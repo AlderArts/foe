@@ -4,23 +4,23 @@
  *
  */
 
-import { Entity } from '../entity';
-import { Images } from '../assets';
-import { Element } from '../damagetype';
-import { StatusEffect } from '../statuseffect';
-import { Color } from '../body/color';
-import { TF } from '../tf';
-import { AppendageType } from '../body/appendage';
-import { Race } from '../body/race';
-import { AlchemyItems } from '../items/alchemy';
-import { AlchemySpecial } from '../items/alchemyspecial';
-import { IngredientItems } from '../items/ingredients';
-import { Party } from '../party';
-import { Encounter } from '../combat';
-import { Text } from '../text';
-import { Abilities } from '../abilities';
+import { Abilities } from "../abilities";
+import { Images } from "../assets";
+import { AppendageType } from "../body/appendage";
+import { Color } from "../body/color";
+import { Race } from "../body/race";
+import { Encounter } from "../combat";
+import { Element } from "../damagetype";
+import { Entity } from "../entity";
+import { AlchemyItems } from "../items/alchemy";
+import { AlchemySpecial } from "../items/alchemyspecial";
+import { IngredientItems } from "../items/ingredients";
+import { Party } from "../party";
+import { StatusEffect } from "../statuseffect";
+import { Text } from "../text";
+import { TF } from "../tf";
 
-let ScorpionScenes : any = {};
+const ScorpionScenes: any = {};
 
 export class Scorpion extends Entity {
 	constructor() {
@@ -56,7 +56,7 @@ export class Scorpion extends Entity {
 		this.elementDef.dmg[Element.mFire]   =  0.5;
 		this.elementDef.dmg[Element.mIce]    =   -1;
 		this.elementDef.dmg[Element.mWater]  = -0.5;
-		
+
 		this.statusDef[StatusEffect.Venom]   = 1;
 
 		this.level             = 5 + Math.floor(Math.random() * 4);
@@ -76,60 +76,64 @@ export class Scorpion extends Entity {
 		this.RestFull();
 	}
 
-	DropTable = function() {
-		let drops = [];
-		if(Math.random() < 0.05) drops.push({ it: AlchemyItems.Scorpius });
-		if(Math.random() < 0.5)  drops.push({ it: IngredientItems.Stinger });
-		if(Math.random() < 0.5)  drops.push({ it: IngredientItems.SVenom });
-		if(Math.random() < 0.5)  drops.push({ it: IngredientItems.SClaw });
-		//Apparently a bone collector...
-		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.DogBone });
-		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.WolfFang });
-		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.SnakeFang });
-		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.AntlerChip });
-		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.CatClaw });
-		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.LizardScale });
-		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.LizardEgg });
-		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.RawHoney });
-		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.BeeChitin });
+	public DropTable = function() {
+		const drops = [];
+		if (Math.random() < 0.05) { drops.push({ it: AlchemyItems.Scorpius }); }
+		if (Math.random() < 0.5) {  drops.push({ it: IngredientItems.Stinger }); }
+		if (Math.random() < 0.5) {  drops.push({ it: IngredientItems.SVenom }); }
+		if (Math.random() < 0.5) {  drops.push({ it: IngredientItems.SClaw }); }
+		// Apparently a bone collector...
+		if (Math.random() < 0.1) {  drops.push({ it: IngredientItems.DogBone }); }
+		if (Math.random() < 0.1) {  drops.push({ it: IngredientItems.WolfFang }); }
+		if (Math.random() < 0.1) {  drops.push({ it: IngredientItems.SnakeFang }); }
+		if (Math.random() < 0.1) {  drops.push({ it: IngredientItems.AntlerChip }); }
+		if (Math.random() < 0.1) {  drops.push({ it: IngredientItems.CatClaw }); }
+		if (Math.random() < 0.1) {  drops.push({ it: IngredientItems.LizardScale }); }
+		if (Math.random() < 0.1) {  drops.push({ it: IngredientItems.LizardEgg }); }
+		if (Math.random() < 0.1) {  drops.push({ it: IngredientItems.RawHoney }); }
+		if (Math.random() < 0.1) {  drops.push({ it: IngredientItems.BeeChitin }); }
 
-		if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Lacertium });
-		if(Math.random() < 0.01) drops.push({ it: AlchemySpecial.Nagazm });
+		if (Math.random() < 0.01) { drops.push({ it: AlchemyItems.Lacertium }); }
+		if (Math.random() < 0.01) { drops.push({ it: AlchemySpecial.Nagazm }); }
 		return drops;
-	}
+	};
 
-	Act(encounter : any, activeChar : any) {
+	public Act(encounter: any, activeChar: any) {
 		// TODO: Very TEMP
 		Text.Add(this.name + " acts! Stab stab hiss!");
 		Text.NL();
 
 		// Pick a random target
-		let t = this.GetSingleTarget(encounter, activeChar);
+		const t = this.GetSingleTarget(encounter, activeChar);
 
-		let parseVars = {
+		const parseVars = {
 			name   : this.name,
 			hisher : this.hisher(),
-			tName  : t.name
+			tName  : t.name,
 		};
 
-		let choice = Math.random();
-		if(choice < 0.4)
+		const choice = Math.random();
+		if (choice < 0.4) {
 			Abilities.Attack.Use(encounter, this, t);
-		else if(choice < 0.7 && Abilities.EnemySkill.Sting.enabledCondition(encounter, this))
+		}
+		else if (choice < 0.7 && Abilities.EnemySkill.Sting.enabledCondition(encounter, this)) {
 			Abilities.EnemySkill.Sting.Use(encounter, this, t);
-		else if(choice < 0.9 && Abilities.Seduction.Distract.enabledCondition(encounter, this))
+ }
+		else if (choice < 0.9 && Abilities.Seduction.Distract.enabledCondition(encounter, this)) {
 			Abilities.Seduction.Distract.Use(encounter, this, t);
-		else
+ }
+		else {
 			Abilities.Seduction.Tease.Use(encounter, this, t);
+ }
 	}
 
 }
 
 // FEMALE ENCOUNTER
 ScorpionScenes.LoneEnc = function() {
-	let enemy    = new Party();
+	const enemy    = new Party();
 	enemy.AddMember(new Scorpion());
-	let enc      = new Encounter(enemy);
+	const enc      = new Encounter(enemy);
 
 	/*
 	enc.canRun = false;
@@ -139,6 +143,6 @@ ScorpionScenes.LoneEnc = function() {
 	enc.VictoryCondition = ...
 	*/
 	return enc;
-}
+};
 
 export { ScorpionScenes };

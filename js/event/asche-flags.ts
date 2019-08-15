@@ -1,7 +1,7 @@
-let AscheFlags = {
+const AscheFlags = {
     Met : {
         NotMet : 0,
-        Met    : 1
+        Met    : 1,
     },
     Talk : {
         Shop    : 1,
@@ -9,13 +9,13 @@ let AscheFlags = {
         Sister  : 4,
         Stock   : 8,
         Box     : 16,
-        BoxDoll : 32
+        BoxDoll : 32,
     },
     Magic : {
         Components : 1,
         Rituals    : 2,
         Authority  : 3,
-        Spirits    : 4
+        Spirits    : 4,
     },
     Tasks : {
         Ginseng_Started : 1,
@@ -28,7 +28,7 @@ let AscheFlags = {
         Nightshade_Finished : 128,
         Spring_Started : 256,
         Spring_Visited : 512,
-        Spring_Finished : 1024
+        Spring_Finished : 1024,
     },
 };
 

@@ -4,23 +4,23 @@
  *
  */
 
-import { Entity } from '../entity';
-import { Images } from '../assets';
-import { Race } from '../body/race';
-import { Color } from '../body/color';
-import { TF } from '../tf';
-import { AppendageType } from '../body/appendage';
-import { Abilities } from '../abilities';
-import { Party } from '../party';
-import { Encounter } from '../combat';
-import { AlchemyItems } from '../items/alchemy';
-import { IngredientItems } from '../items/ingredients';
-import { Text } from '../text';
+import { Abilities } from "../abilities";
+import { Images } from "../assets";
+import { AppendageType } from "../body/appendage";
+import { Color } from "../body/color";
+import { Race } from "../body/race";
+import { Encounter } from "../combat";
+import { Entity } from "../entity";
+import { AlchemyItems } from "../items/alchemy";
+import { IngredientItems } from "../items/ingredients";
+import { Party } from "../party";
+import { Text } from "../text";
+import { TF } from "../tf";
 
-let FeralWolfScenes : any = {};
+const FeralWolfScenes: any = {};
 
 export class FeralWolf extends Entity {
-	constructor(levelbonus? : number) {
+	constructor(levelbonus?: number) {
 		super();
 
 		this.ID = "wolf";
@@ -48,8 +48,9 @@ export class FeralWolf extends Entity {
 
 		this.level             = 4 + Math.floor(Math.random() * 4);
 		this.sexlevel          = 2;
-		if(levelbonus)
+		if (levelbonus) {
 			this.level += levelbonus;
+		}
 
 		this.combatExp         = 5 + this.level;
 		this.coinDrop          = 2 + this.level * 4;
@@ -66,57 +67,61 @@ export class FeralWolf extends Entity {
 		this.RestFull();
 	}
 
-	DropTable() {
-		let drops = [];
-		if(Math.random() < 0.05) drops.push({ it: AlchemyItems.Lobos });
-		if(Math.random() < 0.5)  drops.push({ it: IngredientItems.WolfFang });
-		if(Math.random() < 0.5)  drops.push({ it: IngredientItems.Wolfsbane });
-		if(Math.random() < 0.5)  drops.push({ it: IngredientItems.CanisRoot });
+	public DropTable() {
+		const drops = [];
+		if (Math.random() < 0.05) { drops.push({ it: AlchemyItems.Lobos }); }
+		if (Math.random() < 0.5) {  drops.push({ it: IngredientItems.WolfFang }); }
+		if (Math.random() < 0.5) {  drops.push({ it: IngredientItems.Wolfsbane }); }
+		if (Math.random() < 0.5) {  drops.push({ it: IngredientItems.CanisRoot }); }
 
-		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.DogBiscuit });
-		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.DogBone });
-		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.FoxBerries });
-		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.Foxglove });
+		if (Math.random() < 0.1) {  drops.push({ it: IngredientItems.DogBiscuit }); }
+		if (Math.random() < 0.1) {  drops.push({ it: IngredientItems.DogBone }); }
+		if (Math.random() < 0.1) {  drops.push({ it: IngredientItems.FoxBerries }); }
+		if (Math.random() < 0.1) {  drops.push({ it: IngredientItems.Foxglove }); }
 
-		if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Canis });
-		if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Vulpinix });
-		if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Testos });
-		if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Virilium });
+		if (Math.random() < 0.01) { drops.push({ it: AlchemyItems.Canis }); }
+		if (Math.random() < 0.01) { drops.push({ it: AlchemyItems.Vulpinix }); }
+		if (Math.random() < 0.01) { drops.push({ it: AlchemyItems.Testos }); }
+		if (Math.random() < 0.01) { drops.push({ it: AlchemyItems.Virilium }); }
 		return drops;
 	}
 
-	Act(encounter : any, activeChar : any) {
+	public Act(encounter: any, activeChar: any) {
 		// TODO: Very TEMP
 		Text.Add(this.name + " acts! Growl!");
 		Text.NL();
 		Text.Flush();
 
 		// Pick a random target
-		let t = this.GetSingleTarget(encounter, activeChar);
+		const t = this.GetSingleTarget(encounter, activeChar);
 
-		let parseVars = {
+		const parseVars = {
 			name   : this.name,
 			hisher : this.hisher(),
-			tName  : t.name
+			tName  : t.name,
 		};
 
-		let choice = Math.random();
-		if(choice < 0.5)
+		const choice = Math.random();
+		if (choice < 0.5) {
 			Abilities.Attack.Use(encounter, this, t);
-		else if(choice < 0.7 && Abilities.Physical.DAttack.enabledCondition(encounter, this))
+		}
+		else if (choice < 0.7 && Abilities.Physical.DAttack.enabledCondition(encounter, this)) {
 			Abilities.Physical.Pierce.Use(encounter, this, t);
-		else if(choice < 0.95 && Abilities.Physical.CrushingStrike.enabledCondition(encounter, this))
+ }
+		else if (choice < 0.95 && Abilities.Physical.CrushingStrike.enabledCondition(encounter, this)) {
 			Abilities.Physical.CrushingStrike.Use(encounter, this, t);
-		else
+ }
+		else {
 			Abilities.Seduction.Tease.Use(encounter, this, t);
+ }
 	}
 
 }
 
 FeralWolfScenes.LoneEnc = function() {
-	let enemy = new Party();
+	const enemy = new Party();
 	enemy.AddMember(new FeralWolf());
-	let enc = new Encounter(enemy);
+	const enc = new Encounter(enemy);
 	/*
 	enc.canRun = false;
 	enc.onEncounter = ...
@@ -125,6 +130,6 @@ FeralWolfScenes.LoneEnc = function() {
 	enc.VictoryCondition = ...
 	*/
 	return enc;
-}
+};
 
 export { FeralWolfScenes };

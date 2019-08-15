@@ -1,4 +1,4 @@
 
-let CityWatchScenes : any = {};
+const CityWatchScenes: any = {};
 
 export { CityWatchScenes };

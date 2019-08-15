@@ -1,76 +1,76 @@
-import { GAME, TimeStep } from "../GAME";
-import { PregnancyHandler } from "../pregnancy";
 import { Race } from "../body/race";
-import { Text } from "../text";
-import { OrchidFlags } from "./orchid-flags";
 import { Entity } from "../entity";
-import { Gui } from "../gui";
 import { LaylaFlags } from "../event/farm/layla-flags";
+import { GAME, TimeStep } from "../GAME";
+import { Gui } from "../gui";
 import { OasisFlags } from "../loc/oasis-flags";
 import { Party } from "../party";
+import { PregnancyHandler } from "../pregnancy";
+import { Text } from "../text";
+import { OrchidFlags } from "./orchid-flags";
 
-let OrchidScenes : any = {};
+const OrchidScenes: any = {};
 
-OrchidScenes.Impregnate = function(mother : Entity, slot : number) {
+OrchidScenes.Impregnate = function(mother: Entity, slot: number) {
 	mother.PregHandler().Impregnate({
 		slot   : slot || PregnancyHandler.Slot.Vag,
-		mother : mother,
+		mother,
 		father : GAME().orchid,
 		race   : Race.Plant,
 		num    : 1,
 		time   : 10 * 24,
-		load   : 3
+		load   : 3,
 	});
-}
+};
 
 OrchidScenes.Interact = function() {
-	let player = GAME().player;
-	let orchid = GAME().orchid;
-	let parse : any = {
-		playername : player.name
+	const player = GAME().player;
+	const orchid = GAME().orchid;
+	const parse: any = {
+		playername : player.name,
 	};
-	
+
 	Text.Clear();
 	Text.Add("The purified Orchid looks a lot less intimidating than when you fought her, though she still has a mass of tentacles sticking out of her back. The cute dryad has a lithe form standing at about five foot six, her breasts and hips rather modest compared to her voluptuous mother. Both her skin and hair are green in color, entwined with twigs and leaves. Her formerly black sclera have cleared, her eyes now a soft almond in color.", parse);
 	Text.NL();
-	if(orchid.Slut() >= 50)
+	if (orchid.Slut() >= 50) {
 		Text.Add("She looks playful enough, but neither she nor her friends can ignore the now more or less docile tentacles; a permanent testament to what she’s done. It looks like she tries to avoid touching anything with them, though they are a bit unwieldy to maneuver.", parse);
-	else
+	} else {
 		Text.Add("The dryad looks a lot happier now than before, probably due to you and her friends accepting her new body to such an extent. She now has little trouble handling her tentacles, using them to move around and to grapple playfully with her friends. If nothing else, her new transformation has made her the unquestioned tag-champion of the glade.", parse);
+	}
 	Text.NL();
 	Text.Add("Orchid turns to you as you approach, blushing.", parse);
 	Text.NL();
 	Text.Add("<i>“A-ah, hello [playername]!”</i>", parse);
-	
-	let first = !(orchid.flags["Talk"] & OrchidFlags.Talk.First);
-	orchid.flags["Talk"] |= OrchidFlags.Talk.First;
-	
-	if(first) {
+
+	const first = !(orchid.flags.Talk & OrchidFlags.Talk.First);
+	orchid.flags.Talk |= OrchidFlags.Talk.First;
+
+	if (first) {
 		OrchidScenes.FirstTalk();
-	}
-	else {
+	} else {
 		Text.Flush();
-		
+
 		OrchidScenes.Prompt();
 	}
-}
+};
 
 OrchidScenes.Prompt = function() {
-	let parse : any = {
-		
+	const parse: any = {
+
 	};
-	
-	//[name]
-	let options = new Array();
+
+	// [name]
+	const options = new Array();
 	options.push({ nameStr : "Talk",
 		tooltip : "Ask her if she has time to chat for a bit.",
-		func : function() {
+		func() {
 			Text.Clear();
 			Text.Add("<i>“Sure, I can always spare time to talk to my savior.”</i> She smiles.", parse);
 			Text.Flush();
-			
+
 			OrchidScenes.TalkPrompt();
-		}, enabled : true
+		}, enabled : true,
 	});
 	/* TODO
 	options.push({ nameStr : "name",
@@ -85,22 +85,22 @@ OrchidScenes.Prompt = function() {
 	});
 	*/
 	Gui.SetButtonsFromList(options, true, Gui.PrintDefaultOptions);
-}
+};
 
 OrchidScenes.TalkPrompt = function() {
-	let player = GAME().player;
-	let orchid = GAME().orchid;
-	let parse : any = {
-		playername : player.name
+	const player = GAME().player;
+	const orchid = GAME().orchid;
+	const parse: any = {
+		playername : player.name,
 	};
-	
-	//[name]
-	let options = new Array();
-	if(false) //TODO
+
+	// [name]
+	const options = new Array();
+	if (false) { // TODO
 	options.push({ nameStr : "Spring",
 		tooltip : "Maybe Orchid knows of a way to get past the thorns?",
-		func : function() {
-			//#Shows up after PC has visited the Spring for the first time.
+		func() {
+			// #Shows up after PC has visited the Spring for the first time.
 			Text.Clear();
 			Text.Add("You explain to Orchid about the wall of thorns blocking your way to the spring, and ask her if she knows a way around them.", parse);
 			Text.NL();
@@ -110,27 +110,29 @@ OrchidScenes.TalkPrompt = function() {
 			Text.NL();
 			Text.Add("Orchid shakes her head. <i>“I’m sorry, [playername], but I have no idea how you could get past it. Maybe Mother, or one of my sisters might know of a way. Have you tried asking them?”</i>", parse);
 			Text.NL();
-			if(false) //#if spoken to Mother Tree about this TODO
+			if (false) { // #if spoken to Mother Tree about this TODO
 				Text.Add("Yes, actually. Mother Tree thinks that maybe a strong dryad could force the thorns to open a path for you, but it would be too risky to lead a dryad there. From what she told you the very ground is corrupted, and there’s the chance the dryad might be corrupted like Orchid was...", parse);
-			else
+			} else {
 				Text.Add("No, you came straight to her. Still, maybe you should talk to them.", parse);
+			}
 			Text.NL();
 			Text.Add("<i>“Sorry I was no help.”</i>", parse);
 			Text.NL();
 			Text.Add("It’s alright, you comfort her.", parse);
 			Text.Flush();
-			
+
 			TimeStep({minute: 5});
-			
+
 			OrchidScenes.TalkPrompt();
-		}, enabled : true
+		}, enabled : true,
 	});
+	}
 	options.push({ nameStr : "How is she?",
 		tooltip : "She’s been through a lot, and you’re still concerned for her wellbeing… ask her how she’s holding up.",
-		func : function() {
+		func() {
 			Text.Clear();
-			let slut = orchid.Slut();
-			if(slut < 5) {
+			const slut = orchid.Slut();
+			if (slut < 5) {
 				Text.Add("<i>“I’m… fine.”</i>", parse);
 				Text.NL();
 				Text.Add("...She doesn’t sound so good.", parse);
@@ -142,8 +144,7 @@ OrchidScenes.TalkPrompt = function() {
 				Text.Add("Orchid nods emphatically.", parse);
 				Text.NL();
 				Text.Add("She feels like she’s forcing herself… maybe you could help her get more used to her body sometime later? There’s certain advantages to having a few tentacles...", parse);
-			}
-			else if(slut < 25) {
+			} else if (slut < 25) {
 				Text.Add("<i>“I’ve been good. Umm… I tried a few, err, things on my own.”</i> She blushes.", parse);
 				Text.NL();
 				Text.Add("Oh really? You ask her what kind of things she’s been trying, flashing her a knowing smile.", parse);
@@ -155,8 +156,7 @@ OrchidScenes.TalkPrompt = function() {
 				Text.Add("You laugh at her reaction. There’s nothing to be worried about, nor does she need to be ashamed of her own curiosity.", parse);
 				Text.NL();
 				Text.Add("<i>“Hehe, thank you, [playername].”</i>", parse);
-			}
-			else if(slut < 50) {
+			} else if (slut < 50) {
 				Text.Add("<i>“Things have been going great. I think I’m getting the hang of using these,”</i> she says, wiggling her tentacles behind her.", parse);
 				Text.NL();
 				Text.Add("<i>“Tried a few things by myself, and even had some help from my sisters.”</i>", parse);
@@ -168,8 +168,7 @@ OrchidScenes.TalkPrompt = function() {
 				Text.Add("Well, that’s good! You certainly like having sex with her, so you’d guess other people would too. They just need to get past the fear of her tentacles and they’ll see that she’s a very tender and caring lover, not to mention a sexy girl.", parse);
 				Text.NL();
 				Text.Add("Orchid giggles, then leans over to give you a kiss on the cheek. <i>“Thank you, [playername].”</i>", parse);
-			}
-			else {
+			} else {
 				Text.Add("<i>“I’m fine!”</i> She grins happily. <i>“Mother and my sisters have been helping with my urges lately, I don’t always use my tentacles on them, but when I do they seem to really enjoy themselves. I’ve actually gotten a few requests to more specific things with them lately, but all in all I’m pretty happy.”</i>", parse);
 				Text.NL();
 				Text.Add("So, she’s comfortable with her new body now?", parse);
@@ -182,12 +181,12 @@ OrchidScenes.TalkPrompt = function() {
 				Text.NL();
 				Text.Add("You watch as her tentacles move to caress your body in a very suggestive manner.", parse);
 				Text.NL();
-				parse["wo"] = player.mfTrue("", "wo");
+				parse.wo = player.mfTrue("", "wo");
 				Text.Add("<i>“You know, [playername]? You’re a very attractive [wo]man, and I’m feeling a bit pent up right now. You wouldn’t mind helping me with my urges one more time, would you?”</i> She bats her eyes at you. <i>“I mean, it’s okay if you say no. But think about it,”</i> she adds, releasing you.", parse);
 				Text.NL();
-				
+
 				player.AddLustFraction(0.2);
-				
+
 				Text.Add("Well, she’s learned to be pretty persuasive about it...", parse);
 				Text.NL();
 				Text.Add("<i>“Yay!”</i> She celebrates happily. <i>“But we can always fuck later. Right now, you just wanted to talk right?”</i>", parse);
@@ -197,15 +196,15 @@ OrchidScenes.TalkPrompt = function() {
 				Text.Add("<i>“Okay, I’m listening.”</i> She smiles.", parse);
 			}
 			Text.Flush();
-			
+
 			TimeStep({minute: 5});
-			
+
 			OrchidScenes.TalkPrompt();
-		}, enabled : true
+		}, enabled : true,
 	});
 	options.push({ nameStr : "Mother Tree",
 		tooltip : "You’re curious about Mother Tree, maybe Orchid could share a few things about her?",
-		func : function() {
+		func() {
 			Text.Clear();
 			Text.Add("You ask Orchid if she wouldn’t mind talking about Mother Tree.", parse);
 			Text.NL();
@@ -243,15 +242,15 @@ OrchidScenes.TalkPrompt = function() {
 			Text.NL();
 			Text.Add("<i>“Anytime, [playername]. Anything else you’d like to talk about?”</i>", parse);
 			Text.Flush();
-			
+
 			TimeStep({minute: 10});
-			
+
 			OrchidScenes.TalkPrompt();
-		}, enabled : true
+		}, enabled : true,
 	});
 	options.push({ nameStr : "Her corruption",
 		tooltip : "It’s a sensitive subject, but maybe Orchid wouldn’t mind sating your curiosity?",
-		func : function() {
+		func() {
 			Text.Clear();
 			Text.Add("You preface your question by stating that she doesn’t have to say anything if she doesn’t feel like it, but if she does you’d appreciate it.", parse);
 			Text.NL();
@@ -259,12 +258,11 @@ OrchidScenes.TalkPrompt = function() {
 			Text.NL();
 			Text.Add("You ask her what it was like being… corrupted.", parse);
 			Text.NL();
-			if(orchid.Slut() < 25) {
+			if (orchid.Slut() < 25) {
 				Text.Add("Orchid opens her mouth to reply, but no sound comes out and she averts her gaze. Moments later, she replies, <i>“I’m sorry, [playername], but I really don’t feel like talking about it...”</i>", parse);
 				Text.NL();
 				Text.Add("That’s understandable, you tell her. Maybe she’ll be willing to talk about it when she’s more comfortable. For now, maybe you should change the subject.", parse);
-			}
-			else {
+			} else {
 				Text.Add("<i>“It’s difficult to explain,”</i> Orchid says, closing her eyes.", parse);
 				Text.NL();
 				Text.Add("<i>“I was still myself, I guess, but at the same time… hmm.”</i> She holds her chin, deep in thought.", parse);
@@ -284,11 +282,11 @@ OrchidScenes.TalkPrompt = function() {
 				Text.Add("<i>“No problem, but let’s talk about something else, okay?”</i>", parse);
 			}
 			Text.Flush();
-			
+
 			TimeStep({minute: 5});
-			
+
 			OrchidScenes.TalkPrompt();
-		}, enabled : true
+		}, enabled : true,
 	});
 	/* TODO
 	options.push({ nameStr : "name",
@@ -302,23 +300,23 @@ OrchidScenes.TalkPrompt = function() {
 		}, enabled : true
 	});
 	*/
-	
+
 	Gui.SetButtonsFromList(options, true, function() {
 		Text.Clear();
 		Text.Add("<i>“Oh? Okay, I guess. Want to do something else then?”</i>", parse);
 		Text.Flush();
-		
+
 		OrchidScenes.Prompt();
 	});
-}
+};
 
 OrchidScenes.FirstTalk = function() {
-	let kiakai = GAME().kiakai;
-	let party : Party = GAME().party;
-	let parse : any = {
-		
+	const kiakai = GAME().kiakai;
+	const party: Party = GAME().party;
+	const parse: any = {
+
 	};
-	
+
 	Text.NL();
 	Text.Add("Concerned, you ask if she could sit down and talk to you for a moment.", parse);
 	Text.NL();
@@ -336,35 +334,35 @@ OrchidScenes.FirstTalk = function() {
 	Text.NL();
 	Text.Add("Now, you know this is still a touchy subject, but if possible you’d like to ask her a few more questions about her… transformation. Perhaps she remembers something that could hint who was responsible for that.", parse);
 	Text.NL();
-	if(party.InParty(kiakai)) {
-		parse["name"] = kiakai.name;
+	if (party.InParty(kiakai)) {
+		parse.name = kiakai.name;
 		Text.Add("<i>“Yes, please. I would like to know more about the elves you have met,”</i> [name] chimes in.", parse);
 		Text.NL();
 	}
 	Text.Add("<i>“I… okay, sure. I’d hate for this to happen to anyone else, especially my mother and my sisters.”</i>", parse);
 	Text.Flush();
-	
-	OrchidScenes.FirstTalkPrompt({});
-}
 
-OrchidScenes.FirstTalkPrompt = function(opts : any) {
-	let player = GAME().player;
-	let kiakai = GAME().kiakai;
-    let party : Party = GAME().party;
-    let layla = GAME().layla;
-    let oasis = GAME().oasis;
-    
-	let parse : any = {
+	OrchidScenes.FirstTalkPrompt({});
+};
+
+OrchidScenes.FirstTalkPrompt = function(opts: any) {
+	const player = GAME().player;
+	const kiakai = GAME().kiakai;
+ const party: Party = GAME().party;
+ const layla = GAME().layla;
+ const oasis = GAME().oasis;
+
+	const parse: any = {
 		playername : player.name,
-		name : kiakai.name
+		name : kiakai.name,
 	};
-	
-	//[Attackers] - [Elves][Spring][Lizard?] - [Tentacles] 
-	let options = new Array();
-	if(!opts.attacker) {
+
+	// [Attackers] - [Elves][Spring][Lizard?] - [Tentacles]
+	const options = new Array();
+	if (!opts.attacker) {
 		options.push({ nameStr : "Attackers",
 			tooltip : "First, how about she recounts what she remembers from the attackers? You can discuss the details afterwards.",
-			func : function() {
+			func() {
 				opts.attacker = true;
 				Text.Clear();
 				Text.Add("<i>“O-okay, sure.”</i> She takes a deep breath.", parse);
@@ -386,17 +384,16 @@ OrchidScenes.FirstTalkPrompt = function(opts : any) {
 				Text.Add("It’s quite alright, you tell her. Okay, so you got the general picture. Now you gotta ask about the details...", parse);
 				Text.Flush();
 				OrchidScenes.FirstTalkPrompt(opts);
-			}, enabled : true
+			}, enabled : true,
 		});
-	}
-	else {
-		if(!opts.elves)
+	} else {
+		if (!opts.elves) {
 		options.push({ nameStr : "Elves",
 			tooltip : "What were they like? Has she met them before?",
-			func : function() {
+			func() {
 				opts.elves = true;
 				Text.Clear();
-				if(party.InParty(kiakai)) {
+				if (party.InParty(kiakai)) {
 					Text.Add("[name] steps closer.", parse);
 					Text.NL();
 				}
@@ -406,7 +403,7 @@ OrchidScenes.FirstTalkPrompt = function(opts : any) {
 				Text.NL();
 				Text.Add("<i>“Yes, normally elves look serene, calm and friendly, but these ones... they had blank gazes. It’s as if they didn’t have a mind of their own. All they did was grin and slobber, their clothes were in tatters. Some of them didn’t even care about covering themselves. They were very strong, and they had nails that looked like claws...”</i>", parse);
 				Text.NL();
-				if(party.InParty(kiakai)) {
+				if (party.InParty(kiakai)) {
 					Text.Add("<i>“That does not sound like any elf I would know about. Something must have happened to make them this way. Did you see any other elves? Do you have any idea of why they were acting like that?”</i> [name] asks Orchid.", parse);
 					Text.NL();
 					Text.Add("<i>“I’m sorry, I don’t know. I’ve never actually been to their village, and I didn’t recognize any of them. I-I’m sorry,”</i> Orchid replies, looking down at the ground.", parse);
@@ -417,12 +414,13 @@ OrchidScenes.FirstTalkPrompt = function(opts : any) {
 				Text.Add("You take a deep breath and pat her comfortingly on the arm. That seems to be about all you’re gonna get out of her.", parse);
 				Text.Flush();
 				OrchidScenes.FirstTalkPrompt(opts);
-			}, enabled : true
+			}, enabled : true,
 		});
-		if(!opts.spring)
+		}
+		if (!opts.spring) {
 		options.push({ nameStr : "Spring",
 			tooltip : "Where is it located? What was it like before the corruption?",
-			func : function() {
+			func() {
 				opts.spring = true;
 				Text.Clear();
 				Text.Add("<i>“The spring used to be beautiful. I used to bathe there all the time. Many animals used that as their drinking hole, and I know of a few elves that came to collect its waters frequently.”</i>", parse);
@@ -438,7 +436,7 @@ OrchidScenes.FirstTalkPrompt = function(opts : any) {
 				Text.Add("<i>“In general, just go that way.”</i> She points in a direction.", parse);
 				Text.NL();
 				Text.Add("You thank Orchid for the directions, perhaps you should go check up on it later.", parse);
-				if(party.InParty(layla)) {
+				if (party.InParty(layla)) {
 					Text.NL();
 					Text.Add("<i>“Umm...”</i> Layla says as she approaches the two of you.", parse);
 					Text.NL();
@@ -448,15 +446,14 @@ OrchidScenes.FirstTalkPrompt = function(opts : any) {
 					Text.NL();
 					Text.Add("She looks a bit apprehensive, which is odd since she’s usually pretty cheerful...", parse);
 					Text.NL();
-					if(layla.flags["Talk"] & LaylaFlags.Talk.Origin) {
+					if (layla.flags.Talk & LaylaFlags.Talk.Origin) {
 						Text.Add("It takes a bit, but you finally deduce that this spring Orchid mentioned must be the same spring Layla told you about, the one where she was <i>born</i> in.", parse);
 						Text.NL();
 						Text.Add("You get up and walk towards her, patting her on her head comfortingly.", parse);
 						Text.NL();
 						Text.Add("Layla smiles back at you, as you return to Orchid, whom seems a bit confused about the exchange.", parse);
-					}
-					else {
-						layla.flags["Talk"] |= LaylaFlags.Talk.Origin;
+					} else {
+						layla.flags.Talk |= LaylaFlags.Talk.Origin;
 						Text.Add("You ask her if something’s the matter. You’re here for her, and if she has anything to say, you’ll listen to it.", parse);
 						Text.NL();
 						Text.Add("<i>“Actually… that’s the same spring I came from.”</i>", parse);
@@ -488,12 +485,13 @@ OrchidScenes.FirstTalkPrompt = function(opts : any) {
 				}
 				Text.Flush();
 				OrchidScenes.FirstTalkPrompt(opts);
-			}, enabled : true
+			}, enabled : true,
 		});
-		if(!opts.lizard)
+		}
+		if (!opts.lizard) {
 		options.push({ nameStr : "Lizard?",
 			tooltip : "The lizard creature. Is there anything else she could tell you about him? What was he dressed like? Any markings she’d be able to recognize?",
-			func : function() {
+			func() {
 				opts.lizard = true;
 				Text.Clear();
 				Text.Add("<i>“I… let me think...”</i> she furrows her brows in thought for a few moments.", parse);
@@ -504,13 +502,13 @@ OrchidScenes.FirstTalkPrompt = function(opts : any) {
 				Text.NL();
 				Text.Add("<i>“It was shaped like a snake, a snake with glowing eyes and a wide mouth, with four sharp fangs.”</i>", parse);
 				Text.NL();
-				//TODO HAVE SEEN MAJID STAFF FLAG
-				parse["m"] = false ? " In fact, haven’t you seen such a staff before?" : "";
+				// TODO HAVE SEEN MAJID STAFF FLAG
+				parse.m = false ? " In fact, haven’t you seen such a staff before?" : "";
 				Text.Add("You make a mental note of that.[m] Those details certainly help you narrow things down, but is there anything else she can tell you about him?", parse);
 				Text.NL();
 				Text.Add("<i>“Umm… well he was a lizard, like I said. I’ve never seen anyone like him, I guess.”</i>", parse);
 				Text.NL();
-				if(player.RaceCompare(Race.Reptile) >= 0.4) {
+				if (player.RaceCompare(Race.Reptile) >= 0.4) {
 					Text.Add("<i>“To be honest, you kinda remind me of him, no offense.”</i>", parse);
 					Text.NL();
 					Text.Add("None taken.", parse);
@@ -522,16 +520,14 @@ OrchidScenes.FirstTalkPrompt = function(opts : any) {
 					Text.Add("<i>“Leezan?”</i>", parse);
 					Text.NL();
 					Text.Add("Yes, that’s your species. ", parse);
-					if(oasis.flags["Visit"] >= OasisFlags.Visit.Visited) {
+					if (oasis.flags.Visit >= OasisFlags.Visit.Visited) {
 						Text.Add("Perhaps you should ask around at the Oasis? That’s the town where most lizans come from, so maybe they’d know something about the culprit?", parse);
-					}
-					else {
+					} else {
 						Text.Add("<i>“Oh, I remember one my sisters told us about them. She said they live somewhere in the desert.”</i>", parse);
 						Text.NL();
 						Text.Add("Then perhaps you should keep an eye out for their city. Maybe someone in there will be able to tell you something about the culprit.", parse);
 					}
-				}
-				else {
+				} else {
 					Text.Add("Her description is pretty vague, so you ask if she was sure that he was a lizard.", parse);
 					Text.NL();
 					Text.Add("<i>“Yes! I’m pretty sure! I mean, I’ve never seen anyone like him, but he’s definitely a lizard. He had talons on his feet, and claws on his hands, and sharp teeth on his muzzle!”</i>", parse);
@@ -541,10 +537,11 @@ OrchidScenes.FirstTalkPrompt = function(opts : any) {
 					Text.Add("<i>“I think I remember one of my sisters talking about them. They’re called Lizans, and they live in the desert somewhere.”</i>", parse);
 					Text.NL();
 					Text.Add("Lizans, huh? ", parse);
-					if(oasis.flags["Visit"] >= OasisFlags.Visit.Visited)
+					if (oasis.flags.Visit >= OasisFlags.Visit.Visited) {
 						Text.Add("You’ve actually been to their town. it’s called the Great Oasis, and maybe someone there might be able to tell you more about this mysterious Lizan.", parse);
-					else
+					} else {
 						Text.Add("You’ll have to keep an eye out when you decide to go to the desert. Perhaps if you can find their city, you might be able to find out something about this mysterious Lizan.", parse);
+					}
 				}
 				Text.NL();
 				Text.Add("You ask her if there’s anything else she can remember.", parse);
@@ -556,17 +553,18 @@ OrchidScenes.FirstTalkPrompt = function(opts : any) {
 				Text.Add("Orchid smiles at hearing that. <i>“I’ll be rooting for you, [playername]!”</i>", parse);
 				Text.Flush();
 				OrchidScenes.FirstTalkPrompt(opts);
-				
-				//TODO #Unlock “Strange Lizan” topic when talking to Sissy
-			}, enabled : true
+
+				// TODO #Unlock “Strange Lizan” topic when talking to Sissy
+			}, enabled : true,
 		});
+		}
 	}
-	if(options.length > 0)
+	if (options.length > 0) {
 		Gui.SetButtonsFromList(options, false, null);
-	else {
+	} else {
 		options.push({ nameStr : "Tentacles",
 			tooltip : "So, her tentacles… From the looks of it, it doesn’t seem like they’re going away...",
-			func : function() {
+			func() {
 				Text.Clear();
 				Text.Add("<i>“Y-yeah… They’re weird, I’m a monster!”</i> she declares, beginning to tear up.", parse);
 				Text.NL();
@@ -606,24 +604,24 @@ OrchidScenes.FirstTalkPrompt = function(opts : any) {
 				Text.NL();
 				Text.Add("<i>“How do I do that?”</i> she asks enthusiastically.", parse);
 				Text.Flush();
-				
-				//[Sex][Later]
-				let options = new Array();
+
+				// [Sex][Later]
+				const options = new Array();
 				options.push({ nameStr : "Sex",
 					tooltip : "Well, the best way to do this is to show her.",
-					func : function() {
+					func() {
 						Text.Clear();
 						Text.Add("PLACEHOLDER", parse);
 						Text.NL();
 						Text.Add("", parse);
 						Text.Flush();
-						
-						//#goto First Time Sex TODO
-					}, enabled : false //TODO
+
+						// #goto First Time Sex TODO
+					}, enabled : false, // TODO
 				});
 				options.push({ nameStr : "Later",
 					tooltip : "Well, like you said, it’s hard to explain, and you can’t really try to do that right now.",
-					func : function() {
+					func() {
 						Text.Clear();
 						Text.Add("<i>“Oh? Okay.”</i>", parse);
 						Text.NL();
@@ -637,18 +635,18 @@ OrchidScenes.FirstTalkPrompt = function(opts : any) {
 						Text.NL();
 						Text.Add("Having said that, you thank her once more and the two of you part ways.", parse);
 						Text.Flush();
-						
-						//TODO #”Spring” added as a location from the glade.
-						
+
+						// TODO #”Spring” added as a location from the glade.
+
 						Gui.NextPrompt();
-					}, enabled : true
+					}, enabled : true,
 				});
 				Gui.SetButtonsFromList(options, false, null);
-			}, enabled : true
+			}, enabled : true,
 		});
-		
+
 		Gui.SetButtonsFromList(options, false, null);
 	}
-}
+};
 
 export { OrchidScenes };

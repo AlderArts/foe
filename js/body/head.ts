@@ -1,24 +1,24 @@
 
-import { Hair } from './hair';
-import { BodyPart } from './bodypart';
-import { Stat } from '../stat';
-import { RaceDesc } from './race';
-import { Appendage } from './appendage';
+import { Stat } from "../stat";
+import { Appendage } from "./appendage";
+import { BodyPart } from "./bodypart";
+import { Hair } from "./hair";
+import { RaceDesc } from "./race";
 
 export class Head extends BodyPart {
-	mouth : any;
-	hair : Hair;
-	eyes : any;
-	ears : BodyPart;
-	appendages : Appendage[];
+	public mouth: any;
+	public hair: Hair;
+	public eyes: any;
+	public ears: BodyPart;
+	public appendages: Appendage[];
 
 	constructor() {
 		super();
-		
+
 		this.mouth = {
 			capacity     : new Stat(30),
-			tongue       : new BodyPart()
-		}
+			tongue       : new BodyPart(),
+		};
 		this.hair = new Hair();
 		this.eyes = new BodyPart();
 		this.eyes.count = new Stat(2);
@@ -27,84 +27,85 @@ export class Head extends BodyPart {
 		this.appendages = [];
 	}
 
-	ToStorage() {
-		let storage : any = {
+	public ToStorage() {
+		const storage: any = {
+			col  : this.color.toFixed(),
 			race : this.race.id.toFixed(),
-			col  : this.color.toFixed()
 		};
 		storage.mouth = {
 			cap  : this.mouth.capacity.base.toFixed(2),
-			ton  : {race : this.mouth.tongue.race.id.toFixed(), col : this.mouth.tongue.color.toFixed()}
+			ton  : {race : this.mouth.tongue.race.id.toFixed(), col : this.mouth.tongue.color.toFixed()},
 		};
 		storage.hair = this.hair.ToStorage();
 		storage.eyes = {
-			race  : this.eyes.race.id.toFixed(),
 			col   : this.eyes.color.toFixed(),
-			count : this.eyes.count.base.toFixed()
+			count : this.eyes.count.base.toFixed(),
+			race  : this.eyes.race.id.toFixed(),
 		};
 		storage.ears = {
+			col  : this.ears.color.toFixed(),
 			race : this.ears.race.id.toFixed(),
-			col  : this.ears.color.toFixed()
 		};
-		if(this.appendages.length > 0) {
+		if (this.appendages.length > 0) {
 			storage.app = new Array();
-			for(let i = 0; i < this.appendages.length; i++) {
-				storage.app.push(this.appendages[i].ToStorage());
+			for (const app of this.appendages) {
+				storage.app.push(app.ToStorage());
 			}
 		}
-		
+
 		return storage;
 	}
 
-	FromStorage(storage? : any) {
+	public FromStorage(storage?: any) {
 		storage = storage || {};
-		
-		this.race   = (storage.race === undefined) ? this.race : RaceDesc.IdToRace[parseInt(storage.race)];
-		this.color  = (storage.col === undefined) ? this.color : parseInt(storage.col);
-		
-		if(storage.mouth) {
-			this.mouth.tongue.race       = (storage.mouth.ton.race === undefined) ? this.mouth.tongue.race : RaceDesc.IdToRace[parseInt(storage.mouth.ton.race)];
-			this.mouth.tongue.color      = (storage.mouth.ton.col === undefined) ? this.mouth.tongue.color : parseInt(storage.mouth.ton.col);
+
+		this.race   = (storage.race === undefined) ? this.race : RaceDesc.IdToRace[parseInt(storage.race, 10)];
+		this.color  = (storage.col === undefined) ? this.color : parseInt(storage.col, 10);
+
+		if (storage.mouth) {
+			this.mouth.tongue.race       = (storage.mouth.ton.race === undefined) ? this.mouth.tongue.race : RaceDesc.IdToRace[parseInt(storage.mouth.ton.race, 10)];
+			this.mouth.tongue.color      = (storage.mouth.ton.col === undefined) ? this.mouth.tongue.color : parseInt(storage.mouth.ton.col, 10);
 			this.mouth.capacity.base     = (storage.mouth.cap === undefined) ? this.mouth.capacity.base : parseFloat(storage.mouth.cap);
 		}
-		if(storage.hair) {
+		if (storage.hair) {
 			this.hair.FromStorage(storage.hair);
 		}
-		if(storage.eyes) {
-			this.eyes.race        = (storage.eyes.race === undefined) ? this.eyes.race : RaceDesc.IdToRace[parseInt(storage.eyes.race)];
-			this.eyes.color       = (storage.eyes.col === undefined) ? this.eyes.color : parseInt(storage.eyes.col);
-			this.eyes.count.base  = (storage.eyes.count === undefined) ? this.eyes.count.base : parseInt(storage.eyes.count);
+		if (storage.eyes) {
+			this.eyes.race        = (storage.eyes.race === undefined) ? this.eyes.race : RaceDesc.IdToRace[parseInt(storage.eyes.race, 10)];
+			this.eyes.color       = (storage.eyes.col === undefined) ? this.eyes.color : parseInt(storage.eyes.col, 10);
+			this.eyes.count.base  = (storage.eyes.count === undefined) ? this.eyes.count.base : parseInt(storage.eyes.count, 10);
 		}
-		if(storage.ears) {
-			this.ears.race        = (storage.ears.race === undefined) ? this.ears.race : RaceDesc.IdToRace[parseInt(storage.ears.race)];
-			this.ears.color       = (storage.ears.col === undefined) ? this.ears.color : parseInt(storage.ears.col);
+		if (storage.ears) {
+			this.ears.race        = (storage.ears.race === undefined) ? this.ears.race : RaceDesc.IdToRace[parseInt(storage.ears.race, 10)];
+			this.ears.color       = (storage.ears.col === undefined) ? this.ears.color : parseInt(storage.ears.col, 10);
 		}
-		
-		if(storage.app) {
+
+		if (storage.app) {
 			this.appendages = new Array();
-			for(let i = 0; i < storage.app.length; i++) {
-				let newApp = new Appendage();
-				newApp.FromStorage(storage.app[i]);
+			for (const app of storage.app) {
+				const newApp = new Appendage();
+				newApp.FromStorage(app);
 				this.appendages.push(newApp);
 			}
 		}
 	}
 
-	SetRace(race : RaceDesc) {
+	public SetRace(race: RaceDesc) {
 		this.race              = race;
 		this.mouth.tongue.race = race;
 		this.eyes.race         = race;
 		this.ears.race         = race;
 	}
 
-	NumAttributes(race : RaceDesc) {
+	public NumAttributes(race: RaceDesc) {
 		let sum = 0;
-		if(this.race == race)              sum++;
-		if(this.mouth.tongue.race == race) sum++;
-		if(this.eyes.race == race)         sum++;
-		if(this.ears.race == race)         sum++;
-		for(let i = 0; i < this.appendages.length; i++)
-			if(this.appendages[i].race == race) sum++;
+		if (this.race === race) {              sum++; }
+		if (this.mouth.tongue.race === race) { sum++; }
+		if (this.eyes.race === race) {         sum++; }
+		if (this.ears.race === race) {         sum++; }
+		for (const app of this.appendages) {
+			if (app.race === race) { sum++;
+		} }
 		return sum;
 	}
 

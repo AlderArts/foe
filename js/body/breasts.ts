@@ -1,9 +1,9 @@
 
-import { BodyPart } from './bodypart';
-import { Stat } from '../stat';
-import { Rand } from '../utility';
-import { RaceDesc } from './race';
-import { Color } from './color';
+import { Stat } from "../stat";
+import { Rand } from "../utility";
+import { BodyPart } from "./bodypart";
+import { Color } from "./color";
+import { RaceDesc } from "./race";
 
 export enum NippleType {
 	ordinary = 0,
@@ -11,17 +11,17 @@ export enum NippleType {
 	lipple   = 2,
 	cunt     = 3,
 	cock     = 4,
-};
+}
 
 // Defines a PAIR of breasts (or row)
 export class Breasts extends BodyPart {
-	nippleCount : number;
-	nippleType : NippleType;
-	size : Stat;
-	nippleThickness : Stat;
-	nippleLength : Stat;
+	public nippleCount: number;
+	public nippleType: NippleType;
+	public size: Stat;
+	public nippleThickness: Stat;
+	public nippleLength: Stat;
 
-	constructor(race? : RaceDesc, color? : Color) {
+	constructor(race?: RaceDesc, color?: Color) {
 		super(race, color);
 		this.nippleCount     = 1; // Nipples/aerola
 		this.nippleType      = NippleType.ordinary;
@@ -30,11 +30,11 @@ export class Breasts extends BodyPart {
 		this.nippleLength    = new Stat(0.5);
 	}
 
-	ToStorage(full : boolean) {
-		let storage : any = {
-			size    : this.size.base.toFixed(2)
+	public ToStorage(full: boolean) {
+		const storage: any = {
+			size    : this.size.base.toFixed(2),
 		};
-		if(full) {
+		if (full) {
 			storage.nipC    = this.nippleCount.toFixed();
 			storage.col     = this.color.toFixed();
 			storage.race    = this.race.id.toFixed();
@@ -45,29 +45,29 @@ export class Breasts extends BodyPart {
 		return storage;
 	}
 
-	FromStorage(storage : any) {
+	public FromStorage(storage: any) {
 		storage = storage || {};
-		this.color                = parseInt(storage.col)      || this.color;
-		this.race                 = RaceDesc.IdToRace[parseInt(storage.race)] || this.race;
-		this.nippleCount          = parseInt(storage.nipC)     || this.nippleCount;
+		this.color                = parseInt(storage.col, 10)      || this.color;
+		this.race                 = RaceDesc.IdToRace[parseInt(storage.race, 10)] || this.race;
+		this.nippleCount          = parseInt(storage.nipC, 10)     || this.nippleCount;
 		this.size.base            = parseFloat(storage.size)   || this.size.base;
 		this.nippleThickness.base = parseFloat(storage.nipThk) || this.nippleThickness.base;
 		this.nippleLength.base    = parseFloat(storage.nipLen) || this.nippleLength.base;
-		this.nippleType           = parseInt(storage.nipType)  || this.nippleType;
+		this.nippleType           = parseInt(storage.nipType, 10)  || this.nippleType;
 	}
 
-	Size() {
+	public Size() {
 		return this.size.Get();
 	}
-	NipSize() {
+	public NipSize() {
 		return this.nippleThickness.Get() * this.nippleLength.Get();
 	}
-	noun() {
-		let size = this.size.Get();
-		let nouns = new Array();
-		if(size <= 2) nouns.push("pec");
+	public noun() {
+		const size = this.size.Get();
+		const nouns = new Array();
+		if (size <= 2) { nouns.push("pec"); }
 		nouns.push("breast");
-		if(size >= 3) {
+		if (size >= 3) {
 			nouns.push("boob");
 			nouns.push("mound");
 			nouns.push("mammary");
@@ -75,7 +75,7 @@ export class Breasts extends BodyPart {
 			nouns.push("tit");
 			nouns.push("can");
 		}
-		if(size >= 15) {
+		if (size >= 15) {
 			nouns.push("jug");
 			nouns.push("dug");
 			nouns.push("melon");
@@ -84,12 +84,12 @@ export class Breasts extends BodyPart {
 		}
 		return nouns[Rand(nouns.length)];
 	}
-	nounPlural() {
-		let size = this.size.Get();
-		let nouns = new Array();
-		if(size <= 2) nouns.push("pecs");
+	public nounPlural() {
+		const size = this.size.Get();
+		const nouns = new Array();
+		if (size <= 2) { nouns.push("pecs"); }
 		nouns.push("breasts");
-		if(size >= 3) {
+		if (size >= 3) {
 			nouns.push("boobs");
 			nouns.push("mounds");
 			nouns.push("mammaries");
@@ -97,7 +97,7 @@ export class Breasts extends BodyPart {
 			nouns.push("tits");
 			nouns.push("cans");
 		}
-		if(size >= 15) {
+		if (size >= 15) {
 			nouns.push("jugs");
 			nouns.push("dugs");
 			nouns.push("melons");
@@ -106,127 +106,127 @@ export class Breasts extends BodyPart {
 		}
 		return nouns[Rand(nouns.length)];
 	}
-	Desc() {
-		let size = this.size.Get();
-		
-		let adjs = [];
-		if(size <= 2) {
+	public Desc() {
+		const size = this.size.Get();
+
+		const adjs = [];
+		if (size <= 2) {
 			adjs.push("manly");
 			adjs.push("flat");
 		}
-		if(size > 2 && size <= 5) {
+		if (size > 2 && size <= 5) {
 			adjs.push("tiny");
 			adjs.push("petite");
 			adjs.push("budding");
 			adjs.push("small");
 		}
-		if(size > 5 && size <= 10) {
+		if (size > 5 && size <= 10) {
 			adjs.push("well-proportioned");
 			adjs.push("perky");
 			adjs.push("ample");
 			adjs.push("pert");
 		}
-		if(size > 10 && size <= 20) {
+		if (size > 10 && size <= 20) {
 			adjs.push("large");
 			adjs.push("huge");
 			adjs.push("hefty");
 			adjs.push("plentiful");
 			adjs.push("bountiful");
 		}
-		if(size > 20 && size <= 40) {
+		if (size > 20 && size <= 40) {
 			adjs.push("massive");
 			adjs.push("immense");
 			adjs.push("enormous");
 		}
-		if(size > 30 && size <= 50) {
+		if (size > 30 && size <= 50) {
 			adjs.push("ridiculously large");
 			adjs.push("ludicrous");
 			adjs.push("gargantuan");
 		}
-		if(size > 40) {
+		if (size > 40) {
 			adjs.push("titanic");
 			adjs.push("inhumanly large");
 			adjs.push("monstrous");
 			adjs.push("Jacques-sized");
 		}
-		let adj = adjs[Rand(adjs.length)];
-		
+		const adj = adjs[Rand(adjs.length)];
+
 		let cup;
-		if     (size <= 1    ) cup = "manly";
-		else if(size <= 2    ) cup = "AA-cup";
-		else if(size <= 3    ) cup = "A-cup";
-		else if(size <= 5    ) cup = "B-cup";
-		else if(size <= 7.5  ) cup = "C-cup";
-		else if(size <= 10   ) cup = "D-cup";
-		else if(size <= 12.5 ) cup = "E-cup";
-		else if(size <= 15   ) cup = "F-cup";
-		else if(size <= 17.5 ) cup = "G-cup";
-		else if(size <= 20   ) cup = "H-cup";
-		else if(size <= 22.5 ) cup = "I-cup";
-		else if(size <= 25   ) cup = "J-cup";
-		else if(size <= 27.5 ) cup = "K-cup";
-		else if(size <= 30   ) cup = "L-cup";
-		else if(size <= 32.5 ) cup = "M-cup";
-		else if(size <= 35   ) cup = "N-cup";
-		else if(size <= 37.5 ) cup = "O-cup";
-		else if(size <= 40   ) cup = "P-cup";
-		else if(size <= 42.5 ) cup = "Q-cup";
-		else if(size <= 45   ) cup = "R-cup";
-		else if(size <= 47.5 ) cup = "S-cup";
-		else if(size <= 50   ) cup = "T-cup";
-		else if(size <= 52.5 ) cup = "U-cup";
-		else if(size <= 55   ) cup = "V-cup";
-		else if(size <= 57.5 ) cup = "W-cup";
-		else if(size <= 60   ) cup = "X-cup";
-		else if(size <= 70   ) cup = "XX-cup";
-		else if(size <= 80   ) cup = "XXX-cup";
-		else if(size <= 90   ) cup = "Y-cup";
-		else if(size <= 100  ) cup = "YY-cup";
-		else if(size <= 110  ) cup = "YYY-cup";
-		else if(size <= 120  ) cup = "Z-cup";
-		else if(size <= 130  ) cup = "ZZ-cup";
-		else                   cup = "ZZZ-cup";
-		
-		let sizeStr = size / 2 + " inches";
-		
-		return {a:"a pair of", adj: adj, cup: cup, size: sizeStr};
+		if     (size <= 1    ) { cup = "manly"; }
+		else if (size <= 2    ) { cup = "AA-cup"; }
+		else if (size <= 3    ) { cup = "A-cup"; }
+		else if (size <= 5    ) { cup = "B-cup"; }
+		else if (size <= 7.5  ) { cup = "C-cup"; }
+		else if (size <= 10   ) { cup = "D-cup"; }
+		else if (size <= 12.5 ) { cup = "E-cup"; }
+		else if (size <= 15   ) { cup = "F-cup"; }
+		else if (size <= 17.5 ) { cup = "G-cup"; }
+		else if (size <= 20   ) { cup = "H-cup"; }
+		else if (size <= 22.5 ) { cup = "I-cup"; }
+		else if (size <= 25   ) { cup = "J-cup"; }
+		else if (size <= 27.5 ) { cup = "K-cup"; }
+		else if (size <= 30   ) { cup = "L-cup"; }
+		else if (size <= 32.5 ) { cup = "M-cup"; }
+		else if (size <= 35   ) { cup = "N-cup"; }
+		else if (size <= 37.5 ) { cup = "O-cup"; }
+		else if (size <= 40   ) { cup = "P-cup"; }
+		else if (size <= 42.5 ) { cup = "Q-cup"; }
+		else if (size <= 45   ) { cup = "R-cup"; }
+		else if (size <= 47.5 ) { cup = "S-cup"; }
+		else if (size <= 50   ) { cup = "T-cup"; }
+		else if (size <= 52.5 ) { cup = "U-cup"; }
+		else if (size <= 55   ) { cup = "V-cup"; }
+		else if (size <= 57.5 ) { cup = "W-cup"; }
+		else if (size <= 60   ) { cup = "X-cup"; }
+		else if (size <= 70   ) { cup = "XX-cup"; }
+		else if (size <= 80   ) { cup = "XXX-cup"; }
+		else if (size <= 90   ) { cup = "Y-cup"; }
+		else if (size <= 100  ) { cup = "YY-cup"; }
+		else if (size <= 110  ) { cup = "YYY-cup"; }
+		else if (size <= 120  ) { cup = "Z-cup"; }
+		else if (size <= 130  ) { cup = "ZZ-cup"; }
+		else {                   cup = "ZZZ-cup"; }
+
+		const sizeStr = size / 2 + " inches";
+
+		return {a: "a pair of", adj, cup, size: sizeStr};
 	}
-	nipNoun() {
+	public nipNoun() {
 		// TODO
 		return "nipple";
 	}
-	nipNounPlural() {
+	public nipNounPlural() {
 		// TODO
 		return "nipples";
 	}
-	nipDesc() {
+	public nipDesc() {
 		// TODO
-		let adj = "perky";
-		
-		let nipLen = this.nippleLength.Get() / 2 + " inches";
-		let nipThickness = this.nippleThickness.Get() / 2 + " inches";
-		
-		return {a: "a", adj: adj, len: nipLen, thickness: nipThickness};
+		const adj = "perky";
+
+		const nipLen = this.nippleLength.Get() / 2 + " inches";
+		const nipThickness = this.nippleThickness.Get() / 2 + " inches";
+
+		return {a: "a", adj, len: nipLen, thickness: nipThickness};
 	}
-	NipShort() {
-		let desc = this.nipDesc();
+	public NipShort() {
+		const desc = this.nipDesc();
 		return desc.adj + " " + this.nipNoun();
 	}
-	NipsShort() {
-		let desc = this.nipDesc();
+	public NipsShort() {
+		const desc = this.nipDesc();
 		return desc.adj + " " + this.nipNounPlural();
 	}
-	Short() {
-		let desc = this.Desc();
+	public Short() {
+		const desc = this.Desc();
 		return desc.adj + " " + this.nounPlural();
 	}
-	ShortCup() {
-		let desc = this.Desc();
+	public ShortCup() {
+		const desc = this.Desc();
 		return desc.cup + " " + this.nounPlural();
 	}
 	// TODO: lactation
-	Long() {
-		let desc = this.Desc();
+	public Long() {
+		const desc = this.Desc();
 		return desc.a + " " + desc.adj + " " + this.nounPlural();
 	}
 

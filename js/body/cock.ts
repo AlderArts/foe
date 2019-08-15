@@ -1,28 +1,28 @@
-import * as _ from 'lodash';
+import * as _ from "lodash";
 
-import { BodyPart } from './bodypart';
-import { Stat } from '../stat';
-import { Gender } from './gender';
-import { RaceDesc, Race } from './race';
-import { Color } from './color';
-import { Vagina } from './vagina';
+import { Stat } from "../stat";
+import { BodyPart } from "./bodypart";
+import { Color } from "./color";
+import { Gender } from "./gender";
+import { Race, RaceDesc } from "./race";
+import { Vagina } from "./vagina";
 
 export enum CockType {
 	ordinary   = 0,
-//	clitcock   = 1,
+// 	clitcock   = 1,
 	tentacle   = 2,
 	ovipositor = 3,
-};
+}
 
 export class Cock extends BodyPart {
-	thickness : Stat;
-	length : Stat;
-	type : CockType;
-	vag : Vagina;
-	knot : number;
-	isStrapon : boolean;
+	public thickness: Stat;
+	public length: Stat;
+	public type: CockType;
+	public vag: Vagina;
+	public knot: number;
+	public isStrapon: boolean;
 
-	constructor(race? : RaceDesc, color? : Color) {
+	constructor(race?: RaceDesc, color?: Color) {
 		super(race, color);
 		this.thickness = new Stat(3);
 		this.length    = new Stat(12);
@@ -32,55 +32,55 @@ export class Cock extends BodyPart {
 		this.isStrapon = false;
 	}
 
-	ToStorage(full : boolean) {
-		let storage : any = {
+	public ToStorage(full: boolean) {
+		const storage: any = {
 			len    : this.length.base.toFixed(2),
-			thk    : this.thickness.base.toFixed(2)
+			thk    : this.thickness.base.toFixed(2),
 		};
-		if(full) {
+		if (full) {
 			storage.race = this.race.id.toFixed();
 			storage.col  = this.color.toFixed();
-			if(this.type != CockType.ordinary) storage.type = this.type.toFixed();
-			if(this.knot != 0) storage.knot = this.knot.toFixed();
+			if (this.type !== CockType.ordinary) { storage.type = this.type.toFixed(); }
+			if (this.knot !== 0) { storage.knot = this.knot.toFixed(); }
 		}
 		return storage;
 	}
 
-	FromStorage(storage : any) {
+	public FromStorage(storage: any) {
 		storage = storage || {};
-		this.race           = RaceDesc.IdToRace[parseInt(storage.race)] || this.race;
-		this.color          = parseInt(storage.col)    || this.color;
-		this.type           = parseInt(storage.type)   || this.type;
+		this.race           = RaceDesc.IdToRace[parseInt(storage.race, 10)] || this.race;
+		this.color          = parseInt(storage.col, 10)    || this.color;
+		this.type           = parseInt(storage.type, 10)   || this.type;
 		this.length.base    = parseFloat(storage.len)  || this.length.base;
 		this.thickness.base = parseFloat(storage.thk)  || this.thickness.base;
-		this.knot           = parseInt(storage.knot)   || this.knot;
+		this.knot           = parseInt(storage.knot, 10)   || this.knot;
 	}
 
-	Clone() {
-		let cock            = new Cock(this.race, this.color);
+	public Clone() {
+		const cock            = new Cock(this.race, this.color);
 		cock.thickness.base = this.thickness.base;
 		cock.length.base    = this.length.base;
 		cock.knot           = this.knot;
 		return cock;
 	}
 
-	Len() {
+	public Len() {
 		return this.length.Get();
 	}
-	Thickness() {
+	public Thickness() {
 		return this.thickness.Get();
 	}
-	Size() {
+	public Size() {
 		return this.thickness.Get() * this.length.Get();
 	}
-	Volume() {
-		let r = this.thickness.Get() / 2;
+	public Volume() {
+		const r = this.thickness.Get() / 2;
 		return Math.PI * r * r * this.length.Get();
 	}
-	Knot() {
-		return this.knot != 0;
+	public Knot() {
+		return this.knot !== 0;
 	}
-	Sheath() {
+	public Sheath() {
 		return this.race.isRace(
 			Race.Horse,
 			Race.Cow,
@@ -91,25 +91,23 @@ export class Cock extends BodyPart {
 			Race.Musteline,
 			Race.Rabbit);
 	}
-	Strapon() {
+	public Strapon() {
 		return this.isStrapon;
 	}
 
-	noun() {
-		let noun = [];
-		if(this.vag) {
+	public noun() {
+		const noun = [];
+		if (this.vag) {
 			noun.push("clit-cock");
 			noun.push("girl-cock");
 		}
-		if(this.type == CockType.tentacle) {
+		if (this.type === CockType.tentacle) {
 			noun.push("tentacle");
 			noun.push("tentacle-cock");
-		}
-		else if(this.type == CockType.ovipositor) {
+		} else if (this.type === CockType.ovipositor) {
 			noun.push("ovipositor");
 			noun.push("egg-layer");
-		}
-		else {
+		} else {
 			noun.push("cock");
 			noun.push("dick");
 			noun.push("manhood");
@@ -120,12 +118,12 @@ export class Cock extends BodyPart {
 			noun.push("prick");
 			noun.push("rod");
 			noun.push("shaft");
-			noun.push("dong");	
+			noun.push("dong");
 		}
 		return _.sample(noun);
 	}
-	nounPlural() {
-		let noun = [];
+	public nounPlural() {
+		const noun = [];
 		noun.push("cocks");
 		noun.push("dicks");
 		noun.push("manhoods");
@@ -139,85 +137,72 @@ export class Cock extends BodyPart {
 		noun.push("dongs");
 		return _.sample(noun);
 	}
-	Desc() {
-		let ret : any;
-		let cockArea = this.thickness.Get() * this.length.Get();
-		if     (cockArea <= 10 ) ret = _.sample([{a:"a", adj: "tiny"}, {a:"a", adj: "pathetic"}, {a:"a", adj: "micro"}, {a:"an", adj: "undersized"}]);
-		else if(cockArea <= 20 ) ret = _.sample([{a:"a", adj: "small"}, {a:"a", adj: "petite"}]);
-		else if(cockArea <= 30 ) ret = _.sample([{a:"a", adj: "below average"}, {a:"a", adj: "modest"}]);
-		else if(cockArea <= 40 ) ret = _.sample([{a:"a", adj: "well-proportioned"}, {a:"an", adj: "average"}]);
-		else if(cockArea <= 50 ) ret = _.sample([{a:"a", adj: "strapping"}, {a:"a", adj: "respectable"}, {a:"an", adj: "ample"}]);
-		else if(cockArea <= 70 ) ret = _.sample([{a:"a", adj: "big"}]);
-		else if(cockArea <= 90 ) ret = _.sample([{a:"a", adj: "large"}, {a:"a", adj: "sizable"}]);
-		else if(cockArea <= 120) ret = _.sample([{a:"a", adj: "huge"}, {a:"a", adj: "hefty"}]);
-		else if(cockArea <= 200) ret = _.sample([{a:"an", adj: "enormous"}, {a:"a", adj: "massive"}, {a:"a", adj: "humongous"}]);
-		else if(cockArea <= 400) ret = _.sample([{a:"an", adj: "immense"}, {a:"a", adj: "colossal"}, {a:"a", adj: "mammoth"}]);
-		else if(cockArea <= 800) ret = _.sample([{a:"a", adj: "gargantuan"}, {a:"a", adj: "gigantic"}, {a:"a", adj: "monster sized"}]);
-		else                     ret = _.sample([{a:"a", adj: "titanic"}, {a:"a", adj: "vast"}]);
-		
+	public Desc() {
+		let ret: any;
+		const cockArea = this.thickness.Get() * this.length.Get();
+		if     (cockArea <= 10 ) { ret = _.sample([{a: "a", adj: "tiny"}, {a: "a", adj: "pathetic"}, {a: "a", adj: "micro"}, {a: "an", adj: "undersized"}]); } else if (cockArea <= 20 ) { ret = _.sample([{a: "a", adj: "small"}, {a: "a", adj: "petite"}]); } else if (cockArea <= 30 ) { ret = _.sample([{a: "a", adj: "below average"}, {a: "a", adj: "modest"}]); } else if (cockArea <= 40 ) { ret = _.sample([{a: "a", adj: "well-proportioned"}, {a: "an", adj: "average"}]); } else if (cockArea <= 50 ) { ret = _.sample([{a: "a", adj: "strapping"}, {a: "a", adj: "respectable"}, {a: "an", adj: "ample"}]); } else if (cockArea <= 70 ) { ret = _.sample([{a: "a", adj: "big"}]); } else if (cockArea <= 90 ) { ret = _.sample([{a: "a", adj: "large"}, {a: "a", adj: "sizable"}]); } else if (cockArea <= 120) { ret = _.sample([{a: "a", adj: "huge"}, {a: "a", adj: "hefty"}]); } else if (cockArea <= 200) { ret = _.sample([{a: "an", adj: "enormous"}, {a: "a", adj: "massive"}, {a: "a", adj: "humongous"}]); } else if (cockArea <= 400) { ret = _.sample([{a: "an", adj: "immense"}, {a: "a", adj: "colossal"}, {a: "a", adj: "mammoth"}]); } else if (cockArea <= 800) { ret = _.sample([{a: "a", adj: "gargantuan"}, {a: "a", adj: "gigantic"}, {a: "a", adj: "monster sized"}]); } else {                     ret = _.sample([{a: "a", adj: "titanic"}, {a: "a", adj: "vast"}]); }
+
 		ret.len = this.length.Get() / 2 + " inches";
 		ret.thickness = this.thickness.Get() / 2 + " inches";
-		
+
 		return ret;
 	}
-	Short() {
-		let desc = this.Desc();
-		let noun = this.noun();
-		let adj = (Math.random() < 0.5) ? desc.adj : "";
+	public Short() {
+		const desc = this.Desc();
+		const noun = this.noun();
+		const adj = (Math.random() < 0.5) ? desc.adj : "";
 		let knotted = "";
-		if(this.Knot() && (Math.random() < 0.5)) {
-			if(adj) knotted += ", ";
+		if (this.Knot() && (Math.random() < 0.5)) {
+			if (adj) { knotted += ", "; }
 			knotted += "knotted";
 		}
 		let sheath = "";
-		if(this.Sheath() && (Math.random() < 0.5)) {
-			if(adj || knotted) sheath += ", ";
+		if (this.Sheath() && (Math.random() < 0.5)) {
+			if (adj || knotted) { sheath += ", "; }
 			sheath += "sheathed";
 		}
 		let race = "";
-		if((this.race != Race.Human) && (Math.random() < 0.5)) race += " " + this.race.Short(Gender.male);
+		if ((this.race !== Race.Human) && (Math.random() < 0.5)) { race += " " + this.race.Short(Gender.male); }
 		let ret = adj + knotted + sheath + race;
-		if(ret) ret += " ";
+		if (ret) { ret += " "; }
 		return ret + noun;
 	}
 	// TODO
-	TipShort() {
+	public TipShort() {
 		let adj = "";
-		
-		if(this.race.isRace(Race.Horse)) adj = "flared ";
-		else if(this.race.isRace(Race.Canine, Race.Reptile)) adj = "tapered ";
-		else if(this.race.isRace(Race.Feline)) adj = "barbed ";
-		
-		let nouns = [
+
+		if (this.race.isRace(Race.Horse)) { adj = "flared "; } else if (this.race.isRace(Race.Canine, Race.Reptile)) { adj = "tapered "; } else if (this.race.isRace(Race.Feline)) { adj = "barbed "; }
+
+		const nouns = [
 		"tip",
-		"head"
+		"head",
 		];
-		let noun = _.sample(nouns);
-		
+		const noun = _.sample(nouns);
+
 		return adj + noun;
 	}
 	// TODO (knot size?)
-	KnotShort() {
+	public KnotShort() {
 		return "knot";
 	}
 	// TODO: Better descriptions
-	aLong() {
-		let desc    = this.Desc();
-		let noun    = this.noun();
-		let knotted = this.Knot() ? ", knotted" : "";
-		let sheath  = this.Sheath() ? ", sheathed" : "";
+	public aLong() {
+		const desc    = this.Desc();
+		const noun    = this.noun();
+		const knotted = this.Knot() ? ", knotted" : "";
+		const sheath  = this.Sheath() ? ", sheathed" : "";
 		let race = "";
-		if(this.race != Race.Human) {
+		if (this.race !== Race.Human) {
 			race += " " + this.race.Short(Gender.male);
 		}
 		return desc.a + " " + desc.adj + knotted + sheath + race + " " + noun + ", " + desc.len + " long and " + desc.thickness + " thick";
 	}
 	// TODO: Better descriptions
-	Long() {
-		let desc    = this.Desc();
-		let noun    = this.noun();
-		let knotted = this.Knot() ? ", knotted" : "";
-		let sheath  = this.Sheath() ? ", sheathed" : "";
+	public Long() {
+		const desc    = this.Desc();
+		const noun    = this.noun();
+		const knotted = this.Knot() ? ", knotted" : "";
+		const sheath  = this.Sheath() ? ", sheathed" : "";
 		return desc.adj + knotted + sheath + " " + this.race.Short(Gender.male) + " " + this.noun() + ", " + desc.len + " long and " + desc.thickness + " thick";
 	}
 

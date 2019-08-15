@@ -1,40 +1,40 @@
-import * as _ from 'lodash';
+import * as _ from "lodash";
 
-import { Entity } from '../entity';
-import { EncounterTable } from '../encountertable';
-import { Party } from '../party';
-import { Gender } from '../body/gender';
-import { WorldTime, TimeStep, GAME } from '../GAME';
-import { Images } from '../assets';
-import { Element } from '../damagetype';
-import { Race } from '../body/race';
-import { Color } from '../body/color';
-import { TF } from '../tf';
-import { AppendageType } from '../body/appendage';
-import { WeaponsItems } from '../items/weapons';
-import { ArmorItems } from '../items/armor';
-import { AlchemySpecial } from '../items/alchemyspecial';
-import { IngredientItems } from '../items/ingredients';
-import { CombatItems } from '../items/combatitems';
-import { Text } from '../text';
-import { Abilities } from '../abilities';
-import { PregnancyHandler } from '../pregnancy';
-import { ToysItems } from '../items/toys';
-import { Encounter } from '../combat';
-import { Gui } from '../gui';
-import { SetGameState, GameState } from '../gamestate';
-import { TargetStrategy } from '../entity';
-import { AlchemyItems } from '../items/alchemy';
-import { Sex } from '../entity-sex';
-import { HipSize } from '../body/body';
-import { Capacity, Orifice } from '../body/orifice';
-import { CockType, Cock } from '../body/cock';
+import { Abilities } from "../abilities";
+import { Images } from "../assets";
+import { AppendageType } from "../body/appendage";
+import { HipSize } from "../body/body";
+import { Cock, CockType } from "../body/cock";
+import { Color } from "../body/color";
+import { Gender } from "../body/gender";
+import { Capacity, Orifice } from "../body/orifice";
+import { Race } from "../body/race";
+import { Encounter } from "../combat";
+import { Element } from "../damagetype";
+import { EncounterTable } from "../encountertable";
+import { Entity } from "../entity";
+import { TargetStrategy } from "../entity";
+import { Sex } from "../entity-sex";
+import { GAME, TimeStep, WorldTime } from "../GAME";
+import { GameState, SetGameState } from "../gamestate";
+import { Gui } from "../gui";
+import { AlchemyItems } from "../items/alchemy";
+import { AlchemySpecial } from "../items/alchemyspecial";
+import { ArmorItems } from "../items/armor";
+import { CombatItems } from "../items/combatitems";
+import { IngredientItems } from "../items/ingredients";
+import { ToysItems } from "../items/toys";
+import { WeaponsItems } from "../items/weapons";
+import { Party } from "../party";
+import { PregnancyHandler } from "../pregnancy";
+import { Text } from "../text";
+import { TF } from "../tf";
 
 /*
 Tier 1 Malice scouts and outriders
 */
 
-let MaliceScoutsScenes : any = {};
+const MaliceScoutsScenes: any = {};
 MaliceScoutsScenes.Catboy = {};
 MaliceScoutsScenes.Mare = {};
 MaliceScoutsScenes.Goat = {};
@@ -46,9 +46,9 @@ MaliceScoutsScenes.Group = {};
  *
  */
 export class CatboyMage extends Entity {
-	turnCounter : number;
+	public turnCounter: number;
 
-	constructor(levelbonus? : number) {
+	constructor(levelbonus?: number) {
 		super();
 
 		this.ID = "catboymage";
@@ -78,7 +78,7 @@ export class CatboyMage extends Entity {
 
 		let level = 0;
 
-		let scenes = new EncounterTable();
+		const scenes = new EncounterTable();
 		scenes.AddEnc(function() {
 			level = 9;
 		}, 4.0, function() { return true; });
@@ -120,61 +120,61 @@ export class CatboyMage extends Entity {
 		this.RestFull();
 	}
 
-	DropTable() {
-		let drops = [];
-		if(Math.random() < 0.1)  drops.push({ it: AlchemyItems.Felinix });
-		if(Math.random() < 0.02) drops.push({ it: AlchemySpecial.Tigris });
-		if(Math.random() < 0.5)  drops.push({ it: IngredientItems.Whiskers });
-		if(Math.random() < 0.5)  drops.push({ it: IngredientItems.HairBall });
-		if(Math.random() < 0.5)  drops.push({ it: IngredientItems.CatClaw });
+	public DropTable() {
+		const drops = [];
+		if (Math.random() < 0.1) {  drops.push({ it: AlchemyItems.Felinix }); }
+		if (Math.random() < 0.02) { drops.push({ it: AlchemySpecial.Tigris }); }
+		if (Math.random() < 0.5) {  drops.push({ it: IngredientItems.Whiskers }); }
+		if (Math.random() < 0.5) {  drops.push({ it: IngredientItems.HairBall }); }
+		if (Math.random() < 0.5) {  drops.push({ it: IngredientItems.CatClaw }); }
 
-		if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Bovia });
-		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.GoatMilk });
-		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.SheepMilk });
-		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.CowMilk });
-		if(Math.random() < 0.05) drops.push({ it: IngredientItems.LizardEgg });
-		if(Math.random() < 0.05) drops.push({ it: IngredientItems.MFluff });
+		if (Math.random() < 0.01) { drops.push({ it: AlchemyItems.Bovia }); }
+		if (Math.random() < 0.1) {  drops.push({ it: IngredientItems.GoatMilk }); }
+		if (Math.random() < 0.1) {  drops.push({ it: IngredientItems.SheepMilk }); }
+		if (Math.random() < 0.1) {  drops.push({ it: IngredientItems.CowMilk }); }
+		if (Math.random() < 0.05) { drops.push({ it: IngredientItems.LizardEgg }); }
+		if (Math.random() < 0.05) { drops.push({ it: IngredientItems.MFluff }); }
 
-		if(Math.random() < 0.3)  drops.push({ it: IngredientItems.FreshGrass });
-		if(Math.random() < 0.3)  drops.push({ it: IngredientItems.SpringWater });
-		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.Foxglove });
-		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.TreeBark });
-		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.RawHoney });
+		if (Math.random() < 0.3) {  drops.push({ it: IngredientItems.FreshGrass }); }
+		if (Math.random() < 0.3) {  drops.push({ it: IngredientItems.SpringWater }); }
+		if (Math.random() < 0.1) {  drops.push({ it: IngredientItems.Foxglove }); }
+		if (Math.random() < 0.1) {  drops.push({ it: IngredientItems.TreeBark }); }
+		if (Math.random() < 0.1) {  drops.push({ it: IngredientItems.RawHoney }); }
 
-		if(Math.random() < 0.05) drops.push({ it: IngredientItems.Wolfsbane });
-		if(Math.random() < 0.05) drops.push({ it: IngredientItems.Ramshorn });
+		if (Math.random() < 0.05) { drops.push({ it: IngredientItems.Wolfsbane }); }
+		if (Math.random() < 0.05) { drops.push({ it: IngredientItems.Ramshorn }); }
 
-		if(Math.random() < 0.01) drops.push({ it: IngredientItems.BlackGem });
-		if(Math.random() < 0.01) drops.push({ it: IngredientItems.CorruptPlant });
-		if(Math.random() < 0.01) drops.push({ it: IngredientItems.CorruptSeed });
-		if(Math.random() < 0.01) drops.push({ it: IngredientItems.DemonSeed });
+		if (Math.random() < 0.01) { drops.push({ it: IngredientItems.BlackGem }); }
+		if (Math.random() < 0.01) { drops.push({ it: IngredientItems.CorruptPlant }); }
+		if (Math.random() < 0.01) { drops.push({ it: IngredientItems.CorruptSeed }); }
+		if (Math.random() < 0.01) { drops.push({ it: IngredientItems.DemonSeed }); }
 
 		return drops;
 	}
 
-	Act(encounter : any, activeChar : any) {
+	public Act(encounter: any, activeChar: any) {
 		// TODO: Very TEMP
 		Text.Add(this.name + " acts! Meow!");
 		Text.NL();
 		Text.Flush();
 
 		// Pick a random target
-		let targets = this.GetPartyTarget(encounter, activeChar);
-		let t = this.GetSingleTarget(encounter, activeChar);
+		const targets = this.GetPartyTarget(encounter, activeChar);
+		const t = this.GetSingleTarget(encounter, activeChar);
 
 		this.turnCounter = this.turnCounter || 0;
 
-		let first = (this.turnCounter == 0);
+		const first = (this.turnCounter == 0);
 		this.turnCounter++;
 
-		if(first) {
+		if (first) {
 			CombatItems.DecoyStick.combat.Use(encounter, this);
 			return;
 		}
 
-		let that = this;
+		const that = this;
 
-		let scenes = new EncounterTable();
+		const scenes = new EncounterTable();
 		scenes.AddEnc(function() {
 			Abilities.Attack.Use(encounter, that, t);
 		}, 1.0, function() { return true; });
@@ -198,18 +198,17 @@ export class CatboyMage extends Entity {
 
 }
 
-MaliceScoutsScenes.Catboy.Impregnate = function(mother : Entity, father : CatboyMage, slot? : number, load? : number) {
+MaliceScoutsScenes.Catboy.Impregnate = function(mother: Entity, father: CatboyMage, slot?: number, load?: number) {
 	mother.PregHandler().Impregnate({
 		slot   : slot || PregnancyHandler.Slot.Vag,
-		mother : mother,
-		father : father,
+		mother,
+		father,
 		race   : Race.Feline,
 		num    : 1,
 		time   : 30 * 24,
-		load   : load || 2
+		load   : load || 2,
 	});
-}
-
+};
 
 /*
  *
@@ -217,7 +216,7 @@ MaliceScoutsScenes.Catboy.Impregnate = function(mother : Entity, father : Catboy
  *
  */
 export class CentaurMare extends Entity {
-	constructor(levelbonus? : number) {
+	constructor(levelbonus?: number) {
 		super();
 
 		this.ID = "centaurmare";
@@ -247,7 +246,7 @@ export class CentaurMare extends Entity {
 
 		let level = 0;
 
-		let scenes = new EncounterTable();
+		const scenes = new EncounterTable();
 		scenes.AddEnc(function() {
 			level = 9;
 		}, 4.0, function() { return true; });
@@ -290,50 +289,50 @@ export class CentaurMare extends Entity {
 		this.RestFull();
 	}
 
-	DropTable() {
-		let drops = [];
-	
-		if(Math.random() < 0.1)  drops.push({ it: AlchemyItems.Equinium });
-		if(Math.random() < 0.05) drops.push({ it: AlchemySpecial.Taurico });
-		if(Math.random() < 0.01) drops.push({ it: AlchemySpecial.EquiniumPlus });
-		if(Math.random() < 0.5)  drops.push({ it: IngredientItems.HorseHair });
-		if(Math.random() < 0.5)  drops.push({ it: IngredientItems.HorseShoe });
-		if(Math.random() < 0.5)  drops.push({ it: IngredientItems.HorseCum });
-	
-		if(Math.random() < 0.3)  drops.push({ it: IngredientItems.FruitSeed });
-		if(Math.random() < 0.2)  drops.push({ it: IngredientItems.Hummus });
-		if(Math.random() < 0.2)  drops.push({ it: IngredientItems.SpringWater });
-		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.FlowerPetal });
-		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.Wolfsbane });
-	
-		if(Math.random() < 0.05) drops.push({ it: WeaponsItems.OakSpear });
-		if(Math.random() < 0.05) drops.push({ it: ArmorItems.BronzeChest });
-		if(Math.random() < 0.05) drops.push({ it: ToysItems.EquineDildo });
-		if(Math.random() < 0.05) drops.push({ it: CombatItems.HPotion });
-		if(Math.random() < 0.05) drops.push({ it: CombatItems.LustDart });
-	
-		if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Caprinium });
-		if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Cerventine });
-		if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Estros });
-		if(Math.random() < 0.01) drops.push({ it: AlchemyItems.Fertilium });
-		if(Math.random() < 0.01) drops.push({ it: AlchemyItems.FertiliumPlus });
-	
+	public DropTable() {
+		const drops = [];
+
+		if (Math.random() < 0.1) {  drops.push({ it: AlchemyItems.Equinium }); }
+		if (Math.random() < 0.05) { drops.push({ it: AlchemySpecial.Taurico }); }
+		if (Math.random() < 0.01) { drops.push({ it: AlchemySpecial.EquiniumPlus }); }
+		if (Math.random() < 0.5) {  drops.push({ it: IngredientItems.HorseHair }); }
+		if (Math.random() < 0.5) {  drops.push({ it: IngredientItems.HorseShoe }); }
+		if (Math.random() < 0.5) {  drops.push({ it: IngredientItems.HorseCum }); }
+
+		if (Math.random() < 0.3) {  drops.push({ it: IngredientItems.FruitSeed }); }
+		if (Math.random() < 0.2) {  drops.push({ it: IngredientItems.Hummus }); }
+		if (Math.random() < 0.2) {  drops.push({ it: IngredientItems.SpringWater }); }
+		if (Math.random() < 0.1) {  drops.push({ it: IngredientItems.FlowerPetal }); }
+		if (Math.random() < 0.1) {  drops.push({ it: IngredientItems.Wolfsbane }); }
+
+		if (Math.random() < 0.05) { drops.push({ it: WeaponsItems.OakSpear }); }
+		if (Math.random() < 0.05) { drops.push({ it: ArmorItems.BronzeChest }); }
+		if (Math.random() < 0.05) { drops.push({ it: ToysItems.EquineDildo }); }
+		if (Math.random() < 0.05) { drops.push({ it: CombatItems.HPotion }); }
+		if (Math.random() < 0.05) { drops.push({ it: CombatItems.LustDart }); }
+
+		if (Math.random() < 0.01) { drops.push({ it: AlchemyItems.Caprinium }); }
+		if (Math.random() < 0.01) { drops.push({ it: AlchemyItems.Cerventine }); }
+		if (Math.random() < 0.01) { drops.push({ it: AlchemyItems.Estros }); }
+		if (Math.random() < 0.01) { drops.push({ it: AlchemyItems.Fertilium }); }
+		if (Math.random() < 0.01) { drops.push({ it: AlchemyItems.FertiliumPlus }); }
+
 		return drops;
 	}
-	
-	Act(encounter : any, activeChar : any) {
+
+	public Act(encounter: any, activeChar: any) {
 		// TODO: Very TEMP
 		Text.Add(this.name + " acts! Hyaaah!");
 		Text.NL();
 		Text.Flush();
-	
+
 		// Pick a random target
-		let t = this.GetSingleTarget(encounter, activeChar);
-	
-		let that = this;
-	
-		let scenes = new EncounterTable();
-	
+		const t = this.GetSingleTarget(encounter, activeChar);
+
+		const that = this;
+
+		const scenes = new EncounterTable();
+
 		scenes.AddEnc(function() {
 			Abilities.Attack.Use(encounter, that, t);
 		}, 1.0, function() { return true; });
@@ -352,10 +351,8 @@ export class CentaurMare extends Entity {
 		}, 3.0, function() { return Abilities.Physical.TAttack.enabledCondition(encounter, that); });
 		*/
 		scenes.Get();
-	}	
+	}
 }
-
-
 
 /*
  *
@@ -363,7 +360,7 @@ export class CentaurMare extends Entity {
  *
  */
 export class GoatAlchemist extends Entity {
-	constructor(levelbonus? : number) {
+	constructor(levelbonus?: number) {
 		super();
 
 		this.ID = "goatalchemist";
@@ -372,7 +369,7 @@ export class GoatAlchemist extends Entity {
 		this.name              = "Alchemist";
 		this.monsterName       = "the goat alchemist";
 		this.MonsterName       = "The goat alchemist";
-		
+
 		this.body.DefMale();
 		this.FirstCock().thickness.base = 5;
 		this.FirstCock().length.base = 22;
@@ -395,7 +392,7 @@ export class GoatAlchemist extends Entity {
 
 		let level = 0;
 
-		let scenes = new EncounterTable();
+		const scenes = new EncounterTable();
 		scenes.AddEnc(function() {
 			level = 9;
 		}, 4.0, function() { return true; });
@@ -436,53 +433,52 @@ export class GoatAlchemist extends Entity {
 		this.RestFull();
 	}
 
+	public DropTable() {
+		const drops = [];
+		if (Math.random() < 0.1) {  drops.push({ it: AlchemyItems.Caprinium }); }
+		if (Math.random() < 0.5) {  drops.push({ it: IngredientItems.Ramshorn }); }
+		if (Math.random() < 0.5) {  drops.push({ it: IngredientItems.GoatMilk }); }
+		if (Math.random() < 0.5) {  drops.push({ it: IngredientItems.GoatFleece }); }
 
-	DropTable() {
-		let drops = [];
-		if(Math.random() < 0.1)  drops.push({ it: AlchemyItems.Caprinium });
-		if(Math.random() < 0.5)  drops.push({ it: IngredientItems.Ramshorn });
-		if(Math.random() < 0.5)  drops.push({ it: IngredientItems.GoatMilk });
-		if(Math.random() < 0.5)  drops.push({ it: IngredientItems.GoatFleece });
-		
-		if(Math.random() < 0.3)  drops.push({ it: IngredientItems.FreshGrass });
-		if(Math.random() < 0.3)  drops.push({ it: IngredientItems.SpringWater });
-		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.Foxglove });
-		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.FlowerPetal });
-		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.FoxBerries });
-		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.TreeBark });
-		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.AntlerChip });
-		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.SVenom });
-		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.MDust });
-		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.RawHoney });
-		if(Math.random() < 0.1)  drops.push({ it: IngredientItems.BeeChitin });
-	
-		if(Math.random() < 0.3) drops.push({ it: IngredientItems.Wolfsbane });
-	
-		if(Math.random() < 0.02) drops.push({ it: IngredientItems.BlackGem });
-		if(Math.random() < 0.02) drops.push({ it: IngredientItems.CorruptPlant });
-		if(Math.random() < 0.02) drops.push({ it: IngredientItems.CorruptSeed });
-		if(Math.random() < 0.02) drops.push({ it: IngredientItems.DemonSeed });
-	
+		if (Math.random() < 0.3) {  drops.push({ it: IngredientItems.FreshGrass }); }
+		if (Math.random() < 0.3) {  drops.push({ it: IngredientItems.SpringWater }); }
+		if (Math.random() < 0.1) {  drops.push({ it: IngredientItems.Foxglove }); }
+		if (Math.random() < 0.1) {  drops.push({ it: IngredientItems.FlowerPetal }); }
+		if (Math.random() < 0.1) {  drops.push({ it: IngredientItems.FoxBerries }); }
+		if (Math.random() < 0.1) {  drops.push({ it: IngredientItems.TreeBark }); }
+		if (Math.random() < 0.1) {  drops.push({ it: IngredientItems.AntlerChip }); }
+		if (Math.random() < 0.1) {  drops.push({ it: IngredientItems.SVenom }); }
+		if (Math.random() < 0.1) {  drops.push({ it: IngredientItems.MDust }); }
+		if (Math.random() < 0.1) {  drops.push({ it: IngredientItems.RawHoney }); }
+		if (Math.random() < 0.1) {  drops.push({ it: IngredientItems.BeeChitin }); }
+
+		if (Math.random() < 0.3) { drops.push({ it: IngredientItems.Wolfsbane }); }
+
+		if (Math.random() < 0.02) { drops.push({ it: IngredientItems.BlackGem }); }
+		if (Math.random() < 0.02) { drops.push({ it: IngredientItems.CorruptPlant }); }
+		if (Math.random() < 0.02) { drops.push({ it: IngredientItems.CorruptSeed }); }
+		if (Math.random() < 0.02) { drops.push({ it: IngredientItems.DemonSeed }); }
+
 		return drops;
 	}
-	
-	Act(encounter : any, activeChar : any) {
+
+	public Act(encounter: any, activeChar: any) {
 		// TODO: Very TEMP
 		Text.Add(this.name + " acts! Harrumph!");
 		Text.NL();
 		Text.Flush();
-	
+
 		// Pick a random target
-		let targets = this.GetPartyTarget(encounter, activeChar);
-		let t = this.GetSingleTarget(encounter, activeChar);
-		
-		let allies = this.GetPartyTarget(encounter, activeChar, true);
-		let ally = this.GetSingleTarget(encounter, activeChar, TargetStrategy.LowHp, true);
-	
-		let that = this;
-	
-		let scenes = new EncounterTable();
-		//Offensive
+		const targets = this.GetPartyTarget(encounter, activeChar);
+		const t = this.GetSingleTarget(encounter, activeChar);
+
+		const allies = this.GetPartyTarget(encounter, activeChar, true);
+		const ally = this.GetSingleTarget(encounter, activeChar, TargetStrategy.LowHp, true);
+
+		const that = this;
+
+		const scenes = new EncounterTable();
+		// Offensive
 		scenes.AddEnc(function() {
 			Abilities.Attack.Use(encounter, that, t);
 		}, 2.0, function() { return true; });
@@ -492,7 +488,7 @@ export class GoatAlchemist extends Entity {
 		scenes.AddEnc(function() {
 			Abilities.White.Tirade.Use(encounter, that, t);
 		}, 1.0, function() { return Abilities.White.Tirade.enabledCondition(encounter, that); });
-		//Buffing/Healing
+		// Buffing/Healing
 		scenes.AddEnc(function() {
 			CombatItems.SpeedPotion.combat.Use(encounter, that);
 		}, 1.0, function() { return true; });
@@ -505,42 +501,41 @@ export class GoatAlchemist extends Entity {
 		scenes.AddEnc(function() {
 			Abilities.White.Empower.Use(encounter, that, ally);
 		}, 1.0, function() { return Abilities.White.Empower.enabledCondition(encounter, that); });
-	
+
 		scenes.Get();
-	}	
+	}
 }
 
-
-
 // CATBOY SCENES
-MaliceScoutsScenes.Catboy.LoneEncounter = function(levelbonus : number) {
-	let player = GAME().player;
-	let party : Party = GAME().party;
-	let enemy    = new Party();
-	let catboy   = new CatboyMage(levelbonus);
+MaliceScoutsScenes.Catboy.LoneEncounter = function(levelbonus: number) {
+	const player = GAME().player;
+	const party: Party = GAME().party;
+	const enemy    = new Party();
+	const catboy   = new CatboyMage(levelbonus);
 	enemy.AddMember(catboy);
-	let enc : any = new Encounter(enemy);
+	const enc: any = new Encounter(enemy);
 	enc.catboy   = catboy;
 
 	enc.onEncounter = function() {
-		let parse : any = {
-			day : WorldTime().LightStr("sun beats down warmly", "moon shines softly")
+		let parse: any = {
+			day : WorldTime().LightStr("sun beats down warmly", "moon shines softly"),
 		};
 		parse = player.ParserTags(parse);
 
 		Text.Clear();
-		parse["f"] = player.HasLegs() ? " in your feet" : "";
+		parse.f = player.HasLegs() ? " in your feet" : "";
 		Text.Add("Wandering of the foothills of the Highlands for about an hour, you don’t find anything of note amongst the rocky ground and tall grasses. The air is crisp and the [day] upon you; although you’re starting to feel the rigors of the hard, uneven ground[f], there’s a certain quality to it that you nevertheless find quite refreshing and invigorating.", parse);
 		Text.NL();
-		parse["f"] = player.HasLegs() ? " - or perhaps where your thighs would have been, if you’d had any" : "";
+		parse.f = player.HasLegs() ? " - or perhaps where your thighs would have been, if you’d had any" : "";
 		Text.Add("No better time for a quick break, then, before all that traveling really gets to you. The gently rounded top of a nearby hill offers a perfect spot to take a breather - high up in the midst of a stiff breeze, and with a good view of the surrounding lands to survey them and plan your next move. The grasses get taller as you move along, reaching up to perhaps mid-thigh[f], but you press on ahead and are at the top before long.", parse);
 		Text.NL();
 		Text.Add("Yes, this is indeed the life. Shrugging off your possessions, you ", parse);
-		if(party.Num() > 1) {
-			if(party.Num() == 2)
-				parse["comp"] = party.Get(1).name;
-			else
-				parse["comp"] = "your companions";
+		if (party.Num() > 1) {
+			if (party.Num() == 2) {
+				parse.comp = party.Get(1).name;
+			} else {
+				parse.comp = "your companions";
+			}
 			Text.Add("and [comp] ", parse);
 		}
 		Text.Add("lounge around for a bit to recuperate, closing your eyes to feel the wind on your [skin] and simply savoring the wonder of the great outdoors. As you’re reveling in the natural sensations, though, something else makes itself known to you - cold and clammy as it winds about your arms and body…", parse);
@@ -572,15 +567,15 @@ MaliceScoutsScenes.Catboy.LoneEncounter = function(levelbonus : number) {
 	enc.onVictory = MaliceScoutsScenes.Catboy.WinPrompt;
 
 	return enc;
-}
+};
 
 MaliceScoutsScenes.Catboy.WinPrompt = function() {
-	let player = GAME().player;
-	let party : Party = GAME().party;
-	let enc  = this;
+	const player = GAME().player;
+	const party: Party = GAME().party;
+	const enc  = this;
 	SetGameState(GameState.Event, Gui);
 
-	let parse : any = {
+	const parse: any = {
 
 	};
 
@@ -607,8 +602,8 @@ MaliceScoutsScenes.Catboy.WinPrompt = function() {
 		Text.Add("<i>“So I thought that if I actually went and did it with an outsider, at least word wouldn’t spread about how useless I am…”</i>", parse);
 		Text.NL();
 		Text.Add("Right. You’re seeing how this is shaping up. ", parse);
-		if(party.Num() > 1) {
-			parse["s"] = party.Num() > 2 ? "s" : "";
+		if (party.Num() > 1) {
+			parse.s = party.Num() > 2 ? "s" : "";
 			Text.Add("Maybe he should’ve, you don’t know, at least not picked a target which would leave him outnumbered?", parse);
 			Text.NL();
 			Text.Add("<i>“Didn’t see your friend[s] there. Grass was tall.”</i>", parse);
@@ -617,29 +612,29 @@ MaliceScoutsScenes.Catboy.WinPrompt = function() {
 		Text.Add("Yeah, hopeless. What’re you going to do with this poor sop?", parse);
 		Text.Flush();
 
-		let options = [];
+		const options = [];
 
 		options.push({nameStr : "Petting",
 			tooltip : Text.Parse("Aww, what a pathetic little kitty. Why don’t you give him a scratch?", parse),
 			enabled : true,
-			func : function() {
+			func() {
 				MaliceScoutsScenes.Catboy.Petting(enc);
-			}
+			},
 		});
 		options.push({nameStr : "Petplay",
 			tooltip : Text.Parse("Play around with the kitty, put him in his place. Have him put that mouth of his to good use.", parse),
 			enabled : true,
-			func : function() {
+			func() {
 				MaliceScoutsScenes.Catboy.PetPlay(enc);
-			}
+			},
 		});
-		if(player.FirstVag()) {
+		if (player.FirstVag()) {
 			options.push({nameStr : "Pity fuck",
 				tooltip : Text.Parse("Take pity on the poor guy and let him have it.", parse),
 				enabled : true,
-				func : function() {
+				func() {
 					MaliceScoutsScenes.Catboy.PityFuck(enc, true);
-				}
+				},
 			});
 		}
 		/* TODO (fuck him)
@@ -666,14 +661,14 @@ MaliceScoutsScenes.Catboy.WinPrompt = function() {
 		});
 	});
 	Encounter.prototype.onVictory.call(enc);
-}
+};
 
-MaliceScoutsScenes.Catboy.PityFuck = function(enc : any, win : boolean) {
-	let player = GAME().player;
-	let party : Party = GAME().party;
-	let catboy = enc.catboy;
-	let p1cock = player.BiggestCock();
-	let parse : any = {
+MaliceScoutsScenes.Catboy.PityFuck = function(enc: any, win: boolean) {
+	const player = GAME().player;
+	const party: Party = GAME().party;
+	const catboy = enc.catboy;
+	const p1cock = player.BiggestCock();
+	let parse: any = {
 
 	};
 	parse = player.ParserTags(parse);
@@ -681,7 +676,7 @@ MaliceScoutsScenes.Catboy.PityFuck = function(enc : any, win : boolean) {
 	parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
 
 	Text.Clear();
-	if(win) {
+	if (win) {
 		Text.Add("Shit, this kitty-boy is so sad, you can’t even believe such a wretched little cumrag is possible. Several spirits of utter misfortune must have conspired to produce him, and even so…", parse);
 		Text.NL();
 		Text.Add("The catboy’s ears perk up at your words. <i>“Sad enough for pity sex?”</i>", parse);
@@ -715,8 +710,7 @@ MaliceScoutsScenes.Catboy.PityFuck = function(enc : any, win : boolean) {
 		Text.Add("<i>“She didn’t even bother to put her clothes back on, just ran out of the place to tell her sisters about what’d just happened, and they all started laughing, and more people came, which just meant they got to hear about it, and that drew more people…”</i> He bursts into a flood of tears that run down his cheeks. <i>“I’m such a useless piece of shit… I’m sure even Malice himself knows how much of a loser I am. He’d boot me straight out of camp or order me turned into a cocksleeve, only I’m too lowly and pathetic to even warrant his notice.”</i>", parse);
 		Text.NL();
 		Text.Add("Fine, fine, you’ve heard enough; he can come over. You want to see just how badly someone can fuck. Lying down on the ground, you beckon the catboy forward with a “come hither” finger, a predatory grin on your face.", parse);
-	}
-	else {
+	} else {
 		Text.Add("Astonished, the catboy stares down at his furry paw-hands disbelievingly, clearly uncertain as to whether his victory was for real or just some figment of his imagination. He pinches his cheeks a few times, then his arm, and finally his tail before reluctantly admitting that yes, this is real and it is happening.", parse);
 		Text.NL();
 		Text.Add("Well? He beat you fair and square. Isn’t he going to finish what he started?", parse);
@@ -856,21 +850,21 @@ MaliceScoutsScenes.Catboy.PityFuck = function(enc : any, win : boolean) {
 	Text.NL();
 	Text.Add("<b>Much</b> better.", parse);
 	Text.NL();
-	parse["comp"] = party.Num() == 2 ? party.Get(1).name : "your companions";
-	parse["c"] = party.Num() > 1 ? Text.Parse(" and [comp]", parse) : "";
+	parse.comp = party.Num() == 2 ? party.Get(1).name : "your companions";
+	parse.c = party.Num() > 1 ? Text.Parse(" and [comp]", parse) : "";
 	Text.Add("Business taken care of, the two of you part ways, and you[c] continue on your journey.", parse);
 	Text.Flush();
 
 	player.subDom.IncreaseStat(50, 1);
 
 	Gui.NextPrompt();
-}
+};
 
-MaliceScoutsScenes.Catboy.PetPlay = function(enc : any) {
-	let player = GAME().player;
-	let catboy = enc.catboy;
-	let p1cock = player.BiggestCock();
-	let parse : any = {
+MaliceScoutsScenes.Catboy.PetPlay = function(enc: any) {
+	const player = GAME().player;
+	const catboy = enc.catboy;
+	const p1cock = player.BiggestCock();
+	let parse: any = {
 
 	};
 	parse = player.ParserTags(parse);
@@ -913,21 +907,22 @@ MaliceScoutsScenes.Catboy.PetPlay = function(enc : any) {
 	Text.Add("An enthusiastic nod, followed by two more.", parse);
 	Text.NL();
 	Text.Add("Right. He’ll have to be trained to take it properly, though. First, he’ll have to learn some self-restraint… with that thought in mind, you quickly divest yourself of your [botarmor], letting your", parse);
-	if(player.FirstCock() && player.FirstVag())
+	if (player.FirstCock() && player.FirstVag()) {
 		Text.Add(" mixed genitalia enjoy the cool mountain breeze as they’re exposed to the elements", parse);
-	else if(player.FirstVag())
+	} else if (player.FirstVag()) {
 		Text.Add(" juicy pussy wink at him as fabric falls away to reveal your womanhood to the world", parse);
-	else if(player.FirstCock()) {
+ } else if (player.FirstCock()) {
 		Text.Add(" shaft[s] ", parse);
-		if(player.HasBalls())
+		if (player.HasBalls()) {
 			Text.Add("and balls ", parse);
-		parse["their"] = (player.NumCocks() > 1 || player.HasBalls()) ? "their" : "its";
+		}
+		parse.their = (player.NumCocks() > 1 || player.HasBalls()) ? "their" : "its";
 		Text.Add("hang out and flop in the cool mountain air, finally released from [their] cramped confines", parse);
 	}
 	Text.Add(".", parse);
 	Text.NL();
 
-	let scenes = new EncounterTable();
+	const scenes = new EncounterTable();
 	scenes.AddEnc(function() {
 		Text.Add("At the sight of your womanly flower, the catboy’s eyes go wide to sickeningly sweet proportions. The entirety of his body trembles with repressed need - he’s clearly fighting it, trying to be an obedient, good kitty in the face of your commands, but it’s a losing battle that he’s waging against his treacherous body.", parse);
 		Text.NL();
@@ -940,10 +935,11 @@ MaliceScoutsScenes.Catboy.PetPlay = function(enc : any) {
 		Text.Add("If he dares…", parse);
 		Text.NL();
 		Text.Add("He makes the mistake of looking up at you again - right into the glistening lips of your cunt, ", parse);
-		if(player.FirstCock())
+		if (player.FirstCock()) {
 			Text.Add("nestled underneath your [cocks]", parse);
-		else
+		} else {
 			Text.Add("not six inches from his face", parse);
+		}
 		Text.Add(" and smelling heavily of sex. That’s it - unable to hold himself back any longer, the catboy flops back onto his rump and instinctively thrusts his hips forward as spooge bursts from his shaft in great gouts, his balls shrinking slightly as they empty their load to who-cares-where. Most of it lands on himself, soiling his skin and fur, but some manages to get on your [feet].", parse);
 		Text.NL();
 		Text.Add("Bad kitten! Now look at what he’s done - that’s a right proper mess he’s made here, and who’s going to clean it up?", parse);
@@ -985,22 +981,24 @@ MaliceScoutsScenes.Catboy.PetPlay = function(enc : any) {
 	}, 3.0, function() { return player.FirstVag(); });
 	scenes.AddEnc(function() {
 		Text.Add("Eyeing your [cocks], the catboy ", parse);
-		if(p1cock.Len() >= 30) {
+		if (p1cock.Len() >= 30) {
 			Text.Add("shudders a little at the sight of your massive cock[s]. He swallows hard and shies away a little, clearly intimidated by the thought of what you intend.", parse);
 			Text.NL();
 			Text.Add("He hadn’t counted on this? Well, that’s too bad for him. Yes indeed, this is a <i>big</i> treat, and you’re going to require that he eat it <i>all</i> up. Kitties who waste even the smallest portions of their treats are bad kitties, and bad kitties don’t just not get treats in the future, but they also need to be punished.", parse);
 			Text.NL();
 			Text.Add("He doesn’t want to be punished, does he?", parse);
-			if(player.NumCocks() > 1)
+			if (player.NumCocks() > 1) {
 				Text.Add(" You imperiously motion to the biggest of your shafts.", parse);
+			}
 			Text.NL();
 			Text.Add("Your kitten meows and shakes his head vigorously, the makeshift bell on his belt-collar clattering away. Yes, he knows the score. Gingerly, almost timidly, he gets off all fours and kneels in front of you, bowing his head submissively. You waggle your massive treat in his face for a few seconds, getting his attention, and smile as he takes it mid-length in both hands and opens his mouth wide.", parse);
 			Text.NL();
 			Text.Add("That’s right. That’s a good kitty. Now, open wide and say ‘ah’.", parse);
 			Text.NL();
 			Text.Add("He obeys unthinkingly, the soft tones of your voice lulling him into a sense of security. Once that cute little mouth of his is open, you thrust with everything you’ve got, slip out of his grasp, and plunge as deep into his throat as he’s capable of accommodating. The poor kitten’s eyes go wide as his breath is suddenly cut off, making piteous, strangled noises in the back of his throat as he struggles for breath, but you remain resolute in your actions; he needs to be properly trained if he’ll even make a good pet.", parse);
-			if(player.NumCocks() > 1)
+			if (player.NumCocks() > 1) {
 				Text.Add(" Your other dick[s2] grind[notS2] against his forehead, reminding the effeminate pussy that this’ll end messily for him, no matter how good he is at swallowing.", parse);
+			}
 			Text.NL();
 
 			Sex.Blowjob(catboy, player);
@@ -1008,15 +1006,15 @@ MaliceScoutsScenes.Catboy.PetPlay = function(enc : any) {
 			player.Fuck(player.FirstCock(), 2);
 
 			Text.Add("As you’d expected, your kitten gets over his surprise quickly enough, wheezing and spluttering several times but eventually settling into a rhythm that allows him to get some measure of his breath back while pleasuring you.", parse);
-		}
-		else if(p1cock.Len() >= 18) {
+		} else if (p1cock.Len() >= 18) {
 			Text.Add("seems a little unsure at the sheer sight of your stupendous shaft[s], but gets over his uncertainties soon enough and closes in. You take the moment to praise him for being such a brave kitty, ready to face a task that he very well knows might be daunting, and he practically blushes with pride.", parse);
 			Text.NL();
 			Text.Add("Aww, is he unaccustomed to being praised? Well, he’ll get a lot more of it if he continues proving himself to be a good, obedient kitty. Now, won’t he please go ahead and get his treat?", parse);
 			Text.NL();
 			Text.Add("Your pretty kitten purrs delightedly and grabs hold of[oneof] your [cocks] in both hands, closing his eyes in delight as he slides his lips over your [cockTip]. You feel it, too, waves of pleasure radiating outwards like ripples on a still pond surface. Deeper and deeper, he takes you into his mouth, breath hot against your man-meat, and it’s only after you bump against the back of his throat that he begins scraping at the underside of your shaft with his rough, warm tongue.", parse);
-			if(player.NumCocks() > 1)
+			if (player.NumCocks() > 1) {
 				Text.Add(" Feeling left out, your other cock[s2] grind[notS2] against the feline’s upturned face, dribbling [itsTheir2] sticky pre all over his soft fur.", parse);
+			}
 			Text.NL();
 
 			Sex.Blowjob(catboy, player);
@@ -1030,16 +1028,16 @@ MaliceScoutsScenes.Catboy.PetPlay = function(enc : any) {
 			Text.Add("Your kitten nods vigorously, the warm and wet insides of his mouth shifting against your shaft and making you moan with delight. Well, he should know that you’re enjoying giving him this treat as much as he’s enjoying having it, so he should be an obedient kitty as much as possible in the future, yes?", parse);
 			Text.NL();
 			Text.Add("He purrs, and the vibrations carry through his flesh, up your rod and into your groin. Ah, the simple pleasures of life.", parse);
-		}
-		else {
+		} else {
 			Text.Add("opens his mouth eagerly and without hesitation, revealing its warm, pink insides and that little sandpapery tongue of his. Mmm… you can practically feel it against your [cock] now, wrapping lovingly about the girth of[oneof] your man-meat[s] while you’re stroked to fullness…", parse);
 			Text.NL();
 			Text.Add("The lewd thoughts flood into your mind unbidden, coming fast and hard, and you take a moment to take a deep breath and let it all out in a happy sigh. It’s not as if your kitten’s going anywhere, anyway - he’s staring enraptured at your prick[s], watching the meaty member[s] bob up and down in time with your heartbeat. You can see him just itching to bat at[oneof] [itThem] like some kind of plaything, but he’s successfully resisting the urge so far. What a strong-willed pet you have - maybe he deserves a <i>double</i> helping of kitty treats as a reward…", parse);
 			Text.NL();
-			parse["it"] = player.NumCocks() > 1 ? "one" : "it";
+			parse.it = player.NumCocks() > 1 ? "one" : "it";
 			Text.Add("Wasting no more time, you thrust your [cocks] at the catboy, practically poking him in the face with [itThem] a few times before he manages to catch [it] in both hands and guide it into his waiting maw. Your kitten’s mouth is as warm and wet as the inside of any other hole, and his tongue as divine as you’d envisioned it to be.", parse);
-			if(player.NumCocks() > 1)
+			if (player.NumCocks() > 1) {
 				Text.Add(" Your other member[s2] grind[notS2] against his upturned face, reminding him that there’s more treats to go around.", parse);
+			}
 			Text.NL();
 
 			Sex.Blowjob(catboy, player);
@@ -1054,22 +1052,25 @@ MaliceScoutsScenes.Catboy.PetPlay = function(enc : any) {
 		}
 		Text.NL();
 		Text.Add("This goes on for a little while longer as your pet continues to worship you, licking and sucking away, the natural movements of his mouth seemingly in time with the throbbing of your shaft[s]. Pleasured in such a fashion, it’s not long before you begin feeling the warning tingles of impending orgasm, and you smile at the thought of your pet discovering the creamy center of his delectable kitty treat.", parse);
-		if(player.NumCocks() > 1)
+		if (player.NumCocks() > 1) {
 			Text.Add(" The pre leaking from your unused cock[s2] might give him a hint.", parse);
+		}
 		Text.NL();
 		Text.Add("With the catboy’s rough, sandpapery tongue working away, you blow your load in no time at all - it happens so quickly that you’re surprised yourself. Your kitten’s eyes flick open in surprise as the first thick rope of seed explodes in his mouth; reeling instinctively, he lets go of your shaft, coughing and spluttering as you empty the rest of your tank straight onto his face.", parse);
-		if(player.NumCocks() > 1)
+		if (player.NumCocks() > 1) {
 			Text.Add(" Not to be left out, your other dick[s2] [isAre2] quick to add [itsTheir2] generous addition[s2] to his already tasty treat.", parse);
+		}
 		Text.NL();
 
-		let cum = player.OrgasmCum();
+		const cum = player.OrgasmCum();
 
-		if(cum > 7) {
+		if (cum > 7) {
 			Text.Add("Try as you might to hold back, you can’t slow, let alone stifle the deluge of thick, gooey cum that’s built up in ", parse);
-			if(player.HasBalls())
+			if (player.HasBalls()) {
 				Text.Add("your balls", parse);
-			else
+			} else {
 				Text.Add("you", parse);
+			}
 			Text.Add(". Throwing your head back from the sheer force of it all, you let out a cry as your sperm bursts free of you and gushes all over the catboy. Your poor kitty has barely enough time to try and shield himself ineffectually with an arm before the barrage of spunk hits him.", parse);
 			Text.NL();
 			Text.Add("And a deluge it is, a veritable flood that sweeps over the catboy and threatens to carry him off his feet and away into the distance - or at least, that’s what it <i>feels</i> like. Once you’ve started, you can scarcely stop, and the most you manage to hear from your pet is a few plaintive meows as globs upon globs of thick sperm land on his skin and fur, horribly despoiling his once-pristine vestige even further.", parse);
@@ -1077,15 +1078,15 @@ MaliceScoutsScenes.Catboy.PetPlay = function(enc : any) {
 			Text.Add("On his part, your pet kitten doesn’t seem to care - if anything, he seems equally curious and amused by the thick coat of seed which you’re covering him with. Once he gets over his initial fear and shyness of this new situation, he quickly takes to being bathed in cum like a duck to water; he happily splashes around in the thick, sticky puddles you’re creating on the ground and rubbing his paws all over his body, smearing it across himself as if it was some kind of lotion. Come to think of it, it probably is…", parse);
 			Text.NL();
 			Text.Add("Nevertheless, that’s so adorably cute; there’re few things more endearing in life than a cute kitten enjoying himself for real. By the time you’re done, the catboy looks like a dribbly candle - an unevenly-shaped pillar of white with wide eyes and the faint outline of large, floppy ears.", parse);
-		}
-		else if(cum > 4) {
+		} else if (cum > 4) {
 			Text.Add("Your pet instinctively averts his gaze, turning his cheek towards you - but alas, it does him little good given the force of the flow that erupts from your [cocks]. It’s got all the volume and power of a fire hose, but a lot thicker and weightier than one would expect of a fire hose’s usual fare - the first ropes of spunk to hit your kitten do so with gusto, staggering him and nearly knocking him over.", parse);
 			Text.NL();
 			Text.Add("Well, if that isn’t a show to watch! Not that you could’ve stopped if you wanted to - with so much sperm pent up in you, rippling waves of satiation and satisfaction course through your body as ", parse);
-			if(player.HasBalls())
+			if (player.HasBalls()) {
 				Text.Add("your [balls] empty themselves with shocking speed", parse);
-			else
+			} else {
 				Text.Add("you spew string after string of virile seed", parse);
+			}
 			Text.Add(" onto your poor pet kitty, making him mewl and whimper in shock and surprise as he’s momentarily blinded by having his face plastered with sperm.", parse);
 			Text.NL();
 			Text.Add("Oh, come now - why does he have to be so fussy about it? It’s not as if you’ve turned the squirt bottle on him, have you?", parse);
@@ -1095,8 +1096,7 @@ MaliceScoutsScenes.Catboy.PetPlay = function(enc : any) {
 			Text.Add("At length, your ejaculation does begin to abate somewhat, but not before your pretty kitty has been thoroughly despoiled, his skin and fur covered with a glistening layer of cum that stretches from head to toe. It’s a bit uneven in parts, but that’s only to be expected - it’s not as if you’ve managed enough production to give him an even coating, alas.", parse);
 			Text.NL();
 			Text.Add("Finally managing to open one eye and look about him, your pet kitten meows at you curiously, pawing at you; you reach down and give him a reassuring pat on the head. There, there.", parse);
-		}
-		else {
+		} else {
 			Text.Add("While your production isn’t as high as you’d hoped it would be, you nevertheless manage to come up with enough ejaculate to give your pet kitty a hearty faceful of delicious cream. He certainly seems to take an instant liking to it, his small, pink tongue darting out of his mouth and touching his lips in an experimental taste before coming out for more.", parse);
 			Text.NL();
 			Text.Add("Well, let him have all he wants - there’s still more where that came from.", parse);
@@ -1108,13 +1108,15 @@ MaliceScoutsScenes.Catboy.PetPlay = function(enc : any) {
 			Text.Add("Your pet kitty must have sensed it too, for he meows happily and wastes no time in locking his lips with your [cockTip], determined to not waste the treat this time. Such a good kitty - yes, yes, he deserves everything that’s coming to him!", parse);
 			Text.NL();
 			Text.Add("With an air-rending groan, you shake and shudder a second time, blasting gob after gob of creamy feline treat into the catboy’s mouth. It’s probably nowhere as thick and nutritious as your first load, but that’s probably for the best given your pet’s inexperience in receiving goodies like these. ", parse);
-			if(player.NumCocks() > 1)
+			if (player.NumCocks() > 1) {
 				Text.Add("Your other cock[s2] add[notS2] [itsTheir2] load to [itsTheir2] previous mess on his innocent face, soiling his fur in your seed. ", parse);
+			}
 			Text.Add("You see his cheeks balloon outwards as he struggles to take all your sperm in without wasting even a single drop of his precious kitty treat, swallowing furiously, and give him yet another pat on his cum-smeared head, ruffling his hair and ears as you praise your precious little pet for trying so hard.", parse);
 			Text.NL();
 			Text.Add("Finishing the last of his treat, the catboy pulls away from your manhood with an audible pop and smack of his lips, wiping away a strand of seed with the back of his hand. ", parse);
-			if(player.NumCocks() > 1)
+			if (player.NumCocks() > 1) {
 				Text.Add("Taking meticulous care to not waste your sticky gift, the catboy cleans up the load you deposited on him and eagerly slurps them up, starved for more of your precious cream. ", parse);
+			}
 			Text.Add("He looks up at you with wide, adoring eyes and meows, closing them in pure bliss and rubbing his head against your crotch.", parse);
 			Text.NL();
 			Text.Add("Aww… isn’t that so cute.", parse);
@@ -1136,11 +1138,11 @@ MaliceScoutsScenes.Catboy.PetPlay = function(enc : any) {
 	Text.Flush();
 
 	Gui.NextPrompt();
-}
+};
 
-MaliceScoutsScenes.Catboy.Petting = function(enc : any) {
-	let player = GAME().player;
-	let parse : any = {
+MaliceScoutsScenes.Catboy.Petting = function(enc: any) {
+	const player = GAME().player;
+	let parse: any = {
 
 	};
 	parse = player.ParserTags(parse);
@@ -1177,12 +1179,12 @@ MaliceScoutsScenes.Catboy.Petting = function(enc : any) {
 	Text.Add("He yowls again, his member twitching as it strains against its fleshy confines, trying to get even bigger than what its physical form will allow. Heh, it’s just like the rest of him - a grand spirit constrained by the body it inhabits… as you watch, pre starts oozing down its length, glistening all the while…", parse);
 	Text.Flush();
 
-	//[Handjob][Tease]
-	let options = [];
+	// [Handjob][Tease]
+	const options = [];
 	options.push({nameStr : "Handjob",
 		tooltip : Text.Parse("Why not give the poor pent-up kitty a hand?", parse),
 		enabled : true,
-		func : function() {
+		func() {
 			Text.Clear();
 			Text.Add("Hey, you may not have made him a man like he wanted, but you’ve still made him feel very, very good. Leaving one hand to continue teasing and prodding at the catboy’s ears, you seize his considerable maleness in the other, stroking him off with an up-and-down pumping motion. The cartilaginous barbs along his shaft push into your palms, every bit as hard as the rest of his cock; you tighten your grip, feeling them dig into your flesh.", parse);
 			Text.NL();
@@ -1200,19 +1202,19 @@ MaliceScoutsScenes.Catboy.Petting = function(enc : any) {
 			Text.NL();
 			Text.Add("That tiny bit of stimulation is enough to push the poor catboy over the brink of ecstasy. With a mewling yelp, a thick stream of spunk spews from his manhood and arcs through the air in a slimy spray, coming to rest in a sticky shower a good three or four feet away from him. Spirits, you can swear that his nutsack visibly deflates with the release - which really isn’t that surprising, considering how little release he must get in the course of his daily life.", parse);
 			Text.NL();
-			parse["manwoman"] = player.mfTrue("man", "woman");
+			parse.manwoman = player.mfTrue("man", "woman");
 			Text.Add("Undeterred by the literally sticky situation that you’re faced with, you grab the catboy’s shaft once more and pump away furiously like a [manwoman] possessed, squelching sounds rising from your fingers as you work away diligently. The poor bastard writhes on the ground as he continues to blow his load all over the grass and your hands; the flow continues unabated for a good fraction of a minute before it begins to show signs of dying down.", parse);
 			Text.NL();
 			Text.Add("All good things must eventually come to an end, though, and the catboy’s torrential ejaculation slowly dies down to a dribble that runs down his maleness and onto your fingers. You clench your fist about his slowly softening shaft, feeling the thick spunk squish and burble, then wipe your digits clean on his clothes. The catboy himself is utterly drained, ears twisting this way and that as he pants away with the occasional groan of exhaustion.", parse);
 			Text.NL();
 			player.AddSexExp(2);
 			Gui.PrintDefaultOptions();
-		}
+		},
 	});
 	options.push({nameStr : "Tease",
 		tooltip : Text.Parse("That, from just an ear rub? Let’s find out just how much of a hair-trigger he is...", parse),
 		enabled : true,
-		func : function() {
+		func() {
 			Text.Clear();
 			Text.Add("Teasingly, you tell the catboy that he really is a hair-trigger - all this from just an ear rub?", parse);
 			Text.NL();
@@ -1236,7 +1238,7 @@ MaliceScoutsScenes.Catboy.Petting = function(enc : any) {
 			Text.NL();
 			player.AddSexExp(1);
 			Gui.PrintDefaultOptions();
-		}
+		},
 	});
 
 	Gui.Callstack.push(function() {
@@ -1255,37 +1257,36 @@ MaliceScoutsScenes.Catboy.Petting = function(enc : any) {
 	});
 
 	Gui.SetButtonsFromList(options, false, null);
-}
+};
 
 MaliceScoutsScenes.Catboy.LossPrompt = function() {
-	let player = GAME().player;
-	let party : Party = GAME().party;
+	const player = GAME().player;
+	const party: Party = GAME().party;
 	SetGameState(GameState.Event, Gui);
 	Text.Clear();
 
 	// this = encounter
-	let enc = this;
+	const enc = this;
 
-	let parse : any = {
+	const parse: any = {
 
 	};
 
 	Gui.Callstack.push(function() {
 		Text.Clear();
 		Text.Add("Slight as the catboy may be, the raw destructive force of his magics is too much for you to you bear. Bruised and battered from sheer force, your body finally gives up the ghost and buckles under its own weight, sending you toppling to the ground. Before you can recover, more tendrils of that same magical mist wind about your limbs, quickly solidifying and trussing you up like a pig in a poke.", parse);
-		if(party.Num() > 1) {
-			if(party.Num() > 2) {
-				parse["comp"]    = "your companions";
-				parse["notS"]    = "";
-				parse["heshe"]   = "they";
-				parse["hasHave"] = "have";
-			}
-			else {
-				let p1 = party.Get(1);
-				parse["comp"]    = p1.name;
-				parse["notS"]    = "s";
-				parse["heshe"]   = p1.heshe();
-				parse["hasHave"] = "has";
+		if (party.Num() > 1) {
+			if (party.Num() > 2) {
+				parse.comp    = "your companions";
+				parse.notS    = "";
+				parse.heshe   = "they";
+				parse.hasHave = "have";
+			} else {
+				const p1 = party.Get(1);
+				parse.comp    = p1.name;
+				parse.notS    = "s";
+				parse.heshe   = p1.heshe();
+				parse.hasHave = "has";
 			}
 			Text.Add(" A quick glance at [comp] reveal[notS] that [heshe] [hasHave] pretty much befallen the same fate, restrained with magical bonds identical to the ones which you now bear.", parse);
 		}
@@ -1297,10 +1298,10 @@ MaliceScoutsScenes.Catboy.LossPrompt = function() {
 		Text.Add("Oh, great. Not only are you facing an unappealing rapist, you’re facing an unappealing rapist who <i>doesn’t even know what he’s doing</i>. You don’t think things can get any worse from here on out… can they?", parse);
 		Text.NL();
 
-		//TODO Scenes
-		//Return true for valid scenes, indicating successful scene proc
+		// TODO Scenes
+		// Return true for valid scenes, indicating successful scene proc
 
-		let scenes = new EncounterTable();
+		const scenes = new EncounterTable();
 
 		scenes.AddEnc(function() {
 			MaliceScoutsScenes.Catboy.PityFuck(enc, false);
@@ -1318,10 +1319,10 @@ MaliceScoutsScenes.Catboy.LossPrompt = function() {
 			return true;
 		}, 1.0, function() { return true; });
 		*/
-		let ret = scenes.Get();
+		const ret = scenes.Get();
 
 		// Default fallback
-		if(!ret) {
+		if (!ret) {
 			Text.Add("He looks you up and down a few times, scratching his head intermittently, and then mumbles to himself. <i>“Don’t think this is what he meant by that… guess I’ll have to find another one. Oh, bother.”</i>", parse);
 			Text.NL();
 			Text.Add("With that, he shuffles off, leaving you in the lurch to recover on your own time. That’s quite a while thanks to the magical beating he gave you, but at length you do manage to get up - albeit shakily - without anything else coming to harass you in the meantime.", parse);
@@ -1330,12 +1331,12 @@ MaliceScoutsScenes.Catboy.LossPrompt = function() {
 		}
 	});
 	Encounter.prototype.onLoss.call(enc);
-}
+};
 
-MaliceScoutsScenes.Catboy.GetMilked = function(enc : any) {
-	let player = GAME().player;
-	let catboy = enc.catboy;
-	let parse : any = {
+MaliceScoutsScenes.Catboy.GetMilked = function(enc: any) {
+	const player = GAME().player;
+	const catboy = enc.catboy;
+	let parse: any = {
 
 	};
 	parse = player.ParserTags(parse);
@@ -1363,20 +1364,18 @@ MaliceScoutsScenes.Catboy.GetMilked = function(enc : any) {
 	Text.NL();
 	Text.Add("Pleasant tingles run through the lady lump in question, spreading out into the rest of your chest as his warm lips begin applying pressure to get your milk flowing; it’s clear he’s no stranger to this. Try as you might, you can’t help but grin and take the chance to run your fingers through his white hair and large, fluffy ears; he purrs gloriously, eyes closing in pure bliss as you tuck him against your breast while he nurses.", parse);
 	Text.NL();
-	let lactation = player.LactHandler().Rate();
-	if(lactation <= 1) {
+	const lactation = player.LactHandler().Rate();
+	if (lactation <= 1) {
 		Text.Add("Continuing to mewl to himself, the catboy suckles harder and harder until your feel your milk let down in a flush of warmth from the base of your breast; a pleasant trickle of your milky goodness runs from your nipple into his mouth. Although there’s not that much to be had, his rough, sandpapery tongue rubs against your [nip] until you’re a moaning wreck, coaxing every last drop of nourishing cream that you’ve to spare.", parse);
 		Text.NL();
 		Text.Add("It’s not long before the first tap runs dry, and the kitty cat of a mage moves onto the next, repeating the process with gusto. All cross-eyed and dreamy, the poor guy looks like he’s having the time of his life draining you dry; you just don’t have the heart to stop him even if you had the mind to do so.", parse);
-	}
-	else if(lactation <= 3) {
+	} else if (lactation <= 3) {
 		Text.Add("The catboy pulls hard on your nipple, but it’s unnecessary considering how eager your milk is to let down. It flows and gushes into the catboy’s mouth, leaving you feeling wonderfully maternal as a warm stream joins the base of your breast to your [nip], leaving you gasping in delight to mirror the catboy’s bliss. Ah, this is the life…", parse);
 		Text.NL();
 		Text.Add("With how ferocious the catboy is, it’s not long before you’re down and out despite the considerable reserves you’d started with. Not enough for the catboy mage, though - fighting you seems to have worked up an appetite in him, and he goes straight for your other nipple, attacking it with an increasingly maddened ferocity as you feel your milk let down again.", parse);
 		Text.NL();
 		Text.Add("You have to wonder at his desperate love of milk - sure, he’s a cat, but even so he’s fitting the stereotype a bit <i>too</i> comfortably… oh well, it does take all sorts to make a world. The suckling goes on nearly as long as it did with the first, until he finally finishes and pulls away with a pop. Your [breasts] do feel much lighter now, and he continues eyeing you hungrily even as his stomach gurgles from all the cream he’s taken from you.", parse);
-	}
-	else {
+	} else {
 		Text.Add("The catboy suckles hard momentarily, and winds up sputtering at the flood of milk that jets out of your nipple in response. Backed up for goodness knows how long, your lady lumps revel as much as your feline friend in their long-awaited release. Breast milk gushes over his face, wetting his hair and fur, and he can only look on with ravenous pleasure at what he's started.", parse);
 		Text.NL();
 		Text.Add("Wasting no time, the catboy leans forward and latches back on, his throat swallowing visibly and often as he gulps away, struggling to keep up with your production as you let down in earnest, a torrent of warmth joining the base of your breast to the nipple.  His arms worm their way around your back and lock together in an effort to hold onto you even as your milk squirts out from the corners of his mouth with glorious gusto, forcing himself to either drink or drown in your engulfing flow.", parse);
@@ -1392,15 +1391,13 @@ MaliceScoutsScenes.Catboy.GetMilked = function(enc : any) {
 	player.MilkDrain(30);
 	Text.NL();
 	Text.Add("Eventually, though, you’ve been absolutely drained, ", parse);
-	if(lactation > 3) {
+	if (lactation > 3) {
 		Text.Add("your breasts having deflated by a good two or three cup sizes in the process. This change is only temporary, though - you can feel your milk makers revving up their production once more, a gushing sensation filling your chest as they do their best to ensure that your tits are always full, turgid and deliciously milky.", parse);
 		Text.NL();
 		Text.Add("On his part, the catboy looks absolutely ecstatic, if not exactly sated. His milk-swollen tummy wobbles dangerously with each movement he makes, and he can’t stop purring to himself with each breath he draws.", parse);
-	}
-	else if(lactation > 1) {
+	} else if (lactation > 1) {
 		Text.Add("your breasts having shrunk half or perhaps even a whole cup size now that they’ve been emptied. Not for long, though - you can feel a sensation of churning warmth in your chest as your [breasts] hurry to replace what you’ve lost to the catboy. Bit by bit, they start to grow fat and full again - it’ll be a little while before they’re back at full capacity, but the feeling in the meantime is just wondrous.", parse);
-	}
-	else {
+	} else {
 		Text.Add("an overwhelming sensation of relief washing over you as the nursing comes to an end.", parse);
 	}
 	Text.Add(" On his part, the catboy looks up at you and licks his milky lips; there’s a bit of cream left on your [breasts] and he laps that right up, his little pink tongue flicking in and out of his mouth like a kitten lapping from a saucer.", parse);
@@ -1420,34 +1417,24 @@ MaliceScoutsScenes.Catboy.GetMilked = function(enc : any) {
 	player.AddSexExp(1);
 
 	Gui.NextPrompt();
-}
+};
 
-
-
-
-
-
-
-
-
-
-
-MaliceScoutsScenes.Mare.LoneEncounter = function(levelbonus : number) {
-	let player = GAME().player;
-	let enemy    = new Party();
-	let mare     = new CentaurMare(levelbonus);
+MaliceScoutsScenes.Mare.LoneEncounter = function(levelbonus: number) {
+	const player = GAME().player;
+	const enemy    = new Party();
+	const mare     = new CentaurMare(levelbonus);
 	enemy.AddMember(mare);
-	let enc : any = new Encounter(enemy);
+	const enc: any = new Encounter(enemy);
 	enc.mare     = mare;
 
 	enc.onEncounter = function() {
-		let parse : any = {
+		let parse: any = {
 
 		};
 		parse = player.ParserTags(parse);
 
 		Text.Clear();
-		parse["oneself"] = player.HasLegs() ? "one’s feet" : "oneself";
+		parse.oneself = player.HasLegs() ? "one’s feet" : "oneself";
 		Text.Add("This part of the Highlands that you’re currently exploring is more well-traveled than most. Enough, at least, for a proper mountain trail to have materialized amongst the hills and valleys; it twists and winds its way amongst the highland downs, rarely making a straight line between two points, but the extra distance is worth not having to cut [oneself] on the rocky trails and plateaus.", parse);
 		Text.NL();
 		Text.Add("There’s no sign of who maintains these roads - if anything, it looks like they’ve been made by many, many feet and wheels simply trampling out the path until the grass won’t grow there anymore.", parse);
@@ -1471,12 +1458,12 @@ MaliceScoutsScenes.Mare.LoneEncounter = function(levelbonus : number) {
 		Text.Add("Right. Um…", parse);
 		Text.Flush();
 
-		//[Yes][No]
-		let options = [];
+		// [Yes][No]
+		const options = [];
 		options.push({nameStr : "Yes",
 			tooltip : Text.Parse("Oh, why not? She’s clearly in a bad spot.", parse),
 			enabled : true,
-			func : function() {
+			func() {
 				Text.Clear();
 				Text.Add("The mare visibly sags in relief, her shoulders slumping as she puts away her weapon. <i>“Thanks for being reasonable,”</i> she mumbles, her body now quaking ever so slightly with repressed need. <i>“Shit, just thinking about it is already getting me all wet - not that I don’t like this body of mine, but some days it just wants to do something at the most inconvenient times, if you get what I mean.”</i>", parse);
 				Text.NL();
@@ -1494,12 +1481,12 @@ MaliceScoutsScenes.Mare.LoneEncounter = function(levelbonus : number) {
 					Text.Clear();
 					MaliceScoutsScenes.Mare.LossEntry(enc);
 				});
-			}
+			},
 		});
 		options.push({nameStr : "No",
 			tooltip : Text.Parse("No thanks, you’re just not feeling up to it today.", parse),
 			enabled : true,
-			func : function() {
+			func() {
 				Text.Clear();
 				Text.Add("You do your best to explain to the centaur mare that you’re really not interested in the offer she’s soliciting for, but she won’t have any of it.", parse);
 				Text.NL();
@@ -1514,7 +1501,7 @@ MaliceScoutsScenes.Mare.LoneEncounter = function(levelbonus : number) {
 				Gui.NextPrompt(function() {
 					enc.PrepCombat();
 				});
-			}
+			},
 		});
 		Gui.SetButtonsFromList(options, false, null);
 	};
@@ -1527,14 +1514,14 @@ MaliceScoutsScenes.Mare.LoneEncounter = function(levelbonus : number) {
 	enc.onVictory = MaliceScoutsScenes.Mare.WinPrompt;
 
 	return enc;
-}
+};
 
 MaliceScoutsScenes.Mare.WinPrompt = function() {
-	let player = GAME().player;
-	let enc  = this;
+	const player = GAME().player;
+	const enc  = this;
 	SetGameState(GameState.Event, Gui);
 
-	let parse : any = {
+	const parse: any = {
 
 	};
 
@@ -1547,25 +1534,25 @@ MaliceScoutsScenes.Mare.WinPrompt = function() {
 		Text.Add("The centaur mare’s words cut off, but she continues grumbling under her breath, crossing her arms under the bulges on her breastplate. What will you do now?", parse);
 		Text.Flush();
 
-		//[Walk away][Fuck][Fist]
-		let options = [];
+		// [Walk away][Fuck][Fist]
+		const options = [];
 
-		if(player.FirstCock()) {
-			let p1cock = player.BiggestCock();
+		if (player.FirstCock()) {
+			const p1cock = player.BiggestCock();
 			options.push({nameStr : "Fuck",
 				tooltip : Text.Parse("Give her what she wants - but on your terms.", parse),
-				enabled : function() { return player.HasLegs() && p1cock.Len() >= 25; }, //Gotta have legs and a 10" cock
-				func : function() {
+				enabled() { return player.HasLegs() && p1cock.Len() >= 25; }, // Gotta have legs and a 10" cock
+				func() {
 					MaliceScoutsScenes.Mare.WinFuck(enc);
-				}
+				},
 			});
 		}
 		options.push({nameStr : "Fist",
 			tooltip : Text.Parse("Literally pound the mare’s pussy.", parse),
 			enabled : true,
-			func : function() {
+			func() {
 				MaliceScoutsScenes.Mare.WinFist(enc);
-			}
+			},
 		});
 		/* TODO
 		options.push({nameStr : "",
@@ -1600,13 +1587,13 @@ MaliceScoutsScenes.Mare.WinPrompt = function() {
 		});
 	});
 	Encounter.prototype.onVictory.call(enc);
-}
+};
 
-MaliceScoutsScenes.Mare.WinFuck = function(enc : any) {
-	let player = GAME().player;
-	let mare   = enc.mare;
-	let p1cock = player.BiggestCock();
-	let parse : any = {
+MaliceScoutsScenes.Mare.WinFuck = function(enc: any) {
+	const player = GAME().player;
+	const mare   = enc.mare;
+	const p1cock = player.BiggestCock();
+	let parse: any = {
 
 	};
 	parse = player.ParserTags(parse);
@@ -1633,13 +1620,14 @@ MaliceScoutsScenes.Mare.WinFuck = function(enc : any) {
 	Text.Add("<i>“Not that I haven’t pestered over and over again already,”</i> comes the very grumpy reply. <i>“Do you think I do this out of boredom?”</i>", parse);
 	Text.NL();
 	Text.Add("Hrrmph. ", parse);
-	if(player.IsTaur()) {
+	if (player.IsTaur()) {
 		Text.Add("Well, it looks like all the goods check out. Time to get down to business, then - you take a moment to take aim, then rear up and get mounted on the mare. She lets out a sharp breath as your weight descends upon her - not a surprise, since you did just beat the stuffing out of her - but her body is sturdy with a strong constitution, and before long you’ve got yourself all nicely mounted up atop her.", parse);
 		Text.NL();
-		if(p1cock.Len() >= 38) {
+		if (p1cock.Len() >= 38) {
 			Text.Add("Even for someone of equine proportions, your tackle is a force to be reckoned with", parse);
-			if(p1cock.race.isRace(Race.Horse))
+			if (p1cock.race.isRace(Race.Horse)) {
 				Text.Add(", especially since it’s appropriately shaped for the task at hand", parse);
+			}
 			Text.Add(". The mare’s walls clench needily about your member as it slides deeper and deeper into her, no doubt sending palpable waves of satisfaction and satiation as you fill her insides with rock-hard cock. She’s so well-lubed up from her own juices that you have scarcely any problem plunging into her nethers until you’re hilted well and deep, man-meat firmly wrapped up in mare-meat.", parse);
 			Text.NL();
 
@@ -1652,8 +1640,7 @@ MaliceScoutsScenes.Mare.WinFuck = function(enc : any) {
 			Text.Add("Why, you only seek to please.", parse);
 			Text.NL();
 			Text.Add("The centaur mare simply snorts at that, but she doesn’t say anything more. Very well, then - you grin and concentrate on proving that you’re more than a worthwhile fuck for what her sensibilities must be demanding of her.", parse);
-		}
-		else {
+		} else {
 			Text.Add("Grinning, you take a few moments to tease her pussy lips with your [cockTip], causing a burst of clear girl-cum to erupt from her equine pussy. Yeah, it looks like you won’t be needing any additional lube for this one.", parse);
 			Text.NL();
 			Text.Add("<i>“Just hurry up and put it inside me already, you bastard!”</i>", parse);
@@ -1683,21 +1670,23 @@ MaliceScoutsScenes.Mare.WinFuck = function(enc : any) {
 		Text.Add("Time to seize the moment, then. You nuzzle and kiss at her neck briefly before your arousal builds to the point that you're just grunting and panting in her ear; she's certainly enjoying being mounted and stuffed as much as you are in doing the stuffing.  With her deep cunt squeezing and gripping around as much of your manhood as it can get, you're both quite content to focus on fucking.", parse);
 		Text.NL();
 		Text.Add("With such stimulation, it doesn’t take long before you feel your seed well up ", parse);
-		if(player.HasBalls())
+		if (player.HasBalls()) {
 			Text.Add("and your balls churn ominously ", parse);
+		}
 		Text.Add("as your body prepares for release. Still, it’s not as if you can do anything but the inevitable at this point - you can only close your eyes and grasp tightly at your tauric lover’s torso as orgasm descends upon you.", parse);
 		Text.NL();
 		Text.Add("Sensing the first signs that you’re about to blow, the centaur mare’s body reacts just as quickly, driving her mind over the edge with a loud whinny of delight that echoes about the hilly countryside. Her body tenses in preparation to receive your load, and so you dump it all into her in a wonderfully glorious fashion. Her cunt squeezes about your shaft, desperately milking you for all you’re worth, but it’s not as if you need any extra encouragement to do your best.", parse);
 		Text.NL();
 
-		let cum = player.OrgasmCum();
+		const cum = player.OrgasmCum();
 
-		if(cum >= 8) {
+		if (cum >= 8) {
 			Text.Add("You’re not exactly sure how long you spend unloading your seed into the centaur mare, but you know what they say - time flies when you’re having fun. As the first rush of spunk floods the mare’s tunnel, she gasps orgasmically and writhes in your grasp, thrown into ecstasy by the sheer sensation of being filled with baby batter like this.", parse);
 			Text.NL();
 			Text.Add("With such a high volume that’s pouring out of your [cock]", parse);
-			if(p1cock.Knot())
+			if (p1cock.Knot()) {
 				Text.Add(" and a knot to keep it in to boot", parse);
+			}
 			Text.Add(", the poor centaur’s womb doesn’t stand a chance. Her cunt fills with spunk almost immediately, the sheer pressure of being stuffed so deeply forcing her cervix apart to admit torrents upon torrents of your seed into her freshly heated oven.", parse);
 			Text.NL();
 			Text.Add("No way you’re stopping now! The centaur mare gasps in alarm as her belly begins to bloat and distend downwards as you continue to cum, but you grip her tightly and comfortingly, the closeness of your tauric body to her own seeming to impart some measure of comfort to her as her underbelly inflates to obscene proportions with your sperm.", parse);
@@ -1711,8 +1700,7 @@ MaliceScoutsScenes.Mare.WinFuck = function(enc : any) {
 			Text.Add("Yeah, you can definitely agree with her. Question, though - now, how is she going to be getting back to her camp, her tribe, or wherever she lives?", parse);
 			Text.NL();
 			Text.Add("<i>“Heh. I wasn’t expecting to get back for some time anyway. Maybe…”</i> she breathes a deep sigh and adjusts herself to better bear your weight. <i>“Bah, I won’t be missed for a while anyway. This was most definitely worth it - I don’t think I’ll be feeling so fucking needy for a while now.”</i>", parse);
-		}
-		else if(cum >= 5) {
+		} else if (cum >= 5) {
 			Text.Add("You spend a fairly long while giving the mare a good taste of your wild oats. Of course, it doesn’t <i>seem</i> that long, but as they say - time flies when you’re having fun. At the first rush of spunk into her, the centaur mare gasps and closes her eyes, relief clearly washing over her entire form as she instinctively moves to accept your seed.", parse);
 			Text.NL();
 			Text.Add("<i>“Fuuuuck,”</i> the mare groans, pushing her massive hips against you in a bid to ensure that as much of you as she can take is in her. <i>“Fuuuuuuuck.”</i>", parse);
@@ -1722,8 +1710,9 @@ MaliceScoutsScenes.Mare.WinFuck = function(enc : any) {
 			Text.Add("She moans again and rolls her hindquarters some more, little nickers coming from her mouth amidst flutters of breath. Uncertainly, the centaur mare summons up enough presence of mind to glance back at you, and you notice that her face is a delightful shade of hearty red.", parse);
 			Text.NL();
 			Text.Add("More and more spunk courses through your [cock] and fills her cunt", parse);
-			if(p1cock.Knot())
+			if (p1cock.Knot()) {
 				Text.Add(" held firmly in place by your bloated, swollen knot such that there’s no chance of any going to waste", parse);
+			}
 			Text.Add(". Slowly but gradually, the centaur mare’s underbelly begins to grow round and heavy, stretching with the load you’re forcing into her womb. You see her bite her lip a little uncertainly at the queer sensations of being filled this way, but a hearty grope to her firm breasts is enough to take her mind off such trivialities and back to the business of fucking.", parse);
 			Text.NL();
 			Text.Add("Faster and faster the both of you move, riding out the crest of your high, until she herself reaches hers just as yours is starting to die down. With a savage push against you, the centaur mare stamps at the ground and screams into the cool highland air, her fists clenched into tight, white-knuckled balls. Those deep inner walls pulse and shift against your shaft, coaxing it into the depths of her warm, slippery embrace.", parse);
@@ -1735,8 +1724,7 @@ MaliceScoutsScenes.Mare.WinFuck = function(enc : any) {
 			Text.Add("And that’s one hell of a weight you won’t be lugging around with you.", parse);
 			Text.NL();
 			Text.Add("<i>“Well then, it’s a good thing that I won’t be expected around camp for a bit just yet,”</i> she replies with a number of heavy sighs. <i>“That, and with any luck it’ll be a good long while before I’m itching for a fuck again.”</i>", parse);
-		}
-		else {
+		} else {
 			Text.Add("You grit your teeth and close your eyes as you pound the centaur mare again and again, giving her equine half a good taste of the wild oats you have on offer. Rope after rope of thick, hot cum passes from your [cock] into her waiting pussy, which flexes and clenches as it slurps it up greedily. Maybe there’s not as much as you might have hoped there would be, but there’s far more than enough to put a foal into her baby bag if it came to that.", parse);
 			Text.NL();
 			Text.Add("Come to think of it, <i>will</i> it come to that? Who knows? It’s not as if you’re likely to see this particular centaur mare again, after all.", parse);
@@ -1755,8 +1743,9 @@ MaliceScoutsScenes.Mare.WinFuck = function(enc : any) {
 		}
 		Text.NL();
 		Text.Add("When you're done and feel you’ve had enough, you pull out with a wet slurp and dismount, enjoying the sight of her creamy, well-fucked cunt. She seems quite pleased after her release, tail raised to show off those cum-stained lips of her equine pussy.", parse);
-		if(cum >= 5)
+		if (cum >= 5) {
 			Text.Add(" For a moment, you wonder if all the spunk you just pumped into her is going to blow back out in a small geyser of white, creamy fury, but by some small miracle both her womb and cunt hold, with little more than a trickle of spunk oozing down her hindquarters.", parse);
+		}
 		Text.NL();
 		Text.Add("She catches you eyeing her cum-stained cunt, and turns up the corner of her mouth in a small smile. <i>“Enjoying your handiwork?”</i>", parse);
 		Text.NL();
@@ -1771,8 +1760,7 @@ MaliceScoutsScenes.Mare.WinFuck = function(enc : any) {
 		Text.Add("<i>“I’ll be fine.”</i> The mare waves you off. <i>“Go ahead and trot back to the lowlands or wherever you came from; all I need is to catch my breath and I’ll be fine.”</i>", parse);
 		Text.NL();
 		Text.Add("If she says so, then. With one last look back at the centaur mare, you turn and head on past her and down the road.", parse);
-	}
-	else { // Biped
+	} else { // Biped
 		Text.Add("Well, it looks like everything’s where it should be and she’s in good health. No reason not to go ahead with your plan, then - finding a hollow log nearby, you heft it over and secure it solidly on the ground. With it, you’re able to get a proper boost up in order to properly get at her hindquarters - what with not being a taur and all - giving that firm horseflesh of hers a resounding smack with the flat of your palm.", parse);
 		Text.NL();
 		Text.Add("She yelps. <i>“H-hey!”</i>", parse);
@@ -1782,10 +1770,11 @@ MaliceScoutsScenes.Mare.WinFuck = function(enc : any) {
 		Text.Add("Oh, all right. You’ll not tease her anymore than is strictly necessary. The centaur mare’s swollen, drooling pussy lips make for a large, easy target, and you get all lined up, grinding your [cockTip] against them until she’s squealing and bucking against you, inadvertently getting you all lubed up with her juices.", parse);
 		Text.NL();
 		Text.Add("No time like the present, then. With a mighty thrust, you slide your man-meat into the centaur’s heated folds, ", parse);
-		if(p1cock.Len() >= 38) {
+		if (p1cock.Len() >= 38) {
 			Text.Add("fitting her deep tunnel like a sleeve - almost as if you were made for this.", parse);
-			if(p1cock.race.isRace(Race.Horse))
+			if (p1cock.race.isRace(Race.Horse)) {
 				Text.Add(" That goes double considering the equine tackle you’re packing at the moment - suited in both shape and size, as it were.", parse);
+			}
 			Text.NL();
 
 			Sex.Vaginal(player, mare);
@@ -1797,8 +1786,7 @@ MaliceScoutsScenes.Mare.WinFuck = function(enc : any) {
 			Text.Add("Why, are there no guy centaurs around?", parse);
 			Text.NL();
 			Text.Add("<i>“I’d have to get in line to see those who <b>are</b> in camp. Now shut up and fuck.”</i>", parse);
-		}
-		else {
+		} else {
 			Text.Add("eventually bottoming out in her cavernous cunt.", parse);
 			Text.NL();
 
@@ -1816,10 +1804,11 @@ MaliceScoutsScenes.Mare.WinFuck = function(enc : any) {
 		}
 		Text.NL();
 		Text.Add("Soon enough, you settle into a steady rhythm, pounding away to the musky smell of sex and squelching of juices. ", parse);
-		if(player.HasBalls())
+		if (player.HasBalls()) {
 			Text.Add("Your [balls], full of sperm waiting to be unleashed, slap heavily against her butt cheeks as you grip her hindquarters to steady yourself", parse);
-		else
+		} else {
 			Text.Add("Your pounding is so ferocious that you’ve to widen your stance a little and grip her hindquarters tightly as you steady yourself against the mare’s powerful bucking", parse);
+		}
 		Text.Add(" - and frankly speaking, what fine ass cheeks they are. Round and plump, yet with firm muscle supporting them from underneath and pushing them up, you have to admit that they’re fine pieces of horseflesh indeed. So fine, in fact, that you can’t help but palm them - an action which the centaur returns by way of pushing herself eagerly against you.", parse);
 		Text.NL();
 		Text.Add("Now that’s an invitation if you ever had one. It would be a shame to turn down that advance, so you shift your grasp from her hips to her ass, shamelessly squeezing, kneading, rolling that juicy horseflesh in your hands even as the centaur mare’s inner walls quiver and slide along your [cock] as you continue to fuck her silly.", parse);
@@ -1832,22 +1821,24 @@ MaliceScoutsScenes.Mare.WinFuck = function(enc : any) {
 		Text.NL();
 		Text.Add("You’re doing what you can! The centaur mare looks back at you once more, and little hisses of heated breath escape from between her gritted teeth as she throws a determined glare in your direction.", parse);
 		Text.NL();
-		parse["b"] = player.HasBalls() ? "r balls" : "";
+		parse.b = player.HasBalls() ? "r balls" : "";
 		Text.Add("Guess what? You’re determined, too! With her deep cunt squeezing and gripping around as much of your manhood as it can get, you can practically feel the cum being sucked out of you, drawn out of you[b] by the insistent suction being applied to your shaft.", parse);
 		Text.NL();
 		Text.Add("Subjected to such an intense fucking, you quickly feel yourself approaching your peak despite your best efforts to hold on. Sensing that you don’t have much time left, you desperately smash your hips against the centaur mare’s in a furious bout of fucking, trying to get her to break down before you do.", parse);
 		Text.NL();
 		Text.Add("She wins - barely. With a final thrust of your [cock] into the centaur mare’s warm, inviting insides, you groan aloud and blow your load straight into the centaur mare", parse);
-		if(player.HasBalls())
+		if (player.HasBalls()) {
 			Text.Add(", balls churning and squelching audibly as they disgorge their cargo with terrible efficiency", parse);
+		}
 		Text.Add(". She squeals and whinnies, her voice ringing in the cool highland air, and presses herself against you in a bid to take your seed.", parse);
-		if(p1cock.Knot())
+		if (p1cock.Knot()) {
 			Text.Add(" Even now, you feel your knot swelling and growing, greedily tying the two of you together, corking her cunt to make sure that as little of your sperm escapes as possible.", parse);
+		}
 		Text.NL();
 
-		let cum = player.OrgasmCum();
+		const cum = player.OrgasmCum();
 
-		if(cum >= 8) {
+		if (cum >= 8) {
 			Text.Add("And what a load this one is. The deluge of spunk that’s been kept in reserve within you jets from your [cockTip] like water from a fire hose, an overwhelming sensation of delight washing over your entire body as you feel thick, hot jism run down the entirety of your shaft, down, down, down -", parse);
 			Text.NL();
 			Text.Add("- Clearly, the mare feels it too, for she lets out a loud whinny of orgasming delight just before her equine underbelly begins to bloat with your seed, her cervix unable to withstand the pressure of so much cum being forced into her that it has to no choice but to allow the flood into her heated, waiting womb, your bodies working together to ensure she receives your fertile cock cream.", parse);
@@ -1859,8 +1850,7 @@ MaliceScoutsScenes.Mare.WinFuck = function(enc : any) {
 			Text.Add("You look around to her huge, cum-inflated equine underbelly, so taut, round and low that it brushes against the grass as it sloshes from side to side as she tries to move. Yeah, that’s definitely something all right.", parse);
 			Text.NL();
 			Text.Add("<i>“Aren’t going to be moving about very much, not when I’m filled up like this.”</i> A sigh. <i>“But I guess it’s worth it if it means that I won’t be squirming around for a long time. Not as if I’m expected back in camp any time soon, anyway.”</i>", parse);
-		}
-		else if(cum >= 5) {
+		} else if (cum >= 5) {
 			Text.Add("The load that blasts out of your [cockTip] is certainly respectable, certainly heavy enough for you to palpably feel the rush of thick, liquid warmth that gushes through your manhood before erupting out into the centaur mare’s cunt. The feel of your hot spunk flooding her insides is enough to send the mare careening over the edge of pleasure and she goes down wildly, sweat pouring off her flanks as she shakes and trembles with sated need and desire.", parse);
 			Text.NL();
 			Text.Add("<i>“Fuuuuuck,”</i> she moans, her breasts heaving as she gasps great lungfuls of air. The centaur mare’s sex-swollen breasts bob up and down on her chests, nipples as hard as diamonds, and you have little doubt that her mare ones down below are as equally stiff. <i>“Fuck this. Fuck it all.”</i>", parse);
@@ -1870,8 +1860,7 @@ MaliceScoutsScenes.Mare.WinFuck = function(enc : any) {
 			Text.Add("Filled to the brim with your sperm, the centaur mare’s only response is to moan and shift her weight as her equine underbelly begins to swell outwards, growing lower and rounder as if there’s already a foal growing unnaturally fast in her. Of course, you know it’s just cum from the way it sloshes around, but one can’t deny that it’s quite the satisfying sight.", parse);
 			Text.NL();
 			Text.Add("Eventually, your flow begins to ebb a little - although it’s far from stopped - and the centaur mare sighs in satisfaction. <i>“Well. Won’t <b>this</b> get a few odd looks when I return to camp.”</i>", parse);
-		}
-		else {
+		} else {
 			Text.Add("Greedily, you press yourself against the fine piece of equine horseflesh that the centaur mare is, determined to give her a good taste of your wild oats. As you pump and thrust away, trying to get your sperm in as deep as you can, she on her part rears up against you to take it all into her cavernous pussy, the muscles of her inner walls undulating against and massaging your shaft. Sure, there’s not as much as one might have hoped, but one takes what one can get.", parse);
 			Text.NL();
 			Text.Add("<i>“Is that all you’ve got?”</i> the centaur mare says as your flow begins to ebb and falter. <i>“Sheesh, maybe I should have just let you pass by and jumped the next idiot with a dick to come down the road.”</i>", parse);
@@ -1882,16 +1871,19 @@ MaliceScoutsScenes.Mare.WinFuck = function(enc : any) {
 		}
 		Text.NL();
 		Text.Add("Eventually, though, ", parse);
-		if(player.HasBalls())
+		if (player.HasBalls()) {
 			Text.Add("your [balls] exhaust themselves", parse);
-		else
+		} else {
 			Text.Add("you exhaust yourself", parse);
+		}
 		Text.Add(", the last of your available sperm dribbling out to join what you’ve already put deep in the mare. Winded and breathing hard, you wait for yourself to soften ", parse);
-		if(p1cock.Knot())
+		if (p1cock.Knot()) {
 			Text.Add("and your knot to deflate ", parse);
+		}
 		Text.Add("enough for you to be able to pull out. There’s a loud, wet pop followed by the unsettling noise of slick juices, and you’re free.", parse);
-		if(cum >= 5)
+		if (cum >= 5) {
 			Text.Add(" Despite your initial apprehensions, her cunt holds against the internal pressure of her cumflated womb with little more than a slight trickle that soon comes to a stop. Hah, seems like she’s going to be carrying your load about for a while, then.", parse);
+		}
 		Text.NL();
 		Text.Add("<i>“So, question.”</i>", parse);
 		Text.NL();
@@ -1914,14 +1906,13 @@ MaliceScoutsScenes.Mare.WinFuck = function(enc : any) {
 	TimeStep({hour: 1});
 
 	Gui.NextPrompt();
-}
+};
 
-
-MaliceScoutsScenes.Mare.WinFist = function(enc : any) {
-	let player = GAME().player;
-	let mare   = enc.mare;
-	let p1cock = player.BiggestCock();
-	let parse : any = {
+MaliceScoutsScenes.Mare.WinFist = function(enc: any) {
+	const player = GAME().player;
+	const mare   = enc.mare;
+	const p1cock = player.BiggestCock();
+	let parse: any = {
 
 	};
 	parse = player.ParserTags(parse);
@@ -1942,13 +1933,13 @@ MaliceScoutsScenes.Mare.WinFist = function(enc : any) {
 	Text.Add("<i>“Come on, lowlander,”</i> she snarls through clenched teeth. <i>“There’s no need to keep anyone waiting.”</i>", parse);
 	Text.NL();
 	Text.Add("Hah, so she says. ", parse);
-	if(p1cock) {
+	if (p1cock) {
 		Text.Add("Sure, you might have the equipment to do so, but you’re not in the mood for getting your dick wet today", parse);
-		if(p1cock.Len() < 20)
+		if (p1cock.Len() < 20) {
 			Text.Add(" - that, or you’re too well aware that you’d be completely insufficient for the satiation of the mare’s carnal needs", parse);
+		}
 		Text.Add(". No, instead you have a much better idea, and you’re certain that the mare will be on board with you once you’re in.", parse);
-	}
-	else {
+	} else {
 		Text.Add("It’s not like you have the equipment to do things the orthodox way… but then again, it’s not as if you ever had that in mind from the get go, right? No, you’ve got something better in mind to slake the mare’s desperate thirst, and you’re fairly certain she’ll be on board with you once she gets a taste of what you intend to serve up.", parse);
 	}
 	Text.NL();
@@ -1981,10 +1972,11 @@ MaliceScoutsScenes.Mare.WinFist = function(enc : any) {
 	Text.Add("What a pity, indeed. Good thing that you’re here to scratch that itch, then!", parse);
 	Text.NL();
 	Text.Add("It’s not an actual, massive equine shaft, but your fist and forearm are a pretty good approximation, judging by how the centaur mare nickers. Her inner walls continue to squeeze and ripple against your arm as you push more and more of it into her, stopping just past your wrist before beginning to pull out again. She’s just as toned and muscular on the inside as she is on the outside, and you can’t help but wonder why the centaur men wherever she lives wouldn’t want a piece of her. ", parse);
-	if(player.IsTaur())
+	if (player.IsTaur()) {
 		Text.Add("Yeah, you may be not quite in the mood for that kind of fun right now, but surely <i>all</i> the tauric guys can’t be having a headache <i>all</i> the time.", parse);
-	else
+	} else {
 		Text.Add("You know you would, if you were on four legs instead of two. It’s such a waste, to be honest.", parse);
+	}
 	Text.NL();
 	Text.Add("<i>“H-hey!”</i> the centaur mare says as you move to extract your fist. <i>“You’re not going to pull out already, are you? Come on!”</i>", parse);
 	Text.NL();
@@ -2025,17 +2017,17 @@ MaliceScoutsScenes.Mare.WinFist = function(enc : any) {
 	player.AddLustFraction(0.5);
 
 	Gui.NextPrompt();
-}
+};
 
 MaliceScoutsScenes.Mare.LossPrompt = function() {
-	let player = GAME().player;
+	const player = GAME().player;
 	SetGameState(GameState.Event, Gui);
 	Text.Clear();
 
 	// this = encounter
-	let enc = this;
+	const enc = this;
 
-	let parse : any = {
+	let parse: any = {
 
 	};
 	parse = player.ParserTags(parse);
@@ -2043,10 +2035,11 @@ MaliceScoutsScenes.Mare.LossPrompt = function() {
 	Gui.Callstack.push(function() {
 		Text.Clear();
 		Text.Add("There’s something about a huge mass of horseflesh that has a sense of weight and inevitability about it, one that you get a very keen appreciation for when the centaur mare charges and blindsides you, knocking ", parse);
-		if(player.weapon)
+		if (player.weapon) {
 			Text.Add("your [weapon] out of your [hand]s", parse);
-		else
+		} else {
 			Text.Add("the wind out of you", parse);
+		}
 		Text.Add(" and sending you reeling. Before you know it, she’s got the tip of her spear a hair’s breadth away from your throat.", parse);
 		Text.NL();
 		Text.Add("<i>“I told you that I’d <b>make</b> you service me if it came down to that, and so it has.”</i> She draws a deep breath of cool highland air to steady her words, shaking with mounting arousal, and continues. <i>“You fought well - or at least, as well as you could - but your strength has failed you. I hope that you’ve the good sense to acquiesce, or if not, at least submit to your fate.”</i>", parse);
@@ -2057,21 +2050,21 @@ MaliceScoutsScenes.Mare.LossPrompt = function() {
 		Text.NL();
 
 		let armor = "";
-		if(player.Armor() || !player.LowerArmor()) armor += "[armor]";
-		if(player.Armor() && player.LowerArmor()) armor += " followed by your ";
-		if(player.LowerArmor()) armor += "[botarmor]";
-		parse["arm"] = Text.Parse(armor, parse);
+		if (player.Armor() || !player.LowerArmor()) { armor += "[armor]"; }
+		if (player.Armor() && player.LowerArmor()) { armor += " followed by your "; }
+		if (player.LowerArmor()) { armor += "[botarmor]"; }
+		parse.arm = Text.Parse(armor, parse);
 
 		Text.Add("Your concentration is so focused on her spear-tip that you don’t notice one of her hooved forefeet lashing out, catching you soundly on the chest and sending you sprawling onto your back. Before you know it, she’s tossed aside her spear and shield and is on you, pawing messily at your [arm] in a frantic bid to get it off. It takes somewhat longer than one would expect thanks to how haphazardly she’s grabbing at the material, but eventually the lot is off and you’re at her mercy.", parse);
 		Text.NL();
 		MaliceScoutsScenes.Mare.LossEntry(enc);
 	});
 	Encounter.prototype.onLoss.call(enc);
-}
+};
 
-MaliceScoutsScenes.Mare.LossEntry = function(enc : any) {
-	//TODO More Loss Scenes
-	let scenes = new EncounterTable();
+MaliceScoutsScenes.Mare.LossEntry = function(enc: any) {
+	// TODO More Loss Scenes
+	const scenes = new EncounterTable();
 
 	scenes.AddEnc(function() {
 		MaliceScoutsScenes.Mare.LossFacesit(enc);
@@ -2083,12 +2076,11 @@ MaliceScoutsScenes.Mare.LossEntry = function(enc : any) {
 	}, 1.0, function() { return true; });
 	*/
 	scenes.Get();
-}
+};
 
-
-MaliceScoutsScenes.Mare.LossFacesit = function(enc : any) {
-	let player = GAME().player;
-	let parse : any = {
+MaliceScoutsScenes.Mare.LossFacesit = function(enc: any) {
+	const player = GAME().player;
+	let parse: any = {
 
 	};
 	parse = player.ParserTags(parse);
@@ -2143,10 +2135,10 @@ MaliceScoutsScenes.Mare.LossFacesit = function(enc : any) {
 	Text.NL();
 
 	let armor = "";
-	if(player.Armor() || !player.LowerArmor()) armor += "[armor]";
-	if(player.Armor() && player.LowerArmor()) armor += " followed by your ";
-	if(player.LowerArmor()) armor += "[botarmor]";
-	parse["arm"] = Text.Parse(armor, parse);
+	if (player.Armor() || !player.LowerArmor()) { armor += "[armor]"; }
+	if (player.Armor() && player.LowerArmor()) { armor += " followed by your "; }
+	if (player.LowerArmor()) { armor += "[botarmor]"; }
+	parse.arm = Text.Parse(armor, parse);
 
 	Text.Add("Seems there nothing left for you here now. Leaving the centaur mare to recover in her own time, you gather your [arm] and are on your way. Before long, you crest the next hill, and the centaur vanishes from sight.", parse);
 	Text.Flush();
@@ -2155,24 +2147,21 @@ MaliceScoutsScenes.Mare.LossFacesit = function(enc : any) {
 	player.AddLustFraction(0.5);
 
 	Gui.NextPrompt();
-}
-
-
+};
 
 // GOAT ALCHEMIST SCENES
 
-
-MaliceScoutsScenes.Goat.LoneEncounter = function(levelbonus : number) {
-	let player = GAME().player;
-	let party : Party = GAME().party;
-	let enemy    = new Party();
-	let goat     = new GoatAlchemist(levelbonus);
+MaliceScoutsScenes.Goat.LoneEncounter = function(levelbonus: number) {
+	const player = GAME().player;
+	const party: Party = GAME().party;
+	const enemy    = new Party();
+	const goat     = new GoatAlchemist(levelbonus);
 	enemy.AddMember(goat);
-	let enc : any = new Encounter(enemy);
+	const enc: any = new Encounter(enemy);
 	enc.goat     = goat;
 
 	enc.onEncounter = function() {
-		let parse : any = {
+		let parse: any = {
 
 		};
 		parse = player.ParserTags(parse);
@@ -2183,8 +2172,8 @@ MaliceScoutsScenes.Goat.LoneEncounter = function(levelbonus : number) {
 		Text.Add("<i>“Bombs away!”</i>", parse);
 		Text.NL();
 		Text.Add("You have barely enough time to look up and see two dark, spherical objects fall from the top of the ravine towards you before your instincts kick in and take control of your movement, sending you into a dive for the nearest boulder", parse);
-		if(party.Num() > 1) {
-			parse["comp"] = party.Num() == 2 ? party.Get(1).name : "your companions";
+		if (party.Num() > 1) {
+			parse.comp = party.Num() == 2 ? party.Get(1).name : "your companions";
 			Text.Add(" with [comp] following suit", parse);
 		}
 		Text.NL();
@@ -2208,7 +2197,7 @@ MaliceScoutsScenes.Goat.LoneEncounter = function(levelbonus : number) {
 		Text.NL();
 		Text.Add("<b>It’s a fight!</b>", parse);
 		Text.Flush();
-		
+
 		Gui.NextPrompt(function() {
 			enc.PrepCombat();
 		});
@@ -2222,13 +2211,13 @@ MaliceScoutsScenes.Goat.LoneEncounter = function(levelbonus : number) {
 	enc.onVictory = MaliceScoutsScenes.Goat.WinPrompt;
 
 	return enc;
-}
+};
 
 MaliceScoutsScenes.Goat.WinPrompt = function() {
-	let enc  = this;
+	const enc  = this;
 	SetGameState(GameState.Event, Gui);
 
-	let parse : any = {
+	const parse: any = {
 
 	};
 
@@ -2240,15 +2229,15 @@ MaliceScoutsScenes.Goat.WinPrompt = function() {
 		Text.NL();
 		Text.Add("So, what now?", parse);
 		Text.Flush();
-		
+
 		//
-		let options = [];
+		const options = [];
 		options.push({nameStr : "Turn Tables",
 			tooltip : Text.Parse("So, he was planning to experiment on you? Turnabout is fair play.", parse),
 			enabled : true,
-			func : function() {
+			func() {
 				MaliceScoutsScenes.Goat.WinTurnTables(enc);
-			}
+			},
 		});
 
 		/* TODO
@@ -2276,27 +2265,27 @@ MaliceScoutsScenes.Goat.WinPrompt = function() {
 		});
 	});
 	Encounter.prototype.onVictory.call(enc);
-}
+};
 
-MaliceScoutsScenes.Goat.WinTurnTables = function(enc : any) {
-	let player = GAME().player;
-	let goat = enc.goat;
-	let parse : any = {
-		
+MaliceScoutsScenes.Goat.WinTurnTables = function(enc: any) {
+	const player = GAME().player;
+	const goat = enc.goat;
+	let parse: any = {
+
 	};
 	parse = player.ParserTags(parse);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
-	
+
 	Text.Clear();
 	Text.Add("Snorting, you step forward towards the randy, unkempt old goat and give the bastard a kick in his side just to make sure he stays down and tries no funny tricks. So, he was planning to use you as a guinea pig for whatever crazed experiments he had in mind, didn’t he? Has he ever come across the saying, “physician, heal thyself”?", parse);
 	Text.NL();
 	Text.Add("<i>“Don’t you touch that, you young whippersnapper!”</i> the old fart bleats as you reach down for his belt, but he’s powerless to prevent you from unbuckling it and sliding it off his waist. The contents already looked to be of questionable character, and a closer inspection of the various liquids and powders within the thick glass vials does nothing to alleviate your concerns about their integrity or legality.", parse);
 	Text.NL();
 	Text.Add("Taking a deep breath, you reach into one of the belt’s many pockets and pull out the first thing your fingers close down upon, which just so happens to be ", parse);
-	
-	//Pick one random option from the below, and follow on from there:
-	let scenes = new EncounterTable();
-	//Grow-it-big cream
+
+	// Pick one random option from the below, and follow on from there:
+	const scenes = new EncounterTable();
+	// Grow-it-big cream
 	scenes.AddEnc(function() {
 		Text.Add("a large, solid ceramic tub sealed with plenty of wax. It takes a little bit of tugging for you to finally get the seal open - it’s <i>almost</i> as bad as a pickle jar. Not exactly as bad, but pretty darn close - and it parts with a pop. The heavy scent of cherries rises from the tub’s contents - a light, rosy-pink salve that looks as light and fluffy as whipped cream.", parse);
 		Text.NL();
@@ -2306,7 +2295,7 @@ MaliceScoutsScenes.Goat.WinTurnTables = function(enc : any) {
 		Text.NL();
 		Text.Add("<i>“Oh.”</i> A few seconds’ silence. <i>“Shit.”</i>", parse);
 		Text.NL();
-		parse["l"] = player.IsNaga() ? "your tail" : player.HasLegs() ? "a foot" : Text.Parse("your [legs]", parse);
+		parse.l = player.IsNaga() ? "your tail" : player.HasLegs() ? "a foot" : Text.Parse("your [legs]", parse);
 		Text.Add("Now that you’ve called his bluff, the poor bastard tries to scramble away in earnest, but you pin him to the ground with [l] and grin.", parse);
 		Text.NL();
 		Text.Add("<i>“Seriously! You don’t want to touch that stuff! Not with your bare skin, that is. It’s… it’s… caustic.”</i>", parse);
@@ -2327,13 +2316,13 @@ MaliceScoutsScenes.Goat.WinTurnTables = function(enc : any) {
 		Text.NL();
 		Text.Add("What will you do?", parse);
 		Text.Flush();
-		
+
 		TimeStep({hour: 1});
-		
-		//Structure this as such: random opening for each of the four body parts, followed by body-part specific portion. Alchemist and leave have their own blocks altogether.
-		
-		let intro = function() {
-			let scenes = new EncounterTable();
+
+		// Structure this as such: random opening for each of the four body parts, followed by body-part specific portion. Alchemist and leave have their own blocks altogether.
+
+		const intro = function() {
+			const scenes = new EncounterTable();
 			scenes.AddEnc(function() {
 				Text.Add("An idea begins forming in your mind, but your better sense grabs hold of you and shakes your consciousness silly until it’s sure you’re paying attention. Do you really want to do this? Apply to yourself the completely unverified and unvouched-for product of an old, nasty-smelling ruminant who in all probability hasn’t bathed for days?", parse);
 				Text.NL();
@@ -2378,25 +2367,24 @@ MaliceScoutsScenes.Goat.WinTurnTables = function(enc : any) {
 			scenes.Get();
 			Text.NL();
 		};
-		
-		//[Cock][Balls][Breasts][Vag][Alchemist][Leave]
-		let options = [];
-		if(player.FirstCock()) {
+
+		// [Cock][Balls][Breasts][Vag][Alchemist][Leave]
+		const options = [];
+		if (player.FirstCock()) {
 			options.push({nameStr : "Cock",
 				tooltip : Text.Parse("Do you really have to think twice about this? Swab a batch on your [cocks].", parse),
 				enabled : true,
-				func : function() {
+				func() {
 					Text.Clear();
 					intro();
-					if(player.NumCocks() > 1) {
-						parse["all"] = player.NumCocks() > 2 ? "all" : "both";
+					if (player.NumCocks() > 1) {
+						parse.all = player.NumCocks() > 2 ? "all" : "both";
 						Text.Add("Although you’ve decided on what you want to do, you can’t help but heave a sigh when you look down at your [cocks]. Which one to start with, then? Unable to decide on which of your manhoods to treat first, you eventually settle for working the stuff in your hands to a slick and slippery lather, then grabbing [all] of them in your cream-slick palms and pumping them up and down, as if you were trying to jerk off a bundle of sticks. Up and down, back and forth - to be completely honest, the cream isn’t <i>too</i> different in texture from your average lube, and while it’s still a bit of a struggle to try and evenly coat each one of your shafts all over with a layer of sweet-smelling cream, it’s also easier than you expected.", parse);
 						Text.NL();
 						Text.Add("Of course, it also helps that the cream feels considerably pleasurable as it seeps into your [cocks], a sensation of warm fullness permeating in and suffusing your shafts to their very core. Between this and your zealous rubbing, it doesn’t take long for you to bring all of your man-meat to bear, full and ready for action.", parse);
 						Text.NL();
 						Text.Add("And then it begins. Pulsing and throbbing ever so slightly, veins sticking out on their surfaces like spiderwebs, you see your manhoods begin to grow before your very eyes, the shiny layer of alchemical cream rapidly absorbed into flesh as it fuels the uncanny growth spurt your malenesses are going through. Try as you might, you can’t help but utter a little cry as sensations of contentment wash out from the base of your [cocks], a myriad of lovers’ caresses stroking outwards from your groin and seeping into your lower belly. Before you know it, your [cocks] are twitching of their own accord - and you’ve upended a healthy dose of spunk all over the alchemist lying at your [feet], head thrown back and teeth clenched as each and every one of your shafts blasts away on rapid fire at the stinking old creep.", parse);
-					}
-					else {
+					} else {
 						Text.Add("Yeah, you could do with a bit of enhancement down there. Size does matter, as the saying goes, and you’re not quite done with growing this little puppy yet. Taking the dollop of grow-it-big cream that you’ve gathered on your fingers, you swiftly apply it to the length and girth of your manhood, taking care to ensure that an even coating is applied to all exposed skin from base to tip. The stuff is surprisingly slick and slippery - come to think of it, it’s not too unlike lube - and before you know it, you’ve slipped into a steady back-and-forth motion in applying the stuff as if you were jerking yourself off.", parse);
 						Text.NL();
 						Text.Add("Which, let’s face it, is what you’re doing right now. It’s not just your fingers, it’s the cream as well, and a pleasurable tingling starts up in your [cock] as the alchemical cream settles in, the sensation moving in from the outsides and seeping deep into your flesh. You can’t help it - a groan escapes your lips unbidden as the entirety of your [cock] is transformed into an intensely sensitive pleasure-shaft, twitching furiously in the air as pre quickly gathers and oozes from its tip.", parse);
@@ -2405,13 +2393,13 @@ MaliceScoutsScenes.Goat.WinTurnTables = function(enc : any) {
 					}
 					Text.NL();
 
-					let cum = player.OrgasmCum();
+					const cum = player.OrgasmCum();
 
 					Text.Add("The alchemist moans weakly and tries to shield his face with his hands, but that’s pretty much all that he can do in his current state besides sputter and cough. Rope upon rope of steaming spunk splatters down upon him, getting in his tattered smock, in his hair, and even in his freshly formed cleavage.", parse);
 					Text.NL();
 					Text.Add("What’s more important, though, are the ongoing changes; with each burst of cum you expel from your [cockTip] and onto the alchemist, you can both see and feel your [cock] growing longer and girthier, as if this bout of exercise is causing it to swell like a well-trained muscle.", parse);
 					Text.NL();
-					if(cum > 5) {
+					if (cum > 5) {
 						Text.Add("With the sheer size of the load that you’re currently dumping onto the alchemist, you’re probably going to end up with quite the swinger when all this is over. Already, the old goat’s entire body is covered with thick gobs of your sperm, having plastered him from head to toe; it slowly runs off his matted hair and collects in a puddle beneath him - which is becoming deeper by the second.", parse);
 						Text.NL();
 						Text.Add("Does he like his bath? He really hasn’t had one for a long, long time; he should really be thankful that you stopped by and gave him one. He’ll be all clean and green when he gets himself sorted out, you’re sure of that.", parse);
@@ -2419,8 +2407,7 @@ MaliceScoutsScenes.Goat.WinTurnTables = function(enc : any) {
 						Text.Add("<i>“Fuck… you…”</i>", parse);
 						Text.NL();
 						Text.Add("Oh no no, you get the distinct impression that as big as it is, you’re going to need your entire load for this, so there won’t be any left over for fucking afterwards.", parse);
-					}
-					else {
+					} else {
 						Text.Add("String upon string of hot sperm splashes on the alchemist, and he bleats in his growing distress. You don’t quite have enough in you to give him an actual cumbath, but there’re still sufficient reserves in store to confer upon him a facial, a pearl necklace, and a lovely sheen of spunk on his freshly-grown lady lumps to go with his newfound femininity.", parse);
 						Text.NL();
 						Text.Add("It may not be much, but it’s more of a bath than he’s probably taken for a good, long while. He should be grateful to you that you’re blessing him with a pearly shower like this.", parse);
@@ -2430,7 +2417,7 @@ MaliceScoutsScenes.Goat.WinTurnTables = function(enc : any) {
 						Text.Add("Hmm, try as you might, knowing what he was intending to do to you had you lost… you can’t quite seem to work up very much sympathy for this rancid old goat despite his current predicament. Whistling a merry tune, you simply stand back and relax as the last of the cream works its magic on your [cock], sending out a few more blasts of sticky seed straight onto the alchemist’s face.", parse);
 					}
 					Text.NL();
-					if(player.FirstVag()) {
+					if (player.FirstVag()) {
 						Text.Add("The alchemist was as good to his word, though - this grow-it-big cream stuff is truly localized in its effect. Despite all that’s happened to your [cock] and the accompanying pleasurable sensations that flooded your body, your [vag] is hardly even so much as damp.", parse);
 						Text.NL();
 						Text.Add("Hmm, he may be crazy, but he seems to have done good work. Too bad he has to be such a rancid old bastard in the bargain.", parse);
@@ -2444,34 +2431,32 @@ MaliceScoutsScenes.Goat.WinTurnTables = function(enc : any) {
 					Text.NL();
 					Text.Add("You have a very good idea, which is exactly why you did that. Giving the cum-covered goat a big smile, you apply a swift kick to his side and trot away, leaving him to think about what he’s done - if such a thing is applicable to an old has-been like him.", parse);
 					Text.Flush();
-					
+
 					TimeStep({hour: 1});
-					
-					let cocks = player.AllCocks();
-					for(let i = 0; i < cocks.length; i++) {
+
+					const cocks = player.AllCocks();
+					for (let i = 0; i < cocks.length; i++) {
 						cocks[i].length.IncreaseStat(80, 2);
 						cocks[i].thickness.IncreaseStat(15, 0.5);
 					}
-					
+
 					Gui.NextPrompt();
-				}
+				},
 			});
 		}
-		if(player.HasBalls()) {
+		if (player.HasBalls()) {
 			options.push({nameStr : "Balls",
 				tooltip : Text.Parse("Because everyone knows that the pair makes the man.", parse),
 				enabled : true,
-				func : function() {
+				func() {
 					Text.Clear();
 					intro();
 					Text.Add("Right, no turning back now. Pulling down your [botarmor], you reach down and apply the cream you’ve gathered to your [balls]. ", parse);
-					if(player.Balls().BallSize() >= 12) {
+					if (player.Balls().BallSize() >= 12) {
 						Text.Add("With how large and weighty they already are, you have to use both hands to apply it with any reasonable speed and make sure that you get a more or less even coating of the sweet-smelling cream on your nuts. It’s not <i>difficult</i>, but it is tedious, and you’re sort of privately relieved when the job is done - especially with all the looks of barely restrained jealousy that the alchemist is shooting you. You’ve had to use a bit more than the original amount you scooped out from the tub in order to get everything slathered nicely, but there’s still plenty left over if it comes to that.", parse);
-					}
-					else if(player.Balls().BallSize() >= 8) {
+					} else if (player.Balls().BallSize() >= 8) {
 						Text.Add("It’s not unpleasant, the sensation of the sweet-smelling alchemical stuff against your [balls] as you work in an even coating all over your nutsack. To be completely honest, the slightly greasy and oily feel to it distinctly reminds you of lube… and looking down at the rancid old bastard who concocted it, there’s a more than average chance that he intended just that.", parse);
-					}
-					else {
+					} else {
 						Text.Add("Cupping your [balls] in your cream-filled hand, you roll them around in your palm, feeling the alchemical concoction cool and comforting against your sensitive nutsack as you work an even shine of the stuff around your seed factories. Slightly greasy and oily to the touch, there’s a distinct lube-like quality to it; given the sexual nature of the enhancing cream, you don’t doubt that this was completely intentional.", parse);
 					}
 					Text.NL();
@@ -2497,26 +2482,25 @@ MaliceScoutsScenes.Goat.WinTurnTables = function(enc : any) {
 					Text.NL();
 					Text.Add("Are there?", parse);
 					Text.Flush();
-					
+
 					TimeStep({hour: 1});
-					
+
 					player.Balls().size.IncreaseStat(20, 1);
 					player.RestoreCum(10);
-					
+
 					Gui.NextPrompt();
-				}
+				},
 			});
 		}
 		options.push({nameStr : "Breasts",
 			tooltip : Text.Parse("Your rack could do with a little enhancement…", parse),
 			enabled : true,
-			func : function() {
+			func() {
 				Text.Clear();
 				intro();
-				if(player.FirstBreastRow().Size() > 10) {
+				if (player.FirstBreastRow().Size() > 10) {
 					Text.Add("Hmm. You consider your [breasts] for a moment - sure, they’re large and weighty, but hell, you could do with even bigger ones. Looking down at the nice perky pair of Bs you’ve given the bleating bastard lying before you, you’re pretty sure that even though you have a pretty good thing already going, it can still be improved further with a healthy application of some cream from this little tub.", parse);
-				}
-				else {
+				} else {
 					Text.Add("Hmm. Well, considering the nice pair of lady lumps that the cream has produced on the goat alchemist’s chest, you can only wonder what it can do for you. You <i>do</i> suppose that you could do with some additional heft - and if the results before your eyes are any indication of the final result, then you won’t just be getting a boost in quantity, but quality as well. What’s not to love?", parse);
 				}
 				Text.NL();
@@ -2534,22 +2518,22 @@ MaliceScoutsScenes.Goat.WinTurnTables = function(enc : any) {
 				Text.NL();
 				Text.Add("Huh. Looks like it actually worked - and that was quite the change for the small amount you used. Doesn’t seem like there’re any side effects, either, save for the nagging desire at the back of your mind to go ahead and give someone, <i>anyone</i> a boobjob, but even that is fading as you push your [breasts] back into your [armor] and prepare to be on your way.", parse);
 				Text.Flush();
-				
+
 				TimeStep({hour: 1});
-				
+
 				_.each(player.AllBreastRows(), function(breasts) {
 					breasts.size.IncreaseStat(50, 1);
 				});
 				player.AddLustFraction(0.4);
-				
+
 				Gui.NextPrompt();
-			}
+			},
 		});
-		if(player.FirstVag()) {
+		if (player.FirstVag()) {
 			options.push({nameStr : "Vag",
 				tooltip : Text.Parse("Not the first thing that comes to mind, but it should work.", parse),
 				enabled : true,
-				func : function() {
+				func() {
 					Text.Clear();
 					Text.Add("Hand halfway to your groin, you pause for a second and consider what you’re about to do. Sure, this isn’t the sort of thing that usually comes to mind when one thinks of growing things bigger, but technically it should work, right?", parse);
 					Text.NL();
@@ -2561,19 +2545,17 @@ MaliceScoutsScenes.Goat.WinTurnTables = function(enc : any) {
 					Text.NL();
 					Text.Add("Now comes the hard part - actually applying the stuff where it’s needed. Taking a deep breath, you mentally go through the steps of what you need to do next, then go ahead and bend over. ", parse);
 					Text.NL();
-					//TODO GROWTHRATE RANK
-					let dexrank = player.dexterity.GrowthRank();
-					if(player.IsFlexible() || dexrank >= 15) {
+					// TODO GROWTHRATE RANK
+					const dexrank = player.dexterity.GrowthRank();
+					if (player.IsFlexible() || dexrank >= 15) {
 						Text.Add("Fortunately for you, you’re the fairly limber kind of person, so going through the contortions needed in order to get into position to fist yourself is no problem. As your gloved hands come into contact with your pussy lips, you feel a tingle of warmth emanate from them, worming its way up into your lower belly and sending shivers down your spine.", parse);
 						Text.NL();
 						Text.Add("No time to be hesitant now. Your cunt parts as you gather your strength and push against them, and before you know it, you’re in.", parse);
-					}
-					else if(dexrank >= 10) {
+					} else if (dexrank >= 10) {
 						Text.Add("You might not be the clumsiest of people, but even so, the dexterity required for you to be able to fist yourself to the extent you desire is no small feat. You have to widen your stance a little more than you expected in order for you to get your hand in position, and as you do you can’t help but “accidentally” grind your knuckles against the lips of your womanly flower, smearing just a tiny bit of the cream onto their sensitive folds.", parse);
 						Text.NL();
 						Text.Add("The rush of heat and throbbing blood that funnels into your pussy lips takes you by surprise and leaves you stunned for a moment, quickly followed by a gnawing urge for more. Well, since you were going to be about that anyway, you waste no time in cramming your cream-coated fist into your warm, wet depths, eager to see what happens next.", parse);
-					}
-					else {
+					} else {
 						Text.Add("It’s true that you’re not the most limber of people about, but when there’s a will, there’s a way. Bracing yourself against a nearby boulder, you slowly ease yourself into a position more suited for well and truly fisting yourself as deeply as possible. Your muscles complain in a low, achy tone as you make the necessary contortions, but eventually give way as you position your cream-coated fist at the mouth of your love-tunnel, almost-but-not-quite-touching as you gather your strength for the final insertion.", parse);
 						Text.NL();
 						Text.Add("Knowing what you’re about to do to yourself, your pussy has started to grow just a little damper in response, and you can’t help but finger the petals of your womanly flower tenderly, daubing a bit of the alchemical cream onto the moist folds. The moment that happens, a surge of erotic heat ripples outwards from your cunt lips, traveling up the length of your love-tunnel and sending back a slick coating of juices in response.", parse);
@@ -2590,34 +2572,32 @@ MaliceScoutsScenes.Goat.WinTurnTables = function(enc : any) {
 					Text.Add("That’s a very convincing reply - not. You’d pursue the matter further, if not for the distracting fact that you’ve got a lubed-up, gloved hand stuck in your cooch. That, and you’re starting to <i>really</i> feel the cream starting to do its work, tiny electric tingles working their way into your inner walls and traveling outwards into your hips.", parse);
 					Text.NL();
 
-					let cap = player.FirstVag().Capacity();
+					const cap = player.FirstVag().Capacity();
 
-					if(cap >= Capacity.gaping) {
+					if (cap >= Capacity.gaping) {
 						Text.Add("The transformative takes hold almost immediately after, spreading outwards to fill the entirety of your stretchy womanhood. You’re unable to hold back a lewd moan as your cunt becomes ever more prominent and defined, the petals of your womanly flower swelling and thickening, glistening with arousal and need. They’re so plump and thick, they’re beginning to look almost kissable… you hold that thought in mind for a little longer, then lose it as yet more orgasmic sensations crash into you. Flowing ever further into your flesh, you can’t help but start feeling quite literally hollow as your mound protrudes ever further, growing more and more prominent as it struggles to hide all the excess vaginal flesh that you’re gaining.", parse);
 						Text.NL();
 						Text.Add("Last but not least are your hips - as the cream’s magical effects seep deeper into your body, you feel a strange yet calming and pleasant tingling sensation as your [hips] widen some more, helping to accentuate and enhance your figure but also more importantly, give you some much-needed space to take advantage of your increased stretchiness and fit even larger things within you.", parse);
-					}
-					else if(cap >= Capacity.loose) {
+					} else if (cap >= Capacity.loose) {
 						Text.Add("The moment the changes hit, you go cross-eyed and bite your lips as a wave of orgasmic pleasure washes over you bottom up, sending clear girl-cum oozing out from between your wrist and cunt lips as you come dangerously close to losing it there and then. Nevertheless, you manage to hang on and keep standing as your inner walls greedily absorb the magical cream to fuel their development.", parse);
 						Text.NL();
 						Text.Add("Even as your [vag] clamps down on your fist in a vice-like grip, you can see your cleft slowly swelling, growing more pronounced and defined by the moment. That’s just on the outside, of course - inside, you can definitely feel yourself deepening, flesh parting as it grows more muscular and elastic.", parse);
 						Text.NL();
 						Text.Add("The final area of change is, surprisingly, in your hips - as the tingles from earlier reach your hip bone, you can feel it reform and widen, shifting your stance slightly. This confuses you for a bit until you realize that there’s no point in having a massive womanhood if your hips aren’t wide enough to make use of that added girth in order to fit bigger things in you more comfortably.", parse);
-					}
-					else {
+					} else {
 						Text.Add("With a sudden shudder and outpouring of clear girl-cum, you feel a little more hollow as your sex starts to deepen, inner walls spasming and clenching at your fist and forearm as they swiftly react to the cream’s special properties. You were quite tight before - perhaps overly so - but the cream seems to have changed that, at the very least. Although there’s no obvious change save perhaps a slight swelling of your mound as it accommodates the extra vaginal flesh, a little probing and prodding leaves little doubt that you’re definitely more able to stretch, and a little deeper to boot.", parse);
 					}
-					
+
 					player.FirstVag().capacity.IncreaseStat(15, 0.5);
-					if(cap >= Capacity.loose) {
+					if (cap >= Capacity.loose) {
 						player.body.torso.hipSize.IncreaseStat(HipSize.VeryWide, 0.5);
 					}
-					
+
 					Text.NL();
 					Text.Add("Caught up in the frenzy of sensation, your body works on automatic, mindlessly pistoning your fist in and out of your cunt as all the alchemical cream smeared on the outside of the glove is greedily consumed to fuel your cunt’s rapid growth. Clear, slick fluids flow freely down your wrist and across your [thighs], your womanly flower overflowing with nectar and staining your [skin] with slippery, glistening fluid - this feels <i>so</i> much better than it usually does, and you have little doubt it’s all thanks to the cream.", parse);
 					Text.NL();
-					if(player.FirstCock()) {
-						parse["w"] = player.NumCocks() > 1 ? "worms" : "a worm";
+					if (player.FirstCock()) {
+						parse.w = player.NumCocks() > 1 ? "worms" : "a worm";
 						Text.Add("The alchemist wasn’t kidding about the selectiveness of his cream’s effects, either. Despite your entire body being enraptured by feminine needs and urges, your [cocks] remain[notS] as limp and flaccid as [w] on a hot day. With all the additional effects which come with so many potions, something as targeted as this could really make a pretty coin or two on the market - if the rancid old goat could ever convince anyone to buy his wares. Oh well.", parse);
 						Text.NL();
 					}
@@ -2631,28 +2611,29 @@ MaliceScoutsScenes.Goat.WinTurnTables = function(enc : any) {
 					Text.NL();
 					Text.Add("Of course, that’s why you did it. If he treasures his little concoctions so much, maybe he could consider actually finding volunteers for his experiments instead of lying in wait in the wilderness to make “volunteers” out of unsuspecting travelers. Reaching down, you give his softening dick a good hard slap, making him bleat in pain, then turn your back on the old has-been and are on your way.", parse);
 					Text.Flush();
-					
+
 					TimeStep({hour: 1});
-					
+
 					Gui.NextPrompt();
-				}
+				},
 			});
 		}
 		// Alchemist
 		options.push({nameStr : "Alchemist",
 			tooltip : Text.Parse("Yeah, you’re not using this stuff on yourself. Him, though…", parse),
 			enabled : true,
-			func : function() {
+			func() {
 				Text.Clear();
 				Text.Add("Yeeeah. Seeing what just a small handful of this stuff has done to the alchemist, you look down at the rest of the tub in your hands and a wry smile comes to your lips. There’s no way you’re going to be using any of this stuff on yourself, not after that - but the alchemist himself, though, he looks like he could use some more enhancement - quite a lot of it, in fact.", parse);
 				Text.NL();
 				Text.Add("Maybe it’s your attitude, maybe it’s the nasty gleam in your eye, but one way or the other the rancid old goat senses that you’ve got a bad time in store for him and tries to crawl away hand over foot. That, however, is easily stopped when you simply cross over and place yourself in his path, putting ", parse);
-				if(player.HasLegs())
+				if (player.HasLegs()) {
 					Text.Add("a foot", parse);
-				else if(player.IsNaga())
+				} else if (player.IsNaga()) {
 					Text.Add("your tail", parse);
-				else
+ } else {
 					Text.Add("yourself", parse);
+ }
 				Text.Add(" directly in his path.", parse);
 				Text.NL();
 				Text.Add("Going somewhere?", parse);
@@ -2717,7 +2698,7 @@ MaliceScoutsScenes.Goat.WinTurnTables = function(enc : any) {
 				TimeStep({hour: 1});
 
 				Gui.NextPrompt();
-			}
+			},
 		});
 
 		Gui.SetButtonsFromList(options, true, function() {
@@ -2728,7 +2709,7 @@ MaliceScoutsScenes.Goat.WinTurnTables = function(enc : any) {
 			Text.NL();
 			Text.Add("Maybe now he’ll think twice about waylaying people for his “experiments”, you think to yourself as you stop away. And if not, maybe the pain will suffice to keep him from more shenanigans.", parse);
 			Text.Flush();
-			
+
 			Gui.NextPrompt();
 		});
 	}, 1.0, function() { return true; });
@@ -2743,13 +2724,13 @@ MaliceScoutsScenes.Goat.WinTurnTables = function(enc : any) {
 		Text.NL();
 		Text.Add("What do you do now?", parse);
 		Text.Flush();
-		
-		let options = [];
-		//[Use][Don’t Use]
+
+		const options = [];
+		// [Use][Don’t Use]
 		options.push({nameStr : "Use on him",
 			tooltip : Text.Parse("You really DO want to know just how this works…", parse),
 			enabled : true,
-			func : function() {
+			func() {
 				Text.Clear();
 				Text.Add("Riiight. The dildo looks so interesting - and with so many buttons to boot - that you can’t help but want to see just how it works. Besides, you’ve got a helpless subject here who you can freely experiment on without any moral qualms whatsoever, so why the hell not?", parse);
 				Text.NL();
@@ -2815,19 +2796,19 @@ MaliceScoutsScenes.Goat.WinTurnTables = function(enc : any) {
 				Text.NL();
 				Text.Add("Chuckling to yourself, you gather up your things and prepare to leave. The faint buzz of the toy still lodged on the alchemist’s ass follows you all the way out, and while you’d love to stay and see what happens next, you’ve got other things to do and places to go.", parse);
 				Text.Flush();
-				
+
 				player.AddSexExp(2);
-				
+
 				TimeStep({hour: 1});
-				
+
 				Gui.NextPrompt();
-			}
+			},
 		});
-		
+
 		options.push({nameStr : "Don’t Use",
 			tooltip : Text.Parse("You have a bad feeling about this. Just drop the doggy dildo and walk away.", parse),
 			enabled : true,
-			func : function() {
+			func() {
 				Text.Clear();
 				Text.Add("Hmm. As much as you’d like to see what exactly <i>this</i> is capable of, you just plain don’t feel like a little scientific experimentation today. Mercy… yeah, it’s a fun thing, maybe you’ll show a little.", parse);
 				Text.NL();
@@ -2839,14 +2820,13 @@ MaliceScoutsScenes.Goat.WinTurnTables = function(enc : any) {
 				Text.NL();
 				Text.Add("Destroyed something which took a long time to build and likely highly valuable, thus pissing him off to no end? Why yes, you have an idea of what you’ve done, and he should be thankful you weren’t in a particularly creative or vindictive mood today. With that, you kick some more dirt on the old goat, then spin on your proverbial heel and leave him in your wake.", parse);
 				Text.Flush();
-				
+
 				Gui.NextPrompt();
-			}
+			},
 		});
 		Gui.SetButtonsFromList(options, false, null);
 	}, 1.0, function() { return true; });
-	
-	
+
 	/* TODO other items
 	scenes.AddEnc(function() {
 		Text.Add("", parse);
@@ -2854,19 +2834,19 @@ MaliceScoutsScenes.Goat.WinTurnTables = function(enc : any) {
 		Text.Add("", parse);
 	}, 1.0, function() { return true; });
 	*/
-	
+
 	scenes.Get();
-}
- 
+};
+
 MaliceScoutsScenes.Goat.LossPrompt = function() {
-	let player = GAME().player;
+	const player = GAME().player;
 	SetGameState(GameState.Event, Gui);
 	Text.Clear();
 
 	// this = encounter
-	let enc = this;
+	const enc = this;
 
-	let parse : any = {
+	let parse: any = {
 
 	};
 	parse = player.ParserTags(parse);
@@ -2883,26 +2863,26 @@ MaliceScoutsScenes.Goat.LossPrompt = function() {
 		MaliceScoutsScenes.Goat.LossEntry(enc);
 	});
 	Encounter.prototype.onLoss.call(enc);
-}
+};
 
-MaliceScoutsScenes.Goat.LossEntry = function(enc : any) {
-	let player = GAME().player;
-	let parse : any = {
-		
+MaliceScoutsScenes.Goat.LossEntry = function(enc: any) {
+	const player = GAME().player;
+	let parse: any = {
+
 	};
 	parse = player.ParserTags(parse);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
-	
-	//TODO More Loss Scenes
-	let scenes = new EncounterTable();
+
+	// TODO More Loss Scenes
+	const scenes = new EncounterTable();
 
 	// Tentacle Pet
 	scenes.AddEnc(function() {
-		let tentacock = new Cock();
+		const tentacock = new Cock();
 		tentacock.type = CockType.tentacle;
 		tentacock.length.base = 50;
 		tentacock.thickness.base = 8;
-		
+
 		Text.Add("small box about the size of two clenched fists laid side by side. Small, greyish and metallic, and completely nondescript, its exterior bearing no hint of what might be inside.", parse);
 		Text.NL();
 		Text.Add("<i>“I managed to make a little friend by the lake the other day. It’s got some rather strange appetites, and I think you might want to meet it.”</i> He sniggers in a most unpleasant way. <i>“It likes making new friends. It has potential, but I’d like to study its habits in a little more detail.”</i>", parse);
@@ -2928,12 +2908,15 @@ MaliceScoutsScenes.Goat.LossEntry = function(enc : any) {
 		Text.Add("<i>“And with my experiments as they are, I usually don’t even have to go out of my way to feed it - one way or the other, it keeps on coming across the yummiest, tastiest food. No wonder the little guy likes sticking by me. I’ve never considered myself much of a naturalist, but I’ve been reconsidering that of late. I may be getting on in years, but it isn’t too late to go dabbling into another field, yes?”</i>", parse);
 		Text.NL();
 		Text.Add("As he speaks, two more of the tapered-tip tentacles took themselves about your ", parse);
-		if(player.Armor() || !player.LowerArmor())
+		if (player.Armor() || !player.LowerArmor()) {
 			Text.Add("[armor]", parse);
-		if(player.Armor() && player.LowerArmor())
+		}
+		if (player.Armor() && player.LowerArmor()) {
 			Text.Add(" followed by your ", parse);
-		if(player.LowerArmor())
+		}
+		if (player.LowerArmor()) {
 			Text.Add("[botarmor]", parse);
+		}
 		Text.Add(" with practiced ease - either the goo tentacles instinctively know how to go about divesting people of their clothing, or it’s had a <i>lot</i> of practice doing such. The cool tips brush against your [skin] gently, their touch cold at first, but quickly blossoming into a supremely erotic warmth that quickens your pulse and leaves you gasping for breath.", parse);
 		Text.NL();
 		Text.Add("<i>“Oh, I almost forgot to mention,”</i> the alchemist quips as the tentacle beast rips your [armor] off and flings it away. <i>“My little pet here also secretes a rather nasty contact venom. Not the most potent, that’s for sure, but it does what it’s meant to very well, for an aphrodisiac.”</i>", parse);
@@ -2942,16 +2925,15 @@ MaliceScoutsScenes.Goat.LossEntry = function(enc : any) {
 		Text.NL();
 		Text.Add("With that, it begins.", parse);
 		Text.NL();
-		if(player.FirstCock()) {
+		if (player.FirstCock()) {
 			Text.Add("Already achingly stiff from the aphrodisiac’s effects, your [cocks] ", parse);
-			if(player.NumCocks() > 1) {
+			if (player.NumCocks() > 1) {
 				Text.Add("are already obscenely aroused and swollen from the goo tentacles’ venom, a powerful desire to unload your seed already welling up in your groin, growing by the second. The beast seems surprised to find such a brace of malenesses in one place - perhaps it thinks it’s found another of its kind? - and proceeds cautiously, sending a single probing tentacle to wrap about each of your shafts one by one, testing their [cockTip]s before moving onto the next one.", parse);
 				Text.NL();
 				Text.Add("The tentative tickling only serves to turn you on even more, and before long you’re straining at the clear tentacles, your [cocks] throbbing and bobbing in their restraints even as you mindlessly hump away, your lusts amplified by the copious amounts of aphrodisiac venom being directly applied to your manhoods.", parse);
 				Text.NL();
 				Text.Add("At last, the beast seems to make up its mind as to what it wants to do. Though your cloudy vision, you see yet another tapered tentacle quiver and quake, its end splitting apart into a stretchy, worm-like orifice. This it rapidly attaches to the nearest of your shafts, latching onto the tip with a pop and suckling away with a powerful suction.", parse);
-			}
-			else {
+			} else {
 				Text.Add("twitches and throbs in time with your heartbeat as the aphrodisiac venom directly applied to it takes effect, increasing your burgeoning desire to empty your seed onto - well, you really don’t care where it ends up, so long as it’s out from you.", parse);
 				Text.NL();
 				Text.Add("The goo tentacles take their time in growing your arousal, gently caressing and rubbing with those stretchy, slimy appendages.", parse);
@@ -2976,16 +2958,15 @@ MaliceScoutsScenes.Goat.LossEntry = function(enc : any) {
 		Text.NL();
 		player.AddSexExp(1);
 
-		let womb = player.PregHandler().Womb();
-		let preg = womb && womb.pregnant;
+		const womb = player.PregHandler().Womb();
+		const preg = womb && womb.pregnant;
 
 		// breast block
-		if(player.FirstBreastRow().Size() > 7.5) { //D
+		if (player.FirstBreastRow().Size() > 7.5) { // D
 			Text.Add("Indeed, you steadily become aware of yet another cool slickness wrapping itself about your ", parse);
-			if(preg && womb.progress >= 0.4) {
+			if (preg && womb.progress >= 0.4) {
 				Text.Add("pregnant, bulging", parse);
-			}
-			else {
+			} else {
 				Text.Add("slender", parse);
 			}
 			Text.Add(" waist, coiling itself about you securely before the phallic tip slides along your ribs and nudges the underside of your ample cleavage. Electrifying tingles run through your [breasts] as it pushes again and again, applying a little more force each time, daubing a little more aphrodisiac slime onto the bottom of your lady lumps with each pass.", parse);
@@ -2994,12 +2975,12 @@ MaliceScoutsScenes.Goat.LossEntry = function(enc : any) {
 			Text.NL();
 			Text.Add("Caught in the tentacles’ slimy embrace, you feel your half-lidded eyes begin to droop further as your breasts jiggle and shake, wobbling about from the tentacle’s fervent thrusting. You can <i>feel</i> the blood rushing to your chest, feel your mammaries and nipples swell ever so slightly with the hot flush of excitement, and the anticipation brought on by your body clearly preparing itself for <i>something</i> is maddeningly arousing.", parse);
 			Text.NL();
-			if(player.Lactation()) {
+			if (player.Lactation()) {
 				Text.Add("Having aroused you sufficiently, the tentacle caressing your [breasts] bends in upon itself with inhuman flexibility, more of its length surging up until there’s enough length for its head to be level with your [nips]. You suck in a sharp breath and slowly let it out around the tentacle in your mouth as the tentacle’s phallic head parts, opening up like the petals of a flower to reveal a hungry, maw-like orifice that wastes no time attaching itself to the nearest swollen nipple, engulfing the pleasurable little nub of flesh and swallowing it whole along with the surrounding raised areola.", parse);
 				Text.NL();
 				Text.Add("Tears spring to your eyes, but they’re not ones of pain; your body takes on a life of its own and thrashes against its slippery bindings as you make muffled noises of ecstasy in the back of your throat. Accompanying the rhythmic suckling of the tentacle tip is yet more of the constant back and forth of its length in your cleavage, your ample jugs trailing its movements and making you fully aware of just how weighty they are upon your chest.", parse);
 				Text.NL();
-				if(preg && womb.progress >= 0.4) {
+				if (preg && womb.progress >= 0.4) {
 					Text.Add("With how delicate your pregnancy has made your [breasts], you can’t even begin to try resisting the tentacle as it slurps and suckles away, stealing the enriched milk that’s intended for your unborn progeny. Sure, you’ll just make more <i>and</i> it feels so <i>good</i> to be milked like this, but still…", parse);
 					Text.NL();
 					Text.Add("The pumping on your nipples grows more intense, your breastflesh seeming to grow warm as you feel your milk let down in earnest, and the last of the reservations is swept from your mind as convulsions wrack your body in a beautiful, blissful boobgasm.", parse);
@@ -3007,19 +2988,17 @@ MaliceScoutsScenes.Goat.LossEntry = function(enc : any) {
 					Text.Add("Spirits above, you want this so badly. Mindlessly, you thrust your ample chest out at the tentacle, catching the creature by surprise and causing it to double take; it nevertheless swiftly recovers and reciprocates the gesture as eagerly. You want to be milked, to be suckled dry, not just here and now by this goo-tentacle-beast, but also when you finally birth the fruit of your womb. You just want to be a literal milk-maid, giving suck to an endless legion of feeders, your ever-full mammaries instilling orgasm after orgasm for all eternity.", parse);
 					Text.NL();
 					Text.Add("Is this just the aphrodisiac venom talking, or is it you? Who cares? More and more rich white cream flows outwards from your fat, engorged nipples, traveling down the goo’s translucent tentacles before finally disappearing into its main body, and the mere sight gives you a rush of excitement and fulfillment that leaves you groaning and sighing like the milk slut that you’re becoming.", parse);
-					
+
 					player.slut.IncreaseStat(75, 2);
-				}
-				else {
+				} else {
 					Text.Add("With you all trussed up like this, you couldn’t resist even if you wanted to; your limbs feel as if they’ve been turned to jelly, with all the strength having left them. Slurping and suckling, the tentacle drinks every last drop of fluid it can wrangle from your milk jugs - you can actually <i>see</i> the stuff traveling down its translucent insides back into the box - before moving onto the next and doing the same.", parse);
 				}
 				Text.NL();
-				
+
 				player.MilkDrain(25);
-				
+
 				Text.Add("It seems like forever before the tentacle has drained you dry, but it eventually manages the task and detaches from your nipple, its “mouth” closing back together into its old phallic shape with a wet slurp. As far as you can tell, it looks quite pleased with the meal it’s just had - but still hungry for more.", parse);
-			}
-			else {
+			} else {
 				Text.Add("Having aroused you to breaking, the tentacle gently prods at your nipples and areolae, caressing the diamond-hard nubs and making you ache with desire. It seems to be probing, questing for something, yet it can’t have found what it was looking for, since it withdraws at length, looking almost disappointed.", parse);
 				Text.NL();
 				Text.Add("Nevertheless, it tries a few more times, rubbing its head against your sensitive and heated breastflesh until it’s sure that whatever it was looking for isn’t there and retreats.", parse);
@@ -3030,18 +3009,19 @@ MaliceScoutsScenes.Goat.LossEntry = function(enc : any) {
 			player.AddSexExp(1);
 		}
 		// vag block
-		if(player.FirstVag()) {
+		if (player.FirstVag()) {
 			Text.Add("At last, it’s time for the ribbed tentacle to make its move. For some reason, there’s only one of these, and as you look on in your aphrodisiac-fueled stupor, you quickly realize why. The tentacle is actually <i>growing</i> before your eyes, gaining in girth even as the ribs along its length stand out even further from its main body, slick and rigid, just waiting to be used.", parse);
 			Text.NL();
 			Text.Add("Without further ado, the tentacles spread you even further apart, a cool brush of Highlands air greeting your dripping cunt as it’s fully exposed for all to see. All the stimulation up to this point leaves little doubt as to the nature of your aroused state, and without further ado, the gigantic ribbed tentacle slithers its way up your inner thigh and pauses just outside your pussy. You wonder if it’s going to tease you for a bit - no, clearly it thinks you’re wet enough already, for it rams itself into your waiting cooch.", parse);
 			Text.NL();
-			
-			if(player.FirstVag().Tightness() < Orifice.Tightness.gaping)
+
+			if (player.FirstVag().Tightness() < Orifice.Tightness.gaping) {
 				player.FirstVag().stretch.base = Orifice.Tightness.gaping;
-			
+			}
+
 			Sex.Vaginal(null, player);
 			player.FuckVag(player.FirstVag(), tentacock, 1);
-			
+
 			Text.Add("You squeal in a mixture of equal parts pain and pleasure as you strain to accommodate the massive ribbed tentacle in your cunt. No matter how stretchy you are - or not - the tentacle can simply add more mass to make the fit painfully tight, which it does with gusto. The tentacles on your thighs reaffirm their hold on you, spreading more venom on your [skin], then begin bouncing you up and down on the massive, ribbed tentacle.", parse);
 			Text.NL();
 			Text.Add("If you weren’t gaping before, you are now. With how wet you are - considerably wetter than you remember yourself being under any normal circumstances - the passage of the tentacle into your love-tunnel is easier than it otherwise might have been, but it’s still by no means easy. Somewhere in the back of your mind, in a place that’s not completely occupied with how <i>good</i> the tentacle feels as it squirms and undulates in you, you realize that the goo beast’s venom must be causing the extra wetness in your cunt. After all, it’s feeding off your fluids, and the more pleasure it gives you, the more food it receives…", parse);
@@ -3049,42 +3029,43 @@ MaliceScoutsScenes.Goat.LossEntry = function(enc : any) {
 			Text.Add("Your thoughts are cut short by a powerful pounding between your legs - it seems like in addition to being impaled, the tentacle has begun thrusting, too. The goo may be normally pliant, but the thing inside you is gloriously strong and hard as it rams into you again and again, filling every bit of space you have available in you as it bottoms out against your womb. It doesn’t try to go any further, but that’s more than enough for you to see your mound bulge dangerously as it’s stuffed full up, your now-hypersensitive inner walls keenly feeling the ribs on the tentacle each and every time it slides along your slick cunt.", parse);
 			Text.NL();
 		}
-		//ass block
+		// ass block
 		Text.Add("Last but not least, there’s still your ass which needs dealing with - and the slime tentacles aren’t about to leave an empty orifice unexplored, no. A particularly bulbous phallic tentacle crawls out from the box, a massive knob on the tip of an exceptionally girthy goo appendage. It pauses in front of you for a moment, almost as if to make sure you’re watching, then dives around behind you and out of sight. You can’t see where it’s going, but you can definitely <i>feel</i> the tentacle as its massive head forces its way into your [anus], violating you in every way imaginable - and then some.", parse);
 		Text.NL();
-		
+
 		Sex.Anal(null, player);
 		player.FuckAnal(player.Butt(), tentacock, 1);
-		
-		if(player.Butt().Tightness() >= Orifice.Tightness.loose) {
+
+		if (player.Butt().Tightness() >= Orifice.Tightness.loose) {
 			Text.Add("Good thing that you did all that anal training, for it finally paid off today! There’s a little - well, admittedly a lot of - discomfort as the tentacle worms its way into you; it’s a very tight fit, but your sphincter is strong and brave, stretching wide to admit the tentacle’s head without running the risk of tearing. Even the goo itself seems surprised at this, twisting to and fro like a corkscrew as it explores the insides of your butt, but calms down once it realizes you’re the one with the problem, not it.", parse);
 			Text.NL();
 			Text.Add("Eventually, the two of you come to some sort of compromise: the tentacle pumps more fluid into its tip until it’s snug inside you - but not overfull - and you don’t resist too much.", parse);
-		}
-		else {
+		} else {
 			Text.Add("Twisting and turning like a giant corkscrew, the bulbous tentacle takes a perverse pleasure in forcing its way into you, prying apart your poor asshole and causing you to stretch torturously in order to accommodate its massive girth. You feel like you’re being torn asunder as more and more goo pulses and flows into your back door, several whole sessions of anal training compressed into the short space of a mere few moments.", parse);
 			Text.NL();
 			Text.Add("It’s not over, though. Once the bulk of the tentacle is firmly sequestered in your rectum, you feel it begin to swell even further, filling you up and stretching you out until you’re groaning and gasping at the sheer sensation of being stuffed to the absolute brim.", parse);
 			Text.NL();
 			Text.Add("Yeah… if you weren’t gaping before, then you’re now. Either way, there’s no doubt that you’re going to be walking funny for the next few days…", parse);
 		}
-		if(player.Butt().Tightness() < Orifice.Tightness.gaping)
+		if (player.Butt().Tightness() < Orifice.Tightness.gaping) {
 			player.Butt().stretch.base = Orifice.Tightness.gaping;
-		
+		}
+
 		Text.NL();
 		Text.Add("Surprisingly, though, the tentacle doesn’t seek to push itself any further into your back door - or move very much at all, for that matter. All it does is just sit in your behind and occupy every single last jot of space that you have to spare, pulsating gently every few moments.", parse);
 		Text.NL();
 		Text.Add("The movements may be slight and subtle compared to what’s just happened to you, but it’s nevertheless strangely arousing. Besides, there’s little doubt that your bowels have already been given a thick coating of the beast’s aphrodisiac venom, which is certainly helping things along…", parse);
 		Text.NL();
-		//orgasm block
+		// orgasm block
 		Text.Add("With you being stuffed from both ends and in every available orifice, it’s a small miracle that you haven’t effected a release already. Instead, the tentacles’ pounding and caressing keeps you constantly on the brink, teetering on the edge but unable to fall over or get secure footing.", parse);
 		Text.NL();
 		Text.Add("To say it’s frustrating would be the understatement of a lifetime. You wiggle about in the crushing goo coils, trying to find that last brush, that last touch that’ll finally grant you sweet, sweet release, but it maddenly eludes you despite your best efforts. Seems like you’ll only get to get off when the goo beast allows you to, and not one moment earlier.", parse);
 		Text.NL();
-		if(player.FirstCock()) {
+		if (player.FirstCock()) {
 			Text.Add("You can feel your [cock] twitching rapidly within the tentacles’ coils", parse);
-			if(player.HasBalls())
+			if (player.HasBalls()) {
 				Text.Add(", your [balls] tightening and drawing together as they prepare to send their cargo up and out", parse);
+			}
 			Text.Add(", desperate for the release that’s swaying just out of your reach.", parse);
 			Text.NL();
 		}
@@ -3098,59 +3079,61 @@ MaliceScoutsScenes.Goat.LossEntry = function(enc : any) {
 		Text.NL();
 		Text.Add("That’s a nice thought, isn’t it?", parse);
 		Text.NL();
-		if(player.FirstVag()) {
+		if (player.FirstVag()) {
 			Text.Add("<i>“Perhaps,”</i> the old goat continues, <i>“my only regret is that I’m not the one pounding that cunt of yours, but I guess I’ll just have to vicariously experience it through my little pet here. Not the best, perhaps, but it’ll do. It’ll do.”</i>", parse);
 			Text.NL();
 		}
 		Text.Add("Every bit as cool and slick as the moment they first grabbed you, the tentacles slither across your [skin], and you feel… <i>something</i> shift within their depths. All of a sudden, all that pent up need and hunger come rushing to the fore, swamping your brain with a mind-blowing blast of orgiastic pleasure. Spots swim before your eyes as white-hot flashes erupt in their sockets, and you feel faint and dizzy as your body is gripped by automatic instinct to fulfil its primal desires.", parse);
 		Text.NL();
-		
-		let cum = player.OrgasmCum(2);
-		
-		if(player.FirstCock()) {
+
+		const cum = player.OrgasmCum(2);
+
+		if (player.FirstCock()) {
 			Text.Add("The first part of you to give way is your [cock]. Painfully erect and unyielding, it ", parse);
-			if(player.HasBalls())
+			if (player.HasBalls()) {
 				Text.Add("works in tandem with your balls, the former throbbing and pulsating as the latter grows ever tighter, clenching and unclenching as all the spooge it’s held up in reserve to this point is brought to the fore.", parse);
-			else
+			} else {
 				Text.Add("twitches and trembles ominously, liquid fire surging upwards from its base as you prepare to finally unload everything you’ve got.", parse);
+			}
 			Text.Add(" No more pre - this is the real deal, and the tentacles know it. Sensing that more food is near, ", parse);
-			if(player.NumCocks() > 1)
+			if (player.NumCocks() > 1) {
 				Text.Add("more and more gelatinous tentacles attach themselves to your remaining shafts, desperately suckling away in a bid to not waste so much as a single drop of your seed.", parse);
-			else
+			} else {
 				Text.Add("the goo tentacle attached to your manhood sucks away all the more, encouraging you to make your consequent load a big, big one.", parse);
+			}
 			Text.NL();
 			Text.Add("It’s like you’ve been offered a small slice of heaven itself. How you never noticed it before, you’re not quite sure - from your point of view, everything that’s happened in the last hour or two has melded into a fluffy pink haze - but the inside of the goo is so warm and divine. It’s almost like - no, <i>better</i> than an actual pussy, and with such encouragement and the go-ahead from the goo-beast, you finally get to blow your load with a muffled cry.", parse);
 			Text.NL();
-			if(cum >= 9) {
+			if (cum >= 9) {
 				Text.Add("Even the tentacle beast is taken aback by how, ah - <i>productive</i> you are. Faced with the torrent of spunk that blasts forth from your [cocks], the tentacle[s] [hasHave] trouble channeling all of your sperm back into the beast’s main body hidden in the box. Rope after rope of thick white splooge shoots out in a non-stop barrage, threatening to overwhelm the tentacle[s] - you can see huge bulges of sticky white stuff traveling along the clear, flexible appendage[s], the difference in girth plain for all to see. The layer of goo that separates the tentacles’ insides from their outsides grows dangerously thin - if it’s possible for something as pliant as a goo beast to overstuff itself, well, this is it.", parse);
 				Text.NL();
 				Text.Add("Unfortunately - or perhaps fortunately - for you, the goo beast knows better than to bite off more than it can chew, allowing for some of your seed to overflow and spill onto the rocky ground, only for more tentacles to swarm over and mop up the mess before it can seep into the earth. The sheer determined efficiency with which the thing is feeding is a sight to behold, especially in the face of such overwhelming odds.", parse);
 				Text.NL();
 				Text.Add("Well, if it wants a reprieve, it’ll have to work for it - especially when this is the only way in which you can fight back. Clenching and squeezing, you close your eyes, bite down hard, and concentrate on your groin, pumping every last drop of sperm that you’re worth into the tentacles attached to your [cocks].", parse);
-				if(player.HasBalls()) {
+				if (player.HasBalls()) {
 					Text.Add(" It gets so that you can actually <i>feel</i> your [balls] deflating by the moment, and you desperately hope that you still have enough reserves in you to keep up this deluge for a little while more yet.", parse);
 				}
 				Text.NL();
 				Text.Add("It works. It’s beyond all hope and belief, but it works. Overwhelmed by the sheer rate at which you’re pumping out cum, the goo tentacle[s] hurriedly pop[notS] free of your manhood[s] and beat[notS] a quick retreat lest [itThey] split[s] from the obscene amount of spunk you’re sending down [itThem]. Victorious, you let out a muffled yell about the tentacle in your mouth and thrust your hips forward, allowing the last of your sperm to freely jet through the air like water from a fire hose, glistening globules of white arcing upwards and landing on the stony ground with a splat.", parse);
-			}
-			else if(cum >= 6) {
+			} else if (cum >= 6) {
 				Text.Add("Letting loose a long, lurid groan, you empty ", parse);
-				if(player.HasBalls())
+				if (player.HasBalls()) {
 					Text.Add("your balls", parse);
-				else
+				} else {
 					Text.Add("yourself", parse);
+				}
 				Text.Add(" straight into the tentacle[s] busily slurping away at you. It looks like the goo beast hasn’t had a meal this filling in a long, long time, and is particularly ravenous. Then again, that’s not really surprising considering that the old goat of an alchemist doesn’t look like the most conscientious of pet owners - the bastard probably forgets to feed it on a regular basis.", parse);
 				Text.NL();
 				Text.Add("Well then, seems like it’s up to you to take responsibility for someone else’s pet. Caught in the cool, fluid embrace of the goo beast, your [cocks] twitch[notEs] and pound[notS], each thump of blood in your extremities sending tingles of numbing pleasure racing down your shaft[s] and into your body. You can actually <i>see</i> ", parse);
-				if(player.NumCocks() > 1)
+				if (player.NumCocks() > 1) {
 					Text.Add("thin lines of white running down each of the tentacles, passing through them like a bunch of bendy straws", parse);
-				else
+				} else {
 					Text.Add("a thin line of white running down the tentacle, passing through it like a bendy straw", parse);
+				}
 				Text.Add(", and the simple sight gives you an overwhelming sense of satisfaction.", parse);
 				Text.NL();
 				Text.Add("Despite the copious amount of spunk that you’re producing, the creature seems to have no trouble at all in containing the lot, and you’ve definitely shot off enough seed to fill that small box a handful of times over. Just how big is it on the inside, anyway? You lie back and relax, pondering that question along with the other mysteries of the universe as the goo ripples and undulates, milking the last drops of cum from your [cocks] until it’s sure that you’ve nothing left to give.", parse);
-			}
-			else {
+			} else {
 				Text.Add("With a muffled cry, your body convulses and spasms before loosing forth the load that you’ve built up. It certainly <i>feels</i> like a lot, for you’re absolutely drained at this point, but the goo beast seems to disagree with you. Despite all the stroking and caressing, despite all the anticipation that’s built up in you, there doesn’t seem to be enough spooge in you to satisfy the creature’s hunger.", parse);
 				Text.NL();
 				Text.Add("The tentacle[s] attached to your [cocks] pump away furiously, increasing their suction as far as they dare without hurting you, but the most they manage is a pale white stream, looking fairly diluted as it travels down the goo’s clear blue length before disappearing into the main body somewhere in the box. The tentacles that remain unoccupied swerve down towards you, waggling their tips in your direction in what you can only assume to be a reproachful manner - but giving an apology is sort of hard, especially with one of their number stuffed in your mouth.", parse);
@@ -3159,30 +3142,30 @@ MaliceScoutsScenes.Goat.LossEntry = function(enc : any) {
 			}
 			Text.NL();
 			Text.Add("Eventually, though, the goo beast must’ve decided it’s gotten all that it’s going to get from your manhood[s]. A wet, slurping sound rings in the air as ", parse);
-			if(player.NumCocks() > 1)
+			if (player.NumCocks() > 1) {
 				Text.Add("all of the tentacles withdraw from you at once", parse);
-			else
+			} else {
 				Text.Add("the tentacle pops free of your [cock]", parse);
+			}
 			Text.Add(", allowing you to finally go limp with a sigh of relief. With you having utterly spent your load, the tentacles are free to turn their attention to other matters - and your ordeal is far from over.", parse);
 			Text.NL();
 		}
-		if(player.FirstVag()) {
+		if (player.FirstVag()) {
 			Text.Add("The tentacles which had been bouncing you up and down on the giant ribbed goo-cock had been maintaining a steady rhythm, but now they pick up speed, clearly working you towards a fabulous finish. Despite the tentacle stuffed in your mouth, you gasp and groan as best as you can, fingers digging into the tentacles’ cool, pliant surface and sinking in deep.", parse);
 			Text.NL();
 			Text.Add("Thanks to all the venom that by now’s been spread all over the insides of your love-tunnel, you keenly feel each and every thrust of the gargantuan tentacle you’re impaled on  The ribs, ever more intense than you remember them being, rub up and down your slick inner walls, drinking your feminine juices with great relish even as the vigorous stimulation urges you to produce yet more lubrication.", parse);
 			Text.NL();
-			if(preg && womb.progress >= 0.4) {
+			if (preg && womb.progress >= 0.4) {
 				Text.Add("With you stuffed so thoroughly - filled up with your unborn progeny on one side of your cervix, and with the goo tentacle on the other - you can’t help but feel intensely aroused. Aphrodisiac, hormones and being pounded by a great big tentacle come together in the perfect storm to send you spiraling to new heights of pleasure.", parse);
 				Text.NL();
 				Text.Add("Spirits above, you just feel so <i>full</i> with your swollen midriff and bulging groin; the latter twitches about impatiently as the the goo tentacle writhes about in you, coaxing more and more girl-cum from your insides.", parse);
-			}
-			else {
+			} else {
 				Text.Add("With you stuffed so thoroughly, you can distinctly <i>see</i> the bulge of the tentacle moving about inside you, prominent on your lower belly, and whimper as it piledrives into you yet again.", parse);
 				Text.NL();
 				Text.Add("It’s all you can do to hold on and not pass out from the pleasure as every last slick drop of girl-cum is sucked out of you, leaving you panting and wanting more.", parse);
 			}
 			Text.NL();
-			if(player.FirstCock()) {
+			if (player.FirstCock()) {
 				Text.Add("Sure, it may not be as large an amount of sperm as that you fed the goo beast earlier on, but you suppose that girl-cum has its own unique flavor, texture, or whatnot. Or hey, maybe it just really wants dessert after the main course!", parse);
 				Text.NL();
 			}
@@ -3190,28 +3173,27 @@ MaliceScoutsScenes.Goat.LossEntry = function(enc : any) {
 			Text.NL();
 			Text.Add("While you may be exhausted, your insides still have a spark of energy left, and just as a candle burns brightest just before it goes out, so do you mount an attack of your own. Clenching down hard on the invading goo tentacle, your pussy squeezes the firm, slippery goo in a vice-like grip as if it were a real manhood. The ribbing allows your love-tunnel to get a handle on the slimy appendage within you, and the two of you begin something akin to a perverse tug of war, the tentacle trying to pull away even as you do your best to prevent it from leaving you. Amplified by the aphrodisiac venom, the intense friction of the tentacle’s surface against your tender cunt is more than enough for white-hot spots of pleasure to swim in your vision, and you let out a desperate, muffled scream as a pure blissgasm overtakes you.", parse);
 			Text.NL();
-			parse["gen"] = player.mfTrue("boy", "girl");
+			parse.gen = player.mfTrue("boy", "girl");
 			Text.Add("You don’t remember much of what happens next, up till the point where you dimly realize that you’ve now got two hands full of gelatinous slime, having literally ripped out part of the tentacles binding you in your ecstasy. It doesn’t seem to have done the goo beast any harm as more slime quickly flows back in place to make up for what you took, but a tentacle nevertheless worms over and gives you a reproachful smack on the ass for being such a naughty [gen].", parse);
 			Text.NL();
 			Text.Add("Over and over again, the tentacle pounds itself into you, over and over again, you orgasm until the inside of your head feels like jelly. When the tentacles are finally sated on your fluids and turn their attentions elsewhere, you’re blabbering incoherently around the tentacle gag in your mouth.", parse);
 			Text.NL();
 		}
-		//Ass block. Since everyone will have an asshole, this will be the default string that everyone will be able to see.
+		// Ass block. Since everyone will have an asshole, this will be the default string that everyone will be able to see.
 		Text.Add("At about this time, the goo tentacles decide that it’s finally time for it to finish up in your ass. Stretching you beyond what you thought yourself ever capable of, the tentacle up in your butthole is more than content to simply fill you up to bursting, with the occasional wiggle to remind you that it’s there. Slow and subtle, it tickles you from the inside out, insidious little tendrils of pleasure that salaciously sneak in through the back door and send you to shivering.", parse);
 		Text.NL();
-		if(player.PregHandler().MPregEnabled()) {
+		if (player.PregHandler().MPregEnabled()) {
 			Text.Add("At last, the anusol’s effect finally kick in on a level that you can actually distinguish it from the slick aphrodisiac venom that the goo’s been smearing all over your insides, manifesting itself as an outpouring of lubricating fluids from your back door.", parse);
 			Text.NL();
 			Text.Add("The goo tentacle pauses for a moment, clearly uncertain at this unnatural outpouring of fluids where they should not be, but must have clearly decided that food is food anyway, and continues with an enthusiasm that surprises even you.", parse);
-		}
-		else {
+		} else {
 			Text.Add("There’s not much in the way of fluids here for the goo beast to feed on, but it nevertheless seems to be enjoying itself quite thoroughly. Too much for it to be pulling out of you just yet, at any rate.", parse);
 		}
 		Text.Add(" At least the tentacle’s gentler than it was upon its entry, giving you a little time to recover. Even so, you can’t help but wonder why it’s just content to remain like this, much like a snake coiled up on someone’s midriff - does it like the heat in your rear or something?", parse);
 		Text.NL();
 		Text.Add("Either way, guess you won’t have to ponder that question anymore - by and large, the tentacle appears to be satisfied with what it’s done and slowly deflates before retreating from your various orifices, leaving you feeling more than just a little hollow inside. The void within your bowels, cool and gaping, nags at your mind, and maybe it’s just the venom speaking, but you already miss its filling presence…", parse);
 		Text.NL();
-		//end of ass block.
+		// end of ass block.
 		Text.Add("At long last, it looks like the goo beast has had its fill. You notice that the girth of its clear tentacles is now distinctly fatter - not by a lot, but enough to be readily noticeable, and by and large the slimy appendages see fit to release you, letting you slump to the rocky ground in a quivering lump of drained jelly. The last you see of the creature is its tentacles withdrawing into the tiny box, which the alchemist shuts and stows away carefully.", parse);
 		Text.NL();
 		Text.Add("<i>“Well!”</i> he says, pulling up his pants. <i>“That was most certainly a very educational experience. I learned a lot from that - did you?”</i>", parse);
@@ -3222,12 +3204,12 @@ MaliceScoutsScenes.Goat.LossEntry = function(enc : any) {
 		Text.NL();
 		Text.Add("Ugh… you’ll remember this… and really, he ought to take better care of his pet, or at least feed the poor thing more often.", parse);
 		Text.Flush();
-		
+
 		TimeStep({hour: 2});
-		
+
 		Gui.NextPrompt();
 	}, 1.0, function() { return player.Humanoid(); });
-	
+
 	scenes.AddEnc(function() {
 		Text.Add("small bound book in black-dyed leather, about the size and thickness of a small notebook. <i>“Interesting reading material Malice gets these days, wonder where he’s getting all these from. Never struck me as a reading man, too. Now, where was it?”</i>", parse);
 		Text.NL();
@@ -3236,10 +3218,10 @@ MaliceScoutsScenes.Goat.LossEntry = function(enc : any) {
 		Text.Add("He waggles a hand in the air and gestures at your chest. <i>“Evals klim ym emoceb llahs uoy.”</i>", parse);
 		Text.NL();
 		Text.Add("Have you heard that incantation before? It sounds distinctly familiar, a lingering recollection on the edge of your memory… your train of thought of halted in the middle of the line, though, by a distinct tingling sensation in your [breasts], followed by a steadily mounting pressure from within that begins to push outwards without regard for your [armor]. ", parse);
-		
-		let breastsize = player.FirstBreastRow().Size();
-		
-		if(breastsize < 2) {
+
+		const breastsize = player.FirstBreastRow().Size();
+
+		if (breastsize < 2) {
 			Text.Add("Groaning, you throw your head back and stare up stupidly at the sky as firm flesh gathers on your chest, warm pressure causing two gently raised points to bud outwards before the sensation turns upon itself and washes back into the rest of your body. Rubbing the afflicted area only seems to amplify the pleasure further, and that’s what you end up doing - just unthinkingly rubbing away like a trained monkey while the perverted old goat takes notes.", parse);
 			Text.NL();
 			Text.Add("Well, he’s doing that with one hand, to be precise. He’s dropped his pants with the other and is busily stroking himself off, fingers firmly wrapped about seven stinking inches of goat-cock as the spell proceeds apace.", parse);
@@ -3247,8 +3229,7 @@ MaliceScoutsScenes.Goat.LossEntry = function(enc : any) {
 			Text.Add("A renewed surge of warm pressure runs through your chest, and you whimper and moan as the tiny breast-buds rapidly mature and grow, small pointy bumps ballooning outwards into deliciously rounded teardrop shapes, not that large but certainly <i>feeling</i> very weighty for what they’re worth. Your [armor] now feels considerably stretched - not a surprise given how much more volume it’s accommodating at the moment - and the alchemist is kind enough to help out by stopping his masturbation for a moment to yank it off with a slick, glistening hand, taking care to give you an grope in the bargain. It feels so good that you don’t care - even the weight of your [armor] is enough to to send erotic shivers down from your hypersensitive nipples.", parse);
 			Text.NL();
 			Text.Add("<i>“Instant results,”</i> he mutters not-quite under his breath before pausing to leer at you. <i>“Increase in volume of dense tissue of… hmm… Yes. Very nice.”</i>", parse);
-		}
-		else if(breastsize < 7.5) {
+		} else if (breastsize < 7.5) {
 			Text.Add("Coupled with the sheer sensitivity that’s been instilled in your [breasts], the feeling of having your lady lumps grow in this fashion is exquisitely delicious. It’s all you can do to gaze down stupidly at your chest as your [breasts] tremble and jiggle of their own accord, possessed by some invisible force that pushes them against each other as they swell from within.", parse);
 			Text.NL();
 			Text.Add("The perverted old goat hasn’t been idle, either. He’s got a pencil in one hand, scribbling down notes madly, while the other… well, he’s pulled down his pants and is busy beating himself off to the tune of seven inches of rock-solid goat-cock. How he manages to keep his concentration while clearly aroused like this is anyone’s guess, but you suppose that he’s no stranger to keeping work and pleasure separate, considering the nature of his profession.", parse);
@@ -3256,8 +3237,7 @@ MaliceScoutsScenes.Goat.LossEntry = function(enc : any) {
 			Text.Add("Pulsing and pushing, wobbling and jiggling like a pair of precarious jellies, your lady lumps eventually stop their growth at a firm C, a slight teardrop shape to them. The pressure keeps on for a little while longer, though - you feel it seeping into your [nips] before finally fading away, leaving you with a pair of stiff, swollen teats and an achingly sensitive chest. Moaning like a street whore, you push your hands together and rub at your breasts vigorously, but no matter how much you massage your now-jiggly tits the sensations simply won’t leave you.", parse);
 			Text.NL();
 			Text.Add("<i>“Very swift reaction,”</i> the alchemist bleats, his breath coming in gasps as he trails the numerous throbbing veins on his shaft with a finger. <i>“Extremely pleasurable for the subject, too… initial hostile intent practically evaporated within moments. Very satisfactory.”</i>", parse);
-		}
-		else {
+		} else {
 			Text.Add("You groan and roll your eyes back as the pressure builds up within your [breasts], sending them to throbbing and pulsing, growing outwards ever so slightly before shrinking back to their old size again. More and more pressure continues to mount, but it simply doesn’t seem to have a valid outlet to express itself, eventually fading away in a burst of tingles.", parse);
 			Text.NL();
 			Text.Add("Despite there being no outward change, that hasn’t stopped the alchemist from pulling down his pants and masturbating to the sight of your ample tits, one of his hands a blur as it moves back and forth across seven inches of goat-cock, the other scribbling away furiously as he takes notes with a stub of pencil.", parse);
@@ -3265,24 +3245,24 @@ MaliceScoutsScenes.Goat.LossEntry = function(enc : any) {
 			Text.Add("<i>“No additional volume added to the subject in question… the spell must realize when a sufficient size has been reached for optimum efficiency. Quite remarkable… one has to wonder where Malice gets his hands on things like these. Still, quite pleasurable for the subject, so not a complete loss.”</i>", parse);
 		}
 		Text.NL();
-		
+
 		_.each(player.AllBreastRows(), function(breasts) {
 			breasts.size.IncreaseStat(7.5, 10);
 		});
 		player.AddLustFraction(0.4);
-		
+
 		Text.Add("You’re just starting to recover from the rush of euphoric pleasure when another one hits, signaling the second phase of the spell. Blood practically rushes to your chest, creating an intense warmth in the surrounding [skin] as your [breasts] begin to throb in unison, areolae swollen and raised, [nips] diamond-hard and reaching up for the sky. Like it or not, your boobflesh just feels so <i>firm</i> and <i>turgid</i>, sending palpable waves of contentment into the rest of your body. Something about this just feels… <i>right</i>, and you’re somehow dissuaded to think too deeply or indeed be overly concerned about your current predicament.", parse);
 		Text.NL();
 		Text.Add("Then it begins. ", parse);
-		if(player.Lactation()) {
+		if (player.Lactation()) {
 			Text.Add("You were already milky before, but the alchemist’s spell has turned your previous production up to eleven. With a cry of pleasure, you clutch your tits and squeeze them for dear life as twin jets of milky goodness erupt from your [nips], geysering in the air before falling back down on you in a creamy white shower. The sensations emanating from your lady lumps are absolutely divine, washing over you from head to toe and making you feel just like ", parse);
-			if(player.Gender() == Gender.female)
+			if (player.Gender() == Gender.female) {
 				Text.Add("the woman that you are", parse);
-			else
+			} else {
 				Text.Add("a woman", parse);
+			}
 			Text.Add(". You groan aloud, pushing and squeezing, but the flow seems to have absolutely no intention of abating anytime soon. If anything, it grows ever stronger, adding even more to the sweet-scented puddle of white you’re now lying in.", parse);
-		}
-		else {
+		} else {
 			Text.Add("Unable to withstand the build-up inside them, your [breasts] give way and spurt their load high into the air - twin streams of rich white cream that ribbon outwards before arcing back downwards and falling down onto you in a light, sweet shower. You might not have been lactating before, but whatever else the spell might have done to you, there’s little doubt that you are now.", parse);
 			Text.NL();
 			Text.Add("Naturally, accompanying this is an overwhelming sense of pleasure and satisfaction that radiates outwards from your tits - you never knew that being so milky, so <i>full</i> could feel this good. The only thing better than being full is being milked, and with a start, you realize that you’ve been doing just that for a good while now, groping and squeezing at your bountiful boobs in a frenzied burst of lusty pleasure.", parse);
@@ -3308,10 +3288,10 @@ MaliceScoutsScenes.Goat.LossEntry = function(enc : any) {
 		Text.NL();
 		Text.Add("And just in time, too, as whatever magic the alchemist wove upon you begins to unravel, having run its course. You start squeezing your breasts as their flow diminishes, anxious to continue the pleasure, but eventually all good things come to an end and you have to admit that the bulk of the spell’s effects have finally worn off - although something in your [breasts] feels fuller and riper, eager and ready to give forth a greater bounty the next time you drain your lady lumps.", parse);
 		Text.NL();
-		
+
 		player.lactHandler.lactationRate.IdealStat(10, 1);
 		player.lactHandler.milkProduction.IncreaseStat(5, 1);
-		
+
 		Text.Add("Nevertheless, considering how strangely erotic the constant lactation was, you can’t help but continue pulling at your fattened nipples for a good minute or two even after the milk has completely stopped, secretly hoping that doing so might prolong the spell just a little longer.", parse);
 		Text.NL();
 		Text.Add("It doesn’t.", parse);
@@ -3322,12 +3302,12 @@ MaliceScoutsScenes.Goat.LossEntry = function(enc : any) {
 		Text.NL();
 		Text.Add("Right, right. You can be on your way… once you’ve rested a bit, cleaned yourself up and gotten everything in order. Then there’s the matter of your newly enhanced mammaries… giving the firm boobflesh a poke and shuddering at the erotic tingles the touch generates, you sigh and shake your head. That’s going to have to be dealt with sooner or later…", parse);
 		Text.Flush();
-		
+
 		TimeStep({hour: 1});
-		
+
 		Gui.NextPrompt();
 	}, 1.0, function() { return true; });
-	
+
 	/* TODO
 	scenes.AddEnc(function() {
 		Text.Add("", parse);
@@ -3337,29 +3317,28 @@ MaliceScoutsScenes.Goat.LossEntry = function(enc : any) {
 	}, 1.0, function() { return true; });
 	*/
 	scenes.Get();
-}
-
+};
 
 // GROUP ENCOUNTER
 
-MaliceScoutsScenes.Group.Encounter = function(levelbonus : number) {
-	let player = GAME().player;
-	let party : Party = GAME().party;
-	let enemy    = new Party();
-	let catboy   = new CatboyMage(levelbonus);
-	let goat     = new GoatAlchemist(levelbonus);
-	let mare     = new CentaurMare(levelbonus);
+MaliceScoutsScenes.Group.Encounter = function(levelbonus: number) {
+	const player = GAME().player;
+	const party: Party = GAME().party;
+	const enemy    = new Party();
+	const catboy   = new CatboyMage(levelbonus);
+	const goat     = new GoatAlchemist(levelbonus);
+	const mare     = new CentaurMare(levelbonus);
 	enemy.AddMember(catboy);
 	enemy.AddMember(goat);
 	enemy.AddMember(mare);
-	let enc : any = new Encounter(enemy);
+	const enc: any = new Encounter(enemy);
 	enc.catboy   = catboy;
 	enc.goat     = goat;
 	enc.mare     = mare;
 
 	enc.onEncounter = function() {
-		let parse : any = {
-			himher : player.mfFem("him", "her")
+		const parse: any = {
+			himher : player.mfFem("him", "her"),
 		};
 
 		Text.Clear();
@@ -3384,8 +3363,8 @@ MaliceScoutsScenes.Group.Encounter = function(levelbonus : number) {
 		Text.Add("The final member of the trio, a diminutive catboy mage dressed in baggy robes and pants, waves his hands. <i>“I-I’m here. I’ve been here for a while.”</i>", parse);
 		Text.NL();
 		Text.Add("<i>“Oh, right. You’re so unnoticable, I simply forgot you were there.”</i> The goat-morph alchemist sniffs, then turns to you. <i>“Well, then. I’m afraid to say that we appear to have gotten the drop on you", parse);
-		if(party.Num() > 1) {
-			parse["s"] = party.Num() > 2 ? "s" : "";
+		if (party.Num() > 1) {
+			parse.s = party.Num() > 2 ? "s" : "";
 			Text.Add(" and your friend[s]", parse);
 		}
 		Text.Add(", wouldn’t you say?”</i>", parse);
@@ -3400,7 +3379,7 @@ MaliceScoutsScenes.Group.Encounter = function(levelbonus : number) {
 		Text.NL();
 		Text.Add("With that, the trio advance upon you. <b>It’s a fight!</b>", parse);
 		Text.Flush();
-		
+
 		// Start combat
 		Gui.NextPrompt(function() {
 			enc.PrepCombat();
@@ -3415,14 +3394,14 @@ MaliceScoutsScenes.Group.Encounter = function(levelbonus : number) {
 	enc.onVictory = MaliceScoutsScenes.Group.WinPrompt;
 
 	return enc;
-}
+};
 
 MaliceScoutsScenes.Group.WinPrompt = function() {
-	let player = GAME().player;
-	let enc  = this;
+	const player = GAME().player;
+	const enc  = this;
 	SetGameState(GameState.Event, Gui);
 
-	let parse : any = {
+	let parse: any = {
 
 	};
 	parse = player.ParserTags(parse);
@@ -3436,7 +3415,7 @@ MaliceScoutsScenes.Group.WinPrompt = function() {
 		Text.Add("What do you do?", parse);
 		Text.Flush();
 
-		let options : any[] = [];
+		const options: any[] = [];
 		/* TODO
 		options.push({nameStr : "",
 			tooltip : Text.Parse("", parse),
@@ -3450,53 +3429,50 @@ MaliceScoutsScenes.Group.WinPrompt = function() {
 			}
 		});
 		*/
-		
-		if(options.length > 0) {
+
+		if (options.length > 0) {
 			Gui.SetButtonsFromList(options, false, null);
-		}
-		else { //NULL OPTION
+		} else { // NULL OPTION
 			Gui.NextPrompt(function() {
 				Text.Clear();
 				Text.Add("You rack your brains, trying to think of what to do next. Either you can’t think of anything appropriately kinky that would involve all three of your assailants, or you simply don’t want to have anything to do with them, for the next thing you know, you’re heading out and away from this mess before someone else comes up and… well, inconvenient questions would be the least of the things that could happen. Yeah, sure, you could stay and try and think of increasingly implausible sex acts that would probably involve quite a bit of contortion to accommodate all three of them, but seriously, you’ve got better things to do with your time, don’t you?", parse);
 				Text.NL();
 				Text.Add("Turning away, you double-time it out of the stone circle and make a beeline for the nearest road, or at least what passes for roads in the Highlands before considering your next move.", parse);
 				Text.Flush();
-				
+
 				Gui.NextPrompt();
 			});
 		}
 	});
 	Encounter.prototype.onVictory.call(enc);
-}
-
+};
 
 MaliceScoutsScenes.Group.LossPrompt = function() {
-	let player = GAME().player;
-	let party : Party = GAME().party;
+	const player = GAME().player;
+	const party: Party = GAME().party;
 	SetGameState(GameState.Event, Gui);
 	Text.Clear();
 
 	// this = encounter
-	let enc = this;
+	const enc = this;
 
-	let parse : any = {
+	const parse: any = {
 
 	};
 
 	Gui.Callstack.push(function() {
 		Text.Clear();
 		Text.Add("Ouch! A savage kick from the centaur mare’s hooves sends your head spinning, and this is quickly followed by streams of translucent mist that issue from the catboy mage’s hands and solidify about your limbs, holding you in place. ", parse);
-		if(party.Num() > 1) {
-			if(party.Num() > 2) {
-				parse["comp"]    = "Your companions";
-				parse["isAre"]   = "are";
-				parse["himher"]  = "they";
-			}
-			else {
-				let p1 = party.Get(1);
-				parse["comp"]    = p1.name;
-				parse["isAre"]   = "is";
-				parse["himher"]  = p1.himher();
+		if (party.Num() > 1) {
+			if (party.Num() > 2) {
+				parse.comp    = "Your companions";
+				parse.isAre   = "are";
+				parse.himher  = "they";
+			} else {
+				const p1 = party.Get(1);
+				parse.comp    = p1.name;
+				parse.isAre   = "is";
+				parse.himher  = p1.himher();
 			}
 			Text.Add("[comp] [isAre] too dazed to help you break free of the magical bindings, what with [himher] being wounded and pretty much out of the fight. ", parse);
 		}
@@ -3506,13 +3482,12 @@ MaliceScoutsScenes.Group.LossPrompt = function() {
 		Text.NL();
 		Text.Add("The goat-morph alchemist grins. <i>“Well, I was thinking…”</i>", parse);
 		Text.NL();
-		
-		//#randomly go to one of the below options
-		
-		
-		let catlike = player.RaceCompare(Race.Feline);
 
-		let scenes = new EncounterTable();
+		// #randomly go to one of the below options
+
+		const catlike = player.RaceCompare(Race.Feline);
+
+		const scenes = new EncounterTable();
 		scenes.AddEnc(function() {
 			MaliceScoutsScenes.Group.LossCatboyForcedTF(enc);
 		}, 1.0, function() { return true; });
@@ -3522,7 +3497,7 @@ MaliceScoutsScenes.Group.LossPrompt = function() {
 		scenes.AddEnc(function() {
 			MaliceScoutsScenes.Group.LossCatRape(enc);
 		}, 1.0, function() { return player.FirstVag() && catlike >= 0.4; });
-		
+
 		/* TODO
 		scenes.AddEnc(function() {
 			Text.Add("", parse);
@@ -3533,18 +3508,18 @@ MaliceScoutsScenes.Group.LossPrompt = function() {
 		scenes.Get();
 	});
 	Encounter.prototype.onLoss.call(enc);
-}
+};
 
-MaliceScoutsScenes.Group.LossCatboyForcedTF = function(enc : any) {
-	let player = GAME().player;
-	let catboy = enc.catboy;
-	
-	let parse : any = {
-		
+MaliceScoutsScenes.Group.LossCatboyForcedTF = function(enc: any) {
+	const player = GAME().player;
+	const catboy = enc.catboy;
+
+	let parse: any = {
+
 	};
 	parse = player.ParserTags(parse);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
-	
+
 	Text.Add("<i>“…I do have a concoction that I’ve been meaning to test for a while, and one of the things we’ve come out all this way for is to teach this fellow here -”</i> he points at the catboy - <i>“just how to be a man.”</i>", parse);
 	Text.NL();
 	Text.Add("The catboy’s eyes widen, and he holds his hands out as he begins to back away slowly. <i>“Hey, h-hey. I don’t remember you saying anything about testing potions…I didn’t sign up for this.”</i>", parse);
@@ -3571,31 +3546,31 @@ MaliceScoutsScenes.Group.LossCatboyForcedTF = function(enc : any) {
 	Text.NL();
 	Text.Add("<i>“Hey!”</i> the mare shouts as the transformed catboy’s thick, meaty arm wraps about her waist. <i>“Not me, you doofus!”</i> She looks about for the alchemist, but he’s long since vanished, perhaps headed for a safe vantage point from which to view the fruits of his work. <i>“Come back and tell this brute to let go of me! You didn’t say that he would -”</i>", parse);
 	Text.NL();
-	
+
 	let armor = "";
-	if(player.Armor() || !player.LowerArmor()) armor += "[armor]";
-	if(player.Armor() && player.LowerArmor()) armor += " and ";
-	if(player.LowerArmor()) armor += "[botarmor]";
-	parse["arm"] = Text.Parse(armor, parse);
-	
+	if (player.Armor() || !player.LowerArmor()) { armor += "[armor]"; }
+	if (player.Armor() && player.LowerArmor()) { armor += " and "; }
+	if (player.LowerArmor()) { armor += "[botarmor]"; }
+	parse.arm = Text.Parse(armor, parse);
+
 	Text.Add("Another roar, angrier this time, and this is enough to shut the centaur up; reaching for you with his free hand, the former catboy almost literally tears off your [arm], leaving you stark naked. You wiggle about a bit, fear driving you to attempt one final desperate foray at escape, but the magical bindings are just as strong as they were when they were forged. Before you know it, his hand is on you as well, the bulging muscles of his arm forcing you upright; that same unnatural strength lifts you into the air even as he sits down on one of the standing stones and plops you straight into his lap and onto his barbed member.", parse);
 	Text.NL();
-	
+
 	// Set to 2ft arm thick cock
 	catboy.FirstCock().length.base    = 55;
 	catboy.FirstCock().thickness.base = 10;
-	
+
 	player.AddLustFraction(0.5);
-	
-	if(player.FirstVag()) {
-		if(player.FirstVag().Fits(catboy.FirstCock(), -5)) {
+
+	if (player.FirstVag()) {
+		if (player.FirstVag().Fits(catboy.FirstCock(), -5)) {
 			Text.Add("Seems like all that stretchiness training’s finally paid off today. Your breath catches in your throat as the cum-slick tip of the former catboy’s cock brushes against the petals of your womanly flower, then erupts in a scream of pain and pleasure alike as he impales you upon his shaft, simply loosening his grip on you and letting your weight drag you down upon him.", parse);
 			Text.NL();
-			
+
 			Sex.Vaginal(catboy, player);
 			player.FuckVag(player.FirstVag(), catboy.FirstCock(), 4);
 			catboy.Fuck(catboy.FirstCock(), 4);
-			
+
 			Text.Add("It’s hard to put to words the intense sensation of <i>stretching</i> that’s forced upon you as your [vag] continues to gape wider and wider in order to accommodate the former catboy’s virile rod - thin and tense, your inner walls keenly feel every twitch and bob of that gargantuan manhood in you, shivering and convulsing at the sensations each and every soft cock-barb is producing as it pricks at your insides. The manly musk that rises from him isn’t helping matters, either - like it or not, your face is growing hot, and your thoughts can’t help but start to be consumed by the utterly perverse and painful sex you’re having right now.", parse);
 			Text.NL();
 			Text.Add("Even with your considerable girth, there’re limits to just how much a torso can hold, though. The ex-catboy’s massive shaft has no problem forcing your cervix apart and entering your womb, bumps rising on your lower belly as you <i>feel</i> that steely hardness thrust about inside your warm confines. No matter how much he tries, though, he can’t get any more than about half of his entire length inside you, and eventually gives up with a grunt.", parse);
@@ -3605,7 +3580,7 @@ MaliceScoutsScenes.Group.LossCatboyForcedTF = function(enc : any) {
 			Text.Add("The centaur flicks her eyes this way and that, and then trots over and starts licking the exposed remainder of the ex-catboy’s meaty boner. Guess she figured that a little tonguework isn’t much compared to what you’re going through; on his part, the catboy jams the fist that was restraining the mare straight into her hindquarters, sinking up to the forearm. The centaur sputters and whinnies in surprise as she ends up being vigorously fisted through and through, but manages to stay the course. Stifling her lusty moans, she manages to stay focused on the catboy’s shaft, lapping away like a filly faced with a salt lick.", parse);
 			Text.NL();
 			Text.Add("In and out, in and out, the barbs rubbing up against your slick inner walls with each movement and leaving behind trails of exhilarant pleasure laced with just a smidgen of pain. You bite your lip and try to hold on just a little longer as the former catboy picks up his pace, but the sheer sensation of the <i>thing</i> moving about inside you, squashing your innards even as it ravages your womb - it’s too much for a mere earthly body to bear. You orgasm for the first of what’s soon to be many times, ", parse);
-			if(player.FirstCock()) {
+			if (player.FirstCock()) {
 				Text.Add("sperm blasting from your own shaft[s] and arching through the air, ", parse);
 			}
 			Text.Add("clear girl-cum running down and out to coat the catboy’s massive, meaty member. Somewhere beneath you, the centaur mare whinnies as an extra flavor is added to the medley of tastes currently flooding her mouth.", parse);
@@ -3614,19 +3589,18 @@ MaliceScoutsScenes.Group.LossCatboyForcedTF = function(enc : any) {
 			Text.NL();
 			Text.Add("Time passes in a blur as your head swims and vision dims, your senses overwhelmed by the catboy’s forceful fucking. At last, though, an ominous twitching deep within your body jerks you back to groggy awareness just in time for the catboy to unleash the contents of his balls straight into your womb. Throwing his head back, the feline lets out a bestial roar not too unlike that of a lion’s, and then a torrential surge of spunk flows straight into you.", parse);
 			Text.NL();
-			
-			let womb = player.PregHandler().Womb();
-			let preg = womb && womb.pregnant;
-			
-			if(preg && womb.progress >= 0.2) {
+
+			const womb = player.PregHandler().Womb();
+			const preg = womb && womb.pregnant;
+
+			if (preg && womb.progress >= 0.2) {
 				Text.Add("Being already knocked up, you can’t get any <i>more</i> pregnant than you already are - that sort of thing’s reserved for broody birds - but neither the catboy nor his cum care one whit for what you or your body wants. Another roar rends the air about the standing stones, and you can only groan and hang limply as your already swollen womb grows ever bigger as it’s pumped full of seed.", parse);
 				Text.NL();
 				Text.Add("Bigger and bigger, rounder and rounder - you can <i>feel</i> your unborn progeny being bathed in the catboy’s thick spunk, and the roaring deluge only serves to make you even more aroused. Unable to retain its shape with cock, child and cum all weighing down upon it, your glistening, stretched belly distends and drops, producing a delightful oblong shape.", parse);
-			}
-			else {
-				let womb = player.PregHandler().Womb({slot: PregnancyHandler.Slot.Butt});
-				let preg = womb && womb.pregnant;
-				parse["swollen"] = (preg && womb.progress >= 0.4) ? "already-swollen" : "still-relatively-flat";
+			} else {
+				const womb = player.PregHandler().Womb({slot: PregnancyHandler.Slot.Butt});
+				const preg = womb && womb.pregnant;
+				parse.swollen = (preg && womb.progress >= 0.4) ? "already-swollen" : "still-relatively-flat";
 				Text.Add("Unable to withstand the deluge of baby batter racing into it, your [swollen] belly rapidly swells and distends as if the catboy’s seed had already taken root and was quickening into a batch of kittens at an inhuman rate. You can practically <i>feel</i> muscles stretching and organs giving way to make room for the growing reservoir of spunk within you - first looking to be four months along, then nine, then heavily overdue… and you’re still growing.", parse);
 				Text.NL();
 				Text.Add("Gazing down at your bulging belly, the catboy lets out a triumphant roar just as you feel your belly button surrender to the pressure within your womb and turn itself into an outie. Of course, it doesn’t stop there, protruding further and further as your “pregnancy” continues to grow weightier and weightier…", parse);
@@ -3636,16 +3610,15 @@ MaliceScoutsScenes.Group.LossCatboyForcedTF = function(enc : any) {
 				Text.Add("You don’t have the presence of mind to whip up a witty response to that, so you settle for keeping your mouth shut and pretending that didn’t even dignify a response.", parse);
 			}
 			Text.NL();
-			
+
 			MaliceScoutsScenes.Catboy.Impregnate(player, catboy, PregnancyHandler.Slot.Vag, 6);
-			
+
 			Text.Add("Try as it might, though, there’s a limit to how much your insides can hold, and before too long the river of spunk backflows out your cunt and oozes down the remainder of the catboy’s shaft, painting it white as it flows along. Yet another flavor is added to the delectable meat lollipop that the centaur mare’s been going at for the last few moments; coupled with the heady and arousing scent of sex, it’s enough to set the mare off.", parse);
 			Text.NL();
 			Text.Add("As you watch, the centaur’s eyes roll back into her head, her body shaking as she rears back onto her hind legs and takes the catboy’s fist into herself all the way up to her elbow. Twisting her equine half this way and that so as to get the most out of being skewered on the catboy’s arm, she yelps and moans as slick streams of her own juices run from her pussy and out onto her hind legs.", parse);
 			Text.NL();
 			Text.Add("On his part, the catboy throws the poor mare a bone and flexes his muscles once, twice - you can see the bulge in the mare’s underbelly where it’s clearly straining to keep the limb contained as it flexes. It’s no barbed cat-cock, but it gets the job done well enough.", parse);
-		}
-		else { //dont fit
+		} else { // dont fit
 			Text.Add("Try as he might, there’s no way that the transformed catboy is getting that massive, meaty member in you - it’s simply too large to effect any sort of entrance. Well, the tip might fit, but it’s going to be nowhere near satisfactory for this monster well in rut.", parse);
 			Text.NL();
 			Text.Add("Clearly, the former catboy agrees with you, for he sets you down on the grass with an angry grumble and turns his attentions to the centaur mare. Now <i>there’s</i> a cocksleeve more suited for his massive member - sensing his intentions, the mare looks about frantically, but is as powerless as you to resist as he grabs her hindquarters in both hands and grinds his barbed cat-cock between her legs. She whinnies, first in shock, then in orgiastic pleasure as the former catboy rams his rod into her with a loud squelch and begins a steady rhythm. Hips thrusting, balls slapping against the mare’s pert butt, he moves with slow, rolling motions that speak of carefully restrained power, power that could have ravaged the poor mare at any point.", parse);
@@ -3658,7 +3631,7 @@ MaliceScoutsScenes.Group.LossCatboyForcedTF = function(enc : any) {
 			Text.NL();
 			Text.Add("Still, there’s a lot of man-meat for you to cover, and it’s clear that your initial, cautious laps aren’t doing it for him. It’s hard to go any faster, especially with the overpoweringly arousing scent of his crotch so close to your face; it’s difficult to concentrate on pleasing him and not yourself.", parse);
 			Text.NL();
-			parse["l"] = player.HasLegs() ? "between your legs" : "to your needy pussy";
+			parse.l = player.HasLegs() ? "between your legs" : "to your needy pussy";
 			Text.Add("You don’t know exactly when it happened, but one of your hands has found its way [l]. Dipping and weaving, stroking and caressing, you’re keenly aware of just how inadequate your fingers are compared to the mighty cat-cock that the centaur mare’s currently speared on, and a small voice in the back of your mind points out that it’d be so much <i>more</i> fun if you were the one of the end of that man-meat instead.", parse);
 			Text.NL();
 			Text.Add("<i>“Bitch!”</i> the cat-boy growls, tapping you on the head. Well, to him it might be just a tap, but to <i>you</i>, it’s a good, solid blow. Sure, he didn’t mean it - the brute doesn’t know his own strength - but it still smarts. <i>“Lick good!”</i>", parse);
@@ -3672,19 +3645,18 @@ MaliceScoutsScenes.Group.LossCatboyForcedTF = function(enc : any) {
 			Text.Add("- With a bestial roar, the catboy’s shaft clenches, and you feel a hot rush pass beneath your lips for the briefest of moments before he unleashes his load into the centaur mare. The poor equine groans limply as her underbelly begins bloating with thick cat-spunk, her womb swelling up nice and round until it simply can’t accommodate any more sperm and the continued deluge simply backflows around the edges of her already supremely stretched pussy, emerging as a thick white spray.", parse);
 			Text.NL();
 			Text.Add("Caught up as you are, you have barely enough time to turn shield yourself with your arms before the backflow hits. Much good it does you against the torrent of sperm that blasts back from the centaur’s abused womb - mere seconds pass before you’re completely soaked with cat cum, and twice as long as that before you’ve been completely painted and plastered over, making you resemble a particularly dribbly candle more than anything else. Of course,  you’re not the only thing that ends up coated with spunk; the blowback is so strong that his thighs and groin end up splattered with a nice layer of white as well.", parse);
-			
+
 			player.AddSexExp(2);
 		}
-	}
-	else { //anal
-		if(player.Butt().Fits(catboy.FirstCock(), -5)) {
+	} else { // anal
+		if (player.Butt().Fits(catboy.FirstCock(), -5)) {
 			Text.Add("As hard to believe as it is, the bestial catboy manages to effect entry into your [anus] after a fashion. Despite his monstrous girth, the firm grip he has about your waist pushes you down steadily atop his barbed shaft, wiggling and worming away…", parse);
 			Text.NL();
-			
+
 			Sex.Anal(catboy, player);
 			player.FuckAnal(player.Butt(), catboy.FirstCock(), 4);
 			catboy.Fuck(catboy.FirstCock(), 4);
-			
+
 			Text.Add("You catch sight of the centaur mare staring at you, mouth agape; straddled as you are atop the catboy’s gargantuan cock-head, there’s no way you’re seeing what’s going on underneath you. Feeling it, though, is another matter as your already well-trained asshole is stretched to its limits just trying to accommodate the huge head. At last, the very tip of his cock does manage to pass your sphincter - and you already feel fit to bust. The fact that there’s no lube save for the pre drooling steadily from his tip only makes things worse, but it’s all you can do to grit your teeth and hopefully ride it out.", parse);
 			Text.NL();
 			Text.Add("The bestial catboy growls and shakes his head. <i>“Hole not big enough. Me make hole bigger for next time!”</i> Tossing the centaur mare away like an old toy, he plants both hands about your waist and jams you down <i>hard</i> on his rock-solid prick.", parse);
@@ -3700,8 +3672,7 @@ MaliceScoutsScenes.Group.LossCatboyForcedTF = function(enc : any) {
 			Text.Add("It’s the centaur mare. <i>“Shit,”</i> she mumbles. <i>“Sorry about this. I didn’t know what he was up to, or what the concoction would do…”</i>", parse);
 			Text.NL();
 			Text.Add("It’s all right, you try to say, but the words won’t come out - and even if they would, the perversely deliciously salty taste of cat spunk stops your tongue cold. No need for words, though - you gratefully grasp the centaur’s hand as she drags you out and away from the worst of it. You can’t help but look back, though - while the catboy’s balls are ever so slightly smaller, he’s still going strong, his blasts of seed painting the standing stones a cheery clear white.", parse);
-		}
-		else { //dont fit
+		} else { // dont fit
 			Text.Add("<i>“Fit!”</i> the transformed catboy growls as he rams you down upon the head of his member, causing your [anus] to scream out in pain and terror as it’s stretched beyond what mere mortals are supposed to be capable of. <i>“Me make you fit!”</i>", parse);
 			Text.NL();
 			Text.Add("Despite the catboy’s exhortations, even a brute like him can’t defy the laws of nature. No matter how he twists, wiggles and worms your abused asshole upon the head of his manhood, you simply don’t possess the physical wherewithal to allow even the very tip into you, let alone the barbs that dot the head of his shaft. It doesn’t stop him from trying his very best, though, and it would almost be commendable if he wasn’t trying to split you in two, starting with your ass cheeks.", parse);
@@ -3710,11 +3681,11 @@ MaliceScoutsScenes.Group.LossCatboyForcedTF = function(enc : any) {
 			Text.NL();
 			Text.Add("<i>“You no big enough to fit? Me no use back door then. Me use other end!”</i> the catboy growls, effortlessly flipping you around so that your face is directly in line with his head. With brutal determination, he begins mashing your face against his urethra - at least <i>that</i> you manage to take into your mouth, along with a little bit of the surrounding tip. It’s clearly far from satisfactory, but at least the catboy appears to be jerking himself in earnest now.", parse);
 			Text.NL();
-			
+
 			Sex.Blowjob(player, catboy);
 			player.FuckOral(player.Mouth(), catboy.FirstCock(), 2);
 			catboy.Fuck(catboy.FirstCock(), 2);
-			
+
 			Text.Add("The brutal facefucking goes on for what seems like forever, the potent scent of masculine sex flooding your nose and mouth and turning you dizzy. Dollops of spunk splatter onto your face, rendering you practically blind, and it’s all you can do to struggle to get air in the face of being ravaged this way.", parse);
 			Text.NL();
 			Text.Add("<i>“Me want satisfaction!”</i> Deep and sonorous, the catboy’s voice is thunder in your ears, reverberating through your frail, fuckable flesh. <i>“Give satisfaction now!”</i>", parse);
@@ -3753,24 +3724,24 @@ MaliceScoutsScenes.Group.LossCatboyForcedTF = function(enc : any) {
 	Text.NL();
 	Text.Add("It takes quite a bit of effort, but eventually you’re able to pull yourself upright, albeit unsteadily, and totter off before something worse can happen. Like it or not, you’re going to be walking funny for the next few days…", parse);
 	Text.Flush();
-	
-	TimeStep({hour: 2});
-	
-	Gui.NextPrompt();
-}
 
-MaliceScoutsScenes.Group.LossMagicalBondage = function(enc : any) {
-	let player = GAME().player;
-	let party : Party = GAME().party;
-	let parse : any = {
+	TimeStep({hour: 2});
+
+	Gui.NextPrompt();
+};
+
+MaliceScoutsScenes.Group.LossMagicalBondage = function(enc: any) {
+	const player = GAME().player;
+	const party: Party = GAME().party;
+	let parse: any = {
 		hisher : player.mfTrue("his", "her"),
-		himher : player.mfTrue("him", "her")
+		himher : player.mfTrue("him", "her"),
 	};
 	parse = player.ParserTags(parse);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
-	
+
 	player.AddLustFraction(0.7);
-	
+
 	Text.Add("<i>“You can do that spell, can’t you?”</i>", parse);
 	Text.NL();
 	Text.Add("The catboy looks a little uncertain and takes a step back. <i>“W-what spell?”</i>", parse);
@@ -3787,11 +3758,10 @@ MaliceScoutsScenes.Group.LossMagicalBondage = function(enc : any) {
 	Text.NL();
 	Text.Add("<i>“Yes, correct.”</i> The old goat snorts and spits on the ground. <i>“I want that one.”</i>", parse);
 	Text.NL();
-	if(party.Num() > 2) {
+	if (party.Num() > 2) {
 		Text.Add("<i>“And the others?”</i> the catboy asks, still cringing. <i>“What do you want to do with them?”</i>", parse);
 		Text.NL();
-	}
-	else if(party.Num() > 1) {
+	} else if (party.Num() > 1) {
 		Text.Add("<i>“And the other one?”</i> the catboy asks fearfully. <i>“What do you intend?”</i>", parse);
 		Text.NL();
 	}
@@ -3800,13 +3770,11 @@ MaliceScoutsScenes.Group.LossMagicalBondage = function(enc : any) {
 	Text.Add("With that, a heavy silence falls over the circle as the catboy finishes his spell. The mist might appear incorporeal, but it’s solid enough as a tendril each wraps about your wrists, pulling them sharply behind your back as if jerked by rope. Once you’re firmly bound, the tendrils meld into one before breaking off, resulting in a pair of cuffs locking your arms together uselessly. The remainder of the bindings wrap about your forearms, encasing you from fingertip to elbow in the shimmering magical stuff.", parse);
 	Text.NL();
 	Text.Add("You know instinctively that this isn’t going to be something you’ll be able to break by struggling, even if you hadn’t had the stuffing just beaten out of you. ", parse);
-	if(player.SubDom() >= 30) {
+	if (player.SubDom() >= 30) {
 		Text.Add("Though it’s hard to accept your fate being bound and tied up like this, there isn’t much you can do at this juncture. If you’d wanted to change things, maybe you should have done so a little earlier, or at least before losing to this trio of ne’er-do-wells of dubious origin.", parse);
-	}
-	else if(player.SubDom() >= -30) {
+	} else if (player.SubDom() >= -30) {
 		Text.Add("Well, there doesn’t seem to be anything you can do about this, so it seems that you might as well lie back and think of Eden. If you’re lucky, you might actually get some pleasure out of this… although with the grin that the alchemist’s wearing on his face, you kind of doubt it.", parse);
-	}
-	else {
+	} else {
 		Text.Add("You know that this isn’t quite the right time for this, but there’s something in the back of your mind that’s just made so helplessly aroused to be tied up like this, to be rendered completely at someone’s mercy.", parse);
 		Text.NL();
 		Text.Add("You can’t help it - the more you struggle ineffectually at the magical bonds tying your arms together, the more turned on you become, and before long you feel a surge of heat pass through your breast on its way to your loins, where it blossoms into a cloud of shivering, delectable anticipation.", parse);
@@ -3836,11 +3804,10 @@ MaliceScoutsScenes.Group.LossMagicalBondage = function(enc : any) {
 	Text.NL();
 	Text.Add("<i>“Now then, I’m sure you’ll want this,”</i> he whispers, giving you an affectionate pat on the head. <i>“Wouldn’t want you to bite your tongue off, would we? That would be messy, and I don’t want to have to account for that extra variable.”</i>", parse);
 	Text.NL();
-	if(player.SubDom() >= 30) {
+	if (player.SubDom() >= 30) {
 		Text.Add("You’d have told him to go and get dunked, but all you manage is a series of muffled grunts and snarls thanks to the bit in your mouth. The alchemist catches your death glare as he looks straight at you, then bursts into nasty laughter and gives you another patronizing pat on the head.", parse);
 		Text.NL();
-	}
-	else if(player.SubDom() < -30) {
+	} else if (player.SubDom() < -30) {
 		Text.Add("No, no you wouldn’t - in fact, you’re very glad that he was thoughtful like this, for you’re practically wiggling in your bindings now. Can he get started already? Please? Please? The waiting is killing you.", parse);
 		Text.NL();
 		Text.Add("Of course, you can’t <i>say</i> all of this thanks to the bit in your mouth, but you’re so enthusiastic about all this that the alchemist seems to sense it for himself and quickens his footsteps as he moves into position.", parse);
@@ -3852,29 +3819,29 @@ MaliceScoutsScenes.Group.LossMagicalBondage = function(enc : any) {
 	Text.NL();
 	Text.Add("Obediently, the centauress starts working the crank on the device, and you feel the first resounding smack of its paddle on your butt.", parse);
 	Text.NL();
-	if(player.Butt().Size() >= 9) {
+	if (player.Butt().Size() >= 9) {
 		Text.Add("At first, you feel nothing, and then the sting of the paddle against your [skin] hits you, accompanied by a resounding smack that resonates through the circle of stones. With how expansive your booty is, the blow is cushioned somewhat, but when it finally sinks in you gasp as blood rushes to the mark the paddle made across your butt cheeks.", parse);
 		Text.NL();
 		Text.Add("Smack! Another hit, and this one lands squarely on the luscious fullness of your butt cheeks, sending them jiggling to and fro vigorously as tears spring to your eyes.", parse);
 		Text.NL();
 		Text.Add("Smack! A hit for the third time, and ", parse);
-		if(player.SubDom() >= 30)
+		if (player.SubDom() >= 30) {
 			Text.Add("try as you might to resist it, you can’t help but feel a thrill of lustful pleasure as your body betrays you, trying to make the best of a bad situation. The spirit is strong but the flesh is weak, as the saying goes, and a muffled moan inadvertently escapes your throat, working its way about the leather bit in your mouth.", parse);
-		else if(player.SubDom() >= -30)
+		} else if (player.SubDom() >= -30) {
 			Text.Add("you bite down hard on the bit in your mouth as your ample tush takes more and more abuse. Whether you feel that way is anyone’s guess, but your body is actively getting increasingly aroused by being subjected to the machine’s furious spanking.", parse);
-		else
+ } else {
 			Text.Add("you feel yourself begin to give way wholly to the perversely pleasurable abuse, reveling in being paddled faster than any creature could reasonably do to you. Being tied up like this and spanked over and over again is so much fun, you can’t help but feel like a slut for taking so much enjoyment in being so submissive…", parse);
+ }
 		Text.NL();
 		Text.Add("The machine’s paddles come and go; your bodacious booty jiggles to and fro. Quivering and wobbling like a pair of firm jellies on a plate, they manage to cushion some of the brunt from the blows rapidly landing on your tush, turning your thoughts from pain to arousal.", parse);
-	}
-	else if(player.Butt().Size() < 4) {
+	} else if (player.Butt().Size() < 4) {
 		Text.Add("With a butt so thin and slight as yours, you feel every bit of the blow as the paddle cracks firmly on your behind, leaving a sharp stinging across both slight mounts of your rear. This is quickly followed by a prickling rush of blood to the afflicted area - which in turn quickly gives way to another firm smack.", parse);
 		Text.NL();
 		Text.Add("You yelp, tears threatening to come into your eyes. With how thin your rear is, you could have sworn you felt that one all the way to the bone!", parse);
 		Text.NL();
 		Text.Add("<i>“Disappointing,”</i> the alchemist mutters to himself as he takes notes on a tattered sketchpad. <i>“We’ll have to design different paddles to be more ergonomic for leaner spankees…”</i>", parse);
 		Text.NL();
-		if(player.SubDom() >= 30) {
+		if (player.SubDom() >= 30) {
 			Text.Add("Spankee? You’re not built to be a spankee! You’re not <i>made</i> to be a spankee - in fact, you should be the spanker, and you don’t need some stupid machine to do the job for you! Sure, it might be more efficient in terms of raw spanking power, but it doesn’t have that personal touch only a firm hand can provide, that deep connection that only a wielded paddle or whip can provide.", parse);
 			Text.NL();
 			Text.Add("You should know, yes.", parse);
@@ -3882,23 +3849,21 @@ MaliceScoutsScenes.Group.LossMagicalBondage = function(enc : any) {
 			Text.Add("The alchemist catches the fury in your eye, and simply shrugs and grins. <i>“Heh, don’t worry. I’m sure you’ll come to like it a little by the time we’re done with you.”</i>", parse);
 			Text.NL();
 			Text.Add("The worst thing is, he’s right. Your mind may be pulling in one direction, but your traitorous body has decided to go in the exact opposite direction, and as the blows continue to land on your slender, bony butt, you can’t help but feel just the tiniest bit aroused, your loins stirring despite your best attempts at shutting out those treacherous thoughts.", parse);
-		}
-		else if(player.SubDom() >= -30) {
+		} else if (player.SubDom() >= -30) {
 			Text.Add("You have no good answer for the alchemist, instead deciding to hold on as long as possible and hope that the alchemist’s perverted research will be done before your strength finally gives out.", parse);
 			Text.NL();
 			let gen = "";
-			if(player.FirstCock()) gen += "[cocks]";
-			if(player.FirstCock() && player.FirstVag()) gen += " and ";
-			if(player.FirstVag()) gen += "[vag]";
-			parse["gen"] = Text.Parse(gen, parse);
+			if (player.FirstCock()) { gen += "[cocks]"; }
+			if (player.FirstCock() && player.FirstVag()) { gen += " and "; }
+			if (player.FirstVag()) { gen += "[vag]"; }
+			parse.gen = Text.Parse(gen, parse);
 			Text.Add("Smack after smack lands on your slight rump, and perhaps out of desperation or a bid to get <i>something</i> useful out of this, your body starts to feel a bit horny despite the constant stinging pain from the machine’s repeated smackings. The heat of arousal blossoms in your loins, briefly creeping into your lower belly before concentrating in your [gen]. Running on automatic, you moan softly into the bit in your mouth and squirm against the magical bonds keeping you trussed up in the air, trying to work off the lust your traitorous body is accumulating.", parse);
-		}
-		else {
+		} else {
 			let gen = "";
-			if(player.FirstCock()) gen += "your manhood[s] to stiffening, rapidly swelling with arousal and beads of pre gathering on your [cockTip][s]";
-			if(player.FirstCock() && player.FirstVag()) gen += " even as your lustful thoughts get the better of you. You moan as tingles run from your manhood[s] into your femininity, turning ";
-			if(player.FirstVag()) gen += "your honeypot into a sweltering heat, and you squirm about in your magical bonds as the sudden flush of desire that makes you need to be filled";
-			parse["gen"] = Text.Parse(gen, parse);
+			if (player.FirstCock()) { gen += "your manhood[s] to stiffening, rapidly swelling with arousal and beads of pre gathering on your [cockTip][s]"; }
+			if (player.FirstCock() && player.FirstVag()) { gen += " even as your lustful thoughts get the better of you. You moan as tingles run from your manhood[s] into your femininity, turning "; }
+			if (player.FirstVag()) { gen += "your honeypot into a sweltering heat, and you squirm about in your magical bonds as the sudden flush of desire that makes you need to be filled"; }
+			parse.gen = Text.Parse(gen, parse);
 			Text.Add("Design? More ergonomic? Whyever would he want a <i>spanking</i> to be more comfortable? Doesn’t he know it’s better the more it hurts? The way the paddle is landing firmly on your slender rump, the shock of the impact sinking deep into your bones to be savored like a vintage wine… oh, just daydreaming about being swatted over and over again sends [gen].", parse);
 			Text.NL();
 			Text.Add("<i>“Hey,”</i> the alchemist notes, a nasty grin on his face as he scribbles furiously on a sketchpad. <i>“Seems like this one really, really likes it. Although I must say, the experimental results are probably skewed a bit from the subject’s personality, but nevertheless I think this is going to be an important data point.”</i>", parse);
@@ -3907,8 +3872,7 @@ MaliceScoutsScenes.Group.LossMagicalBondage = function(enc : any) {
 			Text.NL();
 			Text.Add("<i>“No!”</i> the alchemist snaps. <i>“Keep on cranking it, or else I won’t let you play with it when it’s not in use!”</i>", parse);
 		}
-	}
-	else {
+	} else {
 		Text.Add("With a butt as well-proportioned as yours - not too big, not too small, but just right, as they say - each smack of the wooden paddles upon your posterior sends both mounds to quivering and trembling. They don’t actually have the mass required to <i>jiggle</i>, but you can feel the ripples spreading out on your skin from where you’re being spanked, carrying with them the angry heat of pain into your lower back.", parse);
 		Text.NL();
 		Text.Add("<i>“Faster! Faster!”</i> the alchemist yells, reaching up into the air and clenching his fingers as if milking a giant cow. <i>“I want to see some pain here; something to show that all those sleepless nights were worth the time!”</i>", parse);
@@ -3916,7 +3880,7 @@ MaliceScoutsScenes.Group.LossMagicalBondage = function(enc : any) {
 		Text.Add("<i>“It’s already going as fast as it can!”</i> the centauress mutters grumpily, but puts her back into the cranking.", parse);
 		Text.NL();
 		Text.Add("Crack! Crack! Crack! More blows of the paddle arrive swift and sharp on your increasingly sore posterior, no doubt flushing a shade of angry red under your [skin] by now. ", parse);
-		if(player.SubDom() >= 30) {
+		if (player.SubDom() >= 30) {
 			Text.Add("You grit your teeth and swear that once you’re out of this thing, you’re going to hunt down this snide little alchemist and show him what a <i>real</i> spanking is all about, and without the use of a stupid contraption, too!", parse);
 			Text.NL();
 			Text.Add("The alchemist just looks down at you, and catching your expression, points and lets out an annoying, bleat of laughter.", parse);
@@ -3928,30 +3892,29 @@ MaliceScoutsScenes.Group.LossMagicalBondage = function(enc : any) {
 			Text.Add("<i>“Oh, I guess you sure look mad, but the rest of you isn’t. Look at it, eh? Pretty turned on, I’d say.”</i>", parse);
 			Text.NL();
 			let gen = "";
-			if(player.FirstCock()) gen += "your [cocks] start[notS] to twitch and throb";
-			if(player.FirstCock() && player.FirstVag()) gen += " and ";
-			if(player.FirstVag()) gen += "your gash grows slick";
-			parse["gen"] = Text.Parse(gen, parse);
+			if (player.FirstCock()) { gen += "your [cocks] start[notS] to twitch and throb"; }
+			if (player.FirstCock() && player.FirstVag()) { gen += " and "; }
+			if (player.FirstVag()) { gen += "your gash grows slick"; }
+			parse.gen = Text.Parse(gen, parse);
 			Text.Add("With a start, you notice that the rancid old goat is right - your traitorous body has not only let you down in the fight beforehand, but it’s actually enjoying the spanking that’s being applied to your vulnerable booty. Like it or not, the heat of arousal is welling up in your loins, growing with each firm smack of the paddle that’s applied to you. You bite back a moan as [gen], cursing the weakness of your body.", parse);
-		}
-		else if(player.SubDom() >= -30) {
+		} else if (player.SubDom() >= -30) {
 			Text.Add("It’s all you can do to bite back your squeals and moans of pain as the rotating paddles go back and forth in circles, turning your [butt] increasingly red and raw. The blows aren’t strong or sharp enough to draw blood, but the stinging is distinctly uncomfortable - and arousing - as the automated spanking proceeds apace.", parse);
 			Text.NL();
 			Text.Add("You butt cheeks aren’t the only cheeks that’re flushed - heat is creeping into your face and blossoming in your breast, and you wiggle with increased agitation against the magical bonds keeping you suspended in the air. Not that you would be doing much even if you managed to break free, of course, not with the alchemist and his cronies but a few feet away. Like it or not, you’re utterly helpless and at their mercy… and it’s more than a little arousing.", parse);
-		}
-		else {
-			let catlike = player.RaceCompare(Race.Feline);
-			
+		} else {
+			const catlike = player.RaceCompare(Race.Feline);
+
 			Text.Add("Reveling in the luxurious glow of being beaten and punished, you let out a low, muffled moan, practically purring in delight ", parse);
-			if(catlike >= 0.4)
+			if (catlike >= 0.4) {
 				Text.Add("like the cat you are ", parse);
+			}
 			Text.Add("even as tears of pain and pleasure spring to your eyes from the firm paddling you’re receiving.", parse);
 			Text.NL();
 			Text.Add("Feeling a desperate need well up in your breast, you wiggle about in your magical bonds, desperately seeking something to hump and grind against in order to assuage your urges. Unfortunately, not only do you not find anything suited to that purpose, the bindings restraining you only serve to turn you on even more to the point where you feel like you’re about to blow.", parse);
 			Text.NL();
 			Text.Add("<i>“Hmm,”</i> the alchemist notes, eyeing you carefully as he jots something down on a sketchpad. <i>“This one’s reacting in a rather unorthodox manner. Takes a little <b>too</b> much pleasure in it, I’d say…”</i>", parse);
 			Text.NL();
-			if(player.FirstCock()) {
+			if (player.FirstCock()) {
 				Text.Add("You have no response to that as a shudder wracks your body all over, eventually running through your [cocks]. When it finally passes, a long, thin strand of pre dangles precipitously from your [cockTip][s] towards the ground, beading before finally snapping free.", parse);
 				Text.NL();
 			}
@@ -3960,46 +3923,49 @@ MaliceScoutsScenes.Group.LossMagicalBondage = function(enc : any) {
 	}
 	Text.NL();
 	Text.Add("Before long, you can’t deny it any longer. Not when your body twists and writhes of its own accord in its bindings, ", parse);
-	if(player.FirstCock()) {
+	if (player.FirstCock()) {
 		Text.Add("your [cocks] pulsating with release as you finally blow your load in a river of orgasmic ecstasy, emptying ", parse);
-		if(player.HasBalls())
+		if (player.HasBalls()) {
 			Text.Add("your balls", parse);
-		else
+		} else {
 			Text.Add("yourself", parse);
+		}
 		Text.Add(" out on the gravel beneath you, leaving you utterly drained and exhausted. Seeing you flagging, the centaur mare must’ve decided to take pity on you, slowing the rate of spanking just a bit to give you time to recover between each blow of the paddles.", parse);
 		Text.NL();
 		Text.Add("Tied up like this, gagged and bound, watching the large puddle of salty seed you produced slowly seep into the ground - you feel", parse);
-		if(player.SubDom() >= 30)
+		if (player.SubDom() >= 30) {
 			Text.Add(", much to your chagrin,", parse);
-		else if(player.SubDom() < -30)
+		} else if (player.SubDom() < -30) {
 			Text.Add(" wonderfully and gloriously", parse);
+ }
 		Text.Add(" relieved at what you’ve done.", parse);
 		Text.NL();
 	}
-	if(player.FirstCock() && player.FirstVag()) {
+	if (player.FirstCock() && player.FirstVag()) {
 		Text.Add("But it’s not over yet. Not when a different surge of pained lust sends tingles and shudders sweeping through you, ", parse);
 	}
-	if(player.FirstVag()) {
+	if (player.FirstVag()) {
 		Text.Add("your [vag] squelching audibly as your inner walls clench furiously, sending rivulets of feminine honey streaming down your ", parse);
-		if(player.IsNaga())
+		if (player.IsNaga()) {
 			Text.Add("tail", parse);
-		else
+		} else {
 			Text.Add("[thighs]", parse);
+		}
 		Text.Add(" in a thick, free-flowing waterfall. Even with the sudden initial outflow of fluids somewhat abated, your [vag] continues to weep steadily, that glistening honeypot desperately advertising its desire and readiness to be stuffed - a desire that sadly remains unrequited.", parse);
 		Text.NL();
 		Text.Add("Spank. Spank. Spank. The vibrations from each swat of the paddles courses through your lower body, knocking loose a spray of femcum from your honeypot to splash on the ground. You try to pant and whine, your lungs heaving, but the bit in your mouth prevents you from making any kind of meaningful sound.", parse);
 		Text.NL();
 	}
 
-	let cum = player.OrgasmCum();
+	const cum = player.OrgasmCum();
 
 	Text.Add("Another glance at your captors. The centauress is decidedly not looking at you, while the catboy is doing the same, only with a bright blush on his face. Yeah, you’re not going to get anything out of them.", parse);
 	Text.NL();
-	
-	//Breasts block
-	//Use if breast size >= 7.5
-	
-	if(player.FirstBreastRow().Size() >= 7.5) {
+
+	// Breasts block
+	// Use if breast size >= 7.5
+
+	if (player.FirstBreastRow().Size() >= 7.5) {
 		Text.Add("<i>“Oh, look. What do we have here?”</i>", parse);
 		Text.NL();
 		Text.Add("The alchemist’s voice groggily brings you back to some semblance of coherency, and you quickly wish that you hadn’t. The rancid old goat has set down his sketchbook and pencil, and is eyeing your [breasts] with considerable interest. Given their weight and the position that you’re in, they hang down towards the ground, a pair of pendulous orbs which are most definitely feeling their heft.", parse);
@@ -4014,7 +3980,7 @@ MaliceScoutsScenes.Group.LossMagicalBondage = function(enc : any) {
 		Text.NL();
 		Text.Add("<i>“Ah, it’s been too long since I’ve had such an exceedingly suitable test subject to play around with,”</i> the alchemist tells you, a triumphant, nasty sneer plastered on his lips. <i>“It was so nice of you to come along and allow yourself to be volunteered; we all appreciate your kindness in doing so.”</i>", parse);
 		Text.NL();
-		if(player.SubDom() >= 30) {
+		if (player.SubDom() >= 30) {
 			Text.Add("You let out an angry retort, muffled as it is, in which you express several hopes of misfortune personally directed at the rancid old goat’s manhood, along with a handful of colorful expletives pertaining to its attributes. Of course, it comes out about the leather bit as one indistinct mess of noise, but hey, it’s the thought which counts.", parse);
 			Text.NL();
 			Text.Add("The alchemist laughs at your frustration, reaching down to jab you squarely on the nose. <i>“That’s it, that’s it. Rage impotently at me some more.”</i>", parse);
@@ -4022,13 +3988,11 @@ MaliceScoutsScenes.Group.LossMagicalBondage = function(enc : any) {
 			Text.Add("Impotent. That word’s going to describe something else very soon, if only you could just somehow get yourself free…", parse);
 			Text.NL();
 			Text.Add("<i>“But by all means, fume away.”</i> He reaches down to his pants, the stained fabric plainly tented by something massive underneath. Thrusting it in your face, he makes a show of rubbing the bulge, his fingers drawing large, smooth circles across its tip. <i>“It just turns me on even more.”</i>", parse);
-		}
-		else if(player.SubDom() >= -30) {
+		} else if (player.SubDom() >= -30) {
 			Text.Add("You try and think up some kind of witty and clever response to that, but one keeps eluding you - perhaps the burning pain from the constant paddling applied to your rear end has something to do with that.", parse);
 			Text.NL();
 			Text.Add("<i>“Not one for talking, are you? Guess you’re not that different from the other test subjects in that regard. Oh well…”</i>", parse);
-		}
-		else {
+		} else {
 			Text.Add("Oh, it wasn’t really any problem. You have to admit, this is feeling kind of good; it’s been a long time since you’ve had as good a mauling as this one. Not necessarily the most intense, but still good nonetheless.", parse);
 			Text.NL();
 			Text.Add("The alchemist looks at you askance for a moment, perhaps just a tiny bit incredulously, then clearly must have decided to go with the flow, for he harrumphs and takes a step back to consider you.", parse);
@@ -4046,18 +4010,19 @@ MaliceScoutsScenes.Group.LossMagicalBondage = function(enc : any) {
 		Text.NL();
 		Text.Add("Boing. Boing. In perfect time with the rhythmic spanking, too. Your eyes roll up into your head and your chest heaves as he picks up the pace, sending your [breasts] jiggling and swaying as he bounces them in his cupped palms like an expert juggler. Little explosions of bliss and splendor burst into existence behind your eyelids, and you make increasingly urgent noises in the back of your throat as the weight of your full breasts becomes almost too much to bear.", parse);
 		Text.NL();
-		if(player.FirstVag()) {
+		if (player.FirstVag()) {
 			Text.Add("You were already drooling before, but this is something else altogether. With boobs and cunt working together to fill every fiber of your body with mind-numbing pleasure, you cringe a moment before screaming into the leather bit as you orgasm for the second time. You can <i>feel</i> your love-tunnel throb and pulse, and then another outpouring of clear, sticky sexual fluids graces your ", parse);
-			if(player.IsNaga())
+			if (player.IsNaga()) {
 				Text.Add("tail", parse);
-			else
+			} else {
 				Text.Add("[thighs]", parse);
+			}
 			Text.Add(", staining yourself with your own feminine nectar as the high begins to die down and be replaced with heaving exhaustion.", parse);
 			Text.NL();
 		}
 		Text.Add("Still, the alchemist hasn’t finished having his fun yet. Humming a little tune to himself, he presses his fingers <i>hard</i> into your mammaries, sinking in deep and going for the gold.", parse);
 		Text.NL();
-		if(player.Lactation()) {
+		if (player.Lactation()) {
 			Text.Add("Such pressure - the outcome was never really in doubt, was it? Twin streams of rich cream burst from your [nips], their flow encouraged by the alchemist’s cruel grasp. Practically giddy with delight, he begins to milk you openly, draining your tender breasts of their load. The gravelly ground beneath you is more than eager to drink it all up, too, leaving but a thin, wet sheen remaining.", parse);
 			Text.NL();
 			player.MilkDrain(15);
@@ -4065,8 +4030,7 @@ MaliceScoutsScenes.Group.LossMagicalBondage = function(enc : any) {
 		Text.Add("It’s too much for one body to bear. Combined with the continuous spanking that’s being applied to you and the pain of having your lady lumps squeezed like this, your body begins to give out, darkness closing in over your consciousness like a thick haze, veiling your eyes.", parse);
 		Text.NL();
 		Text.Add("The last thing you’re aware of are white-hot lances of pain jabbing into your body from all directions - agonizing, true, but amazingly kinky at the same time.", parse);
-	}
-	else {
+	} else {
 		Text.Add("Unfortunately for you, the spanking is rapidly becoming more than what your frail meat shell can handle. Still, the centauress keeps on turning the handle, and as the paddle lands on your rear for the umpteenth time, you can’t help but feel consciousness gradually slipping away from you, a thick dark haze veiling your eyes…", parse);
 	}
 	Text.NL();
@@ -4078,27 +4042,26 @@ MaliceScoutsScenes.Group.LossMagicalBondage = function(enc : any) {
 	Text.NL();
 	Text.Add("Ugh, you’re going to be walking funny for the next few days, aren’t you?", parse);
 	Text.Flush();
-	
+
 	TimeStep({hour: 2});
-	
+
 	player.AddSexExp(3);
-	
+
 	Gui.NextPrompt();
-}
+};
 
+MaliceScoutsScenes.Group.LossCatRape = function(enc: any) {
+	const player = GAME().player;
+	const catboy = enc.catboy;
 
-MaliceScoutsScenes.Group.LossCatRape = function(enc : any) {
-	let player = GAME().player;
-	let catboy = enc.catboy;
-	
-	let parse : any = {
-		
+	let parse: any = {
+
 	};
 	parse = player.ParserTags(parse);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
-	
-	let virgin = player.FirstVag().virgin;
-	
+
+	const virgin = player.FirstVag().virgin;
+
 	Text.Add("<i>“Yes?”</i>", parse);
 	Text.NL();
 	Text.Add("The goat alchemist glances at the centauress, and the latter sidles surreptitiously over to place herself directly behind the catboy, cutting off his escape with her bulk. While this is happening, the alchemist strides over to you, fumbling about in his toolbelt.", parse);
@@ -4108,10 +4071,9 @@ MaliceScoutsScenes.Group.LossCatRape = function(enc : any) {
 	Text.Add("<i>“Now just lie there a little while longer; I promise this won’t hurt one bit.”</i>", parse);
 	Text.NL();
 	Text.Add("Looking at the way he’s holding the syringe with a wide, crazed grin spread on his face, you’re thoroughly disinclined to believe him. ", parse);
-	if(virgin) {
+	if (virgin) {
 		Text.Add("And as it turns out, he <i>was</i> lying - but it still doesn’t hurt as much as the old goat pulls down your [botarmor] with an overdramatic flourish. You’re in no shape to protest any further - whatever fight you had has long since been knocked out of you - and with an alacrity that defies his age, the alchemist swoops down and shoves the syringe straight into your cooch. There’s a brief flare of pain as you realize you’re no longer a virgin, followed by a strange, warm tingling about your inner walls as he depresses the plunger, injecting the fluid into you.", parse);
-	}
-	else {
+	} else {
 		Text.Add("Surprisingly, though, he was telling the truth - it doesn’t hurt one bit as the old goat gleefully rips off your [botarmor], exposing your [vag]. With a peal of diabolical laughter, the old goat reaches down with surprising swiftness and jams the phallus-shaped syringe straight into your cooter.", parse);
 		Text.NL();
 		Text.Add("Whoa, whoa. You -", parse);
@@ -4163,7 +4125,7 @@ MaliceScoutsScenes.Group.LossCatRape = function(enc : any) {
 	Text.NL();
 	Text.Add("Somehow, the sight of your little boytoy begging desperately just serves to turn you on even more.", parse);
 	Text.NL();
-	if(player.SubDom() < 30 || player.Slut() < 30) {
+	if (player.SubDom() < 30 || player.Slut() < 30) {
 		Text.Add("You aren’t entirely sure that you’re yourself - you know that whatever the alchemist injected into you must’ve done something to the way your head is working - but you can’t seem to hold onto any thought that isn’t about filling that horrible, horrible emptiness within you. ", parse);
 	}
 	Text.Add("Ah… you just feel so warm and good inside; it would be a shame if no one else could share in this delightful glow that suffuses your entire body. All you want to do is to invite a small portion of your delicious little boytoy into yourself so he can share in your pleasure.", parse);
@@ -4184,11 +4146,11 @@ MaliceScoutsScenes.Group.LossCatRape = function(enc : any) {
 	Text.NL();
 	Text.Add("Hee hee. Wouldn’t that be funny, yes? Well, you’ll be the one making his head explode - right into you, if you’re going to have any say in the matter. Leaning your weight back onto your knees, you purr lazily as you finally guide your morsel of a boytoy into you; your wet, hungry lips are only too eager to devour his cock, gleefully stuffing itself with as much of that meaty goodness as it can get, eagerly savoring the wonderful texture and sensation of being filled like this. With all the attention you’ve lavished on him up to this point, your delicious little kitty boytoy is all lubed up and ready to go, slipping into you without any problems.", parse);
 	Text.NL();
-	
+
 	Sex.Vaginal(catboy, player);
 	player.FuckVag(player.FirstVag(), catboy.FirstCock(), 3);
 	catboy.Fuck(catboy.FirstCock(), 3);
-	
+
 	Text.Add("Your morsel of a boytoy whimpers and paws at you, but there’s no fight in it; his breathing is coming short and rapid, that small pink tongue of his hanging out of his mouth as he begins to truly give himself over to the pleasure you’re giving him. Those firm, sensitive nubs on the tip and sides of his manhood - they bump and rub against your inner walls even as you let yourself rise and fall, rise and fall. You can feel them rubbing - no, scraping against your insides, and the twinges of pain only serve to excite you even further, feeding the sweltering fire growing deep within your belly.", parse);
 	Text.NL();
 	Text.Add("He’s so juicy, isn’t he? Your delicious boytoy throbs in time with the clenching of your cunt, the two quickly settling into a steady, pounding rhythm that rapidly grows more intense as you start riding him. Spirits above, that tastes good, so sumptuous to the cock-hungry monster that you are. Oh sure, it could be better, but every meal’s a feast when you’re starving.", parse);
@@ -4206,12 +4168,11 @@ MaliceScoutsScenes.Group.LossCatRape = function(enc : any) {
 	Text.Add("Good kitty. Good, delicious kitty. Just lie there like the subby boytoy that he is, and let his body do the necessary work without reservations. Effeminate in appearance though he may be, he nevertheless still knows how to do what comes naturally to him, and you purr and luxuriate in the glory of his full-mast member pushing in and out of you.", parse);
 	Text.NL();
 	Text.Add("Time to give him a little more pleasure of his own, then - you are a magnanimous mistress, if nothing else. ", parse);
-	if(player.Lactation()) {
+	if (player.Lactation()) {
 		Text.Add("Pushing yourself off him with your knees, you slowly and laboriously pull yourself off his shaft, feeling the emptiness of withdrawal until only his barbed tip remains in you. Looming over your boytoy, you lean forward and shove one of your [breasts] into his face, ", parse);
-		if(player.FirstBreastRow().Size() >= 7.5) {
+		if (player.FirstBreastRow().Size() >= 7.5) {
 			Text.Add("the pillowy mound pressing softly against his mouth and nose, threatening to smother him with its sheer expansiveness. He lets out a few muffled meows, and you graciously ease your weight of him a little to let him breathe easier. There, now you’re all in position for the next step.", parse);
-		}
-		else {
+		} else {
 			Text.Add("causing him to wriggle a little in surprise. Still, he doesn’t protest too much, which is good for you. Considering what you have in mind for him, it’d be a bit of a problem if he got squirmy all over.", parse);
 		}
 		Text.NL();
@@ -4222,8 +4183,7 @@ MaliceScoutsScenes.Group.LossCatRape = function(enc : any) {
 		Text.Add("It’s in this fashion that you allow your yummy little boytoy to have a good taste of you, relieving your aching mammaries of their lactic load. He certainly seems a lot happier for having had the milk - there’s a smile on his face, and his eyes are screwed shut in pure bliss.", parse);
 		Text.NL();
 		Text.Add("Aww, did he miss his mommy? Did he? Did he? Well, so long as he remains an obedient little boytoy, he can have all of your yummy milk to the last drop. There’s no need to be shy about sharing your bodily fluids, after all.", parse);
-	}
-	else {
+	} else {
 		Text.Add("Digging into your delicious little boytoy’s fur, you slide your paws up to his chest and find his yummy little nipples. They’re not as wonderfully sensitive as yours, of course, but they’re still fun to play with, especially on such a cute and shy little morsel like he is.", parse);
 		Text.NL();
 		Text.Add("He realizes what you’re doing, but it’s too late, too late - not that he could have stopped you even if he’d adequate warning of your intentions. Small, whimpering noises escape his mouth as you tease each warm nipple, feeling them respond to your gentle, loving touch. His face trembles, and you can see sweat dampening his fur.", parse);
@@ -4239,20 +4199,19 @@ MaliceScoutsScenes.Group.LossCatRape = function(enc : any) {
 	Text.NL();
 	Text.Add("Hee. For such an effeminate-looking boytoy, he’s quite the virile stud, isn’t he? Barely a few moments have passed, and already your belly is bulging ever so slightly with the sperm that he’s pouring into you. You pet him a few more times on his ears, praising him for being such a good little morsel and encouraging him to drain every single last drop of seed out from his balls and into you. Mrrrr… with such a vigorous seeding, you’d be surprised if your womanly flower weren’t set to bear fruit in a little bit.", parse);
 	Text.NL();
-	
+
 	MaliceScoutsScenes.Catboy.Impregnate(player, catboy);
-	
-	let cum = player.OrgasmCum();
-	
+
+	const cum = player.OrgasmCum();
+
 	Text.Add("He yowls again and thrusts again furiously, those cartilaginous pleasure-barbs rubbing against your insides and sending your body to quaking. ", parse);
-	if(player.FirstCock()) {
+	if (player.FirstCock()) {
 		Text.Add("It’s now that your [cocks] decide[notS] to loose [itsTheir] load, erupting in a geyser of spunk that splatters all over your yummy little boytoy’s front. Most of it gets onto his torso and shoulders, sticking to his fluffy fur, but he also gets several cumshots to the face, making him mewl in surprise. Giggling, you lean forward and lick off some of the stuff off his face - it’s delicious! He should really have some himself, but if he doesn’t want to then that’s his loss.", parse);
 		Text.NL();
 		Text.Add("You pant wildly as you cum again and again, your ecstatic release sending spurt after spurt of seed to coat your little morsel of a boytoy in a nice, sticky layer of spunk. He’s long given up trying to shield himself, instead concentrating on just breathing, and after you’ve finally exhausted yourself he’s been turned into ", parse);
-		if(cum >= 4) {
+		if (cum >= 4) {
 			Text.Add("a matted mess", parse);
-		}
-		else {
+		} else {
 			Text.Add("a splattered mess", parse);
 		}
 		Text.Add(" from your precious gift.", parse);
@@ -4277,8 +4236,8 @@ MaliceScoutsScenes.Group.LossCatRape = function(enc : any) {
 	Text.Flush();
 
 	TimeStep({hour: 2});
-	
+
 	Gui.NextPrompt();
-}
+};
 
 export { MaliceScoutsScenes };

@@ -1,54 +1,52 @@
 /*
- * 
+ *
  * Flee
- * 
+ *
  */
 
-import { Ability, TargetMode } from '../ability';
-import { Gui } from '../gui';
-import { GetDEBUG } from '../../app';
-import { Text } from '../text';
-import { Perks } from '../perks';
+import { GetDEBUG } from "../../app";
+import { Ability, TargetMode } from "../ability";
+import { Gui } from "../gui";
+import { Perks } from "../perks";
+import { Text } from "../text";
 
-let RunAb = new Ability();
+const RunAb = new Ability();
 RunAb.name = "Run";
-RunAb.Short = function() { return "Run away."; }
+RunAb.Short = () => "Run away.";
 RunAb.targetMode = TargetMode.Self;
-RunAb.enabledCondition = function(encounter, caster) {
+RunAb.enabledCondition = (encounter, caster) => {
 	return encounter.canRun;
-}
-RunAb.CastInternal = function(encounter, caster) {
-	let parse : any = {
+};
+RunAb.CastInternal = (encounter, caster) => {
+	const parse: any = {
 		Name : caster.NameDesc(),
+		was : caster.plural() ? "were" : "was",
 		y : caster.plural() ? "y" : "ies",
-		was : caster.plural() ? "were" : "was"
 	};
 	// TODO: Make more flavor text
 	Text.Add("[Name] tr[y] to run away... ", parse);
-	
+
 	Text.Flush();
-	if(encounter.canRun) {
+	if (encounter.canRun) {
 		// TODO: random chance on success (more complex)
-		let runlevel = encounter.RunLevel();
+		const runlevel = encounter.RunLevel();
 		let goal = caster.level / (caster.level + runlevel);
-		if(caster.HasPerk(Perks.Fleetfoot)) goal *= 1.5;
-		
-		if((Math.random() < goal) || GetDEBUG()) {
+		if (caster.HasPerk(Perks.Fleetfoot)) { goal *= 1.5; }
+
+		if ((Math.random() < goal) || GetDEBUG()) {
 			encounter.onRun();
-		}
-		else {
+		} else {
 			Text.Add("but [was] unable to!", parse);
 			Text.Flush();
-			Gui.NextPrompt(function() {
+			Gui.NextPrompt(() => {
 				encounter.CombatTick();
 			});
-		}	
-	}
-	else { //Should never happen (ability locked)
-		Gui.NextPrompt(function() {
+		}
+	} else { // Should never happen (ability locked)
+		Gui.NextPrompt(() => {
 			encounter.CombatTick();
 		});
 	}
-}
+};
 
 export { RunAb };

@@ -32,15 +32,49 @@ let HalloweenScenes : any = {
 // Put here instead of in Halloween items in order to prevent circular reference.
 HalloweenItems.SqueakyToy.Long = function() { return HalloweenScenes.HW.Werewolf() ? "It takes all your willpower to avoid giving in and chewing on this stupid toy every time it squeaks..." : "It squeaks when you squeeze it… kinda useless, though you suppose it could be useful when distracting a dog?"; }
 
-//Will be used for temporary variable storage.
+// Will be used for temporary variable storage.
 export class Halloween {
-	player : any;
-	party : any;
-	flags : number;
-	ronnie : number;
-	harthon : number;
-	harthonPreg : number;
-	nadirma : number;
+	
+	static get Loc() { return HWLoc; }
+	static get State() { return HWState; }
+
+	public static PW() {
+		return "Klaatu Barada Nikto";
+	}
+
+	// Note: checks real time date
+	public static IsSeason() {
+		// Always allow debug
+		if(GetDEBUG()) { return true; }
+		
+		// Halloween season is 14 oct - 14 nov
+		let date  = new Date(); // Get current datetime
+		let month = date.getMonth(); // month, 0-11
+		let day   = date.getDate(); // day, 1-31
+		
+		if((month ==  9) && (day >= 14)) { return true; }
+		if((month == 10) && (day <  14)) { return true; }
+		
+		return false;
+	}
+
+	public static CockParser(parse : any) {
+		let player = GAME().player;
+		parse = parse || {};
+		if(!player.FirstCock()) {
+			parse.cocks = "stake-strapon";
+			parse.cock = "stake-strapon";
+			parse.cockTip = "tip";
+		}
+		return parse;
+	}
+	public player : any;
+	public party : any;
+	public flags : number;
+	public ronnie : number;
+	public harthon : number;
+	public harthonPreg : number;
+	public nadirma : number;
 
 	constructor() {
 		let player = GAME().player;
@@ -64,45 +98,11 @@ export class Halloween {
 		this.flags = 0;
 		this.ronnie = HalloweenFlags.Ronnie.NotMet;
 		this.harthon = 0;
-		this.harthonPreg = 0; //0-5, 5 kit is born
+		this.harthonPreg = 0; // 0-5, 5 kit is born
 		this.nadirma = 0;
 	}
 
-	static PW() {
-		return "Klaatu Barada Nikto";
-	}
-
-	//Note: checks real time date
-	static IsSeason() {
-		// Always allow debug
-		if(GetDEBUG()) return true;
-		
-		// Halloween season is 14 oct - 14 nov
-		let date  = new Date(); //Get current datetime
-		let month = date.getMonth(); //month, 0-11
-		let day   = date.getDate(); //day, 1-31
-		
-		if((month ==  9) && (day >= 14)) return true;
-		if((month == 10) && (day <  14)) return true;
-		
-		return false;
-	}
-
-	static CockParser(parse : any) {
-		let player = GAME().player;
-		parse = parse || {};
-		if(!player.FirstCock()) {
-			parse["cocks"] = "stake-strapon";
-			parse["cock"] = "stake-strapon";
-			parse["cockTip"] = "tip";
-		}
-		return parse;
-	}
-	
-	static get Loc() { return HWLoc; }
-	static get State() { return HWState; }
-
-	Restore() {
+	public Restore() {
 		let player = GAME().player;
 		let party : Party = GAME().party;
 		// Restore player/party
@@ -114,27 +114,27 @@ export class Halloween {
 		party = new Party(this.party);
 	}
 
-	Werewolf() {
+	public Werewolf() {
 		return this.flags & HalloweenFlags.Flags.Werewolf;
 	}
-	RonnieAvailable() {
+	public RonnieAvailable() {
 		return this.ronnie != HalloweenFlags.Ronnie.Removed;
 	}
 
-	HarthonParser(parse : any) {
+	public HarthonParser(parse : any) {
 		let player = GAME().player;
 		parse = parse || {};
 		let fem = this.harthon & HalloweenFlags.Harthon.Feminized;
-		parse["mastermistress"] = player.mfTrue("master", "mistress");
-		parse["MasterMistress"] = player.mfTrue("Master", "Mistress");
-		parse["foxvixen"] = fem ? "vixen" : "fox";
-		parse["LordLady"] = fem ? "Lady" : "Lord";
-		parse["HeShe"] = fem ? "She" : "He";
-		parse["heshe"] = fem ? "she" : "he";
-		parse["HisHer"] = fem ? "Her" : "His";
-		parse["hisher"] = fem ? "her" : "his";
-		parse["hishers"] = fem ? "hers" : "his";
-		parse["himher"] = fem ? "her" : "him";
+		parse.mastermistress = player.mfTrue("master", "mistress");
+		parse.MasterMistress = player.mfTrue("Master", "Mistress");
+		parse.foxvixen = fem ? "vixen" : "fox";
+		parse.LordLady = fem ? "Lady" : "Lord";
+		parse.HeShe = fem ? "She" : "He";
+		parse.heshe = fem ? "she" : "he";
+		parse.HisHer = fem ? "Her" : "His";
+		parse.hisher = fem ? "her" : "his";
+		parse.hishers = fem ? "hers" : "his";
+		parse.himher = fem ? "her" : "him";
 		return parse;
 	}
 
@@ -152,20 +152,19 @@ let HWLoc = {
 };
 
 // GameCache().flags["HW"]
-let HWState = { //Bitmask for globally tracked flag
+let HWState = { // Bitmask for globally tracked flag
 	Intro : 1,
 	Pie   : 2
 };
 
-
-//Trigger this on stepping into the Nomads’ for the first time when season is active.
+// Trigger this on stepping into the Nomads’ for the first time when season is active.
 HalloweenScenes.PieIntro = function() {
 	let parse : any = {
 		
 	};
 	
 	Text.Clear();
-	parse["day"] = WorldTime().LightStr("day", "evening");
+	parse.day = WorldTime().LightStr("day", "evening");
 	Text.Add("As you step into the nomads’ camp and pass by the fire pit, you spy the chief waving you over. The old man is surrounded by fragrant smoke, as always, but he appears unusually animated this [day] - for him, that is. You cross over to where he’s sitting, and he slaps a rough palm against an empty space on the log by his side, inviting you to take a seat.", parse);
 	Text.NL();
 	Text.Add("<i>“Shan’t take up much of your time,”</i> he begins. <i>“Just want you to know that we’re going to be having pumpkin pie after supper every night for the season.”</i>", parse);
@@ -180,11 +179,11 @@ HalloweenScenes.PieIntro = function() {
 	Text.NL();
 	Text.Add("Okay, okay, you’ll show up on time. Anything else?", parse);
 	Text.NL();
-	parse["p"] = GlobalScenes.PortalsOpen() ? "Don’t forget our deal" : "Good luck getting that rock of yours working";
+	parse.p = GlobalScenes.PortalsOpen() ? "Don’t forget our deal" : "Good luck getting that rock of yours working";
 	Text.Add("<i>“No. [p].”</i> With that, the chief turns his attention back to the fire. There’s nothing else for you here, so you get up and head off into the camp.", parse);
 	Text.Flush();
 	
-	GameCache().flags["HW"] |= Halloween.State.Intro;
+	GameCache().flags.HW |= Halloween.State.Intro;
 	
 	TimeStep({minute: 30});
 	
@@ -210,17 +209,17 @@ HalloweenScenes.PumpkinPie = function() {
 		playername : player.name
 	};
 	
-	let first = !(GameCache().flags["HW"] & Halloween.State.Pie);
-	GameCache().flags["HW"] |= Halloween.State.Pie;
+	let first = !(GameCache().flags.HW & Halloween.State.Pie);
+	GameCache().flags.HW |= Halloween.State.Pie;
 	
-	parse["Momo"] = momo.AtCamp() ? "Momo" :
+	parse.Momo = momo.AtCamp() ? "Momo" :
 		cale.Met() ? "Cale" : "A wolf morph";
-	parse["Momo2"] = momo.AtCamp() ? "Momo" :
+	parse.Momo2 = momo.AtCamp() ? "Momo" :
 		cale.Met() ? "Cale" : "the wolf";
-	parse["hisher"] = momo.AtCamp() ? "her" : "his";
+	parse.hisher = momo.AtCamp() ? "her" : "his";
 	
 	let p1 = party.Get(1);
-	parse["comp"] = party.Num() == 2 ? p1.name : "your companions";
+	parse.comp = party.Num() == 2 ? p1.name : "your companions";
 	
 	Text.Clear();
 	if(first) {
@@ -245,10 +244,10 @@ HalloweenScenes.PumpkinPie = function() {
 			Text.NL();
 			Text.Add("Nah, it smells like it’s good enough to shovel into your face by the spoonful, cream or no.", parse);
 			Text.NL();
-			parse["Rosalin"] = rosalin.Met() ? "Rosalin" : "The camp's resident catgirl";
+			parse.Rosalin = rosalin.Met() ? "Rosalin" : "The camp's resident catgirl";
 			Text.Add("[Rosalin] huffs and rubs her still-aching limbs. <i>“I still don’t see why everyone tied me up this afternoon.”</i>", parse);
 			Text.NL();
-			parse["Estevan"] = estevan.Met() ? "Estevan" : "the satyr";
+			parse.Estevan = estevan.Met() ? "Estevan" : "the satyr";
 			Text.Add("<i>“Because you wanted to help with the baking,”</i> [Estevan] replies with a sigh.", parse);
 			Text.NL();
 			Text.Add("<i>“But I had my special frosting all ready to go!”</i>", parse);
@@ -263,10 +262,10 @@ HalloweenScenes.PumpkinPie = function() {
 			Text.NL();
 			Text.Add("Someone - you don’t see who - hands him one, and he reaches down with the knife, cutting through crust and filling with agonizing slowness and precision. Spearing the resultant morsel with his fork and lifting it to his mouth, the chief chews thoughtfully.", parse);
 			Text.NL();
-			parse["cook"] = momo.AtCamp() ? " Taking you on as a cook was one of the better decisions I’ve made in my time." : "";
+			parse.cook = momo.AtCamp() ? " Taking you on as a cook was one of the better decisions I’ve made in my time." : "";
 			Text.Add("<i>“Hmm. Decent.”</i> He spoons another forkful of crust and pumpkin filling into his mouth, careful not to get any on his beard. <i>“No, in fact, I’ll say it’s pretty good.[cook]”</i>", parse);
 			Text.NL();
-			parse["Estevan"] = estevan.Met() ? "Estevan" : "The satyr";
+			parse.Estevan = estevan.Met() ? "Estevan" : "The satyr";
 			Text.Add("[Estevan] chuckles. <i>“Shucks, that’s high praise coming from him, but I guess it was expected. Good ingredients, good cook… the outcome was never truly in doubt. A good pie.”</i>", parse);
 			Text.NL();
 			Text.Add("With a nod and grin, the chief brandishes both knife and fork. <i>“Very well. Come and get it, you youngsters! I can’t eat all of this on my own at my age, you know.”</i>", parse);
@@ -276,18 +275,18 @@ HalloweenScenes.PumpkinPie = function() {
 				Text.Clear();
 				Text.Add("Not that anyone needs any more telling. Cale comes up with a stack of cheap-looking plates, and everyone lines up for their slice of the massive pies. The chief takes great relish in serving up delicious cuts of crust and filling, and if anyone’s portion is bigger than anyone else’s, no one complains.", parse);
 				Text.NL();
-				parse["Magnus"] = magnus.Met() ? "Magnus munches away, the young magician" : "a young, nerdy looking man pipes up. He doesn't seem to have any reservations about it it though, as he's";
+				parse.Magnus = magnus.Met() ? "Magnus munches away, the young magician" : "a young, nerdy looking man pipes up. He doesn't seem to have any reservations about it it though, as he's";
 				Text.Add("<i>“So let me get this straight. We’re going to be having this every evening for weeks on end?”</i> [Magnus] stuffing his face at a rate which gives hope that he’ll actually put some meat on that scrawny frame of his. A few crumbs have landed on his glasses, and he removes them momentarily to flick off the offending scraps.", parse);
 				Text.NL();
-				parse["Cale"] = cale.Met() ? "Cale" : "The wolf";
+				parse.Cale = cale.Met() ? "Cale" : "The wolf";
 				Text.Add("[Cale] nods. <i>“That’s right. Although it’s expected that everyone will be taking turns baking, so someone’ll have to teach you to do it. You need to spend at least a little time away from those books of yours.”</i>", parse);
 				Text.NL();
-				parse["Magnus"] = magnus.Met() ? "Magnus" : "The bookish man";
-				parse["mage"] = magnus.Met() ? "mage" : "man";
+				parse.Magnus = magnus.Met() ? "Magnus" : "The bookish man";
+				parse.mage = magnus.Met() ? "mage" : "man";
 				Text.Add("[Magnus] looks a little unsure at the prospect, but the pull of pumpkin pie is enough to overcome the young [mage]’s reservations about working with his hands. <i>“I suppose. Practical experience is just another way of learning.”</i>", parse);
 				Text.NL();
-				parse["c"] = party.Num() > 1 ? Text.Parse(" and [comp]", parse) : "";
-				parse["c2"] = party.Num() == 2 ? " both" :
+				parse.c = party.Num() > 1 ? Text.Parse(" and [comp]", parse) : "";
+				parse.c2 = party.Num() == 2 ? " both" :
 				party.Num() > 2 ? " all" : "";
 				Text.Add("Eventually, the line moves ahead to the point where you[c] are up next, and you[c2] get served a slice of the delectable dessert. Still warm to the touch, the slice you’ve been served beckons, its wedge-shaped form fitting easily into the palm of your hand.", parse);
 				Text.NL();
@@ -296,7 +295,7 @@ HalloweenScenes.PumpkinPie = function() {
 				Text.Add("Seeing as how everyone’s enjoying delicious pumpkin pie, there’s no reason for you to miss out on the fun, too! Gleefully, you open your jaws as wide as possible and cram as much of the delicious treat as you can into your mouth, leaving barely enough room left over for you to chew. The wonderful flavors of pumpkin and caramelized honey dance upon your tongue with just the right texture, and enjoying it with everyone about you only makes it taste better. Sure, the filling might have burnt your tongue a little with how well it’s kept warm and how quickly you’ve wolfed it down, but it was worth it, there’s no question of that.", parse);
 				Text.NL();
 				if(party.InParty(kiakai, true)) {
-					parse["name"] = kiakai.name;
+					parse.name = kiakai.name;
 					Text.Add("<i>“Rather… ah, heavy,”</i> [name] notes, holding back a hiccup. <i>“It was delicious though, do you not agree, [playername]?”</i>", parse);
 					Text.NL();
 				}
@@ -344,7 +343,7 @@ HalloweenScenes.PumpkinPie = function() {
 				*/
 				Text.Add("However light and fluffy the pie might be on your tongue, though, it sits in your stomach like a leaden weight, and whatever the nomads spiked the filling with didn’t help very much, either. By your third slice of pie, you’re feeling pleasantly warm and full inside, and more than a little drowsy. Sleep is sounding more and more like a good idea, and your overburdened stomach agrees…", parse);
 				Text.NL();
-				parse["c"] = party.Num() > 1 ? Text.Parse(" [comp] and", parse) : "";
+				parse.c = party.Num() > 1 ? Text.Parse(" [comp] and", parse) : "";
 				Text.Add("Although there’s still plenty of life in the party, there <i>are</i> a few who’ve slipped off to sleep off the heavy meal, so you feel no shame in deciding to call it a night. Saying goodbye to[c] the nomads still up and about, you stumble in an approximate beeline for your tent, and are asleep before you even hit the bedroll.", parse);
 				Text.Flush();
 				
@@ -362,19 +361,19 @@ HalloweenScenes.PumpkinPie = function() {
 		let scenes = new EncounterTable();
 		
 		scenes.AddEnc(function() {
-			parse["Magnus"] = magnus.Met() ? "Magnus" : "the scrawny young man";
-			parse["Cale"] = cale.Met() ? "Cale" : "the wolf morph";
+			parse.Magnus = magnus.Met() ? "Magnus" : "the scrawny young man";
+			parse.Cale = cale.Met() ? "Cale" : "the wolf morph";
 			Text.Add("[Magnus] tends to the flames under [Cale]’s watchful eye.", parse);
 			Text.NL();
 			Text.Add("<i>“I still don’t see why I can’t use magic. It would be so much easier to heat the oven that way.”</i>", parse);
 			Text.NL();
 			Text.Add("<i>“And as I’ve told you so many times, It’s not just the heat and ingredients, but the wood smoke that imparts a certain flavor and aroma to the pie. There’s a reason we do things a certain way, so you can just follow what I say for now.”</i>", parse);
 			Text.NL();
-			parse["Magnus"] = magnus.Met() ? "Magnus" : "the young man";
+			parse.Magnus = magnus.Met() ? "Magnus" : "the young man";
 			Text.Add("Yes, seems like [Magnus] is clearly still quite unused to working with his hands.", parse);
 		}, 1.0, function() { return true; });
 		scenes.AddEnc(function() {
-			parse["Estevan"] = estevan.Met() ? "Estevan" : "the satyr hunter";
+			parse.Estevan = estevan.Met() ? "Estevan" : "the satyr hunter";
 			Text.Add("[Estevan] looks over his handiwork. Judging by the number of empty bottles lying by the oven’s side, you can only hope that the satyr hasn’t put <i>all</i> of that into the pies…", parse);
 		}, 1.0, function() { return true; });
 		scenes.AddEnc(function() {
@@ -383,8 +382,8 @@ HalloweenScenes.PumpkinPie = function() {
 			Text.Add("Clearly an old hand at this business, if he can tell when the pies are done by smell alone.", parse);
 		}, 1.0, function() { return true; });
 		scenes.AddEnc(function() {
-			parse["Patchwork"] = patchwork.Met() ? "Patchwork" : "the odd merchant";
-			parse["Patches"] = patchwork.Met() ? "Patches" : "the merchant";
+			parse.Patchwork = patchwork.Met() ? "Patchwork" : "the odd merchant";
+			parse.Patches = patchwork.Met() ? "Patches" : "the merchant";
 			Text.Add("[Patchwork] watches over the baking pies through that strange telescope. Shrouded in all that heavy clothing, doesn’t [Patches] feel hot at all? How’s the crust and filling made without getting all that cloth dirty, anyway? How are the pies handled with no obvious hands with which to do the handling?", parse);
 			Text.NL();
 			Text.Add("The world may never know.", parse);
@@ -395,8 +394,8 @@ HalloweenScenes.PumpkinPie = function() {
 		Text.NL();
 		Text.Add("Such thoughts, though, are wiped from your mind when the warm scent of delicious pumpkin pie’s carried to you on the wind, replaced by memories of that delicious taste and sense of satiation.", parse);
 		Text.NL();
-		parse["hishers"] = p1 ? p1.hishers() : "theirs";
-		parse["c"] = party.Num() > 1 ? Text.Parse(", [comp] soon receiving [hishers] as well", parse) : "";
+		parse.hishers = p1 ? p1.hishers() : "theirs";
+		parse.c = party.Num() > 1 ? Text.Parse(", [comp] soon receiving [hishers] as well", parse) : "";
 		
 		Text.Add("Don’t mind if you do, then! With your opportune moment of arrival, you soon find yourself at the head of a rapidly growing line, and are served your wonderful pie[c]. It’s every bit as wonderful as you remember it being, and soon enough, you feel the strong liquor in the pie filling beginning to take effect. Nevertheless, you manage to down two more slices, and then wobble off to your tent, clutching at your stuffed stomach. You’ll just sleep off this food coma in a bit… ", parse);
 		Text.Flush();
@@ -427,7 +426,7 @@ HalloweenScenes.EnterDream = function(first : boolean) {
 		Text.NL();
 		Text.Add("…And you realize that you’re stark naked.", parse);
 		Text.NL();
-		parse["fem"] = player.Gender() == Gender.male ? "thong" : "bra and panties";
+		parse.fem = player.Gender() == Gender.male ? "thong" : "bra and panties";
 		Text.Add("Hey, did you do something you’ll regret later? Where’s everyone? Usually there’s always some kind of bustle in the nomads’ camp, but all you get from beyond the canvas confines of your tent is deathly silence. And why’s there this skimpy-looking costume lying on the ground beside you? Shrugging, you pick it up - looks like a leather [fem] and a tattered cloak, all in garish shades of black. You must’ve gotten into some real kinky stuff last night… just what’s going on here?", parse);
 		Text.NL();
 		Text.Add("Taking a deep breath and squaring your shoulders, you peer out of the tent flaps, and blink at the scene that meets your eyes. It’s still the nomad’s camp after a fashion, it’s just that… well, everything is spookier, for lack of a better word to describe it. The light of the fire pit is still visible in the distance against a thick carpet of milky-white fog, maybe that should be your first stop once you get started.", parse);
@@ -445,7 +444,6 @@ HalloweenScenes.EnterDream = function(first : boolean) {
 	
 	Gui.NextPrompt();
 }
-
 
 Halloween.Loc.Tent.description = function() {
 	Text.Add("The interior of the tent is dim, with a few rays of moonlight reaching inside through the tattered canvas. Various pots, pans and other cooking utensils are packed away in an open wooden chest draped in spiderwebs. There is little actual furniture besides that; a few rugs rolled out to protect bare feet and a set of bed rolls are free for you to use. Everything has a tattered and frayed look to it.");
@@ -479,8 +477,9 @@ Halloween.Loc.Camp.links.push(new Link(
 	"Path", true, true,
 	null,
 	function() {
-		if(HalloweenScenes.HW.flags & HalloweenFlags.Flags.Elder)
+		if(HalloweenScenes.HW.flags & HalloweenFlags.Flags.Elder) {
 			MoveToLocation(Halloween.Loc.Path);
+		}
 		else {
 			Text.Clear();
 			Text.Add("The night is cold and dark, and you dare not leave the camp without a light.");
@@ -493,10 +492,12 @@ Halloween.Loc.Camp.links.push(new Link(
 
 Halloween.Loc.Camp.events.push(new Link(
 	function() {
-		if(HalloweenScenes.HW.flags & HalloweenFlags.Flags.Elder)
+		if(HalloweenScenes.HW.flags & HalloweenFlags.Flags.Elder) {
 			return "Elder";
-		else
+		}
+		else {
 			return "Figure";
+		}
 	}, true, true,
 	null,
 	function() {
@@ -627,10 +628,12 @@ Halloween.Loc.Path.description = function() {
 }
 
 Halloween.Loc.Path.onEntry = function() {
-	if(HalloweenScenes.HW.RonnieAvailable() && Math.random() < 0.5)
+	if(HalloweenScenes.HW.RonnieAvailable() && Math.random() < 0.5) {
 		HalloweenScenes.Ronnie();
-	else
+	}
+	else {
 		Gui.PrintDefaultOptions();
+	}
 }
 
 Halloween.Loc.Path.links.push(new Link(
@@ -688,7 +691,7 @@ Halloween.Loc.Path.events.push(new Link(
 		Text.Add("Of course, now that you have him... what do you want to do with him?", parse);
 		Text.Flush();
 		
-		//[Fuck][Dismiss]
+		// [Fuck][Dismiss]
 		let options = new Array();
 		options.push({ nameStr : "Fuck",
 			tooltip : "Time to scratch an itch.",
@@ -766,7 +769,7 @@ HalloweenScenes.Ronnie = function() {
 		Text.NL();
 		Text.Add("Still, you can’t escape the thought that it doesn’t have to be this way. You’re bigger, stronger and faster than he is. If you wanted to, you could easily overthrow him, take over as alpha. It is a rather tempting thought.", parse);
 		Text.NL();
-		parse["v"] = player.FirstVag() ? " and glossing over your cunt" : "";
+		parse.v = player.FirstVag() ? " and glossing over your cunt" : "";
 		Text.Add("A yip escapes your lips as Ronnie’s warm, wet tongue slathers a wad of spittle over your asscrack, slurping up your taint[v] before it starts to drill its way into your [anus]. Even if you were of a mind to stop him, Ronnie’s too good at this, giving you a thorough coating of natural lube both inside and out.", parse);
 		Text.NL();
 		Text.Add("Satisfied with his work, Ronnie mounts you, grabbing your hips and pulling you against him as he leans over your back, pointy cock-tip nested on your [anus].", parse);
@@ -774,15 +777,16 @@ HalloweenScenes.Ronnie = function() {
 		Text.Add("As he starts to grind, teasing your opening, you realize that if you were of a mind to take charge, now would be the moment to strike...", parse);
 		Text.Flush();
 		
-		//[Fight!][Submit!]
+		// [Fight!][Submit!]
 		let options = new Array();
 		options.push({ nameStr : "Submit!",
 			tooltip : "Let alpha Ronnie fuck your ass!",
 			func : function() {
 				Text.Clear();
 				Text.Add("With a soft, lupine churr, you eagerly grind your ass back against Ronnie’s teasing cock. You’re happy here, as Ronnie’s beta, and right now, you want your ass full of his magnificent shaft.", parse);
-				if(player.PregHandler().MPregEnabled())
+				if(player.PregHandler().MPregEnabled()) {
 					Text.Add(" The thought of presenting your alpha with your belly bulging full of his pups makes a warm glow fill your body, and you tremble in anticipation of the seeding he’s about to give you.", parse);
+				}
 				Text.NL();
 				Text.Add("The white werewolf licks the nape of your neck and begins pushing inside you.", parse);
 				Text.NL();
@@ -805,7 +809,7 @@ HalloweenScenes.Ronnie = function() {
 		Text.Add("You smile and pet his head with the other hand. Such a good boy... now, what do you want to do with him? Since he sought you out, it’s clear he’s in need of a good fuck, but do you want to scratch an itch yourself?", parse);
 		Text.Flush();
 		
-		//[Yes] [No]
+		// [Yes] [No]
 		let options = new Array();
 		options.push({ nameStr : "Yes",
 			tooltip : "He’s here, you’re both horny, why fight it?",
@@ -850,10 +854,12 @@ HalloweenScenes.RonnieFirst = function() {
 	Text.NL();
 	Text.Add("A bush nearby shakes and shudders, audibly crunching as something forces its way through its depths. You bite your lip and hold your breath; this is it! ...And then you exhale quietly, putting down your ‘stake’ as you see who it is that’s just come blundering through the undergrowth.", parse);
 	Text.NL();
-	if(roa.Met())
+	if(roa.Met()) {
 		Text.Add("It’s... Roa! Surprisingly overdressed by his standards, the effeminate little bunnyboi has covered his girlishly pretty frame with a simple, homespun tunic and a pair of much-patched blue overalls. His bunny-like feet stick out at the tattered ends of his pants, clearly unable or unwilling to go to the extent of wearing shoes, and a small rucksack sits on his back.", parse);
-	else
+	}
+	else {
 		Text.Add("It’s a rabbit-morph - either a very pretty boy, or a very flat girl. Probably the former, given the typically lapine ampleness of the bulge in his much-patched blue overalls. Surprisingly, despite wearing pants and a simple homespun tunic, he goes barefoot. A small rucksack filled with who-knows-what sits on his back.", parse);
+	}
 	Text.NL();
 	Text.Add("<i>“Waah! Pleasedon’tkillme! I’m not even tasty!”</i> He cries out, cowering in fear.", parse);
 	Text.NL();
@@ -880,11 +886,12 @@ HalloweenScenes.RonnieFirst = function() {
 	Text.Add("A lost sheep? No, you haven’t seen anything on this road except him.", parse);
 	
 	let beenAround = false;
-	if(HalloweenScenes.HW.flags & HalloweenFlags.Flags.Graveyard) beenAround = true;
-	if(HalloweenScenes.HW.flags & HalloweenFlags.Flags.WitchHut) beenAround = true;
+	if(HalloweenScenes.HW.flags & HalloweenFlags.Flags.Graveyard) { beenAround = true; }
+	if(HalloweenScenes.HW.flags & HalloweenFlags.Flags.WitchHut) { beenAround = true; }
 	
-	if(beenAround)
+	if(beenAround) {
 		Text.Add(" You’ve been around, too, but you’ve never come across a sheep in your travels.", parse);
+	}
 	Text.NL();
 	Text.Add("<i>“Oh… well, that’s a bummer.”</i> He sighs.", parse);
 	Text.NL();
@@ -895,7 +902,7 @@ HalloweenScenes.RonnieFirst = function() {
 	Text.Add("Looking at the whimpering farmer, you wonder if maybe you should offer him a hand - he’s clearly in <i>way</i> over his head. On the other hand, do you <i>really</i> want to be tramping around a creepy forest with a total stranger, looking for some brainless bit of undercooked mutton?", parse);
 	Text.Flush();
 	
-	//[Help] [Wish luck]
+	// [Help] [Wish luck]
 	let options = new Array();
 	options.push({ nameStr : "Help",
 		tooltip : "How can you possibly ignore someone in need?",
@@ -957,7 +964,7 @@ HalloweenScenes.RonnieFirst = function() {
 				Text.Add("You only have a moment to figure out a course of action - what can you do to save yourself?!", parse);
 				Text.Flush();
 				
-				//[Fight!] [Flee!] [Squeaky Bone!]
+				// [Fight!] [Flee!] [Squeaky Bone!]
 				let options = new Array();
 				options.push({ nameStr : "Fight!",
 					tooltip : "He’d catch you in a heartbeat, you have to fight!",
@@ -971,7 +978,7 @@ HalloweenScenes.RonnieFirst = function() {
 						Text.NL();
 						Text.Add("He visibly staggers at the impact, but it’s not enough to stop him. The white-furred wolfman crashes into you hard enough to knock you off your feet. The two of you hit the ground in a flailing fumble of limbs, pain screaming through your brain as his claws rake over your sides.", parse);
 						Text.NL();
-						parse["l"] = player.HasLegs() ? "" : " the equivalent of";
+						parse.l = player.HasLegs() ? "" : " the equivalent of";
 						Text.Add("As best you can, you deliver[l] a sound kick to his nuts. Yelping sharply in pain, Ronnie rolls off of you, giving you a chance to scramble back upright again.", parse);
 						Text.NL();
 						Text.Add("Stumbling and whining in pain, the werewolf holds his sore nads, too busy with the pain to pay any attention to you.", parse);
@@ -981,10 +988,12 @@ HalloweenScenes.RonnieFirst = function() {
 						Text.Add("Looking up at you, Ronnie swipes the air, growling threateningly as he half-runs, half-limps his way into the woods.", parse);
 						Text.NL();
 						Text.Add("You watch the werewolf flee, letting the triumph wash over you like a soothing balm; that wasn’t so hard after all! You should have known that ", parse);
-						if(roa.Met())
+						if(roa.Met()) {
 							Text.Add("Roa is just a wimp, even in a wolf’s body.", parse);
-						else
+						}
+						else {
 							Text.Add("a rabbit-turned-wolf is still a rabbit at heart.", parse);
+						}
 						Text.Add(" Your sides still hurt a little where he clawed you, but considering how that could have ended up, it’s not so bad.", parse);
 						Text.NL();
 						Text.Add("As you think that, your brow furrows at a sudden stab of pain from your sides. Your vision starts to blur as your hand clasps the slowly bleeding furrows in your [skin]. A sickly heat washes over your body, a fever that springs out of nowhere - what... what’s happening to you?", parse);
@@ -1001,11 +1010,11 @@ HalloweenScenes.RonnieFirst = function() {
 						Text.NL();
 						Text.Add("Panting with the effort, you rise to your feet, licking your chops as you take in the clearing - so clear and bright, to your new eyes! As you scan your surroundings, you realize that you can <i>smell</i> Ronnie’s passage - to your new senses, he might as well leave a glowing trail that snakes off into the undergrowth.", parse);
 						Text.NL();
-						parse["new"] = hasCock ? "" : " new";
+						parse.new = hasCock ? "" : " new";
 						Text.Add("For a moment, you wonder if you ought to hunt down the white werewolf and... thank him properly for your magnificent new body. Your[new] cock throbs eagerly at the thought. Still, maybe you should just leave him be; there’s so much else you could hunt for in these woods!", parse);
 						Text.Flush();
 						
-						//[Chase] [Leave]
+						// [Chase] [Leave]
 						let options = new Array();
 						options.push({ nameStr : "Chase",
 							tooltip : "To the hunt! You need a new bitch!",
@@ -1105,7 +1114,7 @@ HalloweenScenes.RonnieFirst = function() {
 						Text.Add("Then again, maybe you don’t want to. Maybe you’re happy to let him claim you as his bitch; this beautiful new body is his gift to you, after all, you don’t want to be ungrateful...", parse);
 						Text.Flush();
 						
-						//[Fight] [Submit]
+						// [Fight] [Submit]
 						let options = new Array();
 						options.push({ nameStr : "Fight",
 							tooltip : "You’re no runt’s bitch! It’s time you teach that pup his place in this pack.",
@@ -1197,18 +1206,20 @@ HalloweenScenes.WerewolfTF = function() {
 	parse = player.ParserTags(parse);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 	
-	//TODO
-	let blessed = false; //HalloweenScenes.HW.flags & HalloweenFlags.Flags.Nadirmasomething...
+	// TODO
+	let blessed = false; // HalloweenScenes.HW.flags & HalloweenFlags.Flags.Nadirmasomething...
 	
 	if(player.FirstCock()) {
 		Text.Add("Your [cocks] [isAre] hard and throbbing against your belly, aching with the fire that is burning through you. ", parse);
 		if(player.HasBalls()) {
 			Text.Add("You can feel your [balls] throbbing, churning up seed with an almost painful urgency.", parse);
-			if(player.Balls().BallSize() < 5)
+			if(player.Balls().BallSize() < 5) {
 				Text.Add(" They seem to be growing bigger, literally bloating up with sperm.", parse);
+			}
 		}
-		else
+		else {
 			Text.Add("There’s a strange pressure below your cock[s], a feeling of something swelling and growing beneath you. You shuffle your legs to give it room; it feels like a pair of apples swaying down between your legs. It’s heavy and a little awkward, but it also feels really good...", parse);
+		}
 	}
 	else {
 		Text.Add("Pleasure washes through your belly as once-flat flesh stretches and grows. You can’t think of the words to describe how it feels as something long and hard, yet soft, forces its way out of your body. You can feel the breeze gusting across it, making your nerves sing at the touch. Two heavy, round things fall from your loins, making you spread your legs to give them room, bringing with them a strange feeling of liquid weight.", parse);
@@ -1227,17 +1238,17 @@ HalloweenScenes.WerewolfTF = function() {
 		if(blessed && player.FirstBreastRow().Size() < 10) { // E-Cup
 			Text.Add("You swear you can hear a voice in your head whispering, <i>“Yes, come on, bigger; we can do better than this,”</i>, but all you can really focus on is the glorious warmth enveloping your [breasts]. You thrust your chest out with a moan as you feel them swell and bulge, blossoming into a truly spectacular display of womanhood.", parse);
 			
-			//Grow breasts
+			// Grow breasts
 			_.each(player.AllBreastRows(), function(breast) {
-				if(breast.size.base < 10) breast.size.base = 10;
+				if(breast.size.base < 10) { breast.size.base = 10; }
 			});
 		}
 		else if(player.FirstBreastRow().Size() < 7.5) { // D-Cup
 			Text.Add("Warmth centers on your chest, like ghostly fingers caressing your [breasts], and the feeling makes you moan joyfully. You can feel yourself growing, your [breasts] swelling into a glorious set of ripe womanly melons.", parse);
 			
-			//Grow breasts
+			// Grow breasts
 			_.each(player.AllBreastRows(), function(breast) {
-				if(breast.size.base < 7.5) breast.size.base = 7.5;
+				if(breast.size.base < 7.5) { breast.size.base = 7.5; }
 			});
 		}
 		else {
@@ -1275,25 +1286,25 @@ HalloweenScenes.WerewolfTF = function() {
 		Text.NL();
 		Text.Add("Your rapture in your new body is overwhelming, and you allow yourself to be lost in the fog of bliss, for the moment.", parse);
 		
-		//Body stuff, remove vag
+		// Body stuff, remove vag
 		player.body.vagina = [];
 		_.each(player.AllCocks(), function(cock) {
 			cock.vag = null;
 		});
-		//Shrink breasts
+		// Shrink breasts
 		_.each(player.AllBreastRows(), function(breast) {
-			if(breast.size.base > 2) breast.size.base = 2;
+			if(breast.size.base > 2) { breast.size.base = 2; }
 		});
 	}
 	
-	//Items/clothes
-	party.Inv().RemoveItem(HalloweenItems.SkimpyCostume); //Temp measure
+	// Items/clothes
+	party.Inv().RemoveItem(HalloweenItems.SkimpyCostume); // Temp measure
 	player.topArmorSlot = HalloweenItems.WerewolfHide;
 	player.weaponSlot = HalloweenItems.WerewolfClaw;
 	player.Equip();
 	
-	//Werewolf TF
-	//===========
+	// Werewolf TF
+	// ===========
 	
 	// Size
 	player.body.height.base = 210;
@@ -1311,16 +1322,16 @@ HalloweenScenes.WerewolfTF = function() {
 		cocks.push(cock);
 	}
 	_.each(cocks, function(cock) {
-		if(cock.Len() < 25) cock.length.base    = 25;
-		if(cock.Thickness() < 7) cock.thickness.base = 7;
+		if(cock.Len() < 25) { cock.length.base    = 25; }
+		if(cock.Thickness() < 7) { cock.thickness.base = 7; }
 		cock.knot = 1;
 		cock.color = Color.red;
 	});
 	
 	// Fix balls
 	let balls = player.Balls();
-	if(balls.count < 2) balls.count = 2;
-	if(balls.size.base < 5) balls.size.base = 5;
+	if(balls.count < 2) { balls.count = 2; }
+	if(balls.size.base < 5) { balls.size.base = 5; }
 	
 	// Add/modify tail
 	TF.SetAppendage(player.Back(), AppendageType.tail, Race.Wolf, Color.black);
@@ -1354,10 +1365,12 @@ HalloweenScenes.RonniePitch = function() {
 	Text.NL();
 	Text.Add("A high-pitched whimper escapes Ronnie’s lips as you penetrate him; his backdoor opens to you with surprising grace, almost effortlessly swallowing the first few inches of your massive cock. He’s warm and tight around you, muscles twitching and wrinkling in ways that stoke your excitement, but when you push inside, there’s so much <i>give</i> in him...", parse);
 	Text.NL();
-	if(first)
+	if(first) {
 		Text.Add("Well, well; it looks like this isn’t Ronnie’s first ride on a cock - no wonder your beta was so eager to have you inside of him! Well, since he wants this so badly, you’re happy to oblige; you wonder how much of you that he can take...", parse);
-	else
+	}
+	else {
 		Text.Add("Such a slutty little puppy; how could he have ever thought to pretend to be an alpha, when he’s so in love with getting stuffed up the butt? Well, you’re a loving alpha, so you’ll give him what he wants: your [cock] to the very hilt, right up his ass and filling him with a breeder’s delight of semen!", parse);
+	}
 	Text.NL();
 	Text.Add("Driven by that thought, you surge forward, thrusting yourself more than halfway inside of him in a single powerful jerk of your hips. Ronnie yips loudly in pleasure, whining deliciously as you fill his ass, and the sound of your bitchboi beta’s pleasure stokes your inner alpha.", parse);
 	Text.NL();
@@ -1417,7 +1430,7 @@ HalloweenScenes.RonniePitch = function() {
 	Text.NL();
 	Text.Add("Long, pleasant minutes pass, until finally you can pull your slumping dick from Ronnie’s asshole; buttslut that he is, Ronnie still can’t hope to just spring back in the face of your assault. His hole gapes in an almost perfect mold of your impressive wolfhood, a river of thick semen seeping from his stretched opening.", parse);
 	Text.NL();
-	parse["v"] = player.FirstVag() ? " and still slick-lipped cunt" : "";
+	parse.v = player.FirstVag() ? " and still slick-lipped cunt" : "";
 	Text.Add("Stretching stiff joints, you pad silently around to Ronnie’s face and present your wet, musky, half-erect maleness[v] to him. With a rumble in the back of your throat, you curtly order him to clean you up.", parse);
 	Text.NL();
 	Text.Add("The white werewolf lifts his head off the ground, tail wagging tiredly as he crawls over to you and begins gently lapping your shaft.", parse);
@@ -1445,16 +1458,18 @@ HalloweenScenes.RonnieCatch = function() {
 	Text.Add("Ronnie hilts himself, all the way to the knot, then stops to give you time to adjust. While waiting, he bends over and begins gently licking the nape of your neck.", parse);
 	Text.NL();
 	Text.Add("Shivers race across your skin, your glossy black fur standing on end at your alpha’s touch. You groan appreciatively, arching your back in an instinctive effort to expose more of your neck to his hungry caresses. Your own cock is starting to throb with need beneath you, the first drops of pre-cum spattering on the thirsty ground below.", parse);
-	if(player.FirstVag())
+	if(player.FirstVag()) {
 		Text.Add(" Even your neglected cunt is tingling with desire, flushing wet as it squeezes down in sympathy with your ass.", parse);
+	}
 	Text.NL();
 	Text.Add("Your alpha growls softly, gently biting your neck where he’d been licking a few moments ago. It doesn’t hurt even if you can feel the pressure of his sharp teeth, but even if it did you have no reason for alarm; your instincts tell you all you need to know: this is a mating bite.", parse);
 	Text.NL();
 	Text.Add("You stretch yourself out, tingling all over as your alpha begins to thrust away, truly mating with you. His cock slides back and forth through your stretched ring, the friction gnawing away at your mind, his own heavy seed-laden balls gently batting against your even-larger orbs. Ronnie’s arms tighten themselves possessively around your body, his hands starting to stroke through the fur of your stomach as he blindly explores his beta.", parse);
 	Text.NL();
 	Text.Add("Without hesitation, Ronnie gropes for your chest.", parse);
-	if(player.FirstBreastRow().Size() >= 2)
+	if(player.FirstBreastRow().Size() >= 2) {
 		Text.Add(" You hear a faint growl of approval as his hands find the lush roundness of your breasts, fingers greedily cupping each round, fluffy orb. You purr in approval as he eagerly squeezes and kneads your [breasts], luxuriating in his ardor before he gives them a final squeeze and moves on.", parse);
+	}
 	Text.NL();
 	Text.Add("With surprising dexterity, his long claws begin to stroke your [nips], their sharp tips just forceful enough that their pinprick sends shudders of pleasure along your spine. You whimper quietly as he teases you, the gentle touch the perfect counterpoint to his efforts on your ass.", parse);
 	Text.NL();
@@ -1468,8 +1483,8 @@ HalloweenScenes.RonnieCatch = function() {
 	Text.NL();
 	Text.Add("Dimly, you are aware of Ronnie clambering atop your back in his eagerness, his hips thrusting desperately in his need. And then, your wonderful, generous alpha’s hands close around the straining, drooling length of your own cock, vigorously pumping away to help you to cum.", parse);
 	Text.NL();
-	parse["v"] = player.FirstVag() ? " mixed" : "";
-	parse["v2"] = player.FirstVag() ? " as your cunt adds its own spray to the mixture" : "";
+	parse.v = player.FirstVag() ? " mixed" : "";
+	parse.v2 = player.FirstVag() ? " as your cunt adds its own spray to the mixture" : "";
 	Text.Add("That does it for both of you; your howls of ecstasy ring out in unison as both of you erupt. Your own seed spatters across the thirsty ground, forming a great sodden puddle of[v] sexual fluids[v2]. But Ronnie’s cum has nowhere to go but inside of you, pouring furiously into your bowels and swirling up into your stomach.", parse);
 	Text.NL();
 	Text.Add("By the time Ronnie grunts and sighs softly, you feel so very full... it’s glorious. You’re panting with the exertion of your climax, almost steaming in the cool night air, held aloft mostly because Ronnie hasn’t deigned to let you down yet.", parse);
@@ -1600,10 +1615,12 @@ Halloween.Loc.Graveyard.onEntry = function() {
 	let repeat = HalloweenScenes.HW.flags & HalloweenFlags.Flags.Graveyard;
 	HalloweenScenes.HW.flags |= HalloweenFlags.Flags.Graveyard;
 	
-	if(repeat && (Math.random() < 0.5))
+	if(repeat && (Math.random() < 0.5)) {
 		Gui.PrintDefaultOptions();
-	else
+	}
+	else {
 		HalloweenScenes.Kiai();
+	}
 }
 
 HalloweenScenes.Kiai = function() {
@@ -1613,7 +1630,7 @@ HalloweenScenes.Kiai = function() {
 	let parse : any = {
 		name : kiakai.name
 	};
-	let gender = kiakai.flags["InitialGender"];
+	let gender = kiakai.flags.InitialGender;
 	parse = kiakai.ParserPronouns(parse, "", "", gender);
 	
 	let werewolf = HalloweenScenes.HW.Werewolf();
@@ -1630,8 +1647,9 @@ HalloweenScenes.Kiai = function() {
 		Text.Add("The answer comes not from around you, but rather, <i>under</i> you. It begins as a soft scrabbling at first, then grows louder and louder until the earth atop the graves parts to reveal hands. And attached to them are arms, which are attached to shoulders, which are attached to… well, you get the point. One by one, elven zombies emerge from the cold, sodden earth, what looks like tens, no, hundreds of them possessed of an unearthly hunger…", parse);
 		Text.NL();
 		Text.Add("…Except, well, they don’t really <i>look</i> like zombies. The stitches are drawn on their skin in pencil and crayon, and what you originally took for the discoloration of rot is just a smattering of paint. Are you really in such a low-budget production that you can’t even get a proper cast of zombies to attack you? At least some expense could have gone towards getting some tattered rags for them to wear, lend the scene some ambience, but no… apparently, you’ve bummed out on getting a lazy writer and an equally worthless production cast, leading to every single one of the elf zombies being completely and utterly naked.", parse);
-		if(player.Slut() >= 50)
+		if(player.Slut() >= 50) {
 			Text.Add(" Or maybe that’s not such a bad thing, when you think about it a little more…", parse);
+		}
 		Text.NL();
 		Text.Add("As one, the elven zombies take up a bone-chilling moan as they begin shambling towards you, arms outstretched and reaching for you in the classical pose of the living dead.", parse);
 		Text.NL();
@@ -1656,8 +1674,8 @@ HalloweenScenes.Kiai = function() {
 		Text.NL();
 		Text.Add("<i>“…Fuck out… brains…”</i>", parse);
 		Text.NL();
-		parse["gen"] = gender == Gender.male ? "massive boner" : "oozing cunt and engorged clit";
-		parse["w"] = werewolf ? " even with your werewolf strength" : "";
+		parse.gen = gender == Gender.male ? "massive boner" : "oozing cunt and engorged clit";
+		parse.w = werewolf ? " even with your werewolf strength" : "";
 		Text.Add("Oh-kay. Well, that’s nice. Judging by the [gen] [name]’s sporting, looks like [heshe] means it, too. Right - with the zombies closing in and looking to force you into sating their uh, hunger, you’d probably be best looking for a way out of this. It’s clear that there’s too many of them for you to fight directly[w], so you’d better actually use your brains for once.", parse);
 	}
 	else {
@@ -1673,7 +1691,7 @@ HalloweenScenes.Kiai = function() {
 	}
 	Text.Flush();
 	
-	//[Run][Item]
+	// [Run][Item]
 	let options = new Array();
 	options.push({ nameStr : "Run",
 		tooltip : "Come on, they’re slow, shambling things. If you can’t outrun them, you need to cut back on the carbs.",
@@ -1686,7 +1704,7 @@ HalloweenScenes.Kiai = function() {
 			Text.Add("Right, right. You rummage about in your possessions, seeing if there’s anything you could use in order to get you out of this bind. Alternatively, if you don’t have anything on you to your liking, there are other things you could do…", parse);
 			Text.Flush();
 			
-			//[Stake][Holy Water][Garlic][Shades][Dog Bone][Run]
+			// [Stake][Holy Water][Garlic][Shades][Dog Bone][Run]
 			let options = new Array();
 			options.push({ nameStr : "Stake",
 				tooltip : "Put the weapon you received to good use!",
@@ -1798,7 +1816,7 @@ HalloweenScenes.KiaiRun = function() {
 	Text.Clear();
 	Text.Add("Oh, come on - this particular brand of zombie isn’t particularly fast, and it’s not as if you’re <i>completely</i> surrounded yet. Quickly, you look for an opening in the elven undead closing in on you, and make a run for it.", parse);
 	Text.NL();
-	parse["w"] = werewolf ? ", especially when you move that quickly on all fours" : "";
+	parse.w = werewolf ? ", especially when you move that quickly on all fours" : "";
 	Text.Add("As you expected, the slow-witted and bodied things don’t manage to catch up with you[w]. A few of them make a grab for you as you barrel by, but they’re too slow and you easily push them out of the way, breaking through the circle of zombies about you.", parse);
 	Text.NL();
 	Text.Add("It’s only when you’re sure that you’re in the clear that you slow down to catch your breath and look behind you. The elf zombies are still milling about amongst the gravestones, but at least they aren’t actively pursuing you anymore. They’re still down there, though, so it’s more than likely you’ll have to deal with them again at some point if you do head down amongst the headstones again later on.", parse);
@@ -1830,7 +1848,7 @@ HalloweenScenes.KiaiGangrape = function() {
 	let parse : any = {
 		name : kiakai.name
 	};
-	let gender = kiakai.flags["InitialGender"];
+	let gender = kiakai.flags.InitialGender;
 	parse = kiakai.ParserPronouns(parse, "", "", gender);
 	parse = player.ParserTags(parse);
 	
@@ -1839,8 +1857,8 @@ HalloweenScenes.KiaiGangrape = function() {
 	let werewolf = HalloweenScenes.HW.Werewolf();
 	
 	Text.NL();
-	parse["w"] = werewolf ? " despite your werewolf strength" : "";
-	parse["w2"] = werewolf ? "" : ", easily ripping apart your stripperiffic costume with their cold fingers";
+	parse.w = werewolf ? " despite your werewolf strength" : "";
+	parse.w2 = werewolf ? "" : ", easily ripping apart your stripperiffic costume with their cold fingers";
 	Text.Add("The first of the zombies comes into contact with you, and you shiver. The whole scene seems so comical - what with the zombies and their penciled-on stitches and makeup discoloration - but the fact that their numerous elfin hands are grabbing at your body, dragging you down to the ground[w] with their sheer numbers. You fight back as best as you can, but despite their individual frailness and lithe forms, the zombie elves easily overpower you and hold you prone[w2].", parse);
 	Text.NL();
 	Text.Add("<i>“…So horny… must fuck…”</i>", parse);
@@ -1849,19 +1867,21 @@ HalloweenScenes.KiaiGangrape = function() {
 	Text.NL();
 	Text.Add("…Grinning? That’s not quite like -", parse);
 	Text.NL();
-	parse["l"] = player.HasLegs() ? " and force your legs apart" : "";
+	parse.l = player.HasLegs() ? " and force your legs apart" : "";
 	Text.Add("Your thoughts are brought to a quick halt as zombie elves on either side of you grab your [thighs] with cold, rough hands[l], presenting you to their leader. A chill runs down your spine as [heshe] sizes you up with cold, unseeing eyes, so very different from that of the [name] you know.", parse);
 	Text.NL();
-	parse["v"] = vag ? "" : Text.Parse(" has the zombies turn you over and spread your ass cheeks before [heshe]", parse);
-	parse["gen"] = vag ? parse["vag"] : parse["anus"];
+	parse.v = vag ? "" : Text.Parse(" has the zombies turn you over and spread your ass cheeks before [heshe]", parse);
+	parse.gen = vag ? parse.vag : parse.anus;
 	Text.Add("<i>“Prepare… ass…”</i> zombie [name] moans in a deathly, sepulchral voice. The other zombie elves are more than willing to echo the motion, those not involved in holding you down groaning and lurching all about. You swallow hard as [name] gets down on [hisher] knees, sizes you up, then[v] rams [hisher] fist straight into your [gen] without so much as spreading it apart with [hisher] fingers first. Not that the thickness of [hisher] fist and forearm makes any difference with the unnatural strength the usually frail-looking elf possesses in this form; your [gen] barely resists [hisher] intrusion, putting up a token twinge of complaint before giving up and allowing the intrusive appendage free entrance.", parse);
 	Text.NL();
 	Text.Add("Ugh! No lube is bad enough, but zombie [name]’s touch - well, it isn’t exactly <i>life</i>-draining, but with how cold it is it may as well have been as such. You gasp as [name]’s brutally violates your warm innards with [hisher] clammy fist, squirming and struggling instinctively against the <i>thing</i> that’s sucking all the heat out of your body.] It’s clear that [heshe]’s doing this in the most humiliating way possible, perhaps to make a lesson out of you to all the watching zombies - who by this time are openly fondling themselves to the spectacle of [name]’s arm pumping in and out of you with ruthless efficiency.", parse);
 	Text.NL();
-	if(vag)
+	if(vag) {
 		Text.Add("The friction of the undead elf’s wrist and forearm against your love-button sends a pleasant shiver down your spine, warmth blossoming in your nethers - before it’s quickly sucked away by [name]’s ice-cold touch. Still, the momentary flicker of pleasure is only heightened by the rough nature of the intrusion, your inner walls desperately trying to produce enough lube to keep up with the brutal fist-fucking you’re getting.", parse);
-	else
+	}
+	else {
 		Text.Add("[name]’s wrist and forearm scrape against your sphincter as [heshe] rams in and out of you, and you wriggle and rock your hips in time to [hisher] brutal fist-fucking, trying to find a rhythm that will minimize the pain and sensations of having your anal walls stretched so wide. In response, [name] grins that evil grin of [hishers] again and breaks up the rhythm, twisting and turning inside your ass, sending you writhing in both ecstasy and agony, tears running down your cheeks as [heshe] spreads [hisher] fingers inside you, literally hollowing you out with [hisher] icy touch.", parse);
+	}
 	Text.NL();
 	Text.Add("<i>“…Share… suffering…”</i> zombie [name] gasps, roiling, icy mist starting to pour from [hisher] jaws. The chant is quickly taken up by the other zombie elves, who press in on you; you’re keenly aware of the fact that you’re about to be… well, whatever these cartoonish zombies have planned for you, it can’t be very good.", parse);
 	Text.NL();
@@ -1878,12 +1898,11 @@ HalloweenScenes.KiaiGangrape = function() {
 	Text.Add("Zombies: if they fuck you, you turn into one of them. Basic monster knowledge, that. You last sight before you pass out is that of [name]’s innocent yet downright cruel face, welcoming you into the ranks of the horny dead.", parse);
 	Text.Flush();
 	
-	//BAD END
+	// BAD END
 	Gui.NextPrompt(function() {
 		HalloweenScenes.WakingUp(true);
 	});
 }
-
 
 Halloween.Loc.Mausoleum.description = function() {
 	let first = !(HalloweenScenes.HW.flags & HalloweenFlags.Flags.Mausoleum);
@@ -1910,10 +1929,12 @@ Halloween.Loc.Mausoleum.description = function() {
 	Text.Add("On one of the walls, you spy a heavy-looking wooden door. It’s held shut by a wooden bar.");
 	Text.NL();
 	Text.Add("Aside from the door, only one object stands out in this abandoned storage. ");
-	if(HalloweenScenes.HW.harthon & HalloweenFlags.Harthon.Met)
+	if(HalloweenScenes.HW.harthon & HalloweenFlags.Harthon.Met) {
 		Text.Add("The black coffin that sat there is now gone, moved away to who knows where, the only trace of its presence being the spot framed by the dust of the storage.");
-	else
+	}
+	else {
 		Text.Add("One is a black coffin, seemingly out of place with how well it’s maintained compared to everything else. Just approaching it fills you with dread.");
+	}
 }
 
 Halloween.Loc.Mausoleum.links.push(new Link(
@@ -1943,7 +1964,6 @@ Halloween.Loc.Mausoleum.events.push(new Link(
 	}
 ));
 
-
 Halloween.Loc.TortureRoom.description = function() {
 	let player = GAME().player;
 	
@@ -1955,10 +1975,12 @@ Halloween.Loc.TortureRoom.description = function() {
 	Text.Add("Whoever stocked this room must have been quite the BDSM fanatic. Flickering torches keep everything in a sinisterly array of light and dark, shifting shadows adding an air of menace even with the lack of bodily harm threatened. Several tables are laid out, all with either arrays of heavy leather straps fixed to them, rotating bases, or both. A rack - repurposed for less lethal interrogations - sits in one corner, whilst a large rocking horse sits in another.");
 	Text.NL();
 	Text.Add("The walls are bedecked with all kinds of tools of sexual humiliation and punishment. Whips and cat-o-nine-tails in more styles than you had ever seen in one place before. Intricately crafted paddles, pegs, gags and masks. And in pride of place, sex toys: beads, vibrators, and especially dildos, the latter in an array of shapes and sheer sizes that ");
-	if(player.Slut() < 50)
+	if(player.Slut() < 50) {
 		Text.Add("makes you flush and cast your eyes away, unable to look at them.");
-	else
+	}
+	else {
 		Text.Add("makes even an experienced slut like you look at them a little askance.");
+	}
 	Text.NL();
 	Text.Add("Aside from all of the sexual paraphernalia, the room is pretty much empty. The only thing of interest lies at the center of the room; an expensive-looking urn fashioned in the likeness of a dog. It’s carved with ancient drawings and glyphs you couldn’t hope to puzzle out.");
 }
@@ -1969,10 +1991,12 @@ Halloween.Loc.TortureRoom.links.push(new Link(
 	function() {
 		let player = GAME().player;
 		Text.Clear();
-		if(player.Slut() < 50)
+		if(player.Slut() < 50) {
 			Text.Add("You’re more than happy to leave this creepy place and all these perverted devices to keep gathering dust.");
-		else
+		}
+		else {
 			Text.Add("Although you can’t resist casting an appreciative eye over the many delicious toys scattered around, you ultimately shrug your shoulders and leave. They’re just no fun when there’s nobody else to play with.");
+		}
 		Text.Flush();
 		
 		Gui.NextPrompt(function() {
@@ -2001,7 +2025,7 @@ HalloweenScenes.NadirMaApproach = function() {
 	Text.Add("As you reach for the plug, you’re overcome with a powerful sense of dread. Something about this urn just exhales an ominous vibe… Should you really open it?", parse);
 	Text.Flush();
 	
-	//[Yes][No]
+	// [Yes][No]
 	let options = new Array();
 	options.push({ nameStr : "Yes",
 		tooltip : "It’s just a damned jar, what are you afraid of? What could go wrong?",
@@ -2046,10 +2070,12 @@ HalloweenScenes.NadirMa = function() {
 	Text.NL();
 	Text.Add("Before your amazed eyes, the liquid forms the shape of a humanoid being... and then, its color changes; from the earthen hue of the liquid to more lively-looking tones, until what stands before you is no simulacra, but a flesh-and-blood creature.", parse);
 	Text.NL();
-	if(miranda.Met())
+	if(miranda.Met()) {
 		Text.Add("What stands before you now is a trim, toned, female dobermorph whose ample curves offset the muscles of a trained fighter. She looks exactly like Miranda, save for one key detail - the very noticeable emptiness between her thighs. Whoever or whatever this creature is, she lacks the impressive maleness that Miranda takes such pride in.", parse);
-	else
+	}
+	else {
 		Text.Add("It’s a statuesque and <i>very</i> amply female canine-morph - a doberman, you think. Though her naked breasts are full, and even from here you can make out the lusciousness of her buttocks, her belly is flat and toned, and her limbs visibly ripple with power. Whoever this is, she’s not just a pretty face.", parse);
+	}
 	Text.NL();
 	Text.Add("As you finish your observations, the statuesque figure suddenly begins to move. Long, toned arms pivot, reaching for the ceiling as she stretches until she is up on her toes, the act thrusting out her ample bosom even more. Her mouth falls open in a jaw-cracking yawn, the noise echoing through the mausoleum as she twists her shoulders. Rich green eyes open, gazing blearily about the chamber as she dreamily smacks her lips, scratching quite indelicately at her shapely rump.", parse);
 	Text.NL();
@@ -2057,7 +2083,7 @@ HalloweenScenes.NadirMa = function() {
 	Text.NL();
 	Text.Add("<i>“Well, what do we have here?”</i> she says, sashaying towards you with a predatory smile.", parse);
 	Text.NL();
-	parse["proverbial"] = player.HasLegs() ? "" : " proverbial";
+	parse.proverbial = player.HasLegs() ? "" : " proverbial";
 	Text.Add("Something in the way she looks at you makes your skin crawl; there’s a hunger there that seems sexual, but with something ever so slightly <i>off</i> about it. You find yourself swallowing a lump that rises in your throat, unable to bring yourself to meet her gaze as you take a[proverbial] step back. Instead, you focus your gaze firmly on her feet, watching her strut towards you.", parse);
 	Text.NL();
 	Text.Add("She chuckles at your reaction. <i>“What’s the problem? Feeling shy?”</i>", parse);
@@ -2118,7 +2144,7 @@ HalloweenScenes.NadirMa = function() {
 	Text.NL();
 	Text.Add("Wait, is she going where you think she’s going?", parse);
 	Text.NL();
-	parse["wo"] = player.mfTrue("", "wo");
+	parse.wo = player.mfTrue("", "wo");
 	Text.Add("<i>“And now I’m faced with such a delicious looking [wo]man… it’s just too much to bear, trust me. I’m already wet!”</i> she shamelessly declares touching the wet bandages covering her honeypot.", parse);
 	Text.NL();
 	Text.Add("...Yeah, you suspected that’s where she was going.", parse);
@@ -2187,15 +2213,15 @@ HalloweenScenes.NadirMa = function() {
 			else {
 				Text.Add("First of all, let’s get you off those skimpy clothes of yours. My servants wore none, and you certainly don’t need them right now. But don’t just take them off, put on a show for me.”</i>", parse);
 				Text.NL();
-				parse["br"] = player.mfTrue("", " even as you remove the bikini covering them");
-				parse["thongpanties"] = player.mfTrue("thong", "panties");
+				parse.br = player.mfTrue("", " even as you remove the bikini covering them");
+				parse.thongpanties = player.mfTrue("thong", "panties");
 				Text.Add("That’s a fair enough request. With slow, deliberate motions, you begin removing your cloak and stick out your chest, emphasizing your [breasts][br]. Your arms sweep slowly around your frame in languid, delicate motions, the arc of their spiral drawing the eye to examine every inch of you. You shake your hips slowly from side to side, twisting and turning in a perverse little dance, slowly turning so that Nadir-Ma can admire the curves of your [butt], even as you begin peeling off your [thongpanties].", parse);
 				Text.NL();
 				let gen = "";
-				if(player.FirstCock()) gen += "[cocks]";
-				if(player.FirstCock() && player.FirstVag()) gen += " and ";
-				if(player.FirstVag()) gen += "[vag]";
-				parse["gen"] = Text.Parse(gen, parse);
+				if(player.FirstCock()) { gen += "[cocks]"; }
+				if(player.FirstCock() && player.FirstVag()) { gen += " and "; }
+				if(player.FirstVag()) { gen += "[vag]"; }
+				parse.gen = Text.Parse(gen, parse);
 				Text.Add("Fabric drifts into a little pile at your [feet] before you kick it aside, an exaggerated twirl that flamboyantly exposes your [gen]. Slowly, you look up at the dobermorph, waiting to see her reaction.", parse);
 				Text.NL();
 				Text.Add("She applauds you. <i>“Very good. That was a nice show, so how about I give you a little reward?”</i>", parse);
@@ -2212,10 +2238,12 @@ HalloweenScenes.NadirMa = function() {
 				Text.Add("<i>“Well, how do you expect us to have sex when you have so little to offer up front?”</i>", parse);
 				Text.NL();
 				Text.Add("Puzzled, you fish out your ‘stake’ and present it to her, telling her that if she really needs something hard inside of her, this would work. Besides, there’s plenty of fun ", parse);
-				if(player.Gender() == Gender.female)
+				if(player.Gender() == Gender.female) {
 					Text.Add("two girls", parse);
-				else
+				}
+				else {
 					Text.Add("a girl like her and a guy like you", parse);
+				}
 				Text.Add(" can have on their own, no cocks required.", parse);
 				Text.NL();
 				Text.Add("<i>“Yes, of course. But after being stuck inside a cramped jar for more than a few years, I think I deserve to have the real thing, right cutie?”</i>", parse);
@@ -2236,7 +2264,7 @@ HalloweenScenes.NadirMa = function() {
 					cock.thickness.base = 6;
 					player.body.cock.push(cock);
 					
-					//Reset parser
+					// Reset parser
 					parse = player.ParserTags(parse);
 					
 					Text.Clear();
@@ -2244,7 +2272,7 @@ HalloweenScenes.NadirMa = function() {
 					Text.NL();
 					Text.Add("Obediently, you hold your position, watching curiously to see how the magical dobermorph will change you to her liking. Nadir-Ma regally gestures with her hands, and you watch with a politely impressed look as some of her bandages uncurl from around her body and stretch out towards you.", parse);
 					Text.NL();
-					parse["boygirl"] = player.mfTrue("boy", "girl");
+					parse.boygirl = player.mfTrue("boy", "girl");
 					Text.Add("With a sinuous grace that is mildly disconcerting, the bandages twine themselves around you like fabric tentacles. They gently fall on your [hips] and drape themselves across your loins, rapidly twining themselves into a fairly well-designed set of panties. Maybe not the flashiest of lingerie in the world, but a [boygirl] can’t be too choosy in circumstances like these, right?", parse);
 					Text.NL();
 					Text.Add("The line strands reaching between your crotch and Nadir-Ma’s body snap, just an inch or two from your new garment. The bandages retract back to their place on their owner’s body - you’d question why she doesn’t seem to have diminished her own clothing at all, but that’s hardly the weirdest thing about this situation.", parse);
@@ -2255,7 +2283,7 @@ HalloweenScenes.NadirMa = function() {
 					Text.NL();
 					Text.Add("You puff and pant, gasping quietly as the bandages grow tighter, and tighter. They squeeze your sensitive, shifting flesh in a deceptive grip, and yet you just keep on growing!", parse);
 					Text.NL();
-					parse["p"] = player.HasLegs() ? "" : " proverbial";
+					parse.p = player.HasLegs() ? "" : " proverbial";
 					Text.Add("The sudden snap of fabric echoes in your ear like a thunderclap. First, one bandage gives way, brushing against your [legs] as it sways in the breeze, and then another follows suit, a third hot on its heels. And the thing between your[p] thighs keeps on growing bigger, until finally your panties burst asunder.", parse);
 					Text.NL();
 					Text.Add("There, bouncing proudly as it swells to its full glory, is a sizable human cock. It has to be at least thirteen inches long, two inches thick and very sensitive; you shiver at the pleasant tingle that crawls across your [skin] as a gentle breeze wafts over your new appendage.", parse);
@@ -2269,7 +2297,7 @@ HalloweenScenes.NadirMa = function() {
 					HalloweenScenes.NadirMaCont(parse);
 				}
 				
-				//[Yes] [No]
+				// [Yes] [No]
 				let options = new Array();
 				options.push({ nameStr : "Yes",
 					tooltip : "It might not be so bad to have a cock of your own. Would be more fun to stick into things than a toy, that’s for sure.",
@@ -2291,7 +2319,7 @@ HalloweenScenes.NadirMa = function() {
 			}
 		}
 		
-		//[Yes] [No]
+		// [Yes] [No]
 		let options = new Array();
 		options.push({ nameStr : "Yes",
 			tooltip : "Well, it’s a reasonable enough request, and it’s not like it should take much effort, right?",
@@ -2307,7 +2335,7 @@ HalloweenScenes.NadirMa = function() {
 		Gui.SetButtonsFromList(options, false, null);
 	}
 	
-	//[Yes] [No]
+	// [Yes] [No]
 	let options = new Array();
 	options.push({ nameStr : "Yes",
 		tooltip : "She’s attractive, she’s polite and she’s clearly very willing. You can certainly think of worse partners to have.",
@@ -2330,7 +2358,7 @@ HalloweenScenes.NadirMaCont = function(parse : any) {
 	
 	Text.Add("Well, if that’s what she wants. You carefully lower yourself to the ground, adjusting your stance until you are settled firmly, your [cocks] outthrust before you.", parse);
 	Text.NL();
-	parse["boygirl"] = player.mfTrue("boy", "girl");
+	parse.boygirl = player.mfTrue("boy", "girl");
 	Text.Add("<i>“Good [boygirl]!”</i> She says patting you on the head. <i>“This is a great position for you,”</i> she says, sitting on the table before you.", parse);
 	Text.NL();
 	Text.Add("You watch, understanding swiftly dawning as the near-naked dobermorph imperiously raises one of her paw-like feet. It arcs delicately through the air, settling against the base of your shaft with just enough pressure that you can feel it. With a slow, deliberate motion, she starts to stroke the underside of your cock with the tip of her toe.", parse);
@@ -2349,23 +2377,27 @@ HalloweenScenes.NadirMaCont = function(parse : any) {
 	Text.NL();
 	Text.Add("Nadir-Ma further spices things up by adding her other foot to the mix, with one focused on pleasuring your [cockTip] and the other one stroking your shaft.", parse);
 	Text.NL();
-	parse["goo"] = player.IsGoo() ? " No pun intended." : "";
+	parse.goo = player.IsGoo() ? " No pun intended." : "";
 	Text.Add("Your senses sing under the dobermorph’s assault, a duet of pleasure that leaves you putty in her paws.[goo] Pre-cum spouts and gushes, bubbling thickly over the toes dabbling at your [cockTip] and being massaged into your length by her other sweeping foot. You start to groan and grunt, feeling your heart pounding in your chest; you don’t know how much longer you can hold out like this... you’re going to cum, you can just <b>feel</b> it...", parse);
 	Text.NL();
 	Text.Add("<i>“Alright, I think that’s enough,”</i> she says, removing her feet from your throbbing [cock].", parse);
 	Text.NL();
 	Text.Add("You can no more stop the disappointed, heartfelt mewl of dismay that escapes your lips than you can stop breathing. ", parse);
-	if(player.SubDom() < 25)
+	if(player.SubDom() < 25) {
 		Text.Add("Meekly, you look up at her with the most simpering expression you can manage, wordlessly pleading for her to grant you release.", parse);
-	else
+	}
+	else {
 		Text.Add("Angrily, your head snaps up to face her, wordlessly demanding an explanation as to what she thinks she’s doing.", parse);
+	}
 	Text.NL();
 	Text.Add("<i>“That’s enough of a reward, don’t you think so, cutie? If you want more, then you’ll have to serve me more,”</i> she states matter-of-factly.", parse);
 	Text.NL();
-	if(player.SubDom() < 25)
+	if(player.SubDom() < 25) {
 		Text.Add("That sounds fair to you. Nodding your head in a docile fashion, you ask how you may serve her pleasure.", parse);
-	else
+	}
+	else {
 		Text.Add("Well... you won’t say you’re exactly thrilled, but it is fair. Sighing, you ask what she wants you to do.", parse);
+	}
 	Text.NL();
 	Text.Add("<i>“Well, you made quite the mess.”</i> She lifts her feet, wiggling her toes to show you the cum covering each digit. <i>“How about you start by cleaning this up?”</i>", parse);
 	Text.Flush();
@@ -2395,19 +2427,23 @@ HalloweenScenes.NadirMaCont = function(parse : any) {
 		Text.NL();
 		Text.Add("She grins. <i>“Since you’re down there, and doing such a good job, how about a massage too? Actually, how about you just worship my feet? It’s been such a long time since I had a servant worship me like the Goddess I am...”</i>", parse);
 		Text.NL();
-		if(player.SubDom() < 35)
+		if(player.SubDom() < 35) {
 			Text.Add("Oh, but of course! Smiling happily, you eagerly turn to your task.", parse);
-		else
+		}
+		else {
 			Text.Add("Do you really have to? Glancing upwards, you sigh to yourself. Of course you do. Well, let’s just get this over with.", parse);
+		}
 		Text.NL();
 		Text.Add("Lifting Nadir-Ma’s paw to your mouth, you gently kiss each dainty toe in turn, suckling softly as you deepen the liplock. An approving giggle bubbles down to you from above, the dobermorph playfully wriggling her toes in your mouth. With your hands, you gently stroke the rest of her foot, tenderly massaging her ankles as you start to lick her pads.", parse);
 		Text.NL();
 		Text.Add("<i>“Hmm, this is some excellent service you’re giving me here, cutie. If you keep this up, I might have to wind up rewarding you.”</i>", parse);
 		Text.NL();
-		if(player.SubDom() < 35)
+		if(player.SubDom() < 35) {
 			Text.Add("Oh, you wouldn’t presume to ask for something like a reward, not for something like this. But if she insists...", parse);
-		else
+		}
+		else {
 			Text.Add("Well, that makes this a little more bearable. You wonder what she has in mind...", parse);
+		}
 		Text.Add(" Spurred on by her words, you resume your efforts with renewed zeal, licking and kissing, stroking and sucking, worshipping her foot with the ardent fervor of a true believer.", parse);
 		Text.NL();
 		Text.Add("Nadir-Ma giggles. <i>“That’s good, but it’s enough for this foot. Do my other one and I’ll reward you handsomely.”</i> She grins.", parse);
@@ -2438,7 +2474,7 @@ HalloweenScenes.NadirMaCont = function(parse : any) {
 		Text.NL();
 		Text.Add("<i>“Getting ready to cum? Well, I’m not done playing yet.”</i>", parse);
 		Text.NL();
-		parse["k"] = p1cock.Knot() ? ", just behind your swelling knot" : "";
+		parse.k = p1cock.Knot() ? ", just behind your swelling knot" : "";
 		Text.Add("A dismal moan bubbles from your throat as, before your disbelieving eyes, a bandage snakes out from Nadir-Ma’s enchanted apparel. With perverse grace, it slithers through the air and brushes against the base of your cock[k]. In an instant, it twines itself around your sensitive flesh, tying itself so tightly that you haven’t a hope of getting off.", parse);
 		Text.NL();
 		Text.Add("You turn a pleading eye towards Nadir-Ma, but the doberman is oblivious to your desperation. Instead, she goes right back to what she was doing, only slower and more teasing.", parse);
@@ -2492,7 +2528,7 @@ HalloweenScenes.NadirMaCont = function(parse : any) {
 			let prompt2 = function() {
 				HalloweenScenes.HW.nadirma |= HalloweenFlags.NadirMa.GaveBalls;
 				
-				//ADD BALLS
+				// ADD BALLS
 				player.Balls().count.base = 2;
 				player.Balls().size.base = 6;
 				
@@ -2502,7 +2538,7 @@ HalloweenScenes.NadirMaCont = function(parse : any) {
 				if(HalloweenScenes.HW.nadirma & HalloweenFlags.NadirMa.GaveCock) {
 					Text.Add("With a recognizable gesture, the dobermorph sends her bandages undulating out again. You watch as they wrap themselves around your loins for the second time tonight, forming themselves into a familiar set of panties - save for the hole expertly woven to spare your cock, of course.", parse);
 					Text.NL();
-					parse["proverbial"] = player.HasLegs() ? "" : " proverbial";
+					parse.proverbial = player.HasLegs() ? "" : " proverbial";
 					Text.Add("You moan in lazy bliss as a familiar warmth seeps through your body, pleasantly tingling you from head to[proverbial] toe. Your cock stiffens, rising up as the warmth pulses from your enchanted undies, pussy dampening as you feel yourself starting to grow inside of them again.", parse);
 					Text.NL();
 					Text.Add("Lost in pleasure as you are, you can’t help but laugh and chant for your new flesh to grow, grow, grow! Each strand of linen that ruptures at the strain of trying to contain your swelling flesh becomes a trophy, and when your panties finally burst into tatters, you feel a huge sense of pride that mingles with your release as your new flesh flops into view.", parse);
@@ -2518,7 +2554,7 @@ HalloweenScenes.NadirMaCont = function(parse : any) {
 					Text.NL();
 					Text.Add("You puff and pant, gasping quietly as the bandages grow tighter, and tighter. They squeeze your sensitive, shifting flesh in a deceptive grip, and yet you just keep on growing!", parse);
 					Text.NL();
-					parse["proverbial"] = player.HasLegs() ? "" : " proverbial";
+					parse.proverbial = player.HasLegs() ? "" : " proverbial";
 					Text.Add("The sudden snap of fabric echoes in your ear like a thunderclap. First, one bandage gives way, brushing against your [legs] as it sways in the breeze, and then another follows suit, a third hot on its heels. And the thing between your[proverbial] thighs keeps on growing bigger, until finally your panties burst asunder.", parse);
 				}
 				Text.NL();
@@ -2527,7 +2563,7 @@ HalloweenScenes.NadirMaCont = function(parse : any) {
 				HalloweenScenes.NadirMaCont2(parse);
 			}
 			
-			//[Yes] [No]
+			// [Yes] [No]
 			let options = new Array();
 			options.push({ nameStr : "Yes",
 				tooltip : "Well, you really do look kind of odd with a cock and no balls to go with it. Let’s get fixed up.",
@@ -2544,7 +2580,7 @@ HalloweenScenes.NadirMaCont = function(parse : any) {
 		}
 	}
 	
-	//[Yes] [No]
+	// [Yes] [No]
 	let options = new Array();
 	options.push({ nameStr : "Yes",
 		tooltip : "It’s not really that big a deal, certainly not in the face of finally getting to cum!",
@@ -2567,7 +2603,7 @@ HalloweenScenes.NadirMaCont2 = function(parse : any) {
 	
 	Text.Add("<i>“I’ll go get a little something while you produce more tasty cum for me,”</i> Nadir-Ma says, walking around the table and moving out of your field of vision.", parse);
 	Text.NL();
-	parse["b"] = (HalloweenScenes.HW.nadirma & HalloweenFlags.NadirMa.GaveBalls) ? "" : "ly tweaked";
+	parse.b = (HalloweenScenes.HW.nadirma & HalloweenFlags.NadirMa.GaveBalls) ? "" : "ly tweaked";
 	Text.Add("You nod absently, too caught up with rubbing your new[b] balls to really pay much attention. They feel so heavy, and so sensitive! You bite your lip as even brushing them sends tingles racing along your spine.", parse);
 	Text.NL();
 	Text.Add("And you don’t think they’re done growing yet; you swear that you can feel them filling up with cum, your sack stretching tighter as it bloats with seed. Oh, how you want to be plugged into a warm, wet, willing hole and emptying yourself...", parse);
@@ -2586,7 +2622,7 @@ HalloweenScenes.NadirMaCont2 = function(parse : any) {
 		Text.Clear();
 		Text.Add("<i>“Great, let’s get started then!”</i> she says merrily, approaching you and gently grasping[oneof] your [cocks].", parse);
 		Text.NL();
-		parse["chosen"] = player.NumCocks() > 1 ? " chosen" : "";
+		parse.chosen = player.NumCocks() > 1 ? " chosen" : "";
 		Text.Add("You gasp softly, moaning as Nadir-Ma’s mouth closes teasingly around just the [cockTip] of your[chosen] dick. Her plump lips squish deliciously as they clamp around the base of your glans, her tongue tickling the sensitive dickflesh inside her warm, wet maw.", parse);
 		Text.NL();
 		Text.Add("When the dobermorph’s slender fingers wrap themselves tenderly around your [balls], you groan deeply, shuddering slightly as she caresses you. With expert touches, she coaxes you into a warm, comforting veil of bliss...", parse);
@@ -2595,15 +2631,17 @@ HalloweenScenes.NadirMaCont2 = function(parse : any) {
 		Text.NL();
 		Text.Add("Without saying a word, Nadir-Ma pulls away and grabs the dildo. She then begins covering the dildo with your cum, slickening it until it’s covered by a nice layer of seed. <i>“Hmmhmm, now it’s ready. Get on fours and show me your cute backdoor, cutie!”</i>", parse);
 		Text.NL();
-		parse["t"] = player.HasTail() ? Text.Parse(", [tail] curled up out of the way for her", parse) : "";
+		parse.t = player.HasTail() ? Text.Parse(", [tail] curled up out of the way for her", parse) : "";
 		Text.Add("You roll over as best you can, sliding around atop the table until you have assumed the position as instructed. You look back at her over your shoulder[t], expectantly waiting for her to get started.", parse);
 		Text.NL();
 		Text.Add("Nadir-Ma leans over and gives one of your butt cheeks a kiss.", parse);
 		Text.NL();
-		if(player.SubDom() < 45)
+		if(player.SubDom() < 45) {
 			Text.Add("You give her a soft, embarrassed laugh, unable to keep a blush from warming your other set of cheeks.", parse);
-		else
+		}
+		else {
 			Text.Add("You smirk proudly at her obvious appreciation of your ass.", parse);
+		}
 		Text.NL();
 		Text.Add("Then she licks your taint, probing your [anus] with her tongue, and drilling her way inside.", parse);
 		Text.NL();
@@ -2650,7 +2688,7 @@ HalloweenScenes.NadirMaCont2 = function(parse : any) {
 		Text.NL();
 		Text.Add("You slump to the floor, panting for breath, feeling more frustrated than relieved; you’re so close that it’s almost painful, even the slow ebbing of lust as it bleeds away a near-torturous experience.", parse);
 		Text.NL();
-		parse["k"] = p1cock.Knot() ? ", knot included" : "";
+		parse.k = p1cock.Knot() ? ", knot included" : "";
 		Text.Add("<i>“Now, about your reward...”</i> Nadir-Ma suddenly hoists you up as if you weighed nothing and lays you down on the table. In one smooth move, she climbs on the table and aligns[oneof] your [cocks] with her juice-dripping pussy. <i>“You’ll get to fuck a Goddess.”</i> And with that, she lets gravity take its course, impaling herself on your shaft all the way to hilt[k].", parse);
 		Text.NL();
 		Text.Add("You cry out in pleasure, a strangled gasp of pure lust at being so directly enveloped within her. The heat of her drooling cunt swallows your senses, and for a moment, it’s as if there’s nothing but her cooch greedily devouring your cock, slurping back and forth along your length as she bounces atop you.", parse);
@@ -2662,15 +2700,17 @@ HalloweenScenes.NadirMaCont2 = function(parse : any) {
 		Text.Add("<i>“Here’s a little help for you!”</i> she cries between moans, her magic finally unleashing the dildo to its full frenzy.", parse);
 		Text.NL();
 		Text.Add("That’s the last straw; howling like ", parse);
-		if(werewolf)
+		if(werewolf) {
 			Text.Add("the animal you are,", parse);
-		else
+		}
+		else {
 			Text.Add("an animal,", parse);
+		}
 		Text.Add(" you explode inside of Nadir-Ma’s sopping cunt, your tidal wave of seed mixing with her own geyser of femjism; a swirling, seething deluge of juices that somehow vanishes without a trace into her greedy pussy.", parse);
 		Text.NL();
 		Text.Add("You thrust away with all you have, mindlessly pouring every last drop of semen you have to give into the dobermorph’s twat. She swallows it all, and still wants more, relentlessly milking you until even your reserves of climax run dry. As you collapse atop the table, too limp to move, you can still feel her pussy suckling around your dick. But you’re so tired... you can’t get more than half-hard, even when faced with a juicy cunt like hers.", parse);
 		Text.NL();
-		parse["k"] = p1cock.Knot() ? " tugging on your knot and eventually" : "";
+		parse.k = p1cock.Knot() ? " tugging on your knot and eventually" : "";
 		Text.Add("<i>“Hmm, yes. I really needed that. It’s been <b>so</b> long since I got fucked this well… Ah, cutie, you’re the best...”</i> she trails off, turning off the dildo and[k] pulling herself off your [cock]. A thick stream of semen leaks from her pussy, and she happily dips a finger in and takes it to her mouth to taste it. <i>“Tastes like a piece of heaven...”</i>", parse);
 		Text.NL();
 		Text.Add("You groan softly. Somehow, you find the energy to thank her for the compliment, and tell her that you’re happy to please.", parse);
@@ -2691,12 +2731,15 @@ HalloweenScenes.NadirMaCont2 = function(parse : any) {
 		Text.NL();
 		Text.Add("<i>“But first, maybe we should get that dildo out of your ass, unless you’d like to keep it there?”</i> she suggests with a mischievous grin.", parse);
 		Text.NL();
-		if(player.Slut() < 15)
+		if(player.Slut() < 15) {
 			Text.Add("No. Not a chance. You want this thing out of you, and you want it out <b>now</b>!", parse);
-		else if(player.Slut() < 35)
+		}
+		else if(player.Slut() < 35) {
 			Text.Add("Well, it is kind of fun to have it up there... but you do have places to go, so it’s probably better if she takes it out.", parse);
-		else
+ }
+		else {
 			Text.Add("You’re so very tempted to tell her to just leave it there; you’d <b>love</b> to have this little beauty stuffed up your ass as you go exploring. But... it’s her toy; you’d have to be a real jerk to take it from her, especially when she has so much fun to catch up on. So, you tell her to pull it out.", parse);
+ }
 		Text.NL();
 		Text.Add("Nadir-Ma grabs the butt-end of the dildo and begins pulling it out, dragging it slowly so you can feel every little inch that slips out; when it’s finally gone, you feel kinda empty…", parse);
 		Text.NL();
@@ -2724,7 +2767,7 @@ HalloweenScenes.NadirMaCont2 = function(parse : any) {
 				Text.NL();
 			}
 			if(player.Balls().BallSize() < 5) {
-				parse["h"] = player.HasHair() ? Text.Parse(" and making your [hair] stand on end", parse) : "";
+				parse.h = player.HasHair() ? Text.Parse(" and making your [hair] stand on end", parse) : "";
 				Text.Add("Your [balls] prickle beneath your swaying [cocks], sending shivers up your spine[h]. You squirm in Nadir-Ma’s lap, the wetness under your ass not helping as you feel your nuts bulging.", parse);
 				Text.NL();
 				Text.Add("You don’t have words to describe the sensation as cum boils and froths inside the taut skin of your sack, making your balls bloat until they feel as round and full as ripe apples. Liquid weight churns inside your overstuffed scrotum, settling down but still leaving you intimately aware of the new girth down there.", parse);
@@ -2745,7 +2788,7 @@ HalloweenScenes.NadirMaCont2 = function(parse : any) {
 				Text.NL();
 			}
 			if(player.Balls().BallSize() < 4) {
-				parse["proverbial"] = player.HasLegs() ? "" : " proverbial";
+				parse.proverbial = player.HasLegs() ? "" : " proverbial";
 				Text.Add("A prickling sensation in your [balls] makes your [skin] crawl, spurring you to suck harder and deeper at the dobermorph’s delicious breasts. You can literally feel your balls bloating between your[proverbial] thighs, skin stretching taut as they grow bigger and bigger. Only when they have swollen to the size of ripe plums does the feeling of cum frothing to a boil beneath the surface fade away.", parse);
 				Text.NL();
 				Text.Add("<i>“Can’t have my best servant frolic about without a decent package now, can I?”</i> she asks, gently patting your nuts.", parse);
@@ -2765,7 +2808,7 @@ HalloweenScenes.NadirMaCont2 = function(parse : any) {
 			Text.Add("<i>“Don’t worry, cutie. <b>One</b> is the magic number of dicks you’ll need when I’m done with you.”</i> She grins.", parse);
 			Text.NL();
 			
-			//#Pick PC’s biggest cock and make it cock number 1, all other cocks disappear.
+			// #Pick PC’s biggest cock and make it cock number 1, all other cocks disappear.
 			
 			player.body.cock = [p1cock];
 			
@@ -2779,7 +2822,7 @@ HalloweenScenes.NadirMaCont2 = function(parse : any) {
 				Text.Add("Moments later, your [cock] stands alone at your crotch once the other[s2] [hasHave2] disappeared - though not without leaving a parting gift. Your cock swells and grows, getting bigger and fatter, until a proud fifteen inches long shaft pulsates in your lap, its two and a half inch girth aching to stretch some lucky soul around its broad width and make them scream in pleasure.", parse);
 			}
 			else {
-				parse["wo"] = player.mfTrue("", "wo");
+				parse.wo = player.mfTrue("", "wo");
 				Text.Add("When it is all over, your [cock] stands alone and triumphant in your lap, having vanquished its unworthy rival[s]. Now you <i>truly</i> feel like a [wo]man!", parse);
 			}
 			Text.NL();
@@ -2791,13 +2834,13 @@ HalloweenScenes.NadirMaCont2 = function(parse : any) {
 			Text.NL();
 			Text.Add("Moaning around the dobermorph’s nipple, you thrust fervently into her palm, eager to comply. Oh, yes, you want to grow for her!", parse);
 			Text.NL();
-			parse["l"] = player.HasLegs() ? " between your thighs" : "";
+			parse.l = player.HasLegs() ? " between your thighs" : "";
 			Text.Add("Dimly, you can feel yourself stretching and swelling, your cock getting bigger and fatter as the canine Goddess carefully guides its growth. When the tightness fades, a mighty [cock] juts[l], fifteen inches long and two and a half inches thick.", parse);
 			Text.NL();
 			Text.Add("From the smile on her face, Nadir-Ma is quite satisfied with your new tool. She strokes it one last time and then lets it go.", parse);
 			Text.NL();
 		}
-		//Inc cock size
+		// Inc cock size
 		p1cock.length.IncreaseStat(38, 100);
 		p1cock.thickness.IncreaseStat(7, 100);
 		
@@ -2836,20 +2879,22 @@ HalloweenScenes.NadirMaCont2 = function(parse : any) {
 		Text.NL();
 		Text.Add("Enthralled by your Goddess’ generosity, you eagerly suckle harder, anxious to draw as much of the rich, life-giving nectar from her bosom as she will deign to give you.", parse);
 		Text.NL();
-		parse["h"] = player.HasHair() ? "through your hair" : "over your shaven scalp";
-		parse["h2"] = player.HasHair() ? " Her digits playfully intertwine with your locks, sweeping down through them." : "";
-		parse["h3"] = player.HasHair() ? " the length of your hair - down" : "";
+		parse.h = player.HasHair() ? "through your hair" : "over your shaven scalp";
+		parse.h2 = player.HasHair() ? " Her digits playfully intertwine with your locks, sweeping down through them." : "";
+		parse.h3 = player.HasHair() ? " the length of your hair - down" : "";
 		let wings = player.HasWings();
-		parse["wings"] = wings ? wings.Short() : "";
-		parse["w"] = wings ? Text.Parse(", between your [wings]", parse) : "";
+		parse.wings = wings ? wings.Short() : "";
+		parse.w = wings ? Text.Parse(", between your [wings]", parse) : "";
 		Text.Add("Dimly, you can see her smiling down at you as she reaches out and clasps your cheeks, running her fingers over your face as much as she can. Her hands curl across your cheekbones, sweeping up your temples and then start to run [h].[h2] You can feel her digits dragging down[h3] and down, from the top of your skull down over your shoulders[w], across the small of your back, not stopping until you feel them playfully brush your ass.", parse);
 		Text.NL();
 		Text.Add("You smile proudly around the dobermorph’s nipple as she starts to openly grope your butt. Rich and full, perky and firm, it’s a beautiful little eye-catcher. Naturally, her hands sweep further in, encompassing the strong, wide bones of your child-bearing hips; you have a body made for birthing beautiful, healthy children, and from somewhere deep inside, the alien lament that your Goddess lacks a cock with which to bless you with some pups of her own surfaces.", parse);
 		Text.NL();
-		if(player.HasTail())
+		if(player.HasTail()) {
 			Text.Add("Your [tail] wags happily, swaying over your ass, and Nadir-Ma smiles at the sight. It only swishes faster when she reaches around to play with it, scratching its base before creeping down between your plump, squeezable buttocks.", parse);
-		else
+		}
+		else {
 			Text.Add("Nadir-Ma caresses your hips, visibly savoring their curves as she feels the strength and potential in them. But your hips cannot hold the attention of a Goddess like her for long, and inevitably she drifts back to your ass, her delicate fingers creeping down the crevasse of your buttock cleavage.", parse);
+		}
 		Text.NL();
 		Text.Add("The Goddess’ long, slender digit begins to poke at your asshole, slowly rubbing circles around the puckered orifice, letting it feel her pressure before she starts to press on it for real. With the inexorable might of a true queen, she drives on; even were you of a mind to resist, you would be unable to keep her from spreading you open as she pushes herself in to the very knuckle.", parse);
 		Text.NL();
@@ -2883,11 +2928,13 @@ HalloweenScenes.NadirMaCont2 = function(parse : any) {
 		Text.NL();
 		Text.Add("You immediately step forward to see what she was talking about.", parse);
 		Text.NL();
-		parse["toes"] = player.HasLegs() ? "toes" : parse["feet"];
-		if(werewolf)
+		parse.toes = player.HasLegs() ? "toes" : parse.feet;
+		if(werewolf) {
 			Text.Add("...Wow. Nadir-Ma is right; you’re absolutely <b>stunning</b>! Your body remains the same, a strong and proud she-wolf, but there’s no denying your raw femininity either. From the delicate curves of your muzzle, down to the dainty toes of your paws, you are one gorgeous wolfess. Huge breasts jiggle enticingly on your chest, rising and falling with each breath, and your silky tail swishes above big, round, gropable butt cheeks. Even the mighty wolf-cock already jutting from your loins only emphasizes your feral sexuality.", parse);
-		else
+		}
+		else {
 			Text.Add("...Oh, baby. Is that really you? You’re <b>gorgeous</b>! A picture of utter womanhood, from your plump cock-sucking lips down to your dainty little [toes]. Long, sleek hair cascades down your back, shimmering against your beautiful [skin], highlighting curves fit to die for. You push out one baby-making hip, pouting critically as you watch the way your plump tits and your big, fat [cock] bounce with the movement, and then smile in admiration; you are just a fucking <b>machine</b>, aren’t you?", parse);
+		}
 		Text.NL();
 		Text.Add("Licking your lips lasciviously, your hand unthinkingly reaches for your [cock], already outthrust and drooling with desire at the vision of loveliness staring back at you from the mirror.", parse);
 		Text.NL();
@@ -2903,7 +2950,7 @@ HalloweenScenes.NadirMaCont2 = function(parse : any) {
 		Text.NL();
 		Text.Add("Before you can think of a response to that, she starts to stroke your shaft. With the ease of a true expert, her fingers glide back and forth along your skin, caressing every special spot without fail. Each digit unerringly seeks out a particular crease, ridge or crinkle, reducing your brain to a warm puddle of fuck. You can’t possibly hold out much longer...", parse);
 		Text.NL();
-		parse["proverbial"] = player.HasLegs() ? "" : " proverbial";
+		parse.proverbial = player.HasLegs() ? "" : " proverbial";
 		Text.Add("And then, all of a sudden, your Goddess releases you. Your plaintive whine dies on your lips as she fiercely spins you around on your[proverbial] heel and pulls you into a deep kiss. The heat of her floods your mind, the taste of her washing over your tongue, and you don’t have a chance in hell of stopping what happens next.", parse);
 		Text.NL();
 		Text.Add("Your overheated cock explodes like a poorly-capped geyser, your [balls] spewing their frothing, churning contents over the dobermorph’s belly. Gush after gut-clenching gush pours from you, surging over Nadir-Ma’s stomach, spattering against the underside of her tits and washing over her thighs, yet she keeps kissing you until you finally run dry. Your cock belches one last gobbet of seed over the dobie’s now-white torso and goes limp; only then does she let you go.", parse);
@@ -2941,7 +2988,7 @@ HalloweenScenes.NadirMaCont2 = function(parse : any) {
 		Gui.NextPrompt();
 	}
 	
-	//[Yes] [No]
+	// [Yes] [No]
 	let options = new Array();
 	options.push({ nameStr : "Yes",
 		tooltip : "What the hell, after all that’s gone on so far, what’s a little buttplay between friends? Tell her that she can go right ahead.",
@@ -2977,7 +3024,7 @@ HalloweenScenes.NadirMaNoEntry = function(parse : any, func : any) {
 		Text.Add("You’d have to be a complete and total idiot to not notice the hint of fang in her grin, or the menace underlying her words. Whoever she is - and whatever, you can’t forget that whole manifestation business - she really doesn’t like to be told ‘no’. Maybe going along with her wishes might be the smart choice here...", parse);
 		Text.Flush();
 		
-		//[Obey] [Defy]
+		// [Obey] [Defy]
 		let options = new Array();
 		options.push({ nameStr : "Obey",
 			tooltip : "Best not to piss off someone who’s obviously supernatural.",
@@ -3031,7 +3078,7 @@ Her previously discarded bandages immediately wrap themselves around her body as
 		Text.NL();
 		Text.Add("<i>“Gotcha!”</i> she exclaims triumphantly, reeling you in as she sends more bandages to bind you.", parse);
 		Text.NL();
-		parse["lisAre"] = player.HasLegs() ? "are" : "is";
+		parse.lisAre = player.HasLegs() ? "are" : "is";
 		Text.Add("You pull and wriggle and squirm, trying your best to fight it off as Nadir-Ma’s enchanted linen coils around you, but it’s no use. Your arms are pulled behind your back and knotted together, incapable of exerting any leverage. Bandages twine themselves over your [breasts] and [belly], forming bondage patterns that hold the whole mess together, even as your [legs] [lisAre] made similarly useless.", parse);
 		Text.NL();
 		Text.Add("For added insult, a final roll of cloth loops its way around your face, sealing your mouth shut and cutting off any attempts you might make to speak. When it’s all done, you can still wriggle feebly, but that is the extent of your options. Nadir-Ma has you right where she wants you.", parse);
@@ -3056,16 +3103,16 @@ HalloweenScenes.NadirMaBadend = function() {
 	
 	Text.Add("You wouldn’t call your position painful, but it’s not comfortable, either. You are flat on your chest and knees, your [butt] thrust up into the air for all the world to see. And you have a pretty good idea of what Nadir-Ma has in mind for you, with this pose...", parse);
 	Text.NL();
-	parse["gen"] = player.FirstVag() ? parse["vag"] : "taint";
+	parse.gen = player.FirstVag() ? parse.vag : "taint";
 	Text.Add("<i>“Now that’s a pretty sight. I wonder where I should start...”</i> She steps over you, grinding her rock-hard member against your [gen]. <i>“It’s been so long. Maybe I should just let loose and ravage you until you’re nothing more than a used cum-bucket? Or should I savor this moment and fuck you so thoroughly that you’ll have my cock burned into your mind for eternity...”</i>", parse);
 	Text.NL();
 	Text.Add("Even as she muses, she continues to idly grind her hips against yours. You can feel the warmth of her throbbing maleness as it slides against your most intimate parts, so close you’d swear you can feel her heartbeat. It brushes you tantalizingly, almost playfully, smearing a gloss of musky pre-cum over your loins with its passage.", parse);
 	Text.NL();
 	let gen = "";
-	if(player.FirstCock()) gen += "your [cocks] starting to stiffen as the blood rushes to [itThem]";
-	if(player.FirstCock() && player.FirstVag()) gen += " and ";
-	if(player.FirstVag()) gen += "your [vag] starting to dampen, wrinkling in anticipation as her glans brushes along your folds";
-	parse["gen"] = Text.Parse(gen, parse);
+	if(player.FirstCock()) { gen += "your [cocks] starting to stiffen as the blood rushes to [itThem]"; }
+	if(player.FirstCock() && player.FirstVag()) { gen += " and "; }
+	if(player.FirstVag()) { gen += "your [vag] starting to dampen, wrinkling in anticipation as her glans brushes along your folds"; }
+	parse.gen = Text.Parse(gen, parse);
 	Text.Add("Despite everything else about the situation, you can’t help yourself but respond to the doberherm’s treatment. You can feel [gen].", parse);
 	Text.NL();
 	Text.Add("Nadir-Ma laughs out loud when she feels the telltale signs of your arousal. <i>“I knew it! A Goddess always knows! You’re enjoying this!”</i> she accuses.", parse);
@@ -3112,7 +3159,7 @@ HalloweenScenes.NadirMaBadend = function() {
 		Text.Add("You can feel your cheeks burn as you realize that, despite everything, this is actually feeling pretty good - it’s turning you on to have this... this... woman, licking at your asshole.", parse);
 	}
 	else {
-		parse["guygirl"] = player.mfTrue("guy", "girl");
+		parse.guygirl = player.mfTrue("guy", "girl");
 		Text.Add("You moan appreciatively through your gag as Nadir-Ma’s tongue glides across your ass crack. She may have her flaws, but she definitely knows how to make a [guygirl] feel <i>good</i>. You almost wish you weren’t gagged just so you could tell her what a good job she’s doing; she knows her way around an asshole!", parse);
 		Text.NL();
 		Text.Add("Nadir-Ma seems to understand what you’re thinking. Her tongue dances across your taint, caressing you as she slowly spirals her way towards your pucker. Mischievously, you clench yourself shut; not too tight, just enough that she has to work in order to wriggle her way in.", parse);
@@ -3172,18 +3219,22 @@ HalloweenScenes.NadirMaBadend = function() {
 	Text.NL();
 	Text.Add("<i>“We’re just getting warmed up, my bitch. I figured you could use a snack after last round, and I could use some cleaning up, so get to work!”</i> she orders, slapping your face with her half-erect cock and letting the cum-soaked length rest on your cheek.", parse);
 	Text.NL();
-	if(player.SubDom() > 0)
+	if(player.SubDom() > 0) {
 		Text.Add("Well and truly broken at this point, the thought of resistance doesn’t even cross your mind. Instead, you meekly open your mouth and twist your face slightly, gently drawing her cock between your lips.", parse);
-	else
+	}
+	else {
 		Text.Add("You need no further instruction, already opening your mouth and drawing her tasty treat inside, happy for a chance to really taste her dick.", parse);
+	}
 	Text.NL();
 	Text.Add("<i>“And if I feel teeth, you’d better be ready for some <b>hard</b> punishment, the likes only a Goddess could give.”</i>", parse);
 	Text.NL();
-	parse["boygirl"] = player.mfTrue("boy", "girl");
-	if(player.SubDom() > 0)
+	parse.boygirl = player.mfTrue("boy", "girl");
+	if(player.SubDom() > 0) {
 		Text.Add("A fearful tremor wracks your body; no more, please, no more. You keep your eyes downcast, trying to look as docile and obedient as you can.", parse);
-	else
+	}
+	else {
 		Text.Add("If you weren’t distracted by the tasty treat in your mouth, you’d probably snort derisively. As if you would do something like that! You’re a <b>good</b> [boygirl]!", parse);
+	}
 	Text.NL();
 	Text.Add("The taste of her - thick and musky, with a just a little smokiness that you try not to think too hard about - fills your mouth. Gently, you suckle at her cock like a baby at the teat, your [tongueTip] occasionally flicking against her pointy tip, but content to leave the bulk of the work to your pulsing lips and cheeks. You can feel her starting to throb against your tongue, slowly growing harder and harder as you work.", parse);
 	Text.NL();
@@ -3261,35 +3312,41 @@ HalloweenScenes.NadirMaBadend = function() {
 	Text.NL();
 	Text.Add("<i>“Rejoice, bitch. It’s not everyday a lowly mortal is invited to join with a Goddess.”</i> Nadir-Ma motions for her bandages to release you from the table, and she hoists you into the air and onto her lap, sitting down on the table that held you not moments ago.", parse);
 	Text.NL();
-	if(player.SubDom() > 0)
+	if(player.SubDom() > 0) {
 		Text.Add("She hasn’t broken your spirit so badly that you’re just going to sit here and take this! You try to make a move, to break free somehow, but disoriented, exhausted and weighed down by cum, you haven’t a chance of getting out of her arms.", parse);
-	else
+	}
+	else {
 		Text.Add("You croon in bliss, happily snuggling into your Goddess’s lap. You’ve always wanted someone stronger to take care of you, and what greater care and comfort could there be than to be of one flesh with your master forever?", parse);
+	}
 	Text.NL();
-	parse["own"] = player.HasLegs() ? "own" : parse["legs"];
+	parse.own = player.HasLegs() ? "own" : parse.legs;
 	Text.Add("She hugs you from behind, grabbing your hands in hers and willing her bandages to wrap around your arms, binding them with hers. Her legs do the same to your [own], and the bindings covering her chest repeat the motion over your [breasts]. In no time, you’re tied to her, fully aware of the heat emanating from her body as she presses her [breasts] to your back.", parse);
 	Text.NL();
-	if(player.SubDom() > 0)
+	if(player.SubDom() > 0) {
 		Text.Add("Shouting in protest, you try to pull free of her bonds, to escape her amorous clutches.", parse);
-	else
+	}
+	else {
 		Text.Add("Moaning in desire, you snuggle up to her, anxious to become one.", parse);
+	}
 	Text.Add(" The bindings around your frame grow tighter, ensuring you cannot get so much as an inch away from Nadir-Ma. You can feel her body under you changing... softening. You try to think of a simile, and the best you can come up with is sitting in a couch of half-melted butter, especially as you remember the ooze-like mass the doberherm was when she originally appeared.", parse);
 	Text.NL();
 	Text.Add("Nadir-Ma’s cock plunges into your ass with preternatural flexibility, sliding into your depths with an ease that has less to do than you’d think with how well she stretched you out before. Looking down, you can see the ooze-like substances of her limbs starting to creep across your [skin], feel its tight, wet warmth as it envelops you, absorbs you...", parse);
 	Text.NL();
 	Text.Add("<i>“Relax, bitch. There’s nothing you can do about it now; in fact, there was never anything you could’ve done at all. Your fate was sealed the moment you thought it wise to say ‘no’ to the great Nadir-Ma. Besides… you’ll love it! I promise you.”</i>", parse);
 	Text.NL();
-	if(player.SubDom() > 0)
+	if(player.SubDom() > 0) {
 		Text.Add("You very much doubt that! But it’s not as if you can change your fate now... all you can do is hope that there’s some truth in what she says.", parse);
-	else
+	}
+	else {
 		Text.Add("You sigh lustily, impatient for this to be over already. Just being this connected feels <i>sooo</i> good; you can’t wait to truly be made one with her.", parse);
+	}
 	Text.NL();
 	let wings = player.HasWings();
-	parse["wings"] = wings ? wings.Short() : "";
-	parse["w"] = wings ? Text.Parse(", coating over your [wings] in the process", parse) : "";
+	parse.wings = wings ? wings.Short() : "";
+	parse.w = wings ? Text.Parse(", coating over your [wings] in the process", parse) : "";
 	Text.Add("Inexorable as the tide, Nadir-Ma’s amorphous flesh creeps around you. You can feel the lush softness of her breasts as they push against your back, slowly squishing against your spine before seeping around your shoulders[w]. Her cock throbs inside of you as you sink further and further into her lap, her balls joining her dick in your belly as her thighs envelop your own.", parse);
 	Text.NL();
-	parse["h"] = player.HasHair() ? "through your hair" : "over your baldness";
+	parse.h = player.HasHair() ? "through your hair" : "over your baldness";
 	Text.Add("Soon, all that remains of you is your face, and even that is being pulled into her neck. Her warmth is all-encompassing, creeping with deceptive sluggishness to devour this last lingering fragment of you. Streamers of glutinous slime ooze [h] and drip down over your [eyes], blinding you. You can feel it melting over and into your [ears], covering your nose, seeping over your chin. Your mouth takes one final gasp for air... and then it too is gone.", parse);
 	Text.NL();
 	Text.Add("You know nothing but darkness...", parse);
@@ -3407,7 +3464,7 @@ HalloweenScenes.NadirMaBadend = function() {
 		Text.NL();
 		Text.Add("Nadir-Ma chuckles. <i>“Yes, yes. I’ll let you handle that, sis. Switch with me.”</i>", parse);
 		Text.NL();
-		parse["monstrous"] = werewolf ? " monstrous" : "";
+		parse.monstrous = werewolf ? " monstrous" : "";
 		Text.Add("Darkness takes you as Nadir-Ma covers her eyes. A strange tingling sensation runs through your borrowed senses; somehow, you can <i>feel</i> Nadir-Ma’s[monstrous] cock fading away and being absorbed into her body, leaving her all-female once more.", parse);
 		Text.NL();
 		Text.Add("Nadir-Ma’s eyes open, and you feel... different. You don’t have the words to describe it, but somehow, you know that “the sister” has taken over, and that Nadir-Ma - at least, the Nadir-Ma who brought you inside - has retreated into the limbo in which you dwell. You can feel her... a bit <i>too</i> well, actually. It’s like she’s surrounding you, wrapping you in silken coils, embracing your every inch...", parse);
@@ -3469,7 +3526,7 @@ HalloweenScenes.HarthonFirst = function() {
 	Text.Add("You take another step backwards - only to feel something press against your back. With a start, you leap forward, spinning in place to try and see who - or what - you bumped into. The wind howls around you again, whipping the mist into a frenzy before vanishing as swiftly as it came - and taking the vapors with it. Now you can see again - and see who it was you bumped into.", parse);
 	Text.NL();
 	if(terry.Recruited()) {
-		parse["ch"] = terry.Changed() ? " At least, he’s the spitting image of Terry’s original form." : "";
+		parse.ch = terry.Changed() ? " At least, he’s the spitting image of Terry’s original form." : "";
 		Text.Add("It’s... Terry?[ch] The somewhat effeminate golden-furred fox is dressed in a dapper three-piece suit, offset by a long, elegant cape; black on the exterior, but with flashes of a sanguine interior. His upper canines have elongated; even when his mouth is closed, you can see them framing the sides of his muzzle.", parse);
 	}
 	else {
@@ -3485,7 +3542,7 @@ HalloweenScenes.HarthonFirst = function() {
 	Text.Add("All of a sudden, the fox’s eyes begin to glow with a deep, bloody red light. It strikes your brain with all the subtlety of a brick, slamming into your eyes and making you stagger with the sheer force of will that you feel emanating from the vulpine monster. The world flickers at the edge of your vision, your thoughts begin to feel hazy…", parse);
 	Text.Flush();
 	
-	//[Fight!] [Submit!] [Flee!] [Use garlic!]
+	// [Fight!] [Submit!] [Flee!] [Use garlic!]
 	let options = new Array();
 	options.push({ nameStr : "Fight!",
 		tooltip : "You aren’t going to let some crazy fox make a slave out of you!",
@@ -3524,11 +3581,11 @@ HalloweenScenes.HarthonFirst = function() {
 		tooltip : "Time to run for it!",
 		func : function() {
 			Text.Clear();
-			parse["w"] = werewolf ? ", dropping to all fours for an extra burst of speed" : "";
+			parse.w = werewolf ? ", dropping to all fours for an extra burst of speed" : "";
 			Text.Add("With a shake of your head, you spin around and bolt for the stairway out of this forsaken place[w].", parse);
 			Text.NL();
 			
-			//#code note: There’s a random chance you’ll fail. Being a werewolf boosts your chance of escaping tho.
+			// #code note: There’s a random chance you’ll fail. Being a werewolf boosts your chance of escaping tho.
 			let success = Math.random() < (werewolf ? 0.75 : 0.5);
 			
 			if(success) {
@@ -3610,7 +3667,7 @@ HalloweenScenes.HarthonDefeatedPrompt = function() {
 	parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
 	parse = Halloween.CockParser(parse);
 	
-	//[Sex][Holy Water][Leave]
+	// [Sex][Holy Water][Leave]
 	let options = new Array();
 	options.push({ nameStr : "Sex",
 		tooltip : "How could you possibly turn this over? Let’s see if this vampire is the sex god they like to say they are...",
@@ -3619,10 +3676,12 @@ HalloweenScenes.HarthonDefeatedPrompt = function() {
 			
 			HalloweenScenes.HW.harthon |= HalloweenFlags.Harthon.Thrall;
 			
-			if(player.FirstCock())
+			if(player.FirstCock()) {
 				Text.Add("You recall for a moment that the Elder gave you a “stake” to use on the creatures of the night... then you dismiss it. Looking at the lustful [foxvixen] here, you’d say you have all the “stake” you need at your crotch.", parse);
-			else
+			}
+			else {
 				Text.Add("Luckily for Harthon that the Elder gave you just the sort of stake [heshe] needs for this. You grab the dildo and carefully fix it into place.", parse);
+			}
 			Text.NL();
 			Text.Add("Harthon can only look up at you and mewl weakly as you approach. ", parse);
 			if(werewolf) {
@@ -3633,24 +3692,26 @@ HalloweenScenes.HarthonDefeatedPrompt = function() {
 				}
 			}
 			else {
-				parse["v"] = femHarthon ? " and newly formed cunt" : "";
+				parse.v = femHarthon ? " and newly formed cunt" : "";
 				Text.Add("Getting Harthon’s clothes off without disturbing the garlic around [hisher] neck isn’t easy, but fortunately for you, those buttons down [hisher] top come in handy. The once-proud vulpine vampire writhes shamelessly before you, deliberately flaunting [hisher] tight little ass[v].", parse);
 				Text.NL();
 				Text.Add("This is going to be fun...", parse);
 			}
 			Text.Flush();
 			
-			//[Ass] [Pussy]
+			// [Ass] [Pussy]
 			let options = new Array();
 			if(femHarthon) {
 				options.push({ nameStr : "Pussy",
 					tooltip : "How could you resist breaking in her new pussy?",
 					func : function() {
 						Text.Clear();
-						if(werewolf)
+						if(werewolf) {
 							Text.Add("Fortunately, you don’t need to worry about undressing in turn. Your fur keeps you modest when you need it, but doesn’t get in the way when you don’t.", parse);
-						else
+						}
+						else {
 							Text.Add("You quickly shed your clothes, casting them next to Harthon’s own, feeling almost as eager for this as the vampiress herself.", parse);
+						}
 						Text.NL();
 						Text.Add("Reaching down, you pull the supine vampire into your arms, Harthon promptly wrapping her arms around you for support. You carry the vixen to the most comfortable spot you can see and then settle down, draping her across your lap.", parse);
 						Text.NL();
@@ -3658,10 +3719,12 @@ HalloweenScenes.HarthonDefeatedPrompt = function() {
 						Text.NL();
 						Text.Add("Hush, now; you’ll give her what she needs. Your hands close on the vulpine’s perky rear, groping the luscious buttocks as you manhandle her into position.", parse);
 						Text.NL();
-						if(player.FirstCock())
+						if(player.FirstCock()) {
 							Text.Add("You can feel the heat emanating from her puffy netherlips, a faint drizzle of feminine juices already dribbling over your [cockTip] as it slides teasingly against her cunt. She feels soft and wet as you slowly guide yourself inside of her, until you can feel yourself pressing against her hymen.", parse);
-						else
+						}
+						else {
 							Text.Add("As you sweep your strap-on against the vixen’s new cunt, she moans hungrily and grinds her hips against you, helping you to align the tip of the stake with her hole. Carefully, you start to push inside, trying to avoid popping her cherry too roughly.", parse);
+						}
 						Text.NL();
 						Text.Add("<i>“Go on, I need this,”</i> she pleads with a pout.", parse);
 						Text.NL();
@@ -3694,10 +3757,12 @@ HalloweenScenes.HarthonDefeatedPrompt = function() {
 					Text.NL();
 					Text.Add("Hush, now; you’ll give [himher] what [heshe] needs. Your hands close on the vulpine’s perky rear, groping the luscious buttocks as you manhandle [himher] into position.", parse);
 					Text.NL();
-					if(femHarthon)
+					if(femHarthon) {
 						Text.Add("The newly-made vixen actually whimpers in protest as your cock drags across the puffy, leaking folds of her new cunt and slides between her thighs to about her asshole. As horny as she is, though, it seems she’s well past the point of caring where she gets fucked, so long as she is.", parse);
-					else
+					}
+					else {
 						Text.Add("Lost in his lust, the fox can’t even look disgruntled as your [cockTip] slides along his taint to press itself against his virgin hole. Indeed, he actually seems to get even harder at his imminent buggering, pre-cum dripping onto your belly as his cock throbs in anticipation.", parse);
+					}
 					Text.NL();
 					Text.Add("There’s no need to delay; [heshe]’s clearly more than ready for this, and so you slowly lower the [foxvixen] onto your [cock].", parse);
 					Text.NL();
@@ -3705,7 +3770,7 @@ HalloweenScenes.HarthonDefeatedPrompt = function() {
 					Text.NL();
 					Text.Add("Pleasantly surprised at this turn of events, you still don’t let it go to your head. You’re going to thoroughly enjoy spearing this former ‘master of the night’ up [hisher] asshole, but there’s no need to be a monster about it.", parse);
 					Text.NL();
-					parse["mc"] = player.NumCocks() > 1 ? Text.Parse(", even as its ignored sibling[s2] poke[notS2] into [hisher] buttock cleavage", parse) : "";
+					parse.mc = player.NumCocks() > 1 ? Text.Parse(", even as its ignored sibling[s2] poke[notS2] into [hisher] buttock cleavage", parse) : "";
 					Text.Add("With this thought in mind, you keep your pace as slow and gentle as the two of you can tolerate. You continue, coaxing inch after inch inside until [hisher] plush butt is nestling gently in your lap, your cock buried to the very hilt[mc].", parse);
 					Text.NL();
 					Text.Add("As you penetrate the vampire’s tender backdoor, something weird happens. For a moment, your vision goes dark and you feel something flow over your body. Initially, you feel dizzy, but right afterward you feel a new surge of energy. It’s as if a new kind of power has taken hold of you, and becomes a part of you. Experimentally, you try focusing it on the [foxvixen] currently riding your [cock].", parse);
@@ -3783,16 +3848,19 @@ HalloweenScenes.HarthonPitchAnal = function(parse : any) {
 	let p1cock = player.BiggestCock();
 	let femHarthon = HalloweenScenes.HW.harthon & HalloweenFlags.Harthon.Feminized;
 	
-	if(p1cock)
+	if(p1cock) {
 		Text.Add("Your senses are awash in bliss as Terry’s warmth envelops you. [HisHer] hot tunnel squeezes your [cock] in a tight embrace, inundating every inch of your shaft without mercy. Each beat of [hisher] heart makes [hisher] asshole flex, squeezing you gently with a tightness that is just shy of being painful. However, as [heshe] adjusts, [heshe] loosens up just enough to ensure that there is only pleasure at being wrapped inside of [himher].", parse);
-	else
+	}
+	else {
 		Text.Add("Naturally, you don’t get much out of being buried inside of Terry’s tailhole. Your toy is quite something, but it’s not <i>that</i> realistic.", parse);
+	}
 	Text.NL();
 	Text.Add("Of course, the rest of your senses have plenty to enjoy as well. [HisHer] warm, fuzzy butt cheeks are settled heavily in your lap, [hisher] bushy tail gently brushing your [legs] as it shifts. As [heshe] pants softly, quietly whimpering as [heshe] attempts to adjust to being filled by your cock, you can hear everything that escapes [hisher] mouth.", parse);
 	Text.NL();
 	Text.Add("You drink in the sight of the [foxvixen]’s face, brow furrowed as [heshe] tries to comprehend the things that you’re making [himher] feel, reveling in the sense of power that it brings you. ", parse);
-	if(femHarthon)
+	if(femHarthon) {
 		Text.Add("Of course, those beautiful big boobs bouncing with each move she makes are quite an enjoyable sight in their own right. ", parse);
+	}
 	Text.Add("Still, as pleasant as this is, you think it’d be more fun if Terry would just relax a little...", parse);
 	Text.NL();
 	Text.Add("Smiling sweetly, you reach up and caress the [foxvixen]’s chin, gently stroking [hisher] muzzle before drawing [himher] down into a kiss. [HisHer] lips are velvety soft and deliciously warm on your own, Terry melting meekly into your embrace.", parse);
@@ -3801,7 +3869,7 @@ HalloweenScenes.HarthonPitchAnal = function(parse : any) {
 	Text.NL();
 	Text.Add("Terry nods in response, clenching [hisher] butt instinctively to grip your [cock].", parse);
 	Text.NL();
-	parse["boygirl"] = femHarthon ? "girl" : "boy";
+	parse.boygirl = femHarthon ? "girl" : "boy";
 	Text.Add("Good [boygirl]. Now, why doesn’t [heshe] start moving for you? You’ll give [himher] some tips where [heshe] needs them, but you want to see just what [heshe] can do when [heshe] puts [hisher] mind to it.", parse);
 	Text.NL();
 	Text.Add("[HeShe] doesn’t seem too thrilled by the idea, but doesn’t protest. <i>“Yes, [mastermistress],”</i> [heshe] says as [heshe] begin lifting [himher]self.", parse);
@@ -3815,27 +3883,31 @@ HalloweenScenes.HarthonPitchAnal = function(parse : any) {
 	Text.Add("That’s the way; take it easy at first, let [hisher] tunnel get used to being stretched like this. Such a good thrall...", parse);
 	Text.NL();
 	Text.Add("Terry mewls softly at your words, ", parse);
-	if(femHarthon)
+	if(femHarthon) {
 		Text.Add("a bead of wetness glinting as it slides between her clenched netherlips,", parse);
-	else
+	}
+	else {
 		Text.Add("his cock gently poking you as it slips from his sheath,", parse);
+	}
 	Text.Add(" slowly pumping [hisher] hips as [heshe] rises and falls in your lap. Inch by inch, [heshe] takes your [cock], and then [heshe] gives it back. Slowly, [hisher] thrusts grow faster as [hisher] confidence builds, eyes screwed up tightly in concentration and pleasure.", parse);
 	Text.NL();
 	Text.Add("That’s your [boygirl]; still, perhaps a little assistance is in order? Just something to boost [hisher] performance some.", parse);
 	Text.NL();
-	parse["c"] = p1cock ? Text.Parse(", and biting back a shudder as the [foxvixen]’s ass gives your cock a good squeeze", parse) : "";
+	parse.c = p1cock ? Text.Parse(", and biting back a shudder as the [foxvixen]’s ass gives your cock a good squeeze", parse) : "";
 	Text.Add("Closing your eyes[c], you start to concentrate, reaching down to the power you stole from the former king of the night. It stirs eagerly in the depths of your soul, and you cast strands of power out over your vulpine lover, ensnaring [hisher] luscious butt cheeks in a web of magic.", parse);
 	Text.NL();
 	Text.Add("Terry’s eyes widen and [heshe] gasps. [HeShe] looks at you, recognizing [hisher] former power now gripping [himher] so tightly.", parse);
 	Text.NL();
 	Text.Add("You just smile back, warm and comforting, even as you weave your will into Terry’s flesh. [HeShe]’s already nice and tight, but there’s just a few little tweaks you can make here... some lube would be nice...", parse);
 	Text.NL();
-	parse["c"] = p1cock ? Text.Parse(" soaking into your [cock] and", parse) : "";
+	parse.c = p1cock ? Text.Parse(" soaking into your [cock] and", parse) : "";
 	Text.Add("The vampiric [foxvixen] moans as a ripple of pleasure runs through [hisher] anus and spreads throughout [hisher] body. Through [hisher] clenching muscles, you can feel liquid warmth[c] seeping out around [hisher] spread entrance. The scent of female in heat permeates the air, ", parse);
-	if(femHarthon)
+	if(femHarthon) {
 		Text.Add("even stronger than her natural scent.", parse);
-	else
+	}
+	else {
 		Text.Add("completely overpowering Terry’s male musk.", parse);
+	}
 	Text.Add(" You give a few experimental thrusts and find that you can move much better now, the satisfying squelch of flesh on moist flesh only adds to your lust.", parse);
 	Text.NL();
 	Text.Add("<i>“M-my ass, what did yo- oh!”</i>", parse);
@@ -3849,10 +3921,12 @@ HalloweenScenes.HarthonPitchAnal = function(parse : any) {
 	Text.Add("<i>“Control?”</i>", parse);
 	Text.NL();
 	Text.Add("Absently, you nod your head, already stirring Terry’s former power and directing its flow back into [hisher] butt. ", parse);
-	if(p1cock)
+	if(p1cock) {
 		Text.Add("You can <b>feel</b> the shudder that races through [himher], a ripple that spreads through every inch of [hisher] clenched asshole like a wave across the shore. Terry’s ass squeezes and flexes with impossible acuity, molding to every ridge, crease and wrinkle of your [cock].", parse);
-	else
+	}
+	else {
 		Text.Add("Despite the lack of connection to your cock, you can practically feel the way Terry’s ass clenches down on it, almost sucking it free of its bindings as it molds itself around the faux-phallus with impossible flexibility.", parse);
+	}
 	Text.NL();
 	Text.Add("<i>“Hng! Ah! This… Ahn! H-how many more changes are you going to make bef - ah! - before you’re happy!?”</i>", parse);
 	Text.NL();
@@ -3864,12 +3938,14 @@ HalloweenScenes.HarthonPitchAnal = function(parse : any) {
 	Text.NL();
 	Text.Add("<i>“Well… okay, [mastermistress].”</i>", parse);
 	Text.NL();
-	parse["fake"] = p1cock ? "" : " fake";
+	parse.fake = p1cock ? "" : " fake";
 	Text.Add("With closed eyes, the [foxvixen] starts to pump away on your shaft again; slowly, at first, but steadily building up in speed and enthusiasm. [HisHer] jaws fall open soundlessly as [heshe] clenches and releases, milking your[fake] member with rapidly growing expertise. From the way ", parse);
-	if(femHarthon)
+	if(femHarthon) {
 		Text.Add("her netherlips are steadily drooling female lubricant between their puckered labia, glazed with sexual juices until they glitter,", parse);
-	else
+	}
+	else {
 		Text.Add("his cock is bouncing in his lap, dribbling pre-cum onto your belly with each flick of ample foxhood,", parse);
+	}
 	Text.Add(" you can tell that [heshe] finds [hisher] new ass a lot more fun to fuck with.", parse);
 	Text.NL();
 	if(p1cock) {
@@ -3904,10 +3980,12 @@ HalloweenScenes.HarthonPitchAnal = function(parse : any) {
 		Text.Add("His aching cock explodes into a fountain of cum, great ropes of semen erupting from its tip. The off-white jets of thick, sticky fox-seed sprays freely; some spatter across the once-proud vampire’s belly, but the bulk of it hits you.", parse);
 		Text.NL();
 		Text.Add("Liquid heat washes across you as Terry’s cum paints your [breasts], oozing freely down your body as it ", parse);
-		if(player.HasFur())
+		if(player.HasFur()) {
 			Text.Add("mats your fur into a thick tangle of sex-scented knots.", parse);
-		else
+		}
+		else {
 			Text.Add("paints intricate patterns across your [skin].", parse);
+		}
 		Text.NL();
 		Text.Add("Thoroughly drenched with your lover’s cum, the scent of his ecstasy fills your nostrils, drowning your brain in a boiling fog of sex-scented mist.", parse);
 		
@@ -3916,7 +3994,7 @@ HalloweenScenes.HarthonPitchAnal = function(parse : any) {
 	Text.NL();
 	Text.Add("With such a sight before you, the sounds of Terry’s bliss in your ears, the scent of [himher] filling your nose, it’s no wonder that your self-control fails. ", parse);
 	if(p1cock) {
-		parse["c"] = player.NumCocks() > 1 ? Text.Parse(" even as your other neglected cock[s2] spray[notS2] seed onto [hisher] generous ass", parse) : "";
+		parse.c = player.NumCocks() > 1 ? Text.Parse(" even as your other neglected cock[s2] spray[notS2] seed onto [hisher] generous ass", parse) : "";
 		Text.Add("Your [cock] explodes inside of [himher], thick jets rushing into [hisher] overstuffed colon[c].", parse);
 		Text.NL();
 		Text.Add("Clinging to your lover for support, your world fades away to the feel of [himher] wrapped around your dick, greedily milking you dry and ensuring that [heshe] swallows up every last drop you have to give [himher]. And you are feeling in quite a generous mood...", parse);
@@ -3953,10 +4031,12 @@ HalloweenScenes.HarthonPitchAnal = function(parse : any) {
 		Text.Add(" He sighs once he sees that you’re completely plastered with his seed, but then he steels himself and crawls over you.", parse);
 		Text.NL();
 		Text.Add("His first target is your [breasts], he starts by softly lapping your nipples before moving to the area around. ", parse);
-		if(player.FirstBreastRow().Size() >= 2)
+		if(player.FirstBreastRow().Size() >= 2) {
 			Text.Add("From your vantage point, you can see the fox has a smile on his face; it seems he enjoys licking your breasts, not that you’re complaining. Terry’s dexterous tongue finds and cleans every bit of his spent seed easily enough, though you’re not sure your teats needed a second pass.", parse);
-		else
+		}
+		else {
 			Text.Add("The fox doesn’t take too long to clean up every little trace of his cum, his dexterous tongue easily laps everything in a few passes.", parse);
+		}
 		Text.NL();
 		Text.Add("Next, he moves to your belly, gently licking the area around your navel before sticking his tongue into your belly-button. It tickles, and he seems to enjoy your reaction, but he doesn’t tease you for long before he gets up and looks at his last task.", parse);
 	}
@@ -3971,10 +4051,12 @@ HalloweenScenes.HarthonPitchAnal = function(parse : any) {
 	Text.NL();
 	Text.Add("Though initially reluctant, Terry eases [himher]self into a nice rhythm in no time.", parse);
 	Text.NL();
-	if(p1cock)
+	if(p1cock) {
 		Text.Add("You can feel the warm wetness of Terry’s mouth gently pulsing around your [cock]; not enough to really get you hard again, but enough to feel good on your sensitive cock. A hint of stiffness creeps back into your maleness, but that’s as far as it goes as the [foxvixen] carefully sucks you clean.", parse);
-	else
+	}
+	else {
 		Text.Add("You watch Terry fellating your toy with a smile; from a once-proud king of the night to this. Quite a fall. But you’re not gauche enough to rub it in Terry’s face; you just enjoy the gentle ego-stroking as [heshe] gulps and slurps [hisher] way back and forth along your fake dick.", parse);
+	}
 	Text.NL();
 	Text.Add("Eventually, you figure Terry’s had enough, and gently tell [himher] that [heshe] can stop now.", parse);
 	Text.NL();
@@ -3983,7 +4065,7 @@ HalloweenScenes.HarthonPitchAnal = function(parse : any) {
 	Text.Add("You purse your lips, feigning contemplation as you study the glistening [cock] in your lap, admiring the sheen of light on its newly-sucked length. You hold your peace for a few moments, giving Terry the chance to sweat a little, and then smile contentedly as you announce your satisfaction. If [heshe] wants to, [heshe] can leave now.", parse);
 	Text.NL();
 	let pregStage = HalloweenScenes.HW.harthonPreg;
-	parse["p"] = pregStage >= 5 ? " and your daughter" : "";
+	parse.p = pregStage >= 5 ? " and your daughter" : "";
 	Text.Add("<i>“Yes, [mastermistress],”</i> Terry says, bowing slightly before moving to pick up [hisher] things[p].", parse);
 	Text.NL();
 	Text.Add("Before the limping [foxvixen] can get out of reach, you playfully pet [hisher] delicious, cum-dribbling ass. Mischievously, you muse aloud that you hate to see [himher] go, but you <b>love</b> to watch [himher] leave!", parse);
@@ -3992,8 +4074,8 @@ HalloweenScenes.HarthonPitchAnal = function(parse : any) {
 	Text.NL();
 	
 	let outside = party.location != Halloween.Loc.Mausoleum;
-	parse["outside"] = outside ? "into the bushes" : "outside";
-	parse["outside2"] = outside ? " above you" : "";
+	parse.outside = outside ? "into the bushes" : "outside";
+	parse.outside2 = outside ? " above you" : "";
 	Text.Add("You smile and brush it away, wishing your vulpine lover well. Terry nods softly and resumes what [heshe] was doing before you interrupted [himher]. Suitably equipped, [heshe] steps [outside] to transform into a bat. Once the flying fox has wended [hisher] way into the eternal night[outside2], you pick yourself up, dust yourself off, and set off on your own.", parse);
 	Text.Flush();
 	Gui.NextPrompt();
@@ -4005,10 +4087,11 @@ HalloweenScenes.HarthonPitchVag = function(parse : any) {
 	let p1cock = player.BiggestCock();
 	let werewolf = HalloweenScenes.HW.Werewolf();
 	
-	//Impregnate
+	// Impregnate
 	if(p1cock) {
-		if(HalloweenScenes.HW.harthonPreg < 1)
+		if(HalloweenScenes.HW.harthonPreg < 1) {
 			HalloweenScenes.HW.harthonPreg = 1;
+		}
 	}
 	
 	Text.Add("Terry takes a small moment to feel your [cock] deeply embedded inside her, then begins moving her hips, up and down, grind a little bit, then repeat. She keeps a steady pace, moaning each time your rod scrapes her vaginal walls.", parse);
@@ -4017,26 +4100,30 @@ HalloweenScenes.HarthonPitchVag = function(parse : any) {
 	Text.NL();
 	Text.Add("Your arms tighten around Terry’s back, delightfully squishing her plump D-cups against your own [breasts]. You can feel her nipples, stiff with arousal, rubbing against your own [nips] with each breath either of you take and sending tingles racing across your [skin]. A soft growl of pleasure bubbles from your lips before you hungrily lean in and kiss your beloved thrall.", parse);
 	Text.NL();
-	parse["k"] = p1cock && p1cock.Knot() ? ", insistently pushing against your rapidly growing knot" : "";
+	parse.k = p1cock && p1cock.Knot() ? ", insistently pushing against your rapidly growing knot" : "";
 	Text.Add("Terry replies in kind, kissing you back as she grinds her hips against your own[k]. After a short while, she breaks the liplock, panting for air as she clings to you.", parse);
 	Text.NL();
 	Text.Add("Oh, she likes that, doesn’t she? She likes being stuffed so full of cock, ", parse);
-	if(p1cock)
+	if(p1cock) {
 		Text.Add("milking you dry until her belly grows big and round,", parse);
-	else
+	}
+	else {
 		Text.Add("your fake toy stretching her out like the slut she is,", parse);
+	}
 	Text.Add(" doesn’t she? Well, you’re happy to give her everything she wants, everything she <b>needs</b>!", parse);
 	Text.NL();
 	Text.Add("Growling like ", parse);
-	if(werewolf)
+	if(werewolf) {
 		Text.Add("the beast that you are,", parse);
-	else
+	}
+	else {
 		Text.Add("a wild animal,", parse);
+	}
 	Text.Add(" you squeeze the vixen’s plush ass for all your worth and start to really pound her dripping cunt. Terry mewls and squirms, bucking at the wonderful sensations roaring through her hips, surging up her spine to melt her brain into a mush of pure pleasure.", parse);
 	Text.NL();
 	if(p1cock) {
 		if(p1cock.Knot()) {
-			parse["cockRace"] = p1cock.race.qShort();
+			parse.cockRace = p1cock.race.qShort();
 			Text.Add("You can feel the blood rushing through your knot, making it swell with such urgency you’d swear you can hear your own flesh creaking. The burning need to bury it into Terry’s snatch fills you, building on the tingles racing down your [cockRace] shaft.", parse);
 			Text.NL();
 			Text.Add("Unable to consider backing down, you force your cock against the vixen’s tight, sodden snatch with all the strength you can muster. Her whines of pain-tinged pleasure fall on deaf ears, for you are lost to your urges. You <i>have</i> to get it inside - you <b>will</b> get it inside!", parse);
@@ -4048,8 +4135,8 @@ HalloweenScenes.HarthonPitchVag = function(parse : any) {
 			Text.Add("Terry’s breath gusts across your [skin], gently tickling you, but she makes no motion to pull away from you. Looks like she’s too worn out to do anything other but lie in your arms and recover. Not that you’re complaining; you’re pretty spent yourself...", parse);
 		}
 		else {
-			parse["mc"] = player.NumCocks() > 1 ? Text.Parse(", its neglected sibling[s2] responding in kind", parse) : "";
-			parse["c"] = p1cock.Volume() > 400 ? ", her belly visibly bulging at the sheer size of your invading dick," : "";
+			parse.mc = player.NumCocks() > 1 ? Text.Parse(", its neglected sibling[s2] responding in kind", parse) : "";
+			parse.c = p1cock.Volume() > 400 ? ", her belly visibly bulging at the sheer size of your invading dick," : "";
 			Text.Add("You can feel the throbbing coming from your [cock][mc], and you know that you can’t hold it off much longer. Growling softly to yourself, you thrust yourself as deeply into Terry’s warm, dripping snatch as you possibly can[c] and allow yourself to erupt inside of her.", parse);
 			Text.NL();
 			Text.Add("Terry bucks and heaves, arching her back as the sensation of your hot jism splashing around her inner walls sparks her own climax. Her high-pitched howl of pleasure echoes in your ears as her juices gush over your lap, mingling with the seed flowing between her stretched netherlips.", parse);
@@ -4066,7 +4153,7 @@ HalloweenScenes.HarthonPitchVag = function(parse : any) {
 		Text.NL();
 		Text.Add("<i>“M-[mastermistress]!”</i> the vampire vixen cries in-between moans.", parse);
 		Text.NL();
-		parse["wo"] = player.mfTrue("", "wo");
+		parse.wo = player.mfTrue("", "wo");
 		Text.Add("Yes, yes, that’s it! Bucking your hips like a [wo]man possessed, you thrust your [cock] in to the very hilt, grinding against the spots that you know from intimate experience work best. Your heart hammers against your ribcage as you pant harshly, feeling your hunger grow.", parse);
 		Text.NL();
 		Text.Add("<i>“Ahn!”</i> she cries out, draping herself over you as she hugs you as tightly as she can, her small claws digging into your back.", parse);
@@ -4083,10 +4170,10 @@ HalloweenScenes.HarthonPitchVag = function(parse : any) {
 	
 	Gui.NextPrompt(function() {
 		Text.Clear();
-		parse["k"] = p1cock && p1cock.Knot() ? ", and with your knot now-deflated" : "";
+		parse.k = p1cock && p1cock.Knot() ? ", and with your knot now-deflated" : "";
 		Text.Add("Eventually, Terry stirs restlessly in your arms, making a feeble effort to climb from your lap. Feeling recovered yourself[k], you slowly guide her to the ground and pull your [cock] free with a wet slurp.", parse);
 		Text.NL();
-		parse["bloated"] = (pregStage > 0 && pregStage < 5) ? " bloated" : "";
+		parse.bloated = (pregStage > 0 && pregStage < 5) ? " bloated" : "";
 		Text.Add("Hesitantly pushing yourself off the ground, you admire the[bloated] vixen’s supine form and, as best you can, the thick glaze of sexual juices adorning your cock. With great care, you saunter around to Terry’s head, cheerfully noting that it looked like she had quite a lot of fun with that.", parse);
 		Text.NL();
 		Text.Add("Her only reply is to nod weakly.", parse);
@@ -4097,10 +4184,12 @@ HalloweenScenes.HarthonPitchVag = function(parse : any) {
 		Text.NL();
 		Text.Add("Terry’s quick to catch on, and though she doesn’t seem too thrilled by the idea, she picks herself up and settles on her knees, gently grabbing your [cock] and leaning over to begin lapping at it.", parse);
 		Text.NL();
-		if(p1cock)
+		if(p1cock) {
 			Text.Add("Though the touch of her tongue on your overheated flesh is enough to send a shiver running down your spine, you can tell that her heart isn’t in this. She’s obedient enough, but clearly not enjoying this as much as you hoped she would.", parse);
-		else
+		}
+		else {
 			Text.Add("Though she doesn’t hesitate to follow your orders, it’s plain to see that she’s not enjoying herself at all. Her licks are short and perfunctory, not so crass as to blatantly try and get it over and done with, but clearly done without any real care.", parse);
+		}
 		Text.NL();
 		Text.Add("Well, you can’t be having that. A thrall should enjoy servicing her [mastermistress]...", parse);
 		Text.NL();
@@ -4109,8 +4198,9 @@ HalloweenScenes.HarthonPitchVag = function(parse : any) {
 		Text.Add("You can <b>feel</b> her hesitancy melting away, her lust igniting like a roaring inferno that consumes her very being. She wants the juices smeared across your [cock] - she <b>needs</b> them, if she’s going to quench the hunger gnawing at her.", parse);
 		Text.NL();
 		Text.Add("Watching the vixen twitch and shiver, hungrily licking her lips as she stares fixedly at your loins, you allow the power to recede from her.", parse);
-		if(pregStage == 1)
+		if(pregStage == 1) {
 			Text.Add(" Before you leave her, though, something makes you pause for a moment - a strange little spark that seems to be emanating from Terry’s belly. Inquisitively, you let a tendril of power brush against her, and what you find brings a brief smile to your lips. Seems your lovemaking has borne fruit; your seed has taken root inside of the vixen’s womb.", parse);
+		}
 		Text.NL();
 		Text.Add("After your little <i>readjustment,</i> Terry becomes much more enthusiastic, lapping and sucking on your cock like a baby on a teat. She moves her tongue expertly to service the underside of your [cock], moaning in pleasure as she takes you as far as she can.", parse);
 		Text.NL();
@@ -4123,7 +4213,7 @@ HalloweenScenes.HarthonPitchVag = function(parse : any) {
 			Text.Add("Though, really, is there any reason not to let her quench her thirst on your cum? You’re not that pressed for time, are you?", parse);
 			Text.Flush();
 			
-			//[Let her] [Stop her]
+			// [Let her] [Stop her]
 			let options = new Array();
 			options.push({ nameStr : "Let her",
 				tooltip : "Why not let her enjoy herself? Might make her more eager the next time.",
@@ -4142,10 +4232,12 @@ HalloweenScenes.HarthonPitchVag = function(parse : any) {
 					Text.Add("Credit is given where credit is due. You don’t need her for anything else at the moment, so she may leave if she wants.", parse);
 					Text.NL();
 					Text.Add("<i>“Yes, [mastermistress].”</i> She gets up on her feet and grabs her cloak, putting it on. ", parse);
-					if(pregStage >= 5)
+					if(pregStage >= 5) {
 						Text.Add("She takes a moment to grab your daughter and rock the baby in her arms before leaving through the bushes.", parse);
-					else
+					}
+					else {
 						Text.Add("She turns to wave you goodbye and then departs beyond the bushes.", parse);
+					}
 					Text.NL();
 					Text.Add("<i>“Umm… call me again soon, [mastermistress],”</i> she says, before darting away.", parse);
 					Text.Flush();
@@ -4190,7 +4282,7 @@ HalloweenScenes.HarthonPitchVagStop = function(parse : any) {
 	Text.Add("That is <i>enough</i>. She may go now.", parse);
 	Text.NL();
 	let pregStage = HalloweenScenes.HW.harthonPreg;
-	parse["p"] = pregStage >= 5 ? " Then she grabs your daughter, rocking the baby in her arm." : "";
+	parse.p = pregStage >= 5 ? " Then she grabs your daughter, rocking the baby in her arm." : "";
 	Text.Add("<i>“I… yes, [mastermistress],”</i> she says, visibly disappointed. She gets up on her feet and collects her cloak, donning it in one smooth move.[p]", parse);
 	Text.NL();
 	Text.Add("Quietly, you reach out and remove the lingering traces of your dark power from Terry’s mind. Once you have reclaimed it, you thank her for her efforts; you look forward to doing that again some time.", parse);
@@ -4230,7 +4322,7 @@ HalloweenScenes.HarthonBadend = function() {
 	Text.NL();
 	Text.Add("Obediently, you hurry over to the coffin and take hold of the lid. Straining with all your might, you heave it back into place, proud of your efforts as you align its edges just so for Master Harthon.", parse);
 	Text.NL();
-	parse["v"] = player.FirstVag() ? Text.Parse(" and [vag]", parse) : "";
+	parse.v = player.FirstVag() ? Text.Parse(" and [vag]", parse) : "";
 	if(werewolf) {
 		Text.Add("<i>“Thou art naught but a wild beast; it is clear to see from thy lack of trappings.”</i>", parse);
 		Text.NL();
@@ -4269,8 +4361,9 @@ HalloweenScenes.HarthonBadend = function() {
 	Text.Add("As you wait there, with your face hanging over the floor, you can hear the faintest whisper of cloth on cloth as your Master slowly undresses. Warmth flushes through your belly, but you are a good thrall and keep your gaze fixed on the stone beneath you - not so fixed that you don’t see when one elegant bare paw steps gracefully into your field of vision.", parse);
 	Text.NL();
 	Text.Add("Quiet hums greet your ears, and you can just make out the swish of your Master’s tail as he looks you over, before padding daintily away. You can hear him circling you, appraising every inch, and you suck in a breath, hoping that he will like what he sees.", parse);
-	if(player.HasTail())
+	if(player.HasTail()) {
 		Text.Add(" Your [tail] wags in nervous excitement, and you can’t hold it back no matter how you try.", parse);
+	}
 	Text.NL();
 	Text.Add("Master Harthon finishes his inspection then puts both hands on your [butt], groping your cheeks in further appraisal. <i>“Yes, this will do fine.”</i>", parse);
 	Text.NL();
@@ -4290,7 +4383,7 @@ HalloweenScenes.HarthonBadend = function() {
 	Text.NL();
 	Text.Add("Harthon chuckles. <i>“As expected of a bitch in heat. Thou cannot help but beg for more from your master. Very well, thrall. I shall grant you more, but you’ll have to work for it.”</i>", parse);
 	Text.NL();
-	parse["facemuzzle"] = werewolf ? "muzzle" : "face";
+	parse.facemuzzle = werewolf ? "muzzle" : "face";
 	Text.Add("So saying, he steps away from your behind and circles around you, stopping just before you. His dainty, graceful feet mere inches from your [facemuzzle].", parse);
 	Text.NL();
 	Text.Add("Without a thought, you bend down as far as you can and start rapturously kissing your Master’s beautiful, elegant little paws. Your [tongue] lolls over your lips, swiping eagerly over his toes, filling your mouth with the salty prickle of sweat and the unquestionable taste of him.", parse);
@@ -4345,7 +4438,7 @@ HalloweenScenes.HarthonBadend = function() {
 	Text.NL();
 	Text.Add("Your whole body goes stiff as his words sink in. You know that he is wise, loving, and generous, but this... reverently, you ask if he truly means it. Will he keep you forever?", parse);
 	Text.NL();
-	parse["v"] = player.FirstVag() ? "Y" : "And with a few adjustments, y";
+	parse.v = player.FirstVag() ? "Y" : "And with a few adjustments, y";
 	Text.Add("<i>“A lord needs an heir. [v]ou’ll do just fine.”</i>", parse);
 	Text.NL();
 	Text.Add("You moan throatily in desire, mind awash in beautiful images of your future. Your fingers brush against your belly, already envisioning it ripe and swollen with Lord Harthon’s child, feeling them kick and squirm impatiently inside you. Blissfully, you vow that you will give him whole litters of children, as many heirs as he could ever want.", parse);
@@ -4394,7 +4487,7 @@ Halloween.Loc.Chapel.description = function() {
 	Text.Add("There seem to be a couple of options open to you here: press on ahead and towards the chapel’s altar, or duck into the sacristy, which appears relatively intact.");
 }
 
-//#Shows up simply as “Thrall” in Beaten Path, and that’s about the only location you may call Harthon until we expand on the halloween world.
+// #Shows up simply as “Thrall” in Beaten Path, and that’s about the only location you may call Harthon until we expand on the halloween world.
 HalloweenScenes.HarthonThrall = function() {
 	let player = GAME().player;
 
@@ -4411,10 +4504,12 @@ HalloweenScenes.HarthonThrall = function() {
 	parse = Halloween.CockParser(parse);
 	
 	Text.Clear();
-	if(werewolf)
+	if(werewolf) {
 		Text.Add("You inhale slowly and purposefully, filling your lungs and then letting your commanding howl split the cool night air. Your cry echoes into the darkness, a mighty alpha’s summons to [phisher] loyal thrall.", parse);
-	else
+	}
+	else {
 		Text.Add("You stop and close your eyes, focusing on the dark power you got from the former [LordLady] Harthon. Through it, you can feel your connection to your thrall, and you call out to [himher] in the night; a silent whisper meant only for [hisher] ears.", parse);
+	}
 	Text.NL();
 	Text.Add("It takes a few moments, but sure enough you hear the flapping wings of a bat; it lands nearby and right afterwards, you see the bushes rustle and out of them emerges your thrall, Terry.", parse);
 	Text.NL();
@@ -4422,19 +4517,25 @@ HalloweenScenes.HarthonThrall = function() {
 		Text.Add("The former fox has adapted quite well to her new lot in life. She carries herself proudly, totally unabashed in the beautifully feminine form she exposes to you, naked save for the cape that trails down her back. Full, heavy D-cup breasts rise and fall on her chest as she breathes, the pink pearl of her womanhood peeking into visibility when she shifts her thighs. Her long, bushy tail gently sweeps through the air behind her, a leisurely wagging motion as she takes in the sight of you.", parse);
 		
 		let pregStage = HalloweenScenes.HW.harthonPreg;
-		if(pregStage > 0)
+		if(pregStage > 0) {
 			Text.NL();
+		}
 
-		if(pregStage >= 5)
+		if(pregStage >= 5) {
 			Text.Add("She practically glows with maternal beauty, a lovingly proud smile writ across her features as she gazes down on the little bundle of black-and-red fluff in her arms. Your daughter coos softly, clumsily rooting for one of her mother’s nipples and greedily starting to suckle, her little tail wagging as she drinks her fill.", parse);
-		else if(pregStage >= 4)
+		}
+		else if(pregStage >= 4) {
 			Text.Add("Her white-furred belly has swollen out hugely, a great gravid orb that sits heavily on her hips; only her lingering vampiric strength keeps her from the typical pregnant waddle. You can see the taut flesh deform as your unborn kit stretches inside of her, the proud vampiress grinning at you as she rubs the spot where it kicked.", parse);
-		else if(pregStage >= 3)
+ }
+		else if(pregStage >= 3) {
 			Text.Add("The vixen’s belly is round and full now, swelling steadily with child, your seed having unquestionably taken root inside of her. The former fox seems to have taken to motherhood with great aplomb, smiling sweetly as she gently pats her growing bump.", parse);
-		else if(pregStage >= 2)
+ }
+		else if(pregStage >= 2) {
 			Text.Add("The once svelte vixen is now sporting quite a blatant potbelly, obvious at a glance to anyone who looks her way. She seems completely unconcerned by it, and indeed seems to flaunt it almost as readily as she does her lovely breasts.", parse);
-		else if(pregStage >= 1)
+ }
+		else if(pregStage >= 1) {
 			Text.Add("The first signs of your seed taking root have become apparent, the vixen’s trim belly now visibly paunched as her womb starts to fill with life. It’s small and subtle, for now, but you know that it will grow with time.", parse);
+ }
 	}
 	else {
 		Text.Add("Even though he’s naked, save for the cape gently swishing behind him, the former lord still carries himself proudly. Indeed, he flaunts his nakedness, letting the shadows glide sensuously across his graceful, almost girlishly beautiful frame, dappling at the dainty but virile maleness between his loins. He may be bound to you, now, but you can still see the remnants of the seductive predator of the night he once was.", parse);
@@ -4469,14 +4570,15 @@ HalloweenScenes.HarthonThrall = function() {
 	}
 	
 	let pregStage = HalloweenScenes.HW.harthonPreg;
-	if(pregStage > 0 && pregStage < 6)
+	if(pregStage > 0 && pregStage < 6) {
 		HalloweenScenes.HW.harthonPreg++;
+	}
 	
 	if(HalloweenScenes.HW.harthonPreg == 5) {
 		Text.Add("<i>“So… how may I serv- Ah!”</i> The vixen suddenly places a hand on her belly.", parse);
 		Text.NL();
 		
-		//#goto Harthon gives birth
+		// #goto Harthon gives birth
 		HalloweenScenes.HarthonBirth(parse);
 	}
 	else {
@@ -4486,7 +4588,7 @@ HalloweenScenes.HarthonThrall = function() {
 	}
 }
 
-//TODO
+// TODO
 HalloweenScenes.HarthonThrallPrompt = function(parse : any) {
 	let player = GAME().player;
 	let party : Party = GAME().party;
@@ -4496,7 +4598,7 @@ HalloweenScenes.HarthonThrallPrompt = function(parse : any) {
 	
 	let pregStage = HalloweenScenes.HW.harthonPreg;
 	
-	//[Sex][Talk][Holy Water][Dismiss]
+	// [Sex][Talk][Holy Water][Dismiss]
 	let options = new Array();
 	options.push({ nameStr : "Sex",
 		tooltip : Text.Parse("[HeShe] may serve you... most intimately", parse),
@@ -4513,30 +4615,30 @@ HalloweenScenes.HarthonThrallPrompt = function(parse : any) {
 			else {
 				Text.Add("Terry removes [hisher] cloak, folding it neatly before setting it down on a stump nearby.", parse);
 				Text.NL();
-				parse["v"] = femHarthon ? " Do you want my pussy?" : "";
+				parse.v = femHarthon ? " Do you want my pussy?" : "";
 				Text.Add("<i>“So, what exactly do you want me to do, [mastermistress]?[v] Do you want my butt? Or do you want me to suck on you?”</i>", parse);
 			}
 			Text.Flush();
 			
-			//[Pussy][Ass][Blowjob]
+			// [Pussy][Ass][Blowjob]
 			let options = new Array();
 			if(femHarthon) {
 				options.push({ nameStr : "Pussy",
 					tooltip : "You want that sweet pussy of hers.",
 					func : function() {
-						parse["preg"] = (pregStage > 0 && pregStage < 5) ? ", beneath the gravid swell of her belly" : "";
+						parse.preg = (pregStage > 0 && pregStage < 5) ? ", beneath the gravid swell of her belly" : "";
 						
 						Text.Clear();
 						Text.Add("Looking down the vixen’s body[preg], your gaze falls on her womanhood. You dab the [tongueTip] of your [tongue] at your lips as you tell Terry that you want to know her like the woman she is.", parse);
 						Text.NL();
 						Text.Add("<i>“Very well, [mastermistress]. Why don’t you make yourself comfortable?”</i>", parse);
 						Text.NL();
-						parse["w"] = werewolf ? "" : " remove your clothes and";
+						parse.w = werewolf ? "" : " remove your clothes and";
 						Text.Add("Such a good thrall. You[w] ", parse);
 						if(player.FirstCock()) {
 							Text.Add("find a comfy spot to sit down, adjusting yourself so your lovely thrall has access to your [cocks].", parse);
 							Text.NL();
-							parse["l"] = player.Humanoid() ? "pushing your legs apart" : Text.Parse("adjusting your [legs]", parse)
+							parse.l = player.Humanoid() ? "pushing your legs apart" : Text.Parse("adjusting your [legs]", parse)
 							Text.Add("Terry smiles as she saunters over to your position, kneeling before you and [l] so she can lean closer.", parse);
 							Text.NL();
 							Text.Add("She starts by gently caressing[oneof] your [cocks], then leaning down for a soft kiss on your [cockTip].", parse);
@@ -4565,13 +4667,15 @@ HalloweenScenes.HarthonThrallPrompt = function(parse : any) {
 						Text.NL();
 						Text.Add("In one quick swoop, she slides along your length and lets your [cockTip] pop inside her warm honeypot.", parse);
 						Text.NL();
-						parse["g"] = (pregStage > 0 && pregStage < 5) ? " gravid" : "";
+						parse.g = (pregStage > 0 && pregStage < 5) ? " gravid" : "";
 						Text.Add("Eagerly, you reach up and catch her by her ample hips, the warm, wet tightness of her around your [cockTip] spurring you to help her. The[g] vulpine moans softly, glad of the support, and the two of you together slowly guide her down your length.", parse);
 						Text.NL();
-						if(player.FirstCock())
+						if(player.FirstCock()) {
 							Text.Add("You can feel her talented pussy rippling around your cock, drawing each inch of male flesh home where it belongs as you help her support her weight. The feel of her washes over your dick and spirals up your spine. Every beat of her heart and flex of her muscles echoes in your mind, an intimate joining that only fuels your hunger for her.", parse);
-						else
+						}
+						else {
 							Text.Add("Although you may not get quite the same benefit as someone with a real cock, you can still feel every inch of Terry’s progress as she slowly guides herself down your artificial length. You can feel your anticipation building with each moment that goes by, every little moan and grunt that escapes her lips stoking your desire further.", parse);
+						}
 						Text.NL();
 						Text.Add("When her plush butt finally settles into your lap, it’s almost disappointing. Almost. Because now you know the fun can really begin.", parse);
 						Text.NL();
@@ -4583,33 +4687,37 @@ HalloweenScenes.HarthonThrallPrompt = function(parse : any) {
 				tooltip : Text.Parse("[HisHer] sexy ass is far too good to pass up.", parse),
 				func : function() {
 					Text.Clear();
-					parse["w"] = werewolf ? ", like the predator that you are" : "";
+					parse.w = werewolf ? ", like the predator that you are" : "";
 					Text.Add("Instead of answering Terry with words, you slowly stalk towards [himher][w], circling around to [hisher] rear. If your actions confuse your thrall, [heshe] keeps [hisher] thoughts to [himher]self, obediently standing there as you take your desired position.", parse);
 					Text.NL();
 					if(femHarthon) {
-						parse["c"] = werewolf ? "" : " remove your costume and";
+						parse.c = werewolf ? "" : " remove your costume and";
 						Text.Add("Your pretty little vixen has a perfectly pretty little butt; round, plump and juicy, it’s like a fuzzy golden peach, just begging to be squeezed. The thought is enough to make you lick your chops, even as you[c] ", parse);
-						if(player.FirstCock())
+						if(player.FirstCock()) {
 							Text.Add("lasciviously stroke[oneof] your [cocks], coaxing it into standing at attention.", parse);
-						else
+						}
+						else {
 							Text.Add("carefully fix your ‘stake’ into place.", parse);
+						}
 					}
 					else {
 						Text.Add("Nowhere else does your lovely pet foxy’s daintiness give way to effeminacy better than his butt. Those round, shapely cheeks and wide hips give him an amusingly womanly swish to his walk. He has an ass that’s just begging to be fucked... and you have every intention of doing so.", parse);
 						Text.NL();
-						parse["c"] = werewolf ? "" : " peel off your skimpy outfit and";
+						parse.c = werewolf ? "" : " peel off your skimpy outfit and";
 						Text.Add("You almost start to salivate at the thought as you[c] ", parse);
-						if(player.FirstCock())
+						if(player.FirstCock()) {
 							Text.Add("stroke yourself, coaxing[oneof] your [cocks] erect to begin.", parse);
-						else
+						}
+						else {
 							Text.Add("snap your trusty ‘stake’ into place.", parse);
+						}
 					}
 					Text.NL();
 					Text.Add("Your eyes fix on Terry’s gently swishing tail, just waiting for the moment. Oblivious to your wicked intentions, the [foxvixen] finally drops [hisher] guard, and you seize that moment to pounce!", parse);
 					Text.NL();
 					Text.Add("<i>“Eep!”</i> The [foxvixen] jumps at your sudden grab.", parse);
 					Text.NL();
-					parse["former"] = femHarthon ? " former" : "";
+					parse.former = femHarthon ? " former" : "";
 					Text.Add("You can’t hold back a chuckle at the[former] fox’s surprisingly girlish scream, even as you lecherously caress [hisher] ample ass. It’s truly yummy to squeeze; big and soft enough that you can sink into it, but with an underlying firmness that makes it fun to knead.", parse);
 					Text.NL();
 					if(player.FirstCock()) {
@@ -4627,14 +4735,14 @@ HalloweenScenes.HarthonThrallPrompt = function(parse : any) {
 						Text.Add("Such a perverted little vampire; [heshe]’s looking forward to getting ‘staked’! Well, you’re happy to oblige [himher]...", parse);
 					}
 					Text.NL();
-					parse["spreading"] = player.HasLegs() ? "spreading" : "adjusting";
+					parse.spreading = player.HasLegs() ? "spreading" : "adjusting";
 					Text.Add("Your eyes dart around, looking for a convenient spot. Seeing a large, flat boulder, you make your way there, a hand gently stroking Terry’s tail to coax [himher] into following you. You settle yourself atop the boulder, as comfortably as you can, [spreading] your [legs] to grant the [foxvixen] access. ", parse);
 					Text.NL();
 					Text.Add("Smirking, you coolly tell Terry to sit down, one hand leisurely brushing your [cock] to show exactly where you want [himher] to sit.", parse);
 					Text.NL();
 					Text.Add("<i>“Yes, [mastermistress],”</i> the [foxvixen] says with a smile, sauntering towards you.", parse);
 					Text.NL();
-					parse["boygirl"] = femHarthon ? "girl" : "boy";
+					parse.boygirl = femHarthon ? "girl" : "boy";
 					Text.Add("That’s a good [boygirl]...", parse);
 					Text.NL();
 					Text.Add("Terry steps over you, letting your [cock] drag along [hisher] thighs, until the [cockTip] pokes behind [himher] to nestle in [hisher] butt cleavage.", parse);
@@ -4643,7 +4751,7 @@ HalloweenScenes.HarthonThrallPrompt = function(parse : any) {
 					Text.NL();
 					Text.Add("Your thrall’s wanton moans of pleasure are like music to your ears, [heshe] might actually be enjoying this way too much… but what’s the harm in letting the vampire [foxvixen] have a little fun?", parse);
 					Text.NL();
-					parse["f"] = femHarthon ? ", D-cup tits jiggling heavily as she does" : "";
+					parse.f = femHarthon ? ", D-cup tits jiggling heavily as she does" : "";
 					Text.Add("With a soft grunt of effort, you slowly draw Terry down, pushing inch after glorious inch of prickflesh into the once-so-proud vampire’s tight little asshole. [HeShe] arches [hisher] back as you grind deeper[f], but this only spurs your efforts on.", parse);
 					Text.NL();
 					Text.Add("You can’t stop, you <b>won’t</b> stop; deeper and deeper you push, until finally [hisher] sexy ass is nestling heavily in your lap, your [cock] buried to the hilt inside of [himher].", parse);
@@ -4680,15 +4788,17 @@ HalloweenScenes.HarthonThrallPrompt = function(parse : any) {
 						Text.Add("[HeShe] sighs in resignation and proceeds to do as ordered.", parse);
 					}
 					Text.NL();
-					parse["c"] = werewolf ? "" : " twitch aside the rags obscuring your maleness and";
+					parse.c = werewolf ? "" : " twitch aside the rags obscuring your maleness and";
 					Text.Add("Smiling at the [foxvixen]’s prompt obedience, you[c] move closer. Your hand glides lazily back and forth along[oneof] your [cocks], coaxing into a proper erection before you can deliver it. Aligning it with Terry’s warm, wet mouth, you carefully slide the first few inches between [hisher] jaws, feeling the softness of [hisher] tongue as it brushes the sensitive underside of your shaft.", parse);
 					Text.NL();
 					Text.Add("Terry looks up at you as you feed [himher] your [cock] without so much as blinking.", parse);
 					Text.NL();
-					if(first)
+					if(first) {
 						Text.Add("You are more than a little underwhelmed by the lack of enthusiasm Terry is showing you. Oh well, maybe [heshe]’ll warm up to it if you give [himher] a chance?", parse);
-					else
+					}
+					else {
 						Text.Add("Again? Is [heshe] seriously going to make you go through this every single time? But you’ll be nice and give [himher] a chance to get into this on [hisher] own before you bring out your trump card.", parse);
+					}
 					Text.NL();
 					Text.Add("You start to thrust your hips back and forth, rocking slightly as you slowly stroke your pulsating member along Terry’s mouth. You push the [cockTip] in until you are just shy of Terry’s throat, then leisurely draw back. The feeling of [hisher] tongue under your cock makes you shiver, the slight roughness of [hisher] taste buds rippling along your sensitive skin making your heartbeat quicken.", parse);
 					Text.NL();
@@ -4726,10 +4836,12 @@ HalloweenScenes.HarthonThrallPrompt = function(parse : any) {
 					Text.Add("With Terry’s mouth otherwise occupied, you’re quite happy to just sit back and enjoy Terry’s efforts. You occasionally thrust your hips, but with the [foxvixen]’s new enthusiasm, you can gladly leave the bulk of the work to [himher].", parse);
 					Text.NL();
 					Text.Add("The lewd slurps and sucks of Terry’s lips greedily wrapped around your dick echo softly in the cool night air. Your breathing comes in short, sharp pants, and tightness wells up ", parse);
-					if(player.HasBalls())
+					if(player.HasBalls()) {
 						Text.Add("in your aching [balls]", parse);
-					else
+					}
+					else {
 						Text.Add("at the base of your spine", parse);
+					}
 					Text.Add(". You know that you can’t hold out much longer.", parse);
 					Text.NL();
 					Text.Add("Your whole body trembles, eyes squeezing tight as pleasure creeps along your nerves. Feeling your reserves starting to crumble, you shout for Terry to take it all, like the greedy little cum-dumpster [heshe] is, and then give yourself over to climax hammering at your self-control.", parse);
@@ -4737,10 +4849,12 @@ HalloweenScenes.HarthonThrallPrompt = function(parse : any) {
 					Text.Add("A muffled, liquid gurgle is the only answer that you get, but lost as you are in the depths of pleasure, even that falls on deaf ears. You are barely aware of driving your cock as deep into Terry’s mouth as it can possibly go, the compelled [foxvixen] gulping it down without hesitation, eager to ensure that not a single drop escapes [hisher] thirsty gullet.", parse);
 					Text.NL();
 					Text.Add("You shudder and squirm, writhing like a worm on a hook as your tame vampire greedily guzzles down your dick-cream, sucking and slurping until you feel that [heshe]’s going to ", parse);
-					if(player.HasBalls())
+					if(player.HasBalls()) {
 						Text.Add("suck your balls out through your shaft.", parse);
-					else
+					}
+					else {
 						Text.Add("slurp up your spine like a noodle.", parse);
+					}
 					Text.Add(" Caught by your own ploy, you desperately reach for the power within you, breaking the enchantment you laid on your formerly-reluctant pet.", parse);
 					Text.NL();
 					Text.Add("Terry promptly gags and splutters, pulling free of your loins in time for one final meager splash of cum to spatter across [hisher] lips. You stumble backwards, nearly falling flat on your [butt] as Terry shudders and spits, distastefully pawing at the mess on [hisher] face.", parse);
@@ -4755,7 +4869,7 @@ HalloweenScenes.HarthonThrallPrompt = function(parse : any) {
 					Text.NL();
 					Text.Add("It was nothing.", parse);
 					Text.NL();
-					parse["p"] = pregStage >= 5 ? " and your daughter" : "";
+					parse.p = pregStage >= 5 ? " and your daughter" : "";
 					Text.Add("Terry smiles before turning to retrieve [hisher] cloak[p].", parse);
 					Text.NL();
 					Text.Add("<i>“I’ll be waiting for your next call, [mastermistress].”</i>", parse);
@@ -4866,13 +4980,15 @@ HalloweenScenes.HarthonThrallPrompt = function(parse : any) {
 				Text.NL();
 				Text.Add("His cock, still oozing pre-cum along his folds, is nothing more than a glans just barely peeking from beneath his stretched hood. As you rub it with your thumb, you can feel it shrinking smaller and smaller, until it slowly creeps away back into hiding.", parse);
 				Text.NL();
-				//Terry turns female HERE
+				// Terry turns female HERE
 				Text.Add("Gently, you press into Terry’s gash, slowly kneading the soft, vulnerable flesh. As you push, you can feel it giving way, opening up into a waiting love tunnel. First, one finger fits inside, and then a second, both vanishing to the knuckle. Terry trembles and whimpers, teeth clicking in sensory overload as you finish sculpting her inside and out.", parse);
 				Text.NL();
-				if(werewolf)
+				if(werewolf) {
 					Text.Add("You can <b>smell</b> the changes flowing through her; masculine musk almost entirely swallowed by the sweet scent of femininity. It makes your cock ache in need, trembles of anxiety sweeping over your hulking lupine frame, but you hold it at bay. Just a little more...", parse);
-				else
+				}
+				else {
 					Text.Add("Terry is even starting to <b>smell</b> different; a distinctly feminine scent starting to fill your nostrils as you approach the pinnacle of your efforts. You savor the sexual bouquet, even as you continue to tweak her new canal.", parse);
+				}
 				Text.NL();
 				Text.Add("Only when you add the third finger does the magic take place. Terry arches her back and howls like a bitch in heat. Her folds spasm under your touch, her tunnel clenching down on the intruding digits with crushing force as she is wracked by her first female orgasm.", parse);
 				Text.NL();
@@ -4929,7 +5045,7 @@ HalloweenScenes.HarthonThrallPrompt = function(parse : any) {
 				Text.NL();
 				Text.Add("Quickly, you reach up to the vixen atop you, one hand at her hip and another taking her hand. As carefully as you can, you help her to support her weight, slowly coaxing her down your shaft, but keeping her from falling faster than she can handle it.", parse);
 				Text.NL();
-				parse["c"] = player.FirstCock() ? "" : ", even through the barrier of your fake cock";
+				parse.c = player.FirstCock() ? "" : ", even through the barrier of your fake cock";
 				Text.Add("With an almost glacial pace, she takes the first few inches inside, until you can feel her hymen holding you back[c]. The two of you pause for a second, the vixen panting softly as she visibly steels herself, and then she pushes herself down.", parse);
 				Text.NL();
 				Text.Add("You can feel her virginity tear asunder on your member, and though she does her best to hold it back, Terry can’t smother a pitiful yelp of pain, bright red blood beading her lip where she’s bitten it.", parse);
@@ -5003,10 +5119,12 @@ HalloweenScenes.HarthonBirth = function(parse : any) {
 	Text.Add("Sprawled between the vampiress’ legs, little fists clenched and shaking as it continues to howl at being thrust from its warm home, your baby is fluffy, covered in slime, and at once both adorable and disgusting. A grin of paternal pride stretches across your face as you carefully scoop the little one into your arms, using Terry’s cloak as a makeshift blanket.", parse);
 	Text.NL();
 	Text.Add("The vampire vixen has given you a beautiful little baby girl; black where her mother is golden, and red where her mother is white. She sobs fitfully as you bundle her up, gently shushing her. ", parse);
-	if(werewolf)
+	if(werewolf) {
 		Text.Add("From somewhere deep inside of you, an urge to lick her clean surfaces. The little vixen kit looms large in your vision before you catch yourself, slurping your tongue back into your mouth. Damn these lupine instincts. Instead, you carefully and deliberately towel her down with the cloak before wrapping her in its drier portion.", parse);
-	else
+	}
+	else {
 		Text.Add("Using Terry’s cloak like a towel, you wipe the worst of the birth-fluids from her velvety infant’s fur, then carefully wrap her up into a neat bundle.", parse);
+	}
 	Text.NL();
 	Text.Add("Baby now bundled up, you turn back to Terry, who is watching you impatiently. Proudly, you inform her that she’s given you a beautiful little girl, and tenderly pass her daughter to her.", parse);
 	Text.NL();
@@ -5081,10 +5199,12 @@ HalloweenScenes.Laggoth = function() {
 	Text.Add("It’s certainly a hellish one, that’s for sure. Most of the high arched windows have been smashed into pieces, although there’s no sign of the glass debris that one would have expected. Perhaps they were shattered outwards, instead of inwards? If the pews were charred, there’s practically no furniture left standing, save perhaps the occasional pile of ash. In the place of the altar is a garish throne of a thousand skulls, each of them vaguely human. That can’t be very comfortable to sit on, especially when you can see the paint peeling and no one’s bothered to remove the price tags from most of them.", parse);
 	Text.NL();
 	Text.Add("Nevertheless, it doesn’t seem to bother the hulking figure sprawled out lazily on it. You squint a little, trying to make out who it is through the heat-hazed air, and it looks to be… ", parse);
-	if(burrows.Access()) //#if Lagon met - same line
+	if(burrows.Access()) { // #if Lagon met - same line
 		Text.Add("Lagon? There <i>is</i> something similar about this figure and the lagomorph despot you know, something about the face that strikes you as too similar for comfort. Still, there’s little doubt that this <i>isn’t</i> the ruler of the burrows himself - the reddish orange fur should have tipped you off, let alone the crown that sits on his head or the stubby little horns that jut from his brow. He clutches a pitchfork in his right hand, and by the looks of it, he knows how to use it.", parse);
-	else
+	}
+	else {
 		Text.Add("some sort of anthropomorphic rabbit demon, as far as you can tell. The crown perched on his head suggests that he’s a monarch of some sort, held in place by the twin horns which jut out from either side of his brow. Burning orange-red fur covers much of his body, and in his right hand, he clutches a rather impressive-looking and dangerously pointy pitchfork.", parse);
+	}
 	Text.NL();
 	Text.Add("Of course, that’s not to mention the massive two foot long cock and grapefruit-sized balls that this demonic monarch is sporting… or the hulking, muscle-bound body the aforementioned are attached to. You’re just about to duck back into hiding and plan what to do next when the demon king raises his head and sniffs the air.", parse);
 	Text.NL();
@@ -5113,13 +5233,14 @@ HalloweenScenes.Laggoth = function() {
 	Text.NL();
 	Text.Add("<i>“Coitus?”</i> one of the bunny-imps pipes up nervously.", parse);
 	Text.NL();
-	parse["HeShe"] = player.mfFem("He", "She");
-	parse["hisher"] = player.mfFem("his", "her");
+	parse.HeShe = player.mfFem("He", "She");
+	parse.hisher = player.mfFem("his", "her");
 	Text.Add("<i>“Yes, that’s the word. Bring the mortal to me! Now! [HeShe]’s hiding right over there! I <b>smell</b> [hisher] fear! A bit like chocolate, come to think of it.”</i>", parse);
 	Text.NL();
 	Text.Add("Busted! Your heart sinks like a stone as the demon king points a finger right at you. Dismissed by their master, the imp bunnies move like a horde of fire ants, swarming over the blackened floor and charred pews to get at you. There’s no hope of escape - for such small creatures, they certainly move fast, a number of them breaking off from the main body of imps to cut off your path to the exit. ", parse);
-	if(werewolf)
+	if(werewolf) {
 		Text.Add("You howl and claw at the imps in bestial fury, but to little avail; the more of the little bastards you shake off from your fur, the more clamber onto you while your attention is occupied elsewhere. They’re just like ticks… only without the bloodsucking. ", parse);
+	}
 	Text.Add("The remainder of the tiny imp lagomorphs quickly encircle your position, not quite touching you, but quickly herding you out of the pews and forward to where their king is waiting.", parse);
 	Text.NL();
 	Text.Add("<i>“So, what do we have here? Another mortal, it seems!”</i>", parse);
@@ -5141,7 +5262,7 @@ HalloweenScenes.Laggoth = function() {
 	Text.Add("<i>“Now! What business brings you to the seat of my throne on this plane?”</i>", parse);
 	Text.Flush();
 	
-	//[Curiosity][Treasure][Fight Evil][Don’t Answer]
+	// [Curiosity][Treasure][Fight Evil][Don’t Answer]
 	let options = new Array();
 	options.push({ nameStr : "Curiosity",
 		tooltip : "You were just wandering about, no biggie.",
@@ -5238,7 +5359,7 @@ HalloweenScenes.LaggothQnA = function(opts : any) {
 		
 	};
 	
-	//[Preferences][Conquest][Imps]
+	// [Preferences][Conquest][Imps]
 	let options = new Array();
 	if(!opts.pref) {
 		options.push({ nameStr : "Preferences",
@@ -5337,8 +5458,9 @@ HalloweenScenes.LaggothQnA = function(opts : any) {
 			}, enabled : true
 		});
 	}
-	if(options.length > 0)
+	if(options.length > 0) {
 		Gui.SetButtonsFromList(options, false, null);
+	}
 	else {
 		Gui.NextPrompt(function() {
 			Text.Clear();
@@ -5357,7 +5479,7 @@ HalloweenScenes.LaggothQnA = function(opts : any) {
 			Text.Add("Gee… talk about a large ham. Or a big dick, as it were. It doesn’t look like there’s any running from your potentially sticky situation, so what do you do now?", parse);
 			Text.Flush();
 			
-			//[Comfort][Resign][Distract]
+			// [Comfort][Resign][Distract]
 			let options = new Array();
 			options.push({ nameStr : "Comfort",
 				tooltip : "It’s clear that Laggoth’s clearly trying a bit too hard at this demon king gig. He must be having a hard time to be overcompensating this much.",
@@ -5522,7 +5644,7 @@ HalloweenScenes.LaggothDistract = function() {
 	Text.Add("…You hope. Now, let’s see as to whether your guess as to Laggoth’s weakness was right…", parse);
 	Text.Flush();
 	
-	//[Holy Water][Stake][Garlic][Bread]
+	// [Holy Water][Stake][Garlic][Bread]
 	let options = new Array();
 	if(party.Inv().QueryNum(HalloweenItems.HolyWater)) {
 		options.push({ nameStr : "Holy Water",
@@ -5605,7 +5727,7 @@ HalloweenScenes.LaggothDistract = function() {
 			Text.NL();
 			Text.Add("<i>“You haven’t bested me yet, mortal!”</i> Laggoth snarls, slapping his crown back on his head. <i>“Minions! Your Super Ultra Delicious Wonderful Good Lord and master demands that you rend the flesh off this puny mortal this instant!”</i>", parse);
 			Text.NL();
-			parse["heshe"] = player.mfFem("he", "she");
+			parse.heshe = player.mfFem("he", "she");
 			Text.Add("<i>“Eh, I dunno,”</i> one of the imps pipes up. <i>“If [heshe]’s so puny, then why aren’t you doing the smiting yourself?”</i>", parse);
 			Text.NL();
 			Text.Add("<i>“If he can’t smite the puny mortal, doesn’t that mean he’s even weaker than one?”</i>", parse);
@@ -5768,7 +5890,7 @@ HalloweenScenes.Sacristy = function() {
 	Text.Add("Will you do so anyway?", parse);
 	Text.Flush();
 	
-	//[Yes][No]
+	// [Yes][No]
 	let options = new Array();
 	options.push({ nameStr : "Yes",
 		tooltip : "Time to face whatever lurks here.",
@@ -5814,7 +5936,7 @@ HalloweenScenes.Lenka = function() {
 			Text.Add("Her body is far more… ah, developed than Cveta’s currently is, but perhaps it’s a hint of what the songstress might look like in the future when her maternal nature’s fully blossomed. Still, her attitude and demeanor are completely off, her pose far more forward and suggestive as opposed to Cveta’s usual reserved nature. Slowly, she turns her gaze upon you and beckons you forward with a finger.", parse);
 		else
 		*/
-			Text.Add("For one, instead of Cveta’s thin and waifish form, the avian woman lounging on the plush pillows and downy mattress is extremely voluptuous. It’s almost as if everything you knew about the songstress was inverted to create an evil twin of her - a very sexy evil twin, judging by the nasty grin and sultry “come hither” look she’s giving you.", parse);
+		Text.Add("For one, instead of Cveta’s thin and waifish form, the avian woman lounging on the plush pillows and downy mattress is extremely voluptuous. It’s almost as if everything you knew about the songstress was inverted to create an evil twin of her - a very sexy evil twin, judging by the nasty grin and sultry “come hither” look she’s giving you.", parse);
 	}
 	else {
 		Text.Add(" a young avian woman, by all appearances in the rich blossom of her womanhood, lounging on the bed’s rich trimmings. With her voluptuous form and the maternal airs that surround her, she cuts quite the figure - a sentiment that’s only reinforced as she looks directly at you and let out a husky, sultry hum from the back of her throat.", parse);
@@ -5834,7 +5956,7 @@ HalloweenScenes.Lenka = function() {
 		Text.Add("<i>“Oh, I can fix that,”</i> she drawls lazily. <i>“Now, get up here and don’t keep me waiting.”</i>", parse);
 		Text.NL();
 	}
-	parse["c"] = werewolf ? "" : " strip off your costume and";
+	parse.c = werewolf ? "" : " strip off your costume and";
 	Text.Add("Try as you might, there’s something about the avian demoness’ words that makes you really, <i>really</i> want to obey her. Part of you instinctively screams danger about this, but the greater part is consumed by a slavish need to cater to her every whim and desire. Not quite understanding what you’re doing, you[c] approach the bedside for her inspection.", parse);
 	Text.NL();
 	Text.Add("<i>“Allow me to introduce myself, my beautiful cum-pump. I am Lenka, Mother of Shadows - or at least, I will be once I can get some seed into me to create a lovely brood.”</i> She rolls over on her back and rubs her flat, slightly concave midriff for emphasis. <i>“Been quite busy settling in, you know…no time to go out and procure a male’s vital essence…”</i>", parse);
@@ -5858,20 +5980,21 @@ HalloweenScenes.Lenka = function() {
 			Text.NL();
 			Text.Add("Just saying it in that sweet syrupy voice of hers somehow makes it real - in a moment, your [cocks] [isAre] achingly erect, straining at their tethers to reach the hand Lenka is snaking towards [itThem].", parse);
 			Text.NL();
-			parse["mc"] = player.NumCocks() > 1 ? "each shaft’s" : "your";
-			parse["k"] = p1cock.Knot() ? ", then moves to gather your swollen knot in a hand, rubbing her palm all over it and making you dream of sticking that knot in her and filling her full of seed" : "";
+			parse.mc = player.NumCocks() > 1 ? "each shaft’s" : "your";
+			parse.k = p1cock.Knot() ? ", then moves to gather your swollen knot in a hand, rubbing her palm all over it and making you dream of sticking that knot in her and filling her full of seed" : "";
 			Text.Add("<i>“Ah, so eager,”</i> she whispers, running thumb and finger over the ridge of [mc] glans[k]. <i>“So obedient. That’ll do, my darling cum-pump. That’ll do just fine.”</i>", parse);
 		}
 		else {
-			parse["biggest"] = player.NumCocks() > 1 ? " biggest" : "";
+			parse.biggest = player.NumCocks() > 1 ? " biggest" : "";
 			Text.Add("<i>“Tch, is that all you’ve got? Good thing Mama Lenka’s here to give you a hand.”</i> Lazily, the avian demoness reaches out with a gloved hand and takes hold of your[biggest] [cock], her delicate-looking digits wrapping themselves about the shaft of man-meat with surprising strength. Once she has a firm grip, she presses fingers and thumb ever so slightly into your manflesh, running them across its contours.", parse);
 			Text.NL();
-			parse["all"] = player.NumCocks() > 1 ? " all" : "";
+			parse.all = player.NumCocks() > 1 ? " all" : "";
 			Text.Add("The effect is instantaneous, with your [cocks][all] becoming fully engorged promptly. Lenka giggles before rewarding you with a few rapid strokes of her hand, fingers pumping up and down your length. <i>“Stay standing.”</i>", parse);
 			Text.NL();
 			Text.Add("Despite you shaking and shuddering, weakness creeping into your form, there’s something in the avian demoness’ honeyed voice that compels your body to obey. You can only gasp in pleasure, wonder - and a little fear - as she grabs you by the glans and begins tugging on the shaft in question, each gentle yank coaxing more and more manflesh out of your groin to be added to your phallus.", parse);
-			if(player.NumCocks() > 1)
+			if(player.NumCocks() > 1) {
 				Text.Add(" It’s a bit of a shame she didn’t do the same for your other shaft[s]...", parse);
+			}
 			Text.NL();
 			Text.Add("Nevertheless, Lenka doesn’t stop until you’re measuring a whole seven inches from base to tip, whereupon she croons and takes a moment to admire her handiwork.", parse);
 			
@@ -5884,9 +6007,9 @@ HalloweenScenes.Lenka = function() {
 		Text.NL();
 		Text.Add("<i>“Oh dear. Well, no issue there; you’ll be producing issue just fine before long.”</i>", parse);
 		Text.NL();
-		parse["v"] = player.FirstVag() ? Text.Parse(" just above your [vag]", parse) : "";
+		parse.v = player.FirstVag() ? Text.Parse(" just above your [vag]", parse) : "";
 		let canine = player.Race().isRace(Race.Canine);
-		parse["k"] = canine ? ", complete with a knot at the base" : "";
+		parse.k = canine ? ", complete with a knot at the base" : "";
 		Text.Add("You have just enough time to wonder what she means before the lingering sensation of her touch grows red hot, dark magics gathering in your nethers. Your groin clenches, internal changes beginning and soon pushing out of your body[v] to form a brand new cock[k]. You groan and shudder as blood rushes to your new appendage, filling it as thick and straight as a ramrod even as it grows before your eyes. ", parse);
 		Text.NL();
 		Text.Add("Three inches, four, five… it’s only when your brand new shaft is a whole seven inches long and one and a half across that its development stops, leaving it twitching and aching to be used.", parse);
@@ -5894,7 +6017,7 @@ HalloweenScenes.Lenka = function() {
 		p1cock = new Cock();
 		p1cock.length.IncreaseStat(18, 100);
 		p1cock.thickness.IncreaseStat(5, 100);
-		if(canine) p1cock.knot = 1;
+		if(canine) { p1cock.knot = 1; }
 		
 		player.body.cock.push(p1cock);
 		
@@ -5965,7 +6088,7 @@ HalloweenScenes.Lenka = function() {
 	Text.NL();
 	Text.Add("<i>“Stay here, and be my breeding stud for the rest of eternity; stay here, and watch the fruit of my womb bring all of existence to its knees.”</i>", parse);
 	Text.NL();
-	parse["w"] = werewolf ? " animal" : "";
+	parse.w = werewolf ? " animal" : "";
 	Text.Add("Between the magic of her voice and the cloying, captivating scent of the black roses that fill the former sacristy, you can feel the last vestiges of resistance crumbling away. The fact that Lenka is oh-so-perfectly breedable doesn’t help, either; your[w] hindbrain is screaming at you to go and make babies with this glorious specimen of formerly heavenly fecundity. The bed, it’s so firm, soft and comfortable, surpassed only by your mistress-wife’s presence beside you.", parse);
 	Text.NL();
 	Text.Add("A last, tiny voice in your mind screams that this fallen symbol of feminine, fertile perfection isn’t your mistress or your wife, but is quickly snuffed out when Lenka pulls you into her embrace. Her feathers, gloriously hot - each one burns with the infernal fires of the Dark Aspect, and you lovingly reach up to straighten her flaming halo, only to have it fall back into its original lopsided position once your fingers leave it.", parse);
@@ -5991,10 +6114,11 @@ HalloweenScenes.Lenka = function() {
 	Text.Add("<i>“That’s much better. Now, fertilize me.”</i>", parse);
 	Text.NL();
 	Text.Add("With a trill of pleasure, Lenka leans her weight forward and guides your cock into her.", parse);
-	if(player.NumCocks() > 1)
+	if(player.NumCocks() > 1) {
 		Text.Add(" Your remaining shaft[s2] get[notS2] pushed to the side, unloved and unwanted, but who cares? You’d get rid of them this moment if that’s what your mistress commanded.", parse);
+	}
 	Text.NL();
-	parse["knot"] = p1cock.Knot() ? "knot" : "groin";
+	parse.knot = p1cock.Knot() ? "knot" : "groin";
 	Text.Add("Lenka’s glorious pussy stretches wide and devours the entirety of your man-meat, slurping and sucking as she impales herself upon your member with wanton glee, not stopping until her mound is grinding against your [knot].", parse);
 	Text.NL();
 	if((p1cock.Len() >= 40) || (p1cock.Thickness() >= 8)) {
@@ -6018,7 +6142,7 @@ HalloweenScenes.Lenka = function() {
 	Text.Add("At this point, though, will it make any difference? You don’t know…", parse);
 	Text.Flush();
 	
-	//[Submit][Resist]
+	// [Submit][Resist]
 	let options = new Array();
 	options.push({ nameStr : "Submit",
 		tooltip : "It’s hopeless. Might as well just lie back and enjoy your new life as a fallen angel’s breeding slave.",
@@ -6026,19 +6150,21 @@ HalloweenScenes.Lenka = function() {
 			Text.Clear();
 			Text.Add("Oh, what’s the use. Lying here in this oh-so-comfortable bed, having your cock milked by someone both skilled and eager, for the express purpose of bearing as many of your offspring as possible… and for all eternity, too. There are far worse fates than this, you realize as the gentle haze descends upon your senses once more and snuffs out your last spark or resistance. Far worse fates…", parse);
 			Text.NL();
-			if(player.FirstBreastRow().Size() >= 2)
+			if(player.FirstBreastRow().Size() >= 2) {
 				Text.Add("Lenka steadies herself by grabbing your [breasts], greedily and roughly fondling the soft, sensitive flesh. Perhaps a bit too roughly - you whimper and mewl in protest as she squeezes down hard in a bid to get at your [nips], but that only seems to encourage the avian demoness’ lusts.", parse);
-			else
+			}
+			else {
 				Text.Add("Lenka steadies herself by planting her hands on your chest, ostensibly for support but unabashedly taking the chance to get a feel for your body. The avian demoness makes a pleasant, humming noise in the back of her throat - she must like what she feels.", parse);
+			}
 			Text.NL();
-			parse["knot"] = p1cock.Knot() ? "knot" : "cock";
+			parse.knot = p1cock.Knot() ? "knot" : "cock";
 			Text.Add("All of a sudden, you groan, a shudder running through the entirety of your body, and realize that you’re about to blow. Lenka’s body seems to recognize this as well, and her cunt clenches tightly about your swollen [knot], determined not to let a single drop of seed go to waste. This in turn sends you careening over the edge, and you cry out as you feel your cum rise through your shaft, ready to explode into the avian demoness.", parse);
 			Text.NL();
 			if(player.NumCocks() > 1) {
 				Text.Add("Your other shaft[s2] throb[notS2] and pulsate[notS2] too, but nothing comes out despite the overwhelming pleasure you’re experiencing. She really <i>is</i> serious about taking in <i>all</i> your seed.", parse);
 				Text.NL();
 			}
-			parse["len"] = p1cock.Len() >= 20 ? "womb" : "cunt";
+			parse.len = p1cock.Len() >= 20 ? "womb" : "cunt";
 			Text.Add("With a cry of pleasure that sends you writhing under your avian lover, you throw your head back and begin blowing your load straight into her heated [len]. Quickly realizing what’s happening, her body draws you into her as far as you will go, encouraging your seed to go where it’s most needed. Your groins mash and grind together, hips moving frantically with the effort of mating.", parse);
 			Text.NL();
 			Text.Add("Your orgasm seems to last forever, your cock pumping more and more seed into Lenka even as she sings out in triumphant victory at the sensation of hot, slippery baby batter flooding her warm, receptive oven, ready to be baked into delicious little buns. How long does this go on? How long do you ride this wave of pleasure? You can’t tell, not through the fog that clouds your mind; there’s no sign that your shaft is softening as she continues to ride you brutally. Despite the absurd amounts of cum you must’ve forced into her at this point, Lenka’s womb swallows it all without missing a beat, her belly remaining flat and trim throughout the whole process, her lush inner walls amazingly tight about your erection.", parse);
@@ -6051,7 +6177,7 @@ HalloweenScenes.Lenka = function() {
 			Text.NL();
 			Text.Add("She may not be showing yet, but her breasts are definitely starting up milk production. Panting softly, her breasts heaving, Lenka caresses her lower belly, and when she’s done, she’s sporting the slightest of baby bumps, the fruit of your coupling beginning to make itself known.", parse);
 			Text.NL();
-			parse["v"] = player.FirstVag() ? "" : " grow a pussy on you and";
+			parse.v = player.FirstVag() ? "" : " grow a pussy on you and";
 			Text.Add("The avian demoness gathers locks of her long, blood-red hair and toys idly with them. <i>“It’s a shame you can’t feel what I’m feeling, but perhaps that doesn’t matter. Maybe when I get more cum-pumps, I’ll[v] let you have a go, too. Then you can have a nice, rounded belly like me.”</i>", parse);
 			Text.NL();
 			Text.Add("You moan like a whore in heat. When put forward by that tantalizing, honeyed voice, the idea is the most arousing you’ve ever come across. To be like your mistress-wife, your belly big and round, bearing young for her… it’s more than you could ever have hoped for.", parse);
@@ -6131,7 +6257,7 @@ HalloweenScenes.Lenka = function() {
 			Text.Add("Now, the only question is: what do you do?", parse);
 			Text.Flush();
 			
-			//[Flee][Turn Tables]
+			// [Flee][Turn Tables]
 			let options = new Array();
 			options.push({ nameStr : "Flee",
 				tooltip : "You don’t want to push your luck. Get out of here!",
@@ -6161,7 +6287,7 @@ HalloweenScenes.Lenka = function() {
 					Text.NL();
 					Text.Add("Which is none, of course.", parse);
 					Text.NL();
-					parse["c"] = player.NumCocks() > 1 ? Text.Parse(" and loose cock[s2]", parse) : "";
+					parse.c = player.NumCocks() > 1 ? Text.Parse(" and loose cock[s2]", parse) : "";
 					Text.Add("The resultant fucking is short, sharp and brutal - made even more so by Lenka’s attempts to fight you off. Your balls[c] slapping against the avian demoness’ lush rump, you pound her asshole ruthlessly, mashing yourself with such force and energy that beads of sweat begin collecting on your [skin]. The orgasm, when it comes, is as explosive as the first, with surprising results - Lenka practically screams into her gag and her once seductive eyes practically pop out from her head as you empty your load into her. Slowly, her stomach begins to swell as you flood her digestive system with your cum, rounding out her tummy into a noticeable paunch.", parse);
 					Text.NL();
 					if(player.NumCocks() > 1) {
@@ -6252,7 +6378,7 @@ HalloweenScenes.Jenna = function() {
 		Text.NL();
 		Text.Add("You glance at the cloth-wrapped figure across the table, but he, she or it hasn’t moved so much as a muscle in response to the witch’s words. For all you know, it might very well be a statue under there. The teacup set before it hasn’t been so much as touched in the slightest, its contents cold and stale, although that in turn doesn’t bother the witch any.", parse);
 		Text.NL();
-		parse["slut"] = player.Slut() >= 50 ? " like something you could get behind! Or under, depending on where evil likes it." : "… um…";
+		parse.slut = player.Slut() >= 50 ? " like something you could get behind! Or under, depending on where evil likes it." : "… um…";
 		Text.Add("Vanquish evil, or else become its servile fucktoy? That sounds[slut]", parse);
 		Text.NL();
 		Text.Add("The witch nods. <i>“So has the great and powerful Jenna spoken. Which is of course, me. Come now, parched my throat is from the speaking, and tea is much desired for the drinking. Join us, please, in our elegant repose, such that we can study the one whom fate has chose.”</i>", parse);
@@ -6290,7 +6416,7 @@ HalloweenScenes.Jenna = function() {
 		Text.Add("Have you reconsidered and thus returned?”</i>", parse);
 		Text.Flush();
 		
-		//[Sure][Nah]
+		// [Sure][Nah]
 		let options = new Array();
 		options.push({ nameStr : "Sure",
 			tooltip : "Yeah, you changed your mind.",
@@ -6322,7 +6448,7 @@ HalloweenScenes.JennaSwitchPrompt = function(opts : any) {
 	};
 	parse = player.ParserTags(parse);
 	
-	//[Switch][Don’t Switch][Trader]
+	// [Switch][Don’t Switch][Trader]
 	let options = new Array();
 	
 	options.push({ nameStr : "Switch",
@@ -6344,12 +6470,15 @@ HalloweenScenes.JennaSwitchPrompt = function(opts : any) {
 			Text.Add("Perhaps you’d been expecting more of a reaction from the witch, but she simply takes her seat and raises her teacup to her lips. You do the same, of course, trying to watch her discreetly out of the corner of your eye. The tea definitely tastes like it wasn’t brewed with any simple tea leaves - there’s a slightly spicy aftertaste you just can’t place…", parse);
 			Text.NL();
 			Text.Add("Without warning, a sudden, immense wave of lust crashes into you, making it hard to so much as sit up straight. Moaning aloud as fire blossoms in your chest and nethers, you barely feel yourself slump to the ground as ", parse);
-			if(player.FirstCock())
+			if(player.FirstCock()) {
 				Text.Add("your [cocks] engorge to the point of painfulness fully erect and twitching in the air", parse);
-			if(player.FirstCock() && player.FirstVag())
+			}
+			if(player.FirstCock() && player.FirstVag()) {
 				Text.Add(", and ", parse);
-			if(player.FirstVag())
+			}
+			if(player.FirstVag()) {
 				Text.Add("your [vag] becomes flush with heat, your insides squirming and churning in their desire to take in a nice big cock within your heated depths", parse);
+			}
 			Text.Add(". There’s a sigh, and you become briefly aware of someone standing above you, watching you pant and mewl in desire.", parse);
 			Text.NL();
 			Text.Add("<i>“Let that be a lesson learned<br>", parse);
@@ -6460,7 +6589,7 @@ HalloweenScenes.JennaAgreePrompt = function(opts : any) {
 	
 	let werewolf = HalloweenScenes.HW.Werewolf();
 	
-	//[Agree][Don’t Agree][...What?]
+	// [Agree][Don’t Agree][...What?]
 	let options = new Array();
 	options.push({ nameStr : "Agree",
 		tooltip : "Yeah, sure. You suppose you could agree to that...",
@@ -6477,7 +6606,7 @@ HalloweenScenes.JennaAgreePrompt = function(opts : any) {
 				Text.Add("You, in the meantime, can go and undress.”</i>", parse);
 			}
 			Text.NL();
-			parse["w"] = werewolf ? "" : " stripping yourself of your clothing before";
+			parse.w = werewolf ? "" : " stripping yourself of your clothing before";
 			Text.Add("You’re only more than eager to do as Jenna asks,[w] getting down on the wooden floor, head down and ass high in the air, ripe for the taking.", parse);
 			Text.NL();
 			
@@ -6563,7 +6692,7 @@ HalloweenScenes.JennaBroomfuck = function() {
 	Text.Add("Bring forth power fit for lording<br>", parse);
 	Text.Add("Into my charm of potent warding.”</i>", parse);
 	Text.NL();
-	parse["w"] = werewolf ? " your already bestial muzzle" : "";
+	parse.w = werewolf ? " your already bestial muzzle" : "";
 	Text.Add("The gathered arousal is spreading through the rest of your body, sweat beading on your [skin] as you pant and whine,[w] unable to articulate words but knowing what you desperately want more of. Already, your hands feel weak, but you nevertheless move a hand to your [nips] and start rubbing away - it just feels so <i>good</i>, and it’s not fair that only your back half is getting any attention…", parse);
 	Text.NL();
 	Text.Add("Off in what seems like the far distance, Jenna continues to stir her cauldron, which is now frothing violently:", parse);
@@ -6577,12 +6706,12 @@ HalloweenScenes.JennaBroomfuck = function() {
 	Text.Add("Slippery and slimy, sweet and slick,<br>", parse);
 	Text.Add("Make my magic brew nice and thick.”</i>", parse);
 	Text.NL();
-	parse["gen"] = player.FirstCock() ? parse["cocks"] : parse["vag"];
+	parse.gen = player.FirstCock() ? parse.cocks : parse.vag;
 	let gen = "";
-	if(player.FirstCock()) gen += "milking your [cocks]";
-	if(player.FirstCock() && player.FirstVag()) gen += " and ";
-	if(player.FirstVag()) gen += "thrusting into your [vag]";
-	parse["gen2"] = Text.Parse(gen, parse);
+	if(player.FirstCock()) { gen += "milking your [cocks]"; }
+	if(player.FirstCock() && player.FirstVag()) { gen += " and "; }
+	if(player.FirstVag()) { gen += "thrusting into your [vag]"; }
+	parse.gen2 = Text.Parse(gen, parse);
 	Text.Add("Out of nowhere, something brushes against your [gen], and you gasp at the sudden, unexpected sensation, arching your back out of instinct. Then it’s there again, and again, until invisible hands are [gen2] with brutal efficiency, determined to extract every last drop of fresh love-juice that your body can offer up. Working in tandem with the enchanted broomstick pounding away at your sphincter, the ghostly force quickly ignites the fire in your belly into a raging inferno of hot excitement that consumes every inch of your being.", parse);
 	Text.NL();
 	Text.Add("You can’t take it anymore, moaning like the needy whore that you are. One last strangled cry of pleasure escapes your lips, and then sweet, sweet release, your lower body shuddering and buckling under your weight from the exhilaration of it all.", parse);
@@ -6652,10 +6781,12 @@ HalloweenScenes.JennaBroomfuck = function() {
 	Text.NL();
 	Text.Add("<i>“Now go! Go forth and face the terrors of the night! Bring to them your noble, righteous fight! Or you can fuck them silly until the beasts give in; it’s the same thing in the end, really.”</i>", parse);
 	Text.NL();
-	if(player.Slut() >= 50)
+	if(player.Slut() >= 50) {
 		Text.Add("Why, that sounds like quite the entrancing and exhilarating adventure that lies ahead of you! One full of ghosts and goblins… can you fuck a ghost? Won’t be from lack of trying, that’s for sure!", parse);
-	else
+	}
+	else {
 		Text.Add("Um, okay. You’ll keep that in mind if all else fails.", parse);
+	}
 	Text.Add(" Welp, there’s nothing left for you here, unless you still have yet to receive your reward. Besides, your ass has recovered enough for you to at least duckwalk to the door without too much grimacing… you really ought to be on your way, if you don’t have any more business in this place.", parse);
 	Text.Flush();
 	
@@ -6689,18 +6820,20 @@ HalloweenScenes.Patches = function() {
 		return;
 	}
 	
-	parse["pshe"] = patchesGender ? "she’s" : "they’re";
-	parse["s"] = patchesGender ? "s" : "";
+	parse.pshe = patchesGender ? "she’s" : "they’re";
+	parse.s = patchesGender ? "s" : "";
 	
 	if(knowsPatches) {
 		Text.Add("You’re not sure at first, but after a moment, you’re convinced; it’s Patches! What’s that crazy [harpymerchant] doing here? ", parse);
 		Text.NL();
 		Text.Add("[HeShe] incline[s] [hisher] head as you greet [himher], offering you a quiet, <i>“[playername]”</i> in acknowledgement. When you ask [himher] what [pshe] doing here, though, [heshe] just stare[s] back at you silently.", parse);
 		Text.NL();
-		if(patchesGender)
+		if(patchesGender) {
 			Text.Add("You don’t know why she’s being so standoffish, but eventually you give up. You know how stubborn this silly harpy can be, especially about her mysterious character. Once you’ve stopped trying, she tilts her head and says something to you.", parse);
-		else
+		}
+		else {
 			Text.Add("Looks like the usually tight-lipped merchant is feeling even less talkative than usual. Seeing that you’re getting nowhere, you reluctantly give in, mentally cursing eccentric peddlers. You’re so caught up in your private grousing that you almost miss it when they finally say something to you.", parse);
+		}
 	}
 	else {
 		Text.Add("You turn to the figure in its colorful patchwork robes, and wonder if there’s actually anyone in there or not. For all you know, it could be a stand. Or a scarecrow. Or… well, anything that’s stands rigidly upright.", parse);
@@ -6731,7 +6864,7 @@ HalloweenScenes.Patches = function() {
 		Text.NL();
 		Text.Add("Putting it aside, you resume fishing through the chest’s contents again... ah, now here’s something a little more promising; a necklace of garlic bulbs on thick, knotted string. Phew! The smell is enough to make <i>you</i> gag, never mind what it’s supposed to do to vampires and other evil spirits.", parse);
 		Text.NL();
-		parse["witch"] = HalloweenScenes.HW.flags & HalloweenFlags.Flags.Jenna ? "Jenna" : "the witch";
+		parse.witch = HalloweenScenes.HW.flags & HalloweenFlags.Flags.Jenna ? "Jenna" : "the witch";
 		Text.Add("<i>“A garlic a day helps keep the salesmen at bay; their offerings disgust me and I don’t want to pay,”</i> you hear [witch] chime in.", parse);
 		Text.NL();
 		Text.Add("You tuck that away <i>very</i> carefully and keep looking.", parse);
@@ -6782,7 +6915,7 @@ HalloweenScenes.Patches = function() {
 		Text.NL();
 		Text.Add("Oh. Well... that’s depressing. Still, it’s pretty good advice, all things considered.", parse);
 		Text.NL();
-		parse["w"] = werewolf ? "you’re wearing nothing save your furry birthday suit" : "your skimpy outfit";
+		parse.w = werewolf ? "you’re wearing nothing save your furry birthday suit" : "your skimpy outfit";
 		Text.Add("How did you manage to pocket all of this considering [w]? The world may never know, but you do so anyway.", parse);
 		Text.Flush();
 		
@@ -6801,10 +6934,10 @@ HalloweenScenes.Patches = function() {
 		Text.NL();
 		Text.Add("<i>“Wrong.”</i>", parse);
 		Text.NL();
-		if(patchwork.flags["Met"] >= PatchworkFlags.Met.Met2) {
+		if(patchwork.flags.Met >= PatchworkFlags.Met.Met2) {
 			Text.Add("Wait, <b>what</b>!? Patches <i>never</i> cared about the specifics of the password before - so long as you at least made the effort of humoring [himher], [heshe] would always let you off the hook for trying. ", parse);
 			Text.NL();
-			parse["isare"] = patchesGender ? "is" : "are";
+			parse.isare = patchesGender ? "is" : "are";
 			Text.Add("From the way [heshe] [isare] looking at you, it’s clear that won’t be the case this time. You’ll have to find the ‘real’ password somewhere if you expect to do business.", parse);
 		}
 		else {
@@ -6815,7 +6948,7 @@ HalloweenScenes.Patches = function() {
 		Gui.NextPrompt();
 	};
 	
-	//[Give Password][Say anything][Leave]
+	// [Give Password][Say anything][Leave]
 	let options = new Array();
 	if(hasPassword) {
 		options.push({ nameStr : "Give Password",
@@ -6848,10 +6981,12 @@ HalloweenScenes.Patches = function() {
 				
 				Text.Clear();
 				Text.Add("...[pw]?", {pw: textBox.value});
-				if(truePw == pw)
+				if(truePw == pw) {
 					success();
-				else
+				}
+				else {
 					failure();
+				}
 			});
 		}, enabled : true
 	});
@@ -6867,7 +7002,7 @@ HalloweenScenes.Patches = function() {
 		tooltip : "There’s nothing more you can do here, you might as well get going.",
 		func : function() {
 			Text.Clear();
-			parse["p"] = knowsPatches ? ", beyond a nod of the head" : "";
+			parse.p = knowsPatches ? ", beyond a nod of the head" : "";
 			Text.Add("You say goodbye to [Patches], even though you don’t get a response in return[p], and leave [himher] be.", parse);
 			Text.Flush();
 			
@@ -6896,10 +7031,10 @@ HalloweenScenes.WakingUp = function(badend : boolean) {
 	}
 	
 	HalloweenScenes.HW.Restore();
-	//Sleep
+	// Sleep
 	TimeStep({hour: 8});
 	party.RestFull();
-	//Return to Eden
+	// Return to Eden
 	party.location = WORLD().loc.Plains.Nomads.Tent;
 	
 	Text.NL();

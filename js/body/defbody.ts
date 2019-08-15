@@ -1,13 +1,13 @@
 /*
- * 
+ *
  * Default body definitions and convenience functions
- * 
+ *
  */
 
-import { Vagina } from './vagina';
-import { Cock } from './cock';
-import { Race, RaceDesc } from './race';
-import { Color } from './color';
+import { Cock } from "./cock";
+import { Color } from "./color";
+import { Race, RaceDesc } from "./race";
+import { Vagina } from "./vagina";
 
 export enum BodyTypeFemale {
 	Average   = 0,
@@ -16,7 +16,7 @@ export enum BodyTypeFemale {
 	Tomboy    = 3,
 	Cuntboy   = 4,
 	Voluptous = 5,
-};
+}
 
 export enum BodyTypeMale {
 	Average  = 0,
@@ -24,15 +24,14 @@ export enum BodyTypeMale {
 	Muscular = 2,
 	Girly    = 3,
 	Trap     = 4,
-	Shemale  = 5
-};
+	Shemale  = 5,
+}
 
-let DefBody = {
-	DefFemale : function(bodytype? : BodyTypeFemale) {
+const DefBody = {
+	DefFemale(bodytype?: BodyTypeFemale) {
 		bodytype = bodytype || BodyTypeFemale.Average;
-		
-		switch(bodytype)
-		{
+
+		switch (bodytype) {
 		case BodyTypeFemale.Slim:
 			this.femininity.base = 0.4;
 			this.weigth.base = 55;
@@ -98,11 +97,10 @@ let DefBody = {
 		this.vagina.push(new Vagina());
 	},
 
-	DefMale : function(bodytype? : BodyTypeMale) {
+	DefMale(bodytype?: BodyTypeMale) {
 		bodytype = bodytype || BodyTypeMale.Average;
-		
-		switch(bodytype)
-		{
+
+		switch (bodytype) {
 		case BodyTypeMale.Thin:
 			this.femininity.base = -0.4;
 			this.weigth.base = 62;
@@ -155,7 +153,7 @@ let DefBody = {
 
 		case BodyTypeMale.Average:
 		default:
-			
+
 			this.femininity.base = -0.6;
 			this.weigth.base = 72;
 			this.height.base = 181;
@@ -170,20 +168,21 @@ let DefBody = {
 		this.balls.count.base = 2;
 	},
 
-	DefHerm : function(balls? : boolean) {
+	DefHerm(balls?: boolean) {
 		this.femininity.base = 0.3;
 		this.vagina.push(new Vagina());
 		this.cock.push(new Cock());
 		this.breasts[0].size.base = 7.5;
 		this.ass.buttSize.base = 4;
-		if(balls)
+		if (balls) {
 			this.balls.count.base = 2;
+		}
 	},
 
-	SetRace : function(race : RaceDesc) {
+	SetRace(race: RaceDesc) {
 		// Default
 		race = race || Race.Human;
-		
+
 		// Head
 		this.head.race = race;
 		this.head.mouth.tongue.race = race;
@@ -191,30 +190,33 @@ let DefBody = {
 		this.head.eyes.race = race;
 		this.head.ears.race = race;
 		// Skip appendages array
-		
+
 		// Torso
 		this.torso.race = race;
 		// Skip backSlots array
-		
+
 		// Genetalia
-		for(let i=0,j=this.cock.length; i<j; i++) {
-			if(race.isRace(Race.Canine))
+		for (let i = 0, j = this.cock.length; i < j; i++) {
+			if (race.isRace(Race.Canine)) {
 				this.cock[i].knot = 1;
+			}
 			this.cock[i].race = race;
 		}
 		this.balls.race = race;
-		for(let i=0,j=this.vagina.length; i<j; i++)
+		for (let i = 0, j = this.vagina.length; i < j; i++) {
 			this.vagina[i].race = race;
-		for(let i=0,j=this.breasts.length; i<j; i++)
+		}
+		for (let i = 0, j = this.breasts.length; i < j; i++) {
 			this.breasts[i].race = race;
-			
+		}
+
 		this.arms.race = race;
 		this.legs.race = race;
 	},
 
-	SetBodyColor : function(color : Color) {
+	SetBodyColor(color: Color) {
 		color = color || Color.white;
-		
+
 		// Head
 		this.head.color = color;
 		// Skip tongue
@@ -222,31 +224,36 @@ let DefBody = {
 		// Skip eyes
 		this.head.ears.color = color;
 		// Skip appendages array
-		
+
 		// Torso
 		this.torso.color = color;
-		for(let i=0,j=this.backSlots.length; i<j; i++)
+		for (let i = 0, j = this.backSlots.length; i < j; i++) {
 			this.backSlots[i].color = color;
-		
+		}
+
 		// Genetalia
-		for(let i=0,j=this.cock.length; i<j; i++)
+		for (let i = 0, j = this.cock.length; i < j; i++) {
 			this.cock[i].color = color;
+		}
 		this.balls.color = color;
 		// Skip vagina
-		for(let i=0,j=this.breasts.length; i<j; i++)
+		for (let i = 0, j = this.breasts.length; i < j; i++) {
 			this.breasts[i].color = color;
-		for(let i=0,j=this.arms.length; i<j; i++)
+		}
+		for (let i = 0, j = this.arms.length; i < j; i++) {
 			this.arms[i].color = color;
-		for(let i=0,j=this.legs.length; i<j; i++)
+		}
+		for (let i = 0, j = this.legs.length; i < j; i++) {
 			this.legs[i].color = color;
+		}
 	},
 
-	SetHairColor : function(color : Color) {
+	SetHairColor(color: Color) {
 		color = color || Color.white;
 		this.head.hair.color = color;
 	},
 
-	SetEyeColor : function(color : Color) {
+	SetEyeColor(color: Color) {
 		color = color || Color.white;
 		this.head.eyes.color = color;
 	},

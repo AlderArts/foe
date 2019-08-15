@@ -1,4 +1,4 @@
-let CassidyFlags = {
+const CassidyFlags = {
     Met : {
         NotMet     : 0,
         Met        : 1,
@@ -7,22 +7,22 @@ let CassidyFlags = {
         KnowGender : 4,
         TalkFem    : 5,
         BeganFem   : 6,
-        Feminized  : 7
+        Feminized  : 7,
     },
 
     Talk : {
         Salamanders : 1,
         Family      : 2,
         Loner       : 4,
-        MShop       : 8, //One off manage the shop event
+        MShop       : 8, // One off manage the shop event
         Forge       : 16,
         SexIndoor   : 32,
         Spar        : 64,
-        Model       : 128
+        Model       : 128,
     },
 
     Order : {
-        None : 0
+        None : 0,
     },
 };
 

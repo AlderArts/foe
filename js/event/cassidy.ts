@@ -1,61 +1,61 @@
 /*
- * 
+ *
  * Define Cassidy
- * 
+ *
  */
 
-import { Entity } from '../entity';
-import { Race } from '../body/race';
-import { Time } from '../time';
-import { Shop } from '../shop';
-import { GAME } from '../GAME';
-import { Images } from '../assets';
-import { Text } from '../text';
-import { Element } from '../damagetype';
-import { EncounterTable } from '../encountertable';
-import { Abilities } from '../abilities';
-import { CassidyFlags } from './cassidy-flags';
-import { Item } from '../item';
-import { WeaponsItems } from '../items/weapons';
-import { ArmorItems } from '../items/armor';
-import { GlobalScenes } from './global';
+import { Abilities } from "../abilities";
+import { Images } from "../assets";
+import { Race } from "../body/race";
+import { Element } from "../damagetype";
+import { EncounterTable } from "../encountertable";
+import { Entity } from "../entity";
+import { GAME } from "../GAME";
+import { Item } from "../item";
+import { ArmorItems } from "../items/armor";
+import { WeaponsItems } from "../items/weapons";
+import { Shop } from "../shop";
+import { Text } from "../text";
+import { Time } from "../time";
+import { CassidyFlags } from "./cassidy-flags";
+import { GlobalScenes } from "./global";
 
 export class Cassidy extends Entity {
-	orderTimer : Time;
-	femTimer : Time;
-	shop : Shop;
-	shopItems : Item[];
+	public orderTimer: Time;
+	public femTimer: Time;
+	public shop: Shop;
+	public shopItems: Item[];
 
-	constructor(storage? : any) {
+	constructor(storage?: any) {
 		super();
 
 		this.ID = "cassidy";
-		
+
 		// Character stats
 		this.name = "Cassidy";
-		
+
 		this.body.DefFemale();
 		this.FirstBreastRow().size.base = 2;
 		this.body.SetRace(Race.Salamander);
-		
+
 		this.FirstVag().capacity.base = 10;
 		this.FirstVag().virgin = false;
 		this.Butt().capacity.base = 20;
 		this.Butt().virgin = false;
-		
-		this.flags["Met"]   = CassidyFlags.Met.NotMet;
-		this.flags["Talk"]  = 0; //Bitmask
-		this.flags["SparL"] = 0; //Times lost
-		this.flags["Order"] = CassidyFlags.Order.None;
+
+		this.flags.Met   = CassidyFlags.Met.NotMet;
+		this.flags.Talk  = 0; // Bitmask
+		this.flags.SparL = 0; // Times lost
+		this.flags.Order = CassidyFlags.Order.None;
 		this.orderTimer = new Time();
-		//Use for feminize
+		// Use for feminize
 		this.femTimer   = new Time();
-		
-		//Shop stuff
+
+		// Shop stuff
 		this.shop = CreateShop();
-		this.flags["shop"]     = 0;
+		this.flags.shop     = 0;
 		this.shopItems = [];
-		
+
 		this.shopItems.push(WeaponsItems.Dagger);
 		this.shopItems.push(WeaponsItems.Rapier);
 		this.shopItems.push(WeaponsItems.WoodenStaff);
@@ -65,107 +65,98 @@ export class Cassidy extends Entity {
 		this.shopItems.push(WeaponsItems.Halberd);
 		this.shopItems.push(WeaponsItems.HeavyFlail);
 		this.shopItems.push(WeaponsItems.WarHammer);
-		
-		if(storage) this.FromStorage(storage);
+
+		if (storage) { this.FromStorage(storage); }
 	}
 
-	Update(step : number) {
+	public Update(step: number) {
 		super.Update(step);
-		
+
 		this.orderTimer.Dec(step);
 		this.femTimer.Dec(step);
 	}
-	
-	FromStorage(storage : any) {
+
+	public FromStorage(storage: any) {
 		this.Butt().virgin     = parseInt(storage.avirgin) == 1;
 		this.FirstVag().virgin = parseInt(storage.virgin)  == 1;
-		
+
 		this.LoadPersonalityStats(storage);
-		
+
 		// Load flags
 		this.LoadFlags(storage);
 		this.LoadSexFlags(storage);
-		
+
 		this.orderTimer.FromStorage(storage.oTime);
 		this.femTimer.FromStorage(storage.fTime);
 	}
-	
-	ToStorage() {
-		let storage : any = {
+
+	public ToStorage() {
+		const storage: any = {
 			avirgin : this.Butt().virgin ? 1 : 0,
-			virgin  : this.FirstVag().virgin ? 1 : 0
+			virgin  : this.FirstVag().virgin ? 1 : 0,
 		};
-		
+
 		this.SavePersonalityStats(storage);
-		
+
 		this.SaveFlags(storage);
 		this.SaveSexFlags(storage);
-		
+
 		storage.oTime = this.orderTimer.ToStorage();
 		storage.fTime = this.femTimer.ToStorage();
-		
+
 		return storage;
 	}
-	
-	//Pronoun stuff
-	KnowGender() {
-		return this.flags["Met"] >= CassidyFlags.Met.KnowGender;
-	}
-	Feminized() {
-		return this.flags["Met"] >= CassidyFlags.Met.Feminized;
-	}
-	
-	heshe() {
-		if(this.KnowGender()) return "she";
-		else return "he";
-	}
-	HeShe() {
-		if(this.KnowGender()) return "She";
-		else return "He";
-	}
-	himher() {
-		if(this.KnowGender()) return "her";
-		else return "him";
-	}
-	HimHer() {
-		if(this.KnowGender()) return "Her";
-		else return "Him";
-	}
-	hisher() {
-		if(this.KnowGender()) return "her";
-		else return "his";
-	}
-	HisHer() {
-		if(this.KnowGender()) return "Her";
-		else return "His";
-	}
-	hishers() {
-		if(this.KnowGender()) return "hers";
-		else return "his";
-	}
-	mfPronoun(male : any, female : any) {
-		if(this.KnowGender()) return female;
-		else return male;
-	}	
-}
 
+	// Pronoun stuff
+	public KnowGender() {
+		return this.flags.Met >= CassidyFlags.Met.KnowGender;
+	}
+	public Feminized() {
+		return this.flags.Met >= CassidyFlags.Met.Feminized;
+	}
+
+	public heshe() {
+		if (this.KnowGender()) { return "she"; } else { return "he"; }
+	}
+	public HeShe() {
+		if (this.KnowGender()) { return "She"; } else { return "He"; }
+	}
+	public himher() {
+		if (this.KnowGender()) { return "her"; } else { return "him"; }
+	}
+	public HimHer() {
+		if (this.KnowGender()) { return "Her"; } else { return "Him"; }
+	}
+	public hisher() {
+		if (this.KnowGender()) { return "her"; } else { return "his"; }
+	}
+	public HisHer() {
+		if (this.KnowGender()) { return "Her"; } else { return "His"; }
+	}
+	public hishers() {
+		if (this.KnowGender()) { return "hers"; } else { return "his"; }
+	}
+	public mfPronoun(male: any, female: any) {
+		if (this.KnowGender()) { return female; } else { return male; }
+	}
+}
 
 // SPARRING
 export class CassidySpar extends Entity {
-	reflexFlag : boolean;
+	public reflexFlag: boolean;
 
 	constructor() {
 		super();
 
-		let cassidy = GAME().cassidy;
+		const cassidy = GAME().cassidy;
 
 		this.ID = "cassidyspar";
-		
+
 		// Character stats
 		this.name = "Cassidy";
-		
+
 		this.avatar.combat = Images.cassidy;
-		
+
 		this.maxHp.base        = 300; this.maxHp.growth       = 15;
 		this.maxSp.base        = 90; this.maxSp.growth        = 8;
 		this.maxLust.base      = 50; this.maxLust.growth      = 6;
@@ -177,50 +168,51 @@ export class CassidySpar extends Entity {
 		this.spirit.base       = 13; this.spirit.growth       = 1.2;
 		this.libido.base       = 17; this.libido.growth       = 1.2;
 		this.charisma.base     = 14; this.charisma.growth     = 1.2;
-		
-		let levelLimit = 6 + cassidy.flags["SparL"] * 2;
+
+		let levelLimit = 6 + cassidy.flags.SparL * 2;
 		// In act 1, max out at level 14
-		if(!GlobalScenes.PortalsOpen())
+		if (!GlobalScenes.PortalsOpen()) {
 			levelLimit = Math.min(levelLimit, 14);
-		
-		let level = Math.min(levelLimit, GAME().player.level);
-		
+		}
+
+		const level = Math.min(levelLimit, GAME().player.level);
+
 		this.level    = level;
 		this.sexlevel = 3;
-		
+
 		this.elementDef.dmg[Element.mFire]  = 1;
 		this.elementDef.dmg[Element.mIce]   = -0.5;
 		this.elementDef.dmg[Element.mWater] = -0.5;
-		
+
 		this.body.DefFemale();
 		this.FirstBreastRow().size.base = 2;
 		this.body.SetRace(Race.Salamander);
-		
+
 		this.FirstVag().capacity.base = 10;
 		this.FirstVag().virgin = false;
 		this.Butt().capacity.base = 20;
 		this.Butt().virgin = false;
-		
+
 		this.weaponSlot   = WeaponsItems.WarHammer;
 		this.topArmorSlot = ArmorItems.BronzeChest;
 		this.botArmorSlot = ArmorItems.BronzeLeggings;
-		
+
 		this.Equip();
 		this.SetLevelBonus();
 		this.RestFull();
 	}
 
-	Act(encounter : any, activeChar : any) {
-		let that = this;
+	public Act(encounter: any, activeChar: any) {
+		const that = this;
 		// TODO: Very TEMP
 		Text.Add(this.name + " acts! Rawr!");
 		Text.NL();
 		Text.Flush();
-		
+
 		// Pick a random target
-		let t = this.GetSingleTarget(encounter, activeChar);
-		
-		let scenes = new EncounterTable();
+		const t = this.GetSingleTarget(encounter, activeChar);
+
+		const scenes = new EncounterTable();
 		scenes.AddEnc(function() {
 			Abilities.Attack.Use(encounter, that, t);
 		}, 1.0, function() { return true; });
@@ -239,63 +231,62 @@ export class CassidySpar extends Entity {
 		scenes.AddEnc(function() {
 			Abilities.Seduction.Tease.Use(encounter, that, t);
 		}, 1.0, function() { return true; });
-		
+
 		// Conditional abilities (only available at higher Cass levels)
-		
-		if(that.level >= 10) {
-			if(!that.reflexFlag) {
+
+		if (that.level >= 10) {
+			if (!that.reflexFlag) {
 				scenes.AddEnc(function() {
 					Abilities.EnemySkill.Cassidy.Reflex.Use(encounter, that, t);
 				}, 1.0, function() { return Abilities.EnemySkill.Cassidy.Reflex.enabledCondition(encounter, that); });
 			}
 		}
-		
-		if(that.level >= 14) {
+
+		if (that.level >= 14) {
 			scenes.AddEnc(function() {
 				Abilities.EnemySkill.Cassidy.Impact.Use(encounter, that, t);
 			}, 1.0, function() { return Abilities.EnemySkill.Cassidy.Impact.enabledCondition(encounter, that); });
 		}
-		
+
 		scenes.Get();
 	}
-	
-	PhysDmgHP(encounter : any, caster : Entity, val : number) {
-		let parse : any = {};
-		
-		if(this.reflexFlag) {
+
+	public PhysDmgHP(encounter: any, caster: Entity, val: number) {
+		const parse: any = {};
+
+		if (this.reflexFlag) {
 			Text.Add("Before your attack connects, Cassidy dances out of the way so quickly that the salamander smith is practically a blur. Your wasted attack goes wide, and she gives you one of her trademark shit-eating grins.", parse);
 			Text.NL();
 			Text.Add("Hey!", parse);
 			Text.NL();
 			Text.Add("<i>“What?”</i> Cassidy snickers. <i>“You thought I was just gonna stand there and take it like a champ?”</i>", parse);
 			Text.Flush();
-			
+
 			this.reflexFlag = false;
-			
+
 			return false;
-		}
-		else
+		} else {
 			return super.PhysDmgHP(encounter, caster, val);
-	}	
+		}
+	}
 }
 
-
-let CreateShop = function() {
-	let cassidy = GAME().cassidy;
+const CreateShop = function() {
+	const cassidy = GAME().cassidy;
 
 	return new Shop({
-		buyPromptFunc : function(item : Item, cost : number, bought : boolean) {
-			let coin = Text.NumToText(cost);
-			let parse : any = {
+		buyPromptFunc(item: Item, cost: number, bought: boolean) {
+			const coin = Text.NumToText(cost);
+			let parse: any = {
 				item : item.sDesc(),
-				coin : coin
+				coin,
 			};
 			parse = cassidy.ParserPronouns(parse);
-			if(!bought) {
+			if (!bought) {
 				Text.Clear();
 				Text.Add("Right. Stepping up to Cassidy, you inquire about buying the [item] for yourself, if it’s not too much of a bother. ", parse);
-				
-				let scenes = new EncounterTable();
+
+				const scenes = new EncounterTable();
 				scenes.AddEnc(function() {
 					Text.Add("<i>“Nah, it’s no bother - always happy to serve a reasonable customer. For you, that’ll be [coin] coins.”</i>", parse);
 					Text.NL();
@@ -317,14 +308,14 @@ let CreateShop = function() {
 				Text.NL();
 			}
 		},
-		buySuccessFunc : function(item : Item, cost : number, num : number) {
-			let parse : any = {
+		buySuccessFunc(item: Item, cost: number, num: number) {
+			let parse: any = {
 				num : num > 1 ? "them" : "it",
 				her : num > 1 ? "them" : "her",
-				y   : num > 1 ? "ies" : "y"
+				y   : num > 1 ? "ies" : "y",
 			};
 			parse = cassidy.ParserPronouns(parse);
-			
+
 			Text.Clear();
 			Text.Add("<i>“Gotcha. Give me a moment, and I’ll have [num] ready for you.”</i>", parse);
 			Text.NL();
@@ -338,15 +329,15 @@ let CreateShop = function() {
 			Text.NL();
 			Text.Add("<i>“Right! You want anything else?”</i>", parse);
 			Text.NL();
-			
+
 			cassidy.relation.IncreaseStat(30, 2);
 		},
-		buyFailFunc : function(item : Item, cost : number, bought : boolean) {
-			let parse : any = {
-				
+		buyFailFunc(item: Item, cost: number, bought: boolean) {
+			let parse: any = {
+
 			};
 			parse = cassidy.ParserPronouns(parse);
-			
+
 			Text.Clear();
 			Text.Add("Hmm. On second thought, maybe not.", parse);
 			Text.NL();
@@ -357,17 +348,17 @@ let CreateShop = function() {
 			Text.Add("<i>“Oh, all right then. If you say so.”</i> Cass still looks worried and unsure, but you guess that just shows how seriously [heshe] takes [hisher] work. <i>“You still interested in something?”</i>", parse);
 			Text.NL();
 		},
-		sellPromptFunc : function(item : Item, cost : number, sold : boolean) {
-			let coin = Text.NumToText(cost);
-			let parse : any = {
+		sellPromptFunc(item: Item, cost: number, sold: boolean) {
+			const coin = Text.NumToText(cost);
+			let parse: any = {
 				item : item.sDesc(),
-				coin : coin
+				coin,
 			};
 			parse = cassidy.ParserPronouns(parse);
-			
-			if(!sold) {
+
+			if (!sold) {
 				Text.Clear();
-				let scenes = new EncounterTable();
+				const scenes = new EncounterTable();
 				scenes.AddEnc(function() {
 					Text.Add("Cass throws your proffered item a quick glance of [hisher] expert eye. <i>“Yeah, ace. For that, I’ll do [coin] coins, perfectly reasonable price to me. Sound good to you?”</i>", parse);
 				}, 1.0, function() { return true; });
@@ -382,31 +373,31 @@ let CreateShop = function() {
 					Text.Add("<i>“Hmm.”</i> [HeShe] looks up at you. <i>“I guess I can do [coin] coins, if you’d like. Scrap value isn’t usually worth a lot.”</i>", parse);
 				}, 1.0, function() { return true; });
 				scenes.Get();
-				
+
 				Text.NL();
 			}
 		},
-		sellSuccessFunc : function(item : Item, cost : number, num : number) {
-			let parse : any = {
-				
+		sellSuccessFunc(item: Item, cost: number, num: number) {
+			let parse: any = {
+
 			};
 			parse = cassidy.ParserPronouns(parse);
-			
+
 			Text.Clear();
 			Text.Add("Sure, some price is better than no price, after all. You pass your offering over to Cass, who lazily grabs it with [hisher] tail and tosses into the scrap heap with a bunch all the other waste waiting to be reforged.", parse);
 			Text.NL();
 			Text.Add("<i>“That’ll do, that’ll do… damn, I really hate bookkeeping…”</i> the salamander mutters as [heshe] scribbles in a ledger, then slams it shut and counts out your money. <i>“Okay, there I go, and here you are. Enjoy!”</i> ", parse);
 			Text.NL();
 		},
-		sellFailFunc : function(item : Item, cost : number, sold : boolean) {
-			let parse : any = {
-				item : item.sDesc()
+		sellFailFunc(item: Item, cost: number, sold: boolean) {
+			let parse: any = {
+				item : item.sDesc(),
 			};
 			parse = cassidy.ParserPronouns(parse);
-			
+
 			Text.Clear();
 			Text.Add("<i>“Eh? Suit yourself,”</i> Cass replies with a shrug. <i>“I guess it’s a better fate than being taken apart and melted down for scrap...there’s still some use out of it, really. You want to sell anything else?”</i>", parse);
 			Text.NL();
-		}
+		},
 	});
-}
+};

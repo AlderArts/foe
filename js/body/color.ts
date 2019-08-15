@@ -20,12 +20,12 @@ enum Color {
 	purple   = 17,
 	pink     = 18,
 	teal     = 19,
-	
-	numColors= 20
+
+	numColors= 20,
 }
 namespace Color {
-	export function Desc(col : number) {
-		switch(col) {
+	export function Desc(col: number) {
+		switch (col) {
 		case Color.white:    return "white";
 		case Color.light:    return "light";
 		case Color.dark:     return "dark";
@@ -46,7 +46,7 @@ namespace Color {
 		case Color.purple:   return "purple";
 		case Color.pink:     return "pink";
 		case Color.teal:     return "teal";
-		
+
 		default:             return "colorless";
 		}
 	}

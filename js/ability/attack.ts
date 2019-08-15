@@ -1,30 +1,30 @@
 /*
- * 
+ *
  * Basic attack
- * 
+ *
  */
 
-import { AbilityNode } from './node';
-import { Ability } from '../ability';
-import { Text } from '../text';
-import { Encounter } from '../combat';
-import { Entity } from '../entity';
+import { Ability } from "../ability";
+import { Encounter } from "../combat";
+import { Entity } from "../entity";
+import { Text } from "../text";
+import { AbilityNode } from "./node";
 
-let AttackAb = new Ability("Attack");
-AttackAb.Short = function() { return "Perform a physical attack."; }
+const AttackAb = new Ability("Attack");
+AttackAb.Short = () => "Perform a physical attack.";
 AttackAb.castTree.push(AbilityNode.Template.Physical({
-	onMiss: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity) {
-		let parse = AbilityNode.DefaultParser(caster, target);
-		Text.Add("[Name] attack[notS] [tname], but the blow misses!", parse);
+	onAbsorb: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity, dmg: number) => {
+		const parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("[Name] attack[notS] [tname], but [theshe] absorb[tnotS] the blow for " + Text.Heal(dmg) + " damage!");
 	}],
-	onDamage: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity, dmg : number) {
-		let parse = AbilityNode.DefaultParser(caster, target);
+	onDamage: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity, dmg: number) => {
+		const parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[Name] attack[notS] [tname] for " + Text.Damage(-dmg) + " damage! Waagh!", parse);
 	}],
-	onAbsorb: [function(ability : Ability, encounter : Encounter, caster : Entity, target : Entity, dmg : number) {
-		let parse = AbilityNode.DefaultParser(caster, target);
-		Text.Add("[Name] attack[notS] [tname], but [theshe] absorb[tnotS] the blow for " + Text.Heal(dmg) + " damage!");
-	}]
+	onMiss: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
+		const parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("[Name] attack[notS] [tname], but the blow misses!", parse);
+	}],
 }));
 
 export { AttackAb };

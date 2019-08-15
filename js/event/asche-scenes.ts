@@ -1,17 +1,17 @@
-import * as _ from 'lodash';
+import * as _ from "lodash";
 
-import { GAME } from '../GAME';
-import { AscheFlags } from './asche-flags';
-import { Text } from '../text';
-import { Gui } from '../gui';
-import { EncounterTable } from '../encountertable';
-import { GlobalScenes } from './global';
-import { Party } from '../party';
-import { DryadGladeFlags } from '../loc/glade-flags';
-import { MagicShopScenes } from '../loc/rigard/magicshop';
-import { AccItems } from '../items/accessories';
-import { CombatItems } from '../items/combatitems';
-import { AscheTasksScenes } from './asche-tasks';
+import { EncounterTable } from "../encountertable";
+import { GAME } from "../GAME";
+import { Gui } from "../gui";
+import { AccItems } from "../items/accessories";
+import { CombatItems } from "../items/combatitems";
+import { DryadGladeFlags } from "../loc/glade-flags";
+import { MagicShopScenes } from "../loc/rigard/magicshop";
+import { Party } from "../party";
+import { Text } from "../text";
+import { AscheFlags } from "./asche-flags";
+import { AscheTasksScenes } from "./asche-tasks";
+import { GlobalScenes } from "./global";
 
 export namespace AscheScenes {
     export function FortuneCost() {
@@ -19,16 +19,16 @@ export namespace AscheScenes {
     }
 
     export function FirstEntry() {
-        let player = GAME().player;
-        let asche = GAME().asche;
+        const player = GAME().player;
+        const asche = GAME().asche;
 
-        let parse : any = {
-            heshe : player.mfFem("he","she"),
-            handsomepretty : player.mfFem("handsome", "pretty")
+        const parse: any = {
+            heshe : player.mfFem("he", "she"),
+            handsomepretty : player.mfFem("handsome", "pretty"),
         };
-        
-        asche.flags["Met"] = AscheFlags.Met.Met;
-        
+
+        asche.flags.Met = AscheFlags.Met.Met;
+
         Text.Clear();
         Text.Add("A gentle jingle of chimes greets you as you push open the hardwood door, followed by a strong, heady aroma of incense that’s practically overpowering. Still, you forge ahead into the small store, and are greeted by the proprietor behind the counter, a jackal-morph of slender build. Her large ears perk up as she sees you, and she adjusts her clothing - an exotic-looking garment consisting of a white drape, mostly wrapped about her waist and with one end hung loosely over a shoulder, baring her furry midriff. Her dark eyes look as if she’s gone way overboard with the eyeliner and shadow, and she’s adorned from head to toe in jewelery - some of it tasteful, but most of it absolutely tacky, with bangles, earrings, and all.", parse);
         Text.NL();
@@ -56,45 +56,45 @@ export namespace AscheScenes {
     }
 
     export function Prompt() {
-        let player = GAME().player;
-        let asche = GAME().asche;
-        let rigard = GAME().rigard;
+        const player = GAME().player;
+        const asche = GAME().asche;
+        const rigard = GAME().rigard;
 
-        let parse : any = {
+        const parse: any = {
             handsomepretty : player.mfFem("handsome", "pretty"),
             heshe: player.mfFem("he", "she"),
             hisher: player.mfFem("his", "her"),
-            himher: player.mfFem("him", "her")
+            himher: player.mfFem("him", "her"),
         };
-        
-        let options = new Array();
+
+        const options = new Array();
         options.push({ nameStr : "Appearance",
             tooltip : "Study the jackal-morph.",
             func : AscheScenes.Appearance,
-            enabled : true
+            enabled : true,
         });
         options.push({ nameStr : "Talk",
             tooltip : "Chat up Asche.",
-            func : function() {
+            func() {
                 Text.Clear();
                 Text.Add("Asche looks around the her shop for a bit, craning her neck this way and that. Once the jackaless is content that business isn’t too brisk to prevent a bit of chit-chat, she lounges on the counter with all the nonchalance of a lazy cat and smiles at you.", parse);
                 Text.NL();
                 Text.Add("<i>“Well, it seems like Asche has a little time for making small talk with [handsomepretty] customer like you. Maybe call it customer relations? Maybe with enough luck, can be called customer service, too.”</i> She chuckles at her own joke. <i>“Well, what does good customer wish to gossip about?”</i>", parse);
                 Text.Flush();
-                
+
                 AscheScenes.TalkPrompt();
-            }, enabled : true
+            }, enabled : true,
         });
         options.push({ nameStr : "Buy",
             tooltip : "Ask to see her wares.",
-            func : function() {
+            func() {
                 Text.Clear();
                 Text.Add("The jackaless nods and beams at you. <i>“Asche is happy to be able to service customer! Please to be browsing, perusing, going through. If customer is finding anything to [hisher] liking, then is but small matter of money to be bringing it away with [himher].”</i>", parse);
-                
+
                 rigard.MagicShop.Buy(function() {
                     Text.Clear();
-                    
-                    let scenes = new EncounterTable();
+
+                    const scenes = new EncounterTable();
                     scenes.AddEnc(function() {
                         Text.Add("<i>“Oh? There is being nothing here that is interesting customer?”</i> Heaving a small sigh, Asche shrugs and spreads her hands, palms upward. <i>“Well, it is being what it is, so maybe customer should be looking at something else?”</i>", parse);
                     }, 1.0, function() { return true; });
@@ -105,50 +105,50 @@ export namespace AscheScenes {
                         Text.Add("<i>“Is pity that customer is not fancying anything right now, but maybe [heshe] has not come across right item yet,”</i> Asche says as she puts her goods away. <i>“Is not big deal, anyway - these days Asche is doing this more for practice and amusement than actually needing to feed her face. To be coming again another time, when she has different things?”</i>", parse);
                     }, 1.0, function() { return true; });
                     scenes.Get();
-                    
+
                     Text.Flush();
                     AscheScenes.Prompt();
                 }, true);
-            }, enabled : true
+            }, enabled : true,
         });
         options.push({ nameStr : "Sell",
             tooltip : "Get rid of some of your surplus.",
-            func : function() {
+            func() {
                 Text.Clear();
                 Text.Add("<i>“Customer is wanting to sell something to Asche?”</i> The jackaless rubs her hands together, a movement accompanied by the clinking of bangles. <i>“Let Asche see item, and she will tell you how much she thinks she will buy it for.”</i>", parse);
-                
+
                 rigard.MagicShop.Sell(function() {
                     Text.Clear();
                     Text.Add("<i>“Customer come back to Asche if [heshe] wants to sell things, yes?”</i>", parse);
                     Text.Flush();
                     AscheScenes.Prompt();
                 }, true);
-            }, enabled : true
+            }, enabled : true,
         });
         options.push({ nameStr : "The Magic Box",
             tooltip : "Do you feel lucky? Well, do you?",
-            func : function() {
+            func() {
                 Text.Clear();
                 Text.Add("<i>“Ah, customer is interested in magic box?”</i> There’s a soft clink of metal as Asche shifts slightly in her seat. <i>“What is it that good customer desires? Fee is [coin] coins.”</i>", {coin: Text.NumToText(asche.MagicBoxCost()) });
                 Text.Flush();
-                
+
                 AscheScenes.MagicBoxPrompt();
-            }, enabled : true
+            }, enabled : true,
         });
         options.push({ nameStr : "Fortune Telling",
             tooltip : "Ask Asche to see what the future has in store for you.",
-            func : function() {
+            func() {
                 Text.Clear();
-                parse["coin"] = Text.NumToText(AscheScenes.FortuneCost());
+                parse.coin = Text.NumToText(AscheScenes.FortuneCost());
                 Text.Add("<i>Ah, you are wanting Asche to be divining what future holds for you?”</i> the jackaless says with a smirk and wink. <i>“Can be done, for the price of [coin] coins.”</i>", parse);
                 Text.Flush();
-                
+
                 AscheScenes.FortuneTellingPrompt();
-            }, enabled : true
+            }, enabled : true,
         });
         options.push({ nameStr : "Sex",
             tooltip : "Propose a romp in the hay with the exotic shopkeeper.",
-            func : function() {
+            func() {
                 Text.Clear();
                 Text.Add("<i>“Mm…”</i> Asche licks her muzzle, then leans up close to you. Nonchalantly, she cups her breasts, one in each hand, then pushes her lady lumps forward such that the hand-filling mounds seem even bigger and fuller than they already are - you can practically see them through the fabric of her sari. Making sure you’re looking, the jackaless begins kneading gently, a small whine escaping her muzzle before she stops and grins at you. <i>“Asche thinks… not. Asche is a good girl, a nice girl, and does not give freebies to get others hooked, unlike her big sister.”</i>", parse);
                 Text.NL();
@@ -158,12 +158,12 @@ export namespace AscheScenes {
                 Text.NL();
                 Text.Add("<i>“Nevertheless, if customer is determined… maybe there may come a time when there are things [heshe] can do that may make Asche change her mind,”</i> she adds with a wink.", parse);
                 Text.Flush();
-            }, enabled : true
+            }, enabled : true,
         });
         Gui.SetButtonsFromList(options, true, function() {
             Text.Clear();
-            
-            let scenes = new EncounterTable();
+
+            const scenes = new EncounterTable();
             scenes.AddEnc(function() {
                 Text.Add("<i>“Bye bye now,”</i> Asche says, flicking a softly-furred ear in your direction. <i>“Asche is hoping that customer is being in one piece when [heshe] is next returning to her shop… but if not, there are things she has which can be solving that little problem, too…”</i>", parse);
             }, 1.0, function() { return true; });
@@ -184,11 +184,11 @@ export namespace AscheScenes {
     }
 
     export function Appearance() {
-        let player = GAME().player;
-        let parse : any = {
-            handsomepretty : player.mfFem("handsome", "pretty")
+        const player = GAME().player;
+        const parse: any = {
+            handsomepretty : player.mfFem("handsome", "pretty"),
         };
-        
+
         Text.Clear();
         Text.Add("Asche is a lusciously full-bodied jackal-morph, her limbs and figure slender, her chest and hips exotically full. Clothed in a pure white sari that exposes her midriff’s soft deep golden-brown fur, the jackaless is quite the sight to behold. Large, pointy ears peek out from the hood of her snow-white shawl, constantly alert and swivelling this way and that. Stray strands of dirty blond hair streaked with black gather around her chin and shoulders as she levels her narrow, dark eyes at you.", parse);
         Text.NL();
@@ -201,21 +201,21 @@ export namespace AscheScenes {
     }
 
     export function TalkPrompt() {
-        let player = GAME().player;
-        let asche = GAME().asche;
+        const player = GAME().player;
+        const asche = GAME().asche;
 
-        let parse : any = {
+        const parse: any = {
             handsomepretty : player.mfFem("handsome", "pretty"),
             heshe: player.mfFem("he", "she"),
             hisher: player.mfFem("his", "her"),
-            himher : player.mfFem("him", "her")
+            himher : player.mfFem("him", "her"),
         };
-        
-        //[Shop][Magic][Herself][Sister][Stock][Tasks][Back]
-        let options = new Array();
+
+        // [Shop][Magic][Herself][Sister][Stock][Tasks][Back]
+        const options = new Array();
         options.push({ nameStr : "Shop",
             tooltip : "That’s a nice shop she has there.",
-            func : function() {
+            func() {
                 Text.Clear();
                 Text.Add("The shop’s a pretty nice place, you mention, looking around. It definitely has that feel that one gets when entering one of those tiny antique shops, or perhaps an old bookstore - the kind in which forgotten treasures are found, treasures which have entire stories revolving about them.", parse);
                 Text.NL();
@@ -235,19 +235,19 @@ export namespace AscheScenes {
                 Text.NL();
                 Text.Add("Well, from a business standpoint, you suppose it is. From a more personal point of view, though, it’s hardly enough. Nevertheless, it’s probably not good to press her for too much in one go…", parse);
                 Text.Flush();
-                
-                asche.flags["Talk"] |= AscheFlags.Talk.Shop;
-                
+
+                asche.flags.Talk |= AscheFlags.Talk.Shop;
+
                 AscheScenes.TalkPrompt();
-            }, enabled : true
+            }, enabled : true,
         });
         options.push({ nameStr : "Magic",
             tooltip : "Discuss Asche’s particular brand of magic with her.",
-            func : AscheScenes.Lessons, enabled : true
+            func : AscheScenes.Lessons, enabled : true,
         });
         options.push({ nameStr : "Herself",
             tooltip : "Ask the jackaless about herself.",
-            func : function() {
+            func() {
                 Text.Clear();
                 Text.Add("Perhaps she could tell you something about herself.", parse);
                 Text.NL();
@@ -269,16 +269,16 @@ export namespace AscheScenes {
                 Text.NL();
                 Text.Add("<i>“Soon enough, Asche is having enough money to rent out small place in merchants’ district - rent of this place was very much cheaper back then, so easier to do. When she is earning enough money later on, she is buying place and making it her own. Is very nice story, no?”</i>", parse);
                 Text.Flush();
-                
-                asche.flags["Talk"] |= AscheFlags.Talk.Herself;
-                
+
+                asche.flags.Talk |= AscheFlags.Talk.Herself;
+
                 AscheScenes.TalkPrompt();
-            }, enabled : true
+            }, enabled : true,
         });
-        //Requires having asked about herself and shop
+        // Requires having asked about herself and shop
         options.push({ nameStr : "Sister",
             tooltip : "So, this sister she mentioned…",
-            func : function() {
+            func() {
                 Text.Clear();
                 Text.Add("The jackaless’ ears flick at your question. <i>“Why yes, Asche has one big sister. Much lovelier than Asche, too - and much more nasty. Big sister also runs shop much like Asche’s, only with much fewer scruples; while Asche is careful not to sell things that harm customers unless misused, big sister does not think twice about doing so. That is why while Asche can remain in one place, big sister was always having to move shop before shop was moved for her, if you are understanding Asche’s meaning.”</i>", parse);
                 Text.NL();
@@ -294,15 +294,15 @@ export namespace AscheScenes {
                 Text.NL();
                 Text.Add("<i>“Nevertheless, if you are finding in your travels shop much like Asche’s, and also owner who looks like Asche, only she has black and silver fur instead… customer is not to be buying anything and leaving immediately. But there is little to fear from Asche, good customer. Asche is a nice girl, and knows not to salt earth. None of Asche’s merchandise will harm you - unless you mean to do evil with it.”</i>", parse);
                 Text.Flush();
-                
-                asche.flags["Talk"] |= AscheFlags.Talk.Sister;
-                
+
+                asche.flags.Talk |= AscheFlags.Talk.Sister;
+
                 AscheScenes.TalkPrompt();
-            }, enabled : (asche.flags["Talk"] & AscheFlags.Talk.Shop) && (asche.flags["Talk"] & AscheFlags.Talk.Herself)
+            }, enabled : (asche.flags.Talk & AscheFlags.Talk.Shop) && (asche.flags.Talk & AscheFlags.Talk.Herself),
         });
         options.push({ nameStr : "Stock",
             tooltip : "Where does she get all the stuff she sells?",
-            func : function() {
+            func() {
                 Text.Clear();
                 Text.Add("You’ll admit to being a bit curious - just where does Asche get her stock? Some of the things she sells are positively odd; you don’t think the likes of them can be found in any other shop in Rigard - in fact, you’re pretty sure some of her goods would be more at home in the Academy of Higher Arts rather than sitting on her shelves.", parse);
                 Text.NL();
@@ -312,69 +312,70 @@ export namespace AscheScenes {
                 Text.NL();
                 Text.Add("<i>“As for potions, all are brewed by Asche. Simple ones anyone who studies can make, but some are Asche’s special recipe and she is not letting such secrets slip easily.”</i> With that, the jackaless clears her throat and gestures at her store. <i>“Asche has not stayed in business for so long by being stupid or careless; she is having many loyal customers who be relying on her not to make mistake.”</i>", parse);
                 Text.Flush();
-                
-                asche.flags["Talk"] |= AscheFlags.Talk.Stock;
-                
+
+                asche.flags.Talk |= AscheFlags.Talk.Stock;
+
                 AscheScenes.TalkPrompt();
-            }, enabled : true
+            }, enabled : true,
         });
         // TODO Default response:
         options.push({ nameStr : "Tasks",
             tooltip : "Does she perchance need the services of an adventurer?",
-            func : function() {
-                if(AscheTasksScenes.Ginseng.IsEligable())
+            func() {
+                if (AscheTasksScenes.Ginseng.IsEligable()) {
                     AscheTasksScenes.Ginseng.Initiation();
-                else if(AscheTasksScenes.Ginseng.IsOn()) {
-                    if(AscheTasksScenes.Ginseng.IsFail())
+                } else if (AscheTasksScenes.Ginseng.IsOn()) {
+                    if (AscheTasksScenes.Ginseng.IsFail()) {
                         AscheTasksScenes.Ginseng.Failed();
-                    else if(AscheTasksScenes.Ginseng.IsSuccess())
+                    } else if (AscheTasksScenes.Ginseng.IsSuccess()) {
                         AscheTasksScenes.Ginseng.Complete();
-                    else
+ } else {
                         AscheTasksScenes.Ginseng.OnTask();
-                }
-                else if(AscheTasksScenes.Nightshade.IsEligable())
+ }
+                } else if (AscheTasksScenes.Nightshade.IsEligable()) {
                     AscheTasksScenes.Nightshade.Initiation();
-                else if(AscheTasksScenes.Nightshade.IsOn()) {
-                    if(AscheTasksScenes.Nightshade.IsSuccess())
+ } else if (AscheTasksScenes.Nightshade.IsOn()) {
+                    if (AscheTasksScenes.Nightshade.IsSuccess()) {
                         AscheTasksScenes.Nightshade.Complete();
-                    else
+                    } else {
                         AscheTasksScenes.Nightshade.OnTask();
-                }
-                else if(AscheTasksScenes.Spring.IsEligable())
+                    }
+                } else if (AscheTasksScenes.Spring.IsEligable()) {
                     AscheTasksScenes.Spring.Initiation();
-                else if(AscheTasksScenes.Spring.IsOn()) {
-                    if(AscheTasksScenes.Spring.IsSuccess())
+ } else if (AscheTasksScenes.Spring.IsOn()) {
+                    if (AscheTasksScenes.Spring.IsSuccess()) {
                         AscheTasksScenes.Spring.Complete();
-                    else
+                    } else {
                         AscheTasksScenes.Spring.OnTask();
-                }
-                else
+                    }
+                } else {
                     AscheTasksScenes.Default();
-            }, enabled : true
+ }
+            }, enabled : true,
         });
         Gui.SetButtonsFromList(options, true, function() {
             Text.Clear();
             Text.Add("<i>“Customer is having enough of chit-chat, maybe mouth is getting dry?”</i> Leaning forward on the counter, Asche grins at you playfully. <i>“Asche has many nice teas for long conversations, maybe customer can be purchasing some. But is there anything else customer wishes to have to do with Asche before this meeting is over?”</i>", parse);
             Text.Flush();
-            
+
             AscheScenes.Prompt();
         });
     }
 
     export function Lessons() {
-        let player = GAME().player;
-        let asche = GAME().asche;
+        const player = GAME().player;
+        const asche = GAME().asche;
 
-        let parse : any = {
+        const parse: any = {
             handsomepretty : player.mfFem("handsome", "pretty"),
             heshe: player.mfFem("he", "she"),
             hisher: player.mfFem("his", "her"),
-            himher: player.mfFem("him", "her")
+            himher: player.mfFem("him", "her"),
         };
-        
+
         Text.Clear();
         // Lesson one - Components
-        if(asche.flags["Magic"] < AscheFlags.Magic.Components) {
+        if (asche.flags.Magic < AscheFlags.Magic.Components) {
             Text.Add("You’d like to discuss the nature of magic with her. It seems quite different from what is usually practiced on Eden.", parse);
             Text.NL();
             Text.Add("<i>“Oh-ho,”</i> the jackaless replies, eyeing you with a raised eyebrow, her tail swishing from side to side. <i>“Customer is wanting to know the secrets of highlander witch doctors, herb women, and shamans? Is taking many years to truly understand, as well as good memory; Asche spent her whole time as girl learning basics of such magic.”</i>", parse);
@@ -394,14 +395,12 @@ export namespace AscheScenes {
             Text.Add("Asche shrugs. <i>“It is really being depending on what customer has in mind. For example, best item for drawing forth power of sea is being black pearl, which is being incredibly rare. Pearl is also working, but not as powerful, to be needing more of them as compared to black ones. To be representing life and growth is very simple, just needing pinch of common basil herb. Invoking fire and light is requiring volcanic ash from deep underground, but coal can also be sufficing if simple magic is what is needed.</i>", parse);
             Text.NL();
             Text.Add("<i>“Rituals is also being important in working of highlander magic, but maybe is discussion best saved for another time, is it not? Asche’s tongue is getting dry from so much talking, maybe is wanting something to drink.”</i> The jackaless chuckles.", parse);
-            
-            asche.flags["Magic"] = AscheFlags.Magic.Components;
-            
+
+            asche.flags.Magic = AscheFlags.Magic.Components;
+
             Text.Flush();
             AscheScenes.TalkPrompt();
-        }
-        // Lesson two - Ritual
-        else if((asche.flags["Magic"] < AscheFlags.Magic.Rituals) && (asche.flags["Tasks"] >= AscheFlags.Tasks.Ginseng_Finished)) {
+        } else if ((asche.flags.Magic < AscheFlags.Magic.Rituals) && (asche.flags.Tasks >= AscheFlags.Tasks.Ginseng_Finished)) {
             Text.Add("<i>“Now that customer has had chance to see shamanistic power for [himher]self, Asche is thinking that maybe [heshe] is ready for deeper explanation. But… really, this jackaless is curious - she cannot be teaching customer to be doing highlander magic, so why is customer being asking so many questions?”</i>", parse);
             Text.NL();
             Text.Add("Curiosity, nothing more.", parse);
@@ -412,7 +411,7 @@ export namespace AscheScenes {
             Text.NL();
             Text.Add("The jackaless looks at you to make sure you’re still listening, then continues. <i>“Ritual being used in highlander magic is same basic idea, to use actions and symbols to be focusing mind. Difference is that is very tricky. Even Asche does not use it much, only when true power is being called for.”</i>", parse);
             Text.Flush();
-            
+
             Gui.NextPrompt(function() {
                 Text.Clear();
                 Text.Add("<i>“Maybe best explanation is being through example. Say there is not being rain for some time, and shaman is asked to summon rain so that crops may have water. First thing shaman does is to retreat into cave and start preparing large amount of woad. During this time, shaman is also fasting from dawn to dusk to prepare mind for ritual, this period is being lasting two days.</i>", parse);
@@ -432,16 +431,13 @@ export namespace AscheScenes {
                 Text.Add("Asche shakes her head, soft clinks of gold against gold accompanying the movement. <i>“What Asche has told good customer is being very, very summarized. There is reason why next herb woman is almost certainly being daughter of previous one, as training is beginning from moment child is able to walk and speak. Maybe even before, if customer is seeing it that way.</i>", parse);
                 Text.NL();
                 Text.Add("<i>“Now, Asche has said enough, and has shop to tend to. Maybe you buy something to make up for Asche telling you long grandmother story, yes?”</i>", parse);
-                
-                asche.flags["Magic"] = AscheFlags.Magic.Rituals;
-                
+
+                asche.flags.Magic = AscheFlags.Magic.Rituals;
+
                 Text.Flush();
                 AscheScenes.TalkPrompt();
             });
-        }
-        // Lesson three - Authority
-        //TODO Act 1?
-        else if(!GlobalScenes.PortalsOpen() && (asche.flags["Magic"] < AscheFlags.Magic.Authority) && (asche.flags["Tasks"] >= AscheFlags.Tasks.Nightshade_Finished)) {
+        } else if (!GlobalScenes.PortalsOpen() && (asche.flags.Magic < AscheFlags.Magic.Authority) && (asche.flags.Tasks >= AscheFlags.Tasks.Nightshade_Finished)) {
             Text.Add("<i>“Today, Asche would be liking to be talking about what kinds of magic can be done, and what is to not be done. This jackaless is admitting that maybe she should have been making this her very first lesson to customer, but it was slipping her mind…</i>", parse);
             Text.NL();
             Text.Add("<i>“Never mind. She can be making up for lost time right now.”</i>", parse);
@@ -465,14 +461,12 @@ export namespace AscheScenes {
             Text.Add("You nod.", parse);
             Text.NL();
             Text.Add("<i>“Good, that is one thing off this jackaless’ conscience.”</i> Asche huffs, warm breath jetting from her muzzle, and pulls herself away from you. <i>“Do not be saying that Asche is not giving warning… and that is being ending today’s lesson. Is an important one, so Asche is hoping customer is learning it well.”</i>", parse);
-            
-            asche.flags["Magic"] = AscheFlags.Magic.Authority;
-            
+
+            asche.flags.Magic = AscheFlags.Magic.Authority;
+
             Text.Flush();
             AscheScenes.TalkPrompt();
-        }
-        // Lesson Four - Spirits
-        else if((asche.flags["Magic"] < AscheFlags.Magic.Spirits) && (asche.flags["Tasks"] >= AscheFlags.Tasks.Spring_Finished) && GlobalScenes.DefeatedOrchid()) {
+        } else if ((asche.flags.Magic < AscheFlags.Magic.Spirits) && (asche.flags.Tasks >= AscheFlags.Tasks.Spring_Finished) && GlobalScenes.DefeatedOrchid()) {
             Text.Add("Asche nods and traces a finger on the counter. <i>“For today’s lesson with customer, Asche is wishing to be broaching the subject of spirits.”</i>", parse);
             Text.NL();
             Text.Add("Right. Spirits. That’s how you ended up in this mess in the first place - the gem aside, of course. Aria, Uru…", parse);
@@ -506,54 +500,52 @@ export namespace AscheScenes {
             Text.Add("You’ll try and wrap your head about it.", parse);
             Text.NL();
             Text.Add("<i>“Is as much as this jackaless can be asking for, and that is concluding today’s lesson. If customer is taking only one thing away from Asche’s words, she is asking customer to remember to be treating accompanying spirits with respect. Much will be owed them in future.”</i>", parse);
-            
-            asche.flags["Magic"] = AscheFlags.Magic.Spirits;
-            
+
+            asche.flags.Magic = AscheFlags.Magic.Spirits;
+
             Text.Flush();
             AscheScenes.TalkPrompt();
-        }
-        //TODO more lessons
-        else {
+        } else {
             Text.Add("The jackaless makes a show of looking contemplative, leaning on the counter as she taps her chin and rolls her eyes in an exaggerated display of thoughtfulness. <i>“Hmm… customer is wanting to be talking more magic with Asche? This jackaless is thinking not so quickly… maybe good customer is getting one step ahead of [himher]self, yes? Perhaps is best to be contemplating and internalizing things which are being told, lessons which are being taught, having some time to be seeing it in action.</i>", parse);
             Text.NL();
             Text.Add("<i>“Maybe it is being best for good customer if [heshe] is coming back after Asche is finding opportunity to be sending [himher] to experience it in field.”</i>", parse);
             Text.Flush();
             AscheScenes.TalkPrompt();
         }
-        
+
     }
 
     export function FortuneTellingPrompt() {
-        let player = GAME().player;
-        let kiakai = GAME().kiakai;
-        let terry = GAME().terry;
-        let layla = GAME().layla;
-        let party : Party = GAME().party;
-        let rigard = GAME().rigard;
-        let glade = GAME().glade;
+        const player = GAME().player;
+        const kiakai = GAME().kiakai;
+        const terry = GAME().terry;
+        const layla = GAME().layla;
+        const party: Party = GAME().party;
+        const rigard = GAME().rigard;
+        const glade = GAME().glade;
 
-        let parse : any = {
+        const parse: any = {
             handsomepretty : player.mfFem("handsome", "pretty"),
             HeShe: player.mfFem("He", "She"),
             heshe: player.mfFem("he", "she"),
             hisher: player.mfFem("his", "her"),
-            himher : player.mfFem("him", "her")
+            himher : player.mfFem("him", "her"),
         };
-        
-        let cost = AscheScenes.FortuneCost();
-        
-        //[Fortune][Fate][Explain][Never Mind]
-        let options = new Array();
+
+        const cost = AscheScenes.FortuneCost();
+
+        // [Fortune][Fate][Explain][Never Mind]
+        const options = new Array();
         options.push({ nameStr : "Fortune",
             tooltip : "Ask for a quick, light and easy reading.",
-            func : function() {
+            func() {
                 Text.Clear();
                 Text.Add("<i>“Mm.”</i> The jackaless pulls at her shawl as you pass her the money, then dips her head. <i>“All right. Good customer is to be holding out hand, please.”</i>", parse);
                 Text.NL();
                 Text.Add("Obediently, you do as Asche requests. Her fingers tickle as they ply along the contours of your palm, while she mumbles all the while. There’s no obvious indication of worked magic, but she seems to be concentrating furiously, her eyes narrowed and face set; it’s a minute or so before she finally relaxes her grip on your hand.", parse);
                 Text.NL();
-                
-                let scenes = new EncounterTable();
+
+                const scenes = new EncounterTable();
                 scenes.AddEnc(function() {
                     Text.Add("<i>“Hmm. Asche is thinking that you are being having romantic problems in near future.”</i> The jackaless looks up from your palm, her expression serious. <i>”Maybe is being a bit of a headache.”</i>", parse);
                     Text.NL();
@@ -618,16 +610,16 @@ export namespace AscheScenes {
                 */
                 scenes.Get();
                 Text.Flush();
-                
+
                 party.coin -= cost;
                 rigard.MagicShop.totalBought += cost;
-                
+
                 AscheScenes.FortuneTellingPrompt();
-            }, enabled : party.coin >= cost
+            }, enabled : party.coin >= cost,
         });
         options.push({ nameStr : "Fate",
             tooltip : "So, you’re serious about asking Asche to read what the future has in store for you…",
-            func : function() {
+            func() {
                 Text.Clear();
                 Text.Add("All trace of nonchalance drops from the jackaless’ face. Her eyes harden, her lips thin, and you notice that she’s begun fiddling with the hem of her shawl. <i>“So, you are being serious about this, then.”</i>", parse);
                 Text.NL();
@@ -641,11 +633,11 @@ export namespace AscheScenes {
                 Text.NL();
                 Text.Add("<i>“Asche is ready to be telling you what she is seeing in your fate.</i>", parse);
                 Text.NL();
-                
-                let scenes = new EncounterTable();
-                
-                //Fate readings for first phase of game
-                
+
+                const scenes = new EncounterTable();
+
+                // Fate readings for first phase of game
+
                 scenes.AddEnc(function() {
                     // Referencing Uru at portal opening.
                     Text.Add("<i>“Customer is to be wary; an old adversary is to be turning up soon. While customer is knowing that [heshe] will eventually have to confront this enemy, meeting will be far sooner than expected.</i>", parse);
@@ -665,11 +657,11 @@ export namespace AscheScenes {
                     Text.Add("<i>“Customer must be careful about who [heshe] is making friends with,”</i> Asche says. <i>“Is more than just friendship. The more who are knowing of your cause, the more are gathering their energies to aid it; the way these energies are being manifesting will soon make themselves clear as customer proceeds towards [hisher] chosen fate. Of course, customer does not want to be making the wrong friends, trusting the wrong people…“</i>", parse);
                 }, 1.0, function() { return true; });
                 scenes.AddEnc(function() {
-                    //Requires that PC has met Layla.
+                    // Requires that PC has met Layla.
                     Text.Add("<i>“The creature that customer is being calling a chimaera…”</i> Asche looks strangely intent. <i>“Is old. Very, very old, but not in shape that customer now knows; body is old, but mind to be like that of a newborn. She is very pliable thing… Asche is hoping that you are making wise decisions in choosing to mold her.”</i>", parse);
                 }, 1.0, function() { return party.InParty(layla, true); });
                 scenes.AddEnc(function() {
-                    //Requires that player have recruited Terry.
+                    // Requires that player have recruited Terry.
                     Text.Add("<i>“Perhaps may be coming time when you will not be needing collar around foxy companion’s neck, good customer,”</i> Asche says. <i>“May be some time off yet, but is still being possible… provided wise choices are being made. But where to be making wise choices… that is not clear to Asche. This jackaless is sorry, but the mists are being clouding your future, and seeing through them is hard.”</i>", parse);
                 }, 1.0, function() { return party.InParty(terry, true); });
                 scenes.AddEnc(function() {
@@ -682,7 +674,7 @@ export namespace AscheScenes {
                     Text.Add("Can she give you an idea of how many more?", parse);
                     Text.NL();
                     Text.Add("<i>“All customer can be having. More the merrier, as saying goes; customer will be requiring everything that [heshe] can be bringing to bear.”</i>", parse);
-                }, 1.0, function() { return glade.flags["Visit"] >= DryadGladeFlags.Visit.DefeatedOrchid; });
+                }, 1.0, function() { return glade.flags.Visit >= DryadGladeFlags.Visit.DefeatedOrchid; });
                 scenes.AddEnc(function() {
                     Text.Add("<i>“Asche recognizes this place where customer is standing, is minotaur village in highlands. Barricades, they are being there, but are likely to be of not much use against foe customer faces, a fearsome man-beast. Behind each, two evenly matched forces.”</i> The jackaless scratches her muzzle. <i>“Asche will say that she is finding customer’s fate disturbing. Is not liking to think that old tribe may be caught up in strife, too.”</i>", parse);
                 }, 1.0, function() { return true; });
@@ -702,7 +694,7 @@ export namespace AscheScenes {
                     Text.NL();
                     Text.Add("", parse);
                 }, 1.0, function() { return true; });
-                
+
     #scene
     //References Jin.
 
@@ -715,7 +707,7 @@ export namespace AscheScenes {
     #converge
     */
                 // SECOND PHASE
-                if(GlobalScenes.PortalsOpen()) {
+                if (GlobalScenes.PortalsOpen()) {
                     scenes.AddEnc(function() {
                         Text.Add("The jackaless throws you a suspicious glare. <i>“All muddy. Customer is messing things up! Things Asche saw before are still being there, still connected, but in different way… is confusing.”</i>", parse);
                         Text.NL();
@@ -725,7 +717,7 @@ export namespace AscheScenes {
                     }, 1.0, function() { return true; });
                 }
                 /*
-                * 
+                *
     //TODO
     //Third phase
 
@@ -738,18 +730,18 @@ export namespace AscheScenes {
                 }, 1.0, function() { return true; });
                 */
                 scenes.Get();
-                
+
                 party.coin -= cost;
                 rigard.MagicShop.totalBought += cost;
-                
+
                 Text.Flush();
-                
+
                 AscheScenes.FortuneTellingPrompt();
-            }, enabled : party.coin >= cost
+            }, enabled : party.coin >= cost,
         });
         options.push({ nameStr : "Explain",
             tooltip : "How does this fortune-telling of her work, anyway?",
-            func : function() {
+            func() {
                 Text.Clear();
                 Text.Add("Eyeing Asche, you tell the jackaless you’d probably be interested in having your fortune told, but perhaps if you knew a little more about what you were getting yourself into, you could be more enthusiastic about the prospect…", parse);
                 Text.NL();
@@ -763,48 +755,47 @@ export namespace AscheScenes {
                 Text.NL();
                 Text.Add("<i>“That aside, Asche can tell customer [hisher] fate, or fortune. Latter is light and easy to do, maybe small prediction of what is going to be happening later when customer goes to bed, or whether customer is going to be lucky in love. Fate is…”</i> The jackaless grows more somber, her lips pulling into a thin, straight line. <i>“More important, for lack of better word to be describing it. Asche knows what she is saying just now, but fate is not so easily brushed off, is not something done for fun. If you are taking such things lightly or not believing what this jackaless is saying, please not to be asking Asche to read your fate.”</i>.", parse);
                 Text.Flush();
-                
+
                 AscheScenes.FortuneTellingPrompt();
-            }, enabled : true
+            }, enabled : true,
         });
         options.push({ nameStr : "Never Mind",
             tooltip : "Maybe another time.",
-            func : function() {
+            func() {
                 Text.Clear();
                 Text.Add("<i>“As customer is wishing.”</i> Is that a hint of sourness you hear in her voice? <i>“Is there any other business that [heshe] has with Asche?”</i>", parse);
                 Text.Flush();
-                
+
                 AscheScenes.Prompt();
-            }, enabled : true
+            }, enabled : true,
         });
-        
+
         Gui.SetButtonsFromList(options, false, null);
     }
 
-
     export function MagicBoxPrompt() {
-        let player = GAME().player;
-        let asche = GAME().asche;
+        const player = GAME().player;
+        const asche = GAME().asche;
 
-        let parse : any = {
+        const parse: any = {
             coin : Text.NumToText(asche.MagicBoxCost()),
             heshe : player.mfFem("he", "she"),
-            himher : player.mfFem("him", "her")
+            himher : player.mfFem("him", "her"),
         };
-        
-        //[Explanation][Grab][Back]
-        let options = new Array();
-        if(asche.flags["Talk"] & AscheFlags.Talk.Box) {
+
+        // [Explanation][Grab][Back]
+        const options = new Array();
+        if (asche.flags.Talk & AscheFlags.Talk.Box) {
             options.push({ nameStr : "Grab",
                 tooltip : "Stick your hand into limbo and see what you can draw out.",
-                func : function() {
+                func() {
                     AscheScenes.MagicBoxGrab();
-                }, enabled : GAME().party.coin >= asche.MagicBoxCost()
+                }, enabled : GAME().party.coin >= asche.MagicBoxCost(),
             });
         }
         options.push({ nameStr : "Explanation",
             tooltip : "Just what is this box?",
-            func : function() {
+            func() {
                 Text.Clear();
                 Text.Add("<i>“Idea is very simple,”</i> Asche begins, lazily drawing small circles on the counter with a finger. <i>“Box is old family heirloom, artifact with power to draw out lost things. Money behind couch cushions, things fallen beneath floorboards, blasted into limbo, that sort of thing, yes? For small price of [coin] coins, customer can stick hand into box and see what [heshe] can draw out. Is like… hmm… is like a game, yes? Or maybe like lottery. No guarantee that customer will find something useful, but there is also chance that customer will find a great steal. Only sure thing is that thing you draw out is not likely to harm you, and I am here to watch, so customer is perfectly safe.”</i>", parse);
                 Text.NL();
@@ -812,66 +803,66 @@ export namespace AscheScenes {
                 Text.NL();
                 Text.Add("<i>“To be frank, box is Asche’s most popular part of shop, even if it does not directly bring in that much money. People come in to see what bin holds, end up buying things off shelves. Maybe good customer might want to try it out [himher]self?” The jackal-morph giggles. <i>“Perhaps fortune will be smiling today - as saying goes, does customer feel lucky? Well, does [heshe]?”</i>", parse);
                 Text.Flush();
-                
-                asche.flags["Talk"] |= AscheFlags.Talk.Box;
-                
+
+                asche.flags.Talk |= AscheFlags.Talk.Box;
+
                 AscheScenes.MagicBoxPrompt();
-            }, enabled : true
+            }, enabled : true,
         });
         Gui.SetButtonsFromList(options, true, function() {
             Text.Clear();
             Text.Add("Seeing you reconsider, Asche puts away the box back underneath the counter. <i>“Not feeling lucky today? Is all right, Asche understands. Is there anything this jackaless can be helping good customer with?”</i>", parse);
             Text.Flush();
-            
+
             AscheScenes.Prompt();
         });
     }
 
     export function MagicBoxGrab() {
-        let asche = GAME().asche;
-        let rigard = GAME().rigard;
+        const asche = GAME().asche;
+        const rigard = GAME().rigard;
 
-        let parse : any = {
-            
+        const parse: any = {
+
         };
-        
-        let cost = asche.MagicBoxCost();
-        
+
+        const cost = asche.MagicBoxCost();
+
         GAME().party.coin -= cost;
         rigard.MagicShop.totalBought += cost;
-        
+
         Text.Clear();
         Text.Add("You slide the coins across the counter to Asche, who nods and waves you on. Stepping up to the large wooden box, you stick your hand into the swirling darkness. It’s cool to the touch and there’s a vaguely sticky sensation as you waggle your fingers about, but you’re otherwise fine. Now to see what you can find…", parse);
         Text.NL();
-        
-        let scenes = new EncounterTable();
+
+        const scenes = new EncounterTable();
         scenes.AddEnc(AscheScenes.MagicBoxLoss, 1.0, function() { return true; });
         scenes.AddEnc(AscheScenes.MagicBoxWin, 1.0, function() { return true; });
-        
+
         scenes.Get();
     }
 
     export function MagicBoxWin() {
-        let player = GAME().player;
-        let party : Party = GAME().party;
-        let asche = GAME().asche;
+        const player = GAME().player;
+        const party: Party = GAME().party;
+        const asche = GAME().asche;
 
-        let parse : any = {
+        let parse: any = {
             himher : player.mfFem("him", "her"),
-            heshe : player.mfFem("he", "she")
+            heshe : player.mfFem("he", "she"),
         };
-        
-        let scenes = new EncounterTable();
+
+        const scenes = new EncounterTable();
         scenes.AddEnc(function() {
             Text.Add("Your hand closes around something distinctly bottle-shaped - pulling it out, you find that it is indeed a bottle. Inside, you find a potion, and though the bottle looks old and dusty, it should still be drinkable. You stow it away with your other belongings.", parse);
             Text.NL();
-            
-            let item = _.sample(MagicShopScenes.MShop().potions);
-            
+
+            const item = _.sample(MagicShopScenes.MShop().potions);
+
             party.Inv().AddItem(item);
-            
+
             Text.Add("<b>Acquired [lDesc]!</b>", {lDesc : item.lDesc()});
-            
+
             AscheScenes.MagicBoxRepeat();
         }, 1.0, function() { return true; });
         scenes.AddEnc(function() {
@@ -881,27 +872,27 @@ export namespace AscheScenes {
             Text.NL();
             Text.Add("It seems a little ironic that you could’ve bought her stock off the shelves instead of going to such trouble. Still, you guess that it could have been a worse deal, and stow away your new acquisition.", parse);
             Text.NL();
-            
-            let item = _.sample(MagicShopScenes.MShop().consumables);
-            
+
+            const item = _.sample(MagicShopScenes.MShop().consumables);
+
             party.Inv().AddItem(item);
-            
+
             Text.Add("<b>Acquired [lDesc]!</b>", {lDesc : item.lDesc()});
-            
+
             AscheScenes.MagicBoxRepeat();
         }, 1.0, function() { return true; });
         scenes.AddEnc(function() {
             Text.Add("Feeling something smooth under your fingertips, you close in on the object and pull it out of the box’s indeterminate depths. It’s a small leather pouch, and you draw open the strings to reveal a handful of alchemical ingredients. Not the best value that your money could have brought you, but more reagents on hand are always welcome.", parse);
             Text.NL();
             Text.Add("Putting away the reagents and throwing the pouch back into the bin, you turn to other matters.<br>", parse);
-            _.times(_.random(4,10), function() {
-                let item = _.sample(MagicShopScenes.MShop().ingredients);
-                
+            _.times(_.random(4, 10), function() {
+                const item = _.sample(MagicShopScenes.MShop().ingredients);
+
                 party.Inv().AddItem(item);
-                
+
                 Text.Add("<br><b>Acquired [lDesc]!</b>", {lDesc : item.lDesc()});
             });
-            
+
             AscheScenes.MagicBoxRepeat();
         }, 1.0, function() { return true; });
         scenes.AddEnc(function() {
@@ -918,62 +909,64 @@ export namespace AscheScenes {
             Text.Add("<i>“Doll is a wicked, wicked thing made by practitioners of dark magic like big sister,”</i> Asche explains with a shudder. <i>“Follows owner around, helps out, makes itself useful. Too useful, until owner grows fat and lazy, then one day owner is waking to find they are doll and doll is them… after that, doll goes back to one who created it and does his or her bidding.</i>", parse);
             Text.NL();
             Text.Add("<i>“Is very dark, evil magic; many are made in many worlds. Asche will be more careful in the future, a thousand apologies to customer for placing [himher] in peril. Least Asche can do is return good customer’s money and hope [heshe] does not hold it against Asche.”</i>", parse);
-            
+
             party.coin += asche.MagicBoxCost();
-            
-            asche.flags["Talk"] |= AscheFlags.Talk.BoxDoll;
-            
+
+            asche.flags.Talk |= AscheFlags.Talk.BoxDoll;
+
             AscheScenes.MagicBoxRepeat();
-        }, 1.0, function() { return !(asche.flags["Talk"] & AscheFlags.Talk.BoxDoll); });
+        }, 1.0, function() { return !(asche.flags.Talk & AscheFlags.Talk.BoxDoll); });
         scenes.AddEnc(function() {
             Text.Add("You dig around for a bit in the darkness, not really finding anything to your liking, but eventually, your fingers close about something cold and slender, and you pull it out. It’s a thin glass vial of bluish liquid labeled “Lewton’s Concentrate”, but the potion is clearly old and stale; who knows what might have happened to it after sitting around for so long. Best to decide what to do with it while there’s trained help on hand - do you drink it?", parse);
             Text.Flush();
-            
-            //[Yes][No]
-            let options = new Array();
+
+            // [Yes][No]
+            const options = new Array();
             options.push({ nameStr : "Yes",
                 tooltip : "What could go wrong?",
-                func : function() {
+                func() {
                     Text.Clear();
                     Text.Add("Well, nothing for it! Down the hatch! You pull out the cork with a satisfying pop and pour the viscous liquid down your throat, feeling it settle in your stomach. Job done, you smack your lips and savor the aftertaste, vaguely reminiscent of cherries and cream as you wait for the elixir to do its job.", parse);
                     Text.NL();
                     Text.Add("Nothing happens for a few seconds, but then ", parse);
-                    
-                    let scenes = new EncounterTable();
+
+                    const scenes = new EncounterTable();
                     scenes.AddEnc(function() {
                         Text.Add("you feel a lot more calm and alert, your body cool and mind ready to focus. Hey, that wasn’t so bad, even if the potion was well past its use-by date. Handing the empty vial over the counter to Asche, you turn your refreshed mind to the matters at hand.", parse);
-                        
+
                         player.AddLustFraction(-1);
                         player.AddSPFraction(1);
                     }, 1.0, function() { return true; });
                     scenes.AddEnc(function() {
                         parse = player.ParserTags(parse);
-                        parse["heat"] = player.FirstCock() ? "rut" : "heat";
+                        parse.heat = player.FirstCock() ? "rut" : "heat";
                         Text.Add("heat flares up in your loins, rapidly spreading to the rest of your body as you’re wracked from head to toe in delicious, delicious arousal. Even your breath grows hot and heavy as you’re plunged straight into [heat], ", parse);
-                        if(player.FirstCock())
+                        if (player.FirstCock()) {
                             Text.Add("your [cocks] tenting the fabric of your clothes, ", parse);
-                        if(player.FirstVag())
+                        }
+                        if (player.FirstVag()) {
                             Text.Add("your [vag] and netherlips growing wet and swollen, ", parse);
+                        }
                         Text.Add("your skin flush with desire. There’s no way you’re going to be doing much of anything in this state…", parse);
                         Text.NL();
                         Text.Add("Watching you from the counter, Asche shakes her head and sighs. <i>“Silly customer, potions are having expiry dates for a reason, you know. Is true that Asche’s merchandise will not harm when properly used… but even the best of Asche’s potions cannot cure stupid. Maybe this will teach you lesson… either case, Asche requests that you do not relieve yourself in her shop. Cum is terrible thing to have to clean up - it is so… sticky.”</i>", parse);
-                        
+
                         player.AddLustFraction(1);
                         player.AddSPFraction(-1);
                     }, 1.0, function() { return true; });
-                    
+
                     scenes.Get();
-                    
+
                     AscheScenes.MagicBoxRepeat();
-                }, enabled : true
+                }, enabled : true,
             });
             options.push({ nameStr : "No",
                 tooltip : "Best not risk it.",
-                func : function() {
+                func() {
                     Text.Clear();
                     Text.Add("Shaking your head, you pass the expired elixir to Asche, who slides it beneath the counter. <i>“Is good thing you decided not to drink. Potions which sit too long can cause problems, ingredients get old, properties are changing…”</i> The jackaless shrugs and smiles. <i>“Asche will dispose of it properly, rather than just pour it out on ground. Most irresponsible way of dealing with old potions, is it not? Sad to say, though, Asche cannot refund your money for use of box.”</i>", parse);
                     AscheScenes.MagicBoxRepeat();
-                }, enabled : true
+                }, enabled : true,
             });
             Gui.SetButtonsFromList(options, false, null);
         }, 1.0, function() { return true; });
@@ -988,39 +981,38 @@ export namespace AscheScenes {
             Text.NL();
             Text.Add("You look between the book and the box. What do you do with the trashy novel in your hands?", parse);
             Text.Flush();
-            
-            //[Keep][Toss]
-            let options = new Array();
+
+            // [Keep][Toss]
+            const options = new Array();
             options.push({ nameStr : "Keep",
                 tooltip : "It might be pulp fiction, but it’s still a read, right?",
-                func : function() {
+                func() {
                     Text.Clear();
                     Text.Add("Books are books, wherever you find them. Asche coughs loudly when you elect to keep the salacious novel on you, but keeps any comments to herself as you pack it away. Maybe it’ll come in useful later on… or at the very least, keep you company on those cold, lonely nights.", parse);
                     party.Inv().AddItem(AccItems.TrashyNovel);
-                    
+
                     AscheScenes.MagicBoxRepeat();
-                }, enabled : true
+                }, enabled : true,
             });
             options.push({ nameStr : "Toss",
                 tooltip : "You don’t really need such a thing…",
-                func : function() {
+                func() {
                     Text.Clear();
                     Text.Add("Shaking your head, you toss the novel back into the box. You certainly don’t need a piece of dead weight on you. The book plunges into the swirling depths of the box and vanishes without a trace. There’s already plenty of written pornography floating about - more of the same old trashy stuff isn’t going to do the world any favors, right?", parse);
-                    
+
                     AscheScenes.MagicBoxRepeat();
-                }, enabled : true
+                }, enabled : true,
             });
             Gui.SetButtonsFromList(options, false, null);
         }, 1.0, function() { return true; });
         scenes.AddEnc(function() {
-            if(party.Inv().QueryNum(CombatItems.GlassSword) >= 3) {
+            if (party.Inv().QueryNum(CombatItems.GlassSword) >= 3) {
                 Text.Add("Your hand closes about the familiar shape of a hilt, cool to the touch, and your heart skips a beat. However, the thing wrests itself from your grasp at the last moment with a savage twist, slipping back into the swirling darkness of the box.", parse);
                 Text.NL();
                 Text.Add("What? You stand there for a moment, cursing your luck, then remember that you already carry a number of glass swords with you at the moment. Perhaps they don’t like being cooped up together in one place - it might be best to get rid of one or two of them before trying to acquire another.", parse);
                 Text.NL();
                 Text.Add("Either way, you’re not going to be getting your payment back from Asche…", parse);
-            }
-            else {
+            } else {
                 Text.Add("Is that the hilt of a sword you feel? It has the shape of one, but definitely doesn’t feel like leather or metal. Curious, you pull it out - at first glance, it seems like the hilt is fashioned from crystal, but on closer inspection it turns out to be glass, as does the blade when you eventually draw the rest of the weapon out from the box.", parse);
                 Text.NL();
                 Text.Add("Spirits above, the thing is <i>huge!</i> The blade itself is probably longer than the entirety of the box - how it managed to fit is anyone’s guess - and longer than you are tall, even though it doesn’t seem to weigh anything in your hand. The entirety of the blade is wrapped in a strange dark fabric, and you can practically <i>feel</i> the power emanating from this thing.", parse);
@@ -1029,23 +1021,23 @@ export namespace AscheScenes {
                 Text.NL();
                 Text.Add("You thank the jackaless for her advice and put the glass sword away carefully. It looks sturdy enough that a simple jostle probably won’t break it, but best not to take any chances.", parse);
                 Text.NL();
-                
+
                 party.Inv().AddItem(CombatItems.GlassSword);
-                
+
                 Text.Add("<b>Acquired a glass sword!</b>", parse);
             }
             AscheScenes.MagicBoxRepeat();
         }, 0.5, function() { return true; });
-        
+
         scenes.Get();
     }
 
     export function MagicBoxLoss() {
-        let parse : any = {
-            
+        const parse: any = {
+
         };
-        
-        let scenes = new EncounterTable();
+
+        const scenes = new EncounterTable();
         scenes.AddEnc(function() {
             Text.Add("Something stiff hooks itself around your wrist, and as you pull it out, you find that it’s a perfectly ordinary-looking umbrella. Certainly nothing magical about this - or so you think, up to the point where you open it and a light drizzle comes pouring out of its underside.", parse);
             Text.NL();
@@ -1093,42 +1085,42 @@ export namespace AscheScenes {
             Text.Add("</ul></i>", parse);
             Text.Add("Interesting trivia, but nonetheless rather useless. You toss the book back into the box, where it disappears into the dark depths.", parse);
         }, 1.0, function() { return true; });
-        
+
         scenes.Get();
-        
+
         AscheScenes.MagicBoxRepeat();
     }
 
     export function MagicBoxRepeat() {
-        let party : Party = GAME().party;
-        let asche = GAME().asche;
+        const party: Party = GAME().party;
+        const asche = GAME().asche;
 
-        let parse : any = {
-            coin : Text.NumToText(asche.MagicBoxCost())
+        const parse: any = {
+            coin : Text.NumToText(asche.MagicBoxCost()),
         };
-        
+
         Text.NL();
         Text.Add("Now, would you like to have another go at the bin, or have you had enough for now? The fee is [coin] coins.", parse);
         Text.Flush();
-        
-        //[Yes][No]
-        let options = new Array();
+
+        // [Yes][No]
+        const options = new Array();
         options.push({ nameStr : "Yes",
             tooltip : "Why not? Another go it is!",
-            func : function() {
+            func() {
                 AscheScenes.MagicBoxGrab();
-            }, enabled : party.coin >= asche.MagicBoxCost()
+            }, enabled : party.coin >= asche.MagicBoxCost(),
         });
         options.push({ nameStr : "No",
             tooltip : "Nah, not now.",
-            func : function() {
+            func() {
                 Text.Clear();
                 Text.Add("Deciding that you’ve played enough, you gesture for Asche to put away the box. Lady Luck gets tired having to carry one particular person for too long, and you feel you’ve exhausted your share of good fortune for now. Maybe later.", parse);
                 Text.Flush();
-                
+
                 AscheScenes.Prompt();
-            }, enabled : true
+            }, enabled : true,
         });
         Gui.SetButtonsFromList(options, false, null);
     }
-};
+}

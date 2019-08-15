@@ -1,38 +1,38 @@
-import * as _ from 'lodash';
+import * as _ from "lodash";
 
-import { Orifice } from './orifice';
-import { Stat } from '../stat';
-import { Text } from '../text';
+import { Stat } from "../stat";
+import { Text } from "../text";
+import { Orifice } from "./orifice";
 
 export class Butt extends Orifice {
-	buttSize : Stat;
-	
+	public buttSize: Stat;
+
 	constructor() {
 		super();
 		this.buttSize   = new Stat(1);
 	}
-	
-	ToStorage(full? : boolean) {
-		let storage : any = super.ToStorage(full);
-		if(full) {
+
+	public ToStorage(full?: boolean) {
+		const storage: any = super.ToStorage(full);
+		if (full) {
 			storage.size = this.buttSize.base.toFixed(2);
 		}
 		return storage;
 	}
 
-	FromStorage(storage : any) {
+	public FromStorage(storage: any) {
 		storage = storage || {};
 		super.FromStorage(storage);
 		this.buttSize.base   = parseFloat(storage.size) || this.buttSize.base;
 	}
 
-	Size() {
+	public Size() {
 		return this.buttSize.Get();
 	}
 
-	noun() {
-		let size = this.buttSize.Get();
-		let nouns = new Array();
+	public noun() {
+		const size = this.buttSize.Get();
+		const nouns = new Array();
 		nouns.push("butt");
 		nouns.push("rear");
 		nouns.push("rump");
@@ -41,38 +41,38 @@ export class Butt extends Orifice {
 		nouns.push("flank");
 		return _.sample(nouns);
 	}
-	adj() {
-		let size = this.buttSize.Get();
-		let adjs = [];
-		if(size < 2) {
+	public adj() {
+		const size = this.buttSize.Get();
+		const adjs = [];
+		if (size < 2) {
 			adjs.push("flat");
 			adjs.push("non-existent");
 			adjs.push("tight");
 			adjs.push("firm");
 		}
-		if(size >= 2 && size < 5) {
+		if (size >= 2 && size < 5) {
 			adjs.push("delicate");
 			adjs.push("soft");
 			adjs.push("dainty");
 		}
-		if(size >= 4 && size < 8) {
+		if (size >= 4 && size < 8) {
 			adjs.push("ample");
 			adjs.push("full");
 			adjs.push("shapely");
 			adjs.push("plump");
 		}
-		if(size >= 6 && size < 12) {
+		if (size >= 6 && size < 12) {
 			adjs.push("juicy");
 			adjs.push("squeezable");
 			adjs.push("gropable");
 		}
-		if(size >= 10) {
+		if (size >= 10) {
 			adjs.push("jiggly");
 			adjs.push("expansive");
 			adjs.push("massive");
 			adjs.push("huge");
 		}
-		if(size >= 15) {
+		if (size >= 15) {
 			adjs.push("immense");
 			adjs.push("gargantuan");
 			adjs.push("humonguous");
@@ -81,8 +81,8 @@ export class Butt extends Orifice {
 		}
 		return _.sample(adjs);
 	}
-	analNoun() {
-		let nouns = [];
+	public analNoun() {
+		const nouns = [];
 		nouns.push("pucker");
 		nouns.push("anus");
 		nouns.push("anal opening");
@@ -92,40 +92,40 @@ export class Butt extends Orifice {
 		nouns.push("ass");
 		return _.sample(nouns);
 	}
-	AnalDesc() {
+	public AnalDesc() {
 		let ret = null;
-		let area = this.capacity.Get() * this.stretch.Get();
-		if     (area <= 2 ) ret = {a:"an", adj: "extremely tight"};
-		else if(area <= 3 ) ret = {a:"a", adj: "very tight"};
-		else if(area <= 4 ) ret = {a:"a", adj: "tight"};
-		else if(area <= 5 ) ret = {a:"a", adj: "well-proportioned"};
-		else if(area <= 7 ) ret = {a:"a", adj: "flexible"};
-		else if(area <= 9 ) ret = {a:"a", adj: "very flexible"};
-		else if(area <= 11) ret = {a:"a", adj: "loose"};
-		else if(area <= 15) ret = {a:"a", adj: "slutty"};
-		else                ret = {a:"a", adj: "gaping"};
+		const area = this.capacity.Get() * this.stretch.Get();
+		if     (area <= 2 ) { ret = {a: "an", adj: "extremely tight"}; }
+		else if (area <= 3 ) { ret = {a: "a", adj: "very tight"}; }
+		else if (area <= 4 ) { ret = {a: "a", adj: "tight"}; }
+		else if (area <= 5 ) { ret = {a: "a", adj: "well-proportioned"}; }
+		else if (area <= 7 ) { ret = {a: "a", adj: "flexible"}; }
+		else if (area <= 9 ) { ret = {a: "a", adj: "very flexible"}; }
+		else if (area <= 11) { ret = {a: "a", adj: "loose"}; }
+		else if (area <= 15) { ret = {a: "a", adj: "slutty"}; }
+		else {                ret = {a: "a", adj: "gaping"}; }
 		return ret;
 	}
 	// TODO
-	Short() {
+	public Short() {
 		return Text.Parse("[adj] [noun]", {adj: this.adj(), noun: this.noun()});
 	}
 	// TODO: a
-	Long() {
+	public Long() {
 		return Text.Parse("a [adj] [noun]", {adj: this.adj(), noun: this.noun()});
 	}
-	AnalShort() {
-		let desc = this.AnalDesc();
-		let v = this.virgin ? " virgin " : " ";
+	public AnalShort() {
+		const desc = this.AnalDesc();
+		const v = this.virgin ? " virgin " : " ";
 		return desc.adj + v + this.analNoun();
 	}
-	AnalLong() {
-		let desc = this.AnalDesc();
-		let v = this.virgin ? " virgin " : " ";
+	public AnalLong() {
+		const desc = this.AnalDesc();
+		const v = this.virgin ? " virgin " : " ";
 		return desc.a + " " + desc.adj + v + this.analNoun();
 	}
 
-	holeDesc() {
+	public holeDesc() {
 		return this.analNoun();
 	}
 

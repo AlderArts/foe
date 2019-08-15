@@ -1,16 +1,9 @@
-import { Race, RaceDesc } from "./race";
 import { Color } from "./color";
+import { Race, RaceDesc } from "./race";
 
 export class BodyPart {
-	race : RaceDesc;
-	color : Color;
-	
-	constructor(race? : RaceDesc, color? : Color) {
-		this.race  = race || Race.Human;
-		this.color = color || Color.white;
-	}
-	
-	static HasFur(race : RaceDesc) {
+
+	public static HasFur(race: RaceDesc) {
 		return race.isRace(
 			Race.Canine,
 			Race.Feline,
@@ -21,18 +14,25 @@ export class BodyPart {
 			||
 			race.isRaceNotParent(Race.Deer);
 	}
-	static HasScales(race : RaceDesc) {
+	public static HasScales(race: RaceDesc) {
 		return race.isRace(Race.Reptile);
 	}
-	static HasSkin(race : RaceDesc) {
+	public static HasSkin(race: RaceDesc) {
 		return race.isRace(
 			Race.Human,
 			Race.Elf,
 			Race.Demon,
 			Race.Dryad);
 	}
+	public race: RaceDesc;
+	public color: Color;
 
-	Feathered() {
+	constructor(race?: RaceDesc, color?: Color) {
+		this.race  = race || Race.Human;
+		this.color = color || Color.white;
+	}
+
+	public Feathered() {
 		return this.race.isRace(Race.Avian);
 	}
 }
@@ -43,4 +43,4 @@ export enum BodyPartType {
 	ass    = 2,
 	nipple = 3,
 	mouth  = 4,
-};
+}

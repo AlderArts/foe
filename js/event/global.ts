@@ -1,37 +1,37 @@
-import { GameCache, GAME } from "../GAME";
-import { OutlawsFlags } from "./outlaws/outlaws-flags";
+import { GAME, GameCache } from "../GAME";
 import { DryadGladeFlags } from "../loc/glade-flags";
+import { OutlawsFlags } from "./outlaws/outlaws-flags";
 
-let GlobalScenes : any = {};
+const GlobalScenes: any = {};
 
 GlobalScenes.VisitedRigardGates = function() {
 	return GAME().miranda.Met();
-}
+};
 
 GlobalScenes.VisitedOutlaws = function() {
-	return GAME().outlaws.flags["Met"] >= OutlawsFlags.Met.Met;
-}
+	return GAME().outlaws.flags.Met >= OutlawsFlags.Met.Met;
+};
 
 GlobalScenes.MetJeanne = function() {
-	return GAME().jeanne.flags["Met"] != 0;
-}
+	return GAME().jeanne.flags.Met != 0;
+};
 
 GlobalScenes.DefeatedOrchid = function() {
-	return GAME().glade.flags["Visit"] >= DryadGladeFlags.Visit.DefeatedOrchid;
-}
+	return GAME().glade.flags.Visit >= DryadGladeFlags.Visit.DefeatedOrchid;
+};
 
 GlobalScenes.PortalsOpen = function() {
-	return GameCache().flags["Portals"] != 0;
-}
+	return GameCache().flags.Portals != 0;
+};
 
 // Learned from Jeanne/Magnus
 GlobalScenes.MagicStage1 = function() {
-	return GameCache().flags["LearnedMagic"] != 0;
-}
+	return GameCache().flags.LearnedMagic != 0;
+};
 
 // Learned from Jeanne
 GlobalScenes.MagicStage2 = function() {
-	return GameCache().flags["LearnedMagic"] >= 3;
-}
+	return GameCache().flags.LearnedMagic >= 3;
+};
 
 export { GlobalScenes };
