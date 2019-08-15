@@ -4,46 +4,46 @@
  *
  */
 
-import { Event, Link } from '../event';
-import { GameState, SetGameState } from '../gamestate';
-import { Gui } from '../gui';
-import { Gender } from '../body/gender';
-import { JobEnum, Jobs } from '../job';
-import { GAME, GameCache, MoveToLocation, TimeStep, WORLD } from '../GAME';
-import { Text } from '../text';
-import { Input } from '../input';
-import { BodyTypeMale, BodyTypeFemale } from '../body/defbody';
-import { Color } from '../body/color';
-import { Body } from '../body/body';
-import { Party } from '../party';
-import { IntroDemon } from '../enemy/introdemon';
-import { Imp } from '../enemy/imp';
-import { Encounter } from '../combat';
-import { UruFlags } from './uru';
-import { TF } from '../tf';
-import { AppendageType } from '../body/appendage';
-import { Race } from '../body/race';
-import { Sex } from '../entity-sex';
-import { BodyPartType } from '../body/bodypart';
-import { KiakaiFlags } from './kiakai-flags';
-import { WeaponsItems } from '../items/weapons';
-import { ArmorItems } from '../items/armor';
-import { AccItems } from '../items/accessories';
-import { Images } from '../assets';
+import { Images } from "../assets";
+import { AppendageType } from "../body/appendage";
+import { Body } from "../body/body";
+import { BodyPartType } from "../body/bodypart";
+import { Color } from "../body/color";
+import { BodyTypeFemale, BodyTypeMale } from "../body/defbody";
+import { Gender } from "../body/gender";
+import { Race } from "../body/race";
+import { Encounter } from "../combat";
+import { Imp } from "../enemy/imp";
+import { IntroDemon } from "../enemy/introdemon";
+import { Sex } from "../entity-sex";
+import { Event, Link } from "../event";
+import { GAME, GameCache, MoveToLocation, TimeStep, WORLD } from "../GAME";
+import { GameState, SetGameState } from "../gamestate";
+import { Gui } from "../gui";
+import { Input } from "../input";
+import { AccItems } from "../items/accessories";
+import { ArmorItems } from "../items/armor";
+import { WeaponsItems } from "../items/weapons";
+import { JobEnum, Jobs } from "../job";
+import { Party } from "../party";
+import { Text } from "../text";
+import { TF } from "../tf";
+import { KiakaiFlags } from "./kiakai-flags";
+import { UruFlags } from "./uru";
 
-let Intro : any = {};
+const Intro: any = {};
 
 export function InitIntro() {
-	WORLD().SaveSpots["LightAspect"] = LightAspect.Garden;
+	WORLD().SaveSpots.LightAspect = LightAspect.Garden;
 }
 
 /*
  * Introductory scene (start of game). Entry into the attic
  */
 Intro.Start = function() {
-	let player = GAME().player;
-	let party : Party = GAME().party;
-	
+	const player = GAME().player;
+	const party: Party = GAME().party;
+
 	party.SwitchIn(player);
 
 	GAME().IntroActive = true;
@@ -66,7 +66,7 @@ Intro.Start = function() {
 	Text.Flush();
 
 	Gui.NextPrompt(Intro.Mirror);
-}
+};
 
 /*
  * Found mirror
@@ -84,14 +84,14 @@ Intro.Mirror = function() {
 	Text.Flush();
 
 	Gui.NextPrompt(Intro.Gender);
-}
+};
 
 /*
  * Character creation functions
  */
 Intro.Gender = function() {
-	let player = GAME().player;
-	
+	const player = GAME().player;
+
 	Text.Clear();
 	Gui.ClearButtons();
 
@@ -106,11 +106,11 @@ Intro.Gender = function() {
 		player.InitCharacter(Gender.female);
 		Intro.BodyTypeFemale();
 	}, true);
-}
+};
 /* TODO: Set body type */
 Intro.BodyTypeMale = function() {
-	let player = GAME().player;
-	
+	const player = GAME().player;
+
 	Text.Clear();
 	Gui.ClearButtons();
 
@@ -137,11 +137,11 @@ Intro.BodyTypeMale = function() {
 		player.body.DefMale(BodyTypeMale.Trap);
 		Intro.SkinColor();
 	}, true);
-}
+};
 /* TODO: Set body type */
 Intro.BodyTypeFemale = function() {
-	let player = GAME().player;
-	
+	const player = GAME().player;
+
 	Text.Clear();
 	Gui.ClearButtons();
 
@@ -172,10 +172,10 @@ Intro.BodyTypeFemale = function() {
 		player.body.DefFemale(BodyTypeFemale.Cuntboy);
 		Intro.SkinColor();
 	}, true);
-}
+};
 Intro.SkinColor = function() {
-	let player = GAME().player;
-	
+	const player = GAME().player;
+
 	Text.Clear();
 	Gui.ClearButtons();
 
@@ -198,10 +198,10 @@ Intro.SkinColor = function() {
 		player.SetSkinColor(Color.black);
 		Intro.HairColor();
 	}, true);
-}
+};
 Intro.HairColor = function() {
-	let player = GAME().player;
-	
+	const player = GAME().player;
+
 	Text.Clear();
 	Gui.ClearButtons();
 
@@ -236,10 +236,10 @@ Intro.HairColor = function() {
 		player.SetHairColor(Color.platinum);
 		Intro.EyeColor();
 	}, true);
-}
+};
 Intro.EyeColor = function() {
-	let player = GAME().player;
-	
+	const player = GAME().player;
+
 	Text.Clear();
 	Gui.ClearButtons();
 
@@ -270,16 +270,16 @@ Intro.EyeColor = function() {
 		player.SetEyeColor(Color.purple);
 		Intro.Review();
 	}, true);
-}
+};
 
 Intro.Review = function() {
-	let player = GAME().player;
-	
+	const player = GAME().player;
+
 	Text.Clear();
 	Gui.ClearButtons();
 
 	player.PrintDescription(true);
-	
+
 	Text.Add("Is this correct?");
 	Text.Flush();
 
@@ -290,19 +290,19 @@ Intro.Review = function() {
 		player.body = new Body(this);
 		Intro.Gender();
 	}, true);
-}
+};
 
 Intro.JobSelect = function() {
-	let player = GAME().player;
-	
+	const player = GAME().player;
+
 	Text.Clear();
 	Text.Add("What profession do you wish to start out as? You will receive a small permanent stat bonus, and a slight head start in your chosen class.");
 	Text.Flush();
 
-	//[Fighter][Scholar][Courtesan]
-	let options = new Array();
+	// [Fighter][Scholar][Courtesan]
+	const options = new Array();
 	options.push({ nameStr : "Fighter",
-		func : function() {
+		func() {
 			Text.NL();
 			Text.Add("You take pride in your strength and physical prowess, and hope to one day become a mighty warrior. There is still much to learn, however...");
 			Text.Flush();
@@ -315,14 +315,14 @@ Intro.JobSelect = function() {
 			player.spirit.growth       += 0.1;
 			player.libido.growth       += 0.0;
 			player.charisma.growth     += 0.1;
-			player.flags["startJob"]    = JobEnum.Fighter;
+			player.flags.startJob    = JobEnum.Fighter;
 
 			Gui.NextPrompt(Intro.Mirror2);
 		}, enabled : true,
-		tooltip : "Focused on martial abilities and strength, strives to excel in physical combat."
+		tooltip : "Focused on martial abilities and strength, strives to excel in physical combat.",
 	});
 	options.push({ nameStr : "Scholar",
-		func : function() {
+		func() {
 			Text.NL();
 			Text.Add("You like to take a calculated approach to problems facing you, weighing options against each other. From books and scrolls, you have taught yourself various useful supportive abilities. There is still much to learn, however...");
 			Text.Flush();
@@ -335,14 +335,14 @@ Intro.JobSelect = function() {
 			player.spirit.growth       += 0.3;
 			player.libido.growth       += 0.1;
 			player.charisma.growth     += 0.1;
-			player.flags["startJob"]    = JobEnum.Scholar;
+			player.flags.startJob    = JobEnum.Scholar;
 
 			Gui.NextPrompt(Intro.Mirror2);
 		}, enabled : true,
-		tooltip : "Takes a more intellectual approach to problems, and dabbles slightly in the mystical. Starts out with several support abilities."
+		tooltip : "Takes a more intellectual approach to problems, and dabbles slightly in the mystical. Starts out with several support abilities.",
 	});
 	options.push({ nameStr : "Courtesan",
-		func : function() {
+		func() {
 			Text.NL();
 			Text.Add("You often try to fall back on your sex appeal whenever trouble arises, relying on your natural charm to distract and seduce your foes. There is still much to learn, however...");
 			Text.Flush();
@@ -355,15 +355,14 @@ Intro.JobSelect = function() {
 			player.spirit.growth       += 0.0;
 			player.libido.growth       += 0.5;
 			player.charisma.growth     += 0.5;
-			player.flags["startJob"]    = JobEnum.Courtesan;
+			player.flags.startJob    = JobEnum.Courtesan;
 
 			Gui.NextPrompt(Intro.Mirror2);
 		}, enabled : true,
-		tooltip : "Focused on sensual abilities and charming your foes into submission."
+		tooltip : "Focused on sensual abilities and charming your foes into submission.",
 	});
 	Gui.SetButtonsFromList(options);
-}
-
+};
 
 Intro.Mirror2 = function() {
 	Text.Clear();
@@ -372,7 +371,7 @@ Intro.Mirror2 = function() {
 	Text.Flush();
 
 	Gui.NextPrompt(Intro.Mirror3, "Take gem");
-}
+};
 
 Intro.Mirror3 = function() {
 	Text.Clear();
@@ -387,7 +386,7 @@ Intro.Mirror3 = function() {
 	Text.Flush();
 
 	Gui.NextPrompt(Intro.Mirror4);
-}
+};
 
 Intro.Mirror4 = function() {
 	Text.Clear();
@@ -404,13 +403,13 @@ Intro.Mirror4 = function() {
 	Text.Flush();
 
 	Gui.NextPrompt(Intro.DarkAspect);
-}
+};
 
 /*
  * Entry into the dark world
  */
 Intro.DarkAspect = function() {
-	let party : Party = GAME().party;
+	const party: Party = GAME().party;
 
 	Text.Clear();
 
@@ -426,17 +425,15 @@ Intro.DarkAspect = function() {
 		SetGameState(GameState.Game, Gui);
 		Gui.PrintDefaultOptions();
 	});
-}
-
+};
 
 // Create namespace
-let DarkAspect = {
+const DarkAspect = {
 	Barrens   : new Event("Barrens"),
 	Mountains : new Event("Mountains"),
 	Cliff     : new Event("Cliffside"),
-	Peak      : new Event("Peak")
-}
-
+	Peak      : new Event("Peak"),
+};
 
 //
 // Dark aspect dimension
@@ -444,7 +441,7 @@ let DarkAspect = {
 DarkAspect.Barrens.description = function() {
 	Text.Add("You are in an unfamiliar place, an endless plain of red cracked earth, interspersed with black thorn bushes. The sky looks like something from an insane painting, vivid red streaks clashing with dark brown, gray and black clouds. Occasionally, red lightning flashes across the sky, flooding the dim and dreary wasteland with sharp light.");
 	Text.NL();
-}
+};
 DarkAspect.Barrens.links.push(new Link(
 	"Mountains", true, true,
 	function() {
@@ -452,7 +449,7 @@ DarkAspect.Barrens.links.push(new Link(
 		Text.NL();
 	},
 	function() {
-		let player = GAME().player;
+		const player = GAME().player;
 
 		Text.Clear();
 
@@ -486,13 +483,13 @@ DarkAspect.Barrens.links.push(new Link(
 				MoveToLocation(DarkAspect.Mountains, {minute: 5});
 			});
 		});
-	}
+	},
 ));
 
 DarkAspect.Mountains.description = function() {
 	Text.Add("You are at the base of a towering mountain range, rising like massive black pillars toward the chaotic sky. Below, on the wasteland, you can see the demon striding toward you in long steps. Behind it, fire is spreading out, the cracks from the demon's heavy footsteps opening up into an endless abyss.");
 	Text.NL();
-}
+};
 DarkAspect.Mountains.links.push(new Link(
 	"Peak", true, true,
 	function() {
@@ -500,7 +497,7 @@ DarkAspect.Mountains.links.push(new Link(
 		Text.NL();
 	},
 	function() {
-		let player = GAME().player;
+		const player = GAME().player;
 
 		Text.Clear();
 		Text.Add("With no time to lose, you attempt to climb the cliff, somehow finding purchase for your fingers and toes in the ragged rock face. With difficulty, you manage to climb up a crevice, reaching a small platform. The area is about ten by ten yards large, surrounded by jagged outcroppings as sharp as swords.");
@@ -526,86 +523,84 @@ DarkAspect.Mountains.links.push(new Link(
 
 			Gui.NextPrompt(Intro.DemonFight);
 		});
-	}
+	},
 ));
-
-
-
 
 // Intro IMP  scenes
 
 Intro.ImpsWinPrompt = function() {
-	let player = GAME().player;
+	const player = GAME().player;
 
 	Text.Clear();
-		
+
 	Text.Add("A quick, cursory glance tells you that the imps carry nothing of value. In fact, they carry nothing at all, not even clothes.");
 	Text.NL();
 	Text.Add("The words of the demon return to you... why should you not claim your rightful price? You thoughtfully consider the fallen group of scrawny imps - hardly an appealing lot, but maybe they can relieve that itch in your loins?");
 	Text.NL();
-	
-	let imp = new Imp();
-	
-	let genDesc = (player.Gender() == Gender.male) ?
+
+	const imp = new Imp();
+
+	const genDesc = (player.Gender() == Gender.male) ?
 		function() { return player.FirstCock().Short(); } :
 		function() { return player.FirstVag().Short(); };
-		
-	let parse : any = {genDesc: genDesc};
-	
+
+	const parse: any = {genDesc};
+
 	Text.Flush();
-	//[No][Use][Ride][Group]
-	let options = new Array();
+	// [No][Use][Ride][Group]
+	const options = new Array();
 	options.push({ nameStr : "No",
-		func : function() {
+		func() {
 			Text.Add("With a shake of your head, you regain your composure, leaving the pile of imps to their own devices. You catch the demon throwing you a disappointed glance before he returns to his own thoughts.");
 			Text.Flush();
 			Gui.NextPrompt();
 		}, enabled : true,
-		tooltip : "Eww, what were you thinking!?"
+		tooltip : "Eww, what were you thinking!?",
 	});
 	options.push({ nameStr : "Use",
-		func : function() {
-			if(player.Gender() == Gender.male)
+		func() {
+			if (player.Gender() == Gender.male) {
 				Intro.ImpsWinUseMale();
-			else
+			} else {
 				Intro.ImpsWinUseFemale();
+			}
 		}, enabled : true,
-		tooltip : Text.Parse("You need to find a release for your [genDesc], perhaps the imps are up to the task?", parse)
+		tooltip : Text.Parse("You need to find a release for your [genDesc], perhaps the imps are up to the task?", parse),
 	});
 	options.push({ nameStr : "Ride",
 		func : Intro.ImpsWinRide, enabled : true,
-		tooltip : "One of those imp dicks could surely sate you..."
+		tooltip : "One of those imp dicks could surely sate you...",
 	});
 	options.push({ nameStr : "Group",
 		func : Intro.ImpsWinGroup, enabled : true,
-		tooltip : "Why settle for one imp when you can have all of them? Better get ready for being stretched, though..."
+		tooltip : "Why settle for one imp when you can have all of them? Better get ready for being stretched, though...",
 	});
 	Gui.SetButtonsFromList(options);
-}
+};
 
 Intro.ImpsWinUseMale = function() {
-	let player = GAME().player;
+	const player = GAME().player;
 
-	let imp = new Imp();
-	
-	let parse : any = {
-		cockDesc : function() { return player.FirstCock().Short(); },
-		cockLen  : function() { return player.FirstCock().Desc().len; }
+	const imp = new Imp();
+
+	const parse: any = {
+		cockDesc() { return player.FirstCock().Short(); },
+		cockLen() { return player.FirstCock().Desc().len; },
 	};
-	
+
 	Text.Clear();
-	
+
 	Text.Add("Prodding one of the exhausted imps into a wakeful state, you manage to pull him unto his knees, putting him face to face with your stiff [cockDesc]. His feeble protests are quickly overruled by [cockLen] of hot meat stuffed into his tight mouth. You settle into a rough face-fucking rhythm, only interested in your own release.", parse);
 	Text.NL();
 	Text.Add("The poor creature tries to pull back, but you insistently hold his head in place with both hands. The imp's muffled moans sounds pretty pitiful - to think that this creature attempted to assault you! Not like he has anything to complain about, he surely would have attempted to do the same to you.");
 	Text.NL();
 	Text.Add("The sounds coming from the imp suddenly turn from moans to choking noises - seems you are a bit too rough on him...");
 	Text.Flush();
-	
-	//[Gentle][Rough][Anal]
-	let options = new Array();
+
+	// [Gentle][Rough][Anal]
+	const options = new Array();
 	options.push({ nameStr : "Gentle",
-		func : function() {
+		func() {
 			Text.Clear();
 			Text.Add("Showing mercy on the imp, you pull out of his mouth, allowing him to draw breath. Before he can get too comfortable though, you insistently prod his cheek with your [cockDesc], coaxing him.", parse);
 			Text.NL();
@@ -616,43 +611,44 @@ Intro.ImpsWinUseMale = function() {
 			Text.Add("Overcome by pleasure, you lustfully cry out as you unload wad after wad into the mouth of the imp, letting your sticky spunk splatter on his tongue and pour down his throat. The creature dutifully swallows every drop, panting as you pull out, hard with lust himself.");
 			Text.NL();
 			Text.Add("You give the aroused imp a slight snicker, leaving him to his own devices.");
-			
+
 			Sex.Blowjob(imp, player);
 			imp.FuckOral(imp.Mouth(), player.FirstCock(), 1);
 			player.Fuck(player.FirstCock(), 1);
-			
+
 			Text.Flush();
 			Gui.NextPrompt(Intro.DemonGift);
 		}, enabled : true,
-		tooltip : "Let him show off his cock sucking skills."
+		tooltip : "Let him show off his cock sucking skills.",
 	});
 	options.push({ nameStr : "Rough",
-		func : function() {
+		func() {
 			Text.Clear();
 			Text.Add("...Who cares about imps, anyway? Ignoring the creature's increasingly desperate pleas, you resume your skull-fucking with undiminished vigor, only occasionally letting the imp draw air to keep it from passing out.");
 			Text.NL();
-			
-			if(player.FirstCock().length.Get() >= 15)
+
+			if (player.FirstCock().length.Get() >= 15) {
 				Text.Add("Due to its length, your [cockDesc] is soon prodding at the entrance of the imp's throat and by applying a final push, you force the head inside the tight passage. The imp, not used to such treatment, involuntarily constricts his throat, trying to force out the invader. This only further entices you, milking a few drops of pre from your [cockDesc].", parse);
-			else
+			} else {
 				Text.Add("You are not quite big enough to stuff his throat, but if you push as far as you can, you can just manage to touch his uvula. Taking this as a challenge, you grab the imp's head and, roughly and repeatedly, feed him your length, mashing your hips against his face and bruising his nose in the process. Each time your [cockDesc] brushes against the back of his maw, you are rewarded with a shuddering moan and a twitching caress from his tongue. Slamming in as far as you can, you insistently rub against the roof of his mouth.", parse);
-			
+			}
+
 			Text.NL();
 			Text.Add("You rest there, a firm hand keeping the imp in place as his convulsions bring you to your peak. Moaning with pleasure, you release a stream of white semen down the throat of the poor imp, forcing it to swallow.");
 			Text.NL();
 			Text.Add("Spent, you pull out of your cumdump, only to find that the imp has passed out. Shrugging, you leave it where it is, wheezing and leaking cum.");
-			
+
 			Sex.Blowjob(imp, player);
 			imp.FuckOral(imp.Mouth(), player.FirstCock(), 2);
 			player.Fuck(player.FirstCock(), 2);
-			
+
 			Text.Flush();
 			Gui.NextPrompt(Intro.DemonGift);
 		}, enabled : true,
-		tooltip : "Fuck being gentle, you are almost there!"
+		tooltip : "Fuck being gentle, you are almost there!",
 	});
 	options.push({ nameStr : "Anal",
-		func : function() {
+		func() {
 			Text.Clear();
 			Text.Add("You pull out of the imp's mouth, absently rubbing your saliva and pre-covered [cockDesc] against his cheek. The creature takes the opportunity to take a few wheezing breaths before trying to scramble away from you. Effortlessly grabbing his tail and sweeping his legs away from under him, you chide him.", parse);
 			Text.NL();
@@ -660,52 +656,53 @@ Intro.ImpsWinUseMale = function() {
 			Text.NL();
 			Text.Add("With your other hand, you guide your [cockDesc] up against the struggling runt's taint, sighing with content as the dark red rosebud gives way. The imp yelps in a mix of pain and pleasure as you set your pace, plunging your stiff [cockDesc] deeper and deeper inside him.", parse);
 			Text.NL();
-			
+
 			Sex.Anal(player, imp);
 			imp.FuckAnal(imp.Butt(), player.FirstCock(), 3);
 			player.Fuck(player.FirstCock(), 3);
-			
+
 			Text.Add("Before long, you bottom out");
-			if(player.FirstCock().length.Get() >= 15)
+			if (player.FirstCock().length.Get() >= 15) {
 				Text.Add(", your increased length reaching previously untouched depths");
+			}
 			Text.Add(". The imp's anal muscles constrict wildly, trying to force the unfamiliar invader out of its body. You hardly have to move at all to bring yourself to your orgasm, but nonetheless you roughly buck against the imp's ass, painting his insides white with your seed.");
 			Text.NL();
 			Text.Add("Planting a slap on the panting imp's behind, you pull out and tell it to run off. It tries, but after a few wobbling steps, its knees give out and it drops in a quivering heap, leaking semen.");
-			
+
 			Text.Flush();
 			Gui.NextPrompt(Intro.DemonGift);
 		}, enabled : true,
-		tooltip : "If his mouth can't handle your cock, maybe his ass can."
+		tooltip : "If his mouth can't handle your cock, maybe his ass can.",
 	});
 	Gui.SetButtonsFromList(options);
-}
+};
 
-Intro.ImpsCuntBlock = function(parse : any) {
+Intro.ImpsCuntBlock = function(parse: any) {
 	Intro.cuntBlocked = true;
 	Text.Add("<i>“Fuah, I... I need more!”</i> Stepping on the imp's shoulder, you push him to the ground. <i>“Now, be a good boy and stay like that,”</i> you breathe lustily, working him to full arousal with the sole of your foot. Straddling the imp's cock, you rub your wet labia against the tip, but when you try to sink down on the impressive tool, something blocks you. Moaning in frustration, you try to press down again, but the imp's [impCockDesc] just slides to the side, harmlessly.", parse);
 	Text.NL();
 	Text.Add("<b>YOUR VIRGINITY IS <i>MINE</i>,</b> the demon rumbles maliciously, <b>THESE TRASH CAN MAKE DO WITH YOUR OTHER HOLES.</b>", parse);
 	Text.NL();
 	Text.Add("Grumbling, you give it one more try, but the invisible barrier opposes you once more. Frustrated, you adjust your aim, placing your ass over the raised imp-cock.", parse);
-}
+};
 
 Intro.ImpsWinUseFemale = function() {
-	let player = GAME().player;
-	
-	let imp = new Imp();
-	
-	let parse : any = {
-		cuntDesc   : function() { return player.FirstVag().Short(); },
-		breastDesc : function() { return player.FirstBreastRow().Short(); },
-		clitDesc   : function() { return player.FirstVag().ClitShort(); },
-		anusDesc   : function() { return player.Butt().AnalShort(); },
-		//Imp
-		impCockDesc   : function() { return imp.FirstCock().Short(); },
-		cockName   : function() { return imp.FirstCock().noun(); }
+	const player = GAME().player;
+
+	const imp = new Imp();
+
+	const parse: any = {
+		cuntDesc() { return player.FirstVag().Short(); },
+		breastDesc() { return player.FirstBreastRow().Short(); },
+		clitDesc() { return player.FirstVag().ClitShort(); },
+		anusDesc() { return player.Butt().AnalShort(); },
+		// Imp
+		impCockDesc() { return imp.FirstCock().Short(); },
+		cockName() { return imp.FirstCock().noun(); },
 	};
-	
+
 	Text.Clear();
-	
+
 	Text.Add("You rouse one of the imps by prodding him with your foot. Imperiously, you command him to eat you out. The eager creature quickly scrambles to comply, kneeling before you and burying his tongue in your [cuntDesc].", parse);
 	Text.NL();
 	Text.Add("Thoroughly enjoying yourself, you play with your [breastDesc] while the imp laps at your labia, his pointy nose accidentally brushing up against your stiff [clitDesc]. Something stirs inside you... are you really satisfied with only this?", parse);
@@ -713,10 +710,10 @@ Intro.ImpsWinUseFemale = function() {
 
 	// Intro.cuntBlocked
 
-	//[No][Use][Ride][Group]
-	let options = new Array();
+	// [No][Use][Ride][Group]
+	const options = new Array();
 	options.push({ nameStr : "Oral ride",
-		func : function() {
+		func() {
 			Text.Clear();
 			Text.Add("With a rough shove, you push the surprised imp flat on his back. Smirking, you turn around and lower yourself, presenting your pussy to the confused creature. Licking your lips, you survey the imp's [impCockDesc], giving it a friendly squeeze.", parse);
 			Text.NL();
@@ -725,34 +722,33 @@ Intro.ImpsWinUseFemale = function() {
 			Text.Add("The creature may be small, but his cock certainly isn't. Getting the whole thing into your mouth is quite the challenge, but you somehow manage. Juices are streaming freely from your [cuntDesc], and you grind your hips against your demonic lover, your moans muffled by the shaft rammed into your mouth.", parse);
 			Text.NL();
 			Text.Add("Both of you cum simultaneously, salty semen lathering your tongue as you ride out your own trembling orgasm. When your legs have finished shaking, you get up, wiping the remains of the imp's ejaculate from your lips.", parse);
-			
+
 			Sex.Blowjob(player, imp);
 			player.FuckOral(player.Mouth(), imp.FirstCock(), 2);
 			imp.Fuck(imp.FirstCock(), 2);
-			
+
 			Text.Flush();
 			Gui.NextPrompt(Intro.DemonGift);
 		}, enabled : true,
-		tooltip : "Your legs are getting a bit wobbly, and you realize it would be much comfier to straddle the imp's face, and maybe give him a blowjob while you are at it."
+		tooltip : "Your legs are getting a bit wobbly, and you realize it would be much comfier to straddle the imp's face, and maybe give him a blowjob while you are at it.",
 	});
 	options.push({ nameStr : !Intro.cuntBlocked ? "Vaginal ride" : "Anal ride",
-		func : function() {
+		func() {
 			Text.Clear();
-			
-			if(!Intro.cuntBlocked) {
+
+			if (!Intro.cuntBlocked) {
 				Intro.ImpsCuntBlock(parse);
-			}
-			else {
+			} else {
 				Text.Add("<i>“Mm,”</i> licking your lips, you motion for the excited imp to lie down on his back. He complies, watching expectantly as you fondle yourself, teasing a finger inside your [anusDesc]. You get down on your knees, straddling the imp's erect member and guiding it to your ass.", parse);
 			}
 			Text.NL();
-			
+
 			Intro.ImpsWinRideEntrypoint();
 		}, enabled : true,
-		tooltip : !Intro.cuntBlocked ? "Push the imp down on his back and ride his cock." : "Knowing that the demon will probably stop you again, you might as well use your ass from the get-go."
+		tooltip : !Intro.cuntBlocked ? "Push the imp down on his back and ride his cock." : "Knowing that the demon will probably stop you again, you might as well use your ass from the get-go.",
 	});
 	options.push({ nameStr : "Get fucked",
-		func : function() {
+		func() {
 			Text.Clear();
 			Text.Add("You step back from the eager imp's cunnilingus and twirl around. Getting down on your knees, you spread your legs, exposing your bare crotch. <i>“Come on, big boy, spear me on that impaler!”</i>", parse);
 			Text.NL();
@@ -760,16 +756,17 @@ Intro.ImpsWinUseFemale = function() {
 			Text.NL();
 			Text.Add("<i>“Th-the fuck do you think you are do-aah!”</i> your protest is rudely cut off by the head of the imp's cock forcing its way inside your rectum. <i>“S-sorry,”</i> the imp squeaks in an embarrassed apology. <i>“The boss won't let me use the front,”</i> he explains, shoving a few inches inside you.", parse);
 			Text.NL();
-			
+
 			Sex.Anal(imp, player);
 			player.FuckAnal(player.Butt(), imp.FirstCock(), 3);
 			imp.Fuck(imp.FirstCock(), 3);
-			
+
 			Text.Add("Being fucked by the imp is like having an erratic rabbit humping you, no finesse or care, just pure bestial rutting. He probably will not last long at this pace, and you wonder if you are even going to get off at this rate. Without any lubricant, your stretched ass is a flare of pain, ", parse);
-			if(player.Butt().capacity.Get() >= 6)
+			if (player.Butt().capacity.Get() >= 6) {
 				Text.Add("though your increased capacity makes it much easier.");
-			else
+			} else {
 				Text.Add("forced open to the breaking point by the imp.");
+			}
 			Text.NL();
 			Text.Add("You yowl in pain as you feel the imp's already impressive [cockName] swelling inexorably, at least doubling in length and gaining considerably in girth.", parse);
 			Text.NL();
@@ -783,109 +780,110 @@ Intro.ImpsWinUseFemale = function() {
 			Text.Flush();
 			Gui.NextPrompt(Intro.DemonGift);
 		}, enabled : true,
-		tooltip : "Fuck this, you need to be filled, now!"
+		tooltip : "Fuck this, you need to be filled, now!",
 	});
 	Gui.SetButtonsFromList(options);
-}
+};
 
 Intro.ImpsWinRide = function() {
-	let player = GAME().player;
-	let imp = new Imp();
-	
-	let parse : any = {
-		cuntDesc    : function() { return player.FirstVag().Short(); },
-		breastDesc  : function() { return player.FirstBreastRow().Short(); },
-		clitDesc    : function() { return player.FirstVag().ClitShort(); },
-		anusDesc    : function() { return player.Butt().AnalShort(); },
-		cockDesc    : function() { return player.FirstCock().Short(); },
-		//Imp
-		impCockDesc : function() { return imp.FirstCock().Short(); }
+	const player = GAME().player;
+	const imp = new Imp();
+
+	const parse: any = {
+		cuntDesc() { return player.FirstVag().Short(); },
+		breastDesc() { return player.FirstBreastRow().Short(); },
+		clitDesc() { return player.FirstVag().ClitShort(); },
+		anusDesc() { return player.Butt().AnalShort(); },
+		cockDesc() { return player.FirstCock().Short(); },
+		// Imp
+		impCockDesc() { return imp.FirstCock().Short(); },
 	};
-	
+
 	Text.Clear();
-	
+
 	Text.Add("You walk over to one of the prone imps and prod it into a wakeful state. <i>“On your back,”</i> you imperiously order it, <i>“I have need of your cock.”</i> The imp is quick to follow your command, its [impCockDesc] rising to attention as he looks up at you expectantly.", parse);
 	Text.NL();
-	
-	if(player.FirstVag()) {
-		if(!Intro.cuntBlocked) {
+
+	if (player.FirstVag()) {
+		if (!Intro.cuntBlocked) {
 			Intro.ImpsCuntBlock(parse);
-		}
-		else // Female repeat
+		} else { // Female repeat
 			Text.Add("Knowing that the demon will just stop you if you try to use your [cuntDesc], you lower your ass down and press your other hole against the still pole the imp is presenting you with.", parse);
-	}
-	else {// Male
+		}
+	} else {// Male
 		Text.Add("Licking your lips hungrily, you give your own [cockDesc] a few strokes before lowering yourself to straddle the imp, rubbing your taint against his [impCockDesc].", parse);
 	}
 	Text.NL();
-	
-	Intro.ImpsWinRideEntrypoint();
-}
 
+	Intro.ImpsWinRideEntrypoint();
+};
 
 Intro.ImpsWinRideEntrypoint = function() {
-	let player = GAME().player;
-	let imp = new Imp();
-	
-	let parse : any = {
-		cuntDesc    : function() { return player.FirstVag().Short(); },
-		breastDesc  : function() { return player.FirstBreastRow().Short(); },
-		clitDesc    : function() { return player.FirstVag().ClitShort(); },
-		anusDesc    : function() { return player.Butt().AnalShort(); },
-		cockDesc    : function() { return player.FirstCock().Short(); },
-		//Imp
-		impCockDesc : function() { return imp.FirstCock().Short(); }
+	const player = GAME().player;
+	const imp = new Imp();
+
+	const parse: any = {
+		cuntDesc() { return player.FirstVag().Short(); },
+		breastDesc() { return player.FirstBreastRow().Short(); },
+		clitDesc() { return player.FirstVag().ClitShort(); },
+		anusDesc() { return player.Butt().AnalShort(); },
+		cockDesc() { return player.FirstCock().Short(); },
+		// Imp
+		impCockDesc() { return imp.FirstCock().Short(); },
 	};
-	
+
 	Text.Add("You slowly spear yourself on the imp's [impCockDesc], groaning as the thick member forces your anal tunnel open. Not wishing to make it needlessly painful, you take some time growing used to his girth before starting to move. That was your plan, anyway, but the imp immediately starts bucking his hips wildly, somehow managing to hilt himself inside you within moments.", parse);
 	Text.NL();
-	
+
 	Sex.Anal(imp, player);
 	player.FuckAnal(player.Butt(), imp.FirstCock(), 3);
 	imp.Fuck(imp.FirstCock(), 3);
-	
+
 	Text.Add("<i>“Why you little-”</i> you pull yourself off the panting imp, but something makes you lose your footing, causing you to fall on your butt. This, in turn, fills said butt with several inches of imp cock. Once you have regained your composure, you find that you are now comfortable taking his cock this way. Might as well make the best of it.", parse);
 	Text.NL();
 	Text.Add("Planting your hands on the ground behind you, you start to repeatedly drive the imp's cock into your butt, attempting to match your rhythm to your partners frenzied rutting.");
-	if(player.FirstCock())
+	if (player.FirstCock()) {
 		Text.Add(" Your [cockDesc] is bucking wildly, dripping pre all over the creature, and a tightening in your scrotum tells you that you are not far from your peak.", parse);
-	if(player.FirstVag())
+	}
+	if (player.FirstVag()) {
 		Text.Add(" Even untouched, your [cuntDesc] is flowing with feminine juices, itching for release.", parse);
+	}
 	Text.NL();
 	Text.Add("A slight twitch and a loud yelp is all the warning you get before your ass is flooded with hot imp-sperm. Shuddering, you collapse on top of your diminutive lover, ");
-	if(player.FirstCock())
+	if (player.FirstCock()) {
 		Text.Add("your own [cockDesc] unloading across his stomach.", parse);
-	else
+	} else {
 		Text.Add("squashing the imp's head with your [breastDesc].", parse);
+	}
 	Text.NL();
 	Text.Add("Once you have recovered, you gather yourself up, leaking seminal fluids.", parse);
-	
+
 	Text.Flush();
 	Gui.NextPrompt(Intro.DemonGift);
-}
+};
 
 Intro.ImpsWinGroup = function() {
-	let player = GAME().player;
-	let imp = new Imp();
-	
-	let parse : any = {
-		cuntDesc    : function() { return player.FirstVag().Short(); },
-		breastDesc  : function() { return player.FirstBreastRow().Short(); },
-		clitDesc    : function() { return player.FirstVag().ClitShort(); },
-		anusDesc    : function() { return player.Butt().AnalShort(); },
-		cockDesc    : function() { return player.FirstCock().Short(); },
-		//Imp
-		impCockDesc : function() { return imp.FirstCock().Short(); },
-		
-		another     : (player.Gender() == Gender.male) ? "a" : "another"
+	const player = GAME().player;
+	const imp = new Imp();
+
+	const parse: any = {
+		cuntDesc() { return player.FirstVag().Short(); },
+		breastDesc() { return player.FirstBreastRow().Short(); },
+		clitDesc() { return player.FirstVag().ClitShort(); },
+		anusDesc() { return player.Butt().AnalShort(); },
+		cockDesc() { return player.FirstCock().Short(); },
+		// Imp
+		impCockDesc() { return imp.FirstCock().Short(); },
+
+		another     : (player.Gender() == Gender.male) ? "a" : "another",
 	};
-	
+
 	Text.Clear();
 	Text.Add("<i>“All right, boys! Time to wake up!”</i> The groaning imps, still sore from your fight, quickly perk up when they realize your intentions. They all gather around you, cocks quickly stiffening.");
 	Text.NL();
-	
+
 	// Male/female split
-	if(player.Gender() == Gender.male) {
+	if (player.Gender() == Gender.male) {
 		Text.Add("<i>“You, on all fours,”</i> you point to one of the imps, grinning widely. The chosen imp whimpers, but complies with your order, drawing amused snickers from the other imps. They quickly quiet down when you add, <i>“And you two, get my cock ready.”</i>", parse);
 		Text.NL();
 		Text.Add("The two reluctant imps take turns sucking your [cockDesc], coating it with saliva, preparing it for penetration. Enjoying your power over the defeated imps, you lick a few of your fingers and grab hold of the prone imp in front of you, shoving three fingers up to the knuckles in his butt.", parse);
@@ -896,13 +894,11 @@ Intro.ImpsWinGroup = function() {
 		Text.NL();
 		Text.Add("Soon, your four-man contraption is rocking steadily, your twitching [cockDesc] buried deep inside the imp in front of you while the two imps sharing your ass alternate their thrusts.", parse);
 		Text.NL();
-		
+
 		Sex.Anal(player, imp);
 		imp.FuckAnal(imp.Butt(), player.FirstCock(), 2);
 		player.Fuck(player.FirstCock(), 2);
-	}
-	else // female
-	{
+	} else {
 		Text.Add("<i>“I want you to fuck me, all of you!”</i> Getting down on your knees, you motion to them seductively. The imps share excited glances and quickly crowd in around you, providing you with plenty of cocks to suck.", parse);
 		Text.NL();
 		Text.Add("Once the imps have been suitably lathered up, you drag one of them down and straddle him in a sixty-nine position, continuing to work on his cock with your [breastDesc]. The remaining two imps have a brief scuffle about who gets to go first - apparently ending in a draw - as you soon feel one of them jump on top of your back, while the other positions himself behind you. Not one, but two fat imp cocks prod at your [anusDesc], insistently demanding entry.", parse);
@@ -910,98 +906,101 @@ Intro.ImpsWinGroup = function() {
 		Text.Add("Moaning happily around your imp popsicle, you reach back and spread your cheeks wider, trying to accommodate the twin cocks stuffing your [anusDesc]. Meanwhile, the imp underneath you is working at your [cuntDesc], licking and lapping obediently.", parse);
 		Text.NL();
 	}
-	
+
 	Sex.Anal(imp, player);
 	player.FuckAnal(player.Butt(), imp.FirstCock(), 2);
 	imp.Fuck(imp.FirstCock(), 2);
-	
+
 	Text.Add("The writhing mass of flesh soon gets more additions, as you find additional imps closing in around you - surely they were not this many? - one taking position in front of you, presenting you with [another] cock to suck. Two more gather on your sides, and you grab their cocks, stroking them furiously.", parse);
 	Text.NL();
-	
+
 	// Male/female split
-	if(player.Gender() == Gender.male)
+	if (player.Gender() == Gender.male) {
 		Text.Add("You can feel your release building up, as your [cockDesc] excitedly twitches, pumping the imp at the end of the butt-fuck train full of sticky spunk.", parse);
-	else // female
+	} else { // female
 		Text.Add("The multiple penetration finally becomes too much for you, and you buck your hips into the face of the imp buried in your crotch, dripping the juices from your release all over him.", parse);
-		
+	}
+
 	Text.NL();
 	Text.Add("The two imps sharing your [anusDesc] change their rhythm subtly, so that instead of alternating, they are thrusting into you at the same time. Thankfully, they do not last long, soon pouring their corrupted seed into your stomach.", parse);
 	Text.NL();
 	Text.Add("To top off your little orgy, the remaining imps gather around you, jerking themselves off and covering every part of you in white, sticky fluids. It would probably be best to get cleaned up before moving on.", parse);
 	Text.Flush();
-	
-	//[Yourself][Imp]
-	let options = new Array();
+
+	// [Yourself][Imp]
+	const options = new Array();
 	options.push({ nameStr : "Yourself",
-		func : function() {
+		func() {
 			Text.Clear();
 			Text.Add("Methodically, you start the process of getting yourself cleaned up, using your tongue to gather up the largest wads of spunk from your body. You are slightly impeded by one of the imps deciding to have a round two, ruining most of your work so far, but eventually you manage to get yourself cleaned up.");
 			Text.Flush();
 			Gui.NextPrompt(Intro.DemonGift);
 		}, enabled : true,
-		tooltip : "Try to lick as much of that delicious cum from your body as you can."
+		tooltip : "Try to lick as much of that delicious cum from your body as you can.",
 	});
 	options.push({ nameStr : "Imp",
-		func : function() {
+		func() {
 			Text.Clear();
 			Text.Add("<i>“You got me messed up like this,”</i> you complain to the tired imps around you, <i>“you get to clean me up!”</i> The dismayed protests of the imps are quickly cut off by threatening to beat them up again, and they dejectedly get down to business. You lean back and relax, turning around at the appropriate times to give them better access. Eventually, you are as clean as you are likely to become without taking a proper bath.");
 			Text.Flush();
 			Gui.NextPrompt(Intro.DemonGift);
 		}, enabled : true,
-		tooltip : "Why bother when you have imps to do it for you? They created this mess, after all."
+		tooltip : "Why bother when you have imps to do it for you? They created this mess, after all.",
 	});
 	Gui.SetButtonsFromList(options);
-}
+};
 
 Intro.ImpsLossPrompt = function() {
 	Text.Clear();
-	
+
 	Text.Add("You carefully approach the snickering imps, a bit daunted by their taunts. <i>“Does the little missy want another go?”</i> one of the little devils holler, making rude gestures at you.");
 	Text.Flush();
-	
-	//[No][Oral][Get fucked]
-	let options = new Array();
+
+	// [No][Oral][Get fucked]
+	const options = new Array();
 	options.push({ nameStr : "No",
-		func : function() {
+		func() {
 			Text.NL();
 			Text.Add("You have had quite enough of <i>that</i> to last you the day. As you back away, you are hounded by their jeers, promising to give you a good time.");
 			Text.Flush();
 			Gui.NextPrompt();
 		}, enabled : true,
-		tooltip : "Hell no! Get away from them."
+		tooltip : "Hell no! Get away from them.",
 	});
 	options.push({ nameStr : "Oral",
 		func : Intro.ImpsLossOral, enabled : true,
-		tooltip : "Pleasure some of the imps and get your filling of delicious cum."
+		tooltip : "Pleasure some of the imps and get your filling of delicious cum.",
 	});
 	options.push({ nameStr : "Get fucked",
 		func : Intro.ImpsLossFucked , enabled : true,
-		tooltip : "You need more, you need to be fucked!"
+		tooltip : "You need more, you need to be fucked!",
 	});
 	Gui.SetButtonsFromList(options);
-}
-			
+};
+
 Intro.ImpsLossOral = function() {
-	let player = GAME().player;
-	let imp = new Imp();
-	
-	let parse : any = {
-		cuntDesc    : function() { return player.FirstVag().Short(); },
-		breastDesc  : function() { return player.FirstBreastRow().Short(); },
-		clitDesc    : function() { return player.FirstVag().ClitShort(); },
-		anusDesc    : function() { return player.Butt().AnalShort(); },
-		cockDesc    : function() { return player.FirstCock().Short(); },
-		//Imp
-		impCockDesc : function() { return imp.FirstCock().Short(); }
+	const player = GAME().player;
+	const imp = new Imp();
+
+	const parse: any = {
+		cuntDesc() { return player.FirstVag().Short(); },
+		breastDesc() { return player.FirstBreastRow().Short(); },
+		clitDesc() { return player.FirstVag().ClitShort(); },
+		anusDesc() { return player.Butt().AnalShort(); },
+		cockDesc() { return player.FirstCock().Short(); },
+		// Imp
+		impCockDesc() { return imp.FirstCock().Short(); },
 	};
-	
+
 	Text.Clear();
-	
+
 	Text.Add("<i>“M-maybe just a little?”</i> you shuffle around uncomfortably, trying to not seem too eager but failing miserably.");
-	if(player.FirstCock())
+	if (player.FirstCock()) {
 		Text.Add(" Your erect [cockDesc] give your intentions away, even if you awkwardly try to hide it.", parse);
-	if(player.FirstVag())
+	}
+	if (player.FirstVag()) {
 		Text.Add(" Your wet [cuntDesc] gives your intentions away, even if you awkwardly try to hide it.", parse);
+	}
 	Text.NL();
 	Text.Add("<i>“Sure, why don't ya come over here and suck my dick?”</i> one of the imps taunts you, quite surprised when you shuffle over to comply. <i>“Hey, are you seeing this bitch?”</i> he chortles as you get down on your knees, planting a kiss on his hard [impCockDesc]. You go at your task with vigor, any previous embarrassment wiped away by the salty taste of imp pre-cum on your tongue.", parse);
 	Text.NL();
@@ -1012,43 +1011,44 @@ Intro.ImpsLossOral = function() {
 	Text.Add("It is not long before your efforts are successful, as twin jets of white spunk fills your mouth to the brim, forcing you to swallow. Despite giving it your best, droplets are soon streaming down your cheeks, tainting your chest with pearly strands. Grunts from the surrounding imps give you fair warning of their impending orgasms, and you close your eyes blissfully, happily receiving your cum-shower.", parse);
 	Text.NL();
 	Text.Add("<i>“You are pretty good for a slut!”</i> one of the imps praises you, <i>“Come back later and we'll fuck ya good!”</i> Wiping the sticky fluids from your skin and hair, you gather up your possessions.", parse);
-	
+
 	Sex.Blowjob(player, imp);
 	player.FuckOral(player.Mouth(), imp.FirstCock(), 2);
 	imp.Fuck(imp.FirstCock(), 2);
-	
+
 	Text.Flush();
 	Gui.NextPrompt(Intro.DemonGift);
-}
+};
 
 Intro.ImpsLossFucked = function() {
-	let player = GAME().player;
-	let imp = new Imp();
-	
-	let parse : any = {
-		cuntDesc    : function() { return player.FirstVag().Short(); },
-		breastDesc  : function() { return player.FirstBreastRow().Short(); },
-		clitDesc    : function() { return player.FirstVag().ClitShort(); },
-		anusDesc    : function() { return player.Butt().AnalShort(); },
-		cockDesc    : function() { return player.FirstCock().Short(); },
-		//Imp
-		impCockDesc : function() { return imp.FirstCock().Short(); }
+	const player = GAME().player;
+	const imp = new Imp();
+
+	const parse: any = {
+		cuntDesc() { return player.FirstVag().Short(); },
+		breastDesc() { return player.FirstBreastRow().Short(); },
+		clitDesc() { return player.FirstVag().ClitShort(); },
+		anusDesc() { return player.Butt().AnalShort(); },
+		cockDesc() { return player.FirstCock().Short(); },
+		// Imp
+		impCockDesc() { return imp.FirstCock().Short(); },
 	};
-	
+
 	Text.Clear();
-	
+
 	Text.Add("<i>“I... I want you to fuck me!”</i> you can hardly believe that you uttered the words yourself, but the imps are more than happy to oblige. You are quickly pushed down on all fours, held down by two imps while a third on mounts you from behind. Your request is quickly filled as the imp roughly shoves his entire length inside your [anusDesc] and begins to rut wildly.", parse);
 	Text.NL();
-	
+
 	Sex.Anal(imp, player);
 	player.FuckAnal(player.Butt(), imp.FirstCock(), 2);
 	imp.Fuck(imp.FirstCock(), 2);
-	
-	if(player.FirstCock())
+
+	if (player.FirstCock()) {
 		Text.Add("<i>“Why ya have that pitiful little thing?”</i> the imp teases your [cockDesc] between his thrusts, <i>“Not like you ever gonna use it, here!”</i>", parse);
-	else
+	} else {
 		Text.Add("<i>“The boss won't let me use the other hole, so this one will have to do!”</i> the imp grunts.", parse);
-		
+	}
+
 	Text.NL();
 	Text.Add("The imp is done sooner than you would have liked, basting your insides with sticky seminal fluids, but he is quickly replaced by another, picking up where the first left off. One after the other, the imps have a go at your poor [anusDesc], reaming you into a whimpering mess.", parse);
 	Text.NL();
@@ -1058,156 +1058,152 @@ Intro.ImpsLossFucked = function() {
 	Text.NL();
 	Text.Add("<i>“Meet the Impaler!”</i> one of the diminutive devils snickers, presenting you with a phallus so big it almost looks comical on his slight frame, if you did not know that it would soon be lodged deep in your colon. You give it a few licks, hoping the saliva will make the entry easier.", parse);
 	Text.NL();
-	
+
 	Text.Add("The orgy continues, each imp now equipped with a fifteen-inch monster. ");
-	if(player.FirstCock())
+	if (player.FirstCock()) {
 		Text.Add("You have lost count of how many times you have spilled your own seed on the ground, orgasm after orgasm coaxed from your brutalized prostate.");
-	else
+	} else {
 		Text.Add("Feminine juices from countless orgasms drip down your legs, mixing with the leaking seminal fluids from your ravaged [anusDesc].", parse);
+	}
 	Text.Add(" Your stomach is filled to the brim with imp spunk, each new load deposited leaking out harmlessly.", parse);
-	
+
 	Text.NL();
-	
+
 	imp.FirstCock().length.base = 40;
 	imp.FirstCock().thickness.base = 8;
 	Sex.Anal(imp, player);
 	player.FuckAnal(player.Butt(), imp.FirstCock(), 2);
 	imp.Fuck(imp.FirstCock(), 2);
-	
+
 	Text.Add("Finally, you can take no more and black out, still being fucked by the frenzied imps.", parse);
 	Text.NL();
 	Text.Add("You wake up some time later in a pile of snoring imps. Somehow, you seem to have absorbed a ridiculous amount of cum, as your stomach is now relatively normal in size. Carefully disentangling yourself from the imps, you get up.", parse);
-	
+
 	Text.Flush();
 	Gui.NextPrompt(Intro.DemonGift);
-}
-
+};
 
 // Intro.timesTakenDemonGift
 Intro.DemonGift = function() {
-	let player = GAME().player;
+	const player = GAME().player;
 
 	TimeStep({minute: 30});
-	
+
 	// Only allow 3 times
-	if(Intro.timesTakenDemonGift >= 3) {
+	if (Intro.timesTakenDemonGift >= 3) {
 		Gui.PrintDefaultOptions();
 		return;
 	}
-	
-	let parse : any = {
+
+	const parse: any = {
 		msmr        : (player.Gender() == Gender.male) ? "MISTER" : "MISS",
 		hisher      : (player.Gender() == Gender.male) ? "HIS" : "HER",
-		cuntDesc    : function() { return player.FirstVag().Short(); },
-		cockDesc    : function() { return player.FirstCock().Short(); },
-		cockLen     : function() { return player.FirstCock().Desc().len; },
-		breastDesc  : function() { return player.FirstBreastRow().Short(); }
+		cuntDesc() { return player.FirstVag().Short(); },
+		cockDesc() { return player.FirstCock().Short(); },
+		cockLen() { return player.FirstCock().Desc().len; },
+		breastDesc() { return player.FirstBreastRow().Short(); },
 	};
-	
+
 	Text.Clear();
-	
+
 	Text.Add("<b>AND SO, [msmr] HIGH AND MIGHTY GIVES IN TO [hisher] URGES,</b> the demon gloats as you gather up your possessions. Your cheeks burn slightly under the scrutinizing gaze. What business is that of his anyway!", parse);
 	Text.NL();
 	Text.Add("<b>HOW WOULD YOU LIKE IT IF I MADE SOME CHANGES?</b>", parse);
 	Text.NL();
 	Text.Flush();
-	
-	//[No][Big breasts][Vaginal cap][Bigger load][Larger cock][Anal cap]
-	let options = new Array();
+
+	// [No][Big breasts][Vaginal cap][Bigger load][Larger cock][Anal cap]
+	const options = new Array();
 	options.push({ nameStr : "No",
-		func : function() {
+		func() {
 			Text.Add("You shake your head, refusing the demon's temptations.");
 			Text.Flush();
 			Gui.NextPrompt();
 		}, enabled : true,
-		tooltip : "No way you are letting that demon play around with your parts!"
+		tooltip : "No way you are letting that demon play around with your parts!",
 	});
-	if(player.Gender() == Gender.female) {
+	if (player.Gender() == Gender.female) {
 		options.push({ nameStr : "Vaginal cap",
-			func : function() {
+			func() {
 				Text.Add("You let out a shuddering gasp as you feel your insides shift around. You feel you could probably take a lot bigger cocks now...");
-				
+
 				player.FirstVag().capacity.base++;
-				
+
 				Intro.timesTakenDemonGift++;
-				
+
 				Text.Flush();
 				Gui.NextPrompt();
 			}, enabled : true,
-			tooltip : "Increasing your capacity would allow you to take even bigger dicks..."
+			tooltip : "Increasing your capacity would allow you to take even bigger dicks...",
 		});
 	}
-	if(player.Gender() == Gender.male) {
+	if (player.Gender() == Gender.male) {
 		options.push({ nameStr : "Bigger load",
-			func : function() {
+			func() {
 				Text.Add("Before you even utter the words, you can feel your sack churning, growing larger and more virile. You are filled with an urge to deposit your seed in something, anything.");
-				
+
 				player.Balls().size.base++;
 				player.Balls().cumProduction.base++;
 				player.Balls().cumCap.base += 5;
-				
+
 				Intro.timesTakenDemonGift++;
-				
+
 				Text.Flush();
 				Gui.NextPrompt();
 			}, enabled : true,
-			tooltip : "Cumming feels so good..."
+			tooltip : "Cumming feels so good...",
 		});
 		options.push({ nameStr : "Larger cock",
-			func : function() {
+			func() {
 				player.FirstCock().thickness.base++;
 				player.FirstCock().length.base += 5;
-				
+
 				Text.Add("You have hardly uttered the words before you feel your cock swell, gaining a solid two inches. Even though you just got off, your new [cockLen] long cock is stiff and aches for release.", parse);
-				
+
 				Intro.timesTakenDemonGift++;
-				
+
 				Text.Flush();
 				Gui.NextPrompt();
 			}, enabled : true,
-			tooltip : "Another few inches couldn't hurt..."
+			tooltip : "Another few inches couldn't hurt...",
 		});
 	}
 	options.push({ nameStr : "Anal cap",
-		func : function() {
+		func() {
 			Text.Add("Groaning, you feel your insides shift around, allowing for larger things to be put in your butt!");
-			
+
 			player.Butt().capacity.base++;
-			
+
 			Intro.timesTakenDemonGift++;
-			
+
 			Text.Flush();
 			Gui.NextPrompt();
 		}, enabled : true,
-		tooltip : "Increasing your capacity would allow you to take even bigger dicks..."
+		tooltip : "Increasing your capacity would allow you to take even bigger dicks...",
 	});
 	options.push({ nameStr : "Big breasts",
-		func : function() {
+		func() {
 			Text.Add("You moan as your chest fills out, gaining at least a few cup sizes. You carefully touch your stiff nipples; apparently they grew a bit too.");
-			
+
 			player.FirstBreastRow().size.base += 5;
 			player.FirstBreastRow().nippleLength.base += 0.5;
 			player.FirstBreastRow().nippleThickness.base += 0.5;
-			
+
 			Intro.timesTakenDemonGift++;
-			
+
 			Text.Flush();
 			Gui.NextPrompt();
 		}, enabled : true,
-		tooltip : Text.Parse("You consider your [breastDesc] - a bit bigger couldn't hurt, right?", parse)
+		tooltip : Text.Parse("You consider your [breastDesc] - a bit bigger couldn't hurt, right?", parse),
 	});
 	Gui.SetButtonsFromList(options);
-}
-
-
-
-
+};
 
 Intro.DemonFight = function() {
-	let player = GAME().player;
-	let uru = GAME().uru;
+	const player = GAME().player;
+	const uru = GAME().uru;
 
-	let parse : any = {
+	let parse: any = {
 
 	};
 	parse = player.ParserTags(parse);
@@ -1218,35 +1214,35 @@ Intro.DemonFight = function() {
 	Text.Add("You are facing the giant demon and two smaller imps.");
 	Text.Flush();
 	Gui.NextPrompt(function() {
-		let enemy = new Party();
+		const enemy = new Party();
 		enemy.AddMember(new IntroDemon());
 		enemy.AddMember(new Imp());
 		enemy.AddMember(new Imp());
-		let enc = new Encounter(enemy);
+		const enc = new Encounter(enemy);
 		enc.canRun = false;
 		// Set a custom loss scene (imp rape)
 		enc.onLoss = function() {
-			uru.flags["Intro"] |= UruFlags.Intro.LostToImps;
+			uru.flags.Intro |= UruFlags.Intro.LostToImps;
 
 			Text.Clear();
 			Text.Add("Exhausted from the fight, you fall to your knees, your body hurting too much to keep up. The great demon looks down on you incredulously and laughs, a grotesque hissing and thundering sound. <b>HAHAHA! YOU THOUGHT THAT YOU COULD STAND UP TO ME? YET YOU CAN'T EVEN BEAT A BUNCH OF IMPS!</b> The demon seems greatly amused by your plight, but only observes you as you squirm around, trying to get away.");
 			Text.NL();
 			// Count imps
-			let imps = this.GetEnemyArray();
-			let numImps = imps.length - 1;
+			const imps = this.GetEnemyArray();
+			const numImps = imps.length - 1;
 			let impPlural = (numImps > 1) ? "imps" : "imp";
 
 			// Raise downed imps
-			let numDowned = enc.GetDownedEnemyArray().length;
-			if(numDowned > 0) {
+			const numDowned = enc.GetDownedEnemyArray().length;
+			if (numDowned > 0) {
 				Text.Add("With a flick of his hand, the demon revitalizes the fallen " + impPlural + ".");
 				Text.NL();
 			}
 
-			Text.Add("The "); if(numImps > 1) Text.Add(Text.NumToText(numImps) + " ");
+			Text.Add("The "); if (numImps > 1) { Text.Add(Text.NumToText(numImps) + " "); }
 			Text.Add(impPlural + " snicker at you, uncertainly looking up at the demon. <b>BY ALL MEANS,</b> it waves amiably with a great clawed hand.");
 
-			if(player.Gender() == Gender.female) {
+			if (player.Gender() == Gender.female) {
 				Text.Add(" <b>KEEP HER VIRGINITY, THOUGH,</b> the demon adds as an afterthought.");
 			}
 			Text.NL();
@@ -1260,7 +1256,7 @@ Intro.DemonFight = function() {
 			+ ", rubbing the hard shaft in your face before forcing it into your protesting mouth. The imp proceeds to roughly face-fuck you, ignoring your garbled protests. He pulls at your [hair] until he has pushed his meatstick as far down your throat as it'll go, then pulls out and repeats the process.", parse);
 			Text.NL();
 
-			if(numImps >= 2) {
+			if (numImps >= 2) {
 				impPlural = (numImps == 2) ? "the other imp" : "another of the imps";
 				Text.Add("Meanwhile, " + impPlural
 				+ " has moved behind you and grabs hold of your [butt] and pushes his "
@@ -1273,13 +1269,14 @@ Intro.DemonFight = function() {
 				Intro.lubedFlag = true;
 			}
 
-			if(numImps >= 3) {
+			if (numImps >= 3) {
 				impPlural = (numImps == 3) ? "The last of the imps" : "Another of the imps";
 				Text.Add(impPlural + " considers the positioning of the other imps, then grabs the shoulder of the one pounding away at your ass. After a short garbled conversation your lust-ridden mind cannot make sense of, they seem to come to an agreement. The imp crawls in under you, taking a moment to squeeze your ");
-				if(player.Gender() == Gender.female)
+				if (player.Gender() == Gender.female) {
 					Text.Add(player.FirstBreastRow().Short());
-				else
+				} else {
 					Text.Add(player.FirstCock().Short());
+				}
 				Text.Add(" while he is at it. For a short, blissful moment, the cock violating your butt is removed, only to be replaced by that belonging to the imp underneath you.");
 				Text.NL();
 				Text.Add("As the pressure on your poor anus increase, you realize that they intend to push both of them in there. You'll be feeling this one for a week... if you live that long that is.");
@@ -1288,21 +1285,21 @@ Intro.DemonFight = function() {
 				player.FuckAnal(player.Butt(), imps[3].FirstCock(), 2);
 			}
 
-			if(numImps >= 4) {
+			if (numImps >= 4) {
 				Text.Add("The final imp seems to be content just jerking off and rubbing his cock on your body, squeezing one of your nipples with his free hand so hard that it hurts.");
 				Text.NL();
 			}
 
 			impPlural = (numImps > 1) ? "imps" : "imp";
-			let growsPlural = (numImps > 1) ? "grow" : "grows";
-			let impPossesive = (numImps > 1) ? "imps" : "imp's";
-			let impThey = (numImps > 1) ? "they are" : "he is";
+			const growsPlural = (numImps > 1) ? "grow" : "grows";
+			const impPossesive = (numImps > 1) ? "imps" : "imp's";
+			const impThey = (numImps > 1) ? "they are" : "he is";
 			Text.Add("The " + impPossesive + " rutting " + growsPlural + " more insistent, and you can tell "
 			+ impThey + " ready to blow. Any other thoughts are wiped clear as your senses - and body - are filled to the brim with imp ejaculate. The " + impPlural + " withdraw, leaving you leaking cum on the ground.");
 			Text.Flush();
 
 			Gui.NextPrompt(Intro.DemonAftermath);
-		}
+		};
 		// Set a custom win scene
 		enc.onVictory = function() {
 			Text.Clear();
@@ -1314,23 +1311,23 @@ Intro.DemonFight = function() {
 			Text.Add("<i>“D-don't think I am anything like you!”</i> you snap angrily. With an annoyed flick of his hand, the demon knocks you to the ground, forcing all the air out of your lungs.");
 			Text.Flush();
 			Gui.NextPrompt(Intro.DemonAftermath);
-		}
+		};
 		// Set a custom victory condition
 		enc.VictoryCondition = function() {
 			let downed = true;
-			for(let i = 0; i < this.enemy.members.length; i++) {
-				let e = this.enemy.members[i];
-				if(e.name == "Demon") continue; // Don't count the demon
-				if(e.Incapacitated() == false) downed = false;
+			for (let i = 0; i < this.enemy.members.length; i++) {
+				const e = this.enemy.members[i];
+				if (e.name == "Demon") { continue; } // Don't count the demon
+				if (e.Incapacitated() == false) { downed = false; }
 			}
 			return downed;
-		}
+		};
 		enc.Start();
 	});
-}
+};
 
 Intro.DemonAftermath = function() {
-	let player = GAME().player;
+	const player = GAME().player;
 
 	Text.Clear();
 
@@ -1350,35 +1347,35 @@ Intro.DemonAftermath = function() {
 	Gui.NextPrompt(function() {
 		MoveToLocation(DarkAspect.Cliff, {minute: 20});
 	});
-}
-
+};
 
 DarkAspect.Cliff.description = function() {
 	Text.Add("You are on a small outcropping on the sheer mountainside where you fought with the imps.");
 	Text.NL();
 	Text.Add("The huge demon is blocking the path back down, but it seems to be ignoring you for now, no doubt cooking up new ways to torture you.");
 	Text.NL();
-}
+};
 
 DarkAspect.Cliff.events.push(new Link(
 	"Imps", true, true,
 	function() {
-		let uru = GAME().uru;
-		if(uru.flags["Intro"] & UruFlags.Intro.LostToImps)
+		const uru = GAME().uru;
+		if (uru.flags.Intro & UruFlags.Intro.LostToImps) {
 			Text.Add("The imps are still hanging around, sneering and hooting at you. Going near them is probably not going to end well for you. They would probably jump at a chance to have another go at you.");
-		else
+		} else {
 			Text.Add("The fallen imps are out cold on the ground, you guess you could check them for loot, or maybe - just maybe - get some release.");
+		}
 		Text.NL();
 	},
 	function() {
-		let uru = GAME().uru;
-		if(uru.flags["Intro"] & UruFlags.Intro.LostToImps)
+		const uru = GAME().uru;
+		if (uru.flags.Intro & UruFlags.Intro.LostToImps) {
 			Intro.ImpsLossPrompt();
-		else
+		} else {
 			Intro.ImpsWinPrompt();
-	}
+		}
+	},
 ));
-
 
 DarkAspect.Cliff.links.push(new Link(
 	"Climb", true, true,
@@ -1407,7 +1404,7 @@ DarkAspect.Cliff.links.push(new Link(
 
 			Gui.NextPrompt(Intro.UruAppears);
 		});
-	}
+	},
 ));
 
 Intro.UruAppears = function() {
@@ -1428,31 +1425,30 @@ Intro.UruAppears = function() {
 	Text.Flush();
 
 	Gui.NextPrompt(Intro.ChooseName);
-}
+};
 
 Intro.ChooseName = function() {
-	let player = GAME().player;
+	const player = GAME().player;
 
 	Text.Clear();
 	Text.Add("What is your name?");
 	Text.Flush();
 
-	let textBox : any = document.getElementById("textInputArea");
+	const textBox: any = document.getElementById("textInputArea");
 	textBox.value = "";
 	textBox.style.visibility = "visible";
 	textBox.focus();
 	Input.keyDownValid = false;
 
 	Gui.NextPrompt(function() {
-		if(textBox.value == "") {
+		if (textBox.value == "") {
 			Text.Clear();
 			Text.Add("What is your name?");
 			Text.NL();
 			Text.Add("You must enter a name!");
 			Text.Flush();
 			textBox.focus();
-		}
-		else {
+		} else {
 			player.name = textBox.value;
 			textBox.style.visibility = "hidden";
 			Input.keyDownValid = true;
@@ -1460,7 +1456,7 @@ Intro.ChooseName = function() {
 			Intro.UruSeduce();
 		}
 	});
-}
+};
 
 Intro.UruSeduce = function() {
 	Text.Clear();
@@ -1469,13 +1465,12 @@ Intro.UruSeduce = function() {
 	Gui.NextPrompt(function() {
 		MoveToLocation(DarkAspect.Peak, {minute: 5});
 	});
-}
-
+};
 
 DarkAspect.Peak.description = function() {
 	Text.Add("You are at the very peak of the mountain, on a flat, circular plateau no more than twenty yards across. Around and above, the sky is a calm meld of red and pink. In the middle of the plateau stands a throne of stone.");
 	Text.NL();
-}
+};
 DarkAspect.Peak.links.push(new Link(
 	"Throne", true, true,
 	function() {
@@ -1492,7 +1487,7 @@ DarkAspect.Peak.links.push(new Link(
 		Text.Add("Engraved in the stone are runes in a strange language, glowing faintly. You don't understand their meaning.");
 		Text.Flush();
 		Gui.NextPrompt(Gui.PrintDefaultOptions);
-	}
+	},
 ));
 DarkAspect.Peak.events.push(new Link(
 	"Uru", true, true,
@@ -1501,8 +1496,8 @@ DarkAspect.Peak.events.push(new Link(
 		Text.NL();
 	},
 	function() {
-		let uru = GAME().uru;
-	
+		const uru = GAME().uru;
+
 		Text.Clear();
 
 		Text.Add("<i>“Uh, thanks,”</i> you say uncertainly, not sure how to handle a woman who can, apparently, annihilate hundred-foot demons without breaking a sweat. That, and she obviously is a demon herself.");
@@ -1511,31 +1506,31 @@ DarkAspect.Peak.events.push(new Link(
 		Text.NL();
 		Text.Add("<i>“You don't belong here!”</i> she announces, proud of her discovery. <i>“What are you and how did you get here?”</i>");
 		Text.Flush();
-		
-		let options = new Array();
+
+		const options = new Array();
 		options.push({ nameStr: "Demon",
-			func : function() {
+			func() {
 				Text.Clear();
 				Text.Add("You explain about the demon that brought you to this realm - the demon that she just slaughtered. This doesn't seem to be the right thing to say, though, as her mood darkens noticeably. <i>“You are lying! As if that pathetic worm could bridge the gate between dimensions! Not even I...”</i> she trails off thoughtfully. <i>“There must have been something else... what was it?”</i>");
 				Text.NL();
 				Text.Add("Do you tell her about the mirror or not? She did kind of save your life back there.");
 				Text.Flush();
 
-				let options = new Array();
+				const options = new Array();
 				options.push({ nameStr: "Mirror",
-					func : function() {
+					func() {
 						Text.Clear();
 						Text.Add("Thinking back, the thing that sticks to your mind is the mirror you found in the attic. When you mention it, Uru perks up again. <i>“Yeah, that sounds kind of plausible, a magical artifact, no doubt. Maybe even that runt could have managed it, in that case.”</i> She purses her lips. <i>“Actually, it sounds kind of familiar... but enough about that for now, though, I want to know more about you!”</i>");
 						Text.Flush();
 
-						uru.flags["Intro"] |= UruFlags.Intro.ToldUruAboutMirror;
+						uru.flags.Intro |= UruFlags.Intro.ToldUruAboutMirror;
 
 						Gui.NextPrompt(Intro.UruGift);
 					}, enabled : true,
-					tooltip : "Why not tell her the truth about the mirror? What harm could it do?"
+					tooltip : "Why not tell her the truth about the mirror? What harm could it do?",
 				});
 				options.push({ nameStr: "Lie",
-					func : function() {
+					func() {
 						Text.Clear();
 						Text.Add("You are not sure why, but you don't think it would be a good idea to tell her about the mirror or the gem, even if she did save you. Not trusting everyone you come across is probably a healthy attitude when you have been transported to Hell. <i>“Nothing I can think of,”</i> you shrug. <i>“That big demon just appeared out of nowhere and pulled me here.”</i> She doesn't seem particularly happy about your evasive answer.");
 						Text.NL();
@@ -1544,14 +1539,14 @@ DarkAspect.Peak.events.push(new Link(
 
 						Gui.NextPrompt(Intro.UruGift);
 					}, enabled : true,
-					tooltip : "A good lie has some truth in it, telling her that the demon brought you here could probably work."
+					tooltip : "A good lie has some truth in it, telling her that the demon brought you here could probably work.",
 				});
 				Gui.SetButtonsFromList(options);
 			}, enabled : true,
-			tooltip : "Explain how the demon captured and hunted you."
+			tooltip : "Explain how the demon captured and hunted you.",
 		});
 		Gui.SetButtonsFromList(options);
-	}
+	},
 ));
 
 Intro.UruGift = function() {
@@ -1564,49 +1559,49 @@ Intro.UruGift = function() {
 	Text.Add("You start talking about your hometown, but she stops you after only a few sentences. <i>“No, no! I don't want to know what you were, I want to know what you will become!”</i> Perplexed, you ponder the strange question. Does she mean your wishes for the future?");
 	Text.Flush();
 
-	//TODO no impact?
-	//[Power][Love][Peace]
-	let options = new Array();
+	// TODO no impact?
+	// [Power][Love][Peace]
+	const options = new Array();
 	options.push({ nameStr : "Power",
-		func : function() {
+		func() {
 			Text.NL();
 			Text.Add("You tell her that you desire power, to be a ruler of men.");
 			Text.Flush();
 			Gui.NextPrompt(Intro.UruConfirmGift);
 		}, enabled : true,
-		tooltip : "You desire power."
+		tooltip : "You desire power.",
 	});
 	options.push({ nameStr : "Love",
-		func : function() {
+		func() {
 			Text.NL();
 			Text.Add("Most of all, you desire to be loved.");
 			Text.Flush();
 			Gui.NextPrompt(Intro.UruConfirmGift);
 		}, enabled : true,
-		tooltip : "You desire to be loved."
+		tooltip : "You desire to be loved.",
 	});
 	options.push({ nameStr : "Peace",
-		func : function() {
+		func() {
 			Text.NL();
 			Text.Add("You desire to live peacefully, with the power to protect your friends and loved ones from harm.");
 			Text.Flush();
 			Gui.NextPrompt(Intro.UruConfirmGift);
 		}, enabled : true,
-		tooltip : "You desire a peaceful existence."
+		tooltip : "You desire a peaceful existence.",
 	});
 	Gui.SetButtonsFromList(options);
-}
+};
 
 Intro.UruConfirmGift = function() {
-	let player = GAME().player;
-	let uru = GAME().uru;
+	const player = GAME().player;
+	const uru = GAME().uru;
 
 	Text.Clear();
 	player.SetLevelBonus();
 
 	Text.Add("Uru looks at you dubiously. <i>“You really think you could become someone like that?”</i> She ponders, <i>“The way I see it, you were pretty pathetic back there.”</i>");
 	Text.NL();
-	if(uru.flags["Intro"] & UruFlags.Intro.LostToImps) {
+	if (uru.flags.Intro & UruFlags.Intro.LostToImps) {
 		Text.Add("She giggles, <i>“Watching you get railed by imps was fun though, it looked like you enjoyed it!”</i> You blush angrily at that, it's not like you lost on purpose!");
 		Text.NL();
 	}
@@ -1619,10 +1614,10 @@ Intro.UruConfirmGift = function() {
 	Text.Flush();
 
 	Gui.NextPrompt(Intro.UruGen);
-}
+};
 
 Intro.UruGen = function() {
-	let player = GAME().player;
+	const player = GAME().player;
 
 	Text.Clear();
 
@@ -1636,51 +1631,51 @@ Intro.UruGen = function() {
 	// TODO: SEXUAL PREFERENCE INITIAL VALUES
 	Text.Flush();
 
-	let options = new Array();
+	const options = new Array();
 	options.push({ nameStr : "Cock",
-		func : function() {
+		func() {
 			Text.Add("Uru closes in on you, a wicked smile on her face. <i>“Really now, is that so?”</i> As you nod, the object of your admiration rises to full mast. It is certainly the biggest one you've ever seen");
-			if(player.Gender() == Gender.male) Text.Add(", much bigger than your own");
+			if (player.Gender() == Gender.male) { Text.Add(", much bigger than your own"); }
 			Text.Add(". She licks her lips hungrily and gives her shaft a tentative stroke. <i>“How about putting it to use then?”</i>");
 			Text.NL();
 
 			Intro.UruSexChoice();
 		}, enabled : true,
-		tooltip : "That cock sure looks juicy..."
+		tooltip : "That cock sure looks juicy...",
 	});
 	options.push({ nameStr : "Vagina",
-		func : function() {
+		func() {
 			Text.Add("Uru puts one leg on the seat of the throne, letting you get a closer look at her exposed female sex. Her glistening lower lips are a darker shade of red than her skin, but her inner walls are a delicious pink. <i>“All look and no touch?”</i> she teases with a naughty smile.");
 			Text.NL();
 
 			Intro.UruSexChoice();
 		}, enabled : true,
-		tooltip : "Her vagina is moist with juices, inviting and alluring."
+		tooltip : "Her vagina is moist with juices, inviting and alluring.",
 	});
 	options.push({ nameStr : "Ass",
-		func : function() {
+		func() {
 			Text.Add("She chuckles and places a hand on her expansive butt. <i>“I guess I make a good first impression!”</i> She turns around with a little twirl and presents her booty to you. Between her legs, you can clearly see her dripping sex - or rather, both of them. <i>“You like what you see?”</i> she challenges you with a husky voice. <i>“Why don't you try claiming it?”</i>");
 			Text.NL();
 
 			Intro.UruSexChoice();
 		}, enabled : true,
-		tooltip : "What wouldn't you give to tap that ass?"
+		tooltip : "What wouldn't you give to tap that ass?",
 	});
 	options.push({ nameStr : "Breasts",
-		func : function() {
+		func() {
 			Text.Add("<i>“Oh, these inconvenient things?”</i> she asks with an exaggerated sigh that causes her D-cups to bounce in an almost hypnotic manner. Bending forward, she gives you a much closer look. <i>“Go ahead, you can touch them,”</i> she murmurs throatily, <i>“but wouldn't you rather do something more fun?”</i>");
 			Text.NL();
 
 			Intro.UruSexChoice();
 		}, enabled : true,
-		tooltip : "That cleavage is to die for."
+		tooltip : "That cleavage is to die for.",
 	});
 	Gui.SetButtonsFromList(options);
-}
+};
 
 Intro.UruSexChoice = function() {
-	let player = GAME().player;
-	let uru = GAME().uru;
+	const player = GAME().player;
+	const uru = GAME().uru;
 
 	Text.Add("Dimly, you realize that you are about to bang a demon - an extremely sexy demon, sure, but the detail still nags at your muddled mind.");
 	Text.NL();
@@ -1691,48 +1686,48 @@ Intro.UruSexChoice = function() {
 
 	Text.Flush();
 
-	let options = new Array();
+	const options = new Array();
 	options.push({ nameStr : "Fuck vagina",
-		func : function() {
-			uru.flags["Intro"] |= UruFlags.Intro.FuckedUru;
-			if(player.Gender() == Gender.female) {
+		func() {
+			uru.flags.Intro |= UruFlags.Intro.FuckedUru;
+			if (player.Gender() == Gender.female) {
 				Gui.Callstack.push(Intro.UruSexFuckVagina);
 				Intro.UruGiveClitcock();
-			}
-			else
+			} else {
 				Intro.UruSexFuckVagina();
+			}
 		}, enabled : true,
-		tooltip : (player.Gender() == Gender.male) ? "Your cock yearns to be buried inside the omnibus, and her vagina provides a tantalizing target." : "You simply must fuck this beautiful hermaphrodite, and her vagina provides a tantalizing target. Exactly how that is supposed to work is a bit unclear."
+		tooltip : (player.Gender() == Gender.male) ? "Your cock yearns to be buried inside the omnibus, and her vagina provides a tantalizing target." : "You simply must fuck this beautiful hermaphrodite, and her vagina provides a tantalizing target. Exactly how that is supposed to work is a bit unclear.",
 	});
 	options.push({ nameStr : "Fuck anal",
-		func : function() {
-			uru.flags["Intro"] |= UruFlags.Intro.FuckedUru;
-			if(player.Gender() == Gender.female) {
+		func() {
+			uru.flags.Intro |= UruFlags.Intro.FuckedUru;
+			if (player.Gender() == Gender.female) {
 				Gui.Callstack.push(Intro.UruSexFuckAnal);
 				Intro.UruGiveClitcock();
-			}
-			else
+			} else {
 				Intro.UruSexFuckAnal();
+			}
 		}, enabled : true,
-		tooltip : (player.Gender() == Gender.male) ? "You can't wait to rail that tight butt. That a demonic tail is attached an inch above it only provides a slight distraction." : "That butt looks simply delicious... if only you had something to fuck it with."
+		tooltip : (player.Gender() == Gender.male) ? "You can't wait to rail that tight butt. That a demonic tail is attached an inch above it only provides a slight distraction." : "That butt looks simply delicious... if only you had something to fuck it with.",
 	});
 	options.push({ nameStr : "Get fucked",
-		func : function() {
-			uru.flags["Intro"] |= UruFlags.Intro.FuckedByUru;
+		func() {
+			uru.flags.Intro |= UruFlags.Intro.FuckedByUru;
 			Intro.UruSexGetFucked();
 		}, enabled : true,
-		tooltip : "Your eyes constantly stray to the thick cock between her legs. What would it be like if she used it on you?"
+		tooltip : "Your eyes constantly stray to the thick cock between her legs. What would it be like if she used it on you?",
 	});
 	options.push({ nameStr : "No",
 		func : Intro.UruSexDenied, enabled : true,
-		tooltip : "No matter how alluring you find the demonette, you must not allow yourself to be seduced. Who knows what she might be after?"
+		tooltip : "No matter how alluring you find the demonette, you must not allow yourself to be seduced. Who knows what she might be after?",
 	});
 	Gui.SetButtonsFromList(options);
-}
+};
 
 Intro.UruGiveClitcock = function() {
-	let player = GAME().player;
-	let uru = GAME().uru;
+	const player = GAME().player;
+	const uru = GAME().uru;
 
 	Text.Clear();
 
@@ -1745,32 +1740,33 @@ Intro.UruGiveClitcock = function() {
 	Text.Add("Panting, you realize that you have just had an orgasm. Smirking, Uru sucks out the last of your ejaculate. Idly, you wonder if the stuff is potent, though your musings are cut short as the omnibus hugs you, jamming her tongue into your mouth in a rough french kiss, forcing your own cum into your mouth. Her own rock hard dick rubs between your bodies as she pulls away. The demon licks her lips and leans back, looking at you expectantly.");
 	Text.Flush();
 
-	uru.flags["Intro"] |= UruFlags.Intro.GotClitcock;
+	uru.flags.Intro |= UruFlags.Intro.GotClitcock;
 
 	// Gain clit cock
-	let cc = player.FirstVag().CreateClitcock();
+	const cc = player.FirstVag().CreateClitcock();
 	cc.length.base = 14;
 	player.body.cock.push(cc);
 
-	let options = new Array();
+	const options = new Array();
 	options.push({ nameStr : "Spit",
-		func : function() {
+		func() {
 			Text.Clear();
 			Text.Add("Coughing, you spit the thick fluid on the ground. The taste is strangely sweet... ");
-			if(uru.flags["Intro"] & UruFlags.Intro.LostToImps)
+			if (uru.flags.Intro & UruFlags.Intro.LostToImps) {
 				Text.Add("very different from the bitter sperm that the imps pumped you full of");
-			else
+			} else {
 				Text.Add("not that you'd know what cum usually tastes like");
+			}
 			Text.Add(". The omnibus looks at you disapprovingly, like you just spilled perfectly good cream - which you kind of did.");
 			Text.NL();
 			Text.Add("<i>“How about giving it a test run?”</i> the succubus teases you, striking a sultry pose.");
 			Text.Flush();
 			Gui.NextPrompt();
 		}, enabled : true,
-		tooltip : "Ew, gross! Spit it out!"
+		tooltip : "Ew, gross! Spit it out!",
 	});
 	options.push({ nameStr : "Swallow",
-		func : function() {
+		func() {
 			Text.Clear();
 			player.AddSexExp(5);
 			player.slut.IncreaseStat(100, 2);
@@ -1780,18 +1776,17 @@ Intro.UruGiveClitcock = function() {
 			Text.Flush();
 			Gui.NextPrompt();
 		}, enabled : true,
-		tooltip : "Hmm, maybe this isn't so bad. You <i>are</i> feeling a bit hungry..."
+		tooltip : "Hmm, maybe this isn't so bad. You <i>are</i> feeling a bit hungry...",
 	});
 	Gui.SetButtonsFromList(options);
 
-
-}
+};
 
 Intro.UruSexFuckVagina = function() {
-	let player = GAME().player;
-	let uru = GAME().uru;
+	const player = GAME().player;
+	const uru = GAME().uru;
 
-	let parse : any = {
+	let parse: any = {
 
 	};
 	parse = player.ParserTags(parse);
@@ -1810,9 +1805,9 @@ Intro.UruSexFuckVagina = function() {
 	Text.Add("Gathering yourself, you get down to business and start pounding the slutty hermaphrodite as hard as your hips will let you. Her tight passage is a marvel, her insides feeling as if they are moving on their own, stroking and squeezing your length. The way things are going, you are not going to last long.");
 	Text.Flush();
 
-	let options = new Array();
+	const options = new Array();
 	options.push({ nameStr : "Deeper",
-		func : function() {
+		func() {
 			Text.Clear();
 			Text.Add("In for a penny, in for a pound. You increase your pace and make your thrusts deeper and harder, bottoming out each time you push into the demon. <i>“Yeah! Fuck me deeper!”</i> The omnibus moans loudly. <i>“Ram that shaft into my cunt!”</i> You are only too happy to oblige.");
 			Text.NL();
@@ -1820,10 +1815,10 @@ Intro.UruSexFuckVagina = function() {
 			Text.Flush();
 			Gui.NextPrompt();
 		}, enabled : true,
-		tooltip : "Fuck it, keep going!"
+		tooltip : "Fuck it, keep going!",
 	});
 	options.push({ nameStr : "Tits",
-		func : function() {
+		func() {
 			Text.Clear();
 			Text.Add("Slowing your thrusts, you let go of the demon's hips and lean to grab at her soft breasts, kneading and squeezing them as a baker would dough. After giving them a thorough massage, you switch to pinching and pulling at her pert nipples. Uru seems to definitely enjoy the attention you are giving her, moaning soft encouragements as she bites her full lips, looking up at you intently.");
 			Text.NL();
@@ -1831,10 +1826,10 @@ Intro.UruSexFuckVagina = function() {
 			Text.Flush();
 			Gui.NextPrompt();
 		}, enabled : true,
-		tooltip : "Try to distract her by massaging her breasts."
+		tooltip : "Try to distract her by massaging her breasts.",
 	});
 	options.push({ nameStr : "Suck cock",
-		func : function() {
+		func() {
 			Text.Clear();
 
 			Intro.timesSuckedUru++;
@@ -1850,29 +1845,29 @@ Intro.UruSexFuckVagina = function() {
 			Text.NL();
 			Text.Add("<i>“Mmm... that is a good little slut,”</i> the omnibus moans as you start licking and sucking at her tip. <i>“Just couldn't hold yourself back, could you?”</i> she teases. One of her hands grabs your [hair] and gently, though firmly, forces you to take inch after inch of her into your mouth.", parse);
 			Text.NL();
-			parse["cunt"] = player.Gender() == Gender.female ? "cunt" : "ass";
+			parse.cunt = player.Gender() == Gender.female ? "cunt" : "ass";
 			Text.Add("<i>“Once you are done, maybe I'll give you a taste - you'd like that, wouldn't you? How many inches do you think your [cunt] can take? Why don't we find out?”</i> she taunts as she forces you to slowly deepthroat her. She releases you right before you begin to choke. You gasp for air while reflexively swallowing the strands of pre-cum she has left behind.", parse);
 			Text.NL();
 			Text.Add("You glare at her, but all she does is offer you a wicked smile. <i>“Don't give me that look, don't you have something else to finish before I plug your other holes, hmm?”</i> Giving your head a shake, you set your mind to the task at hand.");
 			Text.Flush();
 			Gui.NextPrompt();
 		}, enabled : true,
-		tooltip : "Why not give her cock some attention while you are railing her?"
+		tooltip : "Why not give her cock some attention while you are railing her?",
 	});
 	Gui.SetButtonsFromList(options);
 
 	Gui.Callstack.push(function() {
 		Text.Clear();
-		parse["male"] = player.Gender() == Gender.male ? ", emptying the contents of your balls." : "";
+		parse.male = player.Gender() == Gender.male ? ", emptying the contents of your balls." : "";
 		Text.Add("Your thrusts get shorter and more irregular as you approach your peak. The demon keeps egging you on, but you are too far gone to even hear her. With a final push of your hips, you hilt yourself as your [cock] erupts inside the demon[male].", parse);
 		Text.NL();
 		Text.Add("<i>“Mmm... not bad, I must say,”</i> she muses, caressing your [face] fondly, <i>“I don't suppose you'd let me return the favor? A girl has needs, you know...”</i>", parse);
 
 		Text.Flush();
 
-		let options = new Array();
+		const options = new Array();
 		options.push({ nameStr : "Nope",
-			func : function() {
+			func() {
 				Text.Clear();
 				Text.Add("<i>“Guess not,”</i> she sighs, disappointed, as you shake your head firmly.");
 				Text.NL();
@@ -1882,27 +1877,27 @@ Intro.UruSexFuckVagina = function() {
 				Text.Flush();
 				Gui.NextPrompt(Intro.UruSexAftermath);
 			}, enabled : true,
-			tooltip : "No way are you agreeing to that!" + (player.Gender() == Gender.male ? " Gay!" : "")
+			tooltip : "No way are you agreeing to that!" + (player.Gender() == Gender.male ? " Gay!" : ""),
 		});
 		options.push({ nameStr : "Get fucked",
-			func : function() {
-				uru.flags["Intro"] |= UruFlags.Intro.FuckedByUru;
+			func() {
+				uru.flags.Intro |= UruFlags.Intro.FuckedByUru;
 				Text.Clear();
 				Text.Add("To your muddled mind, this doesn't seem like such a bad idea, and you eagerly nod. With the same wicked smile, the omnibus lets go of you, allowing you to withdraw your spent [cock] from her depths, only for her to suddenly manhandle you with surprising strength until you are on all fours. <i>“No regrets, right?”</i> she murmurs into your ear. On second thought, you are not so sure anymore.", parse);
 				Text.Flush();
 				Gui.NextPrompt(Intro.UruSexGetFuckedPassive2);
 			}, enabled : true,
-			tooltip : "Well, it would only be fair to let her have some fun too... what could go wrong?"
+			tooltip : "Well, it would only be fair to let her have some fun too... what could go wrong?",
 		});
 		Gui.SetButtonsFromList(options);
 	});
-}
+};
 
 Intro.UruSexFuckAnal = function() {
-	let player = GAME().player;
-	let uru = GAME().uru;
+	const player = GAME().player;
+	const uru = GAME().uru;
 
-	let parse : any = {
+	let parse: any = {
 
 	};
 	parse = player.ParserTags(parse);
@@ -1918,9 +1913,9 @@ Intro.UruSexFuckAnal = function() {
 
 	// [Spit][Cunt][Suck]
 	let suckeddick = false;
-	let options = new Array();
+	const options = new Array();
 	options.push({ nameStr : "Spit",
-		func : function() {
+		func() {
 			Text.Clear();
 			Text.Add("Eager to get right into the action, you apply a generous glob of saliva to her anus and rub it in with the tip of your [cock]. Grabbing the demon's full buttocks, you give the supple red skin a firm squeeze before planting your [cock] between them. With long, slow strokes, you spread the makeshift lube evenly along your stiff length, hotdogging the horny demon.", parse);
 			Text.NL();
@@ -1928,13 +1923,13 @@ Intro.UruSexFuckAnal = function() {
 			Text.Flush();
 			Gui.NextPrompt();
 		}, enabled : true,
-		tooltip : "Saliva is the poor man's lube."
+		tooltip : "Saliva is the poor man's lube.",
 	});
 	options.push({ nameStr : "Cunt",
-		func : function() {
+		func() {
 			Text.Clear();
 			player.AddSexExp(1);
-			parse["male"] = player.Gender() == Gender.male ? ", your balls slapping against her stiff cock" : "";
+			parse.male = player.Gender() == Gender.male ? ", your balls slapping against her stiff cock" : "";
 			Text.Add("Well, the omnibus seems eager to provide her own lube, so why not put it to use? You grab your [cock] and rub it against Uru's dripping honeypot, coating your entire length in sticky girl juice. The slutty demonette, mistaking your intentions, starts grinding her hips back against your erection, begging for you to penetrate her. In one smooth thrust, you hilt your [cock] inside her[male].", parse);
 			Text.NL();
 			Text.Add("Gods, she feels amazing! You almost forget yourself and start pumping her pussy then and there, but manage to regain control. <i>“H-hey!”</i> she complains as you withdraw from her hot tunnel. <i>“Don't stop now!”</i>");
@@ -1943,10 +1938,10 @@ Intro.UruSexFuckAnal = function() {
 			Text.Flush();
 			Gui.NextPrompt();
 		}, enabled : true,
-		tooltip : "Why not use that nice cunt to lube yourself up?"
+		tooltip : "Why not use that nice cunt to lube yourself up?",
 	});
 	options.push({ nameStr : "Suck",
-		func : function() {
+		func() {
 			Text.Clear();
 
 			player.slut.IncreaseStat(100, 5);
@@ -1964,10 +1959,11 @@ Intro.UruSexFuckAnal = function() {
 			Text.Add("You ignore her complaints and move your focus to the tip of her bloated bitch-breaker, lapping at her urethra. Already you can taste her spunk on your tongue, a delightful mix of sweet and salty. Your senses are reeling, assaulted by not only sight and touch, but also taste and smell. You take a deep breath and eagerly swallow as much of her cock as you can manage.");
 			Text.NL();
 
-			if(uru.flags["Intro"] & UruFlags.Intro.LostToImps)
+			if (uru.flags.Intro & UruFlags.Intro.LostToImps) {
 				Text.Add("You are certainly no expert in the art of blowjobs - though you could definitely get addicted the way things are going - but the encounter with the imps has at least prepared you a little. That being said, nothing could prepare you for the sheer size of the hermaphrodite's member.");
-			else
+			} else {
 				Text.Add("Having never done this before, you are a bit uncertain on how to proceed. A combination of sucking on the head and lapping at it with your tongue seems to do the trick, though.");
+			}
 			Text.NL();
 
 			Text.Add("<i>“Mmm... ooh... suck it deeper,”</i> the quivering omnibus moans, coaxing you to swallow more of her huge demonic girl-cock. Try as you might, your gag reflex soon gets the better of you, and you are forced to back off. Changing your tactic, you keep the head inside your mouth and alternate between sucking and blowing, all the while jerking the omnibus off using both of your hands.");
@@ -1982,7 +1978,7 @@ Intro.UruSexFuckAnal = function() {
 			Text.Flush();
 			Gui.NextPrompt();
 		}, enabled : true,
-		tooltip : "One way to acquire some lube could be to suck it from Uru's cock. No, that is way too lewd! ...Isn't it?"
+		tooltip : "One way to acquire some lube could be to suck it from Uru's cock. No, that is way too lewd! ...Isn't it?",
 	});
 	Gui.SetButtonsFromList(options);
 
@@ -1997,17 +1993,18 @@ Intro.UruSexFuckAnal = function() {
 		player.Fuck(player.FirstCock(), 5);
 
 		Text.Add("You have to pause to not shoot your load immediately from the immense pressure, but the omnibus will have none of it, and immediately pushes her needy hips back forcefully, swallowing the rest of your [cock] to the hilt.", parse);
-		if(player.Gender() == Gender.male)
+		if (player.Gender() == Gender.male) {
 			Text.Add(" Your swelling balls slap against her full bottom, eager to deposit their load into the willing omnibus.");
+		}
 		Text.NL();
 		Text.Add("Biting your lip, you start to move, hips thrusting back and forth. Her tight tunnel is gripping like a vice, yet you can move in and out of her with ease. After a few minutes of intensely ass-fucking the demon, you feel her tail curling up around one of your legs and gasp as the tip brushes against your own back door. How do you react? Ignore it, eagerly accept it or firmly deny it?");
 		Text.Flush();
 
 		let buttfucked = false;
 		// [Eager][Let be][Deny]
-		let options = new Array();
+		const options = new Array();
 		options.push({ nameStr : "Eager",
-			func : function() {
+			func() {
 				Text.Clear();
 				player.AddSexExp(2);
 				player.slut.IncreaseStat(100, 5);
@@ -2018,10 +2015,10 @@ Intro.UruSexFuckAnal = function() {
 				Text.Flush();
 				Gui.NextPrompt();
 			}, enabled : true,
-			tooltip : "Mm... that feels good..."
+			tooltip : "Mm... that feels good...",
 		});
 		options.push({ nameStr : "Let be",
-			func : function() {
+			func() {
 				Text.Clear();
 				player.AddSexExp(1);
 				buttfucked = true;
@@ -2029,16 +2026,16 @@ Intro.UruSexFuckAnal = function() {
 				Text.Flush();
 				Gui.NextPrompt();
 			}, enabled : true,
-			tooltip : "If that makes her happy, why not? You got other things on your mind - like fucking her brains out."
+			tooltip : "If that makes her happy, why not? You got other things on your mind - like fucking her brains out.",
 		});
 		options.push({ nameStr : "Deny",
-			func : function() {
+			func() {
 				Text.Clear();
 				Text.Add("Gently, but firmly, you grab the demon's tail and move it away. The omnibus seems annoyed for a moment, but forgets about the incident entirely as you grab hold of her hips and start to ram your [cock] even further up her butt. In no time at all, she is at your mercy, moaning for you to go faster, harder, deeper.", parse);
 				Text.Flush();
 				Gui.NextPrompt();
 			}, enabled : true,
-			tooltip : "Screw that, you are in charge here!"
+			tooltip : "Screw that, you are in charge here!",
 		});
 		Gui.SetButtonsFromList(options);
 
@@ -2047,46 +2044,48 @@ Intro.UruSexFuckAnal = function() {
 			Text.Add("Inexperienced as you are, it is not long before your erratic thrusting brings you to your climax, basting the omnibus' anal tunnel with your white, hot spunk. Panting, you attempt to withdraw from her, only to find that you can't. <i>“Oh, you can't be done already, can you?”</i> the omnibus complains petulantly, <i>“I was just getting into it!”</i>");
 			Text.NL();
 			Text.Add("She sighs hopefully, <i>“I guess you wouldn't be interested in switching places?”</i>");
-			if(buttfucked)
+			if (buttfucked) {
 				Text.Add(" To accentuate her statement, her tail thrusts deeper inside you, mashing up against your prostate.");
+			}
 			Text.Flush();
 
 			// [Get fucked][Nope]
-			let options = new Array();
+			const options = new Array();
 			options.push({ nameStr : "Get fucked",
-				func : function() {
-					uru.flags["Intro"] |= UruFlags.Intro.FuckedByUru;
+				func() {
+					uru.flags.Intro |= UruFlags.Intro.FuckedByUru;
 					Text.Clear();
 					Text.Add("To your muddled mind, this doesn't seem like such a bad idea, and you eagerly nod. With a wicked smile, the omnibus lets go of you, allowing you to withdraw your spent member. With surprising strength, she manhandles you until you are on all fours. <i>“No regrets, right?”</i> she murmurs into your ear. On second thought, you are not so sure anymore.");
 					Text.Flush();
 					Gui.NextPrompt(Intro.UruSexGetFuckedPassive2);
 				}, enabled : true,
-				tooltip : "Well, it would only be fair to let her have some fun too... what could go wrong?"
+				tooltip : "Well, it would only be fair to let her have some fun too... what could go wrong?",
 			});
 			options.push({ nameStr : "Nope",
-				func : function() {
+				func() {
 					Text.Clear();
 					Text.Add("<i>“I thought so,”</i> she sighs mournfully. ");
-					if(suckeddick)
+					if (suckeddick) {
 						Text.Add("<i>“Still, thanks for sucking me off before,”</i> she says, smiling back over her shoulder. ");
+					}
 					Text.Add("Arching her back, she is still, somehow, keeping your [cock] trapped inside her. <i>“Well,”</i> she states, a determinant tone in her voice, <i>“we are just going to have to keep going then, aren't we?”</i>", parse);
 					Text.NL();
 					Text.Add("With that, she starts to push her hips back against you. Surprised, you fall on the ground, with the demon following, the impact almost making you cum again. Moaning, the horny slut starts to gyrate her hips, rising and falling on your [cock], still hard despite your recent climax.", parse);
 					Text.Flush();
 					Gui.NextPrompt(Intro.UruSexFuckAnal2);
 				}, enabled : true,
-				tooltip : "No way are you agreeing to that!" + (player.Gender() == Gender.male ? " Gay!" : "")
+				tooltip : "No way are you agreeing to that!" + (player.Gender() == Gender.male ? " Gay!" : ""),
 			});
 			Gui.SetButtonsFromList(options);
 		});
 	});
-}
+};
 
 Intro.UruSexFuckAnal2 = function() {
-	let player = GAME().player;
+	const player = GAME().player;
 
-	let parse : any = {
-		cock : function() { return player.FirstCock().Short(); }
+	const parse: any = {
+		cock() { return player.FirstCock().Short(); },
 	};
 
 	Text.Clear();
@@ -2098,63 +2097,64 @@ Intro.UruSexFuckAnal2 = function() {
 
 		Text.NL();
 		Text.Add("How many times has she made you climax, pumping her full of hot seed? You have completely lost count, riding on the brink of exhaustion from one orgasm to the next. ");
-		if(player.Gender() == Gender.male)
+		if (player.Gender() == Gender.male) {
 			Text.Add("Your balls feel completely both numb and drained, though another load seems to be building.");
-		else
+		} else {
 			Text.Add("Even if you aren't sure of exactly <i>where</i> your ejaculate is coming from, there seems to be no lack of it.");
+		}
 		Text.NL();
 		Text.Add("You feel completely sapped of strength; more so than normal, you realize, quite alarmed. The last of your energy is being sucked right out through your [cock]! Too late, you realize the demon's sinister motivations. With a weak, desperate push, you manage to disentangle yourself from the hermaphrodite before she claims your soul completely.", parse);
 		Text.Flush();
 		Gui.NextPrompt(Intro.UruSexAftermath);
 	});
-}
+};
 
 // Intro.fuckedTarget
 Intro.UruSexGetFucked = function() {
-	let player = GAME().player;
+	const player = GAME().player;
 
 	Text.Clear();
 	Text.Add("Her husky smile slowly spreads while you squirm uncomfortably under her gaze. ");
 
-	if(player.Gender() == Gender.male) {
+	if (player.Gender() == Gender.male) {
 		Intro.fuckedTarget = BodyPartType.ass;
 		Text.Add("<i>“Really now. Well, if that is what you are into, I'll make the experience one to remember,”</i> she promises with a chuckle, <i>“You might not be able to sit for a while, though.”</i>");
 		Text.Flush();
 		Gui.NextPrompt(Intro.UruSexGetFuckedPrep);
-	}
-	else {
+	} else {
 		Text.Add("<i>“Mmm,”</i> the omnibus murmurs as she licks her lips in anticipation, <i>“Tell me, where do you want it?”</i>");
 		Text.NL();
 		Text.Flush();
-		//[Anal][Vaginal]
-		let options = new Array();
+		// [Anal][Vaginal]
+		const options = new Array();
 		options.push({ nameStr : "Anal",
-			func : function() {
+			func() {
 				Intro.fuckedTarget = BodyPartType.ass;
-				if(player.Butt().virgin == false)
+				if (player.Butt().virgin == false) {
 					Text.Add("<i>“Heh, getting addicted to butt-fucking, are we?”</i>");
-				else
+				} else {
 					Text.Add("<i>“Really now. Well, if that is what you are into, I'll make the experience one to remember,”</i> she promises with a chuckle, <i>“You might not be able to sit for a while, though.”</i>");
+				}
 				Text.NL();
 				Text.Add("You mutter something about saving yourself, but she just laughs at you. <i>“You go ahead and rationalize it however you want, my little buttslut,”</i> she states, smiling fondly at you.");
 				Text.Flush();
 				Gui.NextPrompt(Intro.UruSexGetFuckedPrep);
 			}, enabled : true,
-			tooltip : (player.Butt().virgin) ? "No way you are giving up your virginity! Taking it in the butt can't be that bad, can it?" : "Well, seeing how it is already broken in..."
+			tooltip : (player.Butt().virgin) ? "No way you are giving up your virginity! Taking it in the butt can't be that bad, can it?" : "Well, seeing how it is already broken in...",
 		});
 		options.push({ nameStr : "Vaginal",
-			func : function() {
+			func() {
 				Intro.fuckedTarget = BodyPartType.vagina;
 				Intro.lubedFlag = false; // In case the imps raped you before
 				Text.Add("<i>“Ah, I'll be getting a virginal treat?”</i> She slides closer until the two of you are pressed against each other, her male genitalia rubbing against your stomach.");
 				Text.Flush();
 				Gui.NextPrompt(Intro.UruSexGetFuckedPrep);
 			}, enabled : true,
-			tooltip : "You can't wait any longer... your vagina needs to be filled with cock!"
+			tooltip : "You can't wait any longer... your vagina needs to be filled with cock!",
 		});
 		Gui.SetButtonsFromList(options);
 	}
-}
+};
 
 // Get all lubed up and ready
 // Intro.lubedFlag
@@ -2167,47 +2167,48 @@ Intro.UruSexGetFuckedPrep = function() {
 	Text.Add("Sucking her off could provide some much needed lubrication for your upcoming reaming... or you could just get right to the action.");
 	Text.Flush();
 
-	//[Suck her][Lead][Passive]
-	let options = new Array();
+	// [Suck her][Lead][Passive]
+	const options = new Array();
 	options.push({ nameStr : "Suck her",
-		func : function() {
+		func() {
 			Text.NL();
 			Text.Add("Deciding that it would probably be wise to lube her up before she fucks you, you lean forward, planting a kiss on her massive member.");
 			Text.Flush();
 			Gui.NextPrompt(Intro.UruSexGetFuckedSuck);
 		}, enabled : true,
-		tooltip : "How about a taste?"
+		tooltip : "How about a taste?",
 	});
 	options.push({ nameStr : "Lead",
-		func : function() {
+		func() {
 			Intro.UruSexGetFuckedLead();
 		}, enabled : true,
-		tooltip : "Take the lead and ride her."
+		tooltip : "Take the lead and ride her.",
 	});
 	options.push({ nameStr : "Passive",
-		func : function() {
+		func() {
 			Intro.UruSexGetFuckedPassive();
 		}, enabled : true,
-		tooltip : "Submit to the powerful omnibus."
+		tooltip : "Submit to the powerful omnibus.",
 	});
 	Gui.SetButtonsFromList(options);
-}
+};
 
 // Intro.timesSuckedUru
 Intro.UruSexGetFuckedSuck = function() {
-	let player = GAME().player;
-	let uru = GAME().uru;
+	const player = GAME().player;
+	const uru = GAME().uru;
 
 	Text.Clear();
 
-	if(Intro.timesSuckedUru == 0)
+	if (Intro.timesSuckedUru == 0) {
 		Text.Add("<i>“Oh, probably a wise move to get me lubed up,”</i> she praises you. <i>“Then again, you were probably just hungry for cock, weren't you? Just don't forget about the main course.”</i>");
-	else if(Intro.timesSuckedUru == 1)
+	} else if (Intro.timesSuckedUru == 1) {
 		Text.Add("<i>“Mmm...”</i> the omnibus sighs contentedly. <i>“Just can't get enough, can you?”</i> Dutifully, you lap up the remains of her last ejaculation before getting down to business.");
-	else {
+ } else {
 		Text.Add("<i>“You know what is coming,”</i> the omnibus purrs. <i>“Perhaps your plan is to lube yourself up from the other direction, hm?");
-		if(Intro.fuckedTarget == BodyPartType.vagina)
+		if (Intro.fuckedTarget == BodyPartType.vagina) {
 			Text.Add(" You <b>do</b> know those holes aren't connected, right?");
+		}
 		Text.Add("”</i> Dutifully, you lap up the remains of her last ejaculation before getting down to business.");
 	}
 	Text.NL();
@@ -2229,78 +2230,78 @@ Intro.UruSexGetFuckedSuck = function() {
 	Intro.timesSuckedUru++;
 	Intro.lubedFlag = true;
 
-	//[Suck her (again)][Lead][Passive]
-	let options = new Array();
+	// [Suck her (again)][Lead][Passive]
+	const options = new Array();
 
-	if(Intro.timesSuckedUru >= 3) {
+	if (Intro.timesSuckedUru >= 3) {
 		Text.Add("A bit overwhelmed by the sheer cum production of the hermaphrodite demon, you worriedly caress your swelling stomach. Perhaps enough is enough.");
-	}
-	else { // Disable this option after 3 times total
+	} else { // Disable this option after 3 times total
 		options.push({ nameStr : "Again",
-			func : function() {
+			func() {
 				Text.NL();
 				Text.Add("Well... once more couldn't hurt.");
 				Text.Flush();
 				Gui.NextPrompt(Intro.UruSexGetFuckedSuck);
 			}, enabled : true,
-			tooltip : (Intro.timesSuckedUru < 2) ? "Mm... more!" : "You <i>need</i> her cum!"
+			tooltip : (Intro.timesSuckedUru < 2) ? "Mm... more!" : "You <i>need</i> her cum!",
 		});
 	}
 
 	options.push({ nameStr : "Lead",
-		func : function() {
+		func() {
 			Intro.UruSexGetFuckedLead();
 		}, enabled : true,
-		tooltip : "Take the lead and ride her."
+		tooltip : "Take the lead and ride her.",
 	});
 	options.push({ nameStr : "Passive",
-		func : function() {
+		func() {
 			Intro.UruSexGetFuckedPassive();
 		}, enabled : true,
-		tooltip : "Submit to the powerful omnibus."
+		tooltip : "Submit to the powerful omnibus.",
 	});
 	Gui.SetButtonsFromList(options);
 	Text.Flush();
-}
+};
 
 Intro.UruSexGetFuckedLead = function() {
-	let player = GAME().player;
-	let uru = GAME().uru;
+	const player = GAME().player;
+	const uru = GAME().uru;
 
-	let parse : any = {
-		playername : player.name
+	let parse: any = {
+		playername : player.name,
 	};
 	parse = player.ParserTags(parse);
 
 	Text.Clear();
 
-	let uruCockDesc = function() { return uru.FirstCock().Short(); }
-	if(Intro.fuckedTarget == BodyPartType.vagina)
-		parse["target"] = function() { return player.FirstVag().Short(); }
-	else
-		parse["target"] = function() { return player.Butt().AnalShort(); }
+	const uruCockDesc = function() { return uru.FirstCock().Short(); };
+	if (Intro.fuckedTarget == BodyPartType.vagina) {
+		parse.target = function() { return player.FirstVag().Short(); };
+	} else {
+		parse.target = function() { return player.Butt().AnalShort(); };
+	}
 
 	Text.Add("You shake your head slightly. The demon has been taking charge far too much; it's time to turn this around! Determined, you get back on your feet and push the surprised omnibus back. She lands, ass first, on the throne, cock bouncing up and down excitedly. <i>“Why, [playername]!”</i> she exclaims, delighted. <i>“Getting really forward, aren't w-”</i>", parse);
 	Text.NL();
 	Text.Add("You cut her off with a deep kiss as you straddle her hips, her perky " + uruCockDesc() + " rubbing against your soft undercarriage. Positioning yourself so that her cock is pointing straight at your [target], you sigh with euphoria as you ease yourself down, relishing in the feeling of the omnibus entering you.", parse);
 
-	if(Intro.fuckedTarget == BodyPartType.ass) {
+	if (Intro.fuckedTarget == BodyPartType.ass) {
 		Sex.Anal(uru, player);
 		player.FuckAnal(player.Butt(), uru.FirstCock(), 5);
 		uru.Fuck(uru.FirstCock(), 5);
-	}
-	else {
+	} else {
 		Sex.Vaginal(uru, player);
 		player.FuckVag(player.FirstVag(), uru.FirstCock(), 5);
 		uru.Fuck(uru.FirstCock(), 5);
 	}
 	Text.NL();
 
-	if(!Intro.lubedFlag) {
-		if(Intro.fuckedTarget == BodyPartType.ass)
+	if (!Intro.lubedFlag) {
+		if (Intro.fuckedTarget == BodyPartType.ass) {
 			Text.Add("It isn't long before you are unable to go any further, though. Barely the tip has penetrated, but it is simply too painful to force any more inside. Sensing your predicament, your demonic lover begins to slowly rock her hips, indicating for you to bear with her for a while. In a few slight thrusts, accompanied by increasingly fervent moans from the omnibus, you feel your [target] relaxing. An unnatural heat spreads from the immense pillar lodged in your behind, and you can feel large globs of sticky fluids being deposited inside your [target]. It seems the demon can make her own lube at will!", parse);
-		else
+		} else {
 			Text.Add("The going is pretty rough, but your own juices quickly coat Uru's " + uruCockDesc() + ", quickly turning the burning feeling in your loins from pain to pleasure.");
+		}
 		Text.NL();
 	}
 
@@ -2309,10 +2310,9 @@ Intro.UruSexGetFuckedLead = function() {
 	Text.Add("With the extra hands keeping you stable, you are free to pleasure your other assets.");
 	Text.NL();
 
-	if(player.FirstCock()) {
+	if (player.FirstCock()) {
 		Text.Add("Reaching between your legs, you give your [cock] a tug, forming a cocksleeve with the palm of your hand. You time your strokes to match your rise and fall on the demonette's " + uruCockDesc() + ", doubling the intensity of your pleasure.", parse);
-	}
-	else {
+	} else {
 		Text.Add("Reaching up to fondle your [breasts], you gently cup one of the orbs. You alternate between massaging the breast and teasing the sensitive nipple, pinching and pulling it.", parse);
 	}
 
@@ -2320,33 +2320,36 @@ Intro.UruSexGetFuckedLead = function() {
 	Text.Add("You pick up the pace, forcefully impaling your [target] on Uru's " + uruCockDesc() + ", moaning as your hips connect. Every inch of your internal passage is thoroughly filled with hot, demonic cock, the veined appendage pushing all your buttons.", parse);
 	Text.NL();
 
-	if(player.FirstCock())
+	if (player.FirstCock()) {
 		Text.Add("Gasping, you finally can't take any more, and unload your [cock] on the hermaphrodite's stomach, covering her red skin with strands of pearly white.", parse);
-	else
+	} else {
 		Text.Add("Slamming down to the hilt, your legs give away as you are left quivering, riding out the wave of your orgasm.");
+	}
 
 	Text.NL();
 	Text.Add("The omnibus gently caresses your sensitive skin while you regain your strength. <i>“Not bad, lover,”</i> she purrs contentedly, <i>“Ready for round two?”</i> Before you can mouth an exhausted protest, she lifts your [butt] a few inches, before letting gravity impale you yet again. She starts a fast-paced rhythm, roughly pumping your abused [target], pulling your tired body closer to your next climax.", parse);
 	Text.NL();
 	Text.Add("Before long, the omnibus cries out in pleasure, hosing a veritable river of hot sperm into you. ");
-	if(Intro.timesSuckedUru >= 3)
+	if (Intro.timesSuckedUru >= 3) {
 		Text.Add("You look down at your swelling stomach incredulously; when added to your previous sticky meals, you look eight months pregnant, and you are still growing larger!");
-	else
+	} else {
 		Text.Add("Your stomach begins to swell with the sheer amount of white goo being stuffed into you, making you look slightly pregnant.");
+	}
 	Text.Flush();
 	Gui.NextPrompt(Intro.UruSexGetFuckedLead2);
-}
+};
 
 Intro.UruSexGetFuckedLead2 = function() {
-	let player = GAME().player;
-	let uru = GAME().uru;
+	const player = GAME().player;
+	const uru = GAME().uru;
 
-	let uruCockDesc = function() { return uru.FirstCock().Short(); }
+	const uruCockDesc = function() { return uru.FirstCock().Short(); };
 	let targetDesc;
-	if(Intro.fuckedTarget == BodyPartType.vagina)
-		targetDesc = function() { return player.FirstVag().Short(); }
-	else
-		targetDesc = function() { return player.Butt().AnalShort(); }
+	if (Intro.fuckedTarget == BodyPartType.vagina) {
+		targetDesc = function() { return player.FirstVag().Short(); };
+	} else {
+		targetDesc = function() { return player.Butt().AnalShort(); };
+	}
 
 	Text.Clear();
 
@@ -2357,25 +2360,25 @@ Intro.UruSexGetFuckedLead2 = function() {
 	Text.Add("With the last vestige of your strength, you manage to disentangle yourself from the horny demon and fall to the ground, leaking sexual fluids everywhere.");
 	Text.Flush();
 	Gui.NextPrompt(Intro.UruSexAftermath);
-}
+};
 
 // Entry from willing passive fuck (choice)
 Intro.UruSexGetFuckedPassive = function() {
-	let player = GAME().player;
+	const player = GAME().player;
 
 	Text.NL();
 
 	Text.Add("Faced with the towering manhood, you grow unsure, was this really what you wanted? The omnibus notices your distress and reaches down to fondly caress your [hair]. <i>“Don't worry, pet. Just leave everything to me,”</i> she murmurs reassuringly. She imperiously instructs you to turn around on all fours and rest your torso on the seat of the obsidian throne. You meekly comply, very nervous for what is to come, but also incredibly turned on.", {hair: player.Hair().Short()});
 	Text.Flush();
 	Gui.NextPrompt(Intro.UruSexGetFuckedPassive2);
-}
+};
 
 // Get fucked from fuck scenes jump in here
 Intro.UruSexGetFuckedPassive2 = function() {
-	let player = GAME().player;
-	let uru = GAME().uru;
+	const player = GAME().player;
+	const uru = GAME().uru;
 
-	let parse : any = {
+	let parse: any = {
 
 	};
 	parse = player.ParserTags(parse);
@@ -2383,51 +2386,53 @@ Intro.UruSexGetFuckedPassive2 = function() {
 	// If target is not already set, set it to ass for males and vagina for females
 	Intro.fuckedTarget = Intro.fuckedTarget || ((player.Gender() == Gender.male) ? BodyPartType.ass : BodyPartType.vagina);
 
-	let uruCockDesc = function() { return uru.FirstCock().Short(); }
+	const uruCockDesc = function() { return uru.FirstCock().Short(); };
 	let targetDesc;
 	let notTargetDesc;
 	let target;
-	if(Intro.fuckedTarget == BodyPartType.vagina) {
+	if (Intro.fuckedTarget == BodyPartType.vagina) {
 		target = player.FirstVag();
-		targetDesc = function() { return player.FirstVag().Short(); }
-		notTargetDesc = function() { return player.Butt().AnalShort(); }
-	}
-	else {
+		targetDesc = function() { return player.FirstVag().Short(); };
+		notTargetDesc = function() { return player.Butt().AnalShort(); };
+	} else {
 		target = player.Butt();
-		targetDesc = function() { return player.Butt().AnalShort(); }
-		if(player.Gender() == Gender.female)
-			notTargetDesc = function() { return player.FirstVag().Short(); }
+		targetDesc = function() { return player.Butt().AnalShort(); };
+		if (player.Gender() == Gender.female) {
+			notTargetDesc = function() { return player.FirstVag().Short(); };
+		}
 	}
 
 	Text.Clear();
 
 	Text.Add("Uru trails a single finger across your back, circling closer to your crotch and waiting " + targetDesc() + ".");
 
-	if(target.virgin)
+	if (target.virgin) {
 		Text.Add(" <i>“Looks nice and tight, at least for now,”</i> she purrs, <i>“nothing like a virgin hole to get my blood racing!”</i>");
+	}
 
 	Text.NL();
 
-	if(!Intro.lubedFlag) {
+	if (!Intro.lubedFlag) {
 		Text.Add("<i>“Not to crush your expectations, but I'd better lube you up first,”</i> the omnibus mentions with a chuckle, <i>“I plan to go aaall the way with you!”</i> Giving you no chance to protest, she leans down and plants a kiss on your [butt]. ", parse);
-		if(player.FirstCock())
+		if (player.FirstCock()) {
 			Text.Add("Leaning down further, she gives your [cock] a long lick from tip to root, before moving to your " + targetDesc() + ".", parse);
-		else
+		} else {
 			Text.Add("Leaning down further, she gives your " + notTargetDesc() + " a perfunctory lick before moving to your " + targetDesc() + ".");
+		}
 
 		Text.NL();
 		Text.Add("You gasp helplessly as she buries her hot tongue deep inside your  " + targetDesc() + ", slathering the tight passage in slick, demonic saliva. It feels like the appendage is growing in length and girth, slowly getting you used to the size and lubing you up, deeper and deeper. You shudder in pleasure, thinking of how much bigger her actual dick is, and how it will feel to be fucked by her.");
 		Text.NL();
 		Text.Add("Her prolonged ");
-		if(Intro.fuckedTarget == BodyPartType.ass)
+		if (Intro.fuckedTarget == BodyPartType.ass) {
 			Text.Add("rimming");
-		else
+		} else {
 			Text.Add("cunnilingus");
+		}
 		Text.Add(" is almost enough to make you orgasm right then and there, but, to your displeasure, she suddenly withdraws. Stifling your protests with a sharp slap on your [butt], the amused omnibus announces that you are ready for the main course.", parse);
 		Text.NL();
 		Text.Add("Somehow, you don't feel ready.");
-	}
-	else {
+	} else {
 		Text.Add("The omnibus gives your [butt] a playful swat and spreads your cheeks, exposing your eager " + targetDesc() + ". <i>“Since you are all prepared, why don't we skip to the good part right away?”</i> she purrs.", parse);
 	}
 
@@ -2437,12 +2442,11 @@ Intro.UruSexGetFuckedPassive2 = function() {
 	Text.Add("She rocks her hips forward, painfully stretching your tight passage as the broad head makes its entry. In a moment of panic at her sheer girth, you scramble forward, but there is nowhere to go; you are squeezed between the hard stone of the obsidian throne and the hard throbbing member now buried deep in your " + targetDesc() + ". ");
 	Text.NL();
 
-	if(Intro.fuckedTarget == BodyPartType.vagina) {
+	if (Intro.fuckedTarget == BodyPartType.vagina) {
 		Sex.Vaginal(uru, player);
 		player.FuckVag(player.FirstVag(), uru.FirstCock(), 5);
 		uru.Fuck(uru.FirstCock(), 5);
-	}
-	else {
+	} else {
 		Sex.Anal(uru, player);
 		player.FuckAnal(player.Butt(), uru.FirstCock(), 5);
 		uru.Fuck(uru.FirstCock(), 5);
@@ -2451,18 +2455,20 @@ Intro.UruSexGetFuckedPassive2 = function() {
 	Text.Add("Hardly giving you any chance to adjust, Uru begins thrusting rapidly, eliciting sweet moans from you as each thrust explores deeper and deeper, rubbing against previously untouched areas of your nethers. Inch by inch, the omnibus impales you on her rock hard fuckstick. Even as filled up as you feel, you dimly realize that she isn't even halfway inside, yet. You grit your teeth, riding waves of pain while seeking that elusive sense of pleasure, just outside your reach.");
 	Text.NL();
 
-	if(Intro.fuckedTarget == BodyPartType.vagina)
+	if (Intro.fuckedTarget == BodyPartType.vagina) {
 		Text.Add("<i>“Mmm... should I fuck you pregnant? Keep you around as a breeding sow for my tainted seed?”</i> the omnibus moans. You are too far gone to realize that she probably isn't joking about her intentions.");
-	else
+	} else {
 		Text.Add("<i>“Oooh, such a tight hole, a perfect fit for me,”</i> the omnibus compliments on your butt as she rails you, <i>“Granted, not for long, now.”</i> She drives her point - and her cock - home with a particularly deep thrust of her hips.");
+	}
 	Text.NL();
 	Text.Add("As the demonette explores deeper and deeper within you, waves of pleasure well up, rising and falling like a tide with the tip of her cock directing their flow. You completely lose track of time, your world shrinking to the sensory input of her pumping rod. At some point, you probably cum, but you can't tell exactly when.");
 	Text.NL();
 	Text.Add("After an excruciatingly long time, Uru finally rests her hips against your [butt]. By this point, you are reduced to a panting and moaning mess, riding the edge of your last orgasm. The demon rests a while, enjoying her dominance over you. <i>“You'll be a good slut for me from now on, won't you?”</i> she purrs, accentuating her question by slowly rocking her hips, grinding against your deepest reaches", parse);
-	if(Intro.fuckedTarget == BodyPartType.vagina)
+	if (Intro.fuckedTarget == BodyPartType.vagina) {
 		Text.Add(", the tip of her cock rubbing and teasing the entrance to your womb.");
-	else
+	} else {
 		Text.Add(".");
+	}
 	Text.NL();
 	Text.Add("Hardly able to form coherent sentences, you moan something close to <i>“Yes, please, fuck me, now! Fuck me HARD!”</i> The hermaphrodite seems to get the gist of it, as she pulls until only the tip of her cock is inside you, leaving you with a heavy feeling of emptiness. The feeling quickly disappears, however, as she drives her girthy cock home in one thrust, forcing you into another orgasm.");
 	Text.NL();
@@ -2471,15 +2477,16 @@ Intro.UruSexGetFuckedPassive2 = function() {
 	Text.Add("The hot fluid painting your insides white is enough to push you over the edge, once again. As your battered mind returns to reality, you dimly realize two things: the sheer amount of semen is distending your stomach, though the torrent seems to, thankfully, be dissipating. That is less than what you could say for Uru, though, as the omnibus shows no signs of stopping, already entering her second wind.");
 	Text.NL();
 	Text.Add("Over what must be the better part of an hour, the omnibus continues her relentless railing of your " + targetDesc() + ". You both cum several times, your own juices dripping down your legs and splattering against the obsidian stone. Meanwhile, your belly has swollen to an unbelievable size");
-	if(Intro.fuckedTarget == BodyPartType.ass)
+	if (Intro.fuckedTarget == BodyPartType.ass) {
 		Text.Add(", to the point that you can taste the demon's semen.");
-	else
+	} else {
 		Text.Add(".");
+	}
 	Text.NL();
 	Text.Add("As you ride the roller coaster of pain and pleasure, you alternate between begging her to stop and begging for more. The demon only answers by slapping your [butt] and by fucking you even harder. During some point in the exchange of fluids, Uru has flipped you on your back, railing your mewling form relentlessly.", parse);
 	Text.NL();
 
-	if(player.FirstCock()) {
+	if (player.FirstCock()) {
 		Text.Add("You can only moan helplessly as her thrusts bring you to another orgasm, this time depositing your load all over your chest and face.");
 		Text.NL();
 	}
@@ -2494,7 +2501,7 @@ Intro.UruSexGetFuckedPassive2 = function() {
 	Text.Flush();
 
 	Gui.NextPrompt(Intro.UruSexAftermath);
-}
+};
 
 Intro.UruSexDenied = function() {
 	Text.Clear();
@@ -2506,13 +2513,13 @@ Intro.UruSexDenied = function() {
 	Text.Add("The two of you lock lips for an eternal moment and you almost lose yourself in her warm embrace. You quickly find that the demoness is a great kisser, making full use of her velvety tongue and eagerly exploring every part of your mouth. You stumble a bit, you suddenly feeling weak at the knees. Alarmed, you realize that energy is rapidly being drained from your body. Somehow wrenching free, you fall to the ground, panting from the brief encounter.");
 	Text.Flush();
 	Gui.NextPrompt(Intro.UruSexAftermath);
-}
+};
 
 Intro.UruSexAftermath = function() {
-	let player = GAME().player;
-	let uru = GAME().uru;
+	const player = GAME().player;
+	const uru = GAME().uru;
 
-	let parse : any = {
+	let parse: any = {
 
 	};
 	parse = player.ParserTags(parse);
@@ -2523,10 +2530,11 @@ Intro.UruSexAftermath = function() {
 	player.curSp = 0;
 
 	Text.Add("<i>“Aww... and things were just starting to get fun,”</i> Uru complains as she stands above your fallen form. She trails one of her sharp nails - colored black, you idly note - down your stomach and toward your exposed crotch. <i>“There is sooo much you will tell me,”</i> she purrs, <i>“Why not start with how you got here, again? </i>");
-	if(uru.flags["Intro"] & UruFlags.Intro.ToldUruAboutMirror)
+	if (uru.flags.Intro & UruFlags.Intro.ToldUruAboutMirror) {
 		Text.Add("<i>That mirror you talked about... where did you find it, exactly?”</i>");
-	else
+	} else {
 		Text.Add("<i>See, I'm not quite buying your original story, and I told you it was impolite to lie to me!”</i>");
+	}
 	Text.NL();
 	Text.Add("Cursing your lack of caution, you realize that the omnibus is far sharper than you thought at first. She has been toying with you the whole time! Chuckling, she cups your chin in one hand and fondles your cheek absentmindedly. <i>“Playing around with you for a bit was fun, but I have to investigate something. But before I go...”</i> You try to scurry away from her, but she merely smiles and crooks a clawed finger. Like being picked up by an invisible hand, you are hoisted into the air, floating about a foot above the ground, helpless.");
 	Text.NL();
@@ -2545,7 +2553,7 @@ Intro.UruSexAftermath = function() {
 	Text.NL();
 	Text.Add("Before you have a chance to escape - not that there is anywhere to escape <i>to</i> - the omnibus rounds on you with a happy grin on her face. <i>“Do you know what this is?”</i> she asks, hopping around in a little excited dance, <i>“This is my key out of here!”</i>");
 	Text.NL();
-	parse["Int"] = (player.intelligence.growth > 1) ? ", your newfound smarts notwithstanding" : "";
+	parse.Int = (player.intelligence.growth > 1) ? ", your newfound smarts notwithstanding" : "";
 	Text.Add("She goes on to excitedly explain, at length, how manipulating the ethereal winds <i>just so</i>, combined with the right place and time, would enable gates to other realms to be opened. <i>“And it was all hidden in this key right here!”</i> she exults. <i>“Whoever made this was a genius!”</i> Bewildered, you are once again forced to re-evaluate the fickle demon. She acts like an airhead, unable to keep her thoughts on any one thing for an extended period of time, but you could hardly follow anything of what she just said[Int].", parse);
 	Text.NL();
 	Text.Add("<i>“You know... maybe I should reward you for this,”</i> she muses to herself. You instinctively jerk back, not sure if you want any more 'gifts' from the demon. <i>“Oh tut, don't be like that,”</i> she chides. <i>“With some work, you could be someone with power. You've got good foundation; you've survived here this long, after all.”</i> Confused as to what she is talking about, you consider her offer.");
@@ -2575,10 +2583,10 @@ Intro.UruSexAftermath = function() {
 		Text.Flush();
 		Gui.NextPrompt(Intro.LightAspectDesc);
 	});
-}
+};
 
 Intro.LightAspectDesc = function() {
-	let party : Party = GAME().party;
+	const party: Party = GAME().party;
 
 	party.location = LightAspect.Garden;
 	Text.Clear();
@@ -2586,8 +2594,9 @@ Intro.LightAspectDesc = function() {
 	Text.Add("Bit by bit, you return to your senses, roused by the sound of running water and... bird song? Drowsy and confused, you try to orient yourself. Gone is the smoldering, burning wasteland and its perpetually stormy skies, replaced by a calm garden filled with flowers. You are resting on a soft bed of grass, your bruised body cushioned by the fertile loam. High above, in the clear blue skies, peculiar birds fly around, chirping and tweeting their beautiful song.");
 	Text.NL();
 	Text.Add("A light glow radiates from everything around you, giving the lush garden a very eerie atmosphere. Unthinking, you begin to rise, touching your small pointed horns and give your demonic tail a glance, uncomfortably aware of how out of place they are in this serene place. The purple gemstone you took from the attic lies on the ground where you awoke, though it is no longer glowing. You bend down and pick up the jewel, wincing as the motion stretches a few sore muscles.");
-	if(Intro.fuckedTarget)
+	if (Intro.fuckedTarget) {
 		Text.Add(" Thankfully, though, you seem to somehow have lost a few gallons of creamy demonic stuffing, making it considerably easier to move around.");
+	}
 	Text.NL();
 	Text.Add("<i>Come to me, there is not much time left...</i>");
 	Text.NL();
@@ -2598,19 +2607,13 @@ Intro.LightAspectDesc = function() {
 	Gui.NextPrompt(function() {
 		MoveToLocation(LightAspect.Garden);
 	});
-}
-
-
-
-
-
-
+};
 
 // Create namespace
-let LightAspect = {
+const LightAspect = {
 	Garden   : new Event("Garden"),
 	Temple   : new Event("Temple"),
-}
+};
 
 //
 // Light aspect dimension
@@ -2622,13 +2625,14 @@ LightAspect.Garden.description = function() {
 	Text.NL();
 
 	GAME().IntroActive = true;
-}
+};
 
 LightAspect.Garden.events.push(new Link(
 	"Bird", function() { return !Intro.TalkedToBird; }, true,
 	function() {
-		if(!Intro.TalkedToBird)
+		if (!Intro.TalkedToBird) {
 			Text.Add(" A quick survey of the immediate area confirms that no one is nearby, except for an unusual, though innocent-looking, bird.");
+		}
 	},
 	function() {
 		Text.Clear();
@@ -2644,7 +2648,7 @@ LightAspect.Garden.events.push(new Link(
 		Intro.TalkedToBird = true;
 		Text.Flush();
 		Gui.NextPrompt(Gui.PrintDefaultOptions);
-	}
+	},
 ));
 
 LightAspect.Garden.links.push(new Link(
@@ -2654,8 +2658,8 @@ LightAspect.Garden.links.push(new Link(
 		Text.NL();
 	},
 	function() {
-		let party : Party = GAME().party;
-	
+		const party: Party = GAME().party;
+
 		Text.Clear();
 
 		Text.Add("With nowhere else to go, you head down the path leading to the temple-like structure on the hill. As you get closer, you realize that the temple seems to be in surprisingly good shape. Under the overgrowth that has claimed it, the marble is smooth and untouched. In fact, as you get closer to the building, it dawns on you that the vegetation is - rather than being an effect of long disuse - actually a part of the temple itself. Blossoming vines twine artfully around marble pillars, seemingly springing from the stone.");
@@ -2666,7 +2670,7 @@ LightAspect.Garden.links.push(new Link(
 
 		party.location = LightAspect.Temple;
 		Text.Flush();
-		Gui.NextPrompt(function () {
+		Gui.NextPrompt(function() {
 			Text.Clear();
 			Text.Say(Images.aria, "", "left");
 
@@ -2682,11 +2686,11 @@ LightAspect.Garden.links.push(new Link(
 			Text.Flush();
 			Gui.NextPrompt(Intro.AriaPurification);
 		});
-	}
+	},
 ));
 
 Intro.AriaPurification = function() {
-	let player = GAME().player;
+	const player = GAME().player;
 
 	Text.Clear();
 
@@ -2699,44 +2703,42 @@ Intro.AriaPurification = function() {
 	Text.NL();
 
 	// Clitcock TODO
-	let ccIdx = player.FirstClitCockIdx();
-	if(ccIdx != -1) {
+	const ccIdx = player.FirstClitCockIdx();
+	if (ccIdx != -1) {
 		Text.Add("<i>Uhm, what about... that?</i> Aria blushes as her gaze briefly flicker to your oversized, engorged clitoris.");
 		Text.NL();
 
-		//[Remove][Keep]
-		let options = new Array();
+		// [Remove][Keep]
+		const options = new Array();
 		options.push({ nameStr : "Remove",
-			func : function() {
+			func() {
 				Text.Add("After a brief moment of hesitation, you nod. Her cheeks flushed, the Goddess trails her finger down the cleft between your breasts, before uncertainly giving your clit an experimental prod. Barely stifling a moan from the touch, a twinge of regret flits through you as the appendage is enveloped in a soft glow, shrinking down to its original size.");
 				Text.NL();
 				Text.Add("Aria gives her head a quick shake, clearing her thoughts.");
-				let cocks = player.AllCocks();
+				const cocks = player.AllCocks();
 				cocks[ccIdx].vag.clitCock = null;
 				cocks.splice(ccIdx, 1);
 				Text.Flush();
 				Gui.NextPrompt(Intro.AriaTalk);
 			}, enabled : true,
-			tooltip : "You don't know what got over you... of course you don't want to have a cock!"
+			tooltip : "You don't know what got over you... of course you don't want to have a cock!",
 		});
 		options.push({ nameStr : "Keep",
-			func : function() {
+			func() {
 				Text.Add("You thoughtfully bite your lower lip, studying your erect girl-cock. Deciding that you rather like it the way it is, you shake your head at the Goddess, causing her to raise an eyebrow at you but letting it pass.");
 				Text.NL();
 				Text.Add("Aria gives her head a quick shake, clearing her thoughts.");
 				Text.Flush();
 				Gui.NextPrompt(Intro.AriaTalk);
 			}, enabled : true,
-			tooltip : "Actually... you could grow used to this. Having a cock isn't so bad."
+			tooltip : "Actually... you could grow used to this. Having a cock isn't so bad.",
 		});
 		Gui.SetButtonsFromList(options);
-	}
-	else {
+	} else {
 		Gui.NextPrompt(Intro.AriaTalk);
 	}
 	Text.Flush();
-}
-
+};
 
 Intro.AriaTalk = function() {
 	Text.Clear();
@@ -2750,15 +2752,15 @@ Intro.AriaTalk = function() {
 	Intro.AriaTalkedAboutPortals = false;
 
 	Intro.AriaQnA();
-}
+};
 
 Intro.AriaQnA = function() {
 	Text.Flush();
 	// [Aria][Uru][Portals]([Bird])
-	let options = new Array();
-	if(!Intro.AriaTalkedAboutAria) {
+	const options = new Array();
+	if (!Intro.AriaTalkedAboutAria) {
 		options.push({ nameStr : "Aria",
-			func : function() {
+			func() {
 				Text.Clear();
 
 				Text.Add("<i>“You... I guess you saved me back there. How? Why? Who <b>are</b> you, exactly... are you a Goddess?”</i> you ask, feeling self-conscious.");
@@ -2772,12 +2774,12 @@ Intro.AriaQnA = function() {
 
 				Intro.AriaQnA();
 			}, enabled : true,
-			tooltip : "Just who is Aria anyways?"
+			tooltip : "Just who is Aria anyways?",
 		});
 	}
-	if(!Intro.AriaTalkedAboutUru) {
+	if (!Intro.AriaTalkedAboutUru) {
 		options.push({ nameStr : "Uru",
-			func : function() {
+			func() {
 				Text.Clear();
 
 				Text.Add("<i>“That demon... who was she?”</i> As you ask, you realize that you want to know more about the tempting yet fickle hermaphrodite, but you cannot quite pinpoint the reason. Are you just interested because of the threat she represents, or do you have some other, darker motive?");
@@ -2792,12 +2794,12 @@ Intro.AriaQnA = function() {
 
 				Intro.AriaQnA();
 			}, enabled : true,
-			tooltip : "You can't help wanting to know more about the omnibus from before, who is she?"
+			tooltip : "You can't help wanting to know more about the omnibus from before, who is she?",
 		});
 	}
-	if(!Intro.AriaTalkedAboutPortals) {
+	if (!Intro.AriaTalkedAboutPortals) {
 		options.push({ nameStr : "Portals",
-			func : function() {
+			func() {
 				Text.Clear();
 
 				Text.Add("<i>“How did I get to that place? Last thing I remember is the old attic...”</i>");
@@ -2816,12 +2818,12 @@ Intro.AriaQnA = function() {
 
 				Intro.AriaQnA();
 			}, enabled : true,
-			tooltip : "This is clearly not your own world, how were you brought here exactly?"
+			tooltip : "This is clearly not your own world, how were you brought here exactly?",
 		});
 	}
-	if(Intro.TalkedToBird) {
+	if (Intro.TalkedToBird) {
 		options.push({ nameStr : "Bird",
-			func : function() {
+			func() {
 				Text.Clear();
 				Text.Add("<i>“I met a talking bird outside,”</i> you comment.");
 				Text.NL();
@@ -2830,14 +2832,15 @@ Intro.AriaQnA = function() {
 				Intro.TalkedToBird = false;
 				Intro.AriaQnA();
 			}, enabled : true,
-			tooltip : "Talking birds. You gotta be kidding me."
+			tooltip : "Talking birds. You gotta be kidding me.",
 		});
 	}
-	if(options.length > 0)
+	if (options.length > 0) {
 		Gui.SetButtonsFromList(options);
-	else
+	} else {
 		Gui.NextPrompt(Intro.AriaEnd);
-}
+	}
+};
 
 Intro.AriaEnd = function() {
 	Text.Clear();
@@ -2863,13 +2866,12 @@ Intro.AriaEnd = function() {
 	Text.Add("You have no chance to reply, nor even scream, as you close in on the ground and your vision goes black.");
 	Text.Flush();
 	Gui.NextPrompt(Intro.NomadsWakingUp);
-}
+};
 
 Intro.NomadsWakingUp = function() {
-	let player = GAME().player;
-	let kiakai = GAME().kiakai;
-	let party : Party = GAME().party;
-
+	const player = GAME().player;
+	const kiakai = GAME().kiakai;
+	const party: Party = GAME().party;
 
 	Text.Clear();
 
@@ -2885,41 +2887,42 @@ Intro.NomadsWakingUp = function() {
 	Text.Add("The elfin creature starts to sensually suck on one of your nipples, spreading a tingling feeling through your entire body. Even so close, you are not quite sure if it is male or female, either due to the poor light or their very androgynous face. As your intimate visitor slowly grinds its crotch against one of your legs, their gender suddenly becomes <i>readily</i> apparent.");
 	Text.Flush();
 	// [Male][Female]
-	let options = new Array();
+	const options = new Array();
 	options.push({ nameStr : "Male",
-		func : function() {
-			kiakai.flags["InitialGender"] = Gender.male;
+		func() {
+			kiakai.flags.InitialGender = Gender.male;
 			kiakai.InitCharacter(Gender.male);
 			Intro.MeetingKia();
 		}, enabled : true,
-		tooltip : "Is that a bulge in your pants?"
+		tooltip : "Is that a bulge in your pants?",
 	});
 	options.push({ nameStr : "Female",
-		func : function() {
-			kiakai.flags["InitialGender"] = Gender.female;
+		func() {
+			kiakai.flags.InitialGender = Gender.female;
 			kiakai.InitCharacter(Gender.female);
 			Intro.MeetingKia();
 		}, enabled : true,
-		tooltip : "Well, it <i>looks</i> like a girl..."
+		tooltip : "Well, it <i>looks</i> like a girl...",
 	});
 	Gui.SetButtonsFromList(options);
-}
+};
 
 Intro.MeetingKia = function() {
-	let kiakai = GAME().kiakai;
+	const kiakai = GAME().kiakai;
 
-	let parse : any = {
-		name : kiakai.name
+	let parse: any = {
+		name : kiakai.name,
 	};
 	parse = kiakai.ParserPronouns(parse);
 
 	Text.Clear();
 
 	Text.Add("You gently dislodge yourself from the horny elf, pushing yourself into sitting position. Your chest is bare, but someone has managed to get you into a comfortable pair of pants. A better look at your bedmate confirms that ");
-	if(kiakai.Gender() == Gender.female)
+	if (kiakai.Gender() == Gender.female) {
 		Text.Add("she is indeed a she, the soft swell of her small breasts and her slightly widened hips both telltale signs. ");
-	else
+	} else {
 		Text.Add("he is indeed a he, his flat chest, slim figure and the slight bulge between his legs being telltale signs. ");
+	}
 	Text.Add("[HeShe] is clad in a pale blue robe, ending a few inches above [hisher] bared knees.", parse);
 	Text.NL();
 	Text.Add("<i>“Ah, you are awake!”</i> the elf announces happily. Confronted with the question as to what exactly [heshe] was doing in your beddings, and where your beddings <i>are</i> for that matter, the elf blushes slightly. <i>“L-let us not get hasty, here. I know it might look bad, but really, I am just trying to help.”</i> [HeShe] looks a bit distraught.", parse);
@@ -2932,23 +2935,23 @@ Intro.MeetingKia = function() {
 	Intro.KiaTalkedAboutHealing = false;
 
 	Intro.KiaQnA();
-}
+};
 
 Intro.KiaQnA = function() {
-	let kiakai = GAME().kiakai;
+	const kiakai = GAME().kiakai;
 
-	let parse : any = {
+	let parse: any = {
 		name : kiakai.name,
-		boygirl : kiakai.mfTrue("boy", "girl")
+		boygirl : kiakai.mfTrue("boy", "girl"),
 	};
 	parse = kiakai.ParserPronouns(parse);
 
 	Text.Flush();
 	// [Aria][Eden][Kia/Kai]["Healing"]
-	let options = new Array();
-	if(!Intro.KiaTalkedAboutAria) {
+	const options = new Array();
+	if (!Intro.KiaTalkedAboutAria) {
 		options.push({ nameStr : "Aria",
-			func : function() {
+			func() {
 				Text.Clear();
 
 				Text.Add("<i>“The Lady informed me of your arrival, and told me to assist you,”</i> [name] tells you. <i>“She is the Light that wards against the Dark, and a great darkness is approaching. You have been granted a great task by her, the outcome of which may decide the fate of this entire realm.”</i>", parse);
@@ -2960,12 +2963,12 @@ Intro.KiaQnA = function() {
 
 				Intro.KiaQnA();
 			}, enabled : true,
-			tooltip : "Ok, just what is the deal with Aria?"
+			tooltip : "Ok, just what is the deal with Aria?",
 		});
 	}
-	if(!Intro.KiaTalkedAboutEden) {
+	if (!Intro.KiaTalkedAboutEden) {
 		options.push({ nameStr : "Eden",
-			func : function() {
+			func() {
 				Text.Clear();
 
 				Text.Add("You ask how it is exactly that you came to this place, and where it is. [HeShe] mentioned Eden? [name] looks surprised.", parse);
@@ -2984,14 +2987,14 @@ Intro.KiaQnA = function() {
 
 				Intro.KiaQnA();
 			}, enabled : true,
-			tooltip : "What is this place?"
+			tooltip : "What is this place?",
 		});
 	}
-	if(!Intro.KiaTalkedAboutSelf) {
+	if (!Intro.KiaTalkedAboutSelf) {
 		options.push({ nameStr : kiakai.name,
-			func : function() {
+			func() {
 				Text.Clear();
-				parse["title"] = kiakai.mfTrue("priest", "priestess");
+				parse.title = kiakai.mfTrue("priest", "priestess");
 				Text.Add("<i>“I have been in the service of Lady Aria for some thirty years now. I am honored to be a member of her priesthood.”</i>");
 				Text.NL();
 				Text.Add("Hold on. Thirty years? The slender elf hardly looks more than eighteen.");
@@ -3004,12 +3007,12 @@ Intro.KiaQnA = function() {
 
 				Intro.KiaQnA();
 			}, enabled : true,
-			tooltip : Text.Parse("How about prodding the elf to reveal a bit more about [himher]self?", {himher : kiakai.himher()})
+			tooltip : Text.Parse("How about prodding the elf to reveal a bit more about [himher]self?", {himher : kiakai.himher()}),
 		});
 	}
-	if(!Intro.KiaTalkedAboutHealing) {
+	if (!Intro.KiaTalkedAboutHealing) {
 		options.push({ nameStr : "'Healing'",
-			func : function() {
+			func() {
 				Text.Clear();
 
 				Text.Add("You ask how what [heshe] was doing was in any way a form of healing. The elf looks indignant, but at least has the shame to blush a bit.", parse);
@@ -3021,21 +3024,22 @@ Intro.KiaQnA = function() {
 				Intro.KiaTalkedAboutHealing = true;
 				Intro.KiaQnA();
 			}, enabled : true,
-			tooltip : Text.Parse("Just what was [heshe] <i>doing</i> when you woke up? <i>Healing?</i> Really now...", parse)
+			tooltip : Text.Parse("Just what was [heshe] <i>doing</i> when you woke up? <i>Healing?</i> Really now...", parse),
 		});
 	}
-	if(options.length > 0)
+	if (options.length > 0) {
 		Gui.SetButtonsFromList(options);
-	else
+	} else {
 		Gui.NextPrompt(Intro.KiaSurroundings);
-}
+	}
+};
 
 Intro.KiaSurroundings = function() {
-	let kiakai = GAME().kiakai;
+	const kiakai = GAME().kiakai;
 
-	let parse : any = {
-		name : kiakai.name
-	}
+	const parse: any = {
+		name : kiakai.name,
+	};
 	Text.Clear();
 
 	Text.Add("Your most immediate questions answered, you start to explore your surroundings a bit. The tent you are in seems to be only one of many, all gathered in a small circle. In the middle of the camp, there is a large fire pit, most likely serving as a gathering place of some sort. Right now, there does not seem to be very many people around. You spot an old man smoking a pipe, and a strange-looking woman with what looks like a pair of cat ears poking out of her hair.");
@@ -3054,21 +3058,21 @@ Intro.KiaSurroundings = function() {
 		Text.Flush();
 		Gui.NextPrompt(Intro.KiaDecideOutset);
 	});
-}
+};
 
 Intro.Outset = {
 	SaveWorld : 0,
 	GoHome    : 1,
-	GainPower : 2
-}
+	GainPower : 2,
+};
 
 Intro.KiaDecideOutset = function() {
-	let player = GAME().player;
-	let kiakai = GAME().kiakai;
-	let party : Party = GAME().party;
+	const player = GAME().player;
+	const kiakai = GAME().kiakai;
+	const party: Party = GAME().party;
 
-	let parse : any = {
-		name : kiakai.name
+	let parse: any = {
+		name : kiakai.name,
 	};
 	parse = kiakai.ParserPronouns(parse);
 
@@ -3083,12 +3087,12 @@ Intro.KiaDecideOutset = function() {
 	Text.Flush();
 
 	// [Save world][Go Home][Gain Power]
-	let options = new Array();
+	const options = new Array();
 	options.push({ nameStr : "Save world",
 		tooltip : "The elf seems to be earnest and the cause good, why not join each other?",
-		func : function() {
-			GameCache().flags["IntroOutset"] = Intro.Outset.SaveWorld;
-			kiakai.flags["Attitude"] = KiakaiFlags.Attitude.Nice;
+		func() {
+			GameCache().flags.IntroOutset = Intro.Outset.SaveWorld;
+			kiakai.flags.Attitude = KiakaiFlags.Attitude.Nice;
 			kiakai.relation.IncreaseStat(100, 10);
 
 			Text.Add("You agree, the demon must be stopped, and following the advice of [name] seems like a good start, at least. You also have to find out more about this land you have found yourself stuck in.", parse);
@@ -3100,12 +3104,12 @@ Intro.KiaDecideOutset = function() {
 			party.SwitchIn(kiakai);
 			Text.Flush();
 			Gui.NextPrompt(Intro.KiaNiceSex);
-		}, enabled : true
+		}, enabled : true,
 	});
 	options.push({ nameStr : "Go home",
 		tooltip : "No... this is not your fight. Still, you seem to be stuck here, for better or worse.",
-		func : function() {
-			GameCache().flags["IntroOutset"] = Intro.Outset.GoHome;
+		func() {
+			GameCache().flags.IntroOutset = Intro.Outset.GoHome;
 
 			Text.Add("<i>“Look, I know you mean well, but I just want to go home,”</i> you explain to the disappointed elf. <i>“Saving the world is not my job.”</i>");
 			Text.NL();
@@ -3116,11 +3120,11 @@ Intro.KiaDecideOutset = function() {
 			Text.Flush();
 
 			// [Accept][I'm the boss][Decline]
-			let options = new Array();
+			const options = new Array();
 			options.push({ nameStr : "Accept",
 				tooltip : "A friend on the road could certainly help.",
-				func : function() {
-					kiakai.flags["Attitude"] = KiakaiFlags.Attitude.Nice;
+				func() {
+					kiakai.flags.Attitude = KiakaiFlags.Attitude.Nice;
 					kiakai.relation.IncreaseStat(100, 5);
 
 					Text.Add("You accept the company of the elf, feeling glad that you will have someone along who knows the land.");
@@ -3130,12 +3134,12 @@ Intro.KiaDecideOutset = function() {
 					party.SwitchIn(kiakai);
 					Text.Flush();
 					Gui.NextPrompt(Intro.KiaNiceSex);
-				}, enabled : true
+				}, enabled : true,
 			});
 			options.push({ nameStr : "I'm the boss",
 				tooltip : Text.Parse("The elf could be useful to you, but [heshe] needs to be put in [hisher] place.", parse),
-				func : function() {
-					kiakai.flags["Attitude"] = KiakaiFlags.Attitude.Naughty;
+				func() {
+					kiakai.flags.Attitude = KiakaiFlags.Attitude.Naughty;
 					kiakai.relation.DecreaseStat(-100, 5);
 
 					Text.Add("<i>“You may come along if you wish, but don't think that you, or your Lady, is in charge here,”</i> you declare. [name] looks shocked for a moment, but humbly nods, content that [heshe] can follow you and help you.", parse);
@@ -3145,24 +3149,24 @@ Intro.KiaDecideOutset = function() {
 					party.SwitchIn(kiakai);
 					Text.Flush();
 					Gui.NextPrompt(Intro.KiaNaughtySex);
-				}, enabled : true
+				}, enabled : true,
 			});
 			options.push({ nameStr : "Decline",
 				tooltip : Text.Parse("You'll probably be better off on your own, could you really trust [name]?", {name : kiakai.name}),
-				func : function() {
-					kiakai.flags["Attitude"] = KiakaiFlags.Attitude.Neutral;
+				func() {
+					kiakai.flags.Attitude = KiakaiFlags.Attitude.Neutral;
 					Text.Add("<i>“I understand,”</i> the elf nods sadly. <i>“I will try to make inquiries on my own, then. Should you ever change your mind, find me at the center, at Aria's shrine.”</i> The elf bows to you and quietly moves toward the entrance of the tent, leaving you to your own devices.");
 					Text.Flush();
 					Gui.NextPrompt(Intro.Finalizing);
-				}, enabled : true
+				}, enabled : true,
 			});
 			Gui.SetButtonsFromList(options);
-		}, enabled : true
+		}, enabled : true,
 	});
 	options.push({ nameStr : "Gain power",
 		tooltip : "While recent events have put you in a completely unfamiliar environment, why not use this situation to your advantage? Seems like the gem you carry is an object of great power...",
-		func : function() {
-			GameCache().flags["IntroOutset"] = Intro.Outset.GainPower;
+		func() {
+			GameCache().flags.IntroOutset = Intro.Outset.GainPower;
 			player.subDom.IncreaseStat(100, 5);
 			kiakai.subDom.DecreaseStat(-100, 5);
 			kiakai.relation.DecreaseStat(-100, 10);
@@ -3178,11 +3182,11 @@ Intro.KiaDecideOutset = function() {
 			Text.Flush();
 
 			// [I'm the boss][Decline]
-			let options = new Array();
+			const options = new Array();
 			options.push({ nameStr : "I'm the boss",
 				tooltip : Text.Parse("The elf could be useful to you, but [heshe] needs to be put in [hisher] place.", parse),
-				func : function() {
-					kiakai.flags["Attitude"] = KiakaiFlags.Attitude.Naughty;
+				func() {
+					kiakai.flags.Attitude = KiakaiFlags.Attitude.Naughty;
 					Text.Add("<i>“You may come along if you wish, but don't think that you, or your Lady, is in charge here,”</i> you declare. [name] looks shocked for a moment, but humbly nods, content that [heshe] can follow you and help you.", parse);
 					Text.NL();
 					Text.Add("<b>[name] joins your party!</b>", parse);
@@ -3190,31 +3194,31 @@ Intro.KiaDecideOutset = function() {
 					party.SwitchIn(kiakai);
 					Text.Flush();
 					Gui.NextPrompt(Intro.KiaNaughtySex);
-				}, enabled : true
+				}, enabled : true,
 			});
 			options.push({ nameStr : "Decline",
 				tooltip : "What use could the elf possibly be?",
-				func : function() {
-					kiakai.flags["Attitude"] = KiakaiFlags.Attitude.Neutral;
+				func() {
+					kiakai.flags.Attitude = KiakaiFlags.Attitude.Neutral;
 					Text.Add("<i>“I understand,”</i> the elf nods sadly. <i>“I will try to make inquiries on my own, then. Should you ever change your mind, find me at the center, at Aria's shrine.”</i> The elf bows to you and quietly moves toward the entrance of the tent, leaving you to your own devices.");
 					Text.Flush();
 					Gui.NextPrompt(Intro.Finalizing);
-				}, enabled : true
+				}, enabled : true,
 			});
 			Gui.SetButtonsFromList(options);
-		}, enabled : true
+		}, enabled : true,
 	});
 	Gui.SetButtonsFromList(options);
 
-}
+};
 
 Intro.KiaNiceSex = function() {
-	let player = GAME().player;
-	let kiakai = GAME().kiakai;
+	const player = GAME().player;
+	const kiakai = GAME().kiakai;
 
-	let parse : any = {
+	let parse: any = {
 		name : kiakai.name,
-		boygirl : kiakai.mfTrue("boy", "girl")
+		boygirl : kiakai.mfTrue("boy", "girl"),
 	};
 	parse = kiakai.ParserPronouns(parse);
 	parse = player.ParserTags(parse);
@@ -3227,36 +3231,35 @@ Intro.KiaNiceSex = function() {
 	Text.Flush();
 
 	// [Male][Female]
-	let options = new Array();
+	const options = new Array();
 	options.push({ nameStr : kiakai.name,
 		tooltip : Text.Parse("How about asking [name] to finish [hisher] healing session, you could use some release.", parse),
-		func : function() {
-			kiakai.flags["Sexed"]++;
+		func() {
+			kiakai.flags.Sexed++;
 
 			Text.Add("<i>“Actually, before we head out, could you help me with something?”</i>");
 			Text.NL();
 			Text.Add("<i>“I would love to aid you, what is on your mind?”</i> the elf looks at you inquiringly. You indicate that you could use some more of that healing to get your body in shape. Blushing slightly, [name] motions for you to lie on the bedding. With a naughty grin, you recline as the elven [boygirl] straddles you and begins to massage your [breasts] and nibble your nipples. You take a moment to enjoy [hisher] attentions, before gently pushing [hisher] head lower.", parse);
 			Text.NL();
 			Text.Add("The elf gives you a long gaze through [hisher] thick lashes, then shifts [himher]self to be propped against your side", parse);
-			if(kiakai.Gender() == Gender.male)
+			if (kiakai.Gender() == Gender.male) {
 				Text.Add(", his rising erection bumping against your thigh");
+			}
 			Text.Add(". Moving [hisher] hands slowly over your stomach and toward your crotch, [name] leans over to plant a series of kisses around your navel. The elf trails lower and lower, reaching the waistline of your pants, [heshe] ceremoniously undoes them using only [hisher] teeth, then slowly pulls them off your legs.", parse);
 			Text.NL();
 
-			if(player.Gender() == Gender.female) {
+			if (player.Gender() == Gender.female) {
 				Text.Add("You shiver as the elf dips one of [hisher] fingers into your sopping wet [vag], lightly teasing your labia with [hisher] other digits.", parse);
 
 				Sex.Cunnilingus(kiakai, player);
 				kiakai.Fuck(null, 2);
 				player.Fuck(null, 2);
-			}
-			else if(player.Gender() == Gender.male) {
+			} else if (player.Gender() == Gender.male) {
 				Text.Add("Your stiff [cock] springs to attention as it is bared, almost slapping the elf in the face. Using careful touches and light pecks, [name] gently nurses it to full stiffness.", parse);
 				Sex.Blowjob(kiakai, player);
 				kiakai.FuckOral(kiakai.Mouth(), player.FirstCock(), 2);
 				player.Fuck(player.FirstCock(), 2);
-			}
-			else {
+			} else {
 				Text.Add("Your [cock] springs to attention as it is bared, almost slapping the elf in the face. <i>“W-wow, I wasn't expecting it to be so... big,”</i> [name] reverently whispers. Apparently, the elf got [himher]self a good look at your unusual genitalia when clothing you, though it did not seem to prepare [himher] for your full erection. [HeShe] teases your female parts with one hand while planting hot kisses and licks on your [cock].", parse);
 
 				Sex.Cunnilingus(kiakai, player);
@@ -3269,36 +3272,36 @@ Intro.KiaNiceSex = function() {
 			}
 			Text.NL();
 
-
 			Text.Add("<i>“This spot seems to be very sensitive,”</i> [name] murmurs in a husky voice, responding to your soft gasps, <i>“it will require more attention.”</i> The elf hoists one of [hisher] legs over you, straddling your chest and presenting you with a few interesting bits of your own to play with. Excitedly getting down to business, [name] buries [hisher] face in your crotch, ", parse);
-			if(player.Gender() == Gender.female)
+			if (player.Gender() == Gender.female) {
 				Text.Add("lapping at your sopping cunt, seemingly infatuated with the taste of your sticky nectar.");
-			else
+			} else {
 				Text.Add("lathering your [cock] from tip to root, sucking and licking as if possessed.", parse);
+			}
 			Text.NL();
 
 			Text.Add("Are you going to take advantage of your current position and get inside the sexy elf's robes? Maybe you could give [name] some oral attention, or toy with [hisher] cute butt.", parse);
 
 			Intro.KiaNiceSex69();
-		}, enabled : true
+		}, enabled : true,
 	});
 	options.push({ nameStr : "Ignore",
 		tooltip : "Let's try to keep focused here...",
-		func : function() {
+		func() {
 			player.AddLustFraction(-0.5);
 			Text.Add("Taking a few deep breaths, you try to calm down and focus on the task at hand.");
 			Gui.NextPrompt(Intro.Finalizing);
-		}, enabled : true
+		}, enabled : true,
 	});
 	Gui.SetButtonsFromList(options);
-}
+};
 
 Intro.KiaNiceSex69 = function() {
-	let player = GAME().player;
-	let kiakai = GAME().kiakai;
+	const player = GAME().player;
+	const kiakai = GAME().kiakai;
 
-	let parse : any = {
-		name : kiakai.name
+	let parse: any = {
+		name : kiakai.name,
 	};
 	parse = kiakai.ParserPronouns(parse);
 	parse = kiakai.ParserTags(parse, "k");
@@ -3310,84 +3313,79 @@ Intro.KiaNiceSex69 = function() {
 	let fingering = false;
 
 	Text.Flush();
-	let options = new Array();
-	if(kiakai.NumVags() > 0) {
+	const options = new Array();
+	if (kiakai.NumVags() > 0) {
 		options.push({ nameStr : "Vagina",
 			tooltip : Text.Parse("[name] deserves some attention too, how about eating [himher] out?", parse),
-			func : function() {
+			func() {
 				Text.Clear();
 				Sex.Cunnilingus(player, kiakai);
 				player.Fuck(null, 1);
 				kiakai.Fuck(null, 1);
 				Text.Add("Deciding to return the favor, you carefully lift the hem of the elf's robe, exposing [hisher] white panties. Pulling them aside, you expose a tight pink slit, absolutely moist with female juices. Humming to yourself, you lean in to administer some 'healing' of your own. Judging from the muffled gasps down between your legs, the effort is much appreciated.", parse);
 				Gui.PrintDefaultOptions();
-			}, enabled : true
+			}, enabled : true,
 		});
 	}
-	if(kiakai.NumCocks() > 0) {
+	if (kiakai.NumCocks() > 0) {
 		options.push({ nameStr : "Cock",
 		tooltip : Text.Parse("[name] deserves some attention too, and that cock looks rather juicy...", parse),
-			func : function() {
+			func() {
 				Text.Clear();
 				Sex.Blowjob(player, kiakai);
 				player.FuckOral(player.Mouth(), kiakai.FirstCock(), 1);
 				kiakai.Fuck(kiakai.FirstCock(), 1);
 				Text.Add("Deciding to return the favor, you carefully lift the hem of the elf's robe, exposing [hisher] white panties. Pulling them aside, you free the elf's [kcock], hard from the excitement. Humming to yourself, you lean in to administer some 'healing' of your own. Judging from the muffled gasps down between your legs, the effort is much appreciated.", parse);
 				Gui.PrintDefaultOptions();
-			}, enabled : true
+			}, enabled : true,
 		});
 	}
 	options.push({ nameStr : "Finger",
 		tooltip : Text.Parse("How about getting a bit kinky? Let's see how [name] feels about a finger up [hisher] butt. Who knows, perhaps [heshe] will like it?", parse),
-		func : function() {
+		func() {
 			Text.Clear();
 			player.AddSexExp(2);
 			kiakai.AddSexExp(2);
-			kiakai.flags["AnalExp"] = 1;
-			parse["gen"] = kiakai.FirstVag() ? "wet slit" : "stiff cock";
+			kiakai.flags.AnalExp = 1;
+			parse.gen = kiakai.FirstVag() ? "wet slit" : "stiff cock";
 			Text.Add("Deciding to return the favor, you carefully lift the hem of the elf's robe, exposing [hisher] white panties. Licking your lips, you pull the panties down, ignoring [name]'s [gen] for now. Aiming your attention slightly higher up, you wet one of your fingers with saliva and plunge it into [hisher] tight rosebud. Judging from the muffled gasps down between your legs, the effort is much appreciated.", parse);
 			sucking = false;
 			fingering = true;
 			Gui.PrintDefaultOptions();
-		}, enabled : true
+		}, enabled : true,
 	});
 	options.push({ nameStr : "Nope",
 		tooltip : Text.Parse("[name] seems to be doing good on [hisher] own, just enjoy it.", parse),
-		func : function() {
+		func() {
 			Text.Clear();
 			Text.Add("You give [name] a few perfunctory caresses on [hisher] soft [kbutt], then lean back and enjoy your healing session. The light touches only serves to egg the elf on, redoubling [hisher] efforts.", parse);
 			sucking = false;
 			Gui.PrintDefaultOptions();
-		}, enabled : true
+		}, enabled : true,
 	});
 	Gui.SetButtonsFromList(options);
 
 	Gui.Callstack.push(function() {
 		Text.NL();
-		parse["muffled"] = sucking ? " muffled" : "";
-		if(player.Gender() == Gender.male) {
+		parse.muffled = sucking ? " muffled" : "";
+		if (player.Gender() == Gender.male) {
 			Text.Add("The elf bobs [hisher] head up and down on your rigid [cock], alternating between lapping at your sensitive cockhead and burying [hisher] nose in your sack. This new healing session of yours continues for another twenty minutes or so, until a tightening in your balls announce the arrival of your climax. You let out a[muffled] cry as your cum floods the elf's mouth, pouring your seed into [hisher] throat.", parse);
-		}
-		else if(player.Gender() == Gender.female) {
+		} else if (player.Gender() == Gender.female) {
 			Text.Add("The elf uses [hisher] tongue to gently probe your netherlips, burying it so your lips connect. [HeShe] explores your depths hungrily, sometimes poking [hisher] nose against your sensitive clit. This new healing session of yours continues for another twenty minutes or so, until a hot rush in your nethers announce the arrival of your climax. You let out a[muffled] cry as your girly fluids spill into the elf's waiting mouth.", parse);
-		}
-		else {
+		} else {
 			Text.Add("The elf bobs [hisher] head up and down on your rigid [cock], alternating between lapping at the sensitive tip and burying your rod deep in [hisher] throat. Meanwhile, [hisher] hands are busy pleasuring your feminine parts, probing your slick depths. This new healing session of yours continues for another twenty minutes or so, until a rush in your nether regions announce the arrival of your climax. You let out a[muffled] cry as your cum floods the elf's mouth, pouring your seed into [hisher] gullet. At the same time, your feminine juices flow out of your slippery slit, coating [hisher] fingers in clear liquid.", parse);
 		}
 
 		Text.NL();
 
-		if(sucking) {
+		if (sucking) {
 			Text.Add("Your own sensual licks also bear fruit, ");
-			if(kiakai.Gender() == Gender.male) Text.Add("as your tongue is splattered in salty cream from the elf's quivering cock. ");
-			else Text.Add("as your tongue is battered with sweet-tasting girl-cum. ");
+			if (kiakai.Gender() == Gender.male) { Text.Add("as your tongue is splattered in salty cream from the elf's quivering cock. "); } else { Text.Add("as your tongue is battered with sweet-tasting girl-cum. "); }
 			Text.Add("[HisHer] head buried between your legs, [name] lets out a shuddering sigh, utterly spent.", parse);
 			Text.NL();
-		}
-		else if(fingering) {
+		} else if (fingering) {
 			Text.Add("Your own sensual touches also bear fruit, ");
-			if(kiakai.Gender() == Gender.male) Text.Add("as the elf's cock suddenly stiffens and unloads a batch of sticky fluid on your chest. ");
-			else Text.Add("as the elf's hips tremble, streams of clear liquid dripping from her untouched vaginal tunnel. ");
+			if (kiakai.Gender() == Gender.male) { Text.Add("as the elf's cock suddenly stiffens and unloads a batch of sticky fluid on your chest. "); } else { Text.Add("as the elf's hips tremble, streams of clear liquid dripping from her untouched vaginal tunnel. "); }
 			Text.Add("Smiling, you remove three fingers from the elf's once incredibly tight back door, watching as it quickly closes up. Seems like [heshe] enjoyed it, perhaps you could convince [himher] to let you stick something else in that tight hole another time...", parse);
 			Text.NL();
 		}
@@ -3402,15 +3400,15 @@ Intro.KiaNiceSex69 = function() {
 		Text.Flush();
 		Gui.NextPrompt(Intro.Finalizing);
 	});
-}
+};
 
 Intro.KiaNaughtySex = function() {
-	let player = GAME().player;
-	let kiakai = GAME().kiakai;
+	const player = GAME().player;
+	const kiakai = GAME().kiakai;
 
-	let parse : any = {
+	let parse: any = {
 		name : kiakai.name,
-		stutterName : player.name[0] + "-" + player.name
+		stutterName : player.name[0] + "-" + player.name,
 	};
 	parse = player.ParserTags(parse);
 	parse = kiakai.ParserPronouns(parse);
@@ -3423,12 +3421,12 @@ Intro.KiaNaughtySex = function() {
 	Text.NL();
 	Text.Flush();
 
-	let options = new Array();
-	if(player.FirstCock()) {
+	const options = new Array();
+	if (player.FirstCock()) {
 		options.push({ nameStr : "Blowjob",
 			tooltip : Text.Parse("Your cock needs release, and [name] looks like [heshe] has the perfect mouth to provide it.", parse),
-			func : function() {
-				kiakai.flags["Sexed"]++;
+			func() {
+				kiakai.flags.Sexed++;
 
 				Sex.Blowjob(kiakai, player);
 				kiakai.FuckOral(kiakai.Mouth(), player.FirstCock(), 4);
@@ -3459,14 +3457,14 @@ Intro.KiaNaughtySex = function() {
 
 				Text.Flush();
 				Gui.NextPrompt(Intro.Finalizing);
-			}, enabled : true
+			}, enabled : true,
 		});
 	}
-	if(player.FirstVag()) {
+	if (player.FirstVag()) {
 		options.push({ nameStr : "Get eaten",
 			tooltip : Text.Parse("Your cunt is itching for release. Straddling [name]'s face and letting [himher] eat you out should hit the spot.", parse),
-			func : function() {
-				kiakai.flags["Sexed"]++;
+			func() {
+				kiakai.flags.Sexed++;
 
 				Sex.Cunnilingus(kiakai, player);
 				kiakai.Fuck(null, 4);
@@ -3479,15 +3477,15 @@ Intro.KiaNaughtySex = function() {
 				Text.Add("<i>“[name],”</i> you cut [himher] off. <i>“If we're going to work together, we'll have to get to know each other, and know each other intimately.”</i> You gently caress the elf's feminine cheek, looking deep into [hisher] eyes, <i>“Why not take this opportunity to... get to know me better?”</i>", parse);
 				Text.NL();
 				Text.Add("Conflicting emotions race through the elf's eyes, but [heshe] dutifully gets down on [hisher] knees in front of you. You undo your pants, exposing your moist netherlips", parse);
-				if(player.FirstCock()) Text.Add(", and freeing your stiff [cock] in the process", parse);
+				if (player.FirstCock()) { Text.Add(", and freeing your stiff [cock] in the process", parse); }
 				Text.Add(". [HeShe] immediately gets to work, diving between your legs, tongue teasing and prodding.", parse);
 				Text.NL();
 				Text.Add("You enjoy [name] eating you out for a while, but having [himher] merely licking you is not going to be enough. Throwing one of your legs over the elf's shoulder, you pull [himher] closer, grinding your crotch against [hisher] face", parse);
-				if(player.FirstCock()) Text.Add(", your [cock] rubbing back and forth across [hisher] forehead", parse);
+				if (player.FirstCock()) { Text.Add(", your [cock] rubbing back and forth across [hisher] forehead", parse); }
 				Text.Add(". [HeShe] tries to follow the motions of your hips, but a particularly rough thrust makes [himher] lose balance and fall flat on [hisher] ass.", parse);
 				Text.NL();
 				Text.Add("Not wasting any time, you quickly take advantage of the situation and straddle the elf's face. The next twenty minutes or so are spent with you grinding your sopping wet [vag] on [name], until you cry out and squirt your juices all over [hisher] face.", parse);
-				if(player.FirstCock()) Text.Add(" Your next orgasm close, you pull back and unload your [cock], dumping long strands of pearly white cum all over the elf's face.", parse);
+				if (player.FirstCock()) { Text.Add(" Your next orgasm close, you pull back and unload your [cock], dumping long strands of pearly white cum all over the elf's face.", parse); }
 				Text.NL();
 				Text.Add("Neither of you speak as you put your clothes on again. You get a feeling that your slutty companion might be receptive of more of this later, and that [heshe] will be more subdued from now on.", parse);
 
@@ -3500,74 +3498,72 @@ Intro.KiaNaughtySex = function() {
 
 				Text.Flush();
 				Gui.NextPrompt(Intro.Finalizing);
-			}, enabled : true
+			}, enabled : true,
 		});
 	}
 	options.push({ nameStr : "Ignore",
 		tooltip : "Tempting as it is to take advantage of the elf, you have other things to do.",
-		func : function() {
+		func() {
 			Text.Add("Shaking your head a bit, you refocus on the task at hand. Plenty of time to get release later, and it does not seem like the elf would be totally against helping, either.");
 			Text.Flush();
 			Gui.NextPrompt(Intro.Finalizing);
-		}, enabled : true
+		}, enabled : true,
 	});
 	Gui.SetButtonsFromList(options);
-}
-
+};
 
 Intro.Finalizing = function() {
-	let player = GAME().player;
-	let kiakai = GAME().kiakai;
-	let party : Party = GAME().party;
+	const player = GAME().player;
+	const kiakai = GAME().kiakai;
+	const party: Party = GAME().party;
 
 	Text.Clear();
 
-	let parse : any = {
+	const parse: any = {
 		name  : kiakai.name,
 		HeShe : kiakai.HeShe(),
-		i     : party.InParty(kiakai) ? "we" : "I"
+		i     : party.InParty(kiakai) ? "we" : "I",
 	};
-	if(player.flags["startJob"] == JobEnum.Scholar)
-		parse["job"] = "Scholar";
-	else if(player.flags["startJob"] == JobEnum.Courtesan)
-		parse["job"] = "Courtesan";
-	else
-		parse["job"] = "Fighter";
-
+	if (player.flags.startJob == JobEnum.Scholar) {
+		parse.job = "Scholar";
+	} else if (player.flags.startJob == JobEnum.Courtesan) {
+		parse.job = "Courtesan";
+ } else {
+		parse.job = "Fighter";
+ }
 
 	Text.Add("<i>“Oh... one more thing before [i] leave.”</i>", parse);
 	Text.NL();
 	Text.Add("<i>“You said that you are a <b>[job]</b>, yes?”</i> You nod, confirming the statement. ", parse);
-	if(player.flags["startJob"] == JobEnum.Scholar)
+	if (player.flags.startJob == JobEnum.Scholar) {
 		Text.Add("<i>“Very interesting!”</i> [name] lights up, excited in finding a fellow knowledge seeker. <i>“There is always more to learn, and regarding this, I may be able to help you. These scrolls can also aid you, perhaps broaden your horizons?”</i> ", parse);
-	else if(player.flags["startJob"] == JobEnum.Courtesan)
+	} else if (player.flags.startJob == JobEnum.Courtesan) {
 		Text.Add("<i>“I... cannot say I understand your way of fighting.”</i> [name]’s cheek blossom, slightly embarrassed. <i>“Should you reconsider your ways, please study these scrolls.”</i> ", parse);
-	else // Fighter
+ } else { // Fighter
 		Text.Add("<i>“I am sure you must be very strong... I do not think I can help you much, as it is not my calling, but please take these scrolls, they describe other ways you can defeat your foes.”</i> ", parse);
+ }
 	Text.Add("[HeShe] hands you three different scrolls, detailing the basics of physical, magical and sensual combat, and how to best get started with each of those.", parse);
 	Text.NL();
 	Text.Add("<i>“The chief has provided you with some equipment, you can find it in that chest over there.”</i> [name] points to a large coffer near the back of the tent. Opening it reveals ", parse);
-	if(player.flags["startJob"] == JobEnum.Scholar) {
+	if (player.flags.startJob == JobEnum.Scholar) {
 		Text.Add("a simple but robust set of robes, and some dusty old books. Beside the chest is a long wooden staff, apparently part of the set.", parse);
 		player.weaponSlot   = WeaponsItems.WoodenStaff;
 		player.topArmorSlot = ArmorItems.SimpleRobes;
 		player.acc1Slot     = AccItems.CrudeBook;
-		player.jobs["Scholar"].mult = 0.5;
-	}
-	else if(player.flags["startJob"] == JobEnum.Courtesan) {
+		player.jobs.Scholar.mult = 0.5;
+	} else if (player.flags.startJob == JobEnum.Courtesan) {
 		Text.Add("practical yet provocative clothing, revealing without being slutty. On top of the neatly folded pile is a coiled leather whip.", parse);
 		player.weaponSlot   = WeaponsItems.LWhip;
 		player.topArmorSlot = ArmorItems.StylizedClothes;
 		player.acc1Slot     = AccItems.SimpleCuffs;
-		player.jobs["Courtesan"].mult = 0.5;
-	}
-	else {
+		player.jobs.Courtesan.mult = 0.5;
+	} else {
 		Text.Add("a set of leather armor and a well maintained short sword.", parse);
 		player.weaponSlot   = WeaponsItems.ShortSword;
 		player.topArmorSlot = ArmorItems.LeatherChest;
 		player.botArmorSlot = ArmorItems.LeatherPants;
 		player.acc1Slot     = AccItems.IronBangle;
-		player.jobs["Fighter"].mult = 0.5;
+		player.jobs.Fighter.mult = 0.5;
 	}
 	player.Equip();
 	player.RestFull();
@@ -3587,6 +3583,6 @@ Intro.Finalizing = function() {
 	GAME().IntroActive = false;
 
 	Gui.NextPrompt(Gui.PrintDefaultOptions);
-}
+};
 
 export { Intro, DarkAspect, LightAspect };

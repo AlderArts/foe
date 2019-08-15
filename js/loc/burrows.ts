@@ -1,94 +1,94 @@
 /*
- * 
+ *
  * The Burrows, Lagomorph dungeon
- * 
+ *
  */
 
-
-import { Event } from '../event';
-import { EncounterTable } from '../encountertable';
-import { Gender } from '../body/gender';
-import { GAME, WORLD } from '../GAME';
-import { LagonFlags } from '../event/burrows/lagon-flags';
-import { VenaFlags } from '../event/burrows/vena-flags';
-import { BurrowsFlags } from './burrows-flags';
-import { Lagomorph, LagomorphAlpha } from '../enemy/rabbit';
+import { Gender } from "../body/gender";
+import { EncounterTable } from "../encountertable";
+import { Lagomorph, LagomorphAlpha } from "../enemy/rabbit";
+import { Event } from "../event";
+import { LagonFlags } from "../event/burrows/lagon-flags";
+import { VenaFlags } from "../event/burrows/vena-flags";
+import { GAME, WORLD } from "../GAME";
+import { BurrowsFlags } from "./burrows-flags";
 
 // Class to handle global flags and logic for dungeon
 export class Burrows {
-	flags : any;
+	public flags: any;
 
-	constructor(storage? : any) {
+	constructor(storage?: any) {
 		this.flags = {};
-		
-		this.flags["Access"]      = BurrowsFlags.AccessFlags.Unknown;
-		this.flags["BruteTrait"]  = BurrowsFlags.TraitFlags.Inactive;
-		this.flags["HermTrait"]   = BurrowsFlags.TraitFlags.Inactive;
-		this.flags["BrainyTrait"] = BurrowsFlags.TraitFlags.Inactive;
-		
-		this.flags["Felinix"]   = 0;
-		this.flags["Lacertium"] = 0;
-		this.flags["Equinium"]  = 0;
-		
-		if(storage) this.FromStorage(storage);
-	}
-	
-	Access() {
-		return this.flags["Access"] >= BurrowsFlags.AccessFlags.Visited;
+
+		this.flags.Access      = BurrowsFlags.AccessFlags.Unknown;
+		this.flags.BruteTrait  = BurrowsFlags.TraitFlags.Inactive;
+		this.flags.HermTrait   = BurrowsFlags.TraitFlags.Inactive;
+		this.flags.BrainyTrait = BurrowsFlags.TraitFlags.Inactive;
+
+		this.flags.Felinix   = 0;
+		this.flags.Lacertium = 0;
+		this.flags.Equinium  = 0;
+
+		if (storage) { this.FromStorage(storage); }
 	}
 
-	BruteActive() {
-		return this.flags["BruteTrait"] >= BurrowsFlags.TraitFlags.Active;
+	public Access() {
+		return this.flags.Access >= BurrowsFlags.AccessFlags.Visited;
 	}
-	HermActive() {
-		return this.flags["HermTrait"] >= BurrowsFlags.TraitFlags.Active;
+
+	public BruteActive() {
+		return this.flags.BruteTrait >= BurrowsFlags.TraitFlags.Active;
 	}
-	BrainyActive() {
-		return this.flags["BrainyTrait"] >= BurrowsFlags.TraitFlags.Active;
+	public HermActive() {
+		return this.flags.HermTrait >= BurrowsFlags.TraitFlags.Active;
 	}
-	LagonDefeated() {
-		return GAME().lagon.flags["Usurp"] & LagonFlags.Usurp.Defeated;
+	public BrainyActive() {
+		return this.flags.BrainyTrait >= BurrowsFlags.TraitFlags.Active;
 	}
-	LagonChallenged() {
-		return GAME().lagon.flags["Usurp"] & LagonFlags.Usurp.FirstFight;
+	public LagonDefeated() {
+		return GAME().lagon.flags.Usurp & LagonFlags.Usurp.Defeated;
 	}
-	LagonAlly() {
-		return GAME().lagon.flags["Usurp"] & LagonFlags.Usurp.SidedWith;
+	public LagonChallenged() {
+		return GAME().lagon.flags.Usurp & LagonFlags.Usurp.FirstFight;
 	}
-	//TODO
-	LagonChained() {
-		return GAME().burrows.LagonDefeated(); //TODO
+	public LagonAlly() {
+		return GAME().lagon.flags.Usurp & LagonFlags.Usurp.SidedWith;
 	}
-	LagonJudged() {
-		let vena = GAME().vena;
-		return vena.flags["Met"] & VenaFlags.Met.Judgement;
+	// TODO
+	public LagonChained() {
+		return GAME().burrows.LagonDefeated(); // TODO
 	}
-	//TODO
-	LagonPit() {
+	public LagonJudged() {
+		const vena = GAME().vena;
+		return vena.flags.Met & VenaFlags.Met.Judgement;
+	}
+	// TODO
+	public LagonPit() {
 		return false;
 	}
-	VenaRestored() {
-		let vena = GAME().vena;
-		return vena.flags["Met"] & VenaFlags.Met.Restored;
+	public VenaRestored() {
+		const vena = GAME().vena;
+		return vena.flags.Met & VenaFlags.Met.Restored;
 	}
 
-	ToStorage() {
-		let storage : any = {};
-		
+	public ToStorage() {
+		const storage: any = {};
+
 		storage.flags = this.flags;
-		
+
 		return storage;
 	}
 
-	FromStorage(storage : any) {
+	public FromStorage(storage: any) {
 		// Load flags
-		for(let flag in storage.flags)
+		for (const flag in storage.flags) {
 			this.flags[flag] = parseInt(storage.flags[flag]);
+		}
 	}
 
-	GenerateLagomorph(gender? : Gender) {
-		if(gender == null) {
-			let scenes = new EncounterTable();
+	public GenerateLagomorph(gender?: Gender) {
+		if (gender == null) {
+			const scenes = new EncounterTable();
 			scenes.AddEnc(function() {
 				gender = Gender.male;
 			}, 1.0, function() { return true; });
@@ -97,13 +97,13 @@ export class Burrows {
 			}, 1.0, function() { return true; });
 			scenes.Get();
 		}
-		
+
 		return new Lagomorph(gender);
 	}
-	
-	GenerateLagomorphAlpha(gender? : Gender) {
-		if(gender == null) {
-			let scenes = new EncounterTable();
+
+	public GenerateLagomorphAlpha(gender?: Gender) {
+		if (gender == null) {
+			const scenes = new EncounterTable();
 			scenes.AddEnc(function() {
 				gender = Gender.male;
 			}, 3.0, function() { return true; });
@@ -112,8 +112,7 @@ export class Burrows {
 			}, 2.0, function() { return true; });
 			scenes.Get();
 		}
-		
-		return new LagomorphAlpha(gender);
-	}	
-}
 
+		return new LagomorphAlpha(gender);
+	}
+}

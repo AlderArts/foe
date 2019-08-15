@@ -1,27 +1,26 @@
-import { WorldTime, TimeStep, GAME, MoveToLocation, WORLD } from "../GAME";
-import { Text } from "../text";
-import { Gui } from "../gui";
-import { Gender } from '../body/gender';
-import { Race } from "../body/race";
 import { Color } from "../body/color";
+import { Gender } from "../body/gender";
+import { Race } from "../body/race";
+import { EncounterTable } from "../encountertable";
 import { Sex } from "../entity-sex";
-import { SetGameState, GameState } from "../gamestate";
+import { Event, Link } from "../event";
+import { DreamsScenes } from "../event/dreams";
 import { GwendyScenes } from "../event/farm/gwendy-scenes";
-import { Event, Link } from '../event';
-import { EncounterTable } from '../encountertable';
-import { LaylaScenes } from '../event/farm/layla-scenes';
-import { IngredientItems } from '../items/ingredients';
-import { Season } from '../time';
-import { RoamingScenes } from '../event/roaming';
-import { DreamsScenes } from '../event/dreams';
-import { InitMarket } from "./farm-market";
+import { LaylaScenes } from "../event/farm/layla-scenes";
+import { RoamingScenes } from "../event/roaming";
+import { GAME, MoveToLocation, TimeStep, WORLD, WorldTime } from "../GAME";
+import { GameState, SetGameState } from "../gamestate";
+import { Gui } from "../gui";
+import { IngredientItems } from "../items/ingredients";
 import { Party } from "../party";
-
+import { Text } from "../text";
+import { Season } from "../time";
+import { InitMarket } from "./farm-market";
 
 export function InitFarm() {
-    WORLD().SaveSpots["GwendysLoft"] = FarmLoc.Loft;
+    WORLD().SaveSpots.GwendysLoft = FarmLoc.Loft;
     InitMarket(GwendyScenes);
-};
+}
 
 /*
  * ----------------------
@@ -29,61 +28,60 @@ export function InitFarm() {
  * ----------------------
  */
 export namespace FarmScenesIntro {
-    let hasBucket : boolean;
-    let talkedAboutGwendy : boolean;
-    let talkedAboutBarn : boolean;
-    let talkedAboutAlone : boolean;
-    let flirtGwendy : boolean;
-    let fuckedDanie : boolean;
+    let hasBucket: boolean;
+    let talkedAboutGwendy: boolean;
+    let talkedAboutBarn: boolean;
+    let talkedAboutAlone: boolean;
+    let flirtGwendy: boolean;
+    let fuckedDanie: boolean;
 
     export function Start() {
         TimeStep({minute: 15});
         Text.Clear();
 
-        let parse : any = {};
+        const parse: any = {};
 
         Text.Add("While trekking along the rolling grasslands of the plains, you briefly wonder what else might lie out here, until you spot a foreign structure with a muddy pathway leading toward it. In the distance, you see what appears to be an old and worn building. Although from here you are not sure what it is, you feel compelled to go out there and have a look.", parse);
         Text.Flush();
 
-        //[Approach][Nah]
-        let options = new Array();
+        // [Approach][Nah]
+        const options = new Array();
         options.push({ nameStr : "Approach",
             func : FarmScenesIntro.Approach, enabled : true,
-            tooltip : "Approach the building and try to find out what it is."
+            tooltip : "Approach the building and try to find out what it is.",
         });
         options.push({ nameStr : "Nah",
-            func : function() {
+            func() {
                 Text.NL();
                 Text.Add("Deciding to not explore the distant building, you continue on your journey.", parse);
                 Text.Flush();
                 Gui.NextPrompt();
             }, enabled : true,
-            tooltip : "You've got other things to do. The building isn't going anywhere."
+            tooltip : "You've got other things to do. The building isn't going anywhere.",
         });
         Gui.SetButtonsFromList(options);
     }
 
     export function Approach() {
-        let player = GAME().player;
-        let party : Party = GAME().party;
-        let gwendy = GAME().gwendy;
+        const player = GAME().player;
+        const party: Party = GAME().party;
+        const gwendy = GAME().gwendy;
 
         party.location = FarmLoc.Fields;
         TimeStep({minute: 15});
         Text.Clear();
 
-        gwendy.flags["Met"] = 1;
+        gwendy.flags.Met = 1;
 
-        let parse : any = {
+        const parse: any = {
             handsomecute : player.body.femininity.Get() > 0 ? "cute" : "handsome",
-            playername   : player.name
+            playername   : player.name,
         };
 
-        if(party.Two()) {
+        if (party.Two()) {
             Text.Add("[name] seems to be doing good, refreshed by the passing breeze. With that, you head toward your destination.", { name: party.Get(1).name });
             Text.NL();
-        }
-        else if(!party.Alone()) {
+        } else if (!party.Alone()) {
             Text.Add("Facing your group, you see they are fine, looking a bit refreshed by the passing breeze. With that, you head forward to your destination.", parse);
             Text.NL();
         }
@@ -91,11 +89,10 @@ export namespace FarmScenesIntro {
         Text.Add("The building is a fair distance away, and you vaguely wonder how much longer it will take you to reach it. Much to your relief, you reach it quickly, and are immediately rewarded with its identity. It turns out to be a timeworn barn in apparent danger of collapsing, if the patchwork repairs are any indication.", parse);
         Text.NL();
         Text.Add("To its sides, you see a variety of animals quietly grazing on the rather fertile-looking fields. Another look reveals various other life around as well. The occasional equine and dog-morph tend to menial tasks, such as moving hay and sheaf, or watering cattle.", parse);
-        if(party.Two()) {
-            let member = party.Get(1);
+        if (party.Two()) {
+            const member = party.Get(1);
             Text.Add(" You decide to split up for a while, and [name] heads off to explore the farm for [himher]self, leaving you alone.", { name: member.name, himher : member.himher() });
-        }
-        else if(!party.Alone()) {
+        } else if (!party.Alone()) {
             Text.Add(" Your party disperses, each of you going separate ways to see what else lies on the farm for themselves.", parse);
         }
         Text.NL();
@@ -108,10 +105,10 @@ export namespace FarmScenesIntro {
         hasBucket = false;
         Text.Flush();
 
-        //[Sure][Guess so][Nah]
-        let options = new Array();
+        // [Sure][Guess so][Nah]
+        const options = new Array();
         options.push({ nameStr : "Sure",
-            func : function() {
+            func() {
                 Text.Clear();
                 player.strength.IncreaseStat(40, 1);
                 gwendy.relation.IncreaseStat(100, 5);
@@ -127,10 +124,10 @@ export namespace FarmScenesIntro {
                 Text.Flush();
                 Gui.NextPrompt(FarmScenesIntro.EnterBarn);
             }, enabled : true,
-            tooltip : "She has been kind and even gave you a compliment. Give her a hand!"
+            tooltip : "She has been kind and even gave you a compliment. Give her a hand!",
         });
         options.push({ nameStr : "Guess so",
-            func : function() {
+            func() {
                 Text.Clear();
                 Text.Add("You offer a hand to her and ask if you could hold a bucket. She gives you a smirk before shuffling her weight once more. <i>“No one's forcing you to do anything, [playername]. I'm fine for now. Still, if you'd like to help, please follow me.”</i>", parse);
                 Text.NL();
@@ -139,10 +136,10 @@ export namespace FarmScenesIntro {
                 Text.Flush();
                 Gui.NextPrompt(FarmScenesIntro.EnterBarn);
             }, enabled : true,
-            tooltip : "Well, you have nothing better to do... offer her a hand?"
+            tooltip : "Well, you have nothing better to do... offer her a hand?",
         });
         options.push({ nameStr : "Nah",
-            func : function() {
+            func() {
                 Text.Clear();
                 gwendy.relation.DecreaseStat(-100, 5);
                 Text.Add("Well, as pretty as she may be, Gwendy should be more than capable of handling her own chores. She seems to have managed so far, so she'll be fine on her own for now. Your attitude becomes apparent to the girl as she shuffles once more, the buckets threatening to spill, but thanks to her balance and skill the crisis is averted.", parse);
@@ -154,18 +151,18 @@ export namespace FarmScenesIntro {
                 Text.Flush();
                 Gui.NextPrompt(FarmScenesIntro.EnterBarn);
             }, enabled : true,
-            tooltip : "You just came for the sake of it; you don't really have any inclination to help out."
+            tooltip : "You just came for the sake of it; you don't really have any inclination to help out.",
         });
         Gui.SetButtonsFromList(options);
     }
 
     export function EnterBarn() {
-        let party : Party = GAME().party;
+        const party: Party = GAME().party;
 
         party.location = FarmLoc.Barn;
         TimeStep({minute: 10});
 
-        let parse : any = {};
+        const parse: any = {};
 
         Text.Clear();
 
@@ -174,7 +171,7 @@ export namespace FarmScenesIntro {
         Text.Add("She casually laughs it off while pouring the water into a trough for the pigs. <i>“Shoot, this is just another day in the life of a farmer for me. Tending to these guys is all I do, and I'm good at it. But enough of that,”</i> she says as the last of the water empties from the bucket, casting it aside neatly in a corner. <i>“Come with me, there's something I want you to see.”</i> With a happy turn, she heads for the back.", parse);
         Text.NL();
 
-        if(hasBucket) {
+        if (hasBucket) {
             Text.Add("Before you go any further, Gwendy asks you to pour the bucket you carried into the trough for the cattle before following her to the back of the barn. You quickly do so, more than eager to help her out. Afterward, you the put the empty pail in the corner.", parse);
             Text.NL();
         }
@@ -186,13 +183,13 @@ export namespace FarmScenesIntro {
     }
 
     export function EnterLoft() {
-        let party : Party = GAME().party;
+        const party: Party = GAME().party;
 
         party.location = FarmLoc.Loft;
         TimeStep({minute: 5});
         Text.Clear();
 
-        let parse : any = {};
+        const parse: any = {};
 
         Text.Add("Upon reaching the top, you are greeted with the homely sight of furniture spread somewhat clumsily around the place. There is a simple unmade bed with a rather worn, but comfy-looking, quilt resting atop it, and two pillows at the head. A pair of simple wooden drawers lie under the bed, and what looks to be the strap of a bra juts out from one of them. A dresser with a mirror sits close to a round wooden table with two chairs, and a small washtub is under the table filled with dirty dishes. A few essentials that come to mind, like a toilet, are missing, but you believe you saw an outhouse on the way here.", parse);
         Text.NL();
@@ -209,19 +206,19 @@ export namespace FarmScenesIntro {
     }
 
     export function GwendyQuestions1() {
-        let player = GAME().player;
+        const player = GAME().player;
 
-        let parse : any = {
-            race : function() { return player.body.Race().Short(player.Gender()); }
+        const parse: any = {
+            race() { return player.body.Race().Short(player.Gender()); },
         };
 
         Text.Flush();
 
-        //[Sure][Guess so][Nah]
-        let options = new Array();
-        if(!talkedAboutGwendy) {
+        // [Sure][Guess so][Nah]
+        const options = new Array();
+        if (!talkedAboutGwendy) {
             options.push({ nameStr : "Gwendy",
-                func : function() {
+                func() {
                     Text.Clear();
                     Text.Add("You tell her you'd like to know more about her, since it seems she manages the farm by herself. She smiles proudly before inviting you to sit at the table. <i>“Where do I start with this?”</i> she murmurs, looking off into the distance.", parse);
                     Text.NL();
@@ -231,12 +228,12 @@ export namespace FarmScenesIntro {
                     talkedAboutGwendy = true;
                     FarmScenesIntro.GwendyQuestions1();
                 }, enabled : true,
-                tooltip : "Try to get to know the farm girl better."
+                tooltip : "Try to get to know the farm girl better.",
             });
         }
-        if(!talkedAboutBarn) {
+        if (!talkedAboutBarn) {
             options.push({ nameStr : "Barn",
-                func : function() {
+                func() {
                     Text.Clear();
                     Text.Add("Though you admire the girl's obvious effort in maintaining the farm, you can't help but note the declining state of the barn. Gwendy's happy expression becomes a bit more somber when you point that out. You try to take your words back, but the girl shakes her head at your apologies. <i>“It's alright, I know that it's shabby. Even with trying to do repairs when I can, I don't have enough time and money to do that and keep paying these taxes <b>and</b> chase off the fools who come and make trouble... Still, I do what I can to keep it functioning at least. That's the duty of a farmer, right?”</i> Even though she ends with a somewhat positive tone, the pain of dealing with a farm on the brink of collapse is apparent on her face. <i>“Well, it is what it is, but I promise I will have this place up and running, even if it takes me the rest of my life to do it!”</i>", parse);
                     Text.NL();
@@ -244,12 +241,12 @@ export namespace FarmScenesIntro {
                     talkedAboutBarn = true;
                     FarmScenesIntro.GwendyQuestions1();
                 }, enabled : true,
-                tooltip : "This barn has seen better days..."
+                tooltip : "This barn has seen better days...",
             });
         }
-        if(!talkedAboutAlone) {
+        if (!talkedAboutAlone) {
             options.push({ nameStr : "Alone?",
-                func : function() {
+                func() {
                     Text.Clear();
                     Text.Add("Curiously, you point out that she's the only human on a farm full of animals and morphs. Doesn't that make her feel a bit secluded?", parse);
                     Text.NL();
@@ -257,42 +254,44 @@ export namespace FarmScenesIntro {
                     Text.NL();
                     Text.Add("She looks at you with a questioning look before asking:", parse);
                     Text.NL();
-                    if(player.body.Race() == Race.Human)
+                    if (player.body.Race() == Race.Human) {
                         Text.Add("<i>“Why, were you thinking of coming around a bit more to keep me company, as a fellow human?”</i> She asks the question in an innocent enough tone, but her eyes look at you with some expectancy. You tease her, saying that you might just do that, if she doesn't mind. At that, she giggles before casting a flirtatious glance at you. <i>“Oh, I wouldn't mind at all. It might be a bit more fun with you around.”</i>", parse);
-                    else
+                    } else {
                         Text.Add("<i>“Thinking about introducing me to a few other humans... or maybe getting to know me a little better, as a [race]?”</i> Her question intrigues you, but you say it was simple curiosity, though you might come around more if she doesn't mind having a friend that isn't a regular on the ranch. <i>“Well, thanks, I'd appreciate that. You'd better follow through and visit often!”</i>", parse);
+                    }
                     talkedAboutAlone = true;
                     FarmScenesIntro.GwendyQuestions1();
                 }, enabled : true,
-                tooltip : "You must admit, she doesn't look to have friends of the regular variety."
+                tooltip : "You must admit, she doesn't look to have friends of the regular variety.",
             });
         }
-        if(options.length > 0)
+        if (options.length > 0) {
             Gui.SetButtonsFromList(options);
-        else
+        } else {
             FarmScenesIntro.GwendyQuestions2();
+        }
     }
 
     export function GwendyQuestions2() {
-        let player = GAME().player;
-        let party : Party = GAME().party;
-        let gwendy = GAME().gwendy;
-        let farm = GAME().farm;
-        let danie = GAME().danie;
-        let adrian = GAME().adrian;
+        const player = GAME().player;
+        const party: Party = GAME().party;
+        const gwendy = GAME().gwendy;
+        const farm = GAME().farm;
+        const danie = GAME().danie;
+        const adrian = GAME().adrian;
 
-        let parse : any = {
+        const parse: any = {
             playername : player.name,
-            breastDesc : function() { return player.FirstBreastRow().Short(); }
-        }
+            breastDesc() { return player.FirstBreastRow().Short(); },
+        };
 
         Text.Flush();
 
-        //[Flirt][Help][Leave]
-        let options = new Array();
-        if(!flirtGwendy) {
+        // [Flirt][Help][Leave]
+        const options = new Array();
+        if (!flirtGwendy) {
             options.push({ nameStr : "Flirt",
-                func : function() {
+                func() {
                     Text.Clear();
                     flirtGwendy = true;
 
@@ -305,10 +304,10 @@ export namespace FarmScenesIntro {
                     /*
                     * Options
                     */
-                    //[Breasts][Hair][Ass][Lips][Body]
-                    let options = new Array();
+                    // [Breasts][Hair][Ass][Lips][Body]
+                    const options = new Array();
                     options.push({ nameStr : "Breasts",
-                        func : function() {
+                        func() {
                             Text.Clear();
                             player.AddLustFraction(0.2);
                             gwendy.relation.IncreaseStat(100, 5);
@@ -317,10 +316,10 @@ export namespace FarmScenesIntro {
                             Text.Add("<i>“So, you like looking at my lovely ladies, I see. Can't say I blame you. It isn't too often I see another person around here with boobs like mine. But I bet you want to do <b>something else</b> instead of looking at them...”</i> Gwendy looks at you seductively before removing her hands from her breasts. Although her tease was short, it still stirred something within you.", parse);
                             FarmScenesIntro.GwendyQuestions2();
                         }, enabled : true,
-                        tooltip : "Girl's got a nice pair of breasts!"
+                        tooltip : "Girl's got a nice pair of breasts!",
                     });
                     options.push({ nameStr : "Hair",
-                        func : function() {
+                        func() {
                             Text.Clear();
                             player.AddLustFraction(0.1);
                             gwendy.relation.IncreaseStat(100, 3);
@@ -329,10 +328,10 @@ export namespace FarmScenesIntro {
                             Text.Add("She runs her fingers through her silky hair before tucking a stray strand behind her ear, which draws out a bit more beauty from her already cute face. <i>“Momma always told me to aim to please, so I'm glad you like my hair.”</i>", parse);
                             FarmScenesIntro.GwendyQuestions2();
                         }, enabled : true,
-                        tooltip : "Her hair is so pretty! You're kind of jealous."
+                        tooltip : "Her hair is so pretty! You're kind of jealous.",
                     });
                     options.push({ nameStr : "Ass",
-                        func : function() {
+                        func() {
                             Text.Clear();
                             player.AddLustFraction(0.3);
                             gwendy.relation.IncreaseStat(100, 5);
@@ -341,10 +340,10 @@ export namespace FarmScenesIntro {
                             Text.Add("As if to add emphasis on this point, she stands up and turns around while looking over her shoulder, throwing you a sexy look. Before you question what she's doing, she places her hands on her butt and gives it a little shake, making her ass jiggle wondrously. Seeing the look of appreciation on your face, she laughs a bit before sitting back down. <i>“Don't get too excited there, I was just showing you what you liked was all.”</i>", parse);
                             FarmScenesIntro.GwendyQuestions2();
                         }, enabled : true,
-                        tooltip : "Baby got back!"
+                        tooltip : "Baby got back!",
                     });
                     options.push({ nameStr : "Lips",
-                        func : function() {
+                        func() {
                             Text.Clear();
                             player.AddLustFraction(0.1);
                             gwendy.relation.IncreaseStat(100, 2);
@@ -353,10 +352,10 @@ export namespace FarmScenesIntro {
                             Text.Add("<i>“Is that so? You might be right, but we'll never know, now will we?”</i> As she says that, she runs her tongue slowly over sumptuous lips, making them glossy and attractive. <i>“Oh well, I got my answer, so I'll be a bit more appreciative of these lips then.”</i> As she finishes, she blows a kiss to you, a playful smile on her face.", parse);
                             FarmScenesIntro.GwendyQuestions2();
                         }, enabled : true,
-                        tooltip : "Those lips bring many thoughts to your mind..."
+                        tooltip : "Those lips bring many thoughts to your mind...",
                     });
                     options.push({ nameStr : "Body",
-                        func : function() {
+                        func() {
                             Text.Clear();
                             player.AddLustFraction(0.4);
                             gwendy.relation.IncreaseStat(100, 8);
@@ -367,19 +366,19 @@ export namespace FarmScenesIntro {
                             Text.Add("Before it goes any further though, Gwendy breaks the kiss and stops her lap dance. Getting up, she slowly walks back to her seat, tantalizingly shaking her ass. When she sits back down, she smiles and says, <i>“By the way, I like you too... all of you, if you couldn't tell.”</i>", parse);
                             FarmScenesIntro.GwendyQuestions2();
                         }, enabled : true,
-                        tooltip : "She's got it all, honestly."
+                        tooltip : "She's got it all, honestly.",
                     });
                     Gui.SetButtonsFromList(options);
                 }, enabled : true,
-                tooltip : "The girl seems to flirt with you a bit, so why not flirt back?"
+                tooltip : "The girl seems to flirt with you a bit, so why not flirt back?",
             });
         }
         options.push({ nameStr : "Help",
-            func : function() {
+            func() {
                 Text.Clear();
                 // Boons!
-                for(let i = 0; i < party.members.length; i++) {
-                    let c = party.members[i];
+                for (let i = 0; i < party.members.length; i++) {
+                    const c = party.members[i];
                     c.strength.IncreaseStat(30, 2);
                     c.stamina.IncreaseStat(30, 2);
                     c.dexterity.IncreaseStat(30, 2);
@@ -391,11 +390,11 @@ export namespace FarmScenesIntro {
                 Text.Flush();
                 Gui.NextPrompt(FarmScenesIntro.HelpAdrian);
             }, enabled : true,
-            tooltip : "Offer a hand around the farm."
+            tooltip : "Offer a hand around the farm.",
         });
         // TODO!!! Leave loiter
         options.push({ nameStr : "Leave",
-            func : function() {
+            func() {
                 Text.Clear();
 
                 Text.Add("You tell Gwendy that you're fine for now, but thank her for welcoming you into her room. She casts a questioning glance at you, but doesn't ask anything. <i>“Alright then, if that's what you want. I've things to do myself, so I'm leaving now. Of course, you can still check out the farm if you'd like, but I won't be there to help you get around. Other than that, see ya!”</i>", parse);
@@ -405,21 +404,20 @@ export namespace FarmScenesIntro {
                 Text.Add("You look over the farm once more, but decide that right now you're too busy with current events to dawdle around.", parse);
                 Text.NL();
 
-                if(party.Two()) {
-                    let member = party.Get(1);
+                if (party.Two()) {
+                    const member = party.Get(1);
 
                     Text.Add("You call [name] back, telling [himher] it's time to go. [HeShe] returns swiftly, already looking forward to the next visit.", { name: member.name, himher : member.himher(), HeShe : member.HeShe() });
                     Text.NL();
-                }
-                else if(!party.Alone()) {
+                } else if (!party.Alone()) {
                     Text.Add("You call your party back, telling them it's time to go. They return swiftly, already looking forward to the next visit.", parse);
                     Text.NL();
                 }
 
-                danie.flags["Met"] = 1;
-                adrian.flags["Met"] = 1;
+                danie.flags.Met = 1;
+                adrian.flags.Met = 1;
 
-                parse["party"] = party.Two() ? " and your companion" : !party.Alone() ? " and your companions" : "";
+                parse.party = party.Two() ? " and your companion" : !party.Alone() ? " and your companions" : "";
 
                 Text.Add("As you leave, you see a strapping example of an equine tending to the flowerbed at the entrance of the farm. Politely, you wave at him before introducing yourself[party]. He stands up, introducing himself as Adrian. He seems kind of shy, but you figure you can get to know him later.", parse);
                 Text.NL();
@@ -430,7 +428,7 @@ export namespace FarmScenesIntro {
 
                 Text.Add("With that, you head out for your next destination.", parse);
                 Text.NL();
-                farm.flags["Visit"] = 1;
+                farm.flags.Visit = 1;
                 Text.Add("<b>Found Gwendy's Farm (can now be visited from plains)</b>");
                 Text.Flush();
 
@@ -440,25 +438,25 @@ export namespace FarmScenesIntro {
                     MoveToLocation(WORLD().loc.Plains.Crossroads, {minute: 30});
                 });
             }, enabled : true,
-            tooltip : "It is time to get going, you have other matters to attend."
+            tooltip : "It is time to get going, you have other matters to attend.",
         });
         Gui.SetButtonsFromList(options);
     }
 
     export function HelpAdrian() {
-        let player = GAME().player;
-        let party : Party = GAME().party;
-        let adrian = GAME().adrian;
+        const player = GAME().player;
+        const party: Party = GAME().party;
+        const adrian = GAME().adrian;
 
         party.location = FarmLoc.Barn;
         TimeStep({minute: 10});
         Text.Clear();
 
-        adrian.flags["Met"] = 1;
+        adrian.flags.Met = 1;
 
-        let parse : any = {
+        const parse: any = {
             playername : player.name,
-            buttDesc   : function() { return player.Butt().Short(); }
+            buttDesc() { return player.Butt().Short(); },
         };
 
         Text.Add("Getting off the ladder, you are met with the butt-end of a pitchfork as you face the perky girl. Next to her is a rather tall equine-morph, having easily a foot over the girl. He is quite the specimen, too. He has a well-toned body with short, silky brown fur coating the bulging muscles of his bare chest, and a flowing, dark brown mane falling a little past his shoulders to emphasize his equine physique. He is wearing a pair of trousers made from rough cloth, hiding his presumably equine genitals.", parse);
@@ -466,19 +464,18 @@ export namespace FarmScenesIntro {
         Text.Add("<i>“Hey, [playername], quit staring off into space! We've got work to do!”</i> Gwendy commands as she presses the pitchfork into your hand. <i>“I see you've taken notice of Adrian, here. He's a farmhand who helps me out on occasion, so he's familiar with the pace of things around here. Anyway, let's get started. The two of you can work on getting the hay up while I tend to the cows. Afterward, we'll take care of whatever else comes up.”</i>", parse);
         Text.NL();
 
-        if(party.Two()) {
-            let member = party.Get(1);
+        if (party.Two()) {
+            const member = party.Get(1);
 
             Text.Add("You call out to [name], hoping [heshe] will lend a hand with the coming chores. When [heshe] arrives in response to your call, you explain to [himher] you need [himher] to help around the farm and direct [himher] to Gwendy for instructions. She gives [name] a task and sends [himher] on [hisher] way, leaving Gwendy with a happy smile on her face.",
             {
                 name   : member.name,
                 heshe  : member.heshe(),
                 himher : member.himher(),
-                hisher : member.hisher()
+                hisher : member.hisher(),
             });
             Text.NL();
-        }
-        else if(!party.Alone()) {
+        } else if (!party.Alone()) {
             Text.Add("You call out to your companions, hoping they will lend a hand with the coming chores. When they arrive in response to your call, you explain to them you need them to help around the farm and direct them to Gwendy for instructions. She gives everyone a task and sends them on their way, leaving Gwendy with a happy smile on her face.", parse);
             Text.NL();
         }
@@ -488,10 +485,10 @@ export namespace FarmScenesIntro {
         Text.Add("The two of you stop at a field littered with cut, dried hay, and Adrian begins slowly raking the grass into piles and then bundles. When he finishes with a bundle, it is about waist-high, giving you an idea of what your own work should look like. Squaring your shoulders, you get to it.", parse);
         Text.Flush();
 
-        //[Talk][Flirt][Gwendy][Just work]
-        let options = new Array();
+        // [Talk][Flirt][Gwendy][Just work]
+        const options = new Array();
         options.push({ nameStr : "Talk",
-            func : function() {
+            func() {
                 Text.Clear();
                 adrian.subDom.IncreaseStat(100, 3);
                 Text.Add("While working on a rather unwieldy pile, you call Adrian over for assistance. He looks over and sighs as he walks over, lifting the pile by himself. You offer some thanks, but he waves it off before getting back to his own work. In an effort to get to know your co-worker better, you try to talk to him, but he remains silent.", parse);
@@ -500,10 +497,10 @@ export namespace FarmScenesIntro {
                 Text.Flush();
                 Gui.NextPrompt(FarmScenesIntro.HelpAdrianFinished);
             }, enabled : true,
-            tooltip : "Try to get to know him."
+            tooltip : "Try to get to know him.",
         });
         options.push({ nameStr : "Flirt",
-            func : function() {
+            func() {
                 Text.Clear();
                 adrian.subDom.DecreaseStat(-100, 5);
                 Text.Add("In an attempt to win the attention of the equine, you pretend you are having trouble lifting the piles of hay. Calling him over to help while holding on to the pitchfork, you relish the feeling of him wrapping his strong arms around you, his muscles flexing as he works with you.", parse);
@@ -514,10 +511,10 @@ export namespace FarmScenesIntro {
                 Text.Flush();
                 Gui.NextPrompt(FarmScenesIntro.HelpAdrianFinished);
             }, enabled : true,
-            tooltip : "Why not? He is cute and silent."
+            tooltip : "Why not? He is cute and silent.",
         });
         options.push({ nameStr : "Gwendy",
-            func : function() {
+            func() {
                 Text.Clear();
                 adrian.subDom.IncreaseStat(100, 5);
                 Text.Add("After working for a solid thirty minutes, you take a small break to unwind from the rigors of lifting and raking. Adrian likewise pauses in his work, leaning on his pitchfork. Taking the moment to make small talk, you ask him what he thinks of Gwendy.", parse);
@@ -528,35 +525,34 @@ export namespace FarmScenesIntro {
                 Text.Flush();
                 Gui.NextPrompt(FarmScenesIntro.HelpAdrianFinished);
             }, enabled : true,
-            tooltip : "Ask him what he thinks of Gwendy."
+            tooltip : "Ask him what he thinks of Gwendy.",
         });
         options.push({ nameStr : "Just work",
-            func : function() {
+            func() {
                 Text.Clear();
                 Text.Add("Well, Gwendy did say she had a schedule to keep, and you did say you would help, so you leave Adrian alone for the time being. If anything, you can take the opportunity to talk when dust is not threatening to clog your lungs.", parse);
                 Text.Flush();
                 Gui.NextPrompt(FarmScenesIntro.HelpAdrianFinished);
             }, enabled : true,
-            tooltip : "There is too much to do, no time to play!"
+            tooltip : "There is too much to do, no time to play!",
         });
         Gui.SetButtonsFromList(options);
     }
 
     export function HelpAdrianFinished() {
-        let player = GAME().player;
+        const player = GAME().player;
 
         Text.Clear();
         TimeStep({hour: 1});
 
-        let parse : any = {
+        const parse: any = {
             playername : player.name,
-            buttDesc   : function() { return player.Butt().Short(); }
+            buttDesc() { return player.Butt().Short(); },
         };
 
-        if(player.stamina.Get() < 25) {
+        if (player.stamina.Get() < 25) {
             Text.Add("You struggle to get as much done as the equine, who does his task with very little apparent effort. For every pile you make, he is working a third. You feel a bit embarrassed, but press on, if only to maintain your dignity.", parse);
-        }
-        else {
+        } else {
             Text.Add("It is a bit of a hassle, but you manage to keep somewhat of an even pace with Adrian. Despite his skill at this, he is rather slow about it, but makes up for it by making monstrous piles that easily dwarf yours. Still, all in all, the two of you mass together quite a number of haystacks before calling it a day.", parse);
         }
         Text.NL();
@@ -576,21 +572,21 @@ export namespace FarmScenesIntro {
     }
 
     export function MeetDanie() {
-        let player = GAME().player;
-        let party : Party = GAME().party;
-        let danie = GAME().danie;
+        const player = GAME().player;
+        const party: Party = GAME().party;
+        const danie = GAME().danie;
 
         Text.Clear();
         party.location = FarmLoc.Fields;
         TimeStep({minute: 5});
 
-        danie.flags["Met"] = 1;
+        danie.flags.Met = 1;
 
-        let parse : any = {
+        let parse: any = {
             playername : player.name,
             eyeColor   : Color.Desc(player.Eyes().color),
             mistermiss : player.body.Gender() == Gender.male ? "mister" : "miss",
-            MisterMiss : player.body.Gender() == Gender.male ? "Mister" : "Miss"
+            MisterMiss : player.body.Gender() == Gender.male ? "Mister" : "Miss",
         };
         parse = player.ParserTags(parse);
 
@@ -610,10 +606,10 @@ export namespace FarmScenesIntro {
 
         fuckedDanie = false;
         Text.Flush();
-        //[Yes][No]
-        let options = new Array();
+        // [Yes][No]
+        const options = new Array();
         options.push({ nameStr : "Yes",
-            func : function() {
+            func() {
                 Text.Clear();
                 danie.relation.IncreaseStat(100, 5);
                 player.AddLustFraction(0.2);
@@ -637,10 +633,10 @@ export namespace FarmScenesIntro {
                 Text.Flush();
                 Gui.NextPrompt(FarmScenesIntro.HornyDanie);
             }, enabled : true,
-            tooltip : "Why not? She might actually be of help."
+            tooltip : "Why not? She might actually be of help.",
         });
         options.push({ nameStr : "No",
-            func : function() {
+            func() {
                 Text.Clear();
                 danie.relation.DecreaseStat(-100, 5);
                 Text.Add("As sweet as she is, you can't take the time to look after her and do your job at the same time, so you tell her no. Maybe when you're free you can come and play, but you have a job and you need to do it as quickly as possible. ", parse);
@@ -653,22 +649,22 @@ export namespace FarmScenesIntro {
                 Text.Flush();
                 Gui.NextPrompt(FarmScenesIntro.ReturnToGwendy);
             }, enabled : true,
-            tooltip : "You don't need any distractions, so you tell the girl so."
+            tooltip : "You don't need any distractions, so you tell the girl so.",
         });
         Gui.SetButtonsFromList(options);
     }
 
     export function HornyDanie() {
-        let player = GAME().player;
-        let danie = GAME().danie;
+        const player = GAME().player;
+        const danie = GAME().danie;
 
         Text.Clear();
         player.AddLustFraction(0.5);
 
-        let parse : any = {
+        const parse: any = {
             playername      : player.name,
             erectionwetness : player.FirstCock() ? "erection" :
-                            player.FirstVag()  ? "wetness" : "arousal"
+                            player.FirstVag()  ? "wetness" : "arousal",
         };
 
         Text.Add("This is not a good position for you, aroused as you are. You try to hide the [erectionwetness] in your groin, but you are sure Danie can feel it. Much to your dismay, she remarks that there she feels something odd against her stomach, and you quickly get up. Mentally calming yourself, you try to preserve your dignity as you offer her a hand up.", parse);
@@ -676,10 +672,10 @@ export namespace FarmScenesIntro {
         Text.Add("The sheep girl looks at you attentively. You really should get going, but talking to her for a bit would probably not hurt...", parse);
         Text.Flush();
 
-        //[Talk][Leave]
-        let options = new Array();
+        // [Talk][Leave]
+        const options = new Array();
         options.push({ nameStr : "Talk",
-            func : function() {
+            func() {
                 Text.Clear();
                 danie.relation.IncreaseStat(100, 5);
                 Text.Add("Asking her if she is okay, you are caught off guard as she jumps on you, giving you a quick hug. <i>“I'm alright, [playername]! Thank you for asking!”</i> She backs up a bit suddenly, leaving you looking at her in confusion while she stares back with a guilty look. <i>“You must think I'm such a klutz, causing us to trip like that... I know I'm a bit clumsy, but I didn't mean to hurt you. Sorry...”</i>", parse);
@@ -696,10 +692,10 @@ export namespace FarmScenesIntro {
                 Text.Flush();
                 FarmScenesIntro.DanieFuckOptions();
             }, enabled : true,
-            tooltip : "Well, she seems to like being around you, why not talk to her for a bit?"
+            tooltip : "Well, she seems to like being around you, why not talk to her for a bit?",
         });
         options.push({ nameStr : "Leave",
-            func : function() {
+            func() {
                 Text.Clear();
                 danie.relation.DecreaseStat(-100, 5);
                 Text.Add("You just barely recovered from your aroused state, and you really don't need anything to push you back into it at this point. It pains you to admit it, but you're going to have to leave the girl. Knowing her attitude and behavior, she will likely be a little crushed, but you can explain the next time you see her... you hope, at least.", parse);
@@ -708,50 +704,50 @@ export namespace FarmScenesIntro {
                 Text.Flush();
                 Gui.NextPrompt(FarmScenesIntro.ReturnToGwendy);
             }, enabled : true,
-            tooltip : "As you are now, that would only invite unnecessary trouble."
+            tooltip : "As you are now, that would only invite unnecessary trouble.",
         });
         Gui.SetButtonsFromList(options);
     }
 
     export function DanieFuckOptions() {
-        let player = GAME().player;
-        let danie = GAME().danie;
+        const player = GAME().player;
+        const danie = GAME().danie;
 
-        let cocksInVag = player.CocksThatFit(danie.FirstVag());
-        let cocksInAss = player.CocksThatFit(danie.Butt());
+        const cocksInVag = player.CocksThatFit(danie.FirstVag());
+        const cocksInAss = player.CocksThatFit(danie.Butt());
 
-        let parse : any = {
-            playername : player.name
+        const parse: any = {
+            playername : player.name,
         };
 
-        //[Sure][Guess so][Nah]
-        let options = new Array();
-        if(player.FirstCock()) {
+        // [Sure][Guess so][Nah]
+        const options = new Array();
+        if (player.FirstCock()) {
             options.push({ nameStr : "Blowjob",
                 func : FarmScenesIntro.DanieOralSex,
                 obj : true,
                 enabled : true,
-                tooltip : "Oral seems to be the safest option, honestly. Give her a taste of your cock."
+                tooltip : "Oral seems to be the safest option, honestly. Give her a taste of your cock.",
             });
             options.push({ nameStr : "Vaginal",
                 func : FarmScenesIntro.DanieVaginalSex, enabled : cocksInVag.length > 0,
-                tooltip : "Introduce the sheep to your pork sword, y'know?"
+                tooltip : "Introduce the sheep to your pork sword, y'know?",
             });
             options.push({ nameStr : "Anal",
                 func : FarmScenesIntro.DanieAnalSex, enabled : cocksInAss.length > 0,
-                tooltip : "You must admit, you wonder if she'd mind some butt fun."
+                tooltip : "You must admit, you wonder if she'd mind some butt fun.",
             });
         }
-        if(player.FirstVag()) {
+        if (player.FirstVag()) {
             options.push({ nameStr : "Cunnilingus",
                 func : FarmScenesIntro.DanieOralSex,
                 obj : false,
                 enabled : true,
-                tooltip : "Oral seems to be the safest option, honestly. Have her eat you out."
+                tooltip : "Oral seems to be the safest option, honestly. Have her eat you out.",
             });
         }
         options.push({ nameStr : "Nevermind",
-            func : function() {
+            func() {
                 Text.Clear();
                 player.AddLustFraction(-0.2);
                 Text.Add("You tell the helpful girl that this isn't something she needs to concern herself with. Before she can protest, you stand up and tell her to stay here. It's bad enough that you are aroused, but you do not want to do anything irreversible just because you can barely keep your pants on.", parse);
@@ -760,14 +756,14 @@ export namespace FarmScenesIntro {
                 Text.Flush();
                 Gui.NextPrompt(FarmScenesIntro.ReturnToGwendy);
             }, enabled : true,
-            tooltip : "It isn't her problem, so no need to force anything on her."
+            tooltip : "It isn't her problem, so no need to force anything on her.",
         });
         Gui.SetButtonsFromList(options);
     }
 
-    export function DanieOralSex(bits : boolean) {
-        let player = GAME().player;
-        let danie = GAME().danie;
+    export function DanieOralSex(bits: boolean) {
+        const player = GAME().player;
+        const danie = GAME().danie;
 
         Text.Clear();
         fuckedDanie = true;
@@ -776,11 +772,11 @@ export namespace FarmScenesIntro {
 
         // IF bits == true, cock, else vag
 
-        let parse : any = {
+        const parse: any = {
             playername : player.name,
-            cockDesc   : function() { return player.FirstCock().Short(); },
-            cuntDesc   : function() { return player.FirstVag().Short(); },
-            clitDesc   : function() { return player.FirstVag().ClitShort(); }
+            cockDesc() { return player.FirstCock().Short(); },
+            cuntDesc() { return player.FirstVag().Short(); },
+            clitDesc() { return player.FirstVag().ClitShort(); },
         };
 
         Text.Add("You tell the sheep girl to get on her knees. She looks at you with a hint of fear, but does as told. <i>“W-what are we going to do, [playername]?”</i> she asks with understandable nervousness.", parse);
@@ -789,17 +785,17 @@ export namespace FarmScenesIntro {
         Text.NL();
         Text.Add("With that resolved, you undo your pants to reveal ", parse);
 
-        if(player.body.Gender() == Gender.herm) {
+        if (player.body.Gender() == Gender.herm) {
             Text.Add("both sets of sexes, a small bit of confusion on Danie's face as she comments, <i>“Umm, [playername], I didn't know you had both of these! It's going to be hard if I have to do both...”</i> You chuckle slightly and tell her that it isn't necessary as you decide on ", parse);
         }
 
         // MALE/HERM: BLOWJOB
-        if(bits) {
+        if (bits) {
             Text.Add("your [cockDesc], which springs out erect and ready for what's to come. Danie actually lets out a cute whimper as she inches closer to it, apparently understanding what to do.", parse);
             Text.NL();
 
             // Big cock
-            if(player.FirstCock().length.Get() >= 30) {
+            if (player.FirstCock().length.Get() >= 30) {
                 Text.Add("Uncertain, she grabs it with her warm, supple fingers. <i>“T-this...is way too big! I don't know if this is a good idea anymore.”</i>", parse);
                 Text.NL();
                 Text.Add("Her thoughts coincide with yours, as you wonder how the girl would be able to take something so large with a mouth as petite as hers.", parse);
@@ -813,13 +809,11 @@ export namespace FarmScenesIntro {
                 Text.Add("Eventually, she speeds up the tempo, working faster and faster to get you off, her breasts slapping against your lap while squeaking and squishing noises emanate from the lewd act. Unable to bear the girl's efforts any longer, you cum, spurting your fluids onto her face, hair and breasts. Danie squeals in shock, but she continues her ministrations until your orgasm subsides.", parse);
                 Text.NL();
                 Text.Add("When you finish, it looks like the girl is glazed with a fine coat of spunk, making her look rather degraded. Still, she seems rather upbeat, happy that you seem relieved, as your [cockDesc] grows flaccid between her tits. <i>“Are you all good now, [playername]? Is there anything else I can do to help?”</i> You look at her with a relieved face and tell her she's done enough for you.", parse);
-            }
-            else { // Less than x cm cock
+            } else { // Less than x cm cock
                 Text.Add("She grabs it with her warm, supple fingers, leaving you to relish the feeling as she says, ", parse);
-                if(player.FirstCock().length.Get() >= 20) {
+                if (player.FirstCock().length.Get() >= 20) {
                     Text.Add("<i>“W-whoa, this is kind of big! B-but if I need to help you, I'll do what I can... ”</i>", parse);
-                }
-                else {
+                } else {
                     Text.Add("<i>“I think I can handle this, [playername]. It shouldn't be a problem!”</i>", parse);
                 }
                 Text.NL();
@@ -835,9 +829,7 @@ export namespace FarmScenesIntro {
                 Text.NL();
                 Text.Add("You shake your head and tell the girl she's done enough, to which she smiles before hugging you, her breasts enveloping your face. <i>“Yay, I'm glad I could help then!”</i> Maybe spending some time with Danie wasn't so bad, if she's this enthusiastic to 'help' your problems...", parse);
             }
-        }
-        // FEMALE/HERM: CUNNILINGUS
-        else {
+        } else {
             Text.Add("your [cuntDesc], already wet and ready as Danie looks at it expectantly. <i>“Okay, I think I can help with this!”</i> she says with what sounds like an upbeat voice.", parse);
             Text.NL();
             Text.Add("She moves closer, still a little uneasy, though not voicing any complaints. With a tentative lick, her thick tongue strokes gently over your [clitDesc], making you twitch with lust. She surprises you by pushing her flexible organ further, and you can feel the first inch or so delve into your cleft. A whimpering moan escapes your lips.", parse);
@@ -859,23 +851,23 @@ export namespace FarmScenesIntro {
     }
 
     export function DanieVaginalSex() {
-        let player = GAME().player;
-        let danie = GAME().danie;
+        const player = GAME().player;
+        const danie = GAME().danie;
 
         Text.Clear();
         danie.relation.IncreaseStat(100, 15);
         danie.slut.IncreaseStat(100, 5);
         fuckedDanie = true;
 
-        let cocksInVag = player.CocksThatFit(danie.FirstVag());
+        const cocksInVag = player.CocksThatFit(danie.FirstVag());
 
-        let p1Cock = player.BiggestCock(cocksInVag);
+        const p1Cock = player.BiggestCock(cocksInVag);
 
-        let parse : any = {
+        const parse: any = {
             playername : player.name,
-            cockDesc   : function() { return p1Cock.Short(); },
-            cuntDesc   : function() { return danie.FirstVag().Short(); },
-            breastDesc : function() { return player.FirstBreastRow().Short(); }
+            cockDesc() { return p1Cock.Short(); },
+            cuntDesc() { return danie.FirstVag().Short(); },
+            breastDesc() { return player.FirstBreastRow().Short(); },
         };
 
         Text.Add("You ask your new friend to come closer as you undo your pants. She looks a little worried, but approaches nonetheless. Pulling your [cockDesc] out, you tell her that you want to use her cunt right now to help yourself out. <i>“U-um, okay, b-but can I ask you a question, [playername]?”</i> The girl seems a tad more nervous than you expected, and you tell her that of course she can. <i>“I've never done anything like this before, s-so...I'm wondering, is this going to hurt?”</i>", parse);
@@ -905,23 +897,23 @@ export namespace FarmScenesIntro {
     }
 
     export function DanieAnalSex() {
-        let player = GAME().player;
-        let danie = GAME().danie;
+        const player = GAME().player;
+        const danie = GAME().danie;
 
         Text.Clear();
         danie.relation.IncreaseStat(100, 20);
         danie.slut.IncreaseStat(100, 10);
         fuckedDanie = true;
 
-        let cocksInAss = player.CocksThatFit(danie.Butt());
+        const cocksInAss = player.CocksThatFit(danie.Butt());
 
-        let p1Cock = player.BiggestCock(cocksInAss);
+        const p1Cock = player.BiggestCock(cocksInAss);
 
-        let parse : any = {
+        const parse: any = {
             playername : player.name,
-            cockDesc   : function() { return p1Cock.Short(); },
-            anusDesc   : function() { return danie.Butt().AnalShort(); },
-            buttDesc   : function() { return danie.Butt().Short(); }
+            cockDesc() { return p1Cock.Short(); },
+            anusDesc() { return danie.Butt().AnalShort(); },
+            buttDesc() { return danie.Butt().Short(); },
         };
 
         Text.Add("Gathering some courage, you ask Danie if she'd mind letting you use her ass for your problems. She frowns a bit as she asks, <i>“What do you mean, use my ass?”</i> In as short a way as possible, you explain that you would like to have a little fun with her butt. She blushes even harder than when you told her you were horny, but she complies with the plan. Turning around, she presents her tush to you, though it's evident that she is exceptionally nervous. Concerned, you ask why.", parse);
@@ -952,15 +944,15 @@ export namespace FarmScenesIntro {
     }
 
     export function ReturnToGwendy() {
-        let player = GAME().player;
-        let party : Party = GAME().party;
-        let farm = GAME().farm;
+        const player = GAME().player;
+        const party: Party = GAME().party;
+        const farm = GAME().farm;
 
         Text.Clear();
         TimeStep({hour: 2});
 
-        let parse : any = {
-            playername : player.name
+        const parse: any = {
+            playername : player.name,
         };
 
         Text.Add("Although your first day with the sheep was rather frantic, you can't say you didn't enjoy it. Meeting Danie, while a little frustrating, made a good impression on you, especially considering her sweet and innocent attitude. Maybe you can visit her later and spend more time with her? For now, you decide to head back to Gwendy.", parse);
@@ -968,10 +960,9 @@ export namespace FarmScenesIntro {
         Text.Add("You find the farmer humming to herself while watering a vegetable patch. When you approach her, she smiles at you and says, <i>“Well then, didn't think you'd finish with the sheep already. Or did someone decide to have a little <b>fun</b> with the flock?”</i> ", parse);
         Text.NL();
 
-        if(fuckedDanie) {
+        if (fuckedDanie) {
             Text.Add("A nervous chuckle escapes your lips as you deny performing any such actions. A knowing smile graces Gwendy's face as she comes closer and theatrically sniffs at you. <i>“You might say you haven't, but you smell an awful lot like sheep for someone just feeding them... but I won't worry you about it. I think I can trust someone who's willing to help a gal out.”</i> You squirm under her gaze, but she soon backs off.", parse);
-        }
-        else {
+        } else {
             Text.Add("You cast an indignant look at her, but she just chuckles. <i>“Calm down, silly. I know you're not the type to do something like that. Still, you have no idea how much help you were today. I appreciate it, and I hope you'll come by more often, even just to visit.”</i>", parse);
         }
 
@@ -980,18 +971,17 @@ export namespace FarmScenesIntro {
         Text.Add("You nod in affirmation before turning and walking off the ranch.", parse);
         Text.NL();
 
-        if(party.Two()) {
-            let member = party.Get(1);
+        if (party.Two()) {
+            const member = party.Get(1);
 
             Text.Add("You call for [name], telling [himher] you are heading back out.", { name: member.name, himher : member.himher() });
             Text.NL();
-        }
-        else if(!party.Alone()) {
+        } else if (!party.Alone()) {
             Text.Add("You call out to your party, telling them you are heading back out.", parse);
         }
 
         Text.NL();
-        farm.flags["Visit"] = 1;
+        farm.flags.Visit = 1;
         Text.Add("<b>Found Gwendy's Farm (can now be visited from plains).</b>");
         Text.Flush();
         Gui.NextPrompt(function() {
@@ -1000,64 +990,61 @@ export namespace FarmScenesIntro {
     }
 }
 
-
 // Create namespace
-let FarmLoc = {
+const FarmLoc = {
 	Fields : new Event("Plains: Gwendy's farm"),
 	Barn   : new Event("The barn"),
-	Loft   : new Event("Gwendy's loft")
-}
-
+	Loft   : new Event("Gwendy's loft"),
+};
 
 FarmLoc.Loft.events.push(new Link(
 	"Gwendy", function() {
-		let gwendy = GAME().gwendy;
+		const gwendy = GAME().gwendy;
 		return gwendy.IsAtLocation(FarmLoc.Loft);
 	}, true,
 	function() {
-		let gwendy = GAME().gwendy;
-		if(gwendy.IsAtLocation(FarmLoc.Loft)) {
+		const gwendy = GAME().gwendy;
+		if (gwendy.IsAtLocation(FarmLoc.Loft)) {
 			Text.Add("Gwendy is here.");
+		} else {
+			Text.Add("Gwendy doesn't seem to be in at the moment.");
 		}
-		else
-			Text.Add("Gwendy doesn't seem to be in at the moment.");			
 		Text.NL();
 	},
-	GwendyScenes.LoftPrompt
+	GwendyScenes.LoftPrompt,
 ));
 FarmLoc.Barn.events.push(new Link(
 	"Gwendy", function() {
-		let gwendy = GAME().gwendy;
+		const gwendy = GAME().gwendy;
 		return gwendy.IsAtLocation(FarmLoc.Barn);
 	}, true,
 	function() {
-		let gwendy = GAME().gwendy;
-		if(gwendy.IsAtLocation(FarmLoc.Barn)) {
+		const gwendy = GAME().gwendy;
+		if (gwendy.IsAtLocation(FarmLoc.Barn)) {
 			Text.Add("Gwendy is here.");
+		} else {
+			Text.Add("Gwendy doesn't seem to be here at the moment.");
 		}
-		else
-			Text.Add("Gwendy doesn't seem to be here at the moment.");			
 		Text.NL();
 	},
-	GwendyScenes.BarnPrompt
+	GwendyScenes.BarnPrompt,
 ));
 FarmLoc.Fields.events.push(new Link(
 	"Gwendy", function() {
-		let gwendy = GAME().gwendy;
+		const gwendy = GAME().gwendy;
 		return gwendy.IsAtLocation(FarmLoc.Fields);
 	}, true,
 	function() {
-		let gwendy = GAME().gwendy;
-		if(gwendy.IsAtLocation(FarmLoc.Fields)) {
+		const gwendy = GAME().gwendy;
+		if (gwendy.IsAtLocation(FarmLoc.Fields)) {
 			Text.Add("Gwendy is here.");
+		} else {
+			Text.Add("Gwendy doesn't seem to be here at the moment.");
 		}
-		else
-			Text.Add("Gwendy doesn't seem to be here at the moment.");			
 		Text.NL();
 	},
-	GwendyScenes.FieldsPrompt
+	GwendyScenes.FieldsPrompt,
 ));
-
 
 //
 // Gwendy's farm, the fields
@@ -1065,25 +1052,25 @@ FarmLoc.Fields.events.push(new Link(
 FarmLoc.Fields.description = function() {
 	Text.Add("Fields.");
 	Text.NL();
-}
+};
 
 // Set up Layla events
-FarmLoc.Fields.onEntry = function(x : any, from : any) {
-	if(from == WORLD().loc.Plains.Crossroads) {
-		if(LaylaScenes.FarmMeetingTrigger(true)) return;
+FarmLoc.Fields.onEntry = function(x: any, from: any) {
+	if (from == WORLD().loc.Plains.Crossroads) {
+		if (LaylaScenes.FarmMeetingTrigger(true)) { return; }
 	}
 	Gui.PrintDefaultOptions();
-}
+};
 
 FarmLoc.Fields.enc = new EncounterTable();
 FarmLoc.Fields.enc.AddEnc(function() {
 	return function() {
-		let party : Party = GAME().party;
+		const party: Party = GAME().party;
 		Text.Clear();
 
 		Text.Add("Not having much else to do, you wander the fields for a few minutes. You pick up a particularly fresh bundle of grass. Who knows, could be useful for something.");
 		Text.NL();
-		Text.Add("You pick up some fresh grass.", null, 'bold');
+		Text.Add("You pick up some fresh grass.", null, "bold");
 		party.inventory.AddItem(IngredientItems.FreshGrass);
 
 		TimeStep({minute: 15});
@@ -1098,12 +1085,12 @@ FarmLoc.Fields.enc.AddEnc(function() {
 
 FarmLoc.Fields.enc.AddEnc(function() {
 	return function() {
-		let party : Party = GAME().party;
+		const party: Party = GAME().party;
 		Text.Clear();
 
 		Text.Add("Not having much else to do, you wander the fields for a few minutes. You pick up a pretty flower. Who knows, could be useful for something.");
 		Text.NL();
-		Text.Add("You pick up a Foxglove.", null, 'bold');
+		Text.Add("You pick up a Foxglove.", null, "bold");
 		party.inventory.AddItem(IngredientItems.Foxglove);
 
 		TimeStep({minute: 15});
@@ -1118,14 +1105,14 @@ FarmLoc.Fields.links.push(new Link(
 	null,
 	function() {
 		MoveToLocation(WORLD().loc.Plains.Crossroads, {minute: 30});
-	}
+	},
 ));
 FarmLoc.Fields.links.push(new Link(
 	"Barn", true, true,
 	null,
 	function() {
 		MoveToLocation(FarmLoc.Barn, {minute: 5});
-	}
+	},
 ));
 
 //
@@ -1134,20 +1121,20 @@ FarmLoc.Fields.links.push(new Link(
 FarmLoc.Barn.description = function() {
 	Text.Add("Barn.");
 	Text.NL();
-}
+};
 FarmLoc.Barn.links.push(new Link(
 	"Fields", true, true,
 	null,
 	function() {
 		MoveToLocation(FarmLoc.Fields, {minute: 5});
-	}
+	},
 ));
 FarmLoc.Barn.links.push(new Link(
 	"Loft", true, true,
 	null,
 	function() {
 		MoveToLocation(FarmLoc.Loft, {minute: 5});
-	}
+	},
 ));
 
 //
@@ -1158,19 +1145,19 @@ FarmLoc.Loft.safe       = function() { return true; };
 FarmLoc.Loft.description = function() {
 	Text.Add("Gwendy's loft. ");
 	Text.NL();
-}
+};
 FarmLoc.Loft.links.push(new Link(
 	"Climb down", true, true,
 	null,
 	function() {
 		MoveToLocation(FarmLoc.Barn, {minute: 5});
-	}
+	},
 ));
 
 FarmLoc.Loft.SleepFunc = function() {
-	let party : Party = GAME().party;
+	const party: Party = GAME().party;
 
-	let parse : any = {
+	const parse: any = {
 
 	};
 
@@ -1178,7 +1165,7 @@ FarmLoc.Loft.SleepFunc = function() {
 
 	Text.Clear();
 
-	//TODO
+	// TODO
 	Text.Add("PLACEHOLDER", parse);
 	Text.NL();
 	Text.Add("You head off to bed", parse);
@@ -1187,30 +1174,28 @@ FarmLoc.Loft.SleepFunc = function() {
 
 	Text.Flush();
 
-	let func = function(dream : any) {
+	const func = function(dream: any) {
 		TimeStep({hour: 8});
 		party.Sleep();
 
-		if(LaylaScenes.FarmMeetingTrigger(false)) return;
+		if (LaylaScenes.FarmMeetingTrigger(false)) { return; }
 
-		//TODO
+		// TODO
 		Text.Add("You wake up, feeling rested and refreshed.", parse);
 
 		Text.Flush();
 		Gui.PrintDefaultOptions(true);
-	}
+	};
 
 	Gui.NextPrompt(function() {
 		Text.Clear();
 
 		DreamsScenes.Entry(func);
 	});
-}
-
-
-export namespace FarmScenes {
-    
 };
 
+export namespace FarmScenes {
+
+}
 
 export { FarmLoc };

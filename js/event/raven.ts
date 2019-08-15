@@ -1,28 +1,28 @@
 /*
- * 
+ *
  * Define Raven mother
- * 
+ *
  */
 
-import { Entity } from '../entity';
-import { Race } from '../body/race';
-import { TF } from '../tf';
-import { AppendageType } from '../body/appendage';
-import { Color } from '../body/color';
-import { Text } from '../text';
-import { Gui } from '../gui';
-import { GAME } from '../GAME';
-import { Party } from '../party';
-import { GlobalScenes } from './global';
+import { AppendageType } from "../body/appendage";
+import { Color } from "../body/color";
+import { Race } from "../body/race";
+import { Entity } from "../entity";
+import { GAME } from "../GAME";
+import { Gui } from "../gui";
+import { Party } from "../party";
+import { Text } from "../text";
+import { TF } from "../tf";
+import { GlobalScenes } from "./global";
 
-let RavenMotherScenes : any = {};
+const RavenMotherScenes: any = {};
 
 export class RavenMother extends Entity {
-	constructor(storage? : any) {
+	constructor(storage?: any) {
 		super();
 
 		this.ID = "ravenmother";
-		
+
 		this.name              = "RavenMother";
 		this.maxHp.base        = 3000;
 		this.maxSp.base        = 500;
@@ -35,101 +35,99 @@ export class RavenMother extends Entity {
 		this.spirit.base       = 100;
 		this.libido.base       = 100;
 		this.charisma.base     = 80;
-		
+
 		this.level             = 20;
 		this.sexlevel          = 15;
-		
+
 		this.combatExp         = 800;
 		this.coinDrop          = 1500;
-		
+
 		this.body.DefMale();
 		// TODO: Special avatar
-		//this.avatar.combat     = Images.lago_male;
-		
+		// this.avatar.combat     = Images.lago_male;
+
 		this.Butt().buttSize.base = 2;
-		
+
 		this.body.SetRace(Race.Avian);
-		
+
 		TF.SetAppendage(this.Back(), AppendageType.wing, Race.Avian, Color.black);
-		
+
 		this.body.SetBodyColor(Color.white);
-		
+
 		this.body.SetEyeColor(Color.green);
-		
+
 		// Set hp and mana to full
 		this.SetLevelBonus();
 		this.RestFull();
-		
-		this.flags["Stage"]     = 0;
-		this.flags["Met"]       = 0;
-		this.flags["KeptRaven"] = 0;
-		this.flags["RBlock"]    = 0;
-		
-		if(storage) this.FromStorage(storage);
+
+		this.flags.Stage     = 0;
+		this.flags.Met       = 0;
+		this.flags.KeptRaven = 0;
+		this.flags.RBlock    = 0;
+
+		if (storage) { this.FromStorage(storage); }
 	}
 
-	Ravenness() {
-		return Math.floor(this.flags["Stage"] / 100);
+	public Ravenness() {
+		return Math.floor(this.flags.Stage / 100);
 	}
-	
+
 	// Increase ravenness and return trigger
-	RavenTrigger() {
-		let oldVal = this.Ravenness();
-		this.flags["Stage"] += Math.floor(10 + Math.random() * 70);
-		let newVal = this.Ravenness();
-		
+	public RavenTrigger() {
+		const oldVal = this.Ravenness();
+		this.flags.Stage += Math.floor(10 + Math.random() * 70);
+		const newVal = this.Ravenness();
+
 		return newVal > oldVal;
 	}
-	
-	FromStorage(storage : any) {
+
+	public FromStorage(storage: any) {
 		this.LoadPersonalityStats(storage);
-		
+
 		// Load flags
 		this.LoadFlags(storage);
 	}
-	
-	ToStorage() {
-		let storage = {};
-		
+
+	public ToStorage() {
+		const storage = {};
+
 		this.SavePersonalityStats(storage);
-		
+
 		this.SaveFlags(storage);
-		
+
 		return storage;
-	}	
+	}
 }
 
-RavenMotherScenes.TheHunt = function(func : any) {
-	let ravenmother = GAME().ravenmother;
-	let party : Party = GAME().party;
-	let parse : any = {};
-	
+RavenMotherScenes.TheHunt = function(func: any) {
+	const ravenmother = GAME().ravenmother;
+	const party: Party = GAME().party;
+	const parse: any = {};
+
 	RavenMotherScenes.theHuntWakeup = func;
-	
-	if(party.NumTotal() <= 1) {
-		parse["person"] = "your darling";
-		if(Math.random() < 0.5) {
-			parse["pheshe"]  = "he";
-			parse["phisher"] = "his";
+
+	if (party.NumTotal() <= 1) {
+		parse.person = "your darling";
+		if (Math.random() < 0.5) {
+			parse.pheshe  = "he";
+			parse.phisher = "his";
+		} else {
+			parse.pheshe  = "she";
+			parse.phisher = "her";
 		}
-		else {
-			parse["pheshe"]  = "she";
-			parse["phisher"] = "her";
-		}
+	} else {
+		const person = party.GetRandom(true);
+		parse.person  = person.name;
+		parse.pheshe  = person.heshe();
+		parse.phisher = person.hisher();
 	}
-	else {
-		let person = party.GetRandom(true);
-		parse["person"]  = person.name;
-		parse["pheshe"]  = person.heshe();
-		parse["phisher"] = person.hisher();
-	}
-	
-	ravenmother.flags["Met"] = 1;
-	
+
+	ravenmother.flags.Met = 1;
+
 	Text.Clear();
 	Text.Add("Not quite sure what to expect, you focus your mind on the crystal. At first, nothing seems to happen, and you feel a little foolish, but after a few moments, you feel the gemstone tugging at you. It does not draw you in, but instead grasps hold of you, and guides you, almost enveloping you in a crystalline armor. Despite your intense concentration, with its pull, you have no trouble slipping into dream...", parse);
 	Text.Flush();
-	
+
 	Gui.NextPrompt(function() {
 		Text.Clear();
 		Text.Add("...Pancakes sizzle in your frying pan, as [person] waters the plants around your cozy cottage. Have you done this before? You can’t seem to quite recall.", parse);
@@ -144,12 +142,12 @@ RavenMotherScenes.TheHunt = function(func : any) {
 		Text.NL();
 		Text.Add("You’re unsure what to do next, but the bird is not so uncertain. With an outraged croak, it flies straight at the corner of the room, but instead of crashing into the wall, it somehow shifts through it, and with a blur in the air it is gone.", parse);
 		Text.Flush();
-		
-		let prompt = function(asked : boolean) {
-			//[Ask][Investigate]
-			let options = new Array();
+
+		const prompt = function(asked: boolean) {
+			// [Ask][Investigate]
+			const options = new Array();
 			options.push({ nameStr : "Ask",
-				func : function() {
+				func() {
 					Text.Clear();
 					Text.Add("You ask [person] if [pheshe] knows where the raven went or how to follow it.", parse);
 					Text.NL();
@@ -157,13 +155,13 @@ RavenMotherScenes.TheHunt = function(func : any) {
 					Text.NL();
 					Text.Add("Well, you’re not sure why you thought that might work.", parse);
 					Text.Flush();
-					
+
 					prompt(true);
 				}, enabled : !asked,
-				tooltip : Text.Parse("Ask [person] for help.", parse)
+				tooltip : Text.Parse("Ask [person] for help.", parse),
 			});
 			options.push({ nameStr : "Investigate",
-				func : function() {
+				func() {
 					Text.Clear();
 					Text.Add("Ignoring [person]’s bemused entreaties, you carefully examine the corner where the raven disappeared. There’s something different about it. Reality - for lack of a better term - feels thinner there, easier to penetrate. Is it simply because it’s such an unimportant part of the dream?", parse);
 					Text.NL();
@@ -171,22 +169,21 @@ RavenMotherScenes.TheHunt = function(func : any) {
 					Text.NL();
 					Text.Add("You will your body through the corner. The dreamscape stretches, pushing back harder as you try to get through, but as you call for the gem to assist you, the weak fabric of the dream proves no match for you...", parse);
 					Text.Flush();
-					
+
 					Gui.NextPrompt(RavenMotherScenes.TheHuntWolf);
 				}, enabled : true,
-				tooltip : "Examine the spot the raven disappeared."
+				tooltip : "Examine the spot the raven disappeared.",
 			});
 			Gui.SetButtonsFromList(options);
-		}
+		};
 		prompt(false);
 	});
-	
-}
 
+};
 
 RavenMotherScenes.TheHuntWolf = function() {
-	let parse : any = {};
-	
+	const parse: any = {};
+
 	Text.Clear();
 	Text.Add("...You run on all fours, as a hunter, chasing a deer. This time, however, you’re prepared, and slow to a walk, looking around at the trees above. You feel more in control of the dream now. You think you could change into a human if you tried, but there’s no need.", parse);
 	Text.NL();
@@ -196,7 +193,7 @@ RavenMotherScenes.TheHuntWolf = function() {
 	Text.NL();
 	Text.Add("You just miss it, snatching a few of its tail feathers, as it vanishes from the dream. Deciding you’re not going to fall here, you push off the air gently, and delve into the raven’s tunnel, the scent trail of its anxiety clear to your canid nose...", parse);
 	Text.Flush();
-	
+
 	Gui.NextPrompt(function() {
 		Text.Clear();
 		Text.Add("...You are running, stalked by flickering shadows and an all-encroaching fire. Mindless panic swirls through your mind, urging you forward. You blink your eyes, focusing, remembering why you’re here, and you calm.", parse);
@@ -211,7 +208,7 @@ RavenMotherScenes.TheHuntWolf = function() {
 		Text.NL();
 		Text.Add("Well, this time you’re not letting it go. Even if it goes somewhere, it’s not getting away from you...", parse);
 		Text.Flush();
-		
+
 		Gui.NextPrompt(function() {
 			Text.Clear();
 			Text.Add("...You stand in a forest, the squirming raven still clutched in your hands. Something is strange here. It’s not quite like the dreams you’ve had before. Thinking about it for a moment, you realize what it is - there is no pull. This dream doesn’t seem to want you to do anything, doesn’t have a role set out for you.", parse);
@@ -224,24 +221,24 @@ RavenMotherScenes.TheHuntWolf = function() {
 			Text.NL();
 			Text.Add("The beat of wings still pursues you, and you hear loud croaks from birds who have apparently spotted you, calling the rest of the conspiracy after you. You look around you, watching for black shapes flying at you as you run, so you are caught completely off-guard when you dart past a line of thick gnarled trees and find yourself in the middle of a shadowed glade.", parse);
 			Text.Flush();
-			
+
 			Gui.NextPrompt(RavenMotherScenes.TheHuntGlade);
 		});
 	});
-}
+};
 
 RavenMotherScenes.TheHuntGlade = function() {
-	let ravenmother = GAME().ravenmother;
-	let player = GAME().player;
+	const ravenmother = GAME().ravenmother;
+	const player = GAME().player;
 
-	let parse : any = {
-		
+	const parse: any = {
+
 	};
-	
+
 	Text.Clear();
 	Text.Add("The circular clearing is two dozen steps across, with tall, ancient oaks marking its perimeter. The trees across from you are more black than green, their limbs covered in scores of ravens, a countless number of beaks turned toward you by the watchers.", parse);
 	Text.NL();
-	parse["int"] = player.Int() > 30 ? " Well, all bird hearts beat fast, so that really doesn’t mean much." : "";
+	parse.int = player.Int() > 30 ? " Well, all bird hearts beat fast, so that really doesn’t mean much." : "";
 	Text.Add("You spin around and see ravens landing on the trees you just passed. It seems you were not escaping from them. They were herding you. You clutch your prisoner tight to your chest, holding it firm, feeling its heart beating fast.[int] Maybe it would serve as a hostage, at least. Although you wonder how much they would care about the life of one of them when you are surrounded by thousands.", parse);
 	Text.NL();
 	Text.Add("<i>“Release her,”</i> a crackling voice speaks from behind you. You turn and see a girl facing you, sitting on an enormous stump in the middle of the glade. You somehow managed to overlook her when your eyes had met those of the watching birds.", parse);
@@ -250,47 +247,47 @@ RavenMotherScenes.TheHuntGlade = function() {
 	Text.NL();
 	Text.Add("<i>“Now.”</i> Her throaty voice cracks, apparently unused to speech, but her intonation leaves no doubt that she expects to be obeyed.", parse);
 	Text.Flush();
-	
-	//[Comply][Don’t]
-	let options = new Array();
+
+	// [Comply][Don’t]
+	const options = new Array();
 	options.push({ nameStr : "Comply",
-		func : function() {
+		func() {
 			Text.Clear();
 			Text.Add("It cost you a lot of effort to catch the bird, but this seems for the best. As you release your hold, the raven’s claws dig into your hands as it... no, as she jumps up and takes wing with a croak of indignation. In a moment, you lose track of her among the multitude of her kin.", parse);
 			Text.NL();
 			Text.Add("The feathered girl turns her head toward you. Her eyes are pools of gray from edge to edge, black pupils examining you from top to bottom. <i>“Good. You show hints of promise.”</i>", parse);
 			Text.NL();
 			Text.Add("There are a few moments of silence as it becomes increasingly clear that she doesn’t intend to say anything more. You venture forward a little, and take a seat at the foot of the great stump. ", parse);
-			
+
 			RavenMotherScenes.TheHuntGladeCont();
 		}, enabled : true,
-		tooltip : "Release the raven."
+		tooltip : "Release the raven.",
 	});
 	options.push({ nameStr : "Don’t",
-		func : function() {
+		func() {
 			Text.Clear();
 			Text.Add("It cost you a lot of effort to catch the bird. You’re not going to letting it go this easily. You tell the girl that if she wants it back, she’ll have to explain what this is all about, and explain well.", parse);
 			Text.NL();
 			Text.Add("The feathered girl turns her head toward you, a small frown on her lips. <i>“You fail to understand,”</i> she says. You feel cool air brushing past your hands, where a moment earlier you held the squirming bird. The bird itself - at least you guess it’s the same one - flies low by your head, emitting an outraged croak before joining its kin. <i>“I only asked to see.”</i>", parse);
 			Text.NL();
 			Text.Add("To see what? There are a few moments of silence as it becomes increasingly clear that she doesn’t intend to say anything more. Well, at least she doesn’t seem angry with you, and it’s probably not that important. You venture forward a little, and take a seat at the foot of the great stump. ", parse);
-			
-			ravenmother.flags["KeptRaven"] = 1;
-			
+
+			ravenmother.flags.KeptRaven = 1;
+
 			RavenMotherScenes.TheHuntGladeCont();
 		}, enabled : true,
-		tooltip : "Hold on to the raven. Maybe it could be useful as a hostage."
+		tooltip : "Hold on to the raven. Maybe it could be useful as a hostage.",
 	});
 	Gui.SetButtonsFromList(options);
-}
+};
 
 RavenMotherScenes.TheHuntGladeCont = function() {
-	let player = GAME().player;
+	const player = GAME().player;
 
-	let parse : any = {
-		playername : player.name
+	const parse: any = {
+		playername : player.name,
 	};
-	
+
 	Text.Add("Tentatively, you introduce yourself, telling the girl that you are called [playername].", parse);
 	Text.NL();
 	Text.Add("<i>“I have not found a use for names,”</i> she rasps. <i>“I care not what sounds you tie yourself with. I already know you.”</i>", parse);
@@ -309,11 +306,11 @@ RavenMotherScenes.TheHuntGladeCont = function() {
 	Text.NL();
 	Text.Add("This may be one of the more frustrating conversations you’ve ever had. The worst part is that it doesn’t feel like she’s being deliberately obtuse. Her face is open, and she seems to respond readily enough. If your guess is right, it’s more that she just doesn’t understand what you want from her.", parse);
 	Text.Flush();
-	
-	//[Rephrase][Keep going]
-	let options = new Array();
+
+	// [Rephrase][Keep going]
+	const options = new Array();
 	options.push({ nameStr : "Rephrase",
-		func : function() {
+		func() {
 			Text.Clear();
 			Text.Add("You take a few moments to phrase your question. Can you help me understand what information and reasoning led you to believe that it’s desirable to send ravens to observe my dreams?", parse);
 			Text.NL();
@@ -350,13 +347,13 @@ RavenMotherScenes.TheHuntGladeCont = function() {
 			Text.Add("<i>“That is so.”</i>", parse);
 			Text.NL();
 			Text.Add("Will she help you, then?", parse);
-			
+
 			RavenMotherScenes.TheHuntTalk();
 		}, enabled : player.Int() + player.Cha() > 50,
-		tooltip : "Actually, now that you think about, there’s a better way to ask her."
+		tooltip : "Actually, now that you think about, there’s a better way to ask her.",
 	});
 	options.push({ nameStr : "Keep going",
-		func : function() {
+		func() {
 			Text.Clear();
 			Text.Add("Well, you’ll get there eventually. You ask why she needed to know what kind of person you are.", parse);
 			Text.NL();
@@ -377,50 +374,50 @@ RavenMotherScenes.TheHuntGladeCont = function() {
 			Text.Add("You exchange a few more questions and answers, and what you arrive at is that she saw you ask her at some point in time - you imagine in the future. She wasn’t sure whether she should help you or not, so she wanted to know more about you.", parse);
 			Text.NL();
 			Text.Add("You ask if she’s going to help you.", parse);
-			
+
 			RavenMotherScenes.TheHuntTalk();
 		}, enabled : true,
-		tooltip : "It might take a while, but you’ll get to the bottom of this eventually."
+		tooltip : "It might take a while, but you’ll get to the bottom of this eventually.",
 	});
 	Gui.SetButtonsFromList(options);
-}
+};
 
 RavenMotherScenes.TheHuntTalk = function() {
-	let ravenmother = GAME().ravenmother;
+	const ravenmother = GAME().ravenmother;
 
-	let parse : any = {
-		
+	const parse: any = {
+
 	};
-	
+
 	Text.NL();
 	Text.Add("<i>“I don’t know,”</i> she tells you. <i>“Come to me when the time is right and we will see.”</i>", parse);
 	Text.NL();
 	Text.Add("It seems like she’s told you everything she’s willing to tell about this. Maybe everything she can tell. It’s time to decide your next step.", parse);
 	Text.Flush();
-	
-	let prompt = function() {
-		//[Questions][Nah]
-		let options = new Array();
+
+	const prompt = function() {
+		// [Questions][Nah]
+		const options = new Array();
 		options.push({ nameStr : "Questions",
-			func : function() {
+			func() {
 				RavenMotherScenes.TheHuntQuestions(prompt);
 			}, enabled : true,
-			tooltip : "There are a few things you want to ask her..."
+			tooltip : "There are a few things you want to ask her...",
 		});
 		options.push({ nameStr : "Ravens",
-			func : function() {
+			func() {
 				RavenMotherScenes.RavenPrompt(prompt);
 			}, enabled : true,
-			tooltip : "Ask her to do something about the ravens."
+			tooltip : "Ask her to do something about the ravens.",
 		});
 		options.push({ nameStr : "Leave",
-			func : function() {
+			func() {
 				Text.Clear();
 				Text.Add("You rise to your feet, feeling a thousand stares follow your movement suspiciously. Your eyes meet the Raven Mother’s and you tell her that it’s time you went. If you are going to ask her for something, you don’t know what it is yet.", parse);
 				Text.NL();
 				Text.Add("<i>“Are you sure? There is much you have yet to learn. Many things to experience.”</i> She looks at you, and apparently concludes the decision is final. <i>“Go then. Know that you are welcome back. For now.”</i>", parse);
 				Text.NL();
-				parse["raven"] = ravenmother.flags["RBlock"] == 0 ? "since following the ravens again would be a lot of trouble" : "since following the ravens won’t be an option anymore";
+				parse.raven = ravenmother.flags.RBlock == 0 ? "since following the ravens again would be a lot of trouble" : "since following the ravens won’t be an option anymore";
 				Text.Add("You hesitate for a moment and ask how to find your way back, [raven].", parse);
 				Text.NL();
 				Text.Add("<i>“The reason you could come here was not the raven. It was the <b>focus</b> you possess.”</i> You think for a moment and realize she must mean the gemstone. <i>“It protects you from the currents of this world. Simply use it again and think of this place, and you should be able to come.”</i>", parse);
@@ -431,29 +428,29 @@ RavenMotherScenes.TheHuntTalk = function() {
 				Text.NL();
 				Text.Add("You open your eyes, and the real world lies before you, somehow a little duller after your excursion in dreams. Well, at least you came back safe, and mostly figured out what’s going on. And you got out before you completely embarrassed yourself in front of the birds.", parse);
 				Text.Flush();
-				
+
 				Gui.NextPrompt(function() {
 					Text.Clear();
 					RavenMotherScenes.theHuntWakeup(true);
 				});
 			}, enabled : true,
-			tooltip : "It’s time to say your goodbyes and wake up."
+			tooltip : "It’s time to say your goodbyes and wake up.",
 		});
-		
-		Gui.SetButtonsFromList(options);
-	}
-	prompt();
-}
 
-RavenMotherScenes.TheHuntQuestions = function(back : any) {
-	let parse : any = {
-		
+		Gui.SetButtonsFromList(options);
 	};
-	
-	//[Herself][Ravens][Dreams]
-	let options = new Array();
+	prompt();
+};
+
+RavenMotherScenes.TheHuntQuestions = function(back: any) {
+	const parse: any = {
+
+	};
+
+	// [Herself][Ravens][Dreams]
+	const options = new Array();
 	options.push({ nameStr : "Herself",
-		func : function() {
+		func() {
 			Text.Clear();
 			Text.Add("You ask the Raven Mother what she is.", parse);
 			Text.NL();
@@ -463,13 +460,13 @@ RavenMotherScenes.TheHuntQuestions = function(back : any) {
 			Text.NL();
 			Text.Add("<i>“I’m a little like the ravens, I think.”</i> She looks up at the conspiracy observing you from the trees, her eyes lingering on their high perches. <i>“But there are more things different than the same even with them.”</i>", parse);
 			Text.Flush();
-			
+
 			RavenMotherScenes.TheHuntQuestions(back);
 		}, enabled : true,
-		tooltip : "Just what is she exactly?"
+		tooltip : "Just what is she exactly?",
 	});
 	options.push({ nameStr : "Ravens",
-		func : function() {
+		func() {
 			Text.Clear();
 			Text.Add("Feeling a little foolish, you ask the Raven Mother how she's connected to ravens.", parse);
 			Text.NL();
@@ -485,13 +482,13 @@ RavenMotherScenes.TheHuntQuestions = function(back : any) {
 			Text.NL();
 			Text.Add("That was probably the most understated explanation you’ve heard in some time, but you think you get the gist of it.", parse);
 			Text.Flush();
-			
+
 			RavenMotherScenes.TheHuntQuestions(back);
 		}, enabled : true,
-		tooltip : "What's her connection to the ravens?"
+		tooltip : "What's her connection to the ravens?",
 	});
 	options.push({ nameStr : "Dreams",
-		func : function() {
+		func() {
 			Text.Clear();
 			Text.Add("You ask the Raven Mother if she’s has some special link to dreams. After all, she sent ravens to spy on you in dreams, and this meeting is taking place in a dream as well.", parse);
 			Text.NL();
@@ -499,38 +496,39 @@ RavenMotherScenes.TheHuntQuestions = function(back : any) {
 			Text.NL();
 			Text.Add("Soft side?", parse);
 			Text.NL();
-			parse["mage"] = GlobalScenes.MagicStage1() ? "She must be a natural mage. Apparently capable of shaping the world with her will, even if it is ‘difficult’." : "She pauses for a moment to gather her thoughts.";
+			parse.mage = GlobalScenes.MagicStage1() ? "She must be a natural mage. Apparently capable of shaping the world with her will, even if it is ‘difficult’." : "She pauses for a moment to gather her thoughts.";
 			Text.Add("<i>“Here, things are easy to change. On the hard side, it is difficult. Sometimes I forget which is which until I try,”</i> she confides. [mage] <i>“You are usually gone, and only come to the soft side sometimes. But I am always here.”</i>", parse);
 			Text.NL();
 			Text.Add("She is always sleeping?", parse);
 			Text.NL();
 			Text.Add("<i>“Sleeping?”</i> She waves the word aside. <i>“I am always here, but I am always on the hard side too. Right now, I’m eating a rabbit. Its warm flesh is delicious.”</i> She smiles a predatory smile, and you swear for a moment you see blood on her teeth.", parse);
 			Text.Flush();
-			
+
 			RavenMotherScenes.TheHuntQuestions(back);
 		}, enabled : true,
-		tooltip : "Does she have some special connection to dreams?"
+		tooltip : "Does she have some special connection to dreams?",
 	});
 	Gui.SetButtonsFromList(options, true, back);
-}
+};
 
-RavenMotherScenes.RavenPrompt = function(back : any) {
-	let ravenmother = GAME().ravenmother;
+RavenMotherScenes.RavenPrompt = function(back: any) {
+	const ravenmother = GAME().ravenmother;
 
-	let parse : any = {};
-	
+	const parse: any = {};
+
 	Text.Clear();
-	
-	if(ravenmother.flags["RBlock"] == 0)
+
+	if (ravenmother.flags.RBlock == 0) {
 		Text.Add("The ravens are currently watching your dreams.", parse);
-	else
+	} else {
 		Text.Add("The ravens are currently banned from watching your dreams.", parse);
+	}
 	Text.Flush();
-	
-	//[Stop][Send them]
-	let options = new Array();
+
+	// [Stop][Send them]
+	const options = new Array();
 	options.push({ nameStr : "Stop",
-		func : function() {
+		func() {
 			Text.Clear();
 			Text.Add("The birds are really quite annoying. You tell the Raven Mother that she’s probably learned all she’s going to learn from your dreams by now, so she should stop sending her winged spies.", parse);
 			Text.NL();
@@ -538,15 +536,15 @@ RavenMotherScenes.RavenPrompt = function(back : any) {
 			Text.NL();
 			Text.Add("Good. You’re pretty sure she’ll keep her word.", parse);
 			Text.Flush();
-			ravenmother.flags["RBlock"] = 1;
+			ravenmother.flags.RBlock = 1;
 			Gui.NextPrompt(function() {
 				RavenMotherScenes.RavenPrompt(back);
 			});
-		}, enabled : ravenmother.flags["RBlock"] == 0,
-		tooltip : "Ask her to stop sending ravens to watch your dreams."
+		}, enabled : ravenmother.flags.RBlock == 0,
+		tooltip : "Ask her to stop sending ravens to watch your dreams.",
 	});
 	options.push({ nameStr : "Send them",
-		func : function() {
+		func() {
 			Text.Clear();
 			Text.Add("Somehow, your dreams feel a little better with the birds there. You tentatively explain that perhaps you wouldn’t mind seeing ravens in your dreams after all.", parse);
 			Text.NL();
@@ -554,14 +552,14 @@ RavenMotherScenes.RavenPrompt = function(back : any) {
 			Text.NL();
 			Text.Add("Well, sounds like you can look forward to receiving feathered visitors again.", parse);
 			Text.Flush();
-			ravenmother.flags["RBlock"] = 0;
+			ravenmother.flags.RBlock = 0;
 			Gui.NextPrompt(function() {
 				RavenMotherScenes.RavenPrompt(back);
 			});
-		}, enabled : ravenmother.flags["RBlock"] != 0,
-		tooltip : "Ask her to send ravens to your dreams again."
+		}, enabled : ravenmother.flags.RBlock != 0,
+		tooltip : "Ask her to send ravens to your dreams again.",
 	});
 	Gui.SetButtonsFromList(options, true, back);
-}
+};
 
 export { RavenMotherScenes };

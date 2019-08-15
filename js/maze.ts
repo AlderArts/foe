@@ -18,7 +18,7 @@ export class Maze {
 
 	constructor(opts? : any) {
 		opts = opts || {};
-		
+
 		this.map = [];
 		this.xMax = 0;
 		this.yMax = 0;
@@ -31,12 +31,12 @@ export class Maze {
 		room.maze = this;
 		room.x = x;
 		room.y = y;
-		
+
 		if(this.xMax < x)
 			this.xMax = x;
 		if(this.yMax < y)
 			this.yMax = y;
-		
+
 		if(_.isUndefined(this.map[x])) {
 			this.map[x] = [];
 		}
@@ -80,34 +80,34 @@ export class MazeRoom extends Event {
 	constructor(nameFunc? : CallableFunction, opts? : any) {
 		super(nameFunc, opts);
 	}
-	
+
 	SetButtons(links : any) {
 		//Set up regular events
 		super.SetButtons(links);
-		
+
 		let north = this.maze.GetRoom(this.x, this.y-1);
 		let west  = this.maze.GetRoom(this.x-1, this.y);
 		let south = this.maze.GetRoom(this.x, this.y+1);
 		let east  = this.maze.GetRoom(this.x+1, this.y);
-		
+
 		//Set up special interface
 		Input.buttons[5].enabledImage = Images.imgButtonEnabled2;
 		Input.buttons[5].Setup("North", MoveToLocation, north != null, north, null, GameState.Event);
-		
+
 		Input.buttons[8].enabledImage = Images.imgButtonEnabled2;
 		Input.buttons[8].Setup("West", MoveToLocation, west != null, west, null, GameState.Event);
-		
+
 		Input.buttons[9].enabledImage = Images.imgButtonEnabled2;
 		Input.buttons[9].Setup("South", MoveToLocation, south != null, south, null, GameState.Event);
-		
+
 		Input.buttons[10].enabledImage = Images.imgButtonEnabled2;
 		Input.buttons[10].Setup("East", MoveToLocation, east != null, east, null, GameState.Event);
 	}
 
 	PrintDesc() {
 		super.PrintDesc();
-		
-		if(GetDEBUG()) {
+
+		if (GetDEBUG()) {
 			this.maze.Print(this);
 		}
 	}

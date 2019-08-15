@@ -1,4 +1,4 @@
-let HalloweenFlags = {
+const HalloweenFlags = {
     Flags : {
         Elder     : (1 << 0),
         Kiai      : (1 << 1),
@@ -20,7 +20,7 @@ let HalloweenFlags = {
         NotMet  : 0,
         Removed : 1,
         PCBeta  : 2,
-        PCAlpha : 3
+        PCAlpha : 3,
     },
     Harthon : {
         Met          : (1 << 0),

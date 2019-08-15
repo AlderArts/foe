@@ -1,28 +1,28 @@
 /*
- * 
+ *
  * Define Uru
- * 
+ *
  */
-import { Entity } from '../entity';
-import { Images } from '../assets';
-import { Race } from '../body/race';
-import { Color } from '../body/color';
-import { TF } from '../tf';
-import { AppendageType } from '../body/appendage';
+import { Images } from "../assets";
+import { AppendageType } from "../body/appendage";
+import { Color } from "../body/color";
+import { Race } from "../body/race";
+import { Entity } from "../entity";
+import { TF } from "../tf";
 
-let UruScenes = {};
+const UruScenes = {};
 
 export class Uru extends Entity {
-	constructor(storage? : any) {
+	constructor(storage?: any) {
 		super();
 
 		this.ID = "uru";
-		
+
 		// Character stats
 		this.name = "Uru";
-		
+
 		this.avatar.combat = Images.uru1;
-		
+
 		this.maxHp.base        = 6000;
 		this.maxSp.base        = 1500;
 		this.maxLust.base      = 500;
@@ -34,11 +34,11 @@ export class Uru extends Entity {
 		this.spirit.base       = 500;
 		this.libido.base       = 300;
 		this.charisma.base     = 100;
-		
+
 		this.level = 50;
 		this.sexlevel = 50;
 		this.SetExpToLevel();
-		
+
 		this.body.DefHerm(false);
 		this.FirstBreastRow().size.base = 16;
 		this.Butt().buttSize.base = 9;
@@ -48,48 +48,47 @@ export class Uru extends Entity {
 		this.body.SetBodyColor(Color.red);
 		this.body.SetHairColor(Color.black);
 		this.body.SetEyeColor(Color.orange);
-		
+
 		TF.SetAppendage(this.Back(), AppendageType.tail, Race.Demon, Color.red);
 		TF.SetAppendage(this.Appendages(), AppendageType.horn, Race.Demon, Color.black);
-		
+
 		this.FirstVag().virgin = false;
 		this.Butt().virgin = false;
-		
+
 		this.SetLevelBonus();
 		this.RestFull();
 
-		this.flags["Intro"] = 0;
+		this.flags.Intro = 0;
 
-		if(storage) this.FromStorage(storage);
+		if (storage) { this.FromStorage(storage); }
 	}
-		
-	FromStorage(storage : any) {
+
+	public FromStorage(storage: any) {
 		this.LoadPersonalityStats(storage);
-		
+
 		// Load flags
 		this.LoadFlags(storage);
 	}
 
-	ToStorage() {
-		let storage = {};
-		
+	public ToStorage() {
+		const storage = {};
+
 		this.SavePersonalityStats(storage);
-		
+
 		this.SaveFlags(storage);
-		
+
 		return storage;
 	}
 
-
 	// Schedule
-	IsAtLocation(location? : any) {
+	public IsAtLocation(location?: any) {
 		return true;
 	}
 
 }
 
 // Flags
-let UruFlags =  {
+const UruFlags =  {
 	Intro : {
 		LostToImps         : 1,
 		ToldUruAboutMirror : 2,

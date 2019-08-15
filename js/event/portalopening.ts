@@ -1,19 +1,19 @@
-import { Text } from "../text";
 import { Gui } from "../gui";
+import { Text } from "../text";
 
-let PortalOpeningScenes : any = {};
+const PortalOpeningScenes: any = {};
 
 PortalOpeningScenes.Intro = function() {
-	let parse : any = {
-		
+	const parse: any = {
+
 	};
-	
-	//TODO
+
+	// TODO
 	Text.Clear();
-	Text.Add("THIS IS THE END OF CURRENT MAIN STORY CONTENT, COME BACK LATER.", parse, 'bold');
+	Text.Add("THIS IS THE END OF CURRENT MAIN STORY CONTENT, COME BACK LATER.", parse, "bold");
 	Text.Flush();
-	
+
 	Gui.NextPrompt();
-}
+};
 
 export { PortalOpeningScenes };

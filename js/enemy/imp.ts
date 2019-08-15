@@ -55,11 +55,9 @@ export class Imp extends Entity {
 		const col = Math.random();
 		if (col < 0.3) {
 			this.body.SetBodyColor(Color.red);
-		}
-		else if (col < 0.7) {
+		} else if (col < 0.7) {
 			this.body.SetBodyColor(Color.gray);
- }
-		else {
+ } else {
 			this.body.SetBodyColor(Color.green);
  }
 

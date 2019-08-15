@@ -1,9 +1,9 @@
-let Room69Flags = {
+const Room69Flags = {
     RelFlags : {
         NotMet    : 0,
         BrokeDoor : 1,
         BadTerms  : 2,
-        GoodTerms : 3
+        GoodTerms : 3,
     },
 
     HingesFlags : {
@@ -12,8 +12,8 @@ let Room69Flags = {
         TalkedToGoldsmith : 2,
         TalkedToSmith     : 3,
         HaveHinges        : 4,
-        Delivered         : 5
+        Delivered         : 5,
     },
-}
+};
 
 export { Room69Flags };

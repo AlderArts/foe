@@ -1,4 +1,4 @@
-let KiakaiFlags = {
+const KiakaiFlags = {
     Attitude : {
         Slave   : -3,
         Dom     : -2,
@@ -8,7 +8,7 @@ let KiakaiFlags = {
         Friend  : 2,
         Lover   : 3,
     },
-    
+
     SexFirstAttitude : {
         Passive   : 1,
         Mutual    : 2,

@@ -51,30 +51,24 @@ export class Footman extends Entity {
 		const col = Math.random();
 		if (col < 0.6) {
 			this.body.SetBodyColor(Color.white);
-		}
-		else if (col < 0.7) {
+		} else if (col < 0.7) {
 			this.body.SetBodyColor(Color.light);
- }
-		else if (col < 0.8) {
+		} else if (col < 0.8) {
 			this.body.SetBodyColor(Color.dark);
- }
-		else if (col < 0.9) {
+		} else if (col < 0.9) {
 			this.body.SetBodyColor(Color.olive);
- }
-		else {
+		} else {
 			this.body.SetBodyColor(Color.black);
- }
+		}
 
 		const hairCol = Math.random();
 		if (hairCol < 0.4) {
 			this.body.SetHairColor(Color.black);
-		}
-		else if (hairCol < 0.7) {
+		} else if (hairCol < 0.7) {
 			this.body.SetHairColor(Color.brown);
- }
-		else {
+		} else {
 			this.body.SetHairColor(Color.blonde);
- }
+		}
 
 		this.body.SetEyeColor(Rand(Color.numColors));
 
@@ -115,22 +109,19 @@ export class Footman extends Entity {
 		const t = this.GetSingleTarget(encounter, activeChar);
 
 		const parseVars = {
-			name   : this.name,
 			hisher : this.hisher(),
+			name   : this.name,
 			tName  : t.name,
 		};
 
 		const choice = Math.random();
 		if (choice < 0.4 && Abilities.Physical.DAttack.enabledCondition(encounter, this)) {
 			Abilities.Physical.Attack.CastInternal(encounter, this, t);
-		}
-		else if (choice < 0.6 && Abilities.Physical.CrushingStrike.enabledCondition(encounter, this)) {
+		} else if (choice < 0.6 && Abilities.Physical.CrushingStrike.enabledCondition(encounter, this)) {
 			Abilities.Physical.CrushingStrike.CastInternal(encounter, this, t);
- }
-		else if (choice < 0.8 && Abilities.Physical.Pierce.enabledCondition(encounter, this)) {
+ } else if (choice < 0.8 && Abilities.Physical.Pierce.enabledCondition(encounter, this)) {
 			Abilities.Physical.Pierce.CastInternal(encounter, this, t);
- }
-		else {
+ } else {
 			Abilities.Attack.CastInternal(encounter, this, t);
  }
 	}

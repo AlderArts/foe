@@ -1,31 +1,31 @@
-import { Text } from "../text";
-import { Gui } from "../gui";
-import { TimeStep, WORLD, GAME, MoveToLocation } from "../GAME";
-import { GwendyFlags } from "../event/farm/gwendy-flags";
-import { SetGameState, GameState } from "../gamestate";
-import { Encounter } from "../combat";
-import { Party } from "../party";
-import { Bandit } from "../enemy/bandit";
 import { Gender } from "../body/gender";
+import { Encounter } from "../combat";
+import { Bandit } from "../enemy/bandit";
+import { GwendyFlags } from "../event/farm/gwendy-flags";
 import { MirandaFlags } from "../event/miranda-flags";
+import { GAME, MoveToLocation, TimeStep, WORLD } from "../GAME";
+import { GameState, SetGameState } from "../gamestate";
+import { Gui } from "../gui";
+import { Party } from "../party";
+import { Text } from "../text";
 
-let GwendyScenes : any;
-export function InitMarket(gScenes : any) {
+let GwendyScenes: any;
+export function InitMarket(gScenes: any) {
     GwendyScenes = gScenes;
 }
 
 export namespace MarketScenes {
 
-    export function GoToMarketFirst(backfunc : any) {
-        let player = GAME().player;
-        let party : Party = GAME().party;
-        let gwendy = GAME().gwendy;
+    export function GoToMarketFirst(backfunc: any) {
+        const player = GAME().player;
+        const party: Party = GAME().party;
+        const gwendy = GAME().gwendy;
 
-        let parse : any = {
-            playername : player.name
+        const parse: any = {
+            playername : player.name,
         };
 
-        gwendy.flags["Market"] = GwendyFlags.Market.GoneToMarket;
+        gwendy.flags.Market = GwendyFlags.Market.GoneToMarket;
 
         Text.Clear();
         Text.Add("Gwendy sighs, clearly she hoped to change your mind about visiting the city. <i>“Oh, all right. I suppose I need to make my run anyway, and having someone I trust tag along might even make this trip bearable,”</i> she smiles resigned. <i>“Alrighty then, we’re going today. I’ll need you to help me load my cart though. I hope you don’t mind some heavy lifting,”</i> she tells you.", parse);
@@ -38,11 +38,11 @@ export namespace MarketScenes {
         Text.NL();
         Text.Add("<i>“Looks like that’ll be all,”</i> the buxom farmer affirms, after a final check. <i>“Ready to go?”</i> she asks you with a smile.", parse);
         Text.NL();
-        if(party.Num() > 1) {
-            let p1 = party.Get(1);
-            parse["comp"]  = party.Num() > 2 ? "your companions" : p1.name;
-            parse["HeShe"] = party.Num() > 2 ? "they" : p1.HeShe();
-            parse["notS"]  = party.Num() > 2 ? "" : "s";
+        if (party.Num() > 1) {
+            const p1 = party.Get(1);
+            parse.comp  = party.Num() > 2 ? "your companions" : p1.name;
+            parse.HeShe = party.Num() > 2 ? "they" : p1.HeShe();
+            parse.notS  = party.Num() > 2 ? "" : "s";
             Text.Add("Before going, you instruct [comp] to take care of the farm while you two are away. [HeShe] nod[notS] in understanding and bid you a safe journey. You promise you’ll be back soon.", parse);
             Text.NL();
         }
@@ -56,9 +56,8 @@ export namespace MarketScenes {
         Text.NL();
         Text.Add("You stand ready, just in case. Off in the distance, you hear the sound of hooves, though they don’t see to be getting closer. Instead, they stop after some time.", parse);
         Text.NL();
-        parse["wepDesc"] = player.WeaponDesc();
+        parse.wepDesc = player.WeaponDesc();
         Text.Add("<i>“You better be ready, [playername]. I think we’re walking straight into an ambush,”</i> she says, slowing down as she prepares for the worst. You grip your [wepDesc] tightly as you feel the tension building up.", parse);
-
 
         party.SaveActiveParty();
         party.ClearActiveParty();
@@ -68,7 +67,7 @@ export namespace MarketScenes {
         gwendy.RestFull();
 
         party.location = WORLD().loc.Plains.Crossroads;
-        TimeStep({hour:2});
+        TimeStep({hour: 2});
         Text.Flush();
 
         Gui.NextPrompt(function() {
@@ -90,12 +89,12 @@ export namespace MarketScenes {
             Text.Add("<i>“You guys take care of that one, Gwendy is mine,”</i> the leader growls a short order, pulling his blade.", parse);
             Text.Flush();
 
-            let enemy = new Party();
+            const enemy = new Party();
             enemy.AddMember(new Bandit(Gender.male));
             enemy.AddMember(new Bandit(Gender.male));
             enemy.AddMember(new Bandit(Gender.male));
             enemy.AddMember(new Bandit(Gender.female));
-            let enc = new Encounter(enemy);
+            const enc = new Encounter(enemy);
 
             enc.onVictory   = function() {
                 SetGameState(GameState.Event, Gui);
@@ -150,7 +149,7 @@ export namespace MarketScenes {
                 Text.NL();
                 Text.Add("<i>“Like hell I wi-”</i> Gwendy’s angry response is cut of by a sharp slap.", parse);
                 Text.NL();
-                parse["hisher"] = player.mfFem("his", "her");
+                parse.hisher = player.mfFem("his", "her");
                 Text.Add("<i>“Listen closely now,”</i> The bandit hisses. <i>“You are going to suck my cock until I cum. You are going to drink it all down. If I feel even a nibble of teeth, your friend gets [hisher] throat slit. Got it?”</i>", parse);
                 Text.NL();
                 Text.Add("The woman holding you down rolls her eyes. <i>“Can you stop thinking with your cock for one fucking second?”</i> She gestures to the other two, who are returning from the back of the cart. <i>“Our job here is done, let's get out of here.”</i>", parse);
@@ -178,14 +177,14 @@ export namespace MarketScenes {
         });
     }
 
-    export function GoToMarketFirstAfterBandits(won : boolean) {
-        let player = GAME().player;
-        let party : Party = GAME().party;
-        let rigard = GAME().rigard;
-        let miranda = GAME().miranda;
+    export function GoToMarketFirstAfterBandits(won: boolean) {
+        const player = GAME().player;
+        const party: Party = GAME().party;
+        const rigard = GAME().rigard;
+        const miranda = GAME().miranda;
 
-        let parse : any = {
-            playername : player.name
+        const parse: any = {
+            playername : player.name,
         };
 
         party.location = WORLD().loc.Plains.Gate;
@@ -203,10 +202,9 @@ export namespace MarketScenes {
         Text.NL();
         Text.Add("Finally coming to the capital’s main gates, the two of you are halted by a pair of bored-looking guards leaning on their halberds as they wait for visitors. They speak with a flat and dull voice, greeting you in an unenthusiastic manner, as they ask for your papers.", parse);
         Text.NL();
-        if(rigard.Visa()) {
+        if (rigard.Visa()) {
             Text.Add("Both you and Gwendy pull the papers out and let the guards inspect them. They hand them back with lackluster approval, but let you in nonetheless.", parse);
-        }
-        else {
+        } else {
             Text.Add("Gwendy holds her papers out for the guards, which they approve rather quickly. When they ask you for yours, Gwendy explains to them that you’re a farm hand that came to accompany her for her business today. ", parse);
             Text.NL();
             Text.Add("She also tells them you’ll get a visa as soon as you have finished in the market district, which seems to work as the guards shrug their shoulders and let you pass. You murmur a thank you, but she waves it off.", parse);
@@ -214,14 +212,13 @@ export namespace MarketScenes {
             Text.Add("<i>“I already told you, I’ll cover for you. You’re just going to have to pay me back is all.”</i> That last part makes you feel a bit nervous, but what’s done is done.", parse);
         }
 
-        if(!party.InParty(miranda)) {
+        if (!party.InParty(miranda)) {
             Text.NL();
             Text.Add("<i>“Hold a minute,”</i> a familiar voice calls out behind you. Gwendy freezes up as Miranda the guardswoman approaches, her look turning from rebellious to incredulous when the dog-morph ignores her and walks up to you. <i>“Thought I recognized you, luv,”</i> she grins up at you.", parse);
             Text.NL();
-            if(miranda.flags["Met"] >= MirandaFlags.Met.TavernAftermath) {
+            if (miranda.flags.Met >= MirandaFlags.Met.TavernAftermath) {
                 Text.Add("<i>“Why, [playername], back for more already?”</i> the guardswoman jests. <i>“You know where to find me - I’ve got a special gift waiting, just for you.”</i> The last proposal is delivered with a sultry wink, the faint bulge beneath her tight leather armor giving you an idea about just what kind of gift she is alluding to. She briefly inspects Gwendy, summarily dismissing her. <i>“Don’t bother bringing the hussy tho. Not my type.”</i>", parse);
-            }
-            else {
+            } else {
                 Text.Add("<i>“I see you took my advice and scoured the farms for someone to help you in, [playername],”</i> Miranda nods, giving Gwendy a brief glance. <i>“Didn’t know you had a thing for blonde bimbos.”</i>", parse);
             }
             Text.NL();
@@ -240,22 +237,23 @@ export namespace MarketScenes {
 
         Gui.NextPrompt(function() {
             Text.Clear();
-            parse["bumpkin"] = rigard.Access() ? ", looking around left and right in wonder at the sheer size of the city and the variety of its inhabitants" : "";
+            parse.bumpkin = rigard.Access() ? ", looking around left and right in wonder at the sheer size of the city and the variety of its inhabitants" : "";
             Text.Add("You make your way inside the capital without further incident[bumpkin]. Gwendy takes a left, heading down a broad, bustling road, slowly weaving her way past the crowds. Eventually, the two of you reach the market district. The houses here look richer than the ones near the gates, and there is a greater number of shops and restaurants. The closer to the market you get, the more street vendors you see lining the sides of the road.", parse);
             Text.NL();
             Text.Add("Your cart pulls into a large square, packed with merchant stalls and bustling with activity. Gwendy skillfully navigates the masses and pulls into an empty lot, hopping down and gesturing you to join her at the back.", parse);
             Text.NL();
-            if(won)
+            if (won) {
                 Text.Add("<i>“Those bandits cost us some precious time,”</i> the farm girl tells you, instructing you to unload the wares and place them in front of the cart. <i>“We’ll just have to make up for it in presentation. I intend to leave here with my pockets filled and my baskets empty.”</i>", parse);
-            else
+            } else {
                 Text.Add("<i>“Well, this sucks,”</i> Gwendy sighs, surveying the wares still left. <i>“This is going to take a whole lot of convincing to get rid of, and even if we manage to sell it all, we’ll still leave with light pockets. Let’s just make the best we can of the situation.”</i>", parse);
+            }
             Text.NL();
 
-            let haul = {
+            const haul = {
                 quantity : 1,
                 quality  : 0.5,
                 badenc   : "bandits",
-                enclost  : !won
+                enclost  : !won,
             };
 
             MarketScenes.Market(haul, MarketScenes.GoToMarketFirstFinale);
@@ -271,99 +269,100 @@ export namespace MarketScenes {
     *  enclost
     * }
     */
-    export function Market(haul : any, next : any) {
-        let player = GAME().player;
-        let party : Party = GAME().party;
-        let gwendy = GAME().gwendy;
-        let farm = GAME().farm;
+    export function Market(haul: any, next: any) {
+        const player = GAME().player;
+        const party: Party = GAME().party;
+        const gwendy = GAME().gwendy;
+        const farm = GAME().farm;
 
-        let parse : any = {
+        const parse: any = {
             playername : player.name,
             enemy      : haul.badenc,
-            ear        : function() { return player.EarDesc(); }
+            ear() { return player.EarDesc(); },
         };
 
-        let humanity = player.Humanity();
+        const humanity = player.Humanity();
 
         party.location = WORLD().loc.Rigard.ShopStreet.Street;
         let score = 0;
 
         Text.Add("<i>“Alright, [playername]. Put on your best smile and let’s get this gig started,”</i> Gwendy declares with a smile of her own. ", parse);
-        if(haul.badenc)
+        if (haul.badenc) {
             Text.Add("Despite the earlier events of the day, Gwendy is just as enthusiastic as she’d be in any other day. ", parse);
+        }
         Text.Add("Encouraged by her cheerful attitude, you join her in shouting to get the attention of the masses.", parse);
         Text.NL();
 
-        let chacheck = player.Cha() + (20 * humanity) + Math.random() * 20;
-        if(chacheck < 40) {
+        const chacheck = player.Cha() + (20 * humanity) + Math.random() * 20;
+        if (chacheck < 40) {
             Text.Add("Unfortunately, your best efforts aren't good enough. Your statements lack any conviction, your presentation is awful, and you frankly insult more than one person, which only furthers their reluctance to approach the cart and start dealing with you.", parse);
-            if(humanity < 0.95)
+            if (humanity < 0.95) {
                 Text.Add(" It doesn't help matters that you see humans casting blatantly disdainful looks at your inhuman features.", parse);
-        }
-        else if(chacheck < 70) {
+            }
+        } else if (chacheck < 70) {
             Text.Add("You don't do too badly. You make some efforts at presentation, assuring those who are passing by of the good quality of your wares, keeping a polite tone and drawing a small, steady stream of customers to check out your wares.", parse);
-            if(humanity < 0.95)
+            if (humanity < 0.95) {
                 Text.Add(" Though a lot of the more uppity customers cast suspicious looks at your inhuman features, a small number of them still decide to approach you, no matter their personal prejudices.", parse);
+            }
             score += 1;
-        }
-        else if(chacheck < 100) {
+        } else if (chacheck < 100) {
             Text.Add("Your efforts are very effective, if you do say so yourself. With a stream of witty dialogue and well-aimed compliments, back by elaborate assurances of the quality and bargain prices of your wares, you have a steady flow of customers coming to check you out.", parse);
-            if(humanity < 0.95)
+            if (humanity < 0.95) {
                 Text.Add(" Your inhuman features do attract some discriminating stares, there's no denying that. But so eloquent is your presentation that far more eventually swallow their prejudice and approach then staunchly refuse to have any dealings with you.", parse);
+            }
 
             score += 2;
-        }
-        else {
+        } else {
             Text.Add("You were born to be a salesman. People actually switch over from Gwendy's line to instead talk to you, so attractive is your presentation. You keep up a steady stream of compliments, wits and charm, offer assurances and well-aimed ‘free samples’, and otherwise have the crowd eating out of your hand.", parse);
-            if(humanity < 0.95)
+            if (humanity < 0.95) {
                 Text.Add(" Even the prejudice against non-humans doesn't keep your customers away, your charms so extensive that everyone swallows their pride to see what you have to offer.", parse);
+            }
             score += 3;
         }
         Text.NL();
 
-        let intcheck = player.Int() + (20 * humanity) + Math.random() * 20;
+        const intcheck = player.Int() + (20 * humanity) + Math.random() * 20;
 
-        if(intcheck < 40) {
+        if (intcheck < 40) {
             Text.Add("You find yourself struggling to handle yourself in the resulting haggling sessions. In the end, you're lucky to make even, never mind making a profit! You can't bring yourself to look at Gwendy, but you can feel her disappointment all the same.", parse);
-            if(humanity < 0.95)
+            if (humanity < 0.95) {
                 Text.Add(" You hear more than a few prejudiced customers snickering to themselves about ‘stupid morphs’, further confirming your suspicions that you were duped out of receiving fair price for your wares.", parse);
-        }
-        else if(intcheck < 70) {
+            }
+        } else if (intcheck < 70) {
             Text.Add("Try as your customers might, you are no fool, and you find yourself making a nice little profit on the side in exchange for your wares. A glimpse out of the corner of your eye reveals Gwendy giving you a casual nod of approval for your efforts.", parse);
-            if(humanity < 0.95)
+            if (humanity < 0.95) {
                 Text.Add(" You can hear grumbles about losing their cash to a morph from some of the more prejudiced customers, as well as the occasional gloating when such an individual gets the better of you.", parse);
+            }
             score += 1;
-        }
-        else if(intcheck < 100) {
+        } else if (intcheck < 100) {
             Text.Add("Your expertise at spotting a bargain or a bartering tell means you are able to outwit most of your customers and ensure they end up paying the price you ask, or close to it, at least. A very tidy profit is the end result of your sales. Whenever you glance in Gwendy's direction, she's smiling happily at the results of your sales pitching.", parse);
-            if(humanity < 0.95)
+            if (humanity < 0.95) {
                 Text.Add(" The grumblings of angry bigots echo in your [ear]s as you repeatedly best them.", parse);
+            }
             score += 2;
-        }
-        else {
+        } else {
             Text.Add("You pounce on every tell, gauge every reaction to the prices you're asking, and always walk away from a deal with a hefty profit. On the fly, you make up fictitious promotions and flash sales, maximizing your profits whilst at the same time keeping your customers from getting too disgruntled. It's amazing how many people walk away happily, thinking they have a bargain, when in reality you're the one who's got the better deal. Gwendy herself watches you out of the corner of her eye, amazed at how well you're doing - better than she is, even.", parse);
-            if(humanity < 0.95)
+            if (humanity < 0.95) {
                 Text.Add(" Though there's still some grumbling from the bigots about your success, the promotions and sales you offer keep feathers smoothed so successfully that nobody really objects to you, no matter how prejudiced.", parse);
+            }
             score += 3;
         }
         Text.NL();
         Text.Add("Eventually, your goods are all sold off and it's time for Gwendy to close her stall and call it a day. You help her with the final cleanup, and then join her in counting out the day's profits.", parse);
-        if(haul.enclost) {
+        if (haul.enclost) {
             Text.Add(" No matter how good your efforts, you can only do so well with the tattered remains of the original haul. Once again, you curse the [enemy] for ruining your chances of success.", parse);
             score /= 2;
         }
         Text.NL();
-        if(score < 1) {
+        if (score < 1) {
             Text.Add("It's obvious from a casual glance that there's not a lot of money here. Gwendy looks at the paltry sum you’ve made and sighs. <i>“Well, I suppose it could’ve been worse. At least we got enough to pay for replacements.”</i> She pockets the coins, handing you a few. <i>“Here’s your cut, thanks for the help,”</i> she says patting you on the shoulder.", parse);
             Text.NL();
             Text.Add("You can’t shake the feeling that you’ve let her down though...", parse);
-        }
-        else if(score < 3) {
+        } else if (score < 3) {
             Text.Add("The sum of cash the two of you eventually count out is quite a decent one. Gwendy looks pleased with the outcome. <i>“Not bad!”</i> she declares happily. <i>“We can buy replacements and even made some profit. Thanks a lot of the help, [playername],”</i> she says, counting a few coins and handing them over. <i>“Here’s your cut,”</i> she says, smiling.", parse);
             Text.NL();
             Text.Add("You accept the offered coins while she pockets the rest.", parse);
-        }
-        else if(score < 5) {
+        } else if (score < 5) {
             Text.Add("It doesn't take you long to realize you've more than achieved a basic profit from today's dealings. Gwendy smiles happily. <i>“Now this is what I call a successful run, [playername],”</i> she declares, procuring a bag to stash all the gold. <i>“And it was all thanks to you!”</i> she adds.", parse);
             Text.NL();
             Text.Add("You thank her for her kind words, accepting the praise with your usual modesty.", parse);
@@ -371,18 +370,18 @@ export namespace MarketScenes {
             Text.Add("She stacks the gold neatly in a few piles, separating a couple and pushing it toward you. <i>“Your cut, partner!”</i> she grins, bagging the rest.", parse);
             Text.NL();
             Text.Add("You accept the coins from her graciously, adding them to your purse. A very nice sum indeed.", parse);
-        }
-        else {
+        } else {
             Text.Add("The day's profits are staggering; the two of you made more money than Gwendy could in three regular runs by herself.", parse);
             Text.NL();
             Text.Add("<i>“Wow… Someone’s got quite the silver tongue, pulling all those customers to our stall,”</i> Gwendy remarks sidling up to gently bump your hips with the side of hers. Your body rocks slightly at the impact, and you twist around to look her in the eyes, smiling in pride as you do so.", parse);
             Text.NL();
             Text.Add("<i>“I think this calls for a celebration,”</i> she says, tracing a finger around your collarbone. Before you can formulate a reply, she pulls you into a deep kiss, tongue pushing and twisting against your own.", parse);
             Text.NL();
-            if(player.SubDom() - gwendy.SubDom() > 0)
+            if (player.SubDom() - gwendy.SubDom() > 0) {
                 Text.Add("You waste no time in hungrily pulling her to you, rapaciously consuming her lips in return even as your tongue wrestles hers into submission.", parse);
-            else
+            } else {
                 Text.Add("Eagerly, you surrender yourself to her, allowing her to molest your mouth with her tongue, moaning softly in pleasure at her ministrations.", parse);
+            }
             Text.Add(" Breaking the kiss, she giggles.", parse);
             Text.NL();
             Text.Add("<i>“Good to see that silvery tongue of yours isn’t just good for talking,”</i> she bats her eyes flirtatiously. <i>“But let’s save the celebration for later; right now, help me bag all this gold. You can keep that mound as your cut.”</i> She points to a nearby pile of gold. <i>“I’m really glad you came along, [playername].”</i>", parse);
@@ -397,14 +396,15 @@ export namespace MarketScenes {
         haul.quantity = haul.quantity || 0;
         haul.quality  = haul.quality || 0;
         let produce = haul.quantity * haul.quality;
-        if(haul.enclost)
-            produce *= (1-(Math.random() * 0.5));
-        let total = Math.floor(produce * (1+score) * 5000);
-        let coin  = Math.floor(Math.min(total * 0.1, 300));
-        let gcoin = Math.floor(total - coin);
+        if (haul.enclost) {
+            produce *= (1 - (Math.random() * 0.5));
+        }
+        const total = Math.floor(produce * (1 + score) * 5000);
+        const coin  = Math.floor(Math.min(total * 0.1, 300));
+        const gcoin = Math.floor(total - coin);
 
-        parse["gcoin"] = gcoin;
-        parse["coin"]  = coin;
+        parse.gcoin = gcoin;
+        parse.coin  = coin;
 
         Text.Add("<b>Gwendy gains [gcoin] coins for the farm!</b>", parse);
         Text.NL();
@@ -420,17 +420,17 @@ export namespace MarketScenes {
     }
 
     export function GoToMarketFirstFinale() {
-        let player = GAME().player;
-        let party : Party = GAME().party;
-        let gwendy = GAME().gwendy;
-        let rigard = GAME().rigard;
+        const player = GAME().player;
+        const party: Party = GAME().party;
+        const gwendy = GAME().gwendy;
+        const rigard = GAME().rigard;
 
-        let parse : any = {
-            playername : player.name
+        const parse: any = {
+            playername : player.name,
         };
 
         Text.Clear();
-        if(!rigard.Visa()) {
+        if (!rigard.Visa()) {
             Text.Add("<i>“Oh, right, I promised I would get you a pass!”</i> Gwendy says, hopping off the cart and waving for you to follow her. <i>“This town has a thing for bureaucracy, and if you want to enter - not that I know why you would - you have to have the proper papers.”</i>", parse);
             Text.NL();
             Text.Add("She leads you to a booth on the outskirts of the merchant’s district, manned by a fussy administrator. Gwendy helps you fill out the necessary paperwork, signing the application and showing her own visa in order to vouch for you. The official takes his time looking through the documents, eventually accepting them and writing out your visa.", parse);
@@ -440,7 +440,7 @@ export namespace MarketScenes {
             Text.Add("<i>“With this, you can enter and exit the city on your own any time you want,”</i> Gwendy explains. <i>“Given the gates are open, that is.”</i> The two of you make your way back to the empty cart, and prepare to leave.", parse);
             Text.NL();
 
-            rigard.flags["Visa"] = 1;
+            rigard.flags.Visa = 1;
 
             TimeStep({minute: 30});
         }
@@ -459,10 +459,10 @@ export namespace MarketScenes {
 
         gwendy.relation.IncreaseStat(100, 5);
 
-        //[Sleep][Decline]
-        let options = new Array();
+        // [Sleep][Decline]
+        const options = new Array();
         options.push({ nameStr : "Sleep",
-            func : function() {
+            func() {
                 Text.Clear();
                 Text.Add("<i>“Thanks,”</i> she whispers, giving you a peck on the cheek. You follow closely behind the beautiful farmer, climbing up the ladder to the loft. You have quite the nice view as you make your way up, Gwendy’s well-shaped ass wiggling invitingly just above you. There is an awkward silence as you reach the ledge. The farm girl eyes the bed suggestively.", parse);
                 Text.NL();
@@ -473,24 +473,24 @@ export namespace MarketScenes {
 
                 GwendyScenes.LoftSexPrompt();
             }, enabled : true,
-            tooltip : "Join her in the loft."
+            tooltip : "Join her in the loft.",
         });
         options.push({ nameStr : "Decline",
-            func : function() {
+            func() {
                 Text.Clear();
                 Text.Add("<i>“It’s alright, I understand,”</i> Gwendy says, though she looks a bit lonely. <i>“See you around, I suppose?”</i> You nod, promising you’ll return later.", parse);
-                if(party.Num() > 1) {
+                if (party.Num() > 1) {
                     Text.NL();
-                    let p1 = party.Get(1);
-                    parse["comp"] = party.Num() > 2 ? "your companions" : p1.name;
-                    parse["himher"] = party.Num() > 2 ? "them" : p1.himher();
+                    const p1 = party.Get(1);
+                    parse.comp = party.Num() > 2 ? "your companions" : p1.name;
+                    parse.himher = party.Num() > 2 ? "them" : p1.himher();
                     Text.Add("You call for [comp], telling [himher] that it is time for you to leave. As you walk, you explain the events of the day to [himher].", parse);
                 }
                 Text.Flush();
 
                 MoveToLocation(WORLD().loc.Plains.Crossroads, {minute: 30});
             }, enabled : true,
-            tooltip : "Thank her for the offer, but you have other things to do."
+            tooltip : "Thank her for the offer, but you have other things to do.",
         });
         Gui.SetButtonsFromList(options);
     }

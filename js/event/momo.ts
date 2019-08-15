@@ -1,39 +1,38 @@
 /*
- * 
+ *
  * Define Momo
- * 
+ *
  */
 
-import { Entity } from '../entity';
-import { EncounterTable } from '../encountertable';
-import { MoveToLocation, GAME, WORLD, TimeStep } from '../GAME';
-import { Gender } from '../body/gender';
-import { Images } from '../assets';
-import { Time } from '../time';
-import { Race } from '../body/race';
-import { WorldTime } from '../GAME';
-import { Text } from '../text';
-import { Gui } from '../gui';
-import { MomoFlags } from './momo-flags';
-import { Party } from '../party';
-import { Status } from '../statuseffect';
+import { Images } from "../assets";
+import { Gender } from "../body/gender";
+import { Race } from "../body/race";
+import { EncounterTable } from "../encountertable";
+import { Entity } from "../entity";
+import { GAME, MoveToLocation, TimeStep, WORLD } from "../GAME";
+import { WorldTime } from "../GAME";
+import { Gui } from "../gui";
+import { Party } from "../party";
+import { Status } from "../statuseffect";
+import { Text } from "../text";
+import { Time } from "../time";
+import { MomoFlags } from "./momo-flags";
 
-let MomoScenes : any = {};
-
+const MomoScenes: any = {};
 
 export class Momo extends Entity {
-	wanderTimer : Time;
+	public wanderTimer: Time;
 
-	constructor(storage? : any) {
+	constructor(storage?: any) {
 		super();
 
 		this.ID = "momo";
-		
+
 		// Character stats
 		this.name = "Momo";
-		
+
 		this.avatar.combat = Images.momo;
-		
+
 		// TODO Stats
 		this.maxHp.base        = 30;
 		this.maxSp.base        = 40;
@@ -46,107 +45,107 @@ export class Momo extends Entity {
 		this.spirit.base       = 19;
 		this.libido.base       = 18;
 		this.charisma.base     = 16;
-		
+
 		this.level = 1;
 		this.sexlevel = 1;
-		
+
 		this.body.DefFemale();
 		this.FirstBreastRow().size.base = 12.5;
 		this.Butt().buttSize.base = 6;
 		this.body.SetRace(Race.Dragon);
-		
+
 		this.SetLevelBonus();
 		this.RestFull();
-		
-		this.flags["Met"]     = MomoFlags.Met.NotMet;
-		this.flags["tSelf"]   = 0;
-		this.flags["tFamily"] = 0;
-		this.flags["tCook"]   = MomoFlags.TalkCook.First;
-		this.flags["tSkills"] = 0;
-		
+
+		this.flags.Met     = MomoFlags.Met.NotMet;
+		this.flags.tSelf   = 0;
+		this.flags.tFamily = 0;
+		this.flags.tCook   = MomoFlags.TalkCook.First;
+		this.flags.tSkills = 0;
+
 		this.wanderTimer = new Time();
 
-		if(storage) this.FromStorage(storage);
+		if (storage) { this.FromStorage(storage); }
 	}
 
+	public Wandering() {
+		return this.flags.Met < MomoFlags.Met.CampFirst && this.wanderTimer.Expired();
+	}
+	public AtCamp() {
+		return this.flags.Met >= MomoFlags.Met.CampFirst && this.flags.Met <= MomoFlags.Met.Camp;
+	}
+	public Ascended() {
+		return this.flags.Met >= MomoFlags.Met.Ascended;
+	}
+	public IsFollower() {
+		return this.flags.Met >= MomoFlags.Met.Follower;
+	}
 
-	Wandering() {
-		return this.flags["Met"] < MomoFlags.Met.CampFirst && this.wanderTimer.Expired();
-	}
-	AtCamp() {
-		return this.flags["Met"] >= MomoFlags.Met.CampFirst && this.flags["Met"] <= MomoFlags.Met.Camp;
-	}
-	Ascended() {
-		return this.flags["Met"] >= MomoFlags.Met.Ascended;
-	}
-	IsFollower() {
-		return this.flags["Met"] >= MomoFlags.Met.Follower;
-	}
-	
-	Update(step : number) {
-		super.Update(step);		
+	public Update(step: number) {
+		super.Update(step);
 		this.wanderTimer.Dec(step);
 	}
-	
-	FromStorage(storage : any) {
+
+	public FromStorage(storage: any) {
 		this.LoadPersonalityStats(storage);
 		this.body.FromStorage(storage.body);
-		
+
 		// Load flags
 		this.LoadFlags(storage);
 		this.LoadSexFlags(storage);
-		
-		//TODO combat stats
-		
+
+		// TODO combat stats
+
 		this.wanderTimer.FromStorage(storage.wTime);
 	}
-	
-	ToStorage() {
-		let storage : any = {};
-		
+
+	public ToStorage() {
+		const storage: any = {};
+
 		this.SavePersonalityStats(storage);
 		this.SaveBodyPartial(storage, {ass: true, vag: true});
-		
+
 		this.SaveFlags(storage);
 		this.SaveSexFlags(storage);
-		
+
 		storage.wTime = this.wanderTimer.ToStorage();
-		
+
 		return storage;
 	}
-	
+
 	// Schedule
-	IsAtLocation(location? : any) {
+	public IsAtLocation(location?: any) {
 		location = location || GAME().party.location;
-		if(location == WORLD().loc.Plains.Nomads.Fireplace && this.AtCamp() && WorldTime().hour >= 4 && WorldTime().hour < 21) {
+		if (location == WORLD().loc.Plains.Nomads.Fireplace && this.AtCamp() && WorldTime().hour >= 4 && WorldTime().hour < 21) {
 			return true;
 		}
 		return false;
-	}	
+	}
 }
 MomoScenes.MomoEnc = function() {
-	let momo = GAME().momo;
-	if(momo.flags["Met"] == MomoFlags.Met.NotMet)
+	const momo = GAME().momo;
+	if (momo.flags.Met == MomoFlags.Met.NotMet) {
 		MomoScenes.FindingMomo();
-	else
+	} else {
 		MomoScenes.WanderingMomo();
-}
+	}
+};
 
 MomoScenes.FindingMomo = function() {
-	let player = GAME().player;
-	let party : Party = GAME().party;
-	let momo = GAME().momo;
-	let world = WORLD();
+	const player = GAME().player;
+	const party: Party = GAME().party;
+	const momo = GAME().momo;
+	const world = WORLD();
 
-	let parse : any = {
-		playername : player.name
+	const parse: any = {
+		playername : player.name,
 	};
-	
-	parse["area"] = party.location == world.loc.Forest.Outskirts ? "forest" :
+
+	parse.area = party.location == world.loc.Forest.Outskirts ? "forest" :
 	                party.location == world.loc.Desert.Drylands  ? "desert" :
 	                party.location == world.loc.Highlands.Hills  ? "highlands" :
 	                party.location == world.loc.Lake.Shore       ? "lake" : "plains";
-	
+
 	Text.Clear();
 	Text.Add("As you explore the [area], you come upon a curious sight. There appears to be a woman sitting down on the ground; she’s slumped over and hugging her knees. You can’t make out much detail at this time, but you do note that she seems to bear a reptilian tail and horns. You decide to approach.", parse);
 	Text.NL();
@@ -170,11 +169,11 @@ MomoScenes.FindingMomo = function() {
 	Text.NL();
 	Text.Add("...Why would a cook be here, of all places? You ask yourself, but nevermind. You should still figure out what to do with her.", parse);
 	Text.Flush();
-	
-	//[HelpHer][LeaveHer]
-	let options = new Array();
+
+	// [HelpHer][LeaveHer]
+	const options = new Array();
 	options.push({ nameStr : "Help her",
-		func : function() {
+		func() {
 			Text.Clear();
 			Text.Add("Seeing no reason not to aid her, you decide to show her to the Nomads’ camp. While you can’t really help her yourself, you’re pretty sure someone there will be able to.", parse);
 			Text.NL();
@@ -190,17 +189,17 @@ MomoScenes.FindingMomo = function() {
 			Text.NL();
 			Text.Add("With the beaming dragon-girl hot on your trail, you set about confidently, retracing your steps.", parse);
 			Text.Flush();
-			
-			momo.flags["Met"] = MomoFlags.Met.CampFirst;
-			
+
+			momo.flags.Met = MomoFlags.Met.CampFirst;
+
 			Gui.NextPrompt(function() {
 				MoveToLocation(world.loc.Plains.Nomads.Fireplace, {hour : 1});
 			});
 		}, enabled : true,
-		tooltip : "Take the strange woman back to the Nomads’ camp, she clearly needs the help."
+		tooltip : "Take the strange woman back to the Nomads’ camp, she clearly needs the help.",
 	});
 	options.push({ nameStr : "Leave her",
-		func : function() {
+		func() {
 			Text.Clear();
 			Text.Add("With a shake of your head, you tell her that she can forget it; she’s probably just trying to lead you into an ambush.", parse);
 			Text.NL();
@@ -214,36 +213,36 @@ MomoScenes.FindingMomo = function() {
 			Text.NL();
 			Text.Add("Shaking your head, you turn around and head back to the Nomads’ camp. You run into all kinds of lunatics out on the roads it looks like.", parse);
 			Text.Flush();
-			
-			momo.flags["Met"] = MomoFlags.Met.Wandering;
-			
+
+			momo.flags.Met = MomoFlags.Met.Wandering;
+
 			TimeStep({hour: 1});
-			
+
 			momo.wanderTimer = new Time(0, 0, 3, 0, 0);
-			
+
 			Gui.NextPrompt();
 		}, enabled : true,
-		tooltip : "You’re not going to trust some random stranger with the location of the Nomads’ camp."
+		tooltip : "You’re not going to trust some random stranger with the location of the Nomads’ camp.",
 	});
 	Gui.SetButtonsFromList(options, false, null);
-}
+};
 
 MomoScenes.WanderingMomo = function() {
-	let player = GAME().player;
-	let momo = GAME().momo;
+	const player = GAME().player;
+	const momo = GAME().momo;
 
-	let parse : any = {
-		playername : player.name
+	const parse: any = {
+		playername : player.name,
 	};
-	
+
 	Text.Clear();
 	Text.Add("Off in the distance, you spot a familiar blur. Upon closer inspection, you realize that it’s that dragon girl you met a while ago. Seems like she’s still lost…", parse);
 	Text.Flush();
-	
-	//[HelpHer][Leave]
-	let options = new Array();
+
+	// [HelpHer][Leave]
+	const options = new Array();
 	options.push({ nameStr : "Help her",
-		func : function() {
+		func() {
 			Text.Clear();
 			Text.Add("Heaving a sigh, you decide to approach her.", parse);
 			Text.NL();
@@ -267,43 +266,43 @@ MomoScenes.WanderingMomo = function() {
 			Text.NL();
 			Text.Add("With the beaming dragon-girl hot on your trail, you set about confidently, retracing your steps.", parse);
 			Text.Flush();
-			
-			momo.flags["Met"] = MomoFlags.Met.CampFirst;
-			
+
+			momo.flags.Met = MomoFlags.Met.CampFirst;
+
 			Gui.NextPrompt(function() {
 				MoveToLocation(WORLD().loc.Plains.Nomads.Fireplace, {hour : 1});
 			});
 		}, enabled : true,
-		tooltip : "Let your pity win over and help the girl."
+		tooltip : "Let your pity win over and help the girl.",
 	});
 	options.push({ nameStr : "Leave",
-		func : function() {
+		func() {
 			Text.Clear();
 			Text.Add("She mustn’t have noticed you yet, perfect. You’d rather avoid contact with her, so you walk away, leaving her to her own devices.", parse);
 			Text.Flush();
-			
+
 			TimeStep({minute: 10});
-			
+
 			momo.wanderTimer = new Time(0, 0, 3, 0, 0);
-			
+
 			Gui.NextPrompt();
 		}, enabled : true,
-		tooltip : "You’d best not get involved with her any further..."
+		tooltip : "You’d best not get involved with her any further...",
 	});
 	Gui.SetButtonsFromList(options, false, null);
-}
+};
 
 MomoScenes.Interact = function() {
-	let player = GAME().player;
-	let momo = GAME().momo;
+	const player = GAME().player;
+	const momo = GAME().momo;
 
-	let parse : any = {
-		playername : player.name
+	const parse: any = {
+		playername : player.name,
 	};
-	
+
 	Text.Clear();
-	if(momo.flags["Met"] <= MomoFlags.Met.CampFirst) {
-		momo.flags["Met"] = MomoFlags.Met.Camp;
+	if (momo.flags.Met <= MomoFlags.Met.CampFirst) {
+		momo.flags.Met = MomoFlags.Met.Camp;
 		Text.Add("<i>“Oh, come on! Where is it? Couldn’t just get up and walk away!”</i>", parse);
 		Text.NL();
 		Text.Add("As you approach the tent by the fire where Momo now lives, you hear the dragonette complaining about something. You see a great variety of pots, pans and other cooking implements scattered around the entry into the tent, whilst Momo herself is currently bent over rummaging through something in its interior. Her hips wriggle and twitch restlessly as she browses, making her ass jiggle quite nicely. The dragon-girl’s long, swaying tail above it draws your eyes to her shapely rump.", parse);
@@ -366,13 +365,12 @@ MomoScenes.Interact = function() {
 		Text.NL();
 		Text.Add("<i>“See you later, [playername]! Hmm... that smells pretty good; maybe I should have a bowl myself...”</i>", parse);
 		Text.Flush();
-		
+
 		TimeStep({hour: 1});
-		
+
 		Gui.NextPrompt();
-	}
-	else {
-		let scenes = new EncounterTable();
+	} else {
+		const scenes = new EncounterTable();
 		scenes.AddEnc(function() {
 			Text.Add("Momo is lounging on a spare blanket, laid out in an out-of-the-way patch of sunlight, basking in the sunlight like a great lizard. As she hears you approach, though, she sits up and rises to her feet, smiling as she does.", parse);
 		}, 1.0, function() { return true; });
@@ -383,13 +381,12 @@ MomoScenes.Interact = function() {
 			Text.Add("Momo is leisurely stirring some kind of stew in a pot hung low over the fire. It's evidently merely simmering, considering that she doesn't hesitate to place the spoon aside and move to join you.", parse);
 		}, 1.0, function() { return true; });
 		scenes.AddEnc(function() {
-			if(Math.random() < 0.5) {
-				parse["hisher"] = "his";
-				parse["himher"] = "him";
-			}
-			else {
-				parse["hisher"] = "her";
-				parse["himher"] = "her";
+			if (Math.random() < 0.5) {
+				parse.hisher = "his";
+				parse.himher = "him";
+			} else {
+				parse.hisher = "her";
+				parse.himher = "her";
 			}
 			Text.Add("One of the many residents of the camp is already there, chattering away with Momo - from what you overhear as you approach, they're discussing various recipes and cooking tips. Seeing you, the nomad finishes [hisher] discussion and leaves, Momo thanking [himher] before turning to greet you.", parse);
 		}, 1.0, function() { return true; });
@@ -399,45 +396,45 @@ MomoScenes.Interact = function() {
 		scenes.AddEnc(function() {
 			Text.Add("Momo has a huge, tattered-looking journal draped carefully over her knees and is busily scribbling through it. She glances aside at you, but doesn't stop what she's doing. <i>“Just a moment, please,”</i> she begs you, and you wait patiently as she finishes jotting down whatever she is writing, marks her place, and sets the book aside before standing up.", parse);
 		}, 1.0, function() { return true; });
-		
+
 		scenes.Get();
-		
+
 		Text.NL();
 		Text.Add("<i>“Well, hello there, [playername]! What can I do for you?”</i> she asks happily, a bright smile on her face.", parse);
 		Text.Flush();
-		
+
 		MomoScenes.Prompt();
 	}
-}
+};
 
-//TODO
+// TODO
 MomoScenes.Prompt = function() {
-	let player = GAME().player;
-	let parse : any = {
-		playername : player.name
+	const player = GAME().player;
+	const parse: any = {
+		playername : player.name,
 	};
-	
-	//[Talk] [Cook] [Flirt]
-	let options = new Array();
+
+	// [Talk] [Cook] [Flirt]
+	const options = new Array();
 	options.push({ nameStr : "Talk",
-		func : function() {
+		func() {
 			Text.Clear();
 			Text.Add(" <i>“You'd like to talk?”</i> Momo repeats, furrowing her brow curiously at the notion. When you nod your head, she beams in delight.  <i>“Why, certainly! I'd love to talk, [playername] - what's on your mind?”</i>", parse);
 			Text.Flush();
-			
+
 			MomoScenes.TalkPrompt();
 		}, enabled : true,
-		tooltip : "Why not talk with Momo for a while?"
+		tooltip : "Why not talk with Momo for a while?",
 	});
 	options.push({ nameStr : "Cook",
-		func : function() {
+		func() {
 			Text.Clear();
 			Text.Add("<i>“You want me to cook you something? Why, sure! Be happy to!”</i> she smiles proudly. <i>“Anything in particular you wanted to eat? Something nice and tasty, to give you a recharge? Or perhaps you want me to do a little gastronomic magic?”</i> she suggests with a mischievous grin.", parse);
 			Text.Flush();
-			
+
 			MomoScenes.CookPrompt();
 		}, enabled : true,
-		tooltip : "Ask Momo to cook you something."
+		tooltip : "Ask Momo to cook you something.",
 	});
 	/*
 	options.push({ nameStr : "name",
@@ -451,61 +448,65 @@ MomoScenes.Prompt = function() {
 	});
 	*/
 	Gui.SetButtonsFromList(options, true, Gui.PrintDefaultOptions);
-}
+};
 
 MomoScenes.CookPrompt = function() {
-	let player = GAME().player;
-	let momo = GAME().momo;
-	let party : Party = GAME().party;
+	const player = GAME().player;
+	const momo = GAME().momo;
+	const party: Party = GAME().party;
 
-	let parse : any = {
+	const parse: any = {
 		playername : player.name,
 		girlMorph  : momo.Ascended() ? "morph" : "girl",
 		dragonette : momo.Ascended() ? "dragon" : "dragonette",
-		guyGal : player.mfTrue("guy", "gal")
+		guyGal : player.mfTrue("guy", "gal"),
 	};
-	
-	//[Nice Meal][Gastroalchemy][Experiment]
-	let options = new Array();
+
+	// [Nice Meal][Gastroalchemy][Experiment]
+	const options = new Array();
 	options.push({ nameStr : "Nice Meal",
-		func : function() {
+		func() {
 			Text.Clear();
 			Text.Add("<i>“One hearty, wholesome, filling meal coming right up,”</i> the chef declares proudly, puffing out her ample chest for emphasis. <i>“Just take a seat over there and be patient, I’ll have something whipped up for you in a jiffy,”</i> she assures you, already starting to gather ingredients and utensils for her latest dish.", parse);
 			Text.NL();
-			
-			let tempParty = [player];
+
+			const tempParty = [player];
 			let num = 2;
-			for(let i=1, j=party.Num(); i<j; ++i) {
-				let c = party.Get(i);
-				if(c == momo)
+			for (let i = 1, j = party.Num(); i < j; ++i) {
+				const c = party.Get(i);
+				if (c == momo) {
 					num = 3;
-				else
-					tempParty.push(c);					
+				} else {
+					tempParty.push(c);
+				}
 			}
-			if(num == 3)
+			if (num == 3) {
 				tempParty.push(momo);
-			
-			if(tempParty.length == num)
-				parse["comp"] = " and " + tempParty[1].name;
-			else if(tempParty.length > num)
-				parse["comp"] = " and your companions";
-			else
-				parse["comp"] = "";
-			parse["all"] = tempParty.length > num ? " all" : "";
-			parse["partynumber"] = Text.NumToText(tempParty.length);
-			parse["s"] = tempParty.length > 1 ? "s" : "";
-			
+			}
+
+			if (tempParty.length == num) {
+				parse.comp = " and " + tempParty[1].name;
+			} else if (tempParty.length > num) {
+				parse.comp = " and your companions";
+ } else {
+				parse.comp = "";
+ }
+			parse.all = tempParty.length > num ? " all" : "";
+			parse.partynumber = Text.NumToText(tempParty.length);
+			parse.s = tempParty.length > 1 ? "s" : "";
+
 			Text.Add("You[comp] follow her lead, settling down as you watch the [dragonette] move about setting up a small fire to cook. She ensures that the flames won’t spread and promptly ignites it with a small puff of fire. She smiles as the fire gets going and begins cooking, the delicious scent of cooked food wafting around you within instants.", parse);
 			Text.NL();
-			if(WorldTime().hour >= 6 && WorldTime().hour < 11)
+			if (WorldTime().hour >= 6 && WorldTime().hour < 11) {
 				Text.Add("When she’s ready, Momo approaches you with a beaming smile, bearing [partynumber] bowl[s] from which steam is gently wafting, placing them before you[comp] along with serving spoons. <i>“Oatmeal, just like we used to have it back on the farm; plenty of mixed, dried fruit, a good dollop of honey, and a little milk to make it extra creamy,”</i> she brags. <i>“Just the sort of thing to give you the energy for a hard day.”</i>", parse);
-			else if(WorldTime().hour >= 11 && WorldTime().hour < 19)
+			} else if (WorldTime().hour >= 11 && WorldTime().hour < 19) {
 				Text.Add("Momo returns to your side bearing a massive platter piled with sandwiches of all kinds, which she places where you[comp] can easily reach it. <i>“A little variety makes even the simple things more fun,”</i> she notes happily. <i>“Bon appetit.”</i>", parse);
-			else {
-				if(tempParty.length >= num)
-					parse["comp2"] = Text.Parse(" She wastes no time in doling up a serving for [comp] as well.", {comp: tempParty.length == num ? tempParty[1].name : "your companions"});
-				else
-					parse["comp2"] = "";
+ } else {
+				if (tempParty.length >= num) {
+					parse.comp2 = Text.Parse(" She wastes no time in doling up a serving for [comp] as well.", {comp: tempParty.length == num ? tempParty[1].name : "your companions"});
+				} else {
+					parse.comp2 = "";
+				}
 				Text.Add("At last, Momo approaches you[all], carrying a huge iron pot with her. She places a serving bowl and a spoon and fork before you, then starts ladling out the contents: a hearty stew-like meal of fried beans, bacon, mushrooms, jerky strips, onions, carrots, potatoes and other assorted pieces, all bubbling in thick gravy.[comp2] <i>“Dad’s own special potluck recipe,”</i> she notes proudly, a wistful smile on her lips. <i>“Go on, dig in before it gets cold,”</i> she encourages you.", parse);
 			}
 			Text.Add(" You quickly wolf down the offered meal, praising Momo’s culinary skills.", parse);
@@ -516,19 +517,19 @@ MomoScenes.CookPrompt = function() {
 			Text.NL();
 			Text.Add("<i>“It was my pleasure, sugar; I love a [guyGal] who can appreciate good cooking,”</i> Momo replies, tail flicking to and fro in her pleasure, a satisfied grin on her face. <i>“Now, don’t worry about the mess, I’ll take care of that myself. But if you’re ever hungry, please, drop on by - my kitchen’s always open, especially for you,”</i> she assures you, already moving to collect her utensils.", parse);
 			Text.Flush();
-			
+
 			TimeStep({hour: 1});
-			
-			for(let i = 0; i < tempParty.length; ++i) {
-				let c : Entity = tempParty[i];
+
+			for (let i = 0; i < tempParty.length; ++i) {
+				const c: Entity = tempParty[i];
 				c.AddHPFraction(0.3);
 				c.AddSPFraction(0.3);
 				Status.Full(c, {hours: 8, exp: 1.1});
 			}
-			
+
 			MomoScenes.Prompt();
 		}, enabled : true,
-		tooltip : "Momo will prepare a delicious meal to replenish your energies and restore your vitality."
+		tooltip : "Momo will prepare a delicious meal to replenish your energies and restore your vitality.",
 	});
 	/*
 	options.push({ nameStr : "name",
@@ -542,43 +543,43 @@ MomoScenes.CookPrompt = function() {
 	});
 	*/
 	Gui.SetButtonsFromList(options, true, MomoScenes.Prompt);
-}
+};
 
 MomoScenes.TalkPrompt = function() {
-	let player = GAME().player;
-	let momo = GAME().momo;
-	let parse : any = {
+	const player = GAME().player;
+	const momo = GAME().momo;
+	let parse: any = {
 		playername : player.name,
 		girlMorph  : momo.Ascended() ? "morph" : "girl",
-		dragonette : momo.Ascended() ? "dragon" : "dragonette"
+		dragonette : momo.Ascended() ? "dragon" : "dragonette",
 	};
 	parse = player.ParserTags(parse);
-	//[Chat] [Herself] [Family] [Cooking] [Skills]
-	let options = new Array();
+	// [Chat] [Herself] [Family] [Cooking] [Skills]
+	const options = new Array();
 	options.push({ nameStr : "Chat",
-		func : function() {
+		func() {
 			Text.Clear();
-			let scenes = new EncounterTable();
+			const scenes = new EncounterTable();
 			scenes.AddEnc(function() {
 				Text.Add("<i>“The oddest thing I encountered on my travels? Hmm...”</i> Momo trails off, looking thoughtful as she rubs under her chin with one hand.  <i>“Well, a lot of places I went to recently had these great big signs scattered all over the place. They all looked important, but they all said the same thing. In big block-print letters, they all said 'Placeholder'... now, whyever would someone be running around sticking up signs like that? What's supposed to be there? ”</i> Momo wonders, giving you a quizzical expression as if hoping you might know the answer.", parse);
 			}, 1.0, function() { return true; });
 			scenes.AddEnc(function() {
 				Text.Add("<i>“Is there something I particularly like to cook?”</i> Momo repeats. Without hesitation, she grins broadly and states,  <i>“Anything that's got peaches in it - especially if it's a pastry, or has sugar or cream, mm-hmm,”</i> she licks her lips with a rather inhuman-looking tongue, lost in memories of meals long-eaten. <i>“My family had this huge peach orchard on the farm, and every year I used to harvest the biggest, sweetest, juiciest peaches there... oh, I just <b>loved</b> it! I would eat and eat until my belly felt like it was going to burst,”</i> she pats her stomach with both hands as if in emphasis.", parse);
-				Text.NL()
+				Text.NL();
 				Text.Add("<i>“Peaches and cream, peach pie, peach cobbler, peach crumble, peach cake, peach syrup, peach wine...”</i> She suddenly trails off in thought. <i>“You know, I don't remember if I ever really did tried fried peach blossom salad, or if that was just a dream,”</i> she comments idly.", parse);
-				Text.NL()
+				Text.NL();
 				Text.Add("You briefly consider interrupting her peach-induced reverie, but you doubt she’s even aware of your presence...", parse);
 			}, 1.0, function() { return true; });
 			scenes.AddEnc(function() {
 				Text.Add("<i>“Do I enjoy traveling? Oh, yes, I certainly do!”</i> she gushes, nodding her head for emphasis. <i>“There's so many fascinating places to go, foods to eat, and people to talk to - that's what I really love about traveling, actually: the food and the people.”</i>", parse);
-				Text.NL()
+				Text.NL();
 				Text.Add("<i>“Oh, some people might be nasty and horrible - like those savages who wanted to chop off my tail and fry it because they thought it'd be some kind of delicacy,”</i> she indignantly curls her prehensile appendage around her hip for protection at the thought, <i>“Or those suspicious people who ran me out of town when I asked about their cake recipe - but for the most part, the people I meet are just lovely to talk to. Like you!”</i> she giggles, grinning you a beaming smile.", parse);
 			}, 1.0, function() { return true; });
 			scenes.AddEnc(function() {
 				Text.Add("<i>“What foods don't I like? That's easy - seafood,”</i> she replies, gagging at the thought. <i>“I mean fish, crabs, shellfish - I hate the smell, I hate the feel, and I certainly can't stand the taste,”</i> she shudders.", parse);
-				Text.NL()
+				Text.NL();
 				Text.Add("<i>“Nothing, absolutely nothing, makes me sicker than actually eating fish - I can prepare it, if I absolutely have to, but the thought of actually eating it...”</i> she chokes and slaps a hand over her mouth, pointedly looking away from you until she manages to suppress her gag reflex.", parse);
-				Text.NL()
+				Text.NL();
 				Text.Add("<i>“Yeah, I don't like fish. Other than that...? Probably boiled cabbage. It's not so bad fried up with bacon, onions, sausage, and cheese - like Dad used to make - but boiled cabbage is just... bleugh. Maybe it's because of the smell...”</i> she wonders, tapping her chin contemplatively.", parse);
 			}, 1.0, function() { return true; });
 			scenes.AddEnc(function() {
@@ -587,20 +588,20 @@ MomoScenes.TalkPrompt = function() {
 			scenes.AddEnc(function() {
 				Text.Add("<i>“Meat or veg? Well...”</i> she trails off contemplatively. <i>“I know that veggies are supposed to be better for you, and I certainly know enough recipes to know they can be tasty, but honestly? I'm a carnivore at heart. I <b>love</b> eating meat. I swear, I'd go crazy if you tried to put me on a low-meat diet,”</i> she shakes her head at the thought.", parse);
 			}, 1.0, function() { return true; });
-			
+
 			scenes.Get();
 			Text.Flush();
-			
+
 			TimeStep({minute: 15});
-			
+
 			momo.relation.IncreaseStat(25, 2);
-			
+
 			MomoScenes.TalkPrompt();
 		}, enabled : true,
-		tooltip : "Just have a nice chat with the pretty dragon-girl."
+		tooltip : "Just have a nice chat with the pretty dragon-girl.",
 	});
 	options.push({ nameStr : "Herself",
-		func : function() {
+		func() {
 			Text.Clear();
 			Text.Add("<i>“You wanna know about little old me?”</i> Momo asks, fingers pressed against her ample chest, an exaggerated look of surprise on her features. <i>“Well, aren't you just the charmer?”</i> she playfully notes. <i>“Okay, it's not really anything exciting, but... I'm Monareth Kindling, or Momo to my friends. I'm twenty-five years old, and I come from the... was it northwestern parts of the country? I don't recall,”</i> she confesses, looking a little sheepish as she admits that.", parse);
 			Text.NL();
@@ -626,20 +627,20 @@ MomoScenes.TalkPrompt = function() {
 			Text.NL();
 			Text.Add("<i>“Well, that's all I can think of when it comes to talking about little old me,”</i> Momo giggles. <i>“Drop on by anytime, [playername].”</i>", parse);
 			Text.Flush();
-			
+
 			TimeStep({minute: 30});
-			
+
 			momo.relation.IncreaseStat(25, 2);
-			
-			momo.flags["tSelf"] = 1;
-	
+
+			momo.flags.tSelf = 1;
+
 			MomoScenes.TalkPrompt();
 		}, enabled : true,
-		tooltip : "Learn more about Momo."
+		tooltip : "Learn more about Momo.",
 	});
-	if(momo.flags["tSelf"] != 0) {
+	if (momo.flags.tSelf != 0) {
 		options.push({ nameStr : "Family",
-			func : function() {
+			func() {
 				Text.Clear();
 				Text.Add("<i>“You want to know about my family?”</i> Momo repeats, brow furrowed in surprise. <i>“Well, sure, I can tell you a little about them if you really want to know.”</i>", parse);
 				Text.NL();
@@ -681,31 +682,31 @@ MomoScenes.TalkPrompt = function() {
 				Text.NL();
 				Text.Add("That was a pretty interesting story. And a pretty naughty one too. Maybe you should take advantage of Momo’s giddy mood and see if you can take this somewhere?", parse);
 				Text.Flush();
-				
+
 				TimeStep({minute: 30});
-				
-				if(momo.flags["tFamily"] == 0)
-					momo.flags["tFamily"] = 1;
-				
+
+				if (momo.flags.tFamily == 0) {
+					momo.flags.tFamily = 1;
+				}
+
 				momo.relation.IncreaseStat(25, 2);
-				
-				//[Flirt][Nope]
-				let options = new Array();
+
+				// [Flirt][Nope]
+				const options = new Array();
 				options.push({ nameStr : "Flirt",
-					func : function() {
+					func() {
 						Text.Clear();
 						Text.Add("You slowly look Momo over, making it blatantly apparent that you’re checking her out. Then with a smirk, you suggest that you happen to know a thing or two about <i>feeling good down there</i>. Maybe she’d like you to show her?", parse);
 						Text.NL();
-						if(momo.IsFollower()) {
+						if (momo.IsFollower()) {
 							Text.Add("Momo's eyes widen at your innuendo, before her lips curl into a grin, the dragon-[girlMorph] strutting toward you. A hint of the old shyness shows through in the redness dusting her cheeks, but the smile curving her face is pure predator, eyes hooded in her sultriest expression.", parse);
 							Text.NL();
 							Text.Add("<i>“That sounds like an invitation I just <b>have</b> to accept,”</i> she purrs, gently folding her arms around you, long tongue flicking out to slurp playfully over your cheek in a quick motion, tail curling around your [legs]. Leaning her head in to bring it closer to your [ear], she stage whispers, <i>“Step into my parlor,”</i> and then releases you, swaying enticingly as she vanishes into her tent, her prehensile appendage flicking toward you in a “come hither” gesture before it's gone.", parse);
 							Text.Flush();
-							
-							//TODO Momo Sex
+
+							// TODO Momo Sex
 							MomoScenes.TalkPrompt();
-						}
-						else if(momo.Relation() < 20) {
+						} else if (momo.Relation() < 20) {
 							Text.Add("A lighthearted laugh bubbles from the dragon-girl’s lips. <i>“Oh! Stop, you’re making me blush,”</i> she says, clapping her hands over her cheeks for emphasis, a giddy smile on her lips all the same.", parse);
 							Text.NL();
 							Text.Add("You’re not saying anything that’s not true - no reason to be embarrassed about that.", parse);
@@ -720,52 +721,54 @@ MomoScenes.TalkPrompt = function() {
 							Text.NL();
 							Text.Add("<i>“You really are a cheeky bastard, [playername],”</i> Momo declares. She actually sounds approving of the fact. <i>“But I have things I need to do now, so I really should be getting back to them,”</i> the dragon-girl notes, approaching the bevvy of cooking utensils and ingredients that she keeps around. <i>“It was lovely talking to you, though; drop by any time,”</i> she assures you, even as she wrestles out a cutting board and starts peeling some vegetables.", parse);
 							Text.Flush();
-							
+
 							TimeStep({minute: 5});
-							
+
 							momo.relation.IncreaseStat(20, 3);
-							
+
 							MomoScenes.TalkPrompt();
-						}
-						else { //#Med RL (Momo.RL >=20)
+						} else { // #Med RL (Momo.RL >=20)
 							Text.Add("<i>“Well...”</i> Momo slowly starts, openly checking you out, cheeks reddened but clearly liking what she's seeing. <i>“I think you just might be my type... but I'd like a little wining and dining first; a girl likes to feel special,”</i> she grins. <i>“How about it, [playername]? Up for a little dinner date before we think about the... 'dessert', hmm?”</i>", parse);
 							Text.NL();
 							Text.Add("Sounds like a plan!", parse);
 							Text.NL();
 							Text.Flush();
-							
+
 							// TODO Flirt
 							MomoScenes.TalkPrompt();
 						}
 					}, enabled : true,
-					tooltip : "She did just regale you with a rather raunchy tale, why not take advantage of it and see if you can take this somewhere?"
+					tooltip : "She did just regale you with a rather raunchy tale, why not take advantage of it and see if you can take this somewhere?",
 				});
 				options.push({ nameStr : "Nope",
-					func : function() {
+					func() {
 						Text.Clear();
-						if(momo.flags["tFamily"] == 1)
+						if (momo.flags.tFamily == 1) {
 							Text.Add("You thank Momo for the story; you’d never have guessed that this was exactly how a human-dragon hybrid would come to be.", parse);
-						else
+						} else {
 							Text.Add("No matter how many times you hear it, this story never gets old. You thank Momo for retelling it.", parse);
+						}
 						Text.NL();
-						if(momo.flags["tFamily"] == 1)
-							momo.flags["tFamily"] = 2;
+						if (momo.flags.tFamily == 1) {
+							momo.flags.tFamily = 2;
+						}
 						Text.Add("<i>“It was my pleasure, [playername],”</i> she assures you. <i>“I wouldn't normally tell this to just anyone. I had my fill of people poking and prying about it when I left the farm, but you... you're different. I felt I could talk to you and tell you the truth,”</i> she notes absently.", parse);
-						if(momo.IsFollower())
+						if (momo.IsFollower()) {
 							Text.Add(" <i>“And I was certainly right to think so,”</i> she notes, grinning rather smugly as she does.", parse);
+						}
 						Text.Flush();
-						
+
 						MomoScenes.TalkPrompt();
 					}, enabled : true,
-					tooltip : Text.Parse("Nah, this is a stupid idea. Now is not the time to be flirting with the dragon-[girlMorph].", parse)
+					tooltip : Text.Parse("Nah, this is a stupid idea. Now is not the time to be flirting with the dragon-[girlMorph].", parse),
 				});
 				Gui.SetButtonsFromList(options, false, null);
 			}, enabled : true,
-			tooltip : "Why not ask and see if Momo will tell you a little about her origins."
+			tooltip : "Why not ask and see if Momo will tell you a little about her origins.",
 		});
 	}
 	options.push({ nameStr : "Cooking",
-		func : function() {
+		func() {
 			Text.Clear();
 			Text.Add("<i>“Ooh, I love telling this story,”</i> Momo notes happily, grinning a toothy grin of glee at you at the topic. <i>“Well, I come from a really big farming family, and that means two things. Firstly, we need a <b>lot</b> of food when it's meal time. Secondly, cooking meals is a full-time job. So, the way my family sorts it out is that we have these team schedules - some of us are doing chores in the yards, some of us are cooking and cleaning, all that sort of thing. You know what I mean?”</i>", parse);
 			Text.NL();
@@ -773,7 +776,7 @@ MomoScenes.TalkPrompt = function() {
 			Text.NL();
 			Text.Add("<i>“Maybe it's not how everyone would handle it,”</i> Momo admits, <i>“but it worked for us well enough.”</i>", parse);
 			Text.NL();
-			
+
 			Gui.Callstack.push(function() {
 				Text.Add("Shaking her head, Momo returns her attention to her original story.", parse);
 				Text.NL();
@@ -785,23 +788,22 @@ MomoScenes.TalkPrompt = function() {
 				Text.NL();
 				Text.Add("<i>“So, did you have any other questions?”</i> she asks brightly, a chipper look on her face as she looks at you.", parse);
 				Text.Flush();
-				
+
 				momo.relation.IncreaseStat(25, 2);
-				
+
 				TimeStep({minute: 20});
-				
+
 				MomoScenes.TalkPrompt();
 			});
-			
-			
-			if(momo.flags["tCook"] == MomoFlags.TalkCook.First) {
+
+			if (momo.flags.tCook == MomoFlags.TalkCook.First) {
 				Text.Add("Head tilting to the side, she directs an inquisitive look at you. <i>“What about you, [playername]? What kind of family did you come from?”</i> she asks, her tone innocent and sincerely interested.", parse);
 				Text.Flush();
-				
-				//[Big family][Small family][Only Child]
-				let options = new Array();
+
+				// [Big family][Small family][Only Child]
+				const options = new Array();
 				options.push({ nameStr : "Big family",
-					func : function() {
+					func() {
 						Text.Clear();
 						Text.Add("It was a big family. Not as big as hers, of course. There were times when you thought you were going to go insane, and you bickered with your siblings a lot. But there were also times you were glad to have everyone backing you up. It was a noisy family, but once you got used to it you wouldn’t exchange that for anything. This talk actually made you feel a little homesick... you wonder how they’re doing now...", parse);
 						Text.NL();
@@ -809,56 +811,55 @@ MomoScenes.TalkPrompt = function() {
 						Text.NL();
 						Text.Add("She sighs hugely and shakes her head. <i>“I've heard people talk about how noisy or confusing it would be to live like that, and I've never been able to understand it. Okay, maybe I can kind of see the point in not having a really huge family, but I definitely want my kids to have a good number of siblings to play with when they grow up. Six to eight maybe. Twelve or thirteen wouldn't be too bad... anything more than twenty is getting a bit out of hand, though,”</i> she notes, more to herself than to you.", parse);
 						Text.NL();
-						if(player.Gender() == Gender.female && momo.IsFollower()) {
+						if (player.Gender() == Gender.female && momo.IsFollower()) {
 							Text.Add("<i>“Don't worry about me getting any funny ideas, lover mine, I was planning on adopting!”</i> she hastens to reassure you, then pokes her tongue out at you playfully.", parse);
 							Text.NL();
 						}
-						
-						momo.flags["tCook"] = MomoFlags.TalkCook.BigFamily;
-						
+
+						momo.flags.tCook = MomoFlags.TalkCook.BigFamily;
+
 						Gui.PrintDefaultOptions();
 					}, enabled : true,
-					tooltip : "Your family was a lot like hers: big and noisy."
+					tooltip : "Your family was a lot like hers: big and noisy.",
 				});
 				options.push({ nameStr : "Small family",
-					func : function() {
+					func() {
 						Text.Clear();
 						Text.Add("Unlike hers, you have a small family. Everyone kinda stuck in their own corner for the most part, so it was easy to live with them. But there were times when you all gathered together for a reason or another, and you lived knowing you always had people you could count on nearby. 'Course there’s always the usual bickering in the family, but in the end of the day you’d all sit together and laugh it out over dinner. You can’t help but wonder how your siblings are doing…", parse);
 						Text.NL();
 						Text.Add("Reaching out and patting your shoulder in a friendly way, Momo smiles. <i>“You know, I'll be honest, I did sometimes wonder what it'd be like to have a few less siblings,”</i> she confesses. <i>“Don't get me wrong, I love all my brothers and sisters, but there are times that I definitely wouldn't have minded having a little more family space, or personal attention. Honestly? I think I'd rather have a nice medium-sized family, all in all; about five to seven kids, perhaps.”</i>", parse);
 						Text.NL();
-						if(player.Gender() == Gender.female && momo.IsFollower()) {
+						if (player.Gender() == Gender.female && momo.IsFollower()) {
 							Text.Add("<i>“I'm sure the two of us will find a few orphans looking for a pair of moms to give them a good home,”</i> she giggles.", parse);
 							Text.NL();
 						}
-						
-						momo.flags["tCook"] = MomoFlags.TalkCook.SmallFamily;
+
+						momo.flags.tCook = MomoFlags.TalkCook.SmallFamily;
 
 						Gui.PrintDefaultOptions();
 					}, enabled : true,
-					tooltip : "You had some siblings, but not as many as she did."
+					tooltip : "You had some siblings, but not as many as she did.",
 				});
 				options.push({ nameStr : "Only Child",
-					func : function() {
+					func() {
 						Text.Clear();
 						Text.Add("You didn’t have any siblings. For the longest time, it was just you - not that you minded much. You kind of get used to it. It was a bit lonely at times, you admit, but you aren’t sure how you’d handle having to deal with any sort of siblings.", parse);
 						Text.NL();
 						Text.Add("The dragon-[girlMorph] stares at you, then slowly shakes her head. <i>“I'm not sure I could imagine living like that,”</i> she confesses. <i>“Don't get me wrong, I fought with my siblings all the time, but still, I always knew I could trust them,”</i> she shivers. <i>“I definitely wouldn't want my son or daughter to be an only child...”</i>", parse);
 						Text.NL();
-						if(player.Gender() == Gender.female && momo.IsFollower()) {
+						if (player.Gender() == Gender.female && momo.IsFollower()) {
 							Text.Add("<i>“Don't worry, I was thinking adoption, not gender-bending,”</i> she hastily assures you.", parse);
 							Text.NL();
 						}
-						
-						momo.flags["tCook"] = MomoFlags.TalkCook.OnlyChild;
-						
+
+						momo.flags.tCook = MomoFlags.TalkCook.OnlyChild;
+
 						Gui.PrintDefaultOptions();
 					}, enabled : true,
-					tooltip : "You never had any siblings."
+					tooltip : "You never had any siblings.",
 				});
 				Gui.SetButtonsFromList(options, false, null);
-			}
-			else if(momo.flags["tCook"] == MomoFlags.TalkCook.BigFamily) {
+			} else if (momo.flags.tCook == MomoFlags.TalkCook.BigFamily) {
 				Text.Add("Momo chuckles and shakes her head. <i>“I tell you, I never had any problems learning to cope with customers; my kitchen back on the farm was busy as any restaurant ever gets,”</i> she declares, sounding perversely proud of that fact. <i>“Breakfast, lunch, dinner, it was like a battle every time, and the washing up... you could have had a bath in the tub we used for all our plates and stuff...”</i>", parse);
 				Text.NL();
 				Text.Add("She trails off, looking baffled, clearly trying to recall something. Then, a dopey grin stretches her face into a beam of delight and she bursts out giggling. <i>“Actually, there was this one time, when Veran was four, when that’s exactly what I did! I just whisked her up off the floor and plunged her into the tub and started scrubbing her with the washcloths,”</i> Momo declares.", parse);
@@ -868,21 +869,21 @@ MomoScenes.TalkPrompt = function() {
 				Text.Add("<i>“Scold me? My mom pulled me over my knee and spanked me!”</i> Momo corrects you, laughing at the memory. Then, she blinks and pouts, looking wounded. <i>“Honestly, I don’t know why... I mean, Veran loved it! She was happy playing in the bubbles, and she was going to get a bath anyway... besides, she kept pulling my tail,”</i> the [dragonette] huffs, folding her arms defensively over her chest.", parse);
 				Text.NL();
 				Text.Add("Mercurial as always, Momo’s indignation lasts marginally longer than a soap bubble before she sighs, shakes her head and smiles absently. <i>“You know, despite it all, I still really miss my family. Not just my folks, but my brothers and sisters, too. I’d love to go back and see them some day,”</i> she confesses to you.", parse);
-				if(momo.IsFollower())
+				if (momo.IsFollower()) {
 					Text.Add(" <i>“I can’t wait to see their faces when they see you walk in through the door with me,”</i> she titters. <i>“I just know they’d love to meet you.”</i>", parse);
-				if(momo.Ascended())
+				}
+				if (momo.Ascended()) {
 					Text.Add(" She pauses suddenly, nibbling thoughtfully at a crooked finger. <i>“I wonder if they’d be more surprised at seeing you, or at seeing me,”</i> she mumbles, more to herself than to you.", parse);
+				}
 				Text.NL();
 				Gui.PrintDefaultOptions();
-			}
-			else if(momo.flags["tCook"] == MomoFlags.TalkCook.SmallFamily) {
+			} else if (momo.flags.tCook == MomoFlags.TalkCook.SmallFamily) {
 				Text.Add("Momo looks thoughtful for a moment, staring wistfully off into space. <i>“You want to know the truth? There are times I kind of wished my family was a little smaller. I mean, don’t get me wrong, I loved having brothers and sisters! It’s just... well, sometimes I wouldn’t have minded a little more attention from Mom and Dad, or just a little less noise in general.”</i>", parse);
 				Text.NL();
 				Text.Add("A frown crosses her face now. <i>“Not to mention there’s always been some little brats I wouldn’t have minded not having around,”</i> she grumbles, but it’s the half-hearted grumble of an exasperated older sibling; no venom to it at all.", parse);
 				Text.NL();
 				Gui.PrintDefaultOptions();
-			}
-			else { // if(momo.flags["tCook"] == MomoFlags.TalkCook.OnlyChild)
+			} else { // if(momo.flags["tCook"] == MomoFlags.TalkCook.OnlyChild)
 				Text.Add("Momo purses her lips, tapping them in thought. <i>“Well, I guess there’s some good things to say about being an only child. You never have to worry about your parents not having time for you, you don’t have to share all your stuff, you don’t have bratty siblings stealing your things or making kites out of your panties or pulling your tail...”</i>", parse);
 				Text.NL();
 				Text.Add("<i>“Yeah, you were lucky, [playername]; brothers and sisters can be a real pain in the ass... but then again, you never got any of the good stuff, either. You never had siblings help you out when you scraped your knee, or got your tail caught in a door. You never got to listen to your bigger siblings telling you stories, or have your little ones bring you presents they found out on the farm either. No playing together in the bath, no games together, no hiding from thunder under the covers...”</i>", parse);
@@ -892,19 +893,20 @@ MomoScenes.TalkPrompt = function() {
 				Gui.PrintDefaultOptions();
 			}
 		}, enabled : true,
-		tooltip : "So, what made her so fascinated with cooking, anyway?"
+		tooltip : "So, what made her so fascinated with cooking, anyway?",
 	});
-	if(momo.flags["tCook"] != MomoFlags.TalkCook.First) {
+	if (momo.flags.tCook != MomoFlags.TalkCook.First) {
 		options.push({ nameStr : "Skills",
-			func : function() {
+			func() {
 				Text.Clear();
-				if(momo.flags["tSkills"] == 0)
+				if (momo.flags.tSkills == 0) {
 					Text.Add("<i>“You want to know what sort of things I can cook? Why, certainly, I'd be happy to tell you that,”</i> Momo grins with delight, eager to show off.", parse);
-				else
+				} else {
 					Text.Add("<i>“Need a little reminder, do you? It's okay, [playername], we all can forget things sometimes. That's why I have recipe books,”</i> the dragon-[girlMorph] giggles.", parse);
-					
-				momo.flags["tSkills"] = 1;
-				
+				}
+
+				momo.flags.tSkills = 1;
+
 				Text.NL();
 				Text.Add("Clearing her throat and drawing herself up straight, Momo puts a hand on her chest and launches into her explanation. <i>“Well, first and foremost, I know a lovely variety of tasty and nutritious dishes, all guaranteed to give you the energy you need,”</i> she brags. <i>“Whether it's soups or cakes, roasts or stir-fries, I guarantee it'll have you fighting fit in no time flat.”</i>", parse);
 				Text.NL();
@@ -914,14 +916,14 @@ MomoScenes.TalkPrompt = function() {
 				Text.NL();
 				Text.Add("<i>“Well... I think that about sums it up,”</i> she notes, pausing thoughtfully. Nodding her head, she looks back at you. <i>“Anything else you wanted?”</i>", parse);
 				Text.Flush();
-				
+
 				momo.relation.IncreaseStat(25, 2);
-				
+
 				TimeStep({minute: 10});
-				
+
 				MomoScenes.TalkPrompt();
 			}, enabled : true,
-			tooltip : "Ask about Momo's talents and abilities when it comes to being a chef."
+			tooltip : "Ask about Momo's talents and abilities when it comes to being a chef.",
 		});
 	}
 	/*
@@ -931,22 +933,22 @@ MomoScenes.TalkPrompt = function() {
 			Text.Add("", parse);
 			Text.NL();
 			Text.Flush();
-			
+
 			momo.relation.IncreaseStat(20, 2);
-			
+
 			MomoScenes.TalkPrompt();
 		}, enabled : true,
 		tooltip : ""
 	});
 	*/
 	Gui.SetButtonsFromList(options, true, MomoScenes.Prompt);
-}
+};
 /*
 MomoScenes.FindingMomo = function() {
 	let parse : any = {
-		
+
 	};
-	
+
 	Text.Clear();
 	Text.Add("", parse);
 	Text.NL();

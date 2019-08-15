@@ -96,29 +96,26 @@ export class FeralWolf extends Entity {
 		const t = this.GetSingleTarget(encounter, activeChar);
 
 		const parseVars = {
-			name   : this.name,
 			hisher : this.hisher(),
+			name   : this.name,
 			tName  : t.name,
 		};
 
 		const choice = Math.random();
 		if (choice < 0.5) {
 			Abilities.Attack.Use(encounter, this, t);
-		}
-		else if (choice < 0.7 && Abilities.Physical.DAttack.enabledCondition(encounter, this)) {
+		} else if (choice < 0.7 && Abilities.Physical.DAttack.enabledCondition(encounter, this)) {
 			Abilities.Physical.Pierce.Use(encounter, this, t);
- }
-		else if (choice < 0.95 && Abilities.Physical.CrushingStrike.enabledCondition(encounter, this)) {
+ } else if (choice < 0.95 && Abilities.Physical.CrushingStrike.enabledCondition(encounter, this)) {
 			Abilities.Physical.CrushingStrike.Use(encounter, this, t);
- }
-		else {
+ } else {
 			Abilities.Seduction.Tease.Use(encounter, this, t);
  }
 	}
 
 }
 
-FeralWolfScenes.LoneEnc = function() {
+FeralWolfScenes.LoneEnc = () => {
 	const enemy = new Party();
 	enemy.AddMember(new FeralWolf());
 	const enc = new Encounter(enemy);

@@ -1,7 +1,7 @@
-let RavenFlags = {
+const RavenFlags = {
     Stage : {
         ravenstage2 : 8,
-        ravenstage3 : 12
+        ravenstage3 : 12,
     },
 };
 

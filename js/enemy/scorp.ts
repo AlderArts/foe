@@ -115,14 +115,11 @@ export class Scorpion extends Entity {
 		const choice = Math.random();
 		if (choice < 0.4) {
 			Abilities.Attack.Use(encounter, this, t);
-		}
-		else if (choice < 0.7 && Abilities.EnemySkill.Sting.enabledCondition(encounter, this)) {
+		} else if (choice < 0.7 && Abilities.EnemySkill.Sting.enabledCondition(encounter, this)) {
 			Abilities.EnemySkill.Sting.Use(encounter, this, t);
- }
-		else if (choice < 0.9 && Abilities.Seduction.Distract.enabledCondition(encounter, this)) {
+ } else if (choice < 0.9 && Abilities.Seduction.Distract.enabledCondition(encounter, this)) {
 			Abilities.Seduction.Distract.Use(encounter, this, t);
- }
-		else {
+ } else {
 			Abilities.Seduction.Tease.Use(encounter, this, t);
  }
 	}

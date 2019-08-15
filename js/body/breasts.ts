@@ -152,40 +152,7 @@ export class Breasts extends BodyPart {
 		const adj = adjs[Rand(adjs.length)];
 
 		let cup;
-		if     (size <= 1    ) { cup = "manly"; }
-		else if (size <= 2    ) { cup = "AA-cup"; }
-		else if (size <= 3    ) { cup = "A-cup"; }
-		else if (size <= 5    ) { cup = "B-cup"; }
-		else if (size <= 7.5  ) { cup = "C-cup"; }
-		else if (size <= 10   ) { cup = "D-cup"; }
-		else if (size <= 12.5 ) { cup = "E-cup"; }
-		else if (size <= 15   ) { cup = "F-cup"; }
-		else if (size <= 17.5 ) { cup = "G-cup"; }
-		else if (size <= 20   ) { cup = "H-cup"; }
-		else if (size <= 22.5 ) { cup = "I-cup"; }
-		else if (size <= 25   ) { cup = "J-cup"; }
-		else if (size <= 27.5 ) { cup = "K-cup"; }
-		else if (size <= 30   ) { cup = "L-cup"; }
-		else if (size <= 32.5 ) { cup = "M-cup"; }
-		else if (size <= 35   ) { cup = "N-cup"; }
-		else if (size <= 37.5 ) { cup = "O-cup"; }
-		else if (size <= 40   ) { cup = "P-cup"; }
-		else if (size <= 42.5 ) { cup = "Q-cup"; }
-		else if (size <= 45   ) { cup = "R-cup"; }
-		else if (size <= 47.5 ) { cup = "S-cup"; }
-		else if (size <= 50   ) { cup = "T-cup"; }
-		else if (size <= 52.5 ) { cup = "U-cup"; }
-		else if (size <= 55   ) { cup = "V-cup"; }
-		else if (size <= 57.5 ) { cup = "W-cup"; }
-		else if (size <= 60   ) { cup = "X-cup"; }
-		else if (size <= 70   ) { cup = "XX-cup"; }
-		else if (size <= 80   ) { cup = "XXX-cup"; }
-		else if (size <= 90   ) { cup = "Y-cup"; }
-		else if (size <= 100  ) { cup = "YY-cup"; }
-		else if (size <= 110  ) { cup = "YYY-cup"; }
-		else if (size <= 120  ) { cup = "Z-cup"; }
-		else if (size <= 130  ) { cup = "ZZ-cup"; }
-		else {                   cup = "ZZZ-cup"; }
+		if     (size <= 1    ) { cup = "manly"; } else if (size <= 2    ) { cup = "AA-cup"; } else if (size <= 3    ) { cup = "A-cup"; } else if (size <= 5    ) { cup = "B-cup"; } else if (size <= 7.5  ) { cup = "C-cup"; } else if (size <= 10   ) { cup = "D-cup"; } else if (size <= 12.5 ) { cup = "E-cup"; } else if (size <= 15   ) { cup = "F-cup"; } else if (size <= 17.5 ) { cup = "G-cup"; } else if (size <= 20   ) { cup = "H-cup"; } else if (size <= 22.5 ) { cup = "I-cup"; } else if (size <= 25   ) { cup = "J-cup"; } else if (size <= 27.5 ) { cup = "K-cup"; } else if (size <= 30   ) { cup = "L-cup"; } else if (size <= 32.5 ) { cup = "M-cup"; } else if (size <= 35   ) { cup = "N-cup"; } else if (size <= 37.5 ) { cup = "O-cup"; } else if (size <= 40   ) { cup = "P-cup"; } else if (size <= 42.5 ) { cup = "Q-cup"; } else if (size <= 45   ) { cup = "R-cup"; } else if (size <= 47.5 ) { cup = "S-cup"; } else if (size <= 50   ) { cup = "T-cup"; } else if (size <= 52.5 ) { cup = "U-cup"; } else if (size <= 55   ) { cup = "V-cup"; } else if (size <= 57.5 ) { cup = "W-cup"; } else if (size <= 60   ) { cup = "X-cup"; } else if (size <= 70   ) { cup = "XX-cup"; } else if (size <= 80   ) { cup = "XXX-cup"; } else if (size <= 90   ) { cup = "Y-cup"; } else if (size <= 100  ) { cup = "YY-cup"; } else if (size <= 110  ) { cup = "YYY-cup"; } else if (size <= 120  ) { cup = "Z-cup"; } else if (size <= 130  ) { cup = "ZZ-cup"; } else {                   cup = "ZZZ-cup"; }
 
 		const sizeStr = size / 2 + " inches";
 

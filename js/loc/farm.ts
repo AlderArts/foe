@@ -9,40 +9,40 @@
  */
 
 export class Farm {
-	coin : number;
-	flags : any;
+	public coin: number;
+	public flags: any;
 
-	constructor(storage? : any) {
+	constructor(storage?: any) {
 		this.coin = 1000;
 
 		this.flags = {};
-		//this.flags["flag"] = 0;
-		this.flags["Visit"] = 0;
+		// this.flags["flag"] = 0;
+		this.flags.Visit = 0;
 
-		if(storage) this.FromStorage(storage);
+		if (storage) { this.FromStorage(storage); }
 	}
-	
-	FromStorage(storage : any) {
+
+	public FromStorage(storage: any) {
 		this.coin = parseInt(storage.coin) || this.coin;
 		// Load flags
-		for(let flag in storage.flags)
+		for (const flag in storage.flags) {
 			this.flags[flag] = parseInt(storage.flags[flag]);
+		}
 	}
 
-	ToStorage() {
-		let storage : any = {};
+	public ToStorage() {
+		const storage: any = {};
 		storage.coin  = this.coin;
 		storage.flags = this.flags;
 
 		return storage;
 	}
 
-	Update(step : number) {
+	public Update(step: number) {
 		// TODO: Farm produce etc
 	}
 
-	Found() {
-		return this.flags["Visit"] != 0;
+	public Found() {
+		return this.flags.Visit != 0;
 	}
 }
-

@@ -1,26 +1,26 @@
 
-import { KiakaiSex } from './kiakai-sex';
-import { Text } from '../text';
-import { Gui } from '../gui';
-import { GAME, TimeStep } from '../GAME';
-import { KiakaiFlags } from './kiakai-flags';
-import { UruFlags } from './uru';
-import { BurrowsFlags } from '../loc/burrows-flags';
+import { GAME, TimeStep } from "../GAME";
+import { Gui } from "../gui";
+import { BurrowsFlags } from "../loc/burrows-flags";
+import { Text } from "../text";
+import { KiakaiFlags } from "./kiakai-flags";
+import { KiakaiSex } from "./kiakai-sex";
+import { UruFlags } from "./uru";
 
-let KiakaiScenes : any = {
-	Sex : KiakaiSex
+const KiakaiScenes: any = {
+	Sex : KiakaiSex,
 };
 
 KiakaiScenes.RavenDreams = function() {
-	let player = GAME().player;
-	let kiakai = GAME().kiakai;
-	
-	let parse : any = {
+	const player = GAME().player;
+	const kiakai = GAME().kiakai;
+
+	let parse: any = {
 		playername : player.name,
-		name   : kiakai.name
+		name   : kiakai.name,
 	};
 	parse = kiakai.ParserPronouns(parse);
-	
+
 	Text.Clear();
 	Text.Add("You briefly tell [name] about the ravens you’ve noticed watching you in your dreams.", parse);
 	Text.NL();
@@ -32,23 +32,23 @@ KiakaiScenes.RavenDreams = function() {
 	Text.NL();
 	Text.Add("You thank the elf for [hisher] help, your curiosity piqued by the information. There really is something strange about the ravens in this world. You’ll just have to find out what it is.", parse);
 	Text.Flush();
-}
+};
 
 KiakaiScenes.TalkQuest = function() {
-	let player = GAME().player;
-	let kiakai = GAME().kiakai;
-	let rosalin = GAME().rosalin;
-	let rigard = GAME().rigard;
+	const player = GAME().player;
+	const kiakai = GAME().kiakai;
+	const rosalin = GAME().rosalin;
+	const rigard = GAME().rigard;
 
-	let parse : any = {
+	let parse: any = {
 		playername : player.name,
-		name   : kiakai.name
+		name   : kiakai.name,
 	};
 	parse = kiakai.ParserPronouns(parse);
-	
+
 	Text.Clear();
 	// Initial stage
-	if(kiakai.flags["Attitude"] < KiakaiFlags.Attitude.Neutral) {
+	if (kiakai.flags.Attitude < KiakaiFlags.Attitude.Neutral) {
 		Text.Add("You ask what you are to do with the gem.", parse);
 		Text.NL();
 		Text.Add("<i>“Lady Aria has told me that the gem holds great power. If you are able to wield it, maybe it can be used to stop Uru before it is too late.”</i> [name] looks at you suspiciously, clearly wondering if that's what you'd really do with it. <i>“Unfortunately, I know nothing of the magic that powers the artifact.”</i>", parse);
@@ -56,110 +56,105 @@ KiakaiScenes.TalkQuest = function() {
 		Text.Add("Couldn't you just ask Aria?", parse);
 		Text.NL();
 		Text.Add("<i>“The Lady would no doubt be able to assist, but I have been unable to contact her since you arrived on Eden. We will need to seek out someone knowledgeable about such things - perhaps a powerful magician or a skilled alchemist.”</i>", parse);
-	}
-	else {
+	} else {
 		Text.Add("<i>“Our first objective should be to find out more about that gemstone that you are carrying,”</i> [name] suggests. <i>“According to Lady Aria, it holds great power. If you are able to wield it, maybe it can be used to stop Uru before it is too late.”</i>", parse);
 		Text.NL();
 		Text.Add("When you ask [himher] how to best achieve that, the elf frowns thoughtfully. <i>“I know nothing of the magic that powers this artifact. We will need to find either a powerful magician or a skilled alchemist who can study it closer.”</i> [name] lets out a sigh of frustration. <i>“The Lady would no doubt be able to assist, but I have been unable to contact her since you arrived on Eden. I am afraid we are on our own.”</i>", parse);
 	}
 	Text.NL();
-	
-	if(rosalin.flags["Met"] == 0) {
+
+	if (rosalin.flags.Met == 0) {
 		Text.Add("<i>“I know that there is an alchemist at the nomad campsite, but I am not aware how skilled she is. Perhaps she could point us in the right direction, though?”</i>", parse);
-	}
-	else {
+	} else {
 		Text.Add("<i>“About that cat girl... we should probably try to find someone more, so to speak, sane,”</i> the elf shakes [hisher] head. <i>“We could probably find someone in the city - many folk pass through there.”</i>", parse);
-		
+
 		Text.NL();
-		if(rigard.Access()) {
+		if (rigard.Access()) {
 			Text.Add("<i>“Question is, how do we get in?”</i>", parse);
-			
+
 			Text.NL();
 			Text.Add("<i>“Perhaps we could try to have one of the farmers sneak us in. They must pass inside regularly to sell their produce. We will have to make sure they are friendly enough to let us tag along, however.”</i>", parse);
 			Text.NL();
 			Text.Add("<i>“I am sure we will be able to find other ways of gaining entrance eventually as well.”</i>", parse);
-		}
-		else if(rigard.flags["RoyalAccess"] == 0) {
+		} else if (rigard.flags.RoyalAccess == 0) {
 			Text.Add("<i>“I hear that the court mage is a skilled alchemist; perhaps we could seek an audience with her?”</i>", parse);
-		}
-		else {
+		} else {
 			Text.Add("<i>“We should find the court mage and ask her about the gem.”</i>", parse);
 		}
 		// TODO: Further down main quest
 	}
-	
+
 	Text.Flush();
 	kiakai.TalkPrompt();
-}
+};
 
 KiakaiScenes.TalkAria = function() {
-	let player = GAME().player;
-	let kiakai = GAME().kiakai;
+	const player = GAME().player;
+	const kiakai = GAME().kiakai;
 
-	let parse : any = {
+	let parse: any = {
 		playername : player.name,
-		name   : kiakai.name
+		name   : kiakai.name,
 	};
 	parse = kiakai.ParserPronouns(parse);
-	
+
 	// First time
-	if(kiakai.flags["TalkedAria"] == 0) {
-		
-		if(kiakai.flags["Attitude"] < KiakaiFlags.Attitude.Neutral) {
+	if (kiakai.flags.TalkedAria == 0) {
+
+		if (kiakai.flags.Attitude < KiakaiFlags.Attitude.Neutral) {
 			Text.Add("<i>“You may be ignorant of much, [playername], but you have had the honor of standing in her presence yourself.”</i> [name] looks a little angry, perhaps almost jealous. <i>“She is the Lady of Light, the embodiment of good in the worlds. Surely, you must have seen at least that much?”</i>", parse);
-		}
-		else {
+		} else {
 			Text.Add("<i>“I guess things have been dropped on you rather suddenly, [playername],”</i> [name] concedes, looking rather embarrassed. <i>“It was not my intention to keep you in the dark about anything. Please, ask me anything you would like to know.”</i>", parse);
 		}
 		Text.NL();
 		Text.Add("You explain that you would like to know more about Aria and her followers.", parse);
 		Text.NL();
-		
-		if(kiakai.flags["Attitude"] < KiakaiFlags.Attitude.Neutral) {
+
+		if (kiakai.flags.Attitude < KiakaiFlags.Attitude.Neutral) {
 			Text.Add("<i>“It is good that you take interest in her.”</i> The elf seems a little relieved that you're interested in [hisher] Goddess. ", parse);
-		}
-		else {
+		} else {
 			Text.Add("<i>“Certainly!”</i> The elf looks happy that you brought up this particular topic. It seems that [heshe] definitely is a devout follower. ", parse);
 		}
 		Text.Add("<i>“Lady Aria is revered by many here on Eden, and with good reason. While it is not common, there have been incidents with portals to other worlds opening up prior to your arrival here,”</i> [name] starts out, <i>“sometimes through design, sometimes due to happenstance, sometimes due to malice. The times that something... untoward emerged from the other side, the Lady exerted her powers to bind it before it could cause significant harm.”</i>", parse);
 		Text.NL();
 		Text.Add("You ask how long this has been going on. <i>“The records are not clear on this, and the records of my people go back a long time,”</i> [name] answers you. <i>“These kinds of portals have been opening on Eden for thousands of years, as far as I know.”</i>", parse);
 		Text.NL();
-		
-		if(kiakai.flags["Attitude"] < KiakaiFlags.Attitude.Neutral)
+
+		if (kiakai.flags.Attitude < KiakaiFlags.Attitude.Neutral) {
 			Text.Add("<i>“Is there anything else that you would like to know about Lady Aria, [playername]?”</i>", parse);
-		else
+		} else {
 			Text.Add("<i>“Tell me, is there anything else that you would like to know about Lady Aria, [playername]?”</i>", parse);
-		
+		}
+
 		kiakai.relation.IncreaseStat(50, 2);
-		
-		kiakai.flags["TalkedAria"] = 1;
-	}
-	else {
+
+		kiakai.flags.TalkedAria = 1;
+	} else {
 		Text.Add("<i>“What else would you like to know about Lady Aria, [playername]?”</i>", parse);
 	}
 	Text.Flush();
-	
-	let options = [];
+
+	const options = [];
 	// TALK ABOUT ARIA'S GOALS
 	options.push({ nameStr: "Goals",
-		func : function() {
+		func() {
 			Text.Clear();
 			Text.Add("What are Aria's goals exactly? For what reason is she putting so much effort into keeping Eden safe?", parse);
 			Text.NL();
-			
-			if(kiakai.flags["Attitude"] < KiakaiFlags.Attitude.Neutral)
+
+			if (kiakai.flags.Attitude < KiakaiFlags.Attitude.Neutral) {
 				Text.Add("[name], looking affronted, replies curtly, <i>“She is the caretaker of the worlds, [playername]! It is her very nature to protect those who follow and worship her!”</i> You explain that while she did seem benevolent when you met her, you still need to find out everything you can about your situation. Still a bit huffy, [heshe] goes on, <i>“It is not for us to know exactly what the Lady's plans are; we need only trust in her and we will no doubt prevail. I do know that you are instrumental for them, however.”</i>", parse);
-			else
+			} else {
 				Text.Add("[name], looking affronted, replies curtly, <i>“For the safety of those who follow and worship her, of course!”</i> You calm the elf down, explaining that you meant no offense. Still a bit huffy, [heshe] continues, <i>“It is not for me to know exactly what the Lady's plans are, but I do know that you are instrumental for them.”</i>", parse);
+			}
 			Text.NL();
 			Text.Add("When you ask exactly what [heshe] means by that, [name] only responds that something about you, or perhaps the gem you carry, could greatly change the future of Eden. [HeShe] seems unwilling or unable to explain more details at this point.", parse);
 			Text.NL();
 			Text.NL();
-			
+
 			KiakaiScenes.TalkAria();
 		}, enabled : true,
-		tooltip : "Ask about what Aria's goals are."
+		tooltip : "Ask about what Aria's goals are.",
 	});
 	Gui.SetButtonsFromList(options, true, function() {
 		Text.Clear();
@@ -167,51 +162,50 @@ KiakaiScenes.TalkAria = function() {
 		Text.Flush();
 		kiakai.TalkPrompt();
 	});
-	
-}
+
+};
 
 KiakaiScenes.TalkUru = function() {
-	let player = GAME().player;
-	let kiakai = GAME().kiakai;
+	const player = GAME().player;
+	const kiakai = GAME().kiakai;
 
-	let parse : any = {
+	let parse: any = {
 		playername : player.name,
-		name   : kiakai.name
+		name   : kiakai.name,
 	};
 	parse = kiakai.ParserPronouns(parse);
-	
-	if(kiakai.flags["TalkedUru"] == 0) {
+
+	if (kiakai.flags.TalkedUru == 0) {
 		Text.Add("<i>“I would rather not dwell on the dark one longer than I have to, [playername],”</i> [name] tells you in a pained voice, <i>“but one must know their enemy to stand against it in battle.”</i>", parse);
 		Text.NL();
 		Text.Add("The elf clears [hisher] throat, preparing for a longer dissertation. <i>“Uru is a foul and evil creature, utterly selfish and chaotically destructive,”</i> [heshe] begins, <i>“I know very little of the details, but she and Lady Aria have battled with each other before, though I do not know where.”</i>", parse);
 		Text.NL();
-		
-		if(kiakai.flags["Attitude"] < KiakaiFlags.Attitude.Neutral) {
+
+		if (kiakai.flags.Attitude < KiakaiFlags.Attitude.Neutral) {
 			Text.Add("<i>“I thankfully have not experienced it as you have. I have seen visions of the hellish realm she has been trapped in,”</i> [name] shudders uncomfortably. <i>“The truly terrible thing is: that realm was once lush and filled with life. Now, it is nothing more than a defiled wasteland, plagued by demons.”</i>", parse);
 			Text.NL();
 			Text.Add("<i>“Do not trust her under any circumstances, [playername]! She is treacherous, the very embodiment of evil!”</i> The elf adds, clearly worried.", parse);
-		}
-		else
+		} else {
 			Text.Add("<i>“While I thankfully have not experienced it as you have, I have seen visions of the hellish realm she has been trapped in,”</i> [name] shudders uncomfortably. <i>“That realm was once lush and filled with life, now it is nothing more than a defiled wasteland, plagued by demons.”</i>", parse);
-		
+		}
+
 		Text.NL();
 		Text.Add("<i>“Where she came from, what she is, what her goals are, the Lady has yet to see fit to inform me - a kindness, I imagine,”</i> the elf concedes. <i>“I am afraid that you have to ask the Lady yourself to find out more. I will try to answer any questions you have to the best of my abilities, though.”</i>", parse);
 		kiakai.relation.IncreaseStat(50, 2);
-		
-		kiakai.flags["TalkedUru"] = 1;
-	}
-	else {
+
+		kiakai.flags.TalkedUru = 1;
+	} else {
 		Text.Add("<i>“What else would you know of the evil one, [playername]?”</i> [name] asks, [hisher] discomfort clear in [hisher] expression.", parse);
 	}
-	
+
 	Text.Flush();
-	
-	let options = [];
+
+	const options = [];
 	// TALK ABOUT CONFLICT WITH ARIA
 	options.push({ nameStr: "Conflict",
-		func : function() {
+		func() {
 			Text.Clear();
-			
+
 			Text.Add("[name] frowns, trying to collect [hisher] thoughts, <i>“All I know is that Lady Aria has done battle with the one known as Uru before, and that their last conflict ended in Uru being trapped in the realm you saw but a brief glimpse of.”</i>", parse);
 			Text.NL();
 			Text.Add("What of Aria herself, you ask, did she suffer any consequence from the battle?", parse);
@@ -223,131 +217,133 @@ KiakaiScenes.TalkUru = function() {
 			Text.Add("<i>“No! Of course not!”</i> the elf exclaims. <i>“No mere demon could ever match the Lady!”</i>", parse);
 			Text.NL();
 			Text.NL();
-			
+
 			KiakaiScenes.TalkUru();
 		}, enabled : true,
-		tooltip : "Ask about the conflict between Uru and Aria."
+		tooltip : "Ask about the conflict between Uru and Aria.",
 	});
 	// TALK ABOUT WHY URU WAS TRAPPED
 	options.push({ nameStr: "Trapped",
-		func : function() {
+		func() {
 			Text.Clear();
-			
+
 			Text.Add("<i>“Understand that a being so powerful cannot easily pass between the realms,”</i> [name] explains, <i>“A regular portal could not withstand her passing, and her inability to create a more stable one has kept the other planes of existence safe till now.”</i> The elf bows [hisher] head sorrowfully, <i>“But this safety is dearly bought, as an entire realm is now under her influence.”</i>", parse);
 			Text.NL();
-			
-			if(kiakai.flags["TalkedUruDA"] == 0) {
-				
-				if(kiakai.flags["Attitude"] < KiakaiFlags.Attitude.Neutral)
+
+			if (kiakai.flags.TalkedUruDA == 0) {
+
+				if (kiakai.flags.Attitude < KiakaiFlags.Attitude.Neutral) {
 					Text.Add("[name] looks at you pleadingly, fear visible in [hisher] eyes, <i>“Y-you saw what it was like there, [playername]. She <b>cannot</b> be allowed to enter Eden!”</i>", parse);
-				else
+				} else {
 					Text.Add("[name] grabs your hand, fear visible in [hisher] eyes, <i>“Y-you saw what it was like there, [playername]. She <b>cannot</b> be allowed to enter Eden!”</i>", parse);
+				}
 				Text.Flush();
-				
+
 				// [Comfort][Boast][Who cares]
-				let options = [];
+				const options = [];
 				options.push({ nameStr: "Comfort",
-					func : function() {
-						if(kiakai.flags["Attitude"] < KiakaiFlags.Attitude.Neutral) {
+					func() {
+						if (kiakai.flags.Attitude < KiakaiFlags.Attitude.Neutral) {
 							Text.Add("You take pity on the poor elf and embrace [himher]. You feel [hisher] body momentarily go rigid, surprised by your actions, before [heshe] relaxes in your arms. You do your best to soothe and calm [himher] as you assure [himher] that it will not come to that. The elf's shaking slowly subsides as [heshe] presses desperately against you.", parse);
 							Text.NL();
 							Text.Add("<i>“Th-thank you for that,”</i> [name] mumbles, disentangling [himher]self from you and blushing. <i>“Perhaps I have misjudged you.”</i>", parse);
 							Text.NL();
 							Text.Add("You insist that [heshe] can lean on your shoulder if [heshe] needs help. [name] smiles at you, before changing the subject.", parse);
-						}
-						else {
+						} else {
 							Text.Add("You take pity on the poor elf and embrace [himher], soothing and calming as you assure [himher] that it will not come to that. The elf's shaking slowly subsides as [heshe] melts in your arms, resting [hisher] head on your chest.", parse);
 							Text.NL();
 							Text.Add("<i>“Th-thank you,”</i> [name] mumbles, disentangling [himher]self from you and blushing, <i>“I am sorry, I gave in to my fears... it will not happen again.”</i>", parse);
 							Text.NL();
 							Text.Add("You insist that [heshe] can lean on your shoulder anytime. [name] blushes brightly before trying to change the subject.", parse);
 						}
-						
+
 						kiakai.relation.IncreaseStat(100, 5);
-						
+
 						Text.NL();
 						Text.NL();
 						KiakaiScenes.TalkUru();
 					}, enabled : true,
-					tooltip : Text.Parse("Try to comfort [himher].", parse)
+					tooltip : Text.Parse("Try to comfort [himher].", parse),
 				});
 				options.push({ nameStr: "Boast",
-					func : function() {
-						let uru = GAME().uru;
+					func() {
+						const uru = GAME().uru;
 						Text.Add("<i>“Hah, that demon isn't so tough,”</i> you brag confidently, ", parse);
-						if(uru.flags["Intro"] & UruFlags.Intro.FuckedUru ||
-						   uru.flags["Intro"] & UruFlags.Intro.FuckedByUru)
+						if (uru.flags.Intro & UruFlags.Intro.FuckedUru ||
+						   uru.flags.Intro & UruFlags.Intro.FuckedByUru) {
 							Text.Add("<i>“I could handle her just fine, and I left her begging for more!”</i>", parse);
-						else
+						} else {
 							Text.Add("<i>“I could easily withstand her wiles, you have nothing to fear as long as I'm around!”</i>", parse);
+						}
 						Text.NL();
-						
+
 						Text.Add("[name] looks at you doubtfully, but with a desperate spark of hope in [hisher] purple eyes, <i>“R-really?”</i> You nod affirmatively, though deep down you still have some nagging doubts about your own words.", parse);
-						
+
 						Text.NL();
 						Text.NL();
 						KiakaiScenes.TalkUru();
 					}, enabled : true,
-					tooltip : "Boast about your own power."
+					tooltip : "Boast about your own power.",
 				});
 				options.push({ nameStr: "Who cares",
-					func : function() {
+					func() {
 						kiakai.relation.DecreaseStat(-100, 5);
-						Text.Add("You explain to [name] that Eden isn't your world, and you have higher priorities than dealing with Uru.",parse);
+						Text.Add("You explain to [name] that Eden isn't your world, and you have higher priorities than dealing with Uru.", parse);
 						Text.NL();
-						
-						if(kiakai.flags["Attitude"] < KiakaiFlags.Attitude.Neutral)
+
+						if (kiakai.flags.Attitude < KiakaiFlags.Attitude.Neutral) {
 							Text.Add("The elf looks at you, clearly disappointed. <i>“I know you must walk your own path, and I will support you, but please think of the people of this world. They have friends, families, children, the same as you or I.”</i>", parse);
-						else
+						} else {
 							Text.Add("<i>“Think of all the people in this world. You may well be the only one who can help them,”</i> the elf tells you, clearly agitated. <i>“Would you doom all of us to be Uru's prey? Look around you! Would you see it reduced to the wasteland you saw in Uru's realm?”</i>", parse);
-						
+						}
+
 						Text.NL();
-						Text.Add("<i>“Please,”</i> [heshe] entreats you, <i>“do not abandon us.”</i>",parse);
+						Text.Add("<i>“Please,”</i> [heshe] entreats you, <i>“do not abandon us.”</i>", parse);
 						Text.NL();
-						Text.Add("You tell [himher] that you'll think about it, but your own world is still the one most important to you.",parse);
-						
+						Text.Add("You tell [himher] that you'll think about it, but your own world is still the one most important to you.", parse);
+
 						Text.NL();
 						Text.NL();
 						KiakaiScenes.TalkUru();
 					}, enabled : true,
-					tooltip : "Eden isn't your problem, and you're not sure Uru is either..."
+					tooltip : "Eden isn't your problem, and you're not sure Uru is either...",
 				});
-				
+
 				Gui.SetButtonsFromList(options);
-				
-				kiakai.flags["TalkedUruDA"] = 1;
-			}
-			else {
+
+				kiakai.flags.TalkedUruDA = 1;
+			} else {
 				Text.Add("<i>“Though no fault of yours, it seems that safety could now be at an end, but only time will tell,”</i> the elf shudders with unease. <i>“Uru is very, very powerful. Should she ever unleash the full force of her wrath on Eden, we would be as ants before her. It must not come to a direct confrontation.”</i>", parse);
-				if(kiakai.flags["Attitude"] < KiakaiFlags.Attitude.Neutral) {
+				if (kiakai.flags.Attitude < KiakaiFlags.Attitude.Neutral) {
 					Text.NL();
 					Text.Add("<i>“Please, help us to prevent her coming.”</i>", parse);
 				}
-				
+
 				Text.NL();
 				Text.NL();
 				KiakaiScenes.TalkUru();
 			}
 		}, enabled : true,
-		tooltip : "Ask about why and how Uru was sealed in the realm where you met her."
+		tooltip : "Ask about why and how Uru was sealed in the realm where you met her.",
 	});
 	// TALK ABOUT URU CONQUESTS
 	options.push({ nameStr: "Conquests",
-		func : function() {
+		func() {
 			Text.Clear();
-			
+
 			Text.Add("<i>“Before Uru was sealed in the dark realm, many worlds fell under her influence,”</i> [name] intones sorrowfully. <i>“Twisted, corrupted, defiled... they all succumbed, until Lady Aria intervened.”</i>", parse);
 			Text.NL();
-			if(kiakai.flags["Attitude"] < KiakaiFlags.Attitude.Neutral)
+			if (kiakai.flags.Attitude < KiakaiFlags.Attitude.Neutral) {
 				Text.Add("<i>“Uru's very presence is enough to corrupt those around her. I hope your stay was brief enough that you were not significantly affected,”</i> the elf concludes, sounding a little suspicious.", parse);
-			else
+			} else {
 				Text.Add("<i>“Uru's very presence is enough to corrupt those around her, given time,”</i> the elf concludes.", parse);
-			
+			}
+
 			Text.NL();
 			Text.NL();
 			KiakaiScenes.TalkUru();
 		}, enabled : true,
-		tooltip : "Ask about Uru's previous conquests."
+		tooltip : "Ask about Uru's previous conquests.",
 	});
 	Gui.SetButtonsFromList(options, true, function() {
 		Text.Clear();
@@ -355,42 +351,40 @@ KiakaiScenes.TalkUru = function() {
 		Text.Flush();
 		kiakai.TalkPrompt();
 	});
-	
-}
 
+};
 
 KiakaiScenes.TalkEden = function() {
-	let player = GAME().player;
-	let kiakai = GAME().kiakai;
+	const player = GAME().player;
+	const kiakai = GAME().kiakai;
 
-	let parse : any = {
+	let parse: any = {
 		playername : player.name,
-		name   : kiakai.name
+		name   : kiakai.name,
 	};
 	parse = kiakai.ParserPronouns(parse);
-	
+
 	Text.Add("<i>“What would you like to know about Eden, [playername]?”</i>", parse);
 	Text.Flush();
-	
-	let options = [];
+
+	const options = [];
 	// TALK ABOUT GEOGRAPHY
 	options.push({ nameStr: "Geography",
-		func : function() {
+		func() {
 			Text.Clear();
-			
-			let scenes = [];
+
+			const scenes = [];
 			// TREE
 			scenes.push(function() {
 				Text.Add("You ask about the most prominent aspect of the realm: the giant tree rising thousands of feet into the air, covering large parts of Eden in the shadow its foliage.", parse);
 				Text.NL();
 				Text.Add("<i>“The tree stands at the center, its roots delve deep,”</i> [name] intones in a reverent voice. <i>“As far as I know, it has always been here. Only the dragons - the oldest beings that live on Eden - have any idea from whence it came and how it came to grow so big. The tree is a symbol of life and the power of nature, and many on Eden worship it, calling it 'The Mother of All'.”</i>", parse);
 				Text.NL();
-				
+
 				// TODO: VISITED TREE CITY
-				if(true) {
+				if (true) {
 					Text.Add("<i>“It is even rumored that there is an entire city clinging to the upper branches.”</i>", parse);
-				}
-				else {
+				} else {
 					Text.Add("<i>“Even so, it still surprises me that an entire city could thrive there, so far above the ground.”</i>", parse);
 				}
 			});
@@ -398,19 +392,19 @@ KiakaiScenes.TalkEden = function() {
 			scenes.push(function() {
 				Text.Add("You ask [himher] about what cities and villages are located on Eden.", parse);
 				Text.NL();
-				
+
 				Text.Add("<i>“The largest settlement is of course the capital of the kingdom, located edgeways of the plains, between the lake and the great forest, not far from the nomad camp where you woke up. Though it is mostly populated by pure humans, there is a fair scattering of various morphs and other races living there.”</i>", parse);
 				Text.NL();
-				
+
 				// TODO: OTHER CITIES
-				
+
 				Text.Add("<i>“Other than that, there are a few smaller civilized settlements on the plains, and on the far side of the Great Tree,”</i> [name] concludes [hisher] explanation. <i>“The village I once called my home is located there.”</i>", parse);
 			});
 			// DANGER
 			scenes.push(function() {
 				Text.Add("You ask about what places one should best avoid.", parse);
 				Text.NL();
-				
+
 				Text.Add("<i>“The desert, the high mountains, and the deeper reaches of the forest can be very dangerous to unprepared travelers,”</i> the elf confides, <i>“but the place you must be most careful of is the Boneyard, near the Highlands. Stay <b>far</b> away from that place, or you will be sorry.”</i>", parse);
 				Text.NL();
 				Text.Add("The Boneyard? Why is it called that?", parse);
@@ -423,22 +417,22 @@ KiakaiScenes.TalkEden = function() {
 			scenes.push(function() {
 				Text.Add("You ask about why Eden seems to be floating in the sky.", parse);
 				Text.NL();
-				
+
 				Text.Add("[name] looks at you with a confused look on [hisher] face. <i>“What do you mean?”</i> Understanding slowly dawns on [himher], <i>“Oh, I think I understand. It is not so much that Eden is floating, the surrounding land... just is not there anymore. I have trouble imagining it otherwise, but the legends tell of a time when the lands stretched wider than now.”</i>", parse);
 				Text.NL();
 				Text.Add("What could have caused such an event, you ask, disbelief clear in your voice.", parse);
 				Text.NL();
 				Text.Add("<i>“I know not,”</i> [name] admits.", parse);
 			});
-			
-			let sceneId = kiakai.flags["RotGeo"];
-			if(sceneId >= scenes.length) {
+
+			let sceneId = kiakai.flags.RotGeo;
+			if (sceneId >= scenes.length) {
 				sceneId = 0;
 				kiakai.relation.IncreaseStat(30, 1);
 			}
-			
-			kiakai.flags["RotGeo"] = sceneId + 1;
-			
+
+			kiakai.flags.RotGeo = sceneId + 1;
+
 			// Play scene
 			scenes[sceneId]();
 
@@ -446,14 +440,14 @@ KiakaiScenes.TalkEden = function() {
 			Text.NL();
 			KiakaiScenes.TalkEden();
 		}, enabled : true,
-		tooltip : "Ask about the geography of Eden."
+		tooltip : "Ask about the geography of Eden.",
 	});
 	// TALK ABOUT PEOPLE
 	options.push({ nameStr: "People",
-		func : function() {
+		func() {
 			Text.Clear();
-			
-			let scenes = [];
+
+			const scenes = [];
 			// HUMANS
 			scenes.push(function() {
 				Text.Add("<i>“Pure humans used to be the most numerous race on Eden, but interbreeding with the various other races arriving through portals has dwindled their numbers,”</i> [name] explains, <i>“They still account for the majority of the population in the capital, and with a few exceptions, only humans are allowed into the royal palace.”</i>", parse);
@@ -469,9 +463,9 @@ KiakaiScenes.TalkEden = function() {
 			// MORPHS
 			scenes.push(function() {
 				Text.Add("<i>“Creatures with characteristics resembling animals have been arriving to Eden from their various home realms for ages,”</i> the elf explains. <i>“Now, they are a natural part of the population, just as common as pure humans.”</i>", parse);
-				
+
 				// TODO: EXPAND?
-				
+
 			});
 			// MAGICAL BEINGS
 			scenes.push(function() {
@@ -487,13 +481,12 @@ KiakaiScenes.TalkEden = function() {
 			});
 			// RABBITS
 			scenes.push(function() {
-				let burrows = GAME().burrows;
-				if(burrows.flags["Access"] == BurrowsFlags.AccessFlags.Unknown) {
+				const burrows = GAME().burrows;
+				if (burrows.flags.Access == BurrowsFlags.AccessFlags.Unknown) {
 					Text.Add("<i>“Some of the priests at the shrine told me about strange creatures they encountered on the plains, walking upright like humans, but very similar to rabbits in appearance. They are fleet-footed, and ran away before the traveling priests could get a closer look at them.”</i>", parse);
 					Text.NL();
 					Text.Add("<i>“According to the locals, they tend to stay together in small groups, and avoid travelers and larger settlements. As I understand it, they are not very sophisticated or intelligent.”</i>", parse);
-				}
-				else {
+				} else {
 					Text.Add("<i>“The more I learn about those lagomorphs, the more worried I become,”</i> [name] frowns. <i>“What if they formed a mob and attacked one of the outlying farms, who knows what they would do?”</i>", parse);
 					Text.NL();
 					Text.Add("You ask [himher] what [heshe] knows about these critters.", parse);
@@ -501,7 +494,7 @@ KiakaiScenes.TalkEden = function() {
 					Text.Add("<i>“They are not uncommon creatures, as they breed very rapidly,”</i> the elf says. <i>“I never saw one up close when I lived at the shrine, as they tend to keep away from people, but some of the priests who traveled frequently told me about sighting them on the plains.”</i>", parse);
 					Text.NL();
 					Text.Add("<i>“This colony... is something different, though. I have never heard of such a large gathering before.”</i>", parse);
-					if(burrows.Access()) {
+					if (burrows.Access()) {
 						Text.NL();
 						Text.Add("<i>“Not to mention this Lagon... he is dangerous.”</i>", parse);
 					}
@@ -519,15 +512,15 @@ KiakaiScenes.TalkEden = function() {
 				Gui.NextPrompt(KiakaiScenes.TalkEden);
 			});
 			*/
-	
-			let sceneId = kiakai.flags["RotPeople"];
-			if(sceneId >= scenes.length) {
+
+			let sceneId = kiakai.flags.RotPeople;
+			if (sceneId >= scenes.length) {
 				sceneId = 0;
 				kiakai.relation.IncreaseStat(30, 1);
 			}
-			
-			kiakai.flags["RotPeople"] = sceneId + 1;
-			
+
+			kiakai.flags.RotPeople = sceneId + 1;
+
 			// Play scene
 			scenes[sceneId]();
 
@@ -535,16 +528,16 @@ KiakaiScenes.TalkEden = function() {
 			Text.NL();
 			KiakaiScenes.TalkEden();
 		}, enabled : true,
-		tooltip : "Ask about the people and creatures that inhabit Eden."
+		tooltip : "Ask about the people and creatures that inhabit Eden.",
 	});
 	// TALK ABOUT FACTIONS
 	options.push({ nameStr: "Factions",
 		func : KiakaiScenes.TalkFactions, enabled : true,
-		tooltip : "Ask about some of the major groups on Eden."
+		tooltip : "Ask about some of the major groups on Eden.",
 	});
 	// TALK ABOUT HUBWORLD
 	options.push({ nameStr: "Hubworld",
-		func : function() {
+		func() {
 			Text.Clear();
 
 			Text.Add("<i>“There is... something about this particular realm that makes it easier for portals to open, sometimes without any apparent reason,”</i> [name] explains, <i>“The Lady once explained it to me as reality being thinner here, though I did not quite understand her at the time.”</i>", parse);
@@ -557,7 +550,7 @@ KiakaiScenes.TalkEden = function() {
 			Text.NL();
 			KiakaiScenes.TalkEden();
 		}, enabled : true,
-		tooltip : "Ask about Eden's function as a hubworld, and portals to other realms."
+		tooltip : "Ask about Eden's function as a hubworld, and portals to other realms.",
 	});
 	Gui.SetButtonsFromList(options, true, function() {
 		Text.Clear();
@@ -565,23 +558,22 @@ KiakaiScenes.TalkEden = function() {
 		Text.Flush();
 		kiakai.TalkPrompt();
 	});
-	
-}
 
+};
 
 KiakaiScenes.TalkFactions = function() {
-	let player = GAME().player;
-	let kiakai = GAME().kiakai;
+	const player = GAME().player;
+	const kiakai = GAME().kiakai;
 
-	let parse : any = {
+	let parse: any = {
 		playername : player.name,
-		name   : kiakai.name
+		name   : kiakai.name,
 	};
 	parse = kiakai.ParserPronouns(parse);
-	
+
 	Text.Clear();
-	
-	let scenes = [];
+
+	const scenes = [];
 	// KINGDOM
 	scenes.push(function() {
 		Text.Add("<i>“The royal family rules over the largest city on Eden, and a good portion of the plains is under their control. They are purebred humans, and they have a strong distaste for other races. Non-humans and mixed races do best in staying far away from the castle and the Royal Guard, though the city itself is fine.”</i>", parse);
@@ -626,36 +618,34 @@ KiakaiScenes.TalkFactions = function() {
 		Text.NL();
 		Text.Add("[name] frowns a bit, <i>“There have been rumors about people disappearing without a trace while traversing the desert, not even leaving bones behind. If you plan to head there, be very careful.”</i>", parse);
 	});
-	
-	let sceneId = kiakai.flags["RotFactions"];
-	if(sceneId >= scenes.length) {
+
+	let sceneId = kiakai.flags.RotFactions;
+	if (sceneId >= scenes.length) {
 		sceneId = 0;
 		kiakai.relation.IncreaseStat(30, 1);
 	}
-	
-	kiakai.flags["RotFactions"] = sceneId + 1;
-	
+
+	kiakai.flags.RotFactions = sceneId + 1;
+
 	// Play scene
 	scenes[sceneId]();
-	
+
 	Text.NL();
 	Text.NL();
 	KiakaiScenes.TalkEden();
-}
-
-
+};
 
 KiakaiScenes.TalkElves = function() {
-	let player = GAME().player;
-	let kiakai = GAME().kiakai;
+	const player = GAME().player;
+	const kiakai = GAME().kiakai;
 
-	let parse : any = {
+	let parse: any = {
 		playername : player.name,
-		name   : kiakai.name
+		name   : kiakai.name,
 	};
 	parse = kiakai.ParserPronouns(parse);
-	
-	if(kiakai.flags["TalkedElves"] == 0) {
+
+	if (kiakai.flags.TalkedElves == 0) {
 		Text.Add("You ask [name] to tell you a little about the elves.", parse);
 		Text.NL();
 		Text.Add("<i>“The elves are a proud race, [playername]. Although in our appearance we resemble humans, in many ways we are actually closer to dryads or fairies.”</i>", parse);
@@ -663,31 +653,31 @@ KiakaiScenes.TalkElves = function() {
 		Text.Add("<i>“My people live in small groups, building villages to be as close to nature as possible. Many of them live in the forest, some building villages in the branches of the trees to stay safe from the dangerous animals that occasionally roam below. My own village was on the shore - my people love the life of the sea, as well as strength of the trees. I had spent but ten years of my life there, when a priestess of Aria stopped by, and I decided I needed to go with her and join the priesthood.”</i>", parse);
 		Text.NL();
 		Text.Add("<i>“Most elves worship the Great Tree and try to live fully in tune with nature. When they gather plants, they make sure to spread their seeds, so the plant will continue to grow. They hunt animals only when sure the species is flourishing and no harm will be done by the culling.”</i>", parse);
-		
+
 		kiakai.relation.IncreaseStat(50, 2);
-		
-		kiakai.flags["TalkedElves"] = 1;
-	}
-	else {
+
+		kiakai.flags.TalkedElves = 1;
+	} else {
 		Text.Add("<i>“What else would you like to know, [playername]?”</i>", parse);
 	}
 	Text.Flush();
-	
-	//[Culture][Parents][Childhood][Why Leave]
-	let options = new Array();
+
+	// [Culture][Parents][Childhood][Why Leave]
+	const options = new Array();
 	options.push({ nameStr : "Culture",
-		func : function() {
+		func() {
 			Text.Clear();
-			
-			let scenes = [];
+
+			const scenes = [];
 			// Long life
 			scenes.push(function() {
 				Text.Add("<i>“One of the biggest differences between elves and humans is how long we live,”</i> [name] tells you. <i>“Where humans live only a few score years, elves' lifetimes are measured in hundreds. The elders of my village were all past their fourth century when I left.”</i>", parse);
 				Text.NL();
 				Text.Add("<i>“This difference runs much deeper than the number of years, [playername]. Elves know that they have time to grow, to learn, to act. Though they make quick decisions when they must, they prefer to think and discuss very carefully anything they find important.”</i> [name] smiles fondly. <i>“I have heard a tale that once there was an elf who fell in love with a human. He told his people, and asked for their advice, wondering if they would accept his choice. The tale says they discussed it long and hard, and in the end decided that if that was the way of his heart, there was no ill in it. When he finally went to the girl to bring her the joyful news, he found her an old woman, and married besides.”</i> [name] laughs at [hisher] story, and you find it difficult to not join [himher].", parse);
 				Text.NL();
-				if(kiakai.relation.Get() > 25)
+				if (kiakai.relation.Get() > 25) {
 					Text.Add("<i>“Death is also much more terrible for the elves,”</i> [name] tells you, [hisher] eyes looking haunted. <i>“My kind have few children, and there are not many of us, so the loss of even a single life before it reaches its fullness is a great horror to us all.”</i>", parse);
+				}
 			});
 			// Nature worship
 			scenes.push(function() {
@@ -713,15 +703,15 @@ KiakaiScenes.TalkElves = function() {
 				Text.NL();
 				Text.Add("<i>“If one read all the scrolls, I believe that would tell you more of the history of the world than you could learn from all the libraries in the human lands.”</i> The elf smiles with pride and obvious curiosity.", parse);
 			});
-			
-			let sceneId = kiakai.flags["RotElfCulture"];
-			if(sceneId >= scenes.length) {
+
+			let sceneId = kiakai.flags.RotElfCulture;
+			if (sceneId >= scenes.length) {
 				sceneId = 0;
 				kiakai.relation.IncreaseStat(30, 1);
 			}
-			
-			kiakai.flags["RotElfCulture"] = sceneId + 1;
-			
+
+			kiakai.flags.RotElfCulture = sceneId + 1;
+
 			// Play scene
 			scenes[sceneId]();
 
@@ -729,13 +719,13 @@ KiakaiScenes.TalkElves = function() {
 			Text.NL();
 			KiakaiScenes.TalkElves();
 		}, enabled : true,
-		tooltip : Text.Parse("Ask [name] more about elvish culture.", parse)
+		tooltip : Text.Parse("Ask [name] more about elvish culture.", parse),
 	});
 	options.push({ nameStr : "Parents",
-		func : function() {
+		func() {
 			Text.Clear();
-			
-			let scenes = [];
+
+			const scenes = [];
 			// Raised by community
 			scenes.push(function() {
 				Text.Add("<i>“You have to understand that elves have very few children. An elvish woman usually has a child less than once every fifty years, even in her prime. As such, when a child is born, [heshe] is extremely important to all elves.”</i>", parse);
@@ -756,15 +746,15 @@ KiakaiScenes.TalkElves = function() {
 				Text.NL();
 				Text.Add("<i>“Oh, no, not at all,”</i> [name] tells you. <i>“Elves do not feel lonely just because of that. After all, we have the entire community to support us. This is how elves have lived as far back as our lore reaches, so it must be a way of living that is comfortable for us...”</i> [name] trails off, sounding a little sad.", parse);
 			});
-			
-			let sceneId = kiakai.flags["RotElfParents"];
-			if(sceneId >= scenes.length) {
+
+			let sceneId = kiakai.flags.RotElfParents;
+			if (sceneId >= scenes.length) {
 				sceneId = 0;
 				kiakai.relation.IncreaseStat(30, 1);
 			}
-			
-			kiakai.flags["RotElfParents"] = sceneId + 1;
-			
+
+			kiakai.flags.RotElfParents = sceneId + 1;
+
 			// Play scene
 			scenes[sceneId]();
 
@@ -772,14 +762,14 @@ KiakaiScenes.TalkElves = function() {
 			Text.NL();
 			KiakaiScenes.TalkElves();
 		}, enabled : true,
-		tooltip : Text.Parse("Ask [name] more about [hisher] parents.", parse)
+		tooltip : Text.Parse("Ask [name] more about [hisher] parents.", parse),
 	});
 	options.push({ nameStr : "Childhood",
-		func : function() {
+		func() {
 			Text.Clear();
-			
-			let scenes = [];
-			
+
+			const scenes = [];
+
 			// Freedom
 			scenes.push(function() {
 				Text.Add("<i>“There is much time for a child to grow up among my people. Until the child's fifteenth year, the elves place no constraints, no demands, upon the children, provide no education unless the child asks for it. The child is left to learn about the world and explore at [hisher] leisure.”</i>", parse);
@@ -792,30 +782,29 @@ KiakaiScenes.TalkElves = function() {
 				KiakaiScenes.TalkElves();
 			});
 			// Freedom2 TODO
-			if(kiakai.relation.Get() > 40) {
+			if (kiakai.relation.Get() > 40) {
 				scenes.push(function() {
 					Text.Add("<i>“In truth, [playername], I often found myself alone as a child. It is only possible for elves to give birth on every twelfth year or so, and no other child was born at the same time as I in our village. The adults in the village were kind to me, taught me anything I wished, but I only felt close to few of them.”</i> [name]'s voice grows quiet and hollow in memory, as [heshe] speaks.", parse);
 					Text.NL();
 					Text.Add("<i>“There were some older children, but by the time I could play with them, they had duties of their own, ones I was not invited to partake in. Though they smiled at me and were gentle, I was ever an outsider in their small circles.”</i>", parse);
 					Text.NL();
-					
-					if(kiakai.flags["TalkedAlone"] == 0) {
-						kiakai.flags["TalkedAlone"] = 1;
+
+					if (kiakai.flags.TalkedAlone == 0) {
+						kiakai.flags.TalkedAlone = 1;
 						Text.Add("<i>“As a result, I spent much time by myself, exploring the sea and the forest near our village, meeting animals and fish, corals and trees.”</i> The elf pauses, and looks into your eyes doubtfully. <i>“You will think me strange for this, but in some ways, they were my closest friends.”</i>", parse);
 						Text.NL();
 						Text.Flush();
 
-						//[Comfort][Explain][You're Weird!]
-						let options = new Array();
+						// [Comfort][Explain][You're Weird!]
+						const options = new Array();
 						options.push({ nameStr : "Comfort",
-							func : function() {
+							func() {
 								kiakai.relation.IncreaseStat(100, 5);
-								if(kiakai.flags["Attitude"] > KiakaiFlags.Attitude.Neutral) {
+								if (kiakai.flags.Attitude > KiakaiFlags.Attitude.Neutral) {
 									Text.Add("You embrace the elf, telling [himher] that you will be with [himher] now. [name] relaxes in your grasp and hugs you back tightly, pressing [hisher] head into your chest.", parse);
 									Text.NL();
 									Text.Add("<i>“Thank you, [playername],”</i> [heshe] whispers, almost too quiet for you to hear.", parse);
-								}
-								else {
+								} else {
 									Text.Add("You pat the elf on the head, and tell [himher] that you've got [himher] now, and you'll take care of [himher] as long as [heshe] remains loyal.", parse);
 									Text.NL();
 									Text.Add("[name] smiles up at you warmly, pressing [hisher] head slightly into your hand. <i>“Thank you, [playername].”</i>", parse);
@@ -824,10 +813,10 @@ KiakaiScenes.TalkElves = function() {
 								Text.NL();
 								KiakaiScenes.TalkElves();
 							}, enabled : true,
-							tooltip : Text.Parse("Tell the elf that [heshe] is not alone anymore.", parse)
+							tooltip : Text.Parse("Tell the elf that [heshe] is not alone anymore.", parse),
 						});
 						options.push({ nameStr : "Explain",
-							func : function() {
+							func() {
 								Text.Add("You tell the elf not to worry. You have felt lonely yourself sometimes, and you know it is tempting to look for friends wherever you can find them.", parse);
 								Text.NL();
 								Text.Add("<i>“Thanks, [playername],”</i> [name] tells you with a wry smile. <i>“It is good to know I am not the only one going crazy!”</i>", parse);
@@ -835,24 +824,23 @@ KiakaiScenes.TalkElves = function() {
 								Text.NL();
 								KiakaiScenes.TalkElves();
 							}, enabled : true,
-							tooltip : "Explain to the elf that's what loneliness does."
+							tooltip : "Explain to the elf that's what loneliness does.",
 						});
 						options.push({ nameStr : "You're Weird!",
-							func : function() {
+							func() {
 								kiakai.relation.DecreaseStat(-100, 5);
-								
+
 								Text.Add("You tell the elf that, yes, that's really strange. Why would you make friends with the trees and the birds? They can't tell you anything, or even understand you, for that matter!", parse);
 								Text.NL();
 								Text.Add("<i>“I suppose you are right.”</i> [name] turns away from you, and wanders off a little, staring at the ground, clearly dejected.", parse);
 								Text.Flush();
 								Gui.NextPrompt(kiakai.Interact);
 							}, enabled : true,
-							tooltip : "Yep, the elf really is strange."
+							tooltip : "Yep, the elf really is strange.",
 						});
 						Gui.SetButtonsFromList(options);
-					}
-					else {
-						
+					} else {
+
 						Text.Add("<i>“As a result, I spent much time by myself, exploring the sea and the forest near our village, meeting animals and fish, corals and trees. In some ways, they were my closest friends.”</i>", parse);
 						Text.NL();
 						Text.NL();
@@ -865,53 +853,52 @@ KiakaiScenes.TalkElves = function() {
 				Text.Add("<i>“My village was devoted to caring for me, and I did not shun their devotion. The loremaster taught me to read when I was still very young, and before I learned, he read to me from the scrolls when he had time. Sometimes, one of the other adults would also take me to gather fruits and berries with them, or to go fishing, and taught me how to pick out the ripe plants, the abundant fish.”</i> [HeShe] smiles fondly.", parse);
 				Text.NL();
 				Text.Add("<i>“The older children also tried to include me in their games, although often I felt like a burden to them. Still, I made a friend or two among them, and they seemed to actually enjoy my endless questions.”</i>", parse);
-				
+
 				Text.NL();
 				Text.NL();
 				KiakaiScenes.TalkElves();
 			});
-			
-			let sceneId = kiakai.flags["RotElfChild"];
-			if(sceneId >= scenes.length) {
+
+			let sceneId = kiakai.flags.RotElfChild;
+			if (sceneId >= scenes.length) {
 				sceneId = 0;
 				kiakai.relation.IncreaseStat(30, 1);
 			}
-			
-			kiakai.flags["RotElfChild"] = sceneId + 1;
-			
+
+			kiakai.flags.RotElfChild = sceneId + 1;
+
 			// Play scene
 			scenes[sceneId]();
 		}, enabled : true,
-		tooltip : Text.Parse("Ask [name] more about [hisher] childhood.", parse)
+		tooltip : Text.Parse("Ask [name] more about [hisher] childhood.", parse),
 	});
 	// TODO
 	options.push({ nameStr : "Why Leave",
-		func : function() {
+		func() {
 			Text.Clear();
-			
+
 			// Low rel version
-			if(kiakai.relation.Get() < 35 || kiakai.flags["TalkedWhyLeave"] == 0) {
-				kiakai.flags["TalkedWhyLeave"] = 1;
-				
+			if (kiakai.relation.Get() < 35 || kiakai.flags.TalkedWhyLeave == 0) {
+				kiakai.flags.TalkedWhyLeave = 1;
+
 				Text.Add("<i>“One day, a priestess came to my village,”</i> [name] tells you, and pauses briefly, clearly deciding what to say next. <i>“Though we did not worship Aria, she was still generous to us, and aided us with healing. I was impressed as much by her as her abilities, and I saw also the goodness of Aria within her. I decided I too wanted to be able to help people as she did, and went with her to join the priesthood.”</i>", parse);
 				Text.NL();
-				if(kiakai.flags["Attitude"] > KiakaiFlags.Attitude.Neutral) {
+				if (kiakai.flags.Attitude > KiakaiFlags.Attitude.Neutral) {
 					Text.Add("You see pain in the elf's eyes and sense that there's much [heshe]'s not telling you, but you decide not to press the issue. [HeShe] will tell you when [heshe] is ready.", parse);
 					Text.NL();
 					Text.NL();
 					KiakaiScenes.TalkElves();
-				}
-				else {
-					
-					if(kiakai.flags["TalkedWhyLeaveForce"] == 0) {
+				} else {
+
+					if (kiakai.flags.TalkedWhyLeaveForce == 0) {
 						Text.Add("You see pain in the elf's eyes and sense that there's much [heshe]'s not telling you.", parse);
 						Text.Flush();
-						//[Demand answer][Let it go]
-						let options = new Array();
+						// [Demand answer][Let it go]
+						const options = new Array();
 						options.push({ nameStr : "Demand answer",
-							func : function() {
-								kiakai.flags["TalkedWhyLeaveForce"] = 1;
-								
+							func() {
+								kiakai.flags.TalkedWhyLeaveForce = 1;
+
 								kiakai.relation.DecreaseStat(-100, 5);
 								Text.Clear();
 								Text.Add("You tell the elf that you demand to know the whole truth. You're in charge here, and [heshe] <i>will</i> tell you.", parse);
@@ -922,34 +909,31 @@ KiakaiScenes.TalkElves = function() {
 								Text.Flush();
 								Gui.NextPrompt(kiakai.Interact);
 							}, enabled : true,
-							tooltip : "Demand that the elf tell you what happened."
+							tooltip : "Demand that the elf tell you what happened.",
 						});
 						options.push({ nameStr : "Let it go",
-							func : function() {
+							func() {
 								Text.Clear();
 								Text.Add("You decide that whatever [name] is concealing, it's probably not important anyway. Maybe [heshe]'ll tell you later if [heshe] wants.", parse);
 								Text.NL();
 								Text.NL();
 								KiakaiScenes.TalkElves();
 							}, enabled : true,
-							tooltip : "It's probably not important anyway..."
+							tooltip : "It's probably not important anyway...",
 						});
 						Gui.SetButtonsFromList(options);
-					}
-					else {
+					} else {
 						Text.Add("You see pain in the elf's eyes and sense that there's much [heshe]'s not telling you. Perhaps [heshe] will tell you when [heshe]'s ready.", parse);
 						Text.NL();
 						Text.NL();
 						KiakaiScenes.TalkElves();
 					}
 				}
-			}
-			// High rel version
-			else {
+			} else {
 				KiakaiScenes.TalkDimensionalViolation();
 			}
 		}, enabled : true,
-		tooltip : Text.Parse("Ask [name] why [heshe] left the elves.", parse)
+		tooltip : Text.Parse("Ask [name] why [heshe] left the elves.", parse),
 	});
 	Gui.SetButtonsFromList(options, true, function() {
 		Text.Clear();
@@ -957,99 +941,93 @@ KiakaiScenes.TalkElves = function() {
 		Text.Flush();
 		kiakai.TalkPrompt();
 	});
-	
-}
+
+};
 
 KiakaiScenes.TalkDimensionalViolation = function() {
-	let player = GAME().player;
-	let kiakai = GAME().kiakai;
+	const player = GAME().player;
+	const kiakai = GAME().kiakai;
 
-	let parse : any = {
+	let parse: any = {
 		playername : player.name,
-		name   : kiakai.name
+		name   : kiakai.name,
 	};
 	parse = kiakai.ParserPronouns(parse);
-	
+
 	Text.Clear();
-	
-	if(kiakai.flags["TalkedWhyLeaveLong"] == 0) {
+
+	if (kiakai.flags.TalkedWhyLeaveLong == 0) {
 		Text.Add("[name] sighs when you ask for the story again. <i>“Very well, you have been patient with me. I will tell you all that occurred.”</i>", parse);
-	}
-	else {
-		if(kiakai.flags["TalkedWhyLeaveLongReact"] == 1) { // HUG/THANK
+	} else {
+		if (kiakai.flags.TalkedWhyLeaveLongReact == 1) { // HUG/THANK
 			Text.Add("<i>“Very well, I will tell you the story again, if you wish to hear it, [playername],”</i> [name] says, seeming a little more comfortable with the prospect than [heshe] used to be.", parse);
-		}
-		else if(kiakai.flags["TalkedWhyLeaveLongReact"] == 2) { // DISMISS
+		} else if (kiakai.flags.TalkedWhyLeaveLongReact == 2) { // DISMISS
 			Text.Add("<i>“Did you not say it was boring?”</i> [name] asks, looking annoyed. <i>“Very well, I will tell you again, but try to pay attention this time.”</i>", parse);
-		}
-		else {
+		} else {
 			Text.Add("<i>“Thank you for being patient with me, I... I think I will be able to tell the whole story this time.”</i> You nod encouragingly to [name].", parse);
 		}
 	}
-	
+
 	Text.NL();
 	Text.Add("<i>“I was a few months past my tenth birthday when I stumbled upon a portal while wandering through the woods by our village. At first, I was curious and approached it, wondering where it led, however, as I drew near, I felt a sense of wrong emanating from it. A glance inside showed me woods that must have once resembled our own, but which were now blackened, with many trees seemingly rotting upright where they stood. I drew back in revulsion from the thing and ran as fast as I could to tell the adults.”</i> ", parse);
-	
-	if(kiakai.flags["TalkedWhyLeaveLongReact"] == 1) { // HUG/THANK
+
+	if (kiakai.flags.TalkedWhyLeaveLongReact == 1) { // HUG/THANK
 		Text.Add("[name] still looks a little disgusted by the memory, but the horror [heshe] had shown before is gone now.", parse);
 		Text.NL();
-	}
-	else { // DISMISS, OR FIRST TIME
+	} else { // DISMISS, OR FIRST TIME
 		Text.Add("[name] shivers recounting the memory, [hisher] horror of the thing undiminished by time.", parse);
 		Text.NL();
 	}
-	
+
 	Text.Add("<i>“By the time they arrived, the portal had closed, but outside it they found collapsed a peculiar creature. It resembled the dryads of our world, but its skin was blackened and cracked, and a sickly yellow pus oozed from its body. They brought the creature back to the village, thinking it ill, and wishing to heal it, for we have long been friends of the dryads.”</i>", parse);
 	Text.NL();
 	Text.Add("<i>“It was indeed much weakened, for it lie motionless within the village for three days. When it awoke, however, its skin had not changed, and the pus now flowed from its half-open mouth, and... other parts.”</i> The elf shudders. <i>“I am told that when Treal, one of our elders, came upon it, it assaulted him, and he was barely able to hold it off while shouting for help. It was seen then that the creature was unnatural and it was put down, its body and very bones burned to a fine ash upon a bonfire of deadwood.”</i>", parse);
 	Text.NL();
-	
-	if(kiakai.flags["TalkedWhyLeaveLong"] == 0) {
-		kiakai.flags["TalkedWhyLeaveLong"] = 1;
-		
+
+	if (kiakai.flags.TalkedWhyLeaveLong == 0) {
+		kiakai.flags.TalkedWhyLeaveLong = 1;
+
 		Text.Add("<i>“But that was only the beginning, [playername].”</i> [name]'s wide eyes meet yours, with an expression of supplication.", parse);
 		Text.Flush();
-		
-		//[Go on...][Later]
-		let options = new Array();
+
+		// [Go on...][Later]
+		const options = new Array();
 		options.push({ nameStr : "Go on...",
-			func : function() {
+			func() {
 				Text.Clear();
 				Text.Add("You hold the elf's hand, telling [himher] that you'd like to hear the rest of it. [HeShe] nods hesitantly, seeming to take strength from your grip.", parse);
 				Text.NL();
 				KiakaiScenes.TalkDimensionalViolationCont();
 			}, enabled : true,
-			tooltip : "Ask the elf to continue."
+			tooltip : "Ask the elf to continue.",
 		});
 		options.push({ nameStr : "Later",
-			func : function() {
+			func() {
 				Text.Clear();
 				Text.Add("Seeing [name] so distressed, you tell [himher] that [heshe] can finish the story later.", parse);
 				Text.NL();
 				Text.NL();
 				KiakaiScenes.TalkElves();
 			}, enabled : true,
-			tooltip : Text.Parse("Tell the elf it's alright - [heshe] can finish the story later.", parse)
+			tooltip : Text.Parse("Tell the elf it's alright - [heshe] can finish the story later.", parse),
 		});
 		Gui.SetButtonsFromList(options);
-	}
-	// NEXT PIECE CONTINUATION
-	else {
+	} else {
 		KiakaiScenes.TalkDimensionalViolationCont();
 	}
-}
+};
 
 // CONTINUATION OF THE STORY
 KiakaiScenes.TalkDimensionalViolationCont = function() {
-	let player = GAME().player;
-	let kiakai = GAME().kiakai;
+	const player = GAME().player;
+	const kiakai = GAME().kiakai;
 
-	let parse : any = {
+	let parse: any = {
 		playername : player.name,
-		name   : kiakai.name
+		name   : kiakai.name,
 	};
 	parse = kiakai.ParserPronouns(parse);
-	
+
 	Text.Add("<i>“Though the corrupt creature was dead - its body but ashes on the wind - we soon found that it had already caused grave ill. On the morning after the pyre, I saw a bird I had often seen singing to its mate lying dazed upon the ground under the tree of its nest. When I lifted it, it made little response, its breathing shallow, its tiny heart pounding desperately in its chest. I left it alone, thinking that perhaps it had grown old and its time was coming, for I had been taught that all beings must pass. That evening, however, I recall being dizzy, Treal laying me down on a bed, concern clear in his face.”</i>", parse);
 	Text.NL();
 	Text.Add("<i>“After that, I recall little of what occurred,”</i> [name] tells you, looking grim. <i>“I am told that all in the village sickened one by one, until none could care for another. Only a human fisherman, who had come to us the day of the pyre to trade, seemed unaffected. When he saw all around him grow ill, he took great fright and hurried as fast as he could to the Shrine of Aria, where he hoped he could be healed.”</i>", parse);
@@ -1066,100 +1044,97 @@ KiakaiScenes.TalkDimensionalViolationCont = function() {
 	Text.NL();
 	Text.Add("<i>“I was sad to leave my people, but I am certain that I chose the right path. The only thing that marred my departure was that, despite her best efforts, Yrissa had arrived too late to aid two of the elves of my village, and I was told that they had passed on before I woke up.”</i>", parse);
 	Text.NL();
-	
+
 	// IF FIRST TIME
-	if(kiakai.flags["TalkedWhyLeaveLongReact"] == 0) {
+	if (kiakai.flags.TalkedWhyLeaveLongReact == 0) {
 		Text.Flush();
-		//[Hug][Thank][Dismiss]
-		let options = new Array();
+		// [Hug][Thank][Dismiss]
+		const options = new Array();
 		options.push({ nameStr : "Hug",
-			func : function() {
+			func() {
 				Text.Clear();
-				
-				kiakai.flags["TalkedWhyLeaveLongReact"] = 1; // HUG/THANK
+
+				kiakai.flags.TalkedWhyLeaveLongReact = 1; // HUG/THANK
 				kiakai.relation.IncreaseStat(100, 10);
 				kiakai.spirit.IncreaseStat(100, 1);
-				
-				if(kiakai.flags["Attitude"] > KiakaiFlags.Attitude.Neutral) {
+
+				if (kiakai.flags.Attitude > KiakaiFlags.Attitude.Neutral) {
 					Text.Add("You put your arms around [name], drawing [himher] closer to you, and [heshe] returns your embrace. You whisper that it is all in the past now, and [heshe] is well. You reassure [himher] that [heshe] did what was right, and that [heshe] is now a splendid healer.", parse);
 					Text.NL();
 					Text.Add("[name] eventually disentangles [himher]self from your arms and smiles up at you. Perhaps [heshe] will be able to deal with the memories better now.", parse);
-				}
-				else { // NAUGHTY
+				} else { // NAUGHTY
 					Text.Add("You put your arms around [name], and [heshe] relaxes, feeling comfortable in your grasp. You whisper to [himher] that [heshe] did all [heshe] could back then, and that now you will protect [himher].", parse);
 					Text.NL();
 					Text.Add("You eventually release [name] from your arms, and [heshe] smiles up at you. Perhaps [heshe] will be able to deal with the memories better now.", parse);
 				}
-				
+
 				Text.Flush();
 				Gui.NextPrompt(KiakaiScenes.TalkElves);
 			}, enabled : true,
-			tooltip : Text.Parse("Hug the elf, thanking [himher] for telling you the story.", parse)
+			tooltip : Text.Parse("Hug the elf, thanking [himher] for telling you the story.", parse),
 		});
 		options.push({ nameStr : "Thank",
-			func : function() {
+			func() {
 				Text.Clear();
-				
-				kiakai.flags["TalkedWhyLeaveLongReact"] = 1; // HUG/THANK
+
+				kiakai.flags.TalkedWhyLeaveLongReact = 1; // HUG/THANK
 				kiakai.relation.IncreaseStat(100, 5);
 				kiakai.spirit.IncreaseStat(100, 1);
-				
+
 				Text.Add("You tell [name] that you are grateful [heshe] told you all that, and that you think knowing what happened might eventually help you with your quest.", parse);
 				Text.NL();
 				Text.Add("[name] smiles up at you, apparently happy that [heshe] has gotten the memories off [hisher] chest.", parse);
-				
+
 				Text.Flush();
 				Gui.NextPrompt(KiakaiScenes.TalkElves);
 			}, enabled : true,
-			tooltip : "Thank the elf for telling you what happened."
+			tooltip : "Thank the elf for telling you what happened.",
 		});
 		options.push({ nameStr : "Dismiss",
-			func : function() {
+			func() {
 				Text.Clear();
-				
-				kiakai.flags["TalkedWhyLeaveLongReact"] = 2; // DISMISS
+
+				kiakai.flags.TalkedWhyLeaveLongReact = 2; // DISMISS
 				kiakai.relation.DecreaseStat(-100, 5);
-				
+
 				Text.Add("You tell the elf you were sleepy because the story was so boring and might have missed something in the middle. Like, most of it.", parse);
 				Text.NL();
 				Text.Add("<i>“Then why in the worlds did you ask me to tell it?”</i> [name] demands, visibly distraught. You see moisture pooling beneath [hisher] eyes.", parse);
-				
+
 				Text.Flush();
 				Gui.NextPrompt(KiakaiScenes.TalkElves);
 			}, enabled : true,
-			tooltip : "Tell the elf that was really boring."
+			tooltip : "Tell the elf that was really boring.",
 		});
 		Gui.SetButtonsFromList(options);
-	}
-	else {
+	} else {
 		Text.Add("You thank [name] for telling you the story again.", parse);
 		Text.NL();
 		Text.NL();
 		KiakaiScenes.TalkElves();
 	}
-}
-
+};
 
 KiakaiScenes.TalkPriest = function() {
-	let player = GAME().player;
-	let kiakai = GAME().kiakai;
+	const player = GAME().player;
+	const kiakai = GAME().kiakai;
 
-	let parse : any = {
+	let parse: any = {
 		playername : player.name,
-		name   : kiakai.name
+		name   : kiakai.name,
 	};
 	parse = kiakai.ParserPronouns(parse);
-	
-	if(kiakai.flags["TalkedPriest"] == 0) {
-		if(kiakai.flags["Attitude"] < KiakaiFlags.Attitude.Neutral) {
+
+	if (kiakai.flags.TalkedPriest == 0) {
+		if (kiakai.flags.Attitude < KiakaiFlags.Attitude.Neutral) {
 			Text.Add("<i>“The priesthood is the instrument of the Lady on Eden,”</i> the elf tells you, looking proud. <i>“The order mostly stays at the Shrine of Aria, though we sometimes venture out at the request of nearby villages, and some serve as advisers to men of power. Among other things, the priests of Aria are exceptionally skilled healers.”</i>", parse);
 			Text.NL();
-			if(kiakai.relation.Get() > 25)
+			if (kiakai.relation.Get() > 25) {
 				Text.Add("<i>“The priesthood is currently headed by High Priestess Yrissa. She practically raised me from when I was but a young child,”</i> [name] confides with a fond tone in [hisher] voice.", parse);
-			else
+			} else {
 				Text.Add("<i>“The priesthood is currently headed by High Priestess Yrissa. She is a strict woman, but kind and generous as well. You would do well to respect her.”</i> You sense that there is something [name] is not telling you, but decide it's probably not important.", parse);
-		}
-		else {
+			}
+		} else {
 			Text.Add("<i>“The Lady makes her presence on Eden be known through her priesthood,”</i> the elf explains to you. <i>“The order mostly stays at the Shrine of Aria, though we sometimes venture out at the request of nearby villages, and some serve as advisers to men of power. Among other things, the priests of Aria are very skilled healers.”</i>", parse);
 			Text.NL();
 			Text.Add("<i>“The priesthood is currently headed by High Priestess Yrissa,”</i> [name] confides with a fond tone in [hisher] voice. <i>“She practically raised me from when I was but a young child.”</i>", parse);
@@ -1167,41 +1142,40 @@ KiakaiScenes.TalkPriest = function() {
 
 		Text.NL();
 		Text.Add("<i>“I currently hold the rank of acolyte in the order.”</i>", parse);
-		
+
 		kiakai.relation.IncreaseStat(50, 2);
-		kiakai.flags["TalkedPriest"] = 1;
-	}
-	else {
+		kiakai.flags.TalkedPriest = 1;
+	} else {
 		Text.Add("<i>“What else would you like to know about the priesthood, [playername]?”</i>", parse);
 	}
-	
+
 	Text.Flush();
-	//[Hierarchy][Disciplines][Activities][Yrissa][Aria][Meeting]
-	let options = new Array();
+	// [Hierarchy][Disciplines][Activities][Yrissa][Aria][Meeting]
+	const options = new Array();
 	options.push({ nameStr : "Hierarchy",
 		func : KiakaiScenes.TalkPriestHierarchy, enabled : true,
-		tooltip : "Ask about the organization of the priesthood."
+		tooltip : "Ask about the organization of the priesthood.",
 	});
 	options.push({ nameStr : "Disciplines",
 		func : KiakaiScenes.TalkPriestDisciplines, enabled : true,
-		tooltip : "Ask about the priesthood's rules and personal goals."
+		tooltip : "Ask about the priesthood's rules and personal goals.",
 	});
 	// TODO
 	options.push({ nameStr : "Activities",
 		func : KiakaiScenes.TalkPriestActivities, enabled : true,
-		tooltip : "Ask what the priesthood actually does day-to-day."
+		tooltip : "Ask what the priesthood actually does day-to-day.",
 	});
 	options.push({ nameStr : "Yrissa",
 		func : KiakaiScenes.TalkPriestYrissa, enabled : true,
-		tooltip : "Ask about the High Priestess."
+		tooltip : "Ask about the High Priestess.",
 	});
 	options.push({ nameStr : "Aria",
 		func : KiakaiScenes.TalkPriestAria, enabled : true,
-		tooltip : "Ask about the priests' relationship with Aria."
+		tooltip : "Ask about the priests' relationship with Aria.",
 	});
 	options.push({ nameStr : "Meeting",
 		func : KiakaiScenes.TalkPriestMeeting, enabled : true,
-		tooltip : Text.Parse("Ask about [name] leaving to come meet you.", parse)
+		tooltip : Text.Parse("Ask about [name] leaving to come meet you.", parse),
 	});
 	Gui.SetButtonsFromList(options, true, function() {
 		Text.Clear();
@@ -1209,22 +1183,22 @@ KiakaiScenes.TalkPriest = function() {
 		Text.Flush();
 		kiakai.TalkPrompt();
 	});
-}
+};
 
 KiakaiScenes.TalkPriestHierarchy = function() {
-	let player = GAME().player;
-	let kiakai = GAME().kiakai;
+	const player = GAME().player;
+	const kiakai = GAME().kiakai;
 
-	let parse : any = {
+	let parse: any = {
 		playername : player.name,
-		name   : kiakai.name
+		name   : kiakai.name,
 	};
 	parse = kiakai.ParserPronouns(parse);
-	
+
 	Text.Clear();
-	
-	let scenes = [];
-	
+
+	const scenes = [];
+
 	// Overview
 	scenes.push(function() {
 		Text.Add("<i>“I know best the lower ranks of the priesthood, [playername],”</i> [name] says, looking somewhere between embarrassed and annoyed. <i>“There is a long training period for all of its members. First, any entrants start off as novices. In this position, they study the verses of Aria, as well as writing, numeracy, and healing. Once they have a grasp of the basics, which normally takes about four years, they move on to being apprentices.”</i>", parse);
@@ -1249,53 +1223,51 @@ KiakaiScenes.TalkPriestHierarchy = function() {
 		Text.NL();
 		Text.Add("<i>“The current High Priestess is Yrissa, and everyone acknowledges her beauty and wisdom,”</i> the elf blushes slightly. <i>“She is thoughtful and kind, and has moved the priesthood to focus on helping the people of the land.”</i>", parse);
 	});
-	
-	let sceneId = kiakai.flags["RotPrHier"];
-	if(sceneId >= scenes.length) {
+
+	let sceneId = kiakai.flags.RotPrHier;
+	if (sceneId >= scenes.length) {
 		sceneId = 0;
 		kiakai.relation.IncreaseStat(30, 1);
 	}
-	
-	kiakai.flags["RotPrHier"] = sceneId + 1;
-	
+
+	kiakai.flags.RotPrHier = sceneId + 1;
+
 	// Play scene
 	scenes[sceneId]();
-	
+
 	Text.NL();
 	Text.NL();
 	KiakaiScenes.TalkPriest();
-}
-
+};
 
 KiakaiScenes.TalkPriestDisciplines = function() {
-	let player = GAME().player;
-	let kiakai = GAME().kiakai;
+	const player = GAME().player;
+	const kiakai = GAME().kiakai;
 
-	let parse : any = {
+	let parse: any = {
 		playername : player.name,
 		name   : kiakai.name,
-		virg   : kiakai.FirstCock() ? "p-penis has not entered a vagina" : "v-vagina has not felt the touch of a penis"
+		virg   : kiakai.FirstCock() ? "p-penis has not entered a vagina" : "v-vagina has not felt the touch of a penis",
 	};
 	parse = kiakai.ParserPronouns(parse);
-	
+
 	Text.Clear();
-	
-	
-	let scenes = [];
-	
+
+	const scenes = [];
+
 	// Celibacy1
-	if(kiakai.flags["TalkedSex"] < 2) {
+	if (kiakai.flags.TalkedSex < 2) {
 		scenes.push(function() {
 			Text.Add("<i>“One of the primary restrictions on the priesthood is that all must remain celibate,”</i> [name] tells you, looking stern. <i>“Sex is a distraction from service to the Lady Aria, and romantic attachment is a distraction from serving the other people of this world.”</i>", parse);
 			Text.NL();
 			Text.Add("<i>“Many find it difficult at times, but the High Priestess has reaffirmed that this is the proper path in serving Aria.”</i>", parse);
 			Text.Flush();
-			
-			if(kiakai.flags["Sexed"] != 0) {
-				//[But...][Okay]
-				let options = new Array();
+
+			if (kiakai.flags.Sexed != 0) {
+				// [But...][Okay]
+				const options = new Array();
 				options.push({ nameStr : "But...",
-					func : function() {
+					func() {
 						Text.NL();
 						Text.Add("You mention that the two of you have engaged in certain activities.", parse);
 						Text.NL();
@@ -1306,21 +1278,21 @@ KiakaiScenes.TalkPriestDisciplines = function() {
 						Text.NL();
 						KiakaiScenes.TalkPriest();
 					}, enabled : true,
-					tooltip : "But... you know, you and I..."
+					tooltip : "But... you know, you and I...",
 				});
 				options.push({ nameStr : "Okay",
-					func : function() {
+					func() {
 						Text.NL();
 						Text.Add("You decide it's best not to mention to the elf that what the two of you have done constitutes as sex.", parse);
 						Text.NL();
 						Text.NL();
 						KiakaiScenes.TalkPriest();
 					}, enabled : true,
-					tooltip : "Don't mention it."
+					tooltip : "Don't mention it.",
 				});
-				if(kiakai.flags["TalkedSex"] == 1) {
+				if (kiakai.flags.TalkedSex == 1) {
 					options.push({ nameStr : "Confront",
-						func : function() {
+						func() {
 							Text.Clear();
 							Text.Add("What is so wrong with sex? It's just natural reproductive urges after all...", parse);
 							Text.NL();
@@ -1336,7 +1308,7 @@ KiakaiScenes.TalkPriestDisciplines = function() {
 							Text.NL();
 							Text.Add("You wait in silence, letting [name] gather courage to speak. <i>“I may have told you of this, but pregnancy and child-rearing is different for my kind.”</i>", parse);
 							Text.NL();
-							if(kiakai.FirstVag()) {
+							if (kiakai.FirstVag()) {
 								Text.Add("<i>“A pregnancy is very hard on an elvish woman, I... I am afraid.”</i> [name] hugs [himher]self, looking scared. <i>“I could not withstand such pain as they go through, it would break me. Besides...”</i>", parse);
 								Text.NL();
 							}
@@ -1346,10 +1318,10 @@ KiakaiScenes.TalkPriestDisciplines = function() {
 							Text.NL();
 							Text.Add("<i>“I do not know,”</i> the elf looks gloomy. <i>“Neither I nor anyone at the shrine knew much of elven physiology; it may well be that what works for regular humans would not work for me. I simply cannot take the risk.”</i>", parse);
 							Text.Flush();
-							
+
 							Gui.NextPrompt(function() {
 								Text.Clear();
-								
+
 								Text.Add("[name]'s dilemma is understandable, but you are not willing to give up on [himher] so easily. Taking [hisher] hand, you pull [himher] down to sit with you. Patiently, you explain to the elf that there are many ways for two persons to make love to each other, with little to no chance for pregnancy.", parse);
 								Text.NL();
 								Text.Add("At first, [heshe] looks very uncomfortable, perhaps for the first time understanding the implications of [hisher] healing techniques. After a while, the elf begins to look intrigued, even surprising you by asking questions.", parse);
@@ -1362,26 +1334,26 @@ KiakaiScenes.TalkPriestDisciplines = function() {
 								Text.NL();
 								Text.Add("<i>“I... umm... I guess I would not mind...”</i> [name] mumbles. You give [himher] a kiss on the cheek before gathering your gear.", parse);
 								Text.Flush();
-								
+
 								player.AddLustFraction(0.3);
 								kiakai.AddLustFraction(0.6);
 								TimeStep({hour: 3});
-								
+
 								Gui.NextPrompt(KiakaiScenes.TalkPriest);
-								
-								kiakai.flags["TalkedSex"] = 2; // Locks this option, opens sex again
+
+								kiakai.flags.TalkedSex = 2; // Locks this option, opens sex again
 							});
 						}, enabled : true,
-						tooltip : Text.Parse("This seems to be at the root of [name]'s reluctance. Try to confront [himher] about this practice.", parse)
+						tooltip : Text.Parse("This seems to be at the root of [name]'s reluctance. Try to confront [himher] about this practice.", parse),
 					});
 				}
 				Gui.SetButtonsFromList(options);
-			}
-			else
+			} else {
 				Gui.NextPrompt(KiakaiScenes.TalkPriest);
+			}
 		});
 	}
-	if(kiakai.relation.Get() > 50) {
+	if (kiakai.relation.Get() > 50) {
 		// Celibacy2
 		scenes.push(function() {
 			Text.Add("<i>“Although priests are supposed to be celibate, [playername], I suspect that some do not follow the decree,”</i> [name] tells you, looking concerned.", parse);
@@ -1390,8 +1362,9 @@ KiakaiScenes.TalkPriestDisciplines = function() {
 			Text.NL();
 			Text.Add("<i>“W-worst of all, sometimes I... I hear noises...”</i> [name] trails off, clearly too embarrassed to continue on the topic.", parse);
 			Text.NL();
-			if(kiakai.flags["Sexed"] != 0)
+			if (kiakai.flags.Sexed != 0) {
 				Text.Add("You're not sure how to respond, considering the noises you've heard [name] make.", parse);
+			}
 			Text.NL();
 			Text.NL();
 			KiakaiScenes.TalkPriest();
@@ -1408,44 +1381,42 @@ KiakaiScenes.TalkPriestDisciplines = function() {
 		Text.NL();
 		KiakaiScenes.TalkPriest();
 	});
-	
-	let sceneId = kiakai.flags["RotPrDisc"];
-	if(sceneId >= scenes.length) {
+
+	let sceneId = kiakai.flags.RotPrDisc;
+	if (sceneId >= scenes.length) {
 		sceneId = 0;
 		kiakai.relation.IncreaseStat(30, 1);
 	}
-	
-	kiakai.flags["RotPrDisc"] = sceneId + 1;
-	
+
+	kiakai.flags.RotPrDisc = sceneId + 1;
+
 	// Play scene
 	scenes[sceneId]();
-}
-
-
+};
 
 KiakaiScenes.TalkPriestActivities = function() {
-	let player = GAME().player;
-	let kiakai = GAME().kiakai;
+	const player = GAME().player;
+	const kiakai = GAME().kiakai;
 
-	let parse : any = {
+	let parse: any = {
 		playername : player.name,
-		name   : kiakai.name
+		name   : kiakai.name,
 	};
 	parse = kiakai.ParserPronouns(parse);
-	
+
 	Text.Clear();
-	
-	
-	let scenes = [];
-	
+
+	const scenes = [];
+
 	// Chores
 	scenes.push(function() {
 		Text.Add("<i>“There are many chores that need to get done just to keep the shrine running,”</i> [name] tells you. <i>“There is cooking to be done in the kitchens, tending the shrine's fields and gardens, cleaning the floors and maintaining the buildings... Although the priesthood employs some full-time staff to assist with these, much of the work falls to novices and apprentices.”</i>", parse);
 		Text.NL();
 		Text.Add("<i>“Learning and studying priestly arts naturally come first, but for beginners, a large part of the day is also dedicated to this type of labor. It is said that hard work helps develop character and, by exhausting the body, brings the mind closer to the Lady.”</i>", parse);
 		Text.NL();
-		if(kiakai.relation.Get() > 25)
+		if (kiakai.relation.Get() > 25) {
 			Text.Add("<i>“Though, to be honest with you, I have found my mind ever closer to oblivion than to Aria after a grueling day of work.”</i>", parse);
+		}
 	});
 	// Study
 	scenes.push(function() {
@@ -1480,7 +1451,7 @@ KiakaiScenes.TalkPriestActivities = function() {
 		Text.Add("<i>“Some among the diviners have largely left the shrine, and taken up residence in the human capital, where they have become advisers. All diviners know much about the world and about human affairs, and as such, many in positions of power see their advice as invaluable.”</i>", parse);
 		Text.NL();
 		Text.Add("<i>“In return, providing such advice gives them a perfect opportunity to turn the deeds of the mighty to serve the will of Aria, and to help the world. All of them still report to the order heads and the High Priestess, and they occasionally come back to the shrine to inform the others of what is going on in the world, or to seek guidance from their peers when they feel they need it.”</i>", parse);
-		if(kiakai.relation.Get() > 25) {
+		if (kiakai.relation.Get() > 25) {
 			Text.NL();
 			Text.Add("<i>“Between you and me,”</i> [name] adds, <i>“I question the piety of such diviners whom I have met. I fear some of them may have become seduced by worldly power and riches, and report to the High Priestess, and even serve Lady Aria, in name only.”</i>", parse);
 		}
@@ -1491,50 +1462,49 @@ KiakaiScenes.TalkPriestActivities = function() {
 		Text.NL();
 		Text.Add("<i>“In addition, once every season there is a bigger celebration. It is a wondrous occasion, to which many come from the outlying villages, with patrols going out from the shrine and from the kingdom to help guide those who wish it past the beasts in the woods. Many in the priesthood play beautiful music, candles illuminate the grand hall deep into the night like a myriad of stars, and the kitchens labor day and night to provide food for any who wish it at the gathering.”</i> [name] speaks wistfully, a relaxed smile on [hisher] face, and you tell [himher] you'd like to see this celebration sometime.", parse);
 	});
-	
-	let sceneId = kiakai.flags["RotPrAct"];
-	if(sceneId >= scenes.length) {
+
+	let sceneId = kiakai.flags.RotPrAct;
+	if (sceneId >= scenes.length) {
 		sceneId = 0;
 		kiakai.relation.IncreaseStat(30, 1);
 	}
-	
-	kiakai.flags["RotPrAct"] = sceneId + 1;
-	
+
+	kiakai.flags.RotPrAct = sceneId + 1;
+
 	// Play scene
 	scenes[sceneId]();
-	
+
 	Text.NL();
 	Text.NL();
 	KiakaiScenes.TalkPriest();
-}
-
+};
 
 KiakaiScenes.TalkPriestYrissa = function() {
-	let player = GAME().player;
-	let kiakai = GAME().kiakai;
+	const player = GAME().player;
+	const kiakai = GAME().kiakai;
 
-	let parse : any = {
+	let parse: any = {
 		playername : player.name,
-		name   : kiakai.name
+		name   : kiakai.name,
 	};
 	parse = kiakai.ParserPronouns(parse);
-	
+
 	Text.Clear();
-	
-	
-	let scenes = [];
-	
+
+	const scenes = [];
+
 	// General
 	scenes.push(function() {
 		Text.Add("<i>“The current High Priestess of the order is Yrissa. She has held the position for two seven-year cycles in a row now, having assumed it at a young age.”</i>", parse);
 		Text.NL();
 		Text.Add("<i>“She was actually the one who brought me from the village to the order.", parse);
 		Text.NL();
-		
-		if(kiakai.relation.Get() > 25 || kiakai.flags["Attitude"] > KiakaiFlags.Attitude.Neutral)
+
+		if (kiakai.relation.Get() > 25 || kiakai.flags.Attitude > KiakaiFlags.Attitude.Neutral) {
 			Text.Add("She is very precious to me,”</i> [name] confesses. <i>“She was the one who made sure I was accepted even though the leadership back then was still skeptical of admitting an elf, and she has been like an older sister, and sometimes almost a... mother, to me.”</i>", parse);
-		else
+		} else {
 			Text.Add("She has kept watch over me since then, making sure that I am doing well and learning to best serve Lady Aria. She has been a great help in guiding me on my path, [playername]. Perhaps she will be able to assist you, as well,”</i> [name] tells you, looking you straight in the eyes.", parse);
+		}
 		Text.NL();
 		Text.Add("<i>“She is generous and kind, but also strict and meticulous in ensuring that Aria's will is done. She, more than anyone, acts for the preservation of the worlds, and to ensure the dominion of our Lady's goodness.”</i>", parse);
 	});
@@ -1544,8 +1514,7 @@ KiakaiScenes.TalkPriestYrissa = function() {
 		Text.NL();
 		Text.Add("<i>“She has been skillful in directing the order since then, and ensuring that all our abilities are bent to the service of Aria.”</i>", parse);
 	});
-	if(kiakai.relation.Get() > 50)
-	{
+	if (kiakai.relation.Get() > 50) {
 		// Promotion
 		scenes.push(function() {
 			Text.Add("<i>“To be honest with you, I often wish that Yrissa would simply have me promoted already. I think there are many among the order heads who oppose the promotion of an elf to the full prestige of a diviner or cleric, but she could override them if she wished to. I suspect that she had to override them just to get me to the rank of acolyte.”</i> [name] looks petulant, saying this.", parse);
@@ -1557,81 +1526,79 @@ KiakaiScenes.TalkPriestYrissa = function() {
 			Text.Add("You tell [himher] that there is nothing to forgive, and you quite understand [hisher] frustration.", parse);
 		});
 	}
-	
-	let sceneId = kiakai.flags["RotPrYrissa"];
-	if(sceneId >= scenes.length) {
+
+	let sceneId = kiakai.flags.RotPrYrissa;
+	if (sceneId >= scenes.length) {
 		sceneId = 0;
 		kiakai.relation.IncreaseStat(20, 1);
 	}
-	
-	kiakai.flags["RotPrYrissa"] = sceneId + 1;
-	
+
+	kiakai.flags.RotPrYrissa = sceneId + 1;
+
 	// Play scene
 	scenes[sceneId]();
-	
+
 	Text.NL();
 	Text.NL();
 	KiakaiScenes.TalkPriest();
-}
-
+};
 
 KiakaiScenes.TalkPriestAria = function() {
-	let player = GAME().player;
-	let kiakai = GAME().kiakai;
+	const player = GAME().player;
+	const kiakai = GAME().kiakai;
 
-	let parse : any = {
+	let parse: any = {
 		playername : player.name,
-		name   : kiakai.name
+		name   : kiakai.name,
 	};
 	parse = kiakai.ParserPronouns(parse);
-	
+
 	Text.Clear();
-	
-	
-	let scenes = [];
-	
+
+	const scenes = [];
+
 	// Long
 	scenes.push(function() {
 		Text.Add("<i>“Most in the priesthood speak of conversing with Lady Aria almost every day. They pray to her at night, and hear what she wishes of them in response. Sometimes, they even find that small miracles occur, as she lights their way to doing her will.”</i> [name] sounds a little despondent as [heshe] tells you this.", parse);
 		Text.NL();
 		Text.Add("<i>“For some reason, she does not speak to me as often. Perhaps even she prefers to communicate with humans rather than with elves. I know for certain that I have heard from her but twice in my life. The first time she spoke to me, I knew that I must leave the village of my birth, and come to aid her at the shrine, and the second, she told me come and find you.”</i> [name] smiles gently. <i>“I suppose I ought not to complain about the lack of communications, when their import is so great.”</i>", parse);
-		
-		if(kiakai.relation.Get() > 40) {
+
+		if (kiakai.relation.Get() > 40) {
 			Text.NL();
 			Text.Add("The elf pauses, thinking a little, before adding, <i>“To be entirely honest with you, [playername], sometimes I wonder if the other priests hear from Lady Aria at all. The two times she spoke to me, I knew I could have no mistake nor illusion about either her message or intent. I beheld her corporeal form, and the beautiful sight of her garden as well. When the other priests speak of conversing with her, however, it is never something so clear or vivid, and often they receive ambiguous or even conflicting messages.”</i> [name] shakes [hisher] head. <i>“Despite this, I know they are good men and women, and would not invent revelation where there is none. I simply do not know what to make of it.”</i>", parse);
 		}
 	});
-	
-	let sceneId = kiakai.flags["RotPrAria"];
-	if(sceneId >= scenes.length) {
+
+	let sceneId = kiakai.flags.RotPrAria;
+	if (sceneId >= scenes.length) {
 		sceneId = 0;
 		kiakai.relation.IncreaseStat(20, 1);
 	}
-	
-	kiakai.flags["RotPrAria"] = sceneId + 1;
-	
+
+	kiakai.flags.RotPrAria = sceneId + 1;
+
 	// Play scene
 	scenes[sceneId]();
-	
+
 	Text.NL();
 	Text.NL();
 	KiakaiScenes.TalkPriest();
-}
+};
 
 KiakaiScenes.TalkPriestMeeting = function() {
-	let player = GAME().player;
-	let kiakai = GAME().kiakai;
+	const player = GAME().player;
+	const kiakai = GAME().kiakai;
 
-	let parse : any = {
+	let parse: any = {
 		playername : player.name,
-		name   : kiakai.name
+		name   : kiakai.name,
 	};
 	parse = kiakai.ParserPronouns(parse);
-	
+
 	Text.Clear();
-	
-	let scenes = [];
-	
+
+	const scenes = [];
+
 	// Short version
 	scenes.push(function() {
 		Text.Add("<i>“It was a simple thing, [playername]. As I meditated in the gardens, Lady Aria entered my mind, and sent me a vision of her wishes. She told me of your arrival, and showed you to me, instructing me in what I need to do for you.”</i>", parse);
@@ -1642,7 +1609,7 @@ KiakaiScenes.TalkPriestMeeting = function() {
 		Text.NL();
 		Text.Add("<i>“That, I do not know,”</i> the elf replies. <i>“It could be that time flows differently in the other worlds, or that your passage through the boundaries was longer than you perceived. Perhaps it could be that Lady Aria foresaw your arrival, and knew to send me to wait for you before you had even left your world.”</i>", parse);
 	});
-	if(kiakai.relation.Get() > 50) {
+	if (kiakai.relation.Get() > 50) {
 		// Detailed version
 		scenes.push(function() {
 			Text.Add("<i>“I... I have a confession to make, [playername],”</i> [name] says, looking embarrassed. <i>“Although I did not say anything untrue to you about the way I came to fetch you, I may have omitted some details.”</i>", parse);
@@ -1653,28 +1620,29 @@ KiakaiScenes.TalkPriestMeeting = function() {
 			Text.NL();
 			Text.Add("<i>“There was naught else I could do, [playername]! How was I to prove that my revelation was genuine, when the only sign of it was in my mind. If they hesitated or debated, or, worst of all, did not believe me, my purpose would have been ruined. Not telling the priesthood of Lady Aria's wishes was the only way I could carry them out!”</i>", parse);
 			Text.NL();
-			
-			if(kiakai.flags["Attitude"] > KiakaiFlags.Attitude.Neutral)
+
+			if (kiakai.flags.Attitude > KiakaiFlags.Attitude.Neutral) {
 				Text.Add("You hug the agitated elf, telling [himher] that [heshe] chose well. If [heshe] had delayed, you would've been lost, a near-dead stranger in a strange land, and Aria's plan would have been for naught.", parse);
-			else
+			} else {
 				Text.Add("You pat the agitated elf on the head, telling [himher] that [heshe] did well. You tell [himher] that [heshe] doesn't need to worry about the attitude of the priesthood while [heshe]'s following you. After all, in serving you, [heshe] furthers the will of Aria.", parse);
+			}
 		});
 	}
-	
-	let sceneId = kiakai.flags["RotPrMeeting"];
-	if(sceneId >= scenes.length) {
+
+	let sceneId = kiakai.flags.RotPrMeeting;
+	if (sceneId >= scenes.length) {
 		sceneId = 0;
 		kiakai.relation.IncreaseStat(20, 1);
 	}
-	
-	kiakai.flags["RotPrMeeting"] = sceneId + 1;
-	
+
+	kiakai.flags.RotPrMeeting = sceneId + 1;
+
 	// Play scene
 	scenes[sceneId]();
-	
+
 	Text.NL();
 	Text.NL();
 	KiakaiScenes.TalkPriest();
-}
+};
 
 export { KiakaiScenes };

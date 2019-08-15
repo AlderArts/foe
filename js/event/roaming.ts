@@ -1,22 +1,22 @@
-import { EncounterTable } from "../encountertable";
-import { Party } from "../party";
-import { Encounter } from "../combat";
-import { GameState, SetGameState } from "../gamestate";
 import { Gender } from "../body/gender";
-import { WorldTime, TimeStep, GAME, WORLD } from "../GAME";
-import { Gui } from "../gui";
-import { Text } from "../text";
-import { IngredientItems } from "../items/ingredients";
-import { Entity } from "../entity";
+import { Encounter } from "../combat";
+import { EncounterTable } from "../encountertable";
 import { Bandit } from "../enemy/bandit";
-import { WeaponsItems } from "../items/weapons";
+import { Entity } from "../entity";
+import { GAME, TimeStep, WORLD, WorldTime } from "../GAME";
+import { GameState, SetGameState } from "../gamestate";
+import { Gui } from "../gui";
 import { AccItems } from "../items/accessories";
+import { IngredientItems } from "../items/ingredients";
+import { WeaponsItems } from "../items/weapons";
+import { Party } from "../party";
+import { Text } from "../text";
 
-let RoamingScenes : any = {};
+const RoamingScenes: any = {};
 
 RoamingScenes.FlowerPetal = function() {
-	let party : Party = GAME().party;
-	let parse : any = {
+	const party: Party = GAME().party;
+	const parse: any = {
 
 	};
 
@@ -33,20 +33,20 @@ RoamingScenes.FlowerPetal = function() {
 };
 
 RoamingScenes.FindSomeCoins = function() {
-	let party : Party = GAME().party;
-	let world = WORLD();
+	const party: Party = GAME().party;
+	const world = WORLD();
 
-	let coin = Math.floor(5 + Math.random() * 20);
+	const coin = Math.floor(5 + Math.random() * 20);
 
-	let parse : any = {
+	const parse: any = {
 		year    : Math.floor(WorldTime().year - (40 + Math.random() * 20)),
 		rhisher : Math.random() < 0.5 ? "his" : "her",
-		coin    : coin
+		coin,
 	};
 
-	let loc = world.CurrentLocation();
+	const loc = world.CurrentLocation();
 
-	parse["ground"] = loc == world.Locations.Desert ? "sand" :
+	parse.ground = loc == world.Locations.Desert ? "sand" :
 	                  loc == world.Locations.Forest ? "undergrowth" :
 	                  "grass";
 
@@ -65,47 +65,49 @@ RoamingScenes.FindSomeCoins = function() {
 	party.coin += coin;
 
 	Gui.NextPrompt();
-}
+};
 
-RoamingScenes.KingdomPatrol = function(entering : boolean) {
-	let player = GAME().player;
-	let party : Party = GAME().party;
-	let rigard = GAME().rigard;
-	let terry = GAME().terry;
-	let kiakai = GAME().kiakai;
-	let lei = GAME().lei;
-	let world = WORLD();
+RoamingScenes.KingdomPatrol = function(entering: boolean) {
+	const player = GAME().player;
+	const party: Party = GAME().party;
+	const rigard = GAME().rigard;
+	const terry = GAME().terry;
+	const kiakai = GAME().kiakai;
+	const lei = GAME().lei;
+	const world = WORLD();
 
-	let parse : any = {
-		playername : player.name
+	let parse: any = {
+		playername : player.name,
 	};
-	
-	let bonus = party.location == world.loc.KingsRoad.Road;
-	
+
+	const bonus = party.location == world.loc.KingsRoad.Road;
+
 	Text.Clear();
-	if(entering)
+	if (entering) {
 		Text.Add("As you make your way to the plains,", parse);
-	else
+	} else {
 		Text.Add("While you’re looking around,", parse);
+	}
 	Text.Add(" you spot a squad of a dozen mounted men heading your way. Judging by their uniforms, they’re soldiers from one of the kingdom’s patrols.", parse);
 	Text.NL();
-	
-	let capt = new Entity();
-	if(Math.random() < 0.3)
+
+	const capt = new Entity();
+	if (Math.random() < 0.3) {
 		capt.body.DefFemale();
-	else
+	} else {
 		capt.body.DefMale();
-	let gender = capt.Gender();
-	
+	}
+	const gender = capt.Gender();
+
 	parse = capt.ParserPronouns(parse, "r");
-	parse["rmanwoman"] = capt.mfTrue("man", "woman");
-	
-	let scenes = new EncounterTable();
-	
+	parse.rmanwoman = capt.mfTrue("man", "woman");
+
+	const scenes = new EncounterTable();
+
 	scenes.AddEnc(function() {
 		rigard.bandits = RoamingScenes.BanditsGen(capt, bonus ? 3 : 0);
-		parse["rbanditsdesc"] = rigard.bandits.desc;
-		
+		parse.rbanditsdesc = rigard.bandits.desc;
+
 		Text.Add("The [rmanwoman] at the front of the group waves for [rhisher] companions to wait, and rides up to you on [rhisher] own. [rHeShe] is a young, pure human [rmanwoman] and is wearing new looking armor, though dirt staining the tabard points to heavier recent use.", parse);
 		Text.NL();
 		Text.Add("<i>“We’ve received reports of a few bandits raiding the farms in this area,”</i> [rheshe] says without preamble, <i>“and were sent here to investigate. I have been told it’s [rbanditsdesc]. Have you seen them around here?”</i> [rHeShe] doesn’t sound too happy with the job, glancing around, as if [rheshe] just wants to get this conversation over with.", parse);
@@ -125,11 +127,11 @@ RoamingScenes.KingdomPatrol = function(entering : boolean) {
 		Text.NL();
 		Text.Add("[rHeShe] introduces [rhimher]self as a sergeant of the armed forces of Rigard before getting down to business. <i>“What are you doing here?”</i> [rheshe] asks. <i>“You’re not farmers, you’re not traders, and judging by your weapons, you’re not laborers.”</i>", parse);
 		Text.Flush();
-		
-		//[Adventurers][Bandits!]
-		let options = new Array();
+
+		// [Adventurers][Bandits!]
+		const options = new Array();
 		options.push({ nameStr : "Adventurers",
-			func : function() {
+			func() {
 				Text.Clear();
 				Text.Add("You tell the sergeant that you are adventurers, and you’re here as part of your quest. Okay, it might not be an <i>essential</i> part of your quest, but there’s no reason to tell [rhimher] that.", parse);
 				Text.NL();
@@ -141,69 +143,67 @@ RoamingScenes.KingdomPatrol = function(entering : boolean) {
 				Text.NL();
 				Text.Add("<i>“You’re always thinking the whole world is made just for you!”</i> [rheshe] jabs a finger at your chest, glaring. <i>“I’m sorely tempted to have a few men follow you just to make sure you don’t get up to any mischief, but I have none to spare, more’s the pity.”</i>", parse);
 				Text.NL();
-				
-				let humanity = player.Humanity();
-				
-				parse["human"] = humanity > 0.8 ? " human" : "...";
+
+				const humanity = player.Humanity();
+
+				parse.human = humanity > 0.8 ? " human" : "...";
 				Text.Add("[rHeShe] sighs, lowering [rhisher] hand. <i>“So, I guess you can go. <b>Try</b> to be a decent[human] being, though? Please?”</i>", parse);
 				Text.NL();
 				Text.Add("You nod with some relief, and the sergeant turns to mount and leave. <i>“Oh, and no, I will not have sex with you,”</i> [rheshe] throws back in your direction, before riding off.", parse);
 				Text.NL();
-				if(party.InParty(terry)) {
-					parse["himher"] = terry.himher();
+				if (party.InParty(terry)) {
+					parse.himher = terry.himher();
 					Text.Add("<i>“I never realized adventurers were so much like thieves!”</i> Terry remarks, grinning. <i>“Sounds like I can put my skills to good use.”</i>", parse);
 					Text.NL();
 					Text.Add("You tell [himher] that you’ll consider it, at least when you find suitable vases to loot.", parse);
-				}
-				else if(terry.Recruited()) {
-					parse["himher"] = terry.himher();
+				} else if (terry.Recruited()) {
+					parse.himher = terry.himher();
 					Text.Add("You wonder if Terry would appreciate these apparent similarities of [hisher] old profession and the new one.", parse);
 				}
-				
-				let inc = player.charisma.IncreaseStat(30, 1);
-				
-				if(inc > 0) {
+
+				const inc = player.charisma.IncreaseStat(30, 1);
+
+				if (inc > 0) {
 					Text.NL();
 					Text.Add("<b>You feel like you’ve learned a little about how not to offend people from the sergeant’s rant, making you a bit more charismatic!</b>", parse);
 				}
 				Text.Flush();
-				
+
 				Gui.NextPrompt();
 			}, enabled : true,
-			tooltip : Text.Parse("Tell [rhimher] that you’re adventurers.", parse)
+			tooltip : Text.Parse("Tell [rhimher] that you’re adventurers.", parse),
 		});
 		options.push({ nameStr : "Bandits!",
-			func : function() {
+			func() {
 				Text.Clear();
 				Text.Add("Trying to keep a straight face, you proclaim that you are bandits, here to murder, rape, and kill!", parse);
 				Text.NL();
-				
-				let scenes = new EncounterTable();
+
+				const scenes = new EncounterTable();
 				scenes.AddEnc(function() {
-					parse["name"] = kiakai.name;
-					parse["himher"] = kiakai.himher();
+					parse.name = kiakai.name;
+					parse.himher = kiakai.himher();
 					Text.Add("<i>“B-but, [playername],”</i> [name] protests, before you wave to shush [himher].", parse);
 					Text.NL();
 				}, 1.0, function() { return party.InParty(kiakai); });
 				scenes.AddEnc(function() {
-					parse["hisher"] = terry.himher();
+					parse.hisher = terry.himher();
 					Text.Add("Terry’s staring wide-eyed from beside you. Looks like an admission of guilt is not to [hisher] taste.", parse);
 					Text.NL();
 				}, 1.0, function() { return party.InParty(terry); });
-				
+
 				scenes.Get();
-				
+
 				Text.Add("The sergeant lets out a breath of frustration, looking, if anything, more bored than before. <i>“I’ve run into plenty of bandits before, and I gotta tell you I’ve never once had them tell me that.”</i> [rHeShe] scratches [rhisher] chin. <i>“At least without having the numbers on me. Who I do get that line from is young punks who think they can’t die over a shitty joke.”</i>", parse);
 				Text.NL();
 				Text.Add("<i>“I’m fining you fifteen coins for wasting my time. I call it the ‘not killing you for being an idiot’ tax.”</i>", parse);
 				Text.NL();
-				if(party.coin >= 15) {
+				if (party.coin >= 15) {
 					Text.Add("You grumble a little at [rhimher] being unable to take a joke, but faced with the [rmanwoman]’s menacing glare, grudgingly agree to pay up. It's not worth getting in trouble with the kingdom to avoid a petty fine. The coins neatly disappear from your hand into [rhisher] purse.", parse);
 					Text.NL();
 					Text.Add("<i>“Pleasure doing business with you.”</i> The sergeant says, spitting to the side. <i>“Do respect the bloody soldiers, though. Or don’t, I suppose, I could always use more ale… or a new punching bag.”</i>", parse);
 					party.coin -= 15;
-				}
-				else {
+				} else {
 					Text.Add("Feeling a little embarrassed, you tell [rhimher] that you don’t actually have 15 coins.", parse);
 					Text.NL();
 					Text.Add("<i>“Hold still,”</i> [rheshe] commands. The sergeant pats you down roughly, spending perhaps a moment too long checking your butt. <i>“Hrm. Fine, I’m not in this to rob the broke. You can go, I guess.”</i>", parse);
@@ -212,54 +212,55 @@ RoamingScenes.KingdomPatrol = function(entering : boolean) {
 				}
 				Text.NL();
 				Text.Add("Well, that didn’t exactly go well, but perhaps there were worse ways that proclaiming yourself a bandit could have ended. Perhaps expecting soldiers to laugh along was a little over-optimistic.", parse);
-				if(party.InParty(lei)) {
+				if (party.InParty(lei)) {
 					Text.NL();
 					Text.Add("Lei looks at you with a smug grin on his face. <i>“That was an excellent example of how speaking untruth is a bad idea. Though I must admit that most people who choose to lie at least select lies that are favorable to themselves.”</i>", parse);
 					Text.NL();
 					Text.Add("You glare at him in annoyance. Looks like someone even got to feel superior.", parse);
 				}
 				Text.Flush();
-				
+
 				Gui.NextPrompt();
 			}, enabled : true,
-			tooltip : Text.Parse("Tell [rhimher] that you’re bandits. It'd be pretty funny to see [rhisher] reaction, right?", parse)
+			tooltip : Text.Parse("Tell [rhimher] that you’re bandits. It'd be pretty funny to see [rhisher] reaction, right?", parse),
 		});
 		Gui.SetButtonsFromList(options, false, null);
 	}, 1.0, function() { return party.Num() > 1; });
-	
-	scenes.Get();
-}
 
-RoamingScenes.BanditsGen = function(capt : Entity, levelbonus : number) {
-	let CreateBandit = function() {
-		let rand = Math.random();
-		let gender = rand < 0.5 ? Gender.male :
+	scenes.Get();
+};
+
+RoamingScenes.BanditsGen = function(capt: Entity, levelbonus: number) {
+	const CreateBandit = function() {
+		const rand = Math.random();
+		const gender = rand < 0.5 ? Gender.male :
 		             rand < 0.9 ? Gender.female : Gender.herm;
 		return new Bandit(gender, levelbonus);
 	};
-	
-	let colors = ["red", "blue", "green", "beige", "purple", "yellow", "orange", "puce"];
-	let color = colors[Math.floor(Math.random() * colors.length)];
-	let items = ["bandanas", "overcoats", "bowler hats", "pantaloons", "gloves"];
-	let item = items[Math.floor(Math.random() * items.length)];
-	
-	let rclothing = color + " " + item;
-	
-	let num = 2 + Math.ceil(Math.random() * 4);
-	
-	let enemy = new Party();
+
+	const colors = ["red", "blue", "green", "beige", "purple", "yellow", "orange", "puce"];
+	const color = colors[Math.floor(Math.random() * colors.length)];
+	const items = ["bandanas", "overcoats", "bowler hats", "pantaloons", "gloves"];
+	const item = items[Math.floor(Math.random() * items.length)];
+
+	const rclothing = color + " " + item;
+
+	const num = 2 + Math.ceil(Math.random() * 4);
+
+	const enemy = new Party();
 	let males   = 0;
 	let females = 0;
-	for(let i = 0; i < num; ++i) {
-		let bandit = CreateBandit();
-		if(bandit.Gender() == Gender.male)
+	for (let i = 0; i < num; ++i) {
+		const bandit = CreateBandit();
+		if (bandit.Gender() == Gender.male) {
 			males++;
-		else
+		} else {
 			females++;
+		}
 		enemy.AddMember(bandit);
 	}
-	
-	let scenes = new EncounterTable();
+
+	const scenes = new EncounterTable();
 	scenes.AddEnc(function() {
 		return "call each other by ridiculous nicknames";
 	}, 1.0, function() { return true; });
@@ -281,41 +282,41 @@ RoamingScenes.BanditsGen = function(capt : Entity, levelbonus : number) {
 	scenes.AddEnc(function() {
 		return "have a peculiar smell about them";
 	}, 1.0, function() { return true; });
-	
-	let desc = scenes.Get();
-	
-	let enc : any = new Encounter(enemy);
+
+	const desc = scenes.Get();
+
+	const enc: any = new Encounter(enemy);
 	enc.canRun      = false;
 	enc.onEncounter = RoamingScenes.BanditsOnEncounter;
 	enc.onLoss      = RoamingScenes.BanditsLoss;
 	enc.onVictory   = RoamingScenes.BanditsWin;
-	
+
 	enc.leader = enemy.Get(0);
-	enc.desc = Text.Parse("a small group, certainly not more than half a dozen. Apparently, they all wear [rclothing] and " + desc, {rclothing : rclothing});
+	enc.desc = Text.Parse("a small group, certainly not more than half a dozen. Apparently, they all wear [rclothing] and " + desc, {rclothing});
 	enc.rclothing = rclothing;
 	enc.capt = capt;
-	
-	enc.OnIncapacitate = function(entity : Entity) {
+
+	enc.OnIncapacitate = function(entity: Entity) {
 		Encounter.prototype.OnIncapacitate.call(this, entity);
-		let enc = this;
-		let enemy = enc.enemy;
-		
+		const enc = this;
+		const enemy = enc.enemy;
+
 		let found = false;
-		for(let i = 0; i < enemy.Num(); ++i) {
-			if(enemy.Get(i) == entity) {
+		for (let i = 0; i < enemy.Num(); ++i) {
+			if (enemy.Get(i) == entity) {
 				found = true;
 				break;
 			}
 		}
-		
-		if(found) {
-			for(let i = 0; i < enemy.reserve.length; i++) {
-				let bandit = enemy.reserve[i];
-				if(!bandit.Incapacitated()) {
+
+		if (found) {
+			for (let i = 0; i < enemy.reserve.length; i++) {
+				const bandit = enemy.reserve[i];
+				if (!bandit.Incapacitated()) {
 					enemy.SwitchOut(entity);
 					enemy.SwitchIn(bandit);
 
-					let ent : any = {
+					const ent: any = {
 						entity     : bandit,
 						isEnemy    : true,
 						initiative : 0,
@@ -326,12 +327,12 @@ RoamingScenes.BanditsGen = function(capt : Entity, levelbonus : number) {
 					ent.entity.GetSingleTarget(enc, ent);
 
 					enc.Callstack.push(function() {
-						let parse : any = {};
+						const parse: any = {};
 						Text.Clear();
-						parse["hisher"] = entity.hisher();
+						parse.hisher = entity.hisher();
 						Text.Add("Another bandit pushes through the interior door, replacing [hisher] fallen comrade.", parse);
 						Text.Flush();
-						
+
 						Gui.NextPrompt(function() {
 							enc.CombatTick();
 						});
@@ -340,55 +341,57 @@ RoamingScenes.BanditsGen = function(capt : Entity, levelbonus : number) {
 				}
 			}
 		}
-	}
-	
+	};
+
 	return enc;
-}
+};
 
 RoamingScenes.Bandits = function() {
-	let player = GAME().player;
-	let party : Party = GAME().party;
-	let rigard = GAME().rigard;
-	let bandits = rigard.bandits;
+	const player = GAME().player;
+	const party: Party = GAME().party;
+	const rigard = GAME().rigard;
+	const bandits = rigard.bandits;
 
-	let parse : any = {
-		rclothing : bandits.rclothing
+	let parse: any = {
+		rclothing : bandits.rclothing,
 	};
-	
+
 	rigard.bandits = null;
-	
+
 	Text.Clear();
 	Text.Add("As you make your way, the fields around you grow wilder, more unkempt. After walking for a few minutes more, it’s hard to imagine that anyone works the land here at all. Wild grass reaches almost to your waist, and weeds sprout in prickly bushes.", parse);
 	Text.NL();
 	Text.Add("You’re not sure why, but it seems that cultivation has been abandoned in this area. A little further, at the top of a small incline, you spot a derelict farmhouse, confirming your guess. Its roof is tilted at an odd angle, and where glass windows must have once been, empty holes gape onto its interior.", parse);
 	Text.NL();
 	Text.Add("To your surprise, ", parse);
-	if(WorldTime().hour >= 8 && WorldTime().hour < 20)
+	if (WorldTime().hour >= 8 && WorldTime().hour < 20) {
 		Text.Add("you notice an orange flicker on the open window shutter.", parse);
-	else
+	} else {
 		Text.Add("a warm orange glow pours out the windows.", parse);
-	parse["comp"] = party.Num() == 2 ? party.Get(1).name : "your companions";
-	parse["c"] = party.Num() > 1 ? Text.Parse(", [comp] in tow", parse) : "";
+	}
+	parse.comp = party.Num() == 2 ? party.Get(1).name : "your companions";
+	parse.c = party.Num() > 1 ? Text.Parse(", [comp] in tow", parse) : "";
 	Text.Add(" Someone’s burning a fire inside. Curious, you approach to investigate[c]. As you get closer, you hear a sheep braying somewhere on the other side of the house. Deciding to take no chances with the sort of desperate men who would live in such a desperate place, you crouch down by the window, and after listening for a moment, peek inside.", parse);
 	Text.NL();
-	parse["num"] = bandits.enemy.NumTotal() > 3 ? "four" : "three";
+	parse.num = bandits.enemy.NumTotal() > 3 ? "four" : "three";
 	let males   = 0;
 	let females = 0;
 	let num = Math.min(bandits.enemy.NumTotal(), 4);
-	for(let i = 0; i < num; ++i) {
-		let bandit = bandits.enemy.Get(i);
-		if(bandit.Gender() == Gender.male)
+	for (let i = 0; i < num; ++i) {
+		const bandit = bandits.enemy.Get(i);
+		if (bandit.Gender() == Gender.male) {
 			males++;
-		else
+		} else {
 			females++;
+		}
 	}
 	num = bandits.enemy.NumTotal();
-	parse["genders"] = males == 0 ? "women" :
+	parse.genders = males == 0 ? "women" :
 	                   females == 0 ? "men" :
 	                   "men and women";
 	Text.Add("You see a dusty room with furniture that’s on the edge of falling apart. Around a table at one end are [num] [genders], conversing conspiratorially. They seem to be discussing something about ", parse);
-	
-	let scenes = new EncounterTable();
+
+	const scenes = new EncounterTable();
 	scenes.AddEnc(function() {
 		Text.Add("the lay of the land around the local farms, and which farmers have been doing the best.", parse);
 	}, 1.0, function() { return true; });
@@ -405,11 +408,11 @@ RoamingScenes.Bandits = function() {
 		Text.Add("whether they can keep staying there or need to move.", parse);
 	}, 1.0, function() { return true; });
 	scenes.Get();
-	
+
 	Text.NL();
 	Text.Add("Even in this abandoned place, they keep their voices low, so you do not hear many details of what is said.", parse);
-	if(num > 4) {
-		parse["num2"] = num > 5 ? "two people" : "person";
+	if (num > 4) {
+		parse.num2 = num > 5 ? "two people" : "person";
 		Text.Add(" You also notice the sounds of another [num2] moving around in a room in the back.", parse);
 	}
 	Text.NL();
@@ -417,13 +420,13 @@ RoamingScenes.Bandits = function() {
 	Text.NL();
 	Text.Add("You duck back out of sight. Okay, so what should you do about them?", parse);
 	Text.Flush();
-	
-	//[Report][Attack][Extort][Leave]
-	let options = new Array();
+
+	// [Report][Attack][Extort][Leave]
+	const options = new Array();
 	options.push({ nameStr : "Report",
-		func : function() {
+		func() {
 			parse = bandits.capt.ParserPronouns(parse, "r");
-			
+
 			Text.Clear();
 			Text.Add("You sneak away from the farm, darting glances over your shoulder to make sure you haven’t been noticed. The tall grass lends you some cover, but you still feel like you’re about to get an arrow in the back.", parse);
 			Text.NL();
@@ -441,141 +444,139 @@ RoamingScenes.Bandits = function() {
 			Text.NL();
 			Text.Add("<b>You receive 10 coins as a reward for the information.</b>", parse);
 			Text.Flush();
-			
+
 			party.coin += 10;
-			
+
 			Gui.NextPrompt();
 		}, enabled : true,
-		tooltip : "Your job here is done. You can report their location to the kingdom patrol and they’ll take care of the matter."
+		tooltip : "Your job here is done. You can report their location to the kingdom patrol and they’ll take care of the matter.",
 	});
-	parse["num"] = Text.NumToText(num);
+	parse.num = Text.NumToText(num);
 	options.push({ nameStr : "Attack",
-		func : function() {
+		func() {
 			Text.Clear();
-			if(party.Num() == 2)
+			if (party.Num() == 2) {
 				Text.Add("[name] shadowing your steps, you", {name: party.Get(1).name});
-			else if(party.Num() > 2)
+			} else if (party.Num() > 2) {
 				Text.Add("Your companions a step behind you, you", parse);
-			else
+ } else {
 				Text.Add("You", parse);
+ }
 			Text.Add(" bust down the door, sending it screeching open on rusted hinges. As [num] startled faces look up at you from around the table, you step inside, readying yourself for combat.", parse);
 			Text.NL();
 			Text.Add("It takes the bandits a moment to react, and by then you’re upon them!", parse);
 			bandits.Start();
 		}, enabled : true,
-		tooltip : Text.Parse("There’s no need to get help - you’ll take out the [num] bandits here and now.", parse)
+		tooltip : Text.Parse("There’s no need to get help - you’ll take out the [num] bandits here and now.", parse),
 	});
 	options.push({ nameStr : "Extort",
-		func : function() {
+		func() {
 			Text.Clear();
-			parse["c"] = party.Num() == 2 ? Text.Parse(", while [name] steps up into the doorway behind you", {name: party.Get(1).name}) :
+			parse.c = party.Num() == 2 ? Text.Parse(", while [name] steps up into the doorway behind you", {name: party.Get(1).name}) :
 			             party.Num() > 2 ? ", while your companions frame you in the doorway" : "";
-			
+
 			Text.Add("Squaring your shoulders and doing your best to look menacing, you rap once on the farm door, before pushing it open with a loud screech of grating hinges. Taking a step inside, you are greeted by [num] scowling faces[c].", parse);
 			Text.NL();
-			
-			let success = (player.Cha() + Math.random() * 20) >= 40;
-			
-			if(success) {
+
+			const success = (player.Cha() + Math.random() * 20) >= 40;
+
+			if (success) {
 				Text.Add("In the foreword of your speech, you explain that you do understand that everyone must make a living in this world, and that you fully understand their decisions. From there, you proceed to remark that, however, their chosen path entails some additional costs of doing business, to wit, payment for the maintenance of secrecy.", parse);
 				Text.NL();
 				Text.Add("You don’t know whether it’s because of your seemingly fearless appearance or the crime boss mannerisms you’ve done your best to imitate, but the bandits quickly surrender before your verbiage, clearly outgunned. They hand over a decent payment and see you out the door, bowing and scraping the whole way. Not only does crime apparently pay, but you can’t help but think that it’s quite fun too.", parse);
 				Text.NL();
-				let inc = player.charisma.IncreaseStat(40, 1);
-				parse["inc"] = inc ? ", and the experience taught you a little about the art of persuasion" : "";
+				const inc = player.charisma.IncreaseStat(40, 1);
+				parse.inc = inc ? ", and the experience taught you a little about the art of persuasion" : "";
 				Text.Add("<b>You successfully convinced the bandits to hand over 20 coin in hush money[inc].</b>", parse);
 				Text.Flush();
-				
-				
+
 				party.coin += 20;
-				
+
 				Gui.NextPrompt();
-			}
-			else {
+			} else {
 				Text.Add("You do your best to sound intimidating, but your speech comes out sounding like you’re a child trying to threaten the bully with telling the teacher on him. As you might have expected, the bandits look more angry than anything, and when you try to back out and change course, one of them steps between you and the door.", parse);
 				Text.NL();
 				Text.Add("Looks like you’ll have to fight your way out!", parse);
 				bandits.Start();
 			}
 		}, enabled : true,
-		tooltip : "You’re quite willing to leave them alone, if only they’ll pay you a little bit of compensation. Now to convince them..."
+		tooltip : "You’re quite willing to leave them alone, if only they’ll pay you a little bit of compensation. Now to convince them...",
 	});
 	options.push({ nameStr : "Leave",
 		func : Gui.PrintDefaultOptions, enabled : true,
-		tooltip : "This isn’t worth the bother - just leave them alone."
+		tooltip : "This isn’t worth the bother - just leave them alone.",
 	});
 	Gui.SetButtonsFromList(options, false, null);
-}
+};
 
 RoamingScenes.BanditsOnEncounter = function() {
-	let enc = this;
-	let parse : any = {};
-	
-	let num = this.enemy.NumTotal();
-	if(num > 4) {
+	const enc = this;
+	const parse: any = {};
+
+	const num = this.enemy.NumTotal();
+	if (num > 4) {
 		Text.NL();
-		let bandit = this.enemy.Get(4);
-		parse["s"]      = num > 5 ? "s" : "";
-		parse["crowd"]  = num > 5 ? "crowd around" : "tries to push through";
-		parse["heshe"]  = num > 5 ? "they" : bandit.heshe();
-		parse["hisher"] = num > 5 ? "their" : bandit.hisher();
+		const bandit = this.enemy.Get(4);
+		parse.s      = num > 5 ? "s" : "";
+		parse.crowd  = num > 5 ? "crowd around" : "tries to push through";
+		parse.heshe  = num > 5 ? "they" : bandit.heshe();
+		parse.hisher = num > 5 ? "their" : bandit.hisher();
 		Text.Add("The bandit[s] in the back room [crowd] the door, but can’t quite find the space to join battle in this crowded chamber. You suspect [heshe]’ll replace [hisher] comrades when you defeat them.", parse);
 		Text.Flush();
-		
+
 		// Start combat
 		Gui.NextPrompt(function() {
 			enc.PrepCombat();
 		});
-	}
-	else {
+	} else {
 		Text.Flush();
 		Gui.NextPrompt(function() {
 			enc.PrepCombat();
 		});
 	}
-}
+};
 
 RoamingScenes.BanditsLoss = function() {
-	let party : Party = GAME().party;
-	
+	const party: Party = GAME().party;
+
 	SetGameState(GameState.Event, Gui);
-	
-	let enc = this;
-	
-	let bandits = enc.enemy;
-	let num = bandits.NumTotal();
-	
+
+	const enc = this;
+
+	const bandits = enc.enemy;
+	const num = bandits.NumTotal();
+
 	let fallen = 0;
 	let first = null;
-	for(let i = 0; i < num; ++i) {
-		let bandit = bandits.Get(i);
-		if(bandit.Incapacitated()) fallen++;
-		else first = first || bandit;
+	for (let i = 0; i < num; ++i) {
+		const bandit = bandits.Get(i);
+		if (bandit.Incapacitated()) { fallen++; } else { first = first || bandit; }
 	}
-	let remaining = num - fallen;
-	
-	let parse : any = {
-		comp : party.Num() > 1 ? "your party" : "you"
+	const remaining = num - fallen;
+
+	let parse: any = {
+		comp : party.Num() > 1 ? "your party" : "you",
 	};
-	
+
 	parse = first.ParserPronouns(parse);
-	
+
 	Gui.Callstack.push(function() {
 		Text.Clear();
 		Text.Add("With [comp] finally down, the", parse);
-		if(remaining > 1) {
-			parse["remaining"] = fallen > 0 ? " remaining" : "";
+		if (remaining > 1) {
+			parse.remaining = fallen > 0 ? " remaining" : "";
 			Text.Add("[remaining] bandits stand panting around the room, weapons sagging in slack hands.", parse);
-		}
-		else
+		} else {
 			Text.Add("remaining bandit leans on the table for support, letting [hisher] weapon slip out of [hisher] slack grip.", parse);
-		if(fallen >= 2)
+		}
+		if (fallen >= 2) {
 			Text.Add(" Barely conscious, you manage a slight smile. At least you gave them a hell of a fight.", parse);
-		parse["num"] = remaining > 1 ? "One of the bandits" : "The bandit";
+		}
+		parse.num = remaining > 1 ? "One of the bandits" : "The bandit";
 		Text.Add(" [num] approaches after finally catching [hisher] breath and gives you a solid kick in the ribs, making air rush out of you in a pained gasp.", parse);
 		Text.NL();
-		
-		let scenes = new EncounterTable();
+
+		const scenes = new EncounterTable();
 		scenes.AddEnc(function() {
 			Text.Add("<i>“Y’thought you could just waltz in here, beat us up, and take our stuff, did ye?”</i> [HeShe] punctuates [hisher] demand with another kick. <i>“Well, that ain’t how it works. We’re the big dogs ‘round here. We ain’t taking shit from the kingdom, we ain’t taking shit from you, we ain’t taking shit from no one!”</i>", parse);
 		}, 1.0, function() { return true; });
@@ -583,73 +584,73 @@ RoamingScenes.BanditsLoss = function() {
 			Text.Add("<i>“Who sent you? Huh?”</i> Before you can attempt to wheeze out an answer, another kick drives the air out from your lungs. <i>“Was it Rewyn? Or,”</i> [heshe] slows thoughtfully, <i>“did those slimy bastards not understand that ‘no’ means no. We ain’t bowing to any man. <b>They</b> are gonna bow to <b>us</b>.”</i>", parse);
 		}, 1.0, function() { return true; });
 		scenes.Get();
-		
+
 		Text.NL();
 		Text.Add("The rest of the speech runs together in your mind, with kicks blessedly interrupted by long stretches of useless ranting. ", parse);
 		Text.NL();
 		Text.Add("After a while, you must lose consciousness because the next time you can think clearly, your eyes are opening on a field of overgrown grass. Your ribs ache and you are bruised all over, but fortunately your insides feel intact. After a minute or two, you even gather the willpower to get up, your body screaming in protest.", parse);
 		Text.NL();
-		parse["comp"] = party.Num() == 2 ? party.Get(1).name + " is" : "Your companions are";
-		parse["c"] = party.Num() > 1 ? Text.Parse(" [comp] lying in the grass close by, apparently also stirring slowly to wakefulness.", parse) : "";
+		parse.comp = party.Num() == 2 ? party.Get(1).name + " is" : "Your companions are";
+		parse.c = party.Num() > 1 ? Text.Parse(" [comp] lying in the grass close by, apparently also stirring slowly to wakefulness.", parse) : "";
 		Text.Add("The farm is in sight, its door ajar, the building now looking well and truly abandoned.[c] It seems the bandits decided to spare you, and look for a new hideout.", parse);
 		Text.NL();
 		Text.Add("Things could have definitely turned out worse. They could have also turned out a whole lot better.", parse);
-		if(party.coin >= 0) {
+		if (party.coin >= 0) {
 			Text.NL();
-			let coin = Math.min(party.coin, 25);
-			parse["coin"] = coin;
-			parse["s"] = coin > 1 ? "s" : "";
-			
+			const coin = Math.min(party.coin, 25);
+			parse.coin = coin;
+			parse.s = coin > 1 ? "s" : "";
+
 			party.coin -= coin;
-			
+
 			Text.Add("<b>You lose [coin] coin[s]! Good thing you had the foresight to hide most of your spare possessions nearby before attacking, though you aren’t quite sure why you didn’t just hide all of them.</b>", parse);
 		}
 		Text.Flush();
-		
+
 		Gui.NextPrompt();
 	});
-	
+
 	Encounter.prototype.onLoss.call(enc);
-}
+};
 
 RoamingScenes.BanditsWin = function() {
-	let party : Party = GAME().party;
-	
+	const party: Party = GAME().party;
+
 	SetGameState(GameState.Event, Gui);
-	
-	let enc = this;
-	
-	let bandits = enc.enemy;
-	let num = bandits.NumTotal();
-	
-	let parse : any = {
-		
+
+	const enc = this;
+
+	const bandits = enc.enemy;
+	const num = bandits.NumTotal();
+
+	let parse: any = {
+
 	};
-	
+
 	parse = bandits.GetRandom(true, true).ParserPronouns(parse);
-	
-	parse["comp"]  = party.Num() == 2 ? party.Get(1).name : "your companions";
-	parse["comp2"] = party.Num() == 2 ? "The two of you" : "You all";
-	
+
+	parse.comp  = party.Num() == 2 ? party.Get(1).name : "your companions";
+	parse.comp2 = party.Num() == 2 ? "The two of you" : "You all";
+
 	Gui.Callstack.push(function() {
 		Text.Clear();
 		Text.Add("The last bandit falls, as you stand winded but triumphant over your defeated adversaries. ", parse);
-		if(party.Num() > 1) {
+		if (party.Num() > 1) {
 			Text.Add("You exchange euphoric grins with [comp]. [comp2] did well.", parse);
-		}
-		else
+		} else {
 			Text.Add("A euphoric grin twists your lips.", parse);
+		}
 		Text.Flush();
-		
+
 		let fucked = false;
 		let looted = false;
-		
-		let prompt = function() {
-			//[Fuck][Loot][Leave]
-			let options = new Array();
+
+		const prompt = function() {
+			// [Fuck][Loot][Leave]
+			const options = new Array();
 			// TODO
 			options.push({ nameStr : "Fuck",
-				func : function() {
+				func() {
 					Text.Clear();
 					Text.Add("", parse);
 					Text.NL();
@@ -657,13 +658,13 @@ RoamingScenes.BanditsWin = function() {
 					fucked = true;
 					prompt();
 				}, enabled : false && fucked == false,
-				tooltip : ""
+				tooltip : "",
 			});
 			options.push({ nameStr : "Loot",
-				func : function() {
+				func() {
 					Text.Clear();
 					Text.Add("And to the victor go the spoils. You meticulously search the bandits, patting them down and making a neat pile of coins and chipped weapons on the table. ", parse);
-					
+
 					let scenes = new EncounterTable();
 					scenes.AddEnc(function() {
 						Text.Add("One of them even has a pretty gold earring that you carefully unhook from [hisher] ear.", parse);
@@ -677,81 +678,83 @@ RoamingScenes.BanditsWin = function() {
 						Text.Add("Though you wouldn’t touch most of the weapons for fear of gangrene, one of the swords actually looks passable. Maybe you can put it to use.", parse);
 						party.Inv().AddItem(WeaponsItems.ShortSword);
 					}, 1.0, function() { return true; });
-					
+
 					scenes.Get();
-					
+
 					Text.NL();
 					Text.Add("Done with the body search, you tie your semi-conscious adversaries up. You still need to check for a stash, and it wouldn’t do to have them getting in the way.", parse);
 					Text.NL();
-					
+
 					scenes = new EncounterTable();
 					scenes.AddEnc(function() {
 						Text.Add("You shake your captives, demanding information, but they groggily insist they haven’t hidden anything. As if you’d believe that!", parse);
 						Text.NL();
 						Text.Add("You carefully explore the house, but there’s nothing. You tap your knuckles along the walls, listening for hollows. Nothing. You walk around the farm outside, looking for freshly dug earth. Still nothing! Well, actually, a few sheep and hens, but is that really all they managed to steal? What a disappointment.", parse);
 						Text.NL();
-						if(WorldTime().hour < 6 || WorldTime().hour >= 20)
+						if (WorldTime().hour < 6 || WorldTime().hour >= 20) {
 							Text.Add("You wonder if you’ve missed something in the dark, but no, the light should have been enough for your investigation. ", parse);
+						}
 						Text.Add("Frustrated, you curse out the bandits for incompetence and content yourself with gathering up your little pile of loot from the table. That much will have to do.", parse);
 					}, 1.0, function() { return true; });
 					scenes.AddEnc(function() {
 						Text.Add("You shake your captives, demanding information, but they insist they haven’t hidden anything. A quaver of uncertainty in the responses, and eyes impulsively darting toward a window tip you off to the deceit, however.", parse);
 						Text.NL();
-						if(WorldTime().hour < 6 || WorldTime().hour >= 20)
+						if (WorldTime().hour < 6 || WorldTime().hour >= 20) {
 							Text.Add("Grabbing the bandits’ oil lantern and checking", parse);
-						else
+						} else {
 							Text.Add("Checking", parse);
+						}
 						Text.Add(" outside, you find a barely noticeable patch of low grass that looks to have been uprooted and then replanted. You grab a shovel and do not have to dig long before you strike something hard and wooden with a thud.", parse);
 						Text.NL();
 						Text.Add("Five minutes later, you’ve dug around the object, and pull a small box out of the shallow hole. It’s heavy for its size, and you hear the pleasant jingle of coins inside. You head back inside and pour the contents of the box out on the table alongside your other loot, nicely increasing the pile.", parse);
 						Text.NL();
 						Text.Add("You politely thank the bandits, and pack away your earnings, as they glare at you in frustration. Not a bad haul, if you do say so yourself.", parse);
-						
-						let coin = 30 + Math.floor(Math.random() * 50);
-						
+
+						const coin = 30 + Math.floor(Math.random() * 50);
+
 						Text.NL();
-						Text.Add("<b>You pick up an additional [coin] coins!</b>", {coin: coin});
-						
+						Text.Add("<b>You pick up an additional [coin] coins!</b>", {coin});
+
 						party.coin += coin;
 					}, 1.0, function() { return true; });
-					
+
 					scenes.Get();
-					
+
 					looted = true;
 					Text.Flush();
 					prompt();
 				}, enabled : looted == false,
-				tooltip : "Loot everything!"
+				tooltip : "Loot everything!",
 			});
 			options.push({ nameStr : "Leave",
-				func : function() {
+				func() {
 					Text.Clear();
-					if(fucked || looted) {
+					if (fucked || looted) {
 						Text.Add("Your main tasks complete, you check on the stolen livestock around the farm, making sure all the animals ", parse);
-						if(WorldTime().hour >= 8 && WorldTime().hour < 20)
+						if (WorldTime().hour >= 8 && WorldTime().hour < 20) {
 							Text.Add("are free to roam and graze.", parse);
-						else
+						} else {
 							Text.Add("will be free to roam and graze in the morning.", parse);
+						}
 						Text.NL();
 						Text.Add("As you head out, you decide you’ll tell a kingdom patrol where to find the animals and the bandits when you see one. In the meanwhile, the animals should be fine for a day or two. The bandits should as well - after all, you double checked their bonds.", parse);
-					}
-					else {
+					} else {
 						Text.Add("You meticulously tie up the bandits, securing them to the furniture, and making sure the ropes don’t allow them any freedom of movement. They can sit there until the proper authorities come to pick them up.", parse);
 						Text.NL();
 						Text.Add("As you head out, you decide you’ll tell a kingdom patrol where to find them when you see one. It shouldn’t be too long until you see one, and in the worst case scenario, well, they can stew there for a day or two.", parse);
 					}
 					Text.Flush();
-					
+
 					Gui.NextPrompt();
 				}, enabled : true,
-				tooltip : "You’re mostly done here - it’s time to head out."
+				tooltip : "You’re mostly done here - it’s time to head out.",
 			});
 			Gui.SetButtonsFromList(options, false, null);
 		};
 		prompt();
 	});
-	
+
 	Encounter.prototype.onVictory.call(enc);
-}
+};
 
 export { RoamingScenes };
