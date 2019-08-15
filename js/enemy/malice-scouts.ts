@@ -79,21 +79,21 @@ export class CatboyMage extends Entity {
 		let level = 0;
 
 		const scenes = new EncounterTable();
-		scenes.AddEnc(function() {
+		scenes.AddEnc(() => {
 			level = 9;
-		}, 4.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 4.0, () => true);
+		scenes.AddEnc(() => {
 			level = 10;
-		}, 5.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 5.0, () => true);
+		scenes.AddEnc(() => {
 			level = 11;
-		}, 3.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 3.0, () => true);
+		scenes.AddEnc(() => {
 			level = 12;
-		}, 2.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 2.0, () => true);
+		scenes.AddEnc(() => {
 			level = 13;
-		}, 1.0, function() { return true; });
+		}, 1.0, () => true);
 		scenes.Get();
 
 		this.level             = level + (levelbonus || 0);
@@ -164,7 +164,7 @@ export class CatboyMage extends Entity {
 
 		this.turnCounter = this.turnCounter || 0;
 
-		const first = (this.turnCounter == 0);
+		const first = (this.turnCounter === 0);
 		this.turnCounter++;
 
 		if (first) {
@@ -175,30 +175,30 @@ export class CatboyMage extends Entity {
 		const that = this;
 
 		const scenes = new EncounterTable();
-		scenes.AddEnc(function() {
+		scenes.AddEnc(() => {
 			Abilities.Attack.Use(encounter, that, t);
-		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
 			CombatItems.DecoyStick.combat.Use(encounter, that);
-		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
 			CombatItems.HPotion.combat.Use(encounter, that);
-		}, 1.0, function() { return that.HPLevel() < 0.5; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => that.HPLevel() < 0.5);
+		scenes.AddEnc(() => {
 			Abilities.Black.Bolt.Use(encounter, that, t);
-		}, 3.0, function() { return Abilities.Black.Bolt.enabledCondition(encounter, that); });
-		scenes.AddEnc(function() {
+		}, 3.0, () => Abilities.Black.Bolt.enabledCondition(encounter, that));
+		scenes.AddEnc(() => {
 			Abilities.Black.Eruption.Use(encounter, that, targets);
-		}, 4.0, function() { return Abilities.Black.Eruption.enabledCondition(encounter, that); });
-		scenes.AddEnc(function() {
+		}, 4.0, () => Abilities.Black.Eruption.enabledCondition(encounter, that));
+		scenes.AddEnc(() => {
 			Abilities.Black.ThunderStorm.Use(encounter, that, targets);
-		}, 3.0, function() { return Abilities.Black.ThunderStorm.enabledCondition(encounter, that); });
+		}, 3.0, () => Abilities.Black.ThunderStorm.enabledCondition(encounter, that));
 		scenes.Get();
 	}
 
 }
 
-MaliceScoutsScenes.Catboy.Impregnate = function(mother: Entity, father: CatboyMage, slot?: number, load?: number) {
+MaliceScoutsScenes.Catboy.Impregnate = (mother: Entity, father: CatboyMage, slot?: number, load?: number) => {
 	mother.PregHandler().Impregnate({
 		slot   : slot || PregnancyHandler.Slot.Vag,
 		mother,
@@ -247,21 +247,21 @@ export class CentaurMare extends Entity {
 		let level = 0;
 
 		const scenes = new EncounterTable();
-		scenes.AddEnc(function() {
+		scenes.AddEnc(() => {
 			level = 9;
-		}, 4.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 4.0, () => true);
+		scenes.AddEnc(() => {
 			level = 10;
-		}, 5.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 5.0, () => true);
+		scenes.AddEnc(() => {
 			level = 11;
-		}, 3.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 3.0, () => true);
+		scenes.AddEnc(() => {
 			level = 12;
-		}, 2.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 2.0, () => true);
+		scenes.AddEnc(() => {
 			level = 13;
-		}, 1.0, function() { return true; });
+		}, 1.0, () => true);
 		scenes.Get();
 
 		this.level             = level + (levelbonus || 0);
@@ -333,22 +333,22 @@ export class CentaurMare extends Entity {
 
 		const scenes = new EncounterTable();
 
-		scenes.AddEnc(function() {
+		scenes.AddEnc(() => {
 			Abilities.Attack.Use(encounter, that, t);
-		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
 			Abilities.Physical.Bash.Use(encounter, that, t);
-		}, 2.0, function() { return Abilities.Physical.Bash.enabledCondition(encounter, that); });
-		scenes.AddEnc(function() {
+		}, 2.0, () => Abilities.Physical.Bash.enabledCondition(encounter, that));
+		scenes.AddEnc(() => {
 			Abilities.Physical.CrushingStrike.Use(encounter, that, t);
-		}, 3.0, function() { return Abilities.Physical.CrushingStrike.enabledCondition(encounter, that); });
-		scenes.AddEnc(function() {
+		}, 3.0, () => Abilities.Physical.CrushingStrike.enabledCondition(encounter, that));
+		scenes.AddEnc(() => {
 			Abilities.Physical.FocusStrike.Use(encounter, that, t);
-		}, 2.0, function() { return Abilities.Physical.FocusStrike.enabledCondition(encounter, that); });
+		}, 2.0, () => Abilities.Physical.FocusStrike.enabledCondition(encounter, that));
 		/* TODO Taunt attack? (focus)
-		scenes.AddEnc(function() {
+		scenes.AddEnc(() => {
 			Abilities.Physical.TAttack.Use(encounter, that, t);
-		}, 3.0, function() { return Abilities.Physical.TAttack.enabledCondition(encounter, that); });
+		}, 3.0, () => Abilities.Physical.TAttack.enabledCondition(encounter, that));
 		*/
 		scenes.Get();
 	}
@@ -393,21 +393,21 @@ export class GoatAlchemist extends Entity {
 		let level = 0;
 
 		const scenes = new EncounterTable();
-		scenes.AddEnc(function() {
+		scenes.AddEnc(() => {
 			level = 9;
-		}, 4.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 4.0, () => true);
+		scenes.AddEnc(() => {
 			level = 10;
-		}, 5.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 5.0, () => true);
+		scenes.AddEnc(() => {
 			level = 11;
-		}, 3.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 3.0, () => true);
+		scenes.AddEnc(() => {
 			level = 12;
-		}, 2.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 2.0, () => true);
+		scenes.AddEnc(() => {
 			level = 13;
-		}, 1.0, function() { return true; });
+		}, 1.0, () => true);
 		scenes.Get();
 
 		this.level             = level + (levelbonus || 0);
@@ -479,35 +479,35 @@ export class GoatAlchemist extends Entity {
 
 		const scenes = new EncounterTable();
 		// Offensive
-		scenes.AddEnc(function() {
+		scenes.AddEnc(() => {
 			Abilities.Attack.Use(encounter, that, t);
-		}, 2.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 2.0, () => true);
+		scenes.AddEnc(() => {
 			Abilities.Black.Shimmer.Use(encounter, that, t);
-		}, 3.0, function() { return Abilities.Black.Shimmer.enabledCondition(encounter, that); });
-		scenes.AddEnc(function() {
+		}, 3.0, () => Abilities.Black.Shimmer.enabledCondition(encounter, that));
+		scenes.AddEnc(() => {
 			Abilities.White.Tirade.Use(encounter, that, t);
-		}, 1.0, function() { return Abilities.White.Tirade.enabledCondition(encounter, that); });
+		}, 1.0, () => Abilities.White.Tirade.enabledCondition(encounter, that));
 		// Buffing/Healing
-		scenes.AddEnc(function() {
+		scenes.AddEnc(() => {
 			CombatItems.SpeedPotion.combat.Use(encounter, that);
-		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
 			Abilities.White.Heal.Use(encounter, that, ally);
-		}, 1.0, function() { return Abilities.White.Heal.enabledCondition(encounter, that) && ally.HPLevel() < 0.9; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => Abilities.White.Heal.enabledCondition(encounter, that) && ally.HPLevel() < 0.9);
+		scenes.AddEnc(() => {
 			Abilities.White.Cheer.Use(encounter, that, allies);
-		}, 1.0, function() { return Abilities.White.Cheer.enabledCondition(encounter, that); });
-		scenes.AddEnc(function() {
+		}, 1.0, () => Abilities.White.Cheer.enabledCondition(encounter, that));
+		scenes.AddEnc(() => {
 			Abilities.White.Empower.Use(encounter, that, ally);
-		}, 1.0, function() { return Abilities.White.Empower.enabledCondition(encounter, that); });
+		}, 1.0, () => Abilities.White.Empower.enabledCondition(encounter, that));
 
 		scenes.Get();
 	}
 }
 
 // CATBOY SCENES
-MaliceScoutsScenes.Catboy.LoneEncounter = function(levelbonus: number) {
+MaliceScoutsScenes.Catboy.LoneEncounter = (levelbonus: number) => {
 	const player = GAME().player;
 	const party: Party = GAME().party;
 	const enemy    = new Party();
@@ -516,7 +516,7 @@ MaliceScoutsScenes.Catboy.LoneEncounter = function(levelbonus: number) {
 	const enc: any = new Encounter(enemy);
 	enc.catboy   = catboy;
 
-	enc.onEncounter = function() {
+	enc.onEncounter = () => {
 		let parse: any = {
 			day : WorldTime().LightStr("sun beats down warmly", "moon shines softly"),
 		};
@@ -531,7 +531,7 @@ MaliceScoutsScenes.Catboy.LoneEncounter = function(levelbonus: number) {
 		Text.NL();
 		Text.Add("Yes, this is indeed the life. Shrugging off your possessions, you ", parse);
 		if (party.Num() > 1) {
-			if (party.Num() == 2) {
+			if (party.Num() === 2) {
 				parse.comp = party.Get(1).name;
 			} else {
 				parse.comp = "your companions";
@@ -554,7 +554,7 @@ MaliceScoutsScenes.Catboy.LoneEncounter = function(levelbonus: number) {
 		Text.Flush();
 
 		// Start combat
-		Gui.NextPrompt(function() {
+		Gui.NextPrompt(() => {
 			enc.PrepCombat();
 		});
 	};
@@ -579,7 +579,7 @@ MaliceScoutsScenes.Catboy.WinPrompt = function() {
 
 	};
 
-	Gui.Callstack.push(function() {
+	Gui.Callstack.push(() => {
 		Text.Clear();
 		Text.Add("A loud yowl sounds from the catboy mage as he stumbles back. It’s impressive how despite his frail-looking frame, he’s managed to take as much punishment as he already has and still remain standing. You’re not exactly sure when you actually hit him in the face, but there’s blood pouring out of his nose in a frenetic nosebleed and his large, floppy ears have folded flat against his tattered hood.", parse);
 		Text.NL();
@@ -641,7 +641,7 @@ MaliceScoutsScenes.Catboy.WinPrompt = function() {
 		options.push({nameStr : "",
 			tooltip : Text.Parse("", parse),
 			enabled : true,
-			func : function() {
+			func : () => {
 				Text.Clear();
 				Text.Add("", parse);
 				Text.NL();
@@ -651,7 +651,7 @@ MaliceScoutsScenes.Catboy.WinPrompt = function() {
 		});
 		*/
 
-		Gui.SetButtonsFromList(options, true, function() {
+		Gui.SetButtonsFromList(options, true, () => {
 			Text.Clear();
 			Text.Add("This doesn’t have anything on you. Whatever’s been going on between this catboy and his friends, it’s nothing that you want any part of. If he wants to be a man, he can go learn to be one somewhere else.", parse);
 			Text.NL();
@@ -663,7 +663,7 @@ MaliceScoutsScenes.Catboy.WinPrompt = function() {
 	Encounter.prototype.onVictory.call(enc);
 };
 
-MaliceScoutsScenes.Catboy.PityFuck = function(enc: any, win: boolean) {
+MaliceScoutsScenes.Catboy.PityFuck = (enc: any, win: boolean) => {
 	const player = GAME().player;
 	const party: Party = GAME().party;
 	const catboy = enc.catboy;
@@ -850,7 +850,7 @@ MaliceScoutsScenes.Catboy.PityFuck = function(enc: any, win: boolean) {
 	Text.NL();
 	Text.Add("<b>Much</b> better.", parse);
 	Text.NL();
-	parse.comp = party.Num() == 2 ? party.Get(1).name : "your companions";
+	parse.comp = party.Num() === 2 ? party.Get(1).name : "your companions";
 	parse.c = party.Num() > 1 ? Text.Parse(" and [comp]", parse) : "";
 	Text.Add("Business taken care of, the two of you part ways, and you[c] continue on your journey.", parse);
 	Text.Flush();
@@ -860,7 +860,7 @@ MaliceScoutsScenes.Catboy.PityFuck = function(enc: any, win: boolean) {
 	Gui.NextPrompt();
 };
 
-MaliceScoutsScenes.Catboy.PetPlay = function(enc: any) {
+MaliceScoutsScenes.Catboy.PetPlay = (enc: any) => {
 	const player = GAME().player;
 	const catboy = enc.catboy;
 	const p1cock = player.BiggestCock();
@@ -923,7 +923,7 @@ MaliceScoutsScenes.Catboy.PetPlay = function(enc: any) {
 	Text.NL();
 
 	const scenes = new EncounterTable();
-	scenes.AddEnc(function() {
+	scenes.AddEnc(() => {
 		Text.Add("At the sight of your womanly flower, the catboy’s eyes go wide to sickeningly sweet proportions. The entirety of his body trembles with repressed need - he’s clearly fighting it, trying to be an obedient, good kitty in the face of your commands, but it’s a losing battle that he’s waging against his treacherous body.", parse);
 		Text.NL();
 		Text.Add("No! Bad kitten! He’s not going to release until you give him the go-ahead!", parse);
@@ -978,8 +978,8 @@ MaliceScoutsScenes.Catboy.PetPlay = function(enc: any) {
 
 		player.AddLustFraction(0.4);
 		player.AddSexExp(2);
-	}, 3.0, function() { return player.FirstVag(); });
-	scenes.AddEnc(function() {
+	}, 3.0, () => player.FirstVag());
+	scenes.AddEnc(() => {
 		Text.Add("Eyeing your [cocks], the catboy ", parse);
 		if (p1cock.Len() >= 30) {
 			Text.Add("shudders a little at the sight of your massive cock[s]. He swallows hard and shies away a little, clearly intimidated by the thought of what you intend.", parse);
@@ -1126,7 +1126,7 @@ MaliceScoutsScenes.Catboy.PetPlay = function(enc: any) {
 		Text.Add("Eventually, your feline pet gets himself cleaned up a bit - from the spunk dripping off him onto the ground, if nothing else. Looking at the facial - and a bit more - that you’ve just given him, you smile at your kitten approvingly and tell him what a delightful pet he’s been.", parse);
 		Text.NL();
 		Text.Add("He purrs and bows his head submissively, exposing enough of his neck such that you can bestow scritches unto him. Between the makeshift collar you’ve given him and all the spooge that coats his exterior, it’s not an easy task, but you manage it nonetheless - he’s earned as much for his efforts at being a good kitten.", parse);
-	}, 1.0, function() { return player.FirstCock(); });
+	}, 1.0, () => player.FirstCock());
 	scenes.Get();
 
 	Text.NL();
@@ -1140,7 +1140,7 @@ MaliceScoutsScenes.Catboy.PetPlay = function(enc: any) {
 	Gui.NextPrompt();
 };
 
-MaliceScoutsScenes.Catboy.Petting = function(enc: any) {
+MaliceScoutsScenes.Catboy.Petting = (enc: any) => {
 	const player = GAME().player;
 	let parse: any = {
 
@@ -1241,7 +1241,7 @@ MaliceScoutsScenes.Catboy.Petting = function(enc: any) {
 		},
 	});
 
-	Gui.Callstack.push(function() {
+	Gui.Callstack.push(() => {
 		Text.Add("See? That wasn’t so bad after all. He may not have become a man in the sense that he might have put it, but he most certainly had a bit of fun, didn’t he?", parse);
 		Text.NL();
 		Text.Add("The catboy mewls and flicks his tail.", parse);
@@ -1272,7 +1272,7 @@ MaliceScoutsScenes.Catboy.LossPrompt = function() {
 
 	};
 
-	Gui.Callstack.push(function() {
+	Gui.Callstack.push(() => {
 		Text.Clear();
 		Text.Add("Slight as the catboy may be, the raw destructive force of his magics is too much for you to you bear. Bruised and battered from sheer force, your body finally gives up the ghost and buckles under its own weight, sending you toppling to the ground. Before you can recover, more tendrils of that same magical mist wind about your limbs, quickly solidifying and trussing you up like a pig in a poke.", parse);
 		if (party.Num() > 1) {
@@ -1303,21 +1303,21 @@ MaliceScoutsScenes.Catboy.LossPrompt = function() {
 
 		const scenes = new EncounterTable();
 
-		scenes.AddEnc(function() {
+		scenes.AddEnc(() => {
 			MaliceScoutsScenes.Catboy.PityFuck(enc, false);
 			return true;
-		}, 1.0, function() { return player.FirstVag() && player.Femininity() > 0.3; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => player.FirstVag() && player.Femininity() > 0.3);
+		scenes.AddEnc(() => {
 			MaliceScoutsScenes.Catboy.GetMilked(enc);
 			return true;
-		}, 1.0, function() { return player.Lactation(); });
+		}, 1.0, () => player.Lactation());
 		/* TODO
-		scenes.AddEnc(function() {
+		scenes.AddEnc(() => {
 			Text.Add("", parse);
 			Text.NL();
 			Text.Add("", parse);
 			return true;
-		}, 1.0, function() { return true; });
+		}, 1.0, () => true);
 		*/
 		const ret = scenes.Get();
 
@@ -1333,7 +1333,7 @@ MaliceScoutsScenes.Catboy.LossPrompt = function() {
 	Encounter.prototype.onLoss.call(enc);
 };
 
-MaliceScoutsScenes.Catboy.GetMilked = function(enc: any) {
+MaliceScoutsScenes.Catboy.GetMilked = (enc: any) => {
 	const player = GAME().player;
 	const catboy = enc.catboy;
 	let parse: any = {
@@ -1419,7 +1419,7 @@ MaliceScoutsScenes.Catboy.GetMilked = function(enc: any) {
 	Gui.NextPrompt();
 };
 
-MaliceScoutsScenes.Mare.LoneEncounter = function(levelbonus: number) {
+MaliceScoutsScenes.Mare.LoneEncounter = (levelbonus: number) => {
 	const player = GAME().player;
 	const enemy    = new Party();
 	const mare     = new CentaurMare(levelbonus);
@@ -1427,7 +1427,7 @@ MaliceScoutsScenes.Mare.LoneEncounter = function(levelbonus: number) {
 	const enc: any = new Encounter(enemy);
 	enc.mare     = mare;
 
-	enc.onEncounter = function() {
+	enc.onEncounter = () => {
 		let parse: any = {
 
 		};
@@ -1476,7 +1476,7 @@ MaliceScoutsScenes.Mare.LoneEncounter = function(levelbonus: number) {
 				Text.Add("<i>“Phew, sorry about that; hope I didn’t hurt you too badly. Just had to get that out of my system before we began fucking like a bunch of fucking animals.”</i> She pauses a moment and draws a deep breath, panting away - whether from heat or exertion is anyone’s guess. <i>“Damn it, it’s already getting to my vocabulary. Let’s just hurry up and scratch this itch of mine before it gets very much worse.”</i>", parse);
 				Text.Flush();
 
-				Gui.NextPrompt(function() {
+				Gui.NextPrompt(() => {
 					TimeStep({hour: 1});
 					Text.Clear();
 					MaliceScoutsScenes.Mare.LossEntry(enc);
@@ -1498,7 +1498,7 @@ MaliceScoutsScenes.Mare.LoneEncounter = function(levelbonus: number) {
 				Text.Flush();
 
 				// Start combat
-				Gui.NextPrompt(function() {
+				Gui.NextPrompt(() => {
 					enc.PrepCombat();
 				});
 			},
@@ -1525,7 +1525,7 @@ MaliceScoutsScenes.Mare.WinPrompt = function() {
 
 	};
 
-	Gui.Callstack.push(function() {
+	Gui.Callstack.push(() => {
 		Text.Clear();
 		Text.Add("Unable to keep on fighting any longer, the centaur mare sinks to her knees - all four of them - and makes little urgent noises in the back of her throat. Despite being soundly beaten, it looks like her desperate need hasn’t diminished any from the combat. Letting her spear and shield fall to the grassy ground with soft thuds, the centaur wiggles her rump, and when you half-circle around her to investigate you can see a dark streak of wetness running down her hind legs as her flanks heave.", parse);
 		Text.NL();
@@ -1558,7 +1558,7 @@ MaliceScoutsScenes.Mare.WinPrompt = function() {
 		options.push({nameStr : "",
 			tooltip : Text.Parse("", parse),
 			enabled : true,
-			func : function() {
+			func : () => {
 				Text.Clear();
 				Text.Add("", parse);
 				Text.NL();
@@ -1568,7 +1568,7 @@ MaliceScoutsScenes.Mare.WinPrompt = function() {
 		});
 		*/
 
-		Gui.SetButtonsFromList(options, true, function() {
+		Gui.SetButtonsFromList(options, true, () => {
 			Text.Clear();
 			Text.Add("Yeah. Either horses aren’t quite your style, or you’re just not feeling up to it today. Either way, since she was so kind to point it out to you, you’re going to do just that - humiliate her by just walking away after having soundly thrashed the stuffing out of her.", parse);
 			Text.NL();
@@ -1589,7 +1589,7 @@ MaliceScoutsScenes.Mare.WinPrompt = function() {
 	Encounter.prototype.onVictory.call(enc);
 };
 
-MaliceScoutsScenes.Mare.WinFuck = function(enc: any) {
+MaliceScoutsScenes.Mare.WinFuck = (enc: any) => {
 	const player = GAME().player;
 	const mare   = enc.mare;
 	const p1cock = player.BiggestCock();
@@ -1908,7 +1908,7 @@ MaliceScoutsScenes.Mare.WinFuck = function(enc: any) {
 	Gui.NextPrompt();
 };
 
-MaliceScoutsScenes.Mare.WinFist = function(enc: any) {
+MaliceScoutsScenes.Mare.WinFist = (enc: any) => {
 	const player = GAME().player;
 	const mare   = enc.mare;
 	const p1cock = player.BiggestCock();
@@ -2032,7 +2032,7 @@ MaliceScoutsScenes.Mare.LossPrompt = function() {
 	};
 	parse = player.ParserTags(parse);
 
-	Gui.Callstack.push(function() {
+	Gui.Callstack.push(() => {
 		Text.Clear();
 		Text.Add("There’s something about a huge mass of horseflesh that has a sense of weight and inevitability about it, one that you get a very keen appreciation for when the centaur mare charges and blindsides you, knocking ", parse);
 		if (player.weapon) {
@@ -2062,23 +2062,23 @@ MaliceScoutsScenes.Mare.LossPrompt = function() {
 	Encounter.prototype.onLoss.call(enc);
 };
 
-MaliceScoutsScenes.Mare.LossEntry = function(enc: any) {
+MaliceScoutsScenes.Mare.LossEntry = (enc: any) => {
 	// TODO More Loss Scenes
 	const scenes = new EncounterTable();
 
-	scenes.AddEnc(function() {
+	scenes.AddEnc(() => {
 		MaliceScoutsScenes.Mare.LossFacesit(enc);
-	}, 1.0, function() { return true; });
+	}, 1.0, () => true);
 
 	/* TODO
-	scenes.AddEnc(function() {
+	scenes.AddEnc(() => {
 
-	}, 1.0, function() { return true; });
+	}, 1.0, () => true);
 	*/
 	scenes.Get();
 };
 
-MaliceScoutsScenes.Mare.LossFacesit = function(enc: any) {
+MaliceScoutsScenes.Mare.LossFacesit = (enc: any) => {
 	const player = GAME().player;
 	let parse: any = {
 
@@ -2151,7 +2151,7 @@ MaliceScoutsScenes.Mare.LossFacesit = function(enc: any) {
 
 // GOAT ALCHEMIST SCENES
 
-MaliceScoutsScenes.Goat.LoneEncounter = function(levelbonus: number) {
+MaliceScoutsScenes.Goat.LoneEncounter = (levelbonus: number) => {
 	const player = GAME().player;
 	const party: Party = GAME().party;
 	const enemy    = new Party();
@@ -2160,7 +2160,7 @@ MaliceScoutsScenes.Goat.LoneEncounter = function(levelbonus: number) {
 	const enc: any = new Encounter(enemy);
 	enc.goat     = goat;
 
-	enc.onEncounter = function() {
+	enc.onEncounter = () => {
 		let parse: any = {
 
 		};
@@ -2173,7 +2173,7 @@ MaliceScoutsScenes.Goat.LoneEncounter = function(levelbonus: number) {
 		Text.NL();
 		Text.Add("You have barely enough time to look up and see two dark, spherical objects fall from the top of the ravine towards you before your instincts kick in and take control of your movement, sending you into a dive for the nearest boulder", parse);
 		if (party.Num() > 1) {
-			parse.comp = party.Num() == 2 ? party.Get(1).name : "your companions";
+			parse.comp = party.Num() === 2 ? party.Get(1).name : "your companions";
 			Text.Add(" with [comp] following suit", parse);
 		}
 		Text.NL();
@@ -2198,7 +2198,7 @@ MaliceScoutsScenes.Goat.LoneEncounter = function(levelbonus: number) {
 		Text.Add("<b>It’s a fight!</b>", parse);
 		Text.Flush();
 
-		Gui.NextPrompt(function() {
+		Gui.NextPrompt(() => {
 			enc.PrepCombat();
 		});
 	};
@@ -2221,7 +2221,7 @@ MaliceScoutsScenes.Goat.WinPrompt = function() {
 
 	};
 
-	Gui.Callstack.push(function() {
+	Gui.Callstack.push(() => {
 		Text.Clear();
 		Text.Add("The goat-morph alchemist lets out a plaintive bleat as you deal him a solid last blow, knocking him off his feet and onto the ground. He tumbles into a roll to try and avoid breaking any of his precious substances, which by some miracle all of which manage to survive the fall intact.", parse);
 		Text.NL();
@@ -2244,7 +2244,7 @@ MaliceScoutsScenes.Goat.WinPrompt = function() {
 		options.push({nameStr : "",
 			tooltip : Text.Parse("", parse),
 			enabled : true,
-			func : function() {
+			func : () => {
 				Text.Clear();
 				Text.Add("", parse);
 				Text.NL();
@@ -2254,7 +2254,7 @@ MaliceScoutsScenes.Goat.WinPrompt = function() {
 		});
 		*/
 
-		Gui.SetButtonsFromList(options, true, function() {
+		Gui.SetButtonsFromList(options, true, () => {
 			Text.Clear();
 			Text.Add("You definitely have better things to do than to deal with crazy old has-beens. If a solid beating hasn’t shaken loose some of the cobwebs from that mind of his, you doubt that anything else you might have the mind to do is going to change that. Besides, it’s not as if you can turn him in to the law, since out here in the highlands there really isn’t <i>any</i> law - and you’re not going to kill him, so that’s out of the question. It doesn’t feel <i>right</i> to be just leaving him like that, but no immediately better solution presents itself.", parse);
 			Text.NL();
@@ -2267,7 +2267,7 @@ MaliceScoutsScenes.Goat.WinPrompt = function() {
 	Encounter.prototype.onVictory.call(enc);
 };
 
-MaliceScoutsScenes.Goat.WinTurnTables = function(enc: any) {
+MaliceScoutsScenes.Goat.WinTurnTables = (enc: any) => {
 	const player = GAME().player;
 	const goat = enc.goat;
 	let parse: any = {
@@ -2286,7 +2286,7 @@ MaliceScoutsScenes.Goat.WinTurnTables = function(enc: any) {
 	// Pick one random option from the below, and follow on from there:
 	const scenes = new EncounterTable();
 	// Grow-it-big cream
-	scenes.AddEnc(function() {
+	scenes.AddEnc(() => {
 		Text.Add("a large, solid ceramic tub sealed with plenty of wax. It takes a little bit of tugging for you to finally get the seal open - it’s <i>almost</i> as bad as a pickle jar. Not exactly as bad, but pretty darn close - and it parts with a pop. The heavy scent of cherries rises from the tub’s contents - a light, rosy-pink salve that looks as light and fluffy as whipped cream.", parse);
 		Text.NL();
 		Text.Add("<i>“No, you fool!”</i> the goat alchemist bleats. <i>“You know not what you’re dealing with! There are forces at work here that are beyond the grasp of your simple mind to comprehend!”</i>", parse);
@@ -2321,9 +2321,9 @@ MaliceScoutsScenes.Goat.WinTurnTables = function(enc: any) {
 
 		// Structure this as such: random opening for each of the four body parts, followed by body-part specific portion. Alchemist and leave have their own blocks altogether.
 
-		const intro = function() {
+		const intro = () => {
 			const scenes = new EncounterTable();
-			scenes.AddEnc(function() {
+			scenes.AddEnc(() => {
 				Text.Add("An idea begins forming in your mind, but your better sense grabs hold of you and shakes your consciousness silly until it’s sure you’re paying attention. Do you really want to do this? Apply to yourself the completely unverified and unvouched-for product of an old, nasty-smelling ruminant who in all probability hasn’t bathed for days?", parse);
 				Text.NL();
 				Text.Add("Of all the things you could be doing to yourself, is applying to yourself the concoctions of a very possibly deranged alchemist the wisest decision that you could be making at this juncture?", parse);
@@ -2331,8 +2331,8 @@ MaliceScoutsScenes.Goat.WinTurnTables = function(enc: any) {
 				Text.Add("Pfffft, why not? No matter what’s gone into this cream you’re holding in your hands now, it certainly can’t be crazier than some of the stuff that you’ve <i>seen</i> going into the so-called <i>reliable</i> potions. At this point, nothing can surprise you any more, can it? At least it’s topical and you’re not going to be expected to shove it down your throat like some disaffected hobo who eats everything he or she can get his or her hands on.", parse);
 				Text.NL();
 				Text.Add("With that thought in mind, you stick your fingers into the tub again and scoop up a large lump of cream. This had better be good…", parse);
-			}, 1.0, function() { return true; });
-			scenes.AddEnc(function() {
+			}, 1.0, () => true);
+			scenes.AddEnc(() => {
 				Text.Add("You look at the tub in your hand. It doesn’t have eyes, but you get the feeling that it’s staring back at you - or at the very least, there’s a distinct burning gaze on your [skin], although that might be the alchemist.", parse);
 				Text.NL();
 				Text.Add("That’s beyond the point, though. <i>Use me!</i> the tub of cream seems to say to you. <i>What’s the worst that could happen?</i>", parse);
@@ -2340,8 +2340,8 @@ MaliceScoutsScenes.Goat.WinTurnTables = function(enc: any) {
 				Text.Add("Indeed, what’s the worst that could happen? Considering all the crazy things which alchemy can do these days - a potion for everything, as the saying goes - there are indeed a lot of terrible things this little tub of cream could conceivably do to you, but none of them have happened to the randy old goat at your [feet], at any rate.", parse);
 				Text.NL();
 				Text.Add("If nothing terrible happened to him, it shouldn’t to you, right? Right? It’s just a matter of figuring out the proper dosage, right? Nevertheless, you catch your breath as you dip your fingers into the tub once more and scoop out a dollop of grow-it-big cream.", parse);
-			}, 1.0, function() { return true; });
-			scenes.AddEnc(function() {
+			}, 1.0, () => true);
+			scenes.AddEnc(() => {
 				Text.Add("You turn the tub over in your hands once more and give its fine contents a hard look. Completely innocuous, isn’t it? And yet you’ve got a randy old goat lying on the ground sporting a fresh, perky pair of tits that any growing girl would be proud to have. Only this isn’t a growing girl, this is an old, smelly has-been, and he rolls a rheumy, bloodshot eye up at you as you handle the jar with the thick gloves you found.", parse);
 				Text.NL();
 				Text.Add("<i>“Careful with that thing,”</i> he groans, coughing a bit. <i>“The stuff in that tub’s probably more precious than everything you have on you combined.”</i>", parse);
@@ -2363,7 +2363,7 @@ MaliceScoutsScenes.Goat.WinTurnTables = function(enc: any) {
 				Text.Add("<i>“Isn’t it?”</i> the goat alchemist continues to bleat, caught up in the moment of bragging to someone who actually appears to care, no matter how fleetingly. <i>“Isn’t it, though? Makes me all <b>excited</b>, I don’t mind telling you, just thinking about it. It’s a <b>cream</b>, you see.”</i>", parse);
 				Text.NL();
 				Text.Add("Yes. You, er, see. The goat alchemist blabbers on for a little while longer - talk about oblivious - but you go ahead and tune him out before scooping out another bunch of cream from the tub.", parse);
-			}, 1.0, function() { return true; });
+			}, 1.0, () => true);
 			scenes.Get();
 			Text.NL();
 		};
@@ -2434,10 +2434,9 @@ MaliceScoutsScenes.Goat.WinTurnTables = function(enc: any) {
 
 					TimeStep({hour: 1});
 
-					const cocks = player.AllCocks();
-					for (let i = 0; i < cocks.length; i++) {
-						cocks[i].length.IncreaseStat(80, 2);
-						cocks[i].thickness.IncreaseStat(15, 0.5);
+					for (const cock of player.AllCocks()) {
+						cock.length.IncreaseStat(80, 2);
+						cock.thickness.IncreaseStat(15, 0.5);
 					}
 
 					Gui.NextPrompt();
@@ -2521,7 +2520,7 @@ MaliceScoutsScenes.Goat.WinTurnTables = function(enc: any) {
 
 				TimeStep({hour: 1});
 
-				_.each(player.AllBreastRows(), function(breasts) {
+				_.each(player.AllBreastRows(), (breasts) => {
 					breasts.size.IncreaseStat(50, 1);
 				});
 				player.AddLustFraction(0.4);
@@ -2701,7 +2700,7 @@ MaliceScoutsScenes.Goat.WinTurnTables = function(enc: any) {
 			},
 		});
 
-		Gui.SetButtonsFromList(options, true, function() {
+		Gui.SetButtonsFromList(options, true, () => {
 			Text.Clear();
 			Text.Add("Huh, you think you’ve taught the old bastard a good enough lesson. Oh, there’s little doubt he can brew something to fix himself up, being an alchemist and all, but you have the distinct feeling that he’ll be turning some eyes - and inciting some laughter - before he manages that.", parse);
 			Text.NL();
@@ -2712,8 +2711,8 @@ MaliceScoutsScenes.Goat.WinTurnTables = function(enc: any) {
 
 			Gui.NextPrompt();
 		});
-	}, 1.0, function() { return true; });
-	scenes.AddEnc(function() {
+	}, 1.0, () => true);
+	scenes.AddEnc(() => {
 		Text.Add("a sizeable cylindrical object that looks like - oh why yes, it <i>is</i> a dildo. By the looks of the tapered tip and addition of a knot near the base, it’s a rather canine one in design. On the surface, it doesn’t <i>look</i> any different from your average dog-inspired sex toy, but there’s a certain something or the other about it that drives you to inspect it further.", parse);
 		Text.NL();
 		Text.Add("<i>“What are you doing?”</i> the alchemist bleats. You kick some dirt onto the old bastard to shut him up, and continue your investigations.", parse);
@@ -2825,14 +2824,14 @@ MaliceScoutsScenes.Goat.WinTurnTables = function(enc: any) {
 			},
 		});
 		Gui.SetButtonsFromList(options, false, null);
-	}, 1.0, function() { return true; });
+	}, 1.0, () => true);
 
 	/* TODO other items
-	scenes.AddEnc(function() {
+	scenes.AddEnc(() => {
 		Text.Add("", parse);
 		Text.NL();
 		Text.Add("", parse);
-	}, 1.0, function() { return true; });
+	}, 1.0, () => true);
 	*/
 
 	scenes.Get();
@@ -2851,7 +2850,7 @@ MaliceScoutsScenes.Goat.LossPrompt = function() {
 	};
 	parse = player.ParserTags(parse);
 
-	Gui.Callstack.push(function() {
+	Gui.Callstack.push(() => {
 		Text.Clear();
 		Text.Add("Triumphant, the alchemist looms over you, fingering his toolbelt with barely restrained anticipation and glee. <i>“Now, I could say that this was an exercise in tedium, but to be honest I’m glad you got your blood flowing and body all limbered up. Cuts down on the time spent waiting around for results to show up.”</i>", parse);
 		Text.NL();
@@ -2865,7 +2864,7 @@ MaliceScoutsScenes.Goat.LossPrompt = function() {
 	Encounter.prototype.onLoss.call(enc);
 };
 
-MaliceScoutsScenes.Goat.LossEntry = function(enc: any) {
+MaliceScoutsScenes.Goat.LossEntry = (enc: any) => {
 	const player = GAME().player;
 	let parse: any = {
 
@@ -2877,7 +2876,7 @@ MaliceScoutsScenes.Goat.LossEntry = function(enc: any) {
 	const scenes = new EncounterTable();
 
 	// Tentacle Pet
-	scenes.AddEnc(function() {
+	scenes.AddEnc(() => {
 		const tentacock = new Cock();
 		tentacock.type = CockType.tentacle;
 		tentacock.length.base = 50;
@@ -3208,9 +3207,9 @@ MaliceScoutsScenes.Goat.LossEntry = function(enc: any) {
 		TimeStep({hour: 2});
 
 		Gui.NextPrompt();
-	}, 1.0, function() { return player.Humanoid(); });
+	}, 1.0, () => player.Humanoid());
 
-	scenes.AddEnc(function() {
+	scenes.AddEnc(() => {
 		Text.Add("small bound book in black-dyed leather, about the size and thickness of a small notebook. <i>“Interesting reading material Malice gets these days, wonder where he’s getting all these from. Never struck me as a reading man, too. Now, where was it?”</i>", parse);
 		Text.NL();
 		Text.Add("You watch sullenly as the rickety old goat flips through a few pages, mumbling to himself. <i>“Right, right, let’s try this one - he wanted the results posthaste. Ahem - greater lactic rush… mm-hm, hm…”</i>", parse);
@@ -3246,7 +3245,7 @@ MaliceScoutsScenes.Goat.LossEntry = function(enc: any) {
 		}
 		Text.NL();
 
-		_.each(player.AllBreastRows(), function(breasts) {
+		_.each(player.AllBreastRows(), (breasts) => {
 			breasts.size.IncreaseStat(7.5, 10);
 		});
 		player.AddLustFraction(0.4);
@@ -3256,7 +3255,7 @@ MaliceScoutsScenes.Goat.LossEntry = function(enc: any) {
 		Text.Add("Then it begins. ", parse);
 		if (player.Lactation()) {
 			Text.Add("You were already milky before, but the alchemist’s spell has turned your previous production up to eleven. With a cry of pleasure, you clutch your tits and squeeze them for dear life as twin jets of milky goodness erupt from your [nips], geysering in the air before falling back down on you in a creamy white shower. The sensations emanating from your lady lumps are absolutely divine, washing over you from head to toe and making you feel just like ", parse);
-			if (player.Gender() == Gender.female) {
+			if (player.Gender() === Gender.female) {
 				Text.Add("the woman that you are", parse);
 			} else {
 				Text.Add("a woman", parse);
@@ -3306,22 +3305,22 @@ MaliceScoutsScenes.Goat.LossEntry = function(enc: any) {
 		TimeStep({hour: 1});
 
 		Gui.NextPrompt();
-	}, 1.0, function() { return true; });
+	}, 1.0, () => true);
 
 	/* TODO
-	scenes.AddEnc(function() {
+	scenes.AddEnc(() => {
 		Text.Add("", parse);
 		Text.NL();
 		Text.Add("", parse);
 		Text.Flush();
-	}, 1.0, function() { return true; });
+	}, 1.0, () => true);
 	*/
 	scenes.Get();
 };
 
 // GROUP ENCOUNTER
 
-MaliceScoutsScenes.Group.Encounter = function(levelbonus: number) {
+MaliceScoutsScenes.Group.Encounter = (levelbonus: number) => {
 	const player = GAME().player;
 	const party: Party = GAME().party;
 	const enemy    = new Party();
@@ -3336,7 +3335,7 @@ MaliceScoutsScenes.Group.Encounter = function(levelbonus: number) {
 	enc.goat     = goat;
 	enc.mare     = mare;
 
-	enc.onEncounter = function() {
+	enc.onEncounter = () => {
 		const parse: any = {
 			himher : player.mfFem("him", "her"),
 		};
@@ -3381,7 +3380,7 @@ MaliceScoutsScenes.Group.Encounter = function(levelbonus: number) {
 		Text.Flush();
 
 		// Start combat
-		Gui.NextPrompt(function() {
+		Gui.NextPrompt(() => {
 			enc.PrepCombat();
 		});
 	};
@@ -3406,7 +3405,7 @@ MaliceScoutsScenes.Group.WinPrompt = function() {
 	};
 	parse = player.ParserTags(parse);
 
-	Gui.Callstack.push(function() {
+	Gui.Callstack.push(() => {
 		Text.Clear();
 		Text.Add("Defeated, the trio lie groaning on the grass - the catboy and goat-morph are flat on their backs, while the centaur mare has toppled over on her side during the fight, unable or unwilling to get up. Heaving a sigh of relief, you put away your [weapon] and step forward to inspect your assailants more closely. They certainly look like mercenaries, being too well-dressed and equipped for simple bandits. Which company they’re from is a mystery, though; they certainly bear no markings indicating such.", parse);
 		Text.NL();
@@ -3420,7 +3419,7 @@ MaliceScoutsScenes.Group.WinPrompt = function() {
 		options.push({nameStr : "",
 			tooltip : Text.Parse("", parse),
 			enabled : true,
-			func : function() {
+			func : () => {
 				Text.Clear();
 				Text.Add("", parse);
 				Text.NL();
@@ -3433,7 +3432,7 @@ MaliceScoutsScenes.Group.WinPrompt = function() {
 		if (options.length > 0) {
 			Gui.SetButtonsFromList(options, false, null);
 		} else { // NULL OPTION
-			Gui.NextPrompt(function() {
+			Gui.NextPrompt(() => {
 				Text.Clear();
 				Text.Add("You rack your brains, trying to think of what to do next. Either you can’t think of anything appropriately kinky that would involve all three of your assailants, or you simply don’t want to have anything to do with them, for the next thing you know, you’re heading out and away from this mess before someone else comes up and… well, inconvenient questions would be the least of the things that could happen. Yeah, sure, you could stay and try and think of increasingly implausible sex acts that would probably involve quite a bit of contortion to accommodate all three of them, but seriously, you’ve got better things to do with your time, don’t you?", parse);
 				Text.NL();
@@ -3460,7 +3459,7 @@ MaliceScoutsScenes.Group.LossPrompt = function() {
 
 	};
 
-	Gui.Callstack.push(function() {
+	Gui.Callstack.push(() => {
 		Text.Clear();
 		Text.Add("Ouch! A savage kick from the centaur mare’s hooves sends your head spinning, and this is quickly followed by streams of translucent mist that issue from the catboy mage’s hands and solidify about your limbs, holding you in place. ", parse);
 		if (party.Num() > 1) {
@@ -3488,29 +3487,29 @@ MaliceScoutsScenes.Group.LossPrompt = function() {
 		const catlike = player.RaceCompare(Race.Feline);
 
 		const scenes = new EncounterTable();
-		scenes.AddEnc(function() {
+		scenes.AddEnc(() => {
 			MaliceScoutsScenes.Group.LossCatboyForcedTF(enc);
-		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
 			MaliceScoutsScenes.Group.LossMagicalBondage(enc);
-		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
 			MaliceScoutsScenes.Group.LossCatRape(enc);
-		}, 1.0, function() { return player.FirstVag() && catlike >= 0.4; });
+		}, 1.0, () => player.FirstVag() && catlike >= 0.4);
 
 		/* TODO
-		scenes.AddEnc(function() {
+		scenes.AddEnc(() => {
 			Text.Add("", parse);
 			Text.NL();
 			Text.Add("", parse);
-		}, 1.0, function() { return true; });
+		}, 1.0, () => true);
 		*/
 		scenes.Get();
 	});
 	Encounter.prototype.onLoss.call(enc);
 };
 
-MaliceScoutsScenes.Group.LossCatboyForcedTF = function(enc: any) {
+MaliceScoutsScenes.Group.LossCatboyForcedTF = (enc: any) => {
 	const player = GAME().player;
 	const catboy = enc.catboy;
 
@@ -3590,16 +3589,16 @@ MaliceScoutsScenes.Group.LossCatboyForcedTF = function(enc: any) {
 			Text.Add("Time passes in a blur as your head swims and vision dims, your senses overwhelmed by the catboy’s forceful fucking. At last, though, an ominous twitching deep within your body jerks you back to groggy awareness just in time for the catboy to unleash the contents of his balls straight into your womb. Throwing his head back, the feline lets out a bestial roar not too unlike that of a lion’s, and then a torrential surge of spunk flows straight into you.", parse);
 			Text.NL();
 
-			const womb = player.PregHandler().Womb();
-			const preg = womb && womb.pregnant;
+			let womb = player.PregHandler().Womb();
+			let preg = womb && womb.pregnant;
 
 			if (preg && womb.progress >= 0.2) {
 				Text.Add("Being already knocked up, you can’t get any <i>more</i> pregnant than you already are - that sort of thing’s reserved for broody birds - but neither the catboy nor his cum care one whit for what you or your body wants. Another roar rends the air about the standing stones, and you can only groan and hang limply as your already swollen womb grows ever bigger as it’s pumped full of seed.", parse);
 				Text.NL();
 				Text.Add("Bigger and bigger, rounder and rounder - you can <i>feel</i> your unborn progeny being bathed in the catboy’s thick spunk, and the roaring deluge only serves to make you even more aroused. Unable to retain its shape with cock, child and cum all weighing down upon it, your glistening, stretched belly distends and drops, producing a delightful oblong shape.", parse);
 			} else {
-				const womb = player.PregHandler().Womb({slot: PregnancyHandler.Slot.Butt});
-				const preg = womb && womb.pregnant;
+				womb = player.PregHandler().Womb({slot: PregnancyHandler.Slot.Butt});
+				preg = womb && womb.pregnant;
 				parse.swollen = (preg && womb.progress >= 0.4) ? "already-swollen" : "still-relatively-flat";
 				Text.Add("Unable to withstand the deluge of baby batter racing into it, your [swollen] belly rapidly swells and distends as if the catboy’s seed had already taken root and was quickening into a batch of kittens at an inhuman rate. You can practically <i>feel</i> muscles stretching and organs giving way to make room for the growing reservoir of spunk within you - first looking to be four months along, then nine, then heavily overdue… and you’re still growing.", parse);
 				Text.NL();
@@ -3730,7 +3729,7 @@ MaliceScoutsScenes.Group.LossCatboyForcedTF = function(enc: any) {
 	Gui.NextPrompt();
 };
 
-MaliceScoutsScenes.Group.LossMagicalBondage = function(enc: any) {
+MaliceScoutsScenes.Group.LossMagicalBondage = (enc: any) => {
 	const player = GAME().player;
 	const party: Party = GAME().party;
 	let parse: any = {
@@ -4050,7 +4049,7 @@ MaliceScoutsScenes.Group.LossMagicalBondage = function(enc: any) {
 	Gui.NextPrompt();
 };
 
-MaliceScoutsScenes.Group.LossCatRape = function(enc: any) {
+MaliceScoutsScenes.Group.LossCatRape = (enc: any) => {
 	const player = GAME().player;
 	const catboy = enc.catboy;
 

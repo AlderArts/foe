@@ -134,22 +134,22 @@ export class GolQueen extends BossEntity {
 			Abilities.Attack.CastInternal(encounter, this, t);
 		} else if (choice < 0.4 && Abilities.EnemySkill.GolPollen.enabledCondition(encounter, this)) {
 			Abilities.EnemySkill.GolPollen.Use(encounter, this, party);
- } else if (choice < 0.55 && Abilities.EnemySkill.GolLustyPheromones.enabledCondition(encounter, this)) {
+		} else if (choice < 0.55 && Abilities.EnemySkill.GolLustyPheromones.enabledCondition(encounter, this)) {
 			Abilities.EnemySkill.GolLustyPheromones.Use(encounter, this, t);
- } else if (choice < 0.7 && Abilities.EnemySkill.GolCuntDash.enabledCondition(encounter, this)) {
+		} else if (choice < 0.7 && Abilities.EnemySkill.GolCuntDash.enabledCondition(encounter, this)) {
 			Abilities.EnemySkill.GolCuntDash.Use(encounter, this, t);
- } else if (choice < 0.8 && Abilities.Physical.DAttack.enabledCondition(encounter, this)) {
+		} else if (choice < 0.8 && Abilities.Physical.DAttack.enabledCondition(encounter, this)) {
 			Abilities.Physical.DAttack.Use(encounter, this, t);
- } else if (choice < 0.9 && Abilities.Physical.GrandSlam.enabledCondition(encounter, this)) {
+		} else if (choice < 0.9 && Abilities.Physical.GrandSlam.enabledCondition(encounter, this)) {
 			Abilities.Physical.GrandSlam.Use(encounter, this, party);
- } else {
+		} else {
 			Abilities.Attack.Use(encounter, this, t);
- }
+		}
 	}
 
 }
 
-GolScenes.SearchForScepter = function() {
+GolScenes.SearchForScepter = () => {
 	const player = GAME().player;
 	const party: Party = GAME().party;
 	const parse: any = {
@@ -182,8 +182,8 @@ GolScenes.SearchForScepter = function() {
 		func() {
 			Text.Clear();
 			Text.Add("Steeling yourself, you head inside the winding canyon, nerves on end and ready for combat. ", parse);
-			parse.Comp = party.Num() == 2 ? party.Get(1).name : "Your companions";
-			parse.notS = party.Num() == 2 ? "s" : "";
+			parse.Comp = party.Num() === 2 ? party.Get(1).name : "Your companions";
+			parse.notS = party.Num() === 2 ? "s" : "";
 			if (party.Num() > 1) {
 				Text.Add("[Comp] walk[notS] by your side, staying as close to you as possible. ", parse);
 			}
@@ -209,7 +209,7 @@ GolScenes.SearchForScepter = function() {
 			Text.Add("The monster waves her scepter, and the men and women are carried away by scurrying drones, off to whatever fate awaits them deeper within the canyon. You're going to have to fight this crazy Gol if you don't want to wind up like the people of the caravan!", parse);
 			Text.Flush();
 
-			Gui.NextPrompt(function() {
+			Gui.NextPrompt(() => {
 				const enemy = new Party();
 				const gol = new GolQueen();
 				enemy.AddMember(gol);
@@ -255,12 +255,12 @@ GolScenes.CombatLoss = function() {
 	let incubator: boolean;
 
 	const scenes = new EncounterTable();
-	scenes.AddEnc(function() {
+	scenes.AddEnc(() => {
 		incubator = true;
-	}, 1.0, function() { return player.FirstVag(); });
-	scenes.AddEnc(function() {
+	}, 1.0, () => player.FirstVag());
+	scenes.AddEnc(() => {
 		incubator = false;
-	}, 1.0, function() { return player.FirstCock(); });
+	}, 1.0, () => player.FirstCock());
 	scenes.Get();
 
 	parse.inc = incubator ? "incubator" : "drone prince";
@@ -277,7 +277,7 @@ GolScenes.CombatLoss = function() {
 	Text.Add("She shakes her head sadly. <i>“How petty and simple your goals are. The world does not revolve around you, little meatling. The scepter has helped me see that. It is only by working together in unified purpose that we can make anything good, and who better to guide that purpose than the one who holds the scepter?”</i> Her armored bulk skitters forward. Pointed legs stab through the blanket on either side of you, and you do your best to hold still lest you gain a few new holes. <i>“I will give you purpose.”</i>", parse);
 	Text.Flush();
 
-	Gui.NextPrompt(function() {
+	Gui.NextPrompt(() => {
 		if (incubator) {
 			GolScenes.CombatLossIncubator(gol);
 		} else {
@@ -286,7 +286,7 @@ GolScenes.CombatLoss = function() {
 	});
 };
 
-GolScenes.CombatLossIncubator = function(gol: GolQueen) {
+GolScenes.CombatLossIncubator = (gol: GolQueen) => {
 	const player = GAME().player;
 	const parse: any = {
 		skinDesc() { return player.SkinDesc(); },
@@ -312,11 +312,11 @@ GolScenes.CombatLossIncubator = function(gol: GolQueen) {
 	Text.NL();
 	Text.Add("Just how big could her eggs be, and why is everyone from the caravan pregnant if she lays eggs? Her tail twitches as if mindful of your gaze, dripping a thicker flow of its fluid onto your bound chest. She must be ready to birth again. The organ surges out another inch or so from the surrounding carapace, gleaming in the starlight. That scent you smelled earlier - the musky, sexual tang that sent shivers down your spine - is stronger now, given off by the swelling ovipositor above.", parse);
 	Text.NL();
-	parse.l = player.LowerBodyType() != LowerBodyType.Single ? "between your thighs" : "in your loins";
+	parse.l = player.LowerBodyType() !== LowerBodyType.Single ? "between your thighs" : "in your loins";
 	Text.Add("You whimper, though from fear or arousal, you cannot tell. The Gol queen is a magnificent piece of work, perfectly engineered to breed often and in large quantities. The dripping hole above is clearly her ovipositor, and it’s stretching out before your very eyes, engorging in preparation of... something. You try to convince yourself the moisture [l] is nervous sweat and that the prickle of your sensitive nipples against their bindings is a trick of your mind. It works until a droplet of slippery goo lands on your neck, hot and wonderfully sensuous against your [skinDesc].", parse);
 	Text.NL();
 	Text.Add("You gasp in shock, wriggling in your confinement. ", parse);
-	if (player.LowerBodyType() != LowerBodyType.Single) {
+	if (player.LowerBodyType() !== LowerBodyType.Single) {
 		Text.Add("Your [legs] are so perfectly spread and anchored by yet more webs until closing them is an impossibility. You want to close them, close them and grind them together, squeezing down on the wetness between, but you can’t.", parse);
 	} else {
 		Text.Add("Your [legs] is stretched out so that you can’t even flex or twist, anchored with web upon web until movement or concealment of your [vagina] is an impossibility. You wish you could curl back onto yourself, and maybe rub a little across your increasingly puffy entrance, but you can’t.", parse);
@@ -326,7 +326,7 @@ GolScenes.CombatLossIncubator = function(gol: GolQueen) {
 	GolScenes.CombatLossIncEntry(gol);
 };
 
-GolScenes.CombatLossIncEntry = function(gol: GolQueen) {
+GolScenes.CombatLossIncEntry = (gol: GolQueen) => {
 	const player = GAME().player;
 	const p1cock = player.BiggestCock();
 
@@ -349,7 +349,7 @@ GolScenes.CombatLossIncEntry = function(gol: GolQueen) {
 	Text.Add("Licking your lips, you answer, proud of how deceptively eager you sound, <i>“Yes! Use me as your eggholster!”</i> A decidedly panty-drenching thought occurs to you, and you can’t help but give it voice. <i>“Stuff me so full of eggs you have to web my gaped cunt shut just to hold them in!”</i> That was filthy, but it made your [vagina] weep with anticipation. Maybe she’ll wrap you up in webs and just let you hang there until it’s time for your next filling.", parse);
 	Text.NL();
 	Text.Add("Her voice cuts your fantasies short once more. <i>“I exist to serve.”</i> Her tone is anything but humble, but how could you care when that thick cunt-stretcher is being pointed in your direction. It’s so close to you now, the clear fluids it exudes painting a trail up the ruined quilt toward the ", parse);
-	if (player.LowerBodyType() != LowerBodyType.Single) {
+	if (player.LowerBodyType() !== LowerBodyType.Single) {
 		Text.Add("junction of your thighs", parse);
 	} else {
 		Text.Add("hole that lies at the center of your body and thoughts", parse);
@@ -366,7 +366,7 @@ GolScenes.CombatLossIncEntry = function(gol: GolQueen) {
 	Text.Add("You were meant to do this. Meant to take life inside you and nurture it. You see that now, as clearly as you feel your new purpose being bored into your quivering slit. Your thoughts of escape burn away under the raw, untamed truth of it, molten hot in a way that sears your pleasure inside you, forcing you to boil in it. Runnels of girlcum stream out onto the rubble below as if forced out to make room for the new you. A soon to be pregnant you.", parse);
 	Text.Flush();
 
-	Gui.NextPrompt(function() {
+	Gui.NextPrompt(() => {
 		Text.Clear();
 		Text.Add("You close your eyes once more, not because of fear or revulsion, but because dealing with the wealth of sensory data from your stretching quim and your vision is making you dizzy. You can’t shut off the input from down below, so the vision has to go. It’s easier this way. You can focus on the rippling distentions and veins of the expanding ovipositor, the way it tingles and numbs and enhances your sensations all at once.", parse);
 		Text.NL();
@@ -394,7 +394,7 @@ GolScenes.CombatLossIncEntry = function(gol: GolQueen) {
 		Text.Add("Drones? Visions of big-dicked, handsome bug-boys dance in your head, clapping their carapace-covered crotches against your own again and again, your pregnant belly wobbling just above. You nearly cum again. The Queen - your Queen - is so generous!", parse);
 		Text.Flush();
 
-		Gui.NextPrompt(function() {
+		Gui.NextPrompt(() => {
 			Text.Clear();
 			Text.Add("The ovipositor lodged inside of you shifts, twisting and rubbing against your overtaxed walls in whole new ways. It flexes, the base expanding slightly, and then that distention slides deeper inside you. Behind it, the ovipositor narrows once more. She must be giving you your first egg! You giggle with girlish glee, a little pleasure-drunk, and try to relax your muscles as much as possible.", parse);
 			Text.NL();
@@ -411,7 +411,7 @@ GolScenes.CombatLossIncEntry = function(gol: GolQueen) {
 			Text.Add("Your belly bulges. Your pussy creams. You cum, and cum, and cum until unconsciousness claims you.", parse);
 			Text.Flush();
 
-			Gui.NextPrompt(function() {
+			Gui.NextPrompt(() => {
 				Text.Clear();
 				Text.Add("<b>Sometime later...</b>", parse);
 				Text.NL();
@@ -430,7 +430,7 @@ GolScenes.CombatLossIncEntry = function(gol: GolQueen) {
 	});
 };
 
-GolScenes.CombatLossDrone = function(gol: GolQueen) {
+GolScenes.CombatLossDrone = (gol: GolQueen) => {
 	const player = GAME().player;
 	const p1cock = player.BiggestCock();
 
@@ -525,7 +525,7 @@ GolScenes.CombatLossDrone = function(gol: GolQueen) {
 	Text.Add("Staggering up, you grab hold of your oozing erection[s] and stumble toward your Queen. She needs you, and you need her. You understand that. Without an endless source of cum, she won't be able to spread her hive across the lands. She won't be able to make the rest of the world understand what you do: that there's endless pleasure to be found beneath her scepter.", parse);
 	Text.Flush();
 
-	Gui.NextPrompt(function() {
+	Gui.NextPrompt(() => {
 		Text.Clear();
 		Text.Add("Walking across the rubble is hard enough without trying to support several feet worth of cum-drizzling cock. The Gol Queen is watching you, though, smiling to herself when your motions cause you to accidentally stroke your sensitive skin and shoot a lance of release across your own path. You nearly fall twice, each time due to your own pleasure, but every step is bringing you closer to your queen and her heavenly scent. There's only a few yards of distance left.", parse);
 		Text.NL();
@@ -564,7 +564,7 @@ GolScenes.CombatWin = function() {
 		foot() { return player.FootDesc(); },
 	};
 
-	Gui.Callstack.push(function() {
+	Gui.Callstack.push(() => {
 		Text.Clear();
 		if (gol.LustLevel() < 0.5) {
 			Text.Add("The Gol collapses under the weight of her body now that her strength is exhausted. All six legs splay out, and her human-like torso dips forward, barely held aloft by her four quivering arms. The scepter lies discarded so that she might stay at least partially upright.", parse);
@@ -625,7 +625,7 @@ GolScenes.CombatWin = function() {
 
 				TimeStep({minute: 30});
 
-				Gui.NextPrompt(function() {
+				Gui.NextPrompt(() => {
 					GolScenes.CombatAftermath(enc);
 				});
 			}, enabled : true,
@@ -637,7 +637,7 @@ GolScenes.CombatWin = function() {
 	Encounter.prototype.onVictory.call(enc);
 };
 
-GolScenes.CombatWinHyperFuck = function(enc: any, p1cock: Cock) {
+GolScenes.CombatWinHyperFuck = (enc: any, p1cock: Cock) => {
 	const player = GAME().player;
 	const gol = enc.gol;
 	const lusty = gol.LustLevel() >= 0.5;
@@ -739,12 +739,12 @@ GolScenes.CombatWinHyperFuck = function(enc: any, p1cock: Cock) {
 
 	TimeStep({hour: 1});
 
-	Gui.NextPrompt(function() {
+	Gui.NextPrompt(() => {
 		GolScenes.CombatAftermath(enc);
 	});
 };
 
-GolScenes.CombatWinTailfuck = function(enc: any, p1cock: Cock) {
+GolScenes.CombatWinTailfuck = (enc: any, p1cock: Cock) => {
 	const player = GAME().player;
 	const gol = enc.gol;
 	const lusty = gol.LustLevel() >= 0.5;
@@ -820,7 +820,7 @@ GolScenes.CombatWinTailfuck = function(enc: any, p1cock: Cock) {
 			Text.Add("The Gol looks back over her shoulder at you with an expression of confused lust. You can hear the sound of her fisting her frontal entrance all the same, but judging by the expression on her face, she'd like to tear you limb from limb as much as fuck you. Luckily for you, she's still a quivering, defeated wreck. You grab your things and the scepter, whistling jauntily.", parse);
 			Text.Flush();
 
-			Gui.NextPrompt(function() {
+			Gui.NextPrompt(() => {
 				GolScenes.CombatAftermath(enc);
 			});
 		}, enabled : true,
@@ -850,7 +850,7 @@ GolScenes.CombatWinTailfuck = function(enc: any, p1cock: Cock) {
 			Text.Add("You stagger away toward the scepter. You got your prize, and she got the cum she wanted. Win-win, right?", parse);
 			Text.Flush();
 
-			Gui.NextPrompt(function() {
+			Gui.NextPrompt(() => {
 				GolScenes.CombatAftermath(enc);
 			});
 		}, enabled : true,
@@ -860,7 +860,7 @@ GolScenes.CombatWinTailfuck = function(enc: any, p1cock: Cock) {
 
 };
 
-GolScenes.CombatWinCunn = function(enc: any) {
+GolScenes.CombatWinCunn = (enc: any) => {
 	const player = GAME().player;
 	const gol = enc.gol;
 	const lusty = gol.LustLevel() >= 0.5;
@@ -968,7 +968,7 @@ GolScenes.CombatWinCunn = function(enc: any) {
 			Text.NL();
 			Text.Add("The Gol gives out a disappointed cry as you grab the scepter and back away from her, but she stays put, knowing better than to fight you.", parse);
 			Text.Flush();
-			Gui.NextPrompt(function() {
+			Gui.NextPrompt(() => {
 				GolScenes.CombatAftermath(enc);
 			});
 		}, enabled : true,
@@ -977,7 +977,7 @@ GolScenes.CombatWinCunn = function(enc: any) {
 	Gui.SetButtonsFromList(options, false, null);
 };
 
-GolScenes.CombatAftermath = function(enc: any) {
+GolScenes.CombatAftermath = (enc: any) => {
 	const parse: any = {
 
 	};

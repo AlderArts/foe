@@ -119,11 +119,11 @@ export class Footman extends Entity {
 			Abilities.Physical.Attack.CastInternal(encounter, this, t);
 		} else if (choice < 0.6 && Abilities.Physical.CrushingStrike.enabledCondition(encounter, this)) {
 			Abilities.Physical.CrushingStrike.CastInternal(encounter, this, t);
- } else if (choice < 0.8 && Abilities.Physical.Pierce.enabledCondition(encounter, this)) {
+		} else if (choice < 0.8 && Abilities.Physical.Pierce.enabledCondition(encounter, this)) {
 			Abilities.Physical.Pierce.CastInternal(encounter, this, t);
- } else {
+		} else {
 			Abilities.Attack.CastInternal(encounter, this, t);
- }
+		}
 	}
 
 }

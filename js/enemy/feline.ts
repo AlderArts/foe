@@ -47,11 +47,11 @@ export class Wildcat extends Entity {
 		this.monsterName       = "the wildcat";
 		this.MonsterName       = "The wildcat";
 
-		if (gender == Gender.male) {
+		if (gender === Gender.male) {
 			this.avatar.combat     = Images.wildcat_male;
 			this.name              = "Wildcat(M)";
 			this.body.DefMale();
-		} else if (gender == Gender.female) {
+		} else if (gender === Gender.female) {
 			this.avatar.combat     = Images.wildcat_fem;
 			this.name              = "Wildcat(F)";
 			this.body.DefFemale();
@@ -159,7 +159,7 @@ export class Wildcat extends Entity {
 
 }
 
-FelinesScenes.WildcatEnc = function(levelbonus: number) {
+FelinesScenes.WildcatEnc = (levelbonus: number) => {
 	const enemy = new Party();
 	const r = Math.random();
 	if (r < 0.2) {
@@ -208,10 +208,10 @@ export class Puma extends Wildcat {
 		this.GroupName   = "The pumas";
 		this.groupName   = "the pumas";
 
-		if (gender == Gender.male) {
+		if (gender === Gender.male) {
 			this.avatar.combat = Images.puma_male;
 			this.name          = "Puma(M)";
-		} else if (gender == Gender.female) {
+		} else if (gender === Gender.female) {
 			this.avatar.combat = Images.puma_fem;
 			this.name          = "Puma(F)";
 		} else {
@@ -221,7 +221,7 @@ export class Puma extends Wildcat {
 	}
 }
 
-FelinesScenes.PumaEnc = function(levelbonus: number) {
+FelinesScenes.PumaEnc = (levelbonus: number) => {
 	const enemy = new Party();
 	const r = Math.random();
 	if (r < 0.2) {
@@ -270,10 +270,10 @@ export class Jaguar extends Wildcat {
 		this.GroupName   = "The jaguars";
 		this.groupName   = "the jaguars";
 
-		if (gender == Gender.male) {
+		if (gender === Gender.male) {
 			this.avatar.combat = Images.jaguar_male;
 			this.name          = "Jaguar(M)";
-		} else if (gender == Gender.female) {
+		} else if (gender === Gender.female) {
 			this.avatar.combat = Images.jaguar_fem;
 			this.name          = "Jaguar(F)";
 		} else {
@@ -283,7 +283,7 @@ export class Jaguar extends Wildcat {
 	}
 }
 
-FelinesScenes.JaguarEnc = function(levelbonus: number) {
+FelinesScenes.JaguarEnc = (levelbonus: number) => {
 	const enemy = new Party();
 	const r = Math.random();
 	if (r < 0.2) {
@@ -331,10 +331,10 @@ export class Lynx extends Wildcat {
 		this.GroupName   = "The lynx";
 		this.groupName   = "the lynx";
 
-		if (gender == Gender.male) {
+		if (gender === Gender.male) {
 			this.avatar.combat = Images.lynx_male;
 			this.name          = "Lynx(M)";
-		} else if (gender == Gender.female) {
+		} else if (gender === Gender.female) {
 			this.avatar.combat = Images.lynx_fem;
 			this.name          = "Lynx(F)";
 		} else {
@@ -344,7 +344,7 @@ export class Lynx extends Wildcat {
 	}
 }
 
-FelinesScenes.LynxEnc = function(levelbonus: number) {
+FelinesScenes.LynxEnc = (levelbonus: number) => {
 	const enemy = new Party();
 	const r = Math.random();
 	if (r < 0.2) {
@@ -395,10 +395,10 @@ export class Lion extends Wildcat {
 		this.groupName   = "the lions";
 		this.isLion = true;
 
-		if (gender == Gender.male) {
+		if (gender === Gender.male) {
 			// this.avatar.combat = Images.lion_male;
 			this.name          = "Lion(M)";
-		} else if (gender == Gender.female) {
+		} else if (gender === Gender.female) {
 			// this.avatar.combat = Images.lion_fem;
 			this.name          = "Lion(F)";
 		} else {
@@ -408,7 +408,7 @@ export class Lion extends Wildcat {
 	}
 }
 
-FelinesScenes.Impregnate = function(mother: Entity, father: Wildcat, slot: number) {
+FelinesScenes.Impregnate = (mother: Entity, father: Wildcat, slot: number) => {
 	mother.PregHandler().Impregnate({
 		slot   : slot || PregnancyHandler.Slot.Vag,
 		mother,
@@ -469,26 +469,26 @@ FelinesScenes.IntroRegular = function() {
 	Text.Add("[Oneof] flexes [m1hisher] claws menacingly, balancing on [m1hisher] hind legs, grinning as [m1hisher] tail sways playfully behind [m1himher]. ", parse);
 
 	const scenes = new EncounterTable();
-	scenes.AddEnc(function() {
+	scenes.AddEnc(() => {
 		Text.Add("<i>“Stepping in on my turf, are you? Wrong move!”</i> With that, [m1heshe] roars and lunges toward you.", parse);
-	}, 1.0, function() { return true; });
-	scenes.AddEnc(function() {
+	}, 1.0, () => true);
+	scenes.AddEnc(() => {
 		parse.youYourParty = party.Num() > 1 ? "your party" : "you";
 		Text.Add("<i>“Look what the cat dragged in, ladies,”</i> [m1name] purrs confidently, [m1hisher] harem’s eyes glinting hungrily as they study [youYourParty]. <i>“...Bring it to me!”</i>", parse);
-	}, 1.0, function() { return true; });
-	scenes.AddEnc(function() {
+	}, 1.0, () => true);
+	scenes.AddEnc(() => {
 		Text.Add("<i>“Just when I was getting bored!”</i>", parse);
-	}, 1.0, function() { return true; });
-	scenes.AddEnc(function() {
+	}, 1.0, () => true);
+	scenes.AddEnc(() => {
 		parse.bitch = player.mfFem("", " My Bitch.");
 		Text.Add("<i>“Don’t you know I rule these lands?”</i> the majestic lion puffs out his chest proudly, mane flowing in the wind. <i>“Do you know what that makes you? My prey.[bitch]”</i>", parse);
-	}, 3.0, function() { return mainCat.isLion && mainCat.Gender() == Gender.male; });
+	}, 3.0, () => mainCat.isLion && mainCat.Gender() === Gender.male);
 
 	scenes.Get();
 	Text.Flush();
 
 	// Start combat
-	Gui.NextPrompt(function() {
+	Gui.NextPrompt(() => {
 		enc.PrepCombat();
 	});
 };
@@ -520,16 +520,16 @@ FelinesScenes.IntroStalking = function() {
 	Text.NL();
 
 	const scenes = new EncounterTable();
-	scenes.AddEnc(function() {
+	scenes.AddEnc(() => {
 		parse.erRess = mainCat.mfTrue("er", "ress");
 		Text.Add("<i>“You are nimble, my prey!”</i> the hunt[erRess] congratulates you. <i>“But don’t get comfortable - the game has only begun.”</i>", parse);
-	}, 1.0, function() { return true; });
-	scenes.AddEnc(function() {
+	}, 1.0, () => true);
+	scenes.AddEnc(() => {
 		Text.Add("The creature doesn’t say anything, though you can see the glimmer of intelligence in [m1hisher] predatory gaze. A rough tongue flickers over sharp teeth, making you squirm uncomfortably.", parse);
-	}, 1.0, function() { return true; });
-	scenes.AddEnc(function() {
+	}, 1.0, () => true);
+	scenes.AddEnc(() => {
 		Text.Add("<i>“Why don’t you just give up like good prey?”</i> [m1name] purrs as [m1heshe] circles you. <i>“You can run, you can fight, you can give in… the end result will be the same.”</i>", parse);
-	}, 1.0, function() { return true; });
+	}, 1.0, () => true);
 
 	scenes.Get();
 
@@ -541,7 +541,7 @@ FelinesScenes.IntroStalking = function() {
 	Text.Flush();
 
 	// Start combat
-	Gui.NextPrompt(function() {
+	Gui.NextPrompt(() => {
 		enc.PrepCombat();
 	});
 };
@@ -567,7 +567,7 @@ FelinesScenes.WinPrompt = function() {
 		heshe        : group ? "they" : mainCat.heshe(),
 	};
 
-	Gui.Callstack.push(function() {
+	Gui.Callstack.push(() => {
 		Text.Clear();
 		Text.Add("Your [enemyEnemies] lie[notS] defeated, rolling over on [hisher] back[s] in submission to your authority. You consider what you are going to do with the feline[s].", parse);
 		if (player.LustLevel() > 0.5) {
@@ -584,13 +584,13 @@ FelinesScenes.WinPrompt = function() {
 		for (let i = 0; i < enemy.Num(); ++i) {
 			const ent    = enemy.Get(i);
 			const gender = ent.Gender();
-			if (gender == Gender.male) {
+			if (gender === Gender.male) {
 				numMales++;
 				if (male == null) { male = ent; }
-			} else if (gender == Gender.female) {
+			} else if (gender === Gender.female) {
 				numFemales++;
 				if (female == null) { female = ent; }
-			} else if (gender == Gender.herm) {
+			} else if (gender === Gender.herm) {
 				numHerms++;
 				if (herm == null) { herm = ent; }
 			}
@@ -701,7 +701,7 @@ FelinesScenes.WinPrompt = function() {
 		}
 		/* TODO more
 			options.push({ nameStr : "Nah",
-				func : function() {
+				func : () => {
 					FelinesScenes.WinFuckVag(female, enc);
 				}, enabled : true,
 				tooltip : ""
@@ -723,10 +723,10 @@ FelinesScenes.WinPrompt = function() {
 	Encounter.prototype.onVictory.call(enc);
 };
 
-FelinesScenes.WinCatchVag = function(mainCat: Wildcat, enemy: Party) {
+FelinesScenes.WinCatchVag = (mainCat: Wildcat, enemy: Party) => {
 	const player = GAME().player;
-	const otherCats = _.filter(enemy.members, function(cat) {
-		return cat != mainCat;
+	const otherCats = _.filter(enemy.members, (cat) => {
+		return cat !== mainCat;
 	});
 
 	const herm = mainCat.FirstVag();
@@ -848,7 +848,7 @@ FelinesScenes.WinCatchVag = function(mainCat: Wildcat, enemy: Party) {
 		}, enabled : true,
 	});
 
-	Gui.Callstack.push(function() {
+	Gui.Callstack.push(() => {
 		if (player.FirstCock()) {
 			Text.Add(" Your own [cocks] erupt[notS] in sympathetic orgasm, blasting [itsTheir] load[s] onto the [cat]’s [cbreasts] and chin.", parse);
 		}
@@ -868,7 +868,7 @@ FelinesScenes.WinCatchVag = function(mainCat: Wildcat, enemy: Party) {
 	Gui.SetButtonsFromList(options, false, null);
 };
 
-FelinesScenes.WinFuckVag = function(cat: Wildcat, group: boolean, enc: any, cocks: Cock[], numFemales: number) {
+FelinesScenes.WinFuckVag = (cat: Wildcat, group: boolean, enc: any, cocks: Cock[], numFemales: number) => {
 	const player = GAME().player;
 	const pCock = player.BiggestCock(cocks);
 
@@ -935,7 +935,7 @@ FelinesScenes.WinFuckVag = function(cat: Wildcat, group: boolean, enc: any, cock
 
 	let doubleCock = false;
 
-	Gui.Callstack.push(function() {
+	Gui.Callstack.push(() => {
 		Text.NL();
 		if (!pCock.isStrapon) {
 			Text.Add("It’s not long before you can feel a surge in your [balls], announcing the coming of your orgasm. With a final thrust, you drive yourself hips deep into the feline, shuddering as you unleash the torrent of your seed inside her.", parse);
@@ -988,7 +988,7 @@ FelinesScenes.WinFuckVag = function(cat: Wildcat, group: boolean, enc: any, cock
 		Text.NL();
 		if (cocks.length > 1 && Math.random() > 0.5) {
 			doubleCock = true;
-			parse.cock2 = function() { return cocks[1].Short(); };
+			parse.cock2 = () => cocks[1].Short();
 			Text.Add("You are having quite a good time, but can’t help feeling a bit bummed out that only one of your [cocks] is getting the attention it craves. Without skipping a beat, you press your [cock2] down between [possessive] cheeks, hotdogging her for a bit while humming happily.", parse);
 			Text.NL();
 			Text.Add("Drawing your hips back, you reposition yourself so that two cocks prod at the entrance to the quivering pussy’s pussy. It’s a tight fit, but you are nothing if not insistent. Eventually, your persistence bears fruit, and your pair of dicks are welcomed inside the yowling feline’s stretchy vaginal passage. The kitty is in ecstasy, no doubt being filled like she’s never been filled before. Your hips slap against her wetly as your coitus forces the sticky juices dripping out of her overfilled cunt to overflow, liberally coating your thrusting members.", parse);
@@ -1003,15 +1003,15 @@ FelinesScenes.WinFuckVag = function(cat: Wildcat, group: boolean, enc: any, cock
 		Text.NL();
 
 		const scenes = new EncounterTable();
-		scenes.AddEnc(function() {
+		scenes.AddEnc(() => {
 			Text.Add("<i>“Ahn, you are so <b>rough</b>!”</i> she purrs as she squirms beneath you. <i>“I <b>love</b> it! I love getting fucked by you!”</i>", parse);
-		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
 			Text.Add("<i>“W-whoa, taking two dicks is awesome!”</i> she moans, gasping for breath between your thrusts.", parse);
-		}, 1.0, function() { return doubleCock; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => doubleCock);
+		scenes.AddEnc(() => {
 			Text.Add("<i>“P-perhaps I should lose to you more often,”</i> she purrs happily. <i>“You are so good at punishing me when I’ve been a bad girl!”</i>", parse);
-		}, 1.0, function() { return true; });
+		}, 1.0, () => true);
 
 		scenes.Get();
 
@@ -1082,17 +1082,17 @@ FelinesScenes.WinFuckVag = function(cat: Wildcat, group: boolean, enc: any, cock
 			Text.NL();
 
 			const scenes = new EncounterTable();
-			scenes.AddEnc(function() {
+			scenes.AddEnc(() => {
 				parse.IWe = group ? "we" : "I";
 				parse.was = group ? "were" : "was";
 				Text.Add("<i>“Y-you are quite gentle, even though [IWe] [was] hunting you...”</i> [Name] sounds perplexed at this, the prey showing mercy to the defeated hunter.", parse);
-			}, 1.0, function() { return true; });
-			scenes.AddEnc(function() {
+			}, 1.0, () => true);
+			scenes.AddEnc(() => {
 				Text.Add("<i>“Thank you, lover,”</i> [name] purrs, caressing your [skin] tenderly.", parse);
-			}, 1.0, function() { return true; });
-			scenes.AddEnc(function() {
+			}, 1.0, () => true);
+			scenes.AddEnc(() => {
 				Text.Add("<i>“Oh… Oh!”</i> she gasps. <i>“Don’t stop now - haah… - ah, I can’t feel my legs anymore… so good!”</i>", parse);
-			}, 1.0, function() { return true; });
+			}, 1.0, () => true);
 
 			scenes.Get();
 			Gui.PrintDefaultOptions();
@@ -1100,7 +1100,7 @@ FelinesScenes.WinFuckVag = function(cat: Wildcat, group: boolean, enc: any, cock
 	}
 };
 
-FelinesScenes.WinFuckButt = function(cat: Wildcat, group: boolean, enc: any, cocks: Cock[]) {
+FelinesScenes.WinFuckButt = (cat: Wildcat, group: boolean, enc: any, cocks: Cock[]) => {
 	const player = GAME().player;
 	const party: Party = GAME().party;
 	const pCock = player.BiggestCock(cocks);
@@ -1209,16 +1209,16 @@ FelinesScenes.WinFuckButt = function(cat: Wildcat, group: boolean, enc: any, coc
 	Text.NL();
 
 	const scenes = new EncounterTable();
-	scenes.AddEnc(function() {
+	scenes.AddEnc(() => {
 		Text.Add("<i>“Y-you fuck like the king of the plains! S-so good!”</i> [name] moans breathlessly. Perhaps [heshe] isn’t as inexperienced at taking cocks in the ass as you thought.", parse);
-	}, 1.0, function() { return true; });
-	scenes.AddEnc(function() {
+	}, 1.0, () => true);
+	scenes.AddEnc(() => {
 		Text.Add("<i>“Mmh… Ahn!”</i> [name] moans lustily, tail swishing back and forth erratically, the bushy tip brushing against your [skin].", parse);
-	}, 1.0, function() { return true; });
-	scenes.AddEnc(function() {
+	}, 1.0, () => true);
+	scenes.AddEnc(() => {
 		parse.masterMistress = player.mfTrue("master", "mistress");
 		Text.Add("<i>“I love your cock, [masterMistress]!”</i> [name] pants breathlessly. <i>“Stretching me so wide...”</i>", parse);
-	}, 1.0, function() { return true; });
+	}, 1.0, () => true);
 
 	scenes.Get();
 
@@ -1234,11 +1234,11 @@ FelinesScenes.WinFuckButt = function(cat: Wildcat, group: boolean, enc: any, coc
 	Text.Add("You’d give [himher] a moment to recover… but you are so close yourself! Grinning feverishly, you redouble your efforts, taking great advantage of [possessive] tightening muscles and little care for [hisher] feelings. Each thrust pushes you closer and closer, until finally it all comes crashing down on you.", parse);
 	Text.NL();
 
-	Gui.Callstack.push(function() {
+	Gui.Callstack.push(() => {
 		Text.NL();
 		Text.Add("Once [heshe] has recovered sufficiently, [name] sets to cleaning [himher]self up using [hisher] tongue. Every now and then, [heshe] pauses to eye you warily, unsure whether you are finished with [himher] or not.", parse);
 		Text.NL();
-		if (party.Num() == 2) {
+		if (party.Num() === 2) {
 			parse.comp = " and " + party.Get(1).name;
 		} else if (party.Num() > 1) {
 			parse.comp = " and your companions";
@@ -1260,7 +1260,7 @@ FelinesScenes.WinFuckButt = function(cat: Wildcat, group: boolean, enc: any, coc
 
 		const load = player.OrgasmCum();
 
-		Gui.Callstack.push(function() {
+		Gui.Callstack.push(() => {
 			Text.NL();
 			Text.Add("Before leaving the kitty in a panting, sticky heap, you wipe your [cocks] clean on [hisher] fur. A little more cream surely can’t hurt.", parse);
 
@@ -1341,7 +1341,7 @@ FelinesScenes.WinFuckButt = function(cat: Wildcat, group: boolean, enc: any, coc
 	}
 };
 
-FelinesScenes.WinGetBlowjob = function(cat: Wildcat, group: boolean, enc: any) {
+FelinesScenes.WinGetBlowjob = (cat: Wildcat, group: boolean, enc: any) => {
 	const player = GAME().player;
 	let parse: any = {
 		oneof    : group ? " one of" : "",
@@ -1467,7 +1467,7 @@ FelinesScenes.WinGetBlowjob = function(cat: Wildcat, group: boolean, enc: any) {
 	});
 	Gui.SetButtonsFromList(options);
 
-	Gui.Callstack.push(function() {
+	Gui.Callstack.push(() => {
 		Text.NL();
 		if (cat.FirstCock()) {
 			Text.Add("From the mess on the ground, you can tell that sometime during the process [name] shot [hisher] own load, clearly evident by the sticky strands dripping from [hisher] softening barbed cock.", parse);
@@ -1477,18 +1477,18 @@ FelinesScenes.WinGetBlowjob = function(cat: Wildcat, group: boolean, enc: any) {
 		Text.NL();
 
 		const scenes = new EncounterTable();
-		scenes.AddEnc(function() {
+		scenes.AddEnc(() => {
 			Text.Add("<i>“I-it wasn’t that bad,”</i> [heshe] mutters, blushing. [Name] refuses to meet your eye.", parse);
-		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
 			Text.Add("<i>“Cleaning this up will take me all day,”</i> [name] grumbles sullenly. Apparently, [heshe] wants to get started at it right away as [heshe] starts licking your semen from [hisher] fur with [hisher] rough tongue.", parse);
-		}, 1.0, function() { return !throat; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => !throat);
+		scenes.AddEnc(() => {
 			Text.Add("<i>“Your cream is very… thick,”</i> [name] mutters. That almost sounded like a compliment.", parse);
-		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
 			Text.Add("<i>“So full...”</i> [heshe] moans joyfully, caressing [hisher] distended stomach.", parse);
-		}, 1.0, function() { return throat && load > 3; });
+		}, 1.0, () => throat && load > 3);
 
 		scenes.Get();
 
@@ -1503,7 +1503,7 @@ FelinesScenes.WinGetBlowjob = function(cat: Wildcat, group: boolean, enc: any) {
 	});
 };
 
-FelinesScenes.WinGroupService = function(enc: any, enemy: Party) {
+FelinesScenes.WinGroupService = (enc: any, enemy: Party) => {
 	const player = GAME().player;
 	const mainCat = enemy.Get(0);
 	const betaCat = enemy.Get(1);
@@ -1545,7 +1545,7 @@ FelinesScenes.WinGroupService = function(enc: any, enemy: Party) {
 	parse.ghisher = group ? "their" : betaCat.hisher();
 	parse.gheshe = group ? "they" : betaCat.heshe();
 	Text.Add("Seeing [ghisher] boss so eager, the other feline[gs] follow[gnotS] in suit. ", parse);
-	if (player.NumCocks() == 1) {
+	if (player.NumCocks() === 1) {
 		Text.Add("Unfortunately, you only got one [cock], so [gheshe]’ll have to come to an agreement if [gheshe] intend to get some cream.", parse);
 		Text.NL();
 		Text.Add("The cats push and pull, silently trying to get into an agreement. Their leader stops licking you to bicker with [hisher] lackey[gs] and you cough to remind them what they’re supposed to be doing here…", parse);
@@ -1681,7 +1681,7 @@ FelinesScenes.LossRegular = function() {
 		heshe        : group ? "they" : mainCat.heshe(),
 	};
 
-	if (party.Num() == 2) {
+	if (party.Num() === 2) {
 		parse.comp = " you and " + party.Get(1).name;
 	} else if (party.Num() > 1) {
 		parse.comp = " you and your companions";
@@ -1698,19 +1698,19 @@ FelinesScenes.LossRegular = function() {
 	for (let i = 0; i < enemy.Num(); ++i) {
 		const ent    = enemy.Get(i);
 		const gender = ent.Gender();
-		if (gender == Gender.male) {
+		if (gender === Gender.male) {
 			numMales++;
 			if (male == null) { male = ent; }
-		} else if (gender == Gender.female) {
+		} else if (gender === Gender.female) {
 			numFemales++;
 			if (female == null) { female = ent; }
-		} else if (gender == Gender.herm) {
+		} else if (gender === Gender.herm) {
 			numHerms++;
 			if (herm == null) { herm = ent; }
 		}
 	}
 
-	Gui.Callstack.push(function() {
+	Gui.Callstack.push(() => {
 		Text.Clear();
 		Text.Add("You fall on your back,[comp] defeated by the ferocious cat[s]. ", parse);
 		if (group) {
@@ -1721,60 +1721,61 @@ FelinesScenes.LossRegular = function() {
 
 		let scenes = new EncounterTable();
 		if (male) {
-			scenes.AddEnc(function() {
+			scenes.AddEnc(() => {
 				return FelinesScenes.LossCatchVaginal(male, group, enc);
-			}, 1.0, function() { return player.FirstVag(); });
+			}, 1.0, () => player.FirstVag());
 		}
 		if (female) {
 			const cocksInVag = player.CocksThatFit(female.FirstVag());
 
-			scenes.AddEnc(function() {
+			scenes.AddEnc(() => {
 				return FelinesScenes.LossPitchVaginal(female, group, enc, cocksInVag);
-			}, 1.0, function() { return cocksInVag.length > 0; });
+			}, 1.0, () => cocksInVag.length > 0);
 		}
 		if (herm) {
 			const cocksInVag = player.CocksThatFit(herm.FirstVag());
 
-			scenes.AddEnc(function() {
+			scenes.AddEnc(() => {
 				return FelinesScenes.LossCatchVaginal(herm, group, enc);
-			}, 1.0, function() { return player.FirstVag(); });
-			scenes.AddEnc(function() {
+			}, 1.0, () => player.FirstVag());
+			scenes.AddEnc(() => {
 				return FelinesScenes.LossPitchVaginal(herm, group, enc, cocksInVag);
-			}, 1.0, function() { return cocksInVag.length > 0; });
+			}, 1.0, () => cocksInVag.length > 0);
 		}
-		scenes.AddEnc(function() {
+		scenes.AddEnc(() => {
 			return FelinesScenes.LossDrainMilk(mainCat, group, enc);
-		}, 1.0, function() { return player.Lactation(); });
-		scenes.AddEnc(function() {
+		}, 1.0, () => player.Lactation());
+		scenes.AddEnc(() => {
 			return FelinesScenes.LossPCblowsCat(mainCat, enemy);
-		}, 1.0, function() { return mainCat.FirstCock(); });
+		}, 1.0, () => mainCat.FirstCock());
 		if (numMales + numHerms >= 2) {
-			scenes.AddEnc(function() {
+			scenes.AddEnc(() => {
 				// Double team cats. Randomly pick out cat and cat2 from available ones.
-				let cat, cat2;
+				let cat;
+				let cat2;
 
 				scenes = new EncounterTable();
-				scenes.AddEnc(function() {
+				scenes.AddEnc(() => {
 					cat = male;
 					numMales--;
-				}, 1.0, function() { return numMales > 0; });
-				scenes.AddEnc(function() {
+				}, 1.0, () => numMales > 0);
+				scenes.AddEnc(() => {
 					cat = herm;
 					numHerms--;
-				}, 1.0, function() { return numHerms > 0; });
+				}, 1.0, () => numHerms > 0);
 				scenes.Get();
 
 				scenes = new EncounterTable();
-				scenes.AddEnc(function() {
+				scenes.AddEnc(() => {
 					cat2 = male;
-				}, 1.0, function() { return numMales > 0; });
-				scenes.AddEnc(function() {
+				}, 1.0, () => numMales > 0);
+				scenes.AddEnc(() => {
 					cat2 = herm;
-				}, 1.0, function() { return numHerms > 0; });
+				}, 1.0, () => numHerms > 0);
 				scenes.Get();
 
 				return FelinesScenes.LossDoubleTeam(cat, cat2, enemy.Num() > 2, enc);
-			}, numMales + numHerms, function() { return true; });
+			}, numMales + numHerms, () => true);
 		}
 
 		const ret = scenes.Get();
@@ -1787,7 +1788,7 @@ FelinesScenes.LossRegular = function() {
 	Encounter.prototype.onLoss.call(enc);
 };
 
-FelinesScenes.LossPCblowsCat = function(mainCat: Wildcat, enemy: Party) {
+FelinesScenes.LossPCblowsCat = (mainCat: Wildcat, enemy: Party) => {
 	const player = GAME().player;
 	const group = enemy.Num() > 1;
 	const group2 = enemy.Num() > 2;
@@ -1872,36 +1873,36 @@ FelinesScenes.LossPCblowsCat = function(mainCat: Wildcat, enemy: Party) {
 	Text.Add("You grab onto [hisher][supple] thighs for support and extend your tongue. You start with a small lick on [hisher] nuts, tasting them at the same time you weigh them.", parse);
 	Text.NL();
 
-	const CumLevel = {
-		Light : 0,
-		Mid : 1,
-		High : 2,
-	};
+	enum CumLevel {
+		Light = 0,
+		Mid   = 1,
+		High  = 2,
+	}
 	let cum = CumLevel.Light;
 
 	const scenes = new EncounterTable();
-	scenes.AddEnc(function() {
+	scenes.AddEnc(() => {
 		Text.Add("[HisHer] balls feel pretty light, all things considered, and the taste is pretty… unique. It tastes and smells like a mix of sexual fluids along with what must be this [cat]’s own musk.", parse);
 		Text.NL();
 		Text.Add("It dawns on you that this feline must be pretty sexually active. In fact, it hasn’t been long since [heshe]’s had a female speared on [hisher] kitty-prick. As you gently kiss an orb, drawing it into your mouth to suck on it lightly, you get a chance to really taste it.", parse);
 		Text.NL();
 		Text.Add("This sweet taste of pussy juice with a sour undertone of mixed cum… must’ve been quite a fuck for the fluids to have clung to this [cat]’s balls so tightly. As you consider this, you also deduce this [cat] must be very virile because as you suck on [hisher] nuts, you can feel its building weight...", parse);
 		cum = CumLevel.Light;
-	}, 1.0, function() { return true; });
-	scenes.AddEnc(function() {
+	}, 1.0, () => true);
+	scenes.AddEnc(() => {
 		Text.Add("This close to [hisher] balls, you can really smell [hisher] musk. It’s a strange, but not unpleasant, aroma; you recognize what must be [hisher] own scent mixed in and associate this scent to the [cat] currently purring from your ministrations. It’s strange, but you doubt you’d confuse this musk with that of any other feline.", parse);
 		Text.NL();
 		Text.Add("As you move in to kiss one of [hisher] orbs, you catch another powerful wave of [hisher] strong musk. It eggs you on, and just like that, the idea of sucking on [hisher] balls isn’t that bad anymore. You wonder what it’ll taste like when you get to [hisher] shaft...", parse);
 		cum = CumLevel.Mid;
-	}, 1.0, function() { return true; });
-	scenes.AddEnc(function() {
+	}, 1.0, () => true);
+	scenes.AddEnc(() => {
 		Text.Add("The overpowering musk emanating from this cat’s groin threatens to shut down all your senses. [HisHer] balls are taut with their liquid load, and you can tell that they’re <i>heavy</i>! It’s hard not to become aroused as you inhale more of [hisher] sex-ready pheromones.", parse);
 		Text.NL();
 		Text.Add("Somehow, this powerful scent eggs you on, and you become a bit more enthusiastic, moving in to suck on [hisher] balls with great fervor. Once you grow accustomed to [hisher] scent, your mind clears a little and you recover from your stupor as you slow down a bit.", parse);
 		Text.NL();
 		Text.Add("Judging from [hisher] demeanor, looking down at you with unparalleled lust as [heshe] pants, [hisher] shaking legs and twitching tail, you’d guess it’s been a while since this [cat]’s blown [hisher] load. And considering the intensity of [hisher] gaze, it seems [heshe] intends to make you target of [hisher] massively backed up balls...", parse);
 		cum = CumLevel.High;
-	}, 1.0, function() { return true; });
+	}, 1.0, () => true);
 	scenes.Get();
 	Text.NL();
 
@@ -1917,11 +1918,11 @@ FelinesScenes.LossPCblowsCat = function(mainCat: Wildcat, enemy: Party) {
 	Text.NL();
 	Text.Add("You start by licking [hisher] sheath, right where it meets [hisher] pink shaft, then begin making your way up [hisher] length. It feels a bit weird when you get to [hisher] barbs; the little protrusions scrape your tongue, but it doesn’t hurt. And when you finally get to the tapered tip, you catch a taste of [hisher] pre.", parse);
 	Text.NL();
-	if (cum == CumLevel.Light) {
+	if (cum === CumLevel.Light) {
 		Text.Add("Your suspicions are confirmed, and the taste is remarkably similar to what it was like on [hisher] balls along with the female’s juices, except it’s much stronger. Speaking of juices, you’re pretty sure you can still taste it on this [cat]’s dick, just not as strongly as on [hisher] nuts.", parse);
 		Text.NL();
 		Text.Add("On [hisher] sack, the taste of dry female juice was stronger, but here on [hisher] shaft it’s the taste of male seed that’s stronger. It’s a familiar yet different taste - not too bad. You can’t help associating licking [hisher] cock to licking a lollipop, with all its different flavors...", parse);
-	} else if (cum == CumLevel.Mid) {
+	} else if (cum === CumLevel.Mid) {
 		Text.Add("[HeShe] doesn’t taste half bad; in fact, you’re feeling a bit hot yourself…", parse);
 		Text.NL();
 		Text.Add("The musk, the purring, the beading pre, those little barbs tickling your [tongue]... All these elements mixed together serve only to excite you and egg you on as you become more enthusiastic in your licking.", parse);
@@ -1981,9 +1982,9 @@ FelinesScenes.LossPCblowsCat = function(mainCat: Wildcat, enemy: Party) {
 			Text.Add("Well, as flattered as you are that [heshe]’s enjoying your blowjob so much, you figure you should push [himher] off the edge.", parse);
 		} else if (player.Slut() > 30) {
 			Text.Add("Well, as fun and as tasty as [heshe] is, you really can’t spend the rest of your day sucking on [hisher] dick, so you decide it’s time to make this [cat] blow.", parse);
- } else {
+ 		} else {
 			Text.Add("Well, there’s no point in holding back - you’re not exactly doing this because you wanted - and honestly, your jaw is beginning to get tired. Time to make this kitty blow.", parse);
- }
+ 		}
 		Text.NL();
 		Text.Add("You angle yourself and take the cat’s entire shaft down your gullet, the suction practically forming a vacuum as you use your tongue to lick along [hisher] underside. The tiny barbs do little more than tickle your throat as you subject the [cat] to what’s quite possibly the best blowjob [heshe]’ll ever have.", parse);
 	}
@@ -1993,7 +1994,7 @@ FelinesScenes.LossPCblowsCat = function(mainCat: Wildcat, enemy: Party) {
 
 	// #cat cums in PC’s mouth
 
-	if (cum == CumLevel.Light) {
+	if (cum === CumLevel.Light) {
 		Text.Add("[HisHer] load is nothing special. There’s plenty of cream, but it’s nothing you can’t deal with. Within moments, the cat’s finished, and you lick [hisher] cock clean, sucking on the tip to make sure you’ve got everything.", parse);
 		Text.NL();
 		Text.Add("The [cat] pulls out with a wet slurp, purring in satisfaction as [heshe] pets you. You can see that [heshe]’s a bit wobbly, but still manages to remain graceful. [HeShe] leans over and gives you a lick across your lips - a thank you, perhaps? [HeShe] then turns on [hisher] heels and moves away.", parse);
@@ -2001,7 +2002,7 @@ FelinesScenes.LossPCblowsCat = function(mainCat: Wildcat, enemy: Party) {
 		Text.Add("You breathe a sigh of relief and wipe your mouth with the back of your arm. That wasn’t so bad…", parse);
 		Text.NL();
 		Text.Add("Still, it was enough to tire you out even more. Maybe a quick nap would do you good. Yes, just a quick one...", parse);
-	} else if (cum == CumLevel.Mid) {
+	} else if (cum === CumLevel.Mid) {
 		Text.Add("[HeShe] has a lot to give. You get several mouthfuls before [hisher] flow begins to taper off, and at the end of it, you’re left to fall nervelessly on the ground with a full belly.", parse);
 		Text.NL();
 		Text.Add("The [cat]’s flavor is rich inside your mouth; you’ll probably be tasting [himher] for a while. For a moment, you think you might be done until [heshe] suddenly kneels beside you, holding [hisher] dick out to you. It takes a moment for you to register that [heshe] wants you to lick [himher] clean…", parse);
@@ -2034,7 +2035,7 @@ FelinesScenes.LossPCblowsCat = function(mainCat: Wildcat, enemy: Party) {
 	return true;
 };
 
-FelinesScenes.LossCatchVaginal = function(cat: Wildcat, group: boolean, enc: any) {
+FelinesScenes.LossCatchVaginal = (cat: Wildcat, group: boolean, enc: any) => {
 	const player = GAME().player;
 	let parse: any = {
 		oneof    : group ? " one of" : "",
@@ -2061,7 +2062,7 @@ FelinesScenes.LossCatchVaginal = function(cat: Wildcat, group: boolean, enc: any
 		Text.Add("You make no effort to stop [himher] from undressing you, and in fact you try as best you can to aid [name] in removing your clothes. You're eager for [himher] to begin, feeling your own desire kindled within you.", parse);
 	}
 	Text.NL();
-	parse.rump = player.LowerBodyType() == LowerBodyType.Single ? player.LegsDesc() : "rump";
+	parse.rump = player.LowerBodyType() === LowerBodyType.Single ? player.LegsDesc() : "rump";
 	Text.Add("[Name] lifts your [rump], examining what you have to offer.", parse);
 	Text.NL();
 	if (player.Femininity() < 0) { // masculine
@@ -2090,7 +2091,7 @@ FelinesScenes.LossCatchVaginal = function(cat: Wildcat, group: boolean, enc: any
 	} else {
 		if (player.FirstCock()) {
 			parse.b = player.HasBalls() ? Text.Parse(" and your attendant [balls]", parse) : "";
-			parse.things = player.HasBalls() == false && player.NumCocks() == 1 ? "a thing" : "things";
+			parse.things = player.HasBalls() === false && player.NumCocks() === 1 ? "a thing" : "things";
 			Text.Add("[HisHer] eyes flick in surprise and more than a hint of disappointment over your [cocks][balls], clearly not expecting to see such [things] on you. As [hisher] gaze finds what [heshe] is after, though, [heshe] smiles in contentment.", parse);
 			Text.NL();
 		}
@@ -2268,12 +2269,12 @@ FelinesScenes.LossCatchVaginal = function(cat: Wildcat, group: boolean, enc: any
 	return true;
 };
 
-FelinesScenes.LossPitchVaginal = function(cat: Wildcat, group: boolean, enc: any, cocksInVag: Cock[]) {
+FelinesScenes.LossPitchVaginal = (cat: Wildcat, group: boolean, enc: any, cocksInVag: Cock[]) => {
 	const player = GAME().player;
 	const pCock  = player.BiggestCock(cocksInVag);
 	const allCocks = player.AllCocksCopy();
 	for (let i = 0; i < allCocks.length; i++) {
-		if (allCocks[i] == pCock) {
+		if (allCocks[i] === pCock) {
 			allCocks.splice(i, 1);
 			break;
 		}
@@ -2283,7 +2284,7 @@ FelinesScenes.LossPitchVaginal = function(cat: Wildcat, group: boolean, enc: any
 		pCock2 = player.BiggestCock(allCocks);
 
 		for (let i = 0; i < allCocks.length; i++) {
-			if (allCocks[i] == pCock2) {
+			if (allCocks[i] === pCock2) {
 				allCocks.splice(i, 1);
 				break;
 			}
@@ -2310,7 +2311,7 @@ FelinesScenes.LossPitchVaginal = function(cat: Wildcat, group: boolean, enc: any
 	Text.NL();
 	Text.Add("<i>“Let’s see what you’re hiding behind this [armor].”</i> [Name] doesn’t wait for a reply before stripping you down to your birthday suit, tossing your [armor] away. Once done, she takes a step back to examine what you have to offer.", parse);
 	Text.NL();
-	parse.pushingRolling = player.LowerBodyType() == LowerBodyType.Single ? "rolling" : "pushing";
+	parse.pushingRolling = player.LowerBodyType() === LowerBodyType.Single ? "rolling" : "pushing";
 	Text.Add("[HisHer] gaze immediately settles on your [cocks]. <i>“Oh, what a juicy treat you have here. Is all of that for me? You shouldn’t have,”</i> [name] giggles, [pushingRolling] you onto your back. She extends a clawed hand to grip[oneof] your [cocks], taking extreme care not to hurt you as she gives it an experimental stroke.", parse);
 	Text.NL();
 	if (dom) {
@@ -2322,7 +2323,7 @@ FelinesScenes.LossPitchVaginal = function(cat: Wildcat, group: boolean, enc: any
 	Text.NL();
 	Text.Add("By this time, your [cock] is as hard as it's going to get - thick and strong with your desire as her fingers trace designs across its sensitive surface with playful possessiveness. Your breathing quickens involuntarily, and you watch her intently, waiting to see what she intends for you.", parse);
 	Text.NL();
-	parse.l = player.LowerBodyType() == LowerBodyType.Single ? "besides your" : "between your spread";
+	parse.l = player.LowerBodyType() === LowerBodyType.Single ? "besides your" : "between your spread";
 	parse.fem = player.mfFem("Y", "Despite not looking like it, y");
 	Text.Add("Smirking knowingly at you, [name] kneels [l] [legs], extending her feline tongue to lap at your [cockTip] and tasting your pre. <i>“Such a thick cream...”</i> she trails off in a purr. <i>“[fem]ou are quite the stud, aren’t you?”</i> she asks teasingly.", parse);
 	Text.NL();
@@ -2364,7 +2365,7 @@ FelinesScenes.LossPitchVaginal = function(cat: Wildcat, group: boolean, enc: any
 		Text.Add(" Her own neglected catdick slaps wetly against your belly, forgotten about in your mutual eagerness to quench the fires in her cunt.", parse);
 	}
 	Text.NL();
-	if (player.NumCocks() == 2) {
+	if (player.NumCocks() === 2) {
 		Text.Add("Your [cock2Desc] rubs through the toned cheeks of her ass, poking away at the base of her flicking tail with each thrust you make. Her soft fur tickles quite pleasantly against your dick. ", parse);
 	} else if (player.NumCocks() >= 3) {
 		parse = Text.ParserPlural(parse, player.NumCocks() > 3);
@@ -2472,14 +2473,13 @@ FelinesScenes.LossPitchVaginal = function(cat: Wildcat, group: boolean, enc: any
 			Text.NL();
 			Text.Add("<i>“Ah… that was great, lover. Just what I needed,”</i> she purrs.", parse);
 			let cocked = 0;
-			for (let i = 0; i < enc.enemy.length; i++) {
-				const c = enc.enemy[i];
-				if (c == cat) { continue; }
+			for (const c of enc.enemy) {
+				if (c === cat) { continue; }
 				if (c.FirstCock()) { cocked++; }
 			}
 			parse.s   = cocked > 1 ? "s" : "";
 			parse.was = cocked > 1 ? "were" : "was";
-			if (cocked != 0) {
+			if (cocked !== 0) {
 				Text.Add(" <i>“If only my companion[s] [was] half as good as you…”</i> she rolls her eyes.", parse);
 			}
 			Text.Add(" <i>“As much as I want to keep you, I think I’ll let you go this time. Don’t expect me to go easy on you just because you showed me a great time though,”</i> she explains. <i>“Though I wouldn’t mind running into you again,”</i> she adds with a smile.", parse);
@@ -2556,7 +2556,7 @@ FelinesScenes.LossPitchVaginal = function(cat: Wildcat, group: boolean, enc: any
 	return true;
 };
 
-FelinesScenes.LossDrainMilk = function(mainCat: Wildcat, group: boolean, enc: any) {
+FelinesScenes.LossDrainMilk = (mainCat: Wildcat, group: boolean, enc: any) => {
 	const player = GAME().player;
 	let parse: any = {
 		name : mainCat.nameDesc(),
@@ -2655,7 +2655,7 @@ FelinesScenes.LossDrainMilk = function(mainCat: Wildcat, group: boolean, enc: an
 };
 
 /*
-FelinesScenes.WinPrompt = function() {
+FelinesScenes.WinPrompt = () => {
 	let enc = this;
 	let parse : any = {
 
@@ -2668,7 +2668,7 @@ FelinesScenes.WinPrompt = function() {
 }
 */
 
-FelinesScenes.LossDoubleTeam = function(cat: Wildcat, cat2: Wildcat, group: boolean, enc: any) {
+FelinesScenes.LossDoubleTeam = (cat: Wildcat, cat2: Wildcat, group: boolean, enc: any) => {
 	const player = GAME().player;
 	const party: Party = GAME().party;
 
@@ -2691,9 +2691,9 @@ FelinesScenes.LossDoubleTeam = function(cat: Wildcat, cat2: Wildcat, group: bool
 	parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
 
 	const season = WorldTime().season;
-	parse.season = season == Season.Winter ? "gust of chill wind blows across" :
-	                  season == Season.Spring ? "sudden breeze sends dandelion fuzz tickling across" :
-	                  season == Season.Summer ? "gust of wind cools" : "gust of wind tosses a few stray leaves at";
+	parse.season = season === Season.Winter ? "gust of chill wind blows across" :
+	                  season === Season.Spring ? "sudden breeze sends dandelion fuzz tickling across" :
+	                  season === Season.Summer ? "gust of wind cools" : "gust of wind tosses a few stray leaves at";
 
 	const subby = player.SubDom() < -10;
 
@@ -2968,7 +2968,7 @@ FelinesScenes.LossDoubleTeam = function(cat: Wildcat, cat2: Wildcat, group: bool
 					Text.Add("You swing a bare leg over the supine cat-morph and straddle [himher], ", parse);
 				}
 				Text.Add("your [vag] brushing against furry balls and shaft. [HeShe] slides both paws down your sides, settling on your hips, and gives them a squeeze. Another set roughly grabs both cheeks of your [butt]. The second [race] gently pushes you forward, [PapaMama] cat’s now twitching dick sending waves of pleasure through your bits. You wind up prone atop your former opponent, [breasts] squishing against [hisher] ", parse);
-				if (cat.Gender() == Gender.male) {
+				if (cat.Gender() === Gender.male) {
 					Text.Add("fuzzy chest.", parse);
 				} else {
 					Text.Add("furred mounds.", parse);
@@ -3050,7 +3050,7 @@ FelinesScenes.LossDoubleTeam = function(cat: Wildcat, cat2: Wildcat, group: bool
 		});
 	}
 
-	Gui.Callstack.push(function() {
+	Gui.Callstack.push(() => {
 		Text.Clear();
 		Text.Add("Some time later, you come to. [Group] are long gone", parse);
 		if (party.coin > 0) {

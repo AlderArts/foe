@@ -8,8 +8,8 @@ const Race: any = {};
 // TODO Need to fix numbering to something automatic, or at least ordered
 
 // Contains a set of Id,RaceDesc pairs
-const _IdToRace: any = {};
-let _Num = 0;
+const idToRace: any = {};
+let numInternal = 0;
 
 export class RaceDesc {
 	public name: string;
@@ -46,9 +46,9 @@ export class RaceDesc {
 		RaceDesc.IdToRace[this.id] = this;
 	}
 
-	static get Num() { return _Num; }
-	static set Num(value: number) { _Num = value; }
-	static get IdToRace() { return _IdToRace; }
+	static get Num() { return numInternal; }
+	static set Num(value: number) { numInternal = value; }
+	static get IdToRace() { return idToRace; }
 
 	public GeneSize() {
 		if (this.geneSize) {
@@ -63,7 +63,7 @@ export class RaceDesc {
 	public Desc(gender?: Gender) {
 		let desc = this.desc;
 		if (_.isNumber(gender)) {
-			if (gender == Gender.male) {
+			if (gender === Gender.male) {
 				desc = desc.concat(this.descMale);
 			} else {
 				desc = desc.concat(this.descFemale);
@@ -75,16 +75,20 @@ export class RaceDesc {
 
 	// Checks if this race (or any of its parents)
 	public isRace(...args: RaceDesc[]) {
-		for (let i = 0; i < args.length; ++i) {
-			if (this == args[i]) { return true;
-		} }
+		for (const arg of args) {
+			if (this === arg) {
+				return true;
+			}
+		}
 		if (this.superclass) { return RaceDesc.prototype.isRace.apply(this.superclass, args); }
 		return false;
 	}
 	// Checks if this race (not parents)
 	public isRaceNotParent(...args: RaceDesc[]) {
-		for (let i = 0; i < args.length; ++i) {
-			if (this == args[i]) { return true; }
+		for (const arg of args) {
+			if (this === arg) {
+				return true;
+			}
 		}
 		return false;
 	}
@@ -105,7 +109,7 @@ export class RaceDesc {
 	public Quantifier(gender?: Gender) {
 		let quantify = this.quantify;
 		if (_.isNumber(gender)) {
-			if (gender == Gender.male) {
+			if (gender === Gender.male) {
 				quantify = quantify.concat(this.quantifyMale);
 			} else {
 				quantify = quantify.concat(this.quantifyFemale);
@@ -154,32 +158,32 @@ export class RaceScore {
 			this.score[body.arms.race.id]++;
 			this.score[body.legs.race.id]++;
 
-			for (let i = 0; i < body.cock.length; i++) {
-				this.score[body.cock[i].race.id]++;
+			for (const cock of body.cock) {
+				this.score[cock.race.id]++;
 			}
 			if (body.balls.count.Get() > 0) { this.score[body.balls.race.id]++; }
-			for (let i = 0; i < body.backSlots.length; i++) {
-				this.score[body.backSlots[i].race.id]++;
+			for (const backSlot of body.backSlots) {
+				this.score[backSlot.race.id]++;
 			}
-			for (let i = 0; i < body.head.appendages.length; i++) {
-				this.score[body.head.appendages[i].race.id]++;
+			for (const app of body.head.appendages) {
+				this.score[app.race.id]++;
 			}
 
 			// Specific attributes
 			// KNOT (CANID)
-			for (let i = 0; i < body.cock.length; i++) {
-				if (body.cock[i].knot) {
+			for (const cock of body.cock) {
+				if (cock.knot) {
 					this.score[Race.Canine.id]++;
 				}
 			}
 			// IF 2 COCKS
-			if (body.cock.length == 2) {
+			if (body.cock.length === 2) {
 				this.score[Race.Lizard.id]++;
 			}
 
 			// Human-ish looks
-			if (body.arms.count == 2) { this.score[Race.Human.id] += 2; }
-			if (body.legs.count == 2) { this.score[Race.Human.id] += 2; }
+			if (body.arms.count === 2) { this.score[Race.Human.id] += 2; }
+			if (body.legs.count === 2) { this.score[Race.Human.id] += 2; }
 
 			this.len = 0;
 			// EQUALIZE
@@ -203,7 +207,7 @@ export class RaceScore {
 	public SumRace(race: RaceDesc) {
 		const that = this;
 		let sum = that.score[race.id];
-		_.each(race.children, function(r) {
+		_.each(race.children, (r) => {
 			sum += that.SumRace(r);
 		});
 		return sum;

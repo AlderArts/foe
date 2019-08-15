@@ -191,8 +191,8 @@ PhysicalAb.SetTrap.castTree.push((ability: Ability, encounter: Encounter, caster
 		}
 	}
 
-	Status.Counter(caster, { turns : 999, hits : 1, OnHit(enc: Encounter, caster: Entity, attacker: Entity, dmg: number) {
-			PhysicalAb.SpringTrap.Use(encounter, caster, attacker);
+	Status.Counter(caster, { turns : 999, hits : 1, OnHit(enc: Encounter, caster2: Entity, attacker: Entity, dmg: number) {
+			PhysicalAb.SpringTrap.Use(encounter, caster2, attacker);
 			return false;
 		},
 	});

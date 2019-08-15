@@ -37,7 +37,7 @@ export class Lizard extends Entity {
 
 		this.ID = "lizard";
 
-		if (gender == Gender.male) {
+		if (gender === Gender.male) {
 			this.avatar.combat     = Images.lizard_male;
 			this.name              = "Lizard";
 			this.monsterName       = "the male lizard";
@@ -47,7 +47,7 @@ export class Lizard extends Entity {
 			if (Math.random() < 0.1) {
 				this.Butt().virgin = false;
 			}
-		} else if (gender == Gender.female) {
+		} else if (gender === Gender.female) {
 			this.avatar.combat     = Images.lizard_fem;
 			this.name              = "Lizard";
 			this.monsterName       = "the female lizard";
@@ -156,7 +156,7 @@ export class Lizard extends Entity {
 	}
 }
 
-LizardsScenes.Impregnate = function(mother: Entity, father: Lizard, slot?: number) {
+LizardsScenes.Impregnate = (mother: Entity, father: Lizard, slot?: number) => {
 	mother.PregHandler().Impregnate({
 		slot   : slot || PregnancyHandler.Slot.Vag,
 		mother,
@@ -167,7 +167,7 @@ LizardsScenes.Impregnate = function(mother: Entity, father: Lizard, slot?: numbe
 	});
 };
 
-LizardsScenes.GroupEnc = function() {
+LizardsScenes.GroupEnc = () => {
 	const player = GAME().player;
 	const party: Party = GAME().party;
 
@@ -194,7 +194,7 @@ LizardsScenes.GroupEnc = function() {
 	enc.VictoryCondition = ...
 	*/
 
-	enc.onEncounter = function() {
+	enc.onEncounter = () => {
 		let parse: any = {
 			numQ     : Text.Quantify(enemy.Num()),
 			num      : Text.NumToText(enemy.Num()),
@@ -231,7 +231,7 @@ LizardsScenes.GroupEnc = function() {
 
 		Text.Flush();
 
-		Gui.NextPrompt(function() {
+		Gui.NextPrompt(() => {
 			enc.PrepCombat();
 		});
 	};
@@ -247,7 +247,7 @@ LizardsScenes.WinPrompt = function() {
 
 	const enc = this;
 
-	Gui.Callstack.push(function() {
+	Gui.Callstack.push(() => {
 		Text.Clear();
 
 		const parse: any = {
@@ -255,16 +255,16 @@ LizardsScenes.WinPrompt = function() {
 		};
 		let scene: any;
 
-		const odds = enc.third ? (enc.third.body.Gender() == Gender.male ? 0.66 : 0.33) : 0.5;
+		const odds = enc.third ? (enc.third.body.Gender() === Gender.male ? 0.66 : 0.33) : 0.5;
 
 		// Male
 		if (Math.random() < odds) {
-			scene = function() { LizardsScenes.WinMale(enc); };
+			scene = () => { LizardsScenes.WinMale(enc); };
 			parse.m1himher  = "him";
 			parse.m1hisher  = "his";
 			parse.m2hisher  = "her";
 		} else {
-			scene = function() { LizardsScenes.WinFemale(enc); };
+			scene = () => { LizardsScenes.WinFemale(enc); };
 			parse.m1himher  = "her";
 			parse.m1hisher  = "her";
 			parse.m2hisher  = "his";
@@ -274,7 +274,7 @@ LizardsScenes.WinPrompt = function() {
 		if (Math.random() < 0.6) {
 			Text.Add("With a solid <i>thump</i>, you beat your foe to the ground. The reptile tries to scramble away, but you step in front of [m1himher], blocking [m1hisher] path. As you stop [m1himher], you see the other[two] scurry away, leaving [m2hisherTheir] companion to [m1hisher] fate...", parse);
 
-			Gui.NextPrompt(function() {
+			Gui.NextPrompt(() => {
 				scene(enc);
 			});
 		} else {
@@ -311,7 +311,7 @@ LizardsScenes.WinPrompt = function() {
 	Encounter.prototype.onVictory.call(enc);
 };
 
-LizardsScenes.WinMale = function(enc: any) {
+LizardsScenes.WinMale = (enc: any) => {
 	const player = GAME().player;
 	const party: Party = GAME().party;
 	let parse: any = {
@@ -372,7 +372,7 @@ LizardsScenes.WinMale = function(enc: any) {
 	Text.Flush();
 };
 
-LizardsScenes.WinFemale = function(enc: any) {
+LizardsScenes.WinFemale = (enc: any) => {
 	const player = GAME().player;
 	const party: Party = GAME().party;
 	let parse: any = {
@@ -443,14 +443,14 @@ LizardsScenes.WinFemale = function(enc: any) {
 	Text.Flush();
 };
 
-LizardsScenes.WinFuckVag = function(enc: any) {
+LizardsScenes.WinFuckVag = (enc: any) => {
 	const player = GAME().player;
 	const party: Party = GAME().party;
 	const enemy = enc.female;
 	const third = enc.third;
 
 	const p1cock = player.BiggestCock(null, true);
-	const realCock = p1cock.isStrapon == false;
+	const realCock = p1cock.isStrapon === false;
 
 	let parse: any = {
 	};
@@ -543,8 +543,8 @@ LizardsScenes.WinFuckVag = function(enc: any) {
 	parse.real = realCock ? " and the girl’s belly filled with your seed" : "";
 	Text.Add("Spent, you try to pull out of the reptile, but her tail snares you in and holds you close as she rides out her own climax, her pussy reflexively clenching around your [cock]. When she finally lets go, you’re both thoroughly exhausted by the ordeal. You give her a shaky hand up, and you share a smile before you go your separate ways, both of you sated[real].", parse);
 	if (party.Num() > 1) {
-		parse.Comp = party.Num() == 2 ? party.Get(1).name : "Your companions";
-		parse.notS = party.Num() == 2 ? "s" : "";
+		parse.Comp = party.Num() === 2 ? party.Get(1).name : "Your companions";
+		parse.notS = party.Num() === 2 ? "s" : "";
 		Text.NL();
 		Text.Add("[Comp] join[notS] you, helping you gather your gear before you set out on your journey again.", parse);
 	}
@@ -555,7 +555,7 @@ LizardsScenes.WinFuckVag = function(enc: any) {
 	Gui.NextPrompt();
 };
 
-LizardsScenes.WinTailpeg = function(enc: any) {
+LizardsScenes.WinTailpeg = (enc: any) => {
 	const player = GAME().player;
 	const party: Party = GAME().party;
 	const enemy = enc.female;
@@ -627,7 +627,7 @@ LizardsScenes.WinTailpeg = function(enc: any) {
 	Text.NL();
 
 	const scenes = new EncounterTable();
-	scenes.AddEnc(function() {
+	scenes.AddEnc(() => {
 		Text.Add("Finally you feel her bottom out inside of you, your entrance feeling wonderfully stretched, her tail twitching now and then within the heated confines of your body. You close your eyes, taking long, slow breaths. It feels almost <i>just</i> like you imagined...", parse);
 		Text.NL();
 		Text.Add("Suddenly you feel, deep inside your sensitive passage, [m1name]'s tailtip <i>curve</i>. You feel your insides stretch around her as she curls the tip of her tail in a tight bend, and suddenly you can feel her serpentine tail beginning to slither back out of you. As you look down though, you see her buried as deeply in you as before... and you find yourself feeling <i>very</i> much more full. You give a soft groan, ", parse);
@@ -662,8 +662,8 @@ LizardsScenes.WinTailpeg = function(enc: any) {
 				player.AddLustFraction(0.2);
 			}
 		}
-	}, function() { return (player.FirstVag() ? (60 + player.FirstVag().Tightness() * 5) : (20 + player.Butt().Tightness() * 5)) / 100; });
-	scenes.AddEnc(function() {
+	}, () => (player.FirstVag() ? (60 + player.FirstVag().Tightness() * 5) : (20 + player.Butt().Tightness() * 5)) / 100);
+	scenes.AddEnc(() => {
 		Text.Add("Slowly, she begins to slide it out from your body again. You feel her sinuous tail slithering out, tugging on your ", parse);
 		if (player.FirstVag()) {
 			Text.Add("slick cunt as it moves, coating her scales with your fluids.", parse);
@@ -672,7 +672,7 @@ LizardsScenes.WinTailpeg = function(enc: any) {
 		}
 		Text.NL();
 		Text.Add("You let your hands come forward, taking hold of her legs to steady yourself as she slowly pulls her tail out of you... only to push it back in, equally as slow. You feel her tip sliding against your most sensitive spot, her rough scales grinding across it leave you gasping for breath. She lets out a hiss of delight at the sight of you shuddering.", parse);
-	}, function() { return Math.max((player.FirstVag() ? (40 - player.FirstVag().Tightness() * 5) : (80 - player.Butt().Tightness() * 5)) / 100, 0); });
+	}, () => Math.max((player.FirstVag() ? (40 - player.FirstVag().Tightness() * 5) : (80 - player.Butt().Tightness() * 5)) / 100, 0));
 
 	scenes.Get();
 
@@ -680,7 +680,7 @@ LizardsScenes.WinTailpeg = function(enc: any) {
 	if (player.FirstCock()) {
 		Text.Add("You feel her gaze on your [cocks], and realize that you're leaking precum steadily.", parse);
 		Text.NL();
-		if (player.NumCocks() == 2) {
+		if (player.NumCocks() === 2) {
 			Text.Add("A small hunger in her eyes leaves you suddenly wary of her. You see one hand come forward, reaching for your pair of pulsating dicks. Her tail twitches inside of you, and you feel yourself sliding forward. Her fingers close around your [cocks], giving a slow, sensual <i>squeeze.</i> Perhaps two is just the right number for her...", parse);
 			Text.NL();
 			Text.Add("Slowly she begins to pump her hand up and down your sensitive flesh, squishing your thick shafts against each other, smearing your own precum along your lengths. All too soon though, she lets go, returning to the slow, steady pumps of her tail instead...", parse);
@@ -692,7 +692,7 @@ LizardsScenes.WinTailpeg = function(enc: any) {
 	Text.Add("[m1Name] sets into a slow, tormenting rhythm as her undulating tail slithers in and out of your body. Each time she draws her sinuous tail out, you feel your body begin to clench... before she <i>rams</i> it back in, sending a jolt through your pelvis as she forces you open again. You rapidly feel yourself approaching your own climax as her wriggling tail teases your most intimate of spots, very deliberately.", parse);
 	Text.Flush();
 
-	Gui.NextPrompt(function() {
+	Gui.NextPrompt(() => {
 		Text.Clear();
 		if (player.FirstVag()) {
 			Text.Add("In and out her slick, scaly tail slides, driving into your wet cunt like a piston over and over.", parse);
@@ -759,7 +759,7 @@ LizardsScenes.WinTailpeg = function(enc: any) {
 	});
 };
 
-LizardsScenes.WinClaimAss = function(enc: any, enemy: Lizard) {
+LizardsScenes.WinClaimAss = (enc: any, enemy: Lizard) => {
 	const player = GAME().player;
 	const party: Party = GAME().party;
 	let parse: any = {
@@ -800,7 +800,7 @@ LizardsScenes.WinClaimAss = function(enc: any, enemy: Lizard) {
 	if (player.Armor()) {
 		Text.Add("You let go of one of [m1hisher] legs and place a hand on the front of your [armor] and pull your [cocks] out. [m1Name] glances down, [m1hisher] eyes widening slightly as [m1heshe] sees your [cocks].", parse);
 		Text.NL();
-		if (enemy.body.Gender() == Gender.male) {
+		if (enemy.body.Gender() === Gender.male) {
 			Text.Add("<i>“You... you aren't gonna...”</i> he starts, before falling silent, his slitted eyes meeting yours. You smirk at him and he swallows heavily.", parse);
 		} else {
 			Text.Add("<i>“I hope you know what you're doing there,”</i> she breathes.", parse);
@@ -817,7 +817,7 @@ LizardsScenes.WinClaimAss = function(enc: any, enemy: Lizard) {
 	}
 	Text.Flush();
 
-	Gui.NextPrompt(function() {
+	Gui.NextPrompt(() => {
 		Text.Clear();
 
 		Text.Add("You grind the tip of your slowly oozing cock against [m1hisher] pucker, smearing it with your precum, ensuring that it's nice and slick. [m1Name] grunts, looking away and closing [m1hisher] eyes. Underneath you, [m1hisher] tail twitches uneasily. You contemplate toying with [m1himher] a little longer, but decide that [m1heshe]'s had enough – and you don't want to wait anymore.", parse);
@@ -828,25 +828,25 @@ LizardsScenes.WinClaimAss = function(enc: any, enemy: Lizard) {
 		Text.NL();
 
 		const scenes = new EncounterTable();
-		scenes.AddEnc(function() {
+		scenes.AddEnc(() => {
 			Text.Add("Your grip is too strong and your arms overpower [m1hisher] muscles, weakened by the combat, and you simply go on with a broad smile. You slide your shaft back out, feeling [m1hisher] [m1anus] try to hold you tighter. Helpless under your touches, the reptile claws at the earth, a soft groan passing [m1hisher] muzzle. In and out you thrust, burying your [cock] a little deeper with each buck, working yourself steadily deeper to [m1hisher] squirming body.", parse);
 			Text.NL();
 			Text.Add("Finally, you draw your dripping dick back - only to <i>slam</i> it into [m1himher], your groin mashing up to [m1hisher] [m1anus]. Your tip sinks deep into [m1himher] and [m1hisher] jaws snap open wide in a breathless moan.", parse);
 			Text.NL();
-			if (enemy.body.Gender() == Gender.male) {
+			if (enemy.body.Gender() === Gender.male) {
 				Text.Add("He lets out a loud, hissing groan, his pair of throbbing dicks pulsing at attention.", parse);
 			}
-		}, function() { return Math.min((50 + player.strength.Get() - enemy.strength.Get()) / 100, 0.95); });
-		scenes.AddEnc(function() {
+		}, () => Math.min((50 + player.strength.Get() - enemy.strength.Get()) / 100, 0.95));
+		scenes.AddEnc(() => {
 			Text.Add("You're startled by the sheer force of [m1hisher] legs, and they quickly overpower your arms, closing behind your back. Your body lurches toward [m1himher] and you stumble, falling forward. Your entire [cock] hammers into [m1hisher] body, and the reptile's eyes snap wide open. <i>“Aah!”</i> [m1heshe] hisses, [m1hisher] entire body tensing. It only grips your [cock] tighter, and you struggle to suppress a moan. You land on [m1hisher] stomach ", parse);
-			if (enemy.body.Gender() == Gender.male) {
+			if (enemy.body.Gender() === Gender.male) {
 				Text.Add("and feel his own [m1cocks] press against your belly.", parse);
 			} else {
 				Text.Add("and feel her [m1breasts] press against your [face].", parse);
 			}
 			Text.NL();
 			Text.Add("You let out a grunt, quickly pressing yourself back upright, drawing your cock out as much as [m1hisher] legs allow...", parse);
-		}, function() { return Math.max((50 - player.strength.Get() + enemy.strength.Get()) / 100, 0.05); });
+		}, () => Math.max((50 - player.strength.Get() + enemy.strength.Get()) / 100, 0.05));
 		scenes.Get();
 
 		Text.NL();
@@ -858,7 +858,7 @@ LizardsScenes.WinClaimAss = function(enc: any, enemy: Lizard) {
 		Text.NL();
 		Text.Add("<i>“Are you- oh, <b>oh</b>!”</i> [m1heshe] groans out, muzzle blushing a bright red.", parse);
 		Text.NL();
-		if (enemy.body.Gender() == Gender.male && Math.random() < (10 + player.stamina.Get() / 2) / 100) {
+		if (enemy.body.Gender() === Gender.male && Math.random() < (10 + player.stamina.Get() / 2) / 100) {
 			Text.Add("Your heavy bucks seem to have been enough to tip [m1name] over the edge as well, and he lets out a long, aching <i>groan</i>. You see his own [m1cocks] throbbing heavily and feel his [m1anus] practically <i>milking</i> you of your spunk. You aim his dicks up at his chest and watch delightedly as he sends rope after rope of his cum all over his chest, painting himself a sticky white.", parse);
 			Text.NL();
 		}
@@ -883,7 +883,7 @@ LizardsScenes.WinClaimAss = function(enc: any, enemy: Lizard) {
 	});
 };
 
-LizardsScenes.WinBlowjob = function(enc: any, enemy: Lizard) {
+LizardsScenes.WinBlowjob = (enc: any, enemy: Lizard) => {
 	const player = GAME().player;
 	const party: Party = GAME().party;
 	let parse: any = {
@@ -928,7 +928,7 @@ LizardsScenes.WinBlowjob = function(enc: any, enemy: Lizard) {
 	}
 	Text.Flush();
 
-	Gui.NextPrompt(function() {
+	Gui.NextPrompt(() => {
 		Text.Clear();
 
 		Text.Add("Soon, you settle into a rhythm of drawing your [cock] back, feeling [m1hisher] lips massaging and squeezing your thick shaft. [m1HisHer] tongue curls around your dick, and guides your slick cock deeper into [m1hisher] muzzle. For what seems like ages, you stand there, watching [m1hisher] face as [m1heshe] suckles and nurses on your [cock]. Now and then, [m1heshe] glances up to meet your gaze, only to blush deeply as [m1heshe] realizes [m1heshe]'s been caught. You smirk at how much [m1heshe] seems to be secretly enjoying it.", parse);
@@ -940,7 +940,7 @@ LizardsScenes.WinBlowjob = function(enc: any, enemy: Lizard) {
 			Text.Add("At the same time, your sticky seed spurts out across [m1hisher] face from your other pulsing shaft[s], and [m1heshe] has to close one eye.", parse);
 			Text.NL();
 		}
-		parse.boygirl = enemy.body.Gender() == Gender.male ? "boy" : "girl";
+		parse.boygirl = enemy.body.Gender() === Gender.male ? "boy" : "girl";
 		Text.Add("When your orgasm tapers down, the last vestibules of your spunk dripping through the tip of your [cock], you gaze down at [m1name], your cheeks flush with the afterglow of climax. <i>“Swallow,”</i> you order. [m1HeShe] pauses, looking up at you meekly. [m1HisHer] tail flicks in indecision behind [m1himher], before [m1heshe] takes a heavy <i>gulp</i>. You pat [m1hisher] muzzle. <i>“Good [boygirl],”</i> you mutter, pulling your dick from [m1hisher] muzzle. You take the spoils of the encounter and turn to leave without another word, your pleasure taken.", parse);
 		Text.Flush();
 
@@ -953,7 +953,7 @@ LizardsScenes.WinBlowjob = function(enc: any, enemy: Lizard) {
 	});
 };
 
-LizardsScenes.WinPowerbottom = function(enc: any) {
+LizardsScenes.WinPowerbottom = (enc: any) => {
 	const player = GAME().player;
 	const party: Party = GAME().party;
 	const enemy = enc.male;
@@ -1058,7 +1058,7 @@ LizardsScenes.WinPowerbottom = function(enc: any) {
 					Gui.SetButtonsFromList(options);
 				} else {
 					Text.Flush();
-					Gui.NextPrompt(function() {
+					Gui.NextPrompt(() => {
 						Text.Clear();
 						LizardsScenes.WinPowerbottomDeny(enc);
 					});
@@ -1130,7 +1130,7 @@ LizardsScenes.WinPowerbottom = function(enc: any) {
 			}
 			Text.Flush();
 
-			Gui.NextPrompt(function() {
+			Gui.NextPrompt(() => {
 				Text.Clear();
 				if (player.LustLevel() > 0.75) {
 					Text.Add("Slowly you let gravity force you downward, feeling inch after inch of his flesh slide into your body. His hands again come to your hips.", parse);
@@ -1187,7 +1187,7 @@ LizardsScenes.WinPowerbottom = function(enc: any) {
 							Text.NL();
 							Text.Add("Finally he lets go of your sore, abused cheeks with one hand, and you feel yourself begin to slide down. You take a sharp breath to fill your empty lungs, only to have it robbed from you as firm scales <i>smack</i> your tender ass. Stars burst in front of your eyes as his hand impacts your ass again... And then again, and again. He grins broadly as you let out a gasp.", parse);
 							Text.NL();
-							if (player.body.Gender() == Gender.female) {
+							if (player.body.Gender() === Gender.female) {
 								Text.Add("Despite yourself, you feel your wet cunt growing only more heated as he works your back passage, and the wet dripping from your lips onto his groin seems to fuel his mood further...", parse);
 							} else {
 								Text.Add("Despite yourself, you feel your ", parse);
@@ -1238,7 +1238,7 @@ LizardsScenes.WinPowerbottom = function(enc: any) {
 							}
 							Text.Flush();
 
-							Gui.NextPrompt(function() {
+							Gui.NextPrompt(() => {
 								Text.Clear();
 								if (player.Butt().Tightness() > Orifice.Tightness.loose) {
 									Text.Add("With one great <i>heave</i>, he shoves you upward, and you feel your [anus] clench down around his pulsating tips. Even as they begin to twitch, you know what's coming. You relax your loose entrance as much as you can, right as you feel his firm hands pull you downward. At the same time, he bucks his hips upward, plunging himself into you one last time. Ridge after firm, fleshy ridge sinks into your body, and you feel his spaded tips sink deep into you, stretching your insides until they ache.", parse);
@@ -1254,7 +1254,7 @@ LizardsScenes.WinPowerbottom = function(enc: any) {
 								Text.NL();
 
 								const scenes = new EncounterTable();
-								scenes.AddEnc(function() {
+								scenes.AddEnc(() => {
 									if (player.FirstCock()) {
 										parse.s = player.Butt().Tightness() > Orifice.Tightness.loose ? "s" : "";
 										parse.notS = player.Butt().Tightness() > Orifice.Tightness.loose ? "" : "s";
@@ -1296,8 +1296,8 @@ LizardsScenes.WinPowerbottom = function(enc: any) {
 									}
 									Text.NL();
 									Text.Add("One scaled hand comes to your [face], and he holds you steady. Surprisingly, he pushes his own, yellow-green snout forward... and kisses you. Your eyes widen as you find yourself unsure what to do. His forked tongue laps at your lips for a moment, before he pulls back and gives a hazy grin, only to fall back.", parse);
-								}, function() { return player.LustLevel() + (player.FirstCock() ? 0.2 : 0); });
-								scenes.AddEnc(function() {
+								}, () => player.LustLevel() + (player.FirstCock() ? 0.2 : 0));
+								scenes.AddEnc(() => {
 									Text.Add("You feel him rocking faster and faster inside of you. His muzzle parts, and his tongue hangs out from his maw. You can feel his every thrust burying his fat, heavy ridges deeper inside of you, stretching you so achingly wide. It feels wonderful, the warm slime of his [m1cocks] sliding through your [anus].", parse);
 									Text.NL();
 									parse.s = player.Butt().Tightness() > Orifice.Tightness.loose ? "s" : "";
@@ -1328,7 +1328,7 @@ LizardsScenes.WinPowerbottom = function(enc: any) {
 									} else {
 										Text.Add("As hard as he cums inside of you, you don't even come close to his pleasure. You grind yourself down onto his throbbing meat, trying to push yourself over the edge, but it's not quite enough. You bring your hands down to take hold of yourself, but his hands catch yours, holding them in place... You groan in burning need.", parse);
 									}
-								}, function() { return 1 - player.LustLevel() - (player.FirstCock() ? 0.2 : 0); });
+								}, () => 1 - player.LustLevel() - (player.FirstCock() ? 0.2 : 0));
 
 								scenes.Get();
 
@@ -1385,7 +1385,7 @@ LizardsScenes.WinPowerbottom = function(enc: any) {
 	Text.Flush();
 };
 
-LizardsScenes.WinPowerbottomAssert = function(enc: any) {
+LizardsScenes.WinPowerbottomAssert = (enc: any) => {
 	const player = GAME().player;
 	const party: Party = GAME().party;
 	const enemy = enc.male;
@@ -1427,7 +1427,7 @@ LizardsScenes.WinPowerbottomAssert = function(enc: any) {
 	Text.Add("<i>“Stop, or I pull off,”</i> you warn lowly. The lizard lets out a hiss of grudging understanding. <i>“Are you going to be a good boy?”</i> you whisper. He growls lowly, unhappily, but nods once. You smirk, letting one hand slide back to press his hips back to the ground. <i>“Good answer...”</i>", parse);
 	Text.Flush();
 
-	Gui.NextPrompt(function() {
+	Gui.NextPrompt(() => {
 		Text.Clear();
 
 		Text.Add("Slowly, you begin to press yourself down onto him, keeping things to your own pace. The reptile under you squirms steadily, his face contorted uncomfortably as he holds himself back from bucking upward into you. Every time he looks at you, his muzzle reddened and his breathing heavy, you give him a warning look to remind him who’s in control, and what happens if he pushes. You feel his fat ridges sinking into you, ", parse);
@@ -1525,7 +1525,7 @@ LizardsScenes.WinPowerbottomAssert = function(enc: any) {
 	});
 };
 
-LizardsScenes.WinPowerbottomDeny = function(enc: any) {
+LizardsScenes.WinPowerbottomDeny = (enc: any) => {
 	const player = GAME().player;
 	const party: Party = GAME().party;
 	const enemy = enc.male;
@@ -1591,7 +1591,7 @@ LizardsScenes.LossPrompt = function() {
 	};
 	parse = player.ParserTags(parse);
 
-	Gui.Callstack.push(function() {
+	Gui.Callstack.push(() => {
 		Text.Clear();
 		if (player.LustLevel() > 0.6) {
 			Text.Add("You slump to the ground, finding it hard to keep your eyes focused on the leering, scaled creatures standing over you. Your body aches, and not just from bruises. ", parse);
@@ -1610,11 +1610,11 @@ LizardsScenes.LossPrompt = function() {
 		}
 		Text.Flush();
 
-		Gui.NextPrompt(function() {
+		Gui.NextPrompt(() => {
 			const scenes = new EncounterTable();
 
-			scenes.AddEnc(function() { LizardsScenes.LossMale.call(enc);   });
-			scenes.AddEnc(function() { LizardsScenes.LossFemale.call(enc); });
+			scenes.AddEnc(() => { LizardsScenes.LossMale.call(enc);   });
+			scenes.AddEnc(() => { LizardsScenes.LossFemale.call(enc); });
 
 			scenes.Get();
 		});
@@ -1660,7 +1660,7 @@ LizardsScenes.LossMale = function() {
 
 	const scenes = new EncounterTable();
 	// IF FEMALE OR HERM
-	scenes.AddEnc(function() {
+	scenes.AddEnc(() => {
 		Text.Add("With a lascivious smirk, his eyes hungrily drink in the sight of your body.", parse);
 		if (player.FirstBreastRow().size.Get() >= 3) {
 			Text.Add(" His scaled hand comes up and roughly gropes your [breasts], a delighted look on his face as he plays with your exposed mounds.", parse);
@@ -1689,13 +1689,13 @@ LizardsScenes.LossMale = function() {
 
 		// Check for numcocks
 		const cockNum = player.NumCocks();
-		if (cockNum == 1) {
+		if (cockNum === 1) {
 			Text.Add("His hand stops halfway down your body, hovering just above your [cock] for a moment. His eyes narrow and his nostrils flare, before his hand trails lower... He doesn't seem that interested in it this time.", parse);
 		} else if (cockNum > 1) {
 			Text.Add("His hand stops just above your groin, and he smirks. His fingers hover above your [cocks] hesitantly, before moving further down.", parse);
 		}
 
-		if (cockNum == 2) {
+		if (cockNum === 2) {
 			Text.Add(" <i>“Halfway to being a [m1race]...”</i>", parse);
 		}
 		Text.NL();
@@ -1723,17 +1723,17 @@ LizardsScenes.LossMale = function() {
 
 		Text.Flush();
 		// RANDOM SCENE
-		Gui.NextPrompt(function() {
+		Gui.NextPrompt(() => {
 			LizardsScenes.LossMaleVagVariations.call(enc);
 		});
-	}, 2.0, function() { return player.FirstVag(); });
+	}, 2.0, () => player.FirstVag());
 	// IF MALE OR HERM
-	scenes.AddEnc(function() {
+	scenes.AddEnc(() => {
 		Text.Add("His eyes drift down between your legs, and his eyes narrow.", parse);
 		Text.NL();
 
 		LizardsScenes.LossMaleCockVariations.call(enc);
-	}, 1.0, function() { return player.FirstCock(); });
+	}, 1.0, () => player.FirstCock());
 
 	scenes.Get();
 };
@@ -1769,7 +1769,7 @@ LizardsScenes.LossMaleVagVariations = function() {
 
 	const scenes = new EncounterTable();
 	// ANAL
-	scenes.AddEnc(function() {
+	scenes.AddEnc(() => {
 		Text.Add("He leans over your back, and you feel his heavy pair of dense shafts flop down on you, one on either cheek. His hulking form looms over you, and you feel his muzzle slide up beside your ears. <i>“I wonder what your other hole feels like,”</i> he whispers... before you feel his hips draw back. In one swift roll of his hips, you feel a thick, slimy <i>presence</i> spear itself through your [anus], a matching one sliding up between your cheeks as the lizard's other [m1cock] squishes deep inside your body.", parse);
 		Text.NL();
 
@@ -1800,7 +1800,7 @@ LizardsScenes.LossMaleVagVariations = function() {
 			player.FuckVag(player.FirstVag(), enc.male.FirstCock(), 2);
 			Sex.Vaginal(enc.male, player);
 
-			if (player.body.Gender() == Gender.herm) {
+			if (player.body.Gender() === Gender.herm) {
 				Text.Add("The way that his twin dicks both slide sloppily into your body, each throb making them squeeze together inside of you quickly sends your own [cocks] pulsing to life. [m1Name] just smirks, letting out a grunt as he steadily begins to hump.", parse);
 				Text.NL();
 			}
@@ -1811,13 +1811,13 @@ LizardsScenes.LossMaleVagVariations = function() {
 		}
 
 		Text.Flush();
-		Gui.NextPrompt(function() {
+		Gui.NextPrompt(() => {
 			Text.Clear();
 			Text.Add("Finally, with a powerful thrust of his hips, his [m1cock] slams deep into your body. [m1Name] howls out, a bestial cry that makes a shudder run down your spine. He lets go of your hands, grabbing hold of your [butt], rocking his hips against you. You feel his shafts pulsing heavily, before thick, warm fluid starts to fill your [anus]. Thick gouts of it splatter over your back, making a mess of you both inside and out. Deeper and deeper his seed spills into your body, until he simply... pushes you off, jerking his first [m1cock] out from you and leaving you in the dirt. A few, last ropes splatter over your body as he picks up his weapon, before turning and walking away. Exhausted and quivering from your own cruelly teased arousal, you roll onto your back and consign yourself to rest.", parse);
 
 			LizardsScenes.Impregnate(player, enc.male, PregnancyHandler.Slot.Butt);
 
-			if (player.body.Gender() == Gender.herm) {
+			if (player.body.Gender() === Gender.herm) {
 				Text.NL();
 				Text.Add("You feel your [cocks] pulsing in the air, but after [m1name]'s heavy romp, you can't quite summon up the energy to do more than lie there, feeling your sexes throb in time to each other.", parse);
 			}
@@ -1831,7 +1831,7 @@ LizardsScenes.LossMaleVagVariations = function() {
 
 	});
 	// VAG
-	scenes.AddEnc(function() {
+	scenes.AddEnc(() => {
 		Text.Add("Without wasting any time, he steps up behind you, his scaled feet padding against the ground. A soft growl sounds from his throat, and you feel not one, but both of his thick, pulsating dicks press against your [vag]. They feel slimy against your [vag], no doubt slick with the slime in the lizard's slit designed to keep his [m1cocks] ready for use. In a mildly pleasant turn of events, his flesh feels much warmer than his scales. At least it won't be an <i>entirely</i> unpleasant experience.", parse);
 		Text.NL();
 		Text.Add("He grinds against you for what feels like an hour, though your mind idly reasons it can't be more than a minute. Finally, he draws back... and with a single, well placed buck of his powerful hips, both of his dense, hot shafts sink halfway into your dripping [vag].", parse);
@@ -1870,7 +1870,7 @@ LizardsScenes.LossMaleVagVariations = function() {
 		}
 		Text.Flush();
 
-		Gui.NextPrompt(function() {
+		Gui.NextPrompt(() => {
 			Text.Clear();
 
 			Text.Add("Drawing his groin back, [m1name] pulls his [m1cocks] slowly, achingly out of your cunt, each inch leaving you feeling cooler as his flesh slips out from yours. His hand tightens around your wrists, and he shoves the entirety of both of his pulsating, thick cocks into you, only to yank them back out with a fleshy squish that you can't help but blush at to hear coming from your own body. He quickly settles into roughly humping your slick passage, and the feeling of his alien lengths sliding through your [vag] makes it hard to concentrate. He smirks, and it takes you a moment to realize that it's because you're moaning softly.", parse);
@@ -1879,7 +1879,7 @@ LizardsScenes.LossMaleVagVariations = function() {
 			Text.NL();
 
 			const scenes2 = new EncounterTable();
-			scenes2.AddEnc(function() {
+			scenes2.AddEnc(() => {
 				Text.Add("He holds you steady and buries both of his [m1cock]s deep inside you, his teeth clenching tightly as his thick shafts seem to <i>pulse</i>. Your eyes go wide as he holds you there, impaled on his pulsating dicks. Helpless to stop it, you feel his sticky, gooey sperm pumping deep into your passage, squeezing past your cervix and deep into your womb. He grins toothily and gazes almost menacingly at you as the realization grips your mind. Yet even as his climax slowly tapers off, he doesn't stop railing you roughly in the dirt. His [m1cocks] slide wetly in and out of your slippery [vag], steadily pushing you toward your own edge. The pressure builds and builds inside of you, the pleasure growing almost unbearable.", parse);
 				Text.NL();
 				parse.cl5 = player.FirstVag().clitCock ? " loins" : Text.Parse(" [clit]", parse);
@@ -1902,7 +1902,7 @@ LizardsScenes.LossMaleVagVariations = function() {
 					Text.Add("You pass out watching [p1name] pleasure [m2name], feeling [m1name]'s seed settling in your womb.", parse);
 				} else {
 					Text.Add("You manage to pull your legs closed, but roll into the puddle you and [m1name] made.", parse);
-					if (player.NumCocks() == 1) {
+					if (player.NumCocks() === 1) {
 						Text.Add(" You let out a groan as a gob of precum trails up to the tip of your [cock], oozing down your length.", parse);
 					} else if (player.NumCocks() > 1) {
 						Text.Add("You let out a soft groan as gobs of precum trail up to the tip of your [cocks], oozing down the length of each.", parse);
@@ -1913,7 +1913,7 @@ LizardsScenes.LossMaleVagVariations = function() {
 				player.AddLustFraction(0.05);
 				Gui.NextPrompt();
 			});
-			scenes2.AddEnc(function() {
+			scenes2.AddEnc(() => {
 				Text.Add("He holds you in place, before letting out a hiss. <i>“I don't want my line tainted by a weakling like you...”</i>", parse);
 				Text.NL();
 				Text.Add("He slides his [m1cocks] out from your clenching, quivering cunt, dragging his tips across your lips. He snorts, before thrusting his hips forward, his [m1cocks] sliding wetly between your cheeks, aimed over your back.", parse);
@@ -1963,7 +1963,7 @@ LizardsScenes.LossMaleCockVariations = function() {
 
 	const scenes = new EncounterTable();
 	// DISS
-	scenes.AddEnc(function() {
+	scenes.AddEnc(() => {
 		if (player.FirstVag()) {
 			Text.Add("His eyes narrow uncertainly, and you hear him <i>sniff</i> a few times. Abruptly he shoves one hand down under your male attributes. You feel a finger drag across the entrance to your [vag], and he snorts. <i>“A real shame you're... spoiled,”</i> he mutters, dropping you to the ground, picking up his weapon and walking away.", parse);
 		} else {
@@ -1976,7 +1976,7 @@ LizardsScenes.LossMaleCockVariations = function() {
 		Gui.NextPrompt();
 	});
 	// ORAL
-	scenes.AddEnc(function() {
+	scenes.AddEnc(() => {
 		Text.Add("He snorts, looking at you. [m1Name] glowers at you, his eyes piercing into yours.", parse);
 		if (!player.FirstVag()) {
 			Text.Add(" <i>“Guess you don't have a cunt, but a mouth's a mouth.”</i>", parse);
@@ -1990,17 +1990,17 @@ LizardsScenes.LossMaleCockVariations = function() {
 		Text.NL();
 
 		const scenes2 = new EncounterTable();
-		scenes2.AddEnc(function() {
+		scenes2.AddEnc(() => {
 			if (player.body.HasLongSnout()) {
 				Text.Add("<i>“Just the right size for my dick. You got your muzzle just for this, didn't you?”</i>", parse);
 			} else {
 				Text.Add("<i>“What a pretty little mouth you have... Shame it's not a snout, I might be able to fit it all in, then.”</i>", parse);
 			}
 		}, 3.0);
-		scenes2.AddEnc(function() {
+		scenes2.AddEnc(() => {
 			Text.Add("<i>“And here I thought all [playerRace]s were bad at sucking cock.”</i>", parse);
 		}, 4.0);
-		scenes2.AddEnc(function() {
+		scenes2.AddEnc(() => {
 			Text.Add("<i>“Such a pushover. Hope you like the taste, you're going to get it every time you run into my kind.”</i>", parse);
 		}, 3.0);
 		scenes2.Get();
@@ -2072,7 +2072,7 @@ LizardsScenes.LossMaleCockVariations = function() {
 				Sex.Blowjob(enc.male, player);
 
 				const scenes2 = new EncounterTable();
-				scenes2.AddEnc(function() {
+				scenes2.AddEnc(() => {
 					Text.Add("Right near the end though, he jerks his hips back. Your sore throat contracts, leaving you feeling normal again. Unfortunately [m1name] is still in the throes of orgasm, and with a shift of his hips you find <i>both</i> of his fat tips pressed between your lips. You feel his sticky slime pumping across your tongue, filling your cheeks quickly. It tastes bitter and salty, and strangely thick, as though there isn't much water in it. The thick, custard-like slime fills your mouth until you're forced to swallow it just to breathe. With a sickening gulp, you feel the sludge trickling down your throat. He smirks down at you, popping his tips free as you swallow, letting the last few ropes paint your face.", parse);
 					Text.NL();
 					Text.Add("He pushes you to the ground, and picks up his weapon. You gulp down sweet air, looking around.", parse);
@@ -2085,7 +2085,7 @@ LizardsScenes.LossMaleCockVariations = function() {
 					Text.NL();
 					Text.Add("The blunt end strikes your temple, and you black out.", parse);
 				});
-				scenes2.AddEnc(function() {
+				scenes2.AddEnc(() => {
 					Text.Add("He holds you there, each rope pumping down your throat. You look up at him, waiting for him to pull out... Yet even as his climax ends, he just holds you there. You begin to writhe, to squirm, trying to push him off. He easily overpowers you, holding you there. You gasp for air, but his [m1cock] plugs your throat. You find yourself feeling faint. He smirks down at you. Dimly you hear him say, <i>“Maybe next time you'll learn to suck better.”</i>", parse);
 					Text.NL();
 					Text.Add("You pass out...", parse);
@@ -2101,7 +2101,7 @@ LizardsScenes.LossMaleCockVariations = function() {
 		Gui.SetButtonsFromList(options);
 	});
 	// ANAL FUCK
-	scenes.AddEnc(function() {
+	scenes.AddEnc(() => {
 		Text.Add("His eyes light up as he sees your [cock]. He grins a toothy smile. <i>“Well, looks like my lucky day. Been too many females around lately, you have no idea how much I've been wanting a chance like this.”</i>", parse);
 		Text.NL();
 		Text.Add("You don't quite know what he means, exactly, but the guesses you can make leave a sinking feeling in your stomach. He pushes you to the ground.", parse);
@@ -2109,7 +2109,7 @@ LizardsScenes.LossMaleCockVariations = function() {
 
 		const scenes2 = new EncounterTable();
 		// 25%, fuck him
-		scenes2.AddEnc(function() {
+		scenes2.AddEnc(() => {
 			Text.Add("His claws push your back into the ground, and his nostrils flare. His feet step on your [feet], splaying your legs to either side. He comes to a crouch between your legs, looking down at you with a hungry glint in his eyes.", parse);
 			Text.NL();
 			Text.Add("<i>“What..?”</i> you ask, letting out a quivering breath. He grins.", parse);
@@ -2161,7 +2161,7 @@ LizardsScenes.LossMaleCockVariations = function() {
 			Text.Add("[m1Name] leans forward, and you feel both of his [m1cock] push against your stomach. Your every muscle tenses, and you feel yourself tumbling over the edge as your spunk surges through your [cock]. You feel spurt after spurt flood [m1name]'s body, and the reptile groans, his eyes fluttering open. <i>“Yessss...”</i> he hisses, still rocking atop you.", parse);
 			Text.Flush();
 
-			Gui.NextPrompt(function() {
+			Gui.NextPrompt(() => {
 				Text.Clear();
 				player.AddLustFraction(-1);
 
@@ -2176,9 +2176,9 @@ LizardsScenes.LossMaleCockVariations = function() {
 				Text.Flush();
 				Gui.NextPrompt();
 			});
-		}, 1.0, function() { return player.FirstCock(); });
+		}, 1.0, () => player.FirstCock());
 		// 75%, get fucked
-		scenes2.AddEnc(function() {
+		scenes2.AddEnc(() => {
 			Text.Add("His claws find your [butt], and he turns you around onto your stomach. You feel him slide up behind you. <i>“Mmh...”</i> he groans softly.", parse);
 			Text.NL();
 			Text.Add("He leans over your back, and you feel his heavy [m1cocks] flop down between your pert cheeks. His hulking form looms over you, and you feel his muzzle slide up beside your ear. <i>“[MalesHerms] feel so much better than females,”</i> he whispers in your ear. You feel his hips draw back. In one swift roll of his hips, you feel a thick, slimy <i>presence</i> spear itself through your [anus], the [m1cock] squishing up deep inside your body.", parse);
@@ -2256,7 +2256,7 @@ LizardsScenes.LossFemale = function() {
 
 	const scenes = new EncounterTable();
 	// ORAL RAPE
-	scenes.AddEnc(function() {
+	scenes.AddEnc(() => {
 		Text.Add("You grunt as your back hits the ground. When you look up, you see the reptile standing over you, her scant underwear already gone. She smirks down at you, your vision taken up mostly by her yellow-green scaled groin. She crouches down, straddling your face. You blush, trying to turn your head away, but her thighs close around your [face].", parse);
 		Text.NL();
 		Text.Add("<i>“Uh-uh. You're going to be a good [boygirl],”</i> she hisses. You find your nose pressed right against her groin. This close, you can see the vague cleft where her [m1vag] must be, her physiology keeping it hidden and protected from the desert sand when not in use... something she seems very keen to remedy. <i>“Get to work...”</i>", parse);
@@ -2280,7 +2280,7 @@ LizardsScenes.LossFemale = function() {
 		player.FuckOral(player.Mouth(), enc.female.FirstVag(), 2);
 		Text.Flush();
 
-		Gui.NextPrompt(function() {
+		Gui.NextPrompt(() => {
 			Text.Clear();
 
 			Text.Add("You press your [face] against her heated [m1vag] as her legs slide closed around your head.", parse);
@@ -2356,7 +2356,7 @@ LizardsScenes.LossFemale = function() {
 		});
 	}, 1.0);
 	// GENDER SPECIFIC SCENES (COCK)
-	scenes.AddEnc(function() {
+	scenes.AddEnc(() => {
 		Text.Add("Finding yourself flat on your back, she steps over you, reaching down and dropping her scant clothing. ", parse);
 		if (player.LustLevel() > 0.5) {
 			Text.Add("You blush, your [cocks] already hard from her coy behavior, and she smirks sultrily down at you. Right where she wants you, you can do little but look down as she slides over your body, straddling your hips.", parse);
@@ -2374,7 +2374,7 @@ LizardsScenes.LossFemale = function() {
 		Text.Add("You feel her [m1vag] press against your ", parse);
 		if (player.NumCocks() >= 3) {
 			Text.Add("numerous, half-hard dicks, grinding the middle one along her folds.", parse);
-		} else if (player.NumCocks() == 2) {
+		} else if (player.NumCocks() === 2) {
 			Text.Add("pair of thick shafts, her eyes lighting up in delight at the similarity to her own kinds' attributes. Her other hand slides down, and you feel her cool grip surround your twinned members. She presses them right against her [m1vag], which seems suddenly more moist...", parse);
  } else {
 			Text.Add("heavy [cock], letting out a coo of delight as it pushes against her entrance.", parse);
@@ -2387,7 +2387,7 @@ LizardsScenes.LossFemale = function() {
 		Text.NL();
 
 		// TODO: Multidick
-		if (player.NumCocks() == 2) {
+		if (player.NumCocks() === 2) {
 			Text.Add("You feel <i>both</i> of your [cocks] push against her surprisingly wet, warm folds, before they easily part them. A heritage of taking two at once seems to have made her amazingly adapted...", parse);
 			Text.NL();
 			Text.Add("Your twin tips sink into the wet heat of her rippling passage, and her walls constrict around you. You feel your [cocks] squish against each other and her silky confines, and she sinks deeper onto you. You roll your hips, letting out a soft moan as she lowers herself.", parse);
@@ -2405,7 +2405,7 @@ LizardsScenes.LossFemale = function() {
 			Text.Add("<i>“Consider yourself lucky on being my first,”</i> she hisses, her voice a mixture of pleasure and pain.", parse);
 		}
 		Text.Flush();
-		Gui.NextPrompt(function() {
+		Gui.NextPrompt(() => {
 			Text.Clear();
 
 			Text.Add("She smirks, sensing the power she has over you now. You reach out to pull her down further, but as soon as you touch her... she stops. You grip her hips and struggle to pull her down, ", parse);
@@ -2441,11 +2441,11 @@ LizardsScenes.LossFemale = function() {
 			Text.Flush();
 			player.AddLustFraction(0.1);
 
-			Gui.NextPrompt(function() {
+			Gui.NextPrompt(() => {
 				Text.Clear();
 
 				// TODO More than 2 cocks?
-				if (player.NumCocks() == 2) {
+				if (player.NumCocks() === 2) {
 					Text.Add("Finally, you feel like you can't take it anymore. You let out an aching moan... and then another. Soon you're groaning wantonly, thrusting and humping back up into her, your twinned, slick shafts pulsing inside her. She opens her muzzle, and you hear her sibilant yet sweet voice sound out, <i>“Cum in me... make me heavy with your eggs...”</i>", parse);
 					Text.NL();
 					Text.Add("You blush as she orders you to finish inside of her.", parse);
@@ -2525,8 +2525,8 @@ LizardsScenes.LossFemale = function() {
 				Gui.NextPrompt();
 			});
 		});
-	}, 1.0, function() { return player.FirstCock(); });
-	scenes.AddEnc(function() { // TAILFUCK
+	}, 1.0, () => player.FirstCock());
+	scenes.AddEnc(() => { // TAILFUCK
 		const lusty = player.LustLevel() >= 0.7;
 		parse.boygirl = player.mfTrue("boy", "girl");
 		parse = Text.ParserPlural(parse, player.NumCocks() > 1);
@@ -2625,7 +2625,7 @@ LizardsScenes.LossFemale = function() {
 
 		Text.Flush();
 
-		Gui.NextPrompt(function() {
+		Gui.NextPrompt(() => {
 			Text.Clear();
 			const dom = player.SubDom();
 			Text.Add("A quick look tells you that the lizard isn’t joking, and she’s too far gone into the haze of lust to be reasoned with. ", parse);
@@ -2645,15 +2645,15 @@ LizardsScenes.LossFemale = function() {
 			let pussy: boolean = false;
 
 			const scenes = new EncounterTable();
-			scenes.AddEnc(function() {
+			scenes.AddEnc(() => {
 				pussy = true;
 				Text.Add("You moan as she once again thrusts her fingers into your [vag]; the reptile savouring your discomfort. <i>“Don’t try to fool me, you’re wet as the Oasis itself,”</i> she leans closer and taunts you. <i>“You can put on a defiant facade if you want; your body sings a different song.”</i>", parse);
 				Text.NL();
 				parse.dom = dom > 25 ? " reluctantly" :
 				               dom > -25 ? "" : " eagerly";
 				Text.Add("She’s right… it’s no use denying it. You[dom] let go of your last sliver of self-control and close your eyes, only focusing on the heavenly feeling of her hand pounding your pussy. Filling your thoughts is the promise of something more; that scaly and deliciously thick fuckstick that you helped prepare yourself.", parse);
-			}, 3.0, function() { return player.FirstVag(); });
-			scenes.AddEnc(function() {
+			}, 3.0, () => player.FirstVag());
+			scenes.AddEnc(() => {
 				parse.l = player.HasLegs() ? "on all fours" : "face forward";
 				const tail = player.HasTail();
 				parse.tail = tail ? tail.Short() : "";
@@ -2661,7 +2661,7 @@ LizardsScenes.LossFemale = function() {
 				Text.Add("Though her words are soothing, her actions are all but. You’re quickly hoisted around [l], head pushed down into the sand as the lizard takes a seat straddling your back, using you as furniture. You’d be hard pressed to think of a way she could humiliate you further, but she easily exceeds your expectations when she wets her fingers[t] and reaches between your buttcheeks, lightly prodding your [anus]. You clench reflexively, but she’s not about to have any of that. She pushes the first finger in, probing your depths and testing how stretchy you are, and you moan despite yourself.", parse);
 				Text.NL();
 				Text.Add("<i>“It doesn’t have to hurt, I have this oil...”</i> She briefly pulls out her fingers, rummaging through her pack for a bit. A cool liquid seeps between your cheeks, dulling the pain and coaxing another appreciative moan from you. The lizard works it in, spreading you wider and wider. Before long, she fits digit after digit into your relaxing butt, until she can easily make room for her entire hand. This is just the beginning, though; you know how thick her tail is.", parse);
-			}, 1.0, function() { return true; });
+			}, 1.0, () => true);
 
 			scenes.Get();
 			parse.target = pussy ? parse.vag : parse.anus;
@@ -2754,7 +2754,7 @@ LizardsScenes.LossFemale = function() {
 			Text.NL();
 			Text.Add("Time passes...", parse);
 			Text.NL();
-			parse.comp = party.Num() == 2 ? member1.name : "your companions";
+			parse.comp = party.Num() === 2 ? member1.name : "your companions";
 			parse.c = party.Num() > 1 ? Text.Parse(" and [comp]", parse) : "";
 			Text.Add("You’re thoroughly exhausted when the playful lizard finally leaves you alone. Wobbling slightly, you[c] set out on your journey again.", parse);
 			Text.Flush();
@@ -2764,7 +2764,7 @@ LizardsScenes.LossFemale = function() {
 
 			Gui.NextPrompt();
 		});
-	}, 1.0, function() { return true; });
+	}, 1.0, () => true);
 	scenes.Get();
 };
 

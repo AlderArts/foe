@@ -155,7 +155,7 @@ export class Equine extends Entity {
 
 }
 
-EquineScenes.StallionImpregnate = function(mother: Entity, father: Equine, slot: number) {
+EquineScenes.StallionImpregnate = (mother: Entity, father: Equine, slot: number) => {
 	mother.PregHandler().Impregnate({
 		slot   : slot || PregnancyHandler.Slot.Vag,
 		mother,
@@ -167,7 +167,7 @@ EquineScenes.StallionImpregnate = function(mother: Entity, father: Equine, slot:
 	});
 };
 
-EquineScenes.PairEnc = function(levelbonus: number) {
+EquineScenes.PairEnc = (levelbonus: number) => {
 	const enemy    = new Party();
 	const stallion = new Equine(Gender.male, levelbonus);
 	const mare     = new Equine(Gender.female, levelbonus);
@@ -177,7 +177,7 @@ EquineScenes.PairEnc = function(levelbonus: number) {
 	enc.stallion = stallion;
 	enc.mare     = mare;
 
-	enc.onEncounter = function() {
+	enc.onEncounter = () => {
 		const parse: any = {
 			party         : !GAME().party.Alone() ? " and your party" : "",
 			breastCup : enc.mare.FirstBreastRow().ShortCup(),
@@ -196,7 +196,7 @@ EquineScenes.PairEnc = function(levelbonus: number) {
 		Text.Flush();
 
 		// Start combat
-		Gui.NextPrompt(function() {
+		Gui.NextPrompt(() => {
 			enc.PrepCombat();
 		});
 	};
@@ -235,11 +235,11 @@ EquineScenes.LossPrompt = function() {
 
 	const lustBonus = enc.mare.LustLevel() + enc.stallion.LustLevel();
 
-	Gui.Callstack.push(function() {
+	Gui.Callstack.push(() => {
 		Text.Clear();
 
 		const scenes = new EncounterTable();
-		scenes.AddEnc(function() {
+		scenes.AddEnc(() => {
 			Text.Add("You[party] collapse, unable to dispute the equine couple's victory. The two approach you, the stallion eyeing your crumpled figure with desire.", parse);
 			Text.NL();
 			Text.Add("<i>“You in the mood?”</i> The male questions, turned to the mare, his groin twitching in the process.", parse);
@@ -252,7 +252,7 @@ EquineScenes.LossPrompt = function() {
 			Text.Flush();
 			Gui.NextPrompt();
 		}, 1.0);
-		scenes.AddEnc(function() {
+		scenes.AddEnc(() => {
 			parse.kn = player.HasLegs() ? " drop to your knees" : " fall to the ground";
 			Text.Add("The final blow breaks your will and you grudgingly[kn], unable to fight back. Your eyes look around and you hear the telltale click of animalistic tongues.", parse);
 			Text.NL();
@@ -347,7 +347,7 @@ EquineScenes.LossPrompt = function() {
 	Encounter.prototype.onLoss.call(enc);
 };
 
-EquineScenes.FuckFemale = function(enc: any) {
+EquineScenes.FuckFemale = (enc: any) => {
 	const player = GAME().player;
 	const party: Party = GAME().party;
 	let parse: any = {
@@ -439,7 +439,7 @@ EquineScenes.FuckFemale = function(enc: any) {
 	});
 	Gui.SetButtonsFromList(options);
 
-	Gui.Callstack.push(function() {
+	Gui.Callstack.push(() => {
 		Text.Clear();
 
 		Text.Add("<i>“Oh, that was... better than expected. You are <b>good</b>!”</i>", parse);
@@ -459,7 +459,7 @@ EquineScenes.FuckFemale = function(enc: any) {
 	});
 };
 
-EquineScenes.GetFucked = function(enc: any) {
+EquineScenes.GetFucked = (enc: any) => {
 	const player = GAME().player;
 	let parse: any = {
 		ifArmor    : player.Armor() ? "strips you down to full nudity" : "runs them down your naked body",
@@ -502,7 +502,7 @@ EquineScenes.GetFucked = function(enc: any) {
 
 	// DECISIONS
 
-	Gui.NextPrompt(function() {
+	Gui.NextPrompt(() => {
 		Text.Clear();
 
 		Text.Add("Before he's completely ready, you pull yourself off of his horse cock and turn your body around, your mouth taking deep breaths on his base while he stares at your [vag] head on. You slowly stroke a few inches above the bottom of his cock, enticing him to pay attention to your puffed lips. He gets the memo - not a moment later, you feel his fat horse tongue lap greedily at you.", parse);
@@ -524,7 +524,7 @@ EquineScenes.GetFucked = function(enc: any) {
 };
 
 // SCENE FOR MALES/HERMS
-EquineScenes.Threesome1 = function(enc: any) {
+EquineScenes.Threesome1 = (enc: any) => {
 	const player = GAME().player;
 	let parse: any = {
 		mobVag() { return enc.mare.FirstVag().Short(); },
@@ -571,7 +571,7 @@ EquineScenes.Threesome1 = function(enc: any) {
 	// TODO variations
 	// BREAK POINT
 
-	Gui.NextPrompt(function() {
+	Gui.NextPrompt(() => {
 		Text.Clear();
 		Text.Add("You beckon the male to come around to the other side, where the mare is lolling her tongue about, while her hips are flopping eagerly against your wet [cock].", parse);
 		Text.NL();
@@ -600,7 +600,7 @@ EquineScenes.Threesome1 = function(enc: any) {
 	});
 };
 
-EquineScenes.Threesome2 = function(enc: any) {
+EquineScenes.Threesome2 = (enc: any) => {
 	const player = GAME().player;
 	let parse: any = {
 		mobVag() { return enc.mare.FirstVag().Short(); },
@@ -659,7 +659,7 @@ EquineScenes.WinPrompt = function() {
 
 	};
 
-	if (party.Num() == 2) {
+	if (party.Num() === 2) {
 		parse.party = " and " + party.Get(1).name;
 	} else if (party.Num() > 2) {
 		parse.party = " and your companions";
@@ -667,7 +667,7 @@ EquineScenes.WinPrompt = function() {
 		parse.party = "";
  }
 
-	Gui.Callstack.push(function() {
+	Gui.Callstack.push(() => {
 		Text.Clear();
 		Text.Add("You[party] stand down as the defeated equines slump to the ground, panting with exhaustion. The pair exchanges resigned glances, weakly holding hands as they brace themselves for whatever abuse you intend to inflict. The way they fidget indicates that they might even be excited by the prospect.", parse);
 		Text.Flush();
@@ -698,14 +698,14 @@ EquineScenes.WinPrompt = function() {
 		}
 		/* TODO
 		options.push({ nameStr : "Leave",
-			func : function() {
+			func : () => {
 
 			}, enabled : true,
 			tooltip : ""
 		});
 		*/
 
-		Gui.SetButtonsFromList(options, true, function() {
+		Gui.SetButtonsFromList(options, true, () => {
 			Text.NL();
 			Text.Add("However, you aren't interested in taking that kind of tribute right now. You content yourself with rifling through their meager belongings, getting in a quick grope on one or the other just to hear them moan. You stow your loot and turn on your heel, leaving your foes to stare after you in confusion and relief... and perhaps a bit of disappointment.", parse);
 			Text.Flush();
@@ -717,7 +717,7 @@ EquineScenes.WinPrompt = function() {
 };
 
 // TODO
-EquineScenes.WinFuckHim = function(enc: any) {
+EquineScenes.WinFuckHim = (enc: any) => {
 	const player = GAME().player;
 	const party: Party = GAME().party;
 	const mare     = enc.mare;
@@ -772,7 +772,7 @@ EquineScenes.WinFuckHim = function(enc: any) {
 	Text.Add(". Shocked out of his stupor, the stallion tries to jerk his head away, but you tangle your fingers in his mane and pull him back into place, chastising him for moving without your permission. The friction of his muzzle against your package has awakened your [cocks], and [itThey] slowly swell[notS] and stiffen[notS]. From your vantage point, ", parse);
 	if (player.NumCocks() > 2) {
 		Text.Add("it looks like the stallion tried to literally eat a bag of dicks - and failed.", parse);
-	} else if (player.NumCocks() == 2) {
+	} else if (player.NumCocks() === 2) {
 		Text.Add("they seem to be pointing accusingly at the stallion's eyes, as though trying to stare him down.", parse);
  } else {
 		Text.Add("it appears as though the stallion is growing a dick from the end of his nose like a perverse rhino horn.", parse);
@@ -802,7 +802,7 @@ EquineScenes.WinFuckHim = function(enc: any) {
 			Text.Add("Either way, the nod was all he needed to re-affix his gaze upon your [cocks] with an expression more akin to wonder than his previous discomfiture. He reaches out with one hand, only to stop himself, meekly looking up at you to seek your approval. Your smile broadens and you make a gesture to indicate that he is free to indulge his curiosity. The equine swallows nervously, but returns his attention to your crotch, his thick hand touching and then wrapping around[oneof] your rigid shaft[s]. It is amusing to watch the thoughts play across his face as he gives you a few tugs and strokes, fascinated by the alien sensation of cockmeat in his hand that is not his own.", parse);
 			Text.Flush();
 
-			Gui.NextPrompt(function() {
+			Gui.NextPrompt(() => {
 				Text.Clear();
 				Text.Add("He continues on like this for a few minutes ", parse);
 				if (player.NumCocks() > 1) {
@@ -828,7 +828,7 @@ EquineScenes.WinFuckHim = function(enc: any) {
 				Text.Add("Whatever initial reluctance he may have felt, it's clear that he’s truly starting to enjoy being dominated like this. The proudly-erect column of horse meat jutting out and twitching up at you and slowly oozing pre does nothing to dissuade you of the notion. The stallion's increasingly eager sucking is bringing you close to climax far faster than you had anticipated, and you tangle your fingers in his hair once again to pull him off of your meat with a loud slurping sound. He looks up at you in a daze, panting and drooling a bit as thin strands of pre-cum stretch between his lips and your tip. He tries to aim a questioning gaze up at you, but his lust-addled eyes keep wandering back down to your [cocks] that glisten[notS] with his saliva and your own lubricant.", parse);
 				Text.Flush();
 
-				Gui.NextPrompt(function() {
+				Gui.NextPrompt(() => {
 					Text.Clear();
 					Text.Add("A wicked thought crosses your mind. Seeing at how compliant the stallion has become, you tousle his hair and tell him to behave himself for a moment while you get something <i>fun</i>. He is too bewildered to disobey as you lean toward him, your exposed package bouncing freely in the breeze. You snag the loincloth from his hips, tearing off what you don’t need until all that is left is a long strap of cloth. Giving it a quick tug to ensure its tensile quality, you twist the strap around your hands and pull it taut before your new pet’s nose so that it makes a light <i>twang</i> sound. You straighten it and begin tying a loop in one end of the material, making sure to jiggle your junk as much as possible in the equine’s face as you work. As you tie the final knot, you “accidentally” let your tip leave a slimy kiss on the end of his nose, making his nostrils flare as he huffs in your scent. The stallion cannot restrain the urge to let his tongue dart out, giving the underside of your shaft a wet caress before you can pull it away. The gesture makes you shiver involuntarily, and you offer half-chuckling, half-moaning praise for his zeal.", parse);
 					Text.NL();
@@ -843,7 +843,7 @@ EquineScenes.WinFuckHim = function(enc: any) {
 					Text.Add("[cocks] with almost rabid fervor, teasing every inch of flesh he can reach with his tongue and hands until you are as hard as you've ever been in your life. He has completely resigned himself to being your cockslut, so there is no hint of hesitation or shame in his actions; for now, his entire world extends no further than your crotch. With one final long lick up[oneof] your shaft[notS], he lines up the tip with his mouth, his flexible muscle extended just past his lower lip to cradle your glans. Before you can react, he grabs your hips with both hands and impales his face onto your shaft all the way to the hilt.", parse);
 					Text.Flush();
 
-					Gui.NextPrompt(function() {
+					Gui.NextPrompt(() => {
 						Text.Clear();
 						if (longCock) {
 							Text.Add("You gasp in shock - and with a hint of concern - as the full length of your sizable shaft squeezes through the horse's mouth and into the greater tightness of his throat. While you appreciate his enthusiasm, he may have bitten off more than he can chew, figuratively speaking. You can feel the equine gagging and swallowing convulsively around your shaft, and you consider pulling out to offer him respite, but his hands firmly hold your hips in place and refuse to let go. He seems determined to prove that he can master the task you have given him, whatever the cost. Even as tears streak from the corners of his clenched eyelids, he keeps his jaw relaxed and forces his swallowing to slow down, acclimating himself to the intrusion through sheer willpower.", parse);
@@ -960,7 +960,7 @@ EquineScenes.WinFuckHim = function(enc: any) {
 							}, enabled : true,
 						});
 
-						Gui.Callstack.push(function() {
+						Gui.Callstack.push(() => {
 							Text.Clear();
 							Text.Add("The equine sits back shakily on his hooves, visibly enervated by the exercise although his turgid erection indicates that he is still painfully aroused. You look down and realize that you pulled your makeshift noose taut around the equine's package whilst you came, effectively cutting off his release. Your gaze shifts to the stallion's face, grinning at the haze of lust that still fogs his eyes as he pants, his tongue lolling out a bit and strands of your sperm dripping from his chin to his chest. He has been such a good cockslut - and you did say that you might reward him if he pleased you.", parse);
 							Text.NL();
@@ -1006,7 +1006,7 @@ EquineScenes.WinFuckHim = function(enc: any) {
 			Text.Add("His fear of reprisal from you is the only thing keeping his tongue slathering your rod with saliva and his ass bared to the heavens, though even that resolve is wavering as his hindquarters tremble and jerk anxiously. You bury your fingers into his thick mane once again, as much to reassert control as to position yourself for a little something extra. You see the stallion tense as the mare lays her hands on either side of his crack, spreading him wider to gain better access to his pucker. Without further ado, she drags her flat tongue up his taint and across his clenched asshole.", parse);
 			Text.Flush();
 
-			Gui.NextPrompt(function() {
+			Gui.NextPrompt(() => {
 				Text.Clear();
 				Text.Add("The stallion cries out in surprise, and you seize that moment to line up[oneof] your shaft[s] with his open mouth and slide in, muffling his shock with a mouthful of cockmeat. The equine is too focused on what is happening to his hindparts to pay much attention to your intrusion, allowing you to enjoy his mouth more thoroughly as the mare tries to lick the stallion's ass into pliancy. You indulge yourself, using the stud's long muzzle as a cocksleeve to make sure you are nice and hard for the next stage of this little rodeo. His warm, wet mouth and tongue feel marvelous around you, aided by the vibrations from his occasional grunt or moan that tries to escape around your member. Assailed from both ends, the thickly-muscled equine puts forth no resistance, his eyes squeezed firmly shut as he tries to acclimate to the strange, not-entirely-unpleasant sensations.", parse);
 				Text.NL();
@@ -1024,7 +1024,7 @@ EquineScenes.WinFuckHim = function(enc: any) {
 				Text.Add("You tell him to stop, pulling your shaft from the stallion's mouth a bit too quickly. You gasp a bit as the air hitting your cock feels almost frigid after the sweltering heat of his muzzle. The mare straightens, panting slightly, while the stallion simply wavers on all fours, trying to focus on you through a haze of pleasure as he wonders why the stimulation stopped. You regard the mare with a smile, telling her that she has done a marvelous job, but now it is your turn. You give her leave to relax somewhere and enjoy the show.", parse);
 				Text.Flush();
 
-				Gui.NextPrompt(function() {
+				Gui.NextPrompt(() => {
 					Text.Clear();
 					Text.Add("The mare smiles at you and nods her assent. She gets to her hooves and sashays toward a nearby tree stump, plopping down and leaning back against the rough wood as she spreads her legs, one hand already toying with her swelling clit. Satisfied that you'll be uninterrupted, you move behind the stallion and begin to position yourself. He seems blissfully unaware of what's coming, and even presents his ass to you as though he expected to feel a tongue across his puckered hole once again. <i>Not this time,</i> you think with a smirk, as you let[oneof] your [cocks] flop down between his ass cheeks, hotdogging through the mare's saliva to aid in penetrating the stud's virgin hole. He groans happily at the feeling of something rubbing his rectum, and you can feel his balls twitch against ", parse);
 					if (player.IsNaga()) {
@@ -1047,7 +1047,7 @@ EquineScenes.WinFuckHim = function(enc: any) {
 					Text.Add("You grin, and pick up the pace a bit. The moan gets louder, punctuated by a breathy “hunh” each time you thrust into him. You adjust your position to get a better angle, and accidentally rub your cock across the hardened nub of his prostate. His voice cracks and catches in his throat, then comes out as a shuddering groan of pleasure as his member swells back to full hardness and resumes spurting globs of pre-cum into the dirt.", parse);
 					Text.Flush();
 
-					Gui.NextPrompt(function() {
+					Gui.NextPrompt(() => {
 						Text.Clear();
 						Text.Add("You quite enjoy the reaction, and tell him so. You can see his ears burn red with embarrassment, but his body is beyond his control now as your shaft continues to grind against his love button, milking so much pre from him that you wonder how his balls can produce so much. As if seeking an answer to that mystery, you reach under your own [cocks] and grab his heavy ballsack, rolling his testicles around in your hand and giving them a gentle squeeze. The stallion's ass clamps down in surprise, which forces your shaft to grind even harder against his prostate. You feel his scrotum contract in a massive effort, and the stud whinnies uncontrollably as he fires off his first orgasm. Thick ropes shoot outward with stunning speed, splashing against the ground and most of the stallion's chest and arms. His ass keeps rippling around your cock, sending pleasurable shocks through your groin and making your shaft[s] grow impossibly stiff.", parse);
 						Text.NL();
@@ -1162,7 +1162,7 @@ EquineScenes.WinFuckHim = function(enc: any) {
 	Gui.SetButtonsFromList(options, false, null);
 };
 
-EquineScenes.WinFuckHer = function(enc: any) {
+EquineScenes.WinFuckHer = (enc: any) => {
 	const player = GAME().player;
 	const party: Party = GAME().party;
 	const mare     = enc.mare;

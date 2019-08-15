@@ -10,9 +10,9 @@ import { Text } from "../text";
 
 const WaitAb = new Ability();
 WaitAb.name = "Wait";
-WaitAb.Short = function() { return "Wait a while."; };
+WaitAb.Short = () => "Wait a while.";
 WaitAb.targetMode = TargetMode.Self;
-WaitAb.castTree.push(function(ability: Ability, encounter: Encounter, caster: Entity) {
+WaitAb.castTree.push((ability: Ability, encounter: Encounter, caster: Entity) => {
 	Text.Add("[name] does nothing!", {name: caster.name});
 	caster.GetCombatEntry(encounter).initiative += 50;
 });
