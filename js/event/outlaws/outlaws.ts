@@ -44,7 +44,7 @@ export class Outlaws {
 		const storage: any = {};
 
 		storage.flags = this.flags;
-		if (this.relation.base != 0) {
+		if (this.relation.base !== 0) {
 			storage.rep = this.relation.base.toFixed();
 		}
 
@@ -54,13 +54,12 @@ export class Outlaws {
 		return storage;
 	}
 
-	public FromStorage(storage?: any) {
-		storage = storage || {};
+	public FromStorage(storage: any) {
 		// Load flags
-		for (const flag in storage.flags) {
-			this.flags[flag] = parseInt(storage.flags[flag]);
+		for (const flag of storage.flags) {
+			this.flags[flag] = parseInt(storage.flags[flag], 10);
 		}
-		this.relation.base = !isNaN(parseInt(storage.rep)) ? parseInt(storage.rep) : this.relation.base;
+		this.relation.base = !isNaN(parseInt(storage.rep, 10)) ? parseInt(storage.rep, 10) : this.relation.base;
 
 		this.mainQuestTimer.FromStorage(storage.Qtime);
 		this.factTimer.FromStorage(storage.Ftime);
@@ -111,7 +110,7 @@ export class Outlaws {
 		const outlaws = GAME().outlaws;
 		const aquilius = GAME().aquilius;
 		// Only in the initial phase
-		if (outlaws.flags.Met != OutlawsFlags.Met.Met) { return false; }
+		if (outlaws.flags.Met !== OutlawsFlags.Met.Met) { return false; }
 		// Only when meeting the correct relation requirements TODO
 		if (aquilius.flags.Met < AquiliusFlags.Met.Met) { return false; }
 		// Only when meeting total Outlaws rep
@@ -168,7 +167,7 @@ export namespace OutlawsScenes {
 		Text.Add("The trip through the outlaws’ camp and the forest is brisk and uneventful. Snapping to attention at the sight of Maria, the gate sentries lower the drawbridge to let the both of you through, and from there it’s a short walk along the forest trails, shafts of [afternoonevening] sunlight piercing the canopy and illuminating the way forward. This part of the forest isn’t familiar to you - now that you think about it, you left the major trails some time ago.", parse);
 		Text.NL();
 		Text.Add("Before long, though, the trail widens out into a small forest clearing, surrounded on all sides by evergreen trees; silence reigns all about you, enough for you to hear the soft crunch of pine needles underfoot as the two of you draw close to the rocky mound in the glade’s center.", parse);
-		if (WorldTime().season != Season.Winter) {
+		if (WorldTime().season !== Season.Winter) {
 			Text.Add(" Small white wildflowers and tall poppies grow in clumps amidst tall blades of grass, letting loose a faint floral fragrance into the air.", parse);
 		}
 		Text.NL();
@@ -202,7 +201,7 @@ export namespace OutlawsScenes {
 			}, enabled : true,
 		});
 
-		Gui.Callstack.push(function() {
+		Gui.Callstack.push(() => {
 			Text.NL();
 			Text.Add("<i>“Trampled underfoot by horses, cut down in the streets and in their homes, just ordinary people caught up in something they had no hand in creating and wanted no part of. Their bodies never found, in all likelihood thrown onto bonfires or into mass graves. Those who escaped with their lives were left to wonder until they could accept that the missing were never coming home.”</i>", parse);
 			Text.NL();
@@ -309,7 +308,7 @@ export namespace OutlawsScenes {
 		if (options.length > 0) {
 			Gui.SetButtonsFromList(options, false, null);
 		} else {
-			Gui.NextPrompt(function() {
+			Gui.NextPrompt(() => {
 				Text.Clear();
 				Text.Add("At long last, Maria sighs, and you realize that you’ve been standing here talking for quite a while now. <i>“After coming to this place, [playername], I hope you’ve a deeper understanding of what we’re fighting for here. I don’t want you to throw your lot in with us and then get cold feet because you didn’t realize what you were getting yourself into, or if you disagree with us on a few points here and there. If you choose to lend us your strength, then we’ll be relying on you - and the other way around, too.</i>", parse);
 				Text.NL();
@@ -370,7 +369,7 @@ export namespace OutlawsScenes {
 		Text.Add("<i>“Well then, don’t let me hold you up. I’ll admit that I was a tad leery of you when you first came in, but you can’t be all bad if the boss-man’s taken a shine to you. He’s got a sixth sense that way.”</i> With that, Vaughn gives you a wave, touches the brim of his hat once more, then turns back to the gates.", parse);
 		Text.Flush();
 
-		Gui.NextPrompt(function() {
+		Gui.NextPrompt(() => {
 			Text.Clear();
 			Text.Add("The trip to the map room, as Vaughn termed it, is short and sweet. Even if you’d forgotten the way - something that’s not likely considering the memories associated with it - it’s not hard to find, being one of the few actual buildings in the camp instead of a tent of some sort. Plain and utilitarian, yet sturdily constructed, it sits amidst a sea of tents, awaiting your approach.", parse);
 			Text.NL();
@@ -433,7 +432,7 @@ export namespace OutlawsScenes {
 		};
 
 		Text.Clear();
-		parse.season = WorldTime().Season == Season.Winter ? "hot drinks to warm oneself up on a cold day" : "cool drinks to help one beat the noon heat";
+		parse.season = WorldTime().Season === Season.Winter ? "hot drinks to warm oneself up on a cold day" : "cool drinks to help one beat the noon heat";
 		Text.Add("Realizing it’s nearing noon and remembering the task Zenith sent you off on, you seek out the inn that Zenith mentioned. Close enough to the city but far enough from the gates that it’s not worth the watchmen’s time to go harass them, the road is lined with those seeking the crowds that the city draws, but are unable or unwilling to enter the city to get at the marketplaces proper. Makeshift stands have been set up by the wayside, peddling everything from homemade blankets and fresh fruit to [season], hoping to catch an impulse purchase from those coming to and from Rigard.", parse);
 		Text.NL();
 		Text.Add("What you’re more interested in, though, is this Spitting Lion Inn that Zenith mentioned. The buildings in sight of the road are well-spaced, mostly catering to travelers - these aren’t the slums, after all - and you scan the wayhouses and watering holes as you pass them by, hoping to find your point of contact with a minimum of fuss. Alas, that’s not to be - you’re practically in the shadow of the walls and up against them by the time it draws into view.", parse);
@@ -445,7 +444,7 @@ export namespace OutlawsScenes {
 		Text.Add("Ignoring the scent of greasy, heart-stopping food and freshly brewed drink being served, you make your way to the rear where the booths are, standing on a raised platform and offering whatever little privacy they have to afford in a place like this. Only one of them is occupied at the moment, and after a cursory pat to make sure the letter’s still on your person, you slip in and settle yourself down on the cushioned seats to wait for your contact, tying the neckerchief about your collar.", parse);
 		Text.Flush();
 
-		Gui.NextPrompt(function() {
+		Gui.NextPrompt(() => {
 			Text.Clear();
 			if (belinda.Met()) {
 				Text.Add("<i>“Oh-ho, look at who it is. This is quite the surprise.”</i>", parse);
@@ -473,7 +472,7 @@ export namespace OutlawsScenes {
 				Text.Add("Odd. There’s something about the dobie’s voice - deep and husky - that doesn’t quite mesh with her appearance, but you can’t quite put your finger on it. Yes, you reply, you’re indeed a new face.", parse);
 				Text.NL();
 				if (miranda.Nice()) {
-					if (party.Num() == 2) {
+					if (party.Num() === 2) {
 						const p1 = party.Get(1);
 						parse.comp  = p1.name;
 						parse.heshe = p1.heshe();
@@ -875,7 +874,7 @@ export namespace OutlawsScenes {
 						}, enabled : true,
 					});
 
-					Gui.Callstack.push(function() {
+					Gui.Callstack.push(() => {
 						Text.NL();
 						Text.Add("Holding your breath, you take aim, and loose the arrows at your target in turn, watching them arc as they whistle through the air. At length, Maria and Vaughn take their turns at the line, loosing their arrows much like you have, and after it’s all over the latter ambles down the range to count the number of hits everyone’s landed.", parse);
 						Text.NL();
@@ -1008,7 +1007,7 @@ export namespace OutlawsScenes {
 
 			const scenes = new EncounterTable();
 
-			scenes.AddEnc(function() {
+			scenes.AddEnc(() => {
 				Text.Add(" <i>“So, guess what Raine just served up from the cookpot?”</i> [outlaw1] says.", parse);
 				Text.NL();
 				Text.Add("The other outlaw, [outlaw2], sighs. <i>“No. Should I guess?”</i>", parse);
@@ -1020,8 +1019,8 @@ export namespace OutlawsScenes {
 				Text.Add("<i>“I know. It wasn’t good, but at least I could stomach it. Still…”</i>", parse);
 				Text.NL();
 				Text.Add("<i>“If we could still afford to eat well we’d still be living in Rigard, and you know it.”</i>", parse);
-			}, 1.0, function() { return true; });
-			scenes.AddEnc(function() {
+			}, 1.0, () => true);
+			scenes.AddEnc(() => {
 				Text.Add(" <i>“...Well, there’s the food situation,”</i> [outlaw1] says.", parse);
 				Text.NL();
 				Text.Add("<i>“Huh.”</i> The other outlaw, [outlaw2], looks thoughtful at this. <i>“I dunno, if you’re going to be worrying about this all the time, you might as well ask Zenith to be made quartermaster or something and at least get some credit for it.”</i>", parse);
@@ -1035,8 +1034,8 @@ export namespace OutlawsScenes {
 				Text.Add("<i>“Only problem is, what do we have that they’d risk associating with folk like us to get?”</i>", parse);
 				Text.NL();
 				Text.Add("<i>“I’m still working on that problem…”</i>", parse);
-			}, 1.0, function() { return true; });
-			scenes.AddEnc(function() {
+			}, 1.0, () => true);
+			scenes.AddEnc(() => {
 				Text.Add(" One of them, [outlaw1], grins. <i>“Did you see that thing that got built the other day?”</i>", parse);
 				Text.NL();
 				Text.Add("<i>“No, what do you mean?”</i> The other outlaw, [outlaw2], looks appropriately skeptical.", parse);
@@ -1044,7 +1043,7 @@ export namespace OutlawsScenes {
 				Text.Add("<i>“That thing with planters stacked like a stepladder. Idea’s that we can grow a few things on the side, and with them stacked on each other like that they won’t take up that much space. Same principle as mushroom logs, really.”</i>", parse);
 				Text.NL();
 				Text.Add("<i>“Dunno, I’ll believe it when I see it…”</i>", parse);
-			}, 1.0, function() { return true; });
+			}, 1.0, () => true);
 
 			scenes.Get();
 
@@ -1194,7 +1193,7 @@ export namespace OutlawsScenes {
 				Text.NL();
 
 				const scenes = new EncounterTable();
-				scenes.AddEnc(function() {
+				scenes.AddEnc(() => {
 					Text.Add("<i>“We went out with a cart and talked to some farmers on the plains. Bought some grain and preserves in bulk, had a chat about the policies coming out of Rigard,”</i> Zenith taps his chin and chews in silence. <i>“They haven’t reached the tipping point yet, when their anger is greater than their fear of the Crown and its arms. Certainly not enough to want to give our people work as farmhands. They’ve still got enough to lose that they think that if they keep their heads down they’ll come out of the other side unscathed. I’m not so sure about that myself.”</i>", parse);
 					Text.NL();
 					Text.Add("He thinks it’ll get that bad?", parse);
@@ -1204,8 +1203,8 @@ export namespace OutlawsScenes {
 					Text.Add("Hopefully he’ll be able to talk one or two of them into coming around to his point of view.", parse);
 					Text.NL();
 					Text.Add("Zenith nods. <i>“I don’t blame them. They’ve got roots that they’d rather not see pulled out, and their farms make them an obvious and large target. Not like us scheming vagabonds.”</i> He says it with such a completely straight face that you aren’t sure if he’s joking or not. <i>“For now, though, them being willing to sell to us under the table and look the other way is good enough for us. We can’t live off the forest completely, and they get to avoid taxes on sales. It’s a win-win situation.”</i>", parse);
-				}, 1.0, function() { return true; });
-				scenes.AddEnc(function() {
+				}, 1.0, () => true);
+				scenes.AddEnc(() => {
 					Text.Add("<i>“We took a day trip down to Orsineau,”</i> Maria tells you. <i>“There’re some interesting developments going on down in that little town which might turn out to be quite significant down the line.”</i>", parse);
 					Text.NL();
 					Text.Add("Oh? Might you ask what these would be, or is this information not for you?", parse);
@@ -1217,8 +1216,8 @@ export namespace OutlawsScenes {
 					Text.Add("<i>“If we’re successful, you’ll hear about it. If we’re not… well, you won’t hear about it,” Maria adds. <i>“Fishing for potential allies doesn’t often turn out much success, so we often do those things as an afterthought. There’s something else we still need to do in Orsineau, don’t we?”</i>", parse);
 					Text.NL();
 					Text.Add("Zenith eyes Maria sternly. <i>“We’ll need to speak about that later, yes. But not now.”</i>", parse);
-				}, 1.0, function() { return true; });
-				scenes.AddEnc(function() {
+				}, 1.0, () => true);
+				scenes.AddEnc(() => {
 					Text.Add("<i>“Down in the slums, of course,”</i> Zenith mutters. <i>“Picking up pieces from our eyes and ears on the ground, and doing what we can for the aggrieved.”</i>", parse);
 					Text.NL();
 					Text.Add("<i>“Or at least, for those who want to be helped.”</i>", parse);
@@ -1236,8 +1235,8 @@ export namespace OutlawsScenes {
 					Text.Add("<i>“See what I mean?”</i>", parse);
 					Text.NL();
 					Text.Add("<i>“That’s enough,”</i> Zenith says with a frown, cutting Maria off with a quick slice of his hand.", parse);
-				}, 1.0, function() { return true; });
-				scenes.AddEnc(function() {
+				}, 1.0, () => true);
+				scenes.AddEnc(() => {
 					Text.Add("<i>“Just some sundry work in Rigard,”</i> Zenith tells you. <i>“Checking in on our operatives in the merchants’ district and in the brothel, hearing the latest news for ourselves…”</i>", parse);
 					Text.NL();
 					Text.Add("<i>“Leading the city watch on a silly chase…”</i>", parse);
@@ -1251,7 +1250,7 @@ export namespace OutlawsScenes {
 					Text.Add("It’s that bad? Mightn’t he be exaggerating just a little?", parse);
 					Text.NL();
 					Text.Add("<i>“It is that bad.”</i>", parse);
-				}, 1.0, function() { return true; });
+				}, 1.0, () => true);
 
 				scenes.Get();
 
@@ -1281,26 +1280,26 @@ export namespace OutlawsScenes {
 			Text.NL();
 
 			const scenes = new EncounterTable();
-			scenes.AddEnc(function() {
+			scenes.AddEnc(() => {
 				Text.Add("Today, a good proportion of the camp’s involved in preparing fresh game brought in from the forest. Skinning, gutting, butchering take enough hands and are but the first steps in the chain of jobs that goes down the line; meat is set aside to be salted or smoked, bones are collected for soup and meal, and hides and pelts carefully scraped free of flesh, washed, and hung out to dry before heading for the curing tubs.", parse);
-			}, 1.0, function() { return true; });
-			scenes.AddEnc(function() {
+			}, 1.0, () => true);
+			scenes.AddEnc(() => {
 				Text.Add("You pass by a number of folk busy splitting firewood - green logs and branches, still fresh with moisture from the forest, have to be hacked up into regular, more manageable pieces and laid out to dry. It’s back-breaking labor, but someone has to do it, and with firewood it’s far better to get it chopped in advance than to do so when one actually needs the stuff.", parse);
-			}, 1.0, function() { return true; });
-			scenes.AddEnc(function() {
+			}, 1.0, () => true);
+			scenes.AddEnc(() => {
 				parse.day = WorldTime().IsDay() ? "in the shade of the willow grove" : "by the light of several large torches";
 				Text.Add("On your trip by the river, you find a number of folk hanging about on the riverbank [day]. A small pond of sorts has been dug into the riverbank with a net stretched across its mouth, and it seems that several large catfish and freshwater prawns are being raised inside, fed scraps from the camp’s meals.", parse);
 				Text.NL();
 				Text.Add("That’s not the only thing going on about these parts, of course. Several fish traps of woven wicker have been set in the river’s fast-flowing current, and as you watch, several morphs go about the business of emptying them of their catch and setting new bait. A little further downstream, a small team of outlaws tends to one of the bridges that spans the stream, ripping out rotted planks and replacing them with fresh, pitch-soaked ones under Vaughn’s watchful eye.", parse);
-			}, 1.0, function() { return true; });
-			scenes.AddEnc(function() {
+			}, 1.0, () => true);
+			scenes.AddEnc(() => {
 				Text.Add("In a corner of the camp, you find a small kitchen garden tended to by a handful of young, dirty children in patched clothes. They give you suspicious looks as you pass by, but say nothing, being too busy with weeding and watering. Watched over by a bored-looking fox kit, a flock of chickens wanders through the garden, scratching at the soft soil for bugs and worms.", parse);
 				Text.NL();
 				Text.Add("You take stock of the plants - tomatoes, ginger, garlic, carrots, to name a few. Not the sort of vegetables which would make a meal - not in the quantities they’re served in - but at least they’ll give a little flavor to whatever watery broth they’ve the misfortune of being added to.", parse);
-			}, 1.0, function() { return true; });
-			scenes.AddEnc(function() {
+			}, 1.0, () => true);
+			scenes.AddEnc(() => {
 				Text.Add("Wandering through the sea of tents, you come by a small gaggle of women busy making preserves from sun-dried fruit - small red berries of some sort, it seems. Without the luxuries of salt and sugar, they’ve resorted to vinegar for their pickling needs, and the sharp, acrid tang of such is heavy in the air as they sit on the grass in a circle, sharing the latest gossip.", parse);
-			}, 1.0, function() { return true; });
+			}, 1.0, () => true);
 
 			scenes.Get();
 

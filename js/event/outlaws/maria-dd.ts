@@ -83,7 +83,7 @@ export namespace DeadDropScenes {
 		Text.Add("Maria eyes you and folds her arms. <i>“No one misses the outhouse diggers, but believe me, everyone makes noise when shit starts to stink. Anyway, back to the point - we don’t always use the same ones over and over again. That’s just asking for someone to spot whoever’s making the drop-off or pick up, and then cause all sorts of trouble. Sticking to a regular schedule and being predictable in any shape or fashion is stupid, so we go through a rotation with each correspondence, arrange for new drop-off spots, reuse old ones which have been empty for a while now, so on and so forth.”</i>", parse);
 		Text.Flush();
 
-		Gui.NextPrompt(function() {
+		Gui.NextPrompt(() => {
 			Text.Clear();
 			Text.Add("All right, you think you get the point. When can you get started?", parse);
 			Text.NL();
@@ -132,7 +132,7 @@ export namespace DeadDropScenes {
 				// PARTY STUFF
 				maria.DDtimer = new Time(0, 0, 2, 0, 0);
 
-				if (party.Num() == 2) {
+				if (party.Num() === 2) {
 					const p1 = party.Get(1);
 					parse.comp = p1.name;
 					parse = p1.ParserPronouns(parse);
@@ -148,7 +148,7 @@ export namespace DeadDropScenes {
 				party.SwitchIn(player);
 
 				// Set up restore party at the bottom of the callstack. Call before trying to look at party again (in ending)
-				Gui.Callstack.push(function() {
+				Gui.Callstack.push(() => {
 					party.LoadActiveParty();
 				});
 				// PARTY STUFF
@@ -162,15 +162,15 @@ export namespace DeadDropScenes {
 				Text.NL();
 
 				const scenes = new EncounterTable();
-				scenes.AddEnc(function() {
+				scenes.AddEnc(() => {
 					DeadDropScenes.Docks.Entry();
-				}, 1.0, function() { return true; });
+				}, 1.0, () => true);
 				/* TODO other scenes
-				scenes.AddEnc(function() {
+				scenes.AddEnc(() => {
 					Text.Add("", parse);
 					Text.NL();
 					Text.Add("", parse);
-				}, 1.0, function() { return true; });
+				}, 1.0, () => true);
 				*/
 				scenes.Get();
 			}, enabled : true,
@@ -257,7 +257,7 @@ export namespace DeadDropScenes {
 			party.AddMember(maria, true);
 
 			// Set up restore party at the bottom of the callstack, fallthrough
-			Gui.Callstack.push(function() {
+			Gui.Callstack.push(() => {
 				party.LoadActiveParty();
 				Gui.PrintDefaultOptions();
 			});
@@ -294,7 +294,7 @@ export namespace DeadDropScenes {
 			Text.NL();
 			Text.Add("You hurry around the corner just as Maria breaks into a sprint, giving chase after a young mouse-morph who can’t be any older than nine or ten. The brat has a small wrapped package under his arm, and given Maria’s reaction, it has to be what you’re after today.", parse);
 			Text.NL();
-			parse.w = WorldTime().season == Season.Winter ? " and slush" : "";
+			parse.w = WorldTime().season === Season.Winter ? " and slush" : "";
 			Text.Add("Well, nothing for it. You take off after the brat as well, joining Maria in the chase through the muddy streets of the slums. The dirt[w] is slick underfoot, the alleyways narrow, and more than one poor passerby is bowled over by the sheer force of your chase as the two of you pursue the mouse-morph through the shacks and hovels. Dogs bark and chickens flap at the commotion, and though you duck and weave as well as you can, you can’t seem to gain on him - but at least you don’t lose him, either. The streets are long and narrow with few bends, and that helps.", parse);
 			Text.NL();
 			Text.Add("<i>“You don’t want that!”</i> Maria shouts at the fleeing street urchin. <i>“Do you even know what’s in it?”</i>", parse);
@@ -393,7 +393,7 @@ export namespace DeadDropScenes {
 				}, enabled : true,
 			});
 
-			Gui.Callstack.push(function() {
+			Gui.Callstack.push(() => {
 				Text.NL();
 				Text.Add("The two of you walk in silence side by side along the road for a while, the package still in Maria’s hands. Every now and then, she looks down at it, as if not quite sure if it’s really there; you’re just about to ask her for her two coins when she clears her throat.", parse);
 				Text.NL();
@@ -458,7 +458,7 @@ export namespace DeadDropScenes {
 			Text.Add("<i>“Come back soon, then. I’ll be out on forest patrol - if you get back before I do, just dump your haul in the map room and either Zenith or I will come by to pick it up.”</i> She gives you a final nod, then draws her cloak about herself. <i>“Stay out of trouble, okay?”</i>", parse);
 			Text.Flush();
 
-			Gui.NextPrompt(function() {
+			Gui.NextPrompt(() => {
 				Text.Clear();
 				Text.Add("The trip to Rigard is uneventful, and you take care to skirt around the edges of the slums - you don’t want to draw any more attention to yourself than what’s strictly necessary. Eventually, though, you end up at the docks from their northward side, and earth gives way to boardwalks as the smell of tar and stale water greets your nose.", parse);
 				Text.NL();
@@ -468,7 +468,7 @@ export namespace DeadDropScenes {
 				TimeStep({hour: 4});
 
 				const scenes = new EncounterTable();
-				scenes.AddEnc(function() {
+				scenes.AddEnc(() => {
 					Text.Add("Aria must be smiling on you today - things go off without a hitch. You find the barge moored off one of the piers without too much trouble, and sailors and dockhands alike soundly ignore you as you approach the barge and its offloaded cargo - one wonders if they’ve been told to expect you, or at least, someone from the outlaws.", parse);
 					Text.NL();
 					Text.Add("Boxes, barrels and crates - the last have been laid out on pallets, as opposed to being stacked up like the former two. It’s a small matter to spot the outlaws’ three-fingered paw on one of them, and hoist it off the pallet. Weighty, but not heavy.", parse);
@@ -479,17 +479,17 @@ export namespace DeadDropScenes {
 					TimeStep({hour: 4});
 
 					Gui.NextPrompt(DeadDropScenes.Docks.Ending);
-				}, 1.0, function() { return true; });
-				scenes.AddEnc(function() {
+				}, 1.0, () => true);
+				scenes.AddEnc(() => {
 					DeadDropScenes.Docks.DocksCavalcade();
-				}, 2.0, function() { return true; });
-				scenes.AddEnc(function() {
+				}, 2.0, () => true);
+				scenes.AddEnc(() => {
 					DeadDropScenes.Docks.GuardInspection();
-				}, 2.0, function() { return true; });
+				}, 2.0, () => true);
 				/* TODO
-				scenes.AddEnc(function() {
+				scenes.AddEnc(() => {
 
-				}, 2.0, function() { return true; });
+				}, 2.0, () => true);
 				*/
 
 				scenes.Get();
@@ -509,19 +509,19 @@ export namespace DeadDropScenes {
 
 			const scenes = new EncounterTable();
 
-			scenes.AddEnc(function() {
+			scenes.AddEnc(() => {
 				Text.Add("Several alchemical admixtures which you don’t look too closely at, a small case of finely-milled nuts and bolts, some glassware, and the rest of the remaining space in the crate is packed with bags upon bags of fine salt.", parse);
 				Text.NL();
 				Text.Add("Hmm. Guess the outlaws must use a lot of salt. The old forest might provide much, but something as basic and essential as salt… yeah. You can see why this was so important.", parse);
-			}, 1.0, function() { return true; });
-			scenes.AddEnc(function() {
+			}, 1.0, () => true);
+			scenes.AddEnc(() => {
 				Text.Add("A small measure of sulfur, several aromatic oils, and a number of short blades fashioned from quality steel lie in the crate. Quite the odd combination, actually, especially the latter - that is, until you remember that the outlaws don’t have the tools and facilities with which to work metal all the way out here. It really makes one think as to all the people who’re involved in just the simple making of a knife from its constituent parts…", parse);
-			}, 1.0, function() { return true; });
-			scenes.AddEnc(function() {
+			}, 1.0, () => true);
+			scenes.AddEnc(() => {
 				Text.Add("What greets you as you pry the lid open are a number of unmarked bottles, sealed and corked with the utmost care. They’re certainly nothing you’ve ever seen anyone in camp indulge in, so -", parse);
 				Text.NL();
 				Text.Add("<i>“It’s not for us, but for some folk further inland,”</i> Maria explains. <i>“We pass them along on the quiet and help them avoid the ruinous taxes that the Crown imposes on them, and get a cut of the savings made.”</i>", parse);
-			}, 1.0, function() { return true; });
+			}, 1.0, () => true);
 
 			scenes.Get();
 
@@ -531,7 +531,7 @@ export namespace DeadDropScenes {
 
 			Gui.PrintDefaultOptions();
 
-			parse.comp = party.saved.length == 2 ? party.saved[1].name : "your companions";
+			parse.comp = party.saved.length === 2 ? party.saved[1].name : "your companions";
 			parse.c = party.saved.length > 1 ? Text.Parse(" to fetch [comp]", parse) : "";
 			Text.Add("One last nod, and she’s gone. Well, nothing left for it. Turning, you head off into the camp[c] - maybe a warm bath would be welcome after all this…", parse);
 			Text.Flush();
@@ -588,7 +588,7 @@ export namespace DeadDropScenes {
 					Text.Flush();
 					// TODO
 
-					Gui.NextPrompt(function() {
+					Gui.NextPrompt(() => {
 						Text.Clear();
 						DeadDropScenes.Docks.CavalcadePrep();
 					});
@@ -642,7 +642,7 @@ export namespace DeadDropScenes {
 				TimeStep({minute: 5});
 
 				Text.NL();
-				if (that.winner == player) {
+				if (that.winner === player) {
 					DeadDropScenes.Docks.CavalcadeWin();
 				} else {
 					Text.Add("<i>“Want another try, stranger?”</i> the dealer asks, smiling invitingly.", parse);
@@ -859,14 +859,14 @@ export namespace DeadDropScenes {
 
 						const scenes = new EncounterTable();
 
-						scenes.AddEnc(function() {
+						scenes.AddEnc(() => {
 							Text.Add("<i>“Your clothes are of the wrong fit. They’re deviating too much from actual, proper human styles.”</i>", parse);
 							Text.NL();
 							Text.Add("Seriously? When was bad fashion a crime? As in, a crime crime? And let’s face it, when was the time you actually last changed your clothes? You don’t actually say it out loud, though - both you and the guard know that it’s utter bullshit.", parse);
 							Text.NL();
 							Text.Add("<i>“Good thing that this is only a minor offense, so you’ll just have to pay a fine on the spot. That is, if you have the money - else a night in the cells will do just as well, although I’m sure you’d like to avoid that.”</i>", parse);
-						}, 1.0, function() { return true; });
-						scenes.AddEnc(function() {
+						}, 1.0, () => true);
+						scenes.AddEnc(() => {
 							Text.Add("<i>“You were loitering along the waterfront.”</i>", parse);
 							Text.NL();
 							Text.Add("Wait, loitering? You were clearly heading to the Maiden’s Bane -", parse);
@@ -880,8 +880,8 @@ export namespace DeadDropScenes {
 							Text.Add("You get the idea, and shut your trap before you dig yourself ever deeper into this hole.", parse);
 							Text.NL();
 							Text.Add("<i>“Fortunately for you, I’m in a good mood today and willing to let this slide,”</i> the guard continues, those eyes peering at you from within his visor. <i>“We’ll just make it a small fine, and let things lie as they are, shall we? I’m sure you don’t want any trouble, either.”</i>", parse);
-						}, 1.0, function() { return true; });
-						scenes.AddEnc(function() {
+						}, 1.0, () => true);
+						scenes.AddEnc(() => {
 							Text.Add("<i>“You’re on the docks without the appropriate pass.”</i>", parse);
 							Text.NL();
 							Text.Add("You’re pretty sure one doesn’t need a pass to be on the docks, really -", parse);
@@ -891,7 +891,7 @@ export namespace DeadDropScenes {
 							Text.Add("No, you don’t have one - and because there’s no such thing, although you don’t say that last part out loud.", parse);
 							Text.NL();
 							Text.Add("<i>“Luckily for you, I’m not exactly in the mood to haul you all the way to the city watch for them to deal with your mangy ass. To be frank, I don’t want to touch one of you, even on a good day, so let’s call it a small fine and be done with it, shall we?”</i>", parse);
-						}, 1.0, function() { return true; });
+						}, 1.0, () => true);
 
 						scenes.Get();
 
@@ -913,15 +913,15 @@ export namespace DeadDropScenes {
 					Text.Add("From the looks of it, you won’t be able to cross the pier in time to blend in with the fleeing crowd - or at least, not quick enough that you can be sure you can make a clean getaway. Fine, if you’re stuck here, then you might as well make the most of it. The pier is filled with plenty of cargo from river barges waiting to be offloaded to the warehouses or brought on board, and you make a quick decision. ", parse);
 
 					const scenes = new EncounterTable();
-					scenes.AddEnc(function() {
+					scenes.AddEnc(() => {
 						Text.Add("Several casks of vintage wine laid out under a tarpaulin", parse);
-					}, 1.0, function() { return true; });
-					scenes.AddEnc(function() {
+					}, 1.0, () => true);
+					scenes.AddEnc(() => {
 						Text.Add("A number of grain sacks, stacked against each other on large pallets", parse);
-					}, 1.0, function() { return true; });
-					scenes.AddEnc(function() {
+					}, 1.0, () => true);
+					scenes.AddEnc(() => {
 						Text.Add("Numerous boxes of fine cotton cloth lie strewn on the boards where the stevedores dropped them in their haste, and it’s these that", parse);
-					}, 1.0, function() { return true; });
+					}, 1.0, () => true);
 					scenes.Get();
 
 					Text.Add(" catch your eye. Seeing little recourse, you dive amidst them and cover yourself up as best as you can, hoping that the guards won’t check this particular bit of cargo. It’s a good thing that you came alone, too - having someone else with you might have led to an awkward situation…", parse);
@@ -1129,15 +1129,15 @@ export namespace DeadDropScenes {
 						Text.NL();
 
 						const scenes = new EncounterTable();
-						scenes.AddEnc(function() {
+						scenes.AddEnc(() => {
 							Text.Add("<i>“Little brats, using the animals as their spies…”</i>", parse);
-						}, 1.0, function() { return true; });
-						scenes.AddEnc(function() {
+						}, 1.0, () => true);
+						scenes.AddEnc(() => {
 							Text.Add("<i>“I can’t believe this, what is the world coming to…”</i>", parse);
-						}, 1.0, function() { return true; });
-						scenes.AddEnc(function() {
+						}, 1.0, () => true);
+						scenes.AddEnc(() => {
 							Text.Add("<i>“The king has <b>got</b> to take those squirts in hand before it’s too late…”</i>", parse);
-						}, 1.0, function() { return true; });
+						}, 1.0, () => true);
 						scenes.Get();
 
 						Text.Add(" you hear one of them mutter before they round a corner and are gone. Sensing that the threat’s over, the docks’ denizens begin filtering back out into the open from their hiding places. Some of them give you curious looks, but by and large, you notice that a small circle of empty space has formed about you. Dockhands, stevedores and laborers alike make an effort to avoid getting too close to your person.", parse);

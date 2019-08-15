@@ -65,7 +65,7 @@ export namespace VaughnScenes {
 		if (vaughn.flags.Talk & VaughnFlags.Talk.Confront && !vaughn.Confronted()) {
 			VaughnScenes.ConfrontFollowup();
 			return;
-		} else if (vaughn.flags.Met == VaughnFlags.Met.LockpicksElodie) {
+		} else if (vaughn.flags.Met === VaughnFlags.Met.LockpicksElodie) {
 			VaughnTasksScenes.Lockpicks.Debrief();
 			return;
 		} else if (VaughnTasksScenes.Snitch.DebriefAvailable()) {
@@ -74,10 +74,10 @@ export namespace VaughnScenes {
 		} else if (VaughnTasksScenes.Snitch.OutOfTime()) {
 			VaughnTasksScenes.Snitch.DebriefOutOfTime();
 			return;
-		} else if (vaughn.flags.Met == VaughnFlags.Met.PoisoningSucceed) {
+		} else if (vaughn.flags.Met === VaughnFlags.Met.PoisoningSucceed) {
 			VaughnTasksScenes.Poisoning.DebriefSuccess();
 			return;
-		} else if (vaughn.flags.Met == VaughnFlags.Met.PoisoningFail) {
+		} else if (vaughn.flags.Met === VaughnFlags.Met.PoisoningFail) {
 			VaughnTasksScenes.Poisoning.DebriefFailure();
 			return;
 		} else if (VaughnTasksScenes.Poisoning.OutOfTime()) {
@@ -92,25 +92,25 @@ export namespace VaughnScenes {
 		}
 
 		const scenes = new EncounterTable();
-		scenes.AddEnc(function() {
+		scenes.AddEnc(() => {
 			Text.Add("Vaughn turns his head up to look at you, then pulls the cigarette he’s smoking out of his muzzle and stomps it out on the ground. <i>“Evening, [playername]. There something I can do for you, or did you just drop by?”</i>", parse);
-		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
 			Text.Add("As you approach the gates, you spy Vaughn quite animatedly speaking to a couple of the sentries. He dismisses them with a wave of a hand, then turns to you and tips his hat in your direction.", parse);
 			Text.NL();
 			Text.Add("<i>“Don’t mind them,”</i> he says. <i>“Just a bit of a disciplinary issue, really. Now, is there a reason you’re looking for me this evening?”</i>", parse);
-		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
 			Text.Add("You find Vaughn in the watchtower’s nest, staring out into the thick darkness of the forest beyond, his features cast in flickering torchlight. The faraway look in the fox-morph’s eyes vanishes as you emerge into the nest through the hatch in the floor, and he helps you up the last few rungs before giving you a nod.", parse);
 			Text.NL();
 			Text.Add("<i>“It’s quiet out there, [playername]. Too quiet… except for the times when you hear strange noises out from amongst the trees, and start wondering. Well, what can I do for you this evening?”</i>", parse);
-		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
 			Text.Add("As you approach, you find Vaughn fanning himself with his hat, although the fox-morph stops and clears his throat as he notices you drawing close.", parse);
 			Text.NL();
 			Text.Add("<i>“Bit of weather we’ve been having of late,”</i> he mumbles.", parse);
 			Text.NL();
-			if (WorldTime().season == Season.Winter) {
+			if (WorldTime().season === Season.Winter) {
 				Text.Add("Seriously? He <i>does</i> know it’s the middle of winter, doesn’t he?", parse);
 				Text.NL();
 				Text.Add("<i>“Yes,”</i> Vaughn replies in all seriousness.", parse);
@@ -119,7 +119,7 @@ export namespace VaughnScenes {
 			Text.Add("Well, fine, you suppose.", parse);
 			Text.NL();
 			Text.Add("<i>“Well. Did you need me for something? Most people don’t come up to me to make small talk, you know.”</i>", parse);
-		}, 1.0, function() { return true; });
+		}, 1.0, () => true);
 
 		scenes.Get();
 
@@ -141,7 +141,7 @@ export namespace VaughnScenes {
 			tooltip : "Give the fox a once-over.",
 			func() {
 				Text.Clear();
-				parse.w = WorldTime().season == Season.Winter ? ", and he’s let his winter coat grow out a bit to better ward off the cold" : "";
+				parse.w = WorldTime().season === Season.Winter ? ", and he’s let his winter coat grow out a bit to better ward off the cold" : "";
 				Text.Add("Standing at about five foot seven, Vaughn is a fox-morph of middling stature and disposition. His russet coat of fur has seen better days, what with the whole war thing and all[w]. Had life been kinder to him - and if he could be bothered to care for it, of course - Vaughn might have had a sleek and glorious coat of fur, but as it is, he’s a lost cause. Not <i>dirty</i>, of course, just coarse and rough.", parse);
 				Text.NL();
 				Text.Add("His clothes are simple and utilitarian - a short, sleeveless vest, followed by a cotton undershirt and leggings cut from coarse fabric. Since he’s on the clock at the moment, the above has been supplemented with various odds and ends of protective gear: scraps of ringmail and leather, and of course, a pair of padded, open-fingered gloves over his hands and sturdy boots on his feet, covering the natural “socks” of deep black fur that cap his limbs.", parse);
@@ -179,7 +179,7 @@ export namespace VaughnScenes {
 		/* TODO
 		options.push({ nameStr : "name",
 			tooltip : "",
-			func : function() {
+			func : () => {
 				Text.Clear();
 				Text.Add("", parse);
 				Text.NL();
@@ -257,7 +257,7 @@ export namespace VaughnScenes {
 				TimeStep({minute: 10});
 			}, enabled : true,
 		});
-		Gui.SetButtonsFromList(options, true, function() {
+		Gui.SetButtonsFromList(options, true, () => {
 			Text.Clear();
 			Text.Add("Vaughn looks askance at you, then tosses his cigarette onto the ground and stamps it out underfoot. <i>“Right. Break time’s over, then - while I’m still here, you got anything else you’d like to discuss with me?”</i>", parse);
 			Text.Flush();
@@ -334,7 +334,7 @@ export namespace VaughnScenes {
 				Text.Clear();
 
 				const scenes = new EncounterTable();
-				scenes.AddEnc(function() {
+				scenes.AddEnc(() => {
 					Text.Add("Vaughn grimaces and shakes his head. <i>“Bad.”</i>", parse);
 					Text.NL();
 					Text.Add("What’s that supposed to mean?", parse);
@@ -348,8 +348,8 @@ export namespace VaughnScenes {
 					Text.Add("Well, maybe it’s just a feeling.", parse);
 					Text.NL();
 					Text.Add("<i>“I damn well hope so.”</i> Fumbling with his matchbook, Vaughn finally gets another cigarette lit and stuffs it in his mouth without further hesitation. <i>“I damn well hope so.”</i>", parse);
-				}, 1.0, function() { return true; });
-				scenes.AddEnc(function() {
+				}, 1.0, () => true);
+				scenes.AddEnc(() => {
 					Text.Add("<i>“Usually quiet, but it never hurts to stay sharp. Every now and then, some kingdom road patrol gets the bright idea of beating around the trees a little, tromping through the undergrowth trying to find us. Make the big break, find the evil rebels hiding out in the forest, bring home honor and glory. Needless to say, they never do. Closest they ever came was finding the remains of one of our forward camps, but we’d long taken it down and moved on.</i>", parse);
 					Text.NL();
 					Text.Add("<i>“Still, every now and then they do get a little too close for comfort, and then it’s up to Maria to do a little misdirection, lead them on a chase to nowhere and get them hopelessly lost.”</i> He chuckles. <i>“That girl, she’s as full of energy as always. Would love to see if she’s got that much energy in bed… but that’s just an old man dreaming.”</i>", parse);
@@ -357,8 +357,8 @@ export namespace VaughnScenes {
 					Text.Add("Well, maybe it couldn’t hurt to try and follow his dreams…", parse);
 					Text.NL();
 					Text.Add("Vaughn snorts, which tells you without a doubt what he thinks of that idea.", parse);
-				}, 1.0, function() { return true; });
-				scenes.AddEnc(function() {
+				}, 1.0, () => true);
+				scenes.AddEnc(() => {
 					Text.Add("<i>“Slowly. Looking forward to the sun coming up and digging into Raine’s breakfast.”</i>", parse);
 					Text.NL();
 					Text.Add("Does he mean the cookhouse? But… isn’t the food served there unpredictable?", parse);
@@ -376,8 +376,8 @@ export namespace VaughnScenes {
 					Text.Add("Oh.", parse);
 					Text.NL();
 					Text.Add("<i>“Good times, good times.”</i>", parse);
-				}, 1.0, function() { return true; });
-				scenes.AddEnc(function() {
+				}, 1.0, () => true);
+				scenes.AddEnc(() => {
 					Text.Add("<i>“It’s nice. Gives you time to open up your head and let your mind walk around while your eyes stay here and do the watching.”</i>", parse);
 					Text.NL();
 					Text.Add("Huh. Well, given that he’s in charge of the upkeep of the wall and moat, it stands to reason that he’s got plenty to apply his brain to.", parse);
@@ -395,7 +395,7 @@ export namespace VaughnScenes {
 					Text.Add("Well, it wasn’t obvious that it was one. The way he said it with a complete straight face and tone of voice, he could’ve been serious.", parse);
 					Text.NL();
 					Text.Add("<i>“Hah, don’t get much of it these days, but yeah, dreaming about rolls in the hay probably isn’t the best idea while on duty. Those thoughts… well, they tend to take up a little more attention than most.”</i>", parse);
-				}, 1.0, function() { return true; });
+				}, 1.0, () => true);
 
 				scenes.Get();
 
@@ -447,7 +447,7 @@ export namespace VaughnScenes {
 			});
 		}
 
-		Gui.SetButtonsFromList(options, true, function() {
+		Gui.SetButtonsFromList(options, true, () => {
 			Text.Clear();
 			Text.Add("<i>“Right. Anything else you’d like to flap your gums on about?”</i>", parse);
 			Text.Flush();
@@ -489,7 +489,7 @@ export namespace VaughnScenes {
 
 				TimeStep({minute: 10});
 
-				Gui.NextPrompt(function() {
+				Gui.NextPrompt(() => {
 					Text.Clear();
 					Text.Add("<i>“Get this straight. I don’t like what happened. I’m not making excuses for him, but if I were in Rewyn’s shoes… as far as I know the situation, I’m not sure if there’s much I could’ve done differently.”</i>", parse);
 					Text.NL();
@@ -525,7 +525,7 @@ export namespace VaughnScenes {
 						}, enabled : true,
 					});
 
-					Gui.Callstack.push(function() {
+					Gui.Callstack.push(() => {
 						Text.NL();
 						Text.Add("<i>“Right. Now, where was I? Ah, yes. We got taken inside the walls to the barracks - that’s where the City Watch’s headquartered these days. The Royal Guard had set up some sort of booth or something, and was processing people like crazy - it didn’t matter if you were a full human or morph, clean or reeking of cheap beer like I was. If you were there, you weren’t fast enough on your feet.</i>", parse);
 						Text.NL();
@@ -583,7 +583,7 @@ export namespace VaughnScenes {
 
 					TimeStep({minute: 10});
 
-					Gui.NextPrompt(function() {
+					Gui.NextPrompt(() => {
 						Text.Clear();
 						Text.Add("<i>“I remember… Rewyn was angry. No, he was mad. Insane. There was blood on his sword; it was a little thick, but still fresh and glistening in the evening light. I remember being shocked at his appearance, that he looked so young, about my age if not even younger. The Royal Guards flanking him were frightened of him, though they made a good show of not letting it slip. There were tears on his cheeks, and murder on his face.</i>", parse);
 						Text.NL();
@@ -663,7 +663,7 @@ export namespace VaughnScenes {
 				}, enabled : true,
 			});
 		}
-		Gui.SetButtonsFromList(options, true, function() {
+		Gui.SetButtonsFromList(options, true, () => {
 			Text.Clear();
 			Text.Add("<i>“Sure. You got anything else you want to talk about?”</i>", parse);
 			Text.Flush();
@@ -740,7 +740,7 @@ export namespace VaughnScenes {
 			/* TODO
 			options.push({ nameStr : "name",
 				tooltip : "",
-				func : function() {
+				func : () => {
 					Text.Clear();
 					Text.Add("", parse);
 					Text.NL();
@@ -749,7 +749,7 @@ export namespace VaughnScenes {
 				}, enabled : true
 			});
 			*/
-			Gui.SetButtonsFromList(options, true, function() {
+			Gui.SetButtonsFromList(options, true, () => {
 				Text.Clear();
 				Text.Add("<i>“Bah, stringing a guy on like that,”</i> Vaughn grunts. <i>“Well, was there anything else you wanted, besides toying with me?”</i>", parse);
 				Text.Flush();
@@ -866,7 +866,7 @@ export namespace VaughnScenes {
 		Text.NL();
 
 		const scenes = new EncounterTable();
-		scenes.AddEnc(function() {
+		scenes.AddEnc(() => {
 			Text.Add("<i>“Spirits above, Sabrina,”</i> Vaughn groans, just on the edge of your hearing. <i>“Fucking your beautiful breasts always feels amazing - I bet even Aria herself couldn’t compare. I want to stay like this for-fucking-ever.”</i>", parse);
 			Text.NL();
 			Text.Add("Wait… is he calling out someone else’s name while fucking you?", parse);
@@ -889,11 +889,11 @@ export namespace VaughnScenes {
 				}, enabled : true,
 			});
 			Gui.SetButtonsFromList(options, false, null);
-		}, 1.0, function() { return !vaughn.HaveDoneTerryRoleplay() && !vaughn.Confronted(); }); // TODO CHECK LOGIC. MAYBE REMOVE TERRY ROLEPLAY (IF IT DEPENDS ON CONFRONT)
-		scenes.AddEnc(function() {
+		}, 1.0, () => !vaughn.HaveDoneTerryRoleplay() && !vaughn.Confronted()); // TODO CHECK LOGIC. MAYBE REMOVE TERRY ROLEPLAY (IF IT DEPENDS ON CONFRONT)
+		scenes.AddEnc(() => {
 			Text.Add("<i>“Have to… admit,”</i> Vaughn groans in between breaths. <i>“You’re pretty good, [playername]. Pretty damned good, and that’s… a lot, coming from me.”</i>", parse);
 			VaughnScenes.SexTitfuckBigCont(parse);
-		}, 1.0, function() { return true; });
+		}, 1.0, () => true);
 
 		scenes.Get();
 	}
@@ -909,18 +909,18 @@ export namespace VaughnScenes {
 		Text.NL();
 
 		const scenes = new EncounterTable();
-		scenes.AddEnc(function() {
+		scenes.AddEnc(() => {
 			Text.Add("Vaughn does his best to stifle the shout that accompanies his release, but only manages to turn it into a muffled grunt. Before you know it, he’s painting you with his seed - copious gobbets of thick, hot spunk hit your face with force, getting all over your mouth and eyes. Thick and sticky, the liquid warmth oozes down your cheeks and chin; it gushes thickly over your forehead and lips, creeping down your neck before dripping off onto your [breasts] and the ground.", parse);
 			Text.NL();
 			Text.Add("You take a moment to savor the sheer delight of being coated in seed, then wipe yourself off the the back of your hand. Not that you won’t need a proper wash-up later on, but at least you won’t be oozing all over the place.", parse);
-		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
 			Text.Add("With a long, frustrated groan of release, Vaughn sends a flood of thick, potent seed erupting from the tip of his cock, thoroughly inseminating the entirety of your chest. The nook of your cleavage fills up in seconds, and then the hot, quivering spunk overflows outward, coating the outsides of your pillowy mounds; you have to bite back a cry of delight as the slippery warmth reaches your nipples, gliding over them before sliding down to your [belly].", parse);
 			Text.NL();
 			Text.Add("Despite how much cum he’s already dumped onto you, his balls still haven’t emptied - more and more and more just keeps coming, and you can’t help but wonder in the back of your mind just how long he’s been pent up for.", parse);
 			Text.NL();
 			Text.Add("Slowly, though, the torrent slows to a stream, and the stream to a dribble. Your [breasts] and [belly] are utterly swamped in a thick coat of Vaughn’s seed - it almost seems a hopeless task to try and clean yourself up like this, but you try anyway.", parse);
-		}, 1.0, function() { return true; });
+		}, 1.0, () => true);
 
 		scenes.Get();
 
@@ -1027,14 +1027,14 @@ export namespace VaughnScenes {
 		Text.Add("And he does. Without warning, an enormous load spews forth from Vaughn’s manhood, utterly drenching ", parse);
 
 		const scenes = new EncounterTable();
-		scenes.AddEnc(function() {
+		scenes.AddEnc(() => {
 			Text.Add("your modest breasts in copious amounts of his baby batter. String after string of hot, sticky seed splatters onto your [skin] and pools in your cleavage until your [breasts] are thoroughly drenched. The warm flow quickly moves to coat the entirety of your chest with its slippery goodness, then moves on to your [belly] in a rich, gooey waterfall.", parse);
 			Text.NL();
 			Text.Add("Just how much seed do his balls hold? Far too much to be humanly possible - or maybe it’s just your mind playing tricks on you in the darkness, making you misjudge just how long blast after blast of cum founts onto your breasts. A heady, slightly salty smell surrounds you, and your heart skips a beat.", parse);
 			Text.NL();
 			Text.Add("All good things must come to an end, though. Streams turn to splatters, which in turn become dribbles. Utterly spent, Vaughn sags against you for a second or so, but quickly rights himself and withdraws his cock from your [breasts].", parse);
-		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
 			Text.Add("your face with glorious amounts of his baby batter. Fired in quick succession, shot after shot of hot fox cum blasts from his cock to land squarely on your face - on your forehead, your cheeks, your lips. You have to open your mouth to breathe, and naturally, some of his seed gets in and onto your tongue, hot and salty. It’s not exactly foul, but neither is it titillating, either; you’d much rather have it <i>on</i> you rather than <i>in</i> you.", parse);
 			Text.NL();
 			Text.Add("From your face onto your [breasts], then from your lady lumps onto your [belly], the torrent of cum that’s directed on you seems never-ending. It’s almost like having a bath, only much warmer and stickier and you have to concentrate on actually getting air into you - a task made more difficult by the haze of pleasure that swirls about you in the darkness.", parse);
@@ -1044,7 +1044,7 @@ export namespace VaughnScenes {
 			Text.Add("Gee, how pent-up <i>was</i> this guy anyway?", parse);
 			Text.NL();
 			Text.Add("Vaughn himself must be satisfied with the facial he’s given you, for he shudders and pulls his hips away from you, withdrawing his still-hard shaft with a squelch.", parse);
-		}, 1.0, function() { return true; });
+		}, 1.0, () => true);
 
 		scenes.Get();
 

@@ -41,12 +41,12 @@ export namespace MariaScenes {
             const scenes = new EncounterTable();
 
             if (WorldTime().hour >= 12) {
-                scenes.AddEnc(function() {
+                scenes.AddEnc(() => {
                     Text.Add("As it turns out, she’s currently doing a bit of fletching - tipping the arrow shafts with flint heads and making sure the feathers go on just right. It seems rather simple to you, but Maria’s brow is furrowed in an expression of furious concentration. There’s probably more to this fletching business than meets the eye… and it’s only natural that Maria pays great attention to it, since her life depends on her armaments.", parse);
                     Text.NL();
                     Text.Add("At length, though, she does set aside her materials and cocks her head at you. <i>“Come on, [playername]. If you’ve got something to say, spit it out already; there’s no need to be polite. We don’t have all day.”</i>", parse);
-                }, 1.0, function() { return true; });
-                scenes.AddEnc(function() {
+                }, 1.0, () => true);
+                scenes.AddEnc(() => {
                     Text.Add("Maria’s preparing for her next foray into the forest, sharpening a flat-bladed dagger against an oiled whetstone. The monotonous scraping does get on the nerves after a minute or so of it, but you’ve come at a good time - she’s just finishing up, and after wiping off the last of the swarf, sets her kit aside and motions for you to sit on the ground beside her.", parse);
                     Text.NL();
                     Text.Add("<i>“So, you wanted to talk?”</i>", parse);
@@ -54,8 +54,8 @@ export namespace MariaScenes {
                     Text.Add("Yeah. Does she have a bit of time?", parse);
                     Text.NL();
                     Text.Add("<i>“Shoot. I’m all ears.”</i>", parse);
-                }, 1.0, function() { return true; });
-                scenes.AddEnc(function() {
+                }, 1.0, () => true);
+                scenes.AddEnc(() => {
                     Text.Add("She’s dozing under the branches of one of the large riverside willow trees, getting a bit of shut-eye before heading out into the forest. True, she’s supposed to be one of the better outlaws… but she’s human too, and it’s not as if she’s sleeping on the job. Stopping a few feet from her, you clear your throat to announce your presence.", parse);
                     Text.NL();
                     Text.Add("One of her eyes rolls open lazily, but you aren’t fooled - you can see how fast the muscles tense under her skin. <i>“Oh. It’s you.”</i>", parse);
@@ -63,9 +63,9 @@ export namespace MariaScenes {
                     Text.Add("Yeah, it’s you. Does she have a moment?", parse);
                     Text.NL();
                     Text.Add("Maria laughs. <i>“Does it look like I’m busy right now?”</i> With a soft grunt of effort, she pulls herself into a sitting position. <i>“Go on, I’ve never been more available. You wanted something?”</i>", parse);
-                }, 1.0, function() { return true; });
+                }, 1.0, () => true);
             } else {
-                scenes.AddEnc(function() {
+                scenes.AddEnc(() => {
                     Text.Add("She’s at the river, or more precisely, down by where it meets the wall of palings and eventually flows out of camp. There’s a huge tub by Maria’s side, and on closer inspection - yes, there’s the washboard, the soap, and a huge pile of clothes. Most of them are Maria’s, but you do spot an article of Zenith’s here and there; they’re clearly far too large and of the wrong fitting for Maria herself.", parse);
                     Text.NL();
                     Text.Add("As you watch, Maria pounds away at the laundry, suds rising and covering her hands even as she starts sweating bullets from her brow. Slowly, she half-turns to you, still scrubbing away for dear life. <i>“Nothing surprising about this,”</i> she snaps. <i>“It’s a great workout for the forearms.”</i>", parse);
@@ -73,15 +73,15 @@ export namespace MariaScenes {
                     Text.Add("Hey, you were just standing here without saying a single word.", parse);
                     Text.NL();
                     Text.Add("<i>“Except that I could feel your eyes burning into the small of my neck. If you think I’m an idiot-”</i> Maria slaps a shirt down on the board, rinses her hands in the river and sighs. <i>“Look, I didn’t come here to argue with you, and I don’t think you came down here to ogle at me. What did you want?”</i>", parse);
-                }, 1.0, function() { return true; });
-                scenes.AddEnc(function() {
+                }, 1.0, () => true);
+                scenes.AddEnc(() => {
                     Text.Add("She’s got a handful of pelts stretched out on racks in front of her, the results of last night’s hunt. Some of them do look eerily similar to a number of the camp’s inhabitants… but then again, it’s just looks, right?", parse);
                     Text.NL();
                     Text.Add("As you look on, Maria carefully works away with a flensing knife, separating the last scraps of flesh from the hides and flicking them away into a reeking wooden bucket. It’s a grim job - there’re bloodstains up all the way to her wrists - but it’s probably better than the curing that awaits them…", parse);
                     Text.NL();
                     Text.Add("At length, Maria stands, rinses her hands in a small tub of water and turns to you, flicking the water off her fingers and onto the grassy ground. <i>“Thanks for waiting; guess I can take a break now. You were looking for me for something?”</i>", parse);
-                }, 1.0, function() { return true; });
-                scenes.AddEnc(function() {
+                }, 1.0, () => true);
+                scenes.AddEnc(() => {
                     Text.Add("Eventually, you do find Maria. The ebony beauty is slumped against one of the riverside willows, an unmarked bottle of clear liquid in her hands. You can smell the alcohol even from where you stand, and every now and then she raises the bottle to her lips and takes a swig.", parse);
                     Text.NL();
                     Text.Add("<i>“Hey, [playername],”</i> she says, waving you over. With how strong the stuff she’s imbibing must be, it’s a wonder she’s still coherent. <i>“Come over and have a chat. You’re not getting any of my ‘shine, though. It’s all mine. I earned it.”</i>", parse);
@@ -94,7 +94,7 @@ export namespace MariaScenes {
                     Text.NL();
                     parse.mommydaddy = player.mfFem("daddy", "mommy");
                     Text.Add("Maria snorts. <i>“Hey, I didn’t ask you to come and sit down with me so you could play [mommydaddy], all right? You had something on your mind before you started nagging?”</i>", parse);
-                }, 1.0, function() { return true; });
+                }, 1.0, () => true);
             }
             scenes.Get();
 
@@ -127,19 +127,19 @@ export namespace MariaScenes {
 
                 const scenes = new EncounterTable();
 
-                scenes.AddEnc(function() {
+                scenes.AddEnc(() => {
                     Text.Add("<i>“Guess a little lip-flapping couldn’t hurt. At the very least, it’ll help take my mind off things that’ve been happening of late. I know that Zenith has a lid on it, but still, can’t help but want to help…”</i> Maria shakes her head, and then her gaze snaps back to you. <i>“Sorry about that. Yeah, you had something to say?”</i>", parse);
-                }, 1.0, function() { return true; });
-                scenes.AddEnc(function() {
+                }, 1.0, () => true);
+                scenes.AddEnc(() => {
                     Text.Add("<i>“You want to talk?”</i> Maria squints at you. <i>“I guess… although I’ve never been a very good gossip. Having Zenith around all the time when I was growing up did that to me, I guess.”</i>", parse);
                     Text.NL();
                     Text.Add("Gossip? Oh no, perish the thought. You just wanted a bit of pleasant conversation, that’s all.", parse);
                     Text.NL();
                     Text.Add("Maria shrugs. <i>“Sure, if you wanna put it that way. What’s on your mind?”</i>", parse);
-                }, 1.0, function() { return true; });
-                scenes.AddEnc(function() {
+                }, 1.0, () => true);
+                scenes.AddEnc(() => {
                     Text.Add("Maria perks up at the suggestion. <i>“Sure, why not? It’s always great to stop and have a chat with you. Time flies while you’re having fun, as they say, and I’ve got a bit of it left over. You got something in mind?”</i>", parse);
-                }, 1.0, function() { return maria.Relation() >= 50; });
+                }, 1.0, () => maria.Relation() >= 50);
 
                 scenes.Get();
 
@@ -148,7 +148,7 @@ export namespace MariaScenes {
                 MariaScenes.TalkPrompt();
             },
         });
-        if (cveta.flags.Met == CvetaFlags.Met.MariaTalk) {
+        if (cveta.flags.Met === CvetaFlags.Met.MariaTalk) {
             options.push({ nameStr : "Princess",
                 func() {
                     CvetaScenes.MariaTalkRepeat();
@@ -188,7 +188,7 @@ export namespace MariaScenes {
         let parse: any = {
 
         };
-        parse.comp = party.Num() == 2 ? party.Get(1).name : "your companions";
+        parse.comp = party.Num() === 2 ? party.Get(1).name : "your companions";
 
         const unlocked = Jobs.Ranger.Unlocked();
         let student = null;
@@ -335,7 +335,7 @@ export namespace MariaScenes {
                 Text.Add("You break out into a bit of small talk, chatting about this and that without any real direction to the conversation.", parse);
                 Text.NL();
                 const scenes = new EncounterTable();
-                scenes.AddEnc(function() {
+                scenes.AddEnc(() => {
                     Text.Add("Eventually, though, the topic turns to the time the two of you first met.", parse);
                     Text.NL();
                     Text.Add("<i>“To be honest,”</i> Maria begins, <i>“it’s a good thing that I was the one to catch you napping like that. Some of the other locals wouldn’t have bothered with the trouble. That mothgirl, for example - she’d just have robbed you blind while you were sleeping and left it at that.”</i>", parse);
@@ -361,8 +361,8 @@ export namespace MariaScenes {
                     }
                     Text.NL();
                     Text.Add("<i>“That’s all behind us now, anyway.”</i> Maria sighs, and shrugs. <i>“Water under the bridge. Come on, let’s not dwell on this stuff and talk about something cheerier.”</i>", parse);
-                }, 1.0, function() { return true; });
-                scenes.AddEnc(function() {
+                }, 1.0, () => true);
+                scenes.AddEnc(() => {
                     Text.Add("Come to think of it, is there anything she likes to eat in particular?", parse);
                     Text.NL();
                     Text.Add("Maria huffs. <i>“What sort of question is that?”</i>", parse);
@@ -386,7 +386,7 @@ export namespace MariaScenes {
                         Text.NL();
                         Text.Add("Maria reaches out with a finger and jabs you squarely on the chest. <i>“For me to know and for you to find out, buster. Maybe you should try getting in good with me, if you’d really like to know.”</i> ", parse);
                     }
-                }, 1.0, function() { return true; });
+                }, 1.0, () => true);
                 scenes.Get();
                 Text.Flush();
 
@@ -445,7 +445,7 @@ export namespace MariaScenes {
 
                 const scenes = new EncounterTable();
 
-                scenes.AddEnc(function() {
+                scenes.AddEnc(() => {
                     Text.Add("<i>“So-so. We just got another handful of people filtering in from the plains. Poor bastards didn’t see how they were going to pay the land taxes next year.”</i>", parse);
                     Text.NL();
                     Text.Add("Why, were the rates that bad?", parse);
@@ -468,8 +468,8 @@ export namespace MariaScenes {
                     Text.Add("<i>“Of course, it wouldn’t be peachy keen even if Rewyn managed to keep the roads perfectly safe,”</i> Maria continues. <i>“There’s always how much the harvest can be sold for depending on the season, the extra expense involved in getting a huge load there and back, and the problem of money… at the end of the day, there’re a lot more people off their land now, and some of them make their way here.</i>", parse);
                     Text.NL();
                     Text.Add("<i>“Which, naturally, translates to more mouths to feed. If the forest soil weren’t so naturally poor, we’d try expanding one of the clearings and growing something ourselves, but I know that isn’t going to work out. Something’s got to give eventually, though. It always does.”</i>", parse);
-                }, 1.0, function() { return true; });
-                scenes.AddEnc(function() {
+                }, 1.0, () => true);
+                scenes.AddEnc(() => {
                     Text.Add("<i>“Nothing very much.”</i>", parse);
                     Text.NL();
                     Text.Add("Nothing?", parse);
@@ -481,8 +481,8 @@ export namespace MariaScenes {
                     Text.Add("<i>“Zenith has been here for more than a decade, [playername]. He plays the long game because there is none other. Rigard was not built in a day, and it won’t be taken in a day, either.</i>", parse);
                     Text.NL();
                     Text.Add("<i>“So, for now, we bide our time and try and create opportunities to make inroads.”</i>", parse);
-                }, 1.0, function() { return true; });
-                scenes.AddEnc(function() {
+                }, 1.0, () => true);
+                scenes.AddEnc(() => {
                     parse.fem = player.Femininity() >= 0.5 ? " I’m sure you understand, don’t you?" : "";
                     Text.Add("<i>“I’m going out to look for a bit of game in a few hours. Personal thing on my own time - a lady needs some me time.[fem]”</i>", parse);
                     Text.NL();
@@ -493,8 +493,8 @@ export namespace MariaScenes {
                     Text.Add("That sounds bad.", parse);
                     Text.NL();
                     Text.Add("<i>“It is. Raine does what she can to stretch out our rations, but days of nothing but watery broth and gruel drain morale faster than water in the desert. There’s no easy solution - we’ve tried a few things, but people are understandably cautious of having dealings with us.”</i>", parse);
-                }, 1.0, function() { return true; });
-                scenes.AddEnc(function() {
+                }, 1.0, () => true);
+                scenes.AddEnc(() => {
                     Text.Add("<i>“Looking pretty good. Next batch of moonshine’s coming up quite nicely. It’s one of the small luxuries we have here, booze that isn’t taxed by the Crown - and it tastes a lot better, if I dare say so.”</i>", parse);
                     Text.NL();
                     Text.Add("Out of curiosity, what’s it made out of?", parse);
@@ -527,8 +527,8 @@ export namespace MariaScenes {
                         Text.NL();
                         Text.Add("<i>“I’m just glad that if anything in this camp is working, it’s the stills. Let’s just leave it at that, okay?”</i>", parse);
                     }
-                }, 1.0, function() { return true; });
-                scenes.AddEnc(function() {
+                }, 1.0, () => true);
+                scenes.AddEnc(() => {
                     Text.Add("<i>“We just had to turn away a small group of people the other day.”</i>", parse);
                     Text.NL();
                     Text.Add("Interesting. Was there any particular reason?", parse);
@@ -542,7 +542,7 @@ export namespace MariaScenes {
                     Text.Add("Grim.", parse);
                     Text.NL();
                     Text.Add("<i>“Grim, but true. We can’t have dead wood lounging around in camp. If they know what’s good for them, they’ll go back where they came from and try and make something of themselves <b>before</b> showing up again.”</i> ", parse);
-                }, 1.0, function() { return true; });
+                }, 1.0, () => true);
 
                 scenes.Get();
 
@@ -602,7 +602,7 @@ export namespace MariaScenes {
             });
         }
 
-        Gui.SetButtonsFromList(options, true, function() {
+        Gui.SetButtonsFromList(options, true, () => {
             Text.Clear();
             Text.Add("<i>“Anything else on your mind?”</i>", parse);
             Text.Flush();
@@ -629,7 +629,7 @@ export namespace MariaScenes {
             parse.HeShe  = member.HeShe();
         }
 
-        if (maria.flags.Met == 0) {
+        if (maria.flags.Met === 0) {
             maria.flags.Met |= MariaFlags.Met.ForestMeeting;
             Text.Add("Off in the distance, the massive tree at the center of Eden overlooks the entire verdant area, casting long shadows and slightly eclipsing the sun. This far into the woodland, the trees grow close together, and even the smallest is far too tall for you to climb. All around, the sounds of the forest pound against your ears. Up in the high branches, birds twitter at each other. Wind whistles through the limbs, brushing them against one another in a comforting melody. Dozens of unseen insects send mating songs through the air.", parse);
             Text.NL();
@@ -729,7 +729,7 @@ export namespace MariaScenes {
                 maria.pots = 2;
 
                 enc.canRun = false;
-                enc.onLoss = function() {
+                enc.onLoss = () => {
                     SetGameState(GameState.Event, Gui);
                     party.members = enc.oldParty;
 
@@ -760,13 +760,13 @@ export namespace MariaScenes {
                     Text.Flush();
                     Gui.NextPrompt(MariaScenes.ForestFollow);
                 };
-                enc.onVictory = function() {
+                enc.onVictory = () => {
                     SetGameState(GameState.Event, Gui);
                     party.members = enc.oldParty;
                     MariaScenes.ForestConfrontWin();
                 };
 
-                Gui.NextPrompt(function() {
+                Gui.NextPrompt(() => {
                     enc.Start();
                 });
             }, enabled : true,
@@ -878,7 +878,7 @@ export namespace MariaScenes {
                     maria.relation.IncreaseStat(100, 5);
 
                     Text.Flush();
-                    Gui.NextPrompt(function() {
+                    Gui.NextPrompt(() => {
                         Text.Clear();
                         MariaScenes.ForestAftermath();
                     });
@@ -1004,7 +1004,7 @@ export namespace MariaScenes {
         Text.Add("She turns on you abruptly, her tits set to jiggling at the motion. She cautions you to wait here while she informs the guards of your arrival. Sitting down behind a rooty embankment, you lean against the dirt and consider your situation.", parse);
         Text.Flush();
 
-        Gui.NextPrompt(function() {
+        Gui.NextPrompt(() => {
             Text.Clear();
             Text.Add("Waiting around, you wonder exactly how you got to this part of the forest. Thinking back on the trek, you realize that there is no way for you to find your way out of the forest without Maria's help.", parse);
             if (player.Weapon()) {

@@ -1,92 +1,92 @@
-import { GameCache, GAME, TimeStep } from '../../GAME';
-import { GetDEBUG } from '../../../app';
-import { Text } from '../../text';
-import { Gui } from '../../gui';
-import { TerryFlags } from '../terry-flags';
-import { GolemFlags } from './golem-flags';
-import { Party } from '../../party';
-import { GlobalScenes } from '../global';
-import { Alchemy } from '../../alchemy';
-import { TFItem } from '../../tf';
-import { AlchemySpecial } from '../../items/alchemyspecial';
-import { Jeanne } from './jeanne';
-import { RosalinFlags } from '../nomads/rosalin-flags';
+import { GetDEBUG } from "../../../app";
+import { Alchemy } from "../../alchemy";
+import { GAME, GameCache, TimeStep } from "../../GAME";
+import { Gui } from "../../gui";
+import { AlchemySpecial } from "../../items/alchemyspecial";
+import { Party } from "../../party";
+import { Text } from "../../text";
+import { TFItem } from "../../tf";
+import { GlobalScenes } from "../global";
+import { RosalinFlags } from "../nomads/rosalin-flags";
+import { TerryFlags } from "../terry-flags";
+import { GolemFlags } from "./golem-flags";
+import { Jeanne } from "./jeanne";
 
 export namespace JeanneScenes {
-    let TerryScenes : any;
-    export function INIT(terryScenes : any) {
+    let TerryScenes: any;
+    export function INIT(terryScenes: any) {
         TerryScenes = terryScenes;
     }
-    
+
     let talkedGolem  = false;
     let talkedJeanne = false;
     let talkedGem    = false;
-    
+
     // Interaction
     export function Interact() {
-        let jeanne = GAME().jeanne;
+        const jeanne = GAME().jeanne;
 
-        var parse : any = {};
+        const parse: any = {};
         Text.Clear();
         Text.Add("Jeanne greets you as you approach her, politely inquiring what’s on your mind. The gorgeous elven magician flicks her long, pink hair over her shoulder, smiling seductively.", parse);
         Text.NL();
         Text.Add("She is of average height, but quite curvaceous, her wide hips and very generous breasts further accentuating her beautiful female form. The elf is dressed in a tight-fitting silken robe which rustles slightly every time she moves.", parse);
-        
-        if(GetDEBUG()) {
+
+        if (GetDEBUG()) {
             Text.NL();
-            Text.Add("DEBUG: relation: " + jeanne.relation.Get(), null, 'bold');
+            Text.Add("DEBUG: relation: " + jeanne.relation.Get(), null, "bold");
             Text.NL();
-            Text.Add("DEBUG: subDom: " + jeanne.subDom.Get(), null, 'bold');
+            Text.Add("DEBUG: subDom: " + jeanne.subDom.Get(), null, "bold");
             Text.NL();
-            Text.Add("DEBUG: slut: " + jeanne.slut.Get(), null, 'bold');
+            Text.Add("DEBUG: slut: " + jeanne.slut.Get(), null, "bold");
             Text.NL();
         }
-        
+
         Text.Flush();
         JeanneScenes.InteractPrompt();
     }
 
     export function InteractPrompt() {
-        let player = GAME().player;
-        let jeanne = GAME().jeanne;
-        let terry = GAME().terry;
-        let party : Party = GAME().party;
+        const player = GAME().player;
+        const jeanne = GAME().jeanne;
+        const terry = GAME().terry;
+        const party: Party = GAME().party;
 
-        var parse : any = {};
-        //[Talk][Golem][Sex]
-        var options = new Array();
+        const parse: any = {};
+        // [Talk][Golem][Sex]
+        const options = new Array();
         options.push({ nameStr : "Talk",
             func : JeanneScenes.Talk, enabled : true,
-            tooltip : "Seek the magician's advice."
+            tooltip : "Seek the magician's advice.",
         });
         options.push({ nameStr : "Alchemy",
-            func : function() {
+            func() {
                 Text.Clear();
                 Text.Add("<i>“Certainly,”</i> Jeanne replies. <i>“Understand that I cannot sell you much, but if you bring me the right ingredients, perhaps I can help you.”</i> She frowns slightly. <i>“Just know there are certain recipes I will not make for you.”</i>", parse);
-                if(player.alchemyLevel > 0) {
+                if (player.alchemyLevel > 0) {
                     Text.NL();
                     Text.Add("You’ll be sure to take notes so you can replicate the procedure later.", parse);
                 }
                 Text.NL();
-                
+
                 Alchemy.Prompt(jeanne, party.inventory, JeanneScenes.AlchemyBack, JeanneScenes.AlchemyCallback, true);
             }, enabled : true,
-            tooltip : "Ask to make use of Jeanne’s services as an alchemist."
+            tooltip : "Ask to make use of Jeanne’s services as an alchemist.",
         });
-        if(party.InParty(terry) && (terry.flags["TF"] & TerryFlags.TF.Jeanne)) {
+        if (party.InParty(terry) && (terry.flags.TF & TerryFlags.TF.Jeanne)) {
             options.push({ nameStr : "Terry TF",
-                func : function() {
+                func() {
                     Text.Clear();
                     Text.Add("<i>“Sure, what would you like me to prepare?”</i>", parse);
                     Text.Flush();
                     TerryScenes.JeanneTFPrompt();
                 }, enabled : true,
-                tooltip : "Ask Jeanne to help you make some transformatives for Terry."
+                tooltip : "Ask Jeanne to help you make some transformatives for Terry.",
             });
         }
         /*
         options.push({ nameStr : "Nah",
-            func : function() {
+            func : () => {
                 Text.Clear();
                 Text.Add("", parse);
                 Text.NL();
@@ -98,71 +98,68 @@ export namespace JeanneScenes {
         Gui.SetButtonsFromList(options, true);
     }
 
-    export function AlchemyCallback(item : TFItem) {
-        let player = GAME().player;
-        let jeanne = GAME().jeanne;
-        let party : Party = GAME().party;
+    export function AlchemyCallback(item: TFItem) {
+        const player = GAME().player;
+        const jeanne = GAME().jeanne;
+        const party: Party = GAME().party;
 
-        var parse : any = {};
-        
+        const parse: any = {};
+
         Text.Clear();
-        if(item == AlchemySpecial.AnusolPlus) {
+        if (item === AlchemySpecial.AnusolPlus) {
             Text.Add("<i>“Just wait for a bit and I will have your potion ready,”</i> she says, walking off towards her alchemical supplies.", parse);
             Text.NL();
             Text.Add("True to her word, it only takes a few moments for her to finish preparing the mixture. It’s a clear blue liquid, thick and slimy, but with a fragrant scent. The bottle she presents you with is clearly labeled ‘Anusol+’.", parse);
             Text.NL();
             Text.Add("You thank Jeanne and pocket the bottle.", parse);
-        }
-        else {
+        } else {
             Text.Add("<i>“Here you go,”</i> Jeanne tells you as she hands over the finished potion. <i>“Just be wary of the effects it may have on you. Anything else?”</i>", parse);
         }
         Text.NL();
-        
+
         player.AddAlchemy(item);
-        
+
         party.Inv().AddItem(item);
-        
+
         Alchemy.Prompt(jeanne, party.inventory, JeanneScenes.AlchemyBack, JeanneScenes.AlchemyCallback, true);
     }
 
     export function AlchemyBack() {
-        var parse : any = {};
-        
+        const parse: any = {};
+
         Text.Clear();
         Text.Add("<i>“Do come back if there is anything else I can help you with.”</i>", parse);
         Text.Flush();
-        
+
         JeanneScenes.InteractPrompt();
     }
 
     export function Talk() {
-        let player = GAME().player;
-        let terry = GAME().terry;
-        let rosalin = GAME().rosalin;
-        let jeanne = GAME().jeanne;
-        let party : Party = GAME().party;
+        const player = GAME().player;
+        const terry = GAME().terry;
+        const rosalin = GAME().rosalin;
+        const jeanne = GAME().jeanne;
+        const party: Party = GAME().party;
 
-        var parse : any = {
-            playername : player.name
+        const parse: any = {
+            playername : player.name,
         };
-        
-        //[Gem][Magic][Alchemy][Elves][Jeanne][Golem][Rosalin][Terry]
-        var options = new Array();
+
+        // [Gem][Magic][Alchemy][Elves][Jeanne][Golem][Rosalin][Terry]
+        const options = new Array();
         options.push({ nameStr : "Gem",
-            func : function() {
+            func() {
                 Text.Clear();
                 Text.Add("<i>“Alliser’s gem is a prize fit for kings,”</i> Jeanne explains. <i>“Its true powers are only revealed through its magic, though, and now that you have bonded yourself to it, only you can access this.”</i>", parse);
                 Text.NL();
                 Text.Add("<i>“Never give the gem to someone else, not even someone you trust, as it could potentially be used to harm you. The stronger the gem becomes, the stronger this connection will be.”</i>", parse);
                 Text.NL();
-                
-                if(GlobalScenes.PortalsOpen()) {
+
+                if (GlobalScenes.PortalsOpen()) {
                     Text.Add("<i>“After what happened, I can understand if you do not want anything to do with these portals any longer, but it is vital that we are able to find out what caused the portals to disappear in the first place. Lately, I have felt it growing stronger...”</i>", parse);
-                }
-                else if(player.summons.length > 0) {
+                } else if (player.summons.length > 0) {
                     Text.Add("<i>“With the help of the spirit of the forest, the stone should have enough power to allow us to open a portal. Meet me near the old mound at the crossroads, and we will test my theory.”</i>", parse);
-                }
-                else {
+                } else {
                     Text.Add("<i>“Once the stone has enough power, it may be able to reopen the portals again, and that will allow us to investigate what is threatening Eden. I have been unable to find the source of this threat up until now, it is very elusive. I believe it to be external to our world.”</i> The magician looks worried.", parse);
                     Text.NL();
                     Text.Add("<i>“Please hurry in finding a source of power, we need to commune with one of the more powerful, helpful spirits - and soon. Perhaps Lady Aria, if she can be reached. From what you have told me, she knows of the danger that looms over us.”</i>", parse);
@@ -170,16 +167,16 @@ export namespace JeanneScenes {
                     Text.Add("<i>“Travel deep inside the forest, under the branches of the Great Tree, and find the dryads' glade. There you will find an old and wise being known as the Mother Tree, a dear friend of mine. She will know of a way to help you, just tell her that I sent you.”</i>", parse);
                 }
                 Text.Flush();
-                
+
                 JeanneScenes.Talk();
             }, enabled : true,
-            tooltip : "Discuss the gemstone with Jeanne."
+            tooltip : "Discuss the gemstone with Jeanne.",
         });
         options.push({ nameStr : "Magic",
-            func : function() {
+            func() {
                 Text.Clear();
-                
-                if(!GlobalScenes.MagicStage1()) {
+
+                if (!GlobalScenes.MagicStage1()) {
                     Text.Add("<i>“It is a lengthy process, but yes, I can help you. Perhaps… the gem you carry will make this easier.”</i> Jeanne instructs you to take out the stone, and hold it in both hands. She places her own slender hands on top of yours, the beautiful elf’s warmth making your heart race a bit faster.", parse);
                     Text.NL();
                     Text.Add("<i>“The fundamentals of magic is focus, knowing how to channel the energies in and around you and mold them to your will,”</i> the magician explains. <i>“Learn to feel the ebb and flow, become the fulcrum upon which the energy spins...”</i>", parse);
@@ -205,26 +202,24 @@ export namespace JeanneScenes {
                     Text.Add("<b>Unlocked the Healer job.</b>", parse);
                     Text.NL();
                     Text.Add("You thank her for her time, stretching awkwardly. Time ended up just flying by.", parse);
-                    
+
                     TimeStep({hour: 8});
-                    
-                    GameCache().flags["LearnedMagic"] = 2;
-                }
-                else if(GameCache().flags["LearnedMagic"] == 1) {
+
+                    GameCache().flags.LearnedMagic = 2;
+                } else if (GameCache().flags.LearnedMagic === 1) {
                     Text.Add("<i>“Hmm, I sense that you have already had a teacher - of sorts,”</i> Jeanne muses, studying you. <i>“That will make moving beyond the first steps easier for you.”</i> The elven magician quickly reviews what Magnus has taught you, remarking on your affinity with the gemstone, and how it helped you realize how to tap your inner energy.", parse);
                     Text.NL();
                     Text.Add("<i>“Your teaching has been rough, but I can sense your potential.”</i> She ponders your original question, tapping her chin. <i>“Can you show me what you can do?”</i>", parse);
                     Text.NL();
-                    if(!Jeanne.ReadyForMagicTeaching()) {
+                    if (!Jeanne.ReadyForMagicTeaching()) {
                         Text.Add("You try to recall Magnus’ teachings, and focus your mind, summoning a ball of energy between your hands. Almost immediately, Jeanne is shaking her head.", parse);
                         Text.NL();
                         Text.Add("<i>“The idea is correct, but your form is sloppy. Let me give you a few pointers...”</i> You spend the next few hours listening to the magician - a much better teacher than Magnus ever was - explain and show the finer points of using magic to you.", parse);
                         Text.NL();
                         Text.Add("At last, she seems happy with your results. <i>“It is a good start, but you will need to practice more before I can teach you anything more advanced.”</i> You thank her for her time, your head spinning slightly from all the new information.", parse);
-                        
-                        TimeStep({hour:3});
-                    }
-                    else {
+
+                        TimeStep({hour: 3});
+                    } else {
                         Text.Add("With practiced ease, you focus your mind, summoning a ball of energy between your hands.", parse);
                         Text.NL();
                         Text.Add("<i>“Very good! Your form is slightly off, but you have developed a style of your own, I can tell. I will give you a few pointers, but you are almost ready to take the next step.”</i>", parse);
@@ -232,19 +227,17 @@ export namespace JeanneScenes {
                         Text.Add("Jeanne spends the next hour or so pointing out how you can improve on your magic skills and make them more efficient. The sheer amount of information that Magnus glossed over or muddled up is staggering, but your extensive experience of channeling magic helps you significantly.", parse);
                         Text.NL();
                         Text.Add("<i>“The next step will take significantly longer, so come back once you are ready,”</i> Jeanne instructs you, commending you for your quick progress.", parse);
-                        
-                        TimeStep({hour:1});
+
+                        TimeStep({hour: 1});
                     }
-                    
-                    GameCache().flags["LearnedMagic"] = 2;
-                }
-                else if(GameCache().flags["LearnedMagic"] == 2) {
-                    if(!Jeanne.ReadyForMagicTeaching()) {
+
+                    GameCache().flags.LearnedMagic = 2;
+                } else if (GameCache().flags.LearnedMagic === 2) {
+                    if (!Jeanne.ReadyForMagicTeaching()) {
                         Text.Add("<i>“Yes, I can teach you more about the arts of magic, but not until you have engrained the foundations into your mind and spirit,”</i> Jeanne explains. <i>“Only experience can take you further on this road.”</i>", parse);
                         Text.NL();
                         Text.Add("<b>Return once you’ve attained at least nine levels of mastery combined in the Mage, Mystic and Healer jobs.</b>", parse);
-                    }
-                    else {
+                    } else {
                         Text.Add("<i>“I think you have progressed far enough to partake of my lessons,”</i> the magician announces. <i>“We shall begin at once, as time is short.”</i> She instructs you to sit down, facing her.", parse);
                         Text.NL();
                         Text.Add("<i>“Now that you have learned the fundamentals of magic, I can teach you more advanced techniques. First, I have prepared these scrolls for you, in case you would like to proceed down the path of pure magic. The spells are more complex than you are used to, but the general idea is the same.”</i> She hands you a set of scrolls, detailing several new spells for you to learn.", parse);
@@ -266,31 +259,31 @@ export namespace JeanneScenes {
                         Text.Add("<i>“I could spend more time to explain how to each of the disciplines work, and additional spells you could apply, but you would be better served by applying what I have shown you.”</i> Jeanne looks troubled. <i>“Had things been different, you could have taken your time to study this for a few years, but time is not a luxury we possess.”</i>", parse);
                         Text.NL();
                         Text.Add("With that, the magician leaves you to your scrolls.", parse);
-                        
-                        GameCache().flags["LearnedMagic"] = 3;
+
+                        GameCache().flags.LearnedMagic = 3;
                     }
                 }
                 Text.Flush();
-                
+
                 JeanneScenes.Talk();
-            }, enabled : GameCache().flags["LearnedMagic"] < 3,
-            tooltip : "Jeanne is a magic teacher, isn’t she? Could she teach you about magic?"
+            }, enabled : GameCache().flags.LearnedMagic < 3,
+            tooltip : "Jeanne is a magic teacher, isn’t she? Could she teach you about magic?",
         });
         /*
         options.push({ nameStr : "Alchemy",
-            func : function() {
+            func : () => {
                 Text.Clear();
                 Text.Add("", parse);
                 Text.NL();
                 Text.Flush();
-                
+
                 JeanneScenes.Talk();
             }, enabled : true,
             tooltip : ""
         });
         */
         options.push({ nameStr : "Elves",
-            func : function() {
+            func() {
                 Text.Clear();
                 Text.Add("<i>“I no longer keep in touch with my kin. Any I considered family are long dead, centuries upon centuries ago.”</i> There is a twinge of sadness in her composure, but it quickly fades. <i>“Do I miss some of them? Of course I do… but I have no regrets about my decisions.”</i>", parse);
                 Text.NL();
@@ -302,19 +295,18 @@ export namespace JeanneScenes {
                 Text.NL();
                 Text.Add("It doesn’t look like she wants to talk more about it, so you drop the subject.", parse);
                 Text.Flush();
-                
+
                 JeanneScenes.Talk();
             }, enabled : true,
-            tooltip : "Ask Jeanne if she has any dealings with the elves anymore. How was it growing up among them?"
+            tooltip : "Ask Jeanne if she has any dealings with the elves anymore. How was it growing up among them?",
         });
         options.push({ nameStr : "Jeanne",
-            func : function() {
+            func() {
                 Text.Clear();
-                if(jeanne.flags["bg"] == 0) {
+                if (jeanne.flags.bg === 0) {
                     Text.Add("<i>“There is hardly time to tell all of it. I have lived a long life, both here on Eden and in other worlds.”</i> Jeanne ponders your question. <i>“Where to start…?”</i>", parse);
-                    jeanne.flags["bg"] = 1;
-                }
-                else {
+                    jeanne.flags.bg = 1;
+                } else {
                     Text.Add("<i>“My past is not that important, there are greater troubles afoot,”</i> Jeanne reprimands you. <i>“But if you ask, I shall tell you the tale again.”</i>", parse);
                 }
                 Text.NL();
@@ -332,35 +324,34 @@ export namespace JeanneScenes {
                 Text.NL();
                 Text.Add("<i>“There is another reason that I remain here,”</i> she continues, looking troubled. <i>“There is some strange magic brewing beneath this town, and I have been unable to discern what it is. Something powerful, something buried deep… It is not good, whatever it is. I have led expeditions into the catacombs below the castle, but it goes deeper yet.”</i>", parse);
                 Text.Flush();
-                
+
                 JeanneScenes.Talk();
             }, enabled : true,
-            tooltip : "Ask Jeanne for her story."
+            tooltip : "Ask Jeanne for her story.",
         });
-        parse["himher"] = terry.himher();
-        if(party.InParty(terry) && terry.flags["TF"] & TerryFlags.TF.TriedItem && !(terry.flags["TF"] & TerryFlags.TF.Jeanne)) {
+        parse.himher = terry.himher();
+        if (party.InParty(terry) && terry.flags.TF & TerryFlags.TF.TriedItem && !(terry.flags.TF & TerryFlags.TF.Jeanne)) {
             options.push({ nameStr : "Terry",
                 func : TerryScenes.JeanneTFFirst, enabled : true,
-                tooltip : Text.Parse("Ask Jeanne if she can help you with Terry’s collar, and figure out why it seems to make [himher] immune to transformative effects.", parse)
+                tooltip : Text.Parse("Ask Jeanne if she can help you with Terry’s collar, and figure out why it seems to make [himher] immune to transformative effects.", parse),
             });
         }
         /*
         options.push({ nameStr : "Golem",
-            func : function() {
+            func : () => {
                 Text.Clear();
                 Text.Add("", parse);
                 Text.NL();
                 Text.Flush();
-                
-                
+
                 JeanneScenes.Talk();
             }, enabled : true,
             tooltip : ""
         });
         */
-        if(rosalin.flags["Met"] != 0) {
+        if (rosalin.flags.Met !== 0) {
             options.push({ nameStr : "Rosalin",
-                func : function() {
+                func() {
                     Text.Clear();
                     Text.Add("<i>“Ah, her.”</i> Jeanne frowns, looking a bit sad. <i>“You may have noticed that I live alone here. I used to have disciples, since teaching is a passion of mine. Rosalin… changed that. She was always a problematic child, causing quite a bit of trouble for her poor parents. From what I hear, her brief venture into the culinary realm almost put her father on the brink of death.”</i>", parse);
                     Text.NL();
@@ -378,19 +369,19 @@ export namespace JeanneScenes {
                     Text.NL();
                     Text.Add("About that...", parse);
                     Text.Flush();
-                    
+
                     JeanneScenes.Talk();
                 }, enabled : true,
-                tooltip : "Ask the court mage about her former pupil."
+                tooltip : "Ask the court mage about her former pupil.",
             });
-            
-            if(party.Inv().QueryNum(AlchemySpecial.Anusol) && rosalin.flags["Anusol"] < RosalinFlags.Anusol.ShowedJeanne) {
+
+            if (party.Inv().QueryNum(AlchemySpecial.Anusol) && rosalin.flags.Anusol < RosalinFlags.Anusol.ShowedJeanne) {
                 options.push({ nameStr : "Rosalin’s pot",
                     tooltip : "You wonder what Jeanne would have to say about this new potion of Rosalin’s. Maybe showing it to her would be a good idea?",
-                    func : function() {
-                        rosalin.flags["Anusol"] = RosalinFlags.Anusol.ShowedJeanne;
+                    func() {
+                        rosalin.flags.Anusol = RosalinFlags.Anusol.ShowedJeanne;
                         jeanne.recipes.push(AlchemySpecial.AnusolPlus);
-                        
+
                         Text.Clear();
                         Text.Add("Reaching into your belongings, you draw forth a bottle of Anusol and offer it to the elven mage.", parse);
                         Text.NL();
@@ -416,30 +407,30 @@ export namespace JeanneScenes {
                         Text.NL();
                         Text.Add("Nodding to show you understand, you thank her. So, Anusol and Gestarium for an enhanced Anusol potion? You’ll need to remember that.", parse);
                         Text.Flush();
-                        
+
                         JeanneScenes.Talk();
-                    }, enabled : true
+                    }, enabled : true,
                 });
             }
         }
-        
+
         Gui.SetButtonsFromList(options, true, JeanneScenes.InteractPrompt);
     }
 
     export function First() {
-        let player = GAME().player;
-        let kiakai = GAME().kiakai;
-        let jeanne = GAME().jeanne;
-        let party : Party = GAME().party;
+        const player = GAME().player;
+        const kiakai = GAME().kiakai;
+        const jeanne = GAME().jeanne;
+        const party: Party = GAME().party;
 
-        var parse : any = {
+        const parse: any = {
             playername : player.name,
-            name       : function() { return kiakai.name; },
-            hisher     : function() { return kiakai.hisher(); }
+            name() { return kiakai.name; },
+            hisher() { return kiakai.hisher(); },
         };
-        
-        jeanne.flags["Met"] = 1;
-        
+
+        jeanne.flags.Met = 1;
+
         Text.Clear();
         Text.Add("You make the trek up the final set of stairs into a large laboratory, every nook and cranny the home of some strange arcane device or alchemical concoction. Parchments and books are strewn about on tables and chairs, and a half-eaten meal is growing cold, forgotten on a bookshelf.", parse);
         Text.NL();
@@ -450,36 +441,35 @@ export namespace JeanneScenes {
         Text.Add("<i>“I do not recognize you,”</i> she says, her melodious voice sounding puzzled, <i>“are you from the castle?”</i> You tell her that you’re not, and explain why you are here, and who you are.", parse);
         Text.NL();
         Text.Add("<i>“I am indeed the court magician, Jeanne,”</i> the elf tells you, smoothing her dress. <i>“And how can I help you, [playername]?”</i>", parse);
-        if(party.InParty(kiakai)) {
+        if (party.InParty(kiakai)) {
             Text.NL();
             Text.Add("Behind you, [name] peeks out, looking at the beautiful elf shyly. The magician smiles warmly at your companion, acknowledging [hisher] presence.", parse);
         }
         Text.Flush();
-        
+
         talkedGolem  = false;
         talkedJeanne = false;
         talkedGem    = false;
-        
+
         JeanneScenes.FirstPrompt();
     }
 
     export function FirstPrompt() {
-        let golem = GAME().golem;
-        var parse : any = {};
-        //[Golem][Jeanne][Gem]
-        var options = new Array();
-        if(talkedGolem == false) {
+        const golem = GAME().golem;
+        const parse: any = {};
+        // [Golem][Jeanne][Gem]
+        const options = new Array();
+        if (talkedGolem === false) {
             options.push({ nameStr : "Golem",
-                func : function() {
+                func() {
                     Text.Clear();
                     Text.Add("<i>“I was sure I sealed the tower,”</i> the elf says, looking perplexed. <i>“You say that you were attacked by a golem…?”</i> It looks like understanding slowly dawns on her, and she looks a bit apprehensive.", parse);
                     Text.NL();
                     Text.Add("<i>“Tell me, it did not… do anything to you, did it?”</i>", parse);
                     Text.NL();
-                    if(golem.flags["Met"] == GolemFlags.State.Won_prevLoss) {
+                    if (golem.flags.Met === GolemFlags.State.Won_prevLoss) {
                         Text.Add("Your blush must speak volumes, as the magician looks apologetic. <i>“I was afraid of that,”</i> she says in a small voice. <i>“I must have forgotten to deactivate the carnal spell on it.”</i>", parse);
-                    }
-                    else {
+                    } else {
                         Text.Add("You recount how you were attacked, but managed to defeat the guardian. To your surprise, the magician looks almost relieved.", parse);
                         Text.NL();
                         Text.Add("<i>“Ah, good, good. I think I have figured out what it was.”</i>", parse);
@@ -489,16 +479,16 @@ export namespace JeanneScenes {
                     Text.NL();
                     Text.Add("<i>“If you wish, we can speak more about her later.”</i>", parse);
                     Text.Flush();
-                    
+
                     talkedGolem = true;
                     JeanneScenes.FirstPrompt();
                 }, enabled : true,
-                tooltip : "Ask Jeanne about the golem guarding the tower."
+                tooltip : "Ask Jeanne about the golem guarding the tower.",
             });
         }
-        if(talkedJeanne == false) {
+        if (talkedJeanne === false) {
             options.push({ nameStr : "Jeanne",
-                func : function() {
+                func() {
                     Text.Clear();
                     Text.Add("<i>“It matters little to me who rules in Rigard, I have been here longer than they.”</i> The beautiful elf gestures to the laboratory around her. <i>“I’ve lived here for centuries, long before the current king came along with his silly ideas; I will stay here, long after he is gone. There is so very much to learn about the world, and as long as the royals provide me with materials and stay out of my way, I give them advice.”</i>", parse);
                     Text.NL();
@@ -506,16 +496,16 @@ export namespace JeanneScenes {
                     Text.NL();
                     Text.Add("<i>“My research spans many fields, but I mainly study the properties of magic and alchemy.”</i>", parse);
                     Text.Flush();
-                    
+
                     talkedJeanne = true;
                     JeanneScenes.FirstPrompt();
                 }, enabled : true,
-                tooltip : "Ask why an elf is serving the king of Rigard."
+                tooltip : "Ask why an elf is serving the king of Rigard.",
             });
         }
-        if(talkedGem == false) {
+        if (talkedGem === false) {
             options.push({ nameStr : "Gem",
-                func : function() {
+                func() {
                     Text.Clear();
                     Text.Add("When you pull out the purple gemstone you carry, Jeanne’s eyes almost bulge in surprise.", parse);
                     Text.NL();
@@ -535,25 +525,26 @@ export namespace JeanneScenes {
                     Text.NL();
                     Text.Add("Hmm. Perhaps you should stop just showing this thing to everyone you meet.", parse);
                     Text.Flush();
-                    
+
                     talkedGem = true;
                     JeanneScenes.FirstPrompt();
                 }, enabled : true,
-                tooltip : "Ask the magician about the gemstone you carry."
+                tooltip : "Ask the magician about the gemstone you carry.",
             });
         }
-        if(options.length > 0)
+        if (options.length > 0) {
             Gui.SetButtonsFromList(options);
-        else
+        } else {
             Gui.NextPrompt(JeanneScenes.FirstCont);
+        }
     }
 
     export function FirstCont() {
-        let player = GAME().player;
-        var parse : any = {
-            playername : player.name
+        const player = GAME().player;
+        const parse: any = {
+            playername : player.name,
         };
-        
+
         Text.Clear();
         Text.Add("<i>“Right now, getting a source of power for the gem is vital. I have been observing the recent events concerning the portals on Eden. Their disappearance is very worrying… and could have dire consequences. Something is stirring on Eden, and it seems to be absorbing magical power at a frightening rate. I have tried finding out what is causing this, but certain avenues previously available to me are no longer open since the portals closed.”</i>", parse);
         Text.NL();

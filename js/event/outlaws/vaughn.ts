@@ -76,7 +76,7 @@ export class Vaughn extends Entity {
 	// Schedule
 	public IsAtLocation(location?: any) {
 		location = location || GAME().party.location;
-		if (location == WORLD().loc.Outlaws.Camp) {
+		if (location === WORLD().loc.Outlaws.Camp) {
 			return (WorldTime().hour >= 18 || WorldTime().hour < 6);
 		}
 		return false;

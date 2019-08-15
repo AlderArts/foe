@@ -65,7 +65,7 @@ export class Maria extends Entity {
 	}
 
 	public FromStorage(storage: any) {
-		this.Butt().virgin       = parseInt(storage.avirgin) == 1;
+		this.Butt().virgin       = parseInt(storage.avirgin, 10) === 1;
 
 		this.LoadPersonalityStats(storage);
 
@@ -97,7 +97,7 @@ export class Maria extends Entity {
 	// Schedule
 	public IsAtLocation(location?: any) {
 		location = location || GAME().party.location;
-		if (location == WORLD().loc.Outlaws.Camp) {
+		if (location === WORLD().loc.Outlaws.Camp) {
 			return (WorldTime().hour >= 7 && WorldTime().hour < 22);
 		}
 		return false;
@@ -107,7 +107,7 @@ export class Maria extends Entity {
 		const outlaws = GAME().outlaws;
 		const maria = GAME().maria;
 		// Only in the initial phase
-		if (maria.flags.DD != 0) { return false; }
+		if (maria.flags.DD !== 0) { return false; }
 		// Only when meeting the correct conditions
 		if (outlaws.flags.Met < OutlawsFlags.Met.Bouqet) { return false; }
 		// Only when meeting total Outlaws rep

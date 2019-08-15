@@ -3,28 +3,28 @@
  * Define Lei
  *
  */
-import { Entity } from '../../entity';
-import { GetDEBUG } from '../../../app';
-import { Color } from '../../body/color';
-import { Images } from '../../assets';
-import { HairStyle } from '../../body/hair';
-import { Stat } from '../../stat';
-import { Time } from '../../time';
-import { WorldTime, NAV, WORLD, GAME } from '../../GAME';
-import { Abilities } from '../../abilities';
-import { Text } from '../../text';
-import { Gui } from '../../gui';
-import { LeiFlags } from './lei-flags';
+import { GetDEBUG } from "../../../app";
+import { Abilities } from "../../abilities";
+import { Images } from "../../assets";
+import { Color } from "../../body/color";
+import { HairStyle } from "../../body/hair";
+import { Entity } from "../../entity";
+import { GAME, NAV, WORLD, WorldTime } from "../../GAME";
+import { Gui } from "../../gui";
+import { Stat } from "../../stat";
+import { Text } from "../../text";
+import { Time } from "../../time";
+import { LeiFlags } from "./lei-flags";
 
 // TODO: FIX STATS
 export class Lei extends Entity {
-	annoyance : Stat;
-	pastRotation : number;
-	timeout : Time;
-	taskTimer : Time;
-	sparTimer : Time;
+	public annoyance: Stat;
+	public pastRotation: number;
+	public timeout: Time;
+	public taskTimer: Time;
+	public sparTimer: Time;
 
-	constructor(storage? : any) {
+	constructor(storage?: any) {
 		super();
 
 		this.ID = "lei";
@@ -61,14 +61,14 @@ export class Lei extends Entity {
 		this.SetLevelBonus();
 		this.RestFull();
 
-		this.flags["Met"] = LeiFlags.Met.NotMet;
-		this.flags["ToldOrvin"] = 0;
-		this.flags["HeardOf"] = 0;
-		this.flags["Fought"] = LeiFlags.Fight.No;
-		this.flags["Talk"] = 0; //Bitmask
-		this.flags["SexOpen"] = 0; //Toggle
+		this.flags.Met = LeiFlags.Met.NotMet;
+		this.flags.ToldOrvin = 0;
+		this.flags.HeardOf = 0;
+		this.flags.Fought = LeiFlags.Fight.No;
+		this.flags.Talk = 0; // Bitmask
+		this.flags.SexOpen = 0; // Toggle
 
-		this.flags["T1"] = 0; //Bitmask, job 1
+		this.flags.T1 = 0; // Bitmask, job 1
 
 		this.annoyance = new Stat(0);
 		this.pastRotation = 0;
@@ -77,78 +77,78 @@ export class Lei extends Entity {
 		this.taskTimer = new Time();
 		this.sparTimer = new Time();
 
-		if(storage) this.FromStorage(storage);
+		if (storage) { this.FromStorage(storage); }
 	}
 
-	Annoyance() {
+	public Annoyance() {
 		return this.annoyance.Get();
 	}
-	
-	Recruited() {
-		return false; //TODO LeiFlags.Met >= Recruited
+
+	public Recruited() {
+		return false; // TODO LeiFlags.Met >= Recruited
 	}
-	
-	SexOpen() {
-		return this.flags["SexOpen"] != 0;
+
+	public SexOpen() {
+		return this.flags.SexOpen !== 0;
 	}
-	
-	Update(step : number) {
+
+	public Update(step: number) {
 		super.Update(step);
-	
+
 		this.timeout.Dec(step);
 		this.taskTimer.Dec(step);
 		this.sparTimer.Dec(step);
 	}
-	
-	FromStorage(storage : any) {
+
+	public FromStorage(storage: any) {
 		this.LoadPersonalityStats(storage);
-		this.annoyance.base = parseInt(storage.ann)  || this.annoyance.base;
-	
+		this.annoyance.base = parseInt(storage.ann, 10)  || this.annoyance.base;
+
 		this.timeout.FromStorage(storage.timeout);
 		this.taskTimer.FromStorage(storage.tt);
 		this.sparTimer.FromStorage(storage.st);
-	
+
 		// Load flags
 		this.LoadFlags(storage);
 	}
-	
-	ToStorage() {
-		var storage : any = {};
-	
+
+	public ToStorage() {
+		const storage: any = {};
+
 		this.SavePersonalityStats(storage);
-		if(this.annoyance.base != 0) storage.ann = this.annoyance.base.toFixed();
-	
+		if (this.annoyance.base !== 0) { storage.ann = this.annoyance.base.toFixed(); }
+
 		this.SaveFlags(storage);
-	
+
 		storage.timeout = this.timeout.ToStorage();
 		storage.tt = this.taskTimer.ToStorage();
 		storage.st = this.sparTimer.ToStorage();
-	
+
 		return storage;
 	}
 
 	// Schedule
-	IsAtLocation(location : any) {
+	public IsAtLocation(location: any) {
 		// Numbers/slacking/sleep
-		if(location == WORLD().loc.Rigard.Inn.common && this.timeout.Expired())
+		if (location === WORLD().loc.Rigard.Inn.common && this.timeout.Expired()) {
 			return (WorldTime().hour >= 14 && WorldTime().hour < 23);
+		}
 		return false;
 	}
 
 	// Party interaction
-	Interact() {
-		let lei = GAME().lei;
+	public Interact() {
+		const lei = GAME().lei;
 		Text.Clear();
 		Text.Add("Rawr Imma stabbitystab.");
 
-
-		if(GetDEBUG()) {
+		if (GetDEBUG()) {
 			Text.NL();
-			Text.Add("DEBUG: relation: " + lei.relation.Get(), null, 'bold');
+			Text.Add("DEBUG: relation: " + lei.relation.Get(), null, "bold");
 			Text.NL();
-			Text.Add("DEBUG: subDom: " + lei.subDom.Get(), null, 'bold');
+			Text.Add("DEBUG: subDom: " + lei.subDom.Get(), null, "bold");
 			Text.NL();
-			Text.Add("DEBUG: slut: " + lei.slut.Get(), null, 'bold');
+			Text.Add("DEBUG: slut: " + lei.slut.Get(), null, "bold");
 			Text.NL();
 		}
 
@@ -160,7 +160,7 @@ export class Lei extends Entity {
 // COMBAT STATS
 // TODO: FIX STATS
 export class LeiSpar extends Entity {
-	constructor(levelbonus : number) {
+	constructor(levelbonus: number) {
 		super();
 
 		// Character stats
@@ -199,27 +199,28 @@ export class LeiSpar extends Entity {
 		this.RestFull();
 	}
 
-	Act(encounter : any, activeChar : any) {
+	public Act(encounter: any, activeChar: any) {
 		// TODO: Very TEMP
 		Text.Add(this.name + " acts! Chop chop!");
 		Text.NL();
-	
+
 		// Pick a random target
-		var targets = this.GetPartyTarget(encounter, activeChar);
-		var t = this.GetSingleTarget(encounter, activeChar);
-	
-		var choice = Math.random();
-		if(choice < 0.2)
+		const targets = this.GetPartyTarget(encounter, activeChar);
+		const t = this.GetSingleTarget(encounter, activeChar);
+
+		const choice = Math.random();
+		if (choice < 0.2) {
 			Abilities.Attack.CastInternal(encounter, this, t);
-		else if(choice < 0.3 && Abilities.Physical.Kicksand.enabledCondition(encounter, this))
+		} else if (choice < 0.3 && Abilities.Physical.Kicksand.enabledCondition(encounter, this)) {
 			Abilities.Physical.Kicksand.Use(encounter, this, t);
-		else if(choice < 0.5 && Abilities.Physical.Bash.enabledCondition(encounter, this))
+ 		} else if (choice < 0.5 && Abilities.Physical.Bash.enabledCondition(encounter, this)) {
 			Abilities.Physical.Bash.Use(encounter, this, t);
-		else if(choice < 0.7 && Abilities.Physical.DirtyBlow.enabledCondition(encounter, this))
+ 		} else if (choice < 0.7 && Abilities.Physical.DirtyBlow.enabledCondition(encounter, this)) {
 			Abilities.Physical.DirtyBlow.Use(encounter, this, t);
-		else if(choice < 0.9 && Abilities.Physical.TAttack.enabledCondition(encounter, this))
+ 		} else if (choice < 0.9 && Abilities.Physical.TAttack.enabledCondition(encounter, this)) {
 			Abilities.Physical.TAttack.Use(encounter, this, t);
-		else
+ 		} else {
 			Abilities.Attack.Use(encounter, this, t);
-	}	
+ 		}
+	}
 }

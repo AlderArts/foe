@@ -1,19 +1,19 @@
 
-import { GetDEBUG } from '../../../app';
-import { GAME, MoveToLocation, TimeStep, WORLD, WorldTime } from '../../GAME';
-import { Gui } from '../../gui';
-import { CombatItems } from '../../items/combatitems';
-import { QuestItems } from '../../items/quest';
-import { Jobs } from '../../job';
-import { RigardFlags } from '../../loc/rigard/rigard-flags';
-import { Party } from '../../party';
-import { Text } from '../../text';
-import { Time } from '../../time';
-import { GlobalScenes } from '../global';
-import { MirandaFlags } from '../miranda-flags';
-import { Room69Flags } from '../room69-flags';
-import { LeiFlags } from '../royals/lei-flags';
-import { VaughnFlags } from './vaughn-flags';
+import { GetDEBUG } from "../../../app";
+import { GAME, MoveToLocation, TimeStep, WORLD, WorldTime } from "../../GAME";
+import { Gui } from "../../gui";
+import { CombatItems } from "../../items/combatitems";
+import { QuestItems } from "../../items/quest";
+import { Jobs } from "../../job";
+import { RigardFlags } from "../../loc/rigard/rigard-flags";
+import { Party } from "../../party";
+import { Text } from "../../text";
+import { Time } from "../../time";
+import { GlobalScenes } from "../global";
+import { MirandaFlags } from "../miranda-flags";
+import { Room69Flags } from "../room69-flags";
+import { LeiFlags } from "../royals/lei-flags";
+import { VaughnFlags } from "./vaughn-flags";
 
 export namespace VaughnTasksScenes {
 
@@ -30,27 +30,27 @@ export namespace VaughnTasksScenes {
 	}
 
 	export function StartTask() { // TODO add tasks
-		if(VaughnTasksScenes.Lockpicks.Available()) {
+		if (VaughnTasksScenes.Lockpicks.Available()) {
 			VaughnTasksScenes.Lockpicks.Start();
-		} else if(VaughnTasksScenes.Snitch.Available()) {
+		} else if (VaughnTasksScenes.Snitch.Available()) {
 			VaughnTasksScenes.Snitch.Start();
- } else if(VaughnTasksScenes.Poisoning.Available()) {
+ 		} else if (VaughnTasksScenes.Poisoning.Available()) {
 			VaughnTasksScenes.Poisoning.Start();
- }
+ 		}
 	}
 
-	export function TaskPrompt(Prompt : any) {
-		let parse : any = {
+	export function TaskPrompt(Prompt: any) {
+		const parse: any = {
 
 		};
 
 		Text.Clear();
-		if(VaughnTasksScenes.AnyTaskAvailable()) {
+		if (VaughnTasksScenes.AnyTaskAvailable()) {
 			Text.Add("<i>“So, you’re interested in seeing some action? Young people, full of drive and fire… well, I’m not about to stop you from doing what an operative’s supposed to do.”</i> Vaughn thinks a moment, then smiles. <i>“Just so it happens, there’s something that came up which needs handling, and it has to be done the next day. You interested? Remember, you’ll be on the clock if I hand the assignment to you, so don’t accept responsibility for anything that you’re not willing to see through. You’re still thinking of going out there?”</i>", parse);
 			Text.Flush();
 
 			// [Yes][No]
-			let options = new Array();
+			const options = new Array();
 			options.push({ nameStr : "Yes",
 				tooltip : "Yes, you’ll take it.",
 				func() {
@@ -59,7 +59,7 @@ export namespace VaughnTasksScenes {
 					Text.Flush();
 
 					Gui.NextPrompt(VaughnTasksScenes.StartTask);
-				}, enabled : true
+				}, enabled : true,
 			});
 			options.push({ nameStr : "No",
 				tooltip : "No, you’re not sure if you can see the task through.",
@@ -73,7 +73,7 @@ export namespace VaughnTasksScenes {
 					Text.Flush();
 
 					Prompt();
-				}, enabled : true
+				}, enabled : true,
 			});
 			Gui.SetButtonsFromList(options, false, null);
 		} else {
@@ -90,11 +90,11 @@ export namespace VaughnTasksScenes {
 
 	export namespace Lockpicks {
 		export function Available() {
-			if(GAME().vaughn.flags.Met >= VaughnFlags.Met.OnTaskLockpicks) { return false; }
+			if (GAME().vaughn.flags.Met >= VaughnFlags.Met.OnTaskLockpicks) { return false; }
 			return true;
 		}
 		export function OnTask() {
-			return GAME().vaughn.flags.Met == VaughnFlags.Met.OnTaskLockpicks;
+			return GAME().vaughn.flags.Met === VaughnFlags.Met.OnTaskLockpicks;
 		}
 		export function Completed() {
 			return GAME().vaughn.flags.Met >= VaughnFlags.Met.CompletedLockpicks;
@@ -105,12 +105,12 @@ export namespace VaughnTasksScenes {
 		// Block that exploration scene if this scene has been viewed.
 		// TODO Note for far future: Do not enable this if/when Majid has been run out of Rigard.
 		export function Start() {
-			let player = GAME().player;
-			let party : Party = GAME().party;
-			let terry = GAME().terry;
+			const player = GAME().player;
+			const party: Party = GAME().party;
+			const terry = GAME().terry;
 
-			let parse : any = {
-				playername : player.name
+			const parse: any = {
+				playername : player.name,
 			};
 
 			Text.Clear();
@@ -126,7 +126,7 @@ export namespace VaughnTasksScenes {
 			Text.NL();
 			Text.Add("Oh? You undo the string that holds the pouch closed, and are faced with quite the menagerie of interesting implements: various pieces of metal bent in interesting ways, a sharp, silent glass cutter, a hammer no longer than the width of your palm, and other more… exotic-looking things.", parse);
 			Text.NL();
-			if(party.InParty(terry)) {
+			if (party.InParty(terry)) {
 				parse.foxvixen = terry.mfPronoun("fox", "vixen");
 				parse.himher = terry.himher();
 
@@ -184,17 +184,17 @@ export namespace VaughnTasksScenes {
 
 		// Triggered in castle grounds
 		export function MeetingElodie() {
-			let player = GAME().player;
-			let party : Party = GAME().party;
-			let rigard = GAME().rigard;
+			const player = GAME().player;
+			const party: Party = GAME().party;
+			const rigard = GAME().rigard;
 
-			let parse : any = {
-				playername : player.name
+			const parse: any = {
+				playername : player.name,
 			};
 
 			Text.Clear();
 			// Correct time
-			if(!VaughnTasksScenes.Lockpicks.ElodieAvailable()) {
+			if (!VaughnTasksScenes.Lockpicks.ElodieAvailable()) {
 				Text.Add("You arrive at the park and spy the bench by the pond, but there’s currently no one sitting on it at the moment, let alone someone who could be your contact. What was the meeting time again? Sometime in the evening? Maybe you should come back then.", parse);
 				Text.Flush();
 
@@ -204,7 +204,7 @@ export namespace VaughnTasksScenes {
 				return;
 			}
 
-			let metElodie = rigard.flags.Nobles & RigardFlags.Nobles.Elodie;
+			const metElodie = rigard.flags.Nobles & RigardFlags.Nobles.Elodie;
 
 			Text.Add("Evening lends a calm air to the castle grounds, and you arrive at the park as instructed. With the day drawing to a close, servants and nobles alike are enjoying what small amount of free time there’s to be had - this close to the castle proper, extra care is taken by the groundskeepers to ensure the flowerbeds are pristine and the lakes clear.", parse);
 			Text.NL();
@@ -212,7 +212,7 @@ export namespace VaughnTasksScenes {
 			Text.NL();
 			Text.Add("After a little looking around, you spy the bench that Vaughn singled out - an elegantly carved two-seater facing a small pond. Seated on it is a young woman, a small brown bag full of breadcrumbs in her hands as she reaches into it and scatters them onto the water’s surface, much to the local ducks’ delight.", parse);
 			Text.NL();
-			if(metElodie) {
+			if (metElodie) {
 				Text.Add("You recognize her immediately: the maid who was staring at you on the streets of the castle grounds some time back. She’s with the outlaws? Well, it would explain why she was eyeing you, or how she managed to blend into the crowd so effortlessly. The result of plenty of practice, no doubt.", parse);
 				Text.NL();
 				Text.Add("Well, it seems like you’ll get the chance to confront her, regardless of how either of you feels about it.", parse);
@@ -286,12 +286,12 @@ export namespace VaughnTasksScenes {
 
 		// Automatically triggers when approaching Vaughn after completing the task.
 		export function Debrief() {
-			let player = GAME().player;
-			let outlaws = GAME().outlaws;
-			let vaughn = GAME().vaughn;
+			const player = GAME().player;
+			const outlaws = GAME().outlaws;
+			const vaughn = GAME().vaughn;
 
-			let parse : any = {
-				playername : player.name
+			const parse: any = {
+				playername : player.name,
 			};
 
 			Text.Clear();
@@ -299,7 +299,7 @@ export namespace VaughnTasksScenes {
 			Text.NL();
 			Text.Add("Yes, you did.", parse);
 			Text.NL();
-			if(vaughn.taskTimer.Expired()) {
+			if (vaughn.taskTimer.Expired()) {
 				Text.Add("<i>“Right, right. Remember what I said about not taking your time and acting as if everything’s going to wait forever until you go and start things? Well, perhaps you didn’t, because those picks arrived later than they ought to have.</i>", parse);
 				Text.NL();
 				Text.Add("<i>“It’s not too much of a problem now - better late than never, as some say - but from here on out, late is going to be never. You’ll want to be punctual, because if you act like someone who can’t be relied upon, don’t be surprised when people don’t rely on you to get the job done.”</i>", parse);
@@ -336,11 +336,11 @@ export namespace VaughnTasksScenes {
 
 	export namespace Snitch {
 		export function Available() {
-			if(GAME().vaughn.flags.Met >= VaughnFlags.Met.CompletedSnitch) { return false; }
+			if (GAME().vaughn.flags.Met >= VaughnFlags.Met.CompletedSnitch) { return false; }
 			return true;
 		}
 		export function OnTask() {
-			return GAME().vaughn.flags.Met == VaughnFlags.Met.OnTaskSnitch;
+			return GAME().vaughn.flags.Met === VaughnFlags.Met.OnTaskSnitch;
 		}
 		export function Completed() {
 			return GAME().vaughn.flags.Met >= VaughnFlags.Met.CompletedSnitch;
@@ -348,12 +348,12 @@ export namespace VaughnTasksScenes {
 
 		// Disable this and jump ahead to task 3 if Miranda has been permanently recruited.
 		export function Start() {
-			let player = GAME().player;
-			let miranda = GAME().miranda;
-			let vaughn = GAME().vaughn;
+			const player = GAME().player;
+			const miranda = GAME().miranda;
+			const vaughn = GAME().vaughn;
 
-			let parse : any = {
-				playername : player.name
+			const parse: any = {
+				playername : player.name,
 			};
 
 			Text.Clear();
@@ -391,7 +391,7 @@ export namespace VaughnTasksScenes {
 			// TODO: This kinda doesn't work with recruited Miranda
 			Text.Add("As you walk away, though, you can’t help but wonder about what Vaughn said. Sure, you may not know many of the watch personally, but you’re pretty sure Miranda’s on the straight and narrow. If the map is as solid evidence as Vaughn claims it is, then you should be able to talk Miranda around to your point of view. The more you consider the idea, the more it sounds like a viable alternative to sneaking into the City Watch headquarters - and probably easier, too, especially if you’re not confident that you’re skilled enough to not get caught in the act.", parse);
 			Text.NL();
-			if(miranda.Nasty()) {
+			if (miranda.Nasty()) {
 				Text.Add("Of course, given that the two of you aren’t on the best of terms at the moment, you might have to do more than just talk her into listening to you.", parse);
 				Text.NL();
 			}
@@ -402,8 +402,8 @@ export namespace VaughnTasksScenes {
 
 			vaughn.flags.Met = VaughnFlags.Met.OnTaskSnitch;
 
-			let step = WorldTime().TimeToHour(18);
-			if(WorldTime().hour < 12) {
+			const step = WorldTime().TimeToHour(18);
+			if (WorldTime().hour < 12) {
 				vaughn.taskTimer = new Time(0, 0, 2, step.hour, step.minute);
 			} else {
 				vaughn.taskTimer = new Time(0, 0, 3, step.hour, step.minute);
@@ -415,32 +415,32 @@ export namespace VaughnTasksScenes {
 			Gui.NextPrompt();
 		}
 
-		export function MirandaTalk(options : any[], onDuty : any) {
-			let miranda = GAME().miranda;
-			let vaughn = GAME().vaughn;
+		export function MirandaTalk(options: any[], onDuty: any) {
+			const miranda = GAME().miranda;
+			const vaughn = GAME().vaughn;
 
-			if(vaughn.taskTimer.Expired()) { return; }
-			if(vaughn.flags.Met == VaughnFlags.Met.OnTaskSnitch && miranda.flags.Snitch == 0) {
+			if (vaughn.taskTimer.Expired()) { return; }
+			if (vaughn.flags.Met === VaughnFlags.Met.OnTaskSnitch && miranda.flags.Snitch === 0) {
 				options.push({ nameStr : "Snitch",
 					tooltip : "Present your evidence against Terrell to Miranda and ask the dobie if anything can be done.",
 					func() {
 						VaughnTasksScenes.Snitch.Miranda(onDuty);
-					}, enabled : true
+					}, enabled : true,
 				});
 			}
 		}
 
-		export function Miranda(onDuty : any) {
-			let player = GAME().player;
-			let vaughn = GAME().vaughn;
-			let miranda = GAME().miranda;
+		export function Miranda(onDuty: any) {
+			const player = GAME().player;
+			const vaughn = GAME().vaughn;
+			const miranda = GAME().miranda;
 
-			let parse : any = {
-				playername : player.name
+			let parse: any = {
+				playername : player.name,
 			};
 
 			Text.Clear();
-			if(onDuty) {
+			if (onDuty) {
 				Text.Add("You take a look around, spotting several of Miranda’s colleagues nearby. Perhaps you should try to find somewhere more private to present her with Vaughn’s evidence. It’ll definitely be easier to sway her if she’s on her own, if it comes to that.", parse);
 				Text.Flush();
 				// Just leave it at that, the old menu stays
@@ -454,7 +454,7 @@ export namespace VaughnTasksScenes {
 			Text.NL();
 			Text.Add("Let’s see whether you get off on the right foot, then. Calling over a serving wench, you order a couple of drinks, then settle in as they’re brought to your table.", parse);
 			Text.NL();
-			if(miranda.Nice()) {
+			if (miranda.Nice()) {
 				Text.Add("<i>“Ho!”</i> Miranda exclaims as you pull the evidence out of your possessions. <i>“What’s this we have here?”</i>", parse);
 				Text.NL();
 				Text.Add("Slowly, you unfold the paper and explain to Miranda what all this is supposed to mean. Does she have any memory of the most recent crackdown on illegal gambling dens?", parse);
@@ -485,7 +485,7 @@ export namespace VaughnTasksScenes {
 				Text.Flush();
 
 				// [Refuse][Lie]
-				let options = new Array();
+				const options = new Array();
 				options.push({ nameStr : "Refuse",
 					tooltip : "You’re not going to deceive her, but you’re not going to tell the whole truth, either.",
 					func() {
@@ -505,7 +505,7 @@ export namespace VaughnTasksScenes {
 						miranda.relation.IncreaseStat(100, 5);
 
 						Gui.PrintDefaultOptions();
-					}, enabled : true
+					}, enabled : true,
 				});
 				options.push({ nameStr : "Lie",
 					tooltip : "What’s a little white lie? Justice is served, and you don’t want to see the inside of a cell.",
@@ -526,10 +526,10 @@ export namespace VaughnTasksScenes {
 						miranda.relation.IncreaseStat(100, 3);
 
 						Gui.PrintDefaultOptions();
-					}, enabled : true
+					}, enabled : true,
 				});
 
-				Gui.Callstack.push(function() {
+				Gui.Callstack.push(() => {
 					Text.NL();
 					Text.Add("Right. You sip at your drink, and watch Miranda shuffle out of her seat. She’s going already?", parse);
 					Text.NL();
@@ -540,7 +540,7 @@ export namespace VaughnTasksScenes {
 					Text.Add("You watch Miranda storm off, and the palpable heaviness in the air lifts with her passing. Yeah… regardless of what happens next, Terrell’s fate isn’t one that you’d wish upon anyone. By the look of things, you can probably head back to Vaughn and tell him of your success, even if you didn’t come by it the way he expected.", parse);
 					Text.Flush();
 
-					if(miranda.Attitude() < MirandaFlags.Attitude.Nice) {
+					if (miranda.Attitude() < MirandaFlags.Attitude.Nice) {
 						miranda.flags.Attitude = MirandaFlags.Attitude.Nice;
 					}
 
@@ -582,7 +582,7 @@ export namespace VaughnTasksScenes {
 				Text.Flush();
 
 				// [Yes][No]
-				let options = new Array();
+				const options = new Array();
 				options.push({ nameStr : "Yes",
 					tooltip : "If that’s what she wants…",
 					func() {
@@ -599,7 +599,7 @@ export namespace VaughnTasksScenes {
 						Text.Add("Before you know it, Miranda already has her shaft out, emerging from her uniform like a thick, juicy sausage. Guess she’s no stranger to the motions - with a lazy grunt, she spreads her legs wide open, letting you take in the full implications of what you’ve just agreed to do. Pushing forward her throbbing shaft, Miranda rubs it against your lips, letting you get a good taste of dobie dick, complete with a bead of pre-cum at the top. Is the thought of getting back at you making her <i>that</i> excited?", parse);
 						Text.NL();
 						parse.h = player.Hair().Bald() ? "head" : "hair";
-						if(player.Slut() < 50) {
+						if (player.Slut() < 50) {
 							Text.Add("You instinctively try to turn your head away at the sheer size of that massive member, but Miranda reaches under the table and grabs you by the [h], forcing your attention back where she wants it.", parse);
 							Text.NL();
 							Text.Add("<i>“Open up, you wimp. You picked the fight with me, now accept your punishment,”</i> she snarls, then yanks hard on your [h]. As you open your mouth to gasp from the sudden movement, the dobie guardswoman thrusts forward, plunging her cock between your lips and ramming it against the back of your throat, making you gag. Your eyes bulge at the sheer <i>girth</i> you’re forced to take in your maw, its taste coating your tongue and filling your nose, but Miranda doesn’t care. <i>“There, now suck! I'll beat you if you try to bite!”</i>", parse);
@@ -618,7 +618,7 @@ export namespace VaughnTasksScenes {
 						}
 						Text.NL();
 						Text.Add("With a muffled moan, you relax your mouth and throat as best as you can to get the job done and give your tongue space to at least try and do <i>something</i>. It’s hard, considering that it’s hard to even breathe, ", parse);
-						if(player.sexlevel >= 3) {
+						if (player.sexlevel >= 3) {
 							Text.Add("but you at least manage to get some wiggle room around Miranda’s mountainous shaft and run your tongue along the base of her shaft as she thrusts back and forth.", parse);
 							Text.NL();
 							Text.Add("<i>“Not too shabby,”</i> Miranda grunts as she works away, her words punctuated by small gasps of breath. <i>“Knew you’d come around to my way of thinking sooner or later, slut.”</i>", parse);
@@ -677,7 +677,7 @@ export namespace VaughnTasksScenes {
 						TimeStep({hour: 2});
 
 						// [Yes][No]
-						let options = new Array();
+						const options = new Array();
 						options.push({ nameStr : "Yes",
 							tooltip : "Yeah, you’ve had enough of this. Time to call the score even… for now.",
 							func() {
@@ -694,7 +694,7 @@ export namespace VaughnTasksScenes {
 								miranda.relation.IncreaseStat(100, 5);
 
 								Gui.NextPrompt();
-							}, enabled : true
+							}, enabled : true,
 						});
 						options.push({ nameStr : "No",
 							tooltip : "Refuse to call it quits.",
@@ -706,10 +706,10 @@ export namespace VaughnTasksScenes {
 								Text.Flush();
 
 								Gui.NextPrompt();
-							}, enabled : true
+							}, enabled : true,
 						});
 						Gui.SetButtonsFromList(options, false, null);
-					}, enabled : true
+					}, enabled : true,
 				});
 				options.push({ nameStr : "No",
 					tooltip : "No. You’re not standing for this. You’ll take your chances at the watch headquarters.",
@@ -727,7 +727,7 @@ export namespace VaughnTasksScenes {
 						miranda.flags.Snitch |= MirandaFlags.Snitch.RefusedSex;
 
 						Gui.NextPrompt();
-					}, enabled : true
+					}, enabled : true,
 				});
 				Gui.SetButtonsFromList(options, false, null);
 			}
@@ -735,13 +735,13 @@ export namespace VaughnTasksScenes {
 
 		// Triggered via [Evidence] - Break into the watchmens’ lockers and plant the evidence. while in the City Watch area.
 		export function PlantEvidence() {
-			let player = GAME().player;
-			let party : Party = GAME().party;
-			let vaughn = GAME().vaughn;
-			let terry = GAME().terry;
+			const player = GAME().player;
+			const party: Party = GAME().party;
+			const vaughn = GAME().vaughn;
+			const terry = GAME().terry;
 
-			let parse : any = {
-				playername : player.name
+			let parse: any = {
+				playername : player.name,
 			};
 
 			parse = terry.ParserPronouns(parse);
@@ -756,29 +756,29 @@ export namespace VaughnTasksScenes {
 			Text.Add("The middle of the room is occupied by a number of benches, on which several off-duty watchmen are lounging and chatting.", parse);
 			Text.NL();
 			Text.Add("You weigh your odds as you scan the names on the lockers, trying to find Terrell’s - no such luck yet, although you do spot one with the name “Miranda” stenciled on it. The cramped conditions in the locker room probably mean that you’ll have some modicum of cover while trying to break into his things, although how effective it’ll be when the place is crawling with watchmen coming and going is another matter.", parse);
-			parse.comp = party.Num() == 2 ? party.Get(1).name : "your companions";
-			if(party.Num() > 1) {
+			parse.comp = party.Num() === 2 ? party.Get(1).name : "your companions";
+			if (party.Num() > 1) {
 				Text.Add(" You could use [comp] to obscure the view along the long, narrow lines of lockers, too.", parse);
 			}
 			Text.NL();
 			Text.Add("Then there’s the matter of actually getting into Terrell’s things. By the looks of it, each locker is uniform in both make and lock, and a brief inspection of the locks reveals them to be of a simple turnbolt mechanism. There’s enough space that you might be able to slide a card or something between frame and door to jimmy the lock both ways, or if you’ve the aptitude to do so, you could try picking the lock proper. Either that, or maybe if you had enough skill, you could magic the lock open, will the bolt to rise or play with a bit of air…", parse);
 			Text.NL();
-			if(party.InParty(terry)) {
+			if (party.InParty(terry)) {
 				Text.Add("Of course, why bother with all this when you’ve got Terry with you? [HeShe]’s a professional thief, you could just ask [himher] to do the job for you and get it over with.", parse);
 				Text.NL();
 			}
 			Text.Add("While most of the off-duty watchmen might be occupied with the dice game out in the barracks, anyone might come around any time and start asking inconvenient questions. You probably don’t have too much time to make your move, so you ought to choose your next action carefully.", parse);
 			Text.Flush();
 
-			let rogue = Jobs.Rogue.Unlocked(player);
+			const rogue = Jobs.Rogue.Unlocked(player);
 
 			// [Lock][Magic][Terry]
-			let options = new Array();
+			const options = new Array();
 			options.push({ nameStr : "Lock",
 				tooltip : Text.Parse("[Jimmy] the lock.", {Jimmy: rogue ? "Pick" : "Jimmy"}),
 				func() {
 					Text.Clear();
-					if(rogue) {
+					if (rogue) {
 						Text.Add("Well, no time to waste. You stoop and quickly inspect the lock one last time, then get to work. Having been trained in the ways of the rogue, you find the attempt easier than most might expect, but success is by no means guaranteed.", parse);
 					} else {
 						Text.Add("Well, you aren’t making any progress standing around like this. Stooping to give the lock one last inspection, you work as best as you can to get the bolt lifted. The locker may not be the most sturdily made, but it’s still a worthy enough opponent that it might give you a little trouble.", parse);
@@ -788,14 +788,14 @@ export namespace VaughnTasksScenes {
 					let dex = player.Dex() + Math.random() * 20;
 					dex += rogue ? 20 : 0;
 
-					let check = 60;
+					const check = 60;
 
-					if(GetDEBUG()) {
-						Text.Add("Dex check: [dex][r] vs [check]", {dex, check, r:rogue?" (bonus for Rogue)":""}, 'bold');
+					if (GetDEBUG()) {
+						Text.Add("Dex check: [dex][r] vs [check]", {dex, check, r: rogue ? " (bonus for Rogue)" : ""}, "bold");
 						Text.NL();
 					}
 					// #lock success
-					if(dex >= check) {
+					if (dex >= check) {
 						Text.Add("Moments tick by, and with each one that passes, your heart beats a little faster. Is someone going to look down the line of lockers and see what you’re up to? Your fingers begin to shake a little, but you get things under control, and at last, at last - there’s a faint but satisfying <i>thunk</i> of the bolt lifting and you take hold of the locker door and pull it open.", parse);
 						Text.NL();
 						Text.Add("Right. Where to put the evidence so that it looks natural? You eye the locker’s contents - a few sets of uniforms, cleaning tools for said uniforms, what looks like a dried snack in a tied paper bag - ah, looks like there’re some notebooks near the back. You flip through them, hoping to find something incriminating, but Terrell clearly isn’t enough of an idiot to leave something like that in his locker moments before the inspection. Boy, is he going to be surprised.", parse);
@@ -821,10 +821,10 @@ export namespace VaughnTasksScenes {
 					TimeStep({minute: 30});
 
 					Gui.NextPrompt();
-				}, enabled : true
+				}, enabled : true,
 			});
-			let mage = Jobs.Mage.Unlocked(player);
-			if(mage) {
+			const mage = Jobs.Mage.Unlocked(player);
+			if (mage) {
 				options.push({ nameStr : "Magic",
 					tooltip : "Try and get the bolt to lift with a bit of magic.",
 					func() {
@@ -836,16 +836,16 @@ export namespace VaughnTasksScenes {
 						Text.NL();
 
 						let mag = player.Int() + Math.random() * 20;
-						let magStage2 = GlobalScenes.MagicStage2();
-						if(magStage2) { mag += 20; }
+						const magStage2 = GlobalScenes.MagicStage2();
+						if (magStage2) { mag += 20; }
 
-						let check = 50;
+						const check = 50;
 
-						if(GetDEBUG()) {
-							Text.Add("Int check: [mag][m] vs [check]", {mag, check, m:magStage2?" (bonus for tier 2 magic)":""}, 'bold');
+						if (GetDEBUG()) {
+							Text.Add("Int check: [mag][m] vs [check]", {mag, check, m: magStage2 ? " (bonus for tier 2 magic)" : ""}, "bold");
 							Text.NL();
 						}
-						if(mag >= check) {
+						if (mag >= check) {
 							Text.Add("The going is slow but steady. Too quickly and you’ll make a whole lot of noise, too slow and you might lost your grip, sending the bolt clattering back into place. Through the narrow slit between door and frame, you watch a glint of metal rise and finally, a gentle tug on the door has the locker open and bare for your perusal.", parse);
 							Text.NL();
 							Text.Add("Great. Time to find a good place to plant the evidence before you’re discovered - Terrell’s locker is full of spare uniform sets, a boot-cleaning kit, a small tin of brass polish, what looks like an oily snack in a brown paper bag - entirely mundane and boring stuff. You’re just about considering whether to simply slip the papers into the breast pocket of his uniform when you notice a small stack of notebooks buried near the back. ", parse);
@@ -875,10 +875,10 @@ export namespace VaughnTasksScenes {
 						TimeStep({minute: 30});
 
 						Gui.NextPrompt();
-					}, enabled : true
+					}, enabled : true,
 				});
 			}
-			if(party.InParty(terry)) {
+			if (party.InParty(terry)) {
 				options.push({ nameStr : "Terry",
 					tooltip : "Have Terry open the locker for you.",
 					func() {
@@ -916,28 +916,28 @@ export namespace VaughnTasksScenes {
 						TimeStep({minute: 30});
 
 						Gui.NextPrompt();
-					}, enabled : true
+					}, enabled : true,
 				});
 			}
 			Gui.SetButtonsFromList(options, false, null);
 		}
 
 		export function DebriefAvailable() {
-			let vaughn = GAME().vaughn;
+			const vaughn = GAME().vaughn;
 			return vaughn.flags.Met > VaughnFlags.Met.OnTaskSnitch &&
 				vaughn.flags.Met < VaughnFlags.Met.CompletedSnitch;
 		}
 
 		export function Debrief() {
-			let player = GAME().player;
-			let vaughn = GAME().vaughn;
+			const player = GAME().player;
+			const vaughn = GAME().vaughn;
 
-			let parse : any = {
-				playername : player.name
+			const parse: any = {
+				playername : player.name,
 			};
 
 			Text.Clear();
-			if(vaughn.flags.Met == VaughnFlags.Met.SnitchMirandaSuccess) {
+			if (vaughn.flags.Met === VaughnFlags.Met.SnitchMirandaSuccess) {
 				Text.Add("<i>“Right! So you’re back,”</i> Vaughn says, greeting you with a tip of his hat. <i>“I heard from our eyes on the street that quite the raucous caucus took place down at the Watch headquarters a little while ago. Quite the magnificent one, by all accounts. I wish I’d been there to see it myself, but duty calls and all.”</i>", parse);
 				Text.NL();
 				Text.Add("Why, there was some kind of shake-up? Oh dear. It certainly had nothing to do with you; it’s not as if you were even anywhere near the place when things went down.", parse);
@@ -953,7 +953,7 @@ export namespace VaughnTasksScenes {
 				Text.Add("<i>“Indeed. Watchmen who don’t take bullshit were never that many to begin with, and they’re practically a dying breed nowadays.</i>", parse);
 
 				VaughnTasksScenes.Snitch.DebriefSuccess(parse);
-			} else if(vaughn.flags.Met == VaughnFlags.Met.SnitchWatchhousSuccess) {
+			} else if (vaughn.flags.Met === VaughnFlags.Met.SnitchWatchhousSuccess) {
 				Text.Add("<i>“Ah, you’re back,”</i> Vaughn says, greeting you with a tip of his hat. The fox-morph seems uncharacteristically merry, and you have a guess as to why. <i>“Did you have a good time?”</i>", parse);
 				Text.NL();
 				Text.Add("It was quite the wonderful time. You didn’t dare to hang around to watch the fireworks like he suggested, but unless Terrell got back to his locker, found where you’d hidden the evidence and disposed of it - quite the unlikely case - then one could consider this mission accomplished.", parse);
@@ -985,16 +985,16 @@ export namespace VaughnTasksScenes {
 		}
 
 		export function OutOfTime() {
-			let vaughn = GAME().vaughn;
+			const vaughn = GAME().vaughn;
 			return VaughnTasksScenes.Snitch.OnTask() && vaughn.taskTimer.Expired();
 		}
 
 		export function DebriefOutOfTime() {
-			let player = GAME().player;
-			let outlaws = GAME().outlaws;
+			const player = GAME().player;
+			const outlaws = GAME().outlaws;
 
-			let parse : any = {
-				playername : player.name
+			const parse: any = {
+				playername : player.name,
 			};
 
 			Text.Clear();
@@ -1021,10 +1021,10 @@ export namespace VaughnTasksScenes {
 			VaughnTasksScenes.Snitch.DebriefFailure(parse);
 		}
 
-		export function DebriefSuccess(parse : any) {
-			let party : Party = GAME().party;
-			let outlaws = GAME().outlaws;
-			let vaughn = GAME().vaughn;
+		export function DebriefSuccess(parse: any) {
+			const party: Party = GAME().party;
+			const outlaws = GAME().outlaws;
+			const vaughn = GAME().vaughn;
 
 			Text.NL();
 			Text.Add("<i>“Well, that seems like that’s that,”</i> Vaughn says. <i>“Your help’s much appreciated, and with any luck, Terrell’s going to find himself in quite a bit of hot soup for the foreseeable future. Justice is served, righteousness prevails, and all that other stuff I’m supposed to say but I was never really very good at.”</i>", parse);
@@ -1034,8 +1034,8 @@ export namespace VaughnTasksScenes {
 			Text.Add("<i>“Dunno if it’s a pleasure or not, but it damn well felt good to receive the news of the bastard’s demise. Here, it’s not much, but I set these aside for you from the last consignment which came in. We don’t have any actual <b>money</b> to spare at the moment, so goods is all that I can reward you with.”</i>", parse);
 			Text.NL();
 
-			Text.Add("Received 5x Energy Potions.<br>", parse, 'bold');
-			Text.Add("Received 5x Speed Potions.", parse, 'bold');
+			Text.Add("Received 5x Energy Potions.<br>", parse, "bold");
+			Text.Add("Received 5x Speed Potions.", parse, "bold");
 
 			Text.NL();
 
@@ -1054,8 +1054,8 @@ export namespace VaughnTasksScenes {
 			Gui.NextPrompt();
 		}
 
-		export function DebriefFailure(parse : any) {
-			let vaughn = GAME().vaughn;
+		export function DebriefFailure(parse: any) {
+			const vaughn = GAME().vaughn;
 
 			Text.NL();
 			Text.Add("<i>“One more thing. You still have the evidence, don’t you?”</i>", parse);
@@ -1079,26 +1079,26 @@ export namespace VaughnTasksScenes {
 
 	export namespace Poisoning {
 		export function Available() {
-			let vaughn = GAME().vaughn;
-			if(vaughn.flags.Met >= VaughnFlags.Met.CompletedPoisoning) { return false; }
+			const vaughn = GAME().vaughn;
+			if (vaughn.flags.Met >= VaughnFlags.Met.CompletedPoisoning) { return false; }
 			return true;
 		}
 		export function OnTask() {
-			let vaughn = GAME().vaughn;
-			return vaughn.flags.Met == VaughnFlags.Met.OnTaskPoisoning;
+			const vaughn = GAME().vaughn;
+			return vaughn.flags.Met === VaughnFlags.Met.OnTaskPoisoning;
 		}
 		export function Completed() {
-			let vaughn = GAME().vaughn;
+			const vaughn = GAME().vaughn;
 			return vaughn.flags.Met >= VaughnFlags.Met.CompletedPoisoning;
 		}
 
 		export function Start() {
-			let player = GAME().player;
-			let party : Party = GAME().party;
-			let vaughn = GAME().vaughn;
+			const player = GAME().player;
+			const party: Party = GAME().party;
+			const vaughn = GAME().vaughn;
 
-			let parse : any = {
-				playername : player.name
+			const parse: any = {
+				playername : player.name,
 			};
 
 			Text.Clear();
@@ -1138,7 +1138,7 @@ export namespace VaughnTasksScenes {
 			Text.Flush();
 
 			// [Poison][Aphrodisiac]
-			let options = new Array();
+			const options = new Array();
 			options.push({ nameStr : "Poison",
 				tooltip : "The poison sounds cruel enough, thank you very much.",
 				func() {
@@ -1151,7 +1151,7 @@ export namespace VaughnTasksScenes {
 					party.Inv().AddItem(QuestItems.OutlawPoison);
 
 					Gui.PrintDefaultOptions();
-				}, enabled : true
+				}, enabled : true,
 			});
 			options.push({ nameStr : "Aphrodisiac",
 				tooltip : "Why not? It might be fun to watch.",
@@ -1168,10 +1168,10 @@ export namespace VaughnTasksScenes {
 					party.Inv().AddItem(QuestItems.OutlawAphrodisiac);
 
 					Gui.PrintDefaultOptions();
-				}, enabled : true
+				}, enabled : true,
 			});
 
-			Gui.Callstack.push(function() {
+			Gui.Callstack.push(() => {
 				Text.NL();
 				Text.Add("<i>“Now, as for how much you want to use - just a thimbleful will do, really, but there’s enough in here to spike a full-course meal for a whole bunch of folks, which is what it’ll probably come to.”</i>", parse);
 				Text.NL();
@@ -1194,7 +1194,7 @@ export namespace VaughnTasksScenes {
 
 				vaughn.flags.Met = VaughnFlags.Met.OnTaskPoisoning;
 
-				let step = WorldTime().TimeToHour(0);
+				const step = WorldTime().TimeToHour(0);
 				vaughn.taskTimer = new Time(0, 0, 1, step.hour, step.minute);
 
 				Gui.NextPrompt();
@@ -1204,30 +1204,30 @@ export namespace VaughnTasksScenes {
 		}
 
 		export function InnAvailable() {
-			let vaughn = GAME().vaughn;
+			const vaughn = GAME().vaughn;
 			// Trigger this upon stepping into the Lady’s Blessing with this task active (Allotted time, 17-24 the next day, ie timer not expired, and <= 7 hours).
-			if(!VaughnTasksScenes.Poisoning.OnTask()) { return false; }
-			if(vaughn.taskTimer.Expired()) { return false; }
-			if(vaughn.taskTimer.ToHours() > 7) { return false; }
+			if (!VaughnTasksScenes.Poisoning.OnTask()) { return false; }
+			if (vaughn.taskTimer.Expired()) { return false; }
+			if (vaughn.taskTimer.ToHours() > 7) { return false; }
 			return true;
 		}
 
-		export function ArrivalAtInn(onWait : any, oldLocation? : any) {
-			let parse : any = {
-				Orvin : RigardFlags.LB.KnowsOrvin() ? "Orvin" : "the innkeeper"
+		export function ArrivalAtInn(onWait: any, oldLocation?: any) {
+			const parse: any = {
+				Orvin : RigardFlags.LB.KnowsOrvin() ? "Orvin" : "the innkeeper",
 			};
 
 			Text.Clear();
-			if(onWait) {
+			if (onWait) {
 				Text.Add("There's a sudden influx of activity as you overhear a conversation between [Orvin] and his staff. Apparently, the Lady Heydrich and her entourage are about to arrive any minute. As if summoned, small groups of chattering nobles wearing fancy clothes start filtering in through the front doors, quickly greeted by the waiters and ushered into a back room. Meanwhile, the rest of the staff busy themselves with their tasks, working with feverish determination.", parse);
 			} else {
-				parse.start = (oldLocation == WORLD().loc.Rigard.Plaza) ? "Pushing open the door of the Lady’s Blessing" : "Walking down the stairs";
+				parse.start = (oldLocation === WORLD().loc.Rigard.Plaza) ? "Pushing open the door of the Lady’s Blessing" : "Walking down the stairs";
 				Text.Add("[start], you find the the common room a whirl of activity. Not with patrons - the evening crowd is thin today - but with numerous staff, almost all of them darting between the kitchen and the stairs leading up to the rooms. The few patrons who are present are almost exclusively gathered about the gambling tables, keeping themselves out of the way of the busy waiters darting to and fro.", parse);
 			}
 			Text.NL();
 			Text.Add("An organized scene indeed… but teetering on the edge of confusion, an insidious current of chaos under the rushing surface. All it’d take is a push in the right direction to create a situation you could take advantage of… ", parse);
 			Text.NL();
-			if(!GAME().lei.Recruited()) {
+			if (!GAME().lei.Recruited()) {
 				Text.Add("Lei is sitting in his usual corner, ever faithful to his charge. You meet the mercenary’s eyes, and he gives you a silent nod before turning his gaze away from you. He’s a small circle of calm in the whirlwind of activity, but he wouldn’t be Lei otherwise, you guess.", parse);
 				Text.NL();
 			}
@@ -1239,21 +1239,21 @@ export namespace VaughnTasksScenes {
 			VaughnTasksScenes.Poisoning.InnPrompt({});
 		}
 
-		export function InnPrompt(opts : any) {
-			let player = GAME().player;
-			let party : Party = GAME().party;
-			let vaughn = GAME().vaughn;
-			let lei = GAME().lei;
-			let twins = GAME().twins;
+		export function InnPrompt(opts: any) {
+			const player = GAME().player;
+			const party: Party = GAME().party;
+			const vaughn = GAME().vaughn;
+			const lei = GAME().lei;
+			const twins = GAME().twins;
 
-			let parse : any = {
+			const parse: any = {
 				Orvin : RigardFlags.LB.KnowsOrvin() ? "Orvin" : "the innkeeper",
-				playername : player.name
+				playername : player.name,
 			};
 
 			// [Orvin][Kitchen][Waiters][Lei][Twins]
-			let options = new Array();
-			if(RigardFlags.LB.KnowsOrvin() && !opts.Orvin) {
+			const options = new Array();
+			if (RigardFlags.LB.KnowsOrvin() && !opts.Orvin) {
 				options.push({ nameStr : "Orvin",
 					tooltip : "Chat with Orvin and try to find out more about the situation.",
 					func() {
@@ -1280,16 +1280,16 @@ export namespace VaughnTasksScenes {
 						opts.Orvin = true;
 
 						VaughnTasksScenes.Poisoning.InnPrompt(opts);
-					}, enabled : true
+					}, enabled : true,
 				});
 			}
 			options.push({ nameStr : "Kitchen",
 				tooltip : "Sneak into the kitchen and get up to some mischief.",
 				func() {
 					VaughnTasksScenes.Poisoning.Kitchen(opts);
-				}, enabled : true
+				}, enabled : true,
 			});
-			if(!opts.Waiters) {
+			if (!opts.Waiters) {
 				options.push({ nameStr : "Waiters",
 					tooltip : "Waylay one of the waiters with your charm and try to create an opening.",
 					func() {
@@ -1297,7 +1297,7 @@ export namespace VaughnTasksScenes {
 						Text.Add("Hmm. If the kitchen’s a no-go, then that leaves you with the only option of waylaying the food en route to its destination. <i>That</i> in turn means having to deal with one of the many waiters plying up and down the staircase leading to the inn’s upper stories, and you get the distinct feeling that whatever shenanigans you’re going to cook up to distract the waiters with, they’re going to have to be good. Really good.", parse);
 						Text.NL();
 						Text.Add("Although heading over to the stairwell and trying your best to get their attention, not a single one stops to give you so much as a moment. ", parse);
-						if(player.Cha() > 45) {
+						if (player.Cha() > 45) {
 							Text.Add("Some of them do glance in your direction for a bit, but quickly snap back to the task at hand. ", parse);
 						}
 						Text.Add("Is Lady Heydrich’s little get-together that important? Sure seems like it, for so many of the staff to be dedicated to serving her. Or maybe there’s something more to it, judging from how nervous they look…", parse);
@@ -1308,10 +1308,10 @@ export namespace VaughnTasksScenes {
 						opts.Waiters = true;
 
 						VaughnTasksScenes.Poisoning.InnPrompt(opts);
-					}, enabled : true
+					}, enabled : true,
 				});
 			}
-			if(!opts.Lei) {
+			if (!opts.Lei) {
 				options.push({ nameStr : "Lei",
 					tooltip : "Ask Lei and see if you can learn more about the situation.",
 					func() {
@@ -1326,7 +1326,7 @@ export namespace VaughnTasksScenes {
 						Text.Flush();
 
 						// [Yes][No]
-						let options = new Array();
+						const options = new Array();
 						options.push({ nameStr : "Yes",
 							tooltip : "Ask Lei if he’s willing to moonlight for you.",
 							func() {
@@ -1339,7 +1339,7 @@ export namespace VaughnTasksScenes {
 								Text.NL();
 								Text.Add("That’s the idea, yes. Will he do it?", parse);
 								Text.NL();
-								if(lei.Relation() >= LeiFlags.Rel.L3) {
+								if (lei.Relation() >= LeiFlags.Rel.L3) {
 									Text.Add("Lei closes his eyes and thinks a moment. <i>“An interesting proposal. As luck would have it, I am certain that my employers will not be in need of my services for the next couple of hours. It appears a suitable opportunity to practice some of my more subtle skills.</i>", parse);
 									Text.NL();
 									Text.Add("<i>“Show me this vial of yours.”</i>", parse);
@@ -1360,7 +1360,7 @@ export namespace VaughnTasksScenes {
 									Text.Flush();
 
 									// [Yes][No]
-									let options = new Array();
+									const options = new Array();
 									options.push({ nameStr : "Yes",
 										tooltip : "Pay his asking price.",
 										func() {
@@ -1394,14 +1394,14 @@ export namespace VaughnTasksScenes {
 
 											TimeStep({hour: 1});
 
-											if(vaughn.flags.T3 & VaughnFlags.Poisoning.Aphrodisiac) {
+											if (vaughn.flags.T3 & VaughnFlags.Poisoning.Aphrodisiac) {
 												Gui.NextPrompt(VaughnTasksScenes.Poisoning.AphrodisiacEntry);
 											} else {
-												Gui.NextPrompt(function() {
+												Gui.NextPrompt(() => {
 													MoveToLocation(WORLD().loc.Rigard.Plaza);
 												});
 											}
-										}, enabled : party.coin >= 250
+										}, enabled : party.coin >= 250,
 									});
 									options.push({ nameStr : "No",
 										tooltip : "You can’t or won’t pay.",
@@ -1415,7 +1415,7 @@ export namespace VaughnTasksScenes {
 											Text.Flush();
 
 											VaughnTasksScenes.Poisoning.InnPrompt(opts);
-										}, enabled : true
+										}, enabled : true,
 									});
 									Gui.SetButtonsFromList(options, false, null);
 								} else {
@@ -1432,7 +1432,7 @@ export namespace VaughnTasksScenes {
 
 									VaughnTasksScenes.Poisoning.InnPrompt(opts);
 								}
-							}, enabled : true
+							}, enabled : true,
 						});
 						options.push({ nameStr : "No",
 							tooltip : "Nah, you’ll pass.",
@@ -1456,13 +1456,13 @@ export namespace VaughnTasksScenes {
 								Text.Flush();
 
 								VaughnTasksScenes.Poisoning.InnPrompt(opts);
-							}, enabled : true
+							}, enabled : true,
 						});
 						Gui.SetButtonsFromList(options, false, null);
-					}, enabled : true
+					}, enabled : true,
 				});
 			}
-			if(!opts.Twins) {
+			if (!opts.Twins) {
 				options.push({ nameStr : "Twins",
 					tooltip : "Could the Twins possibly lend a hand here?",
 					func() {
@@ -1500,7 +1500,7 @@ export namespace VaughnTasksScenes {
 						Text.NL();
 						Text.Add("<i>“Ah, that’s it. Come to think of it, she’s been throwing her weight around a little too much of late - having Majid’s patronage would certainly drive someone petty like her into a bout of preening. Give power to the undeserving, and that’s what happens. I wonder just what Majid can get out of a small-timer like Heydrich.”</i> Rumi takes a sip of her drink and thinks for a little longer, eyes staring into empty space.", parse);
 						Text.NL();
-						if(twins.Relation() >= 80) {
+						if (twins.Relation() >= 80) {
 							Text.Add("<i>“Another layer of obfuscation between him and his goals, of course. Lady Heydrich <b>has</b> been a thorn in our side for a while, wouldn’t you say, Sister?”</i>", parse);
 							Text.NL();
 							Text.Add("<i>“Yes. Yes, she has. I haven’t forgotten that last time she made a whole fuss about that bill. Quite desperate, if I remember.”</i> A smile breaks out on the princess’ face. <i>“I suppose we could lend a hand, grant a royal favor… within reason, of course. We do have reputations to maintain, and couldn’t be caught dealing with all sorts of shady characters.”</i>", parse);
@@ -1571,10 +1571,10 @@ export namespace VaughnTasksScenes {
 
 							TimeStep({hour: 1});
 
-							if(vaughn.flags.T3 & VaughnFlags.Poisoning.Aphrodisiac) {
+							if (vaughn.flags.T3 & VaughnFlags.Poisoning.Aphrodisiac) {
 								Gui.NextPrompt(VaughnTasksScenes.Poisoning.AphrodisiacEntry);
 							} else {
-								Gui.NextPrompt(function() {
+								Gui.NextPrompt(() => {
 									MoveToLocation(WORLD().loc.Rigard.Plaza);
 								});
 							}
@@ -1591,26 +1591,26 @@ export namespace VaughnTasksScenes {
 
 							VaughnTasksScenes.Poisoning.InnPrompt(opts);
 						}
-					}, enabled : true
+					}, enabled : true,
 				});
 			}
 			Gui.SetButtonsFromList(options, false, null);
 		}
 
-		export function Kitchen(opts : any) {
-			let player = GAME().player;
-			let party : Party = GAME().party;
-			let vaughn = GAME().vaughn;
-			let terry = GAME().terry;
+		export function Kitchen(opts: any) {
+			const player = GAME().player;
+			const party: Party = GAME().party;
+			const vaughn = GAME().vaughn;
+			const terry = GAME().terry;
 
-			let parse : any = {
-				playername: player.name
+			let parse: any = {
+				playername: player.name,
 			};
 
 			Text.Clear();
 			Text.Add("The wonderful aroma of the fare to be had in the Lady’s Blessing hits you once more, and your thoughts drift towards the busy kitchens. Getting into the suites is out of the question, so your best bet is to spike the food either after it’s been cooked or when it’s en route to its final destination. Of the two approaches, you decide that the former offers the best chance of success. Sneaking in, spiking the food and then hightailing it out of there - much easier said than done…", parse);
 			Text.NL();
-			if(party.InParty(terry)) {
+			if (party.InParty(terry)) {
 				parse = terry.ParserPronouns(parse);
 
 				Text.Add("…Of course, you do have with you someone who’s uniquely suited to the job of sneaking around, and if Terry can take things from where they belong, then putting things where they <i>don’t</i> belong should be just as easy. Right? Right?", parse);
@@ -1619,7 +1619,7 @@ export namespace VaughnTasksScenes {
 				Text.Flush();
 
 				// [Terry][Yourself]
-				let options = new Array();
+				const options = new Array();
 				options.push({ nameStr : "Terry",
 					tooltip : Text.Parse("The thief's experience should really pay off here; you doubt [heshe]'ll have any trouble getting it done.", parse),
 					func() {
@@ -1634,7 +1634,7 @@ export namespace VaughnTasksScenes {
 						Text.Add("<i>“What?”</i> Terry exclaims[rel]. <i>“I’m to do your dirty work?”</i>", parse);
 						Text.NL();
 						Text.Add("Well, of course. That’s why you keep [himher] around, to do the things that you can’t manage alone. ", parse);
-						if(terry.Sexed()) {
+						if (terry.Sexed()) {
 							Text.Add("Why, did [heshe] think you just kept [himher] around for the petting and fucking?", parse);
 							Text.NL();
 							parse.rel = terry.Relation() >= 60 ? Text.Parse(" before sticking [hisher] tongue out at you", parse) : "";
@@ -1674,7 +1674,7 @@ export namespace VaughnTasksScenes {
 						Text.Add("Huh. Now that’s an interesting way of looking at things, and you’re doubly glad you asked Terry to go in your stead, but [heshe]’s absolutely sure?", parse);
 						Text.NL();
 						Text.Add("Terry nods. <i>“You get a feel for these things, and then have to decide whether you want to go through with the heist anyways. Still, it may have taken most of what I had, but hey, I still got the job done. I don’t think they were looking for someone like me, though, so that helped, even if there were so many eyes in the kitchen…”</i>", parse);
-						if(terry.PregHandler().IsPregnant()) {
+						if (terry.PregHandler().IsPregnant()) {
 							Text.Add(" The [foxvixen] pats [hisher] rounded tummy. <i>“Didn’t help that I had to lug around this little one too, although I think they enjoyed it.”</i>", parse);
 						}
 						Text.NL();
@@ -1688,21 +1688,21 @@ export namespace VaughnTasksScenes {
 
 						TimeStep({hour: 1});
 
-						if(vaughn.flags.T3 & VaughnFlags.Poisoning.Aphrodisiac) {
+						if (vaughn.flags.T3 & VaughnFlags.Poisoning.Aphrodisiac) {
 							Gui.NextPrompt(VaughnTasksScenes.Poisoning.AphrodisiacEntry);
 						} else {
-							Gui.NextPrompt(function() {
+							Gui.NextPrompt(() => {
 								MoveToLocation(WORLD().loc.Rigard.Plaza);
 							});
 						}
-					}, enabled : true
+					}, enabled : true,
 				});
 				options.push({ nameStr : "Yourself",
 					tooltip : "If you want something done properly, you’ll have to do it yourself.",
 					func() {
 						Text.Clear();
 						VaughnTasksScenes.Poisoning.KitchenYourself();
-					}, enabled : true
+					}, enabled : true,
 				});
 				Gui.SetButtonsFromList(options, false, null);
 			} else {
@@ -1711,15 +1711,15 @@ export namespace VaughnTasksScenes {
 		}
 
 		export function KitchenYourself() {
-			let player = GAME().player;
-			let party : Party = GAME().party;
-			let vaughn = GAME().vaughn;
+			const player = GAME().player;
+			const party: Party = GAME().party;
+			const vaughn = GAME().vaughn;
 
-			let parse : any = {
-				Orvin : RigardFlags.LB.KnowsOrvin() ? "Orvin" : "the innkeeper"
+			const parse: any = {
+				Orvin : RigardFlags.LB.KnowsOrvin() ? "Orvin" : "the innkeeper",
 			};
 
-			parse.comp = party.Num() == 2 ? party.Get(1).name : "your companions";
+			parse.comp = party.Num() === 2 ? party.Get(1).name : "your companions";
 			parse.c = party.Num() > 1 ? Text.Parse(" ask [comp] to wait for you in the barroom, and", parse) : "";
 			Text.Add("Right. No time like the present, then. With the constant stream of staff heading in and out of the kitchen’s main door, just waltzing on in probably isn’t the best of ideas. There doesn’t seem to be any other way of getting into the kitchen from the common room, so you[c] leave the Lady’s Blessing proper and nip around to the back of the building. There ought to be someplace where deliveries are made and the staff enter the inn by, at the very least… it’s too much to imagine that you’d find a pie set out on the windowsill to cool or something of the likes, but at least you might find an alternative approach here.", parse);
 			Text.NL();
@@ -1732,14 +1732,14 @@ export namespace VaughnTasksScenes {
 			Text.Add("Wasting no time, you uncork the vial and begin tainting the bowls, pitchers and serving dishes slated for suite thirty-three, smearing a few drops on each one in turn.", parse);
 			Text.NL();
 
-			let check = (player.Dex() + player.Int()) / 2 + Math.random() * 20;
-			let goal = 50;
+			const check = (player.Dex() + player.Int()) / 2 + Math.random() * 20;
+			const goal = 50;
 
-			if(GetDEBUG()) {
-				Text.Add("Dex+Int check: [val] vs [goal]", {val: check, goal}, 'bold');
+			if (GetDEBUG()) {
+				Text.Add("Dex+Int check: [val] vs [goal]", {val: check, goal}, "bold");
 				Text.NL();
 			}
-			if(check >= goal) {
+			if (check >= goal) {
 				Text.Add("It’s a tiring job, ensuring that everything is as unnoticeable as possible, but the liquid does dry quickly - hopefully that doesn’t reduce its efficacy any. If the cooks or waiters spot it, hopefully they’ll just mistake it for dampness or something and won’t wipe it off… or worse.", parse);
 				Text.NL();
 				Text.Add("It seems like forever, but you finish off the last of the vial’s contents and pop the stopper back in place. And just in time, too - you can hear voices coming to you from beyond the far wall, amidst the din of the kitchen’s activity. Even with the speakers shouting, you can’t quite make out what’s being said, but you know you don’t want to be here when they come in. Sprinting on tiptoe, you vault over the windowsill with a sudden burst of panic-fuelled energy and land in the street outside, just managing to shut the window before the door creaks open and light spills into the back room.", parse);
@@ -1759,10 +1759,10 @@ export namespace VaughnTasksScenes {
 
 				TimeStep({hour: 1});
 
-				if(vaughn.flags.T3 & VaughnFlags.Poisoning.Aphrodisiac) {
+				if (vaughn.flags.T3 & VaughnFlags.Poisoning.Aphrodisiac) {
 					Gui.NextPrompt(VaughnTasksScenes.Poisoning.AphrodisiacEntry);
 				} else {
-					Gui.NextPrompt(function() {
+					Gui.NextPrompt(() => {
 						MoveToLocation(WORLD().loc.Rigard.Plaza);
 					});
 				}
@@ -1774,7 +1774,7 @@ export namespace VaughnTasksScenes {
 				Text.Add("No time to look back - and they might see your face if you did. With one hand on the windowsill, you vault through the window and hit the street outside running. While you don’t think whoever it was behind you managed to get a good look at your back before you took off, it’s probably for the best that you don’t show your face about the Lady’s Blessing for a little bit.", parse);
 				Text.NL();
 				Text.Add("Thankfully, whoever it was who discovered your intrusion doesn’t seem too interested in pursuing you, and you slow your pace a little as you circle around to the inn’s front, keeping a wide berth from the actual entrance.", parse);
-				if(party.Num() > 1) {
+				if (party.Num() > 1) {
 					parse.s = party.Num() > 2 ? "" : "s";
 					Text.Add(" Presently, [comp] emerge[s] from the inn’s front and rejoins you, having figured out what the sudden hullabaloo was all about.", parse);
 				}
@@ -1789,15 +1789,15 @@ export namespace VaughnTasksScenes {
 
 				TimeStep({hour: 1});
 
-				Gui.NextPrompt(function() {
+				Gui.NextPrompt(() => {
 					MoveToLocation(WORLD().loc.Rigard.Plaza);
 				});
 			}
 		}
 
 		export function AphrodisiacEntry() {
-			let parse : any = {
-				Orvin : RigardFlags.LB.KnowsOrvin() ? "Orvin" : "the innkeeper"
+			const parse: any = {
+				Orvin : RigardFlags.LB.KnowsOrvin() ? "Orvin" : "the innkeeper",
 			};
 
 			Text.Clear();
@@ -1807,24 +1807,24 @@ export namespace VaughnTasksScenes {
 			Text.Flush();
 
 			// [Peek][Leave]
-			let options = new Array();
+			const options = new Array();
 			options.push({ nameStr : "Peek",
 				tooltip : "Face it, you just want to know what’s going on inside.",
 				func() {
 					VaughnTasksScenes.Poisoning.AphrodisiacPeek();
-				}, enabled : true
+				}, enabled : true,
 			});
 			options.push({ nameStr : "Leave",
 				tooltip : "You don’t want to linger here any more than necessary.",
 				func() {
 					VaughnTasksScenes.Poisoning.AphrodisiacLeave();
-				}, enabled : true
+				}, enabled : true,
 			});
 			Gui.SetButtonsFromList(options, false, null);
 		}
 
 		export function AphrodisiacLeave() {
-			let parse : any = {};
+			const parse: any = {};
 
 			Text.Clear();
 			Text.Add("Shaking your head, you turn your back and hurry down and out of the Lady’s Blessing. Things should be getting heated up soon, if Vaughn’s description of the aphrodisiac’s effects were accurate, and since you know for sure that the job’s taken care of, you don’t want to be here any longer than necessary. There’s nothing left for you now but to report back to Vaughn and hear what he has to say.", parse);
@@ -1834,19 +1834,19 @@ export namespace VaughnTasksScenes {
 		}
 
 		export function AphrodisiacPeek() {
-			let player = GAME().player;
-			let party : Party = GAME().party;
-			let vaughn = GAME().vaughn;
-			let room69 = GAME().room69;
+			const player = GAME().player;
+			const party: Party = GAME().party;
+			const vaughn = GAME().vaughn;
+			const room69 = GAME().room69;
 
-			let parse : any = {
-				Orvin : RigardFlags.LB.KnowsOrvin() ? "Orvin" : "the innkeeper"
+			let parse: any = {
+				Orvin : RigardFlags.LB.KnowsOrvin() ? "Orvin" : "the innkeeper",
 			};
 			parse = player.ParserTags(parse);
 			parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 			parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
 
-			let p1cock = player.BiggestCock();
+			const p1cock = player.BiggestCock();
 
 			Text.Clear();
 			Text.Add("Curiosity gets the better of you, and you can’t help but crack open the suite door and take a little peek. The scene that greets your eyes isn’t quite the roof-roaring orgy yet, but it’s certainly getting more than a little steamy for the occupants of suite thirty-three, numbering about twelve to fifteen in total. While the aphrodisiac hasn’t had enough time to kick in fully, undone clothes and rumpled fabrics are the order of the day, and there’s plenty of making out going on between the various people within.", parse);
@@ -1859,7 +1859,7 @@ export namespace VaughnTasksScenes {
 			Text.Flush();
 
 			// [Join][69][Leave]
-			let options = new Array();
+			const options = new Array();
 			options.push({ nameStr : "Join",
 				tooltip : "Why let a good orgy go to waste? Join in the fun!",
 				func() {
@@ -1869,11 +1869,11 @@ export namespace VaughnTasksScenes {
 					Text.NL();
 					Text.Add("The other merchants and traders can do themselves; you’re going straight for the prize! Without hesitation, you shove the young man currently occupying her face off; his cock emerges with an audible pop, trailing a small string of seed, and you send him on his way with a good slap on his rump. Hazy and unfocused, Heydrich’s eyes roll this way and that, perhaps wondering who you are or where that delicious cock went. What a greedy little slut, considering that she’s still got one rod of man-meat in each hand.", parse);
 					Text.NL();
-					if(p1cock) {
+					if (p1cock) {
 						parse.mc = player.NumCocks() > 1 ? "whole lot of replacements" : "replacement";
 						Text.Add("Well, you’ve got a [mc] right here, so no need to worry about that. Straddling the lusty noblewoman’s chest, you prodigiously apply your elbow to make a little space for yourself and make yourself comfortable.", parse);
 						Text.NL();
-						if(p1cock.Len() > 25) {
+						if (p1cock.Len() > 25) {
 							Text.Add("With how heavy your [cocks] [isAre], you need plenty of space, and waste no time in literally cock-slapping the nearby orgy-goers into clearing a path for your ponderous rod. Heydrich’s eyes widen as she takes in the impressive length and girth of your man-meat[s], but apprehension soon turns to delight as the aphrodisiac’s hold strengthens. With a renewed urgency, she gobbles up[oneof] your [cocks] without hesitation, trying to cram all she can fit into that mouth of hers and leaving barely enough space to breathe.", parse);
 						} else {
 							parse.a = player.NumCocks() > 1 ? "a" : "your";
@@ -1882,7 +1882,7 @@ export namespace VaughnTasksScenes {
 						Text.NL();
 						parse.b = player.HasBalls() ? " balls slapping at her chin and" : "";
 						Text.Add("Without further ado, you buck your hips forward and start pounding away in a steady, instinctive rhythm,[b] rutting away without a care in the world. Now you’re just another warm body in the midst of the glorious orgy that’s taking place here, flushed and steadily getting slick with sweat as you give in to your desires even without the need of an alchemical aid.", parse);
-						if(player.NumCocks() > 1) {
+						if (player.NumCocks() > 1) {
 							Text.NL();
 							Text.Add("Your other shaft[s2] flop[notS2] and bat[notS2] this way and that, sometimes bumping against Lady Heydrich’s chin, sometimes against other warm things which identity you’re not exactly sure of. At length, you become vaguely aware of other fingers grasping for [itThem2], pumping along [itsTheir2] length with hungry, desperate strokes. It could be any number of the writhing bodies which‘ve drawn closer to the massive pile of copulation since you arrived, but hey, it’s not polite to look a gift horse in the mouth. That mouth’s much better used elsewhere, after all.", parse);
 							Text.NL();
@@ -1900,7 +1900,7 @@ export namespace VaughnTasksScenes {
 					Text.NL();
 					Text.Add("The plush carpet is already soaking up plenty of sexual fluids, and as you vault over the windowsill and onto the roof tiles outside, you can’t help but pity whoever’s going to have to clean this up afterwards. Shouts erupt from behind you as the door’s flung open, and there’s more than one scream at the sight of glistening, rutting orgy-goers, but you don’t dare look back for fear of risking someone getting a glimpse of your face.", parse);
 					Text.NL();
-					parse.comp = party.Num() == 2 ? party.Get(1).name : "your companions";
+					parse.comp = party.Num() === 2 ? party.Get(1).name : "your companions";
 					parse.c = party.Num() > 1 ? Text.Parse(" where [comp] rejoin you", parse) : "";
 					Text.Add("Yeah… maybe staying to partake wasn’t the best of ideas, but it sure <i>felt</i> good while it lasted. Down the roof and round the back[c] - there’s no way you’re heading into the Lady’s Blessing for a while now, not while [Orvin] and his people sort out this mess and are still casting suspicious eyes on everyone and everything. Your nethers still tingling from your rudely interrupted repast, you do your best to clear your head and gather your thoughts. Since there’s nothing left for you to do here, perhaps it’d be best if you headed back to Vaughn and reported in.", parse);
 					Text.Flush();
@@ -1911,12 +1911,12 @@ export namespace VaughnTasksScenes {
 
 					TimeStep({hour: 1});
 
-					Gui.NextPrompt(function() {
+					Gui.NextPrompt(() => {
 						MoveToLocation(WORLD().loc.Rigard.Plaza);
 					});
-				}, enabled : player.FirstCock() || player.FirstVag()
+				}, enabled : player.FirstCock() || player.FirstVag(),
 			});
-			if(room69.flags.Rel >= Room69Flags.RelFlags.GoodTerms) {
+			if (room69.flags.Rel >= Room69Flags.RelFlags.GoodTerms) {
 				options.push({ nameStr : "69",
 					tooltip : "Come to think of it, you know someone who might keep them occupied for a while…",
 					func() {
@@ -1938,35 +1938,35 @@ export namespace VaughnTasksScenes {
 						vaughn.flags.T3 |= VaughnFlags.Poisoning.Used69;
 						TimeStep({hour: 1});
 
-						Gui.NextPrompt(function() {
+						Gui.NextPrompt(() => {
 							MoveToLocation(WORLD().loc.Rigard.Plaza);
 						});
-					}, enabled : true
+					}, enabled : true,
 				});
 			}
 			options.push({ nameStr : "Leave",
 				tooltip : "All right, you know the the job is done. Get out!",
 				func() {
 					VaughnTasksScenes.Poisoning.AphrodisiacLeave();
-				}, enabled : true
+				}, enabled : true,
 			});
 			Gui.SetButtonsFromList(options, false, null);
 		}
 
 		export function OutOfTime() {
-			let vaughn = GAME().vaughn;
+			const vaughn = GAME().vaughn;
 			return VaughnTasksScenes.Poisoning.OnTask() && vaughn.taskTimer.Expired();
 		}
 
 		export function DebriefSuccess() {
-			let player = GAME().player;
-			let party : Party = GAME().party;
-			let outlaws = GAME().outlaws;
-			let vaughn = GAME().vaughn;
+			const player = GAME().player;
+			const party: Party = GAME().party;
+			const outlaws = GAME().outlaws;
+			const vaughn = GAME().vaughn;
 
-			let parse : any = {
+			const parse: any = {
 				Orvin : RigardFlags.LB.KnowsOrvin() ? "Orvin" : "the innkeeper",
-				playername : player.name
+				playername : player.name,
 			};
 
 			Text.Clear();
@@ -1986,7 +1986,7 @@ export namespace VaughnTasksScenes {
 			Text.NL();
 			Text.Add("The fox-morph falls silent, and the two of you stare at each other for a few moments until he collects himself once more. <i>“You just ought to keep this in mind. Get your stuff done, and we’ll handle the mole in our midst. In the meantime, we should probably get back to the problem at hand.”</i>", parse);
 			Text.NL();
-			if(vaughn.flags.T3 & VaughnFlags.Poisoning.Poison) {
+			if (vaughn.flags.T3 & VaughnFlags.Poisoning.Poison) {
 				Text.Add("Well, you got the poison into the food. You didn’t stop to check if the stuff had actually been eaten, though, and by the Lady herself…", parse);
 				Text.NL();
 				Text.Add("<i>“You did what you could,”</i> Vaughn says with a sigh. <i>“It’s the best we can hope for - if everyone around Heydrich but her comes down with the squealing shits, then it’s just our bad luck. You can’t win them all, as Maria says.”</i>", parse);
@@ -2020,7 +2020,7 @@ export namespace VaughnTasksScenes {
 			Text.NL();
 			Text.Add("A wink and tip of Vaughn’s hat. <i>“Open it up in a bit and find out, that’s all I’ll say. All right, then - if there’s nothing else, I’ve got to get back on duty. Have a good one, [playername].”</i>", parse);
 			Text.NL();
-			Text.Add("You unwrap the package. It contains a razor sharp but very fragile looking glass sword.", parse, 'bold');
+			Text.Add("You unwrap the package. It contains a razor sharp but very fragile looking glass sword.", parse, "bold");
 			Text.Flush();
 
 			TimeStep({hour: 1});
@@ -2035,12 +2035,12 @@ export namespace VaughnTasksScenes {
 		}
 
 		export function DebriefFailure() {
-			let player = GAME().player;
-			let vaughn = GAME().vaughn;
+			const player = GAME().player;
+			const vaughn = GAME().vaughn;
 
-			let parse : any = {
+			const parse: any = {
 				Orvin : RigardFlags.LB.KnowsOrvin() ? "Orvin" : "the innkeeper",
-				playername : player.name
+				playername : player.name,
 			};
 
 			Text.Clear();
@@ -2075,11 +2075,11 @@ export namespace VaughnTasksScenes {
 		}
 
 		export function DebriefOutOfTime() {
-			let party : Party = GAME().party;
-			let outlaws = GAME().outlaws;
-			let vaughn = GAME().vaughn;
+			const party: Party = GAME().party;
+			const outlaws = GAME().outlaws;
+			const vaughn = GAME().vaughn;
 
-			let parse : any = {
+			const parse: any = {
 
 			};
 
