@@ -250,8 +250,8 @@ export namespace AscheSexScenes {
 			player.Fuck(p1cock, 0);
 
 			if (player.NumCocks() > 1) {
-				parse.c = player.NumCocks() == 2 ? "your remaining shaft" :
-							player.NumCocks() == 3 ? "your remaining shafts" :
+				parse.c = player.NumCocks() === 2 ? "your remaining shaft" :
+							player.NumCocks() === 3 ? "your remaining shafts" :
 							"two of your remaining shafts";
 				parse.c2 = longCock ? "in tandem with her throat" : "away";
 				Text.Add("At the same time, her hands wrap around [c], working [c2] as she begins to jerk and suck you off with fluid, rhythmic motions of her body.", parse);

@@ -72,8 +72,8 @@ export class Fera extends Entity {
 	}
 
 	public FromStorage(storage: any) {
-		this.Butt().virgin     = parseInt(storage.avirgin) == 1;
-		this.FirstVag().virgin = parseInt(storage.virgin)  == 1;
+		this.Butt().virgin     = parseInt(storage.avirgin, 10) === 1;
+		this.FirstVag().virgin = parseInt(storage.virgin, 10)  === 1;
 
 		this.LoadPersonalityStats(storage);
 
@@ -112,7 +112,7 @@ export class Fera extends Entity {
 }
 
 // Party interaction
-FeraScenes.Interact = function() {
+FeraScenes.Interact = () => {
 	const player = GAME().player;
 	const fera = GAME().fera;
 
@@ -121,7 +121,7 @@ FeraScenes.Interact = function() {
 	if (!RigardScenes.ClothShop.IsOpen()) {
 		Text.Add("The shop is closing, and you are asked to leave.");
 		Text.Flush();
-		Gui.NextPrompt(function() {
+		Gui.NextPrompt(() => {
 			MoveToLocation(WORLD().loc.Rigard.ShopStreet.Street);
 		});
 		return;
@@ -133,7 +133,7 @@ FeraScenes.Interact = function() {
 
 	let parse: any = {
 		playername : player.name,
-		sirmiss    : player.body.Gender() == Gender.male ? "sir" : "miss",
+		sirmiss    : player.body.Gender() === Gender.male ? "sir" : "miss",
 	};
 	parse = player.ParserTags(parse);
 	parse = fera.ParserTags(parse, "f");
@@ -142,7 +142,7 @@ FeraScenes.Interact = function() {
 	Text.Add("Fera is a cute little catgirl. She has large blue eyes and short chestnut hair, brown fur with white spots, and large catlike ears and a tail. She is wearing a very nice looking pink dress with short sleeves and little ruffles along the edges. It is cut above her knees and shows off her slender form very nicely. Her chest is large for her overall size, but it is nothing compared to Miss Nexelle's. Her dress is cut around her [fbreasts] so that her cleavage is clearly visible.", parse);
 	Text.NL();
 
-	if (fera.flags.Met == 0) {
+	if (fera.flags.Met === 0) {
 		fera.flags.Met = 1;
 
 		if (catScore > 0.2) {
@@ -227,7 +227,7 @@ FeraScenes.Interact = function() {
 		}, enabled : true,
 		tooltip : "Ask Fera about herself.",
 	});
-	if (fera.flags.Mom == 1) {
+	if (fera.flags.Mom === 1) {
 		options.push({ nameStr : "Mother",
 			func() {
 				Text.Clear();
@@ -384,7 +384,7 @@ FeraScenes.Interact = function() {
 	}
 };
 
-FeraScenes.TouchPrompt = function() {
+FeraScenes.TouchPrompt = () => {
 	const player = GAME().player;
 	const fera = GAME().fera;
 
@@ -475,7 +475,7 @@ FeraScenes.TouchPrompt = function() {
 	Gui.SetButtonsFromList(options, true, FeraScenes.Interact);
 };
 
-FeraScenes.SexPrompt = function() {
+FeraScenes.SexPrompt = () => {
 	const player = GAME().player;
 	const fera = GAME().fera;
 
@@ -491,7 +491,7 @@ FeraScenes.SexPrompt = function() {
 	parse = player.ParserTags(parse, "", p1Cock);
 	parse = fera.ParserTags(parse, "f");
 
-	if (player.body.Gender() != Gender.male && Math.random() < 0.5) {
+	if (player.body.Gender() !== Gender.male && Math.random() < 0.5) {
 		parse.garment = "dress";
 	} else {
 		parse.garment = "robe";
@@ -501,7 +501,7 @@ FeraScenes.SexPrompt = function() {
 	parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
 
 	const breasts = player.FirstBreastRow().size.Get() > 3;
-	parse.ballsD = player.HasBalls() ? function() { return Text.Parse(" and [balls]", parse); } : "";
+	parse.ballsD = player.HasBalls() ? () => Text.Parse(" and [balls]", parse) : "";
 
 	let armor = "";
 	if (player.Armor() || !player.LowerArmor()) { armor += "[armor]"; }
@@ -629,7 +629,7 @@ FeraScenes.SexPrompt = function() {
 					Text.NL();
 					Text.Add("<i>“You want me to keep going? I can stop if you want...”</i> she says with a smirk. You nod desperately, and she smiles and resumes fingering your [vag]. As you continue to please each other, you can see her tail swishing excitedly.", parse);
 					Text.NL();
-					parse.legs = function() { return player.LegsDesc(); };
+					parse.legs = () => player.LegsDesc();
 					parse = Text.ParserPlural(parse, player.NumLegs() > 1);
 					Text.Add("A few minutes later, you can take no more, and your body tenses as you orgasm. Fera pulls her wet fingers out of your [vag] and helps you remain standing as your [legs] weaken[notS] slightly. Your breathing slows as you cuddle with her for a moment.", parse);
 					Text.NL();
@@ -679,7 +679,7 @@ FeraScenes.SexPrompt = function() {
 				if (player.FirstCock()) {
 					p1Cock = player.BiggestCock();
 
-					parse.ballsD = player.HasBalls() ? function() { return Text.Parse(" and [balls]", parse); } : "";
+					parse.ballsD = player.HasBalls() ? () => Text.Parse(" and [balls]", parse) : "";
 					parse.oneof = player.NumCocks() > 1 ? " one of" : "";
 
 					Text.Add("Whispering quietly, you tell Fera to please your [cocks] with her mouth. She smiles and nods as she waits for you to undress. You sit on the small bench and take off your [botarmor], revealing your [cocks][ballsD].", parse);
@@ -694,21 +694,21 @@ FeraScenes.SexPrompt = function() {
 					Text.NL();
 					Text.Add("The sensation is incredible and you shudder as she begins to lick up and down the entire length of[oneof] your [cocks]. She puts as much as she can of your [cock] into her warm mouth, and begins to suck while her tongue laps up and down the bottom of your shaft. Looking up at you to see how she is faring, she seems pleased with the look of ecstasy on your face.", parse);
 					Text.NL();
-					if (player.NumCocks() == 2) {
+					if (player.NumCocks() === 2) {
 						Text.Add("You feel her hand on your other [cockDesc2], jerking it roughly as she continues to lick your [cock] lovingly. She proceeds to switch dicks and puts the second of your [cocks] into her mouth while she strokes the first. The cute catgirl goes back and forth between your members, paying each equal attention.", parse);
 						Text.NL();
 					}
 
 					const scenes = new EncounterTable();
-					scenes.AddEnc(function() {
+					scenes.AddEnc(() => {
 						Text.Add("Realizing she's been neglecting your other parts, she takes your [balls] into her hand and begins to massage them firmly. She continues to lovingly suck your [cock], using her tongue to stimulate the [cockTip]. Squeezing your balls tightly, Fera makes you shudder from the combined stimulation.", parse);
 						Text.NL();
-					}, 1.0, function() { return player.HasBalls(); });
-					scenes.AddEnc(function() {
+					}, 1.0, () => player.HasBalls());
+					scenes.AddEnc(() => {
 						parse.twoof = player.NumCocks() > 3 ? " two of" : "";
 						Text.Add("Fera shifts her hands onto[twoof] your other cocks, and begins to jerk them roughly. Her mouth pops off your [cock], and she takes a different one into her mouth. Clearly, she wants to please as much of you as she can, and she takes turns sucking and jerking each of your [cocks]. You cannot help but admire her passionate efforts.", parse);
 						Text.NL();
-					}, 1.0, function() { return player.NumCocks() > 2; });
+					}, 1.0, () => player.NumCocks() > 2);
 					scenes.Get();
 
 					if (fera.flags.Blowjob > 3) {
@@ -968,7 +968,7 @@ FeraScenes.SexPrompt = function() {
 				}
 				Text.NL();
 
-				parse.ballsD    = player.HasBalls() ? function() { return Text.Parse(" and [balls]", parse); } : "";
+				parse.ballsD    = player.HasBalls() ? () => Text.Parse(" and [balls]", parse) : "";
 
 				if (player.NumCocks() === 0) {
 						Text.Add("She mewls softly with each thrust, eventually pushing back into you firmly.", parse);
@@ -1173,7 +1173,7 @@ FeraScenes.SexPrompt = function() {
 			});
 		}
 	}
-	if (options.length == 1) {
+	if (options.length === 1) {
 		Gui.NextPrompt(options[0].func);
 	} else {
 		Gui.SetButtonsFromList(options);

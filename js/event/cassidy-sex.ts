@@ -13,7 +13,7 @@ import { CassidyFlags } from "./cassidy-flags";
 const SexScenes: any = {};
 const SparSexScenes: any = {};
 
-SexScenes.Indoors = function() {
+SexScenes.Indoors = () => {
 	const player = GAME().player;
 	const cassidy = GAME().cassidy;
 
@@ -69,7 +69,7 @@ SexScenes.Indoors = function() {
 	SexScenes.IndoorPrompt();
 };
 
-SexScenes.IndoorPrompt = function(opts?: any) {
+SexScenes.IndoorPrompt = (opts?: any) => {
 	const player = GAME().player;
 	const cassidy = GAME().cassidy;
 
@@ -119,7 +119,7 @@ SexScenes.IndoorPrompt = function(opts?: any) {
 	Gui.SetButtonsFromList(options, false, null);
 };
 
-SexScenes.Savor = function(opts: any) {
+SexScenes.Savor = (opts: any) => {
 	const player = GAME().player;
 	const cassidy = GAME().cassidy;
 	opts.savor = true;
@@ -181,7 +181,7 @@ SexScenes.Savor = function(opts: any) {
 	SexScenes.IndoorPrompt(opts);
 };
 
-SexScenes.Tail = function() {
+SexScenes.Tail = () => {
 	const player = GAME().player;
 
 	let parse: any = {
@@ -264,7 +264,7 @@ SexScenes.Tail = function() {
 	}
 };
 
-SexScenes.Tailfuck = function() {
+SexScenes.Tailfuck = () => {
 	const player = GAME().player;
 	const cassidy = GAME().cassidy;
 	let parse: any = {
@@ -306,7 +306,7 @@ SexScenes.Tailfuck = function() {
 	SexScenes.Outro();
 };
 
-SexScenes.Tailpeg = function() {
+SexScenes.Tailpeg = () => {
 	const player = GAME().player;
 	const cassidy = GAME().cassidy;
 	let parse: any = {
@@ -378,7 +378,7 @@ SexScenes.Tailpeg = function() {
 	SexScenes.Outro();
 };
 
-SexScenes.FuckHer = function(cocksInVag: Cock[]) {
+SexScenes.FuckHer = (cocksInVag: Cock[]) => {
 	const player = GAME().player;
 	const cassidy = GAME().cassidy;
 
@@ -480,7 +480,7 @@ SexScenes.FuckHer = function(cocksInVag: Cock[]) {
 	SexScenes.Outro();
 };
 
-SexScenes.Pet = function() {
+SexScenes.Pet = () => {
 	const player = GAME().player;
 	const cassidy = GAME().cassidy;
 
@@ -602,7 +602,7 @@ SexScenes.Pet = function() {
 		},
 	});
 
-	Gui.Callstack.push(function() {
+	Gui.Callstack.push(() => {
 		Text.Add("As you move to continue, though, you feel something sinuous and scaly wrap itself about you, quickly snaking across your [skin]. You have barely enough time to wonder what Cass is about to do before it coils tight about your lower body, pulling you off-balance and sending you landing heavily on the mattress. Cass is huffing and puffing from your earlier ministrations, but it’s clear that her stamina is far from spent.", parse);
 		Text.NL();
 		Text.Add("<i>“Hey,”</i> she pants. <i>“Shouldn’t let you have all the fun, should I? It’s not fair to you.”</i>", parse);
@@ -615,7 +615,7 @@ SexScenes.Pet = function() {
 		Text.NL();
 
 		const scenes = new EncounterTable();
-		scenes.AddEnc(function() {
+		scenes.AddEnc(() => {
 			Text.Add("Still keeping you pinned down as best as she can, Cass slithers her tail under and between her spread legs, and lets it work its way towards you. You can’t see where it’s going, but you can definitely <i>feel</i> it as the salamander’s tail-tip worms its way toward your crotch like some tentacle, leaving a trail of heat in its wake. It pauses a moment to ", parse);
 			if (player.NumCocks() > 1) {
 				Text.Add("pick out a likely target and ", parse);
@@ -662,8 +662,8 @@ SexScenes.Pet = function() {
 				Text.NL();
 				Text.Add("<i>“At least you didn’t make it all the way to the ceiling,”</i> she informs you cheerily, a shit-eating grin plastered on her face. <i>“That’d be hard to clean up.”</i> ", parse);
 			}
-		}, 1.0, function() { return player.FirstCock(); });
-		scenes.AddEnc(function() {
+		}, 1.0, () => player.FirstCock());
+		scenes.AddEnc(() => {
 			Text.Add("While she keeps her hands and feet occupied with pinning you onto the bed, her intentions are made clear by the scaly, prehensile tail snaking up your [thigh]. You feel its burning warmth near your groin for a moment and briefly wonder if that’s her goal, but soon enough its pointed tip continues past it and wriggles onto your stomach before finally inserting itself into your cleavage. More and more tail surges up, parting your [breasts], and the tip finally curls in about itself and starts to flick your nipples.", parse);
 			Text.NL();
 			Text.Add("You tremble and moan. A deep flush of warmth enters your chest as your [nips] swell and stiffen, and it’s not the heat of Cassidy’s tail, either.", parse);
@@ -712,8 +712,8 @@ SexScenes.Pet = function() {
 			if (player.SubDom() >= 50) {
 				Text.Add(" part of you insists that you shouldn’t just take this lying down, but the greater part of you is too tired to go along with that idea.", parse);
 			}
-		}, 1.0, function() { return player.FirstBreastRow().Size() > 3; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => player.FirstBreastRow().Size() > 3);
+		scenes.AddEnc(() => {
 			Text.Add("<i>“Don’t feel that playful today myself,”</i> Cass tells you with a small smile and sigh. <i>“Doesn’t mean I can’t be polite and treat you to something nice, though. After all, not everything’s got to be about getting off, does it?”</i>", parse);
 			Text.NL();
 			Text.Add("Without waiting for your reply, Cassidy begins, returning your massage with one of a far less sexual nature. It’s not exactly titillating, but it does feel <i>very</i> nice, and you feel obliged to inform your salamander lover of that fact.", parse);
@@ -745,7 +745,7 @@ SexScenes.Pet = function() {
 			Text.Add("A laugh. <i>“Don’t worry about it, champ. I’ll do you some other time. It was fun - just let me get in the proper mood, or if you’re clever enough, why don’t you take a shot at getting my juices really flowing?”</i>", parse);
 			Text.NL();
 			Text.Add("You’ll have to take her up on that offer… some other time.", parse);
-		}, 1.0, function() { return true; });
+		}, 1.0, () => true);
 		scenes.Get();
 
 		Text.NL();
@@ -758,7 +758,7 @@ SexScenes.Pet = function() {
 	Gui.SetButtonsFromList(options, false, null);
 };
 
-SexScenes.Anal = function(cocksInAss: Cock[]) {
+SexScenes.Anal = (cocksInAss: Cock[]) => {
 	const player = GAME().player;
 	const cassidy = GAME().cassidy;
 
@@ -891,7 +891,7 @@ SexScenes.Anal = function(cocksInAss: Cock[]) {
 	SexScenes.Outro();
 };
 
-SexScenes.Outro = function() {
+SexScenes.Outro = () => {
 	const cassidy = GAME().cassidy;
 	const world = WORLD();
 
@@ -1038,7 +1038,7 @@ SparSexScenes.Win = function() {
 				Text.Add("Cass gives you a hug, her scaly body all nice and toasty, then waves as you break away and head for the door. <i>“Be careful on your way back, okay?”</i>", parse);
 				Text.Flush();
 
-				Gui.NextPrompt(function() {
+				Gui.NextPrompt(() => {
 					StepToHour(22);
 					MoveToLocation(world.loc.Rigard.ShopStreet.Street);
 				});
@@ -1057,14 +1057,14 @@ SparSexScenes.Win = function() {
 		Text.Add("<i>“Right.”</i> Setting aside her warhammer, Cassidy lunges forward and hugs you. <i>“Be careful on your way home, ace. Don’t be too long in coming back!”</i>", parse);
 		Text.Flush();
 
-		Gui.NextPrompt(function() {
+		Gui.NextPrompt(() => {
 			StepToHour(22);
 			MoveToLocation(world.loc.Rigard.ShopStreet.Street);
 		});
 	}
 };
 
-SparSexScenes.WinPrompt = function() {
+SparSexScenes.WinPrompt = () => {
 	const player = GAME().player;
 
 	const parse: any = {
@@ -1100,7 +1100,7 @@ SparSexScenes.WinPrompt = function() {
 	Gui.SetButtonsFromList(options, false, null);
 };
 
-SparSexScenes.AllFours = function() {
+SparSexScenes.AllFours = () => {
 	const player = GAME().player;
 	const cassidy = GAME().cassidy;
 
@@ -1328,7 +1328,7 @@ SparSexScenes.AllFours = function() {
 		});
 	}
 
-	Gui.Callstack.push(function() {
+	Gui.Callstack.push(() => {
 		Text.NL();
 		SparSexScenes.Outro();
 	});
@@ -1336,7 +1336,7 @@ SparSexScenes.AllFours = function() {
 	Gui.SetButtonsFromList(options, false, null);
 };
 
-SparSexScenes.GetBlown = function() {
+SparSexScenes.GetBlown = () => {
 	const player = GAME().player;
 	const cassidy = GAME().cassidy;
 
@@ -1416,7 +1416,7 @@ SparSexScenes.GetBlown = function() {
 	SparSexScenes.Outro();
 };
 
-SparSexScenes.GetLicked = function() {
+SparSexScenes.GetLicked = () => {
 	const player = GAME().player;
 	const cassidy = GAME().cassidy;
 
@@ -1494,7 +1494,7 @@ SparSexScenes.GetLicked = function() {
 	SparSexScenes.Outro();
 };
 
-SparSexScenes.Spank = function() {
+SparSexScenes.Spank = () => {
 	const player = GAME().player;
 	const cassidy = GAME().cassidy;
 
@@ -1556,7 +1556,7 @@ SparSexScenes.Spank = function() {
 	SparSexScenes.Outro();
 };
 
-SparSexScenes.Outro = function() {
+SparSexScenes.Outro = () => {
 	const cassidy = GAME().cassidy;
 	const world = WORLD();
 
@@ -1657,17 +1657,17 @@ SparSexScenes.Loss = function() {
 		Text.Add("Seems like she’s reached her breaking point. With a final lusty pant and gasp, Cassidy springs into action - and since it’s your fault for unchaining the monster and not being able to sate it, it falls to you to pay the price.", parse);
 		Text.Flush();
 
-		Gui.NextPrompt(function() {
+		Gui.NextPrompt(() => {
 			const scenes = new EncounterTable();
-			scenes.AddEnc(function() {
+			scenes.AddEnc(() => {
 				SparSexScenes.DomRide();
-			}, 1.0, function() { return player.FirstCock(); });
-			scenes.AddEnc(function() {
+			}, 1.0, () => player.FirstCock());
+			scenes.AddEnc(() => {
 				SparSexScenes.SuckOnBreasts();
-			}, 1.0, function() { return cassidy.Feminized(); });
-			scenes.AddEnc(function() {
+			}, 1.0, () => cassidy.Feminized());
+			scenes.AddEnc(() => {
 				SparSexScenes.Tribbing();
-			}, 1.0, function() { return player.FirstVag(); });
+			}, 1.0, () => player.FirstVag());
 			scenes.Get();
 		});
 	} else {
@@ -1694,7 +1694,7 @@ SparSexScenes.Loss = function() {
 	}
 };
 
-SparSexScenes.DomRide = function() {
+SparSexScenes.DomRide = () => {
 	const player = GAME().player;
 	const cassidy = GAME().cassidy;
 
@@ -1832,7 +1832,7 @@ SparSexScenes.DomRide = function() {
 	SparSexScenes.LossOutro();
 };
 
-SparSexScenes.SuckOnBreasts = function() {
+SparSexScenes.SuckOnBreasts = () => {
 	const player = GAME().player;
 
 	let parse: any = {
@@ -1885,7 +1885,7 @@ SparSexScenes.SuckOnBreasts = function() {
 	SparSexScenes.LossOutro();
 };
 
-SparSexScenes.Tribbing = function() {
+SparSexScenes.Tribbing = () => {
 	const player = GAME().player;
 	const cassidy = GAME().cassidy;
 
@@ -1999,7 +1999,7 @@ SparSexScenes.Tribbing = function() {
 	SparSexScenes.LossOutro();
 };
 
-SparSexScenes.LossOutro = function() {
+SparSexScenes.LossOutro = () => {
 	const cassidy = GAME().cassidy;
 	const world = WORLD();
 

@@ -77,8 +77,8 @@ export class Cassidy extends Entity {
 	}
 
 	public FromStorage(storage: any) {
-		this.Butt().virgin     = parseInt(storage.avirgin) == 1;
-		this.FirstVag().virgin = parseInt(storage.virgin)  == 1;
+		this.Butt().virgin     = parseInt(storage.avirgin, 10) === 1;
+		this.FirstVag().virgin = parseInt(storage.virgin, 10)  === 1;
 
 		this.LoadPersonalityStats(storage);
 
@@ -213,39 +213,39 @@ export class CassidySpar extends Entity {
 		const t = this.GetSingleTarget(encounter, activeChar);
 
 		const scenes = new EncounterTable();
-		scenes.AddEnc(function() {
+		scenes.AddEnc(() => {
 			Abilities.Attack.Use(encounter, that, t);
-		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
 			Abilities.Physical.Bash.Use(encounter, that, t);
-		}, 1.0, function() { return Abilities.Physical.Bash.enabledCondition(encounter, that); });
-		scenes.AddEnc(function() {
+		}, 1.0, () => Abilities.Physical.Bash.enabledCondition(encounter, that));
+		scenes.AddEnc(() => {
 			Abilities.Physical.DAttack.Use(encounter, that, t);
-		}, 1.0, function() { return Abilities.Physical.DAttack.enabledCondition(encounter, that); });
-		scenes.AddEnc(function() {
+		}, 1.0, () => Abilities.Physical.DAttack.enabledCondition(encounter, that));
+		scenes.AddEnc(() => {
 			Abilities.EnemySkill.Cassidy.TailSlap.Use(encounter, that, t);
-		}, 1.0, function() { return Abilities.EnemySkill.Cassidy.TailSlap.enabledCondition(encounter, that); });
-		scenes.AddEnc(function() {
+		}, 1.0, () => Abilities.EnemySkill.Cassidy.TailSlap.enabledCondition(encounter, that));
+		scenes.AddEnc(() => {
 			Abilities.EnemySkill.Cassidy.Smoke.Use(encounter, that, t);
-		}, 1.0, function() { return Abilities.EnemySkill.Cassidy.Smoke.enabledCondition(encounter, that); });
-		scenes.AddEnc(function() {
+		}, 1.0, () => Abilities.EnemySkill.Cassidy.Smoke.enabledCondition(encounter, that));
+		scenes.AddEnc(() => {
 			Abilities.Seduction.Tease.Use(encounter, that, t);
-		}, 1.0, function() { return true; });
+		}, 1.0, () => true);
 
 		// Conditional abilities (only available at higher Cass levels)
 
 		if (that.level >= 10) {
 			if (!that.reflexFlag) {
-				scenes.AddEnc(function() {
+				scenes.AddEnc(() => {
 					Abilities.EnemySkill.Cassidy.Reflex.Use(encounter, that, t);
-				}, 1.0, function() { return Abilities.EnemySkill.Cassidy.Reflex.enabledCondition(encounter, that); });
+				}, 1.0, () => Abilities.EnemySkill.Cassidy.Reflex.enabledCondition(encounter, that));
 			}
 		}
 
 		if (that.level >= 14) {
-			scenes.AddEnc(function() {
+			scenes.AddEnc(() => {
 				Abilities.EnemySkill.Cassidy.Impact.Use(encounter, that, t);
-			}, 1.0, function() { return Abilities.EnemySkill.Cassidy.Impact.enabledCondition(encounter, that); });
+			}, 1.0, () => Abilities.EnemySkill.Cassidy.Impact.enabledCondition(encounter, that));
 		}
 
 		scenes.Get();
@@ -271,7 +271,7 @@ export class CassidySpar extends Entity {
 	}
 }
 
-const CreateShop = function() {
+const CreateShop = () => {
 	const cassidy = GAME().cassidy;
 
 	return new Shop({
@@ -287,23 +287,23 @@ const CreateShop = function() {
 				Text.Add("Right. Stepping up to Cassidy, you inquire about buying the [item] for yourself, if it’s not too much of a bother. ", parse);
 
 				const scenes = new EncounterTable();
-				scenes.AddEnc(function() {
+				scenes.AddEnc(() => {
 					Text.Add("<i>“Nah, it’s no bother - always happy to serve a reasonable customer. For you, that’ll be [coin] coins.”</i>", parse);
 					Text.NL();
 					Text.Add("For you? Why, you feel so special and treasured!", parse);
 					Text.NL();
 					Text.Add("Cass shows you [hisher] teeth. <i>“Thing about you, ace? Sometimes, I can’t tell if you’re serious or kidding. But yeah, [coin] coins, them’s the breaks. You want it?”</i>", parse);
-				}, 1.0, function() { return true; });
-				scenes.AddEnc(function() {
+				}, 1.0, () => true);
+				scenes.AddEnc(() => {
 					Text.Add("<i>“Oh, that’s a good choice you have there,”</i> Cass replies, studying you up and down as if you were a really tasty morsel. <i>“Really fits you - you look braver just holding it. How about [coin] coins?”</i>", parse);
-				}, 1.0, function() { return true; });
-				scenes.AddEnc(function() {
+				}, 1.0, () => true);
+				scenes.AddEnc(() => {
 					Text.Add("Cassidy frowns. <i>“That one? I didn’t think - well, if you want to… [coin] coins if you wanna take that baby of mine home, I guess.”</i>", parse);
 					Text.NL();
 					Text.Add("Hey, why the sudden reluctance? This is a shop, isn’t it?", parse);
 					Text.NL();
 					Text.Add("The salamander grins weakly and looks away, unable to meet your eyes. <i>“Yeah, I get that. Problem is, well, it’s sometimes hard to see them go… look, if you want her, just pay up and you can have her.”</i>", parse);
-				}, 1.0, function() { return true; });
+				}, 1.0, () => true);
 				scenes.Get();
 				Text.NL();
 			}
@@ -359,19 +359,19 @@ const CreateShop = function() {
 			if (!sold) {
 				Text.Clear();
 				const scenes = new EncounterTable();
-				scenes.AddEnc(function() {
+				scenes.AddEnc(() => {
 					Text.Add("Cass throws your proffered item a quick glance of [hisher] expert eye. <i>“Yeah, ace. For that, I’ll do [coin] coins, perfectly reasonable price to me. Sound good to you?”</i>", parse);
-				}, 1.0, function() { return true; });
-				scenes.AddEnc(function() {
+				}, 1.0, () => true);
+				scenes.AddEnc(() => {
 					Text.Add("Cass makes a show of examining your proffered item, then grins and snaps [hisher] fingers with an audible click of [hisher] claws. <i>“Okay, here’s my offer: [coin] coins. Deal, or no deal?”</i>", parse);
-				}, 1.0, function() { return true; });
-				scenes.AddEnc(function() {
+				}, 1.0, () => true);
+				scenes.AddEnc(() => {
 					Text.Add("Cass looks down at your offering. <i>“Hmm. Hmmmmmmm.”</i>", parse);
 					Text.NL();
 					Text.Add("Hmm?", parse);
 					Text.NL();
 					Text.Add("<i>“Hmm.”</i> [HeShe] looks up at you. <i>“I guess I can do [coin] coins, if you’d like. Scrap value isn’t usually worth a lot.”</i>", parse);
-				}, 1.0, function() { return true; });
+				}, 1.0, () => true);
 				scenes.Get();
 
 				Text.NL();

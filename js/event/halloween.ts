@@ -30,7 +30,7 @@ const HalloweenScenes: any = {
 };
 
 // Put here instead of in Halloween items in order to prevent circular reference.
-HalloweenItems.SqueakyToy.Long = function() { return HalloweenScenes.HW.Werewolf() ? "It takes all your willpower to avoid giving in and chewing on this stupid toy every time it squeaks..." : "It squeaks when you squeeze it… kinda useless, though you suppose it could be useful when distracting a dog?"; };
+HalloweenItems.SqueakyToy.Long = () => HalloweenScenes.HW.Werewolf() ? "It takes all your willpower to avoid giving in and chewing on this stupid toy every time it squeaks..." : "It squeaks when you squeeze it… kinda useless, though you suppose it could be useful when distracting a dog?";
 
 // Will be used for temporary variable storage.
 export class Halloween {
@@ -52,8 +52,8 @@ export class Halloween {
 		const month = date.getMonth(); // month, 0-11
 		const day   = date.getDate(); // day, 1-31
 
-		if ((month ==  9) && (day >= 14)) { return true; }
-		if ((month == 10) && (day <  14)) { return true; }
+		if ((month ===  9) && (day >= 14)) { return true; }
+		if ((month === 10) && (day <  14)) { return true; }
 
 		return false;
 	}
@@ -106,8 +106,8 @@ export class Halloween {
 		let player = GAME().player;
 		let party: Party = GAME().party;
 		// Restore player/party
-		_.remove(EntityStorage(), function(e) {
-			return e == player;
+		_.remove(EntityStorage(), (e) => {
+			return e === player;
 		});
 		player = new Player(this.player);
 		EntityStorage().push(player);
@@ -118,7 +118,7 @@ export class Halloween {
 		return this.flags & HalloweenFlags.Flags.Werewolf;
 	}
 	public RonnieAvailable() {
-		return this.ronnie != HalloweenFlags.Ronnie.Removed;
+		return this.ronnie !== HalloweenFlags.Ronnie.Removed;
 	}
 
 	public HarthonParser(parse: any) {
@@ -158,7 +158,7 @@ const HWState = { // Bitmask for globally tracked flag
 };
 
 // Trigger this on stepping into the Nomads’ for the first time when season is active.
-HalloweenScenes.PieIntro = function() {
+HalloweenScenes.PieIntro = () => {
 	const parse: any = {
 
 	};
@@ -190,7 +190,7 @@ HalloweenScenes.PieIntro = function() {
 	Gui.NextPrompt();
 };
 
-HalloweenScenes.PumpkinPie = function() {
+HalloweenScenes.PumpkinPie = () => {
 	const player = GAME().player;
 	const party: Party = GAME().party;
 	const momo = GAME().momo;
@@ -219,7 +219,7 @@ HalloweenScenes.PumpkinPie = function() {
 	parse.hisher = momo.AtCamp() ? "her" : "his";
 
 	const p1 = party.Get(1);
-	parse.comp = party.Num() == 2 ? p1.name : "your companions";
+	parse.comp = party.Num() === 2 ? p1.name : "your companions";
 
 	Text.Clear();
 	if (first) {
@@ -236,7 +236,7 @@ HalloweenScenes.PumpkinPie = function() {
 		Text.Add("<i>“Don’t worry, you’ll get to hate it after weeks of the stuff. Enjoy it while it lasts.”</i>", parse);
 		Text.Flush();
 
-		Gui.NextPrompt(function() {
+		Gui.NextPrompt(() => {
 			Text.Clear();
 			Text.Add("With that, he wanders off in the direction of the fire pit, cane tapping against the ground in time with his steps. What a sourpuss - you’re more than willing to turn your attention back to the gigantic pies. Apparently, you’re not the only one who’s been drawn by the inviting scent; the entire population of the camp is slowly but surely converging on your position, lured by the promise of pie.", parse);
 			Text.NL();
@@ -271,7 +271,7 @@ HalloweenScenes.PumpkinPie = function() {
 			Text.Add("With a nod and grin, the chief brandishes both knife and fork. <i>“Very well. Come and get it, you youngsters! I can’t eat all of this on my own at my age, you know.”</i>", parse);
 			Text.Flush();
 
-			Gui.NextPrompt(function() {
+			Gui.NextPrompt(() => {
 				Text.Clear();
 				Text.Add("Not that anyone needs any more telling. Cale comes up with a stack of cheap-looking plates, and everyone lines up for their slice of the massive pies. The chief takes great relish in serving up delicious cuts of crust and filling, and if anyone’s portion is bigger than anyone else’s, no one complains.", parse);
 				Text.NL();
@@ -286,7 +286,7 @@ HalloweenScenes.PumpkinPie = function() {
 				Text.Add("[Magnus] looks a little unsure at the prospect, but the pull of pumpkin pie is enough to overcome the young [mage]’s reservations about working with his hands. <i>“I suppose. Practical experience is just another way of learning.”</i>", parse);
 				Text.NL();
 				parse.c = party.Num() > 1 ? Text.Parse(" and [comp]", parse) : "";
-				parse.c2 = party.Num() == 2 ? " both" :
+				parse.c2 = party.Num() === 2 ? " both" :
 				party.Num() > 2 ? " all" : "";
 				Text.Add("Eventually, the line moves ahead to the point where you[c] are up next, and you[c2] get served a slice of the delectable dessert. Still warm to the touch, the slice you’ve been served beckons, its wedge-shaped form fitting easily into the palm of your hand.", parse);
 				Text.NL();
@@ -349,7 +349,7 @@ HalloweenScenes.PumpkinPie = function() {
 
 				TimeStep({hour: 1});
 
-				Gui.NextPrompt(function() {
+				Gui.NextPrompt(() => {
 					HalloweenScenes.EnterDream(true);
 				});
 			});
@@ -359,7 +359,7 @@ HalloweenScenes.PumpkinPie = function() {
 
 		const scenes = new EncounterTable();
 
-		scenes.AddEnc(function() {
+		scenes.AddEnc(() => {
 			parse.Magnus = magnus.Met() ? "Magnus" : "the scrawny young man";
 			parse.Cale = cale.Met() ? "Cale" : "the wolf morph";
 			Text.Add("[Magnus] tends to the flames under [Cale]’s watchful eye.", parse);
@@ -370,23 +370,23 @@ HalloweenScenes.PumpkinPie = function() {
 			Text.NL();
 			parse.Magnus = magnus.Met() ? "Magnus" : "the young man";
 			Text.Add("Yes, seems like [Magnus] is clearly still quite unused to working with his hands.", parse);
-		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
 			parse.Estevan = estevan.Met() ? "Estevan" : "the satyr hunter";
 			Text.Add("[Estevan] looks over his handiwork. Judging by the number of empty bottles lying by the oven’s side, you can only hope that the satyr hasn’t put <i>all</i> of that into the pies…", parse);
-		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
 			Text.Add("the nomad chief paces back and forth in front of the oven with surprising alacrity for a man his age. He doesn’t look at the oven, but every so often he stops and sniffs the air, testing it with his nose.", parse);
 			Text.NL();
 			Text.Add("Clearly an old hand at this business, if he can tell when the pies are done by smell alone.", parse);
-		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
 			parse.Patchwork = patchwork.Met() ? "Patchwork" : "the odd merchant";
 			parse.Patches = patchwork.Met() ? "Patches" : "the merchant";
 			Text.Add("[Patchwork] watches over the baking pies through that strange telescope. Shrouded in all that heavy clothing, doesn’t [Patches] feel hot at all? How’s the crust and filling made without getting all that cloth dirty, anyway? How are the pies handled with no obvious hands with which to do the handling?", parse);
 			Text.NL();
 			Text.Add("The world may never know.", parse);
-		}, 1.0, function() { return true; });
+		}, 1.0, () => true);
 
 		scenes.Get();
 
@@ -401,13 +401,13 @@ HalloweenScenes.PumpkinPie = function() {
 
 		TimeStep({hour: 1});
 
-		Gui.NextPrompt(function() {
+		Gui.NextPrompt(() => {
 			HalloweenScenes.EnterDream(false);
 		});
 	}
 };
 
-HalloweenScenes.EnterDream = function(first: boolean) {
+HalloweenScenes.EnterDream = (first: boolean) => {
 	const player = GAME().player;
 	const party: Party = GAME().party;
 
@@ -425,7 +425,7 @@ HalloweenScenes.EnterDream = function(first: boolean) {
 		Text.NL();
 		Text.Add("…And you realize that you’re stark naked.", parse);
 		Text.NL();
-		parse.fem = player.Gender() == Gender.male ? "thong" : "bra and panties";
+		parse.fem = player.Gender() === Gender.male ? "thong" : "bra and panties";
 		Text.Add("Hey, did you do something you’ll regret later? Where’s everyone? Usually there’s always some kind of bustle in the nomads’ camp, but all you get from beyond the canvas confines of your tent is deathly silence. And why’s there this skimpy-looking costume lying on the ground beside you? Shrugging, you pick it up - looks like a leather [fem] and a tattered cloak, all in garish shades of black. You must’ve gotten into some real kinky stuff last night… just what’s going on here?", parse);
 		Text.NL();
 		Text.Add("Taking a deep breath and squaring your shoulders, you peer out of the tent flaps, and blink at the scene that meets your eyes. It’s still the nomad’s camp after a fashion, it’s just that… well, everything is spookier, for lack of a better word to describe it. The light of the fire pit is still visible in the distance against a thick carpet of milky-white fog, maybe that should be your first stop once you get started.", parse);
@@ -443,19 +443,19 @@ HalloweenScenes.EnterDream = function(first: boolean) {
 	Gui.NextPrompt();
 };
 
-Halloween.Loc.Tent.description = function() {
+Halloween.Loc.Tent.description = () => {
 	Text.Add("The interior of the tent is dim, with a few rays of moonlight reaching inside through the tattered canvas. Various pots, pans and other cooking utensils are packed away in an open wooden chest draped in spiderwebs. There is little actual furniture besides that; a few rugs rolled out to protect bare feet and a set of bed rolls are free for you to use. Everything has a tattered and frayed look to it.");
 };
 
 Halloween.Loc.Tent.links.push(new Link(
 	"Outside", true, true,
 	null,
-	function() {
+	() => {
 		MoveToLocation(Halloween.Loc.Camp);
 	},
 ));
 
-Halloween.Loc.Camp.description = function() {
+Halloween.Loc.Camp.description = () => {
 	Text.Add("The small gathering of tents look very much like the nomads’ camp, but something is off. It’s hard to see for all the milky fog around, but from time to time, you can see the full moon poking out in the midnight sky. Long grass rustles in a gentle, silent breeze that also sends the leaves on the twisted, gnarled trees aflutter.");
 	Text.NL();
 	Text.Add("A dark hooded shape is huddled by the smoldering ashes of the fire pit, but aside from that, the camp seems deserted. The tent you woke up in is nearby, though you doubt you’d be able to go back to sleep.");
@@ -466,7 +466,7 @@ Halloween.Loc.Camp.description = function() {
 Halloween.Loc.Camp.links.push(new Link(
 	"Tent", true, true,
 	null,
-	function() {
+	() => {
 		MoveToLocation(Halloween.Loc.Tent);
 	},
 ));
@@ -474,7 +474,7 @@ Halloween.Loc.Camp.links.push(new Link(
 Halloween.Loc.Camp.links.push(new Link(
 	"Path", true, true,
 	null,
-	function() {
+	() => {
 		if (HalloweenScenes.HW.flags & HalloweenFlags.Flags.Elder) {
 			MoveToLocation(Halloween.Loc.Path);
 		} else {
@@ -488,7 +488,7 @@ Halloween.Loc.Camp.links.push(new Link(
 ));
 
 Halloween.Loc.Camp.events.push(new Link(
-	function() {
+	() => {
 		if (HalloweenScenes.HW.flags & HalloweenFlags.Flags.Elder) {
 			return "Elder";
 		} else {
@@ -496,7 +496,7 @@ Halloween.Loc.Camp.events.push(new Link(
 		}
 	}, true, true,
 	null,
-	function() {
+	() => {
 		const party: Party = GAME().party;
 		const parse: any = {
 
@@ -572,36 +572,36 @@ Halloween.Loc.Camp.events.push(new Link(
 			Text.NL();
 
 			const scenes = new EncounterTable();
-			scenes.AddEnc(function() {
+			scenes.AddEnc(() => {
 				Text.Add("<i>“Sometimes, skill and quick thinking may not be enough. At times, you may require specialized equipment to deal with the dangers of this land, or maybe you just need to be lucky.”</i> The Elder chuckles.", parse);
-			}, 1.0, function() { return true; });
-			scenes.AddEnc(function() {
+			}, 1.0, () => true);
+			scenes.AddEnc(() => {
 				Text.Add("<i>“Do not stray from the path in the woods; there are bestial monsters which dwell amongst the trees. That which may seem to be is often not. It may be possible to turn a curse upon itself.”</i>", parse);
-			}, 1.0, function() { return true; });
-			scenes.AddEnc(function() {
+			}, 1.0, () => true);
+			scenes.AddEnc(() => {
 				Text.Add("<i>“Remember, the ravens will lead you into the light. Follow them if you tire of this place.”</i>", parse);
-			}, 1.0, function() { return true; });
-			scenes.AddEnc(function() {
+			}, 1.0, () => true);
+			scenes.AddEnc(() => {
 				Text.Add("<i>“One should always beware of one’s own creations. The phrase ‘Stop now! I am your master and you must obey me!’ has been the last words of many a fool.”</i>", parse);
-			}, 1.0, function() { return true; });
-			scenes.AddEnc(function() {
+			}, 1.0, () => true);
+			scenes.AddEnc(() => {
 				Text.Add("<i>“Remember, if you ever find yourself in a bind, it may be helpful to open as many options as possible beforehand so you have space to maneuver. Forewarned is forearmed, but forethought is far better.”</i>", parse);
-			}, 1.0, function() { return true; });
-			scenes.AddEnc(function() {
+			}, 1.0, () => true);
+			scenes.AddEnc(() => {
 				Text.Add("<i>“Sometimes, honesty and innocence is the best policy. There are those who bank on your suspicion to trick you into behaving exactly as they would like you to. Remain one step ahead as always.”</i>", parse);
-			}, 1.0, function() { return true; });
-			scenes.AddEnc(function() {
+			}, 1.0, () => true);
+			scenes.AddEnc(() => {
 				Text.Add("<i>“Demons are powerful creatures, and as such going up against one directly is a fool’s errand. However, they all have a point of weakness somewhere in their persona… deducing that weakness and exploiting it to its fullest is key, perhaps even the only way to defeating them.”</i>", parse);
-			}, 1.0, function() { return true; });
-			scenes.AddEnc(function() {
+			}, 1.0, () => true);
+			scenes.AddEnc(() => {
 				Text.Add("<i>“As I mentioned earlier, there is an elven witch who lives in a hut in the woods who may or may not help you in your quest. Even though she is my friend, she is quite the temperamental creature, and deciding whether to trust her can be a good idea or not, considering how fickle she is…”</i>", parse);
-			}, 1.0, function() { return true; });
-			scenes.AddEnc(function() {
+			}, 1.0, () => true);
+			scenes.AddEnc(() => {
 				Text.Add("<i>“The rank and file of the undead are really slow-witted, I hear. I know of some creatures that believe you can’t see them if they can’t see you, but they believe that they can’t see you if you can’t see them! I know it sounds rather absurd, but truth is stranger than fiction.”</i>", parse);
-			}, 1.0, function() { return true; });
-			scenes.AddEnc(function() {
+			}, 1.0, () => true);
+			scenes.AddEnc(() => {
 				Text.Add("<i>“There is a kindly alchemist who lives in an old house up on a hill. If you are in need of it, she may lend you shelter for the night. Her abode may be menacing in appearance, but I’m sure it’s completely safe.”</i>", parse);
-			}, 1.0, function() { return true; });
+			}, 1.0, () => true);
 
 			scenes.Get();
 		}
@@ -611,7 +611,7 @@ Halloween.Loc.Camp.events.push(new Link(
 	},
 ));
 
-Halloween.Loc.Path.description = function() {
+Halloween.Loc.Path.description = () => {
 	const player = GAME().player;
 	const parse: any = {
 		feet : player.FeetDesc(),
@@ -622,7 +622,7 @@ Halloween.Loc.Path.description = function() {
 	Text.Add("Off in the distance, you hear a raven caw, and a faint sigh echoes through the sickly forest. Still, you press on, and eventually the trees and thorny undergrowth thin a little as you near a crossroads, one with many, many paths branching out from its heart like the spokes of a wheel. From here, you can also make out some landmarks in the distance - perhaps you’re meant to be headed to one of these?", parse);
 };
 
-Halloween.Loc.Path.onEntry = function() {
+Halloween.Loc.Path.onEntry = () => {
 	if (HalloweenScenes.HW.RonnieAvailable() && Math.random() < 0.5) {
 		HalloweenScenes.Ronnie();
 	} else {
@@ -633,43 +633,43 @@ Halloween.Loc.Path.onEntry = function() {
 Halloween.Loc.Path.links.push(new Link(
 	"Camp", true, true,
 	null,
-	function() {
+	() => {
 		MoveToLocation(Halloween.Loc.Camp);
 	},
 ));
 Halloween.Loc.Path.links.push(new Link(
-	function() {
+	() => {
 		return HalloweenScenes.HW.flags & HalloweenFlags.Flags.WitchHut ? "Witch's hut" : "Hut?";
 	}, true, true,
 	null,
-	function() {
+	() => {
 		MoveToLocation(Halloween.Loc.WitchHut);
 	},
 ));
 Halloween.Loc.Path.links.push(new Link(
 	"Graveyard", true, true,
 	null,
-	function() {
+	() => {
 		MoveToLocation(Halloween.Loc.Graveyard);
 	},
 ));
 
 Halloween.Loc.Path.events.push(new Link(
-	"Thrall", function() {
+	"Thrall", () => {
 		return HalloweenScenes.HW.harthon & HalloweenFlags.Harthon.Thrall;
 	}, true,
 	null,
-	function() {
+	() => {
 		HalloweenScenes.HarthonThrall();
 	},
 ));
 
 Halloween.Loc.Path.events.push(new Link(
-	"Beta", function() {
-		return HalloweenScenes.HW.ronnie == HalloweenFlags.Ronnie.PCAlpha;
+	"Beta", () => {
+		return HalloweenScenes.HW.ronnie === HalloweenFlags.Ronnie.PCAlpha;
 	}, true,
 	null,
-	function() {
+	() => {
 		const player = GAME().player;
 
 		let parse: any = {
@@ -735,7 +735,7 @@ Halloween.Loc.Path.events.push(new Link(
 	},
 ));
 
-HalloweenScenes.Ronnie = function() {
+HalloweenScenes.Ronnie = () => {
 	const player = GAME().player;
 
 	let parse: any = {
@@ -747,11 +747,11 @@ HalloweenScenes.Ronnie = function() {
 	Text.Add("This dry, dusty path winds its way through the trees, twisting and turning under gnarled branches and over knobbly roots as it leads… well, somewhere. You’re not quite sure <i>exactly</i> where, but your [feet] seem to have taken on a life of their own, ferrying you down the path to your fate. Come to think of it, you’re not even sure where all the trees came from - they just seem to have sprung up all of a sudden to block out as much moonlight as they can with their twisted, thinly-leafed branches.", parse);
 	Text.NL();
 	// Check out what's going on with Ronnie and select correct path
-	const first = HalloweenScenes.HW.ronnie == HalloweenFlags.Ronnie.NotMet;
+	const first = HalloweenScenes.HW.ronnie === HalloweenFlags.Ronnie.NotMet;
 
 	if (first) {
 		HalloweenScenes.RonnieFirst();
-	} else if (HalloweenScenes.HW.ronnie == HalloweenFlags.Ronnie.PCBeta) {
+	} else if (HalloweenScenes.HW.ronnie === HalloweenFlags.Ronnie.PCBeta) {
 		Text.Add("Your ears perk up as a familiar sound echoes to you out of the wilderness; your cute little alpha is calling to you! Unable to resist his need for you, you howl back to let him know that you heard, and then lope off into the wilderness to find him.", parse);
 		Text.NL();
 		Text.Add("It doesn’t take long for you to find Ronnie, the white werewolf waiting impatiently in a small glade. He gives you a bared-teeth grin, and you obediently kneel before him in submission, getting down on all fours.", parse);
@@ -830,7 +830,7 @@ HalloweenScenes.Ronnie = function() {
 	}
 };
 
-HalloweenScenes.RonnieFirst = function() {
+HalloweenScenes.RonnieFirst = () => {
 	const player = GAME().player;
 	const party: Party = GAME().party;
 	const roa = GAME().roa;
@@ -918,7 +918,7 @@ HalloweenScenes.RonnieFirst = function() {
 			Text.Add("Alright then... looking around, you pick a direction at random and start walking, Ronnie meekly following along behind you.", parse);
 			Text.Flush();
 
-			Gui.NextPrompt(function() {
+			Gui.NextPrompt(() => {
 				Text.Clear();
 				Text.Add("You don’t know how long it’s been since the two of you have started out. You’ve just walked on and on through these dark, creepy woods in search of Ronnie’s missing Dory, but haven’t found so much as a scrap of torn wool to prove the sheep was ever here.", parse);
 				Text.NL();
@@ -1031,7 +1031,7 @@ HalloweenScenes.RonnieFirst = function() {
 								Text.Add("Well, you’ll not look a gift bitch in the ass. Time to show who’s the <b>real</b> alpha around here...", parse);
 								Text.Flush();
 
-								Gui.NextPrompt(function() {
+								Gui.NextPrompt(() => {
 									Text.Clear();
 									HalloweenScenes.RonniePitch();
 								});
@@ -1185,7 +1185,7 @@ HalloweenScenes.RonnieFirst = function() {
 	Gui.SetButtonsFromList(options, false, null);
 };
 
-HalloweenScenes.WerewolfTF = function() {
+HalloweenScenes.WerewolfTF = () => {
 	const player = GAME().player;
 	const party: Party = GAME().party;
 
@@ -1225,14 +1225,14 @@ HalloweenScenes.WerewolfTF = function() {
 			Text.Add("You swear you can hear a voice in your head whispering, <i>“Yes, come on, bigger; we can do better than this,”</i>, but all you can really focus on is the glorious warmth enveloping your [breasts]. You thrust your chest out with a moan as you feel them swell and bulge, blossoming into a truly spectacular display of womanhood.", parse);
 
 			// Grow breasts
-			_.each(player.AllBreastRows(), function(breast) {
+			_.each(player.AllBreastRows(), (breast) => {
 				if (breast.size.base < 10) { breast.size.base = 10; }
 			});
 		} else if (player.FirstBreastRow().Size() < 7.5) { // D-Cup
 			Text.Add("Warmth centers on your chest, like ghostly fingers caressing your [breasts], and the feeling makes you moan joyfully. You can feel yourself growing, your [breasts] swelling into a glorious set of ripe womanly melons.", parse);
 
 			// Grow breasts
-			_.each(player.AllBreastRows(), function(breast) {
+			_.each(player.AllBreastRows(), (breast) => {
 				if (breast.size.base < 7.5) { breast.size.base = 7.5; }
 			});
 		} else {
@@ -1271,11 +1271,11 @@ HalloweenScenes.WerewolfTF = function() {
 
 		// Body stuff, remove vag
 		player.body.vagina = [];
-		_.each(player.AllCocks(), function(cock) {
+		_.each(player.AllCocks(), (cock) => {
 			cock.vag = null;
 		});
 		// Shrink breasts
-		_.each(player.AllBreastRows(), function(breast) {
+		_.each(player.AllBreastRows(), (breast) => {
 			if (breast.size.base > 2) { breast.size.base = 2; }
 		});
 	}
@@ -1287,7 +1287,7 @@ HalloweenScenes.WerewolfTF = function() {
 	player.Equip();
 
 	// Werewolf TF
-	// ===========
+	// ================
 
 	// Size
 	player.body.height.base = 210;
@@ -1300,11 +1300,11 @@ HalloweenScenes.WerewolfTF = function() {
 
 	// Fix cock/s
 	const cocks = player.AllCocks();
-	if (cocks.length == 0) {
+	if (cocks.length === 0) {
 		const cock = new Cock(Race.Wolf, Color.red);
 		cocks.push(cock);
 	}
-	_.each(cocks, function(cock) {
+	_.each(cocks, (cock) => {
 		if (cock.Len() < 25) { cock.length.base    = 25; }
 		if (cock.Thickness() < 7) { cock.thickness.base = 7; }
 		cock.knot = 1;
@@ -1329,7 +1329,7 @@ HalloweenScenes.WerewolfTF = function() {
 	HalloweenScenes.HW.flags |= HalloweenFlags.Flags.Werewolf;
 };
 
-HalloweenScenes.RonniePitch = function() {
+HalloweenScenes.RonniePitch = () => {
 	const player = GAME().player;
 
 	let parse: any = {
@@ -1337,7 +1337,7 @@ HalloweenScenes.RonniePitch = function() {
 	};
 	parse = player.ParserTags(parse);
 
-	const first = HalloweenScenes.HW.ronnie != HalloweenFlags.Ronnie.PCAlpha;
+	const first = HalloweenScenes.HW.ronnie !== HalloweenFlags.Ronnie.PCAlpha;
 	HalloweenScenes.HW.ronnie = HalloweenFlags.Ronnie.PCAlpha;
 
 	Text.Add("As slowly and patiently as you can bring yourself to go, you grind your massive throbbing wolfhood between your beta’s round buttcheeks. Each stroke rubs around the wrinkled opening of his tailhole, working the very tip of your cock against his opening, but never quite penetrating.", parse);
@@ -1425,7 +1425,7 @@ HalloweenScenes.RonniePitch = function() {
 	Gui.NextPrompt();
 };
 
-HalloweenScenes.RonnieCatch = function() {
+HalloweenScenes.RonnieCatch = () => {
 	const player = GAME().player;
 
 	let parse: any = {
@@ -1491,7 +1491,7 @@ HalloweenScenes.RonnieCatch = function() {
 	Gui.NextPrompt();
 };
 
-HalloweenScenes.RonnieReversal = function() {
+HalloweenScenes.RonnieReversal = () => {
 	const parse: any = {
 
 	};
@@ -1512,7 +1512,7 @@ HalloweenScenes.RonnieReversal = function() {
 	Text.Add("The smaller werewolf whines softly and grinds back, much to your surprise. It seems you didn’t even need to <i>mark him</i> to make it clear who runs this little pack of yours… but still, it would set a bad example if you just let him off the hook now, and from the looks of it, he wants this too!", parse);
 	Text.Flush();
 
-	Gui.NextPrompt(function() {
+	Gui.NextPrompt(() => {
 		Text.Clear();
 		HalloweenScenes.RonniePitch();
 	});
@@ -1521,7 +1521,7 @@ HalloweenScenes.RonnieReversal = function() {
 Halloween.Loc.Path.events.push(new Link(
 	"Ravens", true, true,
 	null,
-	function() {
+	() => {
 		const parse: any = {
 
 		};
@@ -1544,7 +1544,7 @@ Halloween.Loc.Path.events.push(new Link(
 				Text.Add("…The last thing you remember is a single black raven feather floating down in a world of white…", parse);
 				Text.Flush();
 
-				Gui.NextPrompt(function() {
+				Gui.NextPrompt(() => {
 					HalloweenScenes.WakingUp(false);
 				});
 			}, enabled : true,
@@ -1563,7 +1563,7 @@ Halloween.Loc.Path.events.push(new Link(
 	},
 ));
 
-Halloween.Loc.Graveyard.description = function() {
+Halloween.Loc.Graveyard.description = () => {
 	Text.Add("The graveyard you’re standing in right now is appropriately grim. Surrounded by a low, moss-covered stone wall, the only sign of life in this forsaken place are the handful of ravens perched on the remains of old, scraggly trees - the branches bare, the wood dead and dry. They caw angrily at you, then flap off to join the other ravens to wherever they’re going.");
 	Text.NL();
 	Text.Add("The wall aside, the construction of this graveyard is quite haphazard. Tombstones and graves lie hither and thither, some of them with freshly turned earth before them. Others have bouquets set before them, but the flowers are long dead and rotting. A few lamps would have provided illumination, no one’s been here to light them, so all you have to go on by is moonlight.");
@@ -1574,26 +1574,26 @@ Halloween.Loc.Graveyard.description = function() {
 Halloween.Loc.Graveyard.links.push(new Link(
 	"Path", true, true,
 	null,
-	function() {
+	() => {
 		MoveToLocation(Halloween.Loc.Path);
 	},
 ));
 Halloween.Loc.Graveyard.links.push(new Link(
 	"Chapel", true, true,
 	null,
-	function() {
+	() => {
 		MoveToLocation(Halloween.Loc.Chapel);
 	},
 ));
 Halloween.Loc.Graveyard.links.push(new Link(
 	"Mausoleum", true, true,
 	null,
-	function() {
+	() => {
 		MoveToLocation(Halloween.Loc.Mausoleum);
 	},
 ));
 
-Halloween.Loc.Graveyard.onEntry = function() {
+Halloween.Loc.Graveyard.onEntry = () => {
 	const repeat = HalloweenScenes.HW.flags & HalloweenFlags.Flags.Graveyard;
 	HalloweenScenes.HW.flags |= HalloweenFlags.Flags.Graveyard;
 
@@ -1604,7 +1604,7 @@ Halloween.Loc.Graveyard.onEntry = function() {
 	}
 };
 
-HalloweenScenes.Kiai = function() {
+HalloweenScenes.Kiai = () => {
 	const player = GAME().player;
 	const party: Party = GAME().party;
 	const kiakai = GAME().kiakai;
@@ -1654,7 +1654,7 @@ HalloweenScenes.Kiai = function() {
 		Text.NL();
 		Text.Add("<i>“…Fuck out… brains…”</i>", parse);
 		Text.NL();
-		parse.gen = gender == Gender.male ? "massive boner" : "oozing cunt and engorged clit";
+		parse.gen = gender === Gender.male ? "massive boner" : "oozing cunt and engorged clit";
 		parse.w = werewolf ? " even with your werewolf strength" : "";
 		Text.Add("Oh-kay. Well, that’s nice. Judging by the [gen] [name]’s sporting, looks like [heshe] means it, too. Right - with the zombies closing in and looking to force you into sating their uh, hunger, you’d probably be best looking for a way out of this. It’s clear that there’s too many of them for you to fight directly[w], so you’d better actually use your brains for once.", parse);
 	} else {
@@ -1785,7 +1785,7 @@ HalloweenScenes.Kiai = function() {
 	Gui.SetButtonsFromList(options, false, null);
 };
 
-HalloweenScenes.KiaiRun = function() {
+HalloweenScenes.KiaiRun = () => {
 	const party: Party = GAME().party;
 	const parse: any = {
 
@@ -1804,24 +1804,24 @@ HalloweenScenes.KiaiRun = function() {
 	let dest = Halloween.Loc.Path;
 
 	const scenes = new EncounterTable();
-	scenes.AddEnc(function() {
+	scenes.AddEnc(() => {
 		dest = Halloween.Loc.Path;
-	}, 1.0, function() { return true; });
-	scenes.AddEnc(function() {
+	}, 1.0, () => true);
+	scenes.AddEnc(() => {
 		dest = Halloween.Loc.Mausoleum;
-	}, 1.0, function() { return true; });
-	scenes.AddEnc(function() {
+	}, 1.0, () => true);
+	scenes.AddEnc(() => {
 		dest = Halloween.Loc.Chapel;
-	}, 1.0, function() { return true; });
+	}, 1.0, () => true);
 	scenes.Get();
 
-	Gui.NextPrompt(function() {
+	Gui.NextPrompt(() => {
 		party.location = dest;
 		Gui.PrintDefaultOptions();
 	});
 };
 
-HalloweenScenes.KiaiGangrape = function() {
+HalloweenScenes.KiaiGangrape = () => {
 	const player = GAME().player;
 	const kiakai = GAME().kiakai;
 	let parse: any = {
@@ -1877,12 +1877,12 @@ HalloweenScenes.KiaiGangrape = function() {
 	Text.Flush();
 
 	// BAD END
-	Gui.NextPrompt(function() {
+	Gui.NextPrompt(() => {
 		HalloweenScenes.WakingUp(true);
 	});
 };
 
-Halloween.Loc.Mausoleum.description = function() {
+Halloween.Loc.Mausoleum.description = () => {
 	const first = !(HalloweenScenes.HW.flags & HalloweenFlags.Flags.Mausoleum);
 	if (first) {
 		Text.Add("Curiosity gets the best of you and you decide to investigate.");
@@ -1916,31 +1916,31 @@ Halloween.Loc.Mausoleum.description = function() {
 Halloween.Loc.Mausoleum.links.push(new Link(
 	"Leave", true, true,
 	null,
-	function() {
+	() => {
 		MoveToLocation(Halloween.Loc.Graveyard);
 	},
 ));
 Halloween.Loc.Mausoleum.links.push(new Link(
-	function() {
+	() => {
 		return (HalloweenScenes.HW.flags & HalloweenFlags.Flags.TRoom) ? "Torture room" : "Door";
 	}, true, true,
 	null,
-	function() {
+	() => {
 		MoveToLocation(Halloween.Loc.TortureRoom);
 	},
 ));
 
 Halloween.Loc.Mausoleum.events.push(new Link(
-	"Coffin", function() {
+	"Coffin", () => {
 		return !(HalloweenScenes.HW.harthon & HalloweenFlags.Harthon.Met);
 	}, true,
 	null,
-	function() {
+	() => {
 		HalloweenScenes.HarthonFirst();
 	},
 ));
 
-Halloween.Loc.TortureRoom.description = function() {
+Halloween.Loc.TortureRoom.description = () => {
 	const player = GAME().player;
 
 	const first = !(HalloweenScenes.HW.flags & HalloweenFlags.Flags.TRoom);
@@ -1963,7 +1963,7 @@ Halloween.Loc.TortureRoom.description = function() {
 Halloween.Loc.TortureRoom.links.push(new Link(
 	"Leave", true, true,
 	null,
-	function() {
+	() => {
 		const player = GAME().player;
 		Text.Clear();
 		if (player.Slut() < 50) {
@@ -1973,23 +1973,23 @@ Halloween.Loc.TortureRoom.links.push(new Link(
 		}
 		Text.Flush();
 
-		Gui.NextPrompt(function() {
+		Gui.NextPrompt(() => {
 			MoveToLocation(Halloween.Loc.Mausoleum);
 		});
 	},
 ));
 
 Halloween.Loc.TortureRoom.events.push(new Link(
-	"Urn", function() {
+	"Urn", () => {
 		return !(HalloweenScenes.HW.flags & HalloweenFlags.Flags.NadirMa);
 	}, true,
 	null,
-	function() {
+	() => {
 		HalloweenScenes.NadirMaApproach();
 	},
 ));
 
-HalloweenScenes.NadirMaApproach = function() {
+HalloweenScenes.NadirMaApproach = () => {
 	const parse: any = {
 
 	};
@@ -2016,7 +2016,7 @@ HalloweenScenes.NadirMaApproach = function() {
 	Gui.SetButtonsFromList(options, false, null);
 };
 
-HalloweenScenes.NadirMa = function() {
+HalloweenScenes.NadirMa = () => {
 	const player = GAME().player;
 	const miranda = GAME().miranda;
 
@@ -2126,7 +2126,7 @@ HalloweenScenes.NadirMa = function() {
 	Text.Add("Well, it’s not like you can’t understand where she’s coming from. That’s a <b>long</b> time to go without getting any sex. Wouldn’t it be nice to help her out, like she asked you to? On the other hand... she’s clearly something supernatural. Getting that close to her mightn’t be a good idea...", parse);
 	Text.Flush();
 
-	const prompt1 = function() {
+	const prompt1 = () => {
 		Text.Clear();
 		Text.Add("You tell Nadir-Ma that you’d be more than happy to help her relieve some tension.", parse);
 		Text.NL();
@@ -2157,7 +2157,7 @@ HalloweenScenes.NadirMa = function() {
 		Text.Add("<i>“Precisely. During all these years I’ve been stuck in that cramped little jar, I’ve never had room to even groom myself, so I’d really like to get a few things taken care of. And since there’s no one here but you and me, I’ll have you act as my servant. Okay?”</i>", parse);
 		Text.Flush();
 
-		const prompt2 = function() {
+		const prompt2 = () => {
 			Text.Clear();
 			Text.Add("You give the matter a moment’s thought and decide that it sounds agreeable. With a nod of emphasis, you tell Nadir-Ma that she just needs to tell you what to do.", parse);
 			Text.NL();
@@ -2208,7 +2208,7 @@ HalloweenScenes.NadirMa = function() {
 				Text.Add("<i>“Well, how do you expect us to have sex when you have so little to offer up front?”</i>", parse);
 				Text.NL();
 				Text.Add("Puzzled, you fish out your ‘stake’ and present it to her, telling her that if she really needs something hard inside of her, this would work. Besides, there’s plenty of fun ", parse);
-				if (player.Gender() == Gender.female) {
+				if (player.Gender() === Gender.female) {
 					Text.Add("two girls", parse);
 				} else {
 					Text.Add("a girl like her and a guy like you", parse);
@@ -2224,7 +2224,7 @@ HalloweenScenes.NadirMa = function() {
 				Text.Add("From the dreamy look on Nadir-Ma’s face, it seems quite evident that she has her heart set on this. You aren’t going to change her mind; all you can do is decide whether you’re going to agree with her plan to change your body more to her liking.", parse);
 				Text.Flush();
 
-				const prompt3 = function() {
+				const prompt3 = () => {
 					HalloweenScenes.HW.nadirma |= HalloweenFlags.NadirMa.GaveCock;
 
 					// ADD COCK
@@ -2319,7 +2319,7 @@ HalloweenScenes.NadirMa = function() {
 	Gui.SetButtonsFromList(options, false, null);
 };
 
-HalloweenScenes.NadirMaCont = function(parse: any) {
+HalloweenScenes.NadirMaCont = (parse: any) => {
 	const player = GAME().player;
 
 	const p1cock = player.BiggestCock();
@@ -2368,7 +2368,7 @@ HalloweenScenes.NadirMaCont = function(parse: any) {
 	Text.Add("<i>“Well, you made quite the mess.”</i> She lifts her feet, wiggling her toes to show you the cum covering each digit. <i>“How about you start by cleaning this up?”</i>", parse);
 	Text.Flush();
 
-	const prompt = function() {
+	const prompt = () => {
 		Text.Clear();
 		Text.Add("Nadir-Ma grins at you. <i>“Good answer, cutie. Come now and clean your mistress’ feet. It’s not everyday that a mere mortal like you gets to clean a Goddess’ foot!”</i>", parse);
 		Text.NL();
@@ -2486,7 +2486,7 @@ HalloweenScenes.NadirMaCont = function(parse: any) {
 			Text.Add("<i>“So, how about it, cutie? Ready to grow a pair?”</i>", parse);
 			Text.Flush();
 
-			const prompt2 = function() {
+			const prompt2 = () => {
 				HalloweenScenes.HW.nadirma |= HalloweenFlags.NadirMa.GaveBalls;
 
 				// ADD BALLS
@@ -2556,7 +2556,7 @@ HalloweenScenes.NadirMaCont = function(parse: any) {
 	Gui.SetButtonsFromList(options, false, null);
 };
 
-HalloweenScenes.NadirMaCont2 = function(parse: any) {
+HalloweenScenes.NadirMaCont2 = (parse: any) => {
 	const player = GAME().player;
 
 	const werewolf = HalloweenScenes.HW.Werewolf();
@@ -2577,7 +2577,7 @@ HalloweenScenes.NadirMaCont2 = function(parse: any) {
 	Text.Add("<i>“Get me to cum first, and you win, but if you cum before me, you lose!”</i> She grins. <i>“So, what will it be, cutie?”</i>", parse);
 	Text.Flush();
 
-	const prompt = function() {
+	const prompt = () => {
 		let p1cock = player.BiggestCock();
 		Text.Clear();
 		Text.Add("<i>“Great, let’s get started then!”</i> she says merrily, approaching you and gently grasping[oneof] your [cocks].", parse);
@@ -2953,7 +2953,7 @@ HalloweenScenes.NadirMaCont2 = function(parse: any) {
 	Gui.SetButtonsFromList(options, false, null);
 };
 
-HalloweenScenes.NadirMaNoEntry = function(parse: any, func: any) {
+HalloweenScenes.NadirMaNoEntry = (parse: any, func: any) => {
 	const player = GAME().player;
 
 	Text.Clear();
@@ -3037,7 +3037,7 @@ Her previously discarded bandages immediately wrap themselves around her body as
 	}
 };
 
-HalloweenScenes.NadirMaBadend = function() {
+HalloweenScenes.NadirMaBadend = () => {
 	const player = GAME().player;
 
 	const werewolf = HalloweenScenes.HW.Werewolf();
@@ -3292,7 +3292,7 @@ HalloweenScenes.NadirMaBadend = function() {
 	Text.Add("You know nothing but darkness...", parse);
 	Text.Flush();
 
-	Gui.NextPrompt(function() {
+	Gui.NextPrompt(() => {
 		Text.Clear();
 		Text.Add("You open your eyes to gaze at the walls of the torture room, previously lit by the greenish flames that appeared when you got Nadir-Ma angry. However, the greenish glow is gone now, having been replaced by the warm orange of regular burning flames.", parse);
 		Text.NL();
@@ -3420,13 +3420,13 @@ HalloweenScenes.NadirMaBadend = function() {
 		Text.Add("Your thoughts are getting so cloudy; all you can think of is how good this feels, all you can feel is Nadir-Ma as she fucks you. ‘Sister’ and body fade away into nothingness; there is just the endless darkness, the huge cock inside you, and the endless hunger of the woman splitting you on it...", parse);
 		Text.Flush();
 
-		Gui.NextPrompt(function() {
+		Gui.NextPrompt(() => {
 			HalloweenScenes.WakingUp(true);
 		});
 	});
 };
 
-HalloweenScenes.HarthonFirst = function() {
+HalloweenScenes.HarthonFirst = () => {
 	const player = GAME().player;
 	const party: Party = GAME().party;
 	const terry = GAME().terry;
@@ -3530,7 +3530,7 @@ HalloweenScenes.HarthonFirst = function() {
 				Text.Add("A few mocking tongues of mist dance within the doorway of the mausoleum, but they make no move to follow you, eventually seeping back down into the depths of the earth. It looks like you made a clean getaway... this time.", parse);
 				Text.Flush();
 
-				Gui.NextPrompt(function() {
+				Gui.NextPrompt(() => {
 					MoveToLocation(Halloween.Loc.Graveyard);
 				});
 			} else {
@@ -3585,7 +3585,7 @@ HalloweenScenes.HarthonFirst = function() {
 	Gui.SetButtonsFromList(options, false, null);
 };
 
-HalloweenScenes.HarthonDefeatedPrompt = function() {
+HalloweenScenes.HarthonDefeatedPrompt = () => {
 	const player = GAME().player;
 	const party: Party = GAME().party;
 
@@ -3762,7 +3762,7 @@ HalloweenScenes.HarthonDefeatedPrompt = function() {
 			Text.Add("Mind made up, you spin around and make for the stairwell leading out of this dank pit. “Lord” Harthon’s pitiful pleas echoing in your ears as you ascend, until finally they are swallowed by the earth as you step forth into the cemetery once again.", parse);
 			Text.Flush();
 
-			Gui.NextPrompt(function() {
+			Gui.NextPrompt(() => {
 				MoveToLocation(Halloween.Loc.Graveyard);
 			});
 		}, enabled : true,
@@ -3770,7 +3770,7 @@ HalloweenScenes.HarthonDefeatedPrompt = function() {
 	Gui.SetButtonsFromList(options, false, null);
 };
 
-HalloweenScenes.HarthonPitchAnal = function(parse: any) {
+HalloweenScenes.HarthonPitchAnal = (parse: any) => {
 	const player = GAME().player;
 	const party: Party = GAME().party;
 
@@ -3990,7 +3990,7 @@ HalloweenScenes.HarthonPitchAnal = function(parse: any) {
 	Text.Add("<i>“Umm… thank you?”</i>", parse);
 	Text.NL();
 
-	const outside = party.location != Halloween.Loc.Mausoleum;
+	const outside = party.location !== Halloween.Loc.Mausoleum;
 	parse.outside = outside ? "into the bushes" : "outside";
 	parse.outside2 = outside ? " above you" : "";
 	Text.Add("You smile and brush it away, wishing your vulpine lover well. Terry nods softly and resumes what [heshe] was doing before you interrupted [himher]. Suitably equipped, [heshe] steps [outside] to transform into a bat. Once the flying fox has wended [hisher] way into the eternal night[outside2], you pick yourself up, dust yourself off, and set off on your own.", parse);
@@ -3998,7 +3998,7 @@ HalloweenScenes.HarthonPitchAnal = function(parse: any) {
 	Gui.NextPrompt();
 };
 
-HalloweenScenes.HarthonPitchVag = function(parse: any) {
+HalloweenScenes.HarthonPitchVag = (parse: any) => {
 	const player = GAME().player;
 
 	const p1cock = player.BiggestCock();
@@ -4081,7 +4081,7 @@ HalloweenScenes.HarthonPitchVag = function(parse: any) {
 
 	const pregStage = HalloweenScenes.HW.harthonPreg;
 
-	Gui.NextPrompt(function() {
+	Gui.NextPrompt(() => {
 		Text.Clear();
 		parse.k = p1cock && p1cock.Knot() ? ", and with your knot now-deflated" : "";
 		Text.Add("Eventually, Terry stirs restlessly in your arms, making a feeble effort to climb from your lap. Feeling recovered yourself[k], you slowly guide her to the ground and pull your [cock] free with a wet slurp.", parse);
@@ -4110,7 +4110,7 @@ HalloweenScenes.HarthonPitchVag = function(parse: any) {
 		Text.Add("You can <b>feel</b> her hesitancy melting away, her lust igniting like a roaring inferno that consumes her very being. She wants the juices smeared across your [cock] - she <b>needs</b> them, if she’s going to quench the hunger gnawing at her.", parse);
 		Text.NL();
 		Text.Add("Watching the vixen twitch and shiver, hungrily licking her lips as she stares fixedly at your loins, you allow the power to recede from her.", parse);
-		if (pregStage == 1) {
+		if (pregStage === 1) {
 			Text.Add(" Before you leave her, though, something makes you pause for a moment - a strange little spark that seems to be emanating from Terry’s belly. Inquisitively, you let a tendril of power brush against her, and what you find brings a brief smile to your lips. Seems your lovemaking has borne fruit; your seed has taken root inside of the vixen’s womb.", parse);
 		}
 		Text.NL();
@@ -4175,7 +4175,7 @@ HalloweenScenes.HarthonPitchVag = function(parse: any) {
 	});
 };
 
-HalloweenScenes.HarthonPitchVagStop = function(parse: any) {
+HalloweenScenes.HarthonPitchVagStop = (parse: any) => {
 	Text.Clear();
 	Text.Add("Decision made, you sharply pull back from Terry’s thirsty mouth, your spittle-slick [cock] wetly popping free of her pursed lips.", parse);
 	Text.NL();
@@ -4203,7 +4203,7 @@ HalloweenScenes.HarthonPitchVagStop = function(parse: any) {
 	Gui.NextPrompt();
 };
 
-HalloweenScenes.HarthonBadend = function() {
+HalloweenScenes.HarthonBadend = () => {
 	const player = GAME().player;
 
 	const werewolf = HalloweenScenes.HW.Werewolf();
@@ -4373,12 +4373,12 @@ HalloweenScenes.HarthonBadend = function() {
 	Text.Add("Amidst the wild sex and fervent fucking, you eventually feel it: his seed penetrates your innermost sanctum, impregnating your unworthy eggs with his sacred heirs. And as you notify him of this, he praises you and you feel him redouble his efforts, fucking you with renewed vigor. And you rejoice; you know that you have fulfilled your duty for your Master, but he will never get rid of you. He’ll always keep you as his enthralled bride, ripe, eager to fuck and ready to pop out more heirs.", parse);
 	Text.Flush();
 
-	Gui.NextPrompt(function() {
+	Gui.NextPrompt(() => {
 		HalloweenScenes.WakingUp(true);
 	});
 };
 
-Halloween.Loc.Chapel.description = function() {
+Halloween.Loc.Chapel.description = () => {
 	const first = !(HalloweenScenes.HW.flags & HalloweenFlags.Flags.Chapel);
 	HalloweenScenes.HW.flags |= HalloweenFlags.Flags.Chapel;
 
@@ -4396,7 +4396,7 @@ Halloween.Loc.Chapel.description = function() {
 };
 
 // #Shows up simply as “Thrall” in Beaten Path, and that’s about the only location you may call Harthon until we expand on the halloween world.
-HalloweenScenes.HarthonThrall = function() {
+HalloweenScenes.HarthonThrall = () => {
 	const player = GAME().player;
 
 	const werewolf = HalloweenScenes.HW.Werewolf();
@@ -4476,7 +4476,7 @@ HalloweenScenes.HarthonThrall = function() {
 		HalloweenScenes.HW.harthonPreg++;
 	}
 
-	if (HalloweenScenes.HW.harthonPreg == 5) {
+	if (HalloweenScenes.HW.harthonPreg === 5) {
 		Text.Add("<i>“So… how may I serv- Ah!”</i> The vixen suddenly places a hand on her belly.", parse);
 		Text.NL();
 
@@ -4490,7 +4490,7 @@ HalloweenScenes.HarthonThrall = function() {
 };
 
 // TODO
-HalloweenScenes.HarthonThrallPrompt = function(parse: any) {
+HalloweenScenes.HarthonThrallPrompt = (parse: any) => {
 	const player = GAME().player;
 	const party: Party = GAME().party;
 
@@ -4777,7 +4777,7 @@ HalloweenScenes.HarthonThrallPrompt = function(parse: any) {
 	/* TODO Talk
 	options.push({ nameStr : "name",
 		tooltip : "",
-		func : function() {
+		func : () => {
 			Text.Clear();
 			Text.Add("", parse);
 			Text.NL();
@@ -4968,7 +4968,7 @@ HalloweenScenes.HarthonThrallPrompt = function(parse: any) {
 	Gui.SetButtonsFromList(options, false, null);
 };
 
-HalloweenScenes.HarthonBirth = function(parse: any) {
+HalloweenScenes.HarthonBirth = (parse: any) => {
 	const werewolf = HalloweenScenes.HW.Werewolf();
 
 	Text.Add("What’s wrong?!", parse);
@@ -5048,26 +5048,26 @@ HalloweenScenes.HarthonBirth = function(parse: any) {
 Halloween.Loc.Chapel.links.push(new Link(
 	"Graveyard", true, true,
 	null,
-	function() {
+	() => {
 		MoveToLocation(Halloween.Loc.Graveyard);
 	},
 ));
 Halloween.Loc.Chapel.events.push(new Link(
-	"Altar", true, function() {
+	"Altar", true, () => {
 		return !(HalloweenScenes.HW.flags & HalloweenFlags.Flags.Laggoth);
 	},
-	function() {
+	() => {
 		if (!(HalloweenScenes.HW.flags & HalloweenFlags.Flags.Laggoth)) {
 			Text.NL();
 			Text.Add("The altar up ahead is lit up by a hellish glow. The source of the evil plaguing the chapel must be there!");
 		}
 	},
-	function() {
+	() => {
 		HalloweenScenes.Laggoth();
 	},
 ));
 
-HalloweenScenes.Laggoth = function() {
+HalloweenScenes.Laggoth = () => {
 	const player = GAME().player;
 	const burrows = GAME().burrows;
 
@@ -5200,7 +5200,7 @@ HalloweenScenes.Laggoth = function() {
 		}, enabled : true,
 	});
 
-	Gui.Callstack.push(function() {
+	Gui.Callstack.push(() => {
 		Text.NL();
 		Text.Add("He really does have a penchant for the melodramatic, doesn’t he?", parse);
 		Text.NL();
@@ -5239,7 +5239,7 @@ HalloweenScenes.Laggoth = function() {
 	Gui.SetButtonsFromList(options, false, null);
 };
 
-HalloweenScenes.LaggothQnA = function(opts: any) {
+HalloweenScenes.LaggothQnA = (opts: any) => {
 	const parse: any = {
 
 	};
@@ -5346,7 +5346,7 @@ HalloweenScenes.LaggothQnA = function(opts: any) {
 	if (options.length > 0) {
 		Gui.SetButtonsFromList(options, false, null);
 	} else {
-		Gui.NextPrompt(function() {
+		Gui.NextPrompt(() => {
 			Text.Clear();
 			Text.Add("<i>“Enough talk!”</i> Laggoth suddenly roars, slapping a meaty hand down on the armrest of his throne. <i>“Have at you - oh, wait, that’s the wrong one, I was reserving that for the guy with the whip. Enough talk! I tire of this; minions, it is time! Prepare my cock!”</i>", parse);
 			Text.NL();
@@ -5506,7 +5506,7 @@ HalloweenScenes.LaggothQnA = function(opts: any) {
 	}
 };
 
-HalloweenScenes.LaggothDistract = function() {
+HalloweenScenes.LaggothDistract = () => {
 	const player = GAME().player;
 	const party: Party = GAME().party;
 
@@ -5687,7 +5687,7 @@ HalloweenScenes.LaggothDistract = function() {
 	Gui.SetButtonsFromList(options, false, null);
 };
 
-HalloweenScenes.LaggothPit = function() {
+HalloweenScenes.LaggothPit = () => {
 	const player = GAME().player;
 
 	const parse: any = {
@@ -5741,22 +5741,22 @@ HalloweenScenes.LaggothPit = function() {
 	Text.Add("Now… that was pretty anticlimactic. But then again, everything about Laggoth wasn’t all it was made out to be.", parse);
 	Text.Flush();
 
-	Gui.NextPrompt(function() {
+	Gui.NextPrompt(() => {
 		HalloweenScenes.WakingUp(true);
 	});
 };
 
 Halloween.Loc.Chapel.events.push(new Link(
-	"Sacristy", true, function() {
+	"Sacristy", true, () => {
 		return !(HalloweenScenes.HW.flags & HalloweenFlags.Flags.Lenka);
 	},
 	null,
-	function() {
+	() => {
 		HalloweenScenes.Sacristy();
 	},
 ));
 
-HalloweenScenes.Sacristy = function() {
+HalloweenScenes.Sacristy = () => {
 	const parse: any = {
 
 	};
@@ -5792,7 +5792,7 @@ HalloweenScenes.Sacristy = function() {
 	Gui.SetButtonsFromList(options, false, null);
 };
 
-HalloweenScenes.Lenka = function() {
+HalloweenScenes.Lenka = () => {
 	const player = GAME().player;
 	const cveta = GAME().cveta;
 
@@ -6104,7 +6104,7 @@ HalloweenScenes.Lenka = function() {
 			Text.Add("Around you, the black roses grow from their heart under the elegant bed; you dimly realize that they’ve already consumed the entirety of the burnt-out chapel in their vicious, thorny grip. In your more lucid moments, when your mistress-wife’s voice isn’t present to command your attention and demand that she be bred, you dimly wonder if they’ll eventually spread to consume everything in the world…", parse);
 			Text.Flush();
 
-			Gui.NextPrompt(function() {
+			Gui.NextPrompt(() => {
 				HalloweenScenes.WakingUp(true);
 			});
 		}, enabled : true,
@@ -6181,7 +6181,7 @@ HalloweenScenes.Lenka = function() {
 	Gui.SetButtonsFromList(options, false, null);
 };
 
-Halloween.Loc.WitchHut.description = function() {
+Halloween.Loc.WitchHut.description = () => {
 	const first = !(HalloweenScenes.HW.flags & HalloweenFlags.Flags.WitchHut);
 	HalloweenScenes.HW.flags |= HalloweenFlags.Flags.WitchHut;
 
@@ -6207,7 +6207,7 @@ Halloween.Loc.WitchHut.description = function() {
 Halloween.Loc.WitchHut.links.push(new Link(
 	"Outside", true, true,
 	null,
-	function() {
+	() => {
 		MoveToLocation(Halloween.Loc.Path);
 	},
 ));
@@ -6215,22 +6215,22 @@ Halloween.Loc.WitchHut.links.push(new Link(
 Halloween.Loc.WitchHut.events.push(new Link(
 	"Trader", true, true,
 	null,
-	function() {
+	() => {
 		HalloweenScenes.Patches();
 	},
 ));
 
 Halloween.Loc.WitchHut.events.push(new Link(
-	function() {
+	() => {
 		return (HalloweenScenes.HW.flags & HalloweenFlags.Flags.Jenna) ? "Jenna" : "Witch";
 	}, true, true,
 	null,
-	function() {
+	() => {
 		HalloweenScenes.Jenna();
 	},
 ));
 
-HalloweenScenes.Jenna = function() {
+HalloweenScenes.Jenna = () => {
 	const player = GAME().player;
 	const parse: any = {
 		playername : player.name,
@@ -6313,7 +6313,7 @@ HalloweenScenes.Jenna = function() {
 	}
 };
 
-HalloweenScenes.JennaSwitchPrompt = function(opts: any) {
+HalloweenScenes.JennaSwitchPrompt = (opts: any) => {
 	const player = GAME().player;
 	let parse: any = {
 
@@ -6452,7 +6452,7 @@ HalloweenScenes.JennaSwitchPrompt = function(opts: any) {
 	Gui.SetButtonsFromList(options, false, null);
 };
 
-HalloweenScenes.JennaAgreePrompt = function(opts: any) {
+HalloweenScenes.JennaAgreePrompt = (opts: any) => {
 	const player = GAME().player;
 	let parse: any = {
 
@@ -6523,7 +6523,7 @@ HalloweenScenes.JennaAgreePrompt = function(opts: any) {
 	Gui.SetButtonsFromList(options, false, null);
 };
 
-HalloweenScenes.JennaBroomfuck = function() {
+HalloweenScenes.JennaBroomfuck = () => {
 	const player = GAME().player;
 	let parse: any = {
 
@@ -6663,7 +6663,7 @@ HalloweenScenes.JennaBroomfuck = function() {
 	Gui.NextPrompt();
 };
 
-HalloweenScenes.Patches = function() {
+HalloweenScenes.Patches = () => {
 	const player = GAME().player;
 	const party: Party = GAME().party;
 	const patchwork = GAME().patchwork;
@@ -6716,7 +6716,7 @@ HalloweenScenes.Patches = function() {
 	Text.Add("<i>“Password?”</i> a feminine voice asks.", parse);
 	Text.Flush();
 
-	const success = function() {
+	const success = () => {
 		Text.NL();
 		Text.Add("<i>“Correct,”</i> [heshe] says, shuffling to move out of the way.", parse);
 		Text.NL();
@@ -6795,7 +6795,7 @@ HalloweenScenes.Patches = function() {
 
 		Gui.NextPrompt();
 	};
-	const failure = function() {
+	const failure = () => {
 		Text.NL();
 		Text.Add("<i>“Wrong.”</i>", parse);
 		Text.NL();
@@ -6837,7 +6837,7 @@ HalloweenScenes.Patches = function() {
 			textBox.focus();
 			Input.keyDownValid = false;
 
-			Gui.NextPrompt(function() {
+			Gui.NextPrompt(() => {
 				const truePw = Halloween.PW().toLowerCase();
 				const pw     = textBox.value.toLowerCase();
 				textBox.style.visibility = "hidden";
@@ -6845,7 +6845,7 @@ HalloweenScenes.Patches = function() {
 
 				Text.Clear();
 				Text.Add("...[pw]?", {pw: textBox.value});
-				if (truePw == pw) {
+				if (truePw === pw) {
 					success();
 				} else {
 					failure();
@@ -6875,7 +6875,7 @@ HalloweenScenes.Patches = function() {
 	Gui.SetButtonsFromList(options, false, null);
 };
 
-HalloweenScenes.WakingUp = function(badend: boolean) {
+HalloweenScenes.WakingUp = (badend: boolean) => {
 	const party: Party = GAME().party;
 	const parse: any = {
 
@@ -6902,7 +6902,7 @@ HalloweenScenes.WakingUp = function(badend: boolean) {
 	Text.NL();
 	Text.Add("You feel full. The good food makes you think you can better focus on learning new things.", parse, "bold");
 
-	_.each(party.members, function(ent) {
+	_.each(party.members, (ent) => {
 		Status.Full(ent, {hours: 12, exp: 1.1});
 	});
 

@@ -4,33 +4,33 @@ import { OutlawsFlags } from "./outlaws/outlaws-flags";
 
 const GlobalScenes: any = {};
 
-GlobalScenes.VisitedRigardGates = function() {
+GlobalScenes.VisitedRigardGates = () => {
 	return GAME().miranda.Met();
 };
 
-GlobalScenes.VisitedOutlaws = function() {
+GlobalScenes.VisitedOutlaws = () => {
 	return GAME().outlaws.flags.Met >= OutlawsFlags.Met.Met;
 };
 
-GlobalScenes.MetJeanne = function() {
-	return GAME().jeanne.flags.Met != 0;
+GlobalScenes.MetJeanne = () => {
+	return GAME().jeanne.flags.Met !== 0;
 };
 
-GlobalScenes.DefeatedOrchid = function() {
+GlobalScenes.DefeatedOrchid = () => {
 	return GAME().glade.flags.Visit >= DryadGladeFlags.Visit.DefeatedOrchid;
 };
 
-GlobalScenes.PortalsOpen = function() {
-	return GameCache().flags.Portals != 0;
+GlobalScenes.PortalsOpen = () => {
+	return GameCache().flags.Portals !== 0;
 };
 
 // Learned from Jeanne/Magnus
-GlobalScenes.MagicStage1 = function() {
-	return GameCache().flags.LearnedMagic != 0;
+GlobalScenes.MagicStage1 = () => {
+	return GameCache().flags.LearnedMagic !== 0;
 };
 
 // Learned from Jeanne
-GlobalScenes.MagicStage2 = function() {
+GlobalScenes.MagicStage2 = () => {
 	return GameCache().flags.LearnedMagic >= 3;
 };
 

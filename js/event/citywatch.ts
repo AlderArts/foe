@@ -1,4 +1,4 @@
 
-const CityWatchScenes: any = {};
+export namespace CityWatchScenes {
 
-export { CityWatchScenes };
+}

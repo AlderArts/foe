@@ -17,7 +17,7 @@ import { UruFlags } from "./uru";
 
 const DreamsScenes: any = {};
 
-DreamsScenes.Entry = function(func: any) {
+DreamsScenes.Entry = (func: any) => {
 	const party: Party = GAME().party;
 	const player = GAME().player;
 	const ravenmother = GAME().ravenmother;
@@ -33,50 +33,50 @@ DreamsScenes.Entry = function(func: any) {
 
 	if (Math.random() < 0.5) {
 		let ravenTrigger = false;
-		if (ravenmother.flags.RBlock == 0) {
+		if (ravenmother.flags.RBlock === 0) {
 			ravenTrigger = ravenmother.RavenTrigger();
 		}
 
-		const dream = function() {
+		const dream = () => {
 			const scenes = new EncounterTable();
-			scenes.AddEnc(DreamsScenes.Ocean, 1.0, function() { return true; }, ravenTrigger);
-			scenes.AddEnc(DreamsScenes.Forest, 1.0, function() { return true; }, ravenTrigger);
-			scenes.AddEnc(DreamsScenes.Harem, 1.0, function() { return true; }, ravenTrigger);
-			scenes.AddEnc(DreamsScenes.BackHome, 1.0, function() { return true; }, ravenTrigger);
-			scenes.AddEnc(DreamsScenes.Heartstone, 1.0, function() { return true; }, ravenTrigger);
-			scenes.AddEnc(DreamsScenes.CoC, 1.0, function() { return true; }, ravenTrigger);
-			scenes.AddEnc(DreamsScenes.EndlessClassroom, 1.0, function() { return true; }, ravenTrigger);
-			scenes.AddEnc(DreamsScenes.PredatorPack, 1.0, function() { return true; }, ravenTrigger);
-			scenes.AddEnc(DreamsScenes.FirePet, 1.0, function() { return true; }, ravenTrigger);
-			scenes.AddEnc(DreamsScenes.House, 1.0, function() { return true; }, ravenTrigger);
-			scenes.AddEnc(DreamsScenes.Hermit, 1.0, function() { return true; }, ravenTrigger);
-			scenes.AddEnc(DreamsScenes.Alchemy, 1.0, function() { return player.alchemyLevel >= 1; }, ravenTrigger);
-			scenes.AddEnc(DreamsScenes.UruChoice, 1.0, function() { return true; }, ravenTrigger);
-			scenes.AddEnc(DreamsScenes.UruRun, 1.0, function() { return true; }, ravenTrigger);
-			scenes.AddEnc(DreamsScenes.AriaTemple, 1.0, function() { return true; }, ravenTrigger);
-			scenes.AddEnc(DreamsScenes.KiakaiMonster, 1.0, function() { return party.location == WORLD().loc.Rigard.Inn.room && party.InParty(kiakai); }, ravenTrigger);
-			scenes.AddEnc(DreamsScenes.Kiakai63, 1.0, function() { return party.InParty(kiakai); }, ravenTrigger);
-			scenes.AddEnc(DreamsScenes.RosalinNursing, 1.0, function() { return rosalin.flags.PastDialog > RosalinFlags.PastDialog.Past; }, ravenTrigger);
-			scenes.AddEnc(DreamsScenes.RosalinTransformation, 1.0, function() { return rosalin.flags.Met != 0; }, ravenTrigger);
-			scenes.AddEnc(DreamsScenes.GwendyBarn, 1.0, function() { return gwendy.flags.Met != 0; }, ravenTrigger);
-			scenes.AddEnc(DreamsScenes.GwendyStallion, 1.0, function() { return gwendy.flags.Met != 0; }, ravenTrigger);
-			scenes.AddEnc(DreamsScenes.FeraKittens, 1.0, function() { return fera.FirstVag().virgin == false; }, ravenTrigger);
-			scenes.AddEnc(DreamsScenes.MirandaJailed, 1.0, function() { return miranda.flags.Met != 0; }, ravenTrigger);
-			scenes.AddEnc(DreamsScenes.MirandaMerc, 1.0, function() { return miranda.flags.Dates >= 1; }, ravenTrigger);
-			scenes.AddEnc(DreamsScenes.TwinsMaids, 1.0, function() { return twins.flags.Met >= TwinsFlags.Met.Access; }, ravenTrigger);
-			scenes.AddEnc(DreamsScenes.BlowjobGive, 2.0, function() { return player.sex.gBlow >= 25; }, ravenTrigger);
-			scenes.AddEnc(DreamsScenes.BlowjobRec, 2.0, function() { return player.sex.rBlow >= 25; }, ravenTrigger);
-			scenes.AddEnc(DreamsScenes.CunnilingusGive, 2.0, function() { return player.sex.gCunn >= 25; }, ravenTrigger);
-			scenes.AddEnc(DreamsScenes.CunnilingusRec, 2.0, function() { return player.sex.rCunn >= 25; }, ravenTrigger);
-			scenes.AddEnc(CvetaScenes.DreamRoses, 1.0, function() { return cveta.flags.Met >= CvetaFlags.Met.FirstMeeting; }, ravenTrigger);
-			scenes.AddEnc(CvetaScenes.DreamBrood, 1.0, function() { return cveta.flags.Met >= CvetaFlags.Met.FirstMeeting; }, ravenTrigger);
-			scenes.AddEnc(DreamsScenes.FragileArmor, 1.0, function() { return rigard.Twopenny.Met > 0; }, ravenTrigger);
-			scenes.AddEnc(DreamsScenes.AscheNighttime, 1.0, function() { return asche.flags.Met >= AscheFlags.Met.Met; }, ravenTrigger);
-			scenes.AddEnc(DreamsScenes.AscheDance, 1.0, function() { return asche.flags.Magic != 0; }, ravenTrigger);
+			scenes.AddEnc(DreamsScenes.Ocean, 1.0, () => true, ravenTrigger);
+			scenes.AddEnc(DreamsScenes.Forest, 1.0, () => true, ravenTrigger);
+			scenes.AddEnc(DreamsScenes.Harem, 1.0, () => true, ravenTrigger);
+			scenes.AddEnc(DreamsScenes.BackHome, 1.0, () => true, ravenTrigger);
+			scenes.AddEnc(DreamsScenes.Heartstone, 1.0, () => true, ravenTrigger);
+			scenes.AddEnc(DreamsScenes.CoC, 1.0, () => true, ravenTrigger);
+			scenes.AddEnc(DreamsScenes.EndlessClassroom, 1.0, () => true, ravenTrigger);
+			scenes.AddEnc(DreamsScenes.PredatorPack, 1.0, () => true, ravenTrigger);
+			scenes.AddEnc(DreamsScenes.FirePet, 1.0, () => true, ravenTrigger);
+			scenes.AddEnc(DreamsScenes.House, 1.0, () => true, ravenTrigger);
+			scenes.AddEnc(DreamsScenes.Hermit, 1.0, () => true, ravenTrigger);
+			scenes.AddEnc(DreamsScenes.Alchemy, 1.0, () => player.alchemyLevel >= 1, ravenTrigger);
+			scenes.AddEnc(DreamsScenes.UruChoice, 1.0, () => true, ravenTrigger);
+			scenes.AddEnc(DreamsScenes.UruRun, 1.0, () => true, ravenTrigger);
+			scenes.AddEnc(DreamsScenes.AriaTemple, 1.0, () => true, ravenTrigger);
+			scenes.AddEnc(DreamsScenes.KiakaiMonster, 1.0, () => party.location === WORLD().loc.Rigard.Inn.room && party.InParty(kiakai), ravenTrigger);
+			scenes.AddEnc(DreamsScenes.Kiakai63, 1.0, () => party.InParty(kiakai), ravenTrigger);
+			scenes.AddEnc(DreamsScenes.RosalinNursing, 1.0, () => rosalin.flags.PastDialog > RosalinFlags.PastDialog.Past, ravenTrigger);
+			scenes.AddEnc(DreamsScenes.RosalinTransformation, 1.0, () => rosalin.flags.Met !== 0, ravenTrigger);
+			scenes.AddEnc(DreamsScenes.GwendyBarn, 1.0, () => gwendy.flags.Met !== 0, ravenTrigger);
+			scenes.AddEnc(DreamsScenes.GwendyStallion, 1.0, () => gwendy.flags.Met !== 0, ravenTrigger);
+			scenes.AddEnc(DreamsScenes.FeraKittens, 1.0, () => fera.FirstVag().virgin === false, ravenTrigger);
+			scenes.AddEnc(DreamsScenes.MirandaJailed, 1.0, () => miranda.flags.Met !== 0, ravenTrigger);
+			scenes.AddEnc(DreamsScenes.MirandaMerc, 1.0, () => miranda.flags.Dates >= 1, ravenTrigger);
+			scenes.AddEnc(DreamsScenes.TwinsMaids, 1.0, () => twins.flags.Met >= TwinsFlags.Met.Access, ravenTrigger);
+			scenes.AddEnc(DreamsScenes.BlowjobGive, 2.0, () => player.sex.gBlow >= 25, ravenTrigger);
+			scenes.AddEnc(DreamsScenes.BlowjobRec, 2.0, () => player.sex.rBlow >= 25, ravenTrigger);
+			scenes.AddEnc(DreamsScenes.CunnilingusGive, 2.0, () => player.sex.gCunn >= 25, ravenTrigger);
+			scenes.AddEnc(DreamsScenes.CunnilingusRec, 2.0, () => player.sex.rCunn >= 25, ravenTrigger);
+			scenes.AddEnc(CvetaScenes.DreamRoses, 1.0, () => cveta.flags.Met >= CvetaFlags.Met.FirstMeeting, ravenTrigger);
+			scenes.AddEnc(CvetaScenes.DreamBrood, 1.0, () => cveta.flags.Met >= CvetaFlags.Met.FirstMeeting, ravenTrigger);
+			scenes.AddEnc(DreamsScenes.FragileArmor, 1.0, () => rigard.Twopenny.Met > 0, ravenTrigger);
+			scenes.AddEnc(DreamsScenes.AscheNighttime, 1.0, () => asche.flags.Met >= AscheFlags.Met.Met, ravenTrigger);
+			scenes.AddEnc(DreamsScenes.AscheDance, 1.0, () => asche.flags.Magic !== 0, ravenTrigger);
 			// TODO //Must have completed Asche’s first task, be it success or failure.
-			// scenes.AddEnc(DreamsScenes.AscheHotSpring, 1.0, function() { return asche.flags["Magic"] != 0; }, ravenTrigger);
+			// scenes.AddEnc(DreamsScenes.AscheHotSpring, 1.0, () => asche.flags["Magic"] !== 0, ravenTrigger);
 
-			const end = function() {
+			const end = () => {
 				DreamsScenes.RavenAfterDream(ravenTrigger, func);
 			};
 
@@ -91,7 +91,7 @@ DreamsScenes.Entry = function(func: any) {
 			}
 		};
 
-		if (ravenTrigger && ravenmother.Ravenness() >= RavenFlags.Stage.ravenstage3 && ravenmother.flags.Met == 0) {
+		if (ravenTrigger && ravenmother.Ravenness() >= RavenFlags.Stage.ravenstage3 && ravenmother.flags.Met === 0) {
 			Text.Add("You prepare for sleep, and lie down, fiddling with the gemstone in your hands. Do you really want to pursue these ravens? They have not harmed you so far, and what if it turns out to be dangerous? Most of your dreams don’t mean much anyway, so perhaps it’s not so bad to have them watched.");
 			Text.NL();
 			Text.Add("You feel like once you plunge ahead into this chase, you won’t be able to back out. Are you sure you want to do it?");
@@ -121,22 +121,22 @@ DreamsScenes.Entry = function(func: any) {
 	}
 };
 
-DreamsScenes.RavenAfterDream = function(ravenTrigger: boolean, func: any) {
+DreamsScenes.RavenAfterDream = (ravenTrigger: boolean, func: any) => {
 	const party: Party = GAME().party;
 	const ravenmother = GAME().ravenmother;
 	const kiakai = GAME().kiakai;
 
 	if (ravenTrigger) {
 		const r = ravenmother.Ravenness();
-		if     (r == RavenFlags.Stage.ravenstage2) {
+		if     (r === RavenFlags.Stage.ravenstage2) {
 			Text.NL();
 			Text.Add("Most of the dream you just experienced is clear in your mind, though fading fast. But there is some part that feels strangely obscured... clawing at your memory, wishing to be recalled, but just beyond your reach.");
 			Text.Flush();
-		} else if (r == RavenFlags.Stage.ravenstage2 + 1) {
+		} else if (r === RavenFlags.Stage.ravenstage2 + 1) {
 			Text.NL();
 			Text.Add("The memories come clearer this time. And amid the clear memories, you distinguish one spot that is veiled in blackness, as if excised from your mind. You grab at it, pushing the veil aside with a mental effort, but it’s already faded too far. Next time, you will be quicker.");
 			Text.Flush();
-		} else if (r == RavenFlags.Stage.ravenstage2 + 2) {
+		} else if (r === RavenFlags.Stage.ravenstage2 + 2) {
 			Text.NL();
 			Text.Add("You turn your mind to the dream, and in moments find the veiled spot. In your mind, you examine it closer and closer, willing it to resolve, and finally it clears, and you see a raven. But what’s the significance of it being part of your dream? There is still something you’re missing.");
 			if (party.InParty(kiakai)) {
@@ -155,7 +155,7 @@ DreamsScenes.RavenAfterDream = function(ravenTrigger: boolean, func: any) {
 					func() {
 						KiakaiScenes.RavenDreams();
 
-						Gui.NextPrompt(function() {
+						Gui.NextPrompt(() => {
 							func(true);
 						});
 					}, enabled : true,
@@ -167,7 +167,7 @@ DreamsScenes.RavenAfterDream = function(ravenTrigger: boolean, func: any) {
 						Text.Add("You tell [name] that you’re alright - you just had a strange dream. [HeShe] smiles, looking only a little skeptical.", parse);
 						Text.Flush();
 
-						Gui.NextPrompt(function() {
+						Gui.NextPrompt(() => {
 							func(true);
 						});
 					}, enabled : true,
@@ -178,7 +178,7 @@ DreamsScenes.RavenAfterDream = function(ravenTrigger: boolean, func: any) {
 				return;
 			}
 			Text.Flush();
-		} else if (r == RavenFlags.Stage.ravenstage2 + 3) {
+		} else if (r === RavenFlags.Stage.ravenstage2 + 3) {
 			Text.NL();
 			Text.Add("When you think of your dream, there is no veil this time - you see everything clearly. The bird was there again, watching you, tracking you. And when you tried to confront it while asleep, you managed to focus on it for a short while, but it somehow slipped away, forcing your mind back into the flow of the dream.");
 			Text.NL();
@@ -189,17 +189,13 @@ DreamsScenes.RavenAfterDream = function(ravenTrigger: boolean, func: any) {
 		}
 	}
 
-	Gui.NextPrompt(function() {
+	Gui.NextPrompt(() => {
 		func(true);
 	});
 };
 
-DreamsScenes.RavenText = function(trigger: boolean, stage1?: string, stage2?: string, no?: string) {
+DreamsScenes.RavenText = (trigger: boolean, stage1: string = "", stage2: string = "", no: string = "") => {
 	const ravenmother = GAME().ravenmother;
-
-	stage1 = stage1 || "";
-	stage2 = stage2 || "";
-	no     = no     || "";
 
 	if (trigger) {
 		const r = ravenmother.Ravenness();
@@ -214,7 +210,7 @@ DreamsScenes.RavenText = function(trigger: boolean, stage1?: string, stage2?: st
 };
 
 // Dreams
-DreamsScenes.Ocean = function(ravenTrigger: boolean) {
+DreamsScenes.Ocean = (ravenTrigger: boolean) => {
 	const parse: any = {
 		raven : DreamsScenes.RavenText(ravenTrigger, " A black bird flies high near the clouds.", " You spot a raven flying high above. It’s here again. You tell yourself you have to remember about this. Still..."),
 	};
@@ -222,7 +218,7 @@ DreamsScenes.Ocean = function(ravenTrigger: boolean) {
 	Text.Add("You float gently in a vast, deep blue ocean, caressed by the gentle waves. The sky above is the same soothing color, dotted with fluffy clouds.[raven] The water is so warm and comforting, and you feel like you don’t have a care in the world. When you wake up, you are refreshed and calm, though slightly regretful.", parse);
 };
 
-DreamsScenes.Forest = function(ravenTrigger: boolean) {
+DreamsScenes.Forest = (ravenTrigger: boolean) => {
 	const parse: any = {
 		raven : DreamsScenes.RavenText(ravenTrigger, " Even the croak of a raven somewhere in the branches of a nearby tree fails to disturb you.", " You hear the croak of a raven from a nearby tree. It must be watching you. You tell yourself you must remember it when you leave these woods."),
 	};
@@ -232,7 +228,7 @@ DreamsScenes.Forest = function(ravenTrigger: boolean) {
 	Text.Add("You awake fully rested, the earthy smell of the forest still vivid in your mind.", parse);
 };
 
-DreamsScenes.Harem = function(ravenTrigger: boolean) {
+DreamsScenes.Harem = (ravenTrigger: boolean) => {
 	const player = GAME().player;
 
 	const parse: any = {
@@ -258,7 +254,7 @@ DreamsScenes.Harem = function(ravenTrigger: boolean) {
 	player.AddLustFraction(0.4);
 };
 
-DreamsScenes.BackHome = function(ravenTrigger: boolean) {
+DreamsScenes.BackHome = (ravenTrigger: boolean) => {
 	const parse: any = {
 		raven : DreamsScenes.RavenText(ravenTrigger, " A beat of wings and a blur of black feathers distracts you for a moment as some bird flaps away from your doorstep.", " A raven flaps away from the opening door. Once again, the bird. You have to remember it. Wait..."),
 	};
@@ -270,7 +266,7 @@ DreamsScenes.BackHome = function(ravenTrigger: boolean) {
 	Text.Add("Unfortunately, reality settles in soon enough. This time, you wake up for real, as far from home as when you went to sleep.", parse);
 };
 
-DreamsScenes.Heartstone = function(ravenTrigger: boolean) {
+DreamsScenes.Heartstone = (ravenTrigger: boolean) => {
 	const player = GAME().player;
 
 	const parse: any = {
@@ -285,7 +281,7 @@ DreamsScenes.Heartstone = function(ravenTrigger: boolean) {
 	Text.Add("You awaken, a bit unsettled by the eerie vision.", parse);
 };
 
-DreamsScenes.CoC = function(ravenTrigger: boolean) {
+DreamsScenes.CoC = (ravenTrigger: boolean) => {
 	const parse: any = {
 		raven1 : DreamsScenes.RavenText(ravenTrigger, " a raven girl,", " a raven girl,"),
 		raven2 : DreamsScenes.RavenText(ravenTrigger, "", " Hold on, that raven girl feels like she doesn’t belong here. It must be one of the watchers again. You have to remember."),
@@ -300,7 +296,7 @@ DreamsScenes.CoC = function(ravenTrigger: boolean) {
 	Text.Add("There is a strange noise, and you find your eyes opening, a little regretfully. You would’ve liked to get to know a bit more about them.", parse);
 };
 
-DreamsScenes.EndlessClassroom = function(ravenTrigger: boolean) {
+DreamsScenes.EndlessClassroom = (ravenTrigger: boolean) => {
 	const player = GAME().player;
 
 	const parse: any = {
@@ -317,7 +313,7 @@ DreamsScenes.EndlessClassroom = function(ravenTrigger: boolean) {
 	Text.Add("You awaken, shivering slightly. What a peculiar dream.", parse);
 };
 
-DreamsScenes.PredatorPack = function(ravenTrigger: boolean) {
+DreamsScenes.PredatorPack = (ravenTrigger: boolean) => {
 	const parse: any = {
 		raven : DreamsScenes.RavenText(ravenTrigger, " Above you, a raven croaks on the wing, encouraging your pursuit.", " Above you, a raven croaks on the wing. They’re watching you again. Well, you’ll give them a show this time, and you’ll remember."),
 		raven2 : DreamsScenes.RavenText(ravenTrigger, "the deer", "the deer", "her"),
@@ -334,7 +330,7 @@ DreamsScenes.PredatorPack = function(ravenTrigger: boolean) {
 	Text.Add("Waking up, you brush a hand over your nose, a little surprised to find it clean.", parse);
 };
 
-DreamsScenes.FirePet = function(ravenTrigger: boolean) {
+DreamsScenes.FirePet = (ravenTrigger: boolean) => {
 	const parse: any = {
 		raven : DreamsScenes.RavenText(ravenTrigger, " At the bottom of the bag, you find a mess of black feathers, and you toss them in as well.", " At the bottom of the bag, you find a mess of black feathers, and you toss them in as well. The raven was here again. It seems to have avoided your bag, but it left a trace. You’ll have to remember about it."),
 	};
@@ -350,7 +346,7 @@ DreamsScenes.FirePet = function(ravenTrigger: boolean) {
 	Text.Add("You awaken, shivering even as your body feels hot.", parse);
 };
 
-DreamsScenes.House = function(ravenTrigger: boolean) {
+DreamsScenes.House = (ravenTrigger: boolean) => {
 	const party: Party = GAME().party;
 	const player = GAME().player;
 
@@ -388,7 +384,7 @@ DreamsScenes.House = function(ravenTrigger: boolean) {
 	Text.Add("Finishing up the pancakes, and showing the new books to [person], you slowly drift awake.", parse);
 };
 
-DreamsScenes.Hermit = function(ravenTrigger: boolean) {
+DreamsScenes.Hermit = (ravenTrigger: boolean) => {
 	const parse: any = {
 		raven : DreamsScenes.RavenText(ravenTrigger, " A raven perches on his shoulder, regarding you with beady eyes.", " A raven perches on his shoulder, almost as if it belongs there. But you’ve seen them enough, you know they are here to watch you. Now, you must only remember that when you wake."),
 	};
@@ -402,7 +398,7 @@ DreamsScenes.Hermit = function(ravenTrigger: boolean) {
 	Text.Add("It doesn’t take you long to do just that, and curse at the imaginary dream hermit and his pointless advice.", parse);
 };
 
-DreamsScenes.Alchemy = function(ravenTrigger: boolean) {
+DreamsScenes.Alchemy = (ravenTrigger: boolean) => {
 	const parse: any = {
 
 	};
@@ -425,7 +421,7 @@ DreamsScenes.Alchemy = function(ravenTrigger: boolean) {
 	Text.Add("You are still mumbling to yourself about the right count of stirs when you wake up, feeling vaguely frustrated at your dreamed incompetence.", parse);
 };
 
-DreamsScenes.UruChoice = function(ravenTrigger: boolean) {
+DreamsScenes.UruChoice = (ravenTrigger: boolean) => {
 	const player = GAME().player;
 	const uru = GAME().uru;
 
@@ -479,7 +475,7 @@ DreamsScenes.UruChoice = function(ravenTrigger: boolean) {
 	});
 	Gui.SetButtonsFromList(options);
 
-	Gui.Callstack.push(function() {
+	Gui.Callstack.push(() => {
 		Text.NL();
 		Text.Add("It seems Uru is done with words, as she pushes you down and ", parse);
 		if (player.FirstCock()) {
@@ -530,7 +526,7 @@ DreamsScenes.UruChoice = function(ravenTrigger: boolean) {
 	return true;
 };
 
-DreamsScenes.UruRun = function(ravenTrigger: boolean) {
+DreamsScenes.UruRun = (ravenTrigger: boolean) => {
 	const parse: any = {
 		raven : DreamsScenes.RavenText(ravenTrigger, " The croak of a raven comes from somewhere, suggesting what might happen to your remains.", " The croak of a raven comes from somewhere, oddly almost encouraging you in your flight. Still, you know it’s just here to watch. You’ll have to remember that when you’re awake."),
 	};
@@ -544,7 +540,7 @@ DreamsScenes.UruRun = function(ravenTrigger: boolean) {
 	Text.Add("You wake up with a cold sweat, happy to once again be firmly entrenched in good old reality.", parse);
 };
 
-DreamsScenes.AriaTemple = function(ravenTrigger: boolean) {
+DreamsScenes.AriaTemple = (ravenTrigger: boolean) => {
 	const player = GAME().player;
 	const uru = GAME().uru;
 
@@ -576,15 +572,15 @@ DreamsScenes.AriaTemple = function(ravenTrigger: boolean) {
 		func() {
 			Text.Clear();
 			const scenes = new EncounterTable();
-			scenes.AddEnc(function() {
+			scenes.AddEnc(() => {
 				Text.Add("<i>The stone is the key… it holds many secrets.</i>", parse);
-			}, 1.0, function() { return true; });
-			scenes.AddEnc(function() {
+			}, 1.0, () => true);
+			scenes.AddEnc(() => {
 				Text.Add("<i>Eden can ill withstand a being such as Uru… you must hurry.</i>", parse);
-			}, 1.0, function() { return true; });
-			scenes.AddEnc(function() {
+			}, 1.0, () => true);
+			scenes.AddEnc(() => {
 				Text.Add("<i>Seek out my true servants, they will aid you on your quest.</i>", parse);
-			}, 1.0, function() { return true; });
+			}, 1.0, () => true);
 
 			scenes.Get();
 			Text.NL();
@@ -607,7 +603,7 @@ DreamsScenes.AriaTemple = function(ravenTrigger: boolean) {
 			Text.Add("It is pure bliss when those full, red lips shower you with kisses - the nape of your neck, your [stomachDesc], your own lips. If this is the dream, you wonder what the reality would be like...", parse);
 
 			const scenes = new EncounterTable();
-			scenes.AddEnc(function() {
+			scenes.AddEnc(() => {
 				Text.Add("Come to think of it, you have some previous experience with laying down Goddesses… though the last one was decidedly more demonic in appearance. As if reading your mind, Lady Aria smiles wickedly, her luminescent eyes taking on an odd scarlet hue. Her serpentine tongue trails across your body, her saliva hot to the touch. You reach up with one [hand], combing the Goddess’ flaxen hair, tracing the curve of her horns.", parse);
 				Text.NL();
 				Text.Add("<i>Your thirst shall be sated, my hero.</i>", parse);
@@ -622,8 +618,8 @@ DreamsScenes.AriaTemple = function(ravenTrigger: boolean) {
 				Text.Add("There is a piercing pain… and then you are awake, heart pounding in your chest, and sweating profusely.", parse);
 
 				player.AddLustFraction(0.3);
-			}, 1.0, function() { return (uru.flags.Intro & UruFlags.Intro.FuckedUru || uru.flags.Intro & UruFlags.Intro.FuckedByUru); });
-			scenes.AddEnc(function() {
+			}, 1.0, () => (uru.flags.Intro & UruFlags.Intro.FuckedUru || uru.flags.Intro & UruFlags.Intro.FuckedByUru));
+			scenes.AddEnc(() => {
 				parse.oneof = player.NumCocks() > 1 ? " one of" : "";
 				parse.s = player.NumCocks() > 1 ? "s" : "";
 				Text.Add("The Goddess’ lips finally find your [multiCockDesc], eagerly wrapping themselves around[oneof] your shaft[s]. The world around you is wavering, growing diffuse and fuzzy. With your pre dripping from her tongue, Lady Aria arches her back as she straddles you, positioning your cock[s] at her entrance[s]. In a single, smooth motion, she slams her hips down, burying your [multiCockDesc] to the hilt inside her tight, divine hole[s].", parse);
@@ -633,8 +629,8 @@ DreamsScenes.AriaTemple = function(ravenTrigger: boolean) {
 				Text.Add("When you finally awaken, you are jolted at being bereft of this ultimate ecstasy. Not to mention aroused beyond measure.", parse);
 
 				player.AddLustFraction(0.7);
-			}, 1.0, function() { return player.FirstCock(); });
-			scenes.AddEnc(function() {
+			}, 1.0, () => player.FirstCock());
+			scenes.AddEnc(() => {
 				Text.Add("Suddenly, the Goddess withdraws her touch, looking a bit grumpy. You look up at her in wordless complaint, aching for her to pleasure you.", parse);
 				Text.NL();
 				Text.Add("<i>Not before you have cleaned up here. You always make a mess!</i>", parse);
@@ -648,7 +644,7 @@ DreamsScenes.AriaTemple = function(ravenTrigger: boolean) {
 				Text.Add("You awaken feeling very strange. The end of the dream was very muddled, but you are pretty sure you didn’t get laid.", parse);
 
 				player.AddLustFraction(0.1);
-			}, 1.0, function() { return true; });
+			}, 1.0, () => true);
 
 			scenes.Get();
 
@@ -663,7 +659,7 @@ DreamsScenes.AriaTemple = function(ravenTrigger: boolean) {
 	return true;
 };
 
-DreamsScenes.KiakaiMonster = function(ravenTrigger: boolean) {
+DreamsScenes.KiakaiMonster = (ravenTrigger: boolean) => {
 	const player = GAME().player;
 	const kiakai = GAME().kiakai;
 
@@ -687,7 +683,7 @@ DreamsScenes.KiakaiMonster = function(ravenTrigger: boolean) {
 	Text.Add("You start to rise up, but bump your head against the bed, and your eyes shoot open with a jolt. Warily, you glance over at the bed across from you, but nothing seems amiss.", parse);
 };
 
-DreamsScenes.Kiakai63 = function(ravenTrigger: boolean) {
+DreamsScenes.Kiakai63 = (ravenTrigger: boolean) => {
 	const kiakai = GAME().kiakai;
 
 	const parse: any = {
@@ -695,7 +691,7 @@ DreamsScenes.Kiakai63 = function(ravenTrigger: boolean) {
 	};
 
 	// Reverse initial gender
-	if (kiakai.flags.InitialGender == Gender.male) {
+	if (kiakai.flags.InitialGender === Gender.male) {
 		parse.str = "she is indeed a she, the soft swell of her small breasts and her slightly wide hips both telltale signs";
 		parse.HeShe = "She";
 		parse.heshe = "she";
@@ -724,7 +720,7 @@ DreamsScenes.Kiakai63 = function(ravenTrigger: boolean) {
 	Text.Add("You continue talking with the elf for a while, but can’t shake the sense of déjà vu. When you wake up for real, you feel a bit confused.", parse);
 };
 
-DreamsScenes.RosalinNursing = function(ravenTrigger: boolean) {
+DreamsScenes.RosalinNursing = (ravenTrigger: boolean) => {
 	const parse: any = {
 		raven : DreamsScenes.RavenText(ravenTrigger, " Somewhere above, a raven croaks loudly in distress at the fumes, and flies off.", " Somewhere above, a raven croaks loudly in distress at the fumes, and flies off. Serves the spy right. They intrude in your dreams far too often. You’ll have to remember to do something about them when you wake up."),
 		raven2 : DreamsScenes.RavenText(ravenTrigger, "the catgirl", "the catgirl", "she"),
@@ -739,7 +735,7 @@ DreamsScenes.RosalinNursing = function(ravenTrigger: boolean) {
 	Text.Add("You wake up in a cold sweat, solemnly promising to never get sick while in the same country as Rosalin.", parse);
 };
 
-DreamsScenes.RosalinTransformation = function(ravenTrigger: boolean) {
+DreamsScenes.RosalinTransformation = (ravenTrigger: boolean) => {
 	const player = GAME().player;
 
 	const parse: any = {
@@ -760,7 +756,7 @@ DreamsScenes.RosalinTransformation = function(ravenTrigger: boolean) {
 	Text.Add("What an odd dream, you think to yourself as you wake.", parse);
 };
 
-DreamsScenes.GwendyBarn = function(ravenTrigger: boolean) {
+DreamsScenes.GwendyBarn = (ravenTrigger: boolean) => {
 	const player = GAME().player;
 
 	const parse: any = {
@@ -775,7 +771,7 @@ DreamsScenes.GwendyBarn = function(ravenTrigger: boolean) {
 	Text.Add("You wake up feeling a bit confused, mind still moving sluggishly.", parse);
 };
 
-DreamsScenes.GwendyStallion = function(ravenTrigger: boolean) {
+DreamsScenes.GwendyStallion = (ravenTrigger: boolean) => {
 	const player = GAME().player;
 
 	const parse: any = {
@@ -798,7 +794,7 @@ DreamsScenes.GwendyStallion = function(ravenTrigger: boolean) {
 	player.AddLustFraction(0.3);
 };
 
-DreamsScenes.FeraKittens = function(ravenTrigger: boolean) {
+DreamsScenes.FeraKittens = (ravenTrigger: boolean) => {
 	const parse: any = {
 		raven : DreamsScenes.RavenText(ravenTrigger, " For some reason, a scrawny baby raven is also nestled among the kittens.", " A scrawny baby raven is nestled among the kittens. It’s a little cute, but that doesn’t make the fact that it’s watching you better. You’ll have to remember this when you wake up."),
 		raven2 : DreamsScenes.RavenText(ravenTrigger, "Fera", "Fera", "she"),
@@ -814,7 +810,7 @@ DreamsScenes.FeraKittens = function(ravenTrigger: boolean) {
 	Text.Add("You suddenly wake up, heart beating rapidly. Perhaps you should consider using preventatives.", parse);
 };
 
-DreamsScenes.MirandaJailed = function(ravenTrigger: boolean) {
+DreamsScenes.MirandaJailed = (ravenTrigger: boolean) => {
 	const miranda = GAME().miranda;
 
 	const parse: any = {
@@ -833,7 +829,7 @@ DreamsScenes.MirandaJailed = function(ravenTrigger: boolean) {
 	Text.Add("You wake up, still uncertain what your crime was.", parse);
 };
 
-DreamsScenes.MirandaMerc = function(ravenTrigger: boolean) {
+DreamsScenes.MirandaMerc = (ravenTrigger: boolean) => {
 	const player = GAME().player;
 
 	const parse: any = {
@@ -856,7 +852,7 @@ DreamsScenes.MirandaMerc = function(ravenTrigger: boolean) {
 	player.AddLustFraction(0.3);
 };
 
-DreamsScenes.TwinsMaids = function(ravenTrigger: boolean) {
+DreamsScenes.TwinsMaids = (ravenTrigger: boolean) => {
 	const player = GAME().player;
 
 	const parse: any = {
@@ -874,7 +870,7 @@ DreamsScenes.TwinsMaids = function(ravenTrigger: boolean) {
 	player.AddLustFraction(0.3);
 };
 
-DreamsScenes.BlowjobGive = function(ravenTrigger: boolean) {
+DreamsScenes.BlowjobGive = (ravenTrigger: boolean) => {
 	const player = GAME().player;
 
 	const parse: any = {
@@ -890,7 +886,7 @@ DreamsScenes.BlowjobGive = function(ravenTrigger: boolean) {
 	player.AddLustFraction(0.5);
 };
 
-DreamsScenes.BlowjobRec = function(ravenTrigger: boolean) {
+DreamsScenes.BlowjobRec = (ravenTrigger: boolean) => {
 	const party: Party = GAME().party;
 	const player = GAME().player;
 
@@ -902,14 +898,14 @@ DreamsScenes.BlowjobRec = function(ravenTrigger: boolean) {
 	Text.NL();
 
 	const scenes = new EncounterTable();
-	scenes.AddEnc(function() {
+	scenes.AddEnc(() => {
 		parse.HeShe = Math.random() > 0.8 ? "He" : "She";
 		Text.Add("[HeShe] is no one special, just another worshipper at the altar of your manhood. These days, you need a blowjob just to get going in the morning. Fortunately, there has been no end of prospective suitors to sate your desires. Even now, two others hover nearby, eyeing your lover jealously. Perhaps you will have to go a few more rounds today.", parse);
-	}, 1.0, function() { return true; });
-	scenes.AddEnc(function() {
+	}, 1.0, () => true);
+	scenes.AddEnc(() => {
 		Text.Add("Uru’s long, flexible tongue wraps itself around your cock, a small smile playing on the demon’s full lips. The succubus is, as always, a master fellatrix, sucking your shaft greedily, trying to coax out your seed. Somewhere in the back of your head, a small voice is trying to scream something at you, but it feels so good… You shake away the uneasy feeling.", parse);
-	}, 1.0, function() { return true; });
-	scenes.AddEnc(function() {
+	}, 1.0, () => true);
+	scenes.AddEnc(() => {
 		const p1 = party.GetRandom(true);
 		parse.Name   = p1.name;
 		parse.HeShe  = p1.HeShe();
@@ -917,7 +913,7 @@ DreamsScenes.BlowjobRec = function(ravenTrigger: boolean) {
 		parse.hisher = p1.hisher();
 		parse.himher = p1.himher();
 		Text.Add("[Name] surfaces briefly for air, before redoubling [hisher] efforts, sucking greedily on your cock. [HeShe] has improved so much since you first asked [himher] to do this, by dedicated training or through sheer natural talent, you are unsure. Either way, [heshe] is right where [heshe] belongs.", parse);
-	}, 1.0, function() { return party.NumTotal() > 1; });
+	}, 1.0, () => party.NumTotal() > 1);
 
 	scenes.Get();
 
@@ -934,7 +930,7 @@ DreamsScenes.BlowjobRec = function(ravenTrigger: boolean) {
 	player.AddLustFraction(0.5);
 };
 
-DreamsScenes.CunnilingusGive = function(ravenTrigger: boolean) {
+DreamsScenes.CunnilingusGive = (ravenTrigger: boolean) => {
 	const player = GAME().player;
 
 	const parse: any = {
@@ -952,7 +948,7 @@ DreamsScenes.CunnilingusGive = function(ravenTrigger: boolean) {
 	player.AddLustFraction(0.5);
 };
 
-DreamsScenes.CunnilingusRec = function(ravenTrigger: boolean) {
+DreamsScenes.CunnilingusRec = (ravenTrigger: boolean) => {
 	const player = GAME().player;
 
 	const parse: any = {
@@ -965,36 +961,36 @@ DreamsScenes.CunnilingusRec = function(ravenTrigger: boolean) {
 	let gender = Math.random() < 0.5 ? Gender.male : Gender.female;
 
 	const scenes = new EncounterTable();
-	scenes.AddEnc(function() {
+	scenes.AddEnc(() => {
 		parse.Name = "The wildcat";
 		parse.name = "the wildcat";
-	}, 1.0, function() { return true; });
-	scenes.AddEnc(function() {
+	}, 1.0, () => true);
+	scenes.AddEnc(() => {
 		parse.Name = "The lagomorph";
 		parse.name = "the lagomorph";
-	}, 1.0, function() { return true; });
-	scenes.AddEnc(function() {
+	}, 1.0, () => true);
+	scenes.AddEnc(() => {
 		parse.Name = "The equine";
 		parse.name = "the equine";
-	}, 1.0, function() { return true; });
-	scenes.AddEnc(function() {
+	}, 1.0, () => true);
+	scenes.AddEnc(() => {
 		parse.Name = "The mothgirl";
 		parse.name = "the mothgirl";
 		gender = Gender.female;
-	}, 1.0, function() { return true; });
-	scenes.AddEnc(function() {
+	}, 1.0, () => true);
+	scenes.AddEnc(() => {
 		parse.Name = "The bandit";
 		parse.name = "the bandit";
-	}, 1.0, function() { return true; });
-	scenes.AddEnc(function() {
+	}, 1.0, () => true);
+	scenes.AddEnc(() => {
 		parse.Name = "Uru";
 		parse.name = "Uru";
 		gender = Gender.female;
-	}, 1.0, function() { return true; });
+	}, 1.0, () => true);
 
 	scenes.Get();
 
-	if (gender == Gender.male) {
+	if (gender === Gender.male) {
 		parse.HeShe  = "He";
 		parse.heshe  = "he";
 		parse.HisHer = "His";
@@ -1025,7 +1021,7 @@ DreamsScenes.CunnilingusRec = function(ravenTrigger: boolean) {
 	player.AddLustFraction(0.5);
 };
 
-DreamsScenes.FragileArmor = function(ravenTrigger: boolean) {
+DreamsScenes.FragileArmor = (ravenTrigger: boolean) => {
 	const parse: any = {
 		raven : DreamsScenes.RavenText(ravenTrigger, " A raven perches on an armor stand, watching the argument as it unfolds.", " There’s a raven sitting on an armor stand, watching you. You need to remember this."),
 	};
@@ -1046,7 +1042,7 @@ DreamsScenes.FragileArmor = function(ravenTrigger: boolean) {
 };
 
 // Must have met Asche.
-DreamsScenes.AscheNighttime = function(ravenTrigger: boolean) {
+DreamsScenes.AscheNighttime = (ravenTrigger: boolean) => {
 	const parse: any = {};
 
 	Text.Add("The scent of oleander and jasmine tickles your nose as you do your best to relax on the mat that’s been so thoughtfully supplied for you. Clothed in her white sari and bearing a tea set in her hands, Asche sets down her burden on the low table and pours a cup of steaming brew each for the both of you, kneeling on the mat on her side of the table.", parse);
@@ -1068,7 +1064,7 @@ DreamsScenes.AscheNighttime = function(ravenTrigger: boolean) {
 	Text.Add("The two of you continue talking into the night, the conversation aided along by the liberal application of a seemingly inexhaustible supply of tea and biscuits. While you don’t quite remember the topic of conversation, you do recall the the biscuits were delightfully tasty, and are a bit saddened when you do wake up.", parse);
 };
 
-DreamsScenes.AscheDance = function(ravenTrigger: boolean) {
+DreamsScenes.AscheDance = (ravenTrigger: boolean) => {
 	const player = GAME().player;
 
 	const parse: any = {
@@ -1108,7 +1104,7 @@ DreamsScenes.AscheDance = function(ravenTrigger: boolean) {
 	Text.Add("You wake with a start, the feel of hard-won sunshine still warm on your face.", parse);
 };
 
-DreamsScenes.AscheHotSpring = function(ravenTrigger: boolean) {
+DreamsScenes.AscheHotSpring = (ravenTrigger: boolean) => {
 	const player = GAME().player;
 
 	let parse: any = {};

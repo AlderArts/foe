@@ -297,7 +297,7 @@ export namespace AscheTasksScenes {
 			enc.onLoss = AscheTasksScenes.Ginseng.FightLoss;
 			enc.onVictory = AscheTasksScenes.Ginseng.FightWin;
 
-			Gui.NextPrompt(function() {
+			Gui.NextPrompt(() => {
 				enc.Start();
 			});
 		}
@@ -388,7 +388,7 @@ export namespace AscheTasksScenes {
 			parse = player.ParserTags(parse);
 
 			Text.Clear();
-			if (player.Gender() == Gender.female && player.Femininity() >= 0) {
+			if (player.Gender() === Gender.female && player.Femininity() >= 0) {
 				Text.Add("The shaman fidgets uncomfortably at your suggestion and swallows hard. <i>“I… you can’t mean to...”</i>", parse);
 				Text.NL();
 				Text.Add("Oh? You run your hands across your [skin], lingering over your [breasts] and [butt], then grin at him - and at the bulge on his loincloth, growing by the moment. Who says you can’t?", parse);
@@ -498,7 +498,7 @@ export namespace AscheTasksScenes {
 
 			};
 
-			Gui.Callstack.push(function() {
+			Gui.Callstack.push(() => {
 				const day = WorldTime().IsDay();
 
 				parse.day = day ? "" : " thanks to the bright moon";
@@ -533,7 +533,7 @@ export namespace AscheTasksScenes {
 			Text.Clear();
 			Text.Add("Ugh. This isn’t going quite as you planned - maybe Asche wasn’t wrong about violence not being the optimal choice, but it’s a little too late for second thoughts now. You’re trying to decide whether it would be better to disengage or see this through to the bitter end when something hard and heavy connects with the side of your head, knocking you unconscious.", parse);
 			Text.NL();
-			parse.comp = party.Num() == 2 ? party.Get(1).name : "your companions";
+			parse.comp = party.Num() === 2 ? party.Get(1).name : "your companions";
 			parse.c = party.Num() > 1 ? Text.Parse(", [comp] by your side and still out cold", parse) : "";
 			Text.Add("You come to some time later face-down in the dirt[c]. That, and the fact that your coin purse is missing, are the only signs that the altercation ever took place - you search around for a bit, and discover that the ravine entrance has been quite thoroughly sealed with fresh-laid stone, no doubt placed there with the shaman’s magic. Seems like the zebras are <i>really</i> determined not to have you back.", parse);
 			Text.NL();
@@ -653,7 +653,7 @@ export namespace AscheTasksScenes {
 					Text.Add("You recieved [coin] coins.", {coin: Text.NumToText(coin)}, "bold");
 					Text.Flush();
 
-					_.each(party.members, function(member) {
+					_.each(party.members, (member) => {
 						member.AddExp(25);
 					});
 
@@ -796,15 +796,15 @@ export namespace AscheTasksScenes {
 			}
 
 			const scenes = new EncounterTable();
-			scenes.AddEnc(function() {
+			scenes.AddEnc(() => {
 				Text.Add("Unfortunately, after half an hour you’re still as empty-handed as you were when you set out, the only thing you’ve gained being an ache in your back and crick in your neck from staring at the forest floor for so long. In a decidedly more sour mood than before, you rub your various sore spots and decide that this wasn’t exactly your lucky day. Maybe you’ll try again later when you’ve made yourself a little more comfortable… or at least, a little less tender.", parse);
 				Text.Flush();
 
 				TimeStep({minute: 30});
 
 				Gui.NextPrompt();
-			}, 3, function() { return true; });
-			scenes.AddEnc(function() {
+			}, 3, () => true);
+			scenes.AddEnc(() => {
 				Text.Add("After half an hour of wandering along the winding and uneven forest trails, you’re about to throw in the towel and take a break when the trail abruptly opens up into a clearing dominated by a small woodland stream at its far end. What’s more important, though, are the numerous dirt and moss-covered rocky outcroppings that dot the area - some of them of considerable height - and perched halfway along one of them is… could it be? Is it? Yes, it <i>is</i> a specimen of nightshade!", parse);
 				Text.NL();
 				Text.Add("Now, to get it down…", parse);
@@ -812,7 +812,7 @@ export namespace AscheTasksScenes {
 				TimeStep({minute: 30});
 
 				AscheTasksScenes.Nightshade.HerbComplications();
-			}, 1 + rangerBonus, function() { return true; });
+			}, 1 + rangerBonus, () => true);
 
 			scenes.Get();
 		}
@@ -1011,7 +1011,7 @@ export namespace AscheTasksScenes {
 					Text.NL();
 					Text.Add("<i>“Asche shall now paint herself and customer with special concoction to help [himher] better feel and understand sensations,”</i> she explains as she trails a finger down from her forehead and around her eyes. <i>“Is important to be having feedback when in lesson, and pattern to be drawn on bodies is allowing for sharing of touch and feelings. Just to be lying back and trusting Asche to be doing her work, yes?”</i>", parse);
 					Text.NL();
-					parse.skin = function() { return player.SkinDesc(); };
+					parse.skin = () => player.SkinDesc();
 					Text.Add("You gaze in wonder at the mystical pattern that’s taking shape on both your bodies - Asche’s touch is like warm syrup flowing across your [skin], leaving a trail of glowing gold in its wake, hot and cool at the same time. Stretching from forehead to chin, then down your neck and over your heart before spreading outwards across your limbs, it reminds you of a golden tree with curled branches, with not a single straight line to be found anywhere.", parse);
 					Text.NL();
 					Text.Add("<i>“Please, will [handsomepretty] customer not help a poor little jackaless like Asche out?”</i> Asche says with an evil grin, her fingers lingering on certain parts of your body, perhaps a little longer than strictly necessary to get the golden ointment applied. <i>“It has been a while since Asche has had been having a proper fucking from a partner who is not pathetic and limp-wristed.”</i>", parse);
@@ -1139,7 +1139,7 @@ export namespace AscheTasksScenes {
 			party.location = WORLD().loc.Highlands.Spring;
 
 			Text.Clear();
-			parse.season = WorldTime().season == Season.Summer ? ", even for summer" : "";
+			parse.season = WorldTime().season === Season.Summer ? ", even for summer" : "";
 			Text.Add("Following Asche’s directions, you leave the beaten trail and head out into the rough, rocky terrain of Eden’s Highlands. The air is cool[season], the ground uneven with stony outcroppings thrusting through the mountain meadows, and small wildflowers poke through the grass, reaching for the sky. Barely half an hour into your hike, you’re already starting to feel the toll the off-trail journey is taking on you, but you forge on anyway - the open nature of your surroundings has you confident that you’ll be able to see any danger coming from far away.", parse);
 			Text.NL();
 			Text.Add("Sitting down on a nearby flat-topped boulder, you review Asche’s directions to the hot spring she mentioned. Considering how far you’ve already come, the spring she mentioned should be on that mountainside plateau over there to the east. It isn’t that far, but the climb up looks like a tough one and there’s no obvious trail leading to it. At least that explains why Asche, who claims to know much of the mystical mysteries of her homeland, wasn’t aware of the spring’s existence.", parse);
@@ -1148,7 +1148,7 @@ export namespace AscheTasksScenes {
 			Text.Add("Well, nothing for it - time to earn your pay. You resolutely stand up and march off towards the mountainside at a brisk pace, doing your best to ignore the growing fatigue in your [feet]. Thankfully, when you get to the foot of the mountain, you discover there <i>is</i> a trail leading up to the plateau - albeit a steep, narrow one, but it’s better than having to climb hand over [foot] to your destination.", parse);
 			Text.NL();
 			Text.Add("At last, you make it and collapse to the ground in calf-high grass, exhausted by the climb. A perfect chance to take a breather and survey your surroundings - the plateau seems peaceful enough for you to let down your guard for a moment. Sheer drops surround it on three sides, and the wildflowers growing in small clumps of white and red only add to the sense of peace that blankets the plateau. In the middle, a large spring juts out from the earth, packed rocks and pebbles forming a lip of sorts around the water’s edge.", parse);
-			if (WorldTime().season == Season.Winter) {
+			if (WorldTime().season === Season.Winter) {
 				Text.Add(" Judging by the sheer amount of steam that’s pouring out from them, it’s evident that its heat is what’s allowed plants to grow so readily, even in the chill of highland winter.", parse);
 			}
 			Text.NL();
@@ -1214,7 +1214,7 @@ export namespace AscheTasksScenes {
 				}, enabled : true,
 			});
 
-			Gui.Callstack.push(function() {
+			Gui.Callstack.push(() => {
 				Text.Clear();
 				Text.Add("Well, here’s your chance. Nipping along to the hot spring’s edge, you pull out Asche’s vials and fill them to the brim with spring water, careful not to get any of it on you. If it’s the water that’s magical, then who knows what it might do to you?", parse);
 				Text.NL();
@@ -1225,7 +1225,7 @@ export namespace AscheTasksScenes {
 
 				asche.flags.Tasks |= AscheFlags.Tasks.Spring_Visited;
 
-				Gui.NextPrompt(function() {
+				Gui.NextPrompt(() => {
 					party.location = WORLD().loc.Highlands.Hills;
 					Gui.PrintDefaultOptions();
 				});
