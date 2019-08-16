@@ -51,6 +51,7 @@ export function InitRigard() {
 	InitLB();
 	InitMageTower();
 	InitKrawitz();
+	MagicShopScenes.INIT(AscheScenes);
 	ArmorShopScenes.CreateShop();
 	MagicShopScenes.CreateShop();
 }

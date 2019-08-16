@@ -75,7 +75,7 @@ ArmorShopLoc.events.push(new Link(
 [Buy][Sell][Specialties][Donovan][Back]
 */
 ArmorShopLoc.onEntry = () => {
-	const rigard = GAME().gwendy;
+	const rigard = GAME().rigard;
 	if (rigard.Twopenny.Met < 1) {
 		ArmorShopScenes.FirstEntry();
 	} else {
@@ -96,9 +96,8 @@ export namespace ArmorShopScenes {
 	}
 
 	export function CreateShop() {
-		const player = GAME().player;
-
 		const buySuccessFunc = (item: Item, cost: number, num: number) => {
+			const player = GAME().player;
 			const parse: any = {
 				sirmadam : player.mfTrue("sir", "madam"),
 			};
@@ -114,6 +113,7 @@ export namespace ArmorShopScenes {
 			Text.NL();
 		};
 		const buyFailFunc = (item: Item, cost: number, bought: boolean) => {
+			const player = GAME().player;
 			const parse: any = {
 				sirmadam : player.mfTrue("sir", "madam"),
 			};
@@ -134,6 +134,7 @@ export namespace ArmorShopScenes {
 
 		const shop = new Shop({
 			buyPromptFunc(item: Item, cost: number, bought: boolean) {
+				const player = GAME().player;
 				const coin = Text.NumToText(cost);
 				const parse: any = {
 					sirmadam : player.mfTrue("sir", "madam"),
@@ -155,6 +156,7 @@ export namespace ArmorShopScenes {
 			buySuccessFunc,
 			buyFailFunc,
 			sellPromptFunc(item: Item, cost: number, sold: boolean) {
+				const player = GAME().player;
 				const coin = Text.NumToText(cost);
 				const parse: any = {
 					sirmadam : player.mfTrue("sir", "madam"),
@@ -190,6 +192,7 @@ export namespace ArmorShopScenes {
 				Text.NL();
 			},
 			sellSuccessFunc(item: Item, cost: number, num: number) {
+				const player = GAME().player;
 				const parse: any = {
 					sirmadam : player.mfTrue("sir", "madam"),
 				};
@@ -211,6 +214,7 @@ export namespace ArmorShopScenes {
 				Text.NL();
 			},
 			sellFailFunc(item: Item, cost: number, sold: boolean) {
+				const player = GAME().player;
 				const parse: any = {
 					sirmadam : player.mfTrue("sir", "madam"),
 					item : item.sDesc(),
@@ -234,6 +238,7 @@ export namespace ArmorShopScenes {
 
 		const specialShop = new Shop({
 			buyPromptFunc(item: Item, cost: number) {
+				const player = GAME().player;
 				const coin = Text.NumToText(cost);
 				const parse: any = {
 					sirmadam : player.mfTrue("sir", "madam"),
