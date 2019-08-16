@@ -6,5 +6,5 @@ export enum KrawitzFlags {
 	Sex            = 16,
 	SpikedServants = 32,
 	Orgy           = 64,
-	TF             = 128
-};
+	TF             = 128,
+}

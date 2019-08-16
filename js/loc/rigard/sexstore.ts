@@ -3,64 +3,64 @@
 // Shop of oddities
 //
 
-import { Event, Link } from '../../event';
-import { WorldTime, MoveToLocation, GAME, WORLD } from '../../GAME';
-import { Text } from '../../text';
-import { Gui } from '../../gui';
+import { Event, Link } from "../../event";
+import { GAME, MoveToLocation, WORLD, WorldTime } from "../../GAME";
+import { Gui } from "../../gui";
+import { Text } from "../../text";
 
-let OddShopLoc = new Event("Odd shop");
+const OddShopLoc = new Event("Odd shop");
 
-let OddShopScenes : any = {};
-OddShopScenes.IsOpen = function() {
-	let rigard = GAME().rigard;
+const OddShopScenes: any = {};
+OddShopScenes.IsOpen = () => {
+	const rigard = GAME().rigard;
 	return (WorldTime().hour >= 9 && WorldTime().hour < 18) && !rigard.UnderLockdown();
-}
+};
 
-OddShopLoc.description = function() {
+OddShopLoc.description = () => {
 	Text.Add("You are in the odd shop.<br>");
-}
+};
 
 OddShopLoc.events.push(new Link(
 	"Shopkeeper", true, true, null,
-	function() {
+	() => {
 		OddShopScenes.Prompt();
-	}
+	},
 ));
 
 OddShopLoc.events.push(new Link(
 	"Leave", true, true, null,
-	function() {
+	() => {
 		MoveToLocation(WORLD().loc.Rigard.ShopStreet.Street, {minute: 5});
-	}
+	},
 ));
 
-OddShopScenes.Prompt = function() {
-	let rigard = GAME().rigard;
+OddShopScenes.Prompt = () => {
+	const rigard = GAME().rigard;
 
-	var parse : any = {
-		
+	const parse: any = {
+
 	};
-	
+
 	Text.Clear();
 	Text.Add("This is pretty placeholder", parse);
 	Text.NL();
 	Text.Flush();
-	var prompt = function() {
-		//[name]
-		var options = new Array();
+	const prompt = () => {
+		// [name]
+		const options = new Array();
 		options.push({ nameStr : "Buy",
-			func : function() {
+			func() {
 				rigard.SexShop.Buy(prompt);
-			}, enabled : true
+			}, enabled : true,
 		});
 		options.push({ nameStr : "Sell",
-			func : function() {
+			func() {
 				rigard.SexShop.Sell(prompt);
-			}, enabled : true
+			}, enabled : true,
 		});
 		Gui.SetButtonsFromList(options, true);
 	};
 	prompt();
-}
+};
 
 export { OddShopLoc, OddShopScenes };

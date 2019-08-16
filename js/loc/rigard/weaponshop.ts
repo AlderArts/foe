@@ -3,90 +3,86 @@
 // Weapon Shop
 //
 
-import { Event, Link } from '../../event';
-import { WorldTime, MoveToLocation, GAME, WORLD } from '../../GAME';
-import { Text } from '../../text';
-import { Gui } from '../../gui';
-import { CassidyFlags } from '../../event/cassidy-flags';
-import { CassidyScenes } from '../../event/cassidy-scenes';
+import { Event, Link } from "../../event";
+import { CassidyFlags } from "../../event/cassidy-flags";
+import { CassidyScenes } from "../../event/cassidy-scenes";
+import { GAME, MoveToLocation, WORLD, WorldTime } from "../../GAME";
+import { Gui } from "../../gui";
+import { Text } from "../../text";
 
-let WeaponShopLoc = new Event("The Pale Flame");
+const WeaponShopLoc = new Event("The Pale Flame");
 
-let WeaponShopScenes : any = {};
+const WeaponShopScenes: any = {};
 
-WeaponShopScenes.IsOpen = function() {
-	let rigard = GAME().rigard;
+WeaponShopScenes.IsOpen = () => {
+	const rigard = GAME().rigard;
 	return (WorldTime().hour >= 8 && WorldTime().hour < 17) && !rigard.UnderLockdown();
-}
+};
 
-WeaponShopLoc.description = function() {
+WeaponShopLoc.description = () => {
 	CassidyScenes.ShopDesc();
-}
+};
 
-WeaponShopLoc.onEntry = function() {
-	let cassidy = GAME().cassidy;
-	var first = cassidy.flags["Met"] < CassidyFlags.Met.Met;
-	if(first) {
+WeaponShopLoc.onEntry = () => {
+	const cassidy = GAME().cassidy;
+	const first = cassidy.flags.Met < CassidyFlags.Met.Met;
+	if (first) {
 		CassidyScenes.First();
-	}
-	else if(!(cassidy.flags["Talk"] & CassidyFlags.Talk.MShop) && (cassidy.Relation() >= 10) && (WorldTime().hour < 12)) {
+	} else if (!(cassidy.flags.Talk & CassidyFlags.Talk.MShop) && (cassidy.Relation() >= 10) && (WorldTime().hour < 12)) {
 		CassidyScenes.ManagingShop();
-	}
-	else if((cassidy.flags["Met"] == CassidyFlags.Met.WentBack) && (cassidy.Relation() >= 30)) {
+	} else if ((cassidy.flags.Met === CassidyFlags.Met.WentBack) && (cassidy.Relation() >= 30)) {
 		CassidyScenes.BigReveal();
-	}
-	else if((cassidy.flags["Met"] == CassidyFlags.Met.TalkFem) && (cassidy.femTimer.Expired())) {
+	} else if ((cassidy.flags.Met === CassidyFlags.Met.TalkFem) && (cassidy.femTimer.Expired())) {
 		CassidyScenes.FemTalk2();
-	}
-	else if((cassidy.flags["Met"] == CassidyFlags.Met.BeganFem) && (cassidy.femTimer.Expired())) {
+	} else if ((cassidy.flags.Met === CassidyFlags.Met.BeganFem) && (cassidy.femTimer.Expired())) {
 		CassidyScenes.FemFinal();
-	}
-	else {
+	} else {
 		Gui.PrintDefaultOptions();
 	}
-}
+};
 
-//TODO
+// TODO
 
 WeaponShopLoc.events.push(new Link(
 	"Cassidy", true, true, null,
-	function() {
+	() => {
 		CassidyScenes.Approach();
-	}
+	},
 ));
 
 WeaponShopLoc.events.push(new Link(
 	"Leave", true, true, null,
-	function() {
+	() => {
 		MoveToLocation(WORLD().loc.Rigard.ShopStreet.Street, {minute: 5});
-	}
+	},
 ));
 
-WeaponShopScenes.StreetDesc = function() {
-	let cassidy = GAME().cassidy;
-	var parse : any = {};
-	
-	var first = cassidy.flags["Met"] < CassidyFlags.Met.Met;
-	var open  = WeaponShopScenes.IsOpen();
-	var order = (cassidy.flags["Order"] != CassidyFlags.Order.None) && !cassidy.orderTimer.Expired();
-	
-	if(first) {
-		if(open)
+WeaponShopScenes.StreetDesc = () => {
+	const cassidy = GAME().cassidy;
+	const parse: any = {};
+
+	const first = cassidy.flags.Met < CassidyFlags.Met.Met;
+	const open  = WeaponShopScenes.IsOpen();
+	const order = (cassidy.flags.Order !== CassidyFlags.Order.None) && !cassidy.orderTimer.Expired();
+
+	if (first) {
+		if (open) {
 			Text.Add("Off to the side of the main street, you spy a modest brick building, clean and definitely looking in its place along the main merchants’ row. The windows are heavily barred, but the door is wide open and a small sign in the shape of a flame-wreathed blade announces the establishment’s name: The Pale Flame.", parse);
-		else
+		} else {
 			Text.Add("Off to the side of the main merchants’ row, you spy a clean and modest building shaped from white brick. The windows are barred, and a thick steel grille has been set over the main entrance, no doubt barred from inside. Seems like opening hours are over - you’ll have to come back in the morning if you want to get in.", parse);
-	}
-	else {
+		}
+	} else {
 		Text.Add("Off to one side of the main merchants’ row, you spy the familiar sight of The Pale Flame nestled amongst the other stores. ", parse);
-		if(open)
+		if (open) {
 			Text.Add("The windows might be barred as always, but the door is invitingly open should you wish to browse Cassidy’s wares.", parse);
-		else {
+		} else {
 			Text.Add("A grille has been drawn over the main door - which in turn has been no doubt barred from within. You’ll have to come back in the morning should you wish to browse Cassidy’s wares.", parse);
-			if(order)
+			if (order) {
 				Text.Add(" However, through one of the windows you spy the yellow-white blaze of the forge at work. Seems like Cassidy’s busy, all right - you can only wonder what you’ll be getting at the end of it all…", parse);
+			}
 		}
 	}
 	Text.NL();
-}
+};
 
 export { WeaponShopLoc, WeaponShopScenes };
