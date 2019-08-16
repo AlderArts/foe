@@ -15,7 +15,7 @@ const PhysicalAb: any = {};
 
 PhysicalAb.Bash = new Ability("Bash");
 PhysicalAb.Bash.Short = () => "Stun effect, low accuracy.";
-PhysicalAb.Bash.cost = { hp: null, sp: 10, lp: null};
+PhysicalAb.Bash.cost = { hp: undefined, sp: 10, lp: undefined};
 PhysicalAb.Bash.cooldown = 2;
 PhysicalAb.Bash.castTree.push(AbilityNode.Template.Physical({
 	atkMod: 1.1,
@@ -44,7 +44,7 @@ PhysicalAb.Bash.castTree.push(AbilityNode.Template.Physical({
 
 PhysicalAb.GrandSlam = new Ability("Grand Slam");
 PhysicalAb.GrandSlam.Short = () => "Stun effect, low accuracy to multiple targets.";
-PhysicalAb.GrandSlam.cost = { hp: null, sp: 50, lp: null};
+PhysicalAb.GrandSlam.cost = { hp: undefined, sp: 50, lp: undefined};
 PhysicalAb.GrandSlam.targetMode = TargetMode.Enemies;
 PhysicalAb.GrandSlam.cooldown = 3;
 PhysicalAb.GrandSlam.castTree.push(AbilityNode.Template.Physical({
@@ -74,7 +74,7 @@ PhysicalAb.GrandSlam.castTree.push(AbilityNode.Template.Physical({
 
 PhysicalAb.Pierce = new Ability("Pierce");
 PhysicalAb.Pierce.Short = () => "Bypass defenses.";
-PhysicalAb.Pierce.cost = { hp: null, sp: 10, lp: null};
+PhysicalAb.Pierce.cost = { hp: undefined, sp: 10, lp: undefined};
 PhysicalAb.Pierce.castTree.push(AbilityNode.Template.Physical({
 	defMod: 0.5,
 	damageType: {pPierce: 1},
@@ -89,7 +89,7 @@ PhysicalAb.Pierce.castTree.push(AbilityNode.Template.Physical({
 
 PhysicalAb.DirtyBlow = new Ability("Dirty Blow");
 PhysicalAb.DirtyBlow.Short = () => "Bypass defenses, low chance of stun.";
-PhysicalAb.DirtyBlow.cost = { hp: null, sp: 20, lp: null};
+PhysicalAb.DirtyBlow.cost = { hp: undefined, sp: 20, lp: undefined};
 PhysicalAb.DirtyBlow.cooldown = 2;
 PhysicalAb.DirtyBlow.castTree.push(AbilityNode.Template.Physical({
 	defMod: 0.3,
@@ -112,7 +112,7 @@ PhysicalAb.DirtyBlow.castTree.push(AbilityNode.Template.Physical({
 
 PhysicalAb.Hamstring = new Ability("Hamstring");
 PhysicalAb.Hamstring.Short = () => "Nicks the target, making a lingering wound.";
-PhysicalAb.Hamstring.cost = { hp: null, sp: 20, lp: null};
+PhysicalAb.Hamstring.cost = { hp: undefined, sp: 20, lp: undefined};
 PhysicalAb.Hamstring.cooldown = 2;
 PhysicalAb.Hamstring.castTree.push(AbilityNode.Template.Physical({
 	atkMod: 0.5,
@@ -135,7 +135,7 @@ PhysicalAb.Hamstring.castTree.push(AbilityNode.Template.Physical({
 
 PhysicalAb.Kicksand = new Ability("Kick sand");
 PhysicalAb.Kicksand.Short = () => "Kick dirt in the enemy's eyes, blinding them. Single target.";
-PhysicalAb.Kicksand.cost = { hp: null, sp: 15, lp: null};
+PhysicalAb.Kicksand.cost = { hp: undefined, sp: 15, lp: undefined};
 PhysicalAb.Kicksand.cooldown = 1;
 PhysicalAb.Kicksand.castTree.push(AbilityNode.Template.Physical({
 	atkMod: 0.05,
@@ -160,7 +160,7 @@ PhysicalAb.Kicksand.castTree.push(AbilityNode.Template.Physical({
 PhysicalAb.Swift = new Ability("Swift");
 PhysicalAb.Swift.Short = () => "Briefly boosts the caster's speed.";
 PhysicalAb.Swift.targetMode = TargetMode.Self;
-PhysicalAb.Swift.cost = { hp: null, sp: 25, lp: null};
+PhysicalAb.Swift.cost = { hp: undefined, sp: 25, lp: undefined};
 PhysicalAb.Swift.castTree.push((ability: Ability, encounter: Encounter, caster: Entity) => {
 	const parse = AbilityNode.DefaultParser(caster);
 
@@ -172,7 +172,7 @@ PhysicalAb.Swift.castTree.push((ability: Ability, encounter: Encounter, caster: 
 PhysicalAb.SetTrap = new Ability("Set trap");
 PhysicalAb.SetTrap.Short = () => "Sets a trap for an enemy.";
 PhysicalAb.SetTrap.targetMode = TargetMode.Self;
-PhysicalAb.SetTrap.cost = { hp: null, sp: 50, lp: null};
+PhysicalAb.SetTrap.cost = { hp: undefined, sp: 50, lp: undefined};
 PhysicalAb.SetTrap.castTime = 100;
 PhysicalAb.SetTrap.cooldown = 3;
 PhysicalAb.SetTrap.onCast = [(ability: Ability, encounter: Encounter, caster: Entity) => {
@@ -216,7 +216,7 @@ PhysicalAb.SpringTrap.castTree.push(AbilityNode.Template.Physical({
 
 PhysicalAb.Backstab = new Ability("Backstab");
 PhysicalAb.Backstab.Short = () => "Deal high damage against a disabled target.";
-PhysicalAb.Backstab.cost = { hp: null, sp: 30, lp: null};
+PhysicalAb.Backstab.cost = { hp: undefined, sp: 30, lp: undefined};
 PhysicalAb.Backstab.cooldown = 1;
 PhysicalAb.Backstab.castTree.push(AbilityNode.Template.Physical({
 	atkMod: 2,
@@ -236,10 +236,10 @@ PhysicalAb.Backstab.enabledTargetCondition = (encounter: Encounter, caster: Enti
 
 PhysicalAb.Ensnare = new Ability("Ensnare");
 PhysicalAb.Ensnare.Short = () => "Slows down an enemy by throwing a net at them.";
-PhysicalAb.Ensnare.cost = { hp: null, sp: 20, lp: null};
+PhysicalAb.Ensnare.cost = { hp: undefined, sp: 20, lp: undefined};
 PhysicalAb.Ensnare.cooldown = 3;
 PhysicalAb.Ensnare.castTree.push(AbilityNode.Template.Physical({
-	toDamage: null,
+	toDamage: undefined,
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[Name] throw[notS] a net toward [tname]! ", parse);
@@ -258,7 +258,7 @@ PhysicalAb.Ensnare.castTree.push(AbilityNode.Template.Physical({
 
 PhysicalAb.FocusStrike = new Ability("Focus strike");
 PhysicalAb.FocusStrike.Short = () => "Bypass defenses.";
-PhysicalAb.FocusStrike.cost = { hp: null, sp: 50, lp: null};
+PhysicalAb.FocusStrike.cost = { hp: undefined, sp: 50, lp: undefined};
 PhysicalAb.FocusStrike.cooldown = 2;
 PhysicalAb.FocusStrike.castTree.push(AbilityNode.Template.Physical({
 	defMod: 0.2,
@@ -274,7 +274,7 @@ PhysicalAb.FocusStrike.castTree.push(AbilityNode.Template.Physical({
 
 PhysicalAb.DAttack = new Ability("D.Attack");
 PhysicalAb.DAttack.Short = () => "Perform two low accuracy hits.";
-PhysicalAb.DAttack.cost = { hp: null, sp: 25, lp: null};
+PhysicalAb.DAttack.cost = { hp: undefined, sp: 25, lp: undefined};
 PhysicalAb.DAttack.cooldown = 2;
 PhysicalAb.DAttack.castTree.push(AbilityNode.Template.Physical({
 	hitMod: 0.75,
@@ -290,7 +290,7 @@ PhysicalAb.DAttack.castTree.push(AbilityNode.Template.Physical({
 
 PhysicalAb.TAttack = new Ability("T.Attack");
 PhysicalAb.TAttack.Short = () => "Perform three low accuracy hits.";
-PhysicalAb.TAttack.cost = { hp: null, sp: 60, lp: null};
+PhysicalAb.TAttack.cost = { hp: undefined, sp: 60, lp: undefined};
 PhysicalAb.TAttack.cooldown = 3;
 PhysicalAb.TAttack.castTree.push(AbilityNode.Template.Physical({
 	hitMod: 0.75,
@@ -306,7 +306,7 @@ PhysicalAb.TAttack.castTree.push(AbilityNode.Template.Physical({
 
 PhysicalAb.QAttack = new Ability("Q.Attack");
 PhysicalAb.QAttack.Short = () => "Perform four low accuracy hits.";
-PhysicalAb.QAttack.cost = { hp: null, sp: 100, lp: null};
+PhysicalAb.QAttack.cost = { hp: undefined, sp: 100, lp: undefined};
 PhysicalAb.QAttack.cooldown = 4;
 PhysicalAb.QAttack.castTree.push(AbilityNode.Template.Physical({
 	hitMod: 0.75,
@@ -322,7 +322,7 @@ PhysicalAb.QAttack.castTree.push(AbilityNode.Template.Physical({
 
 PhysicalAb.Frenzy = new Ability("Frenzy");
 PhysicalAb.Frenzy.Short = () => "Perform a flurry of five strikes, leaving you exhausted.";
-PhysicalAb.Frenzy.cost = { hp: 100, sp: 80, lp: null};
+PhysicalAb.Frenzy.cost = { hp: 100, sp: 80, lp: undefined};
 PhysicalAb.Frenzy.cooldown = 5;
 PhysicalAb.Frenzy.castTime = 100;
 PhysicalAb.Frenzy.onCast.push((ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
@@ -344,7 +344,7 @@ PhysicalAb.Frenzy.castTree.push(AbilityNode.Template.Physical({
 
 PhysicalAb.CrushingStrike = new Ability("Crushing.S");
 PhysicalAb.CrushingStrike.Short = () => "Crushing strike that deals massive damage, with high chance of stunning. Slight recoil effect.";
-PhysicalAb.CrushingStrike.cost = { hp: 25, sp: 10, lp: null};
+PhysicalAb.CrushingStrike.cost = { hp: 25, sp: 10, lp: undefined};
 PhysicalAb.CrushingStrike.cooldown = 2;
 PhysicalAb.CrushingStrike.castTree.push(AbilityNode.Template.Physical({
 	atkMod: 1.5,
@@ -369,7 +369,7 @@ PhysicalAb.CrushingStrike.castTree.push(AbilityNode.Template.Physical({
 
 PhysicalAb.Provoke = new Ability("Provoke");
 PhysicalAb.Provoke.Short = () => "Try to provoke the enemy to focus on you. Single target.";
-PhysicalAb.Provoke.cost = { hp: null, sp: 15, lp: null};
+PhysicalAb.Provoke.cost = { hp: undefined, sp: 15, lp: undefined};
 PhysicalAb.Provoke.castTree.push(AbilityNode.Template.Physical({
 	atkMod: 0.1,
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
@@ -393,7 +393,7 @@ PhysicalAb.Provoke.castTree.push(AbilityNode.Template.Physical({
 
 PhysicalAb.Taunt = new Ability("Taunt");
 PhysicalAb.Taunt.Short = () => "Try to taunt the enemy to focus on you. Single target.";
-PhysicalAb.Taunt.cost = { hp: null, sp: 30, lp: null};
+PhysicalAb.Taunt.cost = { hp: undefined, sp: 30, lp: undefined};
 PhysicalAb.Taunt.castTree.push(AbilityNode.Template.Physical({
 	atkMod: 0.5,
 	hitMod: 1.1,
@@ -420,9 +420,9 @@ PhysicalAb.Fade = new Ability("Fade");
 PhysicalAb.Fade.Short = () => "Fade from the focus of the enemy.";
 PhysicalAb.Fade.cooldown = 3;
 PhysicalAb.Fade.targetMode = TargetMode.Enemies;
-PhysicalAb.Fade.cost = { hp: null, sp: 50, lp: null};
+PhysicalAb.Fade.cost = { hp: undefined, sp: 50, lp: undefined};
 PhysicalAb.Fade.castTree.push(AbilityNode.Template.Physical({
-	toDamage: null,
+	toDamage: undefined,
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster);
 		Text.Add("[Name] fade[notS] from notice.", parse);

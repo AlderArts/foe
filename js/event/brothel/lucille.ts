@@ -326,7 +326,7 @@ export namespace LucilleScenes {
 				}, enabled : true,
 				tooltip : "Refuse to pay and face the sharks instead.",
 			});
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		}
 	}
 }

@@ -51,7 +51,7 @@ export namespace OCavalcadeScenes {
 					}, enabled : true,
 					tooltip : "Nah, this is enough Cavalcade for now.",
 				});
-				Gui.SetButtonsFromList(options, false, null);
+				Gui.SetButtonsFromList(options, false, undefined);
 			} else {
 				Text.Add("<i>“It’s getting late, how about we break this up?”</i> the lizan yawns, gathering up the cards. <i>“If you want another game later, just holler.”</i>", parse);
 				Text.Flush();

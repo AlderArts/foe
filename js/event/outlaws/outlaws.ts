@@ -226,7 +226,7 @@ export namespace OutlawsScenes {
 			OutlawsScenes.MariasBouquetPrompt({});
 		});
 
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	}
 
 	export function MariasBouquetPrompt(opts: any) {
@@ -306,7 +306,7 @@ export namespace OutlawsScenes {
 			});
 		}
 		if (options.length > 0) {
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		} else {
 			Gui.NextPrompt(() => {
 				Text.Clear();
@@ -783,7 +783,7 @@ export namespace OutlawsScenes {
 					Gui.NextPrompt();
 				}, enabled : true,
 			});
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		}
 
 		export function Archery() {
@@ -936,7 +936,7 @@ export namespace OutlawsScenes {
 						Gui.NextPrompt();
 					});
 
-					Gui.SetButtonsFromList(options, false, null);
+					Gui.SetButtonsFromList(options, false, undefined);
 				}, enabled : true,
 			});
 			options.push({ nameStr : "No",
@@ -973,7 +973,7 @@ export namespace OutlawsScenes {
 					Gui.NextPrompt();
 				}, enabled : true,
 			});
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		}
 
 		export function CampFollowers() {
@@ -1137,7 +1137,7 @@ export namespace OutlawsScenes {
 					Gui.NextPrompt();
 				}, enabled : true,
 			});
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		}
 
 		export function FactFinding() {

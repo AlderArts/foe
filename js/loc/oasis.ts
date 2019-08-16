@@ -142,7 +142,7 @@ OasisScenes.CaravanShop = (back: any) => {
 				}
 			}
 			if (found) { continue; }
-			oasis.shop.AddItem(it, 5, null, buyFunc);
+			oasis.shop.AddItem(it, 5, undefined, buyFunc);
 		}
 
 		oasis.flags.shop = timestamp;
@@ -457,7 +457,7 @@ OasisScenes.DesertCaravanEncounter = () => {
 			}, enabled : true,
 			tooltip : Text.Parse("It’s time to head out.", parse),
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	};
 	prompt();
 };

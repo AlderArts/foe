@@ -189,27 +189,27 @@ PlainsLoc.Crossroads.enc.AddEnc(() => {
 			}, enabled : true,
 			tooltip : "Wish the man luck and leave it at that.",
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	};
 }, 0.5, () => WorldTime().hour >= 5 && WorldTime().hour < 21);
 
 PlainsLoc.Crossroads.links.push(new Link(
 	"Nomads", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(PlainsLoc.Nomads.Fireplace, {minute: 15});
 	},
 ));
 PlainsLoc.Crossroads.links.push(new Link(
 	() => GlobalScenes.PortalsOpen() ? "Nexus" : "Mound", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(PlainsLoc.Portals, {minute: 10});
 	},
 ));
 PlainsLoc.Crossroads.links.push(new Link(
 	"Rigard", true, true,
-	null,
+	undefined,
 	() => {
 		const miranda = GAME().miranda;
 		const rigard = GAME().rigard;
@@ -244,21 +244,21 @@ PlainsLoc.Crossroads.links.push(new Link(
 ));
 PlainsLoc.Crossroads.links.push(new Link(
 	"Hills", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(WORLD().loc.Highlands.Hills, {hour: 2});
 	},
 ));
 PlainsLoc.Crossroads.links.push(new Link(
 	"Forest", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(WORLD().loc.Forest.Outskirts, {hour: 2});
 	},
 ));
 PlainsLoc.Crossroads.links.push(new Link(
 	"Desert", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(WORLD().loc.Desert.Drylands, {hour: 2});
 	},
@@ -285,7 +285,7 @@ PlainsLoc.Crossroads.links.push(new Link(
 	"Farm",
 	() => GAME().farm.Found(),
 	true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(WORLD().loc.Farm.Fields, {minute: 30});
 	},
@@ -316,7 +316,7 @@ PlainsLoc.Portals.description = () => {
 };
 PlainsLoc.Portals.links.push(new Link(
 	"Crossroads", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(PlainsLoc.Crossroads, {minute: 10});
 	},
@@ -326,7 +326,7 @@ PlainsLoc.Portals.events.push(new Link(
 	"Jeanne", () => {
 		return !GlobalScenes.PortalsOpen() && GAME().glade.flags.Visit >= DryadGladeFlags.Visit.DefeatedOrchid;
 	}, true,
-	null,
+	undefined,
 	() => {
 		PortalOpeningScenes.Intro();
 	},
@@ -365,14 +365,14 @@ PlainsLoc.Gate.description = () => {
 };
 PlainsLoc.Gate.links.push(new Link(
 	"Crossroads", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(PlainsLoc.Crossroads, {hour: 2});
 	},
 ));
 PlainsLoc.Gate.links.push(new Link(
 	"Rigard", true, true,
-	null,
+	undefined,
 	() => {
 		const miranda = GAME().miranda;
 		const rigard = GAME().rigard;
@@ -407,21 +407,21 @@ PlainsLoc.Gate.links.push(new Link(
 ));
 PlainsLoc.Gate.links.push(new Link(
 	"Slums", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(WORLD().loc.Rigard.Slums.Gate, {minute: 15});
 	},
 ));
 PlainsLoc.Gate.links.push(new Link(
 	"King's road", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(WORLD().loc.KingsRoad.Road, {hour: 1});
 	},
 ));
 PlainsLoc.Gate.events.push(new Link(
 	"Miranda", () => GAME().miranda.IsAtLocation(), true,
-	null,
+	undefined,
 	() => {
 		MirandaScenes.RigardGatesInteract();
 	},
@@ -435,7 +435,7 @@ PlainsLoc.Gate.events.push(new Link(
 	() => {
 		if (GAME().outlaws.flags.Met === OutlawsFlags.Met.Letter) {
 			Text.NL();
-			Text.Add("Zenith has asked you to deliver a letter to a contact at the Spitting Lion Inn at noon. It should be somewhere in the area.", null, "bold");
+			Text.Add("Zenith has asked you to deliver a letter to a contact at the Spitting Lion Inn at noon. It should be somewhere in the area.", undefined, "bold");
 		}
 	},
 	() => {

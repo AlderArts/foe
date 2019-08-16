@@ -1069,7 +1069,7 @@ FarmLoc.Fields.enc.AddEnc(() => {
 
 		Text.Add("Not having much else to do, you wander the fields for a few minutes. You pick up a particularly fresh bundle of grass. Who knows, could be useful for something.");
 		Text.NL();
-		Text.Add("You pick up some fresh grass.", null, "bold");
+		Text.Add("You pick up some fresh grass.", undefined, "bold");
 		party.inventory.AddItem(IngredientItems.FreshGrass);
 
 		TimeStep({minute: 15});
@@ -1089,7 +1089,7 @@ FarmLoc.Fields.enc.AddEnc(() => {
 
 		Text.Add("Not having much else to do, you wander the fields for a few minutes. You pick up a pretty flower. Who knows, could be useful for something.");
 		Text.NL();
-		Text.Add("You pick up a Foxglove.", null, "bold");
+		Text.Add("You pick up a Foxglove.", undefined, "bold");
 		party.inventory.AddItem(IngredientItems.Foxglove);
 
 		TimeStep({minute: 15});
@@ -1101,14 +1101,14 @@ FarmLoc.Fields.enc.AddEnc(() => {
 
 FarmLoc.Fields.links.push(new Link(
 	"Crossroads", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(WORLD().loc.Plains.Crossroads, {minute: 30});
 	},
 ));
 FarmLoc.Fields.links.push(new Link(
 	"Barn", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(FarmLoc.Barn, {minute: 5});
 	},
@@ -1123,14 +1123,14 @@ FarmLoc.Barn.description = () => {
 };
 FarmLoc.Barn.links.push(new Link(
 	"Fields", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(FarmLoc.Fields, {minute: 5});
 	},
 ));
 FarmLoc.Barn.links.push(new Link(
 	"Loft", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(FarmLoc.Loft, {minute: 5});
 	},
@@ -1147,7 +1147,7 @@ FarmLoc.Loft.description = () => {
 };
 FarmLoc.Loft.links.push(new Link(
 	"Climb down", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(FarmLoc.Barn, {minute: 5});
 	},

@@ -95,7 +95,7 @@ SexScenes.IndoorPrompt = (opts?: any) => {
 		enabled : true,
 		func : SexScenes.Tail,
 	});
-	if (player.BiggestCock(null, true)) {
+	if (player.BiggestCock(undefined, true)) {
 		options.push({nameStr : "Fuck her",
 			tooltip : Text.Parse("A traditional favorite.", parse),
 			enabled : cocksInVag.length > 0,
@@ -116,7 +116,7 @@ SexScenes.IndoorPrompt = (opts?: any) => {
 		enabled : true,
 		func : SexScenes.Pet,
 	});
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 };
 
 SexScenes.Savor = (opts: any) => {
@@ -252,7 +252,7 @@ SexScenes.Tail = () => {
 				}
 			},
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	} else {
 		Text.Add("<i>“That’s a pretty prim pucker you’ve got there, champ. Pity to have it ruined.”</i>", parse);
 		Text.NL();
@@ -281,8 +281,8 @@ SexScenes.Tailfuck = () => {
 	Text.NL();
 
 	Sex.Vaginal(cassidy, player);
-	player.FuckVag(player.FirstVag(), null, 2);
-	cassidy.Fuck(null, 2);
+	player.FuckVag(player.FirstVag(), undefined, 2);
+	cassidy.Fuck(undefined, 2);
 
 	Text.Add("All that knocks you down flat onto the mattress -  or you would’ve been, had not Cass roughly pulled you up by the shoulders and kept you in place. Desperate to believe that it’s dealing with a cock, your cunt squeezes and clenches about Cassidy’s tail, trying to milk it into oblivion. Love juices dribbles down and out, staining the sheets with sweet honey", parse);
 	if (player.FirstCock()) {
@@ -326,8 +326,8 @@ SexScenes.Tailpeg = () => {
 	Text.NL();
 
 	Sex.Anal(cassidy, player);
-	player.FuckAnal(player.Butt(), null, 2);
-	cassidy.Fuck(null, 2);
+	player.FuckAnal(player.Butt(), undefined, 2);
+	cassidy.Fuck(undefined, 2);
 
 	Text.Add("<i>“How’s that for a start?”</i> Cassidy asks from behind you, yanking you upwards by the shoulders and preventing you from just collapsing onto the bed where you are. <i>“Don’t know why people don’t lead with their best punch more often, but I’m not going to hold back when it comes to this!”</i>", parse);
 	Text.NL();
@@ -755,7 +755,7 @@ SexScenes.Pet = () => {
 		SexScenes.Outro();
 	});
 
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 };
 
 SexScenes.Anal = (cocksInAss: Cock[]) => {
@@ -1016,7 +1016,7 @@ SparSexScenes.Win = function() {
 						SexScenes.IndoorPrompt();
 					},
 				});
-				Gui.SetButtonsFromList(options, false, null);
+				Gui.SetButtonsFromList(options, false, undefined);
 			},
 		});
 
@@ -1044,7 +1044,7 @@ SparSexScenes.Win = function() {
 				});
 			},
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	} else {
 		Text.Add("<i>“Great bout, champ.”</i> She gives you one of her trademark grins. <i>“A bit of rough and tumble with you makes me feel so alive.”</i>", parse);
 		Text.NL();
@@ -1097,7 +1097,7 @@ SparSexScenes.WinPrompt = () => {
 		enabled : true,
 		func : SparSexScenes.Spank,
 	});
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 };
 
 SparSexScenes.AllFours = () => {
@@ -1333,7 +1333,7 @@ SparSexScenes.AllFours = () => {
 		SparSexScenes.Outro();
 	});
 
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 };
 
 SparSexScenes.GetBlown = () => {
@@ -1452,8 +1452,8 @@ SparSexScenes.GetLicked = () => {
 	Text.NL();
 
 	Sex.Cunnilingus(cassidy, player);
-	cassidy.Fuck(null, 2);
-	player.Fuck(null, 2);
+	cassidy.Fuck(undefined, 2);
+	player.Fuck(undefined, 2);
 
 	parse.cl = player.FirstVag().clitCock ? "" : Text.Parse(" as she peels back the hood of your [clit] and starts toying with it with the forked tip of her tongue", parse);
 	Text.Add("Cass pauses a few moments and withdraws both head and tongue to take in the glistening, drooling mess that your cunt has turned into, then pushes her face back into your muff and redoubles her efforts to please you. She doesn’t have much in the way of spit, but your girl-juices are more than enough for the both of you, and Cass gets a face full of such[cl]. Maybe it’s the heated blood from your recent bout, maybe it’s the sheer aggressiveness with which she’s eating you out, but you can’t help but arch your back and push your hips forward, bumping and grinding against Cassidy’s face, practically begging her to just get over with the foreplay already.", parse);
@@ -1783,8 +1783,8 @@ SparSexScenes.DomRide = () => {
 		Text.NL();
 
 		Sex.Vaginal(cassidy, player);
-		player.FuckVag(player.FirstVag(), null, 1);
-		cassidy.Fuck(null, 1);
+		player.FuckVag(player.FirstVag(), undefined, 1);
+		cassidy.Fuck(undefined, 1);
 	}
 
 	Text.Add("That’s it! You can’t take any more! ", parse);

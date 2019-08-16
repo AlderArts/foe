@@ -41,7 +41,7 @@ TavernLoc.common.events.push(new Link(
 		const rigard = GAME().rigard;
 		return rigard.MetBarnaby() ? "Barnaby" : "Bartender";
 	}, true, true,
-	null,
+	undefined,
 	() => {
 		BarnabyScenes.Approach();
 	},
@@ -49,7 +49,7 @@ TavernLoc.common.events.push(new Link(
 
 TavernLoc.common.links.push(new Link(
 	"Slums", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(WORLD().loc.Rigard.Slums.Gate, {minute: 10});
 	},
@@ -257,7 +257,7 @@ TavernLoc.common.DrunkHandler = () => {
 			});
 		},
 	});
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 };
 
 BarnabyScenes.Approach = () => {
@@ -844,7 +844,7 @@ BarnabyScenes.BlowjobEntrypoint = (func: CallableFunction) => {
 		cock.length.base = 30;
 		cock.thickness.base = 5;
 
-		Sex.Blowjob(player, null);
+		Sex.Blowjob(player, undefined);
 		player.FuckOral(player.Mouth(), cock, 2);
 
 		Text.Add("With the stallion’s cock now firmly placed in your mouth, you start to bob your head up and down along its length. You slowly savor it at first, giving yourself a chance to get a feel for the sizable piece of meat in your mouth. While Barnaby probably only counts as average by the standards of his own kind, that’s still at least a foot of inch and a half-thick sausage you are attempting to inhale.", parse);
@@ -944,7 +944,7 @@ BarnabyScenes.BlowjobEntrypoint = (func: CallableFunction) => {
 			}
 			Text.NL();
 
-			Sex.Blowjob(player, null);
+			Sex.Blowjob(player, undefined);
 			player.FuckOral(player.Mouth(), cock, 1);
 
 			Text.Flush();

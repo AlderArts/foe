@@ -126,7 +126,7 @@ SlumsLoc.Gate.events.push(new Link(
 		const miranda = GAME().miranda;
 		return miranda.IsAtLocation();
 	}, true,
-	null,
+	undefined,
 	() => {
 		MirandaScenes.RigardGatesInteract();
 	},

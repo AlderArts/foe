@@ -47,7 +47,6 @@ export class Aquilius extends Entity {
 		this.flags.Met   = AquiliusFlags.Met.NotMet;
 		this.flags.Herbs = AquiliusFlags.Herbs.No;
 		this.flags.Talk  = 0; // Bitmask
-		this.herbIngredient = null;
 
 		this.helpTimer  = new Time();
 
@@ -219,7 +218,7 @@ export namespace AquiliusScenes {
 			}
 
 			const item = aquilius.herbIngredient;
-			aquilius.herbIngredient = null;
+			aquilius.herbIngredient = undefined;
 
 			if (item && party.Inv().QueryNum(item)) {
 				Text.NL();
@@ -263,7 +262,7 @@ export namespace AquiliusScenes {
 						AquiliusScenes.Prompt();
 					}, enabled : true,
 				});
-				Gui.SetButtonsFromList(options, false, null);
+				Gui.SetButtonsFromList(options, false, undefined);
 			} else {
 				AquiliusScenes.Prompt();
 			}

@@ -40,7 +40,7 @@ export namespace Text {
 					const code = text.slice(start + 1, stop);
 
 					let replaceStr;
-					if (parseStrings[code] !== null) {
+					if (parseStrings[code] !== undefined) {
 						replaceStr = parseStrings[code];
 						if (_.isFunction(replaceStr)) {
 							replaceStr = replaceStr();

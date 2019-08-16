@@ -26,7 +26,7 @@ import { Patchwork, PatchworkFlags, PatchworkScenes } from "./nomads/patchwork";
 import { Player } from "./player";
 
 const HalloweenScenes: any = {
-	HW : null,
+	HW : undefined,
 };
 
 // Put here instead of in Halloween items in order to prevent circular reference.
@@ -449,7 +449,7 @@ Halloween.Loc.Tent.description = () => {
 
 Halloween.Loc.Tent.links.push(new Link(
 	"Outside", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(Halloween.Loc.Camp);
 	},
@@ -465,7 +465,7 @@ Halloween.Loc.Camp.description = () => {
 
 Halloween.Loc.Camp.links.push(new Link(
 	"Tent", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(Halloween.Loc.Tent);
 	},
@@ -473,7 +473,7 @@ Halloween.Loc.Camp.links.push(new Link(
 
 Halloween.Loc.Camp.links.push(new Link(
 	"Path", true, true,
-	null,
+	undefined,
 	() => {
 		if (HalloweenScenes.HW.flags & HalloweenFlags.Flags.Elder) {
 			MoveToLocation(Halloween.Loc.Path);
@@ -495,7 +495,7 @@ Halloween.Loc.Camp.events.push(new Link(
 			return "Figure";
 		}
 	}, true, true,
-	null,
+	undefined,
 	() => {
 		const party: Party = GAME().party;
 		const parse: any = {
@@ -632,7 +632,7 @@ Halloween.Loc.Path.onEntry = () => {
 
 Halloween.Loc.Path.links.push(new Link(
 	"Camp", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(Halloween.Loc.Camp);
 	},
@@ -641,14 +641,14 @@ Halloween.Loc.Path.links.push(new Link(
 	() => {
 		return HalloweenScenes.HW.flags & HalloweenFlags.Flags.WitchHut ? "Witch's hut" : "Hut?";
 	}, true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(Halloween.Loc.WitchHut);
 	},
 ));
 Halloween.Loc.Path.links.push(new Link(
 	"Graveyard", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(Halloween.Loc.Graveyard);
 	},
@@ -658,7 +658,7 @@ Halloween.Loc.Path.events.push(new Link(
 	"Thrall", () => {
 		return HalloweenScenes.HW.harthon & HalloweenFlags.Harthon.Thrall;
 	}, true,
-	null,
+	undefined,
 	() => {
 		HalloweenScenes.HarthonThrall();
 	},
@@ -668,7 +668,7 @@ Halloween.Loc.Path.events.push(new Link(
 	"Beta", () => {
 		return HalloweenScenes.HW.ronnie === HalloweenFlags.Ronnie.PCAlpha;
 	}, true,
-	null,
+	undefined,
 	() => {
 		const player = GAME().player;
 
@@ -731,7 +731,7 @@ Halloween.Loc.Path.events.push(new Link(
 				Gui.NextPrompt();
 			}, enabled : true,
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	},
 ));
 
@@ -790,7 +790,7 @@ HalloweenScenes.Ronnie = () => {
 			tooltip : "It’s time for a new alpha!",
 			func : HalloweenScenes.RonnieReversal, enabled : true,
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	} else { // Alpha
 		Text.Add("Shuffling from the bushes nearby catches your attention. As your head flicks towards the source, a deliciously familiar scent fills your nostrils. Grinning heartily, you call for Ronnie to come out, like a good little beta.", parse);
 		Text.NL();
@@ -826,7 +826,7 @@ HalloweenScenes.Ronnie = () => {
 				Gui.NextPrompt();
 			}, enabled : true,
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	}
 };
 
@@ -1049,7 +1049,7 @@ HalloweenScenes.RonnieFirst = () => {
 								Gui.NextPrompt();
 							}, enabled : true,
 						});
-						Gui.SetButtonsFromList(options, false, null);
+						Gui.SetButtonsFromList(options, false, undefined);
 					}, enabled : true,
 				});
 				options.push({ nameStr : "Flee!",
@@ -1121,7 +1121,7 @@ HalloweenScenes.RonnieFirst = () => {
 								HalloweenScenes.RonnieCatch();
 							}, enabled : true,
 						});
-						Gui.SetButtonsFromList(options, false, null);
+						Gui.SetButtonsFromList(options, false, undefined);
 					}, enabled : true,
 				});
 				if (party.Inv().QueryNum(HalloweenItems.SqueakyToy)) {
@@ -1158,7 +1158,7 @@ HalloweenScenes.RonnieFirst = () => {
 						}, enabled : true,
 					});
 				}
-				Gui.SetButtonsFromList(options, false, null);
+				Gui.SetButtonsFromList(options, false, undefined);
 			});
 		}, enabled : true,
 	});
@@ -1182,7 +1182,7 @@ HalloweenScenes.RonnieFirst = () => {
 			Gui.NextPrompt();
 		}, enabled : true,
 	});
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 };
 
 HalloweenScenes.WerewolfTF = () => {
@@ -1272,7 +1272,7 @@ HalloweenScenes.WerewolfTF = () => {
 		// Body stuff, remove vag
 		player.body.vagina = [];
 		_.each(player.AllCocks(), (cock) => {
-			cock.vag = null;
+			cock.vag = undefined;
 		});
 		// Shrink breasts
 		_.each(player.AllBreastRows(), (breast) => {
@@ -1520,7 +1520,7 @@ HalloweenScenes.RonnieReversal = () => {
 
 Halloween.Loc.Path.events.push(new Link(
 	"Ravens", true, true,
-	null,
+	undefined,
 	() => {
 		const parse: any = {
 
@@ -1559,7 +1559,7 @@ Halloween.Loc.Path.events.push(new Link(
 				Gui.NextPrompt();
 			}, enabled : true,
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	},
 ));
 
@@ -1573,21 +1573,21 @@ Halloween.Loc.Graveyard.description = () => {
 
 Halloween.Loc.Graveyard.links.push(new Link(
 	"Path", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(Halloween.Loc.Path);
 	},
 ));
 Halloween.Loc.Graveyard.links.push(new Link(
 	"Chapel", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(Halloween.Loc.Chapel);
 	},
 ));
 Halloween.Loc.Graveyard.links.push(new Link(
 	"Mausoleum", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(Halloween.Loc.Mausoleum);
 	},
@@ -1779,10 +1779,10 @@ HalloweenScenes.Kiai = () => {
 				tooltip : "Uhh... on second thought, just run away.",
 				func : HalloweenScenes.KiaiRun, enabled : true,
 			});
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		}, enabled : true,
 	});
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 };
 
 HalloweenScenes.KiaiRun = () => {
@@ -1915,7 +1915,7 @@ Halloween.Loc.Mausoleum.description = () => {
 
 Halloween.Loc.Mausoleum.links.push(new Link(
 	"Leave", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(Halloween.Loc.Graveyard);
 	},
@@ -1924,7 +1924,7 @@ Halloween.Loc.Mausoleum.links.push(new Link(
 	() => {
 		return (HalloweenScenes.HW.flags & HalloweenFlags.Flags.TRoom) ? "Torture room" : "Door";
 	}, true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(Halloween.Loc.TortureRoom);
 	},
@@ -1934,7 +1934,7 @@ Halloween.Loc.Mausoleum.events.push(new Link(
 	"Coffin", () => {
 		return !(HalloweenScenes.HW.harthon & HalloweenFlags.Harthon.Met);
 	}, true,
-	null,
+	undefined,
 	() => {
 		HalloweenScenes.HarthonFirst();
 	},
@@ -1962,7 +1962,7 @@ Halloween.Loc.TortureRoom.description = () => {
 
 Halloween.Loc.TortureRoom.links.push(new Link(
 	"Leave", true, true,
-	null,
+	undefined,
 	() => {
 		const player = GAME().player;
 		Text.Clear();
@@ -1983,7 +1983,7 @@ Halloween.Loc.TortureRoom.events.push(new Link(
 	"Urn", () => {
 		return !(HalloweenScenes.HW.flags & HalloweenFlags.Flags.NadirMa);
 	}, true,
-	null,
+	undefined,
 	() => {
 		HalloweenScenes.NadirMaApproach();
 	},
@@ -2013,7 +2013,7 @@ HalloweenScenes.NadirMaApproach = () => {
 			Gui.PrintDefaultOptions();
 		}, enabled : true,
 	});
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 };
 
 HalloweenScenes.NadirMa = () => {
@@ -2279,7 +2279,7 @@ HalloweenScenes.NadirMa = () => {
 						HalloweenScenes.NadirMaNoEntry(parse, prompt3);
 					}, enabled : true,
 				});
-				Gui.SetButtonsFromList(options, false, null);
+				Gui.SetButtonsFromList(options, false, undefined);
 			} else {
 				Text.Add("why don’t you kneel and present yourself to me?”</i>", parse);
 				Text.NL();
@@ -2300,7 +2300,7 @@ HalloweenScenes.NadirMa = () => {
 				HalloweenScenes.NadirMaNoEntry(parse, prompt2);
 			}, enabled : true,
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	};
 
 	// [Yes] [No]
@@ -2316,7 +2316,7 @@ HalloweenScenes.NadirMa = () => {
 			HalloweenScenes.NadirMaNoEntry(parse, prompt1);
 		}, enabled : true,
 	});
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 };
 
 HalloweenScenes.NadirMaCont = (parse: any) => {
@@ -2536,7 +2536,7 @@ HalloweenScenes.NadirMaCont = (parse: any) => {
 					HalloweenScenes.NadirMaNoEntry(parse, prompt2);
 				}, enabled : true,
 			});
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		}
 	};
 
@@ -2553,7 +2553,7 @@ HalloweenScenes.NadirMaCont = (parse: any) => {
 			HalloweenScenes.NadirMaNoEntry(parse, prompt);
 		}, enabled : true,
 	});
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 };
 
 HalloweenScenes.NadirMaCont2 = (parse: any) => {
@@ -2950,7 +2950,7 @@ HalloweenScenes.NadirMaCont2 = (parse: any) => {
 			HalloweenScenes.NadirMaNoEntry(parse, prompt);
 		}, enabled : true,
 	});
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 };
 
 HalloweenScenes.NadirMaNoEntry = (parse: any, func: any) => {
@@ -2995,7 +2995,7 @@ HalloweenScenes.NadirMaNoEntry = (parse: any, func: any) => {
 				HalloweenScenes.NadirMaNoEntry(parse);
 			}, enabled : true,
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	} else {
 		Text.Add("Nadir-Ma’s face turns to a scowl of pure anger. <i>“How <b>dare</b> you refuse me!”</i> Her voice thunders around the storage room.", parse);
 		/* TODO
@@ -3582,7 +3582,7 @@ HalloweenScenes.HarthonFirst = () => {
 			}, enabled : true,
 		});
 	}
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 };
 
 HalloweenScenes.HarthonDefeatedPrompt = () => {
@@ -3711,7 +3711,7 @@ HalloweenScenes.HarthonDefeatedPrompt = () => {
 					HalloweenScenes.HarthonPitchAnal(parse);
 				}, enabled : true,
 			});
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		}, enabled : true,
 	});
 	if (party.Inv().QueryNum(HalloweenItems.HolyWater) &&
@@ -3767,7 +3767,7 @@ HalloweenScenes.HarthonDefeatedPrompt = () => {
 			});
 		}, enabled : true,
 	});
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 };
 
 HalloweenScenes.HarthonPitchAnal = (parse: any) => {
@@ -4162,7 +4162,7 @@ HalloweenScenes.HarthonPitchVag = (parse: any) => {
 					HalloweenScenes.HarthonPitchVagStop(parse);
 				}, enabled : true,
 			});
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		} else {
 			Text.Add("Seems you might have used a touch too much power; she’s completely oblivious to the fact that your toy, realistic as it may be, isn’t going to deliver her any of the salty gooey goodness that she’s after.", parse);
 			Text.NL();
@@ -4771,7 +4771,7 @@ HalloweenScenes.HarthonThrallPrompt = (parse: any) => {
 					Gui.NextPrompt();
 				}, enabled : player.FirstCock(),
 			});
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		}, enabled : true,
 	});
 	/* TODO Talk
@@ -4965,7 +4965,7 @@ HalloweenScenes.HarthonThrallPrompt = (parse: any) => {
 			Gui.NextPrompt();
 		}, enabled : true,
 	});
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 };
 
 HalloweenScenes.HarthonBirth = (parse: any) => {
@@ -5047,7 +5047,7 @@ HalloweenScenes.HarthonBirth = (parse: any) => {
 
 Halloween.Loc.Chapel.links.push(new Link(
 	"Graveyard", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(Halloween.Loc.Graveyard);
 	},
@@ -5236,7 +5236,7 @@ HalloweenScenes.Laggoth = () => {
 		HalloweenScenes.LaggothQnA({});
 	});
 
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 };
 
 HalloweenScenes.LaggothQnA = (opts: any) => {
@@ -5344,7 +5344,7 @@ HalloweenScenes.LaggothQnA = (opts: any) => {
 		});
 	}
 	if (options.length > 0) {
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	} else {
 		Gui.NextPrompt(() => {
 			Text.Clear();
@@ -5501,7 +5501,7 @@ HalloweenScenes.LaggothQnA = (opts: any) => {
 				tooltip : "You’re pretty sure you’ve figured out Laggoth’s weakness and think you can get him to look away for a moment.",
 				func : HalloweenScenes.LaggothDistract, enabled : true,
 			});
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		});
 	}
 };
@@ -5684,7 +5684,7 @@ HalloweenScenes.LaggothDistract = () => {
 			}, enabled : true,
 		});
 	}
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 };
 
 HalloweenScenes.LaggothPit = () => {
@@ -5750,7 +5750,7 @@ Halloween.Loc.Chapel.events.push(new Link(
 	"Sacristy", true, () => {
 		return !(HalloweenScenes.HW.flags & HalloweenFlags.Flags.Lenka);
 	},
-	null,
+	undefined,
 	() => {
 		HalloweenScenes.Sacristy();
 	},
@@ -5789,7 +5789,7 @@ HalloweenScenes.Sacristy = () => {
 			Gui.NextPrompt();
 		}, enabled : true,
 	});
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 };
 
 HalloweenScenes.Lenka = () => {
@@ -6175,10 +6175,10 @@ HalloweenScenes.Lenka = () => {
 					Gui.NextPrompt();
 				}, enabled : true,
 			});
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		}, enabled : true,
 	});
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 };
 
 Halloween.Loc.WitchHut.description = () => {
@@ -6206,7 +6206,7 @@ Halloween.Loc.WitchHut.description = () => {
 
 Halloween.Loc.WitchHut.links.push(new Link(
 	"Outside", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(Halloween.Loc.Path);
 	},
@@ -6214,7 +6214,7 @@ Halloween.Loc.WitchHut.links.push(new Link(
 
 Halloween.Loc.WitchHut.events.push(new Link(
 	"Trader", true, true,
-	null,
+	undefined,
 	() => {
 		HalloweenScenes.Patches();
 	},
@@ -6224,7 +6224,7 @@ Halloween.Loc.WitchHut.events.push(new Link(
 	() => {
 		return (HalloweenScenes.HW.flags & HalloweenFlags.Flags.Jenna) ? "Jenna" : "Witch";
 	}, true, true,
-	null,
+	undefined,
 	() => {
 		HalloweenScenes.Jenna();
 	},
@@ -6309,7 +6309,7 @@ HalloweenScenes.Jenna = () => {
 				Gui.NextPrompt();
 			}, enabled : true,
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	}
 };
 
@@ -6449,7 +6449,7 @@ HalloweenScenes.JennaSwitchPrompt = (opts: any) => {
 		});
 	}
 
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 };
 
 HalloweenScenes.JennaAgreePrompt = (opts: any) => {
@@ -6520,7 +6520,7 @@ HalloweenScenes.JennaAgreePrompt = (opts: any) => {
 			}, enabled : true,
 		});
 	}
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 };
 
 HalloweenScenes.JennaBroomfuck = () => {
@@ -6872,7 +6872,7 @@ HalloweenScenes.Patches = () => {
 			Gui.NextPrompt();
 		}, enabled : true,
 	});
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 };
 
 HalloweenScenes.WakingUp = (badend: boolean) => {

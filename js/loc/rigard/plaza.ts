@@ -77,21 +77,21 @@ PlazaLoc.enc.AddEnc(() => TerryScenes.ExplorePlaza, 1000000.0, () => {
 
 PlazaLoc.links.push(new Link(
 	"Gate", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(WORLD().loc.Rigard.Gate, {minute: 20});
 	},
 ));
 PlazaLoc.links.push(new Link(
 	"Residential", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(WORLD().loc.Rigard.Residential.Street, {minute: 10});
 	},
 ));
 PlazaLoc.links.push(new Link(
 	"Merchants", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(WORLD().loc.Rigard.ShopStreet.Street, {minute: 10});
 	},

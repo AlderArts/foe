@@ -84,11 +84,11 @@ export class Sylistraxia extends Entity {
 
 		if (GetDEBUG()) {
 			Text.NL();
-			Text.Add("DEBUG: relation: " + sylistraxia.relation.Get(), null, "bold");
+			Text.Add("DEBUG: relation: " + sylistraxia.relation.Get(), undefined, "bold");
 			Text.NL();
-			Text.Add("DEBUG: subDom: " + sylistraxia.subDom.Get(), null, "bold");
+			Text.Add("DEBUG: subDom: " + sylistraxia.subDom.Get(), undefined, "bold");
 			Text.NL();
-			Text.Add("DEBUG: slut: " + sylistraxia.slut.Get(), null, "bold");
+			Text.Add("DEBUG: slut: " + sylistraxia.slut.Get(), undefined, "bold");
 			Text.NL();
 		}
 

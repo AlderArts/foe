@@ -55,10 +55,10 @@ equiniumPlus.PushEffect((target: Entity) => {
 		// Base size
 		let inc  = cock.length.IncreaseStat(25, 100);
 		let inc2 = cock.thickness.IncreaseStat(7, 100);
-		if (inc === null) {
+		if (inc === undefined) {
 			inc = cock.length.IncreaseStat(50, 5);
 		}
-		if (inc2 === null) {
+		if (inc2 === undefined) {
 			inc2 = cock.thickness.IncreaseStat(12, 1);
 		}
 		len = len || (inc > 0);
@@ -162,10 +162,10 @@ infernumPlus.PushEffect((target: Entity) => {
 			// Base size
 			let inc  = cock.length.IncreaseStat(20, 100);
 			let inc2 = cock.thickness.IncreaseStat(4, 100);
-			if (inc === null) {
+			if (inc === undefined) {
 				inc  = cock.length.IncreaseStat(30, 2);
 			}
-			if (inc2 === null) {
+			if (inc2 === undefined) {
 				inc2 = cock.thickness.IncreaseStat(6, 1);
 			}
 			if (inc || inc2) { size = true; }

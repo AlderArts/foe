@@ -50,11 +50,11 @@ export class EncounterTable {
 			step -= enc.odds;
 			// If chosen, create an encounter from the supplied function
 			if (step <= 0.0) {
-				return enc.func ? enc.func(enc.obj) : null;
+				return enc.func ? enc.func(enc.obj) : undefined;
 			}
 		}
-		// No encounters will default to null
-		return null;
+		// No encounters will default to undefined
+		return undefined;
 	}
 }
 

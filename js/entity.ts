@@ -176,7 +176,6 @@ export class Entity {
 
 		// Jobs //TODO: Save/load
 		this.jobs         = {};
-		this.currentJob   = null;
 
 		// Experience
 		// Experience is gained by defeating enemies and completing quests
@@ -224,15 +223,6 @@ export class Entity {
 		this.libido.debug = () => that.name + ".libido";
 		this.charisma     = new Stat(0, 1, 0.1);
 		this.charisma.debug = () => that.name + ".charisma";
-
-		// Equipment
-		this.weaponSlot   = null;
-		this.topArmorSlot = null;
-		this.botArmorSlot = null;
-		this.acc1Slot     = null;
-		this.acc2Slot     = null;
-
-		this.strapOn      = null;
 
 		this.elementAtk   = new DamageType();
 		this.elementDef   = new DamageType();
@@ -356,13 +346,13 @@ export class Entity {
 
 	public Strip() {
 		// Remove all equipment (discards it completely and destroys it)
-		this.weaponSlot   = null;
-		this.topArmorSlot = null;
-		this.botArmorSlot = null;
-		this.acc1Slot     = null;
-		this.acc2Slot     = null;
+		this.weaponSlot   = undefined;
+		this.topArmorSlot = undefined;
+		this.botArmorSlot = undefined;
+		this.acc1Slot     = undefined;
+		this.acc2Slot     = undefined;
 
-		this.strapOn      = null;
+		this.strapOn      = undefined;
 	}
 
 	public ItemUsable(item: Item) {
@@ -913,14 +903,14 @@ export class Entity {
 		return this.curHp <= 0; // || this.curLust >= this.Lust();
 	}
 	public Inhibited() {
-		if (this.combatStatus.stats[StatusEffect.Freeze]  !== null) { return true; }
-		if (this.combatStatus.stats[StatusEffect.Numb]    !== null) { return true; }
-		if (this.combatStatus.stats[StatusEffect.Petrify] !== null) { return true; }
-		if (this.combatStatus.stats[StatusEffect.Blind]   !== null) { return true; }
-		if (this.combatStatus.stats[StatusEffect.Sleep]   !== null) { return true; }
-		if (this.combatStatus.stats[StatusEffect.Enrage]  !== null) { return true; }
-		if (this.combatStatus.stats[StatusEffect.Fatigue] !== null) { return true; }
-		if (this.combatStatus.stats[StatusEffect.Limp]    !== null) { return true; }
+		if (this.combatStatus.stats[StatusEffect.Freeze]  !== undefined) { return true; }
+		if (this.combatStatus.stats[StatusEffect.Numb]    !== undefined) { return true; }
+		if (this.combatStatus.stats[StatusEffect.Petrify] !== undefined) { return true; }
+		if (this.combatStatus.stats[StatusEffect.Blind]   !== undefined) { return true; }
+		if (this.combatStatus.stats[StatusEffect.Sleep]   !== undefined) { return true; }
+		if (this.combatStatus.stats[StatusEffect.Enrage]  !== undefined) { return true; }
+		if (this.combatStatus.stats[StatusEffect.Fatigue] !== undefined) { return true; }
+		if (this.combatStatus.stats[StatusEffect.Limp]    !== undefined) { return true; }
 
 		return false;
 	}
@@ -938,7 +928,7 @@ export class Entity {
 		}
 
 		if (fraction > 0 && this.combatStatus.stats[StatusEffect.Bleed]) {
-			this.combatStatus.stats[StatusEffect.Bleed] = null;
+			this.combatStatus.stats[StatusEffect.Bleed] = undefined;
 		}
 		return this.curHp - old;
 	}
@@ -969,21 +959,21 @@ export class Entity {
 		if (val >= 0) { return true; }
 
 		// Check for sleep
-		if (this.combatStatus.stats[StatusEffect.Sleep] !== null) {
-			this.combatStatus.stats[StatusEffect.Sleep] = null;
+		if (this.combatStatus.stats[StatusEffect.Sleep] !== undefined) {
+			this.combatStatus.stats[StatusEffect.Sleep] = undefined;
 		}
 		// Check for confuse
-		if (this.combatStatus.stats[StatusEffect.Confuse] !== null) {
+		if (this.combatStatus.stats[StatusEffect.Confuse] !== undefined) {
 			this.combatStatus.stats[StatusEffect.Confuse].OnFade(encounter, this);
 		}
 
 		// Check for counter
-		if (this.combatStatus.stats[StatusEffect.Counter] !== null) {
+		if (this.combatStatus.stats[StatusEffect.Counter] !== undefined) {
 			const onhit = this.combatStatus.stats[StatusEffect.Counter].OnHit;
 
 			this.combatStatus.stats[StatusEffect.Counter].hits--;
 			if (this.combatStatus.stats[StatusEffect.Counter].hits <= 0) {
-				this.combatStatus.stats[StatusEffect.Counter] = null;
+				this.combatStatus.stats[StatusEffect.Counter] = undefined;
 			}
 
 			let ret;
@@ -995,7 +985,7 @@ export class Entity {
 		}
 		// Check for decoy
 		const decoy = this.combatStatus.stats[StatusEffect.Decoy];
-		if (decoy !== null) {
+		if (decoy !== undefined) {
 			const num  = decoy.copies;
 			const toHit = 1 / (num + 1);
 			if (Math.random() < toHit) {
@@ -1009,7 +999,7 @@ export class Entity {
 				Text.NL();
 				ent.combatStatus.stats[StatusEffect.Decoy].copies--;
 				if (ent.combatStatus.stats[StatusEffect.Decoy].copies <= 0) {
-					ent.combatStatus.stats[StatusEffect.Decoy] = null;
+					ent.combatStatus.stats[StatusEffect.Decoy] = undefined;
 				}
 				Text.Flush();
 				return false;
@@ -1033,7 +1023,7 @@ export class Entity {
 		}
 
 		if (val > 0 && this.combatStatus.stats[StatusEffect.Bleed]) {
-			this.combatStatus.stats[StatusEffect.Bleed] = null;
+			this.combatStatus.stats[StatusEffect.Bleed] = undefined;
 		}
 		return this.curHp - old;
 	}
@@ -1613,8 +1603,7 @@ export class Entity {
 	}
 
 	public RecallAbilities() {
-		_.forIn(this.jobs, (value, key) => {
-			const jd = this.jobs[key];
+		_.forIn(this.jobs, (jd, key) => {
 			for (let i = 0; i < jd.level - 1; i++) {
 				if (i >= jd.job.levels.length) { break; }
 				const skills = jd.job.levels[i].skills;
@@ -1816,11 +1805,11 @@ export class Entity {
 
 		if (GetDEBUG()) {
 			Text.NL();
-			Text.Add("DEBUG: relation: " + this.relation.Get(), null, "bold");
+			Text.Add("DEBUG: relation: " + this.relation.Get(), undefined, "bold");
 			Text.NL();
-			Text.Add("DEBUG: subDom: " + this.subDom.Get(), null, "bold");
+			Text.Add("DEBUG: subDom: " + this.subDom.Get(), undefined, "bold");
 			Text.NL();
-			Text.Add("DEBUG: slut: " + this.slut.Get(), null, "bold");
+			Text.Add("DEBUG: slut: " + this.slut.Get(), undefined, "bold");
 			Text.NL();
 		}
 
@@ -2059,7 +2048,7 @@ export class Entity {
 				return app;
 		}
 			}
-		return null;
+		return undefined;
 	}
 	public HasAntenna() {
 		for (const app of this.body.head.appendages) {
@@ -2067,7 +2056,7 @@ export class Entity {
 				return app;
 			}
 		}
-		return null;
+		return undefined;
 	}
 	public Back() {
 		return this.body.backSlots;
@@ -2078,7 +2067,7 @@ export class Entity {
 				return slot;
 		}
 			}
-		return null;
+		return undefined;
 	}
 	public HasPrehensileTail() {
 		let found = false;
@@ -2095,7 +2084,7 @@ export class Entity {
 				return slot;
 			}
 		}
-		return null;
+		return undefined;
 	}
 	public NumAttributes(race: RaceDesc) {
 		return this.body.NumAttributes(race);
@@ -2232,7 +2221,7 @@ export class Entity {
 	public ParserTags(parse: any = {}, prefix: string = "", p1cock?: Cock) {
 		const ent = this;
 
-		p1cock = p1cock || ent.BiggestCock(null, true);
+		p1cock = p1cock || ent.BiggestCock(undefined, true);
 
 		parse[prefix + "cocks"]     = () => ent.MultiCockDesc();
 		parse[prefix + "cock"]      = () => p1cock.Short();

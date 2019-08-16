@@ -372,7 +372,7 @@ export namespace OpheliaScenes {
                             }, enabled : true,
                             tooltip : "You don’t have the scepter yet.",
                         });
-                        Gui.SetButtonsFromList(options, false, null);
+                        Gui.SetButtonsFromList(options, false, undefined);
                     } else {
                         Text.Add("<i>“I wish I knew of a way to restore her, then you could ask her yourself... but right now? At most, she’ll have the brains to ask for sex...”</i> Ophelia says with a sad face and drooping ears.", parse);
                         Text.NL();
@@ -430,7 +430,7 @@ export namespace OpheliaScenes {
                         ophelia.relation.IncreaseStat(50, 1);
                         OpheliaScenes.TalkPrompt();
                     });
-                    Gui.SetButtonsFromList(options, false, null);
+                    Gui.SetButtonsFromList(options, false, undefined);
                 } else if (ophelia.Relation() >= 30) {
                     Text.Add("<i>“My father...”</i> she starts, looking around, then she takes a deep breath to steel herself. <i>“He’s a tyrant.”</i>", parse);
                     Text.NL();
@@ -475,7 +475,7 @@ export namespace OpheliaScenes {
                         }, enabled : true,
                         tooltip : "Just keep your mouth shut and let Ophelia regain control.",
                     });
-                    Gui.SetButtonsFromList(options, false, null);
+                    Gui.SetButtonsFromList(options, false, undefined);
                 } else {
                     Text.Add("<i>“My father?”</i> she repeats hesitantly. <i>“He’s our king, our leader...”</i>", parse);
                     Text.NL();
@@ -793,7 +793,7 @@ export namespace OpheliaScenes {
                 }, enabled : true,
                 tooltip : "Ask about Roa’s attitude to sex, and his uncanny libido.",
             });
-            Gui.SetButtonsFromList(options, false, null);
+            Gui.SetButtonsFromList(options, false, undefined);
         }
     }
 
@@ -1213,7 +1213,7 @@ export namespace OpheliaScenes {
             }, enabled : true,
             tooltip : "She doesn’t wear panties, why go to the trouble of taking it all the way off?",
         });
-        Gui.SetButtonsFromList(options, false, null);
+        Gui.SetButtonsFromList(options, false, undefined);
     }
 
     export function LabPrompt() {
@@ -1726,7 +1726,7 @@ export namespace OpheliaScenes {
                 }, enabled : true,
                 tooltip : "It’s not worth sticking your neck out for. What is she to you, after all?",
             });
-            Gui.SetButtonsFromList(options, false, null);
+            Gui.SetButtonsFromList(options, false, undefined);
 
             Gui.Callstack.push(() => {
                 Text.NL();
@@ -2128,7 +2128,7 @@ export namespace OpheliaScenes {
                 }, enabled : true,
                 tooltip : "This shit has gone on for too long. Time to wipe that grin off Lagon’s fucking face.",
             });
-            Gui.SetButtonsFromList(options, false, null);
+            Gui.SetButtonsFromList(options, false, undefined);
 
             Gui.Callstack.push(() => {
                 Text.Clear();
@@ -2289,7 +2289,7 @@ export namespace OpheliaScenes {
             }, enabled : true,
             tooltip : "She shouldn’t keep defying her father, as it will put her in danger.",
         });
-        Gui.SetButtonsFromList(options, false, null);
+        Gui.SetButtonsFromList(options, false, undefined);
     }
 
     export function RewardChoices() {
@@ -2441,6 +2441,6 @@ export namespace OpheliaScenes {
             tooltip : ""
         });
         */
-        Gui.SetButtonsFromList(options, false, null);
+        Gui.SetButtonsFromList(options, false, undefined);
     }
 }

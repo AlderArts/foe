@@ -144,11 +144,11 @@ export class Lei extends Entity {
 
 		if (GetDEBUG()) {
 			Text.NL();
-			Text.Add("DEBUG: relation: " + lei.relation.Get(), null, "bold");
+			Text.Add("DEBUG: relation: " + lei.relation.Get(), undefined, "bold");
 			Text.NL();
-			Text.Add("DEBUG: subDom: " + lei.subDom.Get(), null, "bold");
+			Text.Add("DEBUG: subDom: " + lei.subDom.Get(), undefined, "bold");
 			Text.NL();
-			Text.Add("DEBUG: slut: " + lei.slut.Get(), null, "bold");
+			Text.Add("DEBUG: slut: " + lei.slut.Get(), undefined, "bold");
 			Text.NL();
 		}
 

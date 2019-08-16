@@ -378,7 +378,7 @@ FeraScenes.Interact = () => {
 
 	if (GetDEBUG()) {
 		Text.NL();
-		Text.Add("DEBUG: relation: " + fera.relation.Get(), null, "bold");
+		Text.Add("DEBUG: relation: " + fera.relation.Get(), undefined, "bold");
 		Text.NL();
 		Text.Flush();
 	}

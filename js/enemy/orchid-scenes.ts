@@ -560,7 +560,7 @@ OrchidScenes.FirstTalkPrompt = (opts: any) => {
 		}
 	}
 	if (options.length > 0) {
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	} else {
 		options.push({ nameStr : "Tentacles",
 			tooltip : "So, her tentacles… From the looks of it, it doesn’t seem like they’re going away...",
@@ -641,11 +641,11 @@ OrchidScenes.FirstTalkPrompt = (opts: any) => {
 						Gui.NextPrompt();
 					}, enabled : true,
 				});
-				Gui.SetButtonsFromList(options, false, null);
+				Gui.SetButtonsFromList(options, false, undefined);
 			}, enabled : true,
 		});
 
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	}
 };
 

@@ -214,7 +214,7 @@ export namespace AscheTasksScenes {
 						tooltip : "A whole year of celibacy, huh… they must be pretty pent-up. Maybe you can whore yourself out for a favor.",
 						func : AscheTasksScenes.Ginseng.Whore, enabled : true,
 					});
-					Gui.SetButtonsFromList(options, false, null);
+					Gui.SetButtonsFromList(options, false, undefined);
 				}, enabled : true,
 			});
 			const tooltip = Text.Parse("Try to slip past the zebras and enter the spring basin while they’re [day].", {day: WorldTime().IsDay() ? "distracted" : "out of it"});
@@ -283,7 +283,7 @@ export namespace AscheTasksScenes {
 					AscheTasksScenes.Ginseng.Fight();
 				}, enabled : true,
 			});
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		}
 
 		export function Fight() {
@@ -374,7 +374,7 @@ export namespace AscheTasksScenes {
 					AscheTasksScenes.Ginseng.Fight();
 				}, enabled : true,
 			});
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		}
 
 		export function Whore() {
@@ -483,7 +483,7 @@ export namespace AscheTasksScenes {
 						AscheTasksScenes.Ginseng.Fight();
 					}, enabled : true,
 				});
-				Gui.SetButtonsFromList(options, false, null);
+				Gui.SetButtonsFromList(options, false, undefined);
 			}
 		}
 
@@ -660,7 +660,7 @@ export namespace AscheTasksScenes {
 					Gui.NextPrompt();
 				}, enabled : true,
 			});
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		}
 
 	}
@@ -1046,7 +1046,7 @@ export namespace AscheTasksScenes {
 					Gui.NextPrompt();
 				}, enabled : true,
 			});
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		}
 	}
 
@@ -1231,7 +1231,7 @@ export namespace AscheTasksScenes {
 				});
 			});
 
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		}
 
 		export function OnTask() {
@@ -1343,7 +1343,7 @@ export namespace AscheTasksScenes {
 				tooltip : "An adventure? Why, that sounds like a whole barrel of fun! What could go wrong?",
 				func : AscheSexScenes.MagicalThreesome, enabled : true,
 			});
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		}
 	}
 }

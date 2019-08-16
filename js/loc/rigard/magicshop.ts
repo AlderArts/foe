@@ -283,7 +283,7 @@ MagicShopLoc.description = () => {
 };
 
 MagicShopLoc.events.push(new Link(
-	"Asche", true, true, null,
+	"Asche", true, true, undefined,
 	() => {
 		const player = GAME().player;
 		const parse: any = {
@@ -299,7 +299,7 @@ MagicShopLoc.events.push(new Link(
 ));
 
 MagicShopLoc.events.push(new Link(
-	"Leave", true, true, null,
+	"Leave", true, true, undefined,
 	() => {
 		MoveToLocation(WORLD().loc.Rigard.ShopStreet.Street, {minute: 5});
 	},

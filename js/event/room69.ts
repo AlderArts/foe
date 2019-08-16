@@ -78,11 +78,11 @@ Room69Scenes.Interact = () => {
 
 	if (GetDEBUG()) {
 		Text.NL();
-		Text.Add("DEBUG: relation: " + room69.relation.Get(), null, "bold");
+		Text.Add("DEBUG: relation: " + room69.relation.Get(), undefined, "bold");
 		Text.NL();
-		Text.Add("DEBUG: subDom: " + room69.subDom.Get(), null, "bold");
+		Text.Add("DEBUG: subDom: " + room69.subDom.Get(), undefined, "bold");
 		Text.NL();
-		Text.Add("DEBUG: slut: " + room69.slut.Get(), null, "bold");
+		Text.Add("DEBUG: slut: " + room69.slut.Get(), undefined, "bold");
 		Text.NL();
 	}
 	Text.Flush();

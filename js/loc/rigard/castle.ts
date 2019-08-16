@@ -119,7 +119,7 @@ CastleLoc.Grounds.links.push(new Link(
 		const terry = GAME().terry;
 		return terry.flags.Saved === TerryFlags.Saved.TalkedTwins2;
 	}, true,
-	null,
+	undefined,
 	() => {
 		TerryScenes.Release();
 	},
@@ -419,7 +419,7 @@ NobleScenes.AlmsForThePoor = () => {
 					Gui.NextPrompt();
 				}, enabled : true,
 			});
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		}, enabled : true,
 	});
 	options.push({ nameStr : "Leave",
@@ -434,7 +434,7 @@ NobleScenes.AlmsForThePoor = () => {
 			Gui.NextPrompt();
 		}, enabled : true,
 	});
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 };
 
 NobleScenes.Elodie = () => {
@@ -497,7 +497,7 @@ NobleScenes.Elodie = () => {
 		Gui.NextPrompt();
 	});
 
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 };
 
 NobleScenes.RoyalGetaway = () => {
@@ -796,7 +796,7 @@ NobleScenes.BunsChoice = () => {
 		});
 	}
 
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 };
 
 export { CastleLoc, NobleScenes };

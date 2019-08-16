@@ -79,7 +79,7 @@ export namespace Status {
 		this.turns--;
 		// Remove venom effect
 		if (this.turns <= 0 || target.curHp <= 0) {
-			target.combatStatus.stats[StatusEffect.Venom] = null;
+			target.combatStatus.stats[StatusEffect.Venom] = undefined;
 		}
 	};
 
@@ -121,7 +121,7 @@ export namespace Status {
 		this.turns--;
 		// Remove burn effect
 		if (this.turns <= 0 || target.curHp <= 0) {
-			target.combatStatus.stats[StatusEffect.Burn] = null;
+			target.combatStatus.stats[StatusEffect.Burn] = undefined;
 		}
 	};
 
@@ -153,7 +153,7 @@ export namespace Status {
 		this.turns--;
 		// Remove freeze effect
 		if (this.turns <= 0) {
-			target.combatStatus.stats[StatusEffect.Freeze] = null;
+			target.combatStatus.stats[StatusEffect.Freeze] = undefined;
 		}
 	};
 
@@ -184,7 +184,7 @@ export namespace Status {
 		this.turns--;
 		// Remove numb effect
 		if (this.turns <= 0) {
-			target.combatStatus.stats[StatusEffect.Numb] = null;
+			target.combatStatus.stats[StatusEffect.Numb] = undefined;
 		}
 	};
 
@@ -216,7 +216,7 @@ export namespace Status {
 		this.turns--;
 		// Remove blind effect
 		if (this.turns <= 0) {
-			target.combatStatus.stats[StatusEffect.Blind] = null;
+			target.combatStatus.stats[StatusEffect.Blind] = undefined;
 		}
 	};
 
@@ -240,7 +240,7 @@ export namespace Status {
 			hp      : opts.hp || 0,
 			sp      : opts.sp || 0,
 			lp      : opts.lp || 0,
-			caster  : opts.caster || null,
+			caster  : opts.caster || undefined,
 			Tick    : Siphon.Tick,
 		};
 
@@ -260,7 +260,7 @@ export namespace Status {
 
 		// Remove siphon effect
 		if (this.turns <= 0) {
-			target.combatStatus.stats[StatusEffect.Siphon] = null;
+			target.combatStatus.stats[StatusEffect.Siphon] = undefined;
 		}
 	};
 
@@ -290,7 +290,7 @@ export namespace Status {
 		this.turns--;
 		// Remove sleep effect
 		if (this.turns <= 0) {
-			target.combatStatus.stats[StatusEffect.Sleep] = null;
+			target.combatStatus.stats[StatusEffect.Sleep] = undefined;
 		}
 	};
 
@@ -329,7 +329,7 @@ export namespace Status {
 		this.turns--;
 		// Remove bleed effect
 		if (this.turns <= 0 || target.curHp <= 0) {
-			target.combatStatus.stats[StatusEffect.Bleed] = null;
+			target.combatStatus.stats[StatusEffect.Bleed] = undefined;
 		}
 	};
 
@@ -355,7 +355,7 @@ export namespace Status {
 		this.turns--;
 		// Remove haste effect
 		if (this.turns <= 0) {
-			target.combatStatus.stats[StatusEffect.Haste] = null;
+			target.combatStatus.stats[StatusEffect.Haste] = undefined;
 		}
 	};
 
@@ -389,7 +389,7 @@ export namespace Status {
 		this.turns--;
 		// Remove slow effect
 		if (this.turns <= 0) {
-			target.combatStatus.stats[StatusEffect.Slow] = null;
+			target.combatStatus.stats[StatusEffect.Slow] = undefined;
 		}
 	};
 
@@ -430,7 +430,7 @@ export namespace Status {
 		this.turns--;
 		// Remove horny effect
 		if (this.turns <= 0) {
-			target.combatStatus.stats[StatusEffect.Horny] = null;
+			target.combatStatus.stats[StatusEffect.Horny] = undefined;
 		}
 	};
 
@@ -459,7 +459,7 @@ export namespace Status {
 		};
 		// Heals limp
 		if (target.combatStatus.stats[StatusEffect.Limp]) {
-			target.combatStatus.stats[StatusEffect.Limp] = null;
+			target.combatStatus.stats[StatusEffect.Limp] = undefined;
 		}
 
 		return true;
@@ -467,7 +467,7 @@ export namespace Status {
 	Aroused.Update = function(target: any, step: number) {
 		this.hours -= step;
 		if (this.hours <= 0) {
-			target.combatStatus.stats[StatusEffect.Aroused] = null;
+			target.combatStatus.stats[StatusEffect.Aroused] = undefined;
 		}
 	};
 	Aroused.ToStorage = function() {
@@ -516,7 +516,7 @@ export namespace Status {
 
 		// Heals aroused
 		if (target.combatStatus.stats[StatusEffect.Aroused]) {
-			target.combatStatus.stats[StatusEffect.Aroused] = null;
+			target.combatStatus.stats[StatusEffect.Aroused] = undefined;
 		}
 
 		return true;
@@ -524,7 +524,7 @@ export namespace Status {
 	Limp.Update = function(target: any, step: number) {
 		this.hours -= step;
 		if (this.hours <= 0) {
-			target.combatStatus.stats[StatusEffect.Limp] = null;
+			target.combatStatus.stats[StatusEffect.Limp] = undefined;
 		}
 	};
 	Limp.ToStorage = function() {
@@ -584,7 +584,7 @@ export namespace Status {
 		this.turns--;
 		// Remove counter effect
 		if (this.turns <= 0) {
-			target.combatStatus.stats[StatusEffect.Counter] = null;
+			target.combatStatus.stats[StatusEffect.Counter] = undefined;
 		}
 	};
 
@@ -608,7 +608,7 @@ export namespace Status {
 		this.hours -= step;
 		// Remove full effect
 		if (this.hours <= 0) {
-			target.combatStatus.stats[StatusEffect.Full] = null;
+			target.combatStatus.stats[StatusEffect.Full] = undefined;
 		}
 	};
 	Full.ToStorage = function() {
@@ -648,7 +648,7 @@ export namespace Status {
 		// Apply confuse
 		target.combatStatus.stats[StatusEffect.Confuse] = {
 			turns,
-			func   : opts.func || null,
+			func   : opts.func || undefined,
 			Tick   : Confuse.Tick,
 			OnFade : opts.fade || Confuse.OnFade,
 		};
@@ -668,7 +668,7 @@ export namespace Status {
 		this.turns--;
 		// Remove confuse effect
 		if (this.turns <= 0) {
-			target.combatStatus.stats[StatusEffect.Confuse] = null;
+			target.combatStatus.stats[StatusEffect.Confuse] = undefined;
 		}
 	};
 	Confuse.OnFade = (encounter: any, entity: any) => {
@@ -681,7 +681,7 @@ export namespace Status {
 			}
 		}
 		// Remove confuse effect
-		entity.combatStatus.stats[StatusEffect.Confuse] = null;
+		entity.combatStatus.stats[StatusEffect.Confuse] = undefined;
 	};
 
 	export function Weakness(target: any, opts?: any) {
@@ -711,7 +711,7 @@ export namespace Status {
 		this.turns--;
 		// Remove weakness effect
 		if (this.turns <= 0) {
-			target.combatStatus.stats[StatusEffect.Weakness] = null;
+			target.combatStatus.stats[StatusEffect.Weakness] = undefined;
 		}
 	};
 
@@ -745,7 +745,7 @@ export namespace Status {
 	Buff.Update = function(target: any, step: number) {
 		this.hours -= step;
 		if (this.hours <= 0) {
-			target.combatStatus.stats[StatusEffect.Buff] = null;
+			target.combatStatus.stats[StatusEffect.Buff] = undefined;
 		}
 	};
 	Buff.ToStorage = function() {
@@ -812,7 +812,7 @@ export namespace Status {
 		this.turns--;
 		// Remove curse effect
 		if (this.turns <= 0) {
-			target.combatStatus.stats[StatusEffect.Curse] = null;
+			target.combatStatus.stats[StatusEffect.Curse] = undefined;
 		}
 	};
 

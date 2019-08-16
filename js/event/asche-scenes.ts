@@ -770,7 +770,7 @@ export namespace AscheScenes {
             }, enabled : true,
         });
 
-        Gui.SetButtonsFromList(options, false, null);
+        Gui.SetButtonsFromList(options, false, undefined);
     }
 
     export function MagicBoxPrompt() {
@@ -968,7 +968,7 @@ export namespace AscheScenes {
                     AscheScenes.MagicBoxRepeat();
                 }, enabled : true,
             });
-            Gui.SetButtonsFromList(options, false, null);
+            Gui.SetButtonsFromList(options, false, undefined);
         }, 1.0, () => true);
         scenes.AddEnc(() => {
             Text.Add("Pulling your arm out of the box, you find in your hand a rather thick novel, the cover art depicting a rather rugged and handsome jackal-morph caught in quite a suggestive position. A few moments spent flicking through its pages reveals that it’s a romance novel, the plot revolving around the jackal-morph, who swashbuckles his way through the hearts and beds of various women, with no small amount of highly descriptive ravishing on the side.", parse);
@@ -1003,7 +1003,7 @@ export namespace AscheScenes {
                     AscheScenes.MagicBoxRepeat();
                 }, enabled : true,
             });
-            Gui.SetButtonsFromList(options, false, null);
+            Gui.SetButtonsFromList(options, false, undefined);
         }, 1.0, () => true);
         scenes.AddEnc(() => {
             if (party.Inv().QueryNum(CombatItems.GlassSword) >= 3) {
@@ -1121,6 +1121,6 @@ export namespace AscheScenes {
                 AscheScenes.Prompt();
             }, enabled : true,
         });
-        Gui.SetButtonsFromList(options, false, null);
+        Gui.SetButtonsFromList(options, false, undefined);
     }
 }

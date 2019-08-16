@@ -211,7 +211,7 @@ BullTowerLoc.Courtyard.Yard.description = () => {
 // [Animal Pens][Caravan][Enter][Statue][Slip Out]
 BullTowerLoc.Courtyard.Yard.links.push(new Link(
 	"Enter tower", true, true,
-	null,
+	undefined,
 	() => {
 		const outlaws = GAME().outlaws;
 		MoveToLocation(BullTowerLoc.Building.Hall, {minute: 5});
@@ -220,7 +220,7 @@ BullTowerLoc.Courtyard.Yard.links.push(new Link(
 ));
 BullTowerLoc.Courtyard.Yard.links.push(new Link(
 	"Caravans", true, true,
-	null,
+	undefined,
 	() => {
 		const outlaws = GAME().outlaws;
 		MoveToLocation(BullTowerLoc.Courtyard.Caravans, {minute: 5});
@@ -229,7 +229,7 @@ BullTowerLoc.Courtyard.Yard.links.push(new Link(
 ));
 BullTowerLoc.Courtyard.Yard.links.push(new Link(
 	"Animal Pens", true, true,
-	null,
+	undefined,
 	() => {
 		const outlaws = GAME().outlaws;
 		MoveToLocation(BullTowerLoc.Courtyard.Pens, {minute: 5});
@@ -242,7 +242,7 @@ BullTowerLoc.Courtyard.Yard.events.push(new Link(
 		const outlaws = GAME().outlaws;
 		return !(outlaws.flags.BT & OutlawsFlags.BullTower.StatueDestroyed);
 	}, true,
-	null,
+	undefined,
 	() => {
 		const player = GAME().player;
 		const outlaws = GAME().outlaws;
@@ -319,13 +319,13 @@ BullTowerLoc.Courtyard.Yard.events.push(new Link(
 			}, enabled : true,
 			tooltip : "Nah, it can wait.",
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	},
 ));
 
 BullTowerLoc.Courtyard.Yard.links.push(new Link(
 	"Slip out", true, true,
-	null,
+	undefined,
 	() => {
 		const outlaws = GAME().outlaws;
 
@@ -358,7 +358,7 @@ BullTowerLoc.Courtyard.Yard.links.push(new Link(
 				}, enabled : true,
 				tooltip : "There’s still work to be done here.",
 			});
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		} else {
 			Text.Add("You look at the open archway and drawn portcullis. It’s true you could leave now, but you still haven’t accomplished what you set out to do. Retreat is not an option at this point, especially not with Cveta watching you and the fact that if you left now, you’d have a really hard time trying to explain things to Zenith.", parse);
 			Text.Flush();
@@ -389,7 +389,7 @@ BullTowerLoc.Courtyard.Caravans.description = () => {
 
 BullTowerLoc.Courtyard.Caravans.links.push(new Link(
 	"Courtyard", true, true,
-	null,
+	undefined,
 	() => {
 		const outlaws = GAME().outlaws;
 		MoveToLocation(BullTowerLoc.Courtyard.Yard, {minute: 5});
@@ -402,7 +402,7 @@ BullTowerLoc.Courtyard.Caravans.events.push(new Link(
 		const outlaws = GAME().outlaws;
 		return !(outlaws.BT.guardsDown);
 	}, true,
-	null,
+	undefined,
 	() => {
 		const player = GAME().player;
 		const outlaws = GAME().outlaws;
@@ -568,7 +568,7 @@ BullTowerLoc.Courtyard.Caravans.events.push(new Link(
 		const outlaws = GAME().outlaws;
 		return outlaws.BT.guardsDown;
 	},
-	null,
+	undefined,
 	() => {
 		const player = GAME().player;
 		const outlaws = GAME().outlaws;
@@ -602,7 +602,7 @@ BullTowerLoc.Courtyard.Caravans.events.push(new Link(
 		const outlaws = GAME().outlaws;
 		return outlaws.BT.guardsDown && !(outlaws.flags.BT & OutlawsFlags.BullTower.CaravansIgnited);
 	}, true,
-	null,
+	undefined,
 	() => {
 		const player = GAME().player;
 		const outlaws = GAME().outlaws;
@@ -663,7 +663,7 @@ BullTowerLoc.Courtyard.Caravans.events.push(new Link(
 			}, enabled : true,
 			tooltip : "It can wait for now.",
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	},
 ));
 
@@ -686,7 +686,7 @@ BullTowerLoc.Courtyard.Pens.description = () => {
 
 BullTowerLoc.Courtyard.Pens.links.push(new Link(
 	"Courtyard", true, true,
-	null,
+	undefined,
 	() => {
 		const outlaws = GAME().outlaws;
 		MoveToLocation(BullTowerLoc.Courtyard.Yard, {minute: 5});
@@ -699,7 +699,7 @@ BullTowerLoc.Courtyard.Pens.events.push(new Link(
 		const outlaws = GAME().outlaws;
 		return !(outlaws.flags.BT & OutlawsFlags.BullTower.AnimalsFreed);
 	}, true,
-	null,
+	undefined,
 	() => {
 		const outlaws = GAME().outlaws;
 		const parse: any = {
@@ -756,7 +756,7 @@ BullTowerLoc.Building.Hall.description = () => {
 // [Warehouse][Office][Watchtower][Cell][Courtyard]
 BullTowerLoc.Building.Hall.links.push(new Link(
 	"Courtyard", true, true,
-	null,
+	undefined,
 	() => {
 		const outlaws = GAME().outlaws;
 		MoveToLocation(BullTowerLoc.Courtyard.Yard, {minute: 5});
@@ -765,7 +765,7 @@ BullTowerLoc.Building.Hall.links.push(new Link(
 ));
 BullTowerLoc.Building.Hall.links.push(new Link(
 	"Warehouse", true, true,
-	null,
+	undefined,
 	() => {
 		const party: Party = GAME().party;
 		const outlaws = GAME().outlaws;
@@ -799,7 +799,7 @@ BullTowerLoc.Building.Hall.links.push(new Link(
 ));
 BullTowerLoc.Building.Hall.links.push(new Link(
 	"Office", true, true,
-	null,
+	undefined,
 	() => {
 		const outlaws = GAME().outlaws;
 		MoveToLocation(BullTowerLoc.Building.Office, {minute: 5});
@@ -808,7 +808,7 @@ BullTowerLoc.Building.Hall.links.push(new Link(
 ));
 BullTowerLoc.Building.Hall.links.push(new Link(
 	"Cell", true, true,
-	null,
+	undefined,
 	() => {
 		const outlaws = GAME().outlaws;
 		MoveToLocation(BullTowerLoc.Building.Cell, {minute: 5});
@@ -817,7 +817,7 @@ BullTowerLoc.Building.Hall.links.push(new Link(
 ));
 BullTowerLoc.Building.Hall.links.push(new Link(
 	"Tower", true, true,
-	null,
+	undefined,
 	() => {
 		const outlaws = GAME().outlaws;
 		MoveToLocation(BullTowerLoc.Building.Watchtower, {minute: 5});
@@ -946,7 +946,7 @@ BullTowerLoc.Building.Cell.onEntry = () => {
 			}, enabled : true,
 			tooltip : "Well, this is it, then. Time to do what you came here for.",
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	}
 };
 
@@ -966,7 +966,7 @@ BullTowerLoc.Building.Warehouse.description = () => {
 
 BullTowerLoc.Building.Warehouse.links.push(new Link(
 	"Hall", true, true,
-	null,
+	undefined,
 	() => {
 		const outlaws = GAME().outlaws;
 		MoveToLocation(BullTowerLoc.Building.Hall, {minute: 5});
@@ -979,7 +979,7 @@ BullTowerLoc.Building.Warehouse.events.push(new Link(
 		const outlaws = GAME().outlaws;
 		return !(outlaws.flags.BT & OutlawsFlags.BullTower.ContrabandStolen);
 	}, true,
-	null,
+	undefined,
 	() => {
 		const outlaws = GAME().outlaws;
 
@@ -1005,7 +1005,7 @@ BullTowerLoc.Building.Warehouse.events.push(new Link(
 		const outlaws = GAME().outlaws;
 		return !(outlaws.flags.BT & OutlawsFlags.BullTower.BlueRoses);
 	}, true,
-	null,
+	undefined,
 	() => {
 		const player = GAME().player;
 		const outlaws = GAME().outlaws;
@@ -1054,7 +1054,7 @@ BullTowerLoc.Building.Watchtower.description = () => {
 
 BullTowerLoc.Building.Watchtower.links.push(new Link(
 	"Hall", true, true,
-	null,
+	undefined,
 	() => {
 		const outlaws = GAME().outlaws;
 		MoveToLocation(BullTowerLoc.Building.Hall, {minute: 5});
@@ -1067,7 +1067,7 @@ BullTowerLoc.Building.Watchtower.events.push(new Link(
 		const outlaws = GAME().outlaws;
 		return !outlaws.BT.towerGuardDown;
 	}, true,
-	null,
+	undefined,
 	() => {
 		const player = GAME().player;
 		const outlaws = GAME().outlaws;
@@ -1146,7 +1146,7 @@ BullTowerLoc.Building.Watchtower.events.push(new Link(
 		const outlaws = GAME().outlaws;
 		return outlaws.BT.towerGuardDown && !outlaws.BT.stoleLantern;
 	}, true,
-	null,
+	undefined,
 	() => {
 		const outlaws = GAME().outlaws;
 		const parse: any = {
@@ -1183,7 +1183,7 @@ BullTowerLoc.Building.Office.description = () => {
 
 BullTowerLoc.Building.Office.links.push(new Link(
 	"Hall", true, true,
-	null,
+	undefined,
 	() => {
 		const outlaws = GAME().outlaws;
 		MoveToLocation(BullTowerLoc.Building.Hall, {minute: 5});
@@ -1196,7 +1196,7 @@ BullTowerLoc.Building.Office.events.push(new Link(
 		const outlaws = GAME().outlaws;
 		return !(outlaws.flags.BT & OutlawsFlags.BullTower.SafeLooted);
 	}, true,
-	null,
+	undefined,
 	() => {
 		const parse: any = {
 
@@ -1445,7 +1445,7 @@ export namespace BullTowerScenes {
 			}, enabled : true,
 			tooltip : "You’re about done here.",
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	}
 
 	export function MovingOut() {
@@ -1585,7 +1585,7 @@ export namespace BullTowerScenes {
 			}, enabled : true,
 			tooltip : "You’re as ready as you’ll ever be.",
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	}
 
 	export function GuardsWin() {
@@ -1727,7 +1727,7 @@ export namespace BullTowerScenes {
 				}, enabled : true,
 				tooltip : "Get out of here before things get any worse.",
 			});
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		});
 		Encounter.prototype.onVictory.call(enc);
 	}
@@ -1747,7 +1747,7 @@ export namespace BullTowerScenes {
 	export function CorishevFuck(corishev: Corishev) {
 		const player = GAME().player;
 
-		const p1cock = player.BiggestCock(null, true);
+		const p1cock = player.BiggestCock(undefined, true);
 
 		let parse: any = {
 			playername : player.name,
@@ -1933,7 +1933,7 @@ export namespace BullTowerScenes {
 			}, enabled : true,
 			tooltip : "Nah, now’s not the time to be doing this.",
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	}
 
 	export function SafePrompt() {

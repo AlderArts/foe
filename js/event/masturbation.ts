@@ -68,7 +68,7 @@ MasturbationScenes.Entry = () => {
 				tooltip : "",
 				func() {
 					if (optsTc.length >= 2) {
-						Gui.SetButtonsFromList(optsTc, false, null);
+						Gui.SetButtonsFromList(optsTc, false, undefined);
 					} else {
 						optsTc[0].func(optsTc[0].obj);
 					}
@@ -118,7 +118,7 @@ MasturbationScenes.Entry = () => {
 			options.push({ nameStr : "Vag - toys",
 				tooltip : "",
 				func() {
-					Gui.SetButtonsFromList(optsTv, false, null);
+					Gui.SetButtonsFromList(optsTv, false, undefined);
 				}, enabled : !taur && toyAvailable,
 			});
 		}
@@ -174,7 +174,7 @@ MasturbationScenes.Entry = () => {
 		options.push({ nameStr : "Anal - toys",
 			tooltip : "",
 			func() {
-				Gui.SetButtonsFromList(optsTa, false, null);
+				Gui.SetButtonsFromList(optsTa, false, undefined);
 			}, enabled : !taur && toyAvailable,
 		});
 	}

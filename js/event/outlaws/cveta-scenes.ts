@@ -133,7 +133,7 @@ export namespace CvetaScenes {
 			}, enabled : true,
 			tooltip : "You’re a little busy right now. Can it wait?",
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	}
 
 	export function ViolinPrompt() {
@@ -208,7 +208,7 @@ export namespace CvetaScenes {
 			}, enabled : true,
 			tooltip : "You haven’t had the opportunity to enter Rigard yet and get it for her.",
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	}
 
 	export function Approach() {
@@ -334,8 +334,8 @@ export namespace CvetaScenes {
 			playername : player.name,
 		};
 
-		let bardAvailable: Entity = null;
-		let singerAvailable: Entity = null;
+		let bardAvailable: Entity;
+		let singerAvailable: Entity;
 		for (let i = party.Num() - 1; i >= 0; i--) {
 			const p = party.Get(i);
 			const bard   = p.jobs.Bard;
@@ -708,7 +708,7 @@ export namespace CvetaScenes {
 			}, enabled : true,
 			tooltip : "Help Cveta take good care of those delicate and sensitive wings of hers.",
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	}
 
 	export function TalkPrompt() {
@@ -751,7 +751,7 @@ export namespace CvetaScenes {
 					}, enabled : true,
 					tooltip : "You’ve had better days.",
 				});
-				Gui.SetButtonsFromList(options, false, null);
+				Gui.SetButtonsFromList(options, false, undefined);
 			}, enabled : true,
 			tooltip : "Ask how Cveta is doing.",
 		});
@@ -948,7 +948,7 @@ export namespace CvetaScenes {
 
 						CvetaScenes.HerselfPrompt();
 					});
-					Gui.SetButtonsFromList(options, false, null);
+					Gui.SetButtonsFromList(options, false, undefined);
 				}, enabled : true,
 				tooltip : "Ask Cveta about her curious ideas on nobility.",
 			});
@@ -1338,7 +1338,7 @@ export namespace CvetaScenes {
 							}, enabled : true,
 							tooltip : "Tell the truth, but be diplomatic about it.",
 						});
-						Gui.SetButtonsFromList(options, false, null);
+						Gui.SetButtonsFromList(options, false, undefined);
 					}, 1.0, () => true);
 					scenes.AddEnc(() => {
 						Text.Add("Cveta goes about today’s practice slowly and methodically, easing her way into the music like someone into a particularly stiff set of new clothes. Fingering the strings, easing the bow, she carefully draws out each note of what sounds like a funeral march. The bird-morph is definitely in the mood for sad things today; the languid music creeping from the violin strings being always in one minor key or the other. You cast a glance at her, wondering if this choice of pieces was simply a flight of fancy or indicative of some deeper emotion.", parse);
@@ -1384,7 +1384,7 @@ export namespace CvetaScenes {
 							}, enabled : true,
 							tooltip : "If she’s feeling out of sorts, she’ll want to keep it to herself. Respect her privacy and let her be.",
 						});
-						Gui.SetButtonsFromList(options, false, null);
+						Gui.SetButtonsFromList(options, false, undefined);
 						Gui.Callstack.push(() => {
 							Text.Add("<i>“Well.”</i> she says, assuming her usual pleasant demeanor as the melancholy mood lifts from her like mist with the sun. <i>“It was not the most jovial of pieces I could come up with, but it takes all kinds to make a world. Without sorrow, we would not be equipped to appreciate joy; without pain, pleasure would be meaningless.”</i>", parse);
 							Text.NL();
@@ -1484,7 +1484,7 @@ export namespace CvetaScenes {
 			}, enabled : true,
 			tooltip : "If Maria doesn't have the time, then neither do you.",
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	}
 
 	export function MariaTalkRepeat() {
@@ -1691,12 +1691,12 @@ export namespace CvetaScenes {
 						}, enabled : true,
 						tooltip : "Refuse to tell Cveta Maria sent you.",
 					});
-					Gui.SetButtonsFromList(options, false, null);
+					Gui.SetButtonsFromList(options, false, undefined);
 				}, enabled : true,
 				tooltip : "This clearly isn't going anywhere. Cveta clearly isn't the chatty sort, and you're beating your head against a brick wall.",
 			});
 		}
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	}
 
 	export function FirstMeetingCont() {
@@ -1886,7 +1886,7 @@ export namespace CvetaScenes {
 			Text.Add("A light breeze has picked up in the camp, and your gaze wanders back to Cveta. The songstress is huddled in on herself as she plays, and your eyes are drawn to the ruffled beauty of her vermillion feathers, the flow of her gown, and those long, dexterous fingers working away with both strings and pick, fingers that could easily be put to much, much better use…", parse);
 			Text.NL();
 			if (party.InParty(kiakai) || party.InParty(terry) || party.InParty(momo)) {
-				let comp: Entity = null;
+				let comp: Entity;
 				const scenes = new EncounterTable();
 				scenes.AddEnc(() => {
 					comp = kiakai;
@@ -2255,7 +2255,7 @@ export namespace CvetaScenes {
 			Gui.NextPrompt();
 		});
 
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	}
 
 	export function IntimatePrompt() {
@@ -2514,7 +2514,7 @@ export namespace CvetaScenes {
 				Gui.NextPrompt();
 			}, enabled : true,
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	}
 
 }

@@ -1,7 +1,7 @@
 
-let curEncounter: any = null;
-let enemyParty: any = null;
-let currentActiveChar: any = null;
+let curEncounter: any;
+let enemyParty: any;
+let currentActiveChar: any;
 
 export function SetCurEncounter(enc: any) {
     curEncounter = enc;

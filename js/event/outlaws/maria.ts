@@ -129,16 +129,16 @@ export class Maria extends Entity {
 		if (this.HPLevel() < 0.3 && this.pots > 0) {
 			this.pots--;
 			CombatItems.HPotion.combat.Use(encounter, this, this);
-		} else if (choice < 0.2 && Abilities.Physical.SetTrap.enabledCondition(encounter, this) && trap == null) {
+		} else if (choice < 0.2 && Abilities.Physical.SetTrap.enabledCondition(encounter, this) && trap === undefined) {
 			Abilities.Physical.SetTrap.Use(encounter, this);
- } else if (choice < 0.4 && Abilities.Physical.Hamstring.enabledCondition(encounter, this)) {
+ 		} else if (choice < 0.4 && Abilities.Physical.Hamstring.enabledCondition(encounter, this)) {
 			Abilities.Physical.Hamstring.Use(encounter, this, t);
- } else if (choice < 0.6 && Abilities.Physical.FocusStrike.enabledCondition(encounter, this)) {
+ 		} else if (choice < 0.6 && Abilities.Physical.FocusStrike.enabledCondition(encounter, this)) {
 			Abilities.Physical.FocusStrike.Use(encounter, this, t);
- } else if (choice < 0.8 && Abilities.Physical.Ensnare.enabledCondition(encounter, this)) {
+ 		} else if (choice < 0.8 && Abilities.Physical.Ensnare.enabledCondition(encounter, this)) {
 			Abilities.Physical.Ensnare.Use(encounter, this, t);
- } else {
+ 		} else {
 			Abilities.Attack.Use(encounter, this, t);
- }
+ 		}
 	}
 }

@@ -27,7 +27,6 @@ export class Cock extends BodyPart {
 		this.thickness = new Stat(3);
 		this.length    = new Stat(12);
 		this.type      = CockType.ordinary;
-		this.vag       = null; // For clitcock
 		this.knot      = 0;
 		this.isStrapon = false;
 	}

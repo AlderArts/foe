@@ -171,7 +171,7 @@ export namespace LeiSexScenes {
 			Gui.NextPrompt();
 		});
 
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	}
 
 }

@@ -34,11 +34,11 @@ export namespace JeanneScenes {
 
         if (GetDEBUG()) {
             Text.NL();
-            Text.Add("DEBUG: relation: " + jeanne.relation.Get(), null, "bold");
+            Text.Add("DEBUG: relation: " + jeanne.relation.Get(), undefined, "bold");
             Text.NL();
-            Text.Add("DEBUG: subDom: " + jeanne.subDom.Get(), null, "bold");
+            Text.Add("DEBUG: subDom: " + jeanne.subDom.Get(), undefined, "bold");
             Text.NL();
-            Text.Add("DEBUG: slut: " + jeanne.slut.Get(), null, "bold");
+            Text.Add("DEBUG: slut: " + jeanne.slut.Get(), undefined, "bold");
             Text.NL();
         }
 

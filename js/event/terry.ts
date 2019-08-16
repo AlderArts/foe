@@ -153,8 +153,8 @@ export class Terry extends Entity {
 		if (this.flags.Met >= TerryFlags.Met.Caught || this.Recruited()) {
 			this.name = "Terry";
 			this.avatar.combat = Images.terry_c;
-			this.monsterName = null;
-			this.MonsterName = null;
+			this.monsterName = undefined;
+			this.MonsterName = undefined;
 		}
 	}
 
@@ -333,9 +333,9 @@ export class Terry extends Entity {
 
 		if (GetDEBUG()) {
 			Text.NL();
-			Text.Add("DEBUG: relation: " + terry.Relation(), null, "bold");
+			Text.Add("DEBUG: relation: " + terry.Relation(), undefined, "bold");
 			Text.NL();
-			Text.Add("DEBUG: slut: " + terry.Slut(), null, "bold");
+			Text.Add("DEBUG: slut: " + terry.Slut(), undefined, "bold");
 		}
 		Text.Flush();
 

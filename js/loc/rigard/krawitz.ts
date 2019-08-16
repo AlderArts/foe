@@ -58,7 +58,7 @@ KrawitzScenes.SetupStats = () => {
 
 	KrawitzScenes.stat = {};
 
-	rigard.KrawitzWorkDay = null;
+	rigard.KrawitzWorkDay = undefined;
 
 	KrawitzScenes.stat.IsServant         = rigard.Krawitz.Work === 2;
 	KrawitzScenes.stat.HasServantClothes = KrawitzScenes.stat.IsServant;
@@ -144,7 +144,7 @@ KrawitzLoc.Street.onEntry = () => {
 
 KrawitzLoc.Street.links.push(new Link(
 	"Plaza", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(WORLD().loc.Rigard.Plaza, {minute: 10});
 	},
@@ -203,7 +203,7 @@ KrawitzLoc.Grounds.onEntry = () => {
 
 KrawitzLoc.Grounds.links.push(new Link(
 	"Servants'", true, true,
-	null,
+	undefined,
 	() => {
 		const player = GAME().player;
 		const party: Party = GAME().party;
@@ -372,7 +372,7 @@ KrawitzLoc.Grounds.links.push(new Link(
 					tooltip : "Stay for a while longer.",
 				});
 				Gui.SetButtonsFromList(options);
-			}, true, null, "You’ve caused enough trouble for one night, time to call it quits. You won’t be able to return again as people will be a lot more suspicious of newcomers now.");
+			}, true, undefined, "You’ve caused enough trouble for one night, time to call it quits. You won’t be able to return again as people will be a lot more suspicious of newcomers now.");
 		};
 		if (!KrawitzScenes.stat.HasServantClothes) {
 			KrawitzScenes.StealingClothes();
@@ -383,7 +383,7 @@ KrawitzLoc.Grounds.links.push(new Link(
 ));
 KrawitzLoc.Grounds.links.push(new Link(
 	"Mansion", true, true,
-	null,
+	undefined,
 	() => {
 		Text.Clear();
 		if (!KrawitzScenes.stat.MansionVisit) {
@@ -405,7 +405,7 @@ KrawitzLoc.Grounds.links.push(new Link(
 ));
 KrawitzLoc.Grounds.links.push(new Link(
 	"Bathhouse", true, () => !KrawitzScenes.stat.Orgy,
-	null,
+	undefined,
 	() => { KrawitzScenes.Bathhouse(); },
 ));
 KrawitzLoc.Grounds.links.push(new Link(
@@ -471,7 +471,7 @@ KrawitzLoc.Mansion.Hall.links.push(new Link(
 ));
 KrawitzLoc.Mansion.Hall.links.push(new Link(
 	"Kitchen", true, true,
-	null,
+	undefined,
 	() => {
 		const party: Party = GAME().party;
 
@@ -811,7 +811,7 @@ KrawitzLoc.Mansion.Storeroom.description = () => {
 
 KrawitzLoc.Mansion.Storeroom.links.push(new Link(
 	"Hall", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(KrawitzLoc.Mansion.Hall);
 	},
@@ -819,7 +819,7 @@ KrawitzLoc.Mansion.Storeroom.links.push(new Link(
 
 KrawitzLoc.Mansion.Storeroom.events.push(new Link(
 	"Cabinet", () => !KrawitzScenes.stat.LustPotion, true,
-	null,
+	undefined,
 	() => {
 		const player = GAME().player;
 
@@ -847,7 +847,7 @@ KrawitzLoc.Mansion.Storeroom.events.push(new Link(
 		const player = GAME().player;
 		return !KrawitzScenes.stat.TFItem && (KrawitzScenes.stat.ChestLocKnown || player.Int() > 40);
 	}, true,
-	null,
+	undefined,
 	() => {
 		KrawitzScenes.stat.TFItem = true;
 		Text.Clear();
@@ -872,7 +872,7 @@ KrawitzLoc.Mansion.Study.description = () => {
 
 KrawitzLoc.Mansion.Study.links.push(new Link(
 	"Hall", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(KrawitzLoc.Mansion.Hall, {minute: 10});
 	},
@@ -880,7 +880,7 @@ KrawitzLoc.Mansion.Study.links.push(new Link(
 
 KrawitzLoc.Mansion.Study.events.push(new Link(
 	"Sword", () => !KrawitzScenes.stat.HasSword, true,
-	null,
+	undefined,
 	() => {
 		Text.Clear();
 		Text.Add("You take the opportunity to take Krawitz’ prized sword, hiding it in your pack. The old man will surely feel this loss.");
@@ -891,7 +891,7 @@ KrawitzLoc.Mansion.Study.events.push(new Link(
 ));
 KrawitzLoc.Mansion.Study.events.push(new Link(
 	"Binder", () => !KrawitzScenes.stat.HasBinder, true,
-	null,
+	undefined,
 	() => {
 		Text.Clear();
 		Text.Add("You grab the binder of documents from the table, glancing through them briefly before pocketing them. They seem to be records of financial transactions, and while you don’t recognize the names of the various companies and individuals, the numbers make your eyes widen slightly.");
@@ -1011,7 +1011,7 @@ KrawitzScenes.WorkWork = () => {
 		Text.Flush();
 		Gui.NextPrompt();
 	} else if (rigard.KrawitzWorkDay.Leq(WorldTime())) { // Late
-		rigard.KrawitzWorkDay = null;
+		rigard.KrawitzWorkDay = undefined;
 		Text.Add("<i>“And what do you think you are doing here?”</i> the old manservant greets you gruffly. <i>“I don’t have any use for people who can’t keep track of time.”</i> Before you can mouth an excuse, he curtly dismisses you, locking the door behind him as he returns inside the estate.", parse);
 		Text.NL();
 		Text.Add("<b>It seems you lost your chance on this one. You should try to get in some other way.</b>", parse);
@@ -1688,7 +1688,7 @@ KrawitzScenes.Bathhouse = () => {
 	};
 	parse = player.ParserTags(parse);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
-	parse = Text.ParserPlural(parse, player.NumCocks() > 2, null, "2");
+	parse = Text.ParserPlural(parse, player.NumCocks() > 2, undefined, "2");
 
 	const humanity = player.Humanity();
 
@@ -1867,7 +1867,7 @@ KrawitzScenes.Bathhouse = () => {
 								Text.NL();
 
 								player.Fuck(player.FirstCock(), 2);
-								Sex.Blowjob(null, player);
+								Sex.Blowjob(undefined, player);
 							}
 							if (player.FirstVag()) {
 								Text.Add("Lady Krawitz gives your [vag] a long lick with her dainty tongue, sighing blissfully as she tastes you. She places her hands on your hips, holding you in place as if she’s afraid you might suddenly run away, unwilling to let as much as a drop of your juices escape her predatory lapping.", parse);
@@ -1881,7 +1881,7 @@ KrawitzScenes.Bathhouse = () => {
 								Text.NL();
 
 								player.Fuck(player.FirstCock(), 2);
-								Sex.Cunnilingus(null, player);
+								Sex.Cunnilingus(undefined, player);
 							}
 							Text.Add("You sigh contentedly as both of the Krawitz ladies work your nethers, hands and tongues exploring every nook and cranny of your aroused body. You lean down and pat their heads, commending them for being such good sluts, telling them how pleased Lord Krawitz would be if he saw them now.", parse);
 							if (KrawitzScenes.stat.TFdKrawitz) {
@@ -1895,7 +1895,7 @@ KrawitzScenes.Bathhouse = () => {
 								Text.Clear();
 
 								player.Fuck(playerCock, 10);
-								Sex.Vaginal(player, null);
+								Sex.Vaginal(player, undefined);
 
 								Text.Add("Well, time to move on to the main course. ", parse);
 								if (player.FirstCock()) {
@@ -1920,7 +1920,7 @@ KrawitzScenes.Bathhouse = () => {
 								Text.NL();
 								if (player.NumCocks() > 1) {
 									player.Fuck(player.AllCocks()[1], 10);
-									Sex.Vaginal(player, null);
+									Sex.Vaginal(player, undefined);
 
 									Text.Add("Krawitz’ wife doesn’t tarry in mounting[oneof2] your remaining cock[s2], hugging her stepdaughter tightly as she impales herself on your [cock2]. The two women moan in ecstasy as they bounce in time on top of you, their breasts mashing against each other as stepmother and stepdaughter lock lips.", parse);
 									Text.NL();
@@ -2151,7 +2151,7 @@ KrawitzScenes.Aftermath = () => {
 									}, enabled : true,
 									tooltip : "Time you both were getting inside the inn.",
 								});
-								Gui.SetButtonsFromList(options, false, null);
+								Gui.SetButtonsFromList(options, false, undefined);
 
 								Gui.Callstack.push(() => {
 									Text.Add("With the package taking up both hands, you ask her to mind the door, and step inside the inn as she holds it open for you.", parse);
@@ -2184,7 +2184,7 @@ KrawitzScenes.Aftermath = () => {
 							}, enabled : true,
 							tooltip : "You don’t want to pry, so you resolve to remain silent.",
 						});
-						Gui.SetButtonsFromList(options, false, null);
+						Gui.SetButtonsFromList(options, false, undefined);
 					}, enabled : true,
 					tooltip : "You can't just let her brush you off that easily; she really does look like she needs help.",
 				});
@@ -2215,7 +2215,7 @@ KrawitzScenes.Aftermath = () => {
 					}, enabled : true,
 					tooltip : "Alright, if that's how she wants it. You may as well go on in ahead of her.",
 				});
-				Gui.SetButtonsFromList(options, false, null);
+				Gui.SetButtonsFromList(options, false, undefined);
 
 			}, enabled : true,
 			tooltip : "The poor thing's clearly struggling with that load of hers; why not ask if you can help her?",
@@ -2231,7 +2231,7 @@ KrawitzScenes.Aftermath = () => {
 			}, enabled : true,
 			tooltip : "What she does in her own time is none of your business. Bid farewell and get on with your <b>own</b> business.",
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 
 		Gui.Callstack.push(() => {
 			party.location = world.loc.Rigard.Inn.penthouse;

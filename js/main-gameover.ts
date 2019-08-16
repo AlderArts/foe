@@ -9,7 +9,7 @@ export function InitGameOver(splashScreen: any) {
 export function SetGameOverButton(text?: any) {
 	text = text || "This is where your journey comes to an end.";
 	Gui.ClearButtons();
-	Input.buttons[0].Setup("Game Over", GameOver, true, null, text);
+	Input.buttons[0].Setup("Game Over", GameOver, true, undefined, text);
 }
 
 // TODO: Stats, newgame+ etc

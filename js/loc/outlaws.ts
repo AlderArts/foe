@@ -42,7 +42,7 @@ OutlawsLoc.Camp.description = () => {
 
 	if (GetDEBUG()) {
 		Text.NL();
-		Text.Add("DEBUG: Outlaws rep: " + outlaws.Rep(), null, "bold");
+		Text.Add("DEBUG: Outlaws rep: " + outlaws.Rep(), undefined, "bold");
 		Text.NL();
 	}
 };
@@ -74,7 +74,7 @@ OutlawsLoc.Camp.onEntry = () => {
 
 OutlawsLoc.Camp.links.push(new Link(
 	"Forest", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(WORLD().loc.Forest.Outskirts, {hour: 1});
 	},
@@ -82,7 +82,7 @@ OutlawsLoc.Camp.links.push(new Link(
 
 OutlawsLoc.Camp.links.push(new Link(
 	"Infirmary", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(OutlawsLoc.Infirmary, {minute: 5});
 	},
@@ -93,7 +93,7 @@ OutlawsLoc.Camp.links.push(new Link(
 		const outlaws = GAME().outlaws;
 		return outlaws.flags.BullTower === OutlawsFlags.BullTowerQuest.Initiated;
 	}, true,
-	null,
+	undefined,
 	() => {
 		BullTowerScenes.MovingOut();
 	},
@@ -155,7 +155,7 @@ OutlawsLoc.Camp.events.push(new Link(
 		const time = cveta.PerformanceTime();
 		return met && time;
 	}, true,
-	null,
+	undefined,
 	() => {
 		CvetaScenes.Performance();
 	},
@@ -243,7 +243,7 @@ OutlawsLoc.Infirmary.onEntry = () => {
 
 OutlawsLoc.Infirmary.links.push(new Link(
 	"Outside", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(OutlawsLoc.Camp, {minute: 5});
 	},
@@ -253,7 +253,7 @@ OutlawsLoc.Infirmary.events.push(new Link(
 	"Aquilius", () => {
 		return GAME().aquilius.IsAtLocation();
 	}, true,
-	null,
+	undefined,
 	() => {
 		AquiliusScenes.Approach();
 	},

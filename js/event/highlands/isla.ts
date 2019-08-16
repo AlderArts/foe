@@ -282,7 +282,7 @@ export namespace IslaScenes {
 			});
 		});
 
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	}
 
 	export function Approach() {
@@ -1088,9 +1088,9 @@ export namespace IslaScenes {
 			const isla = GAME().isla;
 			const world = WORLD();
 
-			const p1cock = player.BiggestCock(null, true);
-			const strapon = p1cock ? p1cock.isStrapon : null;
-			const knot = p1cock ? p1cock.Knot() : null;
+			const p1cock = player.BiggestCock(undefined, true);
+			const strapon = p1cock ? p1cock.isStrapon : undefined;
+			const knot = p1cock ? p1cock.Knot() : undefined;
 
 			let parse: any = {
 				playername : player.name,
@@ -1283,8 +1283,8 @@ export namespace IslaScenes {
 				Text.Add("<i>“B-but-”</i> the sable-morph begins, but is cut off by you bunching your fingers together and moving to slide your entire hand into her widened gash. Isla bites back a cry as her virgin insides struggle to take the strain, testing the limits of their stretchiness as your entire fist invades her cunt, your wrist grinding against her increasingly heat-swollen lips and rigid love-button.", parse);
 				Text.NL();
 
-				isla.FuckVag(isla.FirstVag(), null, 5);
-				player.Fuck(null, 5);
+				isla.FuckVag(isla.FirstVag(), undefined, 5);
+				player.Fuck(undefined, 5);
 
 				Text.Add("It wouldn’t hurt so much if she were more accommodating, but that’s her prerogative. As before, you begin feeling out Isla’s slick insides, your fingers spreading out and exploring those wet, heated walls. Impaled as she is on your forearm, the sable-morph herself makes little squeaking noises and wriggles atop your wrist as her delicate insides react to your presence.", parse);
 				Text.NL();
@@ -1413,7 +1413,7 @@ export namespace IslaScenes {
 
 		export function Prompt() {
 			const player = GAME().player;
-			const p1cock = player.BiggestCock(null, true);
+			const p1cock = player.BiggestCock(undefined, true);
 
 			const parse: any = {
 
@@ -1438,9 +1438,9 @@ export namespace IslaScenes {
 			const player = GAME().player;
 			const isla = GAME().isla;
 
-			const p1cock = player.BiggestCock(null, true);
-			const strapon = p1cock ? p1cock.isStrapon : null;
-			const knot = p1cock ? p1cock.Knot() : null;
+			const p1cock = player.BiggestCock(undefined, true);
+			const strapon = p1cock ? p1cock.isStrapon : undefined;
+			const knot = p1cock ? p1cock.Knot() : undefined;
 
 			let parse: any = {
 				playername : player.name,
@@ -1577,7 +1577,7 @@ export namespace IslaScenes {
 					IslaScenes.IslaSex.PitchVaginalUnder(parse, opts);
 				}, enabled : true,
 			});
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		}
 
 		export function PitchVaginalUnder(parse: any, opts: any) {

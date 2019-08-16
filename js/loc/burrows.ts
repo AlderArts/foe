@@ -87,7 +87,7 @@ export class Burrows {
 	}
 
 	public GenerateLagomorph(gender?: Gender) {
-		if (gender == null) {
+		if (gender === undefined) {
 			const scenes = new EncounterTable();
 			scenes.AddEnc(() => {
 				gender = Gender.male;
@@ -102,7 +102,7 @@ export class Burrows {
 	}
 
 	public GenerateLagomorphAlpha(gender?: Gender) {
-		if (gender == null) {
+		if (gender === undefined) {
 			const scenes = new EncounterTable();
 			scenes.AddEnc(() => {
 				gender = Gender.male;

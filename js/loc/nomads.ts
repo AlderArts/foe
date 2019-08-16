@@ -83,7 +83,7 @@ MazeTest.AddRoom(1, 1);
 // TODO TEST
 NomadsLoc.Tent.links.push(new Link(
 	"Maze", () => GetDEBUG(), true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(MazeTest.GetRoom(3, 3));
 	},
@@ -284,7 +284,7 @@ NomadsLoc.Fireplace.events.push(new Link(
 
 		return Halloween.IsSeason();
 	}, true,
-	null,
+	undefined,
 	() => {
 		HalloweenScenes.PumpkinPie();
 	},

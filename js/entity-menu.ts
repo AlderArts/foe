@@ -1,3 +1,5 @@
+import * as _ from "lodash";
+
 import { Images } from "./assets";
 import { GAME } from "./GAME";
 import { Gui } from "./gui";
@@ -18,7 +20,7 @@ const EntityMenu = {
 			func() {
 				that.LevelUpPrompt(that.Interact);
 			}, enabled : enableStats,
-			image : that.pendingStatPoints !== 0 ? Images.imgButtonEnabled2 : null,
+			image : that.pendingStatPoints !== 0 ? Images.imgButtonEnabled2 : undefined,
 		});
 		options.push({ nameStr: "Job",
 			func() {
@@ -91,7 +93,7 @@ const EntityMenu = {
 		Text.NL();
 
 		if (this.currentJob) {
-			Text.Add("Job abilities:<br>", null, "bold");
+			Text.Add("Job abilities:<br>", undefined, "bold");
 			const abSet = this.currentJob.abilities;
 
 			for (const ability of abSet.AbilitySet) {
@@ -100,15 +102,13 @@ const EntityMenu = {
 			}
 			Text.Add("<br>");
 		}
-		Text.Add("Known abilities:<br>", null, "bold");
-		for (const set of this.abilities) {
-			const abSet = this.abilities[set];
-
+		Text.Add("Known abilities:<br>", undefined, "bold");
+		_.forIn(this.abilities, (abSet, key) => {
 			for (const ability of abSet.AbilitySet) {
 				Text.Add("[ability] ([cost]): [desc]<br>",
 					{ability: ability.name, cost: ability.CostStr(), desc: ability.Short()});
 			}
-		}
+		});
 
 		Text.Flush();
 
@@ -199,13 +199,13 @@ const EntityMenu = {
 
 			const slotFunc = (slotname: string, slot: Item) => {
 				// Text.AddDiv("<hr>");
-				Text.AddDiv(slotname, null, "itemTypeHeader");
+				Text.AddDiv(slotname, undefined, "itemTypeHeader");
 				// Text.AddDiv("<hr>");
 				if (slot) {
-					Text.AddDiv(slot.name, null, "itemSubtypeHeader");
-					Text.AddDiv(slot.Short(), null, "itemName");
+					Text.AddDiv(slot.name, undefined, "itemSubtypeHeader");
+					Text.AddDiv(slot.Short(), undefined, "itemName");
 				} else {
-					Text.AddDiv("None", null, "itemSubtypeHeader");
+					Text.AddDiv("None", undefined, "itemSubtypeHeader");
 				}
 			};
 
@@ -220,14 +220,14 @@ const EntityMenu = {
 			Text.Flush();
 
 			const slotFunc2 = (slotname: string, slot?: Item) => {
-				Text.AddDiv(slotname, null, "itemTypeHeader");
+				Text.AddDiv(slotname, undefined, "itemTypeHeader");
 				Text.AddDiv("<hr>");
 				Text.Add("[name] [isAre] currently equipped with:", parse);
 				Text.AddDiv("<hr>");
 				if (slot) {
 					slot.ShowEquipStats();
 				} else {
-					Text.AddDiv("None", null, "itemSubtypeHeader");
+					Text.AddDiv("None", undefined, "itemSubtypeHeader");
 				}
 			};
 
@@ -314,7 +314,7 @@ const EntityMenu = {
 		const that = this;
 		Text.Clear();
 		// Fallback for bugs
-		if (this.currentJob === null) {
+		if (this.currentJob === undefined) {
 			Text.Add("ERROR, NO ACTIVE JOB");
 			Text.Flush();
 			Gui.NextPrompt(backfunc);
@@ -322,7 +322,7 @@ const EntityMenu = {
 		}
 
 		const jd  = this.jobs[this.currentJob.name];
-		if (jd === null) {
+		if (jd === undefined) {
 			Text.Add("ERROR, NO JOB DESCRIPTOR");
 			Text.Flush();
 			Gui.NextPrompt(backfunc);
@@ -360,12 +360,10 @@ const EntityMenu = {
 		Text.NL();
 		Text.Add("Available jobs:<br>");
 
-		const options = [];
+		const options: any[] = [];
 
-		for (const jobName of this.jobs) {
-			const jd = this.jobs[jobName];
-
-			if (!jd.job.Unlocked(this)) { continue; }
+		_.forIn (this.jobs, (jd, key) => {
+			if (!jd.job.Unlocked(this)) { return; }
 
 			parse.job = jd.job.Short(this);
 			parse.lvl = jd.level;
@@ -408,7 +406,7 @@ const EntityMenu = {
 				obj : jd.job,
 				tooltip : jd.job.Long ? jd.job.Long(this) : "",
 			});
-		}
+		});
 
 		Text.Flush();
 

@@ -582,7 +582,7 @@ testos.PushEffect((target: Entity) => {
 				vags.splice(randVag, 1);
 				// Clear clitcock
 				if (vag.clitCock) {
-					vag.clitCock.vag = null;
+					vag.clitCock.vag = undefined;
 				}
 				if (vags.length > 0) {
 					Text.Add("[Name] loses one of [hisher] cunts!", parse);
@@ -679,7 +679,7 @@ estros.PushEffect((target: Entity) => {
 			cocks.splice(randCock, 1);
 			// Clear clitcock
 			if (cock.vag) {
-				cock.vag.clitCock = null;
+				cock.vag.clitCock = undefined;
 			}
 			if (cocks.length > 0) {
 				Text.Add("[Name] loses one of [hisher] cocks!", parse);

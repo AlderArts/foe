@@ -121,7 +121,7 @@ ChiefScenes.Interact = () => {
 
 		if (GetDEBUG()) {
 			Text.NL();
-			Text.Add("DEBUG: rep: " + chief.relation.Get(), null, "bold");
+			Text.Add("DEBUG: rep: " + chief.relation.Get(), undefined, "bold");
 			Text.NL();
 		}
 		Text.Flush();

@@ -189,7 +189,7 @@ export namespace LagonScenes {
                         }, enabled : true,
                         tooltip : "On second thought...",
                     });
-                    Gui.SetButtonsFromList(options, false, null);
+                    Gui.SetButtonsFromList(options, false, undefined);
                 }, enabled : true,
                 tooltip : "Lagon’s reign has gone on long enough! Scepter or no scepter, he’s going down!",
             });
@@ -543,7 +543,7 @@ export namespace LagonScenes {
             }, enabled : true,
             tooltip : "You want more than this! Beg for him to take you, to fuck you raw until you’re swollen from his cum!",
         });
-        Gui.SetButtonsFromList(options, false, null);
+        Gui.SetButtonsFromList(options, false, undefined);
     }
 
     export function RulerBlowjobSwallowEntrypoint(opheliaPresent: boolean) {
@@ -1100,7 +1100,7 @@ export namespace LagonScenes {
             }, enabled : true,
             tooltip : "You… ah, you really have to pass.",
         });
-        Gui.SetButtonsFromList(options, false, null);
+        Gui.SetButtonsFromList(options, false, undefined);
     }
 
     export function RulerTalkPrompt() {
@@ -1285,7 +1285,7 @@ export namespace LagonScenes {
                     }, enabled : !burrows.LagonAlly(),
                     tooltip : "That’s not how he should treat his wife.",
                 });
-                Gui.SetButtonsFromList(options, false, null);
+                Gui.SetButtonsFromList(options, false, undefined);
             }, enabled : true,
             tooltip : "Ask him about his mate, Vena.",
         });
@@ -1455,11 +1455,11 @@ export namespace LagonScenes {
                                     }, enabled : true,
                                     tooltip : player.Slut() < 75 ? "You really want that scepter." : "Scepter or not, that proposal sounds really enticing...",
                                 });
-                                Gui.SetButtonsFromList(options, false, null);
+                                Gui.SetButtonsFromList(options, false, undefined);
                             }, enabled : true,
                             tooltip : "Ask him to give you the scepter.",
                         });
-                        Gui.SetButtonsFromList(options, false, null);
+                        Gui.SetButtonsFromList(options, false, undefined);
                     }, enabled : true,
                     tooltip : "Ask him about the story of the scepter, and what it’s significance is. You’ve seen its effects up close with the Gol queen.",
                 });
@@ -1837,7 +1837,7 @@ export namespace LagonScenes {
             }, enabled : true,
             tooltip : "The time has come to face off against this so called king.",
         });
-        Gui.SetButtonsFromList(options, false, null);
+        Gui.SetButtonsFromList(options, false, undefined);
     }
 
     export function ReturnToBurrowsAfterScepter() {
@@ -1966,11 +1966,11 @@ export namespace LagonScenes {
                     }, enabled : true,
                     tooltip : "This damn fetch-quest has gone on for too long… time you get a real reward. And if you can get it without even having to fight anyone… why not? Besides, taking Ophelia away from this place is probably the best she could ever hope for.",
                 });
-                Gui.SetButtonsFromList(options, false, null);
+                Gui.SetButtonsFromList(options, false, undefined);
             }, enabled : true,
             tooltip : "You’re ready.",
         });
-        Gui.SetButtonsFromList(options, false, null);
+        Gui.SetButtonsFromList(options, false, undefined);
     }
 
     export function Usurp(toolate: boolean) {

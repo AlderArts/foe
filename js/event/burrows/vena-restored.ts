@@ -313,6 +313,6 @@ export namespace VenaRScenes {
 			});
 		}
 
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	}
 }

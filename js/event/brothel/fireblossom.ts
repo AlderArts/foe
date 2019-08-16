@@ -167,7 +167,7 @@ export namespace FireblossomScenes {
 				Gui.NextPrompt(FireblossomScenes.SceneSelect);
 			});
 
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		}
 	}
 
@@ -193,7 +193,7 @@ export namespace FireblossomScenes {
 
 		Gui.NextPrompt(() => {
 			TimeStep({hour: 3});
-			LucilleScenes.WhoreAftermath(null, fireblossom.Cost());
+			LucilleScenes.WhoreAftermath(undefined, fireblossom.Cost());
 		});
 	}
 
@@ -449,11 +449,11 @@ export namespace FireblossomScenes {
 							FireblossomScenes.S1Grex();
 						}, enabled : true,
 					});
-					Gui.SetButtonsFromList(options, false, null);
+					Gui.SetButtonsFromList(options, false, undefined);
 				});
 			});
 
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		});
 	}
 
@@ -771,7 +771,7 @@ export namespace FireblossomScenes {
 					});
 				}, enabled : true,
 			});
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		});
 	}
 
@@ -1009,7 +1009,7 @@ export namespace FireblossomScenes {
 				FireblossomScenes.S1GrexPens(opts);
 			}, enabled : true,
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	}
 
 	export function S1GrexPens(opts: any) {

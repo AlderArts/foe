@@ -98,7 +98,7 @@ import { WeaponsItems } from "./items/weapons";
 
 const InitCache = () => {
 	// Reset exploration
-	Gui.SetLastSubmenu(null);
+	Gui.SetLastSubmenu(undefined);
 	GAME().IntroActive = false;
 
 	const gameCache: any = GameCache();
@@ -312,29 +312,29 @@ const CacheToGame = () => {
 		}
 	}
 	if (gameCache.version < 7) {
-		GAME().chief.relation.base = gameCache.flags.NomadRep || 0;      gameCache.flags.NomadRep = null;
-		GAME().chief.flags.Met  = gameCache.flags.NomadChiefMet || 0; gameCache.flags.NomadChiefMet = null;
-		GAME().gwendy.flags.Met = gameCache.flags.GwendyMet || 0;     gameCache.flags.GwendyMet = null;
-		GAME().adrian.flags.Met = gameCache.flags.AdrianMet || 0;     gameCache.flags.AdrianMet = null;
-		GAME().danie.flags.Met  = gameCache.flags.DanieMet || 0;      gameCache.flags.DanieMet = null;
+		GAME().chief.relation.base = gameCache.flags.NomadRep || 0;      gameCache.flags.NomadRep = undefined;
+		GAME().chief.flags.Met  = gameCache.flags.NomadChiefMet || 0; gameCache.flags.NomadChiefMet = undefined;
+		GAME().gwendy.flags.Met = gameCache.flags.GwendyMet || 0;     gameCache.flags.GwendyMet = undefined;
+		GAME().adrian.flags.Met = gameCache.flags.AdrianMet || 0;     gameCache.flags.AdrianMet = undefined;
+		GAME().danie.flags.Met  = gameCache.flags.DanieMet || 0;      gameCache.flags.DanieMet = undefined;
 
 		// Kiakai
-		GAME().kiakai.flags.InitialGender           = gameCache.flags.KiakaiInitialGender || Gender.male; gameCache.flags.KiakaiInitialGender = null;
+		GAME().kiakai.flags.InitialGender           = gameCache.flags.KiakaiInitialGender || Gender.male; gameCache.flags.KiakaiInitialGender = undefined;
 
-		GAME().kiakai.flags.Attitude                = gameCache.flags.KiakaiAttitude || KiakaiFlags.Attitude.Neutral; gameCache.flags.KiakaiAttitude = null;
-		GAME().kiakai.flags.AnalExp                 = gameCache.flags.KiakaiAnalExp || 0; gameCache.flags.KiakaiAnalExp = null;
-		GAME().kiakai.flags.Sexed                   = gameCache.flags.KiakaiSexed || 0; gameCache.flags.KiakaiSexed = null;
+		GAME().kiakai.flags.Attitude                = gameCache.flags.KiakaiAttitude || KiakaiFlags.Attitude.Neutral; gameCache.flags.KiakaiAttitude = undefined;
+		GAME().kiakai.flags.AnalExp                 = gameCache.flags.KiakaiAnalExp || 0; gameCache.flags.KiakaiAnalExp = undefined;
+		GAME().kiakai.flags.Sexed                   = gameCache.flags.KiakaiSexed || 0; gameCache.flags.KiakaiSexed = undefined;
 		// First time dialogue
-		GAME().kiakai.flags.TalkedWhyLeave          = gameCache.flags.KiakaiTalkedWhyLeave || 0; gameCache.flags.KiakaiTalkedWhyLeave = null;
-		GAME().kiakai.flags.TalkedWhyLeaveForce     = gameCache.flags.KiakaiTalkedWhyLeaveForce || 0; gameCache.flags.KiakaiTalkedWhyLeaveForce = null;
-		GAME().kiakai.flags.TalkedWhyLeaveLong      = gameCache.flags.KiakaiTalkedWhyLeaveLong || 0; gameCache.flags.KiakaiTalkedWhyLeaveLong = null;
-		GAME().kiakai.flags.TalkedWhyLeaveLongReact = gameCache.flags.KiakaiTalkedWhyLeaveLongReact || 0; gameCache.flags.KiakaiTalkedWhyLeaveLongReact = null;
-		GAME().kiakai.flags.TalkedPriest            = gameCache.flags.KiakaiTalkedPriest || 0; gameCache.flags.KiakaiTalkedPriest = null;
-		GAME().kiakai.flags.TalkedElves             = gameCache.flags.KiakaiTalkedElves || 0; gameCache.flags.KiakaiTalkedElves = null;
-		GAME().kiakai.flags.TalkedAria              = gameCache.flags.KiakaiTalkedAria || 0; gameCache.flags.KiakaiTalkedAria = null;
-		GAME().kiakai.flags.TalkedUru               = gameCache.flags.KiakaiTalkedUru || 0; gameCache.flags.KiakaiTalkedUru = null;
-		GAME().kiakai.flags.TalkedUruDA             = gameCache.flags.KiakaiTalkedUruDA || 0; gameCache.flags.KiakaiTalkedUruDA = null;
-		GAME().kiakai.flags.TalkedAlone             = gameCache.flags.KiakaiTalkedAlone || 0; gameCache.flags.KiakaiTalkedAlone = null;
+		GAME().kiakai.flags.TalkedWhyLeave          = gameCache.flags.KiakaiTalkedWhyLeave || 0; gameCache.flags.KiakaiTalkedWhyLeave = undefined;
+		GAME().kiakai.flags.TalkedWhyLeaveForce     = gameCache.flags.KiakaiTalkedWhyLeaveForce || 0; gameCache.flags.KiakaiTalkedWhyLeaveForce = undefined;
+		GAME().kiakai.flags.TalkedWhyLeaveLong      = gameCache.flags.KiakaiTalkedWhyLeaveLong || 0; gameCache.flags.KiakaiTalkedWhyLeaveLong = undefined;
+		GAME().kiakai.flags.TalkedWhyLeaveLongReact = gameCache.flags.KiakaiTalkedWhyLeaveLongReact || 0; gameCache.flags.KiakaiTalkedWhyLeaveLongReact = undefined;
+		GAME().kiakai.flags.TalkedPriest            = gameCache.flags.KiakaiTalkedPriest || 0; gameCache.flags.KiakaiTalkedPriest = undefined;
+		GAME().kiakai.flags.TalkedElves             = gameCache.flags.KiakaiTalkedElves || 0; gameCache.flags.KiakaiTalkedElves = undefined;
+		GAME().kiakai.flags.TalkedAria              = gameCache.flags.KiakaiTalkedAria || 0; gameCache.flags.KiakaiTalkedAria = undefined;
+		GAME().kiakai.flags.TalkedUru               = gameCache.flags.KiakaiTalkedUru || 0; gameCache.flags.KiakaiTalkedUru = undefined;
+		GAME().kiakai.flags.TalkedUruDA             = gameCache.flags.KiakaiTalkedUruDA || 0; gameCache.flags.KiakaiTalkedUruDA = undefined;
+		GAME().kiakai.flags.TalkedAlone             = gameCache.flags.KiakaiTalkedAlone || 0; gameCache.flags.KiakaiTalkedAlone = undefined;
 	}
 	if (gameCache.version < 8) {
 		GAME().fera.FirstVag().virgin = true;
@@ -428,13 +428,13 @@ const CacheToGame = () => {
 	if (gameCache.version < 12) {
 		if (GAME().player.jobs.Figther) {
 			GAME().player.jobs.Fighter = GAME().player.jobs.Figther;
-			GAME().player.jobs.Figther = null;
+			GAME().player.jobs.Figther = undefined;
 		}
 	}
 	if (gameCache.version < 13) {
 		if (GAME().rigard.flags.KrawitzQ) {
 			GAME().rigard.Krawitz.Q      = GAME().rigard.flags.KrawitzQ;
-			GAME().rigard.flags.KrawitzQ = null;
+			GAME().rigard.flags.KrawitzQ = undefined;
 		}
 	}
 	if (gameCache.version < 14) {
@@ -498,12 +498,12 @@ const CacheToGame = () => {
 	if (gameCache.version < 23) {
 		// OUTLAWS
 		GAME().outlaws.relation.base = gameCache.flags.OutlawsRep || 0;
-		gameCache.flags.OutlawsRep = null;
+		gameCache.flags.OutlawsRep = undefined;
 	}
 	if (gameCache.version < 24) {
 		// GWENDY'S FARM
 		GAME().farm.flags.Visit = gameCache.flags.FarmFound || 0;
-		gameCache.flags.FarmFound = null;
+		gameCache.flags.FarmFound = undefined;
 	}
 	if (gameCache.version < 25) {
 		// LAYLA LEVEL PACING

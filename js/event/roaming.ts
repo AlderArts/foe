@@ -224,7 +224,7 @@ RoamingScenes.KingdomPatrol = (entering: boolean) => {
 			}, enabled : true,
 			tooltip : Text.Parse("Tell [rhimher] that you’re bandits. It'd be pretty funny to see [rhisher] reaction, right?", parse),
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	}, 1.0, () => party.Num() > 1);
 
 	scenes.Get();
@@ -355,7 +355,7 @@ RoamingScenes.Bandits = () => {
 		rclothing : bandits.rclothing,
 	};
 
-	rigard.bandits = null;
+	rigard.bandits = undefined;
 
 	Text.Clear();
 	Text.Add("As you make your way, the fields around you grow wilder, more unkempt. After walking for a few minutes more, it’s hard to imagine that anyone works the land here at all. Wild grass reaches almost to your waist, and weeds sprout in prickly bushes.", parse);
@@ -505,7 +505,7 @@ RoamingScenes.Bandits = () => {
 		func : Gui.PrintDefaultOptions, enabled : true,
 		tooltip : "This isn’t worth the bother - just leave them alone.",
 	});
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 };
 
 RoamingScenes.BanditsOnEncounter = function() {
@@ -546,7 +546,7 @@ RoamingScenes.BanditsLoss = function() {
 	const num = bandits.NumTotal();
 
 	let fallen = 0;
-	let first = null;
+	let first;
 	for (let i = 0; i < num; ++i) {
 		const bandit = bandits.Get(i);
 		if (bandit.Incapacitated()) { fallen++; } else { first = first || bandit; }
@@ -748,7 +748,7 @@ RoamingScenes.BanditsWin = function() {
 				}, enabled : true,
 				tooltip : "You’re mostly done here - it’s time to head out.",
 			});
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		};
 		prompt();
 	});

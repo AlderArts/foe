@@ -126,7 +126,7 @@ export namespace RoaScenes {
                         tooltip : "Give the bunny a shot at your pussy.",
                     });
                 }
-                Gui.SetButtonsFromList(options, false, null);
+                Gui.SetButtonsFromList(options, false, undefined);
             }, enabled : true,
             tooltip : Text.Parse("What else do you do with a whore in a brothel? Take him back and let’s have some fun! If you remember correctly, his fee is [cost] coins.", parse),
         });
@@ -478,7 +478,7 @@ export namespace RoaScenes {
                     tooltip : "Nope, you’ve got an itch you need scratched, and he’s just the one to do it for you. Let’s see just how good he is with his dick instead of his ass.",
                 });
 
-                Gui.SetButtonsFromList(options, false, null);
+                Gui.SetButtonsFromList(options, false, undefined);
             }, enabled : true,
             tooltip : Text.Parse("You’re in a brothel, he’s clearly willing, why not enjoy a little mutual fun? After all, [cost] coin is hardly a fortune.", parse),
         });
@@ -488,7 +488,7 @@ export namespace RoaScenes {
             }, enabled : true,
             tooltip : Text.Parse("You’re not in the mood for this one.", parse),
         });
-        Gui.SetButtonsFromList(options, false, null);
+        Gui.SetButtonsFromList(options, false, undefined);
     }
 
     export function TSLPitchAnal() {
@@ -500,7 +500,7 @@ export namespace RoaScenes {
             roa.flags.Met = RoaFlags.Met.Sexed;
         }
 
-        let p1cock = player.BiggestCock(null, true);
+        let p1cock = player.BiggestCock(undefined, true);
 
         let parse: any = {
             playername : player.name,
@@ -977,7 +977,7 @@ export namespace RoaScenes {
             }, enabled : true,
             tooltip : "You know better than to let a bunny-boy cum inside your cunt.",
         });
-        Gui.SetButtonsFromList(options, false, null);
+        Gui.SetButtonsFromList(options, false, undefined);
 
         Gui.Callstack.push(() => {
             Text.NL();
@@ -1028,7 +1028,7 @@ export namespace RoaScenes {
                 }, enabled : true,
                 tooltip : "He doesn’t need your help, so just sit back and watch.",
             });
-            Gui.SetButtonsFromList(options, false, null);
+            Gui.SetButtonsFromList(options, false, undefined);
 
             Gui.Callstack.push(() => {
                 Text.NL();
@@ -1111,7 +1111,7 @@ export namespace RoaScenes {
                     }, enabled : true,
                     tooltip : cameinside > 0 ? "Oh no, once was enough for you; you know what they say about bunny-boys, after all..." : "Not a chance, you didn’t do it before, why would you do it this time?",
                 });
-                Gui.SetButtonsFromList(options, false, null);
+                Gui.SetButtonsFromList(options, false, undefined);
 
                 Gui.Callstack.push(() => {
                     Text.NL();
@@ -1290,7 +1290,7 @@ export namespace RoaScenes {
             tooltip : roa.Relation() < 20 ? "You have better things to do, it’s time to get going." :
                     roa.Relation() < 40 ? "You don’t really have the time to spare. Maybe next time, you can stay longer?" : "You’re sorry, you really are, but you just can’t stay this time.",
         });
-        Gui.SetButtonsFromList(options, false, null);
+        Gui.SetButtonsFromList(options, false, undefined);
 
         Gui.Callstack.push(() => {
             LucilleScenes.WhoreAftermath("Roa", roa.Cost());

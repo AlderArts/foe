@@ -35,16 +35,16 @@ export class Job {
 	}
 
 	public AddExp(entity: Entity, exp?: number, reserve?: boolean) {
-		// Check for null arguments and broken links
-		if (entity === null) { return; }
+		// Check for undefined arguments and broken links
+		if (entity === undefined) { return; }
 		const jd = entity.jobs[this.name];
-		if (jd === null) { return; }
+		if (jd === undefined) { return; }
 		exp = exp || 0;
 		// Check for maxed out job
 		let newLevel = this.levels[jd.level - 1];
-		if (newLevel === null) { return; }
+		if (newLevel === undefined) { return; }
 		let toLevel = newLevel.expToLevel;
-		if (toLevel === null) { return; }
+		if (toLevel === undefined) { return; }
 		toLevel *= jd.mult;
 
 		// Add xp to pool
@@ -103,9 +103,9 @@ export class Job {
 			if (func) { func(entity); }
 			// Prepare for checking next level
 			newLevel = this.levels[jd.level - 1];
-			if (newLevel === null) { break; }
+			if (newLevel === undefined) { break; }
 			toLevel = newLevel.expToLevel;
-			if (toLevel === null) {
+			if (toLevel === undefined) {
 				jd.experience = 0;
 				Text.Add("[name] [is] now a master [job]!", parse, "bold");
 				Text.NL();
@@ -118,16 +118,16 @@ export class Job {
 	}
 	// Returns true if job is mastered
 	public Master(entity: Entity) {
-		// Check for null references
-		if (entity === null) { return false; }
+		// Check for undefined references
+		if (entity === undefined) { return false; }
 		const jd = entity.jobs[this.name];
-		if (jd === null) { return false; }
+		if (jd === undefined) { return false; }
 		// Check if current level is same or higher than max level
 		return (jd.level > this.levels.length);
 	}
 
 	public Available(entity: Entity) {
-		if (entity === null) { return false; }
+		if (entity === undefined) { return false; }
 
 		for (const preq of this.preqs) {
 			// Pairs of {job : Jobs["Fighter"], lvl : 3} etc
@@ -136,7 +136,7 @@ export class Job {
 
 			if (job) {
 				const jd = entity.jobs[job.name];
-				if (jd === null) {     return false; }
+				if (jd === undefined) {     return false; }
 				if (jd.level < lvl) { return false; }
 			}
 		}
@@ -158,7 +158,7 @@ export class JobDesc {
 		this.mult       = 1;
 	}
 	public ToStorage() {
-		if (this.level <= 1 && this.experience === 0) { return null; }
+		if (this.level <= 1 && this.experience === 0) { return undefined; }
 		const storage: any = {};
 		if (this.level      !== 1) { storage.lvl = Math.floor(this.level); }
 		if (this.experience !== 0) { storage.exp = Math.floor(this.experience); }
@@ -205,11 +205,11 @@ Jobs.Fighter.abilities.AddAbility(Abilities.Physical.Pierce);
 Jobs.Fighter.abilities.AddAbility(Abilities.Physical.DAttack);
 Jobs.Fighter.abilities.AddAbility(Abilities.Physical.Provoke);
 Jobs.Fighter.levels.push(new JobLevel(10,  [{ab: Abilities.Physical.Bash, set: "Skills"}], {str : 0.2}));
-Jobs.Fighter.levels.push(new JobLevel(20,  null, {str : 0.1, sta : 0.1}));
+Jobs.Fighter.levels.push(new JobLevel(20,  undefined, {str : 0.1, sta : 0.1}));
 Jobs.Fighter.levels.push(new JobLevel(40,  [{ab: Abilities.Physical.Pierce, set: "Skills"}], {str : 0.1, dex : 0.1}));
-Jobs.Fighter.levels.push(new JobLevel(80,  null, {str : 0.2}));
+Jobs.Fighter.levels.push(new JobLevel(80,  undefined, {str : 0.2}));
 Jobs.Fighter.levels.push(new JobLevel(160, [{ab: Abilities.Physical.DAttack, set: "Skills"}], {str : 0.1, sta : 0.1}));
-Jobs.Fighter.levels.push(new JobLevel(320, null, {str : 0.1, dex : 0.1}));
+Jobs.Fighter.levels.push(new JobLevel(320, undefined, {str : 0.1, dex : 0.1}));
 Jobs.Fighter.levels.push(new JobLevel(640, [{ab: Abilities.Physical.Provoke, set: "Skills"}, {ab: Abilities.Physical.TAttack, set: "Skills"}], {str : 0.2, sta : 0.2, dex : 0.2, hp : 5}));
 
 Jobs.Scholar = new Job("Scholar");
@@ -222,11 +222,11 @@ Jobs.Scholar.abilities.AddAbility(Abilities.White.FirstAid);
 Jobs.Scholar.abilities.AddAbility(Abilities.White.Pinpoint);
 Jobs.Scholar.abilities.AddAbility(Abilities.White.Cheer);
 Jobs.Scholar.levels.push(new JobLevel(10,  [{ab: Abilities.White.Tirade, set: "Support"}], {int : 0.2}));
-Jobs.Scholar.levels.push(new JobLevel(20,  null, {int : 0.1, spi : 0.1}));
+Jobs.Scholar.levels.push(new JobLevel(20,  undefined, {int : 0.1, spi : 0.1}));
 Jobs.Scholar.levels.push(new JobLevel(40,  [{ab: Abilities.White.FirstAid, set: "Support"}], {int : 0.1, dex : 0.1}));
-Jobs.Scholar.levels.push(new JobLevel(80,  null, {int : 0.2}));
+Jobs.Scholar.levels.push(new JobLevel(80,  undefined, {int : 0.2}));
 Jobs.Scholar.levels.push(new JobLevel(160, [{ab: Abilities.White.Pinpoint, set: "Support"}], {int : 0.1, spi : 0.1}));
-Jobs.Scholar.levels.push(new JobLevel(320, null, {int : 0.1, cha : 0.1}));
+Jobs.Scholar.levels.push(new JobLevel(320, undefined, {int : 0.1, cha : 0.1}));
 Jobs.Scholar.levels.push(new JobLevel(640, [{ab: Abilities.White.Cheer, set: "Support"}, {ab: Abilities.White.Preach, set: "Support"}], {int : 0.2, spi : 0.2, cha : 0.2, sp : 5}));
 
 Jobs.Courtesan = new Job("Courtesan");
@@ -244,11 +244,11 @@ Jobs.Courtesan.abilities.AddAbility(Abilities.Seduction.Charm);
 Jobs.Courtesan.abilities.AddAbility(Abilities.Seduction.Distract);
 Jobs.Courtesan.abilities.AddAbility(Abilities.Seduction.Seduce);
 Jobs.Courtesan.levels.push(new JobLevel(10,  [{ab: Abilities.Seduction.Fantasize, set: "Seduce"}], {lib : 0.2}));
-Jobs.Courtesan.levels.push(new JobLevel(20,  null, {lib : 0.1, cha : 0.1}));
+Jobs.Courtesan.levels.push(new JobLevel(20,  undefined, {lib : 0.1, cha : 0.1}));
 Jobs.Courtesan.levels.push(new JobLevel(40,  [{ab: Abilities.Seduction.Charm, set: "Seduce"}], {lib : 0.1, dex : 0.1}));
-Jobs.Courtesan.levels.push(new JobLevel(80,  null, {lib : 0.2}));
+Jobs.Courtesan.levels.push(new JobLevel(80,  undefined, {lib : 0.2}));
 Jobs.Courtesan.levels.push(new JobLevel(160, [{ab: Abilities.Seduction.Seduce, set: "Seduce"}], {lib : 0.1, cha : 0.1}));
-Jobs.Courtesan.levels.push(new JobLevel(320, null, {lib : 0.1, int : 0.1}));
+Jobs.Courtesan.levels.push(new JobLevel(320, undefined, {lib : 0.1, int : 0.1}));
 Jobs.Courtesan.levels.push(new JobLevel(640, [{ab: Abilities.Seduction.Distract, set: "Seduce"}, {ab: Abilities.Seduction.Rut, set: "Seduce"}], {lib : 0.2, cha : 0.2, dex : 0.2, lp : 5}));
 
 // Kiai specific
@@ -263,11 +263,11 @@ Jobs.Acolyte.abilities.AddAbility(Abilities.White.Toughen);
 Jobs.Acolyte.abilities.AddAbility(Abilities.White.Empower);
 Jobs.Acolyte.abilities.AddAbility(Abilities.White.Cleanse);
 Jobs.Acolyte.levels.push(new JobLevel(10,  [{ab: Abilities.White.Heal, set: "Support"}], {int : 0.2}));
-Jobs.Acolyte.levels.push(new JobLevel(20,  null, {int : 0.1, spi : 0.1}));
+Jobs.Acolyte.levels.push(new JobLevel(20,  undefined, {int : 0.1, spi : 0.1}));
 Jobs.Acolyte.levels.push(new JobLevel(40,  [{ab: Abilities.White.Preach, set: "Support"}], {int : 0.1, cha : 0.1}));
 Jobs.Acolyte.levels.push(new JobLevel(80,  [{ab: Abilities.White.Cleanse, set: "Support"}], {int : 0.2}));
 Jobs.Acolyte.levels.push(new JobLevel(160, [{ab: Abilities.White.Toughen, set: "Support"}], {int : 0.1, spi : 0.1}));
-Jobs.Acolyte.levels.push(new JobLevel(320, null, {int : 0.1, cha : 0.1}));
+Jobs.Acolyte.levels.push(new JobLevel(320, undefined, {int : 0.1, cha : 0.1}));
 Jobs.Acolyte.levels.push(new JobLevel(640, [{ab: Abilities.White.Empower, set: "Support"}, {ab: Abilities.White.Sermon, set: "Support"}], {int : 0.2, spi : 0.2, cha : 0.2, hp : 5, sp : 10}));
 
 // Cveta specific
@@ -281,11 +281,11 @@ Jobs.Songstress.abilities.AddAbility(Abilities.Seduction.Inflame);
 Jobs.Songstress.abilities.AddAbility(Abilities.Black.Dischord);
 Jobs.Songstress.abilities.AddAbility(Abilities.Seduction.Captivate);
 Jobs.Songstress.levels.push(new JobLevel(10,  [{ab: Abilities.Seduction.Soothe, set: "Support"}], {spi : 0.3}));
-Jobs.Songstress.levels.push(new JobLevel(20,  null, {int : 0.2, cha : 0.1}));
+Jobs.Songstress.levels.push(new JobLevel(20,  undefined, {int : 0.2, cha : 0.1}));
 Jobs.Songstress.levels.push(new JobLevel(40,  [{ab: Abilities.Seduction.Inflame, set: "Seduce"}], {cha : 0.2, spi : 0.1}));
-Jobs.Songstress.levels.push(new JobLevel(80,  null, {cha : 0.2, lib : 0.1}));
+Jobs.Songstress.levels.push(new JobLevel(80,  undefined, {cha : 0.2, lib : 0.1}));
 Jobs.Songstress.levels.push(new JobLevel(160, [{ab: Abilities.Black.Dischord, set: "Spells"}], {cha : 0.1, int : 0.2 }));
-Jobs.Songstress.levels.push(new JobLevel(320, null, {cha : 0.2, lib : 0.1}));
+Jobs.Songstress.levels.push(new JobLevel(320, undefined, {cha : 0.2, lib : 0.1}));
 Jobs.Songstress.levels.push(new JobLevel(640, [{ab: Abilities.Seduction.Captivate, set: "Seduce"}, {ab: Abilities.Black.Scream, set: "Spells"}], {cha : 0.4, lib : 0.1}));
 
 ////////////
@@ -308,11 +308,11 @@ Jobs.Bruiser.abilities.AddAbility(Abilities.Physical.FocusStrike);
 Jobs.Bruiser.abilities.AddAbility(Abilities.Physical.TAttack);
 Jobs.Bruiser.abilities.AddAbility(Abilities.Physical.GrandSlam);
 Jobs.Bruiser.levels.push(new JobLevel(20,   [{ab: Abilities.Physical.CrushingStrike, set: "Skills"}], {str : 0.2, sta : 0.1}));
-Jobs.Bruiser.levels.push(new JobLevel(40,   null, {str : 0.2, dex : 0.1}));
+Jobs.Bruiser.levels.push(new JobLevel(40,   undefined, {str : 0.2, dex : 0.1}));
 Jobs.Bruiser.levels.push(new JobLevel(80,   [{ab: Abilities.Physical.FocusStrike, set: "Skills"}], {str : 0.2, sta : 0.1}));
-Jobs.Bruiser.levels.push(new JobLevel(160,  null, {sta : 0.2, str : 0.1}));
+Jobs.Bruiser.levels.push(new JobLevel(160,  undefined, {sta : 0.2, str : 0.1}));
 Jobs.Bruiser.levels.push(new JobLevel(320,  [{ab: Abilities.Physical.TAttack, set: "Skills"}], {str : 0.2, sta : 0.1}));
-Jobs.Bruiser.levels.push(new JobLevel(640,  null, {sta : 0.2, dex : 0.1}));
+Jobs.Bruiser.levels.push(new JobLevel(640,  undefined, {sta : 0.2, dex : 0.1}));
 Jobs.Bruiser.levels.push(new JobLevel(1280, [{ab: Abilities.Physical.GrandSlam, set: "Skills"}, {ab: Abilities.Physical.Frenzy, set: "Skills"}], {str : 0.3, sta : 0.1, dex : 0.1, hp : 5}));
 
 Jobs.Rogue = new Job("Rogue");
@@ -333,11 +333,11 @@ Jobs.Rogue.abilities.AddAbility(Abilities.Physical.Kicksand);
 Jobs.Rogue.abilities.AddAbility(Abilities.Physical.Swift);
 Jobs.Rogue.abilities.AddAbility(Abilities.Physical.Backstab);
 Jobs.Rogue.levels.push(new JobLevel(20,   [{ab: Abilities.Physical.DirtyBlow, set: "Skills"}], {dex : 0.3}));
-Jobs.Rogue.levels.push(new JobLevel(40,   null, {dex : 0.2, int : 0.1}));
+Jobs.Rogue.levels.push(new JobLevel(40,   undefined, {dex : 0.2, int : 0.1}));
 Jobs.Rogue.levels.push(new JobLevel(80,   [{ab: Abilities.Physical.Kicksand, set: "Skills"}], {cha : 0.2, lib : 0.1}));
-Jobs.Rogue.levels.push(new JobLevel(160,  null, {dex : 0.3}));
+Jobs.Rogue.levels.push(new JobLevel(160,  undefined, {dex : 0.3}));
 Jobs.Rogue.levels.push(new JobLevel(320,  [{ab: Abilities.Physical.Swift, set: "Skills"}], {dex : 0.2, str : 0.1}));
-Jobs.Rogue.levels.push(new JobLevel(640,  null, {dex : 0.2, int : 0.1}));
+Jobs.Rogue.levels.push(new JobLevel(640,  undefined, {dex : 0.2, int : 0.1}));
 Jobs.Rogue.levels.push(new JobLevel(1280, [{ab: Abilities.Physical.Backstab, set: "Skills"}, {ab: Abilities.Physical.Fade, set: "Skills"}], {dex : 0.3, int : 0.1, cha : 0.1}));
 
 Jobs.Ranger = new Job("Ranger");
@@ -358,11 +358,11 @@ Jobs.Ranger.abilities.AddAbility(Abilities.Physical.FocusStrike);
 Jobs.Ranger.abilities.AddAbility(Abilities.Physical.Hamstring);
 Jobs.Ranger.abilities.AddAbility(Abilities.Physical.SetTrap);
 Jobs.Ranger.levels.push(new JobLevel(20,   [{ab: Abilities.Physical.Ensnare, set: "Skills"}], {dex : 0.2, spi : 0.1}));
-Jobs.Ranger.levels.push(new JobLevel(40,   null, {sta : 0.1, dex : 0.2}));
+Jobs.Ranger.levels.push(new JobLevel(40,   undefined, {sta : 0.1, dex : 0.2}));
 Jobs.Ranger.levels.push(new JobLevel(80,   [{ab: Abilities.Physical.FocusStrike, set: "Skills"}], {int : 0.2, dex : 0.1}));
-Jobs.Ranger.levels.push(new JobLevel(160,  null, {dex : 0.3}));
+Jobs.Ranger.levels.push(new JobLevel(160,  undefined, {dex : 0.3}));
 Jobs.Ranger.levels.push(new JobLevel(320,  [{ab: Abilities.Physical.Hamstring, set: "Skills"}], {int : 0.1, sta : 0.2}));
-Jobs.Ranger.levels.push(new JobLevel(640,  null, {spi : 0.2, dex : 0.1}));
+Jobs.Ranger.levels.push(new JobLevel(640,  undefined, {spi : 0.2, dex : 0.1}));
 Jobs.Ranger.levels.push(new JobLevel(1280, [{ab: Abilities.Physical.SetTrap, set: "Skills"}, {ab: Abilities.Physical.Swift, set: "Skills"}], {int : 0.1, sta : 0.1, dex : 0.3}));
 
 Jobs.Squire = new Job("Squire");
@@ -382,11 +382,11 @@ Jobs.Squire.abilities.AddAbility(Abilities.Physical.Hamstring);
 Jobs.Squire.abilities.AddAbility(Abilities.Physical.Taunt);
 // TODO Skills
 Jobs.Squire.levels.push(new JobLevel(20,   [{ab: Abilities.Physical.Provoke, set: "Skills"}], {sta : 0.2, spi : 0.1}));
-Jobs.Squire.levels.push(new JobLevel(40,   null, {sta : 0.1, dex : 0.1, str : 0.1}));
+Jobs.Squire.levels.push(new JobLevel(40,   undefined, {sta : 0.1, dex : 0.1, str : 0.1}));
 Jobs.Squire.levels.push(new JobLevel(80,   [{ab: Abilities.Physical.FocusStrike, set: "Skills"}], {sta : 0.2, dex : 0.1}));
-Jobs.Squire.levels.push(new JobLevel(160,  null, {sta : 0.3}));
+Jobs.Squire.levels.push(new JobLevel(160,  undefined, {sta : 0.3}));
 Jobs.Squire.levels.push(new JobLevel(320,  [{ab: Abilities.Physical.Hamstring, set: "Skills"}], {spi : 0.1, sta : 0.2}));
-Jobs.Squire.levels.push(new JobLevel(640,  null, {spi : 0.2, dex : 0.1}));
+Jobs.Squire.levels.push(new JobLevel(640,  undefined, {spi : 0.2, dex : 0.1}));
 Jobs.Squire.levels.push(new JobLevel(1280, [{ab: Abilities.Physical.Taunt, set: "Skills"}], {spi : 0.1, sta : 0.3, dex : 0.1}));
 
 Jobs.Mage = new Job("Mage");
@@ -401,9 +401,9 @@ Jobs.Mage.abilities.AddAbility(Abilities.Black.Freeze);
 Jobs.Mage.abilities.AddAbility(Abilities.Black.Bolt);
 Jobs.Mage.abilities.AddAbility(Abilities.White.Dispel);
 Jobs.Mage.levels.push(new JobLevel(20,   [{ab: Abilities.Black.Surge, set: "Spells"}], {int : 0.3}));
-Jobs.Mage.levels.push(new JobLevel(40,   null, {int : 0.1, spi : 0.2}));
+Jobs.Mage.levels.push(new JobLevel(40,   undefined, {int : 0.1, spi : 0.2}));
 Jobs.Mage.levels.push(new JobLevel(80,   [{ab: Abilities.Black.Fireball, set: "Spells"}], {int : 0.2, sta : 0.1}));
-Jobs.Mage.levels.push(new JobLevel(160,  null, {int : 0.2, cha : 0.1}));
+Jobs.Mage.levels.push(new JobLevel(160,  undefined, {int : 0.2, cha : 0.1}));
 Jobs.Mage.levels.push(new JobLevel(320,  [{ab: Abilities.Black.Freeze, set: "Spells"}], {int : 0.2, dex : 0.1}));
 Jobs.Mage.levels.push(new JobLevel(640,  [{ab: Abilities.White.Dispel, set: "Support"}], {int : 0.1, spi : 0.2}));
 Jobs.Mage.levels.push(new JobLevel(1280, [{ab: Abilities.Black.Bolt, set: "Spells"}, {ab: Abilities.Black.Eruption, set: "Spells"}], {int : 0.4, spi : 0.1, sp : 5}));
@@ -424,7 +424,7 @@ Jobs.Mystic.abilities.AddAbility(Abilities.Black.Gust);
 Jobs.Mystic.abilities.AddAbility(Abilities.Black.Venom);
 Jobs.Mystic.abilities.AddAbility(Abilities.White.Purify);
 Jobs.Mystic.levels.push(new JobLevel(20,   [{ab: Abilities.Black.Thorn, set: "Spells"}], {sta : 0.3}));
-Jobs.Mystic.levels.push(new JobLevel(40,   null, {int : 0.1, spi : 0.2}));
+Jobs.Mystic.levels.push(new JobLevel(40,   undefined, {int : 0.1, spi : 0.2}));
 Jobs.Mystic.levels.push(new JobLevel(80,   [{ab: Abilities.Black.Spray, set: "Spells"}], {spi : 0.3}));
 Jobs.Mystic.levels.push(new JobLevel(160,  [{ab: Abilities.White.Purify, set: "Support"}], {sta : 0.2, spi : 0.1}));
 Jobs.Mystic.levels.push(new JobLevel(320,  [{ab: Abilities.Black.Spire, set: "Spells"}], {int : 0.2, str : 0.1}));
@@ -442,12 +442,12 @@ Jobs.Healer.Long = (entity: Entity) => {
 Jobs.Healer.preqs.push({job : Jobs.Scholar, lvl : 3});
 Jobs.Healer.abilities.AddAbility(Abilities.White.Heal);
 Jobs.Healer.abilities.AddAbility(Abilities.White.Cleanse);
-Jobs.Healer.levels.push(new JobLevel(20,   null, {spi : 0.3}));
-Jobs.Healer.levels.push(new JobLevel(40,   null, {int : 0.2, cha : 0.1}));
+Jobs.Healer.levels.push(new JobLevel(20,   undefined, {spi : 0.3}));
+Jobs.Healer.levels.push(new JobLevel(40,   undefined, {int : 0.2, cha : 0.1}));
 Jobs.Healer.levels.push(new JobLevel(80,   [{ab: Abilities.White.Heal, set: "Support"}], {sta : 0.2, spi : 0.1}));
-Jobs.Healer.levels.push(new JobLevel(160,  null, {spi : 0.2, int : 0.1}));
+Jobs.Healer.levels.push(new JobLevel(160,  undefined, {spi : 0.2, int : 0.1}));
 Jobs.Healer.levels.push(new JobLevel(320,  [{ab: Abilities.White.Cleanse, set: "Support"}], {int : 0.3}));
-Jobs.Healer.levels.push(new JobLevel(640,  null, {cha : 0.2, sta : 0.1}));
+Jobs.Healer.levels.push(new JobLevel(640,  undefined, {cha : 0.2, sta : 0.1}));
 Jobs.Healer.levels.push(new JobLevel(1280, [{ab: Abilities.White.Recover, set: "Support"}], {spi : 0.4, int : 0.1, sp : 5}));
 Jobs.Healer.Unlocked = (entity: Entity) => {
 	return GlobalScenes.MagicStage1();
@@ -462,11 +462,11 @@ Jobs.Singer.preqs.push({job : Jobs.Courtesan, lvl : 3});
 // TODO Singer abilities
 Jobs.Singer.abilities.AddAbility(Abilities.Seduction.Lull);
 Jobs.Singer.levels.push(new JobLevel(20,   [{ab: Abilities.Seduction.Lull, set: "Support"}], {spi : 0.3}));
-Jobs.Singer.levels.push(new JobLevel(40,   null, {int : 0.2, cha : 0.1}));
-Jobs.Singer.levels.push(new JobLevel(80,   null, {sta : 0.2, spi : 0.1}));
-Jobs.Singer.levels.push(new JobLevel(160,  null, {spi : 0.2, int : 0.1}));
-Jobs.Singer.levels.push(new JobLevel(320,  null, {int : 0.3}));
-Jobs.Singer.levels.push(new JobLevel(640,  null, {cha : 0.2, sta : 0.1}));
+Jobs.Singer.levels.push(new JobLevel(40,   undefined, {int : 0.2, cha : 0.1}));
+Jobs.Singer.levels.push(new JobLevel(80,   undefined, {sta : 0.2, spi : 0.1}));
+Jobs.Singer.levels.push(new JobLevel(160,  undefined, {spi : 0.2, int : 0.1}));
+Jobs.Singer.levels.push(new JobLevel(320,  undefined, {int : 0.3}));
+Jobs.Singer.levels.push(new JobLevel(640,  undefined, {cha : 0.2, sta : 0.1}));
 Jobs.Singer.levels.push(new JobLevel(1280, [{ab: Abilities.White.Heal, set: "Support"}], {spi : 0.4, int : 0.1}));
 Jobs.Singer.Unlocked = (entity: Entity) => {
 	const cveta = GAME().cveta;
@@ -489,11 +489,11 @@ Jobs.Elementalist.abilities.AddAbility(Abilities.Black.Quake);
 Jobs.Elementalist.abilities.AddAbility(Abilities.Black.ThunderStorm);
 Jobs.Elementalist.abilities.AddAbility(Abilities.Black.Eruption);
 Jobs.Elementalist.levels.push(new JobLevel(40,   [{ab: Abilities.Black.Eruption, set: "Spells"}], {int : 0.2, spi: 0.2}));
-Jobs.Elementalist.levels.push(new JobLevel(80,   null, {int : 0.3, sta: 0.1}));
+Jobs.Elementalist.levels.push(new JobLevel(80,   undefined, {int : 0.3, sta: 0.1}));
 Jobs.Elementalist.levels.push(new JobLevel(160,  [{ab: Abilities.Black.ThunderStorm, set: "Spells"}], {int : 0.1, spi : 0.3}));
-Jobs.Elementalist.levels.push(new JobLevel(320,  null, {spi : 0.2, sta : 0.2}));
+Jobs.Elementalist.levels.push(new JobLevel(320,  undefined, {spi : 0.2, sta : 0.2}));
 Jobs.Elementalist.levels.push(new JobLevel(640,  [{ab: Abilities.Black.Hailstorm, set: "Spells"}], {int : 0.4}));
-Jobs.Elementalist.levels.push(new JobLevel(1280, null, {dex : 0.1, sta : 0.1, spi : 0.2}));
+Jobs.Elementalist.levels.push(new JobLevel(1280, undefined, {dex : 0.1, sta : 0.1, spi : 0.2}));
 Jobs.Elementalist.levels.push(new JobLevel(2560, [{ab: Abilities.Black.Quake, set: "Spells"}, {ab: Abilities.Black.PrismaticBurst, set: "Spells"}], {int : 0.5, spi : 0.2, sp : 5}));
 Jobs.Elementalist.Unlocked = (entity: Entity) => {
 	return GlobalScenes.MagicStage2();
@@ -510,11 +510,11 @@ Jobs.Warlock.abilities.AddAbility(Abilities.Black.Lifetap);
 Jobs.Warlock.abilities.AddAbility(Abilities.Black.DrainingTouch);
 Jobs.Warlock.abilities.AddAbility(Abilities.Black.EntropicFortune);
 Jobs.Warlock.levels.push(new JobLevel(40,   [{ab: Abilities.Black.Shade, set: "Spells"}], {sta : 0.2, spi : 0.2}));
-Jobs.Warlock.levels.push(new JobLevel(80,   null, {int : 0.3, lib : 0.1}));
+Jobs.Warlock.levels.push(new JobLevel(80,   undefined, {int : 0.3, lib : 0.1}));
 Jobs.Warlock.levels.push(new JobLevel(160,  [{ab: Abilities.Black.Lifetap, set: "Spells"}], {sta : 0.2, int : 0.2}));
-Jobs.Warlock.levels.push(new JobLevel(320,  null, {lib : 0.2, sta : 0.2}));
+Jobs.Warlock.levels.push(new JobLevel(320,  undefined, {lib : 0.2, sta : 0.2}));
 Jobs.Warlock.levels.push(new JobLevel(640,  [{ab: Abilities.Black.DrainingTouch, set: "Spells"}], {int : 0.3, str : 0.1}));
-Jobs.Warlock.levels.push(new JobLevel(1280, null, {spi : 0.3, sta : 0.1}));
+Jobs.Warlock.levels.push(new JobLevel(1280, undefined, {spi : 0.3, sta : 0.1}));
 Jobs.Warlock.levels.push(new JobLevel(2560, [{ab: Abilities.Black.EntropicFortune, set: "Spells"}, {ab: Abilities.Black.TaintedVitality, set: "Spells"}], {int : 0.3, sta : 0.3, spi : 0.1, sp : 5}));
 Jobs.Warlock.Unlocked = (entity: Entity) => {
 	return GlobalScenes.MagicStage2();
@@ -532,11 +532,11 @@ Jobs.Hypnotist.abilities.AddAbility(Abilities.Seduction.TIllusion);
 Jobs.Hypnotist.abilities.AddAbility(Abilities.Seduction.SIllusion);
 Jobs.Hypnotist.abilities.AddAbility(Abilities.Seduction.Confuse);
 Jobs.Hypnotist.levels.push(new JobLevel(40,   [{ab: Abilities.Seduction.Sleep, set: "Support"}], {cha : 0.2, lib : 0.2}));
-Jobs.Hypnotist.levels.push(new JobLevel(80,   null, {int : 0.3, cha : 0.1}));
+Jobs.Hypnotist.levels.push(new JobLevel(80,   undefined, {int : 0.3, cha : 0.1}));
 Jobs.Hypnotist.levels.push(new JobLevel(160,  [{ab: Abilities.Seduction.TIllusion, set: "Support"}], {int : 0.2, lib : 0.2}));
-Jobs.Hypnotist.levels.push(new JobLevel(320,  null, {cha : 0.3, int : 0.1}));
+Jobs.Hypnotist.levels.push(new JobLevel(320,  undefined, {cha : 0.3, int : 0.1}));
 Jobs.Hypnotist.levels.push(new JobLevel(640,  [{ab: Abilities.Seduction.SIllusion, set: "Support"}], {spi : 0.2, lib : 0.2}));
-Jobs.Hypnotist.levels.push(new JobLevel(1280, null, {int : 0.1, cha : 0.3}));
+Jobs.Hypnotist.levels.push(new JobLevel(1280, undefined, {int : 0.1, cha : 0.3}));
 Jobs.Hypnotist.levels.push(new JobLevel(2560, [{ab: Abilities.Seduction.Confuse, set: "Support"}, {ab: Abilities.Seduction.Allure, set: "Support"}], {cha : 0.3, lib : 0.3, int : 0.2, lp : 5}));
 Jobs.Hypnotist.Unlocked = (entity: Entity) => {
 	return GlobalScenes.MagicStage2();
@@ -552,14 +552,14 @@ Jobs.Eromancer.preqs.push({job : Jobs.Mage, lvl : 3});
 Jobs.Eromancer.preqs.push({job : Jobs.Courtesan, lvl : 3});
 // TODO
 Jobs.Eromancer.abilities.AddAbility(Abilities.White.Heal);
-Jobs.Eromancer.levels.push(new JobLevel(40,   null, {str : 0.2}));
-Jobs.Eromancer.levels.push(new JobLevel(80,   null, {str : 0.2}));
+Jobs.Eromancer.levels.push(new JobLevel(40,   undefined, {str : 0.2}));
+Jobs.Eromancer.levels.push(new JobLevel(80,   undefined, {str : 0.2}));
 // TODO
 Jobs.Eromancer.levels.push(new JobLevel(160,  [{ab: Abilities.White.Heal, set: "Support"}], {int : 0.1, dex : 0.1}));
-Jobs.Eromancer.levels.push(new JobLevel(320,  null, {str : 0.2}));
-Jobs.Eromancer.levels.push(new JobLevel(640,  null, {str : 0.2}));
-Jobs.Eromancer.levels.push(new JobLevel(1280, null, {str : 0.2}));
-Jobs.Eromancer.levels.push(new JobLevel(2560, null, {str : 0.2}));
+Jobs.Eromancer.levels.push(new JobLevel(320,  undefined, {str : 0.2}));
+Jobs.Eromancer.levels.push(new JobLevel(640,  undefined, {str : 0.2}));
+Jobs.Eromancer.levels.push(new JobLevel(1280, undefined, {str : 0.2}));
+Jobs.Eromancer.levels.push(new JobLevel(2560, undefined, {str : 0.2}));
 Jobs.Eromancer.Unlocked = (entity: Entity) => {
 	return GlobalScenes.MagicStage2();
 };
@@ -574,14 +574,14 @@ Jobs.RunicKnight.preqs.push({job : Jobs.Mystic, lvl : 3});
 Jobs.RunicKnight.preqs.push({job : Jobs.Fighter, lvl : 3});
 // TODO
 Jobs.RunicKnight.abilities.AddAbility(Abilities.White.Heal);
-Jobs.RunicKnight.levels.push(new JobLevel(40,   null, {str : 0.2}));
-Jobs.RunicKnight.levels.push(new JobLevel(80,   null, {str : 0.2}));
+Jobs.RunicKnight.levels.push(new JobLevel(40,   undefined, {str : 0.2}));
+Jobs.RunicKnight.levels.push(new JobLevel(80,   undefined, {str : 0.2}));
 // TODO
 Jobs.RunicKnight.levels.push(new JobLevel(160,  [{ab: Abilities.White.Heal, set: "Support"}], {int : 0.1, dex : 0.1}));
-Jobs.RunicKnight.levels.push(new JobLevel(320,  null, {str : 0.2}));
-Jobs.RunicKnight.levels.push(new JobLevel(640,  null, {str : 0.2}));
-Jobs.RunicKnight.levels.push(new JobLevel(1280, null, {str : 0.2}));
-Jobs.RunicKnight.levels.push(new JobLevel(2560, null, {str : 0.2}));
+Jobs.RunicKnight.levels.push(new JobLevel(320,  undefined, {str : 0.2}));
+Jobs.RunicKnight.levels.push(new JobLevel(640,  undefined, {str : 0.2}));
+Jobs.RunicKnight.levels.push(new JobLevel(1280, undefined, {str : 0.2}));
+Jobs.RunicKnight.levels.push(new JobLevel(2560, undefined, {str : 0.2}));
 Jobs.RunicKnight.Unlocked = (entity: Entity) => {
 	return GlobalScenes.MagicStage2();
 };
@@ -596,14 +596,14 @@ Jobs.Bard.preqs.push({job : Jobs.Courtesan, lvl : 5});
 Jobs.Bard.preqs.push({job : Jobs.Singer, lvl : 3});
 // TODO
 Jobs.Bard.abilities.AddAbility(Abilities.White.Heal);
-Jobs.Bard.levels.push(new JobLevel(40,   null, {str : 0.2}));
-Jobs.Bard.levels.push(new JobLevel(80,   null, {str : 0.2}));
+Jobs.Bard.levels.push(new JobLevel(40,   undefined, {str : 0.2}));
+Jobs.Bard.levels.push(new JobLevel(80,   undefined, {str : 0.2}));
 // TODO
 Jobs.Bard.levels.push(new JobLevel(160,  [{ab: Abilities.White.Heal, set: "Support"}], {int : 0.1, dex : 0.1}));
-Jobs.Bard.levels.push(new JobLevel(320,  null, {str : 0.2}));
-Jobs.Bard.levels.push(new JobLevel(640,  null, {str : 0.2}));
-Jobs.Bard.levels.push(new JobLevel(1280, null, {str : 0.2}));
-Jobs.Bard.levels.push(new JobLevel(2560, null, {str : 0.2}));
+Jobs.Bard.levels.push(new JobLevel(320,  undefined, {str : 0.2}));
+Jobs.Bard.levels.push(new JobLevel(640,  undefined, {str : 0.2}));
+Jobs.Bard.levels.push(new JobLevel(1280, undefined, {str : 0.2}));
+Jobs.Bard.levels.push(new JobLevel(2560, undefined, {str : 0.2}));
 Jobs.Bard.Unlocked = (entity: Entity) => {
 	const cveta = GAME().cveta;
 	if (entity === cveta) { return true; }

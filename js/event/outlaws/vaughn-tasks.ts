@@ -75,7 +75,7 @@ export namespace VaughnTasksScenes {
 					Prompt();
 				}, enabled : true,
 			});
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		} else {
 			Text.Add("<i>“Hmm.”</i> Vaughn takes his gaze off you and thinks for a moment. <i>“Don’t imagine I’ve got anything for you at the moment; the other operatives pretty much have all our bases covered and the boss-man’s been in a thinking mood, as opposed to a doing one. Maybe you should go out there and move things along - stir up the hive, as they say. That should create all sorts of opportunities for us to get our fingers into some more pies.”</i>", parse);
 			Text.NL();
@@ -554,7 +554,7 @@ export namespace VaughnTasksScenes {
 					Gui.NextPrompt();
 				});
 
-				Gui.SetButtonsFromList(options, false, null);
+				Gui.SetButtonsFromList(options, false, undefined);
 			} else {
 				Text.Add("<i>“Why’re you being so nice to me all of a sudden?”</i> Miranda practically snarls, the dobie eyeing you suspiciously as a serving wench brings the both of you your drinks - tankards of cheap beer, by the looks of it. <i>“You want something from me, don’t you?”</i>", parse);
 				Text.NL();
@@ -708,7 +708,7 @@ export namespace VaughnTasksScenes {
 								Gui.NextPrompt();
 							}, enabled : true,
 						});
-						Gui.SetButtonsFromList(options, false, null);
+						Gui.SetButtonsFromList(options, false, undefined);
 					}, enabled : true,
 				});
 				options.push({ nameStr : "No",
@@ -729,7 +729,7 @@ export namespace VaughnTasksScenes {
 						Gui.NextPrompt();
 					}, enabled : true,
 				});
-				Gui.SetButtonsFromList(options, false, null);
+				Gui.SetButtonsFromList(options, false, undefined);
 			}
 		}
 
@@ -919,7 +919,7 @@ export namespace VaughnTasksScenes {
 					}, enabled : true,
 				});
 			}
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		}
 
 		export function DebriefAvailable() {
@@ -1200,7 +1200,7 @@ export namespace VaughnTasksScenes {
 				Gui.NextPrompt();
 			});
 
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		}
 
 		export function InnAvailable() {
@@ -1417,7 +1417,7 @@ export namespace VaughnTasksScenes {
 											VaughnTasksScenes.Poisoning.InnPrompt(opts);
 										}, enabled : true,
 									});
-									Gui.SetButtonsFromList(options, false, null);
+									Gui.SetButtonsFromList(options, false, undefined);
 								} else {
 									Text.Add("Lei shakes his head slowly. <i>As you know full well, my services are currently engaged. I will wish you the best of luck, for the cause your task is serving seems to be a worthy one - I am full aware of the disturbing nature of some of the laws passed of late - but I’m sure you understand that I cannot simply abandon my post to aid you. That would be highly remiss of me.”</i>", parse);
 									Text.NL();
@@ -1458,7 +1458,7 @@ export namespace VaughnTasksScenes {
 								VaughnTasksScenes.Poisoning.InnPrompt(opts);
 							}, enabled : true,
 						});
-						Gui.SetButtonsFromList(options, false, null);
+						Gui.SetButtonsFromList(options, false, undefined);
 					}, enabled : true,
 				});
 			}
@@ -1594,7 +1594,7 @@ export namespace VaughnTasksScenes {
 					}, enabled : true,
 				});
 			}
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		}
 
 		export function Kitchen(opts: any) {
@@ -1704,7 +1704,7 @@ export namespace VaughnTasksScenes {
 						VaughnTasksScenes.Poisoning.KitchenYourself();
 					}, enabled : true,
 				});
-				Gui.SetButtonsFromList(options, false, null);
+				Gui.SetButtonsFromList(options, false, undefined);
 			} else {
 				VaughnTasksScenes.Poisoning.KitchenYourself();
 			}
@@ -1820,7 +1820,7 @@ export namespace VaughnTasksScenes {
 					VaughnTasksScenes.Poisoning.AphrodisiacLeave();
 				}, enabled : true,
 			});
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		}
 
 		export function AphrodisiacLeave() {
@@ -1950,7 +1950,7 @@ export namespace VaughnTasksScenes {
 					VaughnTasksScenes.Poisoning.AphrodisiacLeave();
 				}, enabled : true,
 			});
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		}
 
 		export function OutOfTime() {

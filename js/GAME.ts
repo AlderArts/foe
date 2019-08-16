@@ -35,7 +35,7 @@ export function WORLD() {
 	return world;
 }
 
-let worldTime: any = null;
+let worldTime: any;
 
 export function InitWorldTime(time: any) {
     worldTime = time;
@@ -84,7 +84,7 @@ export function InitEntityStorage() {
     entityStorage = new Array();
 }
 
-let cavalcade: any = null;
+let cavalcade: any;
 
 export function SetCavalcade(c: any) {
 	cavalcade = c;

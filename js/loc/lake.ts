@@ -28,7 +28,7 @@ LakeLoc.Shore.description = () => {
 
 LakeLoc.Shore.links.push(new Link(
 	"Slums", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(WORLD().loc.Rigard.Slums.Gate, {minute: 45});
 	},

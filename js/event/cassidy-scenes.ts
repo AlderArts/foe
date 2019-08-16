@@ -645,7 +645,7 @@ CassidyScenes.ShopBuy = () => {
 			if (!it) { return false; }
 			_.pull(shopPool, it);
 
-			cassidy.shop.AddItem(it, 5, null, buyFunc);
+			cassidy.shop.AddItem(it, 5, undefined, buyFunc);
 		});
 
 		cassidy.flags.shop = timestamp;
@@ -1497,7 +1497,7 @@ CassidyScenes.InsideTalkPrompt = () => {
 						});
 					});
 
-					Gui.SetButtonsFromList(options, false, null);
+					Gui.SetButtonsFromList(options, false, undefined);
 				} else {
 					Text.Add("Cass rolls her eyes, grins weakly and tries to hide the fact that her tail’s practically thrashing behind her. <i>“I get where you’re coming from, ace. I really do. But seriously… the fact that whatever caused Great-grandma and Grandma to be stacked sky-high missed me is a <b>good</b> thing. I couldn’t work the forge with hair getting in my way all the time, nor properly swing a hammer with a huge chest or falling on my ass all the time…”</i>", parse);
 					Text.NL();
@@ -1629,7 +1629,7 @@ CassidyScenes.ManagingShop = () => {
 				});
 			}, enabled : true,
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	};
 	askprompt();
 };
@@ -1738,7 +1738,7 @@ CassidyScenes.ManagingShop1 = (score: number) => {
 		tooltip : "For kids like him, bigger is always better.",
 		func : wrong, enabled : true,
 	});
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 };
 
 CassidyScenes.ManagingShop2 = (score: number) => {
@@ -1802,7 +1802,7 @@ CassidyScenes.ManagingShop2 = (score: number) => {
 		});
 	});
 
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 };
 
 CassidyScenes.ManagingShop3 = (score: number) => {
@@ -1862,7 +1862,7 @@ CassidyScenes.ManagingShop3 = (score: number) => {
 			});
 		}, enabled : true,
 	});
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 };
 
 // Intermission 1! Only use if the PC knows who Lei is and if he hasn’t been recruited. Lei doesn’t count as a customer.
@@ -1982,7 +1982,7 @@ CassidyScenes.ManagingShop5 = (score: number) => {
 		});
 	});
 
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 };
 
 CassidyScenes.ManagingShop6 = (score: number) => {
@@ -2139,7 +2139,7 @@ CassidyScenes.ManagingShop6 = (score: number) => {
 		}
 	});
 
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 };
 
 CassidyScenes.ManagingShopCookies = () => {
@@ -2215,7 +2215,7 @@ CassidyScenes.ManagingShopCookies = () => {
 		});
 	});
 
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 };
 
 CassidyScenes.BigReveal = () => {
@@ -2732,7 +2732,7 @@ CassidyScenes.Model = () => {
 				Gui.NextPrompt();
 			});
 
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		},
 	});
 	options.push({nameStr : "No Thanks",
@@ -2752,7 +2752,7 @@ CassidyScenes.Model = () => {
 			CassidyScenes.InsidePrompt();
 		},
 	});
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 };
 
 // FEMINIZING
@@ -2967,7 +2967,7 @@ CassidyScenes.SparFirst = () => {
 			CassidyScenes.InsidePrompt();
 		},
 	});
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 };
 
 // SET UP ENCOUNTER SPAR

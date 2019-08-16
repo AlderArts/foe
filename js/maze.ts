@@ -98,16 +98,16 @@ export class MazeRoom extends Event {
 
 		// Set up special interface
 		Input.buttons[5].enabledImage = Images.imgButtonEnabled2;
-		Input.buttons[5].Setup("North", MoveToLocation, north != null, north, null, GameState.Event);
+		Input.buttons[5].Setup("North", MoveToLocation, north !== undefined, north, undefined, GameState.Event);
 
 		Input.buttons[8].enabledImage = Images.imgButtonEnabled2;
-		Input.buttons[8].Setup("West", MoveToLocation, west != null, west, null, GameState.Event);
+		Input.buttons[8].Setup("West", MoveToLocation, west !== undefined, west, undefined, GameState.Event);
 
 		Input.buttons[9].enabledImage = Images.imgButtonEnabled2;
-		Input.buttons[9].Setup("South", MoveToLocation, south != null, south, null, GameState.Event);
+		Input.buttons[9].Setup("South", MoveToLocation, south !== undefined, south, undefined, GameState.Event);
 
 		Input.buttons[10].enabledImage = Images.imgButtonEnabled2;
-		Input.buttons[10].Setup("East", MoveToLocation, east != null, east, null, GameState.Event);
+		Input.buttons[10].Setup("East", MoveToLocation, east !== undefined, east, undefined, GameState.Event);
 	}
 
 	public PrintDesc() {

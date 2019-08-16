@@ -39,7 +39,7 @@ BrothelLoc.brothel.description = () => {
 
 BrothelLoc.brothel.links.push(new Link(
 	"Outside", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(WORLD().loc.Rigard.Residential.Street, {minute: 5});
 	},
@@ -101,7 +101,7 @@ BrothelLoc.brothel.events.push(new Link(
 		const lucille = GAME().lucille;
 		return lucille.ThemeroomOpen();
 	}, true,
-	null,
+	undefined,
 	() => {
 		LucilleScenes.Themerooms();
 	},
@@ -177,7 +177,7 @@ export namespace BrothelScenes {
 			}, enabled : true,
 			tooltip : "You want her.",
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 
 		Gui.Callstack.push(() => {
 			Text.Add("Dreamily, you say that you are here for her. What possible other reason could you have for coming here? The madame gives you an artful titter, covering her mouth with a delicate hand, playing coy with you.", parse);

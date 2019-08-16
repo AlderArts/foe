@@ -34,7 +34,7 @@ KingsRoadLoc.Road.description = () => {
 
 KingsRoadLoc.Road.links.push(new Link(
 	"Rigard", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(WORLD().loc.Plains.Gate, {hour: 1});
 	},
@@ -42,7 +42,7 @@ KingsRoadLoc.Road.links.push(new Link(
 
 KingsRoadLoc.Road.events.push(new Link(
 	"Scepter", () => GAME().burrows.flags.Access === BurrowsFlags.AccessFlags.Stage4, true,
-	null,
+	undefined,
 	() => {
 		GolScenes.SearchForScepter();
 	},

@@ -558,14 +558,14 @@ BurrowsLoc.Entrance.description = () => {
 
 BurrowsLoc.Entrance.links.push(new Link(
 	"Plains", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(WORLD().loc.Plains.Crossroads, {minute: 30});
 	},
 ));
 BurrowsLoc.Entrance.links.push(new Link(
 	"Inside", true, true,
-	null,
+	undefined,
 	() => {
 		const burrows = GAME().burrows;
 		if (!burrows.LagonDefeated() && burrows.LagonChallenged()) {
@@ -596,7 +596,7 @@ BurrowsLoc.Tunnels.description = () => {
 
 BurrowsLoc.Tunnels.links.push(new Link(
 	"Outside", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(BurrowsLoc.Entrance, {minute: 10});
 	},
@@ -604,7 +604,7 @@ BurrowsLoc.Tunnels.links.push(new Link(
 
 BurrowsLoc.Tunnels.links.push(new Link(
 	"Throne", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(BurrowsLoc.Throne, {minute: 10});
 	},
@@ -612,7 +612,7 @@ BurrowsLoc.Tunnels.links.push(new Link(
 
 BurrowsLoc.Tunnels.links.push(new Link(
 	"The Pit", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(BurrowsLoc.Pit, {minute: 10});
 	},
@@ -620,7 +620,7 @@ BurrowsLoc.Tunnels.links.push(new Link(
 
 BurrowsLoc.Tunnels.links.push(new Link(
 	"Lab", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(BurrowsLoc.Lab, {minute: 10});
 	},
@@ -659,7 +659,7 @@ BurrowsLoc.Throne.description = () => {
 
 BurrowsLoc.Throne.links.push(new Link(
 	"Tunnels", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(BurrowsLoc.Tunnels, {minute: 10});
 	},
@@ -670,7 +670,7 @@ BurrowsLoc.Throne.events.push(new Link(
 		const burrows = GAME().burrows;
 		return burrows.VenaRestored();
 	}, true,
-	null,
+	undefined,
 	() => {
 		VenaRScenes.Approach();
 	},
@@ -681,7 +681,7 @@ BurrowsLoc.Throne.events.push(new Link(
 		const lagon = GAME().lagon;
 		return lagon.IsAtLocation();
 	}, true,
-	null,
+	undefined,
 	() => {
 		const burrows = GAME().burrows;
 		const lagon = GAME().lagon;
@@ -730,7 +730,7 @@ BurrowsLoc.Pit.description = () => {
 
 BurrowsLoc.Pit.links.push(new Link(
 	"Tunnels", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(BurrowsLoc.Tunnels, {minute: 10});
 	},
@@ -741,7 +741,7 @@ BurrowsLoc.Pit.events.push(new Link(
 		const burrows = GAME().burrows;
 		return !burrows.VenaRestored();
 	}, true,
-	null,
+	undefined,
 	() => {
 		VenaScenes.PitApproach();
 	},
@@ -758,7 +758,7 @@ BurrowsLoc.Lab.SaveSpot = "Burrows";
 BurrowsLoc.Lab.safe = () => true;
 BurrowsLoc.Lab.links.push(new Link(
 	"Tunnels", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(BurrowsLoc.Tunnels, {minute: 10});
 	},
@@ -769,7 +769,7 @@ BurrowsLoc.Lab.events.push(new Link(
 		const ophelia = GAME().ophelia;
 		return ophelia.IsAtLocation();
 	}, true,
-	null,
+	undefined,
 	() => {
 		OpheliaScenes.LabApproach();
 	},

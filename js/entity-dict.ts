@@ -45,7 +45,7 @@ const EntityDict = {
 		if (id === "aria") { return GAME().aria; }
 		if (id === "ches") { return GAME().ches; }
 		if (id === "sylistraxia") { return GAME().sylistraxia; }
-		return null;
+		return undefined;
 	},
 };
 

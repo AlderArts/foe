@@ -1195,7 +1195,7 @@ RigardScenes.Chatter2 = (enteringArea: boolean) => {
 			}, enabled : true,
 			tooltip : "Nope. You’re not having any of that. The best plan is to just get away from him.",
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 
 		return true;
 	}, 1.0, () => rigard.Access() && WorldTime().hour >= 6 && WorldTime().hour < 19);
@@ -1495,7 +1495,7 @@ RigardScenes.Lockdown = () => {
 						}, enabled : true,
 						tooltip : "This is hardly the time to be having fun, so tuck her doghood back in and get down to business.",
 					});
-					Gui.SetButtonsFromList(options, false, null);
+					Gui.SetButtonsFromList(options, false, undefined);
 					miranda.flags.Attitude = MirandaFlags.Attitude.Nice;
 				}, enabled : true,
 				tooltip : "The way you see it, this just gives you more options. Why not indulge?",
@@ -1515,7 +1515,7 @@ RigardScenes.Lockdown = () => {
 				}, enabled : true,
 				tooltip : "Eww, you’re not about to touch <b>that!</b>",
 			});
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		} else {
 			if (miranda.Attitude() >= MirandaFlags.Attitude.Neutral) {
 				Text.Add("<i>“Before we get going, how about you help me with an itch I’m having?”</i> the herm dog asks with a mischievous grin.", parse);
@@ -1564,7 +1564,7 @@ RigardScenes.Lockdown = () => {
 					}, enabled : true,
 					tooltip : "This is hardly the time to be having fun. The two of you have a thief to catch.",
 				});
-				Gui.SetButtonsFromList(options, false, null);
+				Gui.SetButtonsFromList(options, false, undefined);
 			} else { // Nasty
 				Text.Add("<i>“Alright then, let’s get to work. You can start off by stripping down,”</i> she orders you.", parse);
 				Text.NL();
@@ -1620,7 +1620,7 @@ RigardScenes.Lockdown = () => {
 					}, enabled : true,
 					tooltip : "Just… no. This is hardly the time to even consider this. Plus you’re just not in the mood.",
 				});
-				Gui.SetButtonsFromList(options, false, null);
+				Gui.SetButtonsFromList(options, false, undefined);
 
 				Gui.Callstack.push(() => {
 					Text.NL();

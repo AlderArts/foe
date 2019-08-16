@@ -37,14 +37,14 @@ HighlandsLoc.Hills.description = () => {
 
 HighlandsLoc.Hills.links.push(new Link(
 	"Crossroads", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(WORLD().loc.Plains.Crossroads, {hour: 2});
 	},
 ));
 HighlandsLoc.Hills.links.push(new Link(
 	"Den entrance", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(WORLD().loc.DragonDen.Entry, {minute: 15});
 	},
@@ -120,7 +120,7 @@ HighlandsLoc.Hills.events.push(new Link(
 	"Ginseng", () => {
 		return GAME().asche.flags.Tasks === AscheFlags.Tasks.Ginseng_Started;
 	}, true,
-	null,
+	undefined,
 	() => {
 		AscheTasksScenes.Ginseng.Highlands();
 	},
@@ -131,7 +131,7 @@ HighlandsLoc.Hills.events.push(new Link(
 		// TODO Isla's string (put as loc rather than event)
 		return AscheTasksScenes.Spring.IsOn() && !AscheTasksScenes.Spring.IsSuccess();
 	}, true,
-	null,
+	undefined,
 	() => {
 		AscheTasksScenes.Spring.Highlands();
 	},
@@ -141,7 +141,7 @@ HighlandsLoc.Hills.links.push(new Link(
 	"Spring", () => {
 		return Isla.Available();
 	}, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(HighlandsLoc.Spring, {minute: 10});
 	},
@@ -177,7 +177,7 @@ HighlandsLoc.Spring.description = () => {
 
 HighlandsLoc.Spring.links.push(new Link(
 	"Leave", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(HighlandsLoc.Hills, {minute: 10});
 	},
@@ -185,14 +185,14 @@ HighlandsLoc.Spring.links.push(new Link(
 
 HighlandsLoc.Spring.events.push(new Link(
 	"Isla", true, true,
-	null,
+	undefined,
 	() => {
 		IslaScenes.Approach();
 	},
 ));
 HighlandsLoc.Spring.events.push(new Link(
 	"Bathe", true, true,
-	null,
+	undefined,
 	() => {
 		IslaScenes.Bathe();
 	},

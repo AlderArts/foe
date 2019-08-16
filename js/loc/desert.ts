@@ -75,7 +75,7 @@ DesertLoc.Drylands.enc.AddEnc(() => {
 
 DesertLoc.Drylands.links.push(new Link(
 	"Crossroads", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(WORLD().loc.Plains.Crossroads, {hour: 2});
 	},

@@ -138,7 +138,7 @@ export class OrchidBoss extends BossEntity {
 
 		// Pick a random target
 		const t = this.GetSingleTarget(encounter, activeChar);
-		let highlust = null;
+		let highlust;
 		for (let i = 0; i < party.Num(); i++) {
 			const c = party.Get(i);
 			if (c.Incapacitated()) { continue; }

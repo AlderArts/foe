@@ -135,14 +135,14 @@ lustDart.Short = () => "Aphrodisiac-tipped darts.";
 lustDart.Long = () => "Throwing darts smeared in potent aphrodisiacs. On a hit, they will charm an enemy.";
 lustDart.combat.targetMode = TargetMode.Enemy;
 lustDart.combat.castTree.push(AbilityNode.Template.Physical({
-	toDamage : null,
+	toDamage : undefined,
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[Name] throw[notS] a lust dart at [tname].", parse);
 		Text.NL();
 	}],
 	onHit: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
-		const parse = AbilityNode.DefaultParser(null, target);
+		const parse = AbilityNode.DefaultParser(undefined, target);
 		Text.Add("It strikes [tname], inflicting [thimher] with charm!", parse);
 		Text.NL();
 		if (Status.Horny(target, { hit : 0.75, turns : 3, turnsR : 5, str : 1, dmg : 0.2 })) {
@@ -153,7 +153,7 @@ lustDart.combat.castTree.push(AbilityNode.Template.Physical({
 		Text.NL();
 	}],
 	onMiss: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
-		const parse = AbilityNode.DefaultParser(null, target);
+		const parse = AbilityNode.DefaultParser(undefined, target);
 		Text.Add("[tName] manage[tnotS] to deftly sidestep the dart.", parse);
 		Text.NL();
 	}],
@@ -165,14 +165,14 @@ poisonDart.Short = () => "Poison-tipped darts.";
 poisonDart.Long = () => "Throwing darts smeared in a fast-acting venom, making them quite dangerous.";
 poisonDart.combat.targetMode = TargetMode.Enemy;
 poisonDart.combat.castTree.push(AbilityNode.Template.Physical({
-	toDamage : null,
+	toDamage : undefined,
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[Name] throw[notS] a poison dart at [tname].", parse);
 		Text.NL();
 	}],
 	onHit: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
-		const parse = AbilityNode.DefaultParser(null, target);
+		const parse = AbilityNode.DefaultParser(undefined, target);
 		Text.Add("It strikes [tname], inflicting [thimher] with poison!", parse);
 		Text.NL();
 		if (Status.Venom(target, { hit : 0.75, turns : 3, turnsR : 5, str : 1, dmg : 0.2 })) {
@@ -183,7 +183,7 @@ poisonDart.combat.castTree.push(AbilityNode.Template.Physical({
 		Text.NL();
 	}],
 	onMiss: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
-		const parse = AbilityNode.DefaultParser(null, target);
+		const parse = AbilityNode.DefaultParser(undefined, target);
 		Text.Add("[tName] manage[tnotS] to deftly sidestep the dart.", parse);
 		Text.NL();
 	}],

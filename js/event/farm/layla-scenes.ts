@@ -238,7 +238,7 @@ export namespace LaylaScenes {
 		// Pregnancy
 		const womb = layla.PregHandler().Womb();
 		const preg = womb && womb.pregnant;
-		const stage = preg ? womb.progress : null;
+		const stage = preg ? womb.progress : undefined;
 		if (preg && stage > 0.8) {
 			Text.Add("Layla’s stomach bulges out to an almost obscene degree, though her elastic skin shows not a single stretch-mark. The child within is nearly full-grown now, soon to make its entry into the world.", parse);
 			Text.NL();
@@ -823,7 +823,7 @@ export namespace LaylaScenes {
 				}, enabled : gwendy.Sexed(), // Only available if you can normally access her Sex menu, otherwise disable this button.
 				tooltip : "If she wants to show you her gratitude, you can think of a more enjoyable way for her to do that...",
 			});
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 
 			Gui.Callstack.push(() => {
 				Text.Clear();
@@ -913,7 +913,7 @@ export namespace LaylaScenes {
 					}, enabled : true,
 					tooltip : "Tell Gwendy that you don’t have any ideas what to do with the creature.",
 				});
-				Gui.SetButtonsFromList(options, false, null);
+				Gui.SetButtonsFromList(options, false, undefined);
 
 				Gui.Callstack.push(() => {
 					Text.NL();
@@ -1093,7 +1093,7 @@ export namespace LaylaScenes {
 			armor() { return player.ArmorDesc(); },
 		};
 
-		const p1cock = player.BiggestCock(null, true);
+		const p1cock = player.BiggestCock(undefined, true);
 
 		// [name]
 		const options = new Array();
@@ -1165,7 +1165,7 @@ export namespace LaylaScenes {
 		const player = GAME().player;
 		const layla = GAME().layla;
 
-		const p1cock = player.BiggestCock(null, true);
+		const p1cock = player.BiggestCock(undefined, true);
 		const strapon = p1cock.isStrapon;
 
 		let parse: any = {
@@ -1517,7 +1517,7 @@ export namespace LaylaScenes {
 				}, enabled : true,
 				tooltip : "That’s a really nice cock she has. You wonder what it would taste like...",
 			});
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 
 			Gui.Callstack.push(() => {
 				Text.Add("Pushing yourself off the ground and rising to your [feet], you dust yourself off and thank Layla for being honest about her little secret. Though, if she has any more surprises tucked away, you’d appreciate it if she told you about them now.", parse);
@@ -1596,7 +1596,7 @@ export namespace LaylaScenes {
 					}, enabled : true,
 					tooltip : "Better, you want to taste it.",
 				});
-				Gui.SetButtonsFromList(options, false, null);
+				Gui.SetButtonsFromList(options, false, undefined);
 
 				Gui.Callstack.push(() => {
 					Text.Add("She’s just full of surprises, isn’t she? What else can she do? You ask curiously.", parse);
@@ -1693,7 +1693,7 @@ export namespace LaylaScenes {
 						}, enabled : true,
 						tooltip : "You have something more interesting to stick in there than a finger, if she’s okay with that?",
 					});
-					Gui.SetButtonsFromList(options, false, null);
+					Gui.SetButtonsFromList(options, false, undefined);
 
 					Gui.Callstack.push(() => {
 						Text.Add("So… is that everything or does she have something else she needs to show you?", parse);
@@ -1751,7 +1751,7 @@ export namespace LaylaScenes {
 								}, enabled : true,
 								tooltip : "You think she should learn about the pleasures of anal, if she’s going to practice pitching.",
 							});
-							Gui.SetButtonsFromList(options, false, null);
+							Gui.SetButtonsFromList(options, false, undefined);
 						};
 
 						options.push({ nameStr : "Hell yeah!",
@@ -1782,7 +1782,7 @@ export namespace LaylaScenes {
 							}, enabled : true,
 							tooltip : "You’re still digesting all she’s told you. Another time, maybe?",
 						});
-						Gui.SetButtonsFromList(options, false, null);
+						Gui.SetButtonsFromList(options, false, undefined);
 					});
 				});
 			});
@@ -1997,7 +1997,7 @@ export namespace LaylaScenes {
 				}, enabled : true,
 				tooltip : "If she’ll just present her cock to you, you’ll take care of getting it lubed up.",
 			});
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		} else {
 			Text.Add("Seeing that the chimera looks a little uncertain, you decide to step in and give her a hand. In a gentle tone, you instruct her to sit down and spread her legs for you.", parse);
 			Text.NL();
@@ -2134,7 +2134,7 @@ export namespace LaylaScenes {
 									Text.Add("Without thinking, your tongue sweeps over your lips, savoring the warming minty taste of her goo. With no hesitation, you open as wide as you can, welcoming the chimera’s second cock as it snakes into your mouth. Wrapping your lips around it, you start to suckle, and fluids pour down your throat in response.", parse);
 									Text.NL();
 
-									LaylaScenes.SexCatchAnalCont2(parse, null, true);
+									LaylaScenes.SexCatchAnalCont2(parse, undefined, true);
 								}, enabled : true,
 								tooltip : "How can you possibly resist an offer like that?",
 							});
@@ -2147,7 +2147,7 @@ export namespace LaylaScenes {
 								}, enabled : true,
 								tooltip : "You don’t want her tail, either.",
 							});
-							Gui.SetButtonsFromList(options, false, null);
+							Gui.SetButtonsFromList(options, false, undefined);
 						} else {
 							Text.Add("<i>“Okay,”</i> she replies in disappointment, turning her attention back to your nipples.", parse);
 							Text.NL();
@@ -2156,7 +2156,7 @@ export namespace LaylaScenes {
 					}, enabled : true,
 					tooltip : "You’d rather she didn’t.",
 				});
-				Gui.SetButtonsFromList(options, false, null);
+				Gui.SetButtonsFromList(options, false, undefined);
 
 			}, 1.0, () => true);
 			scenes.AddEnc(() => {
@@ -2173,7 +2173,7 @@ export namespace LaylaScenes {
 						Text.Add("You open your mouth without hesitation, and immediately Layla’s tail glides inside. Wrapping your lips around its girth, you suckle happily, feeling the warming, mint-tinged goo trickling down your throat.", parse);
 						Text.NL();
 
-						LaylaScenes.SexCatchAnalCont2(parse, null, true);
+						LaylaScenes.SexCatchAnalCont2(parse, undefined, true);
 					}, enabled : true,
 					tooltip : "Let’s just say ‘aahhh’ already.",
 				});
@@ -2212,11 +2212,11 @@ export namespace LaylaScenes {
 							}, enabled : true,
 							tooltip : "You’d rather not.",
 						});
-						Gui.SetButtonsFromList(options, false, null);
+						Gui.SetButtonsFromList(options, false, undefined);
 					}, enabled : true,
 					tooltip : "She can get that out of your face - you have all the cock you need down below.",
 				});
-				Gui.SetButtonsFromList(options, false, null);
+				Gui.SetButtonsFromList(options, false, undefined);
 			}, 1.0, () => layla.sexlevel >= 3);
 			scenes.Get();
 		} else {
@@ -2339,7 +2339,7 @@ export namespace LaylaScenes {
 				}, enabled : true,
 				tooltip : "Not this time.",
 			});
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		} else {
 			LaylaScenes.SexCatchAnalCont3(parse);
 		}
@@ -2439,7 +2439,7 @@ export namespace LaylaScenes {
 		const player = GAME().player;
 		const layla = GAME().layla;
 
-		const p1cock = player.BiggestCock(null, true);
+		const p1cock = player.BiggestCock(undefined, true);
 
 		let parse: any = {
 			playername : player.name,
@@ -2625,7 +2625,7 @@ export namespace LaylaScenes {
 						LaylaScenes.SexPitchVaginalCont(opts, p1cock, parse);
 					}, enabled : true,
 				});
-				Gui.SetButtonsFromList(options, false, null);
+				Gui.SetButtonsFromList(options, false, undefined);
 			} else {
 				Text.Add("You can feel the throbbing in your dick[s] as your hungry gaze sweeps back and forth across the naked chimera’s ample curves. You’re so hard that it almost hurts, ready to just dive into the warmth between her supple thighs... but you force yourself to be patient. You just need to figure out how you want to get her ready for this...", parse);
 				Text.Flush();
@@ -2714,8 +2714,8 @@ export namespace LaylaScenes {
 				Text.NL();
 
 				Sex.Cunnilingus(player, layla);
-				player.Fuck(null, 2);
-				layla.Fuck(null, 2);
+				player.Fuck(undefined, 2);
+				layla.Fuck(undefined, 2);
 
 				Text.Add("You pause for a moment, savoring the indescribable bouquet, and then slowly lower your [face] towards her treasure. You purse your lips and place a light kiss on the chimera’s clitoris, sucking just hard enough that she can feel it. Your tongue flicks out, playfully caressing Layla’s buzzer, dabbing it with its [tongueTip] until you can feel it growing hard and stiff from your ministrations.", parse);
 				Text.NL();
@@ -2733,7 +2733,7 @@ export namespace LaylaScenes {
 				LaylaScenes.SexPitchVaginalCont2(opts, p1cock, parse);
 			}, enabled : true,
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	}
 
 	export function SexPitchVaginalCont2(opts: any, p1cock: Cock, parse: any) {
@@ -2956,7 +2956,7 @@ export namespace LaylaScenes {
 						Gui.PrintDefaultOptions();
 					}, enabled : true,
 				});
-				Gui.SetButtonsFromList(options, false, null);
+				Gui.SetButtonsFromList(options, false, undefined);
 			} else if (laylaSexlevel >= 3) {
 				Text.Add("Layla suddenly springs forth, wrapping her arms around you into a hug as she presses her lips to yours, gently licking them and seeking entrance.", parse);
 				Text.NL();
@@ -3025,14 +3025,14 @@ export namespace LaylaScenes {
 						Gui.PrintDefaultOptions();
 					}, enabled : true,
 				});
-				Gui.SetButtonsFromList(options, false, null);
+				Gui.SetButtonsFromList(options, false, undefined);
 			} else {
 				Text.Add("Throughout your efforts, you try to pay attention to Layla’s reactions. You carefully listen to her gasps and moans, trying to use them to help you gauge how well you’re pleasing her. When her eyes flutter closed and her lips part in a silent cry, you know you’ve found her G-spot, and you try to focus your efforts on it.", parse);
 				Gui.PrintDefaultOptions();
 			}
 		});
 
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	}
 
 	export function SexPitchVaginalCont3(opts: any, p1cock: Cock, parse: any) {
@@ -3184,7 +3184,7 @@ export namespace LaylaScenes {
 					Gui.NextPrompt();
 				}, enabled : true,
 			});
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		} else {
 			Text.Add("You can feel your heart pounding with arousal as you watch Layla mewling and writhing under your ministrations. You may not be getting quite the same pleasure out of this that she is, but the show is certainly worth it! On that thought, you redouble your efforts, determined to push the teetering chimera cleanly over the brink of her restraint.", parse);
 			Text.NL();
@@ -3412,7 +3412,7 @@ export namespace LaylaScenes {
 					Gui.NextPrompt();
 				}, enabled : true,
 			});
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		}
 	}
 

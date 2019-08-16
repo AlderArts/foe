@@ -174,7 +174,7 @@ export namespace LagonDScenes {
 
 		options.push({nameStr : "Pitch anal",
 			tooltip : Text.Parse("He’s just begging for your [cock] up his tight little bunny-butt.", parse),
-			enabled : player.BiggestCock(null, true),
+			enabled : player.BiggestCock(undefined, true),
 			func() {
 				LagonDScenes.PitchAnal();
 			},
@@ -218,7 +218,7 @@ export namespace LagonDScenes {
 		const party: Party = GAME().party;
 		const lagon = GAME().lagon;
 
-		const p1cock = player.BiggestCock(null, true);
+		const p1cock = player.BiggestCock(undefined, true);
 		const strapon = p1cock.isStrapon;
 
 		let parse: any = {
@@ -720,7 +720,7 @@ export namespace LagonDScenes {
 		const options = [];
 		options.push({nameStr : "Pitch anal",
 			tooltip : Text.Parse("If he’s that eager to get his ass tapped, why not oblige him?", parse),
-			enabled : player.BiggestCock(null, true),
+			enabled : player.BiggestCock(undefined, true),
 			func() {
 				LagonDScenes.ScepterPitchAnal();
 			},
@@ -751,7 +751,7 @@ export namespace LagonDScenes {
 		const party: Party = GAME().party;
 		const lagon = GAME().lagon;
 
-		const p1cock = player.BiggestCock(null, true);
+		const p1cock = player.BiggestCock(undefined, true);
 		const strapon = p1cock.isStrapon;
 		let parse: any = {
 			playername : player.name,
@@ -1366,7 +1366,7 @@ export namespace LagonDScenes {
 		Text.Add("Lagon can barely contain his laughter once you give him his sentence. <i>“A public fucking!? Really!? This is hilarious!”</i> He laughs out loud. <i>“Fine then! Who do I have to fuck?”</i> he asks, still laughing.", parse);
 		Text.NL();
 
-		const p1cock = player.BiggestCock(null, true);
+		const p1cock = player.BiggestCock(undefined, true);
 		player.subDom.IncreaseStat(10, 5);
 
 		if (p1cock) {
@@ -1423,7 +1423,7 @@ export namespace LagonDScenes {
 					LagonDScenes.PunishmentVena();
 				},
 			});
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		} else {
 			Text.Add("With mischievous delight, you turn to Vena and tell her that the trial has ended; she may commence to fucking her husband’s ass whenever she feels ready.", parse);
 			Text.NL();
@@ -1442,7 +1442,7 @@ export namespace LagonDScenes {
 		const player = GAME().player;
 		const vena = GAME().vena;
 
-		const p1cock = player.BiggestCock(null, true);
+		const p1cock = player.BiggestCock(undefined, true);
 		const strapon = p1cock.isStrapon;
 
 		let parse: any = {
@@ -1598,7 +1598,7 @@ export namespace LagonDScenes {
 					LagonDScenes.PunishmentPCCont(false);
 				},
 			});
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		} else {
 			Text.Add("Now, you might not quite be getting the same enjoyment out of this as Vena is. But the sight of her lovely rump jiggling as you pound her cunt, and the muffled sounds of pleasure escaping her otherwise occupied mouth are more than enough to keep you happy.", parse);
 			Text.NL();
@@ -1620,7 +1620,7 @@ export namespace LagonDScenes {
 		const player = GAME().player;
 		const lagon = GAME().lagon;
 
-		const p1cock = player.BiggestCock(null, true);
+		const p1cock = player.BiggestCock(undefined, true);
 		const strapon = p1cock.isStrapon;
 
 		let parse: any = {
@@ -2120,7 +2120,7 @@ export namespace LagonDScenes {
 				LagonDScenes.PunishmentVenaCont();
 			},
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	}
 
 	export function PunishmentVenaCont() {

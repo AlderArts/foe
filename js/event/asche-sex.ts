@@ -47,14 +47,14 @@ export namespace AscheSexScenes {
 				}, enabled : true,
 			});
 		}
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	}
 
 	export function FuckHer() {
 		const player = GAME().player;
 		const asche = GAME().asche;
 
-		const p1cock = player.BiggestCock(null, true);
+		const p1cock = player.BiggestCock(undefined, true);
 		const real = !p1cock.isStrapon;
 		const knotted = p1cock.Knot();
 		const longCock = p1cock.Len() > 18;
@@ -180,8 +180,8 @@ export namespace AscheSexScenes {
 		Text.NL();
 
 		Sex.Cunnilingus(player, asche);
-		player.Fuck(null, 0);
-		asche.Fuck(null, 0);
+		player.Fuck(undefined, 0);
+		asche.Fuck(undefined, 0);
 
 		Text.Add("The jackaless tastes every bit as good as you imagined she would, and you feel Asche’s hand on your head gently pushing you downwards, urging you to go further, deeper into her heat-filled passage. You resist and take your time in savoring her, running your tongue across those folds and petals, licking her clit in much the same way you did her nipples; though you eventually succumb to the desire and dive in, tasting her depths.", parse);
 		Text.NL();
@@ -290,8 +290,8 @@ export namespace AscheSexScenes {
 			Text.NL();
 
 			Sex.Cunnilingus(asche, player);
-			asche.Fuck(null, 0);
-			player.Fuck(null, 0);
+			asche.Fuck(undefined, 0);
+			player.Fuck(undefined, 0);
 
 			Text.Add("Asche wasn’t exaggerating, either; the jackaless <i>is</i> sharing your sensations, her entire body trembling from head to toe each time she delves into your cunt, her tongue seemingly impossibly long. Between her spread legs, a thin trickle of girl-cum oozes from the petals of her womanly flower, soiling the sheets. The trickle bursts forth in a squirt with each crashing high of orgasmic pleasure she inflicts upon you.", parse);
 			Text.NL();
@@ -530,8 +530,8 @@ export namespace AscheSexScenes {
 			Text.Add("she noses at your mound, her muzzle probing for your most intimate place, and licking away like a puppy at peanut butter when she does find it.", parse);
 
 			Sex.Cunnilingus(asche, player);
-			asche.Fuck(null, 0);
-			player.Fuck(null, 0);
+			asche.Fuck(undefined, 0);
+			player.Fuck(undefined, 0);
 		}
 		Text.NL();
 		Text.Add("Asche’s lips taste inexplicably of honey, a faint flavor lingering on the edge of your senses, and you wonder if this is yet another facet of the illusion you’re being presented with. Well, she’s right in that it’s a damned good illusion - whoever heard of a threesome with only two participants?", parse);

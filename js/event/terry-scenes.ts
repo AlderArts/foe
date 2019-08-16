@@ -160,7 +160,7 @@ TerryScenes.Appearance = () => {
 	// Pregnancy
 	const womb = terry.PregHandler().Womb();
 	const preg = womb && womb.pregnant;
-	const stage = preg ? womb.progress : null;
+	const stage = preg ? womb.progress : undefined;
 	if     (preg && stage > 0.8) {
 		Text.Add("Seems like Terry’s pregnancy is in its final stages. The [foxvixen]’s belly is nice and round. When you put your hand on [hisher] belly, you can feel the baby inside kick you. The big belly coupled with the [foxvixen]’s sometimes distant gaze make [himher] look very attractive...", parse);
 	} else if (preg && stage > 0.6) {
@@ -772,7 +772,7 @@ TerryScenes.CaughtTheThief = () => {
 				tooltip : "Why should Miranda get to keep all the fun? You’ve worked just as hard to bust this fox.",
 			});
 		}
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 
 		Gui.Callstack.push(() => {
 			Text.NL();
@@ -881,7 +881,7 @@ TerryScenes.CaughtTheThief = () => {
 					}, enabled : true,
 					tooltip : "There’s nothing you can do or say about the matter. What is done, is done. You should probably go back to your own business.",
 				});
-				Gui.SetButtonsFromList(options, false, null);
+				Gui.SetButtonsFromList(options, false, undefined);
 			});
 		});
 	});
@@ -1028,9 +1028,9 @@ TerryScenes.Release = () => {
 
 		terry.name = "Terry";
 		terry.avatar.combat = Images.terry_c;
-		terry.uniqueName = null;
-		terry.monsterName = null;
-		terry.MonsterName = null;
+		terry.uniqueName = undefined;
+		terry.monsterName = undefined;
+		terry.MonsterName = undefined;
 		party.SwitchIn(terry);
 
 		if (party.InParty(miranda)) {
@@ -1099,7 +1099,7 @@ TerryScenes.Release = () => {
 				}, enabled : true,
 				tooltip : "It wouldn’t be very nice of you to submit the fox thief to this after he’s just gotten out of the death row.",
 			});
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 
 			terry.relation.DecreaseStat(-100, 5);
 		} else {
@@ -1212,7 +1212,7 @@ TerryScenes.TalkFeelings = () => {
 				}, enabled : true,
 				tooltip : "You’re not in the mood for sex right now.",
 			});
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 			return;
 		} else if (terry.Relation() >= 30) {
 			Text.Add("<i>“I’m… feeling a bit giddy. Just a bit though!”</i> [heshe] blurts out.", parse);
@@ -1254,7 +1254,7 @@ TerryScenes.TalkFeelings = () => {
 				}, enabled : true,
 				tooltip : Text.Parse("You’re not really in the mood yourself, though, so [heshe]’ll just have to take care of it [himher]self.", parse),
 			});
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 
 			return;
 		} else {
@@ -1711,7 +1711,7 @@ TerryScenes.TalkPast = (force: boolean) => {
 				}, enabled : true,
 				tooltip : Text.Parse("In that case, you’d rather talk to [himher] about something else.", parse),
 			});
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 			return;
 		} else {
 			Text.Add("<i>“Alright then. Now, where was I...”</i>", parse);
@@ -1795,7 +1795,7 @@ TerryScenes.TalkCompliment = () => {
 			}, enabled : true,
 			tooltip : Text.Parse("You really just want to look, refuse [hisher] invitation.", parse),
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 
 		return;
 	} else if (terry.Relation() >= 30) {
@@ -2149,7 +2149,7 @@ TerryScenes.SkinshipPromptChoices = () => {
 					}, enabled : true,
 					tooltip : "Why don’t the two of you enjoy something a little hotter than kissing? [HeShe] certainly looks in the mood for it...",
 				});
-				Gui.SetButtonsFromList(options, false, null);
+				Gui.SetButtonsFromList(options, false, undefined);
 			} else {
 				Text.Add("<i>“[playername], you big tease. Surely, you don’t expect to end this with just a kiss,”</i> [heshe] says, smiling seductively. <i>“That was pretty good. So good, in fact, that now I’m craving something more.”</i>", parse);
 				Text.NL();
@@ -2192,7 +2192,7 @@ TerryScenes.SkinshipPromptChoices = () => {
 					}, enabled : true,
 					tooltip : Text.Parse("As much as you sympathize, you’re really not in the mood. You’ll just have to turn [himher] down.", parse),
 				});
-				Gui.SetButtonsFromList(options, false, null);
+				Gui.SetButtonsFromList(options, false, undefined);
 			}
 			Text.Flush();
 
@@ -2541,7 +2541,7 @@ TerryScenes.BrushTail = () => {
 				}, enabled : true,
 				tooltip : Text.Parse("It’s more fun to keep teasing [himher]; let’s just watch [himher] squirm.", parse),
 			});
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		}, enabled : true,
 		tooltip,
 	});
@@ -2605,7 +2605,7 @@ TerryScenes.BrushTail = () => {
 		}, enabled : true,
 		tooltip : Text.Parse("You promised Terry you were only going to brush [hisher] tail, so you’ll push aside the temptation and keep at it.", parse),
 	});
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 };
 
 TerryScenes.CheckFluids = () => {
@@ -2797,7 +2797,7 @@ TerryScenes.CheckFluids = () => {
 			func : backFunc, enabled : true,
 			tooltip : Text.Parse("No, you’re not really in the mood. [HeShe] can put [hisher] clothes back on.", parse),
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 
 		return;
 	}
@@ -4031,7 +4031,7 @@ TerryScenes.SexPrompt = (backPrompt: CallableFunction) => {
 			}, enabled : true,
 			tooltip : Text.Parse("That mark is pretty attractive. Terry should learn to appreciate [hisher] charms better.", parse),
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 		return;
 	} else {
 		const scenes = new EncounterTable();
@@ -4162,7 +4162,7 @@ TerryScenes.SexPromptChoice = (backPrompt: CallableFunction, haveadrink: boolean
 			}
 			if (options.length > 1) {
 				Text.Flush();
-				Gui.SetButtonsFromList(options, false, null);
+				Gui.SetButtonsFromList(options, false, undefined);
 			} else {
 				Text.NL();
 				if (player.FirstCock()) {
@@ -4193,7 +4193,7 @@ TerryScenes.SexPromptChoice = (backPrompt: CallableFunction, haveadrink: boolean
 		tooltip : Text.Parse("", parse)
 	});
 	 */
-	Gui.SetButtonsFromList(options, backPrompt != null, backPrompt);
+	Gui.SetButtonsFromList(options, backPrompt !== undefined, backPrompt);
 };
 
 TerryScenes.SexGetOralPussy = () => {
@@ -4301,8 +4301,8 @@ TerryScenes.SexGetOralPussy = () => {
 	Text.NL();
 
 	Sex.Cunnilingus(terry, player);
-	terry.Fuck(null, 2);
-	player.Fuck(null, 2);
+	terry.Fuck(undefined, 2);
+	player.Fuck(undefined, 2);
 
 	Text.Add("You moan, deep, loud and sharp as Terry’s tongue dances across your sensitive flesh. A quiver races through you, and your limbs tremble as pleasure dances like a shower of sparks in your brain.", parse);
 	Text.NL();
@@ -4437,7 +4437,7 @@ TerryScenes.SexGetOralCock = () => {
 			cockFunc(c, key);
 		});
 
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	} else {
 		Text.Add("Reaching down, you stroke your [cock], running your fingers demurely along its shaft before calling Terry over to get started.", parse);
 		Text.NL();
@@ -4841,7 +4841,7 @@ TerryScenes.SexGetOralCockCont = (parse: any, p1cock: Cock) => {
 		}, enabled : true,
 		tooltip : Text.Parse("Nothing sexier than a little [foxvixen] covered in spooge. Yank it out and let [himher] get what’s coming!", parse),
 	});
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 };
 
 TerryScenes.SexPitchAnal = (cocksInAss: Cock[]) => {
@@ -5184,7 +5184,7 @@ TerryScenes.SexPitchAnal = (cocksInAss: Cock[]) => {
 						obj : true,
 					});
 					if (options.length > 1) {
-						Gui.SetButtonsFromList(options, false, null);
+						Gui.SetButtonsFromList(options, false, undefined);
 					} else {
 						options[0].func();
 					}
@@ -5318,7 +5318,7 @@ TerryScenes.SexPitchAnal = (cocksInAss: Cock[]) => {
 			}, enabled : true,
 			tooltip : "Bite that tasty tush, and maybe have a taste of what’s to come...",
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	});
 
 	Text.Clear();
@@ -5380,7 +5380,7 @@ TerryScenes.SexPitchAnal = (cocksInAss: Cock[]) => {
 				}, enabled : true,
 				tooltip : "You can't make that promise.",
 			});
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		} else if (terry.Relation() >= 30) {
 			Text.Add("Still, there’s a definite wag in [hisher] tail as it swishes softly over [hisher] butt. It looks like Terry isn’t entirely against this...", parse);
 			Gui.PrintDefaultOptions();
@@ -5666,7 +5666,7 @@ TerryScenes.SexFuckButtEntrypoint = (p1Cock: Cock, promise: boolean, retFunc: an
 		}, enabled : true,
 		tooltip : Text.Parse("Fuck that butt good and hard!", parse),
 	});
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 };
 
 TerryScenes.SexWorship = () => {
@@ -6202,7 +6202,7 @@ TerryScenes.SexWorship = () => {
 		}, enabled : true,
 		tooltip : Text.Parse("Stuff your butt with Terry’s cock and give it a proper sleeve to empty itself into.", parse),
 	});
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 };
 
 // Clean Terry Up Entry Point
@@ -6355,7 +6355,7 @@ TerryScenes.PCCleansTerry = (func: any, opts: any = {}) => {
 		}, enabled : true,
 		tooltip : Text.Parse(tooltip, parse),
 	});
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 };
 // Clean Terry Up Exit Point
 
@@ -6688,7 +6688,7 @@ TerryScenes.TCleansPC = (func: any, opts: any = {}) => {
 		}, enabled : true,
 		tooltip,
 	});
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 };
 // Terry cleans PC Exit Point
 
@@ -7252,7 +7252,7 @@ TerryScenes.SexPitchVaginal = (cocks: Cock[]) => {
 						}, enabled : true,
 						tooltip : "You’d rather not. You want pussy, and that’s what you’ll be getting.",
 					});
-					Gui.SetButtonsFromList(options, false, null);
+					Gui.SetButtonsFromList(options, false, undefined);
 				} else {
 					Gui.PrintDefaultOptions();
 				}
@@ -7382,7 +7382,7 @@ TerryScenes.SexPitchVaginal = (cocks: Cock[]) => {
 
 		// TODO: additional toys
 
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 
 	Gui.Callstack.push(() => {
 		Text.Clear();
@@ -7529,7 +7529,7 @@ TerryScenes.SexPitchVaginal = (cocks: Cock[]) => {
 		if (p2cock) { knotted = knotted || p2cock.knot !== 0; }
 		if (p2cock) { doubleKnot = doubleKnot && p2cock.knot !== 0; }
 
-		parse = Text.ParserPlural(parse, doubleKnot, null, "4");
+		parse = Text.ParserPlural(parse, doubleKnot, undefined, "4");
 
 		if (!strapon) {
 			Text.Flush();
@@ -7551,7 +7551,7 @@ TerryScenes.SexPitchVaginal = (cocks: Cock[]) => {
 
 					if (p1cock.knot !== 0) {
 						const knot2 = p2cock && p2cock.knot !== 0;
-						parse = Text.ParserPlural(parse, knot2, null, "3");
+						parse = Text.ParserPlural(parse, knot2, undefined, "3");
 						parse.andguts = knot2 ? " and guts" : "";
 						if (cum > 6) {
 							Text.Add("With your knot[s3] anchoring you in place, you can’t help but ensure Terry is jammed full of the waterfall of semen gushing from your cock[s] and invading [hisher] defenseless womb[andguts]. Terry’s stomach seems to practically explode as you pour gush after gush inside of [himher], thrusting aggressively against you as [heshe] just keeps getting fuller and fuller. The pressure inside is so intense that fine sprays of seed start spurting out around the seal[notS3] of your bulb[s3].", parse);
@@ -8144,7 +8144,7 @@ TerryScenes.SexPitchVaginal = (cocks: Cock[]) => {
 					tooltip : Text.Parse("Terry’s got some nice big boobs, so why not use them to finish the job?", parse),
 				});
 			}
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		} else {
 			Text.NL();
 			Text.Add("Terry’s clearly very close... but you, yourself, need something a little more. On your next thrust backwards, you keep retreating until your toy pops clearly free of Terry’s grasping cunt.", parse);
@@ -8564,7 +8564,7 @@ TerryScenes.SexCatchVaginal = () => {
 				}
 			},
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	} else {
 		Text.Add("Having [hisher] target in clear sight, Terry wastes no time. [HeShe] grabs [hisher] foxhood and aligns it with your opening, gently teasing your nethers with the tip of [hisher] pointy rod.", parse);
 		Text.NL();
@@ -8762,7 +8762,7 @@ TerryScenes.SexCatchVaginal = () => {
 				}
 			},
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	}
 };
 
@@ -9365,7 +9365,7 @@ TerryScenes.SexCatchAnal = () => {
 	if (terry.Relation() >= 45) {
 		Text.Add(" <i>“Since you’ve been so nice to me, I think I’ll let you pick your poison. How do you wanna get me lubed up for that [anus] of yours?”</i>", parse);
 		Text.Flush();
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	} else {
 		const next = options[Math.floor(Math.random() * (options.length - 1))].func;
 		Text.Flush();
@@ -10808,7 +10808,7 @@ TerryScenes.SexHaveADrinkPussy = () => {
 			}, enabled : true,
 		});
 	}
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 };
 
 TerryScenes.SexHaveADrinkCock = () => {
@@ -12159,7 +12159,7 @@ TerryScenes.SexHaveADrinkBreastsArousal = (parse: any) => {
 		});
 	}
 	if (options.length > 1) {
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	} else {
 		Gui.NextPrompt(options[0].func);
 	}
@@ -12364,7 +12364,7 @@ TerryScenes.SexHaveADrinkBreastsArousalHorsecock = (parse: any) => {
 				Gui.NextPrompt();
 			}, enabled : true,
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	} else if (terry.Relation() < 60) {
 		Text.Add("<i>“Why the surprise? This huge cock is not just for show, y’know?”</i> [HeShe] grins.", parse);
 		Text.NL();
@@ -12413,7 +12413,7 @@ TerryScenes.SexHaveADrinkBreastsArousalHorsecock = (parse: any) => {
 				Gui.NextPrompt();
 			}, enabled : true,
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	} else {
 		Text.Add("<i>“So, how about we see how far I can shoot when I’m <b>inside</b> you?”</i> [HeShe] winks at you.", parse);
 		Text.NL();
@@ -12480,10 +12480,10 @@ TerryScenes.SexHaveADrinkBreastsArousalHorsecock = (parse: any) => {
 						Gui.NextPrompt();
 					}, enabled : true,
 				});
-				Gui.SetButtonsFromList(options, false, null);
+				Gui.SetButtonsFromList(options, false, undefined);
 			}, enabled : true,
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	}
 };
 
@@ -12646,7 +12646,7 @@ TerryScenes.SexHaveADrinkBreastsArousalFoxcock = (parse: any) => {
 				Gui.NextPrompt();
 			}, enabled : true,
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	} else if (terry.Relation() < 60) {
 		Text.Add("<i>“I can still keep going...”</i>", parse);
 		Text.NL();
@@ -12697,7 +12697,7 @@ TerryScenes.SexHaveADrinkBreastsArousalFoxcock = (parse: any) => {
 				Gui.NextPrompt();
 			}, enabled : true,
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	} else {
 		Text.Add("<i>“Only a little,”</i> [heshe] replies, giggling.", parse);
 		Text.NL();
@@ -12793,10 +12793,10 @@ TerryScenes.SexHaveADrinkBreastsArousalFoxcock = (parse: any) => {
 						Gui.NextPrompt();
 					}, enabled : true,
 				});
-				Gui.SetButtonsFromList(options, false, null);
+				Gui.SetButtonsFromList(options, false, undefined);
 			}, enabled : true,
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	}
 };
 
@@ -13027,7 +13027,7 @@ TerryScenes.SexHaveADrinkBreastsArousalPussy = (parse: any) => {
 				Gui.NextPrompt();
 			}, enabled : true,
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	} else if (terry.Relation() < 60) {
 		Text.Add("<i>“Ugh, I could use some rest after that...”</i>", parse);
 		Text.NL();
@@ -13076,7 +13076,7 @@ TerryScenes.SexHaveADrinkBreastsArousalPussy = (parse: any) => {
 				Gui.NextPrompt();
 			}, enabled : true,
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	} else {
 		Text.Add("<i>“Enjoy the show, [playername]?”</i>", parse);
 		Text.NL();
@@ -13148,10 +13148,10 @@ TerryScenes.SexHaveADrinkBreastsArousalPussy = (parse: any) => {
 						Gui.NextPrompt();
 					}, enabled : true,
 				});
-				Gui.SetButtonsFromList(options, false, null);
+				Gui.SetButtonsFromList(options, false, undefined);
 			}, enabled : true,
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	}
 };
 

@@ -154,11 +154,11 @@ EstevanScenes.Interact = () => {
 
 	if (GetDEBUG()) {
 		Text.NL();
-		Text.Add("DEBUG: relation: " + estevan.relation.Get(), null, "bold");
+		Text.Add("DEBUG: relation: " + estevan.relation.Get(), undefined, "bold");
 		Text.NL();
-		Text.Add("DEBUG: subDom: " + estevan.subDom.Get(), null, "bold");
+		Text.Add("DEBUG: subDom: " + estevan.subDom.Get(), undefined, "bold");
 		Text.NL();
-		Text.Add("DEBUG: slut: " + estevan.slut.Get(), null, "bold");
+		Text.Add("DEBUG: slut: " + estevan.slut.Get(), undefined, "bold");
 		Text.NL();
 	}
 	Text.Flush();
@@ -256,7 +256,7 @@ EstevanScenes.Prompt = () => {
 						}, enabled : true,
 						tooltip : "Heck yeah, this is going to be fun!",
 					});
-					Gui.SetButtonsFromList(options, false, null);
+					Gui.SetButtonsFromList(options, false, undefined);
 				};
 
 				if (estevan.flags.Cheat === EstevanFlags.Cheat.NotTalked) {
@@ -596,7 +596,7 @@ EstevanScenes.SexGay = () => {
 				}, enabled : true,
 				tooltip : "If you let the riled up satyr fuck you, you’ll be hobbling around camp for the next few days at least! Maybe you could convince him to accept a blowjob... though your jaw won’t be happy.",
 			});
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		}, enabled : true,
 		tooltip : "Give the horny satyr full access to your ass.",
 	});
@@ -749,7 +749,7 @@ EstevanScenes.SexGay = () => {
 				}, enabled : true,
 				tooltip : "You’ve already committed to fucking his ass, why give up before the grand finale?",
 			});
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 
 			Gui.Callstack.push(() => {
 				Text.NL();
@@ -771,7 +771,7 @@ EstevanScenes.SexGay = () => {
 		}, enabled : true,
 		tooltip : "Convince the satyr that he ought to let you have a turn at his ass. After all, he drank all your wine.",
 	});
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 };
 
 export { EstevanScenes };

@@ -125,7 +125,7 @@ export class Cavalcade {
 				p.hand.push(that.PullCard());
 				p.folded = false;
 			}
-			p.res = null;
+			p.res = undefined;
 		});
 		this.house = [];
 		this.house.push(this.PullCard());
@@ -149,7 +149,7 @@ export class Cavalcade {
 					Text.Add(", ");
 				}
 				if (h === cav.stag) {
-					Text.Add(h.name + " (*)", null, "bold");
+					Text.Add(h.name + " (*)", undefined, "bold");
 				} else {
 					Text.Add(h.name);
 				}
@@ -333,14 +333,14 @@ export class Cavalcade {
 				Text.Add("Your cards are ");
 				let card = GAME().player.hand[0];
 				if (card === that.stag) {
-					Text.Add(card.name + " (*)", null, "bold");
+					Text.Add(card.name + " (*)", undefined, "bold");
 				} else {
 					Text.Add(card.name);
 				}
 				Text.Add(", ");
 				card = GAME().player.hand[1];
 				if (card === that.stag) {
-					Text.Add(card.name + " (*)", null, "bold");
+					Text.Add(card.name + " (*)", undefined, "bold");
 				} else {
 					Text.Add(card.name);
 				}

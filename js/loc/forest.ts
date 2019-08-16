@@ -46,7 +46,7 @@ ForestLoc.Outskirts.enc.AddEnc(() => {
 
 		Text.Add("Not having much else to do, you wander the outskirts of the forest for a few minutes. You pick up a particularly fresh bundle of grass. Who knows, could be useful for something.");
 		Text.NL();
-		Text.Add("You pick up some fresh grass.", null, "bold");
+		Text.Add("You pick up some fresh grass.", undefined, "bold");
 		Text.Flush();
 		party.inventory.AddItem(IngredientItems.FreshGrass);
 
@@ -61,7 +61,7 @@ ForestLoc.Outskirts.enc.AddEnc(() => {
 
 		Text.Add("Not having much else to do, you wander the outskirts of the forest for a few minutes. You pick up a pretty flower. Who knows, could be useful for something.");
 		Text.NL();
-		Text.Add("You pick up a Foxglove.", null, "bold");
+		Text.Add("You pick up a Foxglove.", undefined, "bold");
 		Text.Flush();
 		party.inventory.AddItem(IngredientItems.Foxglove);
 
@@ -76,7 +76,7 @@ ForestLoc.Outskirts.enc.AddEnc(() => {
 
 		Text.Add("As you trek through the undergrowth of the deep forest, you come across a cluster of small bushes with red berries. Seeing as nothing is trying to kill you at the moment, you spend some time gathering them, figuring they could be of some use.");
 		Text.NL();
-		Text.Add("You pick some fox berries.", null, "bold");
+		Text.Add("You pick some fox berries.", undefined, "bold");
 		Text.Flush();
 		party.inventory.AddItem(IngredientItems.FoxBerries);
 
@@ -91,7 +91,7 @@ ForestLoc.Outskirts.enc.AddEnc(() => {
 
 		Text.Add("Not having much else to do, you wander the outskirts of the forest for a few minutes. You pick up an odd root. Who knows, could be useful for something.");
 		Text.NL();
-		Text.Add("You pick up a Canis root.", null, "bold");
+		Text.Add("You pick up a Canis root.", undefined, "bold");
 		Text.Flush();
 		party.inventory.AddItem(IngredientItems.CanisRoot);
 
@@ -106,7 +106,7 @@ ForestLoc.Outskirts.enc.AddEnc(() => {
 
 		Text.Add("While wandering the forest, you come across a small spring filled with clear water. Figuring you might as well get some in case you grow thirsty, you pick out a vial from your pack.");
 		Text.NL();
-		Text.Add("You fill a vial with pure spring water.", null, "bold");
+		Text.Add("You fill a vial with pure spring water.", undefined, "bold");
 		Text.Flush();
 		party.inventory.AddItem(IngredientItems.SpringWater);
 
@@ -235,7 +235,7 @@ ForestLoc.Outskirts.links.push(new Link(
 ));
 ForestLoc.Outskirts.links.push(new Link(
 	"Outlaws", () => GlobalScenes.VisitedOutlaws(), true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(WORLD().loc.Outlaws.Camp, {hour: 1});
 	},
@@ -245,7 +245,7 @@ ForestLoc.Outskirts.links.push(new Link(
 		const jeanne = GAME().jeanne;
 		return jeanne.flags.Met >= 1;
 	}, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(ForestLoc.Glade, {minute: 15});
 	},
@@ -256,14 +256,14 @@ ForestLoc.Outskirts.events.push(new Link(
 		const aquilius = GAME().aquilius;
 		return aquilius.OnHerbsQuest() && !aquilius.OnHerbsQuestFinished();
 	}, true,
-	null,
+	undefined,
 	() => {
 		AquiliusScenes.PickHerbs();
 	},
 ));
 ForestLoc.Outskirts.events.push(new Link(
 	"Nightshade", () => AscheTasksScenes.Nightshade.IsOn() && !AscheTasksScenes.Nightshade.IsSuccess(), true,
-	null,
+	undefined,
 	() => {
 		if (AscheTasksScenes.Nightshade.HasHelpFromAquilius()) {
 			AscheTasksScenes.Nightshade.FollowAquilius();

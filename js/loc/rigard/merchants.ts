@@ -86,14 +86,14 @@ ShopStreetLoc.Street.onEntry = () => {
 
 ShopStreetLoc.Street.links.push(new Link(
 	"Gate", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(WORLD().loc.Rigard.Gate, {minute: 10});
 	},
 ));
 ShopStreetLoc.Street.links.push(new Link(
 	"Residential", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(WORLD().loc.Rigard.Residential.Street, {minute: 20});
 	},
@@ -103,7 +103,7 @@ ShopStreetLoc.Street.links.push(new Link(
 ));
 ShopStreetLoc.Street.links.push(new Link(
 	"Plaza", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(WORLD().loc.Rigard.Plaza, {minute: 10});
 	},
@@ -186,7 +186,7 @@ ShopStreetLoc.Street.events.push(new Link(
 		const burrows = GAME().burrows;
 		return rigard.flags.Scepter !== 0 && burrows.flags.Access < BurrowsFlags.AccessFlags.Stage5;
 	}, true,
-	null,
+	undefined,
 	() => {
 		ShopStreetScenes.Scepter();
 	},
@@ -201,7 +201,7 @@ ShopStreetLoc.Street.events.push(new Link(
 		const party: Party = GAME().party;
 		return party.coin >= 500;
 	},
-	null,
+	undefined,
 	() => {
 		const cveta = GAME().cveta;
 		const kiakai = GAME().kiakai;
@@ -294,7 +294,7 @@ ShopStreetLoc.Street.events.push(new Link(
 
 			Gui.NextPrompt();
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	},
 ));
 

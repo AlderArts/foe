@@ -383,7 +383,7 @@ CaleSexScenes.SexSuckHimEntryPoint = (outside: boolean) => {
 		}, enabled : true,
 		tooltip : "Give him some action on both fronts, distracting him with a blowjob while you plow his rear with your fingers.",
 	});
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 
 	Gui.Callstack.push(() => {
 		Text.Add("You suppress your gag reflex at the long lupine dick thrusting down your throat, its conical tip helping Cale to plunge farther inside of you. Lapping at his knot with your [tongue], you moan softly, sending delightful vibrations along his member as you coax him slowly and steadily deeper. You worm your tongue inside his sheath as far as you can, further teasing him as it slides against the sensitive flesh.", parse);
@@ -514,7 +514,7 @@ CaleSexScenes.SexSuckHimEntryPoint = (outside: boolean) => {
 				tooltip : "Complete your humiliation of him by turning him on his back and making him eat his own seed.",
 			});
 		}
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 
 		Gui.Callstack.push(() => {
 			parse.mess = mess ? " somehow manage to" : "";
@@ -611,7 +611,7 @@ CaleSexScenes.SexGetBJ = (outside: boolean) => {
 				}, enabled : true,
 				tooltip : "You are getting that blowjob, the wolf just needs a bit more enticing first.",
 			});
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		} else {
 			Text.Add("<i>“No offense, but this wolf doesn’t swing that way, ya know?”</i> Cale waves off your suggestive remark. <i>“Now if <b>you</b> want to suck <b>my</b> cock, that’d be a different story.”</i> The cocksure wolf grins, winking at you.", parse);
 			Text.Flush();
@@ -671,8 +671,8 @@ CaleSexScenes.SexGetBJSneakyEntry = (outside: boolean, sneaky: boolean) => {
 		Text.NL();
 
 		Sex.Cunnilingus(cale, player);
-		cale.Fuck(null, 1);
-		player.Fuck(null, 1);
+		cale.Fuck(undefined, 1);
+		player.Fuck(undefined, 1);
 
 		Text.Add("As you lean back even further, you are going to need both arms to prop yourself up. Stretching languidly, you put your weight on your elbows, smiling faintly when you see the wolf wince as your [cocks] flops onto his face. You let him keep up his lapping for a while, chuckling internally as he unsuccessfully tries to ignore your erection[s] rubbing his forehead.", parse);
 		Text.NL();
@@ -881,8 +881,8 @@ CaleSexScenes.SexGetEatenEntrypoint = (outside: boolean) => {
 	Text.NL();
 
 	Sex.Cunnilingus(cale, player);
-	cale.Fuck(null, 2);
-	player.Fuck(null, 2);
+	cale.Fuck(undefined, 2);
+	player.Fuck(undefined, 2);
 
 	Text.Add("Letting him handle the reins, you close your eyes, basking in the ecstasy roused by the wolf’s experienced tongue. Rosalin has certainly given him plenty opportunity to practice at this. ", parse);
 	if (player.FirstCock()) {
@@ -916,7 +916,7 @@ CaleSexScenes.SexGetEatenEntrypoint = (outside: boolean) => {
 		Text.NL();
 
 		player.AddLustFraction(0.3);
-	}, 1.0, () => (cale.Slut() >= 30) || clitcock === null);
+	}, 1.0, () => (cale.Slut() >= 30) || clitcock === undefined);
 	scenes.AddEnc(() => {
 		parse.b = player.HasBalls() ? Text.Parse(" and [balls]", parse) : "";
 		Text.Add("Despite Cale’s enthusiastic lapping, you feel him stray sometimes. The wolf sneaks in a few licks and kisses on your [cocks][b]. You flick one of his triangular ears, chastising him for not focusing on his job.", parse);
@@ -1181,7 +1181,7 @@ CaleSexScenes.SexFuckHim = (outside: boolean, opts?: any) => {
 			tooltip : "Put the wolf in your lap and make him ride you.",
 		});
 
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 
 		Gui.Callstack.push(() => {
 			Text.NL();
@@ -1281,7 +1281,7 @@ CaleSexScenes.SexFuckHim = (outside: boolean, opts?: any) => {
 						}, enabled : true,
 						tooltip : "He's obviously uncertain about how he feels; why not be nice to him?",
 					});
-					Gui.SetButtonsFromList(options, false, null);
+					Gui.SetButtonsFromList(options, false, undefined);
 
 					Gui.Callstack.push(() => {
 						Text.NL();
@@ -1499,14 +1499,14 @@ CaleSexScenes.SexCatchVag = (outside: boolean) => {
 			tooltip : "You know your wolfy slut loves your dick; playing with it should be all he needs to get him fired up.",
 		});
 	}
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 };
 
 CaleSexScenes.SexCatchVagEntrypoint = (outside: boolean, fromAnal: boolean, customIntro: boolean) => {
 	const player = GAME().player;
 	const cale = GAME().cale;
 	const cocksInAss = player.CocksThatFit(cale.Butt(), true);
-	const cock = player.BiggestCock(null, true);
+	const cock = player.BiggestCock(undefined, true);
 
 	let parse: any = {
 		log           : outside ? "log" : "bedroll",
@@ -1672,7 +1672,7 @@ CaleSexScenes.SexCatchVagEntrypoint = (outside: boolean, fromAnal: boolean, cust
 			}, enabled : true,
 			tooltip : "You can’t take the time to wait for it to deflate; make him leave it out.",
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	}, 1.0, () => true);
 	if (!fromAnal) {
 		scenes.AddEnc(() => {
@@ -2046,7 +2046,7 @@ CaleSexScenes.SexCaleButtslutEntrypoint = (cocks: Cock[], outside: boolean) => {
 		tooltip : "You don’t feel like being glued to Cale’s boypussy right now, so just finish.",
 	});
 	if (options.length > 1) {
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	} else {
 		Gui.NextPrompt(options[0].func);
 	}
@@ -2236,10 +2236,10 @@ CaleSexScenes.SexCatchAnalEntrypoint = (outside: any, fromVag: boolean) => {
 			}, enabled : true,
 			tooltip : "He can just forget about shoving that knot up your ass!",
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	}, 1.0, () => true);
 
-	if (fromVag === null) {
+	if (fromVag === undefined) {
 		scenes.AddEnc(() => {
 			Text.Add("You find yourself growling in frustration, so close to the edge that you can nearly taste it. As Cale pulls his hips back again, you find him suddenly withdrawing his cock out entirely, leaving your [anus] squeezing in vain on empty air and you asking what’s wrong - doesn’t he want to finish this?", parse);
 			Text.NL();
@@ -2483,7 +2483,7 @@ CaleSexScenes.SexFuckingHimOutsideComments = (cock: Cock, opts: any) => {
 			}, enabled : true,
 			tooltip : "Nah, as amusing as that would be, Cale is <i>your</i> prize.",
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 
 		breakpoint = true;
 	} else {

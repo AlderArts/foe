@@ -174,7 +174,7 @@ export class Rosalin extends Entity {
 
 	// TODO More variations
 	public raceDesc(compScore?: number) {
-		if (compScore === null) {
+		if (compScore === undefined) {
 			compScore = this.origRaceScore.Compare(new RaceScore(this.body));
 		}
 		if (compScore > 0.95) {
@@ -653,7 +653,7 @@ RosalinScenes.TalkPrompt = () => {
 						tooltip : "How about letting the alchemist do the honors?",
 					});
 				}
-				Gui.SetButtonsFromList(options, false, null);
+				Gui.SetButtonsFromList(options, false, undefined);
 			}, enabled : true,
 			tooltip : Text.Parse("You aren’t sure this is such a good idea… but ask [himher] if [heshe] can make something for Cale.", parse),
 		});
@@ -1000,8 +1000,8 @@ RosalinScenes.FirstFuck = () => {
 								player.Fuck(p1Cock, 2);
 							} else {
 								Sex.Cunnilingus(rosalin, player);
-								rosalin.Fuck(null, 2);
-								player.Fuck(null, 2);
+								rosalin.Fuck(undefined, 2);
+								player.Fuck(undefined, 2);
 							}
 
 							Text.Add("Shrugging, you shuffle around so that you are straddling the alchemist's face, your back to the wolf. Without hesitation, she leans in, ", parse);
@@ -1602,10 +1602,10 @@ RosalinScenes.CombineCallback = (item: TFItem) => {
 						// Base size
 						let inc = cock.length.IncreaseStat(25, 100);
 						let inc2 = cock.thickness.IncreaseStat(7, 100);
-						if (inc === null) {
+						if (inc === undefined) {
 							inc = cock.length.IncreaseStat(50, 5);
 						}
-						if (inc2 === null) {
+						if (inc2 === undefined) {
 							inc2 = cock.thickness.IncreaseStat(12, 1);
 						}
 						if (inc || inc2) { size = true; }

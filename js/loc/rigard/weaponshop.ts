@@ -44,14 +44,14 @@ WeaponShopLoc.onEntry = () => {
 // TODO
 
 WeaponShopLoc.events.push(new Link(
-	"Cassidy", true, true, null,
+	"Cassidy", true, true, undefined,
 	() => {
 		CassidyScenes.Approach();
 	},
 ));
 
 WeaponShopLoc.events.push(new Link(
-	"Leave", true, true, null,
+	"Leave", true, true, undefined,
 	() => {
 		MoveToLocation(WORLD().loc.Rigard.ShopStreet.Street, {minute: 5});
 	},

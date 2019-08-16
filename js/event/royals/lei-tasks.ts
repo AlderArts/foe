@@ -418,13 +418,13 @@ export namespace LeiTaskScenes {
 								}, obj : p, enabled : true,
 							});
 						}
-						Gui.SetButtonsFromList(options, false, null);
+						Gui.SetButtonsFromList(options, false, undefined);
 					} else {
 						Gui.PrintDefaultOptions();
 					}
 				});
 
-				Gui.SetButtonsFromList(options, false, null);
+				Gui.SetButtonsFromList(options, false, undefined);
 			});
 		}
 
@@ -657,7 +657,7 @@ export namespace LeiTaskScenes {
 							Gui.NextPrompt();
 						}, enabled : true,
 					});
-					Gui.SetButtonsFromList(options, false, null);
+					Gui.SetButtonsFromList(options, false, undefined);
 				};
 				prompt();
 			});
@@ -784,7 +784,7 @@ export namespace LeiTaskScenes {
 							Gui.NextPrompt();
 						}, enabled : true,
 					});
-					Gui.SetButtonsFromList(options, false, null);
+					Gui.SetButtonsFromList(options, false, undefined);
 				} else {
 					Text.Add("<i>“The contract has been a success and an excellent start for you on the whole,”</i> he sums up. <i>“Certainly, there are some things you could improve on, but it’s far better than most do on their first time out.”</i>", parse);
 					Text.NL();

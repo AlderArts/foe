@@ -449,7 +449,7 @@ LizardsScenes.WinFuckVag = (enc: any) => {
 	const enemy = enc.female;
 	const third = enc.third;
 
-	const p1cock = player.BiggestCock(null, true);
+	const p1cock = player.BiggestCock(undefined, true);
 	const realCock = p1cock.isStrapon === false;
 
 	let parse: any = {
@@ -457,7 +457,7 @@ LizardsScenes.WinFuckVag = (enc: any) => {
 	parse = player.ParserTags(parse);
 
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
-	parse = Text.ParserPlural(parse, player.NumCocks() > 2, null, "2");
+	parse = Text.ParserPlural(parse, player.NumCocks() > 2, undefined, "2");
 
 	const girthy = p1cock.Thickness() > enemy.FirstVag().Cap();
 
@@ -611,7 +611,7 @@ LizardsScenes.WinTailpeg = (enc: any) => {
 	if (player.FirstVag()) {
 		Text.Add("your heated cunt gradually filling with her thickening tail. She twitches it frequently, and you don't tell her to stop; the way it undulates and slithers through your lips sends electric thrills through your body and you feel your wet mound squeezing tightly around the reptile's tail.", parse);
 		Text.NL();
-		player.FuckVag(player.FirstVag(), null, 3);
+		player.FuckVag(player.FirstVag(), undefined, 3);
 		Sex.Vaginal(enemy, player);
 	} else {
 		Text.Add("your [anus] slowly stretching around it. You lift one hand, licking the palm of it, then bring it back down to lubricate her tail slightly. As you rub your saliva along the length of her scaled tail, it starts to slide in much more easily.", parse);
@@ -620,7 +620,7 @@ LizardsScenes.WinTailpeg = (enc: any) => {
 			Text.Add(" Her eyes roam hungrily over your [cocks] as [itThey] to life, beginning to feel much heavier between your legs.", parse);
 		}
 		Text.NL();
-		player.FuckAnal(player.Butt(), null, 3);
+		player.FuckAnal(player.Butt(), undefined, 3);
 		Sex.Anal(enemy, player);
 	}
 	Text.Add("Thicker and thicker her tail grows and you feel yourself slowly, achingly stretching to take the growing girth of her tail.", parse);
@@ -2530,7 +2530,7 @@ LizardsScenes.LossFemale = function() {
 		const lusty = player.LustLevel() >= 0.7;
 		parse.boygirl = player.mfTrue("boy", "girl");
 		parse = Text.ParserPlural(parse, player.NumCocks() > 1);
-		parse = Text.ParserPlural(parse, third, null, "2");
+		parse = Text.ParserPlural(parse, third, undefined, "2");
 
 		Text.Add("<i>“Much better,”</i> she hisses, her voice slippery like snake oil. <i>“I was feeling so stressed until you came along. You will be my plaything, won’t you?”</i> Not that it seems like you have much choice in the matter. The reptilian enjoys you squirming under her gaze, lightly touching herself as she considers what to do with you. Her tail sways back and forth slowly; poised to strike should you dare escape her clutches.", parse);
 		Text.NL();
@@ -2605,8 +2605,8 @@ LizardsScenes.LossFemale = function() {
 		Text.NL();
 
 		Sex.Cunnilingus(player, lizard);
-		player.Fuck(null, 2);
-		lizard.Fuck(null, 2);
+		player.Fuck(undefined, 2);
+		lizard.Fuck(undefined, 2);
 
 		if (player.FirstBreastRow().Size() >= 6) {
 			Text.Add("The girl smirks as she tops you, her scaly tail worming its way between your [breasts] and into your pliant mouth. <i>“If anyone were to see this, it’d look like you were giving me a blowjob, wouldn’t it?”</i> she murmurs coyly, pushing your breasts together to form a tight valley for her to thrust her tail into.", parse);
@@ -2688,14 +2688,14 @@ LizardsScenes.LossFemale = function() {
 			let cap;
 			if (pussy) {
 				Sex.Vaginal(lizard, player);
-				player.FuckVag(player.FirstVag(), null, 3);
-				lizard.Fuck(null, 3);
+				player.FuckVag(player.FirstVag(), undefined, 3);
+				lizard.Fuck(undefined, 3);
 
 				cap = player.FirstVag().Cap();
 			} else {
 				Sex.Anal(lizard, player);
-				player.FuckAnal(player.Butt(), null, 3);
-				lizard.Fuck(null, 3);
+				player.FuckAnal(player.Butt(), undefined, 3);
+				lizard.Fuck(undefined, 3);
 
 				cap = player.Butt().Cap();
 			}

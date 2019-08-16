@@ -722,8 +722,8 @@ KiakaiSex.HealingNice = () => {
 				Text.Clear();
 
 				Sex.Cunnilingus(kiakai, player);
-				kiakai.Fuck(null, 2);
-				player.Fuck(null, 2);
+				kiakai.Fuck(undefined, 2);
+				player.Fuck(undefined, 2);
 
 				Text.Add("After playing around with [name] for a while, crossing tongues and butting lips, you suggest that perhaps [heshe] would like to kiss your <i>other</i> lips instead.", parse);
 				Text.NL();
@@ -1246,8 +1246,8 @@ KiakaiSex.PleasureElf = () => {
 				const cum = kiakai.OrgasmCum();
 
 				Sex.Cunnilingus(player, kiakai);
-				player.Fuck(null, 2);
-				kiakai.Fuck(null, 2);
+				player.Fuck(undefined, 2);
+				kiakai.Fuck(undefined, 2);
 
 				kiakai.subDom.IncreaseStat(10, 1);
 
@@ -1730,8 +1730,8 @@ KiakaiSex.HealingAssertive = () => {
 				kiakai.AddLustFraction(-1);
 
 				Sex.Cunnilingus(kiakai, player);
-				kiakai.Fuck(null, 3);
-				player.Fuck(null, 1);
+				kiakai.Fuck(undefined, 3);
+				player.Fuck(undefined, 1);
 
 				kiakai.subDom.DecreaseStat(-30, 1);
 
@@ -1844,8 +1844,8 @@ KiakaiSex.HealingAssertive = () => {
 				} else if (player.FirstVag()) {
 					Text.Add("The elf groans under your cruel teasing, [hisher] muffled complaints sending vibrations through your nethers. [HisHer] [ktongue] is hard at work lapping at your [vag], worshipping your feminine sex.", parse);
 					Sex.Cunnilingus(kiakai, player);
-					kiakai.Fuck(null, 1);
-					player.Fuck(null, 1);
+					kiakai.Fuck(undefined, 1);
+					player.Fuck(undefined, 1);
 				}
 				if (player.FirstBreastRow().size.Get() > 3) {
 					Text.Add(" Your stiff [nips] poke against [hisher] stomach, dragging back and forth as you grind your hips against [name]'s mouth.", parse);
@@ -2004,8 +2004,8 @@ KiakaiSex.HealingAssertive = () => {
 						Text.Clear();
 
 						Sex.Cunnilingus(player, kiakai);
-						player.Fuck(null, 1);
-						kiakai.Fuck(null, 1);
+						player.Fuck(undefined, 1);
+						kiakai.Fuck(undefined, 1);
 
 						Text.Add("With your fingers, you spread the elf's labia, revealing the glistening pink flesh within. You confidently dig in, tasting your companion's most private parts. Your [tongue] circles the outer lips several times before moving on to your main course: [name]'s inviting cleft. Reaching in deeply, you jam your flexible organ inside [himher], lapping up [hisher] fluids gleefully.", parse);
 						Text.NL();
@@ -2417,8 +2417,8 @@ KiakaiSex.Sex = () => {
 	Text.Clear();
 
 	// TODO Toys
-	const playerCock = player.FirstCock() || (player.strapOn ? player.strapOn.cock : null);
-	const kiaiCock   = kiakai.FirstCock() || (kiakai.strapOn ? kiakai.strapOn.cock : null);
+	const playerCock = player.FirstCock() || (player.strapOn ? player.strapOn.cock : undefined);
+	const kiaiCock   = kiakai.FirstCock() || (kiakai.strapOn ? kiakai.strapOn.cock : undefined);
 
 	let parse: any = {
 		playername   : player.name,
@@ -2673,9 +2673,9 @@ KiakaiSex.SexPrompt = (attitude: number) => {
 	const kiakai = GAME().kiakai;
 
 	// TODO Toys
-	const playerCock = player.BiggestCock(null, true);
+	const playerCock = player.BiggestCock(undefined, true);
 	const strapon    = playerCock ? playerCock.isStrapon : false;
-	const kiaiCock   = kiakai.BiggestCock(null, true);
+	const kiaiCock   = kiakai.BiggestCock(undefined, true);
 
 	let parse: any = {
 		playername   : player.name,
@@ -3368,8 +3368,8 @@ KiakaiSex.AnalCatchPrep = (choice: any, assert: boolean) => {
 	Text.Flush();
 
 	// TODO Toys
-	const playerCock = player.BiggestCock(null, true);
-	const kiaiCock   = kiakai.BiggestCock(null, true);
+	const playerCock = player.BiggestCock(undefined, true);
+	const kiaiCock   = kiakai.BiggestCock(undefined, true);
 
 	let parse: any = {
 		playername   : player.name,
@@ -4179,8 +4179,8 @@ KiakaiSex.AnalCatchFinish = () => {
 	const player = GAME().player;
 	const kiakai = GAME().kiakai;
 
-	const playerCock = player.BiggestCock(null, true);
-	const kiaiCock   = kiakai.BiggestCock(null, true);
+	const playerCock = player.BiggestCock(undefined, true);
+	const kiaiCock   = kiakai.BiggestCock(undefined, true);
 
 	let parse: any = {
 		playername   : player.name,

@@ -83,21 +83,21 @@ GladeLoc.description = () => {
 
 GladeLoc.links.push(new Link(
 	"Leave", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(WORLD().loc.Forest.Outskirts, {minute: 15});
 	},
 ));
 GladeLoc.events.push(new Link(
 	"Mother tree", true, true,
-	null,
+	undefined,
 	() => {
 		DryadGladeScenes.MotherTree();
 	},
 ));
 GladeLoc.events.push(new Link(
 	"Orchid", true, true,
-	null,
+	undefined,
 	() => {
 		OrchidScenes.Interact();
 	},
@@ -147,7 +147,7 @@ GladeLoc.onEntry = () => {
 		}, enabled : true,
 		tooltip : "Return once you are better prepared.",
 	});
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 };
 
 DryadGladeScenes.First = () => {

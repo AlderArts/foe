@@ -102,11 +102,11 @@ export class Roa extends Entity {
 
 		if (GetDEBUG()) {
 			Text.NL();
-			Text.Add("DEBUG: relation: " + roa.relation.Get(), null, "bold");
+			Text.Add("DEBUG: relation: " + roa.relation.Get(), undefined, "bold");
 			Text.NL();
-			Text.Add("DEBUG: subDom: " + roa.subDom.Get(), null, "bold");
+			Text.Add("DEBUG: subDom: " + roa.subDom.Get(), undefined, "bold");
 			Text.NL();
-			Text.Add("DEBUG: slut: " + roa.slut.Get(), null, "bold");
+			Text.Add("DEBUG: slut: " + roa.slut.Get(), undefined, "bold");
 			Text.NL();
 		}
 

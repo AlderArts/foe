@@ -40,10 +40,7 @@ export class Button {
 		this.visible = false;
 		this.enabled = enabled;
 		this.func    = func;
-		this.obj     = null;
-		this.tooltip = null;
 		this.key     = -1;
-		this.state   = null; // No change
 
 		this.oldEnImagePath  = this.enabledImage;
 		this.oldDisImagePath = this.disabledImage;

@@ -21,7 +21,6 @@ export class Stat {
 		this.growth = growth || 1;
 		this.growthStep = growthStep || 0.1;
 		this.growthBase = this.growth;
-		this.debug  = null;
 	}
 
 	static get growthPerPoint() { return 0.1; }
@@ -47,11 +46,11 @@ export class Stat {
 		if (GetDEBUG() && this.debug) {
 			Text.NL();
 			if (diff > 0) {
-				Text.Add("DEBUG: " + this.debug() + " " + old + " -> " + this.base + " (ideal: " + ideal + ")", null, "blue bold");
+				Text.Add("DEBUG: " + this.debug() + " " + old + " -> " + this.base + " (ideal: " + ideal + ")", undefined, "blue bold");
 			} else if (diff === 0) {
-				Text.Add("DEBUG: " + this.debug() + " " + old + " capped (ideal: " + ideal + ")", null, "bold");
+				Text.Add("DEBUG: " + this.debug() + " " + old + " capped (ideal: " + ideal + ")", undefined, "bold");
  			} else {
-				Text.Add("DEBUG: " + this.debug() + " " + old + " -> " + this.base + " (ideal: " + ideal + ")", null, "red bold");
+				Text.Add("DEBUG: " + this.debug() + " " + old + " -> " + this.base + " (ideal: " + ideal + ")", undefined, "red bold");
  			}
 			Text.NL();
 			Text.Flush();
@@ -69,7 +68,7 @@ export class Stat {
 		ideal = ideal || 0;
 		maxChange = maxChange || 1;
 		let diff = ideal - this.base;
-		if (diff < 0) { return null; }
+		if (diff < 0) { return undefined; }
 		diff = (diff <= maxChange) ? diff : maxChange;
 
 		const old = this.base;
@@ -77,9 +76,9 @@ export class Stat {
 		if (GetDEBUG() && this.debug) {
 			Text.NL();
 			if (diff === 0) {
-				Text.Add("DEBUG: " + this.debug() + " " + old + " capped (ideal: " + ideal + ")", null, "black bold");
+				Text.Add("DEBUG: " + this.debug() + " " + old + " capped (ideal: " + ideal + ")", undefined, "black bold");
 			} else {
-				Text.Add("DEBUG: " + this.debug() + " " + old + " -> " + this.base + " (max: " + ideal + ")", null, "blue bold");
+				Text.Add("DEBUG: " + this.debug() + " " + old + " -> " + this.base + " (max: " + ideal + ")", undefined, "blue bold");
 			}
 			Text.NL();
 			Text.Flush();
@@ -97,7 +96,7 @@ export class Stat {
 		ideal = ideal || 0;
 		maxChange = maxChange || 1;
 		let diff = this.base - ideal;
-		if (diff < 0) { return null; }
+		if (diff < 0) { return undefined; }
 		diff = (diff <= maxChange) ? diff : maxChange;
 
 		const old = this.base;
@@ -105,9 +104,9 @@ export class Stat {
 		if (GetDEBUG() && this.debug) {
 			Text.NL();
 			if (diff === 0) {
-				Text.Add("DEBUG: " + this.debug() + " " + old + " capped (ideal: " + ideal + ")", null, "black bold");
+				Text.Add("DEBUG: " + this.debug() + " " + old + " capped (ideal: " + ideal + ")", undefined, "black bold");
 			} else {
-				Text.Add("DEBUG: " + this.debug() + " " + old + " -> " + this.base + " (min: " + ideal + ")", null, "red bold");
+				Text.Add("DEBUG: " + this.debug() + " " + old + " -> " + this.base + " (min: " + ideal + ")", undefined, "red bold");
 			}
 			Text.NL();
 			Text.Flush();

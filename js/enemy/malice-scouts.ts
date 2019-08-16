@@ -1256,7 +1256,7 @@ MaliceScoutsScenes.Catboy.Petting = (enc: any) => {
 		Gui.NextPrompt();
 	});
 
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 };
 
 MaliceScoutsScenes.Catboy.LossPrompt = function() {
@@ -1503,7 +1503,7 @@ MaliceScoutsScenes.Mare.LoneEncounter = (levelbonus: number) => {
 				});
 			},
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	};
 
 	/*
@@ -2823,7 +2823,7 @@ MaliceScoutsScenes.Goat.WinTurnTables = (enc: any) => {
 				Gui.NextPrompt();
 			},
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	}, 1.0, () => true);
 
 	/* TODO other items
@@ -3018,7 +3018,7 @@ MaliceScoutsScenes.Goat.LossEntry = (enc: any) => {
 				player.FirstVag().stretch.base = Orifice.Tightness.gaping;
 			}
 
-			Sex.Vaginal(null, player);
+			Sex.Vaginal(undefined, player);
 			player.FuckVag(player.FirstVag(), tentacock, 1);
 
 			Text.Add("You squeal in a mixture of equal parts pain and pleasure as you strain to accommodate the massive ribbed tentacle in your cunt. No matter how stretchy you are - or not - the tentacle can simply add more mass to make the fit painfully tight, which it does with gusto. The tentacles on your thighs reaffirm their hold on you, spreading more venom on your [skin], then begin bouncing you up and down on the massive, ribbed tentacle.", parse);
@@ -3032,7 +3032,7 @@ MaliceScoutsScenes.Goat.LossEntry = (enc: any) => {
 		Text.Add("Last but not least, there’s still your ass which needs dealing with - and the slime tentacles aren’t about to leave an empty orifice unexplored, no. A particularly bulbous phallic tentacle crawls out from the box, a massive knob on the tip of an exceptionally girthy goo appendage. It pauses in front of you for a moment, almost as if to make sure you’re watching, then dives around behind you and out of sight. You can’t see where it’s going, but you can definitely <i>feel</i> the tentacle as its massive head forces its way into your [anus], violating you in every way imaginable - and then some.", parse);
 		Text.NL();
 
-		Sex.Anal(null, player);
+		Sex.Anal(undefined, player);
 		player.FuckAnal(player.Butt(), tentacock, 1);
 
 		if (player.Butt().Tightness() >= Orifice.Tightness.loose) {
@@ -3430,7 +3430,7 @@ MaliceScoutsScenes.Group.WinPrompt = function() {
 		*/
 
 		if (options.length > 0) {
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		} else { // NULL OPTION
 			Gui.NextPrompt(() => {
 				Text.Clear();

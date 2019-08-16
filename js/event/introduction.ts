@@ -1472,7 +1472,7 @@ DarkAspect.Peak.description = () => {
 };
 DarkAspect.Peak.links.push(new Link(
 	"Throne", true, true,
-	null,
+	undefined,
 	() => {
 		Text.Clear();
 
@@ -1680,7 +1680,7 @@ Intro.UruSexChoice = () => {
 
 	// Init counter here
 	Intro.timesSuckedUru = 0;
-	Intro.fuckedTarget = null;
+	Intro.fuckedTarget = undefined;
 
 	Text.Flush();
 
@@ -2714,7 +2714,7 @@ Intro.AriaPurification = () => {
 				Text.NL();
 				Text.Add("Aria gives her head a quick shake, clearing her thoughts.");
 				const cocks = player.AllCocks();
-				cocks[ccIdx].vag.clitCock = null;
+				cocks[ccIdx].vag.clitCock = undefined;
 				cocks.splice(ccIdx, 1);
 				Text.Flush();
 				Gui.NextPrompt(Intro.AriaTalk);
@@ -3250,8 +3250,8 @@ Intro.KiaNiceSex = () => {
 				Text.Add("You shiver as the elf dips one of [hisher] fingers into your sopping wet [vag], lightly teasing your labia with [hisher] other digits.", parse);
 
 				Sex.Cunnilingus(kiakai, player);
-				kiakai.Fuck(null, 2);
-				player.Fuck(null, 2);
+				kiakai.Fuck(undefined, 2);
+				player.Fuck(undefined, 2);
 			} else if (player.Gender() === Gender.male) {
 				Text.Add("Your stiff [cock] springs to attention as it is bared, almost slapping the elf in the face. Using careful touches and light pecks, [name] gently nurses it to full stiffness.", parse);
 				Sex.Blowjob(kiakai, player);
@@ -3261,8 +3261,8 @@ Intro.KiaNiceSex = () => {
 				Text.Add("Your [cock] springs to attention as it is bared, almost slapping the elf in the face. <i>“W-wow, I wasn't expecting it to be so... big,”</i> [name] reverently whispers. Apparently, the elf got [himher]self a good look at your unusual genitalia when clothing you, though it did not seem to prepare [himher] for your full erection. [HeShe] teases your female parts with one hand while planting hot kisses and licks on your [cock].", parse);
 
 				Sex.Cunnilingus(kiakai, player);
-				kiakai.Fuck(null, 2);
-				player.Fuck(null, 2);
+				kiakai.Fuck(undefined, 2);
+				player.Fuck(undefined, 2);
 
 				Sex.Blowjob(kiakai, player);
 				kiakai.FuckOral(kiakai.Mouth(), player.FirstCock(), 2);
@@ -3318,8 +3318,8 @@ Intro.KiaNiceSex69 = () => {
 			func() {
 				Text.Clear();
 				Sex.Cunnilingus(player, kiakai);
-				player.Fuck(null, 1);
-				kiakai.Fuck(null, 1);
+				player.Fuck(undefined, 1);
+				kiakai.Fuck(undefined, 1);
 				Text.Add("Deciding to return the favor, you carefully lift the hem of the elf's robe, exposing [hisher] white panties. Pulling them aside, you expose a tight pink slit, absolutely moist with female juices. Humming to yourself, you lean in to administer some 'healing' of your own. Judging from the muffled gasps down between your legs, the effort is much appreciated.", parse);
 				Gui.PrintDefaultOptions();
 			}, enabled : true,
@@ -3465,8 +3465,8 @@ Intro.KiaNaughtySex = () => {
 				kiakai.flags.Sexed++;
 
 				Sex.Cunnilingus(kiakai, player);
-				kiakai.Fuck(null, 4);
-				player.Fuck(null, 4);
+				kiakai.Fuck(undefined, 4);
+				player.Fuck(undefined, 4);
 
 				Text.Add("<i>“Before we go, you should finish what you started,”</i> you insist, smirking at the confused elf.");
 				Text.NL();

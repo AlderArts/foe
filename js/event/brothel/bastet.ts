@@ -104,7 +104,7 @@ export namespace BastetScenes {
 		} else {
 			Text.Add("As the door shuts behind you, you take glance at the familiar desert-themed closet. Well, you know the drill. Choose a chapter, get naked and enter the fantasy.", parse);
 			Text.Flush();
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		}
 	}
 
@@ -460,7 +460,7 @@ export namespace BastetScenes {
 					Gui.NextPrompt(BastetScenes.Birth2);
 				}, enabled : true,
 			});
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		});
 	}
 
@@ -651,7 +651,7 @@ export namespace BastetScenes {
 						Gui.NextPrompt();
 					});
 
-					Gui.SetButtonsFromList(options, false, null);
+					Gui.SetButtonsFromList(options, false, undefined);
 				}, enabled : true,
 			});
 			options.push({ nameStr : "Wait",
@@ -814,13 +814,13 @@ export namespace BastetScenes {
 					tooltip : "The source of all that is comforting, the bringer of joy, the queen of happiness and the granter of desire. What else can be she be but the truest incarnation of the lover?",
 					func : BastetScenes.Birth3, enabled : true,
 				});
-				Gui.SetButtonsFromList(options, false, null);
+				Gui.SetButtonsFromList(options, false, undefined);
 			});
 
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		});
 
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	}
 
 	export function Birth3() {
@@ -1065,12 +1065,12 @@ export namespace BastetScenes {
 
 				Gui.NextPrompt(() => {
 					TimeStep({hour: 3});
-					LucilleScenes.WhoreAftermath(null, bastet.Cost());
+					LucilleScenes.WhoreAftermath(undefined, bastet.Cost());
 				});
 			});
 		});
 
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	}
 
 }

@@ -225,7 +225,7 @@ GolScenes.SearchForScepter = () => {
 		}, enabled : true,
 		tooltip : "Forge on and search for the ultimate fate of the merchant. Perhaps you can find out what has happened with Lagon’s scepter as well.",
 	});
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 };
 
 // TODO
@@ -488,8 +488,8 @@ GolScenes.CombatLossDrone = (gol: GolQueen) => {
 	Text.NL();
 
 	Sex.Cunnilingus(player, gol);
-	player.Fuck(null, 4);
-	gol.Fuck(null, 4);
+	player.Fuck(undefined, 4);
+	gol.Fuck(undefined, 4);
 
 	const cum = player.OrgasmCum();
 
@@ -631,7 +631,7 @@ GolScenes.CombatWin = function() {
 			}, enabled : true,
 			tooltip : "Just grab the scepter and go.",
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 
 	});
 	Encounter.prototype.onVictory.call(enc);
@@ -856,7 +856,7 @@ GolScenes.CombatWinTailfuck = (enc: any, p1cock: Cock) => {
 		}, enabled : true,
 		tooltip : "Cream her up good!",
 	});
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 
 };
 
@@ -906,8 +906,8 @@ GolScenes.CombatWinCunn = (enc: any) => {
 	Text.NL();
 
 	Sex.Cunnilingus(gol, player);
-	gol.Fuck(null, 4);
-	player.Fuck(null, 4);
+	gol.Fuck(undefined, 4);
+	player.Fuck(undefined, 4);
 
 	Text.Add("The Gol's tongue has your pussy enspelled with its pernicious wiggles and libidinous energies. You clamp around it, rapt to the sensation of it stretching higher, gradually pulling the tip up the bottom of your slit. The magnificent muscle twists itself, contorting into a cunt-stroking double-helix. White-knuckled, you hang on for dear life, already feeling anxious flutters in your belly. You're so close to cumming, and yet you've barely begun to sample the Gol's oral talents!", parse);
 	Text.NL();
@@ -974,7 +974,7 @@ GolScenes.CombatWinCunn = (enc: any) => {
 		}, enabled : true,
 		tooltip : "Grab the scepter and go, before you lose yourself.",
 	});
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 };
 
 GolScenes.CombatAftermath = (enc: any) => {

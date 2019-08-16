@@ -132,7 +132,7 @@ Quests.Print = (SetExploreButtons: any) => {
 	if (numQs > 0) {
 		Text.Add("<hr>");
 	} else {
-		Text.Add("No active quests.", null, "bold");
+		Text.Add("No active quests.", undefined, "bold");
 	}
 	Text.Flush();
 
@@ -158,7 +158,7 @@ Quests.Print = (SetExploreButtons: any) => {
 			Quests.Print(SetExploreButtons);
 		}, enabled : Quests.curType !== Quests.Type.All,
 	});
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 
 	SetExploreButtons();
 };

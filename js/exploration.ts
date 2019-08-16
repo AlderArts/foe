@@ -52,15 +52,15 @@ function SetExploreButtons() {
 		}
 
 		if (safeLocation) { // SLEEP
-			Input.exploreButtons[ExploreButtonIndex.Sleep].Setup("", party.location.SleepFunc, waitLocation, null,
+			Input.exploreButtons[ExploreButtonIndex.Sleep].Setup("", party.location.SleepFunc, waitLocation, undefined,
 				"Sleep until you are fully rested (restores HP/SP).");
 		} else { // WAIT
-			Input.exploreButtons[ExploreButtonIndex.Wait].Setup("", party.location.WaitFunc, waitLocation, null,
+			Input.exploreButtons[ExploreButtonIndex.Wait].Setup("", party.location.WaitFunc, waitLocation, undefined,
 				"Wait for a while.");
 		}
 
 		// FIGHT/SEARCH
-		Input.exploreButtons[ExploreButtonIndex.Look].Setup("", Fight, party.location.enc !== null, null,
+		Input.exploreButtons[ExploreButtonIndex.Look].Setup("", Fight, party.location.enc !== undefined, undefined,
 			"Explore the immediate surroundings, possibly finding enemies, new locations or hidden treasures.", GameState.Event);
 	}
 }
@@ -196,7 +196,7 @@ const Explore = (preventClear: boolean) => {
 		Text.Clear();
 	}
 
-	if (party.location === null) {
+	if (party.location === undefined) {
 		Text.Add("ERROR, LOCATION IS NULL");
 		Text.Flush();
 		return;
@@ -224,7 +224,7 @@ const Fight = (preventClear: boolean) => {
 	if (!preventClear) {
 		Text.Clear();
 	}
-	if (party.location === null) {
+	if (party.location === undefined) {
 		Text.Add("ERROR, LOCATION IS NULL");
 		Text.Flush();
 		return;
@@ -251,7 +251,7 @@ const ShowInventory = (preventClear: boolean) => {
 	if (!preventClear) {
 		Text.Clear();
 	}
-	if (party.inventory === null) {
+	if (party.inventory === undefined) {
 		Text.Add("ERROR, INVENTORY IS NULL");
 		Text.Flush();
 		return;

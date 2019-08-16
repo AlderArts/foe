@@ -42,7 +42,7 @@ Raphael.el.is_visible = function() {
 const width = 1280;
 const height = 720;
 
-let LastSubmenu: any = null;
+let LastSubmenu: any;
 let callstack: CallableFunction[] = [];
 let canvas: any;
 let debug: any;
@@ -85,7 +85,7 @@ export class Gui {
 	static set Callstack(cs) { callstack = cs; }
 
 	public static Init() {
-		Gui.debug = null;
+		Gui.debug = undefined;
 		Gui.ShortcutsVisible = false;
 
 		Gui.canvas = Raphael("wrap", 100, 100);
@@ -413,7 +413,7 @@ export class Gui {
 		options.push({ nameStr : "Font",
 			func() {
 				const font = prompt("Please enter fonts (css: font-families) to use, in order of priority.", FontFamily || "sans-serif, Georgia");
-				if (font !== null && font !== "") {
+				if (font !== undefined && font !== "") {
 					FontFamily = font;
 					if (isOnline()) {
 						localStorage.fontFamily = FontFamily;
@@ -425,7 +425,7 @@ export class Gui {
 		options.push({ nameStr : "Size",
 			func() {
 				const size = prompt("Please enter desired font size (css: font-size). For example: small, medium, large.", FontSize || "large");
-				if (size !== null && size !== "") {
+				if (size !== undefined && size !== "") {
 					FontSize = size;
 					if (isOnline()) {
 						localStorage.fontSize = FontSize;
@@ -519,7 +519,7 @@ export class Gui {
 		options.push({ nameStr : "Custom",
 			func() {
 				const col = prompt("Please enter desired background color. Format is rgba(R,G,B,A). Colors are in the range 0-255. Opacity is in the range 0-1.", BgColor || "rgba(255,255,255,1.0)");
-				if (col !== null && col !== "") {
+				if (col !== undefined && col !== "") {
 					BgColor = col;
 					if (isOnline()) {
 						localStorage.bgcolor = BgColor;
@@ -554,7 +554,7 @@ export class Gui {
 	public static NextPrompt(func: any = Gui.PrintDefaultOptions, text: string = "Next", tooltip?: any) {
 		Gui.ClearButtons();
 		// text, func, enabled, obj, tooltip, state
-		Input.buttons[0].Setup(text, func, true, null, tooltip);
+		Input.buttons[0].Setup(text, func, true, undefined, tooltip);
 	}
 
 	public static SetButtonPage(list: any[], page: number, state: GameState) {
@@ -936,7 +936,7 @@ export class Gui {
 		Text.Clear();
 		Text.Add("Fall of Eden saves using JavaScript localStorage (also known as Web Storage). Exactly how and where this will put your save is up to browser implementation, but the standard ensures at least 5MB of storage space, more than enough for 12 full save slots.");
 		Text.NL();
-		Text.Add("IMPORTANT: Saves are kept by your browser, for the specific domain you are playing in atm. If you clear browsing history or the domain changes, you may lose saves. See these saves as temporary, ALWAYS use Save to File to backup if you want to ensure not losing your progress!", null, "bold");
+		Text.Add("IMPORTANT: Saves are kept by your browser, for the specific domain you are playing in atm. If you clear browsing history or the domain changes, you may lose saves. See these saves as temporary, ALWAYS use Save to File to backup if you want to ensure not losing your progress!", undefined, "bold");
 		Text.NL();
 		Text.Add("You can only save at 'safe' locations in the world (the same places you can sleep), but you can load/start a new game from anywhere.");
 		Text.NL();
@@ -964,7 +964,7 @@ export class Gui {
 			Text.Clear();
 		}
 
-		if (GAME().party.location === null) {
+		if (GAME().party.location === undefined) {
 			Text.Add("ERROR, LOCATION IS NULL");
 			Text.Flush();
 			return;

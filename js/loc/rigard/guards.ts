@@ -70,21 +70,21 @@ GateLoc.links.push(new Link(
 ));
 GateLoc.links.push(new Link(
 	"Residential", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(WORLD().loc.Rigard.Residential.Street, {minute: 10});
 	},
 ));
 GateLoc.links.push(new Link(
 	"Merchants", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(WORLD().loc.Rigard.ShopStreet.Street, {minute: 10});
 	},
 ));
 GateLoc.links.push(new Link(
 	"Plaza", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(WORLD().loc.Rigard.Plaza, {minute: 20});
 	},
@@ -94,7 +94,7 @@ GateLoc.links.push(new Link(
 		const rigard = GAME().rigard;
 		return (WorldTime().hour >= 6 && WorldTime().hour < 22) && !rigard.UnderLockdown();
 	},
-	null,
+	undefined,
 	() => {
 		const rigard = GAME().rigard;
 		if (rigard.Krawitz.Q === RigardFlags.KrawitzQ.HeistDone) {
@@ -109,7 +109,7 @@ GateLoc.links.push(new Link(
 		const rigard = GAME().rigard;
 		return !rigard.UnderLockdown();
 	},
-	null,
+	undefined,
 	() => {
 		MoveToLocation(BarracksLoc.common, {minute: 5});
 	},
@@ -125,21 +125,21 @@ BarracksLoc.common.description = () => {
 
 BarracksLoc.common.links.push(new Link(
 	"Gate", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(GateLoc, {minute: 5});
 	},
 ));
 BarracksLoc.common.links.push(new Link(
 	"Yard", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(BarracksLoc.sparring);
 	},
 ));
 BarracksLoc.common.links.push(new Link(
 	"Captains", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(BarracksLoc.captains);
 	},
@@ -195,7 +195,7 @@ BarracksLoc.sparring.description = () => {
 
 BarracksLoc.sparring.links.push(new Link(
 	"Commons", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(BarracksLoc.common);
 	},
@@ -209,7 +209,7 @@ BarracksLoc.captains.description = () => {
 
 BarracksLoc.captains.links.push(new Link(
 	"Commons", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(BarracksLoc.common);
 	},

@@ -167,7 +167,7 @@ export namespace GryphonsScenes {
 		} else {
 			Text.Add("The confines of this particular theme room are a familiar sight to you by now, and you know what to do once the door is closed and latched. The only choice you really need to make is which chapter to play.", parse);
 			Text.Flush();
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		}
 	}
 
@@ -551,7 +551,7 @@ export namespace GryphonsScenes {
 
 		Gui.NextPrompt(() => {
 			TimeStep({hour: 3});
-			LucilleScenes.WhoreAftermath(null, gryphons.Cost());
+			LucilleScenes.WhoreAftermath(undefined, gryphons.Cost());
 		});
 	}
 
@@ -680,7 +680,7 @@ export namespace GryphonsScenes {
 						GryphonsScenes.WorldsEdgeCaught();
 					}, enabled : true,
 				});
-				Gui.SetButtonsFromList(options, false, null);
+				Gui.SetButtonsFromList(options, false, undefined);
 			});
 		});
 	}
@@ -840,7 +840,7 @@ export namespace GryphonsScenes {
 			});
 		}
 		if (options.length > 0) {
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		} else {
 			Gui.NextPrompt(GryphonsScenes.WorldsEdgeSexytimes);
 		}
@@ -1074,7 +1074,7 @@ export namespace GryphonsScenes {
 						GryphonsScenes.PastsWashed();
 					}, enabled : true,
 				});
-				Gui.SetButtonsFromList(options, false, null);
+				Gui.SetButtonsFromList(options, false, undefined);
 			});
 		});
 	}
@@ -1242,7 +1242,7 @@ export namespace GryphonsScenes {
 							GryphonsScenes.PastsRemembrance();
 						}, enabled : true,
 					});
-					Gui.SetButtonsFromList(options, false, null);
+					Gui.SetButtonsFromList(options, false, undefined);
 				});
 			});
 		});
@@ -1346,7 +1346,7 @@ export namespace GryphonsScenes {
 					GryphonsScenes.PastsSexytimes(0);
 				}, enabled : true,
 			});
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		});
 	}
 
@@ -1477,7 +1477,7 @@ export namespace GryphonsScenes {
 				GryphonsScenes.PastsSexytimes2(preg);
 			}, enabled : true,
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	}
 
 	export function PastsSexytimes2(preg: number) {
@@ -1807,10 +1807,10 @@ export namespace GryphonsScenes {
 					});
 				});
 
-				Gui.SetButtonsFromList(options, false, null);
+				Gui.SetButtonsFromList(options, false, undefined);
 			});
 
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		});
 	}
 
@@ -2134,12 +2134,12 @@ export namespace GryphonsScenes {
 							GryphonsScenes.NewLifeHugEnding();
 						}, enabled : true,
 					});
-					Gui.SetButtonsFromList(options, false, null);
+					Gui.SetButtonsFromList(options, false, undefined);
 				});
 			});
 		});
 
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	}
 
 	export function NewLifeHugEnding() {

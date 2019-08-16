@@ -618,8 +618,8 @@ LagomorphScenes.GroupWinOnPlainsPrompt = function() {
 LagomorphScenes.GroupWinOnPlainsFuckBrute = (enc: any) => {
 	const player = GAME().player;
 	const party: Party = GAME().party;
-	const p1cock  = player.BiggestCock(null, true);
-	const strapon = p1cock ? p1cock.isStrapon : null;
+	const p1cock  = player.BiggestCock(undefined, true);
+	const strapon = p1cock ? p1cock.isStrapon : undefined;
 
 	let parse: any = {
 		playername : player.name,
@@ -871,7 +871,7 @@ LagomorphScenes.GroupWinOnPlainsFuckM = (enc: any, group: any) => {
 	const male = new Lagomorph(Gender.male);
 
 	const p1cock  = player.BiggestCock();
-	const strapon = p1cock ? p1cock.isStrapon : null;
+	const strapon = p1cock ? p1cock.isStrapon : undefined;
 
 	let parse: any = {
 		playername : player.name,
@@ -1154,7 +1154,7 @@ LagomorphScenes.GroupWinOnPlainsFuckM = (enc: any, group: any) => {
 			}, enabled : true,
 			tooltip : Text.Parse("Perhaps [name] should just sit this one out. You’ll be along eventually.", parse),
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	}
 
 	Gui.Callstack.push(() => {
@@ -1359,7 +1359,7 @@ LagomorphScenes.GroupWinOnPlainsFuckM = (enc: any, group: any) => {
 				}, enabled : true,
 				tooltip : Text.Parse("[HeShe] can just stay there and watch, you don’t want any bunny-boys touching your pet.", parse),
 			});
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		}
 
 		// COMPANION SECTION END

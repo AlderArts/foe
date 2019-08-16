@@ -48,9 +48,9 @@ AbilityNode.DefaultParser = (caster: Entity, target: Entity) => {
 AbilityNode.Template = {};
 
 AbilityNode.Template.Blank = (node: any = {}) => {
-	node.damageType = node.damageType ? new DamageType(node.damageType) : null;
+	node.damageType = node.damageType ? new DamageType(node.damageType) : undefined;
 
-	node.cost       = node.cost     || { hp: null, sp: null, lp: null};
+	node.cost       = node.cost     || { hp: undefined, sp: undefined, lp: undefined};
 
 	/*
 	node.onCast     = node.onCast   || [];
@@ -83,7 +83,7 @@ AbilityNode.Template.Physical = (node: any = {}) => {
 	node.hitFallen = node.hitFallen;
 	node.retarget  = node.retarget;
 	*/
-	node.damageType = node.damageType ? new DamageType(node.damageType) : null;
+	node.damageType = node.damageType ? new DamageType(node.damageType) : undefined;
 
 	node.toHit     = _.has(node, "toHit")    ? node.toHit    : AbilityNode.ToHit.Regular;
 	node.toDamage  = _.has(node, "toDamage") ? node.toDamage : AbilityNode.ToDamage.Regular;
@@ -102,7 +102,7 @@ AbilityNode.Template.Magical = (node: any = {}) => {
 	node.hitFallen = node.hitFallen;
 	node.retarget  = node.retarget;
 	*/
-	node.damageType = node.damageType ? new DamageType(node.damageType) : null;
+	node.damageType = node.damageType ? new DamageType(node.damageType) : undefined;
 
 	node.toHit     = _.has(node, "toHit")    ? node.toHit    : AbilityNode.ToHit.Regular;
 	node.toDamage  = _.has(node, "toDamage") ? node.toDamage : AbilityNode.ToDamage.Regular;
@@ -121,7 +121,7 @@ AbilityNode.Template.Lust = (node: any = {}) => {
 	node.hitFallen = node.hitFallen;
 	node.retarget  = node.retarget;
 	*/
-	node.damageType = node.damageType ? new DamageType(node.damageType) : null;
+	node.damageType = node.damageType ? new DamageType(node.damageType) : undefined;
 
 	node.toHit     = _.has(node, "toHit")    ? node.toHit    : AbilityNode.ToHit.Regular;
 	node.toDamage  = _.has(node, "toDamage") ? node.toDamage : AbilityNode.ToDamage.Regular;
@@ -140,7 +140,7 @@ AbilityNode.Template.Heal = (node: any = {}) => {
 	node.hitFallen = node.hitFallen;
 	node.retarget  = node.retarget;
 	*/
-	node.toHit     = _.has(node, "toHit")    ? node.toHit    : null;
+	node.toHit     = _.has(node, "toHit")    ? node.toHit    : undefined;
 	node.toDamage  = _.has(node, "toDamage") ? node.toDamage : AbilityNode.ToDamage.Heal;
 	/*
 	node.hitFunc   = node.hitFunc;
@@ -278,7 +278,7 @@ AbilityNode.RunCancel = function(ability: Ability, encounter: Encounter, caster:
 			Text.Add("[tPoss] concentration is broken!", parse, "bold");
 			Text.NL();
 			// Cancel casting
-			entry.casting = null;
+			entry.casting = undefined;
 			// Apply any additional effects
 			_.each(that.onHit, (node) => {
 				node(ability, encounter, caster, target, result);
@@ -390,7 +390,7 @@ AbilityNode.DamageFunc.Physical = (encounter: Encounter, caster: Entity, target:
 
 		return dmg;
 	} else {
-		return null;
+		return undefined;
 	}
 };
 AbilityNode.DamageFunc.Magical = (encounter: Encounter, caster: Entity, target: Entity, dmg: number) => {

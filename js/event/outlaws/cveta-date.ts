@@ -517,10 +517,10 @@ export namespace CvetaDateScenes {
 				Gui.NextPrompt();
 			});
 
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		});
 
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	}
 
 	/* TODO

@@ -81,9 +81,9 @@ CaleScenes.Interact = () => {
 
 	if (GetDEBUG()) {
 		Text.NL();
-		Text.Add("DEBUG: relation: " + cale.relation.Get(), null, "bold");
+		Text.Add("DEBUG: relation: " + cale.relation.Get(), undefined, "bold");
 		Text.NL();
-		Text.Add("DEBUG: slut: " + cale.slut.Get(), null, "bold");
+		Text.Add("DEBUG: slut: " + cale.slut.Get(), undefined, "bold");
 		Text.NL();
 	}
 	Text.Flush();
@@ -230,7 +230,7 @@ CaleScenes.FirstApproach = () => {
 			}, enabled : true,
 			tooltip : "He's obviously uncertain about how he feels; why not be nice to him?",
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	} else if (cale.flags.Met === CaleFlags.Met.SharedGotFucked) {
 		Text.Add("You swallow hard, mind replaying the memories of him as he fucked you earlier, a pang of equal parts lust and intimidation momentarily rocking through you.", parse);
 		Text.NL();
@@ -340,11 +340,11 @@ CaleScenes.FirstApproach = () => {
 					}, enabled : true,
 					tooltip : "This is getting a little too far, you didn't come here to fuck. Well, not just yet anyway.",
 				});
-				Gui.SetButtonsFromList(options, false, null);
+				Gui.SetButtonsFromList(options, false, undefined);
 			}, enabled : true,
 			tooltip : "This feels nice; why not let him see that you're enjoying it?",
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	} else if (cale.flags.Met === CaleFlags.Met.CaleTookRosalin) {
 		Text.Add("<i>“Hey there! Didn’t catch your name last time,”</i> the wolf grins, reminiscing of his romp with Rosalin. <i>“I was a bit preoccupied.”</i>", parse);
 		Text.NL();
@@ -505,7 +505,7 @@ CaleScenes.Shop = () => {
 				}
 			}
 			if (found) { continue; }
-			cale.shop.AddItem(it, 5, null, buyFunc);
+			cale.shop.AddItem(it, 5, undefined, buyFunc);
 		}
 
 		cale.flags.shop = timestamp;
@@ -731,7 +731,7 @@ CaleScenes.TalkPrompt = () => {
 							party.coin -= (coin - 50);
 
 							CaleScenes.TentSex();
-						}, enabled : (party.coin >= coin - 50) && player.BiggestCock(null, true),
+						}, enabled : (party.coin >= coin - 50) && player.BiggestCock(undefined, true),
 					});
 					options.push({ nameStr : "No sex",
 						tooltip : "You’d rather pay the full price than take his wolfy butt.",
@@ -796,7 +796,7 @@ CaleScenes.TalkPrompt = () => {
 						}, enabled : true,
 					});
 				}
-				Gui.SetButtonsFromList(options, false, null);
+				Gui.SetButtonsFromList(options, false, undefined);
 			}, enabled : true,
 		});
 	}
@@ -1040,7 +1040,7 @@ CaleScenes.Rogue = () => {
 				}, enabled : (cocksInAss.length > 0),
 				tooltip : "All that matters is winning, wasn’t it?",
 			});
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		} else { // He got the drop on you
 			Text.Add("Before you can react, the wolf is on you, lunging violently. You brace yourself for impact, but the impact never comes. Cale slides underneath you and kicks your [legs], tripping you and sending you crashing onto the ground. You struggle to get up as fast you can, but the wolf has you pinned down before you can accomplish much. He twists your body in a way that even ", parse);
 			if (player.Str() >= 40) {
@@ -1083,7 +1083,7 @@ CaleScenes.Rogue = () => {
 				}, enabled : true,
 				tooltip : "It wouldn’t be a proper lesson if he stopped here, would it?",
 			});
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		}
 	} else {
 		Text.Add("The two of you spend some time reviewing some dirty fighting techniques, this time without shenanigans, and at the end of it you feel that you have a more solid grasp of the subject.", parse);

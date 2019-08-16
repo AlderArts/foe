@@ -27,7 +27,7 @@ export namespace Saver {
 				options.push({ nameStr : "Game " + i,
 					func(obj: number) {
 						const prmpt = prompt("This will overwrite save slot " + obj + ", continue? \n\n Comment:");
-						if (prmpt !== null) { SaveGame(obj, prmpt); }
+						if (prmpt !== undefined) { SaveGame(obj, prmpt); }
 					}, enabled : true, obj : i,
 				});
 			} else {
@@ -35,7 +35,7 @@ export namespace Saver {
 				options.push({ nameStr : "Game " + i,
 					func(obj: number) {
 						const prmpt = prompt("This will save to slot " + obj + ", continue? \n\n Comment:");
-						if (prmpt !== null) { SaveGame(obj, prmpt); }
+						if (prmpt !== undefined) { SaveGame(obj, prmpt); }
 					}, enabled : true, obj : i,
 				});
 			}
@@ -60,7 +60,7 @@ export namespace Saver {
 		GameToCache();
 		const seen: any[] = [];
 		const saveData = JSON.stringify(GameCache(), (key, value) => {
-			if (typeof value === "object" && value !== null) {
+			if (typeof value === "object" && value !== undefined) {
 				if (seen.indexOf(value) !== -1) {
 					console.error("Circular reference found in the gameCache!\n" + key + ":", value);
 					return;
@@ -106,7 +106,7 @@ export namespace Saver {
 			});
 		} else {
 			Text.NL();
-			Text.Add("No file saved: Enter a filename!", null, "bold");
+			Text.Add("No file saved: Enter a filename!", undefined, "bold");
 			Text.Flush();
 		}
 	}

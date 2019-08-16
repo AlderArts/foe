@@ -187,7 +187,7 @@ export namespace DeadDropScenes {
 				CampPrompt();
 			}, enabled : true,
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	}
 
 	export namespace First {
@@ -220,7 +220,7 @@ export namespace DeadDropScenes {
 					CampPrompt();
 				}, enabled : true,
 			});
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		}
 
 		export function Start() {
@@ -435,7 +435,7 @@ export namespace DeadDropScenes {
 				Gui.NextPrompt();
 			});
 
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		}
 	}
 
@@ -604,7 +604,7 @@ export namespace DeadDropScenes {
 					Gui.NextPrompt(DeadDropScenes.Docks.CavalcadeLoss);
 				}, enabled : true,
 			});
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		}
 
 		export function CavalcadeCost() {
@@ -667,7 +667,7 @@ export namespace DeadDropScenes {
 						}, enabled : true,
 						tooltip : "Nah, you give.",
 					});
-					Gui.SetButtonsFromList(options, false, null);
+					Gui.SetButtonsFromList(options, false, undefined);
 				}
 			};
 
@@ -980,7 +980,7 @@ export namespace DeadDropScenes {
 					}
 				}, enabled : true,
 			});
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		}
 
 		export function GuardPrompt() {
@@ -1056,8 +1056,8 @@ export namespace DeadDropScenes {
 						Text.Add("Feeling a shiver of arousal run down your spine as you're ordered around, you kneel, open your mouth and obediently await the guard’s cock. Grinning widely at your eagerness to serve, he rubs the tip of his cock against your face, letting you get a good feel of the hot skin and sweaty musk. Then he holds it out for you, at which point you happily slide your lips over his cock and start sucking eagerly.", parse);
 						Text.NL();
 
-						Sex.Blowjob(player, null);
-						player.FuckOral(player.Mouth(), null, 2);
+						Sex.Blowjob(player, undefined);
+						player.FuckOral(player.Mouth(), undefined, 2);
 
 						parse.girlboy = player.Femininity() > 0 ? "girl" : "boy";
 						Text.Add("<i>“Oh yeah,”</i> the young man grunts as you bob up and down on his shaft, <i>“Not too shabby, not too shabby. That's a good [girlboy].”</i>", parse);
@@ -1077,8 +1077,8 @@ export namespace DeadDropScenes {
 						Text.Add("”</i>", parse);
 						Text.NL();
 
-						Sex.Blowjob(player, null);
-						player.FuckOral(player.Mouth(), null, 2);
+						Sex.Blowjob(player, undefined);
+						player.FuckOral(player.Mouth(), undefined, 2);
 
 						Text.Add("Having no choice but to do this, you try to get it over with quickly at least. You start to use your hands to jerk and fondle the guard’s cock and balls while you suck him. It's quite clear that he likes your lips and tongue working on his shaft; enough for him not to taunt you any further over your current predicament. In fact, you seem to have such a strong effect on his arousal that it doesn't take all that long to drive him over the edge.", parse);
 						Text.NL();
@@ -1162,7 +1162,7 @@ export namespace DeadDropScenes {
 					}, enabled : true,
 				});
 			}
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		}
 	}
 }

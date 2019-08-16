@@ -271,7 +271,7 @@ MothgirlScenes.LoneEnc = () => {
 			}, enabled : true,
 			tooltip : "You're not willing to give her your money, but by the way she's eyeing you, you bet she's got other things on her mind, too.",
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	};
 
 	enc.onLoss = () => {
@@ -302,7 +302,7 @@ MothgirlScenes.WinPrompt = function() {
 	const moth = enc.moth;
 	SetGameState(GameState.Event, Gui);
 
-	const cocksInAss = player.CocksThatFit(moth.Butt(), null, 5);
+	const cocksInAss = player.CocksThatFit(moth.Butt(), undefined, 5);
 	const p1cock = player.BiggestCock(cocksInAss);
 	const strapon = p1cock ? p1cock.isStrapon : false;
 
@@ -534,8 +534,8 @@ MothgirlScenes.WinCunn = (enc: any) => {
 	Text.NL();
 
 	Sex.Cunnilingus(moth, player);
-	moth.Fuck(null, 2);
-	player.Fuck(null, 2);
+	moth.Fuck(undefined, 2);
+	player.Fuck(undefined, 2);
 
 	Text.Add("The moth-girl sputters as she's submerged in your juices, lips locking with your pussy's as her tongue is pushed through the tight-clenched slit of your [cunt]. The way she moves her tongue, it's like a wet, writhing tentacle spreading your vaginal walls wide, wriggling its way through the chasm of your womanhood. Biting your lip, you spread yourself out with your fingers, easing the moth's intrusion; she takes the opportunity to push in hard and fast, wrapping her tongue through to the lips of your womb, grabbing your [butt] to pull you in on her. You gasp as the moth pulls just a little too hard. Unsteady as you are, a little force is all it takes to send you toppling down atop her, rolling with the bug through the grass until the two of you come to a standstill, straddling her big hips. She stares up at you expectantly, lips pursed over the tip of her long tongue, awaiting your pleasure.", parse);
 	Text.NL();

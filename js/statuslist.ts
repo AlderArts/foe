@@ -12,7 +12,7 @@ export class StatusList {
 	}
 
 	constructor() {
-		// Index contains null if status effect is inactive
+		// Index contains undefined if status effect is inactive
 		// Data in index can contain a degree/timer relevant to the effect
 		this.stats = [];
 	}
@@ -53,7 +53,7 @@ export class StatusList {
 				storage.push(s);
 			}
 		}
-		return storage.length > 0 ? storage : null;
+		return storage.length > 0 ? storage : undefined;
 	};
 
 	public Update = function(ent: any, hours: number) {
@@ -74,7 +74,7 @@ export class StatusList {
 
 	public Clear = function() {
 		for (let i = 0; i < StatusEffect.LAST; i++) {
-			this.stats[i] = null;
+			this.stats[i] = undefined;
 		}
 	};
 
@@ -105,33 +105,33 @@ export class StatusList {
 	};
 
 	public EndOfCombat = function() {
-		this.stats[StatusEffect.Burn]    = null;
-		this.stats[StatusEffect.Freeze]  = null;
-		this.stats[StatusEffect.Numb]    = null;
-		// this.stats[StatusEffect.Petrify] = null;
-		this.stats[StatusEffect.Venom]   = null;
-		this.stats[StatusEffect.Blind]   = null;
-		this.stats[StatusEffect.Siphon]  = null;
-		this.stats[StatusEffect.Seal]    = null;
-		this.stats[StatusEffect.Sleep]   = null;
-		this.stats[StatusEffect.Enrage]  = null;
-		// this.stats[StatusEffect.Fatigue] = null;
-		this.stats[StatusEffect.Bleed]   = null;
-		this.stats[StatusEffect.Haste]   = null;
-		this.stats[StatusEffect.Slow]    = null;
-		this.stats[StatusEffect.Regen]   = null;
-		this.stats[StatusEffect.Boon]    = null;
-		this.stats[StatusEffect.Horny]   = null;
-		// this.stats[StatusEffect.Aroused] = null;
-		// this.stats[StatusEffect.Limp]    = null;
-		// this.stats[StatusEffect.Bimbo]   = null;
-		this.stats[StatusEffect.Decoy]   = null;
-		this.stats[StatusEffect.Counter] = null;
-		// this.stats[StatusEffect.Full]    = null;
-		this.stats[StatusEffect.Confuse] = null;
-		this.stats[StatusEffect.Weakness] = null;
-		// this.stats[StatusEffect.Buff]    = null;
-		this.stats[StatusEffect.Curse]   = null;
+		this.stats[StatusEffect.Burn]    = undefined;
+		this.stats[StatusEffect.Freeze]  = undefined;
+		this.stats[StatusEffect.Numb]    = undefined;
+		// this.stats[StatusEffect.Petrify] = undefined;
+		this.stats[StatusEffect.Venom]   = undefined;
+		this.stats[StatusEffect.Blind]   = undefined;
+		this.stats[StatusEffect.Siphon]  = undefined;
+		this.stats[StatusEffect.Seal]    = undefined;
+		this.stats[StatusEffect.Sleep]   = undefined;
+		this.stats[StatusEffect.Enrage]  = undefined;
+		// this.stats[StatusEffect.Fatigue] = undefined;
+		this.stats[StatusEffect.Bleed]   = undefined;
+		this.stats[StatusEffect.Haste]   = undefined;
+		this.stats[StatusEffect.Slow]    = undefined;
+		this.stats[StatusEffect.Regen]   = undefined;
+		this.stats[StatusEffect.Boon]    = undefined;
+		this.stats[StatusEffect.Horny]   = undefined;
+		// this.stats[StatusEffect.Aroused] = undefined;
+		// this.stats[StatusEffect.Limp]    = undefined;
+		// this.stats[StatusEffect.Bimbo]   = undefined;
+		this.stats[StatusEffect.Decoy]   = undefined;
+		this.stats[StatusEffect.Counter] = undefined;
+		// this.stats[StatusEffect.Full]    = undefined;
+		this.stats[StatusEffect.Confuse] = undefined;
+		this.stats[StatusEffect.Weakness] = undefined;
+		// this.stats[StatusEffect.Buff]    = undefined;
+		this.stats[StatusEffect.Curse]   = undefined;
 	};
 
 }

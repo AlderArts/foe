@@ -241,7 +241,7 @@ NagaScenes.DesertEncounter = function() {
 			}, enabled : true,
 			tooltip : "Resist the naga’s temptation and fight her off!",
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	} else {
 		Text.Add(" Towering over you at roughly eight feet tall is a half-human, half-serpent creature. From the hips up, her body is that of a lithe, average-sized human woman with a thin waist, shapely D-cup breasts proudly on display, and long, slender arms adorned with golden armlets.", parse);
 		Text.NL();
@@ -816,7 +816,7 @@ NagaScenes.DesertWinPrompt2 = (enc: any, hypno: boolean) => {
 		}, enabled : true,
 		tooltip : "You want nothing more to do with the naga - set her free.",
 	});
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 };
 
 NagaScenes.DesertWinHypnotize = (enc: any) => {
@@ -1039,8 +1039,8 @@ NagaScenes.DesertWinGetFuckedVag = (enc: any, hypno: boolean) => {
 	Text.NL();
 
 	Sex.Cunnilingus(naga, player);
-	naga.Fuck(null, 1);
-	player.Fuck(null, 1);
+	naga.Fuck(undefined, 1);
+	player.Fuck(undefined, 1);
 
 	parse.l2 = player.HasLegs() ? "Bending forward" : "From your prone position atop your scaly lover";
 	Text.Add("You caress the snake-slut’s supple breasts while she dutifully stimulates your cunt, moistening it with both her warm saliva and your own juices. As soft and pleasant as they are to grope, you realize that you’d better do some lubricating of your own. [l2], your gaze falls upon on her pair of impressive peckers, both throbbing and oozing steady streams of pre-cum. You reach out for the nearest of her cocks with your hands while moving your face toward her other member.", parse);
@@ -1205,7 +1205,7 @@ NagaScenes.DesertWinTailpeg = (opts: any) => {
 		}, enabled : true,
 		tooltip : "You aren’t interested in being penetrated by her tail.",
 	});
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 };
 
 NagaScenes.DesertNagaMating = (naga: Naga) => {
@@ -1219,7 +1219,7 @@ NagaScenes.DesertNagaMating = (naga: Naga) => {
 	parse = player.ParserTags(parse);
 	parse = naga.ParserTags(parse, "n");
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
-	parse = Text.ParserPlural(parse, player.NumCocks() > 2, null, "2");
+	parse = Text.ParserPlural(parse, player.NumCocks() > 2, undefined, "2");
 
 	parse.comp = party.Num() === 2 ? party.Get(1).name : "your companions";
 

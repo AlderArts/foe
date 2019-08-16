@@ -224,7 +224,7 @@ MomoScenes.FindingMomo = () => {
 		}, enabled : true,
 		tooltip : "You’re not going to trust some random stranger with the location of the Nomads’ camp.",
 	});
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 };
 
 MomoScenes.WanderingMomo = () => {
@@ -289,7 +289,7 @@ MomoScenes.WanderingMomo = () => {
 		}, enabled : true,
 		tooltip : "You’d best not get involved with her any further...",
 	});
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 };
 
 MomoScenes.Interact = () => {
@@ -761,7 +761,7 @@ MomoScenes.TalkPrompt = () => {
 					}, enabled : true,
 					tooltip : Text.Parse("Nah, this is a stupid idea. Now is not the time to be flirting with the dragon-[girlMorph].", parse),
 				});
-				Gui.SetButtonsFromList(options, false, null);
+				Gui.SetButtonsFromList(options, false, undefined);
 			}, enabled : true,
 			tooltip : "Why not ask and see if Momo will tell you a little about her origins.",
 		});
@@ -857,7 +857,7 @@ MomoScenes.TalkPrompt = () => {
 					}, enabled : true,
 					tooltip : "You never had any siblings.",
 				});
-				Gui.SetButtonsFromList(options, false, null);
+				Gui.SetButtonsFromList(options, false, undefined);
 			} else if (momo.flags.tCook === MomoFlags.TalkCook.BigFamily) {
 				Text.Add("Momo chuckles and shakes her head. <i>“I tell you, I never had any problems learning to cope with customers; my kitchen back on the farm was busy as any restaurant ever gets,”</i> she declares, sounding perversely proud of that fact. <i>“Breakfast, lunch, dinner, it was like a battle every time, and the washing up... you could have had a bath in the tub we used for all our plates and stuff...”</i>", parse);
 				Text.NL();

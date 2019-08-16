@@ -24,7 +24,7 @@ WhiteAb._onHeal = (ability: Ability, encounter: Encounter, caster: Entity, targe
 WhiteAb.FirstAid = new Ability("First aid");
 WhiteAb.FirstAid.Short = () => "Heals minor damage, single target.";
 WhiteAb.FirstAid.targetMode = TargetMode.Ally;
-WhiteAb.FirstAid.cost = { hp: null, sp: 5, lp: null};
+WhiteAb.FirstAid.cost = { hp: undefined, sp: 5, lp: undefined};
 WhiteAb.FirstAid.OOC = true;
 WhiteAb.FirstAid.castTree.push(AbilityNode.Template.Heal({
 	atkMod: 1,
@@ -40,7 +40,7 @@ WhiteAb.FirstAid.castTree.push(AbilityNode.Template.Heal({
 WhiteAb.Heal = new Ability("Heal");
 WhiteAb.Heal.Short = () => "Heals some damage, single target.";
 WhiteAb.Heal.targetMode = TargetMode.Ally;
-WhiteAb.Heal.cost = { hp: null, sp: 10, lp: null};
+WhiteAb.Heal.cost = { hp: undefined, sp: 10, lp: undefined};
 WhiteAb.Heal.OOC = true;
 WhiteAb.Heal.castTree.push(AbilityNode.Template.Heal({
 	atkMod: 1.5,
@@ -55,7 +55,7 @@ WhiteAb.Heal.castTree.push(AbilityNode.Template.Heal({
 WhiteAb.Recover = new Ability("Recover");
 WhiteAb.Recover.Short = () => "Heals moderate damage, single target.";
 WhiteAb.Recover.targetMode = TargetMode.Ally;
-WhiteAb.Recover.cost = { hp: null, sp: 30, lp: null};
+WhiteAb.Recover.cost = { hp: undefined, sp: 30, lp: undefined};
 WhiteAb.Recover.OOC = true;
 WhiteAb.Recover.castTree.push(AbilityNode.Template.Heal({
 	atkMod: 2,
@@ -73,7 +73,7 @@ WhiteAb.Cheer = new Ability();
 WhiteAb.Cheer.name = "Cheer";
 WhiteAb.Cheer.Short = () => "Boosts party morale, raising spirit and stamina slightly (doesn't stack).";
 WhiteAb.Cheer.targetMode = TargetMode.Party;
-WhiteAb.Cheer.cost = { hp: null, sp: 30, lp: null};
+WhiteAb.Cheer.cost = { hp: undefined, sp: 30, lp: undefined};
 WhiteAb.Cheer.CastInternal = (encounter: Encounter, caster: Entity, target: Party) => {
 	// TODO: Make more flavor text
 	const parse: any = {
@@ -100,7 +100,7 @@ WhiteAb.Pinpoint = new Ability();
 WhiteAb.Pinpoint.name = "Pinpoint";
 WhiteAb.Pinpoint.Short = () => "Buffs accuracy of one target (doesn't stack).";
 WhiteAb.Pinpoint.targetMode = TargetMode.Ally;
-WhiteAb.Pinpoint.cost = { hp: null, sp: 10, lp: null};
+WhiteAb.Pinpoint.cost = { hp: undefined, sp: 10, lp: undefined};
 WhiteAb.Pinpoint.CastInternal = (encounter: Encounter, caster: Entity, target: Entity) => {
 	target.dexterity.temp = Math.max(target.dexterity.temp, caster.MAttack() / 5);
 
@@ -123,7 +123,7 @@ WhiteAb.Toughen = new Ability();
 WhiteAb.Toughen.name = "Toughen";
 WhiteAb.Toughen.Short = () => "Buffs stamina of one target (doesn't stack).";
 WhiteAb.Toughen.targetMode = TargetMode.Ally;
-WhiteAb.Toughen.cost = { hp: null, sp: 10, lp: null};
+WhiteAb.Toughen.cost = { hp: undefined, sp: 10, lp: undefined};
 WhiteAb.Toughen.CastInternal = (encounter: Encounter, caster: Entity, target: Entity) => {
 	target.stamina.temp = Math.max(target.stamina.temp, caster.MAttack() / 5);
 
@@ -146,7 +146,7 @@ WhiteAb.Empower = new Ability();
 WhiteAb.Empower.name = "Empower";
 WhiteAb.Empower.Short = () => "Buffs strength of one target (doesn't stack).";
 WhiteAb.Empower.targetMode = TargetMode.Ally;
-WhiteAb.Empower.cost = { hp: null, sp: 10, lp: null};
+WhiteAb.Empower.cost = { hp: undefined, sp: 10, lp: undefined};
 WhiteAb.Empower.CastInternal = (encounter: Encounter, caster: Entity, target: Entity) => {
 	target.strength.temp = Math.max(target.strength.temp, caster.MAttack() / 5);
 
@@ -164,10 +164,10 @@ WhiteAb.Empower.CastInternal = (encounter: Encounter, caster: Entity, target: En
 WhiteAb.Tirade = new Ability("Tirade");
 WhiteAb.Tirade.name = "Tirade";
 WhiteAb.Tirade.Short = () => "Attempt to bore the enemy with meaningless drivel. Drain enemy SP.";
-WhiteAb.Tirade.cost = { hp: null, sp: 10, lp: null};
+WhiteAb.Tirade.cost = { hp: undefined, sp: 10, lp: undefined};
 WhiteAb.Tirade.cooldown = 1;
 WhiteAb.Tirade._onMiss = (ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
-	const parse = AbilityNode.DefaultParser(null, target);
+	const parse = AbilityNode.DefaultParser(undefined, target);
 	Text.Add(", but [tname] [tis]n't very impressed!", parse);
 };
 WhiteAb.Tirade.castTree.push(AbilityNode.Template.Magical({
@@ -190,10 +190,10 @@ WhiteAb.Tirade.castTree.push(AbilityNode.Template.Magical({
 
 WhiteAb.Preach = new Ability("Preach");
 WhiteAb.Preach.Short = () => "Attempt to bore the enemy with pompous religious drivel. Drain enemy SP.";
-WhiteAb.Preach.cost = { hp: null, sp: 20, lp: null};
+WhiteAb.Preach.cost = { hp: undefined, sp: 20, lp: undefined};
 WhiteAb.Preach.cooldown = 2;
 WhiteAb.Preach._onMiss = (ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
-	const parse = AbilityNode.DefaultParser(null, target);
+	const parse = AbilityNode.DefaultParser(undefined, target);
 	Text.Add("However, [tname] [tis]n't very impressed!", parse);
 	Text.NL();
 };
@@ -219,7 +219,7 @@ WhiteAb.Preach.castTree.push(AbilityNode.Template.Magical({
 WhiteAb.Sermon = new Ability("Sermon");
 WhiteAb.Sermon.Short = () => "Attempt to bore the enemy party with religious proselytizing. Drain enemy SP.";
 WhiteAb.Sermon.targetMode = TargetMode.Enemies;
-WhiteAb.Sermon.cost = { hp: null, sp: 50, lp: null};
+WhiteAb.Sermon.cost = { hp: undefined, sp: 50, lp: undefined};
 WhiteAb.Sermon.cooldown = 3;
 WhiteAb.Sermon.castTree.push(AbilityNode.Template.Magical({
 	hitMod: 1,
@@ -244,7 +244,7 @@ WhiteAb.Cleanse = new Ability();
 WhiteAb.Cleanse.name = "Cleanse";
 WhiteAb.Cleanse.Short = () => "Remove a negative physical status effect from an ally or a positive physical status effect from an enemy.";
 WhiteAb.Cleanse.targetMode = TargetMode.All;
-WhiteAb.Cleanse.cost = { hp: null, sp: 20, lp: null};
+WhiteAb.Cleanse.cost = { hp: undefined, sp: 20, lp: undefined};
 WhiteAb.Cleanse.cooldown = 2;
 WhiteAb.Cleanse.casttime = 25;
 WhiteAb.Cleanse.CastInternal = (encounter: Encounter, caster: Entity, target: Entity) => {
@@ -266,13 +266,13 @@ WhiteAb.Cleanse.CastInternal = (encounter: Encounter, caster: Entity, target: En
 	// TODO
 	if (ally) {
 		Text.Add("[tName] [tis] healed of any physically debilitating effects!", parse);
-		target.combatStatus.stats[StatusEffect.Burn]   = null;
-		target.combatStatus.stats[StatusEffect.Freeze] = null;
-		target.combatStatus.stats[StatusEffect.Numb]   = null;
-		target.combatStatus.stats[StatusEffect.Venom]  = null;
-		target.combatStatus.stats[StatusEffect.Blind]  = null;
-		target.combatStatus.stats[StatusEffect.Sleep]  = null;
-		target.combatStatus.stats[StatusEffect.Bleed]  = null;
+		target.combatStatus.stats[StatusEffect.Burn]   = undefined;
+		target.combatStatus.stats[StatusEffect.Freeze] = undefined;
+		target.combatStatus.stats[StatusEffect.Numb]   = undefined;
+		target.combatStatus.stats[StatusEffect.Venom]  = undefined;
+		target.combatStatus.stats[StatusEffect.Blind]  = undefined;
+		target.combatStatus.stats[StatusEffect.Sleep]  = undefined;
+		target.combatStatus.stats[StatusEffect.Bleed]  = undefined;
 	} else {
 		Text.Add("[tName] [tis] stripped of any physically strengthening effects!", parse);
 	}
@@ -287,7 +287,7 @@ WhiteAb.Dispel = new Ability();
 WhiteAb.Dispel.name = "Dispel";
 WhiteAb.Dispel.Short = () => "Remove a negative magical status effect from an ally or a positive magical status effect from an enemy.";
 WhiteAb.Dispel.targetMode = TargetMode.All;
-WhiteAb.Dispel.cost = { hp: null, sp: 20, lp: null};
+WhiteAb.Dispel.cost = { hp: undefined, sp: 20, lp: undefined};
 WhiteAb.Dispel.cooldown = 2;
 WhiteAb.Dispel.casttime = 25;
 WhiteAb.Dispel.CastInternal = (encounter: Encounter, caster: Entity, target: Entity) => {
@@ -309,18 +309,18 @@ WhiteAb.Dispel.CastInternal = (encounter: Encounter, caster: Entity, target: Ent
 	// TODO
 	if (ally) {
 		Text.Add("[tName] [tis] healed of any magical debilitating effects!", parse);
-		target.combatStatus.stats[StatusEffect.Curse]    = null;
-		target.combatStatus.stats[StatusEffect.Slow]     = null;
-		target.combatStatus.stats[StatusEffect.Siphon]   = null;
-		target.combatStatus.stats[StatusEffect.Weakness] = null;
-		target.combatStatus.stats[StatusEffect.Petrify]  = null;
-		target.combatStatus.stats[StatusEffect.Seal]     = null;
+		target.combatStatus.stats[StatusEffect.Curse]    = undefined;
+		target.combatStatus.stats[StatusEffect.Slow]     = undefined;
+		target.combatStatus.stats[StatusEffect.Siphon]   = undefined;
+		target.combatStatus.stats[StatusEffect.Weakness] = undefined;
+		target.combatStatus.stats[StatusEffect.Petrify]  = undefined;
+		target.combatStatus.stats[StatusEffect.Seal]     = undefined;
 	} else {
 		Text.Add("[tName] [tis] stripped of any magical bolstering effects!", parse);
-		target.combatStatus.stats[StatusEffect.Decoy] = null;
-		target.combatStatus.stats[StatusEffect.Haste] = null;
-		target.combatStatus.stats[StatusEffect.Regen] = null;
-		target.combatStatus.stats[StatusEffect.Boon]  = null;
+		target.combatStatus.stats[StatusEffect.Decoy] = undefined;
+		target.combatStatus.stats[StatusEffect.Haste] = undefined;
+		target.combatStatus.stats[StatusEffect.Regen] = undefined;
+		target.combatStatus.stats[StatusEffect.Boon]  = undefined;
 	}
 	Text.Flush();
 
@@ -333,7 +333,7 @@ WhiteAb.Purify = new Ability();
 WhiteAb.Purify.name = "Purify";
 WhiteAb.Purify.Short = () => "Remove a negative lust-based status effect from an ally or a positive lust-based status effect from an enemy.";
 WhiteAb.Purify.targetMode = TargetMode.All;
-WhiteAb.Purify.cost = { hp: null, sp: 20, lp: null};
+WhiteAb.Purify.cost = { hp: undefined, sp: 20, lp: undefined};
 WhiteAb.Purify.cooldown = 2;
 WhiteAb.Purify.casttime = 25;
 WhiteAb.Purify.CastInternal = (encounter: Encounter, caster: Entity, target: Entity) => {
@@ -355,9 +355,9 @@ WhiteAb.Purify.CastInternal = (encounter: Encounter, caster: Entity, target: Ent
 	// TODO
 	if (ally) {
 		Text.Add("[tName] [tis] healed of any lust-based debilitating effects!", parse);
-		target.combatStatus.stats[StatusEffect.Horny]   = null;
-		target.combatStatus.stats[StatusEffect.Limp]    = null;
-		target.combatStatus.stats[StatusEffect.Confuse] = null;
+		target.combatStatus.stats[StatusEffect.Horny]   = undefined;
+		target.combatStatus.stats[StatusEffect.Limp]    = undefined;
+		target.combatStatus.stats[StatusEffect.Confuse] = undefined;
 	} else {
 		Text.Add("[tName] [tis] stripped of any lust-based enhancing effects!", parse);
 	}

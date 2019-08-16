@@ -123,8 +123,6 @@ export class NurseryKid {
 	public race: RaceDesc;
 
 	constructor(storage?: any) {
-		this.mother = null;
-		this.father = null;
 		this.num    = 1;
 		this.race   = Race.Human;
 

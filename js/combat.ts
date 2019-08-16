@@ -32,9 +32,6 @@ export class Encounter {
 	constructor(enemy: Party) {
 		this.canRun = true;
 
-		this.onEncounter = null;
-		this.onTick = null;
-
 		// Party filled with entitys
 		this.enemy = enemy;
 		// Array filled with {entity: Entity, isEnemy: bool, initiative: number }
@@ -224,14 +221,14 @@ export class Encounter {
 		for (const ent of this.enemy.members) {
 			ent.ClearCombatBonuses();
 			ent.combatStatus.EndOfCombat();
-			ent.uniqueName = null;
+			ent.uniqueName = undefined;
 		}
 		for (const ent of GAME().party.members) {
 			ent.ClearCombatBonuses();
 			ent.combatStatus.EndOfCombat();
-			ent.uniqueName = null;
+			ent.uniqueName = undefined;
 		}
-		SetCurEncounter(null);
+		SetCurEncounter(undefined);
 	}
 
 	public onRun() {
@@ -334,11 +331,11 @@ export class Encounter {
 			const e = ent.entity;
 			if (e === entity) {
 				// Check for sleep
-				if (e.combatStatus.stats[StatusEffect.Sleep] !== null) {
-					e.combatStatus.stats[StatusEffect.Sleep] = null;
+				if (e.combatStatus.stats[StatusEffect.Sleep] !== undefined) {
+					e.combatStatus.stats[StatusEffect.Sleep] = undefined;
 				}
 				// Check for confuse
-				if (e.combatStatus.stats[StatusEffect.Confuse] !== null) {
+				if (e.combatStatus.stats[StatusEffect.Confuse] !== undefined) {
 					e.combatStatus.stats[StatusEffect.Confuse].OnFade(this, e);
 				}
 				break;
@@ -355,7 +352,7 @@ export class Encounter {
 			return;
 		}
 
-		SetCurrentActiveChar(null);
+		SetCurrentActiveChar(undefined);
 
 		if (enc.onTick) {
 			enc.onTick();
@@ -406,7 +403,7 @@ export class Encounter {
 			SetCurrentActiveChar(activeChar.entity);
 
 			const casting = activeChar.casting;
-			activeChar.casting = null;
+			activeChar.casting = undefined;
 
 			let ini = 100;
 
@@ -464,8 +461,8 @@ export class Encounter {
 				Text.Clear();
 				// TODO: DEBUG ?
 				let entityName = CurrentActiveChar().uniqueName ? CurrentActiveChar().uniqueName : CurrentActiveChar().name;
-				Text.Add("Turn order:<br>", null, "bold");
-				Text.Add(entityName + "<br>", null, "bold");
+				Text.Add("Turn order:<br>", undefined, "bold");
+				Text.Add(entityName + "<br>", undefined, "bold");
 
 				const tempParty: any[] = [];
 				_.each(enc.combatOrder, (c) => {
@@ -476,7 +473,7 @@ export class Encounter {
 				});
 
 				_.times(8, () => {
-					let found: any = null;
+					let found: any;
 					while (!found) {
 						_.each(tempParty, (c) => {
 							if (c.ini >= 100) {

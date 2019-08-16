@@ -124,7 +124,7 @@ MagnusScenes.Interact = () => {
 	} else {
 		if (GetDEBUG()) {
 			Text.NL();
-			Text.Add("DEBUG: relation: " + magnus.relation.Get(), null, "bold");
+			Text.Add("DEBUG: relation: " + magnus.relation.Get(), undefined, "bold");
 			Text.NL();
 		}
 

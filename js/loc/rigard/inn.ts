@@ -51,7 +51,7 @@ InnLoc.common.description = () => {
 
 InnLoc.common.links.push(new Link(
 	"Outside", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(WORLD().loc.Rigard.Plaza);
 	},
@@ -62,7 +62,7 @@ InnLoc.common.links.push(new Link(
 		const twins = GAME().twins;
 		return twins.flags.Met >= TwinsFlags.Met.Access;
 	}, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(InnLoc.penthouse, {minute: 5});
 	},
@@ -78,14 +78,14 @@ InnLoc.penthouse.description = () => {
 };
 InnLoc.penthouse.links.push(new Link(
 	"Downstairs", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(InnLoc.common, {minute: 5});
 	},
 ));
 InnLoc.penthouse.events.push(new Link(
 	"Twins", true, true,
-	null,
+	undefined,
 	() => {
 		TwinsScenes.Interact();
 	},

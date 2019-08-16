@@ -334,7 +334,7 @@ MirandaScenes.BruiserTraining = () => {
 						}, enabled : true,
 						tooltip : "Go along with her whims.",
 					});
-					Gui.SetButtonsFromList(options, false, null);
+					Gui.SetButtonsFromList(options, false, undefined);
 				}, enabled : true,
 				tooltip : "Damn it, Miranda… Alright, you’re game.",
 			});
@@ -348,7 +348,7 @@ MirandaScenes.BruiserTraining = () => {
 				}, enabled : true,
 				tooltip : "Turn down her offer.",
 			});
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		}, enabled : true,
 		tooltip : "...Fine. She wants you to suck her cock, right?",
 	});
@@ -367,7 +367,7 @@ MirandaScenes.BruiserTraining = () => {
 			tooltip : "Hasn’t she been mouthing up a bit too often lately? Can’t she help you for the sake of it, just once?",
 		});
 	}
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 };
 
 MirandaScenes.BruiserTrainingCont = () => {
@@ -2594,7 +2594,7 @@ MirandaScenes.TerryChaseHome = () => {
 			}, enabled : true,
 			tooltip : "Point out that you should perhaps look for the thief instead.",
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	} else { // nice
 		const dom = player.SubDom() - miranda.SubDom();
 		parse.mastermistress = dom > 50 ? player.mfTrue(" master", " mistress") : "";
@@ -2639,7 +2639,7 @@ MirandaScenes.TerryChaseHome = () => {
 			}, enabled : true,
 			tooltip : "You should focus on catching the thief instead.",
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	}
 };
 
@@ -2907,7 +2907,7 @@ MirandaScenes.HomeDommySexRideDobieCockVag = () => {
 	};
 	parse = player.ParserTags(parse);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
-	parse = Text.ParserPlural(parse, player.NumCocks() > 2, null, "2");
+	parse = Text.ParserPlural(parse, player.NumCocks() > 2, undefined, "2");
 
 	Text.Clear();
 
@@ -2997,8 +2997,8 @@ MirandaScenes.HomeDommySexRideDobieCockVag = () => {
 				Text.NL();
 
 				Sex.Cunnilingus(miranda, player);
-				miranda.Fuck(null, 2);
-				player.Fuck(null, 2);
+				miranda.Fuck(undefined, 2);
+				player.Fuck(undefined, 2);
 
 				Text.Add("<i>“Does it feel good, [master]?”</i> she queries, her tongue lolling playfully. You respond with a frustrated moan, a hand in her hair holding Miranda in place as you shove her muzzle back where it belongs: eating out your cunt. The guardswoman is quick on the uptake and returns to the task with redoubled fervor.", parse);
 				Text.NL();
@@ -3065,7 +3065,7 @@ MirandaScenes.HomeDommySexRideDobieCockVag = () => {
 		}, enabled : true,
 		tooltip : "There’s something about that glare that just makes you want to give in and let her take you...",
 	});
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 };
 
 MirandaScenes.HomeDommySexRideDobieCockVagFuck = (stickymiranda: boolean, came: boolean) => {
@@ -3174,7 +3174,7 @@ MirandaScenes.HomeDommySexRideDobieCockVagFuck = (stickymiranda: boolean, came: 
 		}, enabled : true,
 		tooltip : "That thick bulge is too intimidating - leave it out!",
 	});
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 
 	Gui.Callstack.push(() => {
 		Text.NL();
@@ -4488,7 +4488,7 @@ MirandaScenes.HomeSubbySex = () => {
 		tooltip : "Perhaps... she’d let you fuck her if you asked?",
 	});
 
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 };
 
 // TODO
@@ -4497,7 +4497,7 @@ MirandaScenes.HomeSubbySexDommyRide = (location: any, Loc: any) => {
 	const miranda = GAME().miranda;
 
 	const nasty = miranda.Attitude() < MirandaFlags.Attitude.Neutral;
-	let p1cock = player.BiggestCock(null, true);
+	let p1cock = player.BiggestCock(undefined, true);
 	let strapon = p1cock ? p1cock.isStrapon : false;
 	let borrowed = false;
 
@@ -4508,7 +4508,7 @@ MirandaScenes.HomeSubbySexDommyRide = (location: any, Loc: any) => {
 	};
 	parse = player.ParserTags(parse);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
-	parse = Text.ParserPlural(parse, player.NumCocks() > 2, null, "2");
+	parse = Text.ParserPlural(parse, player.NumCocks() > 2, undefined, "2");
 	parse.loc1 = () => location === Loc.Upstairs ? "the bed" : "the rug";
 	parse.loc2 = () => location === Loc.Upstairs ? "the soft sheets" : "the fluffy pelt";
 
@@ -5200,7 +5200,7 @@ MirandaScenes.HomeSubbySexTakeAnal = (location: any, Loc: any) => {
 						tooltip : "Now is the perfect opportunity to get back at the dobie! Have a go at <i>her</i> ass for a while, and stuff a few toys in her pussy for good measure.",
 					});
 				}
-				Gui.SetButtonsFromList(options, false, null);
+				Gui.SetButtonsFromList(options, false, undefined);
 			}
 		});
 	}, "Rough", "Beg her to give it to you rough!");
@@ -5290,7 +5290,7 @@ MirandaScenes.TavernSexPrompt = () => {
 		}, enabled : true,
 		tooltip : "",
 	});
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 };
 
 MirandaScenes.TavernSexBackroomPrompt = () => {
@@ -5351,7 +5351,7 @@ MirandaScenes.TavernSexBackroomPrompt = () => {
 			}, enabled : cocksInVag.length > 0,
 			tooltip : "Fuck the herm.",
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	} else { // nasty
 		parse.l = player.HasLegs() ? " get on your knees" : " get down";
 		Text.Add("<i>“Alright, slut. Strip and[l]. Little Miranda wants a kiss.”</i>", parse);
@@ -6294,7 +6294,7 @@ MirandaScenes.TavernSexDommyBJ = () => {
 			tooltip : "Miranda is getting out of hand. Teach the doberherm who runs this show and why.",
 		});
 	}
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 };
 
 MirandaScenes.TerryTavernSexDommyBJ = () => {
@@ -6621,7 +6621,7 @@ MirandaScenes.DatingBlockPrompt = () => {
 		}, enabled : true,
 		tooltip : "No! You’re not going to do that!",
 	});
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 };
 
 // BAR HANGOUT
@@ -6702,7 +6702,7 @@ MirandaScenes.DatingStage1 = () => {
 			}, enabled : true,
 			tooltip : "Decline. You’re not quite sure what’s in that.",
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	}, 1.0, () => true);
 	// TODO
 	/*
@@ -6765,7 +6765,7 @@ MirandaScenes.DatingStage2 = () => {
 			tooltip : "Just cut right to the chase and take her home.",
 		});
 
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	};
 
 	const scenes = new EncounterTable();
@@ -6934,7 +6934,7 @@ MirandaScenes.TalkBackstory = (atBar: boolean) => {
 					}, enabled : true,
 					tooltip : "Ah… no, you are fine. Please continue the story.",
 				});
-				Gui.SetButtonsFromList(options, false, null);
+				Gui.SetButtonsFromList(options, false, undefined);
 			});
 			// ((Time with the mercs))
 			scenes.push(() => {
@@ -7274,7 +7274,7 @@ MirandaScenes.DatingStage3 = () => {
 			}, enabled : true,
 			tooltip : "Not tonight.",
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	} else if (MirandaScenes.DatingScore >= -1) {
 		Text.Add("<i>“You gotta step up your game, [playername]. Tell you what, you still have a shot at saving this date. It involves you, wrapped around my cock,”</i> the dommy herm gives you a sly grin.", parse);
 		Text.Flush();
@@ -7315,7 +7315,7 @@ MirandaScenes.DatingStage3 = () => {
 			}, enabled : true,
 			tooltip : "...No.",
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	} else {
 		Text.Add("<i>“I have something <b>very</b> special in mind for you tonight, my little slut,”</i> Miranda growls through a grin that’s all teeth. <i>“I’m going to give you a ride your body isn’t likely to forget for weeks… are you coming?”</i>", parse);
 		Text.Flush();
@@ -7368,7 +7368,7 @@ MirandaScenes.DatingStage3 = () => {
 			}, enabled : true,
 			tooltip : "It’s a trap! Flee!",
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	}
 };
 

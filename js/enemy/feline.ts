@@ -578,21 +578,21 @@ FelinesScenes.WinPrompt = function() {
 		let numMales   = 0;
 		let numFemales = 0;
 		let numHerms   = 0;
-		let male: Wildcat = null;
-		let female: Wildcat = null;
-		let herm: Wildcat = null;
+		let male: Wildcat;
+		let female: Wildcat;
+		let herm: Wildcat;
 		for (let i = 0; i < enemy.Num(); ++i) {
 			const ent    = enemy.Get(i);
 			const gender = ent.Gender();
 			if (gender === Gender.male) {
 				numMales++;
-				if (male == null) { male = ent; }
+				if (male === undefined) { male = ent; }
 			} else if (gender === Gender.female) {
 				numFemales++;
-				if (female == null) { female = ent; }
+				if (female === undefined) { female = ent; }
 			} else if (gender === Gender.herm) {
 				numHerms++;
-				if (herm == null) { herm = ent; }
+				if (herm === undefined) { herm = ent; }
 			}
 		}
 
@@ -865,7 +865,7 @@ FelinesScenes.WinCatchVag = (mainCat: Wildcat, enemy: Party) => {
 		Gui.NextPrompt();
 	});
 
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 };
 
 FelinesScenes.WinFuckVag = (cat: Wildcat, group: boolean, enc: any, cocks: Cock[], numFemales: number) => {
@@ -1685,28 +1685,28 @@ FelinesScenes.LossRegular = function() {
 		parse.comp = " you and " + party.Get(1).name;
 	} else if (party.Num() > 1) {
 		parse.comp = " you and your companions";
- } else {
+ 	} else {
 		parse.comp = "";
- }
+ 	}
 
 	let numMales   = 0;
 	let numFemales = 0;
 	let numHerms   = 0;
-	let male: Wildcat = null;
-	let female: Wildcat = null;
-	let herm: Wildcat = null;
+	let male: Wildcat;
+	let female: Wildcat;
+	let herm: Wildcat;
 	for (let i = 0; i < enemy.Num(); ++i) {
 		const ent    = enemy.Get(i);
 		const gender = ent.Gender();
 		if (gender === Gender.male) {
 			numMales++;
-			if (male == null) { male = ent; }
+			if (male === undefined) { male = ent; }
 		} else if (gender === Gender.female) {
 			numFemales++;
-			if (female == null) { female = ent; }
+			if (female === undefined) { female = ent; }
 		} else if (gender === Gender.herm) {
 			numHerms++;
-			if (herm == null) { herm = ent; }
+			if (herm === undefined) { herm = ent; }
 		}
 	}
 
@@ -3067,7 +3067,7 @@ FelinesScenes.LossDoubleTeam = (cat: Wildcat, cat2: Wildcat, group: boolean, enc
 		Gui.NextPrompt();
 	});
 
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 
 	return true;
 };

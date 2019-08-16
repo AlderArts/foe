@@ -11,7 +11,6 @@ export class Vagina extends Orifice {
 	constructor() {
 		super();
 		this.clit          = new Stat(0.5);
-		this.clitCock      = null;
 	}
 
 	public ToStorage(full: any) {
@@ -65,7 +64,7 @@ export class Vagina extends Orifice {
 		return _.sample(nouns);
 	}
 	public Desc() {
-		let ret = null;
+		let ret;
 		const vagArea = this.capacity.Get() * this.stretch.Get();
 		if     (vagArea <= 3 ) {
 			ret = {a: "an", adj: "extremely tight"};

@@ -1155,7 +1155,7 @@ export namespace LeiScenes {
 									tooltip : "That was very interesting, just not interesting to you right now.",
 									func : leaveIt, enabled : true,
 								});
-								Gui.SetButtonsFromList(options, false, null);
+								Gui.SetButtonsFromList(options, false, undefined);
 							} else {
 								LeiScenes.TalkPrompt();
 							}
@@ -1165,7 +1165,7 @@ export namespace LeiScenes {
 						tooltip : "Best to drop it for now…",
 						func : leaveIt, enabled : true,
 					});
-					Gui.SetButtonsFromList(options, false, null);
+					Gui.SetButtonsFromList(options, false, undefined);
 				}
 			}, enabled : true,
 		});
@@ -1634,7 +1634,7 @@ export namespace LeiScenes {
 				LeiScenes.GuardStalkingEntry(parse, nv);
 			}, enabled : true,
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	}
 
 	export function GuardStalkingEntry(parse: any, nv: boolean) {
@@ -1819,10 +1819,10 @@ export namespace LeiScenes {
 							LeiScenes.GuardStalkingOutro(parse, nv);
 						}, enabled : true,
 					});
-					Gui.SetButtonsFromList(options, false, null);
+					Gui.SetButtonsFromList(options, false, undefined);
 				}, enabled : true,
 			});
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		});
 	}
 
@@ -1884,7 +1884,7 @@ export namespace LeiScenes {
 				LeiScenes.GuardStalkingMoveOn(parse, nv);
 			}, enabled : true,
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	}
 
 	export function GuardStalkingMoveOn(parse: any, nv: boolean) {

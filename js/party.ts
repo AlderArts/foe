@@ -32,7 +32,6 @@ export class Party {
 		this.saved   = [];
 		this.temp    = [];
 		this.coin = 0;
-		this.location = null;
 		this.inventory = new Inventory();
 
 		if (storage) { this.FromStorage(storage); }
@@ -161,7 +160,7 @@ export class Party {
 	public Get(num: number): Entity {
 		if (num < this.members.length) { return this.members[num]; } else {
 			num -= this.members.length;
-			if (num < this.reserve.length) { return this.reserve[num]; } else { return null; }
+			if (num < this.reserve.length) { return this.reserve[num]; } else { return undefined; }
 		}
 	}
 	public CloneParty(reserve?: boolean) {
@@ -195,7 +194,7 @@ export class Party {
 		}
 		if (!includePlayer) {
 			len--;
-			if (len <= 0) { return null; }
+			if (len <= 0) { return undefined; }
 		}
 		let num = Math.random() * len;
 		num = Math.floor(num);
@@ -458,7 +457,7 @@ export class Party {
 					if (jobAbilities && jobAbilities.HasAbility(ability)) { continue; }
 
 					if (ability.OOC) {
-						const en = ability.enabledCondition(null, entity);
+						const en = ability.enabledCondition(undefined, entity);
 
 						Text.Add("[name] can use [ability] for [cost]: [desc]<br>",
 							{name: Text.Bold(entity.name), ability: ability.name, cost: ability.CostStr(), desc: ability.Short()});
@@ -493,7 +492,7 @@ export class Party {
 					}
 				}
 			};
-			const jobAbilities = entity.currentJob ? entity.currentJob.abilities : null;
+			const jobAbilities = entity.currentJob ? entity.currentJob.abilities : undefined;
 			if (jobAbilities) {
 				pushAbilities(jobAbilities);
 			}

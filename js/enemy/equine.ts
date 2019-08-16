@@ -982,7 +982,7 @@ EquineScenes.WinFuckHim = (enc: any) => {
 							Gui.NextPrompt();
 						});
 
-						Gui.SetButtonsFromList(options, false, null);
+						Gui.SetButtonsFromList(options, false, undefined);
 					});
 
 				});
@@ -1150,7 +1150,7 @@ EquineScenes.WinFuckHim = (enc: any) => {
 							}, enabled : true,
 						});
 
-						Gui.SetButtonsFromList(options, false, null);
+						Gui.SetButtonsFromList(options, false, undefined);
 					});
 
 				});
@@ -1159,7 +1159,7 @@ EquineScenes.WinFuckHim = (enc: any) => {
 
 		}, enabled : true,
 	});
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 };
 
 EquineScenes.WinFuckHer = (enc: any) => {

@@ -109,7 +109,7 @@ export class Corishev extends BossEntity {
 
 		// Pick a random target
 		const t = this.GetSingleTarget(encounter, activeChar);
-		let highlust = null;
+		let highlust;
 		for (let i = 0; i < party.Num(); i++) {
 			const c = party.Get(i);
 			if (c.Incapacitated()) { continue; }
@@ -126,13 +126,13 @@ export class Corishev extends BossEntity {
 			Abilities.EnemySkill.Corishev.Punish.Use(encounter, this, highlust);
 		} else if (choice < 0.2 && Abilities.EnemySkill.Corishev.Lashing.enabledCondition(encounter, this)) {
 			Abilities.EnemySkill.Corishev.Lashing.Use(encounter, this, t);
- } else if (choice < 0.4 && Abilities.EnemySkill.Corishev.WideStrike.enabledCondition(encounter, this)) {
+ 		} else if (choice < 0.4 && Abilities.EnemySkill.Corishev.WideStrike.enabledCondition(encounter, this)) {
 			Abilities.EnemySkill.Corishev.WideStrike.Use(encounter, this, party);
- } else if (choice < 0.8 && activeChar.entity.LustLevel() < 0.5 && Abilities.EnemySkill.Corishev.SelfHarm.enabledCondition(encounter, this)) {
+ 		} else if (choice < 0.8 && activeChar.entity.LustLevel() < 0.5 && Abilities.EnemySkill.Corishev.SelfHarm.enabledCondition(encounter, this)) {
 			Abilities.EnemySkill.Corishev.SelfHarm.Use(encounter, this);
- } else {
+ 		} else {
 			Abilities.EnemySkill.Corishev.Whip.Use(encounter, this, t);
- }
+ 		}
 	}
 
 }

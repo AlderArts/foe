@@ -58,14 +58,14 @@ ArmorShopLoc.description = () => {
 };
 
 ArmorShopLoc.events.push(new Link(
-	"Donovan", true, true, null,
+	"Donovan", true, true, undefined,
 	() => {
 		ArmorShopScenes.Prompt();
 	},
 ));
 
 ArmorShopLoc.events.push(new Link(
-	"Leave", true, true, null,
+	"Leave", true, true, undefined,
 	() => {
 		MoveToLocation(WORLD().loc.Rigard.ShopStreet.Street, {minute: 5});
 	},

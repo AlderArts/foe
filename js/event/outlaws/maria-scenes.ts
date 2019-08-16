@@ -100,7 +100,7 @@ export namespace MariaScenes {
 
             if (GetDEBUG()) {
                 Text.NL();
-                Text.Add("DEBUG: relation: " + maria.relation.Get(), null, "bold");
+                Text.Add("DEBUG: relation: " + maria.relation.Get(), undefined, "bold");
                 Text.NL();
             }
             Text.Flush();
@@ -191,7 +191,7 @@ export namespace MariaScenes {
         parse.comp = party.Num() === 2 ? party.Get(1).name : "your companions";
 
         const unlocked = Jobs.Ranger.Unlocked();
-        let student = null;
+        let student;
         for (let i = 0; i < party.Num(); i++) {
             const c = party.Get(i);
             if (c.jobs.Fighter.level >= 3) {
@@ -258,7 +258,7 @@ export namespace MariaScenes {
                     MariaScenes.CampPrompt();
                 },
             });
-            Gui.SetButtonsFromList(options, false, null);
+            Gui.SetButtonsFromList(options, false, undefined);
         } else if (student) {
             parse.student = student.nameDesc();
             parse.Student = student.NameDesc();
@@ -747,8 +747,8 @@ export namespace MariaScenes {
                         Text.NL();
 
                         Sex.Cunnilingus(player, maria);
-                        player.Fuck(null, 2);
-                        maria.Fuck(null, 2);
+                        player.Fuck(undefined, 2);
+                        maria.Fuck(undefined, 2);
 
                         Text.Add("Standing back up, she shakily replaces her shorts. Giving you a lecherous smile, she hauls you from the ground and pushes you forward. Bound as you are, you have no choice but to follow.", parse);
                     } else if (maria.LustLevel() > 0.25) {

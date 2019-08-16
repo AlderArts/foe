@@ -95,7 +95,7 @@ NCavalcadeScenes.RegularGame = () => {
 			}, enabled : true,
 			tooltip : "Play for sex.",
 		});
-		Gui.SetButtonsFromList(options, false, null);
+		Gui.SetButtonsFromList(options, false, undefined);
 	} else {
 		Text.Add("<i>“Here we go then!”</i> the satyr says as he starts dealing out cards.", parse);
 		Text.Flush();
@@ -146,7 +146,7 @@ NCavalcadeScenes.PrepCoinGame = () => {
 				}, enabled : true,
 				tooltip : "Nah, this is enough Cavalcade for now.",
 			});
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		} else {
 			Text.Add("<i>“It’s getting late, I need to get some sleep if I’m gonna be on time to check my traps tomorrow morning,”</i> Estevan yawns, gathering up the cards. <i>“If you want another game later, just holler.”</i>", parse);
 			Text.Flush();
@@ -259,7 +259,7 @@ NCavalcadeScenes.PrepSexyGame = () => {
 		}
 
 		if (NCavalcadeScenes.PlayersLeft(players) <= 1) {
-			let next: any = null;
+			let next: any;
 			if     (!player.out) {  next = NCavalcadeScenes.SexyPlayerWin; } else if (!estevan.out) { next = NCavalcadeScenes.SexyEstevanWin; } else if (!rosalin.out) { next = NCavalcadeScenes.SexyRosalinWin; } else if (!cale.out) {    next = NCavalcadeScenes.SexyCaleWin; } else {
 				Text.Add("THIS IS A BUG. WINNER IS BROKEN.", parse);
 			}
@@ -576,7 +576,7 @@ NCavalcadeScenes.SexyPlayerWin = (cheat: boolean) => {
 		}, enabled : true,
 		tooltip : "You are feeling generous for now, let them off the hook.",
 	});
-	Gui.SetButtonsFromList(options, false, null);
+	Gui.SetButtonsFromList(options, false, undefined);
 };
 
 // TODO

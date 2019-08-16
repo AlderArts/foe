@@ -25,7 +25,7 @@ MageTowerLoc.description = () => {
 
 MageTowerLoc.links.push(new Link(
 	"Grounds", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(WORLD().loc.Rigard.Castle.Grounds);
 	},

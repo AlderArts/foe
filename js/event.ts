@@ -44,7 +44,7 @@ export class Event {
 		// Function footprint: function(unused, oldLocation)
 		this.onEntry = opts.onEntry || Gui.PrintDefaultOptions;
 		// Encounter table
-		this.enc = opts.enc || null;
+		this.enc = opts.enc || undefined;
 	}
 
 	public AddEncounter(opts?: any) {
@@ -247,7 +247,7 @@ export class Event {
 		}
 		// list.sort( (a, b) => { return a.nameStr > b.nameStr; } );
 
-		Gui.SetButtonsFromList(list, null, null, GameState.Event);
+		Gui.SetButtonsFromList(list, undefined, undefined, GameState.Event);
 	}
 
 	// Shows

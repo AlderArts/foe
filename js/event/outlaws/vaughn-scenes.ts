@@ -551,7 +551,7 @@ export namespace VaughnScenes {
 						VaughnScenes.TalkWar();
 					});
 
-					Gui.SetButtonsFromList(options, false, null);
+					Gui.SetButtonsFromList(options, false, undefined);
 				});
 			}, enabled : true,
 		});
@@ -888,7 +888,7 @@ export namespace VaughnScenes {
 					VaughnScenes.SexTitfuckBigCont(parse);
 				}, enabled : true,
 			});
-			Gui.SetButtonsFromList(options, false, null);
+			Gui.SetButtonsFromList(options, false, undefined);
 		}, 1.0, () => !vaughn.HaveDoneTerryRoleplay() && !vaughn.Confronted()); // TODO CHECK LOGIC. MAYBE REMOVE TERRY ROLEPLAY (IF IT DEPENDS ON CONFRONT)
 		scenes.AddEnc(() => {
 			Text.Add("<i>“Have to… admit,”</i> Vaughn groans in between breaths. <i>“You’re pretty good, [playername]. Pretty damned good, and that’s… a lot, coming from me.”</i>", parse);

@@ -84,7 +84,7 @@ ResidentialLoc.Street.onEntry = () => {
 
 ResidentialLoc.Street.links.push(new Link(
 	"Gate", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(WORLD().loc.Rigard.Gate, {minute: 10});
 	},
@@ -94,14 +94,14 @@ ResidentialLoc.Street.links.push(new Link(
 ));
 ResidentialLoc.Street.links.push(new Link(
 	"Merchants", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(WORLD().loc.Rigard.ShopStreet.Street, {minute: 20});
 	},
 ));
 ResidentialLoc.Street.links.push(new Link(
 	"Plaza", true, true,
-	null,
+	undefined,
 	() => {
 		MoveToLocation(WORLD().loc.Rigard.Plaza, {minute: 10});
 	},
@@ -112,7 +112,7 @@ ResidentialLoc.Street.links.push(new Link(
 		const rigard = GAME().rigard;
 		return !rigard.UnderLockdown();
 	},
-	null,
+	undefined,
 	() => {
 		const rigard = GAME().rigard;
 		if (rigard.Krawitz.Q === RigardFlags.KrawitzQ.HeistDone) {
@@ -138,7 +138,7 @@ ResidentialLoc.Street.links.push(new Link(
 		const party: Party = GAME().party;
 		return party.InParty(miranda);
 	},
-	null,
+	undefined,
 	() => {
 		MoveToLocation(ResidentialLoc.Miranda);
 	},

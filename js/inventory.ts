@@ -162,7 +162,7 @@ export class Inventory {
 				return it.num;
 			}
 		}
-		return null;
+		return undefined;
 	}
 
 	public AddItem(item: Item, num?: number) {
@@ -236,17 +236,17 @@ export class Inventory {
 		for (const typeKey of _.keys(itemsByType)) {
 			// Add main types
 			Text.AddDiv("<hr>");
-			Text.AddDiv(typeKey, null, "itemTypeHeader");
+			Text.AddDiv(typeKey, undefined, "itemTypeHeader");
 			Text.AddDiv("<hr>");
 			for (const subtypeKey of _.keys(itemsByType[typeKey])) {
 				// Add subtypes (except None type)
 				if (subtypeKey !== ItemSubtype.None) {
-					Text.AddDiv(subtypeKey, null, "itemSubtypeHeader");
+					Text.AddDiv(subtypeKey, undefined, "itemSubtypeHeader");
 				}
 				const items = itemsByType[typeKey][subtypeKey];
 				if (items) {
 					for (const item of items) {
-						Text.AddDiv(item.it.name + " x" + item.num, null, "itemName");
+						Text.AddDiv(item.it.name + " x" + item.num, undefined, "itemName");
 					}
 				}
 			}
@@ -326,7 +326,7 @@ export class Inventory {
 		};
 
 		const combatItemsByType: any = {};
-		Inventory.ItemByBothTypes(this.items, null, null, combatItemsByType);
+		Inventory.ItemByBothTypes(this.items, undefined, undefined, combatItemsByType);
 
 		let usable: any[] = [];
 		// Copy usable items into usable array
@@ -342,17 +342,17 @@ export class Inventory {
 		for (const typeKey of _.keys(combatItemsByType)) {
 			// Add main types
 			Text.AddDiv("<hr>");
-			Text.AddDiv(typeKey, null, "itemTypeHeader");
+			Text.AddDiv(typeKey, undefined, "itemTypeHeader");
 			Text.AddDiv("<hr>");
 			for (const subtypeKey of _.keys(combatItemsByType[typeKey])) {
 				// Add subtypes (except None type)
 				if (subtypeKey !== ItemSubtype.None) {
-					Text.AddDiv(subtypeKey, null, "itemSubtypeHeader");
+					Text.AddDiv(subtypeKey, undefined, "itemSubtypeHeader");
 				}
 				const items = combatItemsByType[typeKey][subtypeKey];
 				if (items) {
 					for (const item of items) {
-						Text.AddDiv(item.it.name + " x" + item.num, null, "itemName");
+						Text.AddDiv(item.it.name + " x" + item.num, undefined, "itemName");
 					}
 				}
 			}
@@ -433,27 +433,27 @@ export class Inventory {
 				switch (type) {
 					case ItemType.Weapon:
 						if (entity.weaponSlot) { inv.AddItem(entity.weaponSlot); }
-						entity.weaponSlot = null;
+						entity.weaponSlot = undefined;
 						break;
 					case ItemSubtype.TopArmor:
 						if (entity.topArmorSlot) { inv.AddItem(entity.topArmorSlot); }
-						entity.topArmorSlot = null;
+						entity.topArmorSlot = undefined;
 						break;
 					case ItemSubtype.BotArmor:
 						if (entity.botArmorSlot) { inv.AddItem(entity.botArmorSlot); }
-						entity.botArmorSlot = null;
+						entity.botArmorSlot = undefined;
 						break;
 					case ItemSubtype.Acc1:
 						if (entity.acc1Slot) { inv.AddItem(entity.acc1Slot); }
-						entity.acc1Slot = null;
+						entity.acc1Slot = undefined;
 						break;
 					case ItemSubtype.Acc2:
 						if (entity.acc2Slot) { inv.AddItem(entity.acc2Slot); }
-						entity.acc2Slot = null;
+						entity.acc2Slot = undefined;
 						break;
 					case ItemSubtype.StrapOn:
 						if (entity.strapOn) { inv.AddItem(entity.strapOn); }
-						entity.strapOn = null;
+						entity.strapOn = undefined;
 						break;
 				}
 				entity.Equip();
@@ -481,7 +481,7 @@ export class Inventory {
 							if (entity.topArmorSlot) { inv.AddItem(entity.topArmorSlot); }
 							if (entity.botArmorSlot) { inv.AddItem(entity.botArmorSlot); }
 							entity.topArmorSlot = t;
-							entity.botArmorSlot = null;
+							entity.botArmorSlot = undefined;
 							break;
 
 						case ItemSubtype.TopArmor:

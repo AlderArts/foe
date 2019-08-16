@@ -21,14 +21,14 @@ OddShopLoc.description = () => {
 };
 
 OddShopLoc.events.push(new Link(
-	"Shopkeeper", true, true, null,
+	"Shopkeeper", true, true, undefined,
 	() => {
 		OddShopScenes.Prompt();
 	},
 ));
 
 OddShopLoc.events.push(new Link(
-	"Leave", true, true, null,
+	"Leave", true, true, undefined,
 	() => {
 		MoveToLocation(WORLD().loc.Rigard.ShopStreet.Street, {minute: 5});
 	},

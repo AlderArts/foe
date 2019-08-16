@@ -17,7 +17,7 @@ const EnemySkillAb: any = {};
 
 EnemySkillAb.Sting = new Ability("Sting");
 EnemySkillAb.Sting.Short = () => "Tail attack with chance of poisoning the target.";
-EnemySkillAb.Sting.cost = { hp: null, sp: 10, lp: null};
+EnemySkillAb.Sting.cost = { hp: undefined, sp: 10, lp: undefined};
 EnemySkillAb.Sting.cooldown = 2;
 EnemySkillAb.Sting.castTree.push(AbilityNode.Template.Physical({
 	atkMod: 1.2,
@@ -46,7 +46,7 @@ EnemySkillAb.Sting.castTree.push(AbilityNode.Template.Physical({
 // Orchid
 EnemySkillAb.TSnare = new Ability("T.Snare");
 EnemySkillAb.TSnare.Short = () => "Slows down the target and raises lust.";
-EnemySkillAb.TSnare.cost = { hp: null, sp: 20, lp: null};
+EnemySkillAb.TSnare.cost = { hp: undefined, sp: 20, lp: undefined};
 EnemySkillAb.TSnare.castTree.push(AbilityNode.Template.Physical({
 	damageType: {lust: 0.1},
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
@@ -71,7 +71,7 @@ EnemySkillAb.TSnare.castTree.push(AbilityNode.Template.Physical({
 
 EnemySkillAb.TSpray = new Ability("T.Spray");
 EnemySkillAb.TSpray.Short = () => "Sprays the targets in sticky tentacle seed. Raises lust.";
-EnemySkillAb.TSpray.cost = { hp: null, sp: 40, lp: null};
+EnemySkillAb.TSpray.cost = { hp: undefined, sp: 40, lp: undefined};
 EnemySkillAb.TSpray.targetMode = TargetMode.Enemies;
 EnemySkillAb.TSpray.cooldown = 2;
 EnemySkillAb.TSpray.castTree.push(AbilityNode.Template.Physical({
@@ -99,7 +99,7 @@ EnemySkillAb.TSpray.castTree.push(AbilityNode.Template.Physical({
 
 EnemySkillAb.TVenom = new Ability("T.Venom");
 EnemySkillAb.TVenom.Short = () => "Sprays one target in poisonous goop.";
-EnemySkillAb.TVenom.cost = { hp: null, sp: 20, lp: null};
+EnemySkillAb.TVenom.cost = { hp: undefined, sp: 20, lp: undefined};
 EnemySkillAb.TVenom.cooldown = 1;
 EnemySkillAb.TVenom.castTree.push(AbilityNode.Template.Physical({
 	hitMod: 0.8,
@@ -128,7 +128,7 @@ EnemySkillAb.TVenom.castTree.push(AbilityNode.Template.Physical({
 
 EnemySkillAb.TRavage = new Ability("T.Ravage");
 EnemySkillAb.TRavage.Short = () => "Grasps the enemy and constricts them, dealing damage and raising lust.";
-EnemySkillAb.TRavage.cost = { hp: null, sp: 25, lp: null};
+EnemySkillAb.TRavage.cost = { hp: undefined, sp: 25, lp: undefined};
 EnemySkillAb.TRavage.castTree.push(AbilityNode.Template.Physical({
 	damageType: {lust: 0.5, pBlunt: 0.5},
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
@@ -153,7 +153,7 @@ EnemySkillAb.TRavage.castTree.push(AbilityNode.Template.Physical({
 
 EnemySkillAb.TWhip = new Ability("T.Whip");
 EnemySkillAb.TWhip.Short = () => "Standard attack. Whips target for blunt damage.";
-EnemySkillAb.TWhip.cost = { hp: null, sp: null, lp: null};
+EnemySkillAb.TWhip.cost = { hp: undefined, sp: undefined, lp: undefined};
 EnemySkillAb.TWhip.castTree.push(AbilityNode.Template.Physical({
 	damageType: {lust: 0.5, pBlunt: 1},
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
@@ -175,7 +175,7 @@ EnemySkillAb.TWhip.castTree.push(AbilityNode.Template.Physical({
 
 EnemySkillAb.TViolate = new Ability("T.Violate");
 EnemySkillAb.TViolate.Short = () => "Orchid's violate attack.";
-EnemySkillAb.TViolate.cost = { hp: null, sp: null, lp: null};
+EnemySkillAb.TViolate.cost = { hp: undefined, sp: undefined, lp: undefined};
 EnemySkillAb.TViolate.castTree.push(AbilityNode.Template.Physical({
 	damageType: {lust: 1, pBlunt: 0.5},
 	hitMod: 2,
@@ -264,7 +264,7 @@ EnemySkillAb.GolLustyPheromones.castTree.push(AbilityNode.Template.Lust({
 
 EnemySkillAb.GolCuntDash = new Ability("C.Dash");
 EnemySkillAb.GolCuntDash.Short = () => "Cunt dash!";
-EnemySkillAb.GolCuntDash.cost = { hp: null, sp: 50, lp: null};
+EnemySkillAb.GolCuntDash.cost = { hp: undefined, sp: 50, lp: undefined};
 EnemySkillAb.GolCuntDash.castTree.push(AbilityNode.Template.Physical({
 	atkMod: 1.3,
 	hitMod: 0.8,
@@ -295,11 +295,11 @@ EnemySkillAb.GolCuntDash.castTree.push(AbilityNode.Template.Physical({
 
 EnemySkillAb.GolPollen = new Ability("S.Pollen");
 EnemySkillAb.GolPollen.Short = () => "Submission pollen.";
-EnemySkillAb.GolPollen.cost = { hp: null, sp: null, lp: 250 };
+EnemySkillAb.GolPollen.cost = { hp: undefined, sp: undefined, lp: 250 };
 EnemySkillAb.GolPollen.targetMode = TargetMode.Enemies;
 EnemySkillAb.GolPollen.castTree.push(AbilityNode.Template.Physical({
 	hitMod: 0.8,
-	toDamage: null,
+	toDamage: undefined,
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 		const parse: any = {};
 		Text.Add("Sighing, the Gol runs her hands through her shimmering black hair in frustration. After her fingers' first pass, she repeats the action, then does it again. And again. Soon, the air around her seems slightly foggy, and your nose itches. A sneeze wracks your body as she continues the motion, filling the air with... something. You can't say what, but it's making you sneeze, and causing your nose to get itchy and irritable. The insectile beauty seems taller and more imposing after each involuntary spasm of your body. Her breasts appear larger, her pussy more inviting, and her face more charmingly human. For a monster, she wouldn't be a bad one to settle down with.", parse);
@@ -356,7 +356,7 @@ EnemySkillAb.Corishev.Whip.castTree.push(AbilityNode.Template.Physical({
 
 EnemySkillAb.Corishev.Lashing = new Ability("Corishev.Lashing");
 EnemySkillAb.Corishev.Lashing.Short = () => "Corishev lashing.";
-EnemySkillAb.Corishev.Lashing.cost = { hp: null, sp: 30, lp: 50};
+EnemySkillAb.Corishev.Lashing.cost = { hp: undefined, sp: 30, lp: 50};
 EnemySkillAb.Corishev.Lashing.castTree.push(AbilityNode.Template.Physical({
 	atkMod: 0.6,
 	hitMod: 0.7,
@@ -380,7 +380,7 @@ EnemySkillAb.Corishev.Lashing.castTree.push(AbilityNode.Template.Physical({
 
 EnemySkillAb.Corishev.WideStrike = new Ability("Corishev.WideStrike");
 EnemySkillAb.Corishev.WideStrike.Short = () => "Corishev lashing.";
-EnemySkillAb.Corishev.WideStrike.cost = { hp: null, sp: 30, lp: 30};
+EnemySkillAb.Corishev.WideStrike.cost = { hp: undefined, sp: 30, lp: 30};
 EnemySkillAb.Corishev.WideStrike.targetMode = TargetMode.Enemies;
 EnemySkillAb.Corishev.WideStrike.castTree.push(AbilityNode.Template.Physical({
 	atkMod: 1.2,
@@ -418,7 +418,7 @@ EnemySkillAb.Corishev.SelfHarm.castTree.push((ability: Ability, encounter: Encou
 
 EnemySkillAb.Corishev.Punish = new Ability("Corishev.Punish");
 EnemySkillAb.Corishev.Punish.Short = () => "Corishev lashing.";
-EnemySkillAb.Corishev.Punish.cost = { hp: null, sp: null, lp: 200 };
+EnemySkillAb.Corishev.Punish.cost = { hp: undefined, sp: undefined, lp: 200 };
 EnemySkillAb.Corishev.Punish.castTree.push(AbilityNode.Template.Physical({
 	atkMod: 3,
 	hitMod: 2,
@@ -429,7 +429,7 @@ EnemySkillAb.Corishev.Punish.castTree.push(AbilityNode.Template.Physical({
 		Text.NL();
 	}],
 	onMiss: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
-		const parse = AbilityNode.DefaultParser(null, target);
+		const parse = AbilityNode.DefaultParser(undefined, target);
 		parse.skin = target.SkinDesc();
 		Text.Add("[tName] [tis] barely able to avoid the brunt of Corishev’s onslaught, but some of the poison from his whip still lands on [thisher] [skin], causing some vicious burning.", parse);
 		Text.NL();
@@ -453,7 +453,7 @@ EnemySkillAb.Corishev.Punish.castTree.push(AbilityNode.Template.Physical({
 EnemySkillAb.Cassidy = {};
 
 EnemySkillAb.Cassidy.TailSlap = new Ability("CassTailSlap");
-EnemySkillAb.Cassidy.TailSlap.cost = { hp: null, sp: 10, lp: null};
+EnemySkillAb.Cassidy.TailSlap.cost = { hp: undefined, sp: 10, lp: undefined};
 EnemySkillAb.Cassidy.TailSlap.Short = () => "CassTailSlap";
 EnemySkillAb.Cassidy.TailSlap.cooldown = 3;
 EnemySkillAb.Cassidy.TailSlap.castTree.push(AbilityNode.Template.Physical({
@@ -466,7 +466,7 @@ EnemySkillAb.Cassidy.TailSlap.castTree.push(AbilityNode.Template.Physical({
 		Text.NL();
 	}],
 	onMiss: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
-		const parse = AbilityNode.DefaultParser(null, target);
+		const parse = AbilityNode.DefaultParser(undefined, target);
 		Text.Add("You narrowly manage to dodge Cassidy’s tail as it sails through the air. Despite the setback, she takes a step back and to the side, easily recovering from the miss and ready to come back at you!", parse);
 		Text.NL();
 	}],
@@ -486,7 +486,7 @@ EnemySkillAb.Cassidy.TailSlap.castTree.push(AbilityNode.Template.Physical({
 }));
 
 EnemySkillAb.Cassidy.Smoke = new Ability("CassSmoke");
-EnemySkillAb.Cassidy.Smoke.cost = { hp: null, sp: 20, lp: null};
+EnemySkillAb.Cassidy.Smoke.cost = { hp: undefined, sp: 20, lp: undefined};
 EnemySkillAb.Cassidy.Smoke.Short = () => "CassSmoke";
 EnemySkillAb.Cassidy.Smoke.cooldown = 4;
 EnemySkillAb.Cassidy.Smoke.castTree.push(AbilityNode.Template.Physical({
@@ -498,7 +498,7 @@ EnemySkillAb.Cassidy.Smoke.castTree.push(AbilityNode.Template.Physical({
 		Text.NL();
 	}],
 	onMiss: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
-		const parse = AbilityNode.DefaultParser(null, target);
+		const parse = AbilityNode.DefaultParser(undefined, target);
 		Text.Add("The cloud of smoke and cinders envelops you, but you push the worst of it away before you’re overwhelmed.", parse);
 		Text.NL();
 	}],
@@ -517,7 +517,7 @@ EnemySkillAb.Cassidy.Smoke.castTree.push(AbilityNode.Template.Physical({
 }));
 
 EnemySkillAb.Cassidy.Reflex = new Ability("CassReflex");
-EnemySkillAb.Cassidy.Reflex.cost = { hp: null, sp: 30, lp: null};
+EnemySkillAb.Cassidy.Reflex.cost = { hp: undefined, sp: 30, lp: undefined};
 EnemySkillAb.Cassidy.Reflex.Short = () => "CassReflex";
 EnemySkillAb.Cassidy.Reflex.cooldown = 5;
 // Push a regular attack
@@ -527,7 +527,7 @@ EnemySkillAb.Cassidy.Reflex.castTree.push((ability: Ability, encounter: Encounte
 });
 
 EnemySkillAb.Cassidy.Impact = new Ability("CassImpact");
-EnemySkillAb.Cassidy.Impact.cost = { hp: null, sp: 50, lp: null};
+EnemySkillAb.Cassidy.Impact.cost = { hp: undefined, sp: 50, lp: undefined};
 EnemySkillAb.Cassidy.Impact.Short = () => "CassImpact";
 EnemySkillAb.Cassidy.Impact.cooldown = 5;
 EnemySkillAb.Cassidy.Impact.castTime = 100;
@@ -542,7 +542,7 @@ EnemySkillAb.Cassidy.Impact.castTree.push(AbilityNode.Template.Physical({
 		Text.NL();
 	}],
 	onMiss: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
-		const parse = AbilityNode.DefaultParser(null, target);
+		const parse = AbilityNode.DefaultParser(undefined, target);
 		Text.Add("<i>“Heh. Here goes nothing!”</i> Cass roars as she brings her war hammer down, its head wreathed in flame. <i>“I pity you, ace - you’re gonna have a bad time!”</i>", parse);
 		Text.NL();
 		Text.Add("Imagine her surprise, then, when you duck under the arc of her hammer swing. It swooshes most impressively through empty air, creating a fiery arc; she wasn’t lying when she said you were going to have a bad time.", parse);

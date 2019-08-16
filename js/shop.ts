@@ -32,8 +32,8 @@ export class Shop {
 
 	constructor(opts: any = {}) {
 		// Contains {it: Item, [num: Number], [enabled: Function], [func: Function], [price: Number]}
-		// Set num to null for infinite stock
-		// Set enabled to null for unconditional
+		// Set num to undefined for infinite stock
+		// Set enabled to undefined for unconditional
 		// Set func to something to have a special even trigger when buying something
 		// Have func return true if the shopping should be aborted
 		// price: 1 = regular price, 0.5 = half price, 2 = double price
@@ -153,12 +153,12 @@ export class Shop {
 		_.forIn(itemsByType, (itemBundle, itemTypeName) => {
 			// Add main types
 			Text.AddDiv("<hr>");
-			Text.AddDiv(itemTypeName, null, "itemTypeHeader");
+			Text.AddDiv(itemTypeName, undefined, "itemTypeHeader");
 			Text.AddDiv("<hr>");
 			_.forIn(itemBundle, (items, itemSubtypeName) => {
 				// Add subtypes (except None type)
 				if (itemSubtypeName !== ItemSubtype.None) {
-					Text.AddDiv(itemSubtypeName, null, "itemSubtypeHeader");
+					Text.AddDiv(itemSubtypeName, undefined, "itemSubtypeHeader");
 				}
 				if (items) {
 					for (const item of items) {
@@ -169,7 +169,7 @@ export class Shop {
 						const func     = item.func;
 
 						enabled = enabled && (party.coin >= cost);
-						Text.AddDiv("<b>" + cost + "g - </b>" + it.name + " - " + it.Short(), null, "itemName");
+						Text.AddDiv("<b>" + cost + "g - </b>" + it.name + " - " + it.Short(), undefined, "itemName");
 
 						options.push({ nameStr : it.name,
 							func : buyFunc, enabled,
@@ -291,13 +291,13 @@ export class Shop {
 			// Add main types, exclude quest items (can't sell quest items at shop)
 			if (itemTypeName !== ItemType.Quest) {
 				Text.AddDiv("<hr>");
-				Text.AddDiv(itemTypeName, null, "itemTypeHeader");
+				Text.AddDiv(itemTypeName, undefined, "itemTypeHeader");
 				Text.AddDiv("<hr>");
 			}
 			_.forIn(itemBundle, (items, itemSubtypeName) => {
 				// Add subtypes (except None type)
 				if (itemSubtypeName !== ItemSubtype.None) {
-					Text.AddDiv(itemSubtypeName, null, "itemSubtypeHeader");
+					Text.AddDiv(itemSubtypeName, undefined, "itemSubtypeHeader");
 				}
 				if (items) {
 					for (const item of items) {
@@ -307,7 +307,7 @@ export class Shop {
 
 						if (price <= 0) { continue; }
 						// TODO Could look better. Perhaps add 'table' functionality to text.js and use it here
-						Text.AddDiv("<b>" + price + "g</b> - " + it.name + " x" + num + " - " + it.Short(), null, "itemName");
+						Text.AddDiv("<b>" + price + "g</b> - " + it.name + " x" + num + " - " + it.Short(), undefined, "itemName");
 
 						options.push({ nameStr : it.name,
 							func : sellFunc, enabled : true,

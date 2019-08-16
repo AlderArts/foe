@@ -78,7 +78,7 @@ const SplashScreen = () => {
 	Input.buttons[11].Setup("Clear saves", () => {
 		Saver.Clear();
 		SplashScreen();
-	}, isOnline(), null, "Warning! This will clear up old saves by removing the save0-11 and savedata0-11 localstorage slots.");
+	}, isOnline(), undefined, "Warning! This will clear up old saves by removing the save0-11 and savedata0-11 localstorage slots.");
 
 	Text.NL();
 	if (isOnline() && Saver.HasSaves()) {

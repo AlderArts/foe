@@ -403,7 +403,7 @@ export namespace GwendyScenes {
 			player.charisma.IncreaseStat(30, 1);
 			return true;
 		}, 1.0, () => player.charisma.base < 30);
-		if (scenes.Get() === null) {
+		if (scenes.Get() === undefined) {
 			Text.Add("is always pleasant, even though she is a bit of a klutz at times.", parse);
 		}
 
@@ -558,7 +558,7 @@ export namespace GwendyScenes {
 				player.libido.IncreaseStat(30, 1);
 				return true;
 			}, 1.0, () => player.libido.base < 30);
-			if (scenes.Get() === null) {
+			if (scenes.Get() === undefined) {
 				Text.Add("you had a good time, and the farmer really appreciated your help.", parse);
 			}
 
@@ -1301,8 +1301,8 @@ export namespace GwendyScenes {
 			Text.NL();
 
 			Sex.Cunnilingus(gwendy, player);
-			gwendy.Fuck(null, 2);
-			player.Fuck(null, 2);
+			gwendy.Fuck(undefined, 2);
+			player.Fuck(undefined, 2);
 
 			Text.Add("Gwendy looks pretty cute eating you out. Her eyes look up at you from time to time, quietly observing you as you moan and pant like a bitch in heat. Pleasure washes over you as her tongue ravages your [vag] with slow, practiced strokes, making you glad you chose to do this. Her flexible organ is small but deft, licking and probing your inner walls. All the while, her nose keeps butting against your [clit].", parse);
 			Text.NL();
@@ -1750,7 +1750,7 @@ export namespace GwendyScenes {
 			Text.Add("The first bead pops in easily enough, thick as it is, enticing a gasp out of the prone farmer. The second and third one follow without problems, though you see her toes curling in pleasure from the penetration. By the fifth one, you are starting to encounter resistance, and Gwendy bites her lip, groaning as she tries to ease her anal ring. Finally, all seven globes are firmly lodged in her back passage, a piece of string the only indication of her hidden cargo.", parse);
 			Text.NL();
 
-			Sex.Anal(null, gwendy);
+			Sex.Anal(undefined, gwendy);
 			gwendy.FuckAnal(gwendy.Butt(), ToysItems.LargeAnalBeads.cock, 2);
 			player.AddSexExp(2);
 
@@ -1904,7 +1904,7 @@ export namespace GwendyScenes {
 			Text.Add("After an agonizing amount of teasing, it finally pops inside, Gwendy’s anal ring stretched an incredible amount. The girl collapses, her legs no longer able to hold her up as she has her first trembling orgasm. Thanks to the flared head, the dildo is firmly stuck inside, about two feet of it hanging out invitingly. Gwendy rolls over on her back, exposing her dripping [gen] and her stuffed ass.", parse);
 			Text.NL();
 
-			Sex.Anal(null, gwendy);
+			Sex.Anal(undefined, gwendy);
 			gwendy.FuckAnal(gwendy.Butt(), ToysItems.EquineDildo.cock, 3);
 
 			Text.Add("<i>“Your turn,”</i> she smiles at you, exhausted from the effort.", parse);
@@ -1920,7 +1920,7 @@ export namespace GwendyScenes {
 			}
 			Text.NL();
 
-			Sex.Anal(null, player);
+			Sex.Anal(undefined, player);
 			player.FuckAnal(player.Butt(), ToysItems.EquineDildo.cock, 3);
 
 			parse.l = player.HasLegs() ? "legs together" : "[legs] with Gwendy's legs";

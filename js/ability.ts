@@ -86,7 +86,7 @@ export class Ability {
 		this.targetMode = TargetMode.Enemy;
 		this.name = name || "ABILITY";
 		// TODO: Tooltip?
-		this.cost = { hp: null, sp: null, lp: null};
+		this.cost = { hp: undefined, sp: undefined, lp: undefined};
 
 		this.castTime = 0;
 		this.cancellable = true; // can be a function(ability, encounter, caster, target, result)
@@ -166,7 +166,7 @@ export class Ability {
 				return true;
 
 			case TargetMode.Self:
-				ability.Use(encounter, caster, null, ext);
+				ability.Use(encounter, caster, undefined, ext);
 				break;
 
 			case TargetMode.Ally:
@@ -255,8 +255,8 @@ export class Ability {
 
 	public UseOutOfCombat(caster: Entity, target: Entity) {
 		Ability.ApplyCost(this, caster);
-		this.StartCast(null, caster, target);
-		this.CastInternal(null, caster, target);
+		this.StartCast(undefined, caster, target);
+		this.CastInternal(undefined, caster, target);
 	}
 
 	public enabledCondition(encounter: Encounter, caster: Entity) {
