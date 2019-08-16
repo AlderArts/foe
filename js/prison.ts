@@ -4,11 +4,11 @@
  *
  */
 
-import { Party } from './party';
-import { GameState, SetGameState } from './gamestate';
-import { Text } from './text';
-import { Gui } from './gui';
-import { GAME } from './GAME';
+import { GAME } from "./GAME";
+import { GameState, SetGameState } from "./gamestate";
+import { Gui } from "./gui";
+import { Party } from "./party";
+import { Text } from "./text";
 
 /*
  * opts {
@@ -19,39 +19,39 @@ import { GAME } from './GAME';
  *
  */
 export class PrisonMinigame {
-	party : any[];
-	enemy : Party;
+	public party: any[];
+	public enemy: Party;
 
-	constructor(opts? : any) {
+	constructor(opts?: any) {
 		opts = opts || {};
 		this.party = opts.party || [];
 		this.enemy = opts.enemy || new Party();
-		//TODO dynamic lists for available actions
+		// TODO dynamic lists for available actions
 	}
-	
-	Prep() {
-		let party : Party = GAME().party;
+
+	public Prep() {
+		const party: Party = GAME().party;
 
 		party.SaveActiveParty();
 		party.ClearActiveParty();
-		for(let i = 0; i < this.party.length; i++)
+		for (let i = 0; i < this.party.length; i++) {
 			party.SwitchIn(this.party[i]);
+		}
 
-		//TODO maybe use a new one, check rendering
+		// TODO maybe use a new one, check rendering
 		SetGameState(GameState.Combat, Gui);
 	}
 
+	public Cleanup() {
+		const party: Party = GAME().party;
 
-	Cleanup() {
-		let party : Party = GAME().party;
-
-		for(let i = 0; i < this.enemy.members.length; i++) {
-			let e = this.enemy.members[i];
+		for (let i = 0; i < this.enemy.members.length; i++) {
+			const e = this.enemy.members[i];
 			e.ClearCombatBonuses();
 			e.combatStatus.EndOfCombat();
 		}
-		for(let i = 0; i < party.members.length; i++) {
-			let e = party.members[i];
+		for (let i = 0; i < party.members.length; i++) {
+			const e = party.members[i];
 			e.ClearCombatBonuses();
 			e.combatStatus.EndOfCombat();
 		}
@@ -61,9 +61,9 @@ export class PrisonMinigame {
 		SetGameState(GameState.Event, Gui);
 	}
 
-	//TODO
-	Tick() {
-		let parse : any = {
+	// TODO
+	public Tick() {
+		const parse: any = {
 
 		};
 
@@ -72,7 +72,7 @@ export class PrisonMinigame {
 		Text.NL();
 		Text.Flush();
 
-		//TODO Set up choices
+		// TODO Set up choices
 		Gui.ClearButtons();
 	}
 }

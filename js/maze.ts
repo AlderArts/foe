@@ -1,22 +1,22 @@
 /*
  * Describes a maze location. A maze consists of multiple maze rooms
  */
-import * as _ from 'lodash';
+import * as _ from "lodash";
 
-import { Event } from './event';
-import { GetDEBUG } from '../app';
-import { Images } from './assets';
-import { Text } from './text';
-import { MoveToLocation } from './GAME';
-import { GameState } from './gamestate';
-import { Input } from './input';
+import { GetDEBUG } from "../app";
+import { Images } from "./assets";
+import { Event } from "./event";
+import { MoveToLocation } from "./GAME";
+import { GameState } from "./gamestate";
+import { Input } from "./input";
+import { Text } from "./text";
 
 export class Maze {
-	map : any[];
-	xMax : number;
-	yMax : number;
+	public map: any[];
+	public xMax: number;
+	public yMax: number;
 
-	constructor(opts? : any) {
+	constructor(opts?: any) {
 		opts = opts || {};
 
 		this.map = [];
@@ -24,7 +24,7 @@ export class Maze {
 		this.yMax = 0;
 	}
 
-	AddRoom(x : number, y : number, room? : MazeRoom) {
+	public AddRoom(x: number, y: number, room?: MazeRoom) {
 		x = x || 0;
 		y = y || 0;
 		room = room || new MazeRoom();
@@ -32,32 +32,35 @@ export class Maze {
 		room.x = x;
 		room.y = y;
 
-		if(this.xMax < x)
+		if (this.xMax < x) {
 			this.xMax = x;
-		if(this.yMax < y)
+		}
+		if (this.yMax < y) {
 			this.yMax = y;
+		}
 
-		if(_.isUndefined(this.map[x])) {
+		if (_.isUndefined(this.map[x])) {
 			this.map[x] = [];
 		}
 		this.map[x][y] = room;
 	}
-	GetRoom(x : number, y : number) : MazeRoom {
-		if(this.map[x])
+	public GetRoom(x: number, y: number): MazeRoom {
+		if (this.map[x]) {
 			return this.map[x][y];
+		}
 	}
-	Print(room : MazeRoom) {
-		let maze = this;
-		//TODO TEMP
+	public Print(room: MazeRoom) {
+		const maze = this;
+		// TODO TEMP
 		Text.Add("<table class='party'>");
-		_.times(maze.yMax+1, function(y) {
+		_.times(maze.yMax + 1, function(y) {
 			Text.Add("<tr>");
-			_.times(maze.xMax+1, function(x) {
+			_.times(maze.xMax + 1, function(x) {
 				Text.Add("<td>");
 				let img = "";
-				let r = maze.GetRoom(x, y);
-				if(r == room) img = "Player";
-				else if(r) img = "Room";
+				const r = maze.GetRoom(x, y);
+				if (r == room) { img = "Player"; }
+				else if (r) { img = "Room"; }
 				Text.Add(img);
 				Text.Add("</td>");
 			});
@@ -67,30 +70,30 @@ export class Maze {
 		Text.Flush();
 	}
 
-};
+}
 
 /*
 * Describes a maze room. A maze room is an event location, with special controls
 */
 export class MazeRoom extends Event {
-	maze : Maze;
-	x : number;
-	y : number;
+	public maze: Maze;
+	public x: number;
+	public y: number;
 
-	constructor(nameFunc? : CallableFunction, opts? : any) {
+	constructor(nameFunc?: CallableFunction, opts?: any) {
 		super(nameFunc, opts);
 	}
 
-	SetButtons(links : any) {
-		//Set up regular events
+	public SetButtons(links: any) {
+		// Set up regular events
 		super.SetButtons(links);
 
-		let north = this.maze.GetRoom(this.x, this.y-1);
-		let west  = this.maze.GetRoom(this.x-1, this.y);
-		let south = this.maze.GetRoom(this.x, this.y+1);
-		let east  = this.maze.GetRoom(this.x+1, this.y);
+		const north = this.maze.GetRoom(this.x, this.y - 1);
+		const west  = this.maze.GetRoom(this.x - 1, this.y);
+		const south = this.maze.GetRoom(this.x, this.y + 1);
+		const east  = this.maze.GetRoom(this.x + 1, this.y);
 
-		//Set up special interface
+		// Set up special interface
 		Input.buttons[5].enabledImage = Images.imgButtonEnabled2;
 		Input.buttons[5].Setup("North", MoveToLocation, north != null, north, null, GameState.Event);
 
@@ -104,7 +107,7 @@ export class MazeRoom extends Event {
 		Input.buttons[10].Setup("East", MoveToLocation, east != null, east, null, GameState.Event);
 	}
 
-	PrintDesc() {
+	public PrintDesc() {
 		super.PrintDesc();
 
 		if (GetDEBUG()) {

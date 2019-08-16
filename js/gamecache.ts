@@ -1,105 +1,105 @@
-import { Gui } from './gui';
-import { SAVE_VERSION, VERSION_STRING } from '../app';
-import { Season, Time } from './time';
+import { SAVE_VERSION, VERSION_STRING } from "../app";
+import { Gui } from "./gui";
+import { Season, Time } from "./time";
 
-import { Intro } from './event/introduction';
+import { Intro } from "./event/introduction";
 
-import { Rigard } from './loc/rigard/rigard';
-import { Farm } from './loc/farm';
-import { Burrows } from './loc/burrows';
-import { DryadGlade } from './loc/glade';
-import { TreeCity } from './loc/treecity/treecity';
-import { Oasis } from './loc/oasis';
-import { Nursery } from './event/nursery';
+import { Nursery } from "./event/nursery";
+import { Burrows } from "./loc/burrows";
+import { Farm } from "./loc/farm";
+import { DryadGlade } from "./loc/glade";
+import { Oasis } from "./loc/oasis";
+import { Rigard } from "./loc/rigard/rigard";
+import { TreeCity } from "./loc/treecity/treecity";
 
-import { Player } from './event/player';
-import { Kiakai } from './event/kiakai';
-import { Miranda } from './event/miranda';
-import { Terry } from './event/terry';
-import { Zina } from './event/zina';
-import { Momo } from './event/momo';
-import { Lei } from './event/royals/lei';
-import { Twins } from './event/royals/twins';
-import { Room69 } from './event/room69';
+import { Kiakai } from "./event/kiakai";
+import { Miranda } from "./event/miranda";
+import { Momo } from "./event/momo";
+import { Player } from "./event/player";
+import { Room69 } from "./event/room69";
+import { Lei } from "./event/royals/lei";
+import { Twins } from "./event/royals/twins";
+import { Terry } from "./event/terry";
+import { Zina } from "./event/zina";
 
-import { Chief } from './event/nomads/chief';
-import { Rosalin } from './event/nomads/rosalin';
-import { Cale } from './event/nomads/cale';
-import { Estevan } from './event/nomads/estevan';
-import { Magnus } from './event/nomads/magnus';
-import { Patchwork } from './event/nomads/patchwork';
+import { Cale } from "./event/nomads/cale";
+import { Chief } from "./event/nomads/chief";
+import { Estevan } from "./event/nomads/estevan";
+import { Magnus } from "./event/nomads/magnus";
+import { Patchwork } from "./event/nomads/patchwork";
+import { Rosalin } from "./event/nomads/rosalin";
 
-import { Lagon } from './event/burrows/lagon';
-import { Ophelia } from './event/burrows/ophelia';
-import { Vena } from './event/burrows/vena';
-import { Roa } from './event/brothel/roa';
+import { Roa } from "./event/brothel/roa";
+import { Lagon } from "./event/burrows/lagon";
+import { Ophelia } from "./event/burrows/ophelia";
+import { Vena } from "./event/burrows/vena";
 
-import { Gwendy } from './event/farm/gwendy';
-import { Danie } from './event/farm/danie';
-import { Adrian } from './event/farm/adrian';
-import { Layla } from './event/farm/layla';
+import { Adrian } from "./event/farm/adrian";
+import { Danie } from "./event/farm/danie";
+import { Gwendy } from "./event/farm/gwendy";
+import { Layla } from "./event/farm/layla";
 
-import { Isla } from './event/highlands/isla';
+import { Isla } from "./event/highlands/isla";
 
-import { Outlaws } from './event/outlaws/outlaws';
-import { Aquilius } from './event/outlaws/aquilius';
-import { Maria } from './event/outlaws/maria';
-import { Cveta } from './event/outlaws/cveta';
-import { Vaughn } from './event/outlaws/vaughn';
+import { Aquilius } from "./event/outlaws/aquilius";
+import { Cveta } from "./event/outlaws/cveta";
+import { Maria } from "./event/outlaws/maria";
+import { Outlaws } from "./event/outlaws/outlaws";
+import { Vaughn } from "./event/outlaws/vaughn";
 
-import { Fera } from './event/fera';
-import { Asche } from './event/asche';
-import { Cassidy } from './event/cassidy';
+import { Asche } from "./event/asche";
+import { Cassidy } from "./event/cassidy";
+import { Fera } from "./event/fera";
 
-import { Jeanne } from './event/royals/jeanne';
-import { GolemBoss } from './event/royals/golem';
+import { GolemBoss } from "./event/royals/golem";
+import { Jeanne } from "./event/royals/jeanne";
 
-import { OrchidBoss } from './enemy/orchid';
+import { OrchidBoss } from "./enemy/orchid";
 
-import { RavenMother } from './event/raven';
-import { Uru, UruFlags } from './event/uru';
+import { RavenMother } from "./event/raven";
+import { Uru, UruFlags } from "./event/uru";
 
-import { Lucille } from './event/brothel/lucille';
-import { Belinda } from './event/brothel/belinda';
-import { Bastet } from './event/brothel/bastet';
-import { Gryphons } from './event/brothel/gryphons';
-import { Fireblossom } from './event/brothel/fireblossom';
+import { Bastet } from "./event/brothel/bastet";
+import { Belinda } from "./event/brothel/belinda";
+import { Fireblossom } from "./event/brothel/fireblossom";
+import { Gryphons } from "./event/brothel/gryphons";
+import { Lucille } from "./event/brothel/lucille";
 
-import { Aria } from './event/aria';
-import { Sylistraxia } from './event/sylistraxia';
-import { Ches } from './event/brothel/ches';
-import { Gender } from './body/gender';
-import { Party } from './party';
-import { GAME, InitGAME, InitWorldTime, InitEntityStorage, EntityStorage, GameCache, WorldTime } from './GAME';
-import { Race } from './body/race';
-import { Color } from './body/color';
-import { TF } from './tf';
-import { Text } from './text';
-import { JobEnum, Jobs } from './job';
-import { Vagina } from './body/vagina';
+import { Color } from "./body/color";
+import { Gender } from "./body/gender";
+import { Race } from "./body/race";
+import { Vagina } from "./body/vagina";
+import { Aria } from "./event/aria";
+import { Ches } from "./event/brothel/ches";
+import { Sylistraxia } from "./event/sylistraxia";
+import { EntityStorage, GAME, GameCache, InitEntityStorage, InitGAME, InitWorldTime, WorldTime } from "./GAME";
+import { JobEnum, Jobs } from "./job";
+import { Party } from "./party";
+import { Text } from "./text";
+import { TF } from "./tf";
 
-import { MirandaFlags } from './event/miranda-flags';
-import { TerryFlags } from './event/terry-flags';
-import { KiakaiFlags } from './event/kiakai-flags';
-import { OutlawsFlags } from './event/outlaws/outlaws-flags';
-import { TwinsFlags } from './event/royals/twins-flags';
-import { RigardFlags } from './loc/rigard/rigard-flags';
-import { DryadGladeFlags } from './loc/glade-flags';
-import { BurrowsFlags } from './loc/burrows-flags';
-import { GolemFlags } from './event/royals/golem-flags';
-import { LeiFlags } from './event/royals/lei-flags';
+import { KiakaiFlags } from "./event/kiakai-flags";
+import { MirandaFlags } from "./event/miranda-flags";
+import { OutlawsFlags } from "./event/outlaws/outlaws-flags";
+import { GolemFlags } from "./event/royals/golem-flags";
+import { LeiFlags } from "./event/royals/lei-flags";
+import { TwinsFlags } from "./event/royals/twins-flags";
+import { TerryFlags } from "./event/terry-flags";
+import { BurrowsFlags } from "./loc/burrows-flags";
+import { DryadGladeFlags } from "./loc/glade-flags";
+import { RigardFlags } from "./loc/rigard/rigard-flags";
 
-import { WeaponsItems } from './items/weapons';
-import { ArmorItems } from './items/armor';
-import { AccItems } from './items/accessories';
-import { AlchemyItems } from './items/alchemy';
+import { AccItems } from "./items/accessories";
+import { AlchemyItems } from "./items/alchemy";
+import { ArmorItems } from "./items/armor";
+import { WeaponsItems } from "./items/weapons";
 
-let InitCache = function() {
+const InitCache = function() {
 	// Reset exploration
 	Gui.SetLastSubmenu(null);
 	GAME().IntroActive = false;
 
-	let gameCache : any = GameCache();
+	const gameCache: any = GameCache();
 
 	// SAVE VERSION
 	gameCache.version = parseInt(gameCache.version) || SAVE_VERSION;
@@ -111,7 +111,7 @@ let InitCache = function() {
 		season : Season.Summer,
 		day    : 0,
 		hour   : 8,
-		minute : 0
+		minute : 0,
 	};
 
 	// Reset everything
@@ -183,7 +183,7 @@ let InitCache = function() {
 	// Don't load for now
 	GAME().aria        = new Aria();
 	GAME().sylistraxia = new Sylistraxia();
-	GAME().ches        = new Ches(); //TODO
+	GAME().ches        = new Ches(); // TODO
 
 	InitEntityStorage();
 
@@ -261,31 +261,32 @@ let InitCache = function() {
 	// FLAGS
 	gameCache.flags = gameCache.flags || {};
 
-	gameCache.flags["LearnedMagic"]            = gameCache.flags["LearnedMagic"] || 0;
-	gameCache.flags["Portals"]                 = gameCache.flags["Portals"] || 0;
+	gameCache.flags.LearnedMagic            = gameCache.flags.LearnedMagic || 0;
+	gameCache.flags.Portals                 = gameCache.flags.Portals || 0;
 
 	// Intro flags
-	gameCache.flags["IntroOutset"]             = gameCache.flags["IntroOutset"] || Intro.Outset.SaveWorld;
+	gameCache.flags.IntroOutset             = gameCache.flags.IntroOutset || Intro.Outset.SaveWorld;
 
-	gameCache.flags["NagaVenom"]      = gameCache.flags["NagaVenom"] || 0;
-	gameCache.flags["NagaMate"]       = gameCache.flags["NagaMate"] || 0;
+	gameCache.flags.NagaVenom      = gameCache.flags.NagaVenom || 0;
+	gameCache.flags.NagaMate       = gameCache.flags.NagaMate || 0;
 
-	gameCache.flags["Moth"]      = gameCache.flags["Moth"] || 0;
+	gameCache.flags.Moth      = gameCache.flags.Moth || 0;
 
-	//Halloween event
-	gameCache.flags["HW"] = gameCache.flags["HW"] || 0;
+	// Halloween event
+	gameCache.flags.HW = gameCache.flags.HW || 0;
 
-	if(GAME().burrows.flags["Access"] >= BurrowsFlags.AccessFlags.Stage5) GAME().rigard.flags["Scepter"] = 0;
-}
+	if (GAME().burrows.flags.Access >= BurrowsFlags.AccessFlags.Stage5) { GAME().rigard.flags.Scepter = 0; }
+};
 
-let CacheToGame = function() {
+const CacheToGame = function() {
 	InitCache();
 
-	let gameCache : any = GameCache();
+	const gameCache: any = GameCache();
 
 	// Load flags
-	for(let flag in gameCache.flags)
+	for (const flag in gameCache.flags) {
 		gameCache.flags[flag] = parseInt(gameCache.flags[flag]);
+	}
 
 	InitWorldTime(
 		new Time(
@@ -293,57 +294,57 @@ let CacheToGame = function() {
 			parseInt(gameCache.time.season),
 			parseInt(gameCache.time.day),
 			parseInt(gameCache.time.hour),
-			parseInt(gameCache.time.minute))
+			parseInt(gameCache.time.minute)),
 	);
 
 	// Adjust for old save formats
-	if(gameCache.version < 4) {
+	if (gameCache.version < 4) {
 		GAME().kiakai.body.SetRace(Race.Elf);
 	}
-	if(gameCache.version < 6) {
-		if     (gameCache.flags["KiakaiAttitude"] == 0) gameCache.flags["KiakaiAttitude"] = KiakaiFlags.Attitude.Nice;
-		else if(gameCache.flags["KiakaiAttitude"] == 1) gameCache.flags["KiakaiAttitude"] = KiakaiFlags.Attitude.Naughty;
-		else if(gameCache.flags["KiakaiAttitude"] == 2) gameCache.flags["KiakaiAttitude"] = KiakaiFlags.Attitude.Neutral;
+	if (gameCache.version < 6) {
+		if     (gameCache.flags.KiakaiAttitude == 0) { gameCache.flags.KiakaiAttitude = KiakaiFlags.Attitude.Nice; }
+		else if (gameCache.flags.KiakaiAttitude == 1) { gameCache.flags.KiakaiAttitude = KiakaiFlags.Attitude.Naughty; }
+		else if (gameCache.flags.KiakaiAttitude == 2) { gameCache.flags.KiakaiAttitude = KiakaiFlags.Attitude.Neutral; }
 	}
-	if(gameCache.version < 7) {
-		GAME().chief.relation.base = gameCache.flags["NomadRep"] || 0;      gameCache.flags["NomadRep"] = null;
-		GAME().chief.flags["Met"]  = gameCache.flags["NomadChiefMet"] || 0; gameCache.flags["NomadChiefMet"] = null;
-		GAME().gwendy.flags["Met"] = gameCache.flags["GwendyMet"] || 0;     gameCache.flags["GwendyMet"] = null;
-		GAME().adrian.flags["Met"] = gameCache.flags["AdrianMet"] || 0;     gameCache.flags["AdrianMet"] = null;
-		GAME().danie.flags["Met"]  = gameCache.flags["DanieMet"] || 0;      gameCache.flags["DanieMet"] = null;
+	if (gameCache.version < 7) {
+		GAME().chief.relation.base = gameCache.flags.NomadRep || 0;      gameCache.flags.NomadRep = null;
+		GAME().chief.flags.Met  = gameCache.flags.NomadChiefMet || 0; gameCache.flags.NomadChiefMet = null;
+		GAME().gwendy.flags.Met = gameCache.flags.GwendyMet || 0;     gameCache.flags.GwendyMet = null;
+		GAME().adrian.flags.Met = gameCache.flags.AdrianMet || 0;     gameCache.flags.AdrianMet = null;
+		GAME().danie.flags.Met  = gameCache.flags.DanieMet || 0;      gameCache.flags.DanieMet = null;
 
 		// Kiakai
-		GAME().kiakai.flags["InitialGender"]           = gameCache.flags["KiakaiInitialGender"] || Gender.male; gameCache.flags["KiakaiInitialGender"] = null;
+		GAME().kiakai.flags.InitialGender           = gameCache.flags.KiakaiInitialGender || Gender.male; gameCache.flags.KiakaiInitialGender = null;
 
-		GAME().kiakai.flags["Attitude"]                = gameCache.flags["KiakaiAttitude"] || KiakaiFlags.Attitude.Neutral; gameCache.flags["KiakaiAttitude"] = null;
-		GAME().kiakai.flags["AnalExp"]                 = gameCache.flags["KiakaiAnalExp"] || 0; gameCache.flags["KiakaiAnalExp"] = null;
-		GAME().kiakai.flags["Sexed"]                   = gameCache.flags["KiakaiSexed"] || 0; gameCache.flags["KiakaiSexed"] = null;
+		GAME().kiakai.flags.Attitude                = gameCache.flags.KiakaiAttitude || KiakaiFlags.Attitude.Neutral; gameCache.flags.KiakaiAttitude = null;
+		GAME().kiakai.flags.AnalExp                 = gameCache.flags.KiakaiAnalExp || 0; gameCache.flags.KiakaiAnalExp = null;
+		GAME().kiakai.flags.Sexed                   = gameCache.flags.KiakaiSexed || 0; gameCache.flags.KiakaiSexed = null;
 		// First time dialogue
-		GAME().kiakai.flags["TalkedWhyLeave"]          = gameCache.flags["KiakaiTalkedWhyLeave"] || 0; gameCache.flags["KiakaiTalkedWhyLeave"] = null;
-		GAME().kiakai.flags["TalkedWhyLeaveForce"]     = gameCache.flags["KiakaiTalkedWhyLeaveForce"] || 0; gameCache.flags["KiakaiTalkedWhyLeaveForce"] = null;
-		GAME().kiakai.flags["TalkedWhyLeaveLong"]      = gameCache.flags["KiakaiTalkedWhyLeaveLong"] || 0; gameCache.flags["KiakaiTalkedWhyLeaveLong"] = null;
-		GAME().kiakai.flags["TalkedWhyLeaveLongReact"] = gameCache.flags["KiakaiTalkedWhyLeaveLongReact"] || 0; gameCache.flags["KiakaiTalkedWhyLeaveLongReact"] = null;
-		GAME().kiakai.flags["TalkedPriest"]            = gameCache.flags["KiakaiTalkedPriest"] || 0; gameCache.flags["KiakaiTalkedPriest"] = null;
-		GAME().kiakai.flags["TalkedElves"]             = gameCache.flags["KiakaiTalkedElves"] || 0; gameCache.flags["KiakaiTalkedElves"] = null;
-		GAME().kiakai.flags["TalkedAria"]              = gameCache.flags["KiakaiTalkedAria"] || 0; gameCache.flags["KiakaiTalkedAria"] = null;
-		GAME().kiakai.flags["TalkedUru"]               = gameCache.flags["KiakaiTalkedUru"] || 0; gameCache.flags["KiakaiTalkedUru"] = null;
-		GAME().kiakai.flags["TalkedUruDA"]             = gameCache.flags["KiakaiTalkedUruDA"] || 0; gameCache.flags["KiakaiTalkedUruDA"] = null;
-		GAME().kiakai.flags["TalkedAlone"]             = gameCache.flags["KiakaiTalkedAlone"] || 0; gameCache.flags["KiakaiTalkedAlone"] = null;
+		GAME().kiakai.flags.TalkedWhyLeave          = gameCache.flags.KiakaiTalkedWhyLeave || 0; gameCache.flags.KiakaiTalkedWhyLeave = null;
+		GAME().kiakai.flags.TalkedWhyLeaveForce     = gameCache.flags.KiakaiTalkedWhyLeaveForce || 0; gameCache.flags.KiakaiTalkedWhyLeaveForce = null;
+		GAME().kiakai.flags.TalkedWhyLeaveLong      = gameCache.flags.KiakaiTalkedWhyLeaveLong || 0; gameCache.flags.KiakaiTalkedWhyLeaveLong = null;
+		GAME().kiakai.flags.TalkedWhyLeaveLongReact = gameCache.flags.KiakaiTalkedWhyLeaveLongReact || 0; gameCache.flags.KiakaiTalkedWhyLeaveLongReact = null;
+		GAME().kiakai.flags.TalkedPriest            = gameCache.flags.KiakaiTalkedPriest || 0; gameCache.flags.KiakaiTalkedPriest = null;
+		GAME().kiakai.flags.TalkedElves             = gameCache.flags.KiakaiTalkedElves || 0; gameCache.flags.KiakaiTalkedElves = null;
+		GAME().kiakai.flags.TalkedAria              = gameCache.flags.KiakaiTalkedAria || 0; gameCache.flags.KiakaiTalkedAria = null;
+		GAME().kiakai.flags.TalkedUru               = gameCache.flags.KiakaiTalkedUru || 0; gameCache.flags.KiakaiTalkedUru = null;
+		GAME().kiakai.flags.TalkedUruDA             = gameCache.flags.KiakaiTalkedUruDA || 0; gameCache.flags.KiakaiTalkedUruDA = null;
+		GAME().kiakai.flags.TalkedAlone             = gameCache.flags.KiakaiTalkedAlone || 0; gameCache.flags.KiakaiTalkedAlone = null;
 	}
-	if(gameCache.version < 8) {
+	if (gameCache.version < 8) {
 		GAME().fera.FirstVag().virgin = true;
 		GAME().fera.Butt().virgin = true;
 	}
-	if(gameCache.version < 9) {
+	if (gameCache.version < 9) {
 		GAME().player.FirstBreastRow().size.base /= 2;
 		GAME().kiakai.FirstBreastRow().size.base /= 2;
 		GAME().rosalin.FirstBreastRow().size.base /= 2;
 	}
-	if(gameCache.version < 10) {
+	if (gameCache.version < 10) {
 		TF.SetRaceOne(GAME().rosalin.Eyes(), Race.Feline);
 		GAME().rosalin.Eyes().color = Color.green;
 	}
-	if(gameCache.version < 11) {
+	if (gameCache.version < 11) {
 		GAME().kiakai.weaponSlot   = WeaponsItems.WoodenStaff;
 		GAME().kiakai.topArmorSlot = ArmorItems.SimpleRobes;
 
@@ -352,10 +353,10 @@ let CacheToGame = function() {
 			Text.Add("What profession do you wish to start as?");
 			Text.Flush();
 
-			let options = new Array();
+			const options = new Array();
 			options.push({ nameStr : "Fighter",
-				func : function() {
-					GAME().player.flags["startJob"] = JobEnum.Fighter;
+				func() {
+					GAME().player.flags.startJob = JobEnum.Fighter;
 					GAME().player.currentJob           = Jobs.Fighter;
 					GAME().player.strength.growth     += 0.6;
 					GAME().player.stamina.growth      += 0.3;
@@ -368,15 +369,15 @@ let CacheToGame = function() {
 					GAME().player.topArmorSlot = ArmorItems.LeatherChest;
 					GAME().player.botArmorSlot = ArmorItems.LeatherPants;
 					GAME().player.acc1Slot     = AccItems.IronBangle;
-					GAME().player.jobs["Fighter"].mult = 0.5;
+					GAME().player.jobs.Fighter.mult = 0.5;
 					GAME().player.Equip();
 					Gui.PrintDefaultOptions();
 				}, enabled : true,
-				tooltip : "Focused on martial abilities and strength, strives to excel in physical combat."
+				tooltip : "Focused on martial abilities and strength, strives to excel in physical combat.",
 			});
 			options.push({ nameStr : "Scholar",
-				func : function() {
-					GAME().player.flags["startJob"] = JobEnum.Scholar;
+				func() {
+					GAME().player.flags.startJob = JobEnum.Scholar;
 					GAME().player.currentJob           = Jobs.Scholar;
 					GAME().player.strength.growth     += 0.0;
 					GAME().player.stamina.growth      += 0.1;
@@ -388,16 +389,16 @@ let CacheToGame = function() {
 					GAME().player.weaponSlot   = WeaponsItems.WoodenStaff;
 					GAME().player.topArmorSlot = ArmorItems.SimpleRobes;
 					GAME().player.acc1Slot     = AccItems.CrudeBook;
-					GAME().player.jobs["Scholar"].mult = 0.5;
-					GAME().player.jobs["Fighter"].mult = 1;
+					GAME().player.jobs.Scholar.mult = 0.5;
+					GAME().player.jobs.Fighter.mult = 1;
 					GAME().player.Equip();
 					Gui.PrintDefaultOptions();
 				}, enabled : true,
-				tooltip : "Takes a more intellectual approach to problems, and dabbles slightly in the mystical. Starts out with several support abilities."
+				tooltip : "Takes a more intellectual approach to problems, and dabbles slightly in the mystical. Starts out with several support abilities.",
 			});
 			options.push({ nameStr : "Courtesan",
-				func : function() {
-					GAME().player.flags["startJob"] = JobEnum.Courtesan;
+				func() {
+					GAME().player.flags.startJob = JobEnum.Courtesan;
 					GAME().player.currentJob           = Jobs.Courtesan;
 					GAME().player.strength.growth     += 0.0;
 					GAME().player.stamina.growth      += 0.0;
@@ -409,117 +410,123 @@ let CacheToGame = function() {
 					GAME().player.weaponSlot   = WeaponsItems.LWhip;
 					GAME().player.topArmorSlot = ArmorItems.StylizedClothes;
 					GAME().player.acc1Slot     = AccItems.SimpleCuffs;
-					GAME().player.jobs["Courtesan"].mult = 0.5;
-					GAME().player.jobs["Fighter"].mult   = 1;
+					GAME().player.jobs.Courtesan.mult = 0.5;
+					GAME().player.jobs.Fighter.mult   = 1;
 					GAME().player.Equip();
 					Gui.PrintDefaultOptions();
 				}, enabled : true,
-				tooltip : "Focused on sensual abilities and charming your foes into submission."
+				tooltip : "Focused on sensual abilities and charming your foes into submission.",
 			});
 			Gui.SetButtonsFromList(options);
 		});
 	}
-	if(gameCache.version < 12) {
-		if(GAME().player.jobs["Figther"]) {
-			GAME().player.jobs["Fighter"] = GAME().player.jobs["Figther"];
-			GAME().player.jobs["Figther"] = null;
+	if (gameCache.version < 12) {
+		if (GAME().player.jobs.Figther) {
+			GAME().player.jobs.Fighter = GAME().player.jobs.Figther;
+			GAME().player.jobs.Figther = null;
 		}
 	}
-	if(gameCache.version < 13) {
-		if(GAME().rigard.flags["KrawitzQ"]) {
-			GAME().rigard.Krawitz["Q"]      = GAME().rigard.flags["KrawitzQ"];
-			GAME().rigard.flags["KrawitzQ"] = null;
+	if (gameCache.version < 13) {
+		if (GAME().rigard.flags.KrawitzQ) {
+			GAME().rigard.Krawitz.Q      = GAME().rigard.flags.KrawitzQ;
+			GAME().rigard.flags.KrawitzQ = null;
 		}
 	}
-	if(gameCache.version < 14) {
-		GAME().miranda.flags["Herm"] = (GAME().miranda.flags["Met"] >= MirandaFlags.Met.TavernAftermath) ? 1 : 0;
+	if (gameCache.version < 14) {
+		GAME().miranda.flags.Herm = (GAME().miranda.flags.Met >= MirandaFlags.Met.TavernAftermath) ? 1 : 0;
 	}
-	if(gameCache.version < 15) {
-		if(GAME().rigard.Krawitz["Q"] >= RigardFlags.KrawitzQ.HeistDone)
-			GAME().twins.flags["Met"] = TwinsFlags.Met.Access;
+	if (gameCache.version < 15) {
+		if (GAME().rigard.Krawitz.Q >= RigardFlags.KrawitzQ.HeistDone) {
+			GAME().twins.flags.Met = TwinsFlags.Met.Access;
+		}
 	}
-	if(gameCache.version < 16) {
-		if(GAME().golem.flags["Met"] > GolemFlags.State.Lost)
-			GAME().jeanne.flags["Met"] = 1;
+	if (gameCache.version < 16) {
+		if (GAME().golem.flags.Met > GolemFlags.State.Lost) {
+			GAME().jeanne.flags.Met = 1;
+		}
 	}
-	if(gameCache.version < 17) {
-		GAME().terry.flags["PrefGender"] = Gender.male;
+	if (gameCache.version < 17) {
+		GAME().terry.flags.PrefGender = Gender.male;
 	}
-	if(gameCache.version < 19) {
+	if (gameCache.version < 19) {
 		GAME().player.SetExpToLevel();
 		GAME().kiakai.SetExpToLevel();
 		GAME().terry.SetExpToLevel();
 		GAME().miranda.SetExpToLevel();
 	}
-	if(gameCache.version < 20) {
-		if(GAME().golem.flags["Met"] >= GolemFlags.State.Won_noLoss) {
+	if (gameCache.version < 20) {
+		if (GAME().golem.flags.Met >= GolemFlags.State.Won_noLoss) {
 			GAME().party.Inv().AddItem(WeaponsItems.MageStaff);
 			GAME().party.Inv().AddItem(ArmorItems.MageRobes);
 		}
-		if(GAME().glade.flags["Visit"] >= DryadGladeFlags.Visit.DefeatedOrchid) {
+		if (GAME().glade.flags.Visit >= DryadGladeFlags.Visit.DefeatedOrchid) {
 			GAME().party.Inv().AddItem(WeaponsItems.VineWhip);
 			GAME().party.Inv().AddItem(ArmorItems.VineBra);
 			GAME().party.Inv().AddItem(ArmorItems.VinePanties);
 			GAME().party.Inv().AddItem(AlchemyItems.Estros);
 		}
 	}
-	if(gameCache.version < 21) {
-		if(GAME().player.body.vagina[0])
+	if (gameCache.version < 21) {
+		if (GAME().player.body.vagina[0]) {
 			GAME().player.body.vagina[0].capacity.base = 5;
+		}
 		GAME().player.body.ass.capacity.base = 4;
-		if(GAME().kiakai.body.vagina[0])
+		if (GAME().kiakai.body.vagina[0]) {
 			GAME().kiakai.body.vagina[0].capacity.base = 5;
+		}
 		GAME().kiakai.body.ass.capacity.base = 4;
-		if(GAME().rosalin.body.vagina[0])
+		if (GAME().rosalin.body.vagina[0]) {
 			GAME().rosalin.body.vagina[0].capacity.base = 5;
+		}
 		GAME().rosalin.body.ass.capacity.base = 4;
 	}
-	if(gameCache.version < 22) {
-		let vag = GAME().terry.flags["vag"];
-		if(vag != TerryFlags.Pussy.None) {
+	if (gameCache.version < 22) {
+		const vag = GAME().terry.flags.vag;
+		if (vag != TerryFlags.Pussy.None) {
 			GAME().terry.body.vagina = [];
 			GAME().terry.body.vagina.push(new Vagina());
-			if(vag == TerryFlags.Pussy.Used)
+			if (vag == TerryFlags.Pussy.Used) {
 				GAME().terry.FirstVag().virgin = false;
+			}
 		}
 	}
-	if(gameCache.version < 23) {
+	if (gameCache.version < 23) {
 		// OUTLAWS
-		GAME().outlaws.relation.base = gameCache.flags["OutlawsRep"] || 0;
-		gameCache.flags["OutlawsRep"] = null;
+		GAME().outlaws.relation.base = gameCache.flags.OutlawsRep || 0;
+		gameCache.flags.OutlawsRep = null;
 	}
-	if(gameCache.version < 24) {
+	if (gameCache.version < 24) {
 		// GWENDY'S FARM
-		GAME().farm.flags["Visit"] = gameCache.flags["FarmFound"] || 0;
-		gameCache.flags["FarmFound"] = null;
+		GAME().farm.flags.Visit = gameCache.flags.FarmFound || 0;
+		gameCache.flags.FarmFound = null;
 	}
-	if(gameCache.version < 25) {
+	if (gameCache.version < 25) {
 		// LAYLA LEVEL PACING
 		GAME().layla.SetExpToLevel();
 	}
-	if(gameCache.version < 26) {
+	if (gameCache.version < 26) {
 		// URU INTRO FLAGS
-		GAME().uru.flags["Intro"] |= gameCache.flags["IntroLostToImps"] ? UruFlags.Intro.LostToImps : 0;
-		GAME().uru.flags["Intro"] |= gameCache.flags["IntroToldUruAboutMirror"] ? UruFlags.Intro.ToldUruAboutMirror : 0;
-		GAME().uru.flags["Intro"] |= gameCache.flags["IntroFuckedUru"] ? UruFlags.Intro.FuckedUru : 0;
-		GAME().uru.flags["Intro"] |= gameCache.flags["IntroFuckedByUru"] ? UruFlags.Intro.FuckedByUru : 0;
+		GAME().uru.flags.Intro |= gameCache.flags.IntroLostToImps ? UruFlags.Intro.LostToImps : 0;
+		GAME().uru.flags.Intro |= gameCache.flags.IntroToldUruAboutMirror ? UruFlags.Intro.ToldUruAboutMirror : 0;
+		GAME().uru.flags.Intro |= gameCache.flags.IntroFuckedUru ? UruFlags.Intro.FuckedUru : 0;
+		GAME().uru.flags.Intro |= gameCache.flags.IntroFuckedByUru ? UruFlags.Intro.FuckedByUru : 0;
 	}
-	if(gameCache.version < 27) {
+	if (gameCache.version < 27) {
 		// OUTLAWS
-		if(GAME().outlaws.Rep() > 0) GAME().outlaws.flags["Met"] = OutlawsFlags.Met.Met;
+		if (GAME().outlaws.Rep() > 0) { GAME().outlaws.flags.Met = OutlawsFlags.Met.Met; }
 	}
-	if(gameCache.version < 28) {
+	if (gameCache.version < 28) {
 		// LEI TASKS
-		if(GAME().lei.flags["Met"] > LeiFlags.Met.KnowName) GAME().lei.flags["Met"] = LeiFlags.Met.KnowName;
+		if (GAME().lei.flags.Met > LeiFlags.Met.KnowName) { GAME().lei.flags.Met = LeiFlags.Met.KnowName; }
 	}
-	if(gameCache.version < 29) {
+	if (gameCache.version < 29) {
 		// LAGON DEFEATED FLAGS (clear unused)
-		GAME().lagon.flags["Usurp"] &= 0x7;
+		GAME().lagon.flags.Usurp &= 0x7;
 	}
-}
+};
 
-let GameToCache = function() {
-	let gameCache : any = GameCache();
+const GameToCache = function() {
+	const gameCache: any = GameCache();
 
 	gameCache.version  = SAVE_VERSION;
 	// For debugging
@@ -598,16 +605,15 @@ let GameToCache = function() {
 	// Current party
 	gameCache.party   = GAME().party.ToStorage();
 
-
-	let parse : any = {
+	const parse: any = {
 		name   : gameCache.player.name,
 		gender : Gender.Short(GAME().player.body.Gender()),
 		lvl    : gameCache.player.lvl,
 		slvl   : gameCache.player.slvl,
-		date   : gameCache.time.DateString()
+		date   : gameCache.time.DateString(),
 	};
 
 	gameCache.name = Text.Parse("[name]([gender]), Lvl [lvl]/[slvl], [date]", parse);
-}
+};
 
 export { InitCache, CacheToGame, GameToCache };

@@ -11,6 +11,6 @@ enum ExploreButtonIndex {
 	Wait     = 8,
 	Sleep    = 9,
 	Look     = 10,
-};
+}
 
 export { ExploreButtonIndex };

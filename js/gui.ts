@@ -1,18 +1,18 @@
-import * as Raphael from 'raphael';
-import * as $ from 'jquery';
-import * as _ from 'lodash';
+import * as $ from "jquery";
+import * as _ from "lodash";
+import * as Raphael from "raphael";
 
-import { Images } from './assets';
-import { SMALL_FONT, DEFAULT_FONT, GetRenderPictures } from '../app';
-import { StatusEffect } from './statuseffect';
-import { Input, Keys } from './input';
-import { isOnline, SetGameState } from './gamestate';
-import { gameState, GameState } from './gamestate';
-import { ExploreButtonIndex } from './explorestate';
-import { Text } from './text';
-import { GAME, WorldTime, GetCavalcade, NAV } from './GAME';
-import { StatusList } from './statuslist';
-import { EnemyParty, CurrentActiveChar } from './combat-data';
+import { DEFAULT_FONT, GetRenderPictures, SMALL_FONT } from "../app";
+import { Images } from "./assets";
+import { CurrentActiveChar, EnemyParty } from "./combat-data";
+import { ExploreButtonIndex } from "./explorestate";
+import { GAME, GetCavalcade, NAV, WorldTime } from "./GAME";
+import { isOnline, SetGameState } from "./gamestate";
+import { gameState, GameState } from "./gamestate";
+import { Input, Keys } from "./input";
+import { StatusEffect } from "./statuseffect";
+import { StatusList } from "./statuslist";
+import { Text } from "./text";
 
 const textArea = {
 	x: 270,
@@ -20,54 +20,54 @@ const textArea = {
 	w: 740,
 	h: 530,
 	inset: 4,
-	pad: {x: 20, y:10}
+	pad: {x: 20, y: 10},
 };
 
 const tooltipArea = {
 	x: 1075,
 	y: 195,
 	w: 190,
-	h: 390
+	h: 390,
 };
 
 const inputtextArea = {
 	x: 500,
-	y: 175
+	y: 175,
 };
 
 Raphael.el.is_visible = function() {
 	return (this.node.style.display !== "none");
-}
+};
 
 const width = 1280;
 const height = 720;
 
-let LastSubmenu : any = null;
-let callstack : CallableFunction[] = [];
-let canvas : any;
-let debug : any;
-let ShortcutsVisible : boolean;
-let fonts : any;
+let LastSubmenu: any = null;
+let callstack: CallableFunction[] = [];
+let canvas: any;
+let debug: any;
+let ShortcutsVisible: boolean;
+let fonts: any;
 
-let party : RaphaelSet;
-let partyObj : any[];
-let enemy : RaphaelSet;
-let enemyObj : any[];
-let cavalcadeSet : RaphaelSet;
-let cavalcadeObj : any;
-let overlay : RaphaelSet;
-let location : any;
-let coinFixed : any;
-let coin : any;
-let dateFixed : any;
-let date : any;
-let timeFixed : any;
-let time : any;
-let clock : any;
+let party: RaphaelSet;
+let partyObj: any[];
+let enemy: RaphaelSet;
+let enemyObj: any[];
+let cavalcadeSet: RaphaelSet;
+let cavalcadeObj: any;
+let overlay: RaphaelSet;
+let location: any;
+let coinFixed: any;
+let coin: any;
+let dateFixed: any;
+let date: any;
+let timeFixed: any;
+let time: any;
+let clock: any;
 
-let FontFamily : string;
-let FontSize : string;
-let BgColor : string;
+let FontFamily: string;
+let FontSize: string;
+let BgColor: string;
 
 export class Gui {
 	static get canvas() { return canvas; }
@@ -81,52 +81,55 @@ export class Gui {
 
 	static get barWidth() { return 145; }
 
-	constructor() {}
+	static get Callstack() { return callstack; }
+	static set Callstack(cs) { callstack = cs; }
 
-	static Init() {
+	public static Init() {
 		Gui.debug = null;
 		Gui.ShortcutsVisible = false;
 
 		Gui.canvas = Raphael("wrap", 100, 100);
 		Gui.canvas.setViewBox(0, 0, width, height, true);
-		Gui.canvas.setSize('100%', '100%');
-		let bg = Gui.canvas.image(Images.bg, 0, 0, width, height);
+		Gui.canvas.setSize("100%", "100%");
+		const bg = Gui.canvas.image(Images.bg, 0, 0, width, height);
 		bg.node.ondragstart = function() {
 			return false;
-		}
-		let svg = document.querySelector("svg");
+		};
+		const svg = document.querySelector("svg");
 		svg.removeAttribute("width");
 		svg.removeAttribute("height");
 
 		fonts = {
-			Kimberley : Gui.canvas.getFont("Kimberley Bl")
+			Kimberley : Gui.canvas.getFont("Kimberley Bl"),
 		};
 
 		Gui.canvas.rect(textArea.x, textArea.y, textArea.w, textArea.h).attr({"stroke-width": textArea.inset});
-		Gui.debug = Gui.canvas.text(1230, 700, "Debug").attr({stroke: "#F00", fill:"#F00", font: SMALL_FONT}).hide();
+		Gui.debug = Gui.canvas.text(1230, 700, "Debug").attr({stroke: "#F00", fill: "#F00", font: SMALL_FONT}).hide();
 		Gui.Resize();
 
 		party = Gui.canvas.set();
 		partyObj = [];
-		for(let i = 0; i < 4; ++i)
-			Gui.SetupPortrait(20, 75+120*i, party, partyObj, true, i);
+		for (let i = 0; i < 4; ++i) {
+			Gui.SetupPortrait(20, 75 + 120 * i, party, partyObj, true, i);
+		}
 		enemy = Gui.canvas.set();
 		enemyObj = [];
-		for(let i = 0; i < 4; ++i)
-			Gui.SetupPortrait(1020, 75+120*i, enemy, enemyObj, false, i);
+		for (let i = 0; i < 4; ++i) {
+			Gui.SetupPortrait(1020, 75 + 120 * i, enemy, enemyObj, false, i);
+		}
 
 		// Cavalcade
 		cavalcadeSet = Gui.canvas.set();
 		cavalcadeObj = {};
 		cavalcadeObj.p = [];
 		Gui.SetupCavalcadeHand(20, 75, cavalcadeSet, cavalcadeObj.p);
-		Gui.SetupCavalcadeHand(1020, 75+120*0, cavalcadeSet, cavalcadeObj.p);
-		Gui.SetupCavalcadeHand(1020, 75+200*1, cavalcadeSet, cavalcadeObj.p);
-		Gui.SetupCavalcadeHand(1020, 75+200*2, cavalcadeSet, cavalcadeObj.p);
+		Gui.SetupCavalcadeHand(1020, 75 + 120 * 0, cavalcadeSet, cavalcadeObj.p);
+		Gui.SetupCavalcadeHand(1020, 75 + 200 * 1, cavalcadeSet, cavalcadeObj.p);
+		Gui.SetupCavalcadeHand(1020, 75 + 200 * 2, cavalcadeSet, cavalcadeObj.p);
 
-		let houseObj = [];
-		for(let i = 0; i < 3; ++i) {
-			let card = Gui.canvas.image(Images.card_back, 25+60*i, 380+25*i, 106, 150);
+		const houseObj = [];
+		for (let i = 0; i < 3; ++i) {
+			const card = Gui.canvas.image(Images.card_back, 25 + 60 * i, 380 + 25 * i, 106, 150);
 			houseObj.push(card);
 			cavalcadeSet.push(card);
 		}
@@ -155,18 +158,18 @@ export class Gui {
 		clock.x = 840;
 		clock.y = 33;
 		clock.r = 25;
-		overlay.push(Gui.canvas.circle(clock.x, clock.y, clock.r).attr({"fill": "#000"}));
-		overlay.push(Gui.canvas.circle(clock.x, clock.y, clock.r*0.97).attr({fill: "rhsb(.1 , .5, .95)-hsb(.1 , 1, .45)"}));
-		for(let i = 0; i < 12; i++) {
-			let start_x = clock.x+Math.round(clock.r*0.8*Math.cos(30*i*Math.PI/180));
-			let start_y = clock.y+Math.round(clock.r*0.8*Math.sin(30*i*Math.PI/180));
-			let end_x   = clock.x+Math.round(clock.r*Math.cos(30*i*Math.PI/180));
-			let end_y   = clock.y+Math.round(clock.r*Math.sin(30*i*Math.PI/180));
-			overlay.push(Gui.canvas.path("M"+start_x+" "+start_y+"L"+end_x+" "+end_y).attr({stroke: "#000", "stroke-width": 3}));
+		overlay.push(Gui.canvas.circle(clock.x, clock.y, clock.r).attr({fill: "#000"}));
+		overlay.push(Gui.canvas.circle(clock.x, clock.y, clock.r * 0.97).attr({fill: "rhsb(.1 , .5, .95)-hsb(.1 , 1, .45)"}));
+		for (let i = 0; i < 12; i++) {
+			const start_x = clock.x + Math.round(clock.r * 0.8 * Math.cos(30 * i * Math.PI / 180));
+			const start_y = clock.y + Math.round(clock.r * 0.8 * Math.sin(30 * i * Math.PI / 180));
+			const end_x   = clock.x + Math.round(clock.r * Math.cos(30 * i * Math.PI / 180));
+			const end_y   = clock.y + Math.round(clock.r * Math.sin(30 * i * Math.PI / 180));
+			overlay.push(Gui.canvas.path("M" + start_x + " " + start_y + "L" + end_x + " " + end_y).attr({"stroke": "#000", "stroke-width": 3}));
 		}
-		clock.hour   = Gui.canvas.path("M"+clock.x+" "+clock.y+"L"+clock.x+" "+(clock.y-clock.r/2)).attr({stroke: "#000", "stroke-width": 5});
-		clock.minute = Gui.canvas.path("M"+clock.x+" "+clock.y+"L"+clock.x+" "+(clock.y-5*clock.r/6)).attr({stroke: "#000", "stroke-width": 3});
-		overlay.push(Gui.canvas.circle(clock.x, clock.y, clock.r/20).attr("fill", "#000"));
+		clock.hour   = Gui.canvas.path("M" + clock.x + " " + clock.y + "L" + clock.x + " " + (clock.y - clock.r / 2)).attr({"stroke": "#000", "stroke-width": 5});
+		clock.minute = Gui.canvas.path("M" + clock.x + " " + clock.y + "L" + clock.x + " " + (clock.y - 5 * clock.r / 6)).attr({"stroke": "#000", "stroke-width": 3});
+		overlay.push(Gui.canvas.circle(clock.x, clock.y, clock.r / 20).attr("fill", "#000"));
 		overlay.push(clock.hour);
 		overlay.push(clock.minute);
 
@@ -174,13 +177,13 @@ export class Gui {
 		Input.Init(Gui);
 
 		// Set bg
-		BgColor = isOnline() && localStorage["bgcolor"] ? localStorage["bgcolor"] : "rgba(255, 255, 255, 0.2)";
+		BgColor = isOnline() && localStorage.bgcolor ? localStorage.bgcolor : "rgba(255, 255, 255, 0.2)";
 		document.getElementById("mainTextArea").style.backgroundColor = BgColor;
-		FontFamily = isOnline() && localStorage["fontFamily"] ? localStorage["fontFamily"] : "Georgia, sans-serif, \"Arial\", \"Helvetica\"";
+		FontFamily = isOnline() && localStorage.fontFamily ? localStorage.fontFamily : "Georgia, sans-serif, \"Arial\", \"Helvetica\"";
 		document.getElementById("mainTextArea").style.fontFamily = FontFamily;
-		FontSize = isOnline() && localStorage["fontSize"] ? localStorage["fontSize"] : "large";
+		FontSize = isOnline() && localStorage.fontSize ? localStorage.fontSize : "large";
 		document.getElementById("mainTextArea").style.fontSize = FontSize;
-		Gui.ShortcutsVisible = isOnline() ? parseInt(localStorage["ShortcutsVisible"]) == 1 : false;
+		Gui.ShortcutsVisible = isOnline() ? parseInt(localStorage.ShortcutsVisible) == 1 : false;
 
 		// Setup keyboard shortcuts
 		// Row 1
@@ -214,27 +217,27 @@ export class Gui {
 		Input.exploreButtons[ExploreButtonIndex.Alchemy].SetKey(Keys.KEY_0);
 		Input.exploreButtons[ExploreButtonIndex.Quests].SetKey(Keys.KEY_U);
 
-
 		Input.menuButtons[0].SetKey(Keys.KEY_CONSOLE);
 
 		Gui.ClearButtons();
 	}
 
-	static Print(x : number, y : number, text : string, font : RaphaelFont, size : number, align? : string) {
+	public static Print(x: number, y: number, text: string, font: RaphaelFont, size: number, align?: string) {
 		align = align || "start";
-		let t = Gui.canvas.print(x, y, text, font, size);
-		let bb = t.getBBox();
-		if(align == "middle")
-			t.translate(-bb.width/2, 0);
-		else if(align == "end")
+		const t = Gui.canvas.print(x, y, text, font, size);
+		const bb = t.getBBox();
+		if (align == "middle") {
+			t.translate(-bb.width / 2, 0);
+		} else if (align == "end") {
 			t.translate(-bb.width, 0);
+ }
 		return t;
 	}
 
-	static PrintGlow(set : RaphaelSet, obj : any, x : number, y : number, text : string|number, font : RaphaelFont, size : number, align : string, glow : any) {
-		if(text != obj.str) {
+	public static PrintGlow(set: RaphaelSet, obj: any, x: number, y: number, text: string|number, font: RaphaelFont, size: number, align: string, glow: any) {
+		if (text != obj.str) {
 			obj.str = text;
-			if(obj.text) {
+			if (obj.text) {
 				set.exclude(obj.text);
 				set.exclude(obj.glow);
 				obj.text.remove();
@@ -244,55 +247,54 @@ export class Gui {
 			obj.glow = obj.text.glow(glow);
 			set.push(obj.text);
 			set.push(obj.glow);
-		}
-		else {
+		} else {
 			obj.text.show();
 			obj.glow.show();
 		}
 	}
 
-	static PrintShow(obj : any) {
+	public static PrintShow(obj: any) {
 		obj.text.show();
 		obj.glow.show();
 	}
 
-	static SetupPortrait(xoffset : number, yoffset : number, set : RaphaelSet, obj : any, isParty : boolean, index : number) {
-		let barStart   = 85;
-		let barWidth   = Gui.barWidth;
-		let barHeigth  = 30;
-		let border     = 6;
-		let barOffsetX = 6;
-		let barOffsetY = 30;
+	public static SetupPortrait(xoffset: number, yoffset: number, set: RaphaelSet, obj: any, isParty: boolean, index: number) {
+		const barStart   = 85;
+		const barWidth   = Gui.barWidth;
+		const barHeigth  = 30;
+		const border     = 6;
+		const barOffsetX = 6;
+		const barOffsetY = 30;
 
-		let glowColor = (isParty) ? "#00FF00" : "#FF1111";
+		const glowColor = (isParty) ? "#00FF00" : "#FF1111";
 
-		let charSet   = Gui.canvas.set();
-		let statusSet = Gui.canvas.set();
-		let portrait  = Gui.canvas.image(Images.pc_male, xoffset, yoffset, 100, 100);
+		const charSet   = Gui.canvas.set();
+		const statusSet = Gui.canvas.set();
+		const portrait  = Gui.canvas.image(Images.pc_male, xoffset, yoffset, 100, 100);
 		portrait.node.ondragstart = function() {
 			return false;
-		}
-		let local : any = {
-			xoffset : xoffset,
-			yoffset : yoffset,
-			portrait: portrait,
+		};
+		const local: any = {
+			xoffset,
+			yoffset,
+			portrait,
 			name    : {},
 			lvl     : {},
 			status  : [],
 			glow    : portrait.glow({opacity: 1, color: glowColor, width: 20}),
-			hpBack  : Gui.canvas.rect(xoffset+barStart, yoffset+10, barWidth, barHeigth).attr({"stroke-width": border, stroke: "#000", fill: "#000"}),
-			hpBar   : Gui.canvas.rect(xoffset+barStart, yoffset+10, barWidth, barHeigth).attr({fill: "#f00"}),
-			hpStr   : Gui.canvas.text(xoffset+barStart+barWidth-5, yoffset+25, "9999/9999").attr({"text-anchor": "end", fill:"#fff", font: DEFAULT_FONT}),
-			spBack  : Gui.canvas.rect(xoffset+barStart+barOffsetX, yoffset+10+barOffsetY, barWidth, barHeigth).attr({"stroke-width": border, stroke: "#000", fill: "#000"}),
-			spBar   : Gui.canvas.rect(xoffset+barStart+barOffsetX, yoffset+10+barOffsetY, barWidth, barHeigth).attr({fill: "#00f"}),
-			spStr   : Gui.canvas.text(xoffset+barStart+barWidth-5+barOffsetX, yoffset+25+barOffsetY, "9999/9999").attr({"text-anchor": "end", fill:"#fff", font: DEFAULT_FONT}),
-			lpBack  : Gui.canvas.rect(xoffset+barStart+2*barOffsetX, yoffset+10+2*barOffsetY, barWidth, barHeigth).attr({"stroke-width": border, stroke: "#000", fill: "#000"}),
-			lpBar   : Gui.canvas.rect(xoffset+barStart+2*barOffsetX, yoffset+10+2*barOffsetY, barWidth, barHeigth).attr({fill: "#f0f"}),
-			lpStr   : Gui.canvas.text(xoffset+barStart+barWidth-5+2*barOffsetX, yoffset+25+2*barOffsetY, "9999/9999").attr({"text-anchor": "end", fill:"#fff", font: DEFAULT_FONT})
+			hpBack  : Gui.canvas.rect(xoffset + barStart, yoffset + 10, barWidth, barHeigth).attr({"stroke-width": border, "stroke": "#000", "fill": "#000"}),
+			hpBar   : Gui.canvas.rect(xoffset + barStart, yoffset + 10, barWidth, barHeigth).attr({fill: "#f00"}),
+			hpStr   : Gui.canvas.text(xoffset + barStart + barWidth - 5, yoffset + 25, "9999/9999").attr({"text-anchor": "end", "fill": "#fff", "font": DEFAULT_FONT}),
+			spBack  : Gui.canvas.rect(xoffset + barStart + barOffsetX, yoffset + 10 + barOffsetY, barWidth, barHeigth).attr({"stroke-width": border, "stroke": "#000", "fill": "#000"}),
+			spBar   : Gui.canvas.rect(xoffset + barStart + barOffsetX, yoffset + 10 + barOffsetY, barWidth, barHeigth).attr({fill: "#00f"}),
+			spStr   : Gui.canvas.text(xoffset + barStart + barWidth - 5 + barOffsetX, yoffset + 25 + barOffsetY, "9999/9999").attr({"text-anchor": "end", "fill": "#fff", "font": DEFAULT_FONT}),
+			lpBack  : Gui.canvas.rect(xoffset + barStart + 2 * barOffsetX, yoffset + 10 + 2 * barOffsetY, barWidth, barHeigth).attr({"stroke-width": border, "stroke": "#000", "fill": "#000"}),
+			lpBar   : Gui.canvas.rect(xoffset + barStart + 2 * barOffsetX, yoffset + 10 + 2 * barOffsetY, barWidth, barHeigth).attr({fill: "#f0f"}),
+			lpStr   : Gui.canvas.text(xoffset + barStart + barWidth - 5 + 2 * barOffsetX, yoffset + 25 + 2 * barOffsetY, "9999/9999").attr({"text-anchor": "end", "fill": "#fff", "font": DEFAULT_FONT}),
 		};
 
-		for(let i = 0; i < StatusList.NumStatus; i++) {
-			local.status[i] = Gui.canvas.image(Images.status[StatusEffect.Burn], xoffset + 16*i + 2, yoffset + 70, 15, 15);
+		for (let i = 0; i < StatusList.NumStatus; i++) {
+			local.status[i] = Gui.canvas.image(Images.status[StatusEffect.Burn], xoffset + 16 * i + 2, yoffset + 70, 15, 15);
 			statusSet.push(local.status[i]);
 		}
 
@@ -312,85 +314,81 @@ export class Gui {
 		obj.push(local);
 
 		charSet.attr({
-			cursor: "pointer"
+			cursor: "pointer",
 		}).click(function() {
 			Gui.HandlePortraitClick(index, isParty);
 		});
 	}
 
-	static HandlePortraitClick = function(index : number, isParty : boolean) {
-		if(gameState == GameState.Game && !GAME().IntroActive) {
-			if(isParty) {
-				let character = GAME().party.Get(index);
-				if(character) {
+	public static HandlePortraitClick = function(index: number, isParty: boolean) {
+		if (gameState == GameState.Game && !GAME().IntroActive) {
+			if (isParty) {
+				const character = GAME().party.Get(index);
+				if (character) {
 					Gui.SetLastSubmenu(Input.exploreButtons[ExploreButtonIndex.Party]);
 					character.Interact(GAME().party.location.switchSpot());
 				}
 			}
 		}
-	}
+	};
 
-	static SetupCavalcadeHand(xoffset : number, yoffset : number, set : RaphaelSet, obj : any) {
-		let charSet = Gui.canvas.set();
+	public static SetupCavalcadeHand(xoffset: number, yoffset: number, set: RaphaelSet, obj: any) {
+		const charSet = Gui.canvas.set();
 
-		//let portrait = Gui.canvas.image(Images.pc_male, xoffset, yoffset, 100, 100);
-		let cards = [];
+		// let portrait = Gui.canvas.image(Images.pc_male, xoffset, yoffset, 100, 100);
+		const cards = [];
 		cards.push(Gui.canvas.image(Images.card_back, xoffset, yoffset, 106, 150));
-		cards.push(Gui.canvas.image(Images.card_back, 110+xoffset, yoffset, 106, 150));
+		cards.push(Gui.canvas.image(Images.card_back, 110 + xoffset, yoffset, 106, 150));
 
-		let local = {
-			xoffset  : xoffset,
-			yoffset  : yoffset,
+		const local = {
+			xoffset,
+			yoffset,
 			name     : {},
 			coin     : {},
-	//		portrait : portrait,
-			cards    : cards
+	// 		portrait : portrait,
+			cards,
 		};
 
-	//	charSet.push(portrait);
+	// 	charSet.push(portrait);
 		charSet.push(cards[0]);
 		charSet.push(cards[1]);
 		set.push(charSet);
 		obj.push(local);
 	}
 
-	static Resize = function() {
-		let w = $(window).width();
-		let h = $(window).height();
-		let ratioW = w/width;
-		let ratioH = h/height;
+	public static Resize = function() {
+		const w = $(window).width();
+		const h = $(window).height();
+		const ratioW = w / width;
+		const ratioH = h / height;
 		let xpos = 0, ypos = 0, ratio = 1;
-		//alert("R:" + ratio + " RW:" + ratioW + " RH:" + ratioH);
-		if(ratioW / ratioH > 1) {
-			xpos  = (w-ratioH*width) / 2;
+		// alert("R:" + ratio + " RW:" + ratioW + " RH:" + ratioH);
+		if (ratioW / ratioH > 1) {
+			xpos  = (w - ratioH * width) / 2;
 			ratio = ratioH;
-		}
-		else {
-			ypos  = (h-ratioW*height) / 2;
+		} else {
+			ypos  = (h - ratioW * height) / 2;
 			ratio = ratioW;
 		}
 
-		let textarea = document.getElementById("mainTextWrapper");
-		textarea.style.left   = xpos + ratio * (textArea.inset/2+textArea.x) +"px";
-		textarea.style.top    = ypos + ratio * (textArea.inset/2+textArea.y) +"px";
-		textarea.style.width  = -2*textArea.pad.x + ratio * (-textArea.inset+textArea.w) +"px";
-		textarea.style.height = -2*textArea.pad.y + ratio * (-textArea.inset+textArea.h) +"px";
+		const textarea = document.getElementById("mainTextWrapper");
+		textarea.style.left   = xpos + ratio * (textArea.inset / 2 + textArea.x) + "px";
+		textarea.style.top    = ypos + ratio * (textArea.inset / 2 + textArea.y) + "px";
+		textarea.style.width  = -2 * textArea.pad.x + ratio * (-textArea.inset + textArea.w) + "px";
+		textarea.style.height = -2 * textArea.pad.y + ratio * (-textArea.inset + textArea.h) + "px";
 
-		let inputtext = document.getElementById("textInputArea");
-		inputtext.style.left   = xpos + ratio * inputtextArea.x +"px";
-		inputtext.style.top    = ypos + ratio * inputtextArea.y +"px";
+		const inputtext = document.getElementById("textInputArea");
+		inputtext.style.left   = xpos + ratio * inputtextArea.x + "px";
+		inputtext.style.top    = ypos + ratio * inputtextArea.y + "px";
 
-		let tooltip = document.getElementById("tooltipTextArea");
-		tooltip.style.left   = xpos + ratio * tooltipArea.x +"px";
-		tooltip.style.top    = ypos + ratio * tooltipArea.y +"px";
-		tooltip.style.width  =        ratio * tooltipArea.w +"px";
-		tooltip.style.height =        ratio * tooltipArea.h +"px";
-	}
+		const tooltip = document.getElementById("tooltipTextArea");
+		tooltip.style.left   = xpos + ratio * tooltipArea.x + "px";
+		tooltip.style.top    = ypos + ratio * tooltipArea.y + "px";
+		tooltip.style.width  =        ratio * tooltipArea.w + "px";
+		tooltip.style.height =        ratio * tooltipArea.h + "px";
+	};
 
-	static get Callstack() { return callstack; }
-	static set Callstack(cs) { callstack = cs; }
-
-	static FontPicker(back : any) {
+	public static FontPicker(back: any) {
 		Text.Clear();
 		Text.Add("Set a new font/fontsize?");
 		Text.NL();
@@ -399,175 +397,187 @@ export class Gui {
 		Text.Add("Integer posuere quam at odio pharetra dignissim sollicitudin leo accumsan. Curabitur eu pharetra urna. Vivamus et gravida tortor. Morbi vel porttitor urna. Donec vitae rutrum urna. Integer elit orci, gravida eget viverra et, tincidunt quis est. Aliquam erat volutpat. Sed euismod rutrum lectus, nec vehicula turpis volutpat et. Nulla mauris felis, eleifend a fringilla id, faucibus eget purus. Donec in neque in ligula condimentum lobortis.");
 		Text.Flush();
 
-		let options = new Array();
+		const options = new Array();
 		options.push({ nameStr : "Reset",
-			func : function() {
+			func() {
 				FontFamily = "Georgia, sans-serif, \"Arial\", \"Helvetica\"";
 				document.getElementById("mainTextArea").style.fontFamily = FontFamily;
 				FontSize = "large";
 				document.getElementById("mainTextArea").style.fontSize = FontSize;
-				if(isOnline()) {
-					localStorage["fontFamily"] = FontFamily;
-					localStorage["fontSize"]   = FontSize;
+				if (isOnline()) {
+					localStorage.fontFamily = FontFamily;
+					localStorage.fontSize   = FontSize;
 				}
-			}, enabled : true
+			}, enabled : true,
 		});
 		options.push({ nameStr : "Font",
-			func : function() {
-				let font = prompt("Please enter fonts (css: font-families) to use, in order of priority.", FontFamily || "sans-serif, Georgia")
-				if(font != null && font != "") {
+			func() {
+				const font = prompt("Please enter fonts (css: font-families) to use, in order of priority.", FontFamily || "sans-serif, Georgia");
+				if (font != null && font != "") {
 					FontFamily = font;
-					if(isOnline())
-						localStorage["fontFamily"] = FontFamily;
+					if (isOnline()) {
+						localStorage.fontFamily = FontFamily;
+					}
 					document.getElementById("mainTextArea").style.fontFamily = FontFamily;
 				}
-			}, enabled : true
+			}, enabled : true,
 		});
 		options.push({ nameStr : "Size",
-			func : function() {
-				let size = prompt("Please enter desired font size (css: font-size). For example: small, medium, large.", FontSize || "large")
-				if(size != null && size != "") {
+			func() {
+				const size = prompt("Please enter desired font size (css: font-size). For example: small, medium, large.", FontSize || "large");
+				if (size != null && size != "") {
 					FontSize = size;
-					if(isOnline())
-						localStorage["fontSize"] = FontSize;
+					if (isOnline()) {
+						localStorage.fontSize = FontSize;
+					}
 					document.getElementById("mainTextArea").style.fontSize = FontSize;
 				}
-			}, enabled : true
+			}, enabled : true,
 		});
 
 		Gui.SetButtonsFromList(options, true, back);
 	}
 
-
-	static BgColorPicker(back : any) {
+	public static BgColorPicker(back: any) {
 		Text.Clear();
 		Text.Add("Set a new background color?");
 		Text.Flush();
 
-		let options = new Array();
+		const options = new Array();
 		options.push({ nameStr : "Light",
-			func : function() {
+			func() {
 				BgColor = "rgba(255, 255, 255, 0.2)";
-				if(isOnline())
-					localStorage["bgcolor"] = BgColor;
+				if (isOnline()) {
+					localStorage.bgcolor = BgColor;
+				}
 				document.getElementById("mainTextArea").style.backgroundColor = BgColor;
-			}, enabled : true
+			}, enabled : true,
 		});
 		options.push({ nameStr : "Pink",
-			func : function() {
+			func() {
 				BgColor = "rgba(240, 48, 192, 0.6)";
-				if(isOnline())
-					localStorage["bgcolor"] = BgColor;
+				if (isOnline()) {
+					localStorage.bgcolor = BgColor;
+				}
 				document.getElementById("mainTextArea").style.backgroundColor = BgColor;
-			}, enabled : true
+			}, enabled : true,
 		});
 		options.push({ nameStr : "Yellow",
-			func : function() {
+			func() {
 				BgColor = "rgba(240, 192, 48, 0.6)";
-				if(isOnline())
-					localStorage["bgcolor"] = BgColor;
+				if (isOnline()) {
+					localStorage.bgcolor = BgColor;
+				}
 				document.getElementById("mainTextArea").style.backgroundColor = BgColor;
-			}, enabled : true
+			}, enabled : true,
 		});
 		options.push({ nameStr : "Cyan",
-			func : function() {
+			func() {
 				BgColor = "rgba(48, 240, 192, 0.6)";
-				if(isOnline())
-					localStorage["bgcolor"] = BgColor;
+				if (isOnline()) {
+					localStorage.bgcolor = BgColor;
+				}
 				document.getElementById("mainTextArea").style.backgroundColor = BgColor;
-			}, enabled : true
+			}, enabled : true,
 		});
 		options.push({ nameStr : "Blue",
-			func : function() {
+			func() {
 				BgColor = "rgba(48, 192, 240, 0.6)";
-				if(isOnline())
-					localStorage["bgcolor"] = BgColor;
+				if (isOnline()) {
+					localStorage.bgcolor = BgColor;
+				}
 				document.getElementById("mainTextArea").style.backgroundColor = BgColor;
-			}, enabled : true
+			}, enabled : true,
 		});
 		options.push({ nameStr : "Green",
-			func : function() {
+			func() {
 				BgColor = "rgba(120, 240, 48, 0.6)";
-				if(isOnline())
-					localStorage["bgcolor"] = BgColor;
+				if (isOnline()) {
+					localStorage.bgcolor = BgColor;
+				}
 				document.getElementById("mainTextArea").style.backgroundColor = BgColor;
-			}, enabled : true
+			}, enabled : true,
 		});
 		options.push({ nameStr : "Purple",
-			func : function() {
+			func() {
 				BgColor = "rgba(192, 48, 240, 0.6)";
-				if(isOnline())
-					localStorage["bgcolor"] = BgColor;
+				if (isOnline()) {
+					localStorage.bgcolor = BgColor;
+				}
 				document.getElementById("mainTextArea").style.backgroundColor = BgColor;
-			}, enabled : true
+			}, enabled : true,
 		});
 		options.push({ nameStr : "None",
-			func : function() {
+			func() {
 				BgColor = "rgba(0, 0, 0, 0.0)";
-				if(isOnline())
-					localStorage["bgcolor"] = BgColor;
+				if (isOnline()) {
+					localStorage.bgcolor = BgColor;
+				}
 				document.getElementById("mainTextArea").style.backgroundColor = BgColor;
-			}, enabled : true
+			}, enabled : true,
 		});
 		options.push({ nameStr : "Custom",
-			func : function() {
-				let col = prompt("Please enter desired background color. Format is rgba(R,G,B,A). Colors are in the range 0-255. Opacity is in the range 0-1.", BgColor || "rgba(255,255,255,1.0)")
-				if(col != null && col != "") {
+			func() {
+				const col = prompt("Please enter desired background color. Format is rgba(R,G,B,A). Colors are in the range 0-255. Opacity is in the range 0-1.", BgColor || "rgba(255,255,255,1.0)");
+				if (col != null && col != "") {
 					BgColor = col;
-					if(isOnline())
-						localStorage["bgcolor"] = BgColor;
+					if (isOnline()) {
+						localStorage.bgcolor = BgColor;
+					}
 					document.getElementById("mainTextArea").style.backgroundColor = BgColor;
 				}
-			}, enabled : true
+			}, enabled : true,
 		});
 
 		Gui.SetButtonsFromList(options, true, back);
 	}
 
-	static ClearChoiceButtons() {
-		for(let i = 0; i < Input.buttons.length; i++)
+	public static ClearChoiceButtons() {
+		for (let i = 0; i < Input.buttons.length; i++) {
 			Input.buttons[i].SetVisible(false);
+		}
 	}
 
-	static ClearButtons() {
-		for(let i = 0; i < Input.buttons.length; i++) {
+	public static ClearButtons() {
+		for (let i = 0; i < Input.buttons.length; i++) {
 			Input.buttons[i].enabledImage = Images.imgButtonEnabled;
 			Input.buttons[i].SetVisible(false);
 		}
-		for(let i = 0; i < Input.navButtons.length; i++)
+		for (let i = 0; i < Input.navButtons.length; i++) {
 			Input.navButtons[i].SetVisible(false);
-		for(let i = 0; i < Input.exploreButtons.length; i++)
+		}
+		for (let i = 0; i < Input.exploreButtons.length; i++) {
 			Input.exploreButtons[i].SetVisible(false);
+		}
 	}
 
-	static NextPrompt(func : any = Gui.PrintDefaultOptions, text : string = "Next", tooltip? : any) {
+	public static NextPrompt(func: any = Gui.PrintDefaultOptions, text: string = "Next", tooltip?: any) {
 		Gui.ClearButtons();
-		//text, func, enabled, obj, tooltip, state
+		// text, func, enabled, obj, tooltip, state
 		Input.buttons[0].Setup(text, func, true, null, tooltip);
 	}
 
-	static SetButtonPage(list : any[], page : number, state : GameState) {
+	public static SetButtonPage(list: any[], page: number, state: GameState) {
 		Gui.ClearChoiceButtons();
-		for(let i=0, j=page*Input.buttons.length; i<Input.buttons.length && j<list.length; i++, j++) {
-			let name = list[j].nameStr || "NULL";
-			let func = list[j].func;
-			let en = list[j].enabled || false;
+		for (let i = 0, j = page * Input.buttons.length; i < Input.buttons.length && j < list.length; i++, j++) {
+			const name = list[j].nameStr || "NULL";
+			const func = list[j].func;
+			const en = list[j].enabled || false;
 			Input.buttons[i].enabledImage = list[j].image || Images.imgButtonEnabled;
 			Input.buttons[i].Setup(name, func, en, list[j].obj, list[j].tooltip, state);
 		}
 	}
 
-	static SetButtonsFromList(list : any[], backEnabled? : boolean, backFunc : any = Gui.PrintDefaultOptions, state? : GameState, backState? : GameState) {
+	public static SetButtonsFromList(list: any[], backEnabled?: boolean, backFunc: any = Gui.PrintDefaultOptions, state?: GameState, backState?: GameState) {
 		Gui.ClearButtons();
 		let currentPage = 0;
 
 		Gui.SetButtonPage(list, currentPage, state);
 
-		let updateNav = function()
-		{
+		const updateNav = function() {
 			Input.navButtons[0].Setup(">>",
 				function() {
-					if(currentPage < (list.length / Input.buttons.length) - 1) {
+					if (currentPage < (list.length / Input.buttons.length) - 1) {
 						currentPage++;
 						Gui.SetButtonPage(list, currentPage, state);
 						updateNav();
@@ -577,7 +587,7 @@ export class Gui {
 				currentPage < (list.length / Input.buttons.length) - 1));
 			Input.navButtons[1].Setup("<<",
 				function() {
-					if(currentPage > 0) {
+					if (currentPage > 0) {
 						currentPage--;
 						Gui.SetButtonPage(list, currentPage, state);
 						updateNav();
@@ -585,33 +595,33 @@ export class Gui {
 				}, true);
 			Input.navButtons[1].SetVisible((list.length > Input.buttons.length &&
 				currentPage > 0));
-			if(backEnabled)
+			if (backEnabled) {
 				Input.navButtons[2].Setup("Back", backFunc, true);
-		}
+			}
+		};
 
 		updateNav();
 
-		return function() { return currentPage; }
+		return function() { return currentPage; };
 	}
 
-	static SetButtonCollectionPage(encounter : any, caster : any, list : any[], ret : any, page : number) {
+	public static SetButtonCollectionPage(encounter: any, caster: any, list: any[], ret: any, page: number) {
 		Gui.ClearChoiceButtons();
-		for(let i=0, j=page*Input.buttons.length; i<Input.buttons.length && j<list.length; i++, j++) {
+		for (let i = 0, j = page * Input.buttons.length; i < Input.buttons.length && j < list.length; i++, j++) {
 			Input.buttons[i].SetFromAbility(encounter, caster, list[j], ret);
 		}
 	}
 
-	static SetButtonsFromCollection = function(encounter : any, caster : any, list : any[], ret : any, backFunc : any) {
+	public static SetButtonsFromCollection = function(encounter: any, caster: any, list: any[], ret: any, backFunc: any) {
 		Gui.ClearButtons();
 		let currentPage = 0;
 
 		Gui.SetButtonCollectionPage(encounter, caster, list, ret, currentPage);
 
-		let updateNav = function()
-		{
+		const updateNav = function() {
 			Input.navButtons[0].Setup(">>",
 				function() {
-					if(currentPage < (list.length / Input.buttons.length) - 1) {
+					if (currentPage < (list.length / Input.buttons.length) - 1) {
 						currentPage++;
 						Gui.SetButtonCollectionPage(encounter, caster, list, ret, currentPage);
 						updateNav();
@@ -621,7 +631,7 @@ export class Gui {
 				currentPage < (list.length / Input.buttons.length) - 1));
 			Input.navButtons[1].Setup("<<",
 				function() {
-					if(currentPage > 0) {
+					if (currentPage > 0) {
 						currentPage--;
 						Gui.SetButtonCollectionPage(encounter, caster, list, ret, currentPage);
 						updateNav();
@@ -629,27 +639,30 @@ export class Gui {
 				}, true);
 			Input.navButtons[1].SetVisible((list.length > Input.buttons.length &&
 				currentPage > 0));
-			if(backFunc)
+			if (backFunc) {
 				Input.navButtons[2].Setup("Back", backFunc, true);
-		}
+			}
+		};
 
 		updateNav();
-	}
+	};
 
-	static RenderParty(p : any, set : RaphaelSet, obj : any, max? : number) {
+	public static RenderParty(p: any, set: RaphaelSet, obj: any, max?: number) {
 		max = max || 4;
 		let i = 0;
-		for(; i < p.Num() && i < max; ++i) {
-			let c = p.Get(i);
+		for (; i < p.Num() && i < max; ++i) {
+			const c = p.Get(i);
 			set[i].show();
 			Gui.RenderEntity(c, set[i], obj[i]);
-			if(gameState != GameState.Combat || c != CurrentActiveChar())
+			if (gameState != GameState.Combat || c != CurrentActiveChar()) {
 				obj[i].glow.hide();
+			}
 		}
-		for(; i < 4 && i < max; ++i)
+		for (; i < 4 && i < max; ++i) {
 			set[i].hide();
+		}
 	}
-	static RenderEntity(entity : any, set : RaphaelElement|any, obj : any) {
+	public static RenderEntity(entity: any, set: RaphaelElement|any, obj: any) {
 		/*
 		let local = {
 			portrait: Gui.canvas.image(Images.pc_male, xoffset, yoffset, 100, 100),
@@ -667,93 +680,94 @@ export class Gui {
 		};
 		*/
 
-		if(entity.avatar.combat)
+		if (entity.avatar.combat) {
 			obj.portrait.attr({src: entity.avatar.combat, opacity: entity.Incapacitated() ? .5 : 1});
-		
-		if(GetRenderPictures()) {
-			obj.portrait.show();
 		}
-		else {
+
+		if (GetRenderPictures()) {
+			obj.portrait.show();
+		} else {
 			obj.portrait.hide();
 		}
 
-		Gui.PrintGlow(set, obj.name, obj.xoffset-5, obj.yoffset, entity.uniqueName || entity.name, fonts.Kimberley, 30, "start", {opacity: 1});
+		Gui.PrintGlow(set, obj.name, obj.xoffset - 5, obj.yoffset, entity.uniqueName || entity.name, fonts.Kimberley, 30, "start", {opacity: 1});
 
-		let hp = Math.floor(entity.curHp) / Math.floor(entity.HP());
-		let hpText = Math.floor(entity.curHp) + "/" + Math.floor(entity.HP());
+		const hp = Math.floor(entity.curHp) / Math.floor(entity.HP());
+		const hpText = Math.floor(entity.curHp) + "/" + Math.floor(entity.HP());
 		obj.hpStr.attr({text: hpText});
-		obj.hpBar.stop().animate({width: hp*Gui.barWidth}, 500, "<>");
-		let sp = Math.floor(entity.curSp) / Math.floor(entity.SP());
-		let spText = Math.floor(entity.curSp) + "/" + Math.floor(entity.SP());
+		obj.hpBar.stop().animate({width: hp * Gui.barWidth}, 500, "<>");
+		const sp = Math.floor(entity.curSp) / Math.floor(entity.SP());
+		const spText = Math.floor(entity.curSp) + "/" + Math.floor(entity.SP());
 		obj.spStr.attr({text: spText});
-		obj.spBar.stop().animate({width: sp*Gui.barWidth}, 500, "<>");
-		let lust = Math.floor(entity.curLust) / Math.floor(entity.Lust());
-		let lustText = Math.floor(entity.curLust) + "/" + Math.floor(entity.Lust());
+		obj.spBar.stop().animate({width: sp * Gui.barWidth}, 500, "<>");
+		const lust = Math.floor(entity.curLust) / Math.floor(entity.Lust());
+		const lustText = Math.floor(entity.curLust) + "/" + Math.floor(entity.Lust());
 		obj.lpStr.attr({text: lustText});
-		obj.lpBar.stop().animate({width: lust*Gui.barWidth}, 500, "<>");
+		obj.lpBar.stop().animate({width: lust * Gui.barWidth}, 500, "<>");
 
 		let levelText = "Lvl " + entity.level + "/" + entity.sexlevel;
-		if(entity.currentJob) {
-			let jd  = entity.jobs[entity.currentJob.name];
-			if(jd) {
+		if (entity.currentJob) {
+			const jd  = entity.jobs[entity.currentJob.name];
+			if (jd) {
 				// Check for maxed out job
-				let master   = jd.job.Master(entity);
-				if(master) levelText += "/*";
-				else       levelText += "/" + jd.level;
+				const master   = jd.job.Master(entity);
+				if (master) { levelText += "/*"; } else {       levelText += "/" + jd.level; }
 			}
 		}
 
-		Gui.PrintGlow(set, obj.lvl, obj.xoffset-3, obj.yoffset+96, levelText, fonts.Kimberley, 14, "start", {opacity: 1, width: 5});
+		Gui.PrintGlow(set, obj.lvl, obj.xoffset - 3, obj.yoffset + 96, levelText, fonts.Kimberley, 14, "start", {opacity: 1, width: 5});
 
 		obj.lvl.text.attr({fill: entity.pendingStatPoints > 0 ? "green" : "white"});
 
 		entity.combatStatus.Render(obj.status);
 	}
 
-	static RenderLocation(name : any) {
+	public static RenderLocation(name: any) {
 		let nameStr;
-		if(_.isFunction(name))
+		if (_.isFunction(name)) {
 			nameStr = name();
-		else if(name)
+		} else if (name) {
 			nameStr = name;
-		else
+ } else {
 			nameStr = "???";
+ }
 
 		Gui.PrintGlow(overlay, location, 300, 30, nameStr, fonts.Kimberley, 30, "start", {opacity: 1});
 	}
 
-	static RenderTime() {
-		let coinStr = GAME().party.coin;
+	public static RenderTime() {
+		const coinStr = GAME().party.coin;
 		Gui.PrintGlow(overlay, coin, 250, 690, coinStr, fonts.Kimberley, 20, "end", {opacity: 1});
 
-		let dateStr = WorldTime().DateString();
+		const dateStr = WorldTime().DateString();
 		Gui.PrintGlow(overlay, date, 1245, 15, dateStr, fonts.Kimberley, 20, "end", {opacity: 1});
 
-		let timeStr = WorldTime().TimeString();
+		const timeStr = WorldTime().TimeString();
 		Gui.PrintGlow(overlay, time, 1245, 45, timeStr, fonts.Kimberley, 20, "end", {opacity: 1});
 
-		let hour   = WorldTime().ToHours();
-		let minute = WorldTime().ToMinutes();
+		const hour   = WorldTime().ToHours();
+		const minute = WorldTime().ToMinutes();
 
-		if(clock.hourNum) {
-			clock.hour.stop().animate({transform:"r"+(hour/12*360)+","+clock.x+","+clock.y}, 2000, "<>");
-			clock.minute.stop().animate({transform:"r"+(minute/60*360)+","+clock.x+","+clock.y}, 2000, "<>");
-		}
-		else {
-			clock.hour.transform("r"+(hour/12*360)+","+clock.x+","+clock.y);
-			clock.minute.transform("r"+(minute/60*360)+","+clock.x+","+clock.y);
+		if (clock.hourNum) {
+			clock.hour.stop().animate({transform: "r" + (hour / 12 * 360) + "," + clock.x + "," + clock.y}, 2000, "<>");
+			clock.minute.stop().animate({transform: "r" + (minute / 60 * 360) + "," + clock.x + "," + clock.y}, 2000, "<>");
+		} else {
+			clock.hour.transform("r" + (hour / 12 * 360) + "," + clock.x + "," + clock.y);
+			clock.minute.transform("r" + (minute / 60 * 360) + "," + clock.x + "," + clock.y);
 		}
 		clock.hourNum   = hour;
 		clock.minuteNum = minute;
 	}
 
-	static SetGameState(state : GameState) {
-		switch(gameState) { // TODO?
+	public static SetGameState(state: GameState) {
+		switch (gameState) { // TODO?
 			case GameState.Game:
-				for(let i = 0; i < Input.menuButtons.length; i++)
+				for (let i = 0; i < Input.menuButtons.length; i++) {
 					Input.menuButtons[i].SetVisibility();
-				for(let i = 0; i < Input.exploreButtons.length; i++)
+				}
+				for (let i = 0; i < Input.exploreButtons.length; i++) {
 					Input.exploreButtons[i].SetVisibility();
+				}
 				break;
 			case GameState.Event:
 			case GameState.Credits:
@@ -761,16 +775,18 @@ export class Gui {
 			case GameState.Cavalcade:
 				Input.menuButtonSet.hide();
 				Input.exploreButtonSet.hide();
-			break;
+			 break;
 		}
-		for(let i = 0; i < Input.buttons.length; i++)
+		for (let i = 0; i < Input.buttons.length; i++) {
 			Input.buttons[i].SetVisibility();
-		for(let i = 0; i < Input.navButtons.length; i++)
+		}
+		for (let i = 0; i < Input.navButtons.length; i++) {
 			Input.navButtons[i].SetVisibility();
+		}
 	}
 
 	// Animation loop Rendering
-	static Render() {
+	public static Render() {
 		cavalcadeSet.hide();
 
 		switch (gameState) {
@@ -781,17 +797,18 @@ export class Gui {
 				break;
 
 			case GameState.Combat:
-				if(EnemyParty())
+				if (EnemyParty()) {
 					Gui.RenderParty(EnemyParty(), enemy, enemyObj);
-				else
+				} else {
 					enemy.hide();
+				}
 
 			case GameState.Game:
 			case GameState.Event:
-				if(gameState == GameState.Game) {
+				if (gameState == GameState.Game) {
 					Input.RenderExploreButtonGlow();
 				}
-				if(gameState == GameState.Game || gameState == GameState.Event) {
+				if (gameState == GameState.Game || gameState == GameState.Event) {
 					enemy.hide();
 				}
 				// TODO: !GetRenderPictures()
@@ -806,52 +823,54 @@ export class Gui {
 			case GameState.Cavalcade:
 				party.hide();
 				enemy.hide();
-				let cavalcade = GetCavalcade();
+				const cavalcade = GetCavalcade();
 
-				for(let i=0,j=cavalcade.players.length; i<j; i++) {
-					let p    = cavalcade.players[i];
-					let obj  = cavalcadeObj.p[i];
+				for (let i = 0, j = cavalcade.players.length; i < j; i++) {
+					const p    = cavalcade.players[i];
+					const obj  = cavalcadeObj.p[i];
 					/*
 					if(p.avatar.combat) {
 						obj.portrait.attr({src: p.avatar.combat, opacity: p.folded ? .5 : 1}).show();
 					}
 					*/
-					Gui.PrintGlow(cavalcadeSet, obj.name, obj.xoffset-5, obj.yoffset, p.name, fonts.Kimberley, 30, "start", {opacity: 1});
+					Gui.PrintGlow(cavalcadeSet, obj.name, obj.xoffset - 5, obj.yoffset, p.name, fonts.Kimberley, 30, "start", {opacity: 1});
 
-					Gui.PrintGlow(cavalcadeSet, obj.coin, obj.xoffset+215, obj.yoffset,
+					Gui.PrintGlow(cavalcadeSet, obj.coin, obj.xoffset + 215, obj.yoffset,
 						p.out ? "Out" : p.purse.coin,
 						fonts.Kimberley, 30, "end", {opacity: 1});
 
-					let cards = obj.cards;
+					const cards = obj.cards;
 
-					for(let k=0; k < 2; k++) {
+					for (let k = 0; k < 2; k++) {
 						// Show cards when game is complete
 						let showCard = cavalcade.round > 4;
 						// don't show folded opponents
-						if(p.folded) showCard = false;
+						if (p.folded) { showCard = false; }
 						showCard = showCard || (p == GAME().player); // always show own
 
-						if(showCard && k < p.hand.length)
+						if (showCard && k < p.hand.length) {
 							cards[k].attr({src: p.hand[k].Img}).show();
-						else
+						} else {
 							cards[k].attr({src: Images.card_back}).show();
+						}
 					}
 				}
 
-				for(let i=0,j=cavalcade.house.length; i<j; i++) {
-					let card = cavalcadeObj.house[i];
+				for (let i = 0, j = cavalcade.house.length; i < j; i++) {
+					const card = cavalcadeObj.house[i];
 					// Show cards when game is complete
-					let showCard = cavalcade.round > i + 1;
-					if(showCard)
+					const showCard = cavalcade.round > i + 1;
+					if (showCard) {
 						card.attr({src: cavalcade.house[i].Img}).show();
-					else
+					} else {
 						card.attr({src: Images.card_back}).show();
+					}
 				}
 
-				let potStr   = cavalcade.pot;
+				const potStr   = cavalcade.pot;
 				let roundStr = cavalcade.round - 1;
-				if(roundStr < 1) roundStr = 1;
-				if(roundStr > 3) roundStr = 3;
+				if (roundStr < 1) { roundStr = 1; }
+				if (roundStr > 3) { roundStr = 3; }
 				Gui.PrintGlow(cavalcadeSet, cavalcadeObj.round, 850, 620, roundStr, fonts.Kimberley, 20, "end", {opacity: 1});
 				Gui.PrintGlow(cavalcadeSet, cavalcadeObj.pot,   850, 670, potStr,   fonts.Kimberley, 20, "end", {opacity: 1});
 				Gui.PrintShow(cavalcadeObj.roundFixed);
@@ -865,10 +884,10 @@ export class Gui {
 		}
 	}
 
-	static RenderStatsScreen(context : any) { // TODO never used anywhere
+	public static RenderStatsScreen(context: any) { // TODO never used anywhere
 		// Set up context for drawing text
 		context.fillStyle = "black";
-		context.textAlign = 'start';
+		context.textAlign = "start";
 		context.font = DEFAULT_FONT;
 
 		context.save();
@@ -889,10 +908,10 @@ export class Gui {
 		context.fillText("Sex level: ", 0, 380);
 		context.fillText("Sexp: ", 0, 410);
 
-		let player = GAME().player;
+		const player = GAME().player;
 
 		context.translate(300, 0);
-		context.textAlign = 'right';
+		context.textAlign = "right";
 		context.fillText(Math.floor(player.strength.Get()), 0, 0);
 		context.fillText(Math.floor(player.stamina.Get()), 0, 30);
 		context.fillText(Math.floor(player.dexterity.Get()), 0, 60);
@@ -908,16 +927,16 @@ export class Gui {
 		context.fillText(Math.floor(player.sexlevel), 0, 380);
 		context.fillText(Math.floor(player.sexperience), 0, 410);
 
-		context.textAlign = 'start';
+		context.textAlign = "start";
 
 		context.restore();
 	}
 
-	static SavePromptText() {
+	public static SavePromptText() {
 		Text.Clear();
 		Text.Add("Fall of Eden saves using JavaScript localStorage (also known as Web Storage). Exactly how and where this will put your save is up to browser implementation, but the standard ensures at least 5MB of storage space, more than enough for 12 full save slots.");
 		Text.NL();
-		Text.Add("IMPORTANT: Saves are kept by your browser, for the specific domain you are playing in atm. If you clear browsing history or the domain changes, you may lose saves. See these saves as temporary, ALWAYS use Save to File to backup if you want to ensure not losing your progress!", null, 'bold');
+		Text.Add("IMPORTANT: Saves are kept by your browser, for the specific domain you are playing in atm. If you clear browsing history or the domain changes, you may lose saves. See these saves as temporary, ALWAYS use Save to File to backup if you want to ensure not losing your progress!", null, "bold");
 		Text.NL();
 		Text.Add("You can only save at 'safe' locations in the world (the same places you can sleep), but you can load/start a new game from anywhere.");
 		Text.NL();
@@ -925,26 +944,27 @@ export class Gui {
 		Text.Flush();
 	}
 
-	static SetLastSubmenu(menu : any) {
+	public static SetLastSubmenu(menu: any) {
 		LastSubmenu = menu;
 	}
-	static GetLastSubmenu() {
+	public static GetLastSubmenu() {
 		return LastSubmenu;
 	}
 
-	static PrintDefaultOptions(preventClear? : boolean) {
-		let e = Gui.Callstack.pop();
-		if(e) {
+	public static PrintDefaultOptions(preventClear?: boolean) {
+		const e = Gui.Callstack.pop();
+		if (e) {
 			e();
 			return;
 		}
 
 		Gui.ClearButtons();
 
-		if(!preventClear)
+		if (!preventClear) {
 			Text.Clear();
+		}
 
-		if(GAME().party.location == null) {
+		if (GAME().party.location == null) {
 			Text.Add("ERROR, LOCATION IS NULL");
 			Text.Flush();
 			return;
@@ -952,11 +972,14 @@ export class Gui {
 
 		SetGameState(GameState.Game, Gui);
 
-		if(LastSubmenu)
+		if (LastSubmenu) {
 			LastSubmenu.func(preventClear);
-		else
+		} else {
 			NAV().Explore();
+		}
 	}
+
+	constructor() {}
 }
 
 // Set window resize

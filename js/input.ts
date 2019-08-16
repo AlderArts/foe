@@ -1,9 +1,9 @@
-import { Button } from './button';
-import { Images } from './assets';
-import { gameState, GameState } from './gamestate';
+import { Images } from "./assets";
+import { Button } from "./button";
+import { gameState, GameState } from "./gamestate";
 
 // TODO this is actually wrong
-let Keys = {
+const Keys = {
 	KEY_CONSOLE : 0,
 
 	KEY_1 : 49,
@@ -43,9 +43,9 @@ let Keys = {
 	KEY_B : 66,
 	KEY_N : 78,
 	KEY_M : 77,
-}
+};
 
-let KeyToText : any = {};
+const KeyToText: any = {};
 KeyToText[Keys.KEY_CONSOLE] = "§";
 
 KeyToText[Keys.KEY_1] = "1";
@@ -87,26 +87,24 @@ KeyToText[Keys.KEY_N] = "N";
 KeyToText[Keys.KEY_M] = "M";
 
 // Internal logical representations
-let LEFT_ARROW  = 0;
-let RIGHT_ARROW = 1;
-let UP_ARROW    = 2;
-let DOWN_ARROW  = 3;
+const LEFT_ARROW  = 0;
+const RIGHT_ARROW = 1;
+const UP_ARROW    = 2;
+const DOWN_ARROW  = 3;
 
-let Gui : any;
-let buttonSet        : RaphaelSet;
-let navButtonSet     : RaphaelSet;
-let exploreButtonSet : RaphaelSet;
-let menuButtonSet    : RaphaelSet;
-let buttons        : Button[] = [];
-let navButtons     : Button[] = [];
-let exploreButtons : Button[] = [];
-let menuButtons    : Button[] = [];
+let Gui: any;
+let buttonSet: RaphaelSet;
+let navButtonSet: RaphaelSet;
+let exploreButtonSet: RaphaelSet;
+let menuButtonSet: RaphaelSet;
+const buttons: Button[] = [];
+const navButtons: Button[] = [];
+const exploreButtons: Button[] = [];
+const menuButtons: Button[] = [];
 
-let keyDownValid   : boolean;
+let keyDownValid: boolean;
 
 export class Input {
-
-	constructor() {}
 
 	static get keyDownValid() { return keyDownValid; }
 	static set keyDownValid(valid) { keyDownValid = valid; }
@@ -119,9 +117,10 @@ export class Input {
 	static get exploreButtonSet() { return exploreButtonSet; }
 	static get menuButtonSet() { return menuButtonSet; }
 
-	static Init(gui : any) {
+
+	public static Init(gui: any) {
 		Gui = gui;
-		//let canvas = document.getElementById("canvas");
+		// let canvas = document.getElementById("canvas");
 
 		window.onkeydown   = Input.Keydown;
 		window.onkeyup     = Input.Keyup;
@@ -131,7 +130,7 @@ export class Input {
 		canvas.onmousemove = Mousemove;
 		*/
 
-		keyDownValid     = true
+		keyDownValid     = true;
 
 		buttonSet        = Gui.canvas.set();
 		navButtonSet     = Gui.canvas.set();
@@ -142,25 +141,25 @@ export class Input {
 
 		Input.InitMenuButtons();
 	}
-	
-	// Init functions for the button sets
-	static InitButtons() {
-		let offset = {x: 270, y:600};
 
-		let button : Button;
-		for(let y = 0; y < 3; y++) {
-			for(let x = 0; x < 4; x++) {
-				button = new Button(Gui, {x : offset.x + 162*x, y : offset.y + 40*y, w : 155, h : 35}, "Button" + (x + y*5), null, true, Images.imgButtonEnabled, Images.imgButtonDisabled);
+	// Init functions for the button sets
+	public static InitButtons() {
+		const offset = {x: 270, y: 600};
+
+		let button: Button;
+		for (let y = 0; y < 3; y++) {
+			for (let x = 0; x < 4; x++) {
+				button = new Button(Gui, {x : offset.x + 162 * x, y : offset.y + 40 * y, w : 155, h : 35}, "Button" + (x + y * 5), null, true, Images.imgButtonEnabled, Images.imgButtonDisabled);
 				buttons.push(button);
 				buttonSet.push(button.set);
 			}
 
-			button = new Button(Gui, {x : offset.x + 162*4, y : offset.y + 40*y, w : 75, h : 35}, "Nav" + y, null, true, Images.imgNavButtonEnabled, Images.imgNavButtonDisabled);
+			button = new Button(Gui, {x : offset.x + 162 * 4, y : offset.y + 40 * y, w : 75, h : 35}, "Nav" + y, null, true, Images.imgNavButtonEnabled, Images.imgNavButtonDisabled);
 			navButtons.push(button);
 			navButtonSet.push(button.set);
 		}
-		for(let y = 0; y < 8; y++) {
-			button = new Button(Gui, {x : 1100, y : 375 + 40 * y, w : 155, h : 35}, "Exp"+y, null, true, Images.imgButtonEnabled, Images.imgButtonDisabled, true);
+		for (let y = 0; y < 8; y++) {
+			button = new Button(Gui, {x : 1100, y : 375 + 40 * y, w : 155, h : 35}, "Exp" + y, null, true, Images.imgButtonEnabled, Images.imgButtonDisabled, true);
 			exploreButtons.push(button);
 			exploreButtonSet.push(button.set);
 		}
@@ -175,16 +174,15 @@ export class Input {
 		exploreButtonSet.push(button.set);
 	}
 
-	static InitMenuButtons() {
-		let offset = {x: 15, y:620};
+	public static InitMenuButtons() {
+		const offset = {x: 15, y: 620};
 
 		// TOP, Data menu
-		let button = new Button(Gui, {x : 10, y : 10, w : 155, h : 35}, "DATA", null, true, Images.imgButtonEnabled, Images.imgButtonDisabled);
+		const button = new Button(Gui, {x : 10, y : 10, w : 155, h : 35}, "DATA", null, true, Images.imgButtonEnabled, Images.imgButtonDisabled);
 		menuButtons.push(button);
 		menuButtonSet.push(button.set);
-	};
-
-	static RenderExploreButtonGlow() {
+	}
+	public static RenderExploreButtonGlow() {
 		/*
 		//TODO keybind tooltip
 		let keybinding = KeyToText[this.key];
@@ -198,40 +196,47 @@ export class Input {
 		}
 		*/
 		// Add a glow effect if this button is the currently choosen exploration option
-		for(let button of exploreButtons) {
-			if(!button.image.is_visible()) continue;
-			if(!button.glow) continue;
-			if(button == Gui.GetLastSubmenu())
+		for (const button of exploreButtons) {
+			if (!button.image.is_visible()) { continue; }
+			if (!button.glow) { continue; }
+			if (button == Gui.GetLastSubmenu()) {
 				button.glow.show();
-			else
+			}
+			else {
 				button.glow.hide();
+			}
 		}
 	}
-	
-	// Catches keypresses
-	static Keydown(event : any) {
-		// Used for text input, when we don't want to have shortcut keys active
-		if(!Input.keyDownValid)
-			return true;
 
-		//event.preventDefault();
+	// Catches keypresses
+	public static Keydown(event: any) {
+		// Used for text input, when we don't want to have shortcut keys active
+		if (!Input.keyDownValid) {
+			return true;
+		}
+
+		// event.preventDefault();
 
 		// TODO: Prioritze layers
-		switch(gameState) {
+		switch (gameState) {
 			case GameState.Game:
-				for(let button of menuButtons)
+				for (const button of menuButtons) {
 					button.HandleKeydown(event.keyCode);
-				for(let button of exploreButtons)
+				}
+				for (const button of exploreButtons) {
 					button.HandleKeydown(event.keyCode);
+				}
 			case GameState.Event:
 			case GameState.Credits:
 			case GameState.Combat:
 			case GameState.Cavalcade:
-				for(let button of buttons)
+				for (const button of buttons) {
 					button.HandleKeydown(event.keyCode);
-				for(let button of navButtons)
+				}
+				for (const button of navButtons) {
 					button.HandleKeydown(event.keyCode);
-			break;
+				}
+			 break;
 		}
 
 		/* TODO Not really used atm
@@ -245,7 +250,7 @@ export class Input {
 	}
 
 	// Catches key releases
-	static Keyup(event : any) {
+	public static Keyup(event: any) {
 		/* TODO Not really used atm
 		switch(event.keyCode) {
 			case Keys.KEY_A: Input.keyinput[LEFT_ARROW]  = false; break;
@@ -256,6 +261,8 @@ export class Input {
 		return true;
 	}
 
-};
+	constructor() {}
+
+}
 
 export { Keys };

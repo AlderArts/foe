@@ -1,46 +1,46 @@
 import { Images } from "./assets";
-import { Text } from "./text";
-import { Gui } from "./gui";
-import { Job } from "./job";
-import { ItemSubtype, Item, ItemType } from "./item";
 import { GAME } from "./GAME";
+import { Gui } from "./gui";
+import { Item, ItemSubtype, ItemType } from "./item";
+import { Job } from "./job";
 import { Stat } from "./stat";
+import { Text } from "./text";
 
-let EntityMenu = {
-	InteractDefault : function(options : any[], switchSpot : boolean, enableEquip : any, enableStats : any, enableJob : any, enableSwitch : boolean) {
-		let that = this;
+const EntityMenu = {
+	InteractDefault(options: any[], switchSpot: boolean, enableEquip: any, enableStats: any, enableJob: any, enableSwitch: boolean) {
+		const that = this;
 		options.push({ nameStr: "Equip",
-			func : function() {
+			func() {
 				that.EquipPrompt(that.Interact);
-			}, enabled : enableEquip
+			}, enabled : enableEquip,
 		});
-		options.push({ nameStr: that.pendingStatPoints != 0 ? "Level up" : "Stats",
-			func : function() {
+		options.push({ nameStr: that.pendingStatPoints !== 0 ? "Level up" : "Stats",
+			func() {
 				that.LevelUpPrompt(that.Interact);
 			}, enabled : enableStats,
-			image : that.pendingStatPoints != 0 ? Images.imgButtonEnabled2 : null
+			image : that.pendingStatPoints !== 0 ? Images.imgButtonEnabled2 : null,
 		});
 		options.push({ nameStr: "Job",
-			func : function() {
+			func() {
 				that.JobPrompt(that.Interact);
-			}, enabled : enableJob
+			}, enabled : enableJob,
 		});
-		if(switchSpot) {
-			let party = GAME().party;
+		if (switchSpot) {
+			const party = GAME().party;
 			options.push({ nameStr: party.InParty(that) ? "Switch out" : "Switch in",
-				func : function() {
+				func() {
 					party.SwitchPrompt(that);
 				}, enabled : enableSwitch,
-				tooltip: party.InParty(that) ? "Send to reserve." : "Switch into active party."
+				tooltip: party.InParty(that) ? "Send to reserve." : "Switch into active party.",
 			});
 		}
 	},
 
-	LevelUpPrompt : function(backFunc : any) {
+	LevelUpPrompt(backFunc: any) {
 		Text.Clear();
 
 		Text.Add("[name] has [points] stat points pending.",
-			{name: this.name, points: this.pendingStatPoints != 0 ? Text.Bold(this.pendingStatPoints) : "no"});
+			{name: this.name, points: this.pendingStatPoints !== 0 ? Text.Bold(this.pendingStatPoints) : "no"});
 
 		Text.NL();
 
@@ -51,28 +51,29 @@ let EntityMenu = {
 		Text.Add("<tr><td><b>Exp:</b></td><td>"       + Math.floor(this.experience) + "/" + Math.floor(this.expToLevel) + "</td></tr>");
 		Text.Add("<tr><td><b>Sex level:</b></td><td>" + Math.floor(this.sexlevel) + "</td></tr>");
 		Text.Add("<tr><td><b>S.Exp:</b></td><td>"     + Math.floor(this.sexperience) + "/" + Math.floor(this.sexpToLevel) + "</td></tr>");
-		if(this.currentJob) {
-			let jd  = this.jobs[this.currentJob.name];
-			if(jd) {
-				let parse : any = {
+		if (this.currentJob) {
+			const jd  = this.jobs[this.currentJob.name];
+			if (jd) {
+				const parse: any = {
 					job        : jd.job.Short(this),
 					lvl        : jd.level,
-					maxlvl     : jd.job.levels.length + 1
+					maxlvl     : jd.job.levels.length + 1,
 				};
 
 				// Check for maxed out job
-				let master   = jd.job.Master(this);
+				const master   = jd.job.Master(this);
 				let toLevel;
-				if(!master) {
-					let newLevel = jd.job.levels[jd.level-1];
+				if (!master) {
+					const newLevel = jd.job.levels[jd.level - 1];
 					toLevel      = newLevel.expToLevel * jd.mult;
 				}
 
 				Text.Add("<tr><td><b>Job:</b></td><td>");
-				if(master)
+				if (master) {
 					Text.Add("<b>(MASTER) [job]</b></td></tr>", parse);
-				else
+				} else {
 					Text.Add("[job] level [lvl]/[maxlvl] (exp " + Math.floor(jd.experience) + "/" + Math.floor(toLevel) + ")</td></tr>", parse);
+				}
 			}
 		}
 		Text.Add("<tr><td><b>HP:</b></td><td>"           + Math.floor(this.HP())   + " (Rank " + this.maxHp.GrowthRank() + ")</td></tr>");
@@ -89,23 +90,21 @@ let EntityMenu = {
 		Text.Add("</table>");
 		Text.NL();
 
-		if(this.currentJob) {
-			Text.Add("Job abilities:<br>", null, 'bold');
-			let abSet = this.currentJob.abilities;
+		if (this.currentJob) {
+			Text.Add("Job abilities:<br>", null, "bold");
+			const abSet = this.currentJob.abilities;
 
-			for(let i = 0; i < abSet.AbilitySet.length; i++) {
-				let ability = abSet.AbilitySet[i];
+			for (const ability of abSet.AbilitySet) {
 				Text.Add("[ability] ([cost]): [desc]<br>",
 					{ability: ability.name, cost: ability.CostStr(), desc: ability.Short()});
 			}
 			Text.Add("<br>");
 		}
-		Text.Add("Known abilities:<br>", null, 'bold');
-		for(let set in this.abilities) {
-			let abSet = this.abilities[set];
+		Text.Add("Known abilities:<br>", null, "bold");
+		for (const set of this.abilities) {
+			const abSet = this.abilities[set];
 
-			for(let i = 0; i < abSet.AbilitySet.length; i++) {
-				let ability = abSet.AbilitySet[i];
+			for (const ability of abSet.AbilitySet) {
 				Text.Add("[ability] ([cost]): [desc]<br>",
 					{ability: ability.name, cost: ability.CostStr(), desc: ability.Short()});
 			}
@@ -113,102 +112,102 @@ let EntityMenu = {
 
 		Text.Flush();
 
-		let that = this;
+		const that = this;
 
-		if(this.pendingStatPoints <= 0) {
+		if (this.pendingStatPoints <= 0) {
 			Gui.NextPrompt(backFunc);
 			return;
 		}
 
-		let options = new Array();
+		const options = new Array();
 		options.push({ nameStr: "Strength",
-			func : function() {
+			func() {
 				that.strength.growth += Stat.growthPerPoint;
 				that.pendingStatPoints--;
 				that.LevelUpPrompt(backFunc);
 			}, enabled : true,
-			tooltip : "A person with high <b>strength</b> can deal a massive amount of physical damage."
+			tooltip : "A person with high <b>strength</b> can deal a massive amount of physical damage.",
 		});
 		options.push({ nameStr: "Stamina",
-			func : function() {
+			func() {
 				that.stamina.growth += Stat.growthPerPoint;
 				that.pendingStatPoints--;
 				that.LevelUpPrompt(backFunc);
 			}, enabled : true,
-			tooltip : "A person with high <b>stamina</b> can take a large amount of punishment. It's most effective against physical attacks, but affects other types of defence as well."
+			tooltip : "A person with high <b>stamina</b> can take a large amount of punishment. It's most effective against physical attacks, but affects other types of defence as well.",
 		});
 		options.push({ nameStr: "Dexterity",
-			func : function() {
+			func() {
 				that.dexterity.growth += Stat.growthPerPoint;
 				that.pendingStatPoints--;
 				that.LevelUpPrompt(backFunc);
 			}, enabled : true,
-			tooltip : "A person with high <b>dexterity</b> can deftly evade enemy attacks, and is better at landing their blows. The swifter a person is, the quicker they are to act."
+			tooltip : "A person with high <b>dexterity</b> can deftly evade enemy attacks, and is better at landing their blows. The swifter a person is, the quicker they are to act.",
 		});
 		options.push({ nameStr: "Intelligence",
-			func : function() {
+			func() {
 				that.intelligence.growth += Stat.growthPerPoint;
 				that.pendingStatPoints--;
 				that.LevelUpPrompt(backFunc);
 			}, enabled : true,
-			tooltip : "Someone with high <b>intelligence</b> is very sharp, and can deal a massive amount of damage with spells. They are also able to act more quickly, as they don't have to spend as much time thinking up their battle plan."
+			tooltip : "Someone with high <b>intelligence</b> is very sharp, and can deal a massive amount of damage with spells. They are also able to act more quickly, as they don't have to spend as much time thinking up their battle plan.",
 		});
 		options.push({ nameStr: "Spirit",
-			func : function() {
+			func() {
 				that.spirit.growth += Stat.growthPerPoint;
 				that.pendingStatPoints--;
 				that.LevelUpPrompt(backFunc);
 			}, enabled : true,
-			tooltip : "A person with high <b>spirit</b> is very stoic - a pillar of willpower. They can take large amounts of magical damage before they fall."
+			tooltip : "A person with high <b>spirit</b> is very stoic - a pillar of willpower. They can take large amounts of magical damage before they fall.",
 		});
 		options.push({ nameStr: "Libido",
-			func : function() {
+			func() {
 				that.libido.growth += Stat.growthPerPoint;
 				that.pendingStatPoints--;
 				that.LevelUpPrompt(backFunc);
 			}, enabled : true,
-			tooltip : "Someone with high <b>libido</b> is a highly experienced in the sexual arts, and can deal high damage with lust attacks. However, it also makes their lust rise faster."
+			tooltip : "Someone with high <b>libido</b> is a highly experienced in the sexual arts, and can deal high damage with lust attacks. However, it also makes their lust rise faster.",
 		});
 		options.push({ nameStr: "Charisma",
-			func : function() {
+			func() {
 				that.charisma.growth += Stat.growthPerPoint;
 				that.pendingStatPoints--;
 				that.LevelUpPrompt(backFunc);
 			}, enabled : true,
-			tooltip : "Someone with high <b>charisma</b> has a way with other people, affecting many parts of battle. The most apparent effect is that their lust attacks are more appealing, but it's also useful in other situations."
+			tooltip : "Someone with high <b>charisma</b> has a way with other people, affecting many parts of battle. The most apparent effect is that their lust attacks are more appealing, but it's also useful in other situations.",
 		});
 		Gui.SetButtonsFromList(options, true, backFunc);
 	},
 
-	EquipPrompt : function(backfunc : any) {
-		let party = GAME().party;
-		let that = this;
-		let parse : any = {
+	EquipPrompt(backfunc: any) {
+		const party = GAME().party;
+		const that = this;
+		const parse: any = {
 			name    : that.NameDesc(),
 			isAre   : that.is(),
-			HeShe   : function() { return that.HeShe(); },
-			heshe   : function() { return that.heshe(); },
-			HisHer  : function() { return that.HisHer(); },
-			hisher  : function() { return that.hisher(); },
-			himher  : function() { return that.himher(); },
-			hishers : function() { return that.hishers(); },
-			es      : function() { return that.plural() ? "" : "es"; }
+			HeShe() { return that.HeShe(); },
+			heshe() { return that.heshe(); },
+			HisHer() { return that.HisHer(); },
+			hisher() { return that.hisher(); },
+			himher() { return that.himher(); },
+			hishers() { return that.hishers(); },
+			es() { return that.plural() ? "" : "es"; },
 		};
 
-		let equipFunc = function() {
+		const equipFunc = () => {
 			Text.Clear();
 
-			let slotFunc = function(slotname : string, slot : Item) {
-				//Text.AddDiv("<hr>");
+			const slotFunc = (slotname: string, slot: Item) => {
+				// Text.AddDiv("<hr>");
 				Text.AddDiv(slotname, null, "itemTypeHeader");
-				//Text.AddDiv("<hr>");
-				if(slot) {
+				// Text.AddDiv("<hr>");
+				if (slot) {
 					Text.AddDiv(slot.name, null, "itemSubtypeHeader");
 					Text.AddDiv(slot.Short(), null, "itemName");
-				}
-				else
+				} else {
 					Text.AddDiv("None", null, "itemSubtypeHeader");
-			}
+				}
+			};
 
 			Text.Add("[name] [isAre] currently equipped with:", parse);
 			Text.NL();
@@ -220,20 +219,21 @@ let EntityMenu = {
 			slotFunc("Toy", that.strapOn);
 			Text.Flush();
 
-			let slotFunc2 = function(slotname : string, slot? : Item) {
+			const slotFunc2 = (slotname: string, slot?: Item) => {
 				Text.AddDiv(slotname, null, "itemTypeHeader");
 				Text.AddDiv("<hr>");
 				Text.Add("[name] [isAre] currently equipped with:", parse);
 				Text.AddDiv("<hr>");
-				if(slot)
+				if (slot) {
 					slot.ShowEquipStats();
-				else
+				} else {
 					Text.AddDiv("None", null, "itemSubtypeHeader");
-			}
+				}
+			};
 
-			let options = new Array();
+			const options = new Array();
 			options.push({ nameStr : "Weapon",
-				func : function() {
+				func() {
 					Text.Clear();
 					slotFunc2("Weapon", that.weaponSlot);
 					Text.AddDiv("<hr>");
@@ -242,10 +242,10 @@ let EntityMenu = {
 					Text.Flush();
 					party.inventory.ShowEquippable(that, ItemType.Weapon, equipFunc);
 				}, enabled : true,
-				tooltip : ""
+				tooltip : "",
 			});
 			options.push({ nameStr : "Top",
-				func : function() {
+				func() {
 					Text.Clear();
 					slotFunc2("Top armor", that.topArmorSlot);
 					Text.AddDiv("<hr>");
@@ -254,11 +254,11 @@ let EntityMenu = {
 					Text.Flush();
 					party.inventory.ShowEquippable(that, ItemSubtype.TopArmor, equipFunc);
 				}, enabled : true,
-				tooltip : ""
+				tooltip : "",
 			});
-			let enabled = that.topArmorSlot ? (that.topArmorSlot.subtype != ItemSubtype.FullArmor) : true;
+			const enabled = that.topArmorSlot ? (that.topArmorSlot.subtype !== ItemSubtype.FullArmor) : true;
 			options.push({ nameStr : "Bottom",
-				func : function() {
+				func() {
 					Text.Clear();
 					slotFunc2("Bottom armor", that.botArmorSlot);
 					Text.AddDiv("<hr>");
@@ -266,11 +266,11 @@ let EntityMenu = {
 					Text.AddDiv("<hr>");
 					Text.Flush();
 					party.inventory.ShowEquippable(that, ItemSubtype.BotArmor, equipFunc);
-				}, enabled : enabled,
-				tooltip : ""
+				}, enabled,
+				tooltip : "",
 			});
 			options.push({ nameStr : "Acc.1",
-				func : function() {
+				func() {
 					Text.Clear();
 					slotFunc2("Accessory", that.acc1Slot);
 					Text.AddDiv("<hr>");
@@ -279,10 +279,10 @@ let EntityMenu = {
 					Text.Flush();
 					party.inventory.ShowEquippable(that, ItemSubtype.Acc1, equipFunc);
 				}, enabled : true,
-				tooltip : ""
+				tooltip : "",
 			});
 			options.push({ nameStr : "Acc.2",
-				func : function() {
+				func() {
 					Text.Clear();
 					slotFunc2("Accessory", that.acc2Slot);
 					Text.AddDiv("<hr>");
@@ -291,10 +291,10 @@ let EntityMenu = {
 					Text.Flush();
 					party.inventory.ShowEquippable(that, ItemSubtype.Acc2, equipFunc);
 				}, enabled : true,
-				tooltip : ""
+				tooltip : "",
 			});
 			options.push({ nameStr : "Toy",
-				func : function() {
+				func() {
 					Text.Clear();
 					slotFunc2("Toy", that.strapOn);
 					Text.AddDiv("<hr>");
@@ -303,99 +303,98 @@ let EntityMenu = {
 					Text.Flush();
 					party.inventory.ShowEquippable(that, ItemSubtype.StrapOn, equipFunc);
 				}, enabled : true,
-				tooltip : ""
+				tooltip : "",
 			});
 			Gui.SetButtonsFromList(options, true, backfunc);
-		}
+		};
 		equipFunc();
 	},
 
-	JobPrompt : function(backfunc : any) {
-		let that = this;
+	JobPrompt(backfunc: any) {
+		const that = this;
 		Text.Clear();
 		// Fallback for bugs
-		if(this.currentJob == null) {
+		if (this.currentJob === null) {
 			Text.Add("ERROR, NO ACTIVE JOB");
 			Text.Flush();
 			Gui.NextPrompt(backfunc);
 			return;
 		}
 
-		let jd  = this.jobs[this.currentJob.name];
-		if(jd == null) {
+		const jd  = this.jobs[this.currentJob.name];
+		if (jd === null) {
 			Text.Add("ERROR, NO JOB DESCRIPTOR");
 			Text.Flush();
 			Gui.NextPrompt(backfunc);
 			return;
 		}
 
-		let parse : any = {
+		const parse: any = {
 			name       : this.NameDesc(),
 			has        : this.has(),
 			Possessive : this.Possessive(),
 			job        : jd.job.Short(this),
 			lvl        : jd.level,
-			maxlvl     : jd.job.levels.length + 1
+			maxlvl     : jd.job.levels.length + 1,
 		};
 
 		// Check for maxed out job
-		let master   = jd.job.Master(this);
+		const master   = jd.job.Master(this);
 		let toLevel;
-		if(!master) {
-			let newLevel = jd.job.levels[jd.level-1];
+		if (!master) {
+			const newLevel = jd.job.levels[jd.level - 1];
 			toLevel      = newLevel.expToLevel * jd.mult;
 		}
 
 		Text.Add("[Possessive] current job is a level [lvl]/[maxlvl] <b>[job]</b>.", parse);
 		Text.NL();
-		if(jd.job.Long) {
+		if (jd.job.Long) {
 			Text.Add(jd.job.Long(this));
 			Text.NL();
 		}
-		if(master)
+		if (master) {
 			Text.Add("[name] [has] mastered this job.", parse);
-		else
+		} else {
 			Text.Add("Exp: " + Math.floor(jd.experience) + "/" + Math.floor(toLevel));
+		}
 		Text.NL();
 		Text.Add("Available jobs:<br>");
 
-		let options = [];
+		const options = [];
 
-		for(let jobName in this.jobs) {
-			let jd = this.jobs[jobName];
+		for (const jobName of this.jobs) {
+			const jd = this.jobs[jobName];
 
-			if(!jd.job.Unlocked(this)) continue;
+			if (!jd.job.Unlocked(this)) { continue; }
 
 			parse.job = jd.job.Short(this);
 			parse.lvl = jd.level;
 			// Check for maxed out job
-			let master   = jd.job.Master(this);
+			const master   = jd.job.Master(this);
 			let toLevel;
-			if(!master) {
-				let newLevel = jd.job.levels[jd.level-1];
+			if (!master) {
+				const newLevel = jd.job.levels[jd.level - 1];
 				toLevel      = newLevel.expToLevel * jd.mult;
 			}
 
-			if(jd.job.Available(this)) {
-				if(master)
+			if (jd.job.Available(this)) {
+				if (master) {
 					Text.Add("[job] <b>(MASTER)</b><br>", parse);
-				else
+				} else {
 					Text.Add("[job]: level [lvl] (exp " + Math.floor(jd.experience) + "/" + Math.floor(toLevel) + ")<br>", parse);
-			}
-			else
-			{
+				}
+			} else {
 				Text.Add("[job]: Requires", parse);
-				for(let i = 0; i < jd.job.preqs.length; i++) {
-					let preq = jd.job.preqs[i];
-					let job  = preq.job;
-					let lvl  = preq.lvl || 1;
+				for (const preq of jd.job.preqs) {
+					const job  = preq.job;
+					const lvl  = preq.lvl || 1;
 					Text.Add(" [job2] lvl [lvl2]", {job2: job.Short(this), lvl2: lvl});
 				}
 				Text.Add(".<br>");
 			}
 
 			options.push({ nameStr : jd.job.Short(this),
-				func : function(obj : Job) {
+				func(obj: Job) {
 					parse.job = obj.Short(this);
 					Text.Clear();
 					Text.Add("[Possessive] current job is <b>[job]</b>.", parse);
@@ -407,7 +406,7 @@ let EntityMenu = {
 					Gui.NextPrompt(backfunc);
 				}, enabled : jd.job.Available(this),
 				obj : jd.job,
-				tooltip : jd.job.Long ? jd.job.Long(this) : ""
+				tooltip : jd.job.Long ? jd.job.Long(this) : "",
 			});
 		}
 

@@ -15,7 +15,8 @@
         "object-literal-sort-keys": false,
         "no-bitwise": false,
         "no-shadowed-variable": false,
-        "no-empty": false
+        "no-empty": false,
+        "no-var-requires": false
     },
     "rulesDirectory": []
 }

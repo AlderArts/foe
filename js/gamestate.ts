@@ -7,21 +7,21 @@ enum GameState {
 	Cavalcade,
 	Alchemy,
 	Hunting,
-};
+}
 
 let gameState = GameState.Credits;
 
-let SetGameState = function(state : GameState, Gui : any) {
+const SetGameState = function(state: GameState, Gui: any) {
 	gameState = state;
 	Gui.SetGameState(state);
-}
+};
 
-let online : boolean = false;
+let online: boolean = false;
 
 export function isOnline() {
     return online;
 }
-export function setOnline(val : boolean) {
+export function setOnline(val: boolean) {
     online = val;
 }
 

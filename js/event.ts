@@ -1,12 +1,12 @@
-import * as _ from 'lodash';
+import * as _ from "lodash";
 
-import { Gui } from "./gui";
 import { Images } from "./assets";
+import { EncounterTable } from "./encountertable";
+import { DreamsScenes } from "./event/dreams";
+import { GAME, StepToHour, TimeStep, WORLD } from "./GAME";
 import { GameState, SetGameState } from "./gamestate";
-import { GAME, TimeStep, WORLD, StepToHour } from "./GAME";
+import { Gui } from "./gui";
 import { Text } from "./text";
-import { DreamsScenes } from './event/dreams';
-import { EncounterTable } from './encountertable';
 
 /*
  *
@@ -18,17 +18,17 @@ import { EncounterTable } from './encountertable';
  */
 
 export class Event {
-	nameFunc : any;
-	description : any;
-	endDescription : any;
-	links : Link[];
-	events : Link[];
-	hunt : any[];
-	onEntry : any;
-	enc : EncounterTable;
-	SaveSpot : string;
+	public nameFunc: any;
+	public description: any;
+	public endDescription: any;
+	public links: Link[];
+	public events: Link[];
+	public hunt: any[];
+	public onEntry: any;
+	public enc: EncounterTable;
+	public SaveSpot: string;
 
-	constructor(nameFunc : any, opts? : any) {
+	constructor(nameFunc: any, opts?: any) {
 		opts = opts || {};
 		// Returns the name of the location/event
 		this.nameFunc = nameFunc;
@@ -46,172 +46,173 @@ export class Event {
 		// Encounter table
 		this.enc = opts.enc || null;
 	}
-	
-	AddEncounter(opts? : any) {
-		opts = opts || {};
-		let nameStr = opts.nameStr || "";
-		let desc    = opts.desc;
-		let func    = opts.func;
-		let cond    = opts.cond;
-		let visible = opts.visible;
-		let enabled = opts.enabled;
-		let odds    = opts.odds;
-		let obj     = opts.obj;
 
-		if(opts.enc)
+	public AddEncounter(opts?: any) {
+		opts = opts || {};
+		const nameStr = opts.nameStr || "";
+		const desc    = opts.desc;
+		const func    = opts.func;
+		const cond    = opts.cond;
+		const visible = opts.visible;
+		const enabled = opts.enabled;
+		const odds    = opts.odds;
+		const obj     = opts.obj;
+
+		if (opts.enc) {
 			this.enc.AddEnc(func, odds, cond, obj);
-		if(opts.hunt) {
+		}
+		if (opts.hunt) {
 			this.hunt.push(new Link(
 				nameStr, visible, enabled,
 				desc,
 				function() {
-					let enc = func();
-					if(enc) {
-						if(enc.Start)
+					const enc = func();
+					if (enc) {
+						if (enc.Start) {
 							enc.Start();
-						else
+						} else {
 							enc();
+						}
 					}
-				}
+				},
 			));
 		}
 	}
 
-	wait() : boolean {
+	public wait(): boolean {
 		return true;
 	}
-	safe() : boolean {
+	public safe(): boolean {
 		return false;
 	}
-	switchSpot() : boolean {
+	public switchSpot(): boolean {
 		return false;
 	}
 
-	SleepFunc() {
+	public SleepFunc() {
 		SetGameState(GameState.Event, Gui);
 		Text.NL();
 		Text.Add("You sleep for 8 hours.");
 		Text.Flush();
 		Gui.NextPrompt(function() {
 			Text.Clear();
-			let func = function() {
+			const func = function() {
 				TimeStep({hour: 8});
 				GAME().party.Sleep();
 
 				Gui.PrintDefaultOptions();
-			}
+			};
 
 			DreamsScenes.Entry(func);
 		});
 	}
 
-	WaitFunc = function() {
+	public WaitFunc = function() {
 		SetGameState(GameState.Event, Gui);
 		Text.Clear();
 		Text.Add("How long do you want to wait?");
 		Text.Flush();
 
-		let options = new Array();
+		const options = new Array();
 		options.push({ nameStr : "Half hour",
 			tooltip : "Wait for half an hour.",
-			func : function() {
+			func() {
 				TimeStep({minute: 30});
 				Gui.PrintDefaultOptions();
-			}, enabled : true
+			}, enabled : true,
 		});
 		options.push({ nameStr : "One hour",
 			tooltip : "Wait for one hour.",
-			func : function() {
+			func() {
 				TimeStep({hour: 1});
 				Gui.PrintDefaultOptions();
-			}, enabled : true
+			}, enabled : true,
 		});
 		options.push({ nameStr : "Two hours",
 			tooltip : "Wait for two hours.",
-			func : function() {
+			func() {
 				TimeStep({hour: 2});
 				Gui.PrintDefaultOptions();
-			}, enabled : true
+			}, enabled : true,
 		});
 		options.push({ nameStr : "Four hours",
 			tooltip : "Wait for four hours.",
-			func : function() {
+			func() {
 				TimeStep({hour: 4});
 				Gui.PrintDefaultOptions();
-			}, enabled : true
+			}, enabled : true,
 		});
 		options.push({ nameStr : "Eight hours",
 			tooltip : "Wait for eight hours.",
-			func : function() {
+			func() {
 				TimeStep({hour: 8});
 				Gui.PrintDefaultOptions();
-			}, enabled : true
+			}, enabled : true,
 		});
 		options.push({ nameStr : "A day",
 			tooltip : "Wait for a day.",
-			func : function() {
+			func() {
 				TimeStep({day: 1});
 				Gui.PrintDefaultOptions();
-			}, enabled : true
+			}, enabled : true,
 		});
 		options.push({ nameStr : "Until 4:00",
 			tooltip : "Wait until early morning.",
-			func : function() {
+			func() {
 				StepToHour(4);
 				Gui.PrintDefaultOptions();
-			}, enabled : true
+			}, enabled : true,
 		});
 		options.push({ nameStr : "Until 8:00",
 			tooltip : "Wait until morning.",
-			func : function() {
+			func() {
 				StepToHour(8);
 				Gui.PrintDefaultOptions();
-			}, enabled : true
+			}, enabled : true,
 		});
 		options.push({ nameStr : "Until 12:00",
 			tooltip : "Wait until midday.",
-			func : function() {
+			func() {
 				StepToHour(12);
 				Gui.PrintDefaultOptions();
-			}, enabled : true
+			}, enabled : true,
 		});
 		options.push({ nameStr : "Until 16:00",
 			tooltip : "Wait until afternoon.",
-			func : function() {
+			func() {
 				StepToHour(16);
 				Gui.PrintDefaultOptions();
-			}, enabled : true
+			}, enabled : true,
 		});
 		options.push({ nameStr : "Until 20:00",
 			tooltip : "Wait until evening.",
-			func : function() {
+			func() {
 				StepToHour(20);
 				Gui.PrintDefaultOptions();
-			}, enabled : true
+			}, enabled : true,
 		});
 		options.push({ nameStr : "Until 00:00",
 			tooltip : "Wait until midnight.",
-			func : function() {
+			func() {
 				StepToHour(0);
 				Gui.PrintDefaultOptions();
-			}, enabled : true
+			}, enabled : true,
 		});
 		Gui.SetButtonsFromList(options, true, function() {
 			Gui.PrintDefaultOptions();
 		});
-	}
+	};
 
-	DrunkHandler = function() {
-		let parse : any = {};
-		let comp = GAME().party.GetRandom();
+	public DrunkHandler = function() {
+		const parse: any = {};
+		const comp = GAME().party.GetRandom();
 		Text.Clear();
-		if(comp) {
-			parse["name"]  = comp.name;
-			parse["HeShe"] = comp.HeShe();
-			parse["heshe"] = comp.heshe();
+		if (comp) {
+			parse.name  = comp.name;
+			parse.HeShe = comp.HeShe();
+			parse.heshe = comp.heshe();
 			Text.Add("With some effort, you open your eyes and find a concerned [name] standing above you. [HeShe] helps you to your feet, but you flinch as [heshe] starts to speak, as a splitting pain thunders through your head. As you draw in a sharp breath, you notice that something smells of vomit, although thankfully you look clean.", parse);
-		}
-		else {
+		} else {
 			Text.Add("With some effort you open your eyes and drag yourself to your feet. You really don’t feel so good. Your head feels like it’s about to split open, and something smells of vomit.", parse);
 		}
 		Text.NL();
@@ -219,14 +220,14 @@ export class Event {
 		Text.Flush();
 
 		Gui.NextPrompt();
-	}
+	};
 
-	SetButtons(links : any[]) {
-		let list = [];
+	public SetButtons(links: any[]) {
+		const list = [];
 
-		if(!links) {
+		if (!links) {
 			links = [];
-			_.each(this.links, function(link : any) {
+			_.each(this.links, function(link: any) {
 				link.image = Images.imgButtonEnabled2;
 				links.push(link);
 			});
@@ -235,60 +236,64 @@ export class Event {
 			});
 		}
 
-		for(let i = 0; i < links.length; i++) {
-			let link = links[i];
+		for (let i = 0; i < links.length; i++) {
+			const link = links[i];
 
-			let visible = _.isFunction(link.visibleCondition) ? link.visibleCondition() : link.visibleCondition;
-			if(!visible) continue;
-			let enabled = _.isFunction(link.enabledCondition) ? link.enabledCondition() : link.enabledCondition;
-			let nameStr = _.isFunction(link.name) ? link.name() : link.name;
+			const visible = _.isFunction(link.visibleCondition) ? link.visibleCondition() : link.visibleCondition;
+			if (!visible) { continue; }
+			const enabled = _.isFunction(link.enabledCondition) ? link.enabledCondition() : link.enabledCondition;
+			const nameStr = _.isFunction(link.name) ? link.name() : link.name;
 
-			list.push({nameStr: nameStr, func: link.func, enabled: enabled, tooltip: link.tooltip, image: link.image});
-			//Input.buttons[i].Setup(nameStr, link.func, enabled);
+			list.push({nameStr, func: link.func, enabled, tooltip: link.tooltip, image: link.image});
+			// Input.buttons[i].Setup(nameStr, link.func, enabled);
 		}
-		//list.sort( function(a, b) { return a.nameStr > b.nameStr; } );
+		// list.sort( function(a, b) { return a.nameStr > b.nameStr; } );
 
 		Gui.SetButtonsFromList(list, null, null, GameState.Event);
 	}
 
 	// Shows
-	PrintDesc() {
-		if(this.description) {
-			if(_.isFunction(this.description))
+	public PrintDesc() {
+		if (this.description) {
+			if (_.isFunction(this.description)) {
 				this.description();
-			else
+			} else {
 				Text.Add(this.description);
+			}
 		}
 
-		for(let i = 0; i < this.links.length; i++) {
-			let link = this.links[i];
-			if(link.print) {
-				if(_.isFunction(link.print))
+		for (let i = 0; i < this.links.length; i++) {
+			const link = this.links[i];
+			if (link.print) {
+				if (_.isFunction(link.print)) {
 					link.print();
-				else
+				} else {
 					Text.Add(link.print);
+				}
 			}
 		}
 
-		for(let i = 0; i < this.events.length; i++) {
-			let e = this.events[i];
-			if(e.print) {
-				if(_.isFunction(e.print))
+		for (let i = 0; i < this.events.length; i++) {
+			const e = this.events[i];
+			if (e.print) {
+				if (_.isFunction(e.print)) {
 					e.print();
-				else
+				} else {
 					Text.Add(e.print);
+				}
 			}
 		}
 
-		if(this.endDescription) {
-			if(_.isFunction(this.endDescription))
+		if (this.endDescription) {
+			if (_.isFunction(this.endDescription)) {
 				this.endDescription();
-			else
+			} else {
 				Text.Add(this.endDescription);
+			}
 		}
 
 		// At safe locations you can sleep and save
-		if(GAME().party.location.safe()) {
+		if (GAME().party.location.safe()) {
 			Text.NL();
 			Text.Add("<b>This is a safe location, you can sleep and save here.</b>");
 			Text.NL();
@@ -299,14 +304,14 @@ export class Event {
 }
 
 export class Link {
-	name : any;
-	visibleCondition : any;
-	enabledCondition : any;
-	print : any;
-	func : CallableFunction;
-	tooltip : any;
+	public name: any;
+	public visibleCondition: any;
+	public enabledCondition: any;
+	public print: any;
+	public func: CallableFunction;
+	public tooltip: any;
 
-	constructor(name : any, visibleCondition : any, enabledCondition : any, print? : any, func? : CallableFunction, tooltip? : any) {
+	constructor(name: any, visibleCondition: any, enabledCondition: any, print?: any, func?: CallableFunction, tooltip?: any) {
 		// String or function that returns string
 		this.name = name;
 		// This can be set to true, or to a function

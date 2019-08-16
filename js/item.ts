@@ -1,12 +1,12 @@
-import * as _ from 'lodash';
+import * as _ from "lodash";
 
-import { DamageType } from './damagetype';
-import { StatusEffect, Status } from './statuseffect';
-import { Entity } from './entity';
-import { Text } from './text';
+import { DamageType } from "./damagetype";
+import { Entity } from "./entity";
+import { Status, StatusEffect } from "./statuseffect";
+import { Text } from "./text";
 
-let ItemIds : any = {};
-//Represents the overall category an item falls under.
+const ItemIds: any = {};
+// Represents the overall category an item falls under.
 export enum ItemType {
 	Weapon     = "Weapons",
 	Armor      = "Armors",
@@ -16,10 +16,10 @@ export enum ItemType {
 	Ingredient = "Ingredients",
 	Quest      = "Quest Items",
 	Toy        = "Toys",
-	Misc       = "Misc", //Default catch all for all items. Should strive to not have this on any items though.
+	Misc       = "Misc", // Default catch all for all items. Should strive to not have this on any items though.
 }
-//Represents a second level of categorization for items.
-//FIXME Attempt to remove Acc1/Acc2 from here. They can exist on entity, but shouldn't exist as a type in items.
+// Represents a second level of categorization for items.
+// FIXME Attempt to remove Acc1/Acc2 from here. They can exist on entity, but shouldn't exist as a type in items.
 export enum ItemSubtype {
 	FullArmor = "Full Armors",
 	TopArmor  = "Top Armors",
@@ -28,38 +28,37 @@ export enum ItemSubtype {
 	Acc2      = 6,
 	StrapOn   = "Strapons",
 	Dildo	  = "Dildos",
-	None	  = "None", //Should be default case for all items
+	None	  = "None", // Should be default case for all items
 }
 
 export class Item {
-	id : string;
-	name : string;
-	type : ItemType;
-	image : any;
-	price : number;
-	subtype : ItemSubtype;
-	recipe : any[];
-	Use : any;
-	effect : any;
-	isTF : boolean;
+	public id: string;
+	public name: string;
+	public type: ItemType;
+	public image: any;
+	public price: number;
+	public subtype: ItemSubtype;
+	public recipe: any[];
+	public Use: any;
+	public effect: any;
+	public isTF: boolean;
 
-	constructor(id : string, name : string, type : ItemType) {
-		//Required (An item will always have these)
+	constructor(id: string, name: string, type: ItemType) {
+		// Required (An item will always have these)
 		this.id     = id;
 		this.name   = name;
 		this.type   = type || ItemType.Misc;
 
-		//Optional, with default
+		// Optional, with default
 		this.image  = new Image(); // TODO This sounds interesting, so i'll look into it later.
 		this.price  = 0;
 		this.subtype = ItemSubtype.None;
 		// Alchemical recipe, an array of {it: Item, num: Number} pairs
-		this.recipe = []; //TODO Maybe should be set to null. I'll look into how recipes are used later.
+		this.recipe = []; // TODO Maybe should be set to null. I'll look into how recipes are used later.
 
-		//Optional, No default (don't forget your null checks if you're working with these!)
-		//function(target)
+		// Optional, No default (don't forget your null checks if you're working with these!)
+		// function(target)
 		this.Use        = null;
-
 
 		/*
 		* effect = {
@@ -82,32 +81,32 @@ export class Item {
 		this.effect = {};
 		this.effect.statusDef = [];
 
-		if(!id) {
+		if (!id) {
 			console.log("Item '" + name + "' has no id.");
 		}
-		if(ItemIds[id]) {
+		if (ItemIds[id]) {
 			console.log("Item '" + id + "' is already registered.");
 		}
 		ItemIds[id] = this;
 	}
 
-	//function(target)
-	Equip(target : Entity) {
-		if(this.effect.maxHp)        target.maxHp.bonus         += this.effect.maxHp;
-		if(this.effect.maxSp)        target.maxSp.bonus         += this.effect.maxSp;
-		if(this.effect.maxLust)      target.maxLust.bonus       += this.effect.maxLust;
+	// function(target)
+	public Equip(target: Entity) {
+		if (this.effect.maxHp) {        target.maxHp.bonus         += this.effect.maxHp; }
+		if (this.effect.maxSp) {        target.maxSp.bonus         += this.effect.maxSp; }
+		if (this.effect.maxLust) {      target.maxLust.bonus       += this.effect.maxLust; }
 
-		if(this.effect.strength)     target.strength.bonus      += this.effect.strength;
-		if(this.effect.stamina)      target.stamina.bonus       += this.effect.stamina;
-		if(this.effect.dexterity)    target.dexterity.bonus     += this.effect.dexterity;
-		if(this.effect.intelligence) target.intelligence.bonus  += this.effect.intelligence;
-		if(this.effect.spirit)       target.spirit.bonus        += this.effect.spirit;
+		if (this.effect.strength) {     target.strength.bonus      += this.effect.strength; }
+		if (this.effect.stamina) {      target.stamina.bonus       += this.effect.stamina; }
+		if (this.effect.dexterity) {    target.dexterity.bonus     += this.effect.dexterity; }
+		if (this.effect.intelligence) { target.intelligence.bonus  += this.effect.intelligence; }
+		if (this.effect.spirit) {       target.spirit.bonus        += this.effect.spirit; }
 
-		if(this.effect.libido)       target.libido.bonus        += this.effect.libido;
-		if(this.effect.charisma)     target.charisma.bonus      += this.effect.charisma;
+		if (this.effect.libido) {       target.libido.bonus        += this.effect.libido; }
+		if (this.effect.charisma) {     target.charisma.bonus      += this.effect.charisma; }
 
-		if(this.effect.atkMod)       target.atkMod += this.effect.atkMod;
-		if(this.effect.defMod)       target.defMod += this.effect.defMod;
+		if (this.effect.atkMod) {       target.atkMod += this.effect.atkMod; }
+		if (this.effect.defMod) {       target.defMod += this.effect.defMod; }
 
 		// Elemental attack
 		target.elementAtk.Add(new DamageType({
@@ -124,7 +123,7 @@ export class Item {
 			mLight   : this.effect.amLight,
 			mDark    : this.effect.amDark,
 			mNature  : this.effect.amNature,
-			lust     : this.effect.alust
+			lust     : this.effect.alust,
 		}));
 
 		// Elemental defense
@@ -142,17 +141,16 @@ export class Item {
 			mLight   : this.effect.dmLight,
 			mDark    : this.effect.dmDark,
 			mNature  : this.effect.dmNature,
-			lust     : this.effect.dlust
+			lust     : this.effect.dlust,
 		}));
-		
-		if(this.effect.statusDef.length > 0) {
-			for(let i = 0; i < StatusEffect.LAST; i++) {
-				let inc = this.effect.statusDef[i];
-				if(inc) {
-					if(target.statusDefGear[i]) {
+
+		if (this.effect.statusDef.length > 0) {
+			for (let i = 0; i < StatusEffect.LAST; i++) {
+				const inc = this.effect.statusDef[i];
+				if (inc) {
+					if (target.statusDefGear[i]) {
 						target.statusDefGear[i] += inc;
-					}
-					else {
+					} else {
 						target.statusDefGear[i] = inc;
 					}
 				}
@@ -160,72 +158,72 @@ export class Item {
 		}
 	}
 
-	ShowEquipStats() {
-		Text.AddDiv("["+this.name+"]", null, "itemTypeHeader");
+	public ShowEquipStats() {
+		Text.AddDiv("[" + this.name + "]", null, "itemTypeHeader");
 		Text.AddDiv(this.Short(), null, "itemSubtypeHeader");
-		if(this.effect.atkMod) Text.AddDiv("Atk: " + this.effect.atkMod, null, "itemName");
-		if(this.effect.defMod) Text.AddDiv("Def: " + this.effect.defMod, null, "itemName");
+		if (this.effect.atkMod) { Text.AddDiv("Atk: " + this.effect.atkMod, null, "itemName"); }
+		if (this.effect.defMod) { Text.AddDiv("Def: " + this.effect.defMod, null, "itemName"); }
 
-		if(this.effect.apSlash)   Text.AddDiv("Slash.Atk: "   + this.effect.apSlash,   null, "itemName");
-		if(this.effect.apBlunt)   Text.AddDiv("Blunt.Atk: "   + this.effect.apBlunt,   null, "itemName");
-		if(this.effect.apPierce)  Text.AddDiv("Pierce.Atk: "  + this.effect.apPierce,  null, "itemName");
-		if(this.effect.amVoid)    Text.AddDiv("Void.Atk: "    + this.effect.amVoid,    null, "itemName");
-		if(this.effect.amFire)    Text.AddDiv("Fire.Atk: "    + this.effect.amFire,    null, "itemName");
-		if(this.effect.amIce)     Text.AddDiv("Ice.Atk: "     + this.effect.amIce,     null, "itemName");
-		if(this.effect.amThunder) Text.AddDiv("Thunder.Atk: " + this.effect.amThunder, null, "itemName");
-		if(this.effect.amEarth)   Text.AddDiv("Earth.Atk: "   + this.effect.amEarth,   null, "itemName");
-		if(this.effect.amWater)   Text.AddDiv("Water.Atk: "   + this.effect.amWater,   null, "itemName");
-		if(this.effect.amWind)    Text.AddDiv("Wind.Atk: "    + this.effect.amWind,    null, "itemName");
-		if(this.effect.amLight)   Text.AddDiv("Light.Atk: "   + this.effect.amLight,   null, "itemName");
-		if(this.effect.amDark)    Text.AddDiv("Dark.Atk: "    + this.effect.amDark,    null, "itemName");
-		if(this.effect.amNature)  Text.AddDiv("Nature.Atk: "  + this.effect.amNature,  null, "itemName");
-		if(this.effect.alust)     Text.AddDiv("Lust.Atk: "    + this.effect.alust,     null, "itemName");
+		if (this.effect.apSlash) {   Text.AddDiv("Slash.Atk: "   + this.effect.apSlash,   null, "itemName"); }
+		if (this.effect.apBlunt) {   Text.AddDiv("Blunt.Atk: "   + this.effect.apBlunt,   null, "itemName"); }
+		if (this.effect.apPierce) {  Text.AddDiv("Pierce.Atk: "  + this.effect.apPierce,  null, "itemName"); }
+		if (this.effect.amVoid) {    Text.AddDiv("Void.Atk: "    + this.effect.amVoid,    null, "itemName"); }
+		if (this.effect.amFire) {    Text.AddDiv("Fire.Atk: "    + this.effect.amFire,    null, "itemName"); }
+		if (this.effect.amIce) {     Text.AddDiv("Ice.Atk: "     + this.effect.amIce,     null, "itemName"); }
+		if (this.effect.amThunder) { Text.AddDiv("Thunder.Atk: " + this.effect.amThunder, null, "itemName"); }
+		if (this.effect.amEarth) {   Text.AddDiv("Earth.Atk: "   + this.effect.amEarth,   null, "itemName"); }
+		if (this.effect.amWater) {   Text.AddDiv("Water.Atk: "   + this.effect.amWater,   null, "itemName"); }
+		if (this.effect.amWind) {    Text.AddDiv("Wind.Atk: "    + this.effect.amWind,    null, "itemName"); }
+		if (this.effect.amLight) {   Text.AddDiv("Light.Atk: "   + this.effect.amLight,   null, "itemName"); }
+		if (this.effect.amDark) {    Text.AddDiv("Dark.Atk: "    + this.effect.amDark,    null, "itemName"); }
+		if (this.effect.amNature) {  Text.AddDiv("Nature.Atk: "  + this.effect.amNature,  null, "itemName"); }
+		if (this.effect.alust) {     Text.AddDiv("Lust.Atk: "    + this.effect.alust,     null, "itemName"); }
 
-		if(this.effect.dpSlash)   Text.AddDiv("Slash.Def: "   + this.effect.dpSlash,   null, "itemName");
-		if(this.effect.dpBlunt)   Text.AddDiv("Blunt.Def: "   + this.effect.dpBlunt,   null, "itemName");
-		if(this.effect.dpPierce)  Text.AddDiv("Pierce.Def: "  + this.effect.dpPierce,  null, "itemName");
-		if(this.effect.dmVoid)    Text.AddDiv("Void.Def: "    + this.effect.dmVoid,    null, "itemName");
-		if(this.effect.dmFire)    Text.AddDiv("Fire.Def: "    + this.effect.dmFire,    null, "itemName");
-		if(this.effect.dmIce)     Text.AddDiv("Ice.Def: "     + this.effect.dmIce,     null, "itemName");
-		if(this.effect.dmThunder) Text.AddDiv("Thunder.Def: " + this.effect.dmThunder, null, "itemName");
-		if(this.effect.dmEarth)   Text.AddDiv("Earth.Def: "   + this.effect.dmEarth,   null, "itemName");
-		if(this.effect.dmWater)   Text.AddDiv("Water.Def: "   + this.effect.dmWater,   null, "itemName");
-		if(this.effect.dmWind)    Text.AddDiv("Wind.Def: "    + this.effect.dmWind,    null, "itemName");
-		if(this.effect.dmLight)   Text.AddDiv("Light.Def: "   + this.effect.dmLight,   null, "itemName");
-		if(this.effect.dmDark)    Text.AddDiv("Dark.Def: "    + this.effect.dmDark,    null, "itemName");
-		if(this.effect.dmNature)  Text.AddDiv("Nature.Def: "  + this.effect.dmNature,  null, "itemName");
-		if(this.effect.dlust)     Text.AddDiv("Lust.Def: "    + this.effect.dlust,     null, "itemName");
+		if (this.effect.dpSlash) {   Text.AddDiv("Slash.Def: "   + this.effect.dpSlash,   null, "itemName"); }
+		if (this.effect.dpBlunt) {   Text.AddDiv("Blunt.Def: "   + this.effect.dpBlunt,   null, "itemName"); }
+		if (this.effect.dpPierce) {  Text.AddDiv("Pierce.Def: "  + this.effect.dpPierce,  null, "itemName"); }
+		if (this.effect.dmVoid) {    Text.AddDiv("Void.Def: "    + this.effect.dmVoid,    null, "itemName"); }
+		if (this.effect.dmFire) {    Text.AddDiv("Fire.Def: "    + this.effect.dmFire,    null, "itemName"); }
+		if (this.effect.dmIce) {     Text.AddDiv("Ice.Def: "     + this.effect.dmIce,     null, "itemName"); }
+		if (this.effect.dmThunder) { Text.AddDiv("Thunder.Def: " + this.effect.dmThunder, null, "itemName"); }
+		if (this.effect.dmEarth) {   Text.AddDiv("Earth.Def: "   + this.effect.dmEarth,   null, "itemName"); }
+		if (this.effect.dmWater) {   Text.AddDiv("Water.Def: "   + this.effect.dmWater,   null, "itemName"); }
+		if (this.effect.dmWind) {    Text.AddDiv("Wind.Def: "    + this.effect.dmWind,    null, "itemName"); }
+		if (this.effect.dmLight) {   Text.AddDiv("Light.Def: "   + this.effect.dmLight,   null, "itemName"); }
+		if (this.effect.dmDark) {    Text.AddDiv("Dark.Def: "    + this.effect.dmDark,    null, "itemName"); }
+		if (this.effect.dmNature) {  Text.AddDiv("Nature.Def: "  + this.effect.dmNature,  null, "itemName"); }
+		if (this.effect.dlust) {     Text.AddDiv("Lust.Def: "    + this.effect.dlust,     null, "itemName"); }
 
-		if(this.effect.maxHp)        Text.AddDiv("HP: "  + this.effect.maxHp,        null, "itemName");
-		if(this.effect.maxSp)        Text.AddDiv("SP: "  + this.effect.maxSp,        null, "itemName");
-		if(this.effect.maxLust)      Text.AddDiv("LP: "  + this.effect.maxLust,      null, "itemName");
-		if(this.effect.strength)     Text.AddDiv("Str: " + this.effect.strength,     null, "itemName");
-		if(this.effect.stamina)      Text.AddDiv("Sta: " + this.effect.stamina,      null, "itemName");
-		if(this.effect.dexterity)    Text.AddDiv("Dex: " + this.effect.dexterity,    null, "itemName");
-		if(this.effect.intelligence) Text.AddDiv("Int: " + this.effect.intelligence, null, "itemName");
-		if(this.effect.spirit)       Text.AddDiv("Spi: " + this.effect.spirit,       null, "itemName");
-		if(this.effect.libido)       Text.AddDiv("Lib: " + this.effect.libido,       null, "itemName");
-		if(this.effect.charisma)     Text.AddDiv("Cha: " + this.effect.charisma,     null, "itemName");
-		
-		for(let i = 0; i < StatusEffect.LAST; i++) {
-			if(this.effect.statusDef[i]) {
+		if (this.effect.maxHp) {        Text.AddDiv("HP: "  + this.effect.maxHp,        null, "itemName"); }
+		if (this.effect.maxSp) {        Text.AddDiv("SP: "  + this.effect.maxSp,        null, "itemName"); }
+		if (this.effect.maxLust) {      Text.AddDiv("LP: "  + this.effect.maxLust,      null, "itemName"); }
+		if (this.effect.strength) {     Text.AddDiv("Str: " + this.effect.strength,     null, "itemName"); }
+		if (this.effect.stamina) {      Text.AddDiv("Sta: " + this.effect.stamina,      null, "itemName"); }
+		if (this.effect.dexterity) {    Text.AddDiv("Dex: " + this.effect.dexterity,    null, "itemName"); }
+		if (this.effect.intelligence) { Text.AddDiv("Int: " + this.effect.intelligence, null, "itemName"); }
+		if (this.effect.spirit) {       Text.AddDiv("Spi: " + this.effect.spirit,       null, "itemName"); }
+		if (this.effect.libido) {       Text.AddDiv("Lib: " + this.effect.libido,       null, "itemName"); }
+		if (this.effect.charisma) {     Text.AddDiv("Cha: " + this.effect.charisma,     null, "itemName"); }
+
+		for (let i = 0; i < StatusEffect.LAST; i++) {
+			if (this.effect.statusDef[i]) {
 				Text.AddDiv(Status.Keys[i] + ".Def: " + this.effect.statusDef[i], null, "itemName");
 			}
 		}
 	}
 
-	sDesc() { return this.name; }
-	lDesc() { return this.name; }
-	Short() { return _.capitalize(this.sDesc()); }
-	Long() { return _.capitalize(this.lDesc()); }
+	public sDesc() { return this.name; }
+	public lDesc() { return this.name; }
+	public Short() { return _.capitalize(this.sDesc()); }
+	public Long() { return _.capitalize(this.lDesc()); }
 
 }
 
-//TODO Possibly reformat items array to just contain items instead of [{it:item, num:x}], so this function be can made a generic Array.prototype.sortByProp for sorting any array of objects by prop.
-function compareItemByProp(p : any){
-	return function(a : any, b : any){
+// TODO Possibly reformat items array to just contain items instead of [{it:item, num:x}], so this function be can made a generic Array.prototype.sortByProp for sorting any array of objects by prop.
+function compareItemByProp(p: any) {
+	return function(a: any, b: any) {
 		return (a.it[p] > b.it[p]) ? 1 : (a.it[p] < b.it[p]) ? -1 : 0;
-	}
+	};
 }
 
 export { ItemIds, compareItemByProp };

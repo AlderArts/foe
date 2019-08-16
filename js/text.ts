@@ -1,51 +1,51 @@
-import * as $ from 'jquery';
-import * as _ from 'lodash';
+import * as $ from "jquery";
+import * as _ from "lodash";
 
-import { GetRenderPictures } from '../app';
-import { Rand } from './utility';
+import { GetRenderPictures } from "../app";
+import { Rand } from "./utility";
 
 export namespace Text {
 
 	let buffer = "";
 	// A div that contains 'groups' of inputs. Each group is on a new line (so you can basically have multiple toolbars).
-	let toolbars = $('<div></div>');
+	let toolbars = $("<div></div>");
 
-	export function InsertImage(imgSrc : string, align : string = 'left') {
-		if(!GetRenderPictures()) { return ""; }
+	export function InsertImage(imgSrc: string, align: string = "left") {
+		if (!GetRenderPictures()) { return ""; }
 		return "<img src='" + imgSrc + "' align='" + align + "' alt='MISSING IMAGE: " + imgSrc + "' style='margin: 1px 8px;'/>";
 	}
 
-	export function Say(imgSrc : string, text : string = "", align : string = 'left') {
-		let textbox = document.getElementById("mainTextArea");
+	export function Say(imgSrc: string, text: string = "", align: string = "left") {
+		const textbox = document.getElementById("mainTextArea");
 
-		if(GetRenderPictures())
+		if (GetRenderPictures()) {
 			textbox.innerHTML += "<img src='" + imgSrc + "' align='" + align + "' alt='MISSING IMAGE: " + imgSrc + "' style='margin: 1px 8px;'>" + text + "</img>";
-		else
+		} else {
 			textbox.innerHTML += text;
+		}
 	}
 
-
-	export function SetTooltip(text : string, parseStrings? : any) {
-		let textbox = document.getElementById("tooltipTextArea");
+	export function SetTooltip(text: string, parseStrings?: any) {
+		const textbox = document.getElementById("tooltipTextArea");
 		textbox.innerHTML = Text.Parse(text, parseStrings);
 	}
 
-	export function Parse(text : string, parseStrings? : any) : string {
+	export function Parse(text: string, parseStrings?: any): string {
 		try {
 			// Simple parser
-			if(parseStrings) {
+			if (parseStrings) {
 				let start = text.indexOf("[");
 				let stop = text.indexOf("]", start);
-				while(start !== -1 && stop !== -1) {
+				while (start !== -1 && stop !== -1) {
 					const code = text.slice(start + 1, stop);
 
 					let replaceStr;
-					if(parseStrings[code] != null) {
+					if (parseStrings[code] != null) {
 						replaceStr = parseStrings[code];
-						if(_.isFunction(replaceStr)) {
+						if (_.isFunction(replaceStr)) {
 							replaceStr = replaceStr();
 						}
-						if(_.isUndefined(replaceStr)) {
+						if (_.isUndefined(replaceStr)) {
 							replaceStr = ApplyStyle("['" + code + "' is undefined]", "error");
 						}
 					} else {
@@ -60,8 +60,7 @@ export namespace Text {
 			}
 
 			return text;
-		}
-		catch(e) {
+		} catch (e) {
 			alert(e.message + "........." + e.stack);
 			return ApplyStyle("PARSE ERROR: { " + text + " }", "error");
 		}
@@ -91,12 +90,12 @@ export namespace Text {
 	*
 	*/
 
-	//Utility function to apply css styling to text
-	//This is used internally by Add and the helper methods below.
-	//This should be used for styling any text that should 
-	//not be passed through Text.Parse
-	function ApplyStyle(text : string|number, cssClasses? : string, tag : string = "span") {
-		return '<' + tag + (cssClasses ? (' class ="' + cssClasses + '">') : '>') + text + '</' + tag + '>';
+	// Utility function to apply css styling to text
+	// This is used internally by Add and the helper methods below.
+	// This should be used for styling any text that should
+	// not be passed through Text.Parse
+	function ApplyStyle(text: string|number, cssClasses?: string, tag: string = "span") {
+		return "<" + tag + (cssClasses ? (' class ="' + cssClasses + '">') : ">") + text + "</" + tag + ">";
 	}
 
 	// Generic function to apply text to the buffer
@@ -104,8 +103,8 @@ export namespace Text {
 	// This is primarily meant to be used for dialogue and scenes,
 	// but AddSpan and AddDiv both call it, since this would make
 	// testing easier in the future, as only this needs unit testing
-	export function Add(text : string, parse? : any, cssClasses? : string, tag? : string) {
-		let parsed = Text.Parse(text, parse);
+	export function Add(text: string, parse?: any, cssClasses?: string, tag?: string) {
+		const parsed = Text.Parse(text, parse);
 		if (cssClasses) {
 			buffer += ApplyStyle(parsed, cssClasses, tag);
 		} else {
@@ -113,13 +112,13 @@ export namespace Text {
 		}
 	}
 
-	//Adds text wrapped in a span.
-	export function AddSpan(text : string, parse? : any, cssClasses? : string) {
+	// Adds text wrapped in a span.
+	export function AddSpan(text: string, parse?: any, cssClasses?: string) {
 		Text.Add(text, parse, cssClasses, "span");
 	}
 
-	//Adds text wrapped in a div.
-	export function AddDiv(text : string, parse? : any, cssClasses? : string) {
+	// Adds text wrapped in a div.
+	export function AddDiv(text: string, parse?: any, cssClasses?: string) {
 		Text.Add(text, parse, cssClasses, "div");
 	}
 
@@ -129,49 +128,49 @@ export namespace Text {
 	* ToolbarLabel: A text label that will be put at the very start of the toolbar. Default is no label.
 	* cssClasses : A string of css classes that will be added to every input in the 'list' parameter.
 	*/
-	export function AddToolbar(list : any[], toolbarLabel? : string, cssClasses? : string) {
-		let toolbar = $("<div>");
-		//Add toolbar label if specified
-		if(toolbarLabel) {
-			let label= $('<span>', {
-				"class" : 'tbarLbl',
-				text : toolbarLabel
+	export function AddToolbar(list: any[], toolbarLabel?: string, cssClasses?: string) {
+		const toolbar = $("<div>");
+		// Add toolbar label if specified
+		if (toolbarLabel) {
+			const label = $("<span>", {
+				class : "tbarLbl",
+				text : toolbarLabel,
 			});
 			toolbar.append(label);
 		}
-		//Add inputs to new toolbar
-		for(let i=0; i < list.length; i++) {
+		// Add inputs to new toolbar
+		for (let i = 0; i < list.length; i++) {
 			toolbar.append(createInput(list[i], cssClasses));
 		}
 		toolbars.append(toolbar);
 	}
-	//Clears the toolbars buffer
+	// Clears the toolbars buffer
 	export function ResetToolbars() {
-		toolbars = $('<div></div>');
+		toolbars = $("<div></div>");
 	}
 
 	export function NL() {
 		buffer += "<br/><br/>";
 	}
 
-	export function Flush(textCssClasses? : string, toolbarCssClasses? : string) {
-		//let textbox = document.getElementById("mainTextArea");
-		let textBox = $("#mainTextArea");
-		let textClasses = (textCssClasses) ? textCssClasses : "";
-		let toolbarClasses = (toolbarCssClasses) ? toolbarCssClasses : "";
-		//textbox.innerHTML += "<div class=\""+toolbarClasses+"\">"+Text.toolbar+"</div>";
-		if(toolbars) {
+	export function Flush(textCssClasses?: string, toolbarCssClasses?: string) {
+		// let textbox = document.getElementById("mainTextArea");
+		const textBox = $("#mainTextArea");
+		const textClasses = (textCssClasses) ? textCssClasses : "";
+		const toolbarClasses = (toolbarCssClasses) ? toolbarCssClasses : "";
+		// textbox.innerHTML += "<div class=\""+toolbarClasses+"\">"+Text.toolbar+"</div>";
+		if (toolbars) {
 			textBox.append(toolbars);
 		}
 		textBox.append(ApplyStyle(buffer, textClasses));
 
 		buffer = "";
-		toolbars = $('<div></div>');
+		toolbars = $("<div></div>");
 	}
 
-	function DigitToText(num : number) {
+	function DigitToText(num: number) {
 		num = Math.floor(num);
-		switch(num) {
+		switch (num) {
 			case 0: return "zero";
 			case 1: return "one";
 			case 2: return "two";
@@ -196,30 +195,29 @@ export namespace Text {
 		}
 	}
 
-	export function NumToText(num : number) {
+	export function NumToText(num: number) {
 		num = Math.floor(num);
-		if(num < 0)
+		if (num < 0) {
 			return num.toString();
-		else if(num < 20)
+		} else if (num < 20) {
 			return DigitToText(num);
-		// TODO: thousands
-		else if(num < 1000) {
-			let ones = num % 10;
-			let tens = Math.floor(num / 10) % 10;
-			let hundreds = Math.floor(num / 100) % 10;
+ } else if (num < 1000) {
+			const ones = num % 10;
+			const tens = Math.floor(num / 10) % 10;
+			const hundreds = Math.floor(num / 100) % 10;
 
 			let str = "";
 
-			if(hundreds != 0)
+			if (hundreds != 0) {
 				str += DigitToText(hundreds) + " hundred";
-			if(tens != 0) {
-				if(hundreds != 0) str += " ";
-				if(num % 100 < 20) {
+			}
+			if (tens != 0) {
+				if (hundreds != 0) { str += " "; }
+				if (num % 100 < 20) {
 					str += DigitToText(num % 100);
 					return str;
-				}
-				else {
-					switch(tens) {
+				} else {
+					switch (tens) {
 						case 2: str += "twenty"; break;
 						case 3: str += "thirty"; break;
 						case 4: str += "fourty"; break;
@@ -231,9 +229,8 @@ export namespace Text {
 					}
 				}
 			}
-			if(ones != 0) {
-				if(hundreds != 0 && tens == 0) str += " ";
-				else if(tens != 0) str += "-";
+			if (ones != 0) {
+				if (hundreds != 0 && tens == 0) { str += " "; } else if (tens != 0) { str += "-"; }
 				str += DigitToText(ones);
 			}
 			return str;
@@ -243,27 +240,22 @@ export namespace Text {
 		return num.toString();
 	}
 
-	export function Quantify(num : number) {
+	export function Quantify(num: number) {
 		num = Math.floor(num);
-		if(num < 0)
+		if (num < 0) {
 			return num.toString();
+		}
 		let r;
-		switch(num) {
+		switch (num) {
 			case 0: return "lack";
 			case 1: r = Rand(4);
-				if     (r == 0) return "lone";
-				else if(r == 1) return "solitary";
-				else if(r == 2) return "individual";
-				else            return "single";
+				       if     (r == 0) { return "lone"; } else if (r == 1) { return "solitary"; } else if (r == 2) { return "individual"; } else {            return "single"; }
 			case 2: r = Rand(2);
-				if(r == 0) return "duo";
-				else       return "pair";
+				       if (r == 0) { return "duo"; } else {       return "pair"; }
 			case 3: r = Rand(2);
-				if(r == 0) return "trio";
-				else       return "triad";
+				       if (r == 0) { return "trio"; } else {       return "triad"; }
 			case 4: r = Rand(2);
-				if(r == 0) return "quad";
-				else       return "quartette";
+				       if (r == 0) { return "quad"; } else {       return "quartette"; }
 			case 5: return "quintet";
 			case 6: return "sextet";
 			case 7: return "septet";
@@ -273,9 +265,9 @@ export namespace Text {
 		}
 	}
 
-	export function Ordinal(num : number, capital? : boolean) {
+	export function Ordinal(num: number, capital?: boolean) {
 		num = Math.floor(num);
-		switch(num) {
+		switch (num) {
 			case 1: return capital ? "First"   : "first";
 			case 2: return capital ? "Second"  : "second";
 			case 3: return capital ? "Third"   : "third";
@@ -289,8 +281,7 @@ export namespace Text {
 		}
 	}
 
-
-	export function ParserPlural(parse : any = {}, condition? : any, prefix : string = "", postfix : string|number = "") {
+	export function ParserPlural(parse: any = {}, condition?: any, prefix: string = "", postfix: string|number = "") {
 		parse[prefix + "a" + postfix]      = condition ? "" : " a";
 		parse[prefix + "s" + postfix]      = condition ? "s" : "";
 		parse[prefix + "notS" + postfix]   = condition ? "" : "s";
@@ -321,7 +312,7 @@ export namespace Text {
 		return parse;
 	}
 
-	export function Enumerate(list : any[], conjunction : any) {
+	export function Enumerate(list: any[], conjunction: any) {
 		let output = "";
 		list.reverse(); // We're assuming that the order matters
 		list.forEach(function(elem, idx) {
@@ -343,32 +334,32 @@ export namespace Text {
 	*   checkbox::: TODO
 	*   radio   ::: TODO
 	*/
-	function createInput(inputOptions : any, cssClasses? : any) {
+	function createInput(inputOptions: any, cssClasses?: any) {
 		let input;
-		let type = inputOptions.type || 'button';
-		let classesStr = (cssClasses || "") + " " + (inputOptions.classes || "");
-		if(type.toLowerCase() == 'button') {
-			let btnName = inputOptions.nameStr;
-			let onclick = inputOptions.func;
-			let clickParam = inputOptions.param;
-			input = $('<input />', {
-				type  : 'button',
-				"class" : 'tbarInput '+classesStr,
+		const type = inputOptions.type || "button";
+		const classesStr = (cssClasses || "") + " " + (inputOptions.classes || "");
+		if (type.toLowerCase() == "button") {
+			const btnName = inputOptions.nameStr;
+			const onclick = inputOptions.func;
+			const clickParam = inputOptions.param;
+			input = $("<input />", {
+				type  : "button",
+				class : "tbarInput " + classesStr,
 				value : btnName,
 				on    : {
-					click: function() {
-						let data = $(this).data()
-						let func = data.func;
+					click() {
+						const data = $(this).data();
+						const func = data.func;
 						func(data.param);
-					}
-				}
+					},
+				},
 			});
-			//Add function and parameter data to input
-			$(input).data("param", inputOptions.obj); //TODO
+			// Add function and parameter data to input
+			$(input).data("param", inputOptions.obj); // TODO
 			$(input).data("func", onclick);
 
-		} else if(type.toLowerCase() == 'select') {
-			//TODO Will finish when I need it later
+		} else if (type.toLowerCase() == "select") {
+			// TODO Will finish when I need it later
 			/*let onSelect = inputOptions.func;
 			let selectParam = inputOptions.param;
 			input = $('<input />', {
@@ -385,10 +376,10 @@ export namespace Text {
 			//Add function and parameter data to input
 			$(input).data("param", inputOptions.obj); //TODO
 			$(input).data("func", onclick);*/
-		} else if(type.toLowerCase() == 'checkbox') {
-			//TODO
-		} else if(type.toLowerCase() == 'rado') {
-			//TODO
+		} else if (type.toLowerCase() == "checkbox") {
+			// TODO
+		} else if (type.toLowerCase() == "rado") {
+			// TODO
 		}
 		return input;
 	}
@@ -402,7 +393,6 @@ export namespace Text {
 		Text.Add("", parse);
 		Text.NL();
 		Text.Flush();
-
 
 		// CHOICE
 
@@ -427,7 +417,6 @@ export namespace Text {
 			tooltip : ""
 		});
 		Gui.SetButtonsFromList(options);
-
 
 		// SCENE ROTATION
 
@@ -462,7 +451,6 @@ export namespace Text {
 
 		Text.Flush();
 
-
 		// RANDOM SCENE (USING ENCOUNTER TABLE)
 
 		let scenes = new EncounterTable();
@@ -486,32 +474,32 @@ export namespace Text {
 
 	// Replaces Text.BoldColor when no color specified
 	// Inherits the default color from parent style
-	export function Bold(text : string|number) {
+	export function Bold(text: string|number) {
 		return ApplyStyle(text, "bold");
 	}
 
 	// Apply a standard life damage style
-	export function Damage(text : string|number) {
+	export function Damage(text: string|number) {
 		return ApplyStyle(text, "life bold");
 	}
 
 	// Apply a standard life heal style
-	export function Heal(text : string|number) {
+	export function Heal(text: string|number) {
 		return ApplyStyle(text, "heal bold");
 	}
 
 	// Apply a standard lust 'damage' style
-	export function Lust(text : string|number) {
+	export function Lust(text: string|number) {
 		return ApplyStyle(text, "pink bold");
 	}
 
 	// Apply a standard lust 'heal' style
-	export function Soothe(text : string|number) {
+	export function Soothe(text: string|number) {
 		return ApplyStyle(text, "soothe bold");
 	}
 
 	// Apply a standard mana / SP  style
-	export function Mana(text : string|number) {
+	export function Mana(text: string|number) {
 		return ApplyStyle(text, "mana bold");
 	}
 

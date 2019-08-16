@@ -1,34 +1,34 @@
 import { GetDEBUG } from "../app";
-import { Gui } from "./gui";
-import { Text } from "./text";
-import { ItemType, ItemSubtype, Item } from "./item";
-import { Inventory } from "./inventory";
 import { GAME } from "./GAME";
+import { Gui } from "./gui";
+import { Inventory } from "./inventory";
+import { Item, ItemSubtype, ItemType } from "./item";
 import { Party } from "./party";
+import { Text } from "./text";
 
 interface ShopInventory {
-	it : Item;
-	num : number;
-	enabled : CallableFunction;
-	func : CallableFunction;
-	price : number;
+	it: Item;
+	num: number;
+	enabled: CallableFunction;
+	func: CallableFunction;
+	price: number;
 }
 
 export class Shop {
-	inventory : ShopInventory[];
-	totalBought : number;
-	totalSold : number;
+	public inventory: ShopInventory[];
+	public totalBought: number;
+	public totalSold: number;
 
-	//opts
-	sellPrice : number;
-	buyPromptFunc : (it: any, cost: number, bought: boolean) => void;
-	buySuccessFunc : (it: any, cost: number, num: number) => void;
-	buyFailFunc : (it: any, cost: number, bought: boolean) => void;
-	sellPromptFunc : (it: any, cost: number, sold: boolean) => void;
-	sellSuccessFunc : (it: any, cost: number, num: number) => void;
-	sellFailFunc : (it: any, cost: number, sold: boolean) => void;
+	// opts
+	public sellPrice: number;
+	public buyPromptFunc: (it: any, cost: number, bought: boolean) => void;
+	public buySuccessFunc: (it: any, cost: number, num: number) => void;
+	public buyFailFunc: (it: any, cost: number, bought: boolean) => void;
+	public sellPromptFunc: (it: any, cost: number, sold: boolean) => void;
+	public sellSuccessFunc: (it: any, cost: number, num: number) => void;
+	public sellFailFunc: (it: any, cost: number, sold: boolean) => void;
 
-	constructor(opts : any = {}) {
+	constructor(opts: any = {}) {
 		// Contains {it: Item, [num: Number], [enabled: Function], [func: Function], [price: Number]}
 		// Set num to null for infinite stock
 		// Set enabled to null for unconditional
@@ -50,57 +50,57 @@ export class Shop {
 		this.sellFailFunc    = opts.sellFailFunc;
 	}
 
-	ToStorage() {
-		let storage : any = {};
-		if(this.totalBought != 0) storage.tb = this.totalBought.toFixed();
-		if(this.totalSold   != 0) storage.ts = this.totalSold.toFixed();
+	public ToStorage() {
+		const storage: any = {};
+		if (this.totalBought != 0) { storage.tb = this.totalBought.toFixed(); }
+		if (this.totalSold   != 0) { storage.ts = this.totalSold.toFixed(); }
 		return storage;
 	}
 
-	FromStorage(storage : any = {}) {
+	public FromStorage(storage: any = {}) {
 		this.totalBought = !isNaN(parseInt(storage.tb)) ? parseInt(storage.tb) : this.totalBought;
 		this.totalSold   = !isNaN(parseInt(storage.ts)) ? parseInt(storage.ts) : this.totalSold;
 	}
 
-	AddItem(item : any, price : number, enabled? : CallableFunction, func? : CallableFunction, num? : number) {
+	public AddItem(item: any, price: number, enabled?: CallableFunction, func?: CallableFunction, num?: number) {
 		this.inventory.push({
 			it      : item,
-			price   : price,
-			enabled : enabled,
-			func    : func,
-			num     : num
+			price,
+			enabled,
+			func,
+			num,
 		});
 	}
 
-	Buy(back : CallableFunction = Gui.PrintDefaultOptions, preventClear? : boolean) {
-		let party : Party = GAME().party;
+	public Buy(back: CallableFunction = Gui.PrintDefaultOptions, preventClear?: boolean) {
+		const party: Party = GAME().party;
 
-		let shop = this;
+		const shop = this;
 
-		if(!preventClear)
+		if (!preventClear) {
 			Text.Clear();
-		else
+		} else {
 			Text.NL();
+		}
 
-		let buyFunc = function(obj : any, bought : boolean) {
-			if(obj.func) {
-				let res = obj.func();
-				if(res) return;
+		const buyFunc = function(obj: any, bought: boolean) {
+			if (obj.func) {
+				const res = obj.func();
+				if (res) { return; }
 			}
 
-			let cost = obj.cost;
-			let num  = party.Inv().QueryNum(obj.it) || 0;
+			const cost = obj.cost;
+			const num  = party.Inv().QueryNum(obj.it) || 0;
 
-			if(shop.buyPromptFunc) shop.buyPromptFunc(obj.it, cost, bought);
-			else Text.Clear();
+			if (shop.buyPromptFunc) { shop.buyPromptFunc(obj.it, cost, bought); } else { Text.Clear(); }
 			Text.Add("Buy " + obj.it.name + " for " + cost + " coin? You are carrying " + num + ".");
 			Text.Flush();
 
-			//[name]
-			let options = new Array();
+			// [name]
+			const options = new Array();
 			options.push({ nameStr : "Buy 1",
-				func : function() {
-					if(shop.buySuccessFunc) shop.buySuccessFunc(obj.it, cost, 1);
+				func() {
+					if (shop.buySuccessFunc) { shop.buySuccessFunc(obj.it, cost, 1); }
 					// Remove cost
 					party.coin -= cost;
 					shop.totalBought += cost;
@@ -108,69 +108,70 @@ export class Shop {
 					party.inventory.AddItem(obj.it);
 					buyFunc(obj, true);
 				}, enabled : party.coin >= cost,
-				tooltip : ""
+				tooltip : "",
 			});
 			options.push({ nameStr : "Buy 5",
-				func : function() {
-					if(shop.buySuccessFunc) shop.buySuccessFunc(obj.it, cost, 5);
+				func() {
+					if (shop.buySuccessFunc) { shop.buySuccessFunc(obj.it, cost, 5); }
 					// Remove cost
-					party.coin -= cost*5;
-					shop.totalBought += cost*5;
+					party.coin -= cost * 5;
+					shop.totalBought += cost * 5;
 					// Add item to inv
 					party.inventory.AddItem(obj.it, 5);
 					buyFunc(obj, true);
-				}, enabled : party.coin >= cost*5,
-				tooltip : ""
+				}, enabled : party.coin >= cost * 5,
+				tooltip : "",
 			});
 			options.push({ nameStr : "Buy 10",
-				func : function() {
-					if(shop.buySuccessFunc) shop.buySuccessFunc(obj.it, cost, 10);
+				func() {
+					if (shop.buySuccessFunc) { shop.buySuccessFunc(obj.it, cost, 10); }
 					// Remove cost
-					party.coin -= cost*10;
-					shop.totalBought += cost*10;
+					party.coin -= cost * 10;
+					shop.totalBought += cost * 10;
 					// Add item to inv
 					party.inventory.AddItem(obj.it, 10);
 					buyFunc(obj, true);
-				}, enabled : party.coin >= cost*10,
-				tooltip : ""
+				}, enabled : party.coin >= cost * 10,
+				tooltip : "",
 			});
 			Gui.SetButtonsFromList(options, true, function() {
 				// Recreate the menu
 				// TODO: Keep page!
-				if(shop.buyFailFunc) shop.buyFailFunc(obj.it, cost, bought);
+				if (shop.buyFailFunc) { shop.buyFailFunc(obj.it, cost, bought); }
 				shop.Buy(back, true);
 			});
 		};
 
-		let itemsByType : any = {};
+		const itemsByType: any = {};
 		Inventory.ItemByBothTypes(this.inventory, itemsByType);
 
-		let options = [];
-		for(let typeKey in itemsByType) {
-			//Add main types
+		const options = [];
+		for (const typeKey in itemsByType) {
+			// Add main types
 			Text.AddDiv("<hr>");
 			Text.AddDiv(typeKey, null, "itemTypeHeader");
 			Text.AddDiv("<hr>");
-			for(let subtypeKey in itemsByType[typeKey]){
-				//Add subtypes (except None type)
-				if(subtypeKey != ItemSubtype.None)
+			for (const subtypeKey in itemsByType[typeKey]) {
+				// Add subtypes (except None type)
+				if (subtypeKey != ItemSubtype.None) {
 					Text.AddDiv(subtypeKey, null, "itemSubtypeHeader");
-				let items = itemsByType[typeKey][subtypeKey];
-				if(items) {
-					for(let i=0; i < items.length; i++) {
-						let it       = items[i].it;
-						let num      = items[i].num;
+				}
+				const items = itemsByType[typeKey][subtypeKey];
+				if (items) {
+					for (let i = 0; i < items.length; i++) {
+						const it       = items[i].it;
+						const num      = items[i].num;
 						let enabled  = items[i].enabled ? items[i].enabled() : true;
-						let cost     = GetDEBUG() ? 0 : Math.floor(items[i].price * it.price);
-						let func     = items[i].func;
+						const cost     = GetDEBUG() ? 0 : Math.floor(items[i].price * it.price);
+						const func     = items[i].func;
 
 						enabled = enabled && (party.coin >= cost);
 						Text.AddDiv("<b>" + cost + "g - </b>" + it.name + " - " + it.Short(), null, "itemName");
 
 						options.push({ nameStr : it.name,
-							func : buyFunc, enabled : enabled,
+							func : buyFunc, enabled,
 							tooltip : it.Long(),
-							obj : {it: items[i].it, cost: cost, func: func }
+							obj : {it: items[i].it, cost, func },
 						});
 					}
 				}
@@ -182,135 +183,134 @@ export class Shop {
 		Gui.SetButtonsFromList(options, true, back);
 	}
 
-	Sell(back : CallableFunction = Gui.PrintDefaultOptions, preventClear? : boolean, customSellFunc? : CallableFunction) {
-		let party : Party = GAME().party;
+	public Sell(back: CallableFunction = Gui.PrintDefaultOptions, preventClear?: boolean, customSellFunc?: CallableFunction) {
+		const party: Party = GAME().party;
 
-		let shop = this;
+		const shop = this;
 
-		if(!preventClear)
+		if (!preventClear) {
 			Text.Clear();
-		else
+		} else {
 			Text.NL();
+		}
 
-		if(party.inventory.items.length == 0) {
+		if (party.inventory.items.length == 0) {
 			Text.Add("You have nothing to sell.");
 		}
 
-		let sellFunc = function(obj : any, havesold : boolean) {
-			if(obj.func) {
-				let res = obj.func();
-				if(res) return;
+		const sellFunc = function(obj: any, havesold: boolean) {
+			if (obj.func) {
+				const res = obj.func();
+				if (res) { return; }
 			}
 
 			let num = obj.num;
-			let cost = Math.floor(shop.sellPrice * obj.it.price);
+			const cost = Math.floor(shop.sellPrice * obj.it.price);
 
-			if(shop.sellPromptFunc) shop.sellPromptFunc(obj.it, cost, havesold);
-			else Text.Clear();
+			if (shop.sellPromptFunc) { shop.sellPromptFunc(obj.it, cost, havesold); } else { Text.Clear(); }
 			Text.Add("Sell " + obj.it.name + " for " + cost + " coin? You are carrying " + num + ".");
 			Text.Flush();
 
-			let options = new Array();
+			const options = new Array();
 			options.push({ nameStr : "Sell 1",
-				func : function() {
-					if(shop.sellSuccessFunc) shop.sellSuccessFunc(obj.it, cost, 1);
+				func() {
+					if (shop.sellSuccessFunc) { shop.sellSuccessFunc(obj.it, cost, 1); }
 					// Add cash
 					party.coin += cost;
 					shop.totalSold += cost;
 					// Remove item from inv
 					party.inventory.RemoveItem(obj.it);
 
-					if(customSellFunc) customSellFunc(obj.it, 1);
+					if (customSellFunc) { customSellFunc(obj.it, 1); }
 
 					num -= 1;
-					if(num <= 0) {
+					if (num <= 0) {
 						// Recreate the menu
 						shop.Sell(back, true, customSellFunc);
-					}
-					else
+					} else {
 						sellFunc(obj, true);
+					}
 				}, enabled : true,
-				tooltip : ""
+				tooltip : "",
 			});
 			options.push({ nameStr : "Sell 5",
-				func : function() {
-					let sold = Math.min(num, 5);
-					if(shop.sellSuccessFunc) shop.sellSuccessFunc(obj.it, cost, sold);
+				func() {
+					const sold = Math.min(num, 5);
+					if (shop.sellSuccessFunc) { shop.sellSuccessFunc(obj.it, cost, sold); }
 					// Add cash
 					party.coin += cost * sold;
 					shop.totalSold += cost * sold;
 					// Remove item from inv
 					party.inventory.RemoveItem(obj.it, sold);
 
-					if(customSellFunc) customSellFunc(obj.it, 5);
+					if (customSellFunc) { customSellFunc(obj.it, 5); }
 
 					num -= sold;
-					if(num <= 0) {
+					if (num <= 0) {
 						// Recreate the menu
 						shop.Sell(back, true, customSellFunc);
-					}
-					else
+					} else {
 						sellFunc(obj, true);
+					}
 				}, enabled : true,
-				tooltip : ""
+				tooltip : "",
 			});
 			options.push({ nameStr : "Sell all",
-				func : function() {
-					if(shop.sellSuccessFunc) shop.sellSuccessFunc(obj.it, cost, num);
+				func() {
+					if (shop.sellSuccessFunc) { shop.sellSuccessFunc(obj.it, cost, num); }
 					// Add cash
 					party.coin += cost * num;
 					shop.totalSold += cost * num;
 					// Remove item from inv
 					party.inventory.RemoveItem(obj.it, num);
 
-					if(customSellFunc) customSellFunc(obj.it, num);
+					if (customSellFunc) { customSellFunc(obj.it, num); }
 
 					// Recreate the menu
 					// TODO: Keep page!
 					shop.Sell(back, true, customSellFunc);
 				}, enabled : true,
-				tooltip : ""
+				tooltip : "",
 			});
 			Gui.SetButtonsFromList(options, true, function() {
-				if(shop.sellFailFunc) shop.sellFailFunc(obj.it, cost, havesold);
+				if (shop.sellFailFunc) { shop.sellFailFunc(obj.it, cost, havesold); }
 				// Recreate the menu
 				// TODO: Keep page!
 				shop.Sell(back, true);
 			});
 		};
 
-
-		let itemsByType : any = {};
+		const itemsByType: any = {};
 		Inventory.ItemByBothTypes(party.Inv().items, itemsByType);
 
-
-		let options = [];
-		for(let typeKey in itemsByType) {
-			//Add main types, exclude quest items (can't sell quest items at shop)
-			if(typeKey != ItemType.Quest){
+		const options = [];
+		for (const typeKey in itemsByType) {
+			// Add main types, exclude quest items (can't sell quest items at shop)
+			if (typeKey != ItemType.Quest) {
 				Text.AddDiv("<hr>");
 				Text.AddDiv(typeKey, null, "itemTypeHeader");
 				Text.AddDiv("<hr>");
 			}
-			for(let subtypeKey in itemsByType[typeKey]){
-				//Add subtypes (except None type)
-				if(subtypeKey != ItemSubtype.None)
+			for (const subtypeKey in itemsByType[typeKey]) {
+				// Add subtypes (except None type)
+				if (subtypeKey != ItemSubtype.None) {
 					Text.AddDiv(subtypeKey, null, "itemSubtypeHeader");
-				let items = itemsByType[typeKey][subtypeKey];
-				if(items) {
-					for(let i=0; i < items.length; i++) {
-						let it       = items[i].it;
-						let num      = items[i].num;
-						let price    = Math.floor(shop.sellPrice * it.price);
+				}
+				const items = itemsByType[typeKey][subtypeKey];
+				if (items) {
+					for (let i = 0; i < items.length; i++) {
+						const it       = items[i].it;
+						const num      = items[i].num;
+						const price    = Math.floor(shop.sellPrice * it.price);
 
-						if(price <= 0) continue;
-						//TODO Could look better. Perhaps add 'table' functionality to text.js and use it here
-						Text.AddDiv("<b>"+price + "g</b> - " + it.name + " x" + num + " - " + it.Short(), null, "itemName");
+						if (price <= 0) { continue; }
+						// TODO Could look better. Perhaps add 'table' functionality to text.js and use it here
+						Text.AddDiv("<b>" + price + "g</b> - " + it.name + " x" + num + " - " + it.Short(), null, "itemName");
 
 						options.push({ nameStr : it.name,
 							func : sellFunc, enabled : true,
 							tooltip : it.Long(),
-							obj : items[i]
+							obj : items[i],
 						});
 					}
 				}

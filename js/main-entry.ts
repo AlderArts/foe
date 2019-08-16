@@ -1,22 +1,20 @@
+import { assetsOverlay, LoadImages } from "./assets";
+import { NAV } from "./GAME";
 import { setOnline } from "./gamestate";
-import { LoadImages, assetsOverlay } from "./assets";
-import { SplashScreen } from "./main-splash";
 import { Gui } from "./gui";
-import { InitWorld } from "./world";
-import { Saver } from "./saver";
 import { Input } from "./input";
 import { InitGameOver } from "./main-gameover";
-import { NAV } from "./GAME";
+import { SplashScreen } from "./main-splash";
+import { Saver } from "./saver";
+import { InitWorld } from "./world";
 
 // Set the main entrypoint of the application
 function EntryPoint() {
 	try {
 		setOnline(localStorage ? true : false);
-	}
-	catch(ex) {
+	} catch (ex) {
 		setOnline(false);
-	}
-	finally {
+	} finally {
 		// Setup the application
 		Setup();
 	}
@@ -28,7 +26,7 @@ function Setup() {
     InitGameOver(SplashScreen);
 
 	// Load assets
-	LoadImages(function() {
+	   LoadImages(function() {
 		assetsOverlay();
 
 		// Go to credits screen
@@ -37,14 +35,14 @@ function Setup() {
 		setTimeout(Gui.Render, 100);
 	});
 
-	InitWorld();
+	   InitWorld();
 
 	// Intialize GUI (set key shortcuts, buttons etc)
-	Gui.Init();
-	Saver.Init();
+	   Gui.Init();
+	   Saver.Init();
 
 	// Basic menu
-	Input.menuButtons[0].Setup("Data", NAV().DataPrompt, true);
+	   Input.menuButtons[0].Setup("Data", NAV().DataPrompt, true);
 
-	Gui.Render();
+	   Gui.Render();
 }

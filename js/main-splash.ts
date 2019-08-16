@@ -1,17 +1,17 @@
-import { Images } from './assets';
-import { Gui } from './gui';
-import { VERSION_STRING, GetRenderPictures, SetRenderPictures, GetDEBUG, SetDEBUG } from '../app';
-import { Input } from './input';
-import { Saver } from './saver';
-import { CreditsScreen } from './credits';
-import { CacheToGame } from './gamecache';
-import { GameState, isOnline, SetGameState } from './gamestate';
-import { Text } from './text';
-import { Intro } from './event/introduction';
-import { SetGameCache } from './GAME';
-import { loadfileOverlay } from './fileoverlay';
+import { GetDEBUG, GetRenderPictures, SetDEBUG, SetRenderPictures, VERSION_STRING } from "../app";
+import { Images } from "./assets";
+import { CreditsScreen } from "./credits";
+import { Intro } from "./event/introduction";
+import { loadfileOverlay } from "./fileoverlay";
+import { SetGameCache } from "./GAME";
+import { CacheToGame } from "./gamecache";
+import { GameState, isOnline, SetGameState } from "./gamestate";
+import { Gui } from "./gui";
+import { Input } from "./input";
+import { Saver } from "./saver";
+import { Text } from "./text";
 
-let SplashScreen = function() {
+const SplashScreen = function() {
 	SetGameState(GameState.Credits, Gui);
 	Text.Clear();
 	Gui.ClearButtons();
@@ -22,7 +22,7 @@ let SplashScreen = function() {
 	Text.Add(Text.InsertImage(Images.gwendy)); // TEMP
 	Text.Add("<i>Game developed by <a href=\"http://www.furaffinity.net/user/aldergames/\">Alder</a></i>");
 	Text.NL();
-	Text.Add("Editors: MrKrampus, Del, Johnathan Roberts, Ryous, CalmKhaos. Thanks a bunch for your hard work!")
+	Text.Add("Editors: MrKrampus, Del, Johnathan Roberts, Ryous, CalmKhaos. Thanks a bunch for your hard work!");
 	Text.NL();
 	Text.Add("Thanks to <a href=\"http://www.fenoxo.com/\">Fenoxo</a> for hosting this and for the inspiration. This game would never have been created if not for CoC!");
 	Text.NL();
@@ -51,14 +51,14 @@ let SplashScreen = function() {
 
 	Input.buttons[4].Setup("Toggle debug", function() {
 		SetDEBUG(!GetDEBUG());
-		if(GetDEBUG()) Gui.debug.show(); else Gui.debug.hide();
+		if (GetDEBUG()) { Gui.debug.show(); } else { Gui.debug.hide(); }
 	}, true);
-
 
 	Input.buttons[7].Setup(Gui.ShortcutsVisible ? "Keys: On" : "Keys: Off", function() {
 		Gui.ShortcutsVisible = !Gui.ShortcutsVisible;
-		if(isOnline())
-			localStorage["ShortcutsVisible"] = Gui.ShortcutsVisible ? 1 : 0;
+		if (isOnline()) {
+			localStorage.ShortcutsVisible = Gui.ShortcutsVisible ? 1 : 0;
+		}
 		SplashScreen();
 	}, true);
 
@@ -81,9 +81,10 @@ let SplashScreen = function() {
 	}, isOnline(), null, "Warning! This will clear up old saves by removing the save0-11 and savedata0-11 localstorage slots.");
 
 	Text.NL();
-	if(isOnline() && Saver.HasSaves())
+	if (isOnline() && Saver.HasSaves()) {
 		Text.Add("DEBUG: localStorage usage: " + JSON.stringify(localStorage).length / 2636625);
+	}
 	Text.Flush();
-}
+};
 
 export { SplashScreen };

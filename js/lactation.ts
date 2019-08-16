@@ -2,36 +2,36 @@
  * Lactation handler
  */
 
-import { Stat } from './stat';
+import { Stat } from "./stat";
 
 export class LactationHandler {
-	entity : any;
-	lactating : boolean;
-	lactationRate : Stat;
-	milkProduction : Stat;
-	milkCap : Stat;
-	milk : Stat;
+	public entity: any;
+	public lactating: boolean;
+	public lactationRate: Stat;
+	public milkProduction: Stat;
+	public milkCap: Stat;
+	public milk: Stat;
 
-	constructor(entity : any, storage? : any) {
+	constructor(entity: any, storage?: any) {
 		this.entity = entity;
-		
-		let debugName = function() { return entity.name + ".body"; };
-		
+
+		const debugName = function() { return entity.name + ".body"; };
+
 		this.lactating      = false;
 		this.lactationRate  = new Stat(0);
-		this.lactationRate.debug = function() { return debugName() + ".lactationRate"; }
+		this.lactationRate.debug = function() { return debugName() + ".lactationRate"; };
 		this.milkProduction = new Stat(0);
-		this.milkProduction.debug = function() { return debugName() + ".milkProduction"; }
+		this.milkProduction.debug = function() { return debugName() + ".milkProduction"; };
 		this.milkCap        = new Stat(0);
-		this.milkCap.debug = function() { return debugName() + ".milkCap"; }
+		this.milkCap.debug = function() { return debugName() + ".milkCap"; };
 		this.milk           = new Stat(0);
-		
-		if(storage) this.FromStorage(storage);
+
+		if (storage) { this.FromStorage(storage); }
 	}
 
-	ToStorage() {
-		let storage : any = {};
-		
+	public ToStorage() {
+		const storage: any = {};
+
 		storage.lact  = this.lactating ? 1 : 0;
 		storage.lactR = this.lactationRate.base;
 		storage.milk  = this.milk.base;
@@ -41,9 +41,9 @@ export class LactationHandler {
 		return storage;
 	}
 
-	FromStorage(storage : any) {
+	public FromStorage(storage: any) {
 		storage = storage || {};
-		
+
 		this.lactating           = parseInt(storage.lact) == 1;
 		this.lactationRate.base  = parseFloat(storage.lactR) || this.lactationRate.base;
 		this.milk.base           = parseFloat(storage.milk)  || this.milk.base;
@@ -51,85 +51,88 @@ export class LactationHandler {
 		this.milkCap.base        = parseFloat(storage.milkC) || this.milkCap.base;
 	}
 
-	CanLactate() {
-		let body = this.entity.body;
-		if(body.breasts.length == 0)
+	public CanLactate() {
+		const body = this.entity.body;
+		if (body.breasts.length == 0) {
 			return false;
-		else if(body.breasts[0].Size() < 2)
+		} else if (body.breasts[0].Size() < 2) {
 			return false;
-		else
+ } else {
 			return true;
+ }
 	}
-	Lactation() {
+	public Lactation() {
 		return this.CanLactate() && this.lactating;
 	}
-	Rate() {
+	public Rate() {
 		return this.lactationRate.Get();
 	}
-	Production() {
+	public Production() {
 		return this.milkProduction.Get();
 	}
-	Milk() {
+	public Milk() {
 		return this.milk.Get();
 	}
-	//TODO Balance
-	MilkCap() {
-		let body = this.entity.body;
+	// TODO Balance
+	public MilkCap() {
+		const body = this.entity.body;
 		let cap  = this.milkCap.Get();
-		for(let i = 0; i < body.breasts.length; i++) {
+		for (let i = 0; i < body.breasts.length; i++) {
 			cap += body.breasts[i].Size();
 		}
 		return cap;
 	}
-	MilkLevel() {
-		let cap = this.MilkCap();
-		if(cap != 0)
+	public MilkLevel() {
+		const cap = this.MilkCap();
+		if (cap != 0) {
 			return this.Milk() / cap;
-		else
+		} else {
 			return 0;
+		}
 	}
 
-	Update(hours : number) {
+	public Update(hours: number) {
 		let inc = this.milkProduction.Get() * hours;
-		if(this.Lactation())
+		if (this.Lactation()) {
 			inc -= this.lactationRate.Get() * hours;
-		
-		let oldMilk = this.MilkLevel();
-		if(inc > 0) {
-			this.milk.IncreaseStat(this.MilkCap(), inc, true);
-			
 		}
-		else if(inc < 0) {
+
+		const oldMilk = this.MilkLevel();
+		if (inc > 0) {
+			this.milk.IncreaseStat(this.MilkCap(), inc, true);
+
+		} else if (inc < 0) {
 			this.milk.DecreaseStat(0, -inc, true);
 		}
-		let newMilk = this.MilkLevel();
-		
-		if(this.Milk() >= this.MilkCap()) {
+		const newMilk = this.MilkLevel();
+
+		if (this.Milk() >= this.MilkCap()) {
 			this.entity.MilkFull();
 		}
-		if(this.Lactation()) {
-			if(this.Milk() <= 0)
+		if (this.Lactation()) {
+			if (this.Milk() <= 0) {
 				this.entity.MilkDrained();
+			}
 		}
-		
+
 		this.entity.LactationProgress(oldMilk, newMilk, this.Rate());
 	}
 
-	MilkDrain(drain : number) {
+	public MilkDrain(drain: number) {
 		return this.milk.DecreaseStat(0, drain);
 	}
-	MilkDrainFraction(fraction : number) {
+	public MilkDrainFraction(fraction: number) {
 		fraction = fraction || 1;
 		return this.milk.DecreaseStat(0, this.MilkCap() * fraction);
 	}
-	FillMilk(fraction : number) {
+	public FillMilk(fraction: number) {
 		fraction = fraction || 1;
 		this.milk.IncreaseStat(this.MilkCap(), this.MilkCap() * fraction);
 	}
-	MilkDrained() {
+	public MilkDrained() {
 		this.lactating = false;
 	}
-	MilkFull() {
+	public MilkFull() {
 		this.lactating = true;
 	}
 

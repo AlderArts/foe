@@ -15,12 +15,12 @@ export enum Element {
 	mNature     = 12,
 	lust        = 13,
 
-	numElements = 14
+	numElements = 14,
 }
 
 export class DamageType {
-	dmg : number[];
-	constructor(type? : any) {
+	public dmg: number[];
+	constructor(type?: any) {
 		type = type || {};
 		this.dmg = [];
 		this.dmg[Element.pSlash]   = type.pSlash   || 0;
@@ -38,15 +38,16 @@ export class DamageType {
 		this.dmg[Element.mNature]  = type.mNature  || 0;
 		this.dmg[Element.lust]     = type.lust     || 0;
 	}
-	
-	Add(other : any) {
-		for(let i = 0; i < Element.numElements; i++)
+
+	public Add(other: any) {
+		for (let i = 0; i < Element.numElements; i++) {
 			this.dmg[i] += other.dmg[i];
+		}
 	}
 
-	ApplyDmgType(def : any, atkDmg : number) {
+	public ApplyDmgType(def: any, atkDmg: number) {
 		let ret = 0;
-		for(let i = 0; i < Element.numElements; i++) {
+		for (let i = 0; i < Element.numElements; i++) {
 			let dmg = this.dmg[i] * atkDmg;
 			dmg -= dmg * def.dmg[i];
 			ret += dmg;

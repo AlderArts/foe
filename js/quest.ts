@@ -1,307 +1,323 @@
-import * as _ from 'lodash';
+import * as _ from "lodash";
 
-import { GetDEBUG } from '../app';
-import { CaleFlags } from './event/nomads/cale-flags';
-import { TerryFlags } from './event/terry-flags';
-import { Text } from './text';
-import { Gui } from './gui';
-import { GlobalScenes } from './event/global';
-import { GAME } from './GAME';
-import { TwinsFlags } from './event/royals/twins-flags';
-import { AlchemyItems } from './items/alchemy';
-import { RigardFlags } from './loc/rigard/rigard-flags';
-import { DryadGladeFlags } from './loc/glade-flags';
-import { BurrowsFlags } from './loc/burrows-flags';
-import { LeiFlags } from './event/royals/lei-flags';
-import { AscheTasksScenes } from './event/asche-tasks';
-import { VaughnFlags } from './event/outlaws/vaughn-flags';
-import { VaughnTasksScenes } from './event/outlaws/vaughn-tasks';
-import { LeiTaskScenes } from './event/royals/lei-tasks';
-import { QuestItems } from './items/quest';
+import { GetDEBUG } from "../app";
+import { AscheTasksScenes } from "./event/asche-tasks";
+import { GlobalScenes } from "./event/global";
+import { CaleFlags } from "./event/nomads/cale-flags";
+import { VaughnFlags } from "./event/outlaws/vaughn-flags";
+import { VaughnTasksScenes } from "./event/outlaws/vaughn-tasks";
+import { LeiFlags } from "./event/royals/lei-flags";
+import { LeiTaskScenes } from "./event/royals/lei-tasks";
+import { TwinsFlags } from "./event/royals/twins-flags";
+import { TerryFlags } from "./event/terry-flags";
+import { GAME } from "./GAME";
+import { Gui } from "./gui";
+import { AlchemyItems } from "./items/alchemy";
+import { QuestItems } from "./items/quest";
+import { BurrowsFlags } from "./loc/burrows-flags";
+import { DryadGladeFlags } from "./loc/glade-flags";
+import { RigardFlags } from "./loc/rigard/rigard-flags";
+import { Text } from "./text";
 
 export class Quest {
-	name : any;
-	desc : any;
-	active : any;
-	list : any[];
+	public name: any;
+	public desc: any;
+	public active: any;
+	public list: any[];
 
-	constructor(opts? : any) {
+	constructor(opts?: any) {
 		opts = opts || {};
 		this.name   = opts.name   || "FAIL";
 		this.desc   = opts.desc   || "NO DESC";
 		this.active = opts.active || function() { return Quests.Type.NotStarted; };
 		this.list   = opts.list   || [];
 	}
-	
-	Print() {
-		let name = _.isFunction(this.name) ? this.name() : this.name;
-		Text.Add("<b>"+name+"</b>");
+
+	public Print() {
+		const name = _.isFunction(this.name) ? this.name() : this.name;
+		Text.Add("<b>" + name + "</b>");
 		Text.NL();
-		let desc = _.isFunction(this.desc) ? this.desc() : this.desc;
+		const desc = _.isFunction(this.desc) ? this.desc() : this.desc;
 		Text.Add(desc);
 		Text.NL();
-		let list = this.list;
-		if(list.length > 0) {
+		const list = this.list;
+		if (list.length > 0) {
 			Text.Add("<ul>");
-			for(let i=0,j=list.length; i<j; ++i) {
-				let item = list[i];
+			for (let i = 0, j = list.length; i < j; ++i) {
+				const item = list[i];
 				item.Print();
 			}
 			Text.Add("</ul>");
 		}
 	}
-	Active() {
+	public Active() {
 		return this.active(this) & Quests.curType;
 	}
 
-};
+}
 
 export class QuestItem {
-	desc : any;
-	active : any;
-	constructor(opts? : any) {
+	public desc: any;
+	public active: any;
+	constructor(opts?: any) {
 		opts = opts || {};
 		this.desc   = opts.desc   || "NO DESC";
 		this.active = opts.active;
 	}
-	
-	Print() {
-		let active = this.Active();
-		if((active & Quests.Type.Visible) || GetDEBUG()) {
+
+	public Print() {
+		const active = this.Active();
+		if ((active & Quests.Type.Visible) || GetDEBUG()) {
 			Text.Add("<li>");
-			if(active & Quests.Type.Completed)
+			if (active & Quests.Type.Completed) {
 				Text.Add("<del>");
-			if(active & Quests.Type.Failed)
+			}
+			if (active & Quests.Type.Failed) {
 				Text.Add("<font color ='red'><del>");
-			
-			let desc = _.isFunction(this.desc) ? this.desc() : this.desc;
-			if(_.isFunction(desc))
+			}
+
+			const desc = _.isFunction(this.desc) ? this.desc() : this.desc;
+			if (_.isFunction(desc)) {
 				desc();
-			else
+			} else {
 				Text.Add(desc);
-			
-			if(active & Quests.Type.Completed)
+			}
+
+			if (active & Quests.Type.Completed) {
 				Text.Add("</del>");
-			if(active & Quests.Type.Failed)
+			}
+			if (active & Quests.Type.Failed) {
 				Text.Add("</del></font>");
+			}
 			Text.Add("</li>");
 		}
 	}
-	Active() {
+	public Active() {
 		return this.active ? this.active() : Quests.Type.Visible;
 	}
-};
+}
 
-
-let Quests : any = {
+const Quests: any = {
 	Type : {
 		NotStarted : 0,
 		Visible    : 1,
 		Completed  : 2,
 		All        : 3,
-		Failed     : 4
-	}
+		Failed     : 4,
+	},
 };
 
 Quests.quests  = [];
 Quests.curType = Quests.Type.Visible;
 
-Quests.Print = function(SetExploreButtons : any) {
+Quests.Print = function(SetExploreButtons: any) {
 	let numQs = 0;
-	for(let i=0, j=Quests.quests.length; i<j; ++i) {
-		let q = Quests.quests[i];
-		let active = q.Active();
-		if(active || GetDEBUG()) {
+	for (let i = 0, j = Quests.quests.length; i < j; ++i) {
+		const q = Quests.quests[i];
+		const active = q.Active();
+		if (active || GetDEBUG()) {
 			numQs++;
 			Text.Add("<hr>");
-			if(!active)
+			if (!active) {
 				Text.Add("<font color ='gray'>");
-			
+			}
+
 			q.Print();
-			
-			if(!active)
+
+			if (!active) {
 				Text.Add("</font>");
+			}
 		}
 	}
-	if(numQs > 0)
+	if (numQs > 0) {
 		Text.Add("<hr>");
-	else {
+	} else {
 		Text.Add("No active quests.", null, "bold");
 	}
 	Text.Flush();
-	
-	let options = new Array();
+
+	const options = new Array();
 	options.push({ nameStr : "Active",
-		func : function() {
+		func() {
 			Text.Clear();
 			Quests.curType = Quests.Type.Visible;
 			Quests.Print(SetExploreButtons);
-		}, enabled : Quests.curType != Quests.Type.Visible
+		}, enabled : Quests.curType != Quests.Type.Visible,
 	});
 	options.push({ nameStr : "Completed",
-		func : function() {
+		func() {
 			Text.Clear();
 			Quests.curType = Quests.Type.Completed;
 			Quests.Print(SetExploreButtons);
-		}, enabled : Quests.curType != Quests.Type.Completed
+		}, enabled : Quests.curType != Quests.Type.Completed,
 	});
 	options.push({ nameStr : "All",
-		func : function() {
+		func() {
 			Text.Clear();
 			Quests.curType = Quests.Type.All;
 			Quests.Print(SetExploreButtons);
-		}, enabled : Quests.curType != Quests.Type.All
+		}, enabled : Quests.curType != Quests.Type.All,
 	});
 	Gui.SetButtonsFromList(options, false, null);
-	
-	SetExploreButtons();
-}
 
+	SetExploreButtons();
+};
 
 /*************************
  * Actual list of quests *
  *************************/
 
-
 // MAIN QUESTS
 
 Quests.quests.push(new Quest({
 	name: "Dark Agenda",
-	desc: function() {
+	desc() {
 		return "Prepare Eden against the coming of Uru.";
 	},
-	active: function() {
+	active() {
 		let status = Quests.Type.NotStarted;
 		status |= Quests.Type.Visible;
 		return status;
 	},
 	list: [
 		new QuestItem({
-			desc: function() {
-				if((GAME().rosalin.flags["Met"] == 0 ||
+			desc() {
+				if ((GAME().rosalin.flags.Met == 0 ||
 				    GlobalScenes.MagicStage1()) &&
-				    GAME().jeanne.flags["Met"] == 0)
+				    GAME().jeanne.flags.Met == 0) {
 					return "Find someone to help you figure out what the gem does.";
-				else
+				} else {
 					return "Talk with the court magician about the gem and figure out what it does.";
+				}
 			},
-			active: function() {
+			active() {
 				let status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if(GAME().jeanne.flags["Met"] != 0)
+				if (GAME().jeanne.flags.Met != 0) {
 					status |= Quests.Type.Completed;
+				}
 				return status;
-			}
+			},
 		}),
 		new QuestItem({
-			desc: function() {
+			desc() {
 				return "Seek the aid of Mother Tree in the Dryad's Glade, deep within the forest.";
 			},
-			active: function() {
+			active() {
 				let status = Quests.Type.NotStarted;
-				if(GAME().jeanne.flags["Met"] != 0)
+				if (GAME().jeanne.flags.Met != 0) {
 					status |= Quests.Type.Visible;
-				if(GAME().glade.flags["Visit"] >= DryadGladeFlags.Visit.DefeatedOrchid)
+				}
+				if (GAME().glade.flags.Visit >= DryadGladeFlags.Visit.DefeatedOrchid) {
 					status |= Quests.Type.Completed;
+				}
 				return status;
-			}
+			},
 		}),
 		new QuestItem({
-			desc: function() {
+			desc() {
 				return "Meet Jeanne at the mound near the Crossroads in order to activate the gem.";
 			},
-			active: function() {
+			active() {
 				let status = Quests.Type.NotStarted;
-				if(GAME().glade.flags["Visit"] >= DryadGladeFlags.Visit.DefeatedOrchid)
+				if (GAME().glade.flags.Visit >= DryadGladeFlags.Visit.DefeatedOrchid) {
 					status |= Quests.Type.Visible;
-				//TODO
+				}
+				// TODO
 				return status;
-			}
-		})
-	]
+			},
+		}),
+	],
 }));
 
-
 Quests.quests.push(new Quest({
-	name: function() {
+	name() {
 		return "The Nomads";
 	},
-	desc: function() {
+	desc() {
 		return "Explore the nomads' camp and talk to it's inhabitants.";
 	},
-	active: function(quest : Quest) {
+	active(quest: Quest) {
 		let complete = true;
-		for(let i=0, j=quest.list.length; i<j; ++i)
+		for (let i = 0, j = quest.list.length; i < j; ++i) {
 			complete = complete && (quest.list[i].Active() & Quests.Type.Completed) != 0;
+		}
 		let status = Quests.Type.NotStarted;
-		if(complete)
+		if (complete) {
 			status |= Quests.Type.Completed;
-		else
+		} else {
 			status |= Quests.Type.Visible;
+		}
 		return status;
 	},
 	list: [
 		new QuestItem({
-			desc: function() {
+			desc() {
 				return "Talk to the leader of the nomads.";
 			},
-			active: function() {
+			active() {
 				let status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if(GAME().chief.flags["Met"] != 0)
+				if (GAME().chief.flags.Met != 0) {
 					status |= Quests.Type.Completed;
+				}
 				return status;
-			}
+			},
 		}),
 		new QuestItem({
-			desc: function() {
+			desc() {
 				return "Approach the strange alchemist.";
 			},
-			active: function() {
+			active() {
 				let status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if(GAME().rosalin.flags["Met"] != 0)
+				if (GAME().rosalin.flags.Met != 0) {
 					status |= Quests.Type.Completed;
+				}
 				return status;
-			}
+			},
 		}),
 		new QuestItem({
-			desc: function() {
+			desc() {
 				return "Perhaps you should check up on that wolf again...";
 			},
-			active: function() {
+			active() {
 				let status = Quests.Type.NotStarted;
-				if(GAME().rosalin.flags["Met"] != 0)
+				if (GAME().rosalin.flags.Met != 0) {
 					status |= Quests.Type.Visible;
-				if(GAME().cale.flags["Met2"] != CaleFlags.Met2.NotMet)
+				}
+				if (GAME().cale.flags.Met2 != CaleFlags.Met2.NotMet) {
 					status |= Quests.Type.Completed;
+				}
 				return status;
-			}
+			},
 		}),
 		new QuestItem({
-			desc: function() {
+			desc() {
 				return "Approach the hunter.";
 			},
-			active: function() {
+			active() {
 				let status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if(GAME().estevan.flags["Met"] != 0)
+				if (GAME().estevan.flags.Met != 0) {
 					status |= Quests.Type.Completed;
+				}
 				return status;
-			}
+			},
 		}),
 		new QuestItem({
-			desc: function() {
+			desc() {
 				return "Approach the magician.";
 			},
-			active: function() {
+			active() {
 				let status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if(GAME().magnus.flags["Met"] != 0)
+				if (GAME().magnus.flags.Met != 0) {
 					status |= Quests.Type.Completed;
+				}
 				return status;
-			}
-		})
+			},
+		}),
 		/*, //TODO Patchwork
 		new QuestItem({
 			desc: function() {
@@ -316,801 +332,855 @@ Quests.quests.push(new Quest({
 			}
 		})
 		*/
-	]
+	],
 }));
-
 
 Quests.quests.push(new Quest({
 	name: "Big City",
-	desc: function() {
-		if(GAME().rigard.Access())
+	desc() {
+		if (GAME().rigard.Access()) {
 			return "Get access to the royal grounds.";
-		else
+		} else {
 			return "Find a way inside the city of Rigard. You'll need to get a pass to enter... only question is how to get one.";
+		}
 	},
-	active: function() {
-		let rigard = GAME().rigard;
+	active() {
+		const rigard = GAME().rigard;
 		let status = Quests.Type.NotStarted;
-		if(rigard.RoyalAccess())
+		if (rigard.RoyalAccess()) {
 			status |= Quests.Type.Completed;
-		else if(GlobalScenes.VisitedRigardGates())
+		} else if (GlobalScenes.VisitedRigardGates()) {
 			status |= Quests.Type.Visible;
+ }
 		return status;
 	},
 	list: [
 		new QuestItem({
-			desc: function() {
-				if(GAME().rigard.Access())
+			desc() {
+				if (GAME().rigard.Access()) {
 					return "Get inside the outer walls.";
-				else
+				} else {
 					return "Get a pass to the city. You could probably get one by gaining the trust of one of the farmers of the plains. Miranda, the guardswoman, is probably also able to help you get one. If all else fails, you've heard that the outlaws in the forest have infiltrated the city... there must be some sort of secret entrance.";
+				}
 			},
-			active: function() {
+			active() {
 				let status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if(GAME().rigard.Access())
+				if (GAME().rigard.Access()) {
 					status |= Quests.Type.Completed;
+				}
 				return status;
-			}
+			},
 		}),
 		new QuestItem({
-			desc: function() {
+			desc() {
 				return "Find a way to get past the inner walls.";
 			},
-			active: function() {
-				let rigard = GAME().rigard;
+			active() {
+				const rigard = GAME().rigard;
 				let status = Quests.Type.NotStarted;
-				if(rigard.Access())
+				if (rigard.Access()) {
 					status |= Quests.Type.Visible;
-				if(rigard.RoyalAccess())
+				}
+				if (rigard.RoyalAccess()) {
 					status |= Quests.Type.Completed;
+				}
 				return status;
-			}
-		})
-	]
+			},
+		}),
+	],
 }));
 
-
-
 Quests.quests.push(new Quest({
-	name: function() {
+	name() {
 		return "Seeking Favor";
 	},
-	desc: function() {
+	desc() {
 		return "Investigate the noble couple you saw sneaking out of the inner district. You probably ought to figure out why they were followed.";
 	},
-	active: function() {
-		let rigard = GAME().rigard;
+	active() {
+		const rigard = GAME().rigard;
 		let status = Quests.Type.NotStarted;
-		if(rigard.RoyalAccess())
+		if (rigard.RoyalAccess()) {
 			status |= Quests.Type.Completed;
-		else if(rigard.flags["RoyalAccessTalk"] >= 1)
+		} else if (rigard.flags.RoyalAccessTalk >= 1) {
 			status |= Quests.Type.Visible;
+ }
 		return status;
 	},
 	list: [
 		new QuestItem({
-			desc: function() {
+			desc() {
 				return "Investigate what became of the noble couple and their stalker. Perhaps seek them at the inn?";
 			},
-			active: function() {
+			active() {
 				let status = Quests.Type.NotStarted;
-				if(GAME().twins.flags["Met"] >= TwinsFlags.Met.Met)
+				if (GAME().twins.flags.Met >= TwinsFlags.Met.Met) {
 					status |= Quests.Type.Completed;
+				}
 				status |= Quests.Type.Visible;
 				return status;
-			}
+			},
 		}),
 		new QuestItem({
-			desc: function() {
+			desc() {
 				return "Heed the noble couple's request by humiliating Lord Krawitz.";
 			},
-			active: function() {
+			active() {
 				let status = Quests.Type.NotStarted;
-				if(GAME().twins.flags["Met"] >= TwinsFlags.Met.Met)
+				if (GAME().twins.flags.Met >= TwinsFlags.Met.Met) {
 					status |= Quests.Type.Visible;
-				if(GAME().rigard.RoyalAccess())
+				}
+				if (GAME().rigard.RoyalAccess()) {
 					status |= Quests.Type.Completed;
+				}
 				return status;
-			}
-		})
-	]
+			},
+		}),
+	],
 }));
 
-
 Quests.quests.push(new Quest({
-	name: function() {
+	name() {
 		return "Shifting the Blame";
 	},
-	desc: function() {
+	desc() {
 		return "Crap, they are on to you. If you don't want to spend the rest of your short life in a cell, you'd better help Miranda catch the thief called the 'Masked Fox'. Before you do, you're not likely to get out of Rigard.";
 	},
-	active: function() {
-		let rigard = GAME().rigard;
+	active() {
+		const rigard = GAME().rigard;
 		let status = Quests.Type.NotStarted;
-		if(rigard.Krawitz["Q"] >= RigardFlags.KrawitzQ.CaughtTerry)
+		if (rigard.Krawitz.Q >= RigardFlags.KrawitzQ.CaughtTerry) {
 			status |= Quests.Type.Completed;
-		else if(rigard.Krawitz["Q"] == RigardFlags.KrawitzQ.HuntingTerry)
+		} else if (rigard.Krawitz.Q == RigardFlags.KrawitzQ.HuntingTerry) {
 			status |= Quests.Type.Visible;
+ }
 		return status;
 	},
 	list: [
 		new QuestItem({
-			desc: function() {
+			desc() {
 				return "Find the thief.";
 			},
-			active: function() {
+			active() {
 				let status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if(GAME().terry.flags["Met"] >= TerryFlags.Met.Found)
+				if (GAME().terry.flags.Met >= TerryFlags.Met.Found) {
 					status |= Quests.Type.Completed;
+				}
 				return status;
-			}
+			},
 		}),
 		new QuestItem({
-			desc: function() {
+			desc() {
 				return "Catch the thief.";
 			},
-			active: function() {
+			active() {
 				let status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if(GAME().terry.flags["Met"] >= TerryFlags.Met.Caught)
+				if (GAME().terry.flags.Met >= TerryFlags.Met.Caught) {
 					status |= Quests.Type.Completed;
+				}
 				return status;
-			}
-		})
-	]
+			},
+		}),
+	],
 }));
-
 
 // SIDE QUESTS
 
 Quests.quests.push(new Quest({
-	name: function() {
+	name() {
 		return "A Guilty Conscience";
 	},
-	desc: function() {
+	desc() {
 		return "You are feeling a bit guilty about the fox currently imprisoned due to your actions. Who knows, he could end up being executed over this, given how the Royal Guard regards morphs in Rigard.";
 	},
-	active: function() {
+	active() {
 		let status = Quests.Type.NotStarted;
-		if(GAME().terry.flags["Saved"] >= TerryFlags.Saved.Saved)
+		if (GAME().terry.flags.Saved >= TerryFlags.Saved.Saved) {
 			status |= Quests.Type.Completed;
-		else if(GAME().rigard.Krawitz["Q"] >= RigardFlags.KrawitzQ.CaughtTerry)
+		} else if (GAME().rigard.Krawitz.Q >= RigardFlags.KrawitzQ.CaughtTerry) {
 			status |= Quests.Type.Visible;
+ }
 		return status;
 	},
 	list: [
 		new QuestItem({
-			desc: function() {
+			desc() {
 				return "Ask around about what's happened to the thief. Who'd have the authority to release him from custody?";
 			},
-			active: function() {
+			active() {
 				let status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if(GAME().terry.flags["Saved"] >= TerryFlags.Saved.TalkedTwins1)
+				if (GAME().terry.flags.Saved >= TerryFlags.Saved.TalkedTwins1) {
 					status |= Quests.Type.Completed;
+				}
 				return status;
-			}
+			},
 		}),
 		new QuestItem({
-			desc: function() {
+			desc() {
 				return "Return to the twins after they have made their arrangements.";
 			},
-			active: function() {
-				let terry = GAME().terry;
+			active() {
+				const terry = GAME().terry;
 				let status = Quests.Type.NotStarted;
-				if(terry.flags["Saved"] >= TerryFlags.Saved.TalkedTwins1)
+				if (terry.flags.Saved >= TerryFlags.Saved.TalkedTwins1) {
 					status |= Quests.Type.Visible;
-				if(terry.flags["Saved"] >= TerryFlags.Saved.TalkedTwins2)
+				}
+				if (terry.flags.Saved >= TerryFlags.Saved.TalkedTwins2) {
 					status |= Quests.Type.Completed;
+				}
 				return status;
-			}
+			},
 		}),
 		new QuestItem({
-			desc: function() {
+			desc() {
 				return "Take custody of the thief from the jail in the royal grounds. It'll be quite interesting to see what effects the collar has...";
 			},
-			active: function() {
-				let terry = GAME().terry;
+			active() {
+				const terry = GAME().terry;
 				let status = Quests.Type.NotStarted;
-				if(terry.flags["Saved"] >= TerryFlags.Saved.TalkedTwins2)
+				if (terry.flags.Saved >= TerryFlags.Saved.TalkedTwins2) {
 					status |= Quests.Type.Visible;
-				if(terry.flags["Saved"] >= TerryFlags.Saved.Saved)
+				}
+				if (terry.flags.Saved >= TerryFlags.Saved.Saved) {
 					status |= Quests.Type.Completed;
+				}
 				return status;
-			}
-		})
-	]
+			},
+		}),
+	],
 }));
 
-
 Quests.quests.push(new Quest({
-	name: function() {
+	name() {
 		return "Mixin' it up!";
 	},
-	desc: function() {
+	desc() {
 		return "Learn about alchemy from Rosalin.";
 	},
-	active: function() {
-		let rosalin = GAME().rosalin;
+	active() {
+		const rosalin = GAME().rosalin;
 		let status = Quests.Type.NotStarted;
-		if(rosalin.flags["AlQuest"] >= 2)
+		if (rosalin.flags.AlQuest >= 2) {
 			status |= Quests.Type.Completed;
-		else if(rosalin.flags["Met"] != 0)
+		} else if (rosalin.flags.Met != 0) {
 			status |= Quests.Type.Visible;
+ }
 		return status;
 	},
 	list: [
 		new QuestItem({
-			desc: function() {
-				let parse = GAME().rosalin.ParserPronouns();
+			desc() {
+				const parse = GAME().rosalin.ParserPronouns();
 				return Text.Parse("Ask Rosalin if [heshe] could teach you the secrets of [hisher] trade.", parse);
 			},
-			active: function() {
+			active() {
 				let status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if(GAME().rosalin.flags["AlQuest"] >= 1)
+				if (GAME().rosalin.flags.AlQuest >= 1) {
 					status |= Quests.Type.Completed;
+				}
 				return status;
-			}
+			},
 		}),
 		new QuestItem({
-			desc: function() {
+			desc() {
 				return "Retrieve the items that Rosalin requested. You should be able to find them from the lagomorphs near the crossroads. The alchemist asked for <b>lettuce, carrot juice and a rabbit foot charm.</b>";
 			},
-			active: function() {
-				let item = AlchemyItems.Leporine;
+			active() {
+				const item = AlchemyItems.Leporine;
 				let enabled = true;
-				for(let j = 0; j < item.recipe.length; j++) {
-					let component = item.recipe[j];
+				for (let j = 0; j < item.recipe.length; j++) {
+					const component = item.recipe[j];
 					enabled = enabled && (GAME().party.inventory.QueryNum(component.it) >= (component.num || 1));
 				}
-				
-				let rosalin = GAME().rosalin;
+
+				const rosalin = GAME().rosalin;
 				let status = Quests.Type.NotStarted;
-				if(rosalin.flags["AlQuest"] >= 1)
+				if (rosalin.flags.AlQuest >= 1) {
 					status |= Quests.Type.Visible;
-				if(rosalin.flags["AlQuest"] >= 2 || enabled)
+				}
+				if (rosalin.flags.AlQuest >= 2 || enabled) {
 					status |= Quests.Type.Completed;
+				}
 				return status;
-			}
+			},
 		}),
 		new QuestItem({
-			desc: function() {
+			desc() {
 				return "Return the items to Rosalin and learn how to do alchemy.";
 			},
-			active: function() {
-				let rosalin = GAME().rosalin;
+			active() {
+				const rosalin = GAME().rosalin;
 				let status = Quests.Type.NotStarted;
-				if(rosalin.flags["AlQuest"] >= 1)
+				if (rosalin.flags.AlQuest >= 1) {
 					status |= Quests.Type.Visible;
-				if(rosalin.flags["AlQuest"] >= 2)
+				}
+				if (rosalin.flags.AlQuest >= 2) {
 					status |= Quests.Type.Completed;
+				}
 				return status;
-			}
-		})
-	]
+			},
+		}),
+	],
 }));
 
 Quests.quests.push(new Quest({
-	name: function() {
+	name() {
 		return "Breeding Bunnies";
 	},
-	desc: function() {
+	desc() {
 		return "Help Ophelia with her alchemical experiments in the Burrows. You are not sure this is really a good idea, but Lagon promised to pay you handsomely for your services.";
 	},
-	active: function() {
-		let burrows = GAME().burrows;
+	active() {
+		const burrows = GAME().burrows;
 		let status = Quests.Type.NotStarted;
-		if(burrows.flags["Access"] >= BurrowsFlags.AccessFlags.Stage3)
+		if (burrows.flags.Access >= BurrowsFlags.AccessFlags.Stage3) {
 			status |= Quests.Type.Completed;
-		else if(burrows.flags["Access"] >= BurrowsFlags.AccessFlags.Visited)
+		} else if (burrows.flags.Access >= BurrowsFlags.AccessFlags.Visited) {
 			status |= Quests.Type.Visible;
+ }
 		return status;
 	},
 	list: [
 		new QuestItem({
-			desc: function() {
+			desc() {
 				let num = GAME().party.Inv().QueryNum(QuestItems.Cactoid);
 				num = num || 0;
-				if(GAME().burrows.BruteActive())
+				if (GAME().burrows.BruteActive()) {
 					return "Bring Ophelia cactoids from the desert: 3/3.";
-				else
-					return Text.Parse("Bring Ophelia cactoids from the desert: [num]/3.", { num: num });
+				} else {
+					return Text.Parse("Bring Ophelia cactoids from the desert: [num]/3.", { num });
+				}
 			},
-			active: function() {
+			active() {
 				let status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if(GAME().burrows.BruteActive())
+				if (GAME().burrows.BruteActive()) {
 					status |= Quests.Type.Completed;
+				}
 				return status;
-			}
+			},
 		}),
 		new QuestItem({
-			desc: function() {
+			desc() {
 				let num = GAME().party.Inv().QueryNum(QuestItems.GolHusk);
 				num = num || 0;
-				if(GAME().burrows.HermActive())
+				if (GAME().burrows.HermActive()) {
 					return "Bring Ophelia Gol husks from the forest: 3/3.";
-				else
-					return Text.Parse("Bring Ophelia Gol husks from the forest: [num]/3.", { num: num });
+				} else {
+					return Text.Parse("Bring Ophelia Gol husks from the forest: [num]/3.", { num });
+				}
 			},
-			active: function() {
+			active() {
 				let status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if(GAME().burrows.HermActive())
+				if (GAME().burrows.HermActive()) {
 					status |= Quests.Type.Completed;
+				}
 				return status;
-			}
+			},
 		}),
 		new QuestItem({
-			desc: function() {
+			desc() {
 				let num = GAME().party.Inv().QueryNum(QuestItems.RedAlgae);
 				num = num || 0;
-				if(GAME().burrows.BrainyActive())
+				if (GAME().burrows.BrainyActive()) {
 					return "Bring Ophelia red algae from the lake: 3/3.";
-				else
-					return Text.Parse("Bring Ophelia red algae from the lake: [num]/3.", { num: num });
+				} else {
+					return Text.Parse("Bring Ophelia red algae from the lake: [num]/3.", { num });
+				}
 			},
-			active: function() {
+			active() {
 				let status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if(GAME().burrows.BrainyActive())
+				if (GAME().burrows.BrainyActive()) {
 					status |= Quests.Type.Completed;
+				}
 				return status;
-			}
-		})
-	]
+			},
+		}),
+	],
 }));
 
 Quests.quests.push(new Quest({
-	name: function() {
+	name() {
 		return "Search for the Scepter";
 	},
-	desc: function() {
+	desc() {
 		return "Ophelia has asked you to search for Lagon's scepter, possibly the only thing that can help her mother.";
 	},
-	active: function() {
-		let burrows = GAME().burrows;
+	active() {
+		const burrows = GAME().burrows;
 		let status = Quests.Type.NotStarted;
-		if(burrows.flags["Access"] >= BurrowsFlags.AccessFlags.QuestlineComplete)
+		if (burrows.flags.Access >= BurrowsFlags.AccessFlags.QuestlineComplete) {
 			status |= Quests.Type.Completed;
-		else if(burrows.flags["Access"] >= BurrowsFlags.AccessFlags.Stage3)
+		} else if (burrows.flags.Access >= BurrowsFlags.AccessFlags.Stage3) {
 			status |= Quests.Type.Visible;
+ }
 		return status;
 	},
 	list: [
 		new QuestItem({
-			desc: function() { //TODO Roa met flag
+			desc() { // TODO Roa met flag
 				return "Find Ophelia's brother, Roa. Your best lead seems to be looking for whorehouses...";
 			},
-			active: function() {
+			active() {
 				let status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if(GAME().burrows.flags["Access"] >= BurrowsFlags.AccessFlags.Stage4)
+				if (GAME().burrows.flags.Access >= BurrowsFlags.AccessFlags.Stage4) {
 					status |= Quests.Type.Completed;
+				}
 				return status;
-			}
-		}),
-		new QuestItem({
-			desc: function() {
-				return GAME().rigard.flags["Scepter"] == 0 ? "Follow the merchant lead, trail the caravan along the King's Road." : "Follow the merchant lead, probably best to check the merchant street.";
 			},
-			active: function() {
-				let burrows = GAME().burrows;
-				let status = Quests.Type.NotStarted;
-				if(burrows.flags["Access"] >= BurrowsFlags.AccessFlags.Stage4)
-					status |= Quests.Type.Visible;
-				if(burrows.flags["Access"] >= BurrowsFlags.AccessFlags.Stage5)
-					status |= Quests.Type.Completed;
-				return status;
-			}
 		}),
 		new QuestItem({
-			desc: function() {
+			desc() {
+				return GAME().rigard.flags.Scepter == 0 ? "Follow the merchant lead, trail the caravan along the King's Road." : "Follow the merchant lead, probably best to check the merchant street.";
+			},
+			active() {
+				const burrows = GAME().burrows;
+				let status = Quests.Type.NotStarted;
+				if (burrows.flags.Access >= BurrowsFlags.AccessFlags.Stage4) {
+					status |= Quests.Type.Visible;
+				}
+				if (burrows.flags.Access >= BurrowsFlags.AccessFlags.Stage5) {
+					status |= Quests.Type.Completed;
+				}
+				return status;
+			},
+		}),
+		new QuestItem({
+			desc() {
 				return "Return the scepter to the Burrows.";
 			},
-			active: function() {
-				let burrows = GAME().burrows;
+			active() {
+				const burrows = GAME().burrows;
 				let status = Quests.Type.NotStarted;
-				if(burrows.flags["Access"] >= BurrowsFlags.AccessFlags.Stage5)
+				if (burrows.flags.Access >= BurrowsFlags.AccessFlags.Stage5) {
 					status |= Quests.Type.Visible;
-				if(burrows.flags["Access"] >= BurrowsFlags.AccessFlags.QuestlineComplete)
+				}
+				if (burrows.flags.Access >= BurrowsFlags.AccessFlags.QuestlineComplete) {
 					status |= Quests.Type.Completed;
+				}
 				return status;
-			}
-		})
-	]
+			},
+		}),
+	],
 }));
 
-
 Quests.quests.push(new Quest({
-	name: function() {
+	name() {
 		return "Helping Aquilius";
 	},
-	desc: function() {
+	desc() {
 		return "Help Aquilius gather herbs from the forest.";
 	},
-	active: function() {
+	active() {
 		let status = Quests.Type.NotStarted;
-		if(GAME().aquilius.OnHerbsQuest())
+		if (GAME().aquilius.OnHerbsQuest()) {
 			status |= Quests.Type.Visible;
+		}
 		return status;
 	},
 	list: [
 		new QuestItem({
-			desc: function() {
+			desc() {
 				return "Gather herbs from the forest for Aquilius. You should be able to find them pretty close to the Outlaws’ camp.";
 			},
-			active: function() {
+			active() {
 				let status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if(GAME().aquilius.OnHerbsQuestFinished())
+				if (GAME().aquilius.OnHerbsQuestFinished()) {
 					status |= Quests.Type.Completed;
+				}
 				return status;
-			}
+			},
 		}),
 		new QuestItem({
-			desc: function() {
-				let aquilius = GAME().aquilius;
-				let item = aquilius.herbIngredient ? aquilius.herbIngredient.sDesc() : "<b>ERROR</b>";
+			desc() {
+				const aquilius = GAME().aquilius;
+				const item = aquilius.herbIngredient ? aquilius.herbIngredient.sDesc() : "<b>ERROR</b>";
 				return "In addition, Aquilius asked for some " + item + ". While not strictly necessary, you’re sure the old surgeon would appreciate you getting that as well.";
 			},
-			active: function() {
+			active() {
 				let status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if(GAME().party.Inv().QueryNum(GAME().aquilius.herbIngredient))
+				if (GAME().party.Inv().QueryNum(GAME().aquilius.herbIngredient)) {
 					status |= Quests.Type.Completed;
+				}
 				return status;
-			}
+			},
 		}),
 		new QuestItem({
-			desc: function() {
+			desc() {
 				return "Return the herbs to Aquilius in the infirmary.";
 			},
-			active: function() {
+			active() {
 				let status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
 				return status;
-			}
-		})
-	]
+			},
+		}),
+	],
 }));
 
-
 Quests.quests.push(new Quest({
-	name: function() {
+	name() {
 		return "Fresh Ginseng";
 	},
-	desc: function() {
+	desc() {
 		return "Help Asche find some fresh Ginseng.";
 	},
-	active: function() {
+	active() {
 		let status = Quests.Type.NotStarted;
-		if(AscheTasksScenes.Ginseng.IsCompleted()) {
-			if(AscheTasksScenes.Ginseng.IsSuccess())
+		if (AscheTasksScenes.Ginseng.IsCompleted()) {
+			if (AscheTasksScenes.Ginseng.IsSuccess()) {
 				status |= Quests.Type.Completed;
-			else if(AscheTasksScenes.Ginseng.IsFail())
+			} else if (AscheTasksScenes.Ginseng.IsFail()) {
 				status |= Quests.Type.Failed;
-		}
-		else if(AscheTasksScenes.Ginseng.IsOn())
+ }
+		} else if (AscheTasksScenes.Ginseng.IsOn()) {
 			status |= Quests.Type.Visible;
+ }
 		return status;
 	},
 	list: [
 		new QuestItem({
-			desc: function() {
+			desc() {
 				return "Go to the Highlands on the other side of the plains and search for fresh Ginseng.";
 			},
-			active: function() {
+			active() {
 				let status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if(AscheTasksScenes.Ginseng.IsSuccess())
+				if (AscheTasksScenes.Ginseng.IsSuccess()) {
 					status |= Quests.Type.Completed;
-				else if(AscheTasksScenes.Ginseng.IsFail())
+				} else if (AscheTasksScenes.Ginseng.IsFail()) {
 					status |= Quests.Type.Failed;
+ }
 				return status;
-			}
+			},
 		}),
 		new QuestItem({
-			desc: function() {
+			desc() {
 				return "Return to Asche in her shop in Rigard.";
 			},
-			active: function() {
+			active() {
 				let status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if(AscheTasksScenes.Ginseng.IsCompleted())
+				if (AscheTasksScenes.Ginseng.IsCompleted()) {
 					status |= Quests.Type.Completed;
+				}
 				return status;
-			}
-		})
-	]
+			},
+		}),
+	],
 }));
 
-
 Quests.quests.push(new Quest({
-	name: function() {
+	name() {
 		return "Nightshade";
 	},
-	desc: function() {
+	desc() {
 		return "Help Asche find some nightshade.";
 	},
-	active: function() {
+	active() {
 		let status = Quests.Type.NotStarted;
-		if(AscheTasksScenes.Nightshade.IsCompleted())
+		if (AscheTasksScenes.Nightshade.IsCompleted()) {
 			status |= Quests.Type.Completed;
-		else if(AscheTasksScenes.Nightshade.IsOn())
+		} else if (AscheTasksScenes.Nightshade.IsOn()) {
 			status |= Quests.Type.Visible;
+ }
 		return status;
 	},
 	list: [
 		new QuestItem({
-			desc: function() {
+			desc() {
 				return "Maybe find someone knowledgeable of forest herbs and ask them where one could find nightshade?";
 			},
-			active: function() {
+			active() {
 				let status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if(AscheTasksScenes.Nightshade.HasHelpFromAquilius())
+				if (AscheTasksScenes.Nightshade.HasHelpFromAquilius()) {
 					status |= Quests.Type.Completed;
+				}
 				return status;
-			}
+			},
 		}),
 		new QuestItem({
-			desc: function() {
+			desc() {
 				return "Go to the Forest and find some nightshade.";
 			},
-			active: function() {
+			active() {
 				let status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if(AscheTasksScenes.Nightshade.IsSuccess())
+				if (AscheTasksScenes.Nightshade.IsSuccess()) {
 					status |= Quests.Type.Completed;
+				}
 				return status;
-			}
+			},
 		}),
 		new QuestItem({
-			desc: function() {
+			desc() {
 				return "Return to Asche in her shop in Rigard.";
 			},
-			active: function() {
+			active() {
 				let status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if(AscheTasksScenes.Nightshade.IsCompleted())
+				if (AscheTasksScenes.Nightshade.IsCompleted()) {
 					status |= Quests.Type.Completed;
+				}
 				return status;
-			}
-		})
-	]
+			},
+		}),
+	],
 }));
 
 Quests.quests.push(new Quest({
-	name: function() {
+	name() {
 		return "Spring Time For Asche";
 	},
-	desc: function() {
+	desc() {
 		return "Asche would like you to investigate a highland spring and collect some water for her.";
 	},
-	active: function() {
+	active() {
 		let status = Quests.Type.NotStarted;
-		if(AscheTasksScenes.Spring.IsCompleted())
+		if (AscheTasksScenes.Spring.IsCompleted()) {
 			status |= Quests.Type.Completed;
-		else if(AscheTasksScenes.Spring.IsOn())
+		} else if (AscheTasksScenes.Spring.IsOn()) {
 			status |= Quests.Type.Visible;
+ }
 		return status;
 	},
 	list: [
 		new QuestItem({
-			desc: function() {
+			desc() {
 				return "Find the spring in the highlands and collect a sample of its waters.";
 			},
-			active: function() {
+			active() {
 				let status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if(AscheTasksScenes.Spring.IsSuccess())
+				if (AscheTasksScenes.Spring.IsSuccess()) {
 					status |= Quests.Type.Completed;
+				}
 				return status;
-			}
+			},
 		}),
 		new QuestItem({
-			desc: function() {
+			desc() {
 				return "Return to Asche in Rigard with the vial.";
 			},
-			active: function() {
+			active() {
 				let status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if(AscheTasksScenes.Spring.IsCompleted())
+				if (AscheTasksScenes.Spring.IsCompleted()) {
 					status |= Quests.Type.Completed;
+				}
 				return status;
-			}
-		})
-	]
+			},
+		}),
+	],
 }));
 
 Quests.quests.push(new Quest({
-	name: function() {
+	name() {
 		return "Tools of the Trade";
 	},
-	desc: function() {
+	desc() {
 		return "Deliver thieves' tools to Elodie, the outlaw contact in Rigard.";
 	},
-	active: function() {
+	active() {
 		let status = Quests.Type.NotStarted;
-		if(VaughnTasksScenes.Lockpicks.Completed())
+		if (VaughnTasksScenes.Lockpicks.Completed()) {
 			status |= Quests.Type.Completed;
-		else if(GAME().vaughn.flags["Met"] >= VaughnFlags.Met.OnTaskLockpicks)
+		} else if (GAME().vaughn.flags.Met >= VaughnFlags.Met.OnTaskLockpicks) {
 			status |= Quests.Type.Visible;
+ }
 		return status;
 	},
 	list: [
 		new QuestItem({
-			desc: function() {
+			desc() {
 				return "Meet with Elodie in the castle grounds and deliver Vaughn's tools to her.";
 			},
-			active: function() {
+			active() {
 				let status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if(GAME().vaughn.flags["Met"] >= VaughnFlags.Met.LockpicksElodie)
+				if (GAME().vaughn.flags.Met >= VaughnFlags.Met.LockpicksElodie) {
 					status |= Quests.Type.Completed;
+				}
 				return status;
-			}
+			},
 		}),
 		new QuestItem({
-			desc: function() {
+			desc() {
 				return "Return to Vaughn and report.";
 			},
-			active: function() {
+			active() {
 				let status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if(VaughnTasksScenes.Lockpicks.Completed())
+				if (VaughnTasksScenes.Lockpicks.Completed()) {
 					status |= Quests.Type.Completed;
+				}
 				return status;
-			}
-		})
-	]
+			},
+		}),
+	],
 }));
 
 Quests.quests.push(new Quest({
-	name: function() {
+	name() {
 		return "The Snitch";
 	},
-	desc: function() {
+	desc() {
 		return "Deal with the crooked guardsman that has been giving the outlaws trouble.";
 	},
-	active: function() {
+	active() {
 		let status = Quests.Type.NotStarted;
-		if(VaughnTasksScenes.Snitch.Completed())
+		if (VaughnTasksScenes.Snitch.Completed()) {
 			status |= Quests.Type.Completed;
-		else if(GAME().vaughn.flags["Met"] >= VaughnFlags.Met.OnTaskSnitch)
+		} else if (GAME().vaughn.flags.Met >= VaughnFlags.Met.OnTaskSnitch) {
 			status |= Quests.Type.Visible;
+ }
 		return status;
 	},
 	list: [
 		new QuestItem({
-			desc: function() {
+			desc() {
 				return "Find a way to deal with the crooked guardsman, Terrell. Vaughn has given you some incriminating evidence that he wants you to plant in the City Watch barracks in Rigard.";
 			},
-			active: function() {
+			active() {
 				let status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if(GAME().vaughn.flags["Met"] >= VaughnFlags.Met.SnitchMirandaSuccess)
+				if (GAME().vaughn.flags.Met >= VaughnFlags.Met.SnitchMirandaSuccess) {
 					status |= Quests.Type.Completed;
+				}
 				return status;
-			}
+			},
 		}),
 		new QuestItem({
-			desc: function() {
+			desc() {
 				return "Return to Vaughn and report.";
 			},
-			active: function() {
+			active() {
 				let status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if(VaughnTasksScenes.Snitch.Completed())
+				if (VaughnTasksScenes.Snitch.Completed()) {
 					status |= Quests.Type.Completed;
+				}
 				return status;
-			}
-		})
-	]
+			},
+		}),
+	],
 }));
 
 Quests.quests.push(new Quest({
-	name: function() {
+	name() {
 		return "The Lady is Indisposed";
 	},
-	desc: function() {
+	desc() {
 		return "Make sure the Lady Heydrich doesn't appear in court.";
 	},
-	active: function() {
-		let vaughn = GAME().vaughn;
+	active() {
+		const vaughn = GAME().vaughn;
 		let status = Quests.Type.NotStarted;
-		
-		if(VaughnTasksScenes.Poisoning.Completed() && !(vaughn.flags["T3"] & VaughnFlags.Poisoning.Success))
+
+		if (VaughnTasksScenes.Poisoning.Completed() && !(vaughn.flags.T3 & VaughnFlags.Poisoning.Success)) {
 			status |= Quests.Type.Failed;
-		else if(VaughnTasksScenes.Poisoning.Completed())
+		} else if (VaughnTasksScenes.Poisoning.Completed()) {
 			status |= Quests.Type.Completed;
-		else if(vaughn.flags["Met"] >= VaughnFlags.Met.OnTaskPoisoning)
+ } else if (vaughn.flags.Met >= VaughnFlags.Met.OnTaskPoisoning) {
 			status |= Quests.Type.Visible;
+ }
 		return status;
 	},
 	list: [
 		new QuestItem({
-			desc: function() {
-				let poison = GAME().vaughn.flags["T3"] & VaughnFlags.Poisoning.Aphrodisiac ? "aphrodisiac" : "poison";
+			desc() {
+				const poison = GAME().vaughn.flags.T3 & VaughnFlags.Poisoning.Aphrodisiac ? "aphrodisiac" : "poison";
 				return "Somehow feed Lady Heydrich the " + poison + ". She can be found in the Lady's Blessing inn in Rigard.";
 			},
-			active: function() {
-				let vaughn = GAME().vaughn;
+			active() {
+				const vaughn = GAME().vaughn;
 				let status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if((vaughn.flags["Met"] >= VaughnFlags.Met.PoisoningFail) && !(vaughn.flags["T3"] & VaughnFlags.Poisoning.Success))
+				if ((vaughn.flags.Met >= VaughnFlags.Met.PoisoningFail) && !(vaughn.flags.T3 & VaughnFlags.Poisoning.Success)) {
 					status |= Quests.Type.Failed;
-				else if(vaughn.flags["Met"] >= VaughnFlags.Met.PoisoningFail)
+				} else if (vaughn.flags.Met >= VaughnFlags.Met.PoisoningFail) {
 					status |= Quests.Type.Completed;
+ }
 				return status;
-			}
+			},
 		}),
 		new QuestItem({
-			desc: function() {
+			desc() {
 				return "Return to Vaughn and report.";
 			},
-			active: function() {
+			active() {
 				let status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if(VaughnTasksScenes.Poisoning.Completed())
+				if (VaughnTasksScenes.Poisoning.Completed()) {
 					status |= Quests.Type.Completed;
+				}
 				return status;
-			}
-		})
-	]
+			},
+		}),
+	],
 }));
 
 Quests.quests.push(new Quest({
-	name: function() {
+	name() {
 		return "Escort Service";
 	},
-	desc: function() {
+	desc() {
 		return "Follow Lei's directions and perform a job for Ventor Orellos.";
 	},
-	active: function() {
+	active() {
 		let status = Quests.Type.NotStarted;
-		if(LeiTaskScenes.Escort.Completed())
+		if (LeiTaskScenes.Escort.Completed()) {
 			status |= Quests.Type.Completed;
-		else if(GAME().lei.flags["Met"] >= LeiFlags.Met.OnTaskEscort)
+		} else if (GAME().lei.flags.Met >= LeiFlags.Met.OnTaskEscort) {
 			status |= Quests.Type.Visible;
+ }
 		return status;
 	},
 	list: [
 		new QuestItem({
-			desc: function() {
+			desc() {
 				return "Meet with Ventor Orellos at his mansion near the Plaza in Rigard between ten and seventeen. According to Lei, he has a job for you.";
 			},
-			active: function() {
+			active() {
 				let status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if(GAME().lei.flags["Met"] >= LeiFlags.Met.EscortFinished)
+				if (GAME().lei.flags.Met >= LeiFlags.Met.EscortFinished) {
 					status |= Quests.Type.Completed;
+				}
 				return status;
-			}
+			},
 		}),
 		new QuestItem({
-			desc: function() {
+			desc() {
 				return "Return to Lei and report.";
 			},
-			active: function() {
+			active() {
 				let status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if(LeiTaskScenes.Escort.Completed())
+				if (LeiTaskScenes.Escort.Completed()) {
 					status |= Quests.Type.Completed;
+				}
 				return status;
-			}
-		})
-	]
+			},
+		}),
+	],
 }));
 
-//TODO Krawitz(?), Burrows, Gwendy
+// TODO Krawitz(?), Burrows, Gwendy
 
 /*
- * : 
+ * :
 
 Quests.quests.push(new Quest({
 	name: function() {

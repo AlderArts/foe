@@ -2,17 +2,17 @@ import { GetDEBUG } from "../app";
 import { Text } from "./text";
 
 export class Stat {
-	base : number;
-	bonus : number;
-	level : number;
-	temp : number;
-	cheat : number;
-	growth : number;
-	growthStep : number;
-	growthBase : number;
-	debug : any;
+	public base: number;
+	public bonus: number;
+	public level: number;
+	public temp: number;
+	public cheat: number;
+	public growth: number;
+	public growthStep: number;
+	public growthBase: number;
+	public debug: any;
 
-	constructor(base? : number, growth? : number, growthStep? : number) {
+	constructor(base?: number, growth?: number, growthStep?: number) {
 		this.base   = base || 0; // Base stat, increased by levelling and TFs
 		this.bonus  = 0; // Bonuses got by equipment/auras/perks etc
 		this.level  = 0; // Bonuses got from levels
@@ -27,90 +27,103 @@ export class Stat {
 	static get growthPerPoint() { return 0.1; }
 	static get growthPointsPerLevel() { return 3; }
 
-	Get() { return this.base + this.bonus + this.level + this.temp + this.cheat; }
-	Clear() { this.bonus = 0; this.temp = 0; }
-	GrowthRank() {
-		return Math.round(((this.growth-this.growthBase) / this.growthStep) + 1); //, -1);
+	public Get() { return this.base + this.bonus + this.level + this.temp + this.cheat; }
+	public Clear() { this.bonus = 0; this.temp = 0; }
+	public GrowthRank() {
+		return Math.round(((this.growth - this.growthBase) / this.growthStep) + 1); // , -1);
 	}
 	// Changes _ONE_ stat, closing in on the ideal
 	// Cap the change to a maximum value
 	// Returns the applied difference, unless the diff is zero
-	IdealStat(ideal : number, maxChange? : number, fraction? : boolean) {
+	public IdealStat(ideal: number, maxChange?: number, fraction?: boolean) {
 		ideal = ideal || 0;
 		maxChange = maxChange || 1;
 		let diff = ideal - this.base;
-		if(diff < 0) maxChange *= -1;
+		if (diff < 0) { maxChange *= -1; }
 		diff = (Math.abs(diff) <= Math.abs(maxChange)) ? diff : maxChange;
-		
-		let old = this.base;
+
+		const old = this.base;
 		this.base += diff;
-		if(GetDEBUG() && this.debug) {
+		if (GetDEBUG() && this.debug) {
 			Text.NL();
-			if(diff > 0)
+			if (diff > 0) {
 				Text.Add("DEBUG: " + this.debug() + " " + old + " -> " + this.base + " (ideal: " + ideal + ")", null, "blue bold");
-			else if(diff == 0)
+			}
+			else if (diff == 0) {
 				Text.Add("DEBUG: " + this.debug() + " " + old + " capped (ideal: " + ideal + ")", null, "bold");
-			else
+ }
+			else {
 				Text.Add("DEBUG: " + this.debug() + " " + old + " -> " + this.base + " (ideal: " + ideal + ")", null, "red bold");
+ }
 			Text.NL();
 			Text.Flush();
 		}
-		if(fraction)
+		if (fraction) {
 			return this.base - old;
-		else
+		}
+		else {
 			return Math.floor(this.base) - Math.floor(old);
+		}
 	}
 	// Changes _ONE_ stat, closing in on the ideal (ONLY INC)
 	// Cap the change to a maximum value
 	// Returns the applied difference (positive), unless the diff is zero
-	IncreaseStat(ideal : number, maxChange? : number, fraction? : boolean) {
+	public IncreaseStat(ideal: number, maxChange?: number, fraction?: boolean) {
 		ideal = ideal || 0;
 		maxChange = maxChange || 1;
 		let diff = ideal - this.base;
-		if(diff < 0) return null;
+		if (diff < 0) { return null; }
 		diff = (diff <= maxChange) ? diff : maxChange;
-		
-		let old = this.base;
+
+		const old = this.base;
 		this.base += diff;
-		if(GetDEBUG() && this.debug) {
+		if (GetDEBUG() && this.debug) {
 			Text.NL();
-			if(diff == 0)
+			if (diff == 0) {
 				Text.Add("DEBUG: " + this.debug() + " " + old + " capped (ideal: " + ideal + ")", null, "black bold");
-			else
+			}
+			else {
 				Text.Add("DEBUG: " + this.debug() + " " + old + " -> " + this.base + " (max: " + ideal + ")", null, "blue bold");
+			}
 			Text.NL();
 			Text.Flush();
 		}
-		if(fraction)
+		if (fraction) {
 			return this.base - old;
-		else
+		}
+		else {
 			return Math.floor(this.base) - Math.floor(old);
+		}
 	}
 	// Changes _ONE_ stat, closing in on the ideal (ONLY DEC)
 	// Cap the change to a maximum value
 	// Returns the applied difference (positive), unless the diff is zero
-	DecreaseStat(ideal : number, maxChange? : number, fraction? : boolean) {
+	public DecreaseStat(ideal: number, maxChange?: number, fraction?: boolean) {
 		ideal = ideal || 0;
 		maxChange = maxChange || 1;
 		let diff = this.base - ideal;
-		if(diff < 0) return null; 
+		if (diff < 0) { return null; }
 		diff = (diff <= maxChange) ? diff : maxChange;
-		
-		let old = this.base;
+
+		const old = this.base;
 		this.base -= diff;
-		if(GetDEBUG() && this.debug) {
+		if (GetDEBUG() && this.debug) {
 			Text.NL();
-			if(diff == 0)
+			if (diff == 0) {
 				Text.Add("DEBUG: " + this.debug() + " " + old + " capped (ideal: " + ideal + ")", null, "black bold");
-			else
+			}
+			else {
 				Text.Add("DEBUG: " + this.debug() + " " + old + " -> " + this.base + " (min: " + ideal + ")", null, "red bold");
+			}
 			Text.NL();
 			Text.Flush();
 		}
-		if(fraction)
+		if (fraction) {
 			return this.base - old;
-		else
+		}
+		else {
 			return Math.floor(this.base) - Math.floor(old);
+		}
 	}
 
 }

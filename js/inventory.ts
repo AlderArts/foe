@@ -1,391 +1,514 @@
-import * as _ from 'lodash';
+import * as _ from "lodash";
 
 import { GetDEBUG } from "../app";
-import { Text } from "./text";
-import { ItemIds, ItemSubtype, ItemType, Item, compareItemByProp } from "./item";
-import { Gui } from "./gui";
-import { CombatItem } from "./items/combatitems";
+import { Encounter } from "./combat";
 import { Entity } from "./entity";
-import { Encounter } from './combat';
-import { GAME } from './GAME';
+import { GAME } from "./GAME";
+import { Gui } from "./gui";
+import { compareItemByProp, Item, ItemIds, ItemSubtype, ItemType } from "./item";
+import { CombatItem } from "./items/combatitems";
+import { Text } from "./text";
 
 interface ItemQuantity {
-	it : Item;
-	num : number;
+	it: Item;
+	num: number;
 }
 
 // Inventory
 export class Inventory {
-	items : ItemQuantity[];
-	
+
+	// Divides items by their 'type'
+	public static ItemByType(inv: ItemQuantity[], itemsByType?: any, usableItemsByType?: any, combatItemsByType?: any) {
+		// Add all keys first. Ensures item output will be in whatever order our ItemType enum is in
+		for (const type in ItemType) {
+			const itemType = ItemType[type];
+			if (itemsByType) {
+				itemsByType[itemType] = [];
+			}
+			if (usableItemsByType) {
+				usableItemsByType[itemType] = [];
+			}
+			if (combatItemsByType) {
+				combatItemsByType[itemType] = [];
+			}
+		}
+		// Populate type arrays with items if they're defined
+		for (let i = 0; i < inv.length; i++) {
+		const it = inv[i].it;
+		if (itemsByType) {
+			itemsByType[it.type].push(inv[i]);
+		}
+		if (usableItemsByType && it.Use) {
+			usableItemsByType[it.type].push(inv[i]);
+		}
+		const itC = it as CombatItem;
+		if (combatItemsByType && itC.combat) {
+			combatItemsByType[it.type].push(inv[i]);
+		}
+		}
+		// Clear empty arrays
+		for (const type in ItemType) {
+			const itemType = ItemType[type];
+			if (itemsByType && itemsByType[itemType].length == 0) {
+				delete itemsByType[itemType];
+			}
+			if (usableItemsByType && usableItemsByType[itemType].length == 0) {
+				delete usableItemsByType[itemType];
+			}
+			if (combatItemsByType && combatItemsByType[itemType].length == 0) {
+				delete combatItemsByType[itemType];
+			}
+		}
+	}
+	// Divides items by their 'type' and further by their 'subtype' inside each primary type. Items WITHOUT a subtype are under property 'None'
+	public static ItemByBothTypes(inv: any, itemsByType?: any, usableItemsByType?: any, combatItemsByType?: any) {
+		// Add all keys first. Ensures item output will be in whatever order our ItemType enum is in
+		for (const type in ItemType) {
+			const itemType = ItemType[type];
+			if (itemsByType) {
+				itemsByType[itemType] = {};
+			}
+			if (usableItemsByType) {
+				usableItemsByType[itemType] = {};
+			}
+			if (combatItemsByType) {
+				combatItemsByType[itemType] = {};
+			}
+
+			for (const subtype in ItemSubtype) {
+				const itemSubtype = ItemSubtype[subtype];
+				if (itemsByType) {
+					itemsByType[itemType][itemSubtype] = [];
+				}
+				if (usableItemsByType) {
+					usableItemsByType[itemType][itemSubtype] = [];
+				}
+				if (combatItemsByType) {
+					combatItemsByType[itemType][itemSubtype] = [];
+				}
+			}
+		}
+		// Populate type arrays with items if they're defined
+		for (let i = 0; i < inv.length; i++) {
+			const it = inv[i].it;
+			if (itemsByType) {
+				itemsByType[it.type][it.subtype].push(inv[i]);
+			}
+			if (usableItemsByType && it.Use) {
+				usableItemsByType[it.type][it.subtype].push(inv[i]);
+			}
+			if (combatItemsByType && it.combat) {
+				combatItemsByType[it.type][it.subtype].push(inv[i]);
+			}
+		}
+		// Clear empty arrays
+		for (const type in ItemType) {
+			const itemType = ItemType[type];
+			// Remove empty subtypes
+			for (const subtype in ItemSubtype) {
+				const itemSubtype = ItemSubtype[subtype];
+				if (itemsByType && itemsByType[itemType][itemSubtype].length == 0) {
+					delete itemsByType[itemType][itemSubtype];
+				}
+				if (usableItemsByType && usableItemsByType[itemType][itemSubtype].length == 0) {
+					delete usableItemsByType[itemType][itemSubtype];
+				}
+				if (combatItemsByType && combatItemsByType[itemType][itemSubtype].length == 0) {
+					delete combatItemsByType[itemType][itemSubtype];
+				}
+			}
+
+			// remove empty types
+			if (itemsByType && _.keys(itemsByType[itemType]).length == 0) {
+				delete itemsByType[itemType];
+			}
+			if (usableItemsByType && _.keys(usableItemsByType[itemType]).length == 0) {
+				delete usableItemsByType[itemType];
+			}
+			if (combatItemsByType && _.keys(combatItemsByType[itemType]).length == 0) {
+				delete combatItemsByType[itemType];
+			}
+		}
+	}
+	public items: ItemQuantity[];
+
 	constructor() {
 		this.items = []; // {it : Item, num : 1} pair
 	}
 
-	ToStorage() {
-		let storage : any = [];
+	public ToStorage() {
+		const storage: any = [];
 		_.each(this.items, function(item) {
 			storage.push({
 				it  : item.it.id,
-				num : item.num
+				num : item.num,
 			});
 		});
 		return storage;
 	}
 
-	FromStorage(storage : any) {
-		let list : any[] = [];
+	public FromStorage(storage: any) {
+		const list: any[] = [];
 		_.each(storage, function(s) {
-			let item = {
+			const item = {
 				it  : ItemIds[s.it],
-				num : parseInt(s.num)
+				num : parseInt(s.num),
 			};
-			if(item.it)
+			if (item.it) {
 				list.push(item);
+			}
 		});
 		this.items = list;
 	}
 
-	QueryNum(item : Item) {
-		for(let i = 0; i < this.items.length; i++) {
-			if(this.items[i].it === item)
+	public QueryNum(item: Item) {
+		for (let i = 0; i < this.items.length; i++) {
+			if (this.items[i].it === item) {
 				return this.items[i].num;
+			}
 		}
 		return null;
 	}
 
-	AddItem(item : Item, num? : number) {
+	public AddItem(item: Item, num?: number) {
 		// Default to 1
 		num = num || 1;
 
-		if(GetDEBUG()) {
+		if (GetDEBUG()) {
 			Text.NL();
-			Text.Add("DEBUG: Added [num] [name] (ID: [id])", {num: num, name: item.name, id: item.id}, 'bold');
+			Text.Add("DEBUG: Added [num] [name] (ID: [id])", {num, name: item.name, id: item.id}, "bold");
 			Text.NL();
 			Text.Flush();
 		}
 
 		// Try to find if there is already an entry
-		for(let i = 0; i < this.items.length; i++) {
-			if(this.items[i].it === item) {
+		for (let i = 0; i < this.items.length; i++) {
+			if (this.items[i].it === item) {
 				this.items[i].num += num;
 				return;
 			}
 		}
 		// Item not found, add new entry
-		this.items.push({it: item, num: num});
+		this.items.push({it: item, num});
 	}
 
-	RemoveItem(item : Item, num? : number) {
+	public RemoveItem(item: Item, num?: number) {
 		// Default to 1
 		num = num || 1;
 
-		if(GetDEBUG()) {
+		if (GetDEBUG()) {
 			Text.NL();
-			Text.Add("DEBUG: Removed [num] [name] (ID: [id])", {num: num, name: item.name, id: item.id}, 'bold');
+			Text.Add("DEBUG: Removed [num] [name] (ID: [id])", {num, name: item.name, id: item.id}, "bold");
 			Text.NL();
 			Text.Flush();
 		}
 
 		// Try to find a stack containing said item
-		for(let i = 0; i < this.items.length; i++) {
-			if(this.items[i].it === item) {
+		for (let i = 0; i < this.items.length; i++) {
+			if (this.items[i].it === item) {
 				this.items[i].num -= num;
 				// If there are no more items in the stack, remove it
-				if(this.items[i].num <= 0)
+				if (this.items[i].num <= 0) {
 					this.items.splice(i, 1);
+				}
 				return;
 			}
 		}
 	}
 
 	// Todo temp
-	Print() {
-		for(let i = 0; i < this.items.length; i++) {
+	public Print() {
+		for (let i = 0; i < this.items.length; i++) {
 			Text.Add(this.items[i].num + "x " + this.items[i].it.name + " - " + this.items[i].it.Short() + "<br>");
 		}
 		Text.Flush();
 	}
-	ShowInventory(SetExploreButtons : any, preventClear? : boolean) {
-		let inv = this;
+	public ShowInventory(SetExploreButtons: any, preventClear?: boolean) {
+		const inv = this;
 		inv.items.sort(compareItemByProp("name"));
-		let backPrompt = function() { inv.ShowInventory(SetExploreButtons); }
-		if(!preventClear)
+		const backPrompt = function() { inv.ShowInventory(SetExploreButtons); };
+		if (!preventClear) {
 			Text.Clear();
+		}
 
-		let itemsByType : any = {};
-		let usableItemsByType : any = {};
+		const itemsByType: any = {};
+		const usableItemsByType: any = {};
 
 		Inventory.ItemByBothTypes(this.items, itemsByType, usableItemsByType);
 
-		for(let typeKey in itemsByType) {
-			//Add main types
+		for (const typeKey in itemsByType) {
+			// Add main types
 			Text.AddDiv("<hr>");
 			Text.AddDiv(typeKey, null, "itemTypeHeader");
 			Text.AddDiv("<hr>");
-			for(let subtypeKey in itemsByType[typeKey]){
-				//Add subtypes (except None type)
-				if(subtypeKey != ItemSubtype.None)
+			for (const subtypeKey in itemsByType[typeKey]) {
+				// Add subtypes (except None type)
+				if (subtypeKey != ItemSubtype.None) {
 					Text.AddDiv(subtypeKey, null, "itemSubtypeHeader");
-				let items = itemsByType[typeKey][subtypeKey];
-				if(items) {
-					for(let i=0; i < items.length; i++) {
-						Text.AddDiv(items[i].it.name + " x"+items[i].num, null, "itemName");
+				}
+				const items = itemsByType[typeKey][subtypeKey];
+				if (items) {
+					for (let i = 0; i < items.length; i++) {
+						Text.AddDiv(items[i].it.name + " x" + items[i].num, null, "itemName");
 					}
 				}
 			}
 			Text.NL();
 		}
 
-		let usable : any[] = [];
-		//Copy usable items into usable array
-		for(let key in usableItemsByType) {
-			for(let subtypeKey in usableItemsByType[key]){
-				let items = usableItemsByType[key][subtypeKey];
-				if(items)
+		let usable: any[] = [];
+		// Copy usable items into usable array
+		for (const key in usableItemsByType) {
+			for (const subtypeKey in usableItemsByType[key]) {
+				const items = usableItemsByType[key][subtypeKey];
+				if (items) {
 					usable = usable.concat(items);
+				}
 			}
 		}
 
-		let options = [];
-		for(let i = 0; i < usable.length; ++i) {
-			let it  = usable[i].it;
-			let num = usable[i].num;
+		const options = [];
+		for (let i = 0; i < usable.length; ++i) {
+			const it  = usable[i].it;
+			const num = usable[i].num;
 			options.push({
 				nameStr: it.name + " x" + num,
 				enabled: true,
-				//tooltip: it.Long(),
+				// tooltip: it.Long(),
 				obj: it,
-				func: function(item : Item) {
+				func(item: Item) {
 					Text.Clear();
 					Text.Add(item.Long());
 					Text.NL();
 					Text.Add("Use [it] on which partymember?", {it: item.name});
 					Text.Flush();
 
-					let target = new Array();
-					_.each(GAME().party.members, function(t : Entity) {
+					const target = new Array();
+					_.each(GAME().party.members, function(t: Entity) {
 						target.push({
 							nameStr : t.name,
-							func    : function(t : Entity) {
+							func(t: Entity) {
 								Text.Clear();
-								let use = t.ItemUse(item, backPrompt);
-								if(use.grab) {
-									if(use.consume)
+								const use = t.ItemUse(item, backPrompt);
+								if (use.grab) {
+									if (use.consume) {
 										inv.RemoveItem(item);
-								}
-								else {
-									if(item.Use(t).consume) // Consume?
+									}
+								} else {
+									if (item.Use(t).consume) { // Consume?
 										inv.RemoveItem(item);
+									}
 									Gui.NextPrompt(backPrompt);
 								}
 								Text.Flush();
 							},
 							enabled : t.ItemUsable(item),
-							obj     : t
+							obj     : t,
 						});
 					});
 
 					Gui.SetButtonsFromList(target, true, backPrompt);
-				}
+				},
 			});
 		}
 		Gui.SetButtonsFromList(options);
 
-		if(this.items.length == 0)
+		if (this.items.length == 0) {
 			Text.Add("You are not carrying anything at the moment.");
+		}
 		Text.Flush();
 		SetExploreButtons();
 	}
-	//TODO Make this use the fancy GUI!
-	CombatInventory(encounter : Encounter, entity : Entity, back? : any) {
-		let inv = this;
+	// TODO Make this use the fancy GUI!
+	public CombatInventory(encounter: Encounter, entity: Entity, back?: any) {
+		const inv = this;
 		Text.Clear();
 
-		let backPrompt = function() {
+		const backPrompt = function() {
 			inv.CombatInventory(encounter, entity, back);
-		}
+		};
 
-		let combatItemsByType : any = {};
+		const combatItemsByType: any = {};
 		Inventory.ItemByBothTypes(this.items, null, null, combatItemsByType);
 
-		let usable : any[] = [];
-		//Copy usable items into usable array
-		for(let key in combatItemsByType) {
-			for(let subtypeKey in combatItemsByType[key]){
-				let items = combatItemsByType[key][subtypeKey];
-				if(items)
+		let usable: any[] = [];
+		// Copy usable items into usable array
+		for (const key in combatItemsByType) {
+			for (const subtypeKey in combatItemsByType[key]) {
+				const items = combatItemsByType[key][subtypeKey];
+				if (items) {
 					usable = usable.concat(items);
+				}
 			}
 		}
-		//Output combat items to central GUI
-		for(let typeKey in combatItemsByType) {
-			//Add main types
+		// Output combat items to central GUI
+		for (const typeKey in combatItemsByType) {
+			// Add main types
 			Text.AddDiv("<hr>");
 			Text.AddDiv(typeKey, null, "itemTypeHeader");
 			Text.AddDiv("<hr>");
-			for(let subtypeKey in combatItemsByType[typeKey]) {
-				//Add subtypes (except None type)
-				if(subtypeKey != ItemSubtype.None)
+			for (const subtypeKey in combatItemsByType[typeKey]) {
+				// Add subtypes (except None type)
+				if (subtypeKey != ItemSubtype.None) {
 					Text.AddDiv(subtypeKey, null, "itemSubtypeHeader");
-				let items = combatItemsByType[typeKey][subtypeKey];
-				if(items) {
-					for(let i=0; i < items.length; i++) {
-						Text.AddDiv(items[i].it.name + " x"+items[i].num, null, "itemName");
+				}
+				const items = combatItemsByType[typeKey][subtypeKey];
+				if (items) {
+					for (let i = 0; i < items.length; i++) {
+						Text.AddDiv(items[i].it.name + " x" + items[i].num, null, "itemName");
 					}
 				}
 			}
 			Text.NL();
 		}
 
-		//Add combat items as buttons
-		let options = [];
-		for(let i = 0; i < usable.length; ++i) {
-			let it  = usable[i].it;
-			let num = usable[i].num;
+		// Add combat items as buttons
+		const options = [];
+		for (let i = 0; i < usable.length; ++i) {
+			const it  = usable[i].it;
+			const num = usable[i].num;
 
-			//Text.Add(num + "x " + it.name + " - " + it.Short() + "<br>");
+			// Text.Add(num + "x " + it.name + " - " + it.Short() + "<br>");
 			options.push({
 				nameStr: it.name,
 				enabled: it.combat ? it.combat.enabledCondition(encounter, entity) : true,
-				//tooltip: it.Long(),
+				// tooltip: it.Long(),
 				obj: it,
-				func: function(item : CombatItem) {
-					if(item.combat.OnSelect(encounter, entity, backPrompt, inv)) {
+				func(item: CombatItem) {
+					if (item.combat.OnSelect(encounter, entity, backPrompt, inv)) {
 						Text.Clear();
 						Text.Add(item.Long());
 						Text.NL();
 						Text.Add("Use [it] on whom?", {it: item.name});
 						Text.Flush();
 					}
-				}
+				},
 			});
 		}
 		Gui.SetButtonsFromList(options, true, back);
 
-		if(options.length == 0)
+		if (options.length == 0) {
 			Text.Add("You are not carrying any items usable in combat at the moment.");
+		}
 		Text.Flush();
 	}
 
-	ShowEquippable(entity : Entity, type : any, backPrompt? : any) {
-		let inv = this;
+	public ShowEquippable(entity: Entity, type: any, backPrompt?: any) {
+		const inv = this;
 		// Populate item list
-		let items : Item[] = [];
+		const items: Item[] = [];
 		_.each(this.items, function(it) {
-			let item = it.it;
-			switch(type) {
+			const item = it.it;
+			switch (type) {
 				case ItemType.Weapon:
-					if(item.type == ItemType.Weapon) items.push(item);
+					if (item.type == ItemType.Weapon) { items.push(item); }
 					break;
 				case ItemSubtype.TopArmor:
-					if     (item.subtype == ItemSubtype.TopArmor)  items.push(item);
-					else if(item.subtype == ItemSubtype.FullArmor) items.push(item);
+					if     (item.subtype == ItemSubtype.TopArmor) {  items.push(item); } else if (item.subtype == ItemSubtype.FullArmor) { items.push(item); }
 					break;
 				case ItemSubtype.BotArmor:
-					if(item.subtype == ItemSubtype.BotArmor) items.push(item);
+					if (item.subtype == ItemSubtype.BotArmor) { items.push(item); }
 					break;
 				case ItemSubtype.Acc1:
 				case ItemSubtype.Acc2:
-					if(item.type == ItemType.Accessory) items.push(item);
+					if (item.type == ItemType.Accessory) { items.push(item); }
 					break;
 				case ItemSubtype.StrapOn:
-					if(item.subtype == ItemSubtype.StrapOn) items.push(item);
+					if (item.subtype == ItemSubtype.StrapOn) { items.push(item); }
 					break;
 			}
 		});
-		//Check if slot has an item equipped
+		// Check if slot has an item equipped
 		let hasEquip = false;
-		switch(type) {
-			case ItemType.Weapon:      if(entity.weaponSlot)   hasEquip = true; break;
-			case ItemSubtype.TopArmor: if(entity.topArmorSlot) hasEquip = true; break;
-			case ItemSubtype.BotArmor: if(entity.botArmorSlot) hasEquip = true; break;
-			case ItemSubtype.Acc1:     if(entity.acc1Slot)     hasEquip = true; break;
-			case ItemSubtype.Acc2:     if(entity.acc2Slot)     hasEquip = true; break;
-			case ItemSubtype.StrapOn:  if(entity.strapOn)      hasEquip = true; break;
+		switch (type) {
+			case ItemType.Weapon:      if (entity.weaponSlot) {   hasEquip = true; } break;
+			case ItemSubtype.TopArmor: if (entity.topArmorSlot) { hasEquip = true; } break;
+			case ItemSubtype.BotArmor: if (entity.botArmorSlot) { hasEquip = true; } break;
+			case ItemSubtype.Acc1:     if (entity.acc1Slot) {     hasEquip = true; } break;
+			case ItemSubtype.Acc2:     if (entity.acc2Slot) {     hasEquip = true; } break;
+			case ItemSubtype.StrapOn:  if (entity.strapOn) {      hasEquip = true; } break;
 		}
-		//Create de-equip function for the slot type
-		let list = [];
+		// Create de-equip function for the slot type
+		const list = [];
 		list.push({
 			nameStr : "Dequip",
-			func    : function() {
-				switch(type) {
+			func() {
+				switch (type) {
 					case ItemType.Weapon:
-						if(entity.weaponSlot) inv.AddItem(entity.weaponSlot);
+						if (entity.weaponSlot) { inv.AddItem(entity.weaponSlot); }
 						entity.weaponSlot = null;
 						break;
 					case ItemSubtype.TopArmor:
-						if(entity.topArmorSlot) inv.AddItem(entity.topArmorSlot);
+						if (entity.topArmorSlot) { inv.AddItem(entity.topArmorSlot); }
 						entity.topArmorSlot = null;
 						break;
 					case ItemSubtype.BotArmor:
-						if(entity.botArmorSlot) inv.AddItem(entity.botArmorSlot);
+						if (entity.botArmorSlot) { inv.AddItem(entity.botArmorSlot); }
 						entity.botArmorSlot = null;
 						break;
 					case ItemSubtype.Acc1:
-						if(entity.acc1Slot) inv.AddItem(entity.acc1Slot);
+						if (entity.acc1Slot) { inv.AddItem(entity.acc1Slot); }
 						entity.acc1Slot = null;
 						break;
 					case ItemSubtype.Acc2:
-						if(entity.acc2Slot) inv.AddItem(entity.acc2Slot);
+						if (entity.acc2Slot) { inv.AddItem(entity.acc2Slot); }
 						entity.acc2Slot = null;
 						break;
 					case ItemSubtype.StrapOn:
-						if(entity.strapOn) inv.AddItem(entity.strapOn);
+						if (entity.strapOn) { inv.AddItem(entity.strapOn); }
 						entity.strapOn = null;
 						break;
 				}
 				entity.Equip();
 				backPrompt();
 			},
-			enabled : hasEquip
+			enabled : hasEquip,
 		});
 
-		//Create button and equip item function for each item valid for the passed in 'type'
+		// Create button and equip item function for each item valid for the passed in 'type'
 		_.each(items, function(it) {
 			it.ShowEquipStats();
 			Text.AddDiv("<hr>");
 			list.push({
 				nameStr : it.name,
-				func    : function(t : Item) {
+				func(t: Item) {
 					inv.RemoveItem(t);
-					let switchType = (t.subtype != ItemSubtype.None) ? t.subtype : t.type;
-					switch(switchType) {
+					const switchType = (t.subtype != ItemSubtype.None) ? t.subtype : t.type;
+					switch (switchType) {
 						case ItemType.Weapon:
-							if(entity.weaponSlot) inv.AddItem(entity.weaponSlot);
+							if (entity.weaponSlot) { inv.AddItem(entity.weaponSlot); }
 							entity.weaponSlot = t;
 							break;
 
 						case ItemSubtype.FullArmor:
-							if(entity.topArmorSlot) inv.AddItem(entity.topArmorSlot);
-							if(entity.botArmorSlot) inv.AddItem(entity.botArmorSlot);
+							if (entity.topArmorSlot) { inv.AddItem(entity.topArmorSlot); }
+							if (entity.botArmorSlot) { inv.AddItem(entity.botArmorSlot); }
 							entity.topArmorSlot = t;
 							entity.botArmorSlot = null;
 							break;
 
 						case ItemSubtype.TopArmor:
-							if(entity.topArmorSlot) inv.AddItem(entity.topArmorSlot);
+							if (entity.topArmorSlot) { inv.AddItem(entity.topArmorSlot); }
 							entity.topArmorSlot = t;
 							break;
 
 						case ItemSubtype.BotArmor:
-							if(entity.botArmorSlot) inv.AddItem(entity.botArmorSlot);
+							if (entity.botArmorSlot) { inv.AddItem(entity.botArmorSlot); }
 							entity.botArmorSlot = t;
 							break;
 
 						case ItemType.Accessory:
-							if(type == ItemSubtype.Acc1) {
-								if(entity.acc1Slot) inv.AddItem(entity.acc1Slot);
+							if (type == ItemSubtype.Acc1) {
+								if (entity.acc1Slot) { inv.AddItem(entity.acc1Slot); }
 								entity.acc1Slot = t;
-							}
-							else if(type == ItemSubtype.Acc2) {
-								if(entity.acc2Slot) inv.AddItem(entity.acc2Slot);
+							} else if (type == ItemSubtype.Acc2) {
+								if (entity.acc2Slot) { inv.AddItem(entity.acc2Slot); }
 								entity.acc2Slot = t;
 							}
 							break;
 
 						case ItemSubtype.StrapOn:
-							if(entity.strapOn) inv.AddItem(entity.strapOn);
+							if (entity.strapOn) { inv.AddItem(entity.strapOn); }
 							entity.strapOn = t;
 							break;
 					}
@@ -394,108 +517,11 @@ export class Inventory {
 				},
 				enabled : true,
 				obj     : it,
-				tooltip : it.Long()
+				tooltip : it.Long(),
 			});
 		});
 
 		Text.Flush();
 		Gui.SetButtonsFromList(list, true, backPrompt);
-	}
-
-	
-	//Divides items by their 'type'
-	static ItemByType(inv : ItemQuantity[], itemsByType? : any, usableItemsByType? : any, combatItemsByType? : any) {
-		//Add all keys first. Ensures item output will be in whatever order our ItemType enum is in
-		for(let type in ItemType){
-			let itemType = ItemType[type];
-			if(itemsByType)
-				itemsByType[itemType] = [];
-			if(usableItemsByType)
-				usableItemsByType[itemType] = [];
-			if(combatItemsByType)
-				combatItemsByType[itemType] = [];
-		}
-		//Populate type arrays with items if they're defined
-		for(let i = 0; i < inv.length; i++) {
-		let it = inv[i].it;
-		if(itemsByType)
-			itemsByType[it.type].push(inv[i]);
-		if(usableItemsByType && it.Use)
-			usableItemsByType[it.type].push(inv[i]);
-		let itC = it as CombatItem;
-		if(combatItemsByType && itC.combat)
-			combatItemsByType[it.type].push(inv[i]);
-		}
-		//Clear empty arrays
-		for(let type in ItemType){
-			let itemType = ItemType[type];
-			if(itemsByType && itemsByType[itemType].length == 0)
-				delete itemsByType[itemType];
-			if(usableItemsByType && usableItemsByType[itemType].length == 0)
-				delete usableItemsByType[itemType];
-			if(combatItemsByType && combatItemsByType[itemType].length == 0)
-				delete combatItemsByType[itemType];
-		}
-	}
-	//Divides items by their 'type' and further by their 'subtype' inside each primary type. Items WITHOUT a subtype are under property 'None'
-	static ItemByBothTypes(inv : any, itemsByType? : any, usableItemsByType? : any, combatItemsByType? : any) {
-		//Add all keys first. Ensures item output will be in whatever order our ItemType enum is in
-		for(let type in ItemType){
-			let itemType = ItemType[type];
-			if(itemsByType) {
-				itemsByType[itemType] = {};
-			}
-			if(usableItemsByType){
-				usableItemsByType[itemType] = {};
-			}
-			if(combatItemsByType){
-				combatItemsByType[itemType] = {};
-			}
-
-			for(let subtype in ItemSubtype){
-				let itemSubtype = ItemSubtype[subtype];
-				if(itemsByType)
-					itemsByType[itemType][itemSubtype] = [];
-				if(usableItemsByType)
-					usableItemsByType[itemType][itemSubtype] = [];
-				if(combatItemsByType)
-					combatItemsByType[itemType][itemSubtype] = [];
-			}
-		}
-		//Populate type arrays with items if they're defined
-		for(let i = 0; i < inv.length; i++) {
-			let it = inv[i].it;
-			if(itemsByType) {
-				itemsByType[it.type][it.subtype].push(inv[i]);
-			}
-			if(usableItemsByType && it.Use) {
-				usableItemsByType[it.type][it.subtype].push(inv[i]);
-			}
-			if(combatItemsByType && it.combat) {
-				combatItemsByType[it.type][it.subtype].push(inv[i]);
-			}
-		}
-		//Clear empty arrays
-		for(let type in ItemType){
-			let itemType = ItemType[type];
-			//Remove empty subtypes
-			for(let subtype in ItemSubtype){
-				let itemSubtype = ItemSubtype[subtype];
-				if(itemsByType && itemsByType[itemType][itemSubtype].length == 0)
-					delete itemsByType[itemType][itemSubtype];
-				if(usableItemsByType && usableItemsByType[itemType][itemSubtype].length == 0)
-					delete usableItemsByType[itemType][itemSubtype];
-				if(combatItemsByType && combatItemsByType[itemType][itemSubtype].length == 0)
-					delete combatItemsByType[itemType][itemSubtype];
-			}
-
-			//remove empty types
-			if(itemsByType && _.keys(itemsByType[itemType]).length == 0)
-				delete itemsByType[itemType];
-			if(usableItemsByType && _.keys(usableItemsByType[itemType]).length == 0)
-				delete usableItemsByType[itemType];
-			if(combatItemsByType && _.keys(combatItemsByType[itemType]).length == 0)
-				delete combatItemsByType[itemType];
-		}
 	}
 }

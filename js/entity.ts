@@ -1,51 +1,51 @@
 
 // Basic game entity
 // Enemies and player inherit from Entity
-import * as _ from 'lodash';
+import * as _ from "lodash";
 
-import { Stat } from './stat';
-import { StatusList } from './statuslist';
-import { Body } from './body/body';
-import { PregnancyHandler, Womb } from './pregnancy';
-import { LactationHandler } from './lactation';
-import { AbilityCollection } from './ability';
-import { DamageType, Element } from './damagetype';
-import { GetDEBUG } from '../app';
-import { EntityMenu } from './entity-menu';
-import { EntityDict } from './entity-dict';
-import { LowerBodyType } from './body/body';
-import { Time } from './time';
-import { Text } from './text';
-import { Gui } from './gui';
-import { Item, ItemIds } from './item';
-import { Perk, PerkIds } from './perks';
-import { StatusEffect } from './statuseffect';
-import { Color } from './body/color';
-import { RaceScore, Race, RaceDesc } from './body/race';
-import { AppendageType } from './body/appendage';
-import { Abilities } from './abilities';
-import { GAME } from './GAME';
-import { GetAggroEntry } from './ability/default';
-import { CurEncounter } from './combat-data';
-import { Jobs } from './job';
-import { Gender } from './body/gender';
-import { Cock } from './body/cock';
-import { Vagina } from './body/vagina';
-import { Butt } from './body/butt';
-import { BodyPartType } from './body/bodypart';
-import { Orifice } from './body/orifice';
-import { NippleType } from './body/breasts';
-import { Unit } from './utility';
+import { GetDEBUG } from "../app";
+import { Abilities } from "./abilities";
+import { AbilityCollection } from "./ability";
+import { GetAggroEntry } from "./ability/default";
+import { AppendageType } from "./body/appendage";
+import { LowerBodyType } from "./body/body";
+import { Body } from "./body/body";
+import { BodyPartType } from "./body/bodypart";
+import { NippleType } from "./body/breasts";
+import { Butt } from "./body/butt";
+import { Cock } from "./body/cock";
+import { Color } from "./body/color";
+import { Gender } from "./body/gender";
+import { Orifice } from "./body/orifice";
+import { Race, RaceDesc, RaceScore } from "./body/race";
+import { Vagina } from "./body/vagina";
+import { CurEncounter } from "./combat-data";
+import { DamageType, Element } from "./damagetype";
+import { EntityDict } from "./entity-dict";
+import { EntityMenu } from "./entity-menu";
+import { GAME } from "./GAME";
+import { Gui } from "./gui";
+import { Item, ItemIds } from "./item";
+import { Jobs } from "./job";
+import { LactationHandler } from "./lactation";
+import { Perk, PerkIds } from "./perks";
+import { PregnancyHandler, Womb } from "./pregnancy";
+import { Stat } from "./stat";
+import { StatusEffect } from "./statuseffect";
+import { StatusList } from "./statuslist";
+import { Text } from "./text";
+import { Time } from "./time";
+import { Unit } from "./utility";
 
 export enum DrunkLevel {
 	Sober   = 0.25,
 	Tipsy   = 0.50,
 	Sloshed = 0.75,
-	Drunk   = 1.00
-};
+	Drunk   = 1.00,
+}
 
 export enum TargetStrategy {
-	None      = 0, //Not used
+	None      = 0, // Not used
 	NearDeath = 1,
 	LowHp     = 2,
 	LowAbsHp  = 4,
@@ -53,86 +53,97 @@ export enum TargetStrategy {
 	HighAbsHp = 16,
 	Leader    = 32,
 	SPHunt    = 64,
-	LPHunt    = 128
-};
+	LPHunt    = 128,
+}
 
 // TODO: Should have shared features, such as combat stats. Body representation
 export class Entity {
-	name : string;
-	monsterName : string;
-	MonsterName : string;
-	groupName : string;
-	GroupName : string;
-	uniqueName : string;
-	ID : string;
-	title : string[];
-	avatar : any;
 
-	combatExp : number;
-	coinDrop : number;
-	abilities : any;
-	recipes : Item[];
-	alchemyLevel : number;
-	jobs : any;
-	currentJob : any;
-	experience : number;
-	level : number;
-	pendingStatPoints : number;
-	expToLevel : number;
-	sexperience : number;
-	sexlevel : number;
-	sexpToLevel : number;
-	
-	ExpToLevel  = 15;
-	SexpToLevel = 30;
+	public static IdToEntity = EntityDict.IdToEntity;
+	public name: string;
+	public monsterName: string;
+	public MonsterName: string;
+	public groupName: string;
+	public GroupName: string;
+	public uniqueName: string;
+	public ID: string;
+	public title: string[];
+	public avatar: any;
 
-	curHp : number;
-	maxHp : Stat;
-	curSp : number;
-	maxSp : Stat;
-	curLust : number;
-	maxLust : Stat;
+	public combatExp: number;
+	public coinDrop: number;
+	public abilities: any;
+	public recipes: Item[];
+	public alchemyLevel: number;
+	public jobs: any;
+	public currentJob: any;
+	public experience: number;
+	public level: number;
+	public pendingStatPoints: number;
+	public expToLevel: number;
+	public sexperience: number;
+	public sexlevel: number;
+	public sexpToLevel: number;
 
-	strength : Stat;
-	stamina : Stat;
-	dexterity : Stat;
-	intelligence : Stat;
-	spirit : Stat;
-	libido : Stat;
-	charisma : Stat;
+	public ExpToLevel  = 15;
+	public SexpToLevel = 30;
 
-	weaponSlot : Item;
-	topArmorSlot : Item;
-	botArmorSlot : Item;
-	acc1Slot : Item;
-	acc2Slot : Item;
+	public curHp: number;
+	public maxHp: Stat;
+	public curSp: number;
+	public maxSp: Stat;
+	public curLust: number;
+	public maxLust: Stat;
 
-	strapOn : any;
+	public strength: Stat;
+	public stamina: Stat;
+	public dexterity: Stat;
+	public intelligence: Stat;
+	public spirit: Stat;
+	public libido: Stat;
+	public charisma: Stat;
 
-	elementAtk : DamageType;
-	elementDef : DamageType;
+	public weaponSlot: Item;
+	public topArmorSlot: Item;
+	public botArmorSlot: Item;
+	public acc1Slot: Item;
+	public acc2Slot: Item;
 
-	atkMod : number;
-	defMod : number;
+	public strapOn: any;
 
-	combatStatus : StatusList;
-	statusDef : any[];
-	statusDefGear : any[];
-	statusWear : any[];
+	public elementAtk: DamageType;
+	public elementDef: DamageType;
 
-	body : Body;
-	drunkLevel : number;
-	pregHandler : PregnancyHandler;
-	lactHandler : LactationHandler;
-	flags : any;
-	sex : any;
-	perks : Perk[];
-	aggro : any[];
-	subDom : Stat;
-	slut : Stat;
-	relation : Stat;
+	public atkMod: number;
+	public defMod: number;
 
-	location : any;
+	public combatStatus: StatusList;
+	public statusDef: any[];
+	public statusDefGear: any[];
+	public statusWear: any[];
+
+	public body: Body;
+	public drunkLevel: number;
+	public pregHandler: PregnancyHandler;
+	public lactHandler: LactationHandler;
+	public flags: any;
+	public sex: any;
+	public perks: Perk[];
+	public aggro: any[];
+	public subDom: Stat;
+	public slut: Stat;
+	public relation: Stat;
+
+	public location: any;
+
+	/* ENTITY MENU */
+	public InteractDefault = EntityMenu.InteractDefault;
+	public LevelUpPrompt = EntityMenu.LevelUpPrompt;
+	public EquipPrompt = EntityMenu.EquipPrompt;
+	public JobPrompt = EntityMenu.JobPrompt;
+
+	/* ENTITY DICT */
+	public UniqueId = EntityDict.UniqueId;
 
 	constructor() {
 		// Names and grammar
@@ -144,29 +155,29 @@ export class Entity {
 		this.ID           = undefined;
 		// Titles are achieved by performing feats or by achieving great strength
 		this.title        = new Array();
-		
+
 		this.avatar       = {};
-		
+
 		// Combat
 		this.combatExp    = 0;
 		this.coinDrop     = 0;
-		
+
 		// TODO: Save/Load
 		this.abilities             = {};
-		this.abilities["Skills"]  = new AbilityCollection("Skills");
-		this.abilities["Spells"]  = new AbilityCollection("Spells");
-		this.abilities["Support"] = new AbilityCollection("Support");
-		this.abilities["Seduce"]  = new AbilityCollection("Seduce");
-		this.abilities["Special"] = new AbilityCollection("SPECIAL");
-		
+		this.abilities.Skills  = new AbilityCollection("Skills");
+		this.abilities.Spells  = new AbilityCollection("Spells");
+		this.abilities.Support = new AbilityCollection("Support");
+		this.abilities.Seduce  = new AbilityCollection("Seduce");
+		this.abilities.Special = new AbilityCollection("SPECIAL");
+
 		// Alchemy stuff
 		this.recipes      = [];
 		this.alchemyLevel = 0;
-		
+
 		// Jobs //TODO: Save/load
 		this.jobs         = {};
 		this.currentJob   = null;
-		
+
 		// Experience
 		// Experience is gained by defeating enemies and completing quests
 		// Enough experience will increase level
@@ -182,38 +193,38 @@ export class Entity {
 		this.sexpToLevel  = this.SexpToLevel;
 
 		// Base stats
-		let that = this;
-		
+		const that = this;
+
 		// Health stat and functions
 		this.curHp        = 0;
 		this.maxHp        = new Stat(10, 10, 5);
-		this.maxHp.debug = function() { return that.name + ".maxHp"; }
+		this.maxHp.debug = function() { return that.name + ".maxHp"; };
 		// SP
 		this.curSp        = 0;
 		this.maxSp        = new Stat(10, 5, 5);
-		this.maxSp.debug = function() { return that.name + ".maxSp"; }
+		this.maxSp.debug = function() { return that.name + ".maxSp"; };
 
 		// Lust stat and functions
 		this.curLust      = 0;
 		this.maxLust      = new Stat(10, 5, 5);
-		this.maxLust.debug = function() { return that.name + ".maxLust"; }
-		
+		this.maxLust.debug = function() { return that.name + ".maxLust"; };
+
 		// Main stats
 		this.strength     = new Stat(0, 1, 0.1);
-		this.strength.debug = function() { return that.name + ".strength"; }
+		this.strength.debug = function() { return that.name + ".strength"; };
 		this.stamina      = new Stat(0, 1, 0.1);
-		this.stamina.debug = function() { return that.name + ".stamina"; }
+		this.stamina.debug = function() { return that.name + ".stamina"; };
 		this.dexterity    = new Stat(0, 1, 0.1);
-		this.dexterity.debug = function() { return that.name + ".dexterity"; }
+		this.dexterity.debug = function() { return that.name + ".dexterity"; };
 		this.intelligence = new Stat(0, 1, 0.1);
-		this.intelligence.debug = function() { return that.name + ".intelligence"; }
+		this.intelligence.debug = function() { return that.name + ".intelligence"; };
 		this.spirit       = new Stat(0, 1, 0.1);
-		this.spirit.debug = function() { return that.name + ".spirit"; }
+		this.spirit.debug = function() { return that.name + ".spirit"; };
 		this.libido       = new Stat(0, 1, 0.1);
-		this.libido.debug = function() { return that.name + ".libido"; }
+		this.libido.debug = function() { return that.name + ".libido"; };
 		this.charisma     = new Stat(0, 1, 0.1);
-		this.charisma.debug = function() { return that.name + ".charisma"; }
-		
+		this.charisma.debug = function() { return that.name + ".charisma"; };
+
 		// Equipment
 		this.weaponSlot   = null;
 		this.topArmorSlot = null;
@@ -222,28 +233,28 @@ export class Entity {
 		this.acc2Slot     = null;
 
 		this.strapOn      = null;
-		
+
 		this.elementAtk   = new DamageType();
 		this.elementDef   = new DamageType();
-		
+
 		this.combatStatus = new StatusList();
 		this.statusDef    = [];
 		this.statusDefGear = [];
 		this.statusWear   = [];
-		
+
 		// Body representation
 		this.body         = new Body(this);
-		
+
 		this.drunkLevel   = 0.0;
-		
+
 		this.pregHandler  = new PregnancyHandler(this);
 		this.lactHandler  = new LactationHandler(this);
-		
+
 		// Set hp and sp to full, clear lust to min level
 		this.Equip();
 		this.SetLevelBonus();
 		this.RestFull();
-		
+
 		this.flags = {};
 		this.sex = {
 			rBlow : 0,
@@ -255,24 +266,22 @@ export class Entity {
 			rVag  : 0,
 			gVag  : 0,
 			sired : 0,
-			birth : 0
+			birth : 0,
 		};
-		
+
 		this.perks   = [];
 		this.aggro   = [];
-		
+
 		// Personality stats
 		this.subDom   = new Stat(0); // sub = low, dom = high
-		this.subDom.debug = function() { return that.name + ".subDom"; }
+		this.subDom.debug = function() { return that.name + ".subDom"; };
 		this.slut     = new Stat(0);
-		this.slut.debug = function() { return that.name + ".slut"; }
+		this.slut.debug = function() { return that.name + ".slut"; };
 		this.relation = new Stat(0);
-		this.relation.debug = function() { return that.name + ".relation"; }
+		this.relation.debug = function() { return that.name + ".relation"; };
 	}
-	
-	static IdToEntity = EntityDict.IdToEntity;
 
-	SetLevelBonus() {
+	public SetLevelBonus() {
 		this.maxHp.level        = this.level * this.maxHp.growth;
 		this.maxSp.level        = this.level * this.maxSp.growth;
 		this.maxLust.level      = this.level * this.maxLust.growth;
@@ -284,35 +293,38 @@ export class Entity {
 		this.libido.level       = this.level * this.libido.growth;
 		this.charisma.level     = this.level * this.charisma.growth;
 	}
-	
-	HasPerk(perk : Perk) {
-		for(let i = 0; i < this.perks.length; ++i) {
-			if(this.perks[i] == perk)
+
+	public HasPerk(perk: Perk) {
+		for (let i = 0; i < this.perks.length; ++i) {
+			if (this.perks[i] == perk) {
 				return true;
+			}
 		}
 		return false;
 	}
-	
-	AddPerk(perk : Perk) {
-		for(let i = 0; i < this.perks.length; ++i) {
-			if(this.perks[i] == perk)
+
+	public AddPerk(perk: Perk) {
+		for (let i = 0; i < this.perks.length; ++i) {
+			if (this.perks[i] == perk) {
 				return;
+			}
 		}
 		this.perks.push(perk);
 	}
-	
-	KnowsRecipe(item : Item) {
-		let idx = this.recipes.indexOf(item); // Find the index
+
+	public KnowsRecipe(item: Item) {
+		const idx = this.recipes.indexOf(item); // Find the index
 		return (idx != -1);
 	}
-	
-	AddAlchemy(item : Item) {
-		let idx = this.recipes.indexOf(item); // Find the index
-		if(idx==-1)
+
+	public AddAlchemy(item: Item) {
+		const idx = this.recipes.indexOf(item); // Find the index
+		if (idx == -1) {
 			this.recipes.push(item);
+		}
 	}
-	
-	Equip() {
+
+	public Equip() {
 		this.maxHp.bonus        = 0;
 		this.maxSp.bonus        = 0;
 		this.maxLust.bonus      = 0;
@@ -323,204 +335,207 @@ export class Entity {
 		this.spirit.bonus       = 0;
 		this.libido.bonus       = 0;
 		this.charisma.bonus     = 0;
-		
+
 		this.atkMod = 1;
 		this.defMod = 1;
-		
+
 		this.elementAtk = new DamageType();
-		if(!this.weaponSlot) this.elementAtk.dmg[Element.pBlunt] = 1;
+		if (!this.weaponSlot) { this.elementAtk.dmg[Element.pBlunt] = 1; }
 		this.elementDef = new DamageType();
-		
+
 		this.statusDefGear = [];
-		
-		if(this.weaponSlot   && this.weaponSlot.Equip)   this.weaponSlot.Equip(this);
-		if(this.topArmorSlot && this.topArmorSlot.Equip) this.topArmorSlot.Equip(this);
-		if(this.botArmorSlot && this.botArmorSlot.Equip) this.botArmorSlot.Equip(this);
-		if(this.acc1Slot     && this.acc1Slot.Equip)     this.acc1Slot.Equip(this);
-		if(this.acc2Slot     && this.acc2Slot.Equip)     this.acc2Slot.Equip(this);
-		
+
+		if (this.weaponSlot   && this.weaponSlot.Equip) {   this.weaponSlot.Equip(this); }
+		if (this.topArmorSlot && this.topArmorSlot.Equip) { this.topArmorSlot.Equip(this); }
+		if (this.botArmorSlot && this.botArmorSlot.Equip) { this.botArmorSlot.Equip(this); }
+		if (this.acc1Slot     && this.acc1Slot.Equip) {     this.acc1Slot.Equip(this); }
+		if (this.acc2Slot     && this.acc2Slot.Equip) {     this.acc2Slot.Equip(this); }
+
 		this.BalanceStats();
 	}
-	
-	Strip() {
+
+	public Strip() {
 		// Remove all equipment (discards it completely and destroys it)
 		this.weaponSlot   = null;
 		this.topArmorSlot = null;
 		this.botArmorSlot = null;
 		this.acc1Slot     = null;
 		this.acc2Slot     = null;
-	
+
 		this.strapOn      = null;
 	}
-	
-	ItemUsable(item : Item) {
-		if(item.isTF)
+
+	public ItemUsable(item: Item) {
+		if (item.isTF) {
 			return false;
+		}
 		return true;
 	}
-	
-	ItemUse(item : Item, backPrompt : any) {
+
+	public ItemUse(item: Item, backPrompt: any) {
 		return {grab : false, consume : true};
 	}
-	
-	Strapon() {
+
+	public Strapon() {
 		return this.strapOn;
 	}
-	
-	AddExp(exp : number, reserve? : boolean) {
-		let buff = this.combatStatus.stats[StatusEffect.Full];
-		if(buff && buff.exp) {
+
+	public AddExp(exp: number, reserve?: boolean) {
+		const buff = this.combatStatus.stats[StatusEffect.Full];
+		if (buff && buff.exp) {
 			exp = Math.ceil(buff.exp * exp);
 		}
-		
-		if(GetDEBUG()) {
+
+		if (GetDEBUG()) {
 			Text.NL();
-			Text.Add("[reserve][name] gains [x] xp.", {reserve: reserve ? "RESERVE: " : "", name: this.name, x: exp}, 'bold');
+			Text.Add("[reserve][name] gains [x] xp.", {reserve: reserve ? "RESERVE: " : "", name: this.name, x: exp}, "bold");
 			Text.NL();
 			Text.Flush();
 		}
-		
+
 		this.experience += exp;
-		if(this.currentJob) {
+		if (this.currentJob) {
 			this.currentJob.AddExp(this, exp, reserve);
 		}
-		
+
 		// Check for level up
-		while(this.experience >= this.expToLevel) {
+		while (this.experience >= this.expToLevel) {
 			this.experience        -= this.expToLevel;
 			this.expToLevel         = Math.floor(this.expToLevel * 1.2);
 			this.level++;
 			this.pendingStatPoints += Stat.growthPointsPerLevel;
-			
+
 			this.SetLevelBonus();
-			
-			if(GetDEBUG()) {
+
+			if (GetDEBUG()) {
 				Text.NL();
-				Text.Add("[reserve][name] gains a level! Now at [x].", {reserve: reserve ? "RESERVE: " : "", name: this.name, x: this.level}, 'bold');
+				Text.Add("[reserve][name] gains a level! Now at [x].", {reserve: reserve ? "RESERVE: " : "", name: this.name, x: this.level}, "bold");
 				Text.NL();
 				Text.Flush();
 			}
 		}
 	}
-	
-	AddSexExp(sexp : number) {
-		if(GetDEBUG()) {
+
+	public AddSexExp(sexp: number) {
+		if (GetDEBUG()) {
 			Text.NL();
-			Text.Add("[name] gains [x] sex exp.", {name: this.name, x: sexp}, 'bold');
+			Text.Add("[name] gains [x] sex exp.", {name: this.name, x: sexp}, "bold");
 			Text.NL();
 			Text.Flush();
 		}
-		
+
 		this.sexperience += sexp;
 		// Check for level up
-		while(this.sexperience >= this.sexpToLevel) {
+		while (this.sexperience >= this.sexpToLevel) {
 			this.sexperience       -= this.sexpToLevel;
 			this.sexpToLevel        = Math.floor(this.sexpToLevel * 2);
 			this.sexlevel++;
-			//this.pendingStatPoints += 5;
-			
-			if(GetDEBUG()) {
+			// this.pendingStatPoints += 5;
+
+			if (GetDEBUG()) {
 				Text.NL();
-				Text.Add("[name] gains a sex level! Now at [x].", {name: this.name, x: this.sexlevel}, 'bold');
+				Text.Add("[name] gains a sex level! Now at [x].", {name: this.name, x: this.sexlevel}, "bold");
 				Text.NL();
 				Text.Flush();
 			}
 		}
 	}
-	
-	SetExpToLevel() {
+
+	public SetExpToLevel() {
 		this.sexpToLevel  = this.SexpToLevel;
 		this.expToLevel   = this.ExpToLevel;
-		for(let i = 1; i < this.level; i++)
+		for (let i = 1; i < this.level; i++) {
 			this.expToLevel  = Math.floor(this.expToLevel * 1.2);
-		for(let i = 1; i < this.sexlevel; i++)
+		}
+		for (let i = 1; i < this.sexlevel; i++) {
 			this.sexpToLevel = Math.floor(this.sexpToLevel * 2);
+		}
 	}
-	
-	IsAtLocation(location : any) {
+
+	public IsAtLocation(location: any) {
 		return (this.location == location);
 	}
-	
+
 	// Should return an array of drops (if any) in the form of {it: Item, num: amount}
-	DropTable() : any[] {
+	public DropTable(): any[] {
 		return [];
 	}
-	
-	Update(step? : number) {
-		if(step) {
-			let time = new Time();
+
+	public Update(step?: number) {
+		if (step) {
+			const time = new Time();
 			time.Inc(step);
-			
-			let hours = time.ToHours();
-			
+
+			const hours = time.ToHours();
+
 			this.AddLustOverTime(hours);
 			this.AccumulateCumOverTime(hours);
 			this.LactationOverTime(hours);
 			this.PregnancyOverTime(hours);
 			this.HandleDrunknessOverTime(hours);
 			this.HandleStretchOverTime(hours);
-			
+
 			this.combatStatus.Update(this, hours);
 		}
 	}
-	
-	HandleStretchOverTime(hours : number) {
+
+	public HandleStretchOverTime(hours: number) {
 		this.body.HandleStretchOverTime(hours);
 	}
-	
-	//TODO
-	AccumulateCumOverTime(hours : number) {
-		let balls = this.Balls();
-		
-		let inc = balls.cumProduction.Get() * hours;
-	
+
+	// TODO
+	public AccumulateCumOverTime(hours: number) {
+		const balls = this.Balls();
+
+		const inc = balls.cumProduction.Get() * hours;
+
 		// Max out
 		balls.cum.IncreaseStat(balls.CumCap(), inc);
 	}
-	
-	MilkDrained() {
+
+	public MilkDrained() {
 		this.lactHandler.MilkDrained();
 		// TODO Output
 	}
-	MilkFull() {
+	public MilkFull() {
 		this.lactHandler.MilkFull();
 	}
-	MilkDrain(drain : number) {
+	public MilkDrain(drain: number) {
 		return this.LactHandler().MilkDrain(drain);
 	}
-	MilkDrainFraction(fraction : number) {
+	public MilkDrainFraction(fraction: number) {
 		return this.LactHandler().MilkDrainFraction(fraction);
 	}
-	
-	LactHandler() {
+
+	public LactHandler() {
 		return this.lactHandler;
 	}
-	
-	LactationOverTime(hours : number) {
+
+	public LactationOverTime(hours: number) {
 		this.lactHandler.Update(hours);
 	}
-	
-	PregHandler() {
+
+	public PregHandler() {
 		return this.pregHandler;
 	}
-	
-	PregnancyOverTime(hours : number) {
+
+	public PregnancyOverTime(hours: number) {
 		this.pregHandler.Update(hours);
 	}
-	
-	PregnancyProgess(womb : Womb, slot : number, oldProgress : number, progress : number) {
+
+	public PregnancyProgess(womb: Womb, slot: number, oldProgress: number, progress: number) {
 	}
-	
-	PregnancyTrigger(womb : Womb, slot : number) {
+
+	public PregnancyTrigger(womb: Womb, slot: number) {
 		// Use unshift instead of push to make sure pregnancy doesn't interfere with scene progression
 		Gui.Callstack.unshift(function() {
 			womb.pregnant = false;
-			
-			if(GetDEBUG()) {
-				let parse : any = {
-					name : this.name
+
+			if (GetDEBUG()) {
+				const parse: any = {
+					name : this.name,
 				};
-				
+
 				Text.Clear();
 				Text.Add("PLACEHOLDER: [name] gave birth.", parse);
 				Text.NL();
@@ -529,67 +544,71 @@ export class Entity {
 			}
 		});
 	}
-	
-	CanGiveBirth() {
+
+	public CanGiveBirth() {
 		return true;
 	}
-	
-	DrunkRecoveryRate() {
+
+	public DrunkRecoveryRate() {
 		let sta = this.Sta();
-		if(sta < Math.E) sta = Math.E;
+		if (sta < Math.E) { sta = Math.E; }
 		return Math.log(sta) / 25;
 	}
-	HandleDrunknessOverTime(hours : number, suppressText? : boolean) {
-		let oldLevel = this.drunkLevel;
+	public HandleDrunknessOverTime(hours: number, suppressText?: boolean) {
+		const oldLevel = this.drunkLevel;
 		this.drunkLevel -= this.DrunkRecoveryRate() * hours;
-		if(this.drunkLevel < 0) this.drunkLevel = 0;
+		if (this.drunkLevel < 0) { this.drunkLevel = 0; }
 	}
-	Drunk() {
+	public Drunk() {
 		return this.drunkLevel;
 	}
-	DrunkStr() {
-		let parse : any = {
+	public DrunkStr() {
+		const parse: any = {
 			name : this.NameDesc(),
-			isAre : this.is()
+			isAre : this.is(),
 		};
-		if(this.drunkLevel > DrunkLevel.Drunk)
+		if (this.drunkLevel > DrunkLevel.Drunk) {
 			return Text.Parse("[name] [isAre] passed out, dead drunk.", parse);
-		if(this.drunkLevel > DrunkLevel.Sloshed)
+		}
+		if (this.drunkLevel > DrunkLevel.Sloshed) {
 			return Text.Parse("[name] [isAre] reeling, quite drunk.", parse);
-		if(this.drunkLevel > DrunkLevel.Tipsy)
+		}
+		if (this.drunkLevel > DrunkLevel.Tipsy) {
 			return Text.Parse("[name] [isAre] tipsy, wobbling slighty.", parse);
-		if(this.drunkLevel > DrunkLevel.Sober)
+		}
+		if (this.drunkLevel > DrunkLevel.Sober) {
 			return Text.Parse("[name] [isAre] feeling a bit tipsy.", parse);
+		}
 		return false;
 	}
-	Drink(drink : number, suppressText : boolean) {
+	public Drink(drink: number, suppressText: boolean) {
 		let sta = this.Sta();
-		if(sta < Math.E) sta = Math.E;
-		let oldLevel = this.drunkLevel;
+		if (sta < Math.E) { sta = Math.E; }
+		const oldLevel = this.drunkLevel;
 		this.drunkLevel += drink / Math.log(sta);
 	}
 	// TODO: Implement for companions
-	InnPrompt() {
+	public InnPrompt() {
 		Text.Clear();
 		Text.Add("[PLACEHOLDER]");
 		Text.NL();
 		Text.Flush();
 		Gui.NextPrompt();
 	}
-	
-	SetEyeColor(color : Color) {
+
+	public SetEyeColor(color: Color) {
 		this.body.head.eyes.color = color;
 	}
-	SetHairColor(color : Color) {
+	public SetHairColor(color: Color) {
 		this.body.head.hair.color = color;
 	}
-	SetSkinColor(color : Color) {
+	public SetSkinColor(color: Color) {
 		this.body.torso.color = color;
 	}
-	
-	DebugMode(debug : boolean) {
-		let value = debug ? 50 : 0;
-		
+
+	public DebugMode(debug: boolean) {
+		const value = debug ? 50 : 0;
+
 		this.maxHp.cheat        = value * 10;
 		this.maxSp.cheat        = value * 10;
 		this.maxLust.cheat      = value * 10;
@@ -600,48 +619,49 @@ export class Entity {
 		this.spirit.cheat       = value;
 		this.libido.cheat       = value;
 		this.charisma.cheat     = value;
-		
+
 		this.Equip();
-		if(debug)
+		if (debug) {
 			this.RestFull();
+		}
 	}
-	
+
 	/* COMBAT RELATED FUNTIONS */
-	Act(encounter : any, activeChar : any) {
+	public Act(encounter: any, activeChar: any) {
 		// TODO: Very TEMP
 		Text.Add(this.name + " acts! Rawr!");
 		Text.NL();
 		Text.Flush();
-		
+
 		// Pick a random target
-		let t = this.GetSingleTarget(encounter, activeChar);
+		const t = this.GetSingleTarget(encounter, activeChar);
 
 		Abilities.Attack.Use(encounter, this, t);
 	}
 
-	//TODO Structure
-	FinishCastInternal(ability : any, encounter : any, caster : any, targets : any) {
+	// TODO Structure
+	public FinishCastInternal(ability: any, encounter: any, caster: any, targets: any) {
 		Text.Flush();
-		
+
 		Gui.NextPrompt(function() {
-			if(encounter)
+			if (encounter) {
 				encounter.CombatTick();
-			else
+			} else {
 				Gui.PrintDefaultOptions();
+			}
 		});
 	}
 
 	// Can be overrided to allow for selective cancellation
-	CanBeInterrupted(ability : any, encounter : any, caster : any, result : any) {
+	public CanBeInterrupted(ability: any, encounter: any, caster: any, result: any) {
 		return true;
 	}
 
-
-	GetCombatEntry(encounter : any) {
-		let ent = this;
-		let found : any;
+	public GetCombatEntry(encounter: any) {
+		const ent = this;
+		let found: any;
 		_.each(encounter.combatOrder, function(it) {
-			if(it.entity == ent) {
+			if (it.entity == ent) {
 				found = it;
 				return false;
 			}
@@ -649,40 +669,45 @@ export class Entity {
 		return found;
 	}
 
-
-	GetPartyTarget(encounter : any, activeChar : any, ally? : any) {
+	public GetPartyTarget(encounter: any, activeChar: any, ally?: any) {
 		let isEnemy = activeChar.isEnemy;
-		let confuse = activeChar.entity.combatStatus.stats[StatusEffect.Confuse];
-		if(confuse)
+		const confuse = activeChar.entity.combatStatus.stats[StatusEffect.Confuse];
+		if (confuse) {
 			isEnemy = !isEnemy;
-		if(ally)
+		}
+		if (ally) {
 			isEnemy = !isEnemy;
-		
-		if(isEnemy)
+		}
+
+		if (isEnemy) {
 			return GAME().party;
-		else
+		} else {
 			return encounter.enemy;
+		}
 	}
 
-	GetSingleTarget(encounter : any, activeChar : any, strategy? : TargetStrategy, ally? : boolean) {
+	public GetSingleTarget(encounter: any, activeChar: any, strategy?: TargetStrategy, ally?: boolean) {
 		let isEnemy = activeChar.isEnemy;
-		let confuse = activeChar.entity.combatStatus.stats[StatusEffect.Confuse];
-		if(confuse)
+		const confuse = activeChar.entity.combatStatus.stats[StatusEffect.Confuse];
+		if (confuse) {
 			isEnemy = !isEnemy;
-		if(ally)
+		}
+		if (ally) {
 			isEnemy = !isEnemy;
-		
+		}
+
 		// Fetch all potential targets
 		let targets;
-		if(isEnemy)
+		if (isEnemy) {
 			targets = encounter.GetLivePartyArray();
-		else
+		} else {
 			targets = encounter.GetLiveEnemyArray();
-		
+		}
+
 		strategy = strategy || TargetStrategy.None;
-		
+
 		let aggro;
-		if(ally) {
+		if (ally) {
 			// cleanup
 			activeChar.aggroAllies = _.reject(activeChar.aggroAllies, function(it) {
 				return it.entity.Incapacitated();
@@ -690,14 +715,14 @@ export class Entity {
 
 			// adding new aggro targets
 			_.each(targets, function(t) {
-				if(!GetAggroEntry(activeChar, t))
+				if (!GetAggroEntry(activeChar, t)) {
 					activeChar.aggroAllies.push({entity: t, aggro: 1});
+				}
 			});
 
 			// make a temporary aggro array
 			aggro = _.clone(activeChar.aggroAllies);
-		}
-		else {
+		} else {
 			// cleanup
 			activeChar.aggro = _.reject(activeChar.aggro, function(it) {
 				return it.entity.Incapacitated();
@@ -705,343 +730,359 @@ export class Entity {
 
 			// adding new aggro targets
 			_.each(targets, function(t) {
-				if(!GetAggroEntry(activeChar, t))
+				if (!GetAggroEntry(activeChar, t)) {
 					activeChar.aggro.push({entity: t, aggro: 1});
+				}
 			});
 
 			// make a temporary aggro array
 			aggro = _.clone(activeChar.aggro);
 		}
-		
+
 		// Strategies
-		if(strategy & TargetStrategy.NearDeath) {
+		if (strategy & TargetStrategy.NearDeath) {
 			_.each(aggro, function(a) {
 				let hp  = 1 - a.entity.HPLevel();
 				hp *= hp;
 				a.aggro *= hp;
 			});
 		}
-		if(strategy & TargetStrategy.LowHp) {
+		if (strategy & TargetStrategy.LowHp) {
 			_.each(aggro, function(a) {
-				let hp  = 1 - a.entity.HPLevel();
+				const hp  = 1 - a.entity.HPLevel();
 				a.aggro *= hp;
 			});
 		}
-		if(strategy & TargetStrategy.HighHp) {
+		if (strategy & TargetStrategy.HighHp) {
 			_.each(aggro, function(a) {
-				let hp  = a.entity.HPLevel();
+				const hp  = a.entity.HPLevel();
 				a.aggro *= hp;
 			});
 		}
-		
+
 		// Normalize hp
-		let min = _.minBy(aggro.length, function(a : any) {
+		const min = _.minBy(aggro.length, function(a: any) {
 			return a.entity.curHp;
 		});
-		let max = _.maxBy(aggro.length, function(a : any) {
+		const max = _.maxBy(aggro.length, function(a: any) {
 			return a.entity.curHp;
 		});
-		
-		let span = max - min;
-		if(strategy & TargetStrategy.LowAbsHp) {
+
+		const span = max - min;
+		if (strategy & TargetStrategy.LowAbsHp) {
 			_.each(aggro, function(a) {
 				let hp = (a.entity.curHp - min) / span;
 				hp  = 1 - hp;
 				a.aggro *= hp;
 			});
 		}
-		if(strategy & TargetStrategy.HighAbsHp) {
+		if (strategy & TargetStrategy.HighAbsHp) {
 			_.each(aggro, function(a) {
-				let hp = (a.entity.curHp - min) / span;
+				const hp = (a.entity.curHp - min) / span;
 				a.aggro *= hp;
 			});
 		}
-		
-		if(strategy & TargetStrategy.Leader) { //Test, this might be wrong
-			if(aggro.length > 0)
+
+		if (strategy & TargetStrategy.Leader) { // Test, this might be wrong
+			if (aggro.length > 0) {
 				aggro[0].aggro *= 5;
+			}
 		}
-		if(strategy & TargetStrategy.SPHunt) {
-			for(let i = 0; i < aggro.length; i++) {
-				let sp = Math.log(aggro[i].entity.SP());
+		if (strategy & TargetStrategy.SPHunt) {
+			for (let i = 0; i < aggro.length; i++) {
+				const sp = Math.log(aggro[i].entity.SP());
 				aggro[i].aggro *= sp;
 			}
 		}
-		if(strategy & TargetStrategy.LPHunt) {
-			for(let i = 0; i < aggro.length; i++) {
-				let lp = Math.log(aggro[i].entity.Lust());
+		if (strategy & TargetStrategy.LPHunt) {
+			for (let i = 0; i < aggro.length; i++) {
+				const lp = Math.log(aggro[i].entity.Lust());
 				aggro[i].aggro *= lp;
 			}
 		}
-		
+
 		// TODO: more complex targetting
 		/*
 		if(strategy & TargetStrategy.None) {
 			let val = this.effect.statusDef[i];
 			val
 				let mod = "+";
-				if(val < 0) mod = "-"; 
+				if(val < 0) mod = "-";
 		}val*100 + ""% + mod
 		*/
-		
+
 		// Weigthed random selection
-		let sum = _.sumBy(aggro, function(a : any) {
+		const sum = _.sumBy(aggro, function(a: any) {
 			return a.aggro;
 		});
-		
+
 		// Pick a target
 		let step = Math.random() * sum;
-		
-		for(let i = 0; i < aggro.length; i++) {
+
+		for (let i = 0; i < aggro.length; i++) {
 			step -= aggro[i].aggro;
-			if(step <= 0.0) return aggro[i].entity;
+			if (step <= 0.0) { return aggro[i].entity; }
 		}
-		
+
 		return _.sample(aggro).entity;
 	}
 
-	//STATS
-	HP() {
-		let buff = this.combatStatus.stats[StatusEffect.Buff];
-		let mod = (buff && buff.HP) ? buff.HP : 1;
-		return Math.ceil((this.maxHp.Get() + Math.pow((this.strength.Get() + this.stamina.Get())/2, 1.3)) * mod);
+	// STATS
+	public HP() {
+		const buff = this.combatStatus.stats[StatusEffect.Buff];
+		const mod = (buff && buff.HP) ? buff.HP : 1;
+		return Math.ceil((this.maxHp.Get() + Math.pow((this.strength.Get() + this.stamina.Get()) / 2, 1.3)) * mod);
 	}
 
-	SP() {
-		let buff = this.combatStatus.stats[StatusEffect.Buff];
-		let mod = (buff && buff.SP) ? buff.SP : 1;
-		return Math.ceil((this.maxSp.Get() + Math.pow((this.spirit.Get() + this.intelligence.Get() + this.stamina.Get())/3, 1.3)) * mod);
+	public SP() {
+		const buff = this.combatStatus.stats[StatusEffect.Buff];
+		const mod = (buff && buff.SP) ? buff.SP : 1;
+		return Math.ceil((this.maxSp.Get() + Math.pow((this.spirit.Get() + this.intelligence.Get() + this.stamina.Get()) / 3, 1.3)) * mod);
 	}
 
-	Lust() {
-		let buff = this.combatStatus.stats[StatusEffect.Buff];
-		let mod = (buff && buff.LP) ? buff.LP : 1;
+	public Lust() {
+		const buff = this.combatStatus.stats[StatusEffect.Buff];
+		const mod = (buff && buff.LP) ? buff.LP : 1;
 		return Math.ceil((this.maxLust.Get() + Math.pow(this.libido.Get(), 1.3)) * mod);
 	}
 
-	MinLust() {
+	public MinLust() {
 		return 0; // TODO: Implement
 	}
 
 	// STATS
-	Str() {
-		let buff = this.combatStatus.stats[StatusEffect.Buff];
-		if(buff && buff.Str)
+	public Str() {
+		const buff = this.combatStatus.stats[StatusEffect.Buff];
+		if (buff && buff.Str) {
 			return this.strength.Get() * buff.Str;
-		else
+		} else {
 			return this.strength.Get();
+		}
 	}
-	Sta() {
-		let buff = this.combatStatus.stats[StatusEffect.Buff];
-		if(buff && buff.Sta)
+	public Sta() {
+		const buff = this.combatStatus.stats[StatusEffect.Buff];
+		if (buff && buff.Sta) {
 			return this.stamina.Get() * buff.Sta;
-		else
+		} else {
 			return this.stamina.Get();
+		}
 	}
-	Dex() {
-		let buff = this.combatStatus.stats[StatusEffect.Buff];
-		if(buff && buff.Dex)
+	public Dex() {
+		const buff = this.combatStatus.stats[StatusEffect.Buff];
+		if (buff && buff.Dex) {
 			return this.dexterity.Get() * buff.Dex;
-		else
+		} else {
 			return this.dexterity.Get();
+		}
 	}
-	Int() {
-		let buff = this.combatStatus.stats[StatusEffect.Buff];
-		if(buff && buff.Int)
+	public Int() {
+		const buff = this.combatStatus.stats[StatusEffect.Buff];
+		if (buff && buff.Int) {
 			return this.intelligence.Get() * buff.Int;
-		else
+		} else {
 			return this.intelligence.Get();
+		}
 	}
-	Spi() {
-		let buff = this.combatStatus.stats[StatusEffect.Buff];
-		if(buff && buff.Spi)
+	public Spi() {
+		const buff = this.combatStatus.stats[StatusEffect.Buff];
+		if (buff && buff.Spi) {
 			return this.spirit.Get() * buff.Spi;
-		else
+		} else {
 			return this.spirit.Get();
+		}
 	}
-	Lib() {
-		let buff = this.combatStatus.stats[StatusEffect.Buff];
-		if(buff && buff.Lib)
+	public Lib() {
+		const buff = this.combatStatus.stats[StatusEffect.Buff];
+		if (buff && buff.Lib) {
 			return this.libido.Get() * buff.Lib;
-		else
+		} else {
 			return this.libido.Get();
+		}
 	}
-	Cha() {
-		let buff = this.combatStatus.stats[StatusEffect.Buff];
-		if(buff && buff.Cha)
+	public Cha() {
+		const buff = this.combatStatus.stats[StatusEffect.Buff];
+		if (buff && buff.Cha) {
 			return this.charisma.Get() * buff.Cha;
-		else
+		} else {
 			return this.charisma.Get();
+		}
 	}
 
 	// TODO: Certain status effects like paralyze should also count as incapacitated
-	Incapacitated() {
+	public Incapacitated() {
 		return this.curHp <= 0; // || this.curLust >= this.Lust();
 	}
-	Inhibited() {
-		if(this.combatStatus.stats[StatusEffect.Freeze]  != null) return true;
-		if(this.combatStatus.stats[StatusEffect.Numb]    != null) return true;
-		if(this.combatStatus.stats[StatusEffect.Petrify] != null) return true;
-		if(this.combatStatus.stats[StatusEffect.Blind]   != null) return true;
-		if(this.combatStatus.stats[StatusEffect.Sleep]   != null) return true;
-		if(this.combatStatus.stats[StatusEffect.Enrage]  != null) return true;
-		if(this.combatStatus.stats[StatusEffect.Fatigue] != null) return true;
-		if(this.combatStatus.stats[StatusEffect.Limp]    != null) return true;
-		
+	public Inhibited() {
+		if (this.combatStatus.stats[StatusEffect.Freeze]  != null) { return true; }
+		if (this.combatStatus.stats[StatusEffect.Numb]    != null) { return true; }
+		if (this.combatStatus.stats[StatusEffect.Petrify] != null) { return true; }
+		if (this.combatStatus.stats[StatusEffect.Blind]   != null) { return true; }
+		if (this.combatStatus.stats[StatusEffect.Sleep]   != null) { return true; }
+		if (this.combatStatus.stats[StatusEffect.Enrage]  != null) { return true; }
+		if (this.combatStatus.stats[StatusEffect.Fatigue] != null) { return true; }
+		if (this.combatStatus.stats[StatusEffect.Limp]    != null) { return true; }
+
 		return false;
 	}
 
-	AddHPFraction(fraction : number) {
+	public AddHPFraction(fraction: number) {
 		fraction = fraction || 0;
-		let old = this.curHp;
+		const old = this.curHp;
 		this.curHp += fraction * this.HP();
-		if(this.curHp > this.HP()) this.curHp = this.HP();
-		if(this.curHp < 0) {
+		if (this.curHp > this.HP()) { this.curHp = this.HP(); }
+		if (this.curHp < 0) {
 			this.curHp = 0;
-			if(CurEncounter())
+			if (CurEncounter()) {
 				CurEncounter().OnIncapacitate(this);
+			}
 		}
-		
-		if(fraction > 0 && this.combatStatus.stats[StatusEffect.Bleed])
+
+		if (fraction > 0 && this.combatStatus.stats[StatusEffect.Bleed]) {
 			this.combatStatus.stats[StatusEffect.Bleed] = null;
+		}
 		return this.curHp - old;
 	}
-	AddSPFraction(fraction : number) {
+	public AddSPFraction(fraction: number) {
 		fraction = fraction || 0;
-		let old = this.curSp;
+		const old = this.curSp;
 		this.curSp += fraction * this.SP();
-		if(this.curSp > this.SP()) this.curSp = this.SP();
-		if(this.curSp < 0) this.curSp = 0;
+		if (this.curSp > this.SP()) { this.curSp = this.SP(); }
+		if (this.curSp < 0) { this.curSp = 0; }
 		return this.curSp - old;
 	}
-	AddLustFraction(fraction : number) { // 0..1
+	public AddLustFraction(fraction: number) { // 0..1
 		fraction = fraction || 0;
-		let old = this.curLust;
+		const old = this.curLust;
 		this.curLust += fraction * this.Lust();
-		if(this.curLust > this.Lust()) this.curLust = this.Lust();
-		if(this.curLust < 0) this.curLust = 0;
+		if (this.curLust > this.Lust()) { this.curLust = this.Lust(); }
+		if (this.curLust < 0) { this.curLust = 0; }
 		return this.curLust - old;
 	}
 
-	PhysDmgHP(encounter : any, caster : any, val : number) {
-		let parse : any = {
-			possessive : this.possessive()
+	public PhysDmgHP(encounter: any, caster: any, val: number) {
+		const parse: any = {
+			possessive : this.possessive(),
 		};
-		let ent = this;
-		
-		//Healing
-		if(val >= 0) return true;
-		
+		const ent = this;
+
+		// Healing
+		if (val >= 0) { return true; }
+
 		// Check for sleep
-		if(this.combatStatus.stats[StatusEffect.Sleep] != null) {
+		if (this.combatStatus.stats[StatusEffect.Sleep] != null) {
 			this.combatStatus.stats[StatusEffect.Sleep] = null;
 		}
 		// Check for confuse
-		if(this.combatStatus.stats[StatusEffect.Confuse] != null) {
+		if (this.combatStatus.stats[StatusEffect.Confuse] != null) {
 			this.combatStatus.stats[StatusEffect.Confuse].OnFade(encounter, this);
 		}
-		
+
 		// Check for counter
-		if(this.combatStatus.stats[StatusEffect.Counter] != null) {
-			let onhit = this.combatStatus.stats[StatusEffect.Counter].OnHit;
-			
+		if (this.combatStatus.stats[StatusEffect.Counter] != null) {
+			const onhit = this.combatStatus.stats[StatusEffect.Counter].OnHit;
+
 			this.combatStatus.stats[StatusEffect.Counter].hits--;
-			if(this.combatStatus.stats[StatusEffect.Counter].hits <= 0)
+			if (this.combatStatus.stats[StatusEffect.Counter].hits <= 0) {
 				this.combatStatus.stats[StatusEffect.Counter] = null;
+			}
 
 			let ret;
-			if(onhit)
+			if (onhit) {
 				ret = onhit(encounter, this, caster, val);
+			}
 
 			return ret;
 		}
 		// Check for decoy
-		let decoy = this.combatStatus.stats[StatusEffect.Decoy];
-		if(decoy != null) {
-			let num  = decoy.copies;
-			let toHit = 1 / (num + 1);
-			if(Math.random() < toHit)
+		const decoy = this.combatStatus.stats[StatusEffect.Decoy];
+		if (decoy != null) {
+			const num  = decoy.copies;
+			const toHit = 1 / (num + 1);
+			if (Math.random() < toHit) {
 				return true;
-			
-			let func = decoy.func || function() {
-				parse["oneof"] = num > 1 ? " one of" : "";
-				parse["copy"]  = num > 1 ? "copies" : "copy";
+			}
+
+			const func = decoy.func || function() {
+				parse.oneof = num > 1 ? " one of" : "";
+				parse.copy  = num > 1 ? "copies" : "copy";
 				Text.Add("The attack is absorbed by[oneof] [possessive] [copy]!", parse);
 				Text.NL();
 				ent.combatStatus.stats[StatusEffect.Decoy].copies--;
-				if(ent.combatStatus.stats[StatusEffect.Decoy].copies <= 0)
+				if (ent.combatStatus.stats[StatusEffect.Decoy].copies <= 0) {
 					ent.combatStatus.stats[StatusEffect.Decoy] = null;
+				}
 				Text.Flush();
 				return false;
-			}
+			};
 			return func(caster, val);
 		}
-		
+
 		return true;
 	}
-	AddHPAbs(val : number) {
+	public AddHPAbs(val: number) {
 		val = val || 0;
-		let old = this.curHp;
+		const old = this.curHp;
 		this.curHp += val;
-		if(this.curHp > this.HP()) this.curHp = this.HP();
-		if(this.curHp < 0) {
+		if (this.curHp > this.HP()) { this.curHp = this.HP(); }
+		if (this.curHp < 0) {
 			this.curHp = 0;
-			if(CurEncounter())
+			if (CurEncounter()) {
 				CurEncounter().OnIncapacitate(this);
+			}
 		}
-		
-		if(val > 0 && this.combatStatus.stats[StatusEffect.Bleed])
+
+		if (val > 0 && this.combatStatus.stats[StatusEffect.Bleed]) {
 			this.combatStatus.stats[StatusEffect.Bleed] = null;
+		}
 		return this.curHp - old;
 	}
-	AddSPAbs(val : number) {
+	public AddSPAbs(val: number) {
 		val = val || 0;
-		let old = this.curSp;
+		const old = this.curSp;
 		this.curSp += val;
-		if(this.curSp > this.SP()) this.curSp = this.SP();
-		if(this.curSp < 0) this.curSp = 0;
+		if (this.curSp > this.SP()) { this.curSp = this.SP(); }
+		if (this.curSp < 0) { this.curSp = 0; }
 		return this.curSp - old;
 	}
-	AddLustAbs(val : number) {
+	public AddLustAbs(val: number) {
 		val = val || 0;
-		let old = this.curLust;
+		const old = this.curLust;
 		this.curLust += val;
-		if(this.curLust > this.Lust()) this.curLust = this.Lust();
-		if(this.curLust < 0) this.curLust = 0;
+		if (this.curLust > this.Lust()) { this.curLust = this.Lust(); }
+		if (this.curLust < 0) { this.curLust = 0; }
 		return this.curLust - old;
 	}
 
-	RestFull() {
+	public RestFull() {
 		this.curHp = this.HP();
 		this.curSp = this.SP();
 		this.curLust = this.MinLust();
-		
-		//this.combatStatus.Clear();
+
+		// this.combatStatus.Clear();
 	}
 
-	Sleep() {
+	public Sleep() {
 		this.curHp = this.HP();
 		this.curSp = this.SP();
 	}
 
-
 	// HP function (returns range 0..1)
-	HPLevel() {
+	public HPLevel() {
 		return this.curHp / this.HP();
 	}
 
 	// SP function (returns range 0..1)
-	SPLevel() {
+	public SPLevel() {
 		return this.curSp / this.SP();
 	}
 
 	// Lust function (returns range 0..1)
-	LustLevel() {
+	public LustLevel() {
 		return this.curLust / this.Lust();
 	}
 
 	// Clear combat effects, called at end of encounters
-	ClearCombatBonuses() {
+	public ClearCombatBonuses() {
 		this.maxHp.temp        = 0;
 		this.maxSp.temp        = 0;
 		this.maxLust.temp      = 0;
@@ -1052,240 +1093,232 @@ export class Entity {
 		this.spirit.temp       = 0;
 		this.libido.temp       = 0;
 		this.charisma.temp     = 0;
-		
+
 		this.BalanceStats();
-		
+
 		this.statusWear = [];
 	}
 
 	// Balance mana, lust and hp
-	BalanceStats() {
-		if(this.curHp < 0)
+	public BalanceStats() {
+		if (this.curHp < 0) {
 			this.curHp = 0;
-		else if(this.curHp > this.HP())
+		} else if (this.curHp > this.HP()) {
 			this.curHp = this.HP();
-		
-		if(this.curSp < 0)
+ }
+
+		if (this.curSp < 0) {
 			this.curSp = 0;
-		else if(this.curSp > this.SP())
+		} else if (this.curSp > this.SP()) {
 			this.curSp = this.SP();
-			
-		if(this.curLust < 0)
+ }
+
+		if (this.curLust < 0) {
 			this.curLust = 0;
-		else if(this.curLust > this.Lust())
+		} else if (this.curLust > this.Lust()) {
 			this.curLust = this.Lust();
+ }
 	}
 
-	AddLustOverTime(hours : number) {
+	public AddLustOverTime(hours: number) {
 		// TODO: Function
 		let lustRate = this.libido.Get() / this.spirit.Get();
 		lustRate /= 48;
-		let slutFactor = ((this.slut.Get()/100) + 1);
-		
+		const slutFactor = ((this.slut.Get() / 100) + 1);
+
 		this.AddLustFraction(hours * lustRate * slutFactor);
 	}
 
-	LustCombatEfficiencyLevel() {
+	public LustCombatEfficiencyLevel() {
 		let lustFactor = (this.LustLevel() - 0.5) * 2;
-		if(lustFactor < 0) lustFactor = 0;
+		if (lustFactor < 0) { lustFactor = 0; }
 		// linear for now
 		return 1.0 - 0.25 * lustFactor;
 	}
 
-	LustCombatTurnLossChance() {
+	public LustCombatTurnLossChance() {
 		let lustFactor = this.LustLevel() - 0.5;
-		if(lustFactor < 0) lustFactor = 0;
+		if (lustFactor < 0) { lustFactor = 0; }
 		return lustFactor; // linear for now
 	}
 
-	Initiative() {
+	public Initiative() {
 		let ini = Math.sqrt(2 * this.Dex() + this.Int());
-		let haste = this.combatStatus.stats[StatusEffect.Haste];
-		if(haste) ini *= haste.factor;
-		let slow  = this.combatStatus.stats[StatusEffect.Slow];
-		if(slow)  ini /= slow.factor;
+		const haste = this.combatStatus.stats[StatusEffect.Haste];
+		if (haste) { ini *= haste.factor; }
+		const slow  = this.combatStatus.stats[StatusEffect.Slow];
+		if (slow) {  ini /= slow.factor; }
 		return ini;
 	}
 
 	// Combat functions (calculated)
-	PAttack() {
+	public PAttack() {
 		// Stat based
-		let atkStat = (this.Str() * 3 + this.Sta() + this.Dex()) / 2;
+		const atkStat = (this.Str() * 3 + this.Sta() + this.Dex()) / 2;
 		// Weapon strength based
-		let atkWep = this.atkMod;
-		
+		const atkWep = this.atkMod;
+
 		// Currently range the attack between 0.9 and 1.1
-		let atkRand = _.random(0.9, 1.1);
-		
+		const atkRand = _.random(0.9, 1.1);
+
 		return atkStat * atkWep * atkRand;
 	}
 
 	// TODO: Add perk/elemental/special effects
-	PDefense() {
+	public PDefense() {
 		// Stat based
 		let defStat = this.Sta() * 3 + this.Spi();
-		if(defStat < 0) defStat = 0;
+		if (defStat < 0) { defStat = 0; }
 		// Defense based on armor
-		let defArmor = this.defMod;
+		const defArmor = this.defMod;
 		// Reduce effect of armor due to armor penetration (TODO)
-		
+
 		// Currently range the attack between 0.9 and 1.1
-		let defRand = _.random(0.9, 1.1);
-		
+		const defRand = _.random(0.9, 1.1);
+
 		// Combine the result
 		return defStat * defArmor * defRand;
 	}
 
 	// TODO temp
-	PHit() {
+	public PHit() {
 		let hitStat = 3 * this.Dex() + this.Int() + this.Cha();
-		
-		let blind = this.combatStatus.stats[StatusEffect.Blind];
-		if(blind) {
+
+		const blind = this.combatStatus.stats[StatusEffect.Blind];
+		if (blind) {
 			hitStat *= (1 - blind.str);
 		}
-		
+
 		return hitStat;
 	}
 
 	// TODO temp
-	PEvade(attack? : number) {
-		let evadeStat = 3 * this.Dex() + this.Int() + this.Cha();
-		
+	public PEvade(attack?: number) {
+		const evadeStat = 3 * this.Dex() + this.Int() + this.Cha();
+
 		return evadeStat;
 	}
 
 	// TODO temp
-	MAttack() {
-		let magStat = (3 * this.Int() + this.Spi() + this.Cha()) / 2;
-		
-		let magRand = _.random(0.9, 1.1);
-		
+	public MAttack() {
+		const magStat = (3 * this.Int() + this.Spi() + this.Cha()) / 2;
+
+		const magRand = _.random(0.9, 1.1);
+
 		return magStat * magRand;
 	}
 
 	// TODO temp
-	MDefense() {
+	public MDefense() {
 		let magDef = this.Sta() + 3 * this.Spi();
-		if(magDef < 0) magDef = 0;
-		
-		let magRand = _.random(0.9, 1.1);
-		
+		if (magDef < 0) { magDef = 0; }
+
+		const magRand = _.random(0.9, 1.1);
+
 		return magDef * magRand;
 	}
 
-	MHit() {
-		let hitStat = 3 * this.Int() + this.Spi() + this.Cha();
-		
+	public MHit() {
+		const hitStat = 3 * this.Int() + this.Spi() + this.Cha();
+
 		return hitStat;
 	}
 
 	// TODO temp
-	MEvade(attack? : number) {
-		let evadeStat = 3 * this.Spi() + this.Int() + this.Dex();
-		
+	public MEvade(attack?: number) {
+		const evadeStat = 3 * this.Spi() + this.Int() + this.Dex();
+
 		return evadeStat;
 	}
 
-	LAttack() {
+	public LAttack() {
 		// Stat based
-		let sedStat = (this.Dex() + 2 * this.Lib() + 2 * this.Cha()) / 2;
+		const sedStat = (this.Dex() + 2 * this.Lib() + 2 * this.Cha()) / 2;
 		/*
 		let sedLust = this.LustLevel();
 		*/
 		// Armor sluttiness based (TODO)
-		let sedArmor = 1;
-		
+		const sedArmor = 1;
+
 		// Currently range the attack between 0.9 and 1.1
-		let sedRand = _.random(0.9, 1.1);
-		
+		const sedRand = _.random(0.9, 1.1);
+
 		return sedStat /* * sedLust*/ * sedArmor * sedRand;
 	}
 
-	LDefense() {
+	public LDefense() {
 		// Stat based
 		let comStat = 2 * this.Sta() + this.Spi() + this.Cha();
-		if(comStat < 0) comStat = 0;
+		if (comStat < 0) { comStat = 0; }
 
 		// Lust and libido based
-	//	let comLust = this.libido.Get() + this.LustLevel();
-		
-		
+	// 	let comLust = this.libido.Get() + this.LustLevel();
+
 		// Currently range the attack between 0.9 and 1.1
-		let comRand = _.random(0.9, 1.1);
-		
+		const comRand = _.random(0.9, 1.1);
+
 		return comStat /* * comLust*/ * comRand;
 	}
 
 	// TODO temp
-	LHit() {
-		let hitStat = 3 * this.Lib() + 2 * this.Cha();
-		
+	public LHit() {
+		const hitStat = 3 * this.Lib() + 2 * this.Cha();
+
 		return hitStat;
 	}
 
 	// TODO temp
-	LEvade(attack? : number) {
+	public LEvade(attack?: number) {
 		let evadeStat = 3 * this.Spi() + this.Sta() + this.Int();
-		
-		let blind = this.combatStatus.stats[StatusEffect.Blind];
-		if(blind) {
+
+		const blind = this.combatStatus.stats[StatusEffect.Blind];
+		if (blind) {
 			evadeStat *= (1 + blind.str);
 		}
-		
+
 		return evadeStat;
 	}
 
-
-
-
-	Resistance(type : number) {
-		let res   = this.statusDef[type]     || 0;
-		let gear  = this.statusDefGear[type] || 0;
-		let wear  = this.statusWear[type]    || 0;
-		let curse = this.combatStatus.stats[StatusEffect.Curse];
+	public Resistance(type: number) {
+		const res   = this.statusDef[type]     || 0;
+		const gear  = this.statusDefGear[type] || 0;
+		const wear  = this.statusWear[type]    || 0;
+		const curse = this.combatStatus.stats[StatusEffect.Curse];
 		let total = res + gear - wear;
-		if(curse) {
+		if (curse) {
 			total -= curse.str;
 		}
-		//TODO other factors
+		// TODO other factors
 		return total;
 	}
 
-	AddResistanceWear(type : number, wear? : number) {
+	public AddResistanceWear(type: number, wear?: number) {
 		wear = wear || 0;
-		if(this.statusWear[type]) {
+		if (this.statusWear[type]) {
 			this.statusWear[type] += wear;
-		}
-		else {
+		} else {
 			this.statusWear[type] = wear;
 		}
 	}
 
-	/* ENTITY MENU */
-	InteractDefault = EntityMenu.InteractDefault;
-	LevelUpPrompt = EntityMenu.LevelUpPrompt;
-	EquipPrompt = EntityMenu.EquipPrompt;
-	JobPrompt = EntityMenu.JobPrompt;
-	
 	/* ENTITY SAVE */
-	
-	SaveSexFlags(storage : any) {
-		let sex : any = {};
-		if(this.sex.rBlow != 0) sex.rBlow = this.sex.rBlow;
-		if(this.sex.gBlow != 0) sex.gBlow = this.sex.gBlow;
-		if(this.sex.rCunn != 0) sex.rCunn = this.sex.rCunn;
-		if(this.sex.gCunn != 0) sex.gCunn = this.sex.gCunn;
-		if(this.sex.rAnal != 0) sex.rAnal = this.sex.rAnal;
-		if(this.sex.gAnal != 0) sex.gAnal = this.sex.gAnal;
-		if(this.sex.rVag  != 0) sex.rVag  = this.sex.rVag;
-		if(this.sex.gVag  != 0) sex.gVag  = this.sex.gVag;
-		if(this.sex.sired != 0) sex.sired = this.sex.sired;
-		if(this.sex.birth != 0) sex.birth = this.sex.birth;
+
+	public SaveSexFlags(storage: any) {
+		const sex: any = {};
+		if (this.sex.rBlow != 0) { sex.rBlow = this.sex.rBlow; }
+		if (this.sex.gBlow != 0) { sex.gBlow = this.sex.gBlow; }
+		if (this.sex.rCunn != 0) { sex.rCunn = this.sex.rCunn; }
+		if (this.sex.gCunn != 0) { sex.gCunn = this.sex.gCunn; }
+		if (this.sex.rAnal != 0) { sex.rAnal = this.sex.rAnal; }
+		if (this.sex.gAnal != 0) { sex.gAnal = this.sex.gAnal; }
+		if (this.sex.rVag  != 0) { sex.rVag  = this.sex.rVag; }
+		if (this.sex.gVag  != 0) { sex.gVag  = this.sex.gVag; }
+		if (this.sex.sired != 0) { sex.sired = this.sex.sired; }
+		if (this.sex.birth != 0) { sex.birth = this.sex.birth; }
 		storage.sex = sex;
 	}
 
-	SaveCombatStats(storage : any) {
+	public SaveCombatStats(storage: any) {
 		storage.name     = this.name;
 		storage.exp      = this.experience.toFixed();
 		storage.points   = this.pendingStatPoints.toFixed();
@@ -1320,84 +1353,89 @@ export class Entity {
 		storage.spiG     = this.spirit.growth.toFixed(1);
 		storage.libG     = this.libido.growth.toFixed(1);
 		storage.chaG     = this.charisma.growth.toFixed(1);
-		
-		if(this.monsterName) storage.mName = this.monsterName;
-		if(this.MonsterName) storage.MName = this.MonsterName;
-		
+
+		if (this.monsterName) { storage.mName = this.monsterName; }
+		if (this.MonsterName) { storage.MName = this.MonsterName; }
+
 		this.SaveStatusEffects(storage);
 	}
 
-	SaveStatusEffects(storage : any) {
-		let s = this.combatStatus.ToStorage();
-		if(s)
+	public SaveStatusEffects(storage: any) {
+		const s = this.combatStatus.ToStorage();
+		if (s) {
 			storage.stat = s;
+		}
 	}
 
-	SavePersonalityStats(storage : any) {
+	public SavePersonalityStats(storage: any) {
 		// Personality stats
-		if(this.subDom.base   != 0) storage.subDom = this.subDom.base.toFixed();
-		if(this.slut.base     != 0) storage.slut   = this.slut.base.toFixed();
-		if(this.relation.base != 0) storage.rel    = this.relation.base.toFixed();
-		if(this.drunkLevel    != 0) storage.drunk  = this.drunkLevel.toFixed(2);
+		if (this.subDom.base   != 0) { storage.subDom = this.subDom.base.toFixed(); }
+		if (this.slut.base     != 0) { storage.slut   = this.slut.base.toFixed(); }
+		if (this.relation.base != 0) { storage.rel    = this.relation.base.toFixed(); }
+		if (this.drunkLevel    != 0) { storage.drunk  = this.drunkLevel.toFixed(2); }
 	}
 
-	SaveFlags(storage : any) {
-		let flags : any = {};
-		for(let flag in this.flags) {
-			if(this.flags[flag] != 0)
+	public SaveFlags(storage: any) {
+		const flags: any = {};
+		for (const flag in this.flags) {
+			if (this.flags[flag] != 0) {
 				flags[flag] = this.flags[flag];
+			}
 		}
 		storage.flags = flags;
 	}
 
-	SavePerks(storage : any) {
-		let perks = [];
-		for(let i = 0; i < this.perks.length; ++i) {
+	public SavePerks(storage: any) {
+		const perks = [];
+		for (let i = 0; i < this.perks.length; ++i) {
 			perks.push(this.perks[i].id);
 		}
 		storage.perks = perks;
 	}
 
-	SaveRecipes(storage : any) {
-		if(this.recipes) {
+	public SaveRecipes(storage: any) {
+		if (this.recipes) {
 			storage.recipes = [];
-			for(let i = 0; i < this.recipes.length; i++)
+			for (let i = 0; i < this.recipes.length; i++) {
 				storage.recipes.push(this.recipes[i].id);
+			}
 		}
 	}
 
-	SaveJobs(storage : any) {
+	public SaveJobs(storage: any) {
 		storage.jobs = {};
-		for(let job in this.jobs) {
-			let jd = this.jobs[job];
-			let jobStorage = jd.ToStorage();
-			if(jobStorage)
+		for (const job in this.jobs) {
+			const jd = this.jobs[job];
+			const jobStorage = jd.ToStorage();
+			if (jobStorage) {
 				storage.jobs[job] = jobStorage;
+			}
 		}
-		if(this.currentJob)
+		if (this.currentJob) {
 			storage.curJob = this.currentJob.name;
+		}
 	}
 
-	SaveEquipment(storage : any) {
+	public SaveEquipment(storage: any) {
 		// Equipment
-		if(this.weaponSlot)   storage.wep    = this.weaponSlot.id;
-		if(this.topArmorSlot) storage.toparm = this.topArmorSlot.id;
-		if(this.botArmorSlot) storage.botarm = this.botArmorSlot.id;
-		if(this.acc1Slot)     storage.acc1   = this.acc1Slot.id;
-		if(this.acc2Slot)     storage.acc2   = this.acc2Slot.id;
-		
-		if(this.strapOn)      storage.toy    = this.strapOn.id;
+		if (this.weaponSlot) {   storage.wep    = this.weaponSlot.id; }
+		if (this.topArmorSlot) { storage.toparm = this.topArmorSlot.id; }
+		if (this.botArmorSlot) { storage.botarm = this.botArmorSlot.id; }
+		if (this.acc1Slot) {     storage.acc1   = this.acc1Slot.id; }
+		if (this.acc2Slot) {     storage.acc2   = this.acc2Slot.id; }
+
+		if (this.strapOn) {      storage.toy    = this.strapOn.id; }
 	}
 
-	SavePregnancy(storage : any) {
+	public SavePregnancy(storage: any) {
 		storage.preg = this.pregHandler.ToStorage();
 	}
 
-	SaveLactation(storage : any) {
+	public SaveLactation(storage: any) {
 		storage.lact = this.lactHandler.ToStorage();
 	}
 
-	//Only saves some stats from body
+	// Only saves some stats from body
 	/*
 	* opts: cock
 	*       balls
@@ -1406,16 +1444,16 @@ export class Entity {
 	*       breasts
 	*       full
 	*/
-	SaveBodyPartial(storage : any, opts : any) {
+	public SaveBodyPartial(storage: any, opts: any) {
 		storage.body = this.body.ToStoragePartial(opts);
 	}
 
 	// Convert to a format easy to write to/from memory
-	ToStorage() {
-		let storage : any = {};
-		
+	public ToStorage() {
+		const storage: any = {};
+
 		storage.body = this.body.ToStorage();
-		
+
 		this.SaveCombatStats(storage);
 		this.SavePersonalityStats(storage);
 		this.SaveRecipes(storage);
@@ -1427,15 +1465,15 @@ export class Entity {
 		this.SaveFlags(storage);
 		this.SaveSexFlags(storage);
 		this.SavePerks(storage);
-		
+
 		return storage;
 	}
 
-	LoadCombatStats(storage : any) {
+	public LoadCombatStats(storage: any) {
 		this.name              = storage.name  || this.name;
 		this.monsterName       = storage.mName || this.monsterName;
 		this.MonsterName       = storage.MName || this.MonsterName;
-		
+
 		this.experience        = !isNaN(parseInt(storage.exp))     ? parseInt(storage.exp) : this.experience;
 		this.level             = !isNaN(parseInt(storage.lvl))     ? parseInt(storage.lvl) : this.level;
 		this.pendingStatPoints = !isNaN(parseInt(storage.points))  ? parseInt(storage.points) : this.pendingStatPoints;
@@ -1473,13 +1511,13 @@ export class Entity {
 		this.LoadStatusEffects(storage);
 	}
 
-	LoadStatusEffects(storage : any) {
-		if(storage.stat) {
+	public LoadStatusEffects(storage: any) {
+		if (storage.stat) {
 			this.combatStatus.FromStorage(storage.stat);
 		}
 	}
 
-	LoadPersonalityStats(storage : any) {
+	public LoadPersonalityStats(storage: any) {
 		// Personality stats
 		this.subDom.base         = parseInt(storage.subDom)  || this.subDom.base;
 		this.slut.base           = parseInt(storage.slut)    || this.slut.base;
@@ -1487,114 +1525,115 @@ export class Entity {
 		this.drunkLevel          = parseFloat(storage.drunk) || this.drunkLevel;
 	}
 
-	LoadRecipes(storage : any) {
-		if(storage.recipes) {
+	public LoadRecipes(storage: any) {
+		if (storage.recipes) {
 			this.recipes = [];
-			for(let i = 0; i < storage.recipes.length; i++)
+			for (let i = 0; i < storage.recipes.length; i++) {
 				this.recipes.push(ItemIds[storage.recipes[i]]);
+			}
 		}
 	}
 
-	LoadJobs(storage : any) {
-		if(storage.jobs) {
-			for(let job in this.jobs) {
-				let jd = this.jobs[job];
+	public LoadJobs(storage: any) {
+		if (storage.jobs) {
+			for (const job in this.jobs) {
+				const jd = this.jobs[job];
 				jd.FromStorage(storage.jobs[jd.job.name]);
 			}
 		}
-		if(storage.curJob)
+		if (storage.curJob) {
 			this.currentJob = Jobs[storage.curJob];
+		}
 	}
 
-	LoadEquipment(storage : any) {
-		if(storage.wep)    this.weaponSlot   = ItemIds[storage.wep];
-		if(storage.toparm) this.topArmorSlot = ItemIds[storage.toparm];
-		if(storage.botarm) this.botArmorSlot = ItemIds[storage.botarm];
-		if(storage.acc1)   this.acc1Slot     = ItemIds[storage.acc1];
-		if(storage.acc2)   this.acc2Slot     = ItemIds[storage.acc2];
-		
-		if(storage.toy)    this.strapOn      = ItemIds[storage.toy];
+	public LoadEquipment(storage: any) {
+		if (storage.wep) {    this.weaponSlot   = ItemIds[storage.wep]; }
+		if (storage.toparm) { this.topArmorSlot = ItemIds[storage.toparm]; }
+		if (storage.botarm) { this.botArmorSlot = ItemIds[storage.botarm]; }
+		if (storage.acc1) {   this.acc1Slot     = ItemIds[storage.acc1]; }
+		if (storage.acc2) {   this.acc2Slot     = ItemIds[storage.acc2]; }
+
+		if (storage.toy) {    this.strapOn      = ItemIds[storage.toy]; }
 	}
 
-	LoadFlags(storage : any) {
-		for(let flag in storage.flags)
+	public LoadFlags(storage: any) {
+		for (const flag in storage.flags) {
 			this.flags[flag] = parseInt(storage.flags[flag]);
+		}
 	}
 
-	LoadSexFlags(storage : any) {
-		for(let flag in storage.sex)
+	public LoadSexFlags(storage: any) {
+		for (const flag in storage.sex) {
 			this.sex[flag] = parseInt(storage.sex[flag]);
+		}
 	}
 
-	LoadPerks(storage : any) {
-		if(storage.perks) {
+	public LoadPerks(storage: any) {
+		if (storage.perks) {
 			this.perks = [];
-			for(let i = 0; i < storage.perks.length; i++) {
+			for (let i = 0; i < storage.perks.length; i++) {
 				this.perks.push(PerkIds[storage.perks[i]]);
 			}
 		}
 	}
 
-	LoadPregnancy(storage : any) {
+	public LoadPregnancy(storage: any) {
 		this.pregHandler.FromStorage(storage.preg);
 	}
 
-	LoadLactation(storage : any) {
+	public LoadLactation(storage: any) {
 		this.lactHandler.FromStorage(storage.lact);
 	}
 
-	FromStorage(storage : any) {
+	public FromStorage(storage: any) {
 		storage = storage || {};
-		
-		if(storage.body) {
+
+		if (storage.body) {
 			this.body = new Body(this);
 			this.body.FromStorage(storage.body);
 		}
 		this.LoadPregnancy(storage);
 		this.LoadLactation(storage);
-		
+
 		// Load flags
 		this.LoadFlags(storage);
 		this.LoadSexFlags(storage);
 		this.LoadCombatStats(storage);
 		this.LoadPersonalityStats(storage);
-		
+
 		this.LoadRecipes(storage);
 		this.LoadJobs(storage);
 		this.LoadEquipment(storage);
 		this.LoadPerks(storage);
-		
+
 		this.RecallAbilities(); // TODO: Implement for special abilitiy sources (flag dependent)
 		this.SetLevelBonus();
 		this.Equip();
 	}
 
-	RecallAbilities() {
-		for(let job in this.jobs) {
-			let jd = this.jobs[job];
-			for(let i = 0; i < jd.level - 1; i++) {
-				if(i >= jd.job.levels.length) break;
-				let skills = jd.job.levels[i].skills;
+	public RecallAbilities() {
+		for (const job in this.jobs) {
+			const jd = this.jobs[job];
+			for (let i = 0; i < jd.level - 1; i++) {
+				if (i >= jd.job.levels.length) { break; }
+				const skills = jd.job.levels[i].skills;
 				// Teach new skills
-				if(skills) {
+				if (skills) {
 					// [ { ab: Ablities.Black.Fireball, set: "Spells" }, ... ]
-					for(let j = 0; j < skills.length; j++) {
-						let sd      = skills[j];
-						let ability = sd.ab;
-						let set     = sd.set;
+					for (let j = 0; j < skills.length; j++) {
+						const sd      = skills[j];
+						const ability = sd.ab;
+						const set     = sd.set;
 						this.abilities[set].AddAbility(ability);
 					}
 				}
 			}
 		}
 	}
-	
-	/* ENTITY DICT */
-	UniqueId = EntityDict.UniqueId;
-	
+
 	/* ENTITY DESC */
-	PrintDescription(partial? : boolean) {
-		let parse : any = {
+	public PrintDescription(partial?: boolean) {
+		let parse: any = {
 			name     : this.NameDesc(),
 			possesive: this.possessive(),
 			weigth   : Math.floor(this.body.weigth.Get() * 2),
@@ -1612,593 +1651,574 @@ export class Entity {
 			ballsDesc: this.Balls().Long(),
 			has      : this.has(),
 			is       : this.is(),
-			larmor   : this.LowerArmorDescLong()
+			larmor   : this.LowerArmorDescLong(),
 		};
 		parse = this.ParserTags(parse);
 		parse = this.ParserPronouns(parse);
-		let height = Math.floor(Unit.CmToInch(this.body.height.Get()));
-		let height_feet = Math.floor(height / 12);
-		let height_inches = Math.floor(height % 12);
-		parse["height"] = height_feet + " feet";
-		if(height_inches > 0) {
-			parse["height"] += " and " + height_inches + " inch";
-			if(height_inches > 1) {
-				parse["height"] += "es";
+		const height = Math.floor(Unit.CmToInch(this.body.height.Get()));
+		const height_feet = Math.floor(height / 12);
+		const height_inches = Math.floor(height % 12);
+		parse.height = height_feet + " feet";
+		if (height_inches > 0) {
+			parse.height += " and " + height_inches + " inch";
+			if (height_inches > 1) {
+				parse.height += "es";
 			}
 		}
-		
+
 		Text.Add("[name] [is] a [gender] [race], [height] tall and weighing around [weigth]lb. [HeShe] [has] [skinDesc]. ", parse);
 		Text.Add("[HeShe] [is] wearing [armor].", parse);
-		if(this.LowerArmor()) Text.Add(" [HeShe] [is] wearing [larmor].", parse);
-		if(this.Weapon()) Text.Add(" [HeShe] [is] wielding [weapon].", parse);
+		if (this.LowerArmor()) { Text.Add(" [HeShe] [is] wearing [larmor].", parse); }
+		if (this.Weapon()) { Text.Add(" [HeShe] [is] wielding [weapon].", parse); }
 		// TODO Body appearance, skin color
 		Text.NL();
 		Text.Add("[HeShe] [has] [faceDesc]. [HisHer] [eyeCount] [eyeColor] [eye][eyeS] observe the surroundings. ", parse);
 		Text.Add("A pair of [ears] sticks out from [possesive] [hairDesc]. ", parse);
-		
-		for(let i = 0; i < this.body.head.appendages.length; i++) {
-			let a = this.body.head.appendages[i];
+
+		for (let i = 0; i < this.body.head.appendages.length; i++) {
+			const a = this.body.head.appendages[i];
 			parse.appDesc = a.Long();
 			Text.Add("On [hisher] head, [heshe] [has] a [appDesc]. ", parse);
 		}
-		
+
 		Text.NL();
 		let bs = false;
 		// Back slots
-		for(let i = 0; i < this.body.backSlots.length; i++) {
-			let b = this.body.backSlots[i];
+		for (let i = 0; i < this.body.backSlots.length; i++) {
+			const b = this.body.backSlots[i];
 			parse.appDesc = b.Long();
 			Text.Add("On [hisher] back, [heshe] [has] a [appDesc]. ", parse);
 			bs = true;
 		}
-		if(bs) Text.NL();
-		
+		if (bs) { Text.NL(); }
+
 		// TODO: Arms/Legs
-		if(this.body.legs.count == 2) {
+		if (this.body.legs.count == 2) {
 			Text.Add("[name] [has] arms. [name] [has] [legs], ending in [feet].", parse);
-		}
-		else if(this.body.legs.count > 2) {
-			parse["num"] = Text.NumToText(this.body.legs.count);
-			parse["race"] = this.body.legs.race.qShort();
+		} else if (this.body.legs.count > 2) {
+			parse.num = Text.NumToText(this.body.legs.count);
+			parse.race = this.body.legs.race.qShort();
 			Text.Add("[name] [has] arms and [num] [race] legs.", parse);
-		}
-		else {
-			parse["race"] = this.body.legs.race.qShort();
+		} else {
+			parse.race = this.body.legs.race.qShort();
 			Text.Add("[name] [has] arms and [race] lower body.", parse);
 		}
 		Text.NL();
-		
+
 		// TODO: Hips/butt
 		Text.Add("[name] [has] [hipsDesc], and [buttDesc].", parse);
 		Text.NL();
-		
+
 		// TODO: Breasts
-		let breasts = this.body.breasts;
-		if(breasts.length == 1) {
+		const breasts = this.body.breasts;
+		if (breasts.length == 1) {
 			parse.breastDesc = breasts[0].Long();
 			Text.Add("[HeShe] [has] [breastDesc].", parse);
-		}
-		else if(breasts.length > 1) {
-			let breast = breasts[0];
-			let breastDesc = breast.Desc();
+		} else if (breasts.length > 1) {
+			const breast = breasts[0];
+			const breastDesc = breast.Desc();
 			parse.breastDesc = breasts[0].Short();
 			parse.breastSize = breastDesc.size;
 			Text.Add("Multiple rows of " + breast.nounPlural() + " sprout from [hisher] chest. [HisHer] first pair of [breastDesc] are [breastSize] in circumference.", parse);
-			for(let i = 1; i < breasts.length; i++) {
+			for (let i = 1; i < breasts.length; i++) {
 				Text.Add("<br>Another two breasts.");
 			}
-		}
-		else {
+		} else {
 			Text.Add("[name] have a featureless smooth chest.", parse);
 		}
-		if(breasts.length > 0)
+		if (breasts.length > 0) {
 			this.LactationDesc(parse);
+		}
 		Text.NL();
-		
+
 		// Genetalia
-		let cocks = this.body.cock;
-		let vags = this.body.vagina;
-		
-		if(cocks.length == 1) {
-			let cock = cocks[0];
+		const cocks = this.body.cock;
+		const vags = this.body.vagina;
+
+		if (cocks.length == 1) {
+			const cock = cocks[0];
 			parse.cockDesc = cock.aLong();
 			Text.Add("[name] [has] [cockDesc].", parse);
-		}
-		else if(cocks.length > 1) {
-			let cock = cocks[0];
+		} else if (cocks.length > 1) {
+			const cock = cocks[0];
 			parse.cockDesc = cock.aLong();
 			parse.numCocks = Text.NumToText(cocks.length);
 			Text.Add("[name] [has] a brace of [numCocks] " + cock.nounPlural() + ".", parse);
-			for(let i = 0; i < cocks.length; i++) {
-				let cock = cocks[i];
+			for (let i = 0; i < cocks.length; i++) {
+				const cock = cocks[i];
 				parse.cockDesc = cock.aLong();
 				Text.NL();
 				Text.Add("[name] [has] [cockDesc].", parse);
 			}
 		}
-		if(cocks[0])
+		if (cocks[0]) {
 			Text.NL();
-		
+		}
+
 		// TODO: balls
-		if(this.HasBalls())
-		{
-			if(cocks.length > 0 || vags.length > 0) {
+		if (this.HasBalls()) {
+			if (cocks.length > 0 || vags.length > 0) {
 				Text.Add("Beneath [hisher] other genitalia, [ballsDesc] hang.", parse);
-			}
-			else {
+			} else {
 				// Weird, no genetalia, just balls
 				Text.Add("Strangely, [ballsDesc] hang from [hisher] otherwise flat crotch.", parse);
 			}
 			Text.NL();
-		}
-		else if(cocks.length == 0 && vags.length == 0) {
+		} else if (cocks.length == 0 && vags.length == 0) {
 			// Genderless, no balls
 			Text.Add("[name] [has] a smooth, featureless crotch.", parse);
 			Text.NL();
 		}
-		
+
 		// TODO: vagina
-		if(vags.length == 1) {
-			let vag = vags[0];
-			let vagDesc = vag.Desc();
+		if (vags.length == 1) {
+			const vag = vags[0];
+			const vagDesc = vag.Desc();
 			Text.Add("[name] [has] " + vagDesc.a + " " + vagDesc.adj + " " + vag.noun() + ".", parse);
-		}
-		else if(vags.length > 1) {
-			let vag = vags[0];
+		} else if (vags.length > 1) {
+			const vag = vags[0];
 			Text.Add("[name] [has] multiple " + vag.nounPlural() + ". [HisHer] first " + vag.noun() + " is slutty.<br>", parse);
-			for(let i = 1; i < vags.length; i++) {
+			for (let i = 1; i < vags.length; i++) {
 				Text.Add("<br>Another of [hisher] " + vag.nounPlural() + " is slutty.", parse);
 			}
 		}
-		if(vags[0])
+		if (vags[0]) {
 			Text.NL();
-		
-		if(partial) {
+		}
+
+		if (partial) {
 			return;
 		}
-		
+
 		// TODO TEMP
-		let balls = this.Balls();
+		const balls = this.Balls();
 		Text.Add("Cum: " + balls.cum.Get().toFixed(2) + " / " + balls.CumCap().toFixed(2));
 		Text.NL();
 		Text.Add("Milk: " + this.Milk().toFixed(2) + " / " + this.MilkCap().toFixed(2));
 		Text.NL();
-		
+
 		// TODO: Pregnancy
 		let womb = this.pregHandler.Womb({slot: PregnancyHandler.Slot.Vag});
-		if(womb && womb.pregnant) {
-			parse["proc"] = (womb.progress * 100).toFixed(1);
-			parse["hour"] = womb.hoursToBirth.toFixed(1);
+		if (womb && womb.pregnant) {
+			parse.proc = (womb.progress * 100).toFixed(1);
+			parse.hour = womb.hoursToBirth.toFixed(1);
 			Text.Add("[name] [is] pregnant. Current progress, [proc]%. [hour] hours to term.", parse);
 			Text.NL();
 		}
-		
+
 		womb = this.pregHandler.Womb({slot: PregnancyHandler.Slot.Butt});
-		if(womb && womb.pregnant) {
-			parse["proc"] = (womb.progress * 100).toFixed(1);
-			parse["hour"] = womb.hoursToBirth.toFixed(1);
+		if (womb && womb.pregnant) {
+			parse.proc = (womb.progress * 100).toFixed(1);
+			parse.hour = womb.hoursToBirth.toFixed(1);
 			Text.Add("[name] [is] butt-pregnant. Current progress, [proc]%. [hour] hours to term.", parse);
 			Text.NL();
 		}
-		
+
 		// TODO: Ass
 		Text.Add("[name] [has] [anusDesc].", parse);
-		
-		if(GetDEBUG()) {
+
+		if (GetDEBUG()) {
 			Text.NL();
-			Text.Add("DEBUG: relation: " + this.relation.Get(), null, 'bold');
+			Text.Add("DEBUG: relation: " + this.relation.Get(), null, "bold");
 			Text.NL();
-			Text.Add("DEBUG: subDom: " + this.subDom.Get(), null, 'bold');
+			Text.Add("DEBUG: subDom: " + this.subDom.Get(), null, "bold");
 			Text.NL();
-			Text.Add("DEBUG: slut: " + this.slut.Get(), null, 'bold');
+			Text.Add("DEBUG: slut: " + this.slut.Get(), null, "bold");
 			Text.NL();
 		}
-		
-		let drunk = this.DrunkStr();
-		if(drunk) {
+
+		const drunk = this.DrunkStr();
+		if (drunk) {
 			Text.NL();
 			Text.Add(drunk);
 		}
-		
+
 		Text.Flush();
 	}
-	
+
 	// TODO: affect with lust/perks?
-	SubDom() {
+	public SubDom() {
 		return this.subDom.Get();
 	}
-	Relation() {
+	public Relation() {
 		return this.relation.Get();
 	}
-	Slut() {
+	public Slut() {
 		return this.slut.Get();
 	}
-	
-	Gender() {
+
+	public Gender() {
 		return this.body.Gender();
 	}
-	Race() {
+	public Race() {
 		return this.body.torso.race;
 	}
-	
-	MuscleTone() {
+
+	public MuscleTone() {
 		return this.body.muscleTone.Get();
 	}
-	BodyMass() {
+	public BodyMass() {
 		return this.body.bodyMass.Get();
 	}
-	
-	Height() {
+
+	public Height() {
 		return this.body.height.Get();
 	}
-	Weigth() {
+	public Weigth() {
 		return this.body.weigth.Get();
 	}
-	
-	Humanity() {
-		let racescore = new RaceScore(this.body);
-		let humanScore = new RaceScore();
+
+	public Humanity() {
+		const racescore = new RaceScore(this.body);
+		const humanScore = new RaceScore();
 		humanScore.score[Race.Human.id] = 1;
 		return racescore.Compare(humanScore);
 	}
-	RaceCompare(race : RaceDesc) {
-		let racescore = new RaceScore(this.body);
+	public RaceCompare(race: RaceDesc) {
+		const racescore = new RaceScore(this.body);
 		return racescore.SumScore(race);
 	}
-	Femininity() {
+	public Femininity() {
 		return this.body.femininity.Get();
 	}
-	FaceDesc() {
+	public FaceDesc() {
 		return this.body.FaceDesc();
 	}
-	SkinDesc() {
+	public SkinDesc() {
 		return this.body.SkinDesc();
 	}
-	SkinType() {
+	public SkinType() {
 		return this.body.torso.race;
 	}
-	LipsDesc() {
+	public LipsDesc() {
 		return this.body.LipsDesc();
 	}
-	TongueDesc() {
+	public TongueDesc() {
 		return this.body.TongueDesc();
 	}
-	TongueTipDesc() {
+	public TongueTipDesc() {
 		return this.body.TongueTipDesc();
 	}
-	LongTongue() {
+	public LongTongue() {
 		return this.body.LongTongue();
 	}
-	Hair() {
+	public Hair() {
 		return this.body.head.hair;
 	}
-	HasHair() {
+	public HasHair() {
 		return this.body.head.hair.Bald() == false;
 	}
-	HasLongHair() {
-		return this.body.head.hair.Bald() == false; //TODO
+	public HasLongHair() {
+		return this.body.head.hair.Bald() == false; // TODO
 	}
-	Face() {
+	public Face() {
 		return this.body.head;
 	}
-	Mouth() {
+	public Mouth() {
 		return this.body.head.mouth;
 	}
-	Tongue() {
+	public Tongue() {
 		return this.body.head.mouth.tongue;
 	}
-	Eyes() {
+	public Eyes() {
 		return this.body.head.eyes;
 	}
-	EyeDesc() {
+	public EyeDesc() {
 		return this.body.EyeDesc();
 	}
-	Ears() {
+	public Ears() {
 		return this.body.head.ears;
 	}
-	EarDesc(plural? : boolean) {
+	public EarDesc(plural?: boolean) {
 		return this.body.EarDesc(plural);
 	}
-	HasFlexibleEars() {
+	public HasFlexibleEars() {
 		return this.body.HasFlexibleEars();
 	}
-	HasMuzzle() {
+	public HasMuzzle() {
 		return this.body.HasMuzzle();
 	}
-	HasLongSnout() {
+	public HasLongSnout() {
 		return this.body.HasLongSnout();
 	}
-	Arms() {
+	public Arms() {
 		return this.body.arms;
 	}
-	MultiArm() {
+	public MultiArm() {
 		return this.body.arms.count > 2;
 	}
-	Legs() {
+	public Legs() {
 		return this.body.legs;
 	}
-	LowerBodyType() {
-		if     (this.body.legs.count <  2) return LowerBodyType.Single;
-		else if(this.body.legs.count == 2) return LowerBodyType.Humanoid;
-		else                               return LowerBodyType.Taur;
+	public LowerBodyType() {
+		if     (this.body.legs.count <  2) { return LowerBodyType.Single; } else if (this.body.legs.count == 2) { return LowerBodyType.Humanoid; } else {                               return LowerBodyType.Taur; }
 	}
-	NumLegs() {
+	public NumLegs() {
 		return this.body.legs.count;
 	}
-	Humanoid() {
+	public Humanoid() {
 		return this.LowerBodyType() == LowerBodyType.Humanoid;
 	}
-	HasLegs() {
+	public HasLegs() {
 		return (this.body.legs.count >= 2);
 	}
-	IsNaga() {
+	public IsNaga() {
 		return (this.body.legs.count < 2) &&
 			(this.body.legs.race.isRace(Race.Snake));
 	}
-	IsTaur() {
+	public IsTaur() {
 		return this.LowerBodyType() == LowerBodyType.Taur;
 	}
-	IsGoo() {
+	public IsGoo() {
 		return (this.body.legs.race.isRace(Race.Goo));
 	}
-	IsFlexible() {
-		return this.body.IsFlexible(); //TODO Perks
+	public IsFlexible() {
+		return this.body.IsFlexible(); // TODO Perks
 	}
-	Butt() {
+	public Butt() {
 		return this.body.ass;
 	}
-	HasBalls() {
+	public HasBalls() {
 		return this.Balls().count.Get() > 0;
 	}
-	Balls() {
+	public Balls() {
 		return this.body.balls;
 	}
-	BallsDesc() {
+	public BallsDesc() {
 		return this.Balls().Short();
 	}
-	Virility() {
+	public Virility() {
 		return this.body.balls.fertility.Get();
 	}
-	HasFur() {
+	public HasFur() {
 		return this.body.HasFur();
 	}
-	HasSkin() {
+	public HasSkin() {
 		return this.body.HasSkin();
 	}
-	HasScales() {
+	public HasScales() {
 		return this.body.HasScales();
 	}
-	
-	LactationDesc(parse : any) {
-		
+
+	public LactationDesc(parse: any) {
+
 	}
-	StomachDesc() {
-		let bellysize = this.pregHandler.BellySize();
+	public StomachDesc() {
+		const bellysize = this.pregHandler.BellySize();
 		return this.body.StomachDesc(bellysize);
 	}
-	HipDesc() {
+	public HipDesc() {
 		return this.body.HipsDesc();
 	}
-	HipsDesc() {
+	public HipsDesc() {
 		return this.body.HipsDesc(true);
 	}
-	HipSize() {
+	public HipSize() {
 		return this.body.HipSize();
 	}
 	// TODO
-	ArmDesc() {
+	public ArmDesc() {
 		return this.body.ArmDesc();
 	}
-	HandDesc() {
+	public HandDesc() {
 		return this.body.HandDesc();
 	}
-	PalmDesc() {
+	public PalmDesc() {
 		return this.body.PalmDesc();
 	}
-	LegDesc() {
+	public LegDesc() {
 		return this.body.LegDesc();
 	}
-	LegsDesc() {
+	public LegsDesc() {
 		return this.body.LegsDesc();
 	}
-	ThighDesc() {
+	public ThighDesc() {
 		return this.body.ThighDesc();
 	}
-	ThighsDesc() {
+	public ThighsDesc() {
 		return this.body.ThighsDesc();
 	}
-	KneeDesc() {
+	public KneeDesc() {
 		return this.body.KneesDesc();
 	}
-	KneesDesc() {
+	public KneesDesc() {
 		return this.body.KneesDesc(true);
 	}
-	FeetDesc() {
+	public FeetDesc() {
 		return this.body.FeetDesc();
 	}
-	FootDesc() {
+	public FootDesc() {
 		return this.body.FootDesc();
 	}
-	Appendages() {
+	public Appendages() {
 		return this.body.head.appendages;
 	}
-	HasNightvision() {
+	public HasNightvision() {
 		return this.body.HasNightvision();
 	}
-	HasHorns() {
-		for(let i = 0; i < this.body.head.appendages.length; i++)
-			if(this.body.head.appendages[i].type == AppendageType.horn)
+	public HasHorns() {
+		for (let i = 0; i < this.body.head.appendages.length; i++) {
+			if (this.body.head.appendages[i].type == AppendageType.horn) {
 				return this.body.head.appendages[i];
+		}
+			}
 		return null;
 	}
-	HasAntenna() {
-		for(let i = 0; i < this.body.head.appendages.length; i++)
-			if(this.body.head.appendages[i].type == AppendageType.antenna)
+	public HasAntenna() {
+		for (let i = 0; i < this.body.head.appendages.length; i++) {
+			if (this.body.head.appendages[i].type == AppendageType.antenna) {
 				return this.body.head.appendages[i];
+			}
+		}
 		return null;
 	}
-	Back() {
+	public Back() {
 		return this.body.backSlots;
 	}
-	HasTail() {
-		for(let i = 0; i < this.body.backSlots.length; i++)
-			if(this.body.backSlots[i].type == AppendageType.tail)
+	public HasTail() {
+		for (let i = 0; i < this.body.backSlots.length; i++) {
+			if (this.body.backSlots[i].type == AppendageType.tail) {
 				return this.body.backSlots[i];
+		}
+			}
 		return null;
 	}
-	HasPrehensileTail() {
+	public HasPrehensileTail() {
 		let found = false;
-		for(let i = 0; i < this.body.backSlots.length; i++)
-			if(this.body.backSlots[i].type == AppendageType.tail)
+		for (let i = 0; i < this.body.backSlots.length; i++) {
+			if (this.body.backSlots[i].type == AppendageType.tail) {
 				found = found || this.body.backSlots[i].Prehensile();
+		}
+			}
 		return found;
 	}
-	HasWings() {
-		for(let i = 0; i < this.body.backSlots.length; i++)
-			if(this.body.backSlots[i].type == AppendageType.wing)
+	public HasWings() {
+		for (let i = 0; i < this.body.backSlots.length; i++) {
+			if (this.body.backSlots[i].type == AppendageType.wing) {
 				return this.body.backSlots[i];
+			}
+		}
 		return null;
 	}
-	NumAttributes(race : RaceDesc) {
+	public NumAttributes(race: RaceDesc) {
 		return this.body.NumAttributes(race);
 	}
-	
+
 	// TODO
-	Weapon() {
+	public Weapon() {
 		return this.weaponSlot;
 	}
 	// TODO
-	WeaponDesc() {
+	public WeaponDesc() {
 		return this.weaponSlot ? this.weaponSlot.sDesc() : "stick";
 	}
 	// TODO
-	WeaponDescLong() {
+	public WeaponDescLong() {
 		return this.weaponSlot ? this.weaponSlot.lDesc() : "a stick";
 	}
 	// TODO
-	Armor() {
+	public Armor() {
 		return this.topArmorSlot;
 	}
 	// TODO
-	LowerArmor() {
+	public LowerArmor() {
 		return this.botArmorSlot;
 	}
 	// TODO
-	LowerArmorDesc() {
+	public LowerArmorDesc() {
 		return this.botArmorSlot ? this.botArmorSlot.sDesc() : this.ArmorDesc();
 	}
 	// TODO
-	LowerArmorDescLong() {
+	public LowerArmorDescLong() {
 		return this.botArmorSlot ? this.botArmorSlot.lDesc() : this.ArmorDescLong();
 	}
 	// TODO
-	ArmorDesc() {
+	public ArmorDesc() {
 		return this.topArmorSlot ? this.topArmorSlot.sDesc() : "comfortable clothes";
 	}
-	ArmorDescLong() {
+	public ArmorDescLong() {
 		return this.topArmorSlot ? this.topArmorSlot.lDesc() : "a set of comfortable clothes";
 	}
-	Accessories() {
+	public Accessories() {
 		return [this.acc1Slot, this.acc2Slot];
 	}
-	
+
 	/* ENTITY GRAMMAR */
-	
-	nameDesc() {
+
+	public nameDesc() {
 		return this.monsterName || this.name;
 	}
-	NameDesc() {
+	public NameDesc() {
 		return this.MonsterName || this.name;
 	}
-	possessive() {
-		let name = this.monsterName || this.name || "the entity";
-		let letter = name[name.length-1];
-		let s = (letter == 's' || letter == 'x') ? "'" : "'s";
+	public possessive() {
+		const name = this.monsterName || this.name || "the entity";
+		const letter = name[name.length - 1];
+		const s = (letter == "s" || letter == "x") ? "'" : "'s";
 		return name + s;
 	}
-	Possessive() {
-		let name = this.MonsterName || this.name || "The entity";
-		let letter = name[name.length-1];
-		let s = (letter == 's' || letter == 'x') ? "'" : "'s";
+	public Possessive() {
+		const name = this.MonsterName || this.name || "The entity";
+		const letter = name[name.length - 1];
+		const s = (letter == "s" || letter == "x") ? "'" : "'s";
 		return name + s;
 	}
-	possessivePlural() {
-		let name = this.groupName || this.name || "the entities";
+	public possessivePlural() {
+		const name = this.groupName || this.name || "the entities";
 		return name + "'";
 	}
-	PossessivePlural() {
-		let name = this.GroupName || this.name || "The entities";
+	public PossessivePlural() {
+		const name = this.GroupName || this.name || "The entities";
 		return name + "'";
 	}
-	heshe(forcegender? : Gender) : string {
-		let gender = forcegender ? forcegender : this.body.Gender();
-		if(gender == Gender.male) return "he";
-		else if(gender == Gender.female) return "she";
-		else if(gender == Gender.herm) return "she";
-		else return "they";
+	public heshe(forcegender?: Gender): string {
+		const gender = forcegender ? forcegender : this.body.Gender();
+		if (gender == Gender.male) { return "he"; } else if (gender == Gender.female) { return "she"; } else if (gender == Gender.herm) { return "she"; } else { return "they"; }
 	}
-	HeShe(forcegender? : Gender) : string {
-		let gender = forcegender ? forcegender : this.body.Gender();
-		if(gender == Gender.male) return "He";
-		else if(gender == Gender.female) return "She";
-		else if(gender == Gender.herm) return "She";
-		else return "They";
+	public HeShe(forcegender?: Gender): string {
+		const gender = forcegender ? forcegender : this.body.Gender();
+		if (gender == Gender.male) { return "He"; } else if (gender == Gender.female) { return "She"; } else if (gender == Gender.herm) { return "She"; } else { return "They"; }
 	}
-	himher(forcegender? : Gender) : string {
-		let gender = forcegender ? forcegender : this.body.Gender();
-		if(gender == Gender.male) return "him";
-		else if(gender == Gender.female) return "her";
-		else if(gender == Gender.herm) return "her";
-		else return "them";
+	public himher(forcegender?: Gender): string {
+		const gender = forcegender ? forcegender : this.body.Gender();
+		if (gender == Gender.male) { return "him"; } else if (gender == Gender.female) { return "her"; } else if (gender == Gender.herm) { return "her"; } else { return "them"; }
 	}
-	HimHer(forcegender? : Gender) : string {
-		let gender = forcegender ? forcegender : this.body.Gender();
-		if(gender == Gender.male) return "Him";
-		else if(gender == Gender.female) return "Her";
-		else if(gender == Gender.herm) return "Her";
-		else return "Them";
+	public HimHer(forcegender?: Gender): string {
+		const gender = forcegender ? forcegender : this.body.Gender();
+		if (gender == Gender.male) { return "Him"; } else if (gender == Gender.female) { return "Her"; } else if (gender == Gender.herm) { return "Her"; } else { return "Them"; }
 	}
-	hisher(forcegender? : Gender) : string {
-		let gender = forcegender ? forcegender : this.body.Gender();
-		if(gender == Gender.male) return "his";
-		else if(gender == Gender.female) return "her";
-		else if(gender == Gender.herm) return "her";
-		else return "their";
+	public hisher(forcegender?: Gender): string {
+		const gender = forcegender ? forcegender : this.body.Gender();
+		if (gender == Gender.male) { return "his"; } else if (gender == Gender.female) { return "her"; } else if (gender == Gender.herm) { return "her"; } else { return "their"; }
 	}
-	HisHer(forcegender? : Gender) : string {
-		let gender = forcegender ? forcegender : this.body.Gender();
-		if(gender == Gender.male) return "His";
-		else if(gender == Gender.female) return "Her";
-		else if(gender == Gender.herm) return "Her";
-		else return "Their";
+	public HisHer(forcegender?: Gender): string {
+		const gender = forcegender ? forcegender : this.body.Gender();
+		if (gender == Gender.male) { return "His"; } else if (gender == Gender.female) { return "Her"; } else if (gender == Gender.herm) { return "Her"; } else { return "Their"; }
 	}
-	hishers(forcegender? : Gender) : string {
-		let gender = forcegender ? forcegender : this.body.Gender();
-		if(gender == Gender.male) return "his";
-		else if(gender == Gender.female) return "hers";
-		else if(gender == Gender.herm) return "hers";
-		else return "theirs";
+	public hishers(forcegender?: Gender): string {
+		const gender = forcegender ? forcegender : this.body.Gender();
+		if (gender == Gender.male) { return "his"; } else if (gender == Gender.female) { return "hers"; } else if (gender == Gender.herm) { return "hers"; } else { return "theirs"; }
 	}
-	has() : string {
-		if(this.body.Gender() == Gender.none) return "have";
+	public has(): string {
+		if (this.body.Gender() == Gender.none) { return "have"; }
 		return "has";
 	}
-	is() : string {
-		if(this.body.Gender() == Gender.none) return "are";
+	public is(): string {
+		if (this.body.Gender() == Gender.none) { return "are"; }
 		return "is";
 	}
-	plural() {
+	public plural() {
 		return (this.body.Gender() == Gender.none);
 	}
 	// TODO femininity from other things (breasts etc)
-	mfFem(male : any, female : any) {
+	public mfFem(male: any, female: any) {
 		return this.body.femininity.Get() > 0 ? female : male;
 	}
-	mfTrue(male : any, female : any) {
+	public mfTrue(male: any, female: any) {
 		return (this.body.Gender() == Gender.male) ? male : female;
 	}
 
-	ParserPronouns(parse? : any, prefix? : string, postfix? : string, forcegender? : Gender) {
+	public ParserPronouns(parse?: any, prefix?: string, postfix?: string, forcegender?: Gender) {
 		parse   = parse   || {};
 		prefix  = prefix  || "";
 		postfix = postfix || "";
@@ -2212,400 +2232,411 @@ export class Entity {
 		return parse;
 	}
 
-	ParserTags(parse? : any, prefix? : string, p1cock? : Cock) {
-		let ent = this;
+	public ParserTags(parse?: any, prefix?: string, p1cock?: Cock) {
+		const ent = this;
 		parse  = parse  || {};
 		prefix = prefix || "";
-		
+
 		p1cock = p1cock || ent.BiggestCock(null, true);
-		
-		parse[prefix + "cocks"]     = function() { return ent.MultiCockDesc(); }
-		parse[prefix + "cock"]      = function() { return p1cock.Short(); }
-		parse[prefix + "cockTip"]   = function() { return p1cock.TipShort(); }
-		parse[prefix + "knot"]      = function() { return p1cock.KnotShort(); }
-		parse[prefix + "balls"]     = function() { return ent.BallsDesc(); }
-		parse[prefix + "butt"]      = function() { return ent.Butt().Short(); }
-		parse[prefix + "anus"]      = function() { return ent.Butt().AnalShort(); }
-		parse[prefix + "vag"]       = function() { return ent.FirstVag() ? ent.FirstVag().Short() : "crotch"; }
-		parse[prefix + "clit"]      = function() { return ent.FirstVag().ClitShort(); }
-		parse[prefix + "breasts"]   = function() { return ent.FirstBreastRow().Short(); }
-		parse[prefix + "nip"]       = function() { return ent.FirstBreastRow().NipShort(); }
-		parse[prefix + "nips"]      = function() { return ent.FirstBreastRow().NipsShort(); }
-		parse[prefix + "tongue"]    = function() { return ent.TongueDesc(); }
-		parse[prefix + "tongueTip"] = function() { return ent.TongueTipDesc(); }
-		parse[prefix + "skin"]      = function() { return ent.SkinDesc(); }
-		parse[prefix + "hair"]      = function() { return ent.Hair().Short(); }
-		parse[prefix + "face"]      = function() { return ent.FaceDesc(); }
-		parse[prefix + "ear"]       = function() { return ent.EarDesc(); }
-		parse[prefix + "ears"]      = function() { return ent.EarDesc(true); }
-		parse[prefix + "eye"]       = function() { return ent.EyeDesc(); }
-		parse[prefix + "eyes"]      = function() { return ent.EyeDesc() + "s"; }
-		parse[prefix + "hand"]      = function() { return ent.HandDesc(); }
-		parse[prefix + "palm"]      = function() { return ent.PalmDesc(); }
-		parse[prefix + "hip"]       = function() { return ent.HipDesc(); }
-		parse[prefix + "hips"]      = function() { return ent.HipsDesc(); }
-		parse[prefix + "thigh"]     = function() { return ent.ThighDesc(); }
-		parse[prefix + "thighs"]    = function() { return ent.ThighsDesc(); }
-		parse[prefix + "legs"]      = function() { return ent.LegsDesc(); }
-		parse[prefix + "leg"]       = function() { return ent.LegDesc(); }
-		parse[prefix + "knee"]      = function() { return ent.KneeDesc(); }
-		parse[prefix + "knees"]     = function() { return ent.KneesDesc(); }
-		parse[prefix + "foot"]      = function() { return ent.FootDesc(); }
-		parse[prefix + "feet"]      = function() { return ent.FeetDesc(); }
-		parse[prefix + "belly"]     = function() { return ent.StomachDesc(); }
-		parse[prefix + "tail"]      = function() { let tail = ent.HasTail(); return tail ? tail.Short() : ""; }
-		parse[prefix + "wings"]     = function() { let wings = ent.HasWings(); return wings ? wings.Short() : ""; }
-		parse[prefix + "horns"]     = function() { let horns = ent.HasHorns(); return horns ? horns.Short() : ""; }
-		
-		parse[prefix + "weapon"]    = function() { return ent.WeaponDesc(); }
-		parse[prefix + "armor"]     = function() { return ent.ArmorDesc(); }
-		parse[prefix + "botarmor"]  = function() { return ent.LowerArmorDesc(); }
+
+		parse[prefix + "cocks"]     = function() { return ent.MultiCockDesc(); };
+		parse[prefix + "cock"]      = function() { return p1cock.Short(); };
+		parse[prefix + "cockTip"]   = function() { return p1cock.TipShort(); };
+		parse[prefix + "knot"]      = function() { return p1cock.KnotShort(); };
+		parse[prefix + "balls"]     = function() { return ent.BallsDesc(); };
+		parse[prefix + "butt"]      = function() { return ent.Butt().Short(); };
+		parse[prefix + "anus"]      = function() { return ent.Butt().AnalShort(); };
+		parse[prefix + "vag"]       = function() { return ent.FirstVag() ? ent.FirstVag().Short() : "crotch"; };
+		parse[prefix + "clit"]      = function() { return ent.FirstVag().ClitShort(); };
+		parse[prefix + "breasts"]   = function() { return ent.FirstBreastRow().Short(); };
+		parse[prefix + "nip"]       = function() { return ent.FirstBreastRow().NipShort(); };
+		parse[prefix + "nips"]      = function() { return ent.FirstBreastRow().NipsShort(); };
+		parse[prefix + "tongue"]    = function() { return ent.TongueDesc(); };
+		parse[prefix + "tongueTip"] = function() { return ent.TongueTipDesc(); };
+		parse[prefix + "skin"]      = function() { return ent.SkinDesc(); };
+		parse[prefix + "hair"]      = function() { return ent.Hair().Short(); };
+		parse[prefix + "face"]      = function() { return ent.FaceDesc(); };
+		parse[prefix + "ear"]       = function() { return ent.EarDesc(); };
+		parse[prefix + "ears"]      = function() { return ent.EarDesc(true); };
+		parse[prefix + "eye"]       = function() { return ent.EyeDesc(); };
+		parse[prefix + "eyes"]      = function() { return ent.EyeDesc() + "s"; };
+		parse[prefix + "hand"]      = function() { return ent.HandDesc(); };
+		parse[prefix + "palm"]      = function() { return ent.PalmDesc(); };
+		parse[prefix + "hip"]       = function() { return ent.HipDesc(); };
+		parse[prefix + "hips"]      = function() { return ent.HipsDesc(); };
+		parse[prefix + "thigh"]     = function() { return ent.ThighDesc(); };
+		parse[prefix + "thighs"]    = function() { return ent.ThighsDesc(); };
+		parse[prefix + "legs"]      = function() { return ent.LegsDesc(); };
+		parse[prefix + "leg"]       = function() { return ent.LegDesc(); };
+		parse[prefix + "knee"]      = function() { return ent.KneeDesc(); };
+		parse[prefix + "knees"]     = function() { return ent.KneesDesc(); };
+		parse[prefix + "foot"]      = function() { return ent.FootDesc(); };
+		parse[prefix + "feet"]      = function() { return ent.FeetDesc(); };
+		parse[prefix + "belly"]     = function() { return ent.StomachDesc(); };
+		parse[prefix + "tail"]      = function() { const tail = ent.HasTail(); return tail ? tail.Short() : ""; };
+		parse[prefix + "wings"]     = function() { const wings = ent.HasWings(); return wings ? wings.Short() : ""; };
+		parse[prefix + "horns"]     = function() { const horns = ent.HasHorns(); return horns ? horns.Short() : ""; };
+
+		parse[prefix + "weapon"]    = function() { return ent.WeaponDesc(); };
+		parse[prefix + "armor"]     = function() { return ent.ArmorDesc(); };
+		parse[prefix + "botarmor"]  = function() { return ent.LowerArmorDesc(); };
 		return parse;
 	}
 
-	toString() {
+	public toString() {
 		return this.name;
 	}
 
-	Appearance() {
+	public Appearance() {
 		return this.NameDesc()
 		+ " is a "
 		+ this.body.GenderStr() + " "
 		+ this.body.RaceStr() + ".";
 	}
-	
+
 	/* ENTITY SEX */
-	Genitalia() {
+	public Genitalia() {
 		return this.body.gen;
 	}
 
 	// TODO: affect with things such as stretch, lust, perks etc
-	VagCap() {
+	public VagCap() {
 		return this.FirstVag().capacity.Get();
 	}
-	OralCap() {
+	public OralCap() {
 		return this.Mouth().capacity.Get();
 	}
-	AnalCap() {
+	public AnalCap() {
 		return this.Butt().capacity.Get();
 	}
 
-	ResetVirgin() {
+	public ResetVirgin() {
 		this.Butt().virgin = true;
-		let vags = this.AllVags();
-		for(let i = 0; i < vags.length; i++)
+		const vags = this.AllVags();
+		for (let i = 0; i < vags.length; i++) {
 			vags[i].virgin = true;
+		}
 	}
 
 	// Convenience functions, cock
-	NumCocks() {
+	public NumCocks() {
 		return this.body.cock.length;
 	}
-	FirstCock() {
+	public FirstCock() {
 		return this.body.cock[0];
 	}
-	FirstClitCockIdx() {
-		for(let i=0,j=this.body.cock.length; i<j; i++) {
-			let c = this.body.cock[i];
-			if(c.vag)
+	public FirstClitCockIdx() {
+		for (let i = 0, j = this.body.cock.length; i < j; i++) {
+			const c = this.body.cock[i];
+			if (c.vag) {
 				return i;
+			}
 		}
 		return -1;
 	}
-	BiggestCock(cocks? : Cock[], incStrapon? : boolean) {
+	public BiggestCock(cocks?: Cock[], incStrapon?: boolean) {
 		cocks = cocks || this.body.cock;
 		let c = cocks[0];
-		if(c) {
+		if (c) {
 			let cSize = cocks[0].length.Get() * cocks[0].thickness.Get();
-			for(let i=1,j=cocks.length; i<j; i++) {
-				let newSize = cocks[i].length.Get() * cocks[i].thickness.Get();
-				if(newSize > cSize) {
+			for (let i = 1, j = cocks.length; i < j; i++) {
+				const newSize = cocks[i].length.Get() * cocks[i].thickness.Get();
+				if (newSize > cSize) {
 					cSize = newSize;
 					c = cocks[i];
 				}
-			};
+			}
 		}
-		if(c)
+		if (c) {
 			return c;
-		else if(incStrapon && this.strapOn)
+		} else if (incStrapon && this.strapOn) {
 			return this.strapOn.cock;
+ }
 	}
-	CocksThatFit(orifice? : Orifice, onlyRealCocks? : boolean, extension? : any) {
-		let ret = [];
-		for(let i=0,j=this.body.cock.length; i<j; i++) {
-			let c = this.body.cock[i];
-			if(!orifice || orifice.Fits(c, extension))
+	public CocksThatFit(orifice?: Orifice, onlyRealCocks?: boolean, extension?: any) {
+		const ret = [];
+		for (let i = 0, j = this.body.cock.length; i < j; i++) {
+			const c = this.body.cock[i];
+			if (!orifice || orifice.Fits(c, extension)) {
 				ret.push(c);
-		};
-		if(ret.length == 0 && !onlyRealCocks && this.strapOn) {
-			let c : Cock = this.strapOn.cock;
-			if(!orifice || orifice.Fits(c, extension))
+			}
+		}
+		if (ret.length == 0 && !onlyRealCocks && this.strapOn) {
+			const c: Cock = this.strapOn.cock;
+			if (!orifice || orifice.Fits(c, extension)) {
 				ret.push(c);
+			}
 		}
 		return ret;
 	}
-	AllCocksCopy() {
-		let ret = [];
-		for(let i=0,j=this.body.cock.length; i<j; i++) {
-			let c = this.body.cock[i];
-				ret.push(c);
-		};
+	public AllCocksCopy() {
+		const ret = [];
+		for (let i = 0, j = this.body.cock.length; i < j; i++) {
+			const c = this.body.cock[i];
+			ret.push(c);
+		}
 		return ret;
 	}
-	AllCocks() {
+	public AllCocks() {
 		return this.body.cock;
 	}
 	// TODO: Race too
-	MultiCockDesc(cocks? : Cock[]) {
+	public MultiCockDesc(cocks?: Cock[]) {
 		cocks = cocks || this.body.cock;
-		if(cocks.length == 0) {
-			if(this.strapOn)
+		if (cocks.length == 0) {
+			if (this.strapOn) {
 				return this.strapOn.cock.Short();
-			else
+			} else {
 				return "[NO COCKS]";
-		}
-		else if(cocks.length == 1)
+			}
+		} else if (cocks.length == 1) {
 			return cocks[0].Short();
-		else
+ } else {
 			return Text.Quantify(cocks.length) + " of " + cocks[0].Desc().adj + " " + cocks[0].nounPlural();
+ }
 	}
-
-
 
 	// Convenience functions, vag
-	NumVags() {
+	public NumVags() {
 		return this.body.vagina.length;
 	}
-	FirstVag() {
+	public FirstVag() {
 		return this.body.vagina[0];
 	}
-	VagsThatFit(capacity : number) {
-		let ret : Vagina[] = [];
-		for(let i=0; i<this.body.vagina.length; i++) {
-			let vag = this.body.vagina[i];
-			let size = vag.capacity.Get();
-			if(size >= capacity) {
+	public VagsThatFit(capacity: number) {
+		const ret: Vagina[] = [];
+		for (let i = 0; i < this.body.vagina.length; i++) {
+			const vag = this.body.vagina[i];
+			const size = vag.capacity.Get();
+			if (size >= capacity) {
 				ret.push(vag);
 			}
-		};
+		}
 		return ret;
 	}
-	AllVags() {
+	public AllVags() {
 		return this.body.vagina;
 	}
-	UnfertilezedWomb() {
-		let ret : Womb[] = [];
-		for(let i=0,j=this.body.vagina.length; i<j; i++){
-			let womb = this.body.vagina[i].womb;
-			if(womb.pregnant == false)
+	public UnfertilezedWomb() {
+		const ret: Womb[] = [];
+		for (let i = 0, j = this.body.vagina.length; i < j; i++) {
+			const womb = this.body.vagina[i].womb;
+			if (womb.pregnant == false) {
 				ret.push(womb);
-		};
+			}
+		}
 		return ret;
 	}
-
 
 	// Convenience functions, breasts
-	NumBreastRows() {
+	public NumBreastRows() {
 		return this.body.breasts.length;
 	}
-	FirstBreastRow() {
+	public FirstBreastRow() {
 		return this.body.breasts[0];
 	}
-	AllBreastRows() {
+	public AllBreastRows() {
 		return this.body.breasts;
 	}
-	BiggestBreasts() {
-		let breasts = this.body.breasts;
+	public BiggestBreasts() {
+		const breasts = this.body.breasts;
 		let c = breasts[0];
 		let cSize = breasts[0].Size();
-		for(let i=1,j=breasts.length; i<j; i++) {
-			let newSize = breasts[i].Size();
-			if(newSize > cSize) {
+		for (let i = 1, j = breasts.length; i < j; i++) {
+			const newSize = breasts[i].Size();
+			if (newSize > cSize) {
 				cSize = newSize;
 				c = breasts[i];
 			}
-		};
+		}
 		return c;
 	}
-	SmallestBreasts() {
-		let breasts = this.body.breasts;
+	public SmallestBreasts() {
+		const breasts = this.body.breasts;
 		let c = breasts[0];
 		let cSize = breasts[0].Size();
-		for(let i=1,j=breasts.length; i<j; i++) {
-			let newSize = breasts[i].Size();
-			if(newSize < cSize) {
+		for (let i = 1, j = breasts.length; i < j; i++) {
+			const newSize = breasts[i].Size();
+			if (newSize < cSize) {
 				cSize = newSize;
 				c = breasts[i];
 			}
-		};
+		}
 		return c;
 	}
-	BiggestNips() {
-		let breasts = this.body.breasts;
+	public BiggestNips() {
+		const breasts = this.body.breasts;
 		let c = breasts[0];
 		let cSize = breasts[0].NipSize();
-		for(let i=1,j=breasts.length; i<j; i++) {
-			let newSize = breasts[i].NipSize();
-			if(newSize > cSize) {
+		for (let i = 1, j = breasts.length; i < j; i++) {
+			const newSize = breasts[i].NipSize();
+			if (newSize > cSize) {
 				cSize = newSize;
 				c = breasts[i];
 			}
-		};
+		}
 		return c;
 	}
-	SmallestNips() {
-		let breasts = this.body.breasts;
+	public SmallestNips() {
+		const breasts = this.body.breasts;
 		let c = breasts[0];
 		let cSize = breasts[0].NipSize();
-		for(let i=1,j=breasts.length; i<j; i++) {
-			let newSize = breasts[i].NipSize();
-			if(newSize < cSize) {
+		for (let i = 1, j = breasts.length; i < j; i++) {
+			const newSize = breasts[i].NipSize();
+			if (newSize < cSize) {
 				cSize = newSize;
 				c = breasts[i];
 			}
-		};
+		}
 		return c;
 	}
-	NipplesThatFitLen(capacity : number) {
-		let ret = new Array();
-		for(let i=0,j=this.body.breasts.length; i<j; i++) {
-			let row = this.body.breasts[i];
-			if(row.nippleType == NippleType.lipple ||
+	public NipplesThatFitLen(capacity: number) {
+		const ret = new Array();
+		for (let i = 0, j = this.body.breasts.length; i < j; i++) {
+			const row = this.body.breasts[i];
+			if (row.nippleType == NippleType.lipple ||
 				row.nippleType == NippleType.cunt) {
-				if(row.NipSize() >= capacity)
+				if (row.NipSize() >= capacity) {
 					ret.push(row);
+				}
 			}
-		};
+		}
 		return ret;
 	}
 
-
-	AllOrfices(capacity? : number) {
+	public AllOrfices(capacity?: number) {
 		capacity = capacity || 0;
-		let ret = new Array();
-		
-		let vags = this.VagsThatFit(capacity);
-		for(let i=0,j=vags.length; i<j; i++)
+		const ret = new Array();
+
+		const vags = this.VagsThatFit(capacity);
+		for (let i = 0, j = vags.length; i < j; i++) {
 			ret.push({type: BodyPartType.vagina, obj: vags[i]});
-		let nips = this.NipplesThatFitLen(capacity);
-		for(let i=0,j=nips.length; i<j; i++)
+		}
+		const nips = this.NipplesThatFitLen(capacity);
+		for (let i = 0, j = nips.length; i < j; i++) {
 			ret.push({type: BodyPartType.nipple, obj: nips[i]});
-		if(this.body.ass.capacity.Get() >= capacity)
+		}
+		if (this.body.ass.capacity.Get() >= capacity) {
 			ret.push({type: BodyPartType.ass, obj: this.body.ass});
-		if(this.body.head.mouth.capacity.Get() >= capacity)
+		}
+		if (this.body.head.mouth.capacity.Get() >= capacity) {
 			ret.push({type: BodyPartType.mouth, obj: this.body.head.mouth});
-		
+		}
+
 		return ret;
 	}
 
-	AllPenetrators(orifice : Orifice) {
-		let ret = new Array();
-		
-		let cocks = this.CocksThatFit(orifice);
-		for(let i=0,j=cocks.length; i<j; i++)
+	public AllPenetrators(orifice: Orifice) {
+		const ret = new Array();
+
+		const cocks = this.CocksThatFit(orifice);
+		for (let i = 0, j = cocks.length; i < j; i++) {
 			ret.push({type: BodyPartType.cock, obj: cocks[i]});
+		}
 		// TODO: Tongue, Nipple-cock, Clitcock
-		
+
 		return ret;
 	}
 
-
-	Fuck(cock : Cock, expMult? : number) {
+	public Fuck(cock: Cock, expMult?: number) {
 		expMult = expMult || 1;
 		this.AddSexExp(expMult);
 		// TODO: Stretch
 	}
 
 	// Fuck entitys mouth (vag, cock)
-	FuckOral(mouth : any, cock : Cock, expMult? : number) {
+	public FuckOral(mouth: any, cock: Cock, expMult?: number) {
 		expMult = expMult || 1;
 		this.AddSexExp(expMult);
 		// TODO: Stretch
 	}
 
 	// Fuck entitys anus (anus, cock)
-	FuckAnal(butt : Butt, cock? : Cock, expMult? : number) {
-		let parse : any = {
+	public FuckAnal(butt: Butt, cock?: Cock, expMult?: number) {
+		const parse: any = {
 			name   : this.NameDesc(),
 			has    : this.has(),
-			hisher : this.hisher()
+			hisher : this.hisher(),
 		};
 		expMult = expMult || 1;
-		if(butt.virgin) {
+		if (butt.virgin) {
 			butt.virgin = false;
 			Text.Add("<b>[name] [has] lost [hisher] anal virginity.</b>", parse);
 			Text.NL();
 			this.AddSexExp(5 * expMult);
-		}
-		else
+		} else {
 			this.AddSexExp(expMult);
-		
-		if(cock) {
+		}
+
+		if (cock) {
 			butt.StretchOrifice(this, cock, false);
 		}
 		Text.Flush();
 	}
 
 	// Fuck entitys vagina (vag, cock)
-	FuckVag(vag : Vagina, cock? : Cock, expMult? : number) {
-		let parse : any = {
+	public FuckVag(vag: Vagina, cock?: Cock, expMult?: number) {
+		const parse: any = {
 			name   : this.NameDesc(),
 			has    : this.has(),
-			hisher : this.hisher()
+			hisher : this.hisher(),
 		};
 		expMult = expMult || 1;
-		if(vag.virgin) {
+		if (vag.virgin) {
 			vag.virgin = false;
 			Text.Add("<b>[name] [has] lost [hisher] virginity.</b>", parse);
 			Text.NL();
 			this.AddSexExp(5 * expMult);
-		}
-		else
+		} else {
 			this.AddSexExp(expMult);
-		
-		if(cock) {
+		}
+
+		if (cock) {
 			vag.StretchOrifice(this, cock, false);
 		}
 		Text.Flush();
 	}
 
-	Sexed() {
-		if(this.flags["Sexed"] && this.flags["Sexed"] != 0)
+	public Sexed() {
+		if (this.flags.Sexed && this.flags.Sexed != 0) {
 			return true;
-		for(let flag in this.sex)
-			if(this.sex[flag] != 0)
+		}
+		for (const flag in this.sex) {
+			if (this.sex[flag] != 0) {
 				return true;
+		}
+			}
 		return false;
 	}
 
-	RestoreCum(quantity? : number) {
+	public RestoreCum(quantity?: number) {
 		quantity = quantity || 1;
-		let balls = this.Balls();
+		const balls = this.Balls();
 		return balls.cum.IncreaseStat(balls.CumCap(), quantity);
 	}
 	// TODO
-	Cum() {
+	public Cum() {
 		return this.Balls().cum.Get();
 	}
-	CumOutput(mult? : number) {
+	public CumOutput(mult?: number) {
 		mult = mult || 1;
-		let balls = this.Balls();
+		const balls = this.Balls();
 		let cum = mult * balls.CumCap() / 4;
 		cum *= this.LustLevel() + 0.5;
-		
+
 		cum = Math.min(cum, this.Cum());
 		return cum;
 	}
 	// TODO test
-	OrgasmCum(mult? : number) {
+	public OrgasmCum(mult?: number) {
 		mult = mult || 1;
-		let balls = this.Balls();
-		let cumQ  = this.CumOutput(mult);
-		
+		const balls = this.Balls();
+		const cumQ  = this.CumOutput(mult);
+
 		this.AddLustFraction(-1);
-		
+
 		balls.cum.DecreaseStat(0, cumQ);
-		if(GetDEBUG()) {
+		if (GetDEBUG()) {
 			Text.NL();
 			Text.Add("<b>[name] came ([cum]).</b>", {name: this.NameDesc(), cum: cumQ.toFixed(2)});
 			Text.NL();
@@ -2613,16 +2644,16 @@ export class Entity {
 		}
 		return cumQ;
 	}
-	Lactation() {
+	public Lactation() {
 		return this.lactHandler.Lactation();
 	}
-	Milk() {
+	public Milk() {
 		return this.lactHandler.milk.Get();
 	}
-	MilkCap() {
+	public MilkCap() {
 		return this.lactHandler.MilkCap();
 	}
-	LactationProgress(oldMilk : number, newMilk : number, lactationRate : number) {
-		//Placeholder, implement in each entity if applicable
+	public LactationProgress(oldMilk: number, newMilk: number, lactationRate: number) {
+		// Placeholder, implement in each entity if applicable
 	}
 }

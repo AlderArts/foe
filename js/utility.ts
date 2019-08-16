@@ -1,5 +1,5 @@
-export function Rand(max : number) {
-	let r = Math.floor(Math.random() * max);
+export function Rand(max: number) {
+	const r = Math.floor(Math.random() * max);
 	return (r < max) ? r : max - 1;
 }
 
@@ -21,47 +21,47 @@ export namespace Unit {
 let GenerateFile: any = (options: any) => {
 	options.script = options.script || "download.php";
 
-	if(!options.filename || !options.content){
+	if (!options.filename || !options.content) {
 		throw new Error("Please enter all the required config options!");
 	}
 
 	// Creating a 1 by 1 px invisible iframe:
 
-	let iframe = $('<iframe>',{
-		width:1,
-		height:1,
-		frameborder:0,
-		css:{
-			display:'none'
-		}
-	}).appendTo('body');
+	const iframe = $("<iframe>", {
+		width: 1,
+		height: 1,
+		frameborder: 0,
+		css: {
+			display: "none",
+		},
+	}).appendTo("body");
 
-	let formHTML = '<form action="" method="post">'+
-		'<input type="hidden" name="filename" />'+
-		'<input type="hidden" name="content" />'+
-		'</form>';
+	const formHTML = '<form action="" method="post">' +
+		'<input type="hidden" name="filename" />' +
+		'<input type="hidden" name="content" />' +
+		"</form>";
 
 	// Giving IE a chance to build the DOM in
 	// the iframe with a short timeout:
 
-	setTimeout(function(){
+	setTimeout(function() {
 
 		// The body element of the iframe document:
 
-		let body = (iframe.prop('contentDocument') !== undefined) ?
-					iframe.prop('contentDocument').body :
-					iframe.prop('document').body;	// IE
+		let body = (iframe.prop("contentDocument") !== undefined) ?
+					iframe.prop("contentDocument").body :
+					iframe.prop("document").body;	// IE
 
 		body = $(body);
 
 		// Adding the form to the body:
 		body.html(formHTML);
 
-		let form = body.find('form');
+		const form = body.find("form");
 
-		form.attr('action',options.script);
-		form.find('input[name=filename]').val(options.filename);
-		form.find('input[name=content]').val(options.content);
+		form.attr("action", options.script);
+		form.find("input[name=filename]").val(options.filename);
+		form.find("input[name=content]").val(options.content);
 
 		// Submitting the form to download.php. This will
 		// cause the file download dialog box to appear.
@@ -71,40 +71,39 @@ let GenerateFile: any = (options: any) => {
 };
 GenerateFile.canSaveOffline = false;
 
-(function(){
+(function() {
 	// calling convention for destroying local variables instead of keeping them in global namespace
-	let lnk : HTMLAnchorElement;
+	let lnk: HTMLAnchorElement;
 	try {
-		new Blob([JSON.stringify({"obj":"discarded"})],{"type":"application/json"});
-		let fl = new File([JSON.stringify({"obj":"discarded"})],"FoE.json",{"type":"application/json"});
+		new Blob([JSON.stringify({obj: "discarded"})], {type: "application/json"});
+		const fl = new File([JSON.stringify({obj: "discarded"})], "FoE.json", {type: "application/json"});
 		lnk = document.createElement("a");
 		if (typeof lnk.hidden !== "boolean" || typeof lnk.href !== "string" || typeof lnk.download !== "string" || typeof lnk.click !== "function") {
-			throw 'Anchor element does not support all necessary features';
+			throw new Error("Anchor element does not support all necessary features");
 		}
-		let url = URL.createObjectURL(fl);
+		const url = URL.createObjectURL(fl);
 		URL.revokeObjectURL(url);
 		lnk.hidden = true;
 		lnk.download = "application/json";
 		document.body.appendChild(lnk);
-	}
-	catch(msg) {
+	} catch (msg) {
 		console.log('Desired features not supported. "Save to file" can only work through server. ', msg);
 		return;
 	}
 	// if no exceptions are thrown, we simply replace the GenerateFile function with this one
-	GenerateFile = function(options : any) {
-		if(!options.filename || !options.content) {
+	GenerateFile = function(options: any) {
+		if (!options.filename || !options.content) {
 			throw new Error("Please enter all the required config options!");
 		}
 		if (lnk.href !== "") {
 			// remove any old data from lingering system resources
 			URL.revokeObjectURL(lnk.href);
 		}
-		let fl = new File([options.content], options.filename, {"type":"application/json"});
+		const fl = new File([options.content], options.filename, {type: "application/json"});
 		lnk.href = URL.createObjectURL(fl);
 		lnk.download = options.filename;
 		lnk.click();
-	}
+	};
 	GenerateFile.canSaveOffline = true;
 })();
 

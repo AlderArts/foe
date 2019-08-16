@@ -1,9 +1,9 @@
-import * as _ from 'lodash';
+import * as _ from "lodash";
 
 // Encounter table for combat
 export class EncounterTable {
-	encounters : any[];
-	hunt : any[];
+	public encounters: any[];
+	public hunt: any[];
 
 	constructor() {
 		// encounter { func, odds }
@@ -12,33 +12,32 @@ export class EncounterTable {
 		// TODO: Hunting
 		this.hunt = [];
 	}
-	
+
 	// Setup phase
-	AddEnc(Func : any, Odds? : any, Cond? : any, Obj? : any) {
+	public AddEnc(Func: any, Odds?: any, Cond?: any, Obj?: any) {
 		this.encounters.push({func: Func, odds: Odds, cond: Cond, obj: Obj});
 	}
 
-	Num() : number {
+	public Num(): number {
 		return this.encounters.length;
 	}
 
 	// Get a fight
-	Get() {
-		let scenes = [];
+	public Get() {
+		const scenes = [];
 
 		// Calculate total scale of odds
 		let sum = 0;
-		for(let i = 0; i < this.encounters.length; i++) {
-			let e = this.encounters[i];
+		for (const e of this.encounters) {
 			let canFind = e.cond;
-			if(canFind === undefined) canFind = true;
-			if(canFind) {
-				if(_.isFunction(canFind)) canFind = canFind();
-				if(canFind) {
+			if (canFind === undefined) { canFind = true; }
+			if (canFind) {
+				if (_.isFunction(canFind)) { canFind = canFind(); }
+				if (canFind) {
 					let odds = e.odds;
-					if(odds === undefined) odds = 1.0;
-					if(_.isFunction(odds)) odds = odds();
-					scenes.push({func: e.func, odds: odds, obj: e.obj});
+					if (odds === undefined) { odds = 1.0; }
+					if (_.isFunction(odds)) { odds = odds(); }
+					scenes.push({func: e.func, odds, obj: e.obj});
 					sum += odds;
 				}
 			}
@@ -47,12 +46,12 @@ export class EncounterTable {
 		// Pick an encounter
 		let step = Math.random() * sum;
 
-		for(let i = 0; i < scenes.length; i++) {
-			let enc = scenes[i];
+		for (const enc of scenes) {
 			step -= enc.odds;
 			// If chosen, create an encounter from the supplied function
-			if(step <= 0.0)
+			if (step <= 0.0) {
 				return enc.func ? enc.func(enc.obj) : null;
+			}
 		}
 		// No encounters will default to null
 		return null;
