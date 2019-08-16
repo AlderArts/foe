@@ -20,7 +20,7 @@ import { KiakaiFlags } from "./kiakai-flags";
 
 const KiakaiSex: any = {};
 
-KiakaiSex.Healing = function() {
+KiakaiSex.Healing = () => {
 	const player = GAME().player;
 	const kiakai = GAME().kiakai;
 
@@ -33,8 +33,8 @@ KiakaiSex.Healing = function() {
 	parse = player.ParserTags(parse);
 	parse = kiakai.ParserTags(parse, "k");
 
-	parse.gen = player.FirstCock() ? function() { return player.MultiCockDesc(); } :
-					player.FirstVag() ? function() { return player.FirstVag().Short(); } :
+	parse.gen = player.FirstCock() ? () => player.MultiCockDesc() :
+					player.FirstVag() ? () => player.FirstVag().Short() :
 					"featureless crotch";
 	parse.fluids  = player.FirstCock() ? "salty pre-cum" :
 					player.FirstVag() ? "sweet juices" :
@@ -65,17 +65,17 @@ KiakaiSex.Healing = function() {
 	} else if (player.HPLevel() < 0.75) { // LOW HEALTH 25-75%
 		player.AddHPFraction(1.0);
 		const scenes = new EncounterTable();
-		scenes.AddEnc(function() {
+		scenes.AddEnc(() => {
 			Text.Add("<i>“[playername]!”</i> The elf exclaims with a worried expression. <i>“Please, lie down and take off your clothes, I will tend to your wounds.”</i> You comply, giving the occasional wince as the elf runs [hisher] hands over your nude body, warm flows of healing energy seeping into your battered form. Soon, your pain is numbing, and the various bruises on your body fade.", parse);
-		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
 			Text.Add("Seeing your wounds, [name] hurriedly instructs you to remove your clothes so [heshe] can tend to you. A gentle flow of healing energy seeps from your elvish companion's fingers, closing up cuts and soothing bruises, numbing your pain. <i>“Are you feeling better, [playername]?”</i> the elf asks. You assure [himher] that you are feeling much better.", parse);
 			if (kiakai.flags.Attitude < KiakaiFlags.Attitude.Neutral) {
 				Text.NL();
 				Text.Add("Much, much better, you add, grinning mischievously at [himher]. The elf nods at you uncertainly.", parse);
 			}
-		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
 			Text.Add("Wordlessly, [name] helps you disrobe, worriedly running [hisher] hands down your wounded body. Your cuts and bruises smart slightly as the elf's deft fingers run over them, assessing the damage. <i>“You must be more careful, [playername],”</i> [name] scolds you. <i>“Share some of your burdens with your companions.”</i>", parse);
 			Text.NL();
 
@@ -87,7 +87,7 @@ KiakaiSex.Healing = function() {
 
 			Text.NL();
 			Text.Add("The discomfort eases as you feel tendrils of healing magic enter your body, working their way into your most dire wounds and numbing the pain.", parse);
-		}, 1.0, function() { return true; });
+		}, 1.0, () => true);
 
 		scenes.Get();
 
@@ -112,16 +112,16 @@ KiakaiSex.Healing = function() {
 			func() {
 				player.AddHPFraction(1.0);
 				const scenes = new EncounterTable();
-				scenes.AddEnc(function() {
+				scenes.AddEnc(() => {
 					Text.Add("<i>“Very well, then,”</i> the elf nods, gesturing for you to turn around and bare your back. [HisHer] light caresses trail over your back, sending light shocks of electricity racing up your spine.", parse);
-				}, 1.0, function() { return true; });
-				scenes.AddEnc(function() {
+				}, 1.0, () => true);
+				scenes.AddEnc(() => {
 					Text.Add("<i>“If that is your wish,”</i> the elf consents, running [hisher] hands across your body. Small probing tendrils of healing magic sneak out from [hisher] fingers, finding their way into your various minor injuries.", parse);
-				}, 1.0, function() { return true; });
-				scenes.AddEnc(function() {
+				}, 1.0, () => true);
+				scenes.AddEnc(() => {
 					Text.Add("It's [hisher] job to keep you healthy at all times, is it not? <i>“As you say,”</i> [name] grudgingly agrees, instructing you to disrobe. After [heshe] has administered some minor healing on your body, the elf withdraws [hisher] hands.", parse);
 				}, 1.0, // Scene only available for naughty
-				function() { return kiakai.flags.Attitude < KiakaiFlags.Attitude.Neutral; });
+				() => kiakai.flags.Attitude < KiakaiFlags.Attitude.Neutral);
 
 				scenes.Get();
 
@@ -151,9 +151,9 @@ KiakaiSex.Healing = function() {
 					Text.Add("[HeShe] doesn't seem to mind at all, sighing happily and snuggling up against your [breasts].", parse);
 				} else if (kiakai.flags.Sexed > 15) {
 					Text.Add("[HeShe] looks conflicted, suspecting what is to come. From [hisher] rapidly beating heart, it seems like [heshe] is looking forward to it.", parse);
- } else {
+ 				} else {
 					Text.Add("[HeShe] seems a bit uncomfortable with you still, but nervously complies, offering no resistance.", parse);
- }
+ 				}
 				KiakaiSex.HealingNice();
 			}, enabled : true,
 			tooltip : "Coax the elf into having some fun with you.",
@@ -174,9 +174,9 @@ KiakaiSex.Healing = function() {
 						Text.Add("close around your erect [cock], caressing the length reverently.", parse);
 					} else if (player.FirstVag()) {
 						Text.Add("brush against your [vag], gently teasing your folds apart.", parse);
- } else {
+ 					} else {
 						Text.Add("caress your featureless crotch.");
- }
+ 					}
 
 					Text.Add(" <i>“You are always making me do weird things,”</i> [name] murmurs under [hisher] breath, but shrugs out of [hisher] [karmor] without any further coaxing from you. Leaning back onto the ground, you enjoy the show.", parse);
 				} else {
@@ -196,7 +196,7 @@ KiakaiSex.Healing = function() {
 	}
 };
 
-KiakaiSex.HealingSeducePrompt = function() {
+KiakaiSex.HealingSeducePrompt = () => {
 	const player = GAME().player;
 	const kiakai = GAME().kiakai;
 
@@ -211,8 +211,8 @@ KiakaiSex.HealingSeducePrompt = function() {
 	parse = player.ParserTags(parse);
 
 	parse.stuttername = player.name[0] + "-" + player.name;
-	parse.gen = player.FirstCock() ? function() { return player.MultiCockDesc(); } :
-					player.FirstVag() ? function() { return player.FirstVag().Short(); } :
+	parse.gen = player.FirstCock() ? () => player.MultiCockDesc() :
+					player.FirstVag() ? () => player.FirstVag().Short() :
 					"featureless crotch";
 
 	Text.Flush();
@@ -279,7 +279,7 @@ KiakaiSex.HealingSeducePrompt = function() {
 
 };
 
-KiakaiSex.HealingNice = function() {
+KiakaiSex.HealingNice = () => {
 	const player = GAME().player;
 	const kiakai = GAME().kiakai;
 
@@ -287,7 +287,7 @@ KiakaiSex.HealingNice = function() {
 		playername : player.name,
 		name    : kiakai.name,
 		heatStirring : player.FirstCock() ? "stirring" : "heat",
-		priest       : kiakai.flags.InitialGender == Gender.male ? "priest" : "priestess",
+		priest       : kiakai.flags.InitialGender === Gender.male ? "priest" : "priestess",
 		eyeColor     : Color.Desc(kiakai.Eyes().color),
 		manwoman     : kiakai.body.femininity.Get() > 0 ? "woman" : "man",
 		load         : player.HasBalls() ? "the contents of your sack" : "your load",
@@ -303,8 +303,8 @@ KiakaiSex.HealingNice = function() {
 	parse = Text.ParserPlural(parse, kiakai.NumCocks() > 1, "k");
 
 	parse.stuttername = player.name[0] + "-" + player.name;
-	parse.gen = player.FirstCock() ? function() { return player.MultiCockDesc(); } :
-					player.FirstVag() ? function() { return player.FirstVag().Short(); } :
+	parse.gen = player.FirstCock() ? () => player.MultiCockDesc() :
+					player.FirstVag() ? () => player.FirstVag().Short() :
 					"featureless crotch";
 
 	Text.Flush();
@@ -352,7 +352,7 @@ KiakaiSex.HealingNice = function() {
 				const cum = player.OrgasmCum();
 
 				const scenes = new EncounterTable();
-				scenes.AddEnc(function() {
+				scenes.AddEnc(() => {
 					Text.Add("A jolt in your nethers snaps you into full attention, and suddenly you are fighting to hold back your release. Glancing down, you see that [name] is not even touching you anymore - rather, a small spark of healing magic bridges the gap to your [cock].", parse);
 					Text.NL();
 					Text.Add("<i>“I will make your pain go away,”</i> [heshe] whispers lustily in your ear. Not able to hold back anymore, you cry out as you deposit [load] into [name]'s waiting hand.", parse);
@@ -360,31 +360,31 @@ KiakaiSex.HealingNice = function() {
 
 					// LARGE LOAD VARIATIONS
 					const scenes = new EncounterTable();
-					scenes.AddEnc(function() {
+					scenes.AddEnc(() => {
 						Text.Add("Your healthy load quickly becomes too much for the elf to handle and [heshe] gives a surprised cry as much of your seed drips from [hisher] hands down on the ground.", parse);
-					}, 1.0, function() { return true; });
-					scenes.AddEnc(function() {
+					}, 1.0, () => true);
+					scenes.AddEnc(() => {
 						Text.Add("Stray bursts of cum erupt from your trembling member, some hitting the surprised elf right in the face, others dripping down [hisher] lithe body.", parse);
-					}, 1.0, function() { return true; });
-					scenes.AddEnc(function() {
+					}, 1.0, () => true);
+					scenes.AddEnc(() => {
 						Text.Add("Grinning, you guide [name]'s head down to your still erupting [cock]. ", parse);
 						if (kiakai.flags.Sexed > 15) {
 							Text.Add("[HeShe] moves eagerly, almost without your encouragement, wrapping [hisher] lips around you in time to meet an eruption of a large wad of cum, splattering on [hisher] tongue. Your sigh of pleasure is met by a moan of delight from the elf as [heshe] keeps [hisher] mouth wrapped around you, waiting for your orgasm to end.", parse);
 						} else {
 							Text.Add("[HeShe] starts to protest, but is quickly interrupted by a large wad of cum splattering on [hisher] tongue. Sighing in pleasure, you hold the struggling elf there as you hose [himher] down, waiting for your orgasm to end.", parse);
 						}
-					}, 1.0, function() { return kiakai.flags.Attitude < KiakaiFlags.Attitude.Neutral; });
+					}, 1.0, () => kiakai.flags.Attitude < KiakaiFlags.Attitude.Neutral);
 
 					scenes.Get();
 				}, 1.0);
-				scenes.AddEnc(function() {
+				scenes.AddEnc(() => {
 					Text.Add("Edged on by your encouragement, [name] shifts around so that [heshe] is kneeling beside your prone form, leaving [himher] with full access to your [cock]. [HeShe] grasps the erect member with both hands, trying [hisher] best to pleasure you.", parse);
 					Text.NL();
 					Text.Add("<i>“Just... like... that!”</i> You moan, urging [himher] to keep up the pace. Understanding dawns on [name]'s face, blushing at your praise, [heshe] keeps jerking your [cock], determined to make you cum. [HeShe] isn't forced to wait long.", parse);
 					Text.NL();
 
 					const scenes = new EncounterTable();
-					scenes.AddEnc(function() {
+					scenes.AddEnc(() => {
 						Text.Add("With a sharp cry, you let loose your flood, ", parse);
 						if (player.CumOutput() > 3) {
 							Text.Add("your [cock] exploding with cum in the poor elf's hands.", parse);
@@ -393,7 +393,7 @@ KiakaiSex.HealingNice = function() {
 						}
 						Text.NL();
 					}, 1.0);
-					scenes.AddEnc(function() {
+					scenes.AddEnc(() => {
 						Text.Add("In a rather uncharacteristic move, [name] leans down to plant a kiss on your trembling [cock]. This plan backfires, though, as you pick that exact moment to hit your peak.", parse);
 						Text.NL();
 
@@ -507,15 +507,15 @@ KiakaiSex.HealingNice = function() {
 						// TODO: More variations
 						const scenes = new EncounterTable();
 						/*
-						scenes.AddEnc(function() {
+						scenes.AddEnc(() => {
 							Text.Add("", parse);
 							Text.NL();
 							Gui.NextPrompt();
-						}, 1.0, function() { return true; });
+						}, 1.0, () => true);
 						*/
 
 						// Fingering variation
-						scenes.AddEnc(function() {
+						scenes.AddEnc(() => {
 							if (player.FirstVag() && Math.random() < 0.5) {
 								Text.Add("You are suddenly distracted from the exquisite blowjob by two lithe fingers probing at your moist [vag]. Gasping in surprise, you moan appreciatively as the elf slowly begins to touch your female parts.", parse);
 								Text.NL();
@@ -593,7 +593,7 @@ KiakaiSex.HealingNice = function() {
 								});
 								/* TODO: finish punish scene
 								options.push({ nameStr : "Punish",
-									func : function() {
+									func : () => {
 										Text.Clear();
 										Gui.Callstack.pop();
 										Text.Add("", parse);
@@ -608,10 +608,10 @@ KiakaiSex.HealingNice = function() {
 							}
 						},
 						// TODO: Temp, have an adjustable variable
-						function() { return 0.5; },
-						function() { return kiakai.flags.Sexed > 20; });
+						() => 0.5,
+						() => kiakai.flags.Sexed > 20);
 
-						scenes.AddEnc(function() {
+						scenes.AddEnc(() => {
 							if (kiakai.flags.Sexed > 10) {
 								Text.Add("The sudden tightening of your [cock] gives the elf all the warning needed. [HeShe] begins to deepthroat you repeatedly, massaging you with the muscles at the back of [hisher] throat. Moaning loudly, you give [name] what [heshe] wants: a generous serving of hot spunk, delivered directly from the tap. ", parse);
 								const cum = player.OrgasmCum();
@@ -630,12 +630,12 @@ KiakaiSex.HealingNice = function() {
 							}
 							Text.Flush();
 							Gui.NextPrompt();
-						}, 1.0, function() { return true; });
+						}, 1.0, () => true);
 
 						scenes.Get();
 
 						// Note, put this here because of intermediate options
-						Gui.Callstack.push(function() {
+						Gui.Callstack.push(() => {
 							Text.Clear();
 							if (kiakai.flags.Sexed > 10) {
 								Text.Add("You could swear that [name] is enjoying these healing sessions more than [hisher] prim demeanor lets on. The two of you gather yourselves, preparing to set out again.", parse);
@@ -757,7 +757,7 @@ KiakaiSex.HealingNice = function() {
 				Text.NL();
 
 				const scenes = new EncounterTable();
-				const defScene = function() {
+				const defScene = () => {
 					Text.Add("In an effort to get better access, [name] spreads your netherlips with [hisher] nimble fingers, exposing your inner walls. [HisHer] [ktongue] thoroughly explores each part before penetrating deeper into your folds, delving into your tunnel. [HisHer] flexible organ works you into a frenzy, not going as deep as a cock fucking you, but constantly flexing and probing you in different ways.", parse);
 					Text.NL();
 					Text.Add("Before long, you are not the only one moaning, as the smell and taste of your sex slowly drives the elf over the edge. [HeShe] withdraws one of [hisher] hands from your labia, reaching down between [hisher] legs to see to [hisher] own urges.", parse);
@@ -779,8 +779,8 @@ KiakaiSex.HealingNice = function() {
 					Text.Flush();
 					Gui.NextPrompt();
 				};
-				scenes.AddEnc(defScene, 1.0, function() { return true; });
-				scenes.AddEnc(function() {
+				scenes.AddEnc(defScene, 1.0, () => true);
+				scenes.AddEnc(() => {
 					Text.Add("Switching tactics, the elf withdraws [hisher] [ktongue], leaving your folds open for assault from [hisher] deft fingers. Being very careful and gentle, [name] inserts two digits into your slippery [vag], probing your depths. While [hisher] fingers are busy, [name] focuses [hisher] oral attention on your [clit], proving to be an excellent multitasker.", parse);
 					Text.NL();
 
@@ -830,7 +830,7 @@ KiakaiSex.HealingNice = function() {
 						});
 						/* TODO: Finish scene
 						options.push({ nameStr : "Punish",
-							func : function() {
+							func : () => {
 								Text.Clear();
 								Text.Add("", parse);
 								Text.NL();
@@ -856,8 +856,8 @@ KiakaiSex.HealingNice = function() {
 						Text.Flush();
 						Gui.NextPrompt();
 					}
-				}, 1.0, function() { return true; });
-				scenes.AddEnc(function() {
+				}, 1.0, () => true);
+				scenes.AddEnc(() => {
 					Text.Add("Without letting up [hisher] assault on your netherlips, [name] gently tugs on your [cocks], determined to pleasure your male endowment[s] as well. [HisHer] deft fingers caress your length[s], playfully tracing the veins on the pulsating member[s].", parse);
 					Text.NL();
 					Text.Add("More than pleased with the dual attention you are given, you decide to help out, grabbing[oneof] your [cocks] and heartily jerking yourself off while the elf administers [hisher] healing skills on your [vag]. Before long, your trembling [legs] announce[lnotS] your approaching orgasm.", parse);
@@ -872,7 +872,7 @@ KiakaiSex.HealingNice = function() {
 
 						if (cum > 3) {
 							Text.Add("Abandoning all efforts to try to swallow all of it for fear of drowning, [name] instead frees your [cockTip] from [hisher] mouth, letting the rest of your load cover [hisher] face, hair, and clothes", parse);
-							parse.count = player.NumCocks() == 2 ? "your other" : "the rest of your";
+							parse.count = player.NumCocks() === 2 ? "your other" : "the rest of your";
 							if (player.NumCocks() > 1) {
 								Text.Add(", where it joins the eruptions from [count] untended cock[s].", parse);
 							} else {
@@ -880,7 +880,7 @@ KiakaiSex.HealingNice = function() {
 							}
 							Text.NL();
 						} else if (player.NumCocks() > 1) {
-							parse.count = player.NumCocks() == 2 ? "the other one is" : "the rest are";
+							parse.count = player.NumCocks() === 2 ? "the other one is" : "the rest are";
 							Text.Add("Although [heshe] manages to gulp down the entire load from one of your [cocks], [count] left unattended, splattering the elf's face, hair, and clothes in your warm cum.", parse);
 							Text.NL();
 						}
@@ -906,8 +906,8 @@ KiakaiSex.HealingNice = function() {
 					}
 					Text.Flush();
 					Gui.NextPrompt();
-				}, 1.0, function() { return player.FirstCock(); });
-				scenes.AddEnc(function() {
+				}, 1.0, () => player.FirstCock());
+				scenes.AddEnc(() => {
 					Text.Add("By this time, [name] knows just what to do to get you off. Electric shocks run through your tingling labia as [heshe] administers a spark of healing energy with the tip of [hisher] [ktongue]. The sparks quickly home in on the most prominent feature of your feminine anatomy: your [clit].", parse);
 					Text.NL();
 					Text.Add("The elf isn't even touching you anymore; [heshe] is just letting [hisher] healing power do the work. [HeShe] lets [hisher] [ktongue] hover a hair's breadth away from your [vag], a tiny beam of refreshing energy bridging the gap between the two of you.", parse);
@@ -931,11 +931,11 @@ KiakaiSex.HealingNice = function() {
 					Text.Add("Resting in the afterglow, you caress your elvish lover's cheek fondly.", parse);
 					Text.Flush();
 					Gui.NextPrompt();
-				}, 1.0, function() { return (kiakai.flags.Sexed > 15); });
+				}, 1.0, () => (kiakai.flags.Sexed > 15));
 
 				scenes.Get();
 
-				Gui.Callstack.push(function() {
+				Gui.Callstack.push(() => {
 					Text.Clear();
 					if (kiakai.flags.Sexed > 10) {
 						Text.Add("<i>“You always taste so good, [playername],”</i> [name] tells you dreamily, running [hisher] tongue over [hisher] lips. The two of you start cleaning up and re-equipping your gear. <i>“Lately, I have found myself wanting to drink from you more and more,”</i> [heshe] admits, blushing cutely.", parse);
@@ -975,9 +975,9 @@ KiakaiSex.HealingNice = function() {
 				Text.Add("your breathing uniting as one.", parse);
 			} else if (player.LustLevel() > kiakai.LustLevel()) {
 				Text.Add("your rapid breathing a counterpoint to [hisher] slower breaths.", parse);
- } else {
+ 			} else {
 				Text.Add("[hisher] rapid breathing a counterpoint to your slower breaths.", parse);
- }
+ 			}
 			Text.NL();
 			Text.Add("After enjoying each other's closeness for a while, you regretfully decide that it's time to get going, and tell as much to the elf, reluctantly disentangling yourself from [himher]. As the two of you stand up and get dressed, you notice [name] glancing at you from time to time, a bright blush on [hisher] cheeks.", parse);
 
@@ -1000,7 +1000,7 @@ KiakaiSex.HealingNice = function() {
 	Gui.SetButtonsFromList(options);
 };
 
-KiakaiSex.PleasureElf = function() {
+KiakaiSex.PleasureElf = () => {
 	const player = GAME().player;
 	const kiakai = GAME().kiakai;
 
@@ -1008,7 +1008,7 @@ KiakaiSex.PleasureElf = function() {
 		playername : player.name,
 		name    : kiakai.name,
 		heatStirring : player.FirstCock() ? "stirring" : "heat",
-		priest       : kiakai.flags.InitialGender == Gender.male ? "priest" : "priestess",
+		priest       : kiakai.flags.InitialGender === Gender.male ? "priest" : "priestess",
 		eyeColor     : Color.Desc(kiakai.Eyes().color),
 	};
 
@@ -1016,8 +1016,8 @@ KiakaiSex.PleasureElf = function() {
 	parse = kiakai.ParserTags(parse, "k");
 	parse = player.ParserTags(parse);
 
-	parse.kgen = kiakai.FirstCock() ? function() { return kiakai.MultiCockDesc(); } :
-					kiakai.FirstVag() ? function() { return kiakai.FirstVag().Short(); } :
+	parse.kgen = kiakai.FirstCock() ? () => kiakai.MultiCockDesc() :
+					kiakai.FirstVag() ? () => kiakai.FirstVag().Short() :
 					"featureless crotch";
 	parse.stutterName = player.name[0] + "-" + player.name;
 
@@ -1059,9 +1059,9 @@ KiakaiSex.PleasureElf = function() {
 					Text.Add(" By now, it has grown so large that you can use two hands to stroke [hisher] length.", parse);
 				} else if (kiakai.HasBalls()) {
 					Text.Add(" Your free hand continues to play with [hisher] [kballs], massaging each testicle between your fingers.", parse);
- } else {
+ 				} else {
 					Text.Add(" Your free hand keeps on exploring [name]'s body, never staying in one place for long.", parse);
- }
+ 				}
 				Text.NL();
 				Text.Add("The elf gasps as you slowly begin to jerk [hisher] [kcock], massaging it from tip to stem.", parse);
 				Text.NL();
@@ -1167,11 +1167,11 @@ KiakaiSex.PleasureElf = function() {
 					Text.Add("<i>“I... never knew it would feel like this,”</i> [name] moans happily.", parse);
 				} else if (kiakai.flags.Sexed < 20) {
 					Text.Add("<i>“M-my cock... t-thank you, [playername],”</i> [name] sighs contentedly.", parse);
- } else if (player.FirstCock()) {
+ 				} else if (player.FirstCock()) {
 					Text.Add("<i>“That was great, [playername],”</i> [name] murmurs, <i>“I wish I could do the same for you...”</i>", parse);
- } else {
+ 				} else {
 					Text.Add("<i>“You are amazing, [playername],”</i> [name] sighs contentedly.", parse);
- }
+ 				}
 				Text.NL();
 
 				Sex.Blowjob(player, kiakai);
@@ -1387,7 +1387,7 @@ KiakaiSex.PleasureElf = function() {
 				Text.Add("You trail one finger down the length of the elf's [kcocks], even placing a kiss on[oneof] [hisher] [kcockTip][s]", parse);
 			} else if (kiakai.FirstVag()) {
 				Text.Add("You trail one finger down the elf's tight slit, even placing a kiss on [hisher] [kclit]", parse);
- }
+ 			}
 			Text.Add(", before shifting your attention to the rest of [hisher] body, intentionally avoiding the spot [name] wants you to touch the most.", parse);
 			Text.NL();
 			Text.Add("When the elf makes another attempt to deal with the problem by [himher]self, you grab hold of both of [hisher] hands, trapping them against [hisher] sides. Unimpeded, you continue your slow torture, licking and lapping at [name]'s crotch, close enough to feel the heat of [hisher] [ktarget], but never quite touching it.", parse);
@@ -1396,7 +1396,7 @@ KiakaiSex.PleasureElf = function() {
 				Text.Add("The elf moans piteously, a drop of pre-cum forming on the tip of [hisher] twitching member.", parse);
 			} else if (kiakai.FirstVag()) {
 				Text.Add("The elf bites [hisher] lip, struggling to keep [himher]self from thrusting [hisher] moist crotch against your tantalizing [tongue].", parse);
- }
+ 			}
 			Text.NL();
 			Text.Add("<i>“I-I cannot take it any longer!”</i> [name] cries out. Taking pity on [himher], you relinquish your grip on [hisher] arms, allowing the elf to take [himher]self the rest of the way. You lean back, thoroughly enjoying the sight of your horny companion fondling [himher]self.", parse);
 			Text.NL();
@@ -1426,7 +1426,7 @@ KiakaiSex.PleasureElf = function() {
 	Gui.SetButtonsFromList(options);
 };
 
-KiakaiSex.PleasureElfEnd = function() {
+KiakaiSex.PleasureElfEnd = () => {
 	const player = GAME().player;
 	const kiakai = GAME().kiakai;
 
@@ -1448,7 +1448,7 @@ KiakaiSex.PleasureElfEnd = function() {
 	Gui.NextPrompt(kiakai.Interact);
 };
 
-KiakaiSex.HealingAssertive = function() {
+KiakaiSex.HealingAssertive = () => {
 	const player = GAME().player;
 	const kiakai = GAME().kiakai;
 
@@ -1468,11 +1468,11 @@ KiakaiSex.HealingAssertive = function() {
 	parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
 
 	parse.stuttername = player.name[0] + "-" + player.name;
-	parse.gen = player.FirstCock() ? function() { return player.MultiCockDesc(); } :
-					player.FirstVag() ? function() { return player.FirstVag().Short(); } :
+	parse.gen = player.FirstCock() ? () => player.MultiCockDesc() :
+					player.FirstVag() ? () => player.FirstVag().Short() :
 					"featureless crotch";
-	parse.kgen = kiakai.FirstCock() ? function() { return kiakai.MultiCockDesc(); } :
-					kiakai.FirstVag() ? function() { return kiakai.FirstVag().Short(); } :
+	parse.kgen = kiakai.FirstCock() ? () => kiakai.MultiCockDesc() :
+					kiakai.FirstVag() ? () => kiakai.FirstVag().Short() :
 					"featureless crotch";
 
 	// TODO: Write more scenes
@@ -1517,7 +1517,7 @@ KiakaiSex.HealingAssertive = function() {
 
 				const scenes = new EncounterTable();
 				// DEEPTHROAT
-				scenes.AddEnc(function() {
+				scenes.AddEnc(() => {
 					Text.Add("[name] has some trouble getting [hisher] breath as your [cock] stuffs [hisher] mouth to the brim, the [cockTip] prodding at the back of [hisher] throat. The elf tries to push [himher]self off your cock, but you grip [himher] firmly, restricting [hisher] movements.", parse);
 					Text.NL();
 					Text.Add("Furtively at first, but rapidly growing more desperate, [name] tries to escape your iron grasp. Relenting slightly, you pull your [cock] out far enough to allow [himher] to breathe through [hisher] nose. [name] gazes up at you with gratitude, but [hisher] relief is short lived as you once again feed your length down [hisher] tight esophagus.", parse);
@@ -1551,9 +1551,9 @@ KiakaiSex.HealingAssertive = function() {
 					Text.Add("With a drawn-out sloppy sound, you pull your softening [cock] from the elf's throat. Once [heshe] has finished coughing, a dribble of cum running down [hisher] chin, you present [himher] with your cum-coated cock.", parse);
 					Text.NL();
 					Text.Add("<i>“Clean it up, like a good slut,”</i> you order [himher] imperiously, smiling as the elf obediently complies.", parse);
-				}, 1.0, function() { return biggestCockLen > 20; });
+				}, 1.0, () => biggestCockLen > 20);
 				// FACEFUCK
-				scenes.AddEnc(function() {
+				scenes.AddEnc(() => {
 					Text.Add("Seeking to get a better angle of penetration, you adjust your lower body, twining your fingers into [name]'s hair, trapping [himher] in place. Intending to get your pleasure out of the elf, and to get it rough, you start thrusting in and out of [hisher] mouth, ignoring [hisher] whimpering complaints.", parse);
 					Text.NL();
 					Text.Add("You set a rapid pace, abusing the poor elf's hole. ", parse);
@@ -1561,9 +1561,9 @@ KiakaiSex.HealingAssertive = function() {
 						Text.Add("Due to the sheer size of your [cock], you are unable to use its full length. Alternating between roughly deepthroating the elf and repeatedly forcing your way in and out of [hisher] throat, you make the most of it anyway.", parse);
 					} else if (biggestCockLen > 13) {
 						Text.Add("Your cock is just long enough to force its way into the elf's throat with each powerful thrust, leaving the elf gasping for air as you pummel [hisher] mouth.", parse);
- } else {
+ 					} else {
 						Text.Add("Roughly smashing your crotch against [hisher] lips, you pummel the elf, making sure to familiarize [himher] with every inch of your [cock].", parse);
- }
+ 					}
 					Text.NL();
 					Text.Add("Hardly given time to breathe, [name]'s muffled moans grow more ragged. Not showing any signs of letting up, you continue your facefucking for several minutes. In a small act of mercy, you pull out in order to let the elf recover.", parse);
 					Text.NL();
@@ -1579,39 +1579,31 @@ KiakaiSex.HealingAssertive = function() {
 					const cum = player.OrgasmCum();
 
 					const scenes = new EncounterTable();
-					scenes.AddEnc(function() {
+					scenes.AddEnc(() => {
 						Text.Add("Deciding to push on and leave the elf with a surprise present, you continue thrusting your throbbing [cock] into [hisher] mouth, hardly slowing down even as you begin to spill your seed inside [himher]. Part of your load seeps out of the corner of [name]'s mouth, dribbling down [hisher] chin.", parse);
 						if (cum > 3) {
 							Text.Add(" Another thread of sticky semen forces its way out [hisher] nose, the elf overwhelmed by the amount of cum you produce.", parse);
 						}
-					}, 1.0, function() { return true; });
-					scenes.AddEnc(function() {
+					}, 1.0, () => true);
+					scenes.AddEnc(() => {
 						Text.Add("You pull your throbbing [cock] away from the elf, excitedly jerking your length in front of [name]'s open, panting mouth. Still slightly disoriented from the rough fuck, [heshe] doesn't seem to notice until the first wad lands on [hisher] [ktongue].", parse);
 						Text.NL();
 						Text.Add("Moaning, you deposit your sticky load on the elf, some of the shots hitting [hisher] mouth by sheer luck. Most miss their mark, landing on [name]'s cheeks or in [hisher] hair.", parse);
 						if (cum > 3) {
 							Text.Add(" Once you are done, the elf's face - and most of [hisher] front - is covered in a sticky mess.", parse);
 						}
-					}, 1.0, function() { return true; });
+					}, 1.0, () => true);
 					scenes.Get();
-				}, 1.0, function() { return true; });
+				}, 1.0, () => true);
 				/* TODO: more scenes
-				scenes.AddEnc(function() {
+				scenes.AddEnc(() => {
 					Text.Add("", parse);
 					Text.NL();
 					Text.Add("", parse);
 					Text.NL();
 					Text.Add("", parse);
 					Text.NL();
-				}, 1.0, function() { return true; });
-				scenes.AddEnc(function() {
-					Text.Add("", parse);
-					Text.NL();
-					Text.Add("", parse);
-					Text.NL();
-					Text.Add("", parse);
-					Text.NL();
-				}, 1.0, function() { return true; });
+				}, 1.0, () => true);
 				*/
 				scenes.Get();
 
@@ -1652,11 +1644,11 @@ KiakaiSex.HealingAssertive = function() {
 					Text.Add("<i>“You want me to... there?”</i> The elf blushes, casting furtive glances at your exposed crotch.", parse);
 				} else if (kiakai.flags.Sexed < 20) {
 					Text.Add("<i>“I-if you want me to,”</i> the elf mumbles, [hisher] expression a beautiful mix of lust and embarrassment. [HeShe] refuses to meet your eyes, [hisher] hands fidgeting.", parse);
- } else {
+ 				} else {
 					Text.Add("<i>“C-can I?”</i> The elf looks a bit flustered, but [heshe] is clearly eager to serve you.", parse);
- }
+ 				}
 				Text.NL();
-				parse.lowerbody = player.LowerBodyType() == LowerBodyType.Single ? Text.Parse("to your [vag]", parse) : "between your legs";
+				parse.lowerbody = player.LowerBodyType() === LowerBodyType.Single ? Text.Parse("to your [vag]", parse) : "between your legs";
 				Text.Add("Nodding impatiently, you guide [hisher] head down [lowerbody], positioning yourself within reach of the elf's [ktongue]. Any lingering inhibitions shattered by your insistence, [name] leans in to pleasure you as best as [heshe] can.", parse);
 				Text.NL();
 				parse.bothtwo = player.Arms().count > 2 ? "two" : "both";
@@ -1678,20 +1670,20 @@ KiakaiSex.HealingAssertive = function() {
 				Text.NL();
 
 				const scenes = new EncounterTable();
-				scenes.AddEnc(function() {
+				scenes.AddEnc(() => {
 					Text.Add("Shaking your head in disappointment, you push [name] back. The elf looks confused, wondering what [heshe] did wrong. <i>“[playername]?”</i> [heshe] asks uncertainly. You push [himher] down on [hisher] back, silencing the elf with a deep kiss. As you withdraw, a string of saliva mixed with your own juices briefly bridges the gap between [name]'s mouth and yours. Not allowing [name] to get back on [hisher] feet, you quickly straddle [hisher] face, your [butt] resting lightly on [hisher] [kbreasts].", parse);
 					Text.NL();
 
 					const scenes = new EncounterTable();
-					scenes.AddEnc(function() {
+					scenes.AddEnc(() => {
 						Text.Add("<i>“Mmm... not bad, but perhaps you still need some guidance...”</i>", parse);
-					}, 1.0, function() { return true; });
-					scenes.AddEnc(function() {
+					}, 1.0, () => true);
+					scenes.AddEnc(() => {
 						Text.Add("<i>“You do it like this!”</i>", parse);
-					}, 1.0, function() { return true; });
-					scenes.AddEnc(function() {
+					}, 1.0, () => true);
+					scenes.AddEnc(() => {
 						Text.Add("<i>“[name],”</i> you smile wickedly, shaking your head, <i>“I see you still have much to learn...”</i>", parse);
-					}, 1.0, function() { return true; });
+					}, 1.0, () => true);
 
 					scenes.Get();
 
@@ -1719,13 +1711,13 @@ KiakaiSex.HealingAssertive = function() {
 					Text.NL();
 					parse.juice = player.FirstCock() ? "the combined fluids of your male and female parts" : "your juices";
 					Text.Add("Feeling your own orgasm surging through your body, you switch gears, grasping your lover's head in your hands and pressing down on [himher] with your crotch. You cry out as waves of pleasure run through you, drenching the elf in [juice].", parse);
-				}, 1.0, function() { return player.LowerBodyType() != LowerBodyType.Single; });
+				}, 1.0, () => player.LowerBodyType() !== LowerBodyType.Single);
 				/* TODO: Scene not requiring legs
-				scenes.AddEnc(function() {
+				scenes.AddEnc(() => {
 					Text.Add("", parse);
 					Text.NL();
 					Text.Add("", parse);
-				}, 1.0, function() { return true; });
+				}, 1.0, () => true);
 				*/
 				scenes.Get();
 
@@ -1790,7 +1782,7 @@ KiakaiSex.HealingAssertive = function() {
 			Text.Clear();
 			parse.emo     = kiakai.flags.Sexed > 15 ? "eagerly" : "fearfully";
 			parse = Text.ParserPlural(parse, kiakai.NumCocks() > 1);
-			parse.boygirl = kiakai.Gender() == Gender.male ? "boy" : "girl";
+			parse.boygirl = kiakai.Gender() === Gender.male ? "boy" : "girl";
 			Text.Add("<i>“On second thought...”</i> you tell the elf to lie down on [hisher] back. [name] complies, [emo] awaiting what you are going to do. Smirking, you take in the sight of the nude elf before you.", parse);
 			Text.NL();
 			if (kiakai.FirstCock() && kiakai.FirstVag()) {
@@ -1841,7 +1833,7 @@ KiakaiSex.HealingAssertive = function() {
 			Text.Flush();
 
 			// REUSED DIALOGUE
-			const KIAI1 = function() {
+			const KIAI1 = () => {
 				if (player.FirstCock()) {
 					parse.mouthThroat = player.FirstCock().length.Get() > 15 ? "throat" : "mouth";
 					Text.Add("The elf groans under your cruel teasing, [hisher] complaints somewhat distorted by the [cock] lodged in [hisher] [mouthThroat]. You ignore [himher], shutting [himher] up by feeding some more of your [cock] into [himher].", parse);
@@ -1859,7 +1851,7 @@ KiakaiSex.HealingAssertive = function() {
 					Text.Add(" Your stiff [nips] poke against [hisher] stomach, dragging back and forth as you grind your hips against [name]'s mouth.", parse);
 				}
 			};
-			const KIAI2 = function() {
+			const KIAI2 = () => {
 				const cum = player.OrgasmCum();
 				if (player.FirstCock()) {
 					Text.Add("Your own climax is building, and you are not going to accept being deterred from it. A few quick thrusts relieve your stress, letting wave after wave of hot spunk flow into the throat of the prone elf.", parse);
@@ -2053,7 +2045,7 @@ KiakaiSex.HealingAssertive = function() {
 
 						Text.Flush();
 
-						Gui.NextPrompt(function() {
+						Gui.NextPrompt(() => {
 							Text.Clear();
 							Text.Add("There, much better.", parse);
 							Text.NL();
@@ -2117,14 +2109,14 @@ KiakaiSex.HealingAssertive = function() {
 					Text.NL();
 					Text.Add("You ask [himher] if [heshe] wants you to keep going. Moaning affirmation. How deep? Loud moan. You flex your fingers, a wicked smile on your face. This time, entry is easier, as [name] has relaxed completely, accepting whatever you push into [himher].", parse);
 
-					parse.pen = function() { return Text.Parse("the [toy]", parse); };
+					parse.pen = () => Text.Parse("the [toy]", parse);
 
 					Text.Flush();
 
 					const options = new Array();
 					options.push({ nameStr : "Fingers",
 						func() {
-							parse.pen = function() { return Math.random() > 0.5 ? "your fingers" : "your digits"; };
+							parse.pen = () => Math.random() > 0.5 ? "your fingers" : "your digits";
 							Text.Clear();
 							Text.Add("By now, three fingers hardly offer any resistance, so you add another one to the mix. You build up a rapid rhythm, plunging deep inside [name]'s [kanus].", parse);
 							if (kiakai.FirstCock()) {
@@ -2137,7 +2129,7 @@ KiakaiSex.HealingAssertive = function() {
 					if (player.LongTongue()) {
 						options.push({ nameStr : "Tongue",
 							func() {
-								parse.pen = function() { return Text.Parse("your [tongue]", parse); };
+								parse.pen = () => Text.Parse("your [tongue]", parse);
 								Text.Clear();
 								Text.Add("Your [tongue], rival to a cock in length, snakes out and buries itself deep inside [name], immediately beginning to thrust in and out.", parse);
 								if (kiakai.FirstCock()) {
@@ -2149,7 +2141,7 @@ KiakaiSex.HealingAssertive = function() {
 						});
 					}
 
-					const addToy = function(toy: any) {
+					const addToy = (toy: any) => {
 						if (GAME().party.inventory.QueryNum(toy)) {
 							const toySize = toy.cock.length.Get();
 							const cap = kiakai.Butt().capacity.Get() * (0.75 + kiakai.LustLevel() + kiakai.flags.AnalExp / 100);
@@ -2178,7 +2170,7 @@ KiakaiSex.HealingAssertive = function() {
 											Text.Add(" The cock lodged in [hisher] throat might also have something to do with it.", parse);
 										} else if (player.FirstVag()) {
 											Text.Add(" That [hisher] [ktongue] is buried in your [cuntAss] might also have something to do with it.", parse);
- }
+ 										}
 										Text.NL();
 										Text.Add("With the help of some lube, you are able to stuff the [toy] into the elf with relative ease, only meeting serious resistance once most of [itThem] rests deep within [himher].", parse);
 									} else {
@@ -2204,7 +2196,7 @@ KiakaiSex.HealingAssertive = function() {
 					addToy(ToysItems.CanidDildo);
 					addToy(ToysItems.ChimeraDildo);
 
-					Gui.Callstack.push(function() {
+					Gui.Callstack.push(() => {
 						Text.NL();
 						Text.Add("It's not long before [name]'s filled [kanus] constricts, and the elf's entire body shakes in pleasure. With a nudge of your [hips], you remind [himher] to return the favor. [HeShe] meekly complies, going down on your nethers with renewed vigor.", parse);
 						Text.NL();
@@ -2228,7 +2220,7 @@ KiakaiSex.HealingAssertive = function() {
 						}
 						Text.Flush();
 
-						Gui.NextPrompt(function() {
+						Gui.NextPrompt(() => {
 							Text.Clear();
 							Text.Add("Finally, you figure enough is enough. [name] probably can't cum more anyway. Gathering up your gear, you poke at the exhausted elf, telling [himher] to get up. [HeShe] scrambles after you, still disoriented.", parse);
 							Text.Flush();
@@ -2296,7 +2288,7 @@ KiakaiSex.HealingAssertive = function() {
 				Text.Add(". The elf, despite [hisher] protests, seems to be really getting into it, if the fluids dripping on your [thighs] are any indication.", parse);
 				Text.NL();
 
-				if (kiakai.flags.AnalExp == 1) {
+				if (kiakai.flags.AnalExp === 1) {
 					Text.Add("<i>“You really seem to like this kind of stuff, you know,”</i> you muse, reminding [himher] of your first meeting, and the way it ended.", parse);
 					Text.NL();
 				}
@@ -2318,11 +2310,11 @@ KiakaiSex.HealingAssertive = function() {
 				let numFingers = 0;
 
 				const scenes = new EncounterTable();
-				scenes.AddEnc(function() {
+				scenes.AddEnc(() => {
 					Text.Add("<i>“You know well what's coming,”</i> you tease [himher], sucking on first one, then another, and finally a third finger. [name]'s eyes widen slightly with each digit you prepare, gulping.", parse);
 					numFingers = 3;
-				}, 1.0, function() { return true; });
-				scenes.AddEnc(function() {
+				}, 1.0, () => true);
+				scenes.AddEnc(() => {
 					Text.Add("<i>“Tell you what, this time, why don't you decide?”</i> you suggest, presenting [name] with your hand, urging [himher] to prepare as many as [heshe] thinks [heshe] can take.", parse);
 					Text.NL();
 
@@ -2339,7 +2331,7 @@ KiakaiSex.HealingAssertive = function() {
 						case 4: Text.Add("Lustfully inspecting your fingers, [name] prepares one after another, lathering up four of them with [hisher] tongue.", parse); break;
 						case 5: Text.Add("Unmistakable lust in [hisher] eyes, [name] eagerly lathers each of your fingers slowly, coating all of them in saliva. When [heshe] is done with your fingers, the elf proceeds to lick the back of your hand.", parse); break;
 					}
-				}, 1.0, function() { return true; });
+				}, 1.0, () => true);
 				scenes.Get();
 
 				player.AddSexExp(2);
@@ -2418,7 +2410,7 @@ KiakaiSex.HealingAssertive = function() {
 	Gui.SetButtonsFromList(options);
 };
 
-KiakaiSex.Sex = function() {
+KiakaiSex.Sex = () => {
 	const player = GAME().player;
 	const kiakai = GAME().kiakai;
 
@@ -2440,14 +2432,14 @@ KiakaiSex.Sex = function() {
 	parse = player.ParserTags(parse);
 
 	parse.stuttername = player.name[0] + "-" + player.name;
-	parse.gen = player.FirstCock() ? function() { return player.MultiCockDesc(); } :
-					player.FirstVag() ? function() { return player.FirstVag().Short(); } :
+	parse.gen = player.FirstCock() ? () => player.MultiCockDesc() :
+					player.FirstVag() ? () => player.FirstVag().Short() :
 					"featureless crotch";
-	parse.kgen = kiakai.FirstCock() ? function() { return kiakai.MultiCockDesc(); } :
-					kiakai.FirstVag() ? function() { return kiakai.FirstVag().Short(); } :
+	parse.kgen = kiakai.FirstCock() ? () => kiakai.MultiCockDesc() :
+					kiakai.FirstVag() ? () => kiakai.FirstVag().Short() :
 					"featureless crotch";
 
-	if (kiakai.flags.TalkedSex == 0) {
+	if (kiakai.flags.TalkedSex === 0) {
 		Text.Add("<i>“[name]...”</i> you start out, uncertain how to broach the topic.", parse);
 		Text.NL();
 		Text.Add("<i>“Yes, [playername], what is on your mind?”</i> the elf responds curiously.", parse);
@@ -2552,7 +2544,7 @@ KiakaiSex.Sex = function() {
 		Text.Flush();
 
 		Gui.NextPrompt(kiakai.Interact);
-	} else if (kiakai.flags.TalkedSex == 2) {
+	} else if (kiakai.flags.TalkedSex === 2) {
 		Text.Add("You ask [name] if [heshe] remembers what you talked about before. [HeShe] blushes once [heshe] realize what you mean.", parse);
 		Text.NL();
 		Text.Add("<i>“R-really? Here? Now?”</i> [heshe] mumbles, fiddling with the hem of [hisher] dress. <i>“V-very well. How... will you have me?”</i>", parse);
@@ -2635,7 +2627,7 @@ KiakaiSex.Sex = function() {
 					Text.Add("[name] blushes, but grabs hold of[oneof] [hisher] [kcocks], slowly jerking the member as [heshe] sways [hisher] [khips] at you. ", parse);
 				} else if (kiakai.FirstVag()) {
 					Text.Add("[name] blushes, but dips the fingers of one hand into [hisher] slick [kvag], teasing the outer folds. ", parse);
- }
+ 				}
 				Text.Add("The elf licks the digits of [hisher] other hand, coating them in slick saliva. Once sufficiently prepared, [heshe] eases one, then two fingers inside [hisher] [kanus].", parse);
 				Text.NL();
 				Text.Add("You can hardly contain your eagerness, all but wiggling your fingers as you edge closer to [name]. Reaching around, you pull the elf close to you, almost throwing [himher] off balance.", parse);
@@ -2675,7 +2667,7 @@ KiakaiSex.Sex = function() {
 	}
 };
 
-KiakaiSex.SexPrompt = function(attitude: number) {
+KiakaiSex.SexPrompt = (attitude: number) => {
 	const player = GAME().player;
 	const party: Party = GAME().party;
 	const kiakai = GAME().kiakai;
@@ -2698,11 +2690,11 @@ KiakaiSex.SexPrompt = function(attitude: number) {
 	parse = player.ParserTags(parse);
 
 	parse.stuttername = player.name[0] + "-" + player.name;
-	parse.gen = player.FirstCock() ? function() { return player.MultiCockDesc(); } :
-					player.FirstVag() ? function() { return player.FirstVag().Short(); } :
+	parse.gen = player.FirstCock() ? () => player.MultiCockDesc() :
+					player.FirstVag() ? () => player.FirstVag().Short() :
 					"featureless crotch";
-	parse.kgen = kiakai.FirstCock() ? function() { return kiakai.MultiCockDesc(); } :
-					kiakai.FirstVag() ? function() { return kiakai.FirstVag().Short(); } :
+	parse.kgen = kiakai.FirstCock() ? () => kiakai.MultiCockDesc() :
+					kiakai.FirstVag() ? () => kiakai.FirstVag().Short() :
 					"featureless crotch";
 
 	Text.Flush();
@@ -2717,7 +2709,7 @@ KiakaiSex.SexPrompt = function(attitude: number) {
 			const virgin = kiakai.Butt().virgin;
 
 			if (attitude) {
-				if (attitude == KiakaiFlags.SexFirstAttitude.Passive) {
+				if (attitude === KiakaiFlags.SexFirstAttitude.Passive) {
 					Text.Add("<i>“C-could you do that thing you said?”</i> [name] nervously queries you. Smiling coyly, you ask the elf to be more specific.", parse);
 					Text.NL();
 					Text.Add("<i>“Before, you said that... there were different ways to have penetrative sex,”</i> [heshe] finishes lamely. Getting an inkling of what [heshe] is after, you rub the elf's back, your hand trailing down toward [hisher] [kbutt].", parse);
@@ -2738,7 +2730,7 @@ KiakaiSex.SexPrompt = function(attitude: number) {
 					Text.Add("<i>“Enough, just do me already!”</i> [name] moans, past caring about [hisher] precious dignity anymore. The elf flips over on hands and knees, wriggling [hisher] [kbutt] at you invitingly.", parse);
 					Text.NL();
 					Text.Add("<i>“Imagine yourself before we met. Who would have thought you'd be begging to be fucked in the butt?”</i> you quip, throwing in one last mocking tease before striding to action.", parse);
-				} else if (attitude == KiakaiFlags.SexFirstAttitude.Mutual) {
+				} else if (attitude === KiakaiFlags.SexFirstAttitude.Mutual) {
 					Text.Add("<i>“Yeees, my [cockType] would fit quite nicely in your butt, wouldn't it?”</i> you purr. To accentuate your point, you give said butt a firm squeeze.", parse);
 					Text.NL();
 					Text.Add("<i>“I... I am sure,”</i> [name] yelps, <i>“there is o-only one way to find out, right?”</i>", parse);
@@ -2752,7 +2744,7 @@ KiakaiSex.SexPrompt = function(attitude: number) {
 					Text.Add("<i>“As ready as I will ever be,”</i> [name] responds nervously.", parse);
 					Text.NL();
 					Text.Add("<i>“Good...”</i> You smile at [himher] encouragingly. <i>“Now, get on all fours, and I'll give you a ride you are not likely to forget.”</i> The elf complies, spreading [hisher] legs expectantly.", parse);
-				} else if (attitude == KiakaiFlags.SexFirstAttitude.Assertive) {
+				} else if (attitude === KiakaiFlags.SexFirstAttitude.Assertive) {
 					Text.Add("<i>“I'm going to fuck you, and fuck you good,”</i> you state bluntly, your hand rubbing along your [cock].", parse);
 					Text.NL();
 					if (kiakai.FirstVag()) {
@@ -2801,7 +2793,7 @@ KiakaiSex.SexPrompt = function(attitude: number) {
 			const cap = kiakai.Butt().Cap();
 
 			// First time
-			if (kiakai.flags.SexPitchAnal == 0) {
+			if (kiakai.flags.SexPitchAnal === 0) {
 				Text.Add("<i>“W-will it hurt?”</i> [name] whimpers over [hisher] shoulder, sounding slightly worried.", parse);
 				Text.NL();
 				Text.Add("<i>“I'll take it slow and gentle,”</i> you promise reassuringly. While talking, you have lubed up the length of your [cock], preparing it for entry. Humming softly, you place the [cockTip] against [name]'s [kanus], applying pressure. Already, you can feel [hisher] sphincter expanding grudgingly.", parse);
@@ -2873,9 +2865,9 @@ KiakaiSex.SexPrompt = function(attitude: number) {
 					Text.Add("Your [cock] easily bottoms out in your groaning companion, joining the two of you at the hip[kpballs].", parse);
 				} else if (len < 35) {
 					Text.Add("It takes some effort, but soon all of your [cock] is lodged inside the groaning elf, testing the limits of [hisher] body.", parse);
- } else {
+ 				} else {
 					Text.Add("Try as you might, you can't fit all of your impressive length inside the groaning elf, leaving a significant portion of the [cock] outside as you strain against [name]'s physical limits.", parse);
- }
+ 				}
 			}
 			Text.NL();
 			Text.Add("<i>“I'm going to start moving now,”</i> you announce, beginning your slow withdrawal from [hisher] expanded tunnel. Leaving a trail of fire in the elf's ravaged innards, you pull your [cock] almost completely back out, preparing to plunge in again. Poised on the edge, with just the tip of your [cock] still resting inside the elf, you lovingly caress [hisher] bare behind.", parse);
@@ -2916,21 +2908,21 @@ KiakaiSex.SexPrompt = function(attitude: number) {
 						Text.Add("Though you try your best to be considerate, [name]'s first time is still a bit overwhelming for [himher]. [HisHer] limbs are trembling slightly as [heshe] does [hisher] best to keep [himher]self upright beneath your grinding.", parse);
 					} else if (kiakai.flags.AnalExp < 30) {
 						Text.Add("[name] does [hisher] best to enjoy your grinding, sometimes even pushing back against your [cock], desiring to have more of it fill [himher].", parse);
- } else {
+ 					} else {
 						Text.Add("A veteran of anal sex, [name] seems almost a bit disappointed at your slow pace, but plays along, pushing back against every one of your thrusts, intensifying [hisher] own pleasure. Amused, you give the elf a light slap on [hisher] bum, encouraging [himher] to let you do the work.", parse);
- }
+ 					}
 					Text.NL();
 
 					const scenes = new EncounterTable();
-					scenes.AddEnc(function() {
+					scenes.AddEnc(() => {
 						parse.s     = kiakai.NumCocks() > 1 ? "s" : "";
 						parse.oneof = kiakai.NumCocks() > 1 ? " one of" : "";
 						Text.Add("Reaching down, you grab hold of[oneof] [name]'s dangling cock[s]. The elf has become really hot and bothered from your tender pounding of [hisher] [kanus], and the [kcock] is stiff, the veins on it standing out as your fingers lightly dance over it.", parse);
 						Text.NL();
 						Text.Add("You caress it, causing a twitch to run through the stiff member, globs of pre splattering on the ground beneath [himher]. Closing your hand around it, you start to pump the [kcock] in time with the thrusts of your hips.", parse);
 						Text.NL();
-					}, 1.0, function() { return kiakai.FirstCock(); });
-					scenes.AddEnc(function() {
+					}, 1.0, () => kiakai.FirstCock());
+					scenes.AddEnc(() => {
 						Text.Add("A quick feel between [name]'s legs tell you that [hisher] [kvag] is soaked, the elf's clear juices trailing down one of [hisher] thighs. Smiling, you dip your fingers in the wet honey pot, then present them to [himher].", parse);
 						Text.NL();
 						Text.Add("<i>“You <b>really</b> like this, don't you?”</i> you tease [himher].", parse);
@@ -2938,7 +2930,7 @@ KiakaiSex.SexPrompt = function(attitude: number) {
 							Text.Add(" [name] greedily licks your digits clean, not wanting to let [hisher] honey go to waste.", parse);
 						}
 						Text.NL();
-					}, 1.0, function() { return kiakai.FirstVag(); });
+					}, 1.0, () => kiakai.FirstVag());
 					scenes.Get();
 
 					Text.Add("You let your hips do the talking, letting your [cock] pump in and out of [name]'s [kanus]. If the elf had ever had doubts as to liking this, they seem to be all gone now.", parse);
@@ -2947,9 +2939,9 @@ KiakaiSex.SexPrompt = function(attitude: number) {
 						Text.Add("<i>“S-so good, I love it, [playername]!”</i> [heshe] moans, <i>“I can feel it, haah... deep inside...”</i>", parse);
 					} else if (kiakai.subDom.Get() > -40) {
 						Text.Add("<i>“More! Give me more!”</i> [heshe] moans, <i>“I love it. Fuck my ass deeper!”</i>", parse);
- } else {
+ 					} else {
 						Text.Add("<i>“D-do me harder, I can take it!”</i> [heshe] begs. <i>“Ravage me, fuck me, stuff my ass full of your [cockType]!”</i>", parse);
- }
+ 					}
 					Text.NL();
 					Text.Add("You are more than happy to oblige, and proceed to give the elf exactly what [heshe] wants in large, sloppy amounts.", parse);
 					if (kiakai.LustLevel() >= 0.75) {
@@ -2961,7 +2953,7 @@ KiakaiSex.SexPrompt = function(attitude: number) {
 					}
 					Text.Flush();
 
-					Gui.NextPrompt(function() {
+					Gui.NextPrompt(() => {
 						Text.Clear();
 
 						if (player.FirstCock()) {
@@ -3048,7 +3040,7 @@ KiakaiSex.SexPrompt = function(attitude: number) {
 					}
 					Text.Flush();
 
-					Gui.NextPrompt(function() {
+					Gui.NextPrompt(() => {
 						Text.Clear();
 
 						Text.Add("The two of you are nearing the limit of your stamina, as your rutting slows down somewhat. [name] is lying face down, whimpering quietly, as you enter the final stretch, your pounding becoming a little erratic.", parse);
@@ -3141,7 +3133,7 @@ KiakaiSex.SexPrompt = function(attitude: number) {
 						Text.Add("The two of you lose all sense of time, your world reduced to relishing in your carnal desires, the relentless pounding of flesh, the tingling wash of healing energy that courses through you.", parse);
 						Text.Flush();
 
-						Gui.NextPrompt(function() {
+						Gui.NextPrompt(() => {
 							Text.Clear();
 
 							if (player.FirstCock()) {
@@ -3225,7 +3217,7 @@ KiakaiSex.SexPrompt = function(attitude: number) {
 			parse = Text.ParserPlural(parse, kiakai.NumCocks() > 1);
 
 			if (attitude) {
-				if (attitude == KiakaiFlags.SexFirstAttitude.Passive) {
+				if (attitude === KiakaiFlags.SexFirstAttitude.Passive) {
 					Text.Add("<i>“W-would you allow me to penetrate you, [playername]?”</i> [name] asks nervously.", parse);
 					Text.NL();
 					if (player.FirstVag()) {
@@ -3245,7 +3237,7 @@ KiakaiSex.SexPrompt = function(attitude: number) {
 					Text.Add("<i>“[playername]...”</i> [name] takes a deep breath, blushing furiously. <i>“By the powers vested in me... I claim the use of your rear!”</i>", parse);
 					Text.NL();
 					Text.Add("Well... for a first try at assertiveness, it isn't so bad, if more than a little strange. You're sure [heshe] will improve as time goes by.", parse);
-				} else if (attitude == KiakaiFlags.SexFirstAttitude.Mutual) {
+				} else if (attitude === KiakaiFlags.SexFirstAttitude.Mutual) {
 					Text.Add("<i>“I want you to take me, and you want the same,”</i> you purr, grabbing hold of [hisher] hands and pressing them to your [butt]. <i>“Why don't you prepare me?”</i> you whisper to [himher].", parse);
 					Text.NL();
 					Text.Add("As if [hisher] inhibitions are lifted by your urgings, you almost immediately feel one of [name]'s slender fingers sneak down your crack, prodding at the entrance of your [anus]. The elf is gentle, but makes no effort to hide [hisher] eagerness as [heshe] plunges two digits into your yearning sphincter.", parse);
@@ -3253,7 +3245,7 @@ KiakaiSex.SexPrompt = function(attitude: number) {
 					Text.Add("Unsated, you dive in, stealing a series of steamy kisses from the breathless elf. You let your [tongue] entwine with [hishers], losing yourself in oral pleasure, leaving [name] free rein of your [anus]. [HeShe] uses the fingers of both hands to spread you open, stretching your ring before pushing the slender digits in as far as the awkward angle will allow.", parse);
 					Text.NL();
 					Text.Add("When you finally break the kiss, you feel more than ready to receive your lover.", parse);
-				} else if (attitude == KiakaiFlags.SexFirstAttitude.Assertive) {
+				} else if (attitude === KiakaiFlags.SexFirstAttitude.Assertive) {
 					Text.Add("<i>“Now... do the same for me,”</i> you command the elf, reclining and presenting [name] with your [anus]. Eager to please, the horny elf hurriedly removes [hisher] fingers from [hisher] puffy pucker. Kneeling down, [heshe] presses [hisher] already slick digits into your pliant anus.", parse);
 					Text.NL();
 					Text.Add("You bite your lip as your submissive companion prepares you, pumping your rear end for all that [heshe] is worth. Perhaps it's time to announce your intentions.", parse);
@@ -3262,7 +3254,7 @@ KiakaiSex.SexPrompt = function(attitude: number) {
 					Text.NL();
 					if (kiakai.FirstCock()) {
 						Text.Add("[name]'s [kcocks] [isAre] rising to the challenge, stiff between [hisher] legs as the excited elf continues to finger you.", parse);
-						if (player.LowerBodyType() != LowerBodyType.Single) {
+						if (player.LowerBodyType() !== LowerBodyType.Single) {
 							Text.NL();
 							Text.Add("<i>“Getting excited, aren't we?”</i> you taunt, placing your foot on[oneof] [hisher] engorged member[s]. Grinning, you let [name] take care of your [anus], playing with yourself in the meantime. You slowly increase the pressure on the elf's [kcock], which has become painfully hard, judging from [name]'s groans.", parse);
 							kiakai.AddLustFraction(0.3);
@@ -3291,7 +3283,7 @@ KiakaiSex.SexPrompt = function(attitude: number) {
 			}
 
 			// First time
-			if (kiakai.flags.SexCatchAnal == 0) {
+			if (kiakai.flags.SexCatchAnal === 0) {
 				Text.Add("<i>“Ah... what should I do?”</i> the elf asks anxiously, eager to please but unsure on how to proceed. You explain that for it not to hurt, the best is to have some form of lubricant first. There are certain oils that could be used, or you could use your own bodily fluids for the task.", parse);
 				Text.NL();
 				Text.Add("<i>“H-how do you mean?”</i> The elf looks bewildered. [HisHer] innocence is so cute... you idly wonder how long [heshe] can hope to maintain it, now that you are around.", parse);
@@ -3306,61 +3298,61 @@ KiakaiSex.SexPrompt = function(attitude: number) {
 			Text.NL();
 			// RANDOM SCENE
 			const scenes = new EncounterTable();
-			scenes.AddEnc(function() {
+			scenes.AddEnc(() => {
 				Text.Add("<i>“I... I am at your mercy, [playername],”</i> the elf bows [hisher] head subserviently, <i>“p-please, tell me what I should do... command me.”</i> It almost sounds like [heshe] is getting off on this.", parse);
 				kiakai.subDom.DecreaseStat(-50, 1);
 				KiakaiSex.AnalCatchPrep();
-			}, 1.0, function() { return kiakai.subDom.Get() < -30; });
-			scenes.AddEnc(function() {
+			}, 1.0, () => kiakai.subDom.Get() < -30);
+			scenes.AddEnc(() => {
 				Text.Add("<i>“Ah... c-can we do that thing you mentioned?”</i> [name] squirms a bit, blushing.", parse);
 				Text.NL();
 
 				const scenes = new EncounterTable();
-				scenes.AddEnc(function() {
+				scenes.AddEnc(() => {
 					Text.Add("<i>“M-may I prepare you myself?”</i> The elf squirms a bit, indicating your [anus].", parse);
 					KiakaiSex.AnalCatchPrep(KiakaiFlags.AnalCatchPrepScene.Rim);
-				}, 1.0, function() { return true; });
-				scenes.AddEnc(function() {
+				}, 1.0, () => true);
+				scenes.AddEnc(() => {
 					Text.Add("<i>“C-can you suck on it?”</i> The elf bites [hisher] lip, uncertain on how you will respond.", parse);
 					KiakaiSex.AnalCatchPrep(KiakaiFlags.AnalCatchPrepScene.Suck);
-				}, 1.0, function() { return true; });
-				scenes.AddEnc(function() {
+				}, 1.0, () => true);
+				scenes.AddEnc(() => {
 					Text.Add("<i>“What if I did it myself?”</i> The elf waves at[oneof] [hisher] [kcock]. <i>“It is quite big, so...”</i> [heshe] trails off, embarrassed.", parse);
 					KiakaiSex.AnalCatchPrep(KiakaiFlags.AnalCatchPrepScene.Selfsuck);
-				}, 1.0, function() { return kiaiCock.length.Get() >= 25; });
-				scenes.AddEnc(function() {
+				}, 1.0, () => kiaiCock.length.Get() >= 25);
+				scenes.AddEnc(() => {
 					Text.Add("<i>“P-perhaps you can provide some?”</i> the elf stutters. When you raise your eyebrow quizzically, [heshe] gestures toward your [cocks], embarrassed.", parse);
 					KiakaiSex.AnalCatchPrep(KiakaiFlags.AnalCatchPrepScene.Frot);
-				}, 1.0, function() { return player.FirstCock(); });
+				}, 1.0, () => player.FirstCock());
 				// TODO: Other oils?
-				scenes.AddEnc(function() {
+				scenes.AddEnc(() => {
 					Text.Add("<i>“C-can I try some of this oil?”</i> the elf asks you.", parse);
 					KiakaiSex.AnalCatchPrep(KiakaiFlags.AnalCatchPrepScene.Oil);
-				}, 1.0, function() { return party.inventory.QueryNum(IngredientItems.SnakeOil); });
+				}, 1.0, () => party.inventory.QueryNum(IngredientItems.SnakeOil));
 				scenes.Get();
-			}, 1.0, function() { return kiakai.subDom.Get() >= -40 && kiakai.subDom.Get() < 10; });
-			scenes.AddEnc(function() {
+			}, 1.0, () => kiakai.subDom.Get() >= -40 && kiakai.subDom.Get() < 10);
+			scenes.AddEnc(() => {
 				Text.Add("<i>“O-okay, then we will try...”</i> [name] quickly decides on a course, glancing at you nervously to see if you will allow [himher] to take the lead.", parse);
 				kiakai.subDom.IncreaseStat(25, 1);
 				KiakaiSex.AnalCatchPrep();
-			}, 1.0, function() { return kiakai.subDom.Get() >= -10 && kiakai.subDom.Get() < 25; });
-			scenes.AddEnc(function() {
+			}, 1.0, () => kiakai.subDom.Get() >= -10 && kiakai.subDom.Get() < 25);
+			scenes.AddEnc(() => {
 				Text.Add("<i>“Then, we will do it this way...”</i> [name] confidently declares.", parse);
 				kiakai.subDom.IncreaseStat(50, 1);
 
 				const scenes = new EncounterTable();
-				scenes.AddEnc(function() {
+				scenes.AddEnc(() => {
 					KiakaiSex.AnalCatchPrep(KiakaiFlags.AnalCatchPrepScene.Suck, true);
-				}, 1.0, function() { return true; });
-				scenes.AddEnc(function() {
+				}, 1.0, () => true);
+				scenes.AddEnc(() => {
 					KiakaiSex.AnalCatchPrep(KiakaiFlags.AnalCatchPrepScene.Frot, true);
-				}, 1.0, function() { return player.FirstCock(); });
+				}, 1.0, () => player.FirstCock());
 				// TODO: Other oils?
-				scenes.AddEnc(function() {
+				scenes.AddEnc(() => {
 					KiakaiSex.AnalCatchPrep(KiakaiFlags.AnalCatchPrepScene.Oil, true);
-				}, 1.0, function() { return party.inventory.QueryNum(IngredientItems.SnakeOil); });
+				}, 1.0, () => party.inventory.QueryNum(IngredientItems.SnakeOil));
 				scenes.Get();
-			}, 1.0, function() { return kiakai.subDom.Get() > 20; });
+			}, 1.0, () => kiakai.subDom.Get() > 20);
 			scenes.Get();
 		}, enabled : kiaiCock,
 		tooltip : attitude ? Text.Parse("Your [anus] craves filling, and the elf can sate your hunger. Have [name] fuck you.", parse) : Text.Parse("Have [name] fuck you.", parse),
@@ -3368,7 +3360,7 @@ KiakaiSex.SexPrompt = function(attitude: number) {
 	Gui.SetButtonsFromList(options);
 };
 
-KiakaiSex.AnalCatchPrep = function(choice: any, assert: boolean) {
+KiakaiSex.AnalCatchPrep = (choice: any, assert: boolean) => {
 	const player = GAME().player;
 	const party: Party = GAME().party;
 	const kiakai = GAME().kiakai;
@@ -3392,11 +3384,11 @@ KiakaiSex.AnalCatchPrep = function(choice: any, assert: boolean) {
 	parse = player.ParserTags(parse);
 
 	parse.stuttername = player.name[0] + "-" + player.name;
-	parse.gen = player.FirstCock() ? function() { return player.MultiCockDesc(); } :
-					player.FirstVag() ? function() { return player.FirstVag().Short(); } :
+	parse.gen = player.FirstCock() ? () => player.MultiCockDesc() :
+					player.FirstVag() ? () => player.FirstVag().Short() :
 					"featureless crotch";
-	parse.kgen = kiakai.FirstCock() ? function() { return kiakai.MultiCockDesc(); } :
-					kiakai.FirstVag() ? function() { return kiakai.FirstVag().Short(); } :
+	parse.kgen = kiakai.FirstCock() ? () => kiakai.MultiCockDesc() :
+					kiakai.FirstVag() ? () => kiakai.FirstVag().Short() :
 					"featureless crotch";
 
 	parse = Text.ParserPlural(parse, kiakai.NumCocks() > 1);
@@ -3468,12 +3460,12 @@ KiakaiSex.AnalCatchPrep = function(choice: any, assert: boolean) {
 	const len = kiaiCock.length.Get();
 	const cap = 25;
 
-	if     (choice == KiakaiFlags.AnalCatchPrepScene.Rim) {
-		parse.legs = player.LowerBodyType() != LowerBodyType.Single ? ", pushing your legs back" : "";
+	if     (choice === KiakaiFlags.AnalCatchPrepScene.Rim) {
+		parse.legs = player.LowerBodyType() !== LowerBodyType.Single ? ", pushing your legs back" : "";
 		Text.Add("<i>“Just lean back and relax...”</i> [name] murmurs[legs]. Gently, the elf spreads your cheeks, planting a kiss directly on your yearning rosebud. [name] plies you open as [heshe] teases your opening with [hisher] [ktongue], licking and lapping before plunging in.", parse);
 		Text.NL();
 		Text.Add("The elf seems to have plenty of oral experience; [heshe] expertly weakens your resistance, tongue probing deep inside you. Just as you are starting to get really hot and bothered, [name] withdraws from your lathered [anus], licking [hisher] lips. Time for the main course.", parse);
-	} else if (choice == KiakaiFlags.AnalCatchPrepScene.Suck) {
+	} else if (choice === KiakaiFlags.AnalCatchPrepScene.Suck) {
 		Text.Add("Wordlessly, [name] parts [hisher] legs, giving you full access to [hisher] [kcocks]. Smiling, you lean in and plant a kiss on[oneof] [hisher] [kcockTip][s]. Eager to get to the main course, you waste no time in ramming as much of the [kcock] as you can down your throat, lathering its length in slick saliva.", parse);
 		Text.NL();
 		if (kiakai.FirstCock()) {
@@ -3481,7 +3473,7 @@ KiakaiSex.AnalCatchPrep = function(choice: any, assert: boolean) {
 			Text.NL();
 		}
 		Text.Add("The elf's [kcock] makes a loud popping sound as it is freed from the grip of your lips. The length is glistening, well prepared for entering you.", parse);
-	} else if (choice == KiakaiFlags.AnalCatchPrepScene.Selfsuck) {
+	} else if (choice === KiakaiFlags.AnalCatchPrepScene.Selfsuck) {
 		Text.Add("[name] gives [himher]self a few experimental strokes, coaxing[oneof] [hisher] [kcock] to rise to its full glory. Nervously, the elf dips [hisher] head, shuddering as [heshe] plants a kiss on the twitching [kcockTip].", parse);
 		Text.NL();
 		if (kiakai.FirstCock()) {
@@ -3513,7 +3505,7 @@ KiakaiSex.AnalCatchPrep = function(choice: any, assert: boolean) {
 				Text.Add("<i>“I... haah... I am sorry, [playername],”</i> [name] pants. <i>“C-could you help get me going again?”</i> [HeShe] doesn't have to ask twice, and you lovingly wrap your lips around [hisher] [kcockTip], sucking lightly on it, goading it back to life.", parse);
 			}
 		}
-	} else if (choice == KiakaiFlags.AnalCatchPrepScene.Frot) {
+	} else if (choice === KiakaiFlags.AnalCatchPrepScene.Frot) {
 		parse.oneof2 = player.NumCocks() > 1 ? " one of" : "";
 		Text.Add("[name] delicately cradles[oneof2] your [cocks], prodding it lightly with[oneof] [hisher] [kcocks]. You sigh luxuriantly as the elf grinds against you while [hisher] hands try to wrap around both of the shafts. Doing your best to help [himher] along, you massage yourself, hands dancing all over your body, trying to coax an orgasm out of your [cock] as quickly as possible.", parse);
 		Text.NL();
@@ -3524,7 +3516,7 @@ KiakaiSex.AnalCatchPrep = function(choice: any, assert: boolean) {
 		}
 		Text.NL();
 		Text.Add("<i>“A-are you ready to go, [playername]?”</i> the elf huffs when your fountain has finally dried up. While you just got off, your companion is still aching to fuck, [kcock] stiff and eager. Weakly, you nod to [himher], urging the elf to go give in to [hisher] desire.", parse);
-	} else if (choice == KiakaiFlags.AnalCatchPrepScene.Oil) {
+	} else if (choice === KiakaiFlags.AnalCatchPrepScene.Oil) {
 		party.inventory.RemoveItem(IngredientItems.SnakeOil);
 		Text.Add("You produce a vial of slick oil from your bags. The liquid is cool on your [skin] as the elf generously applies it to your [anus], working some of the sticky substance into your passage. [name] pours the rest on[oneof] [hisher] [kcocks], spreading the soothing lubricant with long, slow strokes.", parse);
 		Text.NL();
@@ -3541,7 +3533,7 @@ KiakaiSex.AnalCatchPrep = function(choice: any, assert: boolean) {
 	player.FuckAnal(player.Butt(), kiaiCock, 3);
 	Sex.Anal(kiakai, player);
 
-	if (kiakai.flags.SexCatchAnal == 0) {
+	if (kiakai.flags.SexCatchAnal === 0) {
 		Text.Add("<i>“S-so tight! You feel really good, [playername]!”</i> [name] gasps. <i>“That it would feel this good... aah!”</i>", parse);
 		Text.NL();
 	}
@@ -3572,9 +3564,9 @@ KiakaiSex.AnalCatchPrep = function(choice: any, assert: boolean) {
 		Text.Add("The elf is doing a good job, if maybe going a bit slow for your tastes.", parse);
 	} else if (kiakai.sexlevel <= 4) {
 		Text.Add("You gasp lewdly, as [name] is doing a <i>very</i> good job.", parse);
- } else {
+ 	} else {
 		Text.Add("You moan uncontrollably as [name] rails you, every thrust hitting just the right spot. The elf's intimate knowledge of your body shows through.", parse);
- }
+ 	}
 	Text.NL();
 	Text.Add("<i>“H-how is it?”</i> [heshe] pants.", parse);
 	Text.Flush();
@@ -3596,7 +3588,7 @@ KiakaiSex.AnalCatchPrep = function(choice: any, assert: boolean) {
 			}
 			Text.Add("<i>“I... I am sorry, [playername], I will strive to do better!”</i> [name] stammers, hurt by your admonishment. [HeShe] tries to speed up, but in [hisher] hurry, [heshe] loses [hisher] rhythm, annoying you further.", parse);
 			Text.NL();
-			if (kiakai.flags.SexCatchAnal == 0) {
+			if (kiakai.flags.SexCatchAnal === 0) {
 				Text.Add("<i>“I finally give you the <b>privilege</b> of fucking me, and this is what you amount to?”</i>", parse);
 			} else {
 				Text.Add("<i>“You should know better by now,”</i> you taunt, <i>“have you learned nothing?”</i>", parse);
@@ -3615,7 +3607,7 @@ KiakaiSex.AnalCatchPrep = function(choice: any, assert: boolean) {
 			Text.NL();
 
 			const scenes = new EncounterTable();
-			scenes.AddEnc(function() {
+			scenes.AddEnc(() => {
 				Text.Add("<i>“Bet you're feeling left out with nothing stuck up your ass,”</i> you huff, briefly interrupting your self-impaling. <i>“Wouldn't you like a nice, thick tail inside you?”</i>", parse);
 				Text.NL();
 				Text.Add("Not waiting for [hisher] response, you twist your [tail], pressing its tip against [name]'s [kanus]. The elf cries out as you penetrate past [hisher] meager defenses, burying your [tail] deep inside [himher]. Using your hands, you guide the prehensile appendage as far up [name]'s butt as it will go, filling [himher] completely.", parse);
@@ -3624,11 +3616,11 @@ KiakaiSex.AnalCatchPrep = function(choice: any, assert: boolean) {
 				Text.NL();
 				kiakai.subDom.DecreaseStat(-75, 1);
 				tailpegFlag = true;
-			}, 1.0, function() {
+			}, 1.0, () => {
 				const tail = player.HasTail();
 				return tail && tail.Prehensile() && player.sexlevel >= 3 && kiakai.sexlevel >= 3;
 			});
-			scenes.AddEnc(function() {
+			scenes.AddEnc(() => {
 				parse.oneof = player.NumCocks() > 1 ? " one of" : "";
 				Text.Add("<i>“Hey, make yourself useful!”</i> You imperiously motion to[oneof] your bobbing [cocks]. <i>“Suck!”</i>", parse);
 				Text.NL();
@@ -3638,11 +3630,11 @@ KiakaiSex.AnalCatchPrep = function(choice: any, assert: boolean) {
 				Text.NL();
 				kiakai.subDom.DecreaseStat(-75, 1);
 				suckFlag = true;
-			}, 1.0, function() {
+			}, 1.0, () => {
 				const cock = player.FirstCock();
 				return cock && cock.length.Get() > 20 && player.sexlevel >= 2;
 			});
-			scenes.AddEnc(function() {
+			scenes.AddEnc(() => {
 				parse.oneof = kiakai.NumCocks() > 2 ? " one of" : "";
 				parse.s     = kiakai.NumCocks() > 2 ? "s" : "";
 				Text.Add("<i>“It would be a shame to not put all that excess cock to use...”</i> You grin, grabbing hold of[oneof] [name]'s remaining shaft[s]. As you bounce up and down, impaling yourself on the elf, you stroke the rigid member vigorously.", parse);
@@ -3651,7 +3643,7 @@ KiakaiSex.AnalCatchPrep = function(choice: any, assert: boolean) {
 				Text.NL();
 				kiakai.subDom.DecreaseStat(-75, 1);
 				jerkFlag = true;
-			}, 1.0, function() { return kiakai.NumCocks() > 1; });
+			}, 1.0, () => kiakai.NumCocks() > 1);
 			scenes.Get();
 
 			Text.Add("<i>“Hngh, yeah!”</i> you grunt. <i>“All you have to do is stay hard - even you should be able to manage that - and don't you dare cum until I tell you!”</i> From the looks of it, this is not an entirely easy challenge for the elf. [HisHer] eyes are glazed over, and [heshe] moans loudly each time you slam your hips down, overcome with pleasure.", parse);
@@ -3825,7 +3817,7 @@ KiakaiSex.AnalCatchPrep = function(choice: any, assert: boolean) {
 						Text.Add(" The rest of [name]'s dicks throb in unison, splattering their contents on both of you.", parse);
 					} else if (kiakai.NumCocks() > 1) {
 						Text.Add(" [name]'s remaining dick throbs, splattering its contents on both of you.", parse);
- }
+ 					}
 				}
 				if (tailpegFlag) {
 					Text.Add(" [name]'s [kanus] clenches tightly around your [tail] as if trying to milk it.", parse);
@@ -3833,7 +3825,7 @@ KiakaiSex.AnalCatchPrep = function(choice: any, assert: boolean) {
 			}
 			Text.Flush();
 
-			Gui.NextPrompt(function() {
+			Gui.NextPrompt(() => {
 				Text.Clear();
 				Text.Add("The two of you lie panting in each other's arms for a while, an exhausted pile of flesh, sweat and sexual fluids.", parse);
 				Text.NL();
@@ -3872,7 +3864,7 @@ KiakaiSex.AnalCatchPrep = function(choice: any, assert: boolean) {
 		func() {
 			Text.Clear();
 			Text.Add("You moan contentedly that [heshe] has the right idea, encouraging [himher] to keep going. [name] sets a steady rhythm, pushing deep inside you with each thrust. The elf leans down, planting kisses on your lips and neck, unabashedly letting [hisher] hands roam over your body.", parse);
-			if (player.LowerBodyType() != LowerBodyType.Single) {
+			if (player.LowerBodyType() !== LowerBodyType.Single) {
 				Text.Add(" You wrap your legs around [hisher] waist, hugging [himher] tightly, preventing the elf from pulling away - not that [heshe] shows any indication of wanting to do so.", parse);
 			}
 			Text.NL();
@@ -3895,7 +3887,7 @@ KiakaiSex.AnalCatchPrep = function(choice: any, assert: boolean) {
 			}
 			Text.Add("<i>“Ahh, you are amazing, [playername]!”</i> the elf groans, grinding [hisher] hips against you, spearing you on [hisher] [kcock]. <i>“S-so tight!”</i> Your arms snake around your companion, caressing [hisher] back, pulling [himher] down into an intimate kiss.", parse);
 			Text.NL();
-			parse.legs = player.LowerBodyType() != LowerBodyType.Single ? "between your thighs" : "into your colon";
+			parse.legs = player.LowerBodyType() !== LowerBodyType.Single ? "between your thighs" : "into your colon";
 			Text.Add("[name]’s [kcock] pistons in and out of you at an unbelievable speed, a hot pillar of lust thrusting [legs], connecting your bodies into one entity. [HisHer] panting breath is hot on your cheek when [heshe] breaks the kiss, leaning down to nibble at your neck again. You moan appreciatively, twining your fingers through [hisher] hair. The elf wraps [hisher] lips around one of your [nips], sucking lightly on it, gently teasing you with [hisher] teeth.", parse);
 			Text.NL();
 			if (player.FirstCock()) {
@@ -3905,7 +3897,7 @@ KiakaiSex.AnalCatchPrep = function(choice: any, assert: boolean) {
 
 			parse.len = len > cap ? "as deeply as possible" : "all the way";
 			const scenes = new EncounterTable();
-			scenes.AddEnc(function() {
+			scenes.AddEnc(() => {
 				Text.Add("Smiling shyly, [hisher] eyes twinkling at you past thick lashes, [name] rolls over on [hisher] back, sitting you down on [hisher] lap. Experimentally, [heshe] lifts you up, letting gravity ease you back down on [hisher] shaft. You hug the elf tightly against your [breasts], moving your hips up and down to help [himher] build a rhythm again.", parse);
 				Text.NL();
 				Text.Add("Your breathing grows shallow as you impale yourself on [name]’s erect member. By now, both of you are too far gone to slow down, reduced to whimpering moans as you copulate, your sweaty bodies racing toward a simultaneous climax.", parse);
@@ -3913,8 +3905,8 @@ KiakaiSex.AnalCatchPrep = function(choice: any, assert: boolean) {
 				Text.Add("<i>“I... almost there,”</i> [name] groans. The elf props [himher]self up with [hisher] hands, and begins to rapidly pump your [anus], the movements of [hisher] hips repeatedly piercing your hovering sphincter.", parse);
 				Text.NL();
 				Text.Add("<i>“[stuttername]! Ahh!”</i> [HisHer] last erratic thrust sends you off balance, the air in your lungs being forced out as you crash down, [name]’s [kcock] ramming [len] into your bowels. Jointly, you cry out as orgasm hits.", parse);
-			}, 1.0, function() { return true; });
-			scenes.AddEnc(function() {
+			}, 1.0, () => true);
+			scenes.AddEnc(() => {
 				parse.prettyHandsome = kiakai.mfFem("handsome", "pretty");
 				Text.Add("[name] plants [hisher] hands on both sides of your shoulders, barely supporting [himher]self as [heshe] thrusts into you. The elf’s [prettyHandsome] face hovers inches above your own, [hisher] gaze obscured by [hisher] thick lashes. [HeShe] bites [hisher] lips in joy, rutting against you quicker and quicker.", parse);
 				Text.NL();
@@ -3926,13 +3918,13 @@ KiakaiSex.AnalCatchPrep = function(choice: any, assert: boolean) {
 					Text.NL();
 				}
 				Text.Add("<i>“I... I can feel it, it is close!”</i> [name] moans, jacking up [hisher] pace even more. With one final thrust, the elf cries out as [heshe] rams [hisher] [kcock] [len] into your bowels. Jointly, you cry out as orgasm hits.", parse);
-			}, 1.0, function() { return true; });
+			}, 1.0, () => true);
 			scenes.Get();
 			Text.NL();
 
 			if (kiakai.FirstCock()) {
 				Text.Add("The elf’s hot seed pours into your convulsing [anus], your tight ring milking [himher] of [hisher] spunk.", parse);
-				if (kiaiCock.knot == 1 && len <= cap) {
+				if (kiaiCock.knot === 1 && len <= cap) {
 					Text.Add(" [HisHer] swelling knot acts as a stopper, trapping the growing amount of sperm inside you.", parse);
 				}
 				if (kiakai.NumCocks() > 1) {
@@ -3964,20 +3956,20 @@ KiakaiSex.AnalCatchPrep = function(choice: any, assert: boolean) {
 			Text.Add("You lean against each other as you recover from your messy finale[mess].", parse);
 			Text.Flush();
 
-			Gui.NextPrompt(function() {
+			Gui.NextPrompt(() => {
 				Text.Clear();
 
 				if (kiakai.relation.Get() < -20) {
 					Text.Add("<i>“T-thank you for being nice with me,”</i> [name] whimpers, resting [hisher] head against your shoulder.", parse);
 				} else if (kiakai.relation.Get() < 20) {
 					Text.Add("<i>“That was... nice,”</i> [name] murmurs, sounding a bit unsure of [himher]self.", parse);
- } else if (kiakai.relation.Get() < 50) {
+ 				} else if (kiakai.relation.Get() < 50) {
 					Text.Add("<i>“That was amazing, [playername],”</i> [name] smiles, hugging you tightly.", parse);
- } else {
+ 				} else {
 					Text.Add("<i>“I love you, [playername],”</i> [name] murmurs into your ear, snuggling close, enjoying the warmth of your body.", parse);
- }
+ 				}
 				Text.NL();
-				if (kiakai.FirstCock() && kiaiCock.knot == 1) {
+				if (kiakai.FirstCock() && kiaiCock.knot === 1) {
 					Text.Add("It takes a while before the elf’s knot finally deflates, allowing you to disentangle yourself from each other.", parse);
 					TimeStep({minute : 15});
 				} else {
@@ -3985,7 +3977,7 @@ KiakaiSex.AnalCatchPrep = function(choice: any, assert: boolean) {
 				}
 				Text.Add(" You help your companion to [hisher] feet, the two of you chatting while you help clean your bodies, washing away the mixed sexual fluids.", parse);
 				if (kiakai.FirstCock()) {
-					parse.legs = player.LowerBodyType() != LowerBodyType.Single ? " thighs" : " lower body";
+					parse.legs = player.LowerBodyType() !== LowerBodyType.Single ? " thighs" : " lower body";
 					Text.Add(" Part of [name]’s load remains inside your back passage, slowly dribbling down your[legs] as you move about.", parse);
 					if (kiakai.CumOutput() > 3) {
 						Text.Add(" The majority rests in your [belly], sloshing around pleasantly.", parse);
@@ -4019,19 +4011,19 @@ KiakaiSex.AnalCatchPrep = function(choice: any, assert: boolean) {
 			let breastFlag = false;
 
 			const scenes = new EncounterTable();
-			scenes.AddEnc(function() {
-				parse.legs  = player.LowerBodyType() != LowerBodyType.Single ? " between your legs" : "";
+			scenes.AddEnc(() => {
+				parse.legs  = player.LowerBodyType() !== LowerBodyType.Single ? " between your legs" : "";
 				parse.oneof = player.NumCocks() > 1 ? " one of" : "";
 				Text.Add("Biting your lip, you reach down[legs], grabbing hold of[oneof] your [cocks]. Rubbing it in time with [name]'s pistoning, you start pleasuring yourself, moaning unabashedly.", parse);
 				Text.NL();
 				cockFlag = true;
-			}, 1.0, function() { return player.FirstCock(); });
-			scenes.AddEnc(function() {
+			}, 1.0, () => player.FirstCock());
+			scenes.AddEnc(() => {
 				Text.Add("As you let [name] ream you, you reach down and dip your fingers into your neglected honey pot, intent on pleasing it yourself if the elf declines to. You sigh euphorically, your digits matching the rhythm your lover is making.", parse);
 				Text.NL();
 				vagFlag = true;
-			}, 1.0, function() { return player.FirstVag(); });
-			scenes.AddEnc(function() {
+			}, 1.0, () => player.FirstVag());
+			scenes.AddEnc(() => {
 				Text.Add("You fondle your [breasts], pinching your sensitive [nips]. It's all you can do to keep yourself in check.", parse);
 				if (player.FirstBreastRow().size.Get() > 13) {
 					parse.numBr = player.NumBreastRows() > 1 ? "the other" : "another";
@@ -4042,7 +4034,7 @@ KiakaiSex.AnalCatchPrep = function(choice: any, assert: boolean) {
 				}
 				Text.NL();
 				breastFlag = true;
-			}, 1.0, function() { return player.FirstBreastRow().size.Get() > 3; });
+			}, 1.0, () => player.FirstBreastRow().size.Get() > 3);
 
 			scenes.Get();
 
@@ -4076,7 +4068,7 @@ KiakaiSex.AnalCatchPrep = function(choice: any, assert: boolean) {
 			}
 			Text.Flush();
 
-			Gui.NextPrompt(function() {
+			Gui.NextPrompt(() => {
 				Text.Clear();
 
 				Text.Add("Some time later - it's a bit difficult for you to keep track - [name] pulls [hisher] [kcock] out of you, leaving you bereaved. Before you have time to voice a complaint, [heshe] curtly cuts you off.", parse);
@@ -4125,7 +4117,7 @@ KiakaiSex.AnalCatchPrep = function(choice: any, assert: boolean) {
 						func() {
 							Text.Clear();
 							Text.Add("<i>“W-wait!”</i> you pant, suddenly telling the elf to pull out from your [anus]. ", parse);
-							if (kiaiCock.knot != 0 && len <= cap) {
+							if (kiaiCock.knot !== 0 && len <= cap) {
 								Text.Add("[name] tries to comply, but finds [himher]self stuck inside you, trapped by [hisher] engorged knot.", parse);
 								Text.NL();
 								Text.Add("<i>“S-sorry, [playername]!”</i> the elf moans as [heshe] unloads inside you, [hisher] seed flooding your [anus]. You think you detect a trace of... glee? That doesn't seem very much like [himher] at all...", parse);
@@ -4183,7 +4175,7 @@ KiakaiSex.AnalCatchPrep = function(choice: any, assert: boolean) {
 	Gui.SetButtonsFromList(options);
 };
 
-KiakaiSex.AnalCatchFinish = function() {
+KiakaiSex.AnalCatchFinish = () => {
 	const player = GAME().player;
 	const kiakai = GAME().kiakai;
 
@@ -4217,13 +4209,13 @@ KiakaiSex.AnalCatchFinish = function() {
 		Text.Add("<i>“Mmm... I bet you really liked that, did you not?”</i> [name] purrs, affectionately feeling you up.", parse);
 	} else if (kiakai.subDom.Get() > 0) {
 		Text.Add("<i>“Did you enjoy yourself?”</i> [name] asks, blushing faintly as [heshe] asks the bold question. Pulling [himher] in for an extended kiss, you assure [himher] that you did.", parse);
- } else if (kiakai.subDom.Get() > -25) {
+ 	} else if (kiakai.subDom.Get() > -25) {
 		Text.Add("<i>“That was not... unpleasant.”</i> [name] blushes faintly, not used to taking the dominant role with you.", parse);
- } else if (kiakai.subDom.Get() > -50) {
+ 	} else if (kiakai.subDom.Get() > -50) {
 		Text.Add("<i>“Thank you, [playername], for allowing me that,”</i> [name] murmurs, bowing [hisher] head.", parse);
- } else {
+ 	} else {
 		Text.Add("<i>“C-can you do that to me next time? It... it looked so nice,”</i> [name] blurts out, blushing furiously.", parse);
- }
+ 	}
 	Text.NL();
 	Text.Add("You spend a good quarter of an hour cuddled together before regretfully parting to gather your gear. Once you are cleaned up and equipped, you set out for your next destination.", parse);
 

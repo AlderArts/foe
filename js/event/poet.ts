@@ -6,13 +6,13 @@ import { Text } from "../text";
 
 const PoetScenes: any = {};
 
-PoetScenes.Entry = function() {
+PoetScenes.Entry = () => {
 	const parse: any = {
 
 	};
 
 	const scenes = new EncounterTable();
-	scenes.AddEnc(PoetScenes.ToDragonOrLizard, 1.0, function() { return true; });
+	scenes.AddEnc(PoetScenes.ToDragonOrLizard, 1.0, () => true);
 
 	Text.Clear();
 	Text.Add("Walking along the beaten path, you come across a scrawled note left on the ground. Curious, you bend down and pick it up.<i>", parse);
@@ -29,7 +29,7 @@ PoetScenes.Entry = function() {
 	Gui.NextPrompt();
 };
 
-PoetScenes.ToDragonOrLizard = function() {
+PoetScenes.ToDragonOrLizard = () => {
 	const parse: any = {};
 
 	Text.Add("To be dragon or lizard, that is the question–<br>", parse);

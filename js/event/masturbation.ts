@@ -18,7 +18,7 @@ const MasturbationScenes: any = {};
 
 // TODO: Stretch/Cap change for toy training
 
-MasturbationScenes.Entry = function() {
+MasturbationScenes.Entry = () => {
 	const player = GAME().player;
 	const party: Party = GAME().party;
 	const parse: any = {
@@ -26,7 +26,7 @@ MasturbationScenes.Entry = function() {
 	};
 
 	const lust = player.LustLevel();
-	parse.comp = party.Num() == 2 ? party.Get(1).name : "your companions";
+	parse.comp = party.Num() === 2 ? party.Get(1).name : "your companions";
 
 	Text.Clear();
 	if (party.Num() > 1) {
@@ -53,7 +53,7 @@ MasturbationScenes.Entry = function() {
 
 	if (player.FirstCock()) {
 		const optsTc = new Array();
-		_.each(player.AllCocks(), function(c) {
+		_.each(player.AllCocks(), (c) => {
 			optsTc.push({ nameStr : c.race.qCShort(),
 				tooltip : c.aLong(),
 				func(obj: any) {
@@ -88,7 +88,7 @@ MasturbationScenes.Entry = function() {
 		const vagCap = player.FirstVag().Cap();
 
 		const optsTv = new Array();
-		const addVagToy = function(toy: any) {
+		const addVagToy = (toy: any) => {
 			const enabled = vagCap >= toy.cock.Thickness();
 			if (party.Inv().QueryNum(toy)) {
 				optsTv.push({ nameStr : toy.name,
@@ -144,7 +144,7 @@ MasturbationScenes.Entry = function() {
 	const analCap = player.Butt().Cap();
 
 	const optsTa = new Array();
-	const addAnalToy = function(toy: any) {
+	const addAnalToy = (toy: any) => {
 		const enabled = analCap >= toy.cock.Thickness();
 		if (party.Inv().QueryNum(toy)) {
 			optsTa.push({ nameStr : toy.name,
@@ -184,7 +184,7 @@ MasturbationScenes.Entry = function() {
 		func : MasturbationScenes.Breasts, enabled : br,
 	});
 
-	Gui.SetButtonsFromList(options, true, function() {
+	Gui.SetButtonsFromList(options, true, () => {
 		Text.Clear();
 		Text.Add("You resist the urge... you really have better things to do.", parse);
 		Text.NL();
@@ -195,11 +195,11 @@ MasturbationScenes.Entry = function() {
 	});
 };
 
-MasturbationScenes.CockOpening = function(p1cock: Cock) {
+MasturbationScenes.CockOpening = (p1cock: Cock) => {
 	const player = GAME().player;
 	const allCocks = player.AllCocksCopy();
 	for (let i = 0; i < allCocks.length; i++) {
-		if (allCocks[i] == p1cock) {
+		if (allCocks[i] === p1cock) {
 			allCocks.splice(i, 1);
 			break;
 		}
@@ -212,8 +212,8 @@ MasturbationScenes.CockOpening = function(p1cock: Cock) {
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
 
-	parse.cock      = function() { return p1cock.Short(); };
-	parse.cockTip   = function() { return p1cock.TipShort(); };
+	parse.cock      = () => p1cock.Short();
+	parse.cockTip   = () => p1cock.TipShort();
 
 	Text.Clear();
 	Text.Add("Having made your decision, you quickly strip off your [armor] and sit down on a comfortable spot on the ground.", parse);
@@ -222,10 +222,10 @@ MasturbationScenes.CockOpening = function(p1cock: Cock) {
 	const cover = player.Genitalia().cover;
 	let slit = false;
 
-	if (cover == Genitalia.Cover.Slit) {
+	if (cover === Genitalia.Cover.Slit) {
 		Text.Add("You look at your genital slit, gently stroking the outer folds before you carefully spread them open and slip a finger inside. The feeling is exquisite, and you find your [cocks] already getting hard at the prospect of some fun.", parse);
 		Text.NL();
-		if (player.NumCocks() == 2) {
+		if (player.NumCocks() === 2) {
 			Text.Add("You search around, gently stroking the tips of your two cocks. As thrilling as it would be to touch both of them, you’ve already decided which one you’ll be using to relieve yourself, so you flex your muscles to coax it out whilst leaving the other one safely tucked away in your slit.", parse);
 		} else if (player.NumCocks() > 2) {
 			Text.Add("You let your fingers roam the tips of your [cocks] until you find the one you picked for today’s activities. It’s a bit complicated to draw only that one out, but somehow you know exactly which muscles to flex to make it come out.", parse);
@@ -233,10 +233,10 @@ MasturbationScenes.CockOpening = function(p1cock: Cock) {
 			Text.Add("It doesn’t take long before you feel your fingers roam the [cockTip] of your [cock]. You tease yourself as you flex your muscles to make it come out of its hiding place.", parse);
  }
 		slit = true;
-	} else if (cover == Genitalia.Cover.Sheath) {
+	} else if (cover === Genitalia.Cover.Sheath) {
 		Text.Add("You gently massage your sheath, feeling the little waves of pleasure beginning to harden your [cocks]. That being the case, you pull your sheath open and watch as your [cocks] spill out of [itsTheir] hiding place.", parse);
 		Text.NL();
-		if (player.NumCocks() == 2) {
+		if (player.NumCocks() === 2) {
 			Text.Add("You give both your [cocks] a tender stroke, but quickly move to your chosen [cock]. Maybe some other time you’ll play with your other one.", parse);
 		} else if (player.NumCocks() > 2) {
 			Text.Add("You have such a nice selection… but for now, you’ll focus your attention on your [cock]. The others will just have to wait for another time.", parse);
@@ -251,7 +251,7 @@ MasturbationScenes.CockOpening = function(p1cock: Cock) {
 
 	const knot = p1cock.Knot();
 
-	if (p1cock.type == CockType.tentacle) {
+	if (p1cock.type === CockType.tentacle) {
 		Text.Add("First, you start with some gentle stroking. It feels good, but isn’t necessary considering what you can do with your prehensile [cock]. With a mischievous glint in your eyes, you release your member and flex your muscles.", parse);
 		Text.NL();
 		Text.Add("Surely enough, your [cock] starts hardening as you work it into a proper erection. It’s an odd feeling, but it’s also very pleasurable to get an erection in this fashion. It’s almost as if your muscles were cramping, getting rigid and tough to move, yet none of this hurts like it would if it happened anywhere else. Instead, it just feels better and better.", parse);
@@ -259,7 +259,7 @@ MasturbationScenes.CockOpening = function(p1cock: Cock) {
 		Text.Add("Eventually, you work yourself to full mast, and wiggle your shaft experimentally, contracting your muscles rhythmically to draw a dollop of pre on your [cockTip]. Feels like you’re ready to start!", parse);
 	} else {
 		Text.Add("You start with a gentle yet brisk pace, working your hands around your [cock] as you stroke it to full mast.", parse);
-		if (player.NumCocks() == 2 && !slit) {
+		if (player.NumCocks() === 2 && !slit) {
 			Text.Add(" Your other [cocks2] grows erect too, despite lying forgotten.", parse);
 		} else if (player.NumCocks() > 2 && !slit) {
 			Text.Add(" Your other [cocks2] begin growing in sympathetic pleasure, but you remain focused on the one you picked.", parse);
@@ -444,7 +444,7 @@ MasturbationScenes.CockOpening = function(p1cock: Cock) {
 	Text.NL();
 	let selfpaint = false;
 	if (player.Slut() >= 50) {
-		if (p1cock.type == CockType.tentacle) {
+		if (p1cock.type === CockType.tentacle) {
 			Text.Add("You flex your [cock], aiming at yourself in preparation for your climax.", parse);
 		} else {
 			Text.Add("You start pumping at a certain angle, aiming the [cockTip] of your [cock] at yourself in preparation for your orgasm.", parse);
@@ -508,7 +508,7 @@ MasturbationScenes.CockOpening = function(p1cock: Cock) {
 	Gui.NextPrompt();
 };
 
-MasturbationScenes.CockSize = function(parse: any, p1cock: Cock) {
+MasturbationScenes.CockSize = (parse: any, p1cock: Cock) => {
 	const len = p1cock.Len();
 	const girth = p1cock.Thickness();
 
@@ -530,7 +530,7 @@ MasturbationScenes.CockSize = function(parse: any, p1cock: Cock) {
 	Text.NL();
 };
 
-MasturbationScenes.CockSlut = function(parse: any, p1cock: Cock) {
+MasturbationScenes.CockSlut = (parse: any, p1cock: Cock) => {
 	const player = GAME().player;
 	if (player.Slut() >= 30) {
 		Text.Add("In a bid to further increase your enjoyment, you gather some of your pre-ejaculate and take the musky liquid to your mouth, where you lap it all off your hand. Damn, you taste great!", parse);
@@ -541,7 +541,7 @@ MasturbationScenes.CockSlut = function(parse: any, p1cock: Cock) {
 	}
 };
 
-MasturbationScenes.CockKnot = function(parse: any, p1cock: Cock) {
+MasturbationScenes.CockKnot = (parse: any, p1cock: Cock) => {
 	if (p1cock.Knot()) {
 		Text.Add("Your mounting excitement causes your knot to bloat up like a balloon, and you adapt by sparing a hand to squeeze it. It feels great! Each squeeze makes a small rope of pre to spew from your [cockTip] and makes your knot grow ever larger. When you tire of that, you move your hand just behind the bulbous mass to hold tightly to the base of your dick. Doing this, it’s almost like you’d tied someone!", parse);
 		Text.NL();
@@ -552,7 +552,7 @@ MasturbationScenes.CockKnot = function(parse: any, p1cock: Cock) {
 
  */
 
-MasturbationScenes.AnalOpening = function(func: any, obj: any) {
+MasturbationScenes.AnalOpening = (func: any, obj: any) => {
 	const player = GAME().player;
 	let parse: any = {
 		toparmordesc : player.ArmorDesc(),
@@ -564,7 +564,7 @@ MasturbationScenes.AnalOpening = function(func: any, obj: any) {
 	const lusty = player.LustLevel() >= 0.7;
 
 	Text.Clear();
-	const fullArm = player.Armor() ? (player.Armor().subtype == ItemSubtype.FullArmor) : false;
+	const fullArm = player.Armor() ? (player.Armor().subtype === ItemSubtype.FullArmor) : false;
 	parse.arm = player.LowerArmor() && fullArm ? Text.Parse(", quickly followed by your [bottomarmordesc]", parse) : "";
 	Text.Add("After a final check to make sure that you’re well alone and won’t be interrupted, you find a comfortable spot to settle down in and begin disrobing yourself with glee. Soon, your [armor] falls to the ground[arm], leaving you in your birthday suit. ", parse);
 	if (lusty) {
@@ -602,7 +602,7 @@ MasturbationScenes.AnalOpening = function(func: any, obj: any) {
 	func(parse, obj);
 };
 
-MasturbationScenes.AnalFingerCockblock = function(parse: any, cum: number) {
+MasturbationScenes.AnalFingerCockblock = (parse: any, cum: number) => {
 	const player = GAME().player;
 	if (player.FirstCock()) {
 		Text.Add("Unable to take the pounding at your prostate any longer, your [cocks] choose[notS] this moment to shoot off [itsTheir] load, string after string of hot, sticky seed arcing into the air and landing on the ground a good distance away. All the anticipation and stimulation seems to have done you good - your current load of semen looks much thicker and richer than normal, speaking well of your prostate-milking skills.", parse);
@@ -615,7 +615,7 @@ MasturbationScenes.AnalFingerCockblock = function(parse: any, cum: number) {
 	}
 };
 
-MasturbationScenes.AnalFinger = function(parse: any) {
+MasturbationScenes.AnalFinger = (parse: any) => {
 	const player = GAME().player;
 	const cap = player.Butt().Cap();
 	const br = player.FirstBreastRow().Size();
@@ -690,7 +690,7 @@ MasturbationScenes.AnalFinger = function(parse: any) {
 	Gui.NextPrompt();
 };
 
-MasturbationScenes.AnalToy = function(parse: any, toy: any) {
+MasturbationScenes.AnalToy = (parse: any, toy: any) => {
 	const player = GAME().player;
 	const cap = player.Butt().Cap();
 	const br = player.FirstBreastRow().Size();
@@ -768,7 +768,7 @@ MasturbationScenes.AnalToy = function(parse: any, toy: any) {
 };
 
 // Generic opening scene. Sets up all parser stuff and calls the scene proper
-MasturbationScenes.VagOpening = function(func: any, obj: any) {
+MasturbationScenes.VagOpening = (func: any, obj: any) => {
 	const player = GAME().player;
 	let parse: any = {
 		toparmordesc : player.ArmorDesc(),
@@ -801,7 +801,7 @@ MasturbationScenes.VagOpening = function(func: any, obj: any) {
 	func(parse, obj);
 };
 
-MasturbationScenes.VagFingerCockblock = function(parse: any, cum: number) {
+MasturbationScenes.VagFingerCockblock = (parse: any, cum: number) => {
 	const player = GAME().player;
 	if (player.FirstCock()) {
 		Text.Add("At the same time, your [cocks] choose[notS] this moment to shoot off [itsTheir] load, string after string of hot, sticky seed arcing into the air and landing on the ground a good distance away with a series of wet-sounding splats.", parse);
@@ -809,12 +809,12 @@ MasturbationScenes.VagFingerCockblock = function(parse: any, cum: number) {
 			Text.Add(" It seems never-ending, the viscous, white flow - more and more sperm just keeps on coming out of your [cockTip], spraying out like a fire hose with just as much quantity and force, forming large puddles on the ground.", parse);
 		} else if (cum > 6) {
 			Text.Add(" You’ve certainly got quite the reserve of sperm in you - it’s a long while before you actually start to feel dry, despite the considerable amounts of spooge that blast forth from your [cockTip], creating small puddles on the ground before you.", parse);
- }
+ 		}
 		Text.NL();
 	}
 };
 
-MasturbationScenes.VagFinger = function(parse: any) {
+MasturbationScenes.VagFinger = (parse: any) => {
 	const player = GAME().player;
 	// Fisting is triggered with wide hips wide cunt. Else, default to fingering.
 	const cap = (player.body.torso.hipSize.Get() / 10) * (player.FirstVag().Cap() / 5);
@@ -881,7 +881,7 @@ MasturbationScenes.VagFinger = function(parse: any) {
 	Gui.NextPrompt();
 };
 
-MasturbationScenes.VagToy = function(parse: any, toy: any) {
+MasturbationScenes.VagToy = (parse: any, toy: any) => {
 	const player = GAME().player;
 	const preg = player.PregHandler().IsPregnant();
 	const bellySize = player.PregHandler().BellySize();
@@ -926,7 +926,7 @@ MasturbationScenes.VagToy = function(parse: any, toy: any) {
 	Gui.NextPrompt();
 };
 
-MasturbationScenes.VagTailfuck = function(parse: any) {
+MasturbationScenes.VagTailfuck = (parse: any) => {
 	const player = GAME().player;
 	const preg = player.PregHandler().IsPregnant();
 	const bellySize = player.PregHandler().BellySize();
@@ -985,7 +985,7 @@ MasturbationScenes.VagTailfuck = function(parse: any) {
 	Gui.NextPrompt();
 };
 
-MasturbationScenes.Breasts = function() {
+MasturbationScenes.Breasts = () => {
 	const player = GAME().player;
 	const party: Party = GAME().party;
 	let parse: any = {
@@ -1112,7 +1112,7 @@ MasturbationScenes.Breasts = function() {
 		Text.Add("At length, though, you feel your [breasts] starting to get a little tender from the vigorous handling they’ve been given, and decide to cut it here and now than risk them actually getting sore. Giving your cans a final rub and caress, you sigh in relief at all the steam you’ve managed to blow off and prepare to be on your way.", parse);
 	}
 	Text.NL();
-	parse.comp = party.Num() == 2 ? party.Get(1).name : "";
+	parse.comp = party.Num() === 2 ? party.Get(1).name : "";
 	parse.c = party.Num() > 1 ? Text.Parse(" rejoining [comp] and", parse) : "";
 	Text.Add("With that in mind, you collect your gear once more, putting on and doing up your [armor] before[c] setting off on your way.", parse);
 	Text.Flush();

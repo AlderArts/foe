@@ -30,11 +30,11 @@ import { TerryFlags } from "./terry-flags";
 
 const TerryScenes: any = {};
 
-TerryScenes.JeanneTFCost = function() {
+TerryScenes.JeanneTFCost = () => {
     return 50;
 };
 
-TerryScenes.Appearance = function() {
+TerryScenes.Appearance = () => {
 	const terry = GAME().terry;
 
 	const parse: any = {
@@ -54,14 +54,14 @@ TerryScenes.Appearance = function() {
 	Text.Add("You take a closer look at Terry.", parse);
 	Text.NL();
 	Text.Add("Terry is a [trueGender] fox-morph, a former thief that you 'rescued' from the jail in Rigard.", parse);
-	if (terry.Gender() == Gender.male && terry.PronounGender() != Gender.male) {
+	if (terry.Gender() === Gender.male && terry.PronounGender() !== Gender.male) {
 		Text.Add(" Though he’s really a male, you chose to refer to him as a 'she'.", parse);
-	} else if (terry.Gender() == Gender.female && terry.PronounGender() != Gender.female) {
+	} else if (terry.Gender() === Gender.female && terry.PronounGender() !== Gender.female) {
 		Text.Add(" Though she’s really a female, you chose to refer to her as a 'he'.", parse);
  }
 	Text.NL();
 	Text.Add("Terry’s vulpine features are unquestionably feminine; ", parse);
-	if (terry.Gender() == Gender.male) {
+	if (terry.Gender() === Gender.male) {
 		Text.Add("despite [hisher] birth gender, [heshe] can easily pass as a very fetching young fox-woman with only a little effort on [hisher] part.", parse);
 	} else {
 		Text.Add("which is only fitting, seeing as how [heshe]’s a very lovely [foxvixen] [trueGender].", parse);
@@ -82,18 +82,18 @@ TerryScenes.Appearance = function() {
 	if (terry.Cup() > TerryFlags.Breasts.Flat) {
 		parse.c = terry.FirstCock() ? Text.Parse(", contrasting the [tcockDesc] between [hisher] legs", parse) : "";
 		Text.Add("A pair of [tbreastDesc] bulge noticeably atop Terry’s chest[c]. ", parse);
-		if (terry.Cup() == TerryFlags.Breasts.Dcup) {
+		if (terry.Cup() === TerryFlags.Breasts.Dcup) {
 			Text.Add("Though only D-cups, Terry is so slenderly built elsewhere that they seem exaggeratedly large. The full quivering breasts jiggle softly whenever [heshe] moves, making even the act of breathing almost hypnotic as they rise, fall, expand and contract. It really is incredible that such a dainty [foxvixen] could have such huge boobs.", parse);
 			if (terry.Lactation()) {
 				Text.NL();
 				Text.Add("The huge [foxvixen] tits contain an equally huge supply of warm creamy milk, just waiting to be tapped. As if to prove your point, a small bead leaks from each perky pink nipple in turn, sliding down Terry’s areolae. With practiced disinterest, [heshe] wipes the smears of milk away with a quick flick of [hisher] fingers over each breast.", parse);
 			}
-		} else if (terry.Cup() == TerryFlags.Breasts.Ccup) {
+		} else if (terry.Cup() === TerryFlags.Breasts.Ccup) {
 			Text.Add("Plush and proud, the C-cup sized breasts have just the right amount of sag to them, drawing a casual eye and enticing the viewer to touch and squeeze them. Terry’s delicate body-type only makes them seem more prominent.", parse);
 			if (terry.Lactation()) {
 				Text.Add(" Further weighing the [foxvixen] down is the ample supply of fresh milk brewing in each plush teat. As [heshe] moves, a small bead of white wells from one little pink nipple, forced out by the shift in pressure.", parse);
 			}
-		} else if (terry.Cup() == TerryFlags.Breasts.Bcup) {
+		} else if (terry.Cup() === TerryFlags.Breasts.Bcup) {
 			Text.Add("The full, perky orbs are a good size that blends well with Terry’s dainty frame; the luscious pair of B-cups are just big enough to squeeze and play with.", parse);
 			if (terry.Lactation()) {
 				Text.Add(" And that squeezability comes in handy; it makes milking [himher] of the sweet [foxvixen] milk brewing in each tit almost effortless.", parse);
@@ -106,9 +106,9 @@ TerryScenes.Appearance = function() {
 		}
 	} else {
 		Text.Add("Terry’s chest is flat... but that’s about the most masculine thing you can say about [hisher] build. Even though it lacks any visible breasts, there’s a slender suppleness to [hisher] physique that ", parse);
-		if (terry.Gender() == Gender.male) {
+		if (terry.Gender() === Gender.male) {
 			Text.Add("doesn’t help [himher] present [himher]self as male.", parse);
-		} else if (terry.Gender() == Gender.herm) {
+		} else if (terry.Gender() === Gender.herm) {
 			Text.Add("seems strangely appropriate for one who blurs the gender-line like your double-equipped [foxvixen].", parse);
  } else {
 			Text.Add("manages to convey [hisher] fundamental femininity.", parse);
@@ -200,7 +200,7 @@ TerryScenes.Appearance = function() {
 	Text.Flush();
 };
 
-TerryScenes.Prompt = function() {
+TerryScenes.Prompt = () => {
 	const terry = GAME().terry;
 	const party: Party = GAME().party;
 	const player = GAME().player;
@@ -263,7 +263,7 @@ TerryScenes.Prompt = function() {
 
 			that.OrgasmCum();
 
-			Gui.NextPrompt(function() {
+			Gui.NextPrompt(() => {
 				that.Interact(switchSpot);
 			});
 		}, enabled : true,
@@ -275,7 +275,7 @@ TerryScenes.Prompt = function() {
 	Gui.SetButtonsFromList(options, true, NAV().PartyInteraction);
 };
 
-TerryScenes.ExploreGates = function() {
+TerryScenes.ExploreGates = () => {
 	const terry = GAME().terry;
 
 	const parse: any = {
@@ -288,7 +288,7 @@ TerryScenes.ExploreGates = function() {
 	if (terry.flags.Met >= TerryFlags.Met.Found) {
 		Text.Add("As best you can, the pair of you make your way through the crowds, looking for the slightest sign of the thief you're chasing, eyes ever alert for a telltale vulpine form. With the sheer number of people here, it doesn't make your task easy, and you keep having to push your way through the scrum.", parse);
 		Text.NL();
-		if (terry.hidingSpot == WORLD().loc.Rigard.Gate) {
+		if (terry.hidingSpot === WORLD().loc.Rigard.Gate) {
 			Text.Add("Your search finally pays off when you see a vulpine tail rounding a corner toward an alleyway. You signal to Miranda and she opens a path in the crowd so you can give chase. As soon as she notices she’s being followed, she makes a mad dash toward the other side. <i>“Dammit!</i> Miranda curses as she rushes ahead. You follow in tow.", parse);
 			Text.NL();
 			Text.Add("After a while, she finally makes a mistake and rounds a corner on a dead end. Without so much a batting an eye, she readies herself for combat!", parse);
@@ -309,7 +309,7 @@ TerryScenes.ExploreGates = function() {
 
 	Gui.NextPrompt();
 };
-TerryScenes.ExploreResidential = function() {
+TerryScenes.ExploreResidential = () => {
 	const terry = GAME().terry;
 
 	const parse: any = {
@@ -322,7 +322,7 @@ TerryScenes.ExploreResidential = function() {
 
 	if (terry.flags.Met >= TerryFlags.Met.Found) {
 		Text.Add("You decide to look around and ask a few people. Someone might’ve seen her. ", parse);
-		if (terry.hidingSpot == WORLD().loc.Rigard.Residential.Street) {
+		if (terry.hidingSpot === WORLD().loc.Rigard.Residential.Street) {
 			Text.Add("After a long string of complaints, annoyed comments and plain rudeness, one of the residents finally provides a lead.<i>“A vixen? You mean that one?”</i> They point toward an alleyway, where you see a distinct vulpine running off.", parse);
 			Text.NL();
 			Text.Add("Without missing a beat, you call for Miranda and make a mad dash after the thief. You chase after her for a while, until Miranda manages to corner her at a dead end. She draws her blade and prepares for battle!", parse);
@@ -345,7 +345,7 @@ TerryScenes.ExploreResidential = function() {
 
 	Gui.NextPrompt();
 };
-TerryScenes.ExploreMerchants = function() {
+TerryScenes.ExploreMerchants = () => {
 	const terry = GAME().terry;
 	const player = GAME().player;
 
@@ -358,7 +358,7 @@ TerryScenes.ExploreMerchants = function() {
 	Text.NL();
 
 	if (terry.flags.Met >= TerryFlags.Met.Found) {
-		if (terry.hidingSpot == WORLD().loc.Rigard.ShopStreet.Street) {
+		if (terry.hidingSpot === WORLD().loc.Rigard.ShopStreet.Street) {
 			Text.Add("You and Miranda wander through the warehouses of the merchant’s district, looking for any sign of the sleek vixen. The two of you check a few of them before you catch a glimpse of a moving shadow. You rush ahead without thinking, Miranda following hot on your heels, and as soon as round the corner, you’re faced with the vixen thief, already ready for combat!", parse);
 			Text.Flush();
 			TerryScenes.CombatVsMiranda();
@@ -376,7 +376,7 @@ TerryScenes.ExploreMerchants = function() {
 		Text.Add("<i>“Right, this way.”</i>", parse);
 		Text.Flush();
 
-		Gui.NextPrompt(function() {
+		Gui.NextPrompt(() => {
 			Text.Clear();
 			Text.Add("Despite your efforts, the search so far has been for nothing; you're both empty-handed despite how thoroughly you keep checking. You are just about to leave the warehouse district and search elsewhere when you spot something; a warehouse with its doors ajar. Recalling Miranda said there isn't much activity here even when things are normal, you deem that suspicious and call her attention to it, suggesting that you should both check it out.", parse);
 			Text.NL();
@@ -416,7 +416,7 @@ TerryScenes.ExploreMerchants = function() {
 
 	Gui.NextPrompt();
 };
-TerryScenes.ExplorePlaza = function() {
+TerryScenes.ExplorePlaza = () => {
 	const terry = GAME().terry;
 	const player = GAME().player;
 	const miranda = GAME().miranda;
@@ -432,7 +432,7 @@ TerryScenes.ExplorePlaza = function() {
 		Text.NL();
 		Text.Add("Luckily for you, the bustling movement of the people here makes the plaza seem more crowded than it really is, and there aren't that many places to hide anyway. Thusly, if the thief is here, you have a chance of finding her.", parse);
 		Text.NL();
-		if (terry.hidingSpot == WORLD().loc.Rigard.Plaza) {
+		if (terry.hidingSpot === WORLD().loc.Rigard.Plaza) {
 			Text.Add("As you make your way through the crowds, you feel someone walk straight into you, having been looking over their shoulder and not watching where they were going. As you shake your head to recover, you find yourself looking right into the eyes of the vixen you were chasing! She yelps in shock and tries to run away, but the crowd is in the path and so she is cornered inadvertently by the scrum. You shout at her to halt, and she replies by drawing her weapons, sending the crowd fleeing and bringing Miranda running to assist.", parse);
 			Text.Flush();
 			TerryScenes.CombatVsMiranda();
@@ -461,7 +461,7 @@ TerryScenes.ExplorePlaza = function() {
 	Gui.NextPrompt();
 };
 
-TerryScenes.CombatVsMiranda = function() {
+TerryScenes.CombatVsMiranda = () => {
 	const terry = GAME().terry;
  const party: Party = GAME().party;
  const world = WORLD();
@@ -476,7 +476,7 @@ TerryScenes.CombatVsMiranda = function() {
 
 	enc.canRun = false;
 
-	enc.onLoss = function() {
+	enc.onLoss = () => {
 		const parse: any = {
 
 		};
@@ -497,24 +497,24 @@ TerryScenes.CombatVsMiranda = function() {
 
 		// Move Terry
 		const scenes = new EncounterTable();
-		scenes.AddEnc(function() {
+		scenes.AddEnc(() => {
 			terry.hidingSpot = world.loc.Rigard.Gate;
-		}, 1.0, function() { return terry.hidingSpot != world.loc.Rigard.Gate; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => terry.hidingSpot !== world.loc.Rigard.Gate);
+		scenes.AddEnc(() => {
 			terry.hidingSpot = world.loc.Rigard.Residential.Street;
-		}, 1.0, function() { return terry.hidingSpot != world.loc.Rigard.Residential.Street; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => terry.hidingSpot !== world.loc.Rigard.Residential.Street);
+		scenes.AddEnc(() => {
 			terry.hidingSpot = world.loc.Rigard.ShopStreet.Street;
-		}, 1.0, function() { return terry.hidingSpot != world.loc.Rigard.ShopStreet.Street; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => terry.hidingSpot !== world.loc.Rigard.ShopStreet.Street);
+		scenes.AddEnc(() => {
 			terry.hidingSpot = world.loc.Rigard.Plaza;
-		}, 1.0, function() { return terry.hidingSpot != world.loc.Rigard.Plaza; });
+		}, 1.0, () => terry.hidingSpot !== world.loc.Rigard.Plaza);
 
 		scenes.Get();
 
 		Gui.NextPrompt();
 	};
-	enc.onRun = function() {
+	enc.onRun = () => {
 		const parse: any = {
 
 		};
@@ -532,18 +532,18 @@ TerryScenes.CombatVsMiranda = function() {
 
 		// Move Terry
 		const scenes = new EncounterTable();
-		scenes.AddEnc(function() {
+		scenes.AddEnc(() => {
 			terry.hidingSpot = world.loc.Rigard.Gate;
-		}, 1.0, function() { return terry.hidingSpot != world.loc.Rigard.Gate; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => terry.hidingSpot !== world.loc.Rigard.Gate);
+		scenes.AddEnc(() => {
 			terry.hidingSpot = world.loc.Rigard.Residential.Street;
-		}, 1.0, function() { return terry.hidingSpot != world.loc.Rigard.Residential.Street; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => terry.hidingSpot !== world.loc.Rigard.Residential.Street);
+		scenes.AddEnc(() => {
 			terry.hidingSpot = world.loc.Rigard.ShopStreet.Street;
-		}, 1.0, function() { return terry.hidingSpot != world.loc.Rigard.ShopStreet.Street; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => terry.hidingSpot !== world.loc.Rigard.ShopStreet.Street);
+		scenes.AddEnc(() => {
 			terry.hidingSpot = world.loc.Rigard.Plaza;
-		}, 1.0, function() { return terry.hidingSpot != world.loc.Rigard.Plaza; });
+		}, 1.0, () => terry.hidingSpot !== world.loc.Rigard.Plaza);
 
 		scenes.Get();
 
@@ -554,12 +554,12 @@ TerryScenes.CombatVsMiranda = function() {
 	enc.onEncounter = ...
 	enc.VictoryCondition = ...
 	*/
-	Gui.NextPrompt(function() {
+	Gui.NextPrompt(() => {
 		enc.Start();
 	});
 };
 
-TerryScenes.CaughtTheThief = function() {
+TerryScenes.CaughtTheThief = () => {
 	const terry = GAME().terry;
 	const player = GAME().player;
 	const miranda = GAME().miranda;
@@ -590,7 +590,7 @@ TerryScenes.CaughtTheThief = function() {
 	Text.NL();
 	Text.Add("The vixen swallows audibly…", parse);
 	Text.NL();
-	if (party.location == world.loc.Rigard.ShopStreet.Street) {
+	if (party.location === world.loc.Rigard.ShopStreet.Street) {
 		Text.Add("<i>“I-it’s in that warehouse over there,”</i> she squeaks, pointing across the street. Her eyes never leave Miranda’s face.", parse);
 	} else {
 		Text.Add("<i>“I… I hid it in a warehouse in the merchant district!”</i> she squeaks, eyeing Miranda fearfully.", parse);
@@ -599,7 +599,7 @@ TerryScenes.CaughtTheThief = function() {
 
 	TimeStep({minute: 30});
 
-	Gui.NextPrompt(function() {
+	Gui.NextPrompt(() => {
 		Text.Clear(); Text.Add("Following the thief’s directions, you make your way into the appointed warehouse. The doors are locked, not that it makes any difference. Miranda shatters the lock, and latch, with a well placed kick, making both you and the thieving vixen cringe. ", parse);
 		Text.NL();
 		Text.Add("You look inquisitively at your surroundings, trying to see if you can spot where the vixen might’ve stashed the goods. Miranda closes the door behind you and pushes the defeated vixen to your side. Her arms are tied behind her back by a sturdy rope knotted around her wrists, the free end trailing back into Miranda's firm grasp. Not seeing any signs, you turn your attention back toward the thief.", parse);
@@ -774,7 +774,7 @@ TerryScenes.CaughtTheThief = function() {
 		}
 		Gui.SetButtonsFromList(options, false, null);
 
-		Gui.Callstack.push(function() {
+		Gui.Callstack.push(() => {
 			Text.NL();
 			Text.Add("You quickly compose yourself and do your best to assess the situation. Beside you, you have a bound prisoner, naked from the waist down, and beside him is standing Miranda, dressed from the top up in a city watch outfit and naked from the waist down, an erection bobbing uneasily before her. In front of you, a detachment of armed and armored figures whose iconography makes it clear they belong to the Royal Guard. Really not a good scene to be caught in... at least <b>you</b> are still as dressed as you ever are; you look to be the only one acting somewhat professionally here, so your reputation is probably safe... pity Miranda can't say the same.", parse);
 			Text.NL();
@@ -793,7 +793,7 @@ TerryScenes.CaughtTheThief = function() {
 			Text.Add("<i>“Goddammit!”</i> she yells as she angrily punches the floor, cracking the boards and sending splinters flying.", parse);
 			Text.Flush();
 
-			Gui.NextPrompt(function() {
+			Gui.NextPrompt(() => {
 				Text.Clear();
 				party.location = world.loc.Rigard.Tavern.common;
 				TimeStep({hour: 1});
@@ -827,7 +827,7 @@ TerryScenes.CaughtTheThief = function() {
 							Text.Add("You tell her it wasn't so bad, and you're glad you managed to help her.", parse);
 							Text.NL();
 							Text.Add("<i>“Maybe I should be nicer to you from now on. I guess you don’t deserve the crap I throw at you all the time. Sorry for being a dick,”</i> she apologizes.", parse);
-							if (miranda.flags.subCellar != 0) {
+							if (miranda.flags.subCellar !== 0) {
 								Text.Add(" <i>“And - uh - for locking you in my cellar and having sex with you for three days.”</i>", parse);
 							}
 							Text.NL();
@@ -887,7 +887,7 @@ TerryScenes.CaughtTheThief = function() {
 	});
 };
 
-TerryScenes.Release = function() {
+TerryScenes.Release = () => {
 	const terry = GAME().terry;
 	const player = GAME().player;
 	const miranda = GAME().miranda;
@@ -924,7 +924,7 @@ TerryScenes.Release = function() {
 	Text.NL();
 	Text.Add("So, he remembers you then?", parse);
 	Text.NL();
-	if (terry.flags.Met == TerryFlags.Met.LetHer) {
+	if (terry.flags.Met === TerryFlags.Met.LetHer) {
 		Text.Add("<i>“You let that dog rape me! What’re you here for? Want to finish what you started?”</i>", parse);
 		Text.NL();
 		Text.Add("You tell him that, actually, no; you came to see him released.", parse);
@@ -932,7 +932,7 @@ TerryScenes.Release = function() {
 		Text.Add("<i>“Oh, I get it. You’re going to let that dog have another go at me! What are you? Some kind of sick voyeur?”</i>", parse);
 		Text.NL();
 		Text.Add("Miranda isn't even here, you inform him. This is a bail-out, pure and simple.", parse);
-	} else if (terry.flags.Met == TerryFlags.Met.StopHer) {
+	} else if (terry.flags.Met === TerryFlags.Met.StopHer) {
 		Text.Add("<i>“Why are you releasing me? Weren’t you working with that dog to have me arrested?”</i>", parse);
 		Text.NL();
 		Text.Add("You admit that's true, but circumstances have changed.", parse);
@@ -981,7 +981,7 @@ TerryScenes.Release = function() {
 
 	TimeStep({minute: 30});
 
-	Gui.NextPrompt(function() {
+	Gui.NextPrompt(() => {
 		Text.Clear();
 
 		party.location = world.loc.Rigard.Plaza;
@@ -1003,7 +1003,7 @@ TerryScenes.Release = function() {
 		Text.Add("You inform him that it's no problem. Better he wasn't walking around in a prisoner's outfit anyway.", parse);
 		Text.NL();
 		Text.Add("As the two of you continue to walk in silence, he moves to walk beside you. <i>“Y’know, I didn’t really thank you for saving my neck. ", parse);
-		if (terry.flags.Met == TerryFlags.Met.StopHer) {
+		if (terry.flags.Met === TerryFlags.Met.StopHer) {
 			Text.Add("And for protecting me from that dog. ", parse);
 		}
 		Text.Add("They say you should never look a gift horse in the mouth, but after our little encounter in the warehouse, you gotta understand I had my doubts.”</i>", parse);
@@ -1016,7 +1016,7 @@ TerryScenes.Release = function() {
 		Text.NL();
 		Text.Add("<i>“So… out of curiosity, what exactly happens if I disobey you or try to run?”</i> he asks, tail swaying behind.", parse);
 		Text.NL();
-		parse.j = GAME().jeanne.flags.Met != 0 ? "Jeanne, " : "";
+		parse.j = GAME().jeanne.flags.Met !== 0 ? "Jeanne, " : "";
 		Text.Add("You consider it for a moment, then finally decide to tell him the truth, admitting you don't really know. But you know the collar was made by [j]the Royal Court Mage, so he can probably figure it out himself.", parse);
 		Text.NL();
 		Text.Add("<i>“I see… so I guess I’m at your mercy. Lead away then?”</i>", parse);
@@ -1110,7 +1110,7 @@ TerryScenes.Release = function() {
 	});
 };
 
-TerryScenes.TalkPrompt = function() {
+TerryScenes.TalkPrompt = () => {
 	const terry = GAME().terry;
 
 	const parse: any = {
@@ -1131,7 +1131,7 @@ TerryScenes.TalkPrompt = function() {
 	// TODO
 	options.push({ nameStr : "Pronoun",
 		func : TerryScenes.TalkPronoun, enabled : true,
-		tooltip : terry.PronounGender() == Gender.male ? "Terry looks too much like a girl, you should address 'her' as such from now on." : "In the end, Terry is a guy, no matter how girly she looks. You should address 'him' as such.",
+		tooltip : terry.PronounGender() === Gender.male ? "Terry looks too much like a girl, you should address 'her' as such from now on." : "In the end, Terry is a guy, no matter how girly she looks. You should address 'him' as such.",
 	});
 	options.push({ nameStr : "Past",
 		func : TerryScenes.TalkPast, enabled : true,
@@ -1145,7 +1145,7 @@ TerryScenes.TalkPrompt = function() {
 	Gui.SetButtonsFromList(options, true, terry.Interact);
 };
 
-TerryScenes.TalkFeelings = function() {
+TerryScenes.TalkFeelings = () => {
 	const terry = GAME().terry;
 	const player = GAME().player;
 
@@ -1276,7 +1276,7 @@ TerryScenes.TalkFeelings = function() {
 	TerryScenes.TalkPrompt();
 };
 
-TerryScenes.TalkPronoun = function() {
+TerryScenes.TalkPronoun = () => {
 	const terry = GAME().terry;
 	const player = GAME().player;
 
@@ -1297,7 +1297,7 @@ TerryScenes.TalkPronoun = function() {
 	};
 
 	Text.Clear();
-	if (terry.PronounGender() == Gender.male) {
+	if (terry.PronounGender() === Gender.male) {
 		Text.Add("Shaking your head, you tell Terry that you just can’t really think of him as being a guy. ", parse);
 		if (terry.FirstBreastRow().Size() < 3) {
 			Text.Add("It doesn’t matter that he’s flat up top. ", parse);
@@ -1334,7 +1334,7 @@ TerryScenes.TalkPronoun = function() {
 	}
 	Text.NL();
 
-	if (terry.PronounGender() == Gender.male) {
+	if (terry.PronounGender() === Gender.male) {
 		terry.flags.PrefGender = Gender.female;
 	} else {
 		terry.flags.PrefGender = Gender.male;
@@ -1363,7 +1363,7 @@ TerryScenes.TalkPronoun = function() {
 	TerryScenes.TalkPrompt();
 };
 
-TerryScenes.TalkPast = function(force: boolean) {
+TerryScenes.TalkPast = (force: boolean) => {
 	const terry = GAME().terry;
 	const player = GAME().player;
 
@@ -1378,9 +1378,10 @@ TerryScenes.TalkPast = function(force: boolean) {
 	const max = terry.flags.maxPast;
 	let cur = terry.flags.rotPast;
 
-	const scenes = [];
+	type fnType = () => boolean;
+	const scenes: fnType[] = [];
 
-	const BlockScene = function() {
+	const BlockScene = () => {
 		Text.Add("The [foxvixen] looks like [heshe]’s contemplating what to tell you. Finally, [heshe] says:", parse);
 		Text.NL();
 		Text.Add("<i>“...Listen, I don’t really feel comfortable talking about more just yet. I… well, can we do this later?”</i> [heshe] asks.", parse);
@@ -1389,7 +1390,7 @@ TerryScenes.TalkPast = function(force: boolean) {
 	};
 
 	// Long
-	scenes.push(function() {
+	scenes.push(() => {
 		Text.Add("<i>“I was born in the slums of Rigard. My mother was a hooker and my father was a thief. One heavy night of drinking and partying, and I was conceived.”</i>", parse);
 		Text.NL();
 		Text.Add("<i>“My father told me that when he heard the news, he was surprisingly joyous. He and mom never married, but they started living together all the same. Who said someone needs to be married to have a family together?”</i>", parse);
@@ -1406,8 +1407,9 @@ TerryScenes.TalkPast = function(force: boolean) {
 
 		Text.Flush();
 		TerryScenes.TalkPrompt();
+		return false;
 	});
-	scenes.push(function() {
+	scenes.push(() => {
 		if (terry.Relation() < 10) {
 			BlockScene();
 			return true;
@@ -1434,8 +1436,9 @@ TerryScenes.TalkPast = function(force: boolean) {
 		}
 
 		TerryScenes.TalkPrompt();
+		return false;
 	});
-	scenes.push(function() {
+	scenes.push(() => {
 		if (terry.Relation() < 20) {
 			BlockScene();
 			return true;
@@ -1460,8 +1463,9 @@ TerryScenes.TalkPast = function(force: boolean) {
 		if (max < 2) {
 			terry.relation.IncreaseStat(100, 1);
 		}
+		return false;
 	});
-	scenes.push(function() {
+	scenes.push(() => {
 		if (terry.Relation() < 30) {
 			BlockScene();
 			return true;
@@ -1484,8 +1488,9 @@ TerryScenes.TalkPast = function(force: boolean) {
 		if (max < 3) {
 			terry.relation.IncreaseStat(100, 1);
 		}
+		return false;
 	});
-	scenes.push(function() {
+	scenes.push(() => {
 		if (terry.Relation() < 40) {
 			BlockScene();
 			return true;
@@ -1506,8 +1511,9 @@ TerryScenes.TalkPast = function(force: boolean) {
 		if (max < 4) {
 			terry.relation.IncreaseStat(100, 1);
 		}
+		return false;
 	});
-	scenes.push(function() {
+	scenes.push(() => {
 		if (terry.Relation() < 45) {
 			BlockScene();
 			return true;
@@ -1550,9 +1556,9 @@ TerryScenes.TalkPast = function(force: boolean) {
 				Text.Add("Despite [himher] having all the bits necessary to pass as a woman, [hisher]", parse);
 			} else if (terry.FirstVag() || terry.Cup() >= TerryFlags.Breasts.Acup) {
 				Text.Add("Despite [himher] also some girly bits, [hisher]", parse);
- } else {
+ 			} else {
 				Text.Add("[HisHer]", parse);
- }
+ 			}
 			Text.Add(" stallionhood is truly eye-catching! Although Terry <b>is</b> pretty skilled at keeping it hidden...", parse);
 			Text.NL();
 		} else if (terry.FirstCock() && !terry.FirstVag() && terry.Cup() >= TerryFlags.Breasts.Bcup) {
@@ -1572,13 +1578,14 @@ TerryScenes.TalkPast = function(force: boolean) {
 		Text.NL();
 		Text.Add("<i>“Yeah, he kinda did. We had a good run... but eventually, I guess he got too cocky and things didn’t end up well for him. But let’s visit that some other time, alright?”</i>", parse);
 		Text.NL();
-		parse.again = (max == cur) ? "" : " again";
+		parse.again = (max === cur) ? "" : " again";
 		Text.Add("Of course; Terry should take [hisher] time, [heshe]’ll talk when [heshe]’s ready. You thank [himher] for telling you about Thorn[again].", parse);
 		if (max < 5) {
 			terry.relation.IncreaseStat(100, 1);
 		}
+		return false;
 	});
-	scenes.push(function() {
+	scenes.push(() => {
 		if (terry.Relation() < 50) {
 			BlockScene();
 			return true;
@@ -1613,8 +1620,9 @@ TerryScenes.TalkPast = function(force: boolean) {
 		if (max < 6) {
 			terry.relation.IncreaseStat(100, 1);
 		}
+		return false;
 	});
-	scenes.push(function() {
+	scenes.push(() => {
 		if (terry.Relation() < 55) {
 			BlockScene();
 			return true;
@@ -1653,13 +1661,14 @@ TerryScenes.TalkPast = function(force: boolean) {
 		if (max < 7) {
 			terry.relation.IncreaseStat(100, 1);
 		}
+		return false;
 	});
 
 	if (cur >= scenes.length) { cur = 0; }
 
 	if (!force) {
 		Text.Clear();
-		if (max == 0 && cur == 0) {
+		if (max === 0 && cur === 0) {
 			Text.Add("<i>“Okay, I guess I can do that. So, what would you like to know?”</i>", parse);
 			Text.NL();
 			Text.Add("You’re curious about [hisher] past. You’d like to know more about [himher] and you feel this would help sorting that out.", parse);
@@ -1678,7 +1687,7 @@ TerryScenes.TalkPast = function(force: boolean) {
 			Text.Add("<i>“Well, if you really want to know I guess I have to tell you.”</i> [HeShe] smiles a bit. <i>“Let’s start at the beginning then...”</i>", parse);
 
 			terry.relation.IncreaseStat(100, 3);
-		} else if (cur == 0) {
+		} else if (cur === 0) {
 			Text.Add("<i>“I already told you everything I could about my past, [playername]. So, unless you want me to start over, there’s not much else to tell.”</i>", parse);
 			Text.Flush();
 
@@ -1722,7 +1731,7 @@ TerryScenes.TalkPast = function(force: boolean) {
 	TerryScenes.TalkPrompt();
 };
 
-TerryScenes.TalkCompliment = function() {
+TerryScenes.TalkCompliment = () => {
 	const terry = GAME().terry;
 	const player = GAME().player;
 
@@ -1817,7 +1826,7 @@ TerryScenes.TalkCompliment = function() {
 	TerryScenes.TalkPrompt();
 };
 
-TerryScenes.SkinshipRummagePack = function() {
+TerryScenes.SkinshipRummagePack = () => {
 	const terry = GAME().terry;
 	const player = GAME().player;
 
@@ -1861,7 +1870,7 @@ TerryScenes.SkinshipRummagePack = function() {
 	}
 };
 
-TerryScenes.SkinshipPrompt = function() {
+TerryScenes.SkinshipPrompt = () => {
 	const terry = GAME().terry;
 	const player = GAME().player;
 
@@ -1885,7 +1894,7 @@ TerryScenes.SkinshipPrompt = function() {
 	if (terry.Relation() < 30) {
 		Text.Add("<i>“Huh?”</i> The [foxvixen] glares at you as if [heshe]’d just been mocked. <i>“What do I look like to you? Some kind of pet? I don’t need your grabby [hand]s on my body.”</i>", parse);
 		Text.NL();
-		if (terry.flags.Skin == 0) {
+		if (terry.flags.Skin === 0) {
 			Text.Add("Maybe [heshe] doesn’t <i>need</i> them, you confess. But does [heshe] really think it’d be so bad to let you just touch [himher]? You don’t mean anything by doing so, if that’s [hisher] concern. Besides, you <i>could</i> just make this an order...", parse);
 			Text.NL();
 			Text.Add("The [foxvixen] scowls at you, but acquiesces. <i>“Fine, you got your point across… what are you thinking of doing then?”</i>", parse);
@@ -1922,7 +1931,7 @@ TerryScenes.SkinshipPrompt = function() {
 	TerryScenes.SkinshipPromptChoices();
 };
 
-TerryScenes.SkinshipPromptChoices = function() {
+TerryScenes.SkinshipPromptChoices = () => {
 	const terry = GAME().terry;
 	const player = GAME().player;
 	const party: Party = GAME().party;
@@ -2204,7 +2213,7 @@ TerryScenes.SkinshipPromptChoices = function() {
 	/*
 	//[name]
 	options.push({ nameStr : "name",
-		func : function() {
+		func : () => {
 			Text.Clear();
 			Text.Add("", parse);
 			Text.NL();
@@ -2213,7 +2222,7 @@ TerryScenes.SkinshipPromptChoices = function() {
 		tooltip : ""
 	});
 	 */
-	Gui.SetButtonsFromList(options, true, function() {
+	Gui.SetButtonsFromList(options, true, () => {
 		Text.Clear();
 		Text.Add("<i>“Oh, okay. Is there anything else you want to do?”</i>", parse);
 		Text.Flush();
@@ -2222,7 +2231,7 @@ TerryScenes.SkinshipPromptChoices = function() {
 	});
 };
 
-TerryScenes.BrushTail = function() {
+TerryScenes.BrushTail = () => {
 	const terry = GAME().terry;
 	const player = GAME().player;
 
@@ -2342,7 +2351,7 @@ TerryScenes.BrushTail = function() {
 			if (naked) {
 				Text.Add("Since your little slut of a [foxvixen] handily stripped down before [heshe] sat down, there’s nothing to stop you admiring the shapely curves of [hisher] ass. Terry’s hips twitch, wiggling [hisher] butt and ensuring your attention is drawn to the heart so boldly emblazoned on [hisher] ass. ", parse);
 
-				if (terry.flags.BM == 0) {
+				if (terry.flags.BM === 0) {
 					Text.Add("What’s this? You look down at Terry’s bubble-butt. A heart-shaped patch of golden fur is stamped on [hisher] right butt-cheek. You didn’t expect to see a tramp stamp on Terry’s butt, however you admit it looks kinda cute.", parse);
 					terry.flags.BM = 1;
 				} else {
@@ -2434,29 +2443,29 @@ TerryScenes.BrushTail = function() {
 					Text.NL();
 
 					const scenes = new EncounterTable();
-					scenes.AddEnc(function() {
+					scenes.AddEnc(() => {
 						parse.fox = terry.HorseCock() ? "horse" : "fox";
 						Text.Add("<i>“So what are we doing? I’m already rock-hard. Maybe you’d like to add some [fox]-meat to your diet? Or maybe you just need something to fill you up?”</i> [heshe] suggests with a lusty grin.", parse);
-					}, 1.0, function() { return terry.FirstCock(); });
-					scenes.AddEnc(function() {
+					}, 1.0, () => terry.FirstCock());
+					scenes.AddEnc(() => {
 						Text.Add("<i>“What’s it gonna be, [playername]? You finally going to break my virgin pussy in?”</i>", parse);
-					}, 1.0, function() { return terry.FirstVag() && terry.FirstVag().virgin && (player.FirstCock() || player.Strapon()); });
-					scenes.AddEnc(function() {
+					}, 1.0, () => terry.FirstVag() && terry.FirstVag().virgin && (player.FirstCock() || player.Strapon()));
+					scenes.AddEnc(() => {
 						Text.Add("<i>“Tell me what are we doing? I’m so wet I can barely stand it anymore!”</i>", parse);
-					}, 1.0, function() { return terry.FirstVag() && terry.FirstVag().virgin == false; });
-					scenes.AddEnc(function() {
+					}, 1.0, () => terry.FirstVag() && terry.FirstVag().virgin === false);
+					scenes.AddEnc(() => {
 						Text.Add("<i>“So what are you planning? Personally, I’m a bit hungry. Think you could feed me?”</i>", parse);
-					}, 1.0, function() { return player.FirstCock(); });
-					scenes.AddEnc(function() {
+					}, 1.0, () => player.FirstCock());
+					scenes.AddEnc(() => {
 						Text.Add("<i>“I got an itch in my butt, and I just can’t reach it. Got something long and hard to help me with?”</i>", parse);
-					}, 1.0, function() { return player.FirstCock() || player.Strapon(); });
+					}, 1.0, () => player.FirstCock() || player.Strapon());
 
-					scenes.AddEnc(function() {
+					scenes.AddEnc(() => {
 						Text.Add("<i>“Feeling a bit thirsty, think you can get me something to drink? Maybe some juice?”</i> [heshe] grins.", parse);
-					}, 1.0, function() { return player.FirstVag(); });
-					scenes.AddEnc(function() {
+					}, 1.0, () => player.FirstVag());
+					scenes.AddEnc(() => {
 						Text.Add("<i>“My boobs feel so heavy… I could really use a hand over here,”</i> [heshe] says, caressing [hisher] breasts.", parse);
-					}, 1.0, function() { return terry.Lactation() && (terry.Milk() >= terry.MilkCap()); });
+					}, 1.0, () => terry.Lactation() && (terry.Milk() >= terry.MilkCap()));
 
 					scenes.Get();
 
@@ -2466,7 +2475,7 @@ TerryScenes.BrushTail = function() {
 
 					Text.Flush();
 
-					TerryScenes.SexPromptChoice(function() {
+					TerryScenes.SexPromptChoice(() => {
 						Text.Clear();
 						Text.Add("<i>“What? After getting me all worked up, you’re going to back down <b>now</b>!?”</i>", parse);
 						Text.NL();
@@ -2569,7 +2578,7 @@ TerryScenes.BrushTail = function() {
 			Text.NL();
 			Text.Add("Sighing, Terry gently touches up [hisher] hair and smiles at you. <i>“Thanks a lot, [playername]. I should have you brush my tail more often.”</i>", parse);
 			Text.NL();
-			parse.l = player.LowerBodyType() == LowerBodyType.Single ? ", so to speak," : "";
+			parse.l = player.LowerBodyType() === LowerBodyType.Single ? ", so to speak," : "";
 			Text.Add("You smile back, assuring [himher] that you’d be happy to give [himher] a hand whenever [heshe] feels like it, but for now, you both have other things to do. Terry sighs and vacates your lap, whilst you get back to your feet[l] and head off again.", parse);
 			Text.Flush();
 
@@ -2599,7 +2608,7 @@ TerryScenes.BrushTail = function() {
 	Gui.SetButtonsFromList(options, false, null);
 };
 
-TerryScenes.CheckFluids = function() {
+TerryScenes.CheckFluids = () => {
 	const terry = GAME().terry;
 	const player = GAME().player;
 
@@ -2760,7 +2769,7 @@ TerryScenes.CheckFluids = function() {
 		Text.Add("You make a show of it, but you really are considering the question. [HeShe] <b>is</b> right there, and clearly ready to play... it’d honestly be kind of a shame to waste it... ", parse);
 		Text.Flush();
 
-		const backFunc = function() {
+		const backFunc = () => {
 			Text.Clear();
 			Text.Add("<i>“Alright then, but maybe later?”</i>", parse);
 			Text.NL();
@@ -2800,7 +2809,7 @@ TerryScenes.CheckFluids = function() {
 /* TERRY TF SCENES */
 
 // Need if(terry.flags["TF"] & TerryFlags.TF.TriedItem && !(terry.flags["TF"] & TerryFlags.TF.Rosalin))
-TerryScenes.RosalinTF = function() {
+TerryScenes.RosalinTF = () => {
 	const terry = GAME().terry;
 	const player = GAME().player;
 	const rosalin = GAME().rosalin;
@@ -2834,7 +2843,7 @@ TerryScenes.RosalinTF = function() {
 	Gui.NextPrompt();
 };
 
-TerryScenes.JeanneTFFirst = function() {
+TerryScenes.JeanneTFFirst = () => {
 	const terry = GAME().terry;
 
 	let parse: any = {
@@ -2879,7 +2888,7 @@ TerryScenes.JeanneTFFirst = function() {
 	JeanneScenes.Talk();
 };
 
-TerryScenes.JeanneTFPrompt = function() {
+TerryScenes.JeanneTFPrompt = () => {
 	const terry = GAME().terry;
 	const player = GAME().player;
 	const party: Party = GAME().party;
@@ -2892,7 +2901,7 @@ TerryScenes.JeanneTFPrompt = function() {
 	// [name]
 	const options = new Array();
 
-	const AddItem = function(item: TFItem, scene: any, name: string, tooltip: string, costmult: number, horseTF?: boolean) {
+	const AddItem = (item: TFItem, scene: any, name: string, tooltip: string, costmult: number, horseTF?: boolean) => {
 		options.push({ nameStr : name || item.name,
 			func(obj: any) {
 				parse.item = obj.str;
@@ -2901,7 +2910,7 @@ TerryScenes.JeanneTFPrompt = function() {
 
 				Text.Clear();
 				Text.Add("<i>“For that, I will need [item], plus [coin] coins,”</i> she says, showing you a scroll of what she’ll be needing.", parse);
-				if (terry.PregHandler().IsPregnant() && item == AlchemyItems.Testos) {
+				if (terry.PregHandler().IsPregnant() && item === AlchemyItems.Testos) {
 					Text.NL();
 					Text.Add("<i>“Sorry, [playername]. Trying to modify [hisher] womb while [heshe] is still pregnant could have disastrous consequences both for [himher] and the baby. So I am going to have to refuse to do so until Terry has given birth.”</i>", parse);
 					Text.NL();
@@ -2948,7 +2957,7 @@ TerryScenes.JeanneTFPrompt = function() {
 	Gui.SetButtonsFromList(options, true, JeanneScenes.InteractPrompt);
 };
 
-TerryScenes.JeanneTFCraft = function(item: TFItem, scene: any, horseTF: boolean) {
+TerryScenes.JeanneTFCraft = (item: TFItem, scene: any, horseTF: boolean) => {
 	const terry = GAME().terry;
 	const player = GAME().player;
 
@@ -2975,7 +2984,7 @@ TerryScenes.JeanneTFCraft = function(item: TFItem, scene: any, horseTF: boolean)
 	Text.Flush();
 
 	// TODO
-	Gui.NextPrompt(function() {
+	Gui.NextPrompt(() => {
 		Text.Clear();
 		if (horseTF) {
 			Text.Add("Once it’s over, she closes the vial and utters something under her breath, making the vial glow briefly. <i>“Sorry, but I cannot really shrink this one, so your [foxvixen] will have to settle for taking a big one this time,”</i> Jeanne explains, handing you the sealed vial.", parse);
@@ -3064,7 +3073,7 @@ TerryScenes.JeanneTFCraft = function(item: TFItem, scene: any, horseTF: boolean)
 		Text.Add("Kneeling down for a better view, you admire the shapely, feminine ass now lifted before you. Terry’s tail twitches, and unthinkingly, you move to stroke the long appendage with its soft, fluffy fur. A few caresses of the plush tail, and then it’s back to business. You resume studying Terry’s butt, your gaze drawn to the pronounced love-heart shape of pure gold set against the creamy white of the rest of [hisher] ass cheeks.", parse);
 		Text.NL();
 
-		if (terry.flags.BM == 0) {
+		if (terry.flags.BM === 0) {
 			terry.flags.BM = 1;
 			Text.Add("You can’t resist teasing Terry about [hisher] ‘birthmark’; who’d have thought [heshe] would have something so cute on [hisher] body, nevermind it being there of all places?", parse);
 			Text.NL();
@@ -3073,15 +3082,15 @@ TerryScenes.JeanneTFCraft = function(item: TFItem, scene: any, horseTF: boolean)
 			Text.Add("Seems like you found a weak spot, you think to yourself. ", parse);
 		} else {
 			const scenes = new EncounterTable();
-			scenes.AddEnc(function() {
+			scenes.AddEnc(() => {
 				Text.Add("Unable to resist yourself, you poke [himher] playfully right in the center of the heart-shape, feeling [hisher] buttflesh giving under the pressure of your finger.", parse);
-			}, 1.0, function() { return true; });
-			scenes.AddEnc(function() {
+			}, 1.0, () => true);
+			scenes.AddEnc(() => {
 				Text.Add("You gently trail your finger around the heart’s shape, following the lines until you have traced the shape completely.", parse);
-			}, 1.0, function() { return true; });
-			scenes.AddEnc(function() {
+			}, 1.0, () => true);
+			scenes.AddEnc(() => {
 				Text.Add("Struck by an impulse, you bend in closer and plant a soft kiss on the golden-furred patch.", parse);
-			}, 1.0, function() { return true; });
+			}, 1.0, () => true);
 			scenes.Get();
 
 			Text.NL();
@@ -3120,7 +3129,7 @@ TerryScenes.JeanneTFCraft = function(item: TFItem, scene: any, horseTF: boolean)
 		Text.Add("Finally, you deem Terry’s tush to be as ready as it’ll ever be. Giving Jeanne back her lube, you reach for the transformative suppository she gave you earlier, align it with Terry’s anus, and start to gently push it against [hisher] pucker.", parse);
 		Text.NL();
 
-		Gui.Callstack.push(function() {
+		Gui.Callstack.push(() => {
 			Text.NL();
 			Text.Add("The [foxvixen] gets up on [hisher], awaiting whatever effect the suppository is supposed to have on [himher]self.", parse);
 			Text.Flush();
@@ -3138,8 +3147,8 @@ TerryScenes.JeanneTFCraft = function(item: TFItem, scene: any, horseTF: boolean)
 			const cocksInAss = player.CocksThatFit(terry.Butt());
 			let p1Cock     = player.BiggestCock(cocksInAss);
 
-			parse.multiCockDesc = function() { return player.MultiCockDesc(); };
-			parse.cockDesc      = function() { return p1Cock.Short(); };
+			parse.multiCockDesc = () => player.MultiCockDesc();
+			parse.cockDesc      = () => p1Cock.Short();
 
 			if (p1Cock) {
 				Text.Add("You strip your [lowerArmorDesc], exposing your [multiCockDesc] to air.", parse);
@@ -3169,7 +3178,7 @@ TerryScenes.JeanneTFCraft = function(item: TFItem, scene: any, horseTF: boolean)
 			}
 			Text.NL();
 
-			TerryScenes.SexFuckButtEntrypoint(p1Cock, false, function(rough: boolean) {
+			TerryScenes.SexFuckButtEntrypoint(p1Cock, false, (rough: boolean) => {
 				Text.Add("There, now [heshe]’s all stretched up, you proudly declare, working the tip of the big suppository into [hisher] butt. ", parse);
 				if (rough) {
 					Text.Add("<i>“That works, I suppose,”</i> Jeanne muses, huffing as she adjusts her gown, unabashedly licking her drenched fingers clean. <i>“Was it really necessary to be that rough, though?”</i> She really shouldn’t be one to talk. While you had your own fun, the court magician has been playing with some toys out of her collection, eyeing Terry lustfully; looks like she really enjoyed the show.", parse);
@@ -3255,7 +3264,7 @@ TerryScenes.JeanneTFCraft = function(item: TFItem, scene: any, horseTF: boolean)
 				Text.NL();
 				Text.Add("Terry flushes in embarrassment, averting [hisher] eyes. <i>“You really are a big meanie,”</i> [heshe] pouts.", parse);
 				Text.NL();
-				parse.armorDesc = function() { return player.ArmorDesc(); };
+				parse.armorDesc = () => player.ArmorDesc();
 				Text.Add("Extricating your [cockDesc], you pat [himher] gently on the flank and inform [himher] that you’re all done. Having said that, you move to clean up and put your [armorDesc] back on.", parse);
 				Gui.PrintDefaultOptions();
 			});
@@ -3268,7 +3277,7 @@ TerryScenes.JeanneTFCraft = function(item: TFItem, scene: any, horseTF: boolean)
 	});
 };
 
-TerryScenes.JeanneTFGrowBoobs = function() {
+TerryScenes.JeanneTFGrowBoobs = () => {
 	const terry = GAME().terry;
 	const player = GAME().player;
 
@@ -3291,7 +3300,7 @@ TerryScenes.JeanneTFGrowBoobs = function() {
 
 		terry.flags.breasts = TerryFlags.Breasts.Acup;
 		terry.SetBreasts();
-	} else if (terry.Cup() == TerryFlags.Breasts.Acup) {
+	} else if (terry.Cup() === TerryFlags.Breasts.Acup) {
 		Text.Add("A soft whimper escapes Terry’s throat, nipples perking up as [hisher] small bosom quivers before starting to grow. A pleased murmur bubbles from the [foxvixen]’s throat as they swell outwards, stopping only after [heshe] has acquired a perky pair of B-cup breasts.", parse);
 		Text.NL();
 		Text.Add("Terry is left panting as [hisher] transformation reaches an end. [HeShe] cups [hisher] newly grown breasts, testing them momentarily as [heshe] rises to [hisher] feet.", parse);
@@ -3310,7 +3319,7 @@ TerryScenes.JeanneTFGrowBoobs = function() {
 
 		terry.flags.breasts = TerryFlags.Breasts.Bcup;
 		terry.SetBreasts();
-	} else if (terry.Cup() == TerryFlags.Breasts.Bcup) {
+	} else if (terry.Cup() === TerryFlags.Breasts.Bcup) {
 		Text.Add("Terry’s head falls back and [heshe] moans softly, bosom quivering as the transformative goes to work. Nipples hard as diamond, jutting blatantly through the fur, you watch as the perky orbs balloon outwards, swelling into plush, proud C-cups, with just the right amount of sag. Terry truly looks like a woman at any casual glance, with an hourglass figure that many women would kill to have.", parse);
 		if (terry.FirstCock()) {
 			Text.Add(" Even knowing about the [terrycock] hanging between [hisher] legs, if [heshe] were covered, you doubt anyone would notice it at a first glance in [hisher] usual clothes.", parse);
@@ -3335,7 +3344,7 @@ TerryScenes.JeanneTFGrowBoobs = function() {
 		}
 		terry.flags.breasts = TerryFlags.Breasts.Ccup;
 		terry.SetBreasts();
-	} else if (terry.Cup() == TerryFlags.Breasts.Ccup) {
+	} else if (terry.Cup() === TerryFlags.Breasts.Ccup) {
 		Text.Add("Terry arches [hisher] back and moans in pleasure, unthinkingly thrusting out [hisher] bosom and emphasizing its sudden growth spurt. Before your eyes, the former C-cups balloon into large, luscious D-cups, looking even larger than they actually are on Terry’s otherwise petite and graceful build.", parse);
 		Text.NL();
 		Text.Add("Even with the [foxvixen]’s small frame exaggerating every quiver and quake of them, they are truly enticing. Before Terry can think of clambering back to [hisher] feet, you move to touch them. They’re just as soft and inviting as they look; downy fur covering ample flesh that’s got just the right amount of give to it. Yes, groping these is going to be a very enjoyable experience, for both of you.", parse);
@@ -3377,7 +3386,7 @@ TerryScenes.JeanneTFGrowBoobs = function() {
 	JeanneScenes.InteractPrompt();
 };
 
-TerryScenes.JeanneTFShrinkBoobs = function() {
+TerryScenes.JeanneTFShrinkBoobs = () => {
 	const terry = GAME().terry;
 	const player = GAME().player;
 
@@ -3397,7 +3406,7 @@ TerryScenes.JeanneTFShrinkBoobs = function() {
 
 		terry.flags.breasts = TerryFlags.Breasts.Ccup;
 		terry.SetBreasts();
-	} else if (terry.Cup() == TerryFlags.Breasts.Ccup) {
+	} else if (terry.Cup() === TerryFlags.Breasts.Ccup) {
 		Text.Add("A mewl escapes Terry’s throat as [hisher] C-cups quiver visibly, unconsciously arching [hisher] back and making it more prominent as they shrink. By the time they stop, the [foxvixen] is sporting a new B-cup bustline.", parse);
 		Text.NL();
 		Text.Add("[HeShe] massages [hisher] boobs experimentally. <i>“I guess smaller breasts are more manageable...”</i> [heshe] mumbles. You get the feeling that [heshe]’s a bit disappointed at [hisher] reduced bust.", parse);
@@ -3406,7 +3415,7 @@ TerryScenes.JeanneTFShrinkBoobs = function() {
 
 		terry.flags.breasts = TerryFlags.Breasts.Bcup;
 		terry.SetBreasts();
-	} else if (terry.Cup() == TerryFlags.Breasts.Bcup) {
+	} else if (terry.Cup() === TerryFlags.Breasts.Bcup) {
 		Text.Add("The [foxvixen]’s eyes sink closed with a luxuriant groan, B-cups visibly shrinking away and not stopping until [heshe]’s left with a humble A-cup bustline.", parse);
 		Text.NL();
 		Text.Add("Terry checks out [hisher] perky breasts. <i>“Guess I don’t really have to worry about them sagging anymore now.”</i>", parse);
@@ -3415,7 +3424,7 @@ TerryScenes.JeanneTFShrinkBoobs = function() {
 
 		terry.flags.breasts = TerryFlags.Breasts.Acup;
 		terry.SetBreasts();
-	} else if (terry.Cup() == TerryFlags.Breasts.Acup) {
+	} else if (terry.Cup() === TerryFlags.Breasts.Acup) {
 		Text.Add("With a single moan, Terry’s bustline rapidly shrinks away, within seconds leaving [himher] with [hisher] original daintily flat chest.", parse);
 		Text.NL();
 		Text.Add("<i>“Guess I won’t have to worry so much about protecting my chest now, at least not more than usual,”</i> the [foxvixen] states.", parse);
@@ -3442,7 +3451,7 @@ TerryScenes.JeanneTFShrinkBoobs = function() {
 	JeanneScenes.InteractPrompt();
 };
 
-TerryScenes.JeanneTFStartLactate = function() {
+TerryScenes.JeanneTFStartLactate = () => {
 	const terry = GAME().terry;
 	const player = GAME().player;
 
@@ -3460,7 +3469,7 @@ TerryScenes.JeanneTFStartLactate = function() {
 		Text.Add("As close as you are, you can do nothing to keep yourself from getting hosed down as Terry becomes a veritable milk-fountain. Fortunately, it’s only temporary, and the streams die away after a few moments, leaving only the white streaks painted over your body and Terry’s swollen-looking nipples as sign of what lurks inside [hisher] breasts.", parse);
 		Text.NL();
 		Text.Add("The court magician giggles. ", parse);
-		if (terry.flags.xLact == 0) {
+		if (terry.flags.xLact === 0) {
 			Text.Add("<i>“I suppose that is what you get for trying to make a lactating [foxvixen] lactate; I could get used to watching this,”</i> she teases.", parse);
 		} else if (terry.flags.xLact <= 3) {
 			Text.Add("<i>“You must really enjoy getting drenched in breast milk, hrm?”</i>  she teases.", parse);
@@ -3503,7 +3512,7 @@ TerryScenes.JeanneTFStartLactate = function() {
 	JeanneScenes.InteractPrompt();
 };
 
-TerryScenes.JeanneTFStopLactate = function() {
+TerryScenes.JeanneTFStopLactate = () => {
 	const terry = GAME().terry;
 	const player = GAME().player;
 
@@ -3538,7 +3547,7 @@ TerryScenes.JeanneTFStopLactate = function() {
 	JeanneScenes.InteractPrompt();
 };
 
-TerryScenes.JeanneTFGrowVag = function() {
+TerryScenes.JeanneTFGrowVag = () => {
 	const terry = GAME().terry;
 	const player = GAME().player;
 
@@ -3583,7 +3592,7 @@ TerryScenes.JeanneTFGrowVag = function() {
 	JeanneScenes.InteractPrompt();
 };
 
-TerryScenes.JeanneTFRemVag = function() {
+TerryScenes.JeanneTFRemVag = () => {
 	const terry = GAME().terry;
 	const player = GAME().player;
 
@@ -3632,7 +3641,7 @@ TerryScenes.JeanneTFRemVag = function() {
 	JeanneScenes.InteractPrompt();
 };
 
-TerryScenes.JeanneTFGrowCockEntrypoint = function() {
+TerryScenes.JeanneTFGrowCockEntrypoint = () => {
 	const terry = GAME().terry;
 	const player = GAME().player;
 
@@ -3647,7 +3656,7 @@ TerryScenes.JeanneTFGrowCockEntrypoint = function() {
 	Text.Add("As you watch, the flesh over Terry’s cunt begins to bulge and bloat, swelling into an oval-shaped mass. Finally, [heshe] wraps [hisher] fingers around it and its tip splits apart, revealing something crimson-colored and conical in shape jutting from the interior of what is clearly [hisher] new sheath. Curling [hisher] digits around it, Terry strokes away in an almost trance-like state, coaxing inch after inch of turgid flesh from its depths. Its base begins to swell, bloating into the iconic vulpine knot, engorged and clearly ready to be used to anchor Terry to someone, but after that... nothing else happens.", parse);
 };
 
-TerryScenes.JeanneTFHorsegasmEntrypoint = function() {
+TerryScenes.JeanneTFHorsegasmEntrypoint = () => {
 	const terry = GAME().terry;
 	const player = GAME().player;
 
@@ -3674,7 +3683,7 @@ TerryScenes.JeanneTFHorsegasmEntrypoint = function() {
 	Text.Add(" You ask Terry if [heshe] thinks [heshe]’s done now, to which the tired, seed-soaked [foxvixen] simply gives you a dizzy grin and nods sheepishly. Even as you say this, you look over [hisher] now-flaccid horsecock; it doesn’t look to have changed at all.", parse);
 };
 
-TerryScenes.JeanneTFGrowCock = function() {
+TerryScenes.JeanneTFGrowCock = () => {
 	const terry = GAME().terry;
 	const player = GAME().player;
 
@@ -3686,7 +3695,7 @@ TerryScenes.JeanneTFGrowCock = function() {
 	parse = terry.ParserPronouns(parse);
 
 	Text.Clear();
-	if (terry.flags.cock == TerryFlags.Cock.None) {
+	if (terry.flags.cock === TerryFlags.Cock.None) {
 		TerryScenes.JeanneTFGrowCockEntrypoint();
 		Text.NL();
 		Text.Add("The [foxvixen] pants, fapping like [hisher] life depended on it. <i>“Hah… c-can’t cum!”</i> [heshe] exclaims, desperation apparent in [hisher] voice.", parse);
@@ -3703,7 +3712,7 @@ TerryScenes.JeanneTFGrowCock = function() {
 
 		terry.flags.cock = TerryFlags.Cock.Regular;
 		terry.SetCock();
-	} else if (terry.flags.cock == TerryFlags.Cock.Regular) {
+	} else if (terry.flags.cock === TerryFlags.Cock.Regular) {
 		Text.Add("Terry immediately falls to [hisher] knees, furiously fapping at [hisher] fox-cock as it reaches its fully engorged state and dripping pre. The knot inflates in record time. Each time [hisher] paws connect with it, [heshe] spews a long strand of fox-cum.", parse);
 		if (terry.FirstVag()) {
 			Text.Add(" The [foxvixen]’s pussy reacts in a similar manner, squirting small but constant, gushes of fluids underneath, quickly forming a pool of female-scented arousal.", parse);
@@ -3723,7 +3732,7 @@ TerryScenes.JeanneTFGrowCock = function() {
 };
 
 // TODO
-TerryScenes.JeanneTFRemCock = function() {
+TerryScenes.JeanneTFRemCock = () => {
 	const terry = GAME().terry;
 	const player = GAME().player;
 
@@ -3783,7 +3792,7 @@ TerryScenes.JeanneTFRemCock = function() {
 	JeanneScenes.InteractPrompt();
 };
 
-TerryScenes.JeanneTFGrowHorsecock = function() {
+TerryScenes.JeanneTFGrowHorsecock = () => {
 	const terry = GAME().terry;
 	const player = GAME().player;
 
@@ -3903,7 +3912,7 @@ TerryScenes.JeanneTFGrowHorsecock = function() {
 
 /* TERRY SEX SCENES */
 
-TerryScenes.Impregnate = function(mother: Entity, father: Entity, cum: number, slot?: number) {
+TerryScenes.Impregnate = (mother: Entity, father: Entity, cum: number, slot?: number) => {
 	mother.PregHandler().Impregnate({
 		slot   : slot || PregnancyHandler.Slot.Vag,
 		mother,
@@ -3916,7 +3925,7 @@ TerryScenes.Impregnate = function(mother: Entity, father: Entity, cum: number, s
 };
 
 // TODO
-TerryScenes.SexPrompt = function(backPrompt: any) {
+TerryScenes.SexPrompt = (backPrompt: CallableFunction) => {
 	const terry = GAME().terry;
 	const player = GAME().player;
 
@@ -3929,7 +3938,7 @@ TerryScenes.SexPrompt = function(backPrompt: any) {
 	parse = terry.ParserPronouns(parse);
 	parse = terry.ParserTags(parse, "t");
 
-	Gui.Callstack.push(function() {
+	Gui.Callstack.push(() => {
 		Text.Add("Done appreciating your vulpine pet’s naked form, you step around so that you are in front of [himher], rubbing your chin idly as you consider how you want to fuck the [foxvixen] this time...", parse);
 		Text.Flush();
 		TerryScenes.SexPromptChoice(backPrompt, true);
@@ -3949,15 +3958,15 @@ TerryScenes.SexPrompt = function(backPrompt: any) {
 	Text.NL();
 
 	const scenes = new EncounterTable();
-	scenes.AddEnc(function() {
+	scenes.AddEnc(() => {
 		Text.Add("<i>“How’s this?”</i> [heshe] asks, puffing [hisher] chest and proudly displaying [himher]self before you. <i>“Ready for the taking?”</i>", parse);
-	}, 1.0, function() { return true; });
-	scenes.AddEnc(function() {
+	}, 1.0, () => true);
+	scenes.AddEnc(() => {
 		Text.Add("<i>“I’m ready… [master],”</i> the [foxvixen] says, kneeling before you.", parse);
-	}, 1.0, function() { return true; });
-	scenes.AddEnc(function() {
+	}, 1.0, () => true);
+	scenes.AddEnc(() => {
 		Text.Add("<i>“Alright, I guess I’m ready,”</i> the [foxvixen] says, standing before you.", parse);
-	}, 1.0, function() { return true; });
+	}, 1.0, () => true);
 
 	scenes.Get();
 
@@ -3967,7 +3976,7 @@ TerryScenes.SexPrompt = function(backPrompt: any) {
 	Text.Add("You make a point of circling Terry, looking up and down and studying every inch of the [malefemaleherm]’s naked form. As [hisher] tail waves gently in [nervousnessarousal], it exposes a prominent “birthmark” on [hisher] butt cheek; though a large patch of pure white otherwise envelops [hisher] ass and the backs of [hisher] thighs, on the right cheek there is a large, love-heart-shaped patch of the rich golden color that adorns the rest of [hisher] body.", parse);
 	Text.NL();
 
-	if (terry.flags.BM == 0) {
+	if (terry.flags.BM === 0) {
 		terry.flags.BM = 1;
 		Text.Add("Motivated by curiosity, you reach out with your hand to touch it, gently trailing your fingers through the [foxvixen]’s soft fur and tracing the edge of the heart design on [hisher] lusciously shapely ass cheek. There’s no question that it’s real.", parse);
 		Text.NL();
@@ -4002,7 +4011,7 @@ TerryScenes.SexPrompt = function(backPrompt: any) {
 				Text.Add("Shaking your head, you gently chide Terry for getting embarrassed; [heshe] has such a beautiful body, and [heshe] should be proud of it! And this mark, why, it’s simply so fitting for [himher] - surprisingly cute and delicate, but bold and flamboyant when seen. It emphasizes the lusciousness of [hisher] sweet ass wonderfully, drawing the eye in to appreciate it, inviting the onlooking to touch, to rub, to fondle...", parse);
 				Text.NL();
 				Text.Add("<i>“But it’s embarrassing!”</i> [heshe] protests. ", parse);
-				if (terry.Gender() == Gender.male) {
+				if (terry.Gender() === Gender.male) {
 					Text.Add("<i>“I’m a boy dammit! But I have that girly tramp stamp permanently tattooed on my butt!”</i> [heshe] exclaims. ", parse);
 				}
 				Text.Add("<i>“Can you imagine what it was like growing up on the streets? With that thing on my butt? I was bullied left and right because of it!”</i>", parse);
@@ -4027,26 +4036,26 @@ TerryScenes.SexPrompt = function(backPrompt: any) {
 	} else {
 		const scenes = new EncounterTable();
 
-		scenes.AddEnc(function() {
+		scenes.AddEnc(() => {
 			Text.Add("You thrust your tenting bulge against the golden heart, grinding your fabric clad erection against your [foxvixen]’s birthmark and letting [himher] feel your appreciation of it through your [botarmor].", parse);
 			Text.NL();
 			Text.Add("<i>“S-stop it! You perv!”</i> [heshe] exclaims, though [heshe] makes no move to step away from you.", parse);
-		}, 1.0, function() { return player.FirstCock(); });
-		scenes.AddEnc(function() {
+		}, 1.0, () => player.FirstCock());
+		scenes.AddEnc(() => {
 			Text.Add("Feeling mischievous, you give Terry’s butt a sudden firm poke with your finger right in the middle of [hisher] love-heart birthmark.", parse);
 			Text.NL();
 			Text.Add("<i>“Eep!”</i> Terry rubs [hisher] butt right where you poked [himher]. <i>“Jerk...”</i> [heshe] pouts.", parse);
-		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
 			Text.Add("Your fingers reach out and gently trace the love-heart’s edging, starting from the point down at its bottom before curving up, around and then down again.", parse);
 			Text.NL();
 			Text.Add("Terry shudders in embarrassment as you do so. <i>“Okay, you’ve done your teasing, so let’s move on.”</i>", parse);
-		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
 			Text.Add("Grinning to yourself, you deliver a sudden appreciative slap to Terry’s ass right on [hisher] birthmark, watching as the [foxvixen]’s butt jiggles slightly in response to the impact.", parse);
 			Text.NL();
 			Text.Add("<i>“Ooh! H-hey, be gentle!”</i> [heshe] protests, rubbing where you slapped.", parse);
-		}, 1.0, function() { return true; });
+		}, 1.0, () => true);
 
 		scenes.Get();
 	}
@@ -4054,7 +4063,7 @@ TerryScenes.SexPrompt = function(backPrompt: any) {
 	Gui.PrintDefaultOptions();
 };
 
-TerryScenes.SexPromptChoice = function(backPrompt: any, haveadrink: boolean) {
+TerryScenes.SexPromptChoice = (backPrompt: CallableFunction, haveadrink: boolean) => {
 	const terry = GAME().terry;
 	const player = GAME().player;
 
@@ -4175,7 +4184,7 @@ TerryScenes.SexPromptChoice = function(backPrompt: any, haveadrink: boolean) {
 	}
 	/* //TODO
 	options.push({ nameStr : "name",
-		func : function() {
+		func : () => {
 			Text.Clear();
 			Text.Add("", parse);
 			Text.NL();
@@ -4184,10 +4193,10 @@ TerryScenes.SexPromptChoice = function(backPrompt: any, haveadrink: boolean) {
 		tooltip : Text.Parse("", parse)
 	});
 	 */
-	Gui.SetButtonsFromList(options, backPrompt, backPrompt);
+	Gui.SetButtonsFromList(options, backPrompt != null, backPrompt);
 };
 
-TerryScenes.SexGetOralPussy = function() {
+TerryScenes.SexGetOralPussy = () => {
 	const terry = GAME().terry;
 	const player = GAME().player;
 
@@ -4365,7 +4374,7 @@ TerryScenes.SexGetOralPussy = function() {
 	TerryScenes.Prompt();
 };
 
-TerryScenes.SexGetOralCock = function() {
+TerryScenes.SexGetOralCock = () => {
 	const terry = GAME().terry;
 	const player = GAME().player;
 
@@ -4412,7 +4421,7 @@ TerryScenes.SexGetOralCock = function() {
 		// [name]
 		const options = new Array();
 
-		const cockFunc = function(c: Cock, idx: number) {
+		const cockFunc = (c: Cock, idx: number) => {
 			options.push({ nameStr : Text.Ordinal(idx + 1, true),
 				func() {
 					Text.Clear();
@@ -4424,7 +4433,7 @@ TerryScenes.SexGetOralCock = function() {
 			});
 		};
 
-		_.each(player.AllCocks(), function(c, key: number) {
+		_.each(player.AllCocks(), (c, key: number) => {
 			cockFunc(c, key);
 		});
 
@@ -4436,7 +4445,7 @@ TerryScenes.SexGetOralCock = function() {
 	}
 };
 
-TerryScenes.SexGetOralCockCont = function(parse: any, p1cock: Cock) {
+TerryScenes.SexGetOralCockCont = (parse: any, p1cock: Cock) => {
 	const terry = GAME().terry;
 	const player = GAME().player;
 
@@ -4588,7 +4597,7 @@ TerryScenes.SexGetOralCockCont = function(parse: any, p1cock: Cock) {
 			} else if (cum < 6) {
 				Text.Add("A veritable river of semen pours from your [cock] down Terry’s throat. Thick white waves of cum that wash into [hisher] belly as inexorably as the tide.", parse);
 				if (player.NumCocks() > 1) {
-					if (player.NumCocks() == 2) {
+					if (player.NumCocks() === 2) {
 						Text.Add(" Your neglected [cock] pours forth its own load, drenching Terry’s front in excess sperm even as [hisher] belly fills to the brim with the other torrent.", parse);
 					} else {
 						Text.Add(" Neglected as they have been, your other [cocks] still try to get in on the fun, doing their best to paint Terry’s fur as white as newly fallen snow. Thick ropes fling themselves over Terry’s front, arms and legs, caking [himher] in your goo.", parse);
@@ -4619,7 +4628,7 @@ TerryScenes.SexGetOralCockCont = function(parse: any, p1cock: Cock) {
 			} else { // High cum amount
 				Text.Add("When your [cock] explodes, it’s a wonder the force doesn’t pop it clean out of Terry’s mouth. An eruption of cum, fit for a geyser, pounds its way down [hisher] throat with relentless force.", parse);
 				if (player.NumCocks() > 1) {
-					if (player.NumCocks() == 2) {
+					if (player.NumCocks() === 2) {
 						Text.Add(" Not to be outdone, your other [cock] joins the party. It hoses Terry down with great enthusiasm, and ensures [heshe] is completely soaked [himher] in semen both inside and out.", parse);
 					} else {
 						Text.Add(" With all of your [cocks] firing in unison, Terry is promptly drenched inside and out. Waves of semen splatter over [hisher] pelt, even as more floods [hisher] stomach.", parse);
@@ -4723,7 +4732,7 @@ TerryScenes.SexGetOralCockCont = function(parse: any, p1cock: Cock) {
 					Text.Add("Glistening ropes of semen fling themselves about Terry’s face with merry abandon, veiling [himher] in a perverse web of sparkling strands. It streaks over [hisher] hair, paints across [hisher] cheeks and spatters upon [hisher] nose, dripping down [hisher] neck.", parse);
 				}
 			} else if (cum < 6) {
-				parse.bothAll = player.NumCocks() == 2 ? "both" : "all";
+				parse.bothAll = player.NumCocks() === 2 ? "both" : "all";
 				if (player.NumCocks() > 1) {
 					Text.Add("With [bothAll] your [cocks] firing in unison, Terry gets a true soaking. In [hisher] hair, on [hisher] face, over [hisher] belly, across [hisher] arms... your cream goes absolutely <b>everywhere</b>. By the time that you finally stop, Terry is a cummy white shade from head to tail with little drops of love-goo dripping onto the ground beneath [himher].", parse);
 				} else {
@@ -4835,7 +4844,7 @@ TerryScenes.SexGetOralCockCont = function(parse: any, p1cock: Cock) {
 	Gui.SetButtonsFromList(options, false, null);
 };
 
-TerryScenes.SexPitchAnal = function(cocksInAss: Cock[]) {
+TerryScenes.SexPitchAnal = (cocksInAss: Cock[]) => {
 	const terry = GAME().terry;
 	const player = GAME().player;
 
@@ -4854,9 +4863,9 @@ TerryScenes.SexPitchAnal = function(cocksInAss: Cock[]) {
 	const virgin = terry.Butt().virgin;
 	let promise: boolean;
 
-	Gui.Callstack.push(function() {
+	Gui.Callstack.push(() => {
 
-		Gui.Callstack.push(function() {
+		Gui.Callstack.push(() => {
 			Text.Add("Taking the proper stance, you grind your [cock] against the [foxvixen]’s ass, gliding it through the velvety-furred cheeks of [hisher] rear before lining the tip up with [hisher] newly lubed hole.", parse);
 			Text.NL();
 			if (p1Cock.Volume() >= 400) {
@@ -4884,7 +4893,7 @@ TerryScenes.SexPitchAnal = function(cocksInAss: Cock[]) {
 				Text.NL();
 			}
 
-			TerryScenes.SexFuckButtEntrypoint(p1Cock, promise, function(rough: boolean) {
+			TerryScenes.SexFuckButtEntrypoint(p1Cock, promise, (rough: boolean) => {
 				if (rough) {
 					Text.Add("<i>“Ugh, my ass...”</i> Terry groans. <i>“My hips feel sore, my butt feels sore, I’m feeling sore in places I didn’t even think it was possible to feel sore...”</i>", parse);
 					Text.NL();
@@ -4956,7 +4965,7 @@ TerryScenes.SexPitchAnal = function(cocksInAss: Cock[]) {
 					}
 					Text.NL();
 
-					const knotted = p1Cock.knot != 0;
+					const knotted = p1Cock.knot !== 0;
 
 					let fTooltip;
 					let kTooltip;
@@ -5238,7 +5247,7 @@ TerryScenes.SexPitchAnal = function(cocksInAss: Cock[]) {
 		options.push({ nameStr : "Lick",
 			func() {
 				Text.Clear();
-				parse.l = player.LowerBodyType() != LowerBodyType.Single ? " your knees at" : "";
+				parse.l = player.LowerBodyType() !== LowerBodyType.Single ? " your knees at" : "";
 				Text.Add("Lowering yourself to[l] Terry’s rear, you gently nip [himher] right on the heart-stamp, sinking your teeth through the fur into the flesh beneath just hard enough that [heshe] can properly feel it.", parse);
 				Text.NL();
 				Text.Add("<i>“Ow! That hurt!”</i> Terry protests. <i>“Why’d you bite me?”</i>", parse);
@@ -5314,7 +5323,7 @@ TerryScenes.SexPitchAnal = function(cocksInAss: Cock[]) {
 
 	Text.Clear();
 	if (virgin) {
-		Gui.Callstack.push(function() {
+		Gui.Callstack.push(() => {
 			Text.NL();
 			Text.Add("Reaching out with your hands, you gently push on Terry’s shoulders, the [foxvixen] quickly catching on and kneeling down on all fours. You move [hisher] limbs slightly with your [hand]s, adjusting Terry’s stance so that the posture will be more comfortable for [himher], until you are satisfied with the result.", parse);
 			Text.NL();
@@ -5395,12 +5404,12 @@ TerryScenes.SexPitchAnal = function(cocksInAss: Cock[]) {
 	}
 };
 
-TerryScenes.SexFuckButtEntrypoint = function(p1Cock: Cock, promise: boolean, retFunc: any) {
+TerryScenes.SexFuckButtEntrypoint = (p1Cock: Cock, promise: boolean, retFunc: any) => {
 	const terry = GAME().terry;
 	const player = GAME().player;
 
 	const virgin = terry.Butt().virgin;
-	const knotted = p1Cock.knot != 0;
+	const knotted = p1Cock.knot !== 0;
 
 	let parse: any = {
 		foxvixen : terry.mfPronoun("fox", "vixen"),
@@ -5660,7 +5669,7 @@ TerryScenes.SexFuckButtEntrypoint = function(p1Cock: Cock, promise: boolean, ret
 	Gui.SetButtonsFromList(options, false, null);
 };
 
-TerryScenes.SexWorship = function() {
+TerryScenes.SexWorship = () => {
 	const terry = GAME().terry;
 	const player = GAME().player;
 
@@ -6041,7 +6050,7 @@ TerryScenes.SexWorship = function() {
 				parse.br = terry.Cup() >= TerryFlags.Breasts.Ccup ? "breasts" : "hands";
 				Text.Add("<i>“You mean I’m not always? Just joking,”</i> [heshe] laughs. <i>“Alright then, I’m going to milk you good.”</i> Finally, [heshe] engulfs your length in [hisher] warm maw. Terry wastes no time, and begins sucking on as much of your [cock] as [heshe] can get to. [HisHer] [br] stroking along the remainder of your shaft.", parse);
 				Text.NL();
-				parse.k = cock.knot != 0 ? " and your knot" : "";
+				parse.k = cock.knot !== 0 ? " and your knot" : "";
 				Text.Add("Your eyes sink closed and you cry out softly in bliss at the [foxvixen]’s expert ministrations. Warm wetness envelops the key parts of your cock, the stroking against the very base of your shaft[k] merely highlighting the pleasure of [hisher] lips and tongue. ", parse);
 				Text.NL();
 				Text.Add("The hot, wet flesh strokes and caresses you, teasing your [cockTip] and undulating against the underside of your shaft. Sparks of pleasure crackle along your nerves, like a lightning storm inside your brain, and you mindlessly thrust your hips as best you can with Terry’s knot anchoring your ass in place.", parse);
@@ -6121,7 +6130,7 @@ TerryScenes.SexWorship = function() {
 					Text.Add("Thankfully, a few towels is all you needed to deal with that.", parse);
 				}
 				Text.NL();
-				if (cumCoat == CumCoat.Cummy) {
+				if (cumCoat === CumCoat.Cummy) {
 					Text.Add("This brings you to the present... there’s the little matter of your promise to help Terry wash all of the now-gummy, sticky cum matting [hisher] crimson hair out of [hisher] mane.", parse);
 					Text.NL();
 					Text.Add("<i>“Alright, just remember to stay focused. Knowing you, I bet you’re going to be getting all grabby with me, and I don’t need another layer of [playername] on me to clean up later,”</i> [heshe] teases with a grin.", parse);
@@ -6136,7 +6145,7 @@ TerryScenes.SexWorship = function() {
 					TimeStep({hour: 3});
 					Gui.NextPrompt();
 					return;
-				} else if (cumCoat == CumCoat.Gut) {
+				} else if (cumCoat === CumCoat.Gut) {
 					parse.rel = (terry.Relation() + terry.Slut() >= 90) ? " and Terry’s kinky tongue" : "";
 					Text.Add("Even though gravity[rel] have cleaned out your bowels some, you are still sporting quite a belly. Of course, so is the [foxvixen] who gave you your belly. Playfully, you look back and forth between your two semen stuffed swells, visibly comparing them, before announcing that you’re fairly sure Terry’s bigger than you, now.", parse);
 					Text.NL();
@@ -6197,7 +6206,7 @@ TerryScenes.SexWorship = function() {
 };
 
 // Clean Terry Up Entry Point
-TerryScenes.PCCleansTerry = function(func: any, opts: any) {
+TerryScenes.PCCleansTerry = (func: any, opts: any = {}) => {
 	const terry = GAME().terry;
 	const player = GAME().player;
 
@@ -6211,11 +6220,11 @@ TerryScenes.PCCleansTerry = function(func: any, opts: any) {
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
 
-	opts = opts || {};
-	func = func || function(opts: any) {
+	const defFunc = (opts: any) => {
 		Text.Flush();
 		Gui.NextPrompt();
 	};
+	func = func || defFunc;
 
 	// [Towel][Lick Clean]
 	const options = new Array();
@@ -6351,7 +6360,7 @@ TerryScenes.PCCleansTerry = function(func: any, opts: any) {
 // Clean Terry Up Exit Point
 
 // Terry cleans PC Entry Point
-TerryScenes.TCleansPC = function(func: any, opts: any) {
+TerryScenes.TCleansPC = (func: any, opts: any = {}) => {
 	const terry = GAME().terry;
 	const player = GAME().player;
 	const party: Party = GAME().party;
@@ -6366,11 +6375,11 @@ TerryScenes.TCleansPC = function(func: any, opts: any) {
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
 
-	opts = opts || {};
-	func = func || function(opts: any) {
+	const defFunc = (opts: any) => {
 		Text.Flush();
 		Gui.NextPrompt();
 	};
+	func = func || defFunc;
 
 	// [Let Be][Clean Up]
 	const options = new Array();
@@ -6683,12 +6692,12 @@ TerryScenes.TCleansPC = function(func: any, opts: any) {
 };
 // Terry cleans PC Exit Point
 
-TerryScenes.FuckedByBunnyMob = function(male: Entity, parse: any) {
+TerryScenes.FuckedByBunnyMob = (male: Entity, parse: any) => {
 	const terry = GAME().terry;
 
 	if (terry.Slut() < 45) {
 		Text.Add("<i>“Whoa, wait you bunch of pervs! I didn’t- mmf!”</i> Terry’s protests get immediately silenced as one of the males kisses [himher] straight on the lips. ", parse);
-		if (terry.PronounGender() == Gender.male) {
+		if (terry.PronounGender() === Gender.male) {
 			Text.Add("Maybe because Terry looks just so girly...", parse);
 		} else {
 			Text.Add("It seems the lagomorphs are incapable of resisting Terry’s charms...", parse);
@@ -6771,7 +6780,7 @@ TerryScenes.FuckedByBunnyMob = function(male: Entity, parse: any) {
 	const cum = terry.OrgasmCum();
 };
 
-TerryScenes.SexPitchVaginal = function(cocks: Cock[]) {
+TerryScenes.SexPitchVaginal = (cocks: Cock[]) => {
 	const terry = GAME().terry;
 	const player = GAME().player;
 	const party: Party = GAME().party;
@@ -6793,7 +6802,7 @@ TerryScenes.SexPitchVaginal = function(cocks: Cock[]) {
 	if (player.NumCocks() > 1) {
 		const allCocks = player.AllCocksCopy();
 		for (let i = 0; i < allCocks.length; i++) {
-			if (allCocks[i] == p1cock) {
+			if (allCocks[i] === p1cock) {
 				allCocks.splice(i, 1);
 				break;
 			}
@@ -7037,7 +7046,7 @@ TerryScenes.SexPitchVaginal = function(cocks: Cock[]) {
 			Text.NL();
 
 			// Callstack manipulation
-			Gui.Callstack.push(function() {
+			Gui.Callstack.push(() => {
 				Text.NL();
 				parse.c = terry.FirstCock() ? Text.Parse(", [hisher] neglected maleness brushes softly against your chin, but you pay it no mind", parse) : "";
 				Text.Add("Reaching up with your arms, you wrap them around the [foxvixen]’s curvy hips, pulling [himher] down and forward to bring your mouth in proper alignment with [hisher] cunt[c]. This close, you can smell the musk seeping from [hisher] pussy, a heady scent that screams “ready female”. You make sure to burn the scent into your brain.", parse);
@@ -7252,7 +7261,7 @@ TerryScenes.SexPitchVaginal = function(cocks: Cock[]) {
 		tooltip : Text.Parse("Let’s see how your [foxvixen] likes being licked instead.", parse),
 	});
 
-	const dildoScene = function(toy: any) {
+	const dildoScene = (toy: any) => {
 		parse.toy     = toy.sDesc();
 		parse.toyHead = toy.cock.TipShort();
 
@@ -7351,7 +7360,7 @@ TerryScenes.SexPitchVaginal = function(cocks: Cock[]) {
 		Gui.NextPrompt();
 	};
 
-	const addDildoScene = function(toy: Item) {
+	const addDildoScene = (toy: Item) => {
 		if (party.Inv().QueryNum(toy) < 1) { return; }
 
 		parse.toy = toy.sDesc();
@@ -7375,9 +7384,9 @@ TerryScenes.SexPitchVaginal = function(cocks: Cock[]) {
 
 	Gui.SetButtonsFromList(options, false, null);
 
-	Gui.Callstack.push(function() {
+	Gui.Callstack.push(() => {
 		Text.Clear();
-		if (blowjob == TerryBlowjob.Came) {
+		if (blowjob === TerryBlowjob.Came) {
 			Text.Add("Smiling around your mouthful, you take Terry’s right hand and bring it toward your mouth, palm up, as if you were going to kiss it. Instead, you open your lips and tilt your head, allowing the sticky semen within to ooze out over [hisher] fingers. Once you have emptied your maw, you guide the ooze-dripping digits to[oneof] your [cocks].", parse);
 			Text.NL();
 			Text.Add("[HeShe] grins knowingly at you and begins eagerly stroking your [cock] all over. <i>“Making me lube you like this… you’re so kinky, [playername],”</i> [heshe] comments teasingly.", parse);
@@ -7515,10 +7524,10 @@ TerryScenes.SexPitchVaginal = function(cocks: Cock[]) {
 
 		let cumbath: boolean = false;
 
-		let knotted = p1cock.knot != 0;
+		let knotted = p1cock.knot !== 0;
 		let doubleKnot = knotted;
-		if (p2cock) { knotted = knotted || p2cock.knot != 0; }
-		if (p2cock) { doubleKnot = doubleKnot && p2cock.knot != 0; }
+		if (p2cock) { knotted = knotted || p2cock.knot !== 0; }
+		if (p2cock) { doubleKnot = doubleKnot && p2cock.knot !== 0; }
 
 		parse = Text.ParserPlural(parse, doubleKnot, null, "4");
 
@@ -7540,8 +7549,8 @@ TerryScenes.SexPitchVaginal = function(cocks: Cock[]) {
 
 					TerryScenes.Impregnate(terry, player, cum);
 
-					if (p1cock.knot != 0) {
-						const knot2 = p2cock && p2cock.knot != 0;
+					if (p1cock.knot !== 0) {
+						const knot2 = p2cock && p2cock.knot !== 0;
 						parse = Text.ParserPlural(parse, knot2, null, "3");
 						parse.andguts = knot2 ? " and guts" : "";
 						if (cum > 6) {
@@ -7643,7 +7652,7 @@ TerryScenes.SexPitchVaginal = function(cocks: Cock[]) {
 						Text.Add("Terry stares at you, opening [hisher] mouth as if to say something, but you cut [himher] off with a possessively passionate kiss. You thrust your [tongue] shamelessly into [hisher] mouth, wrestling [hisher] own tongue into submission. As you do, your hands start to move into a proper position, one reaching down for [hisher] clitoris, the other toward [hisher] nipples...", parse);
 						Text.NL();
 						parse.c = player.NumCocks() > 1 ? Text.Parse(" and [tanus]", parse) : "";
-						parse.k = p1cock.knot != 0 ? Text.Parse(", even with your knot plugging [himher]", parse) : "";
+						parse.k = p1cock.knot !== 0 ? Text.Parse(", even with your knot plugging [himher]", parse) : "";
 						Text.Add("The [foxvixen] groans into the kiss as you feel [hisher] [tvag][c] clench onto your member[s]. A flood of vixen-juice escapes the seal of your shaft[k]. You moan in pleasure as [hisher] squirting femcum hits your [cockTip] before leaking around your shaft.", parse);
 						Text.NL();
 						Text.Add("<i>“[stuttername], you jerk! I’m still sensitive and you go forcing another orgasm on me,”</i> Terry chastises you, pouting and trying to look mad at you.", parse);
@@ -7787,7 +7796,7 @@ TerryScenes.SexPitchVaginal = function(cocks: Cock[]) {
 						}
 						Text.Flush();
 
-						Gui.NextPrompt(function() {
+						Gui.NextPrompt(() => {
 							Text.Clear();
 							Text.Add("<b>Later…</b>", parse);
 							Text.NL();
@@ -7982,7 +7991,7 @@ TerryScenes.SexPitchVaginal = function(cocks: Cock[]) {
 					TimeStep({hour: 1});
 
 					Gui.NextPrompt();
-				}, enabled : (player.HasPerk(Perks.Breeder) || player.sexlevel >= 5) && terry.PregHandler().IsPregnant() == false,
+				}, enabled : (player.HasPerk(Perks.Breeder) || player.sexlevel >= 5) && terry.PregHandler().IsPregnant() === false,
 				tooltip : Text.Parse("Show Terry what that cunt of [hishers] is really for! Breed [himher] like the bitch [heshe] is and fill [himher] full of kits!", parse),
 			});
 			if (terry.Cup() >= TerryFlags.Breasts.Ccup) {
@@ -8042,7 +8051,7 @@ TerryScenes.SexPitchVaginal = function(cocks: Cock[]) {
 
 						const tail = player.IsNaga() || player.HasPrehensileTail();
 						if (tail) {
-							parse.ti = player.IsNaga() ? function() { return player.LegsDesc(); } : player.HasTail().Short();
+							parse.ti = player.IsNaga() ? () => player.LegsDesc() : player.HasTail().Short();
 							parse.tailSkinDesc = player.IsNaga() ? player.body.SkinDesc(player.Legs()) : player.body.SkinDesc(player.HasTail());
 						}
 
@@ -8260,7 +8269,7 @@ TerryScenes.SexPitchVaginal = function(cocks: Cock[]) {
 	});
 };
 
-TerryScenes.SexCatchVaginal = function() {
+TerryScenes.SexCatchVaginal = () => {
 	const terry = GAME().terry;
 	const player = GAME().player;
 
@@ -8758,7 +8767,7 @@ TerryScenes.SexCatchVaginal = function() {
 };
 
 // Returns true for inside, false for outside
-TerryScenes.SexCatchVaginalHeChooses = function() {
+TerryScenes.SexCatchVaginalHeChooses = () => {
 	const terry = GAME().terry;
 	const player = GAME().player;
 
@@ -8781,7 +8790,7 @@ TerryScenes.SexCatchVaginalHeChooses = function() {
 	}
 };
 
-TerryScenes.SexCatchVaginalInsideHorseCock = function(parse: any) {
+TerryScenes.SexCatchVaginalInsideHorseCock = (parse: any) => {
 	const terry = GAME().terry;
 	const player = GAME().player;
 
@@ -8866,7 +8875,7 @@ TerryScenes.SexCatchVaginalInsideHorseCock = function(parse: any) {
 	}
 	Text.Flush();
 
-	Gui.NextPrompt(function() {
+	Gui.NextPrompt(() => {
 		Text.Clear();
 		Text.Add("<b>Some time later…</b>", parse);
 		Text.NL();
@@ -8885,7 +8894,7 @@ TerryScenes.SexCatchVaginalInsideHorseCock = function(parse: any) {
 	});
 };
 
-TerryScenes.SexCatchVaginalOutsideHorseCock = function(parse: any) {
+TerryScenes.SexCatchVaginalOutsideHorseCock = (parse: any) => {
 	const terry = GAME().terry;
 	const player = GAME().player;
 
@@ -8961,7 +8970,7 @@ TerryScenes.SexCatchVaginalOutsideHorseCock = function(parse: any) {
 	TerryScenes.TCleansPC();
 };
 
-TerryScenes.SexCatchVaginalInsideFoxCock = function(parse: any) {
+TerryScenes.SexCatchVaginalInsideFoxCock = (parse: any) => {
 	const terry = GAME().terry;
 	const player = GAME().player;
 
@@ -9021,7 +9030,7 @@ TerryScenes.SexCatchVaginalInsideFoxCock = function(parse: any) {
 		Text.NL();
 
 		const scenes = new EncounterTable();
-		scenes.AddEnc(function() {
+		scenes.AddEnc(() => {
 			Text.Add("[HisHer] hands move up to tweak your nipples, gently caressing your breasts.", parse);
 			Text.NL();
 			Text.Add("You gasp in pleasure and your hands dart to intercept [hishers], holding onto them as you pull the [foxvixen] up so [heshe]’s level with your face.", parse);
@@ -9029,8 +9038,8 @@ TerryScenes.SexCatchVaginalInsideFoxCock = function(parse: any) {
 			Text.Add("Now, that’s quite enough. If [heshe] gets started, the two of you will never get out of here!", parse);
 			Text.NL();
 			Text.Add("<i>“Doesn’t seem like a such a bad fate.”</i> [HeShe] grins.", parse);
-		}, 1.0, function() { return player.FirstBreastRow().size.Get() >= 3; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => player.FirstBreastRow().size.Get() >= 3);
+		scenes.AddEnc(() => {
 			Text.Add("[HeShe] bends over to give[oneof] your [cocks] a lick.", parse);
 			Text.NL();
 			Text.Add("You gasp in pleasure and your hands dart to [hisher] shoulders, pulling the [foxvixen] up so [heshe]’s level with your face.", parse);
@@ -9038,8 +9047,8 @@ TerryScenes.SexCatchVaginalInsideFoxCock = function(parse: any) {
 			Text.Add("Not that you wouldn’t appreciate a blowjob, but if [heshe] starts on this the two of you aren’t getting out of here anytime soon!", parse);
 			Text.NL();
 			Text.Add("<i>“Aww, you’re talking as if that was a bad thing.”</i> [HeShe] grins.", parse);
-		}, 1.0, function() { return player.FirstCock(); });
-		scenes.AddEnc(function() {
+		}, 1.0, () => player.FirstCock());
+		scenes.AddEnc(() => {
 			Text.Add("[HisHer] hands move a little lower, one finger gently rubbing your [anus].", parse);
 			Text.NL();
 			Text.Add("You shake at the sensation and immediately grabs [hisher] hands, pulling them from under you.", parse);
@@ -9051,7 +9060,7 @@ TerryScenes.SexCatchVaginalInsideFoxCock = function(parse: any) {
 			Text.Add("Terry sighs and you let go of [hisher] hands. Slowly, [heshe] pulls [himher]self up so [hisher] face is level with your.", parse);
 			Text.NL();
 			Text.Add("<i>“Sorry for that, [playername]. You’re just too sexy, and I couldn’t help myself. Forgive me?”</i> [HeShe] grins apologetically.", parse);
-		}, 1.0, function() { return true; });
+		}, 1.0, () => true);
 		scenes.Get();
 
 		Text.NL();
@@ -9072,7 +9081,7 @@ TerryScenes.SexCatchVaginalInsideFoxCock = function(parse: any) {
 	Gui.NextPrompt();
 };
 
-TerryScenes.SexCatchVaginalOutsideFoxCock = function(parse: any) {
+TerryScenes.SexCatchVaginalOutsideFoxCock = (parse: any) => {
 	const terry = GAME().terry;
 	const player = GAME().player;
 
@@ -9145,7 +9154,7 @@ TerryScenes.SexCatchVaginalOutsideFoxCock = function(parse: any) {
 	Gui.NextPrompt();
 };
 
-TerryScenes.SexCatchAnal = function() {
+TerryScenes.SexCatchAnal = () => {
 	const terry = GAME().terry;
 	const player = GAME().player;
 
@@ -9160,7 +9169,7 @@ TerryScenes.SexCatchAnal = function() {
 	parse = player.ParserTags(parse);
 	parse = terry.ParserTags(parse, "t");
 
-	const first = terry.flags.caFirst == 0;
+	const first = terry.flags.caFirst === 0;
 	terry.flags.caFirst++;
 
 	parse = terry.ParserPronouns(parse);
@@ -9360,12 +9369,12 @@ TerryScenes.SexCatchAnal = function() {
 	} else {
 		const next = options[Math.floor(Math.random() * (options.length - 1))].func;
 		Text.Flush();
-		Gui.NextPrompt(function() {
+		Gui.NextPrompt(() => {
 			next(true);
 		});
 	}
 
-	Gui.Callstack.push(function() {
+	Gui.Callstack.push(() => {
 		Text.Clear();
 		if (terry.Relation() < 30) {
 			Text.Add("<i>“No point in delaying the inevitable!”</i> [heshe] says, gripping your [hips] and pushing [hisher] entire cock in a single thrust.", parse);
@@ -9844,7 +9853,7 @@ TerryScenes.SexCatchAnal = function() {
 
 /* TERRY SEX DRINK */
 
-TerryScenes.SexHaveADrink = function(back: any) {
+TerryScenes.SexHaveADrink = (back: any) => {
 	const terry = GAME().terry;
 
 	let parse: any = {
@@ -9909,7 +9918,7 @@ TerryScenes.SexHaveADrink = function(back: any) {
 		});
 	}
 
-	Gui.SetButtonsFromList(options, true, function() {
+	Gui.SetButtonsFromList(options, true, () => {
 		Text.Clear();
 		Text.Add("You tell Terry that you’ve changed your mind; you want to do something else.", parse);
 		Text.NL();
@@ -9932,7 +9941,7 @@ TerryScenes.SexHaveADrink = function(back: any) {
 	});
 };
 
-TerryScenes.SexHaveADrinkPussy = function() {
+TerryScenes.SexHaveADrinkPussy = () => {
 	const terry = GAME().terry;
 	const player = GAME().player;
 
@@ -10802,7 +10811,7 @@ TerryScenes.SexHaveADrinkPussy = function() {
 	Gui.SetButtonsFromList(options, false, null);
 };
 
-TerryScenes.SexHaveADrinkCock = function() {
+TerryScenes.SexHaveADrinkCock = () => {
 	const terry = GAME().terry;
 	const player = GAME().player;
 
@@ -10895,7 +10904,7 @@ TerryScenes.SexHaveADrinkCock = function() {
 	Text.Add("Now naked, you place a hand on your hips and beckon to [himher] with the other. A coy smile on your lips, you ask the [foxvixen] how [heshe]’d like you to receive [himher].", parse);
 	Text.Flush();
 
-	Gui.NextPrompt(function() {
+	Gui.NextPrompt(() => {
 		Text.Clear();
 		if (terry.Relation() < 30) {
 			Text.Add("<i>“Umm… I’m not sure...”</i> [heshe] trails off.", parse);
@@ -11744,7 +11753,7 @@ TerryScenes.SexHaveADrinkCock = function() {
 	});
 };
 
-TerryScenes.SexHaveADrinkBreasts = function() {
+TerryScenes.SexHaveADrinkBreasts = () => {
 	const terry = GAME().terry;
 	const player = GAME().player;
 
@@ -11968,12 +11977,12 @@ TerryScenes.SexHaveADrinkBreasts = function() {
 
 	TimeStep({minute: 15});
 
-	Gui.NextPrompt(function() {
+	Gui.NextPrompt(() => {
 		TerryScenes.SexHaveADrinkBreastsMilk(parse);
 	});
 };
 
-TerryScenes.SexHaveADrinkBreastsMilk = function(parse: any) {
+TerryScenes.SexHaveADrinkBreastsMilk = (parse: any) => {
 	const terry = GAME().terry;
 	const player = GAME().player;
 
@@ -12050,7 +12059,7 @@ TerryScenes.SexHaveADrinkBreastsMilk = function(parse: any) {
 	TerryScenes.SexHaveADrinkBreastsRomance(parse);
 };
 
-TerryScenes.SexHaveADrinkBreastsRomance = function(parse: any) {
+TerryScenes.SexHaveADrinkBreastsRomance = (parse: any) => {
 	const terry = GAME().terry;
 
 	Text.Add("Leisurely, you wrap your arms around Terry and snuggle close, demurely dipping your head down to play a tender kiss on the [foxvixen]’s collarbone, and grinning to yourself as [heshe] shivers in anticipation.", parse);
@@ -12121,7 +12130,7 @@ TerryScenes.SexHaveADrinkBreastsRomance = function(parse: any) {
 	TerryScenes.SexHaveADrinkBreastsArousal(parse);
 };
 
-TerryScenes.SexHaveADrinkBreastsArousal = function(parse: any) {
+TerryScenes.SexHaveADrinkBreastsArousal = (parse: any) => {
 	const terry = GAME().terry;
 	// #arousal check block
 
@@ -12156,7 +12165,7 @@ TerryScenes.SexHaveADrinkBreastsArousal = function(parse: any) {
 	}
 };
 
-TerryScenes.SexHaveADrinkBreastsArousalHorsecock = function(parse: any) {
+TerryScenes.SexHaveADrinkBreastsArousalHorsecock = (parse: any) => {
 	const terry = GAME().terry;
 	const player = GAME().player;
 
@@ -12478,7 +12487,7 @@ TerryScenes.SexHaveADrinkBreastsArousalHorsecock = function(parse: any) {
 	}
 };
 
-TerryScenes.SexHaveADrinkBreastsArousalFoxcock = function(parse: any) {
+TerryScenes.SexHaveADrinkBreastsArousalFoxcock = (parse: any) => {
 	const terry = GAME().terry;
 	const player = GAME().player;
 
@@ -12522,7 +12531,7 @@ TerryScenes.SexHaveADrinkBreastsArousalFoxcock = function(parse: any) {
 	Text.Add("<i>“Yeah, it feels pretty good.”</i>", parse);
 	Text.NL();
 	Text.Add("You thought as much; [heshe] looks so content. [HeShe] really is far too cute for [hisher] own good, does [heshe] know that? ", parse);
-	if (terry.PronounGender() == Gender.female) {
+	if (terry.PronounGender() === Gender.female) {
 		Text.Add("With her sweet[little] tits and this dainty little girl-cock in your fingers, she’s just the yummiest girl you’ve ever held. ", {little: terry.Cup() < TerryFlags.Breasts.Bcup ? " little" : ""});
 	} else {
 		Text.Add("Between his pretty face, his[big] milky boobs and this sweet little fox-dick, you could just eat him up.", {big: terry.Cup() >= TerryFlags.Breasts.Ccup ? " big" : ""});
@@ -12791,13 +12800,13 @@ TerryScenes.SexHaveADrinkBreastsArousalFoxcock = function(parse: any) {
 	}
 };
 
-TerryScenes.SexHaveADrinkBreastsArousalPussy = function(parse: any) {
+TerryScenes.SexHaveADrinkBreastsArousalPussy = (parse: any) => {
 	const terry = GAME().terry;
 	const player = GAME().player;
 
 	Text.Clear();
 	Text.Add("Time to make your little [foxvixen] really feel like a woman...", parse);
-	if (terry.PronounGender() == Gender.male) {
+	if (terry.PronounGender() === Gender.male) {
 		Text.Add(" Oh, how he’d chew you out if you said that to his face...", parse);
 	}
 	Text.NL();

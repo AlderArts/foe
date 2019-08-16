@@ -10,7 +10,7 @@ import { Text } from "../text";
 
 const MeditationScenes: any = {};
 
-MeditationScenes.Entry = function() {
+MeditationScenes.Entry = () => {
 	const player = GAME().player;
 	const party: Party = GAME().party;
 	const kiakai = GAME().kiakai;
@@ -50,11 +50,11 @@ MeditationScenes.Entry = function() {
 			Text.Add("coiling your lower body tightly - although not <i>too</i> tightly and allowing yourself to relax", parse);
 		} else if (player.IsTaur()) {
 			Text.Add("bending your legs to shift some of your weight onto your underbelly as you lie down on the ground", parse);
- } else if (player.IsGoo()) {
+ 		} else if (player.IsGoo()) {
 			Text.Add("easing down your amorphous lower body to the ground", parse);
- } else {
+ 		} else {
 			Text.Add("sitting down and crossing your legs. It’s not quite the lotus position, but it’ll have to do", parse);
- }
+ 		}
 		Text.Add(". All right, now to get this done and over with before things get too out of hand.", parse);
 	} else if (lust >= 0.3) {
 		Text.Add("Making sure that the coast is all clear - or at least for the moment - you find a spot out of the way to rest and catch your breath. Since you’ve got some time to spare, you might as well scratch this itch before it threatens to overwhelm you.", parse);
@@ -68,11 +68,11 @@ MeditationScenes.Entry = function() {
 			Text.Add("packing your lower body into a tight coil", parse);
 		} else if (player.IsTaur()) {
 			Text.Add("folding your legs to rest on your underbelly", parse);
- } else if (player.IsGoo()) {
+ 		} else if (player.IsGoo()) {
 			Text.Add("plopping down delicately", parse);
- } else {
+ 		} else {
 			Text.Add("sitting in a cross-legged position", parse);
- }
+ 		}
 		Text.Add(" as you pull out your gem and focus your thoughts inward.", parse);
 		if (party.InParty(kiakai, switchSpot)) {
 			Text.NL();
@@ -85,7 +85,7 @@ MeditationScenes.Entry = function() {
 
 	const scenes = new EncounterTable();
 	// Breathing exercises (with Kiai). Requires that Kiai be present in the party.
-	scenes.AddEnc(function() {
+	scenes.AddEnc(() => {
 		Text.Add("<i>“I have an idea, [playername]. Shall we go through some simple breathing exercises? They used to help me a lot when I was back at the temple and I needed to clear my mind of… uh… wayward thoughts.”</i>", parse);
 		Text.NL();
 		Text.Add("Well, it sounds like a decent plan. At least with [Kiai] about helping you with this, it’d probably be more effective than trying to meditate on your own.", parse);
@@ -176,17 +176,17 @@ MeditationScenes.Entry = function() {
 		Text.Add("<i>“I am only glad to be able to help in what small way I am able to, [playername]. It is commendable that you chose to deal with your desires in this fashion, rather than seek a more… um, direct method of release. Such would have indeed been easier, I suppose, but you would have missed out on an opportunity to temper your spirit and mind.</i>", parse);
 		Text.NL();
 		Text.Add("<i>“Now then, shall we be on our way?”</i>", parse);
-	}, 1.0, function() { return party.InParty(kiakai, switchSpot); });
+	}, 1.0, () => party.InParty(kiakai, switchSpot));
 	// TODO
 	/*
-	scenes.AddEnc(function() {
+	scenes.AddEnc(() => {
 		Text.Add("", parse);
 		Text.NL();
 		Text.Add("", parse);
-	}, 1.0, function() { return true; });
+	}, 1.0, () => true);
 	*/
 	// Meditate by self
-	scenes.AddEnc(function() {
+	scenes.AddEnc(() => {
 		Text.Add("All right, then. Time to get this over with. Focusing your vision on the gem in your cupped palms, you slowly close your eyes, keeping the gem’s image firmly ensconced in your mind’s eye as you center your body and mind. ", parse);
 		if (lust >= 0.7) {
 			Text.Add("Your concentration lapses more than once as lewd thoughts force their way to your attention, but you manage to forcibly push them down from whence they came and re-orient your mind on the meditative exercise at hand. There’s the lingering suspicion in the back of your mind that they’ll be back in force before too long, but you’ll take any opening you can get.", parse);
@@ -200,7 +200,7 @@ MeditationScenes.Entry = function() {
 
 		const scenes = new EncounterTable();
 		// Astral Projection
-		scenes.AddEnc(function() {
+		scenes.AddEnc(() => {
 			Text.Add("Keeping your eyes closed, you visualize yourself somewhere outside your body, perhaps a few feet ahead", parse);
 			if (party.InParty(kiakai, switchSpot)) {
 				Text.Add(", just in front of [Kiai]", parse);
@@ -219,9 +219,9 @@ MeditationScenes.Entry = function() {
 			Text.Add("At length, something seems to give way, and your eyes snap open of their own accord. You’re still sitting where you were, not having moved so much as an inch - what did you expect? - but you feel as clear-headed as you think you’ll ever get.", parse);
 			Text.NL();
 			Text.Add("Phew! Whether or not you actually managed to project yourself out of your body through sheer force of will is beside the point, for you very definitely don’t feel in the slightest bit aroused any more, and <i>that’s</i> what’s important. Odd, though - you can’t have been sitting down here for so long, and yet your limbs and joints ache and complain when you move to stand up, as if you’d been in that exact same position for an entire day, maybe even two.", parse);
-		}, 1.0, function() { return true; });
+		}, 1.0, () => true);
 		// Martial arts meditation.
-		scenes.AddEnc(function() {
+		scenes.AddEnc(() => {
 			parse.l = player.HasLegs() ? "to your feet" : "yourself upright";
 			Text.Add("Carefully, you stow the gem away again, and get [l]. In your state of focus, your limbs feel exceptionally nimble, your step light, and while it might just be all in your mind it nevertheless makes you feel enthusiastic and invigorated for the exercises you’re about to go through.", parse);
 			Text.NL();
@@ -246,9 +246,9 @@ MeditationScenes.Entry = function() {
 			Text.Add("That seems to be that, though - you’re nearing the end of your meditation session, and begin pulling back your movements into a graceful set of small, simple motions as you wind down the internal fervor to which you’d worked your body into. It doesn’t take long for you to come to a complete stop, and it’s only then that you realize you’ve been holding your breath for a minute now. Exhaling it all in one go, you roll your shoulders and give yourself a quick check-over.", parse);
 			Text.NL();
 			Text.Add("Yes, yes, much better. Nothing pulled, nothing strained. Well, you should be ready to go now.", parse);
-		}, 1.0, function() { return true; });
+		}, 1.0, () => true);
 		// One with the universe
-		scenes.AddEnc(function() {
+		scenes.AddEnc(() => {
 			Text.Add("Concentrating your consciousness on the gem in your hands, you envision in your mind’s eye the power that resides within the gem’s purple facets. Something latent, something immense, but needing to be awakened by the proper rituals… an enormous pulsating light, perhaps? Or maybe it’s more on the lines of a roiling sea of chaos, waves breaking its surface while currents run deep and out of sight? Or it could be none of these, and instead something more on the lines of a tangled ball of yarn, bursting with potential but just needing to be set straight?", parse);
 			Text.NL();
 			Text.Add("None of the answers feel to be particularly right, and none of them feel particularly wrong, either. Despite the amount of time that you’ve held the gem in your possession, so much about it still eludes you to the point that you suspect that even its maker would be surprised to see it in its current state.", parse);
@@ -266,13 +266,13 @@ MeditationScenes.Entry = function() {
 				Text.Add("[Kiai] is still sitting across from you in [hisher] own meditative trance, calmly oblivious to everything about [himher] - you included. ", parse);
 			}
 			Text.Add("Wow. What you just saw… it’s always good to be reminded of how small you are when put in perspective, but alternatively, that could also be inspiration to go ahead and make something bigger of yourself. At any rate, the vision the gem bestowed upon you while meditating has certainly done wonders for your mind. At the very least, every last trace of lewdness has been wiped from your head; it’s a little hard to think of sex when faced with the immenseness of limbo itself.", parse);
-		}, 1.0, function() { return true; });
+		}, 1.0, () => true);
 		/* TODO
-		scenes.AddEnc(function() {
+		scenes.AddEnc(() => {
 			Text.Add("", parse);
 			Text.NL();
 			Text.Add("", parse);
-		}, 1.0, function() { return true; });
+		}, 1.0, () => true);
 		*/
 		scenes.Get();
 
@@ -281,7 +281,7 @@ MeditationScenes.Entry = function() {
 		if (party.InParty(kiakai, switchSpot)) {
 			Text.Add(" Happily, [Kiai] seems to have finished [hisher] own meditation, and gives you a nod as [heshe] rises to [hisher] feet. <i>“Shall we be on our way, [playername]?”</i>", parse);
 		}
-	}, 1.0, function() { return true; });
+	}, 1.0, () => true);
 	scenes.Get();
 
 	Text.NL();

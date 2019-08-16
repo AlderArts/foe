@@ -123,9 +123,9 @@ export class Terry extends Entity {
 	}
 
 	public Changed() {
-		return this.flags.breasts != 0 ||
-			this.flags.vag     != 0 ||
-			this.flags.cock    != 0;
+		return this.flags.breasts !== 0 ||
+			this.flags.vag     !== 0 ||
+			this.flags.cock    !== 0;
 	}
 
 	public Recruited() {
@@ -197,7 +197,7 @@ export class Terry extends Entity {
 		}
 	}
 	public SetLactation() {
-		if (this.flags.lact != 0) {
+		if (this.flags.lact !== 0) {
 			this.lactHandler.milkProduction.base = 3;
 			this.lactHandler.lactationRate.base = 1;
 			this.lactHandler.lactating = true;
@@ -208,24 +208,24 @@ export class Terry extends Entity {
 		}
 	}
 	public Lactation() {
-		return this.flags.lact != 0;
+		return this.flags.lact !== 0;
 	}
 	public SetPussy() {
 		const vag = this.flags.vag;
-		if (vag == TerryFlags.Pussy.None) {
+		if (vag === TerryFlags.Pussy.None) {
 			if (this.FirstVag()) {
 				this.body.vagina = [];
 			}
-		} else if (this.NumVags() == 0) {
+		} else if (this.NumVags() === 0) {
 			this.body.vagina.push(new Vagina());
-			if (vag == TerryFlags.Pussy.Used) {
+			if (vag === TerryFlags.Pussy.Used) {
 				this.FirstVag().virgin = false;
 			}
 		}
 	}
 	public SetCock() {
 		this.body.cock = [];
-		if (this.flags.cock == TerryFlags.Cock.Regular) {
+		if (this.flags.cock === TerryFlags.Cock.Regular) {
 			this.body.cock.push(new Cock());
 			this.FirstCock().length.base = 8;
 			this.FirstCock().thickness.base = 2;
@@ -234,7 +234,7 @@ export class Terry extends Entity {
 			this.Balls().cumCap.base = 5;
 			this.Balls().size.base  = 2;
 			this.Balls().count.base = 2;
-		} else if (this.flags.cock == TerryFlags.Cock.Horse) {
+		} else if (this.flags.cock === TerryFlags.Cock.Horse) {
 			this.body.cock.push(new Cock());
 			this.FirstCock().length.base = 28;
 			this.FirstCock().thickness.base = 6;
@@ -254,35 +254,35 @@ export class Terry extends Entity {
 
 	public heshe() {
 		const gender = this.flags.PrefGender;
-		if (gender == Gender.male) { return "he"; } else { return "she"; }
+		if (gender === Gender.male) { return "he"; } else { return "she"; }
 	}
 	public HeShe() {
 		const gender = this.flags.PrefGender;
-		if (gender == Gender.male) { return "He"; } else { return "She"; }
+		if (gender === Gender.male) { return "He"; } else { return "She"; }
 	}
 	public himher() {
 		const gender = this.flags.PrefGender;
-		if (gender == Gender.male) { return "him"; } else { return "her"; }
+		if (gender === Gender.male) { return "him"; } else { return "her"; }
 	}
 	public HimHer() {
 		const gender = this.flags.PrefGender;
-		if (gender == Gender.male) { return "Him"; } else { return "Her"; }
+		if (gender === Gender.male) { return "Him"; } else { return "Her"; }
 	}
 	public hisher() {
 		const gender = this.flags.PrefGender;
-		if (gender == Gender.male) { return "his"; } else { return "her"; }
+		if (gender === Gender.male) { return "his"; } else { return "her"; }
 	}
 	public HisHer() {
 		const gender = this.flags.PrefGender;
-		if (gender == Gender.male) { return "His"; } else { return "Her"; }
+		if (gender === Gender.male) { return "His"; } else { return "Her"; }
 	}
 	public hishers() {
 		const gender = this.flags.PrefGender;
-		if (gender == Gender.male) { return "his"; } else { return "hers"; }
+		if (gender === Gender.male) { return "his"; } else { return "hers"; }
 	}
 	public mfPronoun(male: any, female: any) {
 		const gender = this.flags.PrefGender;
-		if (gender == Gender.male) { return male; } else { return female; }
+		if (gender === Gender.male) { return male; } else { return female; }
 	}
 
 	public HorseCock() {
@@ -298,7 +298,7 @@ export class Terry extends Entity {
 	}
 
 	public PussyVirgin() {
-		return this.flags.vFirst == 0;
+		return this.flags.vFirst === 0;
 	}
 
 	// Party interaction
@@ -350,7 +350,7 @@ export class Terry extends Entity {
 		// Pick a random target
 		const t = this.GetSingleTarget(encounter, activeChar);
 
-		const first = this.turnCounter == 0;
+		const first = this.turnCounter === 0;
 		this.turnCounter++;
 
 		if (first) {
@@ -405,7 +405,7 @@ export class Terry extends Entity {
 				Text.NL();
 				Text.Add("Considering what you’ve seen, you can only assume that this has something to do with that collar of [hishers]. It seems like it just isn't going to let you just transform [himher] like that. You'll need to see a specialist about this...", parse);
 				Text.NL();
-				if (GAME().jeanne.flags.Met != 0) {
+				if (GAME().jeanne.flags.Met !== 0) {
 					Text.Add("It'd probably be best if you talked to Jeanne; she most likely made the collar, so she should be able to explain what's going on.", parse);
 				} else {
 					Text.Add("Given you got this collar from the heirs of the throne in Rigard, the creator of it is probably the Rigard court wizard; talking to him or her may help answer why this just happened.", parse);

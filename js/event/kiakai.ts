@@ -154,7 +154,7 @@ export class Kiakai extends Entity {
 	}
 
 	public InitCharacter(gender: Gender) {
-		if (gender == Gender.male) {
+		if (gender === Gender.male) {
 			this.body.DefMale();
 			this.body.cock[0].length.base = 8;
 
@@ -188,9 +188,9 @@ export class Kiakai extends Entity {
 			hisher     : kiakai.hisher(),
 		};
 
-		if (kiakai.flags.Attitude == KiakaiFlags.Attitude.Nice) {
+		if (kiakai.flags.Attitude === KiakaiFlags.Attitude.Nice) {
 			Text.Add("The elf perks up as you approach, giving you a friendly smile. <i>“What is on your mind, [playername]?”</i>", parse);
-		} else if (kiakai.flags.Attitude == KiakaiFlags.Attitude.Naughty) {
+		} else if (kiakai.flags.Attitude === KiakaiFlags.Attitude.Naughty) {
 			Text.Add("The elf regards your approach with a wary gaze, not sure what you are after. <i>“Yes?”</i>", parse);
 		} else {
 			Text.Add("[Error in Kiakai attitude: " + kiakai.flags.Attitude + "]");
@@ -221,7 +221,7 @@ export class Kiakai extends Entity {
 				that.OrgasmCum();
 
 				Text.Flush();
-				Gui.NextPrompt(function() {
+				Gui.NextPrompt(() => {
 					that.Interact(switchSpot);
 				});
 			}, enabled : true,
@@ -246,7 +246,7 @@ export class Kiakai extends Entity {
 		});
 		if (kiakai.flags.Sexed >= 30) {
 			options.push({ nameStr: "Sex",
-				func : KiakaiScenes.Sex, enabled : kiakai.flags.TalkedSex != 1,
+				func : KiakaiScenes.Sex, enabled : kiakai.flags.TalkedSex !== 1,
 				tooltip : Text.Parse("Proposition to have sex with [name].", parse),
 			});
 		}
@@ -316,7 +316,7 @@ export class Kiakai extends Entity {
 		// TALK RAVENS
 		const r = ravenmother.Ravenness();
 		if (r >= RavenFlags.Stage.ravenstage2 + 2 &&
-		   ravenmother.flags.Met == 0) {
+		   ravenmother.flags.Met === 0) {
 			options.push({ nameStr : "Ravens",
 				func() {
 					KiakaiScenes.RavenDreams();

@@ -27,25 +27,25 @@ const MirandaScenes: any = {};
 export function InitMiranda() {
 	const world = WORLD();
     // Add catch thief as explorable event
- world.loc.Rigard.Slums.Gate.enc.AddEnc(function() { return MirandaScenes.CatchThatThief; }, 1.0, function() {
+ world.loc.Rigard.Slums.Gate.enc.AddEnc(() => MirandaScenes.CatchThatThief, 1.0, () => {
 		const miranda = GAME().miranda;
-		return miranda.flags.Thief == 0 && miranda.OnPatrol();
+		return miranda.flags.Thief === 0 && miranda.OnPatrol();
 	});
- world.loc.Rigard.Residential.Street.enc.AddEnc(function() { return MirandaScenes.CatchThatThief; }, 1.0, function() {
+ world.loc.Rigard.Residential.Street.enc.AddEnc(() => MirandaScenes.CatchThatThief, 1.0, () => {
 		const miranda = GAME().miranda;
-		return miranda.flags.Thief == 0 && miranda.OnPatrol();
+		return miranda.flags.Thief === 0 && miranda.OnPatrol();
 	});
- world.loc.Rigard.Gate.enc.AddEnc(function() { return MirandaScenes.CatchThatThief; }, 1.0, function() {
+ world.loc.Rigard.Gate.enc.AddEnc(() => MirandaScenes.CatchThatThief, 1.0, () => {
 		const miranda = GAME().miranda;
-		return miranda.flags.Thief == 0 && miranda.OnPatrol();
+		return miranda.flags.Thief === 0 && miranda.OnPatrol();
 	});
- world.loc.Rigard.ShopStreet.Street.enc.AddEnc(function() { return MirandaScenes.CatchThatThief; }, 1.0, function() {
+ world.loc.Rigard.ShopStreet.Street.enc.AddEnc(() => MirandaScenes.CatchThatThief, 1.0, () => {
 		const miranda = GAME().miranda;
-		return miranda.flags.Thief == 0 && miranda.OnPatrol();
+		return miranda.flags.Thief === 0 && miranda.OnPatrol();
 	});
 
- world.loc.Rigard.Tavern.common.events.push(new Link("Miranda", function() { return GAME().miranda.IsAtLocation(); }, true,
-        function() {
+ world.loc.Rigard.Tavern.common.events.push(new Link("Miranda", () => GAME().miranda.IsAtLocation(), true,
+        () => {
             if (GAME().miranda.IsAtLocation()) {
                 Text.Add("Miranda is lounging at a table in the shady tavern. ");
             }
@@ -55,11 +55,11 @@ export function InitMiranda() {
     );
 
     /* TODO */
- world.loc.Rigard.Residential.Miranda.description = function() {
+ world.loc.Rigard.Residential.Miranda.description = () => {
 
     };
- world.loc.Rigard.Residential.Miranda.onEntry = function() {
-        if (GAME().rigard.Krawitz.Q == RigardFlags.KrawitzQ.HuntingTerry) {
+ world.loc.Rigard.Residential.Miranda.onEntry = () => {
+        if (GAME().rigard.Krawitz.Q === RigardFlags.KrawitzQ.HuntingTerry) {
             MirandaScenes.TerryChaseHome();
         } else {
             Gui.PrintDefaultOptions();
@@ -69,7 +69,7 @@ export function InitMiranda() {
 
 // Events
 
-MirandaScenes.BarracksApproach = function() {
+MirandaScenes.BarracksApproach = () => {
 	const player = GAME().player;
 	const miranda = GAME().miranda;
 
@@ -94,7 +94,7 @@ MirandaScenes.BarracksApproach = function() {
 	MirandaScenes.BarracksPrompt();
 };
 
-MirandaScenes.BarracksPrompt = function() {
+MirandaScenes.BarracksPrompt = () => {
 	const player = GAME().player;
 	const party: Party = GAME().party;
 	const miranda = GAME().miranda;
@@ -108,7 +108,7 @@ MirandaScenes.BarracksPrompt = function() {
 	// TODO
 	/*
 	options.push({ nameStr : "name",
-		func : function() {
+		func : () => {
 			Text.Clear();
 			Text.Add("", parse);
 			Text.NL();
@@ -117,7 +117,7 @@ MirandaScenes.BarracksPrompt = function() {
 		tooltip : ""
 	});
 	*/
-	const know = miranda.flags.Herm != 0;
+	const know = miranda.flags.Herm !== 0;
 	options.push({ nameStr : "Spar",
 		func() {
 			Text.Clear();
@@ -149,7 +149,7 @@ MirandaScenes.BarracksPrompt = function() {
 			enc.onLoss = MirandaScenes.SparLoss;
 			enc.onVictory = MirandaScenes.SparWin;
 
-			Gui.NextPrompt(function() {
+			Gui.NextPrompt(() => {
 				enc.Start();
 			});
 		}, enabled : know,
@@ -165,7 +165,7 @@ MirandaScenes.BarracksPrompt = function() {
 
  VaughnTasksScenes.Snitch.MirandaTalk(options, true);
 
-	Gui.SetButtonsFromList(options, true, function() {
+	Gui.SetButtonsFromList(options, true, () => {
 		// TODO
 		Gui.PrintDefaultOptions();
 	});
@@ -231,7 +231,7 @@ MirandaScenes.SparWin = function() {
 	Gui.NextPrompt(); // TODO
 };
 
-MirandaScenes.BruiserTraining = function() {
+MirandaScenes.BruiserTraining = () => {
 	const player = GAME().player;
 	const miranda = GAME().miranda;
 
@@ -240,7 +240,7 @@ MirandaScenes.BruiserTraining = function() {
 	};
 
 	Text.Clear();
-	if (miranda.flags.Bruiser == MirandaFlags.Bruiser.Progress) {
+	if (miranda.flags.Bruiser === MirandaFlags.Bruiser.Progress) {
 		if (player.jobs.Fighter.level < 4) {
 			Text.Add("<i>“Why embarrass yourself more?”</i> Miranda shakes her head. <i>“Come back when you got the basics down, then we can talk. Before that, the only blade I’ll let you touch is the one between my legs.”</i>", parse);
 			Text.NL();
@@ -250,7 +250,7 @@ MirandaScenes.BruiserTraining = function() {
 			MirandaScenes.BarracksPrompt();
 		} else {
 			Text.Add("<i>“Think you got it this time?”</i> Miranda downs her drink and motions for you to follow. <i>“Not going to babysit you, so be sure to keep up this time.", parse);
-			if (miranda.flags.trainSex != 0) {
+			if (miranda.flags.trainSex !== 0) {
 				Text.Add(" I get paid by the hour, and the more time you waste here, the longer I get to lay waste to your ass.", parse);
 			}
 			Text.Add("”</i>");
@@ -302,7 +302,7 @@ MirandaScenes.BruiserTraining = function() {
 					Text.Add("Fuck… here?", parse);
 					Text.Flush();
 
-					const func = function() {
+					const func = () => {
 						miranda.flags.trainSex = 1;
 
 						Text.Add("<i>“...Oh man, you crack me up sometimes. Yanking your chain is just too much fun,”</i> Miranda gasps, clutching her sides. <i>“Well boys, I’ll see you later. Gotta teach this greenling a few things. Coming?”</i>", parse);
@@ -370,7 +370,7 @@ MirandaScenes.BruiserTraining = function() {
 	Gui.SetButtonsFromList(options, false, null);
 };
 
-MirandaScenes.BruiserTrainingCont = function() {
+MirandaScenes.BruiserTrainingCont = () => {
 	const player = GAME().player;
 	const party: Party = GAME().party;
 	const miranda = GAME().miranda;
@@ -406,7 +406,7 @@ MirandaScenes.BruiserTrainingCont = function() {
 
 		miranda.flags.Bruiser = MirandaFlags.Bruiser.Progress;
 
-		Gui.NextPrompt(function() {
+		Gui.NextPrompt(() => {
 			Text.Clear();
 			Text.Add("You return inside the common room and sit down with Miranda.");
 			Text.Flush();
@@ -431,7 +431,7 @@ MirandaScenes.BruiserTrainingCont = function() {
 	Text.NL();
 	Text.Add("Returning your own blade to the stand, the two of you head back toward the commons.", parse);
 	Text.NL();
-	if (miranda.flags.trainSex != 0) {
+	if (miranda.flags.trainSex !== 0) {
 		Text.Add("<i>“Now… I’m sure you said something about giving me a little reward for my teachings, did you not?”</i> Miranda gives you a jab in the side with her elbow. <i>“Nothing like a good fuck to round off a work-out, eh? I’m sure the boys’ll love the show!”</i>", parse);
 		Text.NL();
 		Text.Add("You leg it halfway into her speech, fleeing the dobie’s heckling laughter.", parse);
@@ -445,7 +445,7 @@ MirandaScenes.BruiserTrainingCont = function() {
 	miranda.flags.trainSex = 0;
 	miranda.flags.Bruiser = MirandaFlags.Bruiser.Taught;
 
-	Gui.NextPrompt(function() {
+	Gui.NextPrompt(() => {
 		Text.Clear();
 		Text.Add("You return inside the common room and sit down with Miranda.");
 		Text.Flush();
@@ -457,29 +457,29 @@ MirandaScenes.BruiserTrainingCont = function() {
 	});
 };
 
-MirandaScenes.RigardGatesDesc = function() {
+MirandaScenes.RigardGatesDesc = () => {
 	Text.Add("<i>“Ho!”</i> Miranda greets you as you approach the gate. The dog-morph is lounging beside the gatehouse, ");
 
 	const scenes = new EncounterTable();
-	scenes.AddEnc(function() {
+	scenes.AddEnc(() => {
 		Text.Add("toying with the pommel of her sword.");
-	}, 1.0, function() { return true; });
-	scenes.AddEnc(function() {
+	}, 1.0, () => true);
+	scenes.AddEnc(() => {
 		Text.Add("stretching out sore muscles.");
-	}, 1.0, function() { return true; });
-	scenes.AddEnc(function() {
+	}, 1.0, () => true);
+	scenes.AddEnc(() => {
 		Text.Add("sneaking a drink from a small hip flask while the commanding officer isn’t looking.");
-	}, 1.0, function() { return true; });
-	scenes.AddEnc(function() {
+	}, 1.0, () => true);
+	scenes.AddEnc(() => {
 		Text.Add("her bored gaze drifting over the scenery.");
-	}, 1.0, function() { return true; });
+	}, 1.0, () => true);
 
 	scenes.Get();
 
 	Text.NL();
 };
 
-MirandaScenes.RigardGatesInteract = function() {
+MirandaScenes.RigardGatesInteract = () => {
 	const rigard = GAME().rigard;
 	const miranda = GAME().miranda;
 
@@ -504,7 +504,7 @@ MirandaScenes.RigardGatesInteract = function() {
 	Gui.NextPrompt();
 };
 
-MirandaScenes.RigardGatesEnter = function() {
+MirandaScenes.RigardGatesEnter = () => {
 	const player = GAME().player;
 	const rigard = GAME().rigard;
 	const miranda = GAME().miranda;
@@ -532,7 +532,7 @@ MirandaScenes.RigardGatesEnter = function() {
 			}
 			Text.Flush();
 
-			Gui.NextPrompt(function() {
+			Gui.NextPrompt(() => {
 				MoveToLocation(world.loc.Rigard.Gate, {hour: 1});
 			});
 			return;
@@ -550,7 +550,7 @@ MirandaScenes.RigardGatesEnter = function() {
 			}
 			Text.Flush();
 
-			Gui.NextPrompt(function() {
+			Gui.NextPrompt(() => {
 				MoveToLocation(world.loc.Rigard.Gate, {minute: 5});
 			});
 			return;
@@ -564,7 +564,7 @@ MirandaScenes.RigardGatesEnter = function() {
 				Text.Add("<i>“All seems to be in order. Welcome to Rigard.”</i> She ushers you through the gates, already busy with the next person in line.", parse);
 				Text.Flush();
 
-				Gui.NextPrompt(function() {
+				Gui.NextPrompt(() => {
 					MoveToLocation(world.loc.Rigard.Gate, {minute: 5});
 				});
 				return;
@@ -580,7 +580,7 @@ MirandaScenes.RigardGatesEnter = function() {
 	Gui.PrintDefaultOptions(true);
 };
 
-MirandaScenes.RigardSlumGatesDesc = function() {
+MirandaScenes.RigardSlumGatesDesc = () => {
 	const player = GAME().player;
 	const miranda = GAME().miranda;
 
@@ -593,30 +593,30 @@ MirandaScenes.RigardSlumGatesDesc = function() {
 	Text.Add("<i>“[playername],”</i> Miranda nods in your direction as you approach. The dog-morph is seated at a wooden table beside the peasants’ gate, ", parse);
 
 	const scenes = new EncounterTable();
-	scenes.AddEnc(function() {
+	scenes.AddEnc(() => {
 		Text.Add("playing cards with some of her fellow guards.", parse);
-	}, 1.0, function() { return true; });
-	scenes.AddEnc(function() {
+	}, 1.0, () => true);
+	scenes.AddEnc(() => {
 		Text.Add("sipping at a mug of beer.", parse);
-	}, 1.0, function() { return true; });
-	scenes.AddEnc(function() {
+	}, 1.0, () => true);
+	scenes.AddEnc(() => {
 		Text.Add("sharpening her sword.", parse);
-	}, 1.0, function() { return true; });
-	scenes.AddEnc(function() {
+	}, 1.0, () => true);
+	scenes.AddEnc(() => {
 		Text.Add("watching the street with keen eyes.", parse);
-	}, 1.0, function() { return true; });
+	}, 1.0, () => true);
 
 	scenes.Get();
 
 	Text.Add(" <i>“Quite the rural neighborhood, isn’t it?”</i> Miranda grunts, waving at the muddy streets near the gate. <i>“Still, I grew up in these parts, so I’ll always have a soft spot for it, no matter how much of a cesspit it is.”</i>", parse);
-	if (miranda.Attitude() == MirandaFlags.Attitude.Neutral) {
+	if (miranda.Attitude() === MirandaFlags.Attitude.Neutral) {
 		Text.NL();
 		Text.Add("<i>“If you haven’t already, you should check out the local tavern, the Maidens’ Bane,”</i> Miranda suggests, <i>“I hang around there after work. Cozy little place.”</i>", parse);
 	}
 	Text.NL();
 };
 
-MirandaScenes.RigardSlumGatesEnter = function() {
+MirandaScenes.RigardSlumGatesEnter = () => {
 	const player = GAME().player;
 	const rigard = GAME().rigard;
 	const miranda = GAME().miranda;
@@ -659,7 +659,7 @@ MirandaScenes.RigardSlumGatesEnter = function() {
 			}
 			Text.Flush();
 
-			Gui.NextPrompt(function() {
+			Gui.NextPrompt(() => {
 				MoveToLocation(world.loc.Rigard.Residential.Street, {minute: 5});
 			});
 		} else { // neutral
@@ -667,7 +667,7 @@ MirandaScenes.RigardSlumGatesEnter = function() {
 				Text.Add("<i>“It looks to be in order,”</i> Miranda concludes after looking over your papers. She waves you through the gates, adding that you should come visit her at the tavern after work some time.", parse);
 				Text.NL();
 
-				Gui.NextPrompt(function() {
+				Gui.NextPrompt(() => {
 					MoveToLocation(world.loc.Rigard.Residential.Street, {minute: 5});
 				});
 			} else {
@@ -680,7 +680,7 @@ MirandaScenes.RigardSlumGatesEnter = function() {
 	}
 };
 
-MirandaScenes.RigardGatesBribe = function() {
+MirandaScenes.RigardGatesBribe = () => {
 	const player = GAME().player;
 	const rigard = GAME().rigard;
 	const miranda = GAME().miranda;
@@ -729,7 +729,7 @@ MirandaScenes.RigardGatesBribe = function() {
 	options.push({ nameStr : "Blowjob",
 		func() {
 			Text.Clear();
-			if (miranda.flags.gBJ == 0) { // First
+			if (miranda.flags.gBJ === 0) { // First
 				Text.Add("You suggest that you could perhaps... relieve her? Miranda’s sour expression slowly shifts to a wide grin.", parse);
 				Text.NL();
 				Text.Add("<i>“Now you’re talking!”</i> The dog-morph gets up from her post, motioning for you to follow her. The curious looks from the other guards bore into your back as you trot along behind the herm.", parse);
@@ -780,14 +780,14 @@ MirandaScenes.RigardGatesBribe = function() {
 					Text.Add("<i>“Enjoy your visit to Rigard, citizen,”</i> Miranda snickers, opening the gates for you. Staggering through, you enter the streets of the city. With a sinking heart, you realize this will probably be a regular theme for your visits.", parse);
 				}
 
-				Gui.NextPrompt(function() {
+				Gui.NextPrompt(() => {
 					MoveToLocation(world.loc.Rigard.Residential.Street, {hour: 1});
 				});
 			} else { // Repeat blowjob
 				if (miranda.flags.gBJ < 5) {
 					Text.Add("<i>“You know the drill, come with me.”</i> Miranda leads you into a back alley, pushing your head down to her crotch and pulling out her [mcockDesc]. <i>“I’m sure you remember what to do.”</i> Meekly, you grasp her member, licking the [mcockTip] demurely. In your [hand]s, the hermaphrodite grows stiff, her rock-hard cock pointing right at you.", parse);
 				} else {
-					parse.Bewildered = miranda.flags.public == MirandaFlags.Public.Nothing ? "Bewildered, y" : "Y";
+					parse.Bewildered = miranda.flags.public === MirandaFlags.Public.Nothing ? "Bewildered, y" : "Y";
 					Text.Add("You wait for Miranda to get up, but she just leans back languidly. <i>“Well, what are you waiting for?”</i> she asks, annoyed. <i>“Start sucking, slut.”</i> She parts her legs, exposing her bulge to you. [Bewildered]ou glance around at the other guards, but Miranda redirects your attention to her crotch.", parse);
 					Text.NL();
 					Text.Add("<i>“Don’t mind them; this is the reason you came here anyways, isn’t it?”</i> By now, you might as well conceed her point… there are other ways for you to get into Rigard at this point, and yet here you are, back to get another mouthful of her [mcockDesc]. The others have most likely gotten a good idea of what is going on already anyways.", parse);
@@ -820,7 +820,7 @@ MirandaScenes.RigardGatesBribe = function() {
 						Text.NL();
 						Text.Add("Wiping the remaining droplets of the dog-herm’s cum from your lips, you enter the city of Rigard.", parse);
 
-						Gui.NextPrompt(function() {
+						Gui.NextPrompt(() => {
 							MoveToLocation(world.loc.Rigard.Residential.Street, {minute: 5});
 						});
 					} else {
@@ -831,7 +831,7 @@ MirandaScenes.RigardGatesBribe = function() {
 					Text.Add("<i>“Putting on such a good show for the masses, [playername],”</i> she praises you, gesturing to her grinning colleagues. Quite a few of them have their own cocks out, stroking themselves. <i>“Thanks for the blowjob, bitch,”</i> Miranda grins. <i>“Now shove off, I got work to do.”</i> When you protest that you had a deal, she only laughs at you.", parse);
 					Text.NL();
 					Text.Add("<i>“You agreed to that way too quickly. I’ve been going too easy on you it seems. If you want to negotiate for entry, you better bring something different to the table...”</i> The hermaphrodite gives your [butt] a sound slap as she passes you, making her meaning clear.", parse);
-					if (miranda.flags.gAnal == 0) {
+					if (miranda.flags.gAnal === 0) {
 						Text.NL();
 						Text.Add("W-what? No way!", parse);
 					}
@@ -852,7 +852,7 @@ MirandaScenes.RigardGatesBribe = function() {
 		options.push({ nameStr : "Buttsex",
 			func() {
 				Text.Clear();
-				const first    = miranda.flags.gAnal == 0;
+				const first    = miranda.flags.gAnal === 0;
 				const virgin   = player.Butt().virgin;
 				const audience = miranda.flags.gAnal >= 5;
 
@@ -931,23 +931,23 @@ MirandaScenes.RigardGatesBribe = function() {
 				Text.NL();
 
 				let scenes = new EncounterTable();
-				scenes.AddEnc(function() {
+				scenes.AddEnc(() => {
 					parse.cock = player.NumCocks() > 1 ? "do those pitiful excuses for cocks" : "does that pitiful excuse for a cock";
 					Text.Add("<i>“Tell me, [playername],”</i> she grunts in your ear, her breasts pressing against your back, <i>“[cock] ever see any action? Or are you too busy getting nailed by everyone you meet?”</i>", parse);
 					Text.NL();
-				}, 1.0, function() { return player.FirstCock() && !virgin; });
-				scenes.AddEnc(function() {
+				}, 1.0, () => player.FirstCock() && !virgin);
+				scenes.AddEnc(() => {
 					Text.Add("<i>“Perhaps next time, I’ll try out that cunt of yours, hmm?”</i> she grunts, one hand trailing down to probe your wet netherlips.", parse);
 					Text.NL();
-				}, 1.0, function() { return player.FirstVag(); });
-				scenes.AddEnc(function() {
+				}, 1.0, () => player.FirstVag());
+				scenes.AddEnc(() => {
 					Text.Add("<i>“Nice tits,”</i> she compliments you, <i>“bet they are good cushions, with all the time you spend on your stomach getting railed!”</i>", parse);
 					Text.NL();
-				}, 1.0, function() { return player.FirstBreastRow().Size() > 3; });
-				scenes.AddEnc(function() {
+				}, 1.0, () => player.FirstBreastRow().Size() > 3);
+				scenes.AddEnc(() => {
 					Text.Add("<i>“Found your true calling, boy?”</i> she mocks you. <i>“If it makes you feel any better, you are not the first guy to get a full dose of Miranda, not by a long shot.”</i>", parse);
 					Text.NL();
-				}, 1.0, function() { return player.Gender() == Gender.male; });
+				}, 1.0, () => player.Gender() === Gender.male);
 
 				scenes.Get();
 
@@ -984,19 +984,19 @@ MirandaScenes.RigardGatesBribe = function() {
 				Text.NL();
 
 				scenes = new EncounterTable();
-				scenes.AddEnc(function() {
+				scenes.AddEnc(() => {
 					Text.Add("<i>“Another cherry popped, score one Miranda!”</i> the herm boasts, pumping her fist.", parse);
-				}, 1.0, function() { return virgin; });
-				scenes.AddEnc(function() {
+				}, 1.0, () => virgin);
+				scenes.AddEnc(() => {
 					Text.Add("<i>“Does that hurt? Knot my problem, slut,”</i> she says, mockingly.", parse);
-				}, 1.0, function() { return true; });
-				scenes.AddEnc(function() {
+				}, 1.0, () => true);
+				scenes.AddEnc(() => {
 					Text.Add("<i>“Feel comfortable? Cause I’m not going anywhere any time soon.”</i> No doubt she’s right - once that knot starts to swell, there is no way you are getting it out.", parse);
-				}, 1.0, function() { return true; });
-				scenes.AddEnc(function() {
+				}, 1.0, () => true);
+				scenes.AddEnc(() => {
 					parse.heshe = player.mfTrue("he", "she");
 					Text.Add("<i>“Told you [heshe] could take it,”</i> Miranda boasts to her colleagues.", parse);
-				}, 1.0, function() { return audience; });
+				}, 1.0, () => audience);
 
 				scenes.Get();
 
@@ -1043,7 +1043,7 @@ MirandaScenes.RigardGatesBribe = function() {
 
 				miranda.flags.gAnal++;
 
-				Gui.NextPrompt(function() {
+				Gui.NextPrompt(() => {
 					Text.Clear();
 
 					Text.Add("Eventually, Miranda’s knot shrinks down again to merely unmanageable size. With a grunt and a rough shove, the herm dislodges herself from your abused anus, laughing as you fall to the ground. What feels like several gallons of her semen pours out of your gaping butt. You still feel weak and extremely sore after the rough fuck, but you should be able to move again shortly.", parse);
@@ -1054,7 +1054,7 @@ MirandaScenes.RigardGatesBribe = function() {
 						Text.Add("<i>“Well, go ahead, enter. Unless you want to stay for another round,”</i> Miranda waves you toward the gates, not even bothering to get up and open them for you. Hobbling slightly, you make your way inside the city.", parse);
 						Text.Flush();
 
-						Gui.NextPrompt(function() {
+						Gui.NextPrompt(() => {
 							MoveToLocation(world.loc.Rigard.Residential.Street, {minute : 10});
 						});
 					} else {
@@ -1071,7 +1071,7 @@ MirandaScenes.RigardGatesBribe = function() {
 	Gui.SetButtonsFromList(options, true);
 };
 
-MirandaScenes.WelcomeToRigard = function() {
+MirandaScenes.WelcomeToRigard = () => {
 	const player = GAME().player;
 	const kiakai = GAME().kiakai;
 	const party: Party = GAME().party;
@@ -1111,7 +1111,7 @@ MirandaScenes.WelcomeToRigard = function() {
 		Text.Add("While you don't really know much of the Rigard, other than it seems to be the largest city you have seen so far, possibly the largest on Eden, it is probably a good place to gather information.", parse);
 	}
 	Text.NL();
-	if (rosalin.flags.Met != 0) {
+	if (rosalin.flags.Met !== 0) {
 		Text.Add("If you could get inside the city, there is a possibility you could get a hold of Rosalin's former teacher, a person who sounds like she could help you out with the gemstone.", parse);
 		Text.NL();
 	}
@@ -1130,7 +1130,7 @@ MirandaScenes.WelcomeToRigard = function() {
 	Text.Add("Said outfit does a poor job of containing her generous bust, which seems to be ready to spring out at any moment. Her uniform is made from tight-fitting studded leather, with a short leather skirt that ends just above the knees. As the guardswoman shifts her hips, something seems to move under the skirt.", parse);
 	Text.Flush();
 
-	Gui.NextPrompt(function() {
+	Gui.NextPrompt(() => {
 		Text.Clear();
 		Text.Add("<i>“Hey, eyes up here,”</i> she barks sharply, slightly amused. <i>“Well?”</i> she challenges, holding out her hand. A bit embarrassed, you realize that you completely spaced out for a second there. <i>“Visitor's pass?”</i> she repeats her question.", parse);
 		Text.NL();
@@ -1167,7 +1167,7 @@ MirandaScenes.WelcomeToRigard = function() {
 	});
 };
 
-MirandaScenes.WelcomeToRigardQnA = function() {
+MirandaScenes.WelcomeToRigardQnA = () => {
 	const player = GAME().player;
 	const kiakai = GAME().kiakai;
 
@@ -1237,7 +1237,7 @@ MirandaScenes.WelcomeToRigardQnA = function() {
 	}
 };
 
-MirandaScenes.WelcomeToRigardEnd = function() {
+MirandaScenes.WelcomeToRigardEnd = () => {
 	const player = GAME().player;
 	const kiakai = GAME().kiakai;
 	const farm = GAME().farm;
@@ -1284,7 +1284,7 @@ MirandaScenes.WelcomeToRigardEnd = function() {
 	Gui.NextPrompt();
 };
 
-MirandaScenes.CatchThatThief = function() {
+MirandaScenes.CatchThatThief = () => {
 	const party: Party = GAME().party;
 	const miranda = GAME().miranda;
 
@@ -1317,7 +1317,7 @@ MirandaScenes.CatchThatThief = function() {
 	Gui.NextPrompt();
 };
 
-MirandaScenes.HeyThere = function() {
+MirandaScenes.HeyThere = () => {
 	const player = GAME().player;
 	const miranda = GAME().miranda;
 
@@ -1331,7 +1331,7 @@ MirandaScenes.HeyThere = function() {
 	Text.Add("As you head into the dimly lit bar, your eyes find Miranda, the guardswoman, sitting in a corner by herself. The tall and curvy dog-morph is wearing tight leather pants laced with green cloth tucked into her high boots, and a very suggestive top piece exposing a fair amount of her cleavage. She notices you and motions you over, patting the bench beside her.", parse);
 	Text.NL();
 	Text.Add("You go over and have a seat, while she calls for some more booze. You talk for a while as she tells you about herself and her job in town.", parse);
-	if (miranda.flags.Thief != 0) {
+	if (miranda.flags.Thief !== 0) {
 		Text.NL();
 		Text.Add("When you mention her aggressive take down of the thief you saw earlier, she blushes faintly and avoids your eyes.", parse);
 		Text.NL();
@@ -1385,13 +1385,13 @@ MirandaScenes.HeyThere = function() {
 	}
 };
 
-MirandaScenes.HeyThereCont = function() {
+MirandaScenes.HeyThereCont = () => {
 	const parse: any = {};
 
 	Text.NL();
 	Text.Add("The booze starts to stack up as you continue to talk into the night. You tell her a bit about yourself and your adventures so far, and she contributes witty comments and suggestive remarks.", parse);
 
-	Gui.Callstack.push(function() {
+	Gui.Callstack.push(() => {
 		Gui.NextPrompt(MirandaScenes.HeyThereCatPorn);
 	});
 	Gui.Callstack.push(MirandaScenes.HeyThereChat);
@@ -1399,7 +1399,7 @@ MirandaScenes.HeyThereCont = function() {
 	MirandaScenes.HeyThereChat();
 };
 
-MirandaScenes.HeyThereCatPorn = function() {
+MirandaScenes.HeyThereCatPorn = () => {
 	const player = GAME().player;
 	const miranda = GAME().miranda;
 
@@ -1423,7 +1423,7 @@ MirandaScenes.HeyThereCatPorn = function() {
 	player.AddLustFraction(0.3);
 	miranda.AddLustFraction(0.3);
 
-	Gui.NextPrompt(function() {
+	Gui.NextPrompt(() => {
 		Text.Clear();
 		Text.Add("You hear a loud thump behind you as you watch the aftermath of the show. Miranda is squirming in her seat a bit, hands under the table in front of her. She is looking very flushed and <i>very</i> drunk, her orange eyes half closed in bliss. She dizzily gazes your way, muttering below her breath.", parse);
 		Text.NL();
@@ -1603,7 +1603,7 @@ MirandaScenes.HeyThereCatPorn = function() {
 	});
 };
 
-MirandaScenes.BarChatOptions = function(options: any[], back: any) {
+MirandaScenes.BarChatOptions = (options: any[], back: any) => {
 	const player = GAME().player;
 	const rigard = GAME().rigard;
 	const miranda = GAME().miranda;
@@ -1620,12 +1620,12 @@ MirandaScenes.BarChatOptions = function(options: any[], back: any) {
 			Text.Clear();
 
 			const scenes = new EncounterTable();
-			scenes.AddEnc(function() {
+			scenes.AddEnc(() => {
 				Text.Add("<i>“I like fish a lot, prolly my favorite food. Good thing I live in a port town, eh?”</i> The dobie goes on to dreamily explain great fish dishes that she has cooked over time. Funny, you didn't quite see her as a gourmet cook.", parse);
 				Text.NL();
 				Text.Add("<i>“I’m not, usually. Way too much work. It’s just… sometimes the drudge of the job gets to you. Each day it’s the same old. Those times, I grab a bottle of booze, an unsuspecting guy or girl to fuck blind, and finish it off with a side of fried fish. Best vacation ever.”</i>", parse);
-			}, 1.0, function() { return true; });
-			scenes.AddEnc(function() {
+			}, 1.0, () => true);
+			scenes.AddEnc(() => {
 				Text.Add("<i>“Watch your back if you head to the Highlands,”</i> Miranda warns you, <i>“Ever since kingdom troops pulled out, there’s been nothing but fighting over there. I hear there’s some new warlord pulling his weight around among the tribes. Not to mention, it’s close to the Boneyard, and that’s a place you should <b>really</b> avoid.”</i>", parse);
 				Text.NL();
 				Text.Add("You ask her to tell you more.", parse);
@@ -1633,7 +1633,7 @@ MirandaScenes.BarChatOptions = function(options: any[], back: any) {
 				Text.Add("<i>“About the rabid army wandering the hills or the place filled with dragon bones?”</i> She shakes her head. <i>“If I were still with the Black Hounds, I could tell you more about the fighting at least. I hear they have a company there fighting. Dunno on which side, it probably changes from week to week.”</i>", parse);
 				Text.NL();
 				Text.Add("<i>“As for the Boneyard… it’s a valley said to be an old burial ground for dragons. Never been there myself, but I’ve heard the stories. Ask travelers about it and they’ll tell you anything from animated skeletons to giant fire-breathing lizards inhabit the place. Not really one for superstition, but I could tell you this much at least: no one who goes in there comes back to tell the tale. I’d stay clear of it if I were you.”</i>", parse);
-			}, 1.0, function() { return !GlobalScenes.PortalsOpen(); }); // Act 1
+			}, 1.0, () => !GlobalScenes.PortalsOpen()); // Act 1
 			scenes.Get();
 
 			Text.Flush();
@@ -1650,7 +1650,7 @@ MirandaScenes.BarChatOptions = function(options: any[], back: any) {
 
 			const scenes = [];
 
-			scenes.push(function() {
+			scenes.push(() => {
 				Text.Add("<i>“Walking the beat keeps the coin coming, though it isn’t as exciting as mercenary work. Believe it or not, things are usually pretty quiet here.”</> She shrugs irritably. <i>“I hate doing paperwork - give me a thug to beat up any day of the week.”</i>", parse);
 				Text.NL();
 				Text.Add("With a city this size, there must always be something, right?", parse);
@@ -1663,7 +1663,7 @@ MirandaScenes.BarChatOptions = function(options: any[], back: any) {
 					miranda.AddLustFraction(0.1);
 				}
 			});
-			scenes.push(function() {
+			scenes.push(() => {
 				Text.Add("She tells you a few tidbits of information about her comrades in the guard and their peculiarities. You are particularly surprised that the gruff wolf usually standing guard at the main gates is into writing sleazy erotic poetry, and has quite the following in the female population of the town.", parse);
 				Text.NL();
 				Text.Add("<i>“He is way too shy to tell anyone about it though, so he writes under an alias”</i>, she grins. <i>“You didn't hear that from me though.”</i>", parse);
@@ -1672,13 +1672,13 @@ MirandaScenes.BarChatOptions = function(options: any[], back: any) {
 				Text.NL();
 				Text.Add("<i>“It’s mostly romance schlock, not really my thing. I tried reading it once, but I got kinda bored. Could use some more action, if you know what I mean.”</i> She winks at you.", parse);
 			});
-			scenes.push(function() {
+			scenes.push(() => {
 				Text.Add("She tells you a bit more about her guard troop.", parse);
 				Text.NL();
 				Text.Add("<i>“Did you meet the centaur yet?”</i> she asks you. <i>“He is the strongest guy around here, and a really good archer too.”</i> She brings up a few stories about the two of them hunting together in the forest. Seems like a dependable guy.", parse);
 			});
 			if (rigard.RoyalAccess() && !terry.Recruited()) {
-				scenes.push(function() {
+				scenes.push(() => {
 					Text.Add("<i>“Tell the truth, the most action there’s been recently is that whole mess with Krawitz. That fox was damn slippery, that’s for sure.”</i> Miranda looks irritated. <i>“That thing with Preston after snagged away all the joy I could get from it, though. The Royal Guard always finds a way to shove their feet in where they aren’t wanted and claim glory for work they haven’t done.”</i>", parse);
 					Text.NL();
 					Text.Add("She sighs, taking another draft of her drink.", parse);
@@ -1687,7 +1687,7 @@ MirandaScenes.BarChatOptions = function(options: any[], back: any) {
 				}); // Finished Krawitz, but didn't recruit Terry yet
 			}
 			if (!GlobalScenes.PortalsOpen()) {
-				scenes.push(function() {
+				scenes.push(() => {
 					Text.Add("<i>“There’s been some ugly rumors about that brothel, the Shadow Lady.”</i> Miranda frowns. <i>“Nothing concrete, but word on the street is that some of their services aren’t exactly legal. People who go there often… change. Not that it’s likely to come to anything... the place is off limits to the Watch.”</i>", parse);
 					Text.NL();
 					Text.Add("How come? It sounds like if there’s precedent, it’d at least warrant an investigation.", parse);
@@ -1702,7 +1702,7 @@ MirandaScenes.BarChatOptions = function(options: any[], back: any) {
 				});  // Act 1
 			}
 			if (miranda.Relation() >= 25) {
-				scenes.push(function() {
+				scenes.push(() => {
 					Text.Add("<i>“Well, it has been a lot more entertaining with you around, I'll tell you that!”</i> she giggles. <i>“The other guys there are complaining that my mind is not on the job any more, due to... distractions,”</i> she grins as you blush faintly.", parse);
 					Text.NL();
 					Text.Add("<i>“It's not a problem though, I can do this job in my sleep... not that you’d ever let me sleep, honey,”</i> she places a big sloppy kiss on your cheek.", parse);
@@ -1729,7 +1729,7 @@ MirandaScenes.BarChatOptions = function(options: any[], back: any) {
 		func() {
 			Text.Clear();
 			// First
-			if (miranda.flags.Forest == 0) {
+			if (miranda.flags.Forest === 0) {
 				miranda.flags.Forest = 1;
 				Text.Add("<i>“You said you have been in the big forest, didn't you?”</i> She asks you. You nod and tell her about the various strange creatures you saw there. <i>“That is a very wild place where one shouldn't walk around unprepared,”</i> she notes. <i>“You might get some nasty surprises otherwise.”</i>", parse);
 				Text.Flush();
@@ -1769,17 +1769,17 @@ MirandaScenes.BarChatOptions = function(options: any[], back: any) {
 				Text.NL();
 
 				const scenes = new EncounterTable();
-				scenes.AddEnc(function() {
+				scenes.AddEnc(() => {
 					Text.Add("<i>“Okay,”</i> she begins. <i>“You know those big wolves that prowl around there? Did you know that some of them used to be people?”</i> She goes on to explain that overuse of certain substances enhancing their animal attributes can change a person’s body and mind so much that they lose themselves.", parse);
 					Text.NL();
 					Text.Add("<i>“As long as you keep your wits about you, you should be fine,”</i> she finishes, ordering another mug of mead. <i>“Who knows, I might like having a pet around though…”</i> she adds teasingly. <i>“Just be careful, ok?”</i>", parse);
-				}, 1.0, function() { return true; });
-				scenes.AddEnc(function() {
+				}, 1.0, () => true);
+				scenes.AddEnc(() => {
 					Text.Add("<i>“The goblin tribes of the deeper woods are a weird bunch,”</i> she muses, taking a long draft of the strong mead in her cup. <i>“They are so constantly mad with lust that they fuck like rabbits, yet they somehow keep their numbers down with a surprisingly high fatality rate,”</i> she ponders that a bit. <i>“It’s probably because they are really, really stupid,”</i> she decides, <i>“just be careful that they don't gang up on you.”</i>", parse);
-				}, 1.0, function() { return true; });
-				scenes.AddEnc(function() {
+				}, 1.0, () => true);
+				scenes.AddEnc(() => {
 					Text.Add("<i>“There are some wild feline beasts running around the forest,”</i> she informs you. <i>“They may look cute, but be very careful around them. Unlike the domesticated house cats you might see here in the city, these are natural predators, and are very dangerous. Don't head into their territory unless you have some kind of death wish.”</i>", parse);
-				}, 1.0, function() { return true; });
+				}, 1.0, () => true);
 
 				scenes.Get();
 				Text.Flush();
@@ -1812,7 +1812,7 @@ MirandaScenes.BarChatOptions = function(options: any[], back: any) {
 			Text.Clear();
 			const scenes = new EncounterTable();
 
-			scenes.AddEnc(function() {
+			scenes.AddEnc(() => {
 				Text.Add("<i>“There’s a merchant’s district where most of the shops and markets are located,”</i> Miranda tells you. <i>“Don’t go there too often, my job and lifestyle doesn’t exactly afford me luxury items.”</i>", parse);
 				Text.NL();
 				Text.Add("She ponders a bit.", parse);
@@ -1820,18 +1820,18 @@ MirandaScenes.BarChatOptions = function(options: any[], back: any) {
 				Text.Add("<i>“If anything, I’d like to buy something from the Pale Flame if I had the cash. That salamander seems to have a gift for weapon making. Would certainly be a step up from the junk the Watch doles out. Those swords are more fit for bashing than slashing.”</i>", parse);
 				Text.NL();
 				Text.Add("<i>“Watch out for that creep Donovan, though,”</i> she warns you. <i>“Always be wary of someone trying to sell you used armor.”</i>", parse);
-			}, 1.0, function() { return true; });
-			scenes.AddEnc(function() {
+			}, 1.0, () => true);
+			scenes.AddEnc(() => {
 				Text.Add("<i>“The slums aren’t such a bad place, you know. Bit less safe, due to it being outside the walls, but it breeds hardy people. Bit gruff, but you get used to them. Certainly beats some posh people I’ve come across when it comes to conversation. Never understood how a drop of ‘old blood’ and a bag of cash from daddy can sour someone’s personality that much.”</i>", parse);
 				Text.NL();
 				Text.Add("<i>“Case and point, attended a break-in at some noble mansion near the plaza. The lady of the house looked like she was going to break her neck, the way she was trying to look down her nose at us. Ever seen someone try to look down on a centaur almost twice their height?”</i>", parse);
-			}, 1.0, function() { return true; });
-			scenes.AddEnc(function() {
+			}, 1.0, () => true);
+			scenes.AddEnc(() => {
 				Text.Add("The two of you chat a bit about Rigard. <i>“Well, it's a nice enough place, all things considered,”</i> Miranda concedes. <i>“The booze is passable, and I have a decent job that brings the dough in.”</i> She grins widely. <i>“Nightlife is a real kicker, and now I have you around to keep me entertained!”</i>", parse);
 				player.AddLustFraction(0.1);
 				miranda.AddLustFraction(0.1);
-			}, 1.0, function() { return true; });
-			scenes.AddEnc(function() {
+			}, 1.0, () => true);
+			scenes.AddEnc(() => {
 				Text.Add("You ask Miranda about the royal family living in the castle. Her mood darkens immediately, and she spits on the floor besides the table.", parse);
 				Text.NL();
 				Text.Add("<i>“Rigard may be my home, but don’t think for a second I’ve got anything but scorn for that bunch. Fucking aristocrats...”</i>", parse);
@@ -1843,7 +1843,7 @@ MirandaScenes.BarChatOptions = function(options: any[], back: any) {
 				Text.Add("<i>“Heh, they are a right depraved bunch,”</i> Miranda laughs, a wicked grin playing across her features. <i>“There is plenty a rumor about the dear queen, and don’t get me started on the kids. It’s common knowledge they hit the sack together, and you’d have to look hard to find a girlier prince than Rani.”</i>", parse);
 				Text.NL();
 				Text.Add("<i>“...Still, I’d tap that.”</i>", parse);
-			}, 1.0, function() { return true; });
+			}, 1.0, () => true);
 
 			scenes.Get();
 			Text.Flush();
@@ -1895,7 +1895,7 @@ MirandaScenes.BarChatOptions = function(options: any[], back: any) {
 	options.push({nameStr : "",
 		tooltip : Text.Parse("", parse),
 		enabled : true,
-		func : function() {
+		func : () => {
 			Text.Clear();
 			Text.Add("", parse);
 			Text.NL();
@@ -1905,7 +1905,7 @@ MirandaScenes.BarChatOptions = function(options: any[], back: any) {
 	});
 	*/
 
-	if ((rigard.Krawitz.Q >= RigardFlags.KrawitzQ.CaughtTerry) && (terry.flags.Saved == TerryFlags.Saved.NotStarted)) {
+	if ((rigard.Krawitz.Q >= RigardFlags.KrawitzQ.CaughtTerry) && (terry.flags.Saved === TerryFlags.Saved.NotStarted)) {
 		options.push({ nameStr : "Thief",
 			func() {
 				Text.Clear();
@@ -1915,7 +1915,7 @@ MirandaScenes.BarChatOptions = function(options: any[], back: any) {
 				Text.NL();
 				Text.Add("<i>“Little bastard’s been sentenced to death. He had a long list of infractions, plus he pissed off the higher-ups. And let’s not forget the fact that he’s a morph to boot, ”</i> Miranda explains.", parse);
 				Text.NL();
-				if (rigard.Krawitz.F != 0) {
+				if (rigard.Krawitz.F !== 0) {
 					Text.Add("...Okay, now you really feel guilty for shifting blame onto the fox, even if he <b>is</b> a thief himself. ", parse);
 				}
 				Text.Add("You ask Miranda when he’s going to be executed.", parse);
@@ -1934,12 +1934,12 @@ MirandaScenes.BarChatOptions = function(options: any[], back: any) {
 	}
 };
 
-MirandaScenes.BarTalkOptions = function(options: any[], next: any) {
+MirandaScenes.BarTalkOptions = (options: any[], next: any) => {
 	const parse: any = {};
 
 	options.push({ nameStr : "Her past",
 		func() {
-			Gui.Callstack.push(function() {
+			Gui.Callstack.push(() => {
 				Text.Flush();
 				next();
 			});
@@ -1949,7 +1949,7 @@ MirandaScenes.BarTalkOptions = function(options: any[], next: any) {
 	});
 	options.push({ nameStr : "Her conquests",
 		func() {
-			Gui.Callstack.push(function() {
+			Gui.Callstack.push(() => {
 				Text.Flush();
 				next();
 			});
@@ -1959,7 +1959,7 @@ MirandaScenes.BarTalkOptions = function(options: any[], next: any) {
 	});
 };
 
-MirandaScenes.HeyThereChat = function() {
+MirandaScenes.HeyThereChat = () => {
 	const parse: any = {};
 	Text.NL();
 	Text.Add("What do you want to chat with Miranda about?", parse);
@@ -1974,7 +1974,7 @@ MirandaScenes.HeyThereChat = function() {
 	Gui.SetButtonsFromList(options);
 };
 
-MirandaScenes.TakeHome = function() {
+MirandaScenes.TakeHome = () => {
 	const player = GAME().player;
 	const miranda = GAME().miranda;
 
@@ -2052,7 +2052,7 @@ MirandaScenes.TakeHome = function() {
 	}
 };
 
-MirandaScenes.JustOneMore = function() {
+MirandaScenes.JustOneMore = () => {
 	const player = GAME().player;
 	const miranda = GAME().miranda;
 	const world = WORLD();
@@ -2067,7 +2067,7 @@ MirandaScenes.JustOneMore = function() {
 
 	miranda.flags.Met = MirandaFlags.Met.TavernAftermath;
 
-	if (miranda.flags.Attitude == MirandaFlags.Attitude.Nice) {
+	if (miranda.flags.Attitude === MirandaFlags.Attitude.Nice) {
 		Text.Add("<i>“Well, I honestly didn't think I would see you again after last time,”</i> she laughs softly as you squirm a bit, then pats the bench beside her. Miranda seems very happy that you decided to return, which she makes more clear as she reaches over and whispers in your ear, <i>“If you decided to come back, I guess that means you liked my extra equipment. Perhaps you are yearning for round two?”</i> She gently reaches down into your pants, ", parse);
 		if (player.FirstCock()) {
 			Text.Add("fondling your now aroused [cocks].", parse);
@@ -2089,7 +2089,7 @@ MirandaScenes.JustOneMore = function() {
 		MirandaScenes.MaidensBanePrompt();
 
 		// TODO: Push sexy
-	} else if (miranda.flags.Attitude == MirandaFlags.Attitude.Dismiss) {
+	} else if (miranda.flags.Attitude === MirandaFlags.Attitude.Dismiss) {
 		Text.Add("<i>“I.. uh.. I'm sorry about last time,”</i> she says, a bit defensively. <i>“Of course you weren't expecting... that, to, uh, show up.”</i> She rolls her shoulders. <i>“Well, that's my little secret, I'm a hermaphrodite, got both parts and all,”</i> she smiles, back to her old assertive self.", parse);
 		Text.NL();
 		Text.Add("<i>“Twice the fun though, if you care to try it out.”</i> The dog-morph is obviously waiting for you to say something.", parse);
@@ -2254,7 +2254,7 @@ MirandaScenes.JustOneMore = function() {
 							miranda.relation.IncreaseStat(100, 10);
 							miranda.subDom.DecreaseStat(-100, 10);
 
-							Gui.NextPrompt(function() {
+							Gui.NextPrompt(() => {
 								MoveToLocation(world.loc.Rigard.Slums.Gate, {hour: 4});
 								player.AddLustFraction(-1);
 								miranda.AddLustFraction(-1);
@@ -2270,7 +2270,7 @@ MirandaScenes.JustOneMore = function() {
 							target = BodyPartType.vagina;
 						}
 
-						if (target == BodyPartType.vagina) {
+						if (target === BodyPartType.vagina) {
 							parse.targetDesc = parse.vag;
 						} else {
 							parse.targetDesc = parse.anus;
@@ -2280,7 +2280,7 @@ MirandaScenes.JustOneMore = function() {
 						Text.Add("Blushing slightly, you lay her down on the floor before you, on top of her discarded clothes. Straddling her, you position the tip of her cock at your [targetDesc], wondering if it will even fit inside you. You don't have to wonder very long as Miranda gathers a bit of strength and pushes you down so far that your entrance touches the fur on her stomach. She grins up at you, growling playfully while you gasp for breath.", parse);
 						Text.NL();
 
-						if (target == BodyPartType.vagina) {
+						if (target === BodyPartType.vagina) {
 							Sex.Vaginal(miranda, player);
 							miranda.Fuck(miranda.FirstCock(), 5);
 							player.FuckVag(player.FirstVag(), miranda.FirstCock(), 5);
@@ -2324,7 +2324,7 @@ MirandaScenes.JustOneMore = function() {
 						miranda.relation.IncreaseStat(100, 10);
 						miranda.subDom.IncreaseStat(100, 10);
 
-						Gui.NextPrompt(function() {
+						Gui.NextPrompt(() => {
 							MoveToLocation(world.loc.Rigard.Slums.Gate, {hour: 4});
 							player.AddLustFraction(-1);
 							miranda.AddLustFraction(-1);
@@ -2408,7 +2408,7 @@ MirandaScenes.JustOneMore = function() {
 						miranda.relation.IncreaseStat(100, 15);
 						miranda.subDom.IncreaseStat(100, 20);
 
-						Gui.NextPrompt(function() {
+						Gui.NextPrompt(() => {
 							MoveToLocation(world.loc.Rigard.Slums.Gate, {hour: 4});
 							player.AddLustFraction(-1);
 							miranda.AddLustFraction(-1);
@@ -2424,14 +2424,14 @@ MirandaScenes.JustOneMore = function() {
 	}
 };
 
-MirandaScenes.MaidensBaneTalk = function() {
+MirandaScenes.MaidensBaneTalk = () => {
 	const miranda = GAME().miranda;
 
 	Text.Clear();
 
-	if (miranda.flags.Met == MirandaFlags.Met.Met) {
+	if (miranda.flags.Met === MirandaFlags.Met.Met) {
 		MirandaScenes.HeyThere();
-	} else if (miranda.flags.Met == MirandaFlags.Met.Tavern) {
+	} else if (miranda.flags.Met === MirandaFlags.Met.Tavern) {
 		if (miranda.flags.Attitude >= MirandaFlags.Attitude.Neutral) {
 			Text.Add("You walk over to Miranda, who is lounging on one of the benches in the shady tavern. She’s already gotten started on her first few drinks, and waves you over when she notices you.");
 		} else {
@@ -2448,7 +2448,7 @@ MirandaScenes.MaidensBaneTalk = function() {
 };
 
 // TODO
-MirandaScenes.MaidensBanePrompt = function() {
+MirandaScenes.MaidensBanePrompt = () => {
 	const player = GAME().player;
 	const miranda = GAME().miranda;
 
@@ -2463,18 +2463,18 @@ MirandaScenes.MaidensBanePrompt = function() {
 			Text.Clear();
 
 			const scenes = new EncounterTable();
-			scenes.AddEnc(function() {
+			scenes.AddEnc(() => {
 				Text.Add("What did you want to ask the dobie about?", parse);
-			}, 1.0, function() { return true; });
-			scenes.AddEnc(function() {
+			}, 1.0, () => true);
+			scenes.AddEnc(() => {
 				Text.Add("<i>“What’s on your mind?”</i> the guardswoman asks, leaning back in her seat.", parse);
-			}, 1.0, function() { return true; });
-			scenes.AddEnc(function() {
+			}, 1.0, () => true);
+			scenes.AddEnc(() => {
 				Text.Add("<i>“You want to talk? But there’s so many better uses for that tongue of yours,”</i> Miranda replies, smirking. <i>“Well, spit it out.”</i>", parse);
-			}, 1.0, function() { return dom > 50; });
-			scenes.AddEnc(function() {
+			}, 1.0, () => dom > 50);
+			scenes.AddEnc(() => {
 				Text.Add("<i>“Get on with it, I don’t have all day.”</i> The doberherm is wearing a slightly annoyed expression.", parse);
-			}, 1.0, function() { return miranda.Nasty(); });
+			}, 1.0, () => miranda.Nasty());
 			scenes.Get();
 
 			Text.Flush();
@@ -2492,7 +2492,7 @@ MirandaScenes.MaidensBanePrompt = function() {
 	Gui.SetButtonsFromList(options, true);
 };
 
-MirandaScenes.MaidensBaneTalkPrompt = function() {
+MirandaScenes.MaidensBaneTalkPrompt = () => {
 	const player = GAME().player;
 	const miranda = GAME().miranda;
 
@@ -2510,22 +2510,22 @@ MirandaScenes.MaidensBaneTalkPrompt = function() {
 		MirandaScenes.BarTalkOptions(options, MirandaScenes.MaidensBaneTalkPrompt);
 	}
 
-	Gui.SetButtonsFromList(options, true, function() {
+	Gui.SetButtonsFromList(options, true, () => {
 		Text.Clear();
 		const scenes = new EncounterTable();
 
-		scenes.AddEnc(function() {
+		scenes.AddEnc(() => {
 			Text.Add("<i>“Right, my throat was getting parched anyways.”</i> Miranda drains her tankard and calls for another one.", parse);
-		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
 			Text.Add("<i>“Night’s still young. Anything else on your mind?”</i>", parse);
-		}, 1.0, function() { return true; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
 			Text.Add("<i>“Enough questions,”</i> Miranda states. <i>“I’m getting bored, entertain me.”</i>", parse);
-		}, 1.0, function() { return dom > 50; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => dom > 50);
+		scenes.AddEnc(() => {
 			Text.Add("<i>“You owe me for all this small talk. I think I might collect later tonight,”</i> Miranda drawls ominously.", parse);
-		}, 1.0, function() { return miranda.Nasty(); });
+		}, 1.0, () => miranda.Nasty());
 
 		scenes.Get();
 
@@ -2534,7 +2534,7 @@ MirandaScenes.MaidensBaneTalkPrompt = function() {
 	});
 };
 
-MirandaScenes.MaidensBaneNice = function() {
+MirandaScenes.MaidensBaneNice = () => {
 	const parse: any = {};
 	// TODO
 	Text.Add("", parse);
@@ -2543,7 +2543,7 @@ MirandaScenes.MaidensBaneNice = function() {
 	MirandaScenes.MaidensBanePrompt();
 };
 
-MirandaScenes.MaidensBaneNasty = function() {
+MirandaScenes.MaidensBaneNasty = () => {
 	const parse: any = {};
 	// TODO
 	Text.Add("", parse);
@@ -2554,7 +2554,7 @@ MirandaScenes.MaidensBaneNasty = function() {
 	MirandaScenes.MaidensBanePrompt();
 };
 
-MirandaScenes.TerryChaseHome = function() {
+MirandaScenes.TerryChaseHome = () => {
 	const player = GAME().player;
 	const miranda = GAME().miranda;
 	const terry = GAME().terry;
@@ -2588,7 +2588,7 @@ MirandaScenes.TerryChaseHome = function() {
 				Text.Add("<i>“C’mon, I need some relief here!”</i> Miranda complains, attempting to shove you inside. You barely manage to avoid her grab, dancing outside her reach. <i>“Fine,”</i> she growls, <i>“but I’m getting some action today <b>one</b> way or another.”</i> That doesn’t sound like it bodes well for the thief when you finally catch [himher].", parse);
 				Text.Flush();
 
-				Gui.NextPrompt(function() {
+				Gui.NextPrompt(() => {
 					MoveToLocation(world.loc.Rigard.Residential.Street, {minute: 5});
 				});
 			}, enabled : true,
@@ -2633,7 +2633,7 @@ MirandaScenes.TerryChaseHome = function() {
 				Text.Add("<i>“You are such a tease sometimes, you know that?”</i> Miranda complains. She grudgingly nods in agreement, leading the way as you try to figure out where to search next.", parse);
 				Text.Flush();
 
-				Gui.NextPrompt(function() {
+				Gui.NextPrompt(() => {
 					MoveToLocation(world.loc.Rigard.Residential.Street, {minute: 5});
 				});
 			}, enabled : true,
@@ -2645,7 +2645,7 @@ MirandaScenes.TerryChaseHome = function() {
 
 /* MIRANDA SEX */
 
-MirandaScenes.BarSexOptions = function(options: any[]) {
+MirandaScenes.BarSexOptions = (options: any[]) => {
 	const miranda = GAME().miranda;
 
 	const parse: any = {};
@@ -2671,7 +2671,7 @@ MirandaScenes.BarSexOptions = function(options: any[]) {
 	});
 };
 
-MirandaScenes.TavernSexPublicPrompt = function() {
+MirandaScenes.TavernSexPublicPrompt = () => {
 	const player = GAME().player;
 	const miranda = GAME().miranda;
 
@@ -2710,7 +2710,7 @@ MirandaScenes.TavernSexPublicPrompt = function() {
 	Gui.SetButtonsFromList(options, true, MirandaScenes.MaidensBanePrompt);
 };
 
-MirandaScenes.HomeDescFloor1 = function() {
+MirandaScenes.HomeDescFloor1 = () => {
 	const miranda = GAME().miranda;
 
 	const parse: any = {
@@ -2726,7 +2726,7 @@ MirandaScenes.HomeDescFloor1 = function() {
 	miranda.flags.Floor = 1;
 };
 
-MirandaScenes.HomeDescFloor2 = function() {
+MirandaScenes.HomeDescFloor2 = () => {
 	const miranda = GAME().miranda;
 
 	const parse: any = {
@@ -2742,7 +2742,7 @@ MirandaScenes.HomeDescFloor2 = function() {
 	miranda.flags.Floor = 2;
 };
 
-MirandaScenes.HomeDommySexLeavingFuckedHer = function() {
+MirandaScenes.HomeDommySexLeavingFuckedHer = () => {
 	const player = GAME().player;
 	const party: Party = GAME().party;
 	const rigard = GAME().rigard;
@@ -2753,11 +2753,11 @@ MirandaScenes.HomeDommySexLeavingFuckedHer = function() {
 		playername : player.name,
 	};
 
-	if (rigard.Krawitz.Q == RigardFlags.KrawitzQ.HuntingTerry) {
+	if (rigard.Krawitz.Q === RigardFlags.KrawitzQ.HuntingTerry) {
 		Text.Add("The two of you set out, returning to your search for the elusive thief.", parse);
 		Text.Flush();
 
-		Gui.NextPrompt(function() {
+		Gui.NextPrompt(() => {
 			MoveToLocation(world.loc.Rigard.Residential.Street, {minute : 5});
 		});
 	} else if (party.InParty(miranda)) {
@@ -2774,7 +2774,7 @@ MirandaScenes.HomeDommySexLeavingFuckedHer = function() {
 		}
 		Text.NL();
 
-		Gui.Callstack.push(function() {
+		Gui.Callstack.push(() => {
 			Text.NL();
 			parse.night = WorldTime().DayTime();
 			Text.Add("You bid Miranda farewell and step out into the [night].", parse);
@@ -2783,12 +2783,12 @@ MirandaScenes.HomeDommySexLeavingFuckedHer = function() {
 				parse.comp = party.Num() > 2 ? "the rest of your party" : party.Get(1).name;
 				Text.Add("Somehow, you make it out the gates in order to rejoin [comp].", parse);
 				Text.Flush();
-				Gui.NextPrompt(function() {
+				Gui.NextPrompt(() => {
 					MoveToLocation(world.loc.Rigard.Slums.Gate, {minute: 30});
 				});
 			} else {
 				Text.Flush();
-				Gui.NextPrompt(function() {
+				Gui.NextPrompt(() => {
 					MoveToLocation(world.loc.Rigard.Residential.Street, {minute: 5});
 				});
 			}
@@ -2808,14 +2808,14 @@ MirandaScenes.HomeDommySexLeavingFuckedHer = function() {
 					Text.Add("You sleep until morning.");
 					Text.Flush();
 
-					const func = function() {
+					const func = () => {
 						StepToHour(8);
 						party.Sleep();
 
 						Gui.PrintDefaultOptions();
 					};
 
-					Gui.NextPrompt(function() {
+					Gui.NextPrompt(() => {
 						Text.Clear();
 
 						DreamsScenes.Entry(func);
@@ -2841,7 +2841,7 @@ MirandaScenes.HomeDommySexLeavingFuckedHer = function() {
 	}
 };
 
-MirandaScenes.HomeDommySex = function() {
+MirandaScenes.HomeDommySex = () => {
 	const player = GAME().player;
 	const party: Party = GAME().party;
 	const miranda = GAME().miranda;
@@ -2856,7 +2856,7 @@ MirandaScenes.HomeDommySex = function() {
 
 	Text.NL();
 	Text.Add("You are standing in the murky hallway just inside Miranda’s house, the doggie herself huffing and panting in your arms. She is really starting to get into it, kissing your neck and caressing your back and [butt] with her hands.", parse);
-	if (miranda.flags.Floor == 0) {
+	if (miranda.flags.Floor === 0) {
 		MirandaScenes.HomeDescFloor1();
 	}
 	Text.NL();
@@ -2897,7 +2897,7 @@ MirandaScenes.HomeDommySex = function() {
 	Gui.SetButtonsFromList(options);
 };
 
-MirandaScenes.HomeDommySexRideDobieCockVag = function() {
+MirandaScenes.HomeDommySexRideDobieCockVag = () => {
 	const player = GAME().player;
 	const miranda = GAME().miranda;
 
@@ -2968,7 +2968,7 @@ MirandaScenes.HomeDommySexRideDobieCockVag = function() {
 			Text.NL();
 
 			const scenes = new EncounterTable();
-			scenes.AddEnc(function() {
+			scenes.AddEnc(() => {
 				Text.Add("Miranda quickly digs in, her tongue eagerly lapping at your [cocks]. Her eyes lock with yours as her hands roam, trying to judge your reactions as she explores your body. You look down confidently at the herm, satisfied at her compliance. It feels wonderful when she wraps her lips around[oneof] your shaft[s], alternately sucking and stroking you.", parse);
 				Text.NL();
 
@@ -2990,8 +2990,8 @@ MirandaScenes.HomeDommySexRideDobieCockVag = function() {
 				Text.Add("Your stamina is short lived with Miranda’s digits probing your soddy depths[cl]. With the dual stimulation, it’s not long before you cry out and cum, pouring your seed down the herm’s gullet[c]. When you finally pull out, she’s a panting mess, though she hasn’t forgotten her promised reward.", parse);
 
 				if (player.NumCocks() > 1) { stickymiranda = true; }
-			}, 1.0, function() { return player.FirstCock() && dom > 0; });
-			scenes.AddEnc(function() {
+			}, 1.0, () => player.FirstCock() && dom > 0);
+			scenes.AddEnc(() => {
 				parse.c = player.FirstVag().clitCock ? " the base of" : "";
 				Text.Add("Miranda quickly digs in, burying herself in your wet, needy pussy. Her being a dog gives her quite the proficiency at lapping; her long, flexible tongue seeks out every crevice of your feminine sex, hungrily slurping up your juices. The dobie’s cold, wet nose prods[c] your [clit], her eagerness making you gasp in delight.", parse);
 				Text.NL();
@@ -3010,7 +3010,7 @@ MirandaScenes.HomeDommySexRideDobieCockVag = function() {
 				}
 				Text.Add("It’s a while before your hips finally stop shaking, your recovery not helped by Miranda continuing to lap on your twitching pussy. She, at least, hasn’t forgotten about her promised reward.", parse);
 				if (player.FirstCock()) { stickymiranda = true; }
-			}, 1.0, function() { return true; });
+			}, 1.0, () => true);
 			scenes.Get();
 
 			const cum = player.OrgasmCum();
@@ -3068,7 +3068,7 @@ MirandaScenes.HomeDommySexRideDobieCockVag = function() {
 	Gui.SetButtonsFromList(options, false, null);
 };
 
-MirandaScenes.HomeDommySexRideDobieCockVagFuck = function(stickymiranda: boolean, came: boolean) {
+MirandaScenes.HomeDommySexRideDobieCockVagFuck = (stickymiranda: boolean, came: boolean) => {
 	const player = GAME().player;
 	const miranda = GAME().miranda;
 
@@ -3176,7 +3176,7 @@ MirandaScenes.HomeDommySexRideDobieCockVagFuck = function(stickymiranda: boolean
 	});
 	Gui.SetButtonsFromList(options, false, null);
 
-	Gui.Callstack.push(function() {
+	Gui.Callstack.push(() => {
 		Text.NL();
 		player.subDom.IncreaseStat(75, 1);
 		miranda.subDom.DecreaseStat(-50, 1);
@@ -3185,7 +3185,7 @@ MirandaScenes.HomeDommySexRideDobieCockVagFuck = function(stickymiranda: boolean
 	});
 };
 
-MirandaScenes.HomeDommySexRideDobieCockVagSubmit = function(submit: boolean) {
+MirandaScenes.HomeDommySexRideDobieCockVagSubmit = (submit: boolean) => {
 	const player = GAME().player;
 	const miranda = GAME().miranda;
 
@@ -3225,7 +3225,7 @@ MirandaScenes.HomeDommySexRideDobieCockVagSubmit = function(submit: boolean) {
 	MirandaScenes.HomeDommySexLeavingFuckedHer();
 };
 
-MirandaScenes.HomeDommySexFuckDobieAss = function(cocks: Cock[]) {
+MirandaScenes.HomeDommySexFuckDobieAss = (cocks: Cock[]) => {
 	const player = GAME().player;
 	const miranda = GAME().miranda;
 
@@ -3242,7 +3242,7 @@ MirandaScenes.HomeDommySexFuckDobieAss = function(cocks: Cock[]) {
 	const dom = miranda.SubDom() - player.SubDom();
 
 	if (pCock.isStrapon) {
-		parse.multiCockDesc = function() { return pCock.Short(); };
+		parse.multiCockDesc = () => pCock.Short();
 	}
 
 	Text.Clear();
@@ -3311,9 +3311,9 @@ MirandaScenes.HomeDommySexFuckDobieAss = function(cocks: Cock[]) {
 		Text.Add("Before long, your hips bump against her rear, and you sigh contentedly[b].", parse);
 	} else if (pCock.length.Get() < 35) {
 		Text.Add("It’s going to take some work until you can hilt the herm, but she’s a big girl. You’re sure she can take it.", parse);
- } else {
+ 	} else {
 		Text.Add("No amount of lube is going to help you hilt your monster cock inside the straining asshole of the herm, but you’ll be damned if you don’t try.", parse);
- }
+ 	}
 	Text.NL();
 	Text.Add("You build up to a slow rhythm, showing more care than Miranda usually does to her victims.", parse);
 	if (dom < -25) {
@@ -3370,7 +3370,7 @@ MirandaScenes.HomeDommySexFuckDobieAss = function(cocks: Cock[]) {
 	});
 	Gui.SetButtonsFromList(options);
 
-	Gui.Callstack.push(function() {
+	Gui.Callstack.push(() => {
 		Text.NL();
 		if (dom < -25) {
 			Text.Add("The doberherm looks to be in absolute bliss; her tongue is lolling out while she pants, and her eyes roll to the back of her head. <i>“Having fun?”</i> you ask her.", parse);
@@ -3399,7 +3399,7 @@ MirandaScenes.HomeDommySexFuckDobieAss = function(cocks: Cock[]) {
 		Text.Add("The longer you keep going, the rougher you get, feeling your pleasure building steadily as you ram the herm for all you’re worth. You both lose track of time as you relish in the carnal, animalistic rapture of sex, your [cock] in her ravaged anus all that matters anymore.", parse);
 		Text.NL();
 
-		const knotted = (pCock.knot != 0);
+		const knotted = (pCock.knot !== 0);
 		let load;
 
 		parse.knot = knotted ? " roughly shoving your knot against her entrance," : "";
@@ -3421,9 +3421,9 @@ MirandaScenes.HomeDommySexFuckDobieAss = function(cocks: Cock[]) {
 					parse.load = "tremendous";
 				} else if (load > 3) {
 					parse.load = "considerable";
- } else {
+ 				} else {
 					parse.load = "meager";
- }
+ 				}
 				parse.load2 = load > 3 ? " and bloating it" : "";
 				Text.Add("You fill her back door with your [load] load. With your bulb sealing her tightly, the cum has nowhere to go but her belly, filling it up[load2] under your continuous flood.", parse);
 				if (load > 3) {
@@ -3436,7 +3436,7 @@ MirandaScenes.HomeDommySexFuckDobieAss = function(cocks: Cock[]) {
 				if (player.NumCocks() > 1) {
 					const allCocks = player.AllCocksCopy();
 					for (let i = 0; i < allCocks.length; i++) {
-						if (allCocks[i] == pCock) {
+						if (allCocks[i] === pCock) {
 							allCocks.splice(i, 1);
 							break;
 						}
@@ -3461,9 +3461,9 @@ MirandaScenes.HomeDommySexFuckDobieAss = function(cocks: Cock[]) {
 					parse.load = "tremendous";
 				} else if (load > 3) {
 					parse.load = "considerable";
- } else {
+ 				} else {
 					parse.load = "meager";
- }
+ 				}
 				Text.Add(" The dominated dobie gasps as she feels the first splatters of your [load] load hit her inner walls, hot and sticky. You keep thrusting into her as you shoot wad after wad of thick sperm, painting her anal passage white.", parse);
 				if (load > 3) {
 					parse.several = Text.NumToText(Math.min(Math.floor(2 + (load - 3) * 2), 9));
@@ -3477,7 +3477,7 @@ MirandaScenes.HomeDommySexFuckDobieAss = function(cocks: Cock[]) {
 		Text.NL();
 		parse.cum = !pCock.isStrapon ? ", squirming as she feels your hot cum flow into her" : "";
 		Text.Add("Miranda isn’t far behind you[cum]. ", parse);
-		if (target == Target.boobs) {
+		if (target === Target.boobs) {
 			Text.Add("You seize the opportunity to mash her breasts together, leaning down to suck on one of her erect nipples. This proves to be the last straw. With a howl of pleasure, you feel her cock throbbing against your belly as she orgasms.", parse);
 			Text.NL();
 			if (load > 3) {
@@ -3489,12 +3489,12 @@ MirandaScenes.HomeDommySexFuckDobieAss = function(cocks: Cock[]) {
 			}
 			parse.cum = load > 6 ? ", despite there being no more room inside" : "";
 			Text.Add("Her sphincter constricts your [cock] with all her might, milking you for even more cum[cum]. It feels great, but at the same time it’s so tight that it’s almost painful. The doberherm’s cunt, forgotten until now, constricts and contracts, spewing her female juices all over your lower body. From the looks of it, she came as hard as she’s ever done when pitching.", parse);
-		} else if (target == Target.cunt) {
+		} else if (target === Target.cunt) {
 			Text.Add("You can feel her pussy contract around your fingers even as her ass does the same to your [cock], trying to milk your digits of their non-existent seed.", parse);
 			if (player.NumCocks() > 1) {
 				const allCocks = player.AllCocksCopy();
 				for (let i = 0; i < allCocks.length; i++) {
-					if (allCocks[i] == pCock) {
+					if (allCocks[i] === pCock) {
 						allCocks.splice(i, 1);
 						break;
 					}
@@ -3509,11 +3509,11 @@ MirandaScenes.HomeDommySexFuckDobieAss = function(cocks: Cock[]) {
 				parse.cum = " bloated";
 			} else if (load > 3) {
 				parse.cum = " inflated";
- } else {
+ 			} else {
 				parse.cum = "";
- }
+ 			}
 			Text.Add("Her cock sprays jets of canid cum all over her[cum] belly, matting the dobie’s short dark fur with her own jizz. You grind the dildo into her cunt until her orgasm recedes, leaving the guardswoman a panting, sticky mess. The artificial phallus is dripping with femcum when you finally pull it out, soaked in her juices.", parse);
-		} else if (target == Target.cock) {
+		} else if (target === Target.cock) {
 			Text.Add("Your vicious handjob ends when you grab both her balls and knot tightly, eliciting a sharp cry from the doberherm as her cock throbs, once, twice, and finally sends a powerful jet of doggy-spunk arcing through the air to splatter messily on her face.", parse);
 			Text.NL();
 			parse.strapon = pCock.isStrapon ? ", despite you being unable to give her any" : "";
@@ -3582,7 +3582,7 @@ MirandaScenes.HomeDommySexFuckDobieAss = function(cocks: Cock[]) {
 	});
 };
 
-MirandaScenes.HomeDommySexRideDobieCockShared = function() {
+MirandaScenes.HomeDommySexRideDobieCockShared = () => {
 	const player = GAME().player;
 	const miranda = GAME().miranda;
 
@@ -3613,7 +3613,7 @@ MirandaScenes.HomeDommySexRideDobieCockShared = function() {
 	}
 };
 
-MirandaScenes.HomeDommySexRideDobieCockAnal = function() {
+MirandaScenes.HomeDommySexRideDobieCockAnal = () => {
 	const player = GAME().player;
 	const miranda = GAME().miranda;
 
@@ -3735,7 +3735,7 @@ MirandaScenes.HomeDommySexRideDobieCockAnal = function() {
 	}
 	Gui.SetButtonsFromList(options);
 
-	Gui.Callstack.push(function() {
+	Gui.Callstack.push(() => {
 		Text.NL();
 		if (player.Butt().virgin) {
 			Text.Add("<i>“So tight! What the… are you a virgin back there by any chance?”</i>, Miranda asks.", parse);
@@ -3767,17 +3767,17 @@ MirandaScenes.HomeDommySexRideDobieCockAnal = function() {
 		Text.NL();
 		if (player.FirstCock()) {
 			const scenes = new EncounterTable();
-			scenes.AddEnc(function() {
+			scenes.AddEnc(() => {
 				Text.Add("The sight is just too tempting, and your free hand closes around[oneof] your bobbing [cocks]. Ceasing your riding, you lift yourself from Miranda's dick and settle further up her stomach before your fingers start to pump your own shaft fervently, gliding hard and smooth across the sensitive flesh.", parse);
 				Text.NL();
 				Text.Add("You can feel the flames of desire burning inside of you, growing stronger and hotter with every pump and touch and stroke. A welcome tingling sensation runs down your spine, and you give yourself over to what it entails, making sure to aim your cock[s] right at the open target of Miranda's face. Orgasm washes through you, and you cry out as your [cocks] fountain[notS] [itsTheir] seed.", parse);
-			}, 1.0, function() { return true; });
-			scenes.AddEnc(function() {
+			}, 1.0, () => true);
+			scenes.AddEnc(() => {
 				Text.Add("Eyes fixated on the D-cup tits wobbling so enticingly atop your partner's chest, you push up and forward until Miranda's dick pops free of your ass. A dismayed whimper escapes the morph beneath you, and your anus clenches in sympathy at having been so emptied, but you have another prize to attend to. Sliding along Miranda's stomach, you bring your [cocks] to bear in-between the morph's luscious breasts, your hands wrapping around the firmly toned, velvety-furred orbs and mashing them together around your shaft[s].", parse);
 				Text.NL();
 				Text.Add("You eagerly grind and thrust yourself through Miranda's breasts, your sensitive flesh prickling most deliciously at the warmth and soft fur that surrounds [itThem], a sensation that builds upon the feelings already stoked within you by your riding of Miranda's cock. Pleasure mounts and rises inside of you, battering down your will, until you arch your back and thrust as deeply into the morph's cleavage as you can, unleashing your seed without a care.", parse);
-			}, 1.0, function() { return true; });
-			scenes.AddEnc(function() {
+			}, 1.0, () => true);
+			scenes.AddEnc(() => {
 				Text.Add("One look at that lolling tongue and the wetness of the dog-morph's mouth is all you need to convince you of your next course of action. Miranda actually whines in protest as you suddenly pop your ass free of her cock, but you quickly stifle her complaints by sliding up her stomach so as to thrust[oneof] your [cocks] between her lips. Miranda wastes no time in engulfing it, wrapping her lips eagerly around its length as best she can, hungrily polishing its underside with slurping laps of her tongue.", parse);
 				Text.NL();
 
@@ -3788,7 +3788,7 @@ MirandaScenes.HomeDommySexRideDobieCockAnal = function() {
 				Text.Add("A thrill courses down your spine at the sight of the normally fierce, proudly dominant doberherm reduced to a cock hungry bitch, and you grab hold of her face, energetically thrusting your prick into her drooling maw. With as much fervor as you earlier rode Miranda's dick, you fuck the morph's face, plowing back and forth over her lapping tongue and between her slick lips.", parse);
 				Text.NL();
 				Text.Add("As your pleasure grows, your thrusts grow more erratic; you can feel the pressure building inside you, and you know your climax is almost upon you. Just before you lose control, you pull yourself free of Miranda's mouth, ensuring that your orgasm erupts all over her face.", parse);
-			}, 1.0, function() { return true; });
+			}, 1.0, () => true);
 
 			scenes.Get();
 
@@ -3902,7 +3902,7 @@ MirandaScenes.HomeDommySexRideDobieCockAnal = function() {
 				player.AddLustFraction(-1);
 				miranda.AddLustFraction(-1);
 
-				Gui.NextPrompt(function() {
+				Gui.NextPrompt(() => {
 					Text.Clear();
 					Text.Add("With a stretch to pop some of the aches out of your joints, you set about collecting your discarded [armor], rubbing your sore ass as you bend over to retrieve it. Biting back a groan after straightening up, you slowly redress yourself. As you do all this, you have an audience; though evidently still too weak-kneed to get to her feet herself, you can feel Miranda's eyes as she watches you from her position on the bed.", parse);
 					Text.NL();
@@ -3949,7 +3949,7 @@ MirandaScenes.HomeDommySexRideDobieCockAnal = function() {
 
 };
 
-MirandaScenes.HomeDommySexFuckDobieVag = function(cocks: Cock[]) {
+MirandaScenes.HomeDommySexFuckDobieVag = (cocks: Cock[]) => {
 	const player = GAME().player;
 	const miranda = GAME().miranda;
 
@@ -3966,7 +3966,7 @@ MirandaScenes.HomeDommySexFuckDobieVag = function(cocks: Cock[]) {
 	const dom = miranda.SubDom() - player.SubDom();
 
 	if (pCock.isStrapon) {
-		parse.cocks = function() { return pCock.Short(); };
+		parse.cocks = () => pCock.Short();
 	}
 
 	Text.Clear();
@@ -3974,15 +3974,15 @@ MirandaScenes.HomeDommySexFuckDobieVag = function(cocks: Cock[]) {
 	Text.NL();
 
 	let scenes = new EncounterTable();
-	scenes.AddEnc(function() {
+	scenes.AddEnc(() => {
 		Text.Add("<i>“Like what you see?”</i> Miranda smirks over her shoulder, giving her hips a shake.", parse);
-	}, 1.0, function() { return true; });
-	scenes.AddEnc(function() {
+	}, 1.0, () => true);
+	scenes.AddEnc(() => {
 		Text.Add("<i>“Huff… look at me, getting all hot and bothered,”</i> Miranda pants shamefully, squirming a bit under your close scrutiny.", parse);
-	}, 1.0, function() { return true; });
-	scenes.AddEnc(function() {
+	}, 1.0, () => true);
+	scenes.AddEnc(() => {
 		Text.Add("<i>“Hehe… looks like I’m ready for you, love,”</i> Miranda shake her hips, spreading her cheeks with her cunt fully exposed.", parse);
-	}, 1.0, function() { return miranda.SubDom() < 0; });
+	}, 1.0, () => miranda.SubDom() < 0);
 	scenes.Get();
 
 	Text.Add(" She pauses on the entrance to her room, looking around before sashaying toward her bed with hips swaying side to side.", parse);
@@ -4004,18 +4004,18 @@ MirandaScenes.HomeDommySexFuckDobieVag = function(cocks: Cock[]) {
 	let mode: Mode;
 
 	scenes = new EncounterTable();
-	scenes.AddEnc(function() {
+	scenes.AddEnc(() => {
 		Text.Add("Now, she is going to lie back and spread ‘em as wide as she can. With a heave, you push Miranda over on her back, grabbing her legs and pulling them to the sides. Splayed out, her red cock stands up like a thick pillar, throbbing with excitement. The herm quickly gets the idea, pulling her balls aside to reveal her wet slit. She watches you intently, idly stroking her member while she waits for you to act.", parse);
 
 		mode = Mode.back;
-	}, 1.0, function() { return true; });
-	scenes.AddEnc(function() {
+	}, 1.0, () => true);
+	scenes.AddEnc(() => {
 		Text.Add("She’s a doggie, so there is only one way to go. On all fours, naughty doggie!", parse);
 		Text.NL();
 		Text.Add("<i>“Doggy style, huh? How clever.”</i> Her words are mocking, but she doesn’t waste time in rolling over, wiggling her butt at you. Miranda plants her knees wide on the bed, giving you full access to her nethers. Her wet slit looks as ready as it’ll ever be.", parse);
 
 		mode = Mode.doggy;
-	}, 1.0, function() { return true; });
+	}, 1.0, () => true);
 
 	scenes.Get();
 
@@ -4060,9 +4060,9 @@ MirandaScenes.HomeDommySexFuckDobieVag = function(cocks: Cock[]) {
 		miranda.subDom.DecreaseStat(-50, 1);
 	}
 	Text.NL();
-	if (mode == Mode.back) {
+	if (mode === Mode.back) {
 		Text.Add("As you pick up speed, you grab her by the ankles, spreading her legs wide. Miranda has thrown her head back, tongue lolling about. Her paws are busy between her thighs, feverishly jerking on her leaking cock. The guardswoman moans and squirms as you jackhammer her tight pussy and her heavy tits bounce in rhythm with your movements.", parse);
-	} else if (mode == Mode.doggy) {
+	} else if (mode === Mode.doggy) {
 		Text.Add("You adjust your hold on her hips, pulling her back onto your [cock]. Soon, you’ve established a rhythm - rough and deep, just the way she likes it. The guardswoman is resting on her elbows, her tits bouncing back and forth each time you drive into her. Between her spread legs lie her pride and glory flopping about uselessly, staining the sheets with her pre.", parse);
 	}
 	Text.NL();
@@ -4079,25 +4079,25 @@ MirandaScenes.HomeDommySexFuckDobieVag = function(cocks: Cock[]) {
 	Text.NL();
 
 	let widenButt = false;
-	if (mode == Mode.doggy && player.SubDom() > 30) {
+	if (mode === Mode.doggy && player.SubDom() > 30) {
 		Text.Add("Just above her ravaged pussy, Miranda’s tight rosebud winks at you. The opportunity is just too good to not take advantage of. Licking your fingers thoroughly, you coat them in a thick layer of saliva to ease your entry.", parse);
 		Text.NL();
 		Text.Add("<i>“Hey, what are you up to back th- Ahh!”</i> Miranda’s question is quickly answered by you thumb digging into her tunnel, prying her anus open. ", parse);
 
 		scenes = new EncounterTable();
-		scenes.AddEnc(function() {
+		scenes.AddEnc(() => {
 			Text.Add("<i>“Hngh, think you’re so tough... I can take that easily!”</i> she grunts.", parse);
-		}, 1.0, function() { return miranda.sex.rAnal > 10; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => miranda.sex.rAnal > 10);
+		scenes.AddEnc(() => {
 			Text.Add("<i>“Hey, that’s my schtick,”</i> she complains. <i>“If you keep doing that, you’ll get it back tenfold!”</i>", parse);
 			player.subDom.IncreaseStat(0, 1);
-		}, 1.0, function() { return miranda.sex.gAnal > 10; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => miranda.sex.gAnal > 10);
+		scenes.AddEnc(() => {
 			Text.Add("<i>“T-thank you for using my butt too,”</i> she pants. <i>“Will you fuck me there if I’m a good girl?”</i>", parse);
-		}, 1.0, function() { return miranda.SubDom() < -25; });
-		scenes.AddEnc(function() {
+		}, 1.0, () => miranda.SubDom() < -25);
+		scenes.AddEnc(() => {
 			Text.Add("<i>“S-such a naughty [boyGirl],”</i> she pants. <i>“I’ll get back at you for that.”</i>", parse);
-		}, 1.0, function() { return true; });
+		}, 1.0, () => true);
 
 		scenes.Get();
 
@@ -4113,9 +4113,9 @@ MirandaScenes.HomeDommySexFuckDobieVag = function(cocks: Cock[]) {
 		Text.Add("<i>“Just - haah - keep going like that, [playername],”</i> Miranda begs.", parse);
 	} else {
 		Text.Add("<i>“That all you got?”</i> she moans defiantly. <i>“At this rate, I’ll have to - haah! - do it myself!”</i> ", parse);
-		if (mode == Mode.back) {
+		if (mode === Mode.back) {
 			Text.Add("Keeping one hand busy on her cock, Miranda moves her other one to squeeze her boobs, sighing as she pinches her nipples.", parse);
-		} else if (mode == Mode.doggy) {
+		} else if (mode === Mode.doggy) {
 			Text.Add("True to her word, the herm begins to rock her hips back against you, fucking herself on your [cock].", parse);
  }
 	}
@@ -4128,15 +4128,15 @@ MirandaScenes.HomeDommySexFuckDobieVag = function(cocks: Cock[]) {
 
 	const mCum = miranda.OrgasmCum();
 
-	scenes.AddEnc(function() {
+	scenes.AddEnc(() => {
 		Text.Add("Just where you want her. Grinning widely, you slow down a bit - retaining the depth of your thrusts - but keeping the dog-morph just a hair's breadth away from the orgasm she so desperately craves. When Miranda realizes what you are up to, she growls, cursing you. Her complaints gradually turn to whines and pleas and finally into full on begging as you break down her will with your pistoning [cock].", parse);
 		Text.NL();
 		Text.Add("After another ten minutes, she finally cracks, her thighs twitching and pussy clamping down on your[artificial] shaft. The dog-morph throws back her head and howls, tongue lolling and eyes rolling back as she rides out her climax.", parse);
 		miranda.subDom.DecreaseStat(-75, 1);
-	}, 1.0, function() { return player.SubDom() > 0 && player.sexlevel > 3; });
-	scenes.AddEnc(function() {
+	}, 1.0, () => player.SubDom() > 0 && player.sexlevel > 3);
+	scenes.AddEnc(() => {
 		Text.Add("With a final thrust, you send her over the edge, gripping the guardswoman’s hips tightly as you drive into her, triggering her climax. The doggie’s pussy clamps down on your[artificial] shaft, clenching you tightly even as it stains your pillar with its sweet nectar.", parse);
-	}, 1.0, function() { return true; });
+	}, 1.0, () => true);
 
 	let load: number;
 	enum LoadIn {
@@ -4146,14 +4146,14 @@ MirandaScenes.HomeDommySexFuckDobieVag = function(cocks: Cock[]) {
 	}
 	let loadIn: LoadIn;
 
-	const cont = function() {
+	const cont = () => {
 		Text.Add(" The two of you collapse on top of each other, exhausted from your wild romp.", parse);
 		Text.Flush();
 
-		Gui.NextPrompt(function() {
+		Gui.NextPrompt(() => {
 			Text.Clear();
 			Text.Add("You stay like that for a while, recovering in each others arms.", parse);
-			if (loadIn == LoadIn.out || player.NumCocks() > 1) {
+			if (loadIn === LoadIn.out || player.NumCocks() > 1) {
 				if (dom > 0) {
 					Text.Add(" Miranda has you clean her up by licking your own cum from her matted fur. <i>“Good [boyGirl],”</i> she murmurs, stroking your [hair] gently.", parse);
 				} else {
@@ -4174,9 +4174,9 @@ MirandaScenes.HomeDommySexFuckDobieVag = function(cocks: Cock[]) {
 	};
 
 	scenes.Get();
-	if (mode == Mode.back) {
+	if (mode === Mode.back) {
 		Text.Add(" Miranda’s cock violently erupts, spraying her plentiful seed all over her [mbelly], face and hair.", parse);
-	} else if (mode == Mode.doggy) {
+	} else if (mode === Mode.doggy) {
 		Text.Add(" Between her legs, Miranda’s cock sprays its load, making a sticky pool on her sheets. Laundry is probably in order after this.", parse);
  }
 	Text.Add(" The herm’s knot has swollen to its full size, mindlessly trying to tie her together with her non-existent mate’s cunt. Her tail is wagging uncontrollably, telling you just how far gone she is.", parse);
@@ -4185,8 +4185,8 @@ MirandaScenes.HomeDommySexFuckDobieVag = function(cocks: Cock[]) {
 		Text.Add("Your own orgasm is not far behind. You have only seconds to decide where you are going to cum.", parse);
 		Text.Flush();
 
-		const loads = function() {
-			if (loadIn == LoadIn.out) {
+		const loads = () => {
+			if (loadIn === LoadIn.out) {
 				if (load > 6) {
 					Text.NL();
 					Text.Add("Before you are even halfway done, Miranda is thoroughly coated in your semen, thick, white stripes covering her short dark fur. You wipe your [cocks] off on her thigh, further adding to the mess.", parse);
@@ -4205,7 +4205,7 @@ MirandaScenes.HomeDommySexFuckDobieVag = function(cocks: Cock[]) {
 				if (player.NumCocks() > 1) {
 					const allCocks = player.AllCocksCopy();
 					for (let i = 0; i < allCocks.length; i++) {
-						if (allCocks[i] == pCock) {
+						if (allCocks[i] === pCock) {
 							allCocks.splice(i, 1);
 							break;
 						}
@@ -4245,7 +4245,7 @@ MirandaScenes.HomeDommySexFuckDobieVag = function(cocks: Cock[]) {
 			func() {
 				Text.Clear();
 				load = player.OrgasmCum();
-				if (mode == Mode.back) {
+				if (mode === Mode.back) {
 					if (dom > 25) {
 						Text.Add("You try to pull out your [cock], but quickly meet resistance.", parse);
 						Text.NL();
@@ -4253,7 +4253,7 @@ MirandaScenes.HomeDommySexFuckDobieVag = function(cocks: Cock[]) {
 					} else {
 						Text.Add("You pull out your [cock], just in time to unleash your cum all over the waiting herm. Your load mingles with her own, further coating her in thick, white stripes.", parse);
 					}
-				} else if (mode == Mode.doggy) {
+				} else if (mode === Mode.doggy) {
 					Text.Add("Just before you blow, you manage to pull out of Miranda’s tight pussy, spending your load across her naked back, sticking to her hair.", parse);
 				}
 				loadIn = LoadIn.out;
@@ -4282,7 +4282,7 @@ MirandaScenes.HomeDommySexFuckDobieVag = function(cocks: Cock[]) {
 	}
 };
 
-MirandaScenes.HomeSubbySexLeavingFuckedHer = function() {
+MirandaScenes.HomeSubbySexLeavingFuckedHer = () => {
 	const player = GAME().player;
 	const miranda = GAME().miranda;
 	const party: Party = GAME().party;
@@ -4303,11 +4303,11 @@ MirandaScenes.HomeSubbySexLeavingFuckedHer = function() {
  }
 	Text.NL();
 
-	if (rigard.Krawitz.Q == RigardFlags.KrawitzQ.HuntingTerry) {
+	if (rigard.Krawitz.Q === RigardFlags.KrawitzQ.HuntingTerry) {
 		Text.Add("The two of you set out, returning to your search for the elusive thief.", parse);
 		Text.Flush();
 
-		Gui.NextPrompt(function() {
+		Gui.NextPrompt(() => {
 			MoveToLocation(world.loc.Rigard.Residential.Street, {minute : 5});
 		});
 	} else if (party.InParty(miranda)) {
@@ -4316,7 +4316,7 @@ MirandaScenes.HomeSubbySexLeavingFuckedHer = function() {
 
 		Gui.NextPrompt();
 	} else {
-		Gui.Callstack.push(function() {
+		Gui.Callstack.push(() => {
 			Text.NL();
 			parse.night = WorldTime().DayTime();
 			Text.Add("You bid Miranda farewell and step out into the [night].", parse);
@@ -4325,12 +4325,12 @@ MirandaScenes.HomeSubbySexLeavingFuckedHer = function() {
 				parse.comp = party.Num() > 2 ? "the rest of your party" : party.Get(1).name;
 				Text.Add("Somehow, you make it out the gates in order to rejoin [comp].", parse);
 				Text.Flush();
-				Gui.NextPrompt(function() {
+				Gui.NextPrompt(() => {
 					MoveToLocation(world.loc.Rigard.Slums.Gate, {minute: 30});
 				});
 			} else {
 				Text.Flush();
-				Gui.NextPrompt(function() {
+				Gui.NextPrompt(() => {
 					MoveToLocation(world.loc.Rigard.Residential.Street, {minute: 5});
 				});
 			}
@@ -4350,14 +4350,14 @@ MirandaScenes.HomeSubbySexLeavingFuckedHer = function() {
 					Text.Add("You sleep for 8 hours.");
 					Text.Flush();
 
-					const func = function() {
+					const func = () => {
 						StepToHour(8);
 						party.Sleep();
 
 						Gui.PrintDefaultOptions();
 					};
 
-					Gui.NextPrompt(function() {
+					Gui.NextPrompt(() => {
 						Text.Clear();
 
 						DreamsScenes.Entry(func);
@@ -4383,7 +4383,7 @@ MirandaScenes.HomeSubbySexLeavingFuckedHer = function() {
 	}
 };
 
-MirandaScenes.HomeSubbySex = function() {
+MirandaScenes.HomeSubbySex = () => {
 	const player = GAME().player;
 	const miranda = GAME().miranda;
 	const party: Party = GAME().party;
@@ -4400,7 +4400,7 @@ MirandaScenes.HomeSubbySex = function() {
 
 	Text.NL();
 	Text.Add("Miranda is breathing heavily as she paws at you, dragging and clawing at your gear. There is a fierce fire in her eyes, indicating that at least one of you is in for a <i>really</i> good time. How well this bodes for you, you are not sure.", parse);
-	if (miranda.flags.Floor == 0) {
+	if (miranda.flags.Floor === 0) {
 		MirandaScenes.HomeDescFloor1();
 	}
 	Text.NL();
@@ -4417,7 +4417,7 @@ MirandaScenes.HomeSubbySex = function() {
 	let location = Loc.Upstairs;
 
 	const scenes = new EncounterTable();
-	scenes.AddEnc(function() {
+	scenes.AddEnc(() => {
 		Text.Add("She heads into the main living room, hips swaying seductively.", parse);
 		Text.NL();
 		if (WorldTime().season >= Season.Autumn) {
@@ -4430,8 +4430,8 @@ MirandaScenes.HomeSubbySex = function() {
 		Text.NL();
 		Text.Add("The dobie has you in her sights, and she’s not going to take no for an answer.", parse);
 		location = Loc.Downstairs;
-	}, 1.0, function() { return true; });
-	scenes.AddEnc(function() {
+	}, 1.0, () => true);
+	scenes.AddEnc(() => {
 		Text.Add("<i>“This way!”</i> she motions imperiously, pulling you along up the stairs to her bedroom. The steep stairway gives you quite the view of Miranda’s supple behind, though it’s still obscured by her tight-fitting clothes. The dobie curses as she fumbles a bit with the door, her tail wagging with excitement. When the guardswoman finally manages to get it open, she practically throws you through the doorway and into her bedroom.", parse);
 
 		if (miranda.flags.Floor < 2) {
@@ -4448,14 +4448,14 @@ MirandaScenes.HomeSubbySex = function() {
 		Text.NL();
 		Text.Add("It seems like she has you within her sights, so you better speak up quickly unless you are going to just let her take you. If her wide grin and stiff cock are any judge, she’s itching to have a go at you.", parse);
 		location = Loc.Upstairs;
-	}, 1.0, function() { return true; });
+	}, 1.0, () => true);
 
 	scenes.Get();
 
 	Text.Flush();
 
-	parse.loc1 = function() { return location == Loc.Upstairs ? "the bed" : "the rug"; };
-	parse.loc2 = function() { return location == Loc.Upstairs ? "the soft sheets" : "the fluffy pelt"; };
+	parse.loc1 = () => location === Loc.Upstairs ? "the bed" : "the rug";
+	parse.loc2 = () => location === Loc.Upstairs ? "the soft sheets" : "the fluffy pelt";
 
 	// [Take anal][Take vag][Dommy ride]
 	const options = new Array();
@@ -4466,14 +4466,17 @@ MirandaScenes.HomeSubbySex = function() {
 		tooltip : "You need her... offer your ass to the horny herm.",
 	});
 	// TODO
+	/*
 	if (player.FirstVag()) {
 		options.push({ nameStr : "Take vag",
 			func() {
-
+				// Do nothing
+				Text.Flush();
 			}, enabled : false,
 			tooltip : "Beg Miranda to fuck your pussy; you want to feel her doggy dick dig deep into your wet folds.",
 		});
 	}
+	*/
 
 	const cocksInVag = player.CocksThatFit(miranda.FirstVag(), false, 15);
 	const p1Cock     = player.BiggestCock(cocksInVag);
@@ -4489,7 +4492,7 @@ MirandaScenes.HomeSubbySex = function() {
 };
 
 // TODO
-MirandaScenes.HomeSubbySexDommyRide = function(location: any, Loc: any) {
+MirandaScenes.HomeSubbySexDommyRide = (location: any, Loc: any) => {
 	const player = GAME().player;
 	const miranda = GAME().miranda;
 
@@ -4506,8 +4509,8 @@ MirandaScenes.HomeSubbySexDommyRide = function(location: any, Loc: any) {
 	parse = player.ParserTags(parse);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 2, null, "2");
-	parse.loc1 = function() { return location == Loc.Upstairs ? "the bed" : "the rug"; };
-	parse.loc2 = function() { return location == Loc.Upstairs ? "the soft sheets" : "the fluffy pelt"; };
+	parse.loc1 = () => location === Loc.Upstairs ? "the bed" : "the rug";
+	parse.loc2 = () => location === Loc.Upstairs ? "the soft sheets" : "the fluffy pelt";
 
 	const dom = miranda.SubDom() - player.SubDom();
 
@@ -4522,11 +4525,11 @@ MirandaScenes.HomeSubbySexDommyRide = function(location: any, Loc: any) {
 	Text.Add("Well… perhaps not what you were after, but it looks like this is all you’re going to get for the moment. Miranda pushes you down on [loc2], seating herself on your [breasts], facing away from you. ", parse);
 
 	p1cock = p1cock || StrapOnItems.CanidStrapon.cock;
-	parse.cocks = function() { return player.MultiCockDesc(); };
-	parse.cock  = function() { return p1cock.Short(); };
-	parse.tip   = function() { return p1cock.TipShort(); };
+	parse.cocks = () => player.MultiCockDesc();
+	parse.cock  = () => p1cock.Short();
+	parse.tip   = () => p1cock.TipShort();
 
-	const knotted = p1cock.knot != 0;
+	const knotted = p1cock.knot !== 0;
 
 	const Size = {
 		small  : 0,
@@ -4548,19 +4551,19 @@ MirandaScenes.HomeSubbySexDommyRide = function(location: any, Loc: any) {
 			Text.Add("<i>“Now, which one should I use...”</i> the dobie muses, looking over her collection of toys. <i>“Something nice and thick… here!”</i> She triumphantly pulls out a bright red strap-on with a thick knot at the base, almost as big as her own member. <i>“This one has seen a fair bit of use over the years,”</i> she murmurs fondly. <i>“Just need to get her prepared.”</i>", parse);
 			strapon = true;
 			borrowed = true;
-			parse.cocks = function() { return p1cock.Short(); };
+			parse.cocks = () => p1cock.Short();
 		}
 		Text.NL();
 		Text.Add("Just when you start wondering what she means with ‘prepare’, you feel something prod at your [vag]. <i>“It’s only fair; if you want to fuck me, you provide the lube,”</i> Miranda grins over her shoulder as she pushes the [tip] into your nethers, probing your depths with the toy. She shuffles her hips back until she’s straddling your face, presenting you with her soaked pussy. <i>“Get to work before I change my mind.”</i>", parse);
 	} else {
 		Text.Add("<i>“Now, let’s see what you’re packing,”</i> she hums, coaxing your [cocks] to full mast. ", parse);
-		if (size == Size.huge) {
+		if (size === Size.huge) {
 			Text.Add("<i>“Woah, overcompensating?”</i> the dobie teases, impressed at your size. <i>“Whatever you’ve been eating, I want some of that!”</i>", parse);
-		} else if (size == Size.medium) {
+		} else if (size === Size.medium) {
 			Text.Add("<i>“Not bad, you’re almost as big as me!”</i>", parse);
- } else {
+ 		} else {
 			Text.Add("<i>“Not very impressive, but you’ll have to do.”</i>", parse);
- }
+ 		}
 		Text.NL();
 		Text.Add("You shiver as you feel Miranda clasp her fingers around[oneof] your cock[s], stroking [itThem] lightly. <i>“Think you can keep up?”</i> she taunts. <i>“The moment you hesitate, I’m turning the tables right around, and your ass is next in line.”</i> You gulp, knowing that she’s not joking.", parse);
 		Text.NL();
@@ -4584,20 +4587,20 @@ MirandaScenes.HomeSubbySexDommyRide = function(location: any, Loc: any) {
 			Text.Add("takes turns suckling each of your cocks, mainly focusing on your biggest one.", parse);
 		} else if (player.HasBalls()) {
 			Text.Add("fondles your balls as she laps at your [cock], giving them an alarming squeeze now and then to remind you of who is in charge.", parse);
- } else {
+ 		} else {
 			Text.Add("keeps a tight grip on the base of your [cock] as she laps at the painfully rigid member.", parse);
- }
+ 		}
 		Text.NL();
 		Text.Add("Of course, this being Miranda, she’s not going to stop there. ", parse);
 
 		const scenes = new EncounterTable();
-		scenes.AddEnc(function() {
+		scenes.AddEnc(() => {
 			Text.Add("Her fingers, sloppy with your pre, sneak their way down below your [cocks], find your wet gash and plunge inside it, drawing another gasp from you. She doesn’t play fair, toying with both your sets that way.", parse);
-		}, 1.0, function() { return player.FirstVag(); });
-		scenes.AddEnc(function() {
+		}, 1.0, () => player.FirstVag());
+		scenes.AddEnc(() => {
 			parse.l = player.HasLegs() ? "down between" : "around";
 			Text.Add("Her fingers, sloppy with your pre, sneak their way [l] your [legs], teasing your taint and prodding at your back door. You stifle a moan as she slips inside you; first one, then two digits. Better concentrate so she doesn’t forget about <i>you</i> being the one fucking <i>her</i>.", parse);
-		}, 1.0, function() { return true; });
+		}, 1.0, () => true);
 
 		scenes.Get();
 	} else {
@@ -4615,37 +4618,37 @@ MirandaScenes.HomeSubbySexDommyRide = function(location: any, Loc: any) {
 
 	if (player.FirstCock()) {
 		Text.Add("You moan in pleasure from the wet, warm and tight passage embracing your [cock], sucking it in vigorously. ", parse);
-		if (size == Size.huge) {
+		if (size === Size.huge) {
 			Text.Add("<i>“Oh f-fuck!”</i> Miranda yelps, her thighs trembling as she tries to accommodate your massive cock. Her pussy is clamped around you tight as a vice, and for once it looks like the cocky herm has taken on more than she can chew.", parse);
 			Text.NL();
 			Text.Add("Grinning, you ask her if you’re too much for her to handle. Her reply is a dark glare. <i>“D-don’t get full of yourself,”</i> she gasps, sweat forming on her brow. <i>“T-this puny little stick is nothing!”</i> Poking at her competitive vein seems to do the trick; she looks determined to make the damn thing fit.", parse);
-		} else if (size == Size.medium) {
+		} else if (size === Size.medium) {
 			Text.Add("<i>“Mm… perfect fit,”</i> Miranda pants, her tongue lolling and her eyelids half-closed. It takes her a few strokes, but she manages to ease your thick member into her tight passage, sighing luxuriously. <i>“P-perhaps I won’t regret this after all.”</i>", parse);
- } else {
+ 		} else {
 			Text.Add("<i>“Barely enough to please a woman,”</i> Miranda scoffs, bottoming out and grinding her balls on your crotch. <i>“I’ll let it pass this once, but if you don’t have anything more impressive to come up with, perhaps you should be on the receiving end instead.”</i>", parse);
- }
+ 		}
 	} else {
-		if (size == Size.huge) {
+		if (size === Size.huge) {
 			Text.Add("<i>“How do you even carry this thing around?”</i> Miranda gasps, struggling to take your massive strap-on. Too much for her to handle? <i>“Fuck no! What, you think I give but can’t take?”</i>", parse);
-		} else if ((size == Size.medium) || borrowed) {
+		} else if ((size === Size.medium) || borrowed) {
 			Text.Add("<i>“Fits like a glove,”</i> Miranda sighs as she sinks down on the huge strap-on. <i>“Just how I like them!”</i>", parse);
- } else {
+ 		} else {
 			Text.Add("<i>“You better bring me something bigger next time,”</i> Miranda grunts, easily taking the entire length of your strap-on. <i>“Tiny things like this doesn’t really do it for me anymore… you’re going to have to work for it unless you want to choke on dick when this is over.”</i>", parse);
- }
+ 		}
 		Text.Add(" She slams herself down on you, grinding the base of the toy against your crotch.", parse);
 	}
 	Text.NL();
-	if (size == Size.small) {
+	if (size === Size.small) {
 		Text.Add("You do your best to rock your [hips] in time with Miranda’s bounces, her harsh words fresh in mind. Making the dobie angry is <i>not</i> something you want to do… perhaps it’s best to let her have her way after this is over and done with. Until that time, you have to prove yourself, however.", parse);
 	} else {
-		parse.c = size == Size.huge ? Text.Parse(", gasping as she gives her all to spear herself on your [cock]", parse) : "";
+		parse.c = size === Size.huge ? Text.Parse(", gasping as she gives her all to spear herself on your [cock]", parse) : "";
 		Text.Add("You just lie back and enjoy as the horny herm bounces up and down on you[c]. You mostly let her do the work - and she’s doing a mighty fine job of it - but after a while, you start to get into it, slowly thrusting your [hips] in time with Miranda, meeting her halfway.", parse);
 	}
 	Text.NL();
 	Text.Add("Your [hand] traces the curves of her body, caressing her short fur and feeling the taut muscles beneath. Her wide hips - worthy of a true breeder - her flat tummy, her voluptuous breasts... the morph is built like a statue praising ancient gods, every part of her chiseled to perfection.", parse);
 	Text.NL();
 	Text.Add("The guardswoman moans appreciatively, her nails raking your chest roughly but thankfully not drawing blood. ", parse);
-	if (size == Size.huge) {
+	if (size === Size.huge) {
 		Text.Add("<i>“By the trickster, it feels like riding a fucking minotaur,”</i> she yelps, wincing as she slams down, her overstuffed cunt greedily swallowing your [cock]. <i>“G-go slow...”</i>", parse);
 	} else {
 		Text.Add("<i>“Yeees… keep that up, just like that,”</i> she pants encouragingly, tongue hanging out. <i>“Mm… I need it!”</i>", parse);
@@ -4688,9 +4691,9 @@ MirandaScenes.HomeSubbySexDommyRide = function(location: any, Loc: any) {
 			Text.Add("even more spectacular than Miranda’s,", parse);
 		} else if (cum > 3) {
 			Text.Add("easily comparable to Miranda’s,", parse);
- } else {
+ 		} else {
 			Text.Add("meager when compared to Miranda’s,", parse);
- }
+ 		}
 		Text.Add(" goes off inside the herm, ropes of sticky white pouring into her womb. ", parse);
 		if (player.NumCocks() > 1) {
 			Text.Add("Your other cock[s2] also blast[notS2] [itsTheir2] load[s2], further adding to the mess you’ve made. ", parse);
@@ -4710,13 +4713,13 @@ MirandaScenes.HomeSubbySexDommyRide = function(location: any, Loc: any) {
 
 	TimeStep({hour: 1, minute: 30});
 
-	Gui.NextPrompt(function() {
+	Gui.NextPrompt(() => {
 		Text.Clear();
 		MirandaScenes.HomeSubbySexLeavingFuckedHer();
 	});
 };
 
-MirandaScenes.HomeSubbySexTakeAnal = function(location: any, Loc: any) {
+MirandaScenes.HomeSubbySexTakeAnal = (location: any, Loc: any) => {
 	const player = GAME().player;
 	const miranda = GAME().miranda;
 
@@ -4729,8 +4732,8 @@ MirandaScenes.HomeSubbySexTakeAnal = function(location: any, Loc: any) {
 		guyGirl : player.mfTrue("guy", "girl"),
 		manWoman : player.mfTrue("man", "woman"),
 		masterMistress : player.mfTrue("master", "mistress"),
-		loc1() { return location == Loc.Upstairs ? "the bed" : "the rug"; },
-		loc2() { return location == Loc.Upstairs ? "the soft sheets" : "the fluffy pelt"; },
+		loc1() { return location === Loc.Upstairs ? "the bed" : "the rug"; },
+		loc2() { return location === Loc.Upstairs ? "the soft sheets" : "the fluffy pelt"; },
 	};
 	parse = player.ParserTags(parse);
 	parse = Text.ParserPlural(parse, player.NumCocks() > 1);
@@ -4793,7 +4796,7 @@ MirandaScenes.HomeSubbySexTakeAnal = function(location: any, Loc: any) {
 	Text.Add("You squirm a bit, knowing she’ll only accept one response.", parse);
 	Text.Flush();
 
-	Gui.NextPrompt(function() {
+	Gui.NextPrompt(() => {
 		Text.Clear();
 		Text.Add("<i>“That’s my [boyGirl]!”</i> Miranda commends you, patting you on the butt. <i>“No regrets now; I’m not going to stop until I’m satisfied!”</i> With those words, your fate is sealed. Pulling back her hips, the doberman shifts her position, planting her legs to either side of you, her hands snaking their way in under your [breasts]. ", parse);
 		Text.NL();
@@ -4825,7 +4828,7 @@ MirandaScenes.HomeSubbySexTakeAnal = function(location: any, Loc: any) {
 		parse.prostateColon = player.FirstCock() ? "prostate" : "colon";
 		Text.Add(" Each word is underlined by another deep thrust, slamming into your [prostateColon] like a piledriver.", parse);
 		Text.NL();
-		parse.legs = player.LowerBodyType() != LowerBodyType.Single ? Text.Parse(", hoisting your [legs] over her shoulder", parse) : "";
+		parse.legs = player.LowerBodyType() !== LowerBodyType.Single ? Text.Parse(", hoisting your [legs] over her shoulder", parse) : "";
 		Text.Add("You arch your back in pleasure; sure, Miranda is rough, but you can’t ignore that this feels <i>good</i>. After ten minutes of straight fucking, she’s still not showing any signs of slowing down, only stopping briefly at one point to flip you on your back[legs].", parse);
 		Text.NL();
 
@@ -4865,7 +4868,7 @@ MirandaScenes.HomeSubbySexTakeAnal = function(location: any, Loc: any) {
 			} else {
 				Text.Add("Most of it lands on your [belly] and [breasts], trickling down on [loc2].", parse);
 			}
-			if (location == Loc.Downstairs) {
+			if (location === Loc.Downstairs) {
 				Text.NL();
 				Text.Add("<i>“What did I tell you about staining the rug?”</i> the herm growls, a bit miffed at the mess you caused. <i>“Guess I’m not entirely blameless, but let’s continue this upstairs.”</i>", parse);
 			}
@@ -4873,8 +4876,8 @@ MirandaScenes.HomeSubbySexTakeAnal = function(location: any, Loc: any) {
 			Text.Add("Your femcum gushes forth, clear drops trickling down around the base of Miranda’s fuckstick. While you may have gotten off from the intense anal fuck you just received, your loins are still aching, begging to be filled.", parse);
 		}
 		Text.NL();
-		if (location != Loc.Upstairs) {
-			parse.legs = player.LowerBodyType() != LowerBodyType.Single ? ", your legs wrapped around her" : "";
+		if (location !== Loc.Upstairs) {
+			parse.legs = player.LowerBodyType() !== LowerBodyType.Single ? ", your legs wrapped around her" : "";
 			Text.Add("Not even waiting for her knot to deflate, Miranda hoists you up[legs], patting you on the back as she strides toward the stairs. You gulp as you feel the cum inside you roiling about, but the canid buttplug holds, and just a little of it seeps out.", parse);
 			Text.NL();
 			Text.Add("<i>“I’m far from done with you,”</i> she murmurs in your ear, nipping you playfully. Once in her bedroom, she closes the door behind her, still carrying you around.", parse);
@@ -4896,13 +4899,13 @@ MirandaScenes.HomeSubbySexTakeAnal = function(location: any, Loc: any) {
 
 		Text.Flush();
 
-		Gui.NextPrompt(function() {
-			Gui.Callstack.push(function() {
+		Gui.NextPrompt(() => {
+			Gui.Callstack.push(() => {
 				miranda.relation.IncreaseStat(75, 1);
 				TimeStep({hour : 4});
 
 				Text.Flush();
-				Gui.NextPrompt(function() {
+				Gui.NextPrompt(() => {
 					Text.Clear();
 					Text.Add("Eventually, the two of you rouse from your afterglow and start to poke around for your gear. Miranda’s room is even more of a mess than before, and it reeks of sex.", parse);
 					Text.NL();
@@ -4943,7 +4946,7 @@ MirandaScenes.HomeSubbySexTakeAnal = function(location: any, Loc: any) {
 					Text.Add("Your rampant romp is in danger of wrecking Miranda’s bed, though it seems to be made of sturdy stuff. The horny doberman showers you with kisses as she goes down on you, showing her love in her own rough way.", parse);
 				}
 				Text.NL();
-				parse.l = player.LowerBodyType() != LowerBodyType.Humanoid ? ", taking full advantage of your rather strange physique" : "";
+				parse.l = player.LowerBodyType() !== LowerBodyType.Humanoid ? ", taking full advantage of your rather strange physique" : "";
 				Text.Add("The two of you go through a series of largely improvised positions[l]. You lost count of how many times you climax, only pausing in your fervent love making while waiting for Miranda’s knot to deflate.", parse);
 				if (player.FirstCock()) {
 					parse.nice = !nasty ? Text.Parse(", even taking a ride on [itThem] once", parse) : "";
@@ -5090,13 +5093,13 @@ MirandaScenes.HomeSubbySexTakeAnal = function(location: any, Loc: any) {
 							if (player.NumCocks() > 1) {
 								const allCocks = player.AllCocksCopy();
 								for (let i = 0; i < allCocks.length; i++) {
-									if (allCocks[i] == p1Cock) {
+									if (allCocks[i] === p1Cock) {
 										allCocks.splice(i, 1);
 										break;
 									}
 								}
 
-								parse.cocks2 = function() { return player.MultiCockDesc(allCocks); };
+								parse.cocks2 = () => player.MultiCockDesc(allCocks);
 								parse.s2 = allCocks.length > 1 ? "s" : "";
 								parse.notS2 = allCocks.length > 1 ? "" : "s";
 								parse.itsTheir2 = allCocks.length > 1 ? "their" : "its";
@@ -5119,7 +5122,7 @@ MirandaScenes.HomeSubbySexTakeAnal = function(location: any, Loc: any) {
 					const cocksInAss = player.CocksThatFit(miranda.Butt(), false, 15);
 					const p1Cock = player.BiggestCock(cocksInAss);
 
-					parse.cock = function() { return p1Cock.Short(); };
+					parse.cock = () => p1Cock.Short();
 
 					options.push({ nameStr : "Reversal",
 						func() {
@@ -5204,7 +5207,7 @@ MirandaScenes.HomeSubbySexTakeAnal = function(location: any, Loc: any) {
 };
 
 // TODO
-MirandaScenes.HomeDommyDungeonFirst = function() {
+MirandaScenes.HomeDommyDungeonFirst = () => {
 	const world = WORLD();
 
 	const parse: any = {
@@ -5220,13 +5223,13 @@ MirandaScenes.HomeDommyDungeonFirst = function() {
 	Text.NL();
 	Text.Flush();
 
-	Gui.NextPrompt(function() {
+	Gui.NextPrompt(() => {
 		MoveToLocation(world.loc.Rigard.Slums.Gate);
 	});
 };
 
 // TODO
-MirandaScenes.HomeDommyDungeon = function() {
+MirandaScenes.HomeDommyDungeon = () => {
 	const world = WORLD();
 
 	const parse: any = {
@@ -5242,13 +5245,13 @@ MirandaScenes.HomeDommyDungeon = function() {
 	Text.NL();
 	Text.Flush();
 
-	Gui.NextPrompt(function() {
+	Gui.NextPrompt(() => {
 		MoveToLocation(world.loc.Rigard.Slums.Gate);
 	});
 };
 
 // TODO
-MirandaScenes.HomeSubbyDungeon = function() {
+MirandaScenes.HomeSubbyDungeon = () => {
 	const party: Party = GAME().party;
 	const world = WORLD();
 
@@ -5265,13 +5268,13 @@ MirandaScenes.HomeSubbyDungeon = function() {
 	Text.NL();
 	Text.Flush();
 
-	Gui.NextPrompt(function() {
+	Gui.NextPrompt(() => {
 		MoveToLocation(world.loc.Rigard.Slums.Gate);
 	});
 };
 
 // TODO
-MirandaScenes.TavernSexPrompt = function() {
+MirandaScenes.TavernSexPrompt = () => {
 	const parse: any = {
 
 	};
@@ -5290,7 +5293,7 @@ MirandaScenes.TavernSexPrompt = function() {
 	Gui.SetButtonsFromList(options, false, null);
 };
 
-MirandaScenes.TavernSexBackroomPrompt = function() {
+MirandaScenes.TavernSexBackroomPrompt = () => {
 	const player = GAME().player;
 	const miranda = GAME().miranda;
 
@@ -5367,7 +5370,7 @@ MirandaScenes.TavernSexBackroomPrompt = function() {
 	}
 };
 
-MirandaScenes.TavernSexBackroomSubbyVag = function(cocks: Cock[]) {
+MirandaScenes.TavernSexBackroomSubbyVag = (cocks: Cock[]) => {
 	const player = GAME().player;
 	const miranda = GAME().miranda;
 	const party: Party = GAME().party;
@@ -5378,7 +5381,7 @@ MirandaScenes.TavernSexBackroomSubbyVag = function(cocks: Cock[]) {
 
 	};
 
-	const knotted = p1Cock.knot != 0;
+	const knotted = p1Cock.knot !== 0;
 
 	const cum = MirandaScenes.TavernSexSubbyVag(cocks);
 	const dom = player.SubDom() - miranda.SubDom();
@@ -5472,7 +5475,7 @@ MirandaScenes.TavernSexBackroomSubbyVag = function(cocks: Cock[]) {
 		}
 	}
 	Text.NL();
-	if     (party.Num() == 2) { parse.comp = " gather your companion and"; } else if (party.Num() >  1) { parse.comp = " gather your companions and"; } else {                      parse.comp = ""; }
+	if     (party.Num() === 2) { parse.comp = " gather your companion and"; } else if (party.Num() >  1) { parse.comp = " gather your companions and"; } else {                      parse.comp = ""; }
 	Text.Add("Once the two of you are recovered from your recent exertions, you clean up the mess you made as best you can, then get back into your respective gear. Miranda casually unblocks the door and the two of you head back out into the bar. There, you[comp] say goodbye to the dober-morph before leaving her to resume her drinking.", parse);
 	Text.Flush();
 
@@ -5481,14 +5484,14 @@ MirandaScenes.TavernSexBackroomSubbyVag = function(cocks: Cock[]) {
 	Gui.NextPrompt();
 };
 
-MirandaScenes.TavernSexSubbyVag = function(cocks: Cock[]) {
+MirandaScenes.TavernSexSubbyVag = (cocks: Cock[]) => {
 	const player = GAME().player;
 	const miranda = GAME().miranda;
 
 	const p1Cock = player.BiggestCock(cocks);
 	const allCocks = player.AllCocksCopy();
 	for (let i = 0; i < allCocks.length; i++) {
-		if (allCocks[i] == p1Cock) {
+		if (allCocks[i] === p1Cock) {
 			allCocks.splice(i, 1);
 			break;
 		}
@@ -5526,7 +5529,7 @@ MirandaScenes.TavernSexSubbyVag = function(cocks: Cock[]) {
 		Text.Add("Whatever reservations she’s had about admitting her enjoyment of your teases disappears at the promise of a treat. She grinds back, panting as she declares, <i>“Oh yes! Miranda wants her treat! Please, please give me my treat, pleeeeease?”</i> she intones with a whine.", parse);
 		Text.NL();
 		Text.Add("Well, if she insists... Holding onto her breasts for support, you slide your hips back to line up your [cockTip] with her womanhood and then push forward. ", parse);
-		if (miranda.sex.rVag == 0) {
+		if (miranda.sex.rVag === 0) {
 			Text.Add("The dober-morph's pussy is surprisingly tight, making you fight to make any headway inside of her, slowly wrapping her warm, wet folds around your [cock].", parse);
 		} else {
 			Text.Add("Miranda is as hot and as tight as ever, but you know how to squeeze your way inside of her.", parse);
@@ -5585,7 +5588,7 @@ MirandaScenes.TavernSexSubbyVag = function(cocks: Cock[]) {
 	Text.NL();
 	Text.Add("You have no intention of stopping, and do your best to pick up the pace as you ream her cunt for all you're worth. Struck by a mischievous impulse, your [hand]s abandon her tits, sliding down her belly toward her jutting foot-long cock. Sure enough, it's drooling worse than her tongue is, and you soon find your palms filled with thick, musky Miranda pre-cum. As quickly as you can, you transfer your dripping hands back to her tits, massaging her own sex-juices into the fur as a makeshift lotion, your touch sliding nicely over the slickened bosom.", parse);
 	Text.NL();
-	const knotted = p1Cock.knot != 0;
+	const knotted = p1Cock.knot !== 0;
 	if (knotted && !p1Cock.isStrapon) {
 		Text.Add("You can feel your [cock] pulsating in need, the wave of approaching climax building to its crescendo inside of you. Emphatically, you are aware of your knot bulging with blood, bloated and ready to plug a bitch's pussy as you fill her with your seed. The situation couldn't be more right. Acting on purest instinct, you jam your hips as hard against Miranda's as possible, gritting your teeth as you press the swelling bulb against her tight cunny in an effort to force the engorged flesh inside.", parse);
 		Text.NL();
@@ -5671,7 +5674,7 @@ MirandaScenes.TavernSexSubbyVag = function(cocks: Cock[]) {
 	}
 };
 
-MirandaScenes.TavernSexPublicBJ = function() {
+MirandaScenes.TavernSexPublicBJ = () => {
 	const player = GAME().player;
 	const miranda = GAME().miranda;
 	const party: Party = GAME().party;
@@ -5698,20 +5701,20 @@ MirandaScenes.TavernSexPublicBJ = function() {
 	let setPublic = false;
 
 	const scenes = new EncounterTable();
-	scenes.AddEnc(function() {
+	scenes.AddEnc(() => {
 		Text.Add("<i>“You know what to do, [playername],”</i> Miranda murmurs, sipping her mug while you unlace her britches, releasing the trapped beast. The meaty shaft smacks wetly against your forehead, depositing a splatter of pre on your upturned face. ", parse);
 		if (dom < -25 || player.Slut() > 50) {
 			Text.Add("You lick your lips in anticipation. This is going to be quite a tasty treat.", parse);
 		} else {
 			Text.Add("The herm smiles innocently when you frown, tapping her finger against her thigh. Might as well get to it.", parse);
 		}
-	}, 1.0, function() { return true; });
-	scenes.AddEnc(function() {
+	}, 1.0, () => true);
+	scenes.AddEnc(() => {
 		Text.Add("<i>“Mmm… you know just how to make a girl feel special,”</i> Miranda purrs. <i>“Who knows, perhaps I’ll return the favor later?”</i> The dobie is panting in anticipation as you undo her britches, pulling them down to reveal her aching cock.", parse);
 		Text.NL();
 		Text.Add("<i>“I… I don’t mind you being a bit rough,”</i> she murmurs.", parse);
-	}, 1.0, function() { return miranda.SubDom() < -25; });
-	scenes.AddEnc(function() {
+	}, 1.0, () => miranda.SubDom() < -25);
+	scenes.AddEnc(() => {
 		Text.Add("<i>“Nice try, bitch, but it’s not going to be that easy,”</i> Miranda chuckles mockingly. Before you know it, she’s kicked the table out of the way, leaving you in quite a compromising position. It doesn’t seem like anyone have noticed you yet, though.", parse);
 		Text.NL();
 		Text.Add("<i>“I believe you were in the middle of something,”</i> the dommy herm purrs, leaning back and spreading her legs invitingly. ", parse);
@@ -5724,7 +5727,7 @@ MirandaScenes.TavernSexPublicBJ = function() {
 		player.slut.IncreaseStat(50, 1);
 		player.subDom.DecreaseStat(-50, 1);
 		setPublic = true;
-	}, 1.0, function() { return (miranda.Attitude() < MirandaFlags.Attitude.Neutral) || miranda.SubDom() > 50; });
+	}, 1.0, () => (miranda.Attitude() < MirandaFlags.Attitude.Neutral) || miranda.SubDom() > 50);
 
 	scenes.Get();
 
@@ -5811,7 +5814,7 @@ MirandaScenes.TavernSexPublicBJ = function() {
 		if (party.InParty(gwendy)) { femcomp.push(gwendy); }
 		if (party.InParty(momo)) {   femcomp.push(momo); }
 
-		parse.comp = party.Num() == 2 ? party.Get(1).name : "your companions";
+		parse.comp = party.Num() === 2 ? party.Get(1).name : "your companions";
 		Text.Add("Though she sounds like she’s getting a bit terse, Miranda keeps up a jovial conversation with [comp], acting as if nothing strange is going on. ", parse);
 		if (femcomp.length > 0) {
 			const comp = femcomp[Math.floor(Math.random() * femcomp.length)];
@@ -5821,10 +5824,10 @@ MirandaScenes.TavernSexPublicBJ = function() {
 			parse.himher = comp.himher();
 			Text.Add("She sounds like she’s making not-so-subtle innuendos to [them], asking if [heshe]’d be interested in giving it a try.", parse);
 			Text.NL();
-			if (comp == kiakai) {
+			if (comp === kiakai) {
 				parse.name = kiakai.name;
 				Text.Add("<i>“I… ah, I'm not sure if-”</i> [name] stammers, flustered. Miranda just laughs at the elf’s cute response.", parse);
-			} else if (comp == terry) {
+			} else if (comp === terry) {
 				parse.foxvixen = terry.mfPronoun("fox", "vixen");
 				Text.Add("<i>“In your dreams, watchdog. I’d rather blow everyone on this bar rather than blow you!”</i> the [foxvixen] shoots back, perhaps a bit louder than [heshe] should…", parse);
 				Text.NL();
@@ -5835,12 +5838,12 @@ MirandaScenes.TavernSexPublicBJ = function() {
 				} else {
 					Text.Add("<i>“I-I don’t… I...”</i> Terry tries to stammer out a reply, but ultimately falls silent as the approaching crowd surrounds [himher]. You can hear Miranda laughing above, and while you’d love to see Terry get out of this one, right now you have your <i>own</i> problem to deal with.", parse);
 				}
-			} else if (comp == gwendy) {
+			} else if (comp === gwendy) {
 				Text.Add("<i>“Not likely,”</i> Gwendy sniffs.", parse);
 				if (gwendy.FirstCock()) {
 					Text.Add(" <i>“Perhaps you’d like to try mine though?”</i> the horsecocked herm adds mockingly.", parse);
 				}
-			} else if (comp == roa) {
+			} else if (comp === roa) {
 				Text.Add("<i>“Can I?”</i> the slutty rabbit asks hopefully. <i>“Later,”</i> Miranda promises, licking her lips.", parse);
 			} else {
 				parse.Poss = comp.Possessive();
@@ -5885,7 +5888,7 @@ MirandaScenes.TavernSexPublicBJ = function() {
 	player.slut.IncreaseStat(25, 1);
 };
 
-MirandaScenes.TavernSexDommyBJ = function() {
+MirandaScenes.TavernSexDommyBJ = () => {
 	const player = GAME().player;
 	const miranda = GAME().miranda;
 
@@ -5976,7 +5979,7 @@ MirandaScenes.TavernSexDommyBJ = function() {
 			Text.NL();
 			Text.Add("The swollen flesh grinds back and forth over your tongue as Miranda humps at your face, stretching your jaws but thankfully quiescent for now and thus easy enough to handle once you've adjusted to the mass of it. Almost as if in response to your thoughts, though, you can feel her knot starting to grow inside your maw, pushing your [tongue] down and pinning it against the floor of your mouth. You are intimately aware of the back of the knot grinding against the interior of your lips with each thrust, but never popping free.", parse);
 			Text.NL();
-			if (miranda.sex.rBlow == 1) {
+			if (miranda.sex.rBlow === 1) {
 				Text.Add("...Oh no. She wouldn't! She can't be serious! It looks like she's going to try and tie her dick to your mouth! Unconsciously, you try and pull your head back, but the doberherm's grip simply pushes you back more firmly down on her cock, grinding her shaft down your throat for emphasis. You're not going anywhere, it seems, and you have no choice but to try and relax your jaws as best you can for what you know is coming.", parse);
 			} else if (miranda.sex.rBlow <= 5) {
 				Text.Add("You have a sinking suspicion as to what she has in mind, and an experimental attempt to pull your head back from her bulb confirms it. She wants to knot your mouth again. Sighing softly as best you can through your filled mouth, you relax your jaws as best you can.", parse);
@@ -6020,7 +6023,7 @@ MirandaScenes.TavernSexDommyBJ = function() {
 				Text.Add("That... that would be great, you absently reply to her. Gingerly, you settle yourself down, careful of your tender, cum-stretched stomach. Overwhelmed by what you've gone through, you allow your eyes to sink closed and lose yourself in torpor.", parse);
 				Text.Flush();
 
-				Gui.NextPrompt(function() {
+				Gui.NextPrompt(() => {
 					Text.Clear();
 					Text.Add("The sensations of something warm and soft on your lips stirs you from your slumber, the feel of something wet and firm pressing gently between your lips fully rousing you as it tickles your own tongue. Your eyes open and you find yourself staring into the half-hooded eyes of Miranda as the dober-morph kisses you sweetly. Pleasantly surprised, you lie back and bask in the sensation of her unusually tender actions, allowing her to break it a few moments later, licking your lips unconsciously to chase the last lingering taste of her as she straightens up.", parse);
 					Text.NL();
@@ -6036,7 +6039,7 @@ MirandaScenes.TavernSexDommyBJ = function() {
 				Text.Add("Queasy as you are, you simply nod your head absently. You really don't feel too good, overwhelmed by the recent fucking you received. Slowly, you sink onto your side, head pressed against the nearest pillow, and find yourself fading into darkness.", parse);
 				Text.Flush();
 
-				Gui.NextPrompt(function() {
+				Gui.NextPrompt(() => {
 					Text.Clear();
 					Text.Add("Something cold and wet drenches across your face, bringing you back to consciousness with gasping splutters, shaking your head to clear off the worst of the water. You quickly realize the source of your rude awakening: a smirking Miranda staring down at you, one hand holding an upturned mug.", parse);
 					Text.NL();
@@ -6047,7 +6050,7 @@ MirandaScenes.TavernSexDommyBJ = function() {
 					Gui.PrintDefaultOptions();
 				});
 			}
-			Gui.Callstack.push(function() {
+			Gui.Callstack.push(() => {
 				Text.Add("Though you still feel a little tired, thanks to your efforts and impromptu awakening, you know that you have no time to lie around any further. Noting that Miranda is already fully dressed in her uniform, you slowly pull yourself to upright and grab your [armor], struggling to get your newly bloated form dressed up again. It takes a little work, but soon enough you are ready to go as well.", parse);
 
 				Gui.PrintDefaultOptions();
@@ -6087,33 +6090,33 @@ MirandaScenes.TavernSexDommyBJ = function() {
 
 				const scenes = new EncounterTable();
 				if (player.FirstCock()) {
-					scenes.AddEnc(function() {
+					scenes.AddEnc(() => {
 						parse.sup   = miranda.SubDom() > 0 ? "Much to your surprise, " : "";
 						parse.oneof = player.NumCocks() > 1 ? " one of" : "";
 						parse.s     = player.NumCocks() > 1 ? "s" : "";
 						Text.Add("[sup]Miranda doesn’t protest. Her hands move to your hips, adjusting your position until her nose touches your [cocks]. You can feel her hot breath caress you as she laps up a dollop of pre, then moves to engulf[oneof] your shaft[s]. ", parse);
 						target = Target.Blowjob;
-					}, 1.0, function() { return true; });
+					}, 1.0, () => true);
 				}
 				if (player.FirstVag()) {
-					scenes.AddEnc(function() {
+					scenes.AddEnc(() => {
 						Text.Add("Miranda moves to caress your [butt]. Slowly, she traces your behind until she arrives at your [vag]. With her thumbs, she spreads you open, shoving her snout inside you and inhaling deeply. She licks her lips and begins lapping at your labia. ", parse);
 						target = Target.Cunn;
-					}, 1.0, function() { return true; });
+					}, 1.0, () => true);
 				}
-				scenes.AddEnc(function() {
+				scenes.AddEnc(() => {
 					Text.Add("Miranda grabs your butt cheeks, kneading them and spreading them open to reveal your [anus]. It’s not long before you feel wetness lapping at your crack, tongue massaging your sphincter in hopes of being granted entrance. ", parse);
 					target = Target.Rim;
-				}, 1.0, function() { return true; });
+				}, 1.0, () => true);
 
 				scenes.Get();
 
 				parse.dom = player.SubDom() > 50 ? " That's a good bitch, you absently quip back to her." : "";
 				Text.Add("A moan of pleasure escapes your throat as you feel Miranda's mouth and tongue going to work.[dom] Emboldened, you turn your attention back to her own throbbing dog-cock and open your mouth, swallowing her girldick as deeply as you can and noisily sucking on it. The turgid flesh throbs between your lips, salt-sweet precum oozing steadily over your tongue and vanishing down your throat with each suckle you make. Painstakingly you lick every crease and fold and vein, pumping her shaft in and out between your lips, wriggling your hips back to grant Miranda better access to your own nethers as you do so.", parse);
 				Text.NL();
-				parse.gen = target == Target.Blowjob ? function() { return player.MultiCockDesc(); } :
-				               target == Target.Cunn ? function() { return player.FirstVag().Short(); } :
-				               function() { return player.Butt().AnalShort(); };
+				parse.gen = target === Target.Blowjob ? () => player.MultiCockDesc() :
+				               target === Target.Cunn ? () => player.FirstVag().Short() :
+				               () => player.Butt().AnalShort();
 				Text.Add("Even despite your pleasure as Miranda plays with your [gen], you can see her knot starting to bloat, pleasure fattening it into a nice, big, juicy anchor of flesh. As it bulges into something like an apple-sized bulb of dickmeat, you can feel her cock throbbing in your mouth like mad, a veritable volcanic eruption of girl-semen building inside her apple-sized balls.", parse);
 				Text.NL();
 				Text.Add("Well, no sense in delaying it...", parse);
@@ -6127,12 +6130,12 @@ MirandaScenes.TavernSexDommyBJ = function() {
 
 				Text.Add("As the semen fountain masquerading as doberherm beneath you keeps on erupting into your maw, you diligently swallow each load, at least for a time. Having had enough, you relax your jaws and release her, allowing her cum to spray unabashedly over her thighs as you use your hand to continue milking her. Finally, her spurts grow weaker and weaker until she lets out a final groan and issues what you suspect is her final jet of this orgasm. Quickly, you move, mouth diving in to capture her last load and hold it inside your lips, letting the thick stickiness of it roll across your tongue.", parse);
 				Text.NL();
-				if (target == Target.Blowjob) {
+				if (target === Target.Blowjob) {
 					const cum = player.OrgasmCum();
 
 					if     (cum > 6) { parse.cum = "cascade"; } else if (cum > 3) { parse.cum = "streamer"; } else {             parse.cum = "spurt"; }
 					Text.Add("Even through her own climax, Miranda keeps sucking your cock for all she's worth, her ecstatic moans rattling through the sensitive flesh and sending sparks of pleasure crackling beneath your skin. You feel the pressure building up inside of you even as her own thick cum stirs your senses and enflames your lust. The lewd slurping from behind you as she suckles finally pushes you over the end and you reward her efforts with your own [cum] of spooge.", parse);
-				} else if (target == Target.Cunn) {
+				} else if (target === Target.Cunn) {
 					parse.vc = player.FirstVag().clitCock ? "" : Text.Parse(", her fuzzy chin rubbing against your [clit] seemingly by accident", parse);
 					Text.Add("Throughout her own climax, Miranda's tongue keeps slurping and squelching through your petals, lapping greedily for your feminine nectar[vc]. Your hips twitch and sway, but she simply won't relent in her assault, and inevitably your womanhood releases its juices right into the morph's hungry jaws.", parse);
 
@@ -6160,8 +6163,8 @@ MirandaScenes.TavernSexDommyBJ = function() {
 					Text.NL();
 					Text.Add("You grin and shake your head playfully. Somehow, you don't think that keeping you coming back is going to be too hard... though you have doubts as to whether she can resist overfeeding you.", parse);
 				} else {
-					parse.gen = target == Target.Blowjob ? "own" :
-					               target == Target.Cunn ? "pussy" : "ass";
+					parse.gen = target === Target.Blowjob ? "own" :
+					               target === Target.Cunn ? "pussy" : "ass";
 					Text.Add("<i>“Ain’t I the nicest gal a guy like you could hope for? I gave you cock and even took care of your [gen],”</i> she says, licking her lips.", parse);
 					Text.NL();
 					Text.Add("Twisting around so that you are sitting atop her, you look her in the eye.", parse);
@@ -6177,7 +6180,7 @@ MirandaScenes.TavernSexDommyBJ = function() {
 				}
 				Text.Flush();
 
-				Gui.NextPrompt(function() {
+				Gui.NextPrompt(() => {
 					Text.Clear();
 					Text.Add("You hasten to pull on the rest of your [armor], the now-sated dobermorph having already clambered back into her own gear and now waiting for you by the door. Once dressed, you move to unbarricade the door and let her exit, following her as she goes.", parse);
 					Gui.PrintDefaultOptions();
@@ -6226,7 +6229,7 @@ MirandaScenes.TavernSexDommyBJ = function() {
 
 				if (dom > 50) {
 					Text.Add("<i>“Ah, this feels great,”</i> she remarks, hands moving to rub her breasts, plastered with her own jism. ", parse);
-					if (miranda.flags.Footjob == 0) {
+					if (miranda.flags.Footjob === 0) {
 						Text.Add("<i>“Didn’t know feet could feel this good. You’re pretty creative when showing your dominance, aren’t you, [masterMistress]?”</i>", parse);
 						Text.NL();
 						Text.Add("You nod and agree, then playfully inform her that you aren't done yet. There's still one last thing she needs to do…", parse);
@@ -6251,7 +6254,7 @@ MirandaScenes.TavernSexDommyBJ = function() {
 					}
 				} else {
 					Text.Add("<i>“Heh, not my kink, but this didn’t feel half-bad.”</i> Miranda slumps on the floor, relaxing in afterglow. ", parse);
-					if (miranda.flags.Footjob == 0) {
+					if (miranda.flags.Footjob === 0) {
 						Text.Add("<i>“Just give me some time to recover and we can get going,”</i> she adds.", parse);
 						Text.NL();
 						Text.Add("You chide her not to be so impatient; there's still something she needs to do first. You move your semen dripping [foot] and place it just before her nose with an imperious gesture, declaring that neither of you are leaving until she cleans up the mess she made of your foot.", parse);
@@ -6279,7 +6282,7 @@ MirandaScenes.TavernSexDommyBJ = function() {
 				Text.Add("You patiently watch her as she laps you clean, turning and moving your [foot] to better allow her lapping tongue access to every inch. Finally, she has you cleaned up, and you lower your foot back to the floor, gently petting her on the head and quipping what a good dog she is.", parse);
 				Text.Flush();
 
-				Gui.NextPrompt(function() {
+				Gui.NextPrompt(() => {
 					Text.Clear();
 					Text.Add("You fix the last of your [armor] into place and straighten up, looking over to the equally dressed form of Miranda, waiting for you by the door. Pushing aside the pangs of desire that seeing her so obediently licking you clean after you got her off with just your foot inspired in you, you move to remove the chair barring the door so that the two of you can head back out into the tavern's main room.", parse);
 					Text.Flush();
@@ -6294,12 +6297,12 @@ MirandaScenes.TavernSexDommyBJ = function() {
 	Gui.SetButtonsFromList(options, false, null);
 };
 
-MirandaScenes.TerryTavernSexDommyBJ = function() {
+MirandaScenes.TerryTavernSexDommyBJ = () => {
 	const parse: any = {
 
 	};
 
-	Gui.Callstack.push(function() {
+	Gui.Callstack.push(() => {
 		Text.NL();
 		Text.Add("As the two of you move through the Maiden's Bane, ready to start hunting for this mystery thief, you can't fail to notice the number of knowing smiles directed between patrons - both at you and the watchdog, and at each other. Coupled with the whispering and the occasional stifled laugh, it's pretty obvious they all know what happened whilst you and Miranda were in the backroom. You cast a sidelong glance at Miranda, but the dobermorph doesn't seem to care in the slightest, making no sign that she acknowledges the others.", parse);
 		Text.Flush();
@@ -6310,7 +6313,7 @@ MirandaScenes.TerryTavernSexDommyBJ = function() {
 	MirandaScenes.TavernSexDommyBJ();
 };
 
-MirandaScenes.TerryTavernSexSubbyVag = function(cocks: Cock[]) {
+MirandaScenes.TerryTavernSexSubbyVag = (cocks: Cock[]) => {
 	const player = GAME().player;
 	const miranda = GAME().miranda;
 
@@ -6319,7 +6322,7 @@ MirandaScenes.TerryTavernSexSubbyVag = function(cocks: Cock[]) {
 		playername : player.name,
 	};
 
-	const knotted = p1Cock.knot != 0;
+	const knotted = p1Cock.knot !== 0;
 
 	const cum = MirandaScenes.TavernSexSubbyVag(cocks);
 	const dom = player.SubDom() - miranda.SubDom();
@@ -6403,7 +6406,7 @@ MirandaScenes.TerryTavernSexSubbyVag = function(cocks: Cock[]) {
 
 /* MIRANDA DATE */
 
-MirandaScenes.DatingEntry = function() {
+MirandaScenes.DatingEntry = () => {
 	const player = GAME().player;
 	const miranda = GAME().miranda;
 	const party: Party = GAME().party;
@@ -6414,7 +6417,7 @@ MirandaScenes.DatingEntry = function() {
 	};
 
 	Text.Clear();
-	if (miranda.flags.Dates == 0) { // first
+	if (miranda.flags.Dates === 0) { // first
 		if (miranda.Attitude() >= MirandaFlags.Attitude.Neutral) {
 			Text.Add("<i>“You coming on to me, [playername]?”</i> Miranda looks amused, but nods. <i>“Sure, I’m game. Let’s ditch this place.”</i> Saying so, she drains her beer in one go, slamming the empty cup to the table.", parse);
 		} else {
@@ -6481,7 +6484,7 @@ MirandaScenes.DatingEntry = function() {
 				Text.NL();
 				Text.Add("<i>“Was a while since last time, though. You offering?”</i> Before you can respond, she shakes her head, grinning at you. <i>“My tastes have refined over time. I’d prefer to ram you in my own bed instead. Consider it an offer.”</i>", parse);
 				Text.NL();
-				if (miranda.flags.gAnal != 0) {
+				if (miranda.flags.gAnal !== 0) {
 					Text.Add("<i>“Who knows, perhaps you’ll prefer it over a dirty alleyway,”</i> she adds, jabbing you in the ribs with her elbow.", parse);
 					Text.NL();
 				}
@@ -6494,10 +6497,10 @@ MirandaScenes.DatingEntry = function() {
 			tooltip : "So… she took her first here, has she repeated the feat?",
 		});
 		Gui.SetButtonsFromList(options);
-	} else if (miranda.flags.Dates == 1) {
+	} else if (miranda.flags.Dates === 1) {
 		MirandaScenes.DatingScore = miranda.Attitude();
 
-		if (miranda.flags.dLock == 1) {
+		if (miranda.flags.dLock === 1) {
 			Text.Add("<i>“What, changed your mind? Ready to become my bitch?”</i> Miranda nods toward her crotch pointedly. <i>“Blow me. Right here, right now.”</i>", parse);
 			Text.Flush();
 
@@ -6523,7 +6526,7 @@ MirandaScenes.DatingEntry = function() {
 				Text.Add("You finish your drinks and head out into the slums.", parse);
 				Text.Flush();
 
-				Gui.NextPrompt(function() {
+				Gui.NextPrompt(() => {
 					Text.Clear();
 					MirandaScenes.DatingStage2();
 					miranda.flags.Dates++;
@@ -6555,7 +6558,7 @@ MirandaScenes.DatingEntry = function() {
 	}
 };
 
-MirandaScenes.DatingBlockPrompt = function() {
+MirandaScenes.DatingBlockPrompt = () => {
 	const player = GAME().player;
 	const miranda = GAME().miranda;
 
@@ -6578,7 +6581,7 @@ MirandaScenes.DatingBlockPrompt = function() {
 
 			Text.Flush();
 
-			Gui.NextPrompt(function() {
+			Gui.NextPrompt(() => {
 				Text.Clear();
 				Text.Add("<i>“Thanks for that, [name],”</i> Miranda stretches languidly. <i>“Shall we go?”</i>", parse);
 				Text.NL();
@@ -6623,7 +6626,7 @@ MirandaScenes.DatingBlockPrompt = function() {
 
 // BAR HANGOUT
 // TODO
-MirandaScenes.DatingStage1 = function() {
+MirandaScenes.DatingStage1 = () => {
 	const player = GAME().player;
 	const miranda = GAME().miranda;
 
@@ -6631,7 +6634,7 @@ MirandaScenes.DatingStage1 = function() {
 
 	};
 
-	const contfunc = function() {
+	const contfunc = () => {
 		Text.Add("<i>“How about we duck outside for a while?”</i> the guardswoman asks suggestively. Following her, the two of you head out into the slums of Rigard.", parse);
 		Text.NL();
 
@@ -6639,7 +6642,7 @@ MirandaScenes.DatingStage1 = function() {
 	};
 
 	const scenes = new EncounterTable();
-	scenes.AddEnc(function() {
+	scenes.AddEnc(() => {
 		Text.Add("<i>“Wanna stick around for a few drinks first?”</i> before you have the opportunity to respond, she calls for another round, asking for the ‘special’. The barkeep comes over with two mugs filled with a clear, colorless substance. <i>“Have a taste of this, it packs quite a punch!”</i> the guardswoman urges you on.", parse);
 		Text.Flush();
 
@@ -6662,7 +6665,7 @@ MirandaScenes.DatingStage1 = function() {
 
 					TimeStep({minute: minutes});
 
-					Gui.NextPrompt(function() {
+					Gui.NextPrompt(() => {
 						Text.Clear();
 						Text.Add("When you finally come to, you are prone on the ground, your head pounding something fierce. You throw a quick accusatory glance at Miranda, who is still sitting at the table.", parse);
 						Text.NL();
@@ -6700,27 +6703,27 @@ MirandaScenes.DatingStage1 = function() {
 			tooltip : "Decline. You’re not quite sure what’s in that.",
 		});
 		Gui.SetButtonsFromList(options, false, null);
-	}, 1.0, function() { return true; });
+	}, 1.0, () => true);
 	// TODO
 	/*
-	scenes.AddEnc(function() {
+	scenes.AddEnc(() => {
 		Text.Add("", parse);
 		Text.NL();
-	}, 1.0, function() { return true; });
+	}, 1.0, () => true);
 	*/
 	// Fallback
-	scenes.AddEnc(function() {
+	scenes.AddEnc(() => {
 		Text.Add("You make some small talk, but Miranda is beginning to look bored.", parse);
 		Text.NL();
 		contfunc();
-	}, 0.2, function() { return true; });
+	}, 0.2, () => true);
 
 	scenes.Get();
 };
 
 // TOWN EVENTS
 // TODO
-MirandaScenes.DatingStage2 = function() {
+MirandaScenes.DatingStage2 = () => {
 	const miranda = GAME().miranda;
 
 	const parse: any = {
@@ -6729,13 +6732,13 @@ MirandaScenes.DatingStage2 = function() {
 
 	TimeStep({hour: 1});
 
-	Gui.Callstack.push(function() { // TODO
+	Gui.Callstack.push(() => { // TODO
 		Text.Add("After some time, the two of you have made your way to Miranda’s house. The dobie turns to look at you expectantly.", parse);
 		Text.NL();
 		MirandaScenes.DatingStage3();
 	});
 
-	const talkPrompt = function() {
+	const talkPrompt = () => {
 		// [Her past][Sex stories][Her place]
 		const options = new Array();
 		options.push({ nameStr : "Her past",
@@ -6767,25 +6770,25 @@ MirandaScenes.DatingStage2 = function() {
 
 	const scenes = new EncounterTable();
 	// ((Wandering around slums))
-	scenes.AddEnc(function() {
+	scenes.AddEnc(() => {
 		Text.Add("You wander the sprawling slums of the city, Miranda pointing out her various old haunts as a kid, or places you should be wary of. These parts are to the vast majority filled with unfortunate souls, and desperation makes people do unsavoury things.", parse);
 		Text.NL();
 		Text.Add("The guardswoman walks the streets like if she owns them, confident in her stride. Now would be a good time to talk to her, when her head isn’t deep down a cup of booze.", parse);
 		Text.Flush();
 
 		talkPrompt();
-	}, 1.0, function() { return true; });
+	}, 1.0, () => true);
 	/* TODO
-	scenes.AddEnc(function() {
+	scenes.AddEnc(() => {
 		Text.Add("", parse);
 		Text.NL();
-	}, 1.0, function() { return true; });
+	}, 1.0, () => true);
 	*/
 
 	scenes.Get();
 };
 
-MirandaScenes.TalkBackstory = function(atBar: boolean) {
+MirandaScenes.TalkBackstory = (atBar: boolean) => {
 	const player = GAME().player;
 	const miranda = GAME().miranda;
 
@@ -6802,10 +6805,10 @@ MirandaScenes.TalkBackstory = function(atBar: boolean) {
 	const scenes = [];
 
 	// ((Story of growing up in Rigard))
-	scenes.push(function() {
+	scenes.push(() => {
 		Text.Add("<i>“Me and my family grew up here in Rigard,”</i> Miranda begins thoughtfully. <i>“We had a pretty nice house in the residential district - nothing posh, but bigger than the one I have now. Nice enough place, though I remember very little of it.”</i>", parse);
 		Text.NL();
-		if (miranda.flags.bgRotMax == 0) {
+		if (miranda.flags.bgRotMax === 0) {
 			Text.Add("You ask her why that is? Did they move?", parse);
 			Text.NL();
 			Text.Add("<i>“The rebellion is what happened,”</i> she answers shortly. <i>“I have about the same sob story as every other person in the damn city.”</i> You decide not to pry further until she tells you herself.", parse);
@@ -6822,14 +6825,14 @@ MirandaScenes.TalkBackstory = function(atBar: boolean) {
 	});
 	if (miranda.Relation() >= 25) {
 		// ((Death of her parents))
-		scenes.push(function() {
+		scenes.push(() => {
 			Text.Add("<i>“Remember what I said about the rebellion? There was all sorts of bad stuff brewing in the city after that. Neither of my parents took part, but the city was rife with anti-morph sentiments. Just about everyone was scared and nobody knew what the recently crowned king was going to do next. Many who probably should have fled the city stayed, perhaps because they simply didn’t know anything else.”</i>", parse);
 			Text.NL();
 			Text.Add("<i>“I only remember hazy details of it, but me and my family were forced out into the slums, thrown out of our house and put in a small shed, like a kennel for common dogs.”</i>", parse);
 			Text.NL();
 			Text.Add("<i>“There was a big riot, a large mob of bigoted scum coming down hard on the slums. Bloody miracle the entire city didn’t burn to the ground. Perhaps it would have been better if it did.”</i>", parse);
 			Text.NL();
-			if (miranda.flags.bgRotMax == 1) {
+			if (miranda.flags.bgRotMax === 1) {
 				Text.Add("She is clearly coming up to a particularly painful part of her story, so you refrain from asking any questions for now.", parse);
 				Text.NL();
 			}
@@ -6841,7 +6844,7 @@ MirandaScenes.TalkBackstory = function(atBar: boolean) {
 			Gui.PrintDefaultOptions();
 		});
 		// ((The slums))
-		scenes.push(function() {
+		scenes.push(() => {
 			Text.Add("<i>“Life in the slums was tough for two orphaned kids. I don’t think I was older than ten when we had to start fending for ourselves, and my sister only eight. Bel took it particularly hard, so it was up to me to try and protect the little puppy. Fat thanks I got for that,”</i> she grumbles.", parse);
 			Text.NL();
 			Text.Add("<i>“I think I mentioned it before, but when we first moved to the slums, I spent a lot of time in the docks. I returned there to look for work after we buried our parents, as Bel was fat little use, just running around crying all the time. We were hardly the only ones in the same situation, so there wasn't going to be any charitable benefactor to help us survive. At least, not one that didn’t come with unbearable consequences.”</i>", parse);
@@ -6857,7 +6860,7 @@ MirandaScenes.TalkBackstory = function(atBar: boolean) {
 		});
 		if (miranda.Relation() >= 50) {
 			// ((Joining the mercs))
-			scenes.push(function() {
+			scenes.push(() => {
 				Text.Add("<i>“Years went by in the slums. Both me and Bel grew up into proper ladies - well, Bel did at least. It never quite caught on me,”</i> she grins. <i>“Plus, I had this little addition,”</i> she adds, patting her bulge fondly. <i>“While that sure as hell didn’t help me while growing up, I got a reputation for shutting people up who thought it a fair reason to try and bully me.”</i>", parse);
 				Text.NL();
 				Text.Add("<i>“Even later, I found… different ways to get back at my tormentors, something that hurt their pride even more than a sound beating would.”</i> She grins lewdly. <i>“The best part is that they were all willing - almost all, after a bit of persuasion. Nothing better than breaking in some cocky ass who thinks the world revolves around him.”</i>", parse);
@@ -6880,7 +6883,7 @@ MirandaScenes.TalkBackstory = function(atBar: boolean) {
 						Text.NL();
 
 						let sexedCount = 0;
-						for (const flag in miranda.sex) {
+						for (const flag of miranda.sex) {
 							sexedCount += miranda.sex[flag];
 						}
 
@@ -6907,7 +6910,7 @@ MirandaScenes.TalkBackstory = function(atBar: boolean) {
 						MirandaScenes.DatingStage3();
 
 						// Don't forward the convo until it has been revealed
-						if (miranda.flags.bgRotMax == 3) {
+						if (miranda.flags.bgRotMax === 3) {
 							sceneId--;
 						}
 					}, enabled : true,
@@ -6934,7 +6937,7 @@ MirandaScenes.TalkBackstory = function(atBar: boolean) {
 				Gui.SetButtonsFromList(options, false, null);
 			});
 			// ((Time with the mercs))
-			scenes.push(function() {
+			scenes.push(() => {
 				Text.Add("<i>“The Black Hounds were a rowdy bunch, both on and off duty. How they still get contracts after some of the shit we did is beyond me. We usually got the job done either way, and it wasn’t like we had much competition in our price class.”</i>", parse);
 				Text.NL();
 				Text.Add("<i>“I got to spend a lot of time outside Rigard at the very least, traveling all over Eden. I’ve seen the free cities, visited the desert oasis, spent time among the highland tribes. Wherever there was trouble, the Black Hounds were there. Sometimes even before the fact.”</i>", parse);
@@ -6949,16 +6952,16 @@ MirandaScenes.TalkBackstory = function(atBar: boolean) {
 				Gui.PrintDefaultOptions();
 			});
 			// ((Joining the guard))
-			scenes.push(function() {
+			scenes.push(() => {
 				Text.Add("<i>“Finally, I grew sick of the Hounds. One can only stand so much shit before seeking another line of work… but beating the crap out of people was kinda my thing. Still is. I looked around for something more… respectable, is perhaps the word.”</i> She doesn’t sound like she uses it very much. <i>“I found the guard. Marginally better, perhaps, but they pay well and I don’t have to feel guilty about the people I beat up.”</i>", parse);
 				Text.NL();
-				if (miranda.flags.bgRotMax == 5) {
+				if (miranda.flags.bgRotMax === 5) {
 					Text.Add("You hadn’t exactly suspected Miranda to have a conscience about the things she did, but the more you know.", parse);
 					Text.NL();
 				}
 				Text.Add("<i>“With a nice little premium I got for joining, I was finally able to move out of the slums and back into the city proper. I kinda like my new place, it’s clean if nothing else. By that time, Belinda had already moved into the city, so there wasn’t really anything keeping me in that hovel anyways.”</i>", parse);
 				Text.NL();
-				if (miranda.flags.bgRotMax == 5) {
+				if (miranda.flags.bgRotMax === 5) {
 					Text.Add("You take note that she doesn’t mention where her sister got the money to do so, but you assume she would tell you if it was important.", parse);
 					Text.NL();
 				}
@@ -6970,7 +6973,7 @@ MirandaScenes.TalkBackstory = function(atBar: boolean) {
 				Gui.PrintDefaultOptions();
 			});
 			// ((Life in the guard))
-			scenes.push(function() {
+			scenes.push(() => {
 				Text.Add("<i>“I’ve been walking the streets of Rigard in uniform for years, cracking down hard on crime in this town,”</i> Miranda tells you, stretching languidly. <i>“Given my background, I’m privy to certain information most are not, namely an insight in how the lower layers of society <b>work</b> in this city. Makes me able to predict certain people’s behavior, and prevent any of their shenanigans. Or at the very least catch them in the act, so to speak.”</i> She grins. <i>“Always easier to slam them into a cell when they got a bag of loot slung over their shoulder. Makes people less likely to ask about why they’re walking funny too.”</i>", parse);
 				Text.NL();
 				Text.Add("<i>“Rising to the upper ranks is pretty much impossible for someone like me; not that I’d want to be stuck pushing papers, mind you. If not for the fact that I’m a morph, I’m not a pushover who bends over backwards for every stupid order from above. Still, it keeps me just where I want to be, prowling the streets. They might think I’m difficult to handle, but I’m just too damn good at what I do to get rid of.”</i>", parse);
@@ -6984,8 +6987,8 @@ MirandaScenes.TalkBackstory = function(atBar: boolean) {
 			});
 			if (miranda.Relation() >= 75) {
 				// ((Belinda))
-				scenes.push(function() {
-					if (miranda.flags.bgRotMax == 7) {
+				scenes.push(() => {
+					if (miranda.flags.bgRotMax === 7) {
 						Text.Add("The guardswoman looks unusually thoughtful as she ponders where to pick up the story.", parse);
 						Text.NL();
 						Text.Add("<i>“Look, [playername], I haven’t been entirely honest with you. I think it’s time I tell you the whole story, without leaving out the bits about my sister. I rarely dwell on the past, and it’s a bit embarrassing, so I didn’t think it important. Thinking over things, I can’t really tell my story without it, though.”</i>", parse);
@@ -7003,7 +7006,7 @@ MirandaScenes.TalkBackstory = function(atBar: boolean) {
 					Gui.PrintDefaultOptions();
 				});
 				// ((Her feelings))
-				scenes.push(function() {
+				scenes.push(() => {
 					Text.Add("<i>“To be honest, I’m not sure what else to tell you,”</i> the dog-morph confesses. <i>“Spilling the beans about Belinda isn’t something I usually do with people, just so you know. Not that it’s a secret, exactly, but I never bring it up. And if they bring it up? Most likely it’ll earn them a punch in the face.”</i>", parse);
 					Text.NL();
 					Text.Add("<i>“It’s… frustrating, sure, but in the end she’s her own woman and can make her own decisions. She’s sure as hell better off than I am, in either case. I’m not entirely sure what I was thinking when I joined the guard; perhaps I wanted to clean up the streets to keep my little sister safe, but that isn’t really an issue anymore.”</i>", parse);
@@ -7029,7 +7032,7 @@ MirandaScenes.TalkBackstory = function(atBar: boolean) {
 		miranda.flags.bgRotMax = sceneId;
 	}
 };
-MirandaScenes.TalkConquests = function(atBar: boolean) {
+MirandaScenes.TalkConquests = (atBar: boolean) => {
 	const player = GAME().player;
 	const miranda = GAME().miranda;
 	const party: Party = GAME().party;
@@ -7046,7 +7049,7 @@ MirandaScenes.TalkConquests = function(atBar: boolean) {
 	const scenes = [];
 
 	// Long
-	scenes.push(function() {
+	scenes.push(() => {
 		Text.Add("<i>“Remember when I told you about my first time? This would be back in the slums, before I joined the mercs. I was working down by the docks, hauling crates onto ships and so on. He was a cabin boy about my age on one of the ships that pulled in - pretty little thing too - so he wasn’t aware of my ‘extras’.”</i> She grins wolfishly.", parse);
 		Text.NL();
 		Text.Add("<i>“It was really nice to have someone hit on me for a change. The ship came in from the free cities, so he didn’t really have anything against morphs. Not against cocks either, as it turned out. Well, I had to persuade him a bit, but he eventually came around to seeing things my way. We tried many things together, but I found myself liking pitching way more than I did receiving.”</i>", parse);
@@ -7058,7 +7061,7 @@ MirandaScenes.TalkConquests = function(atBar: boolean) {
 
 		Gui.PrintDefaultOptions();
 	});
-	scenes.push(function() {
+	scenes.push(() => {
 		Text.Add("<i>“After my first time, I kept a steady stream of girlfriends and boyfriends. I was hooked on sex, but I could never keep myself in a relationship very long. Perhaps I’m not cut out for them. Even when I stuck together with someone for a longer period of time, I had flings on the side.”</i>", parse);
 		Text.NL();
 		Text.Add("<i>“Wasn’t very long until I had my first threesome. Actually, there was a girl I had been fucking for a while - a cute catgirl, but a real beast in bed. I caught her cheating on me with some boy, and much to their surprise, rather than being angry with them, I joined in.”</i>", parse);
@@ -7070,7 +7073,7 @@ MirandaScenes.TalkConquests = function(atBar: boolean) {
 
 		Gui.PrintDefaultOptions();
 	});
-	scenes.push(function() {
+	scenes.push(() => {
 		Text.Add("<i>“I’m usually quite forward about my sexuality, domineering even. It took quite a while until I really let someone else lead… not until I had joined the mercs.”</i> She sees your look and waves it off. <i>“No, not one of the Hounds. We were out on a mission to one of the free cities; don’t remember which one. I think it had a port.”</i>", parse);
 		Text.NL();
 		Text.Add("<i>“We had just pushed back a party of raiders, and had captured their leader. He was a minotaur of some kind - damn he was a big fellow, and in more ways than one! The elders wanted to throw him in prison, but I thought that it would be a waste… I had talked to him on the way back to the city, ”</i> Miranda explained. <i>“He wasn’t such a bad sort, really. He and his tribe had been driven out of the mountains, and were just trying to survive. He was quite impressed by the beating I had given him, and told me as much.”</i>", parse);
@@ -7084,7 +7087,7 @@ MirandaScenes.TalkConquests = function(atBar: boolean) {
 
 		Gui.PrintDefaultOptions();
 	});
-	scenes.push(function() {
+	scenes.push(() => {
 
 		parse.foxvixen = terry.mfPronoun("fox", "vixen");
 		parse = terry.ParserPronouns(parse);
@@ -7180,7 +7183,7 @@ MirandaScenes.TalkConquests = function(atBar: boolean) {
 		Gui.PrintDefaultOptions();
 	});
 	/* TODO
-	scenes.push(function() {
+	scenes.push(() => {
 		Text.Add("", parse);
 		Text.NL();
 
@@ -7205,7 +7208,7 @@ MirandaScenes.TalkConquests = function(atBar: boolean) {
 
 // HOMECOMING
 // TODO
-MirandaScenes.DatingStage3 = function() {
+MirandaScenes.DatingStage3 = () => {
 	const player = GAME().player;
 	const miranda = GAME().miranda;
 	const party: Party = GAME().party;
@@ -7264,7 +7267,7 @@ MirandaScenes.DatingStage3 = function() {
 					Text.Add("First, you need to rendezvous with [name]. You make your way outside the inner walls and meet up with [himher] outside the dingy old tavern.", parse);
 					Text.Flush();
 
-					Gui.NextPrompt(function() {
+					Gui.NextPrompt(() => {
 						MoveToLocation(world.loc.Rigard.Slums.Gate, {minute: 20});
 					});
 				}
@@ -7305,7 +7308,7 @@ MirandaScenes.DatingStage3 = function() {
 					Text.Add("First, you need to rendezvous with [name]. You make your way outside the inner walls and meet up with [himher] outside the dingy old tavern.", parse);
 					Text.Flush();
 
-					Gui.NextPrompt(function() {
+					Gui.NextPrompt(() => {
 						MoveToLocation(world.loc.Rigard.Slums.Gate, {minute: 20});
 					});
 				}
@@ -7323,7 +7326,7 @@ MirandaScenes.DatingStage3 = function() {
 			func() {
 				Text.Clear();
 				Text.Add("You back away, shaking your head. ", parse);
-				if (miranda.flags.subCellar != 0) {
+				if (miranda.flags.subCellar !== 0) {
 					Text.Add("…It’s probably nothing, you tell yourself. And you are about to score, all right! Miranda leads you inside, smiling encouragingly. You have a few moments to look around the room before the floor rushes to meet you, and everything goes black.", parse);
 				} else {
 					Text.Add("Gulping, you meet her eyes and nod. There is a flicker of surprise in Miranda’s expression, quickly replaced by a wide predatory grin as she invites you inside. You both know what’s going to happen next.", parse);
@@ -7333,12 +7336,12 @@ MirandaScenes.DatingStage3 = function() {
 
 				MirandaScenes.HomeSubbyDungeon();
 			}, enabled : true,
-			tooltip : miranda.flags.subCellar != 0 ? "You know very well what’s going to happen… and you look forward to it." : "Sure... what could go wrong?",
+			tooltip : miranda.flags.subCellar !== 0 ? "You know very well what’s going to happen… and you look forward to it." : "Sure... what could go wrong?",
 		});
 		options.push({ nameStr : "Decline",
 			func() {
 				Text.Clear();
-				if (miranda.flags.subCellar != 0) {
+				if (miranda.flags.subCellar !== 0) {
 					Text.Add("You’re not going back into her cellar again, no way!", parse);
 				} else {
 					Text.Add("You’re not really sure what she’s up to, but it’s bound to be bad news for you.", parse);
@@ -7358,7 +7361,7 @@ MirandaScenes.DatingStage3 = function() {
 					Text.Add("First, you need to rendezvous with [name]. You make your way outside the inner walls and meet up with [himher] outside the dingy old tavern.", parse);
 					Text.Flush();
 
-					Gui.NextPrompt(function() {
+					Gui.NextPrompt(() => {
 						MoveToLocation(world.loc.Rigard.Slums.Gate, {minute: 20});
 					});
 				}
@@ -7369,7 +7372,7 @@ MirandaScenes.DatingStage3 = function() {
 	}
 };
 
-MirandaScenes.DatingFirstDocks = function() {
+MirandaScenes.DatingFirstDocks = () => {
 	const miranda = GAME().miranda;
 	const party: Party = GAME().party;
 	const world = WORLD();
@@ -7430,7 +7433,7 @@ MirandaScenes.DatingFirstDocks = function() {
 	Gui.SetButtonsFromList(options);
 };
 
-MirandaScenes.DatingFirstMercs = function() {
+MirandaScenes.DatingFirstMercs = () => {
 	const miranda = GAME().miranda;
 
 	const parse: any = {
@@ -7493,7 +7496,7 @@ MirandaScenes.DatingFirstMercs = function() {
 	Gui.SetButtonsFromList(options);
 };
 
-MirandaScenes.DatingFirstCity = function() {
+MirandaScenes.DatingFirstCity = () => {
 	const player = GAME().player;
 	const miranda = GAME().miranda;
 	const party: Party = GAME().party;
@@ -7636,7 +7639,7 @@ MirandaScenes.DatingFirstCity = function() {
 	}
 };
 
-MirandaScenes.DatingFirstHome = function() {
+MirandaScenes.DatingFirstHome = () => {
 	const player = GAME().player;
 	const miranda = GAME().miranda;
 	const party: Party = GAME().party;
@@ -7694,7 +7697,7 @@ MirandaScenes.DatingFirstHome = function() {
 				Text.Add("You decide to leave the inner city[comp], returning to the slums for time being.", parse);
 				Text.Flush();
 
-				Gui.NextPrompt(function() {
+				Gui.NextPrompt(() => {
 					MoveToLocation(world.loc.Rigard.Slums.Gate, {minute: 20});
 				});
 			}, enabled : true,
@@ -7730,7 +7733,7 @@ MirandaScenes.DatingFirstHome = function() {
 					Text.Add("First, you need to rendezvous with [name]. You make your way outside the inner walls and meet up with [himher] outside the dingy old tavern.", parse);
 					Text.Flush();
 
-					Gui.NextPrompt(function() {
+					Gui.NextPrompt(() => {
 						MoveToLocation(world.loc.Rigard.Slums.Gate, {minute: 20});
 					});
 				}
@@ -7778,7 +7781,7 @@ MirandaScenes.DatingFirstHome = function() {
 				}
 				Text.Flush();
 
-				Gui.NextPrompt(function() {
+				Gui.NextPrompt(() => {
 					MoveToLocation(world.loc.Rigard.Slums.Gate, {minute: 20});
 				});
 			}, enabled : true,

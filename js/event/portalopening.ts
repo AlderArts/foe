@@ -3,7 +3,7 @@ import { Text } from "../text";
 
 const PortalOpeningScenes: any = {};
 
-PortalOpeningScenes.Intro = function() {
+PortalOpeningScenes.Intro = () => {
 	const parse: any = {
 
 	};

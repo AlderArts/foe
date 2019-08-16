@@ -64,13 +64,13 @@ export class Room69 extends Entity {
 
 	// Schedule (IS a location. Heh)
 	public IsAtLocation(location: any) {
-		return location == WORLD().loc.Rigard.Inn.room69;
+		return location === WORLD().loc.Rigard.Inn.room69;
 	}
 
 }
 
 // Party interaction
-Room69Scenes.Interact = function() {
+Room69Scenes.Interact = () => {
 	const room69 = GAME().room69;
 
 	Text.Clear();
@@ -88,7 +88,7 @@ Room69Scenes.Interact = function() {
 	Text.Flush();
 };
 
-Room69Scenes.Discovering69 = function() {
+Room69Scenes.Discovering69 = () => {
 	const player = GAME().player;
 
 	const parse: any = {
@@ -121,7 +121,7 @@ Room69Scenes.Discovering69 = function() {
 	Room69Scenes.Discovering69Prompt();
 };
 
-Room69Scenes.Discovering69Prompt = function() {
+Room69Scenes.Discovering69Prompt = () => {
 	const room69 = GAME().room69;
 	const player = GAME().player;
 
@@ -130,7 +130,7 @@ Room69Scenes.Discovering69Prompt = function() {
 
 	// [Sentience][What now][Leave]
 	const options = new Array();
-	if (Room69Scenes.introTalkedSentience == false) {
+	if (Room69Scenes.introTalkedSentience === false) {
 		options.push({ nameStr : "Sentience",
 			func() {
 				Text.Clear();
@@ -147,7 +147,7 @@ Room69Scenes.Discovering69Prompt = function() {
 			tooltip : "Ask why the room can talk and move.",
 		});
 	}
-	if (Room69Scenes.introTriedToLeave == false) {
+	if (Room69Scenes.introTriedToLeave === false) {
 		options.push({ nameStr : "Leave",
 			func() {
 				Text.Clear();
@@ -193,7 +193,7 @@ Room69Scenes.Discovering69Prompt = function() {
 	Gui.SetButtonsFromList(options);
 };
 
-Room69Scenes.Discovering69WhatNow = function() {
+Room69Scenes.Discovering69WhatNow = () => {
 	const room69 = GAME().room69;
 	const party: Party = GAME().party;
 	const player = GAME().player;
@@ -209,7 +209,7 @@ Room69Scenes.Discovering69WhatNow = function() {
 		func : Room69Scenes.Discovering69Sex, enabled : true,
 		tooltip : "Maybe having some fun with Sixtynine won’t be so bad.",
 	});
-	if (Room69Scenes.introTriedArgue == false) {
+	if (Room69Scenes.introTriedArgue === false) {
 		options.push({ nameStr : "Argue",
 			func() {
 				Text.Clear();
@@ -242,18 +242,18 @@ Room69Scenes.Discovering69WhatNow = function() {
 				Text.NL();
 				Text.Add("As you make your way out into the hallway, a petulant <i>“And don’t come back!”</i> comes from Sixtynine as the door slams shut behind you.", parse);
 
-				if (party.Num() == 2) {
+				if (party.Num() === 2) {
 					Text.Add(" Glancing around, you are greeted by a relieved [comp].", {comp: party.Get(1).name});
 				} else if (party.Num() > 2) {
 					Text.Add(" Glancing around, you are greeted by your relieved companions.");
- }
+ 				}
 				Text.Flush();
 
 				room69.relation.DecreaseStat(-100, 10);
 				room69.flags.Rel = Room69Flags.RelFlags.BadTerms;
 				room69.flags.BadStart = Room69Flags.RelFlags.BadTerms;
 
-				Gui.NextPrompt(function() {
+				Gui.NextPrompt(() => {
 					party.location = world.loc.Rigard.Inn.common;
 					Text.Clear();
 					Room69Scenes.Discovering69OrvinRant();
@@ -273,7 +273,7 @@ Room69Scenes.Discovering69WhatNow = function() {
 			tooltip : "Maybe a shouting match with the room will convince it to let you out, although Sixtynine probably wouldn’t be happy about it.",
 		});
 	}
-	if (Room69Scenes.introTriedForce == false) {
+	if (Room69Scenes.introTriedForce === false) {
 		options.push({ nameStr : "Force",
 			func() {
 				Text.Clear();
@@ -329,7 +329,7 @@ Room69Scenes.Discovering69WhatNow = function() {
 	Gui.SetButtonsFromList(options);
 };
 
-Room69Scenes.Discovering69OrvinRant = function() {
+Room69Scenes.Discovering69OrvinRant = () => {
 	const party: Party = GAME().party;
 
 	const parse: any = {
@@ -349,7 +349,7 @@ Room69Scenes.Discovering69OrvinRant = function() {
 
 	if (party.Num() <= 1) {
 		parse.comp = "";
-	} else if (party.Num() == 2) {
+	} else if (party.Num() === 2) {
 		parse.comp = Text.Parse(", leaving a bemused [comp] to again wait outside", {comp: party.Get(1).name});
  } else { // (party.Num() > 2)
 		parse.comp = ", leaving your bemused companions to again wait outside";
@@ -359,7 +359,7 @@ Room69Scenes.Discovering69OrvinRant = function() {
 	Text.Add("You are taken momentarily aback by his vehemence, and point out that it was not allowing you to leave. Clearly unacceptable, especially in an inn of all places.", parse);
 };
 
-Room69Scenes.Discovering69ForceOutro = function() {
+Room69Scenes.Discovering69ForceOutro = () => {
 	const room69 = GAME().room69;
 	const party: Party = GAME().party;
 	const world = WORLD();
@@ -377,11 +377,11 @@ Room69Scenes.Discovering69ForceOutro = function() {
 	Text.NL();
 	if (party.Num() <= 1) {
 		parse.comp = "";
-	} else if (party.Num() == 2) {
+	} else if (party.Num() === 2) {
 		parse.comp = Text.Parse(", where you are greeted by a relieved [comp]", {comp: party.Get(1).name});
- } else { // (party.Num() > 2)
+ 	} else { // (party.Num() > 2)
 		parse.comp = ", where you are greeted by your relieved companions";
- }
+ 	}
 	Text.Add("You are not sure what to say to the distraught room, and step quietly out into the hallway[comp].", parse);
 	Text.NL();
 	Text.Add("You hear quiet sobs coming from the empty doorway behind you.", parse);
@@ -391,7 +391,7 @@ Room69Scenes.Discovering69ForceOutro = function() {
 	room69.flags.Rel = Room69Flags.RelFlags.BrokeDoor;
 	room69.flags.BadStart = Room69Flags.RelFlags.BrokeDoor;
 
-	Gui.NextPrompt(function() {
+	Gui.NextPrompt(() => {
 		party.location = world.loc.Rigard.Inn.common;
 		Text.Clear();
 
@@ -406,14 +406,14 @@ Room69Scenes.Discovering69ForceOutro = function() {
 		Text.Add("You’re stunned into silence momentarily, and before you can demand if he thinks kidnapping is some trivial thing, he’s pushing you out the door. <i>“Go. I need some time to sort out the mess you’ve caused.”</i>", parse);
 		Text.Flush();
 
-		Gui.NextPrompt(function() {
+		Gui.NextPrompt(() => {
 			MoveToLocation(world.loc.Rigard.Plaza, {hour: 1});
 		});
 	});
 };
 
 // Lets get to the sex already!
-Room69Scenes.Discovering69Sex = function() {
+Room69Scenes.Discovering69Sex = () => {
 	const room69 = GAME().room69;
 	const party: Party = GAME().party;
 	const player = GAME().player;
@@ -444,10 +444,10 @@ Room69Scenes.Discovering69Sex = function() {
 		ikname          : !RigardFlags.LB.KnowsOrvin() ? "the innkeeper" : "Orvin",
 	};
 
-	if (player.FirstBreastRow().nippleType == NippleType.lipple ||
-	   player.FirstBreastRow().nippleType == NippleType.cunt) {
+	if (player.FirstBreastRow().nippleType === NippleType.lipple ||
+	   player.FirstBreastRow().nippleType === NippleType.cunt) {
 		parse.nipType = ", slightly gaping";
-	} else if (player.FirstBreastRow().nippleType == NippleType.cock) {
+	} else if (player.FirstBreastRow().nippleType === NippleType.cock) {
 		parse.nipType = ", already rigid";
  } else {
 		parse.nipType = "";
@@ -489,9 +489,9 @@ Room69Scenes.Discovering69Sex = function() {
 			parse.muscle = "what lovely muscles you have";
 		} else if (player.MuscleTone() > 0.33) {
 			parse.muscle = "a little soft, but steel underneath. A delicious combination";
- } else {
+ 		} else {
 			parse.muscle = "so ample, so cuddly";
- }
+ 		}
 		Text.Add("As you begin removing your [topArmorDesc], the sheet slips lightly along your side, curving around you in a gentle embrace. <i>“Mm, [muscle]. I think we are going have a lot of fun tonight,”</i> the voice comments, throaty, almost purring.", parse);
 		Text.NL();
 		Text.Add("You finish with your [topArmorDesc], tossing it aside, and the encircling sheets take the opportunity to twine up to your nipples, running lightly around them, brushing gently across your skin. An involuntary shiver runs through you, and you bite your lip in excitement. The stimulation is not much in itself, but the playful cloth stirs a wave of images in your mind, showing where it might go next.", parse);
@@ -503,7 +503,7 @@ Room69Scenes.Discovering69Sex = function() {
 			parse.gen = Text.Parse("and your [multiCockDesc] stiffening in your [bottomArmorDesc]", parse);
 		} else if (player.FirstVag()) {
 			parse.gen = "and your lower lips growing moist";
- }
+ 		}
 		Text.Add("At the sheets’ ministrations, you feel your breathing become heavier, [gen]. Relentlessly, the cloth continues its attentions. Caressing, tickling, brushing, its motions gentle, yet deliberate, driving you further and further in your mindless excitement.", parse);
 		Text.NL();
 		Text.Add("You reach downward desperately, not sure how much longer you can endure this endless teasing. The tentacles tighten around your chest momentarily and you wonder if Sixtynine plans to stop you, but they release you just as quickly. <i>“Yes, you’d better take that off. We won’t be able to get to the real fun with it in the way.”</i>", parse);
@@ -514,9 +514,9 @@ Room69Scenes.Discovering69Sex = function() {
 		parse.gen = Text.Parse("wet opening and rigid erection[s]", {s: player.NumCocks() > 1 ? "s" : ""});
 	} else if (player.FirstCock()) {
 		parse.gen = Text.Parse("rigid erection[s]", {s: player.NumCocks() > 1 ? "s" : ""});
- } else if (player.FirstVag()) {
+ 	} else if (player.FirstVag()) {
 		parse.gen = Text.Parse("wet opening", parse);
- }
+ 	}
 	Text.Add(" With the path clear, your hands do not hesitate in plunging toward your [gen]. <i>“Ah-ah,”</i> Sixtynine interrupts you. <i>“Just lie back and let me take care of everything. We wouldn’t want your climax to be over too quickly...”</i>", parse);
 	Text.NL();
 	Text.Add("The room has been good to you so far, and you decide to give it a chance here. You lie back on the bed, ", parse);
@@ -528,9 +528,9 @@ Room69Scenes.Discovering69Sex = function() {
 	Text.Add(" You can’t help but giggle as the soft tentacles brush along your [stomachDesc], tickling you.", parse);
 	Text.NL();
 	parse.oneof = player.NumCocks() > 1 ? " one of" : "";
-	parse.gen = player.NumCocks() > 1 ? "members" : player.NumCocks() == 1 ? "member" : player.FirstVag() ? "slit" : "crotch";
+	parse.gen = player.NumCocks() > 1 ? "members" : player.NumCocks() === 1 ? "member" : player.FirstVag() ? "slit" : "crotch";
 	Text.Add("Instead of going for[oneof] your [gen] as you had hoped, ", parse);
-	if (player.LowerBodyType() == LowerBodyType.Single) {
+	if (player.LowerBodyType() === LowerBodyType.Single) {
 		Text.Add("the sheets run part way down the length of your [legsDesc], tracing along your [skin] lovingly.", parse);
 	} else {
 		Text.Add("the sheets run part way down your legs before returning to trace along the curve of your inner thighs.", parse);
@@ -561,8 +561,8 @@ Room69Scenes.Discovering69Sex = function() {
 		Text.NL();
 		parse.first = player.NumCocks() > 2 ? " first" : "";
 		const largeCock = player.BiggestCock();
-		parse.cockTipDesc = function() { return largeCock.TipShort(); };
-		parse.cockDesc    = function() { return largeCock.Short(); };
+		parse.cockTipDesc = () => largeCock.TipShort();
+		parse.cockDesc    = () => largeCock.Short();
 		Text.Add("When the[first] tentacle reaches the tip, it curls around your [cockTipDesc], playing with the underside of your [cockDesc] until you’re nearly panting with excitement. It pauses and circles back, teasing the opening of your penis, pressing the tiniest way in before withdrawing, watching your reaction. <i>“Perhaps another time...”</i>", parse);
 		Text.NL();
 		parse.all     = player.NumCocks() > 2 ? " all" : "";
@@ -617,7 +617,7 @@ Room69Scenes.Discovering69Sex = function() {
 		Text.NL();
 		Text.Add("You simply moan in acceptance, as you feel the now enormous tentacle press another inch into you, stretching you very pleasantly, if a little painfully. It pushes deeper inside you bit by bit, making your breaths come in ragged gasps, as the mild pain is offset by the pleasure of the second tentacle lightly teasing your sensitive button.", parse);
 		Text.NL();
-		parse.womb = function() { return player.FirstVag().womb.Short(); };
+		parse.womb = () => player.FirstVag().womb.Short();
 		Text.Add("You arch your back and your eyes roll up in pleasure as the feeler finally bottoms out, barely brushing against the entrance to your [womb]. You feel wonderfully, deliciously full. Your insides are stimulated to capacity and even stretched slightly beyond, all with a surprising almost gentleness.", parse);
 		Text.NL();
 		Text.Add("That feeling is quickly forgotten, however, when the cloth tentacle starts moving. Already soft due to its material, it is further lubricated by the copious juices it has absorbed from you. It slides inside you smoothly, as if it belongs there, its curves and twists eagerly stimulating every inch.", parse);
@@ -634,7 +634,7 @@ Room69Scenes.Discovering69Sex = function() {
 	}
 	Text.Flush();
 
-	Gui.NextPrompt(function() {
+	Gui.NextPrompt(() => {
 		Text.Clear();
 		parse.cock = player.FirstCock() ? " At least you hope that’s what that is." : "";
 		Text.Add("You feel your consciousness returning, but even your eyelids feel heavy, weighed down with utter exhaustion.[cock] The bed is so comfortable, and it’s so pleasant to simply lie back and do nothing. And besides, you are reluctant to disturb the afterglow of bliss that suffuses your body.", parse);
@@ -669,7 +669,7 @@ Room69Scenes.Discovering69Sex = function() {
 		if (party.Num() > 2) {
 			parse.comp = "It’s time to find your companions and decide what you’re going to do next.";
 		}
-		if (party.Num() == 2) {
+		if (party.Num() === 2) {
 			parse.comp = Text.Parse("It’s time to find [name] and decide what you’re going to do next.", {name: party.Get(1).name});
 		} else {
 			parse.comp = "It’s time to decide what you’re going to do next.";
@@ -683,11 +683,11 @@ Room69Scenes.Discovering69Sex = function() {
 		room69.relation.IncreaseStat(100, 10);
 
 		if (party.Num() <= 1) {
-			Gui.NextPrompt(function() {
+			Gui.NextPrompt(() => {
 				MoveToLocation(world.loc.Rigard.Inn.common);
 			});
 		} else {
-			Gui.NextPrompt(function() {
+			Gui.NextPrompt(() => {
 				Text.Clear();
 				parse.s = party.Num() > 2 ? "s" : "";
 				Text.Add("After wandering through the hallways and seeing no one, you finally head down to ask [ikname] where your companion[s] went.", parse);
@@ -697,7 +697,7 @@ Room69Scenes.Discovering69Sex = function() {
 					parse.hisher = "their";
 					parse.heshe  = "they";
 					parse.internal  = "";
-				} else { // if(party.Num() == 2)
+				} else { // if(party.Num() === 2)
 					const p1 = party.Get(1);
 					parse.comp = p1.name;
 					parse.himher = p1.himher();
@@ -712,7 +712,7 @@ Room69Scenes.Discovering69Sex = function() {
 				Text.NL();
 
 				const scenes = new EncounterTable();
-				scenes.AddEnc(function() {
+				scenes.AddEnc(() => {
 					parse.name = kiakai.name;
 					if (kiakai.flags.Attitude >= KiakaiFlags.Attitude.Neutral) {
 						parse.reaction = "You continue to surprise me!";
@@ -720,29 +720,29 @@ Room69Scenes.Discovering69Sex = function() {
 						parse.reaction = "Nothing you do even surprises me anymore!";
 					}
 					Text.Add("<i>“[playername]! [reaction]”</i> [name] tries to look stern, but the effect is spoiled by an embarrassed blush.", parse);
-				}, 1.0, function() { return party.InParty(kiakai); });
-				scenes.AddEnc(function() {
+				}, 1.0, () => party.InParty(kiakai));
+				scenes.AddEnc(() => {
 					Text.Add("<i>“You go get ‘em! So tell me, how was she? Or was it a he? Details, details!”</i> Gwendy demands, literally on the edge of her seat with curiosity.", parse);
-				}, 1.0, function() { return party.InParty(gwendy); });
-				scenes.AddEnc(function() {
+				}, 1.0, () => party.InParty(gwendy));
+				scenes.AddEnc(() => {
 					Text.Add("<i>“Let’s go. There is real work to be done,”</i> Lei tells you. He’s acting like he doesn’t care, but you his eyes flicker over you in curiosity.", parse);
-				}, 1.0, function() { return party.InParty(lei); });
-				scenes.AddEnc(function() {
+				}, 1.0, () => party.InParty(lei));
+				scenes.AddEnc(() => {
 					Text.Add("<i>“You could have invited me too, you know,”</i> Roa blushes prettily.", parse);
-				}, 1.0, function() { return party.InParty(roa); });
+				}, 1.0, () => party.InParty(roa));
 				/* TODO
-				scenes.AddEnc(function() {
+				scenes.AddEnc(() => {
 					parse["master"] = player.mfTrue("master", "mistress");
 					Text.Add("<i>“Ophelia understand, [master],”</i> the rabbit nods happily, <i>“Ophelia also found some nice cocks to fuck her!”</i>", parse);
-				}, 1.0, function() { return party.InParty(ophelia); });
+				}, 1.0, () => party.InParty(ophelia));
 				*/
-				scenes.AddEnc(function() {
+				scenes.AddEnc(() => {
 					Text.Add("<i>“Having nightly adventures without me eh?”</i> Miranda grins at your squirming. <i>“Don’t worry, I know you’re too much of a slut to go without a good fucking for more than five minutes. Just tell me next time, I’ll sate that itch of yours.”</i>", parse);
-				}, 1.0, function() { return party.InParty(miranda); });
+				}, 1.0, () => party.InParty(miranda));
 				/* TODO: more companions
-				scenes.AddEnc(function() {
+				scenes.AddEnc(() => {
 					Text.Add("", parse);
-				}, 1.0, function() { return true; });
+				}, 1.0, () => true);
 				*/
 				scenes.Get();
 
@@ -755,7 +755,7 @@ Room69Scenes.Discovering69Sex = function() {
 	});
 };
 
-Room69Scenes.ApologizeTo69ForBreakingDoor = function() {
+Room69Scenes.ApologizeTo69ForBreakingDoor = () => {
 	const room69 = GAME().room69;
 	const player = GAME().player;
 
@@ -764,7 +764,7 @@ Room69Scenes.ApologizeTo69ForBreakingDoor = function() {
 	};
 	Text.Clear();
 
-	if (room69.flags.Hinges == Room69Flags.HingesFlags.No) {
+	if (room69.flags.Hinges === Room69Flags.HingesFlags.No) {
 		Text.Add("You head up to the third floor, feeling a little guilty about the way your last encounter with Sixtynine ended.", parse);
 		Text.NL();
 		Text.Add("An oak door has been installed to replace the one you broke, making the room blatantly stand out compared to the ones around it. Looks like they managed to finish the repairs very quickly, though you wonder if they sacrificed quality to get it done.", parse);
@@ -809,7 +809,7 @@ Room69Scenes.ApologizeTo69ForBreakingDoor = function() {
 	} else { // Not delivered hinges
 		Text.Add("<i>“Well. It’s you,”</i> Sixtynine greets you, still sulky despite letting you in. <i>“Does this mean you brought me my hinges?”</i>", parse);
 		Text.NL();
-		if (room69.flags.Hinges != Room69Flags.HingesFlags.HaveHinges) {
+		if (room69.flags.Hinges !== Room69Flags.HingesFlags.HaveHinges) {
 			Text.Add("You tell the room that you don’t have the hinges just yet, but you’re working on it.", parse);
 			Text.NL();
 			Text.Add("<i>“No hinges, no you being here!”</i> the voice exclaims imperiously. <i>“Begone!”</i>", parse);
@@ -839,7 +839,7 @@ Room69Scenes.ApologizeTo69ForBreakingDoor = function() {
 	}
 };
 
-Room69Scenes.ApologizeTo69ForBeingMean = function() {
+Room69Scenes.ApologizeTo69ForBeingMean = () => {
 	const room69 = GAME().room69;
 	const player = GAME().player;
 
@@ -942,7 +942,7 @@ Room69Scenes.ApologizeTo69ForBeingMean = function() {
 };
 
 // TODO: PLACEHOLDER
-Room69Scenes.Normal69 = function() {
+Room69Scenes.Normal69 = () => {
 	const parse: any = {
 
 	};
@@ -967,7 +967,7 @@ Room69Scenes.Normal69 = function() {
 };
 
 /*
-Room69Scenes.Discovering69 = function() {
+Room69Scenes.Discovering69 = () => {
 	let parse : any = {
 
 	};

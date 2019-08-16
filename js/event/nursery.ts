@@ -36,14 +36,14 @@ export class Nursery {
 		const storage: any = {};
 		if (this.TotalKids() > 0) {
 			const kids: any[] = [];
-			_.each(this.kids, function(kid) {
+			_.each(this.kids, (kid) => {
 				kids.push(kid.ToStorage());
 			});
 			storage.kids = kids;
 		}
 		const flags: any = {};
 		for (const flag in this.flags) {
-			if (this.flags[flag] != 0) {
+			if (this.flags[flag] !== 0) {
 				flags[flag] = this.flags[flag];
 			}
 		}
@@ -56,43 +56,43 @@ export class Nursery {
 		const that = this;
 		storage = storage || {};
 		const kids = storage.kids;
-		_.each(kids, function(kid) {
+		_.each(kids, (kid) => {
 			const k = new NurseryKid(kid);
 			that.kids.push(k);
 		});
-		for (const flag in storage.flags) {
-			this.flags[flag] = parseInt(storage.flags[flag]);
+		for (const flag of storage.flags) {
+			this.flags[flag] = parseInt(storage.flags[flag], 10);
 		}
 	}
 
 	public BirthedBy(mother: Entity) {
 		const ret: any[] = [];
-		_.each(this.kids, function(kid) {
-			if (kid.mother == mother) { ret.push(kid); }
+		_.each(this.kids, (kid) => {
+			if (kid.mother === mother) { ret.push(kid); }
 		});
 		return ret;
 	}
 	public FatheredBy(father: Entity) {
 		const ret: any[] = [];
-		_.each(this.kids, function(kid) {
-			if (kid.father == father) { ret.push(kid); }
+		_.each(this.kids, (kid) => {
+			if (kid.father === father) { ret.push(kid); }
 		});
 		return ret;
 	}
 	public TotalKids(person?: Entity) {
 		if (person) {
 			let num = 0;
-			_.each(this.BirthedBy(person), function(kid) {
+			_.each(this.BirthedBy(person), (kid) => {
 				num += kid.num;
 			});
-			_.each(this.FatheredBy(person), function(kid) {
+			_.each(this.FatheredBy(person), (kid) => {
 				num += kid.num;
 			});
 			return num;
 		}
 		// Default to all
 		let num = 0;
-		_.each(this.kids, function(kid) {
+		_.each(this.kids, (kid) => {
 			num += kid.num;
 		});
 		return num;
@@ -102,7 +102,7 @@ export class Nursery {
 		if (!newkid) { return; } // Shouldn't happen
 
 		let found = false;
-		_.each(this.kids, function(kid) {
+		_.each(this.kids, (kid) => {
 			if (kid.SameType(newkid)) {
 				kid.num += newkid.num;
 				found = true;
@@ -136,7 +136,7 @@ export class NurseryKid {
 		if (this.mother) { storage.m  = this.mother; }
 		if (this.father) { storage.f  = this.father; }
 		if (this.num) {    storage.nr = this.num.toFixed(); }
-		if (this.race != Race.Human) { storage.r = this.race.id.toFixed(); }
+		if (this.race !== Race.Human) { storage.r = this.race.id.toFixed(); }
 		return storage;
 	}
 
@@ -144,19 +144,19 @@ export class NurseryKid {
 		storage = storage || {};
 		if (storage.m) {  this.mother = storage.m; }
 		if (storage.f) {  this.father = storage.f; }
-		if (storage.nr) { this.num    = parseInt(storage.nr); }
-		this.race = (storage.r === undefined) ? this.race : RaceDesc.IdToRace[parseInt(storage.r)];
+		if (storage.nr) { this.num    = parseInt(storage.nr, 10); }
+		this.race = (storage.r === undefined) ? this.race : RaceDesc.IdToRace[parseInt(storage.r, 10)];
 	}
 
 	public SameType(kid: NurseryKid) {
-		if (kid.mother != this.mother) { return false; }
-		if (kid.father != this.father) { return false; }
-		if (kid.race   != this.race) {   return false; }
+		if (kid.mother !== this.mother) { return false; }
+		if (kid.father !== this.father) { return false; }
+		if (kid.race   !== this.race) {   return false; }
 		return true;
 	}
 }
 
-NurseryScenes.PrintPCbirthed = function() {
+NurseryScenes.PrintPCbirthed = () => {
 	const player = GAME().player;
 	const nursery: Nursery = GAME().nursery;
 	const kids = nursery.BirthedBy(player.ID);
@@ -167,7 +167,7 @@ NurseryScenes.PrintPCbirthed = function() {
 	if (kids.length > 0) {
 		Text.Add("<b>You’ve given birth to:</b>", parse);
 		Text.NL();
-		_.each(kids, function(kid) {
+		_.each(kids, (kid) => {
 			parse.Num  = _.capitalize(Text.NumToText(kid.num));
 			parse.ren  = kid.num > 1 ? "ren" : "";
 			parse.race = kid.race.qShort();
@@ -186,7 +186,7 @@ NurseryScenes.PrintPCbirthed = function() {
 	}
 };
 
-NurseryScenes.PrintPCfathered = function() {
+NurseryScenes.PrintPCfathered = () => {
 	const player = GAME().player;
 	const nursery: Nursery = GAME().nursery;
 
@@ -198,7 +198,7 @@ NurseryScenes.PrintPCfathered = function() {
 	if (kids.length > 0) {
 		Text.Add("<b>You’ve fathered:</b>", parse);
 		Text.NL();
-		_.each(kids, function(kid) {
+		_.each(kids, (kid) => {
 			parse.Num  = _.capitalize(Text.NumToText(kid.num));
 			parse.ren  = kid.num > 1 ? "ren" : "";
 			parse.race = kid.race.qShort();
@@ -217,7 +217,7 @@ NurseryScenes.PrintPCfathered = function() {
 	}
 };
 
-NurseryScenes.CareBlock = function(womb: Womb) {
+NurseryScenes.CareBlock = (womb: Womb) => {
 	const player = GAME().player;
 	const party: Party = GAME().party;
 	const nursery: Nursery = GAME().nursery;
@@ -238,8 +238,8 @@ NurseryScenes.CareBlock = function(womb: Womb) {
 	const father = Entity.IdToEntity(womb.father);
 	const mother = Entity.IdToEntity(womb.mother);
 
-	const PCmother = mother == player;
-	const PCfather = father == player;
+	const PCmother = mother === player;
+	const PCfather = father === player;
 	const yours = PCmother || PCfather;
 	parse.your = yours ? "your" : "the";
 
@@ -250,7 +250,7 @@ NurseryScenes.CareBlock = function(womb: Womb) {
 			nursery.flags.Met = NurseryFlags.Met.Visited;
 		}
 
-		const atNomads = party.location == world.loc.Plains.Nomads.Tent;
+		const atNomads = party.location === world.loc.Plains.Nomads.Tent;
 		party.location = world.loc.Plains.Nomads.Fireplace;
 
 		if (first) {
@@ -275,7 +275,7 @@ NurseryScenes.CareBlock = function(womb: Womb) {
 			Text.NL();
 			Text.Add("The wrinkled old man is in his usual spot by the fire, his long pipe smoking away, and looks up at you as you approach. His eyes widen a little as he takes in the newborn [infant][s] in your arms, but the mood soon passes and he settles back into his usual grumpy, taciturn self.", parse);
 			Text.NL();
-			if (player.Gender() == Gender.male) {
+			if (player.Gender() === Gender.male) {
 				parse.k = num > 1 ? "some kids" : "a kid";
 				Text.Add("<i>“So,”</i> he says at last. <i>“You went and found some girlie and knocked her up, and now you got [k] on your hands? I suppose you want me to do something about it?”</i>", parse);
 			} else { // Female
@@ -334,7 +334,7 @@ NurseryScenes.CareBlock = function(womb: Womb) {
 };
 
 // Pre gemstead (only available if actually you have kids, and only in act 1)
-NurseryScenes.Nomads = function() {
+NurseryScenes.Nomads = () => {
 	const party: Party = GAME().party;
 	const nursery: Nursery = GAME().nursery;
 	const world = WORLD();
@@ -367,7 +367,7 @@ NurseryScenes.Nomads = function() {
 	/* TODO Interactions
 	options.push({ nameStr : "name",
 		tooltip : "",
-		func : function() {
+		func : () => {
 			Text.Clear();
 			Text.Add("", parse);
 			Text.NL();
@@ -376,7 +376,7 @@ NurseryScenes.Nomads = function() {
 		}, enabled : true
 	});
 	*/
-	Gui.SetButtonsFromList(options, true, function() {
+	Gui.SetButtonsFromList(options, true, () => {
 		party.location = world.loc.Plains.Nomads.Fireplace;
 		Gui.PrintDefaultOptions();
 	});

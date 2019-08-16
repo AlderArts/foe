@@ -190,7 +190,7 @@ export class Miranda extends Entity {
 
 				that.OrgasmCum();
 				Text.Flush();
-				Gui.NextPrompt(function() {
+				Gui.NextPrompt(() => {
 					that.Interact(switchSpot);
 				});
 			}, enabled : true,
@@ -213,17 +213,17 @@ export class Miranda extends Entity {
 		location = location || party.location;
 		if (WorldTime().hour >= 7 && WorldTime().hour < 19) {
 			// Work
-			if (WorldTime().day % 3 == 0) {
-				return (location == world.loc.Rigard.Barracks.common);
-			} else if (WorldTime().day % 3 == 1) {
-				return (location == world.loc.Plains.Gate) || (location == world.loc.Rigard.Gate);
+			if (WorldTime().day % 3 === 0) {
+				return (location === world.loc.Rigard.Barracks.common);
+			} else if (WorldTime().day % 3 === 1) {
+				return (location === world.loc.Plains.Gate) || (location === world.loc.Rigard.Gate);
  } else {
-				return (location == world.loc.Rigard.Slums.Gate);
+				return (location === world.loc.Rigard.Slums.Gate);
  }
 		} else if (WorldTime().hour >= 19 || WorldTime().hour < 2) {
-			return (location == world.loc.Rigard.Tavern.common);
+			return (location === world.loc.Rigard.Tavern.common);
  } else {
-			return (location == world.loc.Rigard.Residential.miranda);
+			return (location === world.loc.Rigard.Residential.miranda);
  }
 	}
 
