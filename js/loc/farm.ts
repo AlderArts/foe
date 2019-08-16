@@ -23,10 +23,10 @@ export class Farm {
 	}
 
 	public FromStorage(storage: any) {
-		this.coin = parseInt(storage.coin) || this.coin;
+		this.coin = parseInt(storage.coin, 10) || this.coin;
 		// Load flags
-		for (const flag in storage.flags) {
-			this.flags[flag] = parseInt(storage.flags[flag]);
+		for (const flag of storage.flags) {
+			this.flags[flag] = parseInt(storage.flags[flag], 10);
 		}
 	}
 
@@ -43,6 +43,6 @@ export class Farm {
 	}
 
 	public Found() {
-		return this.flags.Visit != 0;
+		return this.flags.Visit !== 0;
 	}
 }

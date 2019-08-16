@@ -70,7 +70,7 @@ export namespace MarketScenes {
         TimeStep({hour: 2});
         Text.Flush();
 
-        Gui.NextPrompt(function() {
+        Gui.NextPrompt(() => {
             Text.Clear();
             Text.Add("When the attack comes, it’s swift and sudden. Four horses come crashing through the undergrowth, quickly surrounding your cart. The riders - three male and one female - are all wearing masks, and are armed with swords and cudgels.", parse);
             Text.NL();
@@ -96,7 +96,7 @@ export namespace MarketScenes {
             enemy.AddMember(new Bandit(Gender.female));
             const enc = new Encounter(enemy);
 
-            enc.onVictory   = function() {
+            enc.onVictory   = () => {
                 SetGameState(GameState.Event, Gui);
                 Text.Clear();
                 Text.Add("You round up the defeated bandits, tying them up with some rope from the cart. They look surly, but not overly dismayed by their situation. Gwendy steps forward, taking charge of questioning them.", parse);
@@ -122,15 +122,15 @@ export namespace MarketScenes {
 
                 gwendy.relation.IncreaseStat(100, 5);
 
-                Gui.Callstack.push(function() {
+                Gui.Callstack.push(() => {
                     MarketScenes.GoToMarketFirstAfterBandits(true);
                 });
 
-                Gui.NextPrompt(function() {
+                Gui.NextPrompt(() => {
                     Encounter.prototype.onVictory.call(enc);
                 });
             };
-            enc.onLoss      = function() {
+            enc.onLoss      = () => {
                 SetGameState(GameState.Event, Gui);
                 Text.Clear();
                 Text.Add("The bandits have defeated you, despite of the fight you put up. The sole female pins you down, putting a dagger to your throat. The leader has sauntered over to Gwendy, who is kneeling on all fours, gritting her teeth in rage.", parse);
@@ -163,11 +163,11 @@ export namespace MarketScenes {
                 Text.Add("<i>“Shit!”</i> she groans, surveying the mess that is her cargo. The marauders did a rough job of it, but the sight of smashed and soiled vegetables and spilled milk is disheartening. You help her save what can be saved, working in silence beside the fuming farmer.", parse);
                 Text.Flush();
 
-                Gui.Callstack.push(function() {
+                Gui.Callstack.push(() => {
                     MarketScenes.GoToMarketFirstAfterBandits(false);
                 });
 
-                Gui.NextPrompt(function() {
+                Gui.NextPrompt(() => {
                     Encounter.prototype.onLoss.call(enc);
                 });
             };
@@ -235,7 +235,7 @@ export namespace MarketScenes {
         TimeStep({minute: 30});
         Text.Flush();
 
-        Gui.NextPrompt(function() {
+        Gui.NextPrompt(() => {
             Text.Clear();
             parse.bumpkin = rigard.Access() ? ", looking around left and right in wonder at the sheer size of the city and the variety of its inhabitants" : "";
             Text.Add("You make your way inside the capital without further incident[bumpkin]. Gwendy takes a left, heading down a broad, bustling road, slowly weaving her way past the crowds. Eventually, the two of you reach the market district. The houses here look richer than the ones near the gates, and there is a greater number of shops and restaurants. The closer to the market you get, the more street vendors you see lining the sides of the road.", parse);

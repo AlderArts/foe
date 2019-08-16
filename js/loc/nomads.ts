@@ -32,8 +32,8 @@ const NomadsLoc = {
 };
 
 NomadsLoc.Tent.SaveSpot = "NomadsTent";
-NomadsLoc.Tent.safe = function() { return true; };
-NomadsLoc.Tent.description = function() {
+NomadsLoc.Tent.safe = () => true;
+NomadsLoc.Tent.description = () => {
 	let light;
 	if     (WorldTime().hour >= 6 && WorldTime().hour < 19) { light = "sunlight"; } else if (WorldTime().hour >= 19 || WorldTime().hour < 2) { light = "firelight"; } else { light = "moonlight"; }
 
@@ -43,13 +43,13 @@ NomadsLoc.Tent.description = function() {
 
 NomadsLoc.Tent.links.push(new Link(
 	"Outside", true, true,
-	function() {
+	() => {
 		let light;
 		if     (WorldTime().hour >= 6 && WorldTime().hour < 19) { light = "sunlight"; } else if (WorldTime().hour >= 19 || WorldTime().hour < 2) { light = "firelight"; } else { light = "moonlight"; }
 
 		Text.Add("Outside, the [light] illuminates several other tents that are similar to the one you are in now. ", {light});
 	},
-	function() {
+	() => {
 		MoveToLocation(NomadsLoc.Fireplace, {minute: 5});
 	},
 ));
@@ -63,7 +63,7 @@ MazeTest.AddRoom(3, 5);
 MazeTest.AddRoom(2, 5);
 MazeTest.AddRoom(4, 5);
 MazeTest.AddRoom(5, 5);
-MazeTest.GetRoom(5, 5).description = function() {
+MazeTest.GetRoom(5, 5).description = () => {
 	const parse: any = {};
 
 	Text.Add("Sample desc", parse);
@@ -71,10 +71,10 @@ MazeTest.GetRoom(5, 5).description = function() {
 };
 MazeTest.GetRoom(5, 5).events.push(new Link(
 	"Escape", true, true,
-	function() {
+	() => {
 		Text.Add("Here's the exit.");
 	},
-	function() {
+	() => {
 		MoveToLocation(NomadsLoc.Tent);
 	},
 ));
@@ -82,16 +82,16 @@ MazeTest.AddRoom(1, 1);
 
 // TODO TEST
 NomadsLoc.Tent.links.push(new Link(
-	"Maze", function() { return GetDEBUG(); }, true,
+	"Maze", () => GetDEBUG(), true,
 	null,
-	function() {
+	() => {
 		MoveToLocation(MazeTest.GetRoom(3, 3));
 	},
 ));
 // TODO /TEST --------------
 
 // Trigger this on stepping into the Nomads’ for the first time when season is active.
-NomadsLoc.Fireplace.onEntry = function() {
+NomadsLoc.Fireplace.onEntry = () => {
 	if (!(GameCache().flags.HW & Halloween.State.Intro) &&
 		(GetDEBUG() || Halloween.IsSeason()) &&
 		(WorldTime().hour >= 8) &&
@@ -102,7 +102,7 @@ NomadsLoc.Fireplace.onEntry = function() {
 	}
 };
 
-NomadsLoc.Fireplace.description = function() {
+NomadsLoc.Fireplace.description = () => {
 	Text.Add("The nomad camp is currently set up in the middle of a wide grassland spreading out in all directions. [TreeFar] In the middle of the gathering of disparate tents that make up the nomad camp - about twenty in total - is a large fire pit.", {TreeFar: WORLD().TreeFarDesc()});
 	Text.NL();
 	if (WorldTime().hour >= 7 && WorldTime().hour < 19) {
@@ -116,54 +116,54 @@ NomadsLoc.Fireplace.description = function() {
 };
 NomadsLoc.Fireplace.links.push(new Link(
 	"Crossroads", true, true,
-	function() {
+	() => {
 		Text.Add("A faint trail leads out across the plains toward a low outcropping where several larger paths cross. ");
 	},
-	function() {
+	() => {
 		MoveToLocation(WORLD().loc.Plains.Crossroads, {minute: 15});
 	},
 ));
 NomadsLoc.Fireplace.links.push(new Link(
 	"Tent", true, true,
-	function() {
+	() => {
 		Text.Add("Your own tent is nearby, should you need rest.");
 		Text.NL();
 	},
-	function() {
+	() => {
 		MoveToLocation(NomadsLoc.Tent, {minute: 5});
 	},
 ));
 NomadsLoc.Fireplace.links.push(new Link(
-	"Nursery", function() {
+	"Nursery", () => {
 		if (GlobalScenes.PortalsOpen()) { return false; }
 		return GAME().nursery.TotalKids() > 0;
 	}, true,
-	function() {
+	() => {
 		if (GlobalScenes.PortalsOpen()) { return; }
 		if (GAME().nursery.TotalKids() > 0) {
 			Text.Add("The nursery, where your kids are being taken care of, is nearby.");
 			Text.NL();
 		}
 	},
-	function() {
+	() => {
 		NurseryScenes.Nomads();
 	},
 ));
 // TODO TEMP CAVALCADE
 NomadsLoc.Fireplace.events.push(new Link(
-	"Cavalcade", function() { return NCavalcadeScenes.Enabled(); }, function() { return GAME().party.coin >= NCavalcadeScenes.Bet(); },
-	function() {
+	"Cavalcade", () => NCavalcadeScenes.Enabled(), () => GAME().party.coin >= NCavalcadeScenes.Bet(),
+	() => {
 		const estevan = GAME().estevan;
 		if (NCavalcadeScenes.Enabled()) {
 			Text.Add("Both Rosalin, Cale and Estevan seem to be around. Perhaps they are up for a game of Cavalcade?");
-			if (estevan.flags.Cheat == EstevanFlags.Cheat.Setup) {
+			if (estevan.flags.Cheat === EstevanFlags.Cheat.Setup) {
 				Text.Add(" You remind yourself that you’ve rigged this coming game together with Estevan in order to play a prank on Cale.");
 			}
 			Text.NL();
 			Text.Flush();
 		}
 	},
-	function() {
+	() => {
 		const estevan = GAME().estevan;
 		/* Old explanation
 		Text.Add("PLACEHOLDER TEXT");
@@ -195,7 +195,7 @@ NomadsLoc.Fireplace.events.push(new Link(
 		Text.Clear();
 		Text.Add("You round up the mismatched trio and ask them if they are up for a game of Cavalcade.");
 		Text.NL();
-		if (estevan.flags.Cheat == EstevanFlags.Cheat.Setup) {
+		if (estevan.flags.Cheat === EstevanFlags.Cheat.Setup) {
 			NCavalcadeScenes.CheatGame();
 		} else {
 			NCavalcadeScenes.RegularGame();
@@ -204,17 +204,17 @@ NomadsLoc.Fireplace.events.push(new Link(
 ));
 
 NomadsLoc.Fireplace.events.push(new Link(
-	"Chief", function() { return (WorldTime().hour >= 8 && WorldTime().hour < 22); }, true,
-	function() {
+	"Chief", () => (WorldTime().hour >= 8 && WorldTime().hour < 22), true,
+	() => {
 		if (!(WorldTime().hour >= 8 && WorldTime().hour < 22)) { return; }
 		ChiefScenes.Desc();
 	},
 	ChiefScenes.Interact,
 ));
 NomadsLoc.Fireplace.events.push(new Link(
-	function() { return GAME().cale.name; },
-	function() { return GAME().cale.IsAtLocation(NomadsLoc.Fireplace); }, true,
-	function() {
+	() => GAME().cale.name,
+	() => GAME().cale.IsAtLocation(NomadsLoc.Fireplace), true,
+	() => {
 		if (GAME().cale.IsAtLocation(NomadsLoc.Fireplace)) {
 			CaleScenes.Desc();
 		}
@@ -222,8 +222,8 @@ NomadsLoc.Fireplace.events.push(new Link(
 	CaleScenes.Interact,
 ));
 NomadsLoc.Fireplace.events.push(new Link(
-	function() { return (GAME().estevan.flags.Met == 0) ? "Satyr" : "Estevan"; }, function() { return GAME().estevan.IsAtLocation(); }, true,
-	function() {
+	() => (GAME().estevan.flags.Met === 0) ? "Satyr" : "Estevan", () => GAME().estevan.IsAtLocation(), true,
+	() => {
 		if (GAME().estevan.IsAtLocation()) {
 			EstevanScenes.Desc();
 		}
@@ -231,29 +231,29 @@ NomadsLoc.Fireplace.events.push(new Link(
 	EstevanScenes.Interact,
 ));
 NomadsLoc.Fireplace.events.push(new Link(
-	function() {
-		return GAME().magnus.flags.Met == 0 ? "Scholar" : "Magnus";
-	}, function() { return (WorldTime().hour >= 8 && WorldTime().hour < 22); }, true,
-	function() {
+	() => {
+		return GAME().magnus.flags.Met === 0 ? "Scholar" : "Magnus";
+	}, () => (WorldTime().hour >= 8 && WorldTime().hour < 22), true,
+	() => {
 		if (!(WorldTime().hour >= 8 && WorldTime().hour < 22)) { return; }
 		MagnusScenes.Desc();
 	},
 	MagnusScenes.Interact,
 ));
 NomadsLoc.Fireplace.events.push(new Link(
-	function() { return GAME().rosalin.flags.Met == 0 ? "Alchemist" : "Rosalin"; },
-	function() { return GAME().rosalin.IsAtLocation(NomadsLoc.Fireplace); }, true,
-	function() {
+	() => GAME().rosalin.flags.Met === 0 ? "Alchemist" : "Rosalin",
+	() => GAME().rosalin.IsAtLocation(NomadsLoc.Fireplace), true,
+	() => {
 		if (!GAME().rosalin.IsAtLocation(NomadsLoc.Fireplace)) { return; }
 		RosalinScenes.Desc();
 	},
 	RosalinScenes.Interact,
 	/*,
-	function() { return rosalin.flags["Met"] == 0 ? "Approach the catgirl alchemist." : "Talk with Rosalin the alchemist."; } */
+	() => rosalin.flags["Met"] === 0 ? "Approach the catgirl alchemist." : "Talk with Rosalin the alchemist."; } */
 ));
 NomadsLoc.Fireplace.events.push(new Link(
-	"Patchwork", function() { return (WorldTime().hour >= 8 && WorldTime().hour < 24); }, true,
-	function() {
+	"Patchwork", () => (WorldTime().hour >= 8 && WorldTime().hour < 24), true,
+	() => {
 		if (!(WorldTime().hour >= 8 && WorldTime().hour < 24)) { return; }
 		PatchworkScenes.Desc();
 	},
@@ -262,8 +262,8 @@ NomadsLoc.Fireplace.events.push(new Link(
 
 NomadsLoc.Fireplace.events.push(new Link(
 	"Momo",
-	function() { return GAME().momo.IsAtLocation(NomadsLoc.Fireplace); }, true,
-	function() {
+	() => GAME().momo.IsAtLocation(NomadsLoc.Fireplace), true,
+	() => {
 		const momo = GAME().momo;
 		if (momo.AtCamp()) {
 			Text.Add("A rather tatty tent has been set up close by the central cookfires for Momo, the dragon-girl.");
@@ -277,7 +277,7 @@ NomadsLoc.Fireplace.events.push(new Link(
 ));
 // #add “pie” option to nomads’ camp from 17-22 pm when Halloween season/debug is active.
 NomadsLoc.Fireplace.events.push(new Link(
-	"Pumpkin Pie", function() {
+	"Pumpkin Pie", () => {
 		if (!(GameCache().flags.HW & Halloween.State.Intro)) { return false; }
 		// Correct time of day
 		if ((WorldTime().hour < 17) || (WorldTime().hour >= 22)) { return false; }
@@ -285,12 +285,12 @@ NomadsLoc.Fireplace.events.push(new Link(
 		return Halloween.IsSeason();
 	}, true,
 	null,
-	function() {
+	() => {
 		HalloweenScenes.PumpkinPie();
 	},
 ));
 
-NomadsLoc.Fireplace.switchSpot = function() {
+NomadsLoc.Fireplace.switchSpot = () => {
 	return !GlobalScenes.PortalsOpen();
 };
 

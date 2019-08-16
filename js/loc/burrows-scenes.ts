@@ -47,9 +47,9 @@ export namespace BurrowsScenes {
             parse.comp = " and " + party.Get(1).name;
         } else if (!party.Alone()) {
             parse.comp = " and your companions";
- } else {
+        } else {
             parse.comp = "";
- }
+        }
 
         Text.Clear();
 
@@ -66,7 +66,7 @@ export namespace BurrowsScenes {
                 Text.Add("You still have some second thoughts about approaching the unpredictable mob. You decide to head back toward the crossroads.", parse);
                 Text.Flush();
 
-                Gui.NextPrompt(function() {
+                Gui.NextPrompt(() => {
                     MoveToLocation(WORLD().loc.Plains.Crossroads, {minute: 30});
                 });
             }, enabled : true,
@@ -82,20 +82,20 @@ export namespace BurrowsScenes {
 
                 // Create a new alpha
                 const alpha: any = new LagomorphAlpha(Gender.Random());
-                parse.m1HeShe  = function() { return alpha.HeShe(); };
-                parse.m1heshe  = function() { return alpha.heshe(); };
-                parse.m1HisHer = function() { return alpha.HisHer(); };
-                parse.m1hisher = function() { return alpha.hisher(); };
-                parse.m1himher = function() { return alpha.himher(); };
+                parse.m1HeShe  = () => alpha.HeShe();
+                parse.m1heshe  = () => alpha.heshe();
+                parse.m1HisHer = () => alpha.HisHer();
+                parse.m1hisher = () => alpha.hisher();
+                parse.m1himher = () => alpha.himher();
 
                 Text.Add("After enduring their odd behavior for a few minutes, the messenger returns with one of the lagomorph alphas, a ", parse);
-                if (alpha.Gender() == Gender.male) {
+                if (alpha.Gender() === Gender.male) {
                     Text.Add("lean, strapping male, his rather impressive manhood on full display.", parse);
-                } else if (alpha.Gender() == Gender.herm) {
+                } else if (alpha.Gender() === Gender.herm) {
                     Text.Add("pretty hermaphrodite, her decently sized cock contrasting nicely with her feminine curves and full breasts.", parse);
- } else { // female
+                } else { // female
                     Text.Add("pretty female with a lean, slightly toned body. She makes no attempt to hide her full breasts and the damp patch between her legs from you.", parse);
- }
+                }
                 Text.Add(" [m1HeShe] approaches, hopping around you[comp], trying to evaluate if you are a threat, or perhaps something fun. The rabbit puffs up [m1hisher] chest, asking you imperiously:", parse);
                 Text.NL();
                 Text.Add("<i>“Friend? Foe?”</i> The intended intimidation is somewhat dulled by [m1hisher] kindergarten communication skills. You reply that you mean no harm, you just want to be taken to whoever is in charge.", parse);
@@ -107,7 +107,7 @@ export namespace BurrowsScenes {
                 Text.Add("Perhaps this wasn’t the most well thought out plan.", parse);
                 Text.Flush();
 
-                Gui.NextPrompt(function() {
+                Gui.NextPrompt(() => {
                     Text.Clear();
                     BurrowsScenes.Arrival(alpha);
                 });
@@ -135,9 +135,9 @@ export namespace BurrowsScenes {
             parse.comp = " and " + party.Get(1).name;
         } else if (!party.Alone()) {
             parse.comp = " and your companions";
- } else {
+        } else {
             parse.comp = "";
- }
+        }
 
         party.location = BurrowsLoc.Pit;
 
@@ -166,7 +166,7 @@ export namespace BurrowsScenes {
             Text.Add(" Dimly, you notice [p1name], gasping for air in the sludge beside you.", parse);
         } else if (!party.Alone()) {
             Text.Add(" Dimly, you notice your companions, gasping for air in the sludge beside you.", parse);
- }
+        }
         Text.NL();
         Text.Add("<i>“Just what is the meaning of this?”</i> Surprised, you look up, finding yet another lagomorph standing in front of you. Unlike her brothers and sisters, she is actually clothed, her curvy figure and generous bosom covered by a long white coat. A pair of glasses rest on the bridge of her tiny pink nose, lending her an almost scholarly appearance.", parse);
         Text.NL();
@@ -175,7 +175,7 @@ export namespace BurrowsScenes {
         Text.Add("The strange orator shoos your entourage away, and offers you a hand up. The entire situation is quite bizarre, as she doesn’t seem to mind the rampant orgy that is going on only a few feet away, but you are more than happy to grasp onto even a semblance of normality. Besides, she seems to be the only person here capable of forming sentences longer than two words, and that has to count for something, right?", parse);
         Text.Flush();
 
-        Gui.NextPrompt(function() {
+        Gui.NextPrompt(() => {
             Text.Clear();
 
             Text.Add("<i>“Terribly sorry about this, they get a bit carried away at times,”</i> the strange lagomorph laments, shaking her head. <i>“I am Ophelia, nice to meet you!”</i> You nod uncertainly, offering your own name.", parse);
@@ -232,9 +232,9 @@ export namespace BurrowsScenes {
             parse.comp = " and " + party.Get(1).name;
         } else if (!party.Alone()) {
             parse.comp = " and your companions";
- } else {
+        } else {
             parse.comp = "";
- }
+        }
 
         // [Burrows][Ophelia][Vena][Lab]
         const options = new Array();
@@ -307,7 +307,7 @@ export namespace BurrowsScenes {
                 func() {
                     Text.Clear();
                     Text.Add("<i>“This is my workplace. Neat, isn’t it?”</i> Ophelia looks proudly at the rather dank laboratory, filled with odd jars and vials. Her workbench is a jumble of scribbled notes and bubbling concoctions.", parse);
-                    if (rosalin.flags.Met == 1) {
+                    if (rosalin.flags.Met === 1) {
                         Text.Add(" By comparison, Rosalin runs a tight ship. That, if anything, should be a huge warning sign.", parse);
                     }
                     Text.NL();
@@ -328,7 +328,7 @@ export namespace BurrowsScenes {
         if (options.length > 0) {
             Gui.SetButtonsFromList(options);
         } else {
-            Gui.NextPrompt(function() {
+            Gui.NextPrompt(() => {
                 Text.Clear();
                 Text.Add("You have one more question... who exactly is her father?", parse);
                 Text.NL();
@@ -442,9 +442,9 @@ export namespace BurrowsScenes {
             parse.comp = " and " + party.Get(1).name;
         } else if (!party.Alone()) {
             parse.comp = " and your companions";
- } else {
+        } else {
             parse.comp = "";
- }
+        }
 
         // [Assault][Job]
         const options = new Array();
@@ -503,7 +503,7 @@ export namespace BurrowsScenes {
                 Text.Add("<i>“Bring me three of each kind, and do be careful.”</i> Ophelia concludes. She shuffles from foot to foot in front of the exit. <i>“I’m not allowed to go outside,”</i> she explains sheepishly. Nodding farewell to the bunny alchemist, you step out into the open air.", parse);
                 Text.Flush();
 
-                Gui.NextPrompt(function() {
+                Gui.NextPrompt(() => {
                     MoveToLocation(BurrowsLoc.Entrance, {hour: 1});
                 });
             }, enabled : true,
@@ -516,7 +516,7 @@ export namespace BurrowsScenes {
 //
 // Burrows entrance
 //
-BurrowsLoc.Entrance.description = function() {
+BurrowsLoc.Entrance.description = () => {
 	const burrows = GAME().burrows;
 	const parse: any = {
 		TreeFar : WORLD().TreeFarDesc(),
@@ -528,30 +528,30 @@ BurrowsLoc.Entrance.description = function() {
 	Text.Add("The burrows are located in a group of low hills on the plains, still quite a ways from the forest. [TreeFar]", parse);
 	Text.NL();
 	const scenes = new EncounterTable();
-	scenes.AddEnc(function() {
+	scenes.AddEnc(() => {
 		Text.Add("There is a curious group of rabbits gathered a short distance from the main tunnel. They are carrying what looks like makeshift farming tools, poking at a patch of ground haphazardly. It looks like they are trying to plant carrots.", parse);
-		if (WorldTime().season == Season.Winter) {
+		if (WorldTime().season === Season.Winter) {
 			Text.NL();
 			Text.Add("You consider telling them that the snow will probably complicate things, but they seem to be having fun.", parse);
 		}
 		Text.NL();
-	}, 1.0, function() { return burrows.BrainyActive(); });
-	scenes.AddEnc(function() {
+	}, 1.0, () => burrows.BrainyActive());
+	scenes.AddEnc(() => {
 		Text.Add("You see a strange structure being put together close by. A pile of scrap material is being stacked in the rough semblance of a house, but with barely enough room for a person to fit in. A short female lagomorph seems to be directing a small workforce in the assembly, gesturing insistently. Nodding to herself, she waves the others off and crawls inside the rickety hovel, smiling triumphantly at this defiance of the elements.", parse);
 		Text.NL();
 		Text.Add("The elements in question have something else to say about the matter though; a slight breeze causes the structure to wobble unsteadily before it slowly collapses in on itself, trapping the squealing architect beneath the rubble. Her fellow construction workers mill around uncertainly, apparently unsure if they should be helping her, before pulling away some of the material, freeing her head. She seems to be largely unharmed, although trapped in place.", parse);
 		Text.NL();
 		Text.Add("At her insistent pleading, most of the rubble covering the lagomorph is removed, but a particularly heavy crossbeam is pinning her midsection to the ground. The others make a few half-hearted attempts to pull it aside, but failing that, they shrug and make the best of the situation. Ignoring her muffled protests, three of the male workers set to filling her front and back, quickly reducing the enterprising architect to a moaning slut.", parse);
 		Text.NL();
-	}, 1.0, function() { return burrows.BrainyActive(); });
-	scenes.AddEnc(function() {
+	}, 1.0, () => burrows.BrainyActive());
+	scenes.AddEnc(() => {
 		Text.Add("A group of female lagomorphs are flocking around a bulging brute of a rabbit, at least twice as tall as the regular creatures. He looks almost as wide as he is tall, rippling with muscles, and from the delighted 'oohs' and 'aahs' of the crowd, he is likely sporting quite the third leg. The hulking rabbit is wearing a huge grin and not much else, flexing pompously for his admirers.", parse);
 		Text.NL();
-	}, 1.0, function() { return burrows.BruteActive(); });
-	scenes.AddEnc(function() {
+	}, 1.0, () => burrows.BruteActive());
+	scenes.AddEnc(() => {
 		Text.Add("There is a small crowd of rabbits gathered close by, hooting and cheering. The focus of their attention is a trio of lagomorphs, panting and grinding against each other. You judge them to be female at first due to their breasts, but all three seems to be sporting rather respectable dicks. One is on her back, cock flopping around freely as she is railed by one of her moaning companions. She, in turn, is getting a good fucking from the third hermaphrodite.", parse);
 		Text.NL();
-	}, 1.0, function() { return burrows.HermActive(); });
+	}, 1.0, () => burrows.HermActive());
 
 	scenes.Get();
 };
@@ -559,18 +559,18 @@ BurrowsLoc.Entrance.description = function() {
 BurrowsLoc.Entrance.links.push(new Link(
 	"Plains", true, true,
 	null,
-	function() {
+	() => {
 		MoveToLocation(WORLD().loc.Plains.Crossroads, {minute: 30});
 	},
 ));
 BurrowsLoc.Entrance.links.push(new Link(
 	"Inside", true, true,
 	null,
-	function() {
+	() => {
 		const burrows = GAME().burrows;
 		if (!burrows.LagonDefeated() && burrows.LagonChallenged()) {
             LagonScenes.ReturnToBurrowsAfterFight();
-		} else if (!burrows.LagonDefeated() && burrows.flags.Access == BurrowsFlags.AccessFlags.Stage5) {
+		} else if (!burrows.LagonDefeated() && burrows.flags.Access === BurrowsFlags.AccessFlags.Stage5) {
             LagonScenes.ReturnToBurrowsAfterScepter();
  } else {
 			MoveToLocation(BurrowsLoc.Tunnels, {minute: 10});
@@ -578,8 +578,8 @@ BurrowsLoc.Entrance.links.push(new Link(
 	},
 ));
 
-BurrowsLoc.Entrance.onEntry = function() {
-	if (GAME().burrows.flags.Access == BurrowsFlags.AccessFlags.KnownNotVisited) {
+BurrowsLoc.Entrance.onEntry = () => {
+	if (GAME().burrows.flags.Access === BurrowsFlags.AccessFlags.KnownNotVisited) {
 		BurrowsScenes.FirstApproach();
 	} else {
 		Gui.PrintDefaultOptions();
@@ -589,7 +589,7 @@ BurrowsLoc.Entrance.onEntry = function() {
 //
 // Tunnels
 //
-BurrowsLoc.Tunnels.description = function() {
+BurrowsLoc.Tunnels.description = () => {
 	Text.Add("The burrows are a confusing maze of tunnels criss-crossing through the hillside. There is no real way to navigate in the faintly lit darkness of the lagomorph stronghold, so moving around is a bit of guesswork. Still, you think you could find your way around, given some time. Echoes of the giant orgy in the Pit can be heard even here; finding that place will at least be easy.");
 	Text.NL();
 };
@@ -597,7 +597,7 @@ BurrowsLoc.Tunnels.description = function() {
 BurrowsLoc.Tunnels.links.push(new Link(
 	"Outside", true, true,
 	null,
-	function() {
+	() => {
 		MoveToLocation(BurrowsLoc.Entrance, {minute: 10});
 	},
 ));
@@ -605,7 +605,7 @@ BurrowsLoc.Tunnels.links.push(new Link(
 BurrowsLoc.Tunnels.links.push(new Link(
 	"Throne", true, true,
 	null,
-	function() {
+	() => {
 		MoveToLocation(BurrowsLoc.Throne, {minute: 10});
 	},
 ));
@@ -613,7 +613,7 @@ BurrowsLoc.Tunnels.links.push(new Link(
 BurrowsLoc.Tunnels.links.push(new Link(
 	"The Pit", true, true,
 	null,
-	function() {
+	() => {
 		MoveToLocation(BurrowsLoc.Pit, {minute: 10});
 	},
 ));
@@ -621,7 +621,7 @@ BurrowsLoc.Tunnels.links.push(new Link(
 BurrowsLoc.Tunnels.links.push(new Link(
 	"Lab", true, true,
 	null,
-	function() {
+	() => {
 		MoveToLocation(BurrowsLoc.Lab, {minute: 10});
 	},
 ));
@@ -632,7 +632,7 @@ BurrowsLoc.Tunnels.enc = new EncounterTable();
 //
 // Burrows throne room
 //
-BurrowsLoc.Throne.description = function() {
+BurrowsLoc.Throne.description = () => {
 	const burrows = GAME().burrows;
 	const parse: any = {
 		Lagon : burrows.VenaRestored() ? "Vena" : "Lagon",
@@ -660,29 +660,29 @@ BurrowsLoc.Throne.description = function() {
 BurrowsLoc.Throne.links.push(new Link(
 	"Tunnels", true, true,
 	null,
-	function() {
+	() => {
 		MoveToLocation(BurrowsLoc.Tunnels, {minute: 10});
 	},
 ));
 
 BurrowsLoc.Throne.events.push(new Link(
-	"Vena", function() {
+	"Vena", () => {
 		const burrows = GAME().burrows;
 		return burrows.VenaRestored();
 	}, true,
 	null,
-	function() {
+	() => {
 		VenaRScenes.Approach();
 	},
 ));
 
 BurrowsLoc.Throne.events.push(new Link(
-	"Lagon", function() {
+	"Lagon", () => {
 		const lagon = GAME().lagon;
 		return lagon.IsAtLocation();
 	}, true,
 	null,
-	function() {
+	() => {
 		const burrows = GAME().burrows;
 		const lagon = GAME().lagon;
 		if (burrows.LagonAlly() && !(lagon.flags.Talk & LagonFlags.Talk.AlliedFirst)) {
@@ -698,7 +698,7 @@ BurrowsLoc.Throne.events.push(new Link(
 //
 // Burrows Pit
 //
-BurrowsLoc.Pit.description = function() {
+BurrowsLoc.Pit.description = () => {
 	const player = GAME().player;
 	const burrows = GAME().burrows;
 	const parse: any = {
@@ -731,18 +731,18 @@ BurrowsLoc.Pit.description = function() {
 BurrowsLoc.Pit.links.push(new Link(
 	"Tunnels", true, true,
 	null,
-	function() {
+	() => {
 		MoveToLocation(BurrowsLoc.Tunnels, {minute: 10});
 	},
 ));
 
 BurrowsLoc.Pit.events.push(new Link(
-	"Vena", function() {
+	"Vena", () => {
 		const burrows = GAME().burrows;
 		return !burrows.VenaRestored();
 	}, true,
 	null,
-	function() {
+	() => {
 		VenaScenes.PitApproach();
 	},
 ));
@@ -750,27 +750,27 @@ BurrowsLoc.Pit.events.push(new Link(
 //
 // Burrows Lab
 //
-BurrowsLoc.Lab.description = function() {
+BurrowsLoc.Lab.description = () => {
 	OpheliaScenes.LabDesc();
 };
 
 BurrowsLoc.Lab.SaveSpot = "Burrows";
-BurrowsLoc.Lab.safe = function() { return true; };
+BurrowsLoc.Lab.safe = () => true;
 BurrowsLoc.Lab.links.push(new Link(
 	"Tunnels", true, true,
 	null,
-	function() {
+	() => {
 		MoveToLocation(BurrowsLoc.Tunnels, {minute: 10});
 	},
 ));
 
 BurrowsLoc.Lab.events.push(new Link(
-	"Ophelia", function() {
+	"Ophelia", () => {
 		const ophelia = GAME().ophelia;
 		return ophelia.IsAtLocation();
 	}, true,
 	null,
-	function() {
+	() => {
 		OpheliaScenes.LabApproach();
 	},
 ));

@@ -25,7 +25,7 @@ const KingsRoadLoc = {
 //
 // Hills, main hunting grounds
 //
-KingsRoadLoc.Road.description = function() {
+KingsRoadLoc.Road.description = () => {
 	const parse: any = {
 		TreeFar : WORLD().TreeFarDesc(),
 	};
@@ -35,42 +35,42 @@ KingsRoadLoc.Road.description = function() {
 KingsRoadLoc.Road.links.push(new Link(
 	"Rigard", true, true,
 	null,
-	function() {
+	() => {
 		MoveToLocation(WORLD().loc.Plains.Gate, {hour: 1});
 	},
 ));
 
 KingsRoadLoc.Road.events.push(new Link(
-	"Scepter", function() { return GAME().burrows.flags.Access == BurrowsFlags.AccessFlags.Stage4; }, true,
+	"Scepter", () => GAME().burrows.flags.Access === BurrowsFlags.AccessFlags.Stage4, true,
 	null,
-	function() {
+	() => {
 		GolScenes.SearchForScepter();
 	},
 ));
 
 KingsRoadLoc.Road.enc = new EncounterTable();
-KingsRoadLoc.Road.enc.AddEnc(function() {
+KingsRoadLoc.Road.enc.AddEnc(() => {
 	return MomoScenes.MomoEnc;
-}, 1.0, function() { return GAME().momo.Wandering(); });
+}, 1.0, () => GAME().momo.Wandering());
 
-KingsRoadLoc.Road.enc.AddEnc(function() {
+KingsRoadLoc.Road.enc.AddEnc(() => {
 	return PoetScenes.Entry;
-}, 1.0, function() { return true; });
+}, 1.0, () => true);
 
-KingsRoadLoc.Road.enc.AddEnc(function() {
+KingsRoadLoc.Road.enc.AddEnc(() => {
 	return RoamingScenes.FindSomeCoins;
-}, 0.5, function() { return true; });
+}, 0.5, () => true);
 
-KingsRoadLoc.Road.enc.AddEnc(function() {
+KingsRoadLoc.Road.enc.AddEnc(() => {
 	return RoamingScenes.KingdomPatrol;
-}, 1.0, function() { return true; });
-KingsRoadLoc.Road.enc.AddEnc(function() {
+}, 1.0, () => true);
+KingsRoadLoc.Road.enc.AddEnc(() => {
 	return RoamingScenes.Bandits;
-}, 5.0, function() { return GAME().rigard.bandits; });
+}, 5.0, () => GAME().rigard.bandits);
 
-KingsRoadLoc.Road.enc.AddEnc(function() {
+KingsRoadLoc.Road.enc.AddEnc(() => {
 	return RoamingScenes.FlowerPetal;
-}, 1.0, function() { return WorldTime().season != Season.Winter; });
+}, 1.0, () => WorldTime().season !== Season.Winter);
 
 KingsRoadLoc.Road.AddEncounter({
 	nameStr : "Wildcat",

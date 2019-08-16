@@ -27,22 +27,22 @@ const DesertLoc = {
 //
 // Den entrance
 //
-DesertLoc.Drylands.description = function() {
+DesertLoc.Drylands.description = () => {
 	Text.Add("You’re standing in the drylands, the border between the fertile plains and the barren desert. Beyond here, you’d need the help of the desert dwellers to cross; venturing into the sandy wastes on your own would be foolhardy.");
 };
 
 DesertLoc.Drylands.enc = new EncounterTable();
 
-DesertLoc.Drylands.enc.AddEnc(function() {
+DesertLoc.Drylands.enc.AddEnc(() => {
 	return MomoScenes.MomoEnc;
-}, 1.0, function() { return GAME().momo.Wandering(); });
+}, 1.0, () => GAME().momo.Wandering());
 
-DesertLoc.Drylands.enc.AddEnc(function() {
+DesertLoc.Drylands.enc.AddEnc(() => {
 	return OasisScenes.DesertCaravanEncounter;
-}, 1.0, function() { return true; });
+}, 1.0, () => true);
 
-DesertLoc.Drylands.enc.AddEnc(function() {
-	return function() {
+DesertLoc.Drylands.enc.AddEnc(() => {
+	return () => {
 		const party: Party = GAME().party;
 		const burrows = GAME().burrows;
 
@@ -68,22 +68,22 @@ DesertLoc.Drylands.enc.AddEnc(function() {
 
 		Gui.NextPrompt();
 	};
-}, 1.0, function() {
+}, 1.0, () => {
 	const burrows = GAME().burrows;
-	return burrows.Access() && burrows.flags.BruteTrait == BurrowsFlags.TraitFlags.Inactive;
+	return burrows.Access() && burrows.flags.BruteTrait === BurrowsFlags.TraitFlags.Inactive;
 });
 
 DesertLoc.Drylands.links.push(new Link(
 	"Crossroads", true, true,
 	null,
-	function() {
+	() => {
 		MoveToLocation(WORLD().loc.Plains.Crossroads, {hour: 2});
 	},
 ));
 
-DesertLoc.Drylands.enc.AddEnc(function() {
+DesertLoc.Drylands.enc.AddEnc(() => {
 	return RoamingScenes.FindSomeCoins;
-}, 0.5, function() { return true; });
+}, 0.5, () => true);
 
 DesertLoc.Drylands.AddEncounter({
 	nameStr : "Lizard",

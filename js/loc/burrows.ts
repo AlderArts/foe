@@ -81,20 +81,20 @@ export class Burrows {
 
 	public FromStorage(storage: any) {
 		// Load flags
-		for (const flag in storage.flags) {
-			this.flags[flag] = parseInt(storage.flags[flag]);
+		for (const flag of storage.flags) {
+			this.flags[flag] = parseInt(storage.flags[flag], 10);
 		}
 	}
 
 	public GenerateLagomorph(gender?: Gender) {
 		if (gender == null) {
 			const scenes = new EncounterTable();
-			scenes.AddEnc(function() {
+			scenes.AddEnc(() => {
 				gender = Gender.male;
-			}, 1.0, function() { return true; });
-			scenes.AddEnc(function() {
+			}, 1.0, () => true);
+			scenes.AddEnc(() => {
 				gender = Gender.female;
-			}, 1.0, function() { return true; });
+			}, 1.0, () => true);
 			scenes.Get();
 		}
 
@@ -104,12 +104,12 @@ export class Burrows {
 	public GenerateLagomorphAlpha(gender?: Gender) {
 		if (gender == null) {
 			const scenes = new EncounterTable();
-			scenes.AddEnc(function() {
+			scenes.AddEnc(() => {
 				gender = Gender.male;
-			}, 3.0, function() { return true; });
-			scenes.AddEnc(function() {
+			}, 3.0, () => true);
+			scenes.AddEnc(() => {
 				gender = Gender.female;
-			}, 2.0, function() { return true; });
+			}, 2.0, () => true);
 			scenes.Get();
 		}
 

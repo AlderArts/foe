@@ -22,25 +22,25 @@ const LakeLoc = {
 //
 // Shore
 //
-LakeLoc.Shore.description = function() {
+LakeLoc.Shore.description = () => {
 	Text.Add("You are standing on the shore of the great lake in which the river that passes Rigard pours its waters. Further upstream, you can see the slums and docks of the great city spread out. Despite this, the lake looks pristine; you figure there must be multiple sources of its waters. Further out, you spot an island, and beyond that Eden ends, and the cloudy void begins.");
 };
 
 LakeLoc.Shore.links.push(new Link(
 	"Slums", true, true,
 	null,
-	function() {
+	() => {
 		MoveToLocation(WORLD().loc.Rigard.Slums.Gate, {minute: 45});
 	},
 ));
 
 LakeLoc.Shore.enc = new EncounterTable();
-LakeLoc.Shore.enc.AddEnc(function() {
+LakeLoc.Shore.enc.AddEnc(() => {
 	return MomoScenes.MomoEnc;
-}, 1.0, function() { return GAME().momo.Wandering(); });
+}, 1.0, () => GAME().momo.Wandering());
 
-LakeLoc.Shore.enc.AddEnc(function() {
-	return function() {
+LakeLoc.Shore.enc.AddEnc(() => {
+	return () => {
 		const party: Party = GAME().party;
 		const burrows = GAME().burrows;
 		const parse: any = {
@@ -63,9 +63,9 @@ LakeLoc.Shore.enc.AddEnc(function() {
 
 		Gui.NextPrompt();
 	};
-}, 1.0, function() {
+}, 1.0, () => {
 	const burrows = GAME().burrows;
-	return burrows.Access() && burrows.flags.BrainyTrait == BurrowsFlags.TraitFlags.Inactive;
+	return burrows.Access() && burrows.flags.BrainyTrait === BurrowsFlags.TraitFlags.Inactive;
 });
 
 export { LakeLoc };

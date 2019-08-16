@@ -42,8 +42,8 @@ export class DryadGlade {
 	}
 
 	public FromStorage(storage: any) {
-		for (const flag in storage.flags) {
-			this.flags[flag] = parseInt(storage.flags[flag]);
+		for (const flag of storage.flags) {
+			this.flags[flag] = parseInt(storage.flags[flag], 10);
 		}
 	}
 
@@ -61,8 +61,8 @@ export class DryadGlade {
 const GladeLoc = new Event("Dryads' glade");
 
 GladeLoc.SaveSpot = "Dryads";
-GladeLoc.safe = function() { return true; };
-GladeLoc.description = function() {
+GladeLoc.safe = () => true;
+GladeLoc.description = () => {
 	const orchid = GAME().orchid;
 	const parse: any = {
 
@@ -83,26 +83,26 @@ GladeLoc.description = function() {
 GladeLoc.links.push(new Link(
 	"Leave", true, true,
 	null,
-	function() {
+	() => {
 		MoveToLocation(WORLD().loc.Forest.Outskirts, {minute: 15});
 	},
 ));
 GladeLoc.events.push(new Link(
 	"Mother tree", true, true,
 	null,
-	function() {
+	() => {
 		DryadGladeScenes.MotherTree();
 	},
 ));
 GladeLoc.events.push(new Link(
 	"Orchid", true, true,
 	null,
-	function() {
+	() => {
 		OrchidScenes.Interact();
 	},
 ));
 
-GladeLoc.onEntry = function() {
+GladeLoc.onEntry = () => {
 	const glade = GAME().glade;
 	if (glade.flags.Visit >= DryadGladeFlags.Visit.DefeatedOrchid) {
 		Gui.PrintDefaultOptions();
@@ -114,7 +114,7 @@ GladeLoc.onEntry = function() {
 	};
 
 	Text.Clear();
-	if (glade.flags.Visit == DryadGladeFlags.Visit.NotVisited) {
+	if (glade.flags.Visit === DryadGladeFlags.Visit.NotVisited) {
 		Text.Add("You’ve never been quite as deep into the forest as this before, and you can’t help but feel uneasy as the trees around you grow larger and larger. By now, you are beneath the canopy of the Great Tree itself, an oppressive shadow looming thousands of feet above you. In comparison, the trees around you seem small, but you have no doubt that they are very old. The deeper you delve, the harder it is to pass through the dense undergrowth, and thick tree trunks seem to be almost cutting off your path. If not for the court magician’s directions, you would have been hopelessly lost long ago.", parse);
 		Text.NL();
 		Text.Add("Just as you are beginning to wonder if Jeanne has sent you on a wild goose chase, you notice the trees thinning ahead.", parse);
@@ -140,7 +140,7 @@ GladeLoc.onEntry = function() {
 			Text.Add("You divert your course, staying clear of the glade for now. You should return when you are better prepared.", parse);
 			Text.Flush();
 
-			Gui.NextPrompt(function() {
+			Gui.NextPrompt(() => {
 				MoveToLocation(WORLD().loc.Forest.Outskirts, {minute: 15});
 			});
 		}, enabled : true,
@@ -149,7 +149,7 @@ GladeLoc.onEntry = function() {
 	Gui.SetButtonsFromList(options, false, null);
 };
 
-DryadGladeScenes.First = function() {
+DryadGladeScenes.First = () => {
 	const player = GAME().player;
 	const party: Party = GAME().party;
 	const orchid = GAME().orchid;
@@ -160,7 +160,7 @@ DryadGladeScenes.First = function() {
 
 	if (party.Num() <= 1) {
 		parse.comp = "";
-	} else if (party.Num() == 2) {
+	} else if (party.Num() === 2) {
 		parse.comp = " and " + party.Get(1).name;
  } else {
 		parse.comp = " and your companions";
@@ -168,7 +168,7 @@ DryadGladeScenes.First = function() {
 
 	Text.Clear();
 	Text.Add("Quickening your step, you[comp] soldier on, making for the clearing. You enter a meadow filled with flowers of every shape and color, illuminated by an eerie glow. For a moment, your senses are almost overwhelmed as a thousand different smells enter your nostrils. ", parse);
-	if (WorldTime().season == Season.Winter) {
+	if (WorldTime().season === Season.Winter) {
 		Text.Add("It is somehow getting a lot warmer, and you can’t spy even a single flake of snow in the field of flowers. It’s as if supernatural forces watch over the glade, keeping it in a state of perpetual summer. ", parse);
 	}
 	Text.Add("At the center of the clearing - beyond a spring of clear water - there is a huge tree; easily the largest one you have ever seen - not counting the hulking giant above. The goal of your quest, the Mother Tree, awaits you.", parse);
@@ -198,7 +198,7 @@ DryadGladeScenes.First = function() {
 	Text.Add("<i>“W-what is this?”</i> the Mother Tree cries out in distress, anxiously biting her lip. You hear the centaur’s screams turn to muffled moans as the betentacled assaulter presumably violates her. <i>“Who could-?”</i> The old dryad cuts off, gasping as the attacker enters the glade, striding toward you confidently.", parse);
 	Text.Flush();
 
-	Gui.NextPrompt(function() {
+	Gui.NextPrompt(() => {
 		Text.Clear();
 		Text.Add("The newcomer is another dryad; a creature of the forest, though she is very different from the one beside you. Her skin is green and her wild hair a yet darker green, though you can see pulsing purple veins spreading like a spider web over her lithe form. Her back is a mass of vile, squirming tentacles, spreading out behind her many times her length. Somewhere behind her, you see the centaur being dragged into the clearing, spit roasted with at least three tentacles in every one of her holes.", parse);
 		Text.NL();
@@ -225,13 +225,13 @@ DryadGladeScenes.First = function() {
 		enc.onLoss = DryadGladeScenes.FirstLoss;
 		enc.onVictory = DryadGladeScenes.FirstWin;
 
-		Gui.NextPrompt(function() {
+		Gui.NextPrompt(() => {
 			enc.Start();
 		});
 	});
 };
 
-DryadGladeScenes.FirstLoss = function() {
+DryadGladeScenes.FirstLoss = () => {
 	const player = GAME().player;
 	const party: Party = GAME().party;
 	const orchid = GAME().orchid;
@@ -247,7 +247,7 @@ DryadGladeScenes.FirstLoss = function() {
 
 	if (party.Num() <= 1) {
 		parse.comp = "";
-	} else if (party.Num() == 2) {
+	} else if (party.Num() === 2) {
 		parse.comp = " and " + party.Get(1).name;
  } else {
 		parse.comp = " and your companions";
@@ -269,7 +269,7 @@ DryadGladeScenes.FirstLoss = function() {
 		let count = 1;
 		const total = party.Num();
 
-		if (party.Num() == 2) {
+		if (party.Num() === 2) {
 			parse.comp = party.Get(1).name;
 		} else {
 			parse.comp = "your companions";
@@ -474,7 +474,7 @@ DryadGladeScenes.FirstLoss = function() {
 			Text.NL();
 		}
 
-		if (party.Num() == 2) {
+		if (party.Num() === 2) {
 			parse.comp = party.Get(1).name;
 		} else {
 			parse.comp = "your companions";
@@ -536,7 +536,7 @@ DryadGladeScenes.FirstLoss = function() {
  }
 	Text.Add("Shuddering, you collapse between the mother-daughter pair, your senses fading out.", parse);
 	if (party.Num() > 1) {
-		if (party.Num() == 2) {
+		if (party.Num() === 2) {
 			parse.comp = party.Get(1).name;
 		} else {
 			parse.comp = "your companions";
@@ -546,12 +546,12 @@ DryadGladeScenes.FirstLoss = function() {
 	}
 	Text.Flush();
 
-	Gui.NextPrompt(function() {
+	Gui.NextPrompt(() => {
 		TimeStep({ season : 2 });
 
 		if (party.Num() <= 1) {
 			parse.comp = "";
-		} else if (party.Num() == 2) {
+		} else if (party.Num() === 2) {
 			parse.comp = " and " + party.Get(1).name;
  } else {
 			parse.comp = " and your companions";
@@ -586,7 +586,7 @@ DryadGladeScenes.FirstWin = function(enc: Encounter) {
 	};
 	parse = kiakai.ParserPronouns(parse);
 
-	Gui.Callstack.push(function() {
+	Gui.Callstack.push(() => {
 		Text.Clear();
 		Text.Add("Orchid finally falls back, eyeing you hatefully. She lets go of Mother Tree, letting the exhausted dryad slump back against the trunk of her tree, dripping with corrupted cum. The defeated dryad looks like she still has some fight in her, but she can no longer muster the energy to move her tentacles and grab you.", parse);
 		Text.NL();
@@ -611,7 +611,7 @@ DryadGladeScenes.FirstWin = function(enc: Encounter) {
 
 		TimeStep({ hour : 1 });
 
-		Gui.NextPrompt(function() {
+		Gui.NextPrompt(() => {
 			Text.Clear();
 			Text.Add("Orchid sniffles, wiping away her tears as she tries to compose herself.", parse);
 			Text.NL();
@@ -659,7 +659,7 @@ DryadGladeScenes.FirstWin = function(enc: Encounter) {
 	Encounter.prototype.onVictory.call(enc);
 };
 
-DryadGladeScenes.MotherTree = function() {
+DryadGladeScenes.MotherTree = () => {
 	const parse: any = {
 
 	};
@@ -675,13 +675,13 @@ DryadGladeScenes.MotherTree = function() {
 	DryadGladeScenes.MotherTreePrompt();
 };
 
-DryadGladeScenes.MotherTreePrompt = function() {
+DryadGladeScenes.MotherTreePrompt = () => {
 	const player = GAME().player;
 	const party: Party = GAME().party;
 	const parse: any = {
 		playername : player.name,
 	};
-	if (party.Num() == 2) {
+	if (party.Num() === 2) {
 		parse.comp = " and " + party.Get(1).name;
 	} else if (party.Num() > 2) {
 		parse.comp = " and your companions";
@@ -703,7 +703,7 @@ DryadGladeScenes.MotherTreePrompt = function() {
 	});
 	/* TODO: Sex
 	options.push({ nameStr : "name",
-		func : function() {
+		func : () => {
 			Text.Clear();
 			Text.Add("", parse);
 			Text.NL();
@@ -728,7 +728,7 @@ DryadGladeScenes.MotherTreePrompt = function() {
 	Gui.SetButtonsFromList(options, true, Gui.PrintDefaultOptions);
 };
 
-DryadGladeScenes.MotherTreeTalk = function() {
+DryadGladeScenes.MotherTreeTalk = () => {
 	const player = GAME().player;
 	const parse: any = {
 		playername : player.name,

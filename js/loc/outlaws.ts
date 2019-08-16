@@ -34,9 +34,9 @@ const OutlawsLoc = {
 };
 
 OutlawsLoc.Camp.SaveSpot = "Outlaws";
-OutlawsLoc.Camp.safe = function() { return true; };
+OutlawsLoc.Camp.safe = () => true;
 // TODO
-OutlawsLoc.Camp.description = function() {
+OutlawsLoc.Camp.description = () => {
 	const outlaws = GAME().outlaws;
 	Text.Add("You are in the outlaws' camp.<br>");
 
@@ -47,13 +47,13 @@ OutlawsLoc.Camp.description = function() {
 	}
 };
 
-OutlawsLoc.Camp.onEntry = function() {
+OutlawsLoc.Camp.onEntry = () => {
 	const outlaws = GAME().outlaws;
 	const maria = GAME().maria;
 	const vaughn = GAME().vaughn;
 	const rigard = GAME().rigard;
 	const cveta = GAME().cveta;
-	if (outlaws.Rep() >= 10 && outlaws.flags.Met == OutlawsFlags.Met.Bouqet && outlaws.mainQuestTimer.Expired()) {
+	if (outlaws.Rep() >= 10 && outlaws.flags.Met === OutlawsFlags.Met.Bouqet && outlaws.mainQuestTimer.Expired()) {
 		OutlawsScenes.PathIntoRigardInitiation();
 	} else if (outlaws.Rep() >= 15 && rigard.Krawitz.Q >= RigardFlags.KrawitzQ.CaughtTerry && cveta.flags.Met < CvetaFlags.Met.MariaTalk) {
 		CvetaScenes.MariaTalkFirst();
@@ -75,7 +75,7 @@ OutlawsLoc.Camp.onEntry = function() {
 OutlawsLoc.Camp.links.push(new Link(
 	"Forest", true, true,
 	null,
-	function() {
+	() => {
 		MoveToLocation(WORLD().loc.Forest.Outskirts, {hour: 1});
 	},
 ));
@@ -83,118 +83,118 @@ OutlawsLoc.Camp.links.push(new Link(
 OutlawsLoc.Camp.links.push(new Link(
 	"Infirmary", true, true,
 	null,
-	function() {
+	() => {
 		MoveToLocation(OutlawsLoc.Infirmary, {minute: 5});
 	},
 ));
 
 OutlawsLoc.Camp.links.push(new Link(
-	"Tower", function() {
+	"Tower", () => {
 		const outlaws = GAME().outlaws;
-		return outlaws.flags.BullTower == OutlawsFlags.BullTowerQuest.Initiated;
+		return outlaws.flags.BullTower === OutlawsFlags.BullTowerQuest.Initiated;
 	}, true,
 	null,
-	function() {
+	() => {
 		BullTowerScenes.MovingOut();
 	},
 ));
 
 OutlawsLoc.Camp.events.push(new Link(
-	"Maria", function() {
+	"Maria", () => {
 		const maria = GAME().maria;
 		const time = maria.IsAtLocation();
 		return time;
 	}, true,
-	function() {
+	() => {
 		// TODO
 	},
-	function() {
+	() => {
 		MariaScenes.CampInteract();
 	},
 ));
 
 OutlawsLoc.Camp.events.push(new Link(
-	"Vaughn", function() {
+	"Vaughn", () => {
 		const vaughn = GAME().vaughn;
 		const time = vaughn.IsAtLocation();
 		return time && vaughn.Met();
 	}, true,
-	function() {
+	() => {
 		const vaughn = GAME().vaughn;
 		if (vaughn.Met()) {
 			VaughnScenes.CampDesc();
 		}
 	},
-	function() {
+	() => {
 		VaughnScenes.CampApproach();
 	},
 ));
 
 OutlawsLoc.Camp.events.push(new Link(
-	"Cveta", function() {
+	"Cveta", () => {
 		const cveta = GAME().cveta;
 		const met  = cveta.flags.Met >= CvetaFlags.Met.Available;
 		const time = cveta.WakingTime();
 		return met && time;
 	}, true,
-	function() {
+	() => {
 		const cveta = GAME().cveta;
 		if (cveta.flags.Met >= CvetaFlags.Met.FirstMeeting) {
 			CvetaScenes.CampDesc();
 		}
 	},
-	function() {
+	() => {
 		CvetaScenes.Approach();
 	},
 ));
 
 OutlawsLoc.Camp.events.push(new Link(
-	"Performance", function() {
+	"Performance", () => {
 		const cveta = GAME().cveta;
 		const met  = cveta.flags.Met >= CvetaFlags.Met.FirstMeeting;
 		const time = cveta.PerformanceTime();
 		return met && time;
 	}, true,
 	null,
-	function() {
+	() => {
 		CvetaScenes.Performance();
 	},
 ));
 
 OutlawsLoc.Camp.enc = new EncounterTable();
-OutlawsLoc.Camp.enc.AddEnc(function() {
+OutlawsLoc.Camp.enc.AddEnc(() => {
 	return OutlawsScenes.Exploration.ChowTime;
-}, 1.0, function() { return WorldTime().hour >= 5 && WorldTime().hour < 22; });
-OutlawsLoc.Camp.enc.AddEnc(function() {
+}, 1.0, () => WorldTime().hour >= 5 && WorldTime().hour < 22);
+OutlawsLoc.Camp.enc.AddEnc(() => {
 	return OutlawsScenes.Exploration.Cavalcade;
-}, 1.0, function() { return OCavalcadeScenes.Enabled(); });
-OutlawsLoc.Camp.enc.AddEnc(function() {
+}, 1.0, () => OCavalcadeScenes.Enabled());
+OutlawsLoc.Camp.enc.AddEnc(() => {
 	return OutlawsScenes.Exploration.Archery;
-}, 1.0, function() { return GAME().outlaws.flags.Met >= OutlawsFlags.Met.MetBelinda && WorldTime().IsDay(); });
-OutlawsLoc.Camp.enc.AddEnc(function() {
+}, 1.0, () => GAME().outlaws.flags.Met >= OutlawsFlags.Met.MetBelinda && WorldTime().IsDay());
+OutlawsLoc.Camp.enc.AddEnc(() => {
 	return OutlawsScenes.Exploration.CampFollowers;
-}, 1.0, function() { return !WorldTime().IsDay(); });
-OutlawsLoc.Camp.enc.AddEnc(function() {
+}, 1.0, () => !WorldTime().IsDay());
+OutlawsLoc.Camp.enc.AddEnc(() => {
 	return OutlawsScenes.Exploration.Feeding;
-}, 1.0, function() { return true; });
-OutlawsLoc.Camp.enc.AddEnc(function() {
+}, 1.0, () => true);
+OutlawsLoc.Camp.enc.AddEnc(() => {
 	return OutlawsScenes.Exploration.Carpentry;
-}, 1.0, function() { return GAME().outlaws.flags.Met >= OutlawsFlags.Met.MetBelinda; });
-OutlawsLoc.Camp.enc.AddEnc(function() {
+}, 1.0, () => GAME().outlaws.flags.Met >= OutlawsFlags.Met.MetBelinda);
+OutlawsLoc.Camp.enc.AddEnc(() => {
 	return OutlawsScenes.Exploration.FactFinding;
-}, 1.0, function() { return GAME().outlaws.factTimer.Expired(); });
-OutlawsLoc.Camp.enc.AddEnc(function() {
+}, 1.0, () => GAME().outlaws.factTimer.Expired());
+OutlawsLoc.Camp.enc.AddEnc(() => {
 	return OutlawsScenes.Exploration.DailyLife;
-}, 1.0, function() { return true; });
+}, 1.0, () => true);
 /* TODO
-OutlawsLoc.Camp.enc.AddEnc(function() {
-	return function() {
+OutlawsLoc.Camp.enc.AddEnc(() => {
+	return () => {
 
 	};
-}, 1.0, function() { return true; });
+}, 1.0, () => true);
 */
 
-OutlawsLoc.Infirmary.description = function() {
+OutlawsLoc.Infirmary.description = () => {
 	const terry = GAME().terry;
 	const party: Party = GAME().party;
 	const parse: any = {
@@ -204,14 +204,14 @@ OutlawsLoc.Infirmary.description = function() {
 	Text.Add("This large tent is what passes for an infirmary in the outlaws’ camp. As soon as you step through the open flaps, three rows of simple wooden cots - no more than tough cloth stretched out on wooden frames - greet your eyes; thankfully, only a few of them are filled at any one time. Further to the back, makeshift workbenches and shelves for storing herbs, minerals and medications; besides that, a burner that works away without rest. You note that ", parse);
 
 	const scenes = new EncounterTable();
-	scenes.AddEnc(function() {
+	scenes.AddEnc(() => {
 		Text.Add("it’s currently boiling water in a large tin pot, in which the good surgeon’s scalpel, tweezers and a host of other disturbingly sharp tools are immersed.", parse);
 	});
-	scenes.AddEnc(function() {
+	scenes.AddEnc(() => {
 		parse.t = party.InParty(terry) ? Text.Parse(", causing Terry to wrinkle [hisher] nose in disgust", { hisher: terry.hisher() }) : "";
 		Text.Add("it’s been attached to a flask and a maze of glass tubes, obviously a distillery - spirits go in one end, and purified alcohol comes out the other. The resultant smell that emerges with the steam and fills the air is sharp and harsh[t].", parse);
 	});
-	scenes.AddEnc(function() {
+	scenes.AddEnc(() => {
 		Text.Add("the flame has been turned down to slowly warm a crucible filled with fragrant herbs, a pleasant aroma wafting through the air that makes you feel restful and drowsy.", parse);
 	});
 	scenes.Get();
@@ -233,8 +233,8 @@ OutlawsLoc.Infirmary.description = function() {
 	Text.Add("Taking a moment to savor the peace the infirmary affords, you consider what you ought to do next.", parse);
 };
 
-OutlawsLoc.Infirmary.onEntry = function() {
-	if (GAME().aquilius.flags.Met == 0) {
+OutlawsLoc.Infirmary.onEntry = () => {
+	if (GAME().aquilius.flags.Met === 0) {
 		AquiliusScenes.FirstMeeting();
 	} else {
 		Gui.PrintDefaultOptions();
@@ -244,17 +244,17 @@ OutlawsLoc.Infirmary.onEntry = function() {
 OutlawsLoc.Infirmary.links.push(new Link(
 	"Outside", true, true,
 	null,
-	function() {
+	() => {
 		MoveToLocation(OutlawsLoc.Camp, {minute: 5});
 	},
 ));
 
 OutlawsLoc.Infirmary.events.push(new Link(
-	"Aquilius", function() {
+	"Aquilius", () => {
 		return GAME().aquilius.IsAtLocation();
 	}, true,
 	null,
-	function() {
+	() => {
 		AquiliusScenes.Approach();
 	},
 ));

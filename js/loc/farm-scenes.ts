@@ -254,7 +254,7 @@ export namespace FarmScenesIntro {
                     Text.NL();
                     Text.Add("She looks at you with a questioning look before asking:", parse);
                     Text.NL();
-                    if (player.body.Race() == Race.Human) {
+                    if (player.body.Race() === Race.Human) {
                         Text.Add("<i>“Why, were you thinking of coming around a bit more to keep me company, as a fellow human?”</i> She asks the question in an innocent enough tone, but her eyes look at you with some expectancy. You tease her, saying that you might just do that, if she doesn't mind. At that, she giggles before casting a flirtatious glance at you. <i>“Oh, I wouldn't mind at all. It might be a bit more fun with you around.”</i>", parse);
                     } else {
                         Text.Add("<i>“Thinking about introducing me to a few other humans... or maybe getting to know me a little better, as a [race]?”</i> Her question intrigues you, but you say it was simple curiosity, though you might come around more if she doesn't mind having a friend that isn't a regular on the ranch. <i>“Well, thanks, I'd appreciate that. You'd better follow through and visit often!”</i>", parse);
@@ -377,8 +377,7 @@ export namespace FarmScenesIntro {
             func() {
                 Text.Clear();
                 // Boons!
-                for (let i = 0; i < party.members.length; i++) {
-                    const c = party.members[i];
+                for (const c of party.members) {
                     c.strength.IncreaseStat(30, 2);
                     c.stamina.IncreaseStat(30, 2);
                     c.dexterity.IncreaseStat(30, 2);
@@ -434,7 +433,7 @@ export namespace FarmScenesIntro {
 
                 TimeStep({minute: 20});
 
-                Gui.NextPrompt(function() {
+                Gui.NextPrompt(() => {
                     MoveToLocation(WORLD().loc.Plains.Crossroads, {minute: 30});
                 });
             }, enabled : true,
@@ -585,8 +584,8 @@ export namespace FarmScenesIntro {
         let parse: any = {
             playername : player.name,
             eyeColor   : Color.Desc(player.Eyes().color),
-            mistermiss : player.body.Gender() == Gender.male ? "mister" : "miss",
-            MisterMiss : player.body.Gender() == Gender.male ? "Mister" : "Miss",
+            mistermiss : player.body.Gender() === Gender.male ? "mister" : "miss",
+            MisterMiss : player.body.Gender() === Gender.male ? "Mister" : "Miss",
         };
         parse = player.ParserTags(parse);
 
@@ -770,7 +769,7 @@ export namespace FarmScenesIntro {
         danie.relation.IncreaseStat(100, 10);
         danie.slut.IncreaseStat(100, 5);
 
-        // IF bits == true, cock, else vag
+        // IF bits === true, cock, else vag
 
         const parse: any = {
             playername : player.name,
@@ -785,7 +784,7 @@ export namespace FarmScenesIntro {
         Text.NL();
         Text.Add("With that resolved, you undo your pants to reveal ", parse);
 
-        if (player.body.Gender() == Gender.herm) {
+        if (player.body.Gender() === Gender.herm) {
             Text.Add("both sets of sexes, a small bit of confusion on Danie's face as she comments, <i>“Umm, [playername], I didn't know you had both of these! It's going to be hard if I have to do both...”</i> You chuckle slightly and tell her that it isn't necessary as you decide on ", parse);
         }
 
@@ -984,7 +983,7 @@ export namespace FarmScenesIntro {
         farm.flags.Visit = 1;
         Text.Add("<b>Found Gwendy's Farm (can now be visited from plains).</b>");
         Text.Flush();
-        Gui.NextPrompt(function() {
+        Gui.NextPrompt(() => {
             MoveToLocation(WORLD().loc.Plains.Crossroads, {minute: 30});
         });
     }
@@ -998,11 +997,11 @@ const FarmLoc = {
 };
 
 FarmLoc.Loft.events.push(new Link(
-	"Gwendy", function() {
+	"Gwendy", () => {
 		const gwendy = GAME().gwendy;
 		return gwendy.IsAtLocation(FarmLoc.Loft);
 	}, true,
-	function() {
+	() => {
 		const gwendy = GAME().gwendy;
 		if (gwendy.IsAtLocation(FarmLoc.Loft)) {
 			Text.Add("Gwendy is here.");
@@ -1014,11 +1013,11 @@ FarmLoc.Loft.events.push(new Link(
 	GwendyScenes.LoftPrompt,
 ));
 FarmLoc.Barn.events.push(new Link(
-	"Gwendy", function() {
+	"Gwendy", () => {
 		const gwendy = GAME().gwendy;
 		return gwendy.IsAtLocation(FarmLoc.Barn);
 	}, true,
-	function() {
+	() => {
 		const gwendy = GAME().gwendy;
 		if (gwendy.IsAtLocation(FarmLoc.Barn)) {
 			Text.Add("Gwendy is here.");
@@ -1030,11 +1029,11 @@ FarmLoc.Barn.events.push(new Link(
 	GwendyScenes.BarnPrompt,
 ));
 FarmLoc.Fields.events.push(new Link(
-	"Gwendy", function() {
+	"Gwendy", () => {
 		const gwendy = GAME().gwendy;
 		return gwendy.IsAtLocation(FarmLoc.Fields);
 	}, true,
-	function() {
+	() => {
 		const gwendy = GAME().gwendy;
 		if (gwendy.IsAtLocation(FarmLoc.Fields)) {
 			Text.Add("Gwendy is here.");
@@ -1049,22 +1048,22 @@ FarmLoc.Fields.events.push(new Link(
 //
 // Gwendy's farm, the fields
 //
-FarmLoc.Fields.description = function() {
+FarmLoc.Fields.description = () => {
 	Text.Add("Fields.");
 	Text.NL();
 };
 
 // Set up Layla events
-FarmLoc.Fields.onEntry = function(x: any, from: any) {
-	if (from == WORLD().loc.Plains.Crossroads) {
+FarmLoc.Fields.onEntry = (x: any, from: any) => {
+	if (from === WORLD().loc.Plains.Crossroads) {
 		if (LaylaScenes.FarmMeetingTrigger(true)) { return; }
 	}
 	Gui.PrintDefaultOptions();
 };
 
 FarmLoc.Fields.enc = new EncounterTable();
-FarmLoc.Fields.enc.AddEnc(function() {
-	return function() {
+FarmLoc.Fields.enc.AddEnc(() => {
+	return () => {
 		const party: Party = GAME().party;
 		Text.Clear();
 
@@ -1077,14 +1076,14 @@ FarmLoc.Fields.enc.AddEnc(function() {
 		Text.Flush();
 		Gui.NextPrompt();
 	};
-}, 1.0, function() { return WorldTime().season != Season.Winter; });
+}, 1.0, () => WorldTime().season !== Season.Winter);
 
-FarmLoc.Fields.enc.AddEnc(function() {
+FarmLoc.Fields.enc.AddEnc(() => {
 	return RoamingScenes.FlowerPetal;
-}, 1.0, function() { return WorldTime().season != Season.Winter; });
+}, 1.0, () => WorldTime().season !== Season.Winter);
 
-FarmLoc.Fields.enc.AddEnc(function() {
-	return function() {
+FarmLoc.Fields.enc.AddEnc(() => {
+	return () => {
 		const party: Party = GAME().party;
 		Text.Clear();
 
@@ -1098,19 +1097,19 @@ FarmLoc.Fields.enc.AddEnc(function() {
 		Text.Flush();
 		Gui.NextPrompt();
 	};
-}, 1.0, function() { return WorldTime().season != Season.Winter; });
+}, 1.0, () => WorldTime().season !== Season.Winter);
 
 FarmLoc.Fields.links.push(new Link(
 	"Crossroads", true, true,
 	null,
-	function() {
+	() => {
 		MoveToLocation(WORLD().loc.Plains.Crossroads, {minute: 30});
 	},
 ));
 FarmLoc.Fields.links.push(new Link(
 	"Barn", true, true,
 	null,
-	function() {
+	() => {
 		MoveToLocation(FarmLoc.Barn, {minute: 5});
 	},
 ));
@@ -1118,21 +1117,21 @@ FarmLoc.Fields.links.push(new Link(
 //
 // Gwendy's barn
 //
-FarmLoc.Barn.description = function() {
+FarmLoc.Barn.description = () => {
 	Text.Add("Barn.");
 	Text.NL();
 };
 FarmLoc.Barn.links.push(new Link(
 	"Fields", true, true,
 	null,
-	function() {
+	() => {
 		MoveToLocation(FarmLoc.Fields, {minute: 5});
 	},
 ));
 FarmLoc.Barn.links.push(new Link(
 	"Loft", true, true,
 	null,
-	function() {
+	() => {
 		MoveToLocation(FarmLoc.Loft, {minute: 5});
 	},
 ));
@@ -1141,20 +1140,20 @@ FarmLoc.Barn.links.push(new Link(
 // Gwendy's loft
 //
 FarmLoc.Loft.SaveSpot   = "GwendysLoft";
-FarmLoc.Loft.safe       = function() { return true; };
-FarmLoc.Loft.description = function() {
+FarmLoc.Loft.safe       = () => true;
+FarmLoc.Loft.description = () => {
 	Text.Add("Gwendy's loft. ");
 	Text.NL();
 };
 FarmLoc.Loft.links.push(new Link(
 	"Climb down", true, true,
 	null,
-	function() {
+	() => {
 		MoveToLocation(FarmLoc.Barn, {minute: 5});
 	},
 ));
 
-FarmLoc.Loft.SleepFunc = function() {
+FarmLoc.Loft.SleepFunc = () => {
 	const party: Party = GAME().party;
 
 	const parse: any = {
@@ -1174,7 +1173,7 @@ FarmLoc.Loft.SleepFunc = function() {
 
 	Text.Flush();
 
-	const func = function(dream: any) {
+	const func = (dream: any) => {
 		TimeStep({hour: 8});
 		party.Sleep();
 
@@ -1187,7 +1186,7 @@ FarmLoc.Loft.SleepFunc = function() {
 		Gui.PrintDefaultOptions(true);
 	};
 
-	Gui.NextPrompt(function() {
+	Gui.NextPrompt(() => {
 		Text.Clear();
 
 		DreamsScenes.Entry(func);

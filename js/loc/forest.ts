@@ -34,13 +34,13 @@ const ForestLoc = {
 // Forest
 //
 
-ForestLoc.Outskirts.description = function() {
+ForestLoc.Outskirts.description = () => {
 	Text.Add("You are at the outskirts of a deep forest. With trees and stuff.<br>");
 };
 
 ForestLoc.Outskirts.enc = new EncounterTable();
-ForestLoc.Outskirts.enc.AddEnc(function() {
-	return function() {
+ForestLoc.Outskirts.enc.AddEnc(() => {
+	return () => {
 		const party: Party = GAME().party;
 		Text.Clear();
 
@@ -53,9 +53,9 @@ ForestLoc.Outskirts.enc.AddEnc(function() {
 		TimeStep({minute: 15});
 		Gui.NextPrompt();
 	};
-}, 1.0, function() { return WorldTime().season != Season.Winter; });
-ForestLoc.Outskirts.enc.AddEnc(function() {
-	return function() {
+}, 1.0, () => WorldTime().season !== Season.Winter);
+ForestLoc.Outskirts.enc.AddEnc(() => {
+	return () => {
 		const party: Party = GAME().party;
 		Text.Clear();
 
@@ -68,9 +68,9 @@ ForestLoc.Outskirts.enc.AddEnc(function() {
 		TimeStep({minute: 15});
 		Gui.NextPrompt();
 	};
-}, 1.0, function() { return WorldTime().season != Season.Winter; });
-ForestLoc.Outskirts.enc.AddEnc(function() {
-	return function() {
+}, 1.0, () => WorldTime().season !== Season.Winter);
+ForestLoc.Outskirts.enc.AddEnc(() => {
+	return () => {
 		const party: Party = GAME().party;
 		Text.Clear();
 
@@ -83,9 +83,9 @@ ForestLoc.Outskirts.enc.AddEnc(function() {
 		TimeStep({minute: 15});
 		Gui.NextPrompt();
 	};
-}, 1.0, function() { return WorldTime().season != Season.Winter; });
-ForestLoc.Outskirts.enc.AddEnc(function() {
-	return function() {
+}, 1.0, () => WorldTime().season !== Season.Winter);
+ForestLoc.Outskirts.enc.AddEnc(() => {
+	return () => {
 		const party: Party = GAME().party;
 		Text.Clear();
 
@@ -98,9 +98,9 @@ ForestLoc.Outskirts.enc.AddEnc(function() {
 		TimeStep({minute: 15});
 		Gui.NextPrompt();
 	};
-}, 1.0, function() { return WorldTime().season != Season.Winter; });
-ForestLoc.Outskirts.enc.AddEnc(function() {
-	return function() {
+}, 1.0, () => WorldTime().season !== Season.Winter);
+ForestLoc.Outskirts.enc.AddEnc(() => {
+	return () => {
 		const party: Party = GAME().party;
 		Text.Clear();
 
@@ -113,9 +113,9 @@ ForestLoc.Outskirts.enc.AddEnc(function() {
 		TimeStep({minute: 15});
 		Gui.NextPrompt();
 	};
-}, 1.0, function() { return true; });
-ForestLoc.Outskirts.enc.AddEnc(function() {
-	return function() {
+}, 1.0, () => true);
+ForestLoc.Outskirts.enc.AddEnc(() => {
+	return () => {
 		const party: Party = GAME().party;
 		const parse: any = {
 
@@ -131,9 +131,9 @@ ForestLoc.Outskirts.enc.AddEnc(function() {
 		TimeStep({minute: 15});
 		Gui.NextPrompt();
 	};
-}, 1.0, function() { return true; });
-ForestLoc.Outskirts.enc.AddEnc(function() {
-	return function() {
+}, 1.0, () => true);
+ForestLoc.Outskirts.enc.AddEnc(() => {
+	return () => {
 		const party: Party = GAME().party;
 		const parse: any = {
 
@@ -149,16 +149,16 @@ ForestLoc.Outskirts.enc.AddEnc(function() {
 		TimeStep({minute: 15});
 		Gui.NextPrompt();
 	};
-}, 1.0, function() { return true; });
-ForestLoc.Outskirts.enc.AddEnc(function() {
+}, 1.0, () => true);
+ForestLoc.Outskirts.enc.AddEnc(() => {
 	return RoamingScenes.FlowerPetal;
-}, 1.0, function() { return WorldTime().season != Season.Winter; });
+}, 1.0, () => WorldTime().season !== Season.Winter);
 
 // Add initial Maria event, only trigger 6-20
 ForestLoc.Outskirts.enc.AddEnc(
-	function() {
+	() => {
 		return MariaScenes.ForestMeeting;
-	}, 3.0, function() {
+	}, 3.0, () => {
 		return GlobalScenes.VisitedRigardGates() &&
 		       !GlobalScenes.VisitedOutlaws() &&
 		       (WorldTime().hour >= 6 && WorldTime().hour < 20);
@@ -182,16 +182,16 @@ ForestLoc.Outskirts.AddEncounter({
 	visible : true, enabled : true, hunt : true,
 });
 
-ForestLoc.Outskirts.enc.AddEnc(function() {
+ForestLoc.Outskirts.enc.AddEnc(() => {
 	return MomoScenes.MomoEnc;
-}, 1.0, function() { return GAME().momo.Wandering(); });
+}, 1.0, () => GAME().momo.Wandering());
 
-ForestLoc.Outskirts.enc.AddEnc(function() {
+ForestLoc.Outskirts.enc.AddEnc(() => {
 	return RoamingScenes.FindSomeCoins;
-}, 0.5, function() { return true; });
+}, 0.5, () => true);
 
-ForestLoc.Outskirts.enc.AddEnc(function() {
-	return function() {
+ForestLoc.Outskirts.enc.AddEnc(() => {
+	return () => {
 		const burrows = GAME().burrows;
 		const party: Party = GAME().party;
 		const parse: any = {
@@ -219,52 +219,52 @@ ForestLoc.Outskirts.enc.AddEnc(function() {
 
 		Gui.NextPrompt();
 	};
-}, 4.0, function() {
+}, 4.0, () => {
 	const burrows = GAME().burrows;
-	return burrows.Access() && burrows.flags.HermTrait == BurrowsFlags.TraitFlags.Inactive;
+	return burrows.Access() && burrows.flags.HermTrait === BurrowsFlags.TraitFlags.Inactive;
 });
 
 ForestLoc.Outskirts.links.push(new Link(
 	"Crossroads", true, true,
-	function() {
+	() => {
 		Text.Add("Behind you is the way back to the crossroads.<br>");
 	},
-	function() {
+	() => {
 		MoveToLocation(WORLD().loc.Plains.Crossroads, {hour: 2});
 	},
 ));
 ForestLoc.Outskirts.links.push(new Link(
-	"Outlaws", function() { return GlobalScenes.VisitedOutlaws(); }, true,
+	"Outlaws", () => GlobalScenes.VisitedOutlaws(), true,
 	null,
-	function() {
+	() => {
 		MoveToLocation(WORLD().loc.Outlaws.Camp, {hour: 1});
 	},
 ));
 ForestLoc.Outskirts.links.push(new Link(
-	"Glade", function() {
+	"Glade", () => {
 		const jeanne = GAME().jeanne;
 		return jeanne.flags.Met >= 1;
 	}, true,
 	null,
-	function() {
+	() => {
 		MoveToLocation(ForestLoc.Glade, {minute: 15});
 	},
 ));
 
 ForestLoc.Outskirts.events.push(new Link(
-	"Herbs", function() {
+	"Herbs", () => {
 		const aquilius = GAME().aquilius;
 		return aquilius.OnHerbsQuest() && !aquilius.OnHerbsQuestFinished();
 	}, true,
 	null,
-	function() {
+	() => {
 		AquiliusScenes.PickHerbs();
 	},
 ));
 ForestLoc.Outskirts.events.push(new Link(
-	"Nightshade", function() { return AscheTasksScenes.Nightshade.IsOn() && !AscheTasksScenes.Nightshade.IsSuccess(); }, true,
+	"Nightshade", () => AscheTasksScenes.Nightshade.IsOn() && !AscheTasksScenes.Nightshade.IsSuccess(), true,
 	null,
-	function() {
+	() => {
 		if (AscheTasksScenes.Nightshade.HasHelpFromAquilius()) {
 			AscheTasksScenes.Nightshade.FollowAquilius();
 		} else {

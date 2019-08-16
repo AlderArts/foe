@@ -30,7 +30,7 @@ const HighlandsLoc = {
 //
 // Hills, main hunting grounds
 //
-HighlandsLoc.Hills.description = function() {
+HighlandsLoc.Hills.description = () => {
 	Text.Add("The highlands are a much rougher part of Eden than the rolling plains below. A multitude of small lakes and moors dot the landscape, which looks like it had at some point been crinkled up by a large earthquake. Sheer cliffs make the area difficult to traverse, and if you don’t know where you’re going, you can easily end up having to retrace your steps.");
 	Text.NL();
 };
@@ -38,14 +38,14 @@ HighlandsLoc.Hills.description = function() {
 HighlandsLoc.Hills.links.push(new Link(
 	"Crossroads", true, true,
 	null,
-	function() {
+	() => {
 		MoveToLocation(WORLD().loc.Plains.Crossroads, {hour: 2});
 	},
 ));
 HighlandsLoc.Hills.links.push(new Link(
 	"Den entrance", true, true,
 	null,
-	function() {
+	() => {
 		MoveToLocation(WORLD().loc.DragonDen.Entry, {minute: 15});
 	},
 ));
@@ -108,58 +108,58 @@ HighlandsLoc.Hills.AddEncounter({
 	visible : true, enabled : true, hunt : true,
 });
 
-HighlandsLoc.Hills.enc.AddEnc(function() {
+HighlandsLoc.Hills.enc.AddEnc(() => {
 	return MomoScenes.MomoEnc;
-}, 1.0, function() { return GAME().momo.Wandering(); });
+}, 1.0, () => GAME().momo.Wandering());
 
-HighlandsLoc.Hills.enc.AddEnc(function() {
+HighlandsLoc.Hills.enc.AddEnc(() => {
 	return RoamingScenes.FlowerPetal;
-}, 1.0, function() { return WorldTime().season != Season.Winter; });
+}, 1.0, () => WorldTime().season !== Season.Winter);
 
 HighlandsLoc.Hills.events.push(new Link(
-	"Ginseng", function() {
-		return GAME().asche.flags.Tasks == AscheFlags.Tasks.Ginseng_Started;
+	"Ginseng", () => {
+		return GAME().asche.flags.Tasks === AscheFlags.Tasks.Ginseng_Started;
 	}, true,
 	null,
-	function() {
+	() => {
 		AscheTasksScenes.Ginseng.Highlands();
 	},
 ));
 
 HighlandsLoc.Hills.events.push(new Link(
-	"Spring", function() {
+	"Spring", () => {
 		// TODO Isla's string (put as loc rather than event)
 		return AscheTasksScenes.Spring.IsOn() && !AscheTasksScenes.Spring.IsSuccess();
 	}, true,
 	null,
-	function() {
+	() => {
 		AscheTasksScenes.Spring.Highlands();
 	},
 ));
 
 HighlandsLoc.Hills.links.push(new Link(
-	"Spring", function() {
+	"Spring", () => {
 		return Isla.Available();
 	}, true,
 	null,
-	function() {
+	() => {
 		MoveToLocation(HighlandsLoc.Spring, {minute: 10});
 	},
 ));
 
-HighlandsLoc.Spring.onEntry = function() {
+HighlandsLoc.Spring.onEntry = () => {
 	if (GAME().isla.flags.Met < IslaFlags.Met.Met) {
 		IslaScenes.Introduction();
 	} else {
 		Gui.PrintDefaultOptions();
 	}
 };
-HighlandsLoc.Spring.description = function() {
+HighlandsLoc.Spring.description = () => {
 	const parse: any = {};
 
 	Text.Add("You’re standing on the spring plateau. Nestled away against the mountainside with only an obscure, treacherous trail leading upwards from the foot, the place is usually empty save for the few signs of life which mark the fact that Isla’s made her home here, no matter how temporary.");
 	Text.NL();
-	if (WorldTime().season == Season.Winter) {
+	if (WorldTime().season === Season.Winter) {
 		Text.Add("Even in winter, the heat welling up from deep beneath the earth has warmed the soil to the point where the hot spring’s surrounded by a sizeable circle of green. Thickest at the spring’s rim, short blades of grass hold fast against the turning of the seasons, and clumps of tiny white wildflowers bloom from cracks in the rocky ground.");
 	} else {
 		Text.Add("Over the years, enough soil’s accumulated on the plateau to support some modicum of life - a thin carpet of grass, clumps of colorful mountain wildflowers, the occasional berry shrub. A flock of pigeons has gathered on the mossy stones that stand about the plateau’s rim, and flutter off at your approach.");
@@ -178,7 +178,7 @@ HighlandsLoc.Spring.description = function() {
 HighlandsLoc.Spring.links.push(new Link(
 	"Leave", true, true,
 	null,
-	function() {
+	() => {
 		MoveToLocation(HighlandsLoc.Hills, {minute: 10});
 	},
 ));
@@ -186,14 +186,14 @@ HighlandsLoc.Spring.links.push(new Link(
 HighlandsLoc.Spring.events.push(new Link(
 	"Isla", true, true,
 	null,
-	function() {
+	() => {
 		IslaScenes.Approach();
 	},
 ));
 HighlandsLoc.Spring.events.push(new Link(
 	"Bathe", true, true,
 	null,
-	function() {
+	() => {
 		IslaScenes.Bathe();
 	},
 ));
