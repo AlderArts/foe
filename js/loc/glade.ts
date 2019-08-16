@@ -3,6 +3,7 @@
  * Dryads' glade
  *
  */
+import * as _ from "lodash";
 
 import { Encounter } from "../combat";
 import { OrchidScenes } from "../enemy/orchid-scenes";
@@ -42,9 +43,9 @@ export class DryadGlade {
 	}
 
 	public FromStorage(storage: any) {
-		for (const flag of storage.flags) {
-			this.flags[flag] = parseInt(storage.flags[flag], 10);
-		}
+		_.forIn(storage.flags, (value, key) => {
+			this.flags[key] = parseInt(value, 10);
+		});
 	}
 
 	public Update(step: number) {

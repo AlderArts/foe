@@ -3,6 +3,8 @@
  * Define Twins (fighting entity)
  *
  */
+import * as _ from "lodash";
+
 import { Entity } from "../../entity";
 import { GAME, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
@@ -47,9 +49,9 @@ export class Twins {
 		if (storage.rumi) { this.rumi.FromStorage(storage.rumi); }
 		if (storage.rani) { this.rani.FromStorage(storage.rani); }
 		// Load flags
-		for (const flag of storage.flags) {
-			this.flags[flag] = parseInt(storage.flags[flag], 10);
-		}
+		_.forIn(storage.flags, (value, key) => {
+			this.flags[key] = parseInt(value, 10);
+		});
 
 		this.terryTimer.FromStorage(storage.Ttime);
 	}

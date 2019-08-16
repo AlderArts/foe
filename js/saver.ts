@@ -27,7 +27,7 @@ export namespace Saver {
 				options.push({ nameStr : "Game " + i,
 					func(obj: number) {
 						const prmpt = prompt("This will overwrite save slot " + obj + ", continue? \n\n Comment:");
-						if (prmpt != null) { SaveGame(obj, prmpt); }
+						if (prmpt !== null) { SaveGame(obj, prmpt); }
 					}, enabled : true, obj : i,
 				});
 			} else {
@@ -35,7 +35,7 @@ export namespace Saver {
 				options.push({ nameStr : "Game " + i,
 					func(obj: number) {
 						const prmpt = prompt("This will save to slot " + obj + ", continue? \n\n Comment:");
-						if (prmpt != null) { SaveGame(obj, prmpt); }
+						if (prmpt !== null) { SaveGame(obj, prmpt); }
 					}, enabled : true, obj : i,
 				});
 			}
@@ -59,7 +59,7 @@ export namespace Saver {
 	function SaveGame(slot: number, comment: string) {
 		GameToCache();
 		const seen: any[] = [];
-		const saveData = JSON.stringify(GameCache(), function(key, value) {
+		const saveData = JSON.stringify(GameCache(), (key, value) => {
 			if (typeof value === "object" && value !== null) {
 				if (seen.indexOf(value) !== -1) {
 					console.error("Circular reference found in the gameCache!\n" + key + ":", value);
@@ -90,12 +90,12 @@ export namespace Saver {
 		} else {
 			filename = prompt("SAVE TO FILE WILL NOT WORK IN OFFLINE MODE!\n\n Enter name of save file.");
 		}
-		if (filename && filename != "") {
+		if (filename && filename !== "") {
 			GameToCache();
 			const seen: any[] = [];
 			GenerateFile({filename, content: JSON.stringify(GameCache(),
-				function(key, val) {
-					if (typeof val == "object") {
+				(key, val) => {
+					if (typeof val === "object") {
 						if (seen.indexOf(val) >= 0) {
 							return;
 						}
@@ -180,7 +180,7 @@ export namespace Saver {
 	export function Clear() {
 		// localStorage.clear();
 		const conf = confirm("This will remove all local saves and settings, do you really want to continue?");
-		if (conf == true) {
+		if (conf === true) {
 			for (let i = 0; i < Saver.slots; i++) {
 				delete localStorage["save" + i];
 				delete localStorage["savedata" + i];
@@ -209,7 +209,7 @@ export namespace Saver {
 
 		const reader = new FileReader();
 
-		reader.onload = function(e) {
+		reader.onload = (e) => {
 			const target: any = e.target;
 			SetGameCache(JSON.parse(target.result));
 			CacheToGame();

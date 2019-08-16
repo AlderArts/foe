@@ -1,3 +1,5 @@
+import * as _ from "lodash";
+
 import { GetDEBUG } from "../app";
 import { GAME } from "./GAME";
 import { Gui } from "./gui";
@@ -6,7 +8,7 @@ import { Item, ItemSubtype, ItemType } from "./item";
 import { Party } from "./party";
 import { Text } from "./text";
 
-interface ShopInventory {
+interface IShopInventory {
 	it: Item;
 	num: number;
 	enabled: CallableFunction;
@@ -15,7 +17,7 @@ interface ShopInventory {
 }
 
 export class Shop {
-	public inventory: ShopInventory[];
+	public inventory: IShopInventory[];
 	public totalBought: number;
 	public totalSold: number;
 
@@ -52,14 +54,16 @@ export class Shop {
 
 	public ToStorage() {
 		const storage: any = {};
-		if (this.totalBought != 0) { storage.tb = this.totalBought.toFixed(); }
-		if (this.totalSold   != 0) { storage.ts = this.totalSold.toFixed(); }
+		if (this.totalBought !== 0) { storage.tb = this.totalBought.toFixed(); }
+		if (this.totalSold   !== 0) { storage.ts = this.totalSold.toFixed(); }
 		return storage;
 	}
 
 	public FromStorage(storage: any = {}) {
-		this.totalBought = !isNaN(parseInt(storage.tb)) ? parseInt(storage.tb) : this.totalBought;
-		this.totalSold   = !isNaN(parseInt(storage.ts)) ? parseInt(storage.ts) : this.totalSold;
+		const tb = parseInt(storage.tb, 10);
+		this.totalBought = !isNaN(tb) ? tb : this.totalBought;
+		const ts = parseInt(storage.ts, 10);
+		this.totalSold   = !isNaN(ts) ? ts : this.totalSold;
 	}
 
 	public AddItem(item: any, price: number, enabled?: CallableFunction, func?: CallableFunction, num?: number) {
@@ -83,7 +87,7 @@ export class Shop {
 			Text.NL();
 		}
 
-		const buyFunc = function(obj: any, bought: boolean) {
+		const buyFunc = (obj: any, bought: boolean) => {
 			if (obj.func) {
 				const res = obj.func();
 				if (res) { return; }
@@ -134,7 +138,7 @@ export class Shop {
 				}, enabled : party.coin >= cost * 10,
 				tooltip : "",
 			});
-			Gui.SetButtonsFromList(options, true, function() {
+			Gui.SetButtonsFromList(options, true, () => {
 				// Recreate the menu
 				// TODO: Keep page!
 				if (shop.buyFailFunc) { shop.buyFailFunc(obj.it, cost, bought); }
@@ -145,25 +149,24 @@ export class Shop {
 		const itemsByType: any = {};
 		Inventory.ItemByBothTypes(this.inventory, itemsByType);
 
-		const options = [];
-		for (const typeKey in itemsByType) {
+		const options: any[] = [];
+		_.forIn(itemsByType, (itemBundle, itemTypeName) => {
 			// Add main types
 			Text.AddDiv("<hr>");
-			Text.AddDiv(typeKey, null, "itemTypeHeader");
+			Text.AddDiv(itemTypeName, null, "itemTypeHeader");
 			Text.AddDiv("<hr>");
-			for (const subtypeKey in itemsByType[typeKey]) {
+			_.forIn(itemBundle, (items, itemSubtypeName) => {
 				// Add subtypes (except None type)
-				if (subtypeKey != ItemSubtype.None) {
-					Text.AddDiv(subtypeKey, null, "itemSubtypeHeader");
+				if (itemSubtypeName !== ItemSubtype.None) {
+					Text.AddDiv(itemSubtypeName, null, "itemSubtypeHeader");
 				}
-				const items = itemsByType[typeKey][subtypeKey];
 				if (items) {
-					for (let i = 0; i < items.length; i++) {
-						const it       = items[i].it;
-						const num      = items[i].num;
-						let enabled  = items[i].enabled ? items[i].enabled() : true;
-						const cost     = GetDEBUG() ? 0 : Math.floor(items[i].price * it.price);
-						const func     = items[i].func;
+					for (const item of items) {
+						const it       = item.it;
+						const num      = item.num;
+						let enabled  = item.enabled ? item.enabled() : true;
+						const cost     = GetDEBUG() ? 0 : Math.floor(item.price * it.price);
+						const func     = item.func;
 
 						enabled = enabled && (party.coin >= cost);
 						Text.AddDiv("<b>" + cost + "g - </b>" + it.name + " - " + it.Short(), null, "itemName");
@@ -171,14 +174,14 @@ export class Shop {
 						options.push({ nameStr : it.name,
 							func : buyFunc, enabled,
 							tooltip : it.Long(),
-							obj : {it: items[i].it, cost, func },
+							obj : {it: item.it, cost, func },
 						});
 					}
 				}
-			}
+			});
 
 			Text.NL();
-		}
+		});
 		Text.Flush();
 		Gui.SetButtonsFromList(options, true, back);
 	}
@@ -194,11 +197,11 @@ export class Shop {
 			Text.NL();
 		}
 
-		if (party.inventory.items.length == 0) {
+		if (party.inventory.items.length === 0) {
 			Text.Add("You have nothing to sell.");
 		}
 
-		const sellFunc = function(obj: any, havesold: boolean) {
+		const sellFunc = (obj: any, havesold: boolean) => {
 			if (obj.func) {
 				const res = obj.func();
 				if (res) { return; }
@@ -272,7 +275,7 @@ export class Shop {
 				}, enabled : true,
 				tooltip : "",
 			});
-			Gui.SetButtonsFromList(options, true, function() {
+			Gui.SetButtonsFromList(options, true, () => {
 				if (shop.sellFailFunc) { shop.sellFailFunc(obj.it, cost, havesold); }
 				// Recreate the menu
 				// TODO: Keep page!
@@ -283,24 +286,23 @@ export class Shop {
 		const itemsByType: any = {};
 		Inventory.ItemByBothTypes(party.Inv().items, itemsByType);
 
-		const options = [];
-		for (const typeKey in itemsByType) {
+		const options: any[] = [];
+		_.forIn(itemsByType, (itemBundle, itemTypeName) => {
 			// Add main types, exclude quest items (can't sell quest items at shop)
-			if (typeKey != ItemType.Quest) {
+			if (itemTypeName !== ItemType.Quest) {
 				Text.AddDiv("<hr>");
-				Text.AddDiv(typeKey, null, "itemTypeHeader");
+				Text.AddDiv(itemTypeName, null, "itemTypeHeader");
 				Text.AddDiv("<hr>");
 			}
-			for (const subtypeKey in itemsByType[typeKey]) {
+			_.forIn(itemBundle, (items, itemSubtypeName) => {
 				// Add subtypes (except None type)
-				if (subtypeKey != ItemSubtype.None) {
-					Text.AddDiv(subtypeKey, null, "itemSubtypeHeader");
+				if (itemSubtypeName !== ItemSubtype.None) {
+					Text.AddDiv(itemSubtypeName, null, "itemSubtypeHeader");
 				}
-				const items = itemsByType[typeKey][subtypeKey];
 				if (items) {
-					for (let i = 0; i < items.length; i++) {
-						const it       = items[i].it;
-						const num      = items[i].num;
+					for (const item of items) {
+						const it       = item.it;
+						const num      = item.num;
 						const price    = Math.floor(shop.sellPrice * it.price);
 
 						if (price <= 0) { continue; }
@@ -310,13 +312,13 @@ export class Shop {
 						options.push({ nameStr : it.name,
 							func : sellFunc, enabled : true,
 							tooltip : it.Long(),
-							obj : items[i],
+							obj : item,
 						});
 					}
 				}
-			}
+			});
 			Text.NL();
-		}
+		});
 		Text.Flush();
 		Gui.SetButtonsFromList(options, true, back);
 	}

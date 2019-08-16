@@ -1,4 +1,3 @@
-
 enum ExploreButtonIndex {
 	Explore  = 0,
 	Party    = 1,

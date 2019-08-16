@@ -11,7 +11,7 @@ import { Input } from "./input";
 import { Saver } from "./saver";
 import { Text } from "./text";
 
-const SplashScreen = function() {
+const SplashScreen = () => {
 	SetGameState(GameState.Credits, Gui);
 	Text.Clear();
 	Gui.ClearButtons();
@@ -30,31 +30,31 @@ const SplashScreen = function() {
 	Text.NL();
 	Text.Add("This game has hotkeys enabled, you can use 1-5, q-t, a-g");
 
-	Input.buttons[0].Setup("New game", function() {
+	Input.buttons[0].Setup("New game", () => {
 		// Init game
 		SetGameCache({});
 		CacheToGame();
 		Intro.Start();
 	}, true);
 
-	Input.buttons[1].Setup("Load game", function() {
+	Input.buttons[1].Setup("Load game", () => {
 		Saver.LoadPrompt(SplashScreen);
 	}, Saver.HasSaves());
 
-	Input.buttons[2].Setup("Load file", function() {
+	Input.buttons[2].Setup("Load file", () => {
 		loadfileOverlay();
 	}, true);
 
-	Input.buttons[3].Setup("Credits", function() {
+	Input.buttons[3].Setup("Credits", () => {
 		CreditsScreen(SplashScreen);
 	}, true);
 
-	Input.buttons[4].Setup("Toggle debug", function() {
+	Input.buttons[4].Setup("Toggle debug", () => {
 		SetDEBUG(!GetDEBUG());
 		if (GetDEBUG()) { Gui.debug.show(); } else { Gui.debug.hide(); }
 	}, true);
 
-	Input.buttons[7].Setup(Gui.ShortcutsVisible ? "Keys: On" : "Keys: Off", function() {
+	Input.buttons[7].Setup(Gui.ShortcutsVisible ? "Keys: On" : "Keys: Off", () => {
 		Gui.ShortcutsVisible = !Gui.ShortcutsVisible;
 		if (isOnline()) {
 			localStorage.ShortcutsVisible = Gui.ShortcutsVisible ? 1 : 0;
@@ -62,20 +62,20 @@ const SplashScreen = function() {
 		SplashScreen();
 	}, true);
 
-	Input.buttons[8].Setup("Set bg color", function() {
+	Input.buttons[8].Setup("Set bg color", () => {
 		Gui.BgColorPicker(SplashScreen);
 	}, true);
 
-	Input.buttons[9].Setup("Set font", function() {
+	Input.buttons[9].Setup("Set font", () => {
 		Gui.FontPicker(SplashScreen);
 	}, true);
 
-	Input.buttons[10].Setup(GetRenderPictures() ? "Pics: On" : "Pics: Off", function() {
+	Input.buttons[10].Setup(GetRenderPictures() ? "Pics: On" : "Pics: Off", () => {
 		SetRenderPictures(!GetRenderPictures());
 		SplashScreen();
 	}, true);
 
-	Input.buttons[11].Setup("Clear saves", function() {
+	Input.buttons[11].Setup("Clear saves", () => {
 		Saver.Clear();
 		SplashScreen();
 	}, isOnline(), null, "Warning! This will clear up old saves by removing the save0-11 and savedata0-11 localstorage slots.");

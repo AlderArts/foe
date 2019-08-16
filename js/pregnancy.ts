@@ -51,19 +51,19 @@ export class Womb {
 		};
 		if (this.father) { storage.f = this.father; }
 		if (this.mother) { storage.m = this.mother; }
-		if (this.race != Race.Human) { storage.r = this.race.id.toFixed(); }
+		if (this.race !== Race.Human) { storage.r = this.race.id.toFixed(); }
 		return storage;
 	}
 
 	public FromStorage(storage: any) {
-		this.litterSize   = parseInt(storage.litS)   || this.litterSize;
+		this.litterSize   = parseInt(storage.litS, 10)   || this.litterSize;
 		this.pregnant     = true;
 		this.hoursToBirth = parseFloat(storage.hour) || this.hoursToBirth;
 		this.progress     = parseFloat(storage.prog) || this.progress;
 
 		if (storage.m) {  this.mother = storage.m; }
 		if (storage.f) {  this.father = storage.f; }
-		this.race = (storage.r === undefined) ? this.race : RaceDesc.IdToRace[parseInt(storage.r)];
+		this.race = (storage.r === undefined) ? this.race : RaceDesc.IdToRace[parseInt(storage.r, 10)];
 	}
 
 	public IsEgg() {
@@ -157,18 +157,17 @@ export class PregnancyHandler {
 		if (storage.womb) {
 			const vags = this.entity.AllVags();
 
-			for (let i = 0; i < storage.womb.length; ++i) {
-				const w    = storage.womb[i];
-				const slot = parseInt(w.slot);
+			for (const w of storage.womb) {
+				const slot = parseInt(w.slot, 10);
 				let wPtr = null;
 				if (slot >= PregnancyHandler.Slot.Vag && slot < PregnancyHandler.Slot.Butt) {
 					const idx = slot - PregnancyHandler.Slot.Vag;
 					if ((idx >= 0) && (idx < vags.length)) {
 						wPtr = vags[idx].womb;
 					}
-				} else if (slot == PregnancyHandler.Slot.Butt) {
+				} else if (slot === PregnancyHandler.Slot.Butt) {
 					wPtr = this.entity.Butt().womb;
- }
+ 				}
 
 				if (wPtr) {
 					wPtr.FromStorage(w);
@@ -190,9 +189,9 @@ export class PregnancyHandler {
 			if (vag) {
 				womb = vag.womb;
 			}
-		} else if (slot == PregnancyHandler.Slot.Butt) { womb = this.entity.Butt().womb; }
+		} else if (slot === PregnancyHandler.Slot.Butt) { womb = this.entity.Butt().womb; }
 
-		if (womb == null) {  return false; }
+		if (womb === null) {  return false; }
 
 		return womb;
 	}
@@ -206,7 +205,7 @@ export class PregnancyHandler {
 		const ent = this.entity;
 
 		let womb = null;
-		_.each(ent.AllVags(), function(vag) {
+		_.each(ent.AllVags(), (vag) => {
 			womb = vag.womb;
 			if (womb.pregnant) {
 				ret.push(womb);
@@ -267,7 +266,7 @@ export class PregnancyHandler {
 			womb = mother.Butt().womb;
 		}
 
-		if (womb == null) { return false; }
+		if (womb === null) { return false; }
 		if (womb.pregnant) { return false; }
 		if (slot === PregnancyHandler.Slot.Butt && !this.MPregEnabled()) { return false; }
 
@@ -361,8 +360,8 @@ export class PregnancyHandler {
 		const ent = this.entity;
 
 		const wombs = this.PregnantWombs();
-		_.each(wombs, function(womb) {
-			const slot = ent.Butt().womb == womb ? PregnancyHandler.Slot.Butt : PregnancyHandler.Slot.Vag;
+		_.each(wombs, (womb) => {
+			const slot = ent.Butt().womb === womb ? PregnancyHandler.Slot.Butt : PregnancyHandler.Slot.Vag;
 
 			const oldProgress = womb.progress;
 			if (!womb.triggered) {
@@ -384,7 +383,7 @@ export class PregnancyHandler {
 		let size = 0;
 		const wombs = this.PregnantWombs();
 
-		_.each(wombs, function(womb) {
+		_.each(wombs, (womb) => {
 			size += womb.Size();
 		});
 
@@ -392,4 +391,3 @@ export class PregnancyHandler {
 	}
 
 }
-

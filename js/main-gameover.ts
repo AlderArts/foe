@@ -13,7 +13,7 @@ export function SetGameOverButton(text?: any) {
 }
 
 // TODO: Stats, newgame+ etc
-const GameOver = function() {
+const GameOver = () => {
 	Gui.Callstack = [];
 	SplashScreen();
 };

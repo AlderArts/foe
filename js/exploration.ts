@@ -38,7 +38,7 @@ function SetExploreButtons() {
 	if (!GAME().IntroActive) {
 		Input.exploreButtons[ExploreButtonIndex.Party].enabledImage = (party.location.switchSpot()) ? Images.imgButtonEnabled2 : Images.imgButtonEnabled;
 		Input.exploreButtons[ExploreButtonIndex.Party].Setup("Party", PartyInteraction, true);
-		if (party.members.length == 0) { Input.exploreButtons[ExploreButtonIndex.Party].SetEnabled(false); }
+		if (party.members.length === 0) { Input.exploreButtons[ExploreButtonIndex.Party].SetEnabled(false); }
 
 		Input.exploreButtons[ExploreButtonIndex.Items].Setup("Items", ShowInventory, true);
 
@@ -60,7 +60,7 @@ function SetExploreButtons() {
 		}
 
 		// FIGHT/SEARCH
-		Input.exploreButtons[ExploreButtonIndex.Look].Setup("", Fight, party.location.enc != null, null,
+		Input.exploreButtons[ExploreButtonIndex.Look].Setup("", Fight, party.location.enc !== null, null,
 			"Explore the immediate surroundings, possibly finding enemies, new locations or hidden treasures.", GameState.Event);
 	}
 }
@@ -72,20 +72,20 @@ function LimitedDataPrompt(backFunc: any) {
 
 	Gui.SavePromptText();
 
-	Input.buttons[0].Setup("Save game", function() {
-		Saver.SavePrompt(function() {
+	Input.buttons[0].Setup("Save game", () => {
+		Saver.SavePrompt(() => {
 			LimitedDataPrompt(backFunc);
 		});
 	}, isOnline());
 
 	Input.buttons[2].Setup("Save file", Saver.SaveToFile, true);
 
-	Input.buttons[6].Setup("Save text", function() {
+	Input.buttons[6].Setup("Save text", () => {
 		GameToCache();
 		const seen: any[] = [];
 		const data = JSON.stringify(GameCache(),
-			function(key, val) {
-				if (typeof val == "object") {
+			(key, val) => {
+				if (typeof val === "object") {
 					if (seen.indexOf(val) >= 0) {
 						return;
 					}
@@ -96,7 +96,7 @@ function LimitedDataPrompt(backFunc: any) {
 		Text.Clear();
 		Text.Add(data);
 		Text.Flush();
-		Gui.NextPrompt(function() {
+		Gui.NextPrompt(() => {
 			LimitedDataPrompt(backFunc);
 		});
 	}, true);
@@ -115,36 +115,36 @@ function DataPrompt() {
 
 	Gui.SavePromptText();
 
-	Input.buttons[0].Setup("Save game", function() {
+	Input.buttons[0].Setup("Save game", () => {
 		Saver.SavePrompt(DataPrompt);
 	}, isOnline() && safeLocation);
 
-	Input.buttons[1].Setup("Load game", function() {
+	Input.buttons[1].Setup("Load game", () => {
 		Saver.LoadPrompt(DataPrompt);
 	}, Saver.HasSaves());
 
 	Input.buttons[2].Setup("Save file", Saver.SaveToFile, safeLocation);
 
-	Input.buttons[3].Setup("Load file", function() {
+	Input.buttons[3].Setup("Load file", () => {
 		loadfileOverlay();
 	}, true);
 
-	Input.buttons[4].Setup("Toggle debug", function() {
+	Input.buttons[4].Setup("Toggle debug", () => {
 		SetDEBUG(!GetDEBUG());
 		if (GetDEBUG()) { Gui.debug.show(); } else { Gui.debug.hide(); }
-		for (let i = 0; i < party.members.length; i++) {
-			party.members[i].DebugMode(GetDEBUG());
+		for (const member of party.members) {
+			member.DebugMode(GetDEBUG());
 		}
 	}, true);
 
 	Input.buttons[5].Setup("Quit game", SplashScreen, true);
 
-	Input.buttons[6].Setup("Save text", function() {
+	Input.buttons[6].Setup("Save text", () => {
 		GameToCache();
 		const seen: any[] = [];
 		const data = JSON.stringify(GameCache(),
-			function(key, val) {
-				if (typeof val == "object") {
+			(key, val) => {
+				if (typeof val === "object") {
 					if (seen.indexOf(val) >= 0) {
 						return;
 					}
@@ -158,7 +158,7 @@ function DataPrompt() {
 		Gui.NextPrompt(DataPrompt);
 	}, safeLocation);
 
-	Input.buttons[7].Setup(Gui.ShortcutsVisible ? "Keys: On" : "Keys: Off", function() {
+	Input.buttons[7].Setup(Gui.ShortcutsVisible ? "Keys: On" : "Keys: Off", () => {
 		Gui.ShortcutsVisible = !Gui.ShortcutsVisible;
 		if (isOnline()) {
 			localStorage.ShortcutsVisible = Gui.ShortcutsVisible ? 1 : 0;
@@ -166,15 +166,15 @@ function DataPrompt() {
 		DataPrompt();
 	}, true);
 
-	Input.buttons[8].Setup("Set bg color", function() {
+	Input.buttons[8].Setup("Set bg color", () => {
 		Gui.BgColorPicker(DataPrompt);
 	}, true);
 
-	Input.buttons[9].Setup("Set font", function() {
+	Input.buttons[9].Setup("Set font", () => {
 		Gui.FontPicker(DataPrompt);
 	}, true);
 
-	Input.buttons[10].Setup(GetRenderPictures() ? "Pics: On" : "Pics: Off", function() {
+	Input.buttons[10].Setup(GetRenderPictures() ? "Pics: On" : "Pics: Off", () => {
 		SetRenderPictures(!GetRenderPictures());
 
 		DataPrompt();
@@ -190,13 +190,13 @@ NAV().DataPrompt = DataPrompt;
 //                                                   //
 // ***************************************************//
 
-const Explore = function(preventClear: boolean) {
+const Explore = (preventClear: boolean) => {
 	const party: Party = GAME().party;
 	if (!preventClear) {
 		Text.Clear();
 	}
 
-	if (party.location == null) {
+	if (party.location === null) {
 		Text.Add("ERROR, LOCATION IS NULL");
 		Text.Flush();
 		return;
@@ -210,7 +210,7 @@ const Explore = function(preventClear: boolean) {
 };
 NAV().Explore = Explore;
 
-const PartyInteraction = function(preventClear: boolean) {
+const PartyInteraction = (preventClear: boolean) => {
 	const party: Party = GAME().party;
 	party.Interact(preventClear, party.location.switchSpot());
 	Gui.SetLastSubmenu(Input.exploreButtons[ExploreButtonIndex.Party]);
@@ -219,12 +219,12 @@ const PartyInteraction = function(preventClear: boolean) {
 };
 NAV().PartyInteraction = PartyInteraction;
 
-const Fight = function(preventClear: boolean) {
+const Fight = (preventClear: boolean) => {
 	const party: Party = GAME().party;
 	if (!preventClear) {
 		Text.Clear();
 	}
-	if (party.location == null) {
+	if (party.location === null) {
 		Text.Add("ERROR, LOCATION IS NULL");
 		Text.Flush();
 		return;
@@ -246,12 +246,12 @@ const Fight = function(preventClear: boolean) {
 };
 NAV().Fight = Fight;
 
-const ShowInventory = function(preventClear: boolean) {
+const ShowInventory = (preventClear: boolean) => {
 	const party: Party = GAME().party;
 	if (!preventClear) {
 		Text.Clear();
 	}
-	if (party.inventory == null) {
+	if (party.inventory === null) {
 		Text.Add("ERROR, INVENTORY IS NULL");
 		Text.Flush();
 		return;
@@ -265,7 +265,7 @@ const ShowInventory = function(preventClear: boolean) {
 };
 NAV().ShowInventory = ShowInventory;
 
-const ShowAbilities = function(preventClear: boolean) {
+const ShowAbilities = (preventClear: boolean) => {
 	const party: Party = GAME().party;
 	if (!preventClear) {
 		Text.Clear();
@@ -279,7 +279,7 @@ const ShowAbilities = function(preventClear: boolean) {
 };
 NAV().ShowAbilities = ShowAbilities;
 
-const ShowAlchemy = function(preventClear?: boolean) {
+const ShowAlchemy = (preventClear?: boolean) => {
 	const player = GAME().player;
 	const party: Party = GAME().party;
 	if (!preventClear) {
@@ -294,7 +294,7 @@ const ShowAlchemy = function(preventClear?: boolean) {
 };
 NAV().ShowAlchemy = ShowAlchemy;
 
-const ShowQuests = function(preventClear: boolean) {
+const ShowQuests = (preventClear: boolean) => {
 	if (!preventClear) {
 		Text.Clear();
 	}
@@ -307,7 +307,7 @@ const ShowQuests = function(preventClear: boolean) {
 };
 NAV().ShowQuests = ShowQuests;
 
-const ShowHunting = function(preventClear: boolean) {
+const ShowHunting = (preventClear: boolean) => {
 	const party: Party = GAME().party;
 	if (!preventClear) {
 		Text.Clear();

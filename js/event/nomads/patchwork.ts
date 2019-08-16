@@ -265,7 +265,12 @@ PatchworkScenes.Prompt = () => {
 			Text.Clear();
 			Text.Add("<i>“What are ya buying?”</i> [heshe] ask[notS], opening [hisher] robes to show you the item-lined pockets.", parse);
 			Text.NL();
-			patchwork.Shop.Buy(PatchworkScenes.Prompt, true);
+			patchwork.Shop.Buy(() => {
+				Text.Clear();
+				Text.Add("<i>“If you are in need of something, you will return.”</i>");
+				Text.Flush();
+				PatchworkScenes.Prompt();
+			}, true);
 		}, enabled : true,
 	});
 	options.push({ nameStr : "Sell",
@@ -273,7 +278,12 @@ PatchworkScenes.Prompt = () => {
 			Text.Clear();
 			Text.Add("<i>“What are ya selling?”</i> [heshe] ask[notS], [hisher] telescopic monocle extending past [hisher] robes to examine your goods.", parse);
 			Text.NL();
-			patchwork.Shop.Sell(PatchworkScenes.Prompt, true);
+			patchwork.Shop.Sell(() => {
+				Text.Clear();
+				Text.Add("<i>“If you find something of interest, bring it back to me.”</i>");
+				Text.Flush();
+				PatchworkScenes.Prompt();
+			}, true);
 		}, enabled : true,
 	});
 

@@ -36,21 +36,21 @@ class Time {
 
 	public ToStorage() {
 		const storage: any = {};
-		if (this.year   != 0) { storage.y = this.year; }
-		if (this.season != 0) { storage.s = this.season; }
-		if (this.day    != 0) { storage.d = this.day; }
-		if (this.hour   != 0) { storage.h = this.hour; }
-		if (this.minute != 0) { storage.m = this.minute; }
+		if (this.year   !== 0) { storage.y = this.year; }
+		if (this.season !== 0) { storage.s = this.season; }
+		if (this.day    !== 0) { storage.d = this.day; }
+		if (this.hour   !== 0) { storage.h = this.hour; }
+		if (this.minute !== 0) { storage.m = this.minute; }
 		return storage;
 	}
 
 	public FromStorage(storage?: any) {
 		storage = storage || {};
-		this.year   = parseInt(storage.y) || this.year;
-		this.season = parseInt(storage.s) || this.season;
-		this.day    = parseInt(storage.d) || this.day;
-		this.hour   = parseInt(storage.h) || this.hour;
-		this.minute = parseInt(storage.m) || this.minute;
+		this.year   = parseInt(storage.y, 10) || this.year;
+		this.season = parseInt(storage.s, 10) || this.season;
+		this.day    = parseInt(storage.d, 10) || this.day;
+		this.hour   = parseInt(storage.h, 10) || this.hour;
+		this.minute = parseInt(storage.m, 10) || this.minute;
 	}
 
 	public Clone() {
@@ -172,17 +172,26 @@ class Time {
 
 	public DateString(): string {
 		let season;
-		if (this.season == Season.Spring) { season = "Spring"; }
-		else if (this.season == Season.Summer) { season = "Summer"; }
-		else if (this.season == Season.Autumn) { season = "Autumn"; }
-		else { season = "Winter"; }
+		if (this.season === Season.Spring) {
+			season = "Spring";
+		} else if (this.season === Season.Summer) {
+			season = "Summer";
+		} else if (this.season === Season.Autumn) {
+			season = "Autumn";
+		} else {
+			season = "Winter";
+		}
 
 		const day = this.day + 1;
 		let dateExtension = "th";
 		if (day < 10 || day > 20) {
-			if     (day % 10 == 1) { dateExtension = "st"; }
-			else if (day % 10 == 2) { dateExtension = "nd"; }
-			else if (day % 10 == 3) { dateExtension = "rd"; }
+			if     (day % 10 === 1) {
+				dateExtension = "st";
+			} else if (day % 10 === 2) {
+				dateExtension = "nd";
+			} else if (day % 10 === 3) {
+				dateExtension = "rd";
+			}
 		}
 
 		return day + dateExtension + " of " + season + ", year " + (this.year + 1);
@@ -190,17 +199,26 @@ class Time {
 
 	public DateStringShort(): string {
 		let season;
-		if (this.season == Season.Spring) { season = "Spring"; }
-		else if (this.season == Season.Summer) { season = "Summer"; }
-		else if (this.season == Season.Autumn) { season = "Autumn"; }
-		else { season = "Winter"; }
+		if (this.season === Season.Spring) {
+			season = "Spring";
+		} else if (this.season === Season.Summer) {
+			season = "Summer";
+		} else if (this.season === Season.Autumn) {
+			season = "Autumn";
+		} else {
+			season = "Winter";
+		}
 
 		const day = this.day + 1;
 		let dateExtension = "th";
 		if (day < 10 || day > 20) {
-			if     (day % 10 == 1) { dateExtension = "st"; }
-			else if (day % 10 == 2) { dateExtension = "nd"; }
-			else if (day % 10 == 3) { dateExtension = "rd"; }
+			if     (day % 10 === 1) {
+				dateExtension = "st";
+			} else if (day % 10 === 2) {
+				dateExtension = "nd";
+			} else if (day % 10 === 3) {
+				dateExtension = "rd";
+			}
 		}
 
 		return day + dateExtension + " of " + season;

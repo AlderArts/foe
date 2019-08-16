@@ -3,6 +3,7 @@
  * Town area that can be explored
  *
  */
+import * as _ from "lodash";
 
 import { AscheScenes } from "../../event/asche-scenes";
 import { AscheTasksScenes } from "../../event/asche-tasks";
@@ -197,27 +198,27 @@ export class Rigard {
 			this.KrawitzWorkDay.FromStorage(storage.KWork);
 		}
 		// Load flags
-		for (const flag of storage.flags) {
-			this.flags[flag] = parseInt(storage.flags[flag], 10);
-		}
-		for (const flag of storage.twoP) {
-			this.Twopenny[flag] = parseInt(storage.twoP[flag], 10);
-		}
-		for (const flag of storage.Krawitz) {
-			this.Krawitz[flag] = parseInt(storage.Krawitz[flag], 10);
-		}
-		for (const flag of storage.Brothel) {
-			this.Brothel[flag] = parseInt(storage.Brothel[flag], 10);
-		}
-		for (const flag of storage.CW) {
-			this.CW[flag] = parseInt(storage.CW[flag], 10);
-		}
+		_.forIn(storage.flags, (value, key) => {
+			this.flags[key] = parseInt(value, 10);
+		});
+		_.forIn(storage.twoP, (value, key) => {
+			this.Twopenny[key] = parseInt(value, 10);
+		});
+		_.forIn(storage.Krawitz, (value, key) => {
+			this.Krawitz[key] = parseInt(value, 10);
+		});
+		_.forIn(storage.Brothel, (value, key) => {
+			this.Brothel[key] = parseInt(value, 10);
+		});
+		_.forIn(storage.CW, (value, key) => {
+			this.CW[key] = parseInt(value, 10);
+		});
 		if (storage.cwrel) {
 			this.cwrel.base = parseInt(storage.cwrel, 10) || this.cwrel.base;
 		}
-		for (const flag of storage.LB) {
-			this.LB[flag] = parseInt(storage.LB[flag], 10);
-		}
+		_.forIn(storage.LB, (value, key) => {
+			this.LB[key] = parseInt(value, 10);
+		});
 
 		this.MagicShop.FromStorage(storage.MS);
 

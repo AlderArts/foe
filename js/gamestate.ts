@@ -11,7 +11,7 @@ enum GameState {
 
 let gameState = GameState.Credits;
 
-const SetGameState = function(state: GameState, Gui: any) {
+const SetGameState = (state: GameState, Gui: any) => {
 	gameState = state;
 	Gui.SetGameState(state);
 };

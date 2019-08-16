@@ -3,6 +3,7 @@
  * Town area that can be explored
  *
  */
+import * as _ from "lodash";
 
 // Create namespace
 const TreeCityLoc: any = {};
@@ -31,9 +32,9 @@ export class TreeCity {
 
 	public FromStorage(storage: any) {
 		// Load flags
-		for (const flag of storage.flags) {
-			this.flags[flag] = parseInt(storage.flags[flag], 10);
-		}
+		_.forIn(storage.flags, (value, key) => {
+			this.flags[key] = parseInt(value, 10);
+		});
 	}
 
 }

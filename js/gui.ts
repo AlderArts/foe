@@ -92,7 +92,7 @@ export class Gui {
 		Gui.canvas.setViewBox(0, 0, width, height, true);
 		Gui.canvas.setSize("100%", "100%");
 		const bg = Gui.canvas.image(Images.bg, 0, 0, width, height);
-		bg.node.ondragstart = function() {
+		bg.node.ondragstart = () => {
 			return false;
 		};
 		const svg = document.querySelector("svg");
@@ -161,11 +161,11 @@ export class Gui {
 		overlay.push(Gui.canvas.circle(clock.x, clock.y, clock.r).attr({fill: "#000"}));
 		overlay.push(Gui.canvas.circle(clock.x, clock.y, clock.r * 0.97).attr({fill: "rhsb(.1 , .5, .95)-hsb(.1 , 1, .45)"}));
 		for (let i = 0; i < 12; i++) {
-			const start_x = clock.x + Math.round(clock.r * 0.8 * Math.cos(30 * i * Math.PI / 180));
-			const start_y = clock.y + Math.round(clock.r * 0.8 * Math.sin(30 * i * Math.PI / 180));
-			const end_x   = clock.x + Math.round(clock.r * Math.cos(30 * i * Math.PI / 180));
-			const end_y   = clock.y + Math.round(clock.r * Math.sin(30 * i * Math.PI / 180));
-			overlay.push(Gui.canvas.path("M" + start_x + " " + start_y + "L" + end_x + " " + end_y).attr({"stroke": "#000", "stroke-width": 3}));
+			const startX = clock.x + Math.round(clock.r * 0.8 * Math.cos(30 * i * Math.PI / 180));
+			const startY = clock.y + Math.round(clock.r * 0.8 * Math.sin(30 * i * Math.PI / 180));
+			const endX   = clock.x + Math.round(clock.r * Math.cos(30 * i * Math.PI / 180));
+			const endY   = clock.y + Math.round(clock.r * Math.sin(30 * i * Math.PI / 180));
+			overlay.push(Gui.canvas.path("M" + startX + " " + startY + "L" + endX + " " + endY).attr({"stroke": "#000", "stroke-width": 3}));
 		}
 		clock.hour   = Gui.canvas.path("M" + clock.x + " " + clock.y + "L" + clock.x + " " + (clock.y - clock.r / 2)).attr({"stroke": "#000", "stroke-width": 5});
 		clock.minute = Gui.canvas.path("M" + clock.x + " " + clock.y + "L" + clock.x + " " + (clock.y - 5 * clock.r / 6)).attr({"stroke": "#000", "stroke-width": 3});
@@ -183,7 +183,7 @@ export class Gui {
 		document.getElementById("mainTextArea").style.fontFamily = FontFamily;
 		FontSize = isOnline() && localStorage.fontSize ? localStorage.fontSize : "large";
 		document.getElementById("mainTextArea").style.fontSize = FontSize;
-		Gui.ShortcutsVisible = isOnline() ? parseInt(localStorage.ShortcutsVisible) == 1 : false;
+		Gui.ShortcutsVisible = isOnline() ? parseInt(localStorage.ShortcutsVisible, 10) === 1 : false;
 
 		// Setup keyboard shortcuts
 		// Row 1
@@ -226,16 +226,16 @@ export class Gui {
 		align = align || "start";
 		const t = Gui.canvas.print(x, y, text, font, size);
 		const bb = t.getBBox();
-		if (align == "middle") {
+		if (align === "middle") {
 			t.translate(-bb.width / 2, 0);
-		} else if (align == "end") {
+		} else if (align === "end") {
 			t.translate(-bb.width, 0);
  }
 		return t;
 	}
 
 	public static PrintGlow(set: RaphaelSet, obj: any, x: number, y: number, text: string|number, font: RaphaelFont, size: number, align: string, glow: any) {
-		if (text != obj.str) {
+		if (text !== obj.str) {
 			obj.str = text;
 			if (obj.text) {
 				set.exclude(obj.text);
@@ -271,7 +271,7 @@ export class Gui {
 		const charSet   = Gui.canvas.set();
 		const statusSet = Gui.canvas.set();
 		const portrait  = Gui.canvas.image(Images.pc_male, xoffset, yoffset, 100, 100);
-		portrait.node.ondragstart = function() {
+		portrait.node.ondragstart = () => {
 			return false;
 		};
 		const local: any = {
@@ -315,13 +315,13 @@ export class Gui {
 
 		charSet.attr({
 			cursor: "pointer",
-		}).click(function() {
+		}).click(() => {
 			Gui.HandlePortraitClick(index, isParty);
 		});
 	}
 
-	public static HandlePortraitClick = function(index: number, isParty: boolean) {
-		if (gameState == GameState.Game && !GAME().IntroActive) {
+	public static HandlePortraitClick = (index: number, isParty: boolean) => {
+		if (gameState === GameState.Game && !GAME().IntroActive) {
 			if (isParty) {
 				const character = GAME().party.Get(index);
 				if (character) {
@@ -330,7 +330,7 @@ export class Gui {
 				}
 			}
 		}
-	};
+	}
 
 	public static SetupCavalcadeHand(xoffset: number, yoffset: number, set: RaphaelSet, obj: any) {
 		const charSet = Gui.canvas.set();
@@ -356,12 +356,12 @@ export class Gui {
 		obj.push(local);
 	}
 
-	public static Resize = function() {
+	public static Resize = () => {
 		const w = $(window).width();
 		const h = $(window).height();
 		const ratioW = w / width;
 		const ratioH = h / height;
-		let xpos = 0, ypos = 0, ratio = 1;
+		let xpos = 0; let ypos = 0; let ratio = 1;
 		// alert("R:" + ratio + " RW:" + ratioW + " RH:" + ratioH);
 		if (ratioW / ratioH > 1) {
 			xpos  = (w - ratioH * width) / 2;
@@ -386,7 +386,7 @@ export class Gui {
 		tooltip.style.top    = ypos + ratio * tooltipArea.y + "px";
 		tooltip.style.width  =        ratio * tooltipArea.w + "px";
 		tooltip.style.height =        ratio * tooltipArea.h + "px";
-	};
+	}
 
 	public static FontPicker(back: any) {
 		Text.Clear();
@@ -413,7 +413,7 @@ export class Gui {
 		options.push({ nameStr : "Font",
 			func() {
 				const font = prompt("Please enter fonts (css: font-families) to use, in order of priority.", FontFamily || "sans-serif, Georgia");
-				if (font != null && font != "") {
+				if (font !== null && font !== "") {
 					FontFamily = font;
 					if (isOnline()) {
 						localStorage.fontFamily = FontFamily;
@@ -425,7 +425,7 @@ export class Gui {
 		options.push({ nameStr : "Size",
 			func() {
 				const size = prompt("Please enter desired font size (css: font-size). For example: small, medium, large.", FontSize || "large");
-				if (size != null && size != "") {
+				if (size !== null && size !== "") {
 					FontSize = size;
 					if (isOnline()) {
 						localStorage.fontSize = FontSize;
@@ -519,7 +519,7 @@ export class Gui {
 		options.push({ nameStr : "Custom",
 			func() {
 				const col = prompt("Please enter desired background color. Format is rgba(R,G,B,A). Colors are in the range 0-255. Opacity is in the range 0-1.", BgColor || "rgba(255,255,255,1.0)");
-				if (col != null && col != "") {
+				if (col !== null && col !== "") {
 					BgColor = col;
 					if (isOnline()) {
 						localStorage.bgcolor = BgColor;
@@ -533,21 +533,21 @@ export class Gui {
 	}
 
 	public static ClearChoiceButtons() {
-		for (let i = 0; i < Input.buttons.length; i++) {
-			Input.buttons[i].SetVisible(false);
+		for (const button of Input.buttons) {
+			button.SetVisible(false);
 		}
 	}
 
 	public static ClearButtons() {
-		for (let i = 0; i < Input.buttons.length; i++) {
-			Input.buttons[i].enabledImage = Images.imgButtonEnabled;
-			Input.buttons[i].SetVisible(false);
+		for (const button of Input.buttons) {
+			button.enabledImage = Images.imgButtonEnabled;
+			button.SetVisible(false);
 		}
-		for (let i = 0; i < Input.navButtons.length; i++) {
-			Input.navButtons[i].SetVisible(false);
+		for (const button of Input.navButtons) {
+			button.SetVisible(false);
 		}
-		for (let i = 0; i < Input.exploreButtons.length; i++) {
-			Input.exploreButtons[i].SetVisible(false);
+		for (const button of Input.exploreButtons) {
+			button.SetVisible(false);
 		}
 	}
 
@@ -574,9 +574,9 @@ export class Gui {
 
 		Gui.SetButtonPage(list, currentPage, state);
 
-		const updateNav = function() {
+		const updateNav = () => {
 			Input.navButtons[0].Setup(">>",
-				function() {
+				() => {
 					if (currentPage < (list.length / Input.buttons.length) - 1) {
 						currentPage++;
 						Gui.SetButtonPage(list, currentPage, state);
@@ -586,7 +586,7 @@ export class Gui {
 			Input.navButtons[0].SetVisible((list.length > Input.buttons.length &&
 				currentPage < (list.length / Input.buttons.length) - 1));
 			Input.navButtons[1].Setup("<<",
-				function() {
+				() => {
 					if (currentPage > 0) {
 						currentPage--;
 						Gui.SetButtonPage(list, currentPage, state);
@@ -602,7 +602,7 @@ export class Gui {
 
 		updateNav();
 
-		return function() { return currentPage; };
+		return () => currentPage;
 	}
 
 	public static SetButtonCollectionPage(encounter: any, caster: any, list: any[], ret: any, page: number) {
@@ -612,15 +612,15 @@ export class Gui {
 		}
 	}
 
-	public static SetButtonsFromCollection = function(encounter: any, caster: any, list: any[], ret: any, backFunc: any) {
+	public static SetButtonsFromCollection = (encounter: any, caster: any, list: any[], ret: any, backFunc: any) => {
 		Gui.ClearButtons();
 		let currentPage = 0;
 
 		Gui.SetButtonCollectionPage(encounter, caster, list, ret, currentPage);
 
-		const updateNav = function() {
+		const updateNav = () => {
 			Input.navButtons[0].Setup(">>",
-				function() {
+				() => {
 					if (currentPage < (list.length / Input.buttons.length) - 1) {
 						currentPage++;
 						Gui.SetButtonCollectionPage(encounter, caster, list, ret, currentPage);
@@ -630,7 +630,7 @@ export class Gui {
 			Input.navButtons[0].SetVisible((list.length > Input.buttons.length &&
 				currentPage < (list.length / Input.buttons.length) - 1));
 			Input.navButtons[1].Setup("<<",
-				function() {
+				() => {
 					if (currentPage > 0) {
 						currentPage--;
 						Gui.SetButtonCollectionPage(encounter, caster, list, ret, currentPage);
@@ -645,7 +645,7 @@ export class Gui {
 		};
 
 		updateNav();
-	};
+	}
 
 	public static RenderParty(p: any, set: RaphaelSet, obj: any, max?: number) {
 		max = max || 4;
@@ -654,7 +654,7 @@ export class Gui {
 			const c = p.Get(i);
 			set[i].show();
 			Gui.RenderEntity(c, set[i], obj[i]);
-			if (gameState != GameState.Combat || c != CurrentActiveChar()) {
+			if (gameState !== GameState.Combat || c !== CurrentActiveChar()) {
 				obj[i].glow.hide();
 			}
 		}
@@ -762,11 +762,11 @@ export class Gui {
 	public static SetGameState(state: GameState) {
 		switch (gameState) { // TODO?
 			case GameState.Game:
-				for (let i = 0; i < Input.menuButtons.length; i++) {
-					Input.menuButtons[i].SetVisibility();
+				for (const button of Input.menuButtons) {
+					button.SetVisibility();
 				}
-				for (let i = 0; i < Input.exploreButtons.length; i++) {
-					Input.exploreButtons[i].SetVisibility();
+				for (const button of Input.exploreButtons) {
+					button.SetVisibility();
 				}
 				break;
 			case GameState.Event:
@@ -777,11 +777,11 @@ export class Gui {
 				Input.exploreButtonSet.hide();
 			 break;
 		}
-		for (let i = 0; i < Input.buttons.length; i++) {
-			Input.buttons[i].SetVisibility();
+		for (const button of Input.buttons) {
+			button.SetVisibility();
 		}
-		for (let i = 0; i < Input.navButtons.length; i++) {
-			Input.navButtons[i].SetVisibility();
+		for (const button of Input.navButtons) {
+			button.SetVisibility();
 		}
 	}
 
@@ -805,10 +805,10 @@ export class Gui {
 
 			case GameState.Game:
 			case GameState.Event:
-				if (gameState == GameState.Game) {
+				if (gameState === GameState.Game) {
 					Input.RenderExploreButtonGlow();
 				}
-				if (gameState == GameState.Game || gameState == GameState.Event) {
+				if (gameState === GameState.Game || gameState === GameState.Event) {
 					enemy.hide();
 				}
 				// TODO: !GetRenderPictures()
@@ -846,7 +846,7 @@ export class Gui {
 						let showCard = cavalcade.round > 4;
 						// don't show folded opponents
 						if (p.folded) { showCard = false; }
-						showCard = showCard || (p == GAME().player); // always show own
+						showCard = showCard || (p === GAME().player); // always show own
 
 						if (showCard && k < p.hand.length) {
 							cards[k].attr({src: p.hand[k].Img}).show();
@@ -964,7 +964,7 @@ export class Gui {
 			Text.Clear();
 		}
 
-		if (GAME().party.location == null) {
+		if (GAME().party.location === null) {
 			Text.Add("ERROR, LOCATION IS NULL");
 			Text.Flush();
 			return;

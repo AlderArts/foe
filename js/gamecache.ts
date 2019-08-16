@@ -1,3 +1,5 @@
+import * as _ from "lodash";
+
 import { SAVE_VERSION, VERSION_STRING } from "../app";
 import { Gui } from "./gui";
 import { Season, Time } from "./time";
@@ -94,7 +96,7 @@ import { AlchemyItems } from "./items/alchemy";
 import { ArmorItems } from "./items/armor";
 import { WeaponsItems } from "./items/weapons";
 
-const InitCache = function() {
+const InitCache = () => {
 	// Reset exploration
 	Gui.SetLastSubmenu(null);
 	GAME().IntroActive = false;
@@ -102,7 +104,7 @@ const InitCache = function() {
 	const gameCache: any = GameCache();
 
 	// SAVE VERSION
-	gameCache.version = parseInt(gameCache.version) || SAVE_VERSION;
+	gameCache.version = parseInt(gameCache.version, 10) || SAVE_VERSION;
 
 	// TIME
 	gameCache.time = gameCache.time ||
@@ -278,23 +280,22 @@ const InitCache = function() {
 	if (GAME().burrows.flags.Access >= BurrowsFlags.AccessFlags.Stage5) { GAME().rigard.flags.Scepter = 0; }
 };
 
-const CacheToGame = function() {
+const CacheToGame = () => {
 	InitCache();
-
 	const gameCache: any = GameCache();
 
 	// Load flags
-	for (const flag in gameCache.flags) {
-		gameCache.flags[flag] = parseInt(gameCache.flags[flag]);
-	}
+	_.forIn(gameCache.flags, (value, key) => {
+		gameCache.flags[key] = parseInt(value, 10);
+	});
 
 	InitWorldTime(
 		new Time(
-			parseInt(gameCache.time.year),
-			parseInt(gameCache.time.season),
-			parseInt(gameCache.time.day),
-			parseInt(gameCache.time.hour),
-			parseInt(gameCache.time.minute)),
+			parseInt(gameCache.time.year, 10),
+			parseInt(gameCache.time.season, 10),
+			parseInt(gameCache.time.day, 10),
+			parseInt(gameCache.time.hour, 10),
+			parseInt(gameCache.time.minute, 10)),
 	);
 
 	// Adjust for old save formats
@@ -302,9 +303,13 @@ const CacheToGame = function() {
 		GAME().kiakai.body.SetRace(Race.Elf);
 	}
 	if (gameCache.version < 6) {
-		if     (gameCache.flags.KiakaiAttitude == 0) { gameCache.flags.KiakaiAttitude = KiakaiFlags.Attitude.Nice; }
-		else if (gameCache.flags.KiakaiAttitude == 1) { gameCache.flags.KiakaiAttitude = KiakaiFlags.Attitude.Naughty; }
-		else if (gameCache.flags.KiakaiAttitude == 2) { gameCache.flags.KiakaiAttitude = KiakaiFlags.Attitude.Neutral; }
+		if     (gameCache.flags.KiakaiAttitude === 0) {
+			gameCache.flags.KiakaiAttitude = KiakaiFlags.Attitude.Nice;
+		} else if (gameCache.flags.KiakaiAttitude === 1) {
+			gameCache.flags.KiakaiAttitude = KiakaiFlags.Attitude.Naughty;
+		} else if (gameCache.flags.KiakaiAttitude === 2) {
+			gameCache.flags.KiakaiAttitude = KiakaiFlags.Attitude.Neutral;
+		}
 	}
 	if (gameCache.version < 7) {
 		GAME().chief.relation.base = gameCache.flags.NomadRep || 0;      gameCache.flags.NomadRep = null;
@@ -348,7 +353,7 @@ const CacheToGame = function() {
 		GAME().kiakai.weaponSlot   = WeaponsItems.WoodenStaff;
 		GAME().kiakai.topArmorSlot = ArmorItems.SimpleRobes;
 
-		Gui.Callstack.push(function() {
+		Gui.Callstack.push(() => {
 			Text.Clear();
 			Text.Add("What profession do you wish to start as?");
 			Text.Flush();
@@ -482,10 +487,10 @@ const CacheToGame = function() {
 	}
 	if (gameCache.version < 22) {
 		const vag = GAME().terry.flags.vag;
-		if (vag != TerryFlags.Pussy.None) {
+		if (vag !== TerryFlags.Pussy.None) {
 			GAME().terry.body.vagina = [];
 			GAME().terry.body.vagina.push(new Vagina());
-			if (vag == TerryFlags.Pussy.Used) {
+			if (vag === TerryFlags.Pussy.Used) {
 				GAME().terry.FirstVag().virgin = false;
 			}
 		}
@@ -525,7 +530,7 @@ const CacheToGame = function() {
 	}
 };
 
-const GameToCache = function() {
+const GameToCache = () => {
 	const gameCache: any = GameCache();
 
 	gameCache.version  = SAVE_VERSION;

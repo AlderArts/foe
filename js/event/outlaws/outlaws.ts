@@ -56,9 +56,9 @@ export class Outlaws {
 
 	public FromStorage(storage: any) {
 		// Load flags
-		for (const flag of storage.flags) {
-			this.flags[flag] = parseInt(storage.flags[flag], 10);
-		}
+		_.forIn(storage.flags, (value, key) => {
+			this.flags[key] = parseInt(value, 10);
+		});
 		this.relation.base = !isNaN(parseInt(storage.rep, 10)) ? parseInt(storage.rep, 10) : this.relation.base;
 
 		this.mainQuestTimer.FromStorage(storage.Qtime);

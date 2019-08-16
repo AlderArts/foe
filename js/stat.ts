@@ -48,20 +48,17 @@ export class Stat {
 			Text.NL();
 			if (diff > 0) {
 				Text.Add("DEBUG: " + this.debug() + " " + old + " -> " + this.base + " (ideal: " + ideal + ")", null, "blue bold");
-			}
-			else if (diff == 0) {
+			} else if (diff === 0) {
 				Text.Add("DEBUG: " + this.debug() + " " + old + " capped (ideal: " + ideal + ")", null, "bold");
- }
-			else {
+ 			} else {
 				Text.Add("DEBUG: " + this.debug() + " " + old + " -> " + this.base + " (ideal: " + ideal + ")", null, "red bold");
- }
+ 			}
 			Text.NL();
 			Text.Flush();
 		}
 		if (fraction) {
 			return this.base - old;
-		}
-		else {
+		} else {
 			return Math.floor(this.base) - Math.floor(old);
 		}
 	}
@@ -79,10 +76,9 @@ export class Stat {
 		this.base += diff;
 		if (GetDEBUG() && this.debug) {
 			Text.NL();
-			if (diff == 0) {
+			if (diff === 0) {
 				Text.Add("DEBUG: " + this.debug() + " " + old + " capped (ideal: " + ideal + ")", null, "black bold");
-			}
-			else {
+			} else {
 				Text.Add("DEBUG: " + this.debug() + " " + old + " -> " + this.base + " (max: " + ideal + ")", null, "blue bold");
 			}
 			Text.NL();
@@ -90,8 +86,7 @@ export class Stat {
 		}
 		if (fraction) {
 			return this.base - old;
-		}
-		else {
+		} else {
 			return Math.floor(this.base) - Math.floor(old);
 		}
 	}
@@ -109,10 +104,9 @@ export class Stat {
 		this.base -= diff;
 		if (GetDEBUG() && this.debug) {
 			Text.NL();
-			if (diff == 0) {
+			if (diff === 0) {
 				Text.Add("DEBUG: " + this.debug() + " " + old + " capped (ideal: " + ideal + ")", null, "black bold");
-			}
-			else {
+			} else {
 				Text.Add("DEBUG: " + this.debug() + " " + old + " -> " + this.base + " (min: " + ideal + ")", null, "red bold");
 			}
 			Text.NL();
@@ -120,8 +114,7 @@ export class Stat {
 		}
 		if (fraction) {
 			return this.base - old;
-		}
-		else {
+		} else {
 			return Math.floor(this.base) - Math.floor(old);
 		}
 	}

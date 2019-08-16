@@ -26,7 +26,7 @@ function Setup() {
     InitGameOver(SplashScreen);
 
 	// Load assets
-	   LoadImages(function() {
+	   LoadImages(() => {
 		assetsOverlay();
 
 		// Go to credits screen

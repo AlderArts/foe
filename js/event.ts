@@ -65,7 +65,7 @@ export class Event {
 			this.hunt.push(new Link(
 				nameStr, visible, enabled,
 				desc,
-				function() {
+				() => {
 					const enc = func();
 					if (enc) {
 						if (enc.Start) {
@@ -94,9 +94,9 @@ export class Event {
 		Text.NL();
 		Text.Add("You sleep for 8 hours.");
 		Text.Flush();
-		Gui.NextPrompt(function() {
+		Gui.NextPrompt(() => {
 			Text.Clear();
-			const func = function() {
+			const func = () => {
 				TimeStep({hour: 8});
 				GAME().party.Sleep();
 
@@ -107,7 +107,7 @@ export class Event {
 		});
 	}
 
-	public WaitFunc = function() {
+	public WaitFunc = () => {
 		SetGameState(GameState.Event, Gui);
 		Text.Clear();
 		Text.Add("How long do you want to wait?");
@@ -198,12 +198,12 @@ export class Event {
 				Gui.PrintDefaultOptions();
 			}, enabled : true,
 		});
-		Gui.SetButtonsFromList(options, true, function() {
+		Gui.SetButtonsFromList(options, true, () => {
 			Gui.PrintDefaultOptions();
 		});
-	};
+	}
 
-	public DrunkHandler = function() {
+	public DrunkHandler = () => {
 		const parse: any = {};
 		const comp = GAME().party.GetRandom();
 		Text.Clear();
@@ -220,25 +220,23 @@ export class Event {
 		Text.Flush();
 
 		Gui.NextPrompt();
-	};
+	}
 
 	public SetButtons(links: any[]) {
 		const list = [];
 
 		if (!links) {
 			links = [];
-			_.each(this.links, function(link: any) {
+			_.each(this.links, (link: any) => {
 				link.image = Images.imgButtonEnabled2;
 				links.push(link);
 			});
-			_.each(this.events, function(evt) {
+			_.each(this.events, (evt) => {
 				links.push(evt);
 			});
 		}
 
-		for (let i = 0; i < links.length; i++) {
-			const link = links[i];
-
+		for (const link of links) {
 			const visible = _.isFunction(link.visibleCondition) ? link.visibleCondition() : link.visibleCondition;
 			if (!visible) { continue; }
 			const enabled = _.isFunction(link.enabledCondition) ? link.enabledCondition() : link.enabledCondition;
@@ -247,7 +245,7 @@ export class Event {
 			list.push({nameStr, func: link.func, enabled, tooltip: link.tooltip, image: link.image});
 			// Input.buttons[i].Setup(nameStr, link.func, enabled);
 		}
-		// list.sort( function(a, b) { return a.nameStr > b.nameStr; } );
+		// list.sort( (a, b) => { return a.nameStr > b.nameStr; } );
 
 		Gui.SetButtonsFromList(list, null, null, GameState.Event);
 	}
@@ -262,8 +260,7 @@ export class Event {
 			}
 		}
 
-		for (let i = 0; i < this.links.length; i++) {
-			const link = this.links[i];
+		for (const link of this.links) {
 			if (link.print) {
 				if (_.isFunction(link.print)) {
 					link.print();
@@ -273,8 +270,7 @@ export class Event {
 			}
 		}
 
-		for (let i = 0; i < this.events.length; i++) {
-			const e = this.events[i];
+		for (const e of this.events) {
 			if (e.print) {
 				if (_.isFunction(e.print)) {
 					e.print();

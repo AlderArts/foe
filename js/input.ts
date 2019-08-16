@@ -117,7 +117,6 @@ export class Input {
 	static get exploreButtonSet() { return exploreButtonSet; }
 	static get menuButtonSet() { return menuButtonSet; }
 
-
 	public static Init(gui: any) {
 		Gui = gui;
 		// let canvas = document.getElementById("canvas");
@@ -199,10 +198,9 @@ export class Input {
 		for (const button of exploreButtons) {
 			if (!button.image.is_visible()) { continue; }
 			if (!button.glow) { continue; }
-			if (button == Gui.GetLastSubmenu()) {
+			if (button === Gui.GetLastSubmenu()) {
 				button.glow.show();
-			}
-			else {
+			} else {
 				button.glow.hide();
 			}
 		}

@@ -221,7 +221,7 @@ export class Item {
 
 // TODO Possibly reformat items array to just contain items instead of [{it:item, num:x}], so this function be can made a generic Array.prototype.sortByProp for sorting any array of objects by prop.
 function compareItemByProp(p: any) {
-	return function(a: any, b: any) {
+	return (a: any, b: any) => {
 		return (a.it[p] > b.it[p]) ? 1 : (a.it[p] < b.it[p]) ? -1 : 0;
 	};
 }

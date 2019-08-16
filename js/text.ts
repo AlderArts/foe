@@ -40,7 +40,7 @@ export namespace Text {
 					const code = text.slice(start + 1, stop);
 
 					let replaceStr;
-					if (parseStrings[code] != null) {
+					if (parseStrings[code] !== null) {
 						replaceStr = parseStrings[code];
 						if (_.isFunction(replaceStr)) {
 							replaceStr = replaceStr();
@@ -139,8 +139,8 @@ export namespace Text {
 			toolbar.append(label);
 		}
 		// Add inputs to new toolbar
-		for (let i = 0; i < list.length; i++) {
-			toolbar.append(createInput(list[i], cssClasses));
+		for (const input of list) {
+			toolbar.append(createInput(input, cssClasses));
 		}
 		toolbars.append(toolbar);
 	}
@@ -208,11 +208,11 @@ export namespace Text {
 
 			let str = "";
 
-			if (hundreds != 0) {
+			if (hundreds !== 0) {
 				str += DigitToText(hundreds) + " hundred";
 			}
-			if (tens != 0) {
-				if (hundreds != 0) { str += " "; }
+			if (tens !== 0) {
+				if (hundreds !== 0) { str += " "; }
 				if (num % 100 < 20) {
 					str += DigitToText(num % 100);
 					return str;
@@ -229,8 +229,8 @@ export namespace Text {
 					}
 				}
 			}
-			if (ones != 0) {
-				if (hundreds != 0 && tens == 0) { str += " "; } else if (tens != 0) { str += "-"; }
+			if (ones !== 0) {
+				if (hundreds !== 0 && tens === 0) { str += " "; } else if (tens !== 0) { str += "-"; }
 				str += DigitToText(ones);
 			}
 			return str;
@@ -249,13 +249,13 @@ export namespace Text {
 		switch (num) {
 			case 0: return "lack";
 			case 1: r = Rand(4);
-				       if     (r == 0) { return "lone"; } else if (r == 1) { return "solitary"; } else if (r == 2) { return "individual"; } else {            return "single"; }
+				       if     (r === 0) { return "lone"; } else if (r === 1) { return "solitary"; } else if (r === 2) { return "individual"; } else {            return "single"; }
 			case 2: r = Rand(2);
-				       if (r == 0) { return "duo"; } else {       return "pair"; }
+				       if (r === 0) { return "duo"; } else {       return "pair"; }
 			case 3: r = Rand(2);
-				       if (r == 0) { return "trio"; } else {       return "triad"; }
+				       if (r === 0) { return "trio"; } else {       return "triad"; }
 			case 4: r = Rand(2);
-				       if (r == 0) { return "quad"; } else {       return "quartette"; }
+				       if (r === 0) { return "quad"; } else {       return "quartette"; }
 			case 5: return "quintet";
 			case 6: return "sextet";
 			case 7: return "septet";
@@ -315,10 +315,10 @@ export namespace Text {
 	export function Enumerate(list: any[], conjunction: any) {
 		let output = "";
 		list.reverse(); // We're assuming that the order matters
-		list.forEach(function(elem, idx) {
-			if (idx == 0) {
+		list.forEach((elem, idx) => {
+			if (idx === 0) {
 				output = elem + output;
-			} else if (idx == 1) {
+			} else if (idx === 1) {
 				output = elem + " " + conjunction + " " + output;
 			} else {
 				output = elem + ", " + output;
@@ -338,7 +338,7 @@ export namespace Text {
 		let input;
 		const type = inputOptions.type || "button";
 		const classesStr = (cssClasses || "") + " " + (inputOptions.classes || "");
-		if (type.toLowerCase() == "button") {
+		if (type.toLowerCase() === "button") {
 			const btnName = inputOptions.nameStr;
 			const onclick = inputOptions.func;
 			const clickParam = inputOptions.param;
@@ -358,7 +358,7 @@ export namespace Text {
 			$(input).data("param", inputOptions.obj); // TODO
 			$(input).data("func", onclick);
 
-		} else if (type.toLowerCase() == "select") {
+		} else if (type.toLowerCase() === "select") {
 			// TODO Will finish when I need it later
 			/*let onSelect = inputOptions.func;
 			let selectParam = inputOptions.param;
@@ -376,9 +376,9 @@ export namespace Text {
 			//Add function and parameter data to input
 			$(input).data("param", inputOptions.obj); //TODO
 			$(input).data("func", onclick);*/
-		} else if (type.toLowerCase() == "checkbox") {
+		} else if (type.toLowerCase() === "checkbox") {
 			// TODO
-		} else if (type.toLowerCase() == "rado") {
+		} else if (type.toLowerCase() === "rado") {
 			// TODO
 		}
 		return input;

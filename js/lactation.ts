@@ -15,15 +15,15 @@ export class LactationHandler {
 	constructor(entity: any, storage?: any) {
 		this.entity = entity;
 
-		const debugName = function() { return entity.name + ".body"; };
+		const debugName = () => entity.name + ".body";
 
 		this.lactating      = false;
 		this.lactationRate  = new Stat(0);
-		this.lactationRate.debug = function() { return debugName() + ".lactationRate"; };
+		this.lactationRate.debug = () => debugName() + ".lactationRate";
 		this.milkProduction = new Stat(0);
-		this.milkProduction.debug = function() { return debugName() + ".milkProduction"; };
+		this.milkProduction.debug = () => debugName() + ".milkProduction";
 		this.milkCap        = new Stat(0);
-		this.milkCap.debug = function() { return debugName() + ".milkCap"; };
+		this.milkCap.debug = () => debugName() + ".milkCap";
 		this.milk           = new Stat(0);
 
 		if (storage) { this.FromStorage(storage); }
@@ -41,10 +41,8 @@ export class LactationHandler {
 		return storage;
 	}
 
-	public FromStorage(storage: any) {
-		storage = storage || {};
-
-		this.lactating           = parseInt(storage.lact) == 1;
+	public FromStorage(storage: any = {}) {
+		this.lactating           = parseInt(storage.lact, 10) === 1;
 		this.lactationRate.base  = parseFloat(storage.lactR) || this.lactationRate.base;
 		this.milk.base           = parseFloat(storage.milk)  || this.milk.base;
 		this.milkProduction.base = parseFloat(storage.milkP) || this.milkProduction.base;
@@ -53,13 +51,13 @@ export class LactationHandler {
 
 	public CanLactate() {
 		const body = this.entity.body;
-		if (body.breasts.length == 0) {
+		if (body.breasts.length === 0) {
 			return false;
 		} else if (body.breasts[0].Size() < 2) {
 			return false;
- } else {
+ 		} else {
 			return true;
- }
+ 		}
 	}
 	public Lactation() {
 		return this.CanLactate() && this.lactating;
@@ -77,14 +75,14 @@ export class LactationHandler {
 	public MilkCap() {
 		const body = this.entity.body;
 		let cap  = this.milkCap.Get();
-		for (let i = 0; i < body.breasts.length; i++) {
-			cap += body.breasts[i].Size();
+		for (const breast of body.breasts) {
+			cap += breast.Size();
 		}
 		return cap;
 	}
 	public MilkLevel() {
 		const cap = this.MilkCap();
-		if (cap != 0) {
+		if (cap !== 0) {
 			return this.Milk() / cap;
 		} else {
 			return 0;
@@ -135,5 +133,4 @@ export class LactationHandler {
 	public MilkFull() {
 		this.lactating = true;
 	}
-
 }

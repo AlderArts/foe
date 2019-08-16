@@ -44,7 +44,7 @@ let GenerateFile: any = (options: any) => {
 	// Giving IE a chance to build the DOM in
 	// the iframe with a short timeout:
 
-	setTimeout(function() {
+	setTimeout(() => {
 
 		// The body element of the iframe document:
 
@@ -71,7 +71,7 @@ let GenerateFile: any = (options: any) => {
 };
 GenerateFile.canSaveOffline = false;
 
-(function() {
+(() => {
 	// calling convention for destroying local variables instead of keeping them in global namespace
 	let lnk: HTMLAnchorElement;
 	try {
@@ -91,7 +91,7 @@ GenerateFile.canSaveOffline = false;
 		return;
 	}
 	// if no exceptions are thrown, we simply replace the GenerateFile function with this one
-	GenerateFile = function(options: any) {
+	GenerateFile = (options: any) => {
 		if (!options.filename || !options.content) {
 			throw new Error("Please enter all the required config options!");
 		}

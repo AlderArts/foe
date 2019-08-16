@@ -30,9 +30,9 @@ export namespace TF {
 		let changed = Effect.Unchanged;
 		if (_.isArray(bodypart)) {
 			const list = [];
-			for (let i = 0; i < bodypart.length; i++) {
-				if (bodypart[i].race != race) {
-					list.push(bodypart[i]);
+			for (const bp of bodypart) {
+				if (bp.race !== race) {
+					list.push(bp);
 				}
 			}
 			if (list.length > 0) {
@@ -42,7 +42,7 @@ export namespace TF {
 				ret.bodypart   = list[idx];
 			}
 		} else {
-			changed       = (bodypart.race != race) ? Effect.Changed : Effect.Unchanged;
+			changed       = (bodypart.race !== race) ? Effect.Changed : Effect.Unchanged;
 			bodypart.race = race;
 			ret.bodypart  = bodypart;
 		}
@@ -53,17 +53,17 @@ export namespace TF {
 		let changed: any = Effect.Unchanged;
 		if (_.isArray(bodypart)) {
 			const list = [];
-			for (let i = 0; i < bodypart.length; i++) {
-				if (bodypart[i].race != race) {
-					list.push(bodypart[i]);
+			for (const bp of bodypart) {
+				if (bp.race !== race) {
+					list.push(bp);
 				}
 			}
-			for (let i = 0; i < list.length; i++) {
-				changed      = true;
-				list[i].race = race;
+			for (const bp of list) {
+				changed = true;
+				bp.race = race;
 			}
 		} else {
-			changed       = (bodypart.race != race) ? Effect.Changed : Effect.Unchanged;
+			changed       = (bodypart.race !== race) ? Effect.Changed : Effect.Unchanged;
 			bodypart.race = race;
 		}
 		return changed;
@@ -75,13 +75,12 @@ export namespace TF {
 			count = 1;
 		}
 
-		for (let i = 0; i < slots.length; i++) {
-			const app = slots[i];
-			if (app.type == type) {
+		for (const app of slots) {
+			if (app.type === type) {
 				const changed    =
-				   ((app.race  != race)  ||
-					(app.count != count) ||
-					(app.color != color)) ? Effect.Changed : Effect.Unchanged;
+				   ((app.race  !== race)  ||
+					(app.count !== count) ||
+					(app.color !== color)) ? Effect.Changed : Effect.Unchanged;
 				app.race  = race;
 				app.color = color;
 				app.count = count;
@@ -100,11 +99,11 @@ export namespace TF {
 			all = true;
 		} else if (!_.isNumber(count)) {
 			count = 1;
- }
+ 		}
 
 		for (let i = 0; i < slots.length; i++) {
 			const app = slots[i];
-			if (app.type == type) {
+			if (app.type === type) {
 				if (all) {
 					app.count = 0;
 				} else {
@@ -128,7 +127,7 @@ export namespace TF {
 		const orig = balls.count.Get();
 		const res = balls.count.IncreaseStat(ideal, count);
 		if (res > 0) {
-			if (orig == 0) {
+			if (orig === 0) {
 				return Effect.Added;
 			} else {
 				return Effect.Changed;
@@ -143,8 +142,8 @@ export namespace TF {
 		ideal = ideal || 0;
 
 		const res = balls.count.DecreaseStat(ideal, count);
-		if (res != 0) {
-			if (balls.count.Get() == 0) {
+		if (res !== 0) {
+			if (balls.count.Get() === 0) {
 				return Effect.Removed;
 			} else {
 				return Effect.Changed;
@@ -161,11 +160,10 @@ export namespace TF {
 		if (!suppressUse && this.useStr) {
 			this.useStr(target);
 		}
-		for (let i = 0; i < this.effects.length; i++) {
-			const effect = this.effects[i];
+		for (const effect of this.effects) {
 			if (effect.func) {
 				const ret = effect.func(target, effect.opts);
-				if (ret != Effect.Unchanged) {
+				if (ret !== Effect.Unchanged) {
 					changed = ret;
 				}
 			}
@@ -174,7 +172,7 @@ export namespace TF {
 	}
 
 	export function UseItemDesc(target: Entity) {
-		const parse: any = { name: target.NameDesc(), s: target == GAME().player ? "" : "s", item: this.name };
+		const parse: any = { name: target.NameDesc(), s: target === GAME().player ? "" : "s", item: this.name };
 		Text.Add("[name] chug[s] down a bottle of [item].", parse);
 		Text.NL();
 		Text.Flush();
@@ -196,7 +194,7 @@ export namespace TF {
 			const body    = target.body.torso;
 			if (Math.random() < odds) {
 				changed = TF.SetRaceOne(body, opts.race);
-				if (changed != Effect.Unchanged) {
+				if (changed !== Effect.Unchanged) {
 					Text.Add("[Poss] body turns into [str]!", parse);
 					Text.NL();
 				}
@@ -212,7 +210,7 @@ export namespace TF {
 			const head    = target.body.head;
 			if (Math.random() < odds) {
 				changed = TF.SetRaceOne(head, opts.race);
-				if (changed != Effect.Unchanged) {
+				if (changed !== Effect.Unchanged) {
 					Text.Add("[Poss] face turns into [str]!", parse);
 					Text.NL();
 				}
@@ -228,7 +226,7 @@ export namespace TF {
 			const head    = target.body.head;
 			if (Math.random() < odds) {
 				changed = TF.SetRaceOne(head.mouth.tongue, opts.race);
-				if (changed != Effect.Unchanged) {
+				if (changed !== Effect.Unchanged) {
 					Text.Add("[Poss] tongue turns into [str]!", parse);
 					Text.NL();
 				}
@@ -245,7 +243,7 @@ export namespace TF {
 			const body    = target.body.arms;
 			if (Math.random() < odds) {
 				changed = TF.SetRaceOne(body, opts.race);
-				if (changed != Effect.Unchanged) {
+				if (changed !== Effect.Unchanged) {
 					Text.Add("[Poss] arms turns into [str]!", parse);
 					Text.NL();
 				}
@@ -263,7 +261,7 @@ export namespace TF {
 			const legs    = target.body.legs;
 			if (legs.count >= 2 && Math.random() < odds) {
 				changed = TF.SetRaceOne(legs, opts.race);
-				if (changed != Effect.Unchanged) {
+				if (changed !== Effect.Unchanged) {
 					Text.Add("[Poss] legs turns into [str]!", parse);
 					Text.NL();
 				}
@@ -280,7 +278,7 @@ export namespace TF {
 			const cocks   = target.AllCocks();
 			if (Math.random() < odds) {
 				changed = TF.SetRaceOne(cocks, opts.race);
-				if (changed != Effect.Unchanged) {
+				if (changed !== Effect.Unchanged) {
 					if (cocks.length > 1) {
 						Text.Add("One of [poss] cocks turns into [str]!", parse);
 					} else {
@@ -301,7 +299,7 @@ export namespace TF {
 			const ears    = target.Ears();
 			if (Math.random() < odds) {
 				changed = TF.SetRaceOne(ears, opts.race);
-				if (changed != Effect.Unchanged) {
+				if (changed !== Effect.Unchanged) {
 					Text.Add("[Poss] ears turn into [str]!", parse);
 					Text.NL();
 				}
@@ -315,20 +313,19 @@ export namespace TF {
 			const parse: any = { Poss: target.Possessive(), poss: target.possessive() };
 			const odds  = opts.odds || 1;
 			let num   = opts.num || 1;
-			const cocks = target.AllCocks();
-			for (let i = 0; i < cocks.length; i++) {
+			for (const cock of target.AllCocks()) {
 				if (Math.random() < odds) {
-					parse.cockDesc = cocks[i].Short();
+					parse.cockDesc = cock.Short();
 					if (opts.value) {
-						if (cocks[i].knot == 0) {
-							cocks[i].knot = 1;
+						if (cock.knot === 0) {
+							cock.knot = 1;
 							Text.Add("[Poss] [cockDesc] grows a knot!", parse);
 							Text.NL();
 							num--;
 						}
 					} else {
-						if (cocks[i].knot == 1) {
-							cocks[i].knot = 0;
+						if (cock.knot === 1) {
+							cock.knot = 0;
 							Text.Add("The knot on [poss] [cockDesc] disappears!", parse);
 							Text.NL();
 							num--;
@@ -349,7 +346,7 @@ export namespace TF {
 
 			const gen = target.Genitalia();
 			if (Math.random() < odds) {
-				if (gen.cover != value) {
+				if (gen.cover !== value) {
 					const parse: any = {
 						Poss: target.Possessive(),
 						poss: target.possessive(),
@@ -357,22 +354,22 @@ export namespace TF {
 						notS: target.NumCocks() > 1 ? "" : "s",
 						is: target.NumCocks() > 1 ? "are" : "is",
 					};
-					if (value == Genitalia.Cover.NoCover) {
-						if (gen.cover == Genitalia.Cover.Sheath) {
+					if (value === Genitalia.Cover.NoCover) {
+						if (gen.cover === Genitalia.Cover.Sheath) {
 							Text.Add("The sheath protecting [poss] [cocks] disappears!", parse);
-						} else if (gen.cover == Genitalia.Cover.Slit) {
+						} else if (gen.cover === Genitalia.Cover.Slit) {
 							Text.Add("[Poss] genital slit slowly closes up, pushing [poss] [cocks] into the open!", parse);
  }
-					} else if (value == Genitalia.Cover.Sheath) {
-						if (gen.cover == Genitalia.Cover.NoCover) {
+					} else if (value === Genitalia.Cover.Sheath) {
+						if (gen.cover === Genitalia.Cover.NoCover) {
 							Text.Add("[Poss] [cocks] grow[notS] a sheath!", parse);
-						} else if (gen.cover == Genitalia.Cover.Slit) {
+						} else if (gen.cover === Genitalia.Cover.Slit) {
 							Text.Add("[Poss] genital slit coarsens into a sheath, covering [poss] [cocks]!", parse);
  }
-					} else if (value == Genitalia.Cover.Slit) {
-						if (gen.cover == Genitalia.Cover.NoCover) {
+					} else if (value === Genitalia.Cover.Slit) {
+						if (gen.cover === Genitalia.Cover.NoCover) {
 							Text.Add("[Poss] [cocks] [is] enveloped in a protective genital slit!", parse);
-						} else if (gen.cover == Genitalia.Cover.Sheath) {
+						} else if (gen.cover === Genitalia.Cover.Sheath) {
 							Text.Add("[Poss] sheath morphs into a protective genital slit, covering [poss] [cocks]!", parse);
  }
 					}
@@ -389,7 +386,7 @@ export namespace TF {
 		// odds, race, str, color
 		export function SetTail(target: Entity, opts: any) {
 			let changed = Effect.Unchanged;
-			const parse   = { name: target.NameDesc(), Poss: target.Possessive(), s: target == GAME().player ? "" : "s", str: opts.str };
+			const parse   = { name: target.NameDesc(), Poss: target.Possessive(), s: target === GAME().player ? "" : "s", str: opts.str };
 
 			const odds    = opts.odds || 1;
 			if (Math.random() < odds) {
@@ -436,7 +433,7 @@ export namespace TF {
 		// odds, race, str, color, count
 		export function SetHorn(target: Entity, opts: any) {
 			let changed = Effect.Unchanged;
-			const parse   = { name: target.NameDesc(), Poss: target.Possessive(), s: target == GAME().player ? "" : "s", str: opts.str };
+			const parse   = { name: target.NameDesc(), Poss: target.Possessive(), s: target === GAME().player ? "" : "s", str: opts.str };
 
 			const odds    = opts.odds || 1;
 			if (Math.random() < odds) {
@@ -481,7 +478,7 @@ export namespace TF {
 		// odds, race, str, color, count
 		export function SetAntenna(target: Entity, opts: any) {
 			let changed = Effect.Unchanged;
-			const parse   = { name: target.NameDesc(), Poss: target.Possessive(), s: target == GAME().player ? "" : "s", str: opts.str };
+			const parse   = { name: target.NameDesc(), Poss: target.Possessive(), s: target === GAME().player ? "" : "s", str: opts.str };
 
 			const odds    = opts.odds  || 1;
 			const count   = opts.count || 2;
@@ -527,7 +524,7 @@ export namespace TF {
 		// odds, race, str, color, count
 		export function SetWings(target: Entity, opts: any) {
 			let changed = Effect.Unchanged;
-			const parse   = { name: target.NameDesc(), Poss: target.Possessive(), s: target == GAME().player ? "" : "s", str: opts.str };
+			const parse   = { name: target.NameDesc(), Poss: target.Possessive(), s: target === GAME().player ? "" : "s", str: opts.str };
 
 			const odds    = opts.odds  || 1;
 			const count   = opts.count || 2;
@@ -573,7 +570,7 @@ export namespace TF {
 		// odds, race, str, color, count
 		export function SetAbdomen(target: Entity, opts: any) {
 			let changed = Effect.Unchanged;
-			const parse   = { name: target.NameDesc(), Poss: target.Possessive(), s: target == GAME().player ? "" : "s", str: opts.str };
+			const parse   = { name: target.NameDesc(), Poss: target.Possessive(), s: target === GAME().player ? "" : "s", str: opts.str };
 
 			const odds    = opts.odds  || 1;
 			const count   = opts.count || 2;
@@ -619,7 +616,7 @@ export namespace TF {
 		// odds, race, color, ideal, count
 		export function SetBalls(target: Entity, opts: any) {
 			let changed = Effect.Unchanged;
-			const parse   = { name: target.NameDesc(), s: target == GAME().player ? "" : "s", count: Text.NumToText(opts.count), ballsDesc() { return target.BallsDesc(); } };
+			const parse   = { name: target.NameDesc(), s: target === GAME().player ? "" : "s", count: Text.NumToText(opts.count), ballsDesc() { return target.BallsDesc(); } };
 			const odds    = opts.odds  || 1;
 			const count   = opts.count || 2;
 			const ideal   = opts.ideal || 2;
@@ -718,7 +715,7 @@ export namespace TF {
 			if (opts.female) {
 				if (!target.FirstVag()) { return; }
 			}
-			_.each(target.AllBreastRows(), function(breasts) {
+			_.each(target.AllBreastRows(), (breasts) => {
 				if (Math.random() < odds) {
 					const diff = breasts.size.IncreaseStat(opts.ideal, opts.max);
 					if (diff) {
@@ -736,7 +733,7 @@ export namespace TF {
 
 			const odds  = opts.odds || 1;
 			const multi = opts.multi;
-			_.each(target.AllBreastRows(), function(breasts) {
+			_.each(target.AllBreastRows(), (breasts) => {
 				if (Math.random() < odds) {
 					const diff = breasts.size.DecreaseStat(opts.ideal, opts.max);
 					if (diff) {
@@ -757,7 +754,7 @@ export namespace TF {
 			if (opts.female) {
 				if (!target.FirstVag()) { return; }
 			}
-			_.each(target.AllBreastRows(), function(breasts) {
+			_.each(target.AllBreastRows(), (breasts) => {
 				if (Math.random() < odds) {
 					const diff = breasts.size.IdealStat(opts.ideal, opts.max);
 					if (diff > 0) {
@@ -780,7 +777,7 @@ export namespace TF {
 
 			const odds  = opts.odds || 1;
 			const multi = opts.multi;
-			_.each(target.AllCocks(), function(cock) {
+			_.each(target.AllCocks(), (cock) => {
 				if (Math.random() < odds) {
 					const diff = cock.length.IncreaseStat(opts.ideal, opts.max);
 					if (diff) {
@@ -798,7 +795,7 @@ export namespace TF {
 
 			const odds  = opts.odds || 1;
 			const multi = opts.multi;
-			_.each(target.AllCocks(), function(cock) {
+			_.each(target.AllCocks(), (cock) => {
 				if (Math.random() < odds) {
 					const diff = cock.length.DecreaseStat(opts.ideal, opts.max);
 					if (diff) {
@@ -816,7 +813,7 @@ export namespace TF {
 
 			const odds  = opts.odds || 1;
 			const multi = opts.multi;
-			_.each(target.AllCocks(), function(cock) {
+			_.each(target.AllCocks(), (cock) => {
 				if (Math.random() < odds) {
 					const diff = cock.length.IdealStat(opts.ideal, opts.max);
 					if (diff > 0) {
@@ -839,7 +836,7 @@ export namespace TF {
 
 			const odds  = opts.odds || 1;
 			const multi = opts.multi;
-			_.each(target.AllCocks(), function(cock) {
+			_.each(target.AllCocks(), (cock) => {
 				if (Math.random() < odds) {
 					const diff = cock.thickness.IncreaseStat(opts.ideal, opts.max);
 					if (diff) {
@@ -857,7 +854,7 @@ export namespace TF {
 
 			const odds  = opts.odds || 1;
 			const multi = opts.multi;
-			_.each(target.AllCocks(), function(cock) {
+			_.each(target.AllCocks(), (cock) => {
 				if (Math.random() < odds) {
 					const diff = cock.thickness.DecreaseStat(opts.ideal, opts.max);
 					if (diff) {
@@ -875,7 +872,7 @@ export namespace TF {
 
 			const odds  = opts.odds || 1;
 			const multi = opts.multi;
-			_.each(target.AllCocks(), function(cock) {
+			_.each(target.AllCocks(), (cock) => {
 				if (Math.random() < odds) {
 					const diff = cock.thickness.IdealStat(opts.ideal, opts.max);
 					if (diff > 0) {

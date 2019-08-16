@@ -71,10 +71,10 @@ export class Party {
 
 	public LoadMember(storage: any, entity: Entity) {
 		const str = entity.ID;
-		if (storage.members.indexOf(str) != -1) { this.AddMember(entity); }
-		if (storage.reserve.indexOf(str) != -1) { this.AddReserve(entity); }
-		if (storage.saved.indexOf(str)   != -1) { this.saved.push(entity); }
-		if (storage.temp.indexOf(str)    != -1) { this.temp.push(entity); }
+		if (storage.members.indexOf(str) !== -1) { this.AddMember(entity); }
+		if (storage.reserve.indexOf(str) !== -1) { this.AddReserve(entity); }
+		if (storage.saved.indexOf(str)   !== -1) { this.saved.push(entity); }
+		if (storage.temp.indexOf(str)    !== -1) { this.temp.push(entity); }
 	}
 
 	public FromStorage(storage: any) {
@@ -93,7 +93,7 @@ export class Party {
 		this.LoadMember(storage, GAME().cveta);
 		this.LoadMember(storage, GAME().gwendy);
 
-		this.coin = parseInt(storage.coin) || this.coin;
+		this.coin = parseInt(storage.coin, 10) || this.coin;
 		this.location = WORLD().SaveSpots[storage.loc];
 		this.inventory.FromStorage(storage.inv || []);
 	}
@@ -111,20 +111,20 @@ export class Party {
 	}
 
 	public Alone(): boolean {
-		return (this.members.length == 1);
+		return (this.members.length === 1);
 	}
 
 	public Two(): boolean {
-		return (this.members.length == 2);
+		return (this.members.length === 2);
 	}
 
 	public InParty(member: Entity, reserve?: boolean) {
 		let idx = this.members.indexOf(member); // Find the index
-		if (idx != -1) { return true; }
+		if (idx !== -1) { return true; }
 
 		if (reserve) {
 			idx = this.reserve.indexOf(member);
-			return (idx != -1);
+			return (idx !== -1);
 		}
 		return false;
 	}
@@ -136,8 +136,8 @@ export class Party {
 	public SaveActiveParty() {
 		this.temp = [];
 		this.saved = [];
-		for (let i = 0; i < this.members.length; ++i) {
-			this.saved.push(this.members[i]);
+		for (const member of this.members) {
+			this.saved.push(member);
 		}
 	}
 
@@ -148,12 +148,12 @@ export class Party {
 	}
 	public LoadActiveParty() {
 		this.ClearActiveParty();
-		for (let i = 0; i < this.saved.length; ++i) {
-			this.SwitchIn(this.saved[i]);
+		for (const saved of this.saved) {
+			this.SwitchIn(saved);
 		}
 		this.saved = [];
-		for (let i = 0; i < this.temp.length; i++) {
-			this.RemoveMember(this.temp[i]);
+		for (const temp of this.temp) {
+			this.RemoveMember(temp);
 		}
 		this.temp = [];
 	}
@@ -166,11 +166,11 @@ export class Party {
 	}
 	public CloneParty(reserve?: boolean) {
 		const ret: Entity[] = [];
-		_.each(this.members, function(m) {
+		_.each(this.members, (m) => {
 			ret.push(m);
 		});
 		if (reserve) {
-			_.each(this.reserve, function(m) {
+			_.each(this.reserve, (m) => {
 				ret.push(m);
 			});
 		}
@@ -181,10 +181,10 @@ export class Party {
 	}
 	public GetSlot(member: Entity): number {
 		for (let i = 0; i < this.members.length; ++i) {
-			if (this.members[i] == member) { return i; }
+			if (this.members[i] === member) { return i; }
 		}
 		for (let i = 0; i < this.reserve.length; ++i) {
-			if (this.reserve[i] == member) { return i + this.members.length; }
+			if (this.reserve[i] === member) { return i + this.members.length; }
 		}
 		return -1;
 	}
@@ -207,42 +207,42 @@ export class Party {
 
 	public InReserve(member: Entity): boolean {
 		const idx = this.reserve.indexOf(member); // Find the index
-		return (idx != -1);
+		return (idx !== -1);
 	}
 	public InSaved(member: Entity): boolean {
 		const idx = this.saved.indexOf(member); // Find the index
-		return (idx != -1);
+		return (idx !== -1);
 	}
 	public InTemp(member: Entity): boolean {
 		const idx = this.temp.indexOf(member); // Find the index
-		return (idx != -1);
+		return (idx !== -1);
 	}
 
 	public AddMember(member: Entity, temporary?: boolean) {
 		const idx = this.members.indexOf(member); // Find the index
-		if (idx == -1) {
+		if (idx === -1) {
 			if (this.members.length >= 4) {
 				this.AddReserve(member);
 			} else {
 				this.members.push(member);
 			} // Only add if not already added
 		}
-		if (this == GAME().party) { member.DebugMode(GetDEBUG()); }
+		if (this === GAME().party) { member.DebugMode(GetDEBUG()); }
 		if (temporary) { this.temp.push(member); }
 	}
 
 	public AddReserve(member: Entity) {
 		const idx = this.reserve.indexOf(member); // Find the index
-		if (idx == -1) { this.reserve.push(member); } // Only add if not already added
-		if (this == GAME().party) { member.DebugMode(GetDEBUG()); }
+		if (idx === -1) { this.reserve.push(member); } // Only add if not already added
+		if (this === GAME().party) { member.DebugMode(GetDEBUG()); }
 	}
 
 	public RemoveMember(member: Entity) {
 		let idx = this.members.indexOf(member);  // Find the index
-		if (idx != -1) { this.members.splice(idx, 1); } // Remove it if really found!
+		if (idx !== -1) { this.members.splice(idx, 1); } // Remove it if really found!
 		idx = this.reserve.indexOf(member);  // Find the index
-		if (idx != -1) { this.reserve.splice(idx, 1); } // Remove it if really found!
-		if (this == GAME().party) { member.DebugMode(false); }
+		if (idx !== -1) { this.reserve.splice(idx, 1); } // Remove it if really found!
+		if (this === GAME().party) { member.DebugMode(false); }
 	}
 
 	public SwitchPrompt(member: Entity) {
@@ -266,8 +266,7 @@ export class Party {
 				}, enabled : true,
 				tooltip: Text.Parse("Send [name] to the reserve.", parse),
 			});
-			for (let i = 0; i < this.reserve.length; i++) {
-				const e = this.reserve[i];
+			for (const e of this.reserve) {
 				parse.name2 = e.name;
 				options.push({ nameStr : e.name,
 					obj  : e,
@@ -279,7 +278,7 @@ export class Party {
 					tooltip: Text.Parse("Switch [name] to the reserve, replacing [himher] with [name2].", parse),
 				});
 			}
-			if (options.length == 1) {
+			if (options.length === 1) {
 				that.SwitchOut(member);
 				Gui.PrintDefaultOptions();
 			} else {
@@ -287,19 +286,20 @@ export class Party {
 			}
 		} else {
 			const options = [];
-			for (let i = 0; i < this.members.length; i++) {
-				const e = this.members[i];
+			let i = 0;
+			for (const e of this.members) {
 				options.push({ nameStr : e.name,
 					obj  : e,
 					func(obj: Entity) {
 						that.SwitchOut(obj);
 						that.SwitchIn(member);
 						Gui.PrintDefaultOptions();
-					}, enabled : i != 0,
+					}, enabled : i !== 0,
 					tooltip: Text.Parse("Switch [name] into the active party, replacing [name2].", parse),
 				});
+				i++;
 			}
-			if (options.length == 1) {
+			if (options.length === 1) {
 				that.SwitchIn(member);
 				Gui.PrintDefaultOptions();
 			} else {
@@ -328,20 +328,20 @@ export class Party {
 	}
 
 	public RestFull() {
-		for (let i = 0; i < this.members.length; i++) {
-			this.members[i].RestFull();
+		for (const member of this.members) {
+			member.RestFull();
 		}
-		for (let i = 0; i < this.reserve.length; i++) {
-			this.reserve[i].RestFull();
+		for (const member of this.reserve) {
+			member.RestFull();
 		}
 	}
 
 	public Sleep() {
-		for (let i = 0; i < this.members.length; i++) {
-			this.members[i].Sleep();
+		for (const member of this.members) {
+			member.Sleep();
 		}
-		for (let i = 0; i < this.reserve.length; i++) {
-			this.reserve[i].Sleep();
+		for (const member of this.reserve) {
+			member.Sleep();
 		}
 	}
 
@@ -360,8 +360,8 @@ export class Party {
 		// Interacting with self opens options for masturbation etc
 		Text.Add("<table class='party' style='width:[w]%'>", {w: this.members.length > 1 ? "100" : "50"});
 		Text.Add("<tr>");
-		for (let i = 0; i < this.members.length; i++) {
-			const member = this.members[i];
+		let i = 0;
+		for (const member of this.members) {
 			Text.Add("<td>");
 			Text.Add("<p><center style='font-size: x-large'><b>" + member.name + "</b></center></p>");
 			Text.Add("<table class='party' style='width:100%'>");
@@ -406,7 +406,7 @@ export class Party {
 			Text.Add("<tr><td><b>Charisma:</b></td><td>"     + Math.floor(member.Cha()) + "</td></tr>");
 			Text.Add("</table>");
 			Text.Add("</td>");
-			if (i == 1) {
+			if (i === 1) {
 				Text.Add("</tr><tr>");
 			}
 
@@ -417,13 +417,13 @@ export class Party {
 				enabled: true,
 				image: Images.imgButtonEnabled2,
 			});
+			i++;
 		}
 		Text.Add("</tr>");
 		Text.Add("</table>");
 		if (switchSpot) {
 			// Add reserve too
-			for (let i = 0; i < this.reserve.length; i++) {
-				const member = this.reserve[i];
+			for (const member of this.reserve) {
 				list.push({
 					nameStr: member.name,
 					func: member.Interact,
@@ -445,18 +445,16 @@ export class Party {
 		const that = this;
 
 		const ents = [];
-		for (let i = 0; i < this.members.length; i++) {
-			ents.push(this.members[i]);
+		for (const member of this.members) {
+			ents.push(member);
 		}
 
 		// Go through each member, add available abilities to list
-		for (let i = 0; i < ents.length; i++) {
-			const entity = ents[i];
+		for (const entity of ents) {
 			const abilities = entity.abilities;
 
-			const pushAbilities = function(coll: any, jobAbilities?: any) {
-				for (let ab = 0; ab < coll.AbilitySet.length; ab++) {
-					const ability = coll.AbilitySet[ab];
+			const pushAbilities = (coll: any, jobAbilities?: any) => {
+				for (const ability of coll.AbilitySet) {
 					if (jobAbilities && jobAbilities.HasAbility(ability)) { continue; }
 
 					if (ability.OOC) {
@@ -499,9 +497,9 @@ export class Party {
 			if (jobAbilities) {
 				pushAbilities(jobAbilities);
 			}
-			for (const coll in abilities) {
-				pushAbilities(abilities[coll], jobAbilities);
-			}
+			_.forIn(abilities, (value, key) => {
+				pushAbilities(value, jobAbilities);
+			});
 		}
 		Text.Flush();
 

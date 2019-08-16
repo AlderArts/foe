@@ -474,12 +474,11 @@ export namespace Status {
 		const ret: any = {};
 		if (this.hours) { ret.hours = this.hours.toFixed(2); }
 
-		if (this.fer != 0) { ret.fer = this.fer.toFixed(2); }
+		if (this.fer !== 0) { ret.fer = this.fer.toFixed(2); }
 
 		return ret;
 	};
-	Aroused.FromStorage = function(storage: any) {
-		storage = storage || {};
+	Aroused.FromStorage = (storage: any = {}) => {
 		const obj: any = {};
 		if (storage.hours) { obj.hours = parseFloat(storage.hours); }
 
@@ -532,12 +531,11 @@ export namespace Status {
 		const ret: any = {};
 		if (this.hours) { ret.hours = this.hours.toFixed(2); }
 
-		if (this.fer != 0) { ret.fer = this.fer.toFixed(2); }
+		if (this.fer !== 0) { ret.fer = this.fer.toFixed(2); }
 
 		return ret;
 	};
-	Limp.FromStorage = function(storage: any) {
-		storage = storage || {};
+	Limp.FromStorage = (storage: any = {}) => {
 		const obj: any = {};
 		if (storage.hours) { obj.hours = parseFloat(storage.hours); }
 
@@ -620,8 +618,7 @@ export namespace Status {
 
 		return ret;
 	};
-	Full.FromStorage = function(storage: any) {
-		storage = storage || {};
+	Full.FromStorage = (storage: any = {}) => {
 		const obj: any = {};
 		if (storage.hours) { obj.hours = parseFloat(storage.hours); }
 		if (storage.exp) {   obj.exp   = parseFloat(storage.exp); }
@@ -659,7 +656,7 @@ export namespace Status {
 		// cleanup
 		for (let i = 0, j = CurEncounter().combatOrder.length; i < j; i++) {
 			const c = CurEncounter().combatOrder[i];
-			if (c.entity == target) {
+			if (c.entity === target) {
 				c.aggro = [];
 				break;
 			}
@@ -674,11 +671,11 @@ export namespace Status {
 			target.combatStatus.stats[StatusEffect.Confuse] = null;
 		}
 	};
-	Confuse.OnFade = function(encounter: any, entity: any) {
+	Confuse.OnFade = (encounter: any, entity: any) => {
 		// cleanup
 		for (let i = 0, j = encounter.combatOrder.length; i < j; i++) {
 			const c = encounter.combatOrder[i];
-			if (c.entity == entity) {
+			if (c.entity === entity) {
 				c.aggro = [];
 				break;
 			}
@@ -767,8 +764,7 @@ export namespace Status {
 		if (this.LP) {  ret.LP  = this.LP.toFixed(2); }
 		return ret;
 	};
-	Buff.FromStorage = function(storage: any) {
-		storage = storage || {};
+	Buff.FromStorage = (storage: any = {}) => {
 		const obj: any = {};
 		if (storage.hours) { obj.hours = parseFloat(storage.hours); }
 

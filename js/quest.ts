@@ -25,11 +25,11 @@ export class Quest {
 	public active: any;
 	public list: any[];
 
-	constructor(opts?: any) {
-		opts = opts || {};
+	constructor(opts: any = {}) {
 		this.name   = opts.name   || "FAIL";
 		this.desc   = opts.desc   || "NO DESC";
-		this.active = opts.active || function() { return Quests.Type.NotStarted; };
+		const defActive = () => Quests.Type.NotStarted;
+		this.active = opts.active || defActive;
 		this.list   = opts.list   || [];
 	}
 
@@ -110,7 +110,7 @@ const Quests: any = {
 Quests.quests  = [];
 Quests.curType = Quests.Type.Visible;
 
-Quests.Print = function(SetExploreButtons: any) {
+Quests.Print = (SetExploreButtons: any) => {
 	let numQs = 0;
 	for (let i = 0, j = Quests.quests.length; i < j; ++i) {
 		const q = Quests.quests[i];
@@ -142,21 +142,21 @@ Quests.Print = function(SetExploreButtons: any) {
 			Text.Clear();
 			Quests.curType = Quests.Type.Visible;
 			Quests.Print(SetExploreButtons);
-		}, enabled : Quests.curType != Quests.Type.Visible,
+		}, enabled : Quests.curType !== Quests.Type.Visible,
 	});
 	options.push({ nameStr : "Completed",
 		func() {
 			Text.Clear();
 			Quests.curType = Quests.Type.Completed;
 			Quests.Print(SetExploreButtons);
-		}, enabled : Quests.curType != Quests.Type.Completed,
+		}, enabled : Quests.curType !== Quests.Type.Completed,
 	});
 	options.push({ nameStr : "All",
 		func() {
 			Text.Clear();
 			Quests.curType = Quests.Type.All;
 			Quests.Print(SetExploreButtons);
-		}, enabled : Quests.curType != Quests.Type.All,
+		}, enabled : Quests.curType !== Quests.Type.All,
 	});
 	Gui.SetButtonsFromList(options, false, null);
 
@@ -182,9 +182,9 @@ Quests.quests.push(new Quest({
 	list: [
 		new QuestItem({
 			desc() {
-				if ((GAME().rosalin.flags.Met == 0 ||
+				if ((GAME().rosalin.flags.Met === 0 ||
 				    GlobalScenes.MagicStage1()) &&
-				    GAME().jeanne.flags.Met == 0) {
+				    GAME().jeanne.flags.Met === 0) {
 					return "Find someone to help you figure out what the gem does.";
 				} else {
 					return "Talk with the court magician about the gem and figure out what it does.";
@@ -193,7 +193,7 @@ Quests.quests.push(new Quest({
 			active() {
 				let status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if (GAME().jeanne.flags.Met != 0) {
+				if (GAME().jeanne.flags.Met !== 0) {
 					status |= Quests.Type.Completed;
 				}
 				return status;
@@ -205,7 +205,7 @@ Quests.quests.push(new Quest({
 			},
 			active() {
 				let status = Quests.Type.NotStarted;
-				if (GAME().jeanne.flags.Met != 0) {
+				if (GAME().jeanne.flags.Met !== 0) {
 					status |= Quests.Type.Visible;
 				}
 				if (GAME().glade.flags.Visit >= DryadGladeFlags.Visit.DefeatedOrchid) {
@@ -240,7 +240,7 @@ Quests.quests.push(new Quest({
 	active(quest: Quest) {
 		let complete = true;
 		for (let i = 0, j = quest.list.length; i < j; ++i) {
-			complete = complete && (quest.list[i].Active() & Quests.Type.Completed) != 0;
+			complete = complete && (quest.list[i].Active() & Quests.Type.Completed) !== 0;
 		}
 		let status = Quests.Type.NotStarted;
 		if (complete) {
@@ -258,7 +258,7 @@ Quests.quests.push(new Quest({
 			active() {
 				let status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if (GAME().chief.flags.Met != 0) {
+				if (GAME().chief.flags.Met !== 0) {
 					status |= Quests.Type.Completed;
 				}
 				return status;
@@ -271,7 +271,7 @@ Quests.quests.push(new Quest({
 			active() {
 				let status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if (GAME().rosalin.flags.Met != 0) {
+				if (GAME().rosalin.flags.Met !== 0) {
 					status |= Quests.Type.Completed;
 				}
 				return status;
@@ -283,10 +283,10 @@ Quests.quests.push(new Quest({
 			},
 			active() {
 				let status = Quests.Type.NotStarted;
-				if (GAME().rosalin.flags.Met != 0) {
+				if (GAME().rosalin.flags.Met !== 0) {
 					status |= Quests.Type.Visible;
 				}
-				if (GAME().cale.flags.Met2 != CaleFlags.Met2.NotMet) {
+				if (GAME().cale.flags.Met2 !== CaleFlags.Met2.NotMet) {
 					status |= Quests.Type.Completed;
 				}
 				return status;
@@ -299,7 +299,7 @@ Quests.quests.push(new Quest({
 			active() {
 				let status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if (GAME().estevan.flags.Met != 0) {
+				if (GAME().estevan.flags.Met !== 0) {
 					status |= Quests.Type.Completed;
 				}
 				return status;
@@ -312,7 +312,7 @@ Quests.quests.push(new Quest({
 			active() {
 				let status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if (GAME().magnus.flags.Met != 0) {
+				if (GAME().magnus.flags.Met !== 0) {
 					status |= Quests.Type.Completed;
 				}
 				return status;
@@ -326,7 +326,7 @@ Quests.quests.push(new Quest({
 			active: function() {
 				let status = Quests.Type.NotStarted;
 				status |= Quests.Type.Visible;
-				if(GAME().patchwork.flags["Met"] != 0)
+				if(GAME().patchwork.flags["Met"] !== 0)
 					status |= Quests.Type.Completed;
 				return status;
 			}
@@ -452,7 +452,7 @@ Quests.quests.push(new Quest({
 		let status = Quests.Type.NotStarted;
 		if (rigard.Krawitz.Q >= RigardFlags.KrawitzQ.CaughtTerry) {
 			status |= Quests.Type.Completed;
-		} else if (rigard.Krawitz.Q == RigardFlags.KrawitzQ.HuntingTerry) {
+		} else if (rigard.Krawitz.Q === RigardFlags.KrawitzQ.HuntingTerry) {
 			status |= Quests.Type.Visible;
  }
 		return status;
@@ -566,7 +566,7 @@ Quests.quests.push(new Quest({
 		let status = Quests.Type.NotStarted;
 		if (rosalin.flags.AlQuest >= 2) {
 			status |= Quests.Type.Completed;
-		} else if (rosalin.flags.Met != 0) {
+		} else if (rosalin.flags.Met !== 0) {
 			status |= Quests.Type.Visible;
  }
 		return status;
@@ -593,8 +593,7 @@ Quests.quests.push(new Quest({
 			active() {
 				const item = AlchemyItems.Leporine;
 				let enabled = true;
-				for (let j = 0; j < item.recipe.length; j++) {
-					const component = item.recipe[j];
+				for (const component of item.recipe) {
 					enabled = enabled && (GAME().party.inventory.QueryNum(component.it) >= (component.num || 1));
 				}
 
@@ -739,7 +738,7 @@ Quests.quests.push(new Quest({
 		}),
 		new QuestItem({
 			desc() {
-				return GAME().rigard.flags.Scepter == 0 ? "Follow the merchant lead, trail the caravan along the King's Road." : "Follow the merchant lead, probably best to check the merchant street.";
+				return GAME().rigard.flags.Scepter === 0 ? "Follow the merchant lead, trail the caravan along the King's Road." : "Follow the merchant lead, probably best to check the merchant street.";
 			},
 			active() {
 				const burrows = GAME().burrows;

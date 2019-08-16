@@ -198,32 +198,32 @@ export class Entity {
 		// Health stat and functions
 		this.curHp        = 0;
 		this.maxHp        = new Stat(10, 10, 5);
-		this.maxHp.debug = function() { return that.name + ".maxHp"; };
+		this.maxHp.debug = () => that.name + ".maxHp";
 		// SP
 		this.curSp        = 0;
 		this.maxSp        = new Stat(10, 5, 5);
-		this.maxSp.debug = function() { return that.name + ".maxSp"; };
+		this.maxSp.debug = () => that.name + ".maxSp";
 
 		// Lust stat and functions
 		this.curLust      = 0;
 		this.maxLust      = new Stat(10, 5, 5);
-		this.maxLust.debug = function() { return that.name + ".maxLust"; };
+		this.maxLust.debug = () => that.name + ".maxLust";
 
 		// Main stats
 		this.strength     = new Stat(0, 1, 0.1);
-		this.strength.debug = function() { return that.name + ".strength"; };
+		this.strength.debug = () => that.name + ".strength";
 		this.stamina      = new Stat(0, 1, 0.1);
-		this.stamina.debug = function() { return that.name + ".stamina"; };
+		this.stamina.debug = () => that.name + ".stamina";
 		this.dexterity    = new Stat(0, 1, 0.1);
-		this.dexterity.debug = function() { return that.name + ".dexterity"; };
+		this.dexterity.debug = () => that.name + ".dexterity";
 		this.intelligence = new Stat(0, 1, 0.1);
-		this.intelligence.debug = function() { return that.name + ".intelligence"; };
+		this.intelligence.debug = () => that.name + ".intelligence";
 		this.spirit       = new Stat(0, 1, 0.1);
-		this.spirit.debug = function() { return that.name + ".spirit"; };
+		this.spirit.debug = () => that.name + ".spirit";
 		this.libido       = new Stat(0, 1, 0.1);
-		this.libido.debug = function() { return that.name + ".libido"; };
+		this.libido.debug = () => that.name + ".libido";
 		this.charisma     = new Stat(0, 1, 0.1);
-		this.charisma.debug = function() { return that.name + ".charisma"; };
+		this.charisma.debug = () => that.name + ".charisma";
 
 		// Equipment
 		this.weaponSlot   = null;
@@ -274,11 +274,11 @@ export class Entity {
 
 		// Personality stats
 		this.subDom   = new Stat(0); // sub = low, dom = high
-		this.subDom.debug = function() { return that.name + ".subDom"; };
+		this.subDom.debug = () => that.name + ".subDom";
 		this.slut     = new Stat(0);
-		this.slut.debug = function() { return that.name + ".slut"; };
+		this.slut.debug = () => that.name + ".slut";
 		this.relation = new Stat(0);
-		this.relation.debug = function() { return that.name + ".relation"; };
+		this.relation.debug = () => that.name + ".relation";
 	}
 
 	public SetLevelBonus() {
@@ -295,8 +295,8 @@ export class Entity {
 	}
 
 	public HasPerk(perk: Perk) {
-		for (let i = 0; i < this.perks.length; ++i) {
-			if (this.perks[i] == perk) {
+		for (const p of this.perks) {
+			if (p === perk) {
 				return true;
 			}
 		}
@@ -304,8 +304,8 @@ export class Entity {
 	}
 
 	public AddPerk(perk: Perk) {
-		for (let i = 0; i < this.perks.length; ++i) {
-			if (this.perks[i] == perk) {
+		for (const p of this.perks) {
+			if (p === perk) {
 				return;
 			}
 		}
@@ -314,12 +314,12 @@ export class Entity {
 
 	public KnowsRecipe(item: Item) {
 		const idx = this.recipes.indexOf(item); // Find the index
-		return (idx != -1);
+		return (idx !== -1);
 	}
 
 	public AddAlchemy(item: Item) {
 		const idx = this.recipes.indexOf(item); // Find the index
-		if (idx == -1) {
+		if (idx === -1) {
 			this.recipes.push(item);
 		}
 	}
@@ -453,7 +453,7 @@ export class Entity {
 	}
 
 	public IsAtLocation(location: any) {
-		return (this.location == location);
+		return (this.location === location);
 	}
 
 	// Should return an array of drops (if any) in the form of {it: Item, num: amount}
@@ -643,7 +643,7 @@ export class Entity {
 	public FinishCastInternal(ability: any, encounter: any, caster: any, targets: any) {
 		Text.Flush();
 
-		Gui.NextPrompt(function() {
+		Gui.NextPrompt(() => {
 			if (encounter) {
 				encounter.CombatTick();
 			} else {
@@ -660,8 +660,8 @@ export class Entity {
 	public GetCombatEntry(encounter: any) {
 		const ent = this;
 		let found: any;
-		_.each(encounter.combatOrder, function(it) {
-			if (it.entity == ent) {
+		_.each(encounter.combatOrder, (it) => {
+			if (it.entity === ent) {
 				found = it;
 				return false;
 			}
@@ -709,12 +709,12 @@ export class Entity {
 		let aggro;
 		if (ally) {
 			// cleanup
-			activeChar.aggroAllies = _.reject(activeChar.aggroAllies, function(it) {
+			activeChar.aggroAllies = _.reject(activeChar.aggroAllies, (it) => {
 				return it.entity.Incapacitated();
 			});
 
 			// adding new aggro targets
-			_.each(targets, function(t) {
+			_.each(targets, (t) => {
 				if (!GetAggroEntry(activeChar, t)) {
 					activeChar.aggroAllies.push({entity: t, aggro: 1});
 				}
@@ -724,12 +724,12 @@ export class Entity {
 			aggro = _.clone(activeChar.aggroAllies);
 		} else {
 			// cleanup
-			activeChar.aggro = _.reject(activeChar.aggro, function(it) {
+			activeChar.aggro = _.reject(activeChar.aggro, (it) => {
 				return it.entity.Incapacitated();
 			});
 
 			// adding new aggro targets
-			_.each(targets, function(t) {
+			_.each(targets, (t) => {
 				if (!GetAggroEntry(activeChar, t)) {
 					activeChar.aggro.push({entity: t, aggro: 1});
 				}
@@ -741,43 +741,43 @@ export class Entity {
 
 		// Strategies
 		if (strategy & TargetStrategy.NearDeath) {
-			_.each(aggro, function(a) {
+			_.each(aggro, (a) => {
 				let hp  = 1 - a.entity.HPLevel();
 				hp *= hp;
 				a.aggro *= hp;
 			});
 		}
 		if (strategy & TargetStrategy.LowHp) {
-			_.each(aggro, function(a) {
+			_.each(aggro, (a) => {
 				const hp  = 1 - a.entity.HPLevel();
 				a.aggro *= hp;
 			});
 		}
 		if (strategy & TargetStrategy.HighHp) {
-			_.each(aggro, function(a) {
+			_.each(aggro, (a) => {
 				const hp  = a.entity.HPLevel();
 				a.aggro *= hp;
 			});
 		}
 
 		// Normalize hp
-		const min = _.minBy(aggro.length, function(a: any) {
+		const min = _.minBy(aggro.length, (a: any) => {
 			return a.entity.curHp;
 		});
-		const max = _.maxBy(aggro.length, function(a: any) {
+		const max = _.maxBy(aggro.length, (a: any) => {
 			return a.entity.curHp;
 		});
 
 		const span = max - min;
 		if (strategy & TargetStrategy.LowAbsHp) {
-			_.each(aggro, function(a) {
+			_.each(aggro, (a) => {
 				let hp = (a.entity.curHp - min) / span;
 				hp  = 1 - hp;
 				a.aggro *= hp;
 			});
 		}
 		if (strategy & TargetStrategy.HighAbsHp) {
-			_.each(aggro, function(a) {
+			_.each(aggro, (a) => {
 				const hp = (a.entity.curHp - min) / span;
 				a.aggro *= hp;
 			});
@@ -789,15 +789,15 @@ export class Entity {
 			}
 		}
 		if (strategy & TargetStrategy.SPHunt) {
-			for (let i = 0; i < aggro.length; i++) {
-				const sp = Math.log(aggro[i].entity.SP());
-				aggro[i].aggro *= sp;
+			for (const agg of aggro) {
+				const sp = Math.log(agg.entity.SP());
+				agg.aggro *= sp;
 			}
 		}
 		if (strategy & TargetStrategy.LPHunt) {
-			for (let i = 0; i < aggro.length; i++) {
-				const lp = Math.log(aggro[i].entity.Lust());
-				aggro[i].aggro *= lp;
+			for (const agg of aggro) {
+				const lp = Math.log(agg.entity.Lust());
+				agg.aggro *= lp;
 			}
 		}
 
@@ -812,16 +812,16 @@ export class Entity {
 		*/
 
 		// Weigthed random selection
-		const sum = _.sumBy(aggro, function(a: any) {
+		const sum = _.sumBy(aggro, (a: any) => {
 			return a.aggro;
 		});
 
 		// Pick a target
 		let step = Math.random() * sum;
 
-		for (let i = 0; i < aggro.length; i++) {
-			step -= aggro[i].aggro;
-			if (step <= 0.0) { return aggro[i].entity; }
+		for (const agg of aggro) {
+			step -= agg.aggro;
+			if (step <= 0.0) { return agg.entity; }
 		}
 
 		return _.sample(aggro).entity;
@@ -913,14 +913,14 @@ export class Entity {
 		return this.curHp <= 0; // || this.curLust >= this.Lust();
 	}
 	public Inhibited() {
-		if (this.combatStatus.stats[StatusEffect.Freeze]  != null) { return true; }
-		if (this.combatStatus.stats[StatusEffect.Numb]    != null) { return true; }
-		if (this.combatStatus.stats[StatusEffect.Petrify] != null) { return true; }
-		if (this.combatStatus.stats[StatusEffect.Blind]   != null) { return true; }
-		if (this.combatStatus.stats[StatusEffect.Sleep]   != null) { return true; }
-		if (this.combatStatus.stats[StatusEffect.Enrage]  != null) { return true; }
-		if (this.combatStatus.stats[StatusEffect.Fatigue] != null) { return true; }
-		if (this.combatStatus.stats[StatusEffect.Limp]    != null) { return true; }
+		if (this.combatStatus.stats[StatusEffect.Freeze]  !== null) { return true; }
+		if (this.combatStatus.stats[StatusEffect.Numb]    !== null) { return true; }
+		if (this.combatStatus.stats[StatusEffect.Petrify] !== null) { return true; }
+		if (this.combatStatus.stats[StatusEffect.Blind]   !== null) { return true; }
+		if (this.combatStatus.stats[StatusEffect.Sleep]   !== null) { return true; }
+		if (this.combatStatus.stats[StatusEffect.Enrage]  !== null) { return true; }
+		if (this.combatStatus.stats[StatusEffect.Fatigue] !== null) { return true; }
+		if (this.combatStatus.stats[StatusEffect.Limp]    !== null) { return true; }
 
 		return false;
 	}
@@ -969,16 +969,16 @@ export class Entity {
 		if (val >= 0) { return true; }
 
 		// Check for sleep
-		if (this.combatStatus.stats[StatusEffect.Sleep] != null) {
+		if (this.combatStatus.stats[StatusEffect.Sleep] !== null) {
 			this.combatStatus.stats[StatusEffect.Sleep] = null;
 		}
 		// Check for confuse
-		if (this.combatStatus.stats[StatusEffect.Confuse] != null) {
+		if (this.combatStatus.stats[StatusEffect.Confuse] !== null) {
 			this.combatStatus.stats[StatusEffect.Confuse].OnFade(encounter, this);
 		}
 
 		// Check for counter
-		if (this.combatStatus.stats[StatusEffect.Counter] != null) {
+		if (this.combatStatus.stats[StatusEffect.Counter] !== null) {
 			const onhit = this.combatStatus.stats[StatusEffect.Counter].OnHit;
 
 			this.combatStatus.stats[StatusEffect.Counter].hits--;
@@ -995,14 +995,14 @@ export class Entity {
 		}
 		// Check for decoy
 		const decoy = this.combatStatus.stats[StatusEffect.Decoy];
-		if (decoy != null) {
+		if (decoy !== null) {
 			const num  = decoy.copies;
 			const toHit = 1 / (num + 1);
 			if (Math.random() < toHit) {
 				return true;
 			}
 
-			const func = decoy.func || function() {
+			const defFunc = () => {
 				parse.oneof = num > 1 ? " one of" : "";
 				parse.copy  = num > 1 ? "copies" : "copy";
 				Text.Add("The attack is absorbed by[oneof] [possessive] [copy]!", parse);
@@ -1014,6 +1014,7 @@ export class Entity {
 				Text.Flush();
 				return false;
 			};
+			const func = decoy.func || defFunc;
 			return func(caster, val);
 		}
 
@@ -1105,19 +1106,19 @@ export class Entity {
 			this.curHp = 0;
 		} else if (this.curHp > this.HP()) {
 			this.curHp = this.HP();
- }
+ 		}
 
 		if (this.curSp < 0) {
 			this.curSp = 0;
 		} else if (this.curSp > this.SP()) {
 			this.curSp = this.SP();
- }
+ 		}
 
 		if (this.curLust < 0) {
 			this.curLust = 0;
 		} else if (this.curLust > this.Lust()) {
 			this.curLust = this.Lust();
- }
+ 		}
 	}
 
 	public AddLustOverTime(hours: number) {
@@ -1305,16 +1306,16 @@ export class Entity {
 
 	public SaveSexFlags(storage: any) {
 		const sex: any = {};
-		if (this.sex.rBlow != 0) { sex.rBlow = this.sex.rBlow; }
-		if (this.sex.gBlow != 0) { sex.gBlow = this.sex.gBlow; }
-		if (this.sex.rCunn != 0) { sex.rCunn = this.sex.rCunn; }
-		if (this.sex.gCunn != 0) { sex.gCunn = this.sex.gCunn; }
-		if (this.sex.rAnal != 0) { sex.rAnal = this.sex.rAnal; }
-		if (this.sex.gAnal != 0) { sex.gAnal = this.sex.gAnal; }
-		if (this.sex.rVag  != 0) { sex.rVag  = this.sex.rVag; }
-		if (this.sex.gVag  != 0) { sex.gVag  = this.sex.gVag; }
-		if (this.sex.sired != 0) { sex.sired = this.sex.sired; }
-		if (this.sex.birth != 0) { sex.birth = this.sex.birth; }
+		if (this.sex.rBlow !== 0) { sex.rBlow = this.sex.rBlow; }
+		if (this.sex.gBlow !== 0) { sex.gBlow = this.sex.gBlow; }
+		if (this.sex.rCunn !== 0) { sex.rCunn = this.sex.rCunn; }
+		if (this.sex.gCunn !== 0) { sex.gCunn = this.sex.gCunn; }
+		if (this.sex.rAnal !== 0) { sex.rAnal = this.sex.rAnal; }
+		if (this.sex.gAnal !== 0) { sex.gAnal = this.sex.gAnal; }
+		if (this.sex.rVag  !== 0) { sex.rVag  = this.sex.rVag; }
+		if (this.sex.gVag  !== 0) { sex.gVag  = this.sex.gVag; }
+		if (this.sex.sired !== 0) { sex.sired = this.sex.sired; }
+		if (this.sex.birth !== 0) { sex.birth = this.sex.birth; }
 		storage.sex = sex;
 	}
 
@@ -1369,16 +1370,16 @@ export class Entity {
 
 	public SavePersonalityStats(storage: any) {
 		// Personality stats
-		if (this.subDom.base   != 0) { storage.subDom = this.subDom.base.toFixed(); }
-		if (this.slut.base     != 0) { storage.slut   = this.slut.base.toFixed(); }
-		if (this.relation.base != 0) { storage.rel    = this.relation.base.toFixed(); }
-		if (this.drunkLevel    != 0) { storage.drunk  = this.drunkLevel.toFixed(2); }
+		if (this.subDom.base   !== 0) { storage.subDom = this.subDom.base.toFixed(); }
+		if (this.slut.base     !== 0) { storage.slut   = this.slut.base.toFixed(); }
+		if (this.relation.base !== 0) { storage.rel    = this.relation.base.toFixed(); }
+		if (this.drunkLevel    !== 0) { storage.drunk  = this.drunkLevel.toFixed(2); }
 	}
 
 	public SaveFlags(storage: any) {
 		const flags: any = {};
 		for (const flag in this.flags) {
-			if (this.flags[flag] != 0) {
+			if (this.flags[flag] !== 0) {
 				flags[flag] = this.flags[flag];
 			}
 		}
@@ -1387,8 +1388,8 @@ export class Entity {
 
 	public SavePerks(storage: any) {
 		const perks = [];
-		for (let i = 0; i < this.perks.length; ++i) {
-			perks.push(this.perks[i].id);
+		for (const perk of this.perks) {
+			perks.push(perk.id);
 		}
 		storage.perks = perks;
 	}
@@ -1396,15 +1397,15 @@ export class Entity {
 	public SaveRecipes(storage: any) {
 		if (this.recipes) {
 			storage.recipes = [];
-			for (let i = 0; i < this.recipes.length; i++) {
-				storage.recipes.push(this.recipes[i].id);
+			for (const recipe of this.recipes) {
+				storage.recipes.push(recipe.id);
 			}
 		}
 	}
 
 	public SaveJobs(storage: any) {
 		storage.jobs = {};
-		for (const job in this.jobs) {
+		for (const job of this.jobs) {
 			const jd = this.jobs[job];
 			const jobStorage = jd.ToStorage();
 			if (jobStorage) {
@@ -1474,14 +1475,14 @@ export class Entity {
 		this.monsterName       = storage.mName || this.monsterName;
 		this.MonsterName       = storage.MName || this.MonsterName;
 
-		this.experience        = !isNaN(parseInt(storage.exp))     ? parseInt(storage.exp) : this.experience;
-		this.level             = !isNaN(parseInt(storage.lvl))     ? parseInt(storage.lvl) : this.level;
-		this.pendingStatPoints = !isNaN(parseInt(storage.points))  ? parseInt(storage.points) : this.pendingStatPoints;
-		this.expToLevel        = !isNaN(parseInt(storage.exp2lvl)) ? parseInt(storage.exp2lvl) : this.expToLevel;
-		this.sexperience       = !isNaN(parseInt(storage.sexp))    ? parseInt(storage.sexp) : this.sexperience;
-		this.sexpToLevel       = !isNaN(parseInt(storage.sxp2lvl)) ? parseInt(storage.sxp2lvl) : this.sexpToLevel;
-		this.sexlevel          = !isNaN(parseInt(storage.slvl))    ? parseInt(storage.slvl) : this.sexlevel;
-		this.alchemyLevel      = !isNaN(parseInt(storage.alvl))    ? parseInt(storage.alvl) : this.alchemyLevel;
+		this.experience        = !isNaN(parseInt(storage.exp, 10))     ? parseInt(storage.exp, 10) : this.experience;
+		this.level             = !isNaN(parseInt(storage.lvl, 10))     ? parseInt(storage.lvl, 10) : this.level;
+		this.pendingStatPoints = !isNaN(parseInt(storage.points, 10))  ? parseInt(storage.points, 10) : this.pendingStatPoints;
+		this.expToLevel        = !isNaN(parseInt(storage.exp2lvl, 10)) ? parseInt(storage.exp2lvl, 10) : this.expToLevel;
+		this.sexperience       = !isNaN(parseInt(storage.sexp, 10))    ? parseInt(storage.sexp, 10) : this.sexperience;
+		this.sexpToLevel       = !isNaN(parseInt(storage.sxp2lvl, 10)) ? parseInt(storage.sxp2lvl, 10) : this.sexpToLevel;
+		this.sexlevel          = !isNaN(parseInt(storage.slvl, 10))    ? parseInt(storage.slvl, 10) : this.sexlevel;
+		this.alchemyLevel      = !isNaN(parseInt(storage.alvl, 10))    ? parseInt(storage.alvl, 10) : this.alchemyLevel;
 		this.curHp             = !isNaN(parseFloat(storage.curHp))   ? parseFloat(storage.curHp) : this.curHp;
 		this.maxHp.base        = !isNaN(parseFloat(storage.maxHp))   ? parseFloat(storage.maxHp) : this.maxHp.base;
 		this.curSp             = !isNaN(parseFloat(storage.curSp))   ? parseFloat(storage.curSp) : this.curSp;
@@ -1519,27 +1520,27 @@ export class Entity {
 
 	public LoadPersonalityStats(storage: any) {
 		// Personality stats
-		this.subDom.base         = parseInt(storage.subDom)  || this.subDom.base;
-		this.slut.base           = parseInt(storage.slut)    || this.slut.base;
-		this.relation.base       = parseInt(storage.rel)     || this.relation.base;
-		this.drunkLevel          = parseFloat(storage.drunk) || this.drunkLevel;
+		this.subDom.base   = parseInt(storage.subDom, 10) || this.subDom.base;
+		this.slut.base     = parseInt(storage.slut, 10)   || this.slut.base;
+		this.relation.base = parseInt(storage.rel, 10)    || this.relation.base;
+		this.drunkLevel    = parseFloat(storage.drunk)    || this.drunkLevel;
 	}
 
 	public LoadRecipes(storage: any) {
 		if (storage.recipes) {
 			this.recipes = [];
-			for (let i = 0; i < storage.recipes.length; i++) {
-				this.recipes.push(ItemIds[storage.recipes[i]]);
-			}
+			_.forIn(storage.recipes, (value, key) => {
+				this.recipes.push(ItemIds[value]);
+			});
 		}
 	}
 
 	public LoadJobs(storage: any) {
 		if (storage.jobs) {
-			for (const job in this.jobs) {
-				const jd = this.jobs[job];
+			_.forIn(this.jobs, (value, key) => {
+				const jd = this.jobs[key];
 				jd.FromStorage(storage.jobs[jd.job.name]);
-			}
+			});
 		}
 		if (storage.curJob) {
 			this.currentJob = Jobs[storage.curJob];
@@ -1557,23 +1558,23 @@ export class Entity {
 	}
 
 	public LoadFlags(storage: any) {
-		for (const flag in storage.flags) {
-			this.flags[flag] = parseInt(storage.flags[flag]);
-		}
+		_.forIn(storage.flags, (value, key) => {
+			this.flags[key] = parseInt(value, 10);
+		});
 	}
 
 	public LoadSexFlags(storage: any) {
-		for (const flag in storage.sex) {
-			this.sex[flag] = parseInt(storage.sex[flag]);
-		}
+		_.forIn(storage.sex, (value, key) => {
+			this.sex[key] = parseInt(value, 10);
+		});
 	}
 
 	public LoadPerks(storage: any) {
 		if (storage.perks) {
 			this.perks = [];
-			for (let i = 0; i < storage.perks.length; i++) {
-				this.perks.push(PerkIds[storage.perks[i]]);
-			}
+			_.forIn(storage.perks, (value, key) => {
+				this.perks[parseInt(key, 10)] = value;
+			});
 		}
 	}
 
@@ -1612,23 +1613,22 @@ export class Entity {
 	}
 
 	public RecallAbilities() {
-		for (const job in this.jobs) {
-			const jd = this.jobs[job];
+		_.forIn(this.jobs, (value, key) => {
+			const jd = this.jobs[key];
 			for (let i = 0; i < jd.level - 1; i++) {
 				if (i >= jd.job.levels.length) { break; }
 				const skills = jd.job.levels[i].skills;
 				// Teach new skills
 				if (skills) {
 					// [ { ab: Ablities.Black.Fireball, set: "Spells" }, ... ]
-					for (let j = 0; j < skills.length; j++) {
-						const sd      = skills[j];
+					for (const sd of skills) {
 						const ability = sd.ab;
 						const set     = sd.set;
 						this.abilities[set].AddAbility(ability);
 					}
 				}
 			}
-		}
+		});
 	}
 
 	/* ENTITY DESC */
@@ -1643,7 +1643,7 @@ export class Entity {
 			faceDesc : this.body.FaceDescLong(),
 			eyeCount : Text.NumToText(this.body.head.eyes.count.Get()),
 			eyeColor : Color.Desc(this.body.head.eyes.color),
-			eyeS     : this.body.head.eyes.count.Get() == 1 ? "" : "s",
+			eyeS     : this.body.head.eyes.count.Get() === 1 ? "" : "s",
 			hairDesc : this.body.head.hair.Long(),
 			buttDesc : this.Butt().Long(),
 			hipsDesc : this.HipsDesc(),
@@ -1656,12 +1656,12 @@ export class Entity {
 		parse = this.ParserTags(parse);
 		parse = this.ParserPronouns(parse);
 		const height = Math.floor(Unit.CmToInch(this.body.height.Get()));
-		const height_feet = Math.floor(height / 12);
-		const height_inches = Math.floor(height % 12);
-		parse.height = height_feet + " feet";
-		if (height_inches > 0) {
-			parse.height += " and " + height_inches + " inch";
-			if (height_inches > 1) {
+		const heightFeet = Math.floor(height / 12);
+		const heightInches = Math.floor(height % 12);
+		parse.height = heightFeet + " feet";
+		if (heightInches > 0) {
+			parse.height += " and " + heightInches + " inch";
+			if (heightInches > 1) {
 				parse.height += "es";
 			}
 		}
@@ -1675,17 +1675,15 @@ export class Entity {
 		Text.Add("[HeShe] [has] [faceDesc]. [HisHer] [eyeCount] [eyeColor] [eye][eyeS] observe the surroundings. ", parse);
 		Text.Add("A pair of [ears] sticks out from [possesive] [hairDesc]. ", parse);
 
-		for (let i = 0; i < this.body.head.appendages.length; i++) {
-			const a = this.body.head.appendages[i];
-			parse.appDesc = a.Long();
+		for (const app of this.body.head.appendages) {
+			parse.appDesc = app.Long();
 			Text.Add("On [hisher] head, [heshe] [has] a [appDesc]. ", parse);
 		}
 
 		Text.NL();
 		let bs = false;
 		// Back slots
-		for (let i = 0; i < this.body.backSlots.length; i++) {
-			const b = this.body.backSlots[i];
+		for (const b of this.body.backSlots) {
 			parse.appDesc = b.Long();
 			Text.Add("On [hisher] back, [heshe] [has] a [appDesc]. ", parse);
 			bs = true;
@@ -1693,7 +1691,7 @@ export class Entity {
 		if (bs) { Text.NL(); }
 
 		// TODO: Arms/Legs
-		if (this.body.legs.count == 2) {
+		if (this.body.legs.count === 2) {
 			Text.Add("[name] [has] arms. [name] [has] [legs], ending in [feet].", parse);
 		} else if (this.body.legs.count > 2) {
 			parse.num = Text.NumToText(this.body.legs.count);
@@ -1711,7 +1709,7 @@ export class Entity {
 
 		// TODO: Breasts
 		const breasts = this.body.breasts;
-		if (breasts.length == 1) {
+		if (breasts.length === 1) {
 			parse.breastDesc = breasts[0].Long();
 			Text.Add("[HeShe] [has] [breastDesc].", parse);
 		} else if (breasts.length > 1) {
@@ -1735,7 +1733,7 @@ export class Entity {
 		const cocks = this.body.cock;
 		const vags = this.body.vagina;
 
-		if (cocks.length == 1) {
+		if (cocks.length === 1) {
 			const cock = cocks[0];
 			parse.cockDesc = cock.aLong();
 			Text.Add("[name] [has] [cockDesc].", parse);
@@ -1744,8 +1742,7 @@ export class Entity {
 			parse.cockDesc = cock.aLong();
 			parse.numCocks = Text.NumToText(cocks.length);
 			Text.Add("[name] [has] a brace of [numCocks] " + cock.nounPlural() + ".", parse);
-			for (let i = 0; i < cocks.length; i++) {
-				const cock = cocks[i];
+			for (const cock of cocks) {
 				parse.cockDesc = cock.aLong();
 				Text.NL();
 				Text.Add("[name] [has] [cockDesc].", parse);
@@ -1764,14 +1761,14 @@ export class Entity {
 				Text.Add("Strangely, [ballsDesc] hang from [hisher] otherwise flat crotch.", parse);
 			}
 			Text.NL();
-		} else if (cocks.length == 0 && vags.length == 0) {
+		} else if (cocks.length === 0 && vags.length === 0) {
 			// Genderless, no balls
 			Text.Add("[name] [has] a smooth, featureless crotch.", parse);
 			Text.NL();
 		}
 
 		// TODO: vagina
-		if (vags.length == 1) {
+		if (vags.length === 1) {
 			const vag = vags[0];
 			const vagDesc = vag.Desc();
 			Text.Add("[name] [has] " + vagDesc.a + " " + vagDesc.adj + " " + vag.noun() + ".", parse);
@@ -1906,10 +1903,10 @@ export class Entity {
 		return this.body.head.hair;
 	}
 	public HasHair() {
-		return this.body.head.hair.Bald() == false;
+		return this.body.head.hair.Bald() === false;
 	}
 	public HasLongHair() {
-		return this.body.head.hair.Bald() == false; // TODO
+		return this.body.head.hair.Bald() === false; // TODO
 	}
 	public Face() {
 		return this.body.head;
@@ -1951,13 +1948,13 @@ export class Entity {
 		return this.body.legs;
 	}
 	public LowerBodyType() {
-		if     (this.body.legs.count <  2) { return LowerBodyType.Single; } else if (this.body.legs.count == 2) { return LowerBodyType.Humanoid; } else {                               return LowerBodyType.Taur; }
+		if     (this.body.legs.count <  2) { return LowerBodyType.Single; } else if (this.body.legs.count === 2) { return LowerBodyType.Humanoid; } else { return LowerBodyType.Taur; }
 	}
 	public NumLegs() {
 		return this.body.legs.count;
 	}
 	public Humanoid() {
-		return this.LowerBodyType() == LowerBodyType.Humanoid;
+		return this.LowerBodyType() === LowerBodyType.Humanoid;
 	}
 	public HasLegs() {
 		return (this.body.legs.count >= 2);
@@ -1967,7 +1964,7 @@ export class Entity {
 			(this.body.legs.race.isRace(Race.Snake));
 	}
 	public IsTaur() {
-		return this.LowerBodyType() == LowerBodyType.Taur;
+		return this.LowerBodyType() === LowerBodyType.Taur;
 	}
 	public IsGoo() {
 		return (this.body.legs.race.isRace(Race.Goo));
@@ -2057,17 +2054,17 @@ export class Entity {
 		return this.body.HasNightvision();
 	}
 	public HasHorns() {
-		for (let i = 0; i < this.body.head.appendages.length; i++) {
-			if (this.body.head.appendages[i].type == AppendageType.horn) {
-				return this.body.head.appendages[i];
+		for (const app of this.body.head.appendages) {
+			if (app.type === AppendageType.horn) {
+				return app;
 		}
 			}
 		return null;
 	}
 	public HasAntenna() {
-		for (let i = 0; i < this.body.head.appendages.length; i++) {
-			if (this.body.head.appendages[i].type == AppendageType.antenna) {
-				return this.body.head.appendages[i];
+		for (const app of this.body.head.appendages) {
+			if (app.type === AppendageType.antenna) {
+				return app;
 			}
 		}
 		return null;
@@ -2076,26 +2073,26 @@ export class Entity {
 		return this.body.backSlots;
 	}
 	public HasTail() {
-		for (let i = 0; i < this.body.backSlots.length; i++) {
-			if (this.body.backSlots[i].type == AppendageType.tail) {
-				return this.body.backSlots[i];
+		for (const slot of this.body.backSlots) {
+			if (slot.type === AppendageType.tail) {
+				return slot;
 		}
 			}
 		return null;
 	}
 	public HasPrehensileTail() {
 		let found = false;
-		for (let i = 0; i < this.body.backSlots.length; i++) {
-			if (this.body.backSlots[i].type == AppendageType.tail) {
-				found = found || this.body.backSlots[i].Prehensile();
+		for (const slot of this.body.backSlots) {
+			if (slot.type === AppendageType.tail) {
+				found = found || slot.Prehensile();
 		}
 			}
 		return found;
 	}
 	public HasWings() {
-		for (let i = 0; i < this.body.backSlots.length; i++) {
-			if (this.body.backSlots[i].type == AppendageType.wing) {
-				return this.body.backSlots[i];
+		for (const slot of this.body.backSlots) {
+			if (slot.type === AppendageType.wing) {
+				return slot;
 			}
 		}
 		return null;
@@ -2154,13 +2151,13 @@ export class Entity {
 	public possessive() {
 		const name = this.monsterName || this.name || "the entity";
 		const letter = name[name.length - 1];
-		const s = (letter == "s" || letter == "x") ? "'" : "'s";
+		const s = (letter === "s" || letter === "x") ? "'" : "'s";
 		return name + s;
 	}
 	public Possessive() {
 		const name = this.MonsterName || this.name || "The entity";
 		const letter = name[name.length - 1];
-		const s = (letter == "s" || letter == "x") ? "'" : "'s";
+		const s = (letter === "s" || letter === "x") ? "'" : "'s";
 		return name + s;
 	}
 	public possessivePlural() {
@@ -2173,49 +2170,49 @@ export class Entity {
 	}
 	public heshe(forcegender?: Gender): string {
 		const gender = forcegender ? forcegender : this.body.Gender();
-		if (gender == Gender.male) { return "he"; } else if (gender == Gender.female) { return "she"; } else if (gender == Gender.herm) { return "she"; } else { return "they"; }
+		if (gender === Gender.male) { return "he"; } else if (gender === Gender.female) { return "she"; } else if (gender === Gender.herm) { return "she"; } else { return "they"; }
 	}
 	public HeShe(forcegender?: Gender): string {
 		const gender = forcegender ? forcegender : this.body.Gender();
-		if (gender == Gender.male) { return "He"; } else if (gender == Gender.female) { return "She"; } else if (gender == Gender.herm) { return "She"; } else { return "They"; }
+		if (gender === Gender.male) { return "He"; } else if (gender === Gender.female) { return "She"; } else if (gender === Gender.herm) { return "She"; } else { return "They"; }
 	}
 	public himher(forcegender?: Gender): string {
 		const gender = forcegender ? forcegender : this.body.Gender();
-		if (gender == Gender.male) { return "him"; } else if (gender == Gender.female) { return "her"; } else if (gender == Gender.herm) { return "her"; } else { return "them"; }
+		if (gender === Gender.male) { return "him"; } else if (gender === Gender.female) { return "her"; } else if (gender === Gender.herm) { return "her"; } else { return "them"; }
 	}
 	public HimHer(forcegender?: Gender): string {
 		const gender = forcegender ? forcegender : this.body.Gender();
-		if (gender == Gender.male) { return "Him"; } else if (gender == Gender.female) { return "Her"; } else if (gender == Gender.herm) { return "Her"; } else { return "Them"; }
+		if (gender === Gender.male) { return "Him"; } else if (gender === Gender.female) { return "Her"; } else if (gender === Gender.herm) { return "Her"; } else { return "Them"; }
 	}
 	public hisher(forcegender?: Gender): string {
 		const gender = forcegender ? forcegender : this.body.Gender();
-		if (gender == Gender.male) { return "his"; } else if (gender == Gender.female) { return "her"; } else if (gender == Gender.herm) { return "her"; } else { return "their"; }
+		if (gender === Gender.male) { return "his"; } else if (gender === Gender.female) { return "her"; } else if (gender === Gender.herm) { return "her"; } else { return "their"; }
 	}
 	public HisHer(forcegender?: Gender): string {
 		const gender = forcegender ? forcegender : this.body.Gender();
-		if (gender == Gender.male) { return "His"; } else if (gender == Gender.female) { return "Her"; } else if (gender == Gender.herm) { return "Her"; } else { return "Their"; }
+		if (gender === Gender.male) { return "His"; } else if (gender === Gender.female) { return "Her"; } else if (gender === Gender.herm) { return "Her"; } else { return "Their"; }
 	}
 	public hishers(forcegender?: Gender): string {
 		const gender = forcegender ? forcegender : this.body.Gender();
-		if (gender == Gender.male) { return "his"; } else if (gender == Gender.female) { return "hers"; } else if (gender == Gender.herm) { return "hers"; } else { return "theirs"; }
+		if (gender === Gender.male) { return "his"; } else if (gender === Gender.female) { return "hers"; } else if (gender === Gender.herm) { return "hers"; } else { return "theirs"; }
 	}
 	public has(): string {
-		if (this.body.Gender() == Gender.none) { return "have"; }
+		if (this.body.Gender() === Gender.none) { return "have"; }
 		return "has";
 	}
 	public is(): string {
-		if (this.body.Gender() == Gender.none) { return "are"; }
+		if (this.body.Gender() === Gender.none) { return "are"; }
 		return "is";
 	}
 	public plural() {
-		return (this.body.Gender() == Gender.none);
+		return (this.body.Gender() === Gender.none);
 	}
 	// TODO femininity from other things (breasts etc)
 	public mfFem(male: any, female: any) {
 		return this.body.femininity.Get() > 0 ? female : male;
 	}
 	public mfTrue(male: any, female: any) {
-		return (this.body.Gender() == Gender.male) ? male : female;
+		return (this.body.Gender() === Gender.male) ? male : female;
 	}
 
 	public ParserPronouns(parse?: any, prefix?: string, postfix?: string, forcegender?: Gender) {
@@ -2232,54 +2229,52 @@ export class Entity {
 		return parse;
 	}
 
-	public ParserTags(parse?: any, prefix?: string, p1cock?: Cock) {
+	public ParserTags(parse: any = {}, prefix: string = "", p1cock?: Cock) {
 		const ent = this;
-		parse  = parse  || {};
-		prefix = prefix || "";
 
 		p1cock = p1cock || ent.BiggestCock(null, true);
 
-		parse[prefix + "cocks"]     = function() { return ent.MultiCockDesc(); };
-		parse[prefix + "cock"]      = function() { return p1cock.Short(); };
-		parse[prefix + "cockTip"]   = function() { return p1cock.TipShort(); };
-		parse[prefix + "knot"]      = function() { return p1cock.KnotShort(); };
-		parse[prefix + "balls"]     = function() { return ent.BallsDesc(); };
-		parse[prefix + "butt"]      = function() { return ent.Butt().Short(); };
-		parse[prefix + "anus"]      = function() { return ent.Butt().AnalShort(); };
-		parse[prefix + "vag"]       = function() { return ent.FirstVag() ? ent.FirstVag().Short() : "crotch"; };
-		parse[prefix + "clit"]      = function() { return ent.FirstVag().ClitShort(); };
-		parse[prefix + "breasts"]   = function() { return ent.FirstBreastRow().Short(); };
-		parse[prefix + "nip"]       = function() { return ent.FirstBreastRow().NipShort(); };
-		parse[prefix + "nips"]      = function() { return ent.FirstBreastRow().NipsShort(); };
-		parse[prefix + "tongue"]    = function() { return ent.TongueDesc(); };
-		parse[prefix + "tongueTip"] = function() { return ent.TongueTipDesc(); };
-		parse[prefix + "skin"]      = function() { return ent.SkinDesc(); };
-		parse[prefix + "hair"]      = function() { return ent.Hair().Short(); };
-		parse[prefix + "face"]      = function() { return ent.FaceDesc(); };
-		parse[prefix + "ear"]       = function() { return ent.EarDesc(); };
-		parse[prefix + "ears"]      = function() { return ent.EarDesc(true); };
-		parse[prefix + "eye"]       = function() { return ent.EyeDesc(); };
-		parse[prefix + "eyes"]      = function() { return ent.EyeDesc() + "s"; };
-		parse[prefix + "hand"]      = function() { return ent.HandDesc(); };
-		parse[prefix + "palm"]      = function() { return ent.PalmDesc(); };
-		parse[prefix + "hip"]       = function() { return ent.HipDesc(); };
-		parse[prefix + "hips"]      = function() { return ent.HipsDesc(); };
-		parse[prefix + "thigh"]     = function() { return ent.ThighDesc(); };
-		parse[prefix + "thighs"]    = function() { return ent.ThighsDesc(); };
-		parse[prefix + "legs"]      = function() { return ent.LegsDesc(); };
-		parse[prefix + "leg"]       = function() { return ent.LegDesc(); };
-		parse[prefix + "knee"]      = function() { return ent.KneeDesc(); };
-		parse[prefix + "knees"]     = function() { return ent.KneesDesc(); };
-		parse[prefix + "foot"]      = function() { return ent.FootDesc(); };
-		parse[prefix + "feet"]      = function() { return ent.FeetDesc(); };
-		parse[prefix + "belly"]     = function() { return ent.StomachDesc(); };
-		parse[prefix + "tail"]      = function() { const tail = ent.HasTail(); return tail ? tail.Short() : ""; };
-		parse[prefix + "wings"]     = function() { const wings = ent.HasWings(); return wings ? wings.Short() : ""; };
-		parse[prefix + "horns"]     = function() { const horns = ent.HasHorns(); return horns ? horns.Short() : ""; };
+		parse[prefix + "cocks"]     = () => ent.MultiCockDesc();
+		parse[prefix + "cock"]      = () => p1cock.Short();
+		parse[prefix + "cockTip"]   = () => p1cock.TipShort();
+		parse[prefix + "knot"]      = () => p1cock.KnotShort();
+		parse[prefix + "balls"]     = () => ent.BallsDesc();
+		parse[prefix + "butt"]      = () => ent.Butt().Short();
+		parse[prefix + "anus"]      = () => ent.Butt().AnalShort();
+		parse[prefix + "vag"]       = () => ent.FirstVag() ? ent.FirstVag().Short() : "crotch";
+		parse[prefix + "clit"]      = () => ent.FirstVag().ClitShort();
+		parse[prefix + "breasts"]   = () => ent.FirstBreastRow().Short();
+		parse[prefix + "nip"]       = () => ent.FirstBreastRow().NipShort();
+		parse[prefix + "nips"]      = () => ent.FirstBreastRow().NipsShort();
+		parse[prefix + "tongue"]    = () => ent.TongueDesc();
+		parse[prefix + "tongueTip"] = () => ent.TongueTipDesc();
+		parse[prefix + "skin"]      = () => ent.SkinDesc();
+		parse[prefix + "hair"]      = () => ent.Hair().Short();
+		parse[prefix + "face"]      = () => ent.FaceDesc();
+		parse[prefix + "ear"]       = () => ent.EarDesc();
+		parse[prefix + "ears"]      = () => ent.EarDesc(true);
+		parse[prefix + "eye"]       = () => ent.EyeDesc();
+		parse[prefix + "eyes"]      = () => ent.EyeDesc() + "s";
+		parse[prefix + "hand"]      = () => ent.HandDesc();
+		parse[prefix + "palm"]      = () => ent.PalmDesc();
+		parse[prefix + "hip"]       = () => ent.HipDesc();
+		parse[prefix + "hips"]      = () => ent.HipsDesc();
+		parse[prefix + "thigh"]     = () => ent.ThighDesc();
+		parse[prefix + "thighs"]    = () => ent.ThighsDesc();
+		parse[prefix + "legs"]      = () => ent.LegsDesc();
+		parse[prefix + "leg"]       = () => ent.LegDesc();
+		parse[prefix + "knee"]      = () => ent.KneeDesc();
+		parse[prefix + "knees"]     = () => ent.KneesDesc();
+		parse[prefix + "foot"]      = () => ent.FootDesc();
+		parse[prefix + "feet"]      = () => ent.FeetDesc();
+		parse[prefix + "belly"]     = () => ent.StomachDesc();
+		parse[prefix + "tail"]      = () => { const tail = ent.HasTail(); return tail ? tail.Short() : ""; };
+		parse[prefix + "wings"]     = () => { const wings = ent.HasWings(); return wings ? wings.Short() : ""; };
+		parse[prefix + "horns"]     = () => { const horns = ent.HasHorns(); return horns ? horns.Short() : ""; };
 
-		parse[prefix + "weapon"]    = function() { return ent.WeaponDesc(); };
-		parse[prefix + "armor"]     = function() { return ent.ArmorDesc(); };
-		parse[prefix + "botarmor"]  = function() { return ent.LowerArmorDesc(); };
+		parse[prefix + "weapon"]    = () => ent.WeaponDesc();
+		parse[prefix + "armor"]     = () => ent.ArmorDesc();
+		parse[prefix + "botarmor"]  = () => ent.LowerArmorDesc();
 		return parse;
 	}
 
@@ -2313,8 +2308,8 @@ export class Entity {
 	public ResetVirgin() {
 		this.Butt().virgin = true;
 		const vags = this.AllVags();
-		for (let i = 0; i < vags.length; i++) {
-			vags[i].virgin = true;
+		for (const vag of vags) {
+			vag.virgin = true;
 		}
 	}
 
@@ -2351,7 +2346,7 @@ export class Entity {
 			return c;
 		} else if (incStrapon && this.strapOn) {
 			return this.strapOn.cock;
- }
+ 		}
 	}
 	public CocksThatFit(orifice?: Orifice, onlyRealCocks?: boolean, extension?: any) {
 		const ret = [];
@@ -2361,7 +2356,7 @@ export class Entity {
 				ret.push(c);
 			}
 		}
-		if (ret.length == 0 && !onlyRealCocks && this.strapOn) {
+		if (ret.length === 0 && !onlyRealCocks && this.strapOn) {
 			const c: Cock = this.strapOn.cock;
 			if (!orifice || orifice.Fits(c, extension)) {
 				ret.push(c);
@@ -2383,17 +2378,17 @@ export class Entity {
 	// TODO: Race too
 	public MultiCockDesc(cocks?: Cock[]) {
 		cocks = cocks || this.body.cock;
-		if (cocks.length == 0) {
+		if (cocks.length === 0) {
 			if (this.strapOn) {
 				return this.strapOn.cock.Short();
 			} else {
 				return "[NO COCKS]";
 			}
-		} else if (cocks.length == 1) {
+		} else if (cocks.length === 1) {
 			return cocks[0].Short();
- } else {
+ 		} else {
 			return Text.Quantify(cocks.length) + " of " + cocks[0].Desc().adj + " " + cocks[0].nounPlural();
- }
+ 		}
 	}
 
 	// Convenience functions, vag
@@ -2405,8 +2400,7 @@ export class Entity {
 	}
 	public VagsThatFit(capacity: number) {
 		const ret: Vagina[] = [];
-		for (let i = 0; i < this.body.vagina.length; i++) {
-			const vag = this.body.vagina[i];
+		for (const vag of this.body.vagina) {
 			const size = vag.capacity.Get();
 			if (size >= capacity) {
 				ret.push(vag);
@@ -2421,7 +2415,7 @@ export class Entity {
 		const ret: Womb[] = [];
 		for (let i = 0, j = this.body.vagina.length; i < j; i++) {
 			const womb = this.body.vagina[i].womb;
-			if (womb.pregnant == false) {
+			if (womb.pregnant === false) {
 				ret.push(womb);
 			}
 		}
@@ -2494,8 +2488,8 @@ export class Entity {
 		const ret = new Array();
 		for (let i = 0, j = this.body.breasts.length; i < j; i++) {
 			const row = this.body.breasts[i];
-			if (row.nippleType == NippleType.lipple ||
-				row.nippleType == NippleType.cunt) {
+			if (row.nippleType === NippleType.lipple ||
+				row.nippleType === NippleType.cunt) {
 				if (row.NipSize() >= capacity) {
 					ret.push(row);
 				}
@@ -2598,11 +2592,11 @@ export class Entity {
 	}
 
 	public Sexed() {
-		if (this.flags.Sexed && this.flags.Sexed != 0) {
+		if (this.flags.Sexed && this.flags.Sexed !== 0) {
 			return true;
 		}
 		for (const flag in this.sex) {
-			if (this.sex[flag] != 0) {
+			if (this.sex[flag] !== 0) {
 				return true;
 		}
 			}

@@ -3,14 +3,14 @@
  * The Burrows, Lagomorph dungeon
  *
  */
+import * as _ from "lodash";
 
 import { Gender } from "../body/gender";
 import { EncounterTable } from "../encountertable";
 import { Lagomorph, LagomorphAlpha } from "../enemy/rabbit";
-import { Event } from "../event";
 import { LagonFlags } from "../event/burrows/lagon-flags";
 import { VenaFlags } from "../event/burrows/vena-flags";
-import { GAME, WORLD } from "../GAME";
+import { GAME } from "../GAME";
 import { BurrowsFlags } from "./burrows-flags";
 
 // Class to handle global flags and logic for dungeon
@@ -81,9 +81,9 @@ export class Burrows {
 
 	public FromStorage(storage: any) {
 		// Load flags
-		for (const flag of storage.flags) {
-			this.flags[flag] = parseInt(storage.flags[flag], 10);
-		}
+		_.forIn(storage.flags, (value, key) => {
+			this.flags[key] = parseInt(value, 10);
+		});
 	}
 
 	public GenerateLagomorph(gender?: Gender) {

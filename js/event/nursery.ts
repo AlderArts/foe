@@ -60,9 +60,9 @@ export class Nursery {
 			const k = new NurseryKid(kid);
 			that.kids.push(k);
 		});
-		for (const flag of storage.flags) {
-			this.flags[flag] = parseInt(storage.flags[flag], 10);
-		}
+		_.forIn(storage.flags, (value, key) => {
+			this.flags[key] = parseInt(value, 10);
+		});
 	}
 
 	public BirthedBy(mother: Entity) {

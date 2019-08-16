@@ -44,30 +44,26 @@ export function InitWorld() {
 		LightAspect,
 	};
 
-	world.CurrentLocation = function(loc?: any) {
+	world.CurrentLocation = (loc?: any) => {
 		loc = loc || GAME().party.location;
 
-		if     (loc == PlainsLoc.Crossroads) {
+		if     (loc === PlainsLoc.Crossroads) {
 			return world.Locations.Plains;
-		}
-		else if (loc == ForestLoc.Outskirts) {
+		} else if (loc === ForestLoc.Outskirts) {
 			return world.Locations.Forest;
- }
-		else if (loc == DesertLoc.Drylands) {
+ 		} else if (loc === DesertLoc.Drylands) {
 			return world.Locations.Desert;
- }
-		else if (loc == HighlandsLoc.Hills) {
+		} else if (loc === HighlandsLoc.Hills) {
 			return world.Locations.Highlands;
- }
-		else if (loc == LakeLoc.Shore) {
+ 		} else if (loc === LakeLoc.Shore) {
 			return world.Locations.Lake;
- }
+ 		}
 
 		return -1;
 	};
 
 	// TODO
-	world.TreeFarDesc = function() {
+	world.TreeFarDesc = () => {
 		return "As always, you can see the immense tree at the center of Eden towering in the distance, though you are so far away that the great canopy isn't obscuring the sky above.";
 	};
 

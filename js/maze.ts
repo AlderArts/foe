@@ -53,14 +53,17 @@ export class Maze {
 		const maze = this;
 		// TODO TEMP
 		Text.Add("<table class='party'>");
-		_.times(maze.yMax + 1, function(y) {
+		_.times(maze.yMax + 1, (y) => {
 			Text.Add("<tr>");
-			_.times(maze.xMax + 1, function(x) {
+			_.times(maze.xMax + 1, (x) => {
 				Text.Add("<td>");
 				let img = "";
 				const r = maze.GetRoom(x, y);
-				if (r == room) { img = "Player"; }
-				else if (r) { img = "Room"; }
+				if (r === room) {
+					img = "Player";
+				} else if (r) {
+					img = "Room";
+				}
 				Text.Add(img);
 				Text.Add("</td>");
 			});

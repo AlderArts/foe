@@ -20,8 +20,8 @@ export class StatusList {
 	public FromStorage = function(storage: any) {
 		if (!_.isArray(storage)) { return; }
 		const that = this;
-		_.each(storage, function(stat) {
-			const idx = (stat.idx === undefined) ? 0 : parseInt(stat.idx);
+		_.each(storage, (stat) => {
+			const idx = (stat.idx === undefined) ? 0 : parseInt(stat.idx, 10);
 
 			switch (idx) {
 				// TODO Add permanent status effects here
