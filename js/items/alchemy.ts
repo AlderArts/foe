@@ -17,9 +17,9 @@ import { IngredientItems } from "./ingredients";
 
 const equinium = new TFItem("equin0", "Equinium");
 equinium.price = 7;
-equinium.lDesc = function() { return "a bottle of Equinium"; };
-equinium.Short = function() { return "A bottle of Equinium"; };
-equinium.Long = function() { return "A bottle labeled Equinium, with the picture of a horse on it, containing a thick, heady liquid."; };
+equinium.lDesc = () => "a bottle of Equinium";
+equinium.Short = () => "A bottle of Equinium";
+equinium.Long = () => "A bottle labeled Equinium, with the picture of a horse on it, containing a thick, heady liquid.";
 equinium.recipe = [{it: IngredientItems.HorseShoe}, {it: IngredientItems.HorseHair}, {it: IngredientItems.HorseCum}];
 // Effects
 equinium.PushEffect(TF.ItemEffects.SetCock, {odds: 0.4, race: Race.Horse, str: "a horsecock"});
@@ -39,9 +39,9 @@ equinium.PushEffect(TF.ItemEffects.DecHips, {odds: 0.2, ideal: HipSize.Medium, m
 
 const leporine = new TFItem("lago0", "Leporine");
 leporine.price = 7;
-leporine.lDesc = function() { return "a bottle of Leporine"; };
-leporine.Short = function() { return "A bottle of Leporine"; };
-leporine.Long = function() { return "A bottle labeled Leporine, with the picture of a rabbit on it. The fluid within is clear."; };
+leporine.lDesc = () => "a bottle of Leporine";
+leporine.Short = () => "A bottle of Leporine";
+leporine.Long = () => "A bottle labeled Leporine, with the picture of a rabbit on it. The fluid within is clear.";
 leporine.recipe = [{it: IngredientItems.RabbitFoot}, {it: IngredientItems.CarrotJuice}, {it: IngredientItems.Lettuce}];
 // Effects
 leporine.PushEffect(TF.ItemEffects.SetCock, {odds: 0.4, race: Race.Rabbit, str: "a bunnycock"});
@@ -58,9 +58,9 @@ leporine.PushEffect(TF.ItemEffects.DecBreastSize, {odds: 0.4, ideal: 6, max: 2 }
 
 const felinix = new TFItem("felin0", "Felinix");
 felinix.price = 7;
-felinix.lDesc = function() { return "a bottle of Felinix"; };
-felinix.Short = function() { return "A bottle of Felinix"; };
-felinix.Long = function() { return "A bottle labeled Felinix, with the picture of a cat on it. The fluid within is cloudy."; };
+felinix.lDesc = () => "a bottle of Felinix";
+felinix.Short = () => "A bottle of Felinix";
+felinix.Long = () => "A bottle labeled Felinix, with the picture of a cat on it. The fluid within is cloudy.";
 felinix.recipe = [{it: IngredientItems.Whiskers}, {it: IngredientItems.HairBall}, {it: IngredientItems.CatClaw}];
 // Effects
 felinix.PushEffect(TF.ItemEffects.SetTongue, {odds: 0.3, race: Race.Feline, str: "rough, cat-like tongue"});
@@ -78,16 +78,16 @@ felinix.PushEffect(TF.ItemEffects.DecBreastSize, {odds: 0.4, ideal: 6, max: 2 })
 
 const lacertium = new TFItem("rept0", "Lacertium");
 lacertium.price = 8;
-lacertium.lDesc = function() { return "a bottle of Lacertium"; };
-lacertium.Short = function() { return "A bottle of Lacertium"; };
-lacertium.Long = function() { return "A bottle labeled Lacertium, with the picture of a lizard on it. The fluid within is thick and oily."; };
+lacertium.lDesc = () => "a bottle of Lacertium";
+lacertium.Short = () => "A bottle of Lacertium";
+lacertium.Long = () => "A bottle labeled Lacertium, with the picture of a lizard on it. The fluid within is thick and oily.";
 lacertium.recipe = [{it: IngredientItems.SnakeOil}, {it: IngredientItems.LizardScale}, {it: IngredientItems.LizardEgg}];
 // Effects
 lacertium.PushEffect(TF.ItemEffects.SetTongue, {odds: 0.3, race: Race.Lizard, str: "long, serpentine tongue"});
 lacertium.PushEffect(TF.ItemEffects.SetCock, {odds: 0.4, race: Race.Lizard, str: "a lizard cock"});
-lacertium.PushEffect(function(target: Entity) {
+lacertium.PushEffect((target: Entity) => {
 	const cocks = target.AllCocks();
-	if (cocks.length == 1 && cocks[0].race == Race.Lizard && Math.random() < 0.1) {
+	if (cocks.length === 1 && cocks[0].race === Race.Lizard && Math.random() < 0.1) {
 		cocks.push(cocks[0].Clone());
 		Text.Add("[Poss] reptilian cock splits in two identical dicks!", { Poss: target.Possessive() });
 		Text.NL();
@@ -109,9 +109,9 @@ lacertium.PushEffect(TF.ItemEffects.SetIdealCockThk, {odds: 0.3, ideal: 4, max: 
 
 const ovis = new TFItem("ovis0", "Ovis");
 ovis.price = 8;
-ovis.lDesc = function() { return "a bottle of Ovis"; };
-ovis.Short = function() { return "A bottle of Ovis"; };
-ovis.Long = function() { return "A bottle labeled Ovis, with the picture of a sheep on it. The fluid within is milky white."; };
+ovis.lDesc = () => "a bottle of Ovis";
+ovis.Short = () => "A bottle of Ovis";
+ovis.Long = () => "A bottle labeled Ovis, with the picture of a sheep on it. The fluid within is milky white.";
 ovis.recipe = [{it: IngredientItems.SheepMilk}, {it: IngredientItems.Ramshorn}, {it: IngredientItems.FreshGrass}];
 // Effects
 ovis.PushEffect(TF.ItemEffects.SetEars, {odds: 0.4, race: Race.Sheep, str: "sheep ears"});
@@ -128,9 +128,9 @@ ovis.PushEffect(TF.ItemEffects.IncBreastSize, {odds: 0.4, ideal: 16, max: 2, fem
 
 const bovia = new TFItem("bov0", "Bovia");
 bovia.price = 8;
-bovia.lDesc = function() { return "a bottle of Bovia"; };
-bovia.Short = function() { return "A bottle of Bovia"; };
-bovia.Long = function() { return "A bottle labeled Bovia, with the picture of a cow on it. The fluid within is milky white."; };
+bovia.lDesc = () => "a bottle of Bovia";
+bovia.Short = () => "A bottle of Bovia";
+bovia.Long = () => "A bottle labeled Bovia, with the picture of a cow on it. The fluid within is milky white.";
 bovia.recipe = [{it: IngredientItems.CowMilk}, {it: IngredientItems.CowBell}, {it: IngredientItems.FreshGrass}];
 // Effects
 bovia.PushEffect(TF.ItemEffects.SetTongue, {odds: 0.3, race: Race.Cow, str: "broad, cow-like tongue"});
@@ -138,7 +138,7 @@ bovia.PushEffect(TF.ItemEffects.SetCock, {odds: 0.4, race: Race.Cow, str: "a bov
 bovia.PushEffect(TF.ItemEffects.SetEars, {odds: 0.4, race: Race.Cow, str: "bovine ears"});
 bovia.PushEffect(TF.ItemEffects.SetTail, {odds: 0.4, race: Race.Cow, color: Color.black, str: "a long bovine tail, ending in a tuft of black hair"});
 bovia.PushEffect(TF.ItemEffects.SetHorn, {odds: 0.4, race: Race.Cow, color: Color.black, str: "a pair of strong bovine horns!", count: 2});
-bovia.PushEffect(function(target: Entity) {
+bovia.PushEffect((target: Entity) => {
 	const parse: any = { Poss: target.Possessive() };
 	const breasts = target.BiggestBreasts();
 	if (target.FirstVag() || (breasts && breasts.size.Get() > 5)) {
@@ -173,9 +173,9 @@ bovia.PushEffect(TF.ItemEffects.IncBreastSize, {odds: 1, ideal: 40, max: 5, fema
 
 const caprinium = new TFItem("goat0", "Caprinium");
 caprinium.price = 8;
-caprinium.lDesc = function() { return "a bottle of Caprinium"; };
-caprinium.Short = function() { return "A bottle of Caprinium"; };
-caprinium.Long = function() { return "A bottle filled with a thick white fluid. It has a picture of a goat on it."; };
+caprinium.lDesc = () => "a bottle of Caprinium";
+caprinium.Short = () => "A bottle of Caprinium";
+caprinium.Long = () => "A bottle filled with a thick white fluid. It has a picture of a goat on it.";
 caprinium.recipe = [{it: IngredientItems.GoatMilk}, {it: IngredientItems.FreshGrass}, {it: IngredientItems.GoatFleece}];
 // Effects
 caprinium.PushEffect(TF.ItemEffects.SetEars, {odds: 0.4, race: Race.Goat, str: "caprine ears"});
@@ -193,9 +193,9 @@ caprinium.PushEffect(TF.ItemEffects.DecBreastSize, {odds: .6, ideal: 2, max: 3 }
 
 const canis = new TFItem("dog0", "Canis");
 canis.price = 8;
-canis.lDesc = function() { return "a bottle of Canis"; };
-canis.Short = function() { return "A bottle of Canis"; };
-canis.Long = function() { return "A bottle labeled Canis, with the picture of a dog on it. The fluid within is opaque, and slightly reddish."; };
+canis.lDesc = () => "a bottle of Canis";
+canis.Short = () => "A bottle of Canis";
+canis.Long = () => "A bottle labeled Canis, with the picture of a dog on it. The fluid within is opaque, and slightly reddish.";
 canis.recipe = [{it: IngredientItems.CanisRoot}, {it: IngredientItems.DogBone}, {it: IngredientItems.DogBiscuit}];
 // Effects
 canis.PushEffect(TF.ItemEffects.SetTongue, {odds: 0.3, race: Race.Dog, str: "dog-like tongue"});
@@ -216,9 +216,9 @@ canis.PushEffect(TF.ItemEffects.IncCockThk, {odds: 0.4, ideal: 5, max: 1 });
 
 const lobos = new TFItem("wolf0", "Lobos");
 lobos.price = 8;
-lobos.lDesc = function() { return "a bottle of Lobos"; };
-lobos.Short = function() { return "A bottle of Lobos"; };
-lobos.Long = function() { return "A bottle labeled Lobos with the picture of a wolf on it. The fluid within is opaque, and dullish gray."; };
+lobos.lDesc = () => "a bottle of Lobos";
+lobos.Short = () => "A bottle of Lobos";
+lobos.Long = () => "A bottle labeled Lobos with the picture of a wolf on it. The fluid within is opaque, and dullish gray.";
 lobos.recipe = [{it: IngredientItems.CanisRoot}, {it: IngredientItems.WolfFang}, {it: IngredientItems.Wolfsbane}];
 // Effects
 lobos.PushEffect(TF.ItemEffects.SetCock, {odds: 0.4, race: Race.Wolf, str: "a wolf cock"});
@@ -242,9 +242,9 @@ lobos.PushEffect(TF.ItemEffects.IncCockThk, {odds: 0.4, ideal: 6, max: 1 });
 
 const vulpinix = new TFItem("fox0", "Vulpinix");
 vulpinix.price = 8;
-vulpinix.lDesc = function() { return "a bottle of Vulpinix"; };
-vulpinix.Short = function() { return "A bottle of Vulpinix"; };
-vulpinix.Long = function() { return "A bottle labeled Vulpinix, with the picture of a fox on it. The fluid within is opaque, and bright red."; };
+vulpinix.lDesc = () => "a bottle of Vulpinix";
+vulpinix.Short = () => "A bottle of Vulpinix";
+vulpinix.Long = () => "A bottle labeled Vulpinix, with the picture of a fox on it. The fluid within is opaque, and bright red.";
 vulpinix.recipe = [{it: IngredientItems.CanisRoot}, {it: IngredientItems.FoxBerries}, {it: IngredientItems.Foxglove}];
 // Effects
 vulpinix.PushEffect(TF.ItemEffects.SetCock, {odds: 0.4, race: Race.Fox, str: "a vulpine cock"});
@@ -267,9 +267,9 @@ vulpinix.PushEffect(TF.ItemEffects.SetIdealCockThk, {odds: 0.3, ideal: 4, max: 1
 
 const infernum = new TFItem("demon0", "Infernum");
 infernum.price = 15;
-infernum.lDesc = function() { return "a bottle of Infernum"; };
-infernum.Short = function() { return "A bottle of Infernum"; };
-infernum.Long = function() { return "A bottle labeled Infernum, with the picture of a demon on it. The fluid within is a thick red sludge, tainted with black bubbles."; };
+infernum.lDesc = () => "a bottle of Infernum";
+infernum.Short = () => "A bottle of Infernum";
+infernum.Long = () => "A bottle labeled Infernum, with the picture of a demon on it. The fluid within is a thick red sludge, tainted with black bubbles.";
 infernum.recipe = [{it: IngredientItems.CorruptPlant}, {it: IngredientItems.BlackGem}, {it: IngredientItems.CorruptSeed}];
 // Effects
 infernum.PushEffect(TF.ItemEffects.SetTongue, {odds: 0.3, race: Race.Demon, str: "long and flexible tongue"});
@@ -287,9 +287,9 @@ infernum.PushEffect(TF.ItemEffects.DecFem, {odds: 0.1, ideal: -.8, max: .1, male
 
 const avia = new TFItem("avian0", "Avia");
 avia.price = 25;
-avia.lDesc = function() { return "a bottle of Avia"; };
-avia.Short = function() { return "A bottle of Avia"; };
-avia.Long = function() { return "A bottle labeled Avia, with the picture of a bird on it. The fluid within is a clear, bright blue."; };
+avia.lDesc = () => "a bottle of Avia";
+avia.Short = () => "A bottle of Avia";
+avia.Long = () => "A bottle labeled Avia, with the picture of a bird on it. The fluid within is a clear, bright blue.";
 avia.recipe = [{it: IngredientItems.Feather}, {it: IngredientItems.Trinket}, {it: IngredientItems.FruitSeed}];
 // Effects
 avia.PushEffect(TF.ItemEffects.SetCock, {odds: 0.4, race: Race.Avian, str: "an avian cock"});
@@ -309,9 +309,9 @@ avia.PushEffect(TF.ItemEffects.DecBreastSize, {odds: 0.4, ideal: 2, max: 2 });
 
 const lepida = new TFItem("moth0", "Lepida");
 lepida.price = 10;
-lepida.lDesc = function() { return "a bottle of Lepida"; };
-lepida.Short = function() { return "A bottle of Lepida"; };
-lepida.Long = function() { return "A bottle labeled Lepida, with the picture of a moth on it. The fluid within is a deep purple."; };
+lepida.lDesc = () => "a bottle of Lepida";
+lepida.Short = () => "A bottle of Lepida";
+lepida.Long = () => "A bottle labeled Lepida, with the picture of a moth on it. The fluid within is a deep purple.";
 lepida.recipe = [{it: IngredientItems.MFluff}, {it: IngredientItems.MDust}, {it: IngredientItems.FruitSeed}];
 // Effects
 lepida.PushEffect(TF.ItemEffects.SetAntenna, {odds: 0.4, race: Race.Moth, color: Color.purple, count: 2, str: "a pair of moth-like feelers" });
@@ -333,9 +333,9 @@ lepida.PushEffect(TF.ItemEffects.DecCockThk, {odds: 0.3, ideal: 3, max: 1 });
 
 const scorpius = new TFItem("scorp0", "Scorpius");
 scorpius.price = 10;
-scorpius.lDesc = function() { return "a bottle of Scorpius"; };
-scorpius.Short = function() { return "A bottle of Scorpius"; };
-scorpius.Long = function() { return "A bottle labeled Scorpius, with the picture of a scorpion on it. The fluid within is a pitch black."; };
+scorpius.lDesc = () => "a bottle of Scorpius";
+scorpius.Short = () => "A bottle of Scorpius";
+scorpius.Long = () => "A bottle labeled Scorpius, with the picture of a scorpion on it. The fluid within is a pitch black.";
 scorpius.recipe = [{it: IngredientItems.Stinger}, {it: IngredientItems.SVenom}, {it: IngredientItems.SClaw}];
 // Effects
 scorpius.PushEffect(TF.ItemEffects.SetTail, {odds: 0.4, race: Race.Scorpion, color: Color.black, str: "a black, segmented scorpion tail"});
@@ -352,9 +352,9 @@ scorpius.PushEffect(TF.ItemEffects.IncHips, {odds: 0.2, ideal: HipSize.Wide, max
 
 const cerventine = new TFItem("deer0", "Cerventine");
 cerventine.price = 10;
-cerventine.lDesc = function() { return "a bottle of Cerventine"; };
-cerventine.Short = function() { return "A bottle of Cerventine"; };
-cerventine.Long = function() { return "A bottle filled with a soft brown liquid. It has a picture of a deer on it."; };
+cerventine.lDesc = () => "a bottle of Cerventine";
+cerventine.Short = () => "A bottle of Cerventine";
+cerventine.Long = () => "A bottle filled with a soft brown liquid. It has a picture of a deer on it.";
 cerventine.recipe = [{it: IngredientItems.FreshGrass}, {it: IngredientItems.TreeBark}, {it: IngredientItems.AntlerChip}];
 // Effects
 cerventine.PushEffect(TF.ItemEffects.SetCover, {odds: 0.1, value: Genitalia.Cover.Sheath});
@@ -377,9 +377,9 @@ cerventine.PushEffect(TF.ItemEffects.SetIdealCockThk, {odds: 0.2, ideal: 4, max:
 
 const honeyBrew = new TFItem("bee0", "Honey brew");
 honeyBrew.price = 10;
-honeyBrew.lDesc = function() { return "a jar of Honey brew"; };
-honeyBrew.Short = function() { return "A jar of Honey brew"; };
-honeyBrew.Long = function() { return "A jar filled with liquid honey, incredibly sweet and potent."; };
+honeyBrew.lDesc = () => "a jar of Honey brew";
+honeyBrew.Short = () => "A jar of Honey brew";
+honeyBrew.Long = () => "A jar filled with liquid honey, incredibly sweet and potent.";
 honeyBrew.recipe = [{it: IngredientItems.RawHoney}, {it: IngredientItems.FlowerPetal}, {it: IngredientItems.BeeChitin}];
 // Effects
 honeyBrew.PushEffect(TF.ItemEffects.SetAntenna, {odds: 0.4, race: Race.Bee, color: Color.black, count: 2, str: "a pair of bee antenna" });
@@ -396,9 +396,9 @@ honeyBrew.PushEffect(TF.ItemEffects.IncHips, {odds: 0.2, ideal: HipSize.Wide, ma
 
 const florium = new TFItem("plant0", "Florium");
 florium.price = 10;
-florium.lDesc = function() { return "a bottle of Florium"; };
-florium.Short = function() { return "A bottle of Florium"; };
-florium.Long = function() { return "A bottle filled with a green fluid. It smells of flowers."; };
+florium.lDesc = () => "a bottle of Florium";
+florium.Short = () => "A bottle of Florium";
+florium.Long = () => "A bottle filled with a green fluid. It smells of flowers.";
 florium.recipe = [{it: IngredientItems.Foxglove}, {it: IngredientItems.FlowerPetal}, {it: IngredientItems.TreeBark}];
 // Effects
 florium.PushEffect(TF.ItemEffects.SetCock, {odds: 0.4, race: Race.Plant, str: "a veiny tentacle cock"});
@@ -425,9 +425,9 @@ Green eyes
 
 const homos = new TFItem("human0", "Homos");
 homos.price = 25;
-homos.lDesc = function() { return "a bottle of Homos"; };
-homos.Short = function() { return "A bottle of Homos"; };
-homos.Long = function() { return "A bottle labeled Homos, with the picture of a regular human on it. The fluid within is clear and colorless, like water."; };
+homos.lDesc = () => "a bottle of Homos";
+homos.Short = () => "A bottle of Homos";
+homos.Long = () => "A bottle labeled Homos, with the picture of a regular human on it. The fluid within is clear and colorless, like water.";
 homos.recipe = [{it: IngredientItems.Hummus}, {it: IngredientItems.SpringWater}, {it: IngredientItems.Letter}];
 // Effects
 homos.PushEffect(TF.ItemEffects.SetBody, {odds: 0.4, race: Race.Human, str: "human body"});
@@ -445,7 +445,7 @@ homos.PushEffect(TF.ItemEffects.RemTail, {odds: 0.6, count: 1});
 homos.PushEffect(TF.ItemEffects.RemWings, {odds: 0.6, count: 2});
 homos.PushEffect(TF.ItemEffects.RemAntenna, {odds: 0.6, count: 2});
 homos.PushEffect(TF.ItemEffects.RemAbdomen, {odds: 0.6, count: 1});
-homos.PushEffect(function(target: Entity) {
+homos.PushEffect((target: Entity) => {
 	const parse: any = {
 		Poss : target.Possessive(),
 		legsDesc() { return target.LegsDesc(); },
@@ -455,7 +455,7 @@ homos.PushEffect(function(target: Entity) {
 	};
 
 	if (Math.random() < 0.6) {
-		if (target.body.legs.count != 2) {
+		if (target.body.legs.count !== 2) {
 			target.body.legs.count = 2;
 			target.body.legs.race = Race.Human;
 			Text.Add("[Poss] [legsDesc] morph[notS] until [heshe] [has] two human legs!", parse);
@@ -468,15 +468,15 @@ homos.PushEffect(TF.ItemEffects.SetIdealCockThk, {odds: 0.3, ideal: 4, max: 1 })
 
 const virilium = new TFItem("sex0", "Virilium");
 virilium.price = 100;
-virilium.lDesc = function() { return "a bottle of Virilium"; };
-virilium.Short = function() { return "A bottle of Virilium"; };
-virilium.Long = function() { return "A bottle of potency-enhancing Virilium."; };
+virilium.lDesc = () => "a bottle of Virilium";
+virilium.Short = () => "A bottle of Virilium";
+virilium.Long = () => "A bottle of potency-enhancing Virilium.";
 virilium.recipe = [{it: equinium}, {it: leporine}, {it: lobos}];
 // Effects
 virilium.PushEffect(TF.ItemEffects.IncLib, {odds: 0.3, ideal: 40, max: 2});
 virilium.PushEffect(TF.ItemEffects.IncCha, {odds: 0.2, ideal: 40, max: 2});
 virilium.PushEffect(TF.ItemEffects.SetBalls, {odds: 0.1, ideal: 2, count: 2});
-virilium.PushEffect(function(target: Entity) {
+virilium.PushEffect((target: Entity) => {
 	const parse: any = {
 		name  : target.nameDesc(),
 		heshe : target.heshe(),
@@ -488,7 +488,7 @@ virilium.PushEffect(function(target: Entity) {
 	Text.Add("A shiver runs through [name] as [heshe] [is] hit by a wave of lust!", parse);
 	Text.NL();
 });
-virilium.PushEffect(function(target: Entity) {
+virilium.PushEffect((target: Entity) => {
 	const parse: any = {
 		Poss: target.Possessive(),
 		ballsDesc() { return target.BallsDesc(); },
@@ -528,14 +528,14 @@ virilium.PushEffect(TF.ItemEffects.DecFem, {odds: 0.1, ideal: -1, max: .1});
 
 const testos = new TFItem("sex2", "Testos");
 testos.price = 100;
-testos.lDesc = function() { return "a bottle of Testos"; };
-testos.Short = function() { return "A bottle of Testos"; };
-testos.Long = function() { return "A bottle of pure masculinity labled Testos."; };
+testos.lDesc = () => "a bottle of Testos";
+testos.Short = () => "A bottle of Testos";
+testos.Long = () => "A bottle of pure masculinity labled Testos.";
 testos.recipe = [{it: equinium}, {it: homos}, {it: canis}];
 testos.PushEffect(TF.ItemEffects.IncTone, {odds: 0.3, ideal: .7, max: .1});
 testos.PushEffect(TF.ItemEffects.DecFem, {odds: 0.4, ideal: -1, max: .1});
 testos.PushEffect(TF.ItemEffects.DecBreastSize, {odds: 0.7, ideal: 0, max: 6 });
-testos.PushEffect(function(target: Entity) {
+testos.PushEffect((target: Entity) => {
 	const parse: any = {
 		Name: target.NameDesc(),
 		Poss: target.Possessive(),
@@ -560,7 +560,7 @@ testos.PushEffect(function(target: Entity) {
 	}
 	Text.Flush();
 });
-testos.PushEffect(function(target: Entity) {
+testos.PushEffect((target: Entity) => {
 	let parse: any = {
 		Name : target.NameDesc(),
 		poss : target.possessive(),
@@ -588,7 +588,7 @@ testos.PushEffect(function(target: Entity) {
 					Text.Add("[Name] loses one of [hisher] cunts!", parse);
 				} else {
 					Text.Add("[Poss] pussy shrinks until it disappears completely.", parse);
-					if (cocks.length == 0) {
+					if (cocks.length === 0) {
 						Text.Add(" It's replaced by a brand new cock!");
 						cocks.push(new Cock());
 					}
@@ -604,11 +604,12 @@ testos.PushEffect(function(target: Entity) {
 		}
 	}
 	if (Math.random() < 0.75) {
-		let len = false, thk = false;
-		for (let i = 0; i < cocks.length; i++) {
+		let len = false;
+		let thk = false;
+		for (const cock of cocks) {
 			// Base size
-			len = len || (cocks[i].length.IncreaseStat(35, 1) > 0);
-			thk = thk || (cocks[i].thickness.IncreaseStat(10, .5) > 0);
+			len = len || (cock.length.IncreaseStat(35, 1) > 0);
+			thk = thk || (cock.thickness.IncreaseStat(10, .5) > 0);
 		}
 		if (len || thk) {
 			parse.s    = target.NumCocks() > 1 ? "s" : "";
@@ -632,14 +633,14 @@ testos.PushEffect(function(target: Entity) {
 
 const estros = new TFItem("sex3", "Estros");
 estros.price = 100;
-estros.lDesc = function() { return "a bottle of Estros"; };
-estros.Short = function() { return "A bottle of Estros"; };
-estros.Long = function() { return "A bottle of pure femininity labled Estros."; };
+estros.lDesc = () => "a bottle of Estros";
+estros.Short = () => "A bottle of Estros";
+estros.Long = () => "A bottle of pure femininity labled Estros.";
 estros.recipe = [{it: vulpinix}, {it: homos}, {it: bovia}];
 estros.PushEffect(TF.ItemEffects.DecTone, {odds: 0.2, ideal: 0, max: .1});
 estros.PushEffect(TF.ItemEffects.IncFem, {odds: 0.8, ideal: 1, max: .1});
 estros.PushEffect(TF.ItemEffects.IncBreastSize, {odds: 0.4, ideal: 20, max: 3 });
-estros.PushEffect(function(target: Entity) {
+estros.PushEffect((target: Entity) => {
 	const parse: any = {
 		Poss: target.Possessive(),
 		notS: target.plural() ? "" : "s",
@@ -657,7 +658,7 @@ estros.PushEffect(function(target: Entity) {
 	}
 	Text.Flush();
 });
-estros.PushEffect(function(target: Entity) {
+estros.PushEffect((target: Entity) => {
 	let parse: any = {
 		Name : target.NameDesc(),
 		Poss : target.Possessive(),
@@ -684,7 +685,7 @@ estros.PushEffect(function(target: Entity) {
 				Text.Add("[Name] loses one of [hisher] cocks!", parse);
 			} else {
 				Text.Add("[Poss] cock shrinks until it disappears completely.", parse);
-				if (target.NumVags() == 0) {
+				if (target.NumVags() === 0) {
 					Text.Add(" It's replaced by a brand new pussy!");
 					vags.push(new Vagina());
 				}
@@ -697,8 +698,8 @@ estros.PushEffect(function(target: Entity) {
 	}
 	if (Math.random() < 0.75) {
 		let growth = false;
-		for (let i = 0; i < vags.length; i++) {
-			growth = growth || (vags[i].capacity.IncreaseStat(10, .5) > 0);
+		for (const vag of vags) {
+			growth = growth || (vag.capacity.IncreaseStat(10, .5) > 0);
 		}
 		if (growth) {
 			parse = Text.ParserPlural(parse, target.NumVags() > 1);
@@ -711,11 +712,11 @@ estros.PushEffect(function(target: Entity) {
 const infertilium = new TFItem("sex4", "Infertilium");
 infertilium.isTF = false;
 infertilium.price = 15;
-infertilium.lDesc = function() { return "a bottle of Infertilium"; };
-infertilium.Short = function() { return "A bottle of Infertilium"; };
-infertilium.Long = function() { return "A small, unmarked glass vial that feels cool to the touch. Drinking this will render the drinker practically sterile for one day."; };
+infertilium.lDesc = () => "a bottle of Infertilium";
+infertilium.Short = () => "A bottle of Infertilium";
+infertilium.Long = () => "A small, unmarked glass vial that feels cool to the touch. Drinking this will render the drinker practically sterile for one day.";
 // TODO infertilium.recipe = [{it: felinix}, {it: leporine}, {it: bovia}];
-infertilium.useStr = function(target: Entity) {
+infertilium.useStr = (target: Entity) => {
 	let parse: any = {
 		Name: target.NameDesc(),
 		name: target.nameDesc(),
@@ -761,11 +762,11 @@ infertilium.PushEffect(TF.ItemEffects.DecLib, {odds: 0.2, ideal: 15, max: 1});
 const infertiliumPlus = new TFItem("sex5", "Infertilium+");
 infertiliumPlus.isTF = false;
 infertiliumPlus.price = 25;
-infertiliumPlus.lDesc = function() { return "a bottle of Infertilium+"; };
-infertiliumPlus.Short = function() { return "A bottle of Infertilium+"; };
-infertiliumPlus.Long = function() { return "A small, unmarked glass vial with a thin sheen of frost clinging to its sides. Drinking this will render the drinker practically sterile for five days."; };
+infertiliumPlus.lDesc = () => "a bottle of Infertilium+";
+infertiliumPlus.Short = () => "A bottle of Infertilium+";
+infertiliumPlus.Long = () => "A small, unmarked glass vial with a thin sheen of frost clinging to its sides. Drinking this will render the drinker practically sterile for five days.";
 // TODO infertiliumPlus.recipe = [{it: felinix}, {it: leporine}, {it: bovia}];
-infertiliumPlus.useStr = function(target: Entity) {
+infertiliumPlus.useStr = (target: Entity) => {
 	let parse: any = {
 		Name: target.NameDesc(),
 		name: target.nameDesc(),
@@ -811,7 +812,7 @@ infertiliumPlus.useStr = function(target: Entity) {
 infertiliumPlus.PushEffect(TF.ItemEffects.DecLib, {odds: 0.75, ideal: 15, max: 2});
 
 const fertilium = new TFItem("sex6", "Fertilium");
-const fertiliumcommonUse = function(target: Entity) {
+const fertiliumcommonUse = (target: Entity) => {
 	let parse: any = {
 		name: target.nameDesc(),
 		lowerArmor: target.LowerArmorDesc(),
@@ -822,7 +823,7 @@ const fertiliumcommonUse = function(target: Entity) {
 
 	const ret = true; // Set to false if the pot is refused
 
-	if (target == GAME().player) {
+	if (target === GAME().player) {
 		let gen = "";
 		if (target.FirstCock()) { gen += "[cocks]"; }
 		if (target.FirstCock() && target.FirstVag()) { gen += " and "; }
@@ -853,11 +854,11 @@ const fertiliumcommonUse = function(target: Entity) {
 	return ret;
 };
 fertilium.price = 15;
-fertilium.lDesc = function() { return "a bottle of Fertilium"; };
-fertilium.Short = function() { return "A bottle of Fertilium"; };
-fertilium.Long = function() { return "A vial containing a sweet-smelling pink liquid. On the label there’s the picture of a man having sex with a woman, pouring her swelling belly full of virile seed. Its purpose seems to be to enhance potency."; };
+fertilium.lDesc = () => "a bottle of Fertilium";
+fertilium.Short = () => "A bottle of Fertilium";
+fertilium.Long = () => "A vial containing a sweet-smelling pink liquid. On the label there’s the picture of a man having sex with a woman, pouring her swelling belly full of virile seed. Its purpose seems to be to enhance potency.";
 // TODO fertilium.recipe = [{it: felinix}, {it: leporine}, {it: bovia}];
-fertilium.Use = function(target: Entity) {
+fertilium.Use = (target: Entity) => {
 	if (fertiliumcommonUse(target)) {
 		target.AddLustFraction(0.5);
 
@@ -873,11 +874,11 @@ fertilium.Use = function(target: Entity) {
 
 const fertiliumPlus = new TFItem("sex7", "Fertilium+");
 fertiliumPlus.price = 25;
-fertiliumPlus.lDesc = function() { return "a bottle of Fertilium+"; };
-fertiliumPlus.Short = function() { return "A bottle of Fertilium+"; };
-fertiliumPlus.Long = function() { return "A vial containing a cloyingly sweet-smelling pink liquid. On the label there’s the picture of a man having sex with a woman, pouring her obscenely swollen belly full of virile seed. Its purpose seems to be to greatly enhance potency."; };
+fertiliumPlus.lDesc = () => "a bottle of Fertilium+";
+fertiliumPlus.Short = () => "A bottle of Fertilium+";
+fertiliumPlus.Long = () => "A vial containing a cloyingly sweet-smelling pink liquid. On the label there’s the picture of a man having sex with a woman, pouring her obscenely swollen belly full of virile seed. Its purpose seems to be to greatly enhance potency.";
 // TODO fertiliumPlus.recipe = [{it: felinix}, {it: leporine}, {it: bovia}];
-fertiliumPlus.Use = function(target: Entity) {
+fertiliumPlus.Use = (target: Entity) => {
 	if (fertiliumcommonUse(target)) {
 		target.AddLustFraction(1);
 
@@ -893,12 +894,12 @@ fertiliumPlus.Use = function(target: Entity) {
 
 const gestarium = new TFItem("preg0", "Gestarium");
 gestarium.price = 50;
-gestarium.lDesc = function() { return "a bottle of Gestarium"; };
-gestarium.Short = function() { return "A bottle of Gestarium"; };
-gestarium.Long  = function() { return "A small vial of thick, clear liquid. Drinking this while pregnant will cause the drinker’s pregnancy to advance somewhat."; };
+gestarium.lDesc = () => "a bottle of Gestarium";
+gestarium.Short = () => "A bottle of Gestarium";
+gestarium.Long  = () => "A small vial of thick, clear liquid. Drinking this while pregnant will cause the drinker’s pregnancy to advance somewhat.";
 gestarium.recipe = [{it: fertilium}, {it: estros}, {it: bovia}];
 // Effects
-gestarium.PushEffect(function(target: Entity) {
+gestarium.PushEffect((target: Entity) => {
 	let parse: any = {
 		Name : target.NameDesc(),
 		name : target.nameDesc(),
@@ -912,7 +913,7 @@ gestarium.PushEffect(function(target: Entity) {
 	Text.Add("Unstoppering the vial, [name] drink[notS] the viscous liquid in one gulp. It tastes faintly of raw egg yolk with a texture to match, but goes down smoothly without a hitch.", parse);
 	Text.NL();
 	const isPreg = target.pregHandler.PregnantWombs();
-	const wombs = _.filter(isPreg, function(w) {
+	const wombs = _.filter(isPreg, (w) => {
 		return w.progress < 1;
 	});
 	if (isPreg.length > 0) {
@@ -931,7 +932,7 @@ gestarium.PushEffect(function(target: Entity) {
 	Text.NL();
 });
 
-const gestariumBellyGrowth = function(target: Entity, wombs: Womb[], parse: any) {
+const gestariumBellyGrowth = (target: Entity, wombs: Womb[], parse: any) => {
 	const size = target.pregHandler.BellySize();
 
 	if (size < 0.1) {
@@ -989,7 +990,7 @@ const gestariumBellyGrowth = function(target: Entity, wombs: Womb[], parse: any)
 
 	// PC only, since these are more internal feelings than anything else. Play these if the player progresses from one stage to another. I believe it’s impossible for the PC to jump any more than 1 stage from a potion, so things should be fine.
 	// Could a separate one be made for followers?
-	if (target == GAME().player) {
+	if (target === GAME().player) {
 		const newProgress = womb.progress;
 
 		if (oldProgress < PregnancyLevel.Level2 && newProgress >= PregnancyLevel.Level2) {
@@ -1030,7 +1031,7 @@ const gestariumBellyGrowth = function(target: Entity, wombs: Womb[], parse: any)
 		const production = target.LactHandler().Production();
 
 		const scenes = new EncounterTable();
-		scenes.AddEnc(function() {
+		scenes.AddEnc(() => {
 			Text.NL();
 			Text.Add("[Poss] baby bump isn’t the only thing that’s growing, changing. With the sudden surge of hormones and fertile energy coursing through [name], [poss] [breasts] begin to tingle and turn tender.", parse);
 
@@ -1059,8 +1060,8 @@ const gestariumBellyGrowth = function(target: Entity, wombs: Womb[], parse: any)
 
 				target.lactHandler.lactationRate.IncreaseStat(5, 1);
 			}
-		}, 1.0, function() { return (lact < 5) || (production < 3) || (breasts.Size() < 12.5); });
-		scenes.AddEnc(function() {
+		}, 1.0, () => (lact < 5) || (production < 3) || (breasts.Size() < 12.5));
+		scenes.AddEnc(() => {
 			Text.NL();
 			Text.Add("As [poss] baby bump finishes its growth, though, another change is taking place. With a faint creaking and shifting, [name] find[notS] [hisher] stance widening as [hisher] hips widen and butt plumps up, the comforting warmth moving downwards from [hisher] lower belly and working its magic there.", parse);
 			Text.NL();
@@ -1068,13 +1069,13 @@ const gestariumBellyGrowth = function(target: Entity, wombs: Womb[], parse: any)
 
 			target.body.torso.hipSize.IncreaseStat(HipSize.VeryWide, 1);
 			target.Butt().buttSize.IncreaseStat(15, 1);
-		}, 1.0, function() { return (hipSize < HipSize.VeryWide) || (buttSize < 15); });
-		scenes.AddEnc(function() {
+		}, 1.0, () => (hipSize < HipSize.VeryWide) || (buttSize < 15));
+		scenes.AddEnc(() => {
 			Text.NL();
 			Text.Add("Last but not least, [poss] breasts, already firm, turn practically turgid and sensitive - the reason for that soon becomes clear as a bead of rich cream wells up from each nipple before falling away. Seems like the potion was nice enough to fill up [poss] baby-feeders to the brim, ready for a nice milking… or whatever else [heshe] may have in mind.", parse);
 
 			target.lactHandler.FillMilk(1);
-		}, 1.0, function() { return true; });
+		}, 1.0, () => true);
 
 		scenes.Get();
 	}
@@ -1082,14 +1083,14 @@ const gestariumBellyGrowth = function(target: Entity, wombs: Womb[], parse: any)
 
 const gestariumPlus = new TFItem("sex1", "Gestarium+");
 gestariumPlus.price = 100;
-gestariumPlus.lDesc = function() { return "a bottle of Gestarium+"; };
-gestariumPlus.Short = function() { return "A bottle of Gestarium+"; };
-gestariumPlus.Long = function() { return "A bottle of fertility-enhancing Gestarium+."; };
+gestariumPlus.lDesc = () => "a bottle of Gestarium+";
+gestariumPlus.Short = () => "A bottle of Gestarium+";
+gestariumPlus.Long = () => "A bottle of fertility-enhancing Gestarium+.";
 gestariumPlus.recipe = [{it: felinix}, {it: leporine}, {it: bovia}];
 // Effects
 gestariumPlus.PushEffect(TF.ItemEffects.IncLib, {odds: 0.3, ideal: 40, max: 2});
 gestariumPlus.PushEffect(TF.ItemEffects.IncCha, {odds: 0.2, ideal: 40, max: 2});
-gestariumPlus.PushEffect(function(target: Entity) {
+gestariumPlus.PushEffect((target: Entity) => {
 	const parse: any = {
 		Poss: target.Possessive(),
 		notS: target.plural() ? "" : "s",
@@ -1107,7 +1108,7 @@ gestariumPlus.PushEffect(function(target: Entity) {
 	}
 	Text.Flush();
 });
-gestariumPlus.PushEffect(function(target: Entity) {
+gestariumPlus.PushEffect((target: Entity) => {
 	const parse: any = {
 		name  : target.nameDesc(),
 		heshe : target.heshe(),
@@ -1118,7 +1119,7 @@ gestariumPlus.PushEffect(function(target: Entity) {
 	Text.Add("A shiver runs through [name] as [heshe] [is] hit by a wave of lust!", parse);
 	Text.NL();
 });
-gestariumPlus.PushEffect(function(target: Entity) {
+gestariumPlus.PushEffect((target: Entity) => {
 	let parse: any = {
 		name : target.nameDesc(),
 		poss : target.possessive(),
