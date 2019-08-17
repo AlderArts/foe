@@ -193,38 +193,43 @@ export class Encounter {
 		const entity = activeChar.entity;
 		const encounter = this;
 
+		const backPrompt = () => {
+			Text.Clear();
+			BasePrompt();
+		}
+
 		const BasePrompt = () => {
 			Gui.ClearButtons();
-			Input.buttons[0].SetFromAbility(encounter, entity, Abilities.Attack, BasePrompt);
+			Input.buttons[0].SetFromAbility(encounter, entity, Abilities.Attack, backPrompt);
 
-			Input.buttons[1].SetFromAbility(encounter, entity, Abilities.Seduction.Tease, BasePrompt);
+			Input.buttons[1].SetFromAbility(encounter, entity, Abilities.Seduction.Tease, backPrompt);
 
 			if (entity.currentJob && entity.currentJob.abilities.Empty() === false) {
-				Input.buttons[2].SetFromAbility(encounter, entity, entity.currentJob.abilities, BasePrompt);
+				Input.buttons[2].SetFromAbility(encounter, entity, entity.currentJob.abilities, backPrompt);
 			}
 			if (entity.abilities.Special.Empty() === false) {
-				Input.buttons[3].SetFromAbility(encounter, entity, entity.abilities.Special, BasePrompt);
+				Input.buttons[3].SetFromAbility(encounter, entity, entity.abilities.Special, backPrompt);
 			}
 			if (entity.abilities.Skills.Empty() === false) {
-				Input.buttons[4].SetFromAbility(encounter, entity, entity.abilities.Skills, BasePrompt);
+				Input.buttons[4].SetFromAbility(encounter, entity, entity.abilities.Skills, backPrompt);
 			}
 			if (entity.abilities.Spells.Empty() === false) {
-				Input.buttons[5].SetFromAbility(encounter, entity, entity.abilities.Spells, BasePrompt);
+				Input.buttons[5].SetFromAbility(encounter, entity, entity.abilities.Spells, backPrompt);
 			}
 			if (entity.abilities.Support.Empty() === false) {
-				Input.buttons[6].SetFromAbility(encounter, entity, entity.abilities.Support, BasePrompt);
+				Input.buttons[6].SetFromAbility(encounter, entity, entity.abilities.Support, backPrompt);
 			}
 			if (entity.abilities.Seduce.Empty() === false) {
-				Input.buttons[7].SetFromAbility(encounter, entity, entity.abilities.Seduce, BasePrompt);
+				Input.buttons[7].SetFromAbility(encounter, entity, entity.abilities.Seduce, backPrompt);
 			}
-			Input.buttons[8].SetFromAbility(encounter, entity, Abilities.Wait, BasePrompt);
+			Input.buttons[8].SetFromAbility(encounter, entity, Abilities.Wait, backPrompt);
 			Input.buttons[9].Setup("Item", () => {
-				GAME().party.inventory.CombatInventory(encounter, entity, BasePrompt);
+				GAME().party.inventory.CombatInventory(encounter, entity, backPrompt);
 			}, true);
 			Input.buttons[10].Setup("Submit", () => {
 				encounter.onLoss();
 			}, true);
-			Input.buttons[11].SetFromAbility(encounter, entity, Abilities.Run, BasePrompt);
+			Input.buttons[11].SetFromAbility(encounter, entity, Abilities.Run, backPrompt);
 
 			if (GetDEBUG()) {
 				Input.navButtons[2].Setup("Cheat", () => {
@@ -386,20 +391,6 @@ export class Encounter {
 		} else if (enc.VictoryCondition()) {
 			enc.onVictory();
 		} else {
-			/*
-			let maxIni = 1;
-			// Sort the list after initiative
-			for(let i=0,j=this.combatOrder.length; i<j; i++){
-				let c = this.combatOrder[i];
-
-				if(!c.entity.Incapacitated()) {
-					let ini = c.entity.Initiative();
-					c.initiative += ini;
-					if(maxIni < ini) maxIni = ini;
-				}
-			}
-			*/
-
 			let found = false;
 			while (!found) {
 				_.each(enc.combatOrder, (c) => {

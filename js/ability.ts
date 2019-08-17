@@ -86,7 +86,7 @@ export class Ability {
 		this.targetMode = TargetMode.Enemy;
 		this.name = name || "ABILITY";
 		// TODO: Tooltip?
-		this.cost = { hp: undefined, sp: undefined, lp: undefined};
+		this.cost = { hp: undefined, sp: undefined, lp: undefined };
 
 		this.castTime = 0;
 		this.cancellable = true; // can be a function(ability, encounter, caster, target, result)
