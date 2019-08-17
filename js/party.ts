@@ -13,15 +13,14 @@ import { Entity } from "./entity";
 import { GAME, WORLD } from "./GAME";
 import { GameState, SetGameState } from "./gamestate";
 import { Gui } from "./gui";
-import { Input } from "./input";
 import { Inventory } from "./inventory";
 import { Text } from "./text";
 
 export class Party {
-	public members: any[];
-	public reserve: any[];
-	public saved: any[];
-	public temp: any[];
+	public members: Entity[];
+	public reserve: Entity[];
+	public saved: Entity[];
+	public temp: Entity[];
 	public coin: number;
 	public location: any;
 	public inventory: Inventory;

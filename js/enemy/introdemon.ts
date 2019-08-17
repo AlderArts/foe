@@ -111,10 +111,8 @@ export class IntroDemon extends BossEntity {
 			}
 		}
 
-		Text.Flush();
-		Gui.NextPrompt(() => {
-			encounter.CombatTick();
-		});
+		Text.NL();
+		encounter.CombatTick();
 	}
 
 }

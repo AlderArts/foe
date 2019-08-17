@@ -108,14 +108,14 @@ export class Ability {
 	}
 
 	public StartCast(encounter: Encounter, caster: Entity, target: Entity|Party) {
-		Text.NL();
+		//Text.NL();
 		_.each(this.onCast, function(node) {
 			node(this, encounter, caster, target);
 		});
 	}
 
 	public CastInternal(encounter: Encounter, caster: Entity, target: Entity|Party) {
-		Text.NL();
+		//Text.NL();
 		_.each(this.castTree, function(node) {
 			node(this, encounter, caster, target);
 		});
@@ -131,6 +131,8 @@ export class Ability {
 		const target: any[] = [];
 		const party: Party = GAME().party;
 
+		console.log("OnSelect call: ", ability);
+
 		switch (ability.targetMode) {
 			case TargetMode.All:
 				_.each(party.members, (t) => {
@@ -141,6 +143,8 @@ export class Ability {
 					target.push({
 						nameStr : t.name,
 						func(t: Entity) {
+							Text.Clear();
+							console.log("Use call (all-party): ", ability);
 							ability.Use(encounter, caster, t, ext);
 						},
 						enabled : ability.enabledTargetCondition(encounter, caster, t),
@@ -155,6 +159,8 @@ export class Ability {
 					target.push({
 						nameStr : t.uniqueName || t.name,
 						func(t: Entity) {
+							Text.Clear();
+							console.log("Use call (all-enemy): ", ability);
 							ability.Use(encounter, caster, t, ext);
 						},
 						enabled : ability.enabledTargetCondition(encounter, caster, t),
@@ -166,6 +172,7 @@ export class Ability {
 				return true;
 
 			case TargetMode.Self:
+				Text.Clear();
 				ability.Use(encounter, caster, undefined, ext);
 				break;
 
@@ -177,11 +184,17 @@ export class Ability {
 					if (ability.targetMode === TargetMode.AllyNotSelf && t === caster) { return; }
 					// Don't add incapacitated unless allowed
 					const incap = t.Incapacitated();
-					if (ability.targetMode === TargetMode.AllyFallen && !t.incap()) { return; } else if (incap) { return; }
+					if (incap) {
+						return;
+					} else if (ability.targetMode === TargetMode.AllyFallen) {
+						return;
+					}
 
 					target.push({
 						nameStr : t.name,
 						func(t: Entity) {
+							Text.Clear();
+							console.log("Use call (ally-single): ", ability);
 							ability.Use(encounter, caster, t, ext);
 						},
 						enabled : ability.enabledTargetCondition(encounter, caster, t),
@@ -201,6 +214,8 @@ export class Ability {
 					target.push({
 						nameStr : t.uniqueName || t.name,
 						func(t: Entity) {
+							Text.Clear();
+							console.log("Use call (enemy-single): ", ability);
 							ability.Use(encounter, caster, t, ext);
 						},
 						enabled : ability.enabledTargetCondition(encounter, caster, t),
@@ -212,12 +227,18 @@ export class Ability {
 				return true;
 
 			case TargetMode.Party:
+				Text.Clear();
+				console.log("Use call (party): ", ability);
 				ability.Use(encounter, caster, party, ext);
 				break;
 			case TargetMode.Enemies:
+				Text.Clear();
+				console.log("Use call (enemy): ", ability);
 				ability.Use(encounter, caster, encounter.enemy, ext);
 				break;
 			default:
+				console.error("Something weird happaned using ability: ", ability);
+				Text.NL();
 				encounter.CombatTick();
 		}
 	}
@@ -246,6 +267,7 @@ export class Ability {
 
 			Text.Flush();
 			Gui.NextPrompt(() => {
+				console.log("Next combat tick");
 				encounter.CombatTick();
 			});
 		} else {

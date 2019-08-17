@@ -37,15 +37,13 @@ RunAb.CastInternal = (encounter, caster) => {
 			encounter.onRun();
 		} else {
 			Text.Add("but [was] unable to!", parse);
-			Text.Flush();
-			Gui.NextPrompt(() => {
-				encounter.CombatTick();
-			});
+			Text.NL();
+			encounter.CombatTick();
 		}
 	} else { // Should never happen (ability locked)
-		Gui.NextPrompt(() => {
-			encounter.CombatTick();
-		});
+		console.error("Something went wrong in Run.CastInternal");
+		Text.NL();
+		encounter.CombatTick();
 	}
 };
 

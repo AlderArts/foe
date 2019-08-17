@@ -88,10 +88,8 @@ WhiteAb.Cheer.CastInternal = (encounter: Encounter, caster: Entity, target: Part
 		e.stamina.temp = Math.max(e.stamina.temp, caster.MAttack() / 5);
 		e.spirit.temp = Math.max(e.spirit.temp, caster.MAttack() / 5);
 	}
-	Text.Flush();
-	Gui.NextPrompt(() => {
-		encounter.CombatTick();
-	});
+	Text.NL();
+	encounter.CombatTick();
 };
 
 // TODO: Flavor text, status effects
@@ -108,11 +106,8 @@ WhiteAb.Pinpoint.CastInternal = (encounter: Encounter, caster: Entity, target: E
 
 	// TODO: Make more flavor text
 	Text.Add("[Name] cast[notS] pinpoint on [tname], making [thimher] more limber!", parse);
-	Text.Flush();
-
-	Gui.NextPrompt(() => {
-		encounter.CombatTick();
-	});
+	Text.NL();
+	encounter.CombatTick();
 };
 
 /*
@@ -131,11 +126,8 @@ WhiteAb.Toughen.CastInternal = (encounter: Encounter, caster: Entity, target: En
 
 	// TODO: Make more flavor text
 	Text.Add("[Name] cast[notS] toughen on [tname], protecting [thimher] from harm!", parse);
-	Text.Flush();
-
-	Gui.NextPrompt(() => {
-		encounter.CombatTick();
-	});
+	Text.NL();
+	encounter.CombatTick();
 };
 
 /*
@@ -154,11 +146,8 @@ WhiteAb.Empower.CastInternal = (encounter: Encounter, caster: Entity, target: En
 
 	// TODO: Make more flavor text
 	Text.Add("[Name] cast[notS] empower on [tname], filling [thimher] with strength!", parse);
-	Text.Flush();
-
-	Gui.NextPrompt(() => {
-		encounter.CombatTick();
-	});
+	Text.NL();
+	encounter.CombatTick();
 };
 
 WhiteAb.Tirade = new Ability("Tirade");
@@ -276,11 +265,8 @@ WhiteAb.Cleanse.CastInternal = (encounter: Encounter, caster: Entity, target: En
 	} else {
 		Text.Add("[tName] [tis] stripped of any physically strengthening effects!", parse);
 	}
-	Text.Flush();
-
-	Gui.NextPrompt(() => {
-		encounter.CombatTick();
-	});
+	Text.NL();
+	encounter.CombatTick();
 };
 
 WhiteAb.Dispel = new Ability();
@@ -322,11 +308,8 @@ WhiteAb.Dispel.CastInternal = (encounter: Encounter, caster: Entity, target: Ent
 		target.combatStatus.stats[StatusEffect.Regen] = undefined;
 		target.combatStatus.stats[StatusEffect.Boon]  = undefined;
 	}
-	Text.Flush();
-
-	Gui.NextPrompt(() => {
-		encounter.CombatTick();
-	});
+	Text.NL();
+	encounter.CombatTick();
 };
 
 WhiteAb.Purify = new Ability();
@@ -361,11 +344,8 @@ WhiteAb.Purify.CastInternal = (encounter: Encounter, caster: Entity, target: Ent
 	} else {
 		Text.Add("[tName] [tis] stripped of any lust-based enhancing effects!", parse);
 	}
-	Text.Flush();
-
-	Gui.NextPrompt(() => {
-		encounter.CombatTick();
-	});
+	Text.NL();
+	encounter.CombatTick();
 };
 
 export { WhiteAb };

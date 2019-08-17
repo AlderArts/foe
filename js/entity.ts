@@ -271,6 +271,10 @@ export class Entity {
 		this.relation.debug = () => that.name + ".relation";
 	}
 
+	public Interact(switchSpot: boolean) {
+
+	}
+
 	public SetLevelBonus() {
 		this.maxHp.level        = this.level * this.maxHp.growth;
 		this.maxSp.level        = this.level * this.maxSp.growth;
@@ -633,13 +637,11 @@ export class Entity {
 	public FinishCastInternal(ability: any, encounter: any, caster: any, targets: any) {
 		Text.Flush();
 
-		Gui.NextPrompt(() => {
-			if (encounter) {
-				encounter.CombatTick();
-			} else {
-				Gui.PrintDefaultOptions();
-			}
-		});
+		if (encounter) {
+			encounter.CombatTick();
+		} else {
+			Gui.PrintDefaultOptions();
+		}
 	}
 
 	// Can be overrided to allow for selective cancellation

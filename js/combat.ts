@@ -12,6 +12,15 @@ import { Party } from "./party";
 import { StatusEffect } from "./statuseffect";
 import { Text } from "./text";
 
+interface ICombatOrder {
+	entity: Entity;
+	isEnemy: boolean;
+	aggro: any[];
+	initiative: number;
+	cooldown: any[];
+	casting: any;
+}
+
 // Create encounter with a Party() containing enemies
 export class Encounter {
 
@@ -25,7 +34,7 @@ export class Encounter {
 	public onEncounter: any;
 	public onTick: any;
 	public enemy: Party;
-	public combatOrder: any[];
+	public combatOrder: ICombatOrder[];
 	public Callstack: any[];
 	public uniqueID: number;
 
@@ -56,6 +65,8 @@ export class Encounter {
 
 	// Set up the fight
 	public PrepCombat() {
+		console.log("PrepCombat");
+		Text.Clear();
 		SetGameState(GameState.Combat, Gui);
 
 		SetCurEncounter(this);
@@ -71,13 +82,22 @@ export class Encounter {
 		for (const ent of GAME().party.members) {
 			this.combatOrder.push({
 				entity  : ent,
-				isEnemy : false});
+				isEnemy : false,
+				aggro   : undefined,
+				initiative : 0,
+				cooldown : undefined,
+				casting : undefined,
+			});
 		}
 		for (const ent of this.enemy.members) {
 			this.combatOrder.push({
 				entity  : ent,
 				isEnemy : true,
-				aggro   : []});
+				aggro   : [],
+				initiative : 0,
+				cooldown : undefined,
+				casting : undefined,
+			});
 		}
 
 		for (const ent of this.combatOrder) {
@@ -253,6 +273,7 @@ export class Encounter {
 	}
 
 	public onLoss() {
+		console.log("onLoss");
 		Text.Clear();
 		Text.Add("Defeat!");
 		// TODO: XP loss?
@@ -279,6 +300,7 @@ export class Encounter {
 	}
 
 	public onVictory() {
+		console.log("onVictory");
 		Text.Clear();
 		Text.Add("Victory!");
 		Text.NL();
@@ -344,6 +366,7 @@ export class Encounter {
 	}
 
 	public CombatTick() {
+		console.log("CombatTick");
 		const enc = this;
 
 		const e = enc.Callstack.pop();
@@ -437,10 +460,8 @@ export class Encounter {
 				if (Math.random() < numb.proc) {
 					Text.Add("[name] [is] stunned and cannot move!",
 						{name: CurrentActiveChar().NameDesc(), is: CurrentActiveChar().is()});
-					Text.Flush();
-					Gui.NextPrompt(() => {
-						enc.CombatTick();
-					});
+					Text.NL();
+					enc.CombatTick();
 					return;
 				}
 			}
@@ -450,17 +471,24 @@ export class Encounter {
 			if (sleep) {
 				Text.Add("[name] [is] asleep and cannot act!",
 					{name: CurrentActiveChar().NameDesc(), is: CurrentActiveChar().is()});
-				Text.Flush();
-				Gui.NextPrompt(() => {
-					enc.CombatTick();
-				});
+				Text.NL();
+				enc.CombatTick();
 				return;
 			}
 
 			const combatScreen = () => {
-				Text.Clear();
+				console.log("combatScreen");
+				//Text.Clear();
 				// TODO: DEBUG ?
 				let entityName = CurrentActiveChar().uniqueName ? CurrentActiveChar().uniqueName : CurrentActiveChar().name;
+
+				if (activeChar.entity === GAME().player) {
+					Text.Add("It's your turn.");
+				} else {
+					Text.Add(activeChar.entity.Possessive() + " turn.");
+				}
+				Text.NL();
+
 				Text.Add("Turn order:<br>", undefined, "bold");
 				Text.Add(entityName + "<br>", undefined, "bold");
 
@@ -493,16 +521,10 @@ export class Encounter {
 				});
 				Text.NL();
 
-				if (activeChar.entity === GAME().player) {
-					Text.Add("It's your turn.");
-				} else {
-					Text.Add(activeChar.entity.Possessive() + " turn.");
-				}
-				Text.NL();
 				Text.Flush();
 			};
 
-			combatScreen();
+			//combatScreen();
 
 			if (casting) {
 				const ability = casting.ability;
@@ -519,11 +541,9 @@ export class Encounter {
 				}
 
 				if (Math.random() < activeChar.entity.LustCombatTurnLossChance()) {
-				Text.Add("[name] is too aroused to do anything worthwhile!", {name: activeChar.entity.name});
-				Text.Flush();
-				Gui.NextPrompt(() => {
-						enc.CombatTick();
-					});
+					Text.Add("[name] is too aroused to do anything worthwhile!", {name: activeChar.entity.name});
+					Text.NL();
+					enc.CombatTick();
 				} else {
 					// TODO: Confuse? Is this correctly implemented?
 					if (activeChar.isEnemy) {
