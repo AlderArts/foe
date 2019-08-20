@@ -41,7 +41,6 @@ RunAb.CastInternal = (encounter, caster) => {
 			encounter.CombatTick();
 		}
 	} else { // Should never happen (ability locked)
-		console.error("Something went wrong in Run.CastInternal");
 		Text.NL();
 		encounter.CombatTick();
 	}

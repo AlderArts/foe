@@ -24,6 +24,7 @@ PhysicalAb.Bash.castTree.push(AbilityNode.Template.Physical({
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[Name] read[y] a powerful blow, aiming to stun [tname]! ", parse);
+		Text.NL();
 	}],
 	onMiss: [Defaults.Physical._onMiss],
 	onDamage: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity, dmg: number) => {
@@ -54,6 +55,7 @@ PhysicalAb.GrandSlam.castTree.push(AbilityNode.Template.Physical({
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster);
 		Text.Add("[Name] read[y] a powerful blow, aiming to stun any who stand in [hisher] way! ", parse);
+		Text.NL();
 	}],
 	onMiss: [Defaults.Physical._onMiss],
 	onDamage: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity, dmg: number) => {
@@ -81,6 +83,7 @@ PhysicalAb.Pierce.castTree.push(AbilityNode.Template.Physical({
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[Name] aim[notS] [hisher] strike on a weak point in [tposs] guard! ", parse);
+		Text.NL();
 	}],
 	onMiss: [Defaults.Physical._onMiss],
 	onDamage: [Defaults.Physical._onDamage],
@@ -97,6 +100,7 @@ PhysicalAb.DirtyBlow.castTree.push(AbilityNode.Template.Physical({
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[Name] throw[notS] a low blow, striking a weak point in [tposs] guard! ", parse);
+		Text.NL();
 	}],
 	onMiss: [Defaults.Physical._onMiss],
 	onDamage: [Defaults.Physical._onDamage],
@@ -120,6 +124,7 @@ PhysicalAb.Hamstring.castTree.push(AbilityNode.Template.Physical({
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[Name] tr[y] to hit [tname] with a light attack, aiming to wound! ", parse);
+		Text.NL();
 	}],
 	onMiss: [Defaults.Physical._onMiss],
 	onDamage: [Defaults.Physical._onDamage],
@@ -143,16 +148,19 @@ PhysicalAb.Kicksand.castTree.push(AbilityNode.Template.Physical({
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[Name] kick[notS] some dirt toward [tname]! ", parse);
+		Text.NL();
 	}],
 	onMiss: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[tName] easily avoid[tnotS] the attack.", parse);
+		Text.NL();
 	}],
 	onDamage: [Defaults.Physical._onDamage],
 	onHit: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
 		if (Status.Blind(target, { hit : 0.8, str : 0.5, turns : 3, turnsR : 3 })) {
 			Text.Add("[tName] get[tnotS] a face-full of dirt, blinding [thimher]!", parse);
+			Text.NL();
 		}
 	}],
 }));
@@ -167,6 +175,7 @@ PhysicalAb.Swift.castTree.push((ability: Ability, encounter: Encounter, caster: 
 	Status.Haste(caster, { turns : 3, turnsR : 3, factor : 2 });
 
 	Text.Add("[Name] focus[notEs], briefly boosting [hisher] speed!", parse);
+	Text.NL();
 });
 
 PhysicalAb.SetTrap = new Ability("Set trap");
@@ -178,6 +187,7 @@ PhysicalAb.SetTrap.cooldown = 3;
 PhysicalAb.SetTrap.onCast = [(ability: Ability, encounter: Encounter, caster: Entity) => {
 	const parse = AbilityNode.DefaultParser(caster);
 	Text.Add("[Name] begin[notS] to set a trap!", parse);
+	Text.NL();
 }];
 PhysicalAb.SetTrap.castTree.push((ability: Ability, encounter: Encounter, caster: Entity) => {
 	const parse = AbilityNode.DefaultParser(caster);
@@ -196,6 +206,7 @@ PhysicalAb.SetTrap.castTree.push((ability: Ability, encounter: Encounter, caster
 			return false;
 		},
 	});
+	Text.NL();
 });
 PhysicalAb.SpringTrap = new Ability("Spring trap");
 PhysicalAb.SpringTrap.castTree.push(AbilityNode.Template.Physical({
@@ -205,10 +216,12 @@ PhysicalAb.SpringTrap.castTree.push(AbilityNode.Template.Physical({
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[tName] spring[tnotS] [poss] trap! ", parse);
+		Text.NL();
 	}],
 	onMiss: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[tHeShe] narrowly avoid[tnotS] taking damage! ", parse);
+		Text.NL();
 	}],
 	onDamage: [Defaults.Physical._onDamage],
 	onAbsorb: [Defaults.Physical._onAbsorb],
@@ -225,6 +238,7 @@ PhysicalAb.Backstab.castTree.push(AbilityNode.Template.Physical({
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[Name] dance[notS] around [tname], dealing a crippling backstab! ", parse);
+		Text.NL();
 	}],
 	onMiss: [Defaults.Physical._onMiss],
 	onDamage: [Defaults.Physical._onDamage],
@@ -243,16 +257,19 @@ PhysicalAb.Ensnare.castTree.push(AbilityNode.Template.Physical({
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[Name] throw[notS] a net toward [tname]! ", parse);
+		Text.NL();
 	}],
 	onHit: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
 		if (Status.Slow(target, { hit : 0.6, factor : 2, turns : 3, turnsR : 3 })) {
 			Text.Add("[tName] get[tnotS] caught in the net, slowing [thimher]!", parse);
+			Text.NL();
 		}
 	}],
 	onMiss: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[tName] easily avoid[tnotS] the attack.", parse);
+		Text.NL();
 	}],
 }));
 
@@ -266,6 +283,7 @@ PhysicalAb.FocusStrike.castTree.push(AbilityNode.Template.Physical({
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[Name] aim[notS] [hisher] strike on a weak point in [tposs] guard! ", parse);
+		Text.NL();
 	}],
 	onMiss: [Defaults.Physical._onMiss],
 	onDamage: [Defaults.Physical._onDamage],
@@ -282,6 +300,7 @@ PhysicalAb.DAttack.castTree.push(AbilityNode.Template.Physical({
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[Name] perform[notS] two attacks against [tname] in rapid succession! ", parse);
+		Text.NL();
 	}],
 	onMiss: [Defaults.Physical._onMiss],
 	onDamage: [Defaults.Physical._onDamage],
@@ -298,6 +317,7 @@ PhysicalAb.TAttack.castTree.push(AbilityNode.Template.Physical({
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[Name] perform[notS] three attacks against [tname] in rapid succession! ", parse);
+		Text.NL();
 	}],
 	onMiss: [Defaults.Physical._onMiss],
 	onDamage: [Defaults.Physical._onDamage],
@@ -314,6 +334,7 @@ PhysicalAb.QAttack.castTree.push(AbilityNode.Template.Physical({
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[Name] perform[notS] four attacks against [tname] in rapid succession! ", parse);
+		Text.NL();
 	}],
 	onMiss: [Defaults.Physical._onMiss],
 	onDamage: [Defaults.Physical._onDamage],
@@ -328,6 +349,7 @@ PhysicalAb.Frenzy.castTime = 100;
 PhysicalAb.Frenzy.onCast.push((ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 	const parse = AbilityNode.DefaultParser(caster, target);
 	Text.Add("[Name] [is] riling [himher]self up, preparing to launch an onslaught of blows on [tname]! ", parse);
+	Text.NL();
 });
 PhysicalAb.Frenzy.castTree.push(AbilityNode.Template.Physical({
 	nrAttacks: 5,
@@ -336,6 +358,7 @@ PhysicalAb.Frenzy.castTree.push(AbilityNode.Template.Physical({
 		if (entry) { entry.initiative -= 50; }
 		const parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[Name] perform[notS] a frenzied assault, attacking [tname] with five rapid blows!", parse);
+		Text.NL();
 	}],
 	onMiss: [Defaults.Physical._onMiss],
 	onDamage: [Defaults.Physical._onDamage],
@@ -352,11 +375,13 @@ PhysicalAb.CrushingStrike.castTree.push(AbilityNode.Template.Physical({
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[Name] perform[notS] a wild assault against [tname]! ", parse);
+		Text.NL();
 	}],
 	onMiss: [Defaults.Physical._onMiss],
 	onDamage: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity, dmg: number) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[Name] deliver[notS] a crushing blow to [tname] for " + Text.Damage(-dmg) + " damage, staggering [thimher]!", parse);
+		Text.NL();
 	}],
 	onHit: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 		if (Math.random() < 0.8) {
@@ -375,10 +400,12 @@ PhysicalAb.Provoke.castTree.push(AbilityNode.Template.Physical({
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[Name] taunt[notS] [tname]! ", parse);
+		Text.NL();
 	}],
 	onMiss: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[tName] doesn't look very impressed.", parse);
+		Text.NL();
 	}],
 	onDamage: [Defaults.Physical._onDamage],
 	onHit: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
@@ -388,6 +415,7 @@ PhysicalAb.Provoke.castTree.push(AbilityNode.Template.Physical({
 		}
 		const parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[tName] become[tnotS] agitated, turning more aggressive toward [name]!", parse);
+		Text.NL();
 	}],
 }));
 
@@ -400,10 +428,12 @@ PhysicalAb.Taunt.castTree.push(AbilityNode.Template.Physical({
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[Name] taunt[notS] [tname]! ", parse);
+		Text.NL();
 	}],
 	onMiss: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[tName] doesn't look very impressed.", parse);
+		Text.NL();
 	}],
 	onDamage: [Defaults.Physical._onDamage],
 	onHit: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
@@ -413,6 +443,7 @@ PhysicalAb.Taunt.castTree.push(AbilityNode.Template.Physical({
 		}
 		const parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[tName] become[tnotS] agitated, turning more aggressive toward [name]!", parse);
+		Text.NL();
 	}],
 }));
 
@@ -426,11 +457,12 @@ PhysicalAb.Fade.castTree.push(AbilityNode.Template.Physical({
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster);
 		Text.Add("[Name] fade[notS] from notice.", parse);
+		Text.NL();
 	}],
 	onMiss: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
-		Text.NL();
 		Text.Add("[tName] [tis] not very impressed.", parse);
+		Text.NL();
 	}],
 	onHit: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 		const aggroEntry: any = GetAggroEntry(target.GetCombatEntry(encounter), caster);
@@ -438,8 +470,8 @@ PhysicalAb.Fade.castTree.push(AbilityNode.Template.Physical({
 			aggroEntry.aggro /= 2;
 		}
 		const parse = AbilityNode.DefaultParser(caster, target);
-		Text.NL();
 		Text.Add("[tName] become[tnotS] distracted, turning [thisher] attention away from [name]!", parse);
+		Text.NL();
 	}],
 }));
 

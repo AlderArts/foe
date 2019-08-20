@@ -64,6 +64,7 @@ hPotion.combat.castTree.push((ability: Ability, encounter: Encounter, caster: En
 	Text.Add("[Name] use[notS] a potion.", parse);
 	Text.NL();
 	Text.Add("It heals [tname] for " + Text.Heal(100) + "!", parse);
+	Text.NL();
 
 	target.AddHPAbs(100);
 });
@@ -79,6 +80,7 @@ ePotion.combat.castTree.push((ability: Ability, encounter: Encounter, caster: En
 	Text.Add("[Name] use[notS] an energy potion.", parse);
 	Text.NL();
 	Text.Add("A brief surge of energy runs through [tname], restoring " + Text.Mana(100) + " points of energy!", parse);
+	Text.NL();
 
 	target.AddSPAbs(100);
 });
@@ -96,6 +98,7 @@ speedPotion.combat.castTree.push((ability: Ability, encounter: Encounter, caster
 	Status.Haste(caster, { turns : 3, turnsR : 3, factor : 2 });
 
 	Text.Add("[Name] uncork[notS] a slender vial and drink[notS] its contents. [HeShe] briefly boost[notS] [hisher] speed!", parse);
+	Text.NL();
 });
 
 const smokeBomb = new CombatItem("esc0", "S.Bomb");
@@ -125,6 +128,7 @@ decoyStick.combat.castTree.push((ability: Ability, encounter: Encounter, caster:
 	const parse = AbilityNode.DefaultParser(caster);
 
 	Text.Add("[Name] grab[notS] a decoy stick and break[notS] it. A flash of light emanates, and when it subsides, [heshe] [has] split into four copies.", parse);
+	Text.NL();
 
 	Status.Decoy(caster, {copies: 3});
 });

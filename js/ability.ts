@@ -108,14 +108,12 @@ export class Ability {
 	}
 
 	public StartCast(encounter: Encounter, caster: Entity, target: Entity|Party) {
-		//Text.NL();
 		_.each(this.onCast, function(node) {
 			node(this, encounter, caster, target);
 		});
 	}
 
 	public CastInternal(encounter: Encounter, caster: Entity, target: Entity|Party) {
-		//Text.NL();
 		_.each(this.castTree, function(node) {
 			node(this, encounter, caster, target);
 		});
@@ -128,10 +126,19 @@ export class Ability {
 		const ability = this;
 		// TODO: Buttons (use portraits for target?)
 
+		Text.Clear();
+		const castTime = ability.castTime !== 0 ? ability.castTime : "instant";
+		Text.Add("[ability] (Cost: [cost], Cast time: [time]): [desc]<br>",
+			{
+				ability: ability.name,
+				cost: ability.CostStr(),
+				time: castTime,
+				desc: ability.Short(),
+			});
+		Text.Flush();
+
 		const target: any[] = [];
 		const party: Party = GAME().party;
-
-		console.log("OnSelect call: ", ability);
 
 		switch (ability.targetMode) {
 			case TargetMode.All:
@@ -144,7 +151,6 @@ export class Ability {
 						nameStr : t.name,
 						func(t: Entity) {
 							Text.Clear();
-							console.log("Use call (all-party): ", ability);
 							ability.Use(encounter, caster, t, ext);
 						},
 						enabled : ability.enabledTargetCondition(encounter, caster, t),
@@ -160,7 +166,6 @@ export class Ability {
 						nameStr : t.uniqueName || t.name,
 						func(t: Entity) {
 							Text.Clear();
-							console.log("Use call (all-enemy): ", ability);
 							ability.Use(encounter, caster, t, ext);
 						},
 						enabled : ability.enabledTargetCondition(encounter, caster, t),
@@ -194,7 +199,6 @@ export class Ability {
 						nameStr : t.name,
 						func(t: Entity) {
 							Text.Clear();
-							console.log("Use call (ally-single): ", ability);
 							ability.Use(encounter, caster, t, ext);
 						},
 						enabled : ability.enabledTargetCondition(encounter, caster, t),
@@ -215,7 +219,6 @@ export class Ability {
 						nameStr : t.uniqueName || t.name,
 						func(t: Entity) {
 							Text.Clear();
-							console.log("Use call (enemy-single): ", ability);
 							ability.Use(encounter, caster, t, ext);
 						},
 						enabled : ability.enabledTargetCondition(encounter, caster, t),
@@ -228,16 +231,13 @@ export class Ability {
 
 			case TargetMode.Party:
 				Text.Clear();
-				console.log("Use call (party): ", ability);
 				ability.Use(encounter, caster, party, ext);
 				break;
 			case TargetMode.Enemies:
 				Text.Clear();
-				console.log("Use call (enemy): ", ability);
 				ability.Use(encounter, caster, encounter.enemy, ext);
 				break;
 			default:
-				console.error("Something weird happaned using ability: ", ability);
 				Text.NL();
 				encounter.CombatTick();
 		}
@@ -266,10 +266,7 @@ export class Ability {
 			};
 
 			Text.Flush();
-			Gui.NextPrompt(() => {
-				console.log("Next combat tick");
-				encounter.CombatTick();
-			});
+			encounter.CombatTick();
 		} else {
 			this.CastInternal(encounter, caster, target);
 		}
@@ -347,6 +344,11 @@ export class AbilityCollection {
 	public OnSelect(encounter: Encounter, caster: Entity, backPrompt?: CallableFunction) {
 		const collection = this;
 		const entry = caster.GetCombatEntry(encounter);
+
+		const ret = () => {
+			collection.OnSelect(encounter, caster, backPrompt);
+		};
+
 		const prompt = () => {
 			Text.Clear();
 			_.each(collection.AbilitySet, (ability) => {
@@ -363,15 +365,10 @@ export class AbilityCollection {
 					});
 			});
 			Text.Flush();
-		};
-
-		const ret = () => {
-			collection.OnSelect(encounter, caster, backPrompt);
-			prompt();
+			Gui.SetButtonsFromCollection(encounter, caster, this.AbilitySet, ret, backPrompt);
 		};
 
 		prompt();
-		Gui.SetButtonsFromCollection(encounter, caster, this.AbilitySet, ret, backPrompt);
 	}
 }
 

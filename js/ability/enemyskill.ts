@@ -39,6 +39,7 @@ EnemySkillAb.Sting.castTree.push(AbilityNode.Template.Physical({
 		const parse = AbilityNode.DefaultParser(caster, target);
 		if (Status.Venom(target, { hit : 0.6, turns : 3, turnsR : 3, str : 1, dmg : 0.15 })) {
 			Text.Add("[tName] [thas] been poisoned!", parse);
+			Text.NL();
 		}
 	}],
 }));
@@ -65,6 +66,7 @@ EnemySkillAb.TSnare.castTree.push(AbilityNode.Template.Physical({
 		const parse = AbilityNode.DefaultParser(caster, target);
 		if (Status.Slow(target, { hit : 0.6, factor : 2, turns : 3, turnsR : 3 })) {
 			Text.Add("The tentacles successfully snare [tname], restricting [thisher] movements!", parse);
+			Text.NL();
 		}
 	}],
 }));
@@ -107,10 +109,12 @@ EnemySkillAb.TVenom.castTree.push(AbilityNode.Template.Physical({
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[Name] direct[notS] [hisher] tentacles toward [tname], spraying a long gout of toxic goop toward [thimher]! ", parse);
+		Text.NL();
 	}],
 	onMiss: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[tName] narrowly avoid[tnotS] the blast, escaping unharmed!", parse);
+		Text.NL();
 	}],
 	onDamage: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
@@ -122,6 +126,7 @@ EnemySkillAb.TVenom.castTree.push(AbilityNode.Template.Physical({
 		const parse = AbilityNode.DefaultParser(caster, target);
 		if (Status.Venom(target, { hit : 0.6, turns : 3, turnsR : 3, str : 1, dmg : 0.15 })) {
 			Text.Add("[tName] [thas] been poisoned!", parse);
+			Text.NL();
 		}
 	}],
 }));
@@ -134,10 +139,12 @@ EnemySkillAb.TRavage.castTree.push(AbilityNode.Template.Physical({
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[Name] send[notS] [hisher] tentacles rushing toward [tname], aiming to catch [thimher]! ", parse);
+		Text.NL();
 	}],
 	onMiss: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("The tentacles narrowly miss [tname], merely grazing [thimher].", parse);
+		Text.NL();
 	}],
 	onDamage: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity, dmg: number) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
@@ -146,6 +153,7 @@ EnemySkillAb.TRavage.castTree.push(AbilityNode.Template.Physical({
 		Text.Add("[tName] only barely manage[tnotS] to break [poss] hold on [thimher], but not before the tentacles have gotten real close and personal.", parse);
 		Text.NL();
 		Text.Add("[tName] take[tnotS] " + Text.Damage(-dmg) + " damage!", parse);
+		Text.NL();
 		target.AddLustFraction(0.3);
 	}],
 	onAbsorb: [Defaults.Physical._onAbsorb],
@@ -159,10 +167,12 @@ EnemySkillAb.TWhip.castTree.push(AbilityNode.Template.Physical({
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[Name] thrash[notEs] out with [hisher] tentacles, slashing [tname]! ", parse);
+		Text.NL();
 	}],
 	onMiss: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("The tentacles narrowly miss [tname], hitting empty air!", parse);
+		Text.NL();
 	}],
 	onDamage: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity, dmg: number) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
@@ -182,10 +192,12 @@ EnemySkillAb.TViolate.castTree.push(AbilityNode.Template.Physical({
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("Orchid grins lewdly as she lashes out with her tentacles, aiming for [tname]! ", parse);
+		Text.NL();
 	}],
 	onMiss: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("Even though [tname] [tis] greatly aroused, [theshe] somehow manage[tnotS] to evade getting tangled up in the tentacles.", parse);
+		Text.NL();
 	}],
 	onDamage: [Defaults.Physical._onDamage],
 	onAbsorb: [Defaults.Physical._onAbsorb],
@@ -235,6 +247,8 @@ EnemySkillAb.TViolate.castTree.push(AbilityNode.Template.Physical({
 		Text.Add("[tName] take[tnotS] " + Text.Damage(dmg) + " damage!", parse);
 
 		const cum = target.OrgasmCum();
+
+		Text.NL();
 	}],
 }));
 
@@ -252,10 +266,12 @@ EnemySkillAb.GolLustyPheromones.castTree.push(AbilityNode.Template.Lust({
 	onMiss: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[tName] hold[tnotS] [thisher] breath to avoid as much of it as possible. Frowning, the Gol releases her netherlips.", parse);
+		Text.NL();
 	}],
 	onDamage: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity, dmg: number) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[tName] blush[tnotEs] as [thisher] head swims with thoughts of naked trysts under the stars, overwhelmed by the Gol’s pheromones.", parse);
+		Text.NL();
 		target.AddLustFraction(0.3);
 	}],
 	onAbsorb: [Defaults.Seduction._onAbsorb],
@@ -272,6 +288,7 @@ EnemySkillAb.GolCuntDash.castTree.push(AbilityNode.Template.Physical({
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("Without warning, the Gol launches herself forward, legs clattering as she approaches [tname] with blinding speed. ", parse);
+		Text.NL();
 
 		caster.AddLustFraction(0.1);
 	}],
@@ -288,6 +305,7 @@ EnemySkillAb.GolCuntDash.castTree.push(AbilityNode.Template.Physical({
 		Text.Add("The Gol queen bashes [tname] for " + Text.Damage(-dmg) + " damage, staggering [thimher]!", parse);
 		Text.NL();
 		Text.Add("When she finishes charging past, [tname] blink[tnotS] in a daze and stagger back on [thisher] [feet], uncomfortably warm in all the wrong places.", parse);
+		Text.NL();
 		target.AddLustFraction(0.3);
 	}],
 	onAbsorb: [Defaults.Physical._onAbsorb],
@@ -312,18 +330,19 @@ EnemySkillAb.GolPollen.castTree.push(AbilityNode.Template.Physical({
 
 		if (Status.Slow(target, { hit : 0.6, factor : 2, turns : 1, turnsR : 3 })) {
 			Text.Add("[tName] [tis] slowed! ", parse);
+			Text.NL();
 		}
 		if (Status.Horny(target, { hit : 0.6, str : 1, dmg : 0.1, turns : 1, turnsR : 3 })) {
-			Text.NL();
 			Text.Add("[tName] [tis] horny! ", parse);
+			Text.NL();
 		}
 		if (Status.Sleep(target, { hit : 0.5, turns : 1, turnsR : 3 })) {
-			Text.NL();
 			Text.Add("[tName] [tis] drowsy! ", parse);
+			Text.NL();
 		}
 		if (Status.Confuse(target, { hit : 0.3, turns : 1, turnsR : 3 })) {
-			Text.NL();
 			Text.Add("[tName] [tis] confused! ", parse);
+			Text.NL();
 		}
 	}],
 }));
@@ -337,6 +356,7 @@ EnemySkillAb.Corishev.Whip.castTree.push(AbilityNode.Template.Physical({
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("The lieutenant raises his arm, sending his whip lashing toward [tname]. ", parse);
+		Text.NL();
 	}],
 	onMiss: [Defaults.Physical._onMiss],
 	onDamage: [Defaults.Physical._onDamage],
@@ -344,12 +364,13 @@ EnemySkillAb.Corishev.Whip.castTree.push(AbilityNode.Template.Physical({
 	onHit: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("The whip’s lust inducing poison quickly seeps into the wound, arousing [thimher]!", parse);
+		Text.NL();
 
 		target.AddLustFraction(0.2 + 0.3 * Math.random());
 
 		if (Status.Bleed(target, { hit : 0.6, str : 1, dmg : 0.1, turns : 1, turnsR : 2 })) {
-			Text.NL();
 			Text.Add("[tName] [tis] bleeding!", parse);
+			Text.NL();
 		}
 	}],
 }));
@@ -365,15 +386,18 @@ EnemySkillAb.Corishev.Lashing.castTree.push(AbilityNode.Template.Physical({
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("Laughing maniacally, Corishev swings his whip wildly, raining down a hail of lashes on [tname]. ", parse);
+		Text.NL();
 	}],
 	onMiss: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[tHeShe] barely manage[tnotS] to evade the blow. ", parse);
+		Text.NL();
 	}],
 	onDamage: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity, dmg: number) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
 		parse.skin = target.SkinDesc();
 		Text.Add("The barbed tip of the poisoned whip slashes across [tposs] [skin], dealing " + Text.Damage(-dmg) + " damage! ", parse);
+		Text.NL();
 	}],
 	onAbsorb: [Defaults.Physical._onAbsorb],
 }));
@@ -386,9 +410,9 @@ EnemySkillAb.Corishev.WideStrike.castTree.push(AbilityNode.Template.Physical({
 	atkMod: 1.2,
 	damageType: {pPierce: 1, lust: 0.2},
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
-	const parse: any = {};
-	Text.Add("The crazed lieutenant swings his whip in an arc, hoping to catch the both of you with a single strike.", parse);
-	Text.NL();
+		const parse: any = {};
+		Text.Add("The crazed lieutenant swings his whip in an arc, hoping to catch the both of you with a single strike.", parse);
+		Text.NL();
 	}],
 	onMiss: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
@@ -414,6 +438,7 @@ EnemySkillAb.Corishev.SelfHarm.castTree.push((ability: Ability, encounter: Encou
 	caster.AddLustFraction(0.3);
 
 	Status.Horny(caster, { hit : 2, str : 1, dmg : 0.1, turns : 3, turnsR : 3 });
+	Text.NL();
 });
 
 EnemySkillAb.Corishev.Punish = new Ability("Corishev.Punish");
@@ -512,6 +537,7 @@ EnemySkillAb.Cassidy.Smoke.castTree.push(AbilityNode.Template.Physical({
 		const parse = AbilityNode.DefaultParser(caster, target);
 		if (Status.Blind(target, { hit : 0.5, str : 0.5, turns : 1, turnsR : 3 })) {
 			Text.Add("The thick smoke surrounds you. [tName] [tis] blinded!", parse);
+			Text.NL();
 		}
 	}],
 }));
@@ -565,8 +591,8 @@ EnemySkillAb.Cassidy.Impact.castTree.push(AbilityNode.Template.Physical({
 	onHit: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
 		if (Status.Burn(target, { hit : 1, turns : 3, turnsR : 5, str : 1, dmg : 0.3 })) {
-			Text.NL();
 			Text.Add("[tName] [thas] been burned!", parse);
+			Text.NL();
 		}
 	}],
 }));

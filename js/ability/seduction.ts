@@ -28,6 +28,7 @@ SeductionAb.Sleep.castTree.push((ability: Ability, encounter: Encounter, caster:
 	} else {
 		Text.Add("[tName] manage[notS] to shake off [poss] enchantment, resisting its drowsing effect.", parse);
 	}
+	Text.NL();
 });
 
 SeductionAb.TIllusion = new Ability("T.Illusion");
@@ -66,6 +67,7 @@ SeductionAb.TIllusion.castTree.push((ability: Ability, encounter: Encounter, cas
 		Text.Flush();
 		return false;
 	} });
+	Text.NL();
 });
 
 SeductionAb.SIllusion = new Ability("S.Illusion");
@@ -105,6 +107,7 @@ SeductionAb.SIllusion.castTree.push((ability: Ability, encounter: Encounter, cas
 		Text.Flush();
 		return false;
 	} });
+	Text.NL();
 });
 
 SeductionAb.Confuse = new Ability("Confuse");
@@ -120,6 +123,7 @@ SeductionAb.Confuse.castTree.push((ability: Ability, encounter: Encounter, caste
 	} else {
 		Text.Add("[tName] manage[tnotS] to compose [thimher]self, resisting [poss] unnatural influence.", parse);
 	}
+	Text.NL();
 });
 
 SeductionAb.Rut = new Ability("Rut");
@@ -134,6 +138,7 @@ SeductionAb.Rut.castTree.push(AbilityNode.Template.Lust({
 	}, (ability: Ability, encounter: Encounter, caster: Entity, target: Entity, dmg: number) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[Name] rut[notS] against [tname] for " + Text.Damage(-dmg) + " damage! Sexy!", parse);
+		Text.NL();
 	}],
 }));
 
@@ -153,6 +158,7 @@ SeductionAb.Fantasize.castTree.push((ability: Ability, encounter: Encounter, cas
 
 	// TODO: Make more flavor text
 	Text.Add("[name] fantasizes, building " + Text.Lust(dmg) + " lust! Sexy!", parse);
+	Text.NL();
 });
 
 SeductionAb.Soothe = new Ability("Soothe");
@@ -182,6 +188,7 @@ SeductionAb.Soothe.castTree.push((ability: Ability, encounter: Encounter, caster
 		Text.NL();
 		Text.Add("The music washes over [tposs] mind, leaving [thimher] feeling clean and pristine. [tName] lose[tnotS] " + Text.Soothe(soothe) + " lust!", parse);
 	});
+	Text.NL();
 });
 
 SeductionAb.Captivate = new Ability("Captivate");
@@ -190,6 +197,7 @@ SeductionAb.Captivate.Short = () => "Attempt to immobilize and slow a foe with a
 SeductionAb.Captivate._onMiss = (ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 	const parse = AbilityNode.DefaultParser(caster, target);
 	Text.Add("[tName] manage[tnotS] to resist the brunt of the mesmerizing melody, but still finds [thisher] movements slowed.", parse);
+	Text.NL();
 };
 SeductionAb.Captivate.castTree.push(AbilityNode.Template.Lust({
 	toDamage: undefined,
@@ -197,11 +205,13 @@ SeductionAb.Captivate.castTree.push(AbilityNode.Template.Lust({
 		const parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("Fixing [tname] with a piercing gaze, [name] begin[notS] singing, [hisher] song’s captivating undertones ringing through the air. ", parse);
 		Status.Slow(target, { hit : 0.6, factor : 2, turns : 3, turnsR : 3 });
+		Text.NL();
 	}],
 	onHit: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 		if (Status.Numb(target, { hit : 0.8, turns : 2, proc : 1 })) {
 			const parse = AbilityNode.DefaultParser(caster, target);
 			Text.Add("[tName] is utterly entranced by [poss] song and is slowed to a stop, completely immobilized.", parse);
+			Text.NL();
 		} else {
 			SeductionAb.Captivate._onMiss(ability, encounter, caster, target);
 		}
@@ -228,6 +238,7 @@ SeductionAb.Lull.castTree.push((ability: Ability, encounter: Encounter, caster: 
 	} else {
 		Text.Add("[tName] shrug[ts] it off, managing to stay awake.", parse);
 	}
+	Text.NL();
 });
 
 /*
@@ -245,6 +256,7 @@ SeductionAb.Tease.castTree.push(AbilityNode.Template.Lust({
 		const parse = AbilityNode.DefaultParser(caster, target);
 		parse.hips = caster.HipsDesc();
 		Text.Add("[Name] tease[notS] [tname], shaking [hisher] [hips]! ", parse);
+		Text.NL();
 	}],
 	onMiss: [Defaults.Seduction._onMiss],
 	onDamage: [Defaults.Seduction._onDamage],
@@ -261,6 +273,7 @@ SeductionAb.Seduce.castTree.push(AbilityNode.Template.Lust({
 		const parse = AbilityNode.DefaultParser(caster, target);
 		parse.hips = caster.HipsDesc();
 		Text.Add("[Name] tease[notS] [tname], shaking [hisher] [hips]! ", parse);
+		Text.NL();
 	}],
 	onMiss: [Defaults.Seduction._onMiss],
 	onDamage: [Defaults.Seduction._onDamage],
@@ -279,6 +292,7 @@ SeductionAb.StripTease.castTree.push(AbilityNode.Template.Lust({
 		const parse = AbilityNode.DefaultParser(caster);
 		parse.hips = caster.HipsDesc();
 		Text.Add("[Name] tease[notS] the enemy party, shaking [hisher] [hips]! ", parse);
+		Text.NL();
 	}],
 	onMiss: [Defaults.Seduction._onMiss],
 	onDamage: [Defaults.Seduction._onDamage],
@@ -296,12 +310,14 @@ SeductionAb.Distract.castTree.push(AbilityNode.Template.Lust({
 		const parse = AbilityNode.DefaultParser(caster, target);
 		parse.hips = caster.HipsDesc();
 		Text.Add("[Name] distract[notS] [tname], shaking [hisher] [hips]! ", parse);
+		Text.NL();
 	}],
 	onMiss: [Defaults.Seduction._onMiss],
 	onDamage: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity, dmg: number) => {
 		target.GetCombatEntry(encounter).initiative -= 25;
 		const parse = AbilityNode.DefaultParser(caster, target);
-	 Text.Add("[tName] become[tnotS] aroused, gaining " + Text.Lust(-dmg) + " lust! [tHeShe] become[tnotS] distracted.", parse);
+		Text.Add("[tName] become[tnotS] aroused, gaining " + Text.Lust(-dmg) + " lust! [tHeShe] become[tnotS] distracted.", parse);
+		Text.NL();
 	}],
 	onAbsorb: [Defaults.Seduction._onAbsorb],
 }));
@@ -317,6 +333,7 @@ SeductionAb.Charm.castTree.push(AbilityNode.Template.Lust({
 		const parse = AbilityNode.DefaultParser(caster, target);
 		parse.hips = caster.HipsDesc();
 		Text.Add("[Name] charm[notS] [tname], shaking [hisher] [hips]! ", parse);
+		Text.NL();
 	}],
 	onMiss: [Defaults.Seduction._onMiss],
 	onDamage: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity, dmg: number) => {
@@ -326,7 +343,8 @@ SeductionAb.Charm.castTree.push(AbilityNode.Template.Lust({
 			if (aggroEntry.aggro < 0) { aggroEntry.aggro = 0; }
 		}
 		const parse = AbilityNode.DefaultParser(caster, target);
-	 Text.Add("[tName] become[tnotS] charmed, gaining " + Text.Lust(-dmg) + " lust! [tHeShe] become[tnotS] less aggressive toward [name].", parse);
+		Text.Add("[tName] become[tnotS] charmed, gaining " + Text.Lust(-dmg) + " lust! [tHeShe] become[tnotS] less aggressive toward [name].", parse);
+		Text.NL();
 	}],
 	onAbsorb: [Defaults.Seduction._onAbsorb],
 }));
@@ -341,6 +359,7 @@ SeductionAb.Allure.castTree.push(AbilityNode.Template.Lust({
 		const parse = AbilityNode.DefaultParser(caster, target);
 		parse.hips = caster.HipsDesc();
 		Text.Add("[Name] charm[notS] [tname], shaking [hisher] [hips]! ", parse);
+		Text.NL();
 	}],
 	onMiss: [Defaults.Seduction._onMiss],
 	onDamage: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity, dmg: number) => {
@@ -350,7 +369,8 @@ SeductionAb.Allure.castTree.push(AbilityNode.Template.Lust({
 			if (aggroEntry.aggro < 0) { aggroEntry.aggro = 0; }
 		}
 		const parse = AbilityNode.DefaultParser(caster, target);
-	 Text.Add("[tName] become[tnotS] charmed, gaining " + Text.Lust(-dmg) + " lust! [tHeShe] become[tnotS] less aggressive toward [name].", parse);
+		Text.Add("[tName] become[tnotS] charmed, gaining " + Text.Lust(-dmg) + " lust! [tHeShe] become[tnotS] less aggressive toward [name].", parse);
+		Text.NL();
 	}],
 	onAbsorb: [Defaults.Seduction._onAbsorb],
 }));
@@ -364,15 +384,18 @@ SeductionAb.Inflame.castTree.push(AbilityNode.Template.Lust({
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[Name] slowly sing[notS] a few verses of a soft, sensual melody, projecting [hisher] rich voice at [tname]. ", parse);
+		Text.NL();
 	}],
 	onMiss: [Defaults.Seduction._onMiss],
 	onDamage: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity, dmg: number) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[tName] squirm[tnotS] at the subtle undertones of the song, becoming greatly aroused. [tName] gain[tnotS] " + Text.Lust(-dmg) + " lust!", parse);
+		Text.NL();
 	}],
 	onAbsorb: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[tName] manage[tnotS] to shake off the desire-inducing effects of [poss] voice.", parse);
+		Text.NL();
 	}],
 }));
 
