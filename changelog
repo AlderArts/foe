@@ -19,6 +19,8 @@ Version 0.5.0
 * Using cheats to get items in the tent now gives 10 of every item instead of 1.
 * Fixed a bug in Alchemy that would cause brewing to consume 2x the amount of ingredients actually required.
 * At end of combat, loot is now combined if you receive multiple instances of the same type of item.
+* Combat output has been streamlined. There should be less buttonmashing to get to the next combat choice now. This doesn't change any of the mechanics, just how combat is displayed.
+ - When picking a spell, the battle screen now shows what spell you picked when you choose a target.
 
 * Streamlined Chief talk scenes (removed Next, now looks more in line with other NPC dialogue).
 * Adjusted pacing in the Equines win scenes. They are now split up into multiple pages rather than one long scene.
