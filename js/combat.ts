@@ -2,6 +2,7 @@ import * as _ from "lodash";
 
 import { GetDEBUG } from "../app";
 import { Abilities } from "./abilities";
+import { Ability } from "./ability";
 import { CurrentActiveChar, EnemyParty, SetCurEncounter, SetCurrentActiveChar, SetEnemyParty } from "./combat-data";
 import { Entity } from "./entity";
 import { GAME, TimeStep } from "./GAME";
@@ -534,7 +535,7 @@ export class Encounter {
 			};
 
 			if (casting) {
-				const ability = casting.ability;
+				const ability: Ability = casting.ability;
 				ability.CastInternal(enc, activeChar.entity, casting.target);
 			} else {
 				// Reduce cooldowns

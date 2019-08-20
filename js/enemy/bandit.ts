@@ -227,7 +227,7 @@ export class Bandit extends Entity {
 		} else if (choice < 0.9 && Abilities.Physical.Pierce.enabledCondition(encounter, this)) {
 			Abilities.Physical.Pierce.CastInternal(encounter, this, t);
 		} else {
-					Abilities.Attack.CastInternal(encounter, this, t);
+			Abilities.Attack.CastInternal(encounter, this, t);
 		}
 	}
 
