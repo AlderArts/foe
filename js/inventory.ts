@@ -9,7 +9,7 @@ import { compareItemByProp, Item, ItemIds, ItemSubtype, ItemType } from "./item"
 import { CombatItem } from "./items/combatitems";
 import { Text } from "./text";
 
-interface IItemQuantity {
+export interface IItemQuantity {
 	it: Item;
 	num: number;
 }

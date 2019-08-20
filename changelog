@@ -18,6 +18,7 @@ Version 0.5.0
 * Added a Voluptous option for female start.
 * Using cheats to get items in the tent now gives 10 of every item instead of 1.
 * Fixed a bug in Alchemy that would cause brewing to consume 2x the amount of ingredients actually required.
+* At end of combat, loot is now combined if you receive multiple instances of the same type of item.
 
 * Streamlined Chief talk scenes (removed Next, now looks more in line with other NPC dialogue).
 * Adjusted pacing in the Equines win scenes. They are now split up into multiple pages rather than one long scene.

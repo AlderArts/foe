@@ -11,6 +11,7 @@ import { Input } from "./input";
 import { Party } from "./party";
 import { StatusEffect } from "./statuseffect";
 import { Text } from "./text";
+import { IItemQuantity } from "./inventory";
 
 interface ICombatOrder {
 	entity: Entity;
@@ -310,23 +311,44 @@ export class Encounter {
 		Text.Add("Victory!");
 		Text.NL();
 
+		const drops: IItemQuantity[] = [];
 		let exp = 0; let coin = 0;
 		for (let i = 0; i < this.enemy.NumTotal(); i++) {
 			const e = this.enemy.Get(i);
 			exp  += e.combatExp;
 			coin += e.coinDrop;
 
-			const drops = e.DropTable();
-			for (const drop of drops) {
+			for (const drop of e.DropTable()) {
 				const it  = drop.it;
 				const num = drop.num || 1;
+				// Find if drop is already in looted table
+				let idx = -1;
+				let i = 0;
+				for (const d of drops) {
+					if (it === d.it) {
+						idx = i;
+						break;
+					}
+					i++;
+				}
 
-				Text.Add("The party finds " + num + "x " + it.name + ".<br>");
-				GAME().party.inventory.AddItem(it, num);
+				if (idx >= 0) {
+					drops[idx].num += num;
+				} else {
+					drops.push({it, num});
+				}
 			}
 		}
 
-		Text.Add("The party gains " + exp + " experience and " + coin + " coins.");
+		for (const drop of drops) {
+			const it  = drop.it;
+			const num = drop.num || 1;
+
+			Text.Add("The party finds " + num + "x " + it.name + ".<br>");
+			GAME().party.inventory.AddItem(it, num);
+		}
+
+		Text.Add("<br>The party gains " + exp + " experience and " + coin + " coins.");
 
 		for (const ent of GAME().party.members) {
 			// Don't give exp to fallen characters
@@ -387,9 +409,13 @@ export class Encounter {
 		}
 
 		if (enc.LossCondition()) {
-			enc.onLoss();
+			Gui.NextPrompt(() => {
+				enc.onLoss();
+			});
 		} else if (enc.VictoryCondition()) {
-			enc.onVictory();
+			Gui.NextPrompt(() => {
+				enc.onVictory();
+			});
 		} else {
 			let found = false;
 			while (!found) {
