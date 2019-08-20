@@ -62,7 +62,7 @@ export namespace Saver {
 		const saveData = JSON.stringify(GameCache(), (key, value) => {
 			if (typeof value === "object" && value !== undefined) {
 				if (seen.indexOf(value) !== -1) {
-					console.error("Circular reference found in the gameCache!\n" + key + ":", value);
+					// console.error("Circular reference found in the gameCache!\n" + key + ":", value);
 					return;
 				}
 				seen.push(value);

@@ -8,10 +8,10 @@ import { GAME, TimeStep } from "./GAME";
 import { GameState, SetGameState } from "./gamestate";
 import { Gui } from "./gui";
 import { Input } from "./input";
+import { IItemQuantity } from "./inventory";
 import { Party } from "./party";
 import { StatusEffect } from "./statuseffect";
 import { Text } from "./text";
-import { IItemQuantity } from "./inventory";
 
 interface ICombatOrder {
 	entity: Entity;
@@ -66,7 +66,6 @@ export class Encounter {
 
 	// Set up the fight
 	public PrepCombat() {
-		console.log("PrepCombat");
 		Text.Clear();
 		SetGameState(GameState.Combat, Gui);
 
@@ -189,7 +188,6 @@ export class Encounter {
 		return p;
 	}
 
-	// TODO
 	public SetButtons(activeChar: any, combatScreen: any) {
 		const entity = activeChar.entity;
 		const encounter = this;
@@ -197,7 +195,7 @@ export class Encounter {
 		const backPrompt = () => {
 			Text.Clear();
 			BasePrompt();
-		}
+		};
 
 		const BasePrompt = () => {
 			Gui.ClearButtons();
@@ -279,7 +277,6 @@ export class Encounter {
 	}
 
 	public onLoss() {
-		console.log("onLoss");
 		Text.Clear();
 		Text.Add("Defeat!");
 		// TODO: XP loss?
@@ -306,7 +303,6 @@ export class Encounter {
 	}
 
 	public onVictory() {
-		console.log("onVictory");
 		Text.Clear();
 		Text.Add("Victory!");
 		Text.NL();
@@ -393,7 +389,6 @@ export class Encounter {
 	}
 
 	public CombatTick() {
-		console.log("CombatTick");
 		const enc = this;
 
 		const e = enc.Callstack.pop();
@@ -494,9 +489,6 @@ export class Encounter {
 			}
 
 			const combatScreen = () => {
-				console.log("combatScreen");
-				//Text.Clear();
-				// TODO: DEBUG ?
 				let entityName = CurrentActiveChar().uniqueName ? CurrentActiveChar().uniqueName : CurrentActiveChar().name;
 
 				if (activeChar.entity === GAME().player) {
@@ -540,8 +532,6 @@ export class Encounter {
 
 				Text.Flush();
 			};
-
-			//combatScreen();
 
 			if (casting) {
 				const ability = casting.ability;

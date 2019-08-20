@@ -78,10 +78,10 @@ export class Item {
 		this.effect.statusDef = [];
 
 		if (!id) {
-			console.log("Item '" + name + "' has no id.");
+			// console.log("Item '" + name + "' has no id.");
 		}
 		if (ItemIds[id]) {
-			console.log("Item '" + id + "' is already registered.");
+			// console.log("Item '" + id + "' is already registered.");
 		}
 		ItemIds[id] = this;
 	}
