@@ -3,7 +3,6 @@ import { Ability } from "../ability";
 import { Encounter } from "../combat";
 import { DamageType } from "../damagetype";
 import { Entity } from "../entity";
-import { GAME } from "../GAME";
 import { Party } from "../party";
 import { StatusEffect } from "../statuseffect";
 import { Text } from "../text";
@@ -411,32 +410,10 @@ AbilityNode.DamagePool.Lust = (ability: Ability, encounter: Encounter, caster: E
 	target.AddLustAbs(-dmg);
 };
 
-AbilityNode.Retarget = {};
-AbilityNode.Retarget.Fallen = (ability: Ability, encounter: Encounter, caster: Entity, target: Entity, result: any) => {
-	if (!_.has(target, "members") && target.Incapacitated()) {
-		const entry = target.GetCombatEntry(encounter);
-		if (entry) {
-			let group = GAME().party.members;
-			if (entry.isEnemy) {
-				group = encounter.enemy.members;
-			}
-			target = _.sample(_.filter(group, (e) => {
-				return !e.Incapacitated();
-			}));
-		}
-	}
-
-	return target;
-};
-
 AbilityNode.Run = function(ability: Ability, encounter: Encounter, caster: Entity, target: Entity|Party|any, result: any) {
 	const that = this;
 
-	if (that.retarget) {
-		target = that.retarget(ability, encounter, caster, target, result);
-	}
-
-	// OnCast, allways apply no matter what
+	// OnCast, always apply no matter what
 	_.each(that.onCast, (node) => {
 		node(ability, encounter, caster, target);
 	});
@@ -453,7 +430,7 @@ AbilityNode.Run = function(ability: Ability, encounter: Encounter, caster: Entit
 		nrAttacks = nrAttacks(ability, encounter, caster, target, result);
 	} else if (!_.isNumber(nrAttacks)) {
 		nrAttacks = 1;
- }
+ 	}
 
 	// For each target
 	_.each(targets, (e) => {

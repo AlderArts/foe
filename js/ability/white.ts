@@ -7,7 +7,6 @@
 import { Ability, TargetMode } from "../ability";
 import { Encounter } from "../combat";
 import { Entity } from "../entity";
-import { Gui } from "../gui";
 import { Party } from "../party";
 import { StatusEffect } from "../statuseffect";
 import { Text } from "../text";
@@ -46,7 +45,7 @@ WhiteAb.Heal.castTree.push(AbilityNode.Template.Heal({
 	atkMod: 1.5,
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
-		Text.Add("[Name] read[y] a healing spell, forming a sphere of soothing white magic between [hisher] [hand]s. [HeShe] cast[notS] the enchantment on [tname]", parse);
+		Text.Add("[Name] read[y] a healing spell, forming a sphere of soothing white magic between [hisher] [hand]s. [HeShe] cast[notS] the enchantment on [tname].", parse);
 		Text.NL();
 	}],
 	onAbsorb: [WhiteAb._onHeal],
@@ -61,7 +60,29 @@ WhiteAb.Recover.castTree.push(AbilityNode.Template.Heal({
 	atkMod: 2,
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
-		Text.Add("[Name] read[y] a powerful healing spell, forming a glowing sphere of soothing white magic between [hisher] [hand]s. [HeShe] cast[notS] the enchantment on [tname]", parse);
+		Text.Add("[Name] read[y] a powerful healing spell, forming a glowing sphere of soothing white magic between [hisher] [hand]s. [HeShe] cast[notS] the enchantment on [tname].", parse);
+		Text.NL();
+	}],
+	onAbsorb: [WhiteAb._onHeal],
+}));
+
+WhiteAb.Raise = new Ability("Raise");
+WhiteAb.Raise.Short = () => "Raises an ally that has been knocked out.";
+WhiteAb.Raise.targetMode = TargetMode.AllyFallen;
+WhiteAb.Raise.cost = { hp: undefined, sp: 150, lp: undefined};
+WhiteAb.Raise.cooldown = 2;
+WhiteAb.Raise.castTime = 100;
+WhiteAb.Raise.castTree.push(AbilityNode.Template.Heal({
+	hitFallen: true,
+	atkMod: 0.5,
+	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
+		const parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("[Name] start[notS] casting a restorative spell, aiming to get [tname] back into the fight!", parse);
+		Text.NL();
+	}],
+	onHit: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
+		const parse = AbilityNode.DefaultParser(caster, target);
+		Text.Add("[tName] groan[tnotS] weakly on the ground as [name] release[notS] a powerful healing spell. The magic eases [tposs] wounds, allowing [thimher] to return to the battle.", parse);
 		Text.NL();
 	}],
 	onAbsorb: [WhiteAb._onHeal],

@@ -21,6 +21,8 @@ Version 0.5.0
 * At end of combat, loot is now combined if you receive multiple instances of the same type of item.
 * Combat output has been streamlined. There should be less buttonmashing to get to the next combat choice now. This doesn't change any of the mechanics, just how combat is displayed.
  - When picking a spell, the battle screen now shows what spell you picked when you choose a target.
+* Spells with a cast time that target specific enemies will now retarget if the original target is knocked out before the spell hits. Yes, bleeding edge 90's era RPG technology here.
+* Added a "Raise" spell to Healer/Acolyte jobs. With it, you can get fallen allies back on their feet again.
 
 * Streamlined Chief talk scenes (removed Next, now looks more in line with other NPC dialogue).
 * Adjusted pacing in the Equines win scenes. They are now split up into multiple pages rather than one long scene.

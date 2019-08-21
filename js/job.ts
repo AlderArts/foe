@@ -262,6 +262,7 @@ Jobs.Acolyte.abilities.AddAbility(Abilities.White.Preach);
 Jobs.Acolyte.abilities.AddAbility(Abilities.White.Toughen);
 Jobs.Acolyte.abilities.AddAbility(Abilities.White.Empower);
 Jobs.Acolyte.abilities.AddAbility(Abilities.White.Cleanse);
+Jobs.Acolyte.abilities.AddAbility(Abilities.White.Raise);
 Jobs.Acolyte.levels.push(new JobLevel(10,  [{ab: Abilities.White.Heal, set: "Support"}], {int : 0.2}));
 Jobs.Acolyte.levels.push(new JobLevel(20,  undefined, {int : 0.1, spi : 0.1}));
 Jobs.Acolyte.levels.push(new JobLevel(40,  [{ab: Abilities.White.Preach, set: "Support"}], {int : 0.1, cha : 0.1}));
@@ -442,13 +443,14 @@ Jobs.Healer.Long = (entity: Entity) => {
 Jobs.Healer.preqs.push({job : Jobs.Scholar, lvl : 3});
 Jobs.Healer.abilities.AddAbility(Abilities.White.Heal);
 Jobs.Healer.abilities.AddAbility(Abilities.White.Cleanse);
+Jobs.Healer.abilities.AddAbility(Abilities.White.Raise);
 Jobs.Healer.levels.push(new JobLevel(20,   undefined, {spi : 0.3}));
 Jobs.Healer.levels.push(new JobLevel(40,   undefined, {int : 0.2, cha : 0.1}));
 Jobs.Healer.levels.push(new JobLevel(80,   [{ab: Abilities.White.Heal, set: "Support"}], {sta : 0.2, spi : 0.1}));
 Jobs.Healer.levels.push(new JobLevel(160,  undefined, {spi : 0.2, int : 0.1}));
 Jobs.Healer.levels.push(new JobLevel(320,  [{ab: Abilities.White.Cleanse, set: "Support"}], {int : 0.3}));
 Jobs.Healer.levels.push(new JobLevel(640,  undefined, {cha : 0.2, sta : 0.1}));
-Jobs.Healer.levels.push(new JobLevel(1280, [{ab: Abilities.White.Recover, set: "Support"}], {spi : 0.4, int : 0.1, sp : 5}));
+Jobs.Healer.levels.push(new JobLevel(1280, [{ab: Abilities.White.Recover, set: "Support"}, {ab: Abilities.White.Raise, set: "Support"}], {spi : 0.4, int : 0.1, sp : 5}));
 Jobs.Healer.Unlocked = (entity: Entity) => {
 	return GlobalScenes.MagicStage1();
 };
