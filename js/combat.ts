@@ -14,13 +14,19 @@ import { Party } from "./party";
 import { StatusEffect } from "./statuseffect";
 import { Text } from "./text";
 
+interface ICastingEntry {
+	ability: Ability;
+	target: Entity;
+	retarget: CallableFunction;
+}
+
 interface ICombatOrder {
 	entity: Entity;
 	isEnemy: boolean;
 	aggro: any[];
 	initiative: number;
 	cooldown: any[];
-	casting: any;
+	casting: ICastingEntry;
 }
 
 // Create encounter with a Party() containing enemies
@@ -536,6 +542,9 @@ export class Encounter {
 
 			if (casting) {
 				const ability: Ability = casting.ability;
+				if (casting.retarget) {
+					casting.target = casting.retarget(casting.target);
+				}
 				ability.CastInternal(enc, activeChar.entity, casting.target);
 			} else {
 				// Reduce cooldowns

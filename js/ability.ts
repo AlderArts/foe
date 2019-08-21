@@ -141,7 +141,31 @@ export class Ability {
 		const party: Party = GAME().party;
 
 		switch (ability.targetMode) {
-			case TargetMode.All:
+			case TargetMode.All: {
+				const validTarget = (t: Entity) => {
+					// Don't add incapacitated
+					const incap = t.Incapacitated();
+					return !incap;
+				};
+				const retargetEnemy = (original: Entity) => {
+					if (validTarget(original)) { return original; }
+					for (const t of encounter.enemy.members) {
+						if (validTarget(t)) {
+							return t;
+						}
+					}
+					return original;
+				};
+				const retargetAlly = (original: Entity) => {
+					if (validTarget(original)) { return original; }
+					for (const t of party.members) {
+						if (validTarget(t)) {
+							return t;
+						}
+					}
+					return original;
+				};
+
 				_.each(party.members, (t) => {
 					// Don't add incapacitated
 					const incap = t.Incapacitated();
@@ -151,7 +175,7 @@ export class Ability {
 						nameStr : t.name,
 						func(t: Entity) {
 							Text.Clear();
-							ability.Use(encounter, caster, t, ext);
+							ability.Use(encounter, caster, t, ext, retargetAlly);
 						},
 						enabled : ability.enabledTargetCondition(encounter, caster, t),
 						obj     : t,
@@ -166,7 +190,7 @@ export class Ability {
 						nameStr : t.uniqueName || t.name,
 						func(t: Entity) {
 							Text.Clear();
-							ability.Use(encounter, caster, t, ext);
+							ability.Use(encounter, caster, t, ext, retargetEnemy);
 						},
 						enabled : ability.enabledTargetCondition(encounter, caster, t),
 						obj     : t,
@@ -175,7 +199,7 @@ export class Ability {
 
 				Gui.SetButtonsFromList(target, true, backPrompt);
 				return true;
-
+			}
 			case TargetMode.Self:
 				Text.Clear();
 				ability.Use(encounter, caster, undefined, ext);
@@ -183,52 +207,82 @@ export class Ability {
 
 			case TargetMode.Ally:
 			case TargetMode.AllyNotSelf:
-			case TargetMode.AllyFallen:
-				_.each(party.members, (t) => {
+			case TargetMode.AllyFallen: {
+				const validTarget = (t: Entity) => {
 					// Don't add self unless allowed
-					if (ability.targetMode === TargetMode.AllyNotSelf && t === caster) { return; }
+					if (ability.targetMode === TargetMode.AllyNotSelf && t === caster) { return false; }
 					// Don't add incapacitated unless allowed
 					const incap = t.Incapacitated();
-					if (incap) {
-						return;
-					} else if (ability.targetMode === TargetMode.AllyFallen) {
-						return;
+					if (ability.targetMode === TargetMode.AllyFallen) {
+						if (!incap) {
+							return false;
+						}
+					} else if (incap) {
+						return false;
 					}
+					return true;
+				};
 
-					target.push({
-						nameStr : t.name,
-						func(t: Entity) {
-							Text.Clear();
-							ability.Use(encounter, caster, t, ext);
-						},
-						enabled : ability.enabledTargetCondition(encounter, caster, t),
-						obj     : t,
-					});
+				const retarget = (original: Entity) => {
+					if (validTarget(original)) { return original; }
+					for (const t of encounter.enemy.members) {
+						if (validTarget(t)) {
+							return t;
+						}
+					}
+					return original;
+				};
+
+				_.each(party.members, (t) => {
+					if (validTarget(t)) {
+						target.push({
+							nameStr : t.name,
+							func(t: Entity) {
+								Text.Clear();
+								ability.Use(encounter, caster, t, ext, retarget);
+							},
+							enabled : ability.enabledTargetCondition(encounter, caster, t),
+							obj     : t,
+						});
+					}
 				});
 
 				Gui.SetButtonsFromList(target, true, backPrompt);
 				return true;
-
-			case TargetMode.Enemy:
-				_.each(encounter.enemy.members, (t) => {
+			}
+			case TargetMode.Enemy: {
+				const validTarget = (t: Entity) => {
 					// Don't add incapacitated
 					const incap = t.Incapacitated();
-					if (incap) { return; }
+					return !incap;
+				};
+				const retarget = (original: Entity) => {
+					if (validTarget(original)) { return original; }
+					for (const t of encounter.enemy.members) {
+						if (validTarget(t)) {
+							return t;
+						}
+					}
+					return original;
+				};
 
-					target.push({
-						nameStr : t.uniqueName || t.name,
-						func(t: Entity) {
-							Text.Clear();
-							ability.Use(encounter, caster, t, ext);
-						},
-						enabled : ability.enabledTargetCondition(encounter, caster, t),
-						obj     : t,
-					});
+				_.each(encounter.enemy.members, (t) => {
+					if (validTarget(t)) {
+						target.push({
+							nameStr : t.uniqueName || t.name,
+							func(t: Entity) {
+								Text.Clear();
+								ability.Use(encounter, caster, t, ext, retarget);
+							},
+							enabled : ability.enabledTargetCondition(encounter, caster, t),
+							obj     : t,
+						});
+					}
 				});
 
 				Gui.SetButtonsFromList(target, true, backPrompt);
 				return true;
-
+			}
 			case TargetMode.Party:
 				Text.Clear();
 				ability.Use(encounter, caster, party, ext);
@@ -237,13 +291,13 @@ export class Ability {
 				Text.Clear();
 				ability.Use(encounter, caster, encounter.enemy, ext);
 				break;
-			default:
+			default: // Shouldn't happen
 				Text.NL();
 				encounter.CombatTick();
 		}
 	}
 
-	public Use(encounter: Encounter, caster: Entity, target: Entity|Party, ext?: any) {
+	public Use(encounter: Encounter, caster: Entity, target: Entity|Party, ext?: any, retarget?: CallableFunction) {
 		Ability.ApplyCost(this, caster);
 		this.StartCast(encounter, caster, target);
 
@@ -263,6 +317,7 @@ export class Ability {
 			entry.casting = {
 				ability : this,
 				target,
+				retarget,
 			};
 
 			Text.Flush();
