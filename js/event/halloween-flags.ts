@@ -1,4 +1,4 @@
-const HalloweenFlags = {
+export const HalloweenFlags = {
     Flags : {
         Elder     : (1 << 0),
         Kiai      : (1 << 1),
@@ -35,5 +35,3 @@ const HalloweenFlags = {
         SaidNo    : (1 << 2),
     },
 };
-
-export { HalloweenFlags };
