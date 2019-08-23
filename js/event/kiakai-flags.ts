@@ -1,4 +1,4 @@
-const KiakaiFlags = {
+export const KiakaiFlags = {
     Attitude : {
         Slave   : -3,
         Dom     : -2,
@@ -23,5 +23,3 @@ const KiakaiFlags = {
         Oil      : 5,
     },
 };
-
-export { KiakaiFlags };

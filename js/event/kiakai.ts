@@ -18,6 +18,7 @@ import { JobDesc, Jobs } from "../job";
 import { Text } from "../text";
 import { KiakaiFlags } from "./kiakai-flags";
 import { KiakaiScenes } from "./kiakai-scenes";
+import { KiakaiSexScenes } from "./kiakai-sex";
 import { RavenFlags } from "./raven-flags";
 
 export class Kiakai extends Entity {
@@ -241,12 +242,12 @@ export class Kiakai extends Entity {
 			tooltip : "Clean impure thoughts.",
 		});
 		options.push({ nameStr: "Healing",
-			func : KiakaiScenes.Healing, enabled : true,
+			func : KiakaiSexScenes.Healing, enabled : true,
 			tooltip : Text.Parse("Ask [name] to heal your wounds, and perhaps comfort you in other ways.", parse),
 		});
 		if (kiakai.flags.Sexed >= 30) {
 			options.push({ nameStr: "Sex",
-				func : KiakaiScenes.Sex, enabled : kiakai.flags.TalkedSex !== 1,
+				func : KiakaiSexScenes.KiakaiSex, enabled : kiakai.flags.TalkedSex !== 1,
 				tooltip : Text.Parse("Proposition to have sex with [name].", parse),
 			});
 		}

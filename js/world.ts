@@ -1,7 +1,7 @@
 // World template
 import { InitCheats } from "./cheats";
 import { DreamsScenes } from "./event/dreams";
-import { DarkAspect, InitIntro, LightAspect } from "./event/introduction";
+import { DarkAspect, Intro, LightAspect } from "./event/introduction";
 import { InitMiranda } from "./event/miranda-scenes";
 import { BullTowerLoc } from "./event/outlaws/bulltower";
 import { CvetaScenes } from "./event/outlaws/cveta-scenes";
@@ -67,7 +67,7 @@ export function InitWorld() {
 		return "As always, you can see the immense tree at the center of Eden towering in the distance, though you are so far away that the great canopy isn't obscuring the sky above.";
 	};
 
-	InitIntro();
+	Intro.INIT();
 	InitNomads();
 	InitOutlaws();
 	InitRigard();
