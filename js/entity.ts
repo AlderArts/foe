@@ -174,7 +174,7 @@ export class Entity {
 		this.recipes      = [];
 		this.alchemyLevel = 0;
 
-		// Jobs //TODO: Save/load
+		// Jobs
 		this.jobs         = {};
 
 		// Experience
@@ -1370,11 +1370,11 @@ export class Entity {
 
 	public SaveFlags(storage: any) {
 		const flags: any = {};
-		for (const flag in this.flags) {
-			if (this.flags[flag] !== 0) {
-				flags[flag] = this.flags[flag];
+		_.forIn (this.flags, (flag, key) => {
+			if (flag !== 0) {
+				flags[key] = this.flags[flag];
 			}
-		}
+		});
 		storage.flags = flags;
 	}
 
@@ -1397,13 +1397,12 @@ export class Entity {
 
 	public SaveJobs(storage: any) {
 		storage.jobs = {};
-		for (const job of this.jobs) {
-			const jd = this.jobs[job];
+		_.forIn (this.jobs, (jd, key) => {
 			const jobStorage = jd.ToStorage();
 			if (jobStorage) {
-				storage.jobs[job] = jobStorage;
+				storage.jobs[key] = jobStorage;
 			}
-		}
+		});
 		if (this.currentJob) {
 			storage.curJob = this.currentJob.name;
 		}
