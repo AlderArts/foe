@@ -28,7 +28,7 @@ import { Gui } from "./gui";
 import { Item, ItemIds } from "./item";
 import { Jobs } from "./job";
 import { LactationHandler } from "./lactation";
-import { Perk, PerkIds } from "./perks";
+import { Perk, PerkIds, Perks } from "./perks";
 import { PregnancyHandler, Womb } from "./pregnancy";
 import { Stat } from "./stat";
 import { StatusEffect } from "./statuseffect";
@@ -1372,7 +1372,7 @@ export class Entity {
 		const flags: any = {};
 		_.forIn (this.flags, (flag, key) => {
 			if (flag !== 0) {
-				flags[key] = this.flags[flag];
+				flags[key] = flag;
 			}
 		});
 		storage.flags = flags;
@@ -1528,8 +1528,7 @@ export class Entity {
 
 	public LoadJobs(storage: any) {
 		if (storage.jobs) {
-			_.forIn(this.jobs, (value, key) => {
-				const jd = this.jobs[key];
+			_.forIn(this.jobs, (jd, key) => {
 				jd.FromStorage(storage.jobs[jd.job.name]);
 			});
 		}
@@ -1563,9 +1562,9 @@ export class Entity {
 	public LoadPerks(storage: any) {
 		if (storage.perks) {
 			this.perks = [];
-			_.forIn(storage.perks, (value, key) => {
-				this.perks[parseInt(key, 10)] = value;
-			});
+			for (const perkId of storage.perks) {
+				this.perks.push(PerkIds[perkId]);
+			}
 		}
 	}
 
