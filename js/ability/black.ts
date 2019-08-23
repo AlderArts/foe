@@ -11,12 +11,10 @@ import { Text } from "../text";
 import { Defaults } from "./default";
 import { AbilityNode } from "./node";
 
-const BlackAb: any = {};
-
-BlackAb.Surge = new Ability("Surge");
-BlackAb.Surge.Short = () => "Weak non-elemental magic, single target.";
-BlackAb.Surge.cost = { hp: undefined, sp: 5, lp: undefined};
-BlackAb.Surge.castTree.push(AbilityNode.Template.Magical({
+const surge = new Ability("Surge");
+surge.Short = () => "Weak non-elemental magic, single target.";
+surge.cost = { hp: undefined, sp: 5, lp: undefined};
+surge.castTree.push(AbilityNode.Template.Magical({
 	damageType: {mVoid: 1},
 	onAbsorb: [Defaults.Black._onAbsorb],
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
@@ -28,11 +26,11 @@ BlackAb.Surge.castTree.push(AbilityNode.Template.Magical({
 	onMiss: [Defaults.Black._onMiss],
 }));
 
-BlackAb.Fireball = new Ability("Fireball");
-BlackAb.Fireball.Short = () => "Fire magic, single target.";
-BlackAb.Fireball.cost = { hp: undefined, sp: 10, lp: undefined};
-BlackAb.Fireball.castTime = 75;
-BlackAb.Fireball.castTree.push(AbilityNode.Template.Magical({
+const fireball = new Ability("Fireball");
+fireball.Short = () => "Fire magic, single target.";
+fireball.cost = { hp: undefined, sp: 10, lp: undefined};
+fireball.castTime = 75;
+fireball.castTree.push(AbilityNode.Template.Magical({
 	atkMod: 2,
 	damageType: {mFire: 1},
 	onAbsorb: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity, dmg: number) => {
@@ -56,11 +54,11 @@ BlackAb.Fireball.castTree.push(AbilityNode.Template.Magical({
 	onMiss: [Defaults.Black._onMiss],
 }));
 
-BlackAb.Freeze = new Ability("Freeze");
-BlackAb.Freeze.Short = () => "Ice magic, single target.";
-BlackAb.Freeze.cost = { hp: undefined, sp: 10, lp: undefined};
-BlackAb.Freeze.castTime = 70;
-BlackAb.Freeze.castTree.push(AbilityNode.Template.Magical({
+const freeze = new Ability("Freeze");
+freeze.Short = () => "Ice magic, single target.";
+freeze.cost = { hp: undefined, sp: 10, lp: undefined};
+freeze.castTime = 70;
+freeze.castTree.push(AbilityNode.Template.Magical({
 	atkMod: 1.9,
 	damageType: {mIce: 1},
 	onAbsorb: [Defaults.Black._onAbsorb],
@@ -80,11 +78,11 @@ BlackAb.Freeze.castTree.push(AbilityNode.Template.Magical({
 	onMiss: [Defaults.Black._onMiss],
 }));
 
-BlackAb.Bolt = new Ability("Bolt");
-BlackAb.Bolt.Short = () => "Thunder magic, single target.";
-BlackAb.Bolt.cost = { hp: undefined, sp: 10, lp: undefined};
-BlackAb.Bolt.castTime = 60;
-BlackAb.Bolt.castTree.push(AbilityNode.Template.Magical({
+const bolt = new Ability("Bolt");
+bolt.Short = () => "Thunder magic, single target.";
+bolt.cost = { hp: undefined, sp: 10, lp: undefined};
+bolt.castTime = 60;
+bolt.castTree.push(AbilityNode.Template.Magical({
 	atkMod: 1.8,
 	damageType: {mThunder: 1},
 	onAbsorb: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity, dmg: number) => {
@@ -108,11 +106,11 @@ BlackAb.Bolt.castTree.push(AbilityNode.Template.Magical({
 	onMiss: [Defaults.Black._onMiss],
 }));
 
-BlackAb.Gust = new Ability("Gust");
-BlackAb.Gust.Short = () => "Slashing wind magic, single target.";
-BlackAb.Gust.cost = { hp: undefined, sp: 10, lp: undefined};
-BlackAb.Gust.castTime = 50;
-BlackAb.Gust.castTree.push(AbilityNode.Template.Magical({
+const gust = new Ability("Gust");
+gust.Short = () => "Slashing wind magic, single target.";
+gust.cost = { hp: undefined, sp: 10, lp: undefined};
+gust.castTime = 50;
+gust.castTree.push(AbilityNode.Template.Magical({
 	damageType: {mWind: 0.7, pSlash: 0.3},
 	atkMod: 1.5,
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
@@ -125,11 +123,11 @@ BlackAb.Gust.castTree.push(AbilityNode.Template.Magical({
 	onAbsorb: [Defaults.Black._onAbsorb],
 }));
 
-BlackAb.Spire = new Ability("Spire");
-BlackAb.Spire.Short = () => "Bashing earth magic, single target.";
-BlackAb.Spire.cost = { hp: undefined, sp: 10, lp: undefined};
-BlackAb.Spire.castTime = 70;
-BlackAb.Spire.castTree.push(AbilityNode.Template.Magical({
+const spire = new Ability("Spire");
+spire.Short = () => "Bashing earth magic, single target.";
+spire.cost = { hp: undefined, sp: 10, lp: undefined};
+spire.castTime = 70;
+spire.castTree.push(AbilityNode.Template.Magical({
 	damageType: {mEarth: 0.7, pBlunt: 0.3},
 	atkMod: 1.9,
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
@@ -142,11 +140,11 @@ BlackAb.Spire.castTree.push(AbilityNode.Template.Magical({
 	onAbsorb: [Defaults.Black._onAbsorb],
 }));
 
-BlackAb.Spray = new Ability("Spray");
-BlackAb.Spray.Short = () => "Water magic, single target.";
-BlackAb.Spray.cost = { hp: undefined, sp: 10, lp: undefined};
-BlackAb.Spray.castTime = 50;
-BlackAb.Spray.castTree.push(AbilityNode.Template.Magical({
+const spray = new Ability("Spray");
+spray.Short = () => "Water magic, single target.";
+spray.cost = { hp: undefined, sp: 10, lp: undefined};
+spray.castTime = 50;
+spray.castTree.push(AbilityNode.Template.Magical({
 	damageType: {mWater: 1},
 	atkMod: 1.9,
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
@@ -159,11 +157,11 @@ BlackAb.Spray.castTree.push(AbilityNode.Template.Magical({
 	onAbsorb: [Defaults.Black._onAbsorb],
 }));
 
-BlackAb.Shimmer = new Ability("Shimmer");
-BlackAb.Shimmer.Short = () => "Blinding light magic, single target.";
-BlackAb.Shimmer.cost = { hp: undefined, sp: 15, lp: undefined};
-BlackAb.Shimmer.castTime = 75;
-BlackAb.Shimmer.castTree.push(AbilityNode.Template.Magical({
+const shimmer = new Ability("Shimmer");
+shimmer.Short = () => "Blinding light magic, single target.";
+shimmer.cost = { hp: undefined, sp: 15, lp: undefined};
+shimmer.castTime = 75;
+shimmer.castTree.push(AbilityNode.Template.Magical({
 	damageType: {mLight: 1},
 	atkMod: 1.9,
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
@@ -183,11 +181,11 @@ BlackAb.Shimmer.castTree.push(AbilityNode.Template.Magical({
 	}],
 }));
 
-BlackAb.Shade = new Ability("Shade");
-BlackAb.Shade.Short = () => "Dark shadow magic, single target.";
-BlackAb.Shade.cost = { hp: undefined, sp: 15, lp: undefined};
-BlackAb.Shade.castTime = 85;
-BlackAb.Shade.castTree.push(AbilityNode.Template.Magical({
+const shade = new Ability("Shade");
+shade.Short = () => "Dark shadow magic, single target.";
+shade.cost = { hp: undefined, sp: 15, lp: undefined};
+shade.castTime = 85;
+shade.castTree.push(AbilityNode.Template.Magical({
 	damageType: {mDark: 1},
 	atkMod: 2.2,
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
@@ -207,11 +205,11 @@ BlackAb.Shade.castTree.push(AbilityNode.Template.Magical({
 	}],
 }));
 
-BlackAb.Thorn = new Ability("Thorn");
-BlackAb.Thorn.Short = () => "Constricting nature magic, single target.";
-BlackAb.Thorn.cost = { hp: undefined, sp: 15, lp: undefined};
-BlackAb.Thorn.castTime = 75;
-BlackAb.Thorn.castTree.push(AbilityNode.Template.Magical({
+const thorn = new Ability("Thorn");
+thorn.Short = () => "Constricting nature magic, single target.";
+thorn.cost = { hp: undefined, sp: 15, lp: undefined};
+thorn.castTime = 75;
+thorn.castTree.push(AbilityNode.Template.Magical({
 	damageType: {mNature: 1},
 	atkMod: 2.0,
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
@@ -232,11 +230,11 @@ BlackAb.Thorn.castTree.push(AbilityNode.Template.Magical({
 	}],
 }));
 
-BlackAb.WindShear = new Ability("WindShear");
-BlackAb.WindShear.Short = () => "Wind magic, single target.";
-BlackAb.WindShear.cost = { hp: undefined, sp: 45, lp: undefined};
-BlackAb.WindShear.castTime = 120;
-BlackAb.WindShear.castTree.push(AbilityNode.Template.Magical({
+const windShear = new Ability("WindShear");
+windShear.Short = () => "Wind magic, single target.";
+windShear.cost = { hp: undefined, sp: 45, lp: undefined};
+windShear.castTime = 120;
+windShear.castTree.push(AbilityNode.Template.Magical({
 	damageType: {pSlash: 1, mWind: 1},
 	atkMod: 1.5,
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
@@ -249,11 +247,11 @@ BlackAb.WindShear.castTree.push(AbilityNode.Template.Magical({
 	onAbsorb: [Defaults.Black._onAbsorb],
 }));
 
-BlackAb.Stalagmite = new Ability("Stalagmite");
-BlackAb.Stalagmite.Short = () => "Earth magic, single target.";
-BlackAb.Stalagmite.cost = { hp: undefined, sp: 30, lp: undefined};
-BlackAb.Stalagmite.castTime = 120;
-BlackAb.Stalagmite.castTree.push(AbilityNode.Template.Magical({
+const stalagmite = new Ability("Stalagmite");
+stalagmite.Short = () => "Earth magic, single target.";
+stalagmite.cost = { hp: undefined, sp: 30, lp: undefined};
+stalagmite.castTime = 120;
+stalagmite.castTree.push(AbilityNode.Template.Magical({
 	damageType: {pBlunt: 0.5, mEarth: 1},
 	atkMod: 2.5,
 	defMod: 0.8,
@@ -272,12 +270,12 @@ BlackAb.Stalagmite.castTree.push(AbilityNode.Template.Magical({
 	}, AbilityNode.Template.Cancel()],
 }));
 
-BlackAb.Whirlwind = new Ability("Whirlwind");
-BlackAb.Whirlwind.Short = () => "Wind magic, targets all enemies.";
-BlackAb.Whirlwind.cost = { hp: undefined, sp: 35, lp: undefined};
-BlackAb.Whirlwind.targetMode = TargetMode.Enemies;
-BlackAb.Whirlwind.castTime = 120;
-BlackAb.Whirlwind.castTree.push(AbilityNode.Template.Magical({
+const whirlwind = new Ability("Whirlwind");
+whirlwind.Short = () => "Wind magic, targets all enemies.";
+whirlwind.cost = { hp: undefined, sp: 35, lp: undefined};
+whirlwind.targetMode = TargetMode.Enemies;
+whirlwind.castTime = 120;
+whirlwind.castTree.push(AbilityNode.Template.Magical({
 	damageType: {pSlash: 0.3, mWind: 1},
 	atkMod: 1.9,
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
@@ -290,12 +288,12 @@ BlackAb.Whirlwind.castTree.push(AbilityNode.Template.Magical({
 	onAbsorb: [Defaults.Black._onAbsorb],
 }));
 
-BlackAb.Eruption = new Ability("Eruption");
-BlackAb.Eruption.Short = () => "Fire magic, targets all enemies.";
-BlackAb.Eruption.cost = { hp: undefined, sp: 30, lp: undefined};
-BlackAb.Eruption.targetMode = TargetMode.Enemies;
-BlackAb.Eruption.castTime = 110;
-BlackAb.Eruption.castTree.push(AbilityNode.Template.Magical({
+const eruption = new Ability("Eruption");
+eruption.Short = () => "Fire magic, targets all enemies.";
+eruption.cost = { hp: undefined, sp: 30, lp: undefined};
+eruption.targetMode = TargetMode.Enemies;
+eruption.castTime = 110;
+eruption.castTree.push(AbilityNode.Template.Magical({
 	damageType: {mFire: 1.2},
 	atkMod: 2.1,
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
@@ -308,12 +306,12 @@ BlackAb.Eruption.castTree.push(AbilityNode.Template.Magical({
 	onAbsorb: [Defaults.Black._onAbsorb],
 }));
 
-BlackAb.Spread = new Ability("Spread");
-BlackAb.Spread.Short = () => "Water magic, targets all enemies.";
-BlackAb.Spread.cost = { hp: undefined, sp: 40, lp: undefined};
-BlackAb.Spread.targetMode = TargetMode.Enemies;
-BlackAb.Spread.castTime = 110;
-BlackAb.Spread.castTree.push(AbilityNode.Template.Magical({
+const spread = new Ability("Spread");
+spread.Short = () => "Water magic, targets all enemies.";
+spread.cost = { hp: undefined, sp: 40, lp: undefined};
+spread.targetMode = TargetMode.Enemies;
+spread.castTime = 110;
+spread.castTree.push(AbilityNode.Template.Magical({
 	damageType: {mWater: 1.3},
 	atkMod: 2.1,
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
@@ -326,11 +324,11 @@ BlackAb.Spread.castTree.push(AbilityNode.Template.Magical({
 	onAbsorb: [Defaults.Black._onAbsorb],
 }));
 
-BlackAb.Shock = new Ability("Shock");
-BlackAb.Shock.Short = () => "Thunder magic, single target. Moderate chance of stunning the enemy.";
-BlackAb.Shock.cost = { hp: undefined, sp: 25, lp: undefined};
-BlackAb.Shock.castTime = 80;
-BlackAb.Shock.castTree.push(AbilityNode.Template.Magical({
+const shock = new Ability("Shock");
+shock.Short = () => "Thunder magic, single target. Moderate chance of stunning the enemy.";
+shock.cost = { hp: undefined, sp: 25, lp: undefined};
+shock.castTime = 80;
+shock.castTree.push(AbilityNode.Template.Magical({
 	damageType: {mThunder: 1},
 	atkMod: 3.0,
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
@@ -355,12 +353,12 @@ BlackAb.Shock.castTree.push(AbilityNode.Template.Magical({
 	}],
 }));
 
-BlackAb.ThunderStorm = new Ability("ThunderStorm");
-BlackAb.ThunderStorm.Short = () => "Thunder magic, targets all enemies. Moderate chance of stunning the enemy.";
-BlackAb.ThunderStorm.cost = { hp: undefined, sp: 50, lp: undefined};
-BlackAb.ThunderStorm.targetMode = TargetMode.Enemies;
-BlackAb.ThunderStorm.castTime = 100;
-BlackAb.ThunderStorm.castTree.push(AbilityNode.Template.Magical({
+const thunderStorm = new Ability("ThunderStorm");
+thunderStorm.Short = () => "Thunder magic, targets all enemies. Moderate chance of stunning the enemy.";
+thunderStorm.cost = { hp: undefined, sp: 50, lp: undefined};
+thunderStorm.targetMode = TargetMode.Enemies;
+thunderStorm.castTime = 100;
+thunderStorm.castTree.push(AbilityNode.Template.Magical({
 	atkMod: 2.2,
 	damageType: {mThunder: 1},
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
@@ -385,11 +383,11 @@ BlackAb.ThunderStorm.castTree.push(AbilityNode.Template.Magical({
 	}],
 }));
 
-BlackAb.Venom = new Ability("Venom");
-BlackAb.Venom.Short = () => "Poisons single target.";
-BlackAb.Venom.cost = { hp: undefined, sp: 15, lp: undefined};
-BlackAb.Venom.castTime = 50;
-BlackAb.Venom.castTree.push(AbilityNode.Template.Magical({
+const venom = new Ability("Venom");
+venom.Short = () => "Poisons single target.";
+venom.cost = { hp: undefined, sp: 15, lp: undefined};
+venom.castTime = 50;
+venom.castTree.push(AbilityNode.Template.Magical({
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("Toxic slime drips from [poss] [hand]s as [heshe] point[notS] them toward [tname].", parse);
@@ -408,12 +406,12 @@ BlackAb.Venom.castTree.push(AbilityNode.Template.Magical({
 	toDamage: undefined,
 }));
 
-BlackAb.Ivy = new Ability("Ivy");
-BlackAb.Ivy.Short = () => "Nature magic, targets all enemies.";
-BlackAb.Ivy.cost = { hp: undefined, sp: 40, lp: undefined};
-BlackAb.Ivy.targetMode = TargetMode.Enemies;
-BlackAb.Ivy.castTime = 100;
-BlackAb.Ivy.castTree.push(AbilityNode.Template.Magical({
+const ivy = new Ability("Ivy");
+ivy.Short = () => "Nature magic, targets all enemies.";
+ivy.cost = { hp: undefined, sp: 40, lp: undefined};
+ivy.targetMode = TargetMode.Enemies;
+ivy.castTime = 100;
+ivy.castTree.push(AbilityNode.Template.Magical({
 	atkMod: 2,
 	damageType: {mNature: 1.3},
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
@@ -426,13 +424,13 @@ BlackAb.Ivy.castTree.push(AbilityNode.Template.Magical({
 	onAbsorb: [Defaults.Black._onAbsorb],
 }));
 
-BlackAb.Hellfire = new Ability("Hellfire");
-BlackAb.Hellfire.Short = () => "Demon magic, targets all enemies.";
-BlackAb.Hellfire.targetMode = TargetMode.Enemies;
-BlackAb.Hellfire.cost = { hp: undefined, sp: 500, lp: undefined};
-BlackAb.Hellfire.castTime = 200;
-BlackAb.Hellfire.cooldown = 3;
-BlackAb.Hellfire.castTree.push(AbilityNode.Template.Magical({
+const hellfire = new Ability("Hellfire");
+hellfire.Short = () => "Demon magic, targets all enemies.";
+hellfire.targetMode = TargetMode.Enemies;
+hellfire.cost = { hp: undefined, sp: 500, lp: undefined};
+hellfire.castTime = 200;
+hellfire.cooldown = 3;
+hellfire.castTree.push(AbilityNode.Template.Magical({
 	atkMod: 3,
 	damageType: {mFire: 3, mDark: 3},
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
@@ -445,11 +443,11 @@ BlackAb.Hellfire.castTree.push(AbilityNode.Template.Magical({
 	onAbsorb: [Defaults.Black._onAbsorb],
 }));
 
-BlackAb.Scream = new Ability("Scream");
-BlackAb.Scream.Short = () => "Unleash the destructive power of your voice, damaging all foes on the field.";
-BlackAb.Scream.targetMode = TargetMode.Enemies;
-BlackAb.Scream.cost = { hp: undefined, sp: 30, lp: 30 };
-BlackAb.Scream.castTree.push(AbilityNode.Template.Magical({
+const scream = new Ability("Scream");
+scream.Short = () => "Unleash the destructive power of your voice, damaging all foes on the field.";
+scream.targetMode = TargetMode.Enemies;
+scream.cost = { hp: undefined, sp: 30, lp: 30 };
+scream.castTree.push(AbilityNode.Template.Magical({
 	damageType: {mWind: 0.5, pBlunt: 0.5},
 	atkMod: 2,
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
@@ -470,15 +468,15 @@ BlackAb.Scream.castTree.push(AbilityNode.Template.Magical({
 	}],
 }));
 
-BlackAb.Dischord = new Ability("Dischord");
-BlackAb.Dischord.Short = () => "Attempt to unnerve a foe with your music, hampering their ability to defend themselves. Effectiveness increases with the target’s lust, which is drained in the process.";
-BlackAb.Dischord.cost = { hp: undefined, sp: 20, lp: 30 };
-BlackAb.Dischord._onMiss = (ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
+const dischord = new Ability("Dischord");
+dischord.Short = () => "Attempt to unnerve a foe with your music, hampering their ability to defend themselves. Effectiveness increases with the target’s lust, which is drained in the process.";
+dischord.cost = { hp: undefined, sp: 20, lp: 30 };
+const dischordOnMiss = (ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 	const parse = AbilityNode.DefaultParser(caster, target);
 	Text.Add("[tName] manage[tnotS] to resist the chaotic discordance of [poss] song.", parse);
 	Text.NL();
 };
-BlackAb.Dischord.castTree.push(AbilityNode.Template.Magical({
+dischord.castTree.push(AbilityNode.Template.Magical({
 	toDamage: undefined,
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
@@ -491,17 +489,17 @@ BlackAb.Dischord.castTree.push(AbilityNode.Template.Magical({
 			Text.Add("The sheer discordance of [poss] voice grips [tname], crippling [thisher] ability to defend [thimher]self!", parse);
 			Text.NL();
 		} else {
-			BlackAb.Dischord._onMiss(ability, encounter, caster, target);
+			dischordOnMiss(ability, encounter, caster, target);
 		}
 	}],
-	onMiss: [BlackAb.Dischord._onMiss],
+	onMiss: [dischordOnMiss],
 }));
 
-BlackAb.DrainingTouch = new Ability("Drain touch");
-BlackAb.DrainingTouch.Short = () => "Magical darkness attack. Damage dealt is returned to the caster as HP.";
-BlackAb.DrainingTouch.cost = { hp: undefined, sp: 25, lp: undefined};
-BlackAb.DrainingTouch.castTime = 75;
-BlackAb.DrainingTouch.castTree.push(AbilityNode.Template.Magical({
+const drainingTouch = new Ability("Drain touch");
+drainingTouch.Short = () => "Magical darkness attack. Damage dealt is returned to the caster as HP.";
+drainingTouch.cost = { hp: undefined, sp: 25, lp: undefined};
+drainingTouch.castTime = 75;
+drainingTouch.castTree.push(AbilityNode.Template.Magical({
 	atkMod: 1,
 	damageType: {mDark: 1},
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
@@ -519,12 +517,12 @@ BlackAb.DrainingTouch.castTree.push(AbilityNode.Template.Magical({
 	onAbsorb: [Defaults.Black._onAbsorb],
 }));
 
-BlackAb.Hailstorm = new Ability("Hailstorm");
-BlackAb.Hailstorm.Short = () => "Ice magic, targets all enemies. Low chance of freezing targets.";
-BlackAb.Hailstorm.cost = { hp: undefined, sp: 50, lp: undefined};
-BlackAb.Hailstorm.targetMode = TargetMode.Enemies;
-BlackAb.Hailstorm.castTime = 100;
-BlackAb.Hailstorm.castTree.push(AbilityNode.Template.Magical({
+const hailstorm = new Ability("Hailstorm");
+hailstorm.Short = () => "Ice magic, targets all enemies. Low chance of freezing targets.";
+hailstorm.cost = { hp: undefined, sp: 50, lp: undefined};
+hailstorm.targetMode = TargetMode.Enemies;
+hailstorm.castTime = 100;
+hailstorm.castTree.push(AbilityNode.Template.Magical({
 	atkMod: 2.2,
 	damageType: {mIce: 1},
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
@@ -544,12 +542,12 @@ BlackAb.Hailstorm.castTree.push(AbilityNode.Template.Magical({
 	}],
 }));
 
-BlackAb.Quake = new Ability("Quake");
-BlackAb.Quake.Short = () => "Earth magic, targets all enemies.";
-BlackAb.Quake.cost = { hp: undefined, sp: 40, lp: undefined};
-BlackAb.Quake.targetMode = TargetMode.Enemies;
-BlackAb.Quake.castTime = 90;
-BlackAb.Quake.castTree.push(AbilityNode.Template.Magical({
+const quake = new Ability("Quake");
+quake.Short = () => "Earth magic, targets all enemies.";
+quake.cost = { hp: undefined, sp: 40, lp: undefined};
+quake.targetMode = TargetMode.Enemies;
+quake.castTime = 90;
+quake.castTree.push(AbilityNode.Template.Magical({
 	atkMod: 2,
 	damageType: {mEarth: 1},
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
@@ -562,12 +560,12 @@ BlackAb.Quake.castTree.push(AbilityNode.Template.Magical({
 	onAbsorb: [Defaults.Black._onAbsorb],
 }));
 
-BlackAb.PrismaticBurst = new Ability("Prism Burst");
-BlackAb.PrismaticBurst.Short = () => "A powerful shower of multi-elemental energy. Not likely to be wholly effective, but also not likely to be wholly ineffective, either.";
-BlackAb.PrismaticBurst.cost = { hp: undefined, sp: 70, lp: undefined};
-BlackAb.PrismaticBurst.targetMode = TargetMode.Enemies;
-BlackAb.PrismaticBurst.castTime = 130;
-BlackAb.PrismaticBurst.castTree.push(AbilityNode.Template.Magical({
+const prismaticBurst = new Ability("Prism Burst");
+prismaticBurst.Short = () => "A powerful shower of multi-elemental energy. Not likely to be wholly effective, but also not likely to be wholly ineffective, either.";
+prismaticBurst.cost = { hp: undefined, sp: 70, lp: undefined};
+prismaticBurst.targetMode = TargetMode.Enemies;
+prismaticBurst.castTime = 130;
+prismaticBurst.castTree.push(AbilityNode.Template.Magical({
 	atkMod: 1.5,
 	damageType: {mEarth: 0.5, mFire: 0.5, mIce: 0.5, mThunder: 0.5},
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
@@ -580,12 +578,12 @@ BlackAb.PrismaticBurst.castTree.push(AbilityNode.Template.Magical({
 	onAbsorb: [Defaults.Black._onAbsorb],
 }));
 
-BlackAb.Lifetap = new Ability("Lifetap");
-BlackAb.Lifetap.Short = () => "Convert one fifth of your max HP to SP. While it cannot reduce your HP below 1, be careful!";
-BlackAb.Lifetap.cost = { hp: undefined, sp: undefined, lp: undefined};
-BlackAb.Lifetap.targetMode = TargetMode.Self;
-BlackAb.Lifetap.cooldown = 2;
-BlackAb.Lifetap.castTree.push((ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
+const lifetap = new Ability("Lifetap");
+lifetap.Short = () => "Convert one fifth of your max HP to SP. While it cannot reduce your HP below 1, be careful!";
+lifetap.cost = { hp: undefined, sp: undefined, lp: undefined};
+lifetap.targetMode = TargetMode.Self;
+lifetap.cooldown = 2;
+lifetap.castTree.push((ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 	const parse = AbilityNode.DefaultParser(caster);
 
 	const hp = Math.floor(Math.min(caster.HP() / 5, caster.curHp - 1));
@@ -597,11 +595,11 @@ BlackAb.Lifetap.castTree.push((ability: Ability, encounter: Encounter, caster: E
 	Text.NL();
 });
 
-BlackAb.EntropicFortune = new Ability("E.Fortune");
-BlackAb.EntropicFortune.Short = () => "Curse a target with bad luck, causing debuffs to land more easily.";
-BlackAb.EntropicFortune.cost = { hp: undefined, sp: 35, lp: undefined};
-BlackAb.EntropicFortune.cooldown = 2;
-BlackAb.EntropicFortune.castTree.push(AbilityNode.Template.Magical({
+const entropicFortune = new Ability("E.Fortune");
+entropicFortune.Short = () => "Curse a target with bad luck, causing debuffs to land more easily.";
+entropicFortune.cost = { hp: undefined, sp: 35, lp: undefined};
+entropicFortune.cooldown = 2;
+entropicFortune.castTree.push(AbilityNode.Template.Magical({
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("Gathering thoughts of malice and ill-will, [name] begin[notS] to weave a hex directed at [tname]!", parse);
@@ -618,11 +616,11 @@ BlackAb.EntropicFortune.castTree.push(AbilityNode.Template.Magical({
 	toDamage: undefined,
 }));
 
-BlackAb.TaintedVitality = new Ability("T.Vitality");
-BlackAb.TaintedVitality.Short = () => "Twist a foe’s vitality, reducing their defense and inflicting a strong poison.";
-BlackAb.TaintedVitality.cost = { hp: undefined, sp: 35, lp: undefined};
-BlackAb.TaintedVitality.cooldown = 3;
-BlackAb.TaintedVitality.castTree.push(AbilityNode.Template.Magical({
+const taintedVitality = new Ability("T.Vitality");
+taintedVitality.Short = () => "Twist a foe’s vitality, reducing their defense and inflicting a strong poison.";
+taintedVitality.cost = { hp: undefined, sp: 35, lp: undefined};
+taintedVitality.cooldown = 3;
+taintedVitality.castTree.push(AbilityNode.Template.Magical({
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("Focusing dark power, [name] direct[notS] a stream of twisted, malicious energy at [tname]!", parse);
@@ -658,4 +656,34 @@ BlackAb.TaintedVitality.castTree.push(AbilityNode.Template.Magical({
 	toDamage: undefined,
 }));
 
-export { BlackAb };
+export namespace BlackAb {
+	export const Surge = surge;
+	export const Fireball = fireball;
+	export const Freeze = freeze;
+	export const Bolt = bolt;
+	export const Gust = gust;
+	export const Spire = spire;
+	export const Spray = spray;
+	export const Shimmer = shimmer;
+	export const Shade = shade;
+	export const Thorn = thorn;
+	export const WindShear = windShear;
+	export const Stalagmite = stalagmite;
+	export const Whirlwind = whirlwind;
+	export const Eruption = eruption;
+	export const Spread = spread;
+	export const Shock = shock;
+	export const ThunderStorm = thunderStorm;
+	export const Venom = venom;
+	export const Ivy = ivy;
+	export const Hellfire = hellfire;
+	export const Scream = scream;
+	export const Dischord = dischord;
+	export const DrainingTouch = drainingTouch;
+	export const Hailstorm = hailstorm;
+	export const Quake = quake;
+	export const PrismaticBurst = prismaticBurst;
+	export const Lifetap = lifetap;
+	export const EntropicFortune = entropicFortune;
+	export const TaintedVitality = taintedVitality;
+}
