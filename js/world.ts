@@ -2,7 +2,7 @@
 import { InitCheats } from "./cheats";
 import { DreamsScenes } from "./event/dreams";
 import { DarkAspect, Intro, LightAspect } from "./event/introduction";
-import { InitMiranda } from "./event/miranda-scenes";
+import { MirandaScenes } from "./event/miranda-scenes";
 import { BullTowerLoc } from "./event/outlaws/bulltower";
 import { CvetaScenes } from "./event/outlaws/cveta-scenes";
 import { GAME, WORLD } from "./GAME";
@@ -75,7 +75,7 @@ export function InitWorld() {
 	InitBurrows();
 	InitGlade();
 
-	InitMiranda();
+	MirandaScenes.INIT();
 	CvetaScenes.INIT(DreamsScenes);
 
 	InitCheats();

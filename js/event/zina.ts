@@ -10,8 +10,6 @@ import { Entity } from "../entity";
 import { GAME } from "../GAME";
 import { TF } from "../tf";
 
-const ZinaScenes = {};
-
 export class Zina extends Entity {
 	constructor(storage?: any) {
 		super();
@@ -98,12 +96,14 @@ export class Zina extends Entity {
 	}
 }
 
-const ZinaFlags = {
-	Met : { // Bitmask
-		Met  : 1,
-		BJ   : 2,
-		Cunn : 4,
-	},
-};
+export namespace ZinaFlags {
+	export enum Met { // Bitmask
+		Met  = 1,
+		BJ   = 2,
+		Cunn = 4,
+	}
+}
 
-export { ZinaScenes, ZinaFlags };
+export namespace ZinaScenes {
+
+}

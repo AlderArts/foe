@@ -1,4 +1,4 @@
-const Room69Flags = {
+export const Room69Flags = {
     RelFlags : {
         NotMet    : 0,
         BrokeDoor : 1,
@@ -15,5 +15,3 @@ const Room69Flags = {
         Delivered         : 5,
     },
 };
-
-export { Room69Flags };

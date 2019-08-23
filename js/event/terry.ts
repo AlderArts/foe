@@ -325,11 +325,11 @@ export class Terry extends Entity {
 			Text.Add("[HeShe] occasionally scratches [hisher] neck, around the enchanted collar you gave [himher] to ensure [heshe]’s kept under control. Sometimes, [heshe] gives you an irritated glance when [heshe] thinks you’re not looking.", parse);
 		} else if (terry.Relation() < 60) {
 			Text.Add("Around [hisher] neck is an enchanted collar that prevents [himher] from leaving you or otherwise disobeying you. It was the only way you could take the petite [foxvixen] away from the death row. It’s probably a good thing [heshe]’s wearing it too; considering [hisher] thieving past, there’s no guarantee [heshe] won’t get in trouble again. When [heshe] spots you looking, [heshe] quickly nods in acknowledgement at you.", parse);
- } else if (terry.flags.pQ >= TerryFlags.PersonalQuest.Completed) {
+		} else if (terry.flags.pQ >= TerryFlags.PersonalQuest.Completed) {
 			Text.Add("The [foxvixen] is always wearing that enchanted collar you gave [himher] when you bailed [himher] out of jail, even though [heshe] technically doesn’t have to wear it anymore. You didn’t think the crafty [foxvixen] would find a way out of it, but [heshe] did. Even so, [heshe] insists on wearing it: “As proof of ownership,” you quote. You didn’t think [heshe] would take to [hisher] station so well, nor that you’d grow this close as you travelled together. When your eyes meet, [heshe] smiles warmly at you.", parse);
- } else {
+		} else {
 			Text.Add("[HeShe]’s grown quite close to you as you spent time together, and you gotta admit, the [foxvixen] is not so bad once you get to know [himher]. You’ve found [himher] to be quite amorous when [heshe] wants to, and even a bit clingy at times… but nevertheless, you’re glad to have the company of the pretty [foxvixen]. When your eyes meet, [heshe] smiles warmly at you.", parse);
- }
+		}
 
 		if (GetDEBUG()) {
 			Text.NL();
@@ -364,19 +364,19 @@ export class Terry extends Entity {
 			CombatItems.SmokeBomb.combat.Use(encounter, this);
 		} else if (Abilities.Physical.Backstab.enabledCondition(encounter, this) && Abilities.Physical.Backstab.enabledTargetCondition(encounter, this, t)) {
 			Abilities.Physical.Backstab.Use(encounter, this, t);
- } else if (choice < 0.2 && Abilities.Physical.Kicksand.enabledCondition(encounter, this)) {
+		} else if (choice < 0.2 && Abilities.Physical.Kicksand.enabledCondition(encounter, this)) {
 			Abilities.Physical.Kicksand.Use(encounter, this, t);
- } else if (choice < 0.4 && Abilities.Physical.Swift.enabledCondition(encounter, this)) {
+		} else if (choice < 0.4 && Abilities.Physical.Swift.enabledCondition(encounter, this)) {
 			Abilities.Physical.Swift.Use(encounter, this);
- } else if (choice < 0.6) {
+		} else if (choice < 0.6) {
 			CombatItems.PoisonDart.combat.Use(encounter, this, t);
- } else if (choice < 0.8) {
+		} else if (choice < 0.8) {
 			CombatItems.LustDart.combat.Use(encounter, this, t);
- } else if (Abilities.Physical.DirtyBlow.enabledCondition(encounter, this)) {
+		} else if (Abilities.Physical.DirtyBlow.enabledCondition(encounter, this)) {
 			Abilities.Physical.DirtyBlow.Use(encounter, this, t);
- } else {
+ 		} else {
 			Abilities.Attack.Use(encounter, this, t);
- }
+ 		}
 	}
 
 	// TODO ITEMS

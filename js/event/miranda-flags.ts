@@ -1,4 +1,4 @@
-const MirandaFlags = {
+export const MirandaFlags = {
     Attitude : {
         Hate    : -2,
         Dismiss : -1,
@@ -37,5 +37,3 @@ const MirandaFlags = {
         Taught   : 2,
     },
 };
-
-export { MirandaFlags };

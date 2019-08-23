@@ -217,14 +217,14 @@ export class Miranda extends Entity {
 				return (location === world.loc.Rigard.Barracks.common);
 			} else if (WorldTime().day % 3 === 1) {
 				return (location === world.loc.Plains.Gate) || (location === world.loc.Rigard.Gate);
- } else {
+ 			} else {
 				return (location === world.loc.Rigard.Slums.Gate);
- }
+ 			}
 		} else if (WorldTime().hour >= 19 || WorldTime().hour < 2) {
 			return (location === world.loc.Rigard.Tavern.common);
- } else {
+		} else {
 			return (location === world.loc.Rigard.Residential.miranda);
- }
+ 		}
 	}
 
 	public OnPatrol() {

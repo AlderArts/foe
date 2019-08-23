@@ -11,8 +11,6 @@ import { GAME, NAV } from "../GAME";
 import { Gui } from "../gui";
 import { Text } from "../text";
 
-const SylistraxiaScenes = {};
-
 export class Sylistraxia extends Entity {
 	constructor(storage?: any) {
 		super();
@@ -97,4 +95,6 @@ export class Sylistraxia extends Entity {
 	}
 }
 
-export { SylistraxiaScenes };
+export namespace SylistraxiaScenes {
+
+}

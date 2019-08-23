@@ -1,4 +1,4 @@
-const MomoFlags = {
+export const MomoFlags = {
     Met : {
         NotMet    : 0,
         Wandering : 1,
@@ -15,5 +15,3 @@ const MomoFlags = {
         OnlyChild   : 3,
     },
 };
-
-export { MomoFlags };

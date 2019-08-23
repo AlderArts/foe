@@ -10,8 +10,6 @@ import { Race } from "../body/race";
 import { Entity } from "../entity";
 import { TF } from "../tf";
 
-const UruScenes = {};
-
 export class Uru extends Entity {
 	constructor(storage?: any) {
 		super();
@@ -88,14 +86,16 @@ export class Uru extends Entity {
 }
 
 // Flags
-const UruFlags =  {
-	Intro : {
-		LostToImps         : 1,
-		ToldUruAboutMirror : 2,
-		FuckedUru          : 4,
-		FuckedByUru        : 8,
-		GotClitcock        : 16,
-	},
-};
+export namespace UruFlags {
+	export enum Intro {
+		LostToImps         = 1,
+		ToldUruAboutMirror = 2,
+		FuckedUru          = 4,
+		FuckedByUru        = 8,
+		GotClitcock        = 16,
+	}
+}
 
-export { UruScenes, UruFlags };
+export namespace UruScenes {
+
+}
