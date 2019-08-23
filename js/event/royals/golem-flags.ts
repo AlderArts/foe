@@ -1,4 +1,4 @@
-const GolemFlags = {
+export const GolemFlags = {
     State : {
         NotMet       : 0,
         Met_ran      : 1,
@@ -8,5 +8,3 @@ const GolemFlags = {
         Rebuilt      : 5,
     },
 };
-
-export { GolemFlags };

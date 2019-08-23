@@ -1,4 +1,4 @@
-const LeiFlags = {
+export const LeiFlags = {
     EscortTask : {
         OnTime    : 1,
         Flirted   : 2,
@@ -36,5 +36,3 @@ const LeiFlags = {
         GuardBeating : 4,
     },
 };
-
-export { LeiFlags };

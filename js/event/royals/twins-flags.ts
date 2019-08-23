@@ -1,4 +1,4 @@
-const TwinsFlags = {
+export const TwinsFlags = {
 
     Met : {
         NotMet : 0,
@@ -7,5 +7,3 @@ const TwinsFlags = {
     },
 
 };
-
-export { TwinsFlags };
