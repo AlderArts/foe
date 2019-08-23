@@ -57,9 +57,9 @@ export class Imp extends Entity {
 			this.body.SetBodyColor(Color.red);
 		} else if (col < 0.7) {
 			this.body.SetBodyColor(Color.gray);
- } else {
+		} else {
 			this.body.SetBodyColor(Color.green);
- }
+		}
 
 		this.body.SetEyeColor(Color.yellow);
 

@@ -9,7 +9,6 @@ import { Body } from "../body/body";
 import { Color } from "../body/color";
 import { Race } from "../body/race";
 import { GAME } from "../GAME";
-import { Gui } from "../gui";
 import { Text } from "../text";
 import { Rand } from "../utility";
 import { BossEntity } from "./boss";

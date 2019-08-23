@@ -57,7 +57,7 @@ PlainsLoc.Crossroads.description = () => {
 		Text.Add("The gem glows in the presence of the nearby portals, inexplicably drawn to them. ", parse);
 	} else if (GAME().jeanne.flags.Met !== 0) {
 		Text.Add("This is probably the place that Jeanne was talking about. ", parse);
- }
+ 	}
 	Text.Add("The Nomad camp where you first arrived on Eden lies on the horizon, one beacon of familiarity in this strange land.", parse);
 };
 
@@ -66,7 +66,7 @@ PlainsLoc.Crossroads.enc = new EncounterTable();
 PlainsLoc.Crossroads.AddEncounter({
 	nameStr : "Wildcat",
 	func() {
-		return FelinesScenes.WildcatEnc();
+		return FelinesScenes.WildcatEnc(0);
 	}, odds : 0.25, enc : true,
 	visible : true, enabled : true, hunt : true,
 });
@@ -74,7 +74,7 @@ PlainsLoc.Crossroads.AddEncounter({
 PlainsLoc.Crossroads.AddEncounter({
 	nameStr : "Puma",
 	func() {
-		return FelinesScenes.PumaEnc();
+		return FelinesScenes.PumaEnc(0);
 	}, odds : 0.25, enc : true,
 	visible : true, enabled : true, hunt : true,
 });
@@ -82,7 +82,7 @@ PlainsLoc.Crossroads.AddEncounter({
 PlainsLoc.Crossroads.AddEncounter({
 	nameStr : "Jaguar",
 	func() {
-		return FelinesScenes.JaguarEnc();
+		return FelinesScenes.JaguarEnc(0);
 	}, odds : 0.25, enc : true,
 	visible : true, enabled : true, hunt : true,
 });
@@ -90,7 +90,7 @@ PlainsLoc.Crossroads.AddEncounter({
 PlainsLoc.Crossroads.AddEncounter({
 	nameStr : "Lynx",
 	func() {
-		return FelinesScenes.LynxEnc();
+		return FelinesScenes.LynxEnc(0);
 	}, odds : 0.25, enc : true,
 	visible : true, enabled : true, hunt : true,
 });
@@ -98,7 +98,7 @@ PlainsLoc.Crossroads.AddEncounter({
 PlainsLoc.Crossroads.AddEncounter({
 	nameStr : "Equines",
 	func() {
-		return EquineScenes.PairEnc();
+		return EquineScenes.PairEnc(0);
 	}, odds : 1.0, enc : true,
 	visible : true, enabled : true, hunt : true,
 });

@@ -17,8 +17,6 @@ import { Party } from "../party";
 import { Text } from "../text";
 import { TF } from "../tf";
 
-const FeralWolfScenes: any = {};
-
 export class FeralWolf extends Entity {
 	constructor(levelbonus?: number) {
 		super();
@@ -106,27 +104,29 @@ export class FeralWolf extends Entity {
 			Abilities.Attack.Use(encounter, this, t);
 		} else if (choice < 0.7 && Abilities.Physical.DAttack.enabledCondition(encounter, this)) {
 			Abilities.Physical.Pierce.Use(encounter, this, t);
- } else if (choice < 0.95 && Abilities.Physical.CrushingStrike.enabledCondition(encounter, this)) {
+		} else if (choice < 0.95 && Abilities.Physical.CrushingStrike.enabledCondition(encounter, this)) {
 			Abilities.Physical.CrushingStrike.Use(encounter, this, t);
- } else {
+		} else {
 			Abilities.Seduction.Tease.Use(encounter, this, t);
- }
+		}
 	}
 
 }
 
-FeralWolfScenes.LoneEnc = () => {
-	const enemy = new Party();
-	enemy.AddMember(new FeralWolf());
-	const enc = new Encounter(enemy);
-	/*
-	enc.canRun = false;
-	enc.onEncounter = ...
-	enc.onLoss = ...
-	enc.onVictory = ...
-	enc.VictoryCondition = ...
-	*/
-	return enc;
-};
+export namespace FeralWolfScenes {
 
-export { FeralWolfScenes };
+	export function LoneEnc() {
+		const enemy = new Party();
+		enemy.AddMember(new FeralWolf());
+		const enc = new Encounter(enemy);
+		/*
+		enc.canRun = false;
+		enc.onEncounter = ...
+		enc.onLoss = ...
+		enc.onVictory = ...
+		enc.VictoryCondition = ...
+		*/
+		return enc;
+	}
+
+}

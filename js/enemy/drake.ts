@@ -20,8 +20,6 @@ import { StatusEffect } from "../statuseffect";
 import { Text } from "../text";
 import { TF } from "../tf";
 
-const DrakeScenes: any = {};
-
 export class Drake extends Entity {
 	constructor() {
 		super();
@@ -109,35 +107,37 @@ export class Drake extends Entity {
 		} else if (choice < 0.3 && Abilities.Black.ThunderStorm.enabledCondition(encounter, this)) {
 			Abilities.Black.ThunderStorm.Use(encounter, this, targets);
 		} else if (choice < 0.4 && Abilities.Black.WindShear.enabledCondition(encounter, this)) {
-					Abilities.Black.WindShear.Use(encounter, this, t);
+			Abilities.Black.WindShear.Use(encounter, this, t);
 		} else if (choice < 0.6 && Abilities.Physical.QAttack.enabledCondition(encounter, this)) {
-					Abilities.Physical.QAttack.Use(encounter, this, t);
+			Abilities.Physical.QAttack.Use(encounter, this, t);
 		} else if (choice < 0.7 && Abilities.Physical.Frenzy.enabledCondition(encounter, this)) {
-					Abilities.Physical.Frenzy.Use(encounter, this, t);
+			Abilities.Physical.Frenzy.Use(encounter, this, t);
 		} else if (choice < 0.8 && Abilities.Black.Hellfire.enabledCondition(encounter, this)) {
-					Abilities.Black.Hellfire.Use(encounter, this, targets);
+			Abilities.Black.Hellfire.Use(encounter, this, targets);
 		} else if (choice < 0.9 && Abilities.Seduction.Rut.enabledCondition(encounter, this)) {
-					Abilities.Seduction.Rut.Use(encounter, this, t);
+			Abilities.Seduction.Rut.Use(encounter, this, t);
 		} else {
-					Abilities.Attack.Use(encounter, this, t);
+			Abilities.Attack.Use(encounter, this, t);
 		}
 	}
 
 }
 
-DrakeScenes.DrakeEnc = () => {
-	const enemy    = new Party();
-	enemy.AddMember(new Drake());
-	const enc      = new Encounter(enemy);
+export namespace DrakeScenes {
 
-	/*
-	enc.canRun = false;
-	enc.onEncounter = ...
-	enc.onLoss = ...
-	enc.onVictory = ...
-	enc.VictoryCondition = ...
-	*/
-	return enc;
-};
+	export function DrakeEnc() {
+		const enemy    = new Party();
+		enemy.AddMember(new Drake());
+		const enc      = new Encounter(enemy);
 
-export { DrakeScenes };
+		/*
+		enc.canRun = false;
+		enc.onEncounter = ...
+		enc.onLoss = ...
+		enc.onVictory = ...
+		enc.VictoryCondition = ...
+		*/
+		return enc;
+	}
+
+}
