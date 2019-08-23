@@ -103,7 +103,7 @@ HighlandsLoc.Hills.AddEncounter({
 HighlandsLoc.Hills.AddEncounter({
 	nameStr : "Scouts",
 	func() {
-		return MaliceScoutsScenes.Group.Encounter();
+		return MaliceScoutsScenes.Group.GroupEncounter(0);
 	}, odds : 1, enc : true,
 	visible : true, enabled : true, hunt : true,
 });

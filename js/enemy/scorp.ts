@@ -20,8 +20,6 @@ import { StatusEffect } from "../statuseffect";
 import { Text } from "../text";
 import { TF } from "../tf";
 
-const ScorpionScenes: any = {};
-
 export class Scorpion extends Entity {
 	constructor() {
 		super();
@@ -76,7 +74,7 @@ export class Scorpion extends Entity {
 		this.RestFull();
 	}
 
-	public DropTable = () => {
+	public DropTable() {
 		const drops = [];
 		if (Math.random() < 0.05) { drops.push({ it: AlchemyItems.Scorpius }); }
 		if (Math.random() < 0.5) {  drops.push({ it: IngredientItems.Stinger }); }
@@ -125,20 +123,21 @@ export class Scorpion extends Entity {
 	}
 }
 
-// FEMALE ENCOUNTER
-ScorpionScenes.LoneEnc = () => {
-	const enemy    = new Party();
-	enemy.AddMember(new Scorpion());
-	const enc      = new Encounter(enemy);
+export namespace ScorpionScenes {
+	// FEMALE ENCOUNTER
+	export function LoneEnc() {
+		const enemy    = new Party();
+		enemy.AddMember(new Scorpion());
+		const enc      = new Encounter(enemy);
 
-	/*
-	enc.canRun = false;
-	enc.onEncounter = ...
-	enc.onLoss = ...
-	enc.onVictory = ...
-	enc.VictoryCondition = ...
-	*/
-	return enc;
-};
+		/*
+		enc.canRun = false;
+		enc.onEncounter = ...
+		enc.onLoss = ...
+		enc.onVictory = ...
+		enc.VictoryCondition = ...
+		*/
+		return enc;
+	}
 
-export { ScorpionScenes };
+}

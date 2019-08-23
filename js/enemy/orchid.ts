@@ -220,7 +220,7 @@ export class OrchidBoss extends BossEntity {
 			Text.Flush();
 		} else {
 			Abilities.EnemySkill.TWhip.Use(encounter, this, t);
- }
+ 		}
 	}
 
 }
