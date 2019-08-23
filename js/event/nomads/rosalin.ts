@@ -30,7 +30,7 @@ import { KiakaiFlags } from "../kiakai-flags";
 import { TerryFlags } from "../terry-flags";
 import { TerryScenes } from "../terry-scenes";
 import { CaleFlags } from "./cale-flags";
-import { CaleScenes } from "./cale-scenes";
+import { CaleSexScenes } from "./cale-sex";
 import { RosalinFlags } from "./rosalin-flags";
 
 const RosalinScenes: any = {};
@@ -631,7 +631,7 @@ RosalinScenes.TalkPrompt = () => {
 						Text.Add("Over by the campfire, Cale is growing anxious. The horny wolf, desperate to be filled, is pumping three of his fingers into his [canusDesc], trying his outmost to sate his desires. He lights up when you step up behind him, grinding your [cocks] between his cheeks. His tail is wagging back and forth in excitement, conveniently raised high to allow you full access.", parse);
 						Text.NL();
 
-						CaleScenes.SexFuckHim(true, {goop: true});
+						CaleSexScenes.SexFuckHim(true, {goop: true});
 					}, enabled : true,
 					tooltip : "Looks like he’s gone into heat… best help him through this.",
 				});
@@ -1101,11 +1101,11 @@ RosalinScenes.FirstFuck = () => {
 					if (targetType === BodyPartType.ass) {
 						Sex.Anal(cale, player);
 						player.FuckAnal(target, cale.FirstCock(), 3);
-						CaleScenes.Impregnate(player, PregnancyHandler.Slot.Butt, 2);
+						CaleSexScenes.Impregnate(player, PregnancyHandler.Slot.Butt, 2);
 					} else {
 						Sex.Vaginal(cale, player);
 						player.FuckVag(target, cale.FirstCock(), 3);
-						CaleScenes.Impregnate(player, PregnancyHandler.Slot.Vag, 2);
+						CaleSexScenes.Impregnate(player, PregnancyHandler.Slot.Vag, 2);
 					}
 
 					Text.Add("<i>“Ah... not bad,”</i> the wolf sighs, repeatedly pounding your [targetDesc], trying to build a rhythm. Being so close to the edge already pushes his instincts to the forefront, and soon you feel an even thicker mass press against your [targetDesc]. <i>“Gonna breed you, little slut,”</i> he hisses into your ear as his knot forces it's way inside your [targetDesc]", parse);
