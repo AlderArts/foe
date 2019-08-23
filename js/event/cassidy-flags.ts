@@ -1,4 +1,4 @@
-const CassidyFlags = {
+export const CassidyFlags = {
     Met : {
         NotMet     : 0,
         Met        : 1,
@@ -25,5 +25,3 @@ const CassidyFlags = {
         None : 0,
     },
 };
-
-export { CassidyFlags };

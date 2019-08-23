@@ -1,4 +1,4 @@
-const AscheFlags = {
+export const AscheFlags = {
     Met : {
         NotMet : 0,
         Met    : 1,
@@ -31,5 +31,3 @@ const AscheFlags = {
         Spring_Finished : 1024,
     },
 };
-
-export { AscheFlags };

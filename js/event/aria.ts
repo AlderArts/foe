@@ -6,8 +6,6 @@
 import { Color } from "../body/color";
 import { Entity } from "../entity";
 
-const AriaScenes = {};
-
 export class Aria extends Entity {
 	constructor(storage?: any) {
 		super();
@@ -54,4 +52,6 @@ export class Aria extends Entity {
 
 // Flags
 
-export { AriaScenes };
+export namespace AriaScenes {
+
+}

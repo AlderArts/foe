@@ -7,7 +7,7 @@ import * as _ from "lodash";
 
 import { AscheScenes } from "../../event/asche-scenes";
 import { AscheTasksScenes } from "../../event/asche-tasks";
-import { InitFera } from "../../event/fera";
+import { FeraScenes } from "../../event/fera";
 import { AquiliusScenes } from "../../event/outlaws/aquilius";
 import { JeanneScenes } from "../../event/royals/jeanne-scenes";
 import { LeiScenes } from "../../event/royals/lei-scenes";
@@ -44,7 +44,7 @@ export function InitRigard() {
 	InitGuards(RigardScenes);
 	InitCastle(RigardScenes);
 	InitPlaza(RigardScenes);
-	InitFera(RigardScenes);
+	FeraScenes.INIT(RigardScenes);
 	LeiTaskScenes.INIT(LeiScenes);
 	JeanneScenes.INIT(TerryScenes);
 	AscheTasksScenes.INIT(AscheScenes, AquiliusScenes);
