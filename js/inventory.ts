@@ -59,7 +59,7 @@ export class Inventory {
 		});
 	}
 	// Divides items by their 'type' and further by their 'subtype' inside each primary type. Items WITHOUT a subtype are under property 'None'
-	public static ItemByBothTypes(inv: IItemQuantity[], itemsByType?: any, usableItemsByType?: any, combatItemsByType?: any) {
+	public static ItemByBothTypes(inv: IItemQuantity[], itemsByType: any = {}, usableItemsByType?: any, combatItemsByType?: any) {
 		// Add all keys first. Ensures item output will be in whatever order our ItemType enum is in
 		_.forIn(ItemType, (value, key) => {
 			if (itemsByType) {
