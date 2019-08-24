@@ -22,10 +22,10 @@ import { Text } from "./text";
 let curType: Quests.Type;
 
 export class Quest {
-	public name: any;
-	public desc: any;
-	public active: any;
-	public list: any[];
+	public name: () => string;
+	public desc: () => string;
+	public active: (a: Quest) => Quests.Type;
+	public list: QuestItem[];
 
 	constructor(opts: any = {}) {
 		this.name   = opts.name   || "FAIL";
@@ -45,8 +45,7 @@ export class Quest {
 		const list = this.list;
 		if (list.length > 0) {
 			Text.Add("<ul>");
-			for (let i = 0, j = list.length; i < j; ++i) {
-				const item = list[i];
+			for (const item of list) {
 				item.Print();
 			}
 			Text.Add("</ul>");
@@ -59,10 +58,9 @@ export class Quest {
 }
 
 export class QuestItem {
-	public desc: any;
-	public active: any;
-	constructor(opts?: any) {
-		opts = opts || {};
+	public desc: () => string;
+	public active: () => Quests.Type;
+	constructor(opts: any = {}) {
 		this.desc   = opts.desc   || "NO DESC";
 		this.active = opts.active;
 	}
@@ -113,8 +111,7 @@ export namespace Quests {
 
 	export function Print(SetExploreButtons: CallableFunction) {
 		let numQs = 0;
-		for (let i = 0, j = Quests.quests.length; i < j; ++i) {
-			const q = Quests.quests[i];
+		for (const q of Quests.quests) {
 			const active = q.Active();
 			if (active || GetDEBUG()) {
 				numQs++;
@@ -240,8 +237,8 @@ export namespace Quests {
 		},
 		active(quest: Quest) {
 			let complete = true;
-			for (let i = 0, j = quest.list.length; i < j; ++i) {
-				complete = complete && (quest.list[i].Active() & Quests.Type.Completed) !== 0;
+			for (const q of quest.list) {
+				complete = complete && (q.Active() & Quests.Type.Completed) !== 0;
 			}
 			let status = Quests.Type.NotStarted;
 			if (complete) {
