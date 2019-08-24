@@ -22,7 +22,7 @@ import { Text } from "../text";
 import { TF } from "../tf";
 import { GlobalScenes } from "./global";
 import { HalloweenFlags } from "./halloween-flags";
-import { Patchwork, PatchworkFlags, PatchworkScenes } from "./nomads/patchwork";
+import { PatchworkFlags, PatchworkScenes } from "./nomads/patchwork";
 import { Player } from "./player";
 
 // Put here instead of in Halloween items in order to prevent circular reference.
@@ -89,7 +89,7 @@ export class Halloween {
 		party.ClearActiveParty();
 		party.SwitchIn(player);
 		// Move to Halloween world
-		party.location = Halloween.Loc.Tent;
+		party.location = HWLoc.Tent;
 		// Set up internal flags
 		this.flags = 0;
 		this.ronnie = HalloweenFlags.Ronnie.NotMet;
@@ -100,14 +100,13 @@ export class Halloween {
 
 	public Restore() {
 		let player = GAME().player;
-		let party: Party = GAME().party;
 		// Restore player/party
 		_.remove(EntityStorage(), (e) => {
 			return e === player;
 		});
 		player = new Player(this.player);
 		EntityStorage().push(player);
-		party = new Party(this.party);
+		GAME().party = new Party(this.party);
 	}
 
 	public Werewolf() {
@@ -443,19 +442,19 @@ export namespace HalloweenScenes {
 		Gui.NextPrompt();
 	}
 
-	Halloween.Loc.Tent.description = () => {
+	HWLoc.Tent.description = () => {
 		Text.Add("The interior of the tent is dim, with a few rays of moonlight reaching inside through the tattered canvas. Various pots, pans and other cooking utensils are packed away in an open wooden chest draped in spiderwebs. There is little actual furniture besides that; a few rugs rolled out to protect bare feet and a set of bed rolls are free for you to use. Everything has a tattered and frayed look to it.");
 	};
 
-	Halloween.Loc.Tent.links.push(new Link(
+	HWLoc.Tent.links.push(new Link(
 		"Outside", true, true,
 		undefined,
 		() => {
-			MoveToLocation(Halloween.Loc.Camp);
+			MoveToLocation(HWLoc.Camp);
 		},
 	));
 
-	Halloween.Loc.Camp.description = () => {
+	HWLoc.Camp.description = () => {
 		Text.Add("The small gathering of tents look very much like the nomads’ camp, but something is off. It’s hard to see for all the milky fog around, but from time to time, you can see the full moon poking out in the midnight sky. Long grass rustles in a gentle, silent breeze that also sends the leaves on the twisted, gnarled trees aflutter.");
 		Text.NL();
 		Text.Add("A dark hooded shape is huddled by the smoldering ashes of the fire pit, but aside from that, the camp seems deserted. The tent you woke up in is nearby, though you doubt you’d be able to go back to sleep.");
@@ -463,20 +462,20 @@ export namespace HalloweenScenes {
 		Text.Add("In the distance, you hear the howling of a wolf. You can’t shake the feeling that you’re being watched.");
 	};
 
-	Halloween.Loc.Camp.links.push(new Link(
+	HWLoc.Camp.links.push(new Link(
 		"Tent", true, true,
 		undefined,
 		() => {
-			MoveToLocation(Halloween.Loc.Tent);
+			MoveToLocation(HWLoc.Tent);
 		},
 	));
 
-	Halloween.Loc.Camp.links.push(new Link(
+	HWLoc.Camp.links.push(new Link(
 		"Path", true, true,
 		undefined,
 		() => {
 			if (HW.flags & HalloweenFlags.Flags.Elder) {
-				MoveToLocation(Halloween.Loc.Path);
+				MoveToLocation(HWLoc.Path);
 			} else {
 				Text.Clear();
 				Text.Add("The night is cold and dark, and you dare not leave the camp without a light.");
@@ -487,7 +486,7 @@ export namespace HalloweenScenes {
 		},
 	));
 
-	Halloween.Loc.Camp.events.push(new Link(
+	HWLoc.Camp.events.push(new Link(
 		() => {
 			if (HW.flags & HalloweenFlags.Flags.Elder) {
 				return "Elder";
@@ -611,7 +610,7 @@ export namespace HalloweenScenes {
 		},
 	));
 
-	Halloween.Loc.Path.description = () => {
+	HWLoc.Path.description = () => {
 		const player = GAME().player;
 		const parse: any = {
 			feet : player.FeetDesc(),
@@ -622,7 +621,7 @@ export namespace HalloweenScenes {
 		Text.Add("Off in the distance, you hear a raven caw, and a faint sigh echoes through the sickly forest. Still, you press on, and eventually the trees and thorny undergrowth thin a little as you near a crossroads, one with many, many paths branching out from its heart like the spokes of a wheel. From here, you can also make out some landmarks in the distance - perhaps you’re meant to be headed to one of these?", parse);
 	};
 
-	Halloween.Loc.Path.onEntry = () => {
+	HWLoc.Path.onEntry = () => {
 		if (HW.RonnieAvailable() && Math.random() < 0.5) {
 			HalloweenScenes.Ronnie();
 		} else {
@@ -630,31 +629,31 @@ export namespace HalloweenScenes {
 		}
 	};
 
-	Halloween.Loc.Path.links.push(new Link(
+	HWLoc.Path.links.push(new Link(
 		"Camp", true, true,
 		undefined,
 		() => {
-			MoveToLocation(Halloween.Loc.Camp);
+			MoveToLocation(HWLoc.Camp);
 		},
 	));
-	Halloween.Loc.Path.links.push(new Link(
+	HWLoc.Path.links.push(new Link(
 		() => {
 			return HW.flags & HalloweenFlags.Flags.WitchHut ? "Witch's hut" : "Hut?";
 		}, true, true,
 		undefined,
 		() => {
-			MoveToLocation(Halloween.Loc.WitchHut);
+			MoveToLocation(HWLoc.WitchHut);
 		},
 	));
-	Halloween.Loc.Path.links.push(new Link(
+	HWLoc.Path.links.push(new Link(
 		"Graveyard", true, true,
 		undefined,
 		() => {
-			MoveToLocation(Halloween.Loc.Graveyard);
+			MoveToLocation(HWLoc.Graveyard);
 		},
 	));
 
-	Halloween.Loc.Path.events.push(new Link(
+	HWLoc.Path.events.push(new Link(
 		"Thrall", () => {
 			return HW.harthon & HalloweenFlags.Harthon.Thrall;
 		}, true,
@@ -664,7 +663,7 @@ export namespace HalloweenScenes {
 		},
 	));
 
-	Halloween.Loc.Path.events.push(new Link(
+	HWLoc.Path.events.push(new Link(
 		"Beta", () => {
 			return HW.ronnie === HalloweenFlags.Ronnie.PCAlpha;
 		}, true,
@@ -1518,7 +1517,7 @@ export namespace HalloweenScenes {
 		});
 	}
 
-	Halloween.Loc.Path.events.push(new Link(
+	HWLoc.Path.events.push(new Link(
 		"Ravens", true, true,
 		undefined,
 		() => {
@@ -1563,7 +1562,7 @@ export namespace HalloweenScenes {
 		},
 	));
 
-	Halloween.Loc.Graveyard.description = () => {
+	HWLoc.Graveyard.description = () => {
 		Text.Add("The graveyard you’re standing in right now is appropriately grim. Surrounded by a low, moss-covered stone wall, the only sign of life in this forsaken place are the handful of ravens perched on the remains of old, scraggly trees - the branches bare, the wood dead and dry. They caw angrily at you, then flap off to join the other ravens to wherever they’re going.");
 		Text.NL();
 		Text.Add("The wall aside, the construction of this graveyard is quite haphazard. Tombstones and graves lie hither and thither, some of them with freshly turned earth before them. Others have bouquets set before them, but the flowers are long dead and rotting. A few lamps would have provided illumination, no one’s been here to light them, so all you have to go on by is moonlight.");
@@ -1571,29 +1570,29 @@ export namespace HalloweenScenes {
 		Text.Add("Deep in the heart of the graveyard lies a sinister-looking mausoleum. You can see a faint light flickering from within. A stone path leads to a nearby chapel, although there’s not much of it left.");
 	};
 
-	Halloween.Loc.Graveyard.links.push(new Link(
+	HWLoc.Graveyard.links.push(new Link(
 		"Path", true, true,
 		undefined,
 		() => {
-			MoveToLocation(Halloween.Loc.Path);
+			MoveToLocation(HWLoc.Path);
 		},
 	));
-	Halloween.Loc.Graveyard.links.push(new Link(
+	HWLoc.Graveyard.links.push(new Link(
 		"Chapel", true, true,
 		undefined,
 		() => {
-			MoveToLocation(Halloween.Loc.Chapel);
+			MoveToLocation(HWLoc.Chapel);
 		},
 	));
-	Halloween.Loc.Graveyard.links.push(new Link(
+	HWLoc.Graveyard.links.push(new Link(
 		"Mausoleum", true, true,
 		undefined,
 		() => {
-			MoveToLocation(Halloween.Loc.Mausoleum);
+			MoveToLocation(HWLoc.Mausoleum);
 		},
 	));
 
-	Halloween.Loc.Graveyard.onEntry = () => {
+	HWLoc.Graveyard.onEntry = () => {
 		const repeat = HW.flags & HalloweenFlags.Flags.Graveyard;
 		HW.flags |= HalloweenFlags.Flags.Graveyard;
 
@@ -1801,17 +1800,17 @@ export namespace HalloweenScenes {
 		Text.Add("It’s only when you’re sure that you’re in the clear that you slow down to catch your breath and look behind you. The elf zombies are still milling about amongst the gravestones, but at least they aren’t actively pursuing you anymore. They’re still down there, though, so it’s more than likely you’ll have to deal with them again at some point if you do head down amongst the headstones again later on.", parse);
 		Text.Flush();
 
-		let dest = Halloween.Loc.Path;
+		let dest = HWLoc.Path;
 
 		const scenes = new EncounterTable();
 		scenes.AddEnc(() => {
-			dest = Halloween.Loc.Path;
+			dest = HWLoc.Path;
 		}, 1.0, () => true);
 		scenes.AddEnc(() => {
-			dest = Halloween.Loc.Mausoleum;
+			dest = HWLoc.Mausoleum;
 		}, 1.0, () => true);
 		scenes.AddEnc(() => {
-			dest = Halloween.Loc.Chapel;
+			dest = HWLoc.Chapel;
 		}, 1.0, () => true);
 		scenes.Get();
 
@@ -1882,7 +1881,7 @@ export namespace HalloweenScenes {
 		});
 	}
 
-	Halloween.Loc.Mausoleum.description = () => {
+	HWLoc.Mausoleum.description = () => {
 		const first = !(HW.flags & HalloweenFlags.Flags.Mausoleum);
 		if (first) {
 			Text.Add("Curiosity gets the best of you and you decide to investigate.");
@@ -1913,24 +1912,24 @@ export namespace HalloweenScenes {
 		}
 	};
 
-	Halloween.Loc.Mausoleum.links.push(new Link(
+	HWLoc.Mausoleum.links.push(new Link(
 		"Leave", true, true,
 		undefined,
 		() => {
-			MoveToLocation(Halloween.Loc.Graveyard);
+			MoveToLocation(HWLoc.Graveyard);
 		},
 	));
-	Halloween.Loc.Mausoleum.links.push(new Link(
+	HWLoc.Mausoleum.links.push(new Link(
 		() => {
 			return (HW.flags & HalloweenFlags.Flags.TRoom) ? "Torture room" : "Door";
 		}, true, true,
 		undefined,
 		() => {
-			MoveToLocation(Halloween.Loc.TortureRoom);
+			MoveToLocation(HWLoc.TortureRoom);
 		},
 	));
 
-	Halloween.Loc.Mausoleum.events.push(new Link(
+	HWLoc.Mausoleum.events.push(new Link(
 		"Coffin", () => {
 			return !(HW.harthon & HalloweenFlags.Harthon.Met);
 		}, true,
@@ -1940,7 +1939,7 @@ export namespace HalloweenScenes {
 		},
 	));
 
-	Halloween.Loc.TortureRoom.description = () => {
+	HWLoc.TortureRoom.description = () => {
 		const player = GAME().player;
 
 		const first = !(HW.flags & HalloweenFlags.Flags.TRoom);
@@ -1960,7 +1959,7 @@ export namespace HalloweenScenes {
 		Text.Add("Aside from all of the sexual paraphernalia, the room is pretty much empty. The only thing of interest lies at the center of the room; an expensive-looking urn fashioned in the likeness of a dog. It’s carved with ancient drawings and glyphs you couldn’t hope to puzzle out.");
 	};
 
-	Halloween.Loc.TortureRoom.links.push(new Link(
+	HWLoc.TortureRoom.links.push(new Link(
 		"Leave", true, true,
 		undefined,
 		() => {
@@ -1974,12 +1973,12 @@ export namespace HalloweenScenes {
 			Text.Flush();
 
 			Gui.NextPrompt(() => {
-				MoveToLocation(Halloween.Loc.Mausoleum);
+				MoveToLocation(HWLoc.Mausoleum);
 			});
 		},
 	));
 
-	Halloween.Loc.TortureRoom.events.push(new Link(
+	HWLoc.TortureRoom.events.push(new Link(
 		"Urn", () => {
 			return !(HW.flags & HalloweenFlags.Flags.NadirMa);
 		}, true,
@@ -3531,7 +3530,7 @@ export namespace HalloweenScenes {
 					Text.Flush();
 
 					Gui.NextPrompt(() => {
-						MoveToLocation(Halloween.Loc.Graveyard);
+						MoveToLocation(HWLoc.Graveyard);
 					});
 				} else {
 					Text.Add("But to no avail; there is a blur of motion, and then suddenly, Lord Harthon is in your way. You try to stop, but you are going too fast; you crash bodily into him, but the vampire might as well be a stone wall, leaving you sprawling at his feet.", parse);
@@ -3763,7 +3762,7 @@ export namespace HalloweenScenes {
 				Text.Flush();
 
 				Gui.NextPrompt(() => {
-					MoveToLocation(Halloween.Loc.Graveyard);
+					MoveToLocation(HWLoc.Graveyard);
 				});
 			}, enabled : true,
 		});
@@ -3990,7 +3989,7 @@ export namespace HalloweenScenes {
 		Text.Add("<i>“Umm… thank you?”</i>", parse);
 		Text.NL();
 
-		const outside = party.location !== Halloween.Loc.Mausoleum;
+		const outside = party.location !== HWLoc.Mausoleum;
 		parse.outside = outside ? "into the bushes" : "outside";
 		parse.outside2 = outside ? " above you" : "";
 		Text.Add("You smile and brush it away, wishing your vulpine lover well. Terry nods softly and resumes what [heshe] was doing before you interrupted [himher]. Suitably equipped, [heshe] steps [outside] to transform into a bat. Once the flying fox has wended [hisher] way into the eternal night[outside2], you pick yourself up, dust yourself off, and set off on your own.", parse);
@@ -4378,7 +4377,7 @@ export namespace HalloweenScenes {
 		});
 	}
 
-	Halloween.Loc.Chapel.description = () => {
+	HWLoc.Chapel.description = () => {
 		const first = !(HW.flags & HalloweenFlags.Flags.Chapel);
 		HW.flags |= HalloweenFlags.Flags.Chapel;
 
@@ -5045,14 +5044,14 @@ export namespace HalloweenScenes {
 		Gui.NextPrompt();
 	}
 
-	Halloween.Loc.Chapel.links.push(new Link(
+	HWLoc.Chapel.links.push(new Link(
 		"Graveyard", true, true,
 		undefined,
 		() => {
-			MoveToLocation(Halloween.Loc.Graveyard);
+			MoveToLocation(HWLoc.Graveyard);
 		},
 	));
-	Halloween.Loc.Chapel.events.push(new Link(
+	HWLoc.Chapel.events.push(new Link(
 		"Altar", true, () => {
 			return !(HW.flags & HalloweenFlags.Flags.Laggoth);
 		},
@@ -5746,7 +5745,7 @@ export namespace HalloweenScenes {
 		});
 	}
 
-	Halloween.Loc.Chapel.events.push(new Link(
+	HWLoc.Chapel.events.push(new Link(
 		"Sacristy", true, () => {
 			return !(HW.flags & HalloweenFlags.Flags.Lenka);
 		},
@@ -6181,7 +6180,7 @@ export namespace HalloweenScenes {
 		Gui.SetButtonsFromList(options, false, undefined);
 	}
 
-	Halloween.Loc.WitchHut.description = () => {
+	HWLoc.WitchHut.description = () => {
 		const first = !(HW.flags & HalloweenFlags.Flags.WitchHut);
 		HW.flags |= HalloweenFlags.Flags.WitchHut;
 
@@ -6204,15 +6203,15 @@ export namespace HalloweenScenes {
 		Text.Add("What do you do now?");
 	};
 
-	Halloween.Loc.WitchHut.links.push(new Link(
+	HWLoc.WitchHut.links.push(new Link(
 		"Outside", true, true,
 		undefined,
 		() => {
-			MoveToLocation(Halloween.Loc.Path);
+			MoveToLocation(HWLoc.Path);
 		},
 	));
 
-	Halloween.Loc.WitchHut.events.push(new Link(
+	HWLoc.WitchHut.events.push(new Link(
 		"Trader", true, true,
 		undefined,
 		() => {
@@ -6220,7 +6219,7 @@ export namespace HalloweenScenes {
 		},
 	));
 
-	Halloween.Loc.WitchHut.events.push(new Link(
+	HWLoc.WitchHut.events.push(new Link(
 		() => {
 			return (HW.flags & HalloweenFlags.Flags.Jenna) ? "Jenna" : "Witch";
 		}, true, true,
@@ -6876,7 +6875,6 @@ export namespace HalloweenScenes {
 	}
 
 	export function WakingUp(badend: boolean) {
-		const party: Party = GAME().party;
 		const parse: any = {
 
 		};
@@ -6893,6 +6891,7 @@ export namespace HalloweenScenes {
 		}
 
 		HW.Restore();
+		const party: Party = GAME().party;
 		// Sleep
 		TimeStep({hour: 8});
 		party.RestFull();
