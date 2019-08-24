@@ -1,5 +1,5 @@
 
-enum Season {
+export enum Season {
 	Spring = 0,
 	Summer = 1,
 	Autumn = 2,
@@ -19,7 +19,7 @@ enum Season {
  * minute goes from 0 to 59
  *
  */
-class Time {
+export class Time {
 	public year: number;
 	public season: Season;
 	public day: number;
@@ -269,5 +269,3 @@ class Time {
 		return minute;
 	}
 }
-
-export { Season, Time };

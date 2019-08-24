@@ -7,7 +7,7 @@ import { SeductionAb } from "./ability/seduction";
 import { WaitAb } from "./ability/wait";
 import { WhiteAb } from "./ability/white";
 
-const Abilities = {
+export const Abilities = {
     Attack : AttackAb,
     Run : RunAb,
     Wait : WaitAb,
@@ -18,5 +18,3 @@ const Abilities = {
     Physical : PhysicalAb,
     Seduction : SeductionAb,
 };
-
-export { Abilities };

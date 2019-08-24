@@ -22,8 +22,6 @@ export function InitMerchants(rigardScenes: any) {
 	RigardScenes = rigardScenes;
 }
 
-const ShopStreetScenes: any = {};
-
 //
 // Merchants
 //
@@ -374,331 +372,335 @@ ShopStreetLoc.Street.events.push(new Link(
 	},
 ));
 
-ShopStreetScenes.Speculate = () => {
-	const player = GAME().player;
-	const party: Party = GAME().party;
-	const rigard = GAME().rigard;
+export namespace ShopStreetScenes {
 
-	const stalls = ["stall", "booth", "stand"];
-	const Sdescs = ["shabby-looking", "colorful", "neatly-decorated", "well-kept", "well-used", "plain"];
-	const Mdescs = ["an agitated-looking merchant", "a wildly gesticulating merchant", "an excited-looking merchant", "a desperate-looking merchant"];
+	export function Speculate() {
+		const player = GAME().player;
+		const party: Party = GAME().party;
+		const rigard = GAME().rigard;
 
-	const parse: any = {
-		p1name       : party.Get(1).name,
-		stall() { return stalls[Math.floor(Math.random() * stalls.length)]; },
-		stallDesc() { return Sdescs[Math.floor(Math.random() * Sdescs.length)]; },
-		merchantDesc() { return Mdescs[Math.floor(Math.random() * Mdescs.length)]; },
-		address() { return Math.random() < 0.4 ? "my friend" : player.mfFem("sir", "madam"); },
-	};
+		const stalls = ["stall", "booth", "stand"];
+		const Sdescs = ["shabby-looking", "colorful", "neatly-decorated", "well-kept", "well-used", "plain"];
+		const Mdescs = ["an agitated-looking merchant", "a wildly gesticulating merchant", "an excited-looking merchant", "a desperate-looking merchant"];
 
-	// TODO: FUNCTION?
-	const coins  = Math.floor(100 * (1 + Math.random()));
-	parse.x = Text.NumToText(coins);
-
-	const trueFalseDeal = Math.random() < 0.5 ? 1 : -1;
-	const buyingSkill = Math.min(0.01 * (0.625 * player.Int() + 2 * rigard.flags.BuyingExp), 0.5);
-	const buyingProb = 0.5 + buyingSkill * trueFalseDeal;
-	const buying = Math.random() < buyingProb;
-
-	let waresExam: CallableFunction;
-
-	let scenes = new EncounterTable();
-	scenes.AddEnc(() => {
-		parse.wares = "cheeses";
-		parse.waresContainer = "parcel of cheeses";
-		parse.waresProblem = "they are hard, and barely edible";
-
-		parse.s         = "s";
-		parse.notS      = "";
-		parse.itThey    = "they";
-		parse.itThem    = "them";
-		parse.itThese   = "these";
-		parse.thisThese = "these";
-		parse.itsTheir  = "their";
-
-		waresExam = () => {
-			Text.Add("You ask for a sample of the cheese, and, with a smile, the merchant leans over to cut you a small piece of one of them, ", parse);
-			if (buying) {
-				if (trueFalseDeal === 1 && Math.random() < 2 * buyingSkill) {
-					Text.Add("but as [heshe]'s about to use [hisher] knife, you stop [himher] at the last moment. You point to a different cheese, and ask for a slice of that instead. [HeShe] shrugs indifferently, and proceeds to cut you a piece from the cheese you asked for.", parse);
-				} else {
-					Text.Add("handing it to you on the tip of a tiny fork.", parse);
-				}
-				Text.NL();
-				Text.Add("You put the piece in your mouth, careful to fully gauge the flavor, and you have to admit it really is as good as the merchant had promised.", parse);
-			} else {
-				Text.Add("but as [heshe]'s about to use [hisher] knife, you stop [himher] at the last moment. You point to a different cheese, and ask for a slice of that instead. [HeShe] bites [hisher] lip, eyes narrowing in apparent consternation, but proceeds to cut a tiny piece from the cheese you asked for.", parse);
-				Text.NL();
-				Text.Add("You put the little piece in your mouth, careful to fully gauge the flavor, but you have to spit it out almost immediately in disgust. It's as hard as a rock, and tastes like some cow manure had found its way in.", parse);
-			}
+		const parse: any = {
+			p1name       : party.Get(1).name,
+			stall() { return stalls[Math.floor(Math.random() * stalls.length)]; },
+			stallDesc() { return Sdescs[Math.floor(Math.random() * Sdescs.length)]; },
+			merchantDesc() { return Mdescs[Math.floor(Math.random() * Mdescs.length)]; },
+			address() { return Math.random() < 0.4 ? "my friend" : player.mfFem("sir", "madam"); },
 		};
-	}, 1.0, () => true);
-	scenes.AddEnc(() => {
-		parse.wares = "velvet";
-		parse.waresContainer = "bundles of velvet";
-		parse.waresProblem = "it's threadbare, and fragile";
 
-		parse.s         = "";
-		parse.notS      = "s";
-		parse.itThey    = "it";
-		parse.itThem    = "it";
-		parse.itThese   = "it";
-		parse.thisThese = "this";
-		parse.itsTheir  = "its";
+		// TODO: FUNCTION?
+		const coins  = Math.floor(100 * (1 + Math.random()));
+		parse.x = Text.NumToText(coins);
 
-		waresExam = () => {
-			Text.Add("You lean over to inspect the fabric, running your fingers ", parse);
-			if (buying) {
-				if (trueFalseDeal === 1 && Math.random() < 2 * buyingSkill) {
-					Text.Add("carefully over it, compressing it, and stretching it out. It is soft, yet firm, feeling nice and solid beneath your fingers.", parse);
+		const trueFalseDeal = Math.random() < 0.5 ? 1 : -1;
+		const buyingSkill = Math.min(0.01 * (0.625 * player.Int() + 2 * rigard.flags.BuyingExp), 0.5);
+		const buyingProb = 0.5 + buyingSkill * trueFalseDeal;
+		const buying = Math.random() < buyingProb;
+
+		let waresExam: CallableFunction;
+
+		let scenes = new EncounterTable();
+		scenes.AddEnc(() => {
+			parse.wares = "cheeses";
+			parse.waresContainer = "parcel of cheeses";
+			parse.waresProblem = "they are hard, and barely edible";
+
+			parse.s         = "s";
+			parse.notS      = "";
+			parse.itThey    = "they";
+			parse.itThem    = "them";
+			parse.itThese   = "these";
+			parse.thisThese = "these";
+			parse.itsTheir  = "their";
+
+			waresExam = () => {
+				Text.Add("You ask for a sample of the cheese, and, with a smile, the merchant leans over to cut you a small piece of one of them, ", parse);
+				if (buying) {
+					if (trueFalseDeal === 1 && Math.random() < 2 * buyingSkill) {
+						Text.Add("but as [heshe]'s about to use [hisher] knife, you stop [himher] at the last moment. You point to a different cheese, and ask for a slice of that instead. [HeShe] shrugs indifferently, and proceeds to cut you a piece from the cheese you asked for.", parse);
+					} else {
+						Text.Add("handing it to you on the tip of a tiny fork.", parse);
+					}
 					Text.NL();
-					Text.Add("Brushing your hand over it one last time, you confirm it's really as good as the merchant claimed.", parse);
+					Text.Add("You put the piece in your mouth, careful to fully gauge the flavor, and you have to admit it really is as good as the merchant had promised.", parse);
 				} else {
-					Text.Add("over it. You brush your hand over the cloth, and it certainly feels soft and luxurious in your grasp. It seems like it's really as good as the merchant claimed.", parse);
+					Text.Add("but as [heshe]'s about to use [hisher] knife, you stop [himher] at the last moment. You point to a different cheese, and ask for a slice of that instead. [HeShe] bites [hisher] lip, eyes narrowing in apparent consternation, but proceeds to cut a tiny piece from the cheese you asked for.", parse);
+					Text.NL();
+					Text.Add("You put the little piece in your mouth, careful to fully gauge the flavor, but you have to spit it out almost immediately in disgust. It's as hard as a rock, and tastes like some cow manure had found its way in.", parse);
 				}
-			} else {
-				Text.Add("carefully over it, compressing it, and stretching it out. It seems to give a little more than you expect from velvet, and, puzzled, you lift up a corner of the fabric, peering at it against the sun.", parse);
-				Text.NL();
-				Text.Add("Light shines through in places, exposing the threadbare, worn stitching. If clothes were made out of this, they'd probably tear in hours!", parse);
-			}
+			};
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
+			parse.wares = "velvet";
+			parse.waresContainer = "bundles of velvet";
+			parse.waresProblem = "it's threadbare, and fragile";
+
+			parse.s         = "";
+			parse.notS      = "s";
+			parse.itThey    = "it";
+			parse.itThem    = "it";
+			parse.itThese   = "it";
+			parse.thisThese = "this";
+			parse.itsTheir  = "its";
+
+			waresExam = () => {
+				Text.Add("You lean over to inspect the fabric, running your fingers ", parse);
+				if (buying) {
+					if (trueFalseDeal === 1 && Math.random() < 2 * buyingSkill) {
+						Text.Add("carefully over it, compressing it, and stretching it out. It is soft, yet firm, feeling nice and solid beneath your fingers.", parse);
+						Text.NL();
+						Text.Add("Brushing your hand over it one last time, you confirm it's really as good as the merchant claimed.", parse);
+					} else {
+						Text.Add("over it. You brush your hand over the cloth, and it certainly feels soft and luxurious in your grasp. It seems like it's really as good as the merchant claimed.", parse);
+					}
+				} else {
+					Text.Add("carefully over it, compressing it, and stretching it out. It seems to give a little more than you expect from velvet, and, puzzled, you lift up a corner of the fabric, peering at it against the sun.", parse);
+					Text.NL();
+					Text.Add("Light shines through in places, exposing the threadbare, worn stitching. If clothes were made out of this, they'd probably tear in hours!", parse);
+				}
+			};
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
+			parse.wares = "wines";
+			parse.waresContainer = "jugs of wine";
+			parse.waresProblem = "they are watered down, and hardly fit for consumption";
+
+			parse.s         = "s";
+			parse.notS      = "";
+			parse.itThey    = "they";
+			parse.itThem    = "them";
+			parse.itThese   = "these";
+			parse.thisThese = "these";
+			parse.itsTheir  = "their";
+
+			waresExam = () => {
+				Text.Add("You ask for a sample of the wine, and, with a smile, the merchant leans over toward a jug on [hisher] right, ", parse);
+
+				if (buying) {
+					if (trueFalseDeal === 1 && Math.random() < 2 * buyingSkill) {
+						Text.Add("but as he's about to dip a small cup in the jug, you stop [himher] at the last moment. You point to a different jug, and ask for a sample of that instead. [HeShe] shrugs indifferently, and proceeds to get you a cup from the jug you asked for.", parse);
+					} else {
+						Text.Add("and dips a small cup into it, passing you the sample.", parse);
+					}
+					Text.NL();
+					Text.Add("You put the wine in your mouth, careful to fully gauge the flavor, and have to admit that it really is marvelous. You swirl it around your tongue, finally swallowing it, almost regretfully.", parse);
+				} else {
+					Text.Add("but as he's about to dip a small cup in the jug, you stop [himher] at the last moment. You point to a different jug, and ask for a sample of that instead. [HeShe] bites [hisher] lip, eyes narrowing in apparent consternation, but proceeds to dip the cup shallowly into the vessel you asked for.", parse);
+					Text.NL();
+					Text.Add("You put the wine in your mouth, careful to fully gauge the flavor, but ", parse);
+					if (Math.random() < 0.5) {
+						Text.Add("there's no wine flavor to be found. The wine has been watered down to the point where it's about as tasty as water. Stale, muddy water.", parse);
+					} else {
+						Text.Add("you have to spit it out almost immediately in disgust. It tastes rancid, and you swear you feel some sort of slime coating the surface. You have to wonder if something died in the wine barrel.", parse);
+					}
+				}
+			};
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
+			parse.wares = "oil";
+			parse.waresContainer = "jugs of oil";
+			parse.waresProblem = "it's acrid, and oddly slimy";
+
+			parse.s         = "";
+			parse.notS      = "s";
+			parse.itThey    = "it";
+			parse.itThem    = "it";
+			parse.itThese   = "it";
+			parse.thisThese = "this";
+			parse.itsTheir  = "its";
+
+			waresExam = () => {
+				Text.Add("You ask for a sample of the oil, and, with a smile, the merchant leans over toward a jug on [hisher] right, explaining that this is top cooking grade parnaseed oil. ", parse);
+
+				if (buying) {
+					if (trueFalseDeal === 1 && Math.random() < 2 * buyingSkill) {
+						Text.Add("Before [heshe] can pour your sample, you interrupt [himher], and point to a different jug instead. [HeShe] shrugs indifferently, and proceeds to to ladle you a small portion of oil into a flat cup for you from the vessel you asked for.", parse);
+					} else {
+						Text.Add("[HeShe] ladles a little into a flat cup and passes it to you.", parse);
+					}
+					Text.NL();
+					Text.Add("You swirl your finger around the cup and find that the oil has a perfect consistency, and is a pleasant clear color. Bringing your fingertip to your tongue, you are rewarded with a pleasant smell and a delicious oily taste. You almost feel like it'd be a waste to cook with the oil when you could just eat it with bread.", parse);
+				} else {
+					Text.Add("Before [heshe] can pour your sample, you interrupt [himher], and point to a different jug instead. [HeShe] bites [hisher] lip, eyes narrowing in apparent consternation, but proceeds to ladle you a thin layer of oil into a flat cup for you from the vessel you asked for.", parse);
+					Text.NL();
+					if (Math.random() < 0.5) {
+						Text.Add("You swirl your finger around in the oil, and it seems to stick to your skin correctly. You bring your fingertip to touch your tongue, however, and have to immediately pull away, desperately wishing there was some way to get the disgusting acrid taste out of your mouth.", parse);
+					} else {
+						Text.Add("You swirl your finger around in the oil, and it feels more like slime than anything you'd want to cook with. Looking more closely, you also see small black flecks swimming around in the stuff. You were thinking of tasting it, but at this point you're not sure you'd survive the experience.", parse);
+					}
+				}
+			};
+		}, 1.0, () => true);
+
+		scenes.Get();
+
+		if (Math.random() < 0.7) {
+			parse.HeShe   = "He";
+			parse.heshe   = "he";
+			parse.HisHer  = "His";
+			parse.hisher  = "his";
+			parse.himher  = "him";
+			parse.hishers = "his";
+		} else {
+			parse.HeShe   = "She";
+			parse.heshe   = "she";
+			parse.HisHer  = "Her";
+			parse.hisher  = "her";
+			parse.himher  = "her";
+			parse.hishers = "hers";
+		}
+
+		parse.comp = party.Two() ? Text.Parse(", [p1name] trailing behind you", parse) : !party.Alone() ? ", your companions trailing behind you" : "";
+		parse.comp2 = party.Two() ? Text.Parse(", [p1name] helping your carry the excess", parse) : !party.Alone() ? ", your companions helping you carry the excess" : "";
+
+		Text.Clear();
+		Text.Add("You decide to take a walk through the center of the market and see if there's anything interesting happening. You pass along rows of stalls, a merchant behind each one, many shouting out about the quality of their wares to the passing masses.", parse);
+		Text.NL();
+		Text.Add("Ahead of you, you spot a [stallDesc] [stall] with [merchantDesc] behind it. Not many people seem to be paying attention to [himher] yet, but, feeling curious, you decide to come closer[comp].", parse);
+		Text.NL();
+		Text.Add("The merchant looks up at you, a sickly smile on [hisher] lips, hope apparent in [hisher] eyes.", parse);
+		Text.NL();
+
+		scenes = new EncounterTable();
+		scenes.AddEnc(() => {
+			Text.Add("<i>“You've made the right choice coming to see my goods, [address]!”</i> [heshe] tells you. <i>“I have the finest [wares] in the city, at the lowest price[s]!”</i>", parse);
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
+			Text.Add("<i>“I must congratulate you, [address]!”</i> [heshe] says. <i>“You have just found the best chance to buy some fine [wares] you'll see all day!”</i>", parse);
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
+			Text.Add("<i>“Welcome to my humble shop, [address]!”</i> [heshe] exclaims. <i>“You will find that I have the best [wares] at the lowest price[s] you'll see this week!”</i>", parse);
+		}, 1.0, () => true);
+
+		scenes.Get();
+
+		Text.NL();
+		Text.Add("You ask the merchant why [heshe]'s selling so cheaply if [hisher] goods really are so wonderful.", parse);
+		Text.NL();
+
+		scenes = new EncounterTable();
+		scenes.AddEnc(() => {
+			Text.Add("<i>“You see, I must sadly embark with a caravan soon. I simply do not have the time to sell [itThese] at the price [itThey] deserve[notS].”</i> [HeShe] indicates the [wares] in front of [himher], sniffling theatrically. <i>“It is a great pity that I must practically give [itThem] away.”</i>", parse);
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
+			Text.Add("<i>“It is my misfortune that I must repay my creditors in a little over an hour, and until I sell these, I won't have the money!”</i> [HeShe] sounds genuinely distraught. <i>“So, I must dump [thisThese] [wares] at well below [itsTheir] true worth.”</i>", parse);
+		}, 1.0, () => true);
+		scenes.AddEnc(() => {
+			Text.Add("<i>“You see, [address],”</i> [heshe] says, leaning in conspiratorially, <i>“I really have to pack up and get out of here before the next tax audit, if you catch my meaning. So, though [thisThese] [wares] is worth a lot more, I just have to dump all my stock as quickly as possible and go.”</i> [HeShe] grimaces, clearly finding the prospect distasteful.", parse);
+		}, 1.0, () => true);
+
+		scenes.Get();
+
+		if (party.coin < coins) {
+			Text.NL();
+			Text.Add("<b>You don't have enough money to consider speculating on the merchant's wares right now.</b>", parse);
+		}
+		Text.Flush();
+
+		const notBuyingVars = Math.random() < 2 * buyingSkill ?
+		() => {
+			waresExam();
+			Text.NL();
+			Text.Add("You stiffly tell the merchant that you won't be purchasing any of <i>that</i>. Or probably anything else from [himher]. Ever. [HeShe] looks a little chagrined", parse);
+		} :
+		() => {
+			Text.Add("You look over the [wares], but can't see any defects in [itThem]. Nonetheless, something about the merchant's desperation rang false with you. You suspect there's some problem that you just couldn't quite spot, and decline [hisher] offer. [HeShe] looks a little disappointed", parse);
 		};
-	}, 1.0, () => true);
-	scenes.AddEnc(() => {
-		parse.wares = "wines";
-		parse.waresContainer = "jugs of wine";
-		parse.waresProblem = "they are watered down, and hardly fit for consumption";
-
-		parse.s         = "s";
-		parse.notS      = "";
-		parse.itThey    = "they";
-		parse.itThem    = "them";
-		parse.itThese   = "these";
-		parse.thisThese = "these";
-		parse.itsTheir  = "their";
-
-		waresExam = () => {
-			Text.Add("You ask for a sample of the wine, and, with a smile, the merchant leans over toward a jug on [hisher] right, ", parse);
-
-			if (buying) {
-				if (trueFalseDeal === 1 && Math.random() < 2 * buyingSkill) {
-					Text.Add("but as he's about to dip a small cup in the jug, you stop [himher] at the last moment. You point to a different jug, and ask for a sample of that instead. [HeShe] shrugs indifferently, and proceeds to get you a cup from the jug you asked for.", parse);
-				} else {
-					Text.Add("and dips a small cup into it, passing you the sample.", parse);
-				}
-				Text.NL();
-				Text.Add("You put the wine in your mouth, careful to fully gauge the flavor, and have to admit that it really is marvelous. You swirl it around your tongue, finally swallowing it, almost regretfully.", parse);
-			} else {
-				Text.Add("but as he's about to dip a small cup in the jug, you stop [himher] at the last moment. You point to a different jug, and ask for a sample of that instead. [HeShe] bites [hisher] lip, eyes narrowing in apparent consternation, but proceeds to dip the cup shallowly into the vessel you asked for.", parse);
-				Text.NL();
-				Text.Add("You put the wine in your mouth, careful to fully gauge the flavor, but ", parse);
-				if (Math.random() < 0.5) {
-					Text.Add("there's no wine flavor to be found. The wine has been watered down to the point where it's about as tasty as water. Stale, muddy water.", parse);
-				} else {
-					Text.Add("you have to spit it out almost immediately in disgust. It tastes rancid, and you swear you feel some sort of slime coating the surface. You have to wonder if something died in the wine barrel.", parse);
-				}
-			}
+		const buyingTrueVars = () => {
+			waresExam();
+			Text.NL();
+			Text.Add("Your nod contentedly at the merchant, and purchase a good amount of the [wares] from [himher], careful not to spend too much coin on the risky investment. As you're leaving, you see a line of other customers behind you, and the merchant is cleaned out in minutes.", parse);
+			Text.NL();
+			Text.Add("You spend most of an hour, walking around the marketplace, looking a little comical with your [waresContainer][comp2], until you finally find customers for the goods and manage to turn a tidy profit.", parse);
 		};
-	}, 1.0, () => true);
-	scenes.AddEnc(() => {
-		parse.wares = "oil";
-		parse.waresContainer = "jugs of oil";
-		parse.waresProblem = "it's acrid, and oddly slimy";
-
-		parse.s         = "";
-		parse.notS      = "s";
-		parse.itThey    = "it";
-		parse.itThem    = "it";
-		parse.itThese   = "it";
-		parse.thisThese = "this";
-		parse.itsTheir  = "its";
-
-		waresExam = () => {
-			Text.Add("You ask for a sample of the oil, and, with a smile, the merchant leans over toward a jug on [hisher] right, explaining that this is top cooking grade parnaseed oil. ", parse);
-
-			if (buying) {
-				if (trueFalseDeal === 1 && Math.random() < 2 * buyingSkill) {
-					Text.Add("Before [heshe] can pour your sample, you interrupt [himher], and point to a different jug instead. [HeShe] shrugs indifferently, and proceeds to to ladle you a small portion of oil into a flat cup for you from the vessel you asked for.", parse);
-				} else {
-					Text.Add("[HeShe] ladles a little into a flat cup and passes it to you.", parse);
-				}
-				Text.NL();
-				Text.Add("You swirl your finger around the cup and find that the oil has a perfect consistency, and is a pleasant clear color. Bringing your fingertip to your tongue, you are rewarded with a pleasant smell and a delicious oily taste. You almost feel like it'd be a waste to cook with the oil when you could just eat it with bread.", parse);
-			} else {
-				Text.Add("Before [heshe] can pour your sample, you interrupt [himher], and point to a different jug instead. [HeShe] bites [hisher] lip, eyes narrowing in apparent consternation, but proceeds to ladle you a thin layer of oil into a flat cup for you from the vessel you asked for.", parse);
-				Text.NL();
-				if (Math.random() < 0.5) {
-					Text.Add("You swirl your finger around in the oil, and it seems to stick to your skin correctly. You bring your fingertip to touch your tongue, however, and have to immediately pull away, desperately wishing there was some way to get the disgusting acrid taste out of your mouth.", parse);
-				} else {
-					Text.Add("You swirl your finger around in the oil, and it feels more like slime than anything you'd want to cook with. Looking more closely, you also see small black flecks swimming around in the stuff. You were thinking of tasting it, but at this point you're not sure you'd survive the experience.", parse);
-				}
-			}
+		const buyingFalseVars = () => {
+			parse.randomheshe = Math.random() < 0.5 ? "he" : "she";
+			waresExam();
+			Text.NL();
+			Text.Add("Your nod contentedly at the merchant, and purchase a good amount of the [wares] from [himher], careful not to spend too much coin on the risky investment. As you're leaving, you see a line of other customers behind you, and the merchant is cleaned out in minutes.", parse);
+			Text.NL();
+			Text.Add("You set out walking around the marketplace, looking a little comical with your [waresContainer][comp2], trying to find customers to sell to. Unfortunately, when you do find someone who's interested, [randomheshe] tests the [wares] you bought, and finds that [waresProblem]. You run to find the merchant who had sold you the stuff, but, as you had half suspected, [heshe] is long gone.", parse);
+			Text.NL();
+			Text.Add("You spend most of an hour doing your best to sell off the defective goods, and manage to do so, although you're forced to take a substantial loss relative to what you paid.", parse);
 		};
-	}, 1.0, () => true);
 
-	scenes.Get();
+		// [Inquire][Ignore]
+		const options = new Array();
+		options.push({ nameStr : "Inquire",
+			func() {
+				Text.Clear();
+				if (buying) {
+					if (trueFalseDeal === 1) {
+						buyingTrueVars();
 
-	if (Math.random() < 0.7) {
-		parse.HeShe   = "He";
-		parse.heshe   = "he";
-		parse.HisHer  = "His";
-		parse.hisher  = "his";
-		parse.himher  = "him";
-		parse.hishers = "his";
-	} else {
-		parse.HeShe   = "She";
-		parse.heshe   = "she";
-		parse.HisHer  = "Her";
-		parse.hisher  = "her";
-		parse.himher  = "her";
-		parse.hishers = "hers";
+						Text.NL();
+						Text.Add("You feel like you've learned something from your successful speculation.", parse);
+						Text.NL();
+						Text.Add("<b>You gain [x] coins!</b>", parse);
+						party.coin += coins;
+						TimeStep({hour : 1});
+					} else {
+						buyingFalseVars();
+						Text.NL();
+						Text.Add("Although you're upset about the money you lost, you feel like you've still learned something from your misadventure.", parse);
+						Text.NL();
+						Text.Add("<b>You lose [x] coins!</b>", parse);
+						party.coin -= coins;
+						TimeStep({hour : 1});
+					}
+				} else {
+					notBuyingVars();
+					Text.Add(", but immediately starts calling out to the other passersby, hoping to still make that quick sale.", parse);
+					Text.NL();
+					Text.Add("Although you didn't buy anything, you still feel like you've learned something from the experience.", parse);
+					TimeStep({minute : 20});
+				}
+				rigard.flags.BuyingExp++;
+				player.intelligence.IncreaseStat(40, 0.5);
+
+				Text.Flush();
+				Gui.NextPrompt();
+			}, enabled : party.coin >= coins,
+			tooltip : Text.Parse("Perhaps there is some profit to be made here (requires [x] coins).", parse),
+		});
+		options.push({ nameStr : "Ignore",
+			func() {
+				Text.Clear();
+				Text.Add("You tell [himher] that you really have no use for [wares], and walk on, deciding you'd rather not bother trying to speculate on the price.", parse);
+				Text.Flush();
+				TimeStep({minute: 10});
+				Gui.NextPrompt();
+			}, enabled : true,
+			tooltip : "You aren't particularly interested in following up on this right now.",
+		});
+		Gui.SetButtonsFromList(options);
 	}
 
-	parse.comp = party.Two() ? Text.Parse(", [p1name] trailing behind you", parse) : !party.Alone() ? ", your companions trailing behind you" : "";
-	parse.comp2 = party.Two() ? Text.Parse(", [p1name] helping your carry the excess", parse) : !party.Alone() ? ", your companions helping you carry the excess" : "";
+	export function Scepter() {
+		const rigard = GAME().rigard;
 
-	Text.Clear();
-	Text.Add("You decide to take a walk through the center of the market and see if there's anything interesting happening. You pass along rows of stalls, a merchant behind each one, many shouting out about the quality of their wares to the passing masses.", parse);
-	Text.NL();
-	Text.Add("Ahead of you, you spot a [stallDesc] [stall] with [merchantDesc] behind it. Not many people seem to be paying attention to [himher] yet, but, feeling curious, you decide to come closer[comp].", parse);
-	Text.NL();
-	Text.Add("The merchant looks up at you, a sickly smile on [hisher] lips, hope apparent in [hisher] eyes.", parse);
-	Text.NL();
+		const parse: any = {
 
-	scenes = new EncounterTable();
-	scenes.AddEnc(() => {
-		Text.Add("<i>“You've made the right choice coming to see my goods, [address]!”</i> [heshe] tells you. <i>“I have the finest [wares] in the city, at the lowest price[s]!”</i>", parse);
-	}, 1.0, () => true);
-	scenes.AddEnc(() => {
-		Text.Add("<i>“I must congratulate you, [address]!”</i> [heshe] says. <i>“You have just found the best chance to buy some fine [wares] you'll see all day!”</i>", parse);
-	}, 1.0, () => true);
-	scenes.AddEnc(() => {
-		Text.Add("<i>“Welcome to my humble shop, [address]!”</i> [heshe] exclaims. <i>“You will find that I have the best [wares] at the lowest price[s] you'll see this week!”</i>", parse);
-	}, 1.0, () => true);
+		};
 
-	scenes.Get();
-
-	Text.NL();
-	Text.Add("You ask the merchant why [heshe]'s selling so cheaply if [hisher] goods really are so wonderful.", parse);
-	Text.NL();
-
-	scenes = new EncounterTable();
-	scenes.AddEnc(() => {
-		Text.Add("<i>“You see, I must sadly embark with a caravan soon. I simply do not have the time to sell [itThese] at the price [itThey] deserve[notS].”</i> [HeShe] indicates the [wares] in front of [himher], sniffling theatrically. <i>“It is a great pity that I must practically give [itThem] away.”</i>", parse);
-	}, 1.0, () => true);
-	scenes.AddEnc(() => {
-		Text.Add("<i>“It is my misfortune that I must repay my creditors in a little over an hour, and until I sell these, I won't have the money!”</i> [HeShe] sounds genuinely distraught. <i>“So, I must dump [thisThese] [wares] at well below [itsTheir] true worth.”</i>", parse);
-	}, 1.0, () => true);
-	scenes.AddEnc(() => {
-		Text.Add("<i>“You see, [address],”</i> [heshe] says, leaning in conspiratorially, <i>“I really have to pack up and get out of here before the next tax audit, if you catch my meaning. So, though [thisThese] [wares] is worth a lot more, I just have to dump all my stock as quickly as possible and go.”</i> [HeShe] grimaces, clearly finding the prospect distasteful.", parse);
-	}, 1.0, () => true);
-
-	scenes.Get();
-
-	if (party.coin < coins) {
+		Text.Clear();
+		Text.Add("Following Roa’s direction, you seek out the establishment of the merchant who swindled him out of Lagon’s scepter. It’s a rather small, nondescript shop, set on a side street away from the bustle of the main street. On the front door - which seems locked and barred - there is a notice telling you the proprietor is away on business to the free cities.", parse);
 		Text.NL();
-		Text.Add("<b>You don't have enough money to consider speculating on the merchant's wares right now.</b>", parse);
+		Text.Add("There is also a date proclaiming the expected return date, long since expired. You don’t think you’ll find any more clues here - nor do you find it likely the merchant would leave a valuable item such as the scepter just lying around - perhaps you need to head toward his destination in order to find out the fate of the merchant.", parse);
+		Text.NL();
+		Text.Add("<b>Perhaps you should search along the King's Road.</b>", parse);
+		Text.Flush();
+
+		TimeStep({minute: 15});
+
+		rigard.flags.Scepter = 0;
+
+		Gui.NextPrompt();
 	}
-	Text.Flush();
 
-	const notBuyingVars = Math.random() < 2 * buyingSkill ?
-	() => {
-		waresExam();
-		Text.NL();
-		Text.Add("You stiffly tell the merchant that you won't be purchasing any of <i>that</i>. Or probably anything else from [himher]. Ever. [HeShe] looks a little chagrined", parse);
-	} :
-	() => {
-		Text.Add("You look over the [wares], but can't see any defects in [itThem]. Nonetheless, something about the merchant's desperation rang false with you. You suspect there's some problem that you just couldn't quite spot, and decline [hisher] offer. [HeShe] looks a little disappointed", parse);
-	};
-	const buyingTrueVars = () => {
-		waresExam();
-		Text.NL();
-		Text.Add("Your nod contentedly at the merchant, and purchase a good amount of the [wares] from [himher], careful not to spend too much coin on the risky investment. As you're leaving, you see a line of other customers behind you, and the merchant is cleaned out in minutes.", parse);
-		Text.NL();
-		Text.Add("You spend most of an hour, walking around the marketplace, looking a little comical with your [waresContainer][comp2], until you finally find customers for the goods and manage to turn a tidy profit.", parse);
-	};
-	const buyingFalseVars = () => {
-		parse.randomheshe = Math.random() < 0.5 ? "he" : "she";
-		waresExam();
-		Text.NL();
-		Text.Add("Your nod contentedly at the merchant, and purchase a good amount of the [wares] from [himher], careful not to spend too much coin on the risky investment. As you're leaving, you see a line of other customers behind you, and the merchant is cleaned out in minutes.", parse);
-		Text.NL();
-		Text.Add("You set out walking around the marketplace, looking a little comical with your [waresContainer][comp2], trying to find customers to sell to. Unfortunately, when you do find someone who's interested, [randomheshe] tests the [wares] you bought, and finds that [waresProblem]. You run to find the merchant who had sold you the stuff, but, as you had half suspected, [heshe] is long gone.", parse);
-		Text.NL();
-		Text.Add("You spend most of an hour doing your best to sell off the defective goods, and manage to do so, although you're forced to take a substantial loss relative to what you paid.", parse);
-	};
+}
 
-	// [Inquire][Ignore]
-	const options = new Array();
-	options.push({ nameStr : "Inquire",
-		func() {
-			Text.Clear();
-			if (buying) {
-				if (trueFalseDeal === 1) {
-					buyingTrueVars();
-
-					Text.NL();
-					Text.Add("You feel like you've learned something from your successful speculation.", parse);
-					Text.NL();
-					Text.Add("<b>You gain [x] coins!</b>", parse);
-					party.coin += coins;
-					TimeStep({hour : 1});
-				} else {
-					buyingFalseVars();
-					Text.NL();
-					Text.Add("Although you're upset about the money you lost, you feel like you've still learned something from your misadventure.", parse);
-					Text.NL();
-					Text.Add("<b>You lose [x] coins!</b>", parse);
-					party.coin -= coins;
-					TimeStep({hour : 1});
-				}
-			} else {
-				notBuyingVars();
-				Text.Add(", but immediately starts calling out to the other passersby, hoping to still make that quick sale.", parse);
-				Text.NL();
-				Text.Add("Although you didn't buy anything, you still feel like you've learned something from the experience.", parse);
-				TimeStep({minute : 20});
-			}
-			rigard.flags.BuyingExp++;
-			player.intelligence.IncreaseStat(40, 0.5);
-
-			Text.Flush();
-			Gui.NextPrompt();
-		}, enabled : party.coin >= coins,
-		tooltip : Text.Parse("Perhaps there is some profit to be made here (requires [x] coins).", parse),
-	});
-	options.push({ nameStr : "Ignore",
-		func() {
-			Text.Clear();
-			Text.Add("You tell [himher] that you really have no use for [wares], and walk on, deciding you'd rather not bother trying to speculate on the price.", parse);
-			Text.Flush();
-			TimeStep({minute: 10});
-			Gui.NextPrompt();
-		}, enabled : true,
-		tooltip : "You aren't particularly interested in following up on this right now.",
-	});
-	Gui.SetButtonsFromList(options);
-};
-
-ShopStreetScenes.Scepter = () => {
-	const rigard = GAME().rigard;
-
-	const parse: any = {
-
-	};
-
-	Text.Clear();
-	Text.Add("Following Roa’s direction, you seek out the establishment of the merchant who swindled him out of Lagon’s scepter. It’s a rather small, nondescript shop, set on a side street away from the bustle of the main street. On the front door - which seems locked and barred - there is a notice telling you the proprietor is away on business to the free cities.", parse);
-	Text.NL();
-	Text.Add("There is also a date proclaiming the expected return date, long since expired. You don’t think you’ll find any more clues here - nor do you find it likely the merchant would leave a valuable item such as the scepter just lying around - perhaps you need to head toward his destination in order to find out the fate of the merchant.", parse);
-	Text.NL();
-	Text.Add("<b>Perhaps you should search along the King's Road.</b>", parse);
-	Text.Flush();
-
-	TimeStep({minute: 15});
-
-	rigard.flags.Scepter = 0;
-
-	Gui.NextPrompt();
-};
-
-export { ShopStreetLoc, ShopStreetScenes };
+export { ShopStreetLoc };

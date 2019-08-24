@@ -57,19 +57,19 @@ OutlawsLoc.Camp.onEntry = () => {
 		OutlawsScenes.PathIntoRigardInitiation();
 	} else if (outlaws.Rep() >= 15 && rigard.Krawitz.Q >= RigardFlags.KrawitzQ.CaughtTerry && cveta.flags.Met < CvetaFlags.Met.MariaTalk) {
 		CvetaScenes.MariaTalkFirst();
- } else if (outlaws.Rep() >= 25 && outlaws.flags.Met >= OutlawsFlags.Met.MetBelinda && cveta.Relation() >= 60 && outlaws.flags.BullTower < OutlawsFlags.BullTowerQuest.Initiated) {
+	} else if (outlaws.Rep() >= 25 && outlaws.flags.Met >= OutlawsFlags.Met.MetBelinda && cveta.Relation() >= 60 && outlaws.flags.BullTower < OutlawsFlags.BullTowerQuest.Initiated) {
 		BullTowerScenes.Initiation();
- } else if (outlaws.AlaricSaved() && outlaws.flags.BullTower < OutlawsFlags.BullTowerQuest.AlaricFollowup && outlaws.mainQuestTimer.Expired()) {
+	} else if (outlaws.AlaricSaved() && outlaws.flags.BullTower < OutlawsFlags.BullTowerQuest.AlaricFollowup && outlaws.mainQuestTimer.Expired()) {
 		BullTowerScenes.AftermathAlaric();
- } else if (outlaws.BullTowerCanGetReward() && outlaws.flags.BullTower < OutlawsFlags.BullTowerQuest.ZenithFollowup && outlaws.mainQuestTimer.Expired()) {
+	} else if (outlaws.BullTowerCanGetReward() && outlaws.flags.BullTower < OutlawsFlags.BullTowerQuest.ZenithFollowup && outlaws.mainQuestTimer.Expired()) {
 		BullTowerScenes.AftermathZenith();
- } else if (maria.EligableForDeaddropAlert()) {
+	} else if (maria.EligableForDeaddropAlert()) {
 		DeadDropScenes.Alert();
- } else if (vaughn.IntroAvailable()) {
+	} else if (vaughn.IntroAvailable()) {
 		VaughnScenes.Introduction();
- } else {
+	} else {
 		Gui.PrintDefaultOptions();
- }
+	}
 };
 
 OutlawsLoc.Camp.links.push(new Link(

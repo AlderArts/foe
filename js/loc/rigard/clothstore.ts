@@ -15,11 +15,12 @@ import { Text } from "../../text";
 
 const ClothShopLoc = new Event("Silken Delights");
 
-const ClothShopScenes: any = {};
-ClothShopScenes.IsOpen = () => {
-	const rigard = GAME().rigard;
-	return (WorldTime().hour >= 9 && WorldTime().hour < 20) && !rigard.UnderLockdown();
-};
+export namespace ClothShopScenes {
+	export function IsOpen() {
+		const rigard = GAME().rigard;
+		return (WorldTime().hour >= 9 && WorldTime().hour < 20) && !rigard.UnderLockdown();
+	}
+}
 
 ClothShopLoc.onEntry = () => {
 	const party: Party = GAME().party;
@@ -30,9 +31,9 @@ ClothShopLoc.onEntry = () => {
 		parse.comp = " and " + party.Get(1).name;
 	} else if (!party.Alone()) {
 		parse.comp = " and your companions";
- } else {
+	} else {
 		parse.comp = "";
- }
+	}
 
 	if (rigard.flags.TailorMet === 0) {
 		rigard.flags.TailorMet = 1;
@@ -143,9 +144,9 @@ ClothShopLoc.events.push(new Link(
 				Text.Add("<i>“Oh, hello, [sirmadam], I am Miss Elaine Nexelle, proprietor of Silken Delights, where we have the finest selection of apparel in Rigard. If you have any questions regarding any of our finer apparel, I would be happy to help you make a selection...”</i> she says with a smile.", parse);
 			} else if (humanScore > 0.5) {
 				Text.Add("<i>“Yes? Do you need something?”</i> she asks without pausing in her work.", parse);
- } else {
+			} else {
 				Text.Add("You can feel her cold stare as you walk over. <i>“The bargain clothes are over by the door, that’s probably what you want. If you need help you should go find Fera, and remember, if you damage anything, you buy it. If you can't afford it, I'll make you work it off,”</i> she says coldly before resuming her work.", parse);
- }
+			}
 
 			Text.Flush();
 			// [Nexelle][Store][Guards][City][Fera][Fera's mom]
@@ -299,4 +300,4 @@ ClothShopLoc.endDescription = () => {
 	}
 };
 
-export { ClothShopLoc, ClothShopScenes };
+export { ClothShopLoc };

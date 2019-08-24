@@ -10,12 +10,6 @@ import { Text } from "../../text";
 
 const OddShopLoc = new Event("Odd shop");
 
-const OddShopScenes: any = {};
-OddShopScenes.IsOpen = () => {
-	const rigard = GAME().rigard;
-	return (WorldTime().hour >= 9 && WorldTime().hour < 18) && !rigard.UnderLockdown();
-};
-
 OddShopLoc.description = () => {
 	Text.Add("You are in the odd shop.<br>");
 };
@@ -34,33 +28,42 @@ OddShopLoc.events.push(new Link(
 	},
 ));
 
-OddShopScenes.Prompt = () => {
-	const rigard = GAME().rigard;
+export namespace OddShopScenes {
 
-	const parse: any = {
+	export function IsOpen() {
+		const rigard = GAME().rigard;
+		return (WorldTime().hour >= 9 && WorldTime().hour < 18) && !rigard.UnderLockdown();
+	}
 
-	};
+	export function Prompt() {
+		const rigard = GAME().rigard;
 
-	Text.Clear();
-	Text.Add("This is pretty placeholder", parse);
-	Text.NL();
-	Text.Flush();
-	const prompt = () => {
-		// [name]
-		const options = new Array();
-		options.push({ nameStr : "Buy",
-			func() {
-				rigard.SexShop.Buy(prompt);
-			}, enabled : true,
-		});
-		options.push({ nameStr : "Sell",
-			func() {
-				rigard.SexShop.Sell(prompt);
-			}, enabled : true,
-		});
-		Gui.SetButtonsFromList(options, true);
-	};
-	prompt();
-};
+		const parse: any = {
 
-export { OddShopLoc, OddShopScenes };
+		};
+
+		Text.Clear();
+		Text.Add("This is pretty placeholder", parse);
+		Text.NL();
+		Text.Flush();
+		const prompt = () => {
+			// [name]
+			const options = new Array();
+			options.push({ nameStr : "Buy",
+				func() {
+					rigard.SexShop.Buy(prompt);
+				}, enabled : true,
+			});
+			options.push({ nameStr : "Sell",
+				func() {
+					rigard.SexShop.Sell(prompt);
+				}, enabled : true,
+			});
+			Gui.SetButtonsFromList(options, true);
+		};
+		prompt();
+	}
+
+}
+
+export { OddShopLoc };

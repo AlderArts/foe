@@ -37,9 +37,9 @@ SlumsLoc.Gate.description = () => {
 			Text.Add("You recognize almost every guard manning the gates by this point, and they certainly recognize you, having seen you getting used by Miranda on more than one occasion.");
 		} else if (fucked > 0 && Math.random() > 0.5) {
 			Text.Add("Most of the guards manning the gates look unfamiliar to you, though you hear a snicker indicating that someone recognizes you for your exploits. News travels fast, you guess.");
- } else {
+ 		} else {
 			Text.Add("The guards regard you with rather disinterested looks, lounging at a table beside the gate.");
- }
+ 		}
 		Text.NL();
 	}
 
