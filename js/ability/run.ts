@@ -6,7 +6,6 @@
 
 import { GetDEBUG } from "../../app";
 import { Ability, TargetMode } from "../ability";
-import { Gui } from "../gui";
 import { Perks } from "../perks";
 import { Text } from "../text";
 

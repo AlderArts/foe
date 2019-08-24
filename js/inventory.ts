@@ -59,7 +59,7 @@ export class Inventory {
 		});
 	}
 	// Divides items by their 'type' and further by their 'subtype' inside each primary type. Items WITHOUT a subtype are under property 'None'
-	public static ItemByBothTypes(inv: any, itemsByType?: any, usableItemsByType?: any, combatItemsByType?: any) {
+	public static ItemByBothTypes(inv: IItemQuantity[], itemsByType?: any, usableItemsByType?: any, combatItemsByType?: any) {
 		// Add all keys first. Ensures item output will be in whatever order our ItemType enum is in
 		_.forIn(ItemType, (value, key) => {
 			if (itemsByType) {
@@ -86,7 +86,7 @@ export class Inventory {
 		});
 		// Populate type arrays with items if they're defined
 		for (const item of inv) {
-			const it = item.it;
+			const it = item.it as CombatItem;
 			if (itemsByType) {
 				itemsByType[it.type][it.subtype].push(item);
 			}
@@ -165,10 +165,7 @@ export class Inventory {
 		return undefined;
 	}
 
-	public AddItem(item: Item, num?: number) {
-		// Default to 1
-		num = num || 1;
-
+	public AddItem(item: Item, num: number = 1) {
 		if (GetDEBUG()) {
 			Text.NL();
 			Text.Add("DEBUG: Added [num] [name] (ID: [id])", {num, name: item.name, id: item.id}, "bold");
@@ -187,10 +184,7 @@ export class Inventory {
 		this.items.push({it: item, num});
 	}
 
-	public RemoveItem(item: Item, num?: number) {
-		// Default to 1
-		num = num || 1;
-
+	public RemoveItem(item: Item, num: number = 1) {
 		if (GetDEBUG()) {
 			Text.NL();
 			Text.Add("DEBUG: Removed [num] [name] (ID: [id])", {num, name: item.name, id: item.id}, "bold");
@@ -220,7 +214,7 @@ export class Inventory {
 		}
 		Text.Flush();
 	}
-	public ShowInventory(SetExploreButtons: any, preventClear?: boolean) {
+	public ShowInventory(SetExploreButtons: CallableFunction, preventClear?: boolean) {
 		const inv = this;
 		inv.items.sort(compareItemByProp("name"));
 		const backPrompt = () => { inv.ShowInventory(SetExploreButtons); };

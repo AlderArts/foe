@@ -116,7 +116,7 @@ export class Footman extends Entity {
 
 		const choice = Math.random();
 		if (choice < 0.4 && Abilities.Physical.DAttack.enabledCondition(encounter, this)) {
-			Abilities.Physical.Attack.CastInternal(encounter, this, t);
+			Abilities.Physical.DAttack.CastInternal(encounter, this, t);
 		} else if (choice < 0.6 && Abilities.Physical.CrushingStrike.enabledCondition(encounter, this)) {
 			Abilities.Physical.CrushingStrike.CastInternal(encounter, this, t);
 		} else if (choice < 0.8 && Abilities.Physical.Pierce.enabledCondition(encounter, this)) {

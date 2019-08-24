@@ -14,12 +14,10 @@ import { Text } from "../text";
 import { Defaults, GetAggroEntry } from "./default";
 import { AbilityNode } from "./node";
 
-const SeductionAb: any = {};
-
-SeductionAb.Sleep = new Ability("Sleep");
-SeductionAb.Sleep.Short = () => "Put one enemy to sleep for a short while with magical charms.";
-SeductionAb.Sleep.cost = { hp: undefined, sp: 20, lp: undefined};
-SeductionAb.Sleep.castTree.push((ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
+const sleep = new Ability("Sleep");
+sleep.Short = () => "Put one enemy to sleep for a short while with magical charms.";
+sleep.cost = { hp: undefined, sp: 20, lp: undefined};
+sleep.castTree.push((ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 	const parse = AbilityNode.DefaultParser(caster, target);
 
 	Text.Add("[Name] weave[notS] [hisher] [hand]s in alluring patterns, winking seductively at [tname]. ", parse);
@@ -31,11 +29,11 @@ SeductionAb.Sleep.castTree.push((ability: Ability, encounter: Encounter, caster:
 	Text.NL();
 });
 
-SeductionAb.TIllusion = new Ability("T.Illusion");
-SeductionAb.TIllusion.Short = () => "Terrifies your foes by creating frightening phantasms that soak up any attacks directed at you.";
-SeductionAb.TIllusion.cost = { hp: undefined, sp: 25, lp: 10};
-SeductionAb.TIllusion.targetMode = TargetMode.Self;
-SeductionAb.TIllusion.castTree.push((ability: Ability, encounter: Encounter, caster: Entity) => {
+const tIllusion = new Ability("T.Illusion");
+tIllusion.Short = () => "Terrifies your foes by creating frightening phantasms that soak up any attacks directed at you.";
+tIllusion.cost = { hp: undefined, sp: 25, lp: 10};
+tIllusion.targetMode = TargetMode.Self;
+tIllusion.castTree.push((ability: Ability, encounter: Encounter, caster: Entity) => {
 	const parse = AbilityNode.DefaultParser(caster);
 	let num = 2;
 	num += Math.random() * 3;
@@ -70,11 +68,11 @@ SeductionAb.TIllusion.castTree.push((ability: Ability, encounter: Encounter, cas
 	Text.NL();
 });
 
-SeductionAb.SIllusion = new Ability("S.Illusion");
-SeductionAb.SIllusion.Short = () => "Arouses your foes by creating a harem of alluring mirages.";
-SeductionAb.SIllusion.cost = { hp: undefined, sp: 10, lp: 25};
-SeductionAb.SIllusion.targetMode = TargetMode.Self;
-SeductionAb.SIllusion.castTree.push((ability: Ability, encounter: Encounter, caster: Entity) => {
+const sIllusion = new Ability("S.Illusion");
+sIllusion.Short = () => "Arouses your foes by creating a harem of alluring mirages.";
+sIllusion.cost = { hp: undefined, sp: 10, lp: 25};
+sIllusion.targetMode = TargetMode.Self;
+sIllusion.castTree.push((ability: Ability, encounter: Encounter, caster: Entity) => {
 	const parse = AbilityNode.DefaultParser(caster);
 	let num = 2;
 	num += Math.random() * 3;
@@ -110,10 +108,10 @@ SeductionAb.SIllusion.castTree.push((ability: Ability, encounter: Encounter, cas
 	Text.NL();
 });
 
-SeductionAb.Confuse = new Ability("Confuse");
-SeductionAb.Confuse.Short = () => "Fuck a single opponent’s mind, temporarily drawing them to your side.";
-SeductionAb.Confuse.cost = { hp: undefined, sp: 30, lp: 20};
-SeductionAb.Confuse.castTree.push((ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
+const confuse = new Ability("Confuse");
+confuse.Short = () => "Fuck a single opponent’s mind, temporarily drawing them to your side.";
+confuse.cost = { hp: undefined, sp: 30, lp: 20};
+confuse.castTree.push((ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 	const parse = AbilityNode.DefaultParser(caster, target);
 
 	Text.Add("[Name] perform[notS] a hypnotising dance, blending in [hisher] alluring magic and attempting to assume control of [tname]. ", parse);
@@ -126,10 +124,10 @@ SeductionAb.Confuse.castTree.push((ability: Ability, encounter: Encounter, caste
 	Text.NL();
 });
 
-SeductionAb.Rut = new Ability("Rut");
-SeductionAb.Rut.Short = () => "Hump away at target, dealing damage.";
-SeductionAb.Rut.cost = { hp: undefined, sp: undefined, lp: 10};
-SeductionAb.Rut.castTree.push(AbilityNode.Template.Lust({
+const rut = new Ability("Rut");
+rut.Short = () => "Hump away at target, dealing damage.";
+rut.cost = { hp: undefined, sp: undefined, lp: 10};
+rut.castTree.push(AbilityNode.Template.Lust({
 	damageFunc: AbilityNode.DamageFunc.Physical,
 	damagePool: [AbilityNode.DamagePool.Physical],
 	damageType: {pBlunt: 0.2, lust: 0.8},
@@ -143,10 +141,10 @@ SeductionAb.Rut.castTree.push(AbilityNode.Template.Lust({
 }));
 
 // TODO Tweak
-SeductionAb.Fantasize = new Ability("Fantasize");
-SeductionAb.Fantasize.Short = () => "Raise own lust.";
-SeductionAb.Fantasize.targetMode = TargetMode.Self;
-SeductionAb.Fantasize.castTree.push((ability: Ability, encounter: Encounter, caster: Entity) => {
+const fantasize = new Ability("Fantasize");
+fantasize.Short = () => "Raise own lust.";
+fantasize.targetMode = TargetMode.Self;
+fantasize.castTree.push((ability: Ability, encounter: Encounter, caster: Entity) => {
 	let dmg = 1 * caster.LAttack();
 	dmg = Math.floor(dmg);
 
@@ -161,11 +159,11 @@ SeductionAb.Fantasize.castTree.push((ability: Ability, encounter: Encounter, cas
 	Text.NL();
 });
 
-SeductionAb.Soothe = new Ability("Soothe");
-SeductionAb.Soothe.cost = { hp: undefined, sp: 20, lp: undefined};
-SeductionAb.Soothe.Short = () => "Calm the wayward thoughts of your allies with the gentle touch of your voice.";
-SeductionAb.Soothe.targetMode = TargetMode.Party;
-SeductionAb.Soothe.castTree.push((ability: Ability, encounter: Encounter, caster: Entity, target: Party) => {
+const soothe = new Ability("Soothe");
+soothe.cost = { hp: undefined, sp: 20, lp: undefined};
+soothe.Short = () => "Calm the wayward thoughts of your allies with the gentle touch of your voice.";
+soothe.targetMode = TargetMode.Party;
+soothe.castTree.push((ability: Ability, encounter: Encounter, caster: Entity, target: Party) => {
 	const targets = target.members;
 
 	const group = targets.length > 1;
@@ -191,15 +189,15 @@ SeductionAb.Soothe.castTree.push((ability: Ability, encounter: Encounter, caster
 	Text.NL();
 });
 
-SeductionAb.Captivate = new Ability("Captivate");
-SeductionAb.Captivate.cost = { hp: undefined, sp: undefined, lp: 40};
-SeductionAb.Captivate.Short = () => "Attempt to immobilize and slow a foe with a captivating song. Success rate dependent on your charisma and the target’s lust. If it fails, the target is nevertheless slowed.";
-SeductionAb.Captivate._onMiss = (ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
+const captivate = new Ability("Captivate");
+captivate.cost = { hp: undefined, sp: undefined, lp: 40};
+captivate.Short = () => "Attempt to immobilize and slow a foe with a captivating song. Success rate dependent on your charisma and the target’s lust. If it fails, the target is nevertheless slowed.";
+const captivateOnMiss = (ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 	const parse = AbilityNode.DefaultParser(caster, target);
 	Text.Add("[tName] manage[tnotS] to resist the brunt of the mesmerizing melody, but still finds [thisher] movements slowed.", parse);
 	Text.NL();
 };
-SeductionAb.Captivate.castTree.push(AbilityNode.Template.Lust({
+captivate.castTree.push(AbilityNode.Template.Lust({
 	toDamage: undefined,
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
@@ -213,17 +211,17 @@ SeductionAb.Captivate.castTree.push(AbilityNode.Template.Lust({
 			Text.Add("[tName] is utterly entranced by [poss] song and is slowed to a stop, completely immobilized.", parse);
 			Text.NL();
 		} else {
-			SeductionAb.Captivate._onMiss(ability, encounter, caster, target);
+			captivateOnMiss(ability, encounter, caster, target);
 		}
 	}],
-	onMiss: [SeductionAb.Captivate._onMiss],
+	onMiss: [captivateOnMiss],
 }));
 
 // TODO Tweak
-SeductionAb.Lull = new Ability("Lull");
-SeductionAb.Lull.cost = { hp: undefined, sp: 10, lp: 10};
-SeductionAb.Lull.Short = () => "Put the foe to sleep with a soothing song.";
-SeductionAb.Lull.castTree.push((ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
+const lull = new Ability("Lull");
+lull.cost = { hp: undefined, sp: 10, lp: 10};
+lull.Short = () => "Put the foe to sleep with a soothing song.";
+lull.castTree.push((ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 	/*
 	let hit    = caster.LHit();
 	let evade  = target.LEvade();
@@ -247,9 +245,9 @@ SeductionAb.Lull.castTree.push((ability: Ability, encounter: Encounter, caster: 
  *
  */
 
-SeductionAb.Tease = new Ability("Tease");
-SeductionAb.Tease.Short = () => "Raises the lust of target.";
-SeductionAb.Tease.castTree.push(AbilityNode.Template.Lust({
+const tease = new Ability("Tease");
+tease.Short = () => "Raises the lust of target.";
+tease.castTree.push(AbilityNode.Template.Lust({
 	atkMod: 0.5,
 	damageType: {lust: 1},
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
@@ -263,10 +261,10 @@ SeductionAb.Tease.castTree.push(AbilityNode.Template.Lust({
 	onAbsorb: [Defaults.Seduction._onAbsorb],
 }));
 
-SeductionAb.Seduce = new Ability("Seduce");
-SeductionAb.Seduce.Short = () => "Raises the lust of target.";
-SeductionAb.Seduce.cost = { hp: undefined, sp: 10, lp: 10};
-SeductionAb.Seduce.castTree.push(AbilityNode.Template.Lust({
+const seduce = new Ability("Seduce");
+seduce.Short = () => "Raises the lust of target.";
+seduce.cost = { hp: undefined, sp: 10, lp: 10};
+seduce.castTree.push(AbilityNode.Template.Lust({
 	atkMod: 1,
 	damageType: {lust: 1},
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
@@ -280,12 +278,12 @@ SeductionAb.Seduce.castTree.push(AbilityNode.Template.Lust({
 	onAbsorb: [Defaults.Seduction._onAbsorb],
 }));
 
-SeductionAb.StripTease = new Ability("StripTease");
-SeductionAb.StripTease.Short = () => "Raises the lust of enemy party.";
-SeductionAb.StripTease.cost = { hp: undefined, sp: 40, lp: 40};
-SeductionAb.StripTease.cooldown = 2;
-SeductionAb.StripTease.targetMode = TargetMode.Enemies;
-SeductionAb.StripTease.castTree.push(AbilityNode.Template.Lust({
+const stripTease = new Ability("StripTease");
+stripTease.Short = () => "Raises the lust of enemy party.";
+stripTease.cost = { hp: undefined, sp: 40, lp: 40};
+stripTease.cooldown = 2;
+stripTease.targetMode = TargetMode.Enemies;
+stripTease.castTree.push(AbilityNode.Template.Lust({
 	atkMod: 1.5,
 	damageType: {lust: 1},
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
@@ -299,11 +297,11 @@ SeductionAb.StripTease.castTree.push(AbilityNode.Template.Lust({
 	onAbsorb: [Defaults.Seduction._onAbsorb],
 }));
 
-SeductionAb.Distract = new Ability("Distract");
-SeductionAb.Distract.Short = () => "Raise enemy lust and lower their initiative.";
-SeductionAb.Distract.cost = { hp: undefined, sp: 10, lp: 20};
-SeductionAb.Distract.cooldown = 1;
-SeductionAb.Distract.castTree.push(AbilityNode.Template.Lust({
+const distract = new Ability("Distract");
+distract.Short = () => "Raise enemy lust and lower their initiative.";
+distract.cost = { hp: undefined, sp: 10, lp: 20};
+distract.cooldown = 1;
+distract.castTree.push(AbilityNode.Template.Lust({
 	atkMod: 0.8,
 	damageType: {lust: 1},
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
@@ -322,11 +320,11 @@ SeductionAb.Distract.castTree.push(AbilityNode.Template.Lust({
 	onAbsorb: [Defaults.Seduction._onAbsorb],
 }));
 
-SeductionAb.Charm = new Ability("Charm");
-SeductionAb.Charm.Short = () => "Try to dissuade the enemy from attacking you.";
-SeductionAb.Charm.cost = { hp: undefined, sp: 10, lp: 10};
-SeductionAb.Charm.cooldown = 1;
-SeductionAb.Charm.castTree.push(AbilityNode.Template.Lust({
+const charm = new Ability("Charm");
+charm.Short = () => "Try to dissuade the enemy from attacking you.";
+charm.cost = { hp: undefined, sp: 10, lp: 10};
+charm.cooldown = 1;
+charm.castTree.push(AbilityNode.Template.Lust({
 	atkMod: 0.3,
 	damageType: {lust: 1},
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
@@ -349,11 +347,11 @@ SeductionAb.Charm.castTree.push(AbilityNode.Template.Lust({
 	onAbsorb: [Defaults.Seduction._onAbsorb],
 }));
 
-SeductionAb.Allure = new Ability("Allure");
-SeductionAb.Allure.Short = () => "Try to dissuade the enemy from attacking you.";
-SeductionAb.Allure.cost = { hp: undefined, sp: 30, lp: 60};
-SeductionAb.Allure.cooldown = 2;
-SeductionAb.Allure.castTree.push(AbilityNode.Template.Lust({
+const allure = new Ability("Allure");
+allure.Short = () => "Try to dissuade the enemy from attacking you.";
+allure.cost = { hp: undefined, sp: 30, lp: 60};
+allure.cooldown = 2;
+allure.castTree.push(AbilityNode.Template.Lust({
 	damageType: {lust: 1},
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
@@ -375,10 +373,10 @@ SeductionAb.Allure.castTree.push(AbilityNode.Template.Lust({
 	onAbsorb: [Defaults.Seduction._onAbsorb],
 }));
 
-SeductionAb.Inflame = new Ability("Inflame");
-SeductionAb.Inflame.Short = () => "Greatly arouse the passions of a single foe with the power of song.";
-SeductionAb.Inflame.cost = { hp: undefined, sp: undefined, lp: 25};
-SeductionAb.Inflame.castTree.push(AbilityNode.Template.Lust({
+const inflame = new Ability("Inflame");
+inflame.Short = () => "Greatly arouse the passions of a single foe with the power of song.";
+inflame.cost = { hp: undefined, sp: undefined, lp: 25};
+inflame.castTree.push(AbilityNode.Template.Lust({
 	atkMod: 2,
 	damageType: {lust: 1},
 	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
@@ -399,4 +397,21 @@ SeductionAb.Inflame.castTree.push(AbilityNode.Template.Lust({
 	}],
 }));
 
-export { SeductionAb };
+export namespace SeductionAb {
+	export const Sleep = sleep;
+	export const TIllusion = tIllusion;
+	export const SIllusion = sIllusion;
+	export const Confuse = confuse;
+	export const Rut = rut;
+	export const Fantasize = fantasize;
+	export const Soothe = soothe;
+	export const Captivate = captivate;
+	export const Lull = lull;
+	export const Tease = tease;
+	export const Seduce = seduce;
+	export const StripTease = stripTease;
+	export const Distract = distract;
+	export const Charm = charm;
+	export const Allure = allure;
+	export const Inflame = inflame;
+}

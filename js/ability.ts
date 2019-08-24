@@ -1,6 +1,7 @@
 import * as _ from "lodash";
 
 import { Encounter } from "./combat";
+import { DamageType, IDamageType } from "./damagetype";
 import { Entity } from "./entity";
 import { GAME } from "./GAME";
 import { Gui } from "./gui";
@@ -40,9 +41,50 @@ namespace TargetMode {
 	}
 }
 
+export interface IAbilityCost {
+	hp: number;
+	sp: number;
+	lp: number;
+}
+export interface IAbilityNode {
+	damageTypeNode?: DamageType;
+	damageType?: IDamageType;
+	cost?: IAbilityCost;
+
+	onCast?: CallableFunction[];
+	onHit?: CallableFunction[];
+	onMiss?: CallableFunction[];
+	onDamage?: CallableFunction[];
+	onAbsorb?: CallableFunction[];
+
+	nrAttacks?: number;
+	hitFallen?: boolean;
+
+	toHit?: CallableFunction;
+	toDamage?: CallableFunction;
+	hitFunc?: CallableFunction;
+	evadeFunc?: CallableFunction;
+	atkFunc?: CallableFunction;
+	defFunc?: CallableFunction;
+	damageFunc?: CallableFunction;
+	damagePool?: CallableFunction[];
+
+	hitMod?: number;
+	atkMod?: number;
+	defMod?: number;
+	// Run
+	fraction?: number;
+	// Spellstack
+	value?: Ability|CallableFunction;
+	stack?: Ability[];
+	consume?: boolean;
+	// Cancel
+	result?: any;
+}
+
 export class Ability {
 
-	public static EnabledCost(ab: any, caster: Entity) {
+	public static EnabledCost(ab: Ability|IAbilityNode, caster: Entity) {
 		if (_.isObject(ab.cost)) {
 			if (ab.cost.hp && ab.cost.hp > caster.curHp) { return false; }
 			if (ab.cost.sp && ab.cost.sp > caster.curSp) { return false; }
@@ -51,7 +93,7 @@ export class Ability {
 		return true;
 	}
 
-	public static ApplyCost(ab: any, caster: Entity) {
+	public static ApplyCost(ab: Ability|IAbilityNode, caster: Entity) {
 		if (_.isObject(ab.cost)) {
 			if (ab.cost.hp) { caster.curHp -= ab.cost.hp; }
 			if (ab.cost.sp) { caster.curSp -= ab.cost.sp; }
@@ -73,14 +115,15 @@ export class Ability {
 
 		return defFactor * atk * levelFactor;
 	}
-	public targetMode: any;
+	public targetMode: TargetMode;
 	public name: string;
-	public cost: any;
+	public cost: IAbilityCost;
 	public castTime: number;
 	public cancellable: any;
 	public cooldown: number;
-	public onCast: any[];
-	public castTree: any[];
+	public onCast: CallableFunction[];
+	public castTree: CallableFunction[];
+	public OOC: boolean;
 
 	constructor(name?: string) {
 		this.targetMode = TargetMode.Enemy;
@@ -341,7 +384,7 @@ export class Ability {
 
 	public OnCooldown(casterEntry: any) {
 		const ability = this;
-		let onCooldown = false;
+		let onCooldown = 0;
 		_.each(casterEntry.cooldown, (c) => {
 			if (ability === c.ability) {
 				onCooldown = c.cooldown;
@@ -372,7 +415,7 @@ export class Ability {
 
 export class AbilityCollection {
 	public name: string;
-	public AbilitySet: any[];
+	public AbilitySet: Ability[];
 	constructor(name: string) {
 		this.name = name;
 

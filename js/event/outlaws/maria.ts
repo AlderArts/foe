@@ -130,7 +130,7 @@ export class Maria extends Entity {
 			this.pots--;
 			CombatItems.HPotion.combat.Use(encounter, this, this);
 		} else if (choice < 0.2 && Abilities.Physical.SetTrap.enabledCondition(encounter, this) && trap === undefined) {
-			Abilities.Physical.SetTrap.Use(encounter, this);
+			Abilities.Physical.SetTrap.Use(encounter, this, this);
  		} else if (choice < 0.4 && Abilities.Physical.Hamstring.enabledCondition(encounter, this)) {
 			Abilities.Physical.Hamstring.Use(encounter, this, t);
  		} else if (choice < 0.6 && Abilities.Physical.FocusStrike.enabledCondition(encounter, this)) {

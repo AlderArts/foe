@@ -18,10 +18,26 @@ export enum Element {
 	numElements = 14,
 }
 
+export interface IDamageType {
+	pSlash  ?: number;
+	pBlunt  ?: number;
+	pPierce ?: number;
+	mVoid   ?: number;
+	mFire   ?: number;
+	mIce    ?: number;
+	mThunder?: number;
+	mEarth  ?: number;
+	mWater  ?: number;
+	mWind   ?: number;
+	mLight  ?: number;
+	mDark   ?: number;
+	mNature ?: number;
+	lust    ?: number;
+}
+
 export class DamageType {
 	public dmg: number[];
-	constructor(type?: any) {
-		type = type || {};
+	constructor(type: IDamageType = {}) {
 		this.dmg = [];
 		this.dmg[Element.pSlash]   = type.pSlash   || 0;
 		this.dmg[Element.pBlunt]   = type.pBlunt   || 0;
@@ -39,13 +55,13 @@ export class DamageType {
 		this.dmg[Element.lust]     = type.lust     || 0;
 	}
 
-	public Add(other: any) {
+	public Add(other: DamageType) {
 		for (let i = 0; i < Element.numElements; i++) {
 			this.dmg[i] += other.dmg[i];
 		}
 	}
 
-	public ApplyDmgType(def: any, atkDmg: number) {
+	public ApplyDmgType(def: DamageType, atkDmg: number) {
 		let ret = 0;
 		for (let i = 0; i < Element.numElements; i++) {
 			let dmg = this.dmg[i] * atkDmg;

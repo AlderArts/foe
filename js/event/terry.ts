@@ -367,7 +367,7 @@ export class Terry extends Entity {
 		} else if (choice < 0.2 && Abilities.Physical.Kicksand.enabledCondition(encounter, this)) {
 			Abilities.Physical.Kicksand.Use(encounter, this, t);
 		} else if (choice < 0.4 && Abilities.Physical.Swift.enabledCondition(encounter, this)) {
-			Abilities.Physical.Swift.Use(encounter, this);
+			Abilities.Physical.Swift.Use(encounter, this, this);
 		} else if (choice < 0.6) {
 			CombatItems.PoisonDart.combat.Use(encounter, this, t);
 		} else if (choice < 0.8) {

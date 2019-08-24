@@ -130,12 +130,12 @@ export class GolQueen extends BossEntity {
 		const choice = Math.random();
 		if (choice < 0.2) { // TODO
 			Abilities.Attack.CastInternal(encounter, this, t);
-		} else if (choice < 0.4 && Abilities.EnemySkill.GolPollen.enabledCondition(encounter, this)) {
-			Abilities.EnemySkill.GolPollen.Use(encounter, this, party);
-		} else if (choice < 0.55 && Abilities.EnemySkill.GolLustyPheromones.enabledCondition(encounter, this)) {
-			Abilities.EnemySkill.GolLustyPheromones.Use(encounter, this, t);
-		} else if (choice < 0.7 && Abilities.EnemySkill.GolCuntDash.enabledCondition(encounter, this)) {
-			Abilities.EnemySkill.GolCuntDash.Use(encounter, this, t);
+		} else if (choice < 0.4 && Abilities.EnemySkill.GolQueen.Pollen.enabledCondition(encounter, this)) {
+			Abilities.EnemySkill.GolQueen.Pollen.Use(encounter, this, party);
+		} else if (choice < 0.55 && Abilities.EnemySkill.GolQueen.LustyPheromones.enabledCondition(encounter, this)) {
+			Abilities.EnemySkill.GolQueen.LustyPheromones.Use(encounter, this, t);
+		} else if (choice < 0.7 && Abilities.EnemySkill.GolQueen.CuntDash.enabledCondition(encounter, this)) {
+			Abilities.EnemySkill.GolQueen.CuntDash.Use(encounter, this, t);
 		} else if (choice < 0.8 && Abilities.Physical.DAttack.enabledCondition(encounter, this)) {
 			Abilities.Physical.DAttack.Use(encounter, this, t);
 		} else if (choice < 0.9 && Abilities.Physical.GrandSlam.enabledCondition(encounter, this)) {

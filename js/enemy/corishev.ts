@@ -129,7 +129,7 @@ export class Corishev extends BossEntity {
  		} else if (choice < 0.4 && Abilities.EnemySkill.Corishev.WideStrike.enabledCondition(encounter, this)) {
 			Abilities.EnemySkill.Corishev.WideStrike.Use(encounter, this, party);
  		} else if (choice < 0.8 && activeChar.entity.LustLevel() < 0.5 && Abilities.EnemySkill.Corishev.SelfHarm.enabledCondition(encounter, this)) {
-			Abilities.EnemySkill.Corishev.SelfHarm.Use(encounter, this);
+			Abilities.EnemySkill.Corishev.SelfHarm.Use(encounter, this, this);
  		} else {
 			Abilities.EnemySkill.Corishev.Whip.Use(encounter, this, t);
  		}
