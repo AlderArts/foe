@@ -1,6 +1,6 @@
 
 import { Abilities } from "./abilities";
-import { AbilityCollection } from "./ability";
+import { Ability, AbilityCollection } from "./ability";
 import { Entity } from "./entity";
 import { GlobalScenes } from "./event/global";
 import { MirandaFlags } from "./event/miranda-flags";
@@ -14,10 +14,15 @@ import { Text } from "./text";
 
 const Jobs: any = {};
 
+interface IJobPreq {
+	job: Job;
+	lvl: number;
+}
+
 export class Job {
 	public name: string;
-	public levels: any[];
-	public preqs: any[];
+	public levels: JobLevel[];
+	public preqs: IJobPreq[];
 	public abilities: AbilityCollection;
 
 	constructor(name: string) {
@@ -37,7 +42,7 @@ export class Job {
 	public AddExp(entity: Entity, exp?: number, reserve?: boolean) {
 		// Check for undefined arguments and broken links
 		if (entity === undefined) { return; }
-		const jd = entity.jobs[this.name];
+		const jd: JobDesc = entity.jobs[this.name];
 		if (jd === undefined) { return; }
 		exp = exp || 0;
 		// Check for maxed out job
@@ -120,7 +125,7 @@ export class Job {
 	public Master(entity: Entity) {
 		// Check for undefined references
 		if (entity === undefined) { return false; }
-		const jd = entity.jobs[this.name];
+		const jd: JobDesc = entity.jobs[this.name];
 		if (jd === undefined) { return false; }
 		// Check if current level is same or higher than max level
 		return (jd.level > this.levels.length);
@@ -135,8 +140,8 @@ export class Job {
 			const lvl = preq.lvl || 1;
 
 			if (job) {
-				const jd = entity.jobs[job.name];
-				if (jd === undefined) {     return false; }
+				const jd: JobDesc = entity.jobs[job.name];
+				if (jd === undefined) { return false; }
 				if (jd.level < lvl) { return false; }
 			}
 		}
@@ -172,12 +177,30 @@ export class JobDesc {
 	}
 }
 
+interface IJobSkill {
+	ab: Ability;
+	set: string;
+}
+
+interface IJobBonus {
+	hp?: number;
+	sp?: number;
+	lp?: number;
+	str?: number;
+	sta?: number;
+	dex?: number;
+	int?: number;
+	spi?: number;
+	lib?: number;
+	cha?: number;
+}
+
 export class JobLevel {
 	public expToLevel: number;
-	public skills: any[];
-	public bonus: any;
-	public func: any;
-	constructor(expToLevel: number, skills: any[], bonus: any, func?: any) {
+	public skills: IJobSkill[];
+	public bonus: IJobBonus;
+	public func: CallableFunction;
+	constructor(expToLevel: number, skills: IJobSkill[], bonus: IJobBonus, func?: CallableFunction) {
 		this.expToLevel = expToLevel;
 		this.skills     = skills; // [ { ab: Ablities.Black.Fireball, set: "Spells" }, ... ]
 		this.bonus      = bonus;  // { str: 0.1, int: 0.2 ...}
