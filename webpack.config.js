@@ -22,7 +22,8 @@ module.exports = {
     new CopyWebpackPlugin([
         './foe.html',
         './changelog',
-        {from:'assets/css',to:'assets/css'}
+        {from:'assets/css',to:'assets/css'},
+        {from:'assets/fonts',to:'assets/fonts'}
     ]),
     new MiniCssExtractPlugin({
       filename: "[name].css",
