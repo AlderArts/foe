@@ -78,7 +78,7 @@ export class StatusList {
 		}
 	};
 
-	public Render = function(obj: any) {
+	public Render = function(obj: any[]) {
 		let j = 0;
 
 		for (let i = 0; i < StatusEffect.LAST; i++) {

@@ -8,6 +8,7 @@ import { Color } from "../../body/color";
 import { Entity } from "../../entity";
 import { GAME, WorldTime } from "../../GAME";
 import { JobDesc, Jobs } from "../../job";
+import { ILocation } from "../../location";
 import { Time } from "../../time";
 import { CvetaFlags } from "./cveta-flags";
 
@@ -113,7 +114,7 @@ export class Cveta extends Entity {
 	}
 
 	// Schedule TODO
-	public IsAtLocation(location?: any) {
+	public IsAtLocation(location?: ILocation) {
 		location = location || GAME().party.location;
 		return true;
 	}

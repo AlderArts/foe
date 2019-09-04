@@ -12,6 +12,7 @@ import { Entity } from "../../entity";
 import { Sex } from "../../entity-sex";
 import { GAME, MoveToLocation, StepToHour, TimeStep, WORLD, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
+import { ILocation } from "../../location";
 import { Party } from "../../party";
 import { PregnancyHandler, Womb } from "../../pregnancy";
 import { Text } from "../../text";
@@ -94,7 +95,7 @@ export class Isla extends Entity {
 	}
 
 	// Schedule
-	public IsAtLocation(location?: any) {
+	public IsAtLocation(location?: ILocation) {
 		return true;
 	}
 

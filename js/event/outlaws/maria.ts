@@ -9,6 +9,7 @@ import { Color } from "../../body/color";
 import { Entity } from "../../entity";
 import { GAME, WORLD, WorldTime } from "../../GAME";
 import { CombatItems } from "../../items/combatitems";
+import { ILocation } from "../../location";
 import { StatusEffect } from "../../statuseffect";
 import { Text } from "../../text";
 import { Time } from "../../time";
@@ -95,7 +96,7 @@ export class Maria extends Entity {
 	}
 
 	// Schedule
-	public IsAtLocation(location?: any) {
+	public IsAtLocation(location?: ILocation) {
 		location = location || GAME().party.location;
 		if (location === WORLD().loc.Outlaws.Camp) {
 			return (WorldTime().hour >= 7 && WorldTime().hour < 22);

@@ -21,6 +21,7 @@ import { PlainsLoc } from "./loc/plains";
 import { InitRigard } from "./loc/rigard/rigard";
 import { RigardLoc } from "./loc/rigard/rigard-scenes";
 import { TreeCityLoc } from "./loc/treecity/treecity";
+import { ILocation } from "./location";
 
 export function InitWorld() {
 	const world = WORLD();
@@ -44,7 +45,7 @@ export function InitWorld() {
 		LightAspect,
 	};
 
-	world.CurrentLocation = (loc?: any) => {
+	world.CurrentLocation = (loc?: ILocation) => {
 		loc = loc || GAME().party.location;
 
 		if     (loc === PlainsLoc.Crossroads) {

@@ -16,7 +16,7 @@ import { Text } from "./text";
 export namespace Alchemy {
 
 	// callback in the form of function(item)
-	export function Prompt(alchemist?: Entity, inventory?: Inventory, backPrompt?: any, callback?: any, preventClear?: boolean) {
+	export function Prompt(alchemist?: Entity, inventory?: Inventory, backPrompt?: CallableFunction, callback?: CallableFunction, preventClear?: boolean) {
 		alchemist  = alchemist  || new Entity();
 		inventory  = inventory  || new Inventory();
 
@@ -78,7 +78,7 @@ export namespace Alchemy {
 			Text.Add(it._recipeStr);
 		});
 
-		Gui.SetButtonsFromList(list, backPrompt, backPrompt);
+		Gui.SetButtonsFromList(list, backPrompt !== undefined, backPrompt);
 		Text.Flush();
 	}
 }
@@ -203,7 +203,7 @@ function CountBrewable(it: Item, inventory: Inventory, alchemist: Entity) {
 			return sum += qty;
 		}, 0),
 		steps: productionSteps,
-		brewFn(batchSize: number, backPrompt: any, callback: any, mockRemove: boolean) {
+		brewFn(batchSize: number, backPrompt: CallableFunction, callback: CallableFunction, mockRemove: boolean) {
 			let amountProduced = 0;
 			productionSteps.some((step) => {
 				const qty = Math.min(batchSize - amountProduced, step.qty);

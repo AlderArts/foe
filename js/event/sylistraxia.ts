@@ -9,6 +9,7 @@ import { Race } from "../body/race";
 import { Entity } from "../entity";
 import { GAME, NAV } from "../GAME";
 import { Gui } from "../gui";
+import { ILocation } from "../location";
 import { Text } from "../text";
 
 export class Sylistraxia extends Entity {
@@ -69,7 +70,7 @@ export class Sylistraxia extends Entity {
 	}
 
 	// Schedule
-	public IsAtLocation(location?: any) {
+	public IsAtLocation(location?: ILocation) {
 		return true;
 	}
 

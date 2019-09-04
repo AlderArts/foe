@@ -10,6 +10,12 @@ export namespace Unit {
 	export function KgToPound(kg: number) { return kg * 2.2; }
 }
 
+interface IGenerateFileOpts {
+	script: string;
+	filename: string;
+	content: string;
+}
+
 /*
 	$.generateFile({
 		filename	: 'export.txt',
@@ -18,7 +24,7 @@ export namespace Unit {
 	});
  */
 // Download script, used for save to file. Calls download.php
-let GenerateFile: any = (options: any) => {
+let GenerateFile: any = (options: IGenerateFileOpts) => {
 	options.script = options.script || "download.php";
 
 	if (!options.filename || !options.content) {
@@ -91,7 +97,7 @@ GenerateFile.canSaveOffline = false;
 		return;
 	}
 	// if no exceptions are thrown, we simply replace the GenerateFile function with this one
-	GenerateFile = (options: any) => {
+	GenerateFile = (options: IGenerateFileOpts) => {
 		if (!options.filename || !options.content) {
 			throw new Error("Please enter all the required config options!");
 		}

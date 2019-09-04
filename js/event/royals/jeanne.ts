@@ -8,6 +8,7 @@ import { Entity } from "../../entity";
 import { GAME } from "../../GAME";
 import { AlchemyItems } from "../../items/alchemy";
 import { AlchemySpecial } from "../../items/alchemyspecial";
+import { ILocation } from "../../location";
 import { RosalinFlags } from "../nomads/rosalin-flags";
 
 export class Jeanne extends Entity {
@@ -86,7 +87,7 @@ export class Jeanne extends Entity {
 	}
 
 	// Schedule
-	public IsAtLocation(location?: any) {
+	public IsAtLocation(location?: ILocation) {
 		return true;
 	}
 }

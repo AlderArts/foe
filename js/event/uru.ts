@@ -8,6 +8,7 @@ import { AppendageType } from "../body/appendage";
 import { Color } from "../body/color";
 import { Race } from "../body/race";
 import { Entity } from "../entity";
+import { ILocation } from "../location";
 import { TF } from "../tf";
 
 export class Uru extends Entity {
@@ -79,7 +80,7 @@ export class Uru extends Entity {
 	}
 
 	// Schedule
-	public IsAtLocation(location?: any) {
+	public IsAtLocation(location?: ILocation) {
 		return true;
 	}
 

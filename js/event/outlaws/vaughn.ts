@@ -7,6 +7,7 @@ import { Color } from "../../body/color";
 import { Race } from "../../body/race";
 import { Entity } from "../../entity";
 import { GAME, WORLD, WorldTime } from "../../GAME";
+import { ILocation } from "../../location";
 import { Time } from "../../time";
 import { VaughnFlags } from "./vaughn-flags";
 import { VaughnTasksScenes } from "./vaughn-tasks";
@@ -74,7 +75,7 @@ export class Vaughn extends Entity {
 	}
 
 	// Schedule
-	public IsAtLocation(location?: any) {
+	public IsAtLocation(location?: ILocation) {
 		location = location || GAME().party.location;
 		if (location === WORLD().loc.Outlaws.Camp) {
 			return (WorldTime().hour >= 18 || WorldTime().hour < 6);

@@ -15,6 +15,7 @@ import { Item } from "../item";
 import { ArmorItems } from "../items/armor";
 import { WeaponsItems } from "../items/weapons";
 import { JobDesc, Jobs } from "../job";
+import { ILocation } from "../location";
 import { Text } from "../text";
 import { KiakaiFlags } from "./kiakai-flags";
 import { KiakaiScenes } from "./kiakai-scenes";
@@ -150,7 +151,7 @@ export class Kiakai extends Entity {
 	}
 
 	// Schedule
-	public IsAtLocation(location?: any) {
+	public IsAtLocation(location?: ILocation) {
 		return true;
 	}
 

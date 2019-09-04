@@ -5,6 +5,7 @@
  */
 import { Color } from "../body/color";
 import { Entity } from "../entity";
+import { ILocation } from "../location";
 
 export class Aria extends Entity {
 	constructor(storage?: any) {
@@ -45,7 +46,7 @@ export class Aria extends Entity {
 	}
 
 	// Schedule
-	public IsAtLocation(location?: any) {
+	public IsAtLocation(location?: ILocation) {
 		return true;
 	}
 }

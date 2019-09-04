@@ -10,6 +10,7 @@ import { Gui } from "../../gui";
 import { Item, ItemIds } from "../../item";
 import { IngredientItems } from "../../items/ingredients";
 import { Jobs } from "../../job";
+import { ILocation } from "../../location";
 import { Party } from "../../party";
 import { Text } from "../../text";
 import { Time } from "../../time";
@@ -87,7 +88,7 @@ export class Aquilius extends Entity {
 	}
 
 	// Schedule TODO
-	public IsAtLocation(location?: any) {
+	public IsAtLocation(location?: ILocation) {
 		location = location || GAME().party.location;
 		if (location === WORLD().loc.Outlaws.Infirmary) {
 			return (WorldTime().hour >= 7 && WorldTime().hour < 22);

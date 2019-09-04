@@ -11,6 +11,8 @@ import { Images } from "./assets";
 import { gameState, GameState, SetGameState } from "./gamestate";
 import { Text } from "./text";
 
+export type Tooltip = ((obj: any) => string) | string;
+
 export class Button {
 	public Gui: any;
 	public enabledImage: any;
@@ -19,7 +21,7 @@ export class Button {
 	public enabled: boolean;
 	public func: CallableFunction;
 	public obj: any;
-	public tooltip: any;
+	public tooltip: Tooltip;
 	public key: number;
 	public state: GameState;
 	public oldEnImagePath: any;
@@ -186,7 +188,7 @@ export class Button {
 	/*
 	 * This function is used to set the state of a button after it is created
 	 */
-	public Setup(text: string, func: CallableFunction, enabled: boolean, obj?: any, tooltip?: any, state?: GameState) {
+	public Setup(text: string, func: CallableFunction, enabled: boolean, obj?: any, tooltip?: Tooltip, state?: GameState) {
 		this.SetText(text);
 		this.func    = func;
 		this.obj     = obj;

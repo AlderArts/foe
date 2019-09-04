@@ -14,6 +14,7 @@ import { GAME, WORLD } from "./GAME";
 import { GameState, SetGameState } from "./gamestate";
 import { Gui } from "./gui";
 import { Inventory } from "./inventory";
+import { ILocation } from "./location";
 import { Text } from "./text";
 
 export class Party {
@@ -22,7 +23,7 @@ export class Party {
 	public saved: Entity[];
 	public temp: Entity[];
 	public coin: number;
-	public location: any;
+	public location: ILocation;
 	public inventory: Inventory;
 
 	constructor(storage?: any) {
@@ -343,7 +344,7 @@ export class Party {
 		}
 	}
 
-	public Interact(preventClear?: boolean, switchSpot?: boolean, back?: any) {
+	public Interact(preventClear?: boolean, switchSpot?: boolean, back?: CallableFunction) {
 		const parse: any = {
 
 		};
@@ -433,7 +434,7 @@ export class Party {
 		// Don't sort, use same order as in menu
 		// list.sort( function(a, b) { return a.nameStr > b.nameStr; } );
 
-		Gui.SetButtonsFromList(list, back, false, GameState.Event);
+		Gui.SetButtonsFromList(list, back !== undefined, back, GameState.Event);
 
 		Text.Flush();
 	}

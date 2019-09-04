@@ -4,6 +4,7 @@
  *
  */
 import { Entity } from "../../entity";
+import { ILocation } from "../../location";
 
 export namespace ChesFlags {
 	export enum Met {
@@ -51,7 +52,7 @@ export class Ches extends Entity {
 	// Flags
 
 	// Schedule
-	public IsAtLocation(location?: any) {
+	public IsAtLocation(location?: ILocation) {
 		return true;
 	}
 }

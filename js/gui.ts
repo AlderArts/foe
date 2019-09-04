@@ -568,7 +568,7 @@ export class Gui {
 		}
 	}
 
-	public static SetButtonsFromList(list: any[], backEnabled?: boolean, backFunc: any = Gui.PrintDefaultOptions, state?: GameState, backState?: GameState) {
+	public static SetButtonsFromList(list: any[], backEnabled?: boolean, backFunc: CallableFunction = Gui.PrintDefaultOptions, state?: GameState, backState?: GameState) {
 		Gui.ClearButtons();
 		let currentPage = 0;
 

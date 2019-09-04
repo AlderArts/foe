@@ -8,6 +8,7 @@ import { EncounterTable } from "../../encountertable";
 import { Entity } from "../../entity";
 import { GAME } from "../../GAME";
 import { Gui } from "../../gui";
+import { ILocation } from "../../location";
 import { Party } from "../../party";
 import { Text } from "../../text";
 import { BastetScenes } from "./bastet";
@@ -59,7 +60,7 @@ export class Lucille extends Entity {
 	// Flags
 
 	// Schedule TODO
-	public IsAtLocation(location?: any) {
+	public IsAtLocation(location?: ILocation) {
 		return true;
 	}
 }

@@ -8,6 +8,7 @@ import { Color } from "../body/color";
 import { Race } from "../body/race";
 import { Entity } from "../entity";
 import { GAME } from "../GAME";
+import { ILocation } from "../location";
 import { TF } from "../tf";
 
 export class Zina extends Entity {
@@ -90,7 +91,7 @@ export class Zina extends Entity {
 	}
 
 	// Schedule
-	public IsAtLocation(location?: any) {
+	public IsAtLocation(location?: ILocation) {
 		location = location || GAME().party.location;
 		return true;
 	}

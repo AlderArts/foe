@@ -12,6 +12,7 @@ import { Entity } from "../entity";
 import { GAME, MoveToLocation, TimeStep, WORLD } from "../GAME";
 import { WorldTime } from "../GAME";
 import { Gui } from "../gui";
+import { ILocation } from "../location";
 import { Party } from "../party";
 import { Status } from "../statuseffect";
 import { Text } from "../text";
@@ -112,7 +113,7 @@ export class Momo extends Entity {
 	}
 
 	// Schedule
-	public IsAtLocation(location?: any) {
+	public IsAtLocation(location?: ILocation) {
 		location = location || GAME().party.location;
 		if (location === WORLD().loc.Plains.Nomads.Fireplace && this.AtCamp() && WorldTime().hour >= 4 && WorldTime().hour < 21) {
 			return true;

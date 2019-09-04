@@ -12,6 +12,7 @@ import { EncounterTable } from "../encountertable";
 import { Entity } from "../entity";
 import { GAME, MoveToLocation, TimeStep, WORLD, WorldTime } from "../GAME";
 import { Gui } from "../gui";
+import { ILocation } from "../location";
 import { Text } from "../text";
 import { TF } from "../tf";
 import { Time } from "../time";
@@ -99,7 +100,7 @@ export class Fera extends Entity {
 	}
 
 	// Schedule
-	public IsAtLocation(location?: any) {
+	public IsAtLocation(location?: ILocation) {
 		return true;
 	}
 }

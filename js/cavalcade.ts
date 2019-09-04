@@ -5,7 +5,7 @@ import { GAME, SetCavalcade } from "./GAME";
 import { GameState, SetGameState } from "./gamestate";
 import { Gui } from "./gui";
 import { Input } from "./input";
-import { CardItems } from "./items/cards";
+import { CardItem, CardItems, CardSuit } from "./items/cards";
 import { Party } from "./party";
 import { Text } from "./text";
 import { Rand } from "./utility";
@@ -61,16 +61,16 @@ export class Cavalcade {
 		// Dunno
 		return 0;
 	}
-	public Deck: any[];
+	public Deck: CardItem[];
 	public players: any[];
-	public stag: any;
+	public stag: CardItem;
 	public NextRound: any;
 	public onPost: any;
 	public token: any;
 	public round: number;
 	public bet: number;
 	public pot: number;
-	public house: any[];
+	public house: CardItem[];
 
 	constructor(players: any[], opts?: any) {
 		opts = opts || {};
@@ -144,7 +144,7 @@ export class Cavalcade {
 			});
 			// TODO: TEMP
 			Text.Add("[Poss] hand:<br>", {Poss: p.Possessive()});
-			_.each(p.hand, (h: any, key: any) => {
+			_.each(p.hand, (h: CardItem, key: any) => {
 				if (key > 0) {
 					Text.Add(", ");
 				}
@@ -160,7 +160,7 @@ export class Cavalcade {
 	}
 
 	// Hand is a collection of five cards
-	public EvaluateHand(hand: any) {
+	public EvaluateHand(hand: CardItem[]) {
 		if (!hand || hand.length !== 5) { return; }
 		// Evaluate cards from best to worst hand
 
@@ -266,11 +266,11 @@ export class Cavalcade {
 		return {};
 	}
 
-	public SuitStr(suit: number) {
+	public SuitStr(suit: CardSuit) {
 		switch (suit) {
-			case 0: return "Light";
-			case 1: return "Darkness";
-			case 2: return "Shadow";
+			case CardSuit.Light: return "Light";
+			case CardSuit.Darkness: return "Darkness";
+			case CardSuit.Shadow: return "Shadow";
 		}
 	}
 

@@ -10,7 +10,7 @@ export class Stat {
 	public growth: number;
 	public growthStep: number;
 	public growthBase: number;
-	public debug: any;
+	public debug: () => string;
 
 	constructor(base?: number, growth?: number, growthStep?: number) {
 		this.base   = base || 0; // Base stat, increased by levelling and TFs

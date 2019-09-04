@@ -9,7 +9,7 @@ import { GAME, TimeStep } from "./GAME";
 import { GameState, SetGameState } from "./gamestate";
 import { Gui } from "./gui";
 import { Input } from "./input";
-import { IItemQuantity } from "./inventory";
+import { IItemQuantity } from "./item";
 import { Party } from "./party";
 import { StatusEffect } from "./statuseffect";
 import { Text } from "./text";
@@ -32,18 +32,18 @@ interface ICombatOrder {
 // Create encounter with a Party() containing enemies
 export class Encounter {
 
-	public static InitiativeSorter(a: any, b: any) {
+	public static InitiativeSorter(a: ICombatOrder, b: ICombatOrder) {
 		if (a.entity.Incapacitated() && b.entity.Incapacitated()) { return 0; }
 		if (b.entity.Incapacitated()) { return -1; }
 		if (a.entity.Incapacitated()) { return 1; }
 		return (a.initiative > b.initiative) ? -1 : 1;
 	}
 	public canRun: boolean;
-	public onEncounter: any;
-	public onTick: any;
+	public onEncounter: CallableFunction;
+	public onTick: CallableFunction;
 	public enemy: Party;
 	public combatOrder: ICombatOrder[];
-	public Callstack: any[];
+	public Callstack: CallableFunction[];
 	public uniqueID: number;
 
 	constructor(enemy: Party) {
@@ -195,7 +195,7 @@ export class Encounter {
 		return p;
 	}
 
-	public SetButtons(activeChar: any, combatScreen: any) {
+	public SetButtons(activeChar: ICombatOrder, combatScreen: () => void) {
 		const entity = activeChar.entity;
 		const encounter = this;
 
@@ -508,7 +508,14 @@ export class Encounter {
 				Text.Add("Turn order:<br>", undefined, "bold");
 				Text.Add(entityName + "<br>", undefined, "bold");
 
-				const tempParty: any[] = [];
+				interface ICombatOrderSort {
+					entry: ICombatOrder;
+					name: string;
+					ini: number;
+					inc: number;
+				}
+
+				const tempParty: ICombatOrderSort[] = [];
 				_.each(enc.combatOrder, (c) => {
 					if (!c.entity.Incapacitated()) {
 						entityName = c.entity.uniqueName ? c.entity.uniqueName : c.entity.name;
@@ -517,7 +524,7 @@ export class Encounter {
 				});
 
 				_.times(8, () => {
-					let found: any;
+					let found: ICombatOrderSort;
 					while (!found) {
 						_.each(tempParty, (c) => {
 							if (c.ini >= 100) {

@@ -1,12 +1,13 @@
+import { Tooltip } from "./button";
 import { Gui } from "./gui";
 import { Input } from "./input";
 
-let SplashScreen: any;
-export function InitGameOver(splashScreen: any) {
+let SplashScreen: () => void;
+export function InitGameOver(splashScreen: () => void) {
     SplashScreen = splashScreen;
 }
 
-export function SetGameOverButton(text?: any) {
+export function SetGameOverButton(text?: Tooltip) {
 	text = text || "This is where your journey comes to an end.";
 	Gui.ClearButtons();
 	Input.buttons[0].Setup("Game Over", GameOver, true, undefined, text);

@@ -4,6 +4,7 @@
  *
  */
 
+import { Entity } from "./entity";
 import { GAME } from "./GAME";
 import { GameState, SetGameState } from "./gamestate";
 import { Gui } from "./gui";
@@ -19,7 +20,7 @@ import { Text } from "./text";
  *
  */
 export class PrisonMinigame {
-	public party: any[];
+	public party: Entity[];
 	public enemy: Party;
 
 	constructor(opts?: any) {

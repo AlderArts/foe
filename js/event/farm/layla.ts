@@ -9,6 +9,7 @@ import { Color } from "../../body/color";
 import { Entity } from "../../entity";
 import { GAME, WORLD, WorldTime } from "../../GAME";
 import { JobDesc, Jobs } from "../../job";
+import { ILocation } from "../../location";
 import { Time } from "../../time";
 import { LaylaFlags } from "./layla-flags";
 import { LaylaScenes } from "./layla-scenes";
@@ -121,7 +122,7 @@ export class Layla extends Entity {
 	}
 
 	// Schedule
-	public IsAtLocation(location?: any) {
+	public IsAtLocation(location?: ILocation) {
 		location = location || GAME().party.location;
 		if (location === WORLD().loc.Farm.Fields) {
 			return (WorldTime().hour >= 7 && WorldTime().hour < 22);

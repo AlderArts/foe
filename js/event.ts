@@ -3,9 +3,10 @@ import * as _ from "lodash";
 import { Images } from "./assets";
 import { EncounterTable } from "./encountertable";
 import { DreamsScenes } from "./event/dreams";
-import { GAME, StepToHour, TimeStep, WORLD } from "./GAME";
+import { GAME, StepToHour, TimeStep } from "./GAME";
 import { GameState, SetGameState } from "./gamestate";
 import { Gui } from "./gui";
+import { ILocation } from "./location";
 import { Text } from "./text";
 
 /*
@@ -17,7 +18,7 @@ import { Text } from "./text";
  *
  */
 
-export class Event {
+export class Event implements ILocation {
 	public nameFunc: any;
 	public description: any;
 	public endDescription: any;
@@ -107,7 +108,7 @@ export class Event {
 		});
 	}
 
-	public WaitFunc = () => {
+	public WaitFunc() {
 		SetGameState(GameState.Event, Gui);
 		Text.Clear();
 		Text.Add("How long do you want to wait?");
@@ -203,7 +204,7 @@ export class Event {
 		});
 	}
 
-	public DrunkHandler = () => {
+	public DrunkHandler() {
 		const parse: any = {};
 		const comp = GAME().party.GetRandom();
 		Text.Clear();

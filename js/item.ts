@@ -5,6 +5,11 @@ import { Entity } from "./entity";
 import { Status, StatusEffect } from "./statuseffect";
 import { Text } from "./text";
 
+export interface IItemQuantity {
+	it: Item;
+	num?: number;
+}
+
 const ItemIds: any = {};
 // Represents the overall category an item falls under.
 export enum ItemType {
@@ -38,7 +43,7 @@ export class Item {
 	public image: any;
 	public price: number;
 	public subtype: ItemSubtype;
-	public recipe: any[];
+	public recipe: IItemQuantity[];
 	public Use: any;
 	public effect: any;
 	public isTF: boolean;

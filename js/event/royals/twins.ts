@@ -9,6 +9,7 @@ import { Entity } from "../../entity";
 import { GAME, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
 import { RigardFlags } from "../../loc/rigard/rigard-flags";
+import { ILocation } from "../../location";
 import { Text } from "../../text";
 import { Time } from "../../time";
 import { TerryFlags } from "../terry-flags";
@@ -67,7 +68,7 @@ export class Twins {
 	}
 
 	// Schedule
-	public IsAtLocation(location?: any) {
+	public IsAtLocation(location?: ILocation) {
 		return true;
 	}
 }

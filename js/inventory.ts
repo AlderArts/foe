@@ -5,14 +5,9 @@ import { Encounter } from "./combat";
 import { Entity } from "./entity";
 import { GAME } from "./GAME";
 import { Gui } from "./gui";
-import { compareItemByProp, Item, ItemIds, ItemSubtype, ItemType } from "./item";
+import { compareItemByProp, IItemQuantity, Item, ItemIds, ItemSubtype, ItemType } from "./item";
 import { CombatItem } from "./items/combatitems";
 import { Text } from "./text";
-
-export interface IItemQuantity {
-	it: Item;
-	num: number;
-}
 
 // Inventory
 export class Inventory {

@@ -8,6 +8,8 @@ import * as _ from "lodash";
 
 import { Appendage, AppendageType } from "./body/appendage";
 import { Balls } from "./body/balls";
+import { BodyPart } from "./body/bodypart";
+import { Color } from "./body/color";
 import { Genitalia } from "./body/genitalia";
 import { RaceDesc } from "./body/race";
 import { Entity } from "./entity";
@@ -25,7 +27,7 @@ export namespace TF {
 	}
 
 	// Change of bodyparts, return if something was changed
-	export function SetRaceOne(bodypart: any, race: RaceDesc, ret?: any) {
+	export function SetRaceOne(bodypart: BodyPart|BodyPart[], race: RaceDesc, ret?: any) {
 		ret = ret || {};
 		let changed = Effect.Unchanged;
 		if (_.isArray(bodypart)) {
@@ -49,7 +51,7 @@ export namespace TF {
 		return changed;
 	}
 
-	export function SetRaceAll(bodypart: any, race: RaceDesc) {
+	export function SetRaceAll(bodypart: BodyPart|BodyPart[], race: RaceDesc) {
 		let changed: any = Effect.Unchanged;
 		if (_.isArray(bodypart)) {
 			const list = [];
@@ -70,7 +72,7 @@ export namespace TF {
 	}
 
 	// Will create a new appendage or replace an old one
-	export function SetAppendage(slots: any, type: any, race: RaceDesc, color: any, count?: number) {
+	export function SetAppendage(slots: Appendage[], type: AppendageType, race: RaceDesc, color: Color, count?: number) {
 		if (!_.isNumber(count)) {
 			count = 1;
 		}
@@ -93,7 +95,7 @@ export namespace TF {
 		return Effect.Added;
 	}
 
-	export function RemoveAppendage(slots: any, type: any, count: number) {
+	export function RemoveAppendage(slots: Appendage[], type: AppendageType, count: number) {
 		let all = false;
 		if (count < 0) {
 			all = true;
@@ -184,10 +186,34 @@ export namespace TF {
 	* .race : Race.X
 	* .str  : ex: "an equine cock"
 	*/
+	interface IItemEffectsOpts {
+		odds: number;
+		race: RaceDesc;
+		str: string;
+		count: number;
+	}
+
+	interface IItemEffectsModStat {
+		odds: number;
+		ideal: number;
+		max: number;
+	}
+
+	interface IItemEffectsModStatMulti extends IItemEffectsModStat {
+		multi: number;
+	}
+
+	interface IItemEffectsIdealStat {
+		odds: number;
+		rangeMin: number;
+		rangeMax: number;
+		max: number;
+	}
+
 	export namespace ItemEffects {
 
 		// odds, race, str
-		export function SetBody(target: Entity, opts: any) {
+		export function SetBody(target: Entity, opts: IItemEffectsOpts) {
 			let changed = Effect.Unchanged;
 			const parse   = { Poss: target.Possessive(), str: opts.str };
 			const odds    = opts.odds || 1;
@@ -203,7 +229,7 @@ export namespace TF {
 			return changed;
 		}
 
-		export function SetFace(target: Entity, opts: any) {
+		export function SetFace(target: Entity, opts: IItemEffectsOpts) {
 			let changed = Effect.Unchanged;
 			const parse   = { Poss: target.Possessive(), str: opts.str };
 			const odds    = opts.odds || 1;
@@ -219,7 +245,7 @@ export namespace TF {
 			return changed;
 		}
 
-		export function SetTongue(target: Entity, opts: any) {
+		export function SetTongue(target: Entity, opts: IItemEffectsOpts) {
 			let changed = Effect.Unchanged;
 			const parse   = { Poss: target.Possessive(), str: opts.str };
 			const odds    = opts.odds || 1;
@@ -236,7 +262,7 @@ export namespace TF {
 		}
 
 		// odds, race, str
-		export function SetArms(target: Entity, opts: any) {
+		export function SetArms(target: Entity, opts: IItemEffectsOpts) {
 			let changed = Effect.Unchanged;
 			const parse   = { Poss: target.Possessive(), str: opts.str };
 			const odds    = opts.odds || 1;
@@ -253,7 +279,7 @@ export namespace TF {
 		}
 
 		// odds, race, str, count
-		export function SetLegs(target: Entity, opts: any) {
+		export function SetLegs(target: Entity, opts: IItemEffectsOpts) {
 			let changed = Effect.Unchanged;
 			const parse   = { Poss: target.Possessive(), str: opts.str };
 			const odds    = opts.odds || 1;
@@ -271,7 +297,7 @@ export namespace TF {
 		}
 
 		// odds, race, str
-		export function SetCock(target: Entity, opts: any) {
+		export function SetCock(target: Entity, opts: IItemEffectsOpts) {
 			let changed = Effect.Unchanged;
 			const parse   = { poss: target.possessive(), Poss: target.Possessive(), str: opts.str };
 			const odds    = opts.odds || 1;
@@ -292,7 +318,7 @@ export namespace TF {
 		}
 
 		// odds, race, str
-		export function SetEars(target: Entity, opts: any) {
+		export function SetEars(target: Entity, opts: IItemEffectsOpts) {
 			let changed = Effect.Unchanged;
 			const parse   = { Poss: target.Possessive(), str: opts.str };
 			const odds    = opts.odds || 1;
@@ -359,19 +385,19 @@ export namespace TF {
 							Text.Add("The sheath protecting [poss] [cocks] disappears!", parse);
 						} else if (gen.cover === Genitalia.Cover.Slit) {
 							Text.Add("[Poss] genital slit slowly closes up, pushing [poss] [cocks] into the open!", parse);
- }
+ 						}
 					} else if (value === Genitalia.Cover.Sheath) {
 						if (gen.cover === Genitalia.Cover.NoCover) {
 							Text.Add("[Poss] [cocks] grow[notS] a sheath!", parse);
 						} else if (gen.cover === Genitalia.Cover.Slit) {
 							Text.Add("[Poss] genital slit coarsens into a sheath, covering [poss] [cocks]!", parse);
- }
+ 						}
 					} else if (value === Genitalia.Cover.Slit) {
 						if (gen.cover === Genitalia.Cover.NoCover) {
 							Text.Add("[Poss] [cocks] [is] enveloped in a protective genital slit!", parse);
 						} else if (gen.cover === Genitalia.Cover.Sheath) {
 							Text.Add("[Poss] sheath morphs into a protective genital slit, covering [poss] [cocks]!", parse);
- }
+ 						}
 					}
 					gen.SetCover(value);
 					Text.NL();
@@ -662,7 +688,7 @@ export namespace TF {
 		}
 
 		// odds, ideal, max
-		export function IncBallSize(target: Entity, opts: any) {
+		export function IncBallSize(target: Entity, opts: IItemEffectsModStat) {
 			const odds  = opts.odds || 1;
 			const parse: any = { Poss: target.Possessive() };
 			if (Math.random() < odds &&
@@ -675,7 +701,7 @@ export namespace TF {
 		}
 
 		// odds, ideal, max
-		export function DecBallSize(target: Entity, opts: any) {
+		export function DecBallSize(target: Entity, opts: IItemEffectsModStat) {
 			const odds  = opts.odds || 1;
 			const parse: any = { Poss: target.Possessive() };
 			if (Math.random() < odds &&
@@ -688,7 +714,7 @@ export namespace TF {
 		}
 
 		// odds, rangeMin, rangeMax, max
-		export function IdealBallSize(target: Entity, opts: any) {
+		export function IdealBallSize(target: Entity, opts: IItemEffectsIdealStat) {
 			const odds  = opts.odds || 1;
 			const parse: any = { Poss: target.Possessive() };
 			if (Math.random() < odds) {
@@ -728,7 +754,7 @@ export namespace TF {
 			Text.Flush();
 		}
 		// odds, ideal, max
-		export function DecBreastSize(target: Entity, opts: any) {
+		export function DecBreastSize(target: Entity, opts: IItemEffectsModStatMulti) {
 			const parse: any = { Poss: target.Possessive() };
 
 			const odds  = opts.odds || 1;
@@ -772,7 +798,7 @@ export namespace TF {
 		}
 
 		// odds, ideal, max
-		export function IncCockLen(target: Entity, opts: any) {
+		export function IncCockLen(target: Entity, opts: IItemEffectsModStatMulti) {
 			const parse: any = { Poss: target.Possessive() };
 
 			const odds  = opts.odds || 1;
@@ -790,7 +816,7 @@ export namespace TF {
 			Text.Flush();
 		}
 		// odds, ideal, max
-		export function DecCockLen(target: Entity, opts: any) {
+		export function DecCockLen(target: Entity, opts: IItemEffectsModStatMulti) {
 			const parse: any = { Poss: target.Possessive() };
 
 			const odds  = opts.odds || 1;
@@ -808,7 +834,7 @@ export namespace TF {
 			Text.Flush();
 		}
 		// odds, ideal, max
-		export function SetIdealCockLen(target: Entity, opts: any) {
+		export function SetIdealCockLen(target: Entity, opts: IItemEffectsModStatMulti) {
 			const parse: any = { Poss: target.Possessive() };
 
 			const odds  = opts.odds || 1;
@@ -831,7 +857,7 @@ export namespace TF {
 		}
 
 		// odds, ideal, max
-		export function IncCockThk(target: Entity, opts: any) {
+		export function IncCockThk(target: Entity, opts: IItemEffectsModStatMulti) {
 			const parse: any = { Poss: target.Possessive() };
 
 			const odds  = opts.odds || 1;
@@ -849,7 +875,7 @@ export namespace TF {
 			Text.Flush();
 		}
 		// odds, ideal, max
-		export function DecCockThk(target: Entity, opts: any) {
+		export function DecCockThk(target: Entity, opts: IItemEffectsModStatMulti) {
 			const parse: any = { Poss: target.Possessive() };
 
 			const odds  = opts.odds || 1;
@@ -867,7 +893,7 @@ export namespace TF {
 			Text.Flush();
 		}
 		// odds, ideal, max
-		export function SetIdealCockThk(target: Entity, opts: any) {
+		export function SetIdealCockThk(target: Entity, opts: IItemEffectsModStatMulti) {
 			const parse: any = { Poss: target.Possessive() };
 
 			const odds  = opts.odds || 1;
@@ -918,7 +944,7 @@ export namespace TF {
 		}
 
 		// odds, rangeMin, rangeMax, max
-		export function IdealFem(target: Entity, opts: any) {
+		export function IdealFem(target: Entity, opts: IItemEffectsIdealStat) {
 			const odds  = opts.odds || 1;
 			const parse: any = { name: target.NameDesc(), notS: target.plural() ? "" : "s" };
 			if (Math.random() < odds) {
@@ -936,7 +962,7 @@ export namespace TF {
 		}
 
 		// odds, ideal, max
-		export function IncTone(target: Entity, opts: any) {
+		export function IncTone(target: Entity, opts: IItemEffectsModStat) {
 			const odds  = opts.odds || 1;
 			const parse: any = { name: target.NameDesc(), notS: target.plural() ? "" : "s" };
 			if (Math.random() < odds &&
@@ -948,7 +974,7 @@ export namespace TF {
 		}
 
 		// odds, ideal, min
-		export function DecTone(target: Entity, opts: any) {
+		export function DecTone(target: Entity, opts: IItemEffectsModStat) {
 			const odds  = opts.odds || 1;
 			const parse: any = { name: target.NameDesc(), notS: target.plural() ? "" : "s" };
 			if (Math.random() < odds &&
@@ -960,7 +986,7 @@ export namespace TF {
 		}
 
 		// odds, rangeMin, rangeMax, max
-		export function IdealTone(target: Entity, opts: any) {
+		export function IdealTone(target: Entity, opts: IItemEffectsIdealStat) {
 			const odds  = opts.odds || 1;
 			const parse: any = { name: target.NameDesc(), notS: target.plural() ? "" : "s" };
 			if (Math.random() < odds) {
@@ -978,7 +1004,7 @@ export namespace TF {
 		}
 
 		// odds, ideal, max
-		export function IncHips(target: Entity, opts: any) {
+		export function IncHips(target: Entity, opts: IItemEffectsModStat) {
 			const odds  = opts.odds || 1;
 			const parse: any = { Poss: target.Possessive() };
 			if (Math.random() < odds &&
@@ -989,7 +1015,7 @@ export namespace TF {
 			Text.Flush();
 		}
 		// odds, ideal, min
-		export function DecHips(target: Entity, opts: any) {
+		export function DecHips(target: Entity, opts: IItemEffectsModStat) {
 			const odds  = opts.odds || 1;
 			const parse: any = { Poss: target.Possessive() };
 			if (Math.random() < odds &&
@@ -1000,7 +1026,7 @@ export namespace TF {
 			Text.Flush();
 		}
 		// odds, rangeMin, rangeMax, max
-		export function IdealHips(target: Entity, opts: any) {
+		export function IdealHips(target: Entity, opts: IItemEffectsIdealStat) {
 			const odds  = opts.odds || 1;
 			const parse: any = { Poss: target.Possessive() };
 			if (Math.random() < odds) {
@@ -1020,7 +1046,7 @@ export namespace TF {
 		// INC STATS
 
 		// odds, ideal, max
-		export function IncStr(target: Entity, opts: any) {
+		export function IncStr(target: Entity, opts: IItemEffectsModStat) {
 			const odds  = opts.odds || 1;
 			const parse: any = { name: target.NameDesc(), is: target.is() };
 			if (Math.random() < odds &&
@@ -1032,7 +1058,7 @@ export namespace TF {
 		}
 
 		// odds, ideal, max
-		export function IncSta(target: Entity, opts: any) {
+		export function IncSta(target: Entity, opts: IItemEffectsModStat) {
 			const odds  = opts.odds || 1;
 			const parse: any = { name: target.NameDesc(), is: target.is() };
 			if (Math.random() < odds &&
@@ -1044,7 +1070,7 @@ export namespace TF {
 		}
 
 		// odds, ideal, max
-		export function IncDex(target: Entity, opts: any) {
+		export function IncDex(target: Entity, opts: IItemEffectsModStat) {
 			const odds  = opts.odds || 1;
 			const parse: any = { name: target.NameDesc(), is: target.is() };
 			if (Math.random() < odds &&
@@ -1056,7 +1082,7 @@ export namespace TF {
 		}
 
 		// odds, ideal, max
-		export function IncInt(target: Entity, opts: any) {
+		export function IncInt(target: Entity, opts: IItemEffectsModStat) {
 			const odds  = opts.odds || 1;
 			const parse: any = { name: target.NameDesc(), is: target.is() };
 			if (Math.random() < odds &&
@@ -1068,7 +1094,7 @@ export namespace TF {
 		}
 
 		// odds, ideal, max
-		export function IncSpi(target: Entity, opts: any) {
+		export function IncSpi(target: Entity, opts: IItemEffectsModStat) {
 			const odds  = opts.odds || 1;
 			const parse: any = { name: target.NameDesc(), is: target.is() };
 			if (Math.random() < odds &&
@@ -1080,7 +1106,7 @@ export namespace TF {
 		}
 
 		// odds, ideal, max
-		export function IncLib(target: Entity, opts: any) {
+		export function IncLib(target: Entity, opts: IItemEffectsModStat) {
 			const odds  = opts.odds || 1;
 			const parse: any = { name: target.NameDesc(), is: target.is() };
 			if (Math.random() < odds &&
@@ -1092,7 +1118,7 @@ export namespace TF {
 		}
 
 		// odds, ideal, max
-		export function IncCha(target: Entity, opts: any) {
+		export function IncCha(target: Entity, opts: IItemEffectsModStat) {
 			const odds  = opts.odds || 1;
 			const parse: any = { name: target.NameDesc(), is: target.is() };
 			if (Math.random() < odds &&
@@ -1106,7 +1132,7 @@ export namespace TF {
 		// DEC STATS
 
 		// odds, ideal, max
-		export function DecStr(target: Entity, opts: any) {
+		export function DecStr(target: Entity, opts: IItemEffectsModStat) {
 			const odds  = opts.odds || 1;
 			const parse: any = { name: target.NameDesc(), is: target.is() };
 			if (Math.random() < odds &&
@@ -1118,7 +1144,7 @@ export namespace TF {
 		}
 
 		// odds, ideal, max
-		export function DecSta(target: Entity, opts: any) {
+		export function DecSta(target: Entity, opts: IItemEffectsModStat) {
 			const odds  = opts.odds || 1;
 			const parse: any = { name: target.NameDesc(), is: target.is() };
 			if (Math.random() < odds &&
@@ -1130,7 +1156,7 @@ export namespace TF {
 		}
 
 		// odds, ideal, max
-		export function DecDex(target: Entity, opts: any) {
+		export function DecDex(target: Entity, opts: IItemEffectsModStat) {
 			const odds  = opts.odds || 1;
 			const parse: any = { name: target.NameDesc(), is: target.is() };
 			if (Math.random() < odds &&
@@ -1142,7 +1168,7 @@ export namespace TF {
 		}
 
 		// odds, ideal, max
-		export function DecInt(target: Entity, opts: any) {
+		export function DecInt(target: Entity, opts: IItemEffectsModStat) {
 			const odds  = opts.odds || 1;
 			const parse: any = { name: target.NameDesc(), is: target.is() };
 			if (Math.random() < odds &&
@@ -1154,7 +1180,7 @@ export namespace TF {
 		}
 
 		// odds, ideal, max
-		export function DecSpi(target: Entity, opts: any) {
+		export function DecSpi(target: Entity, opts: IItemEffectsModStat) {
 			const odds  = opts.odds || 1;
 			const parse: any = { name: target.NameDesc(), is: target.is() };
 			if (Math.random() < odds &&
@@ -1166,7 +1192,7 @@ export namespace TF {
 		}
 
 		// odds, ideal, max
-		export function DecLib(target: Entity, opts: any) {
+		export function DecLib(target: Entity, opts: IItemEffectsModStat) {
 			const odds  = opts.odds || 1;
 			const parse: any = { name: target.NameDesc(), is: target.is() };
 			if (Math.random() < odds &&
@@ -1178,7 +1204,7 @@ export namespace TF {
 		}
 
 		// odds, ideal, max
-		export function DecCha(target: Entity, opts: any) {
+		export function DecCha(target: Entity, opts: IItemEffectsModStat) {
 			const odds  = opts.odds || 1;
 			const parse: any = { name: target.NameDesc(), is: target.is() };
 			if (Math.random() < odds &&
