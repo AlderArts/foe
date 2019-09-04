@@ -6,7 +6,7 @@ const windowHeight = 700;
 const APP_NAME = "Fall of Eden";
 const VERSION_MAJOR = 0;
 const VERSION_MINOR = 5;
-const VERSION_SUBSCRIPT = 0;
+const VERSION_SUBSCRIPT = 1;
 const VERSION_NAME = "QoL update";
 
 const SAVE_VERSION = 29;
