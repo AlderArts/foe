@@ -23,6 +23,7 @@ import { Time } from "../../time";
 import { ArmorShopScenes } from "./armorshop";
 import { InitBrothel } from "./brothel";
 import { InitCastle } from "./castle";
+import { ClothShopScenes } from "./clothstore";
 import { InitGuards } from "./guards";
 import { InitLB } from "./inn";
 import { InitKrawitz } from "./krawitz";
@@ -44,7 +45,7 @@ export function InitRigard() {
 	InitGuards(RigardScenes);
 	InitCastle(RigardScenes);
 	InitPlaza(RigardScenes);
-	FeraScenes.INIT(RigardScenes);
+	FeraScenes.INIT(ClothShopScenes);
 	LeiTaskScenes.INIT(LeiScenes);
 	JeanneScenes.INIT(TerryScenes);
 	AscheTasksScenes.INIT(AscheScenes, AquiliusScenes);

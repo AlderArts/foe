@@ -104,11 +104,11 @@ export class Fera extends Entity {
 	}
 }
 
-let RigardScenes: any;
+let ClothShopScenes: any;
 
 export namespace FeraScenes {
-	export function INIT(rigardScenes: any) {
-		RigardScenes = rigardScenes;
+	export function INIT(clothShopScenes: any) {
+		ClothShopScenes = clothShopScenes;
 	}
 
 	// Party interaction
@@ -118,7 +118,7 @@ export namespace FeraScenes {
 
 		Text.Clear();
 
-		if (!RigardScenes.ClothShop.IsOpen()) {
+		if (!ClothShopScenes.IsOpen()) {
 			Text.Add("The shop is closing, and you are asked to leave.");
 			Text.Flush();
 			Gui.NextPrompt(() => {

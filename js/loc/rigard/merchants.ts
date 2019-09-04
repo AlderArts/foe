@@ -47,9 +47,9 @@ ShopStreetLoc.Street.description = () => {
 		Text.Add("A few early birds prowl the streets as the merchant district starts to wake up. A few street vendors selling fresh foods are just opening up, and the smells of baked bread and spices fill the morning air.");
 	} else if (WorldTime().hour >= 9 && WorldTime().hour < 18) {
 		Text.Add("People of all shapes and sizes wander the streets, browsing the wares on display.");
- } else {
+ 	} else {
 		Text.Add("Usually this place is bustling with people, but with all the shops closed for the night, no one is about.");
- }
+ 	}
 	Text.NL();
 
 	if (rigard.Krawitz.Q === RigardFlags.KrawitzQ.HuntingTerry) {
