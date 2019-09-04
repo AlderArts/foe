@@ -2584,11 +2584,11 @@ export class Entity {
 		if (this.flags.Sexed && this.flags.Sexed !== 0) {
 			return true;
 		}
-		for (const flag in this.sex) {
-			if (this.sex[flag] !== 0) {
+		_.forIn (this.sex, (value) => {
+			if (value !== 0) {
 				return true;
-		}
 			}
+		});
 		return false;
 	}
 

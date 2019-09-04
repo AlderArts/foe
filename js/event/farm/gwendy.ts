@@ -3,6 +3,8 @@
  * Define Gwendy
  *
  */
+import * as _ from "lodash";
+
 import { Images } from "../../assets";
 import { Color } from "../../body/color";
 import { HairStyle } from "../../body/hair";
@@ -72,11 +74,11 @@ export class Gwendy extends Entity {
 	}
 
 	public Sexed() {
-		for (const flag in this.sex) {
-			if (this.sex[flag] !== 0) {
+		_.forIn (this.sex, (value) => {
+			if (value !== 0) {
 				return true;
-		}
 			}
+		});
 		if (this.flags.ChallengeWinScene  !== 0) { return true; }
 		if (this.flags.ChallengeLostScene !== 0) { return true; }
 		return false;
