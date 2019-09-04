@@ -1,3 +1,5 @@
+import * as _ from "lodash";
+
 import { GetDEBUG } from "../../app";
 import { LowerBodyType } from "../body/body";
 import { BodyPartType } from "../body/bodypart";
@@ -18,8 +20,10 @@ import { Text } from "../text";
 import { Season } from "../time";
 import { DreamsScenes } from "./dreams";
 import { GlobalScenes } from "./global";
+import { Miranda } from "./miranda";
 import { MirandaFlags } from "./miranda-flags";
 import { VaughnTasksScenes } from "./outlaws/vaughn-tasks";
+import { Player } from "./player";
 import { TerryFlags } from "./terry-flags";
 
 export namespace MirandaScenes {
@@ -28,19 +32,19 @@ export namespace MirandaScenes {
 		const world = WORLD();
 		// Add catch thief as explorable event
 		world.loc.Rigard.Slums.Gate.enc.AddEnc(() => MirandaScenes.CatchThatThief, 1.0, () => {
-			const miranda = GAME().miranda;
+			const miranda: Miranda = GAME().miranda;
 			return miranda.flags.Thief === 0 && miranda.OnPatrol();
 		});
 		world.loc.Rigard.Residential.Street.enc.AddEnc(() => MirandaScenes.CatchThatThief, 1.0, () => {
-			const miranda = GAME().miranda;
+			const miranda: Miranda = GAME().miranda;
 			return miranda.flags.Thief === 0 && miranda.OnPatrol();
 		});
 		world.loc.Rigard.Gate.enc.AddEnc(() => MirandaScenes.CatchThatThief, 1.0, () => {
-			const miranda = GAME().miranda;
+			const miranda: Miranda = GAME().miranda;
 			return miranda.flags.Thief === 0 && miranda.OnPatrol();
 		});
 		world.loc.Rigard.ShopStreet.Street.enc.AddEnc(() => MirandaScenes.CatchThatThief, 1.0, () => {
-			const miranda = GAME().miranda;
+			const miranda: Miranda = GAME().miranda;
 			return miranda.flags.Thief === 0 && miranda.OnPatrol();
 		});
 
@@ -70,8 +74,8 @@ export namespace MirandaScenes {
 	// Events
 
 	export function BarracksApproach() {
-		const player = GAME().player;
-		const miranda = GAME().miranda;
+		const player: Player = GAME().player;
+		const miranda: Miranda = GAME().miranda;
 
 		const parse: any = {
 			playername : player.name,
@@ -95,9 +99,9 @@ export namespace MirandaScenes {
 	}
 
 	export function BarracksPrompt() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const miranda = GAME().miranda;
+		const miranda: Miranda = GAME().miranda;
 
 		const parse: any = {
 			playername : player.name,
@@ -172,9 +176,9 @@ export namespace MirandaScenes {
 	}
 
 	export function SparLoss() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const miranda = GAME().miranda;
+		const miranda: Miranda = GAME().miranda;
 
 		SetGameState(GameState.Event, Gui);
 		const enc = this;
@@ -200,9 +204,9 @@ export namespace MirandaScenes {
 	}
 
 	export function SparWin() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const miranda = GAME().miranda;
+		const miranda: Miranda = GAME().miranda;
 
 		SetGameState(GameState.Event, Gui);
 		const enc = this;
@@ -232,8 +236,8 @@ export namespace MirandaScenes {
 	}
 
 	export function BruiserTraining() {
-		const player = GAME().player;
-		const miranda = GAME().miranda;
+		const player: Player = GAME().player;
+		const miranda: Miranda = GAME().miranda;
 
 		const parse: any = {
 
@@ -371,9 +375,9 @@ export namespace MirandaScenes {
 	}
 
 	export function BruiserTrainingCont() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const miranda = GAME().miranda;
+		const miranda: Miranda = GAME().miranda;
 		const world = WORLD();
 
 		const parse: any = {
@@ -481,7 +485,7 @@ export namespace MirandaScenes {
 
 	export function RigardGatesInteract() {
 		const rigard = GAME().rigard;
-		const miranda = GAME().miranda;
+		const miranda: Miranda = GAME().miranda;
 
 		const parse: any = {};
 
@@ -505,9 +509,9 @@ export namespace MirandaScenes {
 	}
 
 	export function RigardGatesEnter() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const rigard = GAME().rigard;
-		const miranda = GAME().miranda;
+		const miranda: Miranda = GAME().miranda;
 		const world = WORLD();
 
 		const parse: any = {
@@ -581,8 +585,8 @@ export namespace MirandaScenes {
 	}
 
 	export function RigardSlumGatesDesc() {
-		const player = GAME().player;
-		const miranda = GAME().miranda;
+		const player: Player = GAME().player;
+		const miranda: Miranda = GAME().miranda;
 
 		const parse: any = {
 			playername : player.name,
@@ -617,9 +621,9 @@ export namespace MirandaScenes {
 	}
 
 	export function RigardSlumGatesEnter() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const rigard = GAME().rigard;
-		const miranda = GAME().miranda;
+		const miranda: Miranda = GAME().miranda;
 		const world = WORLD();
 
 		let parse: any = {
@@ -681,9 +685,9 @@ export namespace MirandaScenes {
 	}
 
 	export function RigardGatesBribe() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const rigard = GAME().rigard;
-		const miranda = GAME().miranda;
+		const miranda: Miranda = GAME().miranda;
 		const world = WORLD();
 
 		let parse: any = {
@@ -1076,10 +1080,10 @@ export namespace MirandaScenes {
 	let welcomeToRigardMIRANDA: boolean;
 
 	export function WelcomeToRigard() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const kiakai = GAME().kiakai;
 		const party: Party = GAME().party;
-		const miranda = GAME().miranda;
+		const miranda: Miranda = GAME().miranda;
 		const rosalin = GAME().rosalin;
 
 		const parse: any = {
@@ -1172,7 +1176,7 @@ export namespace MirandaScenes {
 	}
 
 	export function WelcomeToRigardQnA() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const kiakai = GAME().kiakai;
 
 		let parse: any = {
@@ -1242,7 +1246,7 @@ export namespace MirandaScenes {
 	}
 
 	export function WelcomeToRigardEnd() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const kiakai = GAME().kiakai;
 		const farm = GAME().farm;
 		const party: Party = GAME().party;
@@ -1290,7 +1294,7 @@ export namespace MirandaScenes {
 
 	export function CatchThatThief() {
 		const party: Party = GAME().party;
-		const miranda = GAME().miranda;
+		const miranda: Miranda = GAME().miranda;
 
 		miranda.flags.Thief = 1;
 
@@ -1322,8 +1326,8 @@ export namespace MirandaScenes {
 	}
 
 	export function HeyThere() {
-		const player = GAME().player;
-		const miranda = GAME().miranda;
+		const player: Player = GAME().player;
+		const miranda: Miranda = GAME().miranda;
 
 		let parse: any = {
 			boygirl() { return player.mfFem("boy", "girl"); },
@@ -1404,8 +1408,8 @@ export namespace MirandaScenes {
 	}
 
 	export function HeyThereCatPorn() {
-		const player = GAME().player;
-		const miranda = GAME().miranda;
+		const player: Player = GAME().player;
+		const miranda: Miranda = GAME().miranda;
 
 		let parse: any = {
 
@@ -1608,9 +1612,9 @@ export namespace MirandaScenes {
 	}
 
 	export function BarChatOptions(options: any[], back?: any) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const rigard = GAME().rigard;
-		const miranda = GAME().miranda;
+		const miranda: Miranda = GAME().miranda;
 		const belinda = GAME().belinda;
 		const terry = GAME().terry;
 
@@ -1979,8 +1983,8 @@ export namespace MirandaScenes {
 	}
 
 	export function TakeHome() {
-		const player = GAME().player;
-		const miranda = GAME().miranda;
+		const player: Player = GAME().player;
+		const miranda: Miranda = GAME().miranda;
 
 		let parse: any = {
 			masterMistress : player.mfTrue("master", "mistress"),
@@ -2057,8 +2061,8 @@ export namespace MirandaScenes {
 	}
 
 	export function JustOneMore() {
-		const player = GAME().player;
-		const miranda = GAME().miranda;
+		const player: Player = GAME().player;
+		const miranda: Miranda = GAME().miranda;
 		const world = WORLD();
 
 		let parse: any = {
@@ -2429,7 +2433,7 @@ export namespace MirandaScenes {
 	}
 
 	export function MaidensBaneTalk() {
-		const miranda = GAME().miranda;
+		const miranda: Miranda = GAME().miranda;
 
 		Text.Clear();
 
@@ -2453,8 +2457,8 @@ export namespace MirandaScenes {
 
 	// TODO
 	export function MaidensBanePrompt() {
-		const player = GAME().player;
-		const miranda = GAME().miranda;
+		const player: Player = GAME().player;
+		const miranda: Miranda = GAME().miranda;
 
 		const parse: any = {};
 
@@ -2497,8 +2501,8 @@ export namespace MirandaScenes {
 	}
 
 	export function MaidensBaneTalkPrompt() {
-		const player = GAME().player;
-		const miranda = GAME().miranda;
+		const player: Player = GAME().player;
+		const miranda: Miranda = GAME().miranda;
 
 		const parse: any = {};
 
@@ -2559,8 +2563,8 @@ export namespace MirandaScenes {
 	}
 
 	export function TerryChaseHome() {
-		const player = GAME().player;
-		const miranda = GAME().miranda;
+		const player: Player = GAME().player;
+		const miranda: Miranda = GAME().miranda;
 		const terry = GAME().terry;
 		const world = WORLD();
 
@@ -2650,7 +2654,7 @@ export namespace MirandaScenes {
 	/* MIRANDA SEX */
 
 	export function BarSexOptions(options: any[]) {
-		const miranda = GAME().miranda;
+		const miranda: Miranda = GAME().miranda;
 
 		const parse: any = {};
 
@@ -2676,8 +2680,8 @@ export namespace MirandaScenes {
 	}
 
 	export function TavernSexPublicPrompt() {
-		const player = GAME().player;
-		const miranda = GAME().miranda;
+		const player: Player = GAME().player;
+		const miranda: Miranda = GAME().miranda;
 
 		const parse: any = {
 			mastermistress : player.mfTrue("master", "mistress"),
@@ -2715,7 +2719,7 @@ export namespace MirandaScenes {
 	}
 
 	export function HomeDescFloor1() {
-		const miranda = GAME().miranda;
+		const miranda: Miranda = GAME().miranda;
 
 		const parse: any = {
 
@@ -2731,7 +2735,7 @@ export namespace MirandaScenes {
 	}
 
 	export function HomeDescFloor2() {
-		const miranda = GAME().miranda;
+		const miranda: Miranda = GAME().miranda;
 
 		const parse: any = {
 
@@ -2747,10 +2751,10 @@ export namespace MirandaScenes {
 	}
 
 	export function HomeDommySexLeavingFuckedHer() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const rigard = GAME().rigard;
-		const miranda = GAME().miranda;
+		const miranda: Miranda = GAME().miranda;
 		const world = WORLD();
 
 		const parse: any = {
@@ -2846,9 +2850,9 @@ export namespace MirandaScenes {
 	}
 
 	export function HomeDommySex() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const miranda = GAME().miranda;
+		const miranda: Miranda = GAME().miranda;
 		const world = WORLD();
 
 		let parse: any = {
@@ -2902,8 +2906,8 @@ export namespace MirandaScenes {
 	}
 
 	export function HomeDommySexRideDobieCockVag() {
-		const player = GAME().player;
-		const miranda = GAME().miranda;
+		const player: Player = GAME().player;
+		const miranda: Miranda = GAME().miranda;
 
 		let parse: any = {
 			playername : player.name,
@@ -3073,8 +3077,8 @@ export namespace MirandaScenes {
 	}
 
 	export function HomeDommySexRideDobieCockVagFuck(stickymiranda: boolean, came: boolean) {
-		const player = GAME().player;
-		const miranda = GAME().miranda;
+		const player: Player = GAME().player;
+		const miranda: Miranda = GAME().miranda;
 
 		const dom = player.SubDom() - miranda.SubDom();
 		let parse: any = {
@@ -3190,8 +3194,8 @@ export namespace MirandaScenes {
 	}
 
 	export function HomeDommySexRideDobieCockVagSubmit(submit?: boolean) {
-		const player = GAME().player;
-		const miranda = GAME().miranda;
+		const player: Player = GAME().player;
+		const miranda: Miranda = GAME().miranda;
 
 		let parse: any = {
 
@@ -3230,8 +3234,8 @@ export namespace MirandaScenes {
 	}
 
 	export function HomeDommySexFuckDobieAss(cocks: Cock[]) {
-		const player = GAME().player;
-		const miranda = GAME().miranda;
+		const player: Player = GAME().player;
+		const miranda: Miranda = GAME().miranda;
 
 		const pCock = cocks[0];
 
@@ -3587,8 +3591,8 @@ export namespace MirandaScenes {
 	}
 
 	export function HomeDommySexRideDobieCockShared() {
-		const player = GAME().player;
-		const miranda = GAME().miranda;
+		const player: Player = GAME().player;
+		const miranda: Miranda = GAME().miranda;
 
 		let parse: any = {
 
@@ -3618,8 +3622,8 @@ export namespace MirandaScenes {
 	}
 
 	export function HomeDommySexRideDobieCockAnal() {
-		const player = GAME().player;
-		const miranda = GAME().miranda;
+		const player: Player = GAME().player;
+		const miranda: Miranda = GAME().miranda;
 
 		let parse: any = {
 			playername    : player.name,
@@ -3954,8 +3958,8 @@ export namespace MirandaScenes {
 	}
 
 	export function HomeDommySexFuckDobieVag(cocks: Cock[]) {
-		const player = GAME().player;
-		const miranda = GAME().miranda;
+		const player: Player = GAME().player;
+		const miranda: Miranda = GAME().miranda;
 
 		const pCock = cocks[0];
 
@@ -4287,8 +4291,8 @@ export namespace MirandaScenes {
 	}
 
 	export function HomeSubbySexLeavingFuckedHer() {
-		const player = GAME().player;
-		const miranda = GAME().miranda;
+		const player: Player = GAME().player;
+		const miranda: Miranda = GAME().miranda;
 		const party: Party = GAME().party;
 		const rigard = GAME().rigard;
 		const world = WORLD();
@@ -4388,8 +4392,8 @@ export namespace MirandaScenes {
 	}
 
 	export function HomeSubbySex() {
-		const player = GAME().player;
-		const miranda = GAME().miranda;
+		const player: Player = GAME().player;
+		const miranda: Miranda = GAME().miranda;
 		const party: Party = GAME().party;
 		const world = WORLD();
 
@@ -4497,8 +4501,8 @@ export namespace MirandaScenes {
 
 	// TODO
 	export function HomeSubbySexDommyRide(location: any, Loc: any) {
-		const player = GAME().player;
-		const miranda = GAME().miranda;
+		const player: Player = GAME().player;
+		const miranda: Miranda = GAME().miranda;
 
 		const nasty = miranda.Attitude() < MirandaFlags.Attitude.Neutral;
 		let p1cock = player.BiggestCock(undefined, true);
@@ -4724,8 +4728,8 @@ export namespace MirandaScenes {
 	}
 
 	export function HomeSubbySexTakeAnal(location: any, Loc: any) {
-		const player = GAME().player;
-		const miranda = GAME().miranda;
+		const player: Player = GAME().player;
+		const miranda: Miranda = GAME().miranda;
 
 		const nasty = miranda.Attitude() < MirandaFlags.Attitude.Neutral;
 
@@ -5298,8 +5302,8 @@ export namespace MirandaScenes {
 	}
 
 	export function TavernSexBackroomPrompt() {
-		const player = GAME().player;
-		const miranda = GAME().miranda;
+		const player: Player = GAME().player;
+		const miranda: Miranda = GAME().miranda;
 
 		let parse: any = {
 			playername : player.name,
@@ -5375,8 +5379,8 @@ export namespace MirandaScenes {
 	}
 
 	export function TavernSexBackroomSubbyVag(cocks: Cock[]) {
-		const player = GAME().player;
-		const miranda = GAME().miranda;
+		const player: Player = GAME().player;
+		const miranda: Miranda = GAME().miranda;
 		const party: Party = GAME().party;
 
 		const p1Cock = player.BiggestCock(cocks);
@@ -5489,8 +5493,8 @@ export namespace MirandaScenes {
 	}
 
 	export function TavernSexSubbyVag(cocks: Cock[]) {
-		const player = GAME().player;
-		const miranda = GAME().miranda;
+		const player: Player = GAME().player;
+		const miranda: Miranda = GAME().miranda;
 
 		const p1Cock = player.BiggestCock(cocks);
 		const allCocks = player.AllCocksCopy();
@@ -5679,8 +5683,8 @@ export namespace MirandaScenes {
 	}
 
 	export function TavernSexPublicBJ() {
-		const player = GAME().player;
-		const miranda = GAME().miranda;
+		const player: Player = GAME().player;
+		const miranda: Miranda = GAME().miranda;
 		const party: Party = GAME().party;
 		const terry = GAME().terry;
 		const kiakai = GAME().kiakai;
@@ -5893,8 +5897,8 @@ export namespace MirandaScenes {
 	}
 
 	export function TavernSexDommyBJ() {
-		const player = GAME().player;
-		const miranda = GAME().miranda;
+		const player: Player = GAME().player;
+		const miranda: Miranda = GAME().miranda;
 
 		let parse: any = {
 			playername : player.name,
@@ -5987,7 +5991,7 @@ export namespace MirandaScenes {
 					Text.Add("...Oh no. She wouldn't! She can't be serious! It looks like she's going to try and tie her dick to your mouth! Unconsciously, you try and pull your head back, but the doberherm's grip simply pushes you back more firmly down on her cock, grinding her shaft down your throat for emphasis. You're not going anywhere, it seems, and you have no choice but to try and relax your jaws as best you can for what you know is coming.", parse);
 				} else if (miranda.sex.rBlow <= 5) {
 					Text.Add("You have a sinking suspicion as to what she has in mind, and an experimental attempt to pull your head back from her bulb confirms it. She wants to knot your mouth again. Sighing softly as best you can through your filled mouth, you relax your jaws as best you can.", parse);
-	} else {
+				} else {
 					Text.Add("What is this thing that she has with knotting herself to your mouth? ", parse);
 					if (miranda.Attitude() >= MirandaFlags.Attitude.Neutral) {
 						Text.Add("Does she love your cocksucking skills that much? ", parse);
@@ -6318,8 +6322,8 @@ export namespace MirandaScenes {
 	}
 
 	export function TerryTavernSexSubbyVag(cocks: Cock[]) {
-		const player = GAME().player;
-		const miranda = GAME().miranda;
+		const player: Player = GAME().player;
+		const miranda: Miranda = GAME().miranda;
 
 		const p1Cock = player.BiggestCock(cocks);
 		const parse: any = {
@@ -6413,8 +6417,8 @@ export namespace MirandaScenes {
 	let datingScore: number;
 
 	export function DatingEntry() {
-		const player = GAME().player;
-		const miranda = GAME().miranda;
+		const player: Player = GAME().player;
+		const miranda: Miranda = GAME().miranda;
 		const party: Party = GAME().party;
 		const world = WORLD();
 
@@ -6565,8 +6569,8 @@ export namespace MirandaScenes {
 	}
 
 	export function DatingBlockPrompt() {
-		const player = GAME().player;
-		const miranda = GAME().miranda;
+		const player: Player = GAME().player;
+		const miranda: Miranda = GAME().miranda;
 
 		const parse: any = {
 			name : miranda.Attitude() >= MirandaFlags.Attitude.Neutral ?
@@ -6633,8 +6637,8 @@ export namespace MirandaScenes {
 	// BAR HANGOUT
 	// TODO
 	export function DatingStage1() {
-		const player = GAME().player;
-		const miranda = GAME().miranda;
+		const player: Player = GAME().player;
+		const miranda: Miranda = GAME().miranda;
 
 		const parse: any = {
 
@@ -6730,7 +6734,7 @@ export namespace MirandaScenes {
 	// TOWN EVENTS
 	// TODO
 	export function DatingStage2() {
-		const miranda = GAME().miranda;
+		const miranda: Miranda = GAME().miranda;
 
 		const parse: any = {
 
@@ -6795,8 +6799,8 @@ export namespace MirandaScenes {
 	}
 
 	export function TalkBackstory(atBar: boolean) {
-		const player = GAME().player;
-		const miranda = GAME().miranda;
+		const player: Player = GAME().player;
+		const miranda: Miranda = GAME().miranda;
 
 		const parse: any = {
 			playername : player.name,
@@ -6889,9 +6893,9 @@ export namespace MirandaScenes {
 							Text.NL();
 
 							let sexedCount = 0;
-							for (const flag of miranda.sex) {
-								sexedCount += miranda.sex[flag];
-							}
+							_.forIn (miranda.sex, (count) => {
+								sexedCount += count;
+							});
 
 							if (sexedCount >= 25) {
 								Text.Add("The guardswoman goes on to describe all the lewd things she and her mystery lover have been up to. Just how would one find the hours in the day for all that?", parse);
@@ -7040,8 +7044,8 @@ export namespace MirandaScenes {
 	}
 
 	export function TalkConquests(atBar: boolean) {
-		const player = GAME().player;
-		const miranda = GAME().miranda;
+		const player: Player = GAME().player;
+		const miranda: Miranda = GAME().miranda;
 		const party: Party = GAME().party;
 		const terry = GAME().terry;
 
@@ -7118,9 +7122,9 @@ export namespace MirandaScenes {
 							Text.Add(" Bet you could use a real dick up your ass to replace the stick that’s firmly lodged inside. And I have more than enough meat for a lapdog like yourself.”</i>", parse);
 						} else if (terry.FirstCock()) {
 							Text.Add(" Bet you don’t get any action on your girl-parts, that’s why you’re so grumpy. But fear not, I can loosen that tight cunt of yours for you.”</i>", parse);
-	} else {
+						} else {
 							Text.Add("”</i>", parse);
-	}
+						}
 						Text.NL();
 						Text.Add("<i>“You seem to be having some miscomprehension about who’s going to nail whom, fucktoy,”</i> Miranda retorts, giving her package a pat. <i>“Remember how it went down the last time you tried to fight me?”</i>", parse);
 						Text.NL();
@@ -7166,9 +7170,9 @@ export namespace MirandaScenes {
 					Text.Add("Same goes for Miranda, if she keeps provoking Terry, you’ll have to punish her.", parse);
 				} else if (dom < 25) {
 					Text.Add("Terry is under your protection now, so you’d really appreciate if Miranda didn’t push [hisher] buttons.", parse);
-	} else {
+				} else {
 					Text.Add("You give the dommy dobie a pleading look, hoping she’ll let Terry off the hook.", parse);
-	}
+				}
 				Text.NL();
 				Text.Add("<i>“Right, right, don’t get your panties tied up in a bunch,”</i> Miranda replies, shrugging.", parse);
 				Text.NL();
@@ -7216,8 +7220,8 @@ export namespace MirandaScenes {
 	// HOMECOMING
 	// TODO
 	export function DatingStage3() {
-		const player = GAME().player;
-		const miranda = GAME().miranda;
+		const player: Player = GAME().player;
+		const miranda: Miranda = GAME().miranda;
 		const party: Party = GAME().party;
 		const world = WORLD();
 
@@ -7380,7 +7384,7 @@ export namespace MirandaScenes {
 	}
 
 	export function DatingFirstDocks() {
-		const miranda = GAME().miranda;
+		const miranda: Miranda = GAME().miranda;
 		const party: Party = GAME().party;
 		const world = WORLD();
 
@@ -7388,7 +7392,7 @@ export namespace MirandaScenes {
 
 		};
 
-		party.location = world.loc.Rigard.Slums.docks;
+		party.location = world.loc.Rigard.Slums.Docks;
 		TimeStep({minute: 20});
 
 		Text.Add("Leaving the small garden behind, the two of you head down a well-trodden road, not quite deserted, even at this hour. After a while, you begin to notice the smell of brine and fish, as your steps takes you closer to the dock area. There are large crates lining the sides of large warehouses, mostly empty but sure to be filled with a new catch the next morning. Along the riverside, a minor fleet of small fishing boats lie tied.", parse);
@@ -7441,7 +7445,7 @@ export namespace MirandaScenes {
 	}
 
 	export function DatingFirstMercs() {
-		const miranda = GAME().miranda;
+		const miranda: Miranda = GAME().miranda;
 
 		const parse: any = {
 
@@ -7504,8 +7508,8 @@ export namespace MirandaScenes {
 	}
 
 	export function DatingFirstCity() {
-		const player = GAME().player;
-		const miranda = GAME().miranda;
+		const player: Player = GAME().player;
+		const miranda: Miranda = GAME().miranda;
 		const party: Party = GAME().party;
 		const rigard = GAME().rigard;
 		const world = WORLD();
@@ -7647,8 +7651,8 @@ export namespace MirandaScenes {
 	}
 
 	export function DatingFirstHome() {
-		const player = GAME().player;
-		const miranda = GAME().miranda;
+		const player: Player = GAME().player;
+		const miranda: Miranda = GAME().miranda;
 		const party: Party = GAME().party;
 		const rigard = GAME().rigard;
 		const world = WORLD();
