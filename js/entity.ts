@@ -5,7 +5,7 @@ import * as _ from "lodash";
 
 import { GetDEBUG } from "../app";
 import { Abilities } from "./abilities";
-import { AbilityCollection } from "./ability";
+import { Ability, AbilityCollection } from "./ability";
 import { GetAggroEntry } from "./ability/default";
 import { AppendageType } from "./body/appendage";
 import { LowerBodyType } from "./body/body";
@@ -54,6 +54,27 @@ export enum TargetStrategy {
 	Leader    = 32,
 	SPHunt    = 64,
 	LPHunt    = 128,
+}
+
+export interface ICastingEntry {
+	ability: Ability;
+	target: Entity;
+	retarget: CallableFunction;
+}
+
+export interface IAggroEntry {
+	entity: Entity;
+	aggro: number;
+}
+
+export interface ICombatOrder {
+	entity: Entity;
+	isEnemy: boolean;
+	aggro: IAggroEntry[];
+	aggroAllies?: IAggroEntry[];
+	initiative: number;
+	cooldown: any[];
+	casting: ICastingEntry;
 }
 
 // TODO: Should have shared features, such as combat stats. Body representation
@@ -661,7 +682,7 @@ export class Entity {
 		return found;
 	}
 
-	public GetPartyTarget(encounter: any, activeChar: any, ally?: any) {
+	public GetPartyTarget(encounter: any, activeChar: ICombatOrder, ally?: boolean) {
 		let isEnemy = activeChar.isEnemy;
 		const confuse = activeChar.entity.combatStatus.stats[StatusEffect.Confuse];
 		if (confuse) {
@@ -678,7 +699,7 @@ export class Entity {
 		}
 	}
 
-	public GetSingleTarget(encounter: any, activeChar: any, strategy?: TargetStrategy, ally?: boolean) {
+	public GetSingleTarget(encounter: any, activeChar: ICombatOrder, strategy?: TargetStrategy, ally?: boolean) {
 		let isEnemy = activeChar.isEnemy;
 		const confuse = activeChar.entity.combatStatus.stats[StatusEffect.Confuse];
 		if (confuse) {
@@ -753,10 +774,10 @@ export class Entity {
 		}
 
 		// Normalize hp
-		const min = _.minBy(aggro.length, (a: any) => {
+		const min = _.minBy(aggro, (a: any) => {
 			return a.entity.curHp;
 		});
-		const max = _.maxBy(aggro.length, (a: any) => {
+		const max = _.maxBy(aggro, (a: any) => {
 			return a.entity.curHp;
 		});
 

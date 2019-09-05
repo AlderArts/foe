@@ -12,7 +12,7 @@ import { Input } from "./input";
 import { Text } from "./text";
 
 export class Maze {
-	public map: any[];
+	public map: MazeRoom[][];
 	public xMax: number;
 	public yMax: number;
 

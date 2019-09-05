@@ -193,7 +193,7 @@ setTrap.castTree.push((ability: Ability, encounter: Encounter, caster: Entity) =
 
 	// Reduce everyones aggro toward trapper
 	for (const activeChar of encounter.combatOrder) {
-		const aggroEntry: any = GetAggroEntry(activeChar, caster);
+		const aggroEntry = GetAggroEntry(activeChar, caster);
 		if (aggroEntry) {
 			aggroEntry.aggro /= 2;
 		}
@@ -407,7 +407,7 @@ provoke.castTree.push(AbilityNode.Template.Physical({
 	}],
 	onDamage: [Defaults.Physical._onDamage],
 	onHit: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
-		const aggroEntry: any = GetAggroEntry(target.GetCombatEntry(encounter), caster);
+		const aggroEntry = GetAggroEntry(target.GetCombatEntry(encounter), caster);
 		if (aggroEntry) {
 			aggroEntry.aggro += 1;
 		}
@@ -435,7 +435,7 @@ taunt.castTree.push(AbilityNode.Template.Physical({
 	}],
 	onDamage: [Defaults.Physical._onDamage],
 	onHit: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
-		const aggroEntry: any = GetAggroEntry(target.GetCombatEntry(encounter), caster);
+		const aggroEntry = GetAggroEntry(target.GetCombatEntry(encounter), caster);
 		if (aggroEntry) {
 			aggroEntry.aggro += 3;
 		}
@@ -463,7 +463,7 @@ fade.castTree.push(AbilityNode.Template.Physical({
 		Text.NL();
 	}],
 	onHit: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
-		const aggroEntry: any = GetAggroEntry(target.GetCombatEntry(encounter), caster);
+		const aggroEntry = GetAggroEntry(target.GetCombatEntry(encounter), caster);
 		if (aggroEntry) {
 			aggroEntry.aggro /= 2;
 		}

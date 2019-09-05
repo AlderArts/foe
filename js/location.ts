@@ -1,7 +1,7 @@
 import { EncounterTable } from "./encountertable";
 
 export interface ILocation {
-    SaveSpot: any;
+    SaveSpot: string;
     wait: () => boolean;
     safe: () => boolean;
     switchSpot: () => boolean;

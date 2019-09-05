@@ -4,6 +4,7 @@ import * as Raphael from "raphael";
 
 import { DEFAULT_FONT, GetRenderPictures, SMALL_FONT } from "../app";
 import { Images } from "./assets";
+import { Tooltip } from "./button";
 import { CurrentActiveChar, EnemyParty } from "./combat-data";
 import { ExploreButtonIndex } from "./explorestate";
 import { GAME, GetCavalcade, NAV, WorldTime } from "./GAME";
@@ -230,7 +231,7 @@ export class Gui {
 			t.translate(-bb.width / 2, 0);
 		} else if (align === "end") {
 			t.translate(-bb.width, 0);
- }
+ 		}
 		return t;
 	}
 
@@ -551,7 +552,7 @@ export class Gui {
 		}
 	}
 
-	public static NextPrompt(func: any = Gui.PrintDefaultOptions, text: string = "Next", tooltip?: any) {
+	public static NextPrompt(func: CallableFunction = Gui.PrintDefaultOptions, text: string = "Next", tooltip?: Tooltip) {
 		Gui.ClearButtons();
 		// text, func, enabled, obj, tooltip, state
 		Input.buttons[0].Setup(text, func, true, undefined, tooltip);
@@ -605,14 +606,14 @@ export class Gui {
 		return () => currentPage;
 	}
 
-	public static SetButtonCollectionPage(encounter: any, caster: any, list: any[], ret: any, page: number) {
+	public static SetButtonCollectionPage(encounter: any, caster: any, list: any[], ret: CallableFunction, page: number) {
 		Gui.ClearChoiceButtons();
 		for (let i = 0, j = page * Input.buttons.length; i < Input.buttons.length && j < list.length; i++, j++) {
 			Input.buttons[i].SetFromAbility(encounter, caster, list[j], ret);
 		}
 	}
 
-	public static SetButtonsFromCollection = (encounter: any, caster: any, list: any[], ret: any, backFunc: any) => {
+	public static SetButtonsFromCollection = (encounter: any, caster: any, list: any[], ret: CallableFunction, backFunc: CallableFunction) => {
 		Gui.ClearButtons();
 		let currentPage = 0;
 
@@ -722,15 +723,15 @@ export class Gui {
 		entity.combatStatus.Render(obj.status);
 	}
 
-	public static RenderLocation(name: any) {
+	public static RenderLocation(name: (() => string)|string) {
 		let nameStr;
 		if (_.isFunction(name)) {
 			nameStr = name();
 		} else if (name) {
 			nameStr = name;
- } else {
+ 		} else {
 			nameStr = "???";
- }
+ 		}
 
 		Gui.PrintGlow(overlay, location, 300, 30, nameStr, fonts.Kimberley, 30, "start", {opacity: 1});
 	}

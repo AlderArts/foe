@@ -4,7 +4,7 @@ import { GetDEBUG } from "../app";
 import { Abilities } from "./abilities";
 import { Ability } from "./ability";
 import { CurrentActiveChar, EnemyParty, SetCurEncounter, SetCurrentActiveChar, SetEnemyParty } from "./combat-data";
-import { Entity } from "./entity";
+import { Entity, ICombatOrder } from "./entity";
 import { GAME, TimeStep } from "./GAME";
 import { GameState, SetGameState } from "./gamestate";
 import { Gui } from "./gui";
@@ -13,21 +13,6 @@ import { IItemQuantity } from "./item";
 import { Party } from "./party";
 import { StatusEffect } from "./statuseffect";
 import { Text } from "./text";
-
-interface ICastingEntry {
-	ability: Ability;
-	target: Entity;
-	retarget: CallableFunction;
-}
-
-interface ICombatOrder {
-	entity: Entity;
-	isEnemy: boolean;
-	aggro: any[];
-	initiative: number;
-	cooldown: any[];
-	casting: ICastingEntry;
-}
 
 // Create encounter with a Party() containing enemies
 export class Encounter {

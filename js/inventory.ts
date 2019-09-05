@@ -379,7 +379,7 @@ export class Inventory {
 		Text.Flush();
 	}
 
-	public ShowEquippable(entity: Entity, type: any, backPrompt?: any) {
+	public ShowEquippable(entity: Entity, type: any, backPrompt?: () => void) {
 		const inv = this;
 		// Populate item list
 		const items: Item[] = [];

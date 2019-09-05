@@ -2,7 +2,7 @@ import * as _ from "lodash";
 
 import { Ability } from "../ability";
 import { Encounter } from "../combat";
-import { Entity } from "../entity";
+import { Entity, IAggroEntry, ICombatOrder } from "../entity";
 import { Text } from "../text";
 import { AbilityNode } from "./node";
 
@@ -61,8 +61,8 @@ export namespace Defaults {
     }
 }
 
-export function GetAggroEntry(activeChar: any, entity: Entity) {
-	let found;
+export function GetAggroEntry(activeChar: ICombatOrder, entity: Entity) {
+	let found: IAggroEntry;
 	_.each(activeChar.aggro, (it) => {
 		if (it.entity === entity) {
 			found = it;
