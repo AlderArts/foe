@@ -30,7 +30,9 @@ module.exports = {
       chunkFilename: "[id].css"
     }),
     new CleanWebpackPlugin(),
-    new ZipPlugin(),
+    new ZipPlugin({
+      filename: 'FoE-latest.zip',
+    }),
     
     new CircularDependencyPlugin({
         // exclude detection of files based on a RegExp

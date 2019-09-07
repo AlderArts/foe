@@ -2,7 +2,7 @@ import * as $ from "jquery";
 import * as _ from "lodash";
 import * as Raphael from "raphael";
 
-import { DEFAULT_FONT, GetRenderPictures, SMALL_FONT } from "../app";
+import { DEFAULT_FONT, GetRenderPictures, SMALL_FONT, windowHeight, windowWidth } from "../app";
 import { Images } from "./assets";
 import { Tooltip } from "./button";
 import { CurrentActiveChar, EnemyParty } from "./combat-data";
@@ -39,9 +39,6 @@ const inputtextArea = {
 Raphael.el.is_visible = function() {
 	return (this.node.style.display !== "none");
 };
-
-const width = 1280;
-const height = 720;
 
 let LastSubmenu: any;
 let callstack: CallableFunction[] = [];
@@ -90,9 +87,9 @@ export class Gui {
 		Gui.ShortcutsVisible = false;
 
 		Gui.canvas = Raphael("wrap", 100, 100);
-		Gui.canvas.setViewBox(0, 0, width, height, true);
+		Gui.canvas.setViewBox(0, 0, windowWidth, windowHeight, true);
 		Gui.canvas.setSize("100%", "100%");
-		const bg = Gui.canvas.image(Images.bg, 0, 0, width, height);
+		const bg = Gui.canvas.image(Images.bg, 0, 0, windowWidth, windowHeight);
 		bg.node.ondragstart = () => {
 			return false;
 		};
@@ -360,15 +357,15 @@ export class Gui {
 	public static Resize = () => {
 		const w = $(window).width();
 		const h = $(window).height();
-		const ratioW = w / width;
-		const ratioH = h / height;
+		const ratioW = w / windowWidth;
+		const ratioH = h / windowHeight;
 		let xpos = 0; let ypos = 0; let ratio = 1;
 		// alert("R:" + ratio + " RW:" + ratioW + " RH:" + ratioH);
 		if (ratioW / ratioH > 1) {
-			xpos  = (w - ratioH * width) / 2;
+			xpos  = (w - ratioH * windowWidth) / 2;
 			ratio = ratioH;
 		} else {
-			ypos  = (h - ratioW * height) / 2;
+			ypos  = (h - ratioW * windowHeight) / 2;
 			ratio = ratioW;
 		}
 

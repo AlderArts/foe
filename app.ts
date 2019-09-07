@@ -1,7 +1,7 @@
 // Universal constants
 const frametime = 0.050; // Used for time updates
-const windowWidth  = 1260;
-const windowHeight = 700;
+export const windowWidth  = 1260;
+export const windowHeight = 700;
 
 const APP_NAME = "Fall of Eden";
 const VERSION_MAJOR = 0;
@@ -9,7 +9,7 @@ const VERSION_MINOR = 5;
 const VERSION_SUBSCRIPT = 1;
 const VERSION_NAME = "QoL update";
 
-const SAVE_VERSION = 29;
+export const SAVE_VERSION = 29;
 // Save version 1: Initial
 // Save version 2: Added inventory
 // Save version 3: Fixed clitcock restoration + height, weigth
@@ -40,34 +40,26 @@ const SAVE_VERSION = 29;
 // Save version 28: Lei flags fix
 // Save version 29: Cleared some unused flags from Lagon
 
-const VERSION_STRING = APP_NAME + " " + VERSION_MAJOR + "." + VERSION_MINOR + "." + VERSION_SUBSCRIPT + ": " + VERSION_NAME;
+export const VERSION_STRING = APP_NAME + " " + VERSION_MAJOR + "." + VERSION_MINOR + "." + VERSION_SUBSCRIPT + ": " + VERSION_NAME;
 
-const HEADER_FONT  = "bold 30pt Calibri";
-const BUTTON_FONT  = "bold 14pt Tahoma, 'Droid Sans', sans-serif";
-const SMALL_FONT   = "16pt Calibri";
-const DEFAULT_FONT = "20pt Calibri";
-const LARGE_FONT   = "26pt Calibri";
+export const HEADER_FONT  = "bold 30pt Calibri";
+export const BUTTON_FONT  = "bold 14pt Tahoma, 'Droid Sans', sans-serif";
+export const SMALL_FONT   = "16pt Calibri";
+export const DEFAULT_FONT = "20pt Calibri";
+export const LARGE_FONT   = "26pt Calibri";
 
 let DEBUG = false;
-function SetDEBUG(val: boolean) {
+export function SetDEBUG(val: boolean) {
 	DEBUG = val;
 }
-function GetDEBUG() {
+export function GetDEBUG() {
 	return DEBUG;
 }
 
 let RENDER_PICTURES = true;
-function SetRenderPictures(val: boolean) {
+export function SetRenderPictures(val: boolean) {
 	RENDER_PICTURES = val;
 }
-function GetRenderPictures() {
+export function GetRenderPictures() {
 	return RENDER_PICTURES;
 }
-
-export {
-	SAVE_VERSION,
-	HEADER_FONT, BUTTON_FONT, SMALL_FONT, DEFAULT_FONT, LARGE_FONT,
-	SetDEBUG, GetDEBUG,
-	SetRenderPictures, GetRenderPictures,
-	VERSION_STRING,
-};
