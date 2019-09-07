@@ -1179,7 +1179,7 @@ FarmLoc.Loft.SleepFunc = () => {
 
 		if (LaylaScenes.FarmMeetingTrigger(false)) { return; }
 
-		// TODO
+        // TODO
 		Text.Add("You wake up, feeling rested and refreshed.", parse);
 
 		Text.Flush();

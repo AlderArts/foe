@@ -7,14 +7,17 @@ import { GAME, MoveToLocation, StepToHour, TimeStep, WORLD } from "../GAME";
 import { GameState, SetGameState } from "../gamestate";
 import { Gui } from "../gui";
 import { Jobs } from "../job";
+import { Party } from "../party";
 import { Text } from "../text";
+import { Cassidy } from "./cassidy";
 import { CassidyFlags } from "./cassidy-flags";
+import { Player } from "./player";
 
 export namespace CassidySexScenes {
 
 	export function Indoors() {
-		const player = GAME().player;
-		const cassidy = GAME().cassidy;
+		const player: Player = GAME().player;
+		const cassidy: Cassidy = GAME().cassidy;
 
 		const parse: any = {
 			armor() { return player.ArmorDesc(); },
@@ -69,8 +72,8 @@ export namespace CassidySexScenes {
 	}
 
 	export function IndoorPrompt(opts: any = {}) {
-		const player = GAME().player;
-		const cassidy = GAME().cassidy;
+		const player: Player = GAME().player;
+		const cassidy: Cassidy = GAME().cassidy;
 
 		const parse: any = {
 
@@ -117,8 +120,8 @@ export namespace CassidySexScenes {
 	}
 
 	export function Savor(opts: any) {
-		const player = GAME().player;
-		const cassidy = GAME().cassidy;
+		const player: Player = GAME().player;
+		const cassidy: Cassidy = GAME().cassidy;
 		opts.savor = true;
 
 		const parse: any = {
@@ -179,7 +182,7 @@ export namespace CassidySexScenes {
 	}
 
 	export function Tail() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		let parse: any = {
 
@@ -262,8 +265,8 @@ export namespace CassidySexScenes {
 	}
 
 	export function Tailfuck() {
-		const player = GAME().player;
-		const cassidy = GAME().cassidy;
+		const player: Player = GAME().player;
+		const cassidy: Cassidy = GAME().cassidy;
 		let parse: any = {
 
 		};
@@ -304,8 +307,8 @@ export namespace CassidySexScenes {
 	}
 
 	export function Tailpeg() {
-		const player = GAME().player;
-		const cassidy = GAME().cassidy;
+		const player: Player = GAME().player;
+		const cassidy: Cassidy = GAME().cassidy;
 		let parse: any = {
 
 		};
@@ -376,8 +379,8 @@ export namespace CassidySexScenes {
 	}
 
 	export function FuckHer(cocksInVag: Cock[]) {
-		const player = GAME().player;
-		const cassidy = GAME().cassidy;
+		const player: Player = GAME().player;
+		const cassidy: Cassidy = GAME().cassidy;
 
 		const p1cock = player.BiggestCock(cocksInVag);
 		const realcock = !p1cock.isStrapon;
@@ -478,8 +481,8 @@ export namespace CassidySexScenes {
 	}
 
 	export function Pet() {
-		const player = GAME().player;
-		const cassidy = GAME().cassidy;
+		const player: Player = GAME().player;
+		const cassidy: Cassidy = GAME().cassidy;
 
 		let parse: any = {
 
@@ -756,8 +759,8 @@ export namespace CassidySexScenes {
 	}
 
 	export function Anal(cocksInAss: Cock[]) {
-		const player = GAME().player;
-		const cassidy = GAME().cassidy;
+		const player: Player = GAME().player;
+		const cassidy: Cassidy = GAME().cassidy;
 
 		const p1cock = player.BiggestCock(cocksInAss);
 		const realcock = !p1cock.isStrapon;
@@ -889,7 +892,7 @@ export namespace CassidySexScenes {
 	}
 
 	export function Outro() {
-		const cassidy = GAME().cassidy;
+		const cassidy: Cassidy = GAME().cassidy;
 		const world = WORLD();
 
 		const parse: any = {
@@ -922,9 +925,9 @@ SPARRING SEX
 export namespace CassidySparSexScenes {
 
 	export function Win() {
-		const player = GAME().player;
-		const party = GAME().party;
-		const cassidy = GAME().cassidy;
+		const player: Player = GAME().player;
+		const party: Party = GAME().party;
+		const cassidy: Cassidy = GAME().cassidy;
 		const world = WORLD();
 
 		const enc  = this;
@@ -1066,7 +1069,7 @@ export namespace CassidySparSexScenes {
 	}
 
 	export function WinPrompt() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const parse: any = {
 
@@ -1102,8 +1105,8 @@ export namespace CassidySparSexScenes {
 	}
 
 	export function AllFours() {
-		const player = GAME().player;
-		const cassidy = GAME().cassidy;
+		const player: Player = GAME().player;
+		const cassidy: Cassidy = GAME().cassidy;
 
 		const p1cock = player.BiggestCock();
 
@@ -1338,8 +1341,8 @@ export namespace CassidySparSexScenes {
 	}
 
 	export function GetBlown() {
-		const player = GAME().player;
-		const cassidy = GAME().cassidy;
+		const player: Player = GAME().player;
+		const cassidy: Cassidy = GAME().cassidy;
 
 		const p1cock = player.BiggestCock();
 
@@ -1418,8 +1421,8 @@ export namespace CassidySparSexScenes {
 	}
 
 	export function GetLicked() {
-		const player = GAME().player;
-		const cassidy = GAME().cassidy;
+		const player: Player = GAME().player;
+		const cassidy: Cassidy = GAME().cassidy;
 
 		let parse: any = {
 
@@ -1496,8 +1499,8 @@ export namespace CassidySparSexScenes {
 	}
 
 	export function Spank() {
-		const player = GAME().player;
-		const cassidy = GAME().cassidy;
+		const player: Player = GAME().player;
+		const cassidy: Cassidy = GAME().cassidy;
 
 		let parse: any = {
 
@@ -1558,7 +1561,7 @@ export namespace CassidySparSexScenes {
 	}
 
 	export function Outro() {
-		const cassidy = GAME().cassidy;
+		const cassidy: Cassidy = GAME().cassidy;
 		const world = WORLD();
 
 		const parse: any = {
@@ -1586,9 +1589,9 @@ export namespace CassidySparSexScenes {
 	}
 
 	export function Loss() {
-		const player = GAME().player;
-		const party = GAME().party;
-		const cassidy = GAME().cassidy;
+		const player: Player = GAME().player;
+		const party: Party = GAME().party;
+		const cassidy: Cassidy = GAME().cassidy;
 		const world = WORLD();
 
 		const enc  = this;
@@ -1696,8 +1699,8 @@ export namespace CassidySparSexScenes {
 	}
 
 	export function DomRide() {
-		const player = GAME().player;
-		const cassidy = GAME().cassidy;
+		const player: Player = GAME().player;
+		const cassidy: Cassidy = GAME().cassidy;
 
 		const p1cock = player.BiggestCock();
 
@@ -1834,7 +1837,7 @@ export namespace CassidySparSexScenes {
 	}
 
 	export function SuckOnBreasts() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		let parse: any = {
 
@@ -1887,8 +1890,8 @@ export namespace CassidySparSexScenes {
 	}
 
 	export function Tribbing() {
-		const player = GAME().player;
-		const cassidy = GAME().cassidy;
+		const player: Player = GAME().player;
+		const cassidy: Cassidy = GAME().cassidy;
 
 		let parse: any = {
 
@@ -2001,7 +2004,7 @@ export namespace CassidySparSexScenes {
 	}
 
 	export function LossOutro() {
-		const cassidy = GAME().cassidy;
+		const cassidy: Cassidy = GAME().cassidy;
 		const world = WORLD();
 
 		const parse: any = {
