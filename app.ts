@@ -1,7 +1,7 @@
 // Universal constants
 const frametime = 0.050; // Used for time updates
-export const windowWidth  = 1260;
-export const windowHeight = 700;
+export const windowWidth  = 1280;
+export const windowHeight = 720;
 
 const APP_NAME = "Fall of Eden";
 const VERSION_MAJOR = 0;
