@@ -542,13 +542,14 @@ export class Entity {
 	}
 
 	public PregnancyTrigger(womb: Womb, slot: number) {
+		const that = this;
 		// Use unshift instead of push to make sure pregnancy doesn't interfere with scene progression
-		Gui.Callstack.unshift(function() {
+		Gui.Callstack.unshift(() => {
 			womb.pregnant = false;
 
 			if (GetDEBUG()) {
 				const parse: any = {
-					name : this.name,
+					name : that.name,
 				};
 
 				Text.Clear();

@@ -5,16 +5,21 @@ CHANGELOG for Fall of Eden
                   CURRENT
 --------------------------------------------
 
+Version 0.5.2
+-------------
+* Fixed bug in Abilities (would show if you tried to Heal out of combat, and then pressed "Back").
+* Fixed bug in default pregnancy trigger handler.
+
+--------------------------------------------
+             PREVIOUS VERSIONS
+--------------------------------------------
+
 Version 0.5.1
 -------------
 * Correctly bundled fonts.
 * Fixed a bug in one of Cale's scenes.
 * Fixed Fera being bugged.
 * Fixed Miranda first date bug.
-
---------------------------------------------
-             PREVIOUS VERSIONS
---------------------------------------------
 
 Version 0.5.0
 -------------

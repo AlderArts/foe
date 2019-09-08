@@ -274,9 +274,9 @@ export namespace NagaScenes {
 			parse.comp = party.Get(1).name;
 		} else if (party.Num() > 2) {
 			parse.comp = "your companions";
-	} else {
+		} else {
 			parse.comp = "";
-	}
+		}
 
 		Gui.Callstack.push(() => {
 			Text.Clear();

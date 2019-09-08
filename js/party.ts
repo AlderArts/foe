@@ -10,7 +10,7 @@ import * as _ from "lodash";
 import { GetDEBUG } from "../app";
 import { Images } from "./assets";
 import { Entity } from "./entity";
-import { GAME, WORLD } from "./GAME";
+import { GAME, NAV, WORLD } from "./GAME";
 import { GameState, SetGameState } from "./gamestate";
 import { Gui } from "./gui";
 import { Inventory } from "./inventory";
@@ -158,9 +158,15 @@ export class Party {
 	}
 	// From "Total"
 	public Get(num: number): Entity {
-		if (num < this.members.length) { return this.members[num]; } else {
+		if (num < this.members.length) {
+			return this.members[num];
+		} else {
 			num -= this.members.length;
-			if (num < this.reserve.length) { return this.reserve[num]; } else { return undefined; }
+			if (num < this.reserve.length) {
+				return this.reserve[num];
+			} else {
+				return undefined;
+			}
 		}
 	}
 	public CloneParty(reserve?: boolean) {
@@ -486,7 +492,7 @@ export class Party {
 									});
 								}
 
-								Gui.SetButtonsFromList(target, true, Party.prototype.ShowAbilities);
+								Gui.SetButtonsFromList(target, true, NAV().ShowAbilities);
 							},
 						});
 					}
