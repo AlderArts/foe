@@ -52,7 +52,7 @@ export class Cassidy extends Entity {
 		this.femTimer   = new Time();
 
 		// Shop stuff
-		this.shop = CreateShop();
+		this.shop = CreateShop(this);
 		this.flags.shop     = 0;
 		this.shopItems = [];
 
@@ -271,9 +271,7 @@ export class CassidySpar extends Entity {
 	}
 }
 
-const CreateShop = () => {
-	const cassidy = GAME().cassidy;
-
+const CreateShop = (cassidy: Cassidy) => {
 	return new Shop({
 		buyPromptFunc(item: Item, cost: number, bought: boolean) {
 			const coin = Text.NumToText(cost);
