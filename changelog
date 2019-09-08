@@ -10,6 +10,7 @@ Version 0.5.2
 * Fixed bug in Abilities (would show if you tried to Heal out of combat, and then pressed "Back").
 * Fixed bug in default pregnancy trigger handler.
 * Fixed Cassidy's shop being broken.
+* Added the ability to set cock size on character creation.
 
 --------------------------------------------
              PREVIOUS VERSIONS

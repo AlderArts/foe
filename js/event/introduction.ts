@@ -29,7 +29,8 @@ import { Party } from "../party";
 import { Text } from "../text";
 import { TF } from "../tf";
 import { KiakaiFlags } from "./kiakai-flags";
-import { UruFlags } from "./uru";
+import { Player } from "./player";
+import { Uru, UruFlags } from "./uru";
 
 // Create location
 const DarkAspect = {
@@ -55,7 +56,7 @@ export namespace Intro {
 	* Introductory scene (start of game). Entry into the attic
 	*/
 	export function Start() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 
 		party.SwitchIn(player);
@@ -104,7 +105,7 @@ export namespace Intro {
 	* Character creation functions
 	*/
 	export function SelectGender() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		Text.Clear();
 		Gui.ClearButtons();
@@ -124,7 +125,7 @@ export namespace Intro {
 
 	/* TODO: Set body type */
 	export function SelectBodyTypeMale() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		Text.Clear();
 		Gui.ClearButtons();
@@ -134,29 +135,96 @@ export namespace Intro {
 
 		Input.buttons[0].Setup("Average", () => {
 			player.body.DefMale(BodyTypeMale.Average);
-			Intro.SkinColor();
+			Intro.SelectCockSize();
 		}, true);
 		Input.buttons[1].Setup("Thin", () => {
 			player.body.DefMale(BodyTypeMale.Thin);
-			Intro.SkinColor();
+			Intro.SelectCockSize();
 		}, true);
 		Input.buttons[2].Setup("Muscular", () => {
 			player.body.DefMale(BodyTypeMale.Muscular);
-			Intro.SkinColor();
+			Intro.SelectCockSize();
 		}, true);
 		Input.buttons[3].Setup("Girly", () => {
 			player.body.DefMale(BodyTypeMale.Girly);
-			Intro.SkinColor();
+			Intro.SelectCockSize();
 		}, true);
 		Input.buttons[4].Setup("Trap", () => {
 			player.body.DefMale(BodyTypeMale.Trap);
-			Intro.SkinColor();
+			Intro.SelectCockSize();
 		}, true);
+	}
+
+	export function SelectCockSize() {
+		const player: Player = GAME().player;
+
+		Text.Clear();
+		Text.Add("How big is your cock?");
+		Text.Flush();
+
+		const options = new Array();
+		options.push({ nameStr : "3\"",
+			func() {
+				player.FirstCock().length.base = 6;
+				player.FirstCock().thickness.base = 1.5;
+				Intro.SkinColor();
+			}, enabled : true,
+		});
+		options.push({ nameStr : "4\"",
+			func() {
+				player.FirstCock().length.base = 8;
+				player.FirstCock().thickness.base = 2;
+				Intro.SkinColor();
+			}, enabled : true,
+		});
+		options.push({ nameStr : "5\"",
+			func() {
+				player.FirstCock().length.base = 10;
+				player.FirstCock().thickness.base = 2.5;
+				Intro.SkinColor();
+			}, enabled : true,
+		});
+		options.push({ nameStr : "6\"",
+			func() {
+				player.FirstCock().length.base = 12;
+				player.FirstCock().thickness.base = 3;
+				Intro.SkinColor();
+			}, enabled : true,
+		});
+		options.push({ nameStr : "7\"",
+			func() {
+				player.FirstCock().length.base = 14;
+				player.FirstCock().thickness.base = 3;
+				Intro.SkinColor();
+			}, enabled : true,
+		});
+		options.push({ nameStr : "8\"",
+			func() {
+				player.FirstCock().length.base = 16;
+				player.FirstCock().thickness.base = 3.5;
+				Intro.SkinColor();
+			}, enabled : true,
+		});
+		options.push({ nameStr : "9\"",
+			func() {
+				player.FirstCock().length.base = 18;
+				player.FirstCock().thickness.base = 3.5;
+				Intro.SkinColor();
+			}, enabled : true,
+		});
+		options.push({ nameStr : "10\"",
+			func() {
+				player.FirstCock().length.base = 20;
+				player.FirstCock().thickness.base = 4;
+				Intro.SkinColor();
+			}, enabled : true,
+		});
+		Gui.SetButtonsFromList(options);
 	}
 
 	/* TODO: Set body type */
 	export function SelectBodyTypeFemale() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		Text.Clear();
 		Gui.ClearButtons();
@@ -191,7 +259,7 @@ export namespace Intro {
 	}
 
 	export function SkinColor() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		Text.Clear();
 		Gui.ClearButtons();
@@ -218,7 +286,7 @@ export namespace Intro {
 	}
 
 	export function HairColor() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		Text.Clear();
 		Gui.ClearButtons();
@@ -257,7 +325,7 @@ export namespace Intro {
 	}
 
 	export function EyeColor() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		Text.Clear();
 		Gui.ClearButtons();
@@ -292,7 +360,7 @@ export namespace Intro {
 	}
 
 	export function Review() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		Text.Clear();
 		Gui.ClearButtons();
@@ -312,7 +380,7 @@ export namespace Intro {
 	}
 
 	export function JobSelect() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		Text.Clear();
 		Text.Add("What profession do you wish to start out as? You will receive a small permanent stat bonus, and a slight head start in your chosen class.");
@@ -460,7 +528,7 @@ export namespace Intro {
 			Text.NL();
 		},
 		() => {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 
 			Text.Clear();
 
@@ -508,7 +576,7 @@ export namespace Intro {
 			Text.NL();
 		},
 		() => {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 
 			Text.Clear();
 			Text.Add("With no time to lose, you attempt to climb the cliff, somehow finding purchase for your fingers and toes in the ragged rock face. With difficulty, you manage to climb up a crevice, reaching a small platform. The area is about ten by ten yards large, surrounded by jagged outcroppings as sharp as swords.");
@@ -540,7 +608,7 @@ export namespace Intro {
 	// Intro IMP  scenes
 
 	export function ImpsWinPrompt() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		Text.Clear();
 
@@ -590,7 +658,7 @@ export namespace Intro {
 	}
 
 	export function ImpsWinUseMale() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const imp = new Imp();
 
@@ -698,7 +766,7 @@ export namespace Intro {
 	}
 
 	export function ImpsWinUseFemale() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const imp = new Imp();
 
@@ -797,7 +865,7 @@ export namespace Intro {
 	}
 
 	export function ImpsWinRide() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const imp = new Imp();
 
 		const parse: any = {
@@ -830,7 +898,7 @@ export namespace Intro {
 	}
 
 	export function ImpsWinRideEntrypoint() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const imp = new Imp();
 
 		const parse: any = {
@@ -874,7 +942,7 @@ export namespace Intro {
 	}
 
 	export function ImpsWinGroup() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const imp = new Imp();
 
 		const parse: any = {
@@ -990,7 +1058,7 @@ export namespace Intro {
 	}
 
 	export function ImpsLossOral() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const imp = new Imp();
 
 		const parse: any = {
@@ -1032,7 +1100,7 @@ export namespace Intro {
 	}
 
 	export function ImpsLossFucked() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const imp = new Imp();
 
 		const parse: any = {
@@ -1096,7 +1164,7 @@ export namespace Intro {
 
 	// timesTakenDemonGift
 	export function DemonGift() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		TimeStep({minute: 30});
 
@@ -1213,8 +1281,8 @@ export namespace Intro {
 	let lubedFlag: boolean;
 
 	export function DemonFight() {
-		const player = GAME().player;
-		const uru = GAME().uru;
+		const player: Player = GAME().player;
+		const uru: Uru = GAME().uru;
 
 		let parse: any = {
 
@@ -1342,7 +1410,7 @@ export namespace Intro {
 	let cuntBlocked: boolean;
 
 	export function DemonAftermath() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		Text.Clear();
 
@@ -1374,7 +1442,7 @@ export namespace Intro {
 	DarkAspect.Cliff.events.push(new Link(
 		"Imps", true, true,
 		() => {
-			const uru = GAME().uru;
+			const uru: Uru = GAME().uru;
 			if (uru.flags.Intro & UruFlags.Intro.LostToImps) {
 				Text.Add("The imps are still hanging around, sneering and hooting at you. Going near them is probably not going to end well for you. They would probably jump at a chance to have another go at you.");
 			} else {
@@ -1383,7 +1451,7 @@ export namespace Intro {
 			Text.NL();
 		},
 		() => {
-			const uru = GAME().uru;
+			const uru: Uru = GAME().uru;
 			if (uru.flags.Intro & UruFlags.Intro.LostToImps) {
 				Intro.ImpsLossPrompt();
 			} else {
@@ -1443,7 +1511,7 @@ export namespace Intro {
 	}
 
 	export function ChooseName() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		Text.Clear();
 		Text.Add("What is your name?");
@@ -1510,7 +1578,7 @@ export namespace Intro {
 			Text.NL();
 		},
 		() => {
-			const uru = GAME().uru;
+			const uru: Uru = GAME().uru;
 
 			Text.Clear();
 
@@ -1607,8 +1675,8 @@ export namespace Intro {
 	}
 
 	export function UruConfirmGift() {
-		const player = GAME().player;
-		const uru = GAME().uru;
+		const player: Player = GAME().player;
+		const uru: Uru = GAME().uru;
 
 		Text.Clear();
 		player.SetLevelBonus();
@@ -1631,7 +1699,7 @@ export namespace Intro {
 	}
 
 	export function UruGen() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		Text.Clear();
 
@@ -1691,8 +1759,8 @@ export namespace Intro {
 	let fuckedTarget: BodyPartType;
 
 	export function UruSexChoice() {
-		const player = GAME().player;
-		const uru = GAME().uru;
+		const player: Player = GAME().player;
+		const uru: Uru = GAME().uru;
 
 		Text.Add("Dimly, you realize that you are about to bang a demon - an extremely sexy demon, sure, but the detail still nags at your muddled mind.");
 		Text.NL();
@@ -1743,8 +1811,8 @@ export namespace Intro {
 	}
 
 	export function UruGiveClitcock() {
-		const player = GAME().player;
-		const uru = GAME().uru;
+		const player: Player = GAME().player;
+		const uru: Uru = GAME().uru;
 
 		Text.Clear();
 
@@ -1799,8 +1867,8 @@ export namespace Intro {
 	}
 
 	export function UruSexFuckVagina() {
-		const player = GAME().player;
-		const uru = GAME().uru;
+		const player: Player = GAME().player;
+		const uru: Uru = GAME().uru;
 
 		let parse: any = {
 
@@ -1910,8 +1978,8 @@ export namespace Intro {
 	}
 
 	export function UruSexFuckAnal() {
-		const player = GAME().player;
-		const uru = GAME().uru;
+		const player: Player = GAME().player;
+		const uru: Uru = GAME().uru;
 
 		let parse: any = {
 
@@ -2098,7 +2166,7 @@ export namespace Intro {
 	}
 
 	export function UruSexFuckAnal2() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const parse: any = {
 			cock() { return player.FirstCock().Short(); },
@@ -2127,7 +2195,7 @@ export namespace Intro {
 
 	// fuckedTarget
 	export function UruSexGetFucked() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		Text.Clear();
 		Text.Add("Her husky smile slowly spreads while you squirm uncomfortably under her gaze. ");
@@ -2211,8 +2279,8 @@ export namespace Intro {
 
 	// timesSuckedUru
 	export function UruSexGetFuckedSuck() {
-		const player = GAME().player;
-		const uru = GAME().uru;
+		const player: Player = GAME().player;
+		const uru: Uru = GAME().uru;
 
 		Text.Clear();
 
@@ -2280,8 +2348,8 @@ export namespace Intro {
 	}
 
 	export function UruSexGetFuckedLead() {
-		const player = GAME().player;
-		const uru = GAME().uru;
+		const player: Player = GAME().player;
+		const uru: Uru = GAME().uru;
 
 		let parse: any = {
 			playername : player.name,
@@ -2356,8 +2424,8 @@ export namespace Intro {
 	}
 
 	export function UruSexGetFuckedLead2() {
-		const player = GAME().player;
-		const uru = GAME().uru;
+		const player: Player = GAME().player;
+		const uru: Uru = GAME().uru;
 
 		const uruCockDesc = () => uru.FirstCock().Short();
 		let targetDesc;
@@ -2380,7 +2448,7 @@ export namespace Intro {
 
 	// Entry from willing passive fuck (choice)
 	export function UruSexGetFuckedPassive() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		Text.NL();
 
@@ -2391,8 +2459,8 @@ export namespace Intro {
 
 	// Get fucked from fuck scenes jump in here
 	export function UruSexGetFuckedPassive2() {
-		const player = GAME().player;
-		const uru = GAME().uru;
+		const player: Player = GAME().player;
+		const uru: Uru = GAME().uru;
 
 		let parse: any = {
 
@@ -2532,8 +2600,8 @@ export namespace Intro {
 	}
 
 	export function UruSexAftermath() {
-		const player = GAME().player;
-		const uru = GAME().uru;
+		const player: Player = GAME().player;
+		const uru: Uru = GAME().uru;
 
 		let parse: any = {
 
@@ -2702,7 +2770,7 @@ export namespace Intro {
 	));
 
 	export function AriaPurification() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		Text.Clear();
 
@@ -2885,7 +2953,7 @@ export namespace Intro {
 	}
 
 	export function NomadsWakingUp() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const kiakai = GAME().kiakai;
 		const party: Party = GAME().party;
 
@@ -3088,7 +3156,7 @@ export namespace Intro {
 	}
 
 	export function KiaDecideOutset() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const kiakai = GAME().kiakai;
 		const party: Party = GAME().party;
 
@@ -3233,7 +3301,7 @@ export namespace Intro {
 	}
 
 	export function KiaNiceSex() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const kiakai = GAME().kiakai;
 
 		let parse: any = {
@@ -3317,7 +3385,7 @@ export namespace Intro {
 	}
 
 	export function KiaNiceSex69() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const kiakai = GAME().kiakai;
 
 		let parse: any = {
@@ -3423,7 +3491,7 @@ export namespace Intro {
 	}
 
 	export function KiaNaughtySex() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const kiakai = GAME().kiakai;
 
 		let parse: any = {
@@ -3533,7 +3601,7 @@ export namespace Intro {
 	}
 
 	export function Finalizing() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const kiakai = GAME().kiakai;
 		const party: Party = GAME().party;
 
