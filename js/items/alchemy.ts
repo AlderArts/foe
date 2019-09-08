@@ -939,21 +939,21 @@ const gestariumBellyGrowth = (target: Entity, wombs: Womb[], parse: any) => {
 		Text.Add("Gradually, [name] become[notS] aware of a faint pressure deep within [hisher] lower belly, palpable waves of contentment radiating from within even as the skin quavers and pulses to reflect the changes taking place within.", parse);
 	} else if (size < 0.3) {
 		Text.Add("Slowly, the warmth turns to pressure, and [name] look[notS] down to find the gentle swell of [hisher] baby bump pushing outward. Almost unnoticeable before, it’s becoming less and less so with each passing moment as the life growing inside begins to push against [poss] womb in earnest.", parse);
- } else if (size < 0.5) {
+ 	} else if (size < 0.5) {
 		Text.Add("[Name] let[notS] out a gentle, quivering sigh as the warmth begins to push outward and clutch[notEs] [hisher] belly as butterflies erupt in the pit of [hisher] stomach. Pulsating with steady growth, [poss] baby bump begins to spread [hisher] hands apart as the potion’s effects take hold and cause the offspring within to mature rapidly. It’s not that big yet, but how large will it be when this is over?", parse);
- } else if (size < 0.8) {
+ 	} else if (size < 0.8) {
 		Text.Add("A soft moan escapes [poss] mouth as [hisher] tummy, already obviously pregnant, begins to fill out even more thanks to the potion’s effects.", parse);
- } else if (size < 1.2) {
+ 	} else if (size < 1.2) {
 		Text.Add("[Name] pant[notS] and gasp[notS] as the feeling of being so full of life floods [hisher] senses; shamelessly, [heshe] rub[notS] [hisher] hands of the burgeoning swell of [hisher] [belly] as it fills out beautifully. Already heavily pregnant and being filled with even more life by the moment, one can only guess at where the growth will stop…", parse);
- } else if (size < 1.6) {
+ 	} else if (size < 1.6) {
 		Text.Add("Slowly, almost reluctantly, the potion’s effects take hold, and [name] moan[notS] unabashedly at the wondrous sensations coursing through [hisher] body, centered about [hisher] womb. Already stretched taut, the skin about [hisher] pregnant belly grows thinner and thinner as the life within grows bigger and bigger, heavier and heavier…", parse);
- } else if (size < 2.0) {
+ 	} else if (size < 2.0) {
 		Text.Add("An ominous rumble resounds from deep within [poss] womb, the usually taut skin of [hisher] womb quivering like jelly as energy gathers in preparation for what’s to come. It doesn’t take long, either - before you know it, [poss] pregnancy is swelling forth before your very eyes, a rapid, pulsating growth. Pushing out and then shrinking in a little, pushing out and then shrinking in a little, [poss] oversized pregnancy already looks overdue with twins, and it’s still getting bigger…", parse);
- } else if (size < 3.0) {
+ 	} else if (size < 3.0) {
 		Text.Add("Clutching [hisher] monstrous pregnancy, [name] huff[notS] and puff[notS], openly panting as the potion acts on the new life developing within [himher]. Staggering a little as [hisher] center of balance begins to shift once more, [name] run[notS] a hand over the taut [skin] that covers the swell of [hisher] pregnancy, delighting in the growth that’s taking place.", parse);
- } else {
+ 	} else {
 		Text.Add("It seems impossible that [name] could get any larger, yet that’s exactly what happens. Lost in the sheer bliss of warmth and growth, [name] [isAre] certainly in a motherly way as the potion takes hold on [hisher] burgeoning womb. Tightly stretched skin creaks as [poss] growth accelerates, and you can’t help but wonder if [name] [isAre] about to burst…", parse);
- }
+ 	}
 	Text.Add(" ");
 
 	const womb = _.sample(wombs);
@@ -970,13 +970,13 @@ const gestariumBellyGrowth = (target: Entity, wombs: Womb[], parse: any) => {
 		Text.Add("When the sensation passes, [poss] belly has grown ever so slightly outward, the barest of bumps to mark [poss] pregnancy. Even with the potion’s help, it’ll probably be a little while before the new life within is ready to emerge into the world.", parse);
 	} else if (newSize < 0.5) {
 		Text.Add("With the growth over, [poss] pregnant bump has settled into a small protrusion - now plainly visible, but still concealable if [heshe] [wasWere] to wear loose-fitting clothes. There’s still plenty of room in [poss] womb for [hisher] offspring to grow, if need be…", parse);
- } else if (newSize < 0.8) {
+ 	} else if (newSize < 0.8) {
 		Text.Add("A gurgle sounds from within [poss] [belly], marking the end of the potion-induced growth spurt. [Name] very obviously look[notS] pregnant now - [hisher] belly is impossible to hide, a protruding bump that sticks out in front of [himher]. There’s some weight to it, but it doesn’t look <i>heavy</i> yet - although one wonders if that’s going to change as time passes.", parse);
- } else if (newSize < 1.2) {
+ 	} else if (newSize < 1.2) {
 		Text.Add("After the growth spurt’s passed, [name] [isAre] left holding a very huggable pregnant belly: full, rounded and looking as large as a full-term pregnancy - perhaps a little more. With all the added weight, [name] [hasHave] shifted [hisher] stance a little to deal with [hisher] lower center of gravity.", parse);
- } else if (newSize < 1.6) {
+ 	} else if (newSize < 1.6) {
 		Text.Add("By the time [poss] womb has calmed once more, [name] [isAre] massive - perhaps the size of a mother carrying full-term twins, give or take a month or so.Tapering off at its peak, [poss] belly juts out before [himher], round and full.", parse);
- } else if (newSize < 2.0) {
+ 	} else if (newSize < 2.0) {
 		Text.Add("The extent to which [poss] belly swells is a little worrisome - well, more than a little worrisome. [HeShe] [isAre] already so large, [hisher] hands barely able to fully encircle the massive maternal mound that juts from [hisher] midesction - just how much longer is this pregnancy going to take, and more importantly, how much bigger [isAre] [name] going to grow?", parse);
 		Text.NL();
 		Text.Add("You can only suppose that [poss] body knows what’s it’s doing and hasn’t bitten off more than it can chew, but even so…", parse);
@@ -986,7 +986,7 @@ const gestariumBellyGrowth = (target: Entity, wombs: Womb[], parse: any) => {
 		Text.Add("For [poss] own sake, though, hopefully the birthing moment isn’t too far off…", parse);
 	} else {
 		Text.Add("Utterly and massively pregnant, you can only wonder how [name] manage[notS] to remain standing as the potion’s effects finally run their course. Ripe and full to the point of bursting, [heshe] can’t even reach around the new contours of [hisher] pregnancy. It can’t be long now, can it? Can it?", parse);
- }
+ 	}
 
 	// PC only, since these are more internal feelings than anything else. Play these if the player progresses from one stage to another. I believe it’s impossible for the PC to jump any more than 1 stage from a potion, so things should be fine.
 	// Could a separate one be made for followers?
