@@ -899,7 +899,7 @@ gestarium.Short = () => "A bottle of Gestarium";
 gestarium.Long  = () => "A small vial of thick, clear liquid. Drinking this while pregnant will cause the drinker’s pregnancy to advance somewhat.";
 gestarium.recipe = [{it: fertilium}, {it: estros}, {it: bovia}];
 // Effects
-gestarium.PushEffect((target: Entity) => {
+const gestariumProgress = (target: Entity) => {
 	let parse: any = {
 		Name : target.NameDesc(),
 		name : target.nameDesc(),
@@ -930,7 +930,9 @@ gestarium.PushEffect((target: Entity) => {
 		Text.Add("Moments tick by, but nothing happens. Maybe drinking this while not pregnant wasn’t the best of ideas… ", parse);
 	}
 	Text.NL();
-});
+};
+
+gestarium.PushEffect(gestariumProgress);
 
 const gestariumBellyGrowth = (target: Entity, wombs: Womb[], parse: any) => {
 	const size = target.pregHandler.BellySize();
@@ -1148,6 +1150,7 @@ gestariumPlus.PushEffect((target: Entity) => {
 	}
 	Text.Flush();
 });
+gestariumPlus.PushEffect(gestariumProgress);
 gestariumPlus.PushEffect(TF.ItemEffects.DecTone, {odds: 0.1, ideal: 0, max: .1});
 gestariumPlus.PushEffect(TF.ItemEffects.IncFem, {odds: 0.1, ideal: 1, max: .1});
 

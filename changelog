@@ -11,6 +11,7 @@ Version 0.5.2
 * Fixed bug in default pregnancy trigger handler.
 * Fixed Cassidy's shop being broken.
 * Added the ability to set cock size on character creation.
+* The pregnancy hastening effects of Gestarium are now applied when using Gestarium+ too.
 
 --------------------------------------------
              PREVIOUS VERSIONS
