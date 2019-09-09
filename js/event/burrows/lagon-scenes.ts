@@ -1647,7 +1647,7 @@ export namespace LagonScenes {
 
         };
 
-        party.location = WORLD().loc.Plains.Burrows.Pit;
+        party.location = WORLD().loc.Burrows.Pit;
         TimeStep({season: 1});
 
         Text.Clear();
@@ -1738,7 +1738,7 @@ export namespace LagonScenes {
 
         Gui.NextPrompt(() => {
             TimeStep({season : 1});
-            party.location = WORLD().loc.Plains.Burrows.Pit;
+            party.location = WORLD().loc.Burrows.Pit;
 
             Text.Clear();
             Text.Add("At first, your new body could barely even take Vena, but the more drugs the bunnies feed you, the easier it becomes, until one day, your master is finally able to fuck you. You cry in pleasure as Lagon’s enormous shafts drills into your flexible pussy, your belly swollen from the numerous loads he’s graced you with.", parse);
