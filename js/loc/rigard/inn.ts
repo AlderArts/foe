@@ -14,6 +14,7 @@ import { TwinsFlags } from "../../event/royals/twins-flags";
 import { GAME, MoveToLocation, TimeStep, WORLD, WorldTime } from "../../GAME";
 import { GameState, SetGameState } from "../../gamestate";
 import { Gui } from "../../gui";
+import { ILocRigardInn } from "../../location";
 import { Party } from "../../party";
 import { Status } from "../../statuseffect";
 import { Text } from "../../text";
@@ -22,34 +23,34 @@ import { RigardFlags } from "./rigard-flags";
 
 export function InitLB() {
 	const world = WORLD();
-	world.SaveSpots.LB = InnLoc.room;
-	world.SaveSpots.LB2 = InnLoc.penthouse;
+	world.SaveSpots.LB = InnLoc.Room;
+	world.SaveSpots.LB2 = InnLoc.Penthouse;
 }
 
 let efriaction: string;
 
-const InnLoc = {
-	common    : new Event("Lady's Blessing"),
-	backroom  : new Event("Back room"),
-	cellar    : new Event("Cellar"),
-	room      : new Event(() => {
+const InnLoc: ILocRigardInn = {
+	Common    : new Event("Lady's Blessing"),
+	Backroom  : new Event("Back room"),
+	Cellar    : new Event("Cellar"),
+	Room      : new Event(() => {
 		const rigard = GAME().rigard;
 		return "Room " + rigard.LB.RoomNr;
 	}),
-	room69    : new Event("Room 369"),
-	penthouse : new Event("Penthouse"),
+	Room69    : new Event("Room 369"),
+	Penthouse : new Event("Penthouse"),
 };
 
 //
 // Bar
 //
-InnLoc.common.description = () => {
+InnLoc.Common.description = () => {
 	Text.Add("You are in the Lady's Blessing's main room.");
 	Text.NL();
 	Text.Flush();
 };
 
-InnLoc.common.links.push(new Link(
+InnLoc.Common.links.push(new Link(
 	"Outside", true, true,
 	undefined,
 	() => {
@@ -57,33 +58,33 @@ InnLoc.common.links.push(new Link(
 	},
 ));
 
-InnLoc.common.links.push(new Link(
+InnLoc.Common.links.push(new Link(
 	"Penthouse", () => {
 		const twins = GAME().twins;
 		return twins.flags.Met >= TwinsFlags.Met.Access;
 	}, true,
 	undefined,
 	() => {
-		MoveToLocation(InnLoc.penthouse, {minute: 5});
+		MoveToLocation(InnLoc.Penthouse, {minute: 5});
 	},
 ));
 
 // Twins' room
-InnLoc.penthouse.SaveSpot = "LB2";
-InnLoc.penthouse.safe = () => true;
-InnLoc.penthouse.description = () => {
+InnLoc.Penthouse.SaveSpot = "LB2";
+InnLoc.Penthouse.safe = () => true;
+InnLoc.Penthouse.description = () => {
 	Text.Add("You are in the Lady's Blessing's penthouse.");
 	Text.NL();
 	Text.Flush();
 };
-InnLoc.penthouse.links.push(new Link(
+InnLoc.Penthouse.links.push(new Link(
 	"Downstairs", true, true,
 	undefined,
 	() => {
-		MoveToLocation(InnLoc.common, {minute: 5});
+		MoveToLocation(InnLoc.Common, {minute: 5});
 	},
 ));
-InnLoc.penthouse.events.push(new Link(
+InnLoc.Penthouse.events.push(new Link(
 	"Twins", true, true,
 	undefined,
 	() => {
@@ -112,7 +113,7 @@ InnLoc.common.links.push(new Link(
 ));
 */
 
-InnLoc.common.endDescription = () => {
+InnLoc.Common.endDescription = () => {
 	const rigard = GAME().rigard;
 	const player = GAME().player;
 
@@ -131,7 +132,7 @@ InnLoc.common.endDescription = () => {
 };
 
 // TODO: Companion reactions?
-InnLoc.common.DrunkHandler = () => {
+InnLoc.Common.DrunkHandler = () => {
 	const parse: any = {};
 	const busy = RigardFlags.LB.Busy();
 	parse.busy = busy === RigardFlags.LB.BusyState.busy ? "few places" : "spot";
@@ -143,7 +144,7 @@ InnLoc.common.DrunkHandler = () => {
 	Gui.NextPrompt();
 };
 
-InnLoc.common.onEntry = (preventClear: boolean, oldLocation: any) => {
+InnLoc.Common.onEntry = (preventClear: boolean, oldLocation: any) => {
 	const rigard = GAME().rigard;
 	const player = GAME().player;
 	const party: Party = GAME().party;
@@ -763,7 +764,7 @@ export namespace LBScenes {
 			});
 		}
 
-		const leiPresent = lei.IsAtLocation(InnLoc.common);
+		const leiPresent = lei.IsAtLocation(InnLoc.Common);
 
 		if (lei.flags.Met < LeiFlags.Met.KnowName) {
 			options.push({ nameStr : "Stranger",
@@ -1730,21 +1731,21 @@ export namespace LBScenes {
 	export function RegularRoom(companion?: Entity) {
 		const rigard = GAME().rigard;
 		const party: Party = GAME().party;
-		const room = InnLoc.room;
+		const room = InnLoc.Room;
 		rigard.LB.RoomComp = party.GetSlot(companion);
 		MoveToLocation(room, {minute : 5});
 	}
 
 }
 
-InnLoc.room.SaveSpot = "LB";
-InnLoc.room.safe = () => true;
-InnLoc.room.description = () => {
+InnLoc.Room.SaveSpot = "LB";
+InnLoc.Room.safe = () => true;
+InnLoc.Room.description = () => {
 	Text.Add("A pair of large beds stand at opposite walls, with a small table, four chairs, and a cabinet between them. The room is spotless, not a single spec of dust anywhere, and the furniture is decorated with tasteful ironwork and carvings. Approaching a bed, you find that the sheets have a light lemony scent about them. You touch a pillow, and your finger sinks gently into its downy softness. Sleeping here would probably be incredibly refreshing and comfortable. Or you could also do something else.");
 	Text.NL();
 	Text.Flush();
 };
-InnLoc.room.events.push(new Link(
+InnLoc.Room.events.push(new Link(
 	() => {
 		const rigard = GAME().rigard;
 		const party: Party = GAME().party;
@@ -1772,7 +1773,7 @@ InnLoc.room.events.push(new Link(
 		}
 	},
 ));
-InnLoc.room.SleepFunc = () => {
+InnLoc.Room.SleepFunc = () => {
 	const rigard = GAME().rigard;
 	const player = GAME().player;
 	const party: Party = GAME().party;
@@ -1818,7 +1819,7 @@ InnLoc.room.SleepFunc = () => {
 
 			Text.Add("You notice that it's rather late, and you were actually supposed to leave the room already. You decide that overstaying a little can't hurt much as you pack your things and head back downstairs. Entering the common room, you notice [ikname] frowning slightly in your direction.", parse);
 			Text.NL();
-			party.location = InnLoc.common;
+			party.location = InnLoc.Common;
 		}
 
 		Text.Flush();
@@ -1831,18 +1832,18 @@ InnLoc.room.SleepFunc = () => {
 	});
 };
 
-InnLoc.room.links.push(new Link(
+InnLoc.Room.links.push(new Link(
 	"Leave", true, true,
 	() => {
 		Text.Add("You could head back downstairs. ");
 	},
 	() => {
-		MoveToLocation(InnLoc.common, {minute: 5});
+		MoveToLocation(InnLoc.Common, {minute: 5});
 	},
 ));
 
 // SET UP EVENTS/LINKS
-InnLoc.common.events.push(new Link(
+InnLoc.Common.events.push(new Link(
 	"Order food",
 	true, () => {
 		const party: Party = GAME().party;
@@ -1864,7 +1865,7 @@ InnLoc.common.events.push(new Link(
 	LBScenes.OrderFood,
 ));
 
-InnLoc.common.events.push(new Link(
+InnLoc.Common.events.push(new Link(
 	() => {
 		const rigard = GAME().rigard;
 		if (RigardFlags.LB.OrvinIsInnkeeper()) {
@@ -1920,12 +1921,12 @@ InnLoc.common.events.push(new Link(
 	},
 ));
 
-InnLoc.common.events.push(new Link(
+InnLoc.Common.events.push(new Link(
 	() => {
 		const lei = GAME().lei;
 		return lei.flags.Met >= LeiFlags.Met.KnowName ? "Lei" : "Stranger";
 	},
-	() => GAME().lei.IsAtLocation(InnLoc.common), () => {
+	() => GAME().lei.IsAtLocation(InnLoc.Common), () => {
 		const rigard = GAME().rigard;
 		return rigard.flags.RoyalAccessTalk > 0;
 	},
@@ -1933,7 +1934,7 @@ InnLoc.common.events.push(new Link(
 	() => { LeiScenes.Interact(); },
 ));
 
-InnLoc.common.events.push(new Link(
+InnLoc.Common.events.push(new Link(
 	"Room", RigardFlags.LB.HasRentedRoom, true,
 	() => {
 		if (RigardFlags.LB.HasRentedRoom()) {
@@ -1945,7 +1946,7 @@ InnLoc.common.events.push(new Link(
 	LBScenes.GotoRoom,
 ));
 
-InnLoc.common.events.push(new Link(
+InnLoc.Common.events.push(new Link(
 	"Room 369", () => {
 		const room69 = GAME().room69;
 		return room69.flags.Rel !== Room69Flags.RelFlags.NotMet;

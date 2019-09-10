@@ -48,7 +48,7 @@ export namespace MirandaScenes {
 			return miranda.flags.Thief === 0 && miranda.OnPatrol();
 		});
 
-		world.loc.Rigard.Tavern.common.events.push(new Link("Miranda", () => GAME().miranda.IsAtLocation(), true,
+		world.loc.Rigard.Tavern.Common.events.push(new Link("Miranda", () => GAME().miranda.IsAtLocation(), true,
 			() => {
 				if (GAME().miranda.IsAtLocation()) {
 					Text.Add("Miranda is lounging at a table in the shady tavern. ");
@@ -384,7 +384,7 @@ export namespace MirandaScenes {
 
 		};
 
-		party.location = world.loc.Rigard.Barracks.sparring;
+		party.location = world.loc.Rigard.Barracks.Sparring;
 		TimeStep({minute: 5});
 
 		Text.NL();
@@ -415,7 +415,7 @@ export namespace MirandaScenes {
 				Text.Add("You return inside the common room and sit down with Miranda.");
 				Text.Flush();
 
-				party.location = world.loc.Rigard.Barracks.sparring;
+				party.location = world.loc.Rigard.Barracks.Sparring;
 				TimeStep({minute: 5});
 
 				MirandaScenes.BarracksPrompt();
@@ -454,7 +454,7 @@ export namespace MirandaScenes {
 			Text.Add("You return inside the common room and sit down with Miranda.");
 			Text.Flush();
 
-			party.location = world.loc.Rigard.Barracks.sparring;
+			party.location = world.loc.Rigard.Barracks.Sparring;
 			TimeStep({minute: 5});
 
 			MirandaScenes.BarracksPrompt();
@@ -5222,7 +5222,7 @@ export namespace MirandaScenes {
 
 		};
 
-		GAME().party.location = world.loc.Rigard.Residential.mDungeon;
+		GAME().party.location = world.loc.Rigard.Residential.MDungeon;
 
 		Text.NL();
 		Text.Add("PLACEHOLDER", parse);
@@ -5244,7 +5244,7 @@ export namespace MirandaScenes {
 
 		};
 
-		GAME().party.location = world.loc.Rigard.Residential.mDungeon;
+		GAME().party.location = world.loc.Rigard.Residential.MDungeon;
 
 		Text.NL();
 		Text.Add("PLACEHOLDER", parse);
@@ -5267,7 +5267,7 @@ export namespace MirandaScenes {
 
 		};
 
-		party.location = world.loc.Rigard.Residential.mDungeon;
+		party.location = world.loc.Rigard.Residential.MDungeon;
 
 		Text.NL();
 		Text.Add("PLACEHOLDER", parse);

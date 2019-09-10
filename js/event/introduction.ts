@@ -25,6 +25,7 @@ import { AccItems } from "../items/accessories";
 import { ArmorItems } from "../items/armor";
 import { WeaponsItems } from "../items/weapons";
 import { JobEnum, Jobs } from "../job";
+import { ILocDarkAspect, ILocLightAspect } from "../location";
 import { Party } from "../party";
 import { Text } from "../text";
 import { TF } from "../tf";
@@ -33,7 +34,7 @@ import { Player } from "./player";
 import { Uru, UruFlags } from "./uru";
 
 // Create location
-const DarkAspect = {
+const DarkAspect: ILocDarkAspect = {
 	Barrens   : new Event("Barrens"),
 	Mountains : new Event("Mountains"),
 	Cliff     : new Event("Cliffside"),
@@ -41,7 +42,7 @@ const DarkAspect = {
 };
 
 // Create location
-const LightAspect = {
+const LightAspect: ILocLightAspect = {
 	Garden   : new Event("Garden"),
 	Temple   : new Event("Temple"),
 };

@@ -9,6 +9,7 @@ import { TerryFlags } from "../../event/terry-flags";
 import { TerryScenes } from "../../event/terry-scenes";
 import { GAME, MoveToLocation, TimeStep, WORLD, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
+import { ILocRigardCastle } from "../../location";
 import { Party } from "../../party";
 import { Text } from "../../text";
 import { Season, Time } from "../../time";
@@ -20,7 +21,7 @@ export function InitCastle(rigardScenes: any) {
 	RigardScenes = rigardScenes;
 }
 
-const CastleLoc = {
+const CastleLoc: ILocRigardCastle = {
 	Grounds   : new Event("Royal grounds"),
 	MageTower : MageTowerLoc,
 	Court     : new Event("Royal court"),

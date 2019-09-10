@@ -14,12 +14,13 @@ import { MomoScenes } from "../event/momo";
 import { PoetScenes } from "../event/poet";
 import { RoamingScenes } from "../event/roaming";
 import { GAME, MoveToLocation, WORLD, WorldTime } from "../GAME";
+import { ILocKingsroad } from "../location";
 import { Text } from "../text";
 import { Season } from "../time";
 import { BurrowsFlags } from "./burrows-flags";
 
 // Create namespace
-const KingsRoadLoc = {
+const KingsRoadLoc: ILocKingsroad = {
 	Road         : new Event("King's road"),
 };
 

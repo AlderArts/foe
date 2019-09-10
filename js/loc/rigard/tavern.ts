@@ -8,18 +8,19 @@ import { MirandaFlags } from "../../event/miranda-flags";
 import { ZinaFlags } from "../../event/zina";
 import { GAME, MoveToLocation, TimeStep, WORLD} from "../../GAME";
 import { Gui } from "../../gui";
+import { ILocRigardTavern } from "../../location";
 import { Party } from "../../party";
 import { Text } from "../../text";
 import { RigardFlags } from "./rigard-flags";
 
-const TavernLoc = {
-	common   : new Event("Maidens' Bane"),
+const TavernLoc: ILocRigardTavern = {
+	Common   : new Event("Maidens' Bane"),
 };
 
 //
 // Tavern
 //
-TavernLoc.common.description = () => {
+TavernLoc.Common.description = () => {
 	const rigard = GAME().rigard;
 	Text.Add("You are in the tavern called the Maidens' Bane. The dim lighting makes it hard to make out details, and the heavy smell of hard alcohol mixed with bile stings your nostrils. Along the bar is a row of stools, a lot of them partly broken or mended - either missing a supporting peg, or the cushion is torn open with the material picked out, making the seat lumpy and hard.");
 	Text.NL();
@@ -33,7 +34,7 @@ TavernLoc.common.description = () => {
 	Text.NL();
 };
 
-TavernLoc.common.events.push(new Link(
+TavernLoc.Common.events.push(new Link(
 	() => {
 		const rigard = GAME().rigard;
 		return rigard.MetBarnaby() ? "Barnaby" : "Bartender";
@@ -44,7 +45,7 @@ TavernLoc.common.events.push(new Link(
 	},
 ));
 
-TavernLoc.common.links.push(new Link(
+TavernLoc.Common.links.push(new Link(
 	"Slums", true, true,
 	undefined,
 	() => {
@@ -53,7 +54,7 @@ TavernLoc.common.links.push(new Link(
 ));
 
 // TODO
-TavernLoc.common.DrunkHandler = () => {
+TavernLoc.Common.DrunkHandler = () => {
 	const rigard = GAME().rigard;
 	const party: Party = GAME().party;
 	const player = GAME().player;

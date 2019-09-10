@@ -7,6 +7,7 @@ import { TerryScenes } from "../../event/terry-scenes";
 import { GAME, MoveToLocation, TimeStep, WORLD, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
 import { QuestItems } from "../../items/quest";
+import { ILocRigardShops } from "../../location";
 import { Party } from "../../party";
 import { Text } from "../../text";
 import { BurrowsFlags } from "../burrows-flags";
@@ -25,7 +26,7 @@ export function InitMerchants(rigardScenes: any) {
 //
 // Merchants
 //
-const ShopStreetLoc = {
+const ShopStreetLoc: ILocRigardShops = {
 	Street       : new Event("Merchant street"),
 	OddShop      : OddShopLoc,
 	ClothShop    : ClothShopLoc,

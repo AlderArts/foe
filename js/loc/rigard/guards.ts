@@ -6,6 +6,7 @@ import { VaughnTasksScenes } from "../../event/outlaws/vaughn-tasks";
 import { TerryScenes } from "../../event/terry-scenes";
 import { GAME, MoveToLocation, WORLD, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
+import { ILocRigardBarracks } from "../../location";
 import { Text } from "../../text";
 import { RigardFlags } from "./rigard-flags";
 
@@ -15,10 +16,10 @@ export function InitGuards(rigardScenes: any) {
 }
 
 const GateLoc = new Event("Main Gate");
-const BarracksLoc = {
-	common   : new Event("Barracks commons"),
-	sparring : new Event("Sparring yard"),
-	captains : new Event("Captains quarters"),
+const BarracksLoc: ILocRigardBarracks = {
+	Common   : new Event("Barracks commons"),
+	Sparring : new Event("Sparring yard"),
+	Captains : new Event("Captains quarters"),
 };
 
 //
@@ -111,41 +112,41 @@ GateLoc.links.push(new Link(
 	},
 	undefined,
 	() => {
-		MoveToLocation(BarracksLoc.common, {minute: 5});
+		MoveToLocation(BarracksLoc.Common, {minute: 5});
 	},
 ));
 
 //
 // Barracks
 //
-BarracksLoc.common.description = () => {
+BarracksLoc.Common.description = () => {
 	Text.Add("There’s always some people around in the dimly lit barracks; a few eating, playing cards or trying to catch a few minutes of shut-eye before returning to their shifts. From the broad variety on display, the city watch consists of both humans and morphs of many kinds.");
 	Text.NL();
 };
 
-BarracksLoc.common.links.push(new Link(
+BarracksLoc.Common.links.push(new Link(
 	"Gate", true, true,
 	undefined,
 	() => {
 		MoveToLocation(GateLoc, {minute: 5});
 	},
 ));
-BarracksLoc.common.links.push(new Link(
+BarracksLoc.Common.links.push(new Link(
 	"Yard", true, true,
 	undefined,
 	() => {
-		MoveToLocation(BarracksLoc.sparring);
+		MoveToLocation(BarracksLoc.Sparring);
 	},
 ));
-BarracksLoc.common.links.push(new Link(
+BarracksLoc.Common.links.push(new Link(
 	"Captains", true, true,
 	undefined,
 	() => {
-		MoveToLocation(BarracksLoc.captains);
+		MoveToLocation(BarracksLoc.Captains);
 	},
 ));
 
-BarracksLoc.common.events.push(new Link(
+BarracksLoc.Common.events.push(new Link(
 	"Miranda", () => {
 		const miranda = GAME().miranda;
 		return miranda.IsAtLocation();
@@ -161,7 +162,7 @@ BarracksLoc.common.events.push(new Link(
 		MirandaScenes.BarracksApproach();
 	},
 ));
-BarracksLoc.common.events.push(new Link(
+BarracksLoc.Common.events.push(new Link(
 	"Evidence", () => {
 		return VaughnTasksScenes.Snitch.OnTask();
 	}, () => {
@@ -188,30 +189,30 @@ BarracksLoc.common.events.push(new Link(
 	},
 ));
 
-BarracksLoc.sparring.description = () => {
+BarracksLoc.Sparring.description = () => {
 	Text.Add("The sparring yard is used by the city watch to do basic training and drills for new recruits. There are a few strawman targets and an archery range, as well as racks of wooden practice weapons of various kinds.");
 	Text.NL();
 };
 
-BarracksLoc.sparring.links.push(new Link(
+BarracksLoc.Sparring.links.push(new Link(
 	"Commons", true, true,
 	undefined,
 	() => {
-		MoveToLocation(BarracksLoc.common);
+		MoveToLocation(BarracksLoc.Common);
 	},
 ));
 
 // TODO
-BarracksLoc.captains.description = () => {
+BarracksLoc.Captains.description = () => {
 	Text.Add("PLACEHOLDER: Capt's quarters.");
 	Text.NL();
 };
 
-BarracksLoc.captains.links.push(new Link(
+BarracksLoc.Captains.links.push(new Link(
 	"Commons", true, true,
 	undefined,
 	() => {
-		MoveToLocation(BarracksLoc.common);
+		MoveToLocation(BarracksLoc.Common);
 	},
 ));
 

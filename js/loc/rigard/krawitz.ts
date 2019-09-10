@@ -20,6 +20,7 @@ import { Input } from "../../input";
 import { AccItems } from "../../items/accessories";
 import { StrapOnItems } from "../../items/strapon";
 import { WeaponsItems } from "../../items/weapons";
+import { ILocRigardKrawitz } from "../../location";
 import { Party } from "../../party";
 import { Text } from "../../text";
 import { Season } from "../../time";
@@ -30,22 +31,7 @@ export function InitKrawitz() {
 	WORLD().SaveSpots.Krawitz = KrawitzLoc.Street;
 }
 
-interface ILocKrawitz {
-	Street: Event;
-	Servants: Event;
-	Grounds: Event;
-	Bathhouse: Event;
-	Mansion: ILocKrawitzMansion;
-}
-
-interface ILocKrawitzMansion {
-	Hall: Event;
-	Study: Event;
-	Kitchen: Event;
-	Storeroom: Event;
-}
-
-const KrawitzLoc: ILocKrawitz = {
+const KrawitzLoc: ILocRigardKrawitz = {
 	Street    : new Event("Krawitz's Estate"),
 	Servants  : new Event("Servants' Quarters"),
 	Grounds   : new Event("Grounds"),
@@ -2102,7 +2088,7 @@ export namespace KrawitzScenes {
 
 		Gui.NextPrompt(() => {
 			TimeStep({hour: 2});
-			party.location = world.loc.Rigard.Inn.common;
+			party.location = world.loc.Rigard.Inn.Common;
 
 			party.LoadActiveParty();
 
@@ -2251,7 +2237,7 @@ export namespace KrawitzScenes {
 			Gui.SetButtonsFromList(options, false, undefined);
 
 			Gui.Callstack.push(() => {
-				party.location = world.loc.Rigard.Inn.penthouse;
+				party.location = world.loc.Rigard.Inn.Penthouse;
 
 				twins.flags.Met = TwinsFlags.Met.Access;
 
@@ -2549,7 +2535,7 @@ export namespace KrawitzScenes {
 		Text.Flush();
 
 		Gui.NextPrompt(() => {
-			MoveToLocation(WORLD().loc.Rigard.Inn.common, {hour: 2});
+			MoveToLocation(WORLD().loc.Rigard.Inn.Common, {hour: 2});
 		});
 	}
 

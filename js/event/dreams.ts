@@ -54,7 +54,7 @@ export namespace DreamsScenes {
 				scenes.AddEnc(DreamsScenes.UruChoice, 1.0, () => true, ravenTrigger);
 				scenes.AddEnc(DreamsScenes.UruRun, 1.0, () => true, ravenTrigger);
 				scenes.AddEnc(DreamsScenes.AriaTemple, 1.0, () => true, ravenTrigger);
-				scenes.AddEnc(DreamsScenes.KiakaiMonster, 1.0, () => party.location === WORLD().loc.Rigard.Inn.room && party.InParty(kiakai), ravenTrigger);
+				scenes.AddEnc(DreamsScenes.KiakaiMonster, 1.0, () => party.location === WORLD().loc.Rigard.Inn.Room && party.InParty(kiakai), ravenTrigger);
 				scenes.AddEnc(DreamsScenes.Kiakai63, 1.0, () => party.InParty(kiakai), ravenTrigger);
 				scenes.AddEnc(DreamsScenes.RosalinNursing, 1.0, () => rosalin.flags.PastDialog > RosalinFlags.PastDialog.Past, ravenTrigger);
 				scenes.AddEnc(DreamsScenes.RosalinTransformation, 1.0, () => rosalin.flags.Met !== 0, ravenTrigger);

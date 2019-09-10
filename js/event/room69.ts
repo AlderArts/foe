@@ -62,7 +62,7 @@ export class Room69 extends Entity {
 
 	// Schedule (IS a location. Heh)
 	public IsAtLocation(location: any) {
-		return location === WORLD().loc.Rigard.Inn.room69;
+		return location === WORLD().loc.Rigard.Inn.Room69;
 	}
 
 }
@@ -259,7 +259,7 @@ export namespace Room69Scenes {
 					room69.flags.BadStart = Room69Flags.RelFlags.BadTerms;
 
 					Gui.NextPrompt(() => {
-						party.location = world.loc.Rigard.Inn.common;
+						party.location = world.loc.Rigard.Inn.Common;
 						Text.Clear();
 						Room69Scenes.Discovering69OrvinRant();
 						Text.Add(" At his skeptical look, you explain that you managed to talk it into letting you leave, though it was quite unpleasant.", parse);
@@ -397,7 +397,7 @@ export namespace Room69Scenes {
 		room69.flags.BadStart = Room69Flags.RelFlags.BrokeDoor;
 
 		Gui.NextPrompt(() => {
-			party.location = world.loc.Rigard.Inn.common;
+			party.location = world.loc.Rigard.Inn.Common;
 			Text.Clear();
 
 			Room69Scenes.Discovering69OrvinRant();
@@ -689,7 +689,7 @@ export namespace Room69Scenes {
 
 			if (party.Num() <= 1) {
 				Gui.NextPrompt(() => {
-					MoveToLocation(world.loc.Rigard.Inn.common);
+					MoveToLocation(world.loc.Rigard.Inn.Common);
 				});
 			} else {
 				Gui.NextPrompt(() => {
@@ -752,7 +752,7 @@ export namespace Room69Scenes {
 					scenes.Get();
 
 					Text.Flush();
-					party.location = world.loc.Rigard.Inn.common;
+					party.location = world.loc.Rigard.Inn.Common;
 					Gui.NextPrompt();
 				});
 			}

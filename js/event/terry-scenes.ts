@@ -795,7 +795,7 @@ export namespace TerryScenes {
 
 				Gui.NextPrompt(() => {
 					Text.Clear();
-					party.location = world.loc.Rigard.Tavern.common;
+					party.location = world.loc.Rigard.Tavern.Common;
 					TimeStep({hour: 1});
 					Text.Add("After Miranda calms down enough, you two somehow find yourselves at the Maidens' Bane. Word that the Royal Guard had <i>caught</i> the thief has spread and the blockade has been lifted. Miranda looks absolutely dejected, drowning her sorrows in a mugful of ale.", parse);
 					Text.NL();
@@ -840,7 +840,7 @@ export namespace TerryScenes {
 							Text.NL();
 
 							party.LoadActiveParty();
-							party.location = world.loc.Rigard.Inn.common;
+							party.location = world.loc.Rigard.Inn.Common;
 							TimeStep({hour: 1});
 
 							if (party.Num() > 1) {
@@ -864,7 +864,7 @@ export namespace TerryScenes {
 							Text.Clear();
 
 							party.LoadActiveParty();
-							party.location = world.loc.Rigard.Inn.common;
+							party.location = world.loc.Rigard.Inn.Common;
 							TimeStep({hour: 1});
 
 							if (party.Num() > 1) {

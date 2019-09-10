@@ -14,13 +14,14 @@ import { RoamingScenes } from "../event/roaming";
 import { GAME, MoveToLocation, TimeStep, WORLD } from "../GAME";
 import { Gui } from "../gui";
 import { QuestItems } from "../items/quest";
+import { ILocDesert } from "../location";
 import { Party } from "../party";
 import { Text } from "../text";
 import { BurrowsFlags } from "./burrows-flags";
 import { OasisScenes } from "./oasis";
 
 // Create namespace
-const DesertLoc = {
+const DesertLoc: ILocDesert = {
 	Drylands         : new Event("Drylands"),
 };
 

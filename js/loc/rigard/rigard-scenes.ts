@@ -6,6 +6,7 @@ import { MirandaScenes } from "../../event/miranda-scenes";
 import { TerryFlags } from "../../event/terry-flags";
 import { GAME, MoveToLocation, TimeStep, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
+import { ILocRigard } from "../../location";
 import { Party } from "../../party";
 import { Text } from "../../text";
 import { Rand } from "../../utility";
@@ -24,7 +25,7 @@ import { SlumsLoc } from "./slums";
 import { TavernLoc } from "./tavern";
 
 // Create namespace
-const RigardLoc = {
+const RigardLoc: ILocRigard = {
 	Gate         : GateLoc,
 	Barracks     : BarracksLoc,
 
@@ -1346,7 +1347,7 @@ export namespace RigardScenes {
 		Text.Add("<i>“We should discuss a few details before we get started, so let’s go to the Maiden’s Bane and plan our moves,”</i> she says, leading you toward her favorite watering hole.", parse);
 		Text.Flush();
 
-		party.location = RigardLoc.Tavern.common;
+		party.location = RigardLoc.Tavern.Common;
 		TimeStep({hour : 1});
 
 		Gui.NextPrompt(() => {

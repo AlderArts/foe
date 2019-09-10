@@ -20,6 +20,7 @@ import { AccItems } from "../../items/accessories";
 import { WeaponsItems } from "../../items/weapons";
 import { Jobs } from "../../job";
 import { BurrowsFlags } from "../../loc/burrows-flags";
+import { ILocBullTower } from "../../location";
 import { Party } from "../../party";
 import { PregnancyHandler } from "../../pregnancy";
 import { Stat } from "../../stat";
@@ -134,7 +135,7 @@ export class BullTowerStats {
  */
 
 // Create namespace
-const BullTowerLoc = {
+const BullTowerLoc: ILocBullTower = {
 	Courtyard :
 	{
 		Yard : new Event("Courtyard"),

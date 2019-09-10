@@ -108,7 +108,7 @@ PlazaLoc.links.push(new Link(
 		Text.Add("There is a large building bustling with the activity, apparently an inn. The sign over the entrance says “The Lady's Blessing”. ");
 	},
 	() => {
-		MoveToLocation(WORLD().loc.Rigard.Inn.common);
+		MoveToLocation(WORLD().loc.Rigard.Inn.Common);
 	},
 ));
 PlazaLoc.links.push(new Link(

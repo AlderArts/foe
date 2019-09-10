@@ -806,17 +806,17 @@ export namespace LeiScenes {
 
 	export function Desc() {
 		const lei = GAME().lei;
-		if (lei.IsAtLocation(WORLD().loc.Rigard.Inn.common)) {
+		if (lei.IsAtLocation(WORLD().loc.Rigard.Inn.Common)) {
 			if (lei.flags.Met < LeiFlags.Met.SeenGates) {
 				Text.Add("You notice a man sitting in the corner of the room on his own, a hood covering his face. There are a few others alone, a few others concealing their faces, but what draws your eye the most is his stillness. Whereas all others in the tavern are in motion, he sits completely still, his only movements the occasional tilt of his head, as he seems to scan the room, and the movement of his hand as he nurses some drink in a dark glass. Everything about him works to pique your curiosity, but you can’t quite come up with a reason to approach him.");
 				lei.flags.Met = LeiFlags.Met.SeenInn;
 			} else if (lei.flags.Met === LeiFlags.Met.SeenGates) {
 				Text.Add("You notice a man sitting in the corner of the room on his own, a hood hiding his face. His clothes are the same dark shade as that of the man you saw following the couple earlier, and something about his still watchfulness makes you suspicious. Perhaps you should approach him and investigate.");
- } else if (lei.flags.Met === LeiFlags.Met.KnowName) {
+ 			} else if (lei.flags.Met === LeiFlags.Met.KnowName) {
 				Text.Add("You see Lei back at his table in the corner of the room. He seems to be scanning the room much as he was last time. Perhaps it’s time to make a concerted effort to find out what his connection is with that couple.");
- } else {
+ 			} else {
 				Text.Add("You see Lei sitting in the corner of the room, nursing his habitual drink. He seems vigilant, as always, scanning the room slowly between sips.");
- }
+ 			}
 			Text.NL();
 		} else if (lei.flags.Met >= LeiFlags.Met.KnowName) {
 			Text.Add("Lei is not in his usual spot.");
@@ -948,9 +948,9 @@ export namespace LeiScenes {
 											Text.Add("[p1name] stands over you, looking down in mute horror", parse);
 										} else if (!party.Alone()) {
 											Text.Add("Your companions gather around you, looking down in mute horror");
- } else {
+ 										} else {
 											Text.Add("Your blood flows out over the cobblestones");
- }
+										}
 										Text.Add(", as the rain becomes a downpour.");
 										Text.NL();
 										Text.NL();
@@ -1707,9 +1707,9 @@ export namespace LeiScenes {
 			Text.Add("There is definitely something off here. The man’s accent is the same as before, but his diction has definitely changed.", parse);
 		} else if (nv) {
 			Text.Add("It’s possible you could, but as when he faced the guard, the range again favors him. He also seemed faster than before…", parse);
- } else {
+ 		} else {
 			Text.Add("You can’t decide whether you’re frustrated by the fact that he can evidently see better than you or glad of it. He managed to stop that blade awfully close.", parse);
- }
+ 		}
 		Text.NL();
 		parse.nv = nv ? "the sword vanishes as if it were never there" : "you feel the steel disappear from your neck";
 		parse.nv2 = nv ? "man" : "voice";

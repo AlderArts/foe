@@ -5,6 +5,7 @@ import { LeiScenes } from "../../event/royals/lei-scenes";
 import { TerryScenes } from "../../event/terry-scenes";
 import { GAME, MoveToLocation, WORLD } from "../../GAME";
 import { Gui } from "../../gui";
+import { ILocRigardResidential } from "../../location";
 import { Party } from "../../party";
 import { Text } from "../../text";
 import { BrothelScenes } from "./brothel";
@@ -15,7 +16,7 @@ export function InitResidential(rigardScenes: any) {
 	RigardScenes = rigardScenes;
 }
 
-const ResidentialLoc = {
+const ResidentialLoc: ILocRigardResidential = {
 	Street   : new Event("Residential street"), // Will also contain gate to slums
 	Tavern   : new Event("Maidens' bane"),
 	Miranda  : new Event("Miranda's house"),
@@ -129,7 +130,7 @@ ResidentialLoc.Street.links.push(new Link(
 		Text.NL();
 	},
 	() => {
-		MoveToLocation(WORLD().loc.Rigard.Brothel.brothel, {minute: 5});
+		MoveToLocation(WORLD().loc.Rigard.Brothel.Brothel, {minute: 5});
 	},
 ));
 ResidentialLoc.Street.links.push(new Link(

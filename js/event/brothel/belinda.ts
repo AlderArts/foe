@@ -67,7 +67,7 @@ export class Belinda extends Entity {
 	// Schedule
 	public IsAtLocation(location: any) {
 		location = location || GAME().party.location;
-		if (location === WORLD().loc.Rigard.Brothel.brothel) {
+		if (location === WORLD().loc.Rigard.Brothel.Brothel) {
 			return (WorldTime().hour >= 18 || WorldTime().hour < 6);
 		}
 		return false;

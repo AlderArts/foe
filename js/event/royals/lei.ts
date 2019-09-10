@@ -130,7 +130,7 @@ export class Lei extends Entity {
 	// Schedule
 	public IsAtLocation(location: any) {
 		// Numbers/slacking/sleep
-		if (location === WORLD().loc.Rigard.Inn.common && this.timeout.Expired()) {
+		if (location === WORLD().loc.Rigard.Inn.Common && this.timeout.Expired()) {
 			return (WorldTime().hour >= 14 && WorldTime().hour < 23);
 		}
 		return false;

@@ -11,11 +11,12 @@ import { LucilleScenes } from "../../event/brothel/lucille";
 import { RoaScenes } from "../../event/brothel/roa-scenes";
 import { GAME, MoveToLocation, TimeStep, WORLD } from "../../GAME";
 import { Gui } from "../../gui";
+import { ILocRigardBrothel } from "../../location";
 import { Text } from "../../text";
 
-const BrothelLoc = {
-	brothel  : new Event("Brothel"),
-	cellar   : new Event("Brothel: Cellar"),
+const BrothelLoc: ILocRigardBrothel = {
+	Brothel  : new Event("Brothel"),
+	Cellar   : new Event("Brothel: Cellar"),
 };
 
 export function InitBrothel() {
@@ -28,7 +29,7 @@ export function InitBrothel() {
 //
 // Brothel
 //
-BrothelLoc.brothel.description = () => {
+BrothelLoc.Brothel.description = () => {
 	Text.Add("The main area of the Shadow Lady is a large open room, two stories high. In stark contrast with the city outside, the interior of the brothel is like a lush oasis of luxury: brilliantly colored cushions of rich cloth piled on divans and couches. An assortment of customers and concubines lounge in the room, talking to each other in smaller groups, or pursuing other forms of entertainment.");
 	Text.NL();
 	Text.Add("Dominating the hall is a large stage for performers to show off their assets. A number of second story balconies give the richer clientele a nice overview of the hall, in addition to allowing for some measure of privacy.");
@@ -37,7 +38,7 @@ BrothelLoc.brothel.description = () => {
 	Text.NL();
 };
 
-BrothelLoc.brothel.links.push(new Link(
+BrothelLoc.Brothel.links.push(new Link(
 	"Outside", true, true,
 	undefined,
 	() => {
@@ -45,7 +46,7 @@ BrothelLoc.brothel.links.push(new Link(
 	},
 ));
 
-BrothelLoc.brothel.events.push(new Link(
+BrothelLoc.Brothel.events.push(new Link(
 	"Bouncer", true, false,
 	() => {
 		const ches = GAME().ches;
@@ -60,7 +61,7 @@ BrothelLoc.brothel.events.push(new Link(
 		// TODO
 	},
 ));
-BrothelLoc.brothel.events.push(new Link(
+BrothelLoc.Brothel.events.push(new Link(
 	"Lucille", () => {
 		const lucille = GAME().lucille;
 		return lucille.IsAtLocation();
@@ -78,7 +79,7 @@ BrothelLoc.brothel.events.push(new Link(
 		// TODO
 	},
 ));
-BrothelLoc.brothel.events.push(new Link(
+BrothelLoc.Brothel.events.push(new Link(
 	() => {
 		const roa = GAME().roa;
 		return roa.Met() ? "Roa" : "Bunny";
@@ -96,7 +97,7 @@ BrothelLoc.brothel.events.push(new Link(
 		RoaScenes.BrothelApproach();
 	},
 ));
-BrothelLoc.brothel.events.push(new Link(
+BrothelLoc.Brothel.events.push(new Link(
 	"Themed rooms", () => {
 		const lucille = GAME().lucille;
 		return lucille.ThemeroomOpen();
@@ -107,7 +108,7 @@ BrothelLoc.brothel.events.push(new Link(
 	},
 ));
 
-BrothelLoc.brothel.onEntry = () => {
+BrothelLoc.Brothel.onEntry = () => {
 	const rigard = GAME().rigard;
 	if (rigard.Brothel.Visit === 0) {
 		BrothelScenes.First();

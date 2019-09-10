@@ -5,6 +5,7 @@ import { MirandaScenes } from "../../event/miranda-scenes";
 import { LeiScenes } from "../../event/royals/lei-scenes";
 import { GAME, MoveToLocation, WORLD, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
+import { ILocRigardSlums } from "../../location";
 import { Text } from "../../text";
 import { Season } from "../../time";
 
@@ -13,7 +14,7 @@ export function InitSlums(rigardScenes: any) {
 	RigardScenes = rigardScenes;
 }
 
-const SlumsLoc = {
+const SlumsLoc: ILocRigardSlums = {
 	Gate     : new Event("Peasants' Gate"),
 	Docks    : new Event("Docks"),
 };
@@ -108,7 +109,7 @@ SlumsLoc.Gate.links.push(new Link(
 		Text.Add("Go to the tavern? ");
 	},
 	() => {
-		MoveToLocation(WORLD().loc.Rigard.Tavern.common, {minute: 10});
+		MoveToLocation(WORLD().loc.Rigard.Tavern.Common, {minute: 10});
 	},
 ));
 SlumsLoc.Gate.links.push(new Link(

@@ -8,10 +8,11 @@ import { EncounterTable } from "../encountertable";
 import { DrakeScenes } from "../enemy/drake";
 import { Event, Link } from "../event";
 import { MoveToLocation, WORLD } from "../GAME";
+import { ILocDragonDen } from "../location";
 import { Text } from "../text";
 
 // Create namespace
-const DragonDenLoc = {
+const DragonDenLoc: ILocDragonDen = {
 	Entry         : new Event("Den entrance"),
 };
 

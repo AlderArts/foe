@@ -18,11 +18,12 @@ import { MomoScenes } from "../event/momo";
 import { RoamingScenes } from "../event/roaming";
 import { GAME, MoveToLocation, WORLD, WorldTime } from "../GAME";
 import { Gui } from "../gui";
+import { ILocHighlands } from "../location";
 import { Text } from "../text";
 import { Season } from "../time";
 
 // Create namespace
-const HighlandsLoc = {
+const HighlandsLoc: ILocHighlands = {
 	Hills         : new Event("Hills"),
 	Spring        : new Event("Spring"),
 };
