@@ -30,7 +30,22 @@ export function InitKrawitz() {
 	WORLD().SaveSpots.Krawitz = KrawitzLoc.Street;
 }
 
-const KrawitzLoc = {
+interface ILocKrawitz {
+	Street: Event;
+	Servants: Event;
+	Grounds: Event;
+	Bathhouse: Event;
+	Mansion: ILocKrawitzMansion;
+}
+
+interface ILocKrawitzMansion {
+	Hall: Event;
+	Study: Event;
+	Kitchen: Event;
+	Storeroom: Event;
+}
+
+const KrawitzLoc: ILocKrawitz = {
 	Street    : new Event("Krawitz's Estate"),
 	Servants  : new Event("Servants' Quarters"),
 	Grounds   : new Event("Grounds"),

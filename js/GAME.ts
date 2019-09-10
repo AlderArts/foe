@@ -1,3 +1,4 @@
+import { IWorld } from "./location";
 import { Time } from "./time";
 
 let game: any = {};
@@ -18,17 +19,9 @@ export function GameCache() {
 	return gameCache;
 }
 
-const world: any = {
+const world: IWorld = {
 	// Prototype initialization
 	SaveSpots     : {},
-};
-
-world.Locations = {
-	Plains    : 0,
-	Forest    : 1,
-	Desert    : 2,
-	Highlands : 3,
-	Lake      : 4,
 };
 
 export function WORLD() {

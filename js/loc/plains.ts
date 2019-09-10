@@ -19,6 +19,7 @@ import { PortalOpeningScenes } from "../event/portalopening";
 import { RoamingScenes } from "../event/roaming";
 import { GAME, MoveToLocation, TimeStep, WORLD, WorldTime } from "../GAME";
 import { Gui } from "../gui";
+import { ILocPlains } from "../location";
 import { Party } from "../party";
 import { Text } from "../text";
 import { Season } from "../time";
@@ -29,7 +30,7 @@ import { DryadGladeFlags } from "./glade-flags";
 import { NomadsLoc } from "./nomads";
 
 // Create namespace
-const PlainsLoc = {
+const PlainsLoc: ILocPlains = {
 	Nomads         : NomadsLoc,
 	Crossroads     : new Event("Plains: Crossroads"),
 	Portals        : new Event(() => {

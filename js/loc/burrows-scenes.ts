@@ -12,6 +12,7 @@ import { VenaScenes } from "../event/burrows/vena-scenes";
 import { GlobalScenes } from "../event/global";
 import { GAME, MoveToLocation, TimeStep, WORLD, WorldTime } from "../GAME";
 import { Gui } from "../gui";
+import { ILocBurrows } from "../location";
 import { Party } from "../party";
 import { Text } from "../text";
 import { Season } from "../time";
@@ -23,7 +24,7 @@ export function InitBurrows() {
 }
 
 // Create namespace
-const BurrowsLoc = {
+const BurrowsLoc: ILocBurrows = {
 	Entrance  : new Event("The Burrows"),
 	Tunnels   : new Event("Burrows: Tunnels"),
 	Pit       : new Event("Burrows: The Pit"),

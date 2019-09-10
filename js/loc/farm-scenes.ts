@@ -12,6 +12,7 @@ import { GAME, MoveToLocation, TimeStep, WORLD, WorldTime } from "../GAME";
 import { GameState, SetGameState } from "../gamestate";
 import { Gui } from "../gui";
 import { IngredientItems } from "../items/ingredients";
+import { ILocFarm } from "../location";
 import { Party } from "../party";
 import { Text } from "../text";
 import { Season } from "../time";
@@ -990,7 +991,7 @@ export namespace FarmScenesIntro {
 }
 
 // Create namespace
-const FarmLoc = {
+const FarmLoc: ILocFarm = {
 	Fields : new Event("Plains: Gwendy's farm"),
 	Barn   : new Event("The barn"),
 	Loft   : new Event("Gwendy's loft"),

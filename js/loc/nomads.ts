@@ -15,6 +15,7 @@ import { RosalinScenes } from "../event/nomads/rosalin";
 import { NurseryScenes } from "../event/nursery";
 import { GAME, GameCache, MoveToLocation, WORLD, WorldTime } from "../GAME";
 import { Gui } from "../gui";
+import { ILocNomads } from "../location";
 import { Maze } from "../maze";
 import { Text } from "../text";
 
@@ -25,7 +26,7 @@ export function InitNomads() {
 	WORLD().SaveSpots.NomadsTent = NomadsLoc.Tent;
 }
 
-const NomadsLoc = {
+const NomadsLoc: ILocNomads = {
 	Tent       : new Event("Tent"), // Start area
 	Fireplace  : new Event("Nomads: Fireplace"),
 	Nursery    : new Event("Nomads: Nursery"),

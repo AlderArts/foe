@@ -19,6 +19,7 @@ import { OutlawsFlags } from "../event/outlaws/outlaws-flags";
 import { VaughnScenes } from "../event/outlaws/vaughn-scenes";
 import { GAME, MoveToLocation, WORLD, WorldTime } from "../GAME";
 import { Gui } from "../gui";
+import { ILocOutlaws } from "../location";
 import { Party } from "../party";
 import { Text } from "../text";
 import { RigardFlags } from "./rigard/rigard-flags";
@@ -28,7 +29,7 @@ export function InitOutlaws() {
 }
 
 // Create namespace
-const OutlawsLoc = {
+const OutlawsLoc: ILocOutlaws = {
 	Camp : new Event("Outlaws' camp"),
 	Infirmary : new Event("Infirmary"),
 };

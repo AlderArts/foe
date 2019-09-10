@@ -21,7 +21,7 @@ import { PlainsLoc } from "./loc/plains";
 import { InitRigard } from "./loc/rigard/rigard";
 import { RigardLoc } from "./loc/rigard/rigard-scenes";
 import { TreeCityLoc } from "./loc/treecity/treecity";
-import { ILocation } from "./location";
+import { ILocation, Locations } from "./location";
 
 export function InitWorld() {
 	const world = WORLD();
@@ -49,15 +49,15 @@ export function InitWorld() {
 		loc = loc || GAME().party.location;
 
 		if     (loc === PlainsLoc.Crossroads) {
-			return world.Locations.Plains;
+			return Locations.Plains;
 		} else if (loc === ForestLoc.Outskirts) {
-			return world.Locations.Forest;
+			return Locations.Forest;
  		} else if (loc === DesertLoc.Drylands) {
-			return world.Locations.Desert;
+			return Locations.Desert;
 		} else if (loc === HighlandsLoc.Hills) {
-			return world.Locations.Highlands;
+			return Locations.Highlands;
  		} else if (loc === LakeLoc.Shore) {
-			return world.Locations.Lake;
+			return Locations.Lake;
  		}
 
 		return -1;

@@ -18,6 +18,7 @@ import { GAME, MoveToLocation, TimeStep, WORLD, WorldTime } from "../GAME";
 import { Gui } from "../gui";
 import { IngredientItems } from "../items/ingredients";
 import { QuestItems } from "../items/quest";
+import { ILocForest } from "../location";
 import { Party } from "../party";
 import { Text } from "../text";
 import { Season } from "../time";
@@ -25,7 +26,7 @@ import { BurrowsFlags } from "./burrows-flags";
 import { GladeLoc } from "./glade";
 
 // Create namespace
-const ForestLoc = {
+const ForestLoc: ILocForest = {
 	Outskirts         : new Event("Forest outskirts"),
 	Glade             : GladeLoc,
 };

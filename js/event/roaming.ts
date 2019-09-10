@@ -9,6 +9,7 @@ import { Gui } from "../gui";
 import { AccItems } from "../items/accessories";
 import { IngredientItems } from "../items/ingredients";
 import { WeaponsItems } from "../items/weapons";
+import { Locations } from "../location";
 import { Party } from "../party";
 import { Text } from "../text";
 
@@ -46,8 +47,8 @@ export namespace RoamingScenes {
 
 		const loc = world.CurrentLocation();
 
-		parse.ground = loc === world.Locations.Desert ? "sand" :
-						loc === world.Locations.Forest ? "undergrowth" :
+		parse.ground = loc === Locations.Desert ? "sand" :
+						loc === Locations.Forest ? "undergrowth" :
 						"grass";
 
 		Text.Clear();
