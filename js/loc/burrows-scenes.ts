@@ -9,6 +9,7 @@ import { InitLagon, LagonScenes } from "../event/burrows/lagon-scenes";
 import { OpheliaScenes } from "../event/burrows/ophelia-scenes";
 import { VenaRScenes } from "../event/burrows/vena-restored";
 import { VenaScenes } from "../event/burrows/vena-scenes";
+import { GlobalScenes } from "../event/global";
 import { GAME, MoveToLocation, TimeStep, WORLD, WorldTime } from "../GAME";
 import { Gui } from "../gui";
 import { Party } from "../party";
@@ -519,7 +520,7 @@ export namespace BurrowsScenes {
 BurrowsLoc.Entrance.description = () => {
 	const burrows = GAME().burrows;
 	const parse: any = {
-		TreeFar : WORLD().TreeFarDesc(),
+		TreeFar : GlobalScenes.TreeFarDesc(),
 		l : burrows.LagonDefeated() ? "the lagomorph" : "Lagon’s",
 	};
 

@@ -103,7 +103,7 @@ NomadsLoc.Fireplace.onEntry = () => {
 };
 
 NomadsLoc.Fireplace.description = () => {
-	Text.Add("The nomad camp is currently set up in the middle of a wide grassland spreading out in all directions. [TreeFar] In the middle of the gathering of disparate tents that make up the nomad camp - about twenty in total - is a large fire pit.", {TreeFar: WORLD().TreeFarDesc()});
+	Text.Add("The nomad camp is currently set up in the middle of a wide grassland spreading out in all directions. [TreeFar] In the middle of the gathering of disparate tents that make up the nomad camp - about twenty in total - is a large fire pit.", {TreeFar: GlobalScenes.TreeFarDesc()});
 	Text.NL();
 	if (WorldTime().hour >= 7 && WorldTime().hour < 19) {
 		Text.Add("Currently it is unlit. Not many people are around, most likely seeing to their daily chores.");

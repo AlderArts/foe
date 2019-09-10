@@ -43,7 +43,7 @@ const PlainsLoc = {
 //
 PlainsLoc.Crossroads.description = () => {
 	const parse: any = {
-		TreeFar : WORLD().TreeFarDesc(),
+		TreeFar : GlobalScenes.TreeFarDesc(),
 		Rigard : GAME().rigard.Visited() ? "Rigard" : "a big city in the distance",
 	};
 
@@ -360,7 +360,7 @@ PlainsLoc.Gate.description = () => {
 
 	Text.Add("The walls have been unable to contain the city’s growth, and there is a large, sprawling slum spreading out by the riverside. Further downstream, the river leads to a large lake at the very edge of Eden, presumably launching its waters into the great void below.");
 	Text.NL();
-	Text.Add("The other path goes around the city, leading into the plains beyond, threading close to the vast forest. [TreeFar]", {TreeFar: WORLD().TreeFarDesc()});
+	Text.Add("The other path goes around the city, leading into the plains beyond, threading close to the vast forest. [TreeFar]", {TreeFar: GlobalScenes.TreeFarDesc()});
 	Text.NL();
 };
 PlainsLoc.Gate.links.push(new Link(
