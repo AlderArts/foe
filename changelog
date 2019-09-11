@@ -5,6 +5,14 @@ CHANGELOG for Fall of Eden
                   CURRENT
 --------------------------------------------
 
+Version 0.5.3
+-------------
+* 
+
+--------------------------------------------
+             PREVIOUS VERSIONS
+--------------------------------------------
+
 Version 0.5.2
 -------------
 * Fixed bug in Abilities (would show if you tried to Heal out of combat, and then pressed "Back").
@@ -14,10 +22,6 @@ Version 0.5.2
 * The pregnancy hastening effects of Gestarium are now applied when using Gestarium+ too.
 * Fixed a bug in Lagon's bad end.
 * Fixed a bug in fucking Terry with strapon (borrowed).
-
---------------------------------------------
-             PREVIOUS VERSIONS
---------------------------------------------
 
 Version 0.5.1
 -------------
