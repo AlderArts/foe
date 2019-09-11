@@ -26,6 +26,7 @@ import { EntityMenu } from "./entity-menu";
 import { GAME } from "./GAME";
 import { Gui } from "./gui";
 import { Item, ItemIds } from "./item";
+import { ItemToy } from "./items/toy-item";
 import { Jobs } from "./job";
 import { LactationHandler } from "./lactation";
 import { Perk, PerkIds, Perks } from "./perks";
@@ -130,7 +131,7 @@ export class Entity {
 	public acc1Slot: Item;
 	public acc2Slot: Item;
 
-	public strapOn: any;
+	public strapOn: ItemToy;
 
 	public elementAtk: DamageType;
 	public elementDef: DamageType;

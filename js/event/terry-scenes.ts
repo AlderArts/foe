@@ -25,6 +25,7 @@ import { PregnancyHandler } from "../pregnancy";
 import { Text } from "../text";
 import { TFItem } from "../tf";
 import { MirandaFlags } from "./miranda-flags";
+import { Player } from "./player";
 import { JeanneScenes } from "./royals/jeanne-scenes";
 import { TerryFlags } from "./terry-flags";
 
@@ -203,7 +204,7 @@ export namespace TerryScenes {
 	export function Prompt() {
 		const terry = GAME().terry;
 		const party: Party = GAME().party;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const parse: any = {
 			foxvixen : terry.mfPronoun("fox", "vixen"),
@@ -347,7 +348,7 @@ export namespace TerryScenes {
 	}
 	export function ExploreMerchants() {
 		const terry = GAME().terry;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const parse: any = {
 			weapon : player.WeaponDesc(),
@@ -418,7 +419,7 @@ export namespace TerryScenes {
 	}
 	export function ExplorePlaza() {
 		const terry = GAME().terry;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const miranda = GAME().miranda;
 
 		const parse: any = {
@@ -561,7 +562,7 @@ export namespace TerryScenes {
 
 	export function CaughtTheThief() {
 		const terry = GAME().terry;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const miranda = GAME().miranda;
 		const party: Party = GAME().party;
 		const rigard = GAME().rigard;
@@ -889,7 +890,7 @@ export namespace TerryScenes {
 
 	export function Release() {
 		const terry = GAME().terry;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const miranda = GAME().miranda;
 		const party: Party = GAME().party;
 		const world = WORLD();
@@ -1147,7 +1148,7 @@ export namespace TerryScenes {
 
 	export function TalkFeelings() {
 		const terry = GAME().terry;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		let parse: any = {
 			playername: player.name,
@@ -1278,7 +1279,7 @@ export namespace TerryScenes {
 
 	export function TalkPronoun() {
 		const terry = GAME().terry;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const parse: any = {
 			breasts() {
@@ -1365,7 +1366,7 @@ export namespace TerryScenes {
 
 	export function TalkPast(force: boolean) {
 		const terry = GAME().terry;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		let parse: any = {
 			foxvixen : terry.mfPronoun("fox", "vixen"),
@@ -1733,7 +1734,7 @@ export namespace TerryScenes {
 
 	export function TalkCompliment() {
 		const terry = GAME().terry;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const parse: any = {
 			foxvixen : terry.mfPronoun("fox", "vixen"),
@@ -1828,7 +1829,7 @@ export namespace TerryScenes {
 
 	export function SkinshipRummagePack() {
 		const terry = GAME().terry;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const parse: any = {
 			foxvixen : terry.mfPronoun("fox", "vixen"),
@@ -1872,7 +1873,7 @@ export namespace TerryScenes {
 
 	export function SkinshipPrompt() {
 		const terry = GAME().terry;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const parse: any = {
 			foxvixen : terry.mfPronoun("fox", "vixen"),
@@ -1933,7 +1934,7 @@ export namespace TerryScenes {
 
 	export function SkinshipPromptChoices() {
 		const terry = GAME().terry;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 
 		let parse: any = {
@@ -2233,7 +2234,7 @@ export namespace TerryScenes {
 
 	export function BrushTail() {
 		const terry = GAME().terry;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		let parse: any = {
 			foxvixen       : terry.mfPronoun("fox", "vixen"),
@@ -2610,7 +2611,7 @@ export namespace TerryScenes {
 
 	export function CheckFluids() {
 		const terry = GAME().terry;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		let parse: any = {
 			foxvixen       : terry.mfPronoun("fox", "vixen"),
@@ -2811,7 +2812,7 @@ export namespace TerryScenes {
 	// Need if(terry.flags["TF"] & TerryFlags.TF.TriedItem && !(terry.flags["TF"] & TerryFlags.TF.Rosalin))
 	export function RosalinTF() {
 		const terry = GAME().terry;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const rosalin = GAME().rosalin;
 
 		let parse: any = {
@@ -2890,7 +2891,7 @@ export namespace TerryScenes {
 
 	export function JeanneTFPrompt() {
 		const terry = GAME().terry;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 
 		let parse: any = {
@@ -2959,7 +2960,7 @@ export namespace TerryScenes {
 
 	export function JeanneTFCraft(item: TFItem, scene: CallableFunction, horseTF: boolean) {
 		const terry = GAME().terry;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		let parse: any = {
 			playername : player.name,
@@ -3279,7 +3280,7 @@ export namespace TerryScenes {
 
 	export function JeanneTFGrowBoobs() {
 		const terry = GAME().terry;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		let parse: any = {
 			playername : player.name,
@@ -3388,7 +3389,7 @@ export namespace TerryScenes {
 
 	export function JeanneTFShrinkBoobs() {
 		const terry = GAME().terry;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		let parse: any = {
 			playername : player.name,
@@ -3453,7 +3454,7 @@ export namespace TerryScenes {
 
 	export function JeanneTFStartLactate() {
 		const terry = GAME().terry;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		let parse: any = {
 			playername : player.name,
@@ -3514,7 +3515,7 @@ export namespace TerryScenes {
 
 	export function JeanneTFStopLactate() {
 		const terry = GAME().terry;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		let parse: any = {
 			playername : player.name,
@@ -3549,7 +3550,7 @@ export namespace TerryScenes {
 
 	export function JeanneTFGrowVag() {
 		const terry = GAME().terry;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		let parse: any = {
 			playername : player.name,
@@ -3594,7 +3595,7 @@ export namespace TerryScenes {
 
 	export function JeanneTFRemVag() {
 		const terry = GAME().terry;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		let parse: any = {
 			playername : player.name,
@@ -3643,7 +3644,7 @@ export namespace TerryScenes {
 
 	export function JeanneTFGrowCockEntrypoint() {
 		const terry = GAME().terry;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		let parse: any = {
 			playername : player.name,
@@ -3658,7 +3659,7 @@ export namespace TerryScenes {
 
 	export function JeanneTFHorsegasmEntrypoint() {
 		const terry = GAME().terry;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		let parse: any = {
 			playername : player.name,
@@ -3685,7 +3686,7 @@ export namespace TerryScenes {
 
 	export function JeanneTFGrowCock() {
 		const terry = GAME().terry;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		let parse: any = {
 			playername : player.name,
@@ -3734,7 +3735,7 @@ export namespace TerryScenes {
 	// TODO
 	export function JeanneTFRemCock() {
 		const terry = GAME().terry;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		let parse: any = {
 			playername : player.name,
@@ -3794,7 +3795,7 @@ export namespace TerryScenes {
 
 	export function JeanneTFGrowHorsecock() {
 		const terry = GAME().terry;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		let parse: any = {
 			playername : player.name,
@@ -3927,7 +3928,7 @@ export namespace TerryScenes {
 	// TODO
 	export function SexPrompt(backPrompt?: CallableFunction) {
 		const terry = GAME().terry;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		let parse: any = {
 			foxvixen : terry.mfPronoun("fox", "vixen"),
@@ -4065,7 +4066,7 @@ export namespace TerryScenes {
 
 	export function SexPromptChoice(backPrompt?: CallableFunction, haveadrink?: boolean) {
 		const terry = GAME().terry;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		let parse: any = {
 			playername : player.name,
@@ -4198,7 +4199,7 @@ export namespace TerryScenes {
 
 	export function SexGetOralPussy() {
 		const terry = GAME().terry;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		let parse: any = {
 			playername : player.name,
@@ -4376,7 +4377,7 @@ export namespace TerryScenes {
 
 	export function SexGetOralCock() {
 		const terry = GAME().terry;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const p1cock = player.BiggestCock();
 
@@ -4387,7 +4388,7 @@ export namespace TerryScenes {
 			master     : player.mfTrue("master", "mistress"),
 		};
 		parse = terry.ParserPronouns(parse);
-		parse = player.ParserTags(parse);
+		parse = player.ParserTags(parse, "", p1cock);
 		parse = terry.ParserTags(parse, "t");
 		parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 		parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
@@ -4447,7 +4448,7 @@ export namespace TerryScenes {
 
 	export function SexGetOralCockCont(parse: any, p1cock: Cock) {
 		const terry = GAME().terry;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const isLarge = p1cock.Volume() >= 100;
 
@@ -4846,7 +4847,7 @@ export namespace TerryScenes {
 
 	export function SexPitchAnal(cocksInAss: Cock[]) {
 		const terry = GAME().terry;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const p1Cock = player.BiggestCock(cocksInAss);
 
@@ -4856,7 +4857,7 @@ export namespace TerryScenes {
 			master  : player.mfTrue("master", "mistress"),
 			playername : player.name,
 		};
-		parse = player.ParserTags(parse);
+		parse = player.ParserTags(parse, "", p1Cock);
 		parse = terry.ParserPronouns(parse);
 		parse = terry.ParserTags(parse, "t");
 
@@ -5406,7 +5407,7 @@ export namespace TerryScenes {
 
 	export function SexFuckButtEntrypoint(p1Cock: Cock, promise: boolean, retFunc: any) {
 		const terry = GAME().terry;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const virgin = terry.Butt().virgin;
 		const knotted = p1Cock.knot !== 0;
@@ -5418,7 +5419,7 @@ export namespace TerryScenes {
 			mistermiss : player.mfTrue("mister", "miss"),
 			playername : player.name,
 		};
-		parse = player.ParserTags(parse);
+		parse = player.ParserTags(parse, "", p1Cock);
 		parse = terry.ParserPronouns(parse);
 		parse = terry.ParserTags(parse, "t");
 
@@ -5467,9 +5468,9 @@ export namespace TerryScenes {
 					Text.Add("<i>“Not bad, all things considered. Better than I expected, anyway.”</i>", parse);
 				} else if (terry.Slut() < 60) {
 					Text.Add("<i>“Nice and full. I think you can start moving now.”</i>", parse);
-	} else {
+				} else {
 					Text.Add("<i>“Pretty good, but you’d better get moving before I get it in my mind to run this show myself, [mistermiss] ‘nice and slow’.”</i> [HeShe] clenches [hisher] ass, drawing a groan out of you.", parse);
-	}
+				}
 				if (promise) {
 					Text.NL();
 					Text.Add("You gently tousle Terry’s ears affectionately, assuring [himher] that you remember your promise; you’ll keep things nice and gentle for [himher], just like [heshe] asked. No better way to lose [hisher] virginity than that.", parse);
@@ -5523,7 +5524,7 @@ export namespace TerryScenes {
 					Text.Add(" Terry’s equine endowment throbs in your grasp; you can feel as the massive load being held in [hisher] balls travels up [hisher] shaft to spew forth like from a perverted hose, matting [hisher] [tbreasts], arms and the ground below. You continue to stroke [hisher] cock throughout the orgasm, making it a point to squeeze the large knot that’s formed just at the base, drawing a few extra jets as Terry groans and cries like a slut.", parse);
 				} else if (terry.FirstCock()) {
 					Text.Add(" Terry’s cock throbs in your grasp. You can feel [hisher] knot inflating as [heshe] spews jet after jet of fox-seed below, emptying [hisher] balls of their liquid load.", parse);
-	}
+				}
 				Text.NL();
 
 				const cum = terry.OrgasmCum();
@@ -5671,7 +5672,7 @@ export namespace TerryScenes {
 
 	export function SexWorship() {
 		const terry = GAME().terry;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		let parse: any = {
 			playername : player.name,
@@ -6208,7 +6209,7 @@ export namespace TerryScenes {
 	// Clean Terry Up Entry Point
 	export function PCCleansTerry(func?: any, opts: any = {}) {
 		const terry = GAME().terry;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		let parse: any = {
 			playername : player.name,
@@ -6362,7 +6363,7 @@ export namespace TerryScenes {
 	// Terry cleans PC Entry Point
 	export function TerryCleansPC(func?: any, opts: any = {}) {
 		const terry = GAME().terry;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 
 		let parse: any = {
@@ -6782,7 +6783,7 @@ export namespace TerryScenes {
 
 	export function SexPitchVaginal(cocks: Cock[]) {
 		const terry = GAME().terry;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 
 		const p1cock  = player.BiggestCock(cocks);
@@ -6795,7 +6796,7 @@ export namespace TerryScenes {
 			fox         : terry.HorseCock() ? "horse" : "fox-",
 			boygirl     : player.mfTrue("boy", "girl"),
 		};
-		parse = player.ParserTags(parse);
+		parse = player.ParserTags(parse, "", p1cock);
 		parse = terry.ParserTags(parse, "t");
 
 		let p2cock: Cock;
@@ -8271,7 +8272,7 @@ export namespace TerryScenes {
 
 	export function SexCatchVaginal() {
 		const terry = GAME().terry;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const p1cock = player.BiggestCock();
 
@@ -8285,7 +8286,7 @@ export namespace TerryScenes {
 			manwoman   : terry.mfPronoun("man", "woman"),
 			mastermistress : player.mfFem("master", "mistress"),
 		};
-		parse = player.ParserTags(parse);
+		parse = player.ParserTags(parse, "", p1cock);
 		parse = terry.ParserTags(parse, "t");
 
 		parse = terry.ParserPronouns(parse);
@@ -8769,7 +8770,7 @@ export namespace TerryScenes {
 	// Returns true for inside, false for outside
 	export function SexCatchVaginalHeChooses() {
 		const terry = GAME().terry;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const tpreg = terry.PregHandler().IsPregnant();
 		const preg = player.PregHandler().IsPregnant();
@@ -8792,7 +8793,7 @@ export namespace TerryScenes {
 
 	export function SexCatchVaginalInsideHorseCock(parse: any) {
 		const terry = GAME().terry;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		Text.Add("You gasp as you feel yourself stretching around the [foxvixen]’s knot; for a moment, you fear [heshe]’s going to force [himher]self in, but thankfully the pressure eases and Terry pulls away. That was kinda rough!", parse);
 		Text.NL();
@@ -8896,7 +8897,7 @@ export namespace TerryScenes {
 
 	export function SexCatchVaginalOutsideHorseCock(parse: any) {
 		const terry = GAME().terry;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		Text.Add("You can't help but moan softly as you feel Terry slowing down. [HeShe] keeps thrusting, but at a much more sedate pace, gyrating [hisher] hips on each stroke through your tunnels. [HeShe] whimpers softly with the effort, [hisher] cock throbbing inside your tunnel, but is steadfast at [hisher] task.", parse);
 		Text.NL();
@@ -8972,7 +8973,7 @@ export namespace TerryScenes {
 
 	export function SexCatchVaginalInsideFoxCock(parse: any) {
 		const terry = GAME().terry;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		Text.Add("You cry out as you are forcibly stuffed and stretched by the [foxvixen]'s surprisingly big knot; as soon as it’s past your entrance, you can feel it growing into a rock-solid plug to hold you in place. Terry instinctively tries to back out, but since [hisher] knot has the two of you tied, all [heshe] manages to do is tug your walls. It feels wonderful, and you let [himher] know that with a deep, pleasure-filled moan.", parse);
 		Text.NL();
@@ -9083,7 +9084,7 @@ export namespace TerryScenes {
 
 	export function SexCatchVaginalOutsideFoxCock(parse: any) {
 		const terry = GAME().terry;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		Text.Add("The [foxvixen] takes a few deep breaths, steadying [himher]self before cracking [hisher] knuckles. <i>“Alright, let’s get to work!”</i> Grinning widely, you nod hungrily and assure [himher] that you're ready.", parse);
 		Text.NL();
@@ -9156,7 +9157,7 @@ export namespace TerryScenes {
 
 	export function SexCatchAnal() {
 		const terry = GAME().terry;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const p1cock = player.BiggestCock();
 
@@ -9166,7 +9167,7 @@ export namespace TerryScenes {
 			fox        : terry.HorseCock() ? "stallion" : "fox-",
 			boygirl    : player.mfFem("boy", "girl"),
 		};
-		parse = player.ParserTags(parse);
+		parse = player.ParserTags(parse, "", p1cock);
 		parse = terry.ParserTags(parse, "t");
 
 		const first = terry.flags.caFirst === 0;
@@ -9943,7 +9944,7 @@ export namespace TerryScenes {
 
 	export function SexHaveADrinkPussy() {
 		const terry = GAME().terry;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		let parse: any = {
 			playername : player.name,
@@ -10813,7 +10814,7 @@ export namespace TerryScenes {
 
 	export function SexHaveADrinkCock() {
 		const terry = GAME().terry;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		let parse: any = {
 			playername : player.name,
@@ -11755,7 +11756,7 @@ export namespace TerryScenes {
 
 	export function SexHaveADrinkBreasts() {
 		const terry = GAME().terry;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		let parse: any = {
 			playername : player.name,
@@ -11984,7 +11985,7 @@ export namespace TerryScenes {
 
 	export function SexHaveADrinkBreastsMilk(parse: any) {
 		const terry = GAME().terry;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		// #Milk quantity block
 		Text.Clear();
@@ -12167,7 +12168,7 @@ export namespace TerryScenes {
 
 	export function SexHaveADrinkBreastsArousalHorsecock(parse: any) {
 		const terry = GAME().terry;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		Text.Clear();
 		Text.Add("You suddenly feel something poking against ", parse);
@@ -12489,7 +12490,7 @@ export namespace TerryScenes {
 
 	export function SexHaveADrinkBreastsArousalFoxcock(parse: any) {
 		const terry = GAME().terry;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		Text.Clear();
 		Text.Add("Decision made, you slide yourself neatly off of Terry’s back and seat yourself on the ground beside [himher]. Without preamble, you reach out and scoop the [foxvixen] off of the ground, pulling [himher] unceremoniously into your lap.", parse);
@@ -12802,7 +12803,7 @@ export namespace TerryScenes {
 
 	export function SexHaveADrinkBreastsArousalPussy(parse: any) {
 		const terry = GAME().terry;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		Text.Clear();
 		Text.Add("Time to make your little [foxvixen] really feel like a woman...", parse);

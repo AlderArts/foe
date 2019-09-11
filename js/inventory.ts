@@ -7,6 +7,7 @@ import { GAME } from "./GAME";
 import { Gui } from "./gui";
 import { compareItemByProp, IItemQuantity, Item, ItemIds, ItemSubtype, ItemType } from "./item";
 import { CombatItem } from "./items/combatitems";
+import { ItemToy } from "./items/toy-item";
 import { Text } from "./text";
 
 // Inventory
@@ -495,7 +496,7 @@ export class Inventory {
 
 						case ItemSubtype.StrapOn:
 							if (entity.strapOn) { inv.AddItem(entity.strapOn); }
-							entity.strapOn = t;
+							entity.strapOn = t as ItemToy;
 							break;
 					}
 					entity.Equip();
