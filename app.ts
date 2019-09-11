@@ -7,7 +7,7 @@ const APP_NAME = "Fall of Eden";
 const VERSION_MAJOR = 0;
 const VERSION_MINOR = 5;
 const VERSION_SUBSCRIPT = 2;
-const VERSION_NAME = "QoL update";
+const VERSION_NAME = "QoL update (bugfix 2)";
 
 export const SAVE_VERSION = 29;
 // Save version 1: Initial
