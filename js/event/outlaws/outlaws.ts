@@ -9,6 +9,7 @@ import { GAME, TimeStep, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
 import { QuestItems } from "../../items/quest";
 import { Jobs } from "../../job";
+import { IChoice } from "../../link";
 import { Party } from "../../party";
 import { Stat } from "../../stat";
 import { Text } from "../../text";
@@ -179,7 +180,7 @@ export namespace OutlawsScenes {
 		Text.Flush();
 
 		// [Yes][No]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Yes",
 			tooltip : "You can probably hazard a guess, yes.",
 			func() {
@@ -238,7 +239,7 @@ export namespace OutlawsScenes {
 		};
 
 		// [Respects][Monument][Bouquets]
-		const options = new Array();
+		const options: IChoice[] = [];
 		if (!opts.Respects) {
 			options.push({ nameStr : "Respects",
 				tooltip : "Since she’s paying her respects here, you take it she lost someone?",
@@ -759,7 +760,7 @@ export namespace OutlawsScenes {
 			outlaws.flags.events |= OutlawsFlags.Events.Cavalcade;
 
 			// [Yes][No]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Yes",
 				tooltip : "Sure, why not?",
 				func() {
@@ -820,7 +821,7 @@ export namespace OutlawsScenes {
 			Text.Flush();
 
 			// [Yes][No]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Yes",
 				tooltip : "Sure, why not? A bit of friendly competition couldn’t hurt.",
 				func() {
@@ -852,7 +853,7 @@ export namespace OutlawsScenes {
 					if (Jobs.Ranger.Unlocked(player)) { dex += 2 * player.jobs.Ranger.level; }
 
 					// [Head][Body]
-					const options = new Array();
+					const options: IChoice[] = [];
 					options.push({ nameStr : "Head",
 						tooltip : "Score high! Show off a bit and aim for the head.",
 						func() {
@@ -1079,7 +1080,7 @@ export namespace OutlawsScenes {
 			Text.Flush();
 
 			// [Yes][No]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Yes",
 				tooltip : "Sure, why not? You weren’t doing anything of import, after all.",
 				func() {

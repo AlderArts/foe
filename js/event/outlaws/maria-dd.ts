@@ -6,6 +6,7 @@ import { Sex } from "../../entity-sex";
 import { GAME, TimeStep, WorldTime } from "../../GAME";
 import { GameState, SetGameState } from "../../gamestate";
 import { Gui } from "../../gui";
+import { IChoice } from "../../link";
 import { RigardFlags } from "../../loc/rigard/rigard-flags";
 import { Party } from "../../party";
 import { Text } from "../../text";
@@ -124,7 +125,7 @@ export namespace DeadDropScenes {
 		Text.Flush();
 
 		// [Yes][No]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Yes",
 			tooltip : "Yeah. Anything need picking up or dropping off?",
 			func() {
@@ -203,7 +204,7 @@ export namespace DeadDropScenes {
 			Text.Flush();
 
 			// [Yes][No]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Yes",
 				tooltip : "You’re about as ready as they come.",
 				func : DeadDropScenes.First.Start, enabled : true,
@@ -307,7 +308,7 @@ export namespace DeadDropScenes {
 			TimeStep({hour: 4});
 
 			// [Yes][No]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Pay",
 				tooltip : "Offer to buy back the package for ten coins.",
 				func() {
@@ -575,7 +576,7 @@ export namespace DeadDropScenes {
 			Text.Flush();
 
 			// [Yes][No]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Yes",
 				tooltip : "Join in for a hand or two.",
 				func() {
@@ -649,7 +650,7 @@ export namespace DeadDropScenes {
 					Text.Flush();
 
 					// [Sure][Nah]
-					const options = new Array();
+					const options: IChoice[] = [];
 					options.push({ nameStr : "Sure",
 						func() {
 							Text.NL();
@@ -771,7 +772,7 @@ export namespace DeadDropScenes {
 			Text.Flush();
 
 			// [Dive][Walk Past][Hide]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Dive",
 				tooltip : "Dive into the lake water. If it’s good enough for the dockhands, it’s good enough for you.",
 				func() {
@@ -996,7 +997,7 @@ export namespace DeadDropScenes {
 			const humanity = player.Humanity();
 
 			// [Pay][Service][Royals]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Pay",
 				tooltip : "Just pay their bloody price and be done with it. Fifteen coins should do it.",
 				func() {

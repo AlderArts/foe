@@ -21,6 +21,7 @@ import { GameState, SetGameState } from "../gamestate";
 import { Gui } from "../gui";
 import { AlchemyItems } from "../items/alchemy";
 import { IngredientItems } from "../items/ingredients";
+import { IChoice } from "../link";
 import { Party } from "../party";
 import { PregnancyHandler } from "../pregnancy";
 import { Text } from "../text";
@@ -288,7 +289,7 @@ export namespace EquineScenes {
 				// SET UP CHOICES
 
 				// [Fuck her][Get fucked][Threesome][No]
-				const options = new Array();
+				const options: IChoice[] = [];
 				if (player.NumCocks() > 0) {
 					options.push({ nameStr : "Fuck her",
 						func() {
@@ -397,7 +398,7 @@ export namespace EquineScenes {
 		Text.Flush();
 
 		// [Inside][Tits][Face]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Inside",
 			func() {
 				Text.Clear();
@@ -673,7 +674,7 @@ export namespace EquineScenes {
 			Text.Flush();
 
 			// [name]
-			const options = new Array();
+			const options: IChoice[] = [];
 			if (player.FirstCock()) {
 				options.push({ nameStr : "Fuck her",
 					func() {
@@ -786,7 +787,7 @@ export namespace EquineScenes {
 		TimeStep({minute: 10});
 
 		// [Get blown] [Fuck his ass]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Get blown",
 			tooltip : "Time to put a cock in that cocky mouth of his.",
 			func() {
@@ -869,7 +870,7 @@ export namespace EquineScenes {
 							TimeStep({minute: 20});
 
 							// [Cum Inside] [Cum Outside]
-							const options = new Array();
+							const options: IChoice[] = [];
 							options.push({ nameStr : "Cum inside",
 								tooltip : "Down the hatch!",
 								func() {
@@ -1061,7 +1062,7 @@ export namespace EquineScenes {
 							TimeStep({minute: 30});
 
 							// [CumInside][CumOutside]
-							const options = new Array();
+							const options: IChoice[] = [];
 							options.push({ nameStr : "Cum inside",
 								tooltip : "Pump the slut full of cum!",
 								func() {

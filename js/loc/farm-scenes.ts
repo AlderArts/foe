@@ -12,7 +12,7 @@ import { GAME, MoveToLocation, TimeStep, WORLD, WorldTime } from "../GAME";
 import { GameState, SetGameState } from "../gamestate";
 import { Gui } from "../gui";
 import { IngredientItems } from "../items/ingredients";
-import { Link } from "../link";
+import { IChoice, Link } from "../link";
 import { ILocFarm } from "../location";
 import { Party } from "../party";
 import { Text } from "../text";
@@ -47,7 +47,7 @@ export namespace FarmScenesIntro {
         Text.Flush();
 
         // [Approach][Nah]
-        const options = new Array();
+        const options: IChoice[] = [];
         options.push({ nameStr : "Approach",
             func : FarmScenesIntro.Approach, enabled : true,
             tooltip : "Approach the building and try to find out what it is.",
@@ -108,7 +108,7 @@ export namespace FarmScenesIntro {
         Text.Flush();
 
         // [Sure][Guess so][Nah]
-        const options = new Array();
+        const options: IChoice[] = [];
         options.push({ nameStr : "Sure",
             func() {
                 Text.Clear();
@@ -217,7 +217,7 @@ export namespace FarmScenesIntro {
         Text.Flush();
 
         // [Sure][Guess so][Nah]
-        const options = new Array();
+        const options: IChoice[] = [];
         if (!talkedAboutGwendy) {
             options.push({ nameStr : "Gwendy",
                 func() {
@@ -290,7 +290,7 @@ export namespace FarmScenesIntro {
         Text.Flush();
 
         // [Flirt][Help][Leave]
-        const options = new Array();
+        const options: IChoice[] = [];
         if (!flirtGwendy) {
             options.push({ nameStr : "Flirt",
                 func() {
@@ -307,7 +307,7 @@ export namespace FarmScenesIntro {
                     * Options
                     */
                     // [Breasts][Hair][Ass][Lips][Body]
-                    const options = new Array();
+                    const options: IChoice[] = [];
                     options.push({ nameStr : "Breasts",
                         func() {
                             Text.Clear();
@@ -487,7 +487,7 @@ export namespace FarmScenesIntro {
         Text.Flush();
 
         // [Talk][Flirt][Gwendy][Just work]
-        const options = new Array();
+        const options: IChoice[] = [];
         options.push({ nameStr : "Talk",
             func() {
                 Text.Clear();
@@ -608,7 +608,7 @@ export namespace FarmScenesIntro {
         fuckedDanie = false;
         Text.Flush();
         // [Yes][No]
-        const options = new Array();
+        const options: IChoice[] = [];
         options.push({ nameStr : "Yes",
             func() {
                 Text.Clear();
@@ -674,7 +674,7 @@ export namespace FarmScenesIntro {
         Text.Flush();
 
         // [Talk][Leave]
-        const options = new Array();
+        const options: IChoice[] = [];
         options.push({ nameStr : "Talk",
             func() {
                 Text.Clear();
@@ -722,7 +722,7 @@ export namespace FarmScenesIntro {
         };
 
         // [Sure][Guess so][Nah]
-        const options = new Array();
+        const options: IChoice[] = [];
         if (player.FirstCock()) {
             options.push({ nameStr : "Blowjob",
                 func : FarmScenesIntro.DanieOralSex,

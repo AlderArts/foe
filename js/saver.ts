@@ -6,6 +6,7 @@ import { GameCache, SetGameCache } from "./GAME";
 import { CacheToGame, GameToCache } from "./gamecache";
 import { isOnline } from "./gamestate";
 import { Gui } from "./gui";
+import { IChoice } from "./link";
 import { Text } from "./text";
 import { GenerateFile } from "./utility";
 
@@ -18,7 +19,7 @@ export namespace Saver {
 		Text.Add("Save game:");
 		Text.NL();
 
-		const options = new Array();
+		const options: IChoice[] = [];
 		for (let i = 0; i < Saver.slots; i++) {
 			Text.Add("Game " + i + ": ");
 			const name = localStorage["save" + i];
@@ -126,7 +127,7 @@ export namespace Saver {
 		Text.Add("Load game:");
 		Text.NL();
 
-		const options = new Array();
+		const options: IChoice[] = [];
 		for (let i = 0; i < Saver.slots; i++) {
 			Text.Add("Game " + i + ": ");
 			const name = localStorage["save" + i];

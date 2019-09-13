@@ -1,6 +1,7 @@
 import { Race } from "../../body/race";
 import { GAME, TimeStep, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
+import { IChoice } from "../../link";
 import { Party } from "../../party";
 import { Text } from "../../text";
 import { LeiFlags } from "./lei-flags";
@@ -97,7 +98,7 @@ export namespace LeiSexScenes {
 		Text.Flush();
 
 		// [Purr][Bite]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Purr",
 			tooltip : "Why not? It <i>is</i> rather pleasant.",
 			func() {

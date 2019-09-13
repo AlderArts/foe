@@ -2,6 +2,7 @@
 import { Entity } from "../../entity";
 import { GAME, TimeStep } from "../../GAME";
 import { Gui } from "../../gui";
+import { IChoice } from "../../link";
 import { Text } from "../../text";
 import { LucilleFlags } from "./lucille-flags";
 
@@ -140,7 +141,7 @@ export namespace FireblossomScenes {
 			Text.Flush();
 
 			// [Enter][Reset]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Enter",
 				tooltip : "Continue exploring Fireblossom’s world from where you left off.",
 				func() {
@@ -280,7 +281,7 @@ export namespace FireblossomScenes {
 			Text.Flush();
 
 			// [Protest][Don’t][Encourage]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Protest",
 				tooltip : "Give this grabby maid a harsh telling off. She clearly doesn’t know her place!",
 				func() {
@@ -424,7 +425,7 @@ export namespace FireblossomScenes {
 					Text.Flush();
 
 					// [Give in][Scheme][Protest]
-					const options = new Array();
+					const options: IChoice[] = [];
 					options.push({ nameStr : "Give in",
 						tooltip : "It’s no use, you can’t fight him.",
 						func() {
@@ -642,7 +643,7 @@ export namespace FireblossomScenes {
 			Text.Flush();
 
 			// [Wait for him][Seduce][Kill him]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Wait for him",
 				tooltip : "For now, do as he says. Wait and observe.",
 				func() {
@@ -947,7 +948,7 @@ export namespace FireblossomScenes {
 		};
 
 		// [Survey][Explore][Wait]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Survey",
 			tooltip : "Look through Grex’s chambers.",
 			func() {

@@ -10,6 +10,7 @@ import { Gui } from "../../gui";
 import { Item, ItemIds } from "../../item";
 import { IngredientItems } from "../../items/ingredients";
 import { Jobs } from "../../job";
+import { IChoice } from "../../link";
 import { ILocation } from "../../location";
 import { Party } from "../../party";
 import { Text } from "../../text";
@@ -228,7 +229,7 @@ export namespace AquiliusScenes {
 				Text.Flush();
 
 				// [Yes][No]
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Yes",
 					tooltip : Text.Parse("Yes, hand over a measure of [ingredient].", parse),
 					func() {
@@ -314,17 +315,17 @@ export namespace AquiliusScenes {
 					Text.Add("<i>“Oh, it’s you, [playername]. You may linger and watch, so long as you don’t get in anyone’s way.”</i>", parse);
 				} else if (aquilius.Relation() >= 50) {
 					Text.Add("<i>“[playername]. I trust you are healthy today? Have you come to help out?”</i>", parse);
- } else {
+ 				} else {
 					Text.Add("<i>“[playername]. What brings you here today?”</i>", parse);
- }
+ 				}
 			} else {
 				if (aquilius.Relation() >= 75) {
 					Text.Add("<i>“Welcome, [playername],”</i> Aquilius says with a cordial nod of his head. <i>“I trust that you’ve had a very safe and fruitful day? Not that I have much in the way of entertaining others, but it’s nice to have a pleasant soul to talk to.”</i>", parse);
 				} else if (aquilius.Relation() >= 50) {
 					Text.Add("<i>“It’s you, [playername]. What brings you to me at this late hour? I hope you haven’t suffered any hurts.”</i>", parse);
- } else {
+ 				} else {
 					Text.Add("<i>“Oh. [playername]. For a moment I thought it was…”</i> Aquilius is clearly suppressing a tic in his face. <i>“No, never mind. I don’t usually get visitors at this hour. Is there something you need?”</i>", parse);
- }
+ 				}
 			}
 			Text.Flush();
 			AquiliusScenes.Prompt();
@@ -340,7 +341,7 @@ export namespace AquiliusScenes {
 		};
 
 		// [name]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Appearance",
 			tooltip : "Give the good surgeon a look-over.",
 			func : AquiliusScenes.Appearance, enabled : true,
@@ -412,7 +413,7 @@ export namespace AquiliusScenes {
 		};
 
 		// [Self][Grind][War][Back]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Self",
 			tooltip : "Ask Aquilius about himself.",
 			func : AquiliusScenes.TalkSelfPrompt, enabled : true,
@@ -473,7 +474,7 @@ export namespace AquiliusScenes {
 		parse = kiakai.ParserPronouns(parse);
 
 		// [Past][Surgery][Outlaws][[Kiai]]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Past",
 			tooltip : "So, where did he come from, who is he, and where is he going?",
 			func() {
@@ -687,7 +688,7 @@ export namespace AquiliusScenes {
 		};
 
 		// [Origins][Fighting][Free Cities][Back]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Origins",
 			tooltip : "How did the war get started in the first place?",
 			func() {
@@ -937,7 +938,7 @@ export namespace AquiliusScenes {
 		};
 
 		// [name]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Gather herbs",
 			tooltip : "Offer to go herb picking.",
 			func() {

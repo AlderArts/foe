@@ -18,6 +18,7 @@ import { AlchemyItems } from "../items/alchemy";
 import { ArmorItems } from "../items/armor";
 import { StrapOnItems } from "../items/strapon";
 import { ToysItems } from "../items/toys";
+import { IChoice } from "../link";
 import { RigardFlags } from "../loc/rigard/rigard-flags";
 import { Party } from "../party";
 import { Perks } from "../perks";
@@ -219,7 +220,7 @@ export namespace TerryScenes {
 		const that = terry;
 		const switchSpot = party.location.switchSpot();
 
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Appearance",
 			func : TerryScenes.Appearance, enabled : true,
 			tooltip : "Take a closer look.",
@@ -627,7 +628,7 @@ export namespace TerryScenes {
 			TimeStep({minute: 30});
 
 			// [LetHer][StopHer][TakeHim]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Let her",
 				func() {
 					Text.Clear();
@@ -806,7 +807,7 @@ export namespace TerryScenes {
 					Text.Flush();
 
 					// [Comfort][Leave]
-					const options = new Array();
+					const options: IChoice[] = [];
 					options.push({ nameStr : "Comfort",
 						func() {
 							Text.Clear();
@@ -1059,7 +1060,7 @@ export namespace TerryScenes {
 				Text.Flush();
 
 				// [Let her][Nope]
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Let her",
 					func() {
 						Text.Clear();
@@ -1124,7 +1125,7 @@ export namespace TerryScenes {
 			hishers : terry.hishers(),
 		};
 
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Feelings",
 			func : TerryScenes.TalkFeelings, enabled : true,
 			tooltip : Text.Parse("Ask your pet [foxvixen] how [heshe]’s doing.", parse),
@@ -1176,7 +1177,7 @@ export namespace TerryScenes {
 				}
 				Text.Flush();
 
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Yes",
 					func() {
 						Text.Clear();
@@ -1226,7 +1227,7 @@ export namespace TerryScenes {
 				Text.Add("Looks like your pet is opening up to you more, if [heshe]’s willing to admit to wanting you. Maybe you should help [himher] get some release...", parse);
 				Text.Flush();
 
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Yes",
 					func() {
 						Text.Clear();
@@ -1693,7 +1694,7 @@ export namespace TerryScenes {
 				Text.Flush();
 
 				// [HearAgain][Nevermind]
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Hear again",
 					func() {
 						Text.Clear();
@@ -1761,7 +1762,7 @@ export namespace TerryScenes {
 			Text.Flush();
 
 			// [Yes][No]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Yes",
 				func() {
 					Text.Clear();
@@ -1949,7 +1950,7 @@ export namespace TerryScenes {
 		parse = terry.ParserPronouns(parse);
 
 		// [Hug]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Hug",
 			func() {
 				terry.flags.Skin++;
@@ -2128,7 +2129,7 @@ export namespace TerryScenes {
 					Text.Add("Terry is looking at you expectantly; what are you going to suggest?", parse);
 
 					// [Intimacy] [Sex]
-					const options = new Array();
+					const options: IChoice[] = [];
 					options.push({ nameStr : "Intimacy",
 						func() {
 							Text.Clear();
@@ -2167,7 +2168,7 @@ export namespace TerryScenes {
 					Text.Add("Looks like <i>somebody</i> really got excited with your little kiss. Perhaps you should offer to ‘help out’, as it were?", parse);
 
 					// [Yes] [No]
-					const options = new Array();
+					const options: IChoice[] = [];
 					options.push({ nameStr : "Yes",
 						func() {
 							Text.Clear();
@@ -2319,7 +2320,7 @@ export namespace TerryScenes {
 		Text.Flush();
 
 		// [Grope] [Pet] [Nope]
-		const options = new Array();
+		const options: IChoice[] = [];
 		const tooltip = naked ? Text.Parse("[HeShe]’s just asking for it, flaunting that sweet ass without even the slightest stitch for modesty. Go on and give it a big squeeze...", parse) : Text.Parse("Even through [hisher] [tlowerArmor], Terry’s got a sweet ass. Why not cop a feel while you can?", parse);
 		options.push({ nameStr : "Grope",
 			func() {
@@ -2430,7 +2431,7 @@ export namespace TerryScenes {
 				Text.Flush();
 
 				// [Sex][No Sex]
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Sex",
 					func() {
 						Text.Clear();
@@ -2783,7 +2784,7 @@ export namespace TerryScenes {
 			};
 
 			// [Sex] [No Sex]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Sex",
 				func() {
 					Text.Clear();
@@ -2900,7 +2901,7 @@ export namespace TerryScenes {
 		parse = terry.ParserPronouns(parse);
 
 		// [name]
-		const options = new Array();
+		const options: IChoice[] = [];
 
 		const AddItem = (item: TFItem, scene: any, name: string, tooltip: string, costmult: number, horseTF?: boolean) => {
 			options.push({ nameStr : name || item.name,
@@ -2921,7 +2922,7 @@ export namespace TerryScenes {
 					} else {
 						Text.Flush();
 
-						const options = new Array();
+						const options: IChoice[] = [];
 						options.push({ nameStr : "Craft",
 							func() {
 								TimeStep({hour: 1});
@@ -3991,7 +3992,7 @@ export namespace TerryScenes {
 			Text.Flush();
 
 			// [Tease][Praise]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Tease",
 				func() {
 					Text.Clear();
@@ -4077,7 +4078,7 @@ export namespace TerryScenes {
 
 		const cocksInAss = player.CocksThatFit(terry.Butt());
 
-		const options = new Array();
+		const options: IChoice[] = [];
 		if (terry.FirstVag()) {
 			const cocksInVag = player.CocksThatFit(terry.FirstVag());
 			options.push({ nameStr : "Pitch vaginal",
@@ -4138,7 +4139,7 @@ export namespace TerryScenes {
 					Text.Add("With a mischievous grin, you make a show of contemplating your answer.", parse);
 				}
 
-				const options = new Array();
+				const options: IChoice[] = [];
 				if (player.FirstCock()) {
 					parse.cock = player.BiggestCock().Short();
 					const tooltip = terry.Relation() < 60 ? "Terry can start by sucking your [cock]." : "Well, how about a fresh serving of warm, gooey cream?";
@@ -4420,7 +4421,7 @@ export namespace TerryScenes {
 			Text.Flush();
 
 			// [name]
-			const options = new Array();
+			const options: IChoice[] = [];
 
 			const cockFunc = (c: Cock, idx: number) => {
 				options.push({ nameStr : Text.Ordinal(idx + 1, true),
@@ -4562,7 +4563,7 @@ export namespace TerryScenes {
 		Text.Flush();
 
 		// [Inside Mouth][Paint [HimHer]]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Inside Mouth",
 			func() {
 				Text.Clear();
@@ -4996,7 +4997,7 @@ export namespace TerryScenes {
 						Text.Flush();
 
 						// [Finish][Knot][PullOut]
-						const options = new Array();
+						const options: IChoice[] = [];
 						if (!p1Cock.isStrapon) {
 							options.push({ nameStr : "Finish",
 								func() {
@@ -5198,7 +5199,7 @@ export namespace TerryScenes {
 			Text.Flush();
 
 			// [Finger][Lick]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Finger",
 				func() {
 					Text.Clear();
@@ -5342,7 +5343,7 @@ export namespace TerryScenes {
 				Text.Flush();
 
 				// [Promise][Can’t]
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Promise",
 					func() {
 						Text.Clear();
@@ -5432,7 +5433,7 @@ export namespace TerryScenes {
 		Text.Flush();
 
 		// [Gentle] [Rough]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Gentle",
 			func() {
 				Text.Clear();
@@ -5805,7 +5806,7 @@ export namespace TerryScenes {
 		TimeStep({hour: 1});
 
 		// [HoseTerry] [Bukkake] [AnalCatch]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Hose Terry",
 			func() {
 				Text.Clear();
@@ -6228,7 +6229,7 @@ export namespace TerryScenes {
 		func = func || defFunc;
 
 		// [Towel][Lick Clean]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Towel",
 			func() {
 				Text.Clear();
@@ -6383,7 +6384,7 @@ export namespace TerryScenes {
 		func = func || defFunc;
 
 		// [Let Be][Clean Up]
-		const options = new Array();
+		const options: IChoice[] = [];
 		let tooltip = terry.Relation() < 30 ? Text.Parse("No, you don’t want anything more from [himher] at the moment. [HeShe]’s free to go.", parse) :
 					terry.Relation() < 60 ? Text.Parse("No, you don’t need [hisher] help; you’ll go and clean yourself off.", parse) :
 					Text.Parse("That’s not necessary; you’re happy to walk around wearing your lover on your [skin] like this.", parse);
@@ -6882,7 +6883,7 @@ export namespace TerryScenes {
 		Text.Flush();
 
 		// [Kiss][Hands][Lick][Dildo]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Kiss",
 			func() {
 				Text.Clear();
@@ -7147,7 +7148,7 @@ export namespace TerryScenes {
 						Text.Flush();
 
 						// [Blow [himher]][Push away]
-						const options = new Array();
+						const options: IChoice[] = [];
 						options.push({ nameStr : Text.Parse("Blow [himher]", parse),
 							func() {
 								blowjob = TerryBlowjob.Yes;
@@ -7536,7 +7537,7 @@ export namespace TerryScenes {
 				Text.Flush();
 
 				// [Cum inside][Cum outside][Breed][Tittyjob]
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Cum inside",
 					func() {
 						Text.Clear();
@@ -8520,7 +8521,7 @@ export namespace TerryScenes {
 			Text.Flush();
 
 			// [[HeShe] decides][Inside] [Outside]
-			const options = [];
+			const options: IChoice[] = [];
 			options.push({nameStr : "Inside",
 				tooltip : Text.Parse("You want [himher] to fill you up with [hisher] fox-seed, tell [himher] to cum inside!", parse),
 				enabled : true,
@@ -8668,7 +8669,7 @@ export namespace TerryScenes {
 			Text.Flush();
 
 			// [[HeShe] decides][Inside] [Outside]
-			const options = [];
+			const options: IChoice[] = [];
 			options.push({nameStr : "Inside",
 				tooltip : Text.Parse("Let [himher] tie you for good and fill you up with [hisher] fox-seed! Tell [himher] to cum inside!", parse),
 				enabled : true,
@@ -9214,7 +9215,7 @@ export namespace TerryScenes {
 		Text.Add("<i>“Let’s not waste time then,”</i> [heshe] says.", parse);
 
 		// [Suck][Vagina][Grind][[HeShe] decides]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Suck",
 			func() {
 				Text.Clear();
@@ -9901,7 +9902,7 @@ export namespace TerryScenes {
 		TimeStep({minute: 10});
 
 		// [Breasts] [Pussy] [Cock]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Breasts",
 			tooltip : Text.Parse("Those yummy [tbreasts] and their sweet milk are calling to you.", parse),
 			func : TerryScenes.SexHaveADrinkBreasts, enabled : terry.Lactation(),
@@ -10160,7 +10161,7 @@ export namespace TerryScenes {
 		player.AddLustFraction(0.25);
 
 		// [LickNtease] [LickNass] [LickNdick]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "LickNtease",
 			tooltip : "As much as you’d like to get on with your business, you can’t just ignore Terry’s birthmark...",
 			func() {
@@ -12136,7 +12137,7 @@ export namespace TerryScenes {
 		// #arousal check block
 
 		// [Cock][Pussy]
-		const options = new Array();
+		const options: IChoice[] = [];
 		if (terry.FirstCock()) {
 			let tooltip = "What better way to show your appreciation than with a nice massage on Terry’s ";
 			if (terry.HorseCock()) { tooltip += "fat stallionhood?"; } else { tooltip += "dainty foxhood?"; }
@@ -12340,7 +12341,7 @@ export namespace TerryScenes {
 			Text.Flush();
 
 			// [Ask for sex] [Finished]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Ask for sex",
 				tooltip : "You’re having too much fun to stop now.",
 				func() {
@@ -12389,7 +12390,7 @@ export namespace TerryScenes {
 			Text.Flush();
 
 			// [Yes] [No]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Yes",
 				tooltip : "Terry’s offering, you’re horny, so why pass it up?",
 				func() {
@@ -12426,7 +12427,7 @@ export namespace TerryScenes {
 			Text.Flush();
 
 			// [Fuck] [Don’t fuck]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Fuck",
 				tooltip : "If Terry wants you this badly, why not oblige?",
 				func() {
@@ -12449,7 +12450,7 @@ export namespace TerryScenes {
 					Text.Flush();
 
 					// [Submit] [Resist]
-					const options = new Array();
+					const options: IChoice[] = [];
 					options.push({ nameStr : "Submit",
 						tooltip : Text.Parse("How can you possibly say no to [himher] in the face of that?", parse),
 						func() {
@@ -12622,7 +12623,7 @@ export namespace TerryScenes {
 			Text.Flush();
 
 			// [Yes][No]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Yes",
 				tooltip : Text.Parse("After that display of [hishers], you sure could use some help getting off yourself.", parse),
 				func() {
@@ -12667,7 +12668,7 @@ export namespace TerryScenes {
 			Text.Flush();
 
 			// [Yes][No]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Yes",
 				tooltip : Text.Parse("Since [heshe]’s offering, why not? After all, you’ve got an itch that could use some scratching...", parse),
 				func() {
@@ -12738,7 +12739,7 @@ export namespace TerryScenes {
 			Text.Flush();
 
 			// [Sure][Later]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Sure",
 				tooltip : "Sounds like a wonderful idea.",
 				func() {
@@ -12757,7 +12758,7 @@ export namespace TerryScenes {
 					Text.Flush();
 
 					// [Give in][Don’t]
-					const options = new Array();
+					const options: IChoice[] = [];
 					options.push({ nameStr : "Give in",
 						tooltip : Text.Parse("Well if [heshe]’s <i>that</i> thankful, you see no point in denying the [foxvixen] [hisher] fun.", parse),
 						func() {
@@ -12993,7 +12994,7 @@ export namespace TerryScenes {
 			Text.Flush();
 
 			// [Yes] [No]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Yes",
 				tooltip : Text.Parse("Fair is fair; let your [foxvixen] pay you back, an orgasm for an orgasm.", parse),
 				func() {
@@ -13050,7 +13051,7 @@ export namespace TerryScenes {
 			Text.Flush();
 
 			// [Yes] [No]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Yes",
 				tooltip : Text.Parse("Why in the world would you turn [himher] down?", parse),
 				func() {
@@ -13095,7 +13096,7 @@ export namespace TerryScenes {
 			Text.Flush();
 
 			// [Yes] [No]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Yes",
 				tooltip : Text.Parse("Well, if [heshe] insists, why not?", parse),
 				func() {
@@ -13120,7 +13121,7 @@ export namespace TerryScenes {
 					Text.Flush();
 
 					// [Give in] [Stay strong]
-					const options = new Array();
+					const options: IChoice[] = [];
 					options.push({ nameStr : "Give in",
 						tooltip : Text.Parse("If [heshe]’s really so eager, why fight it?", parse),
 						func() {

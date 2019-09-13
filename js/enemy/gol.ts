@@ -22,6 +22,7 @@ import { AlchemyItems } from "../items/alchemy";
 import { IngredientItems } from "../items/ingredients";
 import { QuestItems } from "../items/quest";
 import { WeaponsItems } from "../items/weapons";
+import { IChoice } from "../link";
 import { BurrowsFlags } from "../loc/burrows-flags";
 import { SetGameOverButton } from "../main-gameover";
 import { Party } from "../party";
@@ -167,7 +168,7 @@ export namespace GolScenes {
 		TimeStep({minute: 30});
 
 		// [Leave][Explore]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Leave",
 			func() {
 				Text.Clear();
@@ -583,7 +584,7 @@ export namespace GolScenes {
 			Text.Flush();
 
 			// [Hyper fuck][Tailfuck][Cunnilingus][Scepter]
-			const options = new Array();
+			const options: IChoice[] = [];
 			if (player.FirstCock()) {
 				const p1cock = player.BiggestCock();
 
@@ -797,7 +798,7 @@ export namespace GolScenes {
 		TimeStep({hour: 1});
 
 		// [Inside] [Outside]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Outside",
 			func() {
 				Text.Clear();
@@ -948,7 +949,7 @@ export namespace GolScenes {
 		player.AddLustFraction(1);
 
 		// [Stick It In] [Scepter]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Stick it in",
 			func() {
 				Text.Clear();

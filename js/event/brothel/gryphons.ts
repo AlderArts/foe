@@ -11,6 +11,7 @@ import { EncounterTable } from "../../encountertable";
 import { Entity } from "../../entity";
 import { GAME, TimeStep } from "../../GAME";
 import { Gui } from "../../gui";
+import { IChoice } from "../../link";
 import { PregnancyHandler } from "../../pregnancy";
 import { Text } from "../../text";
 import { TF } from "../../tf";
@@ -132,7 +133,7 @@ export namespace GryphonsScenes {
 		Text.Clear();
 
 		// TODO
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "World's Edge",
 			tooltip : "",
 			func : func(GryphonsState.S1WorldsEdge, Gender.male), enabled : true,
@@ -616,7 +617,7 @@ export namespace GryphonsScenes {
 				Text.Flush();
 
 				// [Undergrowth][Waterfall][Sky]
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Undergrowth",
 					tooltip : "Move from the cover of vegetation, and strike when the time is right.",
 					func() {
@@ -794,7 +795,7 @@ export namespace GryphonsScenes {
 		};
 
 		// [Name][Others][Land]
-		const options = new Array();
+		const options: IChoice[] = [];
 		if (!opts.Name) {
 			options.push({ nameStr : "Name",
 				tooltip : "What’s her name?",
@@ -1029,7 +1030,7 @@ export namespace GryphonsScenes {
 				Text.Flush();
 
 				// [Wash][Help Out]
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Wash",
 					tooltip : "Well, if he’s willing to do all the work, you’ll just enjoy a little soak.",
 					func() {
@@ -1213,7 +1214,7 @@ export namespace GryphonsScenes {
 					Text.Flush();
 
 					// [Ask][Watch]
-					const options = new Array();
+					const options: IChoice[] = [];
 					options.push({ nameStr : "Ask",
 						tooltip : "Ask him what he’s up to.",
 						func() {
@@ -1310,7 +1311,7 @@ export namespace GryphonsScenes {
 			Text.Flush();
 
 			// [Hot][Content][Worried]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Hot",
 				tooltip : "",
 				func() {
@@ -1427,7 +1428,7 @@ export namespace GryphonsScenes {
 		Text.Flush();
 
 		// [Proud][Pleased][Shy]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Proud",
 			tooltip : "",
 			func() {
@@ -1658,7 +1659,7 @@ export namespace GryphonsScenes {
 			Text.Flush();
 
 			// [Satisfied][Dissatisfied]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Satisfied",
 				tooltip : "It’s not much, but it’s the best you could do under these circumstances.",
 				func() {
@@ -1700,7 +1701,7 @@ export namespace GryphonsScenes {
 				Text.Flush();
 
 				// [Aggressive][Diplomatic][Thoughtful]
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Aggressive",
 					tooltip : "Make it clear that if they’re here to cause trouble, you’re more than willing to fight.",
 					func() {
@@ -1837,7 +1838,7 @@ export namespace GryphonsScenes {
 		Text.Flush();
 
 		// [Fulfilled][Calm][Frustrated]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Fulfilled",
 			tooltip : "",
 			func() {
@@ -2021,7 +2022,7 @@ export namespace GryphonsScenes {
 					Text.Flush();
 
 					// [Comfort][Hug][Watch]
-					const options = new Array();
+					const options: IChoice[] = [];
 					options.push({ nameStr : "Comfort",
 						tooltip : "Comfort him in the way you know he likes most.",
 						func() {

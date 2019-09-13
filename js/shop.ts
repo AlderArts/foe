@@ -5,6 +5,7 @@ import { GAME } from "./GAME";
 import { Gui } from "./gui";
 import { Inventory } from "./inventory";
 import { Item, ItemSubtype, ItemType } from "./item";
+import { IChoice } from "./link";
 import { Party } from "./party";
 import { Text } from "./text";
 
@@ -101,7 +102,7 @@ export class Shop {
 			Text.Flush();
 
 			// [name]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Buy 1",
 				func() {
 					if (shop.buySuccessFunc) { shop.buySuccessFunc(obj.it, cost, 1); }
@@ -214,7 +215,7 @@ export class Shop {
 			Text.Add("Sell " + obj.it.name + " for " + cost + " coin? You are carrying " + num + ".");
 			Text.Flush();
 
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Sell 1",
 				func() {
 					if (shop.sellSuccessFunc) { shop.sellSuccessFunc(obj.it, cost, 1); }

@@ -12,6 +12,7 @@ import { AlchemyItems } from "../../items/alchemy";
 import { CombatItems } from "../../items/combatitems";
 import { IngredientItems } from "../../items/ingredients";
 import { ToysItems } from "../../items/toys";
+import { IChoice } from "../../link";
 import { Shop } from "../../shop";
 import { Text } from "../../text";
 
@@ -189,7 +190,7 @@ export namespace PatchworkScenes {
 			};
 
 			// [Umm…][Something like…][Err…]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "[Umm…]",
 				func : next, enabled : true,
 				tooltip : "What was it now?",
@@ -252,7 +253,7 @@ export namespace PatchworkScenes {
 		};
 		parse = patchwork.ParserPronouns(parse);
 
-		const options = new Array();
+		const options: IChoice[] = [];
 
 		options.push({ nameStr : "Talk",
 			func() {

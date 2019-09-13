@@ -14,6 +14,7 @@ import { GAME } from "./GAME";
 import { Gui } from "./gui";
 import { AlchemyItems } from "./items/alchemy";
 import { QuestItems } from "./items/quest";
+import { IChoice } from "./link";
 import { BurrowsFlags } from "./loc/burrows-flags";
 import { DryadGladeFlags } from "./loc/glade-flags";
 import { RigardFlags } from "./loc/rigard/rigard-flags";
@@ -134,7 +135,7 @@ export namespace Quests {
 		}
 		Text.Flush();
 
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Active",
 			func() {
 				Text.Clear();

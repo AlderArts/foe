@@ -14,7 +14,7 @@ import { TwinsFlags } from "../../event/royals/twins-flags";
 import { GAME, MoveToLocation, TimeStep, WORLD, WorldTime } from "../../GAME";
 import { GameState, SetGameState } from "../../gamestate";
 import { Gui } from "../../gui";
-import { Link } from "../../link";
+import { IChoice, Link } from "../../link";
 import { ILocRigardInn } from "../../location";
 import { Party } from "../../party";
 import { Status } from "../../statuseffect";
@@ -462,7 +462,7 @@ export namespace LBScenes {
 		Text.Flush();
 
 		const innPrompt = () => {
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Talk",
 				func() {
 					Text.Clear();
@@ -515,7 +515,7 @@ export namespace LBScenes {
 					if (WorldTime().hour >= 9 && WorldTime().hour < 12) {
 						Gui.NextPrompt();
 					} else {
-						const options = new Array();
+						const options: IChoice[] = [];
 						options.push({ nameStr : "Rent room",
 							func() {
 								Text.Clear();
@@ -622,7 +622,7 @@ export namespace LBScenes {
 
 		const busy = RigardFlags.LB.Busy();
 
-		const options = new Array();
+		const options: IChoice[] = [];
 		// Various info about the inn
 		options.push({ nameStr : "Inn",
 			func() {
@@ -1010,7 +1010,7 @@ export namespace LBScenes {
 		Text.Flush();
 
 		// [Sure][Nah]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Sure",
 			func() {
 				Text.Clear();
@@ -1044,7 +1044,7 @@ export namespace LBScenes {
 			ikname   : !RigardFlags.LB.KnowsOrvin() ? "the innkeeper" : "Orvin",
 		};
 
-		const options = [];
+		const options: IChoice[] = [];
 
 		const beers = [];
 		const wines = [];
@@ -1566,7 +1566,7 @@ export namespace LBScenes {
 				Text.Flush();
 
 				// [Party]
-				const options = new Array();
+				const options: IChoice[] = [];
 				for (let i = 1; i < party.Num(); i++) {
 					const comp = party.Get(i);
 					parse.comp    = comp.name;
@@ -1657,7 +1657,7 @@ export namespace LBScenes {
 				parse.himher = comp.himher();
 
 				// [Sure][Nah]
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Accept",
 					func() {
 						Text.Clear();

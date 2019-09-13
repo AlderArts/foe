@@ -19,7 +19,7 @@ import { Gui } from "../../gui";
 import { AccItems } from "../../items/accessories";
 import { WeaponsItems } from "../../items/weapons";
 import { Jobs } from "../../job";
-import { Link } from "../../link";
+import { IChoice, Link } from "../../link";
 import { BurrowsFlags } from "../../loc/burrows-flags";
 import { ILocBullTower } from "../../location";
 import { Party } from "../../party";
@@ -273,7 +273,7 @@ BullTowerLoc.Courtyard.Yard.events.push(new Link(
 		Text.Flush();
 
 		// [Yes][No]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Yes",
 			func() {
 				Text.Clear();
@@ -343,7 +343,7 @@ BullTowerLoc.Courtyard.Yard.links.push(new Link(
 			Text.Flush();
 
 			// [Yes][No]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Yes",
 				func() {
 					BullTowerScenes.EndingSlipOut();
@@ -420,7 +420,7 @@ BullTowerLoc.Courtyard.Caravans.events.push(new Link(
 		Text.Flush();
 
 		// [Sneak][Distract][Lull][Back]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Sneak",
 			func() {
 				Text.Clear();
@@ -633,7 +633,7 @@ BullTowerLoc.Courtyard.Caravans.events.push(new Link(
 		Text.Flush();
 
 		// [Yes][No]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Yes",
 			func() {
 				Text.Clear();
@@ -869,7 +869,7 @@ BullTowerLoc.Building.Cell.onEntry = () => {
 		Text.Flush();
 
 		// [Yes][No]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "No",
 			func() {
 				Text.Clear();
@@ -1085,7 +1085,7 @@ BullTowerLoc.Building.Watchtower.events.push(new Link(
 		Text.Flush();
 
 		// [Sneak][Lull][Leave]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Sneak",
 			func() {
 				Text.Clear();
@@ -1348,7 +1348,7 @@ export namespace BullTowerScenes {
 		};
 
 		// [Presence][Plan][Binder][Leave]
-		const options = new Array();
+		const options: IChoice[] = [];
 		if (!opts.presence) {
 			options.push({ nameStr : "Presence",
 				func() {
@@ -1470,7 +1470,7 @@ export namespace BullTowerScenes {
 		Text.Add("<b>Remember that you will only have one try at this task; whether it meets with success or failure, there will be no retracing your steps, for what is done will remain done.</b>", parse);
 		Text.Flush();
 
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Wait",
 			func() {
 				Text.Clear();
@@ -1700,7 +1700,7 @@ export namespace BullTowerScenes {
 			Text.Flush();
 
 			// [Fuck][Leave]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Fuck",
 				func() {
 					Text.Clear();
@@ -1760,7 +1760,7 @@ export namespace BullTowerScenes {
 		parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
 
 		// [Whip][Ride][Anal][Reconsider]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Whip",
 			func() {
 				Text.Clear();
@@ -1948,7 +1948,7 @@ export namespace BullTowerScenes {
 		};
 
 		// [Inspect][Unlock][Disarm][Fake Out][Leave]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Inspect",
 			func() {
 				Text.Clear();

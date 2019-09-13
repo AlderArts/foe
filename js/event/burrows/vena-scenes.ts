@@ -3,6 +3,7 @@ import { EncounterTable } from "../../encountertable";
 import { Entity } from "../../entity";
 import { GAME, TimeStep, WORLD } from "../../GAME";
 import { Gui } from "../../gui";
+import { IChoice } from "../../link";
 import { BurrowsFlags } from "../../loc/burrows-flags";
 import { Party } from "../../party";
 import { PregnancyHandler } from "../../pregnancy";
@@ -86,7 +87,7 @@ export namespace VenaScenes {
 
         };
 
-        const options = new Array();
+        const options: IChoice[] = [];
         options.push({ nameStr : "Talk",
             func() {
                 Text.Clear();
@@ -138,7 +139,7 @@ export namespace VenaScenes {
         };
 
         // [Herself][Lagon][Ophelia][Roa][The Pit][Back]
-        const options = new Array();
+        const options: IChoice[] = [];
         options.push({ nameStr : "Herself",
             func() {
                 Text.Clear();

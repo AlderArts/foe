@@ -11,7 +11,7 @@ import { Gui } from "../../gui";
 import { Item } from "../../item";
 import { AccItems } from "../../items/accessories";
 import { ArmorItems } from "../../items/armor";
-import { Link } from "../../link";
+import { IChoice, Link } from "../../link";
 import { Party } from "../../party";
 import { Shop } from "../../shop";
 import { Text } from "../../text";
@@ -395,7 +395,7 @@ export namespace ArmorShopScenes {
 		Text.Flush();
 		const prompt = () => {
 			// [name]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Buy",
 				func() {
 					Text.Clear();
@@ -474,7 +474,7 @@ export namespace ArmorShopScenes {
 		};
 
 		// [Shop][Himself][Business][Back]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Shop",
 			func() {
 				Text.Clear();

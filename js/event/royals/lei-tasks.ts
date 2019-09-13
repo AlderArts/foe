@@ -8,11 +8,11 @@ import { Entity } from "../../entity";
 import { GAME, TimeStep, WorldTime } from "../../GAME";
 import { GameState, SetGameState } from "../../gamestate";
 import { Gui } from "../../gui";
+import { IChoice } from "../../link";
 import { Party } from "../../party";
 import { Text } from "../../text";
 import { Season, Time } from "../../time";
 import { LeiFlags } from "./lei-flags";
-
 import { LeiSexScenes } from "./lei-sex";
 
 export namespace LeiTaskScenes {
@@ -256,7 +256,7 @@ export namespace LeiTaskScenes {
 				TimeStep({minute: 30});
 
 				// [Flirt][Don’t]
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Flirt",
 					tooltip : "You’re pretty sure she’s showing off for you, so why not compliment her?",
 					func() {
@@ -401,7 +401,7 @@ export namespace LeiTaskScenes {
 						Text.Flush();
 
 						// [Companions]
-						const options = new Array();
+						const options: IChoice[] = [];
 						for (let i = 1; i < party.members.length; ++i) {
 							const p = party.Get(i);
 							options.push({ nameStr : p.name,
@@ -556,7 +556,7 @@ export namespace LeiTaskScenes {
 
 				const prompt = () => {
 					// [Assist][Payment]
-					const options = new Array();
+					const options: IChoice[] = [];
 					if (!assist) {
 						options.push({ nameStr : "Assist",
 							tooltip : "Offer your assistance in the investigation.",
@@ -760,7 +760,7 @@ export namespace LeiTaskScenes {
 					Text.Flush();
 
 					// [Reward][Refuse]
-					const options = new Array();
+					const options: IChoice[] = [];
 					options.push({ nameStr : "Reward",
 						tooltip : "Rewards are nice. You’d like a reward.",
 						func() {

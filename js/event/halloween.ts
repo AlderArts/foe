@@ -15,7 +15,7 @@ import { Gui } from "../gui";
 import { Input } from "../input";
 import { Inventory } from "../inventory";
 import { HalloweenItems } from "../items/halloween";
-import { Link } from "../link";
+import { IChoice, Link } from "../link";
 import { Party } from "../party";
 import { Perks } from "../perks";
 import { Status } from "../statuseffect";
@@ -686,7 +686,7 @@ export namespace HalloweenScenes {
 			Text.Flush();
 
 			// [Fuck][Dismiss]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Fuck",
 				tooltip : "Time to scratch an itch.",
 				func() {
@@ -771,7 +771,7 @@ export namespace HalloweenScenes {
 			Text.Flush();
 
 			// [Fight!][Submit!]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Submit!",
 				tooltip : "Let alpha Ronnie fuck your ass!",
 				func() {
@@ -802,7 +802,7 @@ export namespace HalloweenScenes {
 			Text.Flush();
 
 			// [Yes] [No]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Yes",
 				tooltip : "He’s here, you’re both horny, why fight it?",
 				func() {
@@ -894,7 +894,7 @@ export namespace HalloweenScenes {
 		Text.Flush();
 
 		// [Help] [Wish luck]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Help",
 			tooltip : "How can you possibly ignore someone in need?",
 			func() {
@@ -956,7 +956,7 @@ export namespace HalloweenScenes {
 					Text.Flush();
 
 					// [Fight!] [Flee!] [Squeaky Bone!]
-					const options = new Array();
+					const options: IChoice[] = [];
 					options.push({ nameStr : "Fight!",
 						tooltip : "He’d catch you in a heartbeat, you have to fight!",
 						func() {
@@ -1005,7 +1005,7 @@ export namespace HalloweenScenes {
 							Text.Flush();
 
 							// [Chase] [Leave]
-							const options = new Array();
+							const options: IChoice[] = [];
 							options.push({ nameStr : "Chase",
 								tooltip : "To the hunt! You need a new bitch!",
 								func() {
@@ -1104,7 +1104,7 @@ export namespace HalloweenScenes {
 							Text.Flush();
 
 							// [Fight] [Submit]
-							const options = new Array();
+							const options: IChoice[] = [];
 							options.push({ nameStr : "Fight",
 								tooltip : "You’re no runt’s bitch! It’s time you teach that pup his place in this pack.",
 								func : HalloweenScenes.RonnieReversal, enabled : true,
@@ -1534,7 +1534,7 @@ export namespace HalloweenScenes {
 			Text.Add("Will you continue following the ravens?", parse);
 			Text.Flush();
 
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Yes",
 				tooltip : "Reach for the end of the road.",
 				func() {
@@ -1671,7 +1671,7 @@ export namespace HalloweenScenes {
 		Text.Flush();
 
 		// [Run][Item]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Run",
 			tooltip : "Come on, they’re slow, shambling things. If you can’t outrun them, you need to cut back on the carbs.",
 			func : HalloweenScenes.KiaiRun, enabled : true,
@@ -1684,7 +1684,7 @@ export namespace HalloweenScenes {
 				Text.Flush();
 
 				// [Stake][Holy Water][Garlic][Shades][Dog Bone][Run]
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Stake",
 					tooltip : "Put the weapon you received to good use!",
 					func() {
@@ -2000,7 +2000,7 @@ export namespace HalloweenScenes {
 		Text.Flush();
 
 		// [Yes][No]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Yes",
 			tooltip : "It’s just a damned jar, what are you afraid of? What could go wrong?",
 			func() {
@@ -2267,7 +2267,7 @@ export namespace HalloweenScenes {
 					};
 
 					// [Yes] [No]
-					const options = new Array();
+					const options: IChoice[] = [];
 					options.push({ nameStr : "Yes",
 						tooltip : "It might not be so bad to have a cock of your own. Would be more fun to stick into things than a toy, that’s for sure.",
 						func : prompt3, enabled : true,
@@ -2288,7 +2288,7 @@ export namespace HalloweenScenes {
 			};
 
 			// [Yes] [No]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Yes",
 				tooltip : "Well, it’s a reasonable enough request, and it’s not like it should take much effort, right?",
 				func : prompt2, enabled : true,
@@ -2304,7 +2304,7 @@ export namespace HalloweenScenes {
 		};
 
 		// [Yes] [No]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Yes",
 			tooltip : "She’s attractive, she’s polite and she’s clearly very willing. You can certainly think of worse partners to have.",
 			func : prompt1, enabled : true,
@@ -2524,7 +2524,7 @@ export namespace HalloweenScenes {
 				};
 
 				// [Yes] [No]
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Yes",
 					tooltip : "Well, you really do look kind of odd with a cock and no balls to go with it. Let’s get fixed up.",
 					func : prompt2, enabled : true,
@@ -2541,7 +2541,7 @@ export namespace HalloweenScenes {
 		};
 
 		// [Yes] [No]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Yes",
 			tooltip : "It’s not really that big a deal, certainly not in the face of finally getting to cum!",
 			func : prompt, enabled : true,
@@ -2938,7 +2938,7 @@ export namespace HalloweenScenes {
 		};
 
 		// [Yes] [No]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Yes",
 			tooltip : "What the hell, after all that’s gone on so far, what’s a little buttplay between friends? Tell her that she can go right ahead.",
 			func : prompt, enabled : true,
@@ -2974,7 +2974,7 @@ export namespace HalloweenScenes {
 			Text.Flush();
 
 			// [Obey] [Defy]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Obey",
 				tooltip : "Best not to piss off someone who’s obviously supernatural.",
 				func() {
@@ -3480,7 +3480,7 @@ export namespace HalloweenScenes {
 		Text.Flush();
 
 		// [Fight!] [Submit!] [Flee!] [Use garlic!]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Fight!",
 			tooltip : "You aren’t going to let some crazy fox make a slave out of you!",
 			func() {
@@ -3603,7 +3603,7 @@ export namespace HalloweenScenes {
 		parse = Halloween.CockParser(parse);
 
 		// [Sex][Holy Water][Leave]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Sex",
 			tooltip : "How could you possibly turn this over? Let’s see if this vampire is the sex god they like to say they are...",
 			func() {
@@ -3633,7 +3633,7 @@ export namespace HalloweenScenes {
 				Text.Flush();
 
 				// [Ass] [Pussy]
-				const options = new Array();
+				const options: IChoice[] = [];
 				if (femHarthon) {
 					options.push({ nameStr : "Pussy",
 						tooltip : "How could you resist breaking in her new pussy?",
@@ -4126,7 +4126,7 @@ export namespace HalloweenScenes {
 				Text.Flush();
 
 				// [Let her] [Stop her]
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Let her",
 					tooltip : "Why not let her enjoy herself? Might make her more eager the next time.",
 					func() {
@@ -4500,7 +4500,7 @@ export namespace HalloweenScenes {
 		const pregStage = HW.harthonPreg;
 
 		// [Sex][Talk][Holy Water][Dismiss]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Sex",
 			tooltip : Text.Parse("[HeShe] may serve you... most intimately", parse),
 			func() {
@@ -4521,7 +4521,7 @@ export namespace HalloweenScenes {
 				Text.Flush();
 
 				// [Pussy][Ass][Blowjob]
-				const options = new Array();
+				const options: IChoice[] = [];
 				if (femHarthon) {
 					options.push({ nameStr : "Pussy",
 						tooltip : "You want that sweet pussy of hers.",
@@ -5148,7 +5148,7 @@ export namespace HalloweenScenes {
 		Text.Flush();
 
 		// [Curiosity][Treasure][Fight Evil][Don’t Answer]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Curiosity",
 			tooltip : "You were just wandering about, no biggie.",
 			func() {
@@ -5245,7 +5245,7 @@ export namespace HalloweenScenes {
 		};
 
 		// [Preferences][Conquest][Imps]
-		const options = new Array();
+		const options: IChoice[] = [];
 		if (!opts.pref) {
 			options.push({ nameStr : "Preferences",
 				tooltip : "So, what’s he into anyway?",
@@ -5364,7 +5364,7 @@ export namespace HalloweenScenes {
 				Text.Flush();
 
 				// [Comfort][Resign][Distract]
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Comfort",
 					tooltip : "It’s clear that Laggoth’s clearly trying a bit too hard at this demon king gig. He must be having a hard time to be overcompensating this much.",
 					func() {
@@ -5529,7 +5529,7 @@ export namespace HalloweenScenes {
 		Text.Flush();
 
 		// [Holy Water][Stake][Garlic][Bread]
-		const options = new Array();
+		const options: IChoice[] = [];
 		if (party.Inv().QueryNum(HalloweenItems.HolyWater)) {
 			options.push({ nameStr : "Holy Water",
 				tooltip : "Holy water should be effective against demons. Splash it on him!",
@@ -5774,7 +5774,7 @@ export namespace HalloweenScenes {
 		Text.Flush();
 
 		// [Yes][No]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Yes",
 			tooltip : "Time to face whatever lurks here.",
 			func : HalloweenScenes.Lenka, enabled : true,
@@ -6019,7 +6019,7 @@ export namespace HalloweenScenes {
 		Text.Flush();
 
 		// [Submit][Resist]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Submit",
 			tooltip : "It’s hopeless. Might as well just lie back and enjoy your new life as a fallen angel’s breeding slave.",
 			func() {
@@ -6133,7 +6133,7 @@ export namespace HalloweenScenes {
 				Text.Flush();
 
 				// [Flee][Turn Tables]
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Flee",
 					tooltip : "You don’t want to push your luck. Get out of here!",
 					func() {
@@ -6289,7 +6289,7 @@ export namespace HalloweenScenes {
 			Text.Flush();
 
 			// [Sure][Nah]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Sure",
 				tooltip : "Yeah, you changed your mind.",
 				func() {
@@ -6321,7 +6321,7 @@ export namespace HalloweenScenes {
 		parse = player.ParserTags(parse);
 
 		// [Switch][Don’t Switch][Trader]
-		const options = new Array();
+		const options: IChoice[] = [];
 
 		options.push({ nameStr : "Switch",
 			tooltip : "The witch’s up to no good. Switch the teacups.",
@@ -6462,7 +6462,7 @@ export namespace HalloweenScenes {
 		const werewolf = HW.Werewolf();
 
 		// [Agree][Don’t Agree][...What?]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Agree",
 			tooltip : "Yeah, sure. You suppose you could agree to that...",
 			func() {
@@ -6813,7 +6813,7 @@ export namespace HalloweenScenes {
 		};
 
 		// [Give Password][Say anything][Leave]
-		const options = new Array();
+		const options: IChoice[] = [];
 		if (hasPassword) {
 			options.push({ nameStr : "Give Password",
 				tooltip : Text.Parse("Alright, you found something that may be a password. Let’s try it and see what [heshe] think[s].", parse),

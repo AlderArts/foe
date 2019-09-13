@@ -9,6 +9,7 @@ import { Gui } from "../gui";
 import { AccItems } from "../items/accessories";
 import { IngredientItems } from "../items/ingredients";
 import { WeaponsItems } from "../items/weapons";
+import { IChoice } from "../link";
 import { Locations } from "../location";
 import { Party } from "../party";
 import { Text } from "../text";
@@ -130,7 +131,7 @@ export namespace RoamingScenes {
 			Text.Flush();
 
 			// [Adventurers][Bandits!]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Adventurers",
 				func() {
 					Text.Clear();
@@ -422,7 +423,7 @@ export namespace RoamingScenes {
 		Text.Flush();
 
 		// [Report][Attack][Extort][Leave]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Report",
 			func() {
 				parse = bandits.capt.ParserPronouns(parse, "r");
@@ -647,7 +648,7 @@ export namespace RoamingScenes {
 
 			const prompt = () => {
 				// [Fuck][Loot][Leave]
-				const options = new Array();
+				const options: IChoice[] = [];
 				// TODO
 				options.push({ nameStr : "Fuck",
 					func() {

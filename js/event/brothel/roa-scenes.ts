@@ -5,6 +5,7 @@ import { Entity } from "../../entity";
 import { Sex } from "../../entity-sex";
 import { GAME, TimeStep } from "../../GAME";
 import { Gui } from "../../gui";
+import { IChoice } from "../../link";
 import { BurrowsFlags } from "../../loc/burrows-flags";
 import { PregnancyHandler } from "../../pregnancy";
 import { Text } from "../../text";
@@ -84,7 +85,7 @@ export namespace RoaScenes {
         parse = player.ParserTags(parse);
 
         // [name]
-        const options = new Array();
+        const options: IChoice[] = [];
         options.push({ nameStr : "Buy",
             func() {
                 Text.Clear();
@@ -115,7 +116,7 @@ export namespace RoaScenes {
                 }
                 Text.Flush();
 
-                const options = new Array();
+                const options: IChoice[] = [];
                 options.push({ nameStr : "Fuck him",
                     func : RoaScenes.TSLPitchAnal, enabled : true,
                     tooltip : "Well he does have a nice-looking butt. So why not do as he wishes and plug it for him?",
@@ -170,7 +171,7 @@ export namespace RoaScenes {
         };
 
         // [name]
-        const options = new Array();
+        const options: IChoice[] = [];
         /*
         options.push({ nameStr : "name",
             func : () => {
@@ -396,7 +397,7 @@ export namespace RoaScenes {
         Text.Flush();
 
         // [Buy] [Leave]
-        const options = new Array();
+        const options: IChoice[] = [];
         options.push({ nameStr : "Buy",
             func() {
                 Text.Clear();
@@ -420,7 +421,7 @@ export namespace RoaScenes {
 
                 const herm = player.FirstCock() && player.FirstVag();
 
-                const options = new Array();
+                const options: IChoice[] = [];
 
                 if (player.NumCocks() > 1) {
                     Text.NL();
@@ -943,7 +944,7 @@ export namespace RoaScenes {
         let cameinside = 0;
 
         // [Inside] [Outside]
-        const options = new Array();
+        const options: IChoice[] = [];
         options.push({ nameStr : "Inside",
             func() {
                 cameinside++;
@@ -993,7 +994,7 @@ export namespace RoaScenes {
             Text.Flush();
 
             // [Help] [Don’t help]
-            const options = new Array();
+            const options: IChoice[] = [];
             options.push({ nameStr : "Help",
                 func() {
                     Text.Clear();
@@ -1083,7 +1084,7 @@ export namespace RoaScenes {
                 Text.Flush();
 
                 // [Inside] [Outside]
-                const options = new Array();
+                const options: IChoice[] = [];
                 options.push({ nameStr : "Inside",
                     func() {
                         cameinside++;
@@ -1167,7 +1168,7 @@ export namespace RoaScenes {
         parse.fem = roa.Relation() >= 40 ? player.name : player.mfFem("sir", "ma’am");
 
         // [Snuggle] [Bathe] [Kiss] [Dismiss]
-        const options = new Array();
+        const options: IChoice[] = [];
         options.push({ nameStr : "Snuggle",
             func() {
                 const first = roa.flags.snug === 0;

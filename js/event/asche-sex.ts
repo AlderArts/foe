@@ -1,12 +1,13 @@
 import { Sex } from "../entity-sex";
 import { GAME, TimeStep } from "../GAME";
 import { Gui } from "../gui";
+import { IChoice } from "../link";
 import { Text } from "../text";
 
 export namespace AscheSexScenes {
 	export function Prompt() {
 		const player = GAME().player;
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Fuck her",
 			tooltip : "You’ve long waited for the chance to have a go at the exotic shopkeeper.",
 			func() {

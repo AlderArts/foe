@@ -95,6 +95,7 @@ import { AccItems } from "./items/accessories";
 import { AlchemyItems } from "./items/alchemy";
 import { ArmorItems } from "./items/armor";
 import { WeaponsItems } from "./items/weapons";
+import { IChoice } from "./link";
 
 const InitCache = () => {
 	// Reset exploration
@@ -358,7 +359,7 @@ const CacheToGame = () => {
 			Text.Add("What profession do you wish to start as?");
 			Text.Flush();
 
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Fighter",
 				func() {
 					GAME().player.flags.startJob = JobEnum.Fighter;

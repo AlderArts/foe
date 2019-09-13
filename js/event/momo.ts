@@ -12,6 +12,7 @@ import { Entity } from "../entity";
 import { GAME, MoveToLocation, TimeStep, WORLD } from "../GAME";
 import { WorldTime } from "../GAME";
 import { Gui } from "../gui";
+import { IChoice } from "../link";
 import { ILocation } from "../location";
 import { Party } from "../party";
 import { Status } from "../statuseffect";
@@ -173,7 +174,7 @@ export namespace MomoScenes {
 		Text.Flush();
 
 		// [HelpHer][LeaveHer]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Help her",
 			func() {
 				Text.Clear();
@@ -242,7 +243,7 @@ export namespace MomoScenes {
 		Text.Flush();
 
 		// [HelpHer][Leave]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Help her",
 			func() {
 				Text.Clear();
@@ -417,7 +418,7 @@ export namespace MomoScenes {
 		};
 
 		// [Talk] [Cook] [Flirt]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Talk",
 			func() {
 				Text.Clear();
@@ -465,7 +466,7 @@ export namespace MomoScenes {
 		};
 
 		// [Nice Meal][Gastroalchemy][Experiment]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Nice Meal",
 			func() {
 				Text.Clear();
@@ -556,7 +557,7 @@ export namespace MomoScenes {
 		};
 		parse = player.ParserTags(parse);
 		// [Chat] [Herself] [Family] [Cooking] [Skills]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Chat",
 			func() {
 				Text.Clear();
@@ -693,7 +694,7 @@ export namespace MomoScenes {
 					momo.relation.IncreaseStat(25, 2);
 
 					// [Flirt][Nope]
-					const options = new Array();
+					const options: IChoice[] = [];
 					options.push({ nameStr : "Flirt",
 						func() {
 							Text.Clear();
@@ -802,7 +803,7 @@ export namespace MomoScenes {
 					Text.Flush();
 
 					// [Big family][Small family][Only Child]
-					const options = new Array();
+					const options: IChoice[] = [];
 					options.push({ nameStr : "Big family",
 						func() {
 							Text.Clear();

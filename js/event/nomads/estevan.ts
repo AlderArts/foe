@@ -15,6 +15,7 @@ import { Sex } from "../../entity-sex";
 import { GAME, TimeStep, WORLD, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
 import { Jobs } from "../../job";
+import { IChoice } from "../../link";
 import { Party } from "../../party";
 import { PregnancyHandler } from "../../pregnancy";
 import { Text } from "../../text";
@@ -174,7 +175,7 @@ export namespace EstevanScenes {
 		};
 
 		// [Options]
-		const options = new Array();
+		const options: IChoice[] = [];
 		/*
 		options.push({ nameStr : "name",
 			func : () => {
@@ -229,7 +230,7 @@ export namespace EstevanScenes {
 
 					const setupFunc = () => {
 						// [Nope][Yeah!]
-						const options = new Array();
+						const options: IChoice[] = [];
 						options.push({ nameStr : "Nope",
 							func() {
 								Text.Clear();
@@ -393,7 +394,7 @@ export namespace EstevanScenes {
 		TimeStep({minute: 30});
 
 		// [Oblige Estevan][Taunt Estevan]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Oblige Estevan",
 			func() {
 				Text.Clear();
@@ -425,7 +426,7 @@ export namespace EstevanScenes {
 				Text.Flush();
 
 				// [Yes!][Uh…]
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Yes!",
 					func() {
 						Text.Clear();
@@ -690,7 +691,7 @@ export namespace EstevanScenes {
 				estevan.flags.Gay |= EstevanFlags.GaySex.FuckedHim;
 
 				// [Facial][Inside]
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Facial",
 					func() {
 						Text.Clear();

@@ -12,6 +12,7 @@ import { Entity } from "../../entity";
 import { Sex } from "../../entity-sex";
 import { GAME, MoveToLocation, StepToHour, TimeStep, WORLD, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
+import { IChoice } from "../../link";
 import { ILocation } from "../../location";
 import { Party } from "../../party";
 import { PregnancyHandler, Womb } from "../../pregnancy";
@@ -166,7 +167,7 @@ export namespace IslaScenes {
 		TimeStep({hour: 1});
 
 		// [Lost][Curious][Spring]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Lost",
 			tooltip : "Tell her you got lost and stumbled upon this place.",
 			func() {
@@ -340,7 +341,7 @@ export namespace IslaScenes {
 
 		};
 
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Appearance",
 			tooltip : "Take a once over of the sable-girl.",
 			func : IslaScenes.Appearance, enabled : true,
@@ -537,7 +538,7 @@ export namespace IslaScenes {
 		};
 
 		// [name]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Herself",
 			tooltip : "Ask Isla about herself.",
 			func() {
@@ -1421,7 +1422,7 @@ export namespace IslaScenes {
 			};
 
 			// [PitchVaginal] //TODO
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Pitch Vaginal",
 				tooltip : "Pound her sensitive insides until she screams.",
 				func : IslaScenes.IslaSex.PitchVaginal, enabled : p1cock,
@@ -1550,7 +1551,7 @@ export namespace IslaScenes {
 
 		export function PitchVaginalPrompt(parse: any, opts: any) {
 			// [Against Wall][Mount Her][Go Under]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Against Wall",
 				tooltip : "Pin the slippery sable to a wall and nail her good.",
 				func() {
@@ -2010,7 +2011,7 @@ export namespace IslaScenes {
 		Text.Flush();
 
 		// [name]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Quick Dip",
 			tooltip : "Take a quick dip in the spring.",
 			func() {

@@ -13,6 +13,7 @@ import { Sex } from "../../entity-sex";
 import { GAME, GameCache, TimeStep, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
 import { AlchemyItems } from "../../items/alchemy";
+import { IChoice } from "../../link";
 import { Party } from "../../party";
 import { PregnancyHandler } from "../../pregnancy";
 import { Text } from "../../text";
@@ -139,7 +140,7 @@ export namespace MagnusScenes {
 
 			const TalkPrompt = () => {
 				// [Talk][Magic][Sex][Meditate]
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Talk",
 					func() {
 						Text.Clear();
@@ -333,7 +334,7 @@ export namespace MagnusScenes {
 		Text.Flush();
 
 		// [Your quest][Magic][Sex]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Your quest",
 			func() {
 				Text.Clear();
@@ -731,7 +732,7 @@ export namespace MagnusScenes {
 						if (first) {
 							Text.Flush();
 							// [Confront][Say nothing]
-							const options = new Array();
+							const options: IChoice[] = [];
 							options.push({ nameStr : "Confront",
 								func : MagnusScenes.Confront, enabled : true,
 								tooltip : "Tell him what happened to you while you were meditating.",
@@ -807,7 +808,7 @@ export namespace MagnusScenes {
 		Text.Flush();
 
 		// [Condemn][Comfort][Complain]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Comfort",
 			func() {
 				Text.Clear();

@@ -10,6 +10,7 @@ import { Race } from "../body/race";
 import { Entity } from "../entity";
 import { GAME } from "../GAME";
 import { Gui } from "../gui";
+import { IChoice } from "../link";
 import { Party } from "../party";
 import { Text } from "../text";
 import { TF } from "../tf";
@@ -147,7 +148,7 @@ export namespace RavenMotherScenes {
 
 			const prompt = (asked: boolean) => {
 				// [Ask][Investigate]
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Ask",
 					func() {
 						Text.Clear();
@@ -250,7 +251,7 @@ export namespace RavenMotherScenes {
 		Text.Flush();
 
 		// [Comply][Don’t]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Comply",
 			func() {
 				Text.Clear();
@@ -309,7 +310,7 @@ export namespace RavenMotherScenes {
 		Text.Flush();
 
 		// [Rephrase][Keep going]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Rephrase",
 			func() {
 				Text.Clear();
@@ -398,7 +399,7 @@ export namespace RavenMotherScenes {
 
 		const prompt = () => {
 			// [Questions][Nah]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Questions",
 				func() {
 					RavenMotherScenes.TheHuntQuestions(prompt);
@@ -449,7 +450,7 @@ export namespace RavenMotherScenes {
 		};
 
 		// [Herself][Ravens][Dreams]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Herself",
 			func() {
 				Text.Clear();
@@ -527,7 +528,7 @@ export namespace RavenMotherScenes {
 		Text.Flush();
 
 		// [Stop][Send them]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Stop",
 			func() {
 				Text.Clear();

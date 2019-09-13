@@ -12,6 +12,7 @@ import { EncounterTable } from "../encountertable";
 import { Entity } from "../entity";
 import { GAME, MoveToLocation, TimeStep, WORLD, WorldTime } from "../GAME";
 import { Gui } from "../gui";
+import { IChoice } from "../link";
 import { ILocation } from "../location";
 import { Text } from "../text";
 import { TF } from "../tf";
@@ -169,7 +170,7 @@ export namespace FeraScenes {
 		}
 		Text.Flush();
 		// [Nexelle] [Fera] [Mother] [Shop] [City] [Touch] [Assistance] [Back]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Nexelle",
 			func() {
 				// Set timer
@@ -183,7 +184,7 @@ export namespace FeraScenes {
 				Text.Flush();
 
 				// [Encourage][Scold][Ignore]
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Encourage",
 					func() {
 						Text.Add("You pat Fera on the head and tell her she does a good job and just needs to be more careful. Her face lights up in response to your praise.", parse);
@@ -241,7 +242,7 @@ export namespace FeraScenes {
 					Text.Flush();
 
 					// [Hold her] [Apologize] [Scoff] [Ignore]
-					const options = new Array();
+					const options: IChoice[] = [];
 					options.push({ nameStr : "Hold her",
 						func() {
 							Text.Add("You put an arm around Fera and stroke her head with your other hand. She winces slightly as you brush against a bruise on her scalp, but seems to relax as you pat her hair, soothing the pain. Her sobbing stops after a while and she looks up at you. <i>“Thank you... I'm so sorry about this. I just get so lonely...”</i>", parse);
@@ -295,7 +296,7 @@ export namespace FeraScenes {
 				Text.Flush();
 
 				// [Encourage] [Realistic] [Ignore]
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Encourage",
 					func() {
 						Text.Add("You smile and tell her that she could be that good if she works at it really hard. <i>“Really? You really think so, [playername]?”</i> She smiles and seems very happy that you believe in her.", parse);
@@ -335,7 +336,7 @@ export namespace FeraScenes {
 				Text.Flush();
 
 				// [Agree] [Disagree] [Ignore]
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Agree",
 					func() {
 						Text.Add("You tell the cute catgirl that you agree with her that morphs should be treated better. <i>“I'm so glad you agree, [playername],”</i> she says with a smile.", parse);
@@ -396,7 +397,7 @@ export namespace FeraScenes {
 		parse = fera.ParserTags(parse, "f");
 
 		// [Cuddle][Fondle]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Cuddle",
 			func() {
 				Text.Clear();
@@ -528,7 +529,7 @@ export namespace FeraScenes {
 		Text.Flush();
 
 		// [Try on][Give oral][Get oral][Titfuck][Sex][Standing][Behind][Anal][Sitting]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Try on",
 			func() {
 				p1Cock = player.BiggestCock();

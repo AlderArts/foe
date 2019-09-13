@@ -25,6 +25,7 @@ import { CombatItems } from "../items/combatitems";
 import { IngredientItems } from "../items/ingredients";
 import { ToysItems } from "../items/toys";
 import { WeaponsItems } from "../items/weapons";
+import { IChoice } from "../link";
 import { Party } from "../party";
 import { PregnancyHandler } from "../pregnancy";
 import { Text } from "../text";
@@ -610,7 +611,7 @@ export namespace MaliceScoutsScenes {
 				Text.Add("Yeah, hopeless. What’re you going to do with this poor sop?", parse);
 				Text.Flush();
 
-				const options = [];
+				const options: IChoice[] = [];
 
 				options.push({nameStr : "Petting",
 					tooltip : Text.Parse("Aww, what a pathetic little kitty. Why don’t you give him a scratch?", parse),
@@ -1178,7 +1179,7 @@ export namespace MaliceScoutsScenes {
 			Text.Flush();
 
 			// [Handjob][Tease]
-			const options = [];
+			const options: IChoice[] = [];
 			options.push({nameStr : "Handjob",
 				tooltip : Text.Parse("Why not give the poor pent-up kitty a hand?", parse),
 				enabled : true,
@@ -1461,7 +1462,7 @@ export namespace MaliceScoutsScenes {
 				Text.Flush();
 
 				// [Yes][No]
-				const options = [];
+				const options: IChoice[] = [];
 				options.push({nameStr : "Yes",
 					tooltip : Text.Parse("Oh, why not? She’s clearly in a bad spot.", parse),
 					enabled : true,
@@ -1537,13 +1538,13 @@ export namespace MaliceScoutsScenes {
 				Text.Flush();
 
 				// [Walk away][Fuck][Fist]
-				const options = [];
+				const options: IChoice[] = [];
 
 				if (player.FirstCock()) {
 					const p1cock = player.BiggestCock();
 					options.push({nameStr : "Fuck",
 						tooltip : Text.Parse("Give her what she wants - but on your terms.", parse),
-						enabled() { return player.HasLegs() && p1cock.Len() >= 25; }, // Gotta have legs and a 10" cock
+						enabled: player.HasLegs() && p1cock.Len() >= 25, // Gotta have legs and a 10" cock
 						func() {
 							MaliceScoutsScenes.Mare.WinFuck(enc);
 						},
@@ -2236,7 +2237,7 @@ export namespace MaliceScoutsScenes {
 				Text.Flush();
 
 				//
-				const options = [];
+				const options: IChoice[] = [];
 				options.push({nameStr : "Turn Tables",
 					tooltip : Text.Parse("So, he was planning to experiment on you? Turnabout is fair play.", parse),
 					enabled : true,
@@ -2374,7 +2375,7 @@ export namespace MaliceScoutsScenes {
 				};
 
 				// [Cock][Balls][Breasts][Vag][Alchemist][Leave]
-				const options = [];
+				const options: IChoice[] = [];
 				if (player.FirstCock()) {
 					options.push({nameStr : "Cock",
 						tooltip : Text.Parse("Do you really have to think twice about this? Swab a batch on your [cocks].", parse),
@@ -2729,7 +2730,7 @@ export namespace MaliceScoutsScenes {
 				Text.Add("What do you do now?", parse);
 				Text.Flush();
 
-				const options = [];
+				const options: IChoice[] = [];
 				// [Use][Don’t Use]
 				options.push({nameStr : "Use on him",
 					tooltip : Text.Parse("You really DO want to know just how this works…", parse),

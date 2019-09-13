@@ -8,6 +8,7 @@ import { GAME, NAV, TimeStep } from "../GAME";
 import { Gui } from "../gui";
 import { IngredientItems } from "../items/ingredients";
 import { ToysItems } from "../items/toys";
+import { IChoice } from "../link";
 import { Party } from "../party";
 import { Text } from "../text";
 import { KiakaiFlags } from "./kiakai-flags";
@@ -107,7 +108,7 @@ export namespace KiakaiSexScenes {
 			Text.NL();
 			Text.Flush();
 			// [Heal][Seduce][Insist]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Heal",
 				func() {
 					player.AddHPFraction(1.0);
@@ -217,7 +218,7 @@ export namespace KiakaiSexScenes {
 
 		Text.Flush();
 		// [Finish][Seduce][Nah]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Finish",
 			func() {
 				Text.Clear();
@@ -308,7 +309,7 @@ export namespace KiakaiSexScenes {
 
 		Text.Flush();
 		// [Handjob][Blowjob][Eat you][Kia/Kai][Cuddle]
-		const options = new Array();
+		const options: IChoice[] = [];
 		if (player.FirstCock()) {
 			// HANDJOB
 			options.push({ nameStr : "Handjob",
@@ -476,7 +477,7 @@ export namespace KiakaiSexScenes {
 
 					Text.Flush();
 					// [Passive][Active]
-					const options = new Array();
+					const options: IChoice[] = [];
 					options.push({ nameStr : "Passive",
 						func() {
 							Text.Clear();
@@ -543,7 +544,7 @@ export namespace KiakaiSexScenes {
 									Text.Add("You draw a surprised gasp as you feel two of the elf's lubed fingers prod at your [anus]. [name] looks up uncertainly, as if asking permission to continue.", parse);
 									Text.Flush();
 									// [Allow][Deny][Punish]
-									const options = new Array();
+									const options: IChoice[] = [];
 									options.push({ nameStr : "Allow",
 										func() {
 											Text.Clear();
@@ -787,7 +788,7 @@ export namespace KiakaiSexScenes {
 							Text.Add("Feeling particularly adventurous, the fingers on [name]'s other hand travel slightly downward, forgoing your [vag] and insistently prodding at your [anus]. Suddenly realizing what [heshe] is doing, the elf stops in place, gazing up at you for approval through [hisher] thick lashes.", parse);
 							Text.Flush();
 							// [Allow][Deny][Punish]
-							const options = new Array();
+							const options: IChoice[] = [];
 							options.push({ nameStr : "Allow",
 								func() {
 									Text.Clear();
@@ -1033,7 +1034,7 @@ export namespace KiakaiSexScenes {
 
 		parse = Text.ParserPlural(parse, kiakai.NumCocks() > 1);
 
-		const options = new Array();
+		const options: IChoice[] = [];
 
 		if (kiakai.FirstCock()) {
 			Text.Add("Without you even touching [itThem], [name]'s [kcocks] spring[notS] to attention, stiff in anticipation. You take your time teasing the elf, letting your hand trail up and down [hisher] thigh, circle around [hisher] crotch and proceed down the other leg.", parse);
@@ -1478,7 +1479,7 @@ export namespace KiakaiSexScenes {
 
 		Text.Flush();
 		// [Oral][69][Anal]
-		const options = new Array();
+		const options: IChoice[] = [];
 
 		if (player.FirstCock()) {
 			options.push({ nameStr : "Blowjob",
@@ -1739,7 +1740,7 @@ export namespace KiakaiSexScenes {
 
 						Text.Flush();
 						// [Mercy][Punish]
-						const options = new Array();
+						const options: IChoice[] = [];
 						options.push({ nameStr : "Mercy",
 							func() {
 								Text.NL();
@@ -1865,7 +1866,7 @@ export namespace KiakaiSexScenes {
 
 				Text.Flush();
 				// [Cock][Vagina][Anal]
-				const options = new Array();
+				const options: IChoice[] = [];
 				if (kiakai.FirstCock()) {
 					options.push({ nameStr : "Cock",
 						func() {
@@ -1927,7 +1928,7 @@ export namespace KiakaiSexScenes {
 							Text.Flush();
 
 							// [Release][Deny]
-							const options = new Array();
+							const options: IChoice[] = [];
 							options.push({ nameStr : "Release",
 								func() {
 									Text.Clear();
@@ -2112,7 +2113,7 @@ export namespace KiakaiSexScenes {
 
 						Text.Flush();
 
-						const options = new Array();
+						const options: IChoice[] = [];
 						options.push({ nameStr : "Fingers",
 							func() {
 								parse.pen = () => Math.random() > 0.5 ? "your fingers" : "your digits";
@@ -2453,7 +2454,7 @@ export namespace KiakaiSexScenes {
 			kiakai.AddLustFraction(1);
 
 			// [Love][Friend][Fuck][Nevermind]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Love",
 				func() {
 					Text.Clear();
@@ -2552,7 +2553,7 @@ export namespace KiakaiSexScenes {
 			kiakai.relation.IncreaseStat(100, 5);
 
 			// [Passive][Mutual][Dig in]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Passive",
 				func() {
 					Text.Clear();
@@ -2698,7 +2699,7 @@ export namespace KiakaiSexScenes {
 
 		Text.Flush();
 		// Sex options
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Anal pitch",
 			func() {
 				Text.Clear();
@@ -2897,7 +2898,7 @@ export namespace KiakaiSexScenes {
 				kiakai.flags.Sexed++;
 
 				// [Gentle][Rough][Ruin]
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Gentle",
 					func() {
 						Text.Clear();
@@ -4092,7 +4093,7 @@ export namespace KiakaiSexScenes {
 						const cum = kiakai.CumOutput();
 
 						// [Sure][Nah]
-						const options = new Array();
+						const options: IChoice[] = [];
 						options.push({ nameStr : "Inside",
 							func() {
 								Text.Clear();

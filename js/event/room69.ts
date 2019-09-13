@@ -11,6 +11,7 @@ import { EncounterTable } from "../encountertable";
 import { Entity } from "../entity";
 import { GAME, MoveToLocation, TimeStep, WORLD } from "../GAME";
 import { Gui } from "../gui";
+import { IChoice } from "../link";
 import { RigardFlags } from "../loc/rigard/rigard-flags";
 import { Party } from "../party";
 import { Text } from "../text";
@@ -134,7 +135,7 @@ export namespace Room69Scenes {
 		};
 
 		// [Sentience][What now][Leave]
-		const options = new Array();
+		const options: IChoice[] = [];
 		if (introTalkedSentience === false) {
 			options.push({ nameStr : "Sentience",
 				func() {
@@ -209,7 +210,7 @@ export namespace Room69Scenes {
 		};
 
 		// [Agree][Argue][Force]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Agree",
 			func : Room69Scenes.Discovering69Sex, enabled : true,
 			tooltip : "Maybe having some fun with Sixtynine won’t be so bad.",
@@ -780,7 +781,7 @@ export namespace Room69Scenes {
 			Text.Flush();
 
 			// [Apologize][Leave]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Apologize",
 				func() {
 					Text.Clear();
@@ -865,7 +866,7 @@ export namespace Room69Scenes {
 		Text.Flush();
 
 		// [Apologize][Insult Fight][Leave]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Apologize",
 			func() {
 				Text.Clear();

@@ -5,6 +5,7 @@ import { Gui } from "../../gui";
 import { CombatItems } from "../../items/combatitems";
 import { QuestItems } from "../../items/quest";
 import { Jobs } from "../../job";
+import { IChoice } from "../../link";
 import { RigardFlags } from "../../loc/rigard/rigard-flags";
 import { Party } from "../../party";
 import { Text } from "../../text";
@@ -50,7 +51,7 @@ export namespace VaughnTasksScenes {
 			Text.Flush();
 
 			// [Yes][No]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Yes",
 				tooltip : "Yes, you’ll take it.",
 				func() {
@@ -485,7 +486,7 @@ export namespace VaughnTasksScenes {
 				Text.Flush();
 
 				// [Refuse][Lie]
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Refuse",
 					tooltip : "You’re not going to deceive her, but you’re not going to tell the whole truth, either.",
 					func() {
@@ -582,7 +583,7 @@ export namespace VaughnTasksScenes {
 				Text.Flush();
 
 				// [Yes][No]
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Yes",
 					tooltip : "If that’s what she wants…",
 					func() {
@@ -677,7 +678,7 @@ export namespace VaughnTasksScenes {
 						TimeStep({hour: 2});
 
 						// [Yes][No]
-						const options = new Array();
+						const options: IChoice[] = [];
 						options.push({ nameStr : "Yes",
 							tooltip : "Yeah, you’ve had enough of this. Time to call the score even… for now.",
 							func() {
@@ -773,7 +774,7 @@ export namespace VaughnTasksScenes {
 			const rogue = Jobs.Rogue.Unlocked(player);
 
 			// [Lock][Magic][Terry]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Lock",
 				tooltip : Text.Parse("[Jimmy] the lock.", {Jimmy: rogue ? "Pick" : "Jimmy"}),
 				func() {
@@ -1138,7 +1139,7 @@ export namespace VaughnTasksScenes {
 			Text.Flush();
 
 			// [Poison][Aphrodisiac]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Poison",
 				tooltip : "The poison sounds cruel enough, thank you very much.",
 				func() {
@@ -1252,7 +1253,7 @@ export namespace VaughnTasksScenes {
 			};
 
 			// [Orvin][Kitchen][Waiters][Lei][Twins]
-			const options = new Array();
+			const options: IChoice[] = [];
 			if (RigardFlags.LB.KnowsOrvin() && !opts.Orvin) {
 				options.push({ nameStr : "Orvin",
 					tooltip : "Chat with Orvin and try to find out more about the situation.",
@@ -1326,7 +1327,7 @@ export namespace VaughnTasksScenes {
 						Text.Flush();
 
 						// [Yes][No]
-						const options = new Array();
+						const options: IChoice[] = [];
 						options.push({ nameStr : "Yes",
 							tooltip : "Ask Lei if he’s willing to moonlight for you.",
 							func() {
@@ -1360,7 +1361,7 @@ export namespace VaughnTasksScenes {
 									Text.Flush();
 
 									// [Yes][No]
-									const options = new Array();
+									const options: IChoice[] = [];
 									options.push({ nameStr : "Yes",
 										tooltip : "Pay his asking price.",
 										func() {
@@ -1619,7 +1620,7 @@ export namespace VaughnTasksScenes {
 				Text.Flush();
 
 				// [Terry][Yourself]
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Terry",
 					tooltip : Text.Parse("The thief's experience should really pay off here; you doubt [heshe]'ll have any trouble getting it done.", parse),
 					func() {
@@ -1807,7 +1808,7 @@ export namespace VaughnTasksScenes {
 			Text.Flush();
 
 			// [Peek][Leave]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Peek",
 				tooltip : "Face it, you just want to know what’s going on inside.",
 				func() {
@@ -1859,7 +1860,7 @@ export namespace VaughnTasksScenes {
 			Text.Flush();
 
 			// [Join][69][Leave]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Join",
 				tooltip : "Why let a good orgy go to waste? Join in the fun!",
 				func() {

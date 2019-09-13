@@ -6,7 +6,7 @@ import { Event } from "../../event";
 import { FeraScenes } from "../../event/fera";
 import { GAME, MoveToLocation, WORLD, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
-import { Link } from "../../link";
+import { IChoice, Link } from "../../link";
 import { Party } from "../../party";
 import { Text } from "../../text";
 
@@ -151,7 +151,7 @@ ClothShopLoc.events.push(new Link(
 
 			Text.Flush();
 			// [Nexelle][Store][Guards][City][Fera][Fera's mom]
-			const options = new Array();
+			const options: IChoice[] = [];
 
 			options.push({ nameStr : "Buy",
 				func() {

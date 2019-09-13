@@ -12,6 +12,7 @@ import { Gui } from "../gui";
 import { ArmorItems } from "../items/armor";
 import { WeaponsItems } from "../items/weapons";
 import { JobDesc, Jobs } from "../job";
+import { IChoice } from "../link";
 import { ILocation } from "../location";
 import { Party } from "../party";
 import { Text } from "../text";
@@ -181,7 +182,7 @@ export class Miranda extends Entity {
 		that.PrintDescription();
 		Text.Flush();
 
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr: "Release",
 			func() {
 				Text.Clear();

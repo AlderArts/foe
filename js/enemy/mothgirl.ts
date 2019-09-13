@@ -21,6 +21,7 @@ import { GameState, SetGameState } from "../gamestate";
 import { Gui } from "../gui";
 import { AlchemyItems } from "../items/alchemy";
 import { IngredientItems } from "../items/ingredients";
+import { IChoice } from "../link";
 import { Party } from "../party";
 import { Text } from "../text";
 import { TF } from "../tf";
@@ -189,7 +190,7 @@ export namespace MothgirlScenes {
 			GameCache().flags.Moth |= MothgirlFlags.Met;
 
 			// [Fight] [Give Money] [Trade Sex]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Fight Her",
 				func() {
 					enc.coin = Math.min(party.coin, enc.coin);
@@ -318,7 +319,7 @@ export namespace MothgirlScenes {
 			Text.Add("With a cry, the moth-girl tumbles to the ground, finally beaten. She tries to scramble away from you, but you easily take hold of the downy fuzz around her neck, hefting her to her feet as you decide what to do with this bold little slut…", parse);
 			Text.Flush();
 
-			const options = new Array();
+			const options: IChoice[] = [];
 			if (player.FirstCock()) {
 				options.push({ nameStr : "Titfuck",
 					func() {

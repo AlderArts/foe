@@ -3,6 +3,7 @@ import { Entity } from "../../entity";
 import { GAME, TimeStep, WorldTime } from "../../GAME";
 import { GameState, SetGameState } from "../../gamestate";
 import { Gui } from "../../gui";
+import { IChoice } from "../../link";
 import { Party } from "../../party";
 import { Text } from "../../text";
 
@@ -33,7 +34,7 @@ export namespace OCavalcadeScenes {
 				Text.Flush();
 
 				// [Sure][Nah]
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Sure",
 					func() {
 						Text.NL();

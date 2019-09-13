@@ -6,6 +6,7 @@ import { GAME, TimeStep, WORLD, WorldTime } from "../../GAME";
 import { GameState, SetGameState } from "../../gamestate";
 import { Gui } from "../../gui";
 import { Jobs } from "../../job";
+import { IChoice } from "../../link";
 import { Party } from "../../party";
 import { Text } from "../../text";
 import { GwendyFlags } from "../farm/gwendy-flags";
@@ -118,7 +119,7 @@ export namespace MariaScenes {
         };
 
         // [name]
-        const options = new Array();
+        const options: IChoice[] = [];
         options.push({nameStr : "Talk",
             tooltip : Text.Parse("You have some things you want to talk with her about.", parse),
             enabled : true,
@@ -209,7 +210,7 @@ export namespace MariaScenes {
             Text.Add("up and down. <i>“It’s true that you still have much to learn before you’re on my level, but there’s not much more I can impart to you by teaching. I can go through the basics with you again if you really wanted to, but I’ve got the lingering suspicion that it would be a waste of our time. There’s really only one way to improve from here on out, and that’s through experience, actually being out there and putting your knowledge to practice - knowing this, do you still want a rundown of the basics?”</i>", parse);
             Text.Flush();
 
-            const options = [];
+            const options: IChoice[] = [];
             // [Yes][No]
             options.push({nameStr : "Yes",
                 tooltip : Text.Parse("Even experts must go over the fundamentals sometime.", parse),
@@ -325,7 +326,7 @@ export namespace MariaScenes {
             playername : player.name,
         };
 
-        const options = [];
+        const options: IChoice[] = [];
         // [Chat][Forest][Outlaws][Zenith][Family][Ranger]
         options.push({nameStr : "Chat",
             tooltip : Text.Parse("Just chat for a bit.", parse),
@@ -691,7 +692,7 @@ export namespace MariaScenes {
         parse = player.ParserTags(parse);
 
         // [Follow][Fight][Trick]
-        const options = new Array();
+        const options: IChoice[] = [];
         options.push({ nameStr : "Follow",
             func : MariaScenes.ForestFollow, enabled : true,
             tooltip : "Follow her.",
@@ -816,7 +817,7 @@ export namespace MariaScenes {
             Text.Flush();
 
             // [Yes][No]
-            const options = new Array();
+            const options: IChoice[] = [];
             options.push({ nameStr : "Yes",
                 func() {
                     maria.flags.Met |= MariaFlags.Met.FightSexed;
@@ -939,7 +940,7 @@ export namespace MariaScenes {
         Text.Flush();
 
         // [Silent][Talk][Flirt]
-        const options = new Array();
+        const options: IChoice[] = [];
         options.push({ nameStr : "Silent",
             func() {
                 Text.Clear();
@@ -1034,7 +1035,7 @@ export namespace MariaScenes {
             Text.Flush();
 
             // [Listen][Interrupt]
-            const options = new Array();
+            const options: IChoice[] = [];
             options.push({ nameStr : "Listen",
                 func() {
                     Text.Clear();

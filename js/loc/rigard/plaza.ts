@@ -9,7 +9,7 @@ import { TerryScenes } from "../../event/terry-scenes";
 import { GAME, MoveToLocation, TimeStep, WORLD, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
 import { IngredientItems } from "../../items/ingredients";
-import { Link } from "../../link";
+import { IChoice, Link } from "../../link";
 import { Party } from "../../party";
 import { Text } from "../../text";
 import { Rand } from "../../utility";
@@ -383,7 +383,7 @@ export namespace PlazaScenes {
 			Text.Flush();
 
 			// [Accept][Tease][Investigate]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Accept",
 				func() {
 					Text.Clear();
@@ -524,7 +524,7 @@ export namespace PlazaScenes {
 		Text.Flush();
 
 		// [Deliver][Open]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Deliver",
 			func() {
 				Text.Clear();

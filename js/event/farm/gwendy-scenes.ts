@@ -8,6 +8,7 @@ import { Gui } from "../../gui";
 import { AlchemyItems } from "../../items/alchemy";
 import { IngredientItems } from "../../items/ingredients";
 import { ToysItems } from "../../items/toys";
+import { IChoice } from "../../link";
 import { BurrowsFlags } from "../../loc/burrows-flags";
 import { MarketScenes } from "../../loc/farm-market";
 import { Party } from "../../party";
@@ -35,7 +36,7 @@ export namespace GwendyScenes {
 
 		Text.Flush();
 		// [Talk][Work]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Talk",
 			func : GwendyScenes.Talk, obj : GwendyScenes.LoftPrompt, enabled : true,
 			tooltip : "Chat with Gwendy.",
@@ -49,7 +50,7 @@ export namespace GwendyScenes {
 
 	export function LoftSexPrompt(back: any, disableSleep: boolean) {
 		const parse: any = {};
-		const options = new Array();
+		const options: IChoice[] = [];
 		GwendyScenes.ChallengeSexWonPrompt(true, options, disableSleep);
 		GwendyScenes.ChallengeSexLostPrompt(true, options, disableSleep);
 		if (!disableSleep) {
@@ -96,7 +97,7 @@ export namespace GwendyScenes {
 		Text.Flush();
 
 		// [Talk][Work]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Talk",
 			func : GwendyScenes.Talk, obj : GwendyScenes.BarnPrompt, enabled : true,
 			tooltip : "Chat with Gwendy.",
@@ -125,7 +126,7 @@ export namespace GwendyScenes {
 		Text.Flush();
 
 		// [Talk][Work]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Talk",
 			func : GwendyScenes.Talk, obj : GwendyScenes.FieldsPrompt, enabled : true,
 			tooltip : "Chat with Gwendy.",
@@ -151,7 +152,7 @@ export namespace GwendyScenes {
 		Text.Flush();
 
 		// [Sure][Nah]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Chat",
 			func() {
 				Text.Clear();
@@ -244,7 +245,7 @@ export namespace GwendyScenes {
 					Text.Flush();
 
 					// [Yes][No]
-					const options = new Array();
+					const options: IChoice[] = [];
 					options.push({ nameStr : "Yes",
 						func : MarketScenes.GoToMarketFirst, enabled : true,
 						tooltip : "Despite all adversities, you still want to go. Besides, if it‘s that bad, she probably needs some company, right?",
@@ -464,7 +465,7 @@ export namespace GwendyScenes {
 		let challenge = true;
 		let lose = false;
 		// [Yeah!][No][Lose]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Yeah!",
 			func() {
 				Text.Clear();
@@ -636,7 +637,7 @@ export namespace GwendyScenes {
  }
 			Text.Flush();
 			Gui.NextPrompt(() => {
-				const options = new Array();
+				const options: IChoice[] = [];
 				const ret = GwendyScenes.ChallengeSexLostPrompt(false, options, false);
 				if (ret) {
 					Gui.SetButtonsFromList(options);
@@ -655,7 +656,7 @@ export namespace GwendyScenes {
 				Text.Add("At this point, it's hard to call it a challenge. Despite that, Gwendy has definitely given it her all to best you, it's just that her best isn't good enough. A shame, but it means you're going to have some fun...", parse);
  }
 			Text.Flush();
-			const options = new Array();
+			const options: IChoice[] = [];
 			GwendyScenes.ChallengeSexWonPrompt(false, options, false);
 			Gui.SetButtonsFromList(options);
 		}
@@ -1158,7 +1159,7 @@ export namespace GwendyScenes {
 				// TODO: Conditional?
 
 				// [Cuddle][Sex]
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Cuddle",
 					func() {
 						Text.Clear();
@@ -1560,7 +1561,7 @@ export namespace GwendyScenes {
 				Text.Flush();
 
 				// [Strapon][R.Strapon][Beads][D.Dildo]
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Strapon",
 					func() {
 						GwendyScenes.ChallengeSexAnalToys(GwendyFlags.Toys.Strapon, hangout, first);
@@ -1761,7 +1762,7 @@ export namespace GwendyScenes {
 			Text.Flush();
 
 			// [Walk][Work][Take out]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Walk",
 				func() {
 					Text.Clear();

@@ -10,6 +10,7 @@ import { GAME, TimeStep, WORLD } from "../../GAME";
 import { GameState, SetGameState } from "../../gamestate";
 import { Gui } from "../../gui";
 import { QuestItems } from "../../items/quest";
+import { IChoice } from "../../link";
 import { BurrowsFlags } from "../../loc/burrows-flags";
 import { SetGameOverButton } from "../../main-gameover";
 import { Party } from "../../party";
@@ -85,7 +86,7 @@ export namespace LagonScenes {
         parse.stuttername = player.name[0] + "-" + player.name;
 
         // [Talk][Sex] ( [Usurp] )
-        const options = new Array();
+        const options: IChoice[] = [];
         options.push({ nameStr : "Talk",
             func() {
                 Text.Clear();
@@ -153,7 +154,7 @@ export namespace LagonScenes {
                     Text.Add("Uh... are you sure that you’re ready for this? Once you go up against Lagon, there’s no turning back.", parse);
                     Text.Flush();
 
-                    const options = new Array();
+                    const options: IChoice[] = [];
                     options.push({ nameStr : "Do it!",
                         func() {
                             Text.Clear();
@@ -205,7 +206,7 @@ export namespace LagonScenes {
         };
 
         // [Blowjob][Get fucked][The Pit][(Back)]
-        const options = new Array();
+        const options: IChoice[] = [];
         options.push({ nameStr : "Blowjob",
             func() {
                 lagon.flags.Talk |= LagonFlags.Talk.RegularSex;
@@ -433,7 +434,7 @@ export namespace LagonScenes {
         Text.Flush();
 
         // [Swallow][Shower][Finger][Beg]
-        const options = new Array();
+        const options: IChoice[] = [];
         options.push({ nameStr : "Swallow",
             func() {
                 Text.Clear();
@@ -1055,7 +1056,7 @@ export namespace LagonScenes {
 
         lagon.relation.IncreaseStat(40, 100);
         // [Blowjob][Get fucked][The Pit][Decline]
-        const options = new Array();
+        const options: IChoice[] = [];
         options.push({ nameStr : "Blowjob",
             func() {
                 Text.Clear();
@@ -1116,7 +1117,7 @@ export namespace LagonScenes {
         };
 
         // [Burrows][Lagon][Vena][Ophelia] { [Scepter][Roa] }
-        const options = new Array();
+        const options: IChoice[] = [];
         options.push({ nameStr : "Burrows",
             func() {
                 Text.Clear();
@@ -1240,7 +1241,7 @@ export namespace LagonScenes {
                 Text.Flush();
 
                 // [Fair][Admirable][Questionable]
-                const options = new Array();
+                const options: IChoice[] = [];
                 options.push({ nameStr : "Fair",
                     func() {
                         Text.Clear();
@@ -1376,7 +1377,7 @@ export namespace LagonScenes {
                         Text.Flush();
 
                         // [Silence][Request]
-                        const options = new Array();
+                        const options: IChoice[] = [];
                         options.push({ nameStr : "Silence",
                             func() {
                                 Text.Clear();
@@ -1423,7 +1424,7 @@ export namespace LagonScenes {
                                 Text.Flush();
 
                                 // [Refuse][Accept]
-                                const options = new Array();
+                                const options: IChoice[] = [];
                                 options.push({ nameStr : "Refuse",
                                     func() {
                                         Text.Clear();
@@ -1766,7 +1767,7 @@ export namespace LagonScenes {
         Text.Flush();
 
         // [Enter][Leave]
-        const options = new Array();
+        const options: IChoice[] = [];
         options.push({ nameStr : "Leave",
             func() {
                 Text.Clear();
@@ -1855,7 +1856,7 @@ export namespace LagonScenes {
         Text.Flush();
 
         // [Enter][Leave]
-        const options = new Array();
+        const options: IChoice[] = [];
         options.push({ nameStr : "Leave",
             func() {
                 Text.Clear();
@@ -1912,7 +1913,7 @@ export namespace LagonScenes {
                 Text.Flush();
 
                 // [Oppose][Stand down]
-                const options = new Array();
+                const options: IChoice[] = [];
                 options.push({ nameStr : "Oppose",
                     func() {
                         Text.Clear();

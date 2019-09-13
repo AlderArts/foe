@@ -13,7 +13,7 @@ import { GAME, MoveToLocation, StepToHour, TimeStep, WORLD, WorldTime } from "..
 import { GameState, SetGameState } from "../gamestate";
 import { Gui } from "../gui";
 import { StrapOnItems } from "../items/strapon";
-import { Link } from "../link";
+import { IChoice, Link } from "../link";
 import { RigardFlags } from "../loc/rigard/rigard-flags";
 import { Party } from "../party";
 import { Text } from "../text";
@@ -108,7 +108,7 @@ export namespace MirandaScenes {
 		};
 
 		// [Train]
-		const options = new Array();
+		const options: IChoice[] = [];
 		// TODO
 		/*
 		options.push({ nameStr : "name",
@@ -276,7 +276,7 @@ export namespace MirandaScenes {
 		Text.Flush();
 
 		// [Decline][Blowjob][Assert]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Decline",
 			func() {
 				Text.Clear();
@@ -294,7 +294,7 @@ export namespace MirandaScenes {
 				Text.Flush();
 
 				// [Decline][Get fucked]
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Get fucked",
 					func() {
 						Text.Clear();
@@ -317,7 +317,7 @@ export namespace MirandaScenes {
 						};
 
 						// [No way!][Obey]
-						const options = new Array();
+						const options: IChoice[] = [];
 						options.push({ nameStr : "No way!",
 							func() {
 								Text.Clear();
@@ -698,7 +698,7 @@ export namespace MirandaScenes {
 		parse = player.ParserTags(parse);
 
 		// [Your job][Money][Blowjob][Sex]
-		const options = new Array();
+		const options: IChoice[] = [];
 		if (rigard.Visa() && miranda.flags.gBribe < 1) {
 			options.push({ nameStr : "Your job",
 				func() {
@@ -1188,7 +1188,7 @@ export namespace MirandaScenes {
 
 		Text.Flush();
 		// [Pass][Outlaws][Miranda]
-		const options = new Array();
+		const options: IChoice[] = [];
 		if (welcomeToRigardPASS) {
 			options.push({ nameStr : "Pass",
 				func() {
@@ -1347,7 +1347,7 @@ export namespace MirandaScenes {
 			Text.Flush();
 
 			// [Sure][Nah]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Drop it",
 				func() {
 					Text.Clear();
@@ -1439,7 +1439,7 @@ export namespace MirandaScenes {
 			Text.Flush();
 
 			// [Comfort][Check]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Comfort",
 				func() {
 					Text.Clear();
@@ -1482,7 +1482,7 @@ export namespace MirandaScenes {
 					miranda.flags.Herm = 1;
 
 					// [Flee!][Watch][Help her]
-					const options = new Array();
+					const options: IChoice[] = [];
 					options.push({ nameStr : "Flee!",
 						func() {
 							Text.Clear();
@@ -1743,7 +1743,7 @@ export namespace MirandaScenes {
 					Text.Flush();
 
 					// [Sure][Nah]
-					const options = new Array();
+					const options: IChoice[] = [];
 					options.push({ nameStr : "Like what?",
 						func() {
 							Text.NL();
@@ -1975,7 +1975,7 @@ export namespace MirandaScenes {
 
 		TimeStep({hour: 1});
 
-		const options = new Array();
+		const options: IChoice[] = [];
 
 		MirandaScenes.BarChatOptions(options);
 
@@ -2039,7 +2039,7 @@ export namespace MirandaScenes {
 			TimeStep({hour: 1});
 
 			// [Take Charge][Let Her Lead]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Take Charge",
 				func() {
 					Text.Clear();
@@ -2105,7 +2105,7 @@ export namespace MirandaScenes {
 			Text.Flush();
 
 			// [Apologize][Leave]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Apologize",
 				func() {
 					Text.Clear();
@@ -2160,7 +2160,7 @@ export namespace MirandaScenes {
 			miranda.flags.Herm = 1;
 
 			// [Accept][Leave][Touch it]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Accept",
 				func() {
 					Text.Clear();
@@ -2214,7 +2214,7 @@ export namespace MirandaScenes {
 					Text.Flush();
 
 					// [Fuck her][Ride her][Let her]
-					const options = new Array();
+					const options: IChoice[] = [];
 					if (player.FirstCock()) {
 						options.push({ nameStr : "Fuck her",
 							func() {
@@ -2462,7 +2462,7 @@ export namespace MirandaScenes {
 
 		const parse: any = {};
 
-		const options = new Array();
+		const options: IChoice[] = [];
 
 		const dom = miranda.SubDom() - player.SubDom();
 
@@ -2508,7 +2508,7 @@ export namespace MirandaScenes {
 
 		const dom = miranda.SubDom() - player.SubDom();
 
-		const options = new Array();
+		const options: IChoice[] = [];
 		if (miranda.flags.Attitude >= MirandaFlags.Attitude.Neutral) {
 			MirandaScenes.BarChatOptions(options, MirandaScenes.MaidensBaneTalkPrompt);
 		}
@@ -2580,7 +2580,7 @@ export namespace MirandaScenes {
 			Text.Flush();
 
 			// [Let her][Not now]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Let her",
 				func() {
 					Text.Clear();
@@ -2616,7 +2616,7 @@ export namespace MirandaScenes {
 			Text.Flush();
 
 			// [Take charge][Let her lead][Not now]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Take charge",
 				func() {
 					Text.Clear();
@@ -2701,7 +2701,7 @@ export namespace MirandaScenes {
 		Text.Flush();
 
 		// [BJ] TODO
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Blow her",
 			func() {
 				Text.Clear();
@@ -2807,7 +2807,7 @@ export namespace MirandaScenes {
 				Text.Flush();
 
 				// [Stay][Don’t]
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Stay",
 					func() {
 						Text.Clear();
@@ -2875,7 +2875,7 @@ export namespace MirandaScenes {
 		const cocksInAss = player.CocksThatFit(miranda.Butt(), false, 5);
 
 		// [Fuck vag][Fuck anal][Ride vag][Ride anal][Cellar/Dungeon]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Fuck vag",
 			func() {
 				MirandaScenes.HomeDommySexFuckDobieVag(cocksInVag);
@@ -2947,7 +2947,7 @@ export namespace MirandaScenes {
 		let stickymiranda = false;
 
 		// [Take oral][Fuck][Submit]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Take oral",
 			func() {
 				Text.Clear();
@@ -3125,7 +3125,7 @@ export namespace MirandaScenes {
 
 		Text.Flush();
 		// [Knot][No knot]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Knot",
 			func() {
 				Text.Clear();
@@ -3348,7 +3348,7 @@ export namespace MirandaScenes {
 		let target: Target;
 
 		// [Boobs][Cunt][Cock]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Boobs",
 			func() {
 				Text.Clear();
@@ -3664,7 +3664,7 @@ export namespace MirandaScenes {
 		Text.Flush();
 
 		// [GetLube] [Pre-Lube] [Blow-Lube] [Cunt-Lube]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Get Lube",
 			func() {
 				Text.Clear();
@@ -3875,7 +3875,7 @@ export namespace MirandaScenes {
 			const mCum = miranda.OrgasmCum();
 
 			// [Take Knot] [Skip Knot]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Take knot",
 				func() {
 					Text.Clear();
@@ -4234,7 +4234,7 @@ export namespace MirandaScenes {
 			};
 
 			// [Inside][Outside][Ass]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Inside",
 				func() {
 					Text.Clear();
@@ -4349,7 +4349,7 @@ export namespace MirandaScenes {
 				Text.Flush();
 
 				// [Stay][Don’t]
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Stay",
 					func() {
 						Text.Clear();
@@ -4466,7 +4466,7 @@ export namespace MirandaScenes {
 		parse.loc2 = () => location === Loc.Upstairs ? "the soft sheets" : "the fluffy pelt";
 
 		// [Take anal][Take vag][Dommy ride]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Take anal",
 			func() {
 				MirandaScenes.HomeSubbySexTakeAnal(location, Loc);
@@ -5015,7 +5015,7 @@ export namespace MirandaScenes {
 					Text.Flush();
 
 					// [Toys][Shower][Reversal]
-					const options = new Array();
+					const options: IChoice[] = [];
 					options.push({ nameStr : "Toys",
 						func() {
 							Text.Clear();
@@ -5204,7 +5204,7 @@ export namespace MirandaScenes {
 								miranda.relation.IncreaseStat(75, 1);
 
 								Gui.PrintDefaultOptions();
-							}, enabled : p1Cock,
+							}, enabled : p1Cock !== undefined,
 							tooltip : "Now is the perfect opportunity to get back at the dobie! Have a go at <i>her</i> ass for a while, and stuff a few toys in her pussy for good measure.",
 						});
 					}
@@ -5288,7 +5288,7 @@ export namespace MirandaScenes {
 		};
 
 		// [name]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "name",
 			func() {
 				Text.Clear();
@@ -5330,7 +5330,7 @@ export namespace MirandaScenes {
 			const cocksInVag = player.CocksThatFit(miranda.FirstVag(), false, 15);
 
 			// [BlowHer][TakeHer]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Blow her",
 				func() {
 					Text.Clear();
@@ -5966,7 +5966,7 @@ export namespace MirandaScenes {
 		TimeStep({minute: 30});
 
 		// [Take It][69][Footjob]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Take it",
 			func() {
 				Text.Clear();
@@ -6460,7 +6460,7 @@ export namespace MirandaScenes {
 			datingScore = miranda.Attitude();
 
 			// [Polite][Rude][Sultry]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Polite",
 				func() {
 					Text.Clear();
@@ -6578,7 +6578,7 @@ export namespace MirandaScenes {
 		};
 
 		// [Do it][Refuse]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Do it",
 			func() {
 				Text.Clear();
@@ -6657,7 +6657,7 @@ export namespace MirandaScenes {
 			Text.Flush();
 
 			// [Drink][Don’t]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Drink",
 				func() {
 					Text.Clear();
@@ -6750,7 +6750,7 @@ export namespace MirandaScenes {
 
 		const talkPrompt = () => {
 			// [Her past][Sex stories][Her place]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Her past",
 				func : MirandaScenes.TalkBackstory, enabled : true,
 				tooltip : "Ask her for her story.",
@@ -6879,7 +6879,7 @@ export namespace MirandaScenes {
 					Text.Flush();
 
 					// [Sure!][No]
-					const options = new Array();
+					const options: IChoice[] = [];
 					options.push({ nameStr : "Sure!",
 					// ((Seduction supreme))
 						func() {
@@ -7239,7 +7239,7 @@ export namespace MirandaScenes {
 			Text.Flush();
 
 			// [Take charge][Passive][Decline]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Take charge",
 				func() {
 					Text.Clear();
@@ -7291,7 +7291,7 @@ export namespace MirandaScenes {
 			Text.Flush();
 
 			// [Passive][Decline]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Passive",
 				func() {
 					Text.Clear();
@@ -7332,7 +7332,7 @@ export namespace MirandaScenes {
 			Text.Flush();
 
 			// [Follow][Decline]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Follow",
 				func() {
 					Text.Clear();
@@ -7403,7 +7403,7 @@ export namespace MirandaScenes {
 		Text.Flush();
 
 		// [Polite][Rude][Sultry]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Polite",
 			func() {
 				Text.Clear();
@@ -7459,7 +7459,7 @@ export namespace MirandaScenes {
 		Text.Flush();
 
 		// [Polite][Rude][Sultry]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Polite",
 			func() {
 				Text.Clear();
@@ -7595,7 +7595,7 @@ export namespace MirandaScenes {
 				Text.Flush();
 
 				// [Blow her][Fuck no]
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Blow her",
 					func() {
 						Text.Clear();
@@ -7670,7 +7670,7 @@ export namespace MirandaScenes {
 		Text.Add("After walking for a while longer, Miranda leads you down a cramped alleyway, stopping in front of a wooden doorway. Apparently, this is where the dog-morph lives. Your heart beats a bit faster.", parse);
 		Text.NL();
 
-		const options = new Array();
+		const options: IChoice[] = [];
 
 		if (datingScore > 2) {
 			Text.Add("<i>“All good nights come to an end, but this one doesn’t have to end here.”</i> Miranda looks at you suggestively. <i>“You are my kind of [guyGirl], [playername]. Would you like to come inside for a bit of fun?”</i>", parse);
@@ -7720,7 +7720,7 @@ export namespace MirandaScenes {
 			Text.Flush();
 
 			// [Get fucked][Decline]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Get fucked",
 				func() {
 					Text.Clear();
@@ -7761,7 +7761,7 @@ export namespace MirandaScenes {
 			Text.Flush();
 
 			// [Follow][Decline]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Follow",
 				func() {
 					Text.Clear();

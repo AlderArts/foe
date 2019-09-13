@@ -5,6 +5,7 @@ import { GAME } from "../GAME";
 import { Gui } from "../gui";
 import { AccItems } from "../items/accessories";
 import { CombatItems } from "../items/combatitems";
+import { IChoice } from "../link";
 import { DryadGladeFlags } from "../loc/glade-flags";
 import { MagicShopScenes } from "../loc/rigard/magicshop";
 import { Party } from "../party";
@@ -67,7 +68,7 @@ export namespace AscheScenes {
             himher: player.mfFem("him", "her"),
         };
 
-        const options = new Array();
+        const options: IChoice[] = [];
         options.push({ nameStr : "Appearance",
             tooltip : "Study the jackal-morph.",
             func : AscheScenes.Appearance,
@@ -212,7 +213,7 @@ export namespace AscheScenes {
         };
 
         // [Shop][Magic][Herself][Sister][Stock][Tasks][Back]
-        const options = new Array();
+        const options: IChoice[] = [];
         options.push({ nameStr : "Shop",
             tooltip : "That’s a nice shop she has there.",
             func() {
@@ -298,7 +299,7 @@ export namespace AscheScenes {
                 asche.flags.Talk |= AscheFlags.Talk.Sister;
 
                 AscheScenes.TalkPrompt();
-            }, enabled : (asche.flags.Talk & AscheFlags.Talk.Shop) && (asche.flags.Talk & AscheFlags.Talk.Herself),
+            }, enabled: ((asche.flags.Talk & AscheFlags.Talk.Shop) && (asche.flags.Talk & AscheFlags.Talk.Herself)) !== 0,
         });
         options.push({ nameStr : "Stock",
             tooltip : "Where does she get all the stuff she sells?",
@@ -535,7 +536,7 @@ export namespace AscheScenes {
         const cost = AscheScenes.FortuneCost();
 
         // [Fortune][Fate][Explain][Never Mind]
-        const options = new Array();
+        const options: IChoice[] = [];
         options.push({ nameStr : "Fortune",
             tooltip : "Ask for a quick, light and easy reading.",
             func() {
@@ -784,7 +785,7 @@ export namespace AscheScenes {
         };
 
         // [Explanation][Grab][Back]
-        const options = new Array();
+        const options: IChoice[] = [];
         if (asche.flags.Talk & AscheFlags.Talk.Box) {
             options.push({ nameStr : "Grab",
                 tooltip : "Stick your hand into limbo and see what you can draw out.",
@@ -921,7 +922,7 @@ export namespace AscheScenes {
             Text.Flush();
 
             // [Yes][No]
-            const options = new Array();
+            const options: IChoice[] = [];
             options.push({ nameStr : "Yes",
                 tooltip : "What could go wrong?",
                 func() {
@@ -983,7 +984,7 @@ export namespace AscheScenes {
             Text.Flush();
 
             // [Keep][Toss]
-            const options = new Array();
+            const options: IChoice[] = [];
             options.push({ nameStr : "Keep",
                 tooltip : "It might be pulp fiction, but it’s still a read, right?",
                 func() {
@@ -1104,7 +1105,7 @@ export namespace AscheScenes {
         Text.Flush();
 
         // [Yes][No]
-        const options = new Array();
+        const options: IChoice[] = [];
         options.push({ nameStr : "Yes",
             tooltip : "Why not? Another go it is!",
             func() {

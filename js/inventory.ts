@@ -8,6 +8,7 @@ import { Gui } from "./gui";
 import { compareItemByProp, IItemQuantity, Item, ItemIds, ItemSubtype, ItemType } from "./item";
 import { CombatItem } from "./items/combatitems";
 import { ItemToy } from "./items/toy-item";
+import { IChoice } from "./link";
 import { Text } from "./text";
 
 // Inventory
@@ -254,7 +255,7 @@ export class Inventory {
 			}
 		}
 
-		const options = [];
+		const options: IChoice[] = [];
 		for (const u of usable) {
 			const it  = u.it;
 			const num = u.num;
@@ -350,7 +351,7 @@ export class Inventory {
 		}
 
 		// Add combat items as buttons
-		const options = [];
+		const options: IChoice[] = [];
 		for (const u of usable) {
 			const it  = u.it;
 			const num = u.num;

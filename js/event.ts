@@ -6,7 +6,7 @@ import { DreamsScenes } from "./event/dreams";
 import { GAME, StepToHour, TimeStep } from "./GAME";
 import { GameState, SetGameState } from "./gamestate";
 import { Gui } from "./gui";
-import { Link } from "./link";
+import { IChoice, Link } from "./link";
 import { ILocation } from "./location";
 import { Text } from "./text";
 
@@ -115,7 +115,7 @@ export class Event implements ILocation {
 		Text.Add("How long do you want to wait?");
 		Text.Flush();
 
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Half hour",
 			tooltip : "Wait for half an hour.",
 			func() {

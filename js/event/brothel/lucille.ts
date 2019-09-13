@@ -8,6 +8,7 @@ import { EncounterTable } from "../../encountertable";
 import { Entity } from "../../entity";
 import { GAME } from "../../GAME";
 import { Gui } from "../../gui";
+import { IChoice } from "../../link";
 import { ILocation } from "../../location";
 import { Party } from "../../party";
 import { Text } from "../../text";
@@ -167,7 +168,7 @@ export namespace LucilleScenes {
 			Gui.NextPrompt(func);
 		};
 
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Cat Dynasty",
 			tooltip : "Choose the Cat Dynasty and enter the role of Bastet, the hermaphrodite feline Goddess.",
 			func() {
@@ -304,7 +305,7 @@ export namespace LucilleScenes {
 			Text.Flush();
 
 			// [Pay][Shark]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Pay",
 				func() {
 					Text.Clear();

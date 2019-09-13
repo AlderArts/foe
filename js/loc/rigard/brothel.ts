@@ -9,7 +9,7 @@ import { LucilleScenes } from "../../event/brothel/lucille";
 import { RoaScenes } from "../../event/brothel/roa-scenes";
 import { GAME, MoveToLocation, TimeStep, WORLD } from "../../GAME";
 import { Gui } from "../../gui";
-import { Link } from "../../link";
+import { IChoice, Link } from "../../link";
 import { ILocRigardBrothel } from "../../location";
 import { Text } from "../../text";
 
@@ -160,7 +160,7 @@ export namespace BrothelScenes {
 		player.AddLustFraction(1);
 
 		// [Resist][Lucille]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Resist",
 			func() {
 				Text.Clear();

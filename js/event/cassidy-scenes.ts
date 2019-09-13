@@ -6,6 +6,7 @@ import { Encounter } from "../combat";
 import { EncounterTable } from "../encountertable";
 import { GAME, MoveToLocation, StepToHour, TimeStep, WORLD, WorldTime } from "../GAME";
 import { Gui } from "../gui";
+import { IChoice } from "../link";
 import { Party } from "../party";
 import { Status } from "../statuseffect";
 import { Text } from "../text";
@@ -248,7 +249,7 @@ export namespace CassidyScenes {
 		};
 		parse = cassidy.ParserPronouns(parse);
 
-		const options = new Array();
+		const options: IChoice[] = [];
 
 		options.push({ nameStr : "Appearance",
 			tooltip : "Give the salamander a once-over.",
@@ -446,7 +447,7 @@ export namespace CassidyScenes {
 		parse = cassidy.ParserPronouns(parse);
 
 		// [What’s Up?][Shop][Back]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "What’s Up?",
 			tooltip : Text.Parse("So… has [heshe] heard anything new?", parse),
 			func() {
@@ -839,7 +840,7 @@ export namespace CassidyScenes {
 		};
 		parse = cassidy.ParserPronouns(parse);
 
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Talk",
 			tooltip : "Have a chat.",
 			func() {
@@ -1156,7 +1157,7 @@ export namespace CassidyScenes {
 		}
 
 		// [Smithing][Salamanders][Family][Loner][Tomboy]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Smithing",
 			tooltip : "Is blacksmithing the official family trade?",
 			func() {
@@ -1422,7 +1423,7 @@ export namespace CassidyScenes {
 
 						TimeStep({minute: 10});
 
-						const options = new Array();
+						const options: IChoice[] = [];
 						options.push({ nameStr : "Yes",
 							tooltip : "Yeah, it really would help.",
 							func() {
@@ -1570,7 +1571,7 @@ export namespace CassidyScenes {
 		TimeStep({minute: 15});
 
 		const askprompt = (asked?: boolean) => {
-			const options = new Array();
+			const options: IChoice[] = [];
 			// [What Do?][Yes][No]
 			if (!asked) {
 				options.push({ nameStr : "What Do?",
@@ -1712,7 +1713,7 @@ export namespace CassidyScenes {
 		};
 
 		// [name]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Rapier",
 			tooltip : "He doesn't look very strong... perhaps a light weapon would be good for him?",
 			func : wrong, enabled : true,
@@ -1766,7 +1767,7 @@ export namespace CassidyScenes {
 		};
 
 		// [325 coins][375 coins][425 coins]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "325 coins",
 			tooltip : "",
 			func : wrong, enabled : true,
@@ -1838,7 +1839,7 @@ export namespace CassidyScenes {
 		};
 
 		// [Oak Spear][Greatsword][Halberd]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Oak Spear",
 			tooltip : "The oak spear is the cheapest thing that you have that could fit that bill... and this guy doesn't really look like he's swimming in coins.",
 			func : wrong, enabled : true,
@@ -1940,7 +1941,7 @@ export namespace CassidyScenes {
 		};
 
 		// [Halberd][Greatsword][Warhammer]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Halberd",
 			tooltip : "Surely a big halberd will do the trick?",
 			func : wrong, enabled : true,
@@ -2017,7 +2018,7 @@ export namespace CassidyScenes {
 		TimeStep({minute: 15});
 
 		// [Yes][No]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Yes",
 			tooltip : "",
 			func() {
@@ -2170,7 +2171,7 @@ export namespace CassidyScenes {
 		TimeStep({hour: 1});
 
 		// [Yes][No]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Yes",
 			tooltip : "Sure, you’d love some cookies.",
 			func() {
@@ -2457,7 +2458,7 @@ export namespace CassidyScenes {
 		Text.Add("<i>“Sorry, ace; customer confidentiality and all. Wouldn’t run my mouth to someone else about something I was making for you, so gotta do the same for others, right? Now… gonna cut back to the chase - you want to model for me, or not?”</i>", parse);
 		Text.Flush();
 
-		const options = [];
+		const options: IChoice[] = [];
 		// [Sure!][No Thanks]
 		options.push({nameStr : "Sure!",
 			tooltip : Text.Parse("Modeling for Cass sounds like fun!", parse),
@@ -2514,7 +2515,7 @@ export namespace CassidyScenes {
 				Text.Add("All right, then; time for the big decision. What kind of pose do you want to strike?", parse);
 				Text.Flush();
 
-				const options = [];
+				const options: IChoice[] = [];
 				options.push({nameStr : "Heroic",
 					tooltip : Text.Parse("Brave and dashing! A traditional favorite!", parse),
 					enabled : true,
@@ -2927,7 +2928,7 @@ export namespace CassidyScenes {
 		Text.Add("<i>“We don’t have to do it now; we can always put it off till later, when you’re ready. But if you want to get to it right now, I wouldn’t say no to that.”</i> She winks at you and grins, thumping a fist on the table. <i>“So… what do you say? I will admit, it <b>will</b> take up most of the night, so if you want to do anything else, we can move it to another date.”</i>", parse);
 		Text.Flush();
 
-		const options = [];
+		const options: IChoice[] = [];
 		options.push({nameStr : "Yeah",
 			tooltip : Text.Parse("Sure, a bit of sparring wouldn’t hurt.", parse),
 			enabled : true,

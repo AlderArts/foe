@@ -1,6 +1,7 @@
 import { EncounterTable } from "../../encountertable";
 import { GAME, StepToHour, TimeStep, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
+import { IChoice } from "../../link";
 import { Text } from "../../text";
 import { Season } from "../../time";
 import { VaughnFlags } from "./vaughn-flags";
@@ -136,7 +137,7 @@ export namespace VaughnScenes {
 		};
 
 		// [Appearance][Tasks]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Appearance",
 			tooltip : "Give the fox a once-over.",
 			func() {
@@ -200,7 +201,7 @@ export namespace VaughnScenes {
 		};
 
 		// [Himself][War][Engineer][Back]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Himself",
 			tooltip : "Ask Vaughn about himself.",
 			func() {
@@ -275,7 +276,7 @@ export namespace VaughnScenes {
 		};
 
 		// [Past][Arrival][Watch][Fiancee][Back]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Past",
 			tooltip : "So, where’d he come from, who is he, and where is he going?",
 			func() {
@@ -465,7 +466,7 @@ export namespace VaughnScenes {
 		};
 
 		// [Beginnings][Wartime][Desertion][Afterwards]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Beginnings",
 			tooltip : "How did it all get started, from his point of view?",
 			func() {
@@ -499,7 +500,7 @@ export namespace VaughnScenes {
 					Text.Flush();
 
 					// [Sure][Nah]
-					const options = new Array();
+					const options: IChoice[] = [];
 					options.push({ nameStr : "Sure",
 						tooltip : "Why not? It’s a cold night.",
 						func() {
@@ -732,7 +733,7 @@ export namespace VaughnScenes {
 			Text.Add("<i>“You sure are persistent, aren’t you? Not even Leon was that persistent when it came to -”</i> Vaughn catches himself mid-sentence, and shakes his head. <i>“What did you have in mind?”</i>", parse);
 
 			// [Titfuck][T. Roleplay]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Titfuck",
 				tooltip : "Offer him a titfuck. That seems to be his thing.",
 				func : VaughnScenes.SexTitfuck, enabled : true,
@@ -873,7 +874,7 @@ export namespace VaughnScenes {
 			Text.Flush();
 
 			// [Confront][Let it go]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Confront",
 				tooltip : "Stop right there. Is he fantasizing about someone else?",
 				func : VaughnScenes.SexConfront, enabled : true,

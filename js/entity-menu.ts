@@ -5,6 +5,7 @@ import { GAME } from "./GAME";
 import { Gui } from "./gui";
 import { Item, ItemSubtype, ItemType } from "./item";
 import { Job } from "./job";
+import { IChoice } from "./link";
 import { Stat } from "./stat";
 import { Text } from "./text";
 
@@ -119,7 +120,7 @@ const EntityMenu = {
 			return;
 		}
 
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr: "Strength",
 			func() {
 				that.strength.growth += Stat.growthPerPoint;
@@ -231,7 +232,7 @@ const EntityMenu = {
 				}
 			};
 
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Weapon",
 				func() {
 					Text.Clear();

@@ -15,6 +15,7 @@ import { Item } from "../item";
 import { ArmorItems } from "../items/armor";
 import { WeaponsItems } from "../items/weapons";
 import { JobDesc, Jobs } from "../job";
+import { IChoice } from "../link";
 import { ILocation } from "../location";
 import { Text } from "../text";
 import { KiakaiFlags } from "./kiakai-flags";
@@ -203,7 +204,7 @@ export class Kiakai extends Entity {
 
 		Text.Flush();
 
-		const options = [];
+		const options: IChoice[] = [];
 
 		options.push({ nameStr: "Talk",
 			func() {
@@ -269,7 +270,7 @@ export class Kiakai extends Entity {
 		};
 		parse = kiakai.ParserPronouns(parse);
 
-		const options = [];
+		const options: IChoice[] = [];
 		// TALK ABOUT MAIN QUEST
 		options.push({ nameStr: "Quest",
 			func : KiakaiScenes.TalkQuest, enabled : true,

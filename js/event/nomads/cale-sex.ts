@@ -6,6 +6,7 @@ import { Entity } from "../../entity";
 import { Sex } from "../../entity-sex";
 import { GAME, TimeStep } from "../../GAME";
 import { Gui } from "../../gui";
+import { IChoice } from "../../link";
 import { PregnancyHandler } from "../../pregnancy";
 import { Text } from "../../text";
 import { Player } from "../player";
@@ -44,7 +45,7 @@ export namespace CaleSexScenes {
 		const cocksInAss = player.CocksThatFit(cale.Butt());
 
 		// [Oral]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Give BJ",
 			func() {
 				CaleSexScenes.SexSuckHim();
@@ -164,7 +165,7 @@ export namespace CaleSexScenes {
 
 		const cocksInAss = player.CocksThatFit(cale.Butt());
 
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Give BJ",
 			func() {
 				CaleSexScenes.SexSuckHim(true);
@@ -285,7 +286,7 @@ export namespace CaleSexScenes {
 		let finger = false;
 
 		// [Suck][Tease][Finger]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Suck",
 			func() {
 				Text.Clear();
@@ -407,7 +408,7 @@ export namespace CaleSexScenes {
 			let mess = false;
 
 			// [Swallow][Facial][Reverse]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Swallow",
 				func() {
 					Text.Clear();
@@ -584,7 +585,7 @@ export namespace CaleSexScenes {
 				Text.Flush();
 
 				// [Eat out][Trick]
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Eat out",
 					func() {
 						Text.Clear();
@@ -1096,7 +1097,7 @@ export namespace CaleSexScenes {
 			let cum: number;
 
 			// [Doggy][R.Cowgirl]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Doggy",
 				func() {
 					Text.Clear();
@@ -1218,7 +1219,7 @@ export namespace CaleSexScenes {
 					if (virgin) {
 						cale.slut.IncreaseStat(50, 5);
 						// [BeForward] [Neutral] [Comfort]
-						const options = new Array();
+						const options: IChoice[] = [];
 						options.push({ nameStr : "Be forward",
 							func() {
 								Text.Clear();
@@ -1422,7 +1423,7 @@ export namespace CaleSexScenes {
 		Text.Flush();
 
 		// [Handjob] [Blowjob] [StrokeSelf]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Handjob",
 			func() {
 				Text.Clear();
@@ -1602,7 +1603,7 @@ export namespace CaleSexScenes {
 			Text.Flush();
 
 			// [Yes] [No]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Yes",
 				func() {
 					Text.Clear();
@@ -1938,7 +1939,7 @@ export namespace CaleSexScenes {
 		const max = (cale.flags.Met2 >= CaleFlags.Met2.Goop) ? 100 : 50;
 
 		// [Tie Him][Nah]
-		const options = new Array();
+		const options: IChoice[] = [];
 		if (knotted) {
 			options.push({ nameStr : "Tie Him",
 				func() {
@@ -2149,7 +2150,7 @@ export namespace CaleSexScenes {
 			Text.Flush();
 
 			// [Yes][No]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Yes",
 				func() {
 					Text.Clear();
@@ -2402,7 +2403,7 @@ export namespace CaleSexScenes {
 			const first = (cale.flags.eBlow === 0);
 
 			// [Hell yeah!][No]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Hell yeah!",
 				func() {
 					cale.flags.eBlow++;

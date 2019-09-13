@@ -3,6 +3,7 @@ import { Entity } from "../entity";
 import { LaylaFlags } from "../event/farm/layla-flags";
 import { GAME, TimeStep } from "../GAME";
 import { Gui } from "../gui";
+import { IChoice } from "../link";
 import { OasisFlags } from "../loc/oasis-flags";
 import { Party } from "../party";
 import { PregnancyHandler } from "../pregnancy";
@@ -61,7 +62,7 @@ export namespace OrchidScenes {
 		};
 
 		// [name]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Talk",
 			tooltip : "Ask her if she has time to chat for a bit.",
 			func() {
@@ -95,7 +96,7 @@ export namespace OrchidScenes {
 		};
 
 		// [name]
-		const options = new Array();
+		const options: IChoice[] = [];
 		if (false) { // TODO
 		options.push({ nameStr : "Spring",
 			tooltip : "Maybe Orchid knows of a way to get past the thorns?",
@@ -358,7 +359,7 @@ export namespace OrchidScenes {
 		};
 
 		// [Attackers] - [Elves][Spring][Lizard?] - [Tentacles]
-		const options = new Array();
+		const options: IChoice[] = [];
 		if (!opts.attacker) {
 			options.push({ nameStr : "Attackers",
 				tooltip : "First, how about she recounts what she remembers from the attackers? You can discuss the details afterwards.",
@@ -606,7 +607,7 @@ export namespace OrchidScenes {
 					Text.Flush();
 
 					// [Sex][Later]
-					const options = new Array();
+					const options: IChoice[] = [];
 					options.push({ nameStr : "Sex",
 						tooltip : "Well, the best way to do this is to show her.",
 						func() {

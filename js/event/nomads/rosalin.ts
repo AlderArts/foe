@@ -21,6 +21,7 @@ import { Gui } from "../../gui";
 import { AlchemyItems } from "../../items/alchemy";
 import { AlchemySpecial } from "../../items/alchemyspecial";
 import { StrapOnItems } from "../../items/strapon";
+import { IChoice } from "../../link";
 import { Party } from "../../party";
 import { PregnancyHandler } from "../../pregnancy";
 import { Text } from "../../text";
@@ -255,7 +256,7 @@ export namespace RosalinScenes {
 		Text.Flush();
 		rosalin.PrintDescription();
 
-		const options = new Array();
+		const options: IChoice[] = [];
 
 		options.push({ nameStr : "Talk",
 			func : RosalinScenes.TalkPrompt, enabled : true,
@@ -322,7 +323,7 @@ export namespace RosalinScenes {
 		Text.Flush();
 
 		// [Alchemy][Blah]
-		const options = new Array();
+		const options: IChoice[] = [];
 		if (rosalin.flags.AlQuest === 0) {
 			options.push({ nameStr : "Alchemy",
 				func() {
@@ -611,7 +612,7 @@ export namespace RosalinScenes {
 					parse.canusDesc = () => cale.Butt().AnalShort();
 					parse.cocks = () => player.MultiCockDesc();
 					// [Take him][Rosalin]
-					const options = new Array();
+					const options: IChoice[] = [];
 					options.push({ nameStr : "Take him",
 						func() {
 							Text.Clear();
@@ -887,7 +888,7 @@ export namespace RosalinScenes {
 
 		TimeStep({minute: 45});
 
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Fuck her",
 			func() {
 				Text.Clear();
@@ -969,7 +970,7 @@ export namespace RosalinScenes {
 				parse.genDesc = () => player.FirstCock() ? player.MultiCockDesc() : player.FirstVag() ? player.FirstVag().Short() : "bare crotch";
 
 				// [Get serviced][Get fucked][Fuck her]
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Get serviced",
 					func() {
 						Text.Add("Amused, you aid her in undressing you, exposing your [genDesc]. The catgirl quickly adjusts to pleasuring both of you, ", parse);
@@ -988,7 +989,7 @@ export namespace RosalinScenes {
 						Text.Flush();
 
 						// [Oral][Fuck him]
-						const options = new Array();
+						const options: IChoice[] = [];
 						options.push({ nameStr : "Oral",
 							func() {
 								Text.Clear();
@@ -1166,7 +1167,7 @@ export namespace RosalinScenes {
 							player.AddLustFraction(0.4);
 
 							// [Oral][Fuck him]
-							const options = new Array();
+							const options: IChoice[] = [];
 							options.push({ nameStr : "Oral",
 								func() {
 									Text.Clear();
@@ -1366,7 +1367,7 @@ export namespace RosalinScenes {
 			Text.Flush();
 
 			// [You][Rosalin][Discard]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "You",
 				func() {
 					Text.Clear();
@@ -1432,7 +1433,7 @@ export namespace RosalinScenes {
 			Text.Add("Rapidly mixing the ingredients together with practiced ease, Rosalin quickly presents you with a bottle of Leporine.", parse);
 			Text.Flush();
 			// [You][Rosalin][Discard]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "You",
 				func() {
 					Text.Clear();
@@ -1532,7 +1533,7 @@ export namespace RosalinScenes {
 			Text.Flush();
 
 			// [You][Rosalin][Discard]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "You",
 				func() {
 					Text.Clear();
@@ -1680,7 +1681,7 @@ export namespace RosalinScenes {
 			Text.Add("Finishing up, Rosalin presents you with a thick, heady potion. <i>“One Equinium, ready to go!”</i>", parse);
 			Text.Flush();
 			// [You][Rosalin][Discard]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "You",
 				func() {
 					Text.Clear();
@@ -1776,7 +1777,7 @@ export namespace RosalinScenes {
 			Text.Flush();
 
 			// [You][Rosalin][Discard]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "You",
 				func() {
 					Text.Clear();
@@ -1865,7 +1866,7 @@ export namespace RosalinScenes {
 			Text.Flush();
 
 			// [You][Rosalin][Discard]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "You",
 				func() {
 					Text.Clear();
@@ -1956,7 +1957,7 @@ export namespace RosalinScenes {
 			Text.Flush();
 
 			// [You][Rosalin][Discard]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "You",
 				func() {
 					Text.Clear();
@@ -2015,7 +2016,7 @@ export namespace RosalinScenes {
 			Text.Flush();
 
 			// [You][Rosalin][Discard]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "You",
 				func() {
 					Text.Clear();
@@ -2121,7 +2122,7 @@ export namespace RosalinScenes {
 			Text.Flush();
 
 			// [You][Rosalin][Discard]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "You",
 				func() {
 					Text.Clear();
@@ -2223,7 +2224,7 @@ export namespace RosalinScenes {
 			Text.Flush();
 
 			// [You][Rosalin][Discard]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "You",
 				func() {
 					Text.Clear();
@@ -2327,7 +2328,7 @@ export namespace RosalinScenes {
 			Text.Flush();
 
 			// [You][Rosalin][Discard]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "You",
 				func() {
 					Text.Clear();
@@ -2394,7 +2395,7 @@ export namespace RosalinScenes {
 			Text.Flush();
 
 			// [You][Rosalin][Discard]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "You",
 				func() {
 					Text.Clear();
@@ -2484,7 +2485,7 @@ export namespace RosalinScenes {
 			Text.Flush();
 
 			// [You][Rosalin][Discard]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "You",
 				func() {
 					Text.Clear();
@@ -2561,7 +2562,7 @@ export namespace RosalinScenes {
 			let rosalinUnlocked = true;
 			const prompt = () => {
 				// [You][Rosalin][Discard]
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "You",
 					func() {
 						Text.Clear();
@@ -2609,7 +2610,7 @@ export namespace RosalinScenes {
 			Text.Flush();
 
 			// [You][Rosalin][Discard]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "You",
 				func() {
 					Text.Clear();
@@ -2769,7 +2770,7 @@ export namespace RosalinScenes {
 			Text.Flush();
 
 			// [Get fucked][Fuck her][Wolfie]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Get fucked",
 				func() {
 					Text.Clear();
@@ -2992,7 +2993,7 @@ export namespace RosalinScenes {
 						Text.Flush();
 
 						// [Sure][Nah]
-						const options = new Array();
+						const options: IChoice[] = [];
 						options.push({ nameStr : "Leave",
 							func() {
 								Text.Clear();
@@ -3059,7 +3060,7 @@ export namespace RosalinScenes {
 			Text.Flush();
 
 			// [Sure][Nah]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Recv. Oral",
 				func() {
 					Text.Clear();

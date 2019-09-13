@@ -1,6 +1,7 @@
 import { EncounterTable } from "../../encountertable";
 import { GAME, TimeStep } from "../../GAME";
 import { Gui } from "../../gui";
+import { IChoice } from "../../link";
 import { Text } from "../../text";
 import { LagonDScenes } from "./lagon-defeated";
 import { VenaFlags } from "./vena-flags";
@@ -134,7 +135,7 @@ export namespace VenaRScenes {
 
 		};
 
-		const options = [];
+		const options: IChoice[] = [];
 
 		const judged = vena.flags.Met & VenaFlags.Met.Judgement;
 		if (!judged) {
@@ -198,7 +199,7 @@ export namespace VenaRScenes {
 			playername : player.name,
 		};
 
-		const options = [];
+		const options: IChoice[] = [];
 		// [Public Fuck][Kill Him][Exile][Drug Him]
 
 		options.push({nameStr : "Public Fuck",

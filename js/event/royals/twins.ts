@@ -8,6 +8,7 @@ import * as _ from "lodash";
 import { Entity } from "../../entity";
 import { GAME, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
+import { IChoice } from "../../link";
 import { RigardFlags } from "../../loc/rigard/rigard-flags";
 import { ILocation } from "../../location";
 import { Text } from "../../text";
@@ -137,7 +138,7 @@ export namespace TwinsScenes {
 		Text.Flush();
 
 		// [Talk]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Talk",
 			func : TwinsScenes.TalkPrompt, enabled : true,
 			tooltip : "Talkie talkie.",
@@ -158,7 +159,7 @@ export namespace TwinsScenes {
 		};
 
 		// [Thief]
-		const options = new Array();
+		const options: IChoice[] = [];
 		if (rigard.Krawitz.Q >= RigardFlags.KrawitzQ.CaughtTerry) {
 			options.push({ nameStr : "Thief",
 				func() {

@@ -11,6 +11,7 @@ import { GameState, SetGameState } from "../../gamestate";
 import { Gui } from "../../gui";
 import { Input } from "../../input";
 import { StrapOnItems } from "../../items/strapon";
+import { IChoice } from "../../link";
 import { Party } from "../../party";
 import { Text } from "../../text";
 import { CaleSexScenes } from "./cale-sex";
@@ -80,7 +81,7 @@ export namespace NCavalcadeScenes {
 			Text.Flush();
 
 			// [Coin game][Sexy game]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Coin game",
 				func() {
 					Text.Clear();
@@ -128,7 +129,7 @@ export namespace NCavalcadeScenes {
 				Text.Flush();
 
 				// [Sure][Nah]
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Sure",
 					func() {
 						Text.NL();
@@ -502,7 +503,7 @@ export namespace NCavalcadeScenes {
 		const caleCockInAss = player.CocksThatFit(cale.Butt());
 
 		// [Fuck Cale][Nothing]
-		const options = new Array();
+		const options: IChoice[] = [];
 		/* TODO
 		options.push({ nameStr : "name",
 			func : () => {

@@ -5,6 +5,7 @@ import { Gender } from "../../body/gender";
 import { GAME, TimeStep, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
 import { Jobs } from "../../job";
+import { IChoice } from "../../link";
 import { Party } from "../../party";
 import { Text } from "../../text";
 import { Cale } from "./cale";
@@ -136,7 +137,7 @@ export namespace CaleScenes {
 			Text.Flush();
 
 			// [BeForward] [Neutral] [Comfort]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Be forward",
 				func() {
 					Text.Clear();
@@ -243,7 +244,7 @@ export namespace CaleScenes {
 			Text.Flush();
 
 			// [Reassert] [Ignore] [Enjoy]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Reassert",
 				func() {
 					Text.Clear();
@@ -309,7 +310,7 @@ export namespace CaleScenes {
 					Text.Flush();
 
 					// [Yes][No]
-					const options = new Array();
+					const options: IChoice[] = [];
 					options.push({ nameStr : "Yes",
 						func() {
 							Text.Clear();
@@ -410,7 +411,7 @@ export namespace CaleScenes {
 		};
 
 		// [Talk][Tent][Sex][Shop][Rogue][Anal]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Talk",
 			func() {
 				Text.Clear();
@@ -526,7 +527,7 @@ export namespace CaleScenes {
 		parse = cale.ParserTags(parse, "c");
 
 		// [Himself][His Past][Goals][Rosalin]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Himself",
 			func() {
 				Text.Clear();
@@ -712,7 +713,7 @@ export namespace CaleScenes {
 					Text.Flush();
 
 					// [name]
-					const options = new Array();
+					const options: IChoice[] = [];
 					if (cale.Buttslut()) {
 						// [Deal][No sex][No deal]
 						options.push({ nameStr : "Deal",
@@ -1000,7 +1001,7 @@ export namespace CaleScenes {
 				Text.Flush();
 
 				// [Let go][Fuck him]
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Let go",
 					func() {
 						Text.Clear();
@@ -1055,7 +1056,7 @@ export namespace CaleScenes {
 				Text.Flush();
 
 				// [Yield][Take it]
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Yield",
 					func() {
 						Text.Clear();

@@ -22,3 +22,12 @@ export class Link {
 		this.tooltip = tooltip;
 	}
 }
+
+export interface IChoice {
+    nameStr: string;
+    func: (obj?: any, ...args: any[]) => void;
+    obj?: any;
+    enabled: boolean;
+    tooltip?: string;
+    image?: any;
+}

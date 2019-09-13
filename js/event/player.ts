@@ -13,6 +13,7 @@ import { GAME, NAV, TimeStep } from "../GAME";
 import { Gui } from "../gui";
 import { Item } from "../item";
 import { JobDesc, JobEnum, Jobs } from "../job";
+import { IChoice } from "../link";
 import { Party } from "../party";
 import { Perks } from "../perks";
 import { PregnancyHandler, PregnancyLevel, Womb } from "../pregnancy";
@@ -685,7 +686,7 @@ export class Player extends Entity {
 
 		player.PrintDescription();
 
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr: "Fantasize",
 			func() {
 				Text.Clear();

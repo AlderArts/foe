@@ -24,6 +24,7 @@ import { Gui } from "../gui";
 import { AlchemyItems } from "../items/alchemy";
 import { AlchemySpecial } from "../items/alchemyspecial";
 import { IngredientItems } from "../items/ingredients";
+import { IChoice } from "../link";
 import { Party } from "../party";
 import { PregnancyHandler } from "../pregnancy";
 import { Text } from "../text";
@@ -596,7 +597,7 @@ export namespace FelinesScenes {
 				}
 			}
 
-			const options = new Array();
+			const options: IChoice[] = [];
 			if (female) {
 				const cocksInVag = player.CocksThatFit(female.FirstVag());
 				const cocksInAss = player.CocksThatFit(female.Butt());
@@ -817,7 +818,7 @@ export namespace FelinesScenes {
 		Text.Flush();
 
 		// [Yes][No]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Yes",
 			tooltip : "Why not? If you do get pregnant, you’re sure your kittens would be adorable!",
 			func() {
@@ -1039,7 +1040,7 @@ export namespace FelinesScenes {
 				Text.Flush();
 
 				// [Comply][Deny]
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Comply",
 					func() {
 						Text.Clear();
@@ -1268,7 +1269,7 @@ export namespace FelinesScenes {
 			});
 
 			// [Inside][Mouth][Body]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Inside",
 				func() {
 					Text.Clear();
@@ -1405,7 +1406,7 @@ export namespace FelinesScenes {
 		let throat = false;
 
 		// [Face][Mouth][Throat]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Face",
 			func() {
 				Text.Clear();
@@ -2175,7 +2176,7 @@ export namespace FelinesScenes {
 		Text.Flush();
 
 		// [Inside][Outside]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Inside",
 			func() {
 				Text.Clear();
@@ -2389,7 +2390,7 @@ export namespace FelinesScenes {
 		Text.Flush();
 
 		// [PoundHer][LayBack][TittyFuck]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "PoundHer",
 			func() {
 				Text.Clear();
@@ -2763,7 +2764,7 @@ export namespace FelinesScenes {
 		const breastSize = player.FirstBreastRow().Size();
 
 		// [Present] [Ride]
-		const options = [];
+		const options: IChoice[] = [];
 		options.push({nameStr : "Present",
 			tooltip : Text.Parse("Get down[l] and offer your ass.", {l: player.Humanoid() ? " on all fours" : ""}),
 			enabled : true,

@@ -21,6 +21,7 @@ import { GameState, SetGameState } from "../../gamestate";
 import { Gui } from "../../gui";
 import { ArmorItems } from "../../items/armor";
 import { WeaponsItems } from "../../items/weapons";
+import { IChoice } from "../../link";
 import { Party } from "../../party";
 import { Text } from "../../text";
 import { GolemFlags } from "./golem-flags";
@@ -161,7 +162,7 @@ export namespace GolemScenes {
 
 		const parse: any = {};
 		// [Fight!][Leave]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Fight!",
 			func() {
 				golem.RestFull();

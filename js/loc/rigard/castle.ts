@@ -9,7 +9,7 @@ import { TerryFlags } from "../../event/terry-flags";
 import { TerryScenes } from "../../event/terry-scenes";
 import { GAME, MoveToLocation, TimeStep, WORLD, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
-import { Link } from "../../link";
+import { IChoice, Link } from "../../link";
 import { ILocRigardCastle } from "../../location";
 import { Party } from "../../party";
 import { Text } from "../../text";
@@ -362,7 +362,7 @@ export namespace NobleScenes {
 		rigard.flags.Nobles |= RigardFlags.Nobles.Alms;
 
 		// [Old man][Young man][Leave]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Old man",
 			tooltip : "Side with the old man.",
 			func() {
@@ -392,7 +392,7 @@ export namespace NobleScenes {
 				Text.Flush();
 
 				// [Give][Leave]
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Give",
 					tooltip : "Give the old man one of your own coins.",
 					func() {
@@ -462,7 +462,7 @@ export namespace NobleScenes {
 		rigard.flags.Nobles |= RigardFlags.Nobles.Elodie;
 
 		// [Confront][Leave]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Confront",
 			tooltip : "It’s impolite to stare, you know.",
 			func() {
@@ -657,7 +657,7 @@ export namespace NobleScenes {
 
 		const first = !(rigard.flags.Nobles & RigardFlags.Nobles.BoughtBuns);
 
-		const options = new Array();
+		const options: IChoice[] = [];
 		if (first) {
 			options.push({ nameStr : "Buy",
 				tooltip : "Sure, you’ll have one of… whatever he’s selling.",

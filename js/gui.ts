@@ -11,6 +11,7 @@ import { GAME, GetCavalcade, NAV, WorldTime } from "./GAME";
 import { isOnline, SetGameState } from "./gamestate";
 import { gameState, GameState } from "./gamestate";
 import { Input, Keys } from "./input";
+import { IChoice } from "./link";
 import { StatusEffect } from "./statuseffect";
 import { StatusList } from "./statuslist";
 import { Text } from "./text";
@@ -395,7 +396,7 @@ export class Gui {
 		Text.Add("Integer posuere quam at odio pharetra dignissim sollicitudin leo accumsan. Curabitur eu pharetra urna. Vivamus et gravida tortor. Morbi vel porttitor urna. Donec vitae rutrum urna. Integer elit orci, gravida eget viverra et, tincidunt quis est. Aliquam erat volutpat. Sed euismod rutrum lectus, nec vehicula turpis volutpat et. Nulla mauris felis, eleifend a fringilla id, faucibus eget purus. Donec in neque in ligula condimentum lobortis.");
 		Text.Flush();
 
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Reset",
 			func() {
 				FontFamily = "Georgia, sans-serif, \"Arial\", \"Helvetica\"";
@@ -441,7 +442,7 @@ export class Gui {
 		Text.Add("Set a new background color?");
 		Text.Flush();
 
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Light",
 			func() {
 				BgColor = "rgba(255, 255, 255, 0.2)";
@@ -555,7 +556,7 @@ export class Gui {
 		Input.buttons[0].Setup(text, func, true, undefined, tooltip);
 	}
 
-	public static SetButtonPage(list: any[], page: number, state: GameState) {
+	public static SetButtonPage(list: IChoice[], page: number, state: GameState) {
 		Gui.ClearChoiceButtons();
 		for (let i = 0, j = page * Input.buttons.length; i < Input.buttons.length && j < list.length; i++, j++) {
 			const name = list[j].nameStr || "NULL";
@@ -566,7 +567,7 @@ export class Gui {
 		}
 	}
 
-	public static SetButtonsFromList(list: any[], backEnabled?: boolean, backFunc: CallableFunction = Gui.PrintDefaultOptions, state?: GameState, backState?: GameState) {
+	public static SetButtonsFromList(list: IChoice[], backEnabled?: boolean, backFunc: CallableFunction = Gui.PrintDefaultOptions, state?: GameState, backState?: GameState) {
 		Gui.ClearButtons();
 		let currentPage = 0;
 

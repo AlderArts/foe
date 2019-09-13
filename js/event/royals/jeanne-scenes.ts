@@ -3,6 +3,7 @@ import { Alchemy } from "../../alchemy";
 import { GAME, GameCache, TimeStep } from "../../GAME";
 import { Gui } from "../../gui";
 import { AlchemySpecial } from "../../items/alchemyspecial";
+import { IChoice } from "../../link";
 import { Party } from "../../party";
 import { Text } from "../../text";
 import { TFItem } from "../../tf";
@@ -54,7 +55,7 @@ export namespace JeanneScenes {
 
         const parse: any = {};
         // [Talk][Golem][Sex]
-        const options = new Array();
+        const options: IChoice[] = [];
         options.push({ nameStr : "Talk",
             func : JeanneScenes.Talk, enabled : true,
             tooltip : "Seek the magician's advice.",
@@ -146,7 +147,7 @@ export namespace JeanneScenes {
         };
 
         // [Gem][Magic][Alchemy][Elves][Jeanne][Golem][Rosalin][Terry]
-        const options = new Array();
+        const options: IChoice[] = [];
         options.push({ nameStr : "Gem",
             func() {
                 Text.Clear();
@@ -458,7 +459,7 @@ export namespace JeanneScenes {
         const golem = GAME().golem;
         const parse: any = {};
         // [Golem][Jeanne][Gem]
-        const options = new Array();
+        const options: IChoice[] = [];
         if (talkedGolem === false) {
             options.push({ nameStr : "Golem",
                 func() {

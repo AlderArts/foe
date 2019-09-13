@@ -7,7 +7,7 @@ import { TerryScenes } from "../../event/terry-scenes";
 import { GAME, MoveToLocation, TimeStep, WORLD, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
 import { QuestItems } from "../../items/quest";
-import { Link } from "../../link";
+import { IChoice, Link } from "../../link";
 import { ILocRigardShops } from "../../location";
 import { Party } from "../../party";
 import { Text } from "../../text";
@@ -242,7 +242,7 @@ ShopStreetLoc.Street.events.push(new Link(
 		Text.Flush();
 
 		// [Yes][No]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Yes",
 			func() {
 				Text.Clear();
@@ -334,7 +334,7 @@ ShopStreetLoc.Street.events.push(new Link(
 			Text.Flush();
 
 			// [Pay][Leave]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Pay",
 				func() {
 					Text.Clear();
@@ -630,7 +630,7 @@ export namespace ShopStreetScenes {
 		};
 
 		// [Inquire][Ignore]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Inquire",
 			func() {
 				Text.Clear();

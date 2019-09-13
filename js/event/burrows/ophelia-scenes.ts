@@ -10,6 +10,7 @@ import { GAME, TimeStep, WORLD } from "../../GAME";
 import { Gui } from "../../gui";
 import { AlchemyItems } from "../../items/alchemy";
 import { QuestItems } from "../../items/quest";
+import { IChoice } from "../../link";
 import { BurrowsFlags } from "../../loc/burrows-flags";
 import { SetGameOverButton } from "../../main-gameover";
 import { Party } from "../../party";
@@ -194,7 +195,7 @@ export namespace OpheliaScenes {
         };
 
         // [Herself] [Her lab] [Sex] [Vena] [Lagon]
-        const options = new Array();
+        const options: IChoice[] = [];
         options.push({ nameStr : "Herself",
             func() {
                 Text.Clear();
@@ -356,7 +357,7 @@ export namespace OpheliaScenes {
                         Text.Flush();
 
                         // [Yes] [No]
-                        const options = new Array();
+                        const options: IChoice[] = [];
                         options.push({ nameStr : "Yes",
                             func() {
                                 OpheliaScenes.TurnInScepter();
@@ -393,7 +394,7 @@ export namespace OpheliaScenes {
                     Text.Add("<i>“I know, I just can’t believe you actually did it,”</i> she smiles. <i>“Father was so powerful, and he even had my potion. You must be some kind of hero to have accomplished this.”</i>", parse);
                     Text.Flush();
 
-                    const options = new Array();
+                    const options: IChoice[] = [];
                     options.push({ nameStr : "Be modest",
                         func() {
                             Text.Clear();
@@ -446,7 +447,7 @@ export namespace OpheliaScenes {
                     Text.Flush();
 
                     // [Come with me] [Stay silent]
-                    const options = new Array();
+                    const options: IChoice[] = [];
                     options.push({ nameStr : "Come with me",
                         func() {
                             Text.Clear();
@@ -572,7 +573,7 @@ export namespace OpheliaScenes {
             Text.Flush();
 
             // [Experiments][Sex]
-            const options = new Array();
+            const options: IChoice[] = [];
             options.push({ nameStr : "Experiments",
                 func() {
                     Text.Clear();
@@ -892,7 +893,7 @@ export namespace OpheliaScenes {
         };
 
         // [name]
-        const options = new Array();
+        const options: IChoice[] = [];
         if (player.FirstCock()) {
             options.push({ nameStr : "Vaginal",
                 func() {
@@ -946,7 +947,7 @@ export namespace OpheliaScenes {
         Text.Flush();
 
         // [Slowly] [Don’t bother]
-        const options = new Array();
+        const options: IChoice[] = [];
         options.push({ nameStr : "Slowly",
             func() {
                 Text.Clear();
@@ -1227,7 +1228,7 @@ export namespace OpheliaScenes {
         };
 
         // [name]
-        const options = new Array();
+        const options: IChoice[] = [];
 
         options.push({ nameStr : "Talk",
             func() {
@@ -1336,7 +1337,7 @@ export namespace OpheliaScenes {
             playername : player.name,
         };
 
-        const options = new Array();
+        const options: IChoice[] = [];
         if (burrows.flags.Felinix === 0) {
             options.push({ nameStr : "Felinix",
                 func() {
@@ -1349,7 +1350,7 @@ export namespace OpheliaScenes {
                     burrows.flags.Felinix = 1;
 
                     OpheliaScenes.PotionsPrompt();
-                }, enabled : party.Inv().QueryNum(AlchemyItems.Felinix),
+                }, enabled : party.Inv().QueryNum(AlchemyItems.Felinix) !== undefined,
                 tooltip : "Introduce Felinix into the diet of the colony.",
             });
         }
@@ -1381,7 +1382,7 @@ export namespace OpheliaScenes {
                     burrows.flags.Lacertium = 1;
 
                     OpheliaScenes.PotionsPrompt();
-                }, enabled : party.Inv().QueryNum(AlchemyItems.Lacertium),
+                }, enabled : party.Inv().QueryNum(AlchemyItems.Lacertium) !== undefined,
                 tooltip : "Introduce Lacertium into the diet of the colony.",
             });
         }
@@ -1435,7 +1436,7 @@ export namespace OpheliaScenes {
 
                         OpheliaScenes.PotionsPrompt();
                     });
-                }, enabled : party.Inv().QueryNum(AlchemyItems.Equinium),
+                }, enabled : party.Inv().QueryNum(AlchemyItems.Equinium) !== undefined,
                 tooltip : "Introduce Equinium into the diet of the colony.",
             });
         }
@@ -1672,7 +1673,7 @@ export namespace OpheliaScenes {
             WatchedOphelia = false;
 
             // [Stop him][Divert][Watch]
-            const options = new Array();
+            const options: IChoice[] = [];
             options.push({ nameStr : "Stop him",
                 func() {
                     Text.Clear();
@@ -1921,7 +1922,7 @@ export namespace OpheliaScenes {
             stoppedVena  = false;
 
             // [Stop Vena][Watch][Offer][Attack]
-            const options = new Array();
+            const options: IChoice[] = [];
             options.push({ nameStr : "Stop Vena",
                 func() {
                     stoppedVena = true;
@@ -2248,7 +2249,7 @@ export namespace OpheliaScenes {
         };
 
         // [Sorry][Encourage][Rebuke]
-        const options = new Array();
+        const options: IChoice[] = [];
         if (WatchedOphelia) {
             options.push({ nameStr : "Sorry",
                 func() {
@@ -2307,7 +2308,7 @@ export namespace OpheliaScenes {
         party.location = WORLD().loc.Burrows.Throne;
 
         // [Virility][Fertility][Breeder][Gold][Sex]
-        const options = new Array();
+        const options: IChoice[] = [];
         if (!player.HasPerk(Perks.Virility)) {
             options.push({ nameStr : "Virility",
                 func() {

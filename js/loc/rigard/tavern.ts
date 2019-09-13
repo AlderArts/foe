@@ -8,7 +8,7 @@ import { MirandaFlags } from "../../event/miranda-flags";
 import { ZinaFlags } from "../../event/zina";
 import { GAME, MoveToLocation, TimeStep, WORLD} from "../../GAME";
 import { Gui } from "../../gui";
-import { Link } from "../../link";
+import { IChoice, Link } from "../../link";
 import { ILocRigardTavern } from "../../location";
 import { Party } from "../../party";
 import { Text } from "../../text";
@@ -99,7 +99,7 @@ TavernLoc.Common.DrunkHandler = () => {
 	Text.Add("Bribe him off with twenty five coin? Or see if he's up for some more... intimate compensation?", parse, "bold");
 	Text.Flush();
 
-	const options = [];
+	const options: IChoice[] = [];
 	options.push({nameStr : "Pay Up",
 		tooltip : Text.Parse("Just give him what he wants. Some coins are a small price to pay for not being robbed, molested or who knows what while you were out cold.", parse),
 		enabled : party.coin >= 25,
@@ -315,7 +315,7 @@ export namespace BarnabyScenes {
 		};
 		parse = player.ParserTags(parse);
 
-		const options = [];
+		const options: IChoice[] = [];
 		options.push({nameStr : "Ale",
 			tooltip : Text.Parse("Light alcohol, costs [coin1] coin.", parse),
 			enabled : party.coin >= coin1,
@@ -651,7 +651,7 @@ export namespace BarnabyScenes {
 
 		};
 
-		const options = [];
+		const options: IChoice[] = [];
 		/* TODO
 		options.push({nameStr : "",
 			tooltip : Text.Parse("", parse),

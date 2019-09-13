@@ -7,6 +7,7 @@ import { GAME, TimeStep } from "../GAME";
 import { Gui } from "../gui";
 import { ItemSubtype } from "../item";
 import { ToysItems } from "../items/toys";
+import { IChoice } from "../link";
 import { Party } from "../party";
 import { Text } from "../text";
 
@@ -49,7 +50,7 @@ export namespace MasturbationScenes {
 		const taur = player.IsTaur();
 
 		// [Cock][Pussy][Breasts][Ass]
-		const options = new Array();
+		const options: IChoice[] = [];
 
 		if (player.FirstCock()) {
 			const optsTc = new Array();

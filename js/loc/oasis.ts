@@ -7,6 +7,7 @@ import { GAME, TimeStep, WorldTime } from "../GAME";
 import { Gui } from "../gui";
 import { Item } from "../item";
 import { IngredientItems } from "../items/ingredients";
+import { IChoice } from "../link";
 import { Party } from "../party";
 import { Shop } from "../shop";
 import { Text } from "../text";
@@ -277,7 +278,7 @@ export namespace OasisScenes {
 
 		const prompt = () => {
 			// [Trade][Rumors][Fun][Leave]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Trade",
 				func() {
 					Text.Clear();

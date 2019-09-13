@@ -11,6 +11,7 @@ import { HairStyle } from "../../body/hair";
 import { Entity } from "../../entity";
 import { GAME, NAV, TimeStep, WORLD, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
+import { IChoice } from "../../link";
 import { Text } from "../../text";
 
 // TODO: FIX STATS
@@ -127,7 +128,7 @@ export class Gwendy extends Entity {
 
 		that.PrintDescription();
 
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr: "Release",
 			func() {
 				Text.Clear();

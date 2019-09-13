@@ -13,6 +13,7 @@ import { GAME, TimeStep } from "../GAME";
 import { GameState, SetGameState } from "../gamestate";
 import { Gui } from "../gui";
 import { IngredientItems } from "../items/ingredients";
+import { IChoice } from "../link";
 import { BurrowsFlags } from "../loc/burrows-flags";
 import { BurrowsScenes } from "../loc/burrows-scenes";
 import { Party } from "../party";
@@ -481,7 +482,7 @@ export namespace LagomorphScenes {
 				Text.Add("The last of the rabbits fall before you, unable to fight on anymore. The critters still look like they want to fuck you though, so maybe - just maybe - you’ll humor them? You could deal with this group here, or have them drag out some of their comrades from the pile that are more to your liking.", parse);
 			}
 
-			const options = new Array();
+			const options: IChoice[] = [];
 
 			if (burrows.flags.Access === BurrowsFlags.AccessFlags.Unknown) {
 				Text.NL();
@@ -994,7 +995,7 @@ export namespace LagomorphScenes {
 			Text.Flush();
 
 			// [Fuck them][Fuck you][Service them][Sit it out]
-			const options = new Array();
+			const options: IChoice[] = [];
 			if (kiakai.FirstCock()) {
 				options.push({ nameStr : "Fuck them",
 					func() {
@@ -1179,7 +1180,7 @@ export namespace LagomorphScenes {
 				blockTerry = true;
 
 				// [Fuck] [Get Fucked] [Don’t Fuck]
-				const options = new Array();
+				const options: IChoice[] = [];
 				if (terry.FirstCock()) {
 					options.push({ nameStr : "Fuck",
 						func() {
@@ -1674,7 +1675,7 @@ export namespace LagomorphScenes {
 		Text.Flush();
 
 		// [Leave][Intimidate][Seduce]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Leave",
 			func() {
 				Text.Clear();
@@ -1753,7 +1754,7 @@ export namespace LagomorphScenes {
 				Text.Flush();
 
 				// [Follow][Ditch]
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Follow",
 					func() {
 						Text.Clear();

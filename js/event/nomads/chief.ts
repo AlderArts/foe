@@ -9,6 +9,7 @@ import { RaceScore } from "../../body/race";
 import { Entity } from "../../entity";
 import { GAME, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
+import { IChoice } from "../../link";
 import { Party } from "../../party";
 import { Text } from "../../text";
 import { Rand } from "../../utility";
@@ -71,7 +72,7 @@ export namespace ChiefScenes {
 			Text.Flush();
 
 			// [Polite][Rude]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Polite",
 				func() {
 					chief.relation.IncreaseStat(100, 10);
@@ -142,7 +143,7 @@ export namespace ChiefScenes {
 		};
 
 		// [Portal][Nomads]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Portal",
 			func() {
 				Text.Clear();

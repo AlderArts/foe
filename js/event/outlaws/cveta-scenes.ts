@@ -5,6 +5,7 @@ import { Entity } from "../../entity";
 import { GAME, TimeStep, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
 import { QuestItems } from "../../items/quest";
+import { IChoice } from "../../link";
 import { KrawitzFlags } from "../../loc/rigard/krawitz-flags";
 import { Party } from "../../party";
 import { Status } from "../../statuseffect";
@@ -63,7 +64,7 @@ export namespace CvetaScenes {
 		Text.Flush();
 
 		// [Yes][No]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Yes",
 			func() {
 				Text.Clear();
@@ -153,7 +154,7 @@ export namespace CvetaScenes {
 		Text.Flush();
 
 		// [Yes][No]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Yes",
 			func() {
 				Text.Clear();
@@ -264,7 +265,7 @@ export namespace CvetaScenes {
 		};
 
 		// [Talk][Music][Play][Leave]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Talk",
 			func() {
 				CvetaScenes.TalkPrompt();
@@ -456,7 +457,7 @@ export namespace CvetaScenes {
 		Text.Flush();
 
 		// [Flirt][Pet][Get Intimate][Date]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Flirt",
 			func() {
 				Text.Clear();
@@ -530,7 +531,7 @@ export namespace CvetaScenes {
 		Text.Flush();
 
 		// [Scratch][Preen][Wings]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Scratch",
 			func() {
 				Text.Clear();
@@ -720,7 +721,7 @@ export namespace CvetaScenes {
 		};
 
 		// [Wellbeing][Chat][Herself][Back]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Wellbeing",
 			func() {
 				Text.Clear();
@@ -728,7 +729,7 @@ export namespace CvetaScenes {
 				Text.Flush();
 
 				// [Yes][No]
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Yes",
 					func() {
 						Text.Clear();
@@ -832,7 +833,7 @@ export namespace CvetaScenes {
 		};
 
 		// [Outlaws][Nobility][Mandate][Past][Voice][Music]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Outlaws",
 			func() {
 				Text.Clear();
@@ -905,7 +906,7 @@ export namespace CvetaScenes {
 					}
 
 					// [Naive][Idealistic][No Comment]
-					const options = new Array();
+					const options: IChoice[] = [];
 					options.push({ nameStr : "Naive",
 						func() {
 							Text.Clear();
@@ -1118,7 +1119,7 @@ export namespace CvetaScenes {
 		Text.Flush();
 
 		// [Sing][Play Lyre][Play Violin]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Sing",
 			func() {
 				Text.Clear();
@@ -1306,7 +1307,7 @@ export namespace CvetaScenes {
 						Text.Flush();
 
 						// [Great!][Bad][Eh…]
-						const options = new Array();
+						const options: IChoice[] = [];
 						options.push({ nameStr : "Great!",
 							func() {
 								Text.Clear();
@@ -1361,7 +1362,7 @@ export namespace CvetaScenes {
 						Text.Flush();
 
 						// [Ask][Let it be]
-						const options = new Array();
+						const options: IChoice[] = [];
 						options.push({ nameStr : "Ask",
 							func() {
 								Text.Clear();
@@ -1457,7 +1458,7 @@ export namespace CvetaScenes {
 		TimeStep({minute: 15});
 
 		// [Yes][No]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Yes",
 			func() {
 				Text.Clear();
@@ -1561,7 +1562,7 @@ export namespace CvetaScenes {
 		};
 
 		// [Wellbeing][Outlaws][Music][Weather][Give Up]
-		const options = new Array();
+		const options: IChoice[] = [];
 		if (opts.wellbeing === false) {
 			options.push({ nameStr : "Wellbeing",
 				func() {
@@ -1648,7 +1649,7 @@ export namespace CvetaScenes {
 					Text.Flush();
 
 					// [Truth][Silence]
-					const options = new Array();
+					const options: IChoice[] = [];
 					options.push({ nameStr : "Truth",
 						func() {
 							Text.Clear();
@@ -2200,7 +2201,7 @@ export namespace CvetaScenes {
 		Text.Flush();
 
 		// [Yes][No]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Yes",
 			tooltip : "Yes, it does quite fit you.",
 			func() {
@@ -2264,7 +2265,7 @@ export namespace CvetaScenes {
 		};
 
 		// [Nuzzle][Cuddle][Grope]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Nuzzle",
 			tooltip : "She may not be able to kiss you, but this is pretty good, too.",
 			func() {
@@ -2473,7 +2474,7 @@ export namespace CvetaScenes {
 		TimeStep({minute: 45});
 
 		// [Yes][No]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Yes",
 			tooltip : "Screw that, she’s too far gone. Full steam ahead!",
 			func() {

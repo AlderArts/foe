@@ -5,6 +5,7 @@ import { Sex } from "../../entity-sex";
 import { GAME, MoveToLocation, TimeStep, WORLD } from "../../GAME";
 import { Gui } from "../../gui";
 import { AlchemySpecial } from "../../items/alchemyspecial";
+import { IChoice } from "../../link";
 import { Party } from "../../party";
 import { Text } from "../../text";
 import { LagonFlags } from "./lagon-flags";
@@ -64,7 +65,7 @@ export namespace LagonDScenes {
 			scepter : "scepter", // TODO
 		};
 
-		const options = [];
+		const options: IChoice[] = [];
 		options.push({nameStr : "Sex",
 			tooltip : Text.Parse("Put an end to Lagon's boredom and take him for a little romp in the hay.", parse),
 			enabled : true,
@@ -170,7 +171,7 @@ export namespace LagonDScenes {
 		Text.Add("With Lagon now safely settled in his bed, you quickly remove your [armor] and cast it onto the table in the center of the room. Now naked, you look over the nude form of the fallen tyrant and lick your lips, trying to decide what you’re going to do with him.", parse);
 		Text.Flush();
 
-		const options = [];
+		const options: IChoice[] = [];
 
 		options.push({nameStr : "Pitch anal",
 			tooltip : Text.Parse("He’s just begging for your [cock] up his tight little bunny-butt.", parse),
@@ -641,7 +642,7 @@ export namespace LagonDScenes {
 			playername : player.name,
 		};
 
-		const options = [];
+		const options: IChoice[] = [];
 		options.push({nameStr : "Sex",
 			tooltip : Text.Parse("Since he’s so eager to please, how about the two of you spend some quality time together?", parse),
 			enabled : true,
@@ -717,7 +718,7 @@ export namespace LagonDScenes {
 
 		};
 
-		const options = [];
+		const options: IChoice[] = [];
 		options.push({nameStr : "Pitch anal",
 			tooltip : Text.Parse("If he’s that eager to get his ass tapped, why not oblige him?", parse),
 			enabled : player.BiggestCock(undefined, true),
@@ -1385,7 +1386,7 @@ export namespace LagonDScenes {
 			}
 			Text.Flush();
 
-			const options = [];
+			const options: IChoice[] = [];
 			// [PC fuck] [Vena fuck]
 			options.push({nameStr : "PC fuck",
 				tooltip : Text.Parse("How can you pass up the chance to humiliate Lagon again?", parse),
@@ -1546,7 +1547,7 @@ export namespace LagonDScenes {
 			Text.Add("Decisions, decisions... but you better make your choice fast; you can’t hold it off much longer!", parse);
 			Text.Flush();
 
-			const options = [];
+			const options: IChoice[] = [];
 			// [Cum] [Don’t cum]
 			parse.guygirl = player.mfTrue("guy", "girl");
 			options.push({nameStr : "Cum",
@@ -2062,7 +2063,7 @@ export namespace LagonDScenes {
 		Text.Flush();
 		TimeStep({hour: 1});
 
-		const options = [];
+		const options: IChoice[] = [];
 		// [Cum inside] [Cum bath]
 		options.push({nameStr : "Cum inside",
 			tooltip : Text.Parse("Best way to humiliate Lagon is to show him what it’s like to be bred like a bitch.", parse),

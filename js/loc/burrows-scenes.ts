@@ -12,7 +12,7 @@ import { VenaScenes } from "../event/burrows/vena-scenes";
 import { GlobalScenes } from "../event/global";
 import { GAME, MoveToLocation, TimeStep, WORLD, WorldTime } from "../GAME";
 import { Gui } from "../gui";
-import { Link } from "../link";
+import { IChoice, Link } from "../link";
 import { ILocBurrows } from "../location";
 import { Party } from "../party";
 import { Text } from "../text";
@@ -62,7 +62,7 @@ export namespace BurrowsScenes {
         Text.Flush();
 
         // [Leave][Approach]
-        const options = new Array();
+        const options: IChoice[] = [];
         options.push({ nameStr : "Leave",
             func() {
                 Text.NL();
@@ -240,7 +240,7 @@ export namespace BurrowsScenes {
         }
 
         // [Burrows][Ophelia][Vena][Lab]
-        const options = new Array();
+        const options: IChoice[] = [];
         if (!OpheliaTalkBurrows) {
             options.push({ nameStr : "Burrows",
                 func() {
@@ -348,7 +348,7 @@ export namespace BurrowsScenes {
                 Text.Flush();
 
                 // [Go along][Resist]
-                const options = new Array();
+                const options: IChoice[] = [];
                 options.push({ nameStr : "Go along",
                     func() {
                         Text.Clear();
@@ -450,7 +450,7 @@ export namespace BurrowsScenes {
         }
 
         // [Assault][Job]
-        const options = new Array();
+        const options: IChoice[] = [];
         if (!ArrivalLagonTalkAssault) {
             options.push({ nameStr : "Assault",
                 func() {

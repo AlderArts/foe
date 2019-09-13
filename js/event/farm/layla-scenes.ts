@@ -9,6 +9,7 @@ import { GAME, NAV, TimeStep, WORLD, WorldTime } from "../../GAME";
 import { MoveToLocation } from "../../GAME";
 import { GameState, SetGameState } from "../../gamestate";
 import { Gui } from "../../gui";
+import { IChoice } from "../../link";
 import { DryadGladeFlags } from "../../loc/glade-flags";
 import { Party } from "../../party";
 import { PregnancyHandler } from "../../pregnancy";
@@ -31,7 +32,7 @@ export namespace LaylaScenes {
 
 		const that = layla;
 
-		const options = new Array();
+		const options: IChoice[] = [];
 
 		options.push({ nameStr : "Talk",
 			func() {
@@ -43,9 +44,9 @@ export namespace LaylaScenes {
 			tooltip : "You’d like to talk about some things with Layla, if she doesn’t mind.",
 		});
 		const tooltip = layla.Virgin() ? "It’s time to make good on your promise and teach her about proper sex." : "You’re feeling a tad horny, and you doubt the pretty chimera would have anything against some intimacy.";
-		let enabled = layla.flags.Talk & LaylaFlags.Talk.Sex;
+		let enabled = (layla.flags.Talk & LaylaFlags.Talk.Sex) !== 0;
 		if (layla.Virgin()) {
-			enabled = enabled && (player.FirstCock() !== undefined || player.Strapon() !== undefined) ? 1 : 0;
+			enabled = enabled && (player.FirstCock() !== undefined || player.Strapon() !== undefined);
 		}
 		options.push({ nameStr : "Sex",
 			func() {
@@ -101,7 +102,7 @@ export namespace LaylaScenes {
 			playername : player.name,
 		};
 
-		const options = new Array();
+		const options: IChoice[] = [];
 
 		const tooltip = layla.Virgin() ? "Despite her apparent innocence, Layla does have a nice body. So why not proposition the chimeric beauty for a little romp in the hay?" : "Now that Layla knows what it is, what does she think about sex?";
 		options.push({ nameStr : "Sex",
@@ -762,7 +763,7 @@ export namespace LaylaScenes {
 			let hadSex = false;
 
 			// [Tea] [Coffee] [You’re fine] [Sex]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Tea",
 				func() {
 					Text.Clear();
@@ -893,7 +894,7 @@ export namespace LaylaScenes {
 				Text.Flush();
 
 				// [Take] [Don’t take]
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Take",
 					func() {
 						layla.flags.Take = 1;
@@ -1099,7 +1100,7 @@ export namespace LaylaScenes {
 		const p1cock = player.BiggestCock(undefined, true);
 
 		// [name]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Catch anal",
 			func() {
 				Text.Clear();
@@ -1117,9 +1118,9 @@ export namespace LaylaScenes {
 					Text.Add("<i>“No problem,”</i> she replies happily.", parse);
 				} else if (layla.sexlevel >= 3) {
 					Text.Add("As you raise your hands to begin undoing your [armor], Layla bounds over. With an almost puppy-like enthusiasm, the chimera starts trying to undress you, playfully tussling with you to remove your gear as quickly as possible. In a matter of moments, the two of you are equally naked.", parse);
- } else {
+ 				} else {
 					Text.Add("You waste little time in stripping yourself down as well. As you remove your gear, you’re quite aware of the curious, yet appreciative, gaze of your chimeric lover.", parse);
- }
+ 				}
 				Text.NL();
 				LaylaScenes.SexCatchAnal();
 			}, enabled : true,
@@ -1151,7 +1152,7 @@ export namespace LaylaScenes {
 		});
 		*/
 		options.push({ nameStr : "Pitch Vaginal",
-			func : LaylaScenes.SexPitchVaginal, enabled : p1cock,
+			func : LaylaScenes.SexPitchVaginal, enabled : p1cock !== undefined,
 			tooltip : "You want to fuck her pussy, if she’s okay with that.",
 		});
 		Gui.SetButtonsFromList(options, true, () => {
@@ -1467,7 +1468,7 @@ export namespace LaylaScenes {
 			let licked = false;
 
 			// [Examine][Touch][Lick]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Examine",
 				func() {
 					Text.Clear();
@@ -1541,7 +1542,7 @@ export namespace LaylaScenes {
 				Text.Flush();
 
 				// [Yes][No][Taste]
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Yes",
 					func() {
 						Text.Clear();
@@ -1616,7 +1617,7 @@ export namespace LaylaScenes {
 					Text.Flush();
 
 					// [Yes][No][Taste]
-					const options = new Array();
+					const options: IChoice[] = [];
 					options.push({ nameStr : "Yes",
 						func() {
 							Text.Clear();
@@ -1721,13 +1722,13 @@ export namespace LaylaScenes {
 						TimeStep({minute: 30});
 
 						// [Hell yeah!] [Sure] [Later]
-						const options = new Array();
+						const options: IChoice[] = [];
 						const getfucked = () => {
 							Text.Clear();
 							Text.Add("<i>“Thanks! So where should I...”</i> She smiles nervously.", parse);
 							Text.Flush();
 							// [Ass][Vagina]
-							const options = new Array();
+							const options: IChoice[] = [];
 							if (player.FirstVag()) {
 								options.push({ nameStr : "Pussy",
 									func() {
@@ -1824,7 +1825,7 @@ export namespace LaylaScenes {
 			Text.Flush();
 
 			// [Tail fuck][Lick’n suck][Blow her]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Tail fuck",
 				func() {
 					Text.Clear();
@@ -2032,9 +2033,9 @@ export namespace LaylaScenes {
 			Text.Add("As practiced as you are, you don’t really have a gag reflex anymore. Layla’s cock glides smoothly down your throat without a hitch, allowing you to gulp her down to the very hilt without even trying.", parse);
 		} else if (player.sexlevel >= 3) {
 			Text.Add("With your experience, you know how to relax your throat to allow the chimera’s cock smooth access. It’s not perfect, you still gag a little, but you’ve taken her to the hilt before long.", parse);
- } else {
+ 		} else {
 			Text.Add("Fighting your gag reflex all the way, you try and swallow Layla to the hilt. As her member invades your throat, you choke and cough. You have to force it down, inch by near-painful inch. Tears leak out from underneath your eyelids, but finally you have it all inside of you, stretching out your gullet.", parse);
- }
+ 		}
 		Text.NL();
 		parse.sl = player.sexlevel < 3 ? " despite your inexperience" : "";
 		Text.Add("The chimera moans in blissful pleasure as your throat muscles ripple along her shaft, working to milk her[sl].", parse);
@@ -2108,7 +2109,7 @@ export namespace LaylaScenes {
 				Text.Flush();
 
 				// [Yes][No]
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Yes",
 					func() {
 						Text.Clear();
@@ -2128,7 +2129,7 @@ export namespace LaylaScenes {
 							Text.Flush();
 
 							// [Yes][No]
-							const options = new Array();
+							const options: IChoice[] = [];
 							options.push({ nameStr : "Yes",
 								func() {
 									Text.Clear();
@@ -2169,7 +2170,7 @@ export namespace LaylaScenes {
 				Text.Flush();
 
 				// [Accept][Push away]
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Accept",
 					func() {
 						Text.Clear();
@@ -2193,7 +2194,7 @@ export namespace LaylaScenes {
 						Text.Flush();
 
 						// [Yes][No]
-						const options = new Array();
+						const options: IChoice[] = [];
 						options.push({ nameStr : "Yes",
 							func() {
 								Text.Clear();
@@ -2274,7 +2275,7 @@ export namespace LaylaScenes {
 			Text.Flush();
 
 			// [Yes] [No]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Yes",
 				func() {
 					Text.Clear();
@@ -2473,7 +2474,7 @@ export namespace LaylaScenes {
 				const laylaSexlevel = layla.sexlevel;
 
 				// [Hands][Tail][Tentacles]
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Hands",
 					tooltip : "You’re quite confident she can work wonders with her fingers...",
 					func() {
@@ -2646,7 +2647,7 @@ export namespace LaylaScenes {
 		const layla = GAME().layla;
 
 		// [Finger][Eat her out]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Finger",
 			tooltip : "Why get fancy for this? Your fingers should be just fine for getting her all fired up.",
 			func() {
@@ -2744,7 +2745,7 @@ export namespace LaylaScenes {
 		const layla = GAME().layla;
 
 		// [Cock][Tail-cock][Finish up]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Cock",
 			tooltip : "It’s right in front of you, so you may as well give it a lick.",
 			func() {
@@ -2762,9 +2763,9 @@ export namespace LaylaScenes {
 					Text.Add("The taste of her dick floods your senses, forcing you back instinctively to keep from gagging as the chimera’s maleness thrusts into your mouth. Only when you feel it stop, trembling slightly in the dark, warm wetness of your mouth, do you dare to move again.", parse);
 				} else if (sexlevel < 5) {
 					Text.Add("You try to relax your throat as Layla’s penis glides along your tongue, tickling against your taste buds as it extends into your inviting mouth. Still, you can’t help but gag as she brushes the back of your throat, forcing you to withdraw your head just a little from her full length.", parse);
- } else {
+ 				} else {
 					Text.Add("Layla’s dick glides into your mouth with all the comfort and ease of a long-missed friend being welcomed home. You effortlessly stretch your gullet around her shaft, allowing the chimera to plunge straight down your throat, ensuring every inch of her maleness is wrapped in your warm, wet maw.", parse);
- }
+ 				}
 				Text.NL();
 
 				Sex.Blowjob(player, layla);
@@ -2926,7 +2927,7 @@ export namespace LaylaScenes {
 				Text.Flush();
 
 				// [Allow][Deny]
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Allow",
 					tooltip : "Fair is fair, after all...",
 					func() {
@@ -2975,7 +2976,7 @@ export namespace LaylaScenes {
 				Text.Flush();
 
 				// [Allow][Deny]
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Allow",
 					tooltip : "She asked first, and it’s only fair, given you’re sticking her already...",
 					func() {
@@ -3066,7 +3067,7 @@ export namespace LaylaScenes {
 			Text.Flush();
 
 			// [Inside][Pull out]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Inside",
 				tooltip : "You haven’t gone through all this to waste it; aim for her womb and let fly!",
 				func() {
@@ -3225,7 +3226,7 @@ export namespace LaylaScenes {
 			Text.Flush();
 
 			// [Frig] [Lick] [Cock] [Tentacles]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Frig",
 				tooltip : "Let’s see what she can do with those long, slender fingers of hers.",
 				func() {

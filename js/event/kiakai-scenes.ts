@@ -1,10 +1,10 @@
 
 import { GAME, TimeStep } from "../GAME";
 import { Gui } from "../gui";
+import { IChoice } from "../link";
 import { BurrowsFlags } from "../loc/burrows-flags";
 import { Text } from "../text";
 import { KiakaiFlags } from "./kiakai-flags";
-import { KiakaiSexScenes } from "./kiakai-sex";
 import { UruFlags } from "./uru";
 
 export namespace KiakaiScenes {
@@ -132,7 +132,7 @@ export namespace KiakaiScenes {
 		}
 		Text.Flush();
 
-		const options = [];
+		const options: IChoice[] = [];
 		// TALK ABOUT ARIA'S GOALS
 		options.push({ nameStr: "Goals",
 			func() {
@@ -197,7 +197,7 @@ export namespace KiakaiScenes {
 
 		Text.Flush();
 
-		const options = [];
+		const options: IChoice[] = [];
 		// TALK ABOUT CONFLICT WITH ARIA
 		options.push({ nameStr: "Conflict",
 			func() {
@@ -237,7 +237,7 @@ export namespace KiakaiScenes {
 					Text.Flush();
 
 					// [Comfort][Boast][Who cares]
-					const options = [];
+					const options: IChoice[] = [];
 					options.push({ nameStr: "Comfort",
 						func() {
 							if (kiakai.flags.Attitude < KiakaiFlags.Attitude.Neutral) {
@@ -359,7 +359,7 @@ export namespace KiakaiScenes {
 		Text.Add("<i>“What would you like to know about Eden, [playername]?”</i>", parse);
 		Text.Flush();
 
-		const options = [];
+		const options: IChoice[] = [];
 		// TALK ABOUT GEOGRAPHY
 		options.push({ nameStr: "Geography",
 			func() {
@@ -651,7 +651,7 @@ export namespace KiakaiScenes {
 		Text.Flush();
 
 		// [Culture][Parents][Childhood][Why Leave]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Culture",
 			func() {
 				Text.Clear();
@@ -781,7 +781,7 @@ export namespace KiakaiScenes {
 							Text.Flush();
 
 							// [Comfort][Explain][You're Weird!]
-							const options = new Array();
+							const options: IChoice[] = [];
 							options.push({ nameStr : "Comfort",
 								func() {
 									kiakai.relation.IncreaseStat(100, 5);
@@ -874,7 +874,7 @@ export namespace KiakaiScenes {
 							Text.Add("You see pain in the elf's eyes and sense that there's much [heshe]'s not telling you.", parse);
 							Text.Flush();
 							// [Demand answer][Let it go]
-							const options = new Array();
+							const options: IChoice[] = [];
 							options.push({ nameStr : "Demand answer",
 								func() {
 									kiakai.flags.TalkedWhyLeaveForce = 1;
@@ -969,7 +969,7 @@ export namespace KiakaiScenes {
 			Text.Flush();
 
 			// [Go on...][Later]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Go on...",
 				func() {
 					Text.Clear();
@@ -1026,7 +1026,7 @@ export namespace KiakaiScenes {
 		if (kiakai.flags.TalkedWhyLeaveLongReact === 0) {
 			Text.Flush();
 			// [Hug][Thank][Dismiss]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Hug",
 				func() {
 					Text.Clear();
@@ -1127,7 +1127,7 @@ export namespace KiakaiScenes {
 
 		Text.Flush();
 		// [Hierarchy][Disciplines][Activities][Yrissa][Aria][Meeting]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Hierarchy",
 			func : KiakaiScenes.TalkPriestHierarchy, enabled : true,
 			tooltip : "Ask about the organization of the priesthood.",
@@ -1240,7 +1240,7 @@ export namespace KiakaiScenes {
 
 				if (kiakai.flags.Sexed !== 0) {
 					// [But...][Okay]
-					const options = new Array();
+					const options: IChoice[] = [];
 					options.push({ nameStr : "But...",
 						func() {
 							Text.NL();

@@ -13,7 +13,7 @@ import { CombatItems } from "./items/combatitems";
 import { IngredientItems } from "./items/ingredients";
 import { StrapOnItems } from "./items/strapon";
 import { ToysItems } from "./items/toys";
-import { Link } from "./link";
+import { IChoice, Link } from "./link";
 import { Text } from "./text";
 
 export function InitCheats() {
@@ -51,7 +51,7 @@ export function InitCheats() {
 
 			const CockSmith = () => {
 				Text.Flush();
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Add cock",
 					func() {
 						GAME().player.body.cock.push(new Cock());
@@ -245,10 +245,10 @@ export function InitCheats() {
 
 			const ElfSmith = () => {
 				Text.Flush();
-				const options = [];
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Attitude",
 					func() {
-						const options = new Array();
+						const options: IChoice[] = [];
 						options.push({ nameStr : "Nice",
 							func() {
 								GAME().party.SwitchIn(kiakai);
@@ -278,7 +278,7 @@ export function InitCheats() {
 				});
 				options.push({ nameStr : "Relation",
 					func() {
-						const options = new Array();
+						const options: IChoice[] = [];
 						options.push({ nameStr : "Rel+10",
 							func() {
 								kiakai.relation.IncreaseStat(100, 10);
@@ -316,7 +316,7 @@ export function InitCheats() {
 					func() {
 						const ElfSmithBody = () => {
 							Text.Flush();
-							const options = new Array();
+							const options: IChoice[] = [];
 							options.push({ nameStr : "Add cock",
 								func() {
 									kiakai.body.cock.push(new Cock());

@@ -25,7 +25,7 @@ import { AccItems } from "../items/accessories";
 import { ArmorItems } from "../items/armor";
 import { WeaponsItems } from "../items/weapons";
 import { JobEnum, Jobs } from "../job";
-import { Link } from "../link";
+import { IChoice, Link } from "../link";
 import { ILocDarkAspect, ILocLightAspect } from "../location";
 import { Party } from "../party";
 import { Text } from "../text";
@@ -164,7 +164,7 @@ export namespace Intro {
 		Text.Add("How big is your cock?");
 		Text.Flush();
 
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "3\"",
 			func() {
 				player.FirstCock().length.base = 6;
@@ -389,7 +389,7 @@ export namespace Intro {
 		Text.Flush();
 
 		// [Fighter][Scholar][Courtesan]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Fighter",
 			func() {
 				Text.NL();
@@ -629,7 +629,7 @@ export namespace Intro {
 
 		Text.Flush();
 		// [No][Use][Ride][Group]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "No",
 			func() {
 				Text.Add("With a shake of your head, you regain your composure, leaving the pile of imps to their own devices. You catch the demon throwing you a disappointed glance before he returns to his own thoughts.");
@@ -679,7 +679,7 @@ export namespace Intro {
 		Text.Flush();
 
 		// [Gentle][Rough][Anal]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Gentle",
 			func() {
 				Text.Clear();
@@ -792,7 +792,7 @@ export namespace Intro {
 		// cuntBlocked
 
 		// [No][Use][Ride][Group]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Oral ride",
 			func() {
 				Text.Clear();
@@ -1009,7 +1009,7 @@ export namespace Intro {
 		Text.Flush();
 
 		// [Yourself][Imp]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Yourself",
 			func() {
 				Text.Clear();
@@ -1038,7 +1038,7 @@ export namespace Intro {
 		Text.Flush();
 
 		// [No][Oral][Get fucked]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "No",
 			func() {
 				Text.NL();
@@ -1194,7 +1194,7 @@ export namespace Intro {
 		Text.Flush();
 
 		// [No][Big breasts][Vaginal cap][Bigger load][Larger cock][Anal cap]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "No",
 			func() {
 				Text.Add("You shake your head, refusing the demon's temptations.");
@@ -1591,7 +1591,7 @@ export namespace Intro {
 			Text.Add("<i>“You don't belong here!”</i> she announces, proud of her discovery. <i>“What are you and how did you get here?”</i>");
 			Text.Flush();
 
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr: "Demon",
 				func() {
 					Text.Clear();
@@ -1600,7 +1600,7 @@ export namespace Intro {
 					Text.Add("Do you tell her about the mirror or not? She did kind of save your life back there.");
 					Text.Flush();
 
-					const options = new Array();
+					const options: IChoice[] = [];
 					options.push({ nameStr: "Mirror",
 						func() {
 							Text.Clear();
@@ -1645,7 +1645,7 @@ export namespace Intro {
 
 		// TODO no impact?
 		// [Power][Love][Peace]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Power",
 			func() {
 				Text.NL();
@@ -1715,7 +1715,7 @@ export namespace Intro {
 		// TODO: SEXUAL PREFERENCE INITIAL VALUES
 		Text.Flush();
 
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Cock",
 			func() {
 				Text.Add("Uru closes in on you, a wicked smile on her face. <i>“Really now, is that so?”</i> As you nod, the object of your admiration rises to full mast. It is certainly the biggest one you've ever seen");
@@ -1773,7 +1773,7 @@ export namespace Intro {
 
 		Text.Flush();
 
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Fuck vagina",
 			func() {
 				uru.flags.Intro |= UruFlags.Intro.FuckedUru;
@@ -1834,7 +1834,7 @@ export namespace Intro {
 		cc.length.base = 14;
 		player.body.cock.push(cc);
 
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Spit",
 			func() {
 				Text.Clear();
@@ -1891,7 +1891,7 @@ export namespace Intro {
 		Text.Add("Gathering yourself, you get down to business and start pounding the slutty hermaphrodite as hard as your hips will let you. Her tight passage is a marvel, her insides feeling as if they are moving on their own, stroking and squeezing your length. The way things are going, you are not going to last long.");
 		Text.Flush();
 
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Deeper",
 			func() {
 				Text.Clear();
@@ -1951,7 +1951,7 @@ export namespace Intro {
 
 			Text.Flush();
 
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Nope",
 				func() {
 					Text.Clear();
@@ -1999,7 +1999,7 @@ export namespace Intro {
 
 		// [Spit][Cunt][Suck]
 		let suckeddick = false;
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Spit",
 			func() {
 				Text.Clear();
@@ -2088,7 +2088,7 @@ export namespace Intro {
 
 			let buttfucked = false;
 			// [Eager][Let be][Deny]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Eager",
 				func() {
 					Text.Clear();
@@ -2136,7 +2136,7 @@ export namespace Intro {
 				Text.Flush();
 
 				// [Get fucked][Nope]
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Get fucked",
 					func() {
 						uru.flags.Intro |= UruFlags.Intro.FuckedByUru;
@@ -2212,7 +2212,7 @@ export namespace Intro {
 			Text.NL();
 			Text.Flush();
 			// [Anal][Vaginal]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Anal",
 				func() {
 					fuckedTarget = BodyPartType.ass;
@@ -2254,7 +2254,7 @@ export namespace Intro {
 		Text.Flush();
 
 		// [Suck her][Lead][Passive]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Suck her",
 			func() {
 				Text.NL();
@@ -2317,7 +2317,7 @@ export namespace Intro {
 		lubedFlag = true;
 
 		// [Suck her (again)][Lead][Passive]
-		const options = new Array();
+		const options: IChoice[] = [];
 
 		if (timesSuckedUru >= 3) {
 			Text.Add("A bit overwhelmed by the sheer cum production of the hermaphrodite demon, you worriedly caress your swelling stomach. Perhaps enough is enough.");
@@ -2791,7 +2791,7 @@ export namespace Intro {
 			Text.NL();
 
 			// [Remove][Keep]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Remove",
 				func() {
 					Text.Add("After a brief moment of hesitation, you nod. Her cheeks flushed, the Goddess trails her finger down the cleft between your breasts, before uncertainly giving your clit an experimental prod. Barely stifling a moan from the touch, a twinge of regret flits through you as the appendage is enveloped in a soft glow, shrinking down to its original size.");
@@ -2843,7 +2843,7 @@ export namespace Intro {
 	export function AriaQnA() {
 		Text.Flush();
 		// [Aria][Uru][Portals]([Bird])
-		const options = new Array();
+		const options: IChoice[] = [];
 		if (!ariaTalkedAboutAria) {
 			options.push({ nameStr : "Aria",
 				func() {
@@ -2973,7 +2973,7 @@ export namespace Intro {
 		Text.Add("The elfin creature starts to sensually suck on one of your nipples, spreading a tingling feeling through your entire body. Even so close, you are not quite sure if it is male or female, either due to the poor light or their very androgynous face. As your intimate visitor slowly grinds its crotch against one of your legs, their gender suddenly becomes <i>readily</i> apparent.");
 		Text.Flush();
 		// [Male][Female]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Male",
 			func() {
 				kiakai.flags.InitialGender = Gender.male;
@@ -3039,7 +3039,7 @@ export namespace Intro {
 
 		Text.Flush();
 		// [Aria][Eden][Kia/Kai]["Healing"]
-		const options = new Array();
+		const options: IChoice[] = [];
 		if (!kiaTalkedAboutAria) {
 			options.push({ nameStr : "Aria",
 				func() {
@@ -3178,7 +3178,7 @@ export namespace Intro {
 		Text.Flush();
 
 		// [Save world][Go Home][Gain Power]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Save world",
 			tooltip : "The elf seems to be earnest and the cause good, why not join each other?",
 			func() {
@@ -3211,7 +3211,7 @@ export namespace Intro {
 				Text.Flush();
 
 				// [Accept][I'm the boss][Decline]
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Accept",
 					tooltip : "A friend on the road could certainly help.",
 					func() {
@@ -3273,7 +3273,7 @@ export namespace Intro {
 				Text.Flush();
 
 				// [I'm the boss][Decline]
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "I'm the boss",
 					tooltip : Text.Parse("The elf could be useful to you, but [heshe] needs to be put in [hisher] place.", parse),
 					func() {
@@ -3321,7 +3321,7 @@ export namespace Intro {
 		Text.Flush();
 
 		// [Male][Female]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : kiakai.name,
 			tooltip : Text.Parse("How about asking [name] to finish [hisher] healing session, you could use some release.", parse),
 			func() {
@@ -3403,7 +3403,7 @@ export namespace Intro {
 		let fingering = false;
 
 		Text.Flush();
-		const options = new Array();
+		const options: IChoice[] = [];
 		if (kiakai.NumVags() > 0) {
 			options.push({ nameStr : "Vagina",
 				tooltip : Text.Parse("[name] deserves some attention too, how about eating [himher] out?", parse),
@@ -3511,7 +3511,7 @@ export namespace Intro {
 		Text.NL();
 		Text.Flush();
 
-		const options = new Array();
+		const options: IChoice[] = [];
 		if (player.FirstCock()) {
 			options.push({ nameStr : "Blowjob",
 				tooltip : Text.Parse("Your cock needs release, and [name] looks like [heshe] has the perfect mouth to provide it.", parse),

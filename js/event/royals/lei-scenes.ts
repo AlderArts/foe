@@ -5,6 +5,7 @@ import { Encounter } from "../../combat";
 import { GAME, TimeStep, WORLD, WorldTime } from "../../GAME";
 import { GameState, SetGameState } from "../../gamestate";
 import { Gui } from "../../gui";
+import { IChoice } from "../../link";
 import { RigardFlags } from "../../loc/rigard/rigard-flags";
 import { SetGameOverButton } from "../../main-gameover";
 import { Party } from "../../party";
@@ -59,7 +60,7 @@ export namespace LeiScenes {
 
 		};
 
-		const options = new Array();
+		const options: IChoice[] = [];
 		// PRE KRAWITZ
 		if (rigard.Krawitz.Q >= RigardFlags.KrawitzQ.Started && rigard.Krawitz.Q < RigardFlags.KrawitzQ.HeistDone) {
 			options.push({ nameStr : "Krawitz",
@@ -287,7 +288,7 @@ export namespace LeiScenes {
 			Text.Flush();
 		}
 
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Confront",
 			func() {
 				Text.Clear();
@@ -330,7 +331,7 @@ export namespace LeiScenes {
 
 				// [Fight][Bribe][Observe]
 				const FightPrompt = () => {
-					const options = new Array();
+					const options: IChoice[] = [];
 					options.push({ nameStr : "Fight",
 						func() {
 							Text.Clear();
@@ -341,7 +342,7 @@ export namespace LeiScenes {
 								Text.Flush();
 
 								// [Fight][Observe]
-								const options = new Array();
+								const options: IChoice[] = [];
 								options.push({ nameStr : "Fight",
 									func() {
 										Text.NL();
@@ -388,7 +389,7 @@ export namespace LeiScenes {
 							Text.Flush();
 
 							// [Pay][Nevermind][Observe]
-							const options = new Array();
+							const options: IChoice[] = [];
 							options.push({ nameStr : "Pay",
 								func() {
 									Text.NL();
@@ -505,7 +506,7 @@ export namespace LeiScenes {
 		Text.Flush();
 
 		// [Wait][Nah]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Wait",
 			func() {
 				Text.Clear();
@@ -654,7 +655,7 @@ export namespace LeiScenes {
 		const TalkPrompt = () => {
 
 			// [Personality][Status][Nothing else]
-			const options = new Array();
+			const options: IChoice[] = [];
 			if (!talkedPersonality) {
 				options.push({ nameStr : "Personality",
 					func() {
@@ -899,7 +900,7 @@ export namespace LeiScenes {
 				};
 
 				// [Attack][Observe] strike 1
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Attack",
 					func() {
 						Text.Clear();
@@ -913,7 +914,7 @@ export namespace LeiScenes {
 						lei.relation.DecreaseStat(-100, 2);
 
 						// [Attack][Observe] strike 2
-						const options = new Array();
+						const options: IChoice[] = [];
 						options.push({ nameStr : "Attack",
 							func() {
 								Text.Clear();
@@ -927,7 +928,7 @@ export namespace LeiScenes {
 								lei.relation.DecreaseStat(-100, 2);
 
 								// [Attack][Observe] strike 3
-								const options = new Array();
+								const options: IChoice[] = [];
 								options.push({ nameStr : "Attack",
 									func() {
 										Text.Clear();
@@ -1009,7 +1010,7 @@ export namespace LeiScenes {
 			playername : player.name,
 		};
 
-		const options = new Array();
+		const options: IChoice[] = [];
 		if (!(lei.flags.Talk & LeiFlags.Talk.Skills)) {
 			options.push({ nameStr : "Skills",
 				tooltip : "Ask him how he came to be as powerful as he is.",
@@ -1105,7 +1106,7 @@ export namespace LeiScenes {
 					};
 
 					// [Ask][Leave]#1
-					const options = new Array();
+					const options: IChoice[] = [];
 					options.push({ nameStr : "Ask",
 						tooltip : "Ask Lei what he thinks about the twins’ acquisitions.",
 						func() {
@@ -1123,7 +1124,7 @@ export namespace LeiScenes {
 
 							if (lei.flags.SexOpen === 0) {
 								// [Offer][Leave]#2
-								const options = new Array();
+								const options: IChoice[] = [];
 								options.push({ nameStr : "Offer",
 									tooltip : "Is he interested in you? You’re definitely interested in him.",
 									func() {
@@ -1187,7 +1188,7 @@ export namespace LeiScenes {
 		};
 
 		// [name]
-		const options = new Array();
+		const options: IChoice[] = [];
 		// TODO
 		options.push({ nameStr : "Eden",
 			tooltip : "Ask Lei what he’s been doing around Eden; what he thinks of it.",
@@ -1259,7 +1260,7 @@ export namespace LeiScenes {
 		};
 
 		// [name]
-		const options = new Array();
+		const options: IChoice[] = [];
 		if (lei.flags.SexOpen === 0) {
 			options.push({ nameStr : "Flirt",
 				tooltip : "Flirt with him, and mention you’d like to do more than flirt.",
@@ -1334,7 +1335,7 @@ export namespace LeiScenes {
 
 		};
 
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Spar",
 			tooltip : "Ask Lei to spar with you.",
 			func() {
@@ -1454,7 +1455,7 @@ export namespace LeiScenes {
 					Text.Flush();
 
 					// [name]
-					const options = new Array();
+					const options: IChoice[] = [];
 
 					LeiSexScenes.Prompt(options);
 
@@ -1584,7 +1585,7 @@ export namespace LeiScenes {
 		Text.Flush();
 
 		// [Observe][Assist]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Observe",
 			tooltip : "This <i>still</i> has nothing to do with you. Keep watching.",
 			func() {
@@ -1734,7 +1735,7 @@ export namespace LeiScenes {
 			Text.Flush();
 
 			// [Approve][Indifferent][Chastise]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Approve",
 				tooltip : "Lei provided a free, useful lesson to the guard. Certainly praiseworthy.",
 				func() {
@@ -1775,7 +1776,7 @@ export namespace LeiScenes {
 					Text.Flush();
 
 					// [Flirt][Move on][Confront]
-					const options = new Array();
+					const options: IChoice[] = [];
 					options.push({ nameStr : "Flirt",
 						tooltip : "And what kind of reward is he offering for your growth?",
 						func() {
@@ -1836,7 +1837,7 @@ export namespace LeiScenes {
 		lei.relation.IncreaseStat(100, 2);
 
 		// [Flirt][Move on]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Flirt",
 			tooltip : "Does he think these crops are so delicious?",
 			func() {

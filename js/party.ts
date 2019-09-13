@@ -14,6 +14,7 @@ import { GAME, NAV, WORLD } from "./GAME";
 import { GameState, SetGameState } from "./gamestate";
 import { Gui } from "./gui";
 import { Inventory } from "./inventory";
+import { IChoice } from "./link";
 import { ILocation } from "./location";
 import { Text } from "./text";
 
@@ -263,7 +264,7 @@ export class Party {
 		Text.Flush();
 
 		if (active) {
-			const options = [];
+			const options: IChoice[] = [];
 			options.push({ nameStr : "---",
 				func() {
 					that.SwitchOut(member);
@@ -290,7 +291,7 @@ export class Party {
 				Gui.SetButtonsFromList(options);
 			}
 		} else {
-			const options = [];
+			const options: IChoice[] = [];
 			let i = 0;
 			for (const e of this.members) {
 				options.push({ nameStr : e.name,

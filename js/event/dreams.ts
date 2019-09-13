@@ -3,6 +3,7 @@ import { Gender } from "../body/gender";
 import { EncounterTable } from "../encountertable";
 import { GAME, WORLD } from "../GAME";
 import { Gui } from "../gui";
+import { IChoice } from "../link";
 import { Party } from "../party";
 import { Text } from "../text";
 import { AscheFlags } from "./asche-flags";
@@ -98,7 +99,7 @@ export namespace DreamsScenes {
 				Text.Flush();
 
 				// [Onward][Not now]
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Onward",
 					func() {
 						RavenMotherScenes.TheHunt(func);
@@ -150,7 +151,7 @@ export namespace DreamsScenes {
 					Text.Flush();
 
 					// [Ravens][Fine]
-					const options = new Array();
+					const options: IChoice[] = [];
 					options.push({ nameStr : "Ravens",
 						func() {
 							KiakaiScenes.RavenDreams();
@@ -439,7 +440,7 @@ export namespace DreamsScenes {
 		Text.Flush();
 
 		// [Resist][Support her]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Resist",
 			func() {
 				Text.Clear();
@@ -567,7 +568,7 @@ export namespace DreamsScenes {
 		Text.Flush();
 
 		// [Advice][Sex]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Advice",
 			func() {
 				Text.Clear();

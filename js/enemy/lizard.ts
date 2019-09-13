@@ -24,6 +24,7 @@ import { Gui } from "../gui";
 import { AlchemyItems } from "../items/alchemy";
 import { AlchemySpecial } from "../items/alchemyspecial";
 import { IngredientItems } from "../items/ingredients";
+import { IChoice } from "../link";
 import { Party } from "../party";
 import { PregnancyHandler } from "../pregnancy";
 import { Text } from "../text";
@@ -285,7 +286,7 @@ export namespace LizardsScenes {
 				Text.Add("You blink in pleased surprise. It seems that, this time, you have your pick of the litter...", parse);
 
 				// [Male][Female]
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Male",
 					func() { LizardsScenes.WinMale(enc); }, enabled : true,
 					tooltip : "Listen to his pleas and take out your victory on him instead.",
@@ -336,7 +337,7 @@ export namespace LizardsScenes {
 		}
 		Text.Flush();
 
-		const options = new Array();
+		const options: IChoice[] = [];
 		if (player.FirstCock()) {
 			options.push({ nameStr : "Anal",
 				func() {
@@ -397,7 +398,7 @@ export namespace LizardsScenes {
 		}
 		Text.Flush();
 
-		const options = new Array();
+		const options: IChoice[] = [];
 		if (player.FirstCock()) {
 			options.push({ nameStr : "Anal",
 				func() {
@@ -984,7 +985,7 @@ export namespace LizardsScenes {
 		Text.Flush();
 
 		// [Sure][Nah]
-		const options = new Array();
+		const options: IChoice[] = [];
 		if (player.FirstVag()) {
 			options.push({ nameStr : "Cunt",
 				func() {
@@ -1012,7 +1013,7 @@ export namespace LizardsScenes {
 
 						Text.Flush();
 						// [Sure][Nah]
-						const options = new Array();
+						const options: IChoice[] = [];
 						options.push({ nameStr : "Yes!",
 							func() {
 								Text.Clear();
@@ -1139,7 +1140,7 @@ export namespace LizardsScenes {
 						Text.Flush();
 
 						// [Sure][Nah]
-						const options = new Array();
+						const options: IChoice[] = [];
 						options.push({ nameStr : "Let him",
 							func() {
 								Text.NL();
@@ -2008,7 +2009,7 @@ export namespace LizardsScenes {
 			Text.Add(" With a smirk, he pushes his hips forward, burying his [m1cock] into your face, letting every inch of it he can fit press into your mouth. Red faced, you close your eyes. You can't push his thick rod out from your lips, and you realize that doing poorly will just make him go even harder. What should you do?", parse);
 			Text.Flush();
 			// [Give in][Resist]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Give in",
 				func() {
 					player.AddLustFraction(0.15);

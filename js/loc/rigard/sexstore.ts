@@ -6,7 +6,7 @@
 import { Event } from "../../event";
 import { GAME, MoveToLocation, WORLD, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
-import { Link } from "../../link";
+import { IChoice, Link } from "../../link";
 import { Text } from "../../text";
 
 const OddShopLoc = new Event("Odd shop");
@@ -49,7 +49,7 @@ export namespace OddShopScenes {
 		Text.Flush();
 		const prompt = () => {
 			// [name]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Buy",
 				func() {
 					rigard.SexShop.Buy(prompt);

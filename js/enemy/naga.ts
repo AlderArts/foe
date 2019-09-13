@@ -24,6 +24,7 @@ import { AlchemyItems } from "../items/alchemy";
 import { AlchemySpecial } from "../items/alchemyspecial";
 import { IngredientItems } from "../items/ingredients";
 import { Jobs } from "../job";
+import { IChoice } from "../link";
 import { Party } from "../party";
 import { PregnancyHandler } from "../pregnancy";
 import { Text } from "../text";
@@ -211,7 +212,7 @@ export namespace NagaScenes {
 
 		if (nagaMate) {
 			// [Fuck][Fight]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Fuck",
 				func() {
 					Text.Clear();
@@ -352,9 +353,9 @@ export namespace NagaScenes {
 			parse.comp = party.Get(1).name;
 		} else if (party.Num() > 2) {
 			parse.comp = "your companions";
-	} else {
+		} else {
 			parse.comp = "";
-	}
+		}
 
 		Text.Add("Still wrapped tightly within the naga’s coils, you feel your body being turned upside-down. Her upper shaft brushes against the side of your face, and instinctively your lips part and you wrap your hands around the thick erection presented to you, guiding the head into your welcoming mouth. You do your best to coat it in saliva, knowing that your only task is to prepare it for the main course.", parse);
 		Text.NL();
@@ -502,9 +503,9 @@ export namespace NagaScenes {
 			parse.comp = party.Get(1).name;
 		} else if (party.Num() > 2) {
 			parse.comp = "your companions";
-	} else {
+		} else {
 			parse.comp = "";
-	}
+		}
 
 		Text.Clear();
 		parse.themItL = player.LowerBodyType() !== LowerBodyType.Single ? "them" : "it";
@@ -739,7 +740,7 @@ export namespace NagaScenes {
 		const parse: any = {};
 
 		// [Fuck][Hypnotize][Leave]
-		const options = new Array();
+		const options: IChoice[] = [];
 		if (player.FirstCock()) {
 			options.push({ nameStr : "Fuck & Jerk",
 				func() {
@@ -1170,7 +1171,7 @@ export namespace NagaScenes {
 		const hypno: boolean = opts.hypno || false;
 
 		// [Tailpeg][No]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Tailpeg",
 			func() {
 				Text.Clear();

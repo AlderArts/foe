@@ -6,6 +6,7 @@ import { MirandaFlags } from "../event/miranda-flags";
 import { GAME, MoveToLocation, TimeStep, WORLD } from "../GAME";
 import { GameState, SetGameState } from "../gamestate";
 import { Gui } from "../gui";
+import { IChoice } from "../link";
 import { Party } from "../party";
 import { Text } from "../text";
 
@@ -460,7 +461,7 @@ export namespace MarketScenes {
         gwendy.relation.IncreaseStat(100, 5);
 
         // [Sleep][Decline]
-        const options = new Array();
+        const options: IChoice[] = [];
         options.push({ nameStr : "Sleep",
             func() {
                 Text.Clear();

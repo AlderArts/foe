@@ -13,7 +13,7 @@ import { GlobalScenes } from "../event/global";
 import { GAME, MoveToLocation, TimeStep, WORLD, WorldTime } from "../GAME";
 import { GameState, SetGameState } from "../gamestate";
 import { Gui } from "../gui";
-import { Link } from "../link";
+import { IChoice, Link } from "../link";
 import { SetGameOverButton } from "../main-gameover";
 import { Party } from "../party";
 import { Text } from "../text";
@@ -129,7 +129,7 @@ GladeLoc.onEntry = () => {
 	Text.Flush();
 
 	// [Enter][Leave]
-	const options = new Array();
+	const options: IChoice[] = [];
 	options.push({ nameStr : "Enter",
 		func : DryadGladeScenes.First, enabled : true,
 		tooltip : "There is no time to lose. Go forth, steeling yourself against whatever danger awaits.",
@@ -692,7 +692,7 @@ export namespace DryadGladeScenes {
 		}
 
 		// [Talk][Sex][Healing]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Talk",
 			func() {
 				Text.Clear();
@@ -737,7 +737,7 @@ export namespace DryadGladeScenes {
 		};
 
 		// [Herself][Orchid][Spirit][Lifegiver]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Herself",
 			func() {
 				Text.Clear();

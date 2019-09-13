@@ -3,6 +3,7 @@ import * as _ from "lodash";
 import { EncounterTable } from "../../encountertable";
 import { GAME, StepToHour, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
+import { IChoice } from "../../link";
 import { DryadGladeFlags } from "../../loc/glade-flags";
 import { Party } from "../../party";
 import { Text } from "../../text";
@@ -43,7 +44,7 @@ export namespace CvetaDateScenes {
 			Text.Flush();
 
 			// [Glade][Spring][Rigard][Up to her][Back]
-			const options = new Array();
+			const options: IChoice[] = [];
 			if (glade.flags.Visit >= DryadGladeFlags.Visit.DefeatedOrchid) {
 				options.push({ nameStr : "Glade",
 					tooltip : "Why not take her out to the dryads’ glade?",
@@ -332,7 +333,7 @@ export namespace CvetaDateScenes {
 		Text.Flush();
 
 		// [Home][Hopes][Yourself][Listen]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Home",
 			tooltip : "Ask her about home, and why she left.",
 			func() {
@@ -454,7 +455,7 @@ export namespace CvetaDateScenes {
 			Text.Flush();
 
 			// [Wash][Lick][Watch]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Wash",
 				tooltip : "Get a little spring water in your cup and wash it off.",
 				func() {

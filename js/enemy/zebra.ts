@@ -17,6 +17,7 @@ import { GameState, SetGameState } from "../gamestate";
 import { Gui } from "../gui";
 import { AlchemyItems } from "../items/alchemy";
 import { IngredientItems } from "../items/ingredients";
+import { IChoice } from "../link";
 import { Party } from "../party";
 import { PregnancyHandler } from "../pregnancy";
 import { Text } from "../text";
@@ -334,7 +335,7 @@ export namespace ZebraShamanScenes {
 			Text.Flush();
 
 			// [Fuck him] [Ride him] [Leave]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Fuck him",
 				func() {
 					ZebraShamanScenes.OnWinFuckHim(enc);

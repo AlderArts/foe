@@ -20,7 +20,7 @@ import { Input } from "../../input";
 import { AccItems } from "../../items/accessories";
 import { StrapOnItems } from "../../items/strapon";
 import { WeaponsItems } from "../../items/weapons";
-import { Link } from "../../link";
+import { IChoice, Link } from "../../link";
 import { ILocRigardKrawitz } from "../../location";
 import { Party } from "../../party";
 import { Text } from "../../text";
@@ -220,7 +220,7 @@ export namespace KrawitzScenes {
 			const ServantPrompt = () => {
 				Text.Clear();
 				// [Grounds]
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Grounds",
 					func() {
 						MoveToLocation(KrawitzLoc.Grounds);
@@ -309,7 +309,7 @@ export namespace KrawitzScenes {
 								stat.ServantSpikedWine = true;
 
 								// [Leave][Bathhouse]
-								const options = new Array();
+								const options: IChoice[] = [];
 								options.push({ nameStr : "Leave",
 									func() {
 										Text.Clear();
@@ -358,7 +358,7 @@ export namespace KrawitzScenes {
 					Text.Add("Are you sure you would like to leave? You will not be able to return later.");
 					Text.Flush();
 
-					const options = new Array();
+					const options: IChoice[] = [];
 					options.push({ nameStr : "Yes",
 						func() {
 							Text.Clear();
@@ -423,7 +423,7 @@ export namespace KrawitzScenes {
 			Text.Add("Are you sure you would like to leave? You will not be able to return later.");
 			Text.Flush();
 
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Yes",
 				func() {
 					Text.Clear();
@@ -670,7 +670,7 @@ export namespace KrawitzScenes {
 	export function KrawitzPrompt() {
 		const parse: any = {};
 		// [Challenge][Leave]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Challenge",
 			func() {
 				Text.Clear();
@@ -716,7 +716,7 @@ export namespace KrawitzScenes {
 		Text.Flush();
 
 		// [Fight][Binder][Flee]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Fight",
 			func() {
 				Text.Clear();
@@ -943,7 +943,7 @@ export namespace KrawitzScenes {
 			Text.Flush();
 
 			// [Work][Leave]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Work",
 				func() {
 					Text.Clear();
@@ -1037,7 +1037,7 @@ export namespace KrawitzScenes {
 			Text.Flush();
 
 			// [Yes][No][Wait]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Yes",
 				func() {
 					NAV().LimitedDataPrompt(KrawitzScenes.EnteringTheWork);
@@ -1122,7 +1122,7 @@ export namespace KrawitzScenes {
 			Text.Flush();
 
 			// [Yes][No][Wait]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Yes",
 				func() {
 					NAV().LimitedDataPrompt(KrawitzScenes.SneakingIn);
@@ -1286,7 +1286,7 @@ export namespace KrawitzScenes {
 		}
 
 		// [Run][Hide][Charm][Attack!][Wine]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Run",
 			func() {
 				Text.Clear();
@@ -1643,7 +1643,7 @@ export namespace KrawitzScenes {
 		Text.Flush();
 
 		// [Scavenge][Leave]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Scavenge",
 			func() {
 				Text.Clear();
@@ -1768,7 +1768,7 @@ export namespace KrawitzScenes {
 			Text.Flush();
 
 			// [Leave][Wine]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Leave",
 				func() {
 					Text.Clear();
@@ -1830,7 +1830,7 @@ export namespace KrawitzScenes {
 						};
 
 						// [Sex][Leave]
-						const options = new Array();
+						const options: IChoice[] = [];
 						options.push({ nameStr : "Leave",
 							func() {
 								Text.Clear();
@@ -2103,7 +2103,7 @@ export namespace KrawitzScenes {
 			Text.Flush();
 
 			// [OfferHelp][IgnoreIt]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Offer help",
 				func() {
 					Text.Clear();
@@ -2113,7 +2113,7 @@ export namespace KrawitzScenes {
 					terry.relation.IncreaseStat(100, 1);
 
 					// [Insist][HoldDoor][Leave]
-					const options = new Array();
+					const options: IChoice[] = [];
 					options.push({ nameStr : "Insist",
 						func() {
 							Text.Clear();
@@ -2130,7 +2130,7 @@ export namespace KrawitzScenes {
 							Text.Flush();
 
 							// [Ask] [Don'tAsk]
-							const options = new Array();
+							const options: IChoice[] = [];
 							options.push({ nameStr : "Ask",
 								func() {
 									Text.Clear();
@@ -2138,7 +2138,7 @@ export namespace KrawitzScenes {
 									Text.Flush();
 
 									// [Sympathize] [Continue]
-									const options = new Array();
+									const options: IChoice[] = [];
 									options.push({ nameStr : "Sympathize",
 										func() {
 											Text.Clear();
@@ -2342,7 +2342,7 @@ export namespace KrawitzScenes {
 
 							twins.flags.SexOpen = 1;
 
-							const options = new Array();
+							const options: IChoice[] = [];
 
 							// [Sure][Nah]
 							if (player.FirstCock()) {
@@ -2426,7 +2426,7 @@ export namespace KrawitzScenes {
 		};
 
 		// [Royals][Krawitz][Disguise][Lei]
-		const options = new Array();
+		const options: IChoice[] = [];
 		if (!twinsTalkRoyals) {
 			options.push({ nameStr : "Royals",
 				func() {
@@ -2562,7 +2562,7 @@ export namespace KrawitzScenes {
 		Text.Flush();
 
 		// [Challenge][Leave]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Challenge",
 			func() {
 				Text.Clear();

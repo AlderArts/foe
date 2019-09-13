@@ -7,6 +7,7 @@ import { GAME, MoveToLocation, StepToHour, TimeStep, WORLD } from "../GAME";
 import { GameState, SetGameState } from "../gamestate";
 import { Gui } from "../gui";
 import { Jobs } from "../job";
+import { IChoice } from "../link";
 import { Party } from "../party";
 import { Text } from "../text";
 import { Cassidy } from "./cassidy";
@@ -82,7 +83,7 @@ export namespace CassidySexScenes {
 		const cocksInVag = player.CocksThatFit(cassidy.FirstVag());
 		const cocksInAss = player.CocksThatFit(cassidy.Butt());
 
-		const options = [];
+		const options: IChoice[] = [];
 		options.push({nameStr : "Savor",
 			tooltip : Text.Parse("No need to rush things. You’ll look her over first.", parse),
 			enabled : !opts.savor,
@@ -206,7 +207,7 @@ export namespace CassidySexScenes {
 			Text.Add("Yeah… that’s a reasonable question; after all, you didn’t specify which hole you wanted it in when you got started. So… where exactly <i>do</i> you want it, anyway?", parse);
 			Text.Flush();
 
-			const options = [];
+			const options: IChoice[] = [];
 			options.push({nameStr : "Fuck",
 				tooltip : Text.Parse("In your cunt!", parse),
 				enabled : true,
@@ -515,7 +516,7 @@ export namespace CassidySexScenes {
 		Text.Flush();
 
 		// [Breasts][Cunt][Tail]
-		const options = [];
+		const options: IChoice[] = [];
 		options.push({nameStr : "Breasts",
 			tooltip : Text.Parse("They’re not small, they’re fun-sized!", parse),
 			enabled : true,
@@ -966,7 +967,7 @@ export namespace CassidySparSexScenes {
 			Text.Add("Even if she doesn’t want to admit it, she really does get off on violence, doesn’t she? If she’s willing and you are too, what’s to stop you from taking things a little further? That is, of course, assuming that you’re willing… are you?", parse);
 			Text.Flush();
 
-			const options = [];
+			const options: IChoice[] = [];
 			options.push({nameStr : "Yes",
 				tooltip : Text.Parse("Why not? Your blood’s still up from all that fighting.", parse),
 				enabled : true,
@@ -977,7 +978,7 @@ export namespace CassidySparSexScenes {
 					Text.Add("Eventually, though, the two of you have to break for air, and you do so with a soft groan. By now, Cass seems <i>really</i> hot under the collar - you don’t think she’d mind if you just took her right here and now, although with both your blood heated and pounding, the result would probably be quite rough, if nothing else. Alternatively, if you’ve the self restraint, you could lead or carry her into a more private setting…", parse);
 					Text.Flush();
 
-					const options = [];
+					const options: IChoice[] = [];
 					// [Outside][Inside]
 					options.push({nameStr : "Outside",
 						tooltip : Text.Parse("Strike while the iron is hot! Take Cass here, right in the back yard.", parse),
@@ -1076,7 +1077,7 @@ export namespace CassidySparSexScenes {
 		};
 
 		// [All fours][Get blown][Get licked][Spank]
-		const options = [];
+		const options: IChoice[] = [];
 		if (player.FirstCock()) {
 			options.push({nameStr : "All fours",
 				tooltip : Text.Parse("Take Cassidy doggy-style in the back yard.", parse),
@@ -1149,7 +1150,7 @@ export namespace CassidySparSexScenes {
 		Text.Flush();
 
 		// [Vag][Ass][DP]
-		const options = [];
+		const options: IChoice[] = [];
 		options.push({nameStr : "Vag",
 			tooltip : Text.Parse("Stick it to her the tried and true way.", parse),
 			enabled : true,

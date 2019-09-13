@@ -17,6 +17,7 @@ import { AccItems } from "../items/accessories";
 import { IngredientItems } from "../items/ingredients";
 import { QuestItems } from "../items/quest";
 import { Jobs } from "../job";
+import { IChoice } from "../link";
 import { Party } from "../party";
 import { Text } from "../text";
 import { Season } from "../time";
@@ -188,7 +189,7 @@ export namespace AscheTasksScenes {
 			Text.Flush();
 
 			// [Approach][Sneak][Fight]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Approach",
 				tooltip : "See if you can negotiate with the shamans. Maybe you can come to an agreement of some sort.",
 				func() {
@@ -205,7 +206,7 @@ export namespace AscheTasksScenes {
 					Text.Flush();
 
 					// [Bribe][Whore]
-					const options = new Array();
+					const options: IChoice[] = [];
 					options.push({ nameStr : "Bribe",
 						tooltip : "See if you can buy off the zebras.",
 						func : AscheTasksScenes.Ginseng.Bribe, enabled : true,
@@ -327,7 +328,7 @@ export namespace AscheTasksScenes {
 			Text.Flush();
 
 			// [Pay][Whore][Fight]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Pay",
 				tooltip : "Pay what they want and be done with it.",
 				func() {
@@ -466,7 +467,7 @@ export namespace AscheTasksScenes {
 				Text.Flush();
 
 				// [Bribe][Fight]
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Bribe",
 					tooltip : "If sex won’t sway them, maybe money will…",
 					func : AscheTasksScenes.Ginseng.Bribe, enabled : true,
@@ -596,7 +597,7 @@ export namespace AscheTasksScenes {
 			Text.Flush();
 
 			// [Yes][No]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Yes",
 				tooltip : "Why not? The mystical shopkeeper is definitely willing and able.",
 				func() {
@@ -962,7 +963,7 @@ export namespace AscheTasksScenes {
 			Text.Flush();
 
 			// [Money][Lesson]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Lesson",
 				tooltip : "Well, you aren’t the kind to pass up a very educational experience…",
 				func() {
@@ -1160,7 +1161,7 @@ export namespace AscheTasksScenes {
 			TimeStep({minute: 30});
 
 			// [Step Out][Hide]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Step out",
 				tooltip : "Taking the initiative might help if you need to get physical.",
 				func() {
@@ -1284,7 +1285,7 @@ export namespace AscheTasksScenes {
 			TimeStep({minute: 15});
 
 			// [Reward][Education][Adventure]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Reward",
 				tooltip : "You’ll just take the goods, thank you very much.",
 				func() {

@@ -5,6 +5,7 @@ import { Race, RaceDesc } from "../body/race";
 import { Entity } from "../entity";
 import { GAME, TimeStep, WORLD } from "../GAME";
 import { Gui } from "../gui";
+import { IChoice } from "../link";
 import { Party } from "../party";
 import { Womb } from "../pregnancy";
 import { Text } from "../text";
@@ -361,7 +362,7 @@ export namespace NurseryScenes {
 		Text.Flush();
 
 		// [name]
-		const options = new Array();
+		const options: IChoice[] = [];
 		/* TODO Interactions
 		options.push({ nameStr : "name",
 			tooltip : "",

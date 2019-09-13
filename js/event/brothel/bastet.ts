@@ -10,6 +10,7 @@ import { EncounterTable } from "../../encountertable";
 import { Entity } from "../../entity";
 import { GAME, TimeStep } from "../../GAME";
 import { Gui } from "../../gui";
+import { IChoice } from "../../link";
 import { Text } from "../../text";
 import { TF } from "../../tf";
 import { LucilleFlags } from "./lucille-flags";
@@ -87,7 +88,7 @@ export namespace BastetScenes {
 
 		// TODO
 		// [Birth][Life][Anubis][Drought][Trouble]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Birth",
 			tooltip : "“Enjoy life as the avatar of a cat Goddess.” Says the poster beside the door.",
 			func : func(BastetState.S1Birth), enabled : true,
@@ -413,7 +414,7 @@ export namespace BastetScenes {
 			Text.Flush();
 
 			// [Correct][Nevermind]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Correct",
 				tooltip : "You’re pretty sure you heard her refer to you as “Her Ladyship”. But you’re a man! Maybe you should correct her.",
 				func() {
@@ -542,7 +543,7 @@ export namespace BastetScenes {
 		Text.Flush();
 
 		// [Masturbate][Meditate]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Masturbate",
 			tooltip : "You’re sure no one will mind if you take the opportunity to relieve some tension. Adala did tell that you could relax if you wanted...",
 			func() {
@@ -580,7 +581,7 @@ export namespace BastetScenes {
 			Text.Flush();
 
 			// [Explain][Wait][Ready]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Explain",
 				tooltip : "You don’t feel ready just yet. Why not ask her to explain the ritual while you wait?",
 				func() {
@@ -605,7 +606,7 @@ export namespace BastetScenes {
 					Text.Flush();
 
 					// [Yes!][Hot][No…]
-					const options = new Array();
+					const options: IChoice[] = [];
 					options.push({ nameStr : "Yes!",
 						tooltip : "I mean, this your manhood that we’re talking about! And if what she said is true, you’re going to lose it!",
 						func() {
@@ -797,7 +798,7 @@ export namespace BastetScenes {
 				Text.Flush();
 
 				// [Mischievous][Matron][Protector][Lover]
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Mischievous",
 					tooltip : "She’s the mischievous lover, of course. Flirtatious and playful, a good-hearted tease who wants your heart and as much fun as she can get.",
 					func : BastetScenes.Birth3, enabled : true,
@@ -844,7 +845,7 @@ export namespace BastetScenes {
 		Text.Flush();
 
 		// [Yes!][Definitely!][Absolutely!]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Yes!",
 			tooltip : "If that’s what she wants, who are you to say no? She can go right ahead and play to her heart’s content!",
 			func : Gui.PrintDefaultOptions, enabled : true,

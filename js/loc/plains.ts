@@ -19,7 +19,7 @@ import { PortalOpeningScenes } from "../event/portalopening";
 import { RoamingScenes } from "../event/roaming";
 import { GAME, MoveToLocation, TimeStep, WORLD, WorldTime } from "../GAME";
 import { Gui } from "../gui";
-import { Link } from "../link";
+import { IChoice, Link } from "../link";
 import { ILocPlains } from "../location";
 import { Party } from "../party";
 import { Text } from "../text";
@@ -156,7 +156,7 @@ PlainsLoc.Crossroads.enc.AddEnc(() => {
 		Text.Flush();
 
 		// [Coins][Luck]
-		const options = new Array();
+		const options: IChoice[] = [];
 		options.push({ nameStr : "Coins",
 			func() {
 				Text.Clear();

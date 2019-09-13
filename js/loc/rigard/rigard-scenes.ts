@@ -6,6 +6,7 @@ import { MirandaScenes } from "../../event/miranda-scenes";
 import { TerryFlags } from "../../event/terry-flags";
 import { GAME, MoveToLocation, TimeStep, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
+import { IChoice } from "../../link";
 import { ILocRigard } from "../../location";
 import { Party } from "../../party";
 import { Text } from "../../text";
@@ -1151,7 +1152,7 @@ export namespace RigardScenes {
 			Text.Flush();
 
 			// [Accept][Run]
-			const options = new Array();
+			const options: IChoice[] = [];
 			options.push({ nameStr : "Accept",
 				func() {
 					Text.Clear();
@@ -1429,7 +1430,7 @@ export namespace RigardScenes {
 				miranda.flags.Herm = 1;
 				miranda.flags.Met  = MirandaFlags.Met.TavernAftermath;
 				// [Hot]
-				const options = new Array();
+				const options: IChoice[] = [];
 				options.push({ nameStr : "Neutral",
 					func() {
 						Text.Clear();
@@ -1454,7 +1455,7 @@ export namespace RigardScenes {
 						Text.Flush();
 
 						// [TakeCharge]
-						const options = new Array();
+						const options: IChoice[] = [];
 						options.push({ nameStr : "Take charge",
 							func() {
 								Text.Clear();
@@ -1524,7 +1525,7 @@ export namespace RigardScenes {
 					Text.Flush();
 
 					// [TakeCharge] [Submit] [Later]
-					const options = new Array();
+					const options: IChoice[] = [];
 					options.push({ nameStr : "Take charge",
 						func() {
 							Text.Clear();
@@ -1579,7 +1580,7 @@ export namespace RigardScenes {
 					};
 					let choice = Choice.Reluctant;
 					// [Submit][Reluctant][Refuse]
-					const options = new Array();
+					const options: IChoice[] = [];
 					options.push({ nameStr : "Submit",
 						func() {
 							Text.Clear();
