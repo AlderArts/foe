@@ -584,9 +584,9 @@ export namespace LizardsScenes {
 			Text.Add(" [vag] exposed to the warm air, the breeze sending a gentle thrill through your body.", parse);
 		} else if (player.FirstCock()) {
 			Text.Add(" slowly hardening [cocks] twitching to life.", parse);
-	} else {
+		} else {
 			Text.Add(" featureless crotch bare to the world.", parse);
-	}
+		}
 		Text.NL();
 		Text.Add("You stop just a step shy of her. She looks up at you from the ground, her oasis-blue eyes locking onto yours. You drop to your hands and knees, your eyes bright as you slide over the top of her. When your hands don't move to her underwear, her expression becomes slightly confused. Your hands meet her legs, her cool scales firm against your fingers. You trail them downward, letting touch guide your hands to the base of her tail, and then lower...", parse);
 		Text.NL();
@@ -2029,9 +2029,9 @@ export namespace LizardsScenes {
 						Text.Add("You let your hand trail down to your groin, feeling tempted to join in the reptile's sensations... but the way that his shaft fills your face so entirely, its partner smearing the scaled creature's fluids over your [face] leaves you feeling an itch for something... else. Your hand trails lower, between your legs. Your fingers brush the wet folds of your [vag], beginning to stroke across them, one finger just beginning to plumb your aching depths.", parse);
 					} else if (player.NumCocks() > 1) {
 						Text.Add("Your hand trails down to your groin, where you let it find your favorite dick. Slowly you squeeze it, blushing yet deeper as you feel precum start to drip from multiple tips.", parse);
-	} else {
+					} else {
 						Text.Add("You let your hand trail down to your [cock], feeling yourself harden.", parse);
-	}
+				}
 					Text.NL();
 					Text.Add("Despite the position, the way his shaft slides over your tongue feels sinfully good. Before long, you find yourself pumping away at yourself as he pistons his heavy meat in and out of your maw. Finally, he grips your head tightly in both hands, and <i>rams</i> your face onto his crotch, his legs spread and tail arched in bliss. You feel his [m1cock] spasm heavily, and thick bulges run down his shaft... emptying right into your throat. You can't even taste it, though you realize you want to. You just feel his potent cum flooding your throat, sliding down to your belly, its partner spraying sticky, oddly thick fluids across your [face]. <i>“Drink up,”</i> the lizard hisses, holding you there. ", parse);
 					if (player.FirstVag()) {

@@ -517,7 +517,7 @@ export namespace LagomorphScenes {
 				parse.comp = party.Get(1).name + " is";
 			} else if (party.Num() > 2) {
 				parse.comp = "your companions are";
-	}
+			}
 
 			// Brute TODO
 			if (enc.brute) {

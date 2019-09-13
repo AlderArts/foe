@@ -1243,9 +1243,9 @@ export namespace FelinesScenes {
 				parse.comp = " and " + party.Get(1).name;
 			} else if (party.Num() > 1) {
 				parse.comp = " and your companions";
-	} else {
+			} else {
 				parse.comp = "";
-	}
+			}
 			Text.Add("Even if keeping the cat as a pet would be fun, you have to get back to your quest. You[comp] gather your gear and once again set out on your journey.", parse);
 			Text.Flush();
 
@@ -1380,18 +1380,18 @@ export namespace FelinesScenes {
 			Text.Add("Though [heshe] is able to swallow much of your [cock], [hisher] eyes desperately plead with you to not force [himher] to take all of your massive erection. Probably for the best, as you don’t think [heshe]’d survive the ordeal. You resolve to make the most of it, each careful thrust pushing a tiny bit more down [hisher] straining throat.", parse);
 		} else if (player.FirstCock().length.Get() > 20) {
 			Text.Add("Somehow, [name] is able to take all of your [cock], even though you see [hisher] throat bulging dangerously at the massive insertion. Sighing happily, you make a habit of pausing for a second when [possessive] lips are pressing against your crotch, making the feline growl uncomfortably.", parse);
-	} else {
+		} else {
 			Text.Add("[Name] is easily able to take your entire length, though it doesn’t make [himher] look any more comfortable doing it. [HeShe] probably just needs practice. Lots of practice.", parse);
-	}
+		}
 		Text.NL();
 		Text.Add("You tell [himher] that [heshe] is such a good cocksucker that [heshe] ought to do this more. One should always make sure to harness their talents, after all. ", parse);
 		if (player.SubDom() > 30) {
 			Text.Add("Going on to tell [himher] that [heshe] ought to be the slut of the plains, you keep degrading [himher] playfully, driving your words home with your [cock]. By now, you’re holding [possessive] head with both hands, making sure that [heshe] can’t get away from your incessant rutting.", parse);
 		} else if (player.SubDom() < -30) {
 			Text.Add("Caressing [hisher] hair gently, you urge [himher] on, letting [himher] become confident. You sigh euphorically as you feel furred paws grip your hips, holding you in place as [name] takes the lead, sucking your [cock] like a champion.", parse);
-	} else {
+		} else {
 			Text.Add("Putting a bit more pressure on [name], you start rocking your hips a bit, keeping a light but firm hand on the back of [hisher] head. [HeShe] balks a little, but is somehow able to keep up.", parse);
-	}
+		}
 		Text.NL();
 		if (player.HasBalls()) {
 			Text.Add("Much to your surprise, one of [possessive] paws hesitantly reach up to cradle your [balls], feeling their weight. Chuckling, you promise [himher] that you’ll soon give the good little kitty [hisher] cream, just like [heshe] wants. All [heshe] has to do is continue to be a good kitty.", parse);
@@ -1570,9 +1570,9 @@ export namespace FelinesScenes {
 				Text.Add("decides to nuzzle and suckle on your [balls], coaxing them into producing more tasty cream for [Bhisher] [friends].", parse);
 			} else if (player.FirstVag()) {
 				Text.Add("mewls happily when [Bheshe] sees that you have a [vag] ripe for some attention. [BHeShe] immediately digs in, licking and kissing with abandon. The sudden bout of enthusiasm makes you lose balance and you almost fall, but you recover quickly enough.", parse);
-	} else {
+			} else {
 				Text.Add("mewls in confusion. Seeing that you have nothing for [Bhimher] to play with underneath, [Bheshe] shrugs and decides to stick to suckling and licking the base of your [cock][k].", parse);
-	}
+			}
 			Text.NL();
 			parse.vb = player.HasBalls() ? Text.Parse(" and [balls]", parse) :
 				player.FirstVag() ? Text.Parse(" and [vag]", parse) : "";
@@ -1624,7 +1624,7 @@ export namespace FelinesScenes {
 				Text.Add(" Those that are left without a cock sit behind, patiently waiting for their turn.", parse);
 			} else if (spare) {
 				Text.Add(" Once every cat has their mouth full of dick, they spare a paw or two to stroke your remaining cock[s].", parse);
-	}
+			}
 			Text.NL();
 			Text.Add("You pet their heads and encourage them to suck deeper and harder. They respond by purring, sending wonderful vibrations coursing through your [cocks]. Pre seeps constantly out of each of your shafts, feeding the felines and spurring them on.", parse);
 			Text.NL();
@@ -2391,7 +2391,7 @@ export namespace FelinesScenes {
 
 		// [PoundHer][LayBack][TittyFuck]
 		const options: IChoice[] = [];
-		options.push({ nameStr : "PoundHer",
+		options.push({ nameStr : "Pound Her",
 			func() {
 				Text.Clear();
 				if (dom) {
@@ -2439,7 +2439,7 @@ export namespace FelinesScenes {
 			}, enabled : true,
 			tooltip : "Let’s make sure she’ll remember you for the coming weeks!",
 		});
-		options.push({ nameStr : "LayBack",
+		options.push({ nameStr : "Lay Back",
 			func() {
 				Text.Clear();
 				Text.Add("With a soft, moaning sigh of contentment, you allow yourself to settle back against the ground. Your own motions nearly cease, content as you are to languidly lie there and cup her buttocks in your hands, feeling the flesh squish and flex most interestingly amidst your fingers. Giving yourself over to her entirely, you submit to being used like a toy, content to allow her to bring you both to your mutual climax. Your mind goes nearly blank, casting aside everything but the weight of your feline lover atop you, the feel of her fur against your [skin], the slapping of flesh on flesh and the sensations of her milking your cock for all she's worth.", parse);
@@ -2505,7 +2505,7 @@ export namespace FelinesScenes {
 			}, enabled : true,
 			tooltip : "This feels too good, plus she’s won fair and square. She can finish you off herself.",
 		});
-		options.push({ nameStr : "TittyFuck",
+		options.push({ nameStr : "Titty Fuck",
 			func() {
 				Text.Clear();
 				if (dom) {
@@ -2814,9 +2814,9 @@ export namespace FelinesScenes {
 					Text.Add("dangling sack", parse);
 				} else if (player.FirstVag()) {
 					Text.Add("moist slit", parse);
-	} else {
+				} else {
 					Text.Add("taint", parse);
-	}
+				}
 				Text.Add(". You squeal again. <i>”That sounds like a ‘yes’ to me! C’mere.”</i> With that, [name] grabs both your hips, lines up, and slowly pushes into your pucker. [HeShe2] stops almost immediately, with just the tip of [hisher2] prick inside you. Your muscles reflexively clench around the prickly barbs, quivering as they press into your sensitive sphincter. ", parse);
 				if (subby) {
 					Text.Add("You whimper and try to push back, wanting the rest of that thick cock in you, when a sudden swat to your rear stops you in your tracks. <i>”Patience,”</i> Bitch mewls.", parse);
