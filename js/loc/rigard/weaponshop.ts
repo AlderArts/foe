@@ -3,11 +3,12 @@
 // Weapon Shop
 //
 
-import { Event, Link } from "../../event";
+import { Event } from "../../event";
 import { CassidyFlags } from "../../event/cassidy-flags";
 import { CassidyScenes } from "../../event/cassidy-scenes";
 import { GAME, MoveToLocation, WORLD, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
+import { Link } from "../../link";
 import { Text } from "../../text";
 
 const WeaponShopLoc = new Event("The Pale Flame");

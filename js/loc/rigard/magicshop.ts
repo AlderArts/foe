@@ -5,7 +5,7 @@
 import * as _ from "lodash";
 
 import { EncounterTable } from "../../encountertable";
-import { Event, Link } from "../../event";
+import { Event } from "../../event";
 import { AscheFlags } from "../../event/asche-flags";
 import { GAME, MoveToLocation, WORLD, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
@@ -15,6 +15,7 @@ import { AlchemyItems } from "../../items/alchemy";
 import { CombatItems } from "../../items/combatitems";
 import { IngredientItems } from "../../items/ingredients";
 import { WeaponsItems } from "../../items/weapons";
+import { Link } from "../../link";
 import { Shop } from "../../shop";
 import { Text } from "../../text";
 

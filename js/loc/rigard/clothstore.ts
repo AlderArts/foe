@@ -2,10 +2,11 @@
 import { Gender } from "../../body/gender";
 import { Race, RaceScore } from "../../body/race";
 import { EncounterTable } from "../../encountertable";
-import { Event, Link } from "../../event";
+import { Event } from "../../event";
 import { FeraScenes } from "../../event/fera";
 import { GAME, MoveToLocation, WORLD, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
+import { Link } from "../../link";
 import { Party } from "../../party";
 import { Text } from "../../text";
 

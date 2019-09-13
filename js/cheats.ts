@@ -3,7 +3,6 @@ import * as _ from "lodash";
 import { GetDEBUG, SetDEBUG } from "../app";
 import { Cock } from "./body/cock";
 import { Vagina } from "./body/vagina";
-import { Link } from "./event";
 import { KiakaiFlags } from "./event/kiakai-flags";
 import { GAME, WORLD } from "./GAME";
 import { Gui } from "./gui";
@@ -14,6 +13,7 @@ import { CombatItems } from "./items/combatitems";
 import { IngredientItems } from "./items/ingredients";
 import { StrapOnItems } from "./items/strapon";
 import { ToysItems } from "./items/toys";
+import { Link } from "./link";
 import { Text } from "./text";
 
 export function InitCheats() {

@@ -5,12 +5,13 @@
 import * as _ from "lodash";
 
 import { EncounterTable } from "../../encountertable";
-import { Event, Link } from "../../event";
+import { Event } from "../../event";
 import { GAME, MoveToLocation, WORLD, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
 import { Item } from "../../item";
 import { AccItems } from "../../items/accessories";
 import { ArmorItems } from "../../items/armor";
+import { Link } from "../../link";
 import { Party } from "../../party";
 import { Shop } from "../../shop";
 import { Text } from "../../text";

@@ -1,10 +1,11 @@
 
 import { EncounterTable } from "../../encountertable";
-import { Event, Link } from "../../event";
+import { Event } from "../../event";
 import { MirandaScenes } from "../../event/miranda-scenes";
 import { LeiScenes } from "../../event/royals/lei-scenes";
 import { GAME, MoveToLocation, WORLD, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
+import { Link } from "../../link";
 import { ILocRigardSlums } from "../../location";
 import { Text } from "../../text";
 import { Season } from "../../time";

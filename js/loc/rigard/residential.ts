@@ -1,10 +1,11 @@
 
 import { EncounterTable } from "../../encountertable";
-import { Event, Link } from "../../event";
+import { Event } from "../../event";
 import { LeiScenes } from "../../event/royals/lei-scenes";
 import { TerryScenes } from "../../event/terry-scenes";
 import { GAME, MoveToLocation, WORLD } from "../../GAME";
 import { Gui } from "../../gui";
+import { Link } from "../../link";
 import { ILocRigardResidential } from "../../location";
 import { Party } from "../../party";
 import { Text } from "../../text";

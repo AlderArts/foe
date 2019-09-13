@@ -1,4 +1,5 @@
 import { EncounterTable } from "./encountertable";
+import { Link } from "./link";
 
 export interface ILocation {
     SaveSpot: string;
@@ -12,11 +13,11 @@ export interface ILocation {
     description: () => void;
     endDescription: () => void;
     onEntry: (preventClear?: boolean, from?: ILocation) => void;
-    events: any[];
-    links: any[];
-    hunt: any[];
+    events: Link[];
+    links: Link[];
+    hunt: Link[];
     enc: EncounterTable;
-    SetButtons: (links?: any[]) => void;
+    SetButtons: (links?: Link[]) => void;
     AddEncounter: (enc: any) => void;
 }
 

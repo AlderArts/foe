@@ -6,8 +6,9 @@
 
 import { EncounterTable } from "../encountertable";
 import { DrakeScenes } from "../enemy/drake";
-import { Event, Link } from "../event";
+import { Event } from "../event";
 import { MoveToLocation, WORLD } from "../GAME";
+import { Link } from "../link";
 import { ILocDragonDen } from "../location";
 import { Text } from "../text";
 

@@ -7,7 +7,7 @@
 import { EncounterTable } from "../encountertable";
 import { FeralWolfScenes } from "../enemy/feralwolf";
 import { MothgirlScenes } from "../enemy/mothgirl";
-import { Event, Link } from "../event";
+import { Event } from "../event";
 import { AscheTasksScenes } from "../event/asche-tasks";
 import { GlobalScenes } from "../event/global";
 import { MomoScenes } from "../event/momo";
@@ -18,6 +18,7 @@ import { GAME, MoveToLocation, TimeStep, WORLD, WorldTime } from "../GAME";
 import { Gui } from "../gui";
 import { IngredientItems } from "../items/ingredients";
 import { QuestItems } from "../items/quest";
+import { Link } from "../link";
 import { ILocForest } from "../location";
 import { Party } from "../party";
 import { Text } from "../text";

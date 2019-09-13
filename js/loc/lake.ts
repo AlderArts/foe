@@ -5,11 +5,12 @@
  */
 
 import { EncounterTable } from "../encountertable";
-import { Event, Link } from "../event";
+import { Event } from "../event";
 import { MomoScenes } from "../event/momo";
 import { GAME, MoveToLocation, TimeStep, WORLD } from "../GAME";
 import { Gui } from "../gui";
 import { QuestItems } from "../items/quest";
+import { Link } from "../link";
 import { ILocLake } from "../location";
 import { Party } from "../party";
 import { Text } from "../text";

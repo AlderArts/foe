@@ -2,7 +2,7 @@ import * as _ from "lodash";
 
 import { EncounterTable } from "../../encountertable";
 import { Entity } from "../../entity";
-import { Event, Link } from "../../event";
+import { Event } from "../../event";
 import { DreamsScenes } from "../../event/dreams";
 import { VaughnTasksScenes } from "../../event/outlaws/vaughn-tasks";
 import { Room69Scenes } from "../../event/room69";
@@ -14,6 +14,7 @@ import { TwinsFlags } from "../../event/royals/twins-flags";
 import { GAME, MoveToLocation, TimeStep, WORLD, WorldTime } from "../../GAME";
 import { GameState, SetGameState } from "../../gamestate";
 import { Gui } from "../../gui";
+import { Link } from "../../link";
 import { ILocRigardInn } from "../../location";
 import { Party } from "../../party";
 import { Status } from "../../statuseffect";

@@ -3,9 +3,10 @@
 // Shop of oddities
 //
 
-import { Event, Link } from "../../event";
+import { Event } from "../../event";
 import { GAME, MoveToLocation, WORLD, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
+import { Link } from "../../link";
 import { Text } from "../../text";
 
 const OddShopLoc = new Event("Odd shop");

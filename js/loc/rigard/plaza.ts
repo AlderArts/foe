@@ -1,7 +1,7 @@
 
 import { LowerBodyType } from "../../body/body";
 import { EncounterTable } from "../../encountertable";
-import { Event, Link } from "../../event";
+import { Event } from "../../event";
 import { Room69Flags } from "../../event/room69-flags";
 import { LeiFlags } from "../../event/royals/lei-flags";
 import { LeiTaskScenes } from "../../event/royals/lei-tasks";
@@ -9,6 +9,7 @@ import { TerryScenes } from "../../event/terry-scenes";
 import { GAME, MoveToLocation, TimeStep, WORLD, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
 import { IngredientItems } from "../../items/ingredients";
+import { Link } from "../../link";
 import { Party } from "../../party";
 import { Text } from "../../text";
 import { Rand } from "../../utility";

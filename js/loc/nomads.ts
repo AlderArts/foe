@@ -1,6 +1,6 @@
 
 import { GetDEBUG } from "../../app";
-import { Event, Link } from "../event";
+import { Event } from "../event";
 import { GlobalScenes } from "../event/global";
 import { Halloween, HalloweenScenes } from "../event/halloween";
 import { MomoScenes } from "../event/momo";
@@ -15,6 +15,7 @@ import { RosalinScenes } from "../event/nomads/rosalin";
 import { NurseryScenes } from "../event/nursery";
 import { GAME, GameCache, MoveToLocation, WORLD, WorldTime } from "../GAME";
 import { Gui } from "../gui";
+import { Link } from "../link";
 import { ILocNomads } from "../location";
 import { Maze } from "../maze";
 import { Text } from "../text";

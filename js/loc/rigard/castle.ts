@@ -1,6 +1,6 @@
 
 import { EncounterTable } from "../../encountertable";
-import { Event, Link } from "../../event";
+import { Event } from "../../event";
 import { AscheFlags } from "../../event/asche-flags";
 import { GlobalScenes } from "../../event/global";
 import { VaughnFlags } from "../../event/outlaws/vaughn-flags";
@@ -9,6 +9,7 @@ import { TerryFlags } from "../../event/terry-flags";
 import { TerryScenes } from "../../event/terry-scenes";
 import { GAME, MoveToLocation, TimeStep, WORLD, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
+import { Link } from "../../link";
 import { ILocRigardCastle } from "../../location";
 import { Party } from "../../party";
 import { Text } from "../../text";

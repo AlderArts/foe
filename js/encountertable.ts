@@ -1,9 +1,17 @@
 import * as _ from "lodash";
+import { Link } from "./link";
+
+export interface IScene {
+	func: (obj: any) => any;
+	odds?: number | (() => number);
+	cond?: boolean | (() => boolean);
+	obj?: any;
+}
 
 // Encounter table for combat
 export class EncounterTable {
-	public encounters: any[];
-	public hunt: any[];
+	public encounters: IScene[];
+	public hunt: Link[];
 
 	constructor() {
 		// encounter { func, odds }
@@ -14,8 +22,8 @@ export class EncounterTable {
 	}
 
 	// Setup phase
-	public AddEnc(Func: any, Odds?: any, Cond?: any, Obj?: any) {
-		this.encounters.push({func: Func, odds: Odds, cond: Cond, obj: Obj});
+	public AddEnc(func: any, odds?: any, cond?: any, obj?: any) {
+		this.encounters.push({func, odds, cond, obj});
 	}
 
 	public Num(): number {
@@ -24,7 +32,7 @@ export class EncounterTable {
 
 	// Get a fight
 	public Get() {
-		const scenes = [];
+		const scenes: IScene[] = [];
 
 		// Calculate total scale of odds
 		let sum = 0;
@@ -47,7 +55,7 @@ export class EncounterTable {
 		let step = Math.random() * sum;
 
 		for (const enc of scenes) {
-			step -= enc.odds;
+			step -= enc.odds as number;
 			// If chosen, create an encounter from the supplied function
 			if (step <= 0.0) {
 				return enc.func ? enc.func(enc.obj) : undefined;

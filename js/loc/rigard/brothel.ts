@@ -1,9 +1,7 @@
-
-import { Event, Link } from "../../event";
-
 import { Cock } from "../../body/cock";
 import { Gender } from "../../body/gender";
 import { Race } from "../../body/race";
+import { Event } from "../../event";
 import { BastetScenes } from "../../event/brothel/bastet";
 import { FireblossomScenes } from "../../event/brothel/fireblossom";
 import { GryphonsScenes } from "../../event/brothel/gryphons";
@@ -11,6 +9,7 @@ import { LucilleScenes } from "../../event/brothel/lucille";
 import { RoaScenes } from "../../event/brothel/roa-scenes";
 import { GAME, MoveToLocation, TimeStep, WORLD } from "../../GAME";
 import { Gui } from "../../gui";
+import { Link } from "../../link";
 import { ILocRigardBrothel } from "../../location";
 import { Text } from "../../text";
 

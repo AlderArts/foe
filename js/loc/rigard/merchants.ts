@@ -1,12 +1,13 @@
 
 import { EncounterTable } from "../../encountertable";
-import { Event, Link } from "../../event";
+import { Event } from "../../event";
 import { CvetaFlags } from "../../event/outlaws/cveta-flags";
 import { Room69Flags } from "../../event/room69-flags";
 import { TerryScenes } from "../../event/terry-scenes";
 import { GAME, MoveToLocation, TimeStep, WORLD, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
 import { QuestItems } from "../../items/quest";
+import { Link } from "../../link";
 import { ILocRigardShops } from "../../location";
 import { Party } from "../../party";
 import { Text } from "../../text";

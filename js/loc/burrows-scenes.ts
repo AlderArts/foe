@@ -2,7 +2,7 @@
 import { Gender } from "../body/gender";
 import { EncounterTable } from "../encountertable";
 import { LagomorphAlpha } from "../enemy/rabbit";
-import { Event, Link } from "../event";
+import { Event } from "../event";
 import { LagonDScenes } from "../event/burrows/lagon-defeated";
 import { LagonFlags } from "../event/burrows/lagon-flags";
 import { InitLagon, LagonScenes } from "../event/burrows/lagon-scenes";
@@ -12,6 +12,7 @@ import { VenaScenes } from "../event/burrows/vena-scenes";
 import { GlobalScenes } from "../event/global";
 import { GAME, MoveToLocation, TimeStep, WORLD, WorldTime } from "../GAME";
 import { Gui } from "../gui";
+import { Link } from "../link";
 import { ILocBurrows } from "../location";
 import { Party } from "../party";
 import { Text } from "../text";

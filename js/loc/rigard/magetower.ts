@@ -1,10 +1,11 @@
 
-import { Event, Link } from "../../event";
+import { Event } from "../../event";
 import { GolemScenes } from "../../event/royals/golem";
 import { GolemFlags } from "../../event/royals/golem-flags";
 import { JeanneScenes } from "../../event/royals/jeanne-scenes";
 import { GAME, MoveToLocation, WORLD } from "../../GAME";
 import { Gui } from "../../gui";
+import { Link } from "../../link";
 import { Text } from "../../text";
 
 export function InitMageTower() {

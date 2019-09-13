@@ -6,7 +6,7 @@
 
 import { GetDEBUG } from "../../app";
 import { EncounterTable } from "../encountertable";
-import { Event, Link } from "../event";
+import { Event } from "../event";
 import { AquiliusScenes } from "../event/outlaws/aquilius";
 import { BullTowerScenes } from "../event/outlaws/bulltower";
 import { OCavalcadeScenes } from "../event/outlaws/cavalcade";
@@ -19,6 +19,7 @@ import { OutlawsFlags } from "../event/outlaws/outlaws-flags";
 import { VaughnScenes } from "../event/outlaws/vaughn-scenes";
 import { GAME, MoveToLocation, WORLD, WorldTime } from "../GAME";
 import { Gui } from "../gui";
+import { Link } from "../link";
 import { ILocOutlaws } from "../location";
 import { Party } from "../party";
 import { Text } from "../text";
