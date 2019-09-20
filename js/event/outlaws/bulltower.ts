@@ -20,6 +20,7 @@ import { AccItems } from "../../items/accessories";
 import { WeaponsItems } from "../../items/weapons";
 import { Jobs } from "../../job";
 import { IChoice, Link } from "../../link";
+import { Burrows } from "../../loc/burrows";
 import { BurrowsFlags } from "../../loc/burrows-flags";
 import { ILocBullTower } from "../../location";
 import { Party } from "../../party";
@@ -27,6 +28,7 @@ import { PregnancyHandler } from "../../pregnancy";
 import { Stat } from "../../stat";
 import { Text } from "../../text";
 import { Time } from "../../time";
+import { Player } from "../player";
 import { OutlawsFlags } from "./outlaws-flags";
 
 export class BullTowerStats {
@@ -246,7 +248,7 @@ BullTowerLoc.Courtyard.Yard.events.push(new Link(
 	}, true,
 	undefined,
 	() => {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const outlaws = GAME().outlaws;
 
 		const parse: any = {
@@ -406,7 +408,7 @@ BullTowerLoc.Courtyard.Caravans.events.push(new Link(
 	}, true,
 	undefined,
 	() => {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const outlaws = GAME().outlaws;
 
 		const parse: any = {
@@ -572,7 +574,7 @@ BullTowerLoc.Courtyard.Caravans.events.push(new Link(
 	},
 	undefined,
 	() => {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const outlaws = GAME().outlaws;
 		const parse: any = {
 			playername : player.name,
@@ -606,7 +608,7 @@ BullTowerLoc.Courtyard.Caravans.events.push(new Link(
 	}, true,
 	undefined,
 	() => {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const outlaws = GAME().outlaws;
 
 		const parse: any = {
@@ -828,9 +830,9 @@ BullTowerLoc.Building.Hall.links.push(new Link(
 ));
 
 BullTowerLoc.Building.Cell.onEntry = () => {
-	const player = GAME().player;
+	const player: Player = GAME().player;
 	const outlaws = GAME().outlaws;
-	const burrows = GAME().burrows;
+	const burrows: Burrows = GAME().burrows;
 
 	const parse: any = {
 		playername : player.name,
@@ -1009,7 +1011,7 @@ BullTowerLoc.Building.Warehouse.events.push(new Link(
 	}, true,
 	undefined,
 	() => {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const outlaws = GAME().outlaws;
 
 		const parse: any = {
@@ -1071,7 +1073,7 @@ BullTowerLoc.Building.Watchtower.events.push(new Link(
 	}, true,
 	undefined,
 	() => {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const outlaws = GAME().outlaws;
 
 		const parse: any = {
@@ -1214,7 +1216,7 @@ BullTowerLoc.Building.Office.events.push(new Link(
 
 export namespace BullTowerScenes {
 	export function Initiation() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const outlaws = GAME().outlaws;
 		const terry = GAME().terry;
@@ -1337,7 +1339,7 @@ export namespace BullTowerScenes {
 	}
 
 	export function InitiationQuestions(opts?: any) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const outlaws = GAME().outlaws;
 
@@ -1451,7 +1453,7 @@ export namespace BullTowerScenes {
 	}
 
 	export function MovingOut() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const outlaws = GAME().outlaws;
 		const cveta = GAME().cveta;
@@ -1655,7 +1657,7 @@ export namespace BullTowerScenes {
 	}
 
 	export function CorishevWin() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const outlaws = GAME().outlaws;
 
 		const enc  = this;
@@ -1747,7 +1749,7 @@ export namespace BullTowerScenes {
 	}
 
 	export function CorishevFuck(corishev: Corishev) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const p1cock = player.BiggestCock(undefined, true);
 
@@ -1918,7 +1920,7 @@ export namespace BullTowerScenes {
 				Gui.NextPrompt(() => {
 					MoveToLocation(BullTowerLoc.Building.Hall, {minute: 20});
 				});
-			}, enabled : p1cock,
+			}, enabled : p1cock !== undefined,
 			tooltip : Text.Parse("Fuck that ass of his with your [cocks].", parse),
 		});
 		options.push({ nameStr : "Reconsider",
@@ -1939,7 +1941,7 @@ export namespace BullTowerScenes {
 	}
 
 	export function SafePrompt() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const outlaws = GAME().outlaws;
 		const terry = GAME().terry;
 
@@ -2084,7 +2086,7 @@ export namespace BullTowerScenes {
 	}
 
 	export function SafeSuccess() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const outlaws = GAME().outlaws;
 
 		const parse: any = {
@@ -2110,7 +2112,7 @@ export namespace BullTowerScenes {
 	}
 
 	export function SafeFailure() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const parse: any = {
 			playername : player.name,
@@ -2340,7 +2342,7 @@ export namespace BullTowerScenes {
 	}
 
 	export function EndingInjured() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const kiakai = GAME().kiakai;
 
@@ -2389,7 +2391,7 @@ export namespace BullTowerScenes {
 	}
 
 	export function EndingDebrief(injured: boolean) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const outlaws = GAME().outlaws;
 
@@ -2552,7 +2554,7 @@ export namespace BullTowerScenes {
 
 	// #This will trigger three days after the event if the player saved Alaric.
 	export function AftermathAlaric() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const outlaws = GAME().outlaws;
 
 		const parse: any = {
@@ -2634,7 +2636,7 @@ export namespace BullTowerScenes {
 
 	// #Triggers one day after the Alaric scene if the player has at least stolen the goods and payoff.
 	export function AftermathZenith() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const outlaws = GAME().outlaws;
 

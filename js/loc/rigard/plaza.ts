@@ -2,6 +2,7 @@
 import { LowerBodyType } from "../../body/body";
 import { EncounterTable } from "../../encountertable";
 import { Event } from "../../event";
+import { Player } from "../../event/player";
 import { Room69Flags } from "../../event/room69-flags";
 import { LeiFlags } from "../../event/royals/lei-flags";
 import { LeiTaskScenes } from "../../event/royals/lei-tasks";
@@ -121,7 +122,7 @@ PlazaLoc.links.push(new Link(
 		Text.Add("The outer walls of the royal grounds stand near, and the castle looms on the hill above. ");
 	},
 	() => {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const rigard = GAME().rigard;
 		const lei = GAME().lei;
 		const rosalin = GAME().rosalin;
@@ -319,7 +320,7 @@ export namespace PlazaScenes {
 
 	export function StatueInfo() {
 		const rigard = GAME().rigard;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const kiakai = GAME().kiakai;
 
@@ -434,7 +435,7 @@ export namespace PlazaScenes {
 	}
 
 	export function LetterDelivery() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const kiakai = GAME().kiakai;
 

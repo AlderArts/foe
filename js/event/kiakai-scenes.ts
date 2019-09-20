@@ -2,15 +2,17 @@
 import { GAME, TimeStep } from "../GAME";
 import { Gui } from "../gui";
 import { IChoice } from "../link";
+import { Burrows } from "../loc/burrows";
 import { BurrowsFlags } from "../loc/burrows-flags";
 import { Text } from "../text";
 import { KiakaiFlags } from "./kiakai-flags";
+import { Player } from "./player";
 import { UruFlags } from "./uru";
 
 export namespace KiakaiScenes {
 
 	export function RavenDreams() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const kiakai = GAME().kiakai;
 
 		let parse: any = {
@@ -33,7 +35,7 @@ export namespace KiakaiScenes {
 	}
 
 	export function TalkQuest() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const kiakai = GAME().kiakai;
 		const rosalin = GAME().rosalin;
 		const rigard = GAME().rigard;
@@ -87,7 +89,7 @@ export namespace KiakaiScenes {
 	}
 
 	export function TalkAria() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const kiakai = GAME().kiakai;
 
 		let parse: any = {
@@ -163,7 +165,7 @@ export namespace KiakaiScenes {
 	}
 
 	export function TalkUru() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const kiakai = GAME().kiakai;
 
 		let parse: any = {
@@ -347,7 +349,7 @@ export namespace KiakaiScenes {
 	}
 
 	export function TalkEden() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const kiakai = GAME().kiakai;
 
 		let parse: any = {
@@ -472,7 +474,7 @@ export namespace KiakaiScenes {
 				});
 				// RABBITS
 				scenes.push(() => {
-					const burrows = GAME().burrows;
+					const burrows: Burrows = GAME().burrows;
 					if (burrows.flags.Access === BurrowsFlags.AccessFlags.Unknown) {
 						Text.Add("<i>“Some of the priests at the shrine told me about strange creatures they encountered on the plains, walking upright like humans, but very similar to rabbits in appearance. They are fleet-footed, and ran away before the traveling priests could get a closer look at them.”</i>", parse);
 						Text.NL();
@@ -551,7 +553,7 @@ export namespace KiakaiScenes {
 	}
 
 	export function TalkFactions() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const kiakai = GAME().kiakai;
 
 		let parse: any = {
@@ -624,7 +626,7 @@ export namespace KiakaiScenes {
 	}
 
 	export function TalkElves() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const kiakai = GAME().kiakai;
 
 		let parse: any = {
@@ -923,7 +925,7 @@ export namespace KiakaiScenes {
 	}
 
 	export function TalkDimensionalViolation() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const kiakai = GAME().kiakai;
 
 		let parse: any = {
@@ -996,7 +998,7 @@ export namespace KiakaiScenes {
 
 	// CONTINUATION OF THE STORY
 	export function TalkDimensionalViolationCont() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const kiakai = GAME().kiakai;
 
 		let parse: any = {
@@ -1092,7 +1094,7 @@ export namespace KiakaiScenes {
 	}
 
 	export function TalkPriest() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const kiakai = GAME().kiakai;
 
 		let parse: any = {
@@ -1162,7 +1164,7 @@ export namespace KiakaiScenes {
 	}
 
 	export function TalkPriestHierarchy() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const kiakai = GAME().kiakai;
 
 		let parse: any = {
@@ -1216,7 +1218,7 @@ export namespace KiakaiScenes {
 	}
 
 	export function TalkPriestDisciplines() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const kiakai = GAME().kiakai;
 
 		let parse: any = {
@@ -1372,7 +1374,7 @@ export namespace KiakaiScenes {
 	}
 
 	export function TalkPriestActivities() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const kiakai = GAME().kiakai;
 
 		let parse: any = {
@@ -1456,7 +1458,7 @@ export namespace KiakaiScenes {
 	}
 
 	export function TalkPriestYrissa() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const kiakai = GAME().kiakai;
 
 		let parse: any = {
@@ -1519,7 +1521,7 @@ export namespace KiakaiScenes {
 	}
 
 	export function TalkPriestAria() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const kiakai = GAME().kiakai;
 
 		let parse: any = {
@@ -1560,7 +1562,7 @@ export namespace KiakaiScenes {
 	}
 
 	export function TalkPriestMeeting() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const kiakai = GAME().kiakai;
 
 		let parse: any = {

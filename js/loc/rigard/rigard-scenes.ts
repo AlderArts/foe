@@ -3,6 +3,7 @@ import { Gender } from "../../body/gender";
 import { EncounterTable } from "../../encountertable";
 import { MirandaFlags } from "../../event/miranda-flags";
 import { MirandaScenes } from "../../event/miranda-scenes";
+import { Player } from "../../event/player";
 import { TerryFlags } from "../../event/terry-flags";
 import { GAME, MoveToLocation, TimeStep, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
@@ -460,7 +461,7 @@ export namespace RigardScenes {
 	export function Chatter2(enteringArea: boolean) {
 		const rigard = GAME().rigard;
 		const party: Party = GAME().party;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const miranda = GAME().miranda;
 		const terry = GAME().terry;
 
@@ -1263,7 +1264,7 @@ export namespace RigardScenes {
 	export function Lockdown() {
 		const rigard = GAME().rigard;
 		const party: Party = GAME().party;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const miranda = GAME().miranda;
 
 		let parse: any = {

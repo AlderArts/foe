@@ -10,6 +10,7 @@ import { GameState, isOnline, SetGameState } from "./gamestate";
 
 import { Alchemy } from "./alchemy";
 import { Images } from "./assets";
+import { Player } from "./event/player";
 import { ExploreButtonIndex } from "./explorestate";
 import { loadfileOverlay } from "./fileoverlay";
 import { GAME, GameCache, NAV } from "./GAME";
@@ -26,7 +27,7 @@ import { Text } from "./text";
 // import { Quest } from './quest'; TODO Circular dep
 
 function SetExploreButtons() {
-	const player = GAME().player;
+	const player: Player = GAME().player;
 	const party: Party = GAME().party;
 
 	const waitLocation = party.location.wait();
@@ -280,7 +281,7 @@ const ShowAbilities = (preventClear: boolean) => {
 NAV().ShowAbilities = ShowAbilities;
 
 const ShowAlchemy = (preventClear?: boolean) => {
-	const player = GAME().player;
+	const player: Player = GAME().player;
 	const party: Party = GAME().party;
 	if (!preventClear) {
 		Text.Clear();

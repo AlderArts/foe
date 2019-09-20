@@ -5,6 +5,7 @@ import { EncounterTable } from "../../encountertable";
 import { Sex } from "../../entity-sex";
 import { Event } from "../../event";
 import { MirandaFlags } from "../../event/miranda-flags";
+import { Player } from "../../event/player";
 import { ZinaFlags } from "../../event/zina";
 import { GAME, MoveToLocation, TimeStep, WORLD} from "../../GAME";
 import { Gui } from "../../gui";
@@ -58,7 +59,7 @@ TavernLoc.Common.links.push(new Link(
 TavernLoc.Common.DrunkHandler = () => {
 	const rigard = GAME().rigard;
 	const party: Party = GAME().party;
-	const player = GAME().player;
+	const player: Player = GAME().player;
 
 	const parse: any = {
 		phisher : player.mfTrue("his", "her"),
@@ -264,7 +265,7 @@ export namespace BarnabyScenes {
 
 	export function Approach() {
 		const rigard = GAME().rigard;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const parse: any = {
 			playername : player.name,
@@ -301,7 +302,7 @@ export namespace BarnabyScenes {
 	export function Prompt(talkative?: boolean) {
 		const rigard = GAME().rigard;
 		const party: Party = GAME().party;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const coin1 = 2;
 		const coin2 = 5;
@@ -643,7 +644,7 @@ export namespace BarnabyScenes {
 	}
 
 	export function ChatPrompt() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const miranda = GAME().miranda;
 		const zina = GAME().zina;
 
@@ -794,7 +795,7 @@ export namespace BarnabyScenes {
 	}
 
 	export function BlowjobEntrypoint(func: CallableFunction) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const miranda = GAME().miranda;
 		const zina = GAME().zina;
 

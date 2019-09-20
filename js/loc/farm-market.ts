@@ -3,6 +3,7 @@ import { Encounter } from "../combat";
 import { Bandit } from "../enemy/bandit";
 import { GwendyFlags } from "../event/farm/gwendy-flags";
 import { MirandaFlags } from "../event/miranda-flags";
+import { Player } from "../event/player";
 import { GAME, MoveToLocation, TimeStep, WORLD } from "../GAME";
 import { GameState, SetGameState } from "../gamestate";
 import { Gui } from "../gui";
@@ -18,7 +19,7 @@ export function InitMarket(gScenes: any) {
 export namespace MarketScenes {
 
     export function GoToMarketFirst(backfunc: any) {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const party: Party = GAME().party;
         const gwendy = GAME().gwendy;
 
@@ -179,7 +180,7 @@ export namespace MarketScenes {
     }
 
     export function GoToMarketFirstAfterBandits(won: boolean) {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const party: Party = GAME().party;
         const rigard = GAME().rigard;
         const miranda = GAME().miranda;
@@ -271,7 +272,7 @@ export namespace MarketScenes {
     * }
     */
     export function Market(haul: any, next: any) {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const party: Party = GAME().party;
         const gwendy = GAME().gwendy;
         const farm = GAME().farm;
@@ -421,7 +422,7 @@ export namespace MarketScenes {
     }
 
     export function GoToMarketFirstFinale() {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const party: Party = GAME().party;
         const gwendy = GAME().gwendy;
         const rigard = GAME().rigard;

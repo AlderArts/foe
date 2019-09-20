@@ -10,6 +10,7 @@ import { Party } from "../party";
 import { Womb } from "../pregnancy";
 import { Text } from "../text";
 import { GlobalScenes } from "./global";
+import { Player } from "./player";
 
 const NurseryFlags = {
 	Met : {
@@ -19,7 +20,7 @@ const NurseryFlags = {
 };
 
 export class Nursery {
-	public kids: any[];
+	public kids: NurseryKid[];
 	public flags: any;
 
 	constructor(storage?: any) {
@@ -64,21 +65,21 @@ export class Nursery {
 		});
 	}
 
-	public BirthedBy(mother: Entity) {
+	public BirthedBy(mother: string) {
 		const ret: any[] = [];
 		_.each(this.kids, (kid) => {
 			if (kid.mother === mother) { ret.push(kid); }
 		});
 		return ret;
 	}
-	public FatheredBy(father: Entity) {
+	public FatheredBy(father: string) {
 		const ret: any[] = [];
 		_.each(this.kids, (kid) => {
 			if (kid.father === father) { ret.push(kid); }
 		});
 		return ret;
 	}
-	public TotalKids(person?: Entity) {
+	public TotalKids(person?: string) {
 		if (person) {
 			let num = 0;
 			_.each(this.BirthedBy(person), (kid) => {
@@ -116,8 +117,8 @@ export class Nursery {
 }
 
 export class NurseryKid {
-	public mother: Entity;
-	public father: Entity;
+	public mother: string;
+	public father: string;
 	public num: number;
 	public race: RaceDesc;
 
@@ -156,7 +157,7 @@ export class NurseryKid {
 export namespace NurseryScenes {
 
 	export function PrintPCbirthed() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const nursery: Nursery = GAME().nursery;
 		const kids = nursery.BirthedBy(player.ID);
 
@@ -186,7 +187,7 @@ export namespace NurseryScenes {
 	}
 
 	export function PrintPCfathered() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const nursery: Nursery = GAME().nursery;
 
 		const kids = nursery.FatheredBy(player.ID);
@@ -217,7 +218,7 @@ export namespace NurseryScenes {
 	}
 
 	export function CareBlock(womb: Womb) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const nursery: Nursery = GAME().nursery;
 		const world = WORLD();

@@ -13,6 +13,7 @@ import { RigardFlags } from "../../loc/rigard/rigard-flags";
 import { ILocation } from "../../location";
 import { Text } from "../../text";
 import { Time } from "../../time";
+import { Player } from "../player";
 import { TerryFlags } from "../terry-flags";
 import { TwinsFlags } from "./twins-flags";
 
@@ -149,7 +150,7 @@ export namespace TwinsScenes {
 	}
 
 	export function TalkPrompt() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const rigard = GAME().rigard;
 		const twins = GAME().twins;
 		const terry = GAME().terry;

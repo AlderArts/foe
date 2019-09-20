@@ -12,6 +12,7 @@ import { Status } from "../../statuseffect";
 import { Text } from "../../text";
 import { Time } from "../../time";
 import { MomoFlags } from "../momo-flags";
+import { Player } from "../player";
 import { CvetaDateScenes } from "./cveta-date";
 import { CvetaFlags } from "./cveta-flags";
 import { OutlawsFlags } from "./outlaws-flags";
@@ -48,7 +49,7 @@ export namespace CvetaScenes {
 	}
 
 	export function ViolinApproach() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const cveta = GAME().cveta;
 		const terry = GAME().terry;
@@ -138,7 +139,7 @@ export namespace CvetaScenes {
 	}
 
 	export function ViolinPrompt() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const outlaws = GAME().outlaws;
 		const cveta = GAME().cveta;
@@ -213,7 +214,7 @@ export namespace CvetaScenes {
 	}
 
 	export function Approach() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const outlaws = GAME().outlaws;
 		const cveta = GAME().cveta;
 
@@ -326,7 +327,7 @@ export namespace CvetaScenes {
 	}
 
 	export function Teach() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const outlaws = GAME().outlaws;
 		const cveta = GAME().cveta;
@@ -439,7 +440,7 @@ export namespace CvetaScenes {
 	}
 
 	export function PlayPrompt() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const cveta = GAME().cveta;
 
 		const parse: any = {
@@ -519,7 +520,7 @@ export namespace CvetaScenes {
 	}
 
 	export function Pet() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const cveta = GAME().cveta;
 
 		const parse: any = {
@@ -713,7 +714,7 @@ export namespace CvetaScenes {
 	}
 
 	export function TalkPrompt() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const cveta = GAME().cveta;
 
 		const parse: any = {
@@ -821,7 +822,7 @@ export namespace CvetaScenes {
 	}
 
 	export function HerselfPrompt() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const cveta = GAME().cveta;
 		const rigard = GAME().rigard;
@@ -1098,7 +1099,7 @@ export namespace CvetaScenes {
 	}
 
 	export function MusicPrompt() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const cveta = GAME().cveta;
 		const kiakai = GAME().kiakai;
@@ -1434,7 +1435,7 @@ export namespace CvetaScenes {
 	}
 
 	export function MariaTalkFirst() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const cveta = GAME().cveta;
 
 		const parse: any = {
@@ -1489,7 +1490,7 @@ export namespace CvetaScenes {
 	}
 
 	export function MariaTalkRepeat() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const parse: any = {
 			playername : player.name,
@@ -1508,7 +1509,7 @@ export namespace CvetaScenes {
 	}
 
 	export function FirstMeeting() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const cveta = GAME().cveta;
 
 		const parse: any = {
@@ -1555,7 +1556,7 @@ export namespace CvetaScenes {
 	}
 
 	export function FirstMeetingPrompt(opts: any) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const parse: any = {
 			playername : player.name,
@@ -1726,7 +1727,7 @@ export namespace CvetaScenes {
 	}
 
 	export function Performance() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const outlaws = GAME().outlaws;
 		const cveta = GAME().cveta;
@@ -2052,7 +2053,7 @@ export namespace CvetaScenes {
 	}
 
 	export function DreamBrood(ravenTrigger: any) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const parse: any = {
 			skinDesc() { return player.SkinDesc(); },
@@ -2079,7 +2080,7 @@ export namespace CvetaScenes {
 
 	// Trigger this the next time the player attempts to approach Cveta in her tent after the quest is over, regardless of success or failure.
 	export function PostBullTowerPerformance() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const outlaws = GAME().outlaws;
 		const cveta = GAME().cveta;
 
@@ -2297,7 +2298,7 @@ export namespace CvetaScenes {
 	}
 
 	export function IntimateNuzzle() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const cveta = GAME().cveta;
 
 		let parse: any = {
@@ -2338,7 +2339,7 @@ export namespace CvetaScenes {
 	}
 
 	export function IntimateCuddle() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const cveta = GAME().cveta;
 
 		const parse: any = {
@@ -2394,7 +2395,7 @@ export namespace CvetaScenes {
 	}
 
 	export function IntimateGrope() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const cveta = GAME().cveta;
 
 		let parse: any = {

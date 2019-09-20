@@ -7,6 +7,7 @@ import { Encounter } from "../combat";
 import { EncounterTable } from "../encountertable";
 import { Entity } from "../entity";
 import { Sex } from "../entity-sex";
+import { Player } from "../event/player";
 import { TerryFlags } from "../event/terry-flags";
 import { TerryScenes } from "../event/terry-scenes";
 import { GAME, TimeStep } from "../GAME";
@@ -14,6 +15,7 @@ import { GameState, SetGameState } from "../gamestate";
 import { Gui } from "../gui";
 import { IngredientItems } from "../items/ingredients";
 import { IChoice } from "../link";
+import { Burrows } from "../loc/burrows";
 import { BurrowsFlags } from "../loc/burrows-flags";
 import { BurrowsScenes } from "../loc/burrows-scenes";
 import { Party } from "../party";
@@ -35,7 +37,7 @@ export namespace LagomorphScenes {
 	}
 
 	export function GroupEnc() {
-		const burrows = GAME().burrows;
+		const burrows: Burrows = GAME().burrows;
 		const enemy = new Party();
 		const enc: any = new Encounter(enemy);
 
@@ -88,9 +90,9 @@ export namespace LagomorphScenes {
 	}
 
 	export function PlainsEncounter() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const burrows = GAME().burrows;
+		const burrows: Burrows = GAME().burrows;
 
 		const enc = this;
 
@@ -171,7 +173,7 @@ export namespace LagomorphScenes {
 	}
 
 	export function GroupLossOnPlains() {
-		const burrows = GAME().burrows;
+		const burrows: Burrows = GAME().burrows;
 		SetGameState(GameState.Event, Gui);
 
 		const enc = this;
@@ -209,7 +211,7 @@ export namespace LagomorphScenes {
 	}
 
 	export function GroupLossOnPlainsBrainy(enc: any)  {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const p1cock = player.BiggestCock();
 
@@ -357,9 +359,9 @@ export namespace LagomorphScenes {
 	}
 
 	export function GroupLossOnPlainsToBurrows(enc: any)  {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const burrows = GAME().burrows;
+		const burrows: Burrows = GAME().burrows;
 		const alpha = enc.alpha;
 
 		let parse: any = {
@@ -389,7 +391,7 @@ export namespace LagomorphScenes {
 		Text.Add("Just as they are about to descend on you, a high voice shouts a short, rapt command, halting them. The horde reluctantly retract their groping hands, shuffling out of the way to reveal their leader, not too different from [m1hisher] followers, but wearing a determined look on [m1hisher] small, furred face.", parse);
 		Text.NL();
 		Text.Add("<i>“No!”</i> [m1heshe] repeats the order. <i>“Take back!”</i> Before you have time to puzzle over this, the mob closes in again, countless hands grabbing hold of you, hoisting you into the air.", parse);
-		if (player.Weigth >= 250) {
+		if (player.Weigth() >= 250) {
 			Text.NL();
 			Text.Add("Well, making an attempt at least. Even with their great numbers, the diminutive creatures are unable to bear the weight of your body. In a cacophony of pained yelps, your frame crashes back to the ground, only just avoiding flattening one of your captors.", parse);
 			Text.NL();
@@ -425,11 +427,11 @@ export namespace LagomorphScenes {
 
 			Gui.NextPrompt();
 			return;
-		} else if (player.Weigth >= 100) {
+		} else if (player.Weigth() >= 100) {
 			Text.Add(" Despite your size, the rabbits have no trouble carrying you, making up for their lesser strength with their large numbers.", parse);
-	} else {
+		} else {
 			Text.Add(" The rabbits have no trouble carrying you, despite their size.", parse);
-	}
+		}
 		Text.NL();
 		Text.Add("With the alpha in the lead, you set out, your convoy loping over the rolling plains at a rapid pace. You are passed between hands several times, as the horde shares the burden of your weight, as if carrying a platter of food, with you the main course.", parse);
 		Text.Flush();
@@ -453,9 +455,9 @@ export namespace LagomorphScenes {
 	}
 
 	export function GroupWinOnPlainsPrompt() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const burrows = GAME().burrows;
+		const burrows: Burrows = GAME().burrows;
 		SetGameState(GameState.Event, Gui);
 
 		const enc = this;
@@ -617,7 +619,7 @@ export namespace LagomorphScenes {
 	}
 
 	export function GroupWinOnPlainsFuckBrute(enc: any)  {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const p1cock  = player.BiggestCock(undefined, true);
 		const strapon = p1cock ? p1cock.isStrapon : undefined;
@@ -865,7 +867,7 @@ export namespace LagomorphScenes {
 	}
 
 	export function GroupWinOnPlainsFuckM(enc: any, group: any)  {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const kiakai = GAME().kiakai;
 		const terry = GAME().terry;
@@ -1406,10 +1408,10 @@ export namespace LagomorphScenes {
 	}
 
 	export function GroupWinOnPlainsGetFuckedM(enc: any, group: any) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const kiakai = GAME().kiakai;
-	 const terry = GAME().terry;
+		const terry = GAME().terry;
 
 		let parse: any = {
 			playername : player.name,
@@ -1446,9 +1448,9 @@ export namespace LagomorphScenes {
 			parse.comp = party.Get(1).name;
 		} else if (party.Num() > 2) {
 			parse.comp = "your companions";
-	} else {
+		} else {
 			parse.comp = "";
-	}
+		}
 
 		parse.p = comp ? Text.Parse(" and suggesting to [comp] to do the same", parse) : "";
 		Text.Add("Removing your gear[p], you present the horny rabbits with the goods. A sultry word is all it takes for their fragile composure to break, sending the group surging toward you.", parse);
@@ -1634,9 +1636,9 @@ export namespace LagomorphScenes {
 				parse.comp = " " + party.Get(1).name + " and";
 			} else if (party.Num() > 2) {
 				parse.comp = " your companions and";
-	} else {
+			} else {
 				parse.comp = "";
-	}
+			}
 			Text.Add("You gather up[comp] your gear, wobbling a bit unsteadily as you re-equip yourself. In the end, you are not sure who got the most out of that engagement: you or the rabbits.", parse);
 			Text.Flush();
 
@@ -1647,10 +1649,10 @@ export namespace LagomorphScenes {
 	}
 
 	export function GroupWinInterrorigate(enc: any) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const burrows = GAME().burrows;
-	 const alpha = enc.alpha;
+		const burrows: Burrows = GAME().burrows;
+		const alpha: Lagomorph = enc.alpha;
 
 		let parse: any = {
 			meUs       : party.Alone() ? "me" : "us",

@@ -4,6 +4,7 @@ import { Race, RaceScore } from "../../body/race";
 import { EncounterTable } from "../../encountertable";
 import { Event } from "../../event";
 import { FeraScenes } from "../../event/fera";
+import { Player } from "../../event/player";
 import { GAME, MoveToLocation, WORLD, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
 import { IChoice, Link } from "../../link";
@@ -112,7 +113,7 @@ ClothShopLoc.events.push(new Link(
 		Text.NL();
 	},
 	() => {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const fera = GAME().fera;
 		const rigard = GAME().rigard;
 

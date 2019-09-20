@@ -19,6 +19,7 @@ import { Status } from "../statuseffect";
 import { Text } from "../text";
 import { Time } from "../time";
 import { MomoFlags } from "./momo-flags";
+import { Player } from "./player";
 
 export class Momo extends Entity {
 	public wanderTimer: Time;
@@ -135,7 +136,7 @@ export namespace MomoScenes {
 	}
 
 	export function FindingMomo() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const momo = GAME().momo;
 		const world = WORLD();
@@ -231,7 +232,7 @@ export namespace MomoScenes {
 	}
 
 	export function WanderingMomo() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const momo = GAME().momo;
 
 		const parse: any = {
@@ -296,7 +297,7 @@ export namespace MomoScenes {
 	}
 
 	export function Interact() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const momo = GAME().momo;
 
 		const parse: any = {
@@ -412,7 +413,7 @@ export namespace MomoScenes {
 
 	// TODO
 	export function Prompt() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const parse: any = {
 			playername : player.name,
 		};
@@ -454,7 +455,7 @@ export namespace MomoScenes {
 	}
 
 	export function CookPrompt() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const momo = GAME().momo;
 		const party: Party = GAME().party;
 
@@ -548,7 +549,7 @@ export namespace MomoScenes {
 	}
 
 	export function TalkPrompt() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const momo = GAME().momo;
 		let parse: any = {
 			playername : player.name,

@@ -7,6 +7,7 @@ import { Event } from "../event";
 import { DreamsScenes } from "../event/dreams";
 import { GwendyScenes } from "../event/farm/gwendy-scenes";
 import { LaylaScenes } from "../event/farm/layla-scenes";
+import { Player } from "../event/player";
 import { RoamingScenes } from "../event/roaming";
 import { GAME, MoveToLocation, TimeStep, WORLD, WorldTime } from "../GAME";
 import { GameState, SetGameState } from "../gamestate";
@@ -65,7 +66,7 @@ export namespace FarmScenesIntro {
     }
 
     export function Approach() {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const party: Party = GAME().party;
         const gwendy = GAME().gwendy;
 
@@ -208,7 +209,7 @@ export namespace FarmScenesIntro {
     }
 
     export function GwendyQuestions1() {
-        const player = GAME().player;
+        const player: Player = GAME().player;
 
         const parse: any = {
             race() { return player.body.Race().Short(player.Gender()); },
@@ -275,7 +276,7 @@ export namespace FarmScenesIntro {
     }
 
     export function GwendyQuestions2() {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const party: Party = GAME().party;
         const gwendy = GAME().gwendy;
         const farm = GAME().farm;
@@ -445,7 +446,7 @@ export namespace FarmScenesIntro {
     }
 
     export function HelpAdrian() {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const party: Party = GAME().party;
         const adrian = GAME().adrian;
 
@@ -541,7 +542,7 @@ export namespace FarmScenesIntro {
     }
 
     export function HelpAdrianFinished() {
-        const player = GAME().player;
+        const player: Player = GAME().player;
 
         Text.Clear();
         TimeStep({hour: 1});
@@ -573,7 +574,7 @@ export namespace FarmScenesIntro {
     }
 
     export function MeetDanie() {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const party: Party = GAME().party;
         const danie = GAME().danie;
 
@@ -656,7 +657,7 @@ export namespace FarmScenesIntro {
     }
 
     export function HornyDanie() {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const danie = GAME().danie;
 
         Text.Clear();
@@ -711,7 +712,7 @@ export namespace FarmScenesIntro {
     }
 
     export function DanieFuckOptions() {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const danie = GAME().danie;
 
         const cocksInVag = player.CocksThatFit(danie.FirstVag());
@@ -763,7 +764,7 @@ export namespace FarmScenesIntro {
     }
 
     export function DanieOralSex(bits: boolean) {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const danie = GAME().danie;
 
         Text.Clear();
@@ -852,7 +853,7 @@ export namespace FarmScenesIntro {
     }
 
     export function DanieVaginalSex() {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const danie = GAME().danie;
 
         Text.Clear();
@@ -898,7 +899,7 @@ export namespace FarmScenesIntro {
     }
 
     export function DanieAnalSex() {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const danie = GAME().danie;
 
         Text.Clear();
@@ -945,7 +946,7 @@ export namespace FarmScenesIntro {
     }
 
     export function ReturnToGwendy() {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const party: Party = GAME().party;
         const farm = GAME().farm;
 

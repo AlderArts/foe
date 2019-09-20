@@ -12,6 +12,7 @@ import { Text } from "../../text";
 import { Time } from "../../time";
 import { GlobalScenes } from "../global";
 import { MirandaFlags } from "../miranda-flags";
+import { Player } from "../player";
 import { Room69Flags } from "../room69-flags";
 import { LeiFlags } from "../royals/lei-flags";
 import { VaughnFlags } from "./vaughn-flags";
@@ -106,7 +107,7 @@ export namespace VaughnTasksScenes {
 		// Block that exploration scene if this scene has been viewed.
 		// TODO Note for far future: Do not enable this if/when Majid has been run out of Rigard.
 		export function Start() {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const party: Party = GAME().party;
 			const terry = GAME().terry;
 
@@ -185,7 +186,7 @@ export namespace VaughnTasksScenes {
 
 		// Triggered in castle grounds
 		export function MeetingElodie() {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const party: Party = GAME().party;
 			const rigard = GAME().rigard;
 
@@ -287,7 +288,7 @@ export namespace VaughnTasksScenes {
 
 		// Automatically triggers when approaching Vaughn after completing the task.
 		export function Debrief() {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const outlaws = GAME().outlaws;
 			const vaughn = GAME().vaughn;
 
@@ -349,7 +350,7 @@ export namespace VaughnTasksScenes {
 
 		// Disable this and jump ahead to task 3 if Miranda has been permanently recruited.
 		export function Start() {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const miranda = GAME().miranda;
 			const vaughn = GAME().vaughn;
 
@@ -432,7 +433,7 @@ export namespace VaughnTasksScenes {
 		}
 
 		export function Miranda(onDuty: any) {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const vaughn = GAME().vaughn;
 			const miranda = GAME().miranda;
 
@@ -736,7 +737,7 @@ export namespace VaughnTasksScenes {
 
 		// Triggered via [Evidence] - Break into the watchmens’ lockers and plant the evidence. while in the City Watch area.
 		export function PlantEvidence() {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const party: Party = GAME().party;
 			const vaughn = GAME().vaughn;
 			const terry = GAME().terry;
@@ -930,7 +931,7 @@ export namespace VaughnTasksScenes {
 		}
 
 		export function Debrief() {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const vaughn = GAME().vaughn;
 
 			const parse: any = {
@@ -991,7 +992,7 @@ export namespace VaughnTasksScenes {
 		}
 
 		export function DebriefOutOfTime() {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const outlaws = GAME().outlaws;
 
 			const parse: any = {
@@ -1094,7 +1095,7 @@ export namespace VaughnTasksScenes {
 		}
 
 		export function Start() {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const party: Party = GAME().party;
 			const vaughn = GAME().vaughn;
 
@@ -1241,7 +1242,7 @@ export namespace VaughnTasksScenes {
 		}
 
 		export function InnPrompt(opts: any) {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const party: Party = GAME().party;
 			const vaughn = GAME().vaughn;
 			const lei = GAME().lei;
@@ -1599,7 +1600,7 @@ export namespace VaughnTasksScenes {
 		}
 
 		export function Kitchen(opts: any) {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const party: Party = GAME().party;
 			const vaughn = GAME().vaughn;
 			const terry = GAME().terry;
@@ -1712,7 +1713,7 @@ export namespace VaughnTasksScenes {
 		}
 
 		export function KitchenYourself() {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const party: Party = GAME().party;
 			const vaughn = GAME().vaughn;
 
@@ -1835,7 +1836,7 @@ export namespace VaughnTasksScenes {
 		}
 
 		export function AphrodisiacPeek() {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const party: Party = GAME().party;
 			const vaughn = GAME().vaughn;
 			const room69 = GAME().room69;
@@ -1915,7 +1916,7 @@ export namespace VaughnTasksScenes {
 					Gui.NextPrompt(() => {
 						MoveToLocation(WORLD().loc.Rigard.Plaza);
 					});
-				}, enabled : player.FirstCock() || player.FirstVag(),
+				}, enabled : player.FirstCock() !== undefined || player.FirstVag() !== undefined,
 			});
 			if (room69.flags.Rel >= Room69Flags.RelFlags.GoodTerms) {
 				options.push({ nameStr : "69",
@@ -1960,7 +1961,7 @@ export namespace VaughnTasksScenes {
 		}
 
 		export function DebriefSuccess() {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const party: Party = GAME().party;
 			const outlaws = GAME().outlaws;
 			const vaughn = GAME().vaughn;
@@ -2036,7 +2037,7 @@ export namespace VaughnTasksScenes {
 		}
 
 		export function DebriefFailure() {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const vaughn = GAME().vaughn;
 
 			const parse: any = {

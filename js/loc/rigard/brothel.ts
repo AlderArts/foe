@@ -7,6 +7,7 @@ import { FireblossomScenes } from "../../event/brothel/fireblossom";
 import { GryphonsScenes } from "../../event/brothel/gryphons";
 import { LucilleScenes } from "../../event/brothel/lucille";
 import { RoaScenes } from "../../event/brothel/roa-scenes";
+import { Player } from "../../event/player";
 import { GAME, MoveToLocation, TimeStep, WORLD } from "../../GAME";
 import { Gui } from "../../gui";
 import { IChoice, Link } from "../../link";
@@ -130,7 +131,7 @@ export namespace BrothelScenes {
 	}
 
 	export function First() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const rigard = GAME().rigard;
 
 		let parse: any = {
@@ -203,7 +204,7 @@ export namespace BrothelScenes {
 	}
 
 	export function MStrap() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const rigard = GAME().rigard;
 
 		let parse: any = {

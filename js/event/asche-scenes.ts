@@ -13,6 +13,7 @@ import { Text } from "../text";
 import { AscheFlags } from "./asche-flags";
 import { AscheTasksScenes } from "./asche-tasks";
 import { GlobalScenes } from "./global";
+import { Player } from "./player";
 
 export namespace AscheScenes {
     export function FortuneCost() {
@@ -20,7 +21,7 @@ export namespace AscheScenes {
     }
 
     export function FirstEntry() {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const asche = GAME().asche;
 
         const parse: any = {
@@ -57,7 +58,7 @@ export namespace AscheScenes {
     }
 
     export function Prompt() {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const asche = GAME().asche;
         const rigard = GAME().rigard;
 
@@ -185,7 +186,7 @@ export namespace AscheScenes {
     }
 
     export function Appearance() {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const parse: any = {
             handsomepretty : player.mfFem("handsome", "pretty"),
         };
@@ -202,7 +203,7 @@ export namespace AscheScenes {
     }
 
     export function TalkPrompt() {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const asche = GAME().asche;
 
         const parse: any = {
@@ -364,7 +365,7 @@ export namespace AscheScenes {
     }
 
     export function Lessons() {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const asche = GAME().asche;
 
         const parse: any = {
@@ -517,7 +518,7 @@ export namespace AscheScenes {
     }
 
     export function FortuneTellingPrompt() {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const kiakai = GAME().kiakai;
         const terry = GAME().terry;
         const layla = GAME().layla;
@@ -775,7 +776,7 @@ export namespace AscheScenes {
     }
 
     export function MagicBoxPrompt() {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const asche = GAME().asche;
 
         const parse: any = {
@@ -844,7 +845,7 @@ export namespace AscheScenes {
     }
 
     export function MagicBoxWin() {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const party: Party = GAME().party;
         const asche = GAME().asche;
 

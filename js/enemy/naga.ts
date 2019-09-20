@@ -17,6 +17,7 @@ import { Element } from "../damagetype";
 import { EncounterTable } from "../encountertable";
 import { Entity } from "../entity";
 import { Sex } from "../entity-sex";
+import { Player } from "../event/player";
 import { GAME, GameCache, TimeStep, WorldTime } from "../GAME";
 import { GameState, SetGameState } from "../gamestate";
 import { Gui } from "../gui";
@@ -172,7 +173,7 @@ export namespace NagaScenes {
 	}
 
 	export function DesertEncounter() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const enc  = this;
 		const naga: Naga = enc.naga;
 		let parse: any = {
@@ -260,7 +261,7 @@ export namespace NagaScenes {
 	}
 
 	export function DesertLoss() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const enc  = this;
 		const naga: Naga = enc.naga;
@@ -310,7 +311,7 @@ export namespace NagaScenes {
 	}
 
 	export function DesertLossScenes(enc: any) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const scenes = new EncounterTable();
 		scenes.AddEnc(() => {
 			NagaScenes.DesertLossGetDPd(enc);
@@ -337,7 +338,7 @@ export namespace NagaScenes {
 	}
 
 	export function DesertLossGetDPd(enc: any) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const naga: Naga = enc.naga;
 		SetGameState(GameState.Event, Gui);
@@ -476,7 +477,7 @@ export namespace NagaScenes {
 	}
 
 	export function DesertLossUseCock(enc: any) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const naga: Naga = enc.naga;
 		SetGameState(GameState.Event, Gui);
@@ -663,8 +664,8 @@ export namespace NagaScenes {
 		for (const cock of player.AllCocks()) {
 			const inc  = cock.length.IncreaseStat(50, 3);
 			const inc2 = cock.thickness.IncreaseStat(12, 1);
-			len = len || inc;
-			thk = thk || inc2;
+			len = len || (inc > 0);
+			thk = thk || (inc2 > 0);
 		}
 		const grown = len || thk;
 
@@ -699,7 +700,7 @@ export namespace NagaScenes {
 
 	// TODO
 	export function DesertWinPrompt() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const enc  = this;
 		const naga: Naga = enc.naga;
@@ -733,7 +734,7 @@ export namespace NagaScenes {
 	}
 
 	export function DesertWinPrompt2(enc: any, hypno: boolean) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const naga: Naga = enc.naga;
 
@@ -821,7 +822,7 @@ export namespace NagaScenes {
 	}
 
 	export function DesertWinHypnotize(enc: any) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const naga: Naga = enc.naga;
 
 		let parse: any = {};
@@ -846,7 +847,7 @@ export namespace NagaScenes {
 	}
 
 	export function DesertWinHypnotizeOwn(enc: any) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const naga: Naga = enc.naga;
 
 		let parse: any = {
@@ -872,7 +873,7 @@ export namespace NagaScenes {
 	}
 
 	export function DesertWinFuckJerk(enc: any, hypno: boolean) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const naga: Naga = enc.naga;
 
 		const p1cock = player.BiggestCock();
@@ -1008,7 +1009,7 @@ export namespace NagaScenes {
 	}
 
 	export function DesertWinGetFuckedVag(enc: any, hypno: boolean) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		Text.Clear();
 
@@ -1160,7 +1161,7 @@ export namespace NagaScenes {
 	}
 
 	export function DesertWinTailpeg(opts: any) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		let parse: any = {
 
 		};
@@ -1210,7 +1211,7 @@ export namespace NagaScenes {
 	}
 
 	export function DesertNagaMating(naga: Naga) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const p1cock = player.BiggestCock();
 

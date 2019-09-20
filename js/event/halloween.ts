@@ -16,6 +16,7 @@ import { Input } from "../input";
 import { Inventory } from "../inventory";
 import { HalloweenItems } from "../items/halloween";
 import { IChoice, Link } from "../link";
+import { Burrows } from "../loc/burrows";
 import { Party } from "../party";
 import { Perks } from "../perks";
 import { Status } from "../statuseffect";
@@ -56,7 +57,7 @@ export class Halloween {
 	}
 
 	public static CockParser(parse: any) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		parse = parse || {};
 		if (!player.FirstCock()) {
 			parse.cocks = "stake-strapon";
@@ -74,7 +75,7 @@ export class Halloween {
 	public nadirma: number;
 
 	constructor() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 
 		// Save player/party
@@ -118,7 +119,7 @@ export class Halloween {
 	}
 
 	public HarthonParser(parse: any) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		parse = parse || {};
 		const fem = this.harthon & HalloweenFlags.Harthon.Feminized;
 		parse.mastermistress = player.mfTrue("master", "mistress");
@@ -191,7 +192,7 @@ export namespace HalloweenScenes {
 	}
 
 	export function PumpkinPie() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const momo = GAME().momo;
 		const cale = GAME().cale;
@@ -408,7 +409,7 @@ export namespace HalloweenScenes {
 	}
 
 	export function EnterDream(first: boolean) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 
 		const parse: any = {
@@ -612,7 +613,7 @@ export namespace HalloweenScenes {
 	));
 
 	HWLoc.Path.description = () => {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const parse: any = {
 			feet : player.FeetDesc(),
 		};
@@ -670,7 +671,7 @@ export namespace HalloweenScenes {
 		}, true,
 		undefined,
 		() => {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 
 			let parse: any = {
 
@@ -736,7 +737,7 @@ export namespace HalloweenScenes {
 	));
 
 	export function Ronnie() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		let parse: any = {
 
@@ -831,7 +832,7 @@ export namespace HalloweenScenes {
 	}
 
 	export function RonnieFirst() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const roa = GAME().roa;
 
@@ -1186,7 +1187,7 @@ export namespace HalloweenScenes {
 	}
 
 	export function WerewolfTF() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 
 		let parse: any = {
@@ -1313,8 +1314,8 @@ export namespace HalloweenScenes {
 
 		// Fix balls
 		const balls = player.Balls();
-		if (balls.count < 2) { balls.count = 2; }
-		if (balls.size.base < 5) { balls.size.base = 5; }
+		if (balls.Count() < 2) { balls.count.base = 2; }
+		if (balls.BallSize() < 5) { balls.size.base = 5; }
 
 		// Add/modify tail
 		TF.SetAppendage(player.Back(), AppendageType.tail, Race.Wolf, Color.black);
@@ -1330,7 +1331,7 @@ export namespace HalloweenScenes {
 	}
 
 	export function RonniePitch() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		let parse: any = {
 
@@ -1426,7 +1427,7 @@ export namespace HalloweenScenes {
 	}
 
 	export function RonnieCatch() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		let parse: any = {
 
@@ -1605,7 +1606,7 @@ export namespace HalloweenScenes {
 	};
 
 	export function Kiai() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const kiakai = GAME().kiakai;
 		let parse: any = {
@@ -1822,7 +1823,7 @@ export namespace HalloweenScenes {
 	}
 
 	export function KiaiGangrape() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const kiakai = GAME().kiakai;
 		let parse: any = {
 			name : kiakai.name,
@@ -1941,7 +1942,7 @@ export namespace HalloweenScenes {
 	));
 
 	HWLoc.TortureRoom.description = () => {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const first = !(HW.flags & HalloweenFlags.Flags.TRoom);
 		HW.flags |= HalloweenFlags.Flags.TRoom;
@@ -1964,7 +1965,7 @@ export namespace HalloweenScenes {
 		"Leave", true, true,
 		undefined,
 		() => {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			Text.Clear();
 			if (player.Slut() < 50) {
 				Text.Add("You’re more than happy to leave this creepy place and all these perverted devices to keep gathering dust.");
@@ -2017,7 +2018,7 @@ export namespace HalloweenScenes {
 	}
 
 	export function NadirMa() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const miranda = GAME().miranda;
 
 		const werewolf = HW.Werewolf();
@@ -2320,7 +2321,7 @@ export namespace HalloweenScenes {
 	}
 
 	export function NadirMaCont(parse: any) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const p1cock = player.BiggestCock();
 
@@ -2557,7 +2558,7 @@ export namespace HalloweenScenes {
 	}
 
 	export function NadirMaCont2(parse: any) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const werewolf = HW.Werewolf();
 
@@ -2954,7 +2955,7 @@ export namespace HalloweenScenes {
 	}
 
 	export function NadirMaNoEntry(parse: any, func: CallableFunction) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		Text.Clear();
 
@@ -3038,7 +3039,7 @@ export namespace HalloweenScenes {
 	}
 
 	export function NadirMaBadend() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const werewolf = HW.Werewolf();
 
@@ -3427,7 +3428,7 @@ export namespace HalloweenScenes {
 	}
 
 	export function HarthonFirst() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const terry = GAME().terry;
 
@@ -3586,7 +3587,7 @@ export namespace HalloweenScenes {
 	}
 
 	export function HarthonDefeatedPrompt() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 
 		const werewolf = HW.Werewolf();
@@ -3771,7 +3772,7 @@ export namespace HalloweenScenes {
 	}
 
 	export function HarthonPitchAnal(parse: any) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 
 		const p1cock = player.BiggestCock();
@@ -3999,7 +4000,7 @@ export namespace HalloweenScenes {
 	}
 
 	export function HarthonPitchVag(parse: any) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const p1cock = player.BiggestCock();
 		const werewolf = HW.Werewolf();
@@ -4204,7 +4205,7 @@ export namespace HalloweenScenes {
 	}
 
 	export function HarthonBadend() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const werewolf = HW.Werewolf();
 
@@ -4397,7 +4398,7 @@ export namespace HalloweenScenes {
 
 	// #Shows up simply as “Thrall” in Beaten Path, and that’s about the only location you may call Harthon until we expand on the halloween world.
 	export function HarthonThrall() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const werewolf = HW.Werewolf();
 		const femHarthon = HW.harthon & HalloweenFlags.Harthon.Feminized;
@@ -4491,7 +4492,7 @@ export namespace HalloweenScenes {
 
 	// TODO
 	export function HarthonThrallPrompt(parse: any) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 
 		const werewolf = HW.Werewolf();
@@ -4769,7 +4770,7 @@ export namespace HalloweenScenes {
 						Text.Flush();
 
 						Gui.NextPrompt();
-					}, enabled : player.FirstCock(),
+					}, enabled : player.FirstCock() !== undefined,
 				});
 				Gui.SetButtonsFromList(options, false, undefined);
 			}, enabled : true,
@@ -5068,8 +5069,8 @@ export namespace HalloweenScenes {
 	));
 
 	export function Laggoth() {
-		const player = GAME().player;
-		const burrows = GAME().burrows;
+		const player: Player = GAME().player;
+		const burrows: Burrows = GAME().burrows;
 
 		const parse: any = {
 
@@ -5507,7 +5508,7 @@ export namespace HalloweenScenes {
 	}
 
 	export function LaggothDistract() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 
 		const parse: any = {
@@ -5688,7 +5689,7 @@ export namespace HalloweenScenes {
 	}
 
 	export function LaggothPit() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const parse: any = {
 			skin : player.SkinDesc(),
@@ -5793,7 +5794,7 @@ export namespace HalloweenScenes {
 	}
 
 	export function Lenka() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const cveta = GAME().cveta;
 
 		let parse: any = {
@@ -6231,7 +6232,7 @@ export namespace HalloweenScenes {
 	));
 
 	export function Jenna() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const parse: any = {
 			playername : player.name,
 			heshe : player.mfTrue("he", "she"),
@@ -6314,7 +6315,7 @@ export namespace HalloweenScenes {
 	}
 
 	export function JennaSwitchPrompt(opts: any) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		let parse: any = {
 
 		};
@@ -6453,7 +6454,7 @@ export namespace HalloweenScenes {
 	}
 
 	export function JennaAgreePrompt(opts: any) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		let parse: any = {
 
 		};
@@ -6524,7 +6525,7 @@ export namespace HalloweenScenes {
 	}
 
 	export function JennaBroomfuck() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		let parse: any = {
 
 		};
@@ -6664,7 +6665,7 @@ export namespace HalloweenScenes {
 	}
 
 	export function Patches() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const patchwork = GAME().patchwork;
 

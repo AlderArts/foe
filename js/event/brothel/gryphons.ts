@@ -15,6 +15,7 @@ import { IChoice } from "../../link";
 import { PregnancyHandler } from "../../pregnancy";
 import { Text } from "../../text";
 import { TF } from "../../tf";
+import { Player } from "../player";
 import { LucilleFlags } from "./lucille-flags";
 
 enum GryphonsState {
@@ -62,7 +63,7 @@ export namespace GryphonsScenes {
 	}
 
 	export function IntroEntryPoint() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const gryphons = GAME().gryphons;
 		const lucille = GAME().lucille;
 
@@ -193,7 +194,7 @@ export namespace GryphonsScenes {
 	}
 
 	export function Outro(gender: Gender, preg?: number) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const gryphons = GAME().gryphons;
 		let parse: any = {
 
@@ -1816,7 +1817,7 @@ export namespace GryphonsScenes {
 	}
 
 	export function NewLife() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const parse: any = {
 
 		};

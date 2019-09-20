@@ -12,6 +12,7 @@ import { IChoice } from "../link";
 import { Party } from "../party";
 import { Text } from "../text";
 import { KiakaiFlags } from "./kiakai-flags";
+import { Player } from "./player";
 
 /*
  *
@@ -22,7 +23,7 @@ import { KiakaiFlags } from "./kiakai-flags";
 export namespace KiakaiSexScenes {
 
 	export function Healing() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const kiakai = GAME().kiakai;
 
 		let parse: any = {
@@ -198,7 +199,7 @@ export namespace KiakaiSexScenes {
 	}
 
 	export function HealingSeducePrompt() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const kiakai = GAME().kiakai;
 
 		let parse: any = {
@@ -280,7 +281,7 @@ export namespace KiakaiSexScenes {
 	}
 
 	export function HealingNice() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const kiakai = GAME().kiakai;
 
 		let parse: any = {
@@ -1001,7 +1002,7 @@ export namespace KiakaiSexScenes {
 	}
 
 	export function PleasureElf() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const kiakai = GAME().kiakai;
 
 		let parse: any = {
@@ -1427,7 +1428,7 @@ export namespace KiakaiSexScenes {
 	}
 
 	export function PleasureElfEnd() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const kiakai = GAME().kiakai;
 
 		let parse: any = {
@@ -1449,7 +1450,7 @@ export namespace KiakaiSexScenes {
 	}
 
 	export function HealingAssertive() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const kiakai = GAME().kiakai;
 
 		let parse: any = {
@@ -2411,7 +2412,7 @@ export namespace KiakaiSexScenes {
 	}
 
 	export function KiakaiSex() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const kiakai = GAME().kiakai;
 
 		Text.Clear();
@@ -2668,7 +2669,7 @@ export namespace KiakaiSexScenes {
 	}
 
 	export function SexPrompt(attitude?: number) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const kiakai = GAME().kiakai;
 
@@ -3049,7 +3050,7 @@ export namespace KiakaiSexScenes {
 							if (player.FirstCock()) {
 								Text.Add("You can feel your climax rising, a familiar twitch in your [balls] giving you the tell-tale signs of imminent stickiness. Groaning, you release your pent up cum, painting [name]'s inner walls white.", parse);
 								const cum = player.OrgasmCum();
-								if (player.cum > 3) {
+								if (cum > 3) {
 									Text.Add(" The elf's stomach bulges slightly from the excessive quantity of spunk being pumped into [himher].", parse);
 								}
 								Text.NL();
@@ -3205,7 +3206,7 @@ export namespace KiakaiSexScenes {
 				}
 
 				Gui.SetButtonsFromList(options);
-			}, enabled : playerCock,
+			}, enabled : playerCock !== undefined,
 			tooltip : attitude ? Text.Parse("You can finally have a go at [himher], like you have been longing to... Fuck [name]'s butt until [heshe] begs for more.", parse) : Text.Parse("Fuck [name]'s butt until [heshe] begs for more.", parse),
 		});
 		options.push({ nameStr : "Anal catch",
@@ -3361,7 +3362,7 @@ export namespace KiakaiSexScenes {
 	}
 
 	export function AnalCatchPrep(choice?: number, assert?: boolean) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const kiakai = GAME().kiakai;
 
@@ -4176,7 +4177,7 @@ export namespace KiakaiSexScenes {
 	}
 
 	export function AnalCatchFinish() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const kiakai = GAME().kiakai;
 
 		const playerCock = player.BiggestCock(undefined, true);

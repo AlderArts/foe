@@ -14,6 +14,7 @@ import { Party } from "../../party";
 import { Stat } from "../../stat";
 import { Text } from "../../text";
 import { Season, Time } from "../../time";
+import { Player } from "../player";
 import { AquiliusFlags } from "./aquilius-flags";
 import { OCavalcadeScenes } from "./cavalcade";
 import { OutlawsFlags } from "./outlaws-flags";
@@ -123,7 +124,7 @@ export class Outlaws {
 export namespace OutlawsScenes {
 
 	export function MariasBouquet() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const parse: any = {
 			playername : player.name,
@@ -231,7 +232,7 @@ export namespace OutlawsScenes {
 	}
 
 	export function MariasBouquetPrompt(opts: any) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const outlaws = GAME().outlaws;
 
 		const parse: any = {
@@ -340,7 +341,7 @@ export namespace OutlawsScenes {
 	}
 
 	export function PathIntoRigardInitiation() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const outlaws = GAME().outlaws;
 
@@ -421,7 +422,7 @@ export namespace OutlawsScenes {
 	}
 
 	export function PathIntoRigardBelinda() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const outlaws = GAME().outlaws;
 		const miranda = GAME().miranda;
@@ -659,7 +660,7 @@ export namespace OutlawsScenes {
 		}
 
 		export function ChowTime() {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const outlaws = GAME().outlaws;
 
 			const parse: any = {
@@ -788,7 +789,7 @@ export namespace OutlawsScenes {
 		}
 
 		export function Archery() {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const outlaws = GAME().outlaws;
 			const maria = GAME().maria;
 
@@ -978,7 +979,7 @@ export namespace OutlawsScenes {
 		}
 
 		export function CampFollowers() {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 
 			const parse: any = {
 				s : player.sexlevel >= 4 ? "familiar" : "odd",
@@ -1058,7 +1059,7 @@ export namespace OutlawsScenes {
 		}
 
 		export function Carpentry() {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const outlaws = GAME().outlaws;
 
 			const parse: any = {
@@ -1142,7 +1143,7 @@ export namespace OutlawsScenes {
 		}
 
 		export function FactFinding() {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const outlaws = GAME().outlaws;
 
 			const parse: any = {

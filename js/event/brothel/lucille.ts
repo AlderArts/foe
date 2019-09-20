@@ -12,6 +12,7 @@ import { IChoice } from "../../link";
 import { ILocation } from "../../location";
 import { Party } from "../../party";
 import { Text } from "../../text";
+import { Player } from "../player";
 import { BastetScenes } from "./bastet";
 import { FireblossomScenes } from "./fireblossom";
 import { GryphonsScenes } from "./gryphons";
@@ -68,7 +69,7 @@ export class Lucille extends Entity {
 
 export namespace LucilleScenes {
 	export function Themerooms() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const gryphons = GAME().gryphons;
 		const bastet = GAME().bastet;
 		const fireblossom = GAME().fireblossom;
@@ -204,7 +205,7 @@ export namespace LucilleScenes {
 	}
 
 	export function WhoreAftermath(name: string, cost: number) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const lucille = GAME().lucille;
 

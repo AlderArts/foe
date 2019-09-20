@@ -15,6 +15,7 @@ import { EncounterTable } from "../encountertable";
 import { Entity } from "../entity";
 import { TargetStrategy } from "../entity";
 import { Sex } from "../entity-sex";
+import { Player } from "../event/player";
 import { GAME, TimeStep, WorldTime } from "../GAME";
 import { GameState, SetGameState } from "../gamestate";
 import { Gui } from "../gui";
@@ -507,7 +508,7 @@ export namespace MaliceScoutsScenes {
 
 		// CATBOY SCENES
 		export function LoneEncounter(levelbonus: number) {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const party: Party = GAME().party;
 			const enemy    = new Party();
 			const catboy   = new CatboyMage(levelbonus);
@@ -569,7 +570,7 @@ export namespace MaliceScoutsScenes {
 		}
 
 		export function WinPrompt() {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const party: Party = GAME().party;
 			const enc  = this;
 			SetGameState(GameState.Event, Gui);
@@ -663,9 +664,9 @@ export namespace MaliceScoutsScenes {
 		}
 
 		export function PityFuck(enc: any, win: boolean) {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const party: Party = GAME().party;
-			const catboy = enc.catboy;
+			const catboy: CatboyMage = enc.catboy;
 			const p1cock = player.BiggestCock();
 			let parse: any = {
 
@@ -860,8 +861,8 @@ export namespace MaliceScoutsScenes {
 		}
 
 		export function PetPlay(enc: any) {
-			const player = GAME().player;
-			const catboy = enc.catboy;
+			const player: Player = GAME().player;
+			const catboy: CatboyMage = enc.catboy;
 			const p1cock = player.BiggestCock();
 			let parse: any = {
 
@@ -1140,7 +1141,7 @@ export namespace MaliceScoutsScenes {
 		}
 
 		export function Petting(enc: any) {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			let parse: any = {
 
 			};
@@ -1259,7 +1260,7 @@ export namespace MaliceScoutsScenes {
 		}
 
 		export function LossPrompt() {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const party: Party = GAME().party;
 			SetGameState(GameState.Event, Gui);
 			Text.Clear();
@@ -1333,8 +1334,8 @@ export namespace MaliceScoutsScenes {
 		}
 
 		export function GetMilked(enc: any) {
-			const player = GAME().player;
-			const catboy = enc.catboy;
+			const player: Player = GAME().player;
+			const catboy: CatboyMage = enc.catboy;
 			let parse: any = {
 
 			};
@@ -1423,7 +1424,7 @@ export namespace MaliceScoutsScenes {
 	export namespace Mare {
 
 		export function LoneEncounter(levelbonus: number) {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const enemy    = new Party();
 			const mare     = new CentaurMare(levelbonus);
 			enemy.AddMember(mare);
@@ -1520,7 +1521,7 @@ export namespace MaliceScoutsScenes {
 		}
 
 		export function WinPrompt() {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const enc  = this;
 			SetGameState(GameState.Event, Gui);
 
@@ -1593,8 +1594,8 @@ export namespace MaliceScoutsScenes {
 		}
 
 		export function WinFuck(enc: any) {
-			const player = GAME().player;
-			const mare   = enc.mare;
+			const player: Player = GAME().player;
+			const mare: CentaurMare = enc.mare;
 			const p1cock = player.BiggestCock();
 			let parse: any = {
 
@@ -1912,8 +1913,8 @@ export namespace MaliceScoutsScenes {
 		}
 
 		export function WinFist(enc: any) {
-			const player = GAME().player;
-			const mare   = enc.mare;
+			const player: Player = GAME().player;
+			const mare: CentaurMare = enc.mare;
 			const p1cock = player.BiggestCock();
 			let parse: any = {
 
@@ -2023,7 +2024,7 @@ export namespace MaliceScoutsScenes {
 		}
 
 		export function LossPrompt() {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			SetGameState(GameState.Event, Gui);
 			Text.Clear();
 
@@ -2038,7 +2039,7 @@ export namespace MaliceScoutsScenes {
 			Gui.Callstack.push(() => {
 				Text.Clear();
 				Text.Add("There’s something about a huge mass of horseflesh that has a sense of weight and inevitability about it, one that you get a very keen appreciation for when the centaur mare charges and blindsides you, knocking ", parse);
-				if (player.weapon) {
+				if (player.Weapon()) {
 					Text.Add("your [weapon] out of your [hand]s", parse);
 				} else {
 					Text.Add("the wind out of you", parse);
@@ -2082,7 +2083,7 @@ export namespace MaliceScoutsScenes {
 		}
 
 		export function LossFacesit(enc: any) {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			let parse: any = {
 
 			};
@@ -2158,7 +2159,7 @@ export namespace MaliceScoutsScenes {
 	export namespace Goat {
 
 		export function LoneEncounter(levelbonus: number) {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const party: Party = GAME().party;
 			const enemy    = new Party();
 			const goat     = new GoatAlchemist(levelbonus);
@@ -2274,8 +2275,8 @@ export namespace MaliceScoutsScenes {
 		}
 
 		export function WinTurnTables(enc: any) {
-			const player = GAME().player;
-			const goat = enc.goat;
+			const player: Player = GAME().player;
+			const goat: GoatAlchemist = enc.goat;
 			let parse: any = {
 
 			};
@@ -2844,7 +2845,7 @@ export namespace MaliceScoutsScenes {
 		}
 
 		export function LossPrompt() {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			SetGameState(GameState.Event, Gui);
 			Text.Clear();
 
@@ -2871,7 +2872,7 @@ export namespace MaliceScoutsScenes {
 		}
 
 		export function LossEntry(enc: any) {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			let parse: any = {
 
 			};
@@ -3329,7 +3330,7 @@ export namespace MaliceScoutsScenes {
 
 	export namespace Group {
 		export function GroupEncounter(levelbonus: number) {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const party: Party = GAME().party;
 			const enemy    = new Party();
 			const catboy   = new CatboyMage(levelbonus);
@@ -3404,7 +3405,7 @@ export namespace MaliceScoutsScenes {
 		}
 
 		export function WinPrompt() {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const enc  = this;
 			SetGameState(GameState.Event, Gui);
 
@@ -3455,7 +3456,7 @@ export namespace MaliceScoutsScenes {
 		}
 
 		export function LossPrompt() {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const party: Party = GAME().party;
 			SetGameState(GameState.Event, Gui);
 			Text.Clear();
@@ -3518,8 +3519,8 @@ export namespace MaliceScoutsScenes {
 		}
 
 		export function LossCatboyForcedTF(enc: any) {
-			const player = GAME().player;
-			const catboy = enc.catboy;
+			const player: Player = GAME().player;
+			const catboy: CatboyMage = enc.catboy;
 
 			let parse: any = {
 
@@ -3738,7 +3739,7 @@ export namespace MaliceScoutsScenes {
 		}
 
 		export function LossMagicalBondage(enc: any) {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const party: Party = GAME().party;
 			let parse: any = {
 				hisher : player.mfTrue("his", "her"),
@@ -3836,9 +3837,9 @@ export namespace MaliceScoutsScenes {
 					Text.Add("try as you might to resist it, you can’t help but feel a thrill of lustful pleasure as your body betrays you, trying to make the best of a bad situation. The spirit is strong but the flesh is weak, as the saying goes, and a muffled moan inadvertently escapes your throat, working its way about the leather bit in your mouth.", parse);
 				} else if (player.SubDom() >= -30) {
 					Text.Add("you bite down hard on the bit in your mouth as your ample tush takes more and more abuse. Whether you feel that way is anyone’s guess, but your body is actively getting increasingly aroused by being subjected to the machine’s furious spanking.", parse);
-		} else {
+				} else {
 					Text.Add("you feel yourself begin to give way wholly to the perversely pleasurable abuse, reveling in being paddled faster than any creature could reasonably do to you. Being tied up like this and spanked over and over again is so much fun, you can’t help but feel like a slut for taking so much enjoyment in being so submissive…", parse);
-		}
+				}
 				Text.NL();
 				Text.Add("The machine’s paddles come and go; your bodacious booty jiggles to and fro. Quivering and wobbling like a pair of firm jellies on a plate, they manage to cushion some of the brunt from the blows rapidly landing on your tush, turning your thoughts from pain to arousal.", parse);
 			} else if (player.Butt().Size() < 4) {
@@ -3944,7 +3945,7 @@ export namespace MaliceScoutsScenes {
 					Text.Add(", much to your chagrin,", parse);
 				} else if (player.SubDom() < -30) {
 					Text.Add(" wonderfully and gloriously", parse);
-		}
+				}
 				Text.Add(" relieved at what you’ve done.", parse);
 				Text.NL();
 			}
@@ -4058,8 +4059,8 @@ export namespace MaliceScoutsScenes {
 		}
 
 		export function LossCatRape(enc: any) {
-			const player = GAME().player;
-			const catboy = enc.catboy;
+			const player: Player = GAME().player;
+			const catboy: CatboyMage = enc.catboy;
 
 			let parse: any = {
 

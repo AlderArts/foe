@@ -16,6 +16,8 @@ import { Element } from "../damagetype";
 import { EncounterTable } from "../encountertable";
 import { Entity } from "../entity";
 import { Sex } from "../entity-sex";
+import { Player } from "../event/player";
+import { Terry } from "../event/terry";
 import { GAME, GameCache, TimeStep } from "../GAME";
 import { GameState, SetGameState } from "../gamestate";
 import { Gui } from "../gui";
@@ -145,8 +147,8 @@ export enum MothgirlFlags {
 export namespace MothgirlScenes {
 
 	export function LoneEnc() {
-		const player = GAME().player;
-		const terry = GAME().terry;
+		const player: Player = GAME().player;
+		const terry: Terry = GAME().terry;
 		const party: Party = GAME().party;
 		const enemy = new Party();
 		const moth = new Mothgirl();
@@ -298,9 +300,9 @@ export namespace MothgirlScenes {
 	}
 
 	export function WinPrompt() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const enc = this;
-		const moth = enc.moth;
+		const moth: Mothgirl = enc.moth;
 		SetGameState(GameState.Event, Gui);
 
 		const cocksInAss = player.CocksThatFit(moth.Butt(), undefined, 5);
@@ -350,7 +352,7 @@ export namespace MothgirlScenes {
 	}
 
 	export function WinTitfuck(enc: any) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const p1cock = player.BiggestCock();
 		const hugecock = p1cock.Len() > 20;
 
@@ -408,8 +410,8 @@ export namespace MothgirlScenes {
 	}
 
 	export function WinAnal(enc: any, cocksInAss: Cock[]) {
-		const player = GAME().player;
-		const moth = enc.moth;
+		const player: Player = GAME().player;
+		const moth: Mothgirl = enc.moth;
 		const p1cock = player.BiggestCock(cocksInAss);
 		const strapon = p1cock.isStrapon;
 		const hugecock = p1cock.Len() > 50;
@@ -495,9 +497,9 @@ export namespace MothgirlScenes {
 			Text.Add("You grit your teeth and continue thrusting as you bring yourself to orgasm at the moth's expense, hammering your strapon deep into her one last time.", parse);
 		} else if (cocksInAss.length > 1) {
 			Text.Add("You blast a thick, creamy double nut deep in the moth-girl's pussy and ass at once, filling both her holes with your spooge until it's drooling out around your pistoning members.", parse);
-	} else {
+		} else {
 			Text.Add("You blast a thick, creamy nut deep in the moth-girl's ass, basting her bowels with cum. She squirms under your grasp, fingers digging deep into her cunt to try and reach climax herself as you pump her full of spooge.", parse);
-	}
+		}
 		parse.c = cocksInAss.length > 1 ? "your second cock" : "her fingers";
 		Text.Add(" She joins you in orgasm a moment later, spurred on by the hard fucking: pussyjuices squirt out around [c] and she chokes back a scream as she joins you in bliss.", parse);
 		Text.NL();
@@ -511,8 +513,8 @@ export namespace MothgirlScenes {
 	}
 
 	export function WinCunn(enc: any) {
-		const player = GAME().player;
-		const moth = enc.moth;
+		const player: Player = GAME().player;
+		const moth: Mothgirl = enc.moth;
 
 		let parse: any = {
 			cocks() { return player.MultiCockDesc(); },
@@ -569,10 +571,10 @@ export namespace MothgirlScenes {
 	}
 
 	export function Loss(enc: any, traded?: boolean) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 
-		const moth = enc.moth;
+		const moth: Mothgirl = enc.moth;
 		const p1cock = player.BiggestCock();
 		traded = traded || enc.coin <= 0;
 
@@ -714,9 +716,9 @@ export namespace MothgirlScenes {
 				Text.Add("from tip to base", parse);
 			} else if (p1cock.Len() < 35) {
 				Text.Add("until her cunt is stretched to the breaking point around your girth member, and you can see your tip poking out from her belly", parse);
-	} else {
+			} else {
 				Text.Add(", massive behemoth that it is. She grunts and groans, desperately forcing herself down your tremendous dong until she's as mounted on your cock as she's liable to get", parse);
-	}
+			}
 			Text.Add(". Once she's planted on you, it doesn't take long for the moth-girl to start moving, alternatively bouncing and grinding in your lap, mashing her boobs in your face until they completely black out your world.", parse);
 			Text.NL();
 			Text.Add("Your captor giggles and wiggles her shoulders, sending quakes of boobflesh slapping against your cheeks. Swallowed in warm, wet darkness, all you can do is clutch at the moth's body in a desperate attempt to hold her back. You're completely ineffectual; blind and wracked by waves of pleasure, left utterly at the moth-girl's mercy as she bounces on your cock. Your fingers find some purchase on the soft swells of her ass cheeks and you dig into them, squeezing and kneading the bandit's butt until she squeals with pleasure, moving faster in response.", parse);

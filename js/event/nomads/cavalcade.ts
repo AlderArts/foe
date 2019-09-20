@@ -5,6 +5,7 @@ import { GetDEBUG } from "../../../app";
 import { Gender } from "../../body/gender";
 import { RaceScore } from "../../body/race";
 import { Cavalcade } from "../../cavalcade";
+import { ICavalcadePlayer } from "../../cavalcade-player";
 import { EncounterTable } from "../../encountertable";
 import { GAME, TimeStep } from "../../GAME";
 import { GameState, SetGameState } from "../../gamestate";
@@ -14,6 +15,7 @@ import { StrapOnItems } from "../../items/strapon";
 import { IChoice } from "../../link";
 import { Party } from "../../party";
 import { Text } from "../../text";
+import { Player } from "../player";
 import { CaleSexScenes } from "./cale-sex";
 import { EstevanFlags } from "./estevan-flags";
 
@@ -34,7 +36,7 @@ export namespace NCavalcadeScenes {
 	}
 
 	export function RegularGame() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const rosalin = GAME().rosalin;
 		const estevan = GAME().estevan;
@@ -109,11 +111,11 @@ export namespace NCavalcadeScenes {
 	}
 
 	export function PrepCoinGame() {
-		const player = GAME().player;
+		const player: ICavalcadePlayer = GAME().player;
 		const party: Party = GAME().party;
-		const rosalin = GAME().rosalin;
-		const cale = GAME().cale;
-		const estevan = GAME().estevan;
+		const rosalin: ICavalcadePlayer = GAME().rosalin;
+		const cale: ICavalcadePlayer = GAME().cale;
+		const estevan: ICavalcadePlayer = GAME().estevan;
 		const onEnd = () => {
 			const parse: any = {
 				playername : player.name,
@@ -179,10 +181,10 @@ export namespace NCavalcadeScenes {
 	}
 
 	export function PrepSexyGame() {
-		const player = GAME().player;
-		const rosalin = GAME().rosalin;
-		const cale = GAME().cale;
-		const estevan = GAME().estevan;
+		const player: ICavalcadePlayer = GAME().player;
+		const rosalin: ICavalcadePlayer = GAME().rosalin;
+		const cale: ICavalcadePlayer = GAME().cale;
+		const estevan: any = GAME().estevan;
 		const token = 50;
 
 		const parse: any = {
@@ -324,7 +326,7 @@ export namespace NCavalcadeScenes {
 	}
 
 	export function CheatGame() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const rosalin = GAME().rosalin;
 		const cale = GAME().cale;
@@ -484,7 +486,7 @@ export namespace NCavalcadeScenes {
 	}
 
 	export function SexyPlayerWin(cheat: boolean) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const cale = GAME().cale;
 		const parse: any = {
 			playername : player.name,

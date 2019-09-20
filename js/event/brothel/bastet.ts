@@ -13,6 +13,7 @@ import { Gui } from "../../gui";
 import { IChoice } from "../../link";
 import { Text } from "../../text";
 import { TF } from "../../tf";
+import { Player } from "../player";
 import { LucilleFlags } from "./lucille-flags";
 
 enum BastetState {
@@ -61,7 +62,7 @@ export namespace BastetScenes {
 	}
 
 	export function IntroEntryPoint() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const bastet = GAME().bastet;
 		const parse: any = {
 			armor : player.ArmorDesc(),
@@ -127,7 +128,7 @@ export namespace BastetScenes {
 	}
 
 	export function TFBlock() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		let parse: any = {};
 		parse = player.ParserTags(parse);
@@ -308,7 +309,7 @@ export namespace BastetScenes {
 	}
 
 	export function Birth() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const lucille = GAME().lucille;
 
 		const parse: any = {

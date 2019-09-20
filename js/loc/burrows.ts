@@ -46,13 +46,13 @@ export class Burrows {
 		return this.flags.BrainyTrait >= BurrowsFlags.TraitFlags.Active;
 	}
 	public LagonDefeated() {
-		return GAME().lagon.flags.Usurp & LagonFlags.Usurp.Defeated;
+		return (GAME().lagon.flags.Usurp & LagonFlags.Usurp.Defeated) > 0;
 	}
 	public LagonChallenged() {
-		return GAME().lagon.flags.Usurp & LagonFlags.Usurp.FirstFight;
+		return (GAME().lagon.flags.Usurp & LagonFlags.Usurp.FirstFight) > 0;
 	}
 	public LagonAlly() {
-		return GAME().lagon.flags.Usurp & LagonFlags.Usurp.SidedWith;
+		return (GAME().lagon.flags.Usurp & LagonFlags.Usurp.SidedWith) > 0;
 	}
 	// TODO
 	public LagonChained() {
@@ -60,7 +60,7 @@ export class Burrows {
 	}
 	public LagonJudged() {
 		const vena = GAME().vena;
-		return vena.flags.Met & VenaFlags.Met.Judgement;
+		return (vena.flags.Met & VenaFlags.Met.Judgement) > 0;
 	}
 	// TODO
 	public LagonPit() {
@@ -68,7 +68,7 @@ export class Burrows {
 	}
 	public VenaRestored() {
 		const vena = GAME().vena;
-		return vena.flags.Met & VenaFlags.Met.Restored;
+		return (vena.flags.Met & VenaFlags.Met.Restored) > 0;
 	}
 
 	public ToStorage() {

@@ -12,6 +12,7 @@ import { EncounterTable } from "../../encountertable";
 import { Entity } from "../../entity";
 import { Sex } from "../../entity-sex";
 import { Event } from "../../event";
+import { Player } from "../../event/player";
 import { TwinsFlags } from "../../event/royals/twins-flags";
 import { GAME, MoveToLocation, NAV, TimeStep, WORLD, WorldTime } from "../../GAME";
 import { GameState, SetGameState } from "../../gamestate";
@@ -57,7 +58,7 @@ export namespace KrawitzScenes {
 
 	export function SetupStats() {
 		const rigard = GAME().rigard;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 
 		stat = {};
@@ -209,7 +210,7 @@ export namespace KrawitzScenes {
 		"Servants'", true, true,
 		undefined,
 		() => {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const party: Party = GAME().party;
 
 			const parse: any = {
@@ -548,7 +549,7 @@ export namespace KrawitzScenes {
 		},
 		() => {
 			const rigard = GAME().rigard;
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const party: Party = GAME().party;
 
 			party.location = KrawitzLoc.Mansion.Study;
@@ -701,7 +702,7 @@ export namespace KrawitzScenes {
 
 	export function FightKrawitz() {
 		const rigard = GAME().rigard;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const parse: any = {};
 		if (rigard.Krawitz.Duel > 0) {
@@ -798,7 +799,7 @@ export namespace KrawitzScenes {
 	// Mansion: Storeroom
 	//
 	KrawitzLoc.Mansion.Storeroom.description = () => {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		Text.Add("You are in a rather dusty storeroom, filled with boxes, crates and chests. A quick survey of the room reveals nothing of immediate value. A small glass cabinet filled with various flasks, partly obscured by a rolled up carpet, looks like it could be interesting.");
 		if (!stat.TFItem) {
@@ -825,7 +826,7 @@ export namespace KrawitzScenes {
 		"Cabinet", () => !stat.LustPotion, true,
 		undefined,
 		() => {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 
 			stat.LustPotion = true;
 			Text.Clear();
@@ -848,7 +849,7 @@ export namespace KrawitzScenes {
 
 	KrawitzLoc.Mansion.Storeroom.events.push(new Link(
 		"Chest", () => {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			return !stat.TFItem && (stat.ChestLocKnown || player.Int() > 40);
 		}, true,
 		undefined,
@@ -909,7 +910,7 @@ export namespace KrawitzScenes {
 
 	export function Scouting() {
 		const rigard = GAME().rigard;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const parse: any = {
 
@@ -1145,7 +1146,7 @@ export namespace KrawitzScenes {
 	}
 
 	export function SneakingIn() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 
 		const parse: any = {
@@ -1262,7 +1263,7 @@ export namespace KrawitzScenes {
 	}
 
 	export function FoundOut(entity: EncType, num: number, gender?: Gender) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		let parse: any = {
 			entity : entity === EncType.Guard ? "the guard" : "the servant",
@@ -1631,7 +1632,7 @@ export namespace KrawitzScenes {
 	}
 
 	export function StealingClothes() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const parse: any = {
 
@@ -1683,7 +1684,7 @@ export namespace KrawitzScenes {
 	}
 
 	export function Bathhouse() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 
 		let parse: any = {
@@ -2040,7 +2041,7 @@ export namespace KrawitzScenes {
 
 	export function Aftermath() {
 		const rigard = GAME().rigard;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const twins = GAME().twins;
 		const lei = GAME().lei;
@@ -2399,7 +2400,7 @@ export namespace KrawitzScenes {
 	let twinsTalkLei: boolean;
 
 	export function TwinsTalk() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const parse: any = {
 			playername : player.name,
 		};
@@ -2501,7 +2502,7 @@ export namespace KrawitzScenes {
 
 	export function TwinsMoreTalk() {
 		const rigard = GAME().rigard;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const twins = GAME().twins;
 
 		const parse: any = {
@@ -2542,7 +2543,7 @@ export namespace KrawitzScenes {
 
 	export function Duel() {
 		const rigard = GAME().rigard;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		SetGameState(GameState.Event, Gui);
 		const parse: any = {

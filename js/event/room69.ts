@@ -17,6 +17,7 @@ import { Party } from "../party";
 import { Text } from "../text";
 import { GlobalScenes } from "./global";
 import { KiakaiFlags } from "./kiakai-flags";
+import { Player } from "./player";
 import { Room69Flags } from "./room69-flags";
 
 export class Room69 extends Entity {
@@ -95,7 +96,7 @@ export namespace Room69Scenes {
 	let introTriedArgue: boolean;
 
 	export function Discovering69() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const parse: any = {
 		};
@@ -129,7 +130,7 @@ export namespace Room69Scenes {
 
 	export function Discovering69Prompt() {
 		const room69 = GAME().room69;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const parse: any = {
 		};
@@ -202,7 +203,7 @@ export namespace Room69Scenes {
 	export function Discovering69WhatNow() {
 		const room69 = GAME().room69;
 		const party: Party = GAME().party;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const world = WORLD();
 
 		const parse: any = {
@@ -422,7 +423,7 @@ export namespace Room69Scenes {
 	export function Discovering69Sex() {
 		const room69 = GAME().room69;
 		const party: Party = GAME().party;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const kiakai = GAME().kiakai;
 		const lei = GAME().lei;
 		const miranda = GAME().miranda;
@@ -763,7 +764,7 @@ export namespace Room69Scenes {
 
 	export function ApologizeTo69ForBreakingDoor() {
 		const room69 = GAME().room69;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const parse: any = {
 
@@ -847,7 +848,7 @@ export namespace Room69Scenes {
 
 	export function ApologizeTo69ForBeingMean() {
 		const room69 = GAME().room69;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const parse: any = {
 			hisher : player.mfTrue("his", "her"),

@@ -7,7 +7,7 @@ CHANGELOG for Fall of Eden
 
 Version 0.5.3
 -------------
-* 
+* Fixed numerous minor logic errors in scenes discovered by applying strict typing.
 
 --------------------------------------------
              PREVIOUS VERSIONS
@@ -57,10 +57,10 @@ Version 0.5.0
  - The entire code base has been converted to ES6 modules and TypeScript instead of JavaScript, making much of the code strictly type checked (finding/fixing a fair number of obscure bugs), and preventing pollution of the global namespace.
  - The build system has been changed from gulp to webpack.
  - Node.js is used to get the latest versions of all vendor packages.
- - More than anything else, this gives me a more stable platform to add content to. 
+ - More than anything else, this gives me a more stable platform to add content to.
 * What does this update mean for you as a player? It shouldn't change anything, but due to the magnitude of the changes, it's possible that some errors have sneaked their way through. I'll be releasing a slightly bigger, non-uglified development version that contains some more backtrace information until things stabilize, please report any issues that show up.
  - For those that used the player object in the console to cheat, this method is unfortunately not available anymore. If there's requests for that kind of thing, I might consider making the objects accessible in some way.
- - The application has been tested on the latest versions of Chrome and Firefox and seem to work fine on them. If you run into any issues starting the game, please append what browser/version you are using. 
+ - The application has been tested on the latest versions of Chrome and Firefox and seem to work fine on them. If you run into any issues starting the game, please append what browser/version you are using.
 
 Version 0.4.24
 --------------
@@ -1266,7 +1266,7 @@ Version 0.2h
 
   parseOptions = {HeShe: kiakai.HeShe(), name: kiakai.name};
   Text.AddOutput("[name] is an elf. [HeShe] is pious.", parseOptions);
-  
+
 * Fixed some issues that would cause 2nd playthrough players to get multiple genetalia
 * Code conforms with closure compiler
 * Fixed a bunch of typos
@@ -1287,14 +1287,14 @@ Version 0.2f
 ------------
 * Write intro scenes
  - Light aspect (up until arriving on Eden)
- 
+
 * Locking off locations
  - Removed Ranch
  - Locked off Nomad camp temporarily (effectively sealing off the explorable world)
 
 * Improve way that clitCocks are handled (too much hassle as it is)
  - Find a way to add clitCock to cock array and treat as ordinary cock
- 
+
 * Improved appearance screen slightly
 * Fixed setting eye, skin and hair color
 * Fixed adding/removing appendages (tail, horns)
@@ -1336,7 +1336,7 @@ Version 0.2d
 ------------
 * Added initial part of "Hey there" encounter for Miranda in the bar
  - fixed bugs
- 
+
 * Button graphics
 * Explore and People tabs are sorted lexically
 * Design HP/MP bars for squadbased combat

@@ -15,6 +15,7 @@ import { Cassidy, CassidySpar } from "./cassidy";
 import { CassidyFlags } from "./cassidy-flags";
 import { CassidySexScenes, CassidySparSexScenes } from "./cassidy-sex";
 import { MirandaFlags } from "./miranda-flags";
+import { Player } from "./player";
 
 let shopBought: boolean;
 let shopSold: boolean;
@@ -23,7 +24,7 @@ let shopSold: boolean;
 export namespace CassidyScenes {
 
 	export function First() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const cassidy: Cassidy = GAME().cassidy;
 		const parse: any = {
 			playername : player.name,
@@ -76,7 +77,7 @@ export namespace CassidyScenes {
 
 	// The Pale Flame interior
 	export function ShopDesc() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const cassidy: Cassidy = GAME().cassidy;
 		const miranda = GAME().miranda;
 		let parse: any = {};
@@ -241,7 +242,7 @@ export namespace CassidyScenes {
 	}
 
 	export function Prompt() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const cassidy: Cassidy = GAME().cassidy;
 
 		let parse: any = {
@@ -438,7 +439,7 @@ export namespace CassidyScenes {
 	}
 
 	export function TalkPrompt() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const cassidy: Cassidy = GAME().cassidy;
 
 		let parse: any = {
@@ -685,7 +686,7 @@ export namespace CassidyScenes {
 	}
 
 	export function HeadInside() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const cassidy: Cassidy = GAME().cassidy;
 
 		let parse: any = {
@@ -832,7 +833,7 @@ export namespace CassidyScenes {
 	}
 
 	export function InsidePrompt() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const cassidy: Cassidy = GAME().cassidy;
 
 		let parse: any = {
@@ -918,7 +919,7 @@ export namespace CassidyScenes {
 	}
 
 	export function InsideMeal() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const cassidy: Cassidy = GAME().cassidy;
 		let parse: any = {
 			playername : player.name,
@@ -1134,7 +1135,7 @@ export namespace CassidyScenes {
 	}
 
 	export function InsideTalkPrompt() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const cassidy: Cassidy = GAME().cassidy;
 
 		let parse: any = {
@@ -1533,7 +1534,7 @@ export namespace CassidyScenes {
 	}
 
 	export function ManagingShop() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const cassidy: Cassidy = GAME().cassidy;
 		let parse: any = {
 			playername : player.name,
@@ -1635,7 +1636,7 @@ export namespace CassidyScenes {
 	}
 
 	export function ManagingShopAccept() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const cassidy: Cassidy = GAME().cassidy;
 		let parse: any = {
 			playername : player.name,
@@ -1679,7 +1680,7 @@ export namespace CassidyScenes {
 	}
 
 	export function ManagingShop1(score: number) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const parse: any = {
 
 		};
@@ -2219,7 +2220,7 @@ export namespace CassidyScenes {
 	}
 
 	export function BigReveal() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const cassidy: Cassidy = GAME().cassidy;
 
 		const parse: any = {
@@ -2428,7 +2429,7 @@ export namespace CassidyScenes {
 
 	export function Model() {
 		const party: Party = GAME().party;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const cassidy: Cassidy = GAME().cassidy;
 
 		let parse: any = {
@@ -2757,7 +2758,7 @@ export namespace CassidyScenes {
 
 	// FEMINIZING
 	export function FemTalk2() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const cassidy: Cassidy = GAME().cassidy;
 
 		const parse: any = {

@@ -11,13 +11,15 @@ import { GameState, SetGameState } from "../../gamestate";
 import { Gui } from "../../gui";
 import { QuestItems } from "../../items/quest";
 import { IChoice } from "../../link";
+import { Burrows } from "../../loc/burrows";
 import { BurrowsFlags } from "../../loc/burrows-flags";
 import { SetGameOverButton } from "../../main-gameover";
 import { Party } from "../../party";
 import { PregnancyHandler } from "../../pregnancy";
 import { Text } from "../../text";
 import { Time } from "../../time";
-import { LagonBrute, LagonRegular } from "./lagon";
+import { Player } from "../player";
+import { Lagon, LagonBrute, LagonRegular } from "./lagon";
 import { LagonFlags } from "./lagon-flags";
 import { OpheliaBrute } from "./ophelia";
 import { OpheliaFlags } from "./ophelia-flags";
@@ -31,7 +33,7 @@ export function InitLagon(opheliaScenes: any) {
 export namespace LagonScenes {
 
     export function LagonImpregnate(mother: Entity, slot?: number) {
-        const lagon = GAME().lagon;
+        const lagon: Lagon = GAME().lagon;
         mother.PregHandler().Impregnate({
             slot   : slot || PregnancyHandler.Slot.Vag,
             mother,
@@ -44,8 +46,8 @@ export namespace LagonScenes {
     }
 
     export function InteractRuler() {
-        const lagon = GAME().lagon;
-        const burrows = GAME().burrows;
+        const lagon: Lagon = GAME().lagon;
+        const burrows: Burrows = GAME().burrows;
         const parse: any = {
 
         };
@@ -77,9 +79,9 @@ export namespace LagonScenes {
     }
 
     export function RulerPrompt() {
-        const player = GAME().player;
-        const lagon = GAME().lagon;
-        const burrows = GAME().burrows;
+        const player: Player = GAME().player;
+        const lagon: Lagon = GAME().lagon;
+        const burrows: Burrows = GAME().burrows;
         const parse: any = {
             playername : player.name,
         };
@@ -200,7 +202,7 @@ export namespace LagonScenes {
 
     // TODO
     export function RulerSexPrompt() {
-        const lagon = GAME().lagon;
+        const lagon: Lagon = GAME().lagon;
         const parse: any = {
 
         };
@@ -260,8 +262,8 @@ export namespace LagonScenes {
     }
 
     export function RulerBlowjob() {
-        const player = GAME().player;
-        const lagon = GAME().lagon;
+        const player: Player = GAME().player;
+        const lagon: Lagon = GAME().lagon;
         const parse: any = {
 
         };
@@ -310,9 +312,9 @@ export namespace LagonScenes {
     }
 
     export function RulerBlowjobEntrypoint() {
-        const player = GAME().player;
-        const lagon = GAME().lagon;
-        const burrows = GAME().burrows;
+        const player: Player = GAME().player;
+        const lagon: Lagon = GAME().lagon;
+        const burrows: Burrows = GAME().burrows;
         const p1cock = player.BiggestCock();
 
         let parse: any = {
@@ -563,8 +565,8 @@ export namespace LagonScenes {
     }
 
     export function RulerBlowjobAftermath(opheliaPresent: boolean) {
-        const player = GAME().player;
-        const lagon = GAME().lagon;
+        const player: Player = GAME().player;
+        const lagon: Lagon = GAME().lagon;
 
         const parse: any = {
 
@@ -588,8 +590,8 @@ export namespace LagonScenes {
 
     // TODO
     export function RulerGetFuckedEntrypoint(opheliaPresent: boolean) {
-        const player = GAME().player;
-        const lagon = GAME().lagon;
+        const player: Player = GAME().player;
+        const lagon: Lagon = GAME().lagon;
 
         const p1cock = player.BiggestCock();
         const lagonSize = lagon.FirstCock().Size();
@@ -754,10 +756,10 @@ export namespace LagonScenes {
 
     // TODO
     export function RulerGetFuckedEntrypoint2(angry: boolean, target: BodyPartType, opheliaPresent: boolean) {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const ophelia = GAME().ophelia;
-        const lagon = GAME().lagon;
-        const burrows = GAME().burrows;
+        const lagon: Lagon = GAME().lagon;
+        const burrows: Burrows = GAME().burrows;
 
         let parse: any = {
 
@@ -1035,8 +1037,8 @@ export namespace LagonScenes {
     }
 
     export function AlliedFirst() {
-        const player = GAME().player;
-        const lagon = GAME().lagon;
+        const player: Player = GAME().player;
+        const lagon: Lagon = GAME().lagon;
 
         const parse: any = {
 
@@ -1105,12 +1107,12 @@ export namespace LagonScenes {
     }
 
     export function RulerTalkPrompt() {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const party: Party = GAME().party;
         const roa = GAME().roa;
         const ophelia = GAME().ophelia;
-        const lagon = GAME().lagon;
-        const burrows = GAME().burrows;
+        const lagon: Lagon = GAME().lagon;
+        const burrows: Burrows = GAME().burrows;
 
         const parse: any = {
             tongue() { return player.TongueDesc(); },
@@ -1507,7 +1509,7 @@ export namespace LagonScenes {
     export function PitDefianceWin() {
         const party: Party = GAME().party;
         const ophelia = GAME().ophelia;
-        const lagon = GAME().lagon;
+        const lagon: Lagon = GAME().lagon;
 
         SetGameState(GameState.Event, Gui);
         const enc = this;
@@ -1551,9 +1553,9 @@ export namespace LagonScenes {
     }
 
     export function PitDefianceLoss() {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const party: Party = GAME().party;
-        const lagon = GAME().lagon;
+        const lagon: Lagon = GAME().lagon;
 
         SetGameState(GameState.Event, Gui);
         let parse: any = {
@@ -1641,7 +1643,7 @@ export namespace LagonScenes {
     }
 
     export function BadendPit() {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const party: Party = GAME().party;
 
         const parse: any = {
@@ -1754,7 +1756,7 @@ export namespace LagonScenes {
     }
 
     export function ReturnToBurrowsAfterFight() {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const party: Party = GAME().party;
         const ophelia = GAME().ophelia;
 
@@ -1842,9 +1844,9 @@ export namespace LagonScenes {
     }
 
     export function ReturnToBurrowsAfterScepter() {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const party: Party = GAME().party;
-        const burrows = GAME().burrows;
+        const burrows: Burrows = GAME().burrows;
         const kiakai = GAME().kiakai;
 
         const parse: any = {
@@ -2000,9 +2002,9 @@ export namespace LagonScenes {
     }
 
     export function LossToRegularLagon() {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const party: Party = GAME().party;
-        const lagon = GAME().lagon;
+        const lagon: Lagon = GAME().lagon;
 
         SetGameState(GameState.Event, Gui);
 
@@ -2145,10 +2147,10 @@ export namespace LagonScenes {
     }
 
     export function WinToBruteLagon() {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const party: Party = GAME().party;
         const ophelia = GAME().ophelia;
-        const lagon = GAME().lagon;
+        const lagon: Lagon = GAME().lagon;
 
         SetGameState(GameState.Event, Gui);
 
@@ -2244,7 +2246,7 @@ export namespace LagonScenes {
     }
 
     export function LossToOphelia() {
-        const player = GAME().player;
+        const player: Player = GAME().player;
 
         SetGameState(GameState.Event, Gui);
         const enc = this;
@@ -2301,9 +2303,9 @@ export namespace LagonScenes {
     }
 
     export function WinToOphelia() {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const ophelia = GAME().ophelia;
-        const lagon = GAME().lagon;
+        const lagon: Lagon = GAME().lagon;
 
         SetGameState(GameState.Event, Gui);
         const enc = this;

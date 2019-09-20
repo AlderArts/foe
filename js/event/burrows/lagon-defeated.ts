@@ -8,12 +8,14 @@ import { AlchemySpecial } from "../../items/alchemyspecial";
 import { IChoice } from "../../link";
 import { Party } from "../../party";
 import { Text } from "../../text";
+import { Player } from "../player";
+import { Lagon } from "./lagon";
 import { LagonFlags } from "./lagon-flags";
 
 export namespace LagonDScenes {
 	export function RoomApproach() {
 		const party: Party = GAME().party;
-		const lagon = GAME().lagon;
+		const lagon: Lagon = GAME().lagon;
 
 		const parse: any = {
 
@@ -59,7 +61,7 @@ export namespace LagonDScenes {
 
 	export function Prompt() {
 		const party: Party = GAME().party;
-		const lagon = GAME().lagon;
+		const lagon: Lagon = GAME().lagon;
 
 		const parse: any = {
 			scepter : "scepter", // TODO
@@ -116,8 +118,8 @@ export namespace LagonDScenes {
 	}
 
 	export function SexPrompt() {
-		const player = GAME().player;
-		const lagon = GAME().lagon;
+		const player: Player = GAME().player;
+		const lagon: Lagon = GAME().lagon;
 
 		let parse: any = {
 
@@ -175,7 +177,7 @@ export namespace LagonDScenes {
 
 		options.push({nameStr : "Pitch anal",
 			tooltip : Text.Parse("He’s just begging for your [cock] up his tight little bunny-butt.", parse),
-			enabled : player.BiggestCock(undefined, true),
+			enabled : player.BiggestCock(undefined, true) !== undefined,
 			func() {
 				LagonDScenes.PitchAnal();
 			},
@@ -215,9 +217,9 @@ export namespace LagonDScenes {
 	}
 
 	export function PitchAnal() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const lagon = GAME().lagon;
+		const lagon: Lagon = GAME().lagon;
 
 		const p1cock = player.BiggestCock(undefined, true);
 		const strapon = p1cock.isStrapon;
@@ -535,8 +537,8 @@ export namespace LagonDScenes {
 	}
 
 	export function ScepterEntry() {
-		const player = GAME().player;
-		const lagon = GAME().lagon;
+		const player: Player = GAME().player;
+		const lagon: Lagon = GAME().lagon;
 
 		const parse: any = {
 			playername : player.name,
@@ -634,8 +636,8 @@ export namespace LagonDScenes {
 	}
 
 	export function ScepterPrompt() {
-		const player = GAME().player;
-		const lagon = GAME().lagon;
+		const player: Player = GAME().player;
+		const lagon: Lagon = GAME().lagon;
 
 		const parse: any = {
 			manwoman : player.mfTrue("man", "woman"),
@@ -712,7 +714,7 @@ export namespace LagonDScenes {
 	}
 
 	export function ScepterSexPrompt() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const parse: any = {
 
@@ -721,7 +723,7 @@ export namespace LagonDScenes {
 		const options: IChoice[] = [];
 		options.push({nameStr : "Pitch anal",
 			tooltip : Text.Parse("If he’s that eager to get his ass tapped, why not oblige him?", parse),
-			enabled : player.BiggestCock(undefined, true),
+			enabled : player.BiggestCock(undefined, true) !== undefined,
 			func() {
 				LagonDScenes.ScepterPitchAnal();
 			},
@@ -748,9 +750,9 @@ export namespace LagonDScenes {
 	}
 
 	export function ScepterPitchAnal() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const lagon = GAME().lagon;
+		const lagon: Lagon = GAME().lagon;
 
 		const p1cock = player.BiggestCock(undefined, true);
 		const strapon = p1cock.isStrapon;
@@ -1268,7 +1270,7 @@ export namespace LagonDScenes {
 	}
 
 	export function Punishment() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 
 		let parse: any = {
@@ -1440,7 +1442,7 @@ export namespace LagonDScenes {
 	}
 
 	export function PunishmentPC() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const vena = GAME().vena;
 
 		const p1cock = player.BiggestCock(undefined, true);
@@ -1618,8 +1620,8 @@ export namespace LagonDScenes {
 	}
 
 	export function PunishmentPCCont(came: boolean) {
-		const player = GAME().player;
-		const lagon = GAME().lagon;
+		const player: Player = GAME().player;
+		const lagon: Lagon = GAME().lagon;
 
 		const p1cock = player.BiggestCock(undefined, true);
 		const strapon = p1cock.isStrapon;
@@ -1926,7 +1928,7 @@ export namespace LagonDScenes {
 	}
 
 	export function PunishmentVena() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const parse: any = {
 			playername : player.name,
@@ -2125,7 +2127,7 @@ export namespace LagonDScenes {
 	}
 
 	export function PunishmentVenaCont() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const parse: any = {
 			playername : player.name,

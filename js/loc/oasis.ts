@@ -3,6 +3,7 @@ import * as _ from "lodash";
 import { Gender } from "../body/gender";
 import { EncounterTable } from "../encountertable";
 import { Entity } from "../entity";
+import { Player } from "../event/player";
 import { GAME, TimeStep, WorldTime } from "../GAME";
 import { Gui } from "../gui";
 import { Item } from "../item";
@@ -153,7 +154,7 @@ export namespace OasisScenes {
 	}
 
 	export function DesertCaravanEncounter() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const oasis: Oasis = GAME().oasis;
 		let parse: any = {

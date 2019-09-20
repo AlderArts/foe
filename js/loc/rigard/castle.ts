@@ -5,6 +5,7 @@ import { AscheFlags } from "../../event/asche-flags";
 import { GlobalScenes } from "../../event/global";
 import { VaughnFlags } from "../../event/outlaws/vaughn-flags";
 import { VaughnTasksScenes } from "../../event/outlaws/vaughn-tasks";
+import { Player } from "../../event/player";
 import { TerryFlags } from "../../event/terry-flags";
 import { TerryScenes } from "../../event/terry-scenes";
 import { GAME, MoveToLocation, TimeStep, WORLD, WorldTime } from "../../GAME";
@@ -144,7 +145,7 @@ CastleLoc.Grounds.events.push(new Link(
 export namespace NobleScenes {
 
 	export function Parkland() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const parse: any = {
 
@@ -211,7 +212,7 @@ export namespace NobleScenes {
 	}
 
 	export function TheDistrict() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const terry = GAME().terry;
 		const kiakai = GAME().kiakai;
 		const cveta = GAME().cveta;
@@ -304,7 +305,7 @@ export namespace NobleScenes {
 	}
 
 	export function GuardPatrol() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const parse: any = {
 
@@ -333,7 +334,7 @@ export namespace NobleScenes {
 	}
 
 	export function AlmsForThePoor() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const rigard = GAME().rigard;
 
@@ -440,7 +441,7 @@ export namespace NobleScenes {
 	}
 
 	export function Elodie() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const rigard = GAME().rigard;
 
 		const parse: any = {
@@ -519,7 +520,7 @@ export namespace NobleScenes {
 	}
 
 	export function MagicalJackal() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const parse: any = {
 			heshe : player.mfFem("he", "she"),

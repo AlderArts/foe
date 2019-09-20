@@ -3,13 +3,14 @@ import { GAME, TimeStep } from "../../GAME";
 import { Gui } from "../../gui";
 import { IChoice } from "../../link";
 import { Text } from "../../text";
+import { Player } from "../player";
 import { LagonDScenes } from "./lagon-defeated";
 import { VenaFlags } from "./vena-flags";
 
 export namespace VenaRScenes {
 
 	export function Approach() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const parse: any = {
 			playername : player.name,
 		};
@@ -194,7 +195,7 @@ export namespace VenaRScenes {
 	}
 
 	export function LagonsFate(opts: any) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const parse: any = {
 			playername : player.name,
 		};

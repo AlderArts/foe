@@ -23,6 +23,7 @@ import { ILocForest } from "../location";
 import { Party } from "../party";
 import { Text } from "../text";
 import { Season } from "../time";
+import { Burrows } from "./burrows";
 import { BurrowsFlags } from "./burrows-flags";
 import { GladeLoc } from "./glade";
 
@@ -194,7 +195,7 @@ ForestLoc.Outskirts.enc.AddEnc(() => {
 
 ForestLoc.Outskirts.enc.AddEnc(() => {
 	return () => {
-		const burrows = GAME().burrows;
+		const burrows: Burrows = GAME().burrows;
 		const party: Party = GAME().party;
 		const parse: any = {
 
@@ -222,7 +223,7 @@ ForestLoc.Outskirts.enc.AddEnc(() => {
 		Gui.NextPrompt();
 	};
 }, 4.0, () => {
-	const burrows = GAME().burrows;
+	const burrows: Burrows = GAME().burrows;
 	return burrows.Access() && burrows.flags.HermTrait === BurrowsFlags.TraitFlags.Inactive;
 });
 

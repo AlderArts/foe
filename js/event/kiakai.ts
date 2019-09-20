@@ -21,6 +21,7 @@ import { Text } from "../text";
 import { KiakaiFlags } from "./kiakai-flags";
 import { KiakaiScenes } from "./kiakai-scenes";
 import { KiakaiSexScenes } from "./kiakai-sex";
+import { Player } from "./player";
 import { RavenFlags } from "./raven-flags";
 
 export class Kiakai extends Entity {
@@ -179,7 +180,7 @@ export class Kiakai extends Entity {
 
 	// Party interaction
 	public Interact(switchSpot: boolean) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const kiakai = GAME().kiakai;
 
 		Text.Clear();
@@ -260,7 +261,7 @@ export class Kiakai extends Entity {
 	}
 
 	public TalkPrompt() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const kiakai = GAME().kiakai;
 		const ravenmother = GAME().ravenmother;
 

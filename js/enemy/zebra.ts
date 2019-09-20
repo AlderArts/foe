@@ -12,6 +12,7 @@ import { Race } from "../body/race";
 import { Encounter } from "../combat";
 import { Entity } from "../entity";
 import { Sex } from "../entity-sex";
+import { Player } from "../event/player";
 import { GAME, TimeStep } from "../GAME";
 import { GameState, SetGameState } from "../gamestate";
 import { Gui } from "../gui";
@@ -271,7 +272,7 @@ export namespace ZebraShamanScenes {
 	}
 
 	export function LoneEncounter() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const enc = this;
 
@@ -312,7 +313,7 @@ export namespace ZebraShamanScenes {
 	}
 
 	export function OnWin() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const enc = this;
 		const zebra = enc.zebra;
@@ -339,7 +340,7 @@ export namespace ZebraShamanScenes {
 			options.push({ nameStr : "Fuck him",
 				func() {
 					ZebraShamanScenes.OnWinFuckHim(enc);
-				}, enabled : player.FirstCock(),
+				}, enabled : player.FirstCock() !== undefined,
 				tooltip : "Perhaps you can convince him to have a bit of fun with you? After all, he did assault you… letting you fuck his ass is the least he can do.",
 			});
 			if (player.FirstVag()) {
@@ -372,7 +373,7 @@ export namespace ZebraShamanScenes {
 	}
 
 	export function OnWinFuckHim(enc: any) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const zebra = enc.zebra;
 
 		const lusty = zebra.LustLevel() > 0.5;
@@ -482,7 +483,7 @@ export namespace ZebraShamanScenes {
 	}
 
 	export function OnWinVaginal(enc: any) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const zebra = enc.zebra;
 
 		const lusty = zebra.LustLevel() > 0.5;

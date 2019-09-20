@@ -3,6 +3,7 @@ import { Gender } from "../body/gender";
 import { EncounterTable } from "../encountertable";
 import { LagomorphAlpha } from "../enemy/rabbit";
 import { Event } from "../event";
+import { Lagon } from "../event/burrows/lagon";
 import { LagonDScenes } from "../event/burrows/lagon-defeated";
 import { LagonFlags } from "../event/burrows/lagon-flags";
 import { InitLagon, LagonScenes } from "../event/burrows/lagon-scenes";
@@ -10,6 +11,7 @@ import { OpheliaScenes } from "../event/burrows/ophelia-scenes";
 import { VenaRScenes } from "../event/burrows/vena-restored";
 import { VenaScenes } from "../event/burrows/vena-scenes";
 import { GlobalScenes } from "../event/global";
+import { Player } from "../event/player";
 import { GAME, MoveToLocation, TimeStep, WORLD, WorldTime } from "../GAME";
 import { Gui } from "../gui";
 import { IChoice, Link } from "../link";
@@ -17,6 +19,7 @@ import { ILocBurrows } from "../location";
 import { Party } from "../party";
 import { Text } from "../text";
 import { Season } from "../time";
+import { Burrows } from "./burrows";
 import { BurrowsFlags } from "./burrows-flags";
 
 export function InitBurrows() {
@@ -121,9 +124,9 @@ export namespace BurrowsScenes {
     }
 
     export function Arrival(alpha: any) {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const party: Party = GAME().party;
-        const burrows = GAME().burrows;
+        const burrows: Burrows = GAME().burrows;
         const parse: any = {
             skinDesc() { return player.SkinDesc(); },
             p1name() { return party.Get(1).name; },
@@ -198,7 +201,7 @@ export namespace BurrowsScenes {
     }
 
     export function ArrivalOphelia() {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const parse: any = {
             playername : player.name,
         };
@@ -224,7 +227,7 @@ export namespace BurrowsScenes {
     }
 
     export function ArrivalOpheliaTalk() {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const party: Party = GAME().party;
         const rosalin = GAME().rosalin;
 
@@ -392,7 +395,7 @@ export namespace BurrowsScenes {
     }
 
     export function ArrivalLagon() {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const parse: any = {
             playername : player.name,
             heshe      : player.mfFem("he", "she"),
@@ -437,7 +440,7 @@ export namespace BurrowsScenes {
 
     export function ArrivalLagonTalk() {
         const party: Party = GAME().party;
-        const lagon = GAME().lagon;
+        const lagon: Lagon = GAME().lagon;
         const parse: any = {
 
         };
@@ -520,7 +523,7 @@ export namespace BurrowsScenes {
 // Burrows entrance
 //
 BurrowsLoc.Entrance.description = () => {
-	const burrows = GAME().burrows;
+	const burrows: Burrows = GAME().burrows;
 	const parse: any = {
 		TreeFar : GlobalScenes.TreeFarDesc(),
 		l : burrows.LagonDefeated() ? "the lagomorph" : "Lagon’s",
@@ -570,7 +573,7 @@ BurrowsLoc.Entrance.links.push(new Link(
 	"Inside", true, true,
 	undefined,
 	() => {
-		const burrows = GAME().burrows;
+		const burrows: Burrows = GAME().burrows;
 		if (!burrows.LagonDefeated() && burrows.LagonChallenged()) {
             LagonScenes.ReturnToBurrowsAfterFight();
 		} else if (!burrows.LagonDefeated() && burrows.flags.Access === BurrowsFlags.AccessFlags.Stage5) {
@@ -636,7 +639,7 @@ BurrowsLoc.Tunnels.enc = new EncounterTable();
 // Burrows throne room
 //
 BurrowsLoc.Throne.description = () => {
-	const burrows = GAME().burrows;
+	const burrows: Burrows = GAME().burrows;
 	const parse: any = {
 		Lagon : burrows.VenaRestored() ? "Vena" : "Lagon",
 	};
@@ -670,7 +673,7 @@ BurrowsLoc.Throne.links.push(new Link(
 
 BurrowsLoc.Throne.events.push(new Link(
 	"Vena", () => {
-		const burrows = GAME().burrows;
+		const burrows: Burrows = GAME().burrows;
 		return burrows.VenaRestored();
 	}, true,
 	undefined,
@@ -681,13 +684,13 @@ BurrowsLoc.Throne.events.push(new Link(
 
 BurrowsLoc.Throne.events.push(new Link(
 	"Lagon", () => {
-		const lagon = GAME().lagon;
+		const lagon: Lagon = GAME().lagon;
 		return lagon.IsAtLocation();
 	}, true,
 	undefined,
 	() => {
-		const burrows = GAME().burrows;
-		const lagon = GAME().lagon;
+		const burrows: Burrows = GAME().burrows;
+		const lagon: Lagon = GAME().lagon;
 		if (burrows.LagonAlly() && !(lagon.flags.Talk & LagonFlags.Talk.AlliedFirst)) {
             LagonScenes.AlliedFirst();
         } else if (burrows.LagonJudged()) {
@@ -702,8 +705,8 @@ BurrowsLoc.Throne.events.push(new Link(
 // Burrows Pit
 //
 BurrowsLoc.Pit.description = () => {
-	const player = GAME().player;
-	const burrows = GAME().burrows;
+	const player: Player = GAME().player;
+	const burrows: Burrows = GAME().burrows;
 	const parse: any = {
 		Lagon : burrows.VenaRestored() ? "Vena" : "Lagon",
 	};
@@ -741,7 +744,7 @@ BurrowsLoc.Pit.links.push(new Link(
 
 BurrowsLoc.Pit.events.push(new Link(
 	"Vena", () => {
-		const burrows = GAME().burrows;
+		const burrows: Burrows = GAME().burrows;
 		return !burrows.VenaRestored();
 	}, true,
 	undefined,

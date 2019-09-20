@@ -13,6 +13,7 @@ import { IChoice } from "../link";
 import { Locations } from "../location";
 import { Party } from "../party";
 import { Text } from "../text";
+import { Player } from "./player";
 
 export namespace RoamingScenes {
 
@@ -70,7 +71,7 @@ export namespace RoamingScenes {
 	}
 
 	export function KingdomPatrol(entering: boolean) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const rigard = GAME().rigard;
 		const terry = GAME().terry;
@@ -348,7 +349,7 @@ export namespace RoamingScenes {
 	}
 
 	export function Bandits() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const rigard = GAME().rigard;
 		const bandits = rigard.bandits;

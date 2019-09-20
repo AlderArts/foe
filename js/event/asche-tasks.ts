@@ -23,6 +23,7 @@ import { Text } from "../text";
 import { Season } from "../time";
 import { AscheFlags } from "./asche-flags";
 import { AscheSexScenes } from "./asche-sex";
+import { Player } from "./player";
 
 export namespace AscheTasksScenes {
 	let AscheScenes: any;
@@ -78,7 +79,7 @@ export namespace AscheTasksScenes {
 		// This should have a level requirement such that the PC has a chance at actually beating the enemies involved. Maybe add a money spent or items bought requirement?
 		// Maybe a minimum level of 7, the encounter will be 8 or 9.
 		export function Initiation() {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const asche = GAME().asche;
 
 			const parse: any = {
@@ -126,7 +127,7 @@ export namespace AscheTasksScenes {
 		}
 
 		export function OnTask() {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 
 			const parse: any = {
 				handsomepretty : player.mfFem("handsome", "pretty"),
@@ -144,7 +145,7 @@ export namespace AscheTasksScenes {
 		}
 
 		export function Failed() {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const asche = GAME().asche;
 
 			const parse: any = {
@@ -161,7 +162,7 @@ export namespace AscheTasksScenes {
 		}
 
 		export function Highlands() {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const party: Party = GAME().party;
 			const asche = GAME().asche;
 
@@ -379,7 +380,7 @@ export namespace AscheTasksScenes {
 		}
 
 		export function Whore() {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const party: Party = GAME().party;
 			const asche = GAME().asche;
 
@@ -547,7 +548,7 @@ export namespace AscheTasksScenes {
 		}
 
 		export function Complete() {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const party: Party = GAME().party;
 			const asche = GAME().asche;
 
@@ -697,7 +698,7 @@ export namespace AscheTasksScenes {
 
 		// The player should have resolved the first quest, be at an appropriate level, and perhaps have spent x amount of money or bought so many items from Asche before this unlocks.
 		export function Initiation() {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const asche = GAME().asche;
 
 			const parse: any = {
@@ -728,7 +729,7 @@ export namespace AscheTasksScenes {
 		}
 
 		export function OnTask() {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const parse: any = {
 				hisher : player.mfFem("his", "her"),
 			};
@@ -744,7 +745,7 @@ export namespace AscheTasksScenes {
 
 		// While on this quest, add a one-time “nightshade” button to Aquilius’ daytime talk menu.
 		export function AskAquiliusForHelp() {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const asche = GAME().asche;
 
 			const parse: any = {
@@ -776,7 +777,7 @@ export namespace AscheTasksScenes {
 
 		// Only used if PC is wandering around blind (I.E, didn’t ask Aquilius)
 		export function BlindStart() {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 
 			const parse: any = {
 
@@ -837,7 +838,7 @@ export namespace AscheTasksScenes {
 		}
 
 		export function HerbComplications() {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const party: Party = GAME().party;
 			const asche = GAME().asche;
 
@@ -900,7 +901,7 @@ export namespace AscheTasksScenes {
 		}
 
 		export function Complete() {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const party: Party = GAME().party;
 			const asche = GAME().asche;
 
@@ -1074,7 +1075,7 @@ export namespace AscheTasksScenes {
 		}
 
 		export function Initiation() {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const asche = GAME().asche;
 
 			const parse: any = {
@@ -1129,7 +1130,7 @@ export namespace AscheTasksScenes {
 
 		// Select “spring” from Highlands menu.
 		export function Highlands() {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const party: Party = GAME().party;
 			const asche = GAME().asche;
 
@@ -1236,7 +1237,7 @@ export namespace AscheTasksScenes {
 		}
 
 		export function OnTask() {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 
 			const parse: any = {
 				heshe  : player.mfFem("he", "she"),
@@ -1249,7 +1250,7 @@ export namespace AscheTasksScenes {
 		}
 
 		export function Complete() {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const party: Party = GAME().party;
 			const asche = GAME().asche;
 

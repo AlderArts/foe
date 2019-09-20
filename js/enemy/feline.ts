@@ -18,6 +18,7 @@ import { Element } from "../damagetype";
 import { EncounterTable } from "../encountertable";
 import { Entity } from "../entity";
 import { Sex } from "../entity-sex";
+import { Player } from "../event/player";
 import { GAME, TimeStep, WorldTime } from "../GAME";
 import { GameState, SetGameState } from "../gamestate";
 import { Gui } from "../gui";
@@ -422,7 +423,7 @@ export namespace FelinesScenes {
 
 	export function Intro() {
 		const enc     = this;
-		const enemy   = enc.enemy;
+		const enemy: Party   = enc.enemy;
 		const group   = enemy.Num() > 1;
 		const mainCat = enemy.Get(0);
 
@@ -435,12 +436,12 @@ export namespace FelinesScenes {
 	}
 
 	export function IntroRegular() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const enc     = this;
-		const enemy   = enc.enemy;
+		const enemy: Party   = enc.enemy;
 		const group: boolean = enemy.Num() > 1;
-		const mainCat: Wildcat = enemy.Get(0);
+		const mainCat: Wildcat = enemy.Get(0) as Wildcat;
 
 		let parse: any = {
 			groupof    : group ? " group of" : "",
@@ -495,13 +496,13 @@ export namespace FelinesScenes {
 	}
 
 	export function IntroStalking() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const enc = this;
 		const p1  = party.Get(1);
-		const enemy   = enc.enemy;
+		const enemy: Party   = enc.enemy;
 		const group   = enemy.Num() > 1;
-		const mainCat = enemy.Get(0);
+		const mainCat: Wildcat = enemy.Get(0) as Wildcat;
 
 		let parse: any = {
 			playername : player.name,
@@ -548,13 +549,13 @@ export namespace FelinesScenes {
 	}
 
 	export function WinPrompt() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		SetGameState(GameState.Event, Gui);
 
 		const enc = this;
-		const enemy   = enc.enemy;
+		const enemy: Party   = enc.enemy;
 		const group   = enemy.Num() > 1;
-		const mainCat = enemy.Get(0);
+		const mainCat: Wildcat = enemy.Get(0) as Wildcat;
 		const taur    = player.IsTaur();
 
 		const parse: any = {
@@ -583,7 +584,7 @@ export namespace FelinesScenes {
 			let female: Wildcat;
 			let herm: Wildcat;
 			for (let i = 0; i < enemy.Num(); ++i) {
-				const ent    = enemy.Get(i);
+				const ent: Wildcat    = enemy.Get(i) as Wildcat;
 				const gender = ent.Gender();
 				if (gender === Gender.male) {
 					numMales++;
@@ -606,7 +607,7 @@ export namespace FelinesScenes {
 					options.push({ nameStr : "Fuck vag(F)",
 						func() {
 							FelinesScenes.WinFuckVag(female, group, enc, cocksInVag, numFemales);
-						}, enabled : cocksInVag,
+						}, enabled : true,
 						tooltip : "Get some pussy.",
 					});
 				}
@@ -725,7 +726,7 @@ export namespace FelinesScenes {
 	}
 
 	export function WinCatchVag(mainCat: Wildcat, enemy: Party) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const otherCats = _.filter(enemy.members, (cat) => {
 			return cat !== mainCat;
 		});
@@ -870,7 +871,7 @@ export namespace FelinesScenes {
 	}
 
 	export function WinFuckVag(cat: Wildcat, group: boolean, enc: any, cocks: Cock[], numFemales: number) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const pCock = player.BiggestCock(cocks);
 
 		let parse: any = {
@@ -1102,7 +1103,7 @@ export namespace FelinesScenes {
 	}
 
 	export function WinFuckButt(cat: Wildcat, group: boolean, enc: any, cocks: Cock[]) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const pCock = player.BiggestCock(cocks);
 
@@ -1174,9 +1175,9 @@ export namespace FelinesScenes {
 			Text.Add("Always happy to introduce another slut to the joys of anal sex as you gleefully thrust your [cock] into [hisher] butt. [HeShe] is in for quite a ride.", parse);
 		} else if (player.sex.gAnal > 5) {
 			Text.Add("With an experienced thrust of your [hips], you plunge your [cock] inside the kitty’s offered butt.", parse);
-	} else {
+		} else {
 			Text.Add("In your bumbling eagerness, you have to take a moment to adjust your aim before your probing [cock] pushes inside [himher].", parse);
-	}
+		}
 		Text.NL();
 
 		// #PC fucks cat
@@ -1343,7 +1344,7 @@ export namespace FelinesScenes {
 	}
 
 	export function WinGetBlowjob(cat: Wildcat, group: boolean, enc: any) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		let parse: any = {
 			oneof    : group ? " one of" : "",
 			s        : group ? "s" : "",
@@ -1505,11 +1506,11 @@ export namespace FelinesScenes {
 	}
 
 	export function WinGroupService(enc: any, enemy: Party) {
-		const player = GAME().player;
-		const mainCat = enemy.Get(0);
-		const betaCat = enemy.Get(1);
-		const gammaCat = enemy.Get(2);
-		const deltaCat = enemy.Get(3);
+		const player: Player = GAME().player;
+		const mainCat: Wildcat = enemy.Get(0) as Wildcat;
+		const betaCat: Wildcat = enemy.Get(1) as Wildcat;
+		const gammaCat: Wildcat = enemy.Get(2) as Wildcat;
+		const deltaCat: Wildcat = enemy.Get(3) as Wildcat;
 		const numCats = enemy.Num();
 		const group = numCats > 2;
 
@@ -1661,15 +1662,15 @@ export namespace FelinesScenes {
 	}
 
 	export function LossRegular() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 
 		SetGameState(GameState.Event, Gui);
 
 		const enc = this;
-		const enemy   = enc.enemy;
+		const enemy: Party   = enc.enemy;
 		const group   = enemy.Num() > 1;
-		const mainCat = enemy.Get(0);
+		const mainCat: Wildcat = enemy.Get(0) as Wildcat;
 
 		const parse: any = {
 			oneof        : group ? " one of" : "",
@@ -1697,7 +1698,7 @@ export namespace FelinesScenes {
 		let female: Wildcat;
 		let herm: Wildcat;
 		for (let i = 0; i < enemy.Num(); ++i) {
-			const ent    = enemy.Get(i);
+			const ent: Wildcat = enemy.Get(i) as Wildcat;
 			const gender = ent.Gender();
 			if (gender === Gender.male) {
 				numMales++;
@@ -1790,7 +1791,7 @@ export namespace FelinesScenes {
 	}
 
 	export function LossPCblowsCat(mainCat: Wildcat, enemy: Party) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const group = enemy.Num() > 1;
 		const group2 = enemy.Num() > 2;
 		const cat1 = enemy.Get(1);
@@ -2037,7 +2038,7 @@ export namespace FelinesScenes {
 	}
 
 	export function LossCatchVaginal(cat: Wildcat, group: boolean, enc: any) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		let parse: any = {
 			oneof    : group ? " one of" : "",
 			s        : group ? "s" : "",
@@ -2271,7 +2272,7 @@ export namespace FelinesScenes {
 	}
 
 	export function LossPitchVaginal(cat: Wildcat, group: boolean, enc: any, cocksInVag: Cock[]) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const pCock  = player.BiggestCock(cocksInVag);
 		const allCocks = player.AllCocksCopy();
 		for (let i = 0; i < allCocks.length; i++) {
@@ -2558,7 +2559,7 @@ export namespace FelinesScenes {
 	}
 
 	export function LossDrainMilk(mainCat: Wildcat, group: boolean, enc: any) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		let parse: any = {
 			name : mainCat.nameDesc(),
 		};
@@ -2670,7 +2671,7 @@ export namespace FelinesScenes {
 	*/
 
 	export function LossDoubleTeam(cat: Wildcat, cat2: Wildcat, group: boolean, enc: any) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 
 		let parse: any = {

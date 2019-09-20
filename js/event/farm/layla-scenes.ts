@@ -10,6 +10,7 @@ import { MoveToLocation } from "../../GAME";
 import { GameState, SetGameState } from "../../gamestate";
 import { Gui } from "../../gui";
 import { IChoice } from "../../link";
+import { Burrows } from "../../loc/burrows";
 import { DryadGladeFlags } from "../../loc/glade-flags";
 import { Party } from "../../party";
 import { PregnancyHandler } from "../../pregnancy";
@@ -343,7 +344,7 @@ export namespace LaylaScenes {
 		const momo = GAME().momo;
 		const miranda = GAME().miranda;
 		const cveta = GAME().cveta;
-		const burrows = GAME().burrows;
+		const burrows: Burrows = GAME().burrows;
 
 		const parse: any = {
 			playername : player.name,

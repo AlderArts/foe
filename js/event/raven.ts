@@ -15,6 +15,7 @@ import { Party } from "../party";
 import { Text } from "../text";
 import { TF } from "../tf";
 import { GlobalScenes } from "./global";
+import { Player } from "./player";
 
 export class RavenMother extends Entity {
 	constructor(storage?: any) {
@@ -231,7 +232,7 @@ export namespace RavenMotherScenes {
 
 	export function TheHuntGlade() {
 		const ravenmother = GAME().ravenmother;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const parse: any = {
 
@@ -284,7 +285,7 @@ export namespace RavenMotherScenes {
 	}
 
 	export function TheHuntGladeCont() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const parse: any = {
 			playername : player.name,

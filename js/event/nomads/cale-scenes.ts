@@ -8,6 +8,7 @@ import { Jobs } from "../../job";
 import { IChoice } from "../../link";
 import { Party } from "../../party";
 import { Text } from "../../text";
+import { Player } from "../player";
 import { Cale } from "./cale";
 import { CaleFlags } from "./cale-flags";
 import { CaleSexScenes } from "./cale-sex";
@@ -19,7 +20,7 @@ export namespace CaleScenes {
 
 	// interaction
 	export function Interact() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const rosalin = GAME().rosalin;
 		const cale: Cale = GAME().cale;
 		const parse: any = {
@@ -112,7 +113,7 @@ export namespace CaleScenes {
 	}
 
 	export function FirstApproach() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const cale: Cale = GAME().cale;
 		let parse: any = {
 			playername : player.name,
@@ -516,7 +517,7 @@ export namespace CaleScenes {
 	}
 
 	export function TalkPrompt() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const rosalin = GAME().rosalin;
 		const cale: Cale = GAME().cale;
@@ -732,7 +733,7 @@ export namespace CaleScenes {
 								party.coin -= (coin - 50);
 
 								CaleSexScenes.TentSex(CaleScenes.Prompt);
-							}, enabled : (party.coin >= coin - 50) && player.BiggestCock(undefined, true),
+							}, enabled : (party.coin >= coin - 50) && player.BiggestCock(undefined, true) !== undefined,
 						});
 						options.push({ nameStr : "No sex",
 							tooltip : "You’d rather pay the full price than take his wolfy butt.",
@@ -805,7 +806,7 @@ export namespace CaleScenes {
 	}
 
 	export function TalkPast() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const cale: Cale = GAME().cale;
 		let parse: any = {
 			playername : player.name,
@@ -967,7 +968,7 @@ export namespace CaleScenes {
 	}
 
 	export function Rogue() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const cale: Cale = GAME().cale;
 		let parse: any = {
 			playername : player.name,

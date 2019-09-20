@@ -17,6 +17,7 @@ import { ILocation } from "../location";
 import { Text } from "../text";
 import { TF } from "../tf";
 import { Time } from "../time";
+import { Player } from "./player";
 
 export class Fera extends Entity {
 	public nexelleTimer: Time;
@@ -115,7 +116,7 @@ export namespace FeraScenes {
 
 	// Party interaction
 	export function Interact() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const fera = GAME().fera;
 
 		Text.Clear();
@@ -387,7 +388,7 @@ export namespace FeraScenes {
 	}
 
 	export function TouchPrompt() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const fera = GAME().fera;
 
 		let parse: any = {
@@ -478,7 +479,7 @@ export namespace FeraScenes {
 	}
 
 	export function SexPrompt() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const fera = GAME().fera;
 
 		const cocksInVag = player.CocksThatFit(fera.FirstVag());
@@ -754,7 +755,7 @@ export namespace FeraScenes {
 					player.AddLustFraction(-1);
 					fera.relation.IncreaseStat(20, 2);
 					Gui.NextPrompt(FeraScenes.Interact);
-				}, enabled : player.FirstVag() || player.FirstCock(),
+				}, enabled : player.FirstVag() !== undefined || player.FirstCock() !== undefined,
 				tooltip : "Ask Fera to service you.",
 			});
 		}
@@ -796,7 +797,7 @@ export namespace FeraScenes {
 					player.AddLustFraction(-1);
 					fera.relation.IncreaseStat(20, 2);
 					Gui.NextPrompt(FeraScenes.Interact);
-				}, enabled : player.FirstCock(),
+				}, enabled : player.FirstCock() !== undefined,
 				tooltip : Text.Parse("Have Fera please you with her [fbreasts].", parse),
 			});
 		}

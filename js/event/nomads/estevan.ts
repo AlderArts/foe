@@ -20,6 +20,7 @@ import { Party } from "../../party";
 import { PregnancyHandler } from "../../pregnancy";
 import { Text } from "../../text";
 import { TF } from "../../tf";
+import { Player } from "../player";
 import { CaleFlags } from "./cale-flags";
 import { EstevanFlags } from "./estevan-flags";
 
@@ -102,7 +103,7 @@ export namespace EstevanScenes {
 	}
 
 	export function Interact() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const cale = GAME().cale;
 		const estevan = GAME().estevan;
 		const parse: any = {
@@ -168,7 +169,7 @@ export namespace EstevanScenes {
 	}
 
 	export function Prompt() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const estevan = GAME().estevan;
 		const parse: any = {
 			playername : player.name,
@@ -323,7 +324,7 @@ export namespace EstevanScenes {
 	}
 
 	export function SexGay() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const estevan = GAME().estevan;
 		const p1cock = player.BiggestCock();
 

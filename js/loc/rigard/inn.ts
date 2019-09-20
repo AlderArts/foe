@@ -5,6 +5,7 @@ import { Entity } from "../../entity";
 import { Event } from "../../event";
 import { DreamsScenes } from "../../event/dreams";
 import { VaughnTasksScenes } from "../../event/outlaws/vaughn-tasks";
+import { Player } from "../../event/player";
 import { Room69Scenes } from "../../event/room69";
 import { Room69Flags } from "../../event/room69-flags";
 import { LeiFlags } from "../../event/royals/lei-flags";
@@ -116,7 +117,7 @@ InnLoc.common.links.push(new Link(
 
 InnLoc.Common.endDescription = () => {
 	const rigard = GAME().rigard;
-	const player = GAME().player;
+	const player: Player = GAME().player;
 
 	if (rigard.Krawitz.Q < RigardFlags.KrawitzQ.HeistDone) {
 		Text.Add("You see the daintily attractive vixen-morph hard at work cleaning up the various dishes and tankards left behind by previous customers. She scurries ceaselessly back and forth, gathering dirty kitchenware and conveying it to the kitchens, only to return for a fresh load.");
@@ -147,7 +148,7 @@ InnLoc.Common.DrunkHandler = () => {
 
 InnLoc.Common.onEntry = (preventClear: boolean, oldLocation: any) => {
 	const rigard = GAME().rigard;
-	const player = GAME().player;
+	const player: Player = GAME().player;
 	const party: Party = GAME().party;
 
 	if (VaughnTasksScenes.Poisoning.InnAvailable()) {
@@ -242,7 +243,7 @@ export namespace LBScenes {
 
 	export function OrderFood() {
 		const rigard = GAME().rigard;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 
 		const parse: any = {
@@ -434,7 +435,7 @@ export namespace LBScenes {
 
 	export function OrvinPrompt() {
 		const rigard = GAME().rigard;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 
 		const parse: any = {
@@ -1034,7 +1035,7 @@ export namespace LBScenes {
 
 	export function DrinksPrompt(innPrompt: CallableFunction) {
 		const rigard = GAME().rigard;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const kiakai = GAME().kiakai;
 		const party: Party = GAME().party;
 
@@ -1520,7 +1521,7 @@ export namespace LBScenes {
 
 	export function GotoRoom() {
 		const rigard = GAME().rigard;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const kiakai = GAME().kiakai;
 		const lei = GAME().lei;
 		const gwendy = GAME().gwendy;
@@ -1776,7 +1777,7 @@ InnLoc.Room.events.push(new Link(
 ));
 InnLoc.Room.SleepFunc = () => {
 	const rigard = GAME().rigard;
-	const player = GAME().player;
+	const player: Player = GAME().player;
 	const party: Party = GAME().party;
 	const comp = party.Get(rigard.LB.RoomComp);
 	const parse: any = {

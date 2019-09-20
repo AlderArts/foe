@@ -10,6 +10,7 @@ import { OrchidScenes } from "../enemy/orchid-scenes";
 import { Sex } from "../entity-sex";
 import { Event } from "../event";
 import { GlobalScenes } from "../event/global";
+import { Player } from "../event/player";
 import { GAME, MoveToLocation, TimeStep, WORLD, WorldTime } from "../GAME";
 import { GameState, SetGameState } from "../gamestate";
 import { Gui } from "../gui";
@@ -152,7 +153,7 @@ GladeLoc.onEntry = () => {
 export namespace DryadGladeScenes {
 
 	export function First() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const orchid = GAME().orchid;
 
@@ -234,7 +235,7 @@ export namespace DryadGladeScenes {
 	}
 
 	export function FirstLoss() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const orchid = GAME().orchid;
 		const kiakai = GAME().kiakai;
@@ -574,7 +575,7 @@ export namespace DryadGladeScenes {
 	}
 
 	export function FirstWin() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const glade = GAME().glade;
 		const kiakai = GAME().kiakai;
@@ -678,7 +679,7 @@ export namespace DryadGladeScenes {
 	}
 
 	export function MotherTreePrompt() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const parse: any = {
 			playername : player.name,
@@ -731,7 +732,7 @@ export namespace DryadGladeScenes {
 	}
 
 	export function MotherTreeTalk() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const parse: any = {
 			playername : player.name,
 		};

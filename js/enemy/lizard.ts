@@ -18,6 +18,7 @@ import { Element } from "../damagetype";
 import { EncounterTable } from "../encountertable";
 import { Entity } from "../entity";
 import { Sex } from "../entity-sex";
+import { Player } from "../event/player";
 import { GAME, TimeStep, WorldTime } from "../GAME";
 import { GameState, SetGameState } from "../gamestate";
 import { Gui } from "../gui";
@@ -169,7 +170,7 @@ export namespace LizardsScenes {
 	}
 
 	export function GroupEnc() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 
 		const enemy    = new Party();
@@ -247,16 +248,17 @@ export namespace LizardsScenes {
 		SetGameState(GameState.Event, Gui);
 
 		const enc = this;
+		const third: Lizard = enc.third;
 
 		Gui.Callstack.push(() => {
 			Text.Clear();
 
 			const parse: any = {
-				two : enc.third ? " two" : "",
+				two : third ? " two" : "",
 			};
 			let scene: any;
 
-			const odds = enc.third ? (enc.third.body.Gender() === Gender.male ? 0.66 : 0.33) : 0.5;
+			const odds = third ? (third.body.Gender() === Gender.male ? 0.66 : 0.33) : 0.5;
 
 			// Male
 			if (Math.random() < odds) {
@@ -270,7 +272,7 @@ export namespace LizardsScenes {
 				parse.m1hisher  = "her";
 				parse.m2hisher  = "his";
 			}
-			parse.m2hisherTheir = enc.third ? "their" : parse.m2hisher;
+			parse.m2hisherTheir = third ? "their" : parse.m2hisher;
 
 			if (Math.random() < 0.6) {
 				Text.Add("With a solid <i>thump</i>, you beat your foe to the ground. The reptile tries to scramble away, but you step in front of [m1himher], blocking [m1hisher] path. As you stop [m1himher], you see the other[two] scurry away, leaving [m2hisherTheir] companion to [m1hisher] fate...", parse);
@@ -313,7 +315,7 @@ export namespace LizardsScenes {
 	}
 
 	export function WinMale(enc: any) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		let parse: any = {
 			p1name() { return party.members[1].NameDesc(); },
@@ -374,7 +376,7 @@ export namespace LizardsScenes {
 	}
 
 	export function WinFemale(enc: any) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		let parse: any = {
 			p1name() { return party.members[1].NameDesc(); },
@@ -445,10 +447,10 @@ export namespace LizardsScenes {
 	}
 
 	export function WinFuckVag(enc: any) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const enemy = enc.female;
-		const third = enc.third;
+		const enemy: Lizard = enc.female;
+		const third: Lizard = enc.third;
 
 		const p1cock = player.BiggestCock(undefined, true);
 		const realCock = p1cock.isStrapon === false;
@@ -557,9 +559,9 @@ export namespace LizardsScenes {
 	}
 
 	export function WinTailpeg(enc: any) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const enemy = enc.female;
+		const enemy: Lizard = enc.female;
 
 		let parse: any = {
 			p1name() { return party.members[1].NameDesc(); },
@@ -656,7 +658,7 @@ export namespace LizardsScenes {
 				Text.Add("[m1Name] picks up on it immediately, a coy smile on her lips. Wordless as ever, you feel her tail slow, and her tip slither back to brush your prostate again. You fix your gaze on her, and her eyes almost dare you to object. Drawn on by the supple motions of her serpentine tail, you're not sure you want to...", parse);
 				Text.NL();
 				Text.Add("Suddenly her tail twitches again, and her tip <i>grinds</i> against your prostate. Your eyes widen, and she <i>shoves</i> another four inches of her now painfully thick tail into you. Pleasure blankets out the pain and you spasm on top of her, your [cocks] throbbing at attention as you press harder against her.", parse);
-				if (player.Butt().Tightness < Orifice.Tightness.gaping) {
+				if (player.Butt().Tightness() < Orifice.Tightness.gaping) {
 					Text.NL();
 					Text.Add("You feel your [anus] stretching agonizingly wide, and you know it will be a while before you feel tight again...", parse);
 					player.Butt().stretch.IncreaseStat(Orifice.Tightness.gaping, 1);
@@ -761,7 +763,7 @@ export namespace LizardsScenes {
 	}
 
 	export function WinClaimAss(enc: any, enemy: Lizard) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		let parse: any = {
 			p1name() { return party.members[1].NameDesc(); },
@@ -790,9 +792,9 @@ export namespace LizardsScenes {
 				Text.Add("easily overpower [m1himher], revealing [m1hisher] [m1anus], taking hold of [m1hisher] legs by the knees.", parse);
 			} else if (player.dexterity.Get() > enemy.dexterity.Get() + 20) {
 				Text.Add("easily outmaneuver [m1himher], leaving [m1himher] startled as you part [m1hisher] stronger legs through sheer skill, taking hold of each one.", parse);
-	} else {
+			} else {
 				Text.Add("manage to pry [m1hisher] legs apart, sliding forward as [m1heshe] grunts indignantly. [m1HisHer] scaled legs are strong in your hands, and it occurs to you that [m1heshe] might simply be going along with it to avoid your wrath.", parse);
-	}
+			}
 		} else {
 			Text.Add("[m1HeShe] looks down almost shyly and, seeming to realize your intent, slowly lies down on [m1hisher] back, drawing in a deep breath. Idly, you wonder if [m1heshe] might have a preference for this. Sensing it will be easy to put your [cocks] to good use, you step forward, grinning at [m1himher]. You take a hold of [m1hisher] legs by the knees, and [m1heshe] gazes at you uncertainly. Pushing [m1hisher] legs further apart, you slide your hips forward, pressing your groin up against [m1name]'s [m1butt]. [m1Name] looks away, [m1hisher] muzzle darkening in a slight blush that sends a delighted thrill down your spine.", parse);
 		}
@@ -885,7 +887,7 @@ export namespace LizardsScenes {
 	}
 
 	export function WinBlowjob(enc: any, enemy: Lizard) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		let parse: any = {
 			p1name() { return party.members[1].NameDesc(); },
@@ -955,9 +957,9 @@ export namespace LizardsScenes {
 	}
 
 	export function WinPowerbottom(enc: any) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const enemy = enc.male;
+		const enemy: Lizard = enc.male;
 
 		let parse: any = {
 			p1name() { return party.members[1].NameDesc(); },
@@ -1387,9 +1389,9 @@ export namespace LizardsScenes {
 	}
 
 	export function WinPowerbottomAssert(enc: any) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const enemy = enc.male;
+		const enemy: Lizard = enc.male;
 
 		let parse: any = {
 			p1name() { return party.members[1].NameDesc(); },
@@ -1472,7 +1474,7 @@ export namespace LizardsScenes {
 			Text.NL();
 			Text.Add("You feel yourself nearing the edge too. The lizard’s thick, slimy meat moving inside of you engulfs your thoughts, the way you feel so completely filled punctuating each heartbeat. Your every motion leaves him deeper inside of you, his fleshy ridges jumping with his pulse and toying with your senses.", parse);
 			Text.NL();
-			if (player.FirstBreastRow() > 3) {
+			if (player.FirstBreastRow().Size() > 3) {
 				Text.Add("You feel [m1name]’s hands suddenly reach forward, groping your [breasts] firmly, cupping your sensitive mounds. You moan softly, pressing your melons forward into his grip as his fingers slide forward, coming to your stiff nipples, gently tweaking them. As you gaze at the lizard, he seems halfway drunk with pleasure, his dicks pulsing helplessly as you ride him.", parse);
 				Text.NL();
 			}
@@ -1527,9 +1529,9 @@ export namespace LizardsScenes {
 	}
 
 	export function WinPowerbottomDeny(enc: any) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const enemy = enc.male;
+		const enemy: Lizard = enc.male;
 
 		let parse: any = {
 			p1name() { return party.members[1].NameDesc(); },
@@ -1579,7 +1581,7 @@ export namespace LizardsScenes {
 	}
 
 	export function LossPrompt() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		SetGameState(GameState.Event, Gui);
 
 		const enc = this;
@@ -1625,7 +1627,7 @@ export namespace LizardsScenes {
 	}
 
 	export function LossMale() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const enc = this;
 
@@ -1740,7 +1742,7 @@ export namespace LizardsScenes {
 	}
 
 	export function LossMaleVagVariations() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		Text.Clear();
 
@@ -1907,7 +1909,7 @@ export namespace LizardsScenes {
 							Text.Add(" You let out a groan as a gob of precum trails up to the tip of your [cock], oozing down your length.", parse);
 						} else if (player.NumCocks() > 1) {
 							Text.Add("You let out a soft groan as gobs of precum trail up to the tip of your [cocks], oozing down the length of each.", parse);
-	}
+						}
 						Text.Add(" Blushing shamefully, you pass out to the sensations of his seed settling in your womb.", parse);
 					}
 					Text.Flush();
@@ -1939,7 +1941,7 @@ export namespace LizardsScenes {
 	}
 
 	export function LossMaleCockVariations() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const enc = this;
 
@@ -2031,7 +2033,7 @@ export namespace LizardsScenes {
 						Text.Add("Your hand trails down to your groin, where you let it find your favorite dick. Slowly you squeeze it, blushing yet deeper as you feel precum start to drip from multiple tips.", parse);
 					} else {
 						Text.Add("You let your hand trail down to your [cock], feeling yourself harden.", parse);
-				}
+					}
 					Text.NL();
 					Text.Add("Despite the position, the way his shaft slides over your tongue feels sinfully good. Before long, you find yourself pumping away at yourself as he pistons his heavy meat in and out of your maw. Finally, he grips your head tightly in both hands, and <i>rams</i> your face onto his crotch, his legs spread and tail arched in bliss. You feel his [m1cock] spasm heavily, and thick bulges run down his shaft... emptying right into your throat. You can't even taste it, though you realize you want to. You just feel his potent cum flooding your throat, sliding down to your belly, its partner spraying sticky, oddly thick fluids across your [face]. <i>“Drink up,”</i> the lizard hisses, holding you there. ", parse);
 					if (player.FirstVag()) {
@@ -2148,9 +2150,9 @@ export namespace LizardsScenes {
 					Text.Add("<i>“Ahhh...”</i> he hisses, slightly pained. <i>“That it would feel so good, I had no idea...”</i>", parse);
 				} else if (player.FirstCock().Size() > 75) {
 					Text.Add("<i>“Oh, just... right,”</i> he hisses.", parse);
-	} else {
+				} else {
 					Text.Add("<i>“This all you got?”</i> he shakes his head, seeming almost disappointed.", parse);
-	}
+				}
 				Text.NL();
 				Text.Add("Slowly he builds up a pace, bouncing up and down on your [cock]. His hand presses against your belly as he rocks himself on your aching length, working you quickly to the edge. His own [m1cocks] bob in front of you almost hypnotically, and between the lewd motion and the pleasure of having his [m1anus] squeezing around your shaft you quickly find yourself moving with him, aching for release.", parse);
 				Text.NL();
@@ -2220,14 +2222,14 @@ export namespace LizardsScenes {
 	}
 
 	export function LossFemale() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		Text.Clear();
 
 		const enc = this;
-		const third = enc.third;
-		const member1 = party.members[1];
-		const lizard = enc.female;
+		const third: Lizard = enc.third;
+		const member1: Entity = party.members[1];
+		const lizard: Lizard = enc.female;
 
 		let parse: any = {
 			playerName   : player.name,
@@ -2602,7 +2604,7 @@ export namespace LizardsScenes {
 				Text.Add(" As you work your way up her tail, you can taste the salty tang of your own pre, reminding you of your spurned [cocks].", parse);
 			} else if (player.FirstVag()) {
 				Text.Add(" Speaking of juices, you can taste your own on her tail; a reminder of where it was just a short while ago. Your loins twitch at the memory.", parse);
-	}
+			}
 			Text.NL();
 
 			Sex.Cunnilingus(player, lizard);
@@ -2634,9 +2636,9 @@ export namespace LizardsScenes {
 					Text.Add("You fume at the thought of the scaly girl persuming to lord it over you like if you were some common slut, but your words lack fire; she and her companion[s2] have already bested you once, they could undoubtedly do so again in your current state.", parse);
 				} else if (dom > -25) {
 					Text.Add("A quick glance tells you that her companion[s2] [isAre2] still around, watching events unfold with curiosity. You can’t really stand up to them the way you are, perhaps it’s better to just let her do her thing and get it over with.", parse);
-	} else {
+				} else {
 					Text.Add("Not that you’d want to… the thought of your mistress’s tail impaling you is too arousing to let go of. The more you think about it, the more receptive you become to the idea.", parse);
-	}
+				}
 				Text.Add(" Either way, it’s becoming harder to think straight. Your loins are aching with need… maybe you should just give in, if only to have your own release.", parse);
 				Text.NL();
 				parse.l = player.HasLegs() ? "between your legs" : "into the valley of your crotch";

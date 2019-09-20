@@ -3,16 +3,17 @@ import { GAME, TimeStep } from "../GAME";
 import { Gui } from "../gui";
 import { IChoice } from "../link";
 import { Text } from "../text";
+import { Player } from "./player";
 
 export namespace AscheSexScenes {
 	export function Prompt() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Fuck her",
 			tooltip : "You’ve long waited for the chance to have a go at the exotic shopkeeper.",
 			func() {
 				AscheSexScenes.FuckHer();
-			}, enabled : player.FirstCock() || player.Strapon(),
+			}, enabled : player.FirstCock() !== undefined || player.Strapon() !== undefined,
 		});
 		options.push({ nameStr : "Give Oral",
 			tooltip : "Better to give than to receive, isn’t it?",
@@ -24,7 +25,7 @@ export namespace AscheSexScenes {
 			tooltip : "She certainly has a nice, long muzzle… wonder if her tongue’s just as good.",
 			func() {
 				AscheSexScenes.GetOral();
-			}, enabled : player.Humanoid() && (player.FirstCock() || player.FirstVag()),
+			}, enabled : player.Humanoid() && (player.FirstCock() !== undefined || player.FirstVag() !== undefined),
 		});
 		if (player.FirstCock()) {
 			options.push({ nameStr : "Titfuck",
@@ -52,7 +53,7 @@ export namespace AscheSexScenes {
 	}
 
 	export function FuckHer() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const asche = GAME().asche;
 
 		const p1cock = player.BiggestCock(undefined, true);
@@ -149,7 +150,7 @@ export namespace AscheSexScenes {
 	}
 
 	export function GiveOral() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const asche = GAME().asche;
 
 		const parse: any = {
@@ -197,7 +198,7 @@ export namespace AscheSexScenes {
 	}
 
 	export function GetOral() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const asche = GAME().asche;
 
 		const p1cock = player.BiggestCock();
@@ -310,7 +311,7 @@ export namespace AscheSexScenes {
 	}
 
 	export function Titfuck() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const p1cock = player.BiggestCock();
 		const longCock = p1cock.Len() > 28;
@@ -361,7 +362,7 @@ export namespace AscheSexScenes {
 	}
 
 	export function MilkHer() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const parse: any = {
 			heshe : player.mfFem("he", "she"),
@@ -405,7 +406,7 @@ export namespace AscheSexScenes {
 	}
 
 	export function Tribbing() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		let parse: any = {
 			heshe : player.mfFem("he", "she"),
@@ -448,7 +449,7 @@ export namespace AscheSexScenes {
 	}
 
 	export function Ending() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const parse: any = {
 
@@ -477,7 +478,7 @@ export namespace AscheSexScenes {
 	}
 
 	export function MagicalThreesome() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const asche = GAME().asche;
 
 		const p1cock = player.BiggestCock();

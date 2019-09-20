@@ -13,6 +13,7 @@ import { IChoice } from "../../link";
 import { Party } from "../../party";
 import { Text } from "../../text";
 import { Rand } from "../../utility";
+import { Player } from "../player";
 
 export class Chief extends Entity {
 	constructor(storage?: any) {
@@ -50,7 +51,7 @@ export class Chief extends Entity {
 export namespace ChiefScenes {
 
 	export function Interact() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const kiakai = GAME().kiakai;
 		const chief = GAME().chief;
@@ -132,7 +133,7 @@ export namespace ChiefScenes {
 	}
 
 	export function TalkPrompt() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const rosalin = GAME().rosalin;
 		const kiakai = GAME().kiakai;
 		const chief = GAME().chief;

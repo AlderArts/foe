@@ -15,6 +15,7 @@ import { Encounter } from "../combat";
 import { Element } from "../damagetype";
 import { EncounterTable } from "../encountertable";
 import { Sex } from "../entity-sex";
+import { Player } from "../event/player";
 import { GAME, TimeStep } from "../GAME";
 import { GameState, SetGameState } from "../gamestate";
 import { Gui } from "../gui";
@@ -151,7 +152,7 @@ export class GolQueen extends BossEntity {
 export namespace GolScenes {
 
 	export function SearchForScepter() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const parse: any = {
 
@@ -231,9 +232,9 @@ export namespace GolScenes {
 
 	// TODO
 	export function CombatLoss() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const enc = this;
-		const gol = enc.gol;
+		const gol: GolQueen = enc.gol;
 		SetGameState(GameState.Event, Gui);
 
 		const parse: any = {
@@ -288,7 +289,7 @@ export namespace GolScenes {
 	}
 
 	export function CombatLossIncubator(gol: GolQueen) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const parse: any = {
 			skinDesc() { return player.SkinDesc(); },
 			armor() { return player.ArmorDesc(); },
@@ -328,7 +329,7 @@ export namespace GolScenes {
 	}
 
 	export function CombatLossIncEntry(gol: GolQueen) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const p1cock = player.BiggestCock();
 
 		let parse: any = {
@@ -432,7 +433,7 @@ export namespace GolScenes {
 	}
 
 	export function CombatLossDrone(gol: GolQueen) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const p1cock = player.BiggestCock();
 
 		let parse: any = {
@@ -555,9 +556,9 @@ export namespace GolScenes {
 	}
 
 	export function CombatWin() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const enc = this;
-		const gol = enc.gol;
+		const gol: GolQueen = enc.gol;
 		SetGameState(GameState.Event, Gui);
 
 		const parse: any = {
@@ -600,7 +601,7 @@ export namespace GolScenes {
 				options.push({ nameStr : "Tailfuck",
 					func() {
 						GolScenes.CombatWinTailfuck(enc, p2cock);
-					}, enabled : p2cock, // < 3'
+					}, enabled : p2cock.length !== undefined,
 					tooltip : "Fuck that tailgina until it’s dripping and leaking eggs!",
 				});
 			}
@@ -639,8 +640,8 @@ export namespace GolScenes {
 	}
 
 	export function CombatWinHyperFuck(enc: any, p1cock: Cock) {
-		const player = GAME().player;
-		const gol = enc.gol;
+		const player: Player = GAME().player;
+		const gol: GolQueen = enc.gol;
 		const lusty = gol.LustLevel() >= 0.5;
 
 		let parse: any = {
@@ -746,8 +747,8 @@ export namespace GolScenes {
 	}
 
 	export function CombatWinTailfuck(enc: any, p1cock: Cock) {
-		const player = GAME().player;
-		const gol = enc.gol;
+		const player: Player = GAME().player;
+		const gol: GolQueen = enc.gol;
 		const lusty = gol.LustLevel() >= 0.5;
 
 		let parse: any = {
@@ -862,8 +863,8 @@ export namespace GolScenes {
 	}
 
 	export function CombatWinCunn(enc: any) {
-		const player = GAME().player;
-		const gol = enc.gol;
+		const player: Player = GAME().player;
+		const gol: GolQueen = enc.gol;
 		const lusty = gol.LustLevel() >= 0.5;
 		const p1cock = player.BiggestCock();
 

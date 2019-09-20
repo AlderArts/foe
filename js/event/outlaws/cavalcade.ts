@@ -1,4 +1,5 @@
 import { Cavalcade } from "../../cavalcade";
+import { ICavalcadePlayer } from "../../cavalcade-player";
 import { Entity } from "../../entity";
 import { GAME, TimeStep, WorldTime } from "../../GAME";
 import { GameState, SetGameState } from "../../gamestate";
@@ -16,7 +17,7 @@ export namespace OCavalcadeScenes {
 	}
 
 	export function PrepRandomCoinGame() {
-		const player = GAME().player;
+		const player: ICavalcadePlayer = GAME().player;
 		const party: Party = GAME().party;
 
 		const onEnd = () => {

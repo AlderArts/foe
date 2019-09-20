@@ -24,6 +24,7 @@ import { WeaponsItems } from "../../items/weapons";
 import { IChoice } from "../../link";
 import { Party } from "../../party";
 import { Text } from "../../text";
+import { Player } from "../player";
 import { GolemFlags } from "./golem-flags";
 import { JeanneScenes } from "./jeanne-scenes";
 
@@ -203,7 +204,7 @@ export namespace GolemScenes {
 	}
 
 	export function OnWin() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const golem = GAME().golem;
 		const kiakai = GAME().kiakai;
@@ -264,7 +265,7 @@ export namespace GolemScenes {
 	}
 
 	export function OnLoss() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const golem = GAME().golem;
 		let parse: any = {

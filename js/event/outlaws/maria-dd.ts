@@ -1,5 +1,6 @@
 import { GetDEBUG } from "../../../app";
 import { Cavalcade } from "../../cavalcade";
+import { ICavalcadePlayer } from "../../cavalcade-player";
 import { EncounterTable } from "../../encountertable";
 import { Entity } from "../../entity";
 import { Sex } from "../../entity-sex";
@@ -12,6 +13,7 @@ import { Party } from "../../party";
 import { Text } from "../../text";
 import { Season, Time } from "../../time";
 import { EstevanFlags } from "../nomads/estevan-flags";
+import { Player } from "../player";
 import { MariaFlags } from "./maria-flags";
 import { OutlawsFlags } from "./outlaws-flags";
 
@@ -21,7 +23,7 @@ import { OutlawsFlags } from "./outlaws-flags";
 export namespace DeadDropScenes {
 
 	export function Alert() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const maria = GAME().maria;
 
 		const parse: any = {
@@ -47,7 +49,7 @@ export namespace DeadDropScenes {
 
 	// Trigger this when the player approaches Maria after having witnessed the above scene.
 	export function Initiation() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const maria = GAME().maria;
 
 		const parse: any = {
@@ -110,7 +112,7 @@ export namespace DeadDropScenes {
 	}
 
 	export function Repeat(CampPrompt: any) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const maria = GAME().maria;
 
@@ -225,7 +227,7 @@ export namespace DeadDropScenes {
 		}
 
 		export function Start() {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const party: Party = GAME().party;
 			const outlaws = GAME().outlaws;
 			const maria = GAME().maria;
@@ -442,7 +444,7 @@ export namespace DeadDropScenes {
 
 	export namespace Docks {
 		export function Entry() {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 
 			const parse: any = {
 				playername : player.name,
@@ -498,7 +500,7 @@ export namespace DeadDropScenes {
 		}
 
 		export function Ending() {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const party: Party = GAME().party;
 
 			const parse: any = {
@@ -613,7 +615,7 @@ export namespace DeadDropScenes {
 		}
 
 		export function CavalcadePrep() {
-			const player = GAME().player;
+			const player: ICavalcadePlayer = GAME().player;
 			const party: Party = GAME().party;
 
 			player.purse  = party;
@@ -742,7 +744,7 @@ export namespace DeadDropScenes {
 		}
 
 		export function GuardInspection() {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const outlaws = GAME().outlaws;
 			const maria = GAME().maria;
 
@@ -985,7 +987,7 @@ export namespace DeadDropScenes {
 		}
 
 		export function GuardPrompt() {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const party: Party = GAME().party;
 			const outlaws = GAME().outlaws;
 			const maria = GAME().maria;

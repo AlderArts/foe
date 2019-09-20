@@ -4,10 +4,12 @@ import { Entity } from "../../entity";
 import { GAME, TimeStep, WORLD } from "../../GAME";
 import { Gui } from "../../gui";
 import { IChoice } from "../../link";
+import { Burrows } from "../../loc/burrows";
 import { BurrowsFlags } from "../../loc/burrows-flags";
 import { Party } from "../../party";
 import { PregnancyHandler } from "../../pregnancy";
 import { Text } from "../../text";
+import { Player } from "../player";
 import { VenaFlags } from "./vena-flags";
 
 export namespace VenaScenes {
@@ -26,7 +28,7 @@ export namespace VenaScenes {
     }
 
     export function PitApproach() {
-        const burrows = GAME().burrows;
+        const burrows: Burrows = GAME().burrows;
 
         const parse: any = {
 
@@ -82,7 +84,7 @@ export namespace VenaScenes {
     }
 
     export function PitPrompt() {
-        const burrows = GAME().burrows;
+        const burrows: Burrows = GAME().burrows;
         const parse: any = {
 
         };
@@ -131,7 +133,7 @@ export namespace VenaScenes {
     export function PitTalkPrompt() {
         const roa = GAME().roa;
         const ophelia = GAME().ophelia;
-        const burrows = GAME().burrows;
+        const burrows: Burrows = GAME().burrows;
         const party: Party = GAME().party;
 
         const parse: any = {
@@ -215,11 +217,11 @@ export namespace VenaScenes {
     }
 
     export function RestoreEntrypoint(fight: boolean) {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const party: Party = GAME().party;
         const ophelia = GAME().ophelia;
         const vena = GAME().vena;
-        const burrows = GAME().burrows;
+        const burrows: Burrows = GAME().burrows;
 
         const parse: any = {
             playername : player.name,

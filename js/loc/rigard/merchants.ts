@@ -2,6 +2,7 @@
 import { EncounterTable } from "../../encountertable";
 import { Event } from "../../event";
 import { CvetaFlags } from "../../event/outlaws/cveta-flags";
+import { Player } from "../../event/player";
 import { Room69Flags } from "../../event/room69-flags";
 import { TerryScenes } from "../../event/terry-scenes";
 import { GAME, MoveToLocation, TimeStep, WORLD, WorldTime } from "../../GAME";
@@ -11,6 +12,7 @@ import { IChoice, Link } from "../../link";
 import { ILocRigardShops } from "../../location";
 import { Party } from "../../party";
 import { Text } from "../../text";
+import { Burrows } from "../burrows";
 import { BurrowsFlags } from "../burrows-flags";
 import { ArmorShopLoc, ArmorShopScenes } from "./armorshop";
 import { ClothShopLoc, ClothShopScenes } from "./clothstore";
@@ -183,7 +185,7 @@ ShopStreetLoc.Street.links.push(new Link(
 ShopStreetLoc.Street.events.push(new Link(
 	"Scepter", () => {
 		const rigard = GAME().rigard;
-		const burrows = GAME().burrows;
+		const burrows: Burrows = GAME().burrows;
 		return rigard.flags.Scepter !== 0 && burrows.flags.Access < BurrowsFlags.AccessFlags.Stage5;
 	}, true,
 	undefined,
@@ -205,7 +207,7 @@ ShopStreetLoc.Street.events.push(new Link(
 	() => {
 		const cveta = GAME().cveta;
 		const kiakai = GAME().kiakai;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 
 		const parse: any = {
@@ -315,7 +317,7 @@ ShopStreetLoc.Street.events.push(new Link(
 	},
 	() => {
 		const room69 = GAME().room69;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		Text.Clear();
 		if (room69.flags.Hinges === Room69Flags.HingesFlags.TalkedToGoldsmith) {
@@ -377,7 +379,7 @@ ShopStreetLoc.Street.events.push(new Link(
 export namespace ShopStreetScenes {
 
 	export function Speculate() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const rigard = GAME().rigard;
 

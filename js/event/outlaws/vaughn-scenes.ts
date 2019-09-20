@@ -4,13 +4,14 @@ import { Gui } from "../../gui";
 import { IChoice } from "../../link";
 import { Text } from "../../text";
 import { Season } from "../../time";
+import { Player } from "../player";
 import { VaughnFlags } from "./vaughn-flags";
 import { VaughnTasksScenes } from "./vaughn-tasks";
 
 export namespace VaughnScenes {
 
 	export function Introduction() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const vaughn = GAME().vaughn;
 
 		const parse: any = {
@@ -54,7 +55,7 @@ export namespace VaughnScenes {
 	}
 
 	export function CampApproach() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const vaughn = GAME().vaughn;
 
 		const parse: any = {
@@ -130,7 +131,7 @@ export namespace VaughnScenes {
 	}
 
 	export function Prompt() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const parse: any = {
 			playername : player.name,
@@ -193,7 +194,7 @@ export namespace VaughnScenes {
 	}
 
 	export function TalkPrompt() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const vaughn = GAME().vaughn;
 
 		const parse: any = {
@@ -268,7 +269,7 @@ export namespace VaughnScenes {
 	}
 
 	export function TalkHimself() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const vaughn = GAME().vaughn;
 
 		const parse: any = {
@@ -458,7 +459,7 @@ export namespace VaughnScenes {
 	}
 
 	export function TalkWar() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const vaughn = GAME().vaughn;
 
 		const parse: any = {
@@ -676,7 +677,7 @@ export namespace VaughnScenes {
 	/* VAUGHN SEX SCENES */
 
 	export function Sex() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const vaughn = GAME().vaughn;
 
 		const parse: any = {
@@ -762,7 +763,7 @@ export namespace VaughnScenes {
 	}
 
 	export function SexTitfuck() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const parse: any = {
 		};
@@ -796,7 +797,7 @@ export namespace VaughnScenes {
 	}
 
 	export function SexTitfuckBig() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const vaughn = GAME().vaughn;
 
 		let parse: any = {
@@ -900,7 +901,7 @@ export namespace VaughnScenes {
 	}
 
 	export function SexTitfuckBigCont(parse: any) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const vaughn = GAME().vaughn;
 
 		Text.NL();
@@ -959,7 +960,7 @@ export namespace VaughnScenes {
 	}
 
 	export function SexTitfuckAverage() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const vaughn = GAME().vaughn;
 
 		let parse: any = {
@@ -1097,7 +1098,7 @@ export namespace VaughnScenes {
 
 	// Confront Vaughn about calling you Sabrina
 	export function SexConfront() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const vaughn = GAME().vaughn;
 
 		let parse: any = {

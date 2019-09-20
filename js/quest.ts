@@ -15,6 +15,7 @@ import { Gui } from "./gui";
 import { AlchemyItems } from "./items/alchemy";
 import { QuestItems } from "./items/quest";
 import { IChoice } from "./link";
+import { Burrows } from "./loc/burrows";
 import { BurrowsFlags } from "./loc/burrows-flags";
 import { DryadGladeFlags } from "./loc/glade-flags";
 import { RigardFlags } from "./loc/rigard/rigard-flags";
@@ -634,7 +635,7 @@ export namespace Quests {
 			return "Help Ophelia with her alchemical experiments in the Burrows. You are not sure this is really a good idea, but Lagon promised to pay you handsomely for your services.";
 		},
 		active() {
-			const burrows = GAME().burrows;
+			const burrows: Burrows = GAME().burrows;
 			let status = Quests.Type.NotStarted;
 			if (burrows.flags.Access >= BurrowsFlags.AccessFlags.Stage3) {
 				status |= Quests.Type.Completed;
@@ -712,7 +713,7 @@ export namespace Quests {
 			return "Ophelia has asked you to search for Lagon's scepter, possibly the only thing that can help her mother.";
 		},
 		active() {
-			const burrows = GAME().burrows;
+			const burrows: Burrows = GAME().burrows;
 			let status = Quests.Type.NotStarted;
 			if (burrows.flags.Access >= BurrowsFlags.AccessFlags.QuestlineComplete) {
 				status |= Quests.Type.Completed;
@@ -740,7 +741,7 @@ export namespace Quests {
 					return GAME().rigard.flags.Scepter === 0 ? "Follow the merchant lead, trail the caravan along the King's Road." : "Follow the merchant lead, probably best to check the merchant street.";
 				},
 				active() {
-					const burrows = GAME().burrows;
+					const burrows: Burrows = GAME().burrows;
 					let status = Quests.Type.NotStarted;
 					if (burrows.flags.Access >= BurrowsFlags.AccessFlags.Stage4) {
 						status |= Quests.Type.Visible;
@@ -756,7 +757,7 @@ export namespace Quests {
 					return "Return the scepter to the Burrows.";
 				},
 				active() {
-					const burrows = GAME().burrows;
+					const burrows: Burrows = GAME().burrows;
 					let status = Quests.Type.NotStarted;
 					if (burrows.flags.Access >= BurrowsFlags.AccessFlags.Stage5) {
 						status |= Quests.Type.Visible;

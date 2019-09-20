@@ -11,6 +11,7 @@ import { KiakaiScenes } from "./kiakai-scenes";
 import { RosalinFlags } from "./nomads/rosalin-flags";
 import { CvetaFlags } from "./outlaws/cveta-flags";
 import { CvetaScenes } from "./outlaws/cveta-scenes";
+import { Player } from "./player";
 import { RavenMotherScenes } from "./raven";
 import { RavenFlags } from "./raven-flags";
 import { TwinsFlags } from "./royals/twins-flags";
@@ -20,7 +21,7 @@ export namespace DreamsScenes {
 
 	export function Entry(func: any) {
 		const party: Party = GAME().party;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const ravenmother = GAME().ravenmother;
 		const fera = GAME().fera;
 		const kiakai = GAME().kiakai;
@@ -230,7 +231,7 @@ export namespace DreamsScenes {
 	}
 
 	export function Harem(ravenTrigger: boolean) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const parse: any = {
 			setof : player.NumCocks() > 1 ? " set of" : "",
@@ -268,7 +269,7 @@ export namespace DreamsScenes {
 	}
 
 	export function Heartstone(ravenTrigger: boolean) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const parse: any = {
 			skinDesc() { return player.SkinDesc(); },
@@ -298,7 +299,7 @@ export namespace DreamsScenes {
 	}
 
 	export function EndlessClassroom(ravenTrigger: boolean) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const parse: any = {
 			gen : player.mfFem("Sir", "Ma'am"),
@@ -349,7 +350,7 @@ export namespace DreamsScenes {
 
 	export function House(ravenTrigger: boolean) {
 		const party: Party = GAME().party;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const parse: any = {
 			mastermistress : player.mfFem("master", "mistress"),
@@ -423,7 +424,7 @@ export namespace DreamsScenes {
 	}
 
 	export function UruChoice(ravenTrigger: boolean) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const uru = GAME().uru;
 
 		const parse: any = {
@@ -542,7 +543,7 @@ export namespace DreamsScenes {
 	}
 
 	export function AriaTemple(ravenTrigger: boolean) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const uru = GAME().uru;
 
 		const parse: any = {
@@ -661,7 +662,7 @@ export namespace DreamsScenes {
 	}
 
 	export function KiakaiMonster(ravenTrigger: boolean) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const kiakai = GAME().kiakai;
 
 		const parse: any = {
@@ -737,7 +738,7 @@ export namespace DreamsScenes {
 	}
 
 	export function RosalinTransformation(ravenTrigger: boolean) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const parse: any = {
 			skinDesc() { return player.SkinDesc(); },
@@ -758,7 +759,7 @@ export namespace DreamsScenes {
 	}
 
 	export function GwendyBarn(ravenTrigger: boolean) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const parse: any = {
 			boyGirl : player.mfTrue("boy", "girl"),
@@ -773,7 +774,7 @@ export namespace DreamsScenes {
 	}
 
 	export function GwendyStallion(ravenTrigger: boolean) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const parse: any = {
 			playername : player.name,
@@ -831,7 +832,7 @@ export namespace DreamsScenes {
 	}
 
 	export function MirandaMerc(ravenTrigger: boolean) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const parse: any = {
 			playername : player.name,
@@ -854,7 +855,7 @@ export namespace DreamsScenes {
 	}
 
 	export function TwinsMaids(ravenTrigger: boolean) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const parse: any = {
 			raven : DreamsScenes.RavenText(ravenTrigger, ", served on a plate with a raven motif", ". The raven depicted on the plate peer up at you intently, but you are not going to let that spoil your evening"),
@@ -872,7 +873,7 @@ export namespace DreamsScenes {
 	}
 
 	export function BlowjobGive(ravenTrigger: boolean) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const parse: any = {
 			raven : DreamsScenes.RavenText(ravenTrigger, " As you look up, the raven’s black eyes meet yours, nodding sagely as you dig in.", " You freeze slightly as you look up at the cock’s owner, a slight smirk on his beak. Well, lets see how the spy likes this."),
@@ -889,7 +890,7 @@ export namespace DreamsScenes {
 
 	export function BlowjobRec(ravenTrigger: boolean) {
 		const party: Party = GAME().party;
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const parse: any = {
 			raven : DreamsScenes.RavenText(ravenTrigger, " On the back of the couch, four ravens sit, watching you with interest.", " You glance up, noting your feathered observers sitting on the edge of the couch. Naughty birds."),
@@ -932,7 +933,7 @@ export namespace DreamsScenes {
 	}
 
 	export function CunnilingusGive(ravenTrigger: boolean) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const parse: any = {
 			raven : DreamsScenes.RavenText(ravenTrigger, " A raven peeks over her shoulder, peering at you curiously.", " Here too, the ravens are watching, peeking down at you over her shoulder. Why do they follow you?"),
@@ -950,7 +951,7 @@ export namespace DreamsScenes {
 	}
 
 	export function CunnilingusRec(ravenTrigger: boolean) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const parse: any = {
 			raven : DreamsScenes.RavenText(ravenTrigger, " A raven settles down on your shoulders, ruffling its feathers uncertainly as it bobs up and down with your movements.", " A raven settles down a little way off, eyeing you warily. Perhaps it suspects that you are onto them."),
@@ -1066,7 +1067,7 @@ export namespace DreamsScenes {
 	}
 
 	export function AscheDance(ravenTrigger: boolean) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const parse: any = {
 			skin : player.SkinDesc(),
@@ -1106,7 +1107,7 @@ export namespace DreamsScenes {
 	}
 
 	export function AscheHotSpring(ravenTrigger: boolean) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		let parse: any = {};
 		parse = player.ParserTags(parse);

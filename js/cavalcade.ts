@@ -1,6 +1,7 @@
 import * as _ from "lodash";
 
 import { GetDEBUG } from "../app";
+import { ICavalcadePlayer, ICavalcadeResult } from "./cavalcade-player";
 import { GAME, SetCavalcade } from "./GAME";
 import { GameState, SetGameState } from "./gamestate";
 import { Gui } from "./gui";
@@ -33,7 +34,7 @@ export class Cavalcade {
 	}
 
 	// Return -1 for handA, 1 for handB, 0 for draw
-	public static EvaluateWinnerSorter(playerA: any, playerB: any) {
+	public static EvaluateWinnerSorter(playerA: ICavalcadePlayer, playerB: ICavalcadePlayer) {
 		if (!playerA.res && !playerB.res) { return 0; } else if (!playerA.res) { return 1; } else if (!playerB.res) { return -1; }
 		// Clear winner
 		if (playerA.res.score !== playerB.res.score) {
@@ -63,7 +64,7 @@ export class Cavalcade {
 		return 0;
 	}
 	public Deck: CardItem[];
-	public players: any[];
+	public players: ICavalcadePlayer[];
 	public stag: CardItem;
 	public NextRound: any;
 	public onPost: any;
@@ -73,7 +74,7 @@ export class Cavalcade {
 	public pot: number;
 	public house: CardItem[];
 
-	constructor(players: any[], opts?: any) {
+	constructor(players: ICavalcadePlayer[], opts?: any) {
 		opts = opts || {};
 
 		this.Deck = [];
@@ -161,7 +162,7 @@ export class Cavalcade {
 	}
 
 	// Hand is a collection of five cards
-	public EvaluateHand(hand: CardItem[]) {
+	public EvaluateHand(hand: CardItem[]): ICavalcadeResult {
 		if (!hand || hand.length !== 5) { return; }
 		// Evaluate cards from best to worst hand
 
@@ -263,8 +264,6 @@ export class Cavalcade {
 		if (counts[0].num === 2) {
 			return {score: Cavalcade.Score.Pair, high: counts[0].val, stag: hasStag};
 		}
-
-		return {};
 	}
 
 	public SuitStr(suit: CardSuit) {

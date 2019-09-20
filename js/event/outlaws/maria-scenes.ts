@@ -10,6 +10,7 @@ import { IChoice } from "../../link";
 import { Party } from "../../party";
 import { Text } from "../../text";
 import { GwendyFlags } from "../farm/gwendy-flags";
+import { Player } from "../player";
 import { CvetaFlags } from "./cveta-flags";
 import { CvetaScenes } from "./cveta-scenes";
 import { DeadDropScenes } from "./maria-dd";
@@ -21,7 +22,7 @@ export namespace MariaScenes {
 
     // Camp interaction
     export function CampInteract() {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const outlaws = GAME().outlaws;
         const maria = GAME().maria;
 
@@ -317,7 +318,7 @@ export namespace MariaScenes {
     }
 
     export function TalkPrompt() {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const outlaws = GAME().outlaws;
         const maria = GAME().maria;
         const gwendy = GAME().gwendy;
@@ -613,7 +614,7 @@ export namespace MariaScenes {
     }
 
     export function ForestMeeting() {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const party: Party = GAME().party;
         const maria = GAME().maria;
 
@@ -681,7 +682,7 @@ export namespace MariaScenes {
     }
 
     export function ForestConfront() {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const party: Party = GAME().party;
         const maria = GAME().maria;
 
@@ -794,7 +795,7 @@ export namespace MariaScenes {
     }
 
     export function ForestConfrontWin() {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const maria = GAME().maria;
 
         let parse: any = {
@@ -903,7 +904,7 @@ export namespace MariaScenes {
     }
 
     export function ForestAftermath() {
-        const player = GAME().player;
+        const player: Player = GAME().player;
 
         let parse: any = {
 
@@ -987,7 +988,7 @@ export namespace MariaScenes {
     }
 
     export function ForestCamp() {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const party: Party = GAME().party;
         const maria = GAME().maria;
 

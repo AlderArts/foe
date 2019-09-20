@@ -6,9 +6,11 @@ import { Sex } from "../../entity-sex";
 import { GAME, TimeStep } from "../../GAME";
 import { Gui } from "../../gui";
 import { IChoice } from "../../link";
+import { Burrows } from "../../loc/burrows";
 import { BurrowsFlags } from "../../loc/burrows-flags";
 import { PregnancyHandler } from "../../pregnancy";
 import { Text } from "../../text";
+import { Player } from "../player";
 import { LucilleScenes } from "./lucille";
 import { RoaFlags } from "./roa-flags";
 
@@ -32,7 +34,7 @@ export namespace RoaScenes {
     }
 
     export function BrothelApproach() {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const roa = GAME().roa;
         const parse: any = {
             playername : player.name,
@@ -77,7 +79,7 @@ export namespace RoaScenes {
     }
 
     export function BrothelPrompt() {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const roa = GAME().roa;
         let parse: any = {
             cost : Text.NumToText(roa.Cost()),
@@ -161,7 +163,7 @@ export namespace RoaScenes {
 
     // TODO
     export function TalkPrompt(backPrompt: any) {
-        const burrows = GAME().burrows;
+        const burrows: Burrows = GAME().burrows;
         const roa = GAME().roa;
         const rigard = GAME().rigard;
         const ches = GAME().ches;
@@ -336,8 +338,8 @@ export namespace RoaScenes {
     }
 
     export function First() {
-        const player = GAME().player;
-        const burrows = GAME().burrows;
+        const player: Player = GAME().player;
+        const burrows: Burrows = GAME().burrows;
         const roa = GAME().roa;
 
         const cost   = roa.Cost();
@@ -493,7 +495,7 @@ export namespace RoaScenes {
     }
 
     export function TSLPitchAnal() {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const roa = GAME().roa;
         const rigard = GAME().rigard;
 
@@ -511,7 +513,7 @@ export namespace RoaScenes {
 
         let mStrap  = false;
         const strapon = p1cock ? p1cock.isStrapon     : false; // Regular
-        const knot    = p1cock ? p1cock.knotted !== 0 : false;
+        const knot    = p1cock ? p1cock.knot !== 0 : false;
 
         Text.Clear();
         if (player.FirstCock()) {
@@ -825,7 +827,7 @@ export namespace RoaScenes {
     }
 
     export function TSLCatchVaginal() {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const roa = GAME().roa;
 
         if (roa.flags.Met < RoaFlags.Met.Sexed) {
@@ -1157,7 +1159,7 @@ export namespace RoaScenes {
     }
 
     export function TSLPostSexPrompt(mStrap: boolean) {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const roa = GAME().roa;
 
         let parse: any = {

@@ -171,7 +171,7 @@ export class Player extends Entity {
 	}
 
 	// Return true if passed out
-	public Drink(drink: number, suppressText: boolean) {
+	public Drink(drink: number, suppressText?: boolean) {
 		const oldLevel = this.drunkLevel;
 		this.drunkLevel += drink / Math.log(this.Sta());
 
@@ -206,7 +206,7 @@ export class Player extends Entity {
 	}
 
 	public LactationProgress(oldMilk: number, newMilk: number, lactationRate: number) {
-		const player = this;
+		const player: Player = this;
 
 		if (oldMilk < 0.5 && newMilk >= 0.5) {
 			Gui.Callstack.unshift(() => {
@@ -308,7 +308,7 @@ export class Player extends Entity {
 	}
 
 	public PregnancyProgess(womb: Womb, slot: number, oldProgress: number, progress: number) {
-		const player = this;
+		const player: Player = this;
 
 		if (!womb) { return; }
 		const num = womb.litterSize;
@@ -533,7 +533,7 @@ export class Player extends Entity {
 
 	// Pregnancy TODO
 	public PregnancyTrigger(womb: Womb, slot: number) {
-		const player = this;
+		const player: Player = this;
 		const party: Party = GAME().party;
 
 		if (!womb) { return; }
@@ -682,7 +682,7 @@ export class Player extends Entity {
 	// Party interaction
 	public Interact(switchSpot: boolean) {
 		Text.Clear();
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		player.PrintDescription();
 

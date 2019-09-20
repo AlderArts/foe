@@ -7,6 +7,7 @@ import * as _ from "lodash";
 import { EncounterTable } from "../../encountertable";
 import { Event } from "../../event";
 import { AscheFlags } from "../../event/asche-flags";
+import { Player } from "../../event/player";
 import { GAME, MoveToLocation, WORLD, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
 import { Item } from "../../item";
@@ -63,7 +64,7 @@ export namespace MagicShopScenes {
 			Text.NL();
 		};
 		const buyPromptFunc = (item: Item, cost: number, bought: boolean) => {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const coin = Text.NumToText(cost);
 			const parse: any = {
 				heshe : player.mfFem("he", "she"),
@@ -115,7 +116,7 @@ export namespace MagicShopScenes {
 				Text.NL();
 			},
 			sellSuccessFunc(item: Item, cost: number, num: number) {
-				const player = GAME().player;
+				const player: Player = GAME().player;
 				const parse: any = {
 					hisher : player.mfFem("his", "her"),
 					heshe : player.mfFem("he", "she"),
@@ -134,7 +135,7 @@ export namespace MagicShopScenes {
 				Text.NL();
 			},
 			sellFailFunc(item: Item, cost: number, sold: boolean) {
-				const player = GAME().player;
+				const player: Player = GAME().player;
 				const parse: any = {
 					hisher : player.mfFem("his", "her"),
 					himher : player.mfFem("him", "her"),
@@ -286,7 +287,7 @@ MagicShopLoc.description = () => {
 MagicShopLoc.events.push(new Link(
 	"Asche", true, true, undefined,
 	() => {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const parse: any = {
 			handsomepretty : player.mfFem("handsome", "pretty"),
 		};

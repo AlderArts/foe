@@ -12,6 +12,7 @@ import { IChoice } from "../../link";
 import { Party } from "../../party";
 import { Text } from "../../text";
 import { Season, Time } from "../../time";
+import { Player } from "../player";
 import { LeiFlags } from "./lei-flags";
 import { LeiSexScenes } from "./lei-sex";
 
@@ -65,7 +66,7 @@ export namespace LeiTaskScenes {
 			return true;
 		}
 		export function Eligable() {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			return player.level >= 6;
 		}
 		export function OnTask() {
@@ -150,7 +151,7 @@ export namespace LeiTaskScenes {
 		}
 
 		export function Estate() {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const party: Party = GAME().party;
 			const lei = GAME().lei;
 			const kiakai = GAME().kiakai;
@@ -429,7 +430,7 @@ export namespace LeiTaskScenes {
 		}
 
 		export function CombatLoss() {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const party: Party = GAME().party;
 			SetGameState(GameState.Event, Gui);
 			Text.Clear();
@@ -458,7 +459,7 @@ export namespace LeiTaskScenes {
 		}
 
 		export function CombatWin() {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const party: Party = GAME().party;
 			const lei = GAME().lei;
 			SetGameState(GameState.Event, Gui);
@@ -490,7 +491,7 @@ export namespace LeiTaskScenes {
 		}
 
 		export function PostCombat(enc: any, won: boolean) {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const party: Party = GAME().party;
 			const lei = GAME().lei;
 			const parse: any = {

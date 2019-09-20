@@ -16,6 +16,7 @@ import { Element } from "../damagetype";
 import { EncounterTable } from "../encountertable";
 import { Entity } from "../entity";
 import { Sex } from "../entity-sex";
+import { Player } from "../event/player";
 import { GAME, TimeStep } from "../GAME";
 import { GameState, SetGameState } from "../gamestate";
 import { Gui } from "../gui";
@@ -213,7 +214,7 @@ export namespace EquineScenes {
 	}
 
 	export function LossPrompt() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		SetGameState(GameState.Event, Gui);
 
@@ -349,7 +350,7 @@ export namespace EquineScenes {
 	}
 
 	export function FuckFemale(enc: any) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		let parse: any = {
 			mobVag() { return enc.mare.FirstVag().Short(); },
@@ -461,7 +462,7 @@ export namespace EquineScenes {
 	}
 
 	export function GetFucked(enc: any) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		let parse: any = {
 			ifArmor    : player.Armor() ? "strips you down to full nudity" : "runs them down your naked body",
 		};
@@ -526,7 +527,7 @@ export namespace EquineScenes {
 
 	// SCENE FOR MALES/HERMS
 	export function Threesome1(enc: any) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		let parse: any = {
 			mobVag() { return enc.mare.FirstVag().Short(); },
 			ifBalls() { return player.HasBalls() ? "r balls" : ""; },
@@ -602,7 +603,7 @@ export namespace EquineScenes {
 	}
 
 	export function Threesome2(enc: any) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		let parse: any = {
 			mobVag() { return enc.mare.FirstVag().Short(); },
 		};
@@ -651,7 +652,7 @@ export namespace EquineScenes {
 
 	// TODO
 	export function WinPrompt() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const enc  = this;
 		SetGameState(GameState.Event, Gui);
@@ -719,10 +720,10 @@ export namespace EquineScenes {
 
 	// TODO
 	export function WinFuckHim(enc: any) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const mare     = enc.mare;
-		const stallion = enc.stallion;
+		const mare: Equine = enc.mare;
+		const stallion: Equine = enc.stallion;
 
 		const p1cock = player.BiggestCock();
 		const allCocks = player.AllCocksCopy();
@@ -1164,10 +1165,10 @@ export namespace EquineScenes {
 	}
 
 	export function WinFuckHer(enc: any) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const mare     = enc.mare;
-		const stallion = enc.stallion;
+		const mare: Equine = enc.mare;
+		const stallion: Equine = enc.stallion;
 
 		let parse: any = {
 
@@ -1315,9 +1316,9 @@ export namespace EquineScenes {
 	}
 
 	export function WinRideHimVag(enc: any) {
-		const player = GAME().player;
-		const mare     = enc.mare;
-		const stallion = enc.stallion;
+		const player: Player = GAME().player;
+		const mare: Equine = enc.mare;
+		const stallion: Equine = enc.stallion;
 
 		let parse: any = {
 

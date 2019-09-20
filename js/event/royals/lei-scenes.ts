@@ -2,6 +2,7 @@ import * as _ from "lodash";
 
 import { Color } from "../../body/color";
 import { Encounter } from "../../combat";
+import { Entity } from "../../entity";
 import { GAME, TimeStep, WORLD, WorldTime } from "../../GAME";
 import { GameState, SetGameState } from "../../gamestate";
 import { Gui } from "../../gui";
@@ -11,6 +12,7 @@ import { SetGameOverButton } from "../../main-gameover";
 import { Party } from "../../party";
 import { Text } from "../../text";
 import { Season, Time } from "../../time";
+import { Player } from "../player";
 import { LeiSpar } from "./lei";
 import { LeiFlags } from "./lei-flags";
 import { LeiSexScenes } from "./lei-sex";
@@ -53,7 +55,7 @@ export namespace LeiScenes {
 	}
 
 	export function InnPrompt() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const lei = GAME().lei;
 		const rigard = GAME().rigard;
 		const parse: any = {
@@ -197,7 +199,7 @@ export namespace LeiScenes {
 	}
 
 	export function InnPromptFirst() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const lei = GAME().lei;
 		const parse: any = {
@@ -226,7 +228,7 @@ export namespace LeiScenes {
 			Text.NL();
 			// TODO: more complex strength assessment
 			let strongestLevel = player.level;
-			let strongestMember = player;
+			let strongestMember: Entity = player;
 			for (let i = 1; i < party.members.length; i++) {
 				if (party.members[i].level > strongestLevel) {
 					strongestLevel = party.members[i].level;
@@ -459,7 +461,7 @@ export namespace LeiScenes {
 	}
 
 	export function ExplanationMain() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const lei = GAME().lei;
 		const parse: any = {
 
@@ -827,7 +829,7 @@ export namespace LeiScenes {
 	}
 
 	export function BarFight() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const lei = GAME().lei;
 		const parse: any = {
@@ -1004,7 +1006,7 @@ export namespace LeiScenes {
 	}
 
 	export function TalkPrompt() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const lei = GAME().lei;
 		const parse: any = {
 			playername : player.name,
@@ -1181,7 +1183,7 @@ export namespace LeiScenes {
 	}
 
 	export function TalkPastPrompt() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const lei = GAME().lei;
 		const parse: any = {
 			playername : player.name,
@@ -1328,7 +1330,7 @@ export namespace LeiScenes {
 	}
 
 	export function SparPrompt() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const lei = GAME().lei;
 		const parse: any = {
@@ -1408,7 +1410,7 @@ export namespace LeiScenes {
 	}
 
 	export function SparWin() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const lei = GAME().lei;
 		const enc = this;
@@ -1530,7 +1532,7 @@ export namespace LeiScenes {
 	}
 
 	export function GuardStalking() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const lei = GAME().lei;
 		const miranda = GAME().miranda;
@@ -1639,7 +1641,7 @@ export namespace LeiScenes {
 	}
 
 	export function GuardStalkingEntry(parse: any, nv: boolean) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const kiakai = GAME().kiakai;
 		const miranda = GAME().miranda;
@@ -1686,7 +1688,7 @@ export namespace LeiScenes {
 	}
 
 	export function GuardStalkingConverge(parse: any, nv: boolean) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const lei = GAME().lei;
 		Text.Add("You gingerly take a few steps inside. ", parse);
 		if (nv) {
@@ -1828,7 +1830,7 @@ export namespace LeiScenes {
 	}
 
 	export function GuardStalkingApprove(parse: any, nv: boolean) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const lei = GAME().lei;
 		Text.Add("<i>“I but water a young sprout. If it becomes strong, perhaps I can use it to grow myself.”</i> He pauses, and his next words are quieter. <i>“This one is not as promising as some I wish to cultivate, but one cannot rely overmuch on a single crop.”</i>", parse);

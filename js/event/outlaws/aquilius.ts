@@ -17,6 +17,7 @@ import { Text } from "../../text";
 import { Time } from "../../time";
 import { AscheTasksScenes } from "../asche-tasks";
 import { GlobalScenes } from "../global";
+import { Player } from "../player";
 import { AquiliusFlags } from "./aquilius-flags";
 
 export class Aquilius extends Entity {
@@ -129,7 +130,7 @@ export class Aquilius extends Entity {
 
 export namespace AquiliusScenes {
 	export function FirstMeeting() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const aquilius = GAME().aquilius;
 		const kiakai = GAME().kiakai;
@@ -188,7 +189,7 @@ export namespace AquiliusScenes {
 	}
 
 	export function Approach() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const aquilius = GAME().aquilius;
 		const outlaws = GAME().outlaws;
@@ -461,7 +462,7 @@ export namespace AquiliusScenes {
 	}
 
 	export function TalkSelfPrompt() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const kiakai = GAME().kiakai;
 
@@ -599,7 +600,7 @@ export namespace AquiliusScenes {
 	}
 
 	export function TalkGrind() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const parse: any = {
 			playername : player.name,
@@ -681,7 +682,7 @@ export namespace AquiliusScenes {
 	}
 
 	export function TalkWarPrompt() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		const parse: any = {
 			playername : player.name,
@@ -785,7 +786,7 @@ export namespace AquiliusScenes {
 	}
 
 	export function Smoke() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const aquilius = GAME().aquilius;
 
 		const parse: any = {
@@ -901,7 +902,7 @@ export namespace AquiliusScenes {
 	}
 
 	export function HelpOut() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const aquilius = GAME().aquilius;
 
 		const parse: any = {
@@ -930,7 +931,7 @@ export namespace AquiliusScenes {
 
 	// TODO
 	export function HelpOutPrompt() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const aquilius = GAME().aquilius;
 
 		const parse: any = {
@@ -1043,7 +1044,7 @@ export namespace AquiliusScenes {
 
 	// Tend to sick (requires healer job available)
 	export function TendToSick() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const aquilius = GAME().aquilius;
 		const outlaws = GAME().outlaws;

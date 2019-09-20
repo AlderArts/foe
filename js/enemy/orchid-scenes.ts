@@ -1,6 +1,8 @@
 import { Race } from "../body/race";
 import { Entity } from "../entity";
 import { LaylaFlags } from "../event/farm/layla-flags";
+import { Kiakai } from "../event/kiakai";
+import { Player } from "../event/player";
 import { GAME, TimeStep } from "../GAME";
 import { Gui } from "../gui";
 import { IChoice } from "../link";
@@ -8,6 +10,7 @@ import { OasisFlags } from "../loc/oasis-flags";
 import { Party } from "../party";
 import { PregnancyHandler } from "../pregnancy";
 import { Text } from "../text";
+import { OrchidBoss } from "./orchid";
 import { OrchidFlags } from "./orchid-flags";
 
 export namespace OrchidScenes {
@@ -25,8 +28,8 @@ export namespace OrchidScenes {
 	}
 
 	export function Interact() {
-		const player = GAME().player;
-		const orchid = GAME().orchid;
+		const player: Player = GAME().player;
+		const orchid: OrchidBoss = GAME().orchid;
 		const parse: any = {
 			playername : player.name,
 		};
@@ -89,8 +92,8 @@ export namespace OrchidScenes {
 	}
 
 	export function TalkPrompt() {
-		const player = GAME().player;
-		const orchid = GAME().orchid;
+		const player: Player = GAME().player;
+		const orchid: OrchidBoss = GAME().orchid;
 		const parse: any = {
 			playername : player.name,
 		};
@@ -312,7 +315,7 @@ export namespace OrchidScenes {
 	}
 
 	export function FirstTalk() {
-		const kiakai = GAME().kiakai;
+		const kiakai: Kiakai = GAME().kiakai;
 		const party: Party = GAME().party;
 		const parse: any = {
 
@@ -347,8 +350,8 @@ export namespace OrchidScenes {
 	}
 
 	export function FirstTalkPrompt(opts: any) {
-		const player = GAME().player;
-		const kiakai = GAME().kiakai;
+		const player: Player = GAME().player;
+		const kiakai: Kiakai = GAME().kiakai;
 		const party: Party = GAME().party;
 		const layla = GAME().layla;
 		const oasis = GAME().oasis;

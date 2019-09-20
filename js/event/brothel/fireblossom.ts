@@ -4,6 +4,7 @@ import { GAME, TimeStep } from "../../GAME";
 import { Gui } from "../../gui";
 import { IChoice } from "../../link";
 import { Text } from "../../text";
+import { Player } from "../player";
 import { LucilleFlags } from "./lucille-flags";
 
 namespace FireblossomFlags {
@@ -97,7 +98,7 @@ export namespace FireblossomScenes {
 	}
 
 	export function IntroEntryPoint() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const kiakai = GAME().kiakai;
 		const fireblossom = GAME().fireblossom;
 		const lucille = GAME().lucille;
@@ -182,7 +183,7 @@ export namespace FireblossomScenes {
 	}
 
 	export function Outro() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const fireblossom = GAME().fireblossom;
 		const parse: any = {
 			armor : player.ArmorDesc(),
@@ -199,7 +200,7 @@ export namespace FireblossomScenes {
 	}
 
 	export function S1TheJourney() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const fireblossom = GAME().fireblossom;
 		const parse: any = {
 
@@ -459,7 +460,7 @@ export namespace FireblossomScenes {
 	}
 
 	export function S1Draxen() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const fireblossom = GAME().fireblossom;
 		const parse: any = {
 
@@ -583,7 +584,7 @@ export namespace FireblossomScenes {
 	}
 
 	export function S1Rakkat() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const fireblossom = GAME().fireblossom;
 		const parse: any = {
 
@@ -941,7 +942,7 @@ export namespace FireblossomScenes {
 	}
 
 	export function S1GrexRoom(opts: any) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const fireblossom = GAME().fireblossom;
 		const parse: any = {
 
@@ -1014,7 +1015,7 @@ export namespace FireblossomScenes {
 	}
 
 	export function S1GrexPens(opts: any) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const fireblossom = GAME().fireblossom;
 		const parse: any = {
 

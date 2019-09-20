@@ -6,6 +6,7 @@ import * as _ from "lodash";
 
 import { EncounterTable } from "../../encountertable";
 import { Event } from "../../event";
+import { Player } from "../../event/player";
 import { GAME, MoveToLocation, WORLD, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
 import { Item } from "../../item";
@@ -48,9 +49,9 @@ ArmorShopLoc.description = () => {
 		Text.Add("Although it’s early in the morning, a goodly number of customers have come in, hoping to find a good deal before they’re all snapped up. ", parse);
 	} else if (WorldTime().hour < 16) {
 		Text.Add("The afternoon rush has made the already cramped store even more so, leaving the aisles thoroughly blocked with people. ", parse);
- } else {
+ 	} else {
 		Text.Add("While most of the customers have headed home, a few still linger in the aisles, taking advantage of the relative peace and quiet to browse to their hearts’ content. ", parse);
- }
+ 	}
 	Text.Add("The store’s clientele is largely comprised of morphs, perhaps because the proprietor is one of their number, or more likely because his goods are more affordable to them.", parse);
 	Text.NL();
 	Text.Add("Whatever the case, you get the feeling that you’d better inspect everything you’re thinking of buying before actually parting with your money, especially with the sign above Donovan that declares ‘[sign]’ in big red letters.", parse);
@@ -98,7 +99,7 @@ export namespace ArmorShopScenes {
 
 	export function CreateShop() {
 		const buySuccessFunc = (item: Item, cost: number, num: number) => {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const parse: any = {
 				sirmadam : player.mfTrue("sir", "madam"),
 			};
@@ -114,7 +115,7 @@ export namespace ArmorShopScenes {
 			Text.NL();
 		};
 		const buyFailFunc = (item: Item, cost: number, bought: boolean) => {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const parse: any = {
 				sirmadam : player.mfTrue("sir", "madam"),
 			};
@@ -135,7 +136,7 @@ export namespace ArmorShopScenes {
 
 		const shop = new Shop({
 			buyPromptFunc(item: Item, cost: number, bought: boolean) {
-				const player = GAME().player;
+				const player: Player = GAME().player;
 				const coin = Text.NumToText(cost);
 				const parse: any = {
 					sirmadam : player.mfTrue("sir", "madam"),
@@ -157,7 +158,7 @@ export namespace ArmorShopScenes {
 			buySuccessFunc,
 			buyFailFunc,
 			sellPromptFunc(item: Item, cost: number, sold: boolean) {
-				const player = GAME().player;
+				const player: Player = GAME().player;
 				const coin = Text.NumToText(cost);
 				const parse: any = {
 					sirmadam : player.mfTrue("sir", "madam"),
@@ -193,7 +194,7 @@ export namespace ArmorShopScenes {
 				Text.NL();
 			},
 			sellSuccessFunc(item: Item, cost: number, num: number) {
-				const player = GAME().player;
+				const player: Player = GAME().player;
 				const parse: any = {
 					sirmadam : player.mfTrue("sir", "madam"),
 				};
@@ -215,7 +216,7 @@ export namespace ArmorShopScenes {
 				Text.NL();
 			},
 			sellFailFunc(item: Item, cost: number, sold: boolean) {
-				const player = GAME().player;
+				const player: Player = GAME().player;
 				const parse: any = {
 					sirmadam : player.mfTrue("sir", "madam"),
 					item : item.sDesc(),
@@ -239,7 +240,7 @@ export namespace ArmorShopScenes {
 
 		const specialShop = new Shop({
 			buyPromptFunc(item: Item, cost: number) {
-				const player = GAME().player;
+				const player: Player = GAME().player;
 				const coin = Text.NumToText(cost);
 				const parse: any = {
 					sirmadam : player.mfTrue("sir", "madam"),
@@ -376,7 +377,7 @@ export namespace ArmorShopScenes {
 	}
 
 	export function Prompt() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const rigard = GAME().rigard;
 
 		const parse: any = {
@@ -466,7 +467,7 @@ export namespace ArmorShopScenes {
 	}
 
 	export function Talk(backFunc: any) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const rigard = GAME().rigard;
 
 		const parse: any = {

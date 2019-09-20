@@ -19,9 +19,11 @@ import { Gui } from "../../gui";
 import { AccItems } from "../../items/accessories";
 import { AlchemyItems } from "../../items/alchemy";
 import { QuestItems } from "../../items/quest";
+import { Burrows } from "../../loc/burrows";
 import { Party } from "../../party";
 import { Text } from "../../text";
 import { TF } from "../../tf";
+import { Player } from "../player";
 
 export class Lagon extends Entity {
 	constructor(storage?: any) {
@@ -80,9 +82,9 @@ export class Lagon extends Entity {
 	}
 
 	// Schedule TODO
-	public IsAtLocation(location: any) {
+	public IsAtLocation(location?: any) {
 		const party: Party = GAME().party;
-		const burrows = GAME().burrows;
+		const burrows: Burrows = GAME().burrows;
 		const world = WORLD();
 		// if(burrows.LagonChained()) //Slave
 		location = location || party.location;
@@ -187,7 +189,7 @@ export class LagonRegular extends BossEntity {
 
 	// TODO
 	public Act(enc: any, activeChar: any) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		// Pick a random target
 		const t = this.GetSingleTarget(enc, activeChar);
 

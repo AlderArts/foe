@@ -30,6 +30,9 @@ export class Balls extends BodyPart {
 	public SackSize() {
 		return this.size.Get() * this.count.Get();
 	}
+	public Count() {
+		return this.count.Get();
+	}
 
 	public ToStorage(full: boolean) {
 		const storage: any = {

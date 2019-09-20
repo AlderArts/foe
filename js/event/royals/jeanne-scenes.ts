@@ -9,6 +9,7 @@ import { Text } from "../../text";
 import { TFItem } from "../../tf";
 import { GlobalScenes } from "../global";
 import { RosalinFlags } from "../nomads/rosalin-flags";
+import { Player } from "../player";
 import { TerryFlags } from "../terry-flags";
 import { GolemFlags } from "./golem-flags";
 import { Jeanne } from "./jeanne";
@@ -48,7 +49,7 @@ export namespace JeanneScenes {
     }
 
     export function InteractPrompt() {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const jeanne = GAME().jeanne;
         const terry = GAME().terry;
         const party: Party = GAME().party;
@@ -100,7 +101,7 @@ export namespace JeanneScenes {
     }
 
     export function AlchemyCallback(item: TFItem) {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const jeanne = GAME().jeanne;
         const party: Party = GAME().party;
 
@@ -136,7 +137,7 @@ export namespace JeanneScenes {
     }
 
     export function Talk() {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const terry = GAME().terry;
         const rosalin = GAME().rosalin;
         const jeanne = GAME().jeanne;
@@ -419,7 +420,7 @@ export namespace JeanneScenes {
     }
 
     export function First() {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const kiakai = GAME().kiakai;
         const jeanne = GAME().jeanne;
         const party: Party = GAME().party;
@@ -541,7 +542,7 @@ export namespace JeanneScenes {
     }
 
     export function FirstCont() {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const parse: any = {
             playername : player.name,
         };

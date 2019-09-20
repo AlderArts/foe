@@ -11,6 +11,7 @@ import { Gui } from "../../gui";
 import { AlchemyItems } from "../../items/alchemy";
 import { QuestItems } from "../../items/quest";
 import { IChoice } from "../../link";
+import { Burrows } from "../../loc/burrows";
 import { BurrowsFlags } from "../../loc/burrows-flags";
 import { SetGameOverButton } from "../../main-gameover";
 import { Party } from "../../party";
@@ -19,7 +20,8 @@ import { PregnancyHandler } from "../../pregnancy";
 import { Text } from "../../text";
 import { RoaFlags } from "../brothel/roa-flags";
 import { GlobalScenes } from "../global";
-import { LagonRegular } from "./lagon";
+import { Player } from "../player";
+import { Lagon, LagonRegular } from "./lagon";
 import { LagonScenes } from "./lagon-scenes";
 import { OpheliaFlags } from "./ophelia-flags";
 import { VenaFlags } from "./vena-flags";
@@ -33,7 +35,7 @@ export namespace OpheliaScenes {
 
     export function LabDesc() {
         const ophelia = GAME().ophelia;
-        const burrows = GAME().burrows;
+        const burrows: Burrows = GAME().burrows;
         const parse: any = {
             old  : ophelia.flags.Met !== 0 ? " old" : "",
             camp : GlobalScenes.PortalsOpen() ? "the gemstead" : "camp",
@@ -77,7 +79,7 @@ export namespace OpheliaScenes {
     }
 
     export function LabApproach() {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const parse: any = {
             playername : player.name,
         };
@@ -90,7 +92,7 @@ export namespace OpheliaScenes {
     }
 
     export function TraitPrompt(options: any) {
-        const burrows = GAME().burrows;
+        const burrows: Burrows = GAME().burrows;
         const parse: any = {
 
         };
@@ -187,9 +189,9 @@ export namespace OpheliaScenes {
 
     // TODO
     export function TalkPrompt() {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const ophelia = GAME().ophelia;
-        const burrows = GAME().burrows;
+        const burrows: Burrows = GAME().burrows;
         const parse: any = {
             playername : player.name,
         };
@@ -510,11 +512,11 @@ export namespace OpheliaScenes {
     }
 
     export function TalkRoa() {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const roa = GAME().roa;
         const ophelia = GAME().ophelia;
         const rosalin = GAME().rosalin;
-        const burrows = GAME().burrows;
+        const burrows: Burrows = GAME().burrows;
 
         const parse: any = {
             playername : player.name,
@@ -799,9 +801,9 @@ export namespace OpheliaScenes {
     }
 
     export function TalkVena() {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const ophelia = GAME().ophelia;
-        const burrows = GAME().burrows;
+        const burrows: Burrows = GAME().burrows;
         let parse: any = {
             playername : player.name,
         };
@@ -886,7 +888,7 @@ export namespace OpheliaScenes {
 
     // TODO
     export function SexEntryPoint() {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const ophelia = GAME().ophelia;
         const parse: any = {
 
@@ -924,9 +926,9 @@ export namespace OpheliaScenes {
     }
 
     export function SexVaginal() {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const ophelia = GAME().ophelia;
-        const burrows = GAME().burrows;
+        const burrows: Burrows = GAME().burrows;
         const p1cock = player.BiggestCock();
         const knotted = p1cock ? p1cock.knot !== 0 : false;
 
@@ -1218,10 +1220,10 @@ export namespace OpheliaScenes {
     }
 
     export function LabPrompt() {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const party: Party = GAME().party;
         const ophelia = GAME().ophelia;
-        const burrows = GAME().burrows;
+        const burrows: Burrows = GAME().burrows;
 
         const parse: any = {
 
@@ -1329,9 +1331,9 @@ export namespace OpheliaScenes {
     }
 
     export function PotionsPrompt() {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const party: Party = GAME().party;
-        const burrows = GAME().burrows;
+        const burrows: Burrows = GAME().burrows;
 
         const parse: any = {
             playername : player.name,
@@ -1445,9 +1447,9 @@ export namespace OpheliaScenes {
     }
 
     export function DeliverCactoids() {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const party: Party = GAME().party;
-        const burrows = GAME().burrows;
+        const burrows: Burrows = GAME().burrows;
 
         const parse: any = {
             playername : player.name,
@@ -1507,9 +1509,9 @@ export namespace OpheliaScenes {
     }
 
     export function DeliverGolHusks() {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const party: Party = GAME().party;
-        const burrows = GAME().burrows;
+        const burrows: Burrows = GAME().burrows;
 
         const parse: any = {
             playername : player.name,
@@ -1559,9 +1561,9 @@ export namespace OpheliaScenes {
     }
 
     export function DeliverAlgae() {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const party: Party = GAME().party;
-        const burrows = GAME().burrows;
+        const burrows: Burrows = GAME().burrows;
 
         const parse: any = {
             playername : player.name,
@@ -1599,11 +1601,11 @@ export namespace OpheliaScenes {
     }
 
     export function DeliverFollowup(trait: number) {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const party: Party = GAME().party;
-        const lagon = GAME().lagon;
+        const lagon: Lagon = GAME().lagon;
         const ophelia = GAME().ophelia;
-        const burrows = GAME().burrows;
+        const burrows: Burrows = GAME().burrows;
 
         const parse: any = {
             playername : player.name,
@@ -1763,8 +1765,8 @@ export namespace OpheliaScenes {
     }
 
     export function DeliverVena(trait: number) {
-        const player = GAME().player;
-        const burrows = GAME().burrows;
+        const player: Player = GAME().player;
+        const burrows: Burrows = GAME().burrows;
         const parse: any = {
             playername : player.name,
         };
@@ -1817,14 +1819,14 @@ export namespace OpheliaScenes {
     }
 
     export function Reward() {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const party: Party = GAME().party;
         const terry = GAME().terry;
         const miranda = GAME().miranda;
         const kiakai = GAME().kiakai;
         const vena = GAME().vena;
         const ophelia = GAME().ophelia;
-        const burrows = GAME().burrows;
+        const burrows: Burrows = GAME().burrows;
 
         let parse: any = {
             playername : player.name,
@@ -2172,7 +2174,7 @@ export namespace OpheliaScenes {
     }
 
     export function ScepterRequest(fight: boolean) {
-        const player = GAME().player;
+        const player: Player = GAME().player;
 
         const parse: any = {
             playername : player.name,
@@ -2294,9 +2296,9 @@ export namespace OpheliaScenes {
     }
 
     export function RewardChoices() {
-        const player = GAME().player;
+        const player: Player = GAME().player;
         const party: Party = GAME().party;
-        const lagon = GAME().lagon;
+        const lagon: Lagon = GAME().lagon;
 
         let parse: any = {
         };

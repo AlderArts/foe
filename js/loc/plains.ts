@@ -14,6 +14,7 @@ import { MirandaScenes } from "../event/miranda-scenes";
 import { MomoScenes } from "../event/momo";
 import { OutlawsScenes } from "../event/outlaws/outlaws";
 import { OutlawsFlags } from "../event/outlaws/outlaws-flags";
+import { Player } from "../event/player";
 import { PoetScenes } from "../event/poet";
 import { PortalOpeningScenes } from "../event/portalopening";
 import { RoamingScenes } from "../event/roaming";
@@ -138,7 +139,7 @@ PlainsLoc.Crossroads.enc.AddEnc(() => {
 
 PlainsLoc.Crossroads.enc.AddEnc(() => {
 	return () => {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const kiakai = GAME().kiakai;
 

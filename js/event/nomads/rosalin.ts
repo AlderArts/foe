@@ -9,10 +9,12 @@ import { Alchemy } from "../../alchemy";
 import { AppendageType } from "../../body/appendage";
 import { Body, LowerBodyType } from "../../body/body";
 import { BodyPartType } from "../../body/bodypart";
+import { Butt } from "../../body/butt";
 import { Cock } from "../../body/cock";
 import { Color } from "../../body/color";
 import { Gender } from "../../body/gender";
 import { Race, RaceScore } from "../../body/race";
+import { Vagina } from "../../body/vagina";
 import { EncounterTable } from "../../encountertable";
 import { Entity } from "../../entity";
 import { Sex } from "../../entity-sex";
@@ -28,6 +30,7 @@ import { Text } from "../../text";
 import { TF, TFItem } from "../../tf";
 import { Rand } from "../../utility";
 import { KiakaiFlags } from "../kiakai-flags";
+import { Player } from "../player";
 import { TerryFlags } from "../terry-flags";
 import { TerryScenes } from "../terry-scenes";
 import { CaleFlags } from "./cale-flags";
@@ -209,7 +212,7 @@ export namespace RosalinScenes {
 	}
 
 	export function Interact() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const rosalin = GAME().rosalin;
 		const cale = GAME().cale;
@@ -301,7 +304,7 @@ export namespace RosalinScenes {
 	}
 
 	export function TalkPrompt() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const rosalin = GAME().rosalin;
 		const cale = GAME().cale;
@@ -714,7 +717,7 @@ export namespace RosalinScenes {
 	}
 
 	export function BrewAnusol() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const rosalin = GAME().rosalin;
 		const kiakai = GAME().kiakai;
@@ -780,7 +783,7 @@ export namespace RosalinScenes {
 	}
 
 	export function FirstTime() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const kiakai = GAME().kiakai;
 		Text.Clear();
@@ -860,7 +863,7 @@ export namespace RosalinScenes {
 	}
 
 	export function FirstFuck() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const rosalin = GAME().rosalin;
 		const cale = GAME().cale;
 
@@ -936,7 +939,7 @@ export namespace RosalinScenes {
 					player.AddLustFraction(-1);
 					RosalinScenes.FirstFuckFollowup(0);
 				});
-			}, enabled : p1Cock,
+			}, enabled : p1Cock !== undefined,
 			tooltip : "Why not rise to the occasion and fuck her until she calms down. You got there first, the wolf can just buzz off.",
 		});
 		options.push({ nameStr : "Wolf",
@@ -1101,11 +1104,11 @@ export namespace RosalinScenes {
 
 						if (targetType === BodyPartType.ass) {
 							Sex.Anal(cale, player);
-							player.FuckAnal(target, cale.FirstCock(), 3);
+							player.FuckAnal(target as Butt, cale.FirstCock(), 3);
 							CaleSexScenes.Impregnate(player, PregnancyHandler.Slot.Butt, 2);
 						} else {
 							Sex.Vaginal(cale, player);
-							player.FuckVag(target, cale.FirstCock(), 3);
+							player.FuckVag(target as Vagina, cale.FirstCock(), 3);
 							CaleSexScenes.Impregnate(player, PregnancyHandler.Slot.Vag, 2);
 						}
 
@@ -1208,7 +1211,7 @@ export namespace RosalinScenes {
 	}
 
 	export function FirstFuckPegWolf() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const rosalin = GAME().rosalin;
 		const cale = GAME().cale;
 		Text.Clear();
@@ -1319,7 +1322,7 @@ export namespace RosalinScenes {
 	}
 
 	export function CombineCallback(item: TFItem) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const rosalin = GAME().rosalin;
 		const cale = GAME().cale;
@@ -2693,7 +2696,7 @@ export namespace RosalinScenes {
 	}
 
 	export function SexPrompt(state: RosalinSexState) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const rosalin = GAME().rosalin;
 		const cale = GAME().cale;
 
@@ -3304,7 +3307,7 @@ export namespace RosalinScenes {
 	}
 
 	export function CockWorship(sexState: RosalinSexState) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const rosalin = GAME().rosalin;
 		Text.Clear();
 
@@ -3489,7 +3492,7 @@ export namespace RosalinScenes {
 	}
 
 	export function VagAftermath() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const rosalin = GAME().rosalin;
 		Text.Clear();
 

@@ -14,6 +14,7 @@ import { Link } from "../link";
 import { ILocLake } from "../location";
 import { Party } from "../party";
 import { Text } from "../text";
+import { Burrows } from "./burrows";
 import { BurrowsFlags } from "./burrows-flags";
 
 // Create namespace
@@ -44,7 +45,7 @@ LakeLoc.Shore.enc.AddEnc(() => {
 LakeLoc.Shore.enc.AddEnc(() => {
 	return () => {
 		const party: Party = GAME().party;
-		const burrows = GAME().burrows;
+		const burrows: Burrows = GAME().burrows;
 		const parse: any = {
 
 		};
@@ -66,7 +67,7 @@ LakeLoc.Shore.enc.AddEnc(() => {
 		Gui.NextPrompt();
 	};
 }, 1.0, () => {
-	const burrows = GAME().burrows;
+	const burrows: Burrows = GAME().burrows;
 	return burrows.Access() && burrows.flags.BrainyTrait === BurrowsFlags.TraitFlags.Inactive;
 });
 

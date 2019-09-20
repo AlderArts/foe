@@ -20,6 +20,7 @@ import { Text } from "../../text";
 import { TF } from "../../tf";
 import { Time } from "../../time";
 import { AscheFlags } from "../asche-flags";
+import { Player } from "../player";
 import { IslaFlags } from "./isla-flags";
 
 export class Isla extends Entity {
@@ -288,7 +289,7 @@ export namespace IslaScenes {
 	}
 
 	export function Approach() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const isla = GAME().isla;
 		const parse: any = {
 			playername : player.name,
@@ -386,7 +387,7 @@ export namespace IslaScenes {
 	}
 
 	export function Appearance() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const isla = GAME().isla;
 		const parse: any = {
 
@@ -531,7 +532,7 @@ export namespace IslaScenes {
 	}
 
 	export function TalkPrompt() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const isla = GAME().isla;
 		const parse: any = {
 
@@ -843,7 +844,7 @@ export namespace IslaScenes {
 	}
 
 	export function TummyRub() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const isla = GAME().isla;
 		const world = WORLD();
 
@@ -1086,7 +1087,7 @@ export namespace IslaScenes {
 	export namespace IslaSex {
 
 		export function First() {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const isla = GAME().isla;
 			const world = WORLD();
 
@@ -1414,7 +1415,7 @@ export namespace IslaScenes {
 		}
 
 		export function Prompt() {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const p1cock = player.BiggestCock(undefined, true);
 
 			const parse: any = {
@@ -1425,7 +1426,7 @@ export namespace IslaScenes {
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Pitch Vaginal",
 				tooltip : "Pound her sensitive insides until she screams.",
-				func : IslaScenes.IslaSex.PitchVaginal, enabled : p1cock,
+				func : IslaScenes.IslaSex.PitchVaginal, enabled : p1cock !== undefined,
 			});
 			Gui.SetButtonsFromList(options, true, () => {
 				Text.Clear();
@@ -1437,7 +1438,7 @@ export namespace IslaScenes {
 		}
 
 		export function PitchVaginal() {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const isla = GAME().isla;
 
 			const p1cock = player.BiggestCock(undefined, true);
@@ -1583,7 +1584,7 @@ export namespace IslaScenes {
 		}
 
 		export function PitchVaginalUnder(parse: any, opts: any) {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const isla = GAME().isla;
 			Text.Clear();
 			Text.Add("You give Isla a wink and ease yourself to the ground, stretching languidly and making sure the sable-morph is taking in your every motion. The soft grass is cool against your [skin] with dew, and your [cocks] jut[notS] proudly into the night air.", parse);
@@ -1733,7 +1734,7 @@ export namespace IslaScenes {
 		}
 
 		export function PitchVaginalMount(parse: any, opts: any) {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const isla = GAME().isla;
 			const figure = opts.figure;
 
@@ -1836,7 +1837,7 @@ export namespace IslaScenes {
 		}
 
 		export function PitchVaginalWall(parse: any, opts: any) {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const isla = GAME().isla;
 			Text.Add("Grabbing Isla by the shoulders, you whirl her around, leading her to the nearest mountain face and pinning her against the cool, mossy rock.", parse);
 			if (opts.preg) {
@@ -1935,7 +1936,7 @@ export namespace IslaScenes {
 		}
 
 		export function PitchVaginalExit(parse: any, opts: any) {
-			const player = GAME().player;
+			const player: Player = GAME().player;
 			const isla = GAME().isla;
 
 			Text.Add("<i>“Oog… enough…”</i>", parse);
@@ -1990,7 +1991,7 @@ export namespace IslaScenes {
 	}
 
 	export function Bathe() {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 		const isla = GAME().isla;
 		let parse: any = {
 
@@ -2069,7 +2070,7 @@ export namespace IslaScenes {
 	}
 
 	export function BatheTF(parse: any, level: number) {
-		const player = GAME().player;
+		const player: Player = GAME().player;
 
 		parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 
