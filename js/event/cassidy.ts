@@ -148,7 +148,7 @@ export class CassidySpar extends Entity {
 	constructor() {
 		super();
 
-		const cassidy = GAME().cassidy;
+		const cassidy: Cassidy = GAME().cassidy;
 
 		this.ID = "cassidyspar";
 

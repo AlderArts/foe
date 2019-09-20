@@ -14,6 +14,7 @@ import { RosalinFlags } from "../nomads/rosalin-flags";
 import { Player } from "../player";
 import { Terry } from "../terry";
 import { TerryFlags } from "../terry-flags";
+import { GolemBoss } from "./golem";
 import { GolemFlags } from "./golem-flags";
 import { Jeanne } from "./jeanne";
 
@@ -29,7 +30,7 @@ export namespace JeanneScenes {
 
     // Interaction
     export function Interact() {
-        const jeanne = GAME().jeanne;
+        const jeanne: Jeanne = GAME().jeanne;
 
         const parse: any = {};
         Text.Clear();
@@ -53,7 +54,7 @@ export namespace JeanneScenes {
 
     export function InteractPrompt() {
         const player: Player = GAME().player;
-        const jeanne = GAME().jeanne;
+        const jeanne: Jeanne = GAME().jeanne;
         const terry: Terry = GAME().terry;
         const party: Party = GAME().party;
 
@@ -105,7 +106,7 @@ export namespace JeanneScenes {
 
     export function AlchemyCallback(item: TFItem) {
         const player: Player = GAME().player;
-        const jeanne = GAME().jeanne;
+        const jeanne: Jeanne = GAME().jeanne;
         const party: Party = GAME().party;
 
         const parse: any = {};
@@ -143,7 +144,7 @@ export namespace JeanneScenes {
         const player: Player = GAME().player;
         const terry: Terry = GAME().terry;
         const rosalin: Rosalin = GAME().rosalin;
-        const jeanne = GAME().jeanne;
+        const jeanne: Jeanne = GAME().jeanne;
         const party: Party = GAME().party;
 
         const parse: any = {
@@ -425,7 +426,7 @@ export namespace JeanneScenes {
     export function First() {
         const player: Player = GAME().player;
         const kiakai: Kiakai = GAME().kiakai;
-        const jeanne = GAME().jeanne;
+        const jeanne: Jeanne = GAME().jeanne;
         const party: Party = GAME().party;
 
         const parse: any = {
@@ -460,7 +461,7 @@ export namespace JeanneScenes {
     }
 
     export function FirstPrompt() {
-        const golem = GAME().golem;
+        const golem: GolemBoss = GAME().golem;
         const parse: any = {};
         // [Golem][Jeanne][Gem]
         const options: IChoice[] = [];

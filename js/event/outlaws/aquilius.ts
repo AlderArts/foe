@@ -133,7 +133,7 @@ export namespace AquiliusScenes {
 	export function FirstMeeting() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const aquilius = GAME().aquilius;
+		const aquilius: Aquilius = GAME().aquilius;
 		const kiakai: Kiakai = GAME().kiakai;
 
 		const parse: any = {
@@ -192,7 +192,7 @@ export namespace AquiliusScenes {
 	export function Approach() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const aquilius = GAME().aquilius;
+		const aquilius: Aquilius = GAME().aquilius;
 		const outlaws = GAME().outlaws;
 
 		const parse: any = {
@@ -336,7 +336,7 @@ export namespace AquiliusScenes {
 
 	// TODO
 	export function Prompt() {
-		const aquilius = GAME().aquilius;
+		const aquilius: Aquilius = GAME().aquilius;
 
 		const parse: any = {
 
@@ -408,7 +408,7 @@ export namespace AquiliusScenes {
 	}
 
 	export function TalkPrompt() {
-		const aquilius = GAME().aquilius;
+		const aquilius: Aquilius = GAME().aquilius;
 
 		const parse: any = {
 
@@ -788,7 +788,7 @@ export namespace AquiliusScenes {
 
 	export function Smoke() {
 		const player: Player = GAME().player;
-		const aquilius = GAME().aquilius;
+		const aquilius: Aquilius = GAME().aquilius;
 
 		const parse: any = {
 			playername : player.name,
@@ -904,7 +904,7 @@ export namespace AquiliusScenes {
 
 	export function HelpOut() {
 		const player: Player = GAME().player;
-		const aquilius = GAME().aquilius;
+		const aquilius: Aquilius = GAME().aquilius;
 
 		const parse: any = {
 			playername : player.name,
@@ -933,7 +933,7 @@ export namespace AquiliusScenes {
 	// TODO
 	export function HelpOutPrompt() {
 		const player: Player = GAME().player;
-		const aquilius = GAME().aquilius;
+		const aquilius: Aquilius = GAME().aquilius;
 
 		const parse: any = {
 			playername : player.name,
@@ -1010,7 +1010,7 @@ export namespace AquiliusScenes {
 	// [Herbs] - Go flower picking like Aquilius asked you to.
 	export function PickHerbs() {
 		const party: Party = GAME().party;
-		const aquilius = GAME().aquilius;
+		const aquilius: Aquilius = GAME().aquilius;
 
 		const parse: any = {
 
@@ -1047,7 +1047,7 @@ export namespace AquiliusScenes {
 	export function TendToSick() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const aquilius = GAME().aquilius;
+		const aquilius: Aquilius = GAME().aquilius;
 		const outlaws = GAME().outlaws;
 		const kiakai: Kiakai = GAME().kiakai;
 
@@ -1163,7 +1163,7 @@ export namespace AquiliusScenes {
 	}
 
 	export function AlchemyHelp() {
-		const aquilius = GAME().aquilius;
+		const aquilius: Aquilius = GAME().aquilius;
 		const outlaws = GAME().outlaws;
 
 		const parse: any = {

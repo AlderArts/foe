@@ -4,6 +4,7 @@ import { EncounterTable } from "../../encountertable";
 import { Miranda } from "../../event/miranda";
 import { MirandaFlags } from "../../event/miranda-flags";
 import { MirandaScenes } from "../../event/miranda-scenes";
+import { Outlaws } from "../../event/outlaws/outlaws";
 import { Player } from "../../event/player";
 import { Terry } from "../../event/terry";
 import { TerryFlags } from "../../event/terry-flags";
@@ -148,7 +149,7 @@ export namespace RigardScenes {
 
 	export function Chatter(enteringArea: boolean) {
 		const rigard: Rigard = GAME().rigard;
-		const outlaws = GAME().outlaws;
+		const outlaws: Outlaws = GAME().outlaws;
 		const party: Party = GAME().party;
 
 		Text.Clear();

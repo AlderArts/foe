@@ -5,6 +5,7 @@ import { AscheTasksScenes } from "./event/asche-tasks";
 import { GlobalScenes } from "./event/global";
 import { CaleFlags } from "./event/nomads/cale-flags";
 import { Rosalin } from "./event/nomads/rosalin";
+import { Aquilius } from "./event/outlaws/aquilius";
 import { Vaughn } from "./event/outlaws/vaughn";
 import { VaughnFlags } from "./event/outlaws/vaughn-flags";
 import { VaughnTasksScenes } from "./event/outlaws/vaughn-tasks";
@@ -805,7 +806,7 @@ export namespace Quests {
 			}),
 			new QuestItem({
 				desc() {
-					const aquilius = GAME().aquilius;
+					const aquilius: Aquilius = GAME().aquilius;
 					const item = aquilius.herbIngredient ? aquilius.herbIngredient.sDesc() : "<b>ERROR</b>";
 					return "In addition, Aquilius asked for some " + item + ". While not strictly necessary, you’re sure the old surgeon would appreciate you getting that as well.";
 				},

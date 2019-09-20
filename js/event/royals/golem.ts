@@ -130,7 +130,7 @@ export namespace GolemScenes {
 
 	export function FirstApproach() {
 		const party: Party = GAME().party;
-		const golem = GAME().golem;
+		const golem: GolemBoss = GAME().golem;
 		const parse: any = {
 			s : party.Num() > 1 ? "s" : "",
 		};
@@ -147,7 +147,7 @@ export namespace GolemScenes {
 			Text.Add("None of your companions are able to find any means of entry either. ", parse);
 		} else if (party.Num() === 2) {
 			Text.Add("[name] looks a bit perplexed, also unable to find any mean to enter the tower. ", {name: party.Get(1).name});
-	}
+		}
 		Text.Add("There is something though…", parse);
 		Text.NL();
 		Text.Add("You take out the strange gemstone that you carry. It seems - for lack of a better term - more alive than before, pulsing and throbbing happily in the presence of the unsettling structure. Before you have time to further contemplate this, however, a loud rumbling noise draw your attention. For no reason apparent to you, a large portion of the tower wall has suddenly started to move.", parse);
@@ -159,7 +159,7 @@ export namespace GolemScenes {
 	}
 
 	export function FightPrompt() {
-		const golem = GAME().golem;
+		const golem: GolemBoss = GAME().golem;
 		const world = WORLD();
 
 		const parse: any = {};
@@ -207,7 +207,7 @@ export namespace GolemScenes {
 	export function OnWin() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const golem = GAME().golem;
+		const golem: GolemBoss = GAME().golem;
 		const kiakai: Kiakai = GAME().kiakai;
 		const parse: any = {
 			name() { return kiakai.name; },
@@ -268,7 +268,7 @@ export namespace GolemScenes {
 	export function OnLoss() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const golem = GAME().golem;
+		const golem: GolemBoss = GAME().golem;
 		let parse: any = {
 			name() { return party.Get(1).name; },
 		};

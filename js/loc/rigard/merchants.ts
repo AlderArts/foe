@@ -5,6 +5,7 @@ import { Kiakai } from "../../event/kiakai";
 import { Cveta } from "../../event/outlaws/cveta";
 import { CvetaFlags } from "../../event/outlaws/cveta-flags";
 import { Player } from "../../event/player";
+import { Room69 } from "../../event/room69";
 import { Room69Flags } from "../../event/room69-flags";
 import { TerryScenes } from "../../event/terry-scenes";
 import { GAME, MoveToLocation, TimeStep, WORLD, WorldTime } from "../../GAME";
@@ -304,11 +305,11 @@ ShopStreetLoc.Street.events.push(new Link(
 
 ShopStreetLoc.Street.events.push(new Link(
 	"Martello", () => {
-		const room69 = GAME().room69;
+		const room69: Room69 = GAME().room69;
 		return room69.flags.Hinges === Room69Flags.HingesFlags.TalkedToGoldsmith || room69.flags.Hinges === Room69Flags.HingesFlags.TalkedToSmith;
 	}, () => WorldTime().hour >= 9 && WorldTime().hour < 18,
 	() => {
-		const room69 = GAME().room69;
+		const room69: Room69 = GAME().room69;
 		if (room69.flags.Hinges === Room69Flags.HingesFlags.TalkedToGoldsmith) {
 			Text.Add("You could ask the smith Martello to make gilded hinges for Sixtynine’s door.");
 			Text.NL();
@@ -318,7 +319,7 @@ ShopStreetLoc.Street.events.push(new Link(
 		}
 	},
 	() => {
-		const room69 = GAME().room69;
+		const room69: Room69 = GAME().room69;
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		Text.Clear();

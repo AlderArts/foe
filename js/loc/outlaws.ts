@@ -14,7 +14,7 @@ import { CvetaFlags } from "../event/outlaws/cveta-flags";
 import { CvetaScenes } from "../event/outlaws/cveta-scenes";
 import { DeadDropScenes } from "../event/outlaws/maria-dd";
 import { MariaScenes } from "../event/outlaws/maria-scenes";
-import { OutlawsScenes } from "../event/outlaws/outlaws";
+import { Outlaws, OutlawsScenes } from "../event/outlaws/outlaws";
 import { OutlawsFlags } from "../event/outlaws/outlaws-flags";
 import { VaughnScenes } from "../event/outlaws/vaughn-scenes";
 import { Terry } from "../event/terry";
@@ -40,7 +40,7 @@ OutlawsLoc.Camp.SaveSpot = "Outlaws";
 OutlawsLoc.Camp.safe = () => true;
 // TODO
 OutlawsLoc.Camp.description = () => {
-	const outlaws = GAME().outlaws;
+	const outlaws: Outlaws = GAME().outlaws;
 	Text.Add("You are in the outlaws' camp.<br>");
 
 	if (GetDEBUG()) {
@@ -51,7 +51,7 @@ OutlawsLoc.Camp.description = () => {
 };
 
 OutlawsLoc.Camp.onEntry = () => {
-	const outlaws = GAME().outlaws;
+	const outlaws: Outlaws = GAME().outlaws;
 	const maria = GAME().maria;
 	const vaughn = GAME().vaughn;
 	const rigard = GAME().rigard;
@@ -93,7 +93,7 @@ OutlawsLoc.Camp.links.push(new Link(
 
 OutlawsLoc.Camp.links.push(new Link(
 	"Tower", () => {
-		const outlaws = GAME().outlaws;
+		const outlaws: Outlaws = GAME().outlaws;
 		return outlaws.flags.BullTower === OutlawsFlags.BullTowerQuest.Initiated;
 	}, true,
 	undefined,

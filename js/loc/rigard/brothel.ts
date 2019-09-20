@@ -5,7 +5,7 @@ import { Event } from "../../event";
 import { BastetScenes } from "../../event/brothel/bastet";
 import { FireblossomScenes } from "../../event/brothel/fireblossom";
 import { GryphonsScenes } from "../../event/brothel/gryphons";
-import { LucilleScenes } from "../../event/brothel/lucille";
+import { Lucille, LucilleScenes } from "../../event/brothel/lucille";
 import { Roa } from "../../event/brothel/roa";
 import { RoaScenes } from "../../event/brothel/roa-scenes";
 import { Player } from "../../event/player";
@@ -64,11 +64,11 @@ BrothelLoc.Brothel.events.push(new Link(
 ));
 BrothelLoc.Brothel.events.push(new Link(
 	"Lucille", () => {
-		const lucille = GAME().lucille;
+		const lucille: Lucille = GAME().lucille;
 		return lucille.IsAtLocation();
 	}, false,
 	() => {
-		const lucille = GAME().lucille;
+		const lucille: Lucille = GAME().lucille;
 		if (lucille.IsAtLocation()) {
 			Text.Add("Lucille wanders the hall, starting conversations here and there, inserting her charm to subtly urge the customers to spends more, and settling deals, employing her concubines.");
 		} else {
@@ -100,7 +100,7 @@ BrothelLoc.Brothel.events.push(new Link(
 ));
 BrothelLoc.Brothel.events.push(new Link(
 	"Themed rooms", () => {
-		const lucille = GAME().lucille;
+		const lucille: Lucille = GAME().lucille;
 		return lucille.ThemeroomOpen();
 	}, true,
 	undefined,

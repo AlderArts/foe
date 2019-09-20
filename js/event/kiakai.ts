@@ -22,6 +22,7 @@ import { KiakaiFlags } from "./kiakai-flags";
 import { KiakaiScenes } from "./kiakai-scenes";
 import { KiakaiSexScenes } from "./kiakai-sex";
 import { Player } from "./player";
+import { RavenMother } from "./raven";
 import { RavenFlags } from "./raven-flags";
 
 export class Kiakai extends Entity {
@@ -263,7 +264,7 @@ export class Kiakai extends Entity {
 	public TalkPrompt() {
 		const player: Player = GAME().player;
 		const kiakai: Kiakai = GAME().kiakai;
-		const ravenmother = GAME().ravenmother;
+		const ravenmother: RavenMother = GAME().ravenmother;
 
 		let parse: any = {
 			playername : player.name,

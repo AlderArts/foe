@@ -11,9 +11,10 @@ import { Event } from "../event";
 import { AscheTasksScenes } from "../event/asche-tasks";
 import { GlobalScenes } from "../event/global";
 import { MomoScenes } from "../event/momo";
-import { AquiliusScenes } from "../event/outlaws/aquilius";
+import { Aquilius, AquiliusScenes } from "../event/outlaws/aquilius";
 import { MariaScenes } from "../event/outlaws/maria-scenes";
 import { RoamingScenes } from "../event/roaming";
+import { Jeanne } from "../event/royals/jeanne";
 import { GAME, MoveToLocation, TimeStep, WORLD, WorldTime } from "../GAME";
 import { Gui } from "../gui";
 import { IngredientItems } from "../items/ingredients";
@@ -245,7 +246,7 @@ ForestLoc.Outskirts.links.push(new Link(
 ));
 ForestLoc.Outskirts.links.push(new Link(
 	"Glade", () => {
-		const jeanne = GAME().jeanne;
+		const jeanne: Jeanne = GAME().jeanne;
 		return jeanne.flags.Met >= 1;
 	}, true,
 	undefined,
@@ -256,7 +257,7 @@ ForestLoc.Outskirts.links.push(new Link(
 
 ForestLoc.Outskirts.events.push(new Link(
 	"Herbs", () => {
-		const aquilius = GAME().aquilius;
+		const aquilius: Aquilius = GAME().aquilius;
 		return aquilius.OnHerbsQuest() && !aquilius.OnHerbsQuestFinished();
 	}, true,
 	undefined,

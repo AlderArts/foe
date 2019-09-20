@@ -6,6 +6,7 @@
 import * as _ from "lodash";
 
 import { Encounter } from "../combat";
+import { OrchidBoss } from "../enemy/orchid";
 import { OrchidScenes } from "../enemy/orchid-scenes";
 import { Sex } from "../entity-sex";
 import { Event } from "../event";
@@ -68,7 +69,7 @@ const GladeLoc = new Event("Dryads' glade");
 GladeLoc.SaveSpot = "Dryads";
 GladeLoc.safe = () => true;
 GladeLoc.description = () => {
-	const orchid = GAME().orchid;
+	const orchid: OrchidBoss = GAME().orchid;
 	const parse: any = {
 
 	};
@@ -159,7 +160,7 @@ export namespace DryadGladeScenes {
 	export function First() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const orchid = GAME().orchid;
+		const orchid: OrchidBoss = GAME().orchid;
 
 		const parse: any = {
 			playername : player.name,
@@ -241,7 +242,7 @@ export namespace DryadGladeScenes {
 	export function FirstLoss() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const orchid = GAME().orchid;
+		const orchid: OrchidBoss = GAME().orchid;
 		const kiakai: Kiakai = GAME().kiakai;
 		const terry: Terry = GAME().terry;
 		const roa: Roa = GAME().roa;

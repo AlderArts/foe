@@ -4,6 +4,7 @@ import { EncounterTable } from "../encountertable";
 import { GAME, WORLD } from "../GAME";
 import { Gui } from "../gui";
 import { IChoice } from "../link";
+import { Rigard } from "../loc/rigard/rigard";
 import { Party } from "../party";
 import { Text } from "../text";
 import { Asche } from "./asche";
@@ -19,7 +20,7 @@ import { Cveta } from "./outlaws/cveta";
 import { CvetaFlags } from "./outlaws/cveta-flags";
 import { CvetaScenes } from "./outlaws/cveta-scenes";
 import { Player } from "./player";
-import { RavenMotherScenes } from "./raven";
+import { RavenMother, RavenMotherScenes } from "./raven";
 import { RavenFlags } from "./raven-flags";
 import { Twins } from "./royals/twins";
 import { TwinsFlags } from "./royals/twins-flags";
@@ -30,10 +31,10 @@ export namespace DreamsScenes {
 	export function Entry(func: any) {
 		const party: Party = GAME().party;
 		const player: Player = GAME().player;
-		const ravenmother = GAME().ravenmother;
+		const ravenmother: RavenMother = GAME().ravenmother;
 		const fera: Fera = GAME().fera;
 		const kiakai: Kiakai = GAME().kiakai;
-		const rigard = GAME().rigard;
+		const rigard: Rigard = GAME().rigard;
 		const rosalin: Rosalin = GAME().rosalin;
 		const gwendy: Gwendy = GAME().gwendy;
 		const cveta: Cveta = GAME().cveta;
@@ -133,7 +134,7 @@ export namespace DreamsScenes {
 
 	export function RavenAfterDream(ravenTrigger: boolean, func: any) {
 		const party: Party = GAME().party;
-		const ravenmother = GAME().ravenmother;
+		const ravenmother: RavenMother = GAME().ravenmother;
 		const kiakai: Kiakai = GAME().kiakai;
 
 		if (ravenTrigger) {
@@ -205,7 +206,7 @@ export namespace DreamsScenes {
 	}
 
 	export function RavenText(trigger: boolean, stage1: string = "", stage2: string = "", no: string = "") {
-		const ravenmother = GAME().ravenmother;
+		const ravenmother: RavenMother = GAME().ravenmother;
 
 		if (trigger) {
 			const r = ravenmother.Ravenness();

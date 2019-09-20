@@ -14,11 +14,13 @@ import { GlobalScenes } from "../global";
 import { Miranda } from "../miranda";
 import { MirandaFlags } from "../miranda-flags";
 import { Player } from "../player";
+import { Room69 } from "../room69";
 import { Room69Flags } from "../room69-flags";
 import { Lei } from "../royals/lei";
 import { LeiFlags } from "../royals/lei-flags";
 import { Twins } from "../royals/twins";
 import { Terry } from "../terry";
+import { Outlaws } from "./outlaws";
 import { Vaughn } from "./vaughn";
 import { VaughnFlags } from "./vaughn-flags";
 
@@ -294,7 +296,7 @@ export namespace VaughnTasksScenes {
 		// Automatically triggers when approaching Vaughn after completing the task.
 		export function Debrief() {
 			const player: Player = GAME().player;
-			const outlaws = GAME().outlaws;
+			const outlaws: Outlaws = GAME().outlaws;
 			const vaughn: Vaughn = GAME().vaughn;
 
 			const parse: any = {
@@ -998,7 +1000,7 @@ export namespace VaughnTasksScenes {
 
 		export function DebriefOutOfTime() {
 			const player: Player = GAME().player;
-			const outlaws = GAME().outlaws;
+			const outlaws: Outlaws = GAME().outlaws;
 
 			const parse: any = {
 				playername : player.name,
@@ -1030,7 +1032,7 @@ export namespace VaughnTasksScenes {
 
 		export function DebriefSuccess(parse: any) {
 			const party: Party = GAME().party;
-			const outlaws = GAME().outlaws;
+			const outlaws: Outlaws = GAME().outlaws;
 			const vaughn: Vaughn = GAME().vaughn;
 
 			Text.NL();
@@ -1844,7 +1846,7 @@ export namespace VaughnTasksScenes {
 			const player: Player = GAME().player;
 			const party: Party = GAME().party;
 			const vaughn: Vaughn = GAME().vaughn;
-			const room69 = GAME().room69;
+			const room69: Room69 = GAME().room69;
 
 			let parse: any = {
 				Orvin : RigardFlags.LB.KnowsOrvin() ? "Orvin" : "the innkeeper",
@@ -1968,7 +1970,7 @@ export namespace VaughnTasksScenes {
 		export function DebriefSuccess() {
 			const player: Player = GAME().player;
 			const party: Party = GAME().party;
-			const outlaws = GAME().outlaws;
+			const outlaws: Outlaws = GAME().outlaws;
 			const vaughn: Vaughn = GAME().vaughn;
 
 			const parse: any = {
@@ -2083,7 +2085,7 @@ export namespace VaughnTasksScenes {
 
 		export function DebriefOutOfTime() {
 			const party: Party = GAME().party;
-			const outlaws = GAME().outlaws;
+			const outlaws: Outlaws = GAME().outlaws;
 			const vaughn: Vaughn = GAME().vaughn;
 
 			const parse: any = {

@@ -104,7 +104,7 @@ let theHuntWakeup: CallableFunction;
 export namespace RavenMotherScenes {
 
 	export function TheHunt(func: CallableFunction) {
-		const ravenmother = GAME().ravenmother;
+		const ravenmother: RavenMother = GAME().ravenmother;
 		const party: Party = GAME().party;
 		const parse: any = {};
 
@@ -231,7 +231,7 @@ export namespace RavenMotherScenes {
 	}
 
 	export function TheHuntGlade() {
-		const ravenmother = GAME().ravenmother;
+		const ravenmother: RavenMother = GAME().ravenmother;
 		const player: Player = GAME().player;
 
 		const parse: any = {
@@ -386,7 +386,7 @@ export namespace RavenMotherScenes {
 	}
 
 	export function TheHuntTalk() {
-		const ravenmother = GAME().ravenmother;
+		const ravenmother: RavenMother = GAME().ravenmother;
 
 		const parse: any = {
 
@@ -515,7 +515,7 @@ export namespace RavenMotherScenes {
 	}
 
 	export function RavenPrompt(back: any) {
-		const ravenmother = GAME().ravenmother;
+		const ravenmother: RavenMother = GAME().ravenmother;
 
 		const parse: any = {};
 

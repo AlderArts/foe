@@ -9,7 +9,7 @@ import { Kiakai } from "../../event/kiakai";
 import { Miranda } from "../../event/miranda";
 import { VaughnTasksScenes } from "../../event/outlaws/vaughn-tasks";
 import { Player } from "../../event/player";
-import { Room69Scenes } from "../../event/room69";
+import { Room69, Room69Scenes } from "../../event/room69";
 import { Room69Flags } from "../../event/room69-flags";
 import { Lei } from "../../event/royals/lei";
 import { LeiFlags } from "../../event/royals/lei-flags";
@@ -618,7 +618,7 @@ export namespace LBScenes {
 	export function OrvinTalkPrompt(innPrompt: CallableFunction) {
 		const rigard = GAME().rigard;
 		const terry: Terry = GAME().terry;
-		const room69 = GAME().room69;
+		const room69: Room69 = GAME().room69;
 		const lei: Lei = GAME().lei;
 		const party: Party = GAME().party;
 
@@ -1702,7 +1702,7 @@ export namespace LBScenes {
 
 	export function RandomRoom(companion?: Entity) {
 		const rigard = GAME().rigard;
-		const room69 = GAME().room69;
+		const room69: Room69 = GAME().room69;
 
 		const parse: any = {
 			roomNr : rigard.LB.RoomNr,
@@ -1955,11 +1955,11 @@ InnLoc.Common.events.push(new Link(
 
 InnLoc.Common.events.push(new Link(
 	"Room 369", () => {
-		const room69 = GAME().room69;
+		const room69: Room69 = GAME().room69;
 		return room69.flags.Rel !== Room69Flags.RelFlags.NotMet;
 	}, true,
 	() => {
-		const room69 = GAME().room69;
+		const room69: Room69 = GAME().room69;
 		if (room69.flags.Rel !== Room69Flags.RelFlags.NotMet) {
 			Text.Add("You could head up to the sentient room Sixtynine.");
 			Text.NL();
@@ -1967,7 +1967,7 @@ InnLoc.Common.events.push(new Link(
 		}
 	},
 	() => {
-		const room69 = GAME().room69;
+		const room69: Room69 = GAME().room69;
 		if (room69.flags.Rel === Room69Flags.RelFlags.BadTerms) {
 			Room69Scenes.ApologizeTo69ForBeingMean();
 		} else if (room69.flags.Rel === Room69Flags.RelFlags.BrokeDoor) {

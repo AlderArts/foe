@@ -73,7 +73,7 @@ export namespace LucilleScenes {
 		const gryphons = GAME().gryphons;
 		const bastet = GAME().bastet;
 		const fireblossom = GAME().fireblossom;
-		const lucille = GAME().lucille;
+		const lucille: Lucille = GAME().lucille;
 
 		const parse: any = {
 			playername: player.name,
@@ -207,7 +207,7 @@ export namespace LucilleScenes {
 	export function WhoreAftermath(name: string, cost: number) {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const lucille = GAME().lucille;
+		const lucille: Lucille = GAME().lucille;
 
 		cost = cost || 0;
 

@@ -110,7 +110,7 @@ export class Outlaws {
 	#Possibly require some rep with outlaws first (helping Maria/Aquilius for a bit)
 	*/
 	public MariasBouqetAvailable() {
-		const outlaws = GAME().outlaws;
+		const outlaws: Outlaws = GAME().outlaws;
 		const aquilius = GAME().aquilius;
 		// Only in the initial phase
 		if (outlaws.flags.Met !== OutlawsFlags.Met.Met) { return false; }
@@ -234,7 +234,7 @@ export namespace OutlawsScenes {
 
 	export function MariasBouquetPrompt(opts: any) {
 		const player: Player = GAME().player;
-		const outlaws = GAME().outlaws;
+		const outlaws: Outlaws = GAME().outlaws;
 
 		const parse: any = {
 			playername : player.name,
@@ -344,7 +344,7 @@ export namespace OutlawsScenes {
 	export function PathIntoRigardInitiation() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const outlaws = GAME().outlaws;
+		const outlaws: Outlaws = GAME().outlaws;
 
 		const parse: any = {
 			playername : player.name,
@@ -425,7 +425,7 @@ export namespace OutlawsScenes {
 	export function PathIntoRigardBelinda() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const outlaws = GAME().outlaws;
+		const outlaws: Outlaws = GAME().outlaws;
 		const miranda: Miranda = GAME().miranda;
 		const belinda = GAME().belinda;
 		const rigard = GAME().rigard;
@@ -662,7 +662,7 @@ export namespace OutlawsScenes {
 
 		export function ChowTime() {
 			const player: Player = GAME().player;
-			const outlaws = GAME().outlaws;
+			const outlaws: Outlaws = GAME().outlaws;
 
 			const parse: any = {
 				lad : player.mfFem("laddie", "lassie"),
@@ -735,7 +735,7 @@ export namespace OutlawsScenes {
 
 		export function Cavalcade() {
 			const party: Party = GAME().party;
-			const outlaws = GAME().outlaws;
+			const outlaws: Outlaws = GAME().outlaws;
 
 			const parse: any = {
 
@@ -791,7 +791,7 @@ export namespace OutlawsScenes {
 
 		export function Archery() {
 			const player: Player = GAME().player;
-			const outlaws = GAME().outlaws;
+			const outlaws: Outlaws = GAME().outlaws;
 			const maria = GAME().maria;
 
 			const parse: any = {
@@ -1061,7 +1061,7 @@ export namespace OutlawsScenes {
 
 		export function Carpentry() {
 			const player: Player = GAME().player;
-			const outlaws = GAME().outlaws;
+			const outlaws: Outlaws = GAME().outlaws;
 
 			const parse: any = {
 				playername : player.name,
@@ -1145,7 +1145,7 @@ export namespace OutlawsScenes {
 
 		export function FactFinding() {
 			const player: Player = GAME().player;
-			const outlaws = GAME().outlaws;
+			const outlaws: Outlaws = GAME().outlaws;
 
 			const parse: any = {
 				playername : player.name,

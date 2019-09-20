@@ -1,7 +1,8 @@
 
 import { Event } from "../../event";
-import { GolemScenes } from "../../event/royals/golem";
+import { GolemBoss, GolemScenes } from "../../event/royals/golem";
 import { GolemFlags } from "../../event/royals/golem-flags";
+import { Jeanne } from "../../event/royals/jeanne";
 import { JeanneScenes } from "../../event/royals/jeanne-scenes";
 import { GAME, MoveToLocation, WORLD } from "../../GAME";
 import { Gui } from "../../gui";
@@ -33,11 +34,11 @@ MageTowerLoc.links.push(new Link(
 ));
 MageTowerLoc.events.push(new Link(
 	"Jeanne", () => {
-		const jeanne = GAME().jeanne;
+		const jeanne: Jeanne = GAME().jeanne;
 		return jeanne.IsAtLocation(MageTowerLoc);
 	}, true,
 	() => {
-		const jeanne = GAME().jeanne;
+		const jeanne: Jeanne = GAME().jeanne;
 		if (jeanne.IsAtLocation(MageTowerLoc)) {
 			Text.Add("The sleepless magician is busy with some experiment or other, poring over some documents over by her workbench. The elf is stunning as always, her long pink hair flowing down her back in thick curls.");
 			Text.NL();
@@ -49,11 +50,11 @@ MageTowerLoc.events.push(new Link(
 ));
 MageTowerLoc.events.push(new Link(
 	"Golem", () => {
-		const golem = GAME().golem;
+		const golem: GolemBoss = GAME().golem;
 		return golem.flags.Met >= GolemFlags.State.Rebuilt;
 	}, true,
 	() => {
-		const golem = GAME().golem;
+		const golem: GolemBoss = GAME().golem;
 		if (golem.flags.Met >= GolemFlags.State.Rebuilt) {
 			Text.Add("The obsidian golem is standing near the wall, silent and unmoving.");
 			Text.NL();
@@ -71,7 +72,7 @@ MageTowerLoc.endDescription = () => {
 };
 
 MageTowerLoc.onEntry = () => {
-	const golem = GAME().golem;
+	const golem: GolemBoss = GAME().golem;
 	const golemState = golem.flags.Met;
 	if (golemState === GolemFlags.State.NotMet) {
 		GolemScenes.FirstApproach();

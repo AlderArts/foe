@@ -17,6 +17,7 @@ import { EstevanFlags } from "../nomads/estevan-flags";
 import { Player } from "../player";
 import { Maria } from "./maria";
 import { MariaFlags } from "./maria-flags";
+import { Outlaws } from "./outlaws";
 import { OutlawsFlags } from "./outlaws-flags";
 
 //
@@ -231,7 +232,7 @@ export namespace DeadDropScenes {
 		export function Start() {
 			const player: Player = GAME().player;
 			const party: Party = GAME().party;
-			const outlaws = GAME().outlaws;
+			const outlaws: Outlaws = GAME().outlaws;
 			const maria: Maria = GAME().maria;
 
 			let parse: any = {};
@@ -683,7 +684,7 @@ export namespace DeadDropScenes {
 		}
 
 		export function CavalcadeWin() {
-			const outlaws = GAME().outlaws;
+			const outlaws: Outlaws = GAME().outlaws;
 			const maria: Maria = GAME().maria;
 
 			const parse: any = {
@@ -747,7 +748,7 @@ export namespace DeadDropScenes {
 
 		export function GuardInspection() {
 			const player: Player = GAME().player;
-			const outlaws = GAME().outlaws;
+			const outlaws: Outlaws = GAME().outlaws;
 			const maria: Maria = GAME().maria;
 
 			const parse: any = {
@@ -991,7 +992,7 @@ export namespace DeadDropScenes {
 		export function GuardPrompt() {
 			const player: Player = GAME().player;
 			const party: Party = GAME().party;
-			const outlaws = GAME().outlaws;
+			const outlaws: Outlaws = GAME().outlaws;
 			const maria: Maria = GAME().maria;
 
 			const parse: any = {

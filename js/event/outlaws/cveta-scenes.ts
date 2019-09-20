@@ -21,6 +21,7 @@ import { Terry } from "../terry";
 import { Cveta } from "./cveta";
 import { CvetaDateScenes } from "./cveta-date";
 import { CvetaFlags } from "./cveta-flags";
+import { Outlaws } from "./outlaws";
 import { OutlawsFlags } from "./outlaws-flags";
 
 export namespace CvetaScenes {
@@ -147,7 +148,7 @@ export namespace CvetaScenes {
 	export function ViolinPrompt() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const outlaws = GAME().outlaws;
+		const outlaws: Outlaws = GAME().outlaws;
 		const cveta: Cveta = GAME().cveta;
 
 		const parse: any = {
@@ -221,7 +222,7 @@ export namespace CvetaScenes {
 
 	export function Approach() {
 		const player: Player = GAME().player;
-		const outlaws = GAME().outlaws;
+		const outlaws: Outlaws = GAME().outlaws;
 		const cveta: Cveta = GAME().cveta;
 
 		const parse: any = {
@@ -264,7 +265,7 @@ export namespace CvetaScenes {
 	}
 
 	export function Prompt() {
-		const outlaws = GAME().outlaws;
+		const outlaws: Outlaws = GAME().outlaws;
 		const cveta: Cveta = GAME().cveta;
 
 		const parse: any = {
@@ -335,7 +336,7 @@ export namespace CvetaScenes {
 	export function Teach() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const outlaws = GAME().outlaws;
+		const outlaws: Outlaws = GAME().outlaws;
 		const cveta: Cveta = GAME().cveta;
 
 		let parse: any = {
@@ -1708,7 +1709,7 @@ export namespace CvetaScenes {
 	}
 
 	export function FirstMeetingCont() {
-		const outlaws = GAME().outlaws;
+		const outlaws: Outlaws = GAME().outlaws;
 
 		const parse: any = {
 			SunlightMoonlight : WorldTime().LightStr("Sunlight", "Moonlight"),
@@ -1735,7 +1736,7 @@ export namespace CvetaScenes {
 	export function Performance() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const outlaws = GAME().outlaws;
+		const outlaws: Outlaws = GAME().outlaws;
 		const cveta: Cveta = GAME().cveta;
 		const kiakai: Kiakai = GAME().kiakai;
 		const momo: Momo = GAME().momo;
@@ -2087,7 +2088,7 @@ export namespace CvetaScenes {
 	// Trigger this the next time the player attempts to approach Cveta in her tent after the quest is over, regardless of success or failure.
 	export function PostBullTowerPerformance() {
 		const player: Player = GAME().player;
-		const outlaws = GAME().outlaws;
+		const outlaws: Outlaws = GAME().outlaws;
 		const cveta: Cveta = GAME().cveta;
 
 		const parse: any = {

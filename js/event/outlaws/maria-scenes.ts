@@ -18,7 +18,7 @@ import { CvetaScenes } from "./cveta-scenes";
 import { Maria } from "./maria";
 import { DeadDropScenes } from "./maria-dd";
 import { MariaFlags } from "./maria-flags";
-import { OutlawsScenes } from "./outlaws";
+import { Outlaws, OutlawsScenes } from "./outlaws";
 import { OutlawsFlags } from "./outlaws-flags";
 
 export namespace MariaScenes {
@@ -26,7 +26,7 @@ export namespace MariaScenes {
     // Camp interaction
     export function CampInteract() {
         const player: Player = GAME().player;
-        const outlaws = GAME().outlaws;
+        const outlaws: Outlaws = GAME().outlaws;
         const maria: Maria = GAME().maria;
 
         if (outlaws.MariasBouqetAvailable()) {
@@ -322,7 +322,7 @@ export namespace MariaScenes {
 
     export function TalkPrompt() {
         const player: Player = GAME().player;
-        const outlaws = GAME().outlaws;
+        const outlaws: Outlaws = GAME().outlaws;
         const maria: Maria = GAME().maria;
         const gwendy: Gwendy = GAME().gwendy;
 
@@ -1077,9 +1077,9 @@ export namespace MariaScenes {
                         Text.Add("<i>“You beat one of my best scouts. Not something every person can say, hm? You're not part of any law enforcement, are you?”</i> Shaking your head, you let Zenith continue. <i>“Come back later then. I'll have some things to discuss with you. For now, you should head back to wherever you call home.”</i>", parse);
                     } else if (maria.flags.Met & MariaFlags.Met.FightLost) {
                         Text.Add("<i>“Seems there was a bit of a misunderstanding. We bear you no ill will, unless you decide to go against us.”</i> Shaking your head, you let Zenith continue. <i>“Come back later then. I'll have some things to discuss with you. For now, you should head back to wherever you call home.”</i>", parse);
- } else {
+                    } else {
                         Text.Add("<i>“Since you showed no violence towards myself or my people, you are free to return if you wish.”</i> As if that settles the entire matter, he shoos you from the room and shuts the door behind you and Maria.", parse);
- }
+                    }
 
                     maria.relation.DecreaseStat(-100, 5);
                     Text.Flush();
@@ -1094,7 +1094,7 @@ export namespace MariaScenes {
 
     export function ForestEnd() {
         const party: Party = GAME().party;
-        const outlaws = GAME().outlaws;
+        const outlaws: Outlaws = GAME().outlaws;
         const maria: Maria = GAME().maria;
 
         maria.RestFull();

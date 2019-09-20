@@ -4,6 +4,7 @@
 //
 
 import { Event } from "../../event";
+import { Cassidy } from "../../event/cassidy";
 import { CassidyFlags } from "../../event/cassidy-flags";
 import { CassidyScenes } from "../../event/cassidy-scenes";
 import { GAME, MoveToLocation, WORLD, WorldTime } from "../../GAME";
@@ -18,7 +19,7 @@ WeaponShopLoc.description = () => {
 };
 
 WeaponShopLoc.onEntry = () => {
-	const cassidy = GAME().cassidy;
+	const cassidy: Cassidy = GAME().cassidy;
 	const first = cassidy.flags.Met < CassidyFlags.Met.Met;
 	if (first) {
 		CassidyScenes.First();
@@ -59,7 +60,7 @@ export namespace WeaponShopScenes {
 	}
 
 	export function StreetDesc() {
-		const cassidy = GAME().cassidy;
+		const cassidy: Cassidy = GAME().cassidy;
 		const parse: any = {};
 
 		const first = cassidy.flags.Met < CassidyFlags.Met.Met;

@@ -78,7 +78,7 @@ export namespace Room69Scenes {
 
 	// Party interaction
 	export function Interact() {
-		const room69 = GAME().room69;
+		const room69: Room69 = GAME().room69;
 
 		Text.Clear();
 		Text.Add("Rawr Imma room.");
@@ -134,7 +134,7 @@ export namespace Room69Scenes {
 	}
 
 	export function Discovering69Prompt() {
-		const room69 = GAME().room69;
+		const room69: Room69 = GAME().room69;
 		const player: Player = GAME().player;
 
 		const parse: any = {
@@ -206,7 +206,7 @@ export namespace Room69Scenes {
 	}
 
 	export function Discovering69WhatNow() {
-		const room69 = GAME().room69;
+		const room69: Room69 = GAME().room69;
 		const party: Party = GAME().party;
 		const player: Player = GAME().player;
 		const world = WORLD();
@@ -372,7 +372,7 @@ export namespace Room69Scenes {
 	}
 
 	export function Discovering69ForceOutro() {
-		const room69 = GAME().room69;
+		const room69: Room69 = GAME().room69;
 		const party: Party = GAME().party;
 		const world = WORLD();
 
@@ -426,7 +426,7 @@ export namespace Room69Scenes {
 
 	// Lets get to the sex already!
 	export function Discovering69Sex() {
-		const room69 = GAME().room69;
+		const room69: Room69 = GAME().room69;
 		const party: Party = GAME().party;
 		const player: Player = GAME().player;
 		const kiakai: Kiakai = GAME().kiakai;
@@ -768,7 +768,7 @@ export namespace Room69Scenes {
 	}
 
 	export function ApologizeTo69ForBreakingDoor() {
-		const room69 = GAME().room69;
+		const room69: Room69 = GAME().room69;
 		const player: Player = GAME().player;
 
 		const parse: any = {
@@ -852,7 +852,7 @@ export namespace Room69Scenes {
 	}
 
 	export function ApologizeTo69ForBeingMean() {
-		const room69 = GAME().room69;
+		const room69: Room69 = GAME().room69;
 		const player: Player = GAME().player;
 
 		const parse: any = {

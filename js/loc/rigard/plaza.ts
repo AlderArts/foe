@@ -5,6 +5,7 @@ import { Event } from "../../event";
 import { Kiakai } from "../../event/kiakai";
 import { Rosalin } from "../../event/nomads/rosalin";
 import { Player } from "../../event/player";
+import { Room69 } from "../../event/room69";
 import { Room69Flags } from "../../event/room69-flags";
 import { Lei } from "../../event/royals/lei";
 import { LeiFlags } from "../../event/royals/lei-flags";
@@ -286,18 +287,18 @@ PlazaLoc.links.push(new Link(
 
 PlazaLoc.events.push(new Link(
 	"Goldsmith", () => {
-		const room69 = GAME().room69;
+		const room69: Room69 = GAME().room69;
 		return room69.flags.Hinges === Room69Flags.HingesFlags.Asked;
 	}, () => WorldTime().hour >= 9 && WorldTime().hour < 18,
 	() => {
-		const room69 = GAME().room69;
+		const room69: Room69 = GAME().room69;
 		if (room69.flags.Hinges === Room69Flags.HingesFlags.Asked) {
 			Text.Add("You see a rich establishment nearby, claiming to be the best goldsmith in town. Perhaps you could as the owner about making hinges for Sixtynine's door?");
 			Text.NL();
 		}
 	},
 	() => {
-		const room69 = GAME().room69;
+		const room69: Room69 = GAME().room69;
 		Text.Clear();
 		Text.Add("You approach the luxurious building housing one of the city’s prominent goldsmiths. You’ve heard he dabbles in banking as well, and generally caters to the upper classes. Hopefully the charge for hinges won’t be too high.");
 		Text.NL();
