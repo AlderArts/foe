@@ -557,15 +557,17 @@ export namespace RigardScenes {
 			parse.areaname = "plaza";
 		} else if (party.location === RigardLoc.ShopStreet.Street) {
 			parse.areaname = "merchant's district";
-	} else if (party.location === RigardLoc.Residential.Street) {
+		} else if (party.location === RigardLoc.Residential.Street) {
 			parse.areaname = "residential district";
-	} else if (party.location === RigardLoc.Slums.Gate) {
+		} else if (party.location === RigardLoc.Slums.Gate) {
 			parse.areaname = "slums";
-	} else if (party.location === RigardLoc.Gate) {
+		} else if (party.location === RigardLoc.Gate) {
 			parse.areaname = "gate district";
-	} else if (party.location === RigardLoc.Castle.Grounds) {
+		} else if (party.location === RigardLoc.Castle.Grounds) {
 			parse.areaname = "royal grounds";
-	} else { return; } // Incorrect location
+		} else {
+			return;
+		} // Incorrect location
 
 		const SetGenders = (npc1?: any, npc2?: any) => {
 			npc1  = npc1  || {};
@@ -1182,9 +1184,9 @@ export namespace RigardScenes {
 						parse.comp = party.Get(1).name;
 					} else if (party.Num() > 2) {
 						parse.comp = "your companions";
-	} else {
+					} else {
 						parse.comp = "";
-	}
+					}
 
 					parse.c1 = party.Num() > 1 ? Text.Parse(", without even waiting to see if [comp] can keep up", parse) : "";
 					Text.Add("You probably look a little silly, but you determinedly speed up to a jog, pushing past passersby[c1]. There are shouts about you running away because you’re afraid of intimacy behind you, but after half a minute you’re far enough that even the man’s prodigious voice begins to fade in the distance.", parse);

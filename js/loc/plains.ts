@@ -49,7 +49,7 @@ const PlainsLoc: ILocPlains = {
 PlainsLoc.Crossroads.description = () => {
 	const parse: any = {
 		TreeFar : GlobalScenes.TreeFarDesc(),
-		Rigard : GAME().rigard.Visited() ? "Rigard" : "a big city in the distance",
+		Rigard : GlobalScenes.VisitedRigardGates() ? "Rigard" : "a big city in the distance",
 	};
 
 	Text.Clear();
@@ -309,7 +309,7 @@ PlainsLoc.Portals.description = () => {
 	} else {
 		Text.Add("You are standing at its apex, studying the strange stone obelisks standing in a large circle. Each one taller than two men in height, the black slates are covered in intricate magical runes, a few of them glowing faintly. There is an eerie feeling in the air around them.", parse);
 		Text.NL();
-		if (GAME().glade.flags.Visit >= DryadGladeFlags.Visit.DefeatedOrchid) {
+		if (GlobalScenes.DefeatedOrchid()) {
 			Text.Add("Not far from the strange stone pillars you can see Jeanne standing near a small tent, working on some form of magical device powered by a set of crystals.", parse);
 			if (!WorldTime().IsDay()) {
 				Text.Add(" She’s set up some torches to light her way, and that together with the glowing runes gives you just enough illumination to see.", parse);
@@ -329,7 +329,7 @@ PlainsLoc.Portals.links.push(new Link(
 
 PlainsLoc.Portals.events.push(new Link(
 	"Jeanne", () => {
-		return !GlobalScenes.PortalsOpen() && GAME().glade.flags.Visit >= DryadGladeFlags.Visit.DefeatedOrchid;
+		return !GlobalScenes.PortalsOpen() && GlobalScenes.DefeatedOrchid();
 	}, true,
 	undefined,
 	() => {
@@ -342,10 +342,10 @@ PlainsLoc.Portals.events.push(new Link(
 //
 
 PlainsLoc.Gate.onEntry = () => {
-	if (GAME().miranda.flags.Met === 0) {
-		MirandaScenes.WelcomeToRigard();
-	} else {
+	if (GlobalScenes.VisitedRigardGates()) {
 		Gui.PrintDefaultOptions();
+	} else {
+		MirandaScenes.WelcomeToRigard();
 	}
 };
 PlainsLoc.Gate.description = () => {

@@ -213,7 +213,7 @@ export namespace Quests {
 					if (GAME().jeanne.flags.Met !== 0) {
 						status |= Quests.Type.Visible;
 					}
-					if (GAME().glade.flags.Visit >= DryadGladeFlags.Visit.DefeatedOrchid) {
+					if (GlobalScenes.DefeatedOrchid()) {
 						status |= Quests.Type.Completed;
 					}
 					return status;
@@ -225,7 +225,7 @@ export namespace Quests {
 				},
 				active() {
 					let status = Quests.Type.NotStarted;
-					if (GAME().glade.flags.Visit >= DryadGladeFlags.Visit.DefeatedOrchid) {
+					if (GlobalScenes.DefeatedOrchid()) {
 						status |= Quests.Type.Visible;
 					}
 					// TODO

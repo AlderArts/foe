@@ -13,7 +13,7 @@ import { JeanneScenes } from "../../event/royals/jeanne-scenes";
 import { LeiScenes } from "../../event/royals/lei-scenes";
 import { LeiTaskScenes } from "../../event/royals/lei-tasks";
 import { TerryScenes } from "../../event/terry-scenes";
-import { GAME, WorldTime } from "../../GAME";
+import { WorldTime } from "../../GAME";
 import { ArmorItems } from "../../items/armor";
 import { StrapOnItems } from "../../items/strapon";
 import { WeaponsItems } from "../../items/weapons";
@@ -236,10 +236,6 @@ export class Rigard {
 
 	public Visa() {
 		return this.flags.Visa !== 0;
-	}
-
-	public Visited() {
-		return GAME().miranda.flags.Met !== 0;
 	}
 
 	public Access() {
