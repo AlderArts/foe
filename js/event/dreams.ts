@@ -8,6 +8,7 @@ import { Party } from "../party";
 import { Text } from "../text";
 import { AscheFlags } from "./asche-flags";
 import { KiakaiScenes } from "./kiakai-scenes";
+import { Miranda } from "./miranda";
 import { RosalinFlags } from "./nomads/rosalin-flags";
 import { CvetaFlags } from "./outlaws/cveta-flags";
 import { CvetaScenes } from "./outlaws/cveta-scenes";
@@ -31,7 +32,7 @@ export namespace DreamsScenes {
 		const cveta = GAME().cveta;
 		const twins = GAME().twins;
 		const asche = GAME().asche;
-		const miranda = GAME().miranda;
+		const miranda: Miranda = GAME().miranda;
 
 		if (Math.random() < 0.5) {
 			let ravenTrigger = false;
@@ -813,7 +814,7 @@ export namespace DreamsScenes {
 	}
 
 	export function MirandaJailed(ravenTrigger: boolean) {
-		const miranda = GAME().miranda;
+		const miranda: Miranda = GAME().miranda;
 
 		const parse: any = {
 			herm : miranda.flags.Met >= 3 ? " herm" : "",

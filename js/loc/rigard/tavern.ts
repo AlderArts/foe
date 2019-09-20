@@ -4,6 +4,7 @@ import { Race } from "../../body/race";
 import { EncounterTable } from "../../encountertable";
 import { Sex } from "../../entity-sex";
 import { Event } from "../../event";
+import { Miranda } from "../../event/miranda";
 import { MirandaFlags } from "../../event/miranda-flags";
 import { Player } from "../../event/player";
 import { ZinaFlags } from "../../event/zina";
@@ -645,7 +646,7 @@ export namespace BarnabyScenes {
 
 	export function ChatPrompt() {
 		const player: Player = GAME().player;
-		const miranda = GAME().miranda;
+		const miranda: Miranda = GAME().miranda;
 		const zina = GAME().zina;
 
 		const parse: any = {
@@ -796,7 +797,7 @@ export namespace BarnabyScenes {
 
 	export function BlowjobEntrypoint(func: CallableFunction) {
 		const player: Player = GAME().player;
-		const miranda = GAME().miranda;
+		const miranda: Miranda = GAME().miranda;
 		const zina = GAME().zina;
 
 		const parse: any = {

@@ -17,6 +17,7 @@ import { Party } from "../party";
 import { Text } from "../text";
 import { GlobalScenes } from "./global";
 import { KiakaiFlags } from "./kiakai-flags";
+import { Miranda } from "./miranda";
 import { Player } from "./player";
 import { Room69Flags } from "./room69-flags";
 
@@ -426,7 +427,7 @@ export namespace Room69Scenes {
 		const player: Player = GAME().player;
 		const kiakai = GAME().kiakai;
 		const lei = GAME().lei;
-		const miranda = GAME().miranda;
+		const miranda: Miranda = GAME().miranda;
 		const gwendy = GAME().gwendy;
 		const roa = GAME().roa;
 		const world = WORLD();

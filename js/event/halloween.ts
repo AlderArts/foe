@@ -24,6 +24,7 @@ import { Text } from "../text";
 import { TF } from "../tf";
 import { GlobalScenes } from "./global";
 import { HalloweenFlags } from "./halloween-flags";
+import { Miranda } from "./miranda";
 import { PatchworkFlags, PatchworkScenes } from "./nomads/patchwork";
 import { Player } from "./player";
 
@@ -201,7 +202,7 @@ export namespace HalloweenScenes {
 		const magnus = GAME().magnus;
 		const patchwork = GAME().patchwork;
 		const kiakai = GAME().kiakai;
-		const miranda = GAME().miranda;
+		const miranda: Miranda = GAME().miranda;
 		const terry = GAME().terry;
 		const gwendy = GAME().gwendy;
 		const layla = GAME().layla;
@@ -2019,7 +2020,7 @@ export namespace HalloweenScenes {
 
 	export function NadirMa() {
 		const player: Player = GAME().player;
-		const miranda = GAME().miranda;
+		const miranda: Miranda = GAME().miranda;
 
 		const werewolf = HW.Werewolf();
 

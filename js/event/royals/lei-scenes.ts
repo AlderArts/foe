@@ -12,6 +12,7 @@ import { SetGameOverButton } from "../../main-gameover";
 import { Party } from "../../party";
 import { Text } from "../../text";
 import { Season, Time } from "../../time";
+import { Miranda } from "../miranda";
 import { Player } from "../player";
 import { LeiSpar } from "./lei";
 import { LeiFlags } from "./lei-flags";
@@ -1535,7 +1536,7 @@ export namespace LeiScenes {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const lei = GAME().lei;
-		const miranda = GAME().miranda;
+		const miranda: Miranda = GAME().miranda;
 		const kiakai = GAME().kiakai;
 
 		const parse: any = {
@@ -1644,7 +1645,7 @@ export namespace LeiScenes {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const kiakai = GAME().kiakai;
-		const miranda = GAME().miranda;
+		const miranda: Miranda = GAME().miranda;
 
 		Text.Add("Although the distance is short, the cloaked man moves with remarkable agility. The shortsword vanishes back inside his cloak, and he snatches up the guard’s longer weapon. Before you’re more than halfway to the scene, he reaches the mouth of the nearest alleyway, and pauses for a moment at the lip of deeper shadows. The man half-turns, momentarily meeting your eyes from beneath the hood of his cloak, and beckons for you to come before disappearing into darkness.", parse);
 		Text.NL();
@@ -1904,7 +1905,7 @@ export namespace LeiScenes {
 	export function GuardStalkingOutro(parse: any, nv: boolean) {
 		const party: Party = GAME().party;
 		const kiakai = GAME().kiakai;
-		const miranda = GAME().miranda;
+		const miranda: Miranda = GAME().miranda;
 
 		Text.Add(" Before coming here, I had a summons delivered to a guard patrol to the west of here, notifying them of the injury of one of their own. They will arrive any minute, and likely be none too happy,”</i> Lei says, sounding quite pleased for his part. He motions for you to follow, as he starts walking toward the mouth of the alleyway. <i>“Did you think I would leave him to lie here all night? If he died, giving the lesson would have been a waste of my time, after all.”</i>", parse);
 		Text.NL();

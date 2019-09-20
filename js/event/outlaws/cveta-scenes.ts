@@ -11,6 +11,7 @@ import { Party } from "../../party";
 import { Status } from "../../statuseffect";
 import { Text } from "../../text";
 import { Time } from "../../time";
+import { Miranda } from "../miranda";
 import { MomoFlags } from "../momo-flags";
 import { Player } from "../player";
 import { CvetaDateScenes } from "./cveta-date";
@@ -827,7 +828,7 @@ export namespace CvetaScenes {
 		const cveta = GAME().cveta;
 		const rigard = GAME().rigard;
 		const momo = GAME().momo;
-		const miranda = GAME().miranda;
+		const miranda: Miranda = GAME().miranda;
 
 		const parse: any = {
 			playername : player.name,

@@ -4,6 +4,7 @@ import { EncounterTable } from "../../encountertable";
 import { Entity } from "../../entity";
 import { Event } from "../../event";
 import { DreamsScenes } from "../../event/dreams";
+import { Miranda } from "../../event/miranda";
 import { VaughnTasksScenes } from "../../event/outlaws/vaughn-tasks";
 import { Player } from "../../event/player";
 import { Room69Scenes } from "../../event/room69";
@@ -1525,7 +1526,7 @@ export namespace LBScenes {
 		const kiakai = GAME().kiakai;
 		const lei = GAME().lei;
 		const gwendy = GAME().gwendy;
-		const miranda = GAME().miranda;
+		const miranda: Miranda = GAME().miranda;
 		const party: Party = GAME().party;
 
 		const parse: any = {

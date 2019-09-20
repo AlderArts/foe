@@ -14,6 +14,7 @@ import { Time } from "../time";
 import { Cassidy, CassidySpar } from "./cassidy";
 import { CassidyFlags } from "./cassidy-flags";
 import { CassidySexScenes, CassidySparSexScenes } from "./cassidy-sex";
+import { Miranda } from "./miranda";
 import { MirandaFlags } from "./miranda-flags";
 import { Player } from "./player";
 
@@ -79,7 +80,7 @@ export namespace CassidyScenes {
 	export function ShopDesc() {
 		const player: Player = GAME().player;
 		const cassidy: Cassidy = GAME().cassidy;
-		const miranda = GAME().miranda;
+		const miranda: Miranda = GAME().miranda;
 		let parse: any = {};
 
 		Text.Add("You’re standing on the shop floor of The Pale Flame. Racks upon racks of implements of assorted death stand in lines and hang on the walls, each and every one of them dust-free and labeled with their name and make. Stabbing, impaling, bludgeoning, crushing, bleeding out, slashing - you name it, and it’s likely Cassidy that has it on display on the floor.", parse);

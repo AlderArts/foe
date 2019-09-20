@@ -1,6 +1,7 @@
 
 import { EncounterTable } from "../../encountertable";
 import { Event } from "../../event";
+import { Miranda } from "../../event/miranda";
 import { MirandaScenes } from "../../event/miranda-scenes";
 import { LeiScenes } from "../../event/royals/lei-scenes";
 import { GAME, MoveToLocation, WORLD, WorldTime } from "../../GAME";
@@ -24,7 +25,7 @@ const SlumsLoc: ILocRigardSlums = {
 // Slums
 //
 SlumsLoc.Gate.description = () => {
-	const miranda = GAME().miranda;
+	const miranda: Miranda = GAME().miranda;
 
 	Text.Add("The slum of Rigard is a wretched cesspool of bustling activity at all times of the day. The sprawling ghetto spreads out along the riverfront, crawling along the walls of the city as if trying to get inside. Most houses you see are built of sturdy but cheap wood, intended to weather the cold winters but not designed for comfort or aesthetics.");
 	Text.NL();
@@ -73,7 +74,7 @@ SlumsLoc.Gate.links.push(new Link(
 	},
 	() => {
 		const rigard = GAME().rigard;
-		const miranda = GAME().miranda;
+		const miranda: Miranda = GAME().miranda;
 		Text.Clear();
 		if (miranda.IsAtLocation()) {
 			MirandaScenes.RigardSlumGatesEnter();
@@ -125,7 +126,7 @@ SlumsLoc.Gate.links.push(new Link(
 
 SlumsLoc.Gate.events.push(new Link(
 	"Miranda", () => {
-		const miranda = GAME().miranda;
+		const miranda: Miranda = GAME().miranda;
 		return miranda.IsAtLocation();
 	}, true,
 	undefined,

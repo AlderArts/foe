@@ -1,6 +1,7 @@
 
 import { Gender } from "../../body/gender";
 import { EncounterTable } from "../../encountertable";
+import { Miranda } from "../../event/miranda";
 import { MirandaFlags } from "../../event/miranda-flags";
 import { MirandaScenes } from "../../event/miranda-scenes";
 import { Player } from "../../event/player";
@@ -12,17 +13,16 @@ import { ILocRigard } from "../../location";
 import { Party } from "../../party";
 import { Text } from "../../text";
 import { Rand } from "../../utility";
-import { KrawitzFlags } from "./krawitz-flags";
-import { RigardFlags } from "./rigard-flags";
-
 import { BrothelLoc } from "./brothel";
 import { CastleLoc } from "./castle";
 import { BarracksLoc, GateLoc } from "./guards";
 import { InnLoc } from "./inn";
 import { KrawitzLoc } from "./krawitz";
+import { KrawitzFlags } from "./krawitz-flags";
 import { ShopStreetLoc } from "./merchants";
 import { PlazaLoc } from "./plaza";
 import { ResidentialLoc } from "./residential";
+import { RigardFlags } from "./rigard-flags";
 import { SlumsLoc } from "./slums";
 import { TavernLoc } from "./tavern";
 
@@ -462,7 +462,7 @@ export namespace RigardScenes {
 		const rigard = GAME().rigard;
 		const party: Party = GAME().party;
 		const player: Player = GAME().player;
-		const miranda = GAME().miranda;
+		const miranda: Miranda = GAME().miranda;
 		const terry = GAME().terry;
 
 		Text.Clear();
@@ -1265,7 +1265,7 @@ export namespace RigardScenes {
 		const rigard = GAME().rigard;
 		const party: Party = GAME().party;
 		const player: Player = GAME().player;
-		const miranda = GAME().miranda;
+		const miranda: Miranda = GAME().miranda;
 
 		let parse: any = {
 			playername : player.name,

@@ -11,6 +11,7 @@ import { Party } from "../../party";
 import { Text } from "../../text";
 import { Time } from "../../time";
 import { GlobalScenes } from "../global";
+import { Miranda } from "../miranda";
 import { MirandaFlags } from "../miranda-flags";
 import { Player } from "../player";
 import { Room69Flags } from "../room69-flags";
@@ -351,7 +352,7 @@ export namespace VaughnTasksScenes {
 		// Disable this and jump ahead to task 3 if Miranda has been permanently recruited.
 		export function Start() {
 			const player: Player = GAME().player;
-			const miranda = GAME().miranda;
+			const miranda: Miranda = GAME().miranda;
 			const vaughn = GAME().vaughn;
 
 			const parse: any = {
@@ -418,7 +419,7 @@ export namespace VaughnTasksScenes {
 		}
 
 		export function MirandaTalk(options: any[], onDuty: any) {
-			const miranda = GAME().miranda;
+			const miranda: Miranda = GAME().miranda;
 			const vaughn = GAME().vaughn;
 
 			if (vaughn.taskTimer.Expired()) { return; }
@@ -435,7 +436,7 @@ export namespace VaughnTasksScenes {
 		export function Miranda(onDuty: any) {
 			const player: Player = GAME().player;
 			const vaughn = GAME().vaughn;
-			const miranda = GAME().miranda;
+			const miranda: Miranda = GAME().miranda;
 
 			let parse: any = {
 				playername : player.name,

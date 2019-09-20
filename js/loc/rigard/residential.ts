@@ -1,6 +1,7 @@
 
 import { EncounterTable } from "../../encountertable";
 import { Event } from "../../event";
+import { Miranda } from "../../event/miranda";
 import { LeiScenes } from "../../event/royals/lei-scenes";
 import { TerryScenes } from "../../event/terry-scenes";
 import { GAME, MoveToLocation, WORLD } from "../../GAME";
@@ -136,7 +137,7 @@ ResidentialLoc.Street.links.push(new Link(
 ));
 ResidentialLoc.Street.links.push(new Link(
 	"Miranda's", true, () => {
-		const miranda = GAME().miranda;
+		const miranda: Miranda = GAME().miranda;
 		const party: Party = GAME().party;
 		return party.InParty(miranda);
 	},

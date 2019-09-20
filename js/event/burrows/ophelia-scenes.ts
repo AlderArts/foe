@@ -20,6 +20,7 @@ import { PregnancyHandler } from "../../pregnancy";
 import { Text } from "../../text";
 import { RoaFlags } from "../brothel/roa-flags";
 import { GlobalScenes } from "../global";
+import { Miranda } from "../miranda";
 import { Player } from "../player";
 import { Lagon, LagonRegular } from "./lagon";
 import { LagonScenes } from "./lagon-scenes";
@@ -1822,7 +1823,7 @@ export namespace OpheliaScenes {
         const player: Player = GAME().player;
         const party: Party = GAME().party;
         const terry = GAME().terry;
-        const miranda = GAME().miranda;
+        const miranda: Miranda = GAME().miranda;
         const kiakai = GAME().kiakai;
         const vena = GAME().vena;
         const ophelia = GAME().ophelia;

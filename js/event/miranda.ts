@@ -174,7 +174,7 @@ export class Miranda extends Entity {
 	// Party interaction
 	public Interact(switchSpot: boolean) {
 		const rigard = GAME().rigard;
-		const miranda = GAME().miranda;
+		const miranda: Miranda = GAME().miranda;
 
 		Text.Clear();
 		const that = miranda;
@@ -207,7 +207,7 @@ export class Miranda extends Entity {
 	// Schedule
 	public IsAtLocation(location?: ILocation) {
 		const party: Party = GAME().party;
-		const miranda = GAME().miranda;
+		const miranda: Miranda = GAME().miranda;
 		const world = WORLD();
 
 		if (party.InParty(miranda)) { return false; }

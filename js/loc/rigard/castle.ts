@@ -3,6 +3,7 @@ import { EncounterTable } from "../../encountertable";
 import { Event } from "../../event";
 import { AscheFlags } from "../../event/asche-flags";
 import { GlobalScenes } from "../../event/global";
+import { Miranda } from "../../event/miranda";
 import { VaughnFlags } from "../../event/outlaws/vaughn-flags";
 import { VaughnTasksScenes } from "../../event/outlaws/vaughn-tasks";
 import { Player } from "../../event/player";
@@ -553,7 +554,7 @@ export namespace NobleScenes {
 
 	export function PalaceParade() {
 		const party: Party = GAME().party;
-		const miranda = GAME().miranda;
+		const miranda: Miranda = GAME().miranda;
 		const rigard = GAME().rigard;
 
 		const parse: any = {

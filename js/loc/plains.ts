@@ -10,6 +10,7 @@ import { FelinesScenes } from "../enemy/feline";
 import { LagomorphScenes } from "../enemy/rabbit-scenes";
 import { Event } from "../event";
 import { GlobalScenes } from "../event/global";
+import { Miranda } from "../event/miranda";
 import { MirandaScenes } from "../event/miranda-scenes";
 import { MomoScenes } from "../event/momo";
 import { OutlawsScenes } from "../event/outlaws/outlaws";
@@ -214,7 +215,7 @@ PlainsLoc.Crossroads.links.push(new Link(
 	"Rigard", true, true,
 	undefined,
 	() => {
-		const miranda = GAME().miranda;
+		const miranda: Miranda = GAME().miranda;
 		const rigard = GAME().rigard;
 
 		if (miranda.flags.Met !== 0 && Math.random() < 0.1) {
@@ -347,7 +348,7 @@ PlainsLoc.Gate.onEntry = () => {
 	}
 };
 PlainsLoc.Gate.description = () => {
-	const miranda = GAME().miranda;
+	const miranda: Miranda = GAME().miranda;
 
 	Text.Add("You are standing on a split in the road leading from the great plains to the city of Rigard. Just up ahead you can see the gates of the great city, and the castle towering above a river flowing beside the town. ");
 	if (miranda.IsAtLocation()) {
@@ -377,7 +378,7 @@ PlainsLoc.Gate.links.push(new Link(
 	"Rigard", true, true,
 	undefined,
 	() => {
-		const miranda = GAME().miranda;
+		const miranda: Miranda = GAME().miranda;
 		const rigard = GAME().rigard;
 
 		Text.Clear();

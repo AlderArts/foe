@@ -2,6 +2,7 @@ import { Gender } from "../body/gender";
 import { Encounter } from "../combat";
 import { Bandit } from "../enemy/bandit";
 import { GwendyFlags } from "../event/farm/gwendy-flags";
+import { Miranda } from "../event/miranda";
 import { MirandaFlags } from "../event/miranda-flags";
 import { Player } from "../event/player";
 import { GAME, MoveToLocation, TimeStep, WORLD } from "../GAME";
@@ -183,7 +184,7 @@ export namespace MarketScenes {
         const player: Player = GAME().player;
         const party: Party = GAME().party;
         const rigard = GAME().rigard;
-        const miranda = GAME().miranda;
+        const miranda: Miranda = GAME().miranda;
 
         const parse: any = {
             playername : player.name,

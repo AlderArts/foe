@@ -16,6 +16,7 @@ import { Party } from "../../party";
 import { PregnancyHandler } from "../../pregnancy";
 import { Text } from "../../text";
 import { Time } from "../../time";
+import { Miranda } from "../miranda";
 import { Player } from "../player";
 import { GwendyScenes } from "./gwendy-scenes";
 import { LaylaFlags } from "./layla-flags";
@@ -342,7 +343,7 @@ export namespace LaylaScenes {
 		const terry = GAME().terry;
 		const roa = GAME().roa;
 		const momo = GAME().momo;
-		const miranda = GAME().miranda;
+		const miranda: Miranda = GAME().miranda;
 		const cveta = GAME().cveta;
 		const burrows: Burrows = GAME().burrows;
 

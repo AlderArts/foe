@@ -1,6 +1,7 @@
 
 import { EncounterTable } from "../../encountertable";
 import { Event } from "../../event";
+import { Miranda } from "../../event/miranda";
 import { MirandaScenes } from "../../event/miranda-scenes";
 import { VaughnTasksScenes } from "../../event/outlaws/vaughn-tasks";
 import { TerryScenes } from "../../event/terry-scenes";
@@ -149,11 +150,11 @@ BarracksLoc.Common.links.push(new Link(
 
 BarracksLoc.Common.events.push(new Link(
 	"Miranda", () => {
-		const miranda = GAME().miranda;
+		const miranda: Miranda = GAME().miranda;
 		return miranda.IsAtLocation();
 	}, true,
 	() => {
-		const miranda = GAME().miranda;
+		const miranda: Miranda = GAME().miranda;
 		if (miranda.IsAtLocation()) {
 			Text.Add("You spot Miranda hanging out with a few other guards, sneaking in a few drinks.");
 			Text.NL();
@@ -171,7 +172,7 @@ BarracksLoc.Common.events.push(new Link(
 		return !vaughn.taskTimer.Expired();
 	},
 	() => {
-		const miranda = GAME().miranda;
+		const miranda: Miranda = GAME().miranda;
 		const vaughn = GAME().vaughn;
 		if (VaughnTasksScenes.Snitch.OnTask()) {
 			if (vaughn.taskTimer.Expired()) {

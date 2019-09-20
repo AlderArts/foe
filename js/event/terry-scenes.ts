@@ -25,6 +25,7 @@ import { Perks } from "../perks";
 import { PregnancyHandler } from "../pregnancy";
 import { Text } from "../text";
 import { TFItem } from "../tf";
+import { Miranda } from "./miranda";
 import { MirandaFlags } from "./miranda-flags";
 import { Player } from "./player";
 import { JeanneScenes } from "./royals/jeanne-scenes";
@@ -421,7 +422,7 @@ export namespace TerryScenes {
 	export function ExplorePlaza() {
 		const terry = GAME().terry;
 		const player: Player = GAME().player;
-		const miranda = GAME().miranda;
+		const miranda: Miranda = GAME().miranda;
 
 		const parse: any = {
 			playername : player.name,
@@ -564,7 +565,7 @@ export namespace TerryScenes {
 	export function CaughtTheThief() {
 		const terry = GAME().terry;
 		const player: Player = GAME().player;
-		const miranda = GAME().miranda;
+		const miranda: Miranda = GAME().miranda;
 		const party: Party = GAME().party;
 		const rigard = GAME().rigard;
 		const world = WORLD();
@@ -892,7 +893,7 @@ export namespace TerryScenes {
 	export function Release() {
 		const terry = GAME().terry;
 		const player: Player = GAME().player;
-		const miranda = GAME().miranda;
+		const miranda: Miranda = GAME().miranda;
 		const party: Party = GAME().party;
 		const world = WORLD();
 

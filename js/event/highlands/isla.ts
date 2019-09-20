@@ -102,7 +102,7 @@ export class Isla extends Entity {
 	}
 
 	public PregnancyTrigger(womb: Womb, slot: number) {
-		const isla = GAME().isla;
+		const isla: Isla = GAME().isla;
 		// Use unshift instead of push to make sure pregnancy doesn't interfere with scene progression
 		Gui.Callstack.unshift(() => {
 			womb.pregnant = false;
@@ -117,7 +117,7 @@ export class Isla extends Entity {
 
 export namespace IslaScenes {
 	export function Impregnate(father: Entity, cum: number) {
-		const isla = GAME().isla;
+		const isla: Isla = GAME().isla;
 		isla.PregHandler().Impregnate({
 			slot   : PregnancyHandler.Slot.Vag,
 			mother : isla,
@@ -131,7 +131,7 @@ export namespace IslaScenes {
 
 	export function Introduction() {
 		const party: Party = GAME().party;
-		const isla = GAME().isla;
+		const isla: Isla = GAME().isla;
 		const world = WORLD();
 
 		const parse: any = {
@@ -290,7 +290,7 @@ export namespace IslaScenes {
 
 	export function Approach() {
 		const player: Player = GAME().player;
-		const isla = GAME().isla;
+		const isla: Isla = GAME().isla;
 		const parse: any = {
 			playername : player.name,
 		};
@@ -337,7 +337,7 @@ export namespace IslaScenes {
 	}
 
 	export function Prompt() {
-		const isla = GAME().isla;
+		const isla: Isla = GAME().isla;
 		const parse: any = {
 
 		};
@@ -388,7 +388,7 @@ export namespace IslaScenes {
 
 	export function Appearance() {
 		const player: Player = GAME().player;
-		const isla = GAME().isla;
+		const isla: Isla = GAME().isla;
 		const parse: any = {
 
 		};
@@ -533,7 +533,7 @@ export namespace IslaScenes {
 
 	export function TalkPrompt() {
 		const player: Player = GAME().player;
-		const isla = GAME().isla;
+		const isla: Isla = GAME().isla;
 		const parse: any = {
 
 		};
@@ -845,7 +845,7 @@ export namespace IslaScenes {
 
 	export function TummyRub() {
 		const player: Player = GAME().player;
-		const isla = GAME().isla;
+		const isla: Isla = GAME().isla;
 		const world = WORLD();
 
 		const parse: any = {
@@ -1088,7 +1088,7 @@ export namespace IslaScenes {
 
 		export function First() {
 			const player: Player = GAME().player;
-			const isla = GAME().isla;
+			const isla: Isla = GAME().isla;
 			const world = WORLD();
 
 			const p1cock = player.BiggestCock(undefined, true);
@@ -1361,7 +1361,7 @@ export namespace IslaScenes {
 		}
 
 		export function Repeat() {
-			const isla = GAME().isla;
+			const isla: Isla = GAME().isla;
 			const parse: any = {
 
 			};
@@ -1439,7 +1439,7 @@ export namespace IslaScenes {
 
 		export function PitchVaginal() {
 			const player: Player = GAME().player;
-			const isla = GAME().isla;
+			const isla: Isla = GAME().isla;
 
 			const p1cock = player.BiggestCock(undefined, true);
 			const strapon = p1cock ? p1cock.isStrapon : undefined;
@@ -1585,7 +1585,7 @@ export namespace IslaScenes {
 
 		export function PitchVaginalUnder(parse: any, opts: any) {
 			const player: Player = GAME().player;
-			const isla = GAME().isla;
+			const isla: Isla = GAME().isla;
 			Text.Clear();
 			Text.Add("You give Isla a wink and ease yourself to the ground, stretching languidly and making sure the sable-morph is taking in your every motion. The soft grass is cool against your [skin] with dew, and your [cocks] jut[notS] proudly into the night air.", parse);
 			Text.NL();
@@ -1735,7 +1735,7 @@ export namespace IslaScenes {
 
 		export function PitchVaginalMount(parse: any, opts: any) {
 			const player: Player = GAME().player;
-			const isla = GAME().isla;
+			const isla: Isla = GAME().isla;
 			const figure = opts.figure;
 
 			Text.Clear();
@@ -1838,7 +1838,7 @@ export namespace IslaScenes {
 
 		export function PitchVaginalWall(parse: any, opts: any) {
 			const player: Player = GAME().player;
-			const isla = GAME().isla;
+			const isla: Isla = GAME().isla;
 			Text.Add("Grabbing Isla by the shoulders, you whirl her around, leading her to the nearest mountain face and pinning her against the cool, mossy rock.", parse);
 			if (opts.preg) {
 				Text.Add(" The sable-morph’s small baby bump protrudes from her midriff, but it isn’t large enough yet to be too much of an impediment for what you’re intending to do to her. Having blatant proof of her fertility - or conversely, your virility - so close only serves to excite you more, and you lean in to plant another kiss on her muzzle.", parse);
@@ -1937,7 +1937,7 @@ export namespace IslaScenes {
 
 		export function PitchVaginalExit(parse: any, opts: any) {
 			const player: Player = GAME().player;
-			const isla = GAME().isla;
+			const isla: Isla = GAME().isla;
 
 			Text.Add("<i>“Oog… enough…”</i>", parse);
 			Text.NL();
@@ -1992,7 +1992,7 @@ export namespace IslaScenes {
 
 	export function Bathe() {
 		const player: Player = GAME().player;
-		const isla = GAME().isla;
+		const isla: Isla = GAME().isla;
 		let parse: any = {
 
 		};
