@@ -3,6 +3,7 @@ import { GAME, TimeStep } from "../GAME";
 import { Gui } from "../gui";
 import { IChoice } from "../link";
 import { Text } from "../text";
+import { Asche } from "./asche";
 import { Player } from "./player";
 
 export namespace AscheSexScenes {
@@ -54,7 +55,7 @@ export namespace AscheSexScenes {
 
 	export function FuckHer() {
 		const player: Player = GAME().player;
-		const asche = GAME().asche;
+		const asche: Asche = GAME().asche;
 
 		const p1cock = player.BiggestCock(undefined, true);
 		const real = !p1cock.isStrapon;
@@ -151,7 +152,7 @@ export namespace AscheSexScenes {
 
 	export function GiveOral() {
 		const player: Player = GAME().player;
-		const asche = GAME().asche;
+		const asche: Asche = GAME().asche;
 
 		const parse: any = {
 			handsomepretty : player.mfFem("handsome", "pretty"),
@@ -199,7 +200,7 @@ export namespace AscheSexScenes {
 
 	export function GetOral() {
 		const player: Player = GAME().player;
-		const asche = GAME().asche;
+		const asche: Asche = GAME().asche;
 
 		const p1cock = player.BiggestCock();
 
@@ -479,7 +480,7 @@ export namespace AscheSexScenes {
 
 	export function MagicalThreesome() {
 		const player: Player = GAME().player;
-		const asche = GAME().asche;
+		const asche: Asche = GAME().asche;
 
 		const p1cock = player.BiggestCock();
 

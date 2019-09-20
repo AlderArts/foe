@@ -14,12 +14,13 @@ import { MarketScenes } from "../../loc/farm-market";
 import { Party } from "../../party";
 import { Text } from "../../text";
 import { Player } from "../player";
+import { Gwendy } from "./gwendy";
 import { GwendyFlags } from "./gwendy-flags";
 
 export namespace GwendyScenes {
 
 	export function LoftPrompt() {
-		const gwendy = GAME().gwendy;
+		const gwendy: Gwendy = GAME().gwendy;
 		Text.Clear();
 
 		const parse: any = {
@@ -141,7 +142,7 @@ export namespace GwendyScenes {
 
 	export function Talk(backfunc: any) {
 		const player: Player = GAME().player;
-		const gwendy = GAME().gwendy;
+		const gwendy: Gwendy = GAME().gwendy;
 		const parse: any = {
 			playername : player.name,
 		};
@@ -289,7 +290,7 @@ export namespace GwendyScenes {
 
 	export function Work() {
 		const party: Party = GAME().party;
-		const gwendy = GAME().gwendy;
+		const gwendy: Gwendy = GAME().gwendy;
 		Text.Clear();
 
 		gwendy.relation.IncreaseStat(40, 1);
@@ -336,7 +337,7 @@ export namespace GwendyScenes {
 	export function WorkFeedingDanie() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const gwendy = GAME().gwendy;
+		const gwendy: Gwendy = GAME().gwendy;
 		const danie = GAME().danie;
 
 		const parse: any = {
@@ -430,7 +431,7 @@ export namespace GwendyScenes {
 	export function WorkMilking() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const gwendy = GAME().gwendy;
+		const gwendy: Gwendy = GAME().gwendy;
 		const parse: any = {
 			playername : player.name,
 		};
@@ -618,7 +619,7 @@ export namespace GwendyScenes {
 	/* GWENDY SEX SCENES */
 
 	export function ChallengeSex(skillcheck: number, lose: boolean) {
-		const gwendy = GAME().gwendy;
+		const gwendy: Gwendy = GAME().gwendy;
 		const parse: any = {
 
 		};
@@ -665,7 +666,7 @@ export namespace GwendyScenes {
 
 	export function ChallengeSexWonPrompt(hangout: boolean, options: any[], disableSleep: boolean) {
 		const player: Player = GAME().player;
-		const gwendy = GAME().gwendy;
+		const gwendy: Gwendy = GAME().gwendy;
 		const parse: any = {
 			playername : player.name,
 		};
@@ -837,7 +838,7 @@ export namespace GwendyScenes {
 
 	export function ChallengeSexHands(cock: boolean, hangout: boolean) {
 		const player: Player = GAME().player;
-		const gwendy = GAME().gwendy;
+		const gwendy: Gwendy = GAME().gwendy;
 		let parse: any = {
 			playername    : player.name,
 		};
@@ -980,7 +981,7 @@ export namespace GwendyScenes {
 
 	export function ChallengeSexBody(titjob: boolean, hangout: boolean, disableSleep: boolean) {
 		const player: Player = GAME().player;
-		const gwendy = GAME().gwendy;
+		const gwendy: Gwendy = GAME().gwendy;
 
 		let parse: any = {
 			playername     : player.name,
@@ -1191,7 +1192,7 @@ export namespace GwendyScenes {
 
 	export function ChallengeSexOral(blow: boolean, hangout: boolean) {
 		const player: Player = GAME().player;
-		const gwendy = GAME().gwendy;
+		const gwendy: Gwendy = GAME().gwendy;
 
 		let parse: any = {
 			playername     : player.name,
@@ -1336,7 +1337,7 @@ export namespace GwendyScenes {
 
 	export function ChallengeSexVag(fuck: boolean, hangout: boolean) {
 		const player: Player = GAME().player;
-		const gwendy = GAME().gwendy;
+		const gwendy: Gwendy = GAME().gwendy;
 
 		let parse: any = {
 			playername     : player.name,
@@ -1491,7 +1492,7 @@ export namespace GwendyScenes {
 
 	export function ChallengeSexAnal(toys: GwendyFlags.Toys, hangout: boolean) {
 		const player: Player = GAME().player;
-		const gwendy = GAME().gwendy;
+		const gwendy: Gwendy = GAME().gwendy;
 
 		let parse: any = {
 			playername     : player.name,
@@ -1695,7 +1696,7 @@ export namespace GwendyScenes {
 
 	export function ChallengeSexAnalToys(toy: GwendyFlags.Toys, hangout: boolean, first: boolean) {
 		const player: Player = GAME().player;
-		const gwendy = GAME().gwendy;
+		const gwendy: Gwendy = GAME().gwendy;
 		const adrian = GAME().adrian;
 
 		let parse: any = {
@@ -1978,7 +1979,7 @@ export namespace GwendyScenes {
 
 	export function ChallengeSexLostPrompt(hangout: boolean, options: any[], disableSleep: boolean) {
 		const player: Player = GAME().player;
-		const gwendy = GAME().gwendy;
+		const gwendy: Gwendy = GAME().gwendy;
 
 		Text.Clear();
 

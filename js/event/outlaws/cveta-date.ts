@@ -8,6 +8,7 @@ import { DryadGladeFlags } from "../../loc/glade-flags";
 import { Party } from "../../party";
 import { Text } from "../../text";
 import { Player } from "../player";
+import { Cveta } from "./cveta";
 import { CvetaFlags } from "./cveta-flags";
 
 export namespace CvetaDateScenes {
@@ -15,7 +16,7 @@ export namespace CvetaDateScenes {
 	export function Prompt(prompt: any) {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const cveta = GAME().cveta;
+		const cveta: Cveta = GAME().cveta;
 		const glade = GAME().glade;
 
 		const parse: any = {
@@ -108,7 +109,7 @@ export namespace CvetaDateScenes {
 	export function PartySetup() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const cveta = GAME().cveta;
+		const cveta: Cveta = GAME().cveta;
 
 		cveta.RestFull();
 
@@ -126,7 +127,7 @@ export namespace CvetaDateScenes {
 
 	export function DryadGlade() {
 		const player: Player = GAME().player;
-		const cveta = GAME().cveta;
+		const cveta: Cveta = GAME().cveta;
 		const glade = GAME().glade;
 
 		const parse: any = {
@@ -302,7 +303,7 @@ export namespace CvetaDateScenes {
 
 	export function Spring() {
 		const player: Player = GAME().player;
-		const cveta = GAME().cveta;
+		const cveta: Cveta = GAME().cveta;
 
 		const parse: any = {
 			playername : player.name,

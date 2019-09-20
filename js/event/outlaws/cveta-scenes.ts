@@ -7,13 +7,18 @@ import { Gui } from "../../gui";
 import { QuestItems } from "../../items/quest";
 import { IChoice } from "../../link";
 import { KrawitzFlags } from "../../loc/rigard/krawitz-flags";
+import { Rigard } from "../../loc/rigard/rigard";
 import { Party } from "../../party";
 import { Status } from "../../statuseffect";
 import { Text } from "../../text";
 import { Time } from "../../time";
+import { Kiakai } from "../kiakai";
 import { Miranda } from "../miranda";
+import { Momo } from "../momo";
 import { MomoFlags } from "../momo-flags";
 import { Player } from "../player";
+import { Terry } from "../terry";
+import { Cveta } from "./cveta";
 import { CvetaDateScenes } from "./cveta-date";
 import { CvetaFlags } from "./cveta-flags";
 import { OutlawsFlags } from "./outlaws-flags";
@@ -25,7 +30,7 @@ export namespace CvetaScenes {
 	}
 
 	export function CampDesc() {
-		const cveta = GAME().cveta;
+		const cveta: Cveta = GAME().cveta;
 
 		const parse: any = {
 
@@ -52,8 +57,8 @@ export namespace CvetaScenes {
 	export function ViolinApproach() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const cveta = GAME().cveta;
-		const terry = GAME().terry;
+		const cveta: Cveta = GAME().cveta;
+		const terry: Terry = GAME().terry;
 
 		const parse: any = {
 			playername : player.name,
@@ -143,7 +148,7 @@ export namespace CvetaScenes {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const outlaws = GAME().outlaws;
-		const cveta = GAME().cveta;
+		const cveta: Cveta = GAME().cveta;
 
 		const parse: any = {
 			playername : player.name,
@@ -217,7 +222,7 @@ export namespace CvetaScenes {
 	export function Approach() {
 		const player: Player = GAME().player;
 		const outlaws = GAME().outlaws;
-		const cveta = GAME().cveta;
+		const cveta: Cveta = GAME().cveta;
 
 		const parse: any = {
 			playername : player.name,
@@ -260,7 +265,7 @@ export namespace CvetaScenes {
 
 	export function Prompt() {
 		const outlaws = GAME().outlaws;
-		const cveta = GAME().cveta;
+		const cveta: Cveta = GAME().cveta;
 
 		const parse: any = {
 
@@ -331,7 +336,7 @@ export namespace CvetaScenes {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const outlaws = GAME().outlaws;
-		const cveta = GAME().cveta;
+		const cveta: Cveta = GAME().cveta;
 
 		let parse: any = {
 			playername : player.name,
@@ -442,7 +447,7 @@ export namespace CvetaScenes {
 
 	export function PlayPrompt() {
 		const player: Player = GAME().player;
-		const cveta = GAME().cveta;
+		const cveta: Cveta = GAME().cveta;
 
 		const parse: any = {
 			playername : player.name,
@@ -522,7 +527,7 @@ export namespace CvetaScenes {
 
 	export function Pet() {
 		const player: Player = GAME().player;
-		const cveta = GAME().cveta;
+		const cveta: Cveta = GAME().cveta;
 
 		const parse: any = {
 			playername : player.name,
@@ -716,7 +721,7 @@ export namespace CvetaScenes {
 
 	export function TalkPrompt() {
 		const player: Player = GAME().player;
-		const cveta = GAME().cveta;
+		const cveta: Cveta = GAME().cveta;
 
 		const parse: any = {
 			playername : player.name,
@@ -825,9 +830,9 @@ export namespace CvetaScenes {
 	export function HerselfPrompt() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const cveta = GAME().cveta;
-		const rigard = GAME().rigard;
-		const momo = GAME().momo;
+		const cveta: Cveta = GAME().cveta;
+		const rigard: Rigard = GAME().rigard;
+		const momo: Momo = GAME().momo;
 		const miranda: Miranda = GAME().miranda;
 
 		const parse: any = {
@@ -1102,8 +1107,8 @@ export namespace CvetaScenes {
 	export function MusicPrompt() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const cveta = GAME().cveta;
-		const kiakai = GAME().kiakai;
+		const cveta: Cveta = GAME().cveta;
+		const kiakai: Kiakai = GAME().kiakai;
 
 		let parse: any = {
 			playername : player.name,
@@ -1437,7 +1442,7 @@ export namespace CvetaScenes {
 
 	export function MariaTalkFirst() {
 		const player: Player = GAME().player;
-		const cveta = GAME().cveta;
+		const cveta: Cveta = GAME().cveta;
 
 		const parse: any = {
 			playername : player.name,
@@ -1511,7 +1516,7 @@ export namespace CvetaScenes {
 
 	export function FirstMeeting() {
 		const player: Player = GAME().player;
-		const cveta = GAME().cveta;
+		const cveta: Cveta = GAME().cveta;
 
 		const parse: any = {
 			playername : player.name,
@@ -1731,10 +1736,10 @@ export namespace CvetaScenes {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const outlaws = GAME().outlaws;
-		const cveta = GAME().cveta;
-		const kiakai = GAME().kiakai;
-		const momo = GAME().momo;
-		const terry = GAME().terry;
+		const cveta: Cveta = GAME().cveta;
+		const kiakai: Kiakai = GAME().kiakai;
+		const momo: Momo = GAME().momo;
+		const terry: Terry = GAME().terry;
 
 		let parse: any = {
 			playername : player.name,
@@ -2083,7 +2088,7 @@ export namespace CvetaScenes {
 	export function PostBullTowerPerformance() {
 		const player: Player = GAME().player;
 		const outlaws = GAME().outlaws;
-		const cveta = GAME().cveta;
+		const cveta: Cveta = GAME().cveta;
 
 		const parse: any = {
 			playername : player.name,
@@ -2300,7 +2305,7 @@ export namespace CvetaScenes {
 
 	export function IntimateNuzzle() {
 		const player: Player = GAME().player;
-		const cveta = GAME().cveta;
+		const cveta: Cveta = GAME().cveta;
 
 		let parse: any = {
 			playername : player.name,
@@ -2341,7 +2346,7 @@ export namespace CvetaScenes {
 
 	export function IntimateCuddle() {
 		const player: Player = GAME().player;
-		const cveta = GAME().cveta;
+		const cveta: Cveta = GAME().cveta;
 
 		const parse: any = {
 			playername : player.name,
@@ -2397,7 +2402,7 @@ export namespace CvetaScenes {
 
 	export function IntimateGrope() {
 		const player: Player = GAME().player;
-		const cveta = GAME().cveta;
+		const cveta: Cveta = GAME().cveta;
 
 		let parse: any = {
 			playername : player.name,

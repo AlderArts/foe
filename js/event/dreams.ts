@@ -6,15 +6,22 @@ import { Gui } from "../gui";
 import { IChoice } from "../link";
 import { Party } from "../party";
 import { Text } from "../text";
+import { Asche } from "./asche";
 import { AscheFlags } from "./asche-flags";
+import { Gwendy } from "./farm/gwendy";
+import { Fera } from "./fera";
+import { Kiakai } from "./kiakai";
 import { KiakaiScenes } from "./kiakai-scenes";
 import { Miranda } from "./miranda";
+import { Rosalin } from "./nomads/rosalin";
 import { RosalinFlags } from "./nomads/rosalin-flags";
+import { Cveta } from "./outlaws/cveta";
 import { CvetaFlags } from "./outlaws/cveta-flags";
 import { CvetaScenes } from "./outlaws/cveta-scenes";
 import { Player } from "./player";
 import { RavenMotherScenes } from "./raven";
 import { RavenFlags } from "./raven-flags";
+import { Twins } from "./royals/twins";
 import { TwinsFlags } from "./royals/twins-flags";
 import { UruFlags } from "./uru";
 
@@ -24,14 +31,14 @@ export namespace DreamsScenes {
 		const party: Party = GAME().party;
 		const player: Player = GAME().player;
 		const ravenmother = GAME().ravenmother;
-		const fera = GAME().fera;
-		const kiakai = GAME().kiakai;
+		const fera: Fera = GAME().fera;
+		const kiakai: Kiakai = GAME().kiakai;
 		const rigard = GAME().rigard;
-		const rosalin = GAME().rosalin;
-		const gwendy = GAME().gwendy;
-		const cveta = GAME().cveta;
-		const twins = GAME().twins;
-		const asche = GAME().asche;
+		const rosalin: Rosalin = GAME().rosalin;
+		const gwendy: Gwendy = GAME().gwendy;
+		const cveta: Cveta = GAME().cveta;
+		const twins: Twins = GAME().twins;
+		const asche: Asche = GAME().asche;
 		const miranda: Miranda = GAME().miranda;
 
 		if (Math.random() < 0.5) {
@@ -127,7 +134,7 @@ export namespace DreamsScenes {
 	export function RavenAfterDream(ravenTrigger: boolean, func: any) {
 		const party: Party = GAME().party;
 		const ravenmother = GAME().ravenmother;
-		const kiakai = GAME().kiakai;
+		const kiakai: Kiakai = GAME().kiakai;
 
 		if (ravenTrigger) {
 			const r = ravenmother.Ravenness();
@@ -664,7 +671,7 @@ export namespace DreamsScenes {
 
 	export function KiakaiMonster(ravenTrigger: boolean) {
 		const player: Player = GAME().player;
-		const kiakai = GAME().kiakai;
+		const kiakai: Kiakai = GAME().kiakai;
 
 		const parse: any = {
 			playername : player.name,
@@ -687,7 +694,7 @@ export namespace DreamsScenes {
 	}
 
 	export function Kiakai63(ravenTrigger: boolean) {
-		const kiakai = GAME().kiakai;
+		const kiakai: Kiakai = GAME().kiakai;
 
 		const parse: any = {
 			raven : DreamsScenes.RavenText(ravenTrigger, " A black bird is perched on the edge of the opening, looking down on you placidly.", " A raven is perched on the edge of the opening, curiously regarding you.<br><br>So, they are watching you once more. You wonder what they’re looking for, and decide to consider the question when you wake up."),

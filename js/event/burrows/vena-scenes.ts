@@ -9,13 +9,16 @@ import { BurrowsFlags } from "../../loc/burrows-flags";
 import { Party } from "../../party";
 import { PregnancyHandler } from "../../pregnancy";
 import { Text } from "../../text";
+import { Roa } from "../brothel/roa";
 import { Player } from "../player";
+import { Ophelia } from "./ophelia";
+import { Vena } from "./vena";
 import { VenaFlags } from "./vena-flags";
 
 export namespace VenaScenes {
 
     export function Impregnate(mother: Entity, father: Entity, slot?: number) {
-        const vena = GAME().vena;
+        const vena: Vena = GAME().vena;
         mother.PregHandler().Impregnate({
             slot   : slot || PregnancyHandler.Slot.Vag,
             mother,
@@ -131,8 +134,8 @@ export namespace VenaScenes {
     }
 
     export function PitTalkPrompt() {
-        const roa = GAME().roa;
-        const ophelia = GAME().ophelia;
+        const roa: Roa = GAME().roa;
+        const ophelia: Ophelia = GAME().ophelia;
         const burrows: Burrows = GAME().burrows;
         const party: Party = GAME().party;
 
@@ -219,8 +222,8 @@ export namespace VenaScenes {
     export function RestoreEntrypoint(fight: boolean) {
         const player: Player = GAME().player;
         const party: Party = GAME().party;
-        const ophelia = GAME().ophelia;
-        const vena = GAME().vena;
+        const ophelia: Ophelia = GAME().ophelia;
+        const vena: Vena = GAME().vena;
         const burrows: Burrows = GAME().burrows;
 
         const parse: any = {

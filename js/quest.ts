@@ -4,11 +4,14 @@ import { GetDEBUG } from "../app";
 import { AscheTasksScenes } from "./event/asche-tasks";
 import { GlobalScenes } from "./event/global";
 import { CaleFlags } from "./event/nomads/cale-flags";
+import { Rosalin } from "./event/nomads/rosalin";
+import { Vaughn } from "./event/outlaws/vaughn";
 import { VaughnFlags } from "./event/outlaws/vaughn-flags";
 import { VaughnTasksScenes } from "./event/outlaws/vaughn-tasks";
 import { LeiFlags } from "./event/royals/lei-flags";
 import { LeiTaskScenes } from "./event/royals/lei-tasks";
 import { TwinsFlags } from "./event/royals/twins-flags";
+import { Terry } from "./event/terry";
 import { TerryFlags } from "./event/terry-flags";
 import { GAME } from "./GAME";
 import { Gui } from "./gui";
@@ -18,6 +21,7 @@ import { IChoice } from "./link";
 import { Burrows } from "./loc/burrows";
 import { BurrowsFlags } from "./loc/burrows-flags";
 import { DryadGladeFlags } from "./loc/glade-flags";
+import { Rigard } from "./loc/rigard/rigard";
 import { RigardFlags } from "./loc/rigard/rigard-flags";
 import { Text } from "./text";
 
@@ -345,7 +349,7 @@ export namespace Quests {
 			}
 		},
 		active() {
-			const rigard = GAME().rigard;
+			const rigard: Rigard = GAME().rigard;
 			let status = Quests.Type.NotStarted;
 			if (rigard.RoyalAccess()) {
 				status |= Quests.Type.Completed;
@@ -377,7 +381,7 @@ export namespace Quests {
 					return "Find a way to get past the inner walls.";
 				},
 				active() {
-					const rigard = GAME().rigard;
+					const rigard: Rigard = GAME().rigard;
 					let status = Quests.Type.NotStarted;
 					if (rigard.Access()) {
 						status |= Quests.Type.Visible;
@@ -399,7 +403,7 @@ export namespace Quests {
 			return "Investigate the noble couple you saw sneaking out of the inner district. You probably ought to figure out why they were followed.";
 		},
 		active() {
-			const rigard = GAME().rigard;
+			const rigard: Rigard = GAME().rigard;
 			let status = Quests.Type.NotStarted;
 			if (rigard.RoyalAccess()) {
 				status |= Quests.Type.Completed;
@@ -448,7 +452,7 @@ export namespace Quests {
 			return "Crap, they are on to you. If you don't want to spend the rest of your short life in a cell, you'd better help Miranda catch the thief called the 'Masked Fox'. Before you do, you're not likely to get out of Rigard.";
 		},
 		active() {
-			const rigard = GAME().rigard;
+			const rigard: Rigard = GAME().rigard;
 			let status = Quests.Type.NotStarted;
 			if (rigard.Krawitz.Q >= RigardFlags.KrawitzQ.CaughtTerry) {
 				status |= Quests.Type.Completed;
@@ -524,7 +528,7 @@ export namespace Quests {
 					return "Return to the twins after they have made their arrangements.";
 				},
 				active() {
-					const terry = GAME().terry;
+					const terry: Terry = GAME().terry;
 					let status = Quests.Type.NotStarted;
 					if (terry.flags.Saved >= TerryFlags.Saved.TalkedTwins1) {
 						status |= Quests.Type.Visible;
@@ -540,7 +544,7 @@ export namespace Quests {
 					return "Take custody of the thief from the jail in the royal grounds. It'll be quite interesting to see what effects the collar has...";
 				},
 				active() {
-					const terry = GAME().terry;
+					const terry: Terry = GAME().terry;
 					let status = Quests.Type.NotStarted;
 					if (terry.flags.Saved >= TerryFlags.Saved.TalkedTwins2) {
 						status |= Quests.Type.Visible;
@@ -562,7 +566,7 @@ export namespace Quests {
 			return "Learn about alchemy from Rosalin.";
 		},
 		active() {
-			const rosalin = GAME().rosalin;
+			const rosalin: Rosalin = GAME().rosalin;
 			let status = Quests.Type.NotStarted;
 			if (rosalin.flags.AlQuest >= 2) {
 				status |= Quests.Type.Completed;
@@ -597,7 +601,7 @@ export namespace Quests {
 						enabled = enabled && (GAME().party.inventory.QueryNum(component.it) >= (component.num || 1));
 					}
 
-					const rosalin = GAME().rosalin;
+					const rosalin: Rosalin = GAME().rosalin;
 					let status = Quests.Type.NotStarted;
 					if (rosalin.flags.AlQuest >= 1) {
 						status |= Quests.Type.Visible;
@@ -613,7 +617,7 @@ export namespace Quests {
 					return "Return the items to Rosalin and learn how to do alchemy.";
 				},
 				active() {
-					const rosalin = GAME().rosalin;
+					const rosalin: Rosalin = GAME().rosalin;
 					let status = Quests.Type.NotStarted;
 					if (rosalin.flags.AlQuest >= 1) {
 						status |= Quests.Type.Visible;
@@ -1084,7 +1088,7 @@ export namespace Quests {
 			return "Make sure the Lady Heydrich doesn't appear in court.";
 		},
 		active() {
-			const vaughn = GAME().vaughn;
+			const vaughn: Vaughn = GAME().vaughn;
 			let status = Quests.Type.NotStarted;
 
 			if (VaughnTasksScenes.Poisoning.Completed() && !(vaughn.flags.T3 & VaughnFlags.Poisoning.Success)) {
@@ -1103,7 +1107,7 @@ export namespace Quests {
 					return "Somehow feed Lady Heydrich the " + poison + ". She can be found in the Lady's Blessing inn in Rigard.";
 				},
 				active() {
-					const vaughn = GAME().vaughn;
+					const vaughn: Vaughn = GAME().vaughn;
 					let status = Quests.Type.NotStarted;
 					status |= Quests.Type.Visible;
 					if ((vaughn.flags.Met >= VaughnFlags.Met.PoisoningFail) && !(vaughn.flags.T3 & VaughnFlags.Poisoning.Success)) {

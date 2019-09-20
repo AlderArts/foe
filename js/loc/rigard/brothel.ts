@@ -6,6 +6,7 @@ import { BastetScenes } from "../../event/brothel/bastet";
 import { FireblossomScenes } from "../../event/brothel/fireblossom";
 import { GryphonsScenes } from "../../event/brothel/gryphons";
 import { LucilleScenes } from "../../event/brothel/lucille";
+import { Roa } from "../../event/brothel/roa";
 import { RoaScenes } from "../../event/brothel/roa-scenes";
 import { Player } from "../../event/player";
 import { GAME, MoveToLocation, TimeStep, WORLD } from "../../GAME";
@@ -81,11 +82,11 @@ BrothelLoc.Brothel.events.push(new Link(
 ));
 BrothelLoc.Brothel.events.push(new Link(
 	() => {
-		const roa = GAME().roa;
+		const roa: Roa = GAME().roa;
 		return roa.Met() ? "Roa" : "Bunny";
 	}, true, true,
 	() => {
-		const roa = GAME().roa;
+		const roa: Roa = GAME().roa;
 		if (roa.Met()) {
 			Text.Add("Roa the lapin is at his usual spot, clad in his skimpy outfit. He looks around for a potential john or jill, visibly sighing at the apparent lack of interest.");
 		} else {

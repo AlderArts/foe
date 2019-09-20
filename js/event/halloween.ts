@@ -9,8 +9,8 @@ import { Race } from "../body/race";
 import { Vagina } from "../body/vagina";
 import { EncounterTable } from "../encountertable";
 import { Event } from "../event";
-import { EntityStorage, MoveToLocation } from "../GAME";
 import { GAME, GameCache, TimeStep, WORLD, WorldTime } from "../GAME";
+import { EntityStorage, MoveToLocation } from "../GAME";
 import { Gui } from "../gui";
 import { Input } from "../input";
 import { Inventory } from "../inventory";
@@ -22,11 +22,22 @@ import { Perks } from "../perks";
 import { Status } from "../statuseffect";
 import { Text } from "../text";
 import { TF } from "../tf";
+import { Roa } from "./brothel/roa";
+import { Gwendy } from "./farm/gwendy";
+import { Layla } from "./farm/layla";
 import { GlobalScenes } from "./global";
 import { HalloweenFlags } from "./halloween-flags";
+import { Kiakai } from "./kiakai";
 import { Miranda } from "./miranda";
-import { PatchworkFlags, PatchworkScenes } from "./nomads/patchwork";
+import { Momo } from "./momo";
+import { Cale } from "./nomads/cale";
+import { Estevan } from "./nomads/estevan";
+import { Magnus } from "./nomads/magnus";
+import { Patchwork, PatchworkFlags, PatchworkScenes } from "./nomads/patchwork";
+import { Rosalin } from "./nomads/rosalin";
+import { Cveta } from "./outlaws/cveta";
 import { Player } from "./player";
+import { Terry } from "./terry";
 
 // Put here instead of in Halloween items in order to prevent circular reference.
 HalloweenItems.SqueakyToy.Long = () => HW.Werewolf() ? "It takes all your willpower to avoid giving in and chewing on this stupid toy every time it squeaks..." : "It squeaks when you squeeze it… kinda useless, though you suppose it could be useful when distracting a dog?";
@@ -195,17 +206,17 @@ export namespace HalloweenScenes {
 	export function PumpkinPie() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const momo = GAME().momo;
-		const cale = GAME().cale;
-		const rosalin = GAME().rosalin;
-		const estevan = GAME().estevan;
-		const magnus = GAME().magnus;
-		const patchwork = GAME().patchwork;
-		const kiakai = GAME().kiakai;
+		const momo: Momo = GAME().momo;
+		const cale: Cale = GAME().cale;
+		const rosalin: Rosalin = GAME().rosalin;
+		const estevan: Estevan = GAME().estevan;
+		const magnus: Magnus = GAME().magnus;
+		const patchwork: Patchwork = GAME().patchwork;
+		const kiakai: Kiakai = GAME().kiakai;
 		const miranda: Miranda = GAME().miranda;
-		const terry = GAME().terry;
-		const gwendy = GAME().gwendy;
-		const layla = GAME().layla;
+		const terry: Terry = GAME().terry;
+		const gwendy: Gwendy = GAME().gwendy;
+		const layla: Layla = GAME().layla;
 
 		const parse: any = {
 			playername : player.name,
@@ -835,7 +846,7 @@ export namespace HalloweenScenes {
 	export function RonnieFirst() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const roa = GAME().roa;
+		const roa: Roa = GAME().roa;
 
 		let parse: any = {
 			playername : player.name,
@@ -1609,7 +1620,7 @@ export namespace HalloweenScenes {
 	export function Kiai() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const kiakai = GAME().kiakai;
+		const kiakai: Kiakai = GAME().kiakai;
 		let parse: any = {
 			name : kiakai.name,
 		};
@@ -1825,7 +1836,7 @@ export namespace HalloweenScenes {
 
 	export function KiaiGangrape() {
 		const player: Player = GAME().player;
-		const kiakai = GAME().kiakai;
+		const kiakai: Kiakai = GAME().kiakai;
 		let parse: any = {
 			name : kiakai.name,
 		};
@@ -3431,7 +3442,7 @@ export namespace HalloweenScenes {
 	export function HarthonFirst() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const terry = GAME().terry;
+		const terry: Terry = GAME().terry;
 
 		const werewolf = HW.Werewolf();
 
@@ -5796,7 +5807,7 @@ export namespace HalloweenScenes {
 
 	export function Lenka() {
 		const player: Player = GAME().player;
-		const cveta = GAME().cveta;
+		const cveta: Cveta = GAME().cveta;
 
 		let parse: any = {
 
@@ -6668,7 +6679,7 @@ export namespace HalloweenScenes {
 	export function Patches() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const patchwork = GAME().patchwork;
+		const patchwork: Patchwork = GAME().patchwork;
 
 		const knowsPatches = patchwork.Met();
 		const patchesGender = patchwork.KnowGender();

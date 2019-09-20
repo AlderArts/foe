@@ -7,7 +7,9 @@ import { Encounter } from "../combat";
 import { EncounterTable } from "../encountertable";
 import { Entity } from "../entity";
 import { Sex } from "../entity-sex";
+import { Kiakai } from "../event/kiakai";
 import { Player } from "../event/player";
+import { Terry } from "../event/terry";
 import { TerryFlags } from "../event/terry-flags";
 import { TerryScenes } from "../event/terry-scenes";
 import { GAME, TimeStep } from "../GAME";
@@ -869,8 +871,8 @@ export namespace LagomorphScenes {
 	export function GroupWinOnPlainsFuckM(enc: any, group: any)  {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const kiakai = GAME().kiakai;
-		const terry = GAME().terry;
+		const kiakai: Kiakai = GAME().kiakai;
+		const terry: Terry = GAME().terry;
 		const male = new Lagomorph(Gender.male);
 
 		const p1cock  = player.BiggestCock();
@@ -1410,8 +1412,8 @@ export namespace LagomorphScenes {
 	export function GroupWinOnPlainsGetFuckedM(enc: any, group: any) {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const kiakai = GAME().kiakai;
-		const terry = GAME().terry;
+		const kiakai: Kiakai = GAME().kiakai;
+		const terry: Terry = GAME().terry;
 
 		let parse: any = {
 			playername : player.name,

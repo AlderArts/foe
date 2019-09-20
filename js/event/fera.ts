@@ -117,7 +117,7 @@ export namespace FeraScenes {
 	// Party interaction
 	export function Interact() {
 		const player: Player = GAME().player;
-		const fera = GAME().fera;
+		const fera: Fera = GAME().fera;
 
 		Text.Clear();
 
@@ -389,7 +389,7 @@ export namespace FeraScenes {
 
 	export function TouchPrompt() {
 		const player: Player = GAME().player;
-		const fera = GAME().fera;
+		const fera: Fera = GAME().fera;
 
 		let parse: any = {
 			against        : (player.FirstBreastRow().size.Get() > 3) ? "between" : "against",
@@ -480,7 +480,7 @@ export namespace FeraScenes {
 
 	export function SexPrompt() {
 		const player: Player = GAME().player;
-		const fera = GAME().fera;
+		const fera: Fera = GAME().fera;
 
 		const cocksInVag = player.CocksThatFit(fera.FirstVag());
 		const cocksInAss = player.CocksThatFit(fera.Butt());

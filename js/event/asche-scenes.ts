@@ -8,12 +8,17 @@ import { CombatItems } from "../items/combatitems";
 import { IChoice } from "../link";
 import { DryadGladeFlags } from "../loc/glade-flags";
 import { MagicShopScenes } from "../loc/rigard/magicshop";
+import { Rigard } from "../loc/rigard/rigard";
 import { Party } from "../party";
 import { Text } from "../text";
+import { Asche } from "./asche";
 import { AscheFlags } from "./asche-flags";
 import { AscheTasksScenes } from "./asche-tasks";
+import { Layla } from "./farm/layla";
 import { GlobalScenes } from "./global";
+import { Kiakai } from "./kiakai";
 import { Player } from "./player";
+import { Terry } from "./terry";
 
 export namespace AscheScenes {
     export function FortuneCost() {
@@ -22,7 +27,7 @@ export namespace AscheScenes {
 
     export function FirstEntry() {
         const player: Player = GAME().player;
-        const asche = GAME().asche;
+        const asche: Asche = GAME().asche;
 
         const parse: any = {
             heshe : player.mfFem("he", "she"),
@@ -59,8 +64,8 @@ export namespace AscheScenes {
 
     export function Prompt() {
         const player: Player = GAME().player;
-        const asche = GAME().asche;
-        const rigard = GAME().rigard;
+        const asche: Asche = GAME().asche;
+        const rigard: Rigard = GAME().rigard;
 
         const parse: any = {
             handsomepretty : player.mfFem("handsome", "pretty"),
@@ -204,7 +209,7 @@ export namespace AscheScenes {
 
     export function TalkPrompt() {
         const player: Player = GAME().player;
-        const asche = GAME().asche;
+        const asche: Asche = GAME().asche;
 
         const parse: any = {
             handsomepretty : player.mfFem("handsome", "pretty"),
@@ -366,7 +371,7 @@ export namespace AscheScenes {
 
     export function Lessons() {
         const player: Player = GAME().player;
-        const asche = GAME().asche;
+        const asche: Asche = GAME().asche;
 
         const parse: any = {
             handsomepretty : player.mfFem("handsome", "pretty"),
@@ -519,11 +524,11 @@ export namespace AscheScenes {
 
     export function FortuneTellingPrompt() {
         const player: Player = GAME().player;
-        const kiakai = GAME().kiakai;
-        const terry = GAME().terry;
-        const layla = GAME().layla;
+        const kiakai: Kiakai = GAME().kiakai;
+        const terry: Terry = GAME().terry;
+        const layla: Layla = GAME().layla;
         const party: Party = GAME().party;
-        const rigard = GAME().rigard;
+        const rigard: Rigard = GAME().rigard;
         const glade = GAME().glade;
 
         const parse: any = {
@@ -777,7 +782,7 @@ export namespace AscheScenes {
 
     export function MagicBoxPrompt() {
         const player: Player = GAME().player;
-        const asche = GAME().asche;
+        const asche: Asche = GAME().asche;
 
         const parse: any = {
             coin : Text.NumToText(asche.MagicBoxCost()),
@@ -821,8 +826,8 @@ export namespace AscheScenes {
     }
 
     export function MagicBoxGrab() {
-        const asche = GAME().asche;
-        const rigard = GAME().rigard;
+        const asche: Asche = GAME().asche;
+        const rigard: Rigard = GAME().rigard;
 
         const parse: any = {
 
@@ -847,7 +852,7 @@ export namespace AscheScenes {
     export function MagicBoxWin() {
         const player: Player = GAME().player;
         const party: Party = GAME().party;
-        const asche = GAME().asche;
+        const asche: Asche = GAME().asche;
 
         let parse: any = {
             himher : player.mfFem("him", "her"),
@@ -1095,7 +1100,7 @@ export namespace AscheScenes {
 
     export function MagicBoxRepeat() {
         const party: Party = GAME().party;
-        const asche = GAME().asche;
+        const asche: Asche = GAME().asche;
 
         const parse: any = {
             coin : Text.NumToText(asche.MagicBoxCost()),

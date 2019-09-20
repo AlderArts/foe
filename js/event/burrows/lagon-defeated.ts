@@ -11,6 +11,7 @@ import { Text } from "../../text";
 import { Player } from "../player";
 import { Lagon } from "./lagon";
 import { LagonFlags } from "./lagon-flags";
+import { Vena } from "./vena";
 
 export namespace LagonDScenes {
 	export function RoomApproach() {
@@ -1443,7 +1444,7 @@ export namespace LagonDScenes {
 
 	export function PunishmentPC() {
 		const player: Player = GAME().player;
-		const vena = GAME().vena;
+		const vena: Vena = GAME().vena;
 
 		const p1cock = player.BiggestCock(undefined, true);
 		const strapon = p1cock.isStrapon;

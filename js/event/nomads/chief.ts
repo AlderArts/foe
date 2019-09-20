@@ -13,7 +13,9 @@ import { IChoice } from "../../link";
 import { Party } from "../../party";
 import { Text } from "../../text";
 import { Rand } from "../../utility";
+import { Kiakai } from "../kiakai";
 import { Player } from "../player";
+import { Rosalin } from "./rosalin";
 
 export class Chief extends Entity {
 	constructor(storage?: any) {
@@ -53,8 +55,8 @@ export namespace ChiefScenes {
 	export function Interact() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const kiakai = GAME().kiakai;
-		const chief = GAME().chief;
+		const kiakai: Kiakai = GAME().kiakai;
+		const chief: Chief = GAME().chief;
 
 		const parse: any = {
 			elfname   : kiakai.name,
@@ -134,9 +136,9 @@ export namespace ChiefScenes {
 
 	export function TalkPrompt() {
 		const player: Player = GAME().player;
-		const rosalin = GAME().rosalin;
-		const kiakai = GAME().kiakai;
-		const chief = GAME().chief;
+		const rosalin: Rosalin = GAME().rosalin;
+		const kiakai: Kiakai = GAME().kiakai;
+		const chief: Chief = GAME().chief;
 		const parse: any = {
 			elfname   : kiakai.name,
 			elfhimher : kiakai.himher(),
@@ -295,14 +297,14 @@ export namespace ChiefScenes {
 	}
 
 	export function Desc() {
-		const chief = GAME().chief;
+		const chief: Chief = GAME().chief;
 		if (chief.flags.Met === 0) {
 			Text.Add("On a log by the fire pit sits an old man smoking a pipe. His sharp eyes quickly find you and he gives you an uninterested look before returning to the pipe.");
 		} else if (chief.relation.Get() >= 50) {
 			Text.Add("On a log by the fire pit sits the nomad chief, smoking his pipe. His attention quickly turns to you and you are given a wide grin, the chief acknowledging your presence before returning to the pipe.");
-	} else {
+		} else {
 			Text.Add("On a log by the fire pit sits the nomad chief, smoking his pipe. His sharp eyes quickly find you and he gives you a short nod before returning to the pipe.");
-	}
+		}
 
 		Text.NL();
 	}

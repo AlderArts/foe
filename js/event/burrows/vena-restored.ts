@@ -5,6 +5,7 @@ import { IChoice } from "../../link";
 import { Text } from "../../text";
 import { Player } from "../player";
 import { LagonDScenes } from "./lagon-defeated";
+import { Vena } from "./vena";
 import { VenaFlags } from "./vena-flags";
 
 export namespace VenaRScenes {
@@ -131,7 +132,7 @@ export namespace VenaRScenes {
 	}
 
 	export function Prompt() {
-		const vena = GAME().vena;
+		const vena: Vena = GAME().vena;
 		const parse: any = {
 
 		};

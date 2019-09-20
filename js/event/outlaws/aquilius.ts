@@ -17,6 +17,7 @@ import { Text } from "../../text";
 import { Time } from "../../time";
 import { AscheTasksScenes } from "../asche-tasks";
 import { GlobalScenes } from "../global";
+import { Kiakai } from "../kiakai";
 import { Player } from "../player";
 import { AquiliusFlags } from "./aquilius-flags";
 
@@ -133,7 +134,7 @@ export namespace AquiliusScenes {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const aquilius = GAME().aquilius;
-		const kiakai = GAME().kiakai;
+		const kiakai: Kiakai = GAME().kiakai;
 
 		const parse: any = {
 			playername : player.name,
@@ -464,7 +465,7 @@ export namespace AquiliusScenes {
 	export function TalkSelfPrompt() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const kiakai = GAME().kiakai;
+		const kiakai: Kiakai = GAME().kiakai;
 
 		let parse: any = {
 			playername : player.name,
@@ -1048,7 +1049,7 @@ export namespace AquiliusScenes {
 		const party: Party = GAME().party;
 		const aquilius = GAME().aquilius;
 		const outlaws = GAME().outlaws;
-		const kiakai = GAME().kiakai;
+		const kiakai: Kiakai = GAME().kiakai;
 
 		let parse: any = {
 			playername : player.name,

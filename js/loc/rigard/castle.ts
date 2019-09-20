@@ -1,12 +1,17 @@
 
 import { EncounterTable } from "../../encountertable";
 import { Event } from "../../event";
+import { Asche } from "../../event/asche";
 import { AscheFlags } from "../../event/asche-flags";
 import { GlobalScenes } from "../../event/global";
+import { Kiakai } from "../../event/kiakai";
 import { Miranda } from "../../event/miranda";
+import { Cveta } from "../../event/outlaws/cveta";
+import { Vaughn } from "../../event/outlaws/vaughn";
 import { VaughnFlags } from "../../event/outlaws/vaughn-flags";
 import { VaughnTasksScenes } from "../../event/outlaws/vaughn-tasks";
 import { Player } from "../../event/player";
+import { Terry } from "../../event/terry";
 import { TerryFlags } from "../../event/terry-flags";
 import { TerryScenes } from "../../event/terry-scenes";
 import { GAME, MoveToLocation, TimeStep, WORLD, WorldTime } from "../../GAME";
@@ -55,7 +60,7 @@ CastleLoc.Grounds.enc.AddEnc(() => NobleScenes.AlmsForThePoor, 1.0, () => {
 	return !(rigard.flags.Nobles & RigardFlags.Nobles.Alms);
 });
 CastleLoc.Grounds.enc.AddEnc(() => NobleScenes.Elodie, 1.0, () => {
-	const vaughn = GAME().vaughn;
+	const vaughn: Vaughn = GAME().vaughn;
 	const rigard = GAME().rigard;
 	return !GlobalScenes.PortalsOpen() &&
 		!(rigard.flags.Nobles & RigardFlags.Nobles.Elodie) &&
@@ -65,12 +70,12 @@ CastleLoc.Grounds.enc.AddEnc(() => NobleScenes.Elodie, 1.0, () => {
 });
 CastleLoc.Grounds.enc.AddEnc(() => NobleScenes.RoyalGetaway);
 CastleLoc.Grounds.enc.AddEnc(() => NobleScenes.MagicalJackal, 1.0, () => {
-	const asche = GAME().asche;
+	const asche: Asche = GAME().asche;
 	return asche.flags.Met >= AscheFlags.Met.Met &&
 		!WorldTime().IsDay();
 });
 CastleLoc.Grounds.enc.AddEnc(() => NobleScenes.PalaceParade, 2.0, () => {
-	const terry = GAME().terry;
+	const terry: Terry = GAME().terry;
 	const rigard = GAME().rigard;
 	return terry.Recruited() &&
 		!WorldTime().IsDay() &&
@@ -118,7 +123,7 @@ CastleLoc.Grounds.links.push(new Link(
 ));
 CastleLoc.Grounds.links.push(new Link(
 	"Jail", () => {
-		const terry = GAME().terry;
+		const terry: Terry = GAME().terry;
 		return terry.flags.Saved === TerryFlags.Saved.TalkedTwins2;
 	}, true,
 	undefined,
@@ -129,10 +134,10 @@ CastleLoc.Grounds.links.push(new Link(
 
 CastleLoc.Grounds.events.push(new Link(
 	"Elodie", () => {
-		const vaughn = GAME().vaughn;
+		const vaughn: Vaughn = GAME().vaughn;
 		return vaughn.flags.Met === VaughnFlags.Met.OnTaskLockpicks; }, true,
 	() => {
-		const vaughn = GAME().vaughn;
+		const vaughn: Vaughn = GAME().vaughn;
 		if (vaughn.flags.Met === VaughnFlags.Met.OnTaskLockpicks) {
 			Text.Add("Somewhere around here, you should look for Elodie, the contact of the outlaws, and hand over the tools you were given. Vaughn said that she has some time off during evenings.");
 			Text.NL();
@@ -214,9 +219,9 @@ export namespace NobleScenes {
 
 	export function TheDistrict() {
 		const player: Player = GAME().player;
-		const terry = GAME().terry;
-		const kiakai = GAME().kiakai;
-		const cveta = GAME().cveta;
+		const terry: Terry = GAME().terry;
+		const kiakai: Kiakai = GAME().kiakai;
+		const cveta: Cveta = GAME().cveta;
 		const party: Party = GAME().party;
 
 		let parse: any = {

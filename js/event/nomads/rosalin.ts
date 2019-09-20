@@ -29,10 +29,13 @@ import { PregnancyHandler } from "../../pregnancy";
 import { Text } from "../../text";
 import { TF, TFItem } from "../../tf";
 import { Rand } from "../../utility";
+import { Kiakai } from "../kiakai";
 import { KiakaiFlags } from "../kiakai-flags";
 import { Player } from "../player";
+import { Terry } from "../terry";
 import { TerryFlags } from "../terry-flags";
 import { TerryScenes } from "../terry-scenes";
+import { Cale } from "./cale";
 import { CaleFlags } from "./cale-flags";
 import { CaleSexScenes } from "./cale-sex";
 import { RosalinFlags } from "./rosalin-flags";
@@ -187,7 +190,7 @@ export class Rosalin extends Entity {
 	}
 
 	// Schedule
-	public IsAtLocation(location: any) {
+	public IsAtLocation(location?: any) {
 		const party: Party = GAME().party;
 		location = location || party.location;
 		if (location === WORLD().loc.Plains.Nomads.Fireplace) {
@@ -214,8 +217,8 @@ export namespace RosalinScenes {
 	export function Interact() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const rosalin = GAME().rosalin;
-		const cale = GAME().cale;
+		const rosalin: Rosalin = GAME().rosalin;
+		const cale: Cale = GAME().cale;
 		const anusol = rosalin.flags.Anusol;
 		let anusolIngredients = true;
 		if (anusol < RosalinFlags.Anusol.AskedForCalesHelp) {
@@ -287,7 +290,7 @@ export namespace RosalinScenes {
 	}
 
 	export function Desc() {
-		const rosalin = GAME().rosalin;
+		const rosalin: Rosalin = GAME().rosalin;
 		let parse: any = {
 			extinguishedLit : (WorldTime().hour >= 19 || WorldTime().hour < 2) ? "lit" : "extinguished",
 		};
@@ -306,9 +309,9 @@ export namespace RosalinScenes {
 	export function TalkPrompt() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const rosalin = GAME().rosalin;
-		const cale = GAME().cale;
-		const terry = GAME().terry;
+		const rosalin: Rosalin = GAME().rosalin;
+		const cale: Cale = GAME().cale;
+		const terry: Terry = GAME().terry;
 		const treecity = GAME().treecity;
 		const rigard = GAME().rigard;
 		Text.Clear();
@@ -719,9 +722,9 @@ export namespace RosalinScenes {
 	export function BrewAnusol() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const rosalin = GAME().rosalin;
-		const kiakai = GAME().kiakai;
-		const cale = GAME().cale;
+		const rosalin: Rosalin = GAME().rosalin;
+		const kiakai: Kiakai = GAME().kiakai;
+		const cale: Cale = GAME().cale;
 		const racescore = new RaceScore(rosalin.body);
 		const compScore = rosalin.origRaceScore.Compare(racescore);
 
@@ -785,7 +788,7 @@ export namespace RosalinScenes {
 	export function FirstTime() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const kiakai = GAME().kiakai;
+		const kiakai: Kiakai = GAME().kiakai;
 		Text.Clear();
 
 		let parse: any = {
@@ -864,8 +867,8 @@ export namespace RosalinScenes {
 
 	export function FirstFuck() {
 		const player: Player = GAME().player;
-		const rosalin = GAME().rosalin;
-		const cale = GAME().cale;
+		const rosalin: Rosalin = GAME().rosalin;
+		const cale: Cale = GAME().cale;
 
 		const parse: any = {
 			armorDesc() { return player.ArmorDesc(); },
@@ -1212,8 +1215,8 @@ export namespace RosalinScenes {
 
 	export function FirstFuckPegWolf() {
 		const player: Player = GAME().player;
-		const rosalin = GAME().rosalin;
-		const cale = GAME().cale;
+		const rosalin: Rosalin = GAME().rosalin;
+		const cale: Cale = GAME().cale;
 		Text.Clear();
 
 		cale.flags.Met = CaleFlags.Met.SharedFuckedHim;
@@ -1324,8 +1327,8 @@ export namespace RosalinScenes {
 	export function CombineCallback(item: TFItem) {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const rosalin = GAME().rosalin;
-		const cale = GAME().cale;
+		const rosalin: Rosalin = GAME().rosalin;
+		const cale: Cale = GAME().cale;
 		Text.Clear();
 
 		const racescore = new RaceScore(rosalin.body);
@@ -2697,8 +2700,8 @@ export namespace RosalinScenes {
 
 	export function SexPrompt(state: RosalinSexState) {
 		const player: Player = GAME().player;
-		const rosalin = GAME().rosalin;
-		const cale = GAME().cale;
+		const rosalin: Rosalin = GAME().rosalin;
+		const cale: Cale = GAME().cale;
 
 		Text.Clear();
 
@@ -3308,7 +3311,7 @@ export namespace RosalinScenes {
 
 	export function CockWorship(sexState: RosalinSexState) {
 		const player: Player = GAME().player;
-		const rosalin = GAME().rosalin;
+		const rosalin: Rosalin = GAME().rosalin;
 		Text.Clear();
 
 		const racescore = new RaceScore(rosalin.body);
@@ -3493,7 +3496,7 @@ export namespace RosalinScenes {
 
 	export function VagAftermath() {
 		const player: Player = GAME().player;
-		const rosalin = GAME().rosalin;
+		const rosalin: Rosalin = GAME().rosalin;
 		Text.Clear();
 
 		const racescore = new RaceScore(rosalin.body);

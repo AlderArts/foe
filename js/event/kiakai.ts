@@ -181,7 +181,7 @@ export class Kiakai extends Entity {
 	// Party interaction
 	public Interact(switchSpot: boolean) {
 		const player: Player = GAME().player;
-		const kiakai = GAME().kiakai;
+		const kiakai: Kiakai = GAME().kiakai;
 
 		Text.Clear();
 		const that = kiakai;
@@ -262,7 +262,7 @@ export class Kiakai extends Entity {
 
 	public TalkPrompt() {
 		const player: Player = GAME().player;
-		const kiakai = GAME().kiakai;
+		const kiakai: Kiakai = GAME().kiakai;
 		const ravenmother = GAME().ravenmother;
 
 		let parse: any = {

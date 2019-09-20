@@ -21,6 +21,7 @@ import { PregnancyHandler } from "../../pregnancy";
 import { Text } from "../../text";
 import { TF } from "../../tf";
 import { Player } from "../player";
+import { Cale } from "./cale";
 import { CaleFlags } from "./cale-flags";
 import { EstevanFlags } from "./estevan-flags";
 
@@ -72,7 +73,7 @@ export class Estevan extends Entity {
 	}
 
 	// Schedule
-	public IsAtLocation(location: any) {
+	public IsAtLocation(location?: any) {
 		const party: Party = GAME().party;
 		location = location || party.location;
 		if (location === WORLD().loc.Plains.Nomads.Fireplace) {
@@ -90,7 +91,7 @@ export class Estevan extends Entity {
 export namespace EstevanScenes {
 
 	export function Impregnate(mother: Entity, slot?: number) {
-		const estevan = GAME().estevan;
+		const estevan: Estevan = GAME().estevan;
 		mother.PregHandler().Impregnate({
 			slot   : slot || PregnancyHandler.Slot.Vag,
 			mother,
@@ -104,8 +105,8 @@ export namespace EstevanScenes {
 
 	export function Interact() {
 		const player: Player = GAME().player;
-		const cale = GAME().cale;
-		const estevan = GAME().estevan;
+		const cale: Cale = GAME().cale;
+		const estevan: Estevan = GAME().estevan;
 		const parse: any = {
 			playername : player.name,
 		};
@@ -170,7 +171,7 @@ export namespace EstevanScenes {
 
 	export function Prompt() {
 		const player: Player = GAME().player;
-		const estevan = GAME().estevan;
+		const estevan: Estevan = GAME().estevan;
 		const parse: any = {
 			playername : player.name,
 		};
@@ -314,7 +315,7 @@ export namespace EstevanScenes {
 	}
 
 	export function Desc() {
-		const estevan = GAME().estevan;
+		const estevan: Estevan = GAME().estevan;
 		if (estevan.flags.Met === 0) {
 			Text.Add("You see a strange creature by the fire, a man half human, half goat. He seems to be working on a contraption of some sort, probably a hunting trap. ");
 		} else {
@@ -325,7 +326,7 @@ export namespace EstevanScenes {
 
 	export function SexGay() {
 		const player: Player = GAME().player;
-		const estevan = GAME().estevan;
+		const estevan: Estevan = GAME().estevan;
 		const p1cock = player.BiggestCock();
 
 		let parse: any = {

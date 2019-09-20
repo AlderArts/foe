@@ -147,7 +147,7 @@ export class Cale extends Entity {
 	}
 
 	// Schedule
-	public IsAtLocation(location: any) {
+	public IsAtLocation(location?: any) {
 		location = location || GAME().party.location;
 		if (location === WORLD().loc.Plains.Nomads.Fireplace) {
 			return GAME().cale.flags.Met !== 0 && (WorldTime().hour >= 15 || WorldTime().hour < 3);

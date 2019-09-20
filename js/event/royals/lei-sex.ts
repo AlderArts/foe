@@ -5,6 +5,7 @@ import { IChoice } from "../../link";
 import { Party } from "../../party";
 import { Text } from "../../text";
 import { Player } from "../player";
+import { Lei } from "./lei";
 import { LeiFlags } from "./lei-flags";
 
 export namespace LeiSexScenes {
@@ -37,13 +38,13 @@ export namespace LeiSexScenes {
 	}
 
 	export function PettingUnlocked() {
-		const lei = GAME().lei;
+		const lei: Lei = GAME().lei;
 		return lei.flags.Met >= LeiFlags.Met.CompletedTaskEscort;
 	}
 	export function Petting(repeat: boolean) {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const lei = GAME().lei;
+		const lei: Lei = GAME().lei;
 
 		const parse: any = {
 			boygirl : player.mfFem("boy", "girl"),

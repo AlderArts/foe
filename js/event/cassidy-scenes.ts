@@ -7,6 +7,7 @@ import { EncounterTable } from "../encountertable";
 import { GAME, MoveToLocation, StepToHour, TimeStep, WORLD, WorldTime } from "../GAME";
 import { Gui } from "../gui";
 import { IChoice } from "../link";
+import { Rigard } from "../loc/rigard/rigard";
 import { Party } from "../party";
 import { Status } from "../statuseffect";
 import { Text } from "../text";
@@ -17,6 +18,7 @@ import { CassidySexScenes, CassidySparSexScenes } from "./cassidy-sex";
 import { Miranda } from "./miranda";
 import { MirandaFlags } from "./miranda-flags";
 import { Player } from "./player";
+import { Lei } from "./royals/lei";
 
 let shopBought: boolean;
 let shopSold: boolean;
@@ -1869,8 +1871,8 @@ export namespace CassidyScenes {
 
 	// Intermission 1! Only use if the PC knows who Lei is and if he hasn’t been recruited. Lei doesn’t count as a customer.
 	export function ManagingShop4(score: number) {
-		const rigard = GAME().rigard;
-		const lei = GAME().lei;
+		const rigard: Rigard = GAME().rigard;
+		const lei: Lei = GAME().lei;
 
 		const parse: any = {
 

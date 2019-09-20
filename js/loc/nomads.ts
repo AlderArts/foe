@@ -3,11 +3,11 @@ import { GetDEBUG } from "../../app";
 import { Event } from "../event";
 import { GlobalScenes } from "../event/global";
 import { Halloween, HalloweenScenes } from "../event/halloween";
-import { MomoScenes } from "../event/momo";
+import { Momo, MomoScenes } from "../event/momo";
 import { CaleScenes } from "../event/nomads/cale-scenes";
 import { NCavalcadeScenes } from "../event/nomads/cavalcade";
 import { ChiefScenes } from "../event/nomads/chief";
-import { EstevanScenes } from "../event/nomads/estevan";
+import { Estevan, EstevanScenes } from "../event/nomads/estevan";
 import { EstevanFlags } from "../event/nomads/estevan-flags";
 import { MagnusScenes } from "../event/nomads/magnus";
 import { PatchworkScenes } from "../event/nomads/patchwork";
@@ -155,7 +155,7 @@ NomadsLoc.Fireplace.links.push(new Link(
 NomadsLoc.Fireplace.events.push(new Link(
 	"Cavalcade", () => NCavalcadeScenes.Enabled(), () => GAME().party.coin >= NCavalcadeScenes.Bet(),
 	() => {
-		const estevan = GAME().estevan;
+		const estevan: Estevan = GAME().estevan;
 		if (NCavalcadeScenes.Enabled()) {
 			Text.Add("Both Rosalin, Cale and Estevan seem to be around. Perhaps they are up for a game of Cavalcade?");
 			if (estevan.flags.Cheat === EstevanFlags.Cheat.Setup) {
@@ -166,7 +166,7 @@ NomadsLoc.Fireplace.events.push(new Link(
 		}
 	},
 	() => {
-		const estevan = GAME().estevan;
+		const estevan: Estevan = GAME().estevan;
 		/* Old explanation
 		Text.Add("PLACEHOLDER TEXT");
 		Text.NL();
@@ -266,7 +266,7 @@ NomadsLoc.Fireplace.events.push(new Link(
 	"Momo",
 	() => GAME().momo.IsAtLocation(NomadsLoc.Fireplace), true,
 	() => {
-		const momo = GAME().momo;
+		const momo: Momo = GAME().momo;
 		if (momo.AtCamp()) {
 			Text.Add("A rather tatty tent has been set up close by the central cookfires for Momo, the dragon-girl.");
 			if (!momo.IsAtLocation()) {

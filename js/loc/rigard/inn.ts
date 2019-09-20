@@ -4,15 +4,19 @@ import { EncounterTable } from "../../encountertable";
 import { Entity } from "../../entity";
 import { Event } from "../../event";
 import { DreamsScenes } from "../../event/dreams";
+import { Gwendy } from "../../event/farm/gwendy";
+import { Kiakai } from "../../event/kiakai";
 import { Miranda } from "../../event/miranda";
 import { VaughnTasksScenes } from "../../event/outlaws/vaughn-tasks";
 import { Player } from "../../event/player";
 import { Room69Scenes } from "../../event/room69";
 import { Room69Flags } from "../../event/room69-flags";
+import { Lei } from "../../event/royals/lei";
 import { LeiFlags } from "../../event/royals/lei-flags";
 import { LeiScenes } from "../../event/royals/lei-scenes";
-import { TwinsScenes } from "../../event/royals/twins";
+import { Twins, TwinsScenes } from "../../event/royals/twins";
 import { TwinsFlags } from "../../event/royals/twins-flags";
+import { Terry } from "../../event/terry";
 import { GAME, MoveToLocation, TimeStep, WORLD, WorldTime } from "../../GAME";
 import { GameState, SetGameState } from "../../gamestate";
 import { Gui } from "../../gui";
@@ -63,7 +67,7 @@ InnLoc.Common.links.push(new Link(
 
 InnLoc.Common.links.push(new Link(
 	"Penthouse", () => {
-		const twins = GAME().twins;
+		const twins: Twins = GAME().twins;
 		return twins.flags.Met >= TwinsFlags.Met.Access;
 	}, true,
 	undefined,
@@ -613,9 +617,9 @@ export namespace LBScenes {
 
 	export function OrvinTalkPrompt(innPrompt: CallableFunction) {
 		const rigard = GAME().rigard;
-		const terry = GAME().terry;
+		const terry: Terry = GAME().terry;
 		const room69 = GAME().room69;
-		const lei = GAME().lei;
+		const lei: Lei = GAME().lei;
 		const party: Party = GAME().party;
 
 		let parse: any = {
@@ -1037,7 +1041,7 @@ export namespace LBScenes {
 	export function DrinksPrompt(innPrompt: CallableFunction) {
 		const rigard = GAME().rigard;
 		const player: Player = GAME().player;
-		const kiakai = GAME().kiakai;
+		const kiakai: Kiakai = GAME().kiakai;
 		const party: Party = GAME().party;
 
 		const parse: any = {
@@ -1523,9 +1527,9 @@ export namespace LBScenes {
 	export function GotoRoom() {
 		const rigard = GAME().rigard;
 		const player: Player = GAME().player;
-		const kiakai = GAME().kiakai;
-		const lei = GAME().lei;
-		const gwendy = GAME().gwendy;
+		const kiakai: Kiakai = GAME().kiakai;
+		const lei: Lei = GAME().lei;
+		const gwendy: Gwendy = GAME().gwendy;
 		const miranda: Miranda = GAME().miranda;
 		const party: Party = GAME().party;
 
@@ -1926,7 +1930,7 @@ InnLoc.Common.events.push(new Link(
 
 InnLoc.Common.events.push(new Link(
 	() => {
-		const lei = GAME().lei;
+		const lei: Lei = GAME().lei;
 		return lei.flags.Met >= LeiFlags.Met.KnowName ? "Lei" : "Stranger";
 	},
 	() => GAME().lei.IsAtLocation(InnLoc.Common), () => {

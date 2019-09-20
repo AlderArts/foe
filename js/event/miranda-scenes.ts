@@ -14,16 +14,23 @@ import { GameState, SetGameState } from "../gamestate";
 import { Gui } from "../gui";
 import { StrapOnItems } from "../items/strapon";
 import { IChoice, Link } from "../link";
+import { Rigard } from "../loc/rigard/rigard";
 import { RigardFlags } from "../loc/rigard/rigard-flags";
 import { Party } from "../party";
 import { Text } from "../text";
 import { Season } from "../time";
+import { Roa } from "./brothel/roa";
 import { DreamsScenes } from "./dreams";
+import { Gwendy } from "./farm/gwendy";
 import { GlobalScenes } from "./global";
+import { Kiakai } from "./kiakai";
 import { Miranda } from "./miranda";
 import { MirandaFlags } from "./miranda-flags";
+import { Momo } from "./momo";
+import { Rosalin } from "./nomads/rosalin";
 import { VaughnTasksScenes } from "./outlaws/vaughn-tasks";
 import { Player } from "./player";
+import { Terry } from "./terry";
 import { TerryFlags } from "./terry-flags";
 
 export namespace MirandaScenes {
@@ -484,7 +491,7 @@ export namespace MirandaScenes {
 	}
 
 	export function RigardGatesInteract() {
-		const rigard = GAME().rigard;
+		const rigard: Rigard = GAME().rigard;
 		const miranda: Miranda = GAME().miranda;
 
 		const parse: any = {};
@@ -510,7 +517,7 @@ export namespace MirandaScenes {
 
 	export function RigardGatesEnter() {
 		const player: Player = GAME().player;
-		const rigard = GAME().rigard;
+		const rigard: Rigard = GAME().rigard;
 		const miranda: Miranda = GAME().miranda;
 		const world = WORLD();
 
@@ -622,7 +629,7 @@ export namespace MirandaScenes {
 
 	export function RigardSlumGatesEnter() {
 		const player: Player = GAME().player;
-		const rigard = GAME().rigard;
+		const rigard: Rigard = GAME().rigard;
 		const miranda: Miranda = GAME().miranda;
 		const world = WORLD();
 
@@ -686,7 +693,7 @@ export namespace MirandaScenes {
 
 	export function RigardGatesBribe() {
 		const player: Player = GAME().player;
-		const rigard = GAME().rigard;
+		const rigard: Rigard = GAME().rigard;
 		const miranda: Miranda = GAME().miranda;
 		const world = WORLD();
 
@@ -1081,10 +1088,10 @@ export namespace MirandaScenes {
 
 	export function WelcomeToRigard() {
 		const player: Player = GAME().player;
-		const kiakai = GAME().kiakai;
+		const kiakai: Kiakai = GAME().kiakai;
 		const party: Party = GAME().party;
 		const miranda: Miranda = GAME().miranda;
-		const rosalin = GAME().rosalin;
+		const rosalin: Rosalin = GAME().rosalin;
 
 		const parse: any = {
 			playername : player.name,
@@ -1177,7 +1184,7 @@ export namespace MirandaScenes {
 
 	export function WelcomeToRigardQnA() {
 		const player: Player = GAME().player;
-		const kiakai = GAME().kiakai;
+		const kiakai: Kiakai = GAME().kiakai;
 
 		let parse: any = {
 			playername : player.name,
@@ -1247,7 +1254,7 @@ export namespace MirandaScenes {
 
 	export function WelcomeToRigardEnd() {
 		const player: Player = GAME().player;
-		const kiakai = GAME().kiakai;
+		const kiakai: Kiakai = GAME().kiakai;
 		const farm = GAME().farm;
 		const party: Party = GAME().party;
 
@@ -1613,10 +1620,10 @@ export namespace MirandaScenes {
 
 	export function BarChatOptions(options: any[], back?: any) {
 		const player: Player = GAME().player;
-		const rigard = GAME().rigard;
+		const rigard: Rigard = GAME().rigard;
 		const miranda: Miranda = GAME().miranda;
 		const belinda = GAME().belinda;
-		const terry = GAME().terry;
+		const terry: Terry = GAME().terry;
 
 		let parse: any = {};
 		parse = player.ParserTags(parse);
@@ -2565,7 +2572,7 @@ export namespace MirandaScenes {
 	export function TerryChaseHome() {
 		const player: Player = GAME().player;
 		const miranda: Miranda = GAME().miranda;
-		const terry = GAME().terry;
+		const terry: Terry = GAME().terry;
 		const world = WORLD();
 
 		const parse: any = {
@@ -2753,7 +2760,7 @@ export namespace MirandaScenes {
 	export function HomeDommySexLeavingFuckedHer() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const rigard = GAME().rigard;
+		const rigard: Rigard = GAME().rigard;
 		const miranda: Miranda = GAME().miranda;
 		const world = WORLD();
 
@@ -4294,7 +4301,7 @@ export namespace MirandaScenes {
 		const player: Player = GAME().player;
 		const miranda: Miranda = GAME().miranda;
 		const party: Party = GAME().party;
-		const rigard = GAME().rigard;
+		const rigard: Rigard = GAME().rigard;
 		const world = WORLD();
 
 		const parse: any = {
@@ -5686,11 +5693,11 @@ export namespace MirandaScenes {
 		const player: Player = GAME().player;
 		const miranda: Miranda = GAME().miranda;
 		const party: Party = GAME().party;
-		const terry = GAME().terry;
-		const kiakai = GAME().kiakai;
-		const roa = GAME().roa;
-		const momo = GAME().momo;
-		const gwendy = GAME().gwendy;
+		const terry: Terry = GAME().terry;
+		const kiakai: Kiakai = GAME().kiakai;
+		const roa: Roa = GAME().roa;
+		const momo: Momo = GAME().momo;
+		const gwendy: Gwendy = GAME().gwendy;
 
 		let parse: any = {
 			playername : player.name,
@@ -7047,7 +7054,7 @@ export namespace MirandaScenes {
 		const player: Player = GAME().player;
 		const miranda: Miranda = GAME().miranda;
 		const party: Party = GAME().party;
-		const terry = GAME().terry;
+		const terry: Terry = GAME().terry;
 
 		let parse: any = {
 
@@ -7511,7 +7518,7 @@ export namespace MirandaScenes {
 		const player: Player = GAME().player;
 		const miranda: Miranda = GAME().miranda;
 		const party: Party = GAME().party;
-		const rigard = GAME().rigard;
+		const rigard: Rigard = GAME().rigard;
 		const world = WORLD();
 
 		const parse: any = {
@@ -7654,7 +7661,7 @@ export namespace MirandaScenes {
 		const player: Player = GAME().player;
 		const miranda: Miranda = GAME().miranda;
 		const party: Party = GAME().party;
-		const rigard = GAME().rigard;
+		const rigard: Rigard = GAME().rigard;
 		const world = WORLD();
 
 		const parse: any = {

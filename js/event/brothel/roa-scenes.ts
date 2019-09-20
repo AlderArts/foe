@@ -8,10 +8,12 @@ import { Gui } from "../../gui";
 import { IChoice } from "../../link";
 import { Burrows } from "../../loc/burrows";
 import { BurrowsFlags } from "../../loc/burrows-flags";
+import { Rigard } from "../../loc/rigard/rigard";
 import { PregnancyHandler } from "../../pregnancy";
 import { Text } from "../../text";
 import { Player } from "../player";
 import { LucilleScenes } from "./lucille";
+import { Roa } from "./roa";
 import { RoaFlags } from "./roa-flags";
 
 export namespace RoaScenes {
@@ -21,7 +23,7 @@ export namespace RoaScenes {
     }
 
     export function Impregnate(mother: Entity, load: number, slot?: number) {
-        const roa = GAME().roa;
+        const roa: Roa = GAME().roa;
         mother.PregHandler().Impregnate({
             slot   : slot || PregnancyHandler.Slot.Vag,
             mother,
@@ -35,7 +37,7 @@ export namespace RoaScenes {
 
     export function BrothelApproach() {
         const player: Player = GAME().player;
-        const roa = GAME().roa;
+        const roa: Roa = GAME().roa;
         const parse: any = {
             playername : player.name,
         };
@@ -80,7 +82,7 @@ export namespace RoaScenes {
 
     export function BrothelPrompt() {
         const player: Player = GAME().player;
-        const roa = GAME().roa;
+        const roa: Roa = GAME().roa;
         let parse: any = {
             cost : Text.NumToText(roa.Cost()),
         };
@@ -164,8 +166,8 @@ export namespace RoaScenes {
     // TODO
     export function TalkPrompt(backPrompt: any) {
         const burrows: Burrows = GAME().burrows;
-        const roa = GAME().roa;
-        const rigard = GAME().rigard;
+        const roa: Roa = GAME().roa;
+        const rigard: Rigard = GAME().rigard;
         const ches = GAME().ches;
 
         const parse: any = {
@@ -323,7 +325,7 @@ export namespace RoaScenes {
     }
 
     export function RestoredVenaTalk() {
-        const roa = GAME().roa;
+        const roa: Roa = GAME().roa;
         const parse: any = {
 
         };
@@ -340,7 +342,7 @@ export namespace RoaScenes {
     export function First() {
         const player: Player = GAME().player;
         const burrows: Burrows = GAME().burrows;
-        const roa = GAME().roa;
+        const roa: Roa = GAME().roa;
 
         const cost   = roa.Cost();
         const p1cock = player.BiggestCock();
@@ -496,8 +498,8 @@ export namespace RoaScenes {
 
     export function TSLPitchAnal() {
         const player: Player = GAME().player;
-        const roa = GAME().roa;
-        const rigard = GAME().rigard;
+        const roa: Roa = GAME().roa;
+        const rigard: Rigard = GAME().rigard;
 
         if (roa.flags.Met < RoaFlags.Met.Sexed) {
             roa.flags.Met = RoaFlags.Met.Sexed;
@@ -828,7 +830,7 @@ export namespace RoaScenes {
 
     export function TSLCatchVaginal() {
         const player: Player = GAME().player;
-        const roa = GAME().roa;
+        const roa: Roa = GAME().roa;
 
         if (roa.flags.Met < RoaFlags.Met.Sexed) {
             roa.flags.Met = RoaFlags.Met.Sexed;
@@ -1160,7 +1162,7 @@ export namespace RoaScenes {
 
     export function TSLPostSexPrompt(mStrap: boolean) {
         const player: Player = GAME().player;
-        const roa = GAME().roa;
+        const roa: Roa = GAME().roa;
 
         let parse: any = {
             playername  : player.name,

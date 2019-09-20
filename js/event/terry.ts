@@ -303,7 +303,7 @@ export class Terry extends Entity {
 
 	// Party interaction
 	public Interact(switchSpot: boolean) {
-		const terry = GAME().terry;
+		const terry: Terry = GAME().terry;
 
 		const parse: any = {
 			foxvixen : terry.mfPronoun("fox", "vixen"),
@@ -386,7 +386,7 @@ export class Terry extends Entity {
 	}
 
 	public ItemUse(item: Item, backPrompt: any) {
-		const terry = GAME().terry;
+		const terry: Terry = GAME().terry;
 
 		if (item.isTF) {
 			let parse: any = {

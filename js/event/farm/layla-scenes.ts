@@ -5,8 +5,8 @@ import { Encounter } from "../../combat";
 import { EncounterTable } from "../../encountertable";
 import { Entity } from "../../entity";
 import { Sex } from "../../entity-sex";
-import { GAME, NAV, TimeStep, WORLD, WorldTime } from "../../GAME";
 import { MoveToLocation } from "../../GAME";
+import { GAME, NAV, TimeStep, WORLD, WorldTime } from "../../GAME";
 import { GameState, SetGameState } from "../../gamestate";
 import { Gui } from "../../gui";
 import { IChoice } from "../../link";
@@ -16,9 +16,16 @@ import { Party } from "../../party";
 import { PregnancyHandler } from "../../pregnancy";
 import { Text } from "../../text";
 import { Time } from "../../time";
+import { Roa } from "../brothel/roa";
+import { Kiakai } from "../kiakai";
 import { Miranda } from "../miranda";
+import { Momo } from "../momo";
+import { Cveta } from "../outlaws/cveta";
 import { Player } from "../player";
+import { Terry } from "../terry";
+import { Gwendy } from "./gwendy";
 import { GwendyScenes } from "./gwendy-scenes";
+import { Layla } from "./layla";
 import { LaylaFlags } from "./layla-flags";
 import { LaylaMob } from "./layla-mob";
 
@@ -26,7 +33,7 @@ export namespace LaylaScenes {
 
 	export function Prompt(switchSpot: boolean) {
 		const player: Player = GAME().player;
-		const layla = GAME().layla;
+		const layla: Layla = GAME().layla;
 
 		const parse: any = {
 
@@ -99,7 +106,7 @@ export namespace LaylaScenes {
 	// TODO
 	export function TalkPrompt(switchSpot: boolean) {
 		const player: Player = GAME().player;
-		const layla = GAME().layla;
+		const layla: Layla = GAME().layla;
 		const parse: any = {
 			playername : player.name,
 		};
@@ -188,8 +195,8 @@ export namespace LaylaScenes {
 
 	export function Appearance(switchSpot: boolean) {
 		const player: Player = GAME().player;
-		const kiakai = GAME().kiakai;
-		const layla = GAME().layla;
+		const kiakai: Kiakai = GAME().kiakai;
+		const layla: Layla = GAME().layla;
 		const parse: any = {
 			name : kiakai.name,
 			playername : player.name,
@@ -338,13 +345,13 @@ export namespace LaylaScenes {
 	export function PartyRegular(switchSpot: boolean) {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const kiakai = GAME().kiakai;
-		const layla = GAME().layla;
-		const terry = GAME().terry;
-		const roa = GAME().roa;
-		const momo = GAME().momo;
+		const kiakai: Kiakai = GAME().kiakai;
+		const layla: Layla = GAME().layla;
+		const terry: Terry = GAME().terry;
+		const roa: Roa = GAME().roa;
+		const momo: Momo = GAME().momo;
 		const miranda: Miranda = GAME().miranda;
-		const cveta = GAME().cveta;
+		const cveta: Cveta = GAME().cveta;
 		const burrows: Burrows = GAME().burrows;
 
 		const parse: any = {
@@ -499,7 +506,7 @@ export namespace LaylaScenes {
 
 	export function FarmMeetingTrigger(approach: boolean) {
 		const glade = GAME().glade;
-		const layla = GAME().layla;
+		const layla: Layla = GAME().layla;
 		if (glade.flags.Visit < DryadGladeFlags.Visit.DefeatedOrchid) { return false; } // TODO: change to after portals open?
 		if (layla.flags.Met === LaylaFlags.Met.NotMet) {
 			if (approach) {
@@ -538,8 +545,8 @@ export namespace LaylaScenes {
 	export function FirstMeeting(approach: boolean) {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const gwendy = GAME().gwendy;
-		const layla = GAME().layla;
+		const gwendy: Gwendy = GAME().gwendy;
+		const layla: Layla = GAME().layla;
 		const parse: any = {
 			playername : player.name,
 		};
@@ -607,7 +614,7 @@ export namespace LaylaScenes {
 	export function RepeatMeeting(approach: boolean) {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const gwendy = GAME().gwendy;
+		const gwendy: Gwendy = GAME().gwendy;
 		const parse: any = {
 			playername : player.name,
 		};
@@ -679,8 +686,8 @@ export namespace LaylaScenes {
 	export function FarmCombatLoss() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const gwendy = GAME().gwendy;
-		const layla = GAME().layla;
+		const gwendy: Gwendy = GAME().gwendy;
+		const layla: Layla = GAME().layla;
 		const enc = this;
 		SetGameState(GameState.Event, Gui);
 
@@ -726,8 +733,8 @@ export namespace LaylaScenes {
 	export function FarmCombatWin() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const gwendy = GAME().gwendy;
-		const layla = GAME().layla;
+		const gwendy: Gwendy = GAME().gwendy;
+		const layla: Layla = GAME().layla;
 		const enc = this;
 		SetGameState(GameState.Event, Gui);
 
@@ -983,7 +990,7 @@ export namespace LaylaScenes {
 	// Automatically happens 3 days after you won against Layla. As soon as the PC steps on the field.
 	export function SecondMeeting() {
 		const player: Player = GAME().player;
-		const layla = GAME().layla;
+		const layla: Layla = GAME().layla;
 		const parse: any = {
 			playername : player.name,
 		};
@@ -1041,7 +1048,7 @@ export namespace LaylaScenes {
 	export function LeavesGwendy() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const layla = GAME().layla;
+		const layla: Layla = GAME().layla;
 		const parse: any = {
 			playername : player.name,
 		};
@@ -1093,7 +1100,7 @@ export namespace LaylaScenes {
 	// TODO
 	export function SexPrompt(switchSpot: boolean) {
 		const player: Player = GAME().player;
-		const layla = GAME().layla;
+		const layla: Layla = GAME().layla;
 		const parse: any = {
 			playername : player.name,
 			armor() { return player.ArmorDesc(); },
@@ -1169,7 +1176,7 @@ export namespace LaylaScenes {
 
 	export function SexFirstTime() {
 		const player: Player = GAME().player;
-		const layla = GAME().layla;
+		const layla: Layla = GAME().layla;
 
 		const p1cock = player.BiggestCock(undefined, true);
 		const strapon = p1cock.isStrapon;
@@ -1797,7 +1804,7 @@ export namespace LaylaScenes {
 
 	export function SexCatchAnal() {
 		const player: Player = GAME().player;
-		const layla = GAME().layla;
+		const layla: Layla = GAME().layla;
 
 		let parse: any = {
 			playername : player.name,
@@ -2025,7 +2032,7 @@ export namespace LaylaScenes {
 
 	export function SexCatchAnalBlowher(parse: any) {
 		const player: Player = GAME().player;
-		const layla = GAME().layla;
+		const layla: Layla = GAME().layla;
 
 		Text.Add("Layla’s flavor washes intensely over your tongue, and you shut your eyes to better focus on the taste. Inch by inch, you glide down her length, swallowing her shaft.", parse);
 		Text.NL();
@@ -2081,7 +2088,7 @@ export namespace LaylaScenes {
 
 	export function SexCatchAnalCont(parse: any) {
 		const player: Player = GAME().player;
-		const layla = GAME().layla;
+		const layla: Layla = GAME().layla;
 
 		Text.Add("Layla starts with shallow thrusts, letting herself build up momentum as she slowly begins to pump longer and harder with each movement.", parse);
 		Text.NL();
@@ -2232,7 +2239,7 @@ export namespace LaylaScenes {
 
 	export function SexCatchAnalCont2(parse: any, kiss?: boolean, tailcock?: boolean) {
 		const player: Player = GAME().player;
-		const layla = GAME().layla;
+		const layla: Layla = GAME().layla;
 
 		if (kiss) {
 			Text.Add("Writhing in the chimera’s arms, you hug her as tightly as you can. Her tongue thrashes in your mouth while your own tries to defend itself against the onslaught. Down below, her hips smack meatily against yours, a rhythmic thrusting that sends warmth and pleasure tingling along your spine.", parse);
@@ -2353,7 +2360,7 @@ export namespace LaylaScenes {
 
 	export function SexCatchAnalCont3(parse: any) {
 		const player: Player = GAME().player;
-		const layla = GAME().layla;
+		const layla: Layla = GAME().layla;
 
 		Text.Add("<i>“O-okay,”</i> she replies, furrowing her brows to will her knot away, all the while pumping herself into you.", parse);
 		Text.NL();
@@ -2418,7 +2425,7 @@ export namespace LaylaScenes {
 	}
 
 	export function FirstTimeSkinShift() {
-		const layla = GAME().layla;
+		const layla: Layla = GAME().layla;
 		const parse: any = {
 
 		};
@@ -2443,7 +2450,7 @@ export namespace LaylaScenes {
 
 	export function SexPitchVaginal() {
 		const player: Player = GAME().player;
-		const layla = GAME().layla;
+		const layla: Layla = GAME().layla;
 
 		const p1cock = player.BiggestCock(undefined, true);
 
@@ -2646,7 +2653,7 @@ export namespace LaylaScenes {
 
 	export function SexPitchVaginalCont(opts: any, p1cock: Cock, parse: any) {
 		const player: Player = GAME().player;
-		const layla = GAME().layla;
+		const layla: Layla = GAME().layla;
 
 		// [Finger][Eat her out]
 		const options: IChoice[] = [];
@@ -2744,7 +2751,7 @@ export namespace LaylaScenes {
 
 	export function SexPitchVaginalCont2(opts: any, p1cock: Cock, parse: any) {
 		const player: Player = GAME().player;
-		const layla = GAME().layla;
+		const layla: Layla = GAME().layla;
 
 		// [Cock][Tail-cock][Finish up]
 		const options: IChoice[] = [];
@@ -3043,7 +3050,7 @@ export namespace LaylaScenes {
 
 	export function SexPitchVaginalCont3(opts: any, p1cock: Cock, parse: any) {
 		const player: Player = GAME().player;
-		const layla = GAME().layla;
+		const layla: Layla = GAME().layla;
 
 		Text.NL();
 		if (player.FirstCock()) {
@@ -3423,7 +3430,7 @@ export namespace LaylaScenes {
 	}
 
 	export function SexPitchVaginalVariable(opts: any, p1cock: Cock, parse: any) {
-		const layla = GAME().layla;
+		const layla: Layla = GAME().layla;
 
 		if (opts.LCock) {
 			Text.NL();

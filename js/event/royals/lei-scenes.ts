@@ -12,19 +12,21 @@ import { SetGameOverButton } from "../../main-gameover";
 import { Party } from "../../party";
 import { Text } from "../../text";
 import { Season, Time } from "../../time";
+import { Kiakai } from "../kiakai";
 import { Miranda } from "../miranda";
 import { Player } from "../player";
-import { LeiSpar } from "./lei";
+import { Lei, LeiSpar } from "./lei";
 import { LeiFlags } from "./lei-flags";
 import { LeiSexScenes } from "./lei-sex";
 import { LeiTaskScenes } from "./lei-tasks";
+import { Twins } from "./twins";
 import { TwinsFlags } from "./twins-flags";
 
 export namespace LeiScenes {
 
 	export function InnApproach() {
 		const party: Party = GAME().party;
-		const lei = GAME().lei;
+		const lei: Lei = GAME().lei;
 		const parse: any = {
 
 		};
@@ -57,7 +59,7 @@ export namespace LeiScenes {
 
 	export function InnPrompt() {
 		const player: Player = GAME().player;
-		const lei = GAME().lei;
+		const lei: Lei = GAME().lei;
 		const rigard = GAME().rigard;
 		const parse: any = {
 
@@ -202,7 +204,7 @@ export namespace LeiScenes {
 	export function InnPromptFirst() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const lei = GAME().lei;
+		const lei: Lei = GAME().lei;
 		const parse: any = {
 
 		};
@@ -463,7 +465,7 @@ export namespace LeiScenes {
 
 	export function ExplanationMain() {
 		const player: Player = GAME().player;
-		const lei = GAME().lei;
+		const lei: Lei = GAME().lei;
 		const parse: any = {
 
 		};
@@ -637,7 +639,7 @@ export namespace LeiScenes {
 	export function RequestMain() {
 		const party: Party = GAME().party;
 		const rigard = GAME().rigard;
-		const twins = GAME().twins;
+		const twins: Twins = GAME().twins;
 
 		const parse: any = {
 
@@ -809,7 +811,7 @@ export namespace LeiScenes {
 	}
 
 	export function Desc() {
-		const lei = GAME().lei;
+		const lei: Lei = GAME().lei;
 		if (lei.IsAtLocation(WORLD().loc.Rigard.Inn.Common)) {
 			if (lei.flags.Met < LeiFlags.Met.SeenGates) {
 				Text.Add("You notice a man sitting in the corner of the room on his own, a hood covering his face. There are a few others alone, a few others concealing their faces, but what draws your eye the most is his stillness. Whereas all others in the tavern are in motion, he sits completely still, his only movements the occasional tilt of his head, as he seems to scan the room, and the movement of his hand as he nurses some drink in a dark glass. Everything about him works to pique your curiosity, but you can’t quite come up with a reason to approach him.");
@@ -832,7 +834,7 @@ export namespace LeiScenes {
 	export function BarFight() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const lei = GAME().lei;
+		const lei: Lei = GAME().lei;
 		const parse: any = {
 			time     : WorldTime().DayTime(),
 			feetDesc() { return player.FeetDesc(); },
@@ -1008,7 +1010,7 @@ export namespace LeiScenes {
 
 	export function TalkPrompt() {
 		const player: Player = GAME().player;
-		const lei = GAME().lei;
+		const lei: Lei = GAME().lei;
 		const parse: any = {
 			playername : player.name,
 		};
@@ -1185,7 +1187,7 @@ export namespace LeiScenes {
 
 	export function TalkPastPrompt() {
 		const player: Player = GAME().player;
-		const lei = GAME().lei;
+		const lei: Lei = GAME().lei;
 		const parse: any = {
 			playername : player.name,
 		};
@@ -1257,7 +1259,7 @@ export namespace LeiScenes {
 	}
 
 	export function SexPrompt() {
-		const lei = GAME().lei;
+		const lei: Lei = GAME().lei;
 		const parse: any = {
 
 		};
@@ -1333,7 +1335,7 @@ export namespace LeiScenes {
 	export function SparPrompt() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const lei = GAME().lei;
+		const lei: Lei = GAME().lei;
 		const parse: any = {
 
 		};
@@ -1413,7 +1415,7 @@ export namespace LeiScenes {
 	export function SparWin() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const lei = GAME().lei;
+		const lei: Lei = GAME().lei;
 		const enc = this;
 
 		SetGameState(GameState.Event, Gui);
@@ -1490,7 +1492,7 @@ export namespace LeiScenes {
 
 	export function SparLoss() {
 		const party: Party = GAME().party;
-		const lei = GAME().lei;
+		const lei: Lei = GAME().lei;
 		const enc = this;
 
 		SetGameState(GameState.Event, Gui);
@@ -1528,16 +1530,16 @@ export namespace LeiScenes {
 
 	// #random one-off explore event in Slums/Residential at night (say 10pm-5am or whatever)
 	export function GuardStalkingApplicable() {
-		const lei = GAME().lei;
+		const lei: Lei = GAME().lei;
 		return lei.flags.Met >= LeiFlags.Met.KnowName && !(lei.flags.Talk & LeiFlags.Talk.GuardBeating) && ((WorldTime().hour >= 22) || (WorldTime().hour < 5));
 	}
 
 	export function GuardStalking() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const lei = GAME().lei;
+		const lei: Lei = GAME().lei;
 		const miranda: Miranda = GAME().miranda;
-		const kiakai = GAME().kiakai;
+		const kiakai: Kiakai = GAME().kiakai;
 
 		const parse: any = {
 			race : player.Eyes().race.qShort(),
@@ -1644,7 +1646,7 @@ export namespace LeiScenes {
 	export function GuardStalkingEntry(parse: any, nv: boolean) {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const kiakai = GAME().kiakai;
+		const kiakai: Kiakai = GAME().kiakai;
 		const miranda: Miranda = GAME().miranda;
 
 		Text.Add("Although the distance is short, the cloaked man moves with remarkable agility. The shortsword vanishes back inside his cloak, and he snatches up the guard’s longer weapon. Before you’re more than halfway to the scene, he reaches the mouth of the nearest alleyway, and pauses for a moment at the lip of deeper shadows. The man half-turns, momentarily meeting your eyes from beneath the hood of his cloak, and beckons for you to come before disappearing into darkness.", parse);
@@ -1690,7 +1692,7 @@ export namespace LeiScenes {
 
 	export function GuardStalkingConverge(parse: any, nv: boolean) {
 		const player: Player = GAME().player;
-		const lei = GAME().lei;
+		const lei: Lei = GAME().lei;
 		Text.Add("You gingerly take a few steps inside. ", parse);
 		if (nv) {
 			Text.Add("Blank walls loom to your left and right - the residents apparently preferring to do without windows. Your pupils widen to their widest. The sky above and reflected light from distant lanterns give you barely enough illumination to see, but even for you the alley is filled with obscuring shadow. Broken timber and other rubbish are piled high in places, providing cover and tricky terrain both.", parse);
@@ -1833,7 +1835,7 @@ export namespace LeiScenes {
 	export function GuardStalkingApprove(parse: any, nv: boolean) {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const lei = GAME().lei;
+		const lei: Lei = GAME().lei;
 		Text.Add("<i>“I but water a young sprout. If it becomes strong, perhaps I can use it to grow myself.”</i> He pauses, and his next words are quieter. <i>“This one is not as promising as some I wish to cultivate, but one cannot rely overmuch on a single crop.”</i>", parse);
 		Text.Flush();
 
@@ -1904,7 +1906,7 @@ export namespace LeiScenes {
 
 	export function GuardStalkingOutro(parse: any, nv: boolean) {
 		const party: Party = GAME().party;
-		const kiakai = GAME().kiakai;
+		const kiakai: Kiakai = GAME().kiakai;
 		const miranda: Miranda = GAME().miranda;
 
 		Text.Add(" Before coming here, I had a summons delivered to a guard patrol to the west of here, notifying them of the injury of one of their own. They will arrive any minute, and likely be none too happy,”</i> Lei says, sounding quite pleased for his part. He motions for you to follow, as he starts walking toward the mouth of the alleyway. <i>“Did you think I would leave him to lie here all night? If he died, giving the lesson would have been a waste of my time, after all.”</i>", parse);

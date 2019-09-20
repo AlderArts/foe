@@ -12,8 +12,10 @@ import { RigardFlags } from "../../loc/rigard/rigard-flags";
 import { Party } from "../../party";
 import { Text } from "../../text";
 import { Season, Time } from "../../time";
+import { Estevan } from "../nomads/estevan";
 import { EstevanFlags } from "../nomads/estevan-flags";
 import { Player } from "../player";
+import { Maria } from "./maria";
 import { MariaFlags } from "./maria-flags";
 import { OutlawsFlags } from "./outlaws-flags";
 
@@ -24,7 +26,7 @@ export namespace DeadDropScenes {
 
 	export function Alert() {
 		const player: Player = GAME().player;
-		const maria = GAME().maria;
+		const maria: Maria = GAME().maria;
 
 		const parse: any = {
 			playername : player.name,
@@ -50,7 +52,7 @@ export namespace DeadDropScenes {
 	// Trigger this when the player approaches Maria after having witnessed the above scene.
 	export function Initiation() {
 		const player: Player = GAME().player;
-		const maria = GAME().maria;
+		const maria: Maria = GAME().maria;
 
 		const parse: any = {
 			playername : player.name,
@@ -114,7 +116,7 @@ export namespace DeadDropScenes {
 	export function Repeat(CampPrompt: any) {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const maria = GAME().maria;
+		const maria: Maria = GAME().maria;
 
 		let parse: any = {
 			playername : player.name,
@@ -230,7 +232,7 @@ export namespace DeadDropScenes {
 			const player: Player = GAME().player;
 			const party: Party = GAME().party;
 			const outlaws = GAME().outlaws;
-			const maria = GAME().maria;
+			const maria: Maria = GAME().maria;
 
 			let parse: any = {};
 
@@ -544,7 +546,7 @@ export namespace DeadDropScenes {
 
 		export function DocksCavalcade() {
 			const party: Party = GAME().party;
-			const estevan = GAME().estevan;
+			const estevan: Estevan = GAME().estevan;
 
 			const parse: any = {
 
@@ -682,7 +684,7 @@ export namespace DeadDropScenes {
 
 		export function CavalcadeWin() {
 			const outlaws = GAME().outlaws;
-			const maria = GAME().maria;
+			const maria: Maria = GAME().maria;
 
 			const parse: any = {
 
@@ -746,7 +748,7 @@ export namespace DeadDropScenes {
 		export function GuardInspection() {
 			const player: Player = GAME().player;
 			const outlaws = GAME().outlaws;
-			const maria = GAME().maria;
+			const maria: Maria = GAME().maria;
 
 			const parse: any = {
 				playername : player.name,
@@ -990,7 +992,7 @@ export namespace DeadDropScenes {
 			const player: Player = GAME().player;
 			const party: Party = GAME().party;
 			const outlaws = GAME().outlaws;
-			const maria = GAME().maria;
+			const maria: Maria = GAME().maria;
 
 			const parse: any = {
 

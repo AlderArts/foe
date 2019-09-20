@@ -1,5 +1,6 @@
 import { Race } from "../body/race";
 import { Entity } from "../entity";
+import { Layla } from "../event/farm/layla";
 import { LaylaFlags } from "../event/farm/layla-flags";
 import { Kiakai } from "../event/kiakai";
 import { Player } from "../event/player";
@@ -353,7 +354,7 @@ export namespace OrchidScenes {
 		const player: Player = GAME().player;
 		const kiakai: Kiakai = GAME().kiakai;
 		const party: Party = GAME().party;
-		const layla = GAME().layla;
+		const layla: Layla = GAME().layla;
 		const oasis = GAME().oasis;
 
 		const parse: any = {

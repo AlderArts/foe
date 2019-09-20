@@ -7,6 +7,7 @@ import * as _ from "lodash";
 import { EncounterTable } from "../../encountertable";
 import { Event } from "../../event";
 import { Player } from "../../event/player";
+import { Terry } from "../../event/terry";
 import { GAME, MoveToLocation, WORLD, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
 import { Item } from "../../item";
@@ -280,7 +281,7 @@ export namespace ArmorShopScenes {
 	export function FirstEntry() {
 		const party: Party = GAME().party;
 		const rigard = GAME().rigard;
-		const terry = GAME().terry;
+		const terry: Terry = GAME().terry;
 
 		const parse: any = {
 

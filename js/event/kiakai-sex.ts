@@ -11,6 +11,7 @@ import { ToysItems } from "../items/toys";
 import { IChoice } from "../link";
 import { Party } from "../party";
 import { Text } from "../text";
+import { Kiakai } from "./kiakai";
 import { KiakaiFlags } from "./kiakai-flags";
 import { Player } from "./player";
 
@@ -24,7 +25,7 @@ export namespace KiakaiSexScenes {
 
 	export function Healing() {
 		const player: Player = GAME().player;
-		const kiakai = GAME().kiakai;
+		const kiakai: Kiakai = GAME().kiakai;
 
 		let parse: any = {
 			playername : player.name,
@@ -200,7 +201,7 @@ export namespace KiakaiSexScenes {
 
 	export function HealingSeducePrompt() {
 		const player: Player = GAME().player;
-		const kiakai = GAME().kiakai;
+		const kiakai: Kiakai = GAME().kiakai;
 
 		let parse: any = {
 			playername : player.name,
@@ -282,7 +283,7 @@ export namespace KiakaiSexScenes {
 
 	export function HealingNice() {
 		const player: Player = GAME().player;
-		const kiakai = GAME().kiakai;
+		const kiakai: Kiakai = GAME().kiakai;
 
 		let parse: any = {
 			playername : player.name,
@@ -1003,7 +1004,7 @@ export namespace KiakaiSexScenes {
 
 	export function PleasureElf() {
 		const player: Player = GAME().player;
-		const kiakai = GAME().kiakai;
+		const kiakai: Kiakai = GAME().kiakai;
 
 		let parse: any = {
 			playername : player.name,
@@ -1421,7 +1422,7 @@ export namespace KiakaiSexScenes {
 				kiakai.subDom.DecreaseStat(-20, 1);
 
 				KiakaiSexScenes.PleasureElfEnd();
-			}, enabled : kiakai.FirstCock() || kiakai.FirstVag(),
+			}, enabled : kiakai.FirstCock() !== undefined || kiakai.FirstVag() !== undefined,
 			tooltip : Text.Parse("Tease [himher] even more, keeping [himher] from getting off.", parse),
 		});
 		Gui.SetButtonsFromList(options);
@@ -1429,7 +1430,7 @@ export namespace KiakaiSexScenes {
 
 	export function PleasureElfEnd() {
 		const player: Player = GAME().player;
-		const kiakai = GAME().kiakai;
+		const kiakai: Kiakai = GAME().kiakai;
 
 		let parse: any = {
 			playername   : player.name,
@@ -1451,7 +1452,7 @@ export namespace KiakaiSexScenes {
 
 	export function HealingAssertive() {
 		const player: Player = GAME().player;
-		const kiakai = GAME().kiakai;
+		const kiakai: Kiakai = GAME().kiakai;
 
 		let parse: any = {
 			playername   : player.name,
@@ -2413,7 +2414,7 @@ export namespace KiakaiSexScenes {
 
 	export function KiakaiSex() {
 		const player: Player = GAME().player;
-		const kiakai = GAME().kiakai;
+		const kiakai: Kiakai = GAME().kiakai;
 
 		Text.Clear();
 
@@ -2671,7 +2672,7 @@ export namespace KiakaiSexScenes {
 	export function SexPrompt(attitude?: number) {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const kiakai = GAME().kiakai;
+		const kiakai: Kiakai = GAME().kiakai;
 
 		// TODO Toys
 		const playerCock = player.BiggestCock(undefined, true);
@@ -3355,7 +3356,7 @@ export namespace KiakaiSexScenes {
 					scenes.Get();
 				}, 1.0, () => kiakai.subDom.Get() > 20);
 				scenes.Get();
-			}, enabled : kiaiCock,
+			}, enabled : kiaiCock !== undefined,
 			tooltip : attitude ? Text.Parse("Your [anus] craves filling, and the elf can sate your hunger. Have [name] fuck you.", parse) : Text.Parse("Have [name] fuck you.", parse),
 		});
 		Gui.SetButtonsFromList(options);
@@ -3364,7 +3365,7 @@ export namespace KiakaiSexScenes {
 	export function AnalCatchPrep(choice?: number, assert?: boolean) {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const kiakai = GAME().kiakai;
+		const kiakai: Kiakai = GAME().kiakai;
 
 		Text.Flush();
 
@@ -4178,7 +4179,7 @@ export namespace KiakaiSexScenes {
 
 	export function AnalCatchFinish() {
 		const player: Player = GAME().player;
-		const kiakai = GAME().kiakai;
+		const kiakai: Kiakai = GAME().kiakai;
 
 		const playerCock = player.BiggestCock(undefined, true);
 		const kiaiCock   = kiakai.BiggestCock(undefined, true);

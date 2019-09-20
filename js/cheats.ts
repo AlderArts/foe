@@ -3,6 +3,7 @@ import * as _ from "lodash";
 import { GetDEBUG, SetDEBUG } from "../app";
 import { Cock } from "./body/cock";
 import { Vagina } from "./body/vagina";
+import { Kiakai } from "./event/kiakai";
 import { KiakaiFlags } from "./event/kiakai-flags";
 import { GAME, WORLD } from "./GAME";
 import { Gui } from "./gui";
@@ -230,7 +231,7 @@ export function InitCheats() {
 			}
 		},
 		() => {
-			const kiakai = GAME().kiakai;
+			const kiakai: Kiakai = GAME().kiakai;
 			const parse: any = {
 				name   : kiakai.name,
 				hisher() { return kiakai.hisher(); },
@@ -331,7 +332,7 @@ export function InitCheats() {
 									Text.Add("[name] lose a cock, leaving [himher] with " + kiakai.NumCocks(), parse);
 									Text.NL();
 									ElfSmithBody();
-								}, enabled : kiakai.FirstCock(),
+								}, enabled : kiakai.FirstCock() !== undefined,
 							});
 							options.push({ nameStr : "Cock+L",
 								func() {
@@ -407,7 +408,7 @@ export function InitCheats() {
 									Text.Add("[name] lose [hisher] vagina", parse);
 									Text.NL();
 									ElfSmithBody();
-								}, enabled : kiakai.FirstVag(),
+								}, enabled : kiakai.FirstVag() !== undefined,
 							});
 							options.push({ nameStr : "Add balls",
 								func() {

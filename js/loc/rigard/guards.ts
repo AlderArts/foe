@@ -3,6 +3,7 @@ import { EncounterTable } from "../../encountertable";
 import { Event } from "../../event";
 import { Miranda } from "../../event/miranda";
 import { MirandaScenes } from "../../event/miranda-scenes";
+import { Vaughn } from "../../event/outlaws/vaughn";
 import { VaughnTasksScenes } from "../../event/outlaws/vaughn-tasks";
 import { TerryScenes } from "../../event/terry-scenes";
 import { GAME, MoveToLocation, WORLD, WorldTime } from "../../GAME";
@@ -168,12 +169,12 @@ BarracksLoc.Common.events.push(new Link(
 	"Evidence", () => {
 		return VaughnTasksScenes.Snitch.OnTask();
 	}, () => {
-		const vaughn = GAME().vaughn;
+		const vaughn: Vaughn = GAME().vaughn;
 		return !vaughn.taskTimer.Expired();
 	},
 	() => {
 		const miranda: Miranda = GAME().miranda;
-		const vaughn = GAME().vaughn;
+		const vaughn: Vaughn = GAME().vaughn;
 		if (VaughnTasksScenes.Snitch.OnTask()) {
 			if (vaughn.taskTimer.Expired()) {
 				Text.Add("You were supposed to plant the evidence in the lockers here for Vaughn, but you weren't quick enough; the inspection has already happened. You should return and report to Vaughn.");

@@ -9,6 +9,7 @@ import { Gender } from "../body/gender";
 import { EncounterTable } from "../encountertable";
 import { Lagomorph, LagomorphAlpha } from "../enemy/rabbit";
 import { LagonFlags } from "../event/burrows/lagon-flags";
+import { Vena } from "../event/burrows/vena";
 import { VenaFlags } from "../event/burrows/vena-flags";
 import { GAME } from "../GAME";
 import { BurrowsFlags } from "./burrows-flags";
@@ -59,7 +60,7 @@ export class Burrows {
 		return GAME().burrows.LagonDefeated(); // TODO
 	}
 	public LagonJudged() {
-		const vena = GAME().vena;
+		const vena: Vena = GAME().vena;
 		return (vena.flags.Met & VenaFlags.Met.Judgement) > 0;
 	}
 	// TODO
@@ -67,7 +68,7 @@ export class Burrows {
 		return false;
 	}
 	public VenaRestored() {
-		const vena = GAME().vena;
+		const vena: Vena = GAME().vena;
 		return (vena.flags.Met & VenaFlags.Met.Restored) > 0;
 	}
 

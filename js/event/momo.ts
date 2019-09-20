@@ -127,7 +127,7 @@ export class Momo extends Entity {
 export namespace MomoScenes {
 
 	export function MomoEnc() {
-		const momo = GAME().momo;
+		const momo: Momo = GAME().momo;
 		if (momo.flags.Met === MomoFlags.Met.NotMet) {
 			MomoScenes.FindingMomo();
 		} else {
@@ -138,7 +138,7 @@ export namespace MomoScenes {
 	export function FindingMomo() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const momo = GAME().momo;
+		const momo: Momo = GAME().momo;
 		const world = WORLD();
 
 		const parse: any = {
@@ -233,7 +233,7 @@ export namespace MomoScenes {
 
 	export function WanderingMomo() {
 		const player: Player = GAME().player;
-		const momo = GAME().momo;
+		const momo: Momo = GAME().momo;
 
 		const parse: any = {
 			playername : player.name,
@@ -298,7 +298,7 @@ export namespace MomoScenes {
 
 	export function Interact() {
 		const player: Player = GAME().player;
-		const momo = GAME().momo;
+		const momo: Momo = GAME().momo;
 
 		const parse: any = {
 			playername : player.name,
@@ -456,7 +456,7 @@ export namespace MomoScenes {
 
 	export function CookPrompt() {
 		const player: Player = GAME().player;
-		const momo = GAME().momo;
+		const momo: Momo = GAME().momo;
 		const party: Party = GAME().party;
 
 		const parse: any = {
@@ -550,7 +550,7 @@ export namespace MomoScenes {
 
 	export function TalkPrompt() {
 		const player: Player = GAME().player;
-		const momo = GAME().momo;
+		const momo: Momo = GAME().momo;
 		let parse: any = {
 			playername : player.name,
 			girlMorph  : momo.Ascended() ? "morph" : "girl",

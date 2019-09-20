@@ -8,8 +8,11 @@ import { Party } from "../../party";
 import { Text } from "../../text";
 import { TFItem } from "../../tf";
 import { GlobalScenes } from "../global";
+import { Kiakai } from "../kiakai";
+import { Rosalin } from "../nomads/rosalin";
 import { RosalinFlags } from "../nomads/rosalin-flags";
 import { Player } from "../player";
+import { Terry } from "../terry";
 import { TerryFlags } from "../terry-flags";
 import { GolemFlags } from "./golem-flags";
 import { Jeanne } from "./jeanne";
@@ -51,7 +54,7 @@ export namespace JeanneScenes {
     export function InteractPrompt() {
         const player: Player = GAME().player;
         const jeanne = GAME().jeanne;
-        const terry = GAME().terry;
+        const terry: Terry = GAME().terry;
         const party: Party = GAME().party;
 
         const parse: any = {};
@@ -138,8 +141,8 @@ export namespace JeanneScenes {
 
     export function Talk() {
         const player: Player = GAME().player;
-        const terry = GAME().terry;
-        const rosalin = GAME().rosalin;
+        const terry: Terry = GAME().terry;
+        const rosalin: Rosalin = GAME().rosalin;
         const jeanne = GAME().jeanne;
         const party: Party = GAME().party;
 
@@ -421,7 +424,7 @@ export namespace JeanneScenes {
 
     export function First() {
         const player: Player = GAME().player;
-        const kiakai = GAME().kiakai;
+        const kiakai: Kiakai = GAME().kiakai;
         const jeanne = GAME().jeanne;
         const party: Party = GAME().party;
 

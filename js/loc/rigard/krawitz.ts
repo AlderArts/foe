@@ -13,7 +13,10 @@ import { Entity } from "../../entity";
 import { Sex } from "../../entity-sex";
 import { Event } from "../../event";
 import { Player } from "../../event/player";
+import { Lei } from "../../event/royals/lei";
+import { Twins } from "../../event/royals/twins";
 import { TwinsFlags } from "../../event/royals/twins-flags";
+import { Terry } from "../../event/terry";
 import { GAME, MoveToLocation, NAV, TimeStep, WORLD, WorldTime } from "../../GAME";
 import { GameState, SetGameState } from "../../gamestate";
 import { Gui } from "../../gui";
@@ -2043,9 +2046,9 @@ export namespace KrawitzScenes {
 		const rigard = GAME().rigard;
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const twins = GAME().twins;
-		const lei = GAME().lei;
-		const terry = GAME().terry;
+		const twins: Twins = GAME().twins;
+		const lei: Lei = GAME().lei;
+		const terry: Terry = GAME().terry;
 		const world = WORLD();
 
 		const parse: any = {
@@ -2503,7 +2506,7 @@ export namespace KrawitzScenes {
 	export function TwinsMoreTalk() {
 		const rigard = GAME().rigard;
 		const player: Player = GAME().player;
-		const twins = GAME().twins;
+		const twins: Twins = GAME().twins;
 
 		const parse: any = {
 			playername : player.name,

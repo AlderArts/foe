@@ -122,7 +122,7 @@ export class Gwendy extends Entity {
 
 	// Party interaction
 	public Interact(switchSpot: boolean) {
-		const gwendy = GAME().gwendy;
+		const gwendy: Gwendy = GAME().gwendy;
 		Text.Clear();
 		const that = gwendy;
 

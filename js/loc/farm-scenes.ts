@@ -5,6 +5,7 @@ import { EncounterTable } from "../encountertable";
 import { Sex } from "../entity-sex";
 import { Event } from "../event";
 import { DreamsScenes } from "../event/dreams";
+import { Gwendy } from "../event/farm/gwendy";
 import { GwendyScenes } from "../event/farm/gwendy-scenes";
 import { LaylaScenes } from "../event/farm/layla-scenes";
 import { Player } from "../event/player";
@@ -68,7 +69,7 @@ export namespace FarmScenesIntro {
     export function Approach() {
         const player: Player = GAME().player;
         const party: Party = GAME().party;
-        const gwendy = GAME().gwendy;
+        const gwendy: Gwendy = GAME().gwendy;
 
         party.location = FarmLoc.Fields;
         TimeStep({minute: 15});
@@ -278,7 +279,7 @@ export namespace FarmScenesIntro {
     export function GwendyQuestions2() {
         const player: Player = GAME().player;
         const party: Party = GAME().party;
-        const gwendy = GAME().gwendy;
+        const gwendy: Gwendy = GAME().gwendy;
         const farm = GAME().farm;
         const danie = GAME().danie;
         const adrian = GAME().adrian;
@@ -1001,11 +1002,11 @@ const FarmLoc: ILocFarm = {
 
 FarmLoc.Loft.events.push(new Link(
 	"Gwendy", () => {
-		const gwendy = GAME().gwendy;
+		const gwendy: Gwendy = GAME().gwendy;
 		return gwendy.IsAtLocation(FarmLoc.Loft);
 	}, true,
 	() => {
-		const gwendy = GAME().gwendy;
+		const gwendy: Gwendy = GAME().gwendy;
 		if (gwendy.IsAtLocation(FarmLoc.Loft)) {
 			Text.Add("Gwendy is here.");
 		} else {
@@ -1017,11 +1018,11 @@ FarmLoc.Loft.events.push(new Link(
 ));
 FarmLoc.Barn.events.push(new Link(
 	"Gwendy", () => {
-		const gwendy = GAME().gwendy;
+		const gwendy: Gwendy = GAME().gwendy;
 		return gwendy.IsAtLocation(FarmLoc.Barn);
 	}, true,
 	() => {
-		const gwendy = GAME().gwendy;
+		const gwendy: Gwendy = GAME().gwendy;
 		if (gwendy.IsAtLocation(FarmLoc.Barn)) {
 			Text.Add("Gwendy is here.");
 		} else {
@@ -1033,11 +1034,11 @@ FarmLoc.Barn.events.push(new Link(
 ));
 FarmLoc.Fields.events.push(new Link(
 	"Gwendy", () => {
-		const gwendy = GAME().gwendy;
+		const gwendy: Gwendy = GAME().gwendy;
 		return gwendy.IsAtLocation(FarmLoc.Fields);
 	}, true,
 	() => {
-		const gwendy = GAME().gwendy;
+		const gwendy: Gwendy = GAME().gwendy;
 		if (gwendy.IsAtLocation(FarmLoc.Fields)) {
 			Text.Add("Gwendy is here.");
 		} else {

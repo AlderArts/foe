@@ -335,7 +335,7 @@ charm.castTree.push(AbilityNode.Template.Lust({
 	}],
 	onMiss: [Defaults.Seduction._onMiss],
 	onDamage: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity, dmg: number) => {
-		const aggroEntry: any = GetAggroEntry(target.GetCombatEntry(encounter), caster);
+		const aggroEntry = GetAggroEntry(target.GetCombatEntry(encounter), caster);
 		if (aggroEntry) {
 			aggroEntry.aggro -= 0.4;
 			if (aggroEntry.aggro < 0) { aggroEntry.aggro = 0; }
@@ -361,7 +361,7 @@ allure.castTree.push(AbilityNode.Template.Lust({
 	}],
 	onMiss: [Defaults.Seduction._onMiss],
 	onDamage: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity, dmg: number) => {
-		const aggroEntry: any = GetAggroEntry(target.GetCombatEntry(encounter), caster);
+		const aggroEntry = GetAggroEntry(target.GetCombatEntry(encounter), caster);
 		if (aggroEntry) {
 			aggroEntry.aggro -= 0.8;
 			if (aggroEntry.aggro < 0) { aggroEntry.aggro = 0; }

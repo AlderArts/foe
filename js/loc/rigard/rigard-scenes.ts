@@ -5,6 +5,7 @@ import { Miranda } from "../../event/miranda";
 import { MirandaFlags } from "../../event/miranda-flags";
 import { MirandaScenes } from "../../event/miranda-scenes";
 import { Player } from "../../event/player";
+import { Terry } from "../../event/terry";
 import { TerryFlags } from "../../event/terry-flags";
 import { GAME, MoveToLocation, TimeStep, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
@@ -22,6 +23,7 @@ import { KrawitzFlags } from "./krawitz-flags";
 import { ShopStreetLoc } from "./merchants";
 import { PlazaLoc } from "./plaza";
 import { ResidentialLoc } from "./residential";
+import { Rigard } from "./rigard";
 import { RigardFlags } from "./rigard-flags";
 import { SlumsLoc } from "./slums";
 import { TavernLoc } from "./tavern";
@@ -50,7 +52,7 @@ const RigardLoc: ILocRigard = {
 export namespace RigardScenes {
 
 	export function CityHistory() {
-		const rigard = GAME().rigard;
+		const rigard: Rigard = GAME().rigard;
 		const party: Party = GAME().party;
 
 		Text.Clear();
@@ -145,7 +147,7 @@ export namespace RigardScenes {
 	}
 
 	export function Chatter(enteringArea: boolean) {
-		const rigard = GAME().rigard;
+		const rigard: Rigard = GAME().rigard;
 		const outlaws = GAME().outlaws;
 		const party: Party = GAME().party;
 
@@ -459,11 +461,11 @@ export namespace RigardScenes {
 
 	// New Del stuff
 	export function Chatter2(enteringArea: boolean) {
-		const rigard = GAME().rigard;
+		const rigard: Rigard = GAME().rigard;
 		const party: Party = GAME().party;
 		const player: Player = GAME().player;
 		const miranda: Miranda = GAME().miranda;
-		const terry = GAME().terry;
+		const terry: Terry = GAME().terry;
 
 		Text.Clear();
 		const parse: any = {
@@ -1262,7 +1264,7 @@ export namespace RigardScenes {
 	}
 
 	export function Lockdown() {
-		const rigard = GAME().rigard;
+		const rigard: Rigard = GAME().rigard;
 		const party: Party = GAME().party;
 		const player: Player = GAME().player;
 		const miranda: Miranda = GAME().miranda;

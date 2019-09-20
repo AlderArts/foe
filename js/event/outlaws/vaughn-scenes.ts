@@ -5,6 +5,7 @@ import { IChoice } from "../../link";
 import { Text } from "../../text";
 import { Season } from "../../time";
 import { Player } from "../player";
+import { Vaughn } from "./vaughn";
 import { VaughnFlags } from "./vaughn-flags";
 import { VaughnTasksScenes } from "./vaughn-tasks";
 
@@ -12,7 +13,7 @@ export namespace VaughnScenes {
 
 	export function Introduction() {
 		const player: Player = GAME().player;
-		const vaughn = GAME().vaughn;
+		const vaughn: Vaughn = GAME().vaughn;
 
 		const parse: any = {
 			playername : player.name,
@@ -56,7 +57,7 @@ export namespace VaughnScenes {
 
 	export function CampApproach() {
 		const player: Player = GAME().player;
-		const vaughn = GAME().vaughn;
+		const vaughn: Vaughn = GAME().vaughn;
 
 		const parse: any = {
 			playername : player.name,
@@ -195,7 +196,7 @@ export namespace VaughnScenes {
 
 	export function TalkPrompt() {
 		const player: Player = GAME().player;
-		const vaughn = GAME().vaughn;
+		const vaughn: Vaughn = GAME().vaughn;
 
 		const parse: any = {
 			playername : player.name,
@@ -270,7 +271,7 @@ export namespace VaughnScenes {
 
 	export function TalkHimself() {
 		const player: Player = GAME().player;
-		const vaughn = GAME().vaughn;
+		const vaughn: Vaughn = GAME().vaughn;
 
 		const parse: any = {
 			playername : player.name,
@@ -460,7 +461,7 @@ export namespace VaughnScenes {
 
 	export function TalkWar() {
 		const player: Player = GAME().player;
-		const vaughn = GAME().vaughn;
+		const vaughn: Vaughn = GAME().vaughn;
 
 		const parse: any = {
 			playername : player.name,
@@ -678,7 +679,7 @@ export namespace VaughnScenes {
 
 	export function Sex() {
 		const player: Player = GAME().player;
-		const vaughn = GAME().vaughn;
+		const vaughn: Vaughn = GAME().vaughn;
 
 		const parse: any = {
 			breasts() { return player.FirstBreastRow().Short(); },
@@ -798,7 +799,7 @@ export namespace VaughnScenes {
 
 	export function SexTitfuckBig() {
 		const player: Player = GAME().player;
-		const vaughn = GAME().vaughn;
+		const vaughn: Vaughn = GAME().vaughn;
 
 		let parse: any = {
 			playername : player.name,
@@ -902,7 +903,7 @@ export namespace VaughnScenes {
 
 	export function SexTitfuckBigCont(parse: any) {
 		const player: Player = GAME().player;
-		const vaughn = GAME().vaughn;
+		const vaughn: Vaughn = GAME().vaughn;
 
 		Text.NL();
 		Text.Add("With the way his shaft is twitching in between your milk makers, it’s clear that he’s going to cum soon. Closing your eyes, you arch yourself backwards as far as you dare, surrendering to the sheer pleasure emanating from your chest in those last few moments with Vaughn’s cock twisting in your cleavage, clearly trying to knot you.", parse);
@@ -961,7 +962,7 @@ export namespace VaughnScenes {
 
 	export function SexTitfuckAverage() {
 		const player: Player = GAME().player;
-		const vaughn = GAME().vaughn;
+		const vaughn: Vaughn = GAME().vaughn;
 
 		let parse: any = {
 			playername : player.name,
@@ -1099,7 +1100,7 @@ export namespace VaughnScenes {
 	// Confront Vaughn about calling you Sabrina
 	export function SexConfront() {
 		const player: Player = GAME().player;
-		const vaughn = GAME().vaughn;
+		const vaughn: Vaughn = GAME().vaughn;
 
 		let parse: any = {
 			playername : player.name,
@@ -1147,7 +1148,7 @@ export namespace VaughnScenes {
 
 	// Trigger this when the player next approaches Vaughn in the outlaws’ camp.
 	export function ConfrontFollowup() {
-		const vaughn = GAME().vaughn;
+		const vaughn: Vaughn = GAME().vaughn;
 
 		const parse: any = {
 

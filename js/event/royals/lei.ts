@@ -138,7 +138,7 @@ export class Lei extends Entity {
 
 	// Party interaction
 	public Interact() {
-		const lei = GAME().lei;
+		const lei: Lei = GAME().lei;
 		Text.Clear();
 		Text.Add("Rawr Imma stabbitystab.");
 

@@ -106,7 +106,7 @@ export class Maria extends Entity {
 
 	public EligableForDeaddropAlert() {
 		const outlaws = GAME().outlaws;
-		const maria = GAME().maria;
+		const maria: Maria = GAME().maria;
 		// Only in the initial phase
 		if (maria.flags.DD !== 0) { return false; }
 		// Only when meeting the correct conditions

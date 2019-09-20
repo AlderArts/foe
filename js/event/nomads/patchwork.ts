@@ -151,7 +151,7 @@ export class Patchwork extends Entity {
 export namespace PatchworkScenes {
 
 	export function Interact() {
-		const patchwork = GAME().patchwork;
+		const patchwork: Patchwork = GAME().patchwork;
 		let parse: any = {};
 		parse = patchwork.ParserPronouns(parse);
 
@@ -241,13 +241,13 @@ export namespace PatchworkScenes {
 	}
 
 	export function BuyFunc() {
-		const patchwork = GAME().patchwork;
+		const patchwork: Patchwork = GAME().patchwork;
 		patchwork.relation.IncreaseStat(10, 1);
 		return false;
 	}
 
 	export function Prompt() {
-		const patchwork = GAME().patchwork;
+		const patchwork: Patchwork = GAME().patchwork;
 		let parse: any = {
 			notS : patchwork.mfPronoun("", "s"),
 		};
@@ -314,7 +314,7 @@ export namespace PatchworkScenes {
 	}
 
 	export function Desc() {
-		const patchwork = GAME().patchwork;
+		const patchwork: Patchwork = GAME().patchwork;
 		let parse: any = {
 			notS : patchwork.mfPronoun("", "s"),
 			dont : patchwork.mfPronoun("don’t", "doesn’t"),

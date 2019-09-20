@@ -1,6 +1,7 @@
 import { Gender } from "../body/gender";
 import { Encounter } from "../combat";
 import { Bandit } from "../enemy/bandit";
+import { Gwendy } from "../event/farm/gwendy";
 import { GwendyFlags } from "../event/farm/gwendy-flags";
 import { Miranda } from "../event/miranda";
 import { MirandaFlags } from "../event/miranda-flags";
@@ -22,7 +23,7 @@ export namespace MarketScenes {
     export function GoToMarketFirst(backfunc: any) {
         const player: Player = GAME().player;
         const party: Party = GAME().party;
-        const gwendy = GAME().gwendy;
+        const gwendy: Gwendy = GAME().gwendy;
 
         const parse: any = {
             playername : player.name,
@@ -275,7 +276,7 @@ export namespace MarketScenes {
     export function Market(haul: any, next: any) {
         const player: Player = GAME().player;
         const party: Party = GAME().party;
-        const gwendy = GAME().gwendy;
+        const gwendy: Gwendy = GAME().gwendy;
         const farm = GAME().farm;
 
         const parse: any = {
@@ -425,7 +426,7 @@ export namespace MarketScenes {
     export function GoToMarketFirstFinale() {
         const player: Player = GAME().player;
         const party: Party = GAME().party;
-        const gwendy = GAME().gwendy;
+        const gwendy: Gwendy = GAME().gwendy;
         const rigard = GAME().rigard;
 
         const parse: any = {

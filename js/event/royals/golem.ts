@@ -6,8 +6,8 @@
 
 import { Abilities } from "../../abilities";
 import { Images } from "../../assets";
-import { Body } from "../../body/body";
 import { LowerBodyType } from "../../body/body";
+import { Body } from "../../body/body";
 import { BodyPartType } from "../../body/bodypart";
 import { Color } from "../../body/color";
 import { Orifice } from "../../body/orifice";
@@ -24,6 +24,7 @@ import { WeaponsItems } from "../../items/weapons";
 import { IChoice } from "../../link";
 import { Party } from "../../party";
 import { Text } from "../../text";
+import { Kiakai } from "../kiakai";
 import { Player } from "../player";
 import { GolemFlags } from "./golem-flags";
 import { JeanneScenes } from "./jeanne-scenes";
@@ -207,7 +208,7 @@ export namespace GolemScenes {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const golem = GAME().golem;
-		const kiakai = GAME().kiakai;
+		const kiakai: Kiakai = GAME().kiakai;
 		const parse: any = {
 			name() { return kiakai.name; },
 			hisher() { return kiakai.hisher(); },

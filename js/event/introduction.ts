@@ -30,6 +30,7 @@ import { ILocDarkAspect, ILocLightAspect } from "../location";
 import { Party } from "../party";
 import { Text } from "../text";
 import { TF } from "../tf";
+import { Kiakai } from "./kiakai";
 import { KiakaiFlags } from "./kiakai-flags";
 import { Player } from "./player";
 import { Uru, UruFlags } from "./uru";
@@ -2956,7 +2957,7 @@ export namespace Intro {
 
 	export function NomadsWakingUp() {
 		const player: Player = GAME().player;
-		const kiakai = GAME().kiakai;
+		const kiakai: Kiakai = GAME().kiakai;
 		const party: Party = GAME().party;
 
 		Text.Clear();
@@ -2999,7 +3000,7 @@ export namespace Intro {
 	let kiaTalkedAboutHealing: boolean;
 
 	export function MeetingKia() {
-		const kiakai = GAME().kiakai;
+		const kiakai: Kiakai = GAME().kiakai;
 
 		let parse: any = {
 			name : kiakai.name,
@@ -3029,7 +3030,7 @@ export namespace Intro {
 	}
 
 	export function KiaQnA() {
-		const kiakai = GAME().kiakai;
+		const kiakai: Kiakai = GAME().kiakai;
 
 		let parse: any = {
 			name : kiakai.name,
@@ -3126,7 +3127,7 @@ export namespace Intro {
 	}
 
 	export function KiaSurroundings() {
-		const kiakai = GAME().kiakai;
+		const kiakai: Kiakai = GAME().kiakai;
 
 		const parse: any = {
 			name : kiakai.name,
@@ -3159,7 +3160,7 @@ export namespace Intro {
 
 	export function KiaDecideOutset() {
 		const player: Player = GAME().player;
-		const kiakai = GAME().kiakai;
+		const kiakai: Kiakai = GAME().kiakai;
 		const party: Party = GAME().party;
 
 		let parse: any = {
@@ -3304,7 +3305,7 @@ export namespace Intro {
 
 	export function KiaNiceSex() {
 		const player: Player = GAME().player;
-		const kiakai = GAME().kiakai;
+		const kiakai: Kiakai = GAME().kiakai;
 
 		let parse: any = {
 			name : kiakai.name,
@@ -3388,7 +3389,7 @@ export namespace Intro {
 
 	export function KiaNiceSex69() {
 		const player: Player = GAME().player;
-		const kiakai = GAME().kiakai;
+		const kiakai: Kiakai = GAME().kiakai;
 
 		let parse: any = {
 			name : kiakai.name,
@@ -3494,7 +3495,7 @@ export namespace Intro {
 
 	export function KiaNaughtySex() {
 		const player: Player = GAME().player;
-		const kiakai = GAME().kiakai;
+		const kiakai: Kiakai = GAME().kiakai;
 
 		let parse: any = {
 			name : kiakai.name,
@@ -3604,7 +3605,7 @@ export namespace Intro {
 
 	export function Finalizing() {
 		const player: Player = GAME().player;
-		const kiakai = GAME().kiakai;
+		const kiakai: Kiakai = GAME().kiakai;
 		const party: Party = GAME().party;
 
 		Text.Clear();

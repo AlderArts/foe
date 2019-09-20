@@ -3,7 +3,7 @@ import { Gender } from "../../body/gender";
 import { Race, RaceScore } from "../../body/race";
 import { EncounterTable } from "../../encountertable";
 import { Event } from "../../event";
-import { FeraScenes } from "../../event/fera";
+import { Fera, FeraScenes } from "../../event/fera";
 import { Player } from "../../event/player";
 import { GAME, MoveToLocation, WORLD, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
@@ -114,7 +114,7 @@ ClothShopLoc.events.push(new Link(
 	},
 	() => {
 		const player: Player = GAME().player;
-		const fera = GAME().fera;
+		const fera: Fera = GAME().fera;
 		const rigard = GAME().rigard;
 
 		const nexellePrompt = () => {
@@ -245,7 +245,7 @@ ClothShopLoc.events.push(new Link(
 
 ClothShopLoc.events.push(new Link(
 	"Fera", true, () => {
-		const fera = GAME().fera;
+		const fera: Fera = GAME().fera;
 		return fera.timeout.Expired();
 	},
 	() => {

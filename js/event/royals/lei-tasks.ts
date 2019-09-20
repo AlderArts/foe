@@ -12,7 +12,10 @@ import { IChoice } from "../../link";
 import { Party } from "../../party";
 import { Text } from "../../text";
 import { Season, Time } from "../../time";
+import { Kiakai } from "../kiakai";
 import { Player } from "../player";
+import { Terry } from "../terry";
+import { Lei } from "./lei";
 import { LeiFlags } from "./lei-flags";
 import { LeiSexScenes } from "./lei-sex";
 
@@ -37,7 +40,7 @@ export namespace LeiTaskScenes {
 	}
 
 	export function TaskPrompt() {
-		const lei = GAME().lei;
+		const lei: Lei = GAME().lei;
 		const parse: any = {
 
 		};
@@ -61,7 +64,7 @@ export namespace LeiTaskScenes {
 
 	export namespace Escort {
 		export function Available() {
-			const lei = GAME().lei;
+			const lei: Lei = GAME().lei;
 			if (lei.flags.Met >= LeiFlags.Met.OnTaskEscort) { return false; }
 			return true;
 		}
@@ -70,11 +73,11 @@ export namespace LeiTaskScenes {
 			return player.level >= 6;
 		}
 		export function OnTask() {
-			const lei = GAME().lei;
+			const lei: Lei = GAME().lei;
 			return lei.flags.Met === LeiFlags.Met.OnTaskEscort;
 		}
 		export function OnTaskText() {
-			const lei = GAME().lei;
+			const lei: Lei = GAME().lei;
 			const parse: any = {
 
 			};
@@ -98,7 +101,7 @@ export namespace LeiTaskScenes {
 		}
 
 		export function Completed() {
-			const lei = GAME().lei;
+			const lei: Lei = GAME().lei;
 			return lei.flags.Met >= LeiFlags.Met.CompletedTaskEscort;
 		}
 
@@ -108,7 +111,7 @@ export namespace LeiTaskScenes {
 		}
 
 		export function Start() {
-			const lei = GAME().lei;
+			const lei: Lei = GAME().lei;
 			const parse: any = {
 				coin : Text.NumToText(LeiTaskScenes.Escort.Coin()),
 			};
@@ -153,9 +156,9 @@ export namespace LeiTaskScenes {
 		export function Estate() {
 			const player: Player = GAME().player;
 			const party: Party = GAME().party;
-			const lei = GAME().lei;
-			const kiakai = GAME().kiakai;
-			const terry = GAME().terry;
+			const lei: Lei = GAME().lei;
+			const kiakai: Kiakai = GAME().kiakai;
+			const terry: Terry = GAME().terry;
 			const rigard = GAME().rigard;
 			let parse: any = {
 				sirmadam : player.mfFem("sir", "madam"),
@@ -461,7 +464,7 @@ export namespace LeiTaskScenes {
 		export function CombatWin() {
 			const player: Player = GAME().player;
 			const party: Party = GAME().party;
-			const lei = GAME().lei;
+			const lei: Lei = GAME().lei;
 			SetGameState(GameState.Event, Gui);
 			Text.Clear();
 
@@ -493,7 +496,7 @@ export namespace LeiTaskScenes {
 		export function PostCombat(enc: any, won: boolean) {
 			const player: Player = GAME().player;
 			const party: Party = GAME().party;
-			const lei = GAME().lei;
+			const lei: Lei = GAME().lei;
 			const parse: any = {
 				armor : player.ArmorDesc(),
 			};
@@ -666,7 +669,7 @@ export namespace LeiTaskScenes {
 
 		export function Debrief() {
 			const party: Party = GAME().party;
-			const lei = GAME().lei;
+			const lei: Lei = GAME().lei;
 			const parse: any = {
 
 			};

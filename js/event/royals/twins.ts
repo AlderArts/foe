@@ -14,6 +14,7 @@ import { ILocation } from "../../location";
 import { Text } from "../../text";
 import { Time } from "../../time";
 import { Player } from "../player";
+import { Terry } from "../terry";
 import { TerryFlags } from "../terry-flags";
 import { TwinsFlags } from "./twins-flags";
 
@@ -152,8 +153,8 @@ export namespace TwinsScenes {
 	export function TalkPrompt() {
 		const player: Player = GAME().player;
 		const rigard = GAME().rigard;
-		const twins = GAME().twins;
-		const terry = GAME().terry;
+		const twins: Twins = GAME().twins;
+		const terry: Terry = GAME().terry;
 
 		const parse: any = {
 			playername : player.name,

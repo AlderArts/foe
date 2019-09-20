@@ -2,8 +2,11 @@
 import { LowerBodyType } from "../../body/body";
 import { EncounterTable } from "../../encountertable";
 import { Event } from "../../event";
+import { Kiakai } from "../../event/kiakai";
+import { Rosalin } from "../../event/nomads/rosalin";
 import { Player } from "../../event/player";
 import { Room69Flags } from "../../event/room69-flags";
+import { Lei } from "../../event/royals/lei";
 import { LeiFlags } from "../../event/royals/lei-flags";
 import { LeiTaskScenes } from "../../event/royals/lei-tasks";
 import { TerryScenes } from "../../event/terry-scenes";
@@ -63,7 +66,7 @@ PlazaLoc.enc.AddEnc(() => PlazaScenes.LetterDelivery, 1.0, () => (WorldTime().ho
 PlazaLoc.enc.AddEnc(() => PlazaScenes.StatueInfo, 1.0, () => {
 	const party: Party = GAME().party;
 	const rigard = GAME().rigard;
-	const kiakai = GAME().kiakai;
+	const kiakai: Kiakai = GAME().kiakai;
 	return (WorldTime().hour >= 6 && WorldTime().hour < 21) && (rigard.flags.TalkedStatue === 0 || (party.InParty(kiakai) && kiakai.flags.TalkedStatue === 0));
 });
 PlazaLoc.enc.AddEnc(() => KrawitzScenes.Duel, 3.0, () => {
@@ -124,8 +127,8 @@ PlazaLoc.links.push(new Link(
 	() => {
 		const player: Player = GAME().player;
 		const rigard = GAME().rigard;
-		const lei = GAME().lei;
-		const rosalin = GAME().rosalin;
+		const lei: Lei = GAME().lei;
+		const rosalin: Rosalin = GAME().rosalin;
 		const world = WORLD();
 
 		const parse: any = {
@@ -264,7 +267,7 @@ PlazaLoc.links.push(new Link(
 	"Orellos", () => {
 		return LeiTaskScenes.Escort.OnTask();
 	}, () => {
-		const lei = GAME().lei;
+		const lei: Lei = GAME().lei;
 		let t = true;
 		if (WorldTime().hour < 10 || WorldTime().hour >= 17) { t = false; }
 		if (lei.taskTimer.ToHours() > 7) { t = false; }
@@ -322,7 +325,7 @@ export namespace PlazaScenes {
 		const rigard = GAME().rigard;
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const kiakai = GAME().kiakai;
+		const kiakai: Kiakai = GAME().kiakai;
 
 		const parse: any = {
 			playername : player.name,
@@ -437,7 +440,7 @@ export namespace PlazaScenes {
 	export function LetterDelivery() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const kiakai = GAME().kiakai;
+		const kiakai: Kiakai = GAME().kiakai;
 
 		const letters     = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 		const animals     = ["stallion", "dog", "eel", "python", "pony", "wildcat", "mare"];

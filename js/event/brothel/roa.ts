@@ -97,7 +97,7 @@ export class Roa extends Entity {
 
 	// Party interaction //TODO
 	public Interact() {
-		const roa = GAME().roa;
+		const roa: Roa = GAME().roa;
 		Text.Clear();
 		Text.Add("Rawr Imma bunny.");
 

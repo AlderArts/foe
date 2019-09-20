@@ -86,7 +86,7 @@ export class Ophelia extends Entity {
 		return this.burrowsCountdown.Expired();
 	}
 
-	public IsAtLocation(location: any) {
+	public IsAtLocation(location?: any) {
 		location = location || GAME().party.location;
 		if (location === WORLD().loc.Burrows.Lab) {
 			if (this.Recruited()) { return false; }

@@ -18,9 +18,11 @@ import { IngredientItems } from "../items/ingredients";
 import { QuestItems } from "../items/quest";
 import { Jobs } from "../job";
 import { IChoice } from "../link";
+import { Rigard } from "../loc/rigard/rigard";
 import { Party } from "../party";
 import { Text } from "../text";
 import { Season } from "../time";
+import { Asche } from "./asche";
 import { AscheFlags } from "./asche-flags";
 import { AscheSexScenes } from "./asche-sex";
 import { Player } from "./player";
@@ -52,27 +54,27 @@ export namespace AscheTasksScenes {
 
 	export namespace Ginseng {
 		export function IsEligable() {
-			const asche = GAME().asche;
-			const rigard = GAME().rigard;
+			const asche: Asche = GAME().asche;
+			const rigard: Rigard = GAME().rigard;
 			return asche.flags.Tasks < AscheFlags.Tasks.Ginseng_Started &&
 				rigard.MagicShop.totalBought >= 500 &&
 				GAME().player.level >= 5;
 		}
 		export function IsOn() {
-			const asche = GAME().asche;
+			const asche: Asche = GAME().asche;
 			return asche.flags.Tasks >= AscheFlags.Tasks.Ginseng_Started &&
 				asche.flags.Tasks < AscheFlags.Tasks.Ginseng_Finished;
 		}
 		export function IsFail() {
-			const asche = GAME().asche;
+			const asche: Asche = GAME().asche;
 			return asche.flags.Tasks & AscheFlags.Tasks.Ginseng_Failed;
 		}
 		export function IsSuccess() {
-			const asche = GAME().asche;
+			const asche: Asche = GAME().asche;
 			return asche.flags.Tasks & AscheFlags.Tasks.Ginseng_Succeeded;
 		}
 		export function IsCompleted() {
-			const asche = GAME().asche;
+			const asche: Asche = GAME().asche;
 			return asche.flags.Tasks >= AscheFlags.Tasks.Ginseng_Finished;
 		}
 
@@ -80,7 +82,7 @@ export namespace AscheTasksScenes {
 		// Maybe a minimum level of 7, the encounter will be 8 or 9.
 		export function Initiation() {
 			const player: Player = GAME().player;
-			const asche = GAME().asche;
+			const asche: Asche = GAME().asche;
 
 			const parse: any = {
 				heshe : player.mfFem("he", "she"),
@@ -146,7 +148,7 @@ export namespace AscheTasksScenes {
 
 		export function Failed() {
 			const player: Player = GAME().player;
-			const asche = GAME().asche;
+			const asche: Asche = GAME().asche;
 
 			const parse: any = {
 				himher : player.mfFem("him", "her"),
@@ -164,7 +166,7 @@ export namespace AscheTasksScenes {
 		export function Highlands() {
 			const player: Player = GAME().player;
 			const party: Party = GAME().party;
-			const asche = GAME().asche;
+			const asche: Asche = GAME().asche;
 
 			const parse: any = {
 
@@ -306,7 +308,7 @@ export namespace AscheTasksScenes {
 
 		export function Bribe() {
 			const party: Party = GAME().party;
-			const asche = GAME().asche;
+			const asche: Asche = GAME().asche;
 
 			const parse: any = {
 
@@ -382,7 +384,7 @@ export namespace AscheTasksScenes {
 		export function Whore() {
 			const player: Player = GAME().player;
 			const party: Party = GAME().party;
-			const asche = GAME().asche;
+			const asche: Asche = GAME().asche;
 
 			let parse: any = {
 
@@ -491,7 +493,7 @@ export namespace AscheTasksScenes {
 
 		export function FightWin() {
 			const party: Party = GAME().party;
-			const asche = GAME().asche;
+			const asche: Asche = GAME().asche;
 
 			const enc = this;
 			SetGameState(GameState.Event, Gui);
@@ -523,7 +525,7 @@ export namespace AscheTasksScenes {
 
 		export function FightLoss() {
 			const party: Party = GAME().party;
-			const asche = GAME().asche;
+			const asche: Asche = GAME().asche;
 
 			const enc = this;
 			SetGameState(GameState.Event, Gui);
@@ -550,7 +552,7 @@ export namespace AscheTasksScenes {
 		export function Complete() {
 			const player: Player = GAME().player;
 			const party: Party = GAME().party;
-			const asche = GAME().asche;
+			const asche: Asche = GAME().asche;
 
 			let parse: any = {
 				himher : player.mfFem("him", "her"),
@@ -672,34 +674,34 @@ export namespace AscheTasksScenes {
 	//
 	export namespace Nightshade {
 		export function IsEligable() {
-			const asche = GAME().asche;
-			const rigard = GAME().rigard;
+			const asche: Asche = GAME().asche;
+			const rigard: Rigard = GAME().rigard;
 			return asche.flags.Tasks < AscheFlags.Tasks.Nightshade_Started &&
 				rigard.MagicShop.totalBought >= 1000 &&
 				GAME().player.level >= 8;
 		}
 		export function IsOn() {
-			const asche = GAME().asche;
+			const asche: Asche = GAME().asche;
 			return asche.flags.Tasks >= AscheFlags.Tasks.Nightshade_Started &&
 				asche.flags.Tasks < AscheFlags.Tasks.Nightshade_Finished;
 		}
 		export function IsSuccess() {
-			const asche = GAME().asche;
+			const asche: Asche = GAME().asche;
 			return asche.flags.Tasks & AscheFlags.Tasks.Nightshade_Succeeded;
 		}
 		export function HasHelpFromAquilius() {
-			const asche = GAME().asche;
+			const asche: Asche = GAME().asche;
 			return asche.flags.Tasks & AscheFlags.Tasks.Nightshade_Aquilius;
 		}
 		export function IsCompleted() {
-			const asche = GAME().asche;
+			const asche: Asche = GAME().asche;
 			return asche.flags.Tasks >= AscheFlags.Tasks.Nightshade_Finished;
 		}
 
 		// The player should have resolved the first quest, be at an appropriate level, and perhaps have spent x amount of money or bought so many items from Asche before this unlocks.
 		export function Initiation() {
 			const player: Player = GAME().player;
-			const asche = GAME().asche;
+			const asche: Asche = GAME().asche;
 
 			const parse: any = {
 				heshe : player.mfFem("he", "she"),
@@ -746,7 +748,7 @@ export namespace AscheTasksScenes {
 		// While on this quest, add a one-time “nightshade” button to Aquilius’ daytime talk menu.
 		export function AskAquiliusForHelp() {
 			const player: Player = GAME().player;
-			const asche = GAME().asche;
+			const asche: Asche = GAME().asche;
 
 			const parse: any = {
 				playername : player.name,
@@ -840,7 +842,7 @@ export namespace AscheTasksScenes {
 		export function HerbComplications() {
 			const player: Player = GAME().player;
 			const party: Party = GAME().party;
-			const asche = GAME().asche;
+			const asche: Asche = GAME().asche;
 
 			const parse: any = {
 				feet : player.FeetDesc(),
@@ -903,7 +905,7 @@ export namespace AscheTasksScenes {
 		export function Complete() {
 			const player: Player = GAME().player;
 			const party: Party = GAME().party;
-			const asche = GAME().asche;
+			const asche: Asche = GAME().asche;
 
 			let parse: any = {
 				handsomepretty : player.mfFem("handsome", "pretty"),
@@ -1054,29 +1056,29 @@ export namespace AscheTasksScenes {
 
 	export namespace Spring {
 		export function IsEligable() {
-			const asche = GAME().asche;
-			const rigard = GAME().rigard;
+			const asche: Asche = GAME().asche;
+			const rigard: Rigard = GAME().rigard;
 			return asche.flags.Tasks < AscheFlags.Tasks.Spring_Started &&
 				rigard.MagicShop.totalBought >= 1500 &&
 				GAME().player.level >= 8;
 		}
 		export function IsOn() {
-			const asche = GAME().asche;
+			const asche: Asche = GAME().asche;
 			return asche.flags.Tasks >= AscheFlags.Tasks.Spring_Started &&
 				asche.flags.Tasks < AscheFlags.Tasks.Spring_Finished;
 		}
 		export function IsSuccess() {
-			const asche = GAME().asche;
+			const asche: Asche = GAME().asche;
 			return asche.flags.Tasks & AscheFlags.Tasks.Spring_Visited;
 		}
 		export function IsCompleted() {
-			const asche = GAME().asche;
+			const asche: Asche = GAME().asche;
 			return asche.flags.Tasks >= AscheFlags.Tasks.Spring_Finished;
 		}
 
 		export function Initiation() {
 			const player: Player = GAME().player;
-			const asche = GAME().asche;
+			const asche: Asche = GAME().asche;
 
 			const parse: any = {
 				HandsomePretty: player.mfFem("Handsome", "Pretty"),
@@ -1132,7 +1134,7 @@ export namespace AscheTasksScenes {
 		export function Highlands() {
 			const player: Player = GAME().player;
 			const party: Party = GAME().party;
-			const asche = GAME().asche;
+			const asche: Asche = GAME().asche;
 
 			const parse: any = {
 				feet : player.FeetDesc(),
@@ -1252,7 +1254,7 @@ export namespace AscheTasksScenes {
 		export function Complete() {
 			const player: Player = GAME().player;
 			const party: Party = GAME().party;
-			const asche = GAME().asche;
+			const asche: Asche = GAME().asche;
 
 			let parse: any = {
 				himher : player.mfFem("him", "her"),

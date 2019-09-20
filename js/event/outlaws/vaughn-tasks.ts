@@ -15,7 +15,11 @@ import { Miranda } from "../miranda";
 import { MirandaFlags } from "../miranda-flags";
 import { Player } from "../player";
 import { Room69Flags } from "../room69-flags";
+import { Lei } from "../royals/lei";
 import { LeiFlags } from "../royals/lei-flags";
+import { Twins } from "../royals/twins";
+import { Terry } from "../terry";
+import { Vaughn } from "./vaughn";
 import { VaughnFlags } from "./vaughn-flags";
 
 export namespace VaughnTasksScenes {
@@ -110,7 +114,7 @@ export namespace VaughnTasksScenes {
 		export function Start() {
 			const player: Player = GAME().player;
 			const party: Party = GAME().party;
-			const terry = GAME().terry;
+			const terry: Terry = GAME().terry;
 
 			const parse: any = {
 				playername : player.name,
@@ -291,7 +295,7 @@ export namespace VaughnTasksScenes {
 		export function Debrief() {
 			const player: Player = GAME().player;
 			const outlaws = GAME().outlaws;
-			const vaughn = GAME().vaughn;
+			const vaughn: Vaughn = GAME().vaughn;
 
 			const parse: any = {
 				playername : player.name,
@@ -353,7 +357,7 @@ export namespace VaughnTasksScenes {
 		export function Start() {
 			const player: Player = GAME().player;
 			const miranda: Miranda = GAME().miranda;
-			const vaughn = GAME().vaughn;
+			const vaughn: Vaughn = GAME().vaughn;
 
 			const parse: any = {
 				playername : player.name,
@@ -420,7 +424,7 @@ export namespace VaughnTasksScenes {
 
 		export function MirandaTalk(options: any[], onDuty: any) {
 			const miranda: Miranda = GAME().miranda;
-			const vaughn = GAME().vaughn;
+			const vaughn: Vaughn = GAME().vaughn;
 
 			if (vaughn.taskTimer.Expired()) { return; }
 			if (vaughn.flags.Met === VaughnFlags.Met.OnTaskSnitch && miranda.flags.Snitch === 0) {
@@ -435,7 +439,7 @@ export namespace VaughnTasksScenes {
 
 		export function Miranda(onDuty: any) {
 			const player: Player = GAME().player;
-			const vaughn = GAME().vaughn;
+			const vaughn: Vaughn = GAME().vaughn;
 			const miranda: Miranda = GAME().miranda;
 
 			let parse: any = {
@@ -740,8 +744,8 @@ export namespace VaughnTasksScenes {
 		export function PlantEvidence() {
 			const player: Player = GAME().player;
 			const party: Party = GAME().party;
-			const vaughn = GAME().vaughn;
-			const terry = GAME().terry;
+			const vaughn: Vaughn = GAME().vaughn;
+			const terry: Terry = GAME().terry;
 
 			let parse: any = {
 				playername : player.name,
@@ -926,14 +930,14 @@ export namespace VaughnTasksScenes {
 		}
 
 		export function DebriefAvailable() {
-			const vaughn = GAME().vaughn;
+			const vaughn: Vaughn = GAME().vaughn;
 			return vaughn.flags.Met > VaughnFlags.Met.OnTaskSnitch &&
 				vaughn.flags.Met < VaughnFlags.Met.CompletedSnitch;
 		}
 
 		export function Debrief() {
 			const player: Player = GAME().player;
-			const vaughn = GAME().vaughn;
+			const vaughn: Vaughn = GAME().vaughn;
 
 			const parse: any = {
 				playername : player.name,
@@ -988,7 +992,7 @@ export namespace VaughnTasksScenes {
 		}
 
 		export function OutOfTime() {
-			const vaughn = GAME().vaughn;
+			const vaughn: Vaughn = GAME().vaughn;
 			return VaughnTasksScenes.Snitch.OnTask() && vaughn.taskTimer.Expired();
 		}
 
@@ -1027,7 +1031,7 @@ export namespace VaughnTasksScenes {
 		export function DebriefSuccess(parse: any) {
 			const party: Party = GAME().party;
 			const outlaws = GAME().outlaws;
-			const vaughn = GAME().vaughn;
+			const vaughn: Vaughn = GAME().vaughn;
 
 			Text.NL();
 			Text.Add("<i>“Well, that seems like that’s that,”</i> Vaughn says. <i>“Your help’s much appreciated, and with any luck, Terrell’s going to find himself in quite a bit of hot soup for the foreseeable future. Justice is served, righteousness prevails, and all that other stuff I’m supposed to say but I was never really very good at.”</i>", parse);
@@ -1058,7 +1062,7 @@ export namespace VaughnTasksScenes {
 		}
 
 		export function DebriefFailure(parse: any) {
-			const vaughn = GAME().vaughn;
+			const vaughn: Vaughn = GAME().vaughn;
 
 			Text.NL();
 			Text.Add("<i>“One more thing. You still have the evidence, don’t you?”</i>", parse);
@@ -1082,23 +1086,23 @@ export namespace VaughnTasksScenes {
 
 	export namespace Poisoning {
 		export function Available() {
-			const vaughn = GAME().vaughn;
+			const vaughn: Vaughn = GAME().vaughn;
 			if (vaughn.flags.Met >= VaughnFlags.Met.CompletedPoisoning) { return false; }
 			return true;
 		}
 		export function OnTask() {
-			const vaughn = GAME().vaughn;
+			const vaughn: Vaughn = GAME().vaughn;
 			return vaughn.flags.Met === VaughnFlags.Met.OnTaskPoisoning;
 		}
 		export function Completed() {
-			const vaughn = GAME().vaughn;
+			const vaughn: Vaughn = GAME().vaughn;
 			return vaughn.flags.Met >= VaughnFlags.Met.CompletedPoisoning;
 		}
 
 		export function Start() {
 			const player: Player = GAME().player;
 			const party: Party = GAME().party;
-			const vaughn = GAME().vaughn;
+			const vaughn: Vaughn = GAME().vaughn;
 
 			const parse: any = {
 				playername : player.name,
@@ -1207,7 +1211,7 @@ export namespace VaughnTasksScenes {
 		}
 
 		export function InnAvailable() {
-			const vaughn = GAME().vaughn;
+			const vaughn: Vaughn = GAME().vaughn;
 			// Trigger this upon stepping into the Lady’s Blessing with this task active (Allotted time, 17-24 the next day, ie timer not expired, and <= 7 hours).
 			if (!VaughnTasksScenes.Poisoning.OnTask()) { return false; }
 			if (vaughn.taskTimer.Expired()) { return false; }
@@ -1245,9 +1249,9 @@ export namespace VaughnTasksScenes {
 		export function InnPrompt(opts: any) {
 			const player: Player = GAME().player;
 			const party: Party = GAME().party;
-			const vaughn = GAME().vaughn;
-			const lei = GAME().lei;
-			const twins = GAME().twins;
+			const vaughn: Vaughn = GAME().vaughn;
+			const lei: Lei = GAME().lei;
+			const twins: Twins = GAME().twins;
 
 			const parse: any = {
 				Orvin : RigardFlags.LB.KnowsOrvin() ? "Orvin" : "the innkeeper",
@@ -1603,8 +1607,8 @@ export namespace VaughnTasksScenes {
 		export function Kitchen(opts: any) {
 			const player: Player = GAME().player;
 			const party: Party = GAME().party;
-			const vaughn = GAME().vaughn;
-			const terry = GAME().terry;
+			const vaughn: Vaughn = GAME().vaughn;
+			const terry: Terry = GAME().terry;
 
 			let parse: any = {
 				playername: player.name,
@@ -1716,7 +1720,7 @@ export namespace VaughnTasksScenes {
 		export function KitchenYourself() {
 			const player: Player = GAME().player;
 			const party: Party = GAME().party;
-			const vaughn = GAME().vaughn;
+			const vaughn: Vaughn = GAME().vaughn;
 
 			const parse: any = {
 				Orvin : RigardFlags.LB.KnowsOrvin() ? "Orvin" : "the innkeeper",
@@ -1839,7 +1843,7 @@ export namespace VaughnTasksScenes {
 		export function AphrodisiacPeek() {
 			const player: Player = GAME().player;
 			const party: Party = GAME().party;
-			const vaughn = GAME().vaughn;
+			const vaughn: Vaughn = GAME().vaughn;
 			const room69 = GAME().room69;
 
 			let parse: any = {
@@ -1957,7 +1961,7 @@ export namespace VaughnTasksScenes {
 		}
 
 		export function OutOfTime() {
-			const vaughn = GAME().vaughn;
+			const vaughn: Vaughn = GAME().vaughn;
 			return VaughnTasksScenes.Poisoning.OnTask() && vaughn.taskTimer.Expired();
 		}
 
@@ -1965,7 +1969,7 @@ export namespace VaughnTasksScenes {
 			const player: Player = GAME().player;
 			const party: Party = GAME().party;
 			const outlaws = GAME().outlaws;
-			const vaughn = GAME().vaughn;
+			const vaughn: Vaughn = GAME().vaughn;
 
 			const parse: any = {
 				Orvin : RigardFlags.LB.KnowsOrvin() ? "Orvin" : "the innkeeper",
@@ -2039,7 +2043,7 @@ export namespace VaughnTasksScenes {
 
 		export function DebriefFailure() {
 			const player: Player = GAME().player;
-			const vaughn = GAME().vaughn;
+			const vaughn: Vaughn = GAME().vaughn;
 
 			const parse: any = {
 				Orvin : RigardFlags.LB.KnowsOrvin() ? "Orvin" : "the innkeeper",
@@ -2080,7 +2084,7 @@ export namespace VaughnTasksScenes {
 		export function DebriefOutOfTime() {
 			const party: Party = GAME().party;
 			const outlaws = GAME().outlaws;
-			const vaughn = GAME().vaughn;
+			const vaughn: Vaughn = GAME().vaughn;
 
 			const parse: any = {
 

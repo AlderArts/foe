@@ -7,13 +7,14 @@ import { Event } from "../../event";
 import { Miranda } from "../../event/miranda";
 import { MirandaFlags } from "../../event/miranda-flags";
 import { Player } from "../../event/player";
-import { ZinaFlags } from "../../event/zina";
+import { Zina, ZinaFlags } from "../../event/zina";
 import { GAME, MoveToLocation, TimeStep, WORLD} from "../../GAME";
 import { Gui } from "../../gui";
 import { IChoice, Link } from "../../link";
 import { ILocRigardTavern } from "../../location";
 import { Party } from "../../party";
 import { Text } from "../../text";
+import { Rigard } from "./rigard";
 import { RigardFlags } from "./rigard-flags";
 
 const TavernLoc: ILocRigardTavern = {
@@ -24,7 +25,7 @@ const TavernLoc: ILocRigardTavern = {
 // Tavern
 //
 TavernLoc.Common.description = () => {
-	const rigard = GAME().rigard;
+	const rigard: Rigard = GAME().rigard;
 	Text.Add("You are in the tavern called the Maidens' Bane. The dim lighting makes it hard to make out details, and the heavy smell of hard alcohol mixed with bile stings your nostrils. Along the bar is a row of stools, a lot of them partly broken or mended - either missing a supporting peg, or the cushion is torn open with the material picked out, making the seat lumpy and hard.");
 	Text.NL();
 	Text.Add("In the main dining area, there are tables - most of them covered in the leftover dishes, foods and half-drunk mugs of other patrons. There are spills and stains on the tables that look as though they have been there for several weeks, with no hope of getting cleaned up anytime soon. On the wall opposite of the bar, there are booths, where it looks like couples could go for some public privacy. For true privacy, there are a few back rooms deeper inside the tavern.");
@@ -39,7 +40,7 @@ TavernLoc.Common.description = () => {
 
 TavernLoc.Common.events.push(new Link(
 	() => {
-		const rigard = GAME().rigard;
+		const rigard: Rigard = GAME().rigard;
 		return rigard.MetBarnaby() ? "Barnaby" : "Bartender";
 	}, true, true,
 	undefined,
@@ -58,7 +59,7 @@ TavernLoc.Common.links.push(new Link(
 
 // TODO
 TavernLoc.Common.DrunkHandler = () => {
-	const rigard = GAME().rigard;
+	const rigard: Rigard = GAME().rigard;
 	const party: Party = GAME().party;
 	const player: Player = GAME().player;
 
@@ -265,7 +266,7 @@ export namespace BarnabyScenes {
 	// Barnaby variable kept in rigard.js
 
 	export function Approach() {
-		const rigard = GAME().rigard;
+		const rigard: Rigard = GAME().rigard;
 		const player: Player = GAME().player;
 
 		const parse: any = {
@@ -301,7 +302,7 @@ export namespace BarnabyScenes {
 	}
 
 	export function Prompt(talkative?: boolean) {
-		const rigard = GAME().rigard;
+		const rigard: Rigard = GAME().rigard;
 		const party: Party = GAME().party;
 		const player: Player = GAME().player;
 
@@ -647,7 +648,7 @@ export namespace BarnabyScenes {
 	export function ChatPrompt() {
 		const player: Player = GAME().player;
 		const miranda: Miranda = GAME().miranda;
-		const zina = GAME().zina;
+		const zina: Zina = GAME().zina;
 
 		const parse: any = {
 
@@ -798,7 +799,7 @@ export namespace BarnabyScenes {
 	export function BlowjobEntrypoint(func: CallableFunction) {
 		const player: Player = GAME().player;
 		const miranda: Miranda = GAME().miranda;
-		const zina = GAME().zina;
+		const zina: Zina = GAME().zina;
 
 		const parse: any = {
 			playername : player.name,

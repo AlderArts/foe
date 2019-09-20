@@ -4,6 +4,7 @@ import { GAME, TimeStep } from "../../GAME";
 import { Gui } from "../../gui";
 import { IChoice } from "../../link";
 import { Text } from "../../text";
+import { Kiakai } from "../kiakai";
 import { Player } from "../player";
 import { LucilleFlags } from "./lucille-flags";
 
@@ -99,7 +100,7 @@ export namespace FireblossomScenes {
 
 	export function IntroEntryPoint() {
 		const player: Player = GAME().player;
-		const kiakai = GAME().kiakai;
+		const kiakai: Kiakai = GAME().kiakai;
 		const fireblossom = GAME().fireblossom;
 		const lucille = GAME().lucille;
 

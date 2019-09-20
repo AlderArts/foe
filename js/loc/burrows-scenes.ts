@@ -7,10 +7,12 @@ import { Lagon } from "../event/burrows/lagon";
 import { LagonDScenes } from "../event/burrows/lagon-defeated";
 import { LagonFlags } from "../event/burrows/lagon-flags";
 import { InitLagon, LagonScenes } from "../event/burrows/lagon-scenes";
+import { Ophelia } from "../event/burrows/ophelia";
 import { OpheliaScenes } from "../event/burrows/ophelia-scenes";
 import { VenaRScenes } from "../event/burrows/vena-restored";
 import { VenaScenes } from "../event/burrows/vena-scenes";
 import { GlobalScenes } from "../event/global";
+import { Rosalin } from "../event/nomads/rosalin";
 import { Player } from "../event/player";
 import { GAME, MoveToLocation, TimeStep, WORLD, WorldTime } from "../GAME";
 import { Gui } from "../gui";
@@ -229,7 +231,7 @@ export namespace BurrowsScenes {
     export function ArrivalOpheliaTalk() {
         const player: Player = GAME().player;
         const party: Party = GAME().party;
-        const rosalin = GAME().rosalin;
+        const rosalin: Rosalin = GAME().rosalin;
 
         const parse: any = {
             playername : player.name,
@@ -772,7 +774,7 @@ BurrowsLoc.Lab.links.push(new Link(
 
 BurrowsLoc.Lab.events.push(new Link(
 	"Ophelia", () => {
-		const ophelia = GAME().ophelia;
+		const ophelia: Ophelia = GAME().ophelia;
 		return ophelia.IsAtLocation();
 	}, true,
 	undefined,

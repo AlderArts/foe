@@ -10,6 +10,7 @@ import { FelinesScenes } from "../enemy/feline";
 import { LagomorphScenes } from "../enemy/rabbit-scenes";
 import { Event } from "../event";
 import { GlobalScenes } from "../event/global";
+import { Kiakai } from "../event/kiakai";
 import { Miranda } from "../event/miranda";
 import { MirandaScenes } from "../event/miranda-scenes";
 import { MomoScenes } from "../event/momo";
@@ -142,7 +143,7 @@ PlainsLoc.Crossroads.enc.AddEnc(() => {
 	return () => {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const kiakai = GAME().kiakai;
+		const kiakai: Kiakai = GAME().kiakai;
 
 		const parse: any = {
 			playername : player.name,

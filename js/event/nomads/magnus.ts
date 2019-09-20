@@ -19,6 +19,7 @@ import { PregnancyHandler } from "../../pregnancy";
 import { Text } from "../../text";
 import { TF } from "../../tf";
 import { GlobalScenes } from "../global";
+import { Kiakai } from "../kiakai";
 import { Player } from "../player";
 import { MagnusFlags } from "./magnus-flags";
 
@@ -79,7 +80,7 @@ export class Magnus extends Entity {
 export namespace MagnusScenes {
 
 	export function Impregnate(mother: Entity, slot?: number) {
-		const magnus = GAME().magnus;
+		const magnus: Magnus = GAME().magnus;
 		mother.PregHandler().Impregnate({
 			slot   : slot || PregnancyHandler.Slot.Vag,
 			mother,
@@ -93,7 +94,7 @@ export namespace MagnusScenes {
 
 	export function Interact() {
 		const player: Player = GAME().player;
-		const magnus = GAME().magnus;
+		const magnus: Magnus = GAME().magnus;
 		Text.Clear();
 
 		const parse: any = {
@@ -318,7 +319,7 @@ export namespace MagnusScenes {
 
 	export function Meditation() {
 		const player: Player = GAME().player;
-		const magnus = GAME().magnus;
+		const magnus: Magnus = GAME().magnus;
 		let parse: any = {
 			playername    : player.name,
 		};
@@ -779,8 +780,8 @@ export namespace MagnusScenes {
 	export function Confront() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const kiakai = GAME().kiakai;
-		const magnus = GAME().magnus;
+		const kiakai: Kiakai = GAME().kiakai;
+		const magnus: Magnus = GAME().magnus;
 		const parse: any = {
 			playername : player.name,
 		};
@@ -868,7 +869,7 @@ export namespace MagnusScenes {
 
 	export function LearnMagic() {
 		const player: Player = GAME().player;
-		const magnus = GAME().magnus;
+		const magnus: Magnus = GAME().magnus;
 		const parse: any = {
 			hand() { return player.HandDesc(); },
 			playername : player.name,
@@ -925,7 +926,7 @@ export namespace MagnusScenes {
 	}
 
 	export function Desc() {
-		const magnus = GAME().magnus;
+		const magnus: Magnus = GAME().magnus;
 		const parse: any = {
 			litExtinguished : WorldTime().hour >= 19 ? "lit" : "extinguished",
 		};

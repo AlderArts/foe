@@ -13,7 +13,10 @@ import { IChoice } from "../link";
 import { Locations } from "../location";
 import { Party } from "../party";
 import { Text } from "../text";
+import { Kiakai } from "./kiakai";
 import { Player } from "./player";
+import { Lei } from "./royals/lei";
+import { Terry } from "./terry";
 
 export namespace RoamingScenes {
 
@@ -74,9 +77,9 @@ export namespace RoamingScenes {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const rigard = GAME().rigard;
-		const terry = GAME().terry;
-		const kiakai = GAME().kiakai;
-		const lei = GAME().lei;
+		const terry: Terry = GAME().terry;
+		const kiakai: Kiakai = GAME().kiakai;
+		const lei: Lei = GAME().lei;
 		const world = WORLD();
 
 		let parse: any = {

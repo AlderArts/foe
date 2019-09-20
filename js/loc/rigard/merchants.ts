@@ -1,6 +1,8 @@
 
 import { EncounterTable } from "../../encountertable";
 import { Event } from "../../event";
+import { Kiakai } from "../../event/kiakai";
+import { Cveta } from "../../event/outlaws/cveta";
 import { CvetaFlags } from "../../event/outlaws/cveta-flags";
 import { Player } from "../../event/player";
 import { Room69Flags } from "../../event/room69-flags";
@@ -197,7 +199,7 @@ ShopStreetLoc.Street.events.push(new Link(
 ShopStreetLoc.Street.events.push(new Link(
 	"Violin", () => {
 		const rigard = GAME().rigard;
-		const cveta = GAME().cveta;
+		const cveta: Cveta = GAME().cveta;
 		return !rigard.UnderLockdown() && cveta.flags.Met === CvetaFlags.Met.ViolinQ;
 	}, () => {
 		const party: Party = GAME().party;
@@ -205,8 +207,8 @@ ShopStreetLoc.Street.events.push(new Link(
 	},
 	undefined,
 	() => {
-		const cveta = GAME().cveta;
-		const kiakai = GAME().kiakai;
+		const cveta: Cveta = GAME().cveta;
+		const kiakai: Kiakai = GAME().kiakai;
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 

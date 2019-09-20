@@ -16,8 +16,11 @@ import { IChoice } from "../../link";
 import { Party } from "../../party";
 import { Text } from "../../text";
 import { Player } from "../player";
+import { Cale } from "./cale";
 import { CaleSexScenes } from "./cale-sex";
+import { Estevan } from "./estevan";
 import { EstevanFlags } from "./estevan-flags";
+import { Rosalin } from "./rosalin";
 
 export namespace NCavalcadeScenes {
 
@@ -26,9 +29,9 @@ export namespace NCavalcadeScenes {
 	}
 
 	export function Enabled() {
-		const rosalin = GAME().rosalin;
-		const cale = GAME().cale;
-		const estevan = GAME().estevan;
+		const rosalin: Rosalin = GAME().rosalin;
+		const cale: Cale = GAME().cale;
+		const estevan: Estevan = GAME().estevan;
 		return cale.IsAtLocation() &&
 			estevan.flags.Met !== 0 &&
 			estevan.IsAtLocation() &&
@@ -38,8 +41,8 @@ export namespace NCavalcadeScenes {
 	export function RegularGame() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const rosalin = GAME().rosalin;
-		const estevan = GAME().estevan;
+		const rosalin: Rosalin = GAME().rosalin;
+		const estevan: Estevan = GAME().estevan;
 		const parse: any = {
 			playername : player.name,
 			hisher     : rosalin.hisher(),
@@ -328,9 +331,9 @@ export namespace NCavalcadeScenes {
 	export function CheatGame() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const rosalin = GAME().rosalin;
-		const cale = GAME().cale;
-		const estevan = GAME().estevan;
+		const rosalin: Rosalin = GAME().rosalin;
+		const cale: Cale = GAME().cale;
+		const estevan: Estevan = GAME().estevan;
 		const cocksInAss = player.CocksThatFit(cale.Butt());
 		const p1cock = player.BiggestCock(cocksInAss);
 
@@ -487,7 +490,7 @@ export namespace NCavalcadeScenes {
 
 	export function SexyPlayerWin(cheat: boolean) {
 		const player: Player = GAME().player;
-		const cale = GAME().cale;
+		const cale: Cale = GAME().cale;
 		const parse: any = {
 			playername : player.name,
 		};

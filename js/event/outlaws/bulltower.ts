@@ -28,7 +28,10 @@ import { PregnancyHandler } from "../../pregnancy";
 import { Stat } from "../../stat";
 import { Text } from "../../text";
 import { Time } from "../../time";
+import { Kiakai } from "../kiakai";
 import { Player } from "../player";
+import { Terry } from "../terry";
+import { Cveta } from "./cveta";
 import { OutlawsFlags } from "./outlaws-flags";
 
 export class BullTowerStats {
@@ -773,7 +776,7 @@ BullTowerLoc.Building.Hall.links.push(new Link(
 	() => {
 		const party: Party = GAME().party;
 		const outlaws = GAME().outlaws;
-		const terry = GAME().terry;
+		const terry: Terry = GAME().terry;
 		const parse: any = {
 
 		};
@@ -1169,7 +1172,7 @@ BullTowerLoc.Building.Watchtower.events.push(new Link(
 
 BullTowerLoc.Building.Office.description = () => {
 	const outlaws = GAME().outlaws;
-	const terry = GAME().terry;
+	const terry: Terry = GAME().terry;
 
 	const parse: any = {
 		t : terry.Recruited() ? ", perhaps so well that even Terry would find it quite the challenge" : "",
@@ -1219,7 +1222,7 @@ export namespace BullTowerScenes {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const outlaws = GAME().outlaws;
-		const terry = GAME().terry;
+		const terry: Terry = GAME().terry;
 
 		const parse: any = {
 			playername: player.name,
@@ -1456,7 +1459,7 @@ export namespace BullTowerScenes {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const outlaws = GAME().outlaws;
-		const cveta = GAME().cveta;
+		const cveta: Cveta = GAME().cveta;
 
 		const parse: any = {
 			playername : player.name,
@@ -1943,7 +1946,7 @@ export namespace BullTowerScenes {
 	export function SafePrompt() {
 		const player: Player = GAME().player;
 		const outlaws = GAME().outlaws;
-		const terry = GAME().terry;
+		const terry: Terry = GAME().terry;
 
 		const parse: any = {
 			playername : player.name,
@@ -2344,7 +2347,7 @@ export namespace BullTowerScenes {
 	export function EndingInjured() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const kiakai = GAME().kiakai;
+		const kiakai: Kiakai = GAME().kiakai;
 
 		const parse: any = {
 			playername : player.name,

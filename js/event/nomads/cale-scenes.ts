@@ -12,6 +12,7 @@ import { Player } from "../player";
 import { Cale } from "./cale";
 import { CaleFlags } from "./cale-flags";
 import { CaleSexScenes } from "./cale-sex";
+import { Rosalin } from "./rosalin";
 import { RosalinFlags } from "./rosalin-flags";
 
 let shopBought: boolean;
@@ -21,7 +22,7 @@ export namespace CaleScenes {
 	// interaction
 	export function Interact() {
 		const player: Player = GAME().player;
-		const rosalin = GAME().rosalin;
+		const rosalin: Rosalin = GAME().rosalin;
 		const cale: Cale = GAME().cale;
 		const parse: any = {
 			playername : player.name,
@@ -519,7 +520,7 @@ export namespace CaleScenes {
 	export function TalkPrompt() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const rosalin = GAME().rosalin;
+		const rosalin: Rosalin = GAME().rosalin;
 		const cale: Cale = GAME().cale;
 		let parse: any = {
 			playername : player.name,

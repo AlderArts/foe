@@ -17,6 +17,7 @@ import { MariaScenes } from "../event/outlaws/maria-scenes";
 import { OutlawsScenes } from "../event/outlaws/outlaws";
 import { OutlawsFlags } from "../event/outlaws/outlaws-flags";
 import { VaughnScenes } from "../event/outlaws/vaughn-scenes";
+import { Terry } from "../event/terry";
 import { GAME, MoveToLocation, WORLD, WorldTime } from "../GAME";
 import { Gui } from "../gui";
 import { Link } from "../link";
@@ -197,7 +198,7 @@ OutlawsLoc.Camp.enc.AddEnc(() => {
 */
 
 OutlawsLoc.Infirmary.description = () => {
-	const terry = GAME().terry;
+	const terry: Terry = GAME().terry;
 	const party: Party = GAME().party;
 	const parse: any = {
 

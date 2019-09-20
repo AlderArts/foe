@@ -9,8 +9,12 @@ import { Encounter } from "../combat";
 import { OrchidScenes } from "../enemy/orchid-scenes";
 import { Sex } from "../entity-sex";
 import { Event } from "../event";
+import { Roa } from "../event/brothel/roa";
 import { GlobalScenes } from "../event/global";
+import { Kiakai } from "../event/kiakai";
+import { Momo } from "../event/momo";
 import { Player } from "../event/player";
+import { Terry } from "../event/terry";
 import { GAME, MoveToLocation, TimeStep, WORLD, WorldTime } from "../GAME";
 import { GameState, SetGameState } from "../gamestate";
 import { Gui } from "../gui";
@@ -238,10 +242,10 @@ export namespace DryadGladeScenes {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const orchid = GAME().orchid;
-		const kiakai = GAME().kiakai;
-		const terry = GAME().terry;
-		const roa = GAME().roa;
-		const momo = GAME().momo;
+		const kiakai: Kiakai = GAME().kiakai;
+		const terry: Terry = GAME().terry;
+		const roa: Roa = GAME().roa;
+		const momo: Momo = GAME().momo;
 		SetGameState(GameState.Event, Gui);
 
 		let parse: any = {
@@ -578,7 +582,7 @@ export namespace DryadGladeScenes {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const glade = GAME().glade;
-		const kiakai = GAME().kiakai;
+		const kiakai: Kiakai = GAME().kiakai;
 		SetGameState(GameState.Event, Gui);
 
 		const enc: Encounter = this;

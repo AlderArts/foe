@@ -6,6 +6,7 @@ import * as _ from "lodash";
 
 import { EncounterTable } from "../../encountertable";
 import { Event } from "../../event";
+import { Asche } from "../../event/asche";
 import { AscheFlags } from "../../event/asche-flags";
 import { Player } from "../../event/player";
 import { GAME, MoveToLocation, WORLD, WorldTime } from "../../GAME";
@@ -308,7 +309,7 @@ MagicShopLoc.events.push(new Link(
 ));
 
 MagicShopLoc.onEntry = () => {
-	const asche = GAME().asche;
+	const asche: Asche = GAME().asche;
 	if (asche.flags.Met < AscheFlags.Met.Met) {
 		AscheScenes.FirstEntry();
 	} else {

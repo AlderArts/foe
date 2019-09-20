@@ -9,10 +9,13 @@ import { Jobs } from "../../job";
 import { IChoice } from "../../link";
 import { Party } from "../../party";
 import { Text } from "../../text";
+import { Gwendy } from "../farm/gwendy";
 import { GwendyFlags } from "../farm/gwendy-flags";
 import { Player } from "../player";
+import { Cveta } from "./cveta";
 import { CvetaFlags } from "./cveta-flags";
 import { CvetaScenes } from "./cveta-scenes";
+import { Maria } from "./maria";
 import { DeadDropScenes } from "./maria-dd";
 import { MariaFlags } from "./maria-flags";
 import { OutlawsScenes } from "./outlaws";
@@ -24,7 +27,7 @@ export namespace MariaScenes {
     export function CampInteract() {
         const player: Player = GAME().player;
         const outlaws = GAME().outlaws;
-        const maria = GAME().maria;
+        const maria: Maria = GAME().maria;
 
         if (outlaws.MariasBouqetAvailable()) {
             OutlawsScenes.MariasBouquet();
@@ -112,8 +115,8 @@ export namespace MariaScenes {
     }
 
     export function CampPrompt() {
-        const maria = GAME().maria;
-        const cveta = GAME().cveta;
+        const maria: Maria = GAME().maria;
+        const cveta: Cveta = GAME().cveta;
 
         const parse: any = {
 
@@ -185,7 +188,7 @@ export namespace MariaScenes {
 
     export function RangerTraining() {
         const party: Party = GAME().party;
-        const maria = GAME().maria;
+        const maria: Maria = GAME().maria;
 
         let parse: any = {
 
@@ -320,8 +323,8 @@ export namespace MariaScenes {
     export function TalkPrompt() {
         const player: Player = GAME().player;
         const outlaws = GAME().outlaws;
-        const maria = GAME().maria;
-        const gwendy = GAME().gwendy;
+        const maria: Maria = GAME().maria;
+        const gwendy: Gwendy = GAME().gwendy;
 
         const parse: any = {
             playername : player.name,
@@ -616,7 +619,7 @@ export namespace MariaScenes {
     export function ForestMeeting() {
         const player: Player = GAME().player;
         const party: Party = GAME().party;
-        const maria = GAME().maria;
+        const maria: Maria = GAME().maria;
 
         Text.Clear();
 
@@ -684,7 +687,7 @@ export namespace MariaScenes {
     export function ForestConfront() {
         const player: Player = GAME().player;
         const party: Party = GAME().party;
-        const maria = GAME().maria;
+        const maria: Maria = GAME().maria;
 
         let parse: any = {
 
@@ -796,7 +799,7 @@ export namespace MariaScenes {
 
     export function ForestConfrontWin() {
         const player: Player = GAME().player;
-        const maria = GAME().maria;
+        const maria: Maria = GAME().maria;
 
         let parse: any = {
 
@@ -928,7 +931,7 @@ export namespace MariaScenes {
     }
 
     export function ForestFollow() {
-        const maria = GAME().maria;
+        const maria: Maria = GAME().maria;
 
         const parse: any = {};
 
@@ -990,7 +993,7 @@ export namespace MariaScenes {
     export function ForestCamp() {
         const player: Player = GAME().player;
         const party: Party = GAME().party;
-        const maria = GAME().maria;
+        const maria: Maria = GAME().maria;
 
         const parse: any = {
             num        : Text.NumToText(party.Num() + 2),
@@ -1092,7 +1095,7 @@ export namespace MariaScenes {
     export function ForestEnd() {
         const party: Party = GAME().party;
         const outlaws = GAME().outlaws;
-        const maria = GAME().maria;
+        const maria: Maria = GAME().maria;
 
         maria.RestFull();
         party.RestFull();

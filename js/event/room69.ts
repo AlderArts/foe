@@ -15,11 +15,15 @@ import { IChoice } from "../link";
 import { RigardFlags } from "../loc/rigard/rigard-flags";
 import { Party } from "../party";
 import { Text } from "../text";
+import { Roa } from "./brothel/roa";
+import { Gwendy } from "./farm/gwendy";
 import { GlobalScenes } from "./global";
+import { Kiakai } from "./kiakai";
 import { KiakaiFlags } from "./kiakai-flags";
 import { Miranda } from "./miranda";
 import { Player } from "./player";
 import { Room69Flags } from "./room69-flags";
+import { Lei } from "./royals/lei";
 
 export class Room69 extends Entity {
 	constructor(storage?: any) {
@@ -425,11 +429,11 @@ export namespace Room69Scenes {
 		const room69 = GAME().room69;
 		const party: Party = GAME().party;
 		const player: Player = GAME().player;
-		const kiakai = GAME().kiakai;
-		const lei = GAME().lei;
+		const kiakai: Kiakai = GAME().kiakai;
+		const lei: Lei = GAME().lei;
 		const miranda: Miranda = GAME().miranda;
-		const gwendy = GAME().gwendy;
-		const roa = GAME().roa;
+		const gwendy: Gwendy = GAME().gwendy;
+		const roa: Roa = GAME().roa;
 		const world = WORLD();
 
 		const parse: any = {
