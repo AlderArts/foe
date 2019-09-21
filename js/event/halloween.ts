@@ -9,8 +9,8 @@ import { Race } from "../body/race";
 import { Vagina } from "../body/vagina";
 import { EncounterTable } from "../encountertable";
 import { Event } from "../event";
-import { GAME, GameCache, TimeStep, WORLD, WorldTime } from "../GAME";
 import { EntityStorage, MoveToLocation } from "../GAME";
+import { GAME, GameCache, TimeStep, WORLD, WorldTime } from "../GAME";
 import { Gui } from "../gui";
 import { Input } from "../input";
 import { Inventory } from "../inventory";
@@ -20,7 +20,7 @@ import { Burrows } from "../loc/burrows";
 import { Party } from "../party";
 import { Perks } from "../perks";
 import { Status } from "../statuseffect";
-import { Text } from "../text";
+import { IParse, Text } from "../text";
 import { TF } from "../tf";
 import { Roa } from "./brothel/roa";
 import { Gwendy } from "./farm/gwendy";
@@ -68,7 +68,7 @@ export class Halloween {
 		return false;
 	}
 
-	public static CockParser(parse: any) {
+	public static CockParser(parse: IParse) {
 		const player: Player = GAME().player;
 		parse = parse || {};
 		if (!player.FirstCock()) {
@@ -130,7 +130,7 @@ export class Halloween {
 		return this.ronnie !== HalloweenFlags.Ronnie.Removed;
 	}
 
-	public HarthonParser(parse: any) {
+	public HarthonParser(parse: IParse) {
 		const player: Player = GAME().player;
 		parse = parse || {};
 		const fem = this.harthon & HalloweenFlags.Harthon.Feminized;
@@ -172,7 +172,7 @@ export namespace HalloweenScenes {
 
 	// Trigger this on stepping into the Nomads’ for the first time when season is active.
 	export function PieIntro() {
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -218,7 +218,7 @@ export namespace HalloweenScenes {
 		const gwendy: Gwendy = GAME().gwendy;
 		const layla: Layla = GAME().layla;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -424,7 +424,7 @@ export namespace HalloweenScenes {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 
-		const parse: any = {
+		const parse: IParse = {
 			skin : player.SkinDesc(),
 		};
 
@@ -511,7 +511,7 @@ export namespace HalloweenScenes {
 		undefined,
 		() => {
 			const party: Party = GAME().party;
-			const parse: any = {
+			const parse: IParse = {
 
 			};
 
@@ -626,7 +626,7 @@ export namespace HalloweenScenes {
 
 	HWLoc.Path.description = () => {
 		const player: Player = GAME().player;
-		const parse: any = {
+		const parse: IParse = {
 			feet : player.FeetDesc(),
 		};
 
@@ -685,7 +685,7 @@ export namespace HalloweenScenes {
 		() => {
 			const player: Player = GAME().player;
 
-			let parse: any = {
+			let parse: IParse = {
 
 			};
 			parse = player.ParserTags(parse);
@@ -751,7 +751,7 @@ export namespace HalloweenScenes {
 	export function Ronnie() {
 		const player: Player = GAME().player;
 
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 		parse = player.ParserTags(parse);
@@ -848,7 +848,7 @@ export namespace HalloweenScenes {
 		const party: Party = GAME().party;
 		const roa: Roa = GAME().roa;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 		};
 		parse = player.ParserTags(parse);
@@ -1202,7 +1202,7 @@ export namespace HalloweenScenes {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 		parse = player.ParserTags(parse);
@@ -1345,7 +1345,7 @@ export namespace HalloweenScenes {
 	export function RonniePitch() {
 		const player: Player = GAME().player;
 
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 		parse = player.ParserTags(parse);
@@ -1441,7 +1441,7 @@ export namespace HalloweenScenes {
 	export function RonnieCatch() {
 		const player: Player = GAME().player;
 
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 		parse = player.ParserTags(parse);
@@ -1505,7 +1505,7 @@ export namespace HalloweenScenes {
 	}
 
 	export function RonnieReversal() {
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -1535,7 +1535,7 @@ export namespace HalloweenScenes {
 		"Ravens", true, true,
 		undefined,
 		() => {
-			const parse: any = {
+			const parse: IParse = {
 
 			};
 
@@ -1621,7 +1621,7 @@ export namespace HalloweenScenes {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const kiakai: Kiakai = GAME().kiakai;
-		let parse: any = {
+		let parse: IParse = {
 			name : kiakai.name,
 		};
 		const gender = kiakai.flags.InitialGender;
@@ -1800,7 +1800,7 @@ export namespace HalloweenScenes {
 
 	export function KiaiRun() {
 		const party: Party = GAME().party;
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 		const werewolf = HW.Werewolf();
@@ -1837,7 +1837,7 @@ export namespace HalloweenScenes {
 	export function KiaiGangrape() {
 		const player: Player = GAME().player;
 		const kiakai: Kiakai = GAME().kiakai;
-		let parse: any = {
+		let parse: IParse = {
 			name : kiakai.name,
 		};
 		const gender = kiakai.flags.InitialGender;
@@ -2003,7 +2003,7 @@ export namespace HalloweenScenes {
 	));
 
 	export function NadirMaApproach() {
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 		Text.Clear();
@@ -2035,7 +2035,7 @@ export namespace HalloweenScenes {
 
 		const werewolf = HW.Werewolf();
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 		};
 		parse = player.ParserTags(parse);
@@ -2332,7 +2332,7 @@ export namespace HalloweenScenes {
 		Gui.SetButtonsFromList(options, false, undefined);
 	}
 
-	export function NadirMaCont(parse: any) {
+	export function NadirMaCont(parse: IParse) {
 		const player: Player = GAME().player;
 
 		const p1cock = player.BiggestCock();
@@ -2569,7 +2569,7 @@ export namespace HalloweenScenes {
 		Gui.SetButtonsFromList(options, false, undefined);
 	}
 
-	export function NadirMaCont2(parse: any) {
+	export function NadirMaCont2(parse: IParse) {
 		const player: Player = GAME().player;
 
 		const werewolf = HW.Werewolf();
@@ -2966,7 +2966,7 @@ export namespace HalloweenScenes {
 		Gui.SetButtonsFromList(options, false, undefined);
 	}
 
-	export function NadirMaNoEntry(parse: any, func: CallableFunction) {
+	export function NadirMaNoEntry(parse: IParse, func: CallableFunction) {
 		const player: Player = GAME().player;
 
 		Text.Clear();
@@ -3055,7 +3055,7 @@ export namespace HalloweenScenes {
 
 		const werewolf = HW.Werewolf();
 
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 		parse = player.ParserTags(parse);
@@ -3446,7 +3446,7 @@ export namespace HalloweenScenes {
 
 		const werewolf = HW.Werewolf();
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 			skin() { return player.SkinDesc(); },
 			feet() { return player.FeetDesc(); },
@@ -3605,7 +3605,7 @@ export namespace HalloweenScenes {
 		const werewolf = HW.Werewolf();
 		const femHarthon = HW.harthon & HalloweenFlags.Harthon.Feminized;
 
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 
@@ -3783,7 +3783,7 @@ export namespace HalloweenScenes {
 		Gui.SetButtonsFromList(options, false, undefined);
 	}
 
-	export function HarthonPitchAnal(parse: any) {
+	export function HarthonPitchAnal(parse: IParse) {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 
@@ -4011,7 +4011,7 @@ export namespace HalloweenScenes {
 		Gui.NextPrompt();
 	}
 
-	export function HarthonPitchVag(parse: any) {
+	export function HarthonPitchVag(parse: IParse) {
 		const player: Player = GAME().player;
 
 		const p1cock = player.BiggestCock();
@@ -4188,7 +4188,7 @@ export namespace HalloweenScenes {
 		});
 	}
 
-	export function HarthonPitchVagStop(parse: any) {
+	export function HarthonPitchVagStop(parse: IParse) {
 		Text.Clear();
 		Text.Add("Decision made, you sharply pull back from Terry’s thirsty mouth, your spittle-slick [cock] wetly popping free of her pursed lips.", parse);
 		Text.NL();
@@ -4221,7 +4221,7 @@ export namespace HalloweenScenes {
 
 		const werewolf = HW.Werewolf();
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 			boygirl : player.mfFem("boy", "girl"),
 		};
@@ -4415,7 +4415,7 @@ export namespace HalloweenScenes {
 		const werewolf = HW.Werewolf();
 		const femHarthon = HW.harthon & HalloweenFlags.Harthon.Feminized;
 
-		let parse: any = {
+		let parse: IParse = {
 			phisher : player.mfTrue("his", "her"),
 		};
 		parse = HW.HarthonParser(parse);
@@ -4503,7 +4503,7 @@ export namespace HalloweenScenes {
 	}
 
 	// TODO
-	export function HarthonThrallPrompt(parse: any) {
+	export function HarthonThrallPrompt(parse: IParse) {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 
@@ -4981,7 +4981,7 @@ export namespace HalloweenScenes {
 		Gui.SetButtonsFromList(options, false, undefined);
 	}
 
-	export function HarthonBirth(parse: any) {
+	export function HarthonBirth(parse: IParse) {
 		const werewolf = HW.Werewolf();
 
 		Text.Add("What’s wrong?!", parse);
@@ -5084,7 +5084,7 @@ export namespace HalloweenScenes {
 		const player: Player = GAME().player;
 		const burrows: Burrows = GAME().burrows;
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -5253,7 +5253,7 @@ export namespace HalloweenScenes {
 	}
 
 	export function LaggothQnA(opts: any) {
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -5523,7 +5523,7 @@ export namespace HalloweenScenes {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -5703,7 +5703,7 @@ export namespace HalloweenScenes {
 	export function LaggothPit() {
 		const player: Player = GAME().player;
 
-		const parse: any = {
+		const parse: IParse = {
 			skin : player.SkinDesc(),
 		};
 
@@ -5770,7 +5770,7 @@ export namespace HalloweenScenes {
 	));
 
 	export function Sacristy() {
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -5809,7 +5809,7 @@ export namespace HalloweenScenes {
 		const player: Player = GAME().player;
 		const cveta: Cveta = GAME().cveta;
 
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 		parse = player.ParserTags(parse);
@@ -6245,7 +6245,7 @@ export namespace HalloweenScenes {
 
 	export function Jenna() {
 		const player: Player = GAME().player;
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 			heshe : player.mfTrue("he", "she"),
 		};
@@ -6328,7 +6328,7 @@ export namespace HalloweenScenes {
 
 	export function JennaSwitchPrompt(opts: any) {
 		const player: Player = GAME().player;
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 		parse = player.ParserTags(parse);
@@ -6467,7 +6467,7 @@ export namespace HalloweenScenes {
 
 	export function JennaAgreePrompt(opts: any) {
 		const player: Player = GAME().player;
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 		parse = player.ParserTags(parse);
@@ -6538,7 +6538,7 @@ export namespace HalloweenScenes {
 
 	export function JennaBroomfuck() {
 		const player: Player = GAME().player;
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 		parse = player.ParserTags(parse);
@@ -6686,7 +6686,7 @@ export namespace HalloweenScenes {
 		const gotCarepack = HW.flags & HalloweenFlags.Flags.Carepack;
 		const hasPassword = HW.flags & HalloweenFlags.Flags.PatchesPW;
 
-		let parse: any = {
+		let parse: IParse = {
 			Patches : knowsPatches ? "Patches" : "the trader",
 			harpymerchant : patchesGender ? "harpy" : "merchant",
 			playername : player.name,
@@ -6889,7 +6889,7 @@ export namespace HalloweenScenes {
 	}
 
 	export function WakingUp(badend: boolean) {
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 

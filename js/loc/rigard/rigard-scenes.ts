@@ -13,7 +13,7 @@ import { Gui } from "../../gui";
 import { IChoice } from "../../link";
 import { ILocRigard } from "../../location";
 import { Party } from "../../party";
-import { Text } from "../../text";
+import { IParse, Text } from "../../text";
 import { Rand } from "../../utility";
 import { BrothelLoc } from "./brothel";
 import { CastleLoc } from "./castle";
@@ -57,7 +57,7 @@ export namespace RigardScenes {
 		const party: Party = GAME().party;
 
 		Text.Clear();
-		const parse: any = {};
+		const parse: IParse = {};
 
 		if (party.location === RigardLoc.Plaza) {
 			parse.person = "a well-dressed youngster";
@@ -107,7 +107,7 @@ export namespace RigardScenes {
 		Gui.NextPrompt();
 	}
 
-	export function ChatterIntro(parse: any, enteringArea: boolean) {
+	export function ChatterIntro(parse: IParse, enteringArea: boolean) {
 		const introText = new EncounterTable();
 		introText.AddEnc(() => {
 			Text.Add("As you are entering the area, you overhear [aAn1] [NPC1] and [aAn2] [NPC2] talking.", parse);
@@ -124,7 +124,7 @@ export namespace RigardScenes {
 		introText.Get();
 	}
 
-	export function ChatterOutro(parse: any) {
+	export function ChatterOutro(parse: IParse) {
 		const outroText = new EncounterTable();
 		outroText.AddEnc(() => {
 			Text.Add("Their conversation fades behind you as you walk on.", parse);
@@ -153,7 +153,7 @@ export namespace RigardScenes {
 		const party: Party = GAME().party;
 
 		Text.Clear();
-		const parse: any = {};
+		const parse: IParse = {};
 
 		let posh = false;
 
@@ -469,7 +469,7 @@ export namespace RigardScenes {
 		const terry: Terry = GAME().terry;
 
 		Text.Clear();
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -1272,7 +1272,7 @@ export namespace RigardScenes {
 		const player: Player = GAME().player;
 		const miranda: Miranda = GAME().miranda;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 			merchantsCitizens : (party.location === RigardLoc.Gate) ? "merchants" : "citizens",
 			assCunt : player.FirstVag() ? "cunt" : "ass",

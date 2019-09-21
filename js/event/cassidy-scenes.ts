@@ -10,7 +10,7 @@ import { IChoice } from "../link";
 import { Rigard } from "../loc/rigard/rigard";
 import { Party } from "../party";
 import { Status } from "../statuseffect";
-import { Text } from "../text";
+import { IParse, Text } from "../text";
 import { Time } from "../time";
 import { Cassidy, CassidySpar } from "./cassidy";
 import { CassidyFlags } from "./cassidy-flags";
@@ -29,7 +29,7 @@ export namespace CassidyScenes {
 	export function First() {
 		const player: Player = GAME().player;
 		const cassidy: Cassidy = GAME().cassidy;
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -83,7 +83,7 @@ export namespace CassidyScenes {
 		const player: Player = GAME().player;
 		const cassidy: Cassidy = GAME().cassidy;
 		const miranda: Miranda = GAME().miranda;
-		let parse: any = {};
+		let parse: IParse = {};
 
 		Text.Add("You’re standing on the shop floor of The Pale Flame. Racks upon racks of implements of assorted death stand in lines and hang on the walls, each and every one of them dust-free and labeled with their name and make. Stabbing, impaling, bludgeoning, crushing, bleeding out, slashing - you name it, and it’s likely Cassidy that has it on display on the floor.", parse);
 		Text.NL();
@@ -202,7 +202,7 @@ export namespace CassidyScenes {
 	export function Approach() {
 		const cassidy: Cassidy = GAME().cassidy;
 
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 		parse = cassidy.ParserPronouns(parse);
@@ -248,7 +248,7 @@ export namespace CassidyScenes {
 		const player: Player = GAME().player;
 		const cassidy: Cassidy = GAME().cassidy;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 		};
 		parse = cassidy.ParserPronouns(parse);
@@ -387,7 +387,7 @@ export namespace CassidyScenes {
 	export function Appearance() {
 		const cassidy: Cassidy = GAME().cassidy;
 
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 		parse = cassidy.ParserPronouns(parse);
@@ -445,7 +445,7 @@ export namespace CassidyScenes {
 		const player: Player = GAME().player;
 		const cassidy: Cassidy = GAME().cassidy;
 
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 		parse = cassidy.ParserPronouns(parse);
@@ -570,7 +570,7 @@ export namespace CassidyScenes {
 	export function ForgeFirst() {
 		const cassidy: Cassidy = GAME().cassidy;
 
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 		parse = cassidy.ParserPronouns(parse);
@@ -615,7 +615,7 @@ export namespace CassidyScenes {
 	export function ShopBuy() {
 		const cassidy: Cassidy = GAME().cassidy;
 
-		const parse: any = {};
+		const parse: IParse = {};
 
 		shopBought = false;
 
@@ -661,7 +661,7 @@ export namespace CassidyScenes {
 	export function ShopSell() {
 		const cassidy: Cassidy = GAME().cassidy;
 
-		let parse: any = {};
+		let parse: IParse = {};
 		parse = cassidy.ParserPronouns(parse);
 
 		shopSold = false;
@@ -692,7 +692,7 @@ export namespace CassidyScenes {
 		const player: Player = GAME().player;
 		const cassidy: Cassidy = GAME().cassidy;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 		};
 		parse = cassidy.ParserPronouns(parse);
@@ -839,7 +839,7 @@ export namespace CassidyScenes {
 		const player: Player = GAME().player;
 		const cassidy: Cassidy = GAME().cassidy;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 		};
 		parse = cassidy.ParserPronouns(parse);
@@ -924,7 +924,7 @@ export namespace CassidyScenes {
 	export function InsideMeal() {
 		const player: Player = GAME().player;
 		const cassidy: Cassidy = GAME().cassidy;
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 		};
 		parse = cassidy.ParserPronouns(parse);
@@ -1141,7 +1141,7 @@ export namespace CassidyScenes {
 		const player: Player = GAME().player;
 		const cassidy: Cassidy = GAME().cassidy;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 		};
 		parse = cassidy.ParserPronouns(parse);
@@ -1539,7 +1539,7 @@ export namespace CassidyScenes {
 	export function ManagingShop() {
 		const player: Player = GAME().player;
 		const cassidy: Cassidy = GAME().cassidy;
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 		};
 		parse = cassidy.ParserPronouns(parse);
@@ -1641,7 +1641,7 @@ export namespace CassidyScenes {
 	export function ManagingShopAccept() {
 		const player: Player = GAME().player;
 		const cassidy: Cassidy = GAME().cassidy;
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 		};
 		parse = cassidy.ParserPronouns(parse);
@@ -1684,7 +1684,7 @@ export namespace CassidyScenes {
 
 	export function ManagingShop1(score: number) {
 		const player: Player = GAME().player;
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -1746,7 +1746,7 @@ export namespace CassidyScenes {
 	}
 
 	export function ManagingShop2(score: number) {
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -1811,7 +1811,7 @@ export namespace CassidyScenes {
 
 	export function ManagingShop3(score: number) {
 		const cassidy: Cassidy = GAME().cassidy;
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 		parse = cassidy.ParserPronouns(parse);
@@ -1874,7 +1874,7 @@ export namespace CassidyScenes {
 		const rigard: Rigard = GAME().rigard;
 		const lei: Lei = GAME().lei;
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -1912,7 +1912,7 @@ export namespace CassidyScenes {
 	}
 
 	export function ManagingShop5(score: number) {
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -1992,7 +1992,7 @@ export namespace CassidyScenes {
 	export function ManagingShop6(score: number) {
 		const cassidy: Cassidy = GAME().cassidy;
 
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 		parse = cassidy.ParserPronouns(parse);
@@ -2149,7 +2149,7 @@ export namespace CassidyScenes {
 	export function ManagingShopCookies() {
 		const cassidy: Cassidy = GAME().cassidy;
 
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 		parse = cassidy.ParserPronouns(parse);
@@ -2226,7 +2226,7 @@ export namespace CassidyScenes {
 		const player: Player = GAME().player;
 		const cassidy: Cassidy = GAME().cassidy;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -2435,7 +2435,7 @@ export namespace CassidyScenes {
 		const player: Player = GAME().player;
 		const cassidy: Cassidy = GAME().cassidy;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 		};
 		parse = player.ParserTags(parse);
@@ -2764,7 +2764,7 @@ export namespace CassidyScenes {
 		const player: Player = GAME().player;
 		const cassidy: Cassidy = GAME().cassidy;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -2825,7 +2825,7 @@ export namespace CassidyScenes {
 	export function FemFinal() {
 		const cassidy: Cassidy = GAME().cassidy;
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -2896,7 +2896,7 @@ export namespace CassidyScenes {
 	export function SparFirst() {
 		const cassidy: Cassidy = GAME().cassidy;
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 

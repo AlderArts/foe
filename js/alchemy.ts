@@ -7,7 +7,7 @@ import { Gui } from "./gui";
 import { Inventory } from "./inventory";
 import { Item, ItemIds } from "./item";
 import { IChoice } from "./link";
-import { Text } from "./text";
+import { IParse, Text } from "./text";
 
 interface IAlchemyChoice extends IChoice {
 	_recipeStr: string;
@@ -90,7 +90,7 @@ export namespace Alchemy {
 
 function MakeItem(it: Item, qty: number, alchemist: Entity, inventory: Inventory, backPrompt: CallableFunction, callback: CallableFunction) {
 	Text.Clear();
-	Text.Add("[name] mix[es] the ingredients, preparing [qty]x [item].", {name: alchemist.NameDesc(), es: alchemist.plural() ? "" : "es", item: it.name, qty});
+	Text.Add("[name] mix[es] the ingredients, preparing [qty]x [item].", {name: alchemist.NameDesc(), es: alchemist.plural() ? "" : "es", item: it.name, qty: qty.toString()});
 	Text.Flush();
 
 	if (callback) {
@@ -114,11 +114,11 @@ function ItemDetails(brewable: IBrewable, inventory: Inventory) {
 	const BrewBatch = brewable.brewFn;
 	const inInventory = inventory.QueryNum(brewable.it);
 
-	const parser = {
+	const parser: IParse = {
 		item: brewable.it.name,
-		maxQty: brewable.qty,
+		maxQty: brewable.qty.toString(),
 		upTo: (brewable.qty > 1) ? "up to" : "",
-		inInv: inInventory,
+		inInv: inInventory.toString(),
 	};
 
 	Text.Clear();

@@ -10,7 +10,7 @@ import { Gui } from "../../gui";
 import { IChoice } from "../../link";
 import { RigardFlags } from "../../loc/rigard/rigard-flags";
 import { Party } from "../../party";
-import { Text } from "../../text";
+import { IParse, Text } from "../../text";
 import { Season, Time } from "../../time";
 import { Estevan } from "../nomads/estevan";
 import { EstevanFlags } from "../nomads/estevan-flags";
@@ -29,7 +29,7 @@ export namespace DeadDropScenes {
 		const player: Player = GAME().player;
 		const maria: Maria = GAME().maria;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -55,7 +55,7 @@ export namespace DeadDropScenes {
 		const player: Player = GAME().player;
 		const maria: Maria = GAME().maria;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -119,7 +119,7 @@ export namespace DeadDropScenes {
 		const party: Party = GAME().party;
 		const maria: Maria = GAME().maria;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 		};
 
@@ -198,7 +198,7 @@ export namespace DeadDropScenes {
 
 	export namespace First {
 		export function Chat(CampPrompt: any) {
-			const parse: any = {};
+			const parse: IParse = {};
 
 			Text.Clear();
 			Text.Add("All right, you’re ready. You tell Maria as much, and the ebony beauty looks you up and down.", parse);
@@ -235,7 +235,7 @@ export namespace DeadDropScenes {
 			const outlaws: Outlaws = GAME().outlaws;
 			const maria: Maria = GAME().maria;
 
-			let parse: any = {};
+			let parse: IParse = {};
 
 			// PARTY STUFF
 			maria.DDtimer = new Time(0, 0, 2, 0, 0);
@@ -449,7 +449,7 @@ export namespace DeadDropScenes {
 		export function Entry() {
 			const player: Player = GAME().player;
 
-			const parse: any = {
+			const parse: IParse = {
 				playername : player.name,
 			};
 
@@ -506,7 +506,7 @@ export namespace DeadDropScenes {
 			const player: Player = GAME().player;
 			const party: Party = GAME().party;
 
-			const parse: any = {
+			const parse: IParse = {
 				playername : player.name,
 			};
 
@@ -549,7 +549,7 @@ export namespace DeadDropScenes {
 			const party: Party = GAME().party;
 			const estevan: Estevan = GAME().estevan;
 
-			const parse: any = {
+			const parse: IParse = {
 
 			};
 
@@ -639,7 +639,7 @@ export namespace DeadDropScenes {
 			const onEnd = function() {
 				const that = this;
 
-				const parse: any = {
+				const parse: IParse = {
 					playername : player.name,
 				};
 
@@ -687,7 +687,7 @@ export namespace DeadDropScenes {
 			const outlaws: Outlaws = GAME().outlaws;
 			const maria: Maria = GAME().maria;
 
-			const parse: any = {
+			const parse: IParse = {
 
 			};
 
@@ -717,7 +717,7 @@ export namespace DeadDropScenes {
 		}
 
 		export function CavalcadeLoss() {
-			const parse: any = {
+			const parse: IParse = {
 
 			};
 
@@ -751,7 +751,7 @@ export namespace DeadDropScenes {
 			const outlaws: Outlaws = GAME().outlaws;
 			const maria: Maria = GAME().maria;
 
-			const parse: any = {
+			const parse: IParse = {
 				playername : player.name,
 			};
 
@@ -941,7 +941,7 @@ export namespace DeadDropScenes {
 					const dex = (player.Dex() + player.Int()) / 2 + Math.random() * 20;
 
 					if (GetDEBUG()) {
-						Text.Add("DEBUG: (dex+int)/2 check [dex] (vs [goal])", {dex, goal}, "bold");
+						Text.Add(`DEBUG: (dex+int)/2 check ${dex} (vs ${goal})`, undefined, "bold");
 						Text.NL();
 					}
 
@@ -995,7 +995,7 @@ export namespace DeadDropScenes {
 			const outlaws: Outlaws = GAME().outlaws;
 			const maria: Maria = GAME().maria;
 
-			const parse: any = {
+			const parse: IParse = {
 
 			};
 

@@ -19,7 +19,7 @@ import { Gui } from "../../gui";
 import { IChoice, Link } from "../../link";
 import { ILocRigardCastle } from "../../location";
 import { Party } from "../../party";
-import { Text } from "../../text";
+import { IParse, Text } from "../../text";
 import { Season, Time } from "../../time";
 import { MageTowerLoc } from "./magetower";
 import { RigardFlags } from "./rigard-flags";
@@ -153,7 +153,7 @@ export namespace NobleScenes {
 	export function Parkland() {
 		const player: Player = GAME().player;
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -187,7 +187,7 @@ export namespace NobleScenes {
 	}
 
 	export function JeannesTower() {
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -224,7 +224,7 @@ export namespace NobleScenes {
 		const cveta: Cveta = GAME().cveta;
 		const party: Party = GAME().party;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 		};
 
@@ -281,7 +281,7 @@ export namespace NobleScenes {
 	export function MeetingMajid() {
 		const rigard = GAME().rigard;
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -313,7 +313,7 @@ export namespace NobleScenes {
 	export function GuardPatrol() {
 		const player: Player = GAME().player;
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -344,7 +344,7 @@ export namespace NobleScenes {
 		const party: Party = GAME().party;
 		const rigard = GAME().rigard;
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -450,7 +450,7 @@ export namespace NobleScenes {
 		const player: Player = GAME().player;
 		const rigard = GAME().rigard;
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -510,7 +510,7 @@ export namespace NobleScenes {
 	}
 
 	export function RoyalGetaway() {
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -528,7 +528,7 @@ export namespace NobleScenes {
 	export function MagicalJackal() {
 		const player: Player = GAME().player;
 
-		const parse: any = {
+		const parse: IParse = {
 			heshe : player.mfFem("he", "she"),
 		};
 
@@ -562,7 +562,7 @@ export namespace NobleScenes {
 		const miranda: Miranda = GAME().miranda;
 		const rigard = GAME().rigard;
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -607,7 +607,7 @@ export namespace NobleScenes {
 	export function Buns() {
 		const rigard = GAME().rigard;
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -655,7 +655,7 @@ export namespace NobleScenes {
 		const party: Party = GAME().party;
 		const rigard = GAME().rigard;
 
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 		parse = Text.ParserPlural(parse, party.Num() > 1);

@@ -10,7 +10,7 @@ import { Encounter } from "../combat";
 import { Entity } from "../entity";
 import { Party } from "../party";
 import { Status, StatusEffect } from "../statuseffect";
-import { Text } from "../text";
+import { IParse, Text } from "../text";
 import { Defaults, GetAggroEntry } from "./default";
 import { AbilityNode } from "./node";
 
@@ -47,7 +47,7 @@ tIllusion.castTree.push((ability: Ability, encounter: Encounter, caster: Entity)
 		if (decoy.copies <= 0) {
 			caster.combatStatus.stats[StatusEffect.Decoy] = undefined;
 		}
-		const parse: any = {
+		const parse: IParse = {
 			p : num > 1 ? "One of " + caster.possessive() : caster.Possessive(),
 			s : num > 1 ? "s" : "",
 			aposs   : attacker.possessive(),
@@ -86,7 +86,7 @@ sIllusion.castTree.push((ability: Ability, encounter: Encounter, caster: Entity)
 		if (decoy.copies <= 0) {
 			caster.combatStatus.stats[StatusEffect.Decoy] = undefined;
 		}
-		const parse: any = {
+		const parse: IParse = {
 			p : num > 1 ? "One of " + caster.possessive() : caster.Possessive(),
 			s : num > 1 ? "s" : "",
 			aposs   : attacker.possessive(),
@@ -150,7 +150,7 @@ fantasize.castTree.push((ability: Ability, encounter: Encounter, caster: Entity)
 
 	caster.AddLustAbs(dmg);
 
-	const parse: any = {
+	const parse: IParse = {
 		name : caster.NameDesc(),
 	};
 
@@ -167,7 +167,7 @@ soothe.castTree.push((ability: Ability, encounter: Encounter, caster: Entity, ta
 	const targets = target.members;
 
 	const group = targets.length > 1;
-	const parse: any = {
+	const parse: IParse = {
 		Poss: caster.Possessive(),
 		their: group ? "their" : caster.hisher(),
 		himher: group ? caster.hisher() + " party" : caster.himher(),

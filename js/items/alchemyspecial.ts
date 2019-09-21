@@ -9,7 +9,7 @@ import { Vagina } from "../body/vagina";
 import { EncounterTable } from "../encountertable";
 import { Entity } from "../entity";
 import { GAME } from "../GAME";
-import { Text } from "../text";
+import { IParse, Text } from "../text";
 import { TF, TFItem } from "../tf";
 import { AlchemyItems } from "./alchemy";
 import { IngredientItems } from "./ingredients";
@@ -25,7 +25,7 @@ equiniumPlus.recipe = [{it: AlchemyItems.Equinium, num: 3}, {it: IngredientItems
 equiniumPlus.PushEffect(TF.ItemEffects.SetEars, {odds: 0.8, race: Race.Horse, str: "equine ears"});
 equiniumPlus.PushEffect(TF.ItemEffects.SetTail, {odds: 0.8, race: Race.Horse, color: Color.brown, str: "a brown, bushy horse tail"});
 equiniumPlus.PushEffect((target: Entity) => {
-	const parse: any = {
+	const parse: IParse = {
 		name: target.NameDesc(),
 		s: target === GAME().player ? "" : "s",
 		possessive: target.possessive(),
@@ -132,7 +132,7 @@ infernumPlus.Long = () => "A bottle of extra potent Infernum, with the picture o
 infernumPlus.recipe = [{it: AlchemyItems.Infernum}, {it: IngredientItems.BlackGem}, {it: IngredientItems.DemonSeed, num: 3}];
 // Effects
 infernumPlus.PushEffect((target: Entity) => {
-	const parse: any = {
+	const parse: IParse = {
 		name: target.NameDesc(),
 		s: target === GAME().player ? "" : "s",
 		possessive: target.possessive(),
@@ -200,7 +200,7 @@ nagazm.Long  = () => "A bottle with a pink, bubbly liquid, labeled Nagasm. It ha
 nagazm.recipe = [{it: IngredientItems.SnakeOil}, {it: IngredientItems.SnakeFang}, {it: IngredientItems.SnakeSkin}];
 // Effects
 nagazm.PushEffect((target: Entity) => {
-	const parse: any = {
+	const parse: IParse = {
 		Poss : target.Possessive(),
 		legsDesc() { return target.LegsDesc(); },
 		s : target.body.legs.count > 1 ? "" : "s",
@@ -221,7 +221,7 @@ nagazm.PushEffect((target: Entity) => {
 });
 nagazm.PushEffect(TF.ItemEffects.RemBalls, {odds: 0.5, ideal: 0, count: 2});
 nagazm.PushEffect((target: Entity) => {
-	const parse: any = { Name: target.NameDesc(), s: target.plural() ? "" : "s" };
+	const parse: IParse = { Name: target.NameDesc(), s: target.plural() ? "" : "s" };
 
 	if (Math.random() < 0.5) {
 		const vags  = target.AllVags();
@@ -245,7 +245,7 @@ nagazm.PushEffect((target: Entity) => {
 	// TODO: Other prerequisites? No testicles? Hermaphroditism?
 	const cocks = target.AllCocks();
 	if (cocks.length === 1 && Math.random() < 0.1) {
-		const parse: any = { Poss: target.Possessive(), cockDesc: cocks[0].Short()};
+		const parse: IParse = { Poss: target.Possessive(), cockDesc: cocks[0].Short()};
 		cocks.push(cocks[0].Clone());
 		Text.Add("[Poss] [cockDesc] splits in two identical dicks!", parse);
 		Text.NL();
@@ -277,7 +277,7 @@ taurico.Long  = () => "A bottle filled with a strange, jelly-like substance. It 
 taurico.recipe = [{it: IngredientItems.HorseShoe}, {it: IngredientItems.CanisRoot}, {it: IngredientItems.Ramshorn}];
 // Effects
 taurico.PushEffect((target: Entity) => {
-	const parse: any = {
+	const parse: IParse = {
 		Poss : target.Possessive(),
 		legsDesc() { return target.LegsDesc(); },
 		race() { return target.body.legs.race.qShort(); },
@@ -329,7 +329,7 @@ anusol.Long  = () => "A bottle labeled Anusol, filled with an oily-looking dark 
 anusol.recipe = [{it: IngredientItems.SnakeOil}, {it: IngredientItems.SpringWater}, {it: IngredientItems.FruitSeed}];
 // Effects
 anusol.PushEffect((target: Entity) => {
-	let parse: any = {
+	let parse: IParse = {
 		botArmor : target.LowerArmorDesc(),
 		Poss : target.Possessive(),
 	};
@@ -403,7 +403,7 @@ anusolPlus.Long  = () => "A bottle labled Anusol+, filled with a thick and slimy
 anusolPlus.recipe = [{it: IngredientItems.SnakeOil}, {it: IngredientItems.SpringWater}, {it: AlchemyItems.Gestarium}];
 // Effects
 anusolPlus.PushEffect((target: Entity) => {
-	let parse: any = {
+	let parse: IParse = {
 		botArmor : target.LowerArmorDesc(),
 		Poss : target.Possessive(),
 	};

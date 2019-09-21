@@ -2,7 +2,7 @@ import { EncounterTable } from "../../encountertable";
 import { GAME, StepToHour, TimeStep, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
 import { IChoice } from "../../link";
-import { Text } from "../../text";
+import { IParse, Text } from "../../text";
 import { Season } from "../../time";
 import { Player } from "../player";
 import { Vaughn } from "./vaughn";
@@ -15,7 +15,7 @@ export namespace VaughnScenes {
 		const player: Player = GAME().player;
 		const vaughn: Vaughn = GAME().vaughn;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -49,7 +49,7 @@ export namespace VaughnScenes {
 	}
 
 	export function CampDesc() {
-		const parse: any = {};
+		const parse: IParse = {};
 
 		Text.Add("Vaughn should be on watch around this time, if you wish to seek out the fox.", parse);
 		Text.NL();
@@ -59,7 +59,7 @@ export namespace VaughnScenes {
 		const player: Player = GAME().player;
 		const vaughn: Vaughn = GAME().vaughn;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -134,7 +134,7 @@ export namespace VaughnScenes {
 	export function Prompt() {
 		const player: Player = GAME().player;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -198,7 +198,7 @@ export namespace VaughnScenes {
 		const player: Player = GAME().player;
 		const vaughn: Vaughn = GAME().vaughn;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -273,7 +273,7 @@ export namespace VaughnScenes {
 		const player: Player = GAME().player;
 		const vaughn: Vaughn = GAME().vaughn;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -463,7 +463,7 @@ export namespace VaughnScenes {
 		const player: Player = GAME().player;
 		const vaughn: Vaughn = GAME().vaughn;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -681,7 +681,7 @@ export namespace VaughnScenes {
 		const player: Player = GAME().player;
 		const vaughn: Vaughn = GAME().vaughn;
 
-		const parse: any = {
+		const parse: IParse = {
 			breasts() { return player.FirstBreastRow().Short(); },
 		};
 
@@ -766,7 +766,7 @@ export namespace VaughnScenes {
 	export function SexTitfuck() {
 		const player: Player = GAME().player;
 
-		const parse: any = {
+		const parse: IParse = {
 		};
 
 		Text.Clear();
@@ -801,7 +801,7 @@ export namespace VaughnScenes {
 		const player: Player = GAME().player;
 		const vaughn: Vaughn = GAME().vaughn;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 			boygirl : player.mfFem("boy", "girl"),
 			upperarmordesc() { return player.ArmorDesc(); },
@@ -901,7 +901,7 @@ export namespace VaughnScenes {
 		scenes.Get();
 	}
 
-	export function SexTitfuckBigCont(parse: any) {
+	export function SexTitfuckBigCont(parse: IParse) {
 		const player: Player = GAME().player;
 		const vaughn: Vaughn = GAME().vaughn;
 
@@ -964,7 +964,7 @@ export namespace VaughnScenes {
 		const player: Player = GAME().player;
 		const vaughn: Vaughn = GAME().vaughn;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 			boygirl : player.mfFem("boy", "girl"),
 			upperarmordesc() { return player.ArmorDesc(); },
@@ -1102,7 +1102,7 @@ export namespace VaughnScenes {
 		const player: Player = GAME().player;
 		const vaughn: Vaughn = GAME().vaughn;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 		};
 		parse = player.ParserTags(parse);
@@ -1150,7 +1150,7 @@ export namespace VaughnScenes {
 	export function ConfrontFollowup() {
 		const vaughn: Vaughn = GAME().vaughn;
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 

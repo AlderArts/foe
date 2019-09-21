@@ -19,7 +19,7 @@ import { Gui } from "../gui";
 import { IChoice, Link } from "../link";
 import { ILocBurrows } from "../location";
 import { Party } from "../party";
-import { Text } from "../text";
+import { IParse, Text } from "../text";
 import { Season } from "../time";
 import { Burrows } from "./burrows";
 import { BurrowsFlags } from "./burrows-flags";
@@ -49,7 +49,7 @@ export namespace BurrowsScenes {
 
     export function FirstApproach() {
         const party: Party = GAME().party;
-        const parse: any = {};
+        const parse: IParse = {};
 
         if (party.Two()) {
             parse.comp = " and " + party.Get(1).name;
@@ -129,7 +129,7 @@ export namespace BurrowsScenes {
         const player: Player = GAME().player;
         const party: Party = GAME().party;
         const burrows: Burrows = GAME().burrows;
-        const parse: any = {
+        const parse: IParse = {
             skinDesc() { return player.SkinDesc(); },
             p1name() { return party.Get(1).name; },
             m1HeShe() { return alpha.HeShe(); },
@@ -204,7 +204,7 @@ export namespace BurrowsScenes {
 
     export function ArrivalOphelia() {
         const player: Player = GAME().player;
-        const parse: any = {
+        const parse: IParse = {
             playername : player.name,
         };
 
@@ -233,7 +233,7 @@ export namespace BurrowsScenes {
         const party: Party = GAME().party;
         const rosalin: Rosalin = GAME().rosalin;
 
-        const parse: any = {
+        const parse: IParse = {
             playername : player.name,
         };
         if (party.Two()) {
@@ -398,7 +398,7 @@ export namespace BurrowsScenes {
 
     export function ArrivalLagon() {
         const player: Player = GAME().player;
-        const parse: any = {
+        const parse: IParse = {
             playername : player.name,
             heshe      : player.mfFem("he", "she"),
         };
@@ -443,7 +443,7 @@ export namespace BurrowsScenes {
     export function ArrivalLagonTalk() {
         const party: Party = GAME().party;
         const lagon: Lagon = GAME().lagon;
-        const parse: any = {
+        const parse: IParse = {
 
         };
         if (party.Two()) {
@@ -526,7 +526,7 @@ export namespace BurrowsScenes {
 //
 BurrowsLoc.Entrance.description = () => {
 	const burrows: Burrows = GAME().burrows;
-	const parse: any = {
+	const parse: IParse = {
 		TreeFar : GlobalScenes.TreeFarDesc(),
 		l : burrows.LagonDefeated() ? "the lagomorph" : "Lagon’s",
 	};
@@ -642,7 +642,7 @@ BurrowsLoc.Tunnels.enc = new EncounterTable();
 //
 BurrowsLoc.Throne.description = () => {
 	const burrows: Burrows = GAME().burrows;
-	const parse: any = {
+	const parse: IParse = {
 		Lagon : burrows.VenaRestored() ? "Vena" : "Lagon",
 	};
 
@@ -709,7 +709,7 @@ BurrowsLoc.Throne.events.push(new Link(
 BurrowsLoc.Pit.description = () => {
 	const player: Player = GAME().player;
 	const burrows: Burrows = GAME().burrows;
-	const parse: any = {
+	const parse: IParse = {
 		Lagon : burrows.VenaRestored() ? "Vena" : "Lagon",
 	};
 

@@ -25,12 +25,11 @@ import { Gui } from "../gui";
 import { IChoice, Link } from "../link";
 import { ILocPlains } from "../location";
 import { Party } from "../party";
-import { Text } from "../text";
+import { IParse, Text } from "../text";
 import { Season } from "../time";
 import { BurrowsFlags } from "./burrows-flags";
 import { BurrowsLoc } from "./burrows-scenes";
 import { FarmScenesIntro } from "./farm-scenes";
-import { DryadGladeFlags } from "./glade-flags";
 import { NomadsLoc } from "./nomads";
 
 // Create namespace
@@ -47,7 +46,7 @@ const PlainsLoc: ILocPlains = {
 // Crossroads
 //
 PlainsLoc.Crossroads.description = () => {
-	const parse: any = {
+	const parse: IParse = {
 		TreeFar : GlobalScenes.TreeFarDesc(),
 		Rigard : GlobalScenes.VisitedRigardGates() ? "Rigard" : "a big city in the distance",
 	};
@@ -145,7 +144,7 @@ PlainsLoc.Crossroads.enc.AddEnc(() => {
 		const party: Party = GAME().party;
 		const kiakai: Kiakai = GAME().kiakai;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 			name : kiakai.name,
 		};
@@ -221,7 +220,7 @@ PlainsLoc.Crossroads.links.push(new Link(
 
 		if (miranda.flags.Met !== 0 && Math.random() < 0.1) {
 			Text.Clear();
-			const parse: any = {};
+			const parse: IParse = {};
 			Text.Add("As you make your way, a farmers’ wagon catches up to you from behind. ", parse);
 			const scenes = new EncounterTable();
 			scenes.AddEnc(() => {
@@ -301,7 +300,7 @@ PlainsLoc.Crossroads.links.push(new Link(
 //
 
 PlainsLoc.Portals.description = () => {
-	const parse: any = {};
+	const parse: IParse = {};
 
 	Text.Add("Located near the crossroads at the center of the great plains lies a lone hill, visible for miles around. ", parse);
 	if (GlobalScenes.PortalsOpen()) {

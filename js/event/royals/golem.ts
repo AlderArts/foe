@@ -6,8 +6,8 @@
 
 import { Abilities } from "../../abilities";
 import { Images } from "../../assets";
-import { LowerBodyType } from "../../body/body";
 import { Body } from "../../body/body";
+import { LowerBodyType } from "../../body/body";
 import { BodyPartType } from "../../body/bodypart";
 import { Color } from "../../body/color";
 import { Orifice } from "../../body/orifice";
@@ -25,7 +25,7 @@ import { ArmorItems } from "../../items/armor";
 import { WeaponsItems } from "../../items/weapons";
 import { IChoice } from "../../link";
 import { Party } from "../../party";
-import { Text } from "../../text";
+import { IParse, Text } from "../../text";
 import { Kiakai } from "../kiakai";
 import { Player } from "../player";
 import { GolemFlags } from "./golem-flags";
@@ -133,7 +133,7 @@ export namespace GolemScenes {
 	export function FirstApproach() {
 		const party: Party = GAME().party;
 		const golem: GolemBoss = GAME().golem;
-		const parse: any = {
+		const parse: IParse = {
 			s : party.Num() > 1 ? "s" : "",
 		};
 
@@ -164,7 +164,7 @@ export namespace GolemScenes {
 		const golem: GolemBoss = GAME().golem;
 		const world = WORLD();
 
-		const parse: any = {};
+		const parse: IParse = {};
 		// [Fight!][Leave]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Fight!",
@@ -211,7 +211,7 @@ export namespace GolemScenes {
 		const party: Party = GAME().party;
 		const golem: GolemBoss = GAME().golem;
 		const kiakai: Kiakai = GAME().kiakai;
-		const parse: any = {
+		const parse: IParse = {
 			name() { return kiakai.name; },
 			hisher() { return kiakai.hisher(); },
 			playername : player.name,
@@ -271,7 +271,7 @@ export namespace GolemScenes {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const golem: GolemBoss = GAME().golem;
-		let parse: any = {
+		let parse: IParse = {
 			name() { return party.Get(1).name; },
 		};
 

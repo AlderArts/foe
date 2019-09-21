@@ -16,7 +16,7 @@ import { Gui } from "../../gui";
 import { IngredientItems } from "../../items/ingredients";
 import { IChoice, Link } from "../../link";
 import { Party } from "../../party";
-import { Text } from "../../text";
+import { IParse, Text } from "../../text";
 import { Rand } from "../../utility";
 import { KrawitzScenes } from "./krawitz";
 import { RigardFlags } from "./rigard-flags";
@@ -132,7 +132,7 @@ PlazaLoc.links.push(new Link(
 		const rosalin: Rosalin = GAME().rosalin;
 		const world = WORLD();
 
-		const parse: any = {
+		const parse: IParse = {
 			stride : player.LowerBodyType() === LowerBodyType.Single ? "slither" : "stride",
 		};
 		if (rigard.flags.RoyalAccess === 0) {
@@ -328,7 +328,7 @@ export namespace PlazaScenes {
 		const party: Party = GAME().party;
 		const kiakai: Kiakai = GAME().kiakai;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 			name   : kiakai.name,
 			heshe  : kiakai.heshe(),
@@ -455,7 +455,7 @@ export namespace PlazaScenes {
 		const coin  = 5  + Rand(10);
 		const coin2 = 10 + Rand(10);
 
-		const parse: any = {
+		const parse: IParse = {
 			name    : kiakai.name,
 			heshe   : kiakai.heshe(),
 			hisher  : kiakai.hisher(),

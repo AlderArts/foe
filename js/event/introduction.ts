@@ -28,7 +28,7 @@ import { JobEnum, Jobs } from "../job";
 import { IChoice, Link } from "../link";
 import { ILocDarkAspect, ILocLightAspect } from "../location";
 import { Party } from "../party";
-import { Text } from "../text";
+import { IParse, Text } from "../text";
 import { TF } from "../tf";
 import { Kiakai } from "./kiakai";
 import { KiakaiFlags } from "./kiakai-flags";
@@ -626,7 +626,7 @@ export namespace Intro {
 			() => player.FirstCock().Short() :
 			() => player.FirstVag().Short();
 
-		const parse: any = {genDesc};
+		const parse: IParse = {genDesc};
 
 		Text.Flush();
 		// [No][Use][Ride][Group]
@@ -665,7 +665,7 @@ export namespace Intro {
 
 		const imp = new Imp();
 
-		const parse: any = {
+		const parse: IParse = {
 			cockDesc() { return player.FirstCock().Short(); },
 			cockLen() { return player.FirstCock().Desc().len; },
 		};
@@ -759,7 +759,7 @@ export namespace Intro {
 		Gui.SetButtonsFromList(options);
 	}
 
-	export function ImpsCuntBlock(parse: any) {
+	export function ImpsCuntBlock(parse: IParse) {
 		cuntBlocked = true;
 		Text.Add("<i>“Fuah, I... I need more!”</i> Stepping on the imp's shoulder, you push him to the ground. <i>“Now, be a good boy and stay like that,”</i> you breathe lustily, working him to full arousal with the sole of your foot. Straddling the imp's cock, you rub your wet labia against the tip, but when you try to sink down on the impressive tool, something blocks you. Moaning in frustration, you try to press down again, but the imp's [impCockDesc] just slides to the side, harmlessly.", parse);
 		Text.NL();
@@ -773,7 +773,7 @@ export namespace Intro {
 
 		const imp = new Imp();
 
-		const parse: any = {
+		const parse: IParse = {
 			cuntDesc() { return player.FirstVag().Short(); },
 			breastDesc() { return player.FirstBreastRow().Short(); },
 			clitDesc() { return player.FirstVag().ClitShort(); },
@@ -871,7 +871,7 @@ export namespace Intro {
 		const player: Player = GAME().player;
 		const imp = new Imp();
 
-		const parse: any = {
+		const parse: IParse = {
 			cuntDesc() { return player.FirstVag().Short(); },
 			breastDesc() { return player.FirstBreastRow().Short(); },
 			clitDesc() { return player.FirstVag().ClitShort(); },
@@ -904,7 +904,7 @@ export namespace Intro {
 		const player: Player = GAME().player;
 		const imp = new Imp();
 
-		const parse: any = {
+		const parse: IParse = {
 			cuntDesc() { return player.FirstVag().Short(); },
 			breastDesc() { return player.FirstBreastRow().Short(); },
 			clitDesc() { return player.FirstVag().ClitShort(); },
@@ -948,7 +948,7 @@ export namespace Intro {
 		const player: Player = GAME().player;
 		const imp = new Imp();
 
-		const parse: any = {
+		const parse: IParse = {
 			cuntDesc() { return player.FirstVag().Short(); },
 			breastDesc() { return player.FirstBreastRow().Short(); },
 			clitDesc() { return player.FirstVag().ClitShort(); },
@@ -1064,7 +1064,7 @@ export namespace Intro {
 		const player: Player = GAME().player;
 		const imp = new Imp();
 
-		const parse: any = {
+		const parse: IParse = {
 			cuntDesc() { return player.FirstVag().Short(); },
 			breastDesc() { return player.FirstBreastRow().Short(); },
 			clitDesc() { return player.FirstVag().ClitShort(); },
@@ -1106,7 +1106,7 @@ export namespace Intro {
 		const player: Player = GAME().player;
 		const imp = new Imp();
 
-		const parse: any = {
+		const parse: IParse = {
 			cuntDesc() { return player.FirstVag().Short(); },
 			breastDesc() { return player.FirstBreastRow().Short(); },
 			clitDesc() { return player.FirstVag().ClitShort(); },
@@ -1177,7 +1177,7 @@ export namespace Intro {
 			return;
 		}
 
-		const parse: any = {
+		const parse: IParse = {
 			msmr        : (player.Gender() === Gender.male) ? "MISTER" : "MISS",
 			hisher      : (player.Gender() === Gender.male) ? "HIS" : "HER",
 			cuntDesc() { return player.FirstVag().Short(); },
@@ -1287,7 +1287,7 @@ export namespace Intro {
 		const player: Player = GAME().player;
 		const uru: Uru = GAME().uru;
 
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 		parse = player.ParserTags(parse);
@@ -1873,7 +1873,7 @@ export namespace Intro {
 		const player: Player = GAME().player;
 		const uru: Uru = GAME().uru;
 
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 		parse = player.ParserTags(parse);
@@ -1984,7 +1984,7 @@ export namespace Intro {
 		const player: Player = GAME().player;
 		const uru: Uru = GAME().uru;
 
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 		parse = player.ParserTags(parse);
@@ -2171,7 +2171,7 @@ export namespace Intro {
 	export function UruSexFuckAnal2() {
 		const player: Player = GAME().player;
 
-		const parse: any = {
+		const parse: IParse = {
 			cock() { return player.FirstCock().Short(); },
 		};
 
@@ -2354,7 +2354,7 @@ export namespace Intro {
 		const player: Player = GAME().player;
 		const uru: Uru = GAME().uru;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 		};
 		parse = player.ParserTags(parse);
@@ -2465,7 +2465,7 @@ export namespace Intro {
 		const player: Player = GAME().player;
 		const uru: Uru = GAME().uru;
 
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 		parse = player.ParserTags(parse);
@@ -2606,7 +2606,7 @@ export namespace Intro {
 		const player: Player = GAME().player;
 		const uru: Uru = GAME().uru;
 
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 		parse = player.ParserTags(parse);
@@ -3002,7 +3002,7 @@ export namespace Intro {
 	export function MeetingKia() {
 		const kiakai: Kiakai = GAME().kiakai;
 
-		let parse: any = {
+		let parse: IParse = {
 			name : kiakai.name,
 		};
 		parse = kiakai.ParserPronouns(parse);
@@ -3032,7 +3032,7 @@ export namespace Intro {
 	export function KiaQnA() {
 		const kiakai: Kiakai = GAME().kiakai;
 
-		let parse: any = {
+		let parse: IParse = {
 			name : kiakai.name,
 			boygirl : kiakai.mfTrue("boy", "girl"),
 		};
@@ -3129,7 +3129,7 @@ export namespace Intro {
 	export function KiaSurroundings() {
 		const kiakai: Kiakai = GAME().kiakai;
 
-		const parse: any = {
+		const parse: IParse = {
 			name : kiakai.name,
 		};
 		Text.Clear();
@@ -3163,7 +3163,7 @@ export namespace Intro {
 		const kiakai: Kiakai = GAME().kiakai;
 		const party: Party = GAME().party;
 
-		let parse: any = {
+		let parse: IParse = {
 			name : kiakai.name,
 		};
 		parse = kiakai.ParserPronouns(parse);
@@ -3307,7 +3307,7 @@ export namespace Intro {
 		const player: Player = GAME().player;
 		const kiakai: Kiakai = GAME().kiakai;
 
-		let parse: any = {
+		let parse: IParse = {
 			name : kiakai.name,
 			boygirl : kiakai.mfTrue("boy", "girl"),
 		};
@@ -3391,7 +3391,7 @@ export namespace Intro {
 		const player: Player = GAME().player;
 		const kiakai: Kiakai = GAME().kiakai;
 
-		let parse: any = {
+		let parse: IParse = {
 			name : kiakai.name,
 		};
 		parse = kiakai.ParserPronouns(parse);
@@ -3497,7 +3497,7 @@ export namespace Intro {
 		const player: Player = GAME().player;
 		const kiakai: Kiakai = GAME().kiakai;
 
-		let parse: any = {
+		let parse: IParse = {
 			name : kiakai.name,
 			stutterName : player.name[0] + "-" + player.name,
 		};
@@ -3610,7 +3610,7 @@ export namespace Intro {
 
 		Text.Clear();
 
-		const parse: any = {
+		const parse: IParse = {
 			name  : kiakai.name,
 			HeShe : kiakai.HeShe(),
 			i     : party.InParty(kiakai) ? "we" : "I",

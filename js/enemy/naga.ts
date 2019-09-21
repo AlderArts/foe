@@ -28,7 +28,7 @@ import { Jobs } from "../job";
 import { IChoice } from "../link";
 import { Party } from "../party";
 import { PregnancyHandler } from "../pregnancy";
-import { Text } from "../text";
+import { IParse, Text } from "../text";
 
 export class Naga extends Entity {
 
@@ -176,7 +176,7 @@ export namespace NagaScenes {
 		const player: Player = GAME().player;
 		const enc  = this;
 		const naga: Naga = enc.naga;
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 
@@ -267,7 +267,7 @@ export namespace NagaScenes {
 		const naga: Naga = enc.naga;
 		SetGameState(GameState.Event, Gui);
 
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 		parse = player.ParserTags(parse);
@@ -343,7 +343,7 @@ export namespace NagaScenes {
 		const naga: Naga = enc.naga;
 		SetGameState(GameState.Event, Gui);
 
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 
@@ -491,7 +491,7 @@ export namespace NagaScenes {
 			}
 		}
 
-		let parse: any = {
+		let parse: IParse = {
 			cocks2() { return player.MultiCockDesc(allCocks); },
 		};
 
@@ -706,7 +706,7 @@ export namespace NagaScenes {
 		const naga: Naga = enc.naga;
 		SetGameState(GameState.Event, Gui);
 
-		let parse: any = {
+		let parse: IParse = {
 			master : player.mfFem("master", "mistress"),
 		};
 
@@ -738,7 +738,7 @@ export namespace NagaScenes {
 		const party: Party = GAME().party;
 		const naga: Naga = enc.naga;
 
-		const parse: any = {};
+		const parse: IParse = {};
 
 		// [Fuck][Hypnotize][Leave]
 		const options: IChoice[] = [];
@@ -825,7 +825,7 @@ export namespace NagaScenes {
 		const player: Player = GAME().player;
 		const naga: Naga = enc.naga;
 
-		let parse: any = {};
+		let parse: IParse = {};
 
 		parse = player.ParserTags(parse);
 		parse = naga.ParserTags(parse, "n");
@@ -850,7 +850,7 @@ export namespace NagaScenes {
 		const player: Player = GAME().player;
 		const naga: Naga = enc.naga;
 
-		let parse: any = {
+		let parse: IParse = {
 			master : player.mfFem("master", "mistress"),
 		};
 
@@ -878,7 +878,7 @@ export namespace NagaScenes {
 
 		const p1cock = player.BiggestCock();
 
-		let parse: any = {
+		let parse: IParse = {
 			master  : player.mfFem("master", "mistress"),
 			biggest : player.NumCocks() > 1 ? " biggest" : "",
 		};
@@ -1018,7 +1018,7 @@ export namespace NagaScenes {
 		const p1cock = player.BiggestCock();
 		const vag = player.FirstVag();
 
-		let parse: any = {
+		let parse: IParse = {
 			master  : player.mfFem("master", "mistress"),
 			biggest : player.NumCocks() > 1 ? " biggest" : "",
 		};
@@ -1162,7 +1162,7 @@ export namespace NagaScenes {
 
 	export function DesertWinTailpeg(opts: any) {
 		const player: Player = GAME().player;
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 
@@ -1215,7 +1215,7 @@ export namespace NagaScenes {
 		const party: Party = GAME().party;
 		const p1cock = player.BiggestCock();
 
-		let parse: any = {
+		let parse: IParse = {
 			boyGirl : player.mfTrue("boy", "girl"),
 		};
 		parse = player.ParserTags(parse);

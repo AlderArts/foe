@@ -28,7 +28,7 @@ import { IChoice } from "../../link";
 import { ILocation } from "../../location";
 import { Party } from "../../party";
 import { PregnancyHandler } from "../../pregnancy";
-import { Text } from "../../text";
+import { IParse, Text } from "../../text";
 import { TF, TFItem } from "../../tf";
 import { Rand } from "../../utility";
 import { Kiakai } from "../kiakai";
@@ -242,7 +242,7 @@ export namespace RosalinScenes {
 
 		Text.Clear();
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 			heshe      : rosalin.heshe(),
 		};
@@ -293,7 +293,7 @@ export namespace RosalinScenes {
 
 	export function Desc() {
 		const rosalin: Rosalin = GAME().rosalin;
-		let parse: any = {
+		let parse: IParse = {
 			extinguishedLit : (WorldTime().hour >= 19 || WorldTime().hour < 2) ? "lit" : "extinguished",
 		};
 		parse = rosalin.ParserPronouns(parse);
@@ -321,7 +321,7 @@ export namespace RosalinScenes {
 		const racescore = new RaceScore(rosalin.body);
 		const compScore = rosalin.origRaceScore.Compare(racescore);
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 			raceDesc() { return rosalin.raceDesc(compScore); },
 		};
@@ -725,12 +725,10 @@ export namespace RosalinScenes {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const rosalin: Rosalin = GAME().rosalin;
-		const kiakai: Kiakai = GAME().kiakai;
-		const cale: Cale = GAME().cale;
 		const racescore = new RaceScore(rosalin.body);
 		const compScore = rosalin.origRaceScore.Compare(racescore);
 
-		let parse: any = {
+		let parse: IParse = {
 			race() { return rosalin.raceDesc(compScore); },
 			rcocks() { return rosalin.MultiCockDesc(); },
 		};
@@ -793,7 +791,7 @@ export namespace RosalinScenes {
 		const kiakai: Kiakai = GAME().kiakai;
 		Text.Clear();
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 			faceDesc() { return player.FaceDesc(); },
 			armDesc() { return player.ArmDesc(); },
@@ -872,7 +870,7 @@ export namespace RosalinScenes {
 		const rosalin: Rosalin = GAME().rosalin;
 		const cale: Cale = GAME().cale;
 
-		const parse: any = {
+		const parse: IParse = {
 			armorDesc() { return player.ArmorDesc(); },
 			cocks() { return player.MultiCockDesc(); },
 			vagDesc() { return player.FirstVag().Short(); },
@@ -1226,7 +1224,7 @@ export namespace RosalinScenes {
 		player.subDom.IncreaseStat(100, 5);
 		cale.flags.Sexed++;
 
-		const parse: any = {
+		const parse: IParse = {
 			armorDesc() { return player.ArmorDesc(); },
 			cocks() { return player.MultiCockDesc(); },
 			vagDesc() { return player.FirstVag().Short(); },
@@ -1288,7 +1286,7 @@ export namespace RosalinScenes {
 
 		Text.Clear();
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -1336,7 +1334,7 @@ export namespace RosalinScenes {
 		const racescore = new RaceScore(rosalin.body);
 		const compScore = rosalin.origRaceScore.Compare(racescore);
 
-		let parse: any = {
+		let parse: IParse = {
 			raceDesc() { return rosalin.raceDesc(compScore); },
 
 			breasts() { return player.FirstBreastRow().Short(); },
@@ -2726,7 +2724,7 @@ export namespace RosalinScenes {
 		}
 		const p2Cock = player.BiggestCock(allCocks);
 
-		let parse: any = {
+		let parse: IParse = {
 			raceDesc() { return rosalin.raceDesc(compScore); },
 			rbreasts() { return rosalin.FirstBreastRow().Short(); },
 			rnips() { return rosalin.FirstBreastRow().NipsShort(); },
@@ -3321,7 +3319,7 @@ export namespace RosalinScenes {
 
 		const cock = rosalin.BiggestCock();
 
-		let parse: any = {
+		let parse: IParse = {
 			raceDesc() { return rosalin.raceDesc(compScore); },
 			rbreasts() { return rosalin.FirstBreastRow().Short(); },
 			rnips() { return rosalin.FirstBreastRow().NipsShort(); },
@@ -3504,7 +3502,7 @@ export namespace RosalinScenes {
 		const racescore = new RaceScore(rosalin.body);
 		const compScore = rosalin.origRaceScore.Compare(racescore);
 
-		let parse: any = {
+		let parse: IParse = {
 			raceDesc() { return rosalin.raceDesc(compScore); },
 
 			playername     : player.name,
@@ -3565,7 +3563,7 @@ export namespace RosalinScenes {
 	}
 
 	export function FuckCaleWatchEntryPoint() {
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 

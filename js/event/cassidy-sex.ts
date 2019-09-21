@@ -9,7 +9,7 @@ import { Gui } from "../gui";
 import { Jobs } from "../job";
 import { IChoice } from "../link";
 import { Party } from "../party";
-import { Text } from "../text";
+import { IParse, Text } from "../text";
 import { Cassidy } from "./cassidy";
 import { CassidyFlags } from "./cassidy-flags";
 import { Player } from "./player";
@@ -20,7 +20,7 @@ export namespace CassidySexScenes {
 		const player: Player = GAME().player;
 		const cassidy: Cassidy = GAME().cassidy;
 
-		const parse: any = {
+		const parse: IParse = {
 			armor() { return player.ArmorDesc(); },
 		};
 
@@ -76,7 +76,7 @@ export namespace CassidySexScenes {
 		const player: Player = GAME().player;
 		const cassidy: Cassidy = GAME().cassidy;
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -125,7 +125,7 @@ export namespace CassidySexScenes {
 		const cassidy: Cassidy = GAME().cassidy;
 		opts.savor = true;
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -185,7 +185,7 @@ export namespace CassidySexScenes {
 	export function Tail() {
 		const player: Player = GAME().player;
 
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 		parse = player.ParserTags(parse);
@@ -268,7 +268,7 @@ export namespace CassidySexScenes {
 	export function Tailfuck() {
 		const player: Player = GAME().player;
 		const cassidy: Cassidy = GAME().cassidy;
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 		parse = player.ParserTags(parse);
@@ -310,7 +310,7 @@ export namespace CassidySexScenes {
 	export function Tailpeg() {
 		const player: Player = GAME().player;
 		const cassidy: Cassidy = GAME().cassidy;
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 		parse = player.ParserTags(parse);
@@ -386,7 +386,7 @@ export namespace CassidySexScenes {
 		const p1cock = player.BiggestCock(cocksInVag);
 		const realcock = !p1cock.isStrapon;
 
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 		parse = player.ParserTags(parse, "", p1cock);
@@ -485,7 +485,7 @@ export namespace CassidySexScenes {
 		const player: Player = GAME().player;
 		const cassidy: Cassidy = GAME().cassidy;
 
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 		parse = player.ParserTags(parse);
@@ -766,7 +766,7 @@ export namespace CassidySexScenes {
 		const p1cock = player.BiggestCock(cocksInAss);
 		const realcock = !p1cock.isStrapon;
 
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 		parse = player.ParserTags(parse, "", p1cock);
@@ -896,7 +896,7 @@ export namespace CassidySexScenes {
 		const cassidy: Cassidy = GAME().cassidy;
 		const world = WORLD();
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -937,7 +937,7 @@ export namespace CassidySparSexScenes {
 
 		party.LoadActiveParty();
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 		};
 		parse = player.ParserTags(parse);
@@ -1072,7 +1072,7 @@ export namespace CassidySparSexScenes {
 	export function WinPrompt() {
 		const player: Player = GAME().player;
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -1111,7 +1111,7 @@ export namespace CassidySparSexScenes {
 
 		const p1cock = player.BiggestCock();
 
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 		parse = player.ParserTags(parse, "", p1cock);
@@ -1347,7 +1347,7 @@ export namespace CassidySparSexScenes {
 
 		const p1cock = player.BiggestCock();
 
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 		parse = player.ParserTags(parse, "", p1cock);
@@ -1425,7 +1425,7 @@ export namespace CassidySparSexScenes {
 		const player: Player = GAME().player;
 		const cassidy: Cassidy = GAME().cassidy;
 
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 		parse = player.ParserTags(parse);
@@ -1503,7 +1503,7 @@ export namespace CassidySparSexScenes {
 		const player: Player = GAME().player;
 		const cassidy: Cassidy = GAME().cassidy;
 
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 		parse = player.ParserTags(parse);
@@ -1565,7 +1565,7 @@ export namespace CassidySparSexScenes {
 		const cassidy: Cassidy = GAME().cassidy;
 		const world = WORLD();
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -1601,7 +1601,7 @@ export namespace CassidySparSexScenes {
 
 		party.LoadActiveParty();
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 		};
 		parse = player.ParserTags(parse);
@@ -1705,7 +1705,7 @@ export namespace CassidySparSexScenes {
 
 		const p1cock = player.BiggestCock();
 
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 		parse = player.ParserTags(parse);
@@ -1840,7 +1840,7 @@ export namespace CassidySparSexScenes {
 	export function SuckOnBreasts() {
 		const player: Player = GAME().player;
 
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 		parse = player.ParserTags(parse);
@@ -1894,7 +1894,7 @@ export namespace CassidySparSexScenes {
 		const player: Player = GAME().player;
 		const cassidy: Cassidy = GAME().cassidy;
 
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 		parse = player.ParserTags(parse);
@@ -2008,7 +2008,7 @@ export namespace CassidySparSexScenes {
 		const cassidy: Cassidy = GAME().cassidy;
 		const world = WORLD();
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 

@@ -10,7 +10,7 @@ import { IChoice } from "../link";
 import { OasisFlags } from "../loc/oasis-flags";
 import { Party } from "../party";
 import { PregnancyHandler } from "../pregnancy";
-import { Text } from "../text";
+import { IParse, Text } from "../text";
 import { OrchidBoss } from "./orchid";
 import { OrchidFlags } from "./orchid-flags";
 
@@ -31,7 +31,7 @@ export namespace OrchidScenes {
 	export function Interact() {
 		const player: Player = GAME().player;
 		const orchid: OrchidBoss = GAME().orchid;
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -61,7 +61,7 @@ export namespace OrchidScenes {
 	}
 
 	export function Prompt() {
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -95,7 +95,7 @@ export namespace OrchidScenes {
 	export function TalkPrompt() {
 		const player: Player = GAME().player;
 		const orchid: OrchidBoss = GAME().orchid;
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -318,7 +318,7 @@ export namespace OrchidScenes {
 	export function FirstTalk() {
 		const kiakai: Kiakai = GAME().kiakai;
 		const party: Party = GAME().party;
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -357,7 +357,7 @@ export namespace OrchidScenes {
 		const layla: Layla = GAME().layla;
 		const oasis = GAME().oasis;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 			name : kiakai.name,
 		};

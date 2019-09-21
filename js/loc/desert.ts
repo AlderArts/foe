@@ -17,7 +17,7 @@ import { QuestItems } from "../items/quest";
 import { Link } from "../link";
 import { ILocDesert } from "../location";
 import { Party } from "../party";
-import { Text } from "../text";
+import { IParse, Text } from "../text";
 import { Burrows } from "./burrows";
 import { BurrowsFlags } from "./burrows-flags";
 import { OasisScenes } from "./oasis";
@@ -49,7 +49,7 @@ DesertLoc.Drylands.enc.AddEnc(() => {
 		const party: Party = GAME().party;
 		const burrows: Burrows = GAME().burrows;
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 

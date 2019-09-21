@@ -11,7 +11,7 @@ import { MariaFlags } from "./event/outlaws/maria-flags";
 import { TerryFlags } from "./event/terry-flags";
 import { GAME } from "./GAME";
 import { IStorage } from "./istorage";
-import { Text } from "./text";
+import { IParse, Text } from "./text";
 
 const Jobs: any = {};
 
@@ -66,10 +66,10 @@ export class Job {
 			// Increase level
 			jd.level++;
 
-			const parse: any = {
+			const parse: IParse = {
 				name : entity.NameDesc(),
 				is   : entity.is(),
-				lvl  : jd.level,
+				lvl  : jd.level.toString(),
 				job  : this.Short(entity),
 				s    : entity.plural() ? "" : "s",
 				has  : entity.has(),
@@ -221,7 +221,7 @@ export enum JobEnum {
 
 Jobs.Fighter = new Job("Fighter");
 Jobs.Fighter.Long = (entity: Entity) => {
-	const parse: any = {hisher: entity.hisher(), Name: entity.NameDesc(), name: entity.nameDesc(), has: entity.has(), s: entity.plural() ? "" : "s"};
+	const parse: IParse = {hisher: entity.hisher(), Name: entity.NameDesc(), name: entity.nameDesc(), has: entity.has(), s: entity.plural() ? "" : "s"};
 	return Text.Parse("As a fighter, [name] train[s] the fundamental basics of physical combat, honing [hisher] body for further specialization. [Name] [has] a broad set of attacks, but lack[s] a tactical mindset.", parse);
 };
 Jobs.Fighter.abilities.AddAbility(Abilities.Physical.Bash);
@@ -238,7 +238,7 @@ Jobs.Fighter.levels.push(new JobLevel(640, [{ab: Abilities.Physical.Provoke, set
 
 Jobs.Scholar = new Job("Scholar");
 Jobs.Scholar.Long = (entity: Entity) => {
-	const parse: any = {hisher: entity.hisher(), Name: entity.NameDesc(), name: entity.nameDesc(), has: entity.has(), is: entity.is()};
+	const parse: IParse = {hisher: entity.hisher(), Name: entity.NameDesc(), name: entity.nameDesc(), has: entity.has(), is: entity.is()};
 	return Text.Parse("As a scholar, [name] [is] a truthseeker, characterized by [hisher] curiosity and thirst for knowledge. While lacking in offensive strength, [name] [has] plenty of supportive abilities to field in combat.", parse);
 };
 Jobs.Scholar.abilities.AddAbility(Abilities.White.Tirade);
@@ -255,7 +255,7 @@ Jobs.Scholar.levels.push(new JobLevel(640, [{ab: Abilities.White.Cheer, set: "Su
 
 Jobs.Courtesan = new Job("Courtesan");
 Jobs.Courtesan.Long = (entity: Entity) => {
-	const parse: any = {hisher: entity.hisher(), heshe: entity.heshe(), name: entity.nameDesc(), Poss: entity.Possessive()};
+	const parse: IParse = {hisher: entity.hisher(), heshe: entity.heshe(), name: entity.nameDesc(), Poss: entity.Possessive()};
 	return Text.Parse("As a playful courtesan, there is a lustful spark stirring within [name], something [heshe] has no qualms about flaunting in combat for [hisher] benefit. [Poss] teasing nature is something that one day might turn into something darker, more primal, should [heshe] give in to [hisher] lust.", parse);
 };
 Jobs.Courtesan.Unlocked = (entity: Entity) => {
@@ -278,7 +278,7 @@ Jobs.Courtesan.levels.push(new JobLevel(640, [{ab: Abilities.Seduction.Distract,
 // Kiai specific
 Jobs.Acolyte = new Job("Acolyte");
 Jobs.Acolyte.Long = (entity: Entity) => {
-	const parse: any = {hisher: entity.hisher(), HeShe: entity.HeShe(), name: entity.nameDesc(), has: entity.has()};
+	const parse: IParse = {hisher: entity.hisher(), HeShe: entity.HeShe(), name: entity.nameDesc(), has: entity.has()};
 	return Text.Parse("As an acolyte, [name] [has] devoted years in the service of Lady Aria, learning empathy and love for [hisher] fellow man. [HeShe] [has] a strong supportive role, but lacks offensive capabilities.", parse);
 };
 Jobs.Acolyte.abilities.AddAbility(Abilities.White.Heal);
@@ -298,7 +298,7 @@ Jobs.Acolyte.levels.push(new JobLevel(640, [{ab: Abilities.White.Empower, set: "
 // Cveta specific
 Jobs.Songstress = new Job("Songstress");
 Jobs.Songstress.Long = (entity: Entity) => {
-	const parse: any = {};
+	const parse: IParse = {};
 	return Text.Parse("All may practice hard, but some gifts are inborn and cannot be imparted through teaching. The Songstress uses the strange, magical qualities of her voice to sway the tides of battle.", parse);
 };
 Jobs.Songstress.abilities.AddAbility(Abilities.Seduction.Soothe);
@@ -319,7 +319,7 @@ Jobs.Songstress.levels.push(new JobLevel(640, [{ab: Abilities.Seduction.Captivat
 
 Jobs.Bruiser = new Job("Bruiser");
 Jobs.Bruiser.Long = (entity: Entity) => {
-	const parse: any = {hisher: entity.hisher(), HeShe: entity.HeShe(), name: entity.nameDesc(), is: entity.is(), s: entity.plural() ? "" : "s"};
+	const parse: IParse = {hisher: entity.hisher(), HeShe: entity.HeShe(), name: entity.nameDesc(), is: entity.is(), s: entity.plural() ? "" : "s"};
 	return Text.Parse("As a bruiser, [name] [is] all about brute strength, and can prove to be quite a fearsome warrior. [HeShe] can dish out a large amount of damage, but fare[s] badly against quick, evasive foes.", parse);
 };
 Jobs.Bruiser.Unlocked = (entity: Entity) => {
@@ -342,7 +342,7 @@ Jobs.Bruiser.levels.push(new JobLevel(1280, [{ab: Abilities.Physical.GrandSlam, 
 
 Jobs.Rogue = new Job("Rogue");
 Jobs.Rogue.Long = (entity: Entity) => {
-	const parse: any = {hisher: entity.hisher(), HeShe: entity.HeShe(), name: entity.nameDesc(), s: entity.plural() ? "" : "s"};
+	const parse: IParse = {hisher: entity.hisher(), HeShe: entity.HeShe(), name: entity.nameDesc(), s: entity.plural() ? "" : "s"};
 	return Text.Parse("As a rogue, [name] fight[s] dirty, using any trick or scheme to deal decisive damage to [hisher] enemies. [HeShe] can deal large amounts of damage against distracted opponents.", parse);
 };
 Jobs.Rogue.Unlocked = (entity: Entity) => {
@@ -367,7 +367,7 @@ Jobs.Rogue.levels.push(new JobLevel(1280, [{ab: Abilities.Physical.Backstab, set
 
 Jobs.Ranger = new Job("Ranger");
 Jobs.Ranger.Long = (entity: Entity) => {
-	const parse: any = {hisher: entity.hisher(), HeShe: entity.HeShe(), name: entity.nameDesc(), is: entity.is()};
+	const parse: IParse = {hisher: entity.hisher(), HeShe: entity.HeShe(), name: entity.nameDesc(), is: entity.is()};
 	return Text.Parse("As a ranger, [name] [is] a skilled hunter, well versed in ways to ensnare and distract [hisher] prey.", parse);
 };
 Jobs.Ranger.Unlocked = (entity: Entity) => {
@@ -392,7 +392,7 @@ Jobs.Ranger.levels.push(new JobLevel(1280, [{ab: Abilities.Physical.SetTrap, set
 
 Jobs.Squire = new Job("Squire");
 Jobs.Squire.Long = (entity: Entity) => {
-	const parse: any = {hisher: entity.hisher(), HeShe: entity.HeShe(), name: entity.nameDesc(), is: entity.is()};
+	const parse: IParse = {hisher: entity.hisher(), HeShe: entity.HeShe(), name: entity.nameDesc(), is: entity.is()};
 	// TODO Desc
 	return Text.Parse("Tank", parse);
 };
@@ -416,7 +416,7 @@ Jobs.Squire.levels.push(new JobLevel(1280, [{ab: Abilities.Physical.Taunt, set: 
 
 Jobs.Mage = new Job("Mage");
 Jobs.Mage.Long = (entity: Entity) => {
-	const parse: any = {hisher: entity.hisher(), heshe: entity.heshe(), has: entity.has(), name: entity.nameDesc(), es: entity.plural() ? "" : "es" };
+	const parse: IParse = {hisher: entity.hisher(), heshe: entity.heshe(), has: entity.has(), name: entity.nameDesc(), es: entity.plural() ? "" : "es" };
 	return Text.Parse("As a mage, [name] [has] taken the first steps into exploring the raw power of the elements and the chaotic force of magic. While [heshe] [has] barely begun tapping [hisher] innate potential, [name] already possess[es] formidable destructive power.", parse);
 };
 Jobs.Mage.preqs.push({job : Jobs.Scholar, lvl : 3});
@@ -438,7 +438,7 @@ Jobs.Mage.Unlocked = (entity: Entity) => {
 
 Jobs.Mystic = new Job("Mystic");
 Jobs.Mystic.Long = (entity: Entity) => {
-	const parse: any = {hisher: entity.hisher(), name: entity.nameDesc(), s: entity.plural() ? "" : "s"};
+	const parse: IParse = {hisher: entity.hisher(), name: entity.nameDesc(), s: entity.plural() ? "" : "s"};
 	return Text.Parse("As a mystic, [name] take[s] the first steps in mastering the  power of nature, commanding water and plants to bend to [hisher] will.", parse);
 };
 Jobs.Mystic.preqs.push({job : Jobs.Scholar, lvl : 3});
@@ -461,7 +461,7 @@ Jobs.Mystic.Unlocked = (entity: Entity) => {
 
 Jobs.Healer = new Job("Healer");
 Jobs.Healer.Long = (entity: Entity) => {
-	const parse: any = {hisher: entity.hisher(), HisHer: entity.HisHer(), name: entity.nameDesc(), s: entity.plural() ? "" : "s"};
+	const parse: IParse = {hisher: entity.hisher(), HisHer: entity.HisHer(), name: entity.nameDesc(), s: entity.plural() ? "" : "s"};
 	return Text.Parse("As a proficient healer, [name] know[s] the bare essentials of caring for the wounded in [hisher] party, keeping them alive in any and all situations. [HisHer] healing hands can ease the pain of minor wounds and nurse people back to health.", parse);
 };
 Jobs.Healer.preqs.push({job : Jobs.Scholar, lvl : 3});
@@ -481,7 +481,7 @@ Jobs.Healer.Unlocked = (entity: Entity) => {
 
 Jobs.Singer = new Job("Singer");
 Jobs.Singer.Long = (entity: Entity) => {
-	const parse: any = {hisher: entity.hisher(), himher: entity.himher(), name: entity.nameDesc(), s: entity.plural() ? "" : "s"};
+	const parse: IParse = {hisher: entity.hisher(), himher: entity.himher(), name: entity.nameDesc(), s: entity.plural() ? "" : "s"};
 	return Text.Parse("As a singer, [name] can sway those around [himher] with [hisher] songs, rousing courage in [hisher] allies or inducing dismay in [hisher] foes.", parse);
 };
 Jobs.Singer.preqs.push({job : Jobs.Courtesan, lvl : 3});
@@ -506,7 +506,7 @@ Jobs.Singer.Unlocked = (entity: Entity) => {
 
 Jobs.Elementalist = new Job("Elementalist");
 Jobs.Elementalist.Long = (entity: Entity) => {
-	const parse: any = {hisher: entity.hisher(), HisHer: entity.HisHer(), name: entity.nameDesc()};
+	const parse: IParse = {hisher: entity.hisher(), HisHer: entity.HisHer(), name: entity.nameDesc()};
 	return Text.Parse("The elementalist is a specialist magician, being able to call on the full fury of the elements to rain down on [hisher] foes. Very effective against large groups of enemies.", parse);
 };
 Jobs.Elementalist.preqs.push({job : Jobs.Mage, lvl : 3});
@@ -527,7 +527,7 @@ Jobs.Elementalist.Unlocked = (entity: Entity) => {
 
 Jobs.Warlock = new Job("Warlock");
 Jobs.Warlock.Long = (entity: Entity) => {
-	const parse: any = {hisher: entity.hisher(), HisHer: entity.HisHer(), name: entity.nameDesc()};
+	const parse: IParse = {hisher: entity.hisher(), HisHer: entity.HisHer(), name: entity.nameDesc()};
 	return Text.Parse("The warlock utilizes the power of darkness to weaken and drain [hisher] enemies. The warlock's curse makes [hisher] foes more susceptible to debilitating effects.", parse);
 };
 Jobs.Warlock.preqs.push({job : Jobs.Mage, lvl : 3});
@@ -548,7 +548,7 @@ Jobs.Warlock.Unlocked = (entity: Entity) => {
 
 Jobs.Hypnotist = new Job("Hypnotist");
 Jobs.Hypnotist.Long = (entity: Entity) => {
-	const parse: any = {hisher: entity.hisher(), HisHer: entity.HisHer(), name: entity.nameDesc()};
+	const parse: IParse = {hisher: entity.hisher(), HisHer: entity.HisHer(), name: entity.nameDesc()};
 	return Text.Parse("Hypnotists utilize the alluring magic of illusion and mental suggestion to manipulate others, both on and off the battlefield. Practitioners of this advanced art require intimate familiarity of the unbridled passions that rule us all, as well as knowledge of the arcane.", parse);
 };
 Jobs.Hypnotist.preqs.push({job : Jobs.Mage, lvl : 3});
@@ -571,7 +571,7 @@ Jobs.Hypnotist.Unlocked = (entity: Entity) => {
 Jobs.Eromancer = new Job("Eromancer");
 // TODO
 Jobs.Eromancer.Long = (entity: Entity) => {
-	const parse: any = {hisher: entity.hisher(), HisHer: entity.HisHer(), name: entity.nameDesc()};
+	const parse: IParse = {hisher: entity.hisher(), HisHer: entity.HisHer(), name: entity.nameDesc()};
 	return Text.Parse("", parse);
 };
 Jobs.Eromancer.preqs.push({job : Jobs.Mage, lvl : 3});
@@ -593,7 +593,7 @@ Jobs.Eromancer.Unlocked = (entity: Entity) => {
 Jobs.RunicKnight = new Job("Runic Knight");
 // TODO
 Jobs.RunicKnight.Long = (entity: Entity) => {
-	const parse: any = {hisher: entity.hisher(), HisHer: entity.HisHer(), name: entity.nameDesc()};
+	const parse: IParse = {hisher: entity.hisher(), HisHer: entity.HisHer(), name: entity.nameDesc()};
 	return Text.Parse("", parse);
 };
 Jobs.RunicKnight.preqs.push({job : Jobs.Mystic, lvl : 3});
@@ -615,7 +615,7 @@ Jobs.RunicKnight.Unlocked = (entity: Entity) => {
 Jobs.Bard = new Job("Bard");
 // TODO
 Jobs.Bard.Long = (entity: Entity) => {
-	const parse: any = {hisher: entity.hisher(), HisHer: entity.HisHer(), name: entity.nameDesc()};
+	const parse: IParse = {hisher: entity.hisher(), HisHer: entity.HisHer(), name: entity.nameDesc()};
 	return Text.Parse("", parse);
 };
 Jobs.Bard.preqs.push({job : Jobs.Courtesan, lvl : 5});

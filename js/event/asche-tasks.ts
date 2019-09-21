@@ -20,7 +20,7 @@ import { Jobs } from "../job";
 import { IChoice } from "../link";
 import { Rigard } from "../loc/rigard/rigard";
 import { Party } from "../party";
-import { Text } from "../text";
+import { IParse, Text } from "../text";
 import { Season } from "../time";
 import { Asche } from "./asche";
 import { AscheFlags } from "./asche-flags";
@@ -36,7 +36,7 @@ export namespace AscheTasksScenes {
 	}
 
 	export function Default() {
-		const parse: any = {};
+		const parse: IParse = {};
 
 		// Play this if the player isn’t eligible for a new task at the moment.
 		Text.Clear();
@@ -84,7 +84,7 @@ export namespace AscheTasksScenes {
 			const player: Player = GAME().player;
 			const asche: Asche = GAME().asche;
 
-			const parse: any = {
+			const parse: IParse = {
 				heshe : player.mfFem("he", "she"),
 				handsomepretty : player.mfFem("handsome", "pretty"),
 			};
@@ -131,7 +131,7 @@ export namespace AscheTasksScenes {
 		export function OnTask() {
 			const player: Player = GAME().player;
 
-			const parse: any = {
+			const parse: IParse = {
 				handsomepretty : player.mfFem("handsome", "pretty"),
 			};
 
@@ -150,7 +150,7 @@ export namespace AscheTasksScenes {
 			const player: Player = GAME().player;
 			const asche: Asche = GAME().asche;
 
-			const parse: any = {
+			const parse: IParse = {
 				himher : player.mfFem("him", "her"),
 			};
 
@@ -168,7 +168,7 @@ export namespace AscheTasksScenes {
 			const party: Party = GAME().party;
 			const asche: Asche = GAME().asche;
 
-			const parse: any = {
+			const parse: IParse = {
 
 			};
 
@@ -238,7 +238,7 @@ export namespace AscheTasksScenes {
 					const goal = 40;
 
 					if (GetDEBUG()) {
-						Text.Add("Dex check: [dex] (vs [goal])", {dex, goal}, "bold");
+						Text.Add(`Dex check: ${dex} (vs ${goal})`, undefined, "bold");
 						Text.NL();
 					}
 					if (dex >= goal) {
@@ -310,7 +310,7 @@ export namespace AscheTasksScenes {
 			const party: Party = GAME().party;
 			const asche: Asche = GAME().asche;
 
-			const parse: any = {
+			const parse: IParse = {
 
 			};
 
@@ -386,7 +386,7 @@ export namespace AscheTasksScenes {
 			const party: Party = GAME().party;
 			const asche: Asche = GAME().asche;
 
-			let parse: any = {
+			let parse: IParse = {
 
 			};
 			parse = player.ParserTags(parse);
@@ -498,7 +498,7 @@ export namespace AscheTasksScenes {
 			const enc = this;
 			SetGameState(GameState.Event, Gui);
 
-			const parse: any = {
+			const parse: IParse = {
 
 			};
 
@@ -530,7 +530,7 @@ export namespace AscheTasksScenes {
 			const enc = this;
 			SetGameState(GameState.Event, Gui);
 
-			const parse: any = {
+			const parse: IParse = {
 
 			};
 
@@ -554,7 +554,7 @@ export namespace AscheTasksScenes {
 			const party: Party = GAME().party;
 			const asche: Asche = GAME().asche;
 
-			let parse: any = {
+			let parse: IParse = {
 				himher : player.mfFem("him", "her"),
 				hisher : player.mfFem("his", "her"),
 				heshe : player.mfFem("he", "she"),
@@ -703,7 +703,7 @@ export namespace AscheTasksScenes {
 			const player: Player = GAME().player;
 			const asche: Asche = GAME().asche;
 
-			const parse: any = {
+			const parse: IParse = {
 				heshe : player.mfFem("he", "she"),
 			};
 
@@ -732,7 +732,7 @@ export namespace AscheTasksScenes {
 
 		export function OnTask() {
 			const player: Player = GAME().player;
-			const parse: any = {
+			const parse: IParse = {
 				hisher : player.mfFem("his", "her"),
 			};
 
@@ -750,7 +750,7 @@ export namespace AscheTasksScenes {
 			const player: Player = GAME().player;
 			const asche: Asche = GAME().asche;
 
-			const parse: any = {
+			const parse: IParse = {
 				playername : player.name,
 			};
 
@@ -781,7 +781,7 @@ export namespace AscheTasksScenes {
 		export function BlindStart() {
 			const player: Player = GAME().player;
 
-			const parse: any = {
+			const parse: IParse = {
 
 			};
 
@@ -823,7 +823,7 @@ export namespace AscheTasksScenes {
 
 		// Use this if asked Aquilius for help
 		export function FollowAquilius() {
-			const parse: any = {
+			const parse: IParse = {
 
 			};
 
@@ -844,7 +844,7 @@ export namespace AscheTasksScenes {
 			const party: Party = GAME().party;
 			const asche: Asche = GAME().asche;
 
-			const parse: any = {
+			const parse: IParse = {
 				feet : player.FeetDesc(),
 			};
 
@@ -871,7 +871,7 @@ export namespace AscheTasksScenes {
 				const check = Math.floor((player.Dex() + player.Sta() + player.Int()) / 3.0 + Math.random() * 20);
 
 				if (GetDEBUG()) {
-					Text.Add("(Dex+Sta+Int)/3 test: [val] (vs [goal])", {val: check, goal}, "bold");
+					Text.Add(`(Dex+Sta+Int)/3 test: ${check} (vs ${goal})`, undefined, "bold");
 					Text.NL();
 				}
 
@@ -907,7 +907,7 @@ export namespace AscheTasksScenes {
 			const party: Party = GAME().party;
 			const asche: Asche = GAME().asche;
 
-			let parse: any = {
+			let parse: IParse = {
 				handsomepretty : player.mfFem("handsome", "pretty"),
 				himher : player.mfFem("him", "her"),
 				hisher : player.mfFem("his", "her"),
@@ -1080,7 +1080,7 @@ export namespace AscheTasksScenes {
 			const player: Player = GAME().player;
 			const asche: Asche = GAME().asche;
 
-			const parse: any = {
+			const parse: IParse = {
 				HandsomePretty: player.mfFem("Handsome", "Pretty"),
 				handsomepretty: player.mfFem("handsome", "pretty"),
 				hisher : player.mfFem("his", "her"),
@@ -1136,7 +1136,7 @@ export namespace AscheTasksScenes {
 			const party: Party = GAME().party;
 			const asche: Asche = GAME().asche;
 
-			const parse: any = {
+			const parse: IParse = {
 				feet : player.FeetDesc(),
 			};
 
@@ -1241,7 +1241,7 @@ export namespace AscheTasksScenes {
 		export function OnTask() {
 			const player: Player = GAME().player;
 
-			const parse: any = {
+			const parse: IParse = {
 				heshe  : player.mfFem("he", "she"),
 				himher : player.mfFem("him", "her"),
 			};
@@ -1256,7 +1256,7 @@ export namespace AscheTasksScenes {
 			const party: Party = GAME().party;
 			const asche: Asche = GAME().asche;
 
-			let parse: any = {
+			let parse: IParse = {
 				himher : player.mfFem("him", "her"),
 				hisher : player.mfFem("his", "her"),
 				heshe : player.mfFem("he", "she"),

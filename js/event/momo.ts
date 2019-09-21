@@ -17,7 +17,7 @@ import { IChoice } from "../link";
 import { ILocation } from "../location";
 import { Party } from "../party";
 import { Status } from "../statuseffect";
-import { Text } from "../text";
+import { IParse, Text } from "../text";
 import { ITime, Time } from "../time";
 import { MomoFlags } from "./momo-flags";
 import { Player } from "./player";
@@ -142,7 +142,7 @@ export namespace MomoScenes {
 		const momo: Momo = GAME().momo;
 		const world = WORLD();
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -236,7 +236,7 @@ export namespace MomoScenes {
 		const player: Player = GAME().player;
 		const momo: Momo = GAME().momo;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -301,7 +301,7 @@ export namespace MomoScenes {
 		const player: Player = GAME().player;
 		const momo: Momo = GAME().momo;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -415,7 +415,7 @@ export namespace MomoScenes {
 	// TODO
 	export function Prompt() {
 		const player: Player = GAME().player;
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -460,7 +460,7 @@ export namespace MomoScenes {
 		const momo: Momo = GAME().momo;
 		const party: Party = GAME().party;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 			girlMorph  : momo.Ascended() ? "morph" : "girl",
 			dragonette : momo.Ascended() ? "dragon" : "dragonette",
@@ -552,7 +552,7 @@ export namespace MomoScenes {
 	export function TalkPrompt() {
 		const player: Player = GAME().player;
 		const momo: Momo = GAME().momo;
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 			girlMorph  : momo.Ascended() ? "morph" : "girl",
 			dragonette : momo.Ascended() ? "dragon" : "dragonette",

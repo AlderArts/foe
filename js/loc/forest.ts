@@ -22,7 +22,7 @@ import { QuestItems } from "../items/quest";
 import { Link } from "../link";
 import { ILocForest } from "../location";
 import { Party } from "../party";
-import { Text } from "../text";
+import { IParse, Text } from "../text";
 import { Season } from "../time";
 import { Burrows } from "./burrows";
 import { BurrowsFlags } from "./burrows-flags";
@@ -121,7 +121,7 @@ ForestLoc.Outskirts.enc.AddEnc(() => {
 ForestLoc.Outskirts.enc.AddEnc(() => {
 	return () => {
 		const party: Party = GAME().party;
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 		Text.Clear();
@@ -139,7 +139,7 @@ ForestLoc.Outskirts.enc.AddEnc(() => {
 ForestLoc.Outskirts.enc.AddEnc(() => {
 	return () => {
 		const party: Party = GAME().party;
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 		Text.Clear();
@@ -198,7 +198,7 @@ ForestLoc.Outskirts.enc.AddEnc(() => {
 	return () => {
 		const burrows: Burrows = GAME().burrows;
 		const party: Party = GAME().party;
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 

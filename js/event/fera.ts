@@ -15,7 +15,7 @@ import { Gui } from "../gui";
 import { IStorage } from "../istorage";
 import { IChoice } from "../link";
 import { ILocation } from "../location";
-import { Text } from "../text";
+import { IParse, Text } from "../text";
 import { TF } from "../tf";
 import { ITime, Time } from "../time";
 import { Player } from "./player";
@@ -135,7 +135,7 @@ export namespace FeraScenes {
 		cat.score[Race.Feline.id] = 1;
 		const catScore = cat.Compare(new RaceScore(player.body));
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 			sirmiss    : player.body.Gender() === Gender.male ? "sir" : "miss",
 		};
@@ -392,7 +392,7 @@ export namespace FeraScenes {
 		const player: Player = GAME().player;
 		const fera: Fera = GAME().fera;
 
-		let parse: any = {
+		let parse: IParse = {
 			against        : (player.FirstBreastRow().size.Get() > 3) ? "between" : "against",
 		};
 		parse = player.ParserTags(parse);
@@ -488,7 +488,7 @@ export namespace FeraScenes {
 
 		let p1Cock = player.BiggestCock(cocksInVag);
 
-		let parse: any = {
+		let parse: IParse = {
 			playername     : player.name,
 			cockDesc2() { return player.AllCocks()[1].Short(); },
 		};

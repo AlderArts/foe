@@ -16,7 +16,7 @@ import { Item } from "../item";
 import { ArmorItems } from "../items/armor";
 import { WeaponsItems } from "../items/weapons";
 import { Shop } from "../shop";
-import { Text } from "../text";
+import { IParse, Text } from "../text";
 import { ITime, Time } from "../time";
 import { CassidyFlags } from "./cassidy-flags";
 import { GlobalScenes } from "./global";
@@ -253,7 +253,7 @@ export class CassidySpar extends Entity {
 	}
 
 	public PhysDmgHP(encounter: any, caster: Entity, val: number) {
-		const parse: any = {};
+		const parse: IParse = {};
 
 		if (this.reflexFlag) {
 			Text.Add("Before your attack connects, Cassidy dances out of the way so quickly that the salamander smith is practically a blur. Your wasted attack goes wide, and she gives you one of her trademark shit-eating grins.", parse);
@@ -276,7 +276,7 @@ const CreateShop = (cassidy: Cassidy) => {
 	return new Shop({
 		buyPromptFunc(item: Item, cost: number, bought: boolean) {
 			const coin = Text.NumToText(cost);
-			let parse: any = {
+			let parse: IParse = {
 				item : item.sDesc(),
 				coin,
 			};
@@ -308,7 +308,7 @@ const CreateShop = (cassidy: Cassidy) => {
 			}
 		},
 		buySuccessFunc(item: Item, cost: number, num: number) {
-			let parse: any = {
+			let parse: IParse = {
 				num : num > 1 ? "them" : "it",
 				her : num > 1 ? "them" : "her",
 				y   : num > 1 ? "ies" : "y",
@@ -332,7 +332,7 @@ const CreateShop = (cassidy: Cassidy) => {
 			cassidy.relation.IncreaseStat(30, 2);
 		},
 		buyFailFunc(item: Item, cost: number, bought: boolean) {
-			let parse: any = {
+			let parse: IParse = {
 
 			};
 			parse = cassidy.ParserPronouns(parse);
@@ -349,7 +349,7 @@ const CreateShop = (cassidy: Cassidy) => {
 		},
 		sellPromptFunc(item: Item, cost: number, sold: boolean) {
 			const coin = Text.NumToText(cost);
-			let parse: any = {
+			let parse: IParse = {
 				item : item.sDesc(),
 				coin,
 			};
@@ -377,7 +377,7 @@ const CreateShop = (cassidy: Cassidy) => {
 			}
 		},
 		sellSuccessFunc(item: Item, cost: number, num: number) {
-			let parse: any = {
+			let parse: IParse = {
 
 			};
 			parse = cassidy.ParserPronouns(parse);
@@ -389,7 +389,7 @@ const CreateShop = (cassidy: Cassidy) => {
 			Text.NL();
 		},
 		sellFailFunc(item: Item, cost: number, sold: boolean) {
-			let parse: any = {
+			let parse: IParse = {
 				item : item.sDesc(),
 			};
 			parse = cassidy.ParserPronouns(parse);

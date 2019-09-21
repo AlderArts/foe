@@ -12,7 +12,7 @@ import { IngredientItems } from "../items/ingredients";
 import { IChoice } from "../link";
 import { Party } from "../party";
 import { Shop } from "../shop";
-import { Text } from "../text";
+import { IParse, Text } from "../text";
 import { ITime } from "../time";
 import { OasisFlags } from "./oasis-flags";
 
@@ -107,7 +107,7 @@ export namespace OasisScenes {
 
 	export function CaravanShop(back: CallableFunction) {
 		const oasis: Oasis = GAME().oasis;
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -159,7 +159,7 @@ export namespace OasisScenes {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const oasis: Oasis = GAME().oasis;
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 		parse = player.ParserTags(parse);

@@ -22,7 +22,7 @@ import { WeaponsItems } from "../items/weapons";
 import { JobDesc, Jobs } from "../job";
 import { RigardLoc } from "../loc/rigard/rigard-scenes";
 import { ILocation } from "../location";
-import { Text } from "../text";
+import { IParse, Text } from "../text";
 import { TerryFlags } from "./terry-flags";
 import { TerryScenes } from "./terry-scenes";
 
@@ -307,7 +307,7 @@ export class Terry extends Entity {
 	public Interact(switchSpot: boolean) {
 		const terry: Terry = GAME().terry;
 
-		const parse: any = {
+		const parse: IParse = {
 			foxvixen : terry.mfPronoun("fox", "vixen"),
 			HeShe   : terry.HeShe(),
 			heshe   : terry.heshe(),
@@ -391,7 +391,7 @@ export class Terry extends Entity {
 		const terry: Terry = GAME().terry;
 
 		if (item.isTF) {
-			let parse: any = {
+			let parse: IParse = {
 				item : item.sDesc(),
 				aItem : item.lDesc(),
 				foxvixen : terry.mfPronoun("fox", "vixen"),

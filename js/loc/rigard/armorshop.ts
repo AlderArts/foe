@@ -16,7 +16,7 @@ import { ArmorItems } from "../../items/armor";
 import { IChoice, Link } from "../../link";
 import { Party } from "../../party";
 import { Shop } from "../../shop";
-import { Text } from "../../text";
+import { IParse, Text } from "../../text";
 
 const ArmorShopLoc = new Event("Twopenny's");
 
@@ -24,7 +24,7 @@ let aShop: any;
 let aSpecialShop: any;
 
 ArmorShopLoc.description = () => {
-	const parse: any = {};
+	const parse: IParse = {};
 
 	const scenes = new EncounterTable();
 	scenes.AddEnc(() => { parse.sign = "NO REFUNDS"; });
@@ -101,7 +101,7 @@ export namespace ArmorShopScenes {
 	export function CreateShop() {
 		const buySuccessFunc = (item: Item, cost: number, num: number) => {
 			const player: Player = GAME().player;
-			const parse: any = {
+			const parse: IParse = {
 				sirmadam : player.mfTrue("sir", "madam"),
 			};
 
@@ -117,7 +117,7 @@ export namespace ArmorShopScenes {
 		};
 		const buyFailFunc = (item: Item, cost: number, bought: boolean) => {
 			const player: Player = GAME().player;
-			const parse: any = {
+			const parse: IParse = {
 				sirmadam : player.mfTrue("sir", "madam"),
 			};
 
@@ -139,7 +139,7 @@ export namespace ArmorShopScenes {
 			buyPromptFunc(item: Item, cost: number, bought: boolean) {
 				const player: Player = GAME().player;
 				const coin = Text.NumToText(cost);
-				const parse: any = {
+				const parse: IParse = {
 					sirmadam : player.mfTrue("sir", "madam"),
 					item : item.sDesc(),
 					coin,
@@ -161,7 +161,7 @@ export namespace ArmorShopScenes {
 			sellPromptFunc(item: Item, cost: number, sold: boolean) {
 				const player: Player = GAME().player;
 				const coin = Text.NumToText(cost);
-				const parse: any = {
+				const parse: IParse = {
 					sirmadam : player.mfTrue("sir", "madam"),
 					item : item.sDesc(),
 					coin,
@@ -196,7 +196,7 @@ export namespace ArmorShopScenes {
 			},
 			sellSuccessFunc(item: Item, cost: number, num: number) {
 				const player: Player = GAME().player;
-				const parse: any = {
+				const parse: IParse = {
 					sirmadam : player.mfTrue("sir", "madam"),
 				};
 
@@ -218,7 +218,7 @@ export namespace ArmorShopScenes {
 			},
 			sellFailFunc(item: Item, cost: number, sold: boolean) {
 				const player: Player = GAME().player;
-				const parse: any = {
+				const parse: IParse = {
 					sirmadam : player.mfTrue("sir", "madam"),
 					item : item.sDesc(),
 				};
@@ -243,7 +243,7 @@ export namespace ArmorShopScenes {
 			buyPromptFunc(item: Item, cost: number) {
 				const player: Player = GAME().player;
 				const coin = Text.NumToText(cost);
-				const parse: any = {
+				const parse: IParse = {
 					sirmadam : player.mfTrue("sir", "madam"),
 					item : item.sDesc(),
 					coin,
@@ -283,7 +283,7 @@ export namespace ArmorShopScenes {
 		const rigard = GAME().rigard;
 		const terry: Terry = GAME().terry;
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -342,7 +342,7 @@ export namespace ArmorShopScenes {
 	export function RegularEntry(newStock: boolean) {
 		const rigard = GAME().rigard;
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -381,7 +381,7 @@ export namespace ArmorShopScenes {
 		const player: Player = GAME().player;
 		const rigard = GAME().rigard;
 
-		const parse: any = {
+		const parse: IParse = {
 			sirmadam : player.mfFem("sir", "madam"),
 			heshe : player.mfFem("he", "she"),
 		};
@@ -471,7 +471,7 @@ export namespace ArmorShopScenes {
 		const player: Player = GAME().player;
 		const rigard = GAME().rigard;
 
-		const parse: any = {
+		const parse: IParse = {
 			sirmadam : player.mfFem("sir", "madam"),
 		};
 

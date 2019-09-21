@@ -16,7 +16,7 @@ import { IChoice } from "../link";
 import { RigardFlags } from "../loc/rigard/rigard-flags";
 import { ILocation } from "../location";
 import { Party } from "../party";
-import { Text } from "../text";
+import { IParse, Text } from "../text";
 import { Roa } from "./brothel/roa";
 import { Gwendy } from "./farm/gwendy";
 import { GlobalScenes } from "./global";
@@ -105,7 +105,7 @@ export namespace Room69Scenes {
 	export function Discovering69() {
 		const player: Player = GAME().player;
 
-		const parse: any = {
+		const parse: IParse = {
 		};
 
 		Text.Clear();
@@ -139,7 +139,7 @@ export namespace Room69Scenes {
 		const room69: Room69 = GAME().room69;
 		const player: Player = GAME().player;
 
-		const parse: any = {
+		const parse: IParse = {
 		};
 
 		// [Sentience][What now][Leave]
@@ -213,7 +213,7 @@ export namespace Room69Scenes {
 		const player: Player = GAME().player;
 		const world = WORLD();
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -346,7 +346,7 @@ export namespace Room69Scenes {
 	export function Discovering69OrvinRant() {
 		const party: Party = GAME().party;
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 		parse.IkName = !RigardFlags.LB.KnowsOrvin() ? "The innkeeper" : "Orvin";
@@ -378,7 +378,7 @@ export namespace Room69Scenes {
 		const party: Party = GAME().party;
 		const world = WORLD();
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 		parse.IkName = !RigardFlags.LB.KnowsOrvin() ? "The innkeeper" : "Orvin";
@@ -438,7 +438,7 @@ export namespace Room69Scenes {
 		const roa: Roa = GAME().roa;
 		const world = WORLD();
 
-		const parse: any = {
+		const parse: IParse = {
 			playername() { return player.name; },
 			topArmorDesc() { return player.ArmorDesc(); },
 			topitthem() { return player.Armor() ? "it" : "them"; },
@@ -773,7 +773,7 @@ export namespace Room69Scenes {
 		const room69: Room69 = GAME().room69;
 		const player: Player = GAME().player;
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 		Text.Clear();
@@ -857,7 +857,7 @@ export namespace Room69Scenes {
 		const room69: Room69 = GAME().room69;
 		const player: Player = GAME().player;
 
-		const parse: any = {
+		const parse: IParse = {
 			hisher : player.mfTrue("his", "her"),
 		};
 
@@ -957,7 +957,7 @@ export namespace Room69Scenes {
 
 	// TODO: PLACEHOLDER
 	export function Normal69() {
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 

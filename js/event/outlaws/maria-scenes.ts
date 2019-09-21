@@ -8,7 +8,7 @@ import { Gui } from "../../gui";
 import { Jobs } from "../../job";
 import { IChoice } from "../../link";
 import { Party } from "../../party";
-import { Text } from "../../text";
+import { IParse, Text } from "../../text";
 import { Gwendy } from "../farm/gwendy";
 import { GwendyFlags } from "../farm/gwendy-flags";
 import { Player } from "../player";
@@ -35,7 +35,7 @@ export namespace MariaScenes {
             !(maria.flags.DD & MariaFlags.DeadDrops.Talked)) {
             DeadDropScenes.Initiation();
         } else {
-            const parse: any = {
+            const parse: IParse = {
                 playername : player.name,
             };
 
@@ -118,7 +118,7 @@ export namespace MariaScenes {
         const maria: Maria = GAME().maria;
         const cveta: Cveta = GAME().cveta;
 
-        const parse: any = {
+        const parse: IParse = {
 
         };
 
@@ -190,7 +190,7 @@ export namespace MariaScenes {
         const party: Party = GAME().party;
         const maria: Maria = GAME().maria;
 
-        let parse: any = {
+        let parse: IParse = {
 
         };
         parse.comp = party.Num() === 2 ? party.Get(1).name : "your companions";
@@ -326,7 +326,7 @@ export namespace MariaScenes {
         const maria: Maria = GAME().maria;
         const gwendy: Gwendy = GAME().gwendy;
 
-        const parse: any = {
+        const parse: IParse = {
             playername : player.name,
         };
 
@@ -623,7 +623,7 @@ export namespace MariaScenes {
 
         Text.Clear();
 
-        let parse: any = {
+        let parse: IParse = {
 
         };
         parse = player.ParserTags(parse);
@@ -689,7 +689,7 @@ export namespace MariaScenes {
         const party: Party = GAME().party;
         const maria: Maria = GAME().maria;
 
-        let parse: any = {
+        let parse: IParse = {
 
         };
         const p1 = party.Get(1);
@@ -801,7 +801,7 @@ export namespace MariaScenes {
         const player: Player = GAME().player;
         const maria: Maria = GAME().maria;
 
-        let parse: any = {
+        let parse: IParse = {
 
         };
         parse = player.ParserTags(parse);
@@ -909,7 +909,7 @@ export namespace MariaScenes {
     export function ForestAftermath() {
         const player: Player = GAME().player;
 
-        let parse: any = {
+        let parse: IParse = {
 
         };
         parse = player.ParserTags(parse);
@@ -933,7 +933,7 @@ export namespace MariaScenes {
     export function ForestFollow() {
         const maria: Maria = GAME().maria;
 
-        const parse: any = {};
+        const parse: IParse = {};
 
         Text.Clear();
         Text.Add("You decide the best course of action is to follow Maria.", parse);
@@ -995,7 +995,7 @@ export namespace MariaScenes {
         const party: Party = GAME().party;
         const maria: Maria = GAME().maria;
 
-        const parse: any = {
+        const parse: IParse = {
             num        : Text.NumToText(party.Num() + 2),
             playername : player.name,
             HeShe      : player.mfTrue("He", "She"),

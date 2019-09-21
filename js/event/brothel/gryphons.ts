@@ -14,7 +14,7 @@ import { Gui } from "../../gui";
 import { IStorage } from "../../istorage";
 import { IChoice } from "../../link";
 import { PregnancyHandler } from "../../pregnancy";
-import { Text } from "../../text";
+import { IParse, Text } from "../../text";
 import { TF } from "../../tf";
 import { Player } from "../player";
 import { LucilleFlags } from "./lucille-flags";
@@ -68,7 +68,7 @@ export namespace GryphonsScenes {
 		const gryphons = GAME().gryphons;
 		const lucille = GAME().lucille;
 
-		const parse: any = {
+		const parse: IParse = {
 			armor : player.ArmorDesc(),
 			skin : player.SkinDesc(),
 		};
@@ -197,7 +197,7 @@ export namespace GryphonsScenes {
 	export function Outro(gender: Gender, preg?: number) {
 		const player: Player = GAME().player;
 		const gryphons = GAME().gryphons;
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 
@@ -560,7 +560,7 @@ export namespace GryphonsScenes {
 
 	// Chapter one - World’s Edge
 	export function WorldsEdge() {
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -689,7 +689,7 @@ export namespace GryphonsScenes {
 	}
 
 	export function WorldsEdgeCaught() {
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -792,7 +792,7 @@ export namespace GryphonsScenes {
 	}
 
 	export function WorldsEdgeQuestions(opts: any) {
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -850,7 +850,7 @@ export namespace GryphonsScenes {
 	}
 
 	export function WorldsEdgeSexytimes() {
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -957,7 +957,7 @@ export namespace GryphonsScenes {
 
 	// Chapter two - Pasts
 	export function Pasts() {
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -1083,7 +1083,7 @@ export namespace GryphonsScenes {
 	}
 
 	export function PastsWashed() {
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -1252,7 +1252,7 @@ export namespace GryphonsScenes {
 	}
 
 	export function PastsRemembrance() {
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -1354,7 +1354,7 @@ export namespace GryphonsScenes {
 	}
 
 	export function PastsSexytimes(preg: number) {
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -1484,7 +1484,7 @@ export namespace GryphonsScenes {
 	}
 
 	export function PastsSexytimes2(preg: number) {
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -1547,7 +1547,7 @@ export namespace GryphonsScenes {
 	}
 
 	export function Building() {
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -1819,7 +1819,7 @@ export namespace GryphonsScenes {
 
 	export function NewLife() {
 		const player: Player = GAME().player;
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -2146,7 +2146,7 @@ export namespace GryphonsScenes {
 	}
 
 	export function NewLifeHugEnding() {
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 

@@ -24,7 +24,7 @@ import { IChoice, Link } from "../../link";
 import { ILocRigardInn } from "../../location";
 import { Party } from "../../party";
 import { Status } from "../../statuseffect";
-import { Text } from "../../text";
+import { IParse, Text } from "../../text";
 import { Season, Time } from "../../time";
 import { RigardFlags } from "./rigard-flags";
 
@@ -140,7 +140,7 @@ InnLoc.Common.endDescription = () => {
 
 // TODO: Companion reactions?
 InnLoc.Common.DrunkHandler = () => {
-	const parse: any = {};
+	const parse: IParse = {};
 	const busy = RigardFlags.LB.Busy();
 	parse.busy = busy === RigardFlags.LB.BusyState.busy ? "few places" : "spot";
 	Text.Clear();
@@ -192,7 +192,7 @@ InnLoc.Common.onEntry = (preventClear: boolean, oldLocation: any) => {
 	Text.Add("The room as a whole is pristine, kept perfectly clean despite the daily spills of drink and dropped food that are an inevitable occurrence in such a busy bar.");
 
 	if (first) {
-		const parse: any = {
+		const parse: IParse = {
 			sir : player.mfFem("sir", "ma’am"),
 		};
 		Text.NL();
@@ -251,7 +251,7 @@ export namespace LBScenes {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 
-		const parse: any = {
+		const parse: IParse = {
 			sirmadam : player.mfFem("sir", "madam"),
 			dname : rigard.LB.Efri === 0 ? "the girl" : "Efri",
 		};
@@ -356,7 +356,7 @@ export namespace LBScenes {
 	export function FoodGet() {
 		const party: Party = GAME().party;
 
-		const parse: any = {};
+		const parse: IParse = {};
 		if (party.Two()) {
 			const p1 = party.Get(1);
 			parse.p1name = p1.name;
@@ -426,11 +426,12 @@ export namespace LBScenes {
 			Text.Add(", and [p1name] makes an order for [p1himher]self", parse);
 		} else if (!party.Alone()) {
 			Text.Add(", and your companions make orders for themselves", parse);
-	}
+		}
 		Text.Add(". You are relieved to find that you do not have to wait long, as the food arrives after only a few minutes. The dish smells - and tastes - delicious, and you happily indulge in the meal,", parse);
 
 		if (!party.Alone()) {
-			Text.Add(" making only light conversation with [comp],", {comp() { return party.Two() ? parse.p1name : "your companions"; }});
+			const comp = party.Two() ? parse.p1name : "your companions";
+			Text.Add(" making only light conversation with [comp],", {comp});
 		}
 
 		Text.Add(" delighted by the high quality.", parse);
@@ -443,7 +444,7 @@ export namespace LBScenes {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 
-		const parse: any = {
+		const parse: IParse = {
 			sirmadam : player.mfFem("sir", "madam"),
 			roomPrice : Text.NumToText(RigardFlags.LB.RoomCost()),
 			IkName   : !RigardFlags.LB.KnowsOrvin() ? "The innkeeper" : "Orvin",
@@ -534,7 +535,7 @@ export namespace LBScenes {
 								}
 								rigard.LB.RoomNr = roomNumber;
 
-								parse.randomnumber = roomNumber;
+								parse.randomnumber = roomNumber.toString();
 
 								Text.Add("You agree to the price, and hand over [roomPrice] coins. ", parse);
 								if (party.NumTotal() > 4) {
@@ -622,7 +623,7 @@ export namespace LBScenes {
 		const lei: Lei = GAME().lei;
 		const party: Party = GAME().party;
 
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 
@@ -997,7 +998,7 @@ export namespace LBScenes {
 	}
 
 	export function EfriPrompt() {
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -1044,7 +1045,7 @@ export namespace LBScenes {
 		const kiakai: Kiakai = GAME().kiakai;
 		const party: Party = GAME().party;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 			IkName   : !RigardFlags.LB.KnowsOrvin() ? "The innkeeper" : "Orvin",
 			ikname   : !RigardFlags.LB.KnowsOrvin() ? "the innkeeper" : "Orvin",
@@ -1533,7 +1534,7 @@ export namespace LBScenes {
 		const miranda: Miranda = GAME().miranda;
 		const party: Party = GAME().party;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -1704,7 +1705,7 @@ export namespace LBScenes {
 		const rigard = GAME().rigard;
 		const room69: Room69 = GAME().room69;
 
-		const parse: any = {
+		const parse: IParse = {
 			roomNr : rigard.LB.RoomNr,
 		};
 		Text.NL();
@@ -1764,7 +1765,7 @@ InnLoc.Room.events.push(new Link(
 		const party: Party = GAME().party;
 		const companion = party.Get(rigard.LB.RoomComp);
 		if (companion) {
-			const parse: any = {
+			const parse: IParse = {
 				name   : companion.name,
 				hisher : companion.hisher(),
 			};
@@ -1785,7 +1786,7 @@ InnLoc.Room.SleepFunc = () => {
 	const player: Player = GAME().player;
 	const party: Party = GAME().party;
 	const comp = party.Get(rigard.LB.RoomComp);
-	const parse: any = {
+	const parse: IParse = {
 
 	};
 	if (comp) {
@@ -1857,7 +1858,7 @@ InnLoc.Common.events.push(new Link(
 		return party.coin >= RigardFlags.LB.MealCost();
 	},
 	() => {
-		const parse: any = {
+		const parse: IParse = {
 			mealcost : RigardFlags.LB.MealCost(),
 		};
 		const busy = RigardFlags.LB.Busy();
@@ -1884,7 +1885,7 @@ InnLoc.Common.events.push(new Link(
 	true, true,
 	() => {
 		const rigard = GAME().rigard;
-		const parse: any = {};
+		const parse: IParse = {};
 		const busy = RigardFlags.LB.Busy();
 
 		if (RigardFlags.LB.OrvinIsInnkeeper()) {

@@ -10,7 +10,7 @@ import { CassidyScenes } from "../../event/cassidy-scenes";
 import { GAME, MoveToLocation, WORLD, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
 import { Link } from "../../link";
-import { Text } from "../../text";
+import { IParse, Text } from "../../text";
 
 const WeaponShopLoc = new Event("The Pale Flame");
 
@@ -61,7 +61,7 @@ export namespace WeaponShopScenes {
 
 	export function StreetDesc() {
 		const cassidy: Cassidy = GAME().cassidy;
-		const parse: any = {};
+		const parse: IParse = {};
 
 		const first = cassidy.flags.Met < CassidyFlags.Met.Met;
 		const open  = WeaponShopScenes.IsOpen();

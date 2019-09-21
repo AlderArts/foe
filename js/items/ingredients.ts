@@ -1,7 +1,7 @@
 import { Entity } from "../entity";
 import { GAME } from "../GAME";
 import { Item, ItemType } from "../item";
-import { Text } from "../text";
+import { IParse, Text } from "../text";
 
 const horseHair = new Item("equin1", "Horse hair", ItemType.Ingredient);
 horseHair.price = 1;
@@ -72,7 +72,7 @@ lizardEgg.sDesc = () => "lizard egg";
 lizardEgg.Long = () => "An unfertilized lizard egg. Good for a snack.";
 lizardEgg.Use = (target: Entity) => {
 	target.AddHPFraction(0.02);
-	const parse: any = { name: target.NameDesc(), s: target === GAME().player ? "" : "s" };
+	const parse: IParse = { name: target.NameDesc(), s: target === GAME().player ? "" : "s" };
 	Text.Add("[name] eat[s] a lizard egg. It is slightly invigorating.", parse);
 	Text.NL();
 	Text.Flush();
@@ -95,7 +95,7 @@ goatMilk.sDesc = () => "goat milk";
 goatMilk.Long = () => "A bottle of goat milk.";
 goatMilk.Use = (target: Entity) => {
 	target.AddHPFraction(0.02);
-	const parse: any = { name: target.NameDesc(), s: target === GAME().player ? "" : "s" };
+	const parse: IParse = { name: target.NameDesc(), s: target === GAME().player ? "" : "s" };
 	Text.Add("[name] drink[s] a bottle of milk. It is slightly invigorating.", parse);
 	Text.NL();
 	Text.Flush();
@@ -113,7 +113,7 @@ sheepMilk.sDesc = () => "sheep milk";
 sheepMilk.Long = () => "A bottle of sheep milk.";
 sheepMilk.Use = (target: Entity) => {
 	target.AddHPFraction(0.02);
-	const parse: any = { name: target.NameDesc(), s: target === GAME().player ? "" : "s" };
+	const parse: IParse = { name: target.NameDesc(), s: target === GAME().player ? "" : "s" };
 	Text.Add("[name] drink[s] a bottle of milk. It is slightly invigorating.", parse);
 	Text.NL();
 	Text.Flush();
@@ -131,7 +131,7 @@ cowMilk.sDesc = () => "cow milk";
 cowMilk.Long = () => "A bottle of ordinary cow milk.";
 cowMilk.Use = (target: Entity) => {
 	target.AddHPFraction(0.02);
-	const parse: any = { name: target.NameDesc(), s: target === GAME().player ? "" : "s" };
+	const parse: IParse = { name: target.NameDesc(), s: target === GAME().player ? "" : "s" };
 	Text.Add("[name] drink[s] a bottle of milk. It is slightly invigorating.", parse);
 	Text.NL();
 	Text.Flush();
@@ -169,7 +169,7 @@ dogBiscuit.Short = () => "A dog biscuit";
 dogBiscuit.Long = () => "A biscuit, commonly given to dogs as a reward. It doesn't taste very good.";
 dogBiscuit.Use = (target: Entity) => {
 	target.AddHPFraction(0.02);
-	const parse: any = { name: target.NameDesc(), s: target === GAME().player ? "" : "s" };
+	const parse: IParse = { name: target.NameDesc(), s: target === GAME().player ? "" : "s" };
 	Text.Add("[name] chew[s] on a dog biscuit. It is slightly invigorating.", parse);
 	Text.NL();
 	Text.Flush();
@@ -224,7 +224,7 @@ demonSeed.Long = () => "A vial filled with demon cum.";
 demonSeed.Use = (target: Entity) => {
 	target.AddLustFraction(0.1);
 	target.RestoreCum(2);
-	const parse: any = {
+	const parse: IParse = {
 		name: target.NameDesc(),
 		s: target === GAME().player ? "" : "s",
 		hisher : target.hisher(),
@@ -242,7 +242,7 @@ hummus.Short = () => "Hummus. Looks edible";
 hummus.Long = () => "Hummus: a foodlike substance.";
 hummus.Use = (target: Entity) => {
 	target.AddHPFraction(0.03);
-	const parse: any = { name: target.NameDesc(), s: target === GAME().player ? "" : "s" };
+	const parse: IParse = { name: target.NameDesc(), s: target === GAME().player ? "" : "s" };
 	Text.Add("[name] eat[s] some hummus. It is slightly invigorating.", parse);
 	Text.NL();
 	Text.Flush();
@@ -339,7 +339,7 @@ rawHoney.Short = () => "Raw honey";
 rawHoney.Long = () => "A small jar of raw honey.";
 rawHoney.Use = (target: Entity) => {
 	target.AddHPFraction(0.02);
-	const parse: any = { name: target.NameDesc(), s: target === GAME().player ? "" : "s" };
+	const parse: IParse = { name: target.NameDesc(), s: target === GAME().player ? "" : "s" };
 	Text.Add("[name] eat[s] a small jar of sweet honey. It is slightly invigorating.", parse);
 	Text.NL();
 	Text.Flush();

@@ -12,7 +12,7 @@ import { IChoice } from "../../link";
 import { BurrowsFlags } from "../../loc/burrows-flags";
 import { MarketScenes } from "../../loc/farm-market";
 import { Party } from "../../party";
-import { Text } from "../../text";
+import { IParse, Text } from "../../text";
 import { Player } from "../player";
 import { Gwendy } from "./gwendy";
 import { GwendyFlags } from "./gwendy-flags";
@@ -23,7 +23,7 @@ export namespace GwendyScenes {
 		const gwendy: Gwendy = GAME().gwendy;
 		Text.Clear();
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -51,7 +51,7 @@ export namespace GwendyScenes {
 	}
 
 	export function LoftSexPrompt(back: any, disableSleep: boolean) {
-		const parse: any = {};
+		const parse: IParse = {};
 		const options: IChoice[] = [];
 		GwendyScenes.ChallengeSexWonPrompt(true, options, disableSleep);
 		GwendyScenes.ChallengeSexLostPrompt(true, options, disableSleep);
@@ -84,7 +84,7 @@ export namespace GwendyScenes {
 	export function BarnPrompt() {
 		Text.Clear();
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -114,7 +114,7 @@ export namespace GwendyScenes {
 	export function FieldsPrompt() {
 		Text.Clear();
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -143,7 +143,7 @@ export namespace GwendyScenes {
 	export function Talk(backfunc: any) {
 		const player: Player = GAME().player;
 		const gwendy: Gwendy = GAME().gwendy;
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -295,7 +295,7 @@ export namespace GwendyScenes {
 
 		gwendy.relation.IncreaseStat(40, 1);
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -340,7 +340,7 @@ export namespace GwendyScenes {
 		const gwendy: Gwendy = GAME().gwendy;
 		const danie = GAME().danie;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -432,7 +432,7 @@ export namespace GwendyScenes {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const gwendy: Gwendy = GAME().gwendy;
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -620,7 +620,7 @@ export namespace GwendyScenes {
 
 	export function ChallengeSex(skillcheck: number, lose: boolean) {
 		const gwendy: Gwendy = GAME().gwendy;
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -667,7 +667,7 @@ export namespace GwendyScenes {
 	export function ChallengeSexWonPrompt(hangout: boolean, options: any[], disableSleep: boolean) {
 		const player: Player = GAME().player;
 		const gwendy: Gwendy = GAME().gwendy;
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -839,7 +839,7 @@ export namespace GwendyScenes {
 	export function ChallengeSexHands(cock: boolean, hangout: boolean) {
 		const player: Player = GAME().player;
 		const gwendy: Gwendy = GAME().gwendy;
-		let parse: any = {
+		let parse: IParse = {
 			playername    : player.name,
 		};
 		parse = player.ParserTags(parse);
@@ -983,7 +983,7 @@ export namespace GwendyScenes {
 		const player: Player = GAME().player;
 		const gwendy: Gwendy = GAME().gwendy;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername     : player.name,
 		};
 		parse = player.ParserTags(parse);
@@ -1194,7 +1194,7 @@ export namespace GwendyScenes {
 		const player: Player = GAME().player;
 		const gwendy: Gwendy = GAME().gwendy;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername     : player.name,
 		};
 		parse = player.ParserTags(parse);
@@ -1339,7 +1339,7 @@ export namespace GwendyScenes {
 		const player: Player = GAME().player;
 		const gwendy: Gwendy = GAME().gwendy;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername     : player.name,
 			manWoman() { return player.mfTrue("man", "woman"); },
 		};
@@ -1494,7 +1494,7 @@ export namespace GwendyScenes {
 		const player: Player = GAME().player;
 		const gwendy: Gwendy = GAME().gwendy;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername     : player.name,
 			manWoman() { return player.mfTrue("man", "woman"); },
 		};
@@ -1699,7 +1699,7 @@ export namespace GwendyScenes {
 		const gwendy: Gwendy = GAME().gwendy;
 		const adrian = GAME().adrian;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername     : player.name,
 			manWoman() { return player.mfTrue("man", "woman"); },
 		};
@@ -1983,7 +1983,7 @@ export namespace GwendyScenes {
 
 		Text.Clear();
 
-		let parse: any = {
+		let parse: IParse = {
 			playername      : player.name,
 			phisher         : player.body.Gender() === Gender.male ? "his" : "her",
 		};

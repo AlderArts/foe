@@ -7,7 +7,7 @@ import { Item, ItemSubtype, ItemType } from "./item";
 import { Job } from "./job";
 import { IChoice } from "./link";
 import { Stat } from "./stat";
-import { Text } from "./text";
+import { IParse, Text } from "./text";
 
 const EntityMenu = {
 	InteractDefault(options: any[], switchSpot: boolean, enableEquip: any, enableStats: any, enableJob: any, enableSwitch: boolean) {
@@ -57,7 +57,7 @@ const EntityMenu = {
 		if (this.currentJob) {
 			const jd  = this.jobs[this.currentJob.name];
 			if (jd) {
-				const parse: any = {
+				const parse: IParse = {
 					job        : jd.job.Short(this),
 					lvl        : jd.level,
 					maxlvl     : jd.job.levels.length + 1,
@@ -183,7 +183,7 @@ const EntityMenu = {
 	EquipPrompt(backfunc: any) {
 		const party = GAME().party;
 		const that = this;
-		const parse: any = {
+		const parse: IParse = {
 			name    : that.NameDesc(),
 			isAre   : that.is(),
 			HeShe() { return that.HeShe(); },
@@ -330,7 +330,7 @@ const EntityMenu = {
 			return;
 		}
 
-		const parse: any = {
+		const parse: IParse = {
 			name       : this.NameDesc(),
 			has        : this.has(),
 			Possessive : this.Possessive(),

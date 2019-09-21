@@ -4,7 +4,7 @@ import { GAME, TimeStep } from "../../GAME";
 import { Gui } from "../../gui";
 import { IStorage } from "../../istorage";
 import { IChoice } from "../../link";
-import { Text } from "../../text";
+import { IParse, Text } from "../../text";
 import { Kiakai } from "../kiakai";
 import { Player } from "../player";
 import { LucilleFlags } from "./lucille-flags";
@@ -105,7 +105,7 @@ export namespace FireblossomScenes {
 		const fireblossom = GAME().fireblossom;
 		const lucille = GAME().lucille;
 
-		const parse: any = {
+		const parse: IParse = {
 			armor : player.ArmorDesc(),
 			skin  : player.SkinDesc(),
 			name  : kiakai.name,
@@ -187,7 +187,7 @@ export namespace FireblossomScenes {
 	export function Outro() {
 		const player: Player = GAME().player;
 		const fireblossom = GAME().fireblossom;
-		const parse: any = {
+		const parse: IParse = {
 			armor : player.ArmorDesc(),
 		};
 
@@ -204,7 +204,7 @@ export namespace FireblossomScenes {
 	export function S1TheJourney() {
 		const player: Player = GAME().player;
 		const fireblossom = GAME().fireblossom;
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -464,7 +464,7 @@ export namespace FireblossomScenes {
 	export function S1Draxen() {
 		const player: Player = GAME().player;
 		const fireblossom = GAME().fireblossom;
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -588,7 +588,7 @@ export namespace FireblossomScenes {
 	export function S1Rakkat() {
 		const player: Player = GAME().player;
 		const fireblossom = GAME().fireblossom;
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -781,7 +781,7 @@ export namespace FireblossomScenes {
 
 	export function S1RakkatCont() {
 		const fireblossom = GAME().fireblossom;
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -863,7 +863,7 @@ export namespace FireblossomScenes {
 
 	export function S1Grex() {
 		const fireblossom = GAME().fireblossom;
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -900,7 +900,7 @@ export namespace FireblossomScenes {
 
 	export function S1GrexEntrypoint() {
 		const fireblossom = GAME().fireblossom;
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -946,7 +946,7 @@ export namespace FireblossomScenes {
 	export function S1GrexRoom(opts: any) {
 		const player: Player = GAME().player;
 		const fireblossom = GAME().fireblossom;
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -1019,7 +1019,7 @@ export namespace FireblossomScenes {
 	export function S1GrexPens(opts: any) {
 		const player: Player = GAME().player;
 		const fireblossom = GAME().fireblossom;
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 

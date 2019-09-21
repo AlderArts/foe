@@ -7,7 +7,7 @@ import { Gui } from "../../gui";
 import { AlchemySpecial } from "../../items/alchemyspecial";
 import { IChoice } from "../../link";
 import { Party } from "../../party";
-import { Text } from "../../text";
+import { IParse, Text } from "../../text";
 import { Player } from "../player";
 import { Lagon } from "./lagon";
 import { LagonFlags } from "./lagon-flags";
@@ -18,7 +18,7 @@ export namespace LagonDScenes {
 		const party: Party = GAME().party;
 		const lagon: Lagon = GAME().lagon;
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -64,7 +64,7 @@ export namespace LagonDScenes {
 		const party: Party = GAME().party;
 		const lagon: Lagon = GAME().lagon;
 
-		const parse: any = {
+		const parse: IParse = {
 			scepter : "scepter", // TODO
 		};
 
@@ -122,7 +122,7 @@ export namespace LagonDScenes {
 		const player: Player = GAME().player;
 		const lagon: Lagon = GAME().lagon;
 
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 		parse = player.ParserTags(parse);
@@ -225,7 +225,7 @@ export namespace LagonDScenes {
 		const p1cock = player.BiggestCock(undefined, true);
 		const strapon = p1cock.isStrapon;
 
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 		parse = player.ParserTags(parse);
@@ -541,7 +541,7 @@ export namespace LagonDScenes {
 		const player: Player = GAME().player;
 		const lagon: Lagon = GAME().lagon;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 			scepter : "scepter", // TODO
 		};
@@ -564,7 +564,7 @@ export namespace LagonDScenes {
 			const dex = player.Dex();
 			const goal = 40;
 			if (GetDEBUG()) {
-				Text.Add("Dex check: [dex] (vs [goal])", {dex, goal}, "bold");
+				Text.Add(`Dex check: ${dex} (vs ${goal})`, undefined, "bold");
 				Text.NL();
 			}
 			if (dex >= goal) {
@@ -640,7 +640,7 @@ export namespace LagonDScenes {
 		const player: Player = GAME().player;
 		const lagon: Lagon = GAME().lagon;
 
-		const parse: any = {
+		const parse: IParse = {
 			manwoman : player.mfTrue("man", "woman"),
 			playername : player.name,
 		};
@@ -717,7 +717,7 @@ export namespace LagonDScenes {
 	export function ScepterSexPrompt() {
 		const player: Player = GAME().player;
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -757,7 +757,7 @@ export namespace LagonDScenes {
 
 		const p1cock = player.BiggestCock(undefined, true);
 		const strapon = p1cock.isStrapon;
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 			stuttername : player.name[0] + "-" + player.name,
 		};
@@ -1274,7 +1274,7 @@ export namespace LagonDScenes {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 		};
 		parse = player.ParserTags(parse);
@@ -1449,7 +1449,7 @@ export namespace LagonDScenes {
 		const p1cock = player.BiggestCock(undefined, true);
 		const strapon = p1cock.isStrapon;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 		};
 		parse = player.ParserTags(parse);
@@ -1627,7 +1627,7 @@ export namespace LagonDScenes {
 		const p1cock = player.BiggestCock(undefined, true);
 		const strapon = p1cock.isStrapon;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 		};
 		parse = player.ParserTags(parse);
@@ -1931,7 +1931,7 @@ export namespace LagonDScenes {
 	export function PunishmentVena() {
 		const player: Player = GAME().player;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -2130,7 +2130,7 @@ export namespace LagonDScenes {
 	export function PunishmentVenaCont() {
 		const player: Player = GAME().player;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 

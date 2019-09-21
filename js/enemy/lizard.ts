@@ -28,7 +28,7 @@ import { IngredientItems } from "../items/ingredients";
 import { IChoice } from "../link";
 import { Party } from "../party";
 import { PregnancyHandler } from "../pregnancy";
-import { Text } from "../text";
+import { IParse, Text } from "../text";
 import { TF } from "../tf";
 
 export class Lizard extends Entity {
@@ -197,7 +197,7 @@ export namespace LizardsScenes {
 		*/
 
 		enc.onEncounter = () => {
-			let parse: any = {
+			let parse: IParse = {
 				numQ     : Text.Quantify(enemy.Num()),
 				num      : Text.NumToText(enemy.Num()),
 			};
@@ -253,7 +253,7 @@ export namespace LizardsScenes {
 		Gui.Callstack.push(() => {
 			Text.Clear();
 
-			const parse: any = {
+			const parse: IParse = {
 				two : third ? " two" : "",
 			};
 			let scene: any;
@@ -317,7 +317,7 @@ export namespace LizardsScenes {
 	export function WinMale(enc: any) {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		let parse: any = {
+		let parse: IParse = {
 			p1name() { return party.members[1].NameDesc(); },
 			m1Name() { return enc.male.NameDesc(); },
 			m1name() { return enc.male.nameDesc(); },
@@ -378,7 +378,7 @@ export namespace LizardsScenes {
 	export function WinFemale(enc: any) {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		let parse: any = {
+		let parse: IParse = {
 			p1name() { return party.members[1].NameDesc(); },
 			m1Name() { return enc.female.NameDesc(); },
 			m1name() { return enc.female.nameDesc(); },
@@ -455,7 +455,7 @@ export namespace LizardsScenes {
 		const p1cock = player.BiggestCock(undefined, true);
 		const realCock = p1cock.isStrapon === false;
 
-		let parse: any = {
+		let parse: IParse = {
 		};
 		parse = player.ParserTags(parse);
 
@@ -563,7 +563,7 @@ export namespace LizardsScenes {
 		const party: Party = GAME().party;
 		const enemy: Lizard = enc.female;
 
-		let parse: any = {
+		let parse: IParse = {
 			p1name() { return party.members[1].NameDesc(); },
 			m1Name() { return enemy.NameDesc(); },
 			m1name() { return enemy.nameDesc(); },
@@ -765,7 +765,7 @@ export namespace LizardsScenes {
 	export function WinClaimAss(enc: any, enemy: Lizard) {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		let parse: any = {
+		let parse: IParse = {
 			p1name() { return party.members[1].NameDesc(); },
 			m1Name() { return enemy.NameDesc(); },
 			m1name() { return enemy.nameDesc(); },
@@ -889,7 +889,7 @@ export namespace LizardsScenes {
 	export function WinBlowjob(enc: any, enemy: Lizard) {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		let parse: any = {
+		let parse: IParse = {
 			p1name() { return party.members[1].NameDesc(); },
 			m1cocks() { return enemy.MultiCockDesc(); },
 			m1Name() { return enemy.NameDesc(); },
@@ -961,7 +961,7 @@ export namespace LizardsScenes {
 		const party: Party = GAME().party;
 		const enemy: Lizard = enc.male;
 
-		let parse: any = {
+		let parse: IParse = {
 			p1name() { return party.members[1].NameDesc(); },
 			m1cock() { return enemy.FirstCock().Short(); },
 			m1cocks() { return enemy.MultiCockDesc(); },
@@ -1393,7 +1393,7 @@ export namespace LizardsScenes {
 		const party: Party = GAME().party;
 		const enemy: Lizard = enc.male;
 
-		let parse: any = {
+		let parse: IParse = {
 			p1name() { return party.members[1].NameDesc(); },
 			m1cock() { return enemy.FirstCock().Short(); },
 			m1cocks() { return enemy.MultiCockDesc(); },
@@ -1533,7 +1533,7 @@ export namespace LizardsScenes {
 		const party: Party = GAME().party;
 		const enemy: Lizard = enc.male;
 
-		let parse: any = {
+		let parse: IParse = {
 			p1name() { return party.members[1].NameDesc(); },
 			m1cock() { return enemy.FirstCock().Short(); },
 			m1cocks() { return enemy.MultiCockDesc(); },
@@ -1586,7 +1586,7 @@ export namespace LizardsScenes {
 
 		const enc = this;
 
-		let parse: any = {
+		let parse: IParse = {
 			m1Name() { return enc.male.NameDesc(); },
 			m1hisher() { return enc.male.hisher(); },
 			m1HeShe() { return enc.male.HeShe(); },
@@ -1634,7 +1634,7 @@ export namespace LizardsScenes {
 		const member1 = party.members[1];
 		const member2 = party.members[2];
 
-		let parse: any = {
+		let parse: IParse = {
 			m1name() { return enc.male.nameDesc(); },
 			m1Name() { return enc.male.NameDesc(); },
 			m1race() { return enc.male.body.RaceStr(); },
@@ -1750,7 +1750,7 @@ export namespace LizardsScenes {
 
 		const member1 = party.members[1];
 
-		let parse: any = {
+		let parse: IParse = {
 			m1Name() { return enc.male.NameDesc(); },
 			m1name() { return enc.male.nameDesc(); },
 			m2name() { return enc.female.nameDesc(); },
@@ -1947,7 +1947,7 @@ export namespace LizardsScenes {
 
 		const member1 = party.members[1];
 
-		let parse: any = {
+		let parse: IParse = {
 			MalesHerms : player.FirstVag() ? "Herms" : "Males",
 			playerRace() { return player.body.RaceStr(); },
 			m1Name() { return enc.male.NameDesc(); },
@@ -2172,9 +2172,13 @@ export namespace LizardsScenes {
 					Text.NL();
 					Text.Add("He holds you there as you writhe, trying to pull away. <i>“Uh-uh. I won, you're <b>mine</b>, and <b>I</b> say when you stop cumming,”</i> he growls. You can only whimper as he works your body to exhaustion...", parse);
 					Text.NL();
-					parse.climaxNr = Math.floor(player.stamina.Get() / 5);
-					if (parse.climaxNr < 4) { parse.climaxNr = 4; }
-					if (parse.climaxNr > 21) { parse.climaxNr = 21; }
+					let climaxNr = Math.floor(player.stamina.Get() / 5);
+					if (climaxNr < 4) {
+						climaxNr = 4;
+					} else if (climaxNr > 21) {
+						climaxNr = 21;
+					}
+					parse.climaxNr = climaxNr.toString();
 					Text.Add("After your [climaxNr]th climax, you find yourself growing faint... and black out, still with [m1name] milking your [cock], even though you're only shooting blanks now...", parse);
 					Text.Flush();
 					Gui.NextPrompt();
@@ -2231,7 +2235,7 @@ export namespace LizardsScenes {
 		const member1: Entity = party.members[1];
 		const lizard: Lizard = enc.female;
 
-		let parse: any = {
+		let parse: IParse = {
 			playerName   : player.name,
 			race() { return player.body.RaceStr(); },
 			boygirl() { return player.body.femininity.Get() > 0 ? "girl" : "boy"; },

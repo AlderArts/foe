@@ -16,7 +16,7 @@ import { IngredientItems } from "../items/ingredients";
 import { WeaponsItems } from "../items/weapons";
 import { Party } from "../party";
 import { StatusEffect } from "../statuseffect";
-import { Text } from "../text";
+import { IParse, Text } from "../text";
 import { BossEntity } from "./boss";
 
 export class Corishev extends BossEntity {
@@ -79,7 +79,7 @@ export class Corishev extends BossEntity {
 	public Act(encounter: ICombatEncounter, activeChar: ICombatOrder) {
 		const party: Party = GAME().party;
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 

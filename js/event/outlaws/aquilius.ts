@@ -14,7 +14,7 @@ import { Jobs } from "../../job";
 import { IChoice } from "../../link";
 import { ILocation } from "../../location";
 import { Party } from "../../party";
-import { Text } from "../../text";
+import { IParse, Text } from "../../text";
 import { ITime, Time } from "../../time";
 import { AscheTasksScenes } from "../asche-tasks";
 import { GlobalScenes } from "../global";
@@ -137,7 +137,7 @@ export namespace AquiliusScenes {
 		const aquilius: Aquilius = GAME().aquilius;
 		const kiakai: Kiakai = GAME().kiakai;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -196,7 +196,7 @@ export namespace AquiliusScenes {
 		const aquilius: Aquilius = GAME().aquilius;
 		const outlaws = GAME().outlaws;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -339,7 +339,7 @@ export namespace AquiliusScenes {
 	export function Prompt() {
 		const aquilius: Aquilius = GAME().aquilius;
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -411,7 +411,7 @@ export namespace AquiliusScenes {
 	export function TalkPrompt() {
 		const aquilius: Aquilius = GAME().aquilius;
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -468,7 +468,7 @@ export namespace AquiliusScenes {
 		const party: Party = GAME().party;
 		const kiakai: Kiakai = GAME().kiakai;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 			boygirl : kiakai.mfTrue("boy", "girl"),
 			manwoman : player.mfTrue("man", "woman"),
@@ -604,7 +604,7 @@ export namespace AquiliusScenes {
 	export function TalkGrind() {
 		const player: Player = GAME().player;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -686,7 +686,7 @@ export namespace AquiliusScenes {
 	export function TalkWarPrompt() {
 		const player: Player = GAME().player;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -791,7 +791,7 @@ export namespace AquiliusScenes {
 		const player: Player = GAME().player;
 		const aquilius: Aquilius = GAME().aquilius;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -881,7 +881,7 @@ export namespace AquiliusScenes {
 	}
 
 	export function Appearance() {
-		const parse: any = {};
+		const parse: IParse = {};
 
 		Text.Clear();
 		Text.Add("You give the good surgeon a look-over.", parse);
@@ -907,7 +907,7 @@ export namespace AquiliusScenes {
 		const player: Player = GAME().player;
 		const aquilius: Aquilius = GAME().aquilius;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -936,7 +936,7 @@ export namespace AquiliusScenes {
 		const player: Player = GAME().player;
 		const aquilius: Aquilius = GAME().aquilius;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -1013,7 +1013,7 @@ export namespace AquiliusScenes {
 		const party: Party = GAME().party;
 		const aquilius: Aquilius = GAME().aquilius;
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -1052,7 +1052,7 @@ export namespace AquiliusScenes {
 		const outlaws = GAME().outlaws;
 		const kiakai: Kiakai = GAME().kiakai;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 		};
 
@@ -1167,7 +1167,7 @@ export namespace AquiliusScenes {
 		const aquilius: Aquilius = GAME().aquilius;
 		const outlaws = GAME().outlaws;
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 

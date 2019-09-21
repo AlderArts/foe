@@ -5,12 +5,12 @@ import { DamageType } from "../damagetype";
 import { Entity } from "../entity";
 import { Party } from "../party";
 import { StatusEffect } from "../statuseffect";
-import { Text } from "../text";
+import { IParse, Text } from "../text";
 
 export namespace AbilityNode {
 
 	export function DefaultParser(caster: Entity, target?: Entity) {
-		let parse: any = {};
+		let parse: IParse = {};
 
 		if (caster) {
 			parse         = caster.ParserPronouns(parse);

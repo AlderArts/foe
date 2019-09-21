@@ -10,7 +10,7 @@ import { IChoice } from "../../link";
 import { RigardFlags } from "../../loc/rigard/rigard-flags";
 import { SetGameOverButton } from "../../main-gameover";
 import { Party } from "../../party";
-import { Text } from "../../text";
+import { IParse, Text } from "../../text";
 import { Season, Time } from "../../time";
 import { Kiakai } from "../kiakai";
 import { Miranda } from "../miranda";
@@ -27,7 +27,7 @@ export namespace LeiScenes {
 	export function InnApproach() {
 		const party: Party = GAME().party;
 		const lei: Lei = GAME().lei;
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -61,7 +61,7 @@ export namespace LeiScenes {
 		const player: Player = GAME().player;
 		const lei: Lei = GAME().lei;
 		const rigard = GAME().rigard;
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -205,7 +205,7 @@ export namespace LeiScenes {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const lei: Lei = GAME().lei;
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -466,7 +466,7 @@ export namespace LeiScenes {
 	export function ExplanationMain() {
 		const player: Player = GAME().player;
 		const lei: Lei = GAME().lei;
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -562,7 +562,7 @@ export namespace LeiScenes {
 
 	export function ObserveMain(first: boolean) {
 		const party: Party = GAME().party;
-		const parse: any = {
+		const parse: IParse = {
 			drink : party.Alone() ? "a drink" : "some drinks",
 		};
 
@@ -641,7 +641,7 @@ export namespace LeiScenes {
 		const rigard = GAME().rigard;
 		const twins: Twins = GAME().twins;
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -835,7 +835,7 @@ export namespace LeiScenes {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const lei: Lei = GAME().lei;
-		const parse: any = {
+		const parse: IParse = {
 			time     : WorldTime().DayTime(),
 			feetDesc() { return player.FeetDesc(); },
 			p1name() { return party.Get(1).name; },
@@ -1011,7 +1011,7 @@ export namespace LeiScenes {
 	export function TalkPrompt() {
 		const player: Player = GAME().player;
 		const lei: Lei = GAME().lei;
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -1188,7 +1188,7 @@ export namespace LeiScenes {
 	export function TalkPastPrompt() {
 		const player: Player = GAME().player;
 		const lei: Lei = GAME().lei;
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -1260,7 +1260,7 @@ export namespace LeiScenes {
 
 	export function SexPrompt() {
 		const lei: Lei = GAME().lei;
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -1336,7 +1336,7 @@ export namespace LeiScenes {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const lei: Lei = GAME().lei;
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -1422,7 +1422,7 @@ export namespace LeiScenes {
 		enc.Cleanup();
 		Text.Clear();
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -1499,7 +1499,7 @@ export namespace LeiScenes {
 		enc.Cleanup();
 		Text.Clear();
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -1541,7 +1541,7 @@ export namespace LeiScenes {
 		const miranda: Miranda = GAME().miranda;
 		const kiakai: Kiakai = GAME().kiakai;
 
-		const parse: any = {
+		const parse: IParse = {
 			race : player.Eyes().race.qShort(),
 			playername : player.name,
 			name : kiakai.name,
@@ -1643,7 +1643,7 @@ export namespace LeiScenes {
 		Gui.SetButtonsFromList(options, false, undefined);
 	}
 
-	export function GuardStalkingEntry(parse: any, nv: boolean) {
+	export function GuardStalkingEntry(parse: IParse, nv: boolean) {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const kiakai: Kiakai = GAME().kiakai;
@@ -1690,7 +1690,7 @@ export namespace LeiScenes {
 		LeiScenes.GuardStalkingConverge(parse, nv);
 	}
 
-	export function GuardStalkingConverge(parse: any, nv: boolean) {
+	export function GuardStalkingConverge(parse: IParse, nv: boolean) {
 		const player: Player = GAME().player;
 		const lei: Lei = GAME().lei;
 		Text.Add("You gingerly take a few steps inside. ", parse);
@@ -1832,7 +1832,7 @@ export namespace LeiScenes {
 		});
 	}
 
-	export function GuardStalkingApprove(parse: any, nv: boolean) {
+	export function GuardStalkingApprove(parse: IParse, nv: boolean) {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const lei: Lei = GAME().lei;
@@ -1893,7 +1893,7 @@ export namespace LeiScenes {
 		Gui.SetButtonsFromList(options, false, undefined);
 	}
 
-	export function GuardStalkingMoveOn(parse: any, nv: boolean) {
+	export function GuardStalkingMoveOn(parse: IParse, nv: boolean) {
 		const party: Party = GAME().party;
 		Text.Clear();
 		parse.comp = party.Num() === 2 ? party.Get(1).name + " is" : "your companions are";
@@ -1904,7 +1904,7 @@ export namespace LeiScenes {
 		LeiScenes.GuardStalkingOutro(parse, nv);
 	}
 
-	export function GuardStalkingOutro(parse: any, nv: boolean) {
+	export function GuardStalkingOutro(parse: IParse, nv: boolean) {
 		const party: Party = GAME().party;
 		const kiakai: Kiakai = GAME().kiakai;
 		const miranda: Miranda = GAME().miranda;

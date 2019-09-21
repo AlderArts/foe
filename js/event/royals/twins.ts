@@ -12,7 +12,7 @@ import { IStorage } from "../../istorage";
 import { IChoice } from "../../link";
 import { RigardFlags } from "../../loc/rigard/rigard-flags";
 import { ILocation } from "../../location";
-import { Text } from "../../text";
+import { IParse, Text } from "../../text";
 import { ITime, Time } from "../../time";
 import { Player } from "../player";
 import { Terry } from "../terry";
@@ -130,7 +130,7 @@ export namespace TwinsScenes {
 
 	// TODO
 	export function Interact() {
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -156,7 +156,7 @@ export namespace TwinsScenes {
 		const twins: Twins = GAME().twins;
 		const terry: Terry = GAME().terry;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 

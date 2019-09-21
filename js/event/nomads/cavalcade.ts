@@ -14,7 +14,7 @@ import { Input } from "../../input";
 import { StrapOnItems } from "../../items/strapon";
 import { IChoice } from "../../link";
 import { Party } from "../../party";
-import { Text } from "../../text";
+import { IParse, Text } from "../../text";
 import { Player } from "../player";
 import { Cale } from "./cale";
 import { CaleSexScenes } from "./cale-sex";
@@ -43,7 +43,7 @@ export namespace NCavalcadeScenes {
 		const party: Party = GAME().party;
 		const rosalin: Rosalin = GAME().rosalin;
 		const estevan: Estevan = GAME().estevan;
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 			hisher     : rosalin.hisher(),
 		};
@@ -120,7 +120,7 @@ export namespace NCavalcadeScenes {
 		const cale: ICavalcadePlayer = GAME().cale;
 		const estevan: ICavalcadePlayer = GAME().estevan;
 		const onEnd = () => {
-			const parse: any = {
+			const parse: IParse = {
 				playername : player.name,
 			};
 
@@ -190,7 +190,7 @@ export namespace NCavalcadeScenes {
 		const estevan: any = GAME().estevan;
 		const token = 50;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 			coin : Text.NumToText(token),
 		};
@@ -340,7 +340,7 @@ export namespace NCavalcadeScenes {
 		const racescore = new RaceScore(rosalin.body);
 		const compScore = rosalin.origRaceScore.Compare(racescore);
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 			racedesc() { return rosalin.raceDesc(compScore); },
 			cockDesc() { return p1cock.Short(); },
@@ -491,7 +491,7 @@ export namespace NCavalcadeScenes {
 	export function SexyPlayerWin(cheat: boolean) {
 		const player: Player = GAME().player;
 		const cale: Cale = GAME().cale;
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -587,7 +587,7 @@ export namespace NCavalcadeScenes {
 
 	// TODO
 	export function SexyEstevanWin(cheat: boolean) {
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -602,7 +602,7 @@ export namespace NCavalcadeScenes {
 
 	// TODO
 	export function SexyCaleWin(cheat: boolean) {
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -617,7 +617,7 @@ export namespace NCavalcadeScenes {
 
 	// TODO
 	export function SexyRosalinWin(cheat: boolean) {
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 

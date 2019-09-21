@@ -26,7 +26,7 @@ import { ILocBullTower } from "../../location";
 import { Party } from "../../party";
 import { PregnancyHandler } from "../../pregnancy";
 import { Stat } from "../../stat";
-import { Text } from "../../text";
+import { IParse, Text } from "../../text";
 import { Time } from "../../time";
 import { Kiakai } from "../kiakai";
 import { Player } from "../player";
@@ -74,7 +74,7 @@ export class BullTowerStats {
 	// BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
 	public IncSuspicion(max: number, inc: number) {
 		const outlaws: Outlaws = GAME().outlaws;
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -258,7 +258,7 @@ BullTowerLoc.Courtyard.Yard.events.push(new Link(
 		const player: Player = GAME().player;
 		const outlaws: Outlaws = GAME().outlaws;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername: player.name,
 		};
 
@@ -340,7 +340,7 @@ BullTowerLoc.Courtyard.Yard.links.push(new Link(
 	() => {
 		const outlaws: Outlaws = GAME().outlaws;
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -418,7 +418,7 @@ BullTowerLoc.Courtyard.Caravans.events.push(new Link(
 		const player: Player = GAME().player;
 		const outlaws: Outlaws = GAME().outlaws;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -583,7 +583,7 @@ BullTowerLoc.Courtyard.Caravans.events.push(new Link(
 	() => {
 		const player: Player = GAME().player;
 		const outlaws: Outlaws = GAME().outlaws;
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -618,7 +618,7 @@ BullTowerLoc.Courtyard.Caravans.events.push(new Link(
 		const player: Player = GAME().player;
 		const outlaws: Outlaws = GAME().outlaws;
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -713,7 +713,7 @@ BullTowerLoc.Courtyard.Pens.events.push(new Link(
 	undefined,
 	() => {
 		const outlaws: Outlaws = GAME().outlaws;
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -781,7 +781,7 @@ BullTowerLoc.Building.Hall.links.push(new Link(
 		const party: Party = GAME().party;
 		const outlaws: Outlaws = GAME().outlaws;
 		const terry: Terry = GAME().terry;
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -841,7 +841,7 @@ BullTowerLoc.Building.Cell.onEntry = () => {
 	const outlaws: Outlaws = GAME().outlaws;
 	const burrows: Burrows = GAME().burrows;
 
-	const parse: any = {
+	const parse: IParse = {
 		playername : player.name,
 		weapon() { return player.WeaponDesc(); },
 	};
@@ -994,7 +994,7 @@ BullTowerLoc.Building.Warehouse.events.push(new Link(
 	() => {
 		const outlaws: Outlaws = GAME().outlaws;
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -1021,7 +1021,7 @@ BullTowerLoc.Building.Warehouse.events.push(new Link(
 		const player: Player = GAME().player;
 		const outlaws: Outlaws = GAME().outlaws;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -1083,7 +1083,7 @@ BullTowerLoc.Building.Watchtower.events.push(new Link(
 		const player: Player = GAME().player;
 		const outlaws: Outlaws = GAME().outlaws;
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -1104,7 +1104,7 @@ BullTowerLoc.Building.Watchtower.events.push(new Link(
 				const check = player.Dex() + Math.random() * 20;
 
 				if (GetDEBUG()) {
-					Text.Add("Dex check, [check] vs 60", {check}, "bold");
+					Text.Add(`Dex check, ${check} vs 60`, undefined, "bold");
 					Text.NL();
 				}
 				if (check >= 60) {
@@ -1160,7 +1160,7 @@ BullTowerLoc.Building.Watchtower.events.push(new Link(
 	undefined,
 	() => {
 		const outlaws: Outlaws = GAME().outlaws;
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -1178,7 +1178,7 @@ BullTowerLoc.Building.Office.description = () => {
 	const outlaws: Outlaws = GAME().outlaws;
 	const terry: Terry = GAME().terry;
 
-	const parse: any = {
+	const parse: IParse = {
 		t : terry.Recruited() ? ", perhaps so well that even Terry would find it quite the challenge" : "",
 	};
 
@@ -1209,7 +1209,7 @@ BullTowerLoc.Building.Office.events.push(new Link(
 	}, true,
 	undefined,
 	() => {
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -1228,7 +1228,7 @@ export namespace BullTowerScenes {
 		const outlaws: Outlaws = GAME().outlaws;
 		const terry: Terry = GAME().terry;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername: player.name,
 		};
 
@@ -1352,7 +1352,7 @@ export namespace BullTowerScenes {
 
 		opts = opts || {};
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -1465,7 +1465,7 @@ export namespace BullTowerScenes {
 		const outlaws: Outlaws = GAME().outlaws;
 		const cveta: Cveta = GAME().cveta;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -1605,7 +1605,7 @@ export namespace BullTowerScenes {
 		const enc  = this;
 		SetGameState(GameState.Event, Gui);
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -1628,7 +1628,7 @@ export namespace BullTowerScenes {
 		const enc  = this;
 		SetGameState(GameState.Event, Gui);
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -1643,7 +1643,7 @@ export namespace BullTowerScenes {
 		const enc  = this;
 		SetGameState(GameState.Event, Gui);
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -1671,7 +1671,7 @@ export namespace BullTowerScenes {
 		const corishev = enc.corishev;
 		SetGameState(GameState.Event, Gui);
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -1760,7 +1760,7 @@ export namespace BullTowerScenes {
 
 		const p1cock = player.BiggestCock(undefined, true);
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 			lowerarmordesc() { return player.LowerArmorDesc(); },
 		};
@@ -1952,7 +1952,7 @@ export namespace BullTowerScenes {
 		const outlaws: Outlaws = GAME().outlaws;
 		const terry: Terry = GAME().terry;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -2012,7 +2012,7 @@ export namespace BullTowerScenes {
 					check += player.jobs.Rogue.level * 5;
 
 					if (GetDEBUG()) {
-						Text.Add("Int/Dex check (with bonuses for Rogue levels): [check] vs 80", {check}, "bold");
+						Text.Add(`Int/Dex check (with bonuses for Rogue levels): ${check} vs 80`, undefined, "bold");
 						Text.NL();
 					}
 
@@ -2057,7 +2057,7 @@ export namespace BullTowerScenes {
 					check += player.jobs.Rogue.level * 5;
 
 					if (GetDEBUG()) {
-						Text.Add("Dex check (with bonuses for Rogue levels): [check] vs 90", {check}, "bold");
+						Text.Add(`Dex check (with bonuses for Rogue levels): ${check} vs 90`, undefined, "bold");
 						Text.NL();
 					}
 
@@ -2096,7 +2096,7 @@ export namespace BullTowerScenes {
 		const player: Player = GAME().player;
 		const outlaws: Outlaws = GAME().outlaws;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -2121,7 +2121,7 @@ export namespace BullTowerScenes {
 	export function SafeFailure() {
 		const player: Player = GAME().player;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 			heshe : player.mfTrue("he", "she"),
 		};
@@ -2153,7 +2153,7 @@ export namespace BullTowerScenes {
 	export function Coversations(outside: boolean) {
 		const outlaws: Outlaws = GAME().outlaws;
 
-		const parse: any = {
+		const parse: IParse = {
 			a : outlaws.flags.BT & OutlawsFlags.BullTower.AlaricFreed ? " and Alaric" : "",
 		};
 
@@ -2287,7 +2287,7 @@ export namespace BullTowerScenes {
 		const party: Party = GAME().party;
 		const outlaws: Outlaws = GAME().outlaws;
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -2313,7 +2313,7 @@ export namespace BullTowerScenes {
 		const outlaws: Outlaws = GAME().outlaws;
 
 		const freed = outlaws.flags.BT & OutlawsFlags.BullTower.AlaricFreed;
-		const parse: any = {
+		const parse: IParse = {
 			two : freed ? "three" : "two",
 			al : freed ? " and Alaric" : "",
 		};
@@ -2353,7 +2353,7 @@ export namespace BullTowerScenes {
 		const party: Party = GAME().party;
 		const kiakai: Kiakai = GAME().kiakai;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 			name : kiakai.name,
 		};
@@ -2402,7 +2402,7 @@ export namespace BullTowerScenes {
 		const party: Party = GAME().party;
 		const outlaws: Outlaws = GAME().outlaws;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -2564,7 +2564,7 @@ export namespace BullTowerScenes {
 		const player: Player = GAME().player;
 		const outlaws: Outlaws = GAME().outlaws;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -2647,7 +2647,7 @@ export namespace BullTowerScenes {
 		const party: Party = GAME().party;
 		const outlaws: Outlaws = GAME().outlaws;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 

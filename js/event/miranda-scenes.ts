@@ -17,7 +17,7 @@ import { IChoice, Link } from "../link";
 import { Rigard } from "../loc/rigard/rigard";
 import { RigardFlags } from "../loc/rigard/rigard-flags";
 import { Party } from "../party";
-import { Text } from "../text";
+import { IParse, Text } from "../text";
 import { Season } from "../time";
 import { Roa } from "./brothel/roa";
 import { DreamsScenes } from "./dreams";
@@ -84,7 +84,7 @@ export namespace MirandaScenes {
 		const player: Player = GAME().player;
 		const miranda: Miranda = GAME().miranda;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -110,7 +110,7 @@ export namespace MirandaScenes {
 		const party: Party = GAME().party;
 		const miranda: Miranda = GAME().miranda;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -191,7 +191,7 @@ export namespace MirandaScenes {
 		const enc = this;
 		enc.Cleanup();
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -219,7 +219,7 @@ export namespace MirandaScenes {
 		const enc = this;
 		enc.Cleanup();
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -246,7 +246,7 @@ export namespace MirandaScenes {
 		const player: Player = GAME().player;
 		const miranda: Miranda = GAME().miranda;
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -387,7 +387,7 @@ export namespace MirandaScenes {
 		const miranda: Miranda = GAME().miranda;
 		const world = WORLD();
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -494,7 +494,7 @@ export namespace MirandaScenes {
 		const rigard: Rigard = GAME().rigard;
 		const miranda: Miranda = GAME().miranda;
 
-		const parse: any = {};
+		const parse: IParse = {};
 
 		Text.Clear();
 		if (!rigard.Visa()) {
@@ -521,7 +521,7 @@ export namespace MirandaScenes {
 		const miranda: Miranda = GAME().miranda;
 		const world = WORLD();
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -595,7 +595,7 @@ export namespace MirandaScenes {
 		const player: Player = GAME().player;
 		const miranda: Miranda = GAME().miranda;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -633,7 +633,7 @@ export namespace MirandaScenes {
 		const miranda: Miranda = GAME().miranda;
 		const world = WORLD();
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 			guygal : player.mfFem("guy", "gal"),
 		};
@@ -697,7 +697,7 @@ export namespace MirandaScenes {
 		const miranda: Miranda = GAME().miranda;
 		const world = WORLD();
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 			mcockDesc() { return miranda.FirstCock().Short(); },
 			mcockTip() { return miranda.FirstCock().TipShort(); },
@@ -1093,7 +1093,7 @@ export namespace MirandaScenes {
 		const miranda: Miranda = GAME().miranda;
 		const rosalin: Rosalin = GAME().rosalin;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 			name   : kiakai.name,
 			heshe  : kiakai.heshe(),
@@ -1186,7 +1186,7 @@ export namespace MirandaScenes {
 		const player: Player = GAME().player;
 		const kiakai: Kiakai = GAME().kiakai;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 			name       : kiakai.name,
 			guygirl    : player.mfTrue("guy", "girl"),
@@ -1258,7 +1258,7 @@ export namespace MirandaScenes {
 		const farm = GAME().farm;
 		const party: Party = GAME().party;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 			name       : kiakai.name,
 		};
@@ -1305,7 +1305,7 @@ export namespace MirandaScenes {
 
 		miranda.flags.Thief = 1;
 
-		const parse: any = {};
+		const parse: IParse = {};
 		if (party.Two()) {
 			parse.comp = " and " + party.Get(1).name;
 		} else if (!party.Alone()) {
@@ -1336,7 +1336,7 @@ export namespace MirandaScenes {
 		const player: Player = GAME().player;
 		const miranda: Miranda = GAME().miranda;
 
-		let parse: any = {
+		let parse: IParse = {
 			boygirl() { return player.mfFem("boy", "girl"); },
 		};
 		parse = player.ParserTags(parse);
@@ -1401,7 +1401,7 @@ export namespace MirandaScenes {
 	}
 
 	export function HeyThereCont() {
-		const parse: any = {};
+		const parse: IParse = {};
 
 		Text.NL();
 		Text.Add("The booze starts to stack up as you continue to talk into the night. You tell her a bit about yourself and your adventures so far, and she contributes witty comments and suggestive remarks.", parse);
@@ -1418,7 +1418,7 @@ export namespace MirandaScenes {
 		const player: Player = GAME().player;
 		const miranda: Miranda = GAME().miranda;
 
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 		parse = player.ParserTags(parse);
@@ -1625,7 +1625,7 @@ export namespace MirandaScenes {
 		const belinda = GAME().belinda;
 		const terry: Terry = GAME().terry;
 
-		let parse: any = {};
+		let parse: IParse = {};
 		parse = player.ParserTags(parse);
 
 		back = back || Gui.PrintDefaultOptions;
@@ -1950,7 +1950,7 @@ export namespace MirandaScenes {
 	}
 
 	export function BarTalkOptions(options: any[], next: any) {
-		const parse: any = {};
+		const parse: IParse = {};
 
 		options.push({ nameStr : "Her past",
 			func() {
@@ -1975,7 +1975,7 @@ export namespace MirandaScenes {
 	}
 
 	export function HeyThereChat() {
-		const parse: any = {};
+		const parse: IParse = {};
 		Text.NL();
 		Text.Add("What do you want to chat with Miranda about?", parse);
 		Text.Flush();
@@ -1993,7 +1993,7 @@ export namespace MirandaScenes {
 		const player: Player = GAME().player;
 		const miranda: Miranda = GAME().miranda;
 
-		let parse: any = {
+		let parse: IParse = {
 			masterMistress : player.mfTrue("master", "mistress"),
 			guyGirl : player.mfTrue("guy", "girl"),
 		};
@@ -2072,7 +2072,7 @@ export namespace MirandaScenes {
 		const miranda: Miranda = GAME().miranda;
 		const world = WORLD();
 
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 		parse = player.ParserTags(parse);
@@ -2467,7 +2467,7 @@ export namespace MirandaScenes {
 		const player: Player = GAME().player;
 		const miranda: Miranda = GAME().miranda;
 
-		const parse: any = {};
+		const parse: IParse = {};
 
 		const options: IChoice[] = [];
 
@@ -2511,7 +2511,7 @@ export namespace MirandaScenes {
 		const player: Player = GAME().player;
 		const miranda: Miranda = GAME().miranda;
 
-		const parse: any = {};
+		const parse: IParse = {};
 
 		const dom = miranda.SubDom() - player.SubDom();
 
@@ -2550,7 +2550,7 @@ export namespace MirandaScenes {
 	}
 
 	export function MaidensBaneNice() {
-		const parse: any = {};
+		const parse: IParse = {};
 		// TODO
 		Text.Add("", parse);
 		Text.Add("You walk over to Miranda, who is lounging on one of the benches in the shady tavern. She’s already gotten started on her first few drinks, and waves you over when she notices you.");
@@ -2559,7 +2559,7 @@ export namespace MirandaScenes {
 	}
 
 	export function MaidensBaneNasty() {
-		const parse: any = {};
+		const parse: IParse = {};
 		// TODO
 		Text.Add("", parse);
 		Text.Add("[PLACEHOLDER] Bad interactions.");
@@ -2575,7 +2575,7 @@ export namespace MirandaScenes {
 		const terry: Terry = GAME().terry;
 		const world = WORLD();
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -2663,7 +2663,7 @@ export namespace MirandaScenes {
 	export function BarSexOptions(options: any[]) {
 		const miranda: Miranda = GAME().miranda;
 
-		const parse: any = {};
+		const parse: IParse = {};
 
 		options.push({ nameStr : "Date",
 			func : MirandaScenes.DatingEntry, enabled : true,
@@ -2690,7 +2690,7 @@ export namespace MirandaScenes {
 		const player: Player = GAME().player;
 		const miranda: Miranda = GAME().miranda;
 
-		const parse: any = {
+		const parse: IParse = {
 			mastermistress : player.mfTrue("master", "mistress"),
 		};
 
@@ -2728,7 +2728,7 @@ export namespace MirandaScenes {
 	export function HomeDescFloor1() {
 		const miranda: Miranda = GAME().miranda;
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 		Text.NL();
@@ -2744,7 +2744,7 @@ export namespace MirandaScenes {
 	export function HomeDescFloor2() {
 		const miranda: Miranda = GAME().miranda;
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 		Text.NL();
@@ -2764,7 +2764,7 @@ export namespace MirandaScenes {
 		const miranda: Miranda = GAME().miranda;
 		const world = WORLD();
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -2862,7 +2862,7 @@ export namespace MirandaScenes {
 		const miranda: Miranda = GAME().miranda;
 		const world = WORLD();
 
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 
@@ -2916,7 +2916,7 @@ export namespace MirandaScenes {
 		const player: Player = GAME().player;
 		const miranda: Miranda = GAME().miranda;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 			master : player.mfFem("master", "mistress"),
 		};
@@ -3088,7 +3088,7 @@ export namespace MirandaScenes {
 		const miranda: Miranda = GAME().miranda;
 
 		const dom = player.SubDom() - miranda.SubDom();
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 			master : dom < 25 ? player.name : player.mfFem("master", "mistress"),
 
@@ -3204,7 +3204,7 @@ export namespace MirandaScenes {
 		const player: Player = GAME().player;
 		const miranda: Miranda = GAME().miranda;
 
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 		parse = player.ParserTags(parse);
@@ -3246,7 +3246,7 @@ export namespace MirandaScenes {
 
 		const pCock = cocks[0];
 
-		let parse: any = {
+		let parse: IParse = {
 			playername    : player.name,
 			boyGirl       : player.mfTrue("boy", "girl"),
 
@@ -3601,7 +3601,7 @@ export namespace MirandaScenes {
 		const player: Player = GAME().player;
 		const miranda: Miranda = GAME().miranda;
 
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 		parse = player.ParserTags(parse);
@@ -3632,7 +3632,7 @@ export namespace MirandaScenes {
 		const player: Player = GAME().player;
 		const miranda: Miranda = GAME().miranda;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername    : player.name,
 			masterMistress: player.mfTrue("master", "mistress"),
 			boyGirl       : player.mfTrue("boy", "girl"),
@@ -3970,7 +3970,7 @@ export namespace MirandaScenes {
 
 		const pCock = cocks[0];
 
-		let parse: any = {
+		let parse: IParse = {
 			playername    : player.name,
 			boyGirl       : player.mfTrue("boy", "girl"),
 
@@ -4304,7 +4304,7 @@ export namespace MirandaScenes {
 		const rigard: Rigard = GAME().rigard;
 		const world = WORLD();
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 			lover : miranda.Attitude() < MirandaFlags.Attitude.Neutral ? "bitch" : "lover",
 		};
@@ -4411,7 +4411,7 @@ export namespace MirandaScenes {
 
 		const nasty = miranda.Attitude() < MirandaFlags.Attitude.Neutral;
 
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 
@@ -4517,7 +4517,7 @@ export namespace MirandaScenes {
 		let strapon = p1cock ? p1cock.isStrapon : false;
 		let borrowed = false;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 			boygirl : player.mfFem("boy", "girl"),
 
@@ -4741,7 +4741,7 @@ export namespace MirandaScenes {
 
 		const nasty = miranda.Attitude() < MirandaFlags.Attitude.Neutral;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 			lover : nasty ? "bitch" : "lover",
 			boyGirl : player.mfTrue("boy", "girl"),
@@ -5226,7 +5226,7 @@ export namespace MirandaScenes {
 	export function HomeDommyDungeonFirst() {
 		const world = WORLD();
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -5248,7 +5248,7 @@ export namespace MirandaScenes {
 	export function HomeDommyDungeon() {
 		const world = WORLD();
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -5271,7 +5271,7 @@ export namespace MirandaScenes {
 		const party: Party = GAME().party;
 		const world = WORLD();
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -5291,7 +5291,7 @@ export namespace MirandaScenes {
 
 	// TODO
 	export function TavernSexPrompt() {
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -5313,7 +5313,7 @@ export namespace MirandaScenes {
 		const player: Player = GAME().player;
 		const miranda: Miranda = GAME().miranda;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 		};
 		parse = player.ParserTags(parse);
@@ -5392,7 +5392,7 @@ export namespace MirandaScenes {
 		const party: Party = GAME().party;
 
 		const p1Cock = player.BiggestCock(cocks);
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 
 		};
@@ -5513,7 +5513,7 @@ export namespace MirandaScenes {
 			}
 		}
 
-		let parse: any = {
+		let parse: IParse = {
 			playername     : player.name,
 			lordLady       : player.mfTrue("lord", "lady"),
 			masterMistress : player.mfTrue("master", "mistress"),
@@ -5700,7 +5700,7 @@ export namespace MirandaScenes {
 		const momo: Momo = GAME().momo;
 		const gwendy: Gwendy = GAME().gwendy;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 			mastermistress : player.mfTrue("master", "mistress"),
 			boyGirl : player.mfTrue("boy", "girl"),
@@ -5908,7 +5908,7 @@ export namespace MirandaScenes {
 		const player: Player = GAME().player;
 		const miranda: Miranda = GAME().miranda;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 			masterMistress : player.mfTrue("master", "mistress"),
 		};
@@ -6314,7 +6314,7 @@ export namespace MirandaScenes {
 	}
 
 	export function TerryTavernSexDommyBJ() {
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -6334,7 +6334,7 @@ export namespace MirandaScenes {
 		const miranda: Miranda = GAME().miranda;
 
 		const p1Cock = player.BiggestCock(cocks);
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -6430,7 +6430,7 @@ export namespace MirandaScenes {
 		const party: Party = GAME().party;
 		const world = WORLD();
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -6580,7 +6580,7 @@ export namespace MirandaScenes {
 		const player: Player = GAME().player;
 		const miranda: Miranda = GAME().miranda;
 
-		const parse: any = {
+		const parse: IParse = {
 			name : miranda.Attitude() >= MirandaFlags.Attitude.Neutral ?
 				player.name : "slut",
 		};
@@ -6648,7 +6648,7 @@ export namespace MirandaScenes {
 		const player: Player = GAME().player;
 		const miranda: Miranda = GAME().miranda;
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -6744,7 +6744,7 @@ export namespace MirandaScenes {
 	export function DatingStage2() {
 		const miranda: Miranda = GAME().miranda;
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -6810,7 +6810,7 @@ export namespace MirandaScenes {
 		const player: Player = GAME().player;
 		const miranda: Miranda = GAME().miranda;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -7057,7 +7057,7 @@ export namespace MirandaScenes {
 		const party: Party = GAME().party;
 		const terry: Terry = GAME().terry;
 
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 
@@ -7235,7 +7235,7 @@ export namespace MirandaScenes {
 
 		const dom = miranda.SubDom() - player.SubDom();
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 			stud : dom >= 50 ? player.mfTrue("master", "mistress") : player.mfTrue("stud", "beautiful"),
 		};
@@ -7396,7 +7396,7 @@ export namespace MirandaScenes {
 		const party: Party = GAME().party;
 		const world = WORLD();
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -7455,7 +7455,7 @@ export namespace MirandaScenes {
 	export function DatingFirstMercs() {
 		const miranda: Miranda = GAME().miranda;
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -7522,7 +7522,7 @@ export namespace MirandaScenes {
 		const rigard: Rigard = GAME().rigard;
 		const world = WORLD();
 
-		const parse: any = {
+		const parse: IParse = {
 			boyGirl : player.mfTrue("boy", "girl"),
 			tongueDesc() { return player.TongueDesc(); },
 			breastDesc() { return player.FirstBreastRow().Short(); },
@@ -7552,7 +7552,7 @@ export namespace MirandaScenes {
 		Text.Add("<i>“It ain’t easy to get a posh job in a town like this as a morph, but I happen to be very good at what I do. And what I do is take out the trash.”</i> She flashes an evil grin full of sharp, pointy teeth. <i>“’Course, someone like me could never get work as an officer. Not that I’d want to sit at a desk pushing papers all day anyways.”</i>", parse);
 		Text.NL();
 		if (GetDEBUG()) {
-			Text.Add("<b>TOTAL SCORE: [x]</b>", {x: datingScore});
+			Text.Add(`<b>TOTAL SCORE: ${datingScore}</b>`);
 			Text.NL();
 		}
 
@@ -7665,7 +7665,7 @@ export namespace MirandaScenes {
 		const rigard: Rigard = GAME().rigard;
 		const world = WORLD();
 
-		const parse: any = {
+		const parse: IParse = {
 			guyGirl : player.mfTrue("guy", "girl"),
 			playername : player.name,
 		};

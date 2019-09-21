@@ -23,7 +23,7 @@ import { IStorage } from "../istorage";
 import { IChoice, Link } from "../link";
 import { SetGameOverButton } from "../main-gameover";
 import { Party } from "../party";
-import { Text } from "../text";
+import { IParse, Text } from "../text";
 import { ITime, Season } from "../time";
 import { DryadGladeFlags } from "./glade-flags";
 
@@ -71,7 +71,7 @@ GladeLoc.SaveSpot = "Dryads";
 GladeLoc.safe = () => true;
 GladeLoc.description = () => {
 	const orchid: OrchidBoss = GAME().orchid;
-	const parse: any = {
+	const parse: IParse = {
 
 	};
 
@@ -116,7 +116,7 @@ GladeLoc.onEntry = () => {
 		return;
 	}
 
-	const parse: any = {
+	const parse: IParse = {
 
 	};
 
@@ -163,7 +163,7 @@ export namespace DryadGladeScenes {
 		const party: Party = GAME().party;
 		const orchid: OrchidBoss = GAME().orchid;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -250,7 +250,7 @@ export namespace DryadGladeScenes {
 		const momo: Momo = GAME().momo;
 		SetGameState(GameState.Event, Gui);
 
-		let parse: any = {
+		let parse: IParse = {
 			armor() { return player.ArmorDesc(); },
 		};
 
@@ -589,7 +589,7 @@ export namespace DryadGladeScenes {
 
 		const enc: Encounter = this;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 			name       : kiakai.name,
 		};
@@ -669,7 +669,7 @@ export namespace DryadGladeScenes {
 	}
 
 	export function MotherTree() {
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -687,7 +687,7 @@ export namespace DryadGladeScenes {
 	export function MotherTreePrompt() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 		if (party.Num() === 2) {
@@ -739,7 +739,7 @@ export namespace DryadGladeScenes {
 
 	export function MotherTreeTalk() {
 		const player: Player = GAME().player;
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 

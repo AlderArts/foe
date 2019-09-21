@@ -171,7 +171,7 @@ export class Ability {
 		// TODO: Buttons (use portraits for target?)
 
 		Text.Clear();
-		const castTime = ability.castTime !== 0 ? ability.castTime : "instant";
+		const castTime = ability.castTime !== 0 ? ability.castTime.toString() : "instant";
 		Text.Add("[ability] (Cost: [cost], Cast time: [time]): [desc]<br>",
 			{
 				ability: ability.name,
@@ -451,7 +451,7 @@ export class AbilityCollection {
 		const prompt = () => {
 			Text.Clear();
 			_.each(collection.AbilitySet, (ability) => {
-				const castTime = ability.castTime !== 0 ? ability.castTime : "instant";
+				const castTime = ability.castTime !== 0 ? ability.castTime.toString() : "instant";
 				const cooldown = ability.OnCooldown(entry);
 				const plural   = (cooldown > 1 ? "s" : "");
 				Text.Add("[ability] (Cost: [cost], Cast time: [time][cd]): [desc]<br>",

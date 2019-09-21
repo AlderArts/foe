@@ -10,7 +10,7 @@ import { KrawitzFlags } from "../../loc/rigard/krawitz-flags";
 import { Rigard } from "../../loc/rigard/rigard";
 import { Party } from "../../party";
 import { Status } from "../../statuseffect";
-import { Text } from "../../text";
+import { IParse, Text } from "../../text";
 import { Time } from "../../time";
 import { Kiakai } from "../kiakai";
 import { Miranda } from "../miranda";
@@ -33,7 +33,7 @@ export namespace CvetaScenes {
 	export function CampDesc() {
 		const cveta: Cveta = GAME().cveta;
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -61,7 +61,7 @@ export namespace CvetaScenes {
 		const cveta: Cveta = GAME().cveta;
 		const terry: Terry = GAME().terry;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -151,7 +151,7 @@ export namespace CvetaScenes {
 		const outlaws: Outlaws = GAME().outlaws;
 		const cveta: Cveta = GAME().cveta;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -225,7 +225,7 @@ export namespace CvetaScenes {
 		const outlaws: Outlaws = GAME().outlaws;
 		const cveta: Cveta = GAME().cveta;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -268,7 +268,7 @@ export namespace CvetaScenes {
 		const outlaws: Outlaws = GAME().outlaws;
 		const cveta: Cveta = GAME().cveta;
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -339,7 +339,7 @@ export namespace CvetaScenes {
 		const outlaws: Outlaws = GAME().outlaws;
 		const cveta: Cveta = GAME().cveta;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 		};
 
@@ -450,7 +450,7 @@ export namespace CvetaScenes {
 		const player: Player = GAME().player;
 		const cveta: Cveta = GAME().cveta;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -530,7 +530,7 @@ export namespace CvetaScenes {
 		const player: Player = GAME().player;
 		const cveta: Cveta = GAME().cveta;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -724,7 +724,7 @@ export namespace CvetaScenes {
 		const player: Player = GAME().player;
 		const cveta: Cveta = GAME().cveta;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -836,7 +836,7 @@ export namespace CvetaScenes {
 		const momo: Momo = GAME().momo;
 		const miranda: Miranda = GAME().miranda;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -1111,7 +1111,7 @@ export namespace CvetaScenes {
 		const cveta: Cveta = GAME().cveta;
 		const kiakai: Kiakai = GAME().kiakai;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 			skinDesc() { return player.SkinDesc(); },
 		};
@@ -1445,7 +1445,7 @@ export namespace CvetaScenes {
 		const player: Player = GAME().player;
 		const cveta: Cveta = GAME().cveta;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -1499,7 +1499,7 @@ export namespace CvetaScenes {
 	export function MariaTalkRepeat() {
 		const player: Player = GAME().player;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -1519,7 +1519,7 @@ export namespace CvetaScenes {
 		const player: Player = GAME().player;
 		const cveta: Cveta = GAME().cveta;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -1565,7 +1565,7 @@ export namespace CvetaScenes {
 	export function FirstMeetingPrompt(opts: any) {
 		const player: Player = GAME().player;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -1711,7 +1711,7 @@ export namespace CvetaScenes {
 	export function FirstMeetingCont() {
 		const outlaws: Outlaws = GAME().outlaws;
 
-		const parse: any = {
+		const parse: IParse = {
 			SunlightMoonlight : WorldTime().LightStr("Sunlight", "Moonlight"),
 		};
 
@@ -1742,7 +1742,7 @@ export namespace CvetaScenes {
 		const momo: Momo = GAME().momo;
 		const terry: Terry = GAME().terry;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 			skinDesc() { return player.SkinDesc(); },
 			cocks() { return player.MultiCockDesc(); },
@@ -2038,7 +2038,7 @@ export namespace CvetaScenes {
 	}
 
 	export function DreamRoses(ravenTrigger: any) {
-		const parse: any = {
+		const parse: IParse = {
 			raven : DreamsScenes.RavenText(ravenTrigger, " and a raven perched on one of the thorny rosebushes", " and the familiar form of a raven perched on one of the rosebushes, something you should remember"),
 		};
 
@@ -2062,7 +2062,7 @@ export namespace CvetaScenes {
 	export function DreamBrood(ravenTrigger: any) {
 		const player: Player = GAME().player;
 
-		const parse: any = {
+		const parse: IParse = {
 			skinDesc() { return player.SkinDesc(); },
 			playername : player.name,
 			raven : DreamsScenes.RavenText(ravenTrigger, " Off in the distance, high above the two of you, a raven circles in the air, its dark feathers starkly contrasting against the colorful scene. You can’t quite make it out, but does it look… jealous?", " There’s that raven again, spying on the two of you from up high in the clouds, the voyeuristic little thing. You should really remember it when you wake up."),
@@ -2091,7 +2091,7 @@ export namespace CvetaScenes {
 		const outlaws: Outlaws = GAME().outlaws;
 		const cveta: Cveta = GAME().cveta;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 			skin() { return player.SkinDesc(); },
 		};
@@ -2268,7 +2268,7 @@ export namespace CvetaScenes {
 	}
 
 	export function IntimatePrompt() {
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -2308,7 +2308,7 @@ export namespace CvetaScenes {
 		const player: Player = GAME().player;
 		const cveta: Cveta = GAME().cveta;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 			hairLong : player.Hair().Long(),
 		};
@@ -2349,7 +2349,7 @@ export namespace CvetaScenes {
 		const player: Player = GAME().player;
 		const cveta: Cveta = GAME().cveta;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 			skin() { return player.SkinDesc(); },
 		};
@@ -2405,7 +2405,7 @@ export namespace CvetaScenes {
 		const player: Player = GAME().player;
 		const cveta: Cveta = GAME().cveta;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 		};
 		parse = player.ParserTags(parse);

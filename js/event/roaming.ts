@@ -12,7 +12,7 @@ import { WeaponsItems } from "../items/weapons";
 import { IChoice } from "../link";
 import { Locations } from "../location";
 import { Party } from "../party";
-import { Text } from "../text";
+import { IParse, Text } from "../text";
 import { Kiakai } from "./kiakai";
 import { Player } from "./player";
 import { Lei } from "./royals/lei";
@@ -22,7 +22,7 @@ export namespace RoamingScenes {
 
 	export function FlowerPetal() {
 		const party: Party = GAME().party;
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -44,10 +44,10 @@ export namespace RoamingScenes {
 
 		const coin = Math.floor(5 + Math.random() * 20);
 
-		const parse: any = {
-			year    : Math.floor(WorldTime().year - (40 + Math.random() * 20)),
+		const parse: IParse = {
+			year    : Math.floor(WorldTime().year - (40 + Math.random() * 20)).toString(),
 			rhisher : Math.random() < 0.5 ? "his" : "her",
-			coin,
+			coin    : coin.toString(),
 		};
 
 		const loc = world.CurrentLocation();
@@ -82,7 +82,7 @@ export namespace RoamingScenes {
 		const lei: Lei = GAME().lei;
 		const world = WORLD();
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 		};
 
@@ -332,7 +332,7 @@ export namespace RoamingScenes {
 						ent.entity.GetSingleTarget(enc, ent);
 
 						enc.Callstack.push(() => {
-							const parse: any = {};
+							const parse: IParse = {};
 							Text.Clear();
 							parse.hisher = entity.hisher();
 							Text.Add("Another bandit pushes through the interior door, replacing [hisher] fallen comrade.", parse);
@@ -357,7 +357,7 @@ export namespace RoamingScenes {
 		const rigard = GAME().rigard;
 		const bandits = rigard.bandits;
 
-		let parse: any = {
+		let parse: IParse = {
 			rclothing : bandits.rclothing,
 		};
 
@@ -516,7 +516,7 @@ export namespace RoamingScenes {
 
 	export function BanditsOnEncounter() {
 		const enc = this;
-		const parse: any = {};
+		const parse: IParse = {};
 
 		const num = this.enemy.NumTotal();
 		if (num > 4) {
@@ -559,7 +559,7 @@ export namespace RoamingScenes {
 		}
 		const remaining = num - fallen;
 
-		let parse: any = {
+		let parse: IParse = {
 			comp : party.Num() > 1 ? "your party" : "you",
 		};
 
@@ -603,7 +603,7 @@ export namespace RoamingScenes {
 			if (party.coin >= 0) {
 				Text.NL();
 				const coin = Math.min(party.coin, 25);
-				parse.coin = coin;
+				parse.coin = coin.toString();
 				parse.s = coin > 1 ? "s" : "";
 
 				party.coin -= coin;
@@ -628,7 +628,7 @@ export namespace RoamingScenes {
 		const bandits = enc.enemy;
 		const num = bandits.NumTotal();
 
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 
@@ -718,7 +718,7 @@ export namespace RoamingScenes {
 							const coin = 30 + Math.floor(Math.random() * 50);
 
 							Text.NL();
-							Text.Add("<b>You pick up an additional [coin] coins!</b>", {coin});
+							Text.Add(`<b>You pick up an additional ${coin} coins!</b>`);
 
 							party.coin += coin;
 						}, 1.0, () => true);

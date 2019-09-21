@@ -2,7 +2,7 @@
 import { IStorage } from "../istorage";
 import { Womb } from "../pregnancy";
 import { Stat } from "../stat";
-import { Text } from "../text";
+import { IParse, Text } from "../text";
 import { Cock } from "./cock";
 
 export enum Capacity {
@@ -78,7 +78,7 @@ export class Orifice {
 	}
 
 	public StretchOrifice(entity: any, cock: Cock, silent?: boolean) {
-		const parse: any = {
+		const parse: IParse = {
 			or   : this.holeDesc(),
 			poss : entity.Possessive(),
 		};

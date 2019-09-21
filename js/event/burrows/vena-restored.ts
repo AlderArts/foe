@@ -2,7 +2,7 @@ import { EncounterTable } from "../../encountertable";
 import { GAME, TimeStep } from "../../GAME";
 import { Gui } from "../../gui";
 import { IChoice } from "../../link";
-import { Text } from "../../text";
+import { IParse, Text } from "../../text";
 import { Player } from "../player";
 import { LagonDScenes } from "./lagon-defeated";
 import { Vena } from "./vena";
@@ -12,7 +12,7 @@ export namespace VenaRScenes {
 
 	export function Approach() {
 		const player: Player = GAME().player;
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -133,7 +133,7 @@ export namespace VenaRScenes {
 
 	export function Prompt() {
 		const vena: Vena = GAME().vena;
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -197,7 +197,7 @@ export namespace VenaRScenes {
 
 	export function LagonsFate(opts: any) {
 		const player: Player = GAME().player;
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 

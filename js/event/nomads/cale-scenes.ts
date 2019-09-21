@@ -7,7 +7,7 @@ import { Gui } from "../../gui";
 import { Jobs } from "../../job";
 import { IChoice } from "../../link";
 import { Party } from "../../party";
-import { Text } from "../../text";
+import { IParse, Text } from "../../text";
 import { Player } from "../player";
 import { Cale } from "./cale";
 import { CaleFlags } from "./cale-flags";
@@ -24,7 +24,7 @@ export namespace CaleScenes {
 		const player: Player = GAME().player;
 		const rosalin: Rosalin = GAME().rosalin;
 		const cale: Cale = GAME().cale;
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -96,7 +96,7 @@ export namespace CaleScenes {
 
 	export function Desc() {
 		const cale: Cale = GAME().cale;
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 		if (cale.flags.Met2 === 0) {
@@ -116,7 +116,7 @@ export namespace CaleScenes {
 	export function FirstApproach() {
 		const player: Player = GAME().player;
 		const cale: Cale = GAME().cale;
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 			guyGal     : player.mfTrue("guy", "gal"),
 		};
@@ -389,7 +389,7 @@ export namespace CaleScenes {
 	}
 
 	export function TalkSlut() {
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -408,7 +408,7 @@ export namespace CaleScenes {
 
 	export function Prompt() {
 		const cale: Cale = GAME().cale;
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -469,7 +469,7 @@ export namespace CaleScenes {
 
 	export function Shop() {
 		const cale: Cale = GAME().cale;
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -522,7 +522,7 @@ export namespace CaleScenes {
 		const party: Party = GAME().party;
 		const rosalin: Rosalin = GAME().rosalin;
 		const cale: Cale = GAME().cale;
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 		};
 		parse = player.ParserTags(parse);
@@ -809,7 +809,7 @@ export namespace CaleScenes {
 	export function TalkPast() {
 		const player: Player = GAME().player;
 		const cale: Cale = GAME().cale;
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 		};
 		parse = player.ParserTags(parse);
@@ -971,7 +971,7 @@ export namespace CaleScenes {
 	export function Rogue() {
 		const player: Player = GAME().player;
 		const cale: Cale = GAME().cale;
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 		};
 		parse = player.ParserTags(parse);
@@ -1111,7 +1111,7 @@ export namespace CaleScenes {
 
 	export function RogueTeach() {
 		const cale: Cale = GAME().cale;
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 

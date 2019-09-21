@@ -165,7 +165,7 @@ export class Inventory {
 	public AddItem(item: Item, num: number = 1) {
 		if (GetDEBUG()) {
 			Text.NL();
-			Text.Add("DEBUG: Added [num] [name] (ID: [id])", {num, name: item.name, id: item.id}, "bold");
+			Text.Add(`DEBUG: Added ${num} ${item.name} (ID: ${item.id})`, undefined, "bold");
 			Text.NL();
 			Text.Flush();
 		}
@@ -184,7 +184,7 @@ export class Inventory {
 	public RemoveItem(item: Item, num: number = 1) {
 		if (GetDEBUG()) {
 			Text.NL();
-			Text.Add("DEBUG: Removed [num] [name] (ID: [id])", {num, name: item.name, id: item.id}, "bold");
+			Text.Add(`DEBUG: Removed ${num} ${item.name} (ID: ${item.id})`, undefined, "bold");
 			Text.NL();
 			Text.Flush();
 		}

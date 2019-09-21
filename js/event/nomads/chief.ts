@@ -12,7 +12,7 @@ import { Gui } from "../../gui";
 import { IStorage } from "../../istorage";
 import { IChoice } from "../../link";
 import { Party } from "../../party";
-import { Text } from "../../text";
+import { IParse, Text } from "../../text";
 import { Rand } from "../../utility";
 import { Kiakai } from "../kiakai";
 import { Player } from "../player";
@@ -59,7 +59,7 @@ export namespace ChiefScenes {
 		const kiakai: Kiakai = GAME().kiakai;
 		const chief: Chief = GAME().chief;
 
-		const parse: any = {
+		const parse: IParse = {
 			elfname   : kiakai.name,
 			elfhimher : kiakai.himher(),
 			playerName: player.name,
@@ -140,7 +140,7 @@ export namespace ChiefScenes {
 		const rosalin: Rosalin = GAME().rosalin;
 		const kiakai: Kiakai = GAME().kiakai;
 		const chief: Chief = GAME().chief;
-		const parse: any = {
+		const parse: IParse = {
 			elfname   : kiakai.name,
 			elfhimher : kiakai.himher(),
 			playerName: player.name,
@@ -205,7 +205,7 @@ export namespace ChiefScenes {
 				const scenes = [];
 				// ROSALIN
 				scenes.push(() => {
-					const parse: any = {
+					const parse: IParse = {
 						heshe   : rosalin.heshe(),
 						hisher  : rosalin.hisher(),
 						himher  : rosalin.himher(),

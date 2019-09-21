@@ -3,7 +3,7 @@ import { Entity } from "../entity";
 import { GAME, TimeStep } from "../GAME";
 import { Gui } from "../gui";
 import { Party } from "../party";
-import { Text } from "../text";
+import { IParse, Text } from "../text";
 
 /*
  * Meditation scenes for the PC
@@ -16,7 +16,7 @@ export namespace MeditationScenes {
 		const party: Party = GAME().party;
 		const kiakai: Entity = GAME().kiakai;
 		const miranda: Entity = GAME().miranda;
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 			Kiai : kiakai.name,
 		};

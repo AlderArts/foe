@@ -13,7 +13,7 @@ import { Gui } from "../gui";
 import { IStorage } from "../istorage";
 import { IChoice } from "../link";
 import { Party } from "../party";
-import { Text } from "../text";
+import { IParse, Text } from "../text";
 import { TF } from "../tf";
 import { GlobalScenes } from "./global";
 import { Player } from "./player";
@@ -107,7 +107,7 @@ export namespace RavenMotherScenes {
 	export function TheHunt(func: CallableFunction) {
 		const ravenmother: RavenMother = GAME().ravenmother;
 		const party: Party = GAME().party;
-		const parse: any = {};
+		const parse: IParse = {};
 
 		theHuntWakeup = func;
 
@@ -186,7 +186,7 @@ export namespace RavenMotherScenes {
 	}
 
 	export function TheHuntWolf() {
-		const parse: any = {};
+		const parse: IParse = {};
 
 		Text.Clear();
 		Text.Add("...You run on all fours, as a hunter, chasing a deer. This time, however, you’re prepared, and slow to a walk, looking around at the trees above. You feel more in control of the dream now. You think you could change into a human if you tried, but there’s no need.", parse);
@@ -235,7 +235,7 @@ export namespace RavenMotherScenes {
 		const ravenmother: RavenMother = GAME().ravenmother;
 		const player: Player = GAME().player;
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -288,7 +288,7 @@ export namespace RavenMotherScenes {
 	export function TheHuntGladeCont() {
 		const player: Player = GAME().player;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -389,7 +389,7 @@ export namespace RavenMotherScenes {
 	export function TheHuntTalk() {
 		const ravenmother: RavenMother = GAME().ravenmother;
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -447,7 +447,7 @@ export namespace RavenMotherScenes {
 	}
 
 	export function TheHuntQuestions(back: any) {
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -518,7 +518,7 @@ export namespace RavenMotherScenes {
 	export function RavenPrompt(back: any) {
 		const ravenmother: RavenMother = GAME().ravenmother;
 
-		const parse: any = {};
+		const parse: IParse = {};
 
 		Text.Clear();
 

@@ -29,7 +29,7 @@ import { WeaponsItems } from "../items/weapons";
 import { IChoice } from "../link";
 import { Party } from "../party";
 import { PregnancyHandler } from "../pregnancy";
-import { Text } from "../text";
+import { IParse, Text } from "../text";
 import { TF } from "../tf";
 
 /*
@@ -517,7 +517,7 @@ export namespace MaliceScoutsScenes {
 			enc.catboy   = catboy;
 
 			enc.onEncounter = () => {
-				let parse: any = {
+				let parse: IParse = {
 					day : WorldTime().LightStr("sun beats down warmly", "moon shines softly"),
 				};
 				parse = player.ParserTags(parse);
@@ -575,7 +575,7 @@ export namespace MaliceScoutsScenes {
 			const enc  = this;
 			SetGameState(GameState.Event, Gui);
 
-			const parse: any = {
+			const parse: IParse = {
 
 			};
 
@@ -668,7 +668,7 @@ export namespace MaliceScoutsScenes {
 			const party: Party = GAME().party;
 			const catboy: CatboyMage = enc.catboy;
 			const p1cock = player.BiggestCock();
-			let parse: any = {
+			let parse: IParse = {
 
 			};
 			parse = player.ParserTags(parse);
@@ -864,7 +864,7 @@ export namespace MaliceScoutsScenes {
 			const player: Player = GAME().player;
 			const catboy: CatboyMage = enc.catboy;
 			const p1cock = player.BiggestCock();
-			let parse: any = {
+			let parse: IParse = {
 
 			};
 			parse = player.ParserTags(parse);
@@ -1142,7 +1142,7 @@ export namespace MaliceScoutsScenes {
 
 		export function Petting(enc: any) {
 			const player: Player = GAME().player;
-			let parse: any = {
+			let parse: IParse = {
 
 			};
 			parse = player.ParserTags(parse);
@@ -1268,7 +1268,7 @@ export namespace MaliceScoutsScenes {
 			// this = encounter
 			const enc = this;
 
-			const parse: any = {
+			const parse: IParse = {
 
 			};
 
@@ -1336,7 +1336,7 @@ export namespace MaliceScoutsScenes {
 		export function GetMilked(enc: any) {
 			const player: Player = GAME().player;
 			const catboy: CatboyMage = enc.catboy;
-			let parse: any = {
+			let parse: IParse = {
 
 			};
 			parse = player.ParserTags(parse);
@@ -1432,7 +1432,7 @@ export namespace MaliceScoutsScenes {
 			enc.mare     = mare;
 
 			enc.onEncounter = () => {
-				let parse: any = {
+				let parse: IParse = {
 
 				};
 				parse = player.ParserTags(parse);
@@ -1525,7 +1525,7 @@ export namespace MaliceScoutsScenes {
 			const enc  = this;
 			SetGameState(GameState.Event, Gui);
 
-			const parse: any = {
+			const parse: IParse = {
 
 			};
 
@@ -1597,7 +1597,7 @@ export namespace MaliceScoutsScenes {
 			const player: Player = GAME().player;
 			const mare: CentaurMare = enc.mare;
 			const p1cock = player.BiggestCock();
-			let parse: any = {
+			let parse: IParse = {
 
 			};
 			parse = player.ParserTags(parse);
@@ -1916,7 +1916,7 @@ export namespace MaliceScoutsScenes {
 			const player: Player = GAME().player;
 			const mare: CentaurMare = enc.mare;
 			const p1cock = player.BiggestCock();
-			let parse: any = {
+			let parse: IParse = {
 
 			};
 			parse = player.ParserTags(parse);
@@ -2031,7 +2031,7 @@ export namespace MaliceScoutsScenes {
 			// this = encounter
 			const enc = this;
 
-			let parse: any = {
+			let parse: IParse = {
 
 			};
 			parse = player.ParserTags(parse);
@@ -2084,7 +2084,7 @@ export namespace MaliceScoutsScenes {
 
 		export function LossFacesit(enc: any) {
 			const player: Player = GAME().player;
-			let parse: any = {
+			let parse: IParse = {
 
 			};
 			parse = player.ParserTags(parse);
@@ -2168,7 +2168,7 @@ export namespace MaliceScoutsScenes {
 			enc.goat     = goat;
 
 			enc.onEncounter = () => {
-				let parse: any = {
+				let parse: IParse = {
 
 				};
 				parse = player.ParserTags(parse);
@@ -2224,7 +2224,7 @@ export namespace MaliceScoutsScenes {
 			const enc  = this;
 			SetGameState(GameState.Event, Gui);
 
-			const parse: any = {
+			const parse: IParse = {
 
 			};
 
@@ -2277,7 +2277,7 @@ export namespace MaliceScoutsScenes {
 		export function WinTurnTables(enc: any) {
 			const player: Player = GAME().player;
 			const goat: GoatAlchemist = enc.goat;
-			let parse: any = {
+			let parse: IParse = {
 
 			};
 			parse = player.ParserTags(parse);
@@ -2852,7 +2852,7 @@ export namespace MaliceScoutsScenes {
 			// this = encounter
 			const enc = this;
 
-			let parse: any = {
+			let parse: IParse = {
 
 			};
 			parse = player.ParserTags(parse);
@@ -2873,7 +2873,7 @@ export namespace MaliceScoutsScenes {
 
 		export function LossEntry(enc: any) {
 			const player: Player = GAME().player;
-			let parse: any = {
+			let parse: IParse = {
 
 			};
 			parse = player.ParserTags(parse);
@@ -3345,7 +3345,7 @@ export namespace MaliceScoutsScenes {
 			enc.mare     = mare;
 
 			enc.onEncounter = () => {
-				const parse: any = {
+				const parse: IParse = {
 					himher : player.mfFem("him", "her"),
 				};
 
@@ -3409,7 +3409,7 @@ export namespace MaliceScoutsScenes {
 			const enc  = this;
 			SetGameState(GameState.Event, Gui);
 
-			let parse: any = {
+			let parse: IParse = {
 
 			};
 			parse = player.ParserTags(parse);
@@ -3464,7 +3464,7 @@ export namespace MaliceScoutsScenes {
 			// this = encounter
 			const enc = this;
 
-			const parse: any = {
+			const parse: IParse = {
 
 			};
 
@@ -3522,7 +3522,7 @@ export namespace MaliceScoutsScenes {
 			const player: Player = GAME().player;
 			const catboy: CatboyMage = enc.catboy;
 
-			let parse: any = {
+			let parse: IParse = {
 
 			};
 			parse = player.ParserTags(parse);
@@ -3741,7 +3741,7 @@ export namespace MaliceScoutsScenes {
 		export function LossMagicalBondage(enc: any) {
 			const player: Player = GAME().player;
 			const party: Party = GAME().party;
-			let parse: any = {
+			let parse: IParse = {
 				hisher : player.mfTrue("his", "her"),
 				himher : player.mfTrue("him", "her"),
 			};
@@ -4062,7 +4062,7 @@ export namespace MaliceScoutsScenes {
 			const player: Player = GAME().player;
 			const catboy: CatboyMage = enc.catboy;
 
-			let parse: any = {
+			let parse: IParse = {
 
 			};
 			parse = player.ParserTags(parse);

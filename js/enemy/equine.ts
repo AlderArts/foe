@@ -25,7 +25,7 @@ import { IngredientItems } from "../items/ingredients";
 import { IChoice } from "../link";
 import { Party } from "../party";
 import { PregnancyHandler } from "../pregnancy";
-import { Text } from "../text";
+import { IParse, Text } from "../text";
 import { TF } from "../tf";
 
 export class Equine extends Entity {
@@ -180,7 +180,7 @@ export namespace EquineScenes {
 		enc.mare     = mare;
 
 		enc.onEncounter = () => {
-			const parse: any = {
+			const parse: IParse = {
 				party         : !GAME().party.Alone() ? " and your party" : "",
 				breastCup : enc.mare.FirstBreastRow().ShortCup(),
 			};
@@ -221,7 +221,7 @@ export namespace EquineScenes {
 		// this = encounter
 		const enc = this;
 
-		const parse: any = {
+		const parse: IParse = {
 			party         : !party.Alone() ? " and your party" : "",
 			hisher1       : enc.stallion.hisher(),
 			heshe1        : enc.stallion.heshe(),
@@ -352,7 +352,7 @@ export namespace EquineScenes {
 	export function FuckFemale(enc: any) {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		let parse: any = {
+		let parse: IParse = {
 			mobVag() { return enc.mare.FirstVag().Short(); },
 		};
 
@@ -463,7 +463,7 @@ export namespace EquineScenes {
 
 	export function GetFucked(enc: any) {
 		const player: Player = GAME().player;
-		let parse: any = {
+		let parse: IParse = {
 			ifArmor    : player.Armor() ? "strips you down to full nudity" : "runs them down your naked body",
 		};
 
@@ -528,7 +528,7 @@ export namespace EquineScenes {
 	// SCENE FOR MALES/HERMS
 	export function Threesome1(enc: any) {
 		const player: Player = GAME().player;
-		let parse: any = {
+		let parse: IParse = {
 			mobVag() { return enc.mare.FirstVag().Short(); },
 			ifBalls() { return player.HasBalls() ? "r balls" : ""; },
 		};
@@ -604,7 +604,7 @@ export namespace EquineScenes {
 
 	export function Threesome2(enc: any) {
 		const player: Player = GAME().player;
-		let parse: any = {
+		let parse: IParse = {
 			mobVag() { return enc.mare.FirstVag().Short(); },
 		};
 
@@ -657,7 +657,7 @@ export namespace EquineScenes {
 		const enc  = this;
 		SetGameState(GameState.Event, Gui);
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -734,7 +734,7 @@ export namespace EquineScenes {
 			}
 		}
 
-		let parse: any = {
+		let parse: IParse = {
 			cocks2() { return player.MultiCockDesc(allCocks); },
 		};
 
@@ -1170,7 +1170,7 @@ export namespace EquineScenes {
 		const mare: Equine = enc.mare;
 		const stallion: Equine = enc.stallion;
 
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 
@@ -1320,7 +1320,7 @@ export namespace EquineScenes {
 		const mare: Equine = enc.mare;
 		const stallion: Equine = enc.stallion;
 
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 

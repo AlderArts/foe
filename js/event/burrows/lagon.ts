@@ -23,7 +23,7 @@ import { QuestItems } from "../../items/quest";
 import { Burrows } from "../../loc/burrows";
 import { ILocation } from "../../location";
 import { Party } from "../../party";
-import { Text } from "../../text";
+import { IParse, Text } from "../../text";
 import { TF } from "../../tf";
 import { ITime } from "../../time";
 import { Player } from "../player";
@@ -166,7 +166,7 @@ export class LagonRegular extends BossEntity {
 	}
 
 	public PhysDmgHP(encounter: any, caster: Entity, val: number) {
-		const parse: any = {
+		const parse: IParse = {
 			poss : caster.possessive(),
 		};
 
@@ -196,7 +196,7 @@ export class LagonRegular extends BossEntity {
 		// Pick a random target
 		const t = this.GetSingleTarget(enc, activeChar);
 
-		const parse: any = {
+		const parse: IParse = {
 			name   : this.name,
 			hisher : this.hisher(),
 			tName  : t.name,
@@ -340,7 +340,7 @@ export class LagonBrute extends BossEntity {
 		const targets = this.GetPartyTarget(encounter, activeChar);
 		const t = this.GetSingleTarget(encounter, activeChar);
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 

@@ -6,8 +6,8 @@
 
 import { Abilities } from "../abilities";
 import { Images } from "../assets";
-import { LowerBodyType } from "../body/body";
 import { Body } from "../body/body";
+import { LowerBodyType } from "../body/body";
 import { Cock, CockType } from "../body/cock";
 import { Color } from "../body/color";
 import { Race } from "../body/race";
@@ -28,7 +28,7 @@ import { IChoice } from "../link";
 import { BurrowsFlags } from "../loc/burrows-flags";
 import { SetGameOverButton } from "../main-gameover";
 import { Party } from "../party";
-import { Text } from "../text";
+import { IParse, Text } from "../text";
 import { BossEntity } from "./boss";
 
 export class GolQueen extends BossEntity {
@@ -155,7 +155,7 @@ export namespace GolScenes {
 	export function SearchForScepter() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -238,7 +238,7 @@ export namespace GolScenes {
 		const gol: GolQueen = enc.gol;
 		SetGameState(GameState.Event, Gui);
 
-		const parse: any = {
+		const parse: IParse = {
 			foot() { return player.FootDesc(); },
 		};
 
@@ -291,7 +291,7 @@ export namespace GolScenes {
 
 	export function CombatLossIncubator(gol: GolQueen) {
 		const player: Player = GAME().player;
-		const parse: any = {
+		const parse: IParse = {
 			skinDesc() { return player.SkinDesc(); },
 			armor() { return player.ArmorDesc(); },
 			legs() { return player.LegsDesc(); },
@@ -333,7 +333,7 @@ export namespace GolScenes {
 		const player: Player = GAME().player;
 		const p1cock = player.BiggestCock();
 
-		let parse: any = {
+		let parse: IParse = {
 			vagina() { return player.FirstVag().Short(); },
 			cocks() { return player.MultiCockDesc(); },
 			cock() { return p1cock.Short(); },
@@ -437,7 +437,7 @@ export namespace GolScenes {
 		const player: Player = GAME().player;
 		const p1cock = player.BiggestCock();
 
-		let parse: any = {
+		let parse: IParse = {
 			vagina() { return player.FirstVag().Short(); },
 			cocks() { return player.MultiCockDesc(); },
 			cock() { return p1cock.Short(); },
@@ -562,7 +562,7 @@ export namespace GolScenes {
 		const gol: GolQueen = enc.gol;
 		SetGameState(GameState.Event, Gui);
 
-		const parse: any = {
+		const parse: IParse = {
 			feet() { return player.FeetDesc(); },
 			foot() { return player.FootDesc(); },
 		};
@@ -645,7 +645,7 @@ export namespace GolScenes {
 		const gol: GolQueen = enc.gol;
 		const lusty = gol.LustLevel() >= 0.5;
 
-		let parse: any = {
+		let parse: IParse = {
 			cocks() { return player.MultiCockDesc(); },
 			cock() { return p1cock.Short(); },
 			cockTip() { return p1cock.TipShort(); },
@@ -752,7 +752,7 @@ export namespace GolScenes {
 		const gol: GolQueen = enc.gol;
 		const lusty = gol.LustLevel() >= 0.5;
 
-		let parse: any = {
+		let parse: IParse = {
 			cocks() { return player.MultiCockDesc(); },
 			cock() { return p1cock.Short(); },
 			cockTip() { return p1cock.TipShort(); },
@@ -869,7 +869,7 @@ export namespace GolScenes {
 		const lusty = gol.LustLevel() >= 0.5;
 		const p1cock = player.BiggestCock();
 
-		let parse: any = {
+		let parse: IParse = {
 			cocks() { return player.MultiCockDesc(); },
 			cock() { return p1cock.Short(); },
 			cockTip() { return p1cock.TipShort(); },
@@ -981,7 +981,7 @@ export namespace GolScenes {
 	}
 
 	export function CombatAftermath(enc: any) {
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 

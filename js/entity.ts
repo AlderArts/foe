@@ -37,7 +37,7 @@ import { PregnancyHandler, Womb } from "./pregnancy";
 import { Stat } from "./stat";
 import { StatusEffect } from "./statuseffect";
 import { StatusList } from "./statuslist";
-import { Text } from "./text";
+import { IParse, Text } from "./text";
 import { ITime, Time } from "./time";
 import { Unit } from "./utility";
 
@@ -418,9 +418,11 @@ export class Entity {
 			exp = Math.ceil(buff.exp * exp);
 		}
 
+		const r = reserve ? "RESERVE: " : "";
+
 		if (GetDEBUG()) {
 			Text.NL();
-			Text.Add("[reserve][name] gains [x] xp.", {reserve: reserve ? "RESERVE: " : "", name: this.name, x: exp}, "bold");
+			Text.Add(`${r}${this.name} gains ${exp} xp.`, undefined, "bold");
 			Text.NL();
 			Text.Flush();
 		}
@@ -441,7 +443,7 @@ export class Entity {
 
 			if (GetDEBUG()) {
 				Text.NL();
-				Text.Add("[reserve][name] gains a level! Now at [x].", {reserve: reserve ? "RESERVE: " : "", name: this.name, x: this.level}, "bold");
+				Text.Add(`${r}${this.name} gains a level! Now at ${this.level}.`, undefined, "bold");
 				Text.NL();
 				Text.Flush();
 			}
@@ -451,7 +453,7 @@ export class Entity {
 	public AddSexExp(sexp: number) {
 		if (GetDEBUG()) {
 			Text.NL();
-			Text.Add("[name] gains [x] sex exp.", {name: this.name, x: sexp}, "bold");
+			Text.Add(`${this.name} gains ${sexp} sex exp.`, undefined, "bold");
 			Text.NL();
 			Text.Flush();
 		}
@@ -466,7 +468,7 @@ export class Entity {
 
 			if (GetDEBUG()) {
 				Text.NL();
-				Text.Add("[name] gains a sex level! Now at [x].", {name: this.name, x: this.sexlevel}, "bold");
+				Text.Add(`${this.name} gains a sex level! Now at ${this.sexlevel}.`, undefined, "bold");
 				Text.NL();
 				Text.Flush();
 			}
@@ -565,7 +567,7 @@ export class Entity {
 			womb.pregnant = false;
 
 			if (GetDEBUG()) {
-				const parse: any = {
+				const parse: IParse = {
 					name : that.name,
 				};
 
@@ -596,7 +598,7 @@ export class Entity {
 		return this.drunkLevel;
 	}
 	public DrunkStr() {
-		const parse: any = {
+		const parse: IParse = {
 			name : this.NameDesc(),
 			isAre : this.is(),
 		};
@@ -991,7 +993,7 @@ export class Entity {
 	}
 
 	public PhysDmgHP(encounter: ICombatEncounter, caster: Entity, val: number) {
-		const parse: any = {
+		const parse: IParse = {
 			possessive : this.possessive(),
 		};
 		const ent = this;
@@ -1661,10 +1663,10 @@ export class Entity {
 
 	/* ENTITY DESC */
 	public PrintDescription(partial?: boolean) {
-		let parse: any = {
+		let parse: IParse = {
 			name     : this.NameDesc(),
 			possesive: this.possessive(),
-			weigth   : Math.floor(this.body.weigth.Get() * 2),
+			weigth   : Math.floor(this.body.weigth.Get() * 2).toString(),
 			race     : this.body.RaceStr(),
 			gender   : this.body.GenderStr(),
 			skinDesc : this.body.SkinDesc(),
@@ -2028,7 +2030,7 @@ export class Entity {
 		return this.body.HasScales();
 	}
 
-	public LactationDesc(parse: any) {
+	public LactationDesc(parse: IParse) {
 
 	}
 	public StomachDesc() {
@@ -2260,7 +2262,7 @@ export class Entity {
 		return parse;
 	}
 
-	public ParserTags(parse: any = {}, prefix: string = "", p1cock?: Cock) {
+	public ParserTags(parse: IParse = {}, prefix: string = "", p1cock?: Cock) {
 		const ent = this;
 
 		p1cock = p1cock || ent.BiggestCock(undefined, true);
@@ -2578,7 +2580,7 @@ export class Entity {
 
 	// Fuck entitys anus (anus, cock)
 	public FuckAnal(butt: Butt, cock?: Cock, expMult?: number) {
-		const parse: any = {
+		const parse: IParse = {
 			name   : this.NameDesc(),
 			has    : this.has(),
 			hisher : this.hisher(),
@@ -2601,7 +2603,7 @@ export class Entity {
 
 	// Fuck entitys vagina (vag, cock)
 	public FuckVag(vag: Vagina, cock?: Cock, expMult?: number) {
-		const parse: any = {
+		const parse: IParse = {
 			name   : this.NameDesc(),
 			has    : this.has(),
 			hisher : this.hisher(),

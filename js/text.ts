@@ -4,6 +4,10 @@ import * as _ from "lodash";
 import { GetRenderPictures } from "../app";
 import { Rand } from "./utility";
 
+export interface IParse {
+	[index: string]: string|(() => string);
+}
+
 export namespace Text {
 
 	let buffer = "";
@@ -25,12 +29,12 @@ export namespace Text {
 		}
 	}
 
-	export function SetTooltip(text: string, parseStrings?: any) {
+	export function SetTooltip(text: string, parseStrings?: IParse) {
 		const textbox = document.getElementById("tooltipTextArea");
 		textbox.innerHTML = Text.Parse(text, parseStrings);
 	}
 
-	export function Parse(text: string, parseStrings?: any): string {
+	export function Parse(text: string, parseStrings?: IParse): string {
 		try {
 			// Simple parser
 			if (parseStrings) {
@@ -103,7 +107,7 @@ export namespace Text {
 	// This is primarily meant to be used for dialogue and scenes,
 	// but AddSpan and AddDiv both call it, since this would make
 	// testing easier in the future, as only this needs unit testing
-	export function Add(text: string, parse?: any, cssClasses?: string, tag?: string) {
+	export function Add(text: string, parse?: IParse, cssClasses?: string, tag?: string) {
 		const parsed = Text.Parse(text, parse);
 		if (cssClasses) {
 			buffer += ApplyStyle(parsed, cssClasses, tag);
@@ -113,12 +117,12 @@ export namespace Text {
 	}
 
 	// Adds text wrapped in a span.
-	export function AddSpan(text: string, parse?: any, cssClasses?: string) {
+	export function AddSpan(text: string, parse?: IParse, cssClasses?: string) {
 		Text.Add(text, parse, cssClasses, "span");
 	}
 
 	// Adds text wrapped in a div.
-	export function AddDiv(text: string, parse?: any, cssClasses?: string) {
+	export function AddDiv(text: string, parse?: IParse, cssClasses?: string) {
 		Text.Add(text, parse, cssClasses, "div");
 	}
 
@@ -201,7 +205,7 @@ export namespace Text {
 			return num.toString();
 		} else if (num < 20) {
 			return DigitToText(num);
- } else if (num < 1000) {
+ 		} else if (num < 1000) {
 			const ones = num % 10;
 			const tens = Math.floor(num / 10) % 10;
 			const hundreds = Math.floor(num / 100) % 10;
@@ -281,7 +285,7 @@ export namespace Text {
 		}
 	}
 
-	export function ParserPlural(parse: any = {}, condition?: any, prefix: string = "", postfix: string|number = "") {
+	export function ParserPlural(parse: IParse = {}, condition?: any, prefix: string = "", postfix: string|number = "") {
 		parse[prefix + "a" + postfix]      = condition ? "" : " a";
 		parse[prefix + "s" + postfix]      = condition ? "s" : "";
 		parse[prefix + "notS" + postfix]   = condition ? "" : "s";

@@ -7,7 +7,7 @@ import { Event } from "../../event";
 import { GAME, MoveToLocation, WORLD, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
 import { IChoice, Link } from "../../link";
-import { Text } from "../../text";
+import { IParse, Text } from "../../text";
 
 const OddShopLoc = new Event("Odd shop");
 
@@ -39,7 +39,7 @@ export namespace OddShopScenes {
 	export function Prompt() {
 		const rigard = GAME().rigard;
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 

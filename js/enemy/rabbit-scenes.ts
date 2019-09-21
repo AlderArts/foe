@@ -22,7 +22,7 @@ import { BurrowsFlags } from "../loc/burrows-flags";
 import { BurrowsScenes } from "../loc/burrows-scenes";
 import { Party } from "../party";
 import { PregnancyHandler } from "../pregnancy";
-import { Text } from "../text";
+import { IParse, Text } from "../text";
 import { Lagomorph, LagomorphBrute, LagomorphWizard } from "./rabbit";
 
 export namespace LagomorphScenes {
@@ -98,7 +98,7 @@ export namespace LagomorphScenes {
 
 		const enc = this;
 
-		let parse: any = {
+		let parse: IParse = {
 			himherthem : party.Num() > 1 ? "them" : player.mfFem("him", "her"),
 		};
 
@@ -218,7 +218,7 @@ export namespace LagomorphScenes {
 		const p1cock = player.BiggestCock();
 
 		const brainy = enc.brainy;
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 
@@ -366,7 +366,7 @@ export namespace LagomorphScenes {
 		const burrows: Burrows = GAME().burrows;
 		const alpha = enc.alpha;
 
-		let parse: any = {
+		let parse: IParse = {
 			p1name() { return party.members[1].name; },
 			m1HeShe() { return alpha.HeShe(); },
 			m1heshe() { return alpha.heshe(); },
@@ -464,7 +464,7 @@ export namespace LagomorphScenes {
 
 		const enc = this;
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -626,7 +626,7 @@ export namespace LagomorphScenes {
 		const p1cock  = player.BiggestCock(undefined, true);
 		const strapon = p1cock ? p1cock.isStrapon : undefined;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 
 		};
@@ -838,7 +838,7 @@ export namespace LagomorphScenes {
 
 	export function GroupWinOnPlainsBruteIntro() {
 		const party: Party = GAME().party;
-		const parse: any = {};
+		const parse: IParse = {};
 
 		if (party.Num() > 1) {
 			const p1 = party.Get(1);
@@ -857,7 +857,7 @@ export namespace LagomorphScenes {
 	}
 
 	export function GroupWinOnPlainsBruteCums() {
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -878,7 +878,7 @@ export namespace LagomorphScenes {
 		const p1cock  = player.BiggestCock();
 		const strapon = p1cock ? p1cock.isStrapon : undefined;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 
 		};
@@ -1415,7 +1415,7 @@ export namespace LagomorphScenes {
 		const kiakai: Kiakai = GAME().kiakai;
 		const terry: Terry = GAME().terry;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 
 		};
@@ -1656,7 +1656,7 @@ export namespace LagomorphScenes {
 		const burrows: Burrows = GAME().burrows;
 		const alpha: Lagomorph = enc.alpha;
 
-		let parse: any = {
+		let parse: IParse = {
 			meUs       : party.Alone() ? "me" : "us",
 			p1name() { return party.members[1].name; },
 		};

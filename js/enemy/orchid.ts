@@ -20,7 +20,7 @@ import { ArmorItems } from "../items/armor";
 import { IngredientItems } from "../items/ingredients";
 import { WeaponsItems } from "../items/weapons";
 import { Party } from "../party";
-import { Text } from "../text";
+import { IParse, Text } from "../text";
 import { BossEntity } from "./boss";
 
 export class OrchidBoss extends BossEntity {
@@ -164,7 +164,7 @@ export class OrchidBoss extends BossEntity {
  		} else if (choice < 0.4 && Abilities.EnemySkill.TRavage.enabledCondition(encounter, this)) {
 			Abilities.EnemySkill.TRavage.Use(encounter, this, t);
  		} else if (choice < 0.6) { // Tease
-			const parse: any = {
+			const parse: IParse = {
 
 			};
 

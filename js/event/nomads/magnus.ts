@@ -17,7 +17,7 @@ import { AlchemyItems } from "../../items/alchemy";
 import { IChoice } from "../../link";
 import { Party } from "../../party";
 import { PregnancyHandler } from "../../pregnancy";
-import { Text } from "../../text";
+import { IParse, Text } from "../../text";
 import { TF } from "../../tf";
 import { GlobalScenes } from "../global";
 import { Kiakai } from "../kiakai";
@@ -98,7 +98,7 @@ export namespace MagnusScenes {
 		const magnus: Magnus = GAME().magnus;
 		Text.Clear();
 
-		const parse: any = {
+		const parse: IParse = {
 			upDown     : player.Height() >= 185 ? " up" : player.Height() <= 165 ? " down" : "",
 			playername : player.name,
 		};
@@ -321,7 +321,7 @@ export namespace MagnusScenes {
 	export function Meditation() {
 		const player: Player = GAME().player;
 		const magnus: Magnus = GAME().magnus;
-		let parse: any = {
+		let parse: IParse = {
 			playername    : player.name,
 		};
 		parse = player.ParserTags(parse);
@@ -766,7 +766,7 @@ export namespace MagnusScenes {
 
 	export function SexSounding() {
 		const player: Player = GAME().player;
-		let parse: any = {
+		let parse: IParse = {
 			setof : player.NumCocks() > 1 ? " set of" : "",
 		};
 		parse = player.ParserTags(parse);
@@ -783,7 +783,7 @@ export namespace MagnusScenes {
 		const party: Party = GAME().party;
 		const kiakai: Kiakai = GAME().kiakai;
 		const magnus: Magnus = GAME().magnus;
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -871,7 +871,7 @@ export namespace MagnusScenes {
 	export function LearnMagic() {
 		const player: Player = GAME().player;
 		const magnus: Magnus = GAME().magnus;
-		const parse: any = {
+		const parse: IParse = {
 			hand() { return player.HandDesc(); },
 			playername : player.name,
 		};
@@ -928,7 +928,7 @@ export namespace MagnusScenes {
 
 	export function Desc() {
 		const magnus: Magnus = GAME().magnus;
-		const parse: any = {
+		const parse: IParse = {
 			litExtinguished : WorldTime().hour >= 19 ? "lit" : "extinguished",
 		};
 

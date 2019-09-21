@@ -11,7 +11,7 @@ import { GameState, SetGameState } from "../gamestate";
 import { Gui } from "../gui";
 import { IChoice } from "../link";
 import { Party } from "../party";
-import { Text } from "../text";
+import { IParse, Text } from "../text";
 
 let GwendyScenes: any;
 export function InitMarket(gScenes: any) {
@@ -25,7 +25,7 @@ export namespace MarketScenes {
         const party: Party = GAME().party;
         const gwendy: Gwendy = GAME().gwendy;
 
-        const parse: any = {
+        const parse: IParse = {
             playername : player.name,
         };
 
@@ -187,7 +187,7 @@ export namespace MarketScenes {
         const rigard = GAME().rigard;
         const miranda: Miranda = GAME().miranda;
 
-        const parse: any = {
+        const parse: IParse = {
             playername : player.name,
         };
 
@@ -279,7 +279,7 @@ export namespace MarketScenes {
         const gwendy: Gwendy = GAME().gwendy;
         const farm = GAME().farm;
 
-        const parse: any = {
+        const parse: IParse = {
             playername : player.name,
             enemy      : haul.badenc,
             ear() { return player.EarDesc(); },
@@ -407,8 +407,8 @@ export namespace MarketScenes {
         const coin  = Math.floor(Math.min(total * 0.1, 300));
         const gcoin = Math.floor(total - coin);
 
-        parse.gcoin = gcoin;
-        parse.coin  = coin;
+        parse.gcoin = gcoin.toString();
+        parse.coin  = coin.toString();
 
         Text.Add("<b>Gwendy gains [gcoin] coins for the farm!</b>", parse);
         Text.NL();
@@ -429,7 +429,7 @@ export namespace MarketScenes {
         const gwendy: Gwendy = GAME().gwendy;
         const rigard = GAME().rigard;
 
-        const parse: any = {
+        const parse: IParse = {
             playername : player.name,
         };
 

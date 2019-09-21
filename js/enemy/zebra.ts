@@ -21,7 +21,7 @@ import { IngredientItems } from "../items/ingredients";
 import { IChoice } from "../link";
 import { Party } from "../party";
 import { PregnancyHandler } from "../pregnancy";
-import { Text } from "../text";
+import { IParse, Text } from "../text";
 import { TF } from "../tf";
 
 export class ZebraShaman extends Entity {
@@ -243,7 +243,7 @@ export namespace ZebraShamanScenes {
 		const zebra = enc.zebra;
 		SetGameState(GameState.Event, Gui);
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -276,7 +276,7 @@ export namespace ZebraShamanScenes {
 		const party: Party = GAME().party;
 		const enc = this;
 
-		const parse: any = {
+		const parse: IParse = {
 			weapon : player.WeaponDesc(),
 		};
 
@@ -319,7 +319,7 @@ export namespace ZebraShamanScenes {
 		const zebra = enc.zebra;
 		SetGameState(GameState.Event, Gui);
 
-		const parse: any = {
+		const parse: IParse = {
 			weapon : player.WeaponDesc(),
 		};
 
@@ -379,7 +379,7 @@ export namespace ZebraShamanScenes {
 		const lusty = zebra.LustLevel() > 0.5;
 		const p1cock = player.BiggestCock();
 
-		let parse: any = {
+		let parse: IParse = {
 			clothes() { return player.ArmorDesc(); },
 		};
 		parse = player.ParserTags(parse);
@@ -489,7 +489,7 @@ export namespace ZebraShamanScenes {
 		const lusty = zebra.LustLevel() > 0.5;
 		const p1cock = player.BiggestCock();
 
-		let parse: any = {
+		let parse: IParse = {
 			clothes() { return player.ArmorDesc(); },
 		};
 		parse = player.ParserTags(parse);

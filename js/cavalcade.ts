@@ -9,7 +9,7 @@ import { Input } from "./input";
 import { CardItem, CardItems, CardSuit } from "./items/cards";
 import { IChoice } from "./link";
 import { Party } from "./party";
-import { Text } from "./text";
+import { IParse, Text } from "./text";
 import { Rand } from "./utility";
 
 enum CScore {
@@ -315,10 +315,10 @@ export class Cavalcade {
 	public CoinGameRound() {
 		const party: Party = GAME().party;
 		const that: Cavalcade = this;
-		const parse: any = {
+		const parse: IParse = {
 			token : that.token,
-			bet : that.bet,
-			pot() { return that.pot; },
+			bet : () => that.bet.toString(),
+			pot : () => that.pot.toString(),
 		};
 
 		Gui.ClearButtons();
@@ -473,7 +473,7 @@ export class Cavalcade {
 					w.purse.coin += that.pot;
 					if (party.InParty(w as any)) {
 						Text.NL();
-						parse.pot = that.pot;
+						parse.pot = that.pot.toString();
 						Text.Add("The party gains [pot] [token]s!", parse);
 					}
 				});
@@ -483,7 +483,7 @@ export class Cavalcade {
 				that.winner.purse.coin += that.pot;
 				if (party.InParty(that.winner as any)) {
 					Text.NL();
-					parse.pot = that.pot;
+					parse.pot = that.pot.toString();
 					Text.Add("The party gains [pot] [token]s!", parse);
 				}
 			}

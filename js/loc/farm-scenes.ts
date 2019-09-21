@@ -17,7 +17,7 @@ import { IngredientItems } from "../items/ingredients";
 import { IChoice, Link } from "../link";
 import { ILocFarm } from "../location";
 import { Party } from "../party";
-import { Text } from "../text";
+import { IParse, Text } from "../text";
 import { Season } from "../time";
 import { InitMarket } from "./farm-market";
 
@@ -43,7 +43,7 @@ export namespace FarmScenesIntro {
         TimeStep({minute: 15});
         Text.Clear();
 
-        const parse: any = {};
+        const parse: IParse = {};
 
         Text.Add("While trekking along the rolling grasslands of the plains, you briefly wonder what else might lie out here, until you spot a foreign structure with a muddy pathway leading toward it. In the distance, you see what appears to be an old and worn building. Although from here you are not sure what it is, you feel compelled to go out there and have a look.", parse);
         Text.Flush();
@@ -77,7 +77,7 @@ export namespace FarmScenesIntro {
 
         gwendy.flags.Met = 1;
 
-        const parse: any = {
+        const parse: IParse = {
             handsomecute : player.body.femininity.Get() > 0 ? "cute" : "handsome",
             playername   : player.name,
         };
@@ -166,7 +166,7 @@ export namespace FarmScenesIntro {
         party.location = FarmLoc.Barn;
         TimeStep({minute: 10});
 
-        const parse: any = {};
+        const parse: IParse = {};
 
         Text.Clear();
 
@@ -193,7 +193,7 @@ export namespace FarmScenesIntro {
         TimeStep({minute: 5});
         Text.Clear();
 
-        const parse: any = {};
+        const parse: IParse = {};
 
         Text.Add("Upon reaching the top, you are greeted with the homely sight of furniture spread somewhat clumsily around the place. There is a simple unmade bed with a rather worn, but comfy-looking, quilt resting atop it, and two pillows at the head. A pair of simple wooden drawers lie under the bed, and what looks to be the strap of a bra juts out from one of them. A dresser with a mirror sits close to a round wooden table with two chairs, and a small washtub is under the table filled with dirty dishes. A few essentials that come to mind, like a toilet, are missing, but you believe you saw an outhouse on the way here.", parse);
         Text.NL();
@@ -212,7 +212,7 @@ export namespace FarmScenesIntro {
     export function GwendyQuestions1() {
         const player: Player = GAME().player;
 
-        const parse: any = {
+        const parse: IParse = {
             race() { return player.body.Race().Short(player.Gender()); },
         };
 
@@ -284,7 +284,7 @@ export namespace FarmScenesIntro {
         const danie = GAME().danie;
         const adrian = GAME().adrian;
 
-        const parse: any = {
+        const parse: IParse = {
             playername : player.name,
             breastDesc() { return player.FirstBreastRow().Short(); },
         };
@@ -457,7 +457,7 @@ export namespace FarmScenesIntro {
 
         adrian.flags.Met = 1;
 
-        const parse: any = {
+        const parse: IParse = {
             playername : player.name,
             buttDesc() { return player.Butt().Short(); },
         };
@@ -548,7 +548,7 @@ export namespace FarmScenesIntro {
         Text.Clear();
         TimeStep({hour: 1});
 
-        const parse: any = {
+        const parse: IParse = {
             playername : player.name,
             buttDesc() { return player.Butt().Short(); },
         };
@@ -585,7 +585,7 @@ export namespace FarmScenesIntro {
 
         danie.flags.Met = 1;
 
-        let parse: any = {
+        let parse: IParse = {
             playername : player.name,
             eyeColor   : Color.Desc(player.Eyes().color),
             mistermiss : player.body.Gender() === Gender.male ? "mister" : "miss",
@@ -664,7 +664,7 @@ export namespace FarmScenesIntro {
         Text.Clear();
         player.AddLustFraction(0.5);
 
-        const parse: any = {
+        const parse: IParse = {
             playername      : player.name,
             erectionwetness : player.FirstCock() ? "erection" :
                             player.FirstVag()  ? "wetness" : "arousal",
@@ -719,7 +719,7 @@ export namespace FarmScenesIntro {
         const cocksInVag = player.CocksThatFit(danie.FirstVag());
         const cocksInAss = player.CocksThatFit(danie.Butt());
 
-        const parse: any = {
+        const parse: IParse = {
             playername : player.name,
         };
 
@@ -775,7 +775,7 @@ export namespace FarmScenesIntro {
 
         // IF bits === true, cock, else vag
 
-        const parse: any = {
+        const parse: IParse = {
             playername : player.name,
             cockDesc() { return player.FirstCock().Short(); },
             cuntDesc() { return player.FirstVag().Short(); },
@@ -866,7 +866,7 @@ export namespace FarmScenesIntro {
 
         const p1Cock = player.BiggestCock(cocksInVag);
 
-        const parse: any = {
+        const parse: IParse = {
             playername : player.name,
             cockDesc() { return p1Cock.Short(); },
             cuntDesc() { return danie.FirstVag().Short(); },
@@ -912,7 +912,7 @@ export namespace FarmScenesIntro {
 
         const p1Cock = player.BiggestCock(cocksInAss);
 
-        const parse: any = {
+        const parse: IParse = {
             playername : player.name,
             cockDesc() { return p1Cock.Short(); },
             anusDesc() { return danie.Butt().AnalShort(); },
@@ -954,7 +954,7 @@ export namespace FarmScenesIntro {
         Text.Clear();
         TimeStep({hour: 2});
 
-        const parse: any = {
+        const parse: IParse = {
             playername : player.name,
         };
 
@@ -1160,7 +1160,7 @@ FarmLoc.Loft.links.push(new Link(
 FarmLoc.Loft.SleepFunc = () => {
 	const party: Party = GAME().party;
 
-	const parse: any = {
+	const parse: IParse = {
 
 	};
 

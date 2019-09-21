@@ -6,7 +6,7 @@ import { Entity, ICombatEncounter } from "../entity";
 import { Inventory } from "../inventory";
 import { Item, ItemType } from "../item";
 import { Status } from "../statuseffect";
-import { Text } from "../text";
+import { IParse, Text } from "../text";
 
 export class CombatItemAbility extends Ability {
 	public item: CombatItem;
@@ -29,17 +29,17 @@ export class CombatItem extends Item {
 
 	// Default messages
 	public static _onDamage(ability: Ability, encounter: Encounter, caster: Entity, target: Entity, dmg: number) {
-		const parse: any = { tName : target.nameDesc() };
+		const parse: IParse = { tName : target.nameDesc() };
 		Text.Add("The attack hits [tName] for " + Text.Damage(dmg) + " damage!", parse);
 		Text.NL();
 	}
 	public static _onMiss(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) {
-		const parse: any = { tName : target.nameDesc() };
+		const parse: IParse = { tName : target.nameDesc() };
 		Text.Add("The attack narrowly misses [tName], dealing no damage!", parse);
 		Text.NL();
 	}
 	public static _onAbsorb(ability: Ability, encounter: Encounter, caster: Entity, target: Entity, dmg: number) {
-		const parse: any = { tName : target.NameDesc(), s : target.plural() ? "" : "s" };
+		const parse: IParse = { tName : target.NameDesc(), s : target.plural() ? "" : "s" };
 		Text.Add("[tName] absorb[s] the attack, gaining " + Text.Heal(dmg) + " health!", parse);
 		Text.NL();
 	}

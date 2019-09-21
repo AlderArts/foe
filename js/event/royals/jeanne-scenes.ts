@@ -5,7 +5,7 @@ import { Gui } from "../../gui";
 import { AlchemySpecial } from "../../items/alchemyspecial";
 import { IChoice } from "../../link";
 import { Party } from "../../party";
-import { Text } from "../../text";
+import { IParse, Text } from "../../text";
 import { TFItem } from "../../tf";
 import { GlobalScenes } from "../global";
 import { Kiakai } from "../kiakai";
@@ -32,7 +32,7 @@ export namespace JeanneScenes {
     export function Interact() {
         const jeanne: Jeanne = GAME().jeanne;
 
-        const parse: any = {};
+        const parse: IParse = {};
         Text.Clear();
         Text.Add("Jeanne greets you as you approach her, politely inquiring what’s on your mind. The gorgeous elven magician flicks her long, pink hair over her shoulder, smiling seductively.", parse);
         Text.NL();
@@ -58,7 +58,7 @@ export namespace JeanneScenes {
         const terry: Terry = GAME().terry;
         const party: Party = GAME().party;
 
-        const parse: any = {};
+        const parse: IParse = {};
         // [Talk][Golem][Sex]
         const options: IChoice[] = [];
         options.push({ nameStr : "Talk",
@@ -109,7 +109,7 @@ export namespace JeanneScenes {
         const jeanne: Jeanne = GAME().jeanne;
         const party: Party = GAME().party;
 
-        const parse: any = {};
+        const parse: IParse = {};
 
         Text.Clear();
         if (item === AlchemySpecial.AnusolPlus) {
@@ -131,7 +131,7 @@ export namespace JeanneScenes {
     }
 
     export function AlchemyBack() {
-        const parse: any = {};
+        const parse: IParse = {};
 
         Text.Clear();
         Text.Add("<i>“Do come back if there is anything else I can help you with.”</i>", parse);
@@ -147,7 +147,7 @@ export namespace JeanneScenes {
         const jeanne: Jeanne = GAME().jeanne;
         const party: Party = GAME().party;
 
-        const parse: any = {
+        const parse: IParse = {
             playername : player.name,
         };
 
@@ -429,7 +429,7 @@ export namespace JeanneScenes {
         const jeanne: Jeanne = GAME().jeanne;
         const party: Party = GAME().party;
 
-        const parse: any = {
+        const parse: IParse = {
             playername : player.name,
             name() { return kiakai.name; },
             hisher() { return kiakai.hisher(); },
@@ -462,7 +462,7 @@ export namespace JeanneScenes {
 
     export function FirstPrompt() {
         const golem: GolemBoss = GAME().golem;
-        const parse: any = {};
+        const parse: IParse = {};
         // [Golem][Jeanne][Gem]
         const options: IChoice[] = [];
         if (talkedGolem === false) {
@@ -547,7 +547,7 @@ export namespace JeanneScenes {
 
     export function FirstCont() {
         const player: Player = GAME().player;
-        const parse: any = {
+        const parse: IParse = {
             playername : player.name,
         };
 

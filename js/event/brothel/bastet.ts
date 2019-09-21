@@ -12,7 +12,7 @@ import { GAME, TimeStep } from "../../GAME";
 import { Gui } from "../../gui";
 import { IStorage } from "../../istorage";
 import { IChoice } from "../../link";
-import { Text } from "../../text";
+import { IParse, Text } from "../../text";
 import { TF } from "../../tf";
 import { Player } from "../player";
 import { LucilleFlags } from "./lucille-flags";
@@ -65,7 +65,7 @@ export namespace BastetScenes {
 	export function IntroEntryPoint() {
 		const player: Player = GAME().player;
 		const bastet = GAME().bastet;
-		const parse: any = {
+		const parse: IParse = {
 			armor : player.ArmorDesc(),
 		};
 
@@ -131,7 +131,7 @@ export namespace BastetScenes {
 	export function TFBlock() {
 		const player: Player = GAME().player;
 
-		let parse: any = {};
+		let parse: IParse = {};
 		parse = player.ParserTags(parse);
 		parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 
@@ -313,7 +313,7 @@ export namespace BastetScenes {
 		const player: Player = GAME().player;
 		const lucille = GAME().lucille;
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -468,7 +468,7 @@ export namespace BastetScenes {
 	}
 
 	export function Birth2() {
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -828,7 +828,7 @@ export namespace BastetScenes {
 
 	export function Birth3() {
 		const bastet = GAME().bastet;
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 

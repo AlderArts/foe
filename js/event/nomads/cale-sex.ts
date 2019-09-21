@@ -8,7 +8,7 @@ import { GAME, TimeStep } from "../../GAME";
 import { Gui } from "../../gui";
 import { IChoice } from "../../link";
 import { PregnancyHandler } from "../../pregnancy";
-import { Text } from "../../text";
+import { IParse, Text } from "../../text";
 import { Player } from "../player";
 import { Cale } from "./cale";
 import { CaleFlags } from "./cale-flags";
@@ -33,7 +33,7 @@ export namespace CaleSexScenes {
 	export function TentSex(Prompt: CallableFunction) {
 		const player: Player = GAME().player;
 		const cale: Cale = GAME().cale;
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -139,7 +139,7 @@ export namespace CaleSexScenes {
 		const player: Player = GAME().player;
 		const rosalin: Rosalin = GAME().rosalin;
 		const cale: Cale = GAME().cale;
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 		};
 		parse = rosalin.ParserPronouns(parse);
@@ -242,7 +242,7 @@ export namespace CaleSexScenes {
 
 	export function SexSuckHim(outside?: boolean) {
 		const player: Player = GAME().player;
-		const parse: any = {
+		const parse: IParse = {
 			masterMistress : player.mfTrue("master", "mistress"),
 		};
 
@@ -265,7 +265,7 @@ export namespace CaleSexScenes {
 		const cale: Cale = GAME().cale;
 		const virgin = cale.Butt().virgin;
 
-		let parse: any = {
+		let parse: IParse = {
 			log        : outside ? "log" : "bedroll",
 			playername : player.name,
 			girlBoy    : player.mfTrue("boy", "girl"),
@@ -543,7 +543,7 @@ export namespace CaleSexScenes {
 		const cale: Cale = GAME().cale;
 		const virgin = cale.Butt().virgin;
 
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 		parse = Text.ParserPlural(parse, player.NumCocks() > 1);
@@ -569,7 +569,7 @@ export namespace CaleSexScenes {
 	export function SexGetBJ(Prompt: CallableFunction, outside?: boolean) {
 		const player: Player = GAME().player;
 		const cale: Cale = GAME().cale;
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -648,7 +648,7 @@ export namespace CaleSexScenes {
 		const p1cock = player.BiggestCock();
 		const virgin = cale.Butt().virgin;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername     : player.name,
 			stutterName    : player.name[0] + "-" + player.name,
 		};
@@ -844,7 +844,7 @@ export namespace CaleSexScenes {
 		const virgin = cale.Butt().virgin;
 		const biggestCock = player.BiggestCock();
 
-		let parse: any = {
+		let parse: IParse = {
 			playername     : player.name,
 			stutterName    : player.name[0] + "-" + player.name,
 			biggest        : player.NumCocks() > 1 ? " biggest" : "",
@@ -992,7 +992,7 @@ export namespace CaleSexScenes {
 			}
 		}
 
-		let parse: any = {
+		let parse: IParse = {
 			log            : outside ? "wooden log" : "bedroll",
 			playername     : player.name,
 			cocks2() { return player.MultiCockDesc(allCocks); },
@@ -1401,7 +1401,7 @@ export namespace CaleSexScenes {
 	export function SexCatchVag(outside?: boolean) {
 		const player: Player = GAME().player;
 		const cale: Cale = GAME().cale;
-		let parse: any = {
+		let parse: IParse = {
 			log           : outside ? "log" : "bedroll",
 			playername    : player.name,
 		};
@@ -1511,7 +1511,7 @@ export namespace CaleSexScenes {
 		const cocksInAss = player.CocksThatFit(cale.Butt(), true);
 		const cock = player.BiggestCock(undefined, true);
 
-		let parse: any = {
+		let parse: IParse = {
 			log           : outside ? "log" : "bedroll",
 			playername    : player.name,
 			guygal        : player.mfTrue("guy", "gal"),
@@ -1802,7 +1802,7 @@ export namespace CaleSexScenes {
 	export function SexCaleShowerEntrypoint(outside: boolean) {
 		const player: Player = GAME().player;
 		const cale: Cale = GAME().cale;
-		let parse: any = {
+		let parse: IParse = {
 			log        : outside ? "log" : "bedroll",
 			playername : player.name,
 		};
@@ -1850,7 +1850,7 @@ export namespace CaleSexScenes {
 
 	export function SexCaleCleanCockEntrypoint(cock: Cock, outside: boolean) {
 		const player: Player = GAME().player;
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 		parse = player.ParserTags(parse, "", cock);
@@ -1893,7 +1893,7 @@ export namespace CaleSexScenes {
 		const p1cock = player.BiggestCock(cocks);
 		const knotted = p1cock.knot !== 0;
 
-		let parse: any = {
+		let parse: IParse = {
 			log        : outside ? "log" : "bedroll",
 			playername : player.name,
 		};
@@ -2058,7 +2058,7 @@ export namespace CaleSexScenes {
 	export function SexCatchAnal(outside?: boolean) {
 		const player: Player = GAME().player;
 		const cale: Cale = GAME().cale;
-		let parse: any = {
+		let parse: IParse = {
 			log : outside ? "log" : "bedroll",
 			playername : player.name,
 		};
@@ -2115,7 +2115,7 @@ export namespace CaleSexScenes {
 		const cale: Cale = GAME().cale;
 		const cocksInAss = player.CocksThatFit(cale.Butt(), true);
 
-		let parse: any = {
+		let parse: IParse = {
 			log : outside ? "log" : "bedroll",
 			playername    : player.name,
 		};
@@ -2305,7 +2305,7 @@ export namespace CaleSexScenes {
 
 	export function SexGettingFuckedOutsideComments() {
 		const cale: Cale = GAME().cale;
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -2344,7 +2344,7 @@ export namespace CaleSexScenes {
 		const racescore = new RaceScore(rosalin.body);
 		const compScore = rosalin.origRaceScore.Compare(racescore);
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 			racedesc() { return rosalin.raceDesc(compScore); },
 		};

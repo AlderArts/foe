@@ -9,7 +9,7 @@ import { GAME, MoveToLocation, WORLD, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
 import { IChoice, Link } from "../../link";
 import { Party } from "../../party";
-import { Text } from "../../text";
+import { IParse, Text } from "../../text";
 
 //
 // Sliken Delights
@@ -27,7 +27,7 @@ export namespace ClothShopScenes {
 ClothShopLoc.onEntry = () => {
 	const party: Party = GAME().party;
 	const rigard = GAME().rigard;
-	const parse: any = {};
+	const parse: IParse = {};
 
 	if (party.Two()) {
 		parse.comp = " and " + party.Get(1).name;
@@ -65,7 +65,7 @@ ClothShopLoc.onEntry = () => {
 };
 
 ClothShopLoc.description = () => {
-	const parse: any = {};
+	const parse: IParse = {};
 	Text.Add("The Silken Delights clothing shop is clearly a high-end establishment, with two private guards, red velvet curtains and expensive-looking paintings all over. The counter is straight ahead from the door, and draped with the same red velvet as the walls and windows. Long racks of clothes stretch down a hallway to the left where you can see large shelves of shoes and four large stalls along the back wall which you assume are fitting rooms for customers. The whole store is amazingly clean, with no dirt or dust anywhere. There are hat racks by the counter with all sorts of fancy looking hats.", parse);
 	Text.NL();
 	/*
@@ -88,7 +88,7 @@ ClothShopLoc.events.push(new Link(
 	"Nexelle", true, true,
 	() => {
 		const tailorRand = ["the tailor", "the owner", "Miss Nexelle"];
-		const parse: any = {
+		const parse: IParse = {
 			tailorName() { return tailorRand[Math.floor(Math.random() * tailorRand.length)]; },
 		};
 
@@ -127,7 +127,7 @@ ClothShopLoc.events.push(new Link(
 				return;
 			}
 
-			const parse: any = {
+			const parse: IParse = {
 				sirmadam : player.body.Gender() === Gender.male ? "sir" : "madam",
 			};
 			Text.Clear();
@@ -249,7 +249,7 @@ ClothShopLoc.events.push(new Link(
 		return fera.timeout.Expired();
 	},
 	() => {
-		const parse: any = {};
+		const parse: IParse = {};
 		// FERA
 		const scenes = new EncounterTable();
 		scenes.AddEnc(() => {
@@ -280,7 +280,7 @@ ClothShopLoc.events.push(new Link(
 
 ClothShopLoc.endDescription = () => {
 	const party: Party = GAME().party;
-	const parse: any = {};
+	const parse: IParse = {};
 
 	if (WorldTime().hour >= 9 && WorldTime().hour < 12) {
 		Text.Add("It is still early but there are a few customers currently in the clothing store.", parse);

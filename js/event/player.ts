@@ -17,7 +17,7 @@ import { IChoice } from "../link";
 import { Party } from "../party";
 import { Perks } from "../perks";
 import { PregnancyHandler, PregnancyLevel, Womb } from "../pregnancy";
-import { Text } from "../text";
+import { IParse, Text } from "../text";
 import { GlobalScenes } from "./global";
 import { MasturbationScenes } from "./masturbation";
 import { MeditationScenes } from "./meditation";
@@ -210,7 +210,7 @@ export class Player extends Entity {
 
 		if (oldMilk < 0.5 && newMilk >= 0.5) {
 			Gui.Callstack.unshift(() => {
-				const parse: any = {
+				const parse: IParse = {
 					breasts : player.FirstBreastRow().Short(),
 				};
 				Text.Clear();
@@ -221,7 +221,7 @@ export class Player extends Entity {
 		}
 		if (oldMilk < 0.9 && newMilk >= 0.9) {
 			Gui.Callstack.unshift(() => {
-				const parse: any = {
+				const parse: IParse = {
 					breasts() { return player.FirstBreastRow().Short(); },
 					nips: player.FirstBreastRow().NipsShort(),
 				};
@@ -235,7 +235,7 @@ export class Player extends Entity {
 		// Trigger start of lactation
 		if (oldMilk < 1 && newMilk >= 1 && lactationRate !== 0) {
 			Gui.Callstack.unshift(() => {
-				const parse: any = {
+				const parse: IParse = {
 					breasts() { return player.FirstBreastRow().Short(); },
 					nips: player.FirstBreastRow().NipsShort(),
 				};
@@ -265,7 +265,7 @@ export class Player extends Entity {
 		// Trigger end of lactaction
 		if (oldMilk > 0 && newMilk <= 0) {
 			Gui.Callstack.unshift(() => {
-				const parse: any = {
+				const parse: IParse = {
 					nips: player.FirstBreastRow().NipsShort(),
 				};
 
@@ -277,7 +277,7 @@ export class Player extends Entity {
 		}
 	}
 
-	public LactationDesc(parse: any) {
+	public LactationDesc(parse: IParse) {
 		if (!this.lactHandler.CanLactate()) {
 			return;
 		}
@@ -314,7 +314,7 @@ export class Player extends Entity {
 		const num = womb.litterSize;
 		const breasts = player.FirstBreastRow().Size() >= 2;
 
-		const parse: any = {};
+		const parse: IParse = {};
 		parse.belly = player.StomachDesc();
 
 		if (progress > PregnancyLevel.Level1 && oldProgress <= PregnancyLevel.Level1) {
@@ -540,7 +540,7 @@ export class Player extends Entity {
 		// Use unshift instead of push to make sure pregnancy doesn't interfere with scene progression
 		Gui.Callstack.unshift(() => {
 			womb.pregnant = false;
-			let parse: any = {
+			let parse: IParse = {
 
 			};
 			parse = player.ParserTags(parse);

@@ -17,7 +17,7 @@ import { SetGameOverButton } from "../../main-gameover";
 import { Party } from "../../party";
 import { Perks } from "../../perks";
 import { PregnancyHandler } from "../../pregnancy";
-import { Text } from "../../text";
+import { IParse, Text } from "../../text";
 import { Roa } from "../brothel/roa";
 import { RoaFlags } from "../brothel/roa-flags";
 import { GlobalScenes } from "../global";
@@ -43,7 +43,7 @@ export namespace OpheliaScenes {
     export function LabDesc() {
         const ophelia: Ophelia = GAME().ophelia;
         const burrows: Burrows = GAME().burrows;
-        const parse: any = {
+        const parse: IParse = {
             old  : ophelia.flags.Met !== 0 ? " old" : "",
             camp : GlobalScenes.PortalsOpen() ? "the gemstead" : "camp",
         };
@@ -87,7 +87,7 @@ export namespace OpheliaScenes {
 
     export function LabApproach() {
         const player: Player = GAME().player;
-        const parse: any = {
+        const parse: IParse = {
             playername : player.name,
         };
 
@@ -100,7 +100,7 @@ export namespace OpheliaScenes {
 
     export function TraitPrompt(options: any) {
         const burrows: Burrows = GAME().burrows;
-        const parse: any = {
+        const parse: IParse = {
 
         };
 
@@ -199,7 +199,7 @@ export namespace OpheliaScenes {
         const player: Player = GAME().player;
         const ophelia: Ophelia = GAME().ophelia;
         const burrows: Burrows = GAME().burrows;
-        const parse: any = {
+        const parse: IParse = {
             playername : player.name,
         };
 
@@ -525,7 +525,7 @@ export namespace OpheliaScenes {
         const rosalin: Rosalin = GAME().rosalin;
         const burrows: Burrows = GAME().burrows;
 
-        const parse: any = {
+        const parse: IParse = {
             playername : player.name,
         };
 
@@ -811,7 +811,7 @@ export namespace OpheliaScenes {
         const player: Player = GAME().player;
         const ophelia: Ophelia = GAME().ophelia;
         const burrows: Burrows = GAME().burrows;
-        let parse: any = {
+        let parse: IParse = {
             playername : player.name,
         };
         parse = player.ParserTags(parse);
@@ -897,7 +897,7 @@ export namespace OpheliaScenes {
     export function SexEntryPoint() {
         const player: Player = GAME().player;
         const ophelia: Ophelia = GAME().ophelia;
-        const parse: any = {
+        const parse: IParse = {
 
         };
 
@@ -939,7 +939,7 @@ export namespace OpheliaScenes {
         const p1cock = player.BiggestCock();
         const knotted = p1cock ? p1cock.knot !== 0 : false;
 
-        let parse: any = {
+        let parse: IParse = {
             playername : player.name,
         };
         parse = Text.ParserPlural(parse, player.NumCocks() > 1);
@@ -1232,7 +1232,7 @@ export namespace OpheliaScenes {
         const ophelia: Ophelia = GAME().ophelia;
         const burrows: Burrows = GAME().burrows;
 
-        const parse: any = {
+        const parse: IParse = {
 
         };
 
@@ -1321,7 +1321,7 @@ export namespace OpheliaScenes {
     }
 
     export function TurnInScepter() {
-        const parse: any = {
+        const parse: IParse = {
 
         };
 
@@ -1342,7 +1342,7 @@ export namespace OpheliaScenes {
         const party: Party = GAME().party;
         const burrows: Burrows = GAME().burrows;
 
-        const parse: any = {
+        const parse: IParse = {
             playername : player.name,
         };
 
@@ -1458,7 +1458,7 @@ export namespace OpheliaScenes {
         const party: Party = GAME().party;
         const burrows: Burrows = GAME().burrows;
 
-        const parse: any = {
+        const parse: IParse = {
             playername : player.name,
         };
 
@@ -1520,7 +1520,7 @@ export namespace OpheliaScenes {
         const party: Party = GAME().party;
         const burrows: Burrows = GAME().burrows;
 
-        const parse: any = {
+        const parse: IParse = {
             playername : player.name,
         };
 
@@ -1572,7 +1572,7 @@ export namespace OpheliaScenes {
         const party: Party = GAME().party;
         const burrows: Burrows = GAME().burrows;
 
-        const parse: any = {
+        const parse: IParse = {
             playername : player.name,
         };
 
@@ -1614,7 +1614,7 @@ export namespace OpheliaScenes {
         const ophelia: Ophelia = GAME().ophelia;
         const burrows: Burrows = GAME().burrows;
 
-        const parse: any = {
+        const parse: IParse = {
             playername : player.name,
             himher : player.mfFem("him", "her"),
         };
@@ -1774,7 +1774,7 @@ export namespace OpheliaScenes {
     export function DeliverVena(trait: number) {
         const player: Player = GAME().player;
         const burrows: Burrows = GAME().burrows;
-        const parse: any = {
+        const parse: IParse = {
             playername : player.name,
         };
 
@@ -1835,7 +1835,7 @@ export namespace OpheliaScenes {
         const ophelia: Ophelia = GAME().ophelia;
         const burrows: Burrows = GAME().burrows;
 
-        let parse: any = {
+        let parse: IParse = {
             playername : player.name,
             softToned : burrows.BruteActive() ? "toned" : "soft",
         };
@@ -2183,7 +2183,7 @@ export namespace OpheliaScenes {
     export function ScepterRequest(fight: boolean) {
         const player: Player = GAME().player;
 
-        const parse: any = {
+        const parse: IParse = {
             playername : player.name,
             again : fight ? " again" : "",
             haggardDetermined : fight ? "determined" : "haggard",
@@ -2216,7 +2216,7 @@ export namespace OpheliaScenes {
     }
 
     export function WatchVenaEntry() {
-        const parse: any = {
+        const parse: IParse = {
 
         };
 
@@ -2253,7 +2253,7 @@ export namespace OpheliaScenes {
 
     export function RewardAftermathStage2Prompt() {
         const ophelia: Ophelia = GAME().ophelia;
-        const parse: any = {
+        const parse: IParse = {
 
         };
 
@@ -2307,7 +2307,7 @@ export namespace OpheliaScenes {
         const party: Party = GAME().party;
         const lagon: Lagon = GAME().lagon;
 
-        let parse: any = {
+        let parse: IParse = {
         };
         parse = player.ParserTags(parse);
 

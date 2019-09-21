@@ -9,7 +9,7 @@ import { Encounter } from "../combat";
 import { Entity } from "../entity";
 import { Party } from "../party";
 import { StatusEffect } from "../statuseffect";
-import { Text } from "../text";
+import { IParse, Text } from "../text";
 import { AbilityNode } from "./node";
 
 const whiteOnHeal = (ability: Ability, encounter: Encounter, caster: Entity, target: Entity, dmg: number) => {
@@ -96,7 +96,7 @@ cheer.targetMode = TargetMode.Party;
 cheer.cost = { hp: undefined, sp: 30, lp: undefined};
 cheer.CastInternal = (encounter: Encounter, caster: Entity, target: Party) => {
 	// TODO: Make more flavor text
-	const parse: any = {
+	const parse: IParse = {
 		name : caster.name,
 		s : caster.plural() ? "" : "s",
 	};

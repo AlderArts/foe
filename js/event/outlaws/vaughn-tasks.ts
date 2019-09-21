@@ -8,7 +8,7 @@ import { Jobs } from "../../job";
 import { IChoice } from "../../link";
 import { RigardFlags } from "../../loc/rigard/rigard-flags";
 import { Party } from "../../party";
-import { Text } from "../../text";
+import { IParse, Text } from "../../text";
 import { Time } from "../../time";
 import { GlobalScenes } from "../global";
 import { Miranda } from "../miranda";
@@ -49,7 +49,7 @@ export namespace VaughnTasksScenes {
 	}
 
 	export function TaskPrompt(Prompt: any) {
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -118,7 +118,7 @@ export namespace VaughnTasksScenes {
 			const party: Party = GAME().party;
 			const terry: Terry = GAME().terry;
 
-			const parse: any = {
+			const parse: IParse = {
 				playername : player.name,
 			};
 
@@ -197,7 +197,7 @@ export namespace VaughnTasksScenes {
 			const party: Party = GAME().party;
 			const rigard = GAME().rigard;
 
-			const parse: any = {
+			const parse: IParse = {
 				playername : player.name,
 			};
 
@@ -299,7 +299,7 @@ export namespace VaughnTasksScenes {
 			const outlaws: Outlaws = GAME().outlaws;
 			const vaughn: Vaughn = GAME().vaughn;
 
-			const parse: any = {
+			const parse: IParse = {
 				playername : player.name,
 			};
 
@@ -361,7 +361,7 @@ export namespace VaughnTasksScenes {
 			const miranda: Miranda = GAME().miranda;
 			const vaughn: Vaughn = GAME().vaughn;
 
-			const parse: any = {
+			const parse: IParse = {
 				playername : player.name,
 			};
 
@@ -444,7 +444,7 @@ export namespace VaughnTasksScenes {
 			const vaughn: Vaughn = GAME().vaughn;
 			const miranda: Miranda = GAME().miranda;
 
-			let parse: any = {
+			let parse: IParse = {
 				playername : player.name,
 			};
 
@@ -749,7 +749,7 @@ export namespace VaughnTasksScenes {
 			const vaughn: Vaughn = GAME().vaughn;
 			const terry: Terry = GAME().terry;
 
-			let parse: any = {
+			let parse: IParse = {
 				playername : player.name,
 			};
 
@@ -800,7 +800,8 @@ export namespace VaughnTasksScenes {
 					const check = 60;
 
 					if (GetDEBUG()) {
-						Text.Add("Dex check: [dex][r] vs [check]", {dex, check, r: rogue ? " (bonus for Rogue)" : ""}, "bold");
+						const r = rogue ? " (bonus for Rogue)" : "";
+						Text.Add(`Dex check: ${dex}${r} vs ${check}`, undefined, "bold");
 						Text.NL();
 					}
 					// #lock success
@@ -851,7 +852,8 @@ export namespace VaughnTasksScenes {
 						const check = 50;
 
 						if (GetDEBUG()) {
-							Text.Add("Int check: [mag][m] vs [check]", {mag, check, m: magStage2 ? " (bonus for tier 2 magic)" : ""}, "bold");
+							const m = magStage2 ? " (bonus for tier 2 magic)" : "";
+							Text.Add(`Int check: ${mag}${m} vs ${check}`, undefined, "bold");
 							Text.NL();
 						}
 						if (mag >= check) {
@@ -941,7 +943,7 @@ export namespace VaughnTasksScenes {
 			const player: Player = GAME().player;
 			const vaughn: Vaughn = GAME().vaughn;
 
-			const parse: any = {
+			const parse: IParse = {
 				playername : player.name,
 			};
 
@@ -1002,7 +1004,7 @@ export namespace VaughnTasksScenes {
 			const player: Player = GAME().player;
 			const outlaws: Outlaws = GAME().outlaws;
 
-			const parse: any = {
+			const parse: IParse = {
 				playername : player.name,
 			};
 
@@ -1030,7 +1032,7 @@ export namespace VaughnTasksScenes {
 			VaughnTasksScenes.Snitch.DebriefFailure(parse);
 		}
 
-		export function DebriefSuccess(parse: any) {
+		export function DebriefSuccess(parse: IParse) {
 			const party: Party = GAME().party;
 			const outlaws: Outlaws = GAME().outlaws;
 			const vaughn: Vaughn = GAME().vaughn;
@@ -1063,7 +1065,7 @@ export namespace VaughnTasksScenes {
 			Gui.NextPrompt();
 		}
 
-		export function DebriefFailure(parse: any) {
+		export function DebriefFailure(parse: IParse) {
 			const vaughn: Vaughn = GAME().vaughn;
 
 			Text.NL();
@@ -1106,7 +1108,7 @@ export namespace VaughnTasksScenes {
 			const party: Party = GAME().party;
 			const vaughn: Vaughn = GAME().vaughn;
 
-			const parse: any = {
+			const parse: IParse = {
 				playername : player.name,
 			};
 
@@ -1222,7 +1224,7 @@ export namespace VaughnTasksScenes {
 		}
 
 		export function ArrivalAtInn(onWait: any, oldLocation?: any) {
-			const parse: any = {
+			const parse: IParse = {
 				Orvin : RigardFlags.LB.KnowsOrvin() ? "Orvin" : "the innkeeper",
 			};
 
@@ -1255,7 +1257,7 @@ export namespace VaughnTasksScenes {
 			const lei: Lei = GAME().lei;
 			const twins: Twins = GAME().twins;
 
-			const parse: any = {
+			const parse: IParse = {
 				Orvin : RigardFlags.LB.KnowsOrvin() ? "Orvin" : "the innkeeper",
 				playername : player.name,
 			};
@@ -1612,7 +1614,7 @@ export namespace VaughnTasksScenes {
 			const vaughn: Vaughn = GAME().vaughn;
 			const terry: Terry = GAME().terry;
 
-			let parse: any = {
+			let parse: IParse = {
 				playername: player.name,
 			};
 
@@ -1724,7 +1726,7 @@ export namespace VaughnTasksScenes {
 			const party: Party = GAME().party;
 			const vaughn: Vaughn = GAME().vaughn;
 
-			const parse: any = {
+			const parse: IParse = {
 				Orvin : RigardFlags.LB.KnowsOrvin() ? "Orvin" : "the innkeeper",
 			};
 
@@ -1745,7 +1747,7 @@ export namespace VaughnTasksScenes {
 			const goal = 50;
 
 			if (GetDEBUG()) {
-				Text.Add("Dex+Int check: [val] vs [goal]", {val: check, goal}, "bold");
+				Text.Add(`Dex+Int check: ${check} vs ${goal}`, undefined, "bold");
 				Text.NL();
 			}
 			if (check >= goal) {
@@ -1805,7 +1807,7 @@ export namespace VaughnTasksScenes {
 		}
 
 		export function AphrodisiacEntry() {
-			const parse: any = {
+			const parse: IParse = {
 				Orvin : RigardFlags.LB.KnowsOrvin() ? "Orvin" : "the innkeeper",
 			};
 
@@ -1833,7 +1835,7 @@ export namespace VaughnTasksScenes {
 		}
 
 		export function AphrodisiacLeave() {
-			const parse: any = {};
+			const parse: IParse = {};
 
 			Text.Clear();
 			Text.Add("Shaking your head, you turn your back and hurry down and out of the Lady’s Blessing. Things should be getting heated up soon, if Vaughn’s description of the aphrodisiac’s effects were accurate, and since you know for sure that the job’s taken care of, you don’t want to be here any longer than necessary. There’s nothing left for you now but to report back to Vaughn and hear what he has to say.", parse);
@@ -1848,7 +1850,7 @@ export namespace VaughnTasksScenes {
 			const vaughn: Vaughn = GAME().vaughn;
 			const room69: Room69 = GAME().room69;
 
-			let parse: any = {
+			let parse: IParse = {
 				Orvin : RigardFlags.LB.KnowsOrvin() ? "Orvin" : "the innkeeper",
 			};
 			parse = player.ParserTags(parse);
@@ -1973,7 +1975,7 @@ export namespace VaughnTasksScenes {
 			const outlaws: Outlaws = GAME().outlaws;
 			const vaughn: Vaughn = GAME().vaughn;
 
-			const parse: any = {
+			const parse: IParse = {
 				Orvin : RigardFlags.LB.KnowsOrvin() ? "Orvin" : "the innkeeper",
 				playername : player.name,
 			};
@@ -2047,7 +2049,7 @@ export namespace VaughnTasksScenes {
 			const player: Player = GAME().player;
 			const vaughn: Vaughn = GAME().vaughn;
 
-			const parse: any = {
+			const parse: IParse = {
 				Orvin : RigardFlags.LB.KnowsOrvin() ? "Orvin" : "the innkeeper",
 				playername : player.name,
 			};
@@ -2088,7 +2090,7 @@ export namespace VaughnTasksScenes {
 			const outlaws: Outlaws = GAME().outlaws;
 			const vaughn: Vaughn = GAME().vaughn;
 
-			const parse: any = {
+			const parse: IParse = {
 
 			};
 

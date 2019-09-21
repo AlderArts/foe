@@ -17,7 +17,7 @@ import { WeaponsItems } from "../items/weapons";
 import { JobDesc, Jobs } from "../job";
 import { IChoice } from "../link";
 import { ILocation } from "../location";
-import { Text } from "../text";
+import { IParse, Text } from "../text";
 import { KiakaiFlags } from "./kiakai-flags";
 import { KiakaiScenes } from "./kiakai-scenes";
 import { KiakaiSexScenes } from "./kiakai-sex";
@@ -187,7 +187,7 @@ export class Kiakai extends Entity {
 		Text.Clear();
 		const that = kiakai;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 			name       : kiakai.name,
 			hisher     : kiakai.hisher(),
@@ -266,7 +266,7 @@ export class Kiakai extends Entity {
 		const kiakai: Kiakai = GAME().kiakai;
 		const ravenmother: RavenMother = GAME().ravenmother;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 			name   : kiakai.name,
 		};

@@ -13,7 +13,7 @@ import { Jobs } from "../../job";
 import { IChoice } from "../../link";
 import { Party } from "../../party";
 import { Stat } from "../../stat";
-import { Text } from "../../text";
+import { IParse, Text } from "../../text";
 import { ITime, Season, Time } from "../../time";
 import { Miranda } from "../miranda";
 import { Player } from "../player";
@@ -128,7 +128,7 @@ export namespace OutlawsScenes {
 	export function MariasBouquet() {
 		const player: Player = GAME().player;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 			afternoonevening : WorldTime().hour >= 16 ? "evening" : "afternoon",
 		};
@@ -237,7 +237,7 @@ export namespace OutlawsScenes {
 		const player: Player = GAME().player;
 		const outlaws: Outlaws = GAME().outlaws;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -347,7 +347,7 @@ export namespace OutlawsScenes {
 		const party: Party = GAME().party;
 		const outlaws: Outlaws = GAME().outlaws;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -431,7 +431,7 @@ export namespace OutlawsScenes {
 		const belinda = GAME().belinda;
 		const rigard = GAME().rigard;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -665,7 +665,7 @@ export namespace OutlawsScenes {
 			const player: Player = GAME().player;
 			const outlaws: Outlaws = GAME().outlaws;
 
-			const parse: any = {
+			const parse: IParse = {
 				lad : player.mfFem("laddie", "lassie"),
 			};
 
@@ -738,7 +738,7 @@ export namespace OutlawsScenes {
 			const party: Party = GAME().party;
 			const outlaws: Outlaws = GAME().outlaws;
 
-			const parse: any = {
+			const parse: IParse = {
 
 			};
 
@@ -795,7 +795,7 @@ export namespace OutlawsScenes {
 			const outlaws: Outlaws = GAME().outlaws;
 			const maria = GAME().maria;
 
-			const parse: any = {
+			const parse: IParse = {
 				playername : player.name,
 			};
 
@@ -883,7 +883,7 @@ export namespace OutlawsScenes {
 						Text.Add("Holding your breath, you take aim, and loose the arrows at your target in turn, watching them arc as they whistle through the air. At length, Maria and Vaughn take their turns at the line, loosing their arrows much like you have, and after it’s all over the latter ambles down the range to count the number of hits everyone’s landed.", parse);
 						Text.NL();
 						if (GetDEBUG()) {
-							Text.Add("DEBUG: dex+str [dex] (vs [goal], [goal2])", {dex, goal, goal2}, "bold");
+							Text.Add(`DEBUG: dex+str ${dex} (vs ${goal}, ${goal2})`, undefined, "bold");
 							Text.NL();
 						}
 						if (dex >= goal2) {
@@ -983,7 +983,7 @@ export namespace OutlawsScenes {
 		export function CampFollowers() {
 			const player: Player = GAME().player;
 
-			const parse: any = {
+			const parse: IParse = {
 				s : player.sexlevel >= 4 ? "familiar" : "odd",
 			};
 
@@ -1001,7 +1001,7 @@ export namespace OutlawsScenes {
 		}
 
 		export function Feeding() {
-			const parse: any = {
+			const parse: IParse = {
 				outlaw1 : OutlawsScenes.Exploration.RandName(),
 				outlaw2 : OutlawsScenes.Exploration.RandName(),
 			};
@@ -1064,7 +1064,7 @@ export namespace OutlawsScenes {
 			const player: Player = GAME().player;
 			const outlaws: Outlaws = GAME().outlaws;
 
-			const parse: any = {
+			const parse: IParse = {
 				playername : player.name,
 			};
 
@@ -1148,7 +1148,7 @@ export namespace OutlawsScenes {
 			const player: Player = GAME().player;
 			const outlaws: Outlaws = GAME().outlaws;
 
-			const parse: any = {
+			const parse: IParse = {
 				playername : player.name,
 			};
 
@@ -1275,7 +1275,7 @@ export namespace OutlawsScenes {
 		}
 
 		export function DailyLife() {
-			const parse: any = {
+			const parse: IParse = {
 
 			};
 

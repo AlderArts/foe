@@ -13,7 +13,7 @@ import { QuestItems } from "../items/quest";
 import { Link } from "../link";
 import { ILocLake } from "../location";
 import { Party } from "../party";
-import { Text } from "../text";
+import { IParse, Text } from "../text";
 import { Burrows } from "./burrows";
 import { BurrowsFlags } from "./burrows-flags";
 
@@ -46,7 +46,7 @@ LakeLoc.Shore.enc.AddEnc(() => {
 	return () => {
 		const party: Party = GAME().party;
 		const burrows: Burrows = GAME().burrows;
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 

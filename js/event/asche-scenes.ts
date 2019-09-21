@@ -10,7 +10,7 @@ import { DryadGladeFlags } from "../loc/glade-flags";
 import { MagicShopScenes } from "../loc/rigard/magicshop";
 import { Rigard } from "../loc/rigard/rigard";
 import { Party } from "../party";
-import { Text } from "../text";
+import { IParse, Text } from "../text";
 import { Asche } from "./asche";
 import { AscheFlags } from "./asche-flags";
 import { AscheTasksScenes } from "./asche-tasks";
@@ -29,7 +29,7 @@ export namespace AscheScenes {
         const player: Player = GAME().player;
         const asche: Asche = GAME().asche;
 
-        const parse: any = {
+        const parse: IParse = {
             heshe : player.mfFem("he", "she"),
             handsomepretty : player.mfFem("handsome", "pretty"),
         };
@@ -67,7 +67,7 @@ export namespace AscheScenes {
         const asche: Asche = GAME().asche;
         const rigard: Rigard = GAME().rigard;
 
-        const parse: any = {
+        const parse: IParse = {
             handsomepretty : player.mfFem("handsome", "pretty"),
             heshe: player.mfFem("he", "she"),
             hisher: player.mfFem("his", "her"),
@@ -192,7 +192,7 @@ export namespace AscheScenes {
 
     export function Appearance() {
         const player: Player = GAME().player;
-        const parse: any = {
+        const parse: IParse = {
             handsomepretty : player.mfFem("handsome", "pretty"),
         };
 
@@ -211,7 +211,7 @@ export namespace AscheScenes {
         const player: Player = GAME().player;
         const asche: Asche = GAME().asche;
 
-        const parse: any = {
+        const parse: IParse = {
             handsomepretty : player.mfFem("handsome", "pretty"),
             heshe: player.mfFem("he", "she"),
             hisher: player.mfFem("his", "her"),
@@ -373,7 +373,7 @@ export namespace AscheScenes {
         const player: Player = GAME().player;
         const asche: Asche = GAME().asche;
 
-        const parse: any = {
+        const parse: IParse = {
             handsomepretty : player.mfFem("handsome", "pretty"),
             heshe: player.mfFem("he", "she"),
             hisher: player.mfFem("his", "her"),
@@ -531,7 +531,7 @@ export namespace AscheScenes {
         const rigard: Rigard = GAME().rigard;
         const glade = GAME().glade;
 
-        const parse: any = {
+        const parse: IParse = {
             handsomepretty : player.mfFem("handsome", "pretty"),
             HeShe: player.mfFem("He", "She"),
             heshe: player.mfFem("he", "she"),
@@ -784,7 +784,7 @@ export namespace AscheScenes {
         const player: Player = GAME().player;
         const asche: Asche = GAME().asche;
 
-        const parse: any = {
+        const parse: IParse = {
             coin : Text.NumToText(asche.MagicBoxCost()),
             heshe : player.mfFem("he", "she"),
             himher : player.mfFem("him", "her"),
@@ -829,7 +829,7 @@ export namespace AscheScenes {
         const asche: Asche = GAME().asche;
         const rigard: Rigard = GAME().rigard;
 
-        const parse: any = {
+        const parse: IParse = {
 
         };
 
@@ -854,7 +854,7 @@ export namespace AscheScenes {
         const party: Party = GAME().party;
         const asche: Asche = GAME().asche;
 
-        let parse: any = {
+        let parse: IParse = {
             himher : player.mfFem("him", "her"),
             heshe : player.mfFem("he", "she"),
         };
@@ -1040,7 +1040,7 @@ export namespace AscheScenes {
     }
 
     export function MagicBoxLoss() {
-        const parse: any = {
+        const parse: IParse = {
 
         };
 
@@ -1102,7 +1102,7 @@ export namespace AscheScenes {
         const party: Party = GAME().party;
         const asche: Asche = GAME().asche;
 
-        const parse: any = {
+        const parse: IParse = {
             coin : Text.NumToText(asche.MagicBoxCost()),
         };
 

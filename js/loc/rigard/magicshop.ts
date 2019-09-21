@@ -19,7 +19,7 @@ import { IngredientItems } from "../../items/ingredients";
 import { WeaponsItems } from "../../items/weapons";
 import { Link } from "../../link";
 import { Shop } from "../../shop";
-import { Text } from "../../text";
+import { IParse, Text } from "../../text";
 
 const MagicShopLoc = new Event("Asche's Fanciful Trinkets");
 
@@ -40,7 +40,7 @@ export namespace MagicShopScenes {
 
 	export function CreateShop() {
 		const buySuccessFunc = (item: Item, cost: number, num: number) => {
-			const parse: any = {};
+			const parse: IParse = {};
 
 			Text.Clear();
 			const scenes = new EncounterTable();
@@ -52,7 +52,7 @@ export namespace MagicShopScenes {
 			Text.NL();
 		};
 		const buyFailFunc = (item: Item, cost: number, bought: boolean) => {
-			const parse: any = {};
+			const parse: IParse = {};
 
 			Text.Clear();
 			if (bought) {
@@ -67,7 +67,7 @@ export namespace MagicShopScenes {
 		const buyPromptFunc = (item: Item, cost: number, bought: boolean) => {
 			const player: Player = GAME().player;
 			const coin = Text.NumToText(cost);
-			const parse: any = {
+			const parse: IParse = {
 				heshe : player.mfFem("he", "she"),
 				item : item.sDesc(),
 				coin,
@@ -89,7 +89,7 @@ export namespace MagicShopScenes {
 			buyFailFunc,
 			sellPromptFunc(item: Item, cost: number, sold: boolean) {
 				const coin = Text.NumToText(cost);
-				const parse: any = {
+				const parse: IParse = {
 					item : item.sDesc(),
 					coin,
 					Coin : _.capitalize(coin),
@@ -118,7 +118,7 @@ export namespace MagicShopScenes {
 			},
 			sellSuccessFunc(item: Item, cost: number, num: number) {
 				const player: Player = GAME().player;
-				const parse: any = {
+				const parse: IParse = {
 					hisher : player.mfFem("his", "her"),
 					heshe : player.mfFem("he", "she"),
 				};
@@ -137,7 +137,7 @@ export namespace MagicShopScenes {
 			},
 			sellFailFunc(item: Item, cost: number, sold: boolean) {
 				const player: Player = GAME().player;
-				const parse: any = {
+				const parse: IParse = {
 					hisher : player.mfFem("his", "her"),
 					himher : player.mfFem("him", "her"),
 					heshe : player.mfFem("he", "she"),
@@ -239,7 +239,7 @@ export namespace MagicShopScenes {
 }
 
 MagicShopLoc.description = () => {
-	const parse: any = {
+	const parse: IParse = {
 
 	};
 
@@ -289,7 +289,7 @@ MagicShopLoc.events.push(new Link(
 	"Asche", true, true, undefined,
 	() => {
 		const player: Player = GAME().player;
-		const parse: any = {
+		const parse: IParse = {
 			handsomepretty : player.mfFem("handsome", "pretty"),
 		};
 

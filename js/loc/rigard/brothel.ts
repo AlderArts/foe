@@ -13,7 +13,7 @@ import { GAME, MoveToLocation, TimeStep, WORLD } from "../../GAME";
 import { Gui } from "../../gui";
 import { IChoice, Link } from "../../link";
 import { ILocRigardBrothel } from "../../location";
-import { Text } from "../../text";
+import { IParse, Text } from "../../text";
 
 const BrothelLoc: ILocRigardBrothel = {
 	Brothel  : new Event("Brothel"),
@@ -135,7 +135,7 @@ export namespace BrothelScenes {
 		const player: Player = GAME().player;
 		const rigard = GAME().rigard;
 
-		let parse: any = {
+		let parse: IParse = {
 			handsomePretty : player.mfFem("handsome", "pretty"),
 			playername : player.name,
 			gender : Gender.Desc(player.Gender()),
@@ -208,7 +208,7 @@ export namespace BrothelScenes {
 		const player: Player = GAME().player;
 		const rigard = GAME().rigard;
 
-		let parse: any = {
+		let parse: IParse = {
 		};
 		parse = player.ParserTags(parse);
 		parse = Text.ParserPlural(parse, player.NumLegs() > 1);

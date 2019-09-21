@@ -11,7 +11,7 @@ import { Entity } from "../entity";
 import { GAME } from "../GAME";
 import { PregnancyLevel, Womb } from "../pregnancy";
 import { Status } from "../statuseffect";
-import { Text } from "../text";
+import { IParse, Text } from "../text";
 import { TF, TFItem } from "../tf";
 import { IngredientItems } from "./ingredients";
 
@@ -139,7 +139,7 @@ bovia.PushEffect(TF.ItemEffects.SetEars, {odds: 0.4, race: Race.Cow, str: "bovin
 bovia.PushEffect(TF.ItemEffects.SetTail, {odds: 0.4, race: Race.Cow, color: Color.black, str: "a long bovine tail, ending in a tuft of black hair"});
 bovia.PushEffect(TF.ItemEffects.SetHorn, {odds: 0.4, race: Race.Cow, color: Color.black, str: "a pair of strong bovine horns!", count: 2});
 bovia.PushEffect((target: Entity) => {
-	const parse: any = { Poss: target.Possessive() };
+	const parse: IParse = { Poss: target.Possessive() };
 	const breasts = target.BiggestBreasts();
 	if (target.FirstVag() || (breasts && breasts.size.Get() > 5)) {
 		if (Math.random() < 0.5) {
@@ -446,7 +446,7 @@ homos.PushEffect(TF.ItemEffects.RemWings, {odds: 0.6, count: 2});
 homos.PushEffect(TF.ItemEffects.RemAntenna, {odds: 0.6, count: 2});
 homos.PushEffect(TF.ItemEffects.RemAbdomen, {odds: 0.6, count: 1});
 homos.PushEffect((target: Entity) => {
-	const parse: any = {
+	const parse: IParse = {
 		Poss : target.Possessive(),
 		legsDesc() { return target.LegsDesc(); },
 		notS : target.body.legs.count > 1 ? "s" : "",
@@ -477,7 +477,7 @@ virilium.PushEffect(TF.ItemEffects.IncLib, {odds: 0.3, ideal: 40, max: 2});
 virilium.PushEffect(TF.ItemEffects.IncCha, {odds: 0.2, ideal: 40, max: 2});
 virilium.PushEffect(TF.ItemEffects.SetBalls, {odds: 0.1, ideal: 2, count: 2});
 virilium.PushEffect((target: Entity) => {
-	const parse: any = {
+	const parse: IParse = {
 		name  : target.nameDesc(),
 		heshe : target.heshe(),
 		is    : target.is(),
@@ -489,7 +489,7 @@ virilium.PushEffect((target: Entity) => {
 	Text.NL();
 });
 virilium.PushEffect((target: Entity) => {
-	const parse: any = {
+	const parse: IParse = {
 		Poss: target.Possessive(),
 		ballsDesc() { return target.BallsDesc(); },
 		s      : target.HasBalls() ? "s" : "",
@@ -536,7 +536,7 @@ testos.PushEffect(TF.ItemEffects.IncTone, {odds: 0.3, ideal: .7, max: .1});
 testos.PushEffect(TF.ItemEffects.DecFem, {odds: 0.4, ideal: -1, max: .1});
 testos.PushEffect(TF.ItemEffects.DecBreastSize, {odds: 0.7, ideal: 0, max: 6 });
 testos.PushEffect((target: Entity) => {
-	const parse: any = {
+	const parse: IParse = {
 		Name: target.NameDesc(),
 		Poss: target.Possessive(),
 		ballsDesc() { return target.BallsDesc(); },
@@ -561,7 +561,7 @@ testos.PushEffect((target: Entity) => {
 	Text.Flush();
 });
 testos.PushEffect((target: Entity) => {
-	let parse: any = {
+	let parse: IParse = {
 		Name : target.NameDesc(),
 		poss : target.possessive(),
 		Poss : target.Possessive(),
@@ -641,7 +641,7 @@ estros.PushEffect(TF.ItemEffects.DecTone, {odds: 0.2, ideal: 0, max: .1});
 estros.PushEffect(TF.ItemEffects.IncFem, {odds: 0.8, ideal: 1, max: .1});
 estros.PushEffect(TF.ItemEffects.IncBreastSize, {odds: 0.4, ideal: 20, max: 3 });
 estros.PushEffect((target: Entity) => {
-	const parse: any = {
+	const parse: IParse = {
 		Poss: target.Possessive(),
 		notS: target.plural() ? "" : "s",
 	};
@@ -659,7 +659,7 @@ estros.PushEffect((target: Entity) => {
 	Text.Flush();
 });
 estros.PushEffect((target: Entity) => {
-	let parse: any = {
+	let parse: IParse = {
 		Name : target.NameDesc(),
 		Poss : target.Possessive(),
 		multiCockDesc() { return target.MultiCockDesc(); },
@@ -717,7 +717,7 @@ infertilium.Short = () => "A bottle of Infertilium";
 infertilium.Long = () => "A small, unmarked glass vial that feels cool to the touch. Drinking this will render the drinker practically sterile for one day.";
 // TODO infertilium.recipe = [{it: felinix}, {it: leporine}, {it: bovia}];
 infertilium.useStr = (target: Entity) => {
-	let parse: any = {
+	let parse: IParse = {
 		Name: target.NameDesc(),
 		name: target.nameDesc(),
 	};
@@ -767,7 +767,7 @@ infertiliumPlus.Short = () => "A bottle of Infertilium+";
 infertiliumPlus.Long = () => "A small, unmarked glass vial with a thin sheen of frost clinging to its sides. Drinking this will render the drinker practically sterile for five days.";
 // TODO infertiliumPlus.recipe = [{it: felinix}, {it: leporine}, {it: bovia}];
 infertiliumPlus.useStr = (target: Entity) => {
-	let parse: any = {
+	let parse: IParse = {
 		Name: target.NameDesc(),
 		name: target.nameDesc(),
 	};
@@ -813,7 +813,7 @@ infertiliumPlus.PushEffect(TF.ItemEffects.DecLib, {odds: 0.75, ideal: 15, max: 2
 
 const fertilium = new TFItem("sex6", "Fertilium");
 const fertiliumcommonUse = (target: Entity) => {
-	let parse: any = {
+	let parse: IParse = {
 		name: target.nameDesc(),
 		lowerArmor: target.LowerArmorDesc(),
 	};
@@ -900,7 +900,7 @@ gestarium.Long  = () => "A small vial of thick, clear liquid. Drinking this whil
 gestarium.recipe = [{it: fertilium}, {it: estros}, {it: bovia}];
 // Effects
 const gestariumProgress = (target: Entity) => {
-	let parse: any = {
+	let parse: IParse = {
 		Name : target.NameDesc(),
 		name : target.nameDesc(),
 		Poss : target.Possessive(),
@@ -934,7 +934,7 @@ const gestariumProgress = (target: Entity) => {
 
 gestarium.PushEffect(gestariumProgress);
 
-const gestariumBellyGrowth = (target: Entity, wombs: Womb[], parse: any) => {
+const gestariumBellyGrowth = (target: Entity, wombs: Womb[], parse: IParse) => {
 	const size = target.pregHandler.BellySize();
 
 	if (size < 0.1) {
@@ -1093,7 +1093,7 @@ gestariumPlus.recipe = [{it: felinix}, {it: leporine}, {it: bovia}];
 gestariumPlus.PushEffect(TF.ItemEffects.IncLib, {odds: 0.3, ideal: 40, max: 2});
 gestariumPlus.PushEffect(TF.ItemEffects.IncCha, {odds: 0.2, ideal: 40, max: 2});
 gestariumPlus.PushEffect((target: Entity) => {
-	const parse: any = {
+	const parse: IParse = {
 		Poss: target.Possessive(),
 		notS: target.plural() ? "" : "s",
 	};
@@ -1111,7 +1111,7 @@ gestariumPlus.PushEffect((target: Entity) => {
 	Text.Flush();
 });
 gestariumPlus.PushEffect((target: Entity) => {
-	const parse: any = {
+	const parse: IParse = {
 		name  : target.nameDesc(),
 		heshe : target.heshe(),
 		is    : target.is(),
@@ -1122,7 +1122,7 @@ gestariumPlus.PushEffect((target: Entity) => {
 	Text.NL();
 });
 gestariumPlus.PushEffect((target: Entity) => {
-	let parse: any = {
+	let parse: IParse = {
 		name : target.nameDesc(),
 		poss : target.possessive(),
 	};

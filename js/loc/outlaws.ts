@@ -23,7 +23,7 @@ import { Gui } from "../gui";
 import { Link } from "../link";
 import { ILocOutlaws } from "../location";
 import { Party } from "../party";
-import { Text } from "../text";
+import { IParse, Text } from "../text";
 import { RigardFlags } from "./rigard/rigard-flags";
 
 export function InitOutlaws() {
@@ -200,7 +200,7 @@ OutlawsLoc.Camp.enc.AddEnc(() => {
 OutlawsLoc.Infirmary.description = () => {
 	const terry: Terry = GAME().terry;
 	const party: Party = GAME().party;
-	const parse: any = {
+	const parse: IParse = {
 
 	};
 

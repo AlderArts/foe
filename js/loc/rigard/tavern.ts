@@ -13,7 +13,7 @@ import { Gui } from "../../gui";
 import { IChoice, Link } from "../../link";
 import { ILocRigardTavern } from "../../location";
 import { Party } from "../../party";
-import { Text } from "../../text";
+import { IParse, Text } from "../../text";
 import { Rigard } from "./rigard";
 import { RigardFlags } from "./rigard-flags";
 
@@ -63,7 +63,7 @@ TavernLoc.Common.DrunkHandler = () => {
 	const party: Party = GAME().party;
 	const player: Player = GAME().player;
 
-	const parse: any = {
+	const parse: IParse = {
 		phisher : player.mfTrue("his", "her"),
 	};
 
@@ -269,7 +269,7 @@ export namespace BarnabyScenes {
 		const rigard: Rigard = GAME().rigard;
 		const player: Player = GAME().player;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -310,7 +310,7 @@ export namespace BarnabyScenes {
 		const coin2 = 5;
 		const coin3 = 10;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 			coin1 : Text.NumToText(coin1),
 			coin2 : Text.NumToText(coin2),
@@ -650,7 +650,7 @@ export namespace BarnabyScenes {
 		const miranda: Miranda = GAME().miranda;
 		const zina: Zina = GAME().zina;
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -801,7 +801,7 @@ export namespace BarnabyScenes {
 		const miranda: Miranda = GAME().miranda;
 		const zina: Zina = GAME().zina;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 			boygirl    : player.mfTrue("boy", "girl"),
 			guygal     : player.mfTrue("guy", "gal"),

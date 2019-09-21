@@ -10,7 +10,7 @@ import { GameState, SetGameState } from "../../gamestate";
 import { Gui } from "../../gui";
 import { IChoice } from "../../link";
 import { Party } from "../../party";
-import { Text } from "../../text";
+import { IParse, Text } from "../../text";
 import { Season, Time } from "../../time";
 import { Kiakai } from "../kiakai";
 import { Player } from "../player";
@@ -41,7 +41,7 @@ export namespace LeiTaskScenes {
 
 	export function TaskPrompt() {
 		const lei: Lei = GAME().lei;
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -78,7 +78,7 @@ export namespace LeiTaskScenes {
 		}
 		export function OnTaskText() {
 			const lei: Lei = GAME().lei;
-			const parse: any = {
+			const parse: IParse = {
 
 			};
 
@@ -112,7 +112,7 @@ export namespace LeiTaskScenes {
 
 		export function Start() {
 			const lei: Lei = GAME().lei;
-			const parse: any = {
+			const parse: IParse = {
 				coin : Text.NumToText(LeiTaskScenes.Escort.Coin()),
 			};
 
@@ -160,7 +160,7 @@ export namespace LeiTaskScenes {
 			const kiakai: Kiakai = GAME().kiakai;
 			const terry: Terry = GAME().terry;
 			const rigard = GAME().rigard;
-			let parse: any = {
+			let parse: IParse = {
 				sirmadam : player.mfFem("sir", "madam"),
 				playername : player.name,
 			};
@@ -440,7 +440,7 @@ export namespace LeiTaskScenes {
 
 			const enc = this;
 
-			const parse: any = {
+			const parse: IParse = {
 
 			};
 
@@ -470,7 +470,7 @@ export namespace LeiTaskScenes {
 
 			const enc = this;
 
-			const parse: any = {
+			const parse: IParse = {
 
 			};
 
@@ -497,7 +497,7 @@ export namespace LeiTaskScenes {
 			const player: Player = GAME().player;
 			const party: Party = GAME().party;
 			const lei: Lei = GAME().lei;
-			const parse: any = {
+			const parse: IParse = {
 				armor : player.ArmorDesc(),
 			};
 
@@ -670,7 +670,7 @@ export namespace LeiTaskScenes {
 		export function Debrief() {
 			const party: Party = GAME().party;
 			const lei: Lei = GAME().lei;
-			const parse: any = {
+			const parse: IParse = {
 
 			};
 

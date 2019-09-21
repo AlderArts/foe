@@ -6,7 +6,7 @@ import { Gui } from "../../gui";
 import { IChoice } from "../../link";
 import { DryadGladeFlags } from "../../loc/glade-flags";
 import { Party } from "../../party";
-import { Text } from "../../text";
+import { IParse, Text } from "../../text";
 import { Player } from "../player";
 import { Cveta } from "./cveta";
 import { CvetaFlags } from "./cveta-flags";
@@ -19,7 +19,7 @@ export namespace CvetaDateScenes {
 		const cveta: Cveta = GAME().cveta;
 		const glade = GAME().glade;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -130,7 +130,7 @@ export namespace CvetaDateScenes {
 		const cveta: Cveta = GAME().cveta;
 		const glade = GAME().glade;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -305,7 +305,7 @@ export namespace CvetaDateScenes {
 		const player: Player = GAME().player;
 		const cveta: Cveta = GAME().cveta;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 

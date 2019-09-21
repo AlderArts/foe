@@ -28,7 +28,7 @@ import { IngredientItems } from "../items/ingredients";
 import { IChoice } from "../link";
 import { Party } from "../party";
 import { PregnancyHandler } from "../pregnancy";
-import { Text } from "../text";
+import { IParse, Text } from "../text";
 import { TF } from "../tf";
 import { Season } from "../time";
 
@@ -443,7 +443,7 @@ export namespace FelinesScenes {
 		const group: boolean = enemy.Num() > 1;
 		const mainCat: Wildcat = enemy.Get(0) as Wildcat;
 
-		let parse: any = {
+		let parse: IParse = {
 			groupof    : group ? " group of" : "",
 			s          : group ? "s" : "",
 			notS       : group ? "" : "s",
@@ -504,7 +504,7 @@ export namespace FelinesScenes {
 		const group   = enemy.Num() > 1;
 		const mainCat: Wildcat = enemy.Get(0) as Wildcat;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 			desc       : mainCat.desc,
 			m1name     : mainCat.nameDesc(),
@@ -558,7 +558,7 @@ export namespace FelinesScenes {
 		const mainCat: Wildcat = enemy.Get(0) as Wildcat;
 		const taur    = player.IsTaur();
 
-		const parse: any = {
+		const parse: IParse = {
 			oneof        : group ? " one of" : "",
 			enemyEnemies : group ? "enemies" : "enemy",
 			s            : group ? "s" : "",
@@ -735,7 +735,7 @@ export namespace FelinesScenes {
 		const cat1 = otherCats[0];
 		const group = enemy.Num() > 1;
 		const group2 = enemy.Num() > 2;
-		let parse: any = {
+		let parse: IParse = {
 			cat() { return _.sample(mainCat.Race().Desc()).noun; },
 		};
 		parse = player.ParserTags(parse);
@@ -874,7 +874,7 @@ export namespace FelinesScenes {
 		const player: Player = GAME().player;
 		const pCock = player.BiggestCock(cocks);
 
-		let parse: any = {
+		let parse: IParse = {
 			Name     : cat.NameDesc(),
 			name     : cat.nameDesc(),
 			Possessive  : cat.Possessive(),
@@ -1107,7 +1107,7 @@ export namespace FelinesScenes {
 		const party: Party = GAME().party;
 		const pCock = player.BiggestCock(cocks);
 
-		let parse: any = {
+		let parse: IParse = {
 			oneof    : group ? " one of" : "",
 			s        : group ? "s" : "",
 			Name     : cat.NameDesc(),
@@ -1345,7 +1345,7 @@ export namespace FelinesScenes {
 
 	export function WinGetBlowjob(cat: Wildcat, group: boolean, enc: any) {
 		const player: Player = GAME().player;
-		let parse: any = {
+		let parse: IParse = {
 			oneof    : group ? " one of" : "",
 			s        : group ? "s" : "",
 			Name     : cat.NameDesc(),
@@ -1516,7 +1516,7 @@ export namespace FelinesScenes {
 
 		const numCocks = player.NumCocks();
 
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 		parse = player.ParserTags(parse);
@@ -1672,7 +1672,7 @@ export namespace FelinesScenes {
 		const group   = enemy.Num() > 1;
 		const mainCat: Wildcat = enemy.Get(0) as Wildcat;
 
-		const parse: any = {
+		const parse: IParse = {
 			oneof        : group ? " one of" : "",
 			enemyEnemies : group ? "enemies" : "enemy",
 			s            : group ? "s" : "",
@@ -1796,7 +1796,7 @@ export namespace FelinesScenes {
 		const group2 = enemy.Num() > 2;
 		const cat1 = enemy.Get(1);
 		const herm = mainCat.FirstVag();
-		let parse: any = {
+		let parse: IParse = {
 			cat() { return _.sample(mainCat.Race().Desc()).noun; },
 		};
 		parse = player.ParserTags(parse);
@@ -2039,7 +2039,7 @@ export namespace FelinesScenes {
 
 	export function LossCatchVaginal(cat: Wildcat, group: boolean, enc: any) {
 		const player: Player = GAME().player;
-		let parse: any = {
+		let parse: IParse = {
 			oneof    : group ? " one of" : "",
 			s        : group ? "s" : "",
 			Name     : cat.NameDesc(),
@@ -2293,7 +2293,7 @@ export namespace FelinesScenes {
 			}
 		}
 
-		let parse: any = {
+		let parse: IParse = {
 			oneof    : player.NumCocks() > 1 ? " one of" : "",
 			s        : group ? "s" : "",
 			Name     : cat.NameDesc(),
@@ -2560,7 +2560,7 @@ export namespace FelinesScenes {
 
 	export function LossDrainMilk(mainCat: Wildcat, group: boolean, enc: any) {
 		const player: Player = GAME().player;
-		let parse: any = {
+		let parse: IParse = {
 			name : mainCat.nameDesc(),
 		};
 		parse = player.ParserTags(parse);
@@ -2674,7 +2674,7 @@ export namespace FelinesScenes {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 
-		let parse: any = {
+		let parse: IParse = {
 			name  : cat.nameDesc(),
 			Name  : cat.NameDesc(),
 			group : cat.groupName,

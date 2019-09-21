@@ -25,7 +25,7 @@ import { AlchemyItems } from "../items/alchemy";
 import { IngredientItems } from "../items/ingredients";
 import { IChoice } from "../link";
 import { Party } from "../party";
-import { Text } from "../text";
+import { IParse, Text } from "../text";
 import { TF } from "../tf";
 
 export class Mothgirl extends Entity {
@@ -158,7 +158,7 @@ export namespace MothgirlScenes {
 
 		enc.coin = Math.max(Math.floor(party.coin * 0.1), 100);
 
-		let parse: any = {
+		let parse: IParse = {
 			legs() { return player.LegsDesc(); },
 			weapon() { return player.WeaponDesc(); },
 			armor() { return player.ArmorDesc(); },
@@ -309,7 +309,7 @@ export namespace MothgirlScenes {
 		const p1cock = player.BiggestCock(cocksInAss);
 		const strapon = p1cock ? p1cock.isStrapon : false;
 
-		let parse: any = {
+		let parse: IParse = {
 			acocks() { return player.MultiCockDesc(cocksInAss); },
 		};
 		if (strapon) { parse.acocks = "strapon"; }
@@ -356,7 +356,7 @@ export namespace MothgirlScenes {
 		const p1cock = player.BiggestCock();
 		const hugecock = p1cock.Len() > 20;
 
-		let parse: any = {
+		let parse: IParse = {
 			breasts() { return player.FirstBreastRow().Short(); },
 			tongue() { return player.TongueDesc(); },
 			armor() { return player.ArmorDesc(); },
@@ -416,7 +416,7 @@ export namespace MothgirlScenes {
 		const strapon = p1cock.isStrapon;
 		const hugecock = p1cock.Len() > 50;
 
-		let parse: any = {
+		let parse: IParse = {
 			armor() { return player.ArmorDesc(); },
 			cocks() { return player.MultiCockDesc(cocksInAss); },
 			cock() { return p1cock.Short(); },
@@ -516,7 +516,7 @@ export namespace MothgirlScenes {
 		const player: Player = GAME().player;
 		const moth: Mothgirl = enc.moth;
 
-		let parse: any = {
+		let parse: IParse = {
 			cocks() { return player.MultiCockDesc(); },
 			cunt() { return player.FirstVag().Short(); },
 			clit() { return player.FirstVag().ClitShort(); },
@@ -578,7 +578,7 @@ export namespace MothgirlScenes {
 		const p1cock = player.BiggestCock();
 		traded = traded || enc.coin <= 0;
 
-		let parse: any = {
+		let parse: IParse = {
 			coin    : Text.NumToText(enc.coin),
 			armor() { return player.ArmorDesc(); },
 			legs() { return player.LegsDesc(); },

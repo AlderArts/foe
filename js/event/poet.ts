@@ -2,14 +2,12 @@
 import { EncounterTable } from "../encountertable";
 import { TimeStep } from "../GAME";
 import { Gui } from "../gui";
-import { Text } from "../text";
+import { IParse, Text } from "../text";
 
 export namespace PoetScenes {
 
 	export function Entry() {
-		const parse: any = {
-
-		};
+		const parse: IParse = {};
 
 		const scenes = new EncounterTable();
 		scenes.AddEnc(PoetScenes.ToDragonOrLizard, 1.0, () => true);
@@ -30,7 +28,7 @@ export namespace PoetScenes {
 	}
 
 	export function ToDragonOrLizard() {
-		const parse: any = {};
+		const parse: IParse = {};
 
 		Text.Add("To be dragon or lizard, that is the question–<br>", parse);
 		Text.Add("Whether ’tis nobler in the mind to suffer<br>", parse);

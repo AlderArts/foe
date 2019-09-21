@@ -9,7 +9,7 @@ import { GAME } from "./GAME";
 import { GameState, SetGameState } from "./gamestate";
 import { Gui } from "./gui";
 import { Party } from "./party";
-import { Text } from "./text";
+import { IParse, Text } from "./text";
 
 /*
  * opts {
@@ -62,7 +62,7 @@ export class PrisonMinigame {
 
 	// TODO
 	public Tick() {
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 

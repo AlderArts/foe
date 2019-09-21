@@ -4,7 +4,7 @@ import { Gui } from "../gui";
 import { IChoice } from "../link";
 import { Burrows } from "../loc/burrows";
 import { BurrowsFlags } from "../loc/burrows-flags";
-import { Text } from "../text";
+import { IParse, Text } from "../text";
 import { Kiakai } from "./kiakai";
 import { KiakaiFlags } from "./kiakai-flags";
 import { Rosalin } from "./nomads/rosalin";
@@ -17,7 +17,7 @@ export namespace KiakaiScenes {
 		const player: Player = GAME().player;
 		const kiakai: Kiakai = GAME().kiakai;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 			name   : kiakai.name,
 		};
@@ -42,7 +42,7 @@ export namespace KiakaiScenes {
 		const rosalin: Rosalin = GAME().rosalin;
 		const rigard = GAME().rigard;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 			name   : kiakai.name,
 		};
@@ -94,7 +94,7 @@ export namespace KiakaiScenes {
 		const player: Player = GAME().player;
 		const kiakai: Kiakai = GAME().kiakai;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 			name   : kiakai.name,
 		};
@@ -170,7 +170,7 @@ export namespace KiakaiScenes {
 		const player: Player = GAME().player;
 		const kiakai: Kiakai = GAME().kiakai;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 			name   : kiakai.name,
 		};
@@ -354,7 +354,7 @@ export namespace KiakaiScenes {
 		const player: Player = GAME().player;
 		const kiakai: Kiakai = GAME().kiakai;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 			name   : kiakai.name,
 		};
@@ -558,7 +558,7 @@ export namespace KiakaiScenes {
 		const player: Player = GAME().player;
 		const kiakai: Kiakai = GAME().kiakai;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 			name   : kiakai.name,
 		};
@@ -631,7 +631,7 @@ export namespace KiakaiScenes {
 		const player: Player = GAME().player;
 		const kiakai: Kiakai = GAME().kiakai;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 			name   : kiakai.name,
 		};
@@ -930,7 +930,7 @@ export namespace KiakaiScenes {
 		const player: Player = GAME().player;
 		const kiakai: Kiakai = GAME().kiakai;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 			name   : kiakai.name,
 		};
@@ -1003,7 +1003,7 @@ export namespace KiakaiScenes {
 		const player: Player = GAME().player;
 		const kiakai: Kiakai = GAME().kiakai;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 			name   : kiakai.name,
 		};
@@ -1099,7 +1099,7 @@ export namespace KiakaiScenes {
 		const player: Player = GAME().player;
 		const kiakai: Kiakai = GAME().kiakai;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 			name   : kiakai.name,
 		};
@@ -1169,7 +1169,7 @@ export namespace KiakaiScenes {
 		const player: Player = GAME().player;
 		const kiakai: Kiakai = GAME().kiakai;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 			name   : kiakai.name,
 		};
@@ -1223,7 +1223,7 @@ export namespace KiakaiScenes {
 		const player: Player = GAME().player;
 		const kiakai: Kiakai = GAME().kiakai;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 			name   : kiakai.name,
 			virg   : kiakai.FirstCock() ? "p-penis has not entered a vagina" : "v-vagina has not felt the touch of a penis",
@@ -1379,7 +1379,7 @@ export namespace KiakaiScenes {
 		const player: Player = GAME().player;
 		const kiakai: Kiakai = GAME().kiakai;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 			name   : kiakai.name,
 		};
@@ -1463,7 +1463,7 @@ export namespace KiakaiScenes {
 		const player: Player = GAME().player;
 		const kiakai: Kiakai = GAME().kiakai;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 			name   : kiakai.name,
 		};
@@ -1526,7 +1526,7 @@ export namespace KiakaiScenes {
 		const player: Player = GAME().player;
 		const kiakai: Kiakai = GAME().kiakai;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 			name   : kiakai.name,
 		};
@@ -1567,7 +1567,7 @@ export namespace KiakaiScenes {
 		const player: Player = GAME().player;
 		const kiakai: Kiakai = GAME().kiakai;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 			name   : kiakai.name,
 		};

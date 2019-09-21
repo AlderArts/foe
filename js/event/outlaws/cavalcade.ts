@@ -6,7 +6,7 @@ import { GameState, SetGameState } from "../../gamestate";
 import { Gui } from "../../gui";
 import { IChoice } from "../../link";
 import { Party } from "../../party";
-import { Text } from "../../text";
+import { IParse, Text } from "../../text";
 
 export namespace OCavalcadeScenes {
 	export function Bet() {
@@ -21,7 +21,7 @@ export namespace OCavalcadeScenes {
 		const party: Party = GAME().party;
 
 		const onEnd = () => {
-			const parse: any = {
+			const parse: IParse = {
 				playername : player.name,
 			};
 

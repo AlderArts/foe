@@ -1,10 +1,10 @@
 import { Gui } from "../gui";
-import { Text } from "../text";
+import { IParse, Text } from "../text";
 
 export namespace PortalOpeningScenes {
 
 	export function Intro() {
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 

@@ -11,7 +11,7 @@ import { ItemToy } from "../items/toy-item";
 import { ToysItems } from "../items/toys";
 import { IChoice } from "../link";
 import { Party } from "../party";
-import { Text } from "../text";
+import { IParse, Text } from "../text";
 
 /*
  * Masturbation scenes for the PC
@@ -24,7 +24,7 @@ export namespace MasturbationScenes {
 	export function Entry() {
 		const player: Entity = GAME().player;
 		const party: Party = GAME().party;
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -208,7 +208,7 @@ export namespace MasturbationScenes {
 			}
 		}
 
-		let parse: any = {
+		let parse: IParse = {
 			cocks2() { return player.MultiCockDesc(allCocks); },
 		};
 		parse = player.ParserTags(parse);
@@ -511,7 +511,7 @@ export namespace MasturbationScenes {
 		Gui.NextPrompt();
 	}
 
-	export function CockSize(parse: any, p1cock: Cock) {
+	export function CockSize(parse: IParse, p1cock: Cock) {
 		const len = p1cock.Len();
 		const girth = p1cock.Thickness();
 
@@ -533,7 +533,7 @@ export namespace MasturbationScenes {
 		Text.NL();
 	}
 
-	export function CockSlut(parse: any, p1cock: Cock) {
+	export function CockSlut(parse: IParse, p1cock: Cock) {
 		const player: Entity = GAME().player;
 		if (player.Slut() >= 30) {
 			Text.Add("In a bid to further increase your enjoyment, you gather some of your pre-ejaculate and take the musky liquid to your mouth, where you lap it all off your hand. Damn, you taste great!", parse);
@@ -544,7 +544,7 @@ export namespace MasturbationScenes {
 		}
 	}
 
-	export function CockKnot(parse: any, p1cock: Cock) {
+	export function CockKnot(parse: IParse, p1cock: Cock) {
 		if (p1cock.Knot()) {
 			Text.Add("Your mounting excitement causes your knot to bloat up like a balloon, and you adapt by sparing a hand to squeeze it. It feels great! Each squeeze makes a small rope of pre to spew from your [cockTip] and makes your knot grow ever larger. When you tire of that, you move your hand just behind the bulbous mass to hold tightly to the base of your dick. Doing this, it’s almost like you’d tied someone!", parse);
 			Text.NL();
@@ -557,7 +557,7 @@ export namespace MasturbationScenes {
 
 	export function AnalOpening(func: CallableFunction, obj?: any) {
 		const player: Entity = GAME().player;
-		let parse: any = {
+		let parse: IParse = {
 			toparmordesc : player.ArmorDesc(),
 			bottomarmordesc : player.LowerArmorDesc(),
 		};
@@ -605,7 +605,7 @@ export namespace MasturbationScenes {
 		func(parse, obj);
 	}
 
-	export function AnalFingerCockblock(parse: any, cum: number) {
+	export function AnalFingerCockblock(parse: IParse, cum: number) {
 		const player: Entity = GAME().player;
 		if (player.FirstCock()) {
 			Text.Add("Unable to take the pounding at your prostate any longer, your [cocks] choose[notS] this moment to shoot off [itsTheir] load, string after string of hot, sticky seed arcing into the air and landing on the ground a good distance away. All the anticipation and stimulation seems to have done you good - your current load of semen looks much thicker and richer than normal, speaking well of your prostate-milking skills.", parse);
@@ -618,7 +618,7 @@ export namespace MasturbationScenes {
 		}
 	}
 
-	export function AnalFinger(parse: any) {
+	export function AnalFinger(parse: IParse) {
 		const player: Entity = GAME().player;
 		const cap = player.Butt().Cap();
 		const br = player.FirstBreastRow().Size();
@@ -693,7 +693,7 @@ export namespace MasturbationScenes {
 		Gui.NextPrompt();
 	}
 
-	export function AnalToy(parse: any, toy: ItemToy) {
+	export function AnalToy(parse: IParse, toy: ItemToy) {
 		const player: Entity = GAME().player;
 		const cap = player.Butt().Cap();
 		const br = player.FirstBreastRow().Size();
@@ -773,7 +773,7 @@ export namespace MasturbationScenes {
 	// Generic opening scene. Sets up all parser stuff and calls the scene proper
 	export function VagOpening(func: CallableFunction, obj?: any) {
 		const player: Entity = GAME().player;
-		let parse: any = {
+		let parse: IParse = {
 			toparmordesc : player.ArmorDesc(),
 			bottomarmordesc : player.LowerArmorDesc(),
 		};
@@ -804,7 +804,7 @@ export namespace MasturbationScenes {
 		func(parse, obj);
 	}
 
-	export function VagFingerCockblock(parse: any, cum: number) {
+	export function VagFingerCockblock(parse: IParse, cum: number) {
 		const player: Entity = GAME().player;
 		if (player.FirstCock()) {
 			Text.Add("At the same time, your [cocks] choose[notS] this moment to shoot off [itsTheir] load, string after string of hot, sticky seed arcing into the air and landing on the ground a good distance away with a series of wet-sounding splats.", parse);
@@ -817,7 +817,7 @@ export namespace MasturbationScenes {
 		}
 	}
 
-	export function VagFinger(parse: any) {
+	export function VagFinger(parse: IParse) {
 		const player: Entity = GAME().player;
 		// Fisting is triggered with wide hips wide cunt. Else, default to fingering.
 		const cap = (player.body.torso.hipSize.Get() / 10) * (player.FirstVag().Cap() / 5);
@@ -884,7 +884,7 @@ export namespace MasturbationScenes {
 		Gui.NextPrompt();
 	}
 
-	export function VagToy(parse: any, toy: ItemToy) {
+	export function VagToy(parse: IParse, toy: ItemToy) {
 		const player: Entity = GAME().player;
 		const preg = player.PregHandler().IsPregnant();
 		const bellySize = player.PregHandler().BellySize();
@@ -929,7 +929,7 @@ export namespace MasturbationScenes {
 		Gui.NextPrompt();
 	}
 
-	export function VagTailfuck(parse: any) {
+	export function VagTailfuck(parse: IParse) {
 		const player: Entity = GAME().player;
 		const preg = player.PregHandler().IsPregnant();
 		const bellySize = player.PregHandler().BellySize();
@@ -991,7 +991,7 @@ export namespace MasturbationScenes {
 	export function Breasts() {
 		const player: Entity = GAME().player;
 		const party: Party = GAME().party;
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 		parse = player.ParserTags(parse);

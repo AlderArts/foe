@@ -10,7 +10,7 @@ import { Burrows } from "../../loc/burrows";
 import { BurrowsFlags } from "../../loc/burrows-flags";
 import { Rigard } from "../../loc/rigard/rigard";
 import { PregnancyHandler } from "../../pregnancy";
-import { Text } from "../../text";
+import { IParse, Text } from "../../text";
 import { Player } from "../player";
 import { LucilleScenes } from "./lucille";
 import { Roa } from "./roa";
@@ -38,7 +38,7 @@ export namespace RoaScenes {
     export function BrothelApproach() {
         const player: Player = GAME().player;
         const roa: Roa = GAME().roa;
-        const parse: any = {
+        const parse: IParse = {
             playername : player.name,
         };
 
@@ -83,7 +83,7 @@ export namespace RoaScenes {
     export function BrothelPrompt() {
         const player: Player = GAME().player;
         const roa: Roa = GAME().roa;
-        let parse: any = {
+        let parse: IParse = {
             cost : Text.NumToText(roa.Cost()),
         };
         parse = player.ParserTags(parse);
@@ -170,7 +170,7 @@ export namespace RoaScenes {
         const rigard: Rigard = GAME().rigard;
         const ches = GAME().ches;
 
-        const parse: any = {
+        const parse: IParse = {
 
         };
 
@@ -326,7 +326,7 @@ export namespace RoaScenes {
 
     export function RestoredVenaTalk() {
         const roa: Roa = GAME().roa;
-        const parse: any = {
+        const parse: IParse = {
 
         };
 
@@ -347,7 +347,7 @@ export namespace RoaScenes {
         const cost   = roa.Cost();
         const p1cock = player.BiggestCock();
 
-        let parse: any = {
+        let parse: IParse = {
             cost : Text.NumToText(cost),
         };
         parse = player.ParserTags(parse);
@@ -507,7 +507,7 @@ export namespace RoaScenes {
 
         let p1cock = player.BiggestCock(undefined, true);
 
-        let parse: any = {
+        let parse: IParse = {
             playername : player.name,
         };
         parse = Text.ParserPlural(parse, player.NumCocks() > 1);
@@ -836,7 +836,7 @@ export namespace RoaScenes {
             roa.flags.Met = RoaFlags.Met.Sexed;
         }
 
-        let parse: any = {
+        let parse: IParse = {
             playername : player.name,
             lipsDesc() { return player.LipsDesc(); },
         };
@@ -1164,7 +1164,7 @@ export namespace RoaScenes {
         const player: Player = GAME().player;
         const roa: Roa = GAME().roa;
 
-        let parse: any = {
+        let parse: IParse = {
             playername  : player.name,
             lipsDesc() { return player.LipsDesc(); },
         };

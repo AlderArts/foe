@@ -12,7 +12,7 @@ import { IStorage } from "../../istorage";
 import { IChoice } from "../../link";
 import { ILocation } from "../../location";
 import { Party } from "../../party";
-import { Text } from "../../text";
+import { IParse, Text } from "../../text";
 import { Player } from "../player";
 import { BastetScenes } from "./bastet";
 import { FireblossomScenes } from "./fireblossom";
@@ -76,7 +76,7 @@ export namespace LucilleScenes {
 		const fireblossom = GAME().fireblossom;
 		const lucille: Lucille = GAME().lucille;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername: player.name,
 			sirmadam: player.mfFem("sir", "madam"),
 		};
@@ -212,7 +212,7 @@ export namespace LucilleScenes {
 
 		cost = cost || 0;
 
-		const parse: any = {
+		const parse: IParse = {
 			name,
 			playername : player.name,
 			skinDesc() { return player.SkinDesc(); },

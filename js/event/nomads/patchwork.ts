@@ -15,7 +15,7 @@ import { IngredientItems } from "../../items/ingredients";
 import { ToysItems } from "../../items/toys";
 import { IChoice } from "../../link";
 import { Shop } from "../../shop";
-import { Text } from "../../text";
+import { IParse, Text } from "../../text";
 
 export const PatchworkFlags = {
 	Met : {
@@ -153,7 +153,7 @@ export namespace PatchworkScenes {
 
 	export function Interact() {
 		const patchwork: Patchwork = GAME().patchwork;
-		let parse: any = {};
+		let parse: IParse = {};
 		parse = patchwork.ParserPronouns(parse);
 
 		Text.Clear();
@@ -249,7 +249,7 @@ export namespace PatchworkScenes {
 
 	export function Prompt() {
 		const patchwork: Patchwork = GAME().patchwork;
-		let parse: any = {
+		let parse: IParse = {
 			notS : patchwork.mfPronoun("", "s"),
 		};
 		parse = patchwork.ParserPronouns(parse);
@@ -316,7 +316,7 @@ export namespace PatchworkScenes {
 
 	export function Desc() {
 		const patchwork: Patchwork = GAME().patchwork;
-		let parse: any = {
+		let parse: IParse = {
 			notS : patchwork.mfPronoun("", "s"),
 			dont : patchwork.mfPronoun("don’t", "doesn’t"),
 		};

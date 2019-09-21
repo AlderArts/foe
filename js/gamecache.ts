@@ -77,7 +77,7 @@ import { Sylistraxia } from "./event/sylistraxia";
 import { EntityStorage, GAME, GameCache, InitEntityStorage, InitGAME, InitWorldTime, WorldTime } from "./GAME";
 import { JobEnum, Jobs } from "./job";
 import { Party } from "./party";
-import { Text } from "./text";
+import { IParse, Text } from "./text";
 import { TF } from "./tf";
 
 import { KiakaiFlags } from "./event/kiakai-flags";
@@ -612,7 +612,7 @@ const GameToCache = () => {
 	// Current party
 	gameCache.party   = GAME().party.ToStorage();
 
-	const parse: any = {
+	const parse: IParse = {
 		name   : gameCache.player.name,
 		gender : Gender.Short(GAME().player.body.Gender()),
 		lvl    : gameCache.player.lvl,

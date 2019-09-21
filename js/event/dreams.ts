@@ -6,7 +6,7 @@ import { Gui } from "../gui";
 import { IChoice } from "../link";
 import { Rigard } from "../loc/rigard/rigard";
 import { Party } from "../party";
-import { Text } from "../text";
+import { IParse, Text } from "../text";
 import { Asche } from "./asche";
 import { AscheFlags } from "./asche-flags";
 import { Gwendy } from "./farm/gwendy";
@@ -151,7 +151,7 @@ export namespace DreamsScenes {
 				Text.NL();
 				Text.Add("You turn your mind to the dream, and in moments find the veiled spot. In your mind, you examine it closer and closer, willing it to resolve, and finally it clears, and you see a raven. But what’s the significance of it being part of your dream? There is still something you’re missing.");
 				if (party.InParty(kiakai)) {
-					const parse: any = {
+					const parse: IParse = {
 						name : kiakai.name,
 						HeShe : kiakai.HeShe(),
 						heshe : kiakai.heshe(),
@@ -222,7 +222,7 @@ export namespace DreamsScenes {
 
 	// Dreams
 	export function Ocean(ravenTrigger: boolean) {
-		const parse: any = {
+		const parse: IParse = {
 			raven : DreamsScenes.RavenText(ravenTrigger, " A black bird flies high near the clouds.", " You spot a raven flying high above. It’s here again. You tell yourself you have to remember about this. Still..."),
 		};
 
@@ -230,7 +230,7 @@ export namespace DreamsScenes {
 	}
 
 	export function Forest(ravenTrigger: boolean) {
-		const parse: any = {
+		const parse: IParse = {
 			raven : DreamsScenes.RavenText(ravenTrigger, " Even the croak of a raven somewhere in the branches of a nearby tree fails to disturb you.", " You hear the croak of a raven from a nearby tree. It must be watching you. You tell yourself you must remember it when you leave these woods."),
 		};
 
@@ -242,7 +242,7 @@ export namespace DreamsScenes {
 	export function Harem(ravenTrigger: boolean) {
 		const player: Player = GAME().player;
 
-		const parse: any = {
+		const parse: IParse = {
 			setof : player.NumCocks() > 1 ? " set of" : "",
 			s     : player.NumCocks() > 1 ? "s" : "",
 			raven : DreamsScenes.RavenText(ravenTrigger, " Some soft black down floats around, apparently from the pillow.", " You spot a black feather drifting down, and, looking up, momentarily lock eyes with a raven. You break eye contact first, returning to the pleasant dream. You’ll just have to remember that it was there for when you awake."),
@@ -266,7 +266,7 @@ export namespace DreamsScenes {
 	}
 
 	export function BackHome(ravenTrigger: boolean) {
-		const parse: any = {
+		const parse: IParse = {
 			raven : DreamsScenes.RavenText(ravenTrigger, " A beat of wings and a blur of black feathers distracts you for a moment as some bird flaps away from your doorstep.", " A raven flaps away from the opening door. Once again, the bird. You have to remember it. Wait..."),
 		};
 
@@ -280,7 +280,7 @@ export namespace DreamsScenes {
 	export function Heartstone(ravenTrigger: boolean) {
 		const player: Player = GAME().player;
 
-		const parse: any = {
+		const parse: IParse = {
 			skinDesc() { return player.SkinDesc(); },
 			raven : DreamsScenes.RavenText(ravenTrigger, " A black feather falls on you from somewhere up above, but you pay it no mind.", " A black feather falls from somewhere above. Again, the ravens are watching. You feel you should take note, but you yourself are simply too fascinating."),
 		};
@@ -293,7 +293,7 @@ export namespace DreamsScenes {
 	}
 
 	export function CoC(ravenTrigger: boolean) {
-		const parse: any = {
+		const parse: IParse = {
 			raven1 : DreamsScenes.RavenText(ravenTrigger, " a raven girl,", " a raven girl,"),
 			raven2 : DreamsScenes.RavenText(ravenTrigger, "", " Hold on, that raven girl feels like she doesn’t belong here. It must be one of the watchers again. You have to remember."),
 		};
@@ -310,7 +310,7 @@ export namespace DreamsScenes {
 	export function EndlessClassroom(ravenTrigger: boolean) {
 		const player: Player = GAME().player;
 
-		const parse: any = {
+		const parse: IParse = {
 			gen : player.mfFem("Sir", "Ma'am"),
 			raven : DreamsScenes.RavenText(ravenTrigger, " The more you look, the more bird-like they all appear, staring at you with intent beady eyes.", " As you look, the students look more and more like ravens, staring at you with beady eyes. Now, you can even make out their black wings. So many watchers this time. You force yourself to lock gazes with the multitude for a moment longer - you have to remember them."),
 		};
@@ -325,7 +325,7 @@ export namespace DreamsScenes {
 	}
 
 	export function PredatorPack(ravenTrigger: boolean) {
-		const parse: any = {
+		const parse: IParse = {
 			raven : DreamsScenes.RavenText(ravenTrigger, " Above you, a raven croaks on the wing, encouraging your pursuit.", " Above you, a raven croaks on the wing. They’re watching you again. Well, you’ll give them a show this time, and you’ll remember."),
 			raven2 : DreamsScenes.RavenText(ravenTrigger, "the deer", "the deer", "her"),
 		};
@@ -342,7 +342,7 @@ export namespace DreamsScenes {
 	}
 
 	export function FirePet(ravenTrigger: boolean) {
-		const parse: any = {
+		const parse: IParse = {
 			raven : DreamsScenes.RavenText(ravenTrigger, " At the bottom of the bag, you find a mess of black feathers, and you toss them in as well.", " At the bottom of the bag, you find a mess of black feathers, and you toss them in as well. The raven was here again. It seems to have avoided your bag, but it left a trace. You’ll have to remember about it."),
 		};
 
@@ -361,7 +361,7 @@ export namespace DreamsScenes {
 		const party: Party = GAME().party;
 		const player: Player = GAME().player;
 
-		const parse: any = {
+		const parse: IParse = {
 			mastermistress : player.mfFem("master", "mistress"),
 			raven1 : DreamsScenes.RavenText(ravenTrigger, " marveling at the beautiful raven design painted on your plates,", ""),
 			raven2 : DreamsScenes.RavenText(ravenTrigger, "", " You notice a lifelike raven design painted on your plate. So lifelike, indeed, that its eyes seem to move. You almost admire them for watching you from something like this. Still, you’ve got to figure out why the birds are here, once you’re awake."),
@@ -396,7 +396,7 @@ export namespace DreamsScenes {
 	}
 
 	export function Hermit(ravenTrigger: boolean) {
-		const parse: any = {
+		const parse: IParse = {
 			raven : DreamsScenes.RavenText(ravenTrigger, " A raven perches on his shoulder, regarding you with beady eyes.", " A raven perches on his shoulder, almost as if it belongs there. But you’ve seen them enough, you know they are here to watch you. Now, you must only remember that when you wake."),
 		};
 
@@ -410,7 +410,7 @@ export namespace DreamsScenes {
 	}
 
 	export function Alchemy(ravenTrigger: boolean) {
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -436,7 +436,7 @@ export namespace DreamsScenes {
 		const player: Player = GAME().player;
 		const uru = GAME().uru;
 
-		const parse: any = {
+		const parse: IParse = {
 			multiCockDesc() { return player.MultiCockDesc(); },
 			cockDesc() { return player.FirstCock().Short(); },
 			cockDesc2() { return player.AllCocks()[1].Short(); },
@@ -538,7 +538,7 @@ export namespace DreamsScenes {
 	}
 
 	export function UruRun(ravenTrigger: boolean) {
-		const parse: any = {
+		const parse: IParse = {
 			raven : DreamsScenes.RavenText(ravenTrigger, " The croak of a raven comes from somewhere, suggesting what might happen to your remains.", " The croak of a raven comes from somewhere, oddly almost encouraging you in your flight. Still, you know it’s just here to watch. You’ll have to remember that when you’re awake."),
 		};
 
@@ -555,7 +555,7 @@ export namespace DreamsScenes {
 		const player: Player = GAME().player;
 		const uru = GAME().uru;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername  : player.name,
 			stomachDesc() { return player.StomachDesc(); },
 			hand() { return player.HandDesc(); },
@@ -674,7 +674,7 @@ export namespace DreamsScenes {
 		const player: Player = GAME().player;
 		const kiakai: Kiakai = GAME().kiakai;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 			name : kiakai.name,
 			heshe : kiakai.heshe(),
@@ -697,7 +697,7 @@ export namespace DreamsScenes {
 	export function Kiakai63(ravenTrigger: boolean) {
 		const kiakai: Kiakai = GAME().kiakai;
 
-		const parse: any = {
+		const parse: IParse = {
 			raven : DreamsScenes.RavenText(ravenTrigger, " A black bird is perched on the edge of the opening, looking down on you placidly.", " A raven is perched on the edge of the opening, curiously regarding you.<br><br>So, they are watching you once more. You wonder what they’re looking for, and decide to consider the question when you wake up."),
 		};
 
@@ -732,7 +732,7 @@ export namespace DreamsScenes {
 	}
 
 	export function RosalinNursing(ravenTrigger: boolean) {
-		const parse: any = {
+		const parse: IParse = {
 			raven : DreamsScenes.RavenText(ravenTrigger, " Somewhere above, a raven croaks loudly in distress at the fumes, and flies off.", " Somewhere above, a raven croaks loudly in distress at the fumes, and flies off. Serves the spy right. They intrude in your dreams far too often. You’ll have to remember to do something about them when you wake up."),
 			raven2 : DreamsScenes.RavenText(ravenTrigger, "the catgirl", "the catgirl", "she"),
 		};
@@ -749,7 +749,7 @@ export namespace DreamsScenes {
 	export function RosalinTransformation(ravenTrigger: boolean) {
 		const player: Player = GAME().player;
 
-		const parse: any = {
+		const parse: IParse = {
 			skinDesc() { return player.SkinDesc(); },
 			raven : DreamsScenes.RavenText(ravenTrigger, "a lustrous raven in her place. The bird looks at you curiously before flying off.", "a lustrous raven in her place. You grab for the bird, but it simply croaks at you in annoyance and flies off. You’re going to have to do something about these birds invading your dreams. If only you can remember about them when you wake up.", "only a tiny white mouse in her place."),
 		};
@@ -770,7 +770,7 @@ export namespace DreamsScenes {
 	export function GwendyBarn(ravenTrigger: boolean) {
 		const player: Player = GAME().player;
 
-		const parse: any = {
+		const parse: IParse = {
 			boyGirl : player.mfTrue("boy", "girl"),
 			raven : DreamsScenes.RavenText(ravenTrigger, " You do feel an inexplicable pang of annoyance when she carefully cleans the raven’s feathers, but no matter.", " You do feel a pang of annoyance when she carefully cleans the raven’s feathers. You’ve been seeing that bird or its like far too often in your dreams. Maybe once you’re awake you’ll be able to figure out something about it."),
 		};
@@ -785,7 +785,7 @@ export namespace DreamsScenes {
 	export function GwendyStallion(ravenTrigger: boolean) {
 		const player: Player = GAME().player;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 			skinDesc() { return player.SkinDesc(); },
 			raven : DreamsScenes.RavenText(ravenTrigger, " Outside, you hear the solemn caw of a raven.", " Outside, the ravens caw, announcing their presence in the dream."),
@@ -806,7 +806,7 @@ export namespace DreamsScenes {
 	}
 
 	export function FeraKittens(ravenTrigger: boolean) {
-		const parse: any = {
+		const parse: IParse = {
 			raven : DreamsScenes.RavenText(ravenTrigger, " For some reason, a scrawny baby raven is also nestled among the kittens.", " A scrawny baby raven is nestled among the kittens. It’s a little cute, but that doesn’t make the fact that it’s watching you better. You’ll have to remember this when you wake up."),
 			raven2 : DreamsScenes.RavenText(ravenTrigger, "Fera", "Fera", "she"),
 			raven3 : DreamsScenes.RavenText(ravenTrigger, "the lot", "the lot", "them"),
@@ -824,7 +824,7 @@ export namespace DreamsScenes {
 	export function MirandaJailed(ravenTrigger: boolean) {
 		const miranda: Miranda = GAME().miranda;
 
-		const parse: any = {
+		const parse: IParse = {
 			herm : miranda.flags.Met >= 3 ? " herm" : "",
 			raven : DreamsScenes.RavenText(ravenTrigger, " A raven croaks somewhere, underscoring the verdict.", " A raven croaks somewhere, underscoring the verdict. You can’t quite make out where it’s perched among the rafters of the lawhouse, but it’s clear you’re still being watched. You’ll have to remember that when you get out of this dream."),
 		};
@@ -843,7 +843,7 @@ export namespace DreamsScenes {
 	export function MirandaMerc(ravenTrigger: boolean) {
 		const player: Player = GAME().player;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 			raven : DreamsScenes.RavenText(ravenTrigger, " A flock of ravens welcome you home, croaking from the roof of the house.", " You notice that a flock of ravens are studying you intently from their vantage point atop the roof. Here too."),
 		};
@@ -866,7 +866,7 @@ export namespace DreamsScenes {
 	export function TwinsMaids(ravenTrigger: boolean) {
 		const player: Player = GAME().player;
 
-		const parse: any = {
+		const parse: IParse = {
 			raven : DreamsScenes.RavenText(ravenTrigger, ", served on a plate with a raven motif", ". The raven depicted on the plate peer up at you intently, but you are not going to let that spoil your evening"),
 		};
 
@@ -884,7 +884,7 @@ export namespace DreamsScenes {
 	export function BlowjobGive(ravenTrigger: boolean) {
 		const player: Player = GAME().player;
 
-		const parse: any = {
+		const parse: IParse = {
 			raven : DreamsScenes.RavenText(ravenTrigger, " As you look up, the raven’s black eyes meet yours, nodding sagely as you dig in.", " You freeze slightly as you look up at the cock’s owner, a slight smirk on his beak. Well, lets see how the spy likes this."),
 		};
 
@@ -901,7 +901,7 @@ export namespace DreamsScenes {
 		const party: Party = GAME().party;
 		const player: Player = GAME().player;
 
-		const parse: any = {
+		const parse: IParse = {
 			raven : DreamsScenes.RavenText(ravenTrigger, " On the back of the couch, four ravens sit, watching you with interest.", " You glance up, noting your feathered observers sitting on the edge of the couch. Naughty birds."),
 		};
 
@@ -944,7 +944,7 @@ export namespace DreamsScenes {
 	export function CunnilingusGive(ravenTrigger: boolean) {
 		const player: Player = GAME().player;
 
-		const parse: any = {
+		const parse: IParse = {
 			raven : DreamsScenes.RavenText(ravenTrigger, " A raven peeks over her shoulder, peering at you curiously.", " Here too, the ravens are watching, peeking down at you over her shoulder. Why do they follow you?"),
 		};
 
@@ -962,7 +962,7 @@ export namespace DreamsScenes {
 	export function CunnilingusRec(ravenTrigger: boolean) {
 		const player: Player = GAME().player;
 
-		const parse: any = {
+		const parse: IParse = {
 			raven : DreamsScenes.RavenText(ravenTrigger, " A raven settles down on your shoulders, ruffling its feathers uncertainly as it bobs up and down with your movements.", " A raven settles down a little way off, eyeing you warily. Perhaps it suspects that you are onto them."),
 			multiCockDesc() { return player.MultiCockDesc(); },
 			itThem : player.NumCocks() > 1 ? "them" : "it",
@@ -1033,7 +1033,7 @@ export namespace DreamsScenes {
 	}
 
 	export function FragileArmor(ravenTrigger: boolean) {
-		const parse: any = {
+		const parse: IParse = {
 			raven : DreamsScenes.RavenText(ravenTrigger, " A raven perches on an armor stand, watching the argument as it unfolds.", " There’s a raven sitting on an armor stand, watching you. You need to remember this."),
 		};
 
@@ -1054,7 +1054,7 @@ export namespace DreamsScenes {
 
 	// Must have met Asche.
 	export function AscheNighttime(ravenTrigger: boolean) {
-		const parse: any = {};
+		const parse: IParse = {};
 
 		Text.Add("The scent of oleander and jasmine tickles your nose as you do your best to relax on the mat that’s been so thoughtfully supplied for you. Clothed in her white sari and bearing a tea set in her hands, Asche sets down her burden on the low table and pours a cup of steaming brew each for the both of you, kneeling on the mat on her side of the table.", parse);
 		Text.NL();
@@ -1078,7 +1078,7 @@ export namespace DreamsScenes {
 	export function AscheDance(ravenTrigger: boolean) {
 		const player: Player = GAME().player;
 
-		const parse: any = {
+		const parse: IParse = {
 			skin : player.SkinDesc(),
 		};
 
@@ -1118,7 +1118,7 @@ export namespace DreamsScenes {
 	export function AscheHotSpring(ravenTrigger: boolean) {
 		const player: Player = GAME().player;
 
-		let parse: any = {};
+		let parse: IParse = {};
 		parse = player.ParserTags(parse);
 		parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 

@@ -27,7 +27,7 @@ import { WeaponsItems } from "../../items/weapons";
 import { IChoice, Link } from "../../link";
 import { ILocRigardKrawitz } from "../../location";
 import { Party } from "../../party";
-import { Text } from "../../text";
+import { IParse, Text } from "../../text";
 import { Season } from "../../time";
 import { KrawitzFlags } from "./krawitz-flags";
 import { RigardFlags } from "./rigard-flags";
@@ -216,7 +216,7 @@ export namespace KrawitzScenes {
 			const player: Player = GAME().player;
 			const party: Party = GAME().party;
 
-			const parse: any = {
+			const parse: IParse = {
 
 			};
 			party.location = KrawitzLoc.Servants;
@@ -458,7 +458,7 @@ export namespace KrawitzScenes {
 
 			stat.Swiped = true;
 		}
-		const parse: any = {
+		const parse: IParse = {
 			vase : stat.Swiped ? "The huge staircase nearby is in disrepair, with visibly flaky paint." : "It’s a rather jarring contrast to see an ornate antique statue, no doubt very expensive, standing beside a huge staircase with visibly flaky paint.",
 		};
 		Text.Add("You are in the main building of the Krawitz estate. The interior of the mansion, while richly decorated, has clearly seen better days. [vase] Though the main hallway is spotless, you can see tufts of dust gathering in the more dimly lit side corridors. The intricately designed carpet you are standing on exudes a faint smell of mold. Either Krawitz has been a massive cheapskate with maintenance lately, or the servants aren’t doing a very good job keeping this place in shape.", parse);
@@ -556,7 +556,7 @@ export namespace KrawitzScenes {
 			const party: Party = GAME().party;
 
 			party.location = KrawitzLoc.Mansion.Study;
-			const parse: any = {
+			const parse: IParse = {
 
 			};
 			Text.Clear();
@@ -672,7 +672,7 @@ export namespace KrawitzScenes {
 	));
 
 	export function KrawitzPrompt() {
-		const parse: any = {};
+		const parse: IParse = {};
 		// [Challenge][Leave]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Challenge",
@@ -707,7 +707,7 @@ export namespace KrawitzScenes {
 		const rigard = GAME().rigard;
 		const player: Player = GAME().player;
 
-		const parse: any = {};
+		const parse: IParse = {};
 		if (rigard.Krawitz.Duel > 0) {
 			Text.Add("<i>“It- it’s you!”</i> Krawitz gasps, recognizing you from your previous encounter. <i>“Why have you come here?!”</i>");
 		} else {
@@ -784,7 +784,7 @@ export namespace KrawitzScenes {
 	}
 
 	export function Flee(entryPoint?: boolean) {
-		const parse: any = {};
+		const parse: IParse = {};
 		if (!entryPoint) {
 			Text.Add("This wasn’t a very good plan to start with. You curse yourself as you dash through the dark corridors of the mansion, the sound of alarms rising around you, the livid lord hot on your heels. You hear him groaning in pain as you throw down various vases and statues to block his path, though you don’t stop to find out if the pain is physical or merely monetary.", parse);
 			Text.NL();
@@ -915,7 +915,7 @@ export namespace KrawitzScenes {
 		const rigard = GAME().rigard;
 		const player: Player = GAME().player;
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 		Text.Clear();
@@ -1008,7 +1008,7 @@ export namespace KrawitzScenes {
 	export function WorkWork() {
 		const rigard = GAME().rigard;
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -1067,7 +1067,7 @@ export namespace KrawitzScenes {
 		const rigard = GAME().rigard;
 		const party: Party = GAME().party;
 
-		const parse: any = {
+		const parse: IParse = {
 			name() { return party.Get(1).name; },
 		};
 
@@ -1107,7 +1107,7 @@ export namespace KrawitzScenes {
 	}
 
 	export function ApproachGates() {
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -1152,7 +1152,7 @@ export namespace KrawitzScenes {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 
-		const parse: any = {
+		const parse: IParse = {
 			name() { return party.Get(1).name; },
 		};
 
@@ -1192,7 +1192,7 @@ export namespace KrawitzScenes {
 	}
 
 	export function GuardLost(gender: Gender) {
-		const parse: any = {
+		const parse: IParse = {
 			HeShe  : gender === Gender.male ? "He" : "She",
 			heshe  : gender === Gender.male ? "he" : "she",
 			hisher : gender === Gender.male ? "his" : "her",
@@ -1210,7 +1210,7 @@ export namespace KrawitzScenes {
 	}
 
 	export function GuardConvinced(gender: Gender) {
-		const parse: any = {
+		const parse: IParse = {
 			HeShe  : gender === Gender.male ? "He" : "She",
 			heshe  : gender === Gender.male ? "he" : "she",
 			hisher : gender === Gender.male ? "his" : "her",
@@ -1227,7 +1227,7 @@ export namespace KrawitzScenes {
 	}
 
 	export function ServantLost(gender: Gender) {
-		const parse: any = {
+		const parse: IParse = {
 			HeShe   : gender === Gender.male ? "He" : "She",
 			heshe   : gender === Gender.male ? "he" : "she",
 			hisher  : gender === Gender.male ? "his" : "her",
@@ -1247,7 +1247,7 @@ export namespace KrawitzScenes {
 
 	export function ServantConvinced(gender: Gender) {
 		const player: Entity = GAME().player;
-		const parse: any = {
+		const parse: IParse = {
 			HeShe   : gender === Gender.male ? "He" : "She",
 			heshe   : gender === Gender.male ? "he" : "she",
 			hisher  : gender === Gender.male ? "his" : "her",
@@ -1268,7 +1268,7 @@ export namespace KrawitzScenes {
 	export function FoundOut(entity: EncType, num: number, gender?: Gender) {
 		const player: Player = GAME().player;
 
-		let parse: any = {
+		let parse: IParse = {
 			entity : entity === EncType.Guard ? "the guard" : "the servant",
 			spiked : stat.LustPotion && stat.HasWine ? "spiked " : "",
 		};
@@ -1414,7 +1414,7 @@ export namespace KrawitzScenes {
 	export function PatrollingGuards() {
 		const rigard = GAME().rigard;
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -1519,7 +1519,7 @@ export namespace KrawitzScenes {
 
 	// Overhear servants (grounds/servants/mansion)
 	export function WanderingServants() {
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 		const gender = Math.random() > 0.5 ? Gender.male : Gender.female;
@@ -1637,7 +1637,7 @@ export namespace KrawitzScenes {
 	export function StealingClothes() {
 		const player: Player = GAME().player;
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 		Text.Clear();
@@ -1690,7 +1690,7 @@ export namespace KrawitzScenes {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 
-		let parse: any = {
+		let parse: IParse = {
 			cock2() { return player.AllCocks()[1].Short(); },
 			cockTip2() { return player.AllCocks()[1].TipShort(); },
 		};
@@ -1981,7 +1981,7 @@ export namespace KrawitzScenes {
 	}
 
 	export function BathhouseWine() {
-		const parse: any = {
+		const parse: IParse = {
 		};
 
 		stat.BathhouseWine = true;
@@ -1998,7 +1998,7 @@ export namespace KrawitzScenes {
 	}
 
 	export function OrgyEntrypoint() {
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -2051,7 +2051,7 @@ export namespace KrawitzScenes {
 		const terry: Terry = GAME().terry;
 		const world = WORLD();
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -2332,7 +2332,7 @@ export namespace KrawitzScenes {
 						twins.rani.relation.IncreaseStat(100, points * 3);
 						const coin = 100 * points;
 						party.coin += coin;
-						Text.Add("<b>You earned [coin] coins!</b>", {coin});
+						Text.Add("<b>You earned [coin] coins!</b>", {coin: coin.toString()});
 						if (points >= 6) {
 							Text.NL();
 							Text.Add("<i>“I think an additional reward is in order,”</i> the woman declares, pulling out an elaborate silver necklace with a rose at its center.", parse);
@@ -2404,7 +2404,7 @@ export namespace KrawitzScenes {
 
 	export function TwinsTalk() {
 		const player: Player = GAME().player;
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -2425,7 +2425,7 @@ export namespace KrawitzScenes {
 	}
 
 	export function TwinsPrompt() {
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -2508,7 +2508,7 @@ export namespace KrawitzScenes {
 		const player: Player = GAME().player;
 		const twins: Twins = GAME().twins;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -2549,7 +2549,7 @@ export namespace KrawitzScenes {
 		const player: Player = GAME().player;
 
 		SetGameState(GameState.Event, Gui);
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -2592,7 +2592,7 @@ export namespace KrawitzScenes {
 				Text.NL();
 				const dex = Math.floor(player.Dex() + Math.random() * 20);
 				if (GetDEBUG()) {
-					Text.Add("<b>Dex([pcdex]) + rand(20) = [dex] (vs 80/60)</b>", {pcdex : player.Dex(), dex});
+					Text.Add(`<b>Dex(${player.Dex()}) + rand(20) = ${dex} (vs 80/60)</b>`);
 					Text.NL();
 				}
 				Text.Add("The servant Krawitz called Rufio does a countdown for you before raising his arm to indicate the start of the fight. ", parse);

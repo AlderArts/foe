@@ -7,7 +7,7 @@
 import { GetDEBUG } from "../../app";
 import { Ability, TargetMode } from "../ability";
 import { Perks } from "../perks";
-import { Text } from "../text";
+import { IParse, Text } from "../text";
 
 const RunAb = new Ability();
 RunAb.name = "Run";
@@ -17,7 +17,7 @@ RunAb.enabledCondition = (encounter, caster) => {
 	return encounter.canRun;
 };
 RunAb.CastInternal = (encounter, caster) => {
-	const parse: any = {
+	const parse: IParse = {
 		Name : caster.NameDesc(),
 		was : caster.plural() ? "were" : "was",
 		y : caster.plural() ? "y" : "ies",

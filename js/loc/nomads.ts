@@ -18,7 +18,7 @@ import { Gui } from "../gui";
 import { Link } from "../link";
 import { ILocNomads } from "../location";
 import { Maze } from "../maze";
-import { Text } from "../text";
+import { IParse, Text } from "../text";
 
 //
 // Nomads
@@ -66,7 +66,7 @@ MazeTest.AddRoom(2, 5);
 MazeTest.AddRoom(4, 5);
 MazeTest.AddRoom(5, 5);
 MazeTest.GetRoom(5, 5).description = () => {
-	const parse: any = {};
+	const parse: IParse = {};
 
 	Text.Add("Sample desc", parse);
 	Text.NL();

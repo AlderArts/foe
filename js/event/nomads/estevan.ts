@@ -20,7 +20,7 @@ import { IChoice } from "../../link";
 import { ILocation } from "../../location";
 import { Party } from "../../party";
 import { PregnancyHandler } from "../../pregnancy";
-import { Text } from "../../text";
+import { IParse, Text } from "../../text";
 import { TF } from "../../tf";
 import { Player } from "../player";
 import { Cale } from "./cale";
@@ -109,7 +109,7 @@ export namespace EstevanScenes {
 		const player: Player = GAME().player;
 		const cale: Cale = GAME().cale;
 		const estevan: Estevan = GAME().estevan;
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -174,7 +174,7 @@ export namespace EstevanScenes {
 	export function Prompt() {
 		const player: Player = GAME().player;
 		const estevan: Estevan = GAME().estevan;
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -331,7 +331,7 @@ export namespace EstevanScenes {
 		const estevan: Estevan = GAME().estevan;
 		const p1cock = player.BiggestCock();
 
-		let parse: any = {
+		let parse: IParse = {
 			playername    : player.name,
 		};
 		parse = player.ParserTags(parse);

@@ -10,7 +10,7 @@ import { IngredientItems } from "../items/ingredients";
 import { ToysItems } from "../items/toys";
 import { IChoice } from "../link";
 import { Party } from "../party";
-import { Text } from "../text";
+import { IParse, Text } from "../text";
 import { Kiakai } from "./kiakai";
 import { KiakaiFlags } from "./kiakai-flags";
 import { Player } from "./player";
@@ -27,7 +27,7 @@ export namespace KiakaiSexScenes {
 		const player: Player = GAME().player;
 		const kiakai: Kiakai = GAME().kiakai;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 			name   : kiakai.name,
 			heatStirring : player.FirstCock() ? "stirring" : "heat",
@@ -203,7 +203,7 @@ export namespace KiakaiSexScenes {
 		const player: Player = GAME().player;
 		const kiakai: Kiakai = GAME().kiakai;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 			name   : kiakai.name,
 			heatStirring : player.FirstCock() ? "stirring" : "heat",
@@ -285,7 +285,7 @@ export namespace KiakaiSexScenes {
 		const player: Player = GAME().player;
 		const kiakai: Kiakai = GAME().kiakai;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 			name    : kiakai.name,
 			heatStirring : player.FirstCock() ? "stirring" : "heat",
@@ -1006,7 +1006,7 @@ export namespace KiakaiSexScenes {
 		const player: Player = GAME().player;
 		const kiakai: Kiakai = GAME().kiakai;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername : player.name,
 			name    : kiakai.name,
 			heatStirring : player.FirstCock() ? "stirring" : "heat",
@@ -1432,7 +1432,7 @@ export namespace KiakaiSexScenes {
 		const player: Player = GAME().player;
 		const kiakai: Kiakai = GAME().kiakai;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername   : player.name,
 			name         : kiakai.name,
 		};
@@ -1454,7 +1454,7 @@ export namespace KiakaiSexScenes {
 		const player: Player = GAME().player;
 		const kiakai: Kiakai = GAME().kiakai;
 
-		let parse: any = {
+		let parse: IParse = {
 			playername   : player.name,
 			name         : kiakai.name,
 			heatStirring : player.FirstCock() ? "stirring" : "heat",
@@ -2422,7 +2422,7 @@ export namespace KiakaiSexScenes {
 		const playerCock = player.FirstCock() || (player.strapOn ? player.strapOn.cock : undefined);
 		const kiaiCock   = kiakai.FirstCock() || (kiakai.strapOn ? kiakai.strapOn.cock : undefined);
 
-		let parse: any = {
+		let parse: IParse = {
 			playername   : player.name,
 			name         : kiakai.name,
 			kCockDesc2() { return kiakai.AllCocks()[1].Short(); },
@@ -2679,7 +2679,7 @@ export namespace KiakaiSexScenes {
 		const strapon    = playerCock ? playerCock.isStrapon : false;
 		const kiaiCock   = kiakai.BiggestCock(undefined, true);
 
-		let parse: any = {
+		let parse: IParse = {
 			playername   : player.name,
 			name         : kiakai.name,
 			kCockDesc2() { return kiakai.AllCocks()[1].Short(); },
@@ -3373,7 +3373,7 @@ export namespace KiakaiSexScenes {
 		const playerCock = player.BiggestCock(undefined, true);
 		const kiaiCock   = kiakai.BiggestCock(undefined, true);
 
-		let parse: any = {
+		let parse: IParse = {
 			playername   : player.name,
 			name         : kiakai.name,
 			kCockDesc2() { return kiakai.AllCocks()[1].Short(); },
@@ -4184,7 +4184,7 @@ export namespace KiakaiSexScenes {
 		const playerCock = player.BiggestCock(undefined, true);
 		const kiaiCock   = kiakai.BiggestCock(undefined, true);
 
-		let parse: any = {
+		let parse: IParse = {
 			playername   : player.name,
 			name         : kiakai.name,
 			kCockDesc2() { return kiakai.AllCocks()[1].Short(); },

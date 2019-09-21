@@ -8,7 +8,7 @@ import { Burrows } from "../../loc/burrows";
 import { BurrowsFlags } from "../../loc/burrows-flags";
 import { Party } from "../../party";
 import { PregnancyHandler } from "../../pregnancy";
-import { Text } from "../../text";
+import { IParse, Text } from "../../text";
 import { Roa } from "../brothel/roa";
 import { Player } from "../player";
 import { Ophelia } from "./ophelia";
@@ -33,7 +33,7 @@ export namespace VenaScenes {
     export function PitApproach() {
         const burrows: Burrows = GAME().burrows;
 
-        const parse: any = {
+        const parse: IParse = {
 
         };
 
@@ -88,7 +88,7 @@ export namespace VenaScenes {
 
     export function PitPrompt() {
         const burrows: Burrows = GAME().burrows;
-        const parse: any = {
+        const parse: IParse = {
 
         };
 
@@ -139,7 +139,7 @@ export namespace VenaScenes {
         const burrows: Burrows = GAME().burrows;
         const party: Party = GAME().party;
 
-        const parse: any = {
+        const parse: IParse = {
 
         };
 
@@ -226,7 +226,7 @@ export namespace VenaScenes {
         const vena: Vena = GAME().vena;
         const burrows: Burrows = GAME().burrows;
 
-        const parse: any = {
+        const parse: IParse = {
             playername : player.name,
         };
 

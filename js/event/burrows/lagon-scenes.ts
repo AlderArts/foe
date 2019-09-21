@@ -16,7 +16,7 @@ import { BurrowsFlags } from "../../loc/burrows-flags";
 import { SetGameOverButton } from "../../main-gameover";
 import { Party } from "../../party";
 import { PregnancyHandler } from "../../pregnancy";
-import { Text } from "../../text";
+import { IParse, Text } from "../../text";
 import { Time } from "../../time";
 import { Roa } from "../brothel/roa";
 import { Kiakai } from "../kiakai";
@@ -50,7 +50,7 @@ export namespace LagonScenes {
     export function InteractRuler() {
         const lagon: Lagon = GAME().lagon;
         const burrows: Burrows = GAME().burrows;
-        const parse: any = {
+        const parse: IParse = {
 
         };
 
@@ -84,7 +84,7 @@ export namespace LagonScenes {
         const player: Player = GAME().player;
         const lagon: Lagon = GAME().lagon;
         const burrows: Burrows = GAME().burrows;
-        const parse: any = {
+        const parse: IParse = {
             playername : player.name,
         };
         parse.stuttername = player.name[0] + "-" + player.name;
@@ -205,7 +205,7 @@ export namespace LagonScenes {
     // TODO
     export function RulerSexPrompt() {
         const lagon: Lagon = GAME().lagon;
-        const parse: any = {
+        const parse: IParse = {
 
         };
 
@@ -266,7 +266,7 @@ export namespace LagonScenes {
     export function RulerBlowjob() {
         const player: Player = GAME().player;
         const lagon: Lagon = GAME().lagon;
-        const parse: any = {
+        const parse: IParse = {
 
         };
 
@@ -319,7 +319,7 @@ export namespace LagonScenes {
         const burrows: Burrows = GAME().burrows;
         const p1cock = player.BiggestCock();
 
-        let parse: any = {
+        let parse: IParse = {
             playername : player.name,
         };
 
@@ -552,7 +552,7 @@ export namespace LagonScenes {
     }
 
     export function RulerBlowjobSwallowEntrypoint(opheliaPresent: boolean) {
-        const parse: any = {
+        const parse: IParse = {
 
         };
 
@@ -570,7 +570,7 @@ export namespace LagonScenes {
         const player: Player = GAME().player;
         const lagon: Lagon = GAME().lagon;
 
-        const parse: any = {
+        const parse: IParse = {
 
         };
 
@@ -597,7 +597,7 @@ export namespace LagonScenes {
 
         const p1cock = player.BiggestCock();
         const lagonSize = lagon.FirstCock().Size();
-        let parse: any = {
+        let parse: IParse = {
             armor() { return player.ArmorDesc(); },
             pheshe : player.mfTrue("he", "she"),
         };
@@ -763,7 +763,7 @@ export namespace LagonScenes {
         const lagon: Lagon = GAME().lagon;
         const burrows: Burrows = GAME().burrows;
 
-        let parse: any = {
+        let parse: IParse = {
 
         };
         parse = player.ParserTags(parse);
@@ -1026,7 +1026,7 @@ export namespace LagonScenes {
 
     // TODO
     export function RulerPitEntrypoint() {
-        const parse: any = {
+        const parse: IParse = {
 
         };
 
@@ -1042,7 +1042,7 @@ export namespace LagonScenes {
         const player: Player = GAME().player;
         const lagon: Lagon = GAME().lagon;
 
-        const parse: any = {
+        const parse: IParse = {
 
         };
 
@@ -1116,7 +1116,7 @@ export namespace LagonScenes {
         const lagon: Lagon = GAME().lagon;
         const burrows: Burrows = GAME().burrows;
 
-        const parse: any = {
+        const parse: IParse = {
             tongue() { return player.TongueDesc(); },
         };
 
@@ -1515,7 +1515,7 @@ export namespace LagonScenes {
 
         SetGameState(GameState.Event, Gui);
         const enc = this;
-        const parse: any = {
+        const parse: IParse = {
 
         };
 
@@ -1560,7 +1560,7 @@ export namespace LagonScenes {
         const lagon: Lagon = GAME().lagon;
 
         SetGameState(GameState.Event, Gui);
-        let parse: any = {
+        let parse: IParse = {
             face() { return player.FaceDesc(); },
             tongue() { return player.TongueDesc(); },
             anusDesc() { return player.Butt().AnalShort(); },
@@ -1648,7 +1648,7 @@ export namespace LagonScenes {
         const player: Player = GAME().player;
         const party: Party = GAME().party;
 
-        const parse: any = {
+        const parse: IParse = {
 
         };
 
@@ -1690,7 +1690,7 @@ export namespace LagonScenes {
         const scepter = party.Inv().QueryNum(QuestItems.Scepter);
 
         SetGameState(GameState.Event, Gui);
-        const parse: any = {
+        const parse: IParse = {
 
         };
 
@@ -1762,7 +1762,7 @@ export namespace LagonScenes {
         const party: Party = GAME().party;
         const ophelia: Ophelia = GAME().ophelia;
 
-        const parse: any = {
+        const parse: IParse = {
             playername : player.name,
         };
 
@@ -1851,7 +1851,7 @@ export namespace LagonScenes {
         const burrows: Burrows = GAME().burrows;
         const kiakai: Kiakai = GAME().kiakai;
 
-        const parse: any = {
+        const parse: IParse = {
             playername : player.name,
         };
 
@@ -1979,7 +1979,7 @@ export namespace LagonScenes {
     }
 
     export function Usurp(toolate: boolean) {
-        const parse: any = {
+        const parse: IParse = {
 
         };
 
@@ -2014,7 +2014,7 @@ export namespace LagonScenes {
         const toolate = enc.toolate;
         const scepter = party.Inv().QueryNum(QuestItems.Scepter);
 
-        const parse: any = {
+        const parse: IParse = {
             tongue() { return player.TongueDesc(); },
             breasts() { return player.FirstBreastRow().Short(); },
         };
@@ -2111,7 +2111,7 @@ export namespace LagonScenes {
         const toolate = enc.toolate;
         const scepter = party.Inv().QueryNum(QuestItems.Scepter);
 
-        const parse: any = {
+        const parse: IParse = {
 
         };
 
@@ -2160,7 +2160,7 @@ export namespace LagonScenes {
         const toolate = enc.toolate;
         const scepter = party.Inv().QueryNum(QuestItems.Scepter);
 
-        const parse: any = {
+        const parse: IParse = {
             playername : player.name,
         };
 
@@ -2253,7 +2253,7 @@ export namespace LagonScenes {
         SetGameState(GameState.Event, Gui);
         const enc = this;
 
-        const parse: any = {
+        const parse: IParse = {
             cocks() { return player.MultiCockDesc(); },
         };
 
@@ -2312,7 +2312,7 @@ export namespace LagonScenes {
         SetGameState(GameState.Event, Gui);
         const enc = this;
 
-        const parse: any = {
+        const parse: IParse = {
             playername : player.name,
             stuttername : player.name[0] + "-" + player.name,
             pheshe : player.mfFem("he", "she"),

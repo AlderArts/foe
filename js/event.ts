@@ -8,7 +8,7 @@ import { GameState, SetGameState } from "./gamestate";
 import { Gui } from "./gui";
 import { IChoice, Link } from "./link";
 import { ILocation } from "./location";
-import { Text } from "./text";
+import { IParse, Text } from "./text";
 
 /*
  *
@@ -206,7 +206,7 @@ export class Event implements ILocation {
 	}
 
 	public DrunkHandler() {
-		const parse: any = {};
+		const parse: IParse = {};
 		const comp = GAME().party.GetRandom();
 		Text.Clear();
 		if (comp) {

@@ -14,7 +14,7 @@ import { QuestItems } from "../../items/quest";
 import { IChoice, Link } from "../../link";
 import { ILocRigardShops } from "../../location";
 import { Party } from "../../party";
-import { Text } from "../../text";
+import { IParse, Text } from "../../text";
 import { Burrows } from "../burrows";
 import { BurrowsFlags } from "../burrows-flags";
 import { ArmorShopLoc, ArmorShopScenes } from "./armorshop";
@@ -213,7 +213,7 @@ ShopStreetLoc.Street.events.push(new Link(
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 			sirmadam : player.mfFem("sir", "madam"),
 		};
@@ -328,7 +328,7 @@ ShopStreetLoc.Street.events.push(new Link(
 			Text.NL();
 			Text.Add("Inside, you are met by the smith’s assistant, and, when he hears your request, forced to wait for a few minutes for Martello to finish up with his current task. You hear clanging from the forge room, and it seems that the man is observing one of his apprentices work on a horseshoe, checking her technique.");
 			Text.NL();
-			const parse: any = {
+			const parse: IParse = {
 				str : player.Str() > 35 ?
 				", and you return it in kind, your hands briefly locking in an immovable bond. The smith smiles at you, in apparent approval" :
 				", and you shake your hand a little to adjust your joints once he releases you",
@@ -390,7 +390,7 @@ export namespace ShopStreetScenes {
 		const Sdescs = ["shabby-looking", "colorful", "neatly-decorated", "well-kept", "well-used", "plain"];
 		const Mdescs = ["an agitated-looking merchant", "a wildly gesticulating merchant", "an excited-looking merchant", "a desperate-looking merchant"];
 
-		const parse: any = {
+		const parse: IParse = {
 			p1name       : party.Get(1).name,
 			stall() { return stalls[Math.floor(Math.random() * stalls.length)]; },
 			stallDesc() { return Sdescs[Math.floor(Math.random() * Sdescs.length)]; },
@@ -689,7 +689,7 @@ export namespace ShopStreetScenes {
 	export function Scepter() {
 		const rigard = GAME().rigard;
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 

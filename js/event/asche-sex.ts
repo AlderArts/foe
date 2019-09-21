@@ -2,7 +2,7 @@ import { Sex } from "../entity-sex";
 import { GAME, TimeStep } from "../GAME";
 import { Gui } from "../gui";
 import { IChoice } from "../link";
-import { Text } from "../text";
+import { IParse, Text } from "../text";
 import { Asche } from "./asche";
 import { Player } from "./player";
 
@@ -63,7 +63,7 @@ export namespace AscheSexScenes {
 		const longCock = p1cock.Len() > 18;
 		const massiveCock = p1cock.Volume() > 750;
 
-		let parse: any = {};
+		let parse: IParse = {};
 
 		parse = player.ParserTags(parse);
 
@@ -154,7 +154,7 @@ export namespace AscheSexScenes {
 		const player: Player = GAME().player;
 		const asche: Asche = GAME().asche;
 
-		const parse: any = {
+		const parse: IParse = {
 			handsomepretty : player.mfFem("handsome", "pretty"),
 			heshe : player.mfFem("he", "she"),
 			himher : player.mfFem("him", "her"),
@@ -204,7 +204,7 @@ export namespace AscheSexScenes {
 
 		const p1cock = player.BiggestCock();
 
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 		parse = player.ParserTags(parse);
@@ -317,7 +317,7 @@ export namespace AscheSexScenes {
 		const p1cock = player.BiggestCock();
 		const longCock = p1cock.Len() > 28;
 
-		let parse: any = {
+		let parse: IParse = {
 			heshe : player.mfFem("he", "she"),
 		};
 		parse = player.ParserTags(parse);
@@ -365,7 +365,7 @@ export namespace AscheSexScenes {
 	export function MilkHer() {
 		const player: Player = GAME().player;
 
-		const parse: any = {
+		const parse: IParse = {
 			heshe : player.mfFem("he", "she"),
 			nips : player.FirstBreastRow().NipsShort(),
 			handsomepretty : player.mfFem("handsome", "pretty"),
@@ -409,7 +409,7 @@ export namespace AscheSexScenes {
 	export function Tribbing() {
 		const player: Player = GAME().player;
 
-		let parse: any = {
+		let parse: IParse = {
 			heshe : player.mfFem("he", "she"),
 			hisher : player.mfFem("his", "her"),
 		};
@@ -452,7 +452,7 @@ export namespace AscheSexScenes {
 	export function Ending() {
 		const player: Player = GAME().player;
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -484,7 +484,7 @@ export namespace AscheSexScenes {
 
 		const p1cock = player.BiggestCock();
 
-		let parse: any = {
+		let parse: IParse = {
 			lowerarmordesc : player.LowerArmorDesc(),
 			upperarmordesc : player.ArmorDesc(),
 			handsomepretty : player.mfFem("handsome", "pretty"),

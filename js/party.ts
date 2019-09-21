@@ -16,7 +16,7 @@ import { Gui } from "./gui";
 import { Inventory } from "./inventory";
 import { IChoice } from "./link";
 import { ILocation } from "./location";
-import { Text } from "./text";
+import { IParse, Text } from "./text";
 
 export class Party {
 	public members: Entity[];
@@ -252,7 +252,7 @@ export class Party {
 	}
 
 	public SwitchPrompt(member: Entity) {
-		const parse: any = {
+		const parse: IParse = {
 			name:   member.name,
 			himher: member.himher(),
 			HeShe:  member.HeShe(),
@@ -352,7 +352,7 @@ export class Party {
 	}
 
 	public Interact(preventClear?: boolean, switchSpot?: boolean, back?: CallableFunction) {
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -381,7 +381,7 @@ export class Party {
 			if (member.currentJob) {
 					const jd  = member.jobs[member.currentJob.name];
 					if (jd) {
-						const parse: any = {
+						const parse: IParse = {
 							job        : jd.job.Short(this),
 							lvl        : jd.level,
 							maxlvl     : jd.job.levels.length + 1,

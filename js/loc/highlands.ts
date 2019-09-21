@@ -20,7 +20,7 @@ import { GAME, MoveToLocation, WORLD, WorldTime } from "../GAME";
 import { Gui } from "../gui";
 import { Link } from "../link";
 import { ILocHighlands } from "../location";
-import { Text } from "../text";
+import { IParse, Text } from "../text";
 import { Season } from "../time";
 
 // Create namespace
@@ -157,7 +157,7 @@ HighlandsLoc.Spring.onEntry = () => {
 	}
 };
 HighlandsLoc.Spring.description = () => {
-	const parse: any = {};
+	const parse: IParse = {};
 
 	Text.Add("You’re standing on the spring plateau. Nestled away against the mountainside with only an obscure, treacherous trail leading upwards from the foot, the place is usually empty save for the few signs of life which mark the fact that Isla’s made her home here, no matter how temporary.");
 	Text.NL();

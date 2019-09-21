@@ -8,7 +8,7 @@ import { Gui } from "../gui";
 import { IChoice } from "../link";
 import { Party } from "../party";
 import { Womb } from "../pregnancy";
-import { Text } from "../text";
+import { IParse, Text } from "../text";
 import { GlobalScenes } from "./global";
 import { Player } from "./player";
 
@@ -161,7 +161,7 @@ export namespace NurseryScenes {
 		const nursery: Nursery = GAME().nursery;
 		const kids = nursery.BirthedBy(player.ID);
 
-		const parse: any = {};
+		const parse: IParse = {};
 
 		let num = 0;
 		if (kids.length > 0) {
@@ -192,7 +192,7 @@ export namespace NurseryScenes {
 
 		const kids = nursery.FatheredBy(player.ID);
 
-		const parse: any = {};
+		const parse: IParse = {};
 
 		let num = 0;
 		if (kids.length > 0) {
@@ -223,7 +223,7 @@ export namespace NurseryScenes {
 		const nursery: Nursery = GAME().nursery;
 		const world = WORLD();
 
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 
@@ -340,7 +340,7 @@ export namespace NurseryScenes {
 		const world = WORLD();
 
 		const num = nursery.TotalKids();
-		const parse: any = {
+		const parse: IParse = {
 			ren   : num > 1 ? "ren" : "",
 			isAre : num > 1 ? "are" : "is",
 		};

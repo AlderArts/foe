@@ -3,7 +3,7 @@ import { GAME, TimeStep, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
 import { IChoice } from "../../link";
 import { Party } from "../../party";
-import { Text } from "../../text";
+import { IParse, Text } from "../../text";
 import { Player } from "../player";
 import { Lei } from "./lei";
 import { LeiFlags } from "./lei-flags";
@@ -11,7 +11,7 @@ import { LeiFlags } from "./lei-flags";
 export namespace LeiSexScenes {
 
 	export function Prompt(options: IChoice[]) {
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -46,7 +46,7 @@ export namespace LeiSexScenes {
 		const party: Party = GAME().party;
 		const lei: Lei = GAME().lei;
 
-		const parse: any = {
+		const parse: IParse = {
 			boygirl : player.mfFem("boy", "girl"),
 			hair() { return player.Hair().Short(); },
 			ear() { return player.EarDesc(); },

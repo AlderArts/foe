@@ -15,7 +15,7 @@ import { IngredientItems } from "./items/ingredients";
 import { StrapOnItems } from "./items/strapon";
 import { ToysItems } from "./items/toys";
 import { IChoice, Link } from "./link";
-import { Text } from "./text";
+import { IParse, Text } from "./text";
 
 export function InitCheats() {
 	const world = WORLD();
@@ -232,7 +232,7 @@ export function InitCheats() {
 		},
 		() => {
 			const kiakai: Kiakai = GAME().kiakai;
-			const parse: any = {
+			const parse: IParse = {
 				name   : kiakai.name,
 				hisher() { return kiakai.hisher(); },
 				himher() { return kiakai.himher(); },

@@ -10,7 +10,7 @@ import { IStorage } from "./istorage";
 import { Perks } from "./perks";
 import { Stat } from "./stat";
 import { StatusEffect } from "./statuseffect";
-import { Text } from "./text";
+import { IParse, Text } from "./text";
 
 // Progress
 export enum PregnancyLevel {
@@ -290,11 +290,11 @@ export class PregnancyHandler {
 		if (aroused) { fertility *= aroused.fer; }
 
 		const chance = Math.random();
-		const parse: any = {
+		const parse: IParse = {
 			mother : mother.name,
 			father : father.name,
-			odds   : fertility,
-			chance,
+			odds   : fertility.toString(),
+			chance : chance.toString(),
 		};
 
 		if (opts.force || (chance < fertility)) {

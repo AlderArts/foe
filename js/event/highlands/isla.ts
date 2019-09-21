@@ -17,7 +17,7 @@ import { IChoice } from "../../link";
 import { ILocation } from "../../location";
 import { Party } from "../../party";
 import { PregnancyHandler, Womb } from "../../pregnancy";
-import { Text } from "../../text";
+import { IParse, Text } from "../../text";
 import { TF } from "../../tf";
 import { ITime, Time } from "../../time";
 import { AscheFlags } from "../asche-flags";
@@ -135,7 +135,7 @@ export namespace IslaScenes {
 		const isla: Isla = GAME().isla;
 		const world = WORLD();
 
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -292,7 +292,7 @@ export namespace IslaScenes {
 	export function Approach() {
 		const player: Player = GAME().player;
 		const isla: Isla = GAME().isla;
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -339,7 +339,7 @@ export namespace IslaScenes {
 
 	export function Prompt() {
 		const isla: Isla = GAME().isla;
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -390,7 +390,7 @@ export namespace IslaScenes {
 	export function Appearance() {
 		const player: Player = GAME().player;
 		const isla: Isla = GAME().isla;
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -535,7 +535,7 @@ export namespace IslaScenes {
 	export function TalkPrompt() {
 		const player: Player = GAME().player;
 		const isla: Isla = GAME().isla;
-		const parse: any = {
+		const parse: IParse = {
 
 		};
 
@@ -849,7 +849,7 @@ export namespace IslaScenes {
 		const isla: Isla = GAME().isla;
 		const world = WORLD();
 
-		const parse: any = {
+		const parse: IParse = {
 			playername : player.name,
 		};
 
@@ -1096,7 +1096,7 @@ export namespace IslaScenes {
 			const strapon = p1cock ? p1cock.isStrapon : undefined;
 			const knot = p1cock ? p1cock.Knot() : undefined;
 
-			let parse: any = {
+			let parse: IParse = {
 				playername : player.name,
 			};
 			parse = player.ParserTags(parse);
@@ -1363,7 +1363,7 @@ export namespace IslaScenes {
 
 		export function Repeat() {
 			const isla: Isla = GAME().isla;
-			const parse: any = {
+			const parse: IParse = {
 
 			};
 
@@ -1419,7 +1419,7 @@ export namespace IslaScenes {
 			const player: Player = GAME().player;
 			const p1cock = player.BiggestCock(undefined, true);
 
-			const parse: any = {
+			const parse: IParse = {
 
 			};
 
@@ -1446,7 +1446,7 @@ export namespace IslaScenes {
 			const strapon = p1cock ? p1cock.isStrapon : undefined;
 			const knot = p1cock ? p1cock.Knot() : undefined;
 
-			let parse: any = {
+			let parse: IParse = {
 				playername : player.name,
 				lowerarmordesc : player.LowerArmorDesc(),
 			};
@@ -1551,7 +1551,7 @@ export namespace IslaScenes {
 			});
 		}
 
-		export function PitchVaginalPrompt(parse: any, opts: any) {
+		export function PitchVaginalPrompt(parse: IParse, opts: any) {
 			// [Against Wall][Mount Her][Go Under]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Against Wall",
@@ -1584,7 +1584,7 @@ export namespace IslaScenes {
 			Gui.SetButtonsFromList(options, false, undefined);
 		}
 
-		export function PitchVaginalUnder(parse: any, opts: any) {
+		export function PitchVaginalUnder(parse: IParse, opts: any) {
 			const player: Player = GAME().player;
 			const isla: Isla = GAME().isla;
 			Text.Clear();
@@ -1734,7 +1734,7 @@ export namespace IslaScenes {
 			IslaScenes.IslaSex.PitchVaginalExit(parse, opts);
 		}
 
-		export function PitchVaginalMount(parse: any, opts: any) {
+		export function PitchVaginalMount(parse: IParse, opts: any) {
 			const player: Player = GAME().player;
 			const isla: Isla = GAME().isla;
 			const figure = opts.figure;
@@ -1837,7 +1837,7 @@ export namespace IslaScenes {
 			IslaScenes.IslaSex.PitchVaginalExit(parse, opts);
 		}
 
-		export function PitchVaginalWall(parse: any, opts: any) {
+		export function PitchVaginalWall(parse: IParse, opts: any) {
 			const player: Player = GAME().player;
 			const isla: Isla = GAME().isla;
 			Text.Add("Grabbing Isla by the shoulders, you whirl her around, leading her to the nearest mountain face and pinning her against the cool, mossy rock.", parse);
@@ -1936,7 +1936,7 @@ export namespace IslaScenes {
 			IslaScenes.IslaSex.PitchVaginalExit(parse, opts);
 		}
 
-		export function PitchVaginalExit(parse: any, opts: any) {
+		export function PitchVaginalExit(parse: IParse, opts: any) {
 			const player: Player = GAME().player;
 			const isla: Isla = GAME().isla;
 
@@ -1994,7 +1994,7 @@ export namespace IslaScenes {
 	export function Bathe() {
 		const player: Player = GAME().player;
 		const isla: Isla = GAME().isla;
-		let parse: any = {
+		let parse: IParse = {
 
 		};
 		parse = player.ParserTags(parse);
@@ -2070,7 +2070,7 @@ export namespace IslaScenes {
 		});
 	}
 
-	export function BatheTF(parse: any, level: number) {
+	export function BatheTF(parse: IParse, level: number) {
 		const player: Player = GAME().player;
 
 		parse = Text.ParserPlural(parse, player.NumCocks() > 1);
