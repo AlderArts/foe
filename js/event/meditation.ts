@@ -1,4 +1,5 @@
 import { EncounterTable } from "../encountertable";
+import { Entity } from "../entity";
 import { GAME, TimeStep } from "../GAME";
 import { Gui } from "../gui";
 import { Party } from "../party";
@@ -11,10 +12,10 @@ import { Text } from "../text";
 export namespace MeditationScenes {
 
 	export function Entry() {
-		const player = GAME().player;
+		const player: Entity = GAME().player;
 		const party: Party = GAME().party;
-		const kiakai = GAME().kiakai;
-		const miranda = GAME().miranda;
+		const kiakai: Entity = GAME().kiakai;
+		const miranda: Entity = GAME().miranda;
 		let parse: any = {
 			playername : player.name,
 			Kiai : kiakai.name,
