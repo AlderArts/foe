@@ -14,7 +14,7 @@ import { IChoice } from "../../link";
 import { ILocation } from "../../location";
 import { Party } from "../../party";
 import { Text } from "../../text";
-import { Time } from "../../time";
+import { ITime, Time } from "../../time";
 import { AscheTasksScenes } from "../asche-tasks";
 import { GlobalScenes } from "../global";
 import { Kiakai } from "../kiakai";
@@ -85,7 +85,7 @@ export class Aquilius extends Entity {
 		return storage;
 	}
 
-	public Update(step: number) {
+	public Update(step: ITime) {
 		super.Update(step);
 		this.helpTimer.Dec(step);
 	}

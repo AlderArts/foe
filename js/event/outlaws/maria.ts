@@ -12,7 +12,7 @@ import { CombatItems } from "../../items/combatitems";
 import { ILocation } from "../../location";
 import { StatusEffect } from "../../statuseffect";
 import { Text } from "../../text";
-import { Time } from "../../time";
+import { ITime, Time } from "../../time";
 import { OutlawsFlags } from "./outlaws-flags";
 
 export class Maria extends Entity {
@@ -90,7 +90,7 @@ export class Maria extends Entity {
 		return storage;
 	}
 
-	public Update(step: number) {
+	public Update(step: ITime) {
 		super.Update(step);
 		this.DDtimer.Dec(step);
 	}

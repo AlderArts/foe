@@ -18,7 +18,7 @@ import { Party } from "../../party";
 import { PregnancyHandler, Womb } from "../../pregnancy";
 import { Text } from "../../text";
 import { TF } from "../../tf";
-import { Time } from "../../time";
+import { ITime, Time } from "../../time";
 import { AscheFlags } from "../asche-flags";
 import { Player } from "../player";
 import { IslaFlags } from "./isla-flags";
@@ -55,7 +55,7 @@ export class Isla extends Entity {
 		if (storage) { this.FromStorage(storage); }
 	}
 
-	public Update(step: number) {
+	public Update(step: ITime) {
 		super.Update(step);
 		this.springTimer.Dec(step);
 	}

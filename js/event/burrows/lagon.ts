@@ -23,6 +23,7 @@ import { Burrows } from "../../loc/burrows";
 import { Party } from "../../party";
 import { Text } from "../../text";
 import { TF } from "../../tf";
+import { ITime } from "../../time";
 import { Player } from "../player";
 
 export class Lagon extends Entity {
@@ -77,7 +78,7 @@ export class Lagon extends Entity {
 		return storage;
 	}
 
-	public Update(step: number) {
+	public Update(step: ITime) {
 		super.Update(step);
 	}
 

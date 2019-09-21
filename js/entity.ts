@@ -35,7 +35,7 @@ import { Stat } from "./stat";
 import { StatusEffect } from "./statuseffect";
 import { StatusList } from "./statuslist";
 import { Text } from "./text";
-import { Time } from "./time";
+import { ITime, Time } from "./time";
 import { Unit } from "./utility";
 
 export enum DrunkLevel {
@@ -477,7 +477,7 @@ export class Entity {
 		return [];
 	}
 
-	public Update(step?: number) {
+	public Update(step?: ITime) {
 		if (step) {
 			const time = new Time();
 			time.Inc(step);

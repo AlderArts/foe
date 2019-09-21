@@ -19,7 +19,7 @@ import { StrapOnItems } from "../../items/strapon";
 import { WeaponsItems } from "../../items/weapons";
 import { Shop } from "../../shop";
 import { Stat } from "../../stat";
-import { Time } from "../../time";
+import { ITime, Time } from "../../time";
 import { ArmorShopScenes } from "./armorshop";
 import { InitBrothel } from "./brothel";
 import { InitCastle } from "./castle";
@@ -229,7 +229,7 @@ export class Rigard {
 		}
 	}
 
-	public Update(step: number) {
+	public Update(step: ITime) {
 		this.LBroomTimer.Dec(step);
 		this.ParadeTimer.Dec(step);
 	}

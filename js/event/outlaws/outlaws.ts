@@ -13,7 +13,7 @@ import { IChoice } from "../../link";
 import { Party } from "../../party";
 import { Stat } from "../../stat";
 import { Text } from "../../text";
-import { Season, Time } from "../../time";
+import { ITime, Season, Time } from "../../time";
 import { Miranda } from "../miranda";
 import { Player } from "../player";
 import { AquiliusFlags } from "./aquilius-flags";
@@ -68,7 +68,7 @@ export class Outlaws {
 		this.factTimer.FromStorage(storage.Ftime);
 	}
 
-	public Update(step: number) {
+	public Update(step: ITime) {
 		this.mainQuestTimer.Dec(step);
 		this.factTimer.Dec(step);
 	}
@@ -435,7 +435,7 @@ export namespace OutlawsScenes {
 		};
 
 		Text.Clear();
-		parse.season = WorldTime().Season === Season.Winter ? "hot drinks to warm oneself up on a cold day" : "cool drinks to help one beat the noon heat";
+		parse.season = (WorldTime().season === Season.Winter) ? "hot drinks to warm oneself up on a cold day" : "cool drinks to help one beat the noon heat";
 		Text.Add("Realizing it’s nearing noon and remembering the task Zenith sent you off on, you seek out the inn that Zenith mentioned. Close enough to the city but far enough from the gates that it’s not worth the watchmen’s time to go harass them, the road is lined with those seeking the crowds that the city draws, but are unable or unwilling to enter the city to get at the marketplaces proper. Makeshift stands have been set up by the wayside, peddling everything from homemade blankets and fresh fruit to [season], hoping to catch an impulse purchase from those coming to and from Rigard.", parse);
 		Text.NL();
 		Text.Add("What you’re more interested in, though, is this Spitting Lion Inn that Zenith mentioned. The buildings in sight of the road are well-spaced, mostly catering to travelers - these aren’t the slums, after all - and you scan the wayhouses and watering holes as you pass them by, hoping to find your point of contact with a minimum of fuss. Alas, that’s not to be - you’re practically in the shadow of the walls and up against them by the time it draws into view.", parse);

@@ -10,7 +10,7 @@ import { Entity } from "../../entity";
 import { GAME, WORLD, WorldTime } from "../../GAME";
 import { JobDesc, Jobs } from "../../job";
 import { ILocation } from "../../location";
-import { Time } from "../../time";
+import { ITime, Time } from "../../time";
 import { LaylaFlags } from "./layla-flags";
 import { LaylaScenes } from "./layla-scenes";
 
@@ -116,7 +116,7 @@ export class Layla extends Entity {
 		return storage;
 	}
 
-	public Update(step: number) {
+	public Update(step: ITime) {
 		super.Update(step);
 		this.farmTimer.Dec(step);
 	}

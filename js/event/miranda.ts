@@ -16,7 +16,7 @@ import { IChoice } from "../link";
 import { ILocation } from "../location";
 import { Party } from "../party";
 import { Text } from "../text";
-import { Time } from "../time";
+import { ITime, Time } from "../time";
 import { MirandaFlags } from "./miranda-flags";
 
 export class Miranda extends Entity {
@@ -166,7 +166,7 @@ export class Miranda extends Entity {
 		return storage;
 	}
 
-	public Update(step: number) {
+	public Update(step: ITime) {
 		super.Update(step);
 		this.snitchTimer.Dec(step);
 	}

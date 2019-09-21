@@ -13,7 +13,7 @@ import { GAME, NAV, WORLD, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
 import { Stat } from "../../stat";
 import { Text } from "../../text";
-import { Time } from "../../time";
+import { ITime, Time } from "../../time";
 import { LeiFlags } from "./lei-flags";
 
 // TODO: FIX STATS
@@ -92,7 +92,7 @@ export class Lei extends Entity {
 		return this.flags.SexOpen !== 0;
 	}
 
-	public Update(step: number) {
+	public Update(step: ITime) {
 		super.Update(step);
 
 		this.timeout.Dec(step);

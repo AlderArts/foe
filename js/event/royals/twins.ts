@@ -12,7 +12,7 @@ import { IChoice } from "../../link";
 import { RigardFlags } from "../../loc/rigard/rigard-flags";
 import { ILocation } from "../../location";
 import { Text } from "../../text";
-import { Time } from "../../time";
+import { ITime, Time } from "../../time";
 import { Player } from "../player";
 import { Terry } from "../terry";
 import { TerryFlags } from "../terry-flags";
@@ -41,7 +41,7 @@ export class Twins {
 		return this.rumi.Relation() + this.rani.Relation();
 	}
 
-	public Update(step: number) {
+	public Update(step: ITime) {
 		this.rumi.Update(step);
 		this.rani.Update(step);
 		this.terryTimer.Dec(step);

@@ -17,7 +17,7 @@ import { ILocation } from "../location";
 import { Party } from "../party";
 import { Status } from "../statuseffect";
 import { Text } from "../text";
-import { Time } from "../time";
+import { ITime, Time } from "../time";
 import { MomoFlags } from "./momo-flags";
 import { Player } from "./player";
 
@@ -82,7 +82,7 @@ export class Momo extends Entity {
 		return this.flags.Met >= MomoFlags.Met.Follower;
 	}
 
-	public Update(step: number) {
+	public Update(step: ITime) {
 		super.Update(step);
 		this.wanderTimer.Dec(step);
 	}

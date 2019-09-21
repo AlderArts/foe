@@ -16,7 +16,7 @@ import { IChoice } from "../link";
 import { ILocation } from "../location";
 import { Text } from "../text";
 import { TF } from "../tf";
-import { Time } from "../time";
+import { ITime, Time } from "../time";
 import { Player } from "./player";
 
 export class Fera extends Entity {
@@ -57,7 +57,7 @@ export class Fera extends Entity {
 		if (storage) { this.FromStorage(storage); }
 	}
 
-	public Update(step: number) {
+	public Update(step: ITime) {
 		super.Update(step);
 
 		this.nexelleTimer.Dec(step);

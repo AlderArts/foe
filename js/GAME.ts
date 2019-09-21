@@ -1,5 +1,5 @@
 import { IWorld } from "./location";
-import { Time } from "./time";
+import { ITime, Time } from "./time";
 
 let game: any = {};
 
@@ -28,9 +28,9 @@ export function WORLD() {
 	return world;
 }
 
-let worldTime: any;
+let worldTime: Time;
 
-export function InitWorldTime(time: any) {
+export function InitWorldTime(time: Time) {
     worldTime = time;
 }
 
@@ -50,7 +50,7 @@ export function MoveToLocation(location: any, timestep?: any, preventClear?: boo
 }
 
 // Update function (for internal game time)
-export function TimeStep(step: {}) {
+export function TimeStep(step: ITime) {
 	worldTime.Inc(step);
 
 	for (const ent of entityStorage) {

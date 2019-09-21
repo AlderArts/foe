@@ -9,7 +9,7 @@ import { Entity } from "../../entity";
 import { GAME, WorldTime } from "../../GAME";
 import { JobDesc, Jobs } from "../../job";
 import { ILocation } from "../../location";
-import { Time } from "../../time";
+import { ITime, Time } from "../../time";
 import { CvetaFlags } from "./cveta-flags";
 
 export class Cveta extends Entity {
@@ -119,7 +119,7 @@ export class Cveta extends Entity {
 		return true;
 	}
 
-	public Update(step: number) {
+	public Update(step: ITime) {
 		super.Update(step);
 
 		this.violinTimer.Dec(step);

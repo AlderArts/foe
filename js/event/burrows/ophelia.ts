@@ -15,7 +15,7 @@ import { GAME, WORLD, WorldTime } from "../../GAME";
 import { AlchemyItems } from "../../items/alchemy";
 import { AlchemySpecial } from "../../items/alchemyspecial";
 import { TF } from "../../tf";
-import { Time } from "../../time";
+import { ITime, Time } from "../../time";
 import { OpheliaFlags } from "./ophelia-flags";
 
 export class Ophelia extends Entity {
@@ -64,7 +64,7 @@ export class Ophelia extends Entity {
 		return storage;
 	}
 
-	public Update(step: number) {
+	public Update(step: ITime) {
 		super.Update(step);
 		this.burrowsCountdown.Dec(step);
 	}

@@ -16,7 +16,7 @@ import { ArmorItems } from "../items/armor";
 import { WeaponsItems } from "../items/weapons";
 import { Shop } from "../shop";
 import { Text } from "../text";
-import { Time } from "../time";
+import { ITime, Time } from "../time";
 import { CassidyFlags } from "./cassidy-flags";
 import { GlobalScenes } from "./global";
 
@@ -69,7 +69,7 @@ export class Cassidy extends Entity {
 		if (storage) { this.FromStorage(storage); }
 	}
 
-	public Update(step: number) {
+	public Update(step: ITime) {
 		super.Update(step);
 
 		this.orderTimer.Dec(step);

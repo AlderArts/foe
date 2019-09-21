@@ -7,6 +7,14 @@ export enum Season {
 	LAST   = 4,
 }
 
+export interface ITime {
+	minute?: number;
+	hour?: number;
+	day?: number;
+	season?: Season;
+	year?: number;
+}
+
 /*
  *
  * Time structure
@@ -92,7 +100,7 @@ export class Time {
 		return step;
 	}
 
-	public Inc(time: any) {
+	public Inc(time: ITime) {
 		const minutes = time.minute || 0;
 		const hours   = time.hour   || 0;
 		const days    = time.day    || 0;
@@ -123,7 +131,7 @@ export class Time {
 		}
 	}
 
-	public Dec(time: any) {
+	public Dec(time: ITime) {
 		const minutes = time.minute || 0;
 		const hours   = time.hour   || 0;
 		const days    = time.day    || 0;
