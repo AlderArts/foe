@@ -27,7 +27,7 @@ import { IslaFlags } from "./isla-flags";
 export class Isla extends Entity {
 
 	public static Available() {
-		return GAME().asche.flags.Tasks & AscheFlags.Tasks.Spring_Visited;
+		return (GAME().asche.flags.Tasks & AscheFlags.Tasks.Spring_Visited) > 0;
 	}
 	public springTimer: Time;
 

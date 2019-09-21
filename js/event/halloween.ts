@@ -652,7 +652,7 @@ export namespace HalloweenScenes {
 	));
 	HWLoc.Path.links.push(new Link(
 		() => {
-			return HW.flags & HalloweenFlags.Flags.WitchHut ? "Witch's hut" : "Hut?";
+			return (HW.flags & HalloweenFlags.Flags.WitchHut) ? "Witch's hut" : "Hut?";
 		}, true, true,
 		undefined,
 		() => {
@@ -669,7 +669,7 @@ export namespace HalloweenScenes {
 
 	HWLoc.Path.events.push(new Link(
 		"Thrall", () => {
-			return HW.harthon & HalloweenFlags.Harthon.Thrall;
+			return (HW.harthon & HalloweenFlags.Harthon.Thrall) > 0;
 		}, true,
 		undefined,
 		() => {

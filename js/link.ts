@@ -1,14 +1,23 @@
 
+type funcType = (obj?: any, ...args: any[]) => void;
+
 export class Link {
-	public name: any;
-	public visibleCondition: any;
-	public enabledCondition: any;
-	public print: any;
-	public func: CallableFunction;
-    public tooltip: any;
+	public name: string|(() => string);
+	public visibleCondition: boolean|(() => boolean);
+	public enabledCondition: boolean|(() => boolean);
+	public print: string|(() => void);
+	public func: funcType;
+    public tooltip: string|(() => string);
     public image: any;
 
-	constructor(name: any, visibleCondition: any, enabledCondition: any, print?: any, func?: CallableFunction, tooltip?: any) {
+	constructor(
+        name: string|(() => string),
+        visibleCondition: boolean|(() => boolean),
+        enabledCondition: boolean|(() => boolean),
+        print?: string|(() => void),
+        func?: funcType,
+        tooltip?: string|(() => string)) {
+
 		// String or function that returns string
 		this.name = name;
 		// This can be set to true, or to a function
@@ -25,7 +34,7 @@ export class Link {
 
 export interface IChoice {
     nameStr: string;
-    func: (obj?: any, ...args: any[]) => void;
+    func: funcType;
     obj?: any;
     enabled: boolean;
     tooltip?: string;

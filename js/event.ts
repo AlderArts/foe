@@ -224,7 +224,7 @@ export class Event implements ILocation {
 		Gui.NextPrompt();
 	}
 
-	public SetButtons(links: any[]) {
+	public SetButtons(links: Link[]) {
 		const list: IChoice[] = [];
 
 		if (!links) {
@@ -243,8 +243,9 @@ export class Event implements ILocation {
 			if (!visible) { continue; }
 			const enabled = _.isFunction(link.enabledCondition) ? link.enabledCondition() : link.enabledCondition;
 			const nameStr = _.isFunction(link.name) ? link.name() : link.name;
+			const tooltip = _.isFunction(link.tooltip) ? link.tooltip() : link.tooltip;
 
-			list.push({nameStr, func: link.func, enabled, tooltip: link.tooltip, image: link.image});
+			list.push({nameStr, func: link.func, enabled, tooltip, image: link.image});
 			// Input.buttons[i].Setup(nameStr, link.func, enabled);
 		}
 		// list.sort( (a, b) => { return a.nameStr > b.nameStr; } );
