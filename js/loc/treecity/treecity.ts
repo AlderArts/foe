@@ -5,10 +5,13 @@
  */
 import * as _ from "lodash";
 import { IStorage } from "../../istorage";
+import { ILocation } from "../../location";
 
 // Create namespace
-const TreeCityLoc: any = {};
-const TreeCityScenes: any = {};
+export const TreeCityLoc: ILocation = undefined;
+export namespace TreeCityScenes {
+
+}
 
 // Class to handle global flags and logic for town
 export class TreeCity {
@@ -39,5 +42,3 @@ export class TreeCity {
 	}
 
 }
-
-export { TreeCityLoc, TreeCityScenes };

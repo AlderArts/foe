@@ -816,7 +816,7 @@ export namespace LeiTaskScenes {
 			return lei.flags["Met"] === LeiFlags.Met.OnTaskEscort;
 		}
 		export function OnTaskText() {
-			var parse : any = {
+			var parse: IParse = {
 
 			};
 
@@ -830,7 +830,7 @@ export namespace LeiTaskScenes {
 		}
 
 		export function Start() {
-			var parse : any = {
+			var parse: IParse = {
 
 			};
 

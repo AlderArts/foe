@@ -2537,7 +2537,7 @@ export namespace LizardsScenes {
 			const lusty = player.LustLevel() >= 0.7;
 			parse.boygirl = player.mfTrue("boy", "girl");
 			parse = Text.ParserPlural(parse, player.NumCocks() > 1);
-			parse = Text.ParserPlural(parse, third, undefined, "2");
+			parse = Text.ParserPlural(parse, third !== undefined, undefined, "2");
 
 			Text.Add("<i>“Much better,”</i> she hisses, her voice slippery like snake oil. <i>“I was feeling so stressed until you came along. You will be my plaything, won’t you?”</i> Not that it seems like you have much choice in the matter. The reptilian enjoys you squirming under her gaze, lightly touching herself as she considers what to do with you. Her tail sways back and forth slowly; poised to strike should you dare escape her clutches.", parse);
 			Text.NL();

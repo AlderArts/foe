@@ -8,6 +8,7 @@
 import * as _ from "lodash";
 
 import { GetDEBUG } from "../app";
+import { Ability, AbilityCollection } from "./ability";
 import { Images } from "./assets";
 import { Entity } from "./entity";
 import { GAME, NAV, WORLD } from "./GAME";
@@ -447,7 +448,7 @@ export class Party {
 	}
 
 	public ShowAbilities() {
-		const list: any[] = [];
+		const list: IChoice[] = [];
 		const that = this;
 
 		const ents = [];
@@ -459,7 +460,7 @@ export class Party {
 		for (const entity of ents) {
 			const abilities = entity.abilities;
 
-			const pushAbilities = (coll: any, jobAbilities?: any) => {
+			const pushAbilities = (coll: AbilityCollection, jobAbilities?: AbilityCollection) => {
 				for (const ability of coll.AbilitySet) {
 					if (jobAbilities && jobAbilities.HasAbility(ability)) { continue; }
 
@@ -469,11 +470,16 @@ export class Party {
 						Text.Add("[name] can use [ability] for [cost]: [desc]<br>",
 							{name: Text.Bold(entity.name), ability: ability.name, cost: ability.CostStr(), desc: ability.Short()});
 
+						interface ICasting {
+							caster: Entity;
+							skill: Ability;
+						}
+
 						list.push({
 							nameStr : ability.name,
 							enabled : en,
 							obj     : { caster: entity, skill : ability },
-							func(obj: any) {
+							func(obj: ICasting) {
 								Text.Clear();
 								Text.Add("Who will [name] cast [ability] on?",
 									{name: obj.caster.name, ability: obj.skill.name});

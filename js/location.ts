@@ -1,6 +1,19 @@
 import { EncounterTable } from "./encountertable";
 import { Link } from "./link";
 
+export interface ILocationEnc {
+	nameStr?: string|(() => string);
+	desc?: string|(() => void);
+	func?: (obj: any) => any;
+	cond?: boolean|(() => boolean);
+	visible?: boolean|(() => boolean);
+	enabled?: boolean|(() => boolean);
+	odds?: number|(() => number);
+	obj?: any;
+	enc?: boolean;
+	hunt?: boolean;
+}
+
 export interface ILocation {
     SaveSpot: string;
     wait: () => boolean;
@@ -18,7 +31,7 @@ export interface ILocation {
     hunt: Link[];
     enc: EncounterTable;
     SetButtons: (links?: Link[]) => void;
-    AddEncounter: (enc: any) => void;
+    AddEncounter: (enc: ILocationEnc) => void;
 }
 
 export enum Locations {
@@ -31,7 +44,7 @@ export enum Locations {
 
 export interface IWorld {
     loc?: ILocations;
-    SaveSpots: any;
+    SaveSpots: {[index: string]: ILocation};
     CurrentLocation?: (loc?: ILocation) => any;
 }
 
@@ -49,7 +62,7 @@ export interface ILocations {
     Rigard: ILocRigard;
 
     DragonDen: ILocDragonDen;
-    TreeCity: any;
+    TreeCity: ILocation;
 
     DarkAspect: ILocDarkAspect;
     LightAspect: ILocLightAspect;

@@ -7,7 +7,7 @@ import { GAME, StepToHour, TimeStep } from "./GAME";
 import { GameState, SetGameState } from "./gamestate";
 import { Gui } from "./gui";
 import { IChoice, Link } from "./link";
-import { ILocation } from "./location";
+import { ILocation, ILocationEnc } from "./location";
 import { IParse, Text } from "./text";
 
 /*
@@ -49,7 +49,7 @@ export class Event implements ILocation {
 		this.enc = opts.enc || undefined;
 	}
 
-	public AddEncounter(opts?: any) {
+	public AddEncounter(opts?: ILocationEnc) {
 		opts = opts || {};
 		const nameStr = opts.nameStr || "";
 		const desc    = opts.desc;
@@ -68,7 +68,7 @@ export class Event implements ILocation {
 				nameStr, visible, enabled,
 				desc,
 				() => {
-					const enc = func();
+					const enc = func(obj);
 					if (enc) {
 						if (enc.Start) {
 							enc.Start();

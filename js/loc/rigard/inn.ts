@@ -21,7 +21,7 @@ import { GAME, MoveToLocation, TimeStep, WORLD, WorldTime } from "../../GAME";
 import { GameState, SetGameState } from "../../gamestate";
 import { Gui } from "../../gui";
 import { IChoice, Link } from "../../link";
-import { ILocRigardInn } from "../../location";
+import { ILocation, ILocRigardInn } from "../../location";
 import { Party } from "../../party";
 import { Status } from "../../statuseffect";
 import { IParse, Text } from "../../text";
@@ -151,7 +151,7 @@ InnLoc.Common.DrunkHandler = () => {
 	Gui.NextPrompt();
 };
 
-InnLoc.Common.onEntry = (preventClear: boolean, oldLocation: any) => {
+InnLoc.Common.onEntry = (preventClear: boolean, oldLocation: ILocation) => {
 	const rigard = GAME().rigard;
 	const player: Player = GAME().player;
 	const party: Party = GAME().party;

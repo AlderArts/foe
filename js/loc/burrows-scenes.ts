@@ -89,7 +89,7 @@ export namespace BurrowsScenes {
                 Text.NL();
 
                 // Create a new alpha
-                const alpha: any = new LagomorphAlpha(Gender.Random());
+                const alpha = new LagomorphAlpha(Gender.Random());
                 parse.m1HeShe  = () => alpha.HeShe();
                 parse.m1heshe  = () => alpha.heshe();
                 parse.m1HisHer = () => alpha.HisHer();
@@ -125,7 +125,7 @@ export namespace BurrowsScenes {
         Gui.SetButtonsFromList(options);
     }
 
-    export function Arrival(alpha: any) {
+    export function Arrival(alpha: LagomorphAlpha) {
         const player: Player = GAME().player;
         const party: Party = GAME().party;
         const burrows: Burrows = GAME().burrows;

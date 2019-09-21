@@ -273,7 +273,7 @@ export namespace MarketScenes {
     *  enclost
     * }
     */
-    export function Market(haul: any, next: any) {
+    export function Market(haul: any, next: CallableFunction) {
         const player: Player = GAME().player;
         const party: Party = GAME().party;
         const gwendy: Gwendy = GAME().gwendy;

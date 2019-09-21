@@ -21,20 +21,26 @@ import { QuestItems } from "./items/quest";
 import { IChoice } from "./link";
 import { Burrows } from "./loc/burrows";
 import { BurrowsFlags } from "./loc/burrows-flags";
-import { DryadGladeFlags } from "./loc/glade-flags";
 import { Rigard } from "./loc/rigard/rigard";
 import { RigardFlags } from "./loc/rigard/rigard-flags";
 import { Text } from "./text";
 
 let curType: Quests.Type;
 
+interface IQuestOpts {
+	name?: string|(() => string);
+	desc?: () => string;
+	active?: (a: Quest) => Quests.Type;
+	list?: QuestItem[];
+}
+
 export class Quest {
-	public name: () => string;
-	public desc: () => string;
+	public name: string|(() => string);
+	public desc: string|(() => string);
 	public active: (a: Quest) => Quests.Type;
 	public list: QuestItem[];
 
-	constructor(opts: any = {}) {
+	constructor(opts: IQuestOpts = {}) {
 		this.name   = opts.name   || "FAIL";
 		this.desc   = opts.desc   || "NO DESC";
 		const defActive = () => Quests.Type.NotStarted;
@@ -64,10 +70,15 @@ export class Quest {
 
 }
 
+interface IQuestItemOpts {
+	desc?: () => string;
+	active?: () => Quests.Type;
+}
+
 export class QuestItem {
-	public desc: () => string;
+	public desc: string|(() => string);
 	public active: () => Quests.Type;
-	constructor(opts: any = {}) {
+	constructor(opts: IQuestItemOpts = {}) {
 		this.desc   = opts.desc   || "NO DESC";
 		this.active = opts.active;
 	}

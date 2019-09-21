@@ -57,7 +57,7 @@ enum EncType {
 
 export namespace KrawitzScenes {
 
-	let stat: any;
+	let stat: {[index: string]: number|boolean};
 
 	export function SetupStats() {
 		const rigard = GAME().rigard;
@@ -546,7 +546,7 @@ export namespace KrawitzScenes {
 	));
 
 	KrawitzLoc.Mansion.Hall.links.push(new Link(
-		"Study", true, () => stat.Orgy || (!stat.TFdKrawitz && stat.KrawitzFood !== 3),
+		"Study", true, () => (stat.Orgy as boolean) || (!stat.TFdKrawitz && stat.KrawitzFood !== 3),
 		() => {
 			Text.Add("Go to Krawitz' study?<br>");
 		},
@@ -853,7 +853,7 @@ export namespace KrawitzScenes {
 	KrawitzLoc.Mansion.Storeroom.events.push(new Link(
 		"Chest", () => {
 			const player: Player = GAME().player;
-			return !stat.TFItem && (stat.ChestLocKnown || player.Int() > 40);
+			return (!stat.TFItem as boolean) && ((stat.ChestLocKnown as boolean) || player.Int() > 40);
 		}, true,
 		undefined,
 		() => {
@@ -1379,7 +1379,7 @@ export namespace KrawitzScenes {
 
 	// TODO: Trigger found out
 	export function AddSuspicion(num: number, surpressNext?: boolean) {
-		stat.Suspicion += num;
+		stat.Suspicion = stat.Suspicion as number + num;
 
 		if (stat.Suspicion > 100) { stat.Suspicion = 100; }
 		if (stat.Suspicion < 0) { stat.Suspicion = 0; }
@@ -1488,7 +1488,7 @@ export namespace KrawitzScenes {
 			Text.Add("<i>“And how would you know? Only the servants are allowed in the kitchens, and I doubt he’d feed something like that to you.”</i>", parse);
 		});
 
-		let sceneId = stat.guardRot;
+		let sceneId = stat.guardRot as number;
 		if (sceneId >= scenes.length) { sceneId = 0; }
 
 		stat.guardRot = sceneId + 1;
@@ -1604,7 +1604,7 @@ export namespace KrawitzScenes {
 			Text.Add("<i>“Your blunt approach seems to be working, don’t worry about it,”</i> the third servant consoles her. They continue chatting as they walk past you.", parse);
 		});
 
-		let sceneId = stat.servantRot;
+		let sceneId = stat.servantRot as number;
 		if (sceneId >= scenes.length) { sceneId = 0; }
 
 		stat.servantRot = sceneId + 1;

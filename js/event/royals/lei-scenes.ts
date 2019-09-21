@@ -727,7 +727,7 @@ export namespace LeiScenes {
 
 	/* TODO Unused?
 	export function InnFirstPrompt() {
-		var parse : any = {
+		var parse: IParse = {
 
 		};
 

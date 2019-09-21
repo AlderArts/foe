@@ -17,6 +17,7 @@ import { Item } from "../item";
 import { AlchemyItems } from "../items/alchemy";
 import { ArmorItems } from "../items/armor";
 import { StrapOnItems } from "../items/strapon";
+import { ItemToy } from "../items/toy-item";
 import { ToysItems } from "../items/toys";
 import { IChoice } from "../link";
 import { RigardFlags } from "../loc/rigard/rigard-flags";
@@ -2906,7 +2907,7 @@ export namespace TerryScenes {
 		// [name]
 		const options: IChoice[] = [];
 
-		const AddItem = (item: TFItem, scene: any, name: string, tooltip: string, costmult: number, horseTF?: boolean) => {
+		const AddItem = (item: TFItem, scene: CallableFunction, name: string, tooltip: string, costmult: number, horseTF?: boolean) => {
 			options.push({ nameStr : name || item.name,
 				func(obj: any) {
 					parse.item = obj.str;
@@ -5409,7 +5410,7 @@ export namespace TerryScenes {
 		}
 	}
 
-	export function SexFuckButtEntrypoint(p1Cock: Cock, promise: boolean, retFunc: any) {
+	export function SexFuckButtEntrypoint(p1Cock: Cock, promise: boolean, retFunc: CallableFunction) {
 		const terry: Terry = GAME().terry;
 		const player: Player = GAME().player;
 
@@ -6211,7 +6212,7 @@ export namespace TerryScenes {
 	}
 
 	// Clean Terry Up Entry Point
-	export function PCCleansTerry(func?: any, opts: any = {}) {
+	export function PCCleansTerry(func?: CallableFunction, opts: any = {}) {
 		const terry: Terry = GAME().terry;
 		const player: Player = GAME().player;
 
@@ -7266,7 +7267,7 @@ export namespace TerryScenes {
 			tooltip : Text.Parse("Let’s see how your [foxvixen] likes being licked instead.", parse),
 		});
 
-		const dildoScene = (toy: any) => {
+		const dildoScene = (toy: ItemToy) => {
 			parse.toy     = toy.sDesc();
 			parse.toyHead = toy.cock.TipShort();
 

@@ -66,7 +66,7 @@ function SetExploreButtons() {
 	}
 }
 
-function LimitedDataPrompt(backFunc: any) {
+function LimitedDataPrompt(backFunc: CallableFunction) {
 	SetGameState(GameState.Event, Gui);
 
 	Gui.ClearButtons();

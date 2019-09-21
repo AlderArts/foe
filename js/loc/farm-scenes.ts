@@ -15,7 +15,7 @@ import { GameState, SetGameState } from "../gamestate";
 import { Gui } from "../gui";
 import { IngredientItems } from "../items/ingredients";
 import { IChoice, Link } from "../link";
-import { ILocFarm } from "../location";
+import { ILocation, ILocFarm } from "../location";
 import { Party } from "../party";
 import { IParse, Text } from "../text";
 import { Season } from "../time";
@@ -1058,7 +1058,7 @@ FarmLoc.Fields.description = () => {
 };
 
 // Set up Layla events
-FarmLoc.Fields.onEntry = (x: any, from: any) => {
+FarmLoc.Fields.onEntry = (x: boolean, from: ILocation) => {
 	if (from === WORLD().loc.Plains.Crossroads) {
 		if (LaylaScenes.FarmMeetingTrigger(true)) { return; }
 	}

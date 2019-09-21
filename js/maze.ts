@@ -9,6 +9,7 @@ import { Event } from "./event";
 import { MoveToLocation } from "./GAME";
 import { GameState } from "./gamestate";
 import { Input } from "./input";
+import { Link } from "./link";
 import { Text } from "./text";
 
 export class Maze {
@@ -87,7 +88,7 @@ export class MazeRoom extends Event {
 		super(nameFunc, opts);
 	}
 
-	public SetButtons(links: any) {
+	public SetButtons(links: Link[]) {
 		// Set up regular events
 		super.SetButtons(links);
 

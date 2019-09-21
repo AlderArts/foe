@@ -285,7 +285,7 @@ export namespace Text {
 		}
 	}
 
-	export function ParserPlural(parse: IParse = {}, condition?: any, prefix: string = "", postfix: string|number = "") {
+	export function ParserPlural(parse: IParse = {}, condition?: boolean, prefix: string = "", postfix: string|number = "") {
 		parse[prefix + "a" + postfix]      = condition ? "" : " a";
 		parse[prefix + "s" + postfix]      = condition ? "s" : "";
 		parse[prefix + "notS" + postfix]   = condition ? "" : "s";
@@ -389,7 +389,7 @@ export namespace Text {
 	}
 	/*
 		// REGULAR TEXT (NEW METHOD)
-		let parse : any = {
+		let parse: IParse = {
 
 		};
 

@@ -387,7 +387,7 @@ export class Terry extends Entity {
 		return true;
 	}
 
-	public ItemUse(item: Item, backPrompt: any) {
+	public ItemUse(item: Item, backPrompt: CallableFunction) {
 		const terry: Terry = GAME().terry;
 
 		if (item.isTF) {

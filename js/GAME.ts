@@ -94,7 +94,7 @@ export function GetCavalcade() {
 	return cavalcade;
 }
 
-const nav: any = {};
+const nav: {[index: string]: any} = {};
 
 export function NAV() {
 	return nav;

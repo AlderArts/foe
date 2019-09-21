@@ -13,7 +13,7 @@ import { GAME } from "./GAME";
 import { IStorage } from "./istorage";
 import { IParse, Text } from "./text";
 
-const Jobs: any = {};
+const Jobs: {[index: string]: Job} = {};
 
 interface IJobPreq {
 	job: Job;
@@ -36,7 +36,10 @@ export class Job {
 	public Short(entity: Entity) {
 		return this.name;
 	}
-	public Unlocked(entity: Entity) {
+	public Long(entity: Entity) {
+		return this.name;
+	}
+	public Unlocked(entity?: Entity) {
 		return true;
 	}
 

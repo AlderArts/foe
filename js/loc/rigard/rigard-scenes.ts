@@ -473,10 +473,16 @@ export namespace RigardScenes {
 			playername : player.name,
 		};
 
-		const npcsLower: any[] = [];
-		const npcsMiddle1: any[] = [];
-		const npcsMiddle2: any[] = [];
-		const npcsNoble: any[] = [];
+		interface INPC {
+			noun: string;
+			a: string;
+			gender?: Gender;
+		}
+
+		const npcsLower: INPC[] = [];
+		const npcsMiddle1: INPC[] = [];
+		const npcsMiddle2: INPC[] = [];
+		const npcsNoble: INPC[] = [];
 
 		npcsLower.push({noun: "ragged servant", a: "a"});
 		npcsLower.push({noun: "tired servant", a: "a"});
@@ -569,9 +575,7 @@ export namespace RigardScenes {
 			return;
 		} // Incorrect location
 
-		const SetGenders = (npc1?: any, npc2?: any) => {
-			npc1  = npc1  || {};
-			npc2  = npc2  || {};
+		const SetGenders = (npc1: INPC, npc2: INPC) => {
 			parse.NPC1     = npc1.noun;
 			parse.aAn1     = npc1.a;
 			parse.heshe1   = npc1.gender === Gender.male ? "he" : "she";

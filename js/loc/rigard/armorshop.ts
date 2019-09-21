@@ -20,8 +20,8 @@ import { IParse, Text } from "../../text";
 
 const ArmorShopLoc = new Event("Twopenny's");
 
-let aShop: any;
-let aSpecialShop: any;
+let aShop: Shop;
+let aSpecialShop: Shop;
 
 ArmorShopLoc.description = () => {
 	const parse: IParse = {};
@@ -467,7 +467,7 @@ export namespace ArmorShopScenes {
 		prompt();
 	}
 
-	export function Talk(backFunc: any) {
+	export function Talk(backFunc: CallableFunction) {
 		const player: Player = GAME().player;
 		const rigard = GAME().rigard;
 
