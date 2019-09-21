@@ -54,48 +54,48 @@ export class Hair extends BodyPart {
 	}
 	public Short() {
 		if (this.length.Get() === 0) {
-			return "bald scalp";
+			return `bald scalp`;
 		} else {
-			return Color.Desc(this.color) + " hair";
+			return `${Color.Desc(this.color)} hair`;
 		}
 	}
 	public Long() {
 		const len = this.length.Get();
 		if (len === 0) {
-			return "bald scalp";
+			return `bald scalp`;
 		} else {
 			const color = Color.Desc(this.color);
 			let style;
 			switch (this.style) {
-				case HairStyle.straight: style = "straight " + color + " hair"; break;
-				case HairStyle.wavy:     style = "wavy " + color + " hair"; break;
-				case HairStyle.ponytail: style = color + " hair, which is kept in a ponytail"; break;
-				case HairStyle.shaggy:   style = "shaggy " + color + " hair"; break;
-				case HairStyle.curly:    style = "curly " + color + " hair"; break;
-				case HairStyle.braid:    style = color + " hair, which is kept in a braid"; break;
-				default:                 style = "unkempt hair"; break;
+				case HairStyle.straight: style = `straight ${color} hair`; break;
+				case HairStyle.wavy:     style = `wavy ${color} hair`; break;
+				case HairStyle.ponytail: style = `${color} hair, which is kept in a ponytail`; break;
+				case HairStyle.shaggy:   style = `shaggy ${color} hair`; break;
+				case HairStyle.curly:    style = `curly ${color} hair`; break;
+				case HairStyle.braid:    style = `${color} hair, which is kept in a braid`; break;
+				default:                 style = `unkempt hair`; break;
 			}
 
-			if     (len < 1) {
-				return color + " stubble";
+			if (len < 1) {
+				return `${color} stubble`;
 			} else if (len < 5) {
-				return "short " + color + " hair";
+				return `short ${color} hair`;
 			} else if (len < 10) {
-							return "short " + style;
+				return `short ${style}`;
 			} else if (len < 20) {
-							return "medium length, " + style;
+				return `medium length, ${style}`;
 			} else if (len < 30) {
-							return "shoulder-length, " + style;
+				return `shoulder-length, ${style}`;
 			} else if (len < 50) {
-							return "long, " + style;
+				return `long, ${style}`;
 			} else if (len < 70) {
-							return "waist-length, " + style;
+				return `waist-length, ${style}`;
 			} else if (len < 100) {
-							return "ass-length, " + style;
+				return `ass-length, ${style}`;
 			} else if (len < 140) {
-							return "knee-length, " + style;
+				return `knee-length, ${style}`;
 			} else {
-							return "ground-dragging, " + style;
+				return `ground-dragging, ${style}`;
 			}
 		}
 	}

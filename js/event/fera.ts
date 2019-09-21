@@ -132,7 +132,7 @@ export namespace FeraScenes {
 		}
 
 		const cat = new RaceScore();
-		cat.score[Race.Feline] = 1;
+		cat.score[Race.Feline.id] = 1;
 		const catScore = cat.Compare(new RaceScore(player.body));
 
 		let parse: any = {

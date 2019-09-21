@@ -20,17 +20,17 @@ import { Text } from "./text";
  */
 
 export class Event implements ILocation {
-	public nameFunc: any;
-	public description: any;
-	public endDescription: any;
+	public nameFunc: string|(() => string);
+	public description: () => void;
+	public endDescription: () => void;
 	public links: Link[];
 	public events: Link[];
 	public hunt: Link[];
-	public onEntry: any;
+	public onEntry: () => void;
 	public enc: EncounterTable;
 	public SaveSpot: string;
 
-	constructor(nameFunc: any, opts?: any) {
+	constructor(nameFunc: string|(() => string), opts?: any) {
 		opts = opts || {};
 		// Returns the name of the location/event
 		this.nameFunc = nameFunc;
@@ -225,11 +225,11 @@ export class Event implements ILocation {
 	}
 
 	public SetButtons(links: any[]) {
-		const list = [];
+		const list: IChoice[] = [];
 
 		if (!links) {
 			links = [];
-			_.each(this.links, (link: any) => {
+			_.each(this.links, (link) => {
 				link.image = Images.imgButtonEnabled2;
 				links.push(link);
 			});

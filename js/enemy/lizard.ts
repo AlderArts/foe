@@ -1006,7 +1006,7 @@ export namespace LizardsScenes {
 
 					const racescore   = new RaceScore(player.body);
 					const lizardScore = new RaceScore();
-					lizardScore.score[Race.Lizard] = 1;
+					lizardScore.score[Race.Lizard.id] = 1;
 					const compScore   = racescore.Compare(lizardScore);
 
 					if (compScore > 0.2) {

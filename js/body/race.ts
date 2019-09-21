@@ -3,28 +3,43 @@ import * as _ from "lodash";
 import { Gender } from "./gender";
 
 // Contains references to descriptors
-const Race: any = {};
+const Race: {[index: string]: RaceDesc} = {};
 
 // TODO Need to fix numbering to something automatic, or at least ordered
 
 // Contains a set of Id,RaceDesc pairs
-const idToRace: any = {};
+const idToRace: {[index: number]: RaceDesc} = {};
 let numInternal = 0;
+
+interface IRaceNoun {
+	a: string;
+	noun: string;
+}
+
+interface IRaceDescOpts {
+	desc?: IRaceNoun[];
+	descMale?: IRaceNoun[];
+	descFemale?: IRaceNoun[];
+	quantify?: IRaceNoun[];
+	quantifyMale?: IRaceNoun[];
+	quantifyFemale?: IRaceNoun[];
+	geneSize?: number;
+}
 
 export class RaceDesc {
 	public name: string;
-	public superclass: any;
-	public children: any[];
-	public desc: any[];
-	public descMale: any[];
-	public descFemale: any[];
-	public quantify: any[];
-	public quantifyMale: any[];
-	public quantifyFemale: any[];
-	public geneSize: any;
+	public superclass: RaceDesc;
+	public children: RaceDesc[];
+	public desc: IRaceNoun[];
+	public descMale: IRaceNoun[];
+	public descFemale: IRaceNoun[];
+	public quantify: IRaceNoun[];
+	public quantifyMale: IRaceNoun[];
+	public quantifyFemale: IRaceNoun[];
+	public geneSize: number;
 	public id: number;
 
-	constructor(name: string, id: number, opts?: any, superclass?: any) {
+	constructor(name: string, id: number, opts?: IRaceDescOpts, superclass?: RaceDesc) {
 		opts = opts || {};
 		this.name = name || "RACE";
 		this.superclass = superclass;
@@ -50,14 +65,14 @@ export class RaceDesc {
 	static set Num(value: number) { numInternal = value; }
 	static get IdToRace() { return idToRace; }
 
-	public GeneSize() {
+	public GeneSize(): number {
 		if (this.geneSize) {
 			return this.geneSize;
 		} else if (this.superclass) {
 			return this.superclass.GeneSize();
- } else {
+ 		} else {
 			return 1;
- }
+ 		}
 	}
 
 	public Desc(gender?: Gender) {
@@ -243,6 +258,18 @@ export class RaceScore {
 		return sorted;
 	}
 
+	public debug() {
+		let ret = "<b>RaceDesc:</b><br>";
+		for (let i = 0; i < RaceDesc.Num; i++) {
+			const score = this.score[i];
+			if (score !== 0) {
+				const raceName = idToRace[i].name;
+				ret += `- ${raceName}: ${score}<br>`;
+			}
+		}
+
+		return ret;
+	}
 }
 
 // TODO Current max 44

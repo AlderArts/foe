@@ -92,7 +92,7 @@ export class Vagina extends Orifice {
 	public Short() {
 		const desc = this.Desc();
 		const v = this.virgin ? " virgin " : " ";
-		return desc.adj + v + this.noun();
+		return `${desc.adj}${v}${this.noun()}`;
 	}
 	// TODO
 	public ClitShort() {

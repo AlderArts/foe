@@ -23,13 +23,27 @@ enum CScore {
 	Pair      = 7,
 }
 
+export interface ICavalcadeOpts {
+	stag?: CardItem;
+	NextRound?: () => void;
+	onPost?: () => void;
+	token?: string;
+	bet?: number;
+}
+
+interface ICavalcadeScore {
+	num: number;
+	val?: number;
+	suit?: CardSuit;
+}
+
 /*
  * The card game Cavalcade
  */
 export class Cavalcade {
 
 	static get Score() { return CScore; }
-	public static CardCountSorter(a: any, b: any) {
+	public static CardCountSorter(a: ICavalcadeScore, b: ICavalcadeScore) {
 		if (a.num === b.num) { return (a.val < b.val) ? -1 : 1; } else { return (a.num > b.num) ? -1 : 1; }
 	}
 
@@ -66,15 +80,18 @@ export class Cavalcade {
 	public Deck: CardItem[];
 	public players: ICavalcadePlayer[];
 	public stag: CardItem;
-	public NextRound: any;
-	public onPost: any;
-	public token: any;
+	public NextRound: () => void;
+	public onPost: () => void;
+	public token: string;
 	public round: number;
 	public bet: number;
 	public pot: number;
 	public house: CardItem[];
 
-	constructor(players: ICavalcadePlayer[], opts?: any) {
+	public winner: ICavalcadePlayer;
+	public winners: ICavalcadePlayer[];
+
+	constructor(players: ICavalcadePlayer[], opts?: ICavalcadeOpts) {
 		opts = opts || {};
 
 		this.Deck = [];
@@ -146,7 +163,7 @@ export class Cavalcade {
 			});
 			// TODO: TEMP
 			Text.Add("[Poss] hand:<br>", {Poss: p.Possessive()});
-			_.each(p.hand, (h: CardItem, key: any) => {
+			_.each(p.hand, (h: CardItem, key: number) => {
 				if (key > 0) {
 					Text.Add(", ");
 				}
@@ -176,7 +193,7 @@ export class Cavalcade {
 		}
 
 		// Count similar cards, ignore stag
-		const counts = [];
+		const counts: ICavalcadeScore[] = [];
 		for (let i = 0; i < 5; i++) {
 			if (hand[i] === this.stag) {
 				continue;
@@ -198,7 +215,7 @@ export class Cavalcade {
 		counts.sort(Cavalcade.CardCountSorter);
 
 		// Count cards of the same suit, ignore stag
-		const suits = [];
+		const suits: ICavalcadeScore[] = [];
 		for (let i = 0; i < 5; i++) {
 			if (hand[i] === this.stag) {
 				continue;
@@ -274,7 +291,7 @@ export class Cavalcade {
 		}
 	}
 
-	public ResultStr(res: any) {
+	public ResultStr(res: ICavalcadeResult) {
 		let str;
 		switch (res.score) {
 			case Cavalcade.Score.Cavalcade: str = "Full Cavalcade of " + this.SuitStr(res.suit); break;
@@ -297,7 +314,7 @@ export class Cavalcade {
 	// If the Stag is revealed in the house hand, replace it with a new card
 	public CoinGameRound() {
 		const party: Party = GAME().party;
-		const that: any = this;
+		const that: Cavalcade = this;
 		const parse: any = {
 			token : that.token,
 			bet : that.bet,
@@ -431,9 +448,10 @@ export class Cavalcade {
 			});
 
 			_.each(that.winners, (w) => {
-				Text.Add("HAND EVALUATION ([p]):<br>", {p: w.name});
+				Text.Add(`HAND EVALUATION (${w.name}):<br>`);
 				w.res = that.EvaluateHand(w.hand);
-				Text.Add("Hand evaluated as: " + that.ResultStr(w.res));
+				const result = that.ResultStr(w.res);
+				Text.Add(`Hand evaluated as: ${result}`);
 				Text.NL();
 			});
 
@@ -453,7 +471,7 @@ export class Cavalcade {
 				that.pot = Math.floor(that.pot / that.winners.length);
 				_.each(that.winners, (w) => {
 					w.purse.coin += that.pot;
-					if (party.InParty(w)) {
+					if (party.InParty(w as any)) {
 						Text.NL();
 						parse.pot = that.pot;
 						Text.Add("The party gains [pot] [token]s!", parse);
@@ -463,7 +481,7 @@ export class Cavalcade {
 				that.winner = that.winners[0];
 				Text.Add("[name] won the round!", {name: that.winner.NameDesc()});
 				that.winner.purse.coin += that.pot;
-				if (party.InParty(that.winner)) {
+				if (party.InParty(that.winner as any)) {
 					Text.NL();
 					parse.pot = that.pot;
 					Text.Add("The party gains [pot] [token]s!", parse);

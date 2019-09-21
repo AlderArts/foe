@@ -139,7 +139,7 @@ ClothShopLoc.events.push(new Link(
 			Text.NL();
 
 			const human = new RaceScore();
-			human.score[Race.Human] = 1;
+			human.score[Race.Human.id] = 1;
 			const humanScore = human.Compare(new RaceScore(player.body));
 
 			if (humanScore > 0.9 || player.charisma.Get() >= 50) {

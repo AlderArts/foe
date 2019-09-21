@@ -375,9 +375,9 @@ export class Party {
 			Text.Add("<tr><td><b>SP:</b></td><td>" + Math.floor(member.curSp) + "/" + Math.floor(member.SP()) + "</td></tr>", parse);
 			Text.Add("<tr><td><b>Lust:</b></td><td>" + Math.floor(member.curLust) + "/" + Math.floor(member.Lust()) + "</td></tr>", parse);
 			Text.Add("<tr><td><b>Level:</b></td><td>" + member.level + "</td></tr>", parse);
-			Text.Add("<tr><td><b>Exp:</b></td><td>"       + Math.floor(member.experience) + "/" + Math.floor(member.expToLevel) + "</td></tr>");
+			Text.Add("<tr><td><b>Exp:</b></td><td>" + Math.floor(member.experience) + "/" + Math.floor(member.expToLevel) + "</td></tr>");
 			Text.Add("<tr><td><b>SexLevel:</b></td><td>" + member.sexlevel + "</td></tr>", parse);
-			Text.Add("<tr><td><b>S.Exp:</b></td><td>"     + Math.floor(member.sexperience) + "/" + Math.floor(member.sexpToLevel) + "</td></tr>");
+			Text.Add("<tr><td><b>S.Exp:</b></td><td>" + Math.floor(member.sexperience) + "/" + Math.floor(member.sexpToLevel) + "</td></tr>");
 			if (member.currentJob) {
 					const jd  = member.jobs[member.currentJob.name];
 					if (jd) {

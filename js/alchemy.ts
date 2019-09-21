@@ -9,6 +9,10 @@ import { Item, ItemIds } from "./item";
 import { IChoice } from "./link";
 import { Text } from "./text";
 
+interface IAlchemyChoice extends IChoice {
+	_recipeStr: string;
+}
+
 /*
  *
  * Alchemy
@@ -26,7 +30,7 @@ export namespace Alchemy {
 		}
 		Text.Add("[name] can transmute the following items:", {name: alchemist.NameDesc()});
 
-		let list: any[] = [];
+		let list: IAlchemyChoice[] = [];
 
 		const Brew = (brewable: IBrewable) => {
 			if (alchemist === GAME().player) {
@@ -178,7 +182,7 @@ interface IBrewable {
 
 function CountBrewable(it: Item, inventory: Inventory, alchemist: Entity): IBrewable {
 	let recipeDict = GetRecipeDict(it);
-	const invDict = _.chain(inventory.ToStorage()).keyBy("it").mapValues("num").value();
+	const invDict: IAlchemyRecipeDict = _.chain(inventory.ToStorage()).keyBy("it").mapValues("num").value();
 	const productionSteps: IAlchemyProductionStep[] = []; // [{qty: 5, recipe: [...]}]
 
 	while (!_.isEmpty(recipeDict)) {
@@ -239,7 +243,7 @@ function CountBrewable(it: Item, inventory: Inventory, alchemist: Entity): IBrew
 	};
 }
 
-function AdaptRecipe(recipeDict: IAlchemyRecipeDict, invDict: any, alchemist: Entity): IAlchemyRecipeDict {
+function AdaptRecipe(recipeDict: IAlchemyRecipeDict, invDict: IAlchemyRecipeDict, alchemist: Entity): IAlchemyRecipeDict {
 	const origRecipeDict = recipeDict;
 	recipeDict = _.assign({}, recipeDict);
 

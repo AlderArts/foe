@@ -83,7 +83,7 @@ export class MazeRoom extends Event {
 	public x: number;
 	public y: number;
 
-	constructor(nameFunc?: CallableFunction, opts?: any) {
+	constructor(nameFunc?: string|(() => string), opts?: any) {
 		super(nameFunc, opts);
 	}
 

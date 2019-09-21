@@ -8,6 +8,7 @@ CHANGELOG for Fall of Eden
 Version 0.5.3
 -------------
 * Fixed numerous minor logic errors in scenes discovered by applying strict typing.
+* Fixed some race detection errors in scenes, also discovered by applying strict typing.
 
 --------------------------------------------
              PREVIOUS VERSIONS

@@ -15,6 +15,13 @@ export enum CockType {
 	ovipositor = 3,
 }
 
+export interface ICockDesc {
+	len?: string;
+	thickness?: string;
+	a: string;
+	adj: string;
+}
+
 export class Cock extends BodyPart {
 	public thickness: Stat;
 	public length: Stat;
@@ -138,9 +145,33 @@ export class Cock extends BodyPart {
 		return _.sample(noun);
 	}
 	public Desc() {
-		let ret: any;
+		let ret: ICockDesc;
 		const cockArea = this.thickness.Get() * this.length.Get();
-		if     (cockArea <= 10 ) { ret = _.sample([{a: "a", adj: "tiny"}, {a: "a", adj: "pathetic"}, {a: "a", adj: "micro"}, {a: "an", adj: "undersized"}]); } else if (cockArea <= 20 ) { ret = _.sample([{a: "a", adj: "small"}, {a: "a", adj: "petite"}]); } else if (cockArea <= 30 ) { ret = _.sample([{a: "a", adj: "below average"}, {a: "a", adj: "modest"}]); } else if (cockArea <= 40 ) { ret = _.sample([{a: "a", adj: "well-proportioned"}, {a: "an", adj: "average"}]); } else if (cockArea <= 50 ) { ret = _.sample([{a: "a", adj: "strapping"}, {a: "a", adj: "respectable"}, {a: "an", adj: "ample"}]); } else if (cockArea <= 70 ) { ret = _.sample([{a: "a", adj: "big"}]); } else if (cockArea <= 90 ) { ret = _.sample([{a: "a", adj: "large"}, {a: "a", adj: "sizable"}]); } else if (cockArea <= 120) { ret = _.sample([{a: "a", adj: "huge"}, {a: "a", adj: "hefty"}]); } else if (cockArea <= 200) { ret = _.sample([{a: "an", adj: "enormous"}, {a: "a", adj: "massive"}, {a: "a", adj: "humongous"}]); } else if (cockArea <= 400) { ret = _.sample([{a: "an", adj: "immense"}, {a: "a", adj: "colossal"}, {a: "a", adj: "mammoth"}]); } else if (cockArea <= 800) { ret = _.sample([{a: "a", adj: "gargantuan"}, {a: "a", adj: "gigantic"}, {a: "a", adj: "monster sized"}]); } else {                     ret = _.sample([{a: "a", adj: "titanic"}, {a: "a", adj: "vast"}]); }
+		if (cockArea <= 10 ) {
+			ret = _.sample([{a: "a", adj: "tiny"}, {a: "a", adj: "pathetic"}, {a: "a", adj: "micro"}, {a: "an", adj: "undersized"}]);
+		} else if (cockArea <= 20 ) {
+			ret = _.sample([{a: "a", adj: "small"}, {a: "a", adj: "petite"}]);
+		} else if (cockArea <= 30 ) {
+			ret = _.sample([{a: "a", adj: "below average"}, {a: "a", adj: "modest"}]);
+		} else if (cockArea <= 40 ) {
+			ret = _.sample([{a: "a", adj: "well-proportioned"}, {a: "an", adj: "average"}]);
+		} else if (cockArea <= 50 ) {
+			ret = _.sample([{a: "a", adj: "strapping"}, {a: "a", adj: "respectable"}, {a: "an", adj: "ample"}]);
+		} else if (cockArea <= 70 ) {
+			ret = _.sample([{a: "a", adj: "big"}]);
+		} else if (cockArea <= 90 ) {
+			ret = _.sample([{a: "a", adj: "large"}, {a: "a", adj: "sizable"}]);
+		} else if (cockArea <= 120) {
+			ret = _.sample([{a: "a", adj: "huge"}, {a: "a", adj: "hefty"}]);
+		} else if (cockArea <= 200) {
+			ret = _.sample([{a: "an", adj: "enormous"}, {a: "a", adj: "massive"}, {a: "a", adj: "humongous"}]);
+		} else if (cockArea <= 400) {
+			ret = _.sample([{a: "an", adj: "immense"}, {a: "a", adj: "colossal"}, {a: "a", adj: "mammoth"}]);
+		} else if (cockArea <= 800) {
+			ret = _.sample([{a: "a", adj: "gargantuan"}, {a: "a", adj: "gigantic"}, {a: "a", adj: "monster sized"}]);
+		} else {
+			ret = _.sample([{a: "a", adj: "titanic"}, {a: "a", adj: "vast"}]);
+		}
 
 		ret.len = this.length.Get() / 2 + " inches";
 		ret.thickness = this.thickness.Get() / 2 + " inches";

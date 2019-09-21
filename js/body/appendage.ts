@@ -44,21 +44,37 @@ export class Appendage extends BodyPart {
 	public Short() {
 		let noun;
 		if (this.count > 1) {
-			if     (this.type === AppendageType.horn) {
+			if (this.type === AppendageType.horn) {
 				if (this.race.isRace(Race.Deer)) {
 					noun = "antlers";
 				} else {
 					noun = "horns";
 				}
-			} else if (this.type === AppendageType.antenna) { noun = "antennas"; } else if (this.type === AppendageType.tail) {    noun = "tails"; } else if (this.type === AppendageType.wing) {    noun = "wings"; } else if (this.type === AppendageType.abdomen) { noun = "abdomen"; }
+			} else if (this.type === AppendageType.antenna) {
+				noun = "antennas";
+			} else if (this.type === AppendageType.tail) {
+				noun = "tails";
+			} else if (this.type === AppendageType.wing) {
+				noun = "wings";
+			} else if (this.type === AppendageType.abdomen) {
+				noun = "abdomen";
+			}
 		} else {
-			if     (this.type === AppendageType.horn) {
+			if (this.type === AppendageType.horn) {
 				if (this.race.isRace(Race.Deer)) {
 					noun = "antler";
 				} else {
 					noun = "horn";
 				}
-			} else if (this.type === AppendageType.antenna) { noun = "antenna"; } else if (this.type === AppendageType.tail) {    noun = "tail"; } else if (this.type === AppendageType.wing) {    noun = "wing"; } else if (this.type === AppendageType.abdomen) { noun = "abdomen"; }
+			} else if (this.type === AppendageType.antenna) {
+				noun = "antenna";
+			} else if (this.type === AppendageType.tail) {
+				noun = "tail";
+			} else if (this.type === AppendageType.wing) {
+				noun = "wing";
+			} else if (this.type === AppendageType.abdomen) {
+				noun = "abdomen";
+			}
 		}
 		return noun;
 	}

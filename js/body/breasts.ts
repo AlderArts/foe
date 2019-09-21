@@ -178,24 +178,24 @@ export class Breasts extends BodyPart {
 	}
 	public NipShort() {
 		const desc = this.nipDesc();
-		return desc.adj + " " + this.nipNoun();
+		return `${desc.adj} ${this.nipNoun()}`;
 	}
 	public NipsShort() {
 		const desc = this.nipDesc();
-		return desc.adj + " " + this.nipNounPlural();
+		return `${desc.adj} ${this.nipNounPlural()}`;
 	}
 	public Short() {
 		const desc = this.Desc();
-		return desc.adj + " " + this.nounPlural();
+		return `${desc.adj} ${this.nounPlural()}`;
 	}
 	public ShortCup() {
 		const desc = this.Desc();
-		return desc.cup + " " + this.nounPlural();
+		return `${desc.cup} ${this.nounPlural()}`;
 	}
 	// TODO: lactation
 	public Long() {
 		const desc = this.Desc();
-		return desc.a + " " + desc.adj + " " + this.nounPlural();
+		return `${desc.a} ${desc.adj} ${this.nounPlural()}`;
 	}
 
 }

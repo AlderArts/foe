@@ -145,7 +145,9 @@ export class Balls extends BodyPart {
 			adjs.push("desperate ");
 			adjs.push("throbbing ");
 			adjs.push("heated ");
-		} else { return ""; }
+		} else {
+			return "";
+		}
 
 		return adjs[Rand(adjs.length)];
 	}
@@ -157,7 +159,11 @@ export class Balls extends BodyPart {
 		let str = "";
 		if (Math.random() > 0.5) {
 			str += Text.Quantify(count);
-			if (count > 1) { str += " of "; } else {          str += " "; }
+			if (count > 1) {
+				str += " of ";
+			} else {
+				str += " ";
+			}
 		}
 		if (Math.random() > 0.5) {
 			str += this.adj() + " ";
@@ -176,7 +182,11 @@ export class Balls extends BodyPart {
 
 		let str = "";
 		str += "a " + Text.Quantify(count);
-		if (count > 1) { str += " of "; } else {          str += " "; }
+		if (count > 1) {
+			str += " of ";
+		} else {
+			str += " ";
+		}
 		str += this.adj() + " ";
 		str += this.adj2();
 		str += this.noun();

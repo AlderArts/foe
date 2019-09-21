@@ -116,8 +116,10 @@ export class Head extends BodyPart {
 		if (this.eyes.race === race) {         sum++; }
 		if (this.ears.race === race) {         sum++; }
 		for (const app of this.appendages) {
-			if (app.race === race) { sum++;
-		} }
+			if (app.race === race) {
+				sum++;
+			}
+		}
 		return sum;
 	}
 

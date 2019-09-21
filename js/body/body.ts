@@ -35,7 +35,7 @@ export enum LowerBodyType {
 export class Torso extends BodyPart {
 	public hipSize: Stat;
 
-	constructor(debugName: any) {
+	constructor(debugName: () => string) {
 		super();
 		this.hipSize = new Stat(1); // TODO: Default
 		this.hipSize.debug = () => debugName() + ".hipSize";

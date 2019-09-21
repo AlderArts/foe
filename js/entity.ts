@@ -1850,6 +1850,9 @@ export class Entity {
 			Text.NL();
 			Text.Add("DEBUG: slut: " + this.slut.Get(), undefined, "bold");
 			Text.NL();
+			const race = new RaceScore(this.body);
+			Text.Add(race.debug());
+			Text.NL();
 		}
 
 		const drunk = this.DrunkStr();

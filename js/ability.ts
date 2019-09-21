@@ -5,6 +5,7 @@ import { DamageType, IDamageType } from "./damagetype";
 import { Entity, ICombatEncounter, ICombatOrder } from "./entity";
 import { GAME } from "./GAME";
 import { Gui } from "./gui";
+import { IChoice } from "./link";
 import { Party } from "./party";
 import { Stat } from "./stat";
 import { Text } from "./text";
@@ -180,7 +181,7 @@ export class Ability {
 			});
 		Text.Flush();
 
-		const target: any[] = [];
+		const target: IChoice[] = [];
 		const party: Party = GAME().party;
 
 		switch (ability.targetMode) {

@@ -16,5 +16,6 @@ export interface ICavalcadePlayer {
     purse: {coin: number};
 
     name: string;
+    NameDesc: () => string;
     Possessive: () => string;
 }
