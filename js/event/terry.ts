@@ -12,7 +12,7 @@ import { Color } from "../body/color";
 import { Gender } from "../body/gender";
 import { Race } from "../body/race";
 import { Vagina } from "../body/vagina";
-import { Entity } from "../entity";
+import { Entity, ICombatEncounter, ICombatOrder } from "../entity";
 import { GAME } from "../GAME";
 import { Gui } from "../gui";
 import { Item } from "../item";
@@ -342,7 +342,7 @@ export class Terry extends Entity {
 		TerryScenes.Prompt();
 	}
 
-	public Act(encounter: any, activeChar: any) {
+	public Act(encounter: ICombatEncounter, activeChar: ICombatOrder) {
 		// TODO: AI!
 		Text.Add("The thief hops around nimbly.");
 		Text.NL();

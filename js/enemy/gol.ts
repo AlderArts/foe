@@ -14,6 +14,7 @@ import { Race } from "../body/race";
 import { Encounter } from "../combat";
 import { Element } from "../damagetype";
 import { EncounterTable } from "../encountertable";
+import { ICombatEncounter, ICombatOrder } from "../entity";
 import { Sex } from "../entity-sex";
 import { Player } from "../event/player";
 import { GAME, TimeStep } from "../GAME";
@@ -114,7 +115,7 @@ export class GolQueen extends BossEntity {
 		return drops;
 	}
 
-	public Act(encounter: any, activeChar: any) {
+	public Act(encounter: ICombatEncounter, activeChar: ICombatOrder) {
 		const party: Party = GAME().party;
 		// TODO: Very TEMP
 		Text.Add(this.name + " acts! Buzz!");

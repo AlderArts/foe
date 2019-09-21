@@ -84,6 +84,11 @@ export interface ICombatEncounter {
 	enemy: any;
 	GetLivePartyArray: () => any;
 	GetLiveEnemyArray: () => any;
+	CombatTick: () => void;
+	GenerateUniqueName: (entity: Entity) => void;
+	canRun: boolean;
+	onRun: () => void;
+	RunLevel: () => number;
 }
 
 // TODO: Should have shared features, such as combat stats. Body representation
@@ -652,7 +657,7 @@ export class Entity {
 	}
 
 	/* COMBAT RELATED FUNTIONS */
-	public Act(encounter: any, activeChar: any) {
+	public Act(encounter: ICombatEncounter, activeChar: ICombatOrder) {
 		// TODO: Very TEMP
 		Text.Add(this.name + " acts! Rawr!");
 		Text.NL();

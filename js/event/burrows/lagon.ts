@@ -13,7 +13,7 @@ import { Race } from "../../body/race";
 import { EncounterTable } from "../../encountertable";
 import { BossEntity } from "../../enemy/boss";
 import { Lagomorph, LagomorphAlpha, LagomorphBrute, LagomorphElite, LagomorphWizard } from "../../enemy/rabbit";
-import { Entity } from "../../entity";
+import { Entity, ICombatEncounter, ICombatOrder } from "../../entity";
 import { GAME, WORLD } from "../../GAME";
 import { Gui } from "../../gui";
 import { AccItems } from "../../items/accessories";
@@ -189,7 +189,7 @@ export class LagonRegular extends BossEntity {
 	}
 
 	// TODO
-	public Act(enc: any, activeChar: any) {
+	public Act(enc: ICombatEncounter, activeChar: ICombatOrder) {
 		const player: Player = GAME().player;
 		// Pick a random target
 		const t = this.GetSingleTarget(enc, activeChar);
@@ -332,7 +332,7 @@ export class LagonBrute extends BossEntity {
 	}
 
 	// TODO
-	public Act(encounter: any, activeChar: any) {
+	public Act(encounter: ICombatEncounter, activeChar: ICombatOrder) {
 		const party: Party = GAME().party;
 		// Pick a random target
 		const targets = this.GetPartyTarget(encounter, activeChar);

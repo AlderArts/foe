@@ -11,7 +11,7 @@ import { Color } from "../body/color";
 import { Gender } from "../body/gender";
 import { Race } from "../body/race";
 import { Element } from "../damagetype";
-import { Entity } from "../entity";
+import { Entity, ICombatEncounter, ICombatOrder } from "../entity";
 import { AlchemyItems } from "../items/alchemy";
 import { IngredientItems } from "../items/ingredients";
 import { TF } from "../tf";
@@ -102,7 +102,7 @@ export class Lagomorph extends Entity {
 		return drops;
 	}
 
-	public Act(encounter: any, activeChar: any) {
+	public Act(encounter: ICombatEncounter, activeChar: ICombatOrder) {
 		// Pick a random target
 		const t = this.GetSingleTarget(encounter, activeChar);
 
@@ -230,7 +230,7 @@ export class LagomorphBrute extends Lagomorph {
 	}
 
 	// TODO: Drop table
-	public Act(encounter: any, activeChar: any) {
+	public Act(encounter: ICombatEncounter, activeChar: ICombatOrder) {
 		// Pick a random target
 		const t = this.GetSingleTarget(encounter, activeChar);
 
@@ -291,7 +291,7 @@ export class LagomorphWizard extends Lagomorph {
 
 	// TODO: Drop table
 
-	public Act(encounter: any, activeChar: any) {
+	public Act(encounter: ICombatEncounter, activeChar: ICombatOrder) {
 		// Pick a random target
 		const t = this.GetSingleTarget(encounter, activeChar);
 

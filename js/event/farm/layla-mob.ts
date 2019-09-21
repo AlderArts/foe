@@ -1,7 +1,7 @@
 import { Abilities } from "../../abilities";
 import { Images } from "../../assets";
 import { Color } from "../../body/color";
-import { Entity, TargetStrategy } from "../../entity";
+import { Entity, ICombatEncounter, ICombatOrder, TargetStrategy } from "../../entity";
 import { Text } from "../../text";
 
 /* TODO
@@ -46,7 +46,7 @@ export class LaylaMob extends Entity {
 		this.RestFull();
 	}
 
-	public Act(encounter: any, activeChar: any) {
+	public Act(encounter: ICombatEncounter, activeChar: ICombatOrder) {
 		// TODO: Very TEMP
 		Text.Add(this.MonsterName + " acts! Rawr!");
 		Text.NL();

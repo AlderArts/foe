@@ -12,6 +12,7 @@ import { Color } from "../body/color";
 import { Race } from "../body/race";
 import { Element } from "../damagetype";
 import { EncounterTable } from "../encountertable";
+import { ICombatEncounter, ICombatOrder } from "../entity";
 import { GAME } from "../GAME";
 import { AlchemyItems } from "../items/alchemy";
 import { ArmorItems } from "../items/armor";
@@ -112,7 +113,7 @@ export class OrchidBoss extends BossEntity {
 		return storage;
 	}
 
-	public Act(encounter: any, activeChar: any) {
+	public Act(encounter: ICombatEncounter|any, activeChar: ICombatOrder) {
 		const party: Party = GAME().party;
 
 		Text.Add("Orchid squirms and sways her hips.");

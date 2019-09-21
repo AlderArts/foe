@@ -11,7 +11,7 @@ import { Color } from "../body/color";
 import { Race } from "../body/race";
 import { Encounter } from "../combat";
 import { Element } from "../damagetype";
-import { Entity } from "../entity";
+import { Entity, ICombatEncounter, ICombatOrder } from "../entity";
 import { AlchemyItems } from "../items/alchemy";
 import { AlchemySpecial } from "../items/alchemyspecial";
 import { IngredientItems } from "../items/ingredients";
@@ -96,7 +96,7 @@ export class Scorpion extends Entity {
 		return drops;
 	}
 
-	public Act(encounter: any, activeChar: any) {
+	public Act(encounter: ICombatEncounter, activeChar: ICombatOrder) {
 		// TODO: Very TEMP
 		Text.Add(this.name + " acts! Stab stab hiss!");
 		Text.NL();

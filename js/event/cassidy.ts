@@ -9,7 +9,7 @@ import { Images } from "../assets";
 import { Race } from "../body/race";
 import { Element } from "../damagetype";
 import { EncounterTable } from "../encountertable";
-import { Entity } from "../entity";
+import { Entity, ICombatEncounter, ICombatOrder } from "../entity";
 import { GAME } from "../GAME";
 import { Item } from "../item";
 import { ArmorItems } from "../items/armor";
@@ -202,7 +202,7 @@ export class CassidySpar extends Entity {
 		this.RestFull();
 	}
 
-	public Act(encounter: any, activeChar: any) {
+	public Act(encounter: ICombatEncounter, activeChar: ICombatOrder) {
 		const that = this;
 		// TODO: Very TEMP
 		Text.Add(this.name + " acts! Rawr!");

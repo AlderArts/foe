@@ -7,6 +7,7 @@ import { Images } from "../assets";
 import { Body } from "../body/body";
 import { Element } from "../damagetype";
 import { EncounterTable } from "../encountertable";
+import { ICombatEncounter, ICombatOrder } from "../entity";
 import { GAME } from "../GAME";
 import { AccItems } from "../items/accessories";
 import { AlchemyItems } from "../items/alchemy";
@@ -75,7 +76,7 @@ export class Corishev extends BossEntity {
 		return drops;
 	}
 
-	public Act(encounter: any, activeChar: any) {
+	public Act(encounter: ICombatEncounter, activeChar: ICombatOrder) {
 		const party: Party = GAME().party;
 
 		const parse: any = {

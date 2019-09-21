@@ -10,7 +10,7 @@ import { AppendageType } from "../../body/appendage";
 import { Color } from "../../body/color";
 import { Race } from "../../body/race";
 import { BossEntity } from "../../enemy/boss";
-import { Entity } from "../../entity";
+import { Entity, ICombatEncounter, ICombatOrder } from "../../entity";
 import { GAME, WORLD, WorldTime } from "../../GAME";
 import { AlchemyItems } from "../../items/alchemy";
 import { AlchemySpecial } from "../../items/alchemyspecial";
@@ -149,7 +149,7 @@ export class OpheliaBrute extends BossEntity {
 	}
 
 	// TODO
-	public Act(encounter: any, activeChar: any) {
+	public Act(encounter: ICombatEncounter, activeChar: ICombatOrder) {
 		// Pick a random target
 		const targets = this.GetPartyTarget(encounter, activeChar);
 		const t = this.GetSingleTarget(encounter, activeChar);

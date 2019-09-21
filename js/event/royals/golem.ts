@@ -6,8 +6,8 @@
 
 import { Abilities } from "../../abilities";
 import { Images } from "../../assets";
-import { LowerBodyType } from "../../body/body";
 import { Body } from "../../body/body";
+import { LowerBodyType } from "../../body/body";
 import { BodyPartType } from "../../body/bodypart";
 import { Color } from "../../body/color";
 import { Orifice } from "../../body/orifice";
@@ -15,6 +15,7 @@ import { Race } from "../../body/race";
 import { Encounter } from "../../combat";
 import { Element } from "../../damagetype";
 import { BossEntity } from "../../enemy/boss";
+import { ICombatEncounter, ICombatOrder } from "../../entity";
 import { Sex } from "../../entity-sex";
 import { GAME, MoveToLocation, TimeStep, WORLD } from "../../GAME";
 import { GameState, SetGameState } from "../../gamestate";
@@ -105,7 +106,7 @@ export class GolemBoss extends BossEntity {
 		return storage;
 	}
 
-	public Act(encounter: any, activeChar: any) {
+	public Act(encounter: ICombatEncounter, activeChar: ICombatOrder) {
 		// TODO: AI!
 		Text.Add(this.NameDesc() + " shuffles around cumbersomely.");
 		Text.NL();

@@ -2,7 +2,7 @@ import { Ability, TargetMode } from "../ability";
 import { Defaults } from "../ability/default";
 import { AbilityNode } from "../ability/node";
 import { Encounter } from "../combat";
-import { Entity } from "../entity";
+import { Entity, ICombatEncounter } from "../entity";
 import { Inventory } from "../inventory";
 import { Item } from "../item";
 import { Status } from "../statuseffect";
@@ -16,7 +16,7 @@ export class CombatItemAbility extends Ability {
 		this.item = item;
 	}
 
-	public Use(encounter: Encounter, caster: Entity, target?: Entity, inv?: Inventory) {
+	public Use(encounter: ICombatEncounter, caster: Entity, target?: Entity, inv?: Inventory) {
 		if (inv && this.item.consume) {
 			inv.RemoveItem(this.item);
 		}

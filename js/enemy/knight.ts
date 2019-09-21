@@ -8,7 +8,7 @@ import { Abilities } from "../abilities";
 import { Images } from "../assets";
 import { Color } from "../body/color";
 import { Race } from "../body/race";
-import { Entity } from "../entity";
+import { Entity, ICombatEncounter, ICombatOrder } from "../entity";
 import { AlchemyItems } from "../items/alchemy";
 import { IngredientItems } from "../items/ingredients";
 import { Text } from "../text";
@@ -100,7 +100,7 @@ export class Footman extends Entity {
 		return drops;
 	}
 
-	public Act(encounter: any, activeChar: any) {
+	public Act(encounter: ICombatEncounter, activeChar: ICombatOrder) {
 		// TODO: Very TEMP
 		Text.Add(this.name + " acts! Yah!");
 		Text.NL();

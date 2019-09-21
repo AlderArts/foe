@@ -10,7 +10,7 @@ import { AppendageType } from "../body/appendage";
 import { Color } from "../body/color";
 import { Race } from "../body/race";
 import { Encounter } from "../combat";
-import { Entity } from "../entity";
+import { Entity, ICombatEncounter, ICombatOrder } from "../entity";
 import { Sex } from "../entity-sex";
 import { Player } from "../event/player";
 import { GAME, TimeStep } from "../GAME";
@@ -103,7 +103,7 @@ export class ZebraShaman extends Entity {
 		return drops;
 	}
 
-	public Act(encounter: any, activeChar: any) {
+	public Act(encounter: ICombatEncounter, activeChar: ICombatOrder) {
 		// TODO: Very TEMP
 		Text.Add(this.name + " acts!");
 		Text.NL();
@@ -186,7 +186,7 @@ export class ZebraBrave extends Entity {
 		return drops;
 	}
 
-	public Act(encounter: any, activeChar: any) {
+	public Act(encounter: ICombatEncounter, activeChar: ICombatOrder) {
 		// TODO: Very TEMP
 		Text.Add(this.name + " acts!");
 		Text.NL();

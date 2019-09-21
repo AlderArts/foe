@@ -14,7 +14,7 @@ import { Race } from "../body/race";
 import { Encounter } from "../combat";
 import { Element } from "../damagetype";
 import { EncounterTable } from "../encountertable";
-import { Entity } from "../entity";
+import { Entity, ICombatEncounter, ICombatOrder } from "../entity";
 import { Sex } from "../entity-sex";
 import { Player } from "../event/player";
 import { GAME, TimeStep } from "../GAME";
@@ -128,7 +128,7 @@ export class Equine extends Entity {
 		return drops;
 	}
 
-	public Act(encounter: any, activeChar: any) {
+	public Act(encounter: ICombatEncounter, activeChar: ICombatOrder) {
 		// TODO: Very TEMP
 		Text.Add(this.name + " acts! Rawr!");
 		Text.NL();

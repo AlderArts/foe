@@ -8,7 +8,7 @@ import { Abilities } from "../../abilities";
 import { Images } from "../../assets";
 import { Color } from "../../body/color";
 import { HairStyle } from "../../body/hair";
-import { Entity } from "../../entity";
+import { Entity, ICombatEncounter, ICombatOrder } from "../../entity";
 import { GAME, NAV, WORLD, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
 import { Stat } from "../../stat";
@@ -199,7 +199,7 @@ export class LeiSpar extends Entity {
 		this.RestFull();
 	}
 
-	public Act(encounter: any, activeChar: any) {
+	public Act(encounter: ICombatEncounter, activeChar: ICombatOrder) {
 		// TODO: Very TEMP
 		Text.Add(this.name + " acts! Chop chop!");
 		Text.NL();

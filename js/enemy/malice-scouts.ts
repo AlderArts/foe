@@ -12,7 +12,7 @@ import { Race } from "../body/race";
 import { Encounter } from "../combat";
 import { Element } from "../damagetype";
 import { EncounterTable } from "../encountertable";
-import { Entity } from "../entity";
+import { Entity, ICombatEncounter, ICombatOrder } from "../entity";
 import { TargetStrategy } from "../entity";
 import { Sex } from "../entity-sex";
 import { Player } from "../event/player";
@@ -148,7 +148,7 @@ export class CatboyMage extends Entity {
 		return drops;
 	}
 
-	public Act(encounter: any, activeChar: any) {
+	public Act(encounter: ICombatEncounter, activeChar: ICombatOrder) {
 		// TODO: Very TEMP
 		Text.Add(this.name + " acts! Meow!");
 		Text.NL();
@@ -304,7 +304,7 @@ export class CentaurMare extends Entity {
 		return drops;
 	}
 
-	public Act(encounter: any, activeChar: any) {
+	public Act(encounter: ICombatEncounter, activeChar: ICombatOrder) {
 		// TODO: Very TEMP
 		Text.Add(this.name + " acts! Hyaaah!");
 		Text.NL();
@@ -446,7 +446,7 @@ export class GoatAlchemist extends Entity {
 		return drops;
 	}
 
-	public Act(encounter: any, activeChar: any) {
+	public Act(encounter: ICombatEncounter, activeChar: ICombatOrder) {
 		// TODO: Very TEMP
 		Text.Add(this.name + " acts! Harrumph!");
 		Text.NL();

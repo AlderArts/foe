@@ -6,7 +6,7 @@
 import { Abilities } from "../../abilities";
 import { Images } from "../../assets";
 import { Color } from "../../body/color";
-import { Entity } from "../../entity";
+import { Entity, ICombatEncounter, ICombatOrder } from "../../entity";
 import { GAME, WORLD, WorldTime } from "../../GAME";
 import { CombatItems } from "../../items/combatitems";
 import { ILocation } from "../../location";
@@ -115,7 +115,7 @@ export class Maria extends Entity {
 		return true;
 	}
 
-	public Act(encounter: any, activeChar: any) {
+	public Act(encounter: ICombatEncounter, activeChar: ICombatOrder) {
 		// TODO: AI!
 		Text.Add("The huntress hops around nimbly.");
 		Text.NL();

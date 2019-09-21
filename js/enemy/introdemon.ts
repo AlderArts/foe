@@ -8,6 +8,7 @@ import { Images } from "../assets";
 import { Body } from "../body/body";
 import { Color } from "../body/color";
 import { Race } from "../body/race";
+import { ICombatEncounter, ICombatOrder } from "../entity";
 import { GAME } from "../GAME";
 import { Text } from "../text";
 import { Rand } from "../utility";
@@ -60,7 +61,7 @@ export class IntroDemon extends BossEntity {
 		this.RestFull();
 	}
 
-	public Act(encounter: any, activeChar: any) {
+	public Act(encounter: ICombatEncounter, activeChar: ICombatOrder) {
 		// TODO: More actions (rand 'em)
 
 		this.turnCounter++;

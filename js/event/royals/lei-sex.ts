@@ -10,7 +10,7 @@ import { LeiFlags } from "./lei-flags";
 
 export namespace LeiSexScenes {
 
-	export function Prompt(options: any[]) {
+	export function Prompt(options: IChoice[]) {
 		const parse: any = {
 
 		};

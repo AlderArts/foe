@@ -2,7 +2,7 @@ import * as _ from "lodash";
 
 import { Encounter } from "./combat";
 import { DamageType, IDamageType } from "./damagetype";
-import { Entity } from "./entity";
+import { Entity, ICombatEncounter, ICombatOrder } from "./entity";
 import { GAME } from "./GAME";
 import { Gui } from "./gui";
 import { Party } from "./party";
@@ -150,13 +150,13 @@ export class Ability {
 		return "NO DESC";
 	}
 
-	public StartCast(encounter: Encounter, caster: Entity, target: Entity|Party) {
+	public StartCast(encounter: ICombatEncounter, caster: Entity, target: Entity|Party) {
 		_.each(this.onCast, function(node) {
 			node(this, encounter, caster, target);
 		});
 	}
 
-	public CastInternal(encounter: Encounter, caster: Entity, target: Entity|Party) {
+	public CastInternal(encounter: ICombatEncounter, caster: Entity, target: Entity|Party) {
 		_.each(this.castTree, function(node) {
 			node(this, encounter, caster, target);
 		});
@@ -165,7 +165,7 @@ export class Ability {
 	}
 
 	// Used as entrypoint for PC/Party (active selection)
-	public OnSelect(encounter: Encounter, caster: Entity, backPrompt?: CallableFunction, ext?: any) {
+	public OnSelect(encounter: ICombatEncounter, caster: Entity, backPrompt?: CallableFunction, ext?: any) {
 		const ability = this;
 		// TODO: Buttons (use portraits for target?)
 
@@ -340,7 +340,7 @@ export class Ability {
 		}
 	}
 
-	public Use(encounter: Encounter, caster: Entity, target: Entity|Party, ext?: any, retarget?: CallableFunction) {
+	public Use(encounter: ICombatEncounter, caster: Entity, target: Entity|Party, ext?: any, retarget?: CallableFunction) {
 		Ability.ApplyCost(this, caster);
 		this.StartCast(encounter, caster, target);
 
@@ -376,13 +376,13 @@ export class Ability {
 		this.CastInternal(undefined, caster, target);
 	}
 
-	public enabledCondition(encounter: Encounter, caster: Entity) {
+	public enabledCondition(encounter: ICombatEncounter, caster: Entity) {
 		const onCooldown = encounter ? this.OnCooldown(caster.GetCombatEntry(encounter)) : false;
 
 		return Ability.EnabledCost(this, caster) && !onCooldown;
 	}
 
-	public OnCooldown(casterEntry: any) {
+	public OnCooldown(casterEntry: ICombatOrder) {
 		const ability = this;
 		let onCooldown = 0;
 		_.each(casterEntry.cooldown, (c) => {
@@ -394,7 +394,7 @@ export class Ability {
 		return onCooldown;
 	}
 
-	public enabledTargetCondition(encounter: Encounter, caster: Entity, target: Entity) {
+	public enabledTargetCondition(encounter: ICombatEncounter, caster: Entity, target: Entity) {
 		return true;
 	}
 
