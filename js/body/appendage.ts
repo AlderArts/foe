@@ -1,4 +1,5 @@
 
+import { IStorage } from "../istorage";
 import { Text } from "../text";
 import { BodyPart } from "./bodypart";
 import { Color } from "./color";
@@ -32,7 +33,7 @@ export class Appendage extends BodyPart {
 		return storage;
 	}
 
-	public FromStorage(storage: any) {
+	public FromStorage(storage: IStorage) {
 		storage = storage || {};
 		this.race   = RaceDesc.IdToRace[parseInt(storage.race, 10)] || this.race;
 		this.color  = parseInt(storage.col, 10)    || this.color;

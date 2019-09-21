@@ -11,6 +11,8 @@ import { HairStyle } from "../../body/hair";
 import { Entity, ICombatEncounter, ICombatOrder } from "../../entity";
 import { GAME, NAV, WORLD, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
+import { IStorage } from "../../istorage";
+import { ILocation } from "../../location";
 import { Stat } from "../../stat";
 import { Text } from "../../text";
 import { ITime, Time } from "../../time";
@@ -24,7 +26,7 @@ export class Lei extends Entity {
 	public taskTimer: Time;
 	public sparTimer: Time;
 
-	constructor(storage?: any) {
+	constructor(storage?: IStorage) {
 		super();
 
 		this.ID = "lei";
@@ -128,7 +130,7 @@ export class Lei extends Entity {
 	}
 
 	// Schedule
-	public IsAtLocation(location: any) {
+	public IsAtLocation(location: ILocation) {
 		// Numbers/slacking/sleep
 		if (location === WORLD().loc.Rigard.Inn.Common && this.timeout.Expired()) {
 			return (WorldTime().hour >= 14 && WorldTime().hour < 23);

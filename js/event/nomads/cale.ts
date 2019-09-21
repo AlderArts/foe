@@ -8,8 +8,10 @@ import { Color } from "../../body/color";
 import { Race } from "../../body/race";
 import { Entity } from "../../entity";
 import { GAME, WORLD, WorldTime } from "../../GAME";
+import { IStorage } from "../../istorage";
 import { Item } from "../../item";
 import { IngredientItems } from "../../items/ingredients";
+import { ILocation } from "../../location";
 import { Shop } from "../../shop";
 import { TF } from "../../tf";
 import { CaleFlags } from "./cale-flags";
@@ -18,7 +20,7 @@ export class Cale extends Entity {
 	public shop: Shop;
 	public shopItems: Item[];
 
-	constructor(storage?: any) {
+	constructor(storage?: IStorage) {
 		super();
 
 		this.ID = "cale";
@@ -119,7 +121,7 @@ export class Cale extends Entity {
 		return this.flags.Met2 >= CaleFlags.Met2.Goop;
 	}
 
-	public FromStorage(storage: any) {
+	public FromStorage(storage: IStorage) {
 		this.Butt().virgin       = parseInt(storage.virgin, 10) === 1;
 
 		this.LoadPersonalityStats(storage);
@@ -134,8 +136,8 @@ export class Cale extends Entity {
 	}
 
 	public ToStorage() {
-		const storage: any = {
-			virgin : this.Butt().virgin ? 1 : 0,
+		const storage: IStorage = {
+			virgin : (this.Butt().virgin ? 1 : 0).toString(),
 		};
 
 		this.SavePersonalityStats(storage);
@@ -147,7 +149,7 @@ export class Cale extends Entity {
 	}
 
 	// Schedule
-	public IsAtLocation(location?: any) {
+	public IsAtLocation(location?: ILocation) {
 		location = location || GAME().party.location;
 		if (location === WORLD().loc.Plains.Nomads.Fireplace) {
 			return GAME().cale.flags.Met !== 0 && (WorldTime().hour >= 15 || WorldTime().hour < 3);

@@ -19,11 +19,12 @@ import { Terry } from "../event/terry";
 import { GAME, MoveToLocation, TimeStep, WORLD, WorldTime } from "../GAME";
 import { GameState, SetGameState } from "../gamestate";
 import { Gui } from "../gui";
+import { IStorage } from "../istorage";
 import { IChoice, Link } from "../link";
 import { SetGameOverButton } from "../main-gameover";
 import { Party } from "../party";
 import { Text } from "../text";
-import { Season } from "../time";
+import { ITime, Season } from "../time";
 import { DryadGladeFlags } from "./glade-flags";
 
 export function InitGlade() {
@@ -33,7 +34,7 @@ export function InitGlade() {
 export class DryadGlade {
 	public flags: any;
 
-	constructor(storage?: any) {
+	constructor(storage?: IStorage) {
 		this.flags = {};
 
 		this.flags.Visit = DryadGladeFlags.Visit.NotVisited;
@@ -42,18 +43,18 @@ export class DryadGlade {
 	}
 
 	public ToStorage() {
-		const storage: any = {};
+		const storage: IStorage = {};
 		storage.flags = this.flags;
 		return storage;
 	}
 
-	public FromStorage(storage: any) {
+	public FromStorage(storage: IStorage) {
 		_.forIn(storage.flags, (value, key) => {
-			this.flags[key] = parseInt(value, 10);
+			this.flags[key] = parseInt(value as string, 10);
 		});
 	}
 
-	public Update(step: number) {
+	public Update(step: ITime) {
 
 	}
 

@@ -5,10 +5,23 @@ import { BodyPart } from "./bodypart";
 import { Hair } from "./hair";
 import { RaceDesc } from "./race";
 
+export interface IMouth {
+	capacity: Stat;
+	tongue: BodyPart;
+}
+
+class Eyes extends BodyPart {
+	public count: Stat;
+	constructor() {
+		super();
+		this.count = new Stat(2);
+	}
+}
+
 export class Head extends BodyPart {
-	public mouth: any;
+	public mouth: IMouth;
 	public hair: Hair;
-	public eyes: any;
+	public eyes: Eyes;
 	public ears: BodyPart;
 	public appendages: Appendage[];
 
@@ -20,8 +33,7 @@ export class Head extends BodyPart {
 			tongue       : new BodyPart(),
 		};
 		this.hair = new Hair();
-		this.eyes = new BodyPart();
-		this.eyes.count = new Stat(2);
+		this.eyes = new Eyes();
 		this.ears = new BodyPart();
 		// Appendages (antenna etc)
 		this.appendages = [];

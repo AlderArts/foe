@@ -9,6 +9,7 @@ import { Race } from "../body/race";
 import { Entity } from "../entity";
 import { GAME, NAV, TimeStep, WORLD, WorldTime } from "../GAME";
 import { Gui } from "../gui";
+import { IStorage } from "../istorage";
 import { ArmorItems } from "../items/armor";
 import { WeaponsItems } from "../items/weapons";
 import { JobDesc, Jobs } from "../job";
@@ -22,7 +23,7 @@ import { MirandaFlags } from "./miranda-flags";
 export class Miranda extends Entity {
 	public snitchTimer: Time;
 
-	constructor(storage?: any) {
+	constructor(storage?: IStorage) {
 		super();
 
 		this.ID = "miranda";

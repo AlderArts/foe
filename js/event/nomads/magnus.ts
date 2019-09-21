@@ -12,6 +12,7 @@ import { Entity } from "../../entity";
 import { Sex } from "../../entity-sex";
 import { GAME, GameCache, TimeStep, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
+import { IStorage } from "../../istorage";
 import { AlchemyItems } from "../../items/alchemy";
 import { IChoice } from "../../link";
 import { Party } from "../../party";
@@ -24,7 +25,7 @@ import { Player } from "../player";
 import { MagnusFlags } from "./magnus-flags";
 
 export class Magnus extends Entity {
-	constructor(storage?: any) {
+	constructor(storage?: IStorage) {
 		super();
 
 		this.ID = "magnus";
@@ -56,7 +57,7 @@ export class Magnus extends Entity {
 		return this.flags.Met !== 0;
 	}
 
-	public FromStorage(storage: any) {
+	public FromStorage(storage: IStorage) {
 		this.LoadPersonalityStats(storage);
 
 		// Load flags
@@ -65,7 +66,7 @@ export class Magnus extends Entity {
 	}
 
 	public ToStorage() {
-		const storage = {};
+		const storage: IStorage = {};
 
 		this.SavePersonalityStats(storage);
 

@@ -7,6 +7,7 @@ import { EncounterTable } from "../../encountertable";
 import { Entity } from "../../entity";
 import { GAME, StepToHour, TimeStep, WORLD, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
+import { IStorage } from "../../istorage";
 import { Item, ItemIds } from "../../item";
 import { IngredientItems } from "../../items/ingredients";
 import { Jobs } from "../../job";
@@ -35,7 +36,7 @@ export class Aquilius extends Entity {
 	public helpTimer: Time;
 	public herbIngredient: Item;
 
-	constructor(storage?: any) {
+	constructor(storage?: IStorage) {
 		super();
 
 		this.ID = "aquilius";

@@ -5,6 +5,7 @@ import * as _ from "lodash";
 
 import { CurEncounter } from "./combat-data";
 import { DamageType } from "./damagetype";
+import { IStorage } from "./istorage";
 
 export enum StatusEffect {
 	Burn     = 0, // OK
@@ -471,14 +472,14 @@ export namespace Status {
 		}
 	};
 	Aroused.ToStorage = function() {
-		const ret: any = {};
+		const ret: IStorage = {};
 		if (this.hours) { ret.hours = this.hours.toFixed(2); }
 
 		if (this.fer !== 0) { ret.fer = this.fer.toFixed(2); }
 
 		return ret;
 	};
-	Aroused.FromStorage = (storage: any = {}) => {
+	Aroused.FromStorage = (storage: IStorage = {}) => {
 		const obj: any = {};
 		if (storage.hours) { obj.hours = parseFloat(storage.hours); }
 
@@ -528,14 +529,14 @@ export namespace Status {
 		}
 	};
 	Limp.ToStorage = function() {
-		const ret: any = {};
+		const ret: IStorage = {};
 		if (this.hours) { ret.hours = this.hours.toFixed(2); }
 
 		if (this.fer !== 0) { ret.fer = this.fer.toFixed(2); }
 
 		return ret;
 	};
-	Limp.FromStorage = (storage: any = {}) => {
+	Limp.FromStorage = (storage: IStorage = {}) => {
 		const obj: any = {};
 		if (storage.hours) { obj.hours = parseFloat(storage.hours); }
 
@@ -612,13 +613,13 @@ export namespace Status {
 		}
 	};
 	Full.ToStorage = function() {
-		const ret: any = {};
+		const ret: IStorage = {};
 		if (this.hours) { ret.hours = this.hours.toFixed(2); }
 		if (this.exp) {   ret.exp   = this.exp.toFixed(2); }
 
 		return ret;
 	};
-	Full.FromStorage = (storage: any = {}) => {
+	Full.FromStorage = (storage: IStorage = {}) => {
 		const obj: any = {};
 		if (storage.hours) { obj.hours = parseFloat(storage.hours); }
 		if (storage.exp) {   obj.exp   = parseFloat(storage.exp); }
@@ -749,7 +750,7 @@ export namespace Status {
 		}
 	};
 	Buff.ToStorage = function() {
-		const ret: any = {};
+		const ret: IStorage = {};
 		if (this.hours) { ret.hours = this.hours.toFixed(2); }
 
 		if (this.Str) { ret.Str = this.Str.toFixed(2); }
@@ -764,7 +765,7 @@ export namespace Status {
 		if (this.LP) {  ret.LP  = this.LP.toFixed(2); }
 		return ret;
 	};
-	Buff.FromStorage = (storage: any = {}) => {
+	Buff.FromStorage = (storage: IStorage = {}) => {
 		const obj: any = {};
 		if (storage.hours) { obj.hours = parseFloat(storage.hours); }
 

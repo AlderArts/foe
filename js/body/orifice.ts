@@ -1,4 +1,5 @@
 
+import { IStorage } from "../istorage";
 import { Womb } from "../pregnancy";
 import { Stat } from "../stat";
 import { Text } from "../text";
@@ -35,10 +36,10 @@ export class Orifice {
 	static get Tightness() { return TightnessEnum; }
 
 	public ToStorage(full?: boolean) {
-		const storage: any = {
+		const storage: IStorage = {
 			cap    : this.capacity.base.toFixed(2),
 			str    : this.stretch.base.toFixed(2),
-			virgin : this.virgin ? 1 : 0,
+			virgin : (this.virgin ? 1 : 0).toString(),
 		};
 		if (full) {
 			storage.mstr = this.minStretch.base.toFixed(2);
@@ -46,7 +47,7 @@ export class Orifice {
 		return storage;
 	}
 
-	public FromStorage(storage: any) {
+	public FromStorage(storage: IStorage) {
 		storage = storage || {};
 		this.capacity.base   = parseFloat(storage.cap)  || this.capacity.base;
 		this.minStretch.base = parseFloat(storage.mstr) || this.minStretch.base;

@@ -10,6 +10,7 @@ import { EncounterTable } from "../../encountertable";
 import { Entity } from "../../entity";
 import { GAME, TimeStep } from "../../GAME";
 import { Gui } from "../../gui";
+import { IStorage } from "../../istorage";
 import { IChoice } from "../../link";
 import { Text } from "../../text";
 import { TF } from "../../tf";
@@ -26,7 +27,7 @@ enum BastetState {
 }
 
 export class Bastet extends Entity {
-	constructor(storage?: any) {
+	constructor(storage?: IStorage) {
 		super();
 
 		this.flags.State = BastetState.NotViewed;
@@ -41,13 +42,13 @@ export class Bastet extends Entity {
 		return this.flags.State === BastetState.NotViewed;
 	}
 
-	public FromStorage(storage: any) {
+	public FromStorage(storage: IStorage) {
 		// Load flags
 		this.LoadFlags(storage);
 	}
 
 	public ToStorage() {
-		const storage = {};
+		const storage: IStorage = {};
 
 		this.SaveFlags(storage);
 

@@ -6,8 +6,8 @@
 
 import { Abilities } from "../../abilities";
 import { Images } from "../../assets";
-import { Body } from "../../body/body";
 import { LowerBodyType } from "../../body/body";
+import { Body } from "../../body/body";
 import { BodyPartType } from "../../body/bodypart";
 import { Color } from "../../body/color";
 import { Orifice } from "../../body/orifice";
@@ -20,6 +20,7 @@ import { Sex } from "../../entity-sex";
 import { GAME, MoveToLocation, TimeStep, WORLD } from "../../GAME";
 import { GameState, SetGameState } from "../../gamestate";
 import { Gui } from "../../gui";
+import { IStorage } from "../../istorage";
 import { ArmorItems } from "../../items/armor";
 import { WeaponsItems } from "../../items/weapons";
 import { IChoice } from "../../link";
@@ -31,7 +32,7 @@ import { GolemFlags } from "./golem-flags";
 import { JeanneScenes } from "./jeanne-scenes";
 
 export class GolemBoss extends BossEntity {
-	constructor(storage?: any) {
+	constructor(storage?: IStorage) {
 		super();
 
 		this.ID = "golem";
@@ -92,7 +93,7 @@ export class GolemBoss extends BossEntity {
 		return drops;
 	}
 
-	public FromStorage(storage: any) {
+	public FromStorage(storage: IStorage) {
 		// Personality stats
 
 		// Load flags
@@ -100,7 +101,7 @@ export class GolemBoss extends BossEntity {
 	}
 
 	public ToStorage() {
-		const storage = {};
+		const storage: IStorage = {};
 		this.SaveFlags(storage);
 
 		return storage;

@@ -1,5 +1,6 @@
 import * as _ from "lodash";
 
+import { IStorage } from "../istorage";
 import { Stat } from "../stat";
 import { Text } from "../text";
 import { Orifice } from "./orifice";
@@ -13,14 +14,14 @@ export class Butt extends Orifice {
 	}
 
 	public ToStorage(full?: boolean) {
-		const storage: any = super.ToStorage(full);
+		const storage: IStorage = super.ToStorage(full);
 		if (full) {
 			storage.size = this.buttSize.base.toFixed(2);
 		}
 		return storage;
 	}
 
-	public FromStorage(storage: any) {
+	public FromStorage(storage: IStorage) {
 		storage = storage || {};
 		super.FromStorage(storage);
 		this.buttSize.base   = parseFloat(storage.size) || this.buttSize.base;

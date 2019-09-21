@@ -8,10 +8,11 @@ import { AppendageType } from "../../body/appendage";
 import { Color } from "../../body/color";
 import { Race } from "../../body/race";
 import { Entity } from "../../entity";
+import { IStorage } from "../../istorage";
 import { TF } from "../../tf";
 
 export class Vena extends Entity {
-	constructor(storage?: any) {
+	constructor(storage?: IStorage) {
 		super();
 
 		this.ID = "vena";
@@ -40,7 +41,7 @@ export class Vena extends Entity {
 		if (storage) { this.FromStorage(storage); }
 	}
 
-	public FromStorage(storage: any) {
+	public FromStorage(storage: IStorage) {
 		this.LoadPersonalityStats(storage);
 
 		// Load flags
@@ -48,7 +49,7 @@ export class Vena extends Entity {
 	}
 
 	public ToStorage() {
-		const storage = {};
+		const storage: IStorage = {};
 
 		this.SavePersonalityStats(storage);
 

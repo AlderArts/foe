@@ -10,6 +10,7 @@ import { CvetaFlags } from "./event/outlaws/cveta-flags";
 import { MariaFlags } from "./event/outlaws/maria-flags";
 import { TerryFlags } from "./event/terry-flags";
 import { GAME } from "./GAME";
+import { IStorage } from "./istorage";
 import { Text } from "./text";
 
 const Jobs: any = {};
@@ -164,12 +165,12 @@ export class JobDesc {
 	}
 	public ToStorage() {
 		if (this.level <= 1 && this.experience === 0) { return undefined; }
-		const storage: any = {};
-		if (this.level      !== 1) { storage.lvl = Math.floor(this.level); }
-		if (this.experience !== 0) { storage.exp = Math.floor(this.experience); }
+		const storage: IStorage = {};
+		if (this.level      !== 1) { storage.lvl = Math.floor(this.level).toString(); }
+		if (this.experience !== 0) { storage.exp = Math.floor(this.experience).toString(); }
 		return storage;
 	}
-	public FromStorage(storage: any) {
+	public FromStorage(storage: IStorage) {
 		if (storage) {
 			this.level      = parseInt(storage.lvl, 10) || this.level;
 			this.experience = parseInt(storage.exp, 10) || this.experience;

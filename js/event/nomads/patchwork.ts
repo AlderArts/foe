@@ -8,6 +8,7 @@ import { Gender } from "../../body/gender";
 import { Entity } from "../../entity";
 import { GAME } from "../../GAME";
 import { Gui } from "../../gui";
+import { IStorage } from "../../istorage";
 import { AlchemyItems } from "../../items/alchemy";
 import { CombatItems } from "../../items/combatitems";
 import { IngredientItems } from "../../items/ingredients";
@@ -28,7 +29,7 @@ export const PatchworkFlags = {
 export class Patchwork extends Entity {
 	public Shop: Shop;
 
-	constructor(storage?: any) {
+	constructor(storage?: IStorage) {
 		super();
 
 		this.ID = "patchwork";
@@ -91,7 +92,7 @@ export class Patchwork extends Entity {
 		return this.flags.Met >= PatchworkFlags.Met.Met;
 	}
 
-	public FromStorage(storage: any) {
+	public FromStorage(storage: IStorage) {
 		this.body.FromStorage(storage.body);
 		this.LoadPersonalityStats(storage);
 		this.LoadFlags(storage);
@@ -99,7 +100,7 @@ export class Patchwork extends Entity {
 	}
 
 	public ToStorage() {
-		const storage = {};
+		const storage: IStorage = {};
 
 		this.SaveBodyPartial(storage, {ass: true, vag: true});
 

@@ -7,6 +7,7 @@ import { Images } from "../../assets";
 import { Color } from "../../body/color";
 import { Entity } from "../../entity";
 import { GAME, WorldTime } from "../../GAME";
+import { IStorage } from "../../istorage";
 import { JobDesc, Jobs } from "../../job";
 import { ILocation } from "../../location";
 import { ITime, Time } from "../../time";
@@ -16,7 +17,7 @@ export class Cveta extends Entity {
 	public violinTimer: Time;
 	public flirtTimer: Time;
 
-	constructor(storage?: any) {
+	constructor(storage?: IStorage) {
 		super();
 
 		this.ID = "cveta";
@@ -100,8 +101,8 @@ export class Cveta extends Entity {
 
 	public ToStorage() {
 		const storage: any = {
-			virgin  : this.FirstVag().virgin ? 1 : 0,
-			avirgin : this.Butt().virgin ? 1 : 0,
+			virgin  : (this.FirstVag().virgin ? 1 : 0).toString(),
+			avirgin : (this.Butt().virgin ? 1 : 0).toString(),
 		};
 
 		storage.Vtime = this.violinTimer.ToStorage();

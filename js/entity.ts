@@ -16,6 +16,7 @@ import { Butt } from "./body/butt";
 import { Cock } from "./body/cock";
 import { Color } from "./body/color";
 import { Gender } from "./body/gender";
+import { IMouth } from "./body/head";
 import { Orifice } from "./body/orifice";
 import { Race, RaceDesc, RaceScore } from "./body/race";
 import { Vagina } from "./body/vagina";
@@ -25,10 +26,12 @@ import { EntityDict } from "./entity-dict";
 import { EntityMenu } from "./entity-menu";
 import { GAME } from "./GAME";
 import { Gui } from "./gui";
+import { IStorage } from "./istorage";
 import { Item, ItemIds } from "./item";
 import { ItemToy } from "./items/toy-item";
 import { Jobs } from "./job";
 import { LactationHandler } from "./lactation";
+import { ILocation } from "./location";
 import { Perk, PerkIds } from "./perks";
 import { PregnancyHandler, Womb } from "./pregnancy";
 import { Stat } from "./stat";
@@ -401,7 +404,7 @@ export class Entity {
 		return true;
 	}
 
-	public ItemUse(item: Item, backPrompt: any) {
+	public ItemUse(item: Item, backPrompt: CallableFunction) {
 		return {grab : false, consume : true};
 	}
 
@@ -481,7 +484,7 @@ export class Entity {
 		}
 	}
 
-	public IsAtLocation(location: any) {
+	public IsAtLocation(location: ILocation) {
 		return (this.location === location);
 	}
 
@@ -1332,7 +1335,7 @@ export class Entity {
 
 	/* ENTITY SAVE */
 
-	public SaveSexFlags(storage: any) {
+	public SaveSexFlags(storage: IStorage) {
 		const sex: any = {};
 		if (this.sex.rBlow !== 0) { sex.rBlow = this.sex.rBlow; }
 		if (this.sex.gBlow !== 0) { sex.gBlow = this.sex.gBlow; }
@@ -1347,7 +1350,7 @@ export class Entity {
 		storage.sex = sex;
 	}
 
-	public SaveCombatStats(storage: any) {
+	public SaveCombatStats(storage: IStorage) {
 		storage.name     = this.name;
 		storage.exp      = this.experience.toFixed();
 		storage.points   = this.pendingStatPoints.toFixed();
@@ -1396,7 +1399,7 @@ export class Entity {
 		}
 	}
 
-	public SavePersonalityStats(storage: any) {
+	public SavePersonalityStats(storage: IStorage) {
 		// Personality stats
 		if (this.subDom.base   !== 0) { storage.subDom = this.subDom.base.toFixed(); }
 		if (this.slut.base     !== 0) { storage.slut   = this.slut.base.toFixed(); }
@@ -1404,7 +1407,7 @@ export class Entity {
 		if (this.drunkLevel    !== 0) { storage.drunk  = this.drunkLevel.toFixed(2); }
 	}
 
-	public SaveFlags(storage: any) {
+	public SaveFlags(storage: IStorage) {
 		const flags: any = {};
 		_.forIn (this.flags, (flag, key) => {
 			if (flag !== 0) {
@@ -1444,7 +1447,7 @@ export class Entity {
 		}
 	}
 
-	public SaveEquipment(storage: any) {
+	public SaveEquipment(storage: IStorage) {
 		// Equipment
 		if (this.weaponSlot) {   storage.wep    = this.weaponSlot.id; }
 		if (this.topArmorSlot) { storage.toparm = this.topArmorSlot.id; }
@@ -1455,7 +1458,7 @@ export class Entity {
 		if (this.strapOn) {      storage.toy    = this.strapOn.id; }
 	}
 
-	public SavePregnancy(storage: any) {
+	public SavePregnancy(storage: IStorage) {
 		storage.preg = this.pregHandler.ToStorage();
 	}
 
@@ -1472,13 +1475,13 @@ export class Entity {
 	*       breasts
 	*       full
 	*/
-	public SaveBodyPartial(storage: any, opts: any) {
+	public SaveBodyPartial(storage: IStorage, opts: any) {
 		storage.body = this.body.ToStoragePartial(opts);
 	}
 
 	// Convert to a format easy to write to/from memory
 	public ToStorage() {
-		const storage: any = {};
+		const storage: IStorage = {};
 
 		storage.body = this.body.ToStorage();
 
@@ -1497,7 +1500,7 @@ export class Entity {
 		return storage;
 	}
 
-	public LoadCombatStats(storage: any) {
+	public LoadCombatStats(storage: IStorage) {
 		this.name              = storage.name  || this.name;
 		this.monsterName       = storage.mName || this.monsterName;
 		this.MonsterName       = storage.MName || this.MonsterName;
@@ -1539,13 +1542,13 @@ export class Entity {
 		this.LoadStatusEffects(storage);
 	}
 
-	public LoadStatusEffects(storage: any) {
+	public LoadStatusEffects(storage: IStorage) {
 		if (storage.stat) {
 			this.combatStatus.FromStorage(storage.stat);
 		}
 	}
 
-	public LoadPersonalityStats(storage: any) {
+	public LoadPersonalityStats(storage: IStorage) {
 		// Personality stats
 		this.subDom.base   = parseInt(storage.subDom, 10) || this.subDom.base;
 		this.slut.base     = parseInt(storage.slut, 10)   || this.slut.base;
@@ -1562,7 +1565,7 @@ export class Entity {
 		}
 	}
 
-	public LoadJobs(storage: any) {
+	public LoadJobs(storage: IStorage) {
 		if (storage.jobs) {
 			_.forIn(this.jobs, (jd, key) => {
 				jd.FromStorage(storage.jobs[jd.job.name]);
@@ -1573,7 +1576,7 @@ export class Entity {
 		}
 	}
 
-	public LoadEquipment(storage: any) {
+	public LoadEquipment(storage: IStorage) {
 		if (storage.wep) {    this.weaponSlot   = ItemIds[storage.wep]; }
 		if (storage.toparm) { this.topArmorSlot = ItemIds[storage.toparm]; }
 		if (storage.botarm) { this.botArmorSlot = ItemIds[storage.botarm]; }
@@ -1595,7 +1598,7 @@ export class Entity {
 		});
 	}
 
-	public LoadPerks(storage: any) {
+	public LoadPerks(storage: IStorage) {
 		if (storage.perks) {
 			this.perks = [];
 			for (const perkId of storage.perks) {
@@ -1604,7 +1607,7 @@ export class Entity {
 		}
 	}
 
-	public LoadPregnancy(storage: any) {
+	public LoadPregnancy(storage: IStorage) {
 		this.pregHandler.FromStorage(storage.preg);
 	}
 
@@ -1612,7 +1615,7 @@ export class Entity {
 		this.lactHandler.FromStorage(storage.lact);
 	}
 
-	public FromStorage(storage: any) {
+	public FromStorage(storage: IStorage) {
 		storage = storage || {};
 
 		if (storage.body) {
@@ -2564,7 +2567,7 @@ export class Entity {
 	}
 
 	// Fuck entitys mouth (vag, cock)
-	public FuckOral(mouth: any, cock: Cock, expMult?: number) {
+	public FuckOral(mouth: IMouth, cock: Cock, expMult?: number) {
 		expMult = expMult || 1;
 		this.AddSexExp(expMult);
 		// TODO: Stretch

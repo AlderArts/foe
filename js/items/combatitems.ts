@@ -4,7 +4,7 @@ import { AbilityNode } from "../ability/node";
 import { Encounter } from "../combat";
 import { Entity, ICombatEncounter } from "../entity";
 import { Inventory } from "../inventory";
-import { Item } from "../item";
+import { Item, ItemType } from "../item";
 import { Status } from "../statuseffect";
 import { Text } from "../text";
 
@@ -46,7 +46,7 @@ export class CombatItem extends Item {
 	public consume: boolean;
 	public combat: CombatItemAbility;
 
-	constructor(id: string, name: string, type?: any) {
+	constructor(id: string, name: string, type?: ItemType) {
 		super(id, name, type);
 		this.consume = true;
 		this.combat = new CombatItemAbility(this);

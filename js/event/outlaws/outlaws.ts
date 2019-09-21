@@ -7,6 +7,7 @@ import { GetDEBUG } from "../../../app";
 import { EncounterTable } from "../../encountertable";
 import { GAME, TimeStep, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
+import { IStorage } from "../../istorage";
 import { QuestItems } from "../../items/quest";
 import { Jobs } from "../../job";
 import { IChoice } from "../../link";
@@ -27,7 +28,7 @@ export class Outlaws {
 	public mainQuestTimer: Time;
 	public factTimer: Time;
 
-	constructor(storage?: any) {
+	constructor(storage?: IStorage) {
 		this.flags = {};
 
 		this.flags.Met = 0;
@@ -60,7 +61,7 @@ export class Outlaws {
 	public FromStorage(storage: any) {
 		// Load flags
 		_.forIn(storage.flags, (value, key) => {
-			this.flags[key] = parseInt(value, 10);
+			this.flags[key] = parseInt(value as string, 10);
 		});
 		this.relation.base = !isNaN(parseInt(storage.rep, 10)) ? parseInt(storage.rep, 10) : this.relation.base;
 

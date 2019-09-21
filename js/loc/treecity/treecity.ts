@@ -4,6 +4,7 @@
  *
  */
 import * as _ from "lodash";
+import { IStorage } from "../../istorage";
 
 // Create namespace
 const TreeCityLoc: any = {};
@@ -13,7 +14,7 @@ const TreeCityScenes: any = {};
 export class TreeCity {
 	public flags: any;
 
-	constructor(storage?: any) {
+	constructor(storage?: IStorage) {
 		this.flags = {};
 
 		// Have been to tree city
@@ -23,17 +24,17 @@ export class TreeCity {
 	}
 
 	public ToStorage() {
-		const storage: any = {};
+		const storage: IStorage = {};
 
 		storage.flags = this.flags;
 
 		return storage;
 	}
 
-	public FromStorage(storage: any) {
+	public FromStorage(storage: IStorage) {
 		// Load flags
 		_.forIn(storage.flags, (value, key) => {
-			this.flags[key] = parseInt(value, 10);
+			this.flags[key] = parseInt(value as string, 10);
 		});
 	}
 

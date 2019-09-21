@@ -12,8 +12,10 @@ import { Race } from "../../body/race";
 import { BossEntity } from "../../enemy/boss";
 import { Entity, ICombatEncounter, ICombatOrder } from "../../entity";
 import { GAME, WORLD, WorldTime } from "../../GAME";
+import { IStorage } from "../../istorage";
 import { AlchemyItems } from "../../items/alchemy";
 import { AlchemySpecial } from "../../items/alchemyspecial";
+import { ILocation } from "../../location";
 import { TF } from "../../tf";
 import { ITime, Time } from "../../time";
 import { OpheliaFlags } from "./ophelia-flags";
@@ -21,7 +23,7 @@ import { OpheliaFlags } from "./ophelia-flags";
 export class Ophelia extends Entity {
 	public burrowsCountdown: Time;
 
-	constructor(storage?: any) {
+	constructor(storage?: IStorage) {
 		super();
 
 		this.ID = "ophelia";
@@ -86,7 +88,7 @@ export class Ophelia extends Entity {
 		return this.burrowsCountdown.Expired();
 	}
 
-	public IsAtLocation(location?: any) {
+	public IsAtLocation(location?: ILocation) {
 		location = location || GAME().party.location;
 		if (location === WORLD().loc.Burrows.Lab) {
 			if (this.Recruited()) { return false; }

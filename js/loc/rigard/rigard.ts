@@ -14,6 +14,7 @@ import { LeiScenes } from "../../event/royals/lei-scenes";
 import { LeiTaskScenes } from "../../event/royals/lei-tasks";
 import { TerryScenes } from "../../event/terry-scenes";
 import { WorldTime } from "../../GAME";
+import { IStorage } from "../../istorage";
 import { ArmorItems } from "../../items/armor";
 import { StrapOnItems } from "../../items/strapon";
 import { WeaponsItems } from "../../items/weapons";
@@ -82,7 +83,7 @@ export class Rigard {
 
 	public alianaRel: Stat;
 
-	constructor(storage?: any) {
+	constructor(storage?: IStorage) {
 		this.flags = {};
 
 		// TODO: Store
@@ -201,25 +202,25 @@ export class Rigard {
 		}
 		// Load flags
 		_.forIn(storage.flags, (value, key) => {
-			this.flags[key] = parseInt(value, 10);
+			this.flags[key] = parseInt(value as string, 10);
 		});
 		_.forIn(storage.twoP, (value, key) => {
-			this.Twopenny[key] = parseInt(value, 10);
+			this.Twopenny[key] = parseInt(value as string, 10);
 		});
 		_.forIn(storage.Krawitz, (value, key) => {
-			this.Krawitz[key] = parseInt(value, 10);
+			this.Krawitz[key] = parseInt(value as string, 10);
 		});
 		_.forIn(storage.Brothel, (value, key) => {
-			this.Brothel[key] = parseInt(value, 10);
+			this.Brothel[key] = parseInt(value as string, 10);
 		});
 		_.forIn(storage.CW, (value, key) => {
-			this.CW[key] = parseInt(value, 10);
+			this.CW[key] = parseInt(value as string, 10);
 		});
 		if (storage.cwrel) {
 			this.cwrel.base = parseInt(storage.cwrel, 10) || this.cwrel.base;
 		}
 		_.forIn(storage.LB, (value, key) => {
-			this.LB[key] = parseInt(value, 10);
+			this.LB[key] = parseInt(value as string, 10);
 		});
 
 		this.MagicShop.FromStorage(storage.MS);

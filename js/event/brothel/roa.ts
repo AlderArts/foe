@@ -10,12 +10,13 @@ import { Race } from "../../body/race";
 import { Entity } from "../../entity";
 import { GAME, NAV } from "../../GAME";
 import { Gui } from "../../gui";
+import { IStorage } from "../../istorage";
 import { ILocation } from "../../location";
 import { Text } from "../../text";
 import { RoaFlags } from "./roa-flags";
 
 export class Roa extends Entity {
-	constructor(storage?: any) {
+	constructor(storage?: IStorage) {
 		super();
 
 		this.ID = "roa";
@@ -71,7 +72,7 @@ export class Roa extends Entity {
 		return false;
 	}
 
-	public FromStorage(storage: any) {
+	public FromStorage(storage: IStorage) {
 		this.LoadPersonalityStats(storage);
 
 		// Load flags
@@ -80,7 +81,7 @@ export class Roa extends Entity {
 	}
 
 	public ToStorage() {
-		const storage: any = {};
+		const storage: IStorage = {};
 
 		this.SavePersonalityStats(storage);
 

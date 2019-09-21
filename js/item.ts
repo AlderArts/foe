@@ -47,6 +47,7 @@ export class Item {
 	public Use: any;
 	public effect: any;
 	public isTF: boolean;
+	public combat: any;
 
 	constructor(id: string, name: string, type: ItemType) {
 		// Required (An item will always have these)

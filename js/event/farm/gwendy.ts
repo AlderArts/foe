@@ -11,12 +11,14 @@ import { HairStyle } from "../../body/hair";
 import { Entity } from "../../entity";
 import { GAME, NAV, TimeStep, WORLD, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
+import { IStorage } from "../../istorage";
 import { IChoice } from "../../link";
+import { ILocation } from "../../location";
 import { Text } from "../../text";
 
 // TODO: FIX STATS
 export class Gwendy extends Entity {
-	constructor(storage?: any) {
+	constructor(storage?: IStorage) {
 		super();
 
 		this.ID = "gwendy";
@@ -85,7 +87,7 @@ export class Gwendy extends Entity {
 		return false;
 	}
 
-	public FromStorage(storage: any) {
+	public FromStorage(storage: IStorage) {
 		this.LoadPersonalityStats(storage);
 
 		// Load flags
@@ -94,7 +96,7 @@ export class Gwendy extends Entity {
 	}
 
 	public ToStorage() {
-		const storage = {};
+		const storage: IStorage = {};
 
 		this.SavePersonalityStats(storage);
 
@@ -105,7 +107,7 @@ export class Gwendy extends Entity {
 	}
 
 	// Schedule
-	public IsAtLocation(location: any) {
+	public IsAtLocation(location: ILocation) {
 		const world = WORLD();
 		// Numbers/slacking/sleep
 		if     (location === world.loc.Farm.Loft) {

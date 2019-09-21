@@ -10,6 +10,7 @@ import { Race } from "../body/race";
 import { Entity } from "../entity";
 import { GAME } from "../GAME";
 import { Gui } from "../gui";
+import { IStorage } from "../istorage";
 import { IChoice } from "../link";
 import { Party } from "../party";
 import { Text } from "../text";
@@ -18,7 +19,7 @@ import { GlobalScenes } from "./global";
 import { Player } from "./player";
 
 export class RavenMother extends Entity {
-	constructor(storage?: any) {
+	constructor(storage?: IStorage) {
 		super();
 
 		this.ID = "ravenmother";
@@ -81,7 +82,7 @@ export class RavenMother extends Entity {
 		return newVal > oldVal;
 	}
 
-	public FromStorage(storage: any) {
+	public FromStorage(storage: IStorage) {
 		this.LoadPersonalityStats(storage);
 
 		// Load flags
@@ -89,7 +90,7 @@ export class RavenMother extends Entity {
 	}
 
 	public ToStorage() {
-		const storage = {};
+		const storage: IStorage = {};
 
 		this.SavePersonalityStats(storage);
 

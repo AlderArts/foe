@@ -12,6 +12,7 @@ import { EncounterTable } from "../encountertable";
 import { Entity } from "../entity";
 import { GAME, MoveToLocation, TimeStep, WORLD, WorldTime } from "../GAME";
 import { Gui } from "../gui";
+import { IStorage } from "../istorage";
 import { IChoice } from "../link";
 import { ILocation } from "../location";
 import { Text } from "../text";
@@ -26,7 +27,7 @@ export class Fera extends Entity {
 	public fondleTimer: Time;
 	public timeout: Time;
 
-	constructor(storage?: any) {
+	constructor(storage?: IStorage) {
 		super();
 
 		this.ID = "fera";
@@ -84,8 +85,8 @@ export class Fera extends Entity {
 
 	public ToStorage() {
 		const storage: any = {
-			avirgin : this.Butt().virgin ? 1 : 0,
-			virgin  : this.FirstVag().virgin ? 1 : 0,
+			avirgin : (this.Butt().virgin ? 1 : 0).toString(),
+			virgin  : (this.FirstVag().virgin ? 1 : 0).toString(),
 		};
 
 		this.SavePersonalityStats(storage);

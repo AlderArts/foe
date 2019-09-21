@@ -4,6 +4,7 @@ import { GetDEBUG } from "../app";
 import { GAME } from "./GAME";
 import { Gui } from "./gui";
 import { Inventory } from "./inventory";
+import { IStorage } from "./istorage";
 import { Item, ItemSubtype, ItemType } from "./item";
 import { IChoice } from "./link";
 import { Party } from "./party";
@@ -24,12 +25,12 @@ export class Shop {
 
 	// opts
 	public sellPrice: number;
-	public buyPromptFunc: (it: any, cost: number, bought: boolean) => void;
-	public buySuccessFunc: (it: any, cost: number, num: number) => void;
-	public buyFailFunc: (it: any, cost: number, bought: boolean) => void;
-	public sellPromptFunc: (it: any, cost: number, sold: boolean) => void;
-	public sellSuccessFunc: (it: any, cost: number, num: number) => void;
-	public sellFailFunc: (it: any, cost: number, sold: boolean) => void;
+	public buyPromptFunc: (it: Item, cost: number, bought: boolean) => void;
+	public buySuccessFunc: (it: Item, cost: number, num: number) => void;
+	public buyFailFunc: (it: Item, cost: number, bought: boolean) => void;
+	public sellPromptFunc: (it: Item, cost: number, sold: boolean) => void;
+	public sellSuccessFunc: (it: Item, cost: number, num: number) => void;
+	public sellFailFunc: (it: Item, cost: number, sold: boolean) => void;
 
 	constructor(opts: any = {}) {
 		// Contains {it: Item, [num: Number], [enabled: Function], [func: Function], [price: Number]}
@@ -54,20 +55,20 @@ export class Shop {
 	}
 
 	public ToStorage() {
-		const storage: any = {};
+		const storage: IStorage = {};
 		if (this.totalBought !== 0) { storage.tb = this.totalBought.toFixed(); }
 		if (this.totalSold   !== 0) { storage.ts = this.totalSold.toFixed(); }
 		return storage;
 	}
 
-	public FromStorage(storage: any = {}) {
+	public FromStorage(storage: IStorage = {}) {
 		const tb = parseInt(storage.tb, 10);
 		this.totalBought = !isNaN(tb) ? tb : this.totalBought;
 		const ts = parseInt(storage.ts, 10);
 		this.totalSold   = !isNaN(ts) ? ts : this.totalSold;
 	}
 
-	public AddItem(item: any, price: number, enabled?: CallableFunction, func?: CallableFunction, num?: number) {
+	public AddItem(item: Item, price: number, enabled?: CallableFunction, func?: CallableFunction, num?: number) {
 		this.inventory.push({
 			it      : item,
 			price,
@@ -150,7 +151,7 @@ export class Shop {
 		const itemsByType: any = {};
 		Inventory.ItemByBothTypes(this.inventory, itemsByType);
 
-		const options: any[] = [];
+		const options: IChoice[] = [];
 		_.forIn(itemsByType, (itemBundle, itemTypeName) => {
 			// Add main types
 			Text.AddDiv("<hr>");
@@ -287,7 +288,7 @@ export class Shop {
 		const itemsByType: any = {};
 		Inventory.ItemByBothTypes(party.Inv().items, itemsByType);
 
-		const options: any[] = [];
+		const options: IChoice[] = [];
 		_.forIn(itemsByType, (itemBundle, itemTypeName) => {
 			// Add main types, exclude quest items (can't sell quest items at shop)
 			if (itemTypeName !== ItemType.Quest) {

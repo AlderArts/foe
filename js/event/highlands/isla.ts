@@ -12,6 +12,7 @@ import { Entity } from "../../entity";
 import { Sex } from "../../entity-sex";
 import { GAME, MoveToLocation, StepToHour, TimeStep, WORLD, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
+import { IStorage } from "../../istorage";
 import { IChoice } from "../../link";
 import { ILocation } from "../../location";
 import { Party } from "../../party";
@@ -30,7 +31,7 @@ export class Isla extends Entity {
 	}
 	public springTimer: Time;
 
-	constructor(storage?: any) {
+	constructor(storage?: IStorage) {
 		super();
 
 		this.ID = "isla";

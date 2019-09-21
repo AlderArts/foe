@@ -4,6 +4,7 @@
  *
  */
 import { Entity } from "../../entity";
+import { IStorage } from "../../istorage";
 import { ILocation } from "../../location";
 
 export namespace ChesFlags {
@@ -13,7 +14,7 @@ export namespace ChesFlags {
 }
 
 export class Ches extends Entity {
-	constructor(storage?: any) {
+	constructor(storage?: IStorage) {
 		super();
 
 		this.ID = "ches";
@@ -32,7 +33,7 @@ export class Ches extends Entity {
 		return this.flags.Met !== ChesFlags.Met.NotMet;
 	}
 
-	public FromStorage(storage: any) {
+	public FromStorage(storage: IStorage) {
 		this.LoadPersonalityStats(storage);
 
 		// Load flags
@@ -40,7 +41,7 @@ export class Ches extends Entity {
 	}
 
 	public ToStorage() {
-		const storage: any = {};
+		const storage: IStorage = {};
 
 		this.SavePersonalityStats(storage);
 

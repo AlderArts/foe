@@ -8,6 +8,7 @@ import { EncounterTable } from "../../encountertable";
 import { Entity } from "../../entity";
 import { GAME } from "../../GAME";
 import { Gui } from "../../gui";
+import { IStorage } from "../../istorage";
 import { IChoice } from "../../link";
 import { ILocation } from "../../location";
 import { Party } from "../../party";
@@ -19,7 +20,7 @@ import { GryphonsScenes } from "./gryphons";
 import { LucilleFlags } from "./lucille-flags";
 
 export class Lucille extends Entity {
-	constructor(storage?: any) {
+	constructor(storage?: IStorage) {
 		super();
 
 		this.ID = "lucille";
@@ -42,7 +43,7 @@ export class Lucille extends Entity {
 		return this.flags.Theme === 0;
 	}
 
-	public FromStorage(storage: any) {
+	public FromStorage(storage: IStorage) {
 		this.LoadPersonalityStats(storage);
 
 		// Load flags
@@ -50,7 +51,7 @@ export class Lucille extends Entity {
 	}
 
 	public ToStorage() {
-		const storage = {};
+		const storage: IStorage = {};
 
 		this.SavePersonalityStats(storage);
 

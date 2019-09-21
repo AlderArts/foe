@@ -1,4 +1,5 @@
 
+import { IStorage } from "../istorage";
 import { Stat } from "../stat";
 import { Text } from "../text";
 import { Rand } from "../utility";
@@ -35,7 +36,7 @@ export class Balls extends BodyPart {
 	}
 
 	public ToStorage(full: boolean) {
-		const storage: any = {
+		const storage: IStorage = {
 			cum   : this.cum.base.toFixed(2),
 			cumC  : this.cumCap.base.toFixed(2),
 			cumP  : this.cumProduction.base.toFixed(2),
@@ -50,7 +51,7 @@ export class Balls extends BodyPart {
 		return storage;
 	}
 
-	public FromStorage(storage: any) {
+	public FromStorage(storage: IStorage) {
 		storage = storage || {};
 		this.race               = RaceDesc.IdToRace[parseInt(storage.race, 10)] || this.race;
 		this.color              = parseInt(storage.col, 10)    || this.color;

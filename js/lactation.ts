@@ -2,6 +2,7 @@
  * Lactation handler
  */
 
+import { IStorage } from "./istorage";
 import { Stat } from "./stat";
 
 export class LactationHandler {
@@ -12,7 +13,7 @@ export class LactationHandler {
 	public milkCap: Stat;
 	public milk: Stat;
 
-	constructor(entity: any, storage?: any) {
+	constructor(entity: any, storage?: IStorage) {
 		this.entity = entity;
 
 		const debugName = () => entity.name + ".body";
@@ -30,18 +31,18 @@ export class LactationHandler {
 	}
 
 	public ToStorage() {
-		const storage: any = {};
+		const storage: IStorage = {};
 
-		storage.lact  = this.lactating ? 1 : 0;
-		storage.lactR = this.lactationRate.base;
-		storage.milk  = this.milk.base;
-		storage.milkP = this.milkProduction.base;
-		storage.milkC = this.milkCap.base;
+		storage.lact  = (this.lactating ? 1 : 0).toString();
+		storage.lactR = this.lactationRate.base.toString();
+		storage.milk  = this.milk.base.toString();
+		storage.milkP = this.milkProduction.base.toString();
+		storage.milkC = this.milkCap.base.toString();
 
 		return storage;
 	}
 
-	public FromStorage(storage: any = {}) {
+	public FromStorage(storage: IStorage = {}) {
 		this.lactating           = parseInt(storage.lact, 10) === 1;
 		this.lactationRate.base  = parseFloat(storage.lactR) || this.lactationRate.base;
 		this.milk.base           = parseFloat(storage.milk)  || this.milk.base;

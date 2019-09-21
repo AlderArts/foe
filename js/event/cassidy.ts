@@ -11,6 +11,7 @@ import { Element } from "../damagetype";
 import { EncounterTable } from "../encountertable";
 import { Entity, ICombatEncounter, ICombatOrder } from "../entity";
 import { GAME } from "../GAME";
+import { IStorage } from "../istorage";
 import { Item } from "../item";
 import { ArmorItems } from "../items/armor";
 import { WeaponsItems } from "../items/weapons";
@@ -26,7 +27,7 @@ export class Cassidy extends Entity {
 	public shop: Shop;
 	public shopItems: Item[];
 
-	constructor(storage?: any) {
+	constructor(storage?: IStorage) {
 		super();
 
 		this.ID = "cassidy";

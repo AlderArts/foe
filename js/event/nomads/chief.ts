@@ -9,6 +9,7 @@ import { RaceScore } from "../../body/race";
 import { Entity } from "../../entity";
 import { GAME, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
+import { IStorage } from "../../istorage";
 import { IChoice } from "../../link";
 import { Party } from "../../party";
 import { Text } from "../../text";
@@ -18,7 +19,7 @@ import { Player } from "../player";
 import { Rosalin } from "./rosalin";
 
 export class Chief extends Entity {
-	constructor(storage?: any) {
+	constructor(storage?: IStorage) {
 		super();
 
 		this.ID = "chief";
@@ -31,7 +32,7 @@ export class Chief extends Entity {
 		if (storage) { this.FromStorage(storage); }
 	}
 
-	public FromStorage(storage: any) {
+	public FromStorage(storage: IStorage) {
 		this.LoadPersonalityStats(storage);
 
 		// Load flags
@@ -39,7 +40,7 @@ export class Chief extends Entity {
 	}
 
 	public ToStorage() {
-		const storage = {};
+		const storage: IStorage = {};
 
 		this.SavePersonalityStats(storage);
 

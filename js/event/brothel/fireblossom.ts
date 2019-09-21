@@ -2,6 +2,7 @@
 import { Entity } from "../../entity";
 import { GAME, TimeStep } from "../../GAME";
 import { Gui } from "../../gui";
+import { IStorage } from "../../istorage";
 import { IChoice } from "../../link";
 import { Text } from "../../text";
 import { Kiakai } from "../kiakai";
@@ -36,7 +37,7 @@ export class Fireblossom extends Entity {
 	public grexRel: number;
 	public qinRel: number;
 
-	constructor(storage?: any) {
+	constructor(storage?: IStorage) {
 		super();
 
 		this.flags.State  = FireblossomFlags.State.S1Journey;
@@ -66,7 +67,7 @@ export class Fireblossom extends Entity {
 		return this.flags.State > FireblossomFlags.State.S1Journey;
 	}
 
-	public FromStorage(storage: any) {
+	public FromStorage(storage: IStorage) {
 		// Load flags
 		this.LoadFlags(storage);
 
@@ -78,7 +79,7 @@ export class Fireblossom extends Entity {
 	}
 
 	public ToStorage() {
-		const storage: any = {};
+		const storage: IStorage = {};
 
 		this.SaveFlags(storage);
 

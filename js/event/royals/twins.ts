@@ -8,6 +8,7 @@ import * as _ from "lodash";
 import { Entity } from "../../entity";
 import { GAME, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
+import { IStorage } from "../../istorage";
 import { IChoice } from "../../link";
 import { RigardFlags } from "../../loc/rigard/rigard-flags";
 import { ILocation } from "../../location";
@@ -24,7 +25,7 @@ export class Twins {
 	public flags: any;
 	public terryTimer: Time;
 
-	constructor(storage?: any) {
+	constructor(storage?: IStorage) {
 		this.rumi = new Rumi();
 		this.rani = new Rani();
 
@@ -52,15 +53,14 @@ export class Twins {
 		if (storage.rani) { this.rani.FromStorage(storage.rani); }
 		// Load flags
 		_.forIn(storage.flags, (value, key) => {
-			this.flags[key] = parseInt(value, 10);
+			this.flags[key] = parseInt(value as string, 10);
 		});
 
 		this.terryTimer.FromStorage(storage.Ttime);
 	}
 
 	public ToStorage() {
-		const storage: any = {
-		};
+		const storage: any = {};
 		storage.rumi  = this.rumi.ToStorage();
 		storage.rani  = this.rani.ToStorage();
 		storage.flags = this.flags;
@@ -82,7 +82,7 @@ export class Rumi extends Entity {
 		this.ID = "rumi";
 	}
 
-	public FromStorage(storage: any) {
+	public FromStorage(storage: IStorage) {
 		this.LoadPersonalityStats(storage);
 
 		// Load flags
@@ -90,7 +90,7 @@ export class Rumi extends Entity {
 	}
 
 	public ToStorage() {
-		const storage: any = {
+		const storage: IStorage = {
 
 		};
 
@@ -107,7 +107,7 @@ export class Rani extends Entity {
 		this.ID = "rani";
 	}
 
-	public FromStorage(storage: any) {
+	public FromStorage(storage: IStorage) {
 		this.LoadPersonalityStats(storage);
 
 		// Load flags
@@ -115,7 +115,7 @@ export class Rani extends Entity {
 	}
 
 	public ToStorage() {
-		const storage: any = {
+		const storage: IStorage = {
 
 		};
 

@@ -12,13 +12,14 @@ import { LagonFlags } from "../event/burrows/lagon-flags";
 import { Vena } from "../event/burrows/vena";
 import { VenaFlags } from "../event/burrows/vena-flags";
 import { GAME } from "../GAME";
+import { IStorage } from "../istorage";
 import { BurrowsFlags } from "./burrows-flags";
 
 // Class to handle global flags and logic for dungeon
 export class Burrows {
 	public flags: any;
 
-	constructor(storage?: any) {
+	constructor(storage?: IStorage) {
 		this.flags = {};
 
 		this.flags.Access      = BurrowsFlags.AccessFlags.Unknown;
@@ -73,17 +74,17 @@ export class Burrows {
 	}
 
 	public ToStorage() {
-		const storage: any = {};
+		const storage: IStorage = {};
 
 		storage.flags = this.flags;
 
 		return storage;
 	}
 
-	public FromStorage(storage: any) {
+	public FromStorage(storage: IStorage) {
 		// Load flags
 		_.forIn(storage.flags, (value, key) => {
-			this.flags[key] = parseInt(value, 10);
+			this.flags[key] = parseInt(value as string, 10);
 		});
 	}
 

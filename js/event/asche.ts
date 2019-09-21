@@ -6,10 +6,11 @@
 
 import { Race } from "../body/race";
 import { Entity } from "../entity";
+import { IStorage } from "../istorage";
 import { AscheFlags } from "./asche-flags";
 
 export class Asche extends Entity {
-	constructor(storage?: any) {
+	constructor(storage?: IStorage) {
 		super();
 
 		this.ID = "asche";
@@ -37,7 +38,7 @@ export class Asche extends Entity {
 		return 100;
 	}
 
-	public FromStorage(storage: any) {
+	public FromStorage(storage: IStorage) {
 		this.LoadPersonalityStats(storage);
 
 		// Load flags
@@ -46,7 +47,7 @@ export class Asche extends Entity {
 	}
 
 	public ToStorage() {
-		const storage: any = {};
+		const storage: IStorage = {};
 
 		this.SavePersonalityStats(storage);
 

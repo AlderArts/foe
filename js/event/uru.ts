@@ -8,11 +8,12 @@ import { AppendageType } from "../body/appendage";
 import { Color } from "../body/color";
 import { Race } from "../body/race";
 import { Entity } from "../entity";
+import { IStorage } from "../istorage";
 import { ILocation } from "../location";
 import { TF } from "../tf";
 
 export class Uru extends Entity {
-	constructor(storage?: any) {
+	constructor(storage?: IStorage) {
 		super();
 
 		this.ID = "uru";
@@ -62,7 +63,7 @@ export class Uru extends Entity {
 		if (storage) { this.FromStorage(storage); }
 	}
 
-	public FromStorage(storage: any) {
+	public FromStorage(storage: IStorage) {
 		this.LoadPersonalityStats(storage);
 
 		// Load flags
@@ -70,7 +71,7 @@ export class Uru extends Entity {
 	}
 
 	public ToStorage() {
-		const storage = {};
+		const storage: IStorage = {};
 
 		this.SavePersonalityStats(storage);
 

@@ -8,6 +8,7 @@ import { Images } from "../../assets";
 import { Color } from "../../body/color";
 import { Entity } from "../../entity";
 import { GAME, WORLD, WorldTime } from "../../GAME";
+import { IStorage } from "../../istorage";
 import { JobDesc, Jobs } from "../../job";
 import { ILocation } from "../../location";
 import { ITime, Time } from "../../time";
@@ -17,7 +18,7 @@ import { LaylaScenes } from "./layla-scenes";
 export class Layla extends Entity {
 	public farmTimer: Time;
 
-	constructor(storage?: any) {
+	constructor(storage?: IStorage) {
 		super();
 		this.ID = "layla";
 

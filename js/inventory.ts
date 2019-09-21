@@ -140,7 +140,7 @@ export class Inventory {
 	}
 
 	public FromStorage(storage: any) {
-		const list: any[] = [];
+		const list: IItemQuantity[] = [];
 		_.each(storage, (s) => {
 			const item = {
 				it  : ItemIds[s.it],
@@ -244,7 +244,7 @@ export class Inventory {
 			Text.NL();
 		}
 
-		let usable: any[] = [];
+		let usable: IItemQuantity[] = [];
 		// Copy usable items into usable array
 		for (const key of _.keys(usableItemsByType)) {
 			for (const subtypeKey of _.keys(usableItemsByType[key])) {
@@ -308,7 +308,7 @@ export class Inventory {
 		SetExploreButtons();
 	}
 	// TODO Make this use the fancy GUI!
-	public CombatInventory(encounter: Encounter, entity: Entity, back?: any) {
+	public CombatInventory(encounter: Encounter, entity: Entity, back?: CallableFunction) {
 		const inv = this;
 		Text.Clear();
 
@@ -319,7 +319,7 @@ export class Inventory {
 		const combatItemsByType: any = {};
 		Inventory.ItemByBothTypes(this.items, undefined, undefined, combatItemsByType);
 
-		let usable: any[] = [];
+		let usable: IItemQuantity[] = [];
 		// Copy usable items into usable array
 		for (const key of _.keys(combatItemsByType)) {
 			for (const subtypeKey of _.keys(combatItemsByType[key])) {
@@ -381,7 +381,7 @@ export class Inventory {
 		Text.Flush();
 	}
 
-	public ShowEquippable(entity: Entity, type: any, backPrompt?: () => void) {
+	public ShowEquippable(entity: Entity, type: ItemType|ItemSubtype, backPrompt?: () => void) {
 		const inv = this;
 		// Populate item list
 		const items: Item[] = [];

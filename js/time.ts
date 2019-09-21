@@ -1,3 +1,4 @@
+import { IStorage } from "./istorage";
 
 export enum Season {
 	Spring = 0,
@@ -43,16 +44,16 @@ export class Time {
 	}
 
 	public ToStorage() {
-		const storage: any = {};
-		if (this.year   !== 0) { storage.y = this.year; }
-		if (this.season !== 0) { storage.s = this.season; }
-		if (this.day    !== 0) { storage.d = this.day; }
-		if (this.hour   !== 0) { storage.h = this.hour; }
-		if (this.minute !== 0) { storage.m = this.minute; }
+		const storage: IStorage = {};
+		if (this.year   !== 0) { storage.y = this.year.toString(); }
+		if (this.season !== 0) { storage.s = this.season.toString(); }
+		if (this.day    !== 0) { storage.d = this.day.toString(); }
+		if (this.hour   !== 0) { storage.h = this.hour.toString(); }
+		if (this.minute !== 0) { storage.m = this.minute.toString(); }
 		return storage;
 	}
 
-	public FromStorage(storage?: any) {
+	public FromStorage(storage?: IStorage) {
 		storage = storage || {};
 		this.year   = parseInt(storage.y, 10) || this.year;
 		this.season = parseInt(storage.s, 10) || this.season;

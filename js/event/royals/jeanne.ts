@@ -6,6 +6,7 @@
 import { Race } from "../../body/race";
 import { Entity } from "../../entity";
 import { GAME } from "../../GAME";
+import { IStorage } from "../../istorage";
 import { AlchemyItems } from "../../items/alchemy";
 import { AlchemySpecial } from "../../items/alchemyspecial";
 import { ILocation } from "../../location";
@@ -18,7 +19,7 @@ export class Jeanne extends Entity {
 				GAME().player.jobs.Mystic.level +
 				GAME().player.jobs.Healer.level) >= 9;
 	}
-	constructor(storage?: any) {
+	constructor(storage?: IStorage) {
 		super();
 
 		this.ID = "jeanne";
@@ -66,7 +67,7 @@ export class Jeanne extends Entity {
 		if (storage) { this.FromStorage(storage); }
 	}
 
-	public FromStorage(storage: any) {
+	public FromStorage(storage: IStorage) {
 		this.LoadPersonalityStats(storage);
 
 		// Load flags
@@ -77,7 +78,7 @@ export class Jeanne extends Entity {
 	}
 
 	public ToStorage() {
-		const storage = {};
+		const storage: IStorage = {};
 
 		this.SavePersonalityStats(storage);
 

@@ -20,10 +20,12 @@ import { Entity } from "../../entity";
 import { Sex } from "../../entity-sex";
 import { GAME, TimeStep, WORLD, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
+import { IStorage } from "../../istorage";
 import { AlchemyItems } from "../../items/alchemy";
 import { AlchemySpecial } from "../../items/alchemyspecial";
 import { StrapOnItems } from "../../items/strapon";
 import { IChoice } from "../../link";
+import { ILocation } from "../../location";
 import { Party } from "../../party";
 import { PregnancyHandler } from "../../pregnancy";
 import { Text } from "../../text";
@@ -43,7 +45,7 @@ import { RosalinFlags } from "./rosalin-flags";
 export class Rosalin extends Entity {
 	public origRaceScore: RaceScore;
 
-	constructor(storage?: any) {
+	constructor(storage?: IStorage) {
 		super();
 
 		this.ID = "rosalin";
@@ -100,7 +102,7 @@ export class Rosalin extends Entity {
 		return this.flags.Met !== 0;
 	}
 
-	public FromStorage(storage: any) {
+	public FromStorage(storage: IStorage) {
 		storage = storage || {};
 
 		this.body.FromStorage(storage.body);
@@ -117,7 +119,7 @@ export class Rosalin extends Entity {
 	}
 
 	public ToStorage() {
-		const storage: any = {};
+		const storage: IStorage = {};
 
 		storage.body = this.body.ToStorage();
 		this.SavePregnancy(storage);
@@ -190,7 +192,7 @@ export class Rosalin extends Entity {
 	}
 
 	// Schedule
-	public IsAtLocation(location?: any) {
+	public IsAtLocation(location?: ILocation) {
 		const party: Party = GAME().party;
 		location = location || party.location;
 		if (location === WORLD().loc.Plains.Nomads.Fireplace) {

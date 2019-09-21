@@ -10,12 +10,13 @@ import { Race } from "../../body/race";
 import { Entity } from "../../entity";
 import { GAME, NAV } from "../../GAME";
 import { Gui } from "../../gui";
+import { IStorage } from "../../istorage";
 import { ILocation } from "../../location";
 import { Text } from "../../text";
 import { TF } from "../../tf";
 
 export class Adrian extends Entity {
-	constructor(storage?: any) {
+	constructor(storage?: IStorage) {
 		super();
 
 		this.ID = "adrian";
@@ -54,7 +55,7 @@ export class Adrian extends Entity {
 		if (storage) { this.FromStorage(storage); }
 	}
 
-	public FromStorage(storage: any) {
+	public FromStorage(storage: IStorage) {
 		this.body.FromStorage(storage.body);
 		this.LoadPersonalityStats(storage);
 
@@ -63,7 +64,7 @@ export class Adrian extends Entity {
 	}
 
 	public ToStorage() {
-		const storage = {};
+		const storage: IStorage = {};
 
 		this.SaveBodyPartial(storage, {ass: true});
 		this.SavePersonalityStats(storage);

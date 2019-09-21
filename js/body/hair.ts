@@ -1,4 +1,5 @@
 
+import { IStorage } from "../istorage";
 import { Stat } from "../stat";
 import { BodyPart } from "./bodypart";
 import { Color } from "./color";
@@ -33,7 +34,7 @@ export class Hair extends BodyPart {
 		return storage;
 	}
 
-	public FromStorage(storage: any) {
+	public FromStorage(storage: IStorage) {
 		storage = storage || {};
 		this.race        = (storage.race === undefined) ? this.race : RaceDesc.IdToRace[parseInt(storage.race, 10)];
 		this.color       = (storage.col === undefined) ? this.color : parseInt(storage.col, 10);

@@ -15,21 +15,23 @@ import { Vagina } from "../body/vagina";
 import { Entity, ICombatEncounter, ICombatOrder } from "../entity";
 import { GAME } from "../GAME";
 import { Gui } from "../gui";
+import { IStorage } from "../istorage";
 import { Item } from "../item";
 import { CombatItems } from "../items/combatitems";
 import { WeaponsItems } from "../items/weapons";
 import { JobDesc, Jobs } from "../job";
 import { RigardLoc } from "../loc/rigard/rigard-scenes";
+import { ILocation } from "../location";
 import { Text } from "../text";
 import { TerryFlags } from "./terry-flags";
 import { TerryScenes } from "./terry-scenes";
 
 export class Terry extends Entity {
 	public sbombs: number;
-	public hidingSpot: any;
+	public hidingSpot: ILocation;
 	public turnCounter: number;
 
-	constructor(storage?: any) {
+	constructor(storage?: IStorage) {
 		super();
 
 		this.ID = "terry";
@@ -132,7 +134,7 @@ export class Terry extends Entity {
 		return this.flags.Saved >= TerryFlags.Saved.Saved;
 	}
 
-	public FromStorage(storage: any) {
+	public FromStorage(storage: IStorage) {
 		this.body.FromStorage(storage.body);
 		this.LoadLactation(storage);
 		this.LoadPregnancy(storage);
@@ -159,7 +161,7 @@ export class Terry extends Entity {
 	}
 
 	public ToStorage() {
-		const storage: any = {};
+		const storage: IStorage = {};
 		this.SaveBodyPartial(storage, {ass: true, vag: true, balls: true});
 		this.SaveLactation(storage);
 		this.SavePregnancy(storage);

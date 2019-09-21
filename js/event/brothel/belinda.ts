@@ -7,6 +7,7 @@ import { Color } from "../../body/color";
 import { Race } from "../../body/race";
 import { Entity } from "../../entity";
 import { GAME, WORLD, WorldTime } from "../../GAME";
+import { IStorage } from "../../istorage";
 
 export namespace BelindaFlags {
 	export enum Met {
@@ -16,7 +17,7 @@ export namespace BelindaFlags {
 }
 
 export class Belinda extends Entity {
-	constructor(storage?: any) {
+	constructor(storage?: IStorage) {
 		super();
 
 		this.ID = "belinda";
@@ -45,14 +46,14 @@ export class Belinda extends Entity {
 		return this.flags.Met >= BelindaFlags.Met.Met;
 	}
 
-	public FromStorage(storage: any) {
+	public FromStorage(storage: IStorage) {
 		this.LoadPersonalityStats(storage);
 		// Load flags
 		this.LoadFlags(storage);
 	}
 
 	public ToStorage() {
-		const storage: any = {
+		const storage: IStorage = {
 
 		};
 

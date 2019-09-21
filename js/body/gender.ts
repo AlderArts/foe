@@ -47,7 +47,7 @@ namespace Gender {
 		default: return "-";
 		}
 	}
-	export function Random(odds?: any[]) {
+	export function Random(odds?: number[]) {
 		odds = odds || [1, 1, 1];
 		let sum = 0;
 		for (let i = 0; i < Gender.LAST; i++) {

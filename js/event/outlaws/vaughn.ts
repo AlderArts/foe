@@ -7,6 +7,7 @@ import { Color } from "../../body/color";
 import { Race } from "../../body/race";
 import { Entity } from "../../entity";
 import { GAME, WORLD, WorldTime } from "../../GAME";
+import { IStorage } from "../../istorage";
 import { ILocation } from "../../location";
 import { ITime, Time } from "../../time";
 import { VaughnFlags } from "./vaughn-flags";
@@ -15,7 +16,7 @@ import { VaughnTasksScenes } from "./vaughn-tasks";
 export class Vaughn extends Entity {
 	public taskTimer: Time;
 
-	constructor(storage?: any) {
+	constructor(storage?: IStorage) {
 		super();
 
 		this.ID = "vaughn";

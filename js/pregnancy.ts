@@ -6,6 +6,7 @@ import * as _ from "lodash";
 import { GetDEBUG } from "../app";
 import { Race, RaceDesc } from "./body/race";
 import { Sex } from "./entity-sex";
+import { IStorage } from "./istorage";
 import { Perks } from "./perks";
 import { Stat } from "./stat";
 import { StatusEffect } from "./statuseffect";
@@ -42,7 +43,7 @@ export class Womb {
 	}
 
 	public ToStorage() {
-		const storage: any = {
+		const storage: IStorage = {
 			litS : this.litterSize.toFixed(),
 			hour : this.hoursToBirth.toFixed(2),
 			prog : this.progress.toFixed(4),
@@ -53,7 +54,7 @@ export class Womb {
 		return storage;
 	}
 
-	public FromStorage(storage: any) {
+	public FromStorage(storage: IStorage) {
 		this.litterSize   = parseInt(storage.litS, 10)   || this.litterSize;
 		this.pregnant     = true;
 		this.hoursToBirth = parseFloat(storage.hour) || this.hoursToBirth;

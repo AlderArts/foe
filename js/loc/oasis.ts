@@ -6,12 +6,14 @@ import { Entity } from "../entity";
 import { Player } from "../event/player";
 import { GAME, TimeStep, WorldTime } from "../GAME";
 import { Gui } from "../gui";
+import { IStorage } from "../istorage";
 import { Item } from "../item";
 import { IngredientItems } from "../items/ingredients";
 import { IChoice } from "../link";
 import { Party } from "../party";
 import { Shop } from "../shop";
 import { Text } from "../text";
+import { ITime } from "../time";
 import { OasisFlags } from "./oasis-flags";
 
 export class Oasis {
@@ -20,7 +22,7 @@ export class Oasis {
 	public shopItems: Item[];
 	public Shopbought: boolean;
 
-	constructor(storage?: any) {
+	constructor(storage?: IStorage) {
 		this.flags = {};
 		this.Shopbought = false;
 
@@ -78,21 +80,21 @@ export class Oasis {
 	}
 
 	public ToStorage() {
-		const storage: any = {};
+		const storage: IStorage = {};
 
 		storage.flags   = this.flags;
 
 		return storage;
 	}
 
-	public FromStorage(storage: any) {
+	public FromStorage(storage: IStorage) {
 		// Load flags
 		_.forIn(storage.flags, (value, key) => {
-			this.flags[key] = parseInt(value, 10);
+			this.flags[key] = parseInt(value as string, 10);
 		});
 	}
 
-	public Update(step: any) {
+	public Update(step: ITime) {
 
 	}
 
@@ -103,7 +105,7 @@ export class Oasis {
 
 export namespace OasisScenes {
 
-	export function CaravanShop(back: any) {
+	export function CaravanShop(back: CallableFunction) {
 		const oasis: Oasis = GAME().oasis;
 		const parse: any = {
 

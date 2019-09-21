@@ -14,6 +14,7 @@ import { Element } from "../damagetype";
 import { EncounterTable } from "../encountertable";
 import { ICombatEncounter, ICombatOrder } from "../entity";
 import { GAME } from "../GAME";
+import { IStorage } from "../istorage";
 import { AlchemyItems } from "../items/alchemy";
 import { ArmorItems } from "../items/armor";
 import { IngredientItems } from "../items/ingredients";
@@ -23,7 +24,7 @@ import { Text } from "../text";
 import { BossEntity } from "./boss";
 
 export class OrchidBoss extends BossEntity {
-	constructor(storage?: any) {
+	constructor(storage?: IStorage) {
 		super();
 
 		this.ID = "orchid";
@@ -97,7 +98,7 @@ export class OrchidBoss extends BossEntity {
 		return drops;
 	}
 
-	public FromStorage(storage: any) {
+	public FromStorage(storage: IStorage) {
 		// Personality stats
 		this.LoadPersonalityStats(storage);
 
@@ -106,7 +107,7 @@ export class OrchidBoss extends BossEntity {
 	}
 
 	public ToStorage() {
-		const storage = {};
+		const storage: IStorage = {};
 		this.SavePersonalityStats(storage);
 		this.SaveFlags(storage);
 

@@ -9,11 +9,12 @@ import { Race } from "../body/race";
 import { Entity } from "../entity";
 import { GAME, NAV } from "../GAME";
 import { Gui } from "../gui";
+import { IStorage } from "../istorage";
 import { ILocation } from "../location";
 import { Text } from "../text";
 
 export class Sylistraxia extends Entity {
-	constructor(storage?: any) {
+	constructor(storage?: IStorage) {
 		super();
 
 		this.ID = "sylistraxia";
@@ -52,7 +53,7 @@ export class Sylistraxia extends Entity {
 		if (storage) { this.FromStorage(storage); }
 	}
 
-	public FromStorage(storage: any) {
+	public FromStorage(storage: IStorage) {
 		this.LoadPersonalityStats(storage);
 
 		// Load flags
@@ -60,7 +61,7 @@ export class Sylistraxia extends Entity {
 	}
 
 	public ToStorage() {
-		const storage = {};
+		const storage: IStorage = {};
 
 		this.SavePersonalityStats(storage);
 

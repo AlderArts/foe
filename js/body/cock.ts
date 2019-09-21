@@ -1,5 +1,6 @@
 import * as _ from "lodash";
 
+import { IStorage } from "../istorage";
 import { Stat } from "../stat";
 import { BodyPart } from "./bodypart";
 import { Color } from "./color";
@@ -32,7 +33,7 @@ export class Cock extends BodyPart {
 	}
 
 	public ToStorage(full: boolean) {
-		const storage: any = {
+		const storage: IStorage = {
 			len    : this.length.base.toFixed(2),
 			thk    : this.thickness.base.toFixed(2),
 		};
@@ -45,7 +46,7 @@ export class Cock extends BodyPart {
 		return storage;
 	}
 
-	public FromStorage(storage: any) {
+	public FromStorage(storage: IStorage) {
 		storage = storage || {};
 		this.race           = RaceDesc.IdToRace[parseInt(storage.race, 10)] || this.race;
 		this.color          = parseInt(storage.col, 10)    || this.color;

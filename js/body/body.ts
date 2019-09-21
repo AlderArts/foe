@@ -15,6 +15,7 @@ import { DefBody } from "./defbody";
 import { Gender } from "./gender";
 import { Genitalia } from "./genitalia";
 import { Head } from "./head";
+import { IBody } from "./ibody";
 import { Race, RaceDesc } from "./race";
 import { Vagina } from "./vagina";
 
@@ -50,7 +51,7 @@ export class Limbs extends BodyPart {
 }
 
 // Describe a standard humanoid-ish body
-export class Body {
+export class Body implements IBody {
 	public entity: any;
 	public muscleTone: Stat;
 	public bodyMass: Stat;
@@ -149,7 +150,7 @@ export class Body {
 			for (const a of this.cock) {
 				const c = a.ToStorage(true);
 				if (a.vag) {
-					c.ccIdx = this.vagina.indexOf(a.vag);
+					c.ccIdx = this.vagina.indexOf(a.vag).toString();
 				}
 				storage.cock.push(c);
 			}

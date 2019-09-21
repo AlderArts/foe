@@ -1,3 +1,5 @@
+import { IStorage } from "../istorage";
+import { IBody } from "./ibody";
 
 /*
  * Superclass for all entity genitalia. Handles things that
@@ -11,10 +13,10 @@ enum GCover {
 }
 
 export class Genitalia {
-	public body: any;
+	public body: IBody;
 	public cover: GCover;
 
-	constructor(body: any, storage?: any) {
+	constructor(body: IBody, storage?: IStorage) {
 		this.body   = body;
 		this.cover  = GCover.NoCover;
 
@@ -30,7 +32,7 @@ export class Genitalia {
 		return storage;
 	}
 
-	public FromStorage(storage: any) {
+	public FromStorage(storage: IStorage) {
 		storage = storage || {};
 		this.cover = parseInt(storage.c, 10) || this.cover;
 	}

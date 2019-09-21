@@ -1,4 +1,5 @@
 
+import { IStorage } from "../istorage";
 import { Stat } from "../stat";
 import { Rand } from "../utility";
 import { BodyPart } from "./bodypart";
@@ -31,7 +32,7 @@ export class Breasts extends BodyPart {
 	}
 
 	public ToStorage(full: boolean) {
-		const storage: any = {
+		const storage: IStorage = {
 			size    : this.size.base.toFixed(2),
 		};
 		if (full) {
@@ -45,7 +46,7 @@ export class Breasts extends BodyPart {
 		return storage;
 	}
 
-	public FromStorage(storage: any) {
+	public FromStorage(storage: IStorage) {
 		storage = storage || {};
 		this.color                = parseInt(storage.col, 10)      || this.color;
 		this.race                 = RaceDesc.IdToRace[parseInt(storage.race, 10)] || this.race;

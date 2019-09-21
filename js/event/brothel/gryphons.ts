@@ -11,6 +11,7 @@ import { EncounterTable } from "../../encountertable";
 import { Entity } from "../../entity";
 import { GAME, TimeStep } from "../../GAME";
 import { Gui } from "../../gui";
+import { IStorage } from "../../istorage";
 import { IChoice } from "../../link";
 import { PregnancyHandler } from "../../pregnancy";
 import { Text } from "../../text";
@@ -27,7 +28,7 @@ enum GryphonsState {
 }
 
 export class Gryphons extends Entity {
-	constructor(storage?: any) {
+	constructor(storage?: IStorage) {
 		super();
 
 		this.flags.State = GryphonsState.NotViewed;
@@ -42,13 +43,13 @@ export class Gryphons extends Entity {
 		return this.flags.State === GryphonsState.NotViewed;
 	}
 
-	public FromStorage(storage: any) {
+	public FromStorage(storage: IStorage) {
 		// Load flags
 		this.LoadFlags(storage);
 	}
 
 	public ToStorage() {
-		const storage = {};
+		const storage: IStorage = {};
 
 		this.SaveFlags(storage);
 

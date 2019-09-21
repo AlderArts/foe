@@ -6,6 +6,7 @@ import { GAME, NAV } from "./GAME";
 import { Gui } from "./gui";
 import { Inventory } from "./inventory";
 import { Item, ItemIds } from "./item";
+import { IChoice } from "./link";
 import { Text } from "./text";
 
 /*
@@ -27,7 +28,7 @@ export namespace Alchemy {
 
 		let list: any[] = [];
 
-		const Brew = (brewable: any) => {
+		const Brew = (brewable: IBrewable) => {
 			if (alchemist === GAME().player) {
 				ItemDetails(brewable, inventory);
 			} else {
@@ -103,9 +104,9 @@ function MakeItem(it: Item, qty: number, alchemist: Entity, inventory: Inventory
 	}
 }
 
-function ItemDetails(brewable: any, inventory: Inventory) {
+function ItemDetails(brewable: IBrewable, inventory: Inventory) {
 	const batchFormats = [1, 5, 10, 25];
-	const list = [];
+	const list: IChoice[] = [];
 	const BrewBatch = brewable.brewFn;
 	const inInventory = inventory.QueryNum(brewable.it);
 
@@ -148,7 +149,7 @@ function ItemDetails(brewable: any, inventory: Inventory) {
 
 function GetRecipeDict(it: Item) {
 	const recipe = it.recipe;
-	const recipeDict: any = {};
+	const recipeDict: IAlchemyRecipeDict = {};
 
 	// There's always the possibility of some items being required more than once
 	recipe.forEach((ingredient) => {
@@ -159,10 +160,26 @@ function GetRecipeDict(it: Item) {
 	return recipeDict;
 }
 
-function CountBrewable(it: Item, inventory: Inventory, alchemist: Entity) {
+interface IAlchemyRecipeDict {
+	[index: string]: number;
+}
+
+interface IAlchemyProductionStep {
+	recipe: {[index: string]: number};
+	qty: number;
+}
+
+interface IBrewable {
+	it: Item;
+	qty: number;
+	steps: IAlchemyProductionStep[];
+	brewFn: (batchSize: number, backPrompt: CallableFunction, callback: CallableFunction, mockRemove?: boolean) => void;
+}
+
+function CountBrewable(it: Item, inventory: Inventory, alchemist: Entity): IBrewable {
 	let recipeDict = GetRecipeDict(it);
 	const invDict = _.chain(inventory.ToStorage()).keyBy("it").mapValues("num").value();
-	const productionSteps: any[] = []; // [{qty: 5, recipe: [...]}]
+	const productionSteps: IAlchemyProductionStep[] = []; // [{qty: 5, recipe: [...]}]
 
 	while (!_.isEmpty(recipeDict)) {
 		let limitingQuota = Infinity;
@@ -222,7 +239,7 @@ function CountBrewable(it: Item, inventory: Inventory, alchemist: Entity) {
 	};
 }
 
-function AdaptRecipe(recipeDict: any, invDict: any, alchemist: Entity): any {
+function AdaptRecipe(recipeDict: IAlchemyRecipeDict, invDict: any, alchemist: Entity): IAlchemyRecipeDict {
 	const origRecipeDict = recipeDict;
 	recipeDict = _.assign({}, recipeDict);
 

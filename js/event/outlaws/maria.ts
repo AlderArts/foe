@@ -8,6 +8,7 @@ import { Images } from "../../assets";
 import { Color } from "../../body/color";
 import { Entity, ICombatEncounter, ICombatOrder } from "../../entity";
 import { GAME, WORLD, WorldTime } from "../../GAME";
+import { IStorage } from "../../istorage";
 import { CombatItems } from "../../items/combatitems";
 import { ILocation } from "../../location";
 import { StatusEffect } from "../../statuseffect";
@@ -19,7 +20,7 @@ export class Maria extends Entity {
 	public DDtimer: Time;
 	public pots: number;
 
-	constructor(storage?: any) {
+	constructor(storage?: IStorage) {
 		super();
 
 		this.ID = "maria";
@@ -78,7 +79,7 @@ export class Maria extends Entity {
 
 	public ToStorage() {
 		const storage: any = {
-			avirgin : this.Butt().virgin ? 1 : 0,
+			avirgin : (this.Butt().virgin ? 1 : 0).toString(),
 		};
 
 		this.SavePersonalityStats(storage);

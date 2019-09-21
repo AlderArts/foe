@@ -11,8 +11,10 @@ import { EncounterTable } from "../encountertable";
 import { Entity } from "../entity";
 import { GAME, MoveToLocation, TimeStep, WORLD } from "../GAME";
 import { Gui } from "../gui";
+import { IStorage } from "../istorage";
 import { IChoice } from "../link";
 import { RigardFlags } from "../loc/rigard/rigard-flags";
+import { ILocation } from "../location";
 import { Party } from "../party";
 import { Text } from "../text";
 import { Roa } from "./brothel/roa";
@@ -26,7 +28,7 @@ import { Room69Flags } from "./room69-flags";
 import { Lei } from "./royals/lei";
 
 export class Room69 extends Entity {
-	constructor(storage?: any) {
+	constructor(storage?: IStorage) {
 		super();
 
 		this.ID = "room69";
@@ -50,7 +52,7 @@ export class Room69 extends Entity {
 		if (storage) { this.FromStorage(storage); }
 	}
 
-	public FromStorage(storage: any) {
+	public FromStorage(storage: IStorage) {
 		this.LoadPersonalityStats(storage);
 
 		// Load flags
@@ -58,7 +60,7 @@ export class Room69 extends Entity {
 	}
 
 	public ToStorage() {
-		const storage = {};
+		const storage: IStorage = {};
 
 		this.SavePersonalityStats(storage);
 
@@ -68,7 +70,7 @@ export class Room69 extends Entity {
 	}
 
 	// Schedule (IS a location. Heh)
-	public IsAtLocation(location: any) {
+	public IsAtLocation(location: ILocation) {
 		return location === WORLD().loc.Rigard.Inn.Room69;
 	}
 

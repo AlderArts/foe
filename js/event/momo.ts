@@ -12,6 +12,7 @@ import { Entity } from "../entity";
 import { GAME, MoveToLocation, TimeStep, WORLD } from "../GAME";
 import { WorldTime } from "../GAME";
 import { Gui } from "../gui";
+import { IStorage } from "../istorage";
 import { IChoice } from "../link";
 import { ILocation } from "../location";
 import { Party } from "../party";
@@ -24,7 +25,7 @@ import { Player } from "./player";
 export class Momo extends Entity {
 	public wanderTimer: Time;
 
-	constructor(storage?: any) {
+	constructor(storage?: IStorage) {
 		super();
 
 		this.ID = "momo";

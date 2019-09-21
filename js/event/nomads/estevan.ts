@@ -14,8 +14,10 @@ import { Entity } from "../../entity";
 import { Sex } from "../../entity-sex";
 import { GAME, TimeStep, WORLD, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
+import { IStorage } from "../../istorage";
 import { Jobs } from "../../job";
 import { IChoice } from "../../link";
+import { ILocation } from "../../location";
 import { Party } from "../../party";
 import { PregnancyHandler } from "../../pregnancy";
 import { Text } from "../../text";
@@ -26,7 +28,7 @@ import { CaleFlags } from "./cale-flags";
 import { EstevanFlags } from "./estevan-flags";
 
 export class Estevan extends Entity {
-	constructor(storage?: any) {
+	constructor(storage?: IStorage) {
 		super();
 
 		this.ID = "estevan";
@@ -55,7 +57,7 @@ export class Estevan extends Entity {
 		return this.flags.Met !== 0;
 	}
 
-	public FromStorage(storage: any) {
+	public FromStorage(storage: IStorage) {
 		this.LoadPersonalityStats(storage);
 		this.body.FromStorage(storage.body);
 		// Load flags
@@ -63,7 +65,7 @@ export class Estevan extends Entity {
 	}
 
 	public ToStorage() {
-		const storage = {};
+		const storage: IStorage = {};
 
 		this.SavePersonalityStats(storage);
 		this.SaveBodyPartial(storage, {ass: true});
@@ -73,7 +75,7 @@ export class Estevan extends Entity {
 	}
 
 	// Schedule
-	public IsAtLocation(location?: any) {
+	public IsAtLocation(location?: ILocation) {
 		const party: Party = GAME().party;
 		location = location || party.location;
 		if (location === WORLD().loc.Plains.Nomads.Fireplace) {

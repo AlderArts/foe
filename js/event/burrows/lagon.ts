@@ -16,10 +16,12 @@ import { Lagomorph, LagomorphAlpha, LagomorphBrute, LagomorphElite, LagomorphWiz
 import { Entity, ICombatEncounter, ICombatOrder } from "../../entity";
 import { GAME, WORLD } from "../../GAME";
 import { Gui } from "../../gui";
+import { IStorage } from "../../istorage";
 import { AccItems } from "../../items/accessories";
 import { AlchemyItems } from "../../items/alchemy";
 import { QuestItems } from "../../items/quest";
 import { Burrows } from "../../loc/burrows";
+import { ILocation } from "../../location";
 import { Party } from "../../party";
 import { Text } from "../../text";
 import { TF } from "../../tf";
@@ -27,7 +29,7 @@ import { ITime } from "../../time";
 import { Player } from "../player";
 
 export class Lagon extends Entity {
-	constructor(storage?: any) {
+	constructor(storage?: IStorage) {
 		super();
 
 		this.ID = "lagon";
@@ -57,7 +59,7 @@ export class Lagon extends Entity {
 		if (storage) { this.FromStorage(storage); }
 	}
 
-	public FromStorage(storage: any) {
+	public FromStorage(storage: IStorage) {
 		this.LoadPersonalityStats(storage);
 		this.body.FromStorage(storage.body);
 
@@ -67,7 +69,7 @@ export class Lagon extends Entity {
 	}
 
 	public ToStorage() {
-		const storage = {};
+		const storage: IStorage = {};
 
 		this.SavePersonalityStats(storage);
 		this.SaveBodyPartial(storage, {ass: true});
@@ -83,7 +85,7 @@ export class Lagon extends Entity {
 	}
 
 	// Schedule TODO
-	public IsAtLocation(location?: any) {
+	public IsAtLocation(location?: ILocation) {
 		const party: Party = GAME().party;
 		const burrows: Burrows = GAME().burrows;
 		const world = WORLD();

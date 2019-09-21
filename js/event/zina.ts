@@ -8,11 +8,12 @@ import { Color } from "../body/color";
 import { Race } from "../body/race";
 import { Entity } from "../entity";
 import { GAME } from "../GAME";
+import { IStorage } from "../istorage";
 import { ILocation } from "../location";
 import { TF } from "../tf";
 
 export class Zina extends Entity {
-	constructor(storage?: any) {
+	constructor(storage?: IStorage) {
 		super();
 
 		this.ID = "zina";
@@ -64,7 +65,7 @@ export class Zina extends Entity {
 	}
 
 	// TODO save/load combat stats/preg/etc
-	public FromStorage(storage: any) {
+	public FromStorage(storage: IStorage) {
 		this.LoadPersonalityStats(storage);
 
 		// Load flags
@@ -72,7 +73,7 @@ export class Zina extends Entity {
 	}
 
 	public ToStorage() {
-		const storage = {};
+		const storage: IStorage = {};
 
 		this.SavePersonalityStats(storage);
 

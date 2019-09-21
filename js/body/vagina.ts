@@ -1,5 +1,6 @@
 import * as _ from "lodash";
 
+import { IStorage } from "../istorage";
 import { Stat } from "../stat";
 import { Cock } from "./cock";
 import { Orifice } from "./orifice";
@@ -13,7 +14,7 @@ export class Vagina extends Orifice {
 		this.clit          = new Stat(0.5);
 	}
 
-	public ToStorage(full: any) {
+	public ToStorage(full: boolean) {
 		const storage = super.ToStorage(full);
 		if (full) {
 			storage.clit = this.clit.base.toFixed(2);
@@ -21,7 +22,7 @@ export class Vagina extends Orifice {
 		return storage;
 	}
 
-	public FromStorage(storage: any) {
+	public FromStorage(storage: IStorage) {
 		storage = storage || {};
 		super.FromStorage(storage);
 		this.clit.base    = parseFloat(storage.clit) || this.clit.base;
