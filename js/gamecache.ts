@@ -283,11 +283,12 @@ const InitCache = () => {
 
 const CacheToGame = () => {
 	InitCache();
-	const gameCache: any = GameCache();
+	const gameCache = GameCache();
 
 	// Load flags
 	_.forIn(gameCache.flags, (value, key) => {
-		gameCache.flags[key] = parseInt(value, 10);
+		const str: any = value;
+		gameCache.flags[key] = parseInt(str, 10);
 	});
 
 	InitWorldTime(
@@ -304,7 +305,7 @@ const CacheToGame = () => {
 		GAME().kiakai.body.SetRace(Race.Elf);
 	}
 	if (gameCache.version < 6) {
-		if     (gameCache.flags.KiakaiAttitude === 0) {
+		if (gameCache.flags.KiakaiAttitude === 0) {
 			gameCache.flags.KiakaiAttitude = KiakaiFlags.Attitude.Nice;
 		} else if (gameCache.flags.KiakaiAttitude === 1) {
 			gameCache.flags.KiakaiAttitude = KiakaiFlags.Attitude.Naughty;

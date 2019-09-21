@@ -1,7 +1,7 @@
 import { ILocation, IWorld } from "./location";
-import { ITime, Time } from "./time";
+import { ITime, ITimeStorage, Time } from "./time";
 
-let game: any = {};
+let game: {[index: string]: any} = {};
 
 export function InitGAME() {
     game = {};
@@ -10,9 +10,16 @@ export function GAME() {
     return game;
 }
 
-let gameCache: any = {};
+export interface IGameCache {
+	name?: string;
+	version?: number;
+	time?: ITimeStorage;
+	flags?: {[index: string]: number};
+}
 
-export function SetGameCache(c: any) {
+let gameCache: IGameCache = {};
+
+export function SetGameCache(c: IGameCache) {
 	gameCache = c;
 }
 export function GameCache() {

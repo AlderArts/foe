@@ -16,6 +16,14 @@ export interface ITime {
 	year?: number;
 }
 
+export interface ITimeStorage {
+	minute?: string;
+	hour?: string;
+	day?: string;
+	season?: string;
+	year?: string;
+}
+
 /*
  *
  * Time structure
