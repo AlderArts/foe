@@ -8,6 +8,7 @@ import { Race } from "../../body/race";
 import { Entity } from "../../entity";
 import { GAME, WORLD, WorldTime } from "../../GAME";
 import { IStorage } from "../../istorage";
+import { ILocation } from "../../location";
 
 export namespace BelindaFlags {
 	export enum Met {
@@ -66,7 +67,7 @@ export class Belinda extends Entity {
 
 	// TODO
 	// Schedule
-	public IsAtLocation(location: any) {
+	public IsAtLocation(location: ILocation) {
 		location = location || GAME().party.location;
 		if (location === WORLD().loc.Rigard.Brothel.Brothel) {
 			return (WorldTime().hour >= 18 || WorldTime().hour < 6);

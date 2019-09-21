@@ -1,4 +1,4 @@
-import { IWorld } from "./location";
+import { ILocation, IWorld } from "./location";
 import { ITime, Time } from "./time";
 
 let game: any = {};
@@ -38,7 +38,7 @@ export function WorldTime() {
     return worldTime;
 }
 
-export function MoveToLocation(location: any, timestep?: any, preventClear?: boolean) {
+export function MoveToLocation(location: ILocation, timestep?: ITime, preventClear?: boolean) {
 	const oldLocation = game.party.location;
 	game.party.location = location;
 

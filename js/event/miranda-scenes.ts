@@ -4398,6 +4398,11 @@ export namespace MirandaScenes {
 		}
 	}
 
+	enum MirandaHouseLoc {
+		Upstairs,
+		Downstairs,
+	}
+
 	export function HomeSubbySex() {
 		const player: Player = GAME().player;
 		const miranda: Miranda = GAME().miranda;
@@ -4425,11 +4430,7 @@ export namespace MirandaScenes {
 			Text.Add("<i>“Enough gawking, let's fuck!”</i> the horny herm exclaims, almost ripping apart your [armor] in her eagerness. In short order, she has relieved you of your gear, leaving you standing nude in her foyer. ", parse);
 		}
 
-		const Loc = {
-			Upstairs   : 0,
-			Downstairs : 1,
-		};
-		let location = Loc.Upstairs;
+		let location = MirandaHouseLoc.Upstairs;
 
 		const scenes = new EncounterTable();
 		scenes.AddEnc(() => {
@@ -4444,7 +4445,7 @@ export namespace MirandaScenes {
 			Text.Add("<i>“Listen close,”</i> she says, stalking up to you while tearing her own clothes off, <i>“if you stain the rug, you are gonna lick it up. And trust me, you are going to stain the rug.”</i> She discards her top, letting her large breasts bounce freely. Downstairs, her cock is quickly rising to attention.", parse);
 			Text.NL();
 			Text.Add("The dobie has you in her sights, and she’s not going to take no for an answer.", parse);
-			location = Loc.Downstairs;
+			location = MirandaHouseLoc.Downstairs;
 		}, 1.0, () => true);
 		scenes.AddEnc(() => {
 			Text.Add("<i>“This way!”</i> she motions imperiously, pulling you along up the stairs to her bedroom. The steep stairway gives you quite the view of Miranda’s supple behind, though it’s still obscured by her tight-fitting clothes. The dobie curses as she fumbles a bit with the door, her tail wagging with excitement. When the guardswoman finally manages to get it open, she practically throws you through the doorway and into her bedroom.", parse);
@@ -4462,21 +4463,21 @@ export namespace MirandaScenes {
 			Text.Add("<i>“Check out the goods all you like,”</i> Miranda quips sultrily, tossing her long hair over her shoulder. <i>“Don’t daydream for too long, though. As you can see, I’m getting kinda antsy.”</i>", parse);
 			Text.NL();
 			Text.Add("It seems like she has you within her sights, so you better speak up quickly unless you are going to just let her take you. If her wide grin and stiff cock are any judge, she’s itching to have a go at you.", parse);
-			location = Loc.Upstairs;
+			location = MirandaHouseLoc.Upstairs;
 		}, 1.0, () => true);
 
 		scenes.Get();
 
 		Text.Flush();
 
-		parse.loc1 = () => location === Loc.Upstairs ? "the bed" : "the rug";
-		parse.loc2 = () => location === Loc.Upstairs ? "the soft sheets" : "the fluffy pelt";
+		parse.loc1 = () => location === MirandaHouseLoc.Upstairs ? "the bed" : "the rug";
+		parse.loc2 = () => location === MirandaHouseLoc.Upstairs ? "the soft sheets" : "the fluffy pelt";
 
 		// [Take anal][Take vag][Dommy ride]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Take anal",
 			func() {
-				MirandaScenes.HomeSubbySexTakeAnal(location, Loc);
+				MirandaScenes.HomeSubbySexTakeAnal(location);
 			}, enabled : true,
 			tooltip : "You need her... offer your ass to the horny herm.",
 		});
@@ -4498,7 +4499,7 @@ export namespace MirandaScenes {
 
 		options.push({ nameStr : "Dommy ride",
 			func() {
-				MirandaScenes.HomeSubbySexDommyRide(location, Loc);
+				MirandaScenes.HomeSubbySexDommyRide(location);
 			}, enabled : true,
 			tooltip : "Perhaps... she’d let you fuck her if you asked?",
 		});
@@ -4507,7 +4508,7 @@ export namespace MirandaScenes {
 	}
 
 	// TODO
-	export function HomeSubbySexDommyRide(location: any, Loc: any) {
+	export function HomeSubbySexDommyRide(location: MirandaHouseLoc) {
 		const player: Player = GAME().player;
 		const miranda: Miranda = GAME().miranda;
 
@@ -4524,8 +4525,8 @@ export namespace MirandaScenes {
 		parse = player.ParserTags(parse);
 		parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 		parse = Text.ParserPlural(parse, player.NumCocks() > 2, undefined, "2");
-		parse.loc1 = () => location === Loc.Upstairs ? "the bed" : "the rug";
-		parse.loc2 = () => location === Loc.Upstairs ? "the soft sheets" : "the fluffy pelt";
+		parse.loc1 = () => location === MirandaHouseLoc.Upstairs ? "the bed" : "the rug";
+		parse.loc2 = () => location === MirandaHouseLoc.Upstairs ? "the soft sheets" : "the fluffy pelt";
 
 		const dom = miranda.SubDom() - player.SubDom();
 
@@ -4734,7 +4735,7 @@ export namespace MirandaScenes {
 		});
 	}
 
-	export function HomeSubbySexTakeAnal(location: any, Loc: any) {
+	export function HomeSubbySexTakeAnal(location: MirandaHouseLoc) {
 		const player: Player = GAME().player;
 		const miranda: Miranda = GAME().miranda;
 
@@ -4747,8 +4748,8 @@ export namespace MirandaScenes {
 			guyGirl : player.mfTrue("guy", "girl"),
 			manWoman : player.mfTrue("man", "woman"),
 			masterMistress : player.mfTrue("master", "mistress"),
-			loc1() { return location === Loc.Upstairs ? "the bed" : "the rug"; },
-			loc2() { return location === Loc.Upstairs ? "the soft sheets" : "the fluffy pelt"; },
+			loc1() { return location === MirandaHouseLoc.Upstairs ? "the bed" : "the rug"; },
+			loc2() { return location === MirandaHouseLoc.Upstairs ? "the soft sheets" : "the fluffy pelt"; },
 		};
 		parse = player.ParserTags(parse);
 		parse = Text.ParserPlural(parse, player.NumCocks() > 1);
@@ -4883,7 +4884,7 @@ export namespace MirandaScenes {
 				} else {
 					Text.Add("Most of it lands on your [belly] and [breasts], trickling down on [loc2].", parse);
 				}
-				if (location === Loc.Downstairs) {
+				if (location === MirandaHouseLoc.Downstairs) {
 					Text.NL();
 					Text.Add("<i>“What did I tell you about staining the rug?”</i> the herm growls, a bit miffed at the mess you caused. <i>“Guess I’m not entirely blameless, but let’s continue this upstairs.”</i>", parse);
 				}
@@ -4891,7 +4892,7 @@ export namespace MirandaScenes {
 				Text.Add("Your femcum gushes forth, clear drops trickling down around the base of Miranda’s fuckstick. While you may have gotten off from the intense anal fuck you just received, your loins are still aching, begging to be filled.", parse);
 			}
 			Text.NL();
-			if (location !== Loc.Upstairs) {
+			if (location !== MirandaHouseLoc.Upstairs) {
 				parse.legs = player.LowerBodyType() !== LowerBodyType.Single ? ", your legs wrapped around her" : "";
 				Text.Add("Not even waiting for her knot to deflate, Miranda hoists you up[legs], patting you on the back as she strides toward the stairs. You gulp as you feel the cum inside you roiling about, but the canid buttplug holds, and just a little of it seeps out.", parse);
 				Text.NL();
@@ -4907,7 +4908,7 @@ export namespace MirandaScenes {
 				Text.NL();
 				Text.Add("<i>“Now, where were we?”</i> she purrs as she looms over you, her eyes still filled with unsated lust.", parse);
 
-				location = Loc.Upstairs;
+				location = MirandaHouseLoc.Upstairs;
 			}
 
 			TimeStep({hour : 1});

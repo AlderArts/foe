@@ -172,7 +172,7 @@ export class Entity {
 	public slut: Stat;
 	public relation: Stat;
 
-	public location: any;
+	public location: ILocation;
 
 	/* ENTITY MENU */
 	public InteractDefault = EntityMenu.InteractDefault;
