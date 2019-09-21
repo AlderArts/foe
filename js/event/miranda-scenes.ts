@@ -950,7 +950,7 @@ export namespace MirandaScenes {
 					scenes.AddEnc(() => {
 						Text.Add("<i>“Perhaps next time, I’ll try out that cunt of yours, hmm?”</i> she grunts, one hand trailing down to probe your wet netherlips.", parse);
 						Text.NL();
-					}, 1.0, () => player.FirstVag());
+					}, 1.0, () => player.FirstVag() !== undefined);
 					scenes.AddEnc(() => {
 						Text.Add("<i>“Nice tits,”</i> she compliments you, <i>“bet they are good cushions, with all the time you spend on your stomach getting railed!”</i>", parse);
 						Text.NL();
@@ -4611,7 +4611,7 @@ export namespace MirandaScenes {
 			const scenes = new EncounterTable();
 			scenes.AddEnc(() => {
 				Text.Add("Her fingers, sloppy with your pre, sneak their way down below your [cocks], find your wet gash and plunge inside it, drawing another gasp from you. She doesn’t play fair, toying with both your sets that way.", parse);
-			}, 1.0, () => player.FirstVag());
+			}, 1.0, () => player.FirstVag() !== undefined);
 			scenes.AddEnc(() => {
 				parse.l = player.HasLegs() ? "down between" : "around";
 				Text.Add("Her fingers, sloppy with your pre, sneak their way [l] your [legs], teasing your taint and prodding at your back door. You stifle a moan as she slips inside you; first one, then two digits. Better concentrate so she doesn’t forget about <i>you</i> being the one fucking <i>her</i>.", parse);

@@ -1664,10 +1664,10 @@ export namespace GwendyScenes {
 			const scenes = new EncounterTable();
 			scenes.AddEnc(() => {
 				Text.Add("Her balls lets loose the flood of her pent up seed,[geachof] her horsecock[gs] painting her bed in strands of sticky white goo. ", parse);
-			}, 1.0, () => gwendy.FirstCock());
+			}, 1.0, () => gwendy.FirstCock() !== undefined);
 			scenes.AddEnc(() => {
 				Text.Add("She cries out, and from the wetness trailing down her legs, she’ll have to change the sheets after you are done here. ", parse);
-			}, 1.0, () => gwendy.FirstVag());
+			}, 1.0, () => gwendy.FirstVag() !== undefined);
 
 			scenes.Get();
 
@@ -2183,7 +2183,7 @@ export namespace GwendyScenes {
 						Text.NL();
 						Text.Add("<i>“Good. Well, you’re free to leave now, since I’ve had my fun. Just make sure that if you do get off, it’d better be away from the farm. Who knows what might happen to you if I catch you?”</i> Despite her playful tone, you instinctively know you’d be degraded even worse than today. Getting dressed in haste, you mumble your goodbyes to Gwendy, before heading on your way, painfully aroused.", parse);
 						Text.NL();
-					}, 1.0, () => player.FirstCock());
+					}, 1.0, () => player.FirstCock() !== undefined);
 					scenes.AddEnc(() => {
 						Text.Add("Gwendy chuckles in a haughty tone, as she begins to caress the slick folds surrounding your [vag]. It elicits a low moan from you and she smiles at your arousal. Slowly, she begins tease your [clit] with a stray finger as you squirm and grow wetter.", parse);
 						Text.NL();
@@ -2199,7 +2199,7 @@ export namespace GwendyScenes {
 						Text.NL();
 						Text.Add("<i>“I’ve had fun with you, but I’ve got other things to do. Don’t let me catch you getting off here on the farm, though. While you are here, you are under my thumb, got it?”</i>", parse);
 						Text.NL();
-					}, 1.0, () => player.FirstVag());
+					}, 1.0, () => player.FirstVag() !== undefined);
 
 					scenes.Get();
 

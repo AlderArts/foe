@@ -928,7 +928,7 @@ export namespace LagonScenes {
                 Text.Add("Finally, you can no longer hold back, crying out as you feed your [cum] load to the sisters. Before you’ve even regained your senses again, your [cocks] [isAre] growing stiff again, coaxed by Lagon’s constant pounding. Their hunger sated, each of the girls give your quivering cock[s] a final kiss before withdrawing, licking cum from their lips. You’re given no time to recover before you’re once again bent over the throne, the king impaling you with undiminished fervor.", parse);
             }
             player.AddLustFraction(0.5);
-        }, 1.0, () => player.FirstCock());
+        }, 1.0, () => player.FirstCock() !== undefined);
 
         scenes.Get();
 

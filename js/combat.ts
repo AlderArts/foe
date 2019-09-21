@@ -4,7 +4,7 @@ import { GetDEBUG } from "../app";
 import { Abilities } from "./abilities";
 import { Ability } from "./ability";
 import { CurrentActiveChar, EnemyParty, SetCurEncounter, SetCurrentActiveChar, SetEnemyParty } from "./combat-data";
-import { Entity, ICombatOrder } from "./entity";
+import { Entity, ICombatEncounter, ICombatOrder } from "./entity";
 import { GAME, TimeStep } from "./GAME";
 import { GameState, SetGameState } from "./gamestate";
 import { Gui } from "./gui";
@@ -15,7 +15,7 @@ import { StatusEffect } from "./statuseffect";
 import { Text } from "./text";
 
 // Create encounter with a Party() containing enemies
-export class Encounter {
+export class Encounter implements ICombatEncounter {
 
 	public static InitiativeSorter(a: ICombatOrder, b: ICombatOrder) {
 		if (a.entity.Incapacitated() && b.entity.Incapacitated()) { return 0; }
@@ -74,11 +74,7 @@ export class Encounter {
 		for (const ent of GAME().party.members) {
 			this.combatOrder.push({
 				entity  : ent,
-				isEnemy : false,
-				aggro   : undefined,
 				initiative : 0,
-				cooldown : undefined,
-				casting : undefined,
 			});
 		}
 		for (const ent of this.enemy.members) {
@@ -87,8 +83,6 @@ export class Encounter {
 				isEnemy : true,
 				aggro   : [],
 				initiative : 0,
-				cooldown : undefined,
-				casting : undefined,
 			});
 		}
 

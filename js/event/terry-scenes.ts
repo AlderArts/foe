@@ -2451,23 +2451,23 @@ export namespace TerryScenes {
 						scenes.AddEnc(() => {
 							parse.fox = terry.HorseCock() ? "horse" : "fox";
 							Text.Add("<i>“So what are we doing? I’m already rock-hard. Maybe you’d like to add some [fox]-meat to your diet? Or maybe you just need something to fill you up?”</i> [heshe] suggests with a lusty grin.", parse);
-						}, 1.0, () => terry.FirstCock());
+						}, 1.0, () => terry.FirstCock() !== undefined);
 						scenes.AddEnc(() => {
 							Text.Add("<i>“What’s it gonna be, [playername]? You finally going to break my virgin pussy in?”</i>", parse);
-						}, 1.0, () => terry.FirstVag() && terry.FirstVag().virgin && (player.FirstCock() || player.Strapon()));
+						}, 1.0, () => terry.FirstVag() && terry.FirstVag().virgin && (player.FirstCock() !== undefined || player.Strapon() !== undefined));
 						scenes.AddEnc(() => {
 							Text.Add("<i>“Tell me what are we doing? I’m so wet I can barely stand it anymore!”</i>", parse);
 						}, 1.0, () => terry.FirstVag() && terry.FirstVag().virgin === false);
 						scenes.AddEnc(() => {
 							Text.Add("<i>“So what are you planning? Personally, I’m a bit hungry. Think you could feed me?”</i>", parse);
-						}, 1.0, () => player.FirstCock());
+						}, 1.0, () => player.FirstCock() !== undefined);
 						scenes.AddEnc(() => {
 							Text.Add("<i>“I got an itch in my butt, and I just can’t reach it. Got something long and hard to help me with?”</i>", parse);
-						}, 1.0, () => player.FirstCock() || player.Strapon());
+						}, 1.0, () => player.FirstCock() !== undefined || player.Strapon() !== undefined);
 
 						scenes.AddEnc(() => {
 							Text.Add("<i>“Feeling a bit thirsty, think you can get me something to drink? Maybe some juice?”</i> [heshe] grins.", parse);
-						}, 1.0, () => player.FirstVag());
+						}, 1.0, () => player.FirstVag() !== undefined);
 						scenes.AddEnc(() => {
 							Text.Add("<i>“My boobs feel so heavy… I could really use a hand over here,”</i> [heshe] says, caressing [hisher] breasts.", parse);
 						}, 1.0, () => terry.Lactation() && (terry.Milk() >= terry.MilkCap()));
@@ -4045,7 +4045,7 @@ export namespace TerryScenes {
 				Text.Add("You thrust your tenting bulge against the golden heart, grinding your fabric clad erection against your [foxvixen]’s birthmark and letting [himher] feel your appreciation of it through your [botarmor].", parse);
 				Text.NL();
 				Text.Add("<i>“S-stop it! You perv!”</i> [heshe] exclaims, though [heshe] makes no move to step away from you.", parse);
-			}, 1.0, () => player.FirstCock());
+			}, 1.0, () => player.FirstCock() !== undefined);
 			scenes.AddEnc(() => {
 				Text.Add("Feeling mischievous, you give Terry’s butt a sudden firm poke with your finger right in the middle of [hisher] love-heart birthmark.", parse);
 				Text.NL();
@@ -9052,7 +9052,7 @@ export namespace TerryScenes {
 				Text.Add("Not that you wouldn’t appreciate a blowjob, but if [heshe] starts on this the two of you aren’t getting out of here anytime soon!", parse);
 				Text.NL();
 				Text.Add("<i>“Aww, you’re talking as if that was a bad thing.”</i> [HeShe] grins.", parse);
-			}, 1.0, () => player.FirstCock());
+			}, 1.0, () => player.FirstCock() !== undefined);
 			scenes.AddEnc(() => {
 				Text.Add("[HisHer] hands move a little lower, one finger gently rubbing your [anus].", parse);
 				Text.NL();

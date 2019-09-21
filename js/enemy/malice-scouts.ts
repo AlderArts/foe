@@ -978,7 +978,7 @@ export namespace MaliceScoutsScenes {
 
 				player.AddLustFraction(0.4);
 				player.AddSexExp(2);
-			}, 3.0, () => player.FirstVag());
+			}, 3.0, () => player.FirstVag() !== undefined);
 			scenes.AddEnc(() => {
 				Text.Add("Eyeing your [cocks], the catboy ", parse);
 				if (p1cock.Len() >= 30) {
@@ -1126,7 +1126,7 @@ export namespace MaliceScoutsScenes {
 				Text.Add("Eventually, your feline pet gets himself cleaned up a bit - from the spunk dripping off him onto the ground, if nothing else. Looking at the facial - and a bit more - that you’ve just given him, you smile at your kitten approvingly and tell him what a delightful pet he’s been.", parse);
 				Text.NL();
 				Text.Add("He purrs and bows his head submissively, exposing enough of his neck such that you can bestow scritches unto him. Between the makeshift collar you’ve given him and all the spooge that coats his exterior, it’s not an easy task, but you manage it nonetheless - he’s earned as much for his efforts at being a good kitten.", parse);
-			}, 1.0, () => player.FirstCock());
+			}, 1.0, () => player.FirstCock() !== undefined);
 			scenes.Get();
 
 			Text.NL();

@@ -344,7 +344,7 @@ export class Ability {
 		Ability.ApplyCost(this, caster);
 		this.StartCast(encounter, caster, target);
 
-		const entry: any = caster.GetCombatEntry(encounter);
+		const entry = caster.GetCombatEntry(encounter);
 
 		// Set cooldown
 		if (this.cooldown) {

@@ -908,7 +908,7 @@ export namespace KiakaiSexScenes {
 						}
 						Text.Flush();
 						Gui.NextPrompt();
-					}, 1.0, () => player.FirstCock());
+					}, 1.0, () => player.FirstCock() !== undefined);
 					scenes.AddEnc(() => {
 						Text.Add("By this time, [name] knows just what to do to get you off. Electric shocks run through your tingling labia as [heshe] administers a spark of healing energy with the tip of [hisher] [ktongue]. The sparks quickly home in on the most prominent feature of your feminine anatomy: your [clit].", parse);
 						Text.NL();
@@ -2923,7 +2923,7 @@ export namespace KiakaiSexScenes {
 							Text.NL();
 							Text.Add("You caress it, causing a twitch to run through the stiff member, globs of pre splattering on the ground beneath [himher]. Closing your hand around it, you start to pump the [kcock] in time with the thrusts of your hips.", parse);
 							Text.NL();
-						}, 1.0, () => kiakai.FirstCock());
+						}, 1.0, () => kiakai.FirstCock() !== undefined);
 						scenes.AddEnc(() => {
 							Text.Add("A quick feel between [name]'s legs tell you that [hisher] [kvag] is soaked, the elf's clear juices trailing down one of [hisher] thighs. Smiling, you dip your fingers in the wet honey pot, then present them to [himher].", parse);
 							Text.NL();
@@ -2932,7 +2932,7 @@ export namespace KiakaiSexScenes {
 								Text.Add(" [name] greedily licks your digits clean, not wanting to let [hisher] honey go to waste.", parse);
 							}
 							Text.NL();
-						}, 1.0, () => kiakai.FirstVag());
+						}, 1.0, () => kiakai.FirstVag() !== undefined);
 						scenes.Get();
 
 						Text.Add("You let your hips do the talking, letting your [cock] pump in and out of [name]'s [kanus]. If the elf had ever had doubts as to liking this, they seem to be all gone now.", parse);
@@ -3325,12 +3325,12 @@ export namespace KiakaiSexScenes {
 					scenes.AddEnc(() => {
 						Text.Add("<i>“P-perhaps you can provide some?”</i> the elf stutters. When you raise your eyebrow quizzically, [heshe] gestures toward your [cocks], embarrassed.", parse);
 						KiakaiSexScenes.AnalCatchPrep(KiakaiFlags.AnalCatchPrepScene.Frot);
-					}, 1.0, () => player.FirstCock());
+					}, 1.0, () => player.FirstCock() !== undefined);
 					// TODO: Other oils?
 					scenes.AddEnc(() => {
 						Text.Add("<i>“C-can I try some of this oil?”</i> the elf asks you.", parse);
 						KiakaiSexScenes.AnalCatchPrep(KiakaiFlags.AnalCatchPrepScene.Oil);
-					}, 1.0, () => party.inventory.QueryNum(IngredientItems.SnakeOil));
+					}, 1.0, () => party.inventory.QueryNum(IngredientItems.SnakeOil) > 0);
 					scenes.Get();
 				}, 1.0, () => kiakai.subDom.Get() >= -40 && kiakai.subDom.Get() < 10);
 				scenes.AddEnc(() => {
@@ -3348,11 +3348,11 @@ export namespace KiakaiSexScenes {
 					}, 1.0, () => true);
 					scenes.AddEnc(() => {
 						KiakaiSexScenes.AnalCatchPrep(KiakaiFlags.AnalCatchPrepScene.Frot, true);
-					}, 1.0, () => player.FirstCock());
+					}, 1.0, () => player.FirstCock() !== undefined);
 					// TODO: Other oils?
 					scenes.AddEnc(() => {
 						KiakaiSexScenes.AnalCatchPrep(KiakaiFlags.AnalCatchPrepScene.Oil, true);
-					}, 1.0, () => party.inventory.QueryNum(IngredientItems.SnakeOil));
+					}, 1.0, () => party.inventory.QueryNum(IngredientItems.SnakeOil) > 0);
 					scenes.Get();
 				}, 1.0, () => kiakai.subDom.Get() > 20);
 				scenes.Get();
@@ -4019,12 +4019,12 @@ export namespace KiakaiSexScenes {
 					Text.Add("Biting your lip, you reach down[legs], grabbing hold of[oneof] your [cocks]. Rubbing it in time with [name]'s pistoning, you start pleasuring yourself, moaning unabashedly.", parse);
 					Text.NL();
 					cockFlag = true;
-				}, 1.0, () => player.FirstCock());
+				}, 1.0, () => player.FirstCock() !== undefined);
 				scenes.AddEnc(() => {
 					Text.Add("As you let [name] ream you, you reach down and dip your fingers into your neglected honey pot, intent on pleasing it yourself if the elf declines to. You sigh euphorically, your digits matching the rhythm your lover is making.", parse);
 					Text.NL();
 					vagFlag = true;
-				}, 1.0, () => player.FirstVag());
+				}, 1.0, () => player.FirstVag() !== undefined);
 				scenes.AddEnc(() => {
 					Text.Add("You fondle your [breasts], pinching your sensitive [nips]. It's all you can do to keep yourself in check.", parse);
 					if (player.FirstBreastRow().size.Get() > 13) {

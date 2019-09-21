@@ -320,7 +320,7 @@ export namespace NagaScenes {
 		scenes.AddEnc(() => {
 			NagaScenes.DesertLossUseCock(enc);
 			return true;
-		}, 1.0, () => player.FirstCock());
+		}, 1.0, () => player.FirstCock() !== undefined);
 		scenes.AddEnc(() => {
 			NagaScenes.DesertNagaMating(enc.naga);
 			return true;
@@ -1280,7 +1280,7 @@ export namespace NagaScenes {
 			TimeStep({hour: 4});
 
 			Gui.NextPrompt();
-		}, 1.0, () => player.FirstVag());
+		}, 1.0, () => player.FirstVag() !== undefined);
 		scenes.AddEnc(() => {
 			Text.Add("Your new mate shifts the upper region of her scaled tail against you, your entwined tails gently pulsing in time with your heartbeats. You feel the warmth and moisture of her glistening slit as she slowly rubs it across the length of[oneof] your [cocks], slathering it with her liquid arousal. She lines up her tight, dripping entrance with your [cock], pressing her netherlips gently against your [cockTip] and giggling softly as she kisses you again. Her stare meets yours with warmth and passion as she slowly but surely presses her body against yours, forcing your prick between her tight folds. You both moan in bliss as her pussy swallows your member whole, wrapping your dick in warmth and sensations of rippling muscle contractions.", parse);
 			if (player.NumCocks() > 1) {
@@ -1330,7 +1330,7 @@ export namespace NagaScenes {
 			TimeStep({hour: 4});
 
 			Gui.NextPrompt();
-		}, 1.0, () => player.FirstCock());
+		}, 1.0, () => player.FirstCock() !== undefined);
 
 		Gui.Callstack.push(() => {
 			Text.Clear();

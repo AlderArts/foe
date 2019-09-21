@@ -259,9 +259,9 @@ export class Rigard {
 	}
 
 	public MetBarnaby() {
-		return this.flags.Barnaby & RigardFlags.Barnaby.Met;
+		return (this.flags.Barnaby & RigardFlags.Barnaby.Met) > 0;
 	}
 	public BlownBarnaby() {
-		return this.flags.Barnaby & RigardFlags.Barnaby.Blowjob;
+		return (this.flags.Barnaby & RigardFlags.Barnaby.Blowjob) > 0;
 	}
 }

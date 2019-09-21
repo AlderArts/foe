@@ -877,7 +877,7 @@ export namespace CaleSexScenes {
 			Text.NL();
 
 			player.AddLustFraction(0.3);
-		}, 1.0, () => player.FirstCock());
+		}, 1.0, () => player.FirstCock() !== undefined);
 
 		scenes.Get();
 
@@ -932,7 +932,7 @@ export namespace CaleSexScenes {
 			Text.NL();
 			Text.Add("<i>“Deal!”</i> he exclaims, digging his way back into your muff.", parse);
 			Text.NL();
-		}, 1.0, () => cale.Slut() >= 60 && player.FirstCock());
+		}, 1.0, () => cale.Slut() >= 60 && player.FirstCock() !== undefined);
 
 		scenes.Get();
 
@@ -2269,7 +2269,7 @@ export namespace CaleSexScenes {
 					Text.Clear();
 					CaleSexScenes.SexCatchVagEntrypoint(outside, true);
 				});
-			}, 1.0, () => player.FirstVag());
+			}, 1.0, () => player.FirstVag() !== undefined);
 
 			scenes.AddEnc(() => {
 				Text.Add("Without so much as a warning, Cale pulls out of your abused ass and nests his knotty wolf-pecker between the cheeks of your [butt]. He presses them together as he fucks your ass cleavage, rubbing his length against your rosebud.", parse);

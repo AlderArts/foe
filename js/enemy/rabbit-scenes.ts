@@ -294,13 +294,13 @@ export namespace LagomorphScenes {
 			Text.NL();
 			Text.Add("You gasp in surprise when her deft fingers begin stroking your [cock]. ", parse);
 			usecock = true;
-		}, 1.0, () => player.FirstCock());
+		}, 1.0, () => player.FirstCock() !== undefined);
 		scenes.AddEnc(() => {
 			parse.c = player.FirstCock() ? Text.Parse("Passing over your [cocks] in the process, h", parse) : "H";
 			Text.Add("[c]er fingers reach for your womanhood. Nimbly, her fingertips start to stroke your netherlips, teasingly caressing around your opening. With surprising adeptness for someone so apparently prudish, she teases open your folds and begins to work her fingers inside, gentle but insistent strokes and thrusts that slowly feed her into your cunt.", parse);
 			Text.NL();
 			Text.Add("You gasp in surprise when her deft fingers begin fingering your [vag]. ", parse);
-		}, 1.0, () => player.FirstVag());
+		}, 1.0, () => player.FirstVag() !== undefined);
 
 		scenes.Get();
 
@@ -1478,7 +1478,7 @@ export namespace LagomorphScenes {
 		scenes.AddEnc(() => {
 			target = BodyPartType.vagina;
 			parse.target = () => player.FirstVag().Short();
-		}, 3.0, () => player.FirstVag());
+		}, 3.0, () => player.FirstVag() !== undefined);
 		scenes.AddEnc(() => {
 			target = BodyPartType.ass;
 			parse.target = () => player.Butt().AnalShort();

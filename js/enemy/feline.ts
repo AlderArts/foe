@@ -1725,7 +1725,7 @@ export namespace FelinesScenes {
 			if (male) {
 				scenes.AddEnc(() => {
 					return FelinesScenes.LossCatchVaginal(male, group, enc);
-				}, 1.0, () => player.FirstVag());
+				}, 1.0, () => player.FirstVag() !== undefined);
 			}
 			if (female) {
 				const cocksInVag = player.CocksThatFit(female.FirstVag());
@@ -1739,7 +1739,7 @@ export namespace FelinesScenes {
 
 				scenes.AddEnc(() => {
 					return FelinesScenes.LossCatchVaginal(herm, group, enc);
-				}, 1.0, () => player.FirstVag());
+				}, 1.0, () => player.FirstVag() !== undefined);
 				scenes.AddEnc(() => {
 					return FelinesScenes.LossPitchVaginal(herm, group, enc, cocksInVag);
 				}, 1.0, () => cocksInVag.length > 0);
@@ -1749,7 +1749,7 @@ export namespace FelinesScenes {
 			}, 1.0, () => player.Lactation());
 			scenes.AddEnc(() => {
 				return FelinesScenes.LossPCblowsCat(mainCat, enemy);
-			}, 1.0, () => mainCat.FirstCock());
+			}, 1.0, () => mainCat.FirstCock() !== undefined);
 			if (numMales + numHerms >= 2) {
 				scenes.AddEnc(() => {
 					// Double team cats. Randomly pick out cat and cat2 from available ones.

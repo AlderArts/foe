@@ -22,7 +22,7 @@ export class EncounterTable {
 	}
 
 	// Setup phase
-	public AddEnc(func: any, odds?: any, cond?: any, obj?: any) {
+	public AddEnc(func: (obj: any) => any, odds?: number | (() => number), cond?: boolean | (() => boolean), obj?: any) {
 		this.encounters.push({func, odds, cond, obj});
 	}
 

@@ -259,10 +259,10 @@ export namespace GolScenes {
 		const scenes = new EncounterTable();
 		scenes.AddEnc(() => {
 			incubator = true;
-		}, 1.0, () => player.FirstVag());
+		}, 1.0, () => player.FirstVag() !== undefined);
 		scenes.AddEnc(() => {
 			incubator = false;
-		}, 1.0, () => player.FirstCock());
+		}, 1.0, () => player.FirstCock() !== undefined);
 		scenes.Get();
 
 		parse.inc = incubator ? "incubator" : "drone prince";

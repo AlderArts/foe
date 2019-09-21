@@ -2523,12 +2523,12 @@ export namespace RosalinScenes {
 						Text.Add("<i>“Aww… but I liked that tail,”</i> [heshe] pouts.", parse);
 						TF.RemoveAppendage(rosalin.Back(), AppendageType.tail, 1);
 						Text.NL();
-					}, 1.0, () => rosalin.HasTail());
+					}, 1.0, () => rosalin.HasTail() !== undefined);
 					scenes.AddEnc(() => {
 						Text.Add("Rosalin’s horns quickly pull back into [hisher] head, leaving no trace behind.", parse);
 						TF.RemoveAppendage(rosalin.Appendages(), AppendageType.horn, 4);
 						Text.NL();
-					}, 1.0, () => rosalin.HasHorns());
+					}, 1.0, () => rosalin.HasHorns() !== undefined);
 
 					scenes.Get();
 

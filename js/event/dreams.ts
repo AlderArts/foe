@@ -629,7 +629,7 @@ export namespace DreamsScenes {
 					Text.Add("There is a piercing pain… and then you are awake, heart pounding in your chest, and sweating profusely.", parse);
 
 					player.AddLustFraction(0.3);
-				}, 1.0, () => (uru.flags.Intro & UruFlags.Intro.FuckedUru || uru.flags.Intro & UruFlags.Intro.FuckedByUru));
+				}, 1.0, () => (uru.flags.Intro & UruFlags.Intro.FuckedUru || uru.flags.Intro & UruFlags.Intro.FuckedByUru) > 0);
 				scenes.AddEnc(() => {
 					parse.oneof = player.NumCocks() > 1 ? " one of" : "";
 					parse.s = player.NumCocks() > 1 ? "s" : "";
@@ -640,7 +640,7 @@ export namespace DreamsScenes {
 					Text.Add("When you finally awaken, you are jolted at being bereft of this ultimate ecstasy. Not to mention aroused beyond measure.", parse);
 
 					player.AddLustFraction(0.7);
-				}, 1.0, () => player.FirstCock());
+				}, 1.0, () => player.FirstCock() !== undefined);
 				scenes.AddEnc(() => {
 					Text.Add("Suddenly, the Goddess withdraws her touch, looking a bit grumpy. You look up at her in wordless complaint, aching for her to pleasure you.", parse);
 					Text.NL();

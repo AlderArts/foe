@@ -29,7 +29,7 @@ import { Item, ItemIds } from "./item";
 import { ItemToy } from "./items/toy-item";
 import { Jobs } from "./job";
 import { LactationHandler } from "./lactation";
-import { Perk, PerkIds, Perks } from "./perks";
+import { Perk, PerkIds } from "./perks";
 import { PregnancyHandler, Womb } from "./pregnancy";
 import { Stat } from "./stat";
 import { StatusEffect } from "./statuseffect";
@@ -59,7 +59,7 @@ export enum TargetStrategy {
 
 export interface ICastingEntry {
 	ability: Ability;
-	target: Entity;
+	target: Entity|any;
 	retarget: CallableFunction;
 }
 
@@ -70,12 +70,20 @@ export interface IAggroEntry {
 
 export interface ICombatOrder {
 	entity: Entity;
-	isEnemy: boolean;
-	aggro: IAggroEntry[];
+	isEnemy?: boolean;
+	aggro?: IAggroEntry[];
 	aggroAllies?: IAggroEntry[];
 	initiative: number;
-	cooldown: any[];
-	casting: ICastingEntry;
+	cooldown?: any[];
+	casting?: ICastingEntry;
+	spellstack?: any[];
+}
+
+export interface ICombatEncounter {
+	combatOrder: ICombatOrder[];
+	enemy: any;
+	GetLivePartyArray: () => any;
+	GetLiveEnemyArray: () => any;
 }
 
 // TODO: Should have shared features, such as combat stats. Body representation
@@ -672,9 +680,9 @@ export class Entity {
 		return true;
 	}
 
-	public GetCombatEntry(encounter: any) {
+	public GetCombatEntry(encounter: ICombatEncounter) {
 		const ent = this;
-		let found: any;
+		let found: ICombatOrder;
 		_.each(encounter.combatOrder, (it) => {
 			if (it.entity === ent) {
 				found = it;
@@ -684,7 +692,7 @@ export class Entity {
 		return found;
 	}
 
-	public GetPartyTarget(encounter: any, activeChar: ICombatOrder, ally?: boolean) {
+	public GetPartyTarget(encounter: ICombatEncounter, activeChar: ICombatOrder, ally?: boolean) {
 		let isEnemy = activeChar.isEnemy;
 		const confuse = activeChar.entity.combatStatus.stats[StatusEffect.Confuse];
 		if (confuse) {
@@ -701,7 +709,7 @@ export class Entity {
 		}
 	}
 
-	public GetSingleTarget(encounter: any, activeChar: ICombatOrder, strategy?: TargetStrategy, ally?: boolean) {
+	public GetSingleTarget(encounter: ICombatEncounter, activeChar: ICombatOrder, strategy?: TargetStrategy, ally?: boolean) {
 		let isEnemy = activeChar.isEnemy;
 		const confuse = activeChar.entity.combatStatus.stats[StatusEffect.Confuse];
 		if (confuse) {
@@ -776,12 +784,12 @@ export class Entity {
 		}
 
 		// Normalize hp
-		const min = _.minBy(aggro, (a: any) => {
+		const min = _.minBy(aggro, (a) => {
 			return a.entity.curHp;
-		});
-		const max = _.maxBy(aggro, (a: any) => {
+		}).entity.curHp;
+		const max = _.maxBy(aggro, (a) => {
 			return a.entity.curHp;
-		});
+		}).entity.curHp;
 
 		const span = max - min;
 		if (strategy & TargetStrategy.LowAbsHp) {
@@ -827,7 +835,7 @@ export class Entity {
 		*/
 
 		// Weigthed random selection
-		const sum = _.sumBy(aggro, (a: any) => {
+		const sum = _.sumBy(aggro, (a) => {
 			return a.aggro;
 		});
 
@@ -974,7 +982,7 @@ export class Entity {
 		return this.curLust - old;
 	}
 
-	public PhysDmgHP(encounter: any, caster: any, val: number) {
+	public PhysDmgHP(encounter: ICombatEncounter, caster: Entity, val: number) {
 		const parse: any = {
 			possessive : this.possessive(),
 		};

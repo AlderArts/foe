@@ -83,7 +83,7 @@ export class Zina extends Entity {
 
 	// Flags
 	public Met() {
-		return this.flags.Met & ZinaFlags.Met.Met;
+		return (this.flags.Met & ZinaFlags.Met.Met) > 0;
 	}
 
 	public Recruited() {

@@ -2117,7 +2117,7 @@ export namespace IslaScenes {
 			return true;
 		}, 1.0, () => {
 			return !player.Ears().race.isRace(Race.Ferret) ||
-				player.HasAntenna() || player.HasHorns(); });
+				player.HasAntenna() !== undefined || player.HasHorns() !== undefined; });
 		scenes.AddEnc(() => {
 			Text.NL();
 			Text.Add("Basking in the steam rising from the hot spring, you feel it gather on your face, wetting your skin. And then there’s a strange tightness, not altogether unpleasant…", parse);

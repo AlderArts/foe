@@ -739,7 +739,7 @@ export namespace MothgirlScenes {
 			Text.NL();
 			parse.traded = traded ? "" : ", waving her bag of coins in front of you triumphantly";
 			Text.Add("<i>“Thanks for the fun, cutey!”</i> she giggles[traded] before flying off, blowing a kiss over her shoulder as she leaves. ", parse);
-		}, 1.0, () => player.FirstCock());
+		}, 1.0, () => player.FirstCock() !== undefined);
 
 		scenes.Get();
 

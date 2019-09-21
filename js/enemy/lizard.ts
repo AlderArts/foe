@@ -1729,14 +1729,14 @@ export namespace LizardsScenes {
 			Gui.NextPrompt(() => {
 				LizardsScenes.LossMaleVagVariations.call(enc);
 			});
-		}, 2.0, () => player.FirstVag());
+		}, 2.0, () => player.FirstVag() !== undefined);
 		// IF MALE OR HERM
 		scenes.AddEnc(() => {
 			Text.Add("His eyes drift down between your legs, and his eyes narrow.", parse);
 			Text.NL();
 
 			LizardsScenes.LossMaleCockVariations.call(enc);
-		}, 1.0, () => player.FirstCock());
+		}, 1.0, () => player.FirstCock() !== undefined);
 
 		scenes.Get();
 	}
@@ -2179,7 +2179,7 @@ export namespace LizardsScenes {
 					Text.Flush();
 					Gui.NextPrompt();
 				});
-			}, 1.0, () => player.FirstCock());
+			}, 1.0, () => player.FirstCock() !== undefined);
 			// 75%, get fucked
 			scenes2.AddEnc(() => {
 				Text.Add("His claws find your [butt], and he turns you around onto your stomach. You feel him slide up behind you. <i>“Mmh...”</i> he groans softly.", parse);
@@ -2528,7 +2528,7 @@ export namespace LizardsScenes {
 					Gui.NextPrompt();
 				});
 			});
-		}, 1.0, () => player.FirstCock());
+		}, 1.0, () => player.FirstCock() !== undefined);
 		scenes.AddEnc(() => { // TAILFUCK
 			const lusty = player.LustLevel() >= 0.7;
 			parse.boygirl = player.mfTrue("boy", "girl");
@@ -2655,7 +2655,7 @@ export namespace LizardsScenes {
 					parse.dom = dom > 25 ? " reluctantly" :
 								dom > -25 ? "" : " eagerly";
 					Text.Add("She’s right… it’s no use denying it. You[dom] let go of your last sliver of self-control and close your eyes, only focusing on the heavenly feeling of her hand pounding your pussy. Filling your thoughts is the promise of something more; that scaly and deliciously thick fuckstick that you helped prepare yourself.", parse);
-				}, 3.0, () => player.FirstVag());
+				}, 3.0, () => player.FirstVag() !== undefined);
 				scenes.AddEnc(() => {
 					parse.l = player.HasLegs() ? "on all fours" : "face forward";
 					const tail = player.HasTail();

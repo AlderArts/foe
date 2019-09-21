@@ -156,7 +156,7 @@ export namespace LucilleScenes {
 					scenes.AddEnc(() => {
 						Text.Add("<i>“Ah… it seems that someone is eager to get started,”</i> Lucille smiles warmly, brushing her hand lightly over your taut clothing and tracing the outline of your [cocks]. <i>“I do so hope that the experience is up to your expectations… if not, perhaps you can come by my chambers afterward?”</i>", {cocks: player.MultiCockDesc()});
 						player.AddLustFraction(1);
-					}, 1.0, () => player.FirstCock());
+					}, 1.0, () => player.FirstCock() !== undefined);
 					scenes.Get();
 					Text.NL();
 					Text.Add("With that, she steps aside, allowing you to enter the room.", parse);

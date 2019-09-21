@@ -690,7 +690,7 @@ export namespace RigardScenes {
 			Text.NL();
 			// Outro text
 			RigardScenes.ChatterOutro(parse);
-		}, 1.0, () => rigard.Krawitz.F & KrawitzFlags.Orgy);
+		}, 1.0, () => (rigard.Krawitz.F & KrawitzFlags.Orgy) > 0);
 		scenes.AddEnc(() => {
 			Text.Add("Walking along, your eyes are drawn to a man in front of you. He reaches up to pull the hood of his cloak further down over his face, even though only a hint of his features is visible as it is.", parse);
 			Text.NL();
@@ -1102,7 +1102,7 @@ export namespace RigardScenes {
 			Text.NL();
 			// Outro text
 			RigardScenes.ChatterOutro(parse);
-		}, nobleArea, () => rigard.Krawitz.F & KrawitzFlags.TF);
+		}, nobleArea, () => (rigard.Krawitz.F & KrawitzFlags.TF) > 0);
 		scenes.AddEnc(() => {
 			Text.Add("Standing at the mouth of an alleyway, a short bulky man is chatting with a taller, broad-shouldered man. Their clothes hang a little loose on them, and are spotted with unpatched holes. The mention of rather impressive sexual acts catches your attention.", parse);
 			Text.NL();

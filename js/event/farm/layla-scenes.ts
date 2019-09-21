@@ -1818,10 +1818,10 @@ export namespace LaylaScenes {
 			const scenes = new EncounterTable();
 			scenes.AddEnc(() => {
 				Text.Add("gently massage your labia.", parse);
-			}, 1.0, () => player.FirstVag());
+			}, 1.0, () => player.FirstVag() !== undefined);
 			scenes.AddEnc(() => {
 				Text.Add("stroke[oneof] your [cocks].", parse);
-			}, 1.0, () => player.FirstCock());
+			}, 1.0, () => player.FirstCock() !== undefined);
 			scenes.AddEnc(() => {
 				Text.Add("fondle your balls, testing their weight.", parse);
 			}, 1.0, () => player.HasBalls());

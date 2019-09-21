@@ -663,7 +663,7 @@ export namespace CassidySexScenes {
 					Text.NL();
 					Text.Add("<i>“At least you didn’t make it all the way to the ceiling,”</i> she informs you cheerily, a shit-eating grin plastered on her face. <i>“That’d be hard to clean up.”</i> ", parse);
 				}
-			}, 1.0, () => player.FirstCock());
+			}, 1.0, () => player.FirstCock() !== undefined);
 			scenes.AddEnc(() => {
 				Text.Add("While she keeps her hands and feet occupied with pinning you onto the bed, her intentions are made clear by the scaly, prehensile tail snaking up your [thigh]. You feel its burning warmth near your groin for a moment and briefly wonder if that’s her goal, but soon enough its pointed tip continues past it and wriggles onto your stomach before finally inserting itself into your cleavage. More and more tail surges up, parting your [breasts], and the tip finally curls in about itself and starts to flick your nipples.", parse);
 				Text.NL();
@@ -688,9 +688,9 @@ export namespace CassidySexScenes {
 					Text.Add("only manage to cup your [breasts] like snowcaps on a mountain peak", parse);
 				} else if (player.FirstBreastRow().Size() > 5) { // C
 					Text.Add("barely manage to engulf your [breasts], with quite a bit of flesh left over", parse);
-	} else {
+				} else {
 					Text.Add("greedily seize your [breasts]", parse);
-	}
+				}
 				Text.Add(", and she starts kneading and rolling away.", parse);
 				Text.NL();
 				Text.Add("With how easily she’s going away at this… does she do this to herself often?", parse);
@@ -1666,13 +1666,13 @@ export namespace CassidySparSexScenes {
 				const scenes = new EncounterTable();
 				scenes.AddEnc(() => {
 					CassidySparSexScenes.DomRide();
-				}, 1.0, () => player.FirstCock());
+				}, 1.0, () => player.FirstCock() !== undefined);
 				scenes.AddEnc(() => {
 					CassidySparSexScenes.SuckOnBreasts();
 				}, 1.0, () => cassidy.Feminized());
 				scenes.AddEnc(() => {
 					CassidySparSexScenes.Tribbing();
-				}, 1.0, () => player.FirstVag());
+				}, 1.0, () => player.FirstVag() !== undefined);
 				scenes.Get();
 			});
 		} else {
