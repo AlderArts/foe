@@ -164,7 +164,7 @@ export namespace RoaScenes {
     }
 
     // TODO
-    export function TalkPrompt(backPrompt: any) {
+    export function TalkPrompt(backPrompt: CallableFunction) {
         const burrows: Burrows = GAME().burrows;
         const roa: Roa = GAME().roa;
         const rigard: Rigard = GAME().rigard;

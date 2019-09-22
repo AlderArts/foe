@@ -152,6 +152,14 @@ export class GolQueen extends BossEntity {
 
 export namespace GolScenes {
 
+	class GolEncounter extends Encounter {
+		public gol: GolQueen;
+
+		constructor(enemy: Party) {
+			super(enemy);
+		}
+	}
+
 	export function SearchForScepter() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
@@ -216,7 +224,7 @@ export namespace GolScenes {
 					const enemy = new Party();
 					const gol = new GolQueen();
 					enemy.AddMember(gol);
-					const enc: any = new Encounter(enemy);
+					const enc = new GolEncounter(enemy);
 					enc.gol = gol;
 
 					enc.canRun = false;
@@ -234,8 +242,8 @@ export namespace GolScenes {
 	// TODO
 	export function CombatLoss() {
 		const player: Player = GAME().player;
-		const enc = this;
-		const gol: GolQueen = enc.gol;
+		const enc: GolEncounter = this;
+		const gol = enc.gol;
 		SetGameState(GameState.Event, Gui);
 
 		const parse: IParse = {
@@ -640,9 +648,9 @@ export namespace GolScenes {
 		Encounter.prototype.onVictory.call(enc);
 	}
 
-	export function CombatWinHyperFuck(enc: any, p1cock: Cock) {
+	export function CombatWinHyperFuck(enc: GolEncounter, p1cock: Cock) {
 		const player: Player = GAME().player;
-		const gol: GolQueen = enc.gol;
+		const gol = enc.gol;
 		const lusty = gol.LustLevel() >= 0.5;
 
 		let parse: IParse = {
@@ -747,9 +755,9 @@ export namespace GolScenes {
 		});
 	}
 
-	export function CombatWinTailfuck(enc: any, p1cock: Cock) {
+	export function CombatWinTailfuck(enc: GolEncounter, p1cock: Cock) {
 		const player: Player = GAME().player;
-		const gol: GolQueen = enc.gol;
+		const gol = enc.gol;
 		const lusty = gol.LustLevel() >= 0.5;
 
 		let parse: IParse = {
@@ -863,9 +871,9 @@ export namespace GolScenes {
 
 	}
 
-	export function CombatWinCunn(enc: any) {
+	export function CombatWinCunn(enc: GolEncounter) {
 		const player: Player = GAME().player;
-		const gol: GolQueen = enc.gol;
+		const gol = enc.gol;
 		const lusty = gol.LustLevel() >= 0.5;
 		const p1cock = player.BiggestCock();
 
@@ -980,7 +988,7 @@ export namespace GolScenes {
 		Gui.SetButtonsFromList(options, false, undefined);
 	}
 
-	export function CombatAftermath(enc: any) {
+	export function CombatAftermath(enc: GolEncounter) {
 		const parse: IParse = {
 
 		};

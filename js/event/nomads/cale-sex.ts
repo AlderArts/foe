@@ -975,7 +975,7 @@ export namespace CaleSexScenes {
 		Gui.NextPrompt();
 	}
 
-	export function SexFuckHim(outside?: boolean, opts: any = {}) {
+	export function SexFuckHim(outside?: boolean, opts: IFuckHimOutsideOpts = {}) {
 		const player: Player = GAME().player;
 		const cale: Cale = GAME().cale;
 
@@ -2110,7 +2110,7 @@ export namespace CaleSexScenes {
 		CaleSexScenes.SexCatchAnalEntrypoint(outside);
 	}
 
-	export function SexCatchAnalEntrypoint(outside: any, fromVag?: boolean) {
+	export function SexCatchAnalEntrypoint(outside: boolean, fromVag?: boolean) {
 		const player: Player = GAME().player;
 		const cale: Cale = GAME().cale;
 		const cocksInAss = player.CocksThatFit(cale.Butt(), true);
@@ -2332,7 +2332,13 @@ export namespace CaleSexScenes {
 		cale.flags.xedOut++;
 	}
 
-	export function SexFuckingHimOutsideComments(cock: Cock, opts: any) {
+	interface IFuckHimOutsideOpts {
+		goop?: boolean;
+		cavalcade?: boolean;
+		cheat?: boolean;
+	}
+
+	export function SexFuckingHimOutsideComments(cock: Cock, opts: IFuckHimOutsideOpts) {
 		const player: Player = GAME().player;
 		const rosalin: Rosalin = GAME().rosalin;
 		const cale: Cale = GAME().cale;

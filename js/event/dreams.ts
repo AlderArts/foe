@@ -1149,7 +1149,7 @@ export namespace DreamsScenes {
 
 	/*
 	export function Ocean = function(ravenTrigger) {
-		let parse : any = {
+		let parse: IParse = {
 			raven : DreamsScenes.RavenText(ravenTrigger, "", "")
 		};
 

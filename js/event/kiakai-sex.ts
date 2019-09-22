@@ -7,6 +7,7 @@ import { Sex } from "../entity-sex";
 import { GAME, NAV, TimeStep } from "../GAME";
 import { Gui } from "../gui";
 import { IngredientItems } from "../items/ingredients";
+import { ItemToy } from "../items/toy-item";
 import { ToysItems } from "../items/toys";
 import { IChoice } from "../link";
 import { Party } from "../party";
@@ -2143,7 +2144,7 @@ export namespace KiakaiSexScenes {
 							});
 						}
 
-						const addToy = (toy: any) => {
+						const addToy = (toy: ItemToy) => {
 							if (GAME().party.inventory.QueryNum(toy)) {
 								const toySize = toy.cock.length.Get();
 								const cap = kiakai.Butt().capacity.Get() * (0.75 + kiakai.LustLevel() + kiakai.flags.AnalExp / 100);

@@ -943,7 +943,12 @@ export namespace FireblossomScenes {
 		FireblossomScenes.S1GrexRoom({});
 	}
 
-	export function S1GrexRoom(opts: any) {
+	interface IS1GrexRoomOpts {
+		survey?: boolean;
+		explore?: boolean;
+	}
+
+	export function S1GrexRoom(opts: IS1GrexRoomOpts) {
 		const player: Player = GAME().player;
 		const fireblossom = GAME().fireblossom;
 		const parse: IParse = {
@@ -1016,7 +1021,7 @@ export namespace FireblossomScenes {
 		Gui.SetButtonsFromList(options, false, undefined);
 	}
 
-	export function S1GrexPens(opts: any) {
+	export function S1GrexPens(opts: IS1GrexRoomOpts) {
 		const player: Player = GAME().player;
 		const fireblossom = GAME().fireblossom;
 		const parse: IParse = {

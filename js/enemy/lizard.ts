@@ -169,6 +169,16 @@ export namespace LizardsScenes {
 		});
 	}
 
+	class LizardEncounter extends Encounter {
+		public male: Lizard;
+		public female: Lizard;
+		public third: Lizard;
+
+		constructor(enemy: Party) {
+			super(enemy);
+		}
+	}
+
 	export function GroupEnc() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
@@ -178,7 +188,7 @@ export namespace LizardsScenes {
 		const female   = new Lizard(Gender.female);
 		enemy.AddMember(male);
 		enemy.AddMember(female);
-		const enc: any = new Encounter(enemy);
+		const enc = new LizardEncounter(enemy);
 		enc.male     = male;
 		enc.female   = female;
 
@@ -247,8 +257,8 @@ export namespace LizardsScenes {
 	export function WinPrompt() {
 		SetGameState(GameState.Event, Gui);
 
-		const enc = this;
-		const third: Lizard = enc.third;
+		const enc: LizardEncounter = this;
+		const third = enc.third;
 
 		Gui.Callstack.push(() => {
 			Text.Clear();
@@ -256,7 +266,7 @@ export namespace LizardsScenes {
 			const parse: IParse = {
 				two : third ? " two" : "",
 			};
-			let scene: any;
+			let scene: () => void;
 
 			const odds = third ? (third.body.Gender() === Gender.male ? 0.66 : 0.33) : 0.5;
 
@@ -278,7 +288,7 @@ export namespace LizardsScenes {
 				Text.Add("With a solid <i>thump</i>, you beat your foe to the ground. The reptile tries to scramble away, but you step in front of [m1himher], blocking [m1hisher] path. As you stop [m1himher], you see the other[two] scurry away, leaving [m2hisherTheir] companion to [m1hisher] fate...", parse);
 
 				Gui.NextPrompt(() => {
-					scene(enc);
+					scene();
 				});
 			} else {
 				Text.Add("You feint one way, then strike the finishing blow to the surprised reptile in front of you. She slumps to the ground and you move to block her escape. Suddenly, you hear an alarmed hiss of breath. Turning your head, you see the beaten male looking up at you, breathing slowly. He looks to the female, then back at you.", parse);
@@ -314,7 +324,7 @@ export namespace LizardsScenes {
 		Encounter.prototype.onVictory.call(enc);
 	}
 
-	export function WinMale(enc: any) {
+	export function WinMale(enc: LizardEncounter) {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		let parse: IParse = {
@@ -375,7 +385,7 @@ export namespace LizardsScenes {
 		Text.Flush();
 	}
 
-	export function WinFemale(enc: any) {
+	export function WinFemale(enc: LizardEncounter) {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		let parse: IParse = {
@@ -446,11 +456,10 @@ export namespace LizardsScenes {
 		Text.Flush();
 	}
 
-	export function WinFuckVag(enc: any) {
+	export function WinFuckVag(enc: LizardEncounter) {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const enemy: Lizard = enc.female;
-		const third: Lizard = enc.third;
+		const enemy = enc.female;
 
 		const p1cock = player.BiggestCock(undefined, true);
 		const realCock = p1cock.isStrapon === false;
@@ -558,10 +567,10 @@ export namespace LizardsScenes {
 		Gui.NextPrompt();
 	}
 
-	export function WinTailpeg(enc: any) {
+	export function WinTailpeg(enc: LizardEncounter) {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const enemy: Lizard = enc.female;
+		const enemy = enc.female;
 
 		let parse: IParse = {
 			p1name() { return party.members[1].NameDesc(); },
@@ -762,7 +771,7 @@ export namespace LizardsScenes {
 		});
 	}
 
-	export function WinClaimAss(enc: any, enemy: Lizard) {
+	export function WinClaimAss(enc: LizardEncounter, enemy: Lizard) {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		let parse: IParse = {
@@ -886,7 +895,7 @@ export namespace LizardsScenes {
 		});
 	}
 
-	export function WinBlowjob(enc: any, enemy: Lizard) {
+	export function WinBlowjob(enc: LizardEncounter, enemy: Lizard) {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		let parse: IParse = {
@@ -956,10 +965,10 @@ export namespace LizardsScenes {
 		});
 	}
 
-	export function WinPowerbottom(enc: any) {
+	export function WinPowerbottom(enc: LizardEncounter) {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const enemy: Lizard = enc.male;
+		const enemy = enc.male;
 
 		let parse: IParse = {
 			p1name() { return party.members[1].NameDesc(); },
@@ -1388,10 +1397,10 @@ export namespace LizardsScenes {
 		Text.Flush();
 	}
 
-	export function WinPowerbottomAssert(enc: any) {
+	export function WinPowerbottomAssert(enc: LizardEncounter) {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const enemy: Lizard = enc.male;
+		const enemy = enc.male;
 
 		let parse: IParse = {
 			p1name() { return party.members[1].NameDesc(); },
@@ -1528,10 +1537,10 @@ export namespace LizardsScenes {
 		});
 	}
 
-	export function WinPowerbottomDeny(enc: any) {
+	export function WinPowerbottomDeny(enc: LizardEncounter) {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const enemy: Lizard = enc.male;
+		const enemy = enc.male;
 
 		let parse: IParse = {
 			p1name() { return party.members[1].NameDesc(); },

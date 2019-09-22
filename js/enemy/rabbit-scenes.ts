@@ -23,7 +23,7 @@ import { BurrowsScenes } from "../loc/burrows-scenes";
 import { Party } from "../party";
 import { PregnancyHandler } from "../pregnancy";
 import { IParse, Text } from "../text";
-import { Lagomorph, LagomorphBrute, LagomorphWizard } from "./rabbit";
+import { Lagomorph, LagomorphAlpha, LagomorphBrute, LagomorphWizard } from "./rabbit";
 
 export namespace LagomorphScenes {
 
@@ -38,10 +38,21 @@ export namespace LagomorphScenes {
 		});
 	}
 
+	class LagomorphEncounter extends Encounter {
+		public alpha: LagomorphAlpha;
+		public brute: LagomorphBrute;
+		public brainy: LagomorphWizard;
+		public herm: Lagomorph;
+
+		constructor(enemy: Party) {
+			super(enemy);
+		}
+	}
+
 	export function GroupEnc() {
 		const burrows: Burrows = GAME().burrows;
 		const enemy = new Party();
-		const enc: any = new Encounter(enemy);
+		const enc = new LagomorphEncounter(enemy);
 
 		const scenes = new EncounterTable();
 		scenes.AddEnc(() => {
@@ -212,7 +223,7 @@ export namespace LagomorphScenes {
 		Encounter.prototype.onLoss.call(enc);
 	}
 
-	export function GroupLossOnPlainsBrainy(enc: any)  {
+	export function GroupLossOnPlainsBrainy(enc: LagomorphEncounter)  {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const p1cock = player.BiggestCock();
@@ -268,9 +279,9 @@ export namespace LagomorphScenes {
 			Text.Add("...It seems you have little choice. You reluctantly open your mouth as the hopper’s mons steadily approach your maw.", parse);
 		} else if (player.Slut() < 60) {
 			Text.Add("Well, maybe this won’t be so bad. You open your mouth and roll out your [tongue] to receive the approaching lapine pussy, already wondering what it will taste like.", parse);
-	} else {
+		} else {
 			Text.Add("It’s difficult to hide your excitement as she lowers herself over you. You can barely contain yourself as you lick your lips and open wide, rolling your [tongue] out like a red carpet as you wait for her hips to lower enough for you to taste her.", parse);
-	}
+		}
 		Text.NL();
 		Text.Add("She sucks in a quiet breath between her lips, shivering once, and then allows herself to fall the last few inches. Her thighs press against your head for support, blocking out most of the light and leaving you in a warm, musk-heavy darkness. A trickle of juices drips slowly and steadily onto your lips, the taste seeping over your tongue already.", parse);
 		Text.NL();
@@ -321,9 +332,9 @@ export namespace LagomorphScenes {
 			Text.Add("You see no reason not to grant them their wish, especially since this means you can cover the lapine atop you with her sibling’s cream. Of course, you’d get soaked too… but that wouldn’t be so bad now, would it?", parse);
 		} else if (player.Slut() >= 30) {
 			Text.Add("Normally, you’d have a thing or two to say about this, but right now you’re too busy to care. So you decide to grant them a small reprieve and begin moving your hands. The effort is only half-hearted though, as you have better, and more delicious, things to do...", parse);
-	} else {
+		} else {
 			Text.Add("As if getting your face buried into a horny hopper’s muff wasn’t enough… well, you’re too busy to bother. They can have your hands, but you’re not going to stroke them.", parse);
-	}
+		}
 		Text.NL();
 		Text.Add("<i>“What the hell do you think you’re doing?! You can’t just go grabbing <b>my</b> fuckbuddy like that - certainly not while I’m still fucking [himher]! Do you want to make me fall off?”</i> The lagomorph atop you complains loudly, wobbling slightly as if in emphasis, though her hand remains fixed to your genitals as if glued there.", parse);
 		Text.NL();
@@ -360,7 +371,7 @@ export namespace LagomorphScenes {
 		Gui.NextPrompt();
 	}
 
-	export function GroupLossOnPlainsToBurrows(enc: any)  {
+	export function GroupLossOnPlainsToBurrows(enc: LagomorphEncounter)  {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const burrows: Burrows = GAME().burrows;
@@ -456,13 +467,21 @@ export namespace LagomorphScenes {
 		});
 	}
 
+	interface ILagomorphGroup {
+		males: number;
+		females: number;
+		malegroup?: boolean;
+		femalegroup?: boolean;
+		mixedgroup?: boolean;
+	}
+
 	export function GroupWinOnPlainsPrompt() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const burrows: Burrows = GAME().burrows;
 		SetGameState(GameState.Event, Gui);
 
-		const enc = this;
+		const enc: LagomorphEncounter = this;
 
 		const parse: IParse = {
 
@@ -501,7 +520,10 @@ export namespace LagomorphScenes {
 			}
 			Text.Flush();
 
-			const group: any = {};
+			const group: ILagomorphGroup = {
+				males: 0,
+				females: 0,
+			};
 
 			group.males   = 0;
 			group.females = 0;
@@ -620,7 +642,7 @@ export namespace LagomorphScenes {
 		Encounter.prototype.onVictory.call(enc);
 	}
 
-	export function GroupWinOnPlainsFuckBrute(enc: any)  {
+	export function GroupWinOnPlainsFuckBrute(enc: LagomorphEncounter)  {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const p1cock  = player.BiggestCock(undefined, true);
@@ -868,7 +890,7 @@ export namespace LagomorphScenes {
 		Text.Add("When even his prodigious balls are tapped, he slumps forward, panting heavily, ears almost trailing down into the great puddle of jism centered on his hulking form, washing thick and sticky over his hands and swirling around his knees and lower legs.", parse);
 	}
 
-	export function GroupWinOnPlainsFuckM(enc: any, group: any)  {
+	export function GroupWinOnPlainsFuckM(enc: LagomorphEncounter, group: ILagomorphGroup)  {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const kiakai: Kiakai = GAME().kiakai;
@@ -1409,7 +1431,7 @@ export namespace LagomorphScenes {
 		}
 	}
 
-	export function GroupWinOnPlainsGetFuckedM(enc: any, group: any) {
+	export function GroupWinOnPlainsGetFuckedM(enc: LagomorphEncounter, group: ILagomorphGroup) {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const kiakai: Kiakai = GAME().kiakai;
@@ -1650,11 +1672,11 @@ export namespace LagomorphScenes {
 		});
 	}
 
-	export function GroupWinInterrorigate(enc: any) {
+	export function GroupWinInterrorigate(enc: LagomorphEncounter) {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const burrows: Burrows = GAME().burrows;
-		const alpha: Lagomorph = enc.alpha;
+		const alpha = enc.alpha;
 
 		let parse: IParse = {
 			meUs       : party.Alone() ? "me" : "us",

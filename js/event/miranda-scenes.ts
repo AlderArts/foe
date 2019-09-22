@@ -1618,7 +1618,7 @@ export namespace MirandaScenes {
 		});
 	}
 
-	export function BarChatOptions(options: any[], back?: any) {
+	export function BarChatOptions(options: IChoice[], back?: CallableFunction) {
 		const player: Player = GAME().player;
 		const rigard: Rigard = GAME().rigard;
 		const miranda: Miranda = GAME().miranda;
@@ -1949,7 +1949,7 @@ export namespace MirandaScenes {
 		}
 	}
 
-	export function BarTalkOptions(options: any[], next: any) {
+	export function BarTalkOptions(options: IChoice[], next: CallableFunction) {
 		const parse: IParse = {};
 
 		options.push({ nameStr : "Her past",
@@ -2660,7 +2660,7 @@ export namespace MirandaScenes {
 
 	/* MIRANDA SEX */
 
-	export function BarSexOptions(options: any[]) {
+	export function BarSexOptions(options: IChoice[]) {
 		const miranda: Miranda = GAME().miranda;
 
 		const parse: IParse = {};

@@ -853,7 +853,7 @@ export namespace LagonScenes {
             Text.NL();
             Text.Add("In your aroused state, you don’t need much coaxing to wrap your lips around the middle one - a respectable seven inch bunny-pecker - simultaneously grabbing the other two and stroking them off. Unlike their father, these ones are quick to shoot, relatively soon blasting their seed all over your face and down your gullet. <i>“Good work,”</i> Lagon purrs, scratching you on the back.", parse);
 
-            const bunny: any = new Lagomorph(Gender.male);
+            const bunny = new Lagomorph(Gender.male);
             Sex.Blowjob(player, bunny);
             player.FuckOral(player.Mouth(), bunny.FirstCock(), 1);
             bunny.Fuck(bunny.FirstCock(), 1);
@@ -912,7 +912,7 @@ export namespace LagonScenes {
                 Text.Add(" <i>“Why don’t you sate their desires?”</i>", parse);
                 Text.NL();
 
-                const bunny: any = new Lagomorph(Gender.female);
+                const bunny = new Lagomorph(Gender.female);
 
                 Sex.Blowjob(bunny, player);
                 bunny.FuckOral(bunny.Mouth(), player.FirstCock(), 1);
@@ -1514,7 +1514,7 @@ export namespace LagonScenes {
         const lagon: Lagon = GAME().lagon;
 
         SetGameState(GameState.Event, Gui);
-        const enc = this;
+        const enc: UsurpEncounter = this;
         const parse: IParse = {
 
         };
@@ -1978,6 +1978,14 @@ export namespace LagonScenes {
         Gui.SetButtonsFromList(options, false, undefined);
     }
 
+    class UsurpEncounter extends Encounter {
+        public toolate: boolean;
+
+        constructor(enemy: Party) {
+            super(enemy);
+        }
+    }
+
     export function Usurp(toolate: boolean) {
         const parse: IParse = {
 
@@ -1989,7 +1997,7 @@ export namespace LagonScenes {
         enemy.AddMember(new LagomorphBrute());
         enemy.AddMember(new LagomorphWizard());
         enemy.AddMember(new LagomorphElite(Gender.Random()));
-        const enc: any = new Encounter(enemy);
+        const enc = new UsurpEncounter(enemy);
         enc.toolate = toolate;
 
         enc.canRun = false;
@@ -2010,7 +2018,7 @@ export namespace LagonScenes {
 
         SetGameState(GameState.Event, Gui);
 
-        const enc = this;
+        const enc: UsurpEncounter = this;
         const toolate = enc.toolate;
         const scepter = party.Inv().QueryNum(QuestItems.Scepter);
 
@@ -2107,7 +2115,7 @@ export namespace LagonScenes {
 
         SetGameState(GameState.Event, Gui);
 
-        const enc = this;
+        const enc: UsurpEncounter = this;
         const toolate = enc.toolate;
         const scepter = party.Inv().QueryNum(QuestItems.Scepter);
 
@@ -2156,7 +2164,7 @@ export namespace LagonScenes {
 
         SetGameState(GameState.Event, Gui);
 
-        const enc = this;
+        const enc: UsurpEncounter = this;
         const toolate = enc.toolate;
         const scepter = party.Inv().QueryNum(QuestItems.Scepter);
 
@@ -2251,7 +2259,7 @@ export namespace LagonScenes {
         const player: Player = GAME().player;
 
         SetGameState(GameState.Event, Gui);
-        const enc = this;
+        const enc: UsurpEncounter = this;
 
         const parse: IParse = {
             cocks() { return player.MultiCockDesc(); },
@@ -2310,7 +2318,7 @@ export namespace LagonScenes {
         const lagon: Lagon = GAME().lagon;
 
         SetGameState(GameState.Event, Gui);
-        const enc = this;
+        const enc: UsurpEncounter = this;
 
         const parse: IParse = {
             playername : player.name,

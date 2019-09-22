@@ -700,7 +700,7 @@ export namespace LagonDScenes {
 			Text.NL();
 			Text.Add("Amused, you salute him in return, and turn to leave. You haven’t gotten far down the tunnel when lapine moaning echoes back to you from Lagon’s chamber. Looking back over your shoulder, you see the other guard looking through the window in Lagon’s door, an expression of surprise giving way to one of envy. You chuckle to yourself in amusement and keep heading to the throne room.", parse);
 
-			const guard: any = new LagomorphElite(Gender.male);
+			const guard = new LagomorphElite(Gender.male);
 
 			Sex.Anal(guard, lagon);
 			lagon.FuckAnal(lagon.Butt(), guard.FirstCock(), 0);

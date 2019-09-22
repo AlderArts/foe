@@ -282,7 +282,7 @@ export class Terry extends Entity {
 		const gender = this.flags.PrefGender;
 		if (gender === Gender.male) { return "his"; } else { return "hers"; }
 	}
-	public mfPronoun(male: any, female: any) {
+	public mfPronoun(male: string, female: string) {
 		const gender = this.flags.PrefGender;
 		if (gender === Gender.male) { return male; } else { return female; }
 	}

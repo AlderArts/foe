@@ -422,8 +422,8 @@ export namespace FelinesScenes {
 	}
 
 	export function Intro() {
-		const enc     = this;
-		const enemy: Party   = enc.enemy;
+		const enc: Encounter = this;
+		const enemy   = enc.enemy;
 		const group   = enemy.Num() > 1;
 		const mainCat = enemy.Get(0);
 
@@ -438,7 +438,7 @@ export namespace FelinesScenes {
 	export function IntroRegular() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const enc     = this;
+		const enc: Encounter = this;
 		const enemy: Party   = enc.enemy;
 		const group: boolean = enemy.Num() > 1;
 		const mainCat: Wildcat = enemy.Get(0) as Wildcat;
@@ -498,10 +498,10 @@ export namespace FelinesScenes {
 	export function IntroStalking() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const enc = this;
-		const p1  = party.Get(1);
-		const enemy: Party   = enc.enemy;
-		const group   = enemy.Num() > 1;
+		const enc: Encounter = this;
+		const p1 = party.Get(1);
+		const enemy = enc.enemy;
+		const group = enemy.Num() > 1;
 		const mainCat: Wildcat = enemy.Get(0) as Wildcat;
 
 		let parse: IParse = {
@@ -552,11 +552,11 @@ export namespace FelinesScenes {
 		const player: Player = GAME().player;
 		SetGameState(GameState.Event, Gui);
 
-		const enc = this;
-		const enemy: Party   = enc.enemy;
-		const group   = enemy.Num() > 1;
+		const enc: Encounter = this;
+		const enemy = enc.enemy;
+		const group = enemy.Num() > 1;
 		const mainCat: Wildcat = enemy.Get(0) as Wildcat;
-		const taur    = player.IsTaur();
+		const taur = player.IsTaur();
 
 		const parse: IParse = {
 			oneof        : group ? " one of" : "",
@@ -870,7 +870,7 @@ export namespace FelinesScenes {
 		Gui.SetButtonsFromList(options, false, undefined);
 	}
 
-	export function WinFuckVag(cat: Wildcat, group: boolean, enc: any, cocks: Cock[], numFemales: number) {
+	export function WinFuckVag(cat: Wildcat, group: boolean, enc: Encounter, cocks: Cock[], numFemales: number) {
 		const player: Player = GAME().player;
 		const pCock = player.BiggestCock(cocks);
 
@@ -883,6 +883,8 @@ export namespace FelinesScenes {
 		};
 		parse = cat.ParserPronouns(parse);
 		parse = player.ParserTags(parse);
+
+		const trio = enc.enemy.Num() > 2;
 
 		Text.Clear();
 		if (group) {
@@ -1021,8 +1023,8 @@ export namespace FelinesScenes {
 			Text.Add(" Grunting, you tell her that you’re more than happy to give it to her any time. You can always use a distraction from this whole ‘saving the world’ business, and a moaning, slutty kitty to fuck[breed] provides just that.", parse);
 			if (group) {
 				Text.NL();
-				parse.s = enc.enemy.Num() > 2 ? "s" : "";
-				parse.is = enc.enemy.Num() > 2 ? "are" : "is";
+				parse.s = trio ? "s" : "";
+				parse.is = trio ? "are" : "is";
 				Text.Add("[Possessive] companion[s] [is] looking on, perhaps in jealousy or apprehension, not that you care either way. If you still feel in the mood for it, perhaps you’ll give them a good fucking too.", parse);
 			}
 
@@ -1102,7 +1104,7 @@ export namespace FelinesScenes {
 		}
 	}
 
-	export function WinFuckButt(cat: Wildcat, group: boolean, enc: any, cocks: Cock[]) {
+	export function WinFuckButt(cat: Wildcat, group: boolean, enc: Encounter, cocks: Cock[]) {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const pCock = player.BiggestCock(cocks);
@@ -1343,7 +1345,7 @@ export namespace FelinesScenes {
 		}
 	}
 
-	export function WinGetBlowjob(cat: Wildcat, group: boolean, enc: any) {
+	export function WinGetBlowjob(cat: Wildcat, group: boolean, enc: Encounter) {
 		const player: Player = GAME().player;
 		let parse: IParse = {
 			oneof    : group ? " one of" : "",
@@ -1505,7 +1507,7 @@ export namespace FelinesScenes {
 		});
 	}
 
-	export function WinGroupService(enc: any, enemy: Party) {
+	export function WinGroupService(enc: Encounter, enemy: Party) {
 		const player: Player = GAME().player;
 		const mainCat: Wildcat = enemy.Get(0) as Wildcat;
 		const betaCat: Wildcat = enemy.Get(1) as Wildcat;
@@ -2037,7 +2039,7 @@ export namespace FelinesScenes {
 		return true;
 	}
 
-	export function LossCatchVaginal(cat: Wildcat, group: boolean, enc: any) {
+	export function LossCatchVaginal(cat: Wildcat, group: boolean, enc: Encounter) {
 		const player: Player = GAME().player;
 		let parse: IParse = {
 			oneof    : group ? " one of" : "",
@@ -2051,6 +2053,8 @@ export namespace FelinesScenes {
 		};
 		parse = cat.ParserPronouns(parse);
 		parse = player.ParserTags(parse);
+
+		const trio = enc.enemy.Num() > 2;
 
 		const dom    = player.SubDom() > 0;
 		const virgin = player.FirstVag().virgin;
@@ -2221,7 +2225,7 @@ export namespace FelinesScenes {
 					Text.Add("The two of you stay locked in this position for a moment longer before [heshe] finally announces, <i>“I’m sorry, my dear. But I can’t stay with you.”</i> [HeShe] extracts [himher]self from your used [vag] and gently pats you on your [t].", parse);
 				}
 				Text.NL();
-				parse.s = enc.enemy.Num() > 2 ? "s" : "";
+				parse.s = trio ? "s" : "";
 				parse.comp = group ? Text.Parse(" calling [hisher] friend[s] over and", parse) : "";
 				Text.Add("<i>“I really need to be going, but I hope to run into you again,”</i> [heshe] says,[comp] walking away.", parse);
 
@@ -2255,7 +2259,7 @@ export namespace FelinesScenes {
 				Text.NL();
 				Text.Add("[Name] drinks down all of your femcum with gusto, even licking around your honeypot to ensure [heshe] gets every last drop of your sweet tasting juices.", parse);
 				Text.NL();
-				parse.s = enc.enemy.Num() > 2 ? "s" : "";
+				parse.s = trio ? "s" : "";
 				parse.comp = group ? Text.Parse(", calling [hisher] companion[s] to follow after [himher]", parse) : "";
 				Text.Add("<i>“Mmm, delicious,”</i> [heshe] states, licking [hisher] lips. <i>“I’ll be going now, dear. But I hope to run into you again.”</i> [HeShe] gives your [butt] a parting kiss and walks away[comp].", parse);
 				Text.Flush();
@@ -2271,7 +2275,7 @@ export namespace FelinesScenes {
 		return true;
 	}
 
-	export function LossPitchVaginal(cat: Wildcat, group: boolean, enc: any, cocksInVag: Cock[]) {
+	export function LossPitchVaginal(cat: Wildcat, group: boolean, enc: Encounter, cocksInVag: Cock[]) {
 		const player: Player = GAME().player;
 		const pCock  = player.BiggestCock(cocksInVag);
 		const allCocks = player.AllCocksCopy();
@@ -2307,6 +2311,8 @@ export namespace FelinesScenes {
 		};
 		parse = cat.ParserPronouns(parse);
 		parse = player.ParserTags(parse, "", pCock);
+
+		const trio = enc.enemy.Num() > 2;
 
 		const dom    = player.SubDom() > 0;
 
@@ -2418,14 +2424,14 @@ export namespace FelinesScenes {
 				Text.NL();
 				Text.Add("She rubs her sore nethers, wincing a bit as she dips her finger inside to withdraw a stray dollop of your jism. Running her tongue over her lips, she unceremoniously licks finger clean, enjoying the flavor of your thick cream. <i>“Hmm, tasty!”</i> she remarks. Turning to look down at you, she grins. <i>“Sorry for not sticking around, stud. But I really must be going, so I’ll see you around,”</i> she bids you farewell, throwing a smooch at you. ", parse);
 				if (cat.FirstCock() && group) {
-					parse.oneof = enc.enemy.length > 2 ? " one of" : "";
-					parse.s     = enc.enemy.length > 2 ? "s" : "";
+					parse.oneof = trio ? " one of" : "";
+					parse.s     = trio ? "s" : "";
 					Text.NL();
 					Text.Add("<i>“Oh, and don’t mind the mess,”</i> she motions at the strands of her own cum painting her bosom. <i>“I’ll have[oneof] my friend[s] clean this up,”</i> she giggles.", parse);
 				}
 				Text.NL();
 				if (group) {
-					parse.comp = Text.Parse(" rejoins her companion[s] and", {s: enc.enemy.length > 2 ? "s" : ""});
+					parse.comp = Text.Parse(" rejoins her companion[s] and", {s: trio ? "s" : ""});
 				} else {
 					parse.comp = "";
 				}
@@ -2475,7 +2481,7 @@ export namespace FelinesScenes {
 				Text.NL();
 				Text.Add("<i>“Ah… that was great, lover. Just what I needed,”</i> she purrs.", parse);
 				let cocked = 0;
-				for (const c of enc.enemy) {
+				for (const c of enc.enemy.members) {
 					if (c === cat) { continue; }
 					if (c.FirstCock()) { cocked++; }
 				}
@@ -2529,8 +2535,8 @@ export namespace FelinesScenes {
 				Text.NL();
 				Text.Add("The kitty takes a moment to catch her breath, before she starts scraping the strands of your thick cream from her face and licking her hand clean. <i>“That was unexpected,”</i> she remarks. <i>“But you did show me a good time,”</i> she adds, propping herself up on her elbows.", parse);
 				if (group) {
-					parse.oneof = enc.enemy.length > 2 ? " one of" : "";
-					parse.s = enc.enemy.length > 2 ? "s" : "";
+					parse.oneof = trio ? " one of" : "";
+					parse.s = trio ? "s" : "";
 					Text.Add("<i>“Guess I’ll have[oneof] my friend[s] clean me up later,”</i> she says absentmindedly.", parse);
 				} else {
 					Text.Add("<i>“I’ll save the rest to eat on the go,”</i> she giggles.", parse);
@@ -2538,7 +2544,7 @@ export namespace FelinesScenes {
 				Text.NL();
 
 				if (group) {
-					parse.comp = Text.Parse(" and calls her friend[s] to her side", {s: enc.enemy.length > 2 ? "s" : ""});
+					parse.comp = Text.Parse(" and calls her friend[s] to her side", {s: trio ? "s" : ""});
 				} else {
 					parse.comp = "";
 				}
@@ -2558,7 +2564,7 @@ export namespace FelinesScenes {
 		return true;
 	}
 
-	export function LossDrainMilk(mainCat: Wildcat, group: boolean, enc: any) {
+	export function LossDrainMilk(mainCat: Wildcat, group: boolean, enc: Encounter) {
 		const player: Player = GAME().player;
 		let parse: IParse = {
 			name : mainCat.nameDesc(),
@@ -2658,8 +2664,8 @@ export namespace FelinesScenes {
 
 	/*
 	export function WinPrompt = () => {
-		let enc = this;
-		let parse : any = {
+		let enc: Encounter = this;
+		let parse: IParse = {
 
 		};
 
@@ -2670,7 +2676,7 @@ export namespace FelinesScenes {
 	}
 	*/
 
-	export function LossDoubleTeam(cat: Wildcat, cat2: Wildcat, group: boolean, enc: any) {
+	export function LossDoubleTeam(cat: Wildcat, cat2: Wildcat, group: boolean, enc: Encounter) {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 

@@ -157,9 +157,17 @@ export namespace NagaScenes {
 		});
 	}
 
+	class NagaEncounter extends Encounter {
+		public naga: Naga;
+
+		constructor(enemy: Party) {
+			super(enemy);
+		}
+	}
+
 	export function LoneEnc() {
 		const enemy = new Party();
-		const enc: any = new Encounter(enemy);
+		const enc = new NagaEncounter(enemy);
 
 		enc.naga = new Naga();
 
@@ -174,8 +182,7 @@ export namespace NagaScenes {
 
 	export function DesertEncounter() {
 		const player: Player = GAME().player;
-		const enc  = this;
-		const naga: Naga = enc.naga;
+		const enc: NagaEncounter = this;
 		let parse: IParse = {
 
 		};
@@ -310,7 +317,7 @@ export namespace NagaScenes {
 		Encounter.prototype.onLoss.call(enc);
 	}
 
-	export function DesertLossScenes(enc: any) {
+	export function DesertLossScenes(enc: NagaEncounter) {
 		const player: Player = GAME().player;
 		const scenes = new EncounterTable();
 		scenes.AddEnc(() => {
@@ -337,10 +344,10 @@ export namespace NagaScenes {
 		return scenes.Get();
 	}
 
-	export function DesertLossGetDPd(enc: any) {
+	export function DesertLossGetDPd(enc: NagaEncounter) {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const naga: Naga = enc.naga;
+		const naga = enc.naga;
 		SetGameState(GameState.Event, Gui);
 
 		let parse: IParse = {
@@ -476,10 +483,10 @@ export namespace NagaScenes {
 		Gui.NextPrompt();
 	}
 
-	export function DesertLossUseCock(enc: any) {
+	export function DesertLossUseCock(enc: NagaEncounter) {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const naga: Naga = enc.naga;
+		const naga = enc.naga;
 		SetGameState(GameState.Event, Gui);
 
 		const p1cock = player.BiggestCock();
@@ -733,10 +740,9 @@ export namespace NagaScenes {
 		Encounter.prototype.onVictory.call(enc);
 	}
 
-	export function DesertWinPrompt2(enc: any, hypno: boolean) {
+	export function DesertWinPrompt2(enc: NagaEncounter, hypno: boolean) {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const naga: Naga = enc.naga;
 
 		const parse: IParse = {};
 
@@ -821,9 +827,9 @@ export namespace NagaScenes {
 		Gui.SetButtonsFromList(options, false, undefined);
 	}
 
-	export function DesertWinHypnotize(enc: any) {
+	export function DesertWinHypnotize(enc: NagaEncounter) {
 		const player: Player = GAME().player;
-		const naga: Naga = enc.naga;
+		const naga = enc.naga;
 
 		let parse: IParse = {};
 
@@ -846,9 +852,9 @@ export namespace NagaScenes {
 		NagaScenes.DesertWinPrompt2(enc, true);
 	}
 
-	export function DesertWinHypnotizeOwn(enc: any) {
+	export function DesertWinHypnotizeOwn(enc: NagaEncounter) {
 		const player: Player = GAME().player;
-		const naga: Naga = enc.naga;
+		const naga = enc.naga;
 
 		let parse: IParse = {
 			master : player.mfFem("master", "mistress"),
@@ -872,9 +878,9 @@ export namespace NagaScenes {
 		NagaScenes.DesertWinPrompt2(enc, true);
 	}
 
-	export function DesertWinFuckJerk(enc: any, hypno: boolean) {
+	export function DesertWinFuckJerk(enc: NagaEncounter, hypno: boolean) {
 		const player: Player = GAME().player;
-		const naga: Naga = enc.naga;
+		const naga = enc.naga;
 
 		const p1cock = player.BiggestCock();
 
@@ -1008,12 +1014,12 @@ export namespace NagaScenes {
 		Gui.NextPrompt();
 	}
 
-	export function DesertWinGetFuckedVag(enc: any, hypno: boolean) {
+	export function DesertWinGetFuckedVag(enc: NagaEncounter, hypno: boolean) {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		Text.Clear();
 
-		const naga: Naga = enc.naga;
+		const naga = enc.naga;
 
 		const p1cock = player.BiggestCock();
 		const vag = player.FirstVag();
@@ -1160,16 +1166,22 @@ export namespace NagaScenes {
 		});
 	}
 
-	export function DesertWinTailpeg(opts: any) {
+	interface IDesertWinTailpegOpts {
+		naga: Naga;
+		hypno: boolean;
+		next: (tailPeg: boolean) => void;
+	}
+
+	export function DesertWinTailpeg(opts: IDesertWinTailpegOpts) {
 		const player: Player = GAME().player;
 		let parse: IParse = {
 
 		};
 
 		parse = player.ParserTags(parse);
-		const next  = opts.next || Gui.PrintDefaultOptions;
-		const naga: Naga = opts.naga || new Naga();
-		const hypno: boolean = opts.hypno || false;
+		const next  = opts.next;
+		const naga = opts.naga;
+		const hypno = opts.hypno;
 
 		// [Tailpeg][No]
 		const options: IChoice[] = [];

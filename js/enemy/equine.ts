@@ -169,13 +169,22 @@ export namespace EquineScenes {
 		});
 	}
 
+	class EquineEncounter extends Encounter {
+		public stallion: Equine;
+		public mare: Equine;
+
+		constructor(enemy: Party) {
+			super(enemy);
+		}
+	}
+
 	export function PairEnc(levelbonus: number) {
 		const enemy    = new Party();
 		const stallion = new Equine(Gender.male, levelbonus);
 		const mare     = new Equine(Gender.female, levelbonus);
 		enemy.AddMember(stallion);
 		enemy.AddMember(mare);
-		const enc: any = new Encounter(enemy);
+		const enc = new EquineEncounter(enemy);
 		enc.stallion = stallion;
 		enc.mare     = mare;
 
@@ -349,7 +358,7 @@ export namespace EquineScenes {
 		Encounter.prototype.onLoss.call(enc);
 	}
 
-	export function FuckFemale(enc: any) {
+	export function FuckFemale(enc: EquineEncounter) {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		let parse: IParse = {
@@ -461,7 +470,7 @@ export namespace EquineScenes {
 		});
 	}
 
-	export function GetFucked(enc: any) {
+	export function GetFucked(enc: EquineEncounter) {
 		const player: Player = GAME().player;
 		let parse: IParse = {
 			ifArmor    : player.Armor() ? "strips you down to full nudity" : "runs them down your naked body",
@@ -526,7 +535,7 @@ export namespace EquineScenes {
 	}
 
 	// SCENE FOR MALES/HERMS
-	export function Threesome1(enc: any) {
+	export function Threesome1(enc: EquineEncounter) {
 		const player: Player = GAME().player;
 		let parse: IParse = {
 			mobVag() { return enc.mare.FirstVag().Short(); },
@@ -602,7 +611,7 @@ export namespace EquineScenes {
 		});
 	}
 
-	export function Threesome2(enc: any) {
+	export function Threesome2(enc: EquineEncounter) {
 		const player: Player = GAME().player;
 		let parse: IParse = {
 			mobVag() { return enc.mare.FirstVag().Short(); },
@@ -719,11 +728,11 @@ export namespace EquineScenes {
 	}
 
 	// TODO
-	export function WinFuckHim(enc: any) {
+	export function WinFuckHim(enc: EquineEncounter) {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const mare: Equine = enc.mare;
-		const stallion: Equine = enc.stallion;
+		const mare = enc.mare;
+		const stallion = enc.stallion;
 
 		const p1cock = player.BiggestCock();
 		const allCocks = player.AllCocksCopy();
@@ -1164,11 +1173,11 @@ export namespace EquineScenes {
 		Gui.SetButtonsFromList(options, false, undefined);
 	}
 
-	export function WinFuckHer(enc: any) {
+	export function WinFuckHer(enc: EquineEncounter) {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const mare: Equine = enc.mare;
-		const stallion: Equine = enc.stallion;
+		const mare = enc.mare;
+		const stallion = enc.stallion;
 
 		let parse: IParse = {
 
@@ -1315,10 +1324,10 @@ export namespace EquineScenes {
 		});
 	}
 
-	export function WinRideHimVag(enc: any) {
+	export function WinRideHimVag(enc: EquineEncounter) {
 		const player: Player = GAME().player;
-		const mare: Equine = enc.mare;
-		const stallion: Equine = enc.stallion;
+		const mare = enc.mare;
+		const stallion = enc.stallion;
 
 		let parse: IParse = {
 

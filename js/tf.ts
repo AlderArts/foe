@@ -26,8 +26,12 @@ export namespace TF {
 		Removed   = 3,
 	}
 
+	export interface ISetTFRet {
+		bodypart?: BodyPart;
+	}
+
 	// Change of bodyparts, return if something was changed
-	export function SetRaceOne(bodypart: BodyPart|BodyPart[], race: RaceDesc, ret?: any) {
+	export function SetRaceOne(bodypart: BodyPart|BodyPart[], race: RaceDesc, ret?: ISetTFRet) {
 		ret = ret || {};
 		let changed = Effect.Unchanged;
 		if (_.isArray(bodypart)) {
@@ -1234,7 +1238,7 @@ export class TFItem extends Item {
 		this.isTF    = true;
 	}
 
-	public PushEffect(func: any, opts?: any) {
+	public PushEffect(func: CallableFunction, opts?: any) {
 		this.effects.push({ func, opts});
 	}
 

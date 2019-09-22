@@ -143,7 +143,7 @@ export class Patchwork extends Entity {
 		const gender = this.PronounGender();
 		if (gender === Gender.male) { return "theirs"; } else { return "hers"; }
 	}
-	public mfPronoun(male: any, female: any) {
+	public mfPronoun(male: string, female: string) {
 		const gender = this.PronounGender();
 		if (gender === Gender.male) { return male; } else { return female; }
 	}

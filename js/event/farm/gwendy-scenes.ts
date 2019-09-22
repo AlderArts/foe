@@ -50,7 +50,7 @@ export namespace GwendyScenes {
 		Gui.SetButtonsFromList(options, true);
 	}
 
-	export function LoftSexPrompt(back: any, disableSleep: boolean) {
+	export function LoftSexPrompt(back: CallableFunction, disableSleep: boolean) {
 		const parse: IParse = {};
 		const options: IChoice[] = [];
 		GwendyScenes.ChallengeSexWonPrompt(true, options, disableSleep);
@@ -140,7 +140,7 @@ export namespace GwendyScenes {
 		Gui.SetButtonsFromList(options, true);
 	}
 
-	export function Talk(backfunc: any) {
+	export function Talk(backfunc: CallableFunction) {
 		const player: Player = GAME().player;
 		const gwendy: Gwendy = GAME().gwendy;
 		const parse: IParse = {
@@ -664,7 +664,7 @@ export namespace GwendyScenes {
 		}
 	}
 
-	export function ChallengeSexWonPrompt(hangout: boolean, options: any[], disableSleep: boolean) {
+	export function ChallengeSexWonPrompt(hangout: boolean, options: IChoice[], disableSleep: boolean) {
 		const player: Player = GAME().player;
 		const gwendy: Gwendy = GAME().gwendy;
 		const parse: IParse = {
@@ -1181,7 +1181,7 @@ export namespace GwendyScenes {
 						Text.Add("<i>“Say... are you really just going to leave it like that?”</i> she manages to pant, grinding back against your body. <i>“Come on... I need it...”</i>", parse);
 						Text.Flush();
 
-						GwendyScenes.LoftSexPrompt(false, disableSleep);
+						GwendyScenes.LoftSexPrompt(undefined, disableSleep);
 					}, enabled : true,
 					tooltip : "She is ready and more than willing.",
 				});
@@ -1977,7 +1977,7 @@ export namespace GwendyScenes {
 		}
 	}
 
-	export function ChallengeSexLostPrompt(hangout: boolean, options: any[], disableSleep: boolean) {
+	export function ChallengeSexLostPrompt(hangout: boolean, options: IChoice[], disableSleep: boolean) {
 		const player: Player = GAME().player;
 		const gwendy: Gwendy = GAME().gwendy;
 
@@ -2027,7 +2027,7 @@ export namespace GwendyScenes {
 						scenes.AddEnc(() => {
 							Text.Add("As she breaks the kiss, you find yourself slightly aroused. The same could be said for Gwendy and her amorous glance. <i>“Heheh, sorry, [playername], but that's all for now.”</i> She smiles upon noticing your disappointment, though she makes up with another, longer kiss. <i>“Then again, I might not be able to resist so easily... whaddaya say we kick it up a notch?”</i>", parse);
 							Text.Flush();
-							GwendyScenes.LoftSexPrompt(false, disableSleep);
+							GwendyScenes.LoftSexPrompt(undefined, disableSleep);
 						}, 1.0, () => lossScene >= 1 || wonScene >= 1);
 
 						scenes.Get();

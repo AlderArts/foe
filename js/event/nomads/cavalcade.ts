@@ -173,7 +173,7 @@ export namespace NCavalcadeScenes {
 		g.NextRound();
 	}
 
-	export function PlayersLeft(players: any[]) {
+	export function PlayersLeft(players: ICavalcadePlayer[]) {
 		let num = 0;
 		for (const p of players) {
 			if (!p.out) {
@@ -265,8 +265,16 @@ export namespace NCavalcadeScenes {
 			}
 
 			if (NCavalcadeScenes.PlayersLeft(players) <= 1) {
-				let next: any;
-				if     (!player.out) {  next = NCavalcadeScenes.SexyPlayerWin; } else if (!estevan.out) { next = NCavalcadeScenes.SexyEstevanWin; } else if (!rosalin.out) { next = NCavalcadeScenes.SexyRosalinWin; } else if (!cale.out) {    next = NCavalcadeScenes.SexyCaleWin; } else {
+				let next: (cheat: boolean) => void;
+				if (!player.out) {
+					next = NCavalcadeScenes.SexyPlayerWin;
+				} else if (!estevan.out) {
+					next = NCavalcadeScenes.SexyEstevanWin;
+				} else if (!rosalin.out) {
+					next = NCavalcadeScenes.SexyRosalinWin;
+				} else if (!cale.out) {
+					next = NCavalcadeScenes.SexyCaleWin;
+				} else {
 					Text.Add("THIS IS A BUG. WINNER IS BROKEN.", parse);
 				}
 

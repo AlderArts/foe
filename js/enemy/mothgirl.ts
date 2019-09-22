@@ -146,6 +146,15 @@ export enum MothgirlFlags {
 
 export namespace MothgirlScenes {
 
+	class MothgirlEncounter extends Encounter {
+		public moth: Mothgirl;
+		public coin: number;
+
+		constructor(enemy: Party) {
+			super(enemy);
+		}
+	}
+
 	export function LoneEnc() {
 		const player: Player = GAME().player;
 		const terry: Terry = GAME().terry;
@@ -153,7 +162,7 @@ export namespace MothgirlScenes {
 		const enemy = new Party();
 		const moth = new Mothgirl();
 		enemy.AddMember(moth);
-		const enc: any = new Encounter(enemy);
+		const enc = new MothgirlEncounter(enemy);
 		enc.moth = moth;
 
 		enc.coin = Math.max(Math.floor(party.coin * 0.1), 100);
@@ -351,7 +360,7 @@ export namespace MothgirlScenes {
 		Encounter.prototype.onVictory.call(enc);
 	}
 
-	export function WinTitfuck(enc: any) {
+	export function WinTitfuck(enc: MothgirlEncounter) {
 		const player: Player = GAME().player;
 		const p1cock = player.BiggestCock();
 		const hugecock = p1cock.Len() > 20;
@@ -409,9 +418,9 @@ export namespace MothgirlScenes {
 		Gui.NextPrompt();
 	}
 
-	export function WinAnal(enc: any, cocksInAss: Cock[]) {
+	export function WinAnal(enc: MothgirlEncounter, cocksInAss: Cock[]) {
 		const player: Player = GAME().player;
-		const moth: Mothgirl = enc.moth;
+		const moth = enc.moth;
 		const p1cock = player.BiggestCock(cocksInAss);
 		const strapon = p1cock.isStrapon;
 		const hugecock = p1cock.Len() > 50;
@@ -512,9 +521,9 @@ export namespace MothgirlScenes {
 		Gui.NextPrompt();
 	}
 
-	export function WinCunn(enc: any) {
+	export function WinCunn(enc: MothgirlEncounter) {
 		const player: Player = GAME().player;
-		const moth: Mothgirl = enc.moth;
+		const moth = enc.moth;
 
 		let parse: IParse = {
 			cocks() { return player.MultiCockDesc(); },
@@ -570,11 +579,11 @@ export namespace MothgirlScenes {
 		Gui.NextPrompt();
 	}
 
-	export function Loss(enc: any, traded?: boolean) {
+	export function Loss(enc: MothgirlEncounter, traded?: boolean) {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 
-		const moth: Mothgirl = enc.moth;
+		const moth = enc.moth;
 		const p1cock = player.BiggestCock();
 		traded = traded || enc.coin <= 0;
 

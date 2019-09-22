@@ -17,17 +17,13 @@ export class Maze {
 	public xMax: number;
 	public yMax: number;
 
-	constructor(opts?: any) {
-		opts = opts || {};
-
+	constructor() {
 		this.map = [];
 		this.xMax = 0;
 		this.yMax = 0;
 	}
 
 	public AddRoom(x: number, y: number, room?: MazeRoom) {
-		x = x || 0;
-		y = y || 0;
 		room = room || new MazeRoom();
 		room.maze = this;
 		room.x = x;

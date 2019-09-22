@@ -137,7 +137,7 @@ export class Cassidy extends Entity {
 	public hishers() {
 		if (this.KnowGender()) { return "hers"; } else { return "his"; }
 	}
-	public mfPronoun(male: any, female: any) {
+	public mfPronoun(male: string, female: string) {
 		if (this.KnowGender()) { return female; } else { return male; }
 	}
 }

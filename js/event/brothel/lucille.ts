@@ -127,7 +127,7 @@ export namespace LucilleScenes {
 		*/
 		Text.Flush();
 
-		const selection = (func: any) => {
+		const selection = (func: () => void) => {
 			Text.Clear();
 			if (lucillePresent) {
 				Text.Add("<i>“A wise choice,”</i> Lucille affirms, leading you toward the back. The two of you enter a narrow corridor with a long line of doors, each marked by a small symbol indicating what is inside. Some of the rooms are marked as occupied, and you hear strange noises from inside them.", parse);

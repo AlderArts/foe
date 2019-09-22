@@ -9,11 +9,12 @@ import { Race } from "../body/race";
 import { Vagina } from "../body/vagina";
 import { EncounterTable } from "../encountertable";
 import { Event } from "../event";
-import { EntityStorage, MoveToLocation } from "../GAME";
 import { GAME, GameCache, TimeStep, WORLD, WorldTime } from "../GAME";
+import { EntityStorage, MoveToLocation } from "../GAME";
 import { Gui } from "../gui";
 import { Input } from "../input";
 import { Inventory } from "../inventory";
+import { IStorage } from "../istorage";
 import { HalloweenItems } from "../items/halloween";
 import { IChoice, Link } from "../link";
 import { Burrows } from "../loc/burrows";
@@ -78,7 +79,7 @@ export class Halloween {
 		}
 		return parse;
 	}
-	public player: any;
+	public player: IStorage;
 	public party: any;
 	public flags: number;
 	public ronnie: number;
@@ -5252,7 +5253,13 @@ export namespace HalloweenScenes {
 		Gui.SetButtonsFromList(options, false, undefined);
 	}
 
-	export function LaggothQnA(opts: any) {
+	interface ILaggothQnAOpts {
+		pref?: boolean;
+		conq?: boolean;
+		imps?: boolean;
+	}
+
+	export function LaggothQnA(opts: ILaggothQnAOpts) {
 		const parse: IParse = {
 
 		};
@@ -6326,7 +6333,11 @@ export namespace HalloweenScenes {
 		}
 	}
 
-	export function JennaSwitchPrompt(opts: any) {
+	interface IJennaSwitchPromptOpts {
+		trader?: boolean;
+	}
+
+	export function JennaSwitchPrompt(opts: IJennaSwitchPromptOpts) {
 		const player: Player = GAME().player;
 		let parse: IParse = {
 
@@ -6465,7 +6476,11 @@ export namespace HalloweenScenes {
 		Gui.SetButtonsFromList(options, false, undefined);
 	}
 
-	export function JennaAgreePrompt(opts: any) {
+	interface IJennaAgreePromptOpts {
+		what?: boolean;
+	}
+
+	export function JennaAgreePrompt(opts: IJennaAgreePromptOpts) {
 		const player: Player = GAME().player;
 		let parse: IParse = {
 

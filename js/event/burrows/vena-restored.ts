@@ -195,7 +195,13 @@ export namespace VenaRScenes {
 		});
 	}
 
-	export function LagonsFate(opts: any) {
+	interface ILagonsFateOpts {
+		kill?: boolean;
+		exile?: boolean;
+		drug?: boolean;
+	}
+
+	export function LagonsFate(opts: ILagonsFateOpts) {
 		const player: Player = GAME().player;
 		const parse: IParse = {
 			playername : player.name,

@@ -165,7 +165,7 @@ export class LagonRegular extends BossEntity {
 		return drops;
 	}
 
-	public PhysDmgHP(encounter: any, caster: Entity, val: number) {
+	public PhysDmgHP(encounter: ICombatEncounter, caster: Entity, val: number) {
 		const parse: IParse = {
 			poss : caster.possessive(),
 		};
@@ -248,7 +248,7 @@ export class LagonRegular extends BossEntity {
 				}
 				enemy.AddMember(entity);
 
-				const ent: any = {
+				const ent: ICombatOrder = {
 					entity,
 					isEnemy    : true,
 					initiative : 0,

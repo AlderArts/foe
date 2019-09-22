@@ -2058,16 +2058,21 @@ export namespace RosalinScenes {
 					scenes.AddEnc(() => {
 						parse.oneof = rosalin.NumCocks() > 1 ? "one of " : "";
 						Text.Add("<i>“Ahn!”</i> Rosalin exclaims, moaning loudly as [hisher] hands go to [hisher] crotch. Pulling [hisher] dress up, [heshe] reveals that [oneof][hisher] [rcocks] has turned into a pointed canine cock, complete with a knot.", parse);
-						const ret: any = {};
+						const ret: TF.ISetTFRet = {};
 						TF.SetRaceOne(rosalin.AllCocks(), Race.Dog, ret);
-						if (ret.bodypart) { ret.bodypart.knot = 1; }
+						if (ret.bodypart) {
+							const cock = ret.bodypart as Cock;
+							cock.knot = 1;
+						}
 						Text.NL();
 					}, 1.0, () => {
 						let unchanged = false;
 						const cocks = rosalin.AllCocks();
 						for (const cock of cocks) {
-							if (cock.race !== Race.Dog) { unchanged = true;
-						} }
+							if (cock.race !== Race.Dog) {
+								unchanged = true;
+							}
+						}
 						return unchanged;
 					});
 					scenes.AddEnc(() => {
@@ -2162,15 +2167,20 @@ export namespace RosalinScenes {
 					scenes.AddEnc(() => {
 						parse.oneof = rosalin.NumCocks() > 1 ? "one of " : "";
 						Text.Add("<i>“Ahn!”</i> Rosalin exclaims, moaning loudly as [hisher] hands go to [hisher] crotch. Pulling [hisher] dress up, [heshe] reveals that [oneof][hisher] [rcocks] has turned into a pointed canine cock, complete with a knot.", parse);
-						const ret: any = {};
+						const ret: TF.ISetTFRet = {};
 						TF.SetRaceOne(rosalin.AllCocks(), Race.Wolf, ret);
-						if (ret.bodypart) { ret.bodypart.knot = 1; }
+						if (ret.bodypart) {
+							const cock = ret.bodypart as Cock;
+							cock.knot = 1;
+						}
 						Text.NL();
 					}, 1.0, () => {
 						let unchanged = false;
 						const cocks = rosalin.AllCocks();
 						for (const cock of cocks) {
-							if (cock.race !== Race.Wolf) { unchanged = true; }
+							if (cock.race !== Race.Wolf) {
+								unchanged = true;
+							}
 						}
 						return unchanged;
 					});
@@ -2266,15 +2276,20 @@ export namespace RosalinScenes {
 					scenes.AddEnc(() => {
 						parse.oneof = rosalin.NumCocks() > 1 ? "one of " : "";
 						Text.Add("<i>“Ahn!”</i> Rosalin exclaims, moaning loudly as [hisher] hands go to [hisher] crotch. Pulling [hisher] dress up, [heshe] reveals that [oneof][hisher] [rcocks] has turned into a pointed canine cock, complete with a knot.", parse);
-						const ret: any = {};
+						const ret: TF.ISetTFRet = {};
 						TF.SetRaceOne(rosalin.AllCocks(), Race.Fox, ret);
-						if (ret.bodypart) { ret.bodypart.knot = 1; }
+						if (ret.bodypart) {
+							const cock = ret.bodypart as Cock;
+							cock.knot = 1;
+						}
 						Text.NL();
 					}, 1.0, () => {
 						let unchanged = false;
 						const cocks = rosalin.AllCocks();
 						for (const cock of cocks) {
-							if (cock.race !== Race.Fox) { unchanged = true; }
+							if (cock.race !== Race.Fox) {
+								unchanged = true;
+							}
 						}
 						return unchanged;
 					});

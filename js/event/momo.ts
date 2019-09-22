@@ -949,7 +949,7 @@ export namespace MomoScenes {
 	}
 	/*
 	export function FindingMomo() {
-		let parse : any = {
+		let parse: IParse = {
 
 		};
 

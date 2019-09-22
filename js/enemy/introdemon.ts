@@ -94,7 +94,7 @@ export class IntroDemon extends BossEntity {
 				const newImp = new Imp();
 				encounter.enemy.AddMember(newImp);
 
-				const ent: any = {
+				const ent: ICombatOrder = {
 					entity     : newImp,
 					isEnemy    : true,
 					initiative : 0,

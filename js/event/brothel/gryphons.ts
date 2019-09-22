@@ -295,7 +295,7 @@ export namespace GryphonsScenes {
 					player.Legs().count = 2;
 					return t;
 				} else if (incompleteGryphonCockTF()) {
-					let parse2: any = {};
+					let parse2: IParse = {};
 					parse2 = Text.ParserPlural(parse2, player.NumCocks() > 1);
 					const cscenes = new EncounterTable();
 					_.each(player.AllCocks(), (c) => {
@@ -337,7 +337,7 @@ export namespace GryphonsScenes {
 		});
 
 		if (gender === Gender.male && player.FirstCock()) {
-			let parse2: any = {};
+			let parse2: IParse = {};
 			parse2 = Text.ParserPlural(parse2, player.NumCocks() > 1);
 
 			const incompleteCockSizeOne = (c: Cock) => {
@@ -409,7 +409,7 @@ export namespace GryphonsScenes {
 				cond() { return player.HasBalls() && player.Balls().fertility.Get() < .9; },
 			});
 		} else if (gender === Gender.female && player.FirstVag()) { // female
-			const parse2: any = {
+			const parse2: IParse = {
 				breasts : player.FirstBreastRow().Short(),
 			};
 			const incompleteVagSize = () => {

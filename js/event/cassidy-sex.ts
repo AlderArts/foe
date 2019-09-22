@@ -72,7 +72,11 @@ export namespace CassidySexScenes {
 		CassidySexScenes.IndoorPrompt();
 	}
 
-	export function IndoorPrompt(opts: any = {}) {
+	interface ICassidyIndoorOpts {
+		savor?: boolean;
+	}
+
+	export function IndoorPrompt(opts: ICassidyIndoorOpts = {}) {
 		const player: Player = GAME().player;
 		const cassidy: Cassidy = GAME().cassidy;
 
@@ -120,7 +124,7 @@ export namespace CassidySexScenes {
 		Gui.SetButtonsFromList(options, false, undefined);
 	}
 
-	export function Savor(opts: any) {
+	export function Savor(opts: ICassidyIndoorOpts) {
 		const player: Player = GAME().player;
 		const cassidy: Cassidy = GAME().cassidy;
 		opts.savor = true;

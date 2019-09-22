@@ -98,7 +98,7 @@ export namespace OpheliaScenes {
         OpheliaScenes.LabPrompt();
     }
 
-    export function TraitPrompt(options: any) {
+    export function TraitPrompt(options: IChoice[]) {
         const burrows: Burrows = GAME().burrows;
         const parse: IParse = {
 
