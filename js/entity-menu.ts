@@ -10,7 +10,7 @@ import { Stat } from "./stat";
 import { IParse, Text } from "./text";
 
 const EntityMenu = {
-	InteractDefault(options: any[], switchSpot: boolean, enableEquip: any, enableStats: any, enableJob: any, enableSwitch: boolean) {
+	InteractDefault(options: IChoice[], switchSpot: boolean, enableEquip: boolean, enableStats: boolean, enableJob: boolean, enableSwitch: boolean) {
 		const that = this;
 		options.push({ nameStr: "Equip",
 			func() {
@@ -39,7 +39,7 @@ const EntityMenu = {
 		}
 	},
 
-	LevelUpPrompt(backFunc: any) {
+	LevelUpPrompt(backFunc: CallableFunction) {
 		Text.Clear();
 
 		Text.Add("[name] has [points] stat points pending.",
@@ -180,7 +180,7 @@ const EntityMenu = {
 		Gui.SetButtonsFromList(options, true, backFunc);
 	},
 
-	EquipPrompt(backfunc: any) {
+	EquipPrompt(backfunc: CallableFunction) {
 		const party = GAME().party;
 		const that = this;
 		const parse: IParse = {
@@ -311,7 +311,7 @@ const EntityMenu = {
 		equipFunc();
 	},
 
-	JobPrompt(backfunc: any) {
+	JobPrompt(backfunc: CallableFunction) {
 		const that = this;
 		Text.Clear();
 		// Fallback for bugs
@@ -361,7 +361,7 @@ const EntityMenu = {
 		Text.NL();
 		Text.Add("Available jobs:<br>");
 
-		const options: any[] = [];
+		const options: IChoice[] = [];
 
 		_.forIn (this.jobs, (jd, key) => {
 			if (!jd.job.Unlocked(this)) { return; }

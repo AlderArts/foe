@@ -223,11 +223,18 @@ export namespace ZebraShamanScenes {
 		});
 	}
 
+	class ZebraEncounter extends Encounter {
+		public zebra: ZebraShaman;
+		constructor(enemy: Party) {
+			super(enemy);
+		}
+	}
+
 	export function LoneEnc(levelbonus?: number) {
 		const enemy = new Party();
 		const zebra = new ZebraShaman(levelbonus);
 		enemy.AddMember(zebra);
-		const enc: any = new Encounter(enemy);
+		const enc = new ZebraEncounter(enemy);
 		enc.zebra = zebra;
 
 		enc.onEncounter = ZebraShamanScenes.LoneEncounter;
@@ -239,7 +246,7 @@ export namespace ZebraShamanScenes {
 
 	export function OnLoss() {
 		const party: Party = GAME().party;
-		const enc = this;
+		const enc: ZebraEncounter = this;
 		const zebra = enc.zebra;
 		SetGameState(GameState.Event, Gui);
 
@@ -274,7 +281,7 @@ export namespace ZebraShamanScenes {
 	export function LoneEncounter() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const enc = this;
+		const enc: ZebraEncounter = this;
 
 		const parse: IParse = {
 			weapon : player.WeaponDesc(),
@@ -315,7 +322,7 @@ export namespace ZebraShamanScenes {
 	export function OnWin() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const enc = this;
+		const enc: ZebraEncounter = this;
 		const zebra = enc.zebra;
 		SetGameState(GameState.Event, Gui);
 
@@ -372,7 +379,7 @@ export namespace ZebraShamanScenes {
 		Encounter.prototype.onVictory.call(enc);
 	}
 
-	export function OnWinFuckHim(enc: any) {
+	export function OnWinFuckHim(enc: ZebraEncounter) {
 		const player: Player = GAME().player;
 		const zebra = enc.zebra;
 
@@ -482,7 +489,7 @@ export namespace ZebraShamanScenes {
 		});
 	}
 
-	export function OnWinVaginal(enc: any) {
+	export function OnWinVaginal(enc: ZebraEncounter) {
 		const player: Player = GAME().player;
 		const zebra = enc.zebra;
 
