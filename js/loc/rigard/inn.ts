@@ -1859,7 +1859,7 @@ InnLoc.Common.events.push(new Link(
 	},
 	() => {
 		const parse: IParse = {
-			mealcost : RigardFlags.LB.MealCost(),
+			mealcost : RigardFlags.LB.MealCost().toString(),
 		};
 		const busy = RigardFlags.LB.Busy();
 		if (busy === RigardFlags.LB.BusyState.busy) {

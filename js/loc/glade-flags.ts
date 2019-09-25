@@ -1,10 +1,7 @@
-
-const DryadGladeFlags = {
-    Visit : {
-        NotVisited     : 0,
-        Visited        : 1,
-        DefeatedOrchid : 2,
-    },
-};
-
-export { DryadGladeFlags };
+export namespace DryadGladeFlags {
+    export enum Visit {
+        NotVisited     = 0,
+        Visited        = 1,
+        DefeatedOrchid = 2,
+    }
+}

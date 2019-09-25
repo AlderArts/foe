@@ -1,5 +1,5 @@
-export const OrchidFlags = {
-    Talk : {
-        First : 1,
-    },
-};
+export namespace OrchidFlags {
+    export enum Talk {
+        First = 1,
+    }
+}

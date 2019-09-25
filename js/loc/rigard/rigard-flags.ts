@@ -1,70 +1,67 @@
 import { GAME, WorldTime } from "../../GAME";
 
-const RigardLB: any = {};
-
-const RigardFlags = {
-    Nobles : {
-        MetMajid : 1,
-        Alms     : 2,
-        Elodie   : 4,
-        Parade   : 8,
-        Buns     : 16,
-        BoughtBuns : 32,
-    },
-    KrawitzQ : {
-        NotStarted   : 0,
-        Started      : 1,
-        HeistDone    : 2,
-        HuntingTerry : 3,
-        CaughtTerry  : 4,
-    },
-    Barnaby : { // Bitmask
-        Met     : 1,
-        Blowjob : 2,
-        PassedOut : 4,
-    },
-
-    LB : RigardLB,
-};
-
-RigardLB.BusyState = {
-	busy    : 0,
-	midbusy : 1,
-	notbusy : 2,
-};
-RigardLB.MealCost = () => {
-	return 20;
-};
-RigardLB.RoomCost = () => {
-	return 100;
-};
-
-RigardLB.Busy = () => {
-	if (WorldTime().hour >= 17) {
-        return RigardLB.BusyState.busy;
-    } else if (WorldTime().hour >= 7 || WorldTime().hour < 1) {
-        return RigardLB.BusyState.midbusy;
-    } else {
-        return RigardLB.BusyState.notbusy;
+export namespace RigardFlags {
+    export enum Nobles {
+        MetMajid = 1,
+        Alms     = 2,
+        Elodie   = 4,
+        Parade   = 8,
+        Buns     = 16,
+        BoughtBuns = 32,
     }
-};
-
-RigardLB.KnowsOrvin = () => {
-	const rigard = GAME().rigard;
-	return rigard.LB.Orvin !== 0;
-};
-
-RigardLB.OrvinIsInnkeeper = () => {
-	if (WorldTime().hour >= 8) {
-        return true;
-    } else {
-        return false;
+    export enum KrawitzQ {
+        NotStarted   = 0,
+        Started      = 1,
+        HeistDone    = 2,
+        HuntingTerry = 3,
+        CaughtTerry  = 4,
     }
-};
+    export enum Barnaby { // Bitmask
+        Met     = 1,
+        Blowjob = 2,
+        PassedOut = 4,
+    }
 
-RigardLB.HasRentedRoom = () => {
-	const rigard = GAME().rigard;
-	return !rigard.LBroomTimer.Expired();
-};
+    export namespace LB {
+        export enum BusyState {
+            busy    = 0,
+            midbusy = 1,
+            notbusy = 2,
+        }
+        export function MealCost() {
+            return 20;
+        }
+        export function RoomCost() {
+            return 100;
+        }
 
-export { RigardFlags };
+        export function Busy() {
+            if (WorldTime().hour >= 17) {
+                return BusyState.busy;
+            } else if (WorldTime().hour >= 7 || WorldTime().hour < 1) {
+                return BusyState.midbusy;
+            } else {
+                return BusyState.notbusy;
+            }
+        }
+
+        export function KnowsOrvin() {
+            const rigard = GAME().rigard;
+            return rigard.LB.Orvin !== 0;
+        }
+
+        export function OrvinIsInnkeeper() {
+            if (WorldTime().hour >= 8) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        export function HasRentedRoom() {
+            const rigard = GAME().rigard;
+            return !rigard.LBroomTimer.Expired();
+        }
+
+    }
+}

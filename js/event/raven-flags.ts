@@ -1,6 +1,6 @@
-export const RavenFlags = {
-    Stage : {
-        ravenstage2 : 8,
-        ravenstage3 : 12,
-    },
-};
+export namespace RavenFlags {
+    export enum Stage {
+        ravenstage2 = 8,
+        ravenstage3 = 12,
+    }
+}
