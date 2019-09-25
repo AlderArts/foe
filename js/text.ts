@@ -2,7 +2,6 @@ import * as $ from "jquery";
 import * as _ from "lodash";
 
 import { GetRenderPictures } from "../app";
-import { Rand } from "./utility";
 
 export interface IParse {
 	[index: string]: string|(() => string);
@@ -16,14 +15,14 @@ export namespace Text {
 
 	export function InsertImage(imgSrc: string, align: string = "left") {
 		if (!GetRenderPictures()) { return ""; }
-		return "<img src='" + imgSrc + "' align='" + align + "' alt='MISSING IMAGE: " + imgSrc + "' style='margin: 1px 8px;'/>";
+		return `<img src='${imgSrc}' align='${align}' alt='MISSING IMAGE: ${imgSrc}' style='margin: 1px 8px;'/>`;
 	}
 
 	export function Say(imgSrc: string, text: string = "", align: string = "left") {
 		const textbox = document.getElementById("mainTextArea");
 
 		if (GetRenderPictures()) {
-			textbox.innerHTML += "<img src='" + imgSrc + "' align='" + align + "' alt='MISSING IMAGE: " + imgSrc + "' style='margin: 1px 8px;'>" + text + "</img>";
+			textbox.innerHTML += `<img src='${imgSrc}' align='${align}' alt='MISSING IMAGE: ${imgSrc}' style='margin: 1px 8px;'>${text}</img>`;
 		} else {
 			textbox.innerHTML += text;
 		}
@@ -50,10 +49,10 @@ export namespace Text {
 							replaceStr = replaceStr();
 						}
 						if (_.isUndefined(replaceStr)) {
-							replaceStr = ApplyStyle("['" + code + "' is undefined]", "error");
+							replaceStr = ApplyStyle(`['${code}' is undefined]`, "error");
 						}
 					} else {
-						replaceStr = ApplyStyle("['" + code + "' couldn't be parsed]", "error");
+						replaceStr = ApplyStyle(`['${code}' couldn't be parsed]`, "error");
 					}
 
 					text = text.slice(0, start) + replaceStr + text.slice(stop + 1);
@@ -66,7 +65,7 @@ export namespace Text {
 			return text;
 		} catch (e) {
 			alert(e.message + "........." + e.stack);
-			return ApplyStyle("PARSE ERROR: { " + text + " }", "error");
+			return ApplyStyle(`PARSE ERROR: { ${text} }`, "error");
 		}
 	}
 
@@ -99,7 +98,8 @@ export namespace Text {
 	// This should be used for styling any text that should
 	// not be passed through Text.Parse
 	function ApplyStyle(text: string|number, cssClasses?: string, tag: string = "span") {
-		return "<" + tag + (cssClasses ? (' class ="' + cssClasses + '">') : ">") + text + "</" + tag + ">";
+		const classes = cssClasses ? ` class ="${cssClasses}">` : ">";
+		return `<${tag}${classes}${text}</${tag}>`;
 	}
 
 	// Generic function to apply text to the buffer
@@ -249,17 +249,16 @@ export namespace Text {
 		if (num < 0) {
 			return num.toString();
 		}
-		let r;
 		switch (num) {
 			case 0: return "lack";
-			case 1: r = Rand(4);
-				       if     (r === 0) { return "lone"; } else if (r === 1) { return "solitary"; } else if (r === 2) { return "individual"; } else {            return "single"; }
-			case 2: r = Rand(2);
-				       if (r === 0) { return "duo"; } else {       return "pair"; }
-			case 3: r = Rand(2);
-				       if (r === 0) { return "trio"; } else {       return "triad"; }
-			case 4: r = Rand(2);
-				       if (r === 0) { return "quad"; } else {       return "quartette"; }
+			case 1:
+				return _.sample(["lone", "solitary", "individual", "single"]);
+			case 2:
+				return _.sample(["duo", "pair"]);
+			case 3:
+				return _.sample(["trio", "triad"]);
+			case 4:
+				return _.sample(["quad", "quartette"]);
 			case 5: return "quintet";
 			case 6: return "sextet";
 			case 7: return "septet";
@@ -285,33 +284,33 @@ export namespace Text {
 		}
 	}
 
-	export function ParserPlural(parse: IParse = {}, condition?: boolean, prefix: string = "", postfix: string|number = "") {
-		parse[prefix + "a" + postfix]      = condition ? "" : " a";
-		parse[prefix + "s" + postfix]      = condition ? "s" : "";
-		parse[prefix + "notS" + postfix]   = condition ? "" : "s";
-		parse[prefix + "es" + postfix]     = condition ? "es" : "";
-		parse[prefix + "notEs" + postfix]  = condition ? "" : "es";
-		parse[prefix + "yIes" + postfix]   = condition ? "ies" : "y";
+	export function ParserPlural(parse: IParse = {}, condition?: boolean, prefix: string = "", postfix: string = "") {
+		parse[`${prefix}a${postfix}`]      = condition ? "" : " a";
+		parse[`${prefix}s${postfix}`]      = condition ? "s" : "";
+		parse[`${prefix}notS${postfix}`]   = condition ? "" : "s";
+		parse[`${prefix}es${postfix}`]     = condition ? "es" : "";
+		parse[`${prefix}notEs${postfix}`]  = condition ? "" : "es";
+		parse[`${prefix}yIes${postfix}`]   = condition ? "ies" : "y";
 
-		parse[prefix + "isAre" + postfix]   = condition ? "are" : "is";
-		parse[prefix + "hasHave" + postfix] = condition ? "have" : "has";
-		parse[prefix + "wasWere" + postfix] = condition ? "were" : "was";
+		parse[`${prefix}isAre${postfix}`]   = condition ? "are" : "is";
+		parse[`${prefix}hasHave${postfix}`] = condition ? "have" : "has";
+		parse[`${prefix}wasWere${postfix}`] = condition ? "were" : "was";
 
-		parse[prefix + "oneof" + postfix]  = condition ? " one of" : "";
-		parse[prefix + "someof" + postfix] = condition ? " some of" : "";
-		parse[prefix + "eachof" + postfix] = condition ? " each of" : "";
-		parse[prefix + "allof" + postfix]  = condition ? " all of" : "";
+		parse[`${prefix}oneof${postfix}`]  = condition ? " one of" : "";
+		parse[`${prefix}someof${postfix}`] = condition ? " some of" : "";
+		parse[`${prefix}eachof${postfix}`] = condition ? " each of" : "";
+		parse[`${prefix}allof${postfix}`]  = condition ? " all of" : "";
 
-		parse[prefix + "ItThey" + postfix]    = condition ? "They" : "It";
-		parse[prefix + "ItsTheyre" + postfix] = condition ? "They’re" : "It’s";
+		parse[`${prefix}ItThey${postfix}`]    = condition ? "They" : "It";
+		parse[`${prefix}ItsTheyre${postfix}`] = condition ? "They’re" : "It’s";
 
-		parse[prefix + "itThey" + postfix]    = condition ? "they" : "it";
-		parse[prefix + "itThem" + postfix]    = condition ? "them" : "it";
-		parse[prefix + "itsTheir" + postfix]  = condition ? "their" : "its";
-		parse[prefix + "itsTheyre" + postfix] = condition ? "they’re" : "it’s";
-		parse[prefix + "itsTheyve" + postfix] = condition ? "they’ve" : "it’s";
-		parse[prefix + "thisThese" + postfix] = condition ? "these" : "this";
-		parse[prefix + "thatThose" + postfix] = condition ? "those" : "that";
+		parse[`${prefix}itThey${postfix}`]    = condition ? "they" : "it";
+		parse[`${prefix}itThem${postfix}`]    = condition ? "them" : "it";
+		parse[`${prefix}itsTheir${postfix}`]  = condition ? "their" : "its";
+		parse[`${prefix}itsTheyre${postfix}`] = condition ? "they’re" : "it’s";
+		parse[`${prefix}itsTheyve${postfix}`] = condition ? "they’ve" : "it’s";
+		parse[`${prefix}thisThese${postfix}`] = condition ? "these" : "this";
+		parse[`${prefix}thatThose${postfix}`] = condition ? "those" : "that";
 
 		return parse;
 	}

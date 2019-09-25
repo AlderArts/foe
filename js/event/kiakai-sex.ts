@@ -301,7 +301,7 @@ export namespace KiakaiSexScenes {
 		parse = kiakai.ParserTags(parse, "k");
 		parse = player.ParserTags(parse);
 		parse = Text.ParserPlural(parse, player.NumCocks() > 1);
-		parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", 2);
+		parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
 		parse = Text.ParserPlural(parse, player.NumLegs() > 1, "l");
 		parse = Text.ParserPlural(parse, kiakai.NumCocks() > 1, "k");
 
