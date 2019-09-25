@@ -1,101 +1,86 @@
 import * as _ from "lodash";
 
 import { SAVE_VERSION, VERSION_STRING } from "../app";
-import { Gui } from "./gui";
-import { Season, Time } from "./time";
-
+import { Color } from "./body/color";
+import { Gender } from "./body/gender";
+import { Race } from "./body/race";
+import { Vagina } from "./body/vagina";
+import { InitDebugObjects } from "./debug";
+import { OrchidBoss } from "./enemy/orchid";
+import { Aria } from "./event/aria";
+import { Asche } from "./event/asche";
+import { Bastet } from "./event/brothel/bastet";
+import { Belinda } from "./event/brothel/belinda";
+import { Ches } from "./event/brothel/ches";
+import { Fireblossom } from "./event/brothel/fireblossom";
+import { Gryphons } from "./event/brothel/gryphons";
+import { Lucille } from "./event/brothel/lucille";
+import { Roa } from "./event/brothel/roa";
+import { Lagon } from "./event/burrows/lagon";
+import { Ophelia } from "./event/burrows/ophelia";
+import { Vena } from "./event/burrows/vena";
+import { Cassidy } from "./event/cassidy";
+import { Adrian } from "./event/farm/adrian";
+import { Danie } from "./event/farm/danie";
+import { Gwendy } from "./event/farm/gwendy";
+import { Layla } from "./event/farm/layla";
+import { Fera } from "./event/fera";
+import { Isla } from "./event/highlands/isla";
 import { Intro } from "./event/introduction";
-
-import { Nursery } from "./event/nursery";
-import { Burrows } from "./loc/burrows";
-import { Farm } from "./loc/farm";
-import { DryadGlade } from "./loc/glade";
-import { Oasis } from "./loc/oasis";
-import { Rigard } from "./loc/rigard/rigard";
-import { TreeCity } from "./loc/treecity/treecity";
-
 import { Kiakai } from "./event/kiakai";
+import { KiakaiFlags } from "./event/kiakai-flags";
 import { Miranda } from "./event/miranda";
+import { MirandaFlags } from "./event/miranda-flags";
 import { Momo } from "./event/momo";
-import { Player } from "./event/player";
-import { Room69 } from "./event/room69";
-import { Lei } from "./event/royals/lei";
-import { Twins } from "./event/royals/twins";
-import { Terry } from "./event/terry";
-import { Zina } from "./event/zina";
-
 import { Cale } from "./event/nomads/cale";
 import { Chief } from "./event/nomads/chief";
 import { Estevan } from "./event/nomads/estevan";
 import { Magnus } from "./event/nomads/magnus";
 import { Patchwork } from "./event/nomads/patchwork";
 import { Rosalin } from "./event/nomads/rosalin";
-
-import { Roa } from "./event/brothel/roa";
-import { Lagon } from "./event/burrows/lagon";
-import { Ophelia } from "./event/burrows/ophelia";
-import { Vena } from "./event/burrows/vena";
-
-import { Adrian } from "./event/farm/adrian";
-import { Danie } from "./event/farm/danie";
-import { Gwendy } from "./event/farm/gwendy";
-import { Layla } from "./event/farm/layla";
-
-import { Isla } from "./event/highlands/isla";
-
+import { Nursery } from "./event/nursery";
 import { Aquilius } from "./event/outlaws/aquilius";
 import { Cveta } from "./event/outlaws/cveta";
 import { Maria } from "./event/outlaws/maria";
 import { Outlaws } from "./event/outlaws/outlaws";
-import { Vaughn } from "./event/outlaws/vaughn";
-
-import { Asche } from "./event/asche";
-import { Cassidy } from "./event/cassidy";
-import { Fera } from "./event/fera";
-
-import { GolemBoss } from "./event/royals/golem";
-import { Jeanne } from "./event/royals/jeanne";
-
-import { OrchidBoss } from "./enemy/orchid";
-
-import { RavenMother } from "./event/raven";
-import { Uru, UruFlags } from "./event/uru";
-
-import { Bastet } from "./event/brothel/bastet";
-import { Belinda } from "./event/brothel/belinda";
-import { Fireblossom } from "./event/brothel/fireblossom";
-import { Gryphons } from "./event/brothel/gryphons";
-import { Lucille } from "./event/brothel/lucille";
-
-import { Color } from "./body/color";
-import { Gender } from "./body/gender";
-import { Race } from "./body/race";
-import { Vagina } from "./body/vagina";
-import { Aria } from "./event/aria";
-import { Ches } from "./event/brothel/ches";
-import { Sylistraxia } from "./event/sylistraxia";
-import { EntityStorage, GAME, GameCache, InitEntityStorage, InitGAME, InitWorldTime, WorldTime } from "./GAME";
-import { JobEnum, Jobs } from "./job";
-import { Party } from "./party";
-import { IParse, Text } from "./text";
-import { TF } from "./tf";
-
-import { KiakaiFlags } from "./event/kiakai-flags";
-import { MirandaFlags } from "./event/miranda-flags";
 import { OutlawsFlags } from "./event/outlaws/outlaws-flags";
+import { Vaughn } from "./event/outlaws/vaughn";
+import { Player } from "./event/player";
+import { RavenMother } from "./event/raven";
+import { Room69 } from "./event/room69";
+import { GolemBoss } from "./event/royals/golem";
 import { GolemFlags } from "./event/royals/golem-flags";
+import { Jeanne } from "./event/royals/jeanne";
+import { Lei } from "./event/royals/lei";
 import { LeiFlags } from "./event/royals/lei-flags";
+import { Twins } from "./event/royals/twins";
 import { TwinsFlags } from "./event/royals/twins-flags";
+import { Sylistraxia } from "./event/sylistraxia";
+import { Terry } from "./event/terry";
 import { TerryFlags } from "./event/terry-flags";
-import { BurrowsFlags } from "./loc/burrows-flags";
-import { DryadGladeFlags } from "./loc/glade-flags";
-import { RigardFlags } from "./loc/rigard/rigard-flags";
-
+import { Uru, UruFlags } from "./event/uru";
+import { Zina } from "./event/zina";
+import { EntityStorage, GAME, GameCache, InitEntityStorage, InitGAME, InitWorldTime, WorldTime } from "./GAME";
+import { Gui } from "./gui";
 import { AccItems } from "./items/accessories";
 import { AlchemyItems } from "./items/alchemy";
 import { ArmorItems } from "./items/armor";
 import { WeaponsItems } from "./items/weapons";
+import { JobEnum, Jobs } from "./job";
 import { IChoice } from "./link";
+import { Burrows } from "./loc/burrows";
+import { BurrowsFlags } from "./loc/burrows-flags";
+import { Farm } from "./loc/farm";
+import { DryadGlade } from "./loc/glade";
+import { DryadGladeFlags } from "./loc/glade-flags";
+import { Oasis } from "./loc/oasis";
+import { Rigard } from "./loc/rigard/rigard";
+import { RigardFlags } from "./loc/rigard/rigard-flags";
+import { TreeCity } from "./loc/treecity/treecity";
+import { Party } from "./party";
+import { IParse, Text } from "./text";
+import { TF } from "./tf";
+import { Season, Time } from "./time";
 
 const InitCache = () => {
 	// Reset exploration
@@ -119,6 +104,8 @@ const InitCache = () => {
 
 	// Reset everything
 	InitGAME();
+
+	InitDebugObjects();
 
 	GAME().rigard   = new Rigard(gameCache.rigard);
 	GAME().farm     = new Farm(gameCache.farm);

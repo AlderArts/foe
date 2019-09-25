@@ -9,6 +9,7 @@ Version 0.5.3
 -------------
 * Fixed numerous minor logic errors in scenes discovered by applying strict typing.
 * Fixed some race detection errors in scenes, also discovered by applying strict typing.
+* Added some debug functionality. If you are in to hacking through the console, a bunch of game variables can now be accessed through the console on the object 'game'.
 
 --------------------------------------------
              PREVIOUS VERSIONS
