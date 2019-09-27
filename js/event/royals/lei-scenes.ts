@@ -156,11 +156,11 @@ export namespace LeiScenes {
 							Text.Add("<i>“There are many things I can teach you,”</i> he replies, <i>“though I am not sure how much you can learn.”</i>", parse);
 						} else if (player.level < 13) {
 							Text.Add("<i>“There are many things I can teach you,”</i> he replies, <i>“and I believe you can benefit from my instruction.”</i>", parse);
- } else if (player.level < 19) {
+ 						} else if (player.level < 19) {
 							Text.Add("<i>“You have come far since first I saw you,”</i> he remarks, <i>“still, I believe there are a few things I can yet show you.”</i>", parse);
- } else {
+ 						} else {
 							Text.Add("<i>“Truly, you have grown strong already,”</i> he says, <i>“but perhaps we can help each other.”</i>", parse);
- }
+ 						}
 						Text.NL();
 						Text.Add("<i>“What would you like to do today?”</i>", parse);
 						Text.Flush();
@@ -601,9 +601,9 @@ export namespace LeiScenes {
 			parse.comp = "and your companion ";
 		} else if (!party.Alone()) {
 			parse.comp = "and your companions ";
- } else {
+ 		} else {
 			parse.comp = "";
- }
+ 		}
 		// {and your companions }
 
 		Text.Add("As they pass by Lei, he again follows. By the time you remember you were supposed to talk to them and perhaps warn them about their stalker, they are most of the way to the door, and you hurry to catch up, pushing through the crowded common room.", parse);
