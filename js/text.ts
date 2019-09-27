@@ -97,7 +97,7 @@ export namespace Text {
 	// This is used internally by Add and the helper methods below.
 	// This should be used for styling any text that should
 	// not be passed through Text.Parse
-	function ApplyStyle(text: string|number, cssClasses?: string, tag: string = "span") {
+	export function ApplyStyle(text: string|number, cssClasses?: string, tag: string = "span") {
 		const classes = cssClasses ? ` class ="${cssClasses}">` : ">";
 		return `<${tag}${classes}${text}</${tag}>`;
 	}
