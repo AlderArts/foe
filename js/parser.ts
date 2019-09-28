@@ -1,7 +1,7 @@
 import * as _ from "lodash";
-import { Text } from "./text";
 import { Entity } from "./entity";
 import { GAME } from "./GAME";
+import { Text } from "./text";
 
 export function P2(literals: TemplateStringsArray, ...tags: string[]) {
     let result = "";
@@ -76,6 +76,15 @@ interface IParseSyntaxOpts {
     method: string;
 }
 
+function _splitBody(opts: IParseSyntaxOpts, req: number) {
+    let terms = opts.body.split("|");
+    if (terms.length !== req) {
+        alert(`Parser error, ${opts.type}${opts.method ? `.${opts.method}` : ""} requires ${req} terms, ${terms.length} given.`);
+        terms = terms.fill("ERROR", terms.length, req - 1);
+    }
+    return terms;
+}
+
 function _parseSyntax(opts: IParseSyntaxOpts) {
     const parsed = syntax[opts.type];
     if (parsed) {
@@ -85,8 +94,9 @@ function _parseSyntax(opts: IParseSyntaxOpts) {
     }
 }
 
-const parseChar: {[index: string]: (c: Entity) => string} = {
+const parseChar: {[index: string]: (c: Entity, opts?: IParseSyntaxOpts) => string} = {
     name: (c: Entity) => c.name,
+    // TODO forcegender?
     heshe: (c: Entity) => c.heshe(),
     HeShe: (c: Entity) => c.HeShe(),
     himher: (c: Entity) => c.himher(),
@@ -94,52 +104,109 @@ const parseChar: {[index: string]: (c: Entity) => string} = {
     hisher: (c: Entity) => c.hisher(),
     HisHer: (c: Entity) => c.HisHer(),
     hishers: (c: Entity) => c.hishers(),
-    // TODO
+    poss: (c: Entity) => c.possessive(),
+    Poss: (c: Entity) => c.Possessive(),
+    poss2: (c: Entity) => c.possessivePlural(),
+    Poss2: (c: Entity) => c.PossessivePlural(),
+    has: (c: Entity) => c.has(),
+    is: (c: Entity) => c.is(),
+    mfFem: (c: Entity, opts: IParseSyntaxOpts) => { const terms = _splitBody(opts, 2); return c.mfFem(terms[0], terms[1]); },
+    mfTrue: (c: Entity, opts: IParseSyntaxOpts) => { const terms = _splitBody(opts, 2); return c.mfTrue(terms[0], terms[1]); },
+    taur: (c: Entity, opts: IParseSyntaxOpts) => { const terms = _splitBody(opts, 2); return c.IsTaur() ? terms[0] : terms[1]; },
+    naga: (c: Entity, opts: IParseSyntaxOpts) => { const terms = _splitBody(opts, 2); return c.IsNaga() ? terms[0] : terms[1]; },
+    goo: (c: Entity, opts: IParseSyntaxOpts) => { const terms = _splitBody(opts, 2); return c.IsGoo() ? terms[0] : terms[1]; },
+    flexible: (c: Entity, opts: IParseSyntaxOpts) => { const terms = _splitBody(opts, 2); return c.IsFlexible() ? terms[0] : terms[1]; },
+    hashair: (c: Entity, opts: IParseSyntaxOpts) => { const terms = _splitBody(opts, 2); return c.HasHair() ? terms[0] : terms[1]; },
+    longhair: (c: Entity, opts: IParseSyntaxOpts) => { const terms = _splitBody(opts, 2); return c.HasLongHair() ? terms[0] : terms[1]; },
+    longtongue: (c: Entity, opts: IParseSyntaxOpts) => { const terms = _splitBody(opts, 2); return c.LongTongue() ? terms[0] : terms[1]; },
+
+    cocks: (c: Entity) => c.MultiCockDesc(),
+    // TODO howto?
+    // cock: (c: Entity) => p1cock.Short(),
+    // cockTip: (c: Entity) => p1cock.TipShort(),
+    // knot: (c: Entity) => p1cock.KnotShort(),
+    balls: (c: Entity) => c.BallsDesc(),
+    butt: (c: Entity) => c.Butt().Short(),
+    anus: (c: Entity) => c.Butt().AnalShort(),
+    vag: (c: Entity) => c.FirstVag().Short(),
+    clit: (c: Entity) => c.FirstVag().ClitShort(),
+    breasts: (c: Entity) => c.FirstBreastRow().Short(),
+    nip: (c: Entity) => c.FirstBreastRow().NipShort(),
+    nips: (c: Entity) => c.FirstBreastRow().NipsShort(),
+    tongue: (c: Entity) => c.TongueDesc(),
+    tongueTip: (c: Entity) => c.TongueTipDesc(),
+    skin: (c: Entity) => c.SkinDesc(),
+    hair: (c: Entity) => c.Hair().Short(),
+    lips: (c: Entity) => c.LipsDesc(),
+    face: (c: Entity) => c.FaceDesc(),
+    ear: (c: Entity) => c.EarDesc(),
+    ears: (c: Entity) => c.EarDesc(true),
+    eye: (c: Entity) => c.EyeDesc(),
+    eyes: (c: Entity) => c.EyesDesc(),
+    hand: (c: Entity) => c.HandDesc(),
+    palm: (c: Entity) => c.PalmDesc(),
+    hip: (c: Entity) => c.HipDesc(),
+    hips: (c: Entity) => c.HipsDesc(),
+    thigh: (c: Entity) => c.ThighDesc(),
+    thighs: (c: Entity) => c.ThighsDesc(),
+    leg: (c: Entity) => c.LegDesc(),
+    legs: (c: Entity) => c.LegsDesc(),
+    knee: (c: Entity) => c.KneeDesc(),
+    knees: (c: Entity) => c.KneesDesc(),
+    foot: (c: Entity) => c.FootDesc(),
+    feet: (c: Entity) => c.FeetDesc(),
+    belly: (c: Entity) => c.StomachDesc(),
+    tail: (c: Entity) => { const tail = c.HasTail(); return tail ? tail.Short() : ""; },
+    wings: (c: Entity) => { const wings = c.HasWings(); return wings ? wings.Short() : ""; },
+    horns: (c: Entity) => { const horns = c.HasHorns(); return horns ? horns.Short() : ""; },
+    weapon: (c: Entity) => c.WeaponDesc(),
+    armor: (c: Entity) => c.ArmorDesc(),
+    botarmor: (c: Entity) => c.LowerArmorDesc(),
 };
 
 const syntax: {[index: string]: (opts: IParseSyntaxOpts) => string} = {
     // Character parsers
-    pc: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().player),
-    kiai: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().kiakai),
-    miranda: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().miranda),
-    terry: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().terry),
-    zina: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().zina),
-    momo: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().momo),
-    lei: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().lei),
-    rumi: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().twins.rumi),
-    rani: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().twins.rani),
-    room69: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().room69),
-    chief: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().chief),
-    rosalin: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().rosalin),
-    cale: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().cale),
-    estevan: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().estevan),
-    magnus: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().magnus),
-    patchwork: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().patchwork),
-    lagon: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().lagon),
-    ophelia: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().ophelia),
-    vena: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().vena),
-    roa: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().roa),
-    gwendy: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().gwendy),
-    danie: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().danie),
-    adrian: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().adrian),
-    layla: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().layla),
-    isla: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().isla),
-    aquilius: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().aquilius),
-    maria: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().maria),
-    cveta: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().cveta),
-    vaughn: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().vaughn),
-    fera: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().fera),
-    asche: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().asche),
-    cassidy: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().cassidy),
-    jeanne: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().jeanne),
-    golem: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().golem),
-    orchid: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().orchid),
-    raven: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().ravenmother),
-    uru: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().uru),
-    lucille: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().lucille),
-    belinda: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().belinda),
-    aria: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().aria),
-    ches: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().ches),
+    pc: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().player, opts),
+    kiai: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().kiakai, opts),
+    miranda: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().miranda, opts),
+    terry: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().terry, opts),
+    zina: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().zina, opts),
+    momo: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().momo, opts),
+    lei: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().lei, opts),
+    rumi: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().twins.rumi, opts),
+    rani: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().twins.rani, opts),
+    room69: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().room69, opts),
+    chief: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().chief, opts),
+    rosalin: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().rosalin, opts),
+    cale: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().cale, opts),
+    estevan: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().estevan, opts),
+    magnus: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().magnus, opts),
+    patchwork: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().patchwork, opts),
+    lagon: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().lagon, opts),
+    ophelia: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().ophelia, opts),
+    vena: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().vena, opts),
+    roa: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().roa, opts),
+    gwendy: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().gwendy, opts),
+    danie: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().danie, opts),
+    adrian: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().adrian, opts),
+    layla: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().layla, opts),
+    isla: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().isla, opts),
+    aquilius: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().aquilius, opts),
+    maria: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().maria, opts),
+    cveta: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().cveta, opts),
+    vaughn: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().vaughn, opts),
+    fera: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().fera, opts),
+    asche: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().asche, opts),
+    cassidy: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().cassidy, opts),
+    jeanne: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().jeanne, opts),
+    golem: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().golem, opts),
+    orchid: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().orchid, opts),
+    raven: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().ravenmother, opts),
+    uru: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().uru, opts),
+    lucille: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().lucille, opts),
+    belinda: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().belinda, opts),
+    aria: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().aria, opts),
+    ches: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().ches, opts),
     // TODO
     if: (opts: IParseSyntaxOpts) => {
         return `|if ${opts.body}|`;

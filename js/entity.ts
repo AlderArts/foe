@@ -1956,6 +1956,9 @@ export class Entity {
 	public EyeDesc() {
 		return this.body.EyeDesc();
 	}
+	public EyesDesc() {
+		return this.body.EyeDesc() + "s";
+	}
 	public Ears() {
 		return this.body.head.ears;
 	}
@@ -2090,8 +2093,8 @@ export class Entity {
 		for (const app of this.body.head.appendages) {
 			if (app.type === AppendageType.horn) {
 				return app;
-		}
 			}
+		}
 		return undefined;
 	}
 	public HasAntenna() {
