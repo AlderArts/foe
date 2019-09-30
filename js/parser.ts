@@ -1,6 +1,6 @@
 import * as _ from "lodash";
 import { Entity } from "./entity";
-import { GAME } from "./GAME";
+import { GAME, WorldTime } from "./GAME";
 import { Text } from "./text";
 
 export function P2(literals: TemplateStringsArray, ...tags: string[]) {
@@ -222,9 +222,10 @@ const syntax: {[index: string]: (opts: IParseSyntaxOpts) => string} = {
     belinda: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().belinda, opts),
     aria: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().aria, opts),
     ches: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().ches, opts),
-    // TODO
-    if: (opts: IParseSyntaxOpts) => {
-        return `|if ${opts.body}|`;
+
+    season: (opts: IParseSyntaxOpts) => {
+        const terms = _splitBody(opts, 4);
+        return terms[WorldTime().season];
     },
 };
 
