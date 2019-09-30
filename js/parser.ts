@@ -94,6 +94,18 @@ function _parseSyntax(opts: IParseSyntaxOpts) {
     }
 }
 
+function parseComp(opts: IParseSyntaxOpts) {
+    const terms = _splitBody(opts, 3);
+    const num: number = GAME().party.Num();
+    if (num > 2) { // group
+        return terms[2];
+    } else if (num === 2) { // two
+        return terms[1];
+    } else { // alone
+        return terms[0];
+    }
+}
+
 const parseChar: {[index: string]: (c: Entity, opts?: IParseSyntaxOpts) => string} = {
     name: (c: Entity) => c.name,
     // TODO forcegender?
@@ -167,6 +179,9 @@ const parseChar: {[index: string]: (c: Entity, opts?: IParseSyntaxOpts) => strin
 const syntax: {[index: string]: (opts: IParseSyntaxOpts) => string} = {
     // Character parsers
     pc: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().player, opts),
+    comp: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().party.Get(1), opts),
+    comps: (opts: IParseSyntaxOpts) => parseComp(opts),
+
     kiai: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().kiakai, opts),
     miranda: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().miranda, opts),
     terry: (opts: IParseSyntaxOpts) => parseChar[opts.method](GAME().terry, opts),
