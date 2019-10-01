@@ -3,7 +3,7 @@ import { Entity } from "./entity";
 import { GAME, WorldTime } from "./GAME";
 import { Text } from "./text";
 
-export function P2(literals: TemplateStringsArray, ...tags: string[]) {
+export function P2(literals: TemplateStringsArray, ...tags: Array<string|boolean>) {
     let result = "";
 
     _.forEach(tags, (tag, key) => {
@@ -76,7 +76,7 @@ interface IParseSyntaxOpts {
     method: string;
 }
 
-function _splitBody(opts: IParseSyntaxOpts, req: number) {
+function _splitBody(opts: IParseSyntaxOpts, req?: number) {
     let terms: string[] = [];
 
     // Code that splits parser body into terms separated by |. Recognizes recursive parser tags, so that terms are split correctly.
@@ -99,11 +99,29 @@ function _splitBody(opts: IParseSyntaxOpts, req: number) {
     terms.push(body.slice(start));
 
     // Verify that the correct number of terms have been captured
-    if (terms.length !== req) {
+    if (req && terms.length !== req) {
         alert(`Parser error, ${opts.type}${opts.method ? `.${opts.method}` : ""} requires ${req} terms, ${terms.length} given.`);
         terms = terms.fill("ERROR", terms.length, req - 1);
     }
     return terms;
+}
+
+interface IParseArgs {
+    conds: string[];
+    body: string[];
+}
+
+function _splitArgs(opts: IParseSyntaxOpts): IParseArgs {
+    const separator = opts.body.indexOf(":");
+    if (separator !== -1) {
+        const condPart = opts.body.slice(0, separator);
+        const bodyPart = opts.body.slice(separator + 1);
+        const cOpts: IParseSyntaxOpts = {body: condPart, type: opts.type, method: "condition"};
+        const bOpts: IParseSyntaxOpts = {body: bodyPart, type: opts.type, method: "body"};
+        const conds = _splitBody(cOpts);
+        const body = _splitBody(bOpts, conds.length + 1);
+        return {conds, body};
+    }
 }
 
 function _parseSyntax(opts: IParseSyntaxOpts) {
@@ -247,6 +265,16 @@ const syntax: {[index: string]: (opts: IParseSyntaxOpts) => string} = {
     season: (opts: IParseSyntaxOpts) => {
         const terms = _splitBody(opts, 4);
         return terms[WorldTime().season];
+    },
+    if: (opts: IParseSyntaxOpts) => {
+        const args = _splitArgs(opts);
+        for (const [i, cond] of args.conds.entries()) {
+            if (cond === "true") {
+                return args.body[i];
+            }
+        }
+        // else
+        return _.last(args.body);
     },
 };
 
