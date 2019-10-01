@@ -77,7 +77,28 @@ interface IParseSyntaxOpts {
 }
 
 function _splitBody(opts: IParseSyntaxOpts, req: number) {
-    let terms = opts.body.split("|");
+    let terms: string[] = [];
+
+    // Code that splits parser body into terms separated by |. Recognizes recursive parser tags, so that terms are split correctly.
+    const body = opts.body;
+    let recurseLevel = 0;
+    let start = 0;
+    for (let i = 0; i < body.length; i++) {
+        const c = body.charAt(i);
+        if (c === "[") {
+            recurseLevel++;
+        } else if (c === "]") {
+            recurseLevel--;
+        } else if (c === "|") {
+            if (recurseLevel === 0) {
+                terms.push(body.slice(start, i));
+                start = i + 1;
+            }
+        }
+    }
+    terms.push(body.slice(start));
+
+    // Verify that the correct number of terms have been captured
     if (terms.length !== req) {
         alert(`Parser error, ${opts.type}${opts.method ? `.${opts.method}` : ""} requires ${req} terms, ${terms.length} given.`);
         terms = terms.fill("ERROR", terms.length, req - 1);
