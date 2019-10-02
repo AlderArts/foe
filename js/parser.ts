@@ -212,6 +212,17 @@ const parseChar: {[index: string]: (c: Entity, opts?: IParseSyntaxOpts) => strin
     weapon: (c: Entity) => c.WeaponDesc(),
     armor: (c: Entity) => c.ArmorDesc(),
     botarmor: (c: Entity) => c.LowerArmorDesc(),
+    humanity: (c: Entity, opts: IParseSyntaxOpts) => {
+        const humanity = c.Humanity();
+        const args = _splitArgs(opts);
+        for (const [i, cond] of args.conds.entries()) {
+            if (humanity >= parseInt(cond, 10)) {
+                return args.body[i];
+            }
+        }
+        // else
+        return _.last(args.body);
+    },
 };
 
 const syntax: {[index: string]: (opts: IParseSyntaxOpts) => string} = {
