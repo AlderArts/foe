@@ -13,10 +13,13 @@ export function P2(literals: TemplateStringsArray, ...tags: Array<string|boolean
     // Add the last literal
     result += _.last(literals);
 
+    result = ParseRecurse(result);
     // Add <i></i> tags to dialogue
-    // result = result.replace(/“/g, "<i>“").replace(/”/g, "”</i>");
+    result = result.replace(/“/g, "<i>“").replace(/”/g, "”</i>");
+    // Insert line breaks
+    result = result.replace(/\n/g, "<br>");
 
-    return ParseRecurse(result);
+    return result;
 }
 
 function ParseRecurse(literal: string) {
