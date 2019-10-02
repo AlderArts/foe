@@ -290,17 +290,3 @@ const syntax: {[index: string]: (opts: IParseSyntaxOpts) => string} = {
         return _.last(args.body);
     },
 };
-
-// Unrelated code below for matching enum
-
-/*
-const keys: {[key in keyof typeof Season]: string} = {
-    Spring: "Hello",
-    Summer: "Hi",
-    Autumn: "hoi",
-    Winter: "oo",
-    LAST: undefined,
-};
-
-const season = keys[Season.Autumn];
-*/
