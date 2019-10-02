@@ -148,6 +148,7 @@ export class Entity {
 	public acc2Slot: Item;
 
 	public strapOn: ItemToy;
+	public prefCock: Cock;
 
 	public elementAtk: DamageType;
 	public elementDef: DamageType;
@@ -2350,6 +2351,13 @@ export class Entity {
 	}
 
 	// Convenience functions, cock
+	public SetPreferredCock(cock: Cock) {
+		this.prefCock = cock;
+	}
+	public GetPreferredCock(): Cock {
+		return this.prefCock;
+	}
+
 	public NumCocks() {
 		return this.body.cock.length;
 	}

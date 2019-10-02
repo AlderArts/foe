@@ -172,10 +172,9 @@ const parseChar: {[index: string]: (c: Entity, opts?: IParseSyntaxOpts) => strin
     longtongue: (c: Entity, opts: IParseSyntaxOpts) => { const terms = _splitBody(opts, 2); return c.LongTongue() ? terms[0] : terms[1]; },
 
     cocks: (c: Entity) => c.MultiCockDesc(),
-    // TODO howto?
-    // cock: (c: Entity) => p1cock.Short(),
-    // cockTip: (c: Entity) => p1cock.TipShort(),
-    // knot: (c: Entity) => p1cock.KnotShort(),
+    cock: (c: Entity) => { const cock = c.GetPreferredCock() || c.FirstCock(); return cock.Short(); },
+    cockTip: (c: Entity) => { const cock = c.GetPreferredCock() || c.FirstCock(); return cock.TipShort(); },
+    knot: (c: Entity) => { const cock = c.GetPreferredCock() || c.FirstCock(); return cock.KnotShort(); },
     balls: (c: Entity) => c.BallsDesc(),
     butt: (c: Entity) => c.Butt().Short(),
     anus: (c: Entity) => c.Butt().AnalShort(),
