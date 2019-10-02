@@ -14,3 +14,4 @@ node_modules
 .vscode/*
 yarn.lock
 dist/*
+package-lock.json
