@@ -289,4 +289,8 @@ const syntax: {[index: string]: (opts: IParseSyntaxOpts) => string} = {
         // else
         return _.last(args.body);
     },
+    rand: (opts: IParseSyntaxOpts) => {
+        const body = _splitBody(opts);
+        return _.sample(body);
+    },
 };
