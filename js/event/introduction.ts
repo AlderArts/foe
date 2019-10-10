@@ -34,6 +34,7 @@ import { Kiakai } from "./kiakai";
 import { KiakaiFlags } from "./kiakai-flags";
 import { Player } from "./player";
 import { Uru, UruFlags } from "./uru";
+import { Miranda } from "./miranda";
 
 // Create location
 const DarkAspect: ILocDarkAspect = {
@@ -62,11 +63,17 @@ export namespace Intro {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 
+		const miranda: Miranda = GAME().miranda;
+		const mp = miranda.Parser;
+
 		party.SwitchIn(player);
 
 		GAME().IntroActive = true;
 
 		Text.Clear();
+
+		// TODO REMOVE
+		Text.Add(`TODO REMOVE: Testing some new parser stuff: ${mp.heshe} is a ${mp.name}. `);
 
 		Text.Add("You are not quite sure what draws you there, but once again, you find yourself climbing the rickety ladder leading to the attic of the old house. With a heave and a cloud of dust, you open the trapdoor and peek into the room. An alarmed caw and a flutter of wings inform you of the presence of a bird's nest somewhere in the darkness above. Guess someone still uses this place after all.");
 		Text.NL();

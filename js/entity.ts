@@ -94,6 +94,80 @@ export interface ICombatEncounter {
 	RunLevel: () => number;
 }
 
+class EntityParser {
+	private ent: Entity;
+
+	constructor(entity: Entity) {
+		this.ent = entity;
+	}
+
+	public get name() { return this.ent.NameDesc(); }
+	public get heshe() { return this.ent.heshe(); }
+	public get HeShe() { return this.ent.HeShe(); }
+	public get hisher() { return this.ent.hisher(); }
+	public get HisHer() { return this.ent.HisHer(); }
+	public get himher() { return this.ent.himher(); }
+	public get HimHer() { return this.ent.HimHer(); }
+	public get hishers() { return this.ent.hishers(); }
+	public get poss() { return this.ent.possessive(); }
+	public get Poss() { return this.ent.Possessive(); }
+	public get poss2() { return this.ent.possessivePlural(); }
+	public get Poss2() { return this.ent.PossessivePlural(); }
+	public get has() { return this.ent.has(); }
+	public get is() { return this.ent.is(); }
+	public mfFem(male: string, female: string) { return this.ent.mfFem(male, female); }
+	public mfTrue(male: string, female: string) { return this.ent.mfTrue(male, female); }
+	public taur(iftaur: string, nottaur: string) { return this.ent.IsTaur() ? iftaur : nottaur; }
+	public naga(ifnaga: string, notnaga: string) { return this.ent.IsTaur() ? ifnaga : notnaga; }
+	public goo(ifgoo: string, notgoo: string) { return this.ent.IsTaur() ? ifgoo : notgoo; }
+	public flexible(ifflexible: string, notflexible: string) { return this.ent.IsFlexible() ? ifflexible : notflexible; }
+	public hashair(ifhashair: string, nothashair: string) { return this.ent.HasHair() ? ifhashair : nothashair; }
+	public longhair(iflonghair: string, notlonghair: string) { return this.ent.HasLongHair() ? iflonghair : notlonghair; }
+	public longtongue(iflongtongue: string, notlongtongue: string) { return this.ent.LongTongue() ? iflongtongue : notlongtongue; }
+	public get cocks() { return this.ent.MultiCockDesc(); }
+	public get cock() { const cock = this.ent.GetPreferredCock() || this.ent.FirstCock(); return cock.Short(); }
+	public get cockTip() { const cock = this.ent.GetPreferredCock() || this.ent.FirstCock(); return cock.TipShort(); }
+	public get knot() { const cock = this.ent.GetPreferredCock() || this.ent.FirstCock(); return cock.KnotShort(); }
+	public get balls() { return this.ent.BallsDesc(); }
+	public get butt() { return this.ent.Butt().Short(); }
+	public get anus() { return this.ent.Butt().AnalShort(); }
+	public get vag() { return this.ent.FirstVag().Short(); }
+	public get clit() { return this.ent.FirstVag().ClitShort(); }
+	public get breasts() { return this.ent.FirstBreastRow().Short(); }
+	public get nip() { return this.ent.FirstBreastRow().NipShort(); }
+	public get nips() { return this.ent.FirstBreastRow().NipsShort(); }
+	public get tongue() { return this.ent.TongueDesc(); }
+	public get tongueTip() { return this.ent.TongueTipDesc(); }
+	public get skin() { return this.ent.SkinDesc(); }
+	public get hair() { return this.ent.Hair().Short(); }
+	public get lips() { return this.ent.LipsDesc(); }
+	public get face() { return this.ent.FaceDesc(); }
+	public get ear() { return this.ent.EarDesc(); }
+	public get ears() { return this.ent.EarDesc(true); }
+	public get eye() { return this.ent.EyeDesc(); }
+	public get eyes() { return this.ent.EyesDesc(); }
+	public get hand() { return this.ent.HandDesc(); }
+	public get palm() { return this.ent.PalmDesc(); }
+	public get hip() { return this.ent.HipDesc(); }
+	public get hips() { return this.ent.HipsDesc(); }
+	public get thigh() { return this.ent.ThighDesc(); }
+	public get thighs() { return this.ent.ThighsDesc(); }
+	public get leg() { return this.ent.LegDesc(); }
+	public get legs() { return this.ent.LegsDesc(); }
+	public get knee() { return this.ent.KneeDesc(); }
+	public get knees() { return this.ent.KneesDesc(); }
+	public get foot() { return this.ent.FootDesc(); }
+	public get feet() { return this.ent.FeetDesc(); }
+	public get belly() { return this.ent.StomachDesc(); }
+	public get tail() { const tail = this.ent.HasTail(); return tail ? tail.Short() : ""; }
+	public get wing() { const wing = this.ent.HasWings(); return wing ? wing.Short() : ""; }
+	public get horns() { const horns = this.ent.HasHorns(); return horns ? horns.Short() : ""; }
+	public get weapon() { return this.ent.WeaponDesc(); }
+	public get armor() { return this.ent.ArmorDesc(); }
+	public get botarmor() { return this.ent.LowerArmorDesc(); }
+	// TODO humanity
+}
+
 // TODO: Should have shared features, such as combat stats. Body representation
 export class Entity {
 
@@ -184,7 +258,12 @@ export class Entity {
 	/* ENTITY DICT */
 	public UniqueId = EntityDict.UniqueId;
 
+	/* ENTITY PARSER */
+	public get Parser() { return this.parser; }
+	private parser: EntityParser;
+
 	constructor() {
+		this.parser = new EntityParser(this);
 		// Names and grammar
 		this.name         = "ENTITY";
 		this.monsterName  = undefined;
@@ -2245,14 +2324,14 @@ export class Entity {
 		return (this.body.Gender() === Gender.none);
 	}
 	// TODO femininity from other things (breasts etc)
-	public mfFem(male: any, female: any) {
+	public mfFem(male: string, female: string) {
 		return this.body.femininity.Get() > 0 ? female : male;
 	}
-	public mfTrue(male: any, female: any) {
+	public mfTrue(male: string, female: string) {
 		return (this.body.Gender() === Gender.male) ? male : female;
 	}
 
-	public ParserPronouns(parse?: any, prefix?: string, postfix?: string, forcegender?: Gender) {
+	public ParserPronouns(parse?: IParse, prefix?: string, postfix?: string, forcegender?: Gender) {
 		parse   = parse   || {};
 		prefix  = prefix  || "";
 		postfix = postfix || "";
