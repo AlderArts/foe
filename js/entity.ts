@@ -101,7 +101,8 @@ class EntityParser {
 		this.ent = entity;
 	}
 
-	public get name() { return this.ent.NameDesc(); }
+	public get name() { return this.ent.nameDesc(); }
+	public get Name() { return this.ent.NameDesc(); }
 	public get heshe() { return this.ent.heshe(); }
 	public get HeShe() { return this.ent.HeShe(); }
 	public get hisher() { return this.ent.hisher(); }
@@ -165,7 +166,19 @@ class EntityParser {
 	public get weapon() { return this.ent.WeaponDesc(); }
 	public get armor() { return this.ent.ArmorDesc(); }
 	public get botarmor() { return this.ent.LowerArmorDesc(); }
-	// TODO humanity
+	public humanity(conds: number[], ...str: string[]) {
+		if (conds.length !== str.length - 1) {
+			return Text.ApplyStyle(`Parse error [humanity(conds, ...str)], number of strs must equal conds - 1!`, "error");
+		}
+		const humanity = this.ent.Humanity();
+		for (const [i, cond] of conds.entries()) {
+			if (humanity >= cond) {
+				return str[i];
+			}
+		}
+		// else
+		return _.last(str);
+	}
 }
 
 // TODO: Should have shared features, such as combat stats. Body representation

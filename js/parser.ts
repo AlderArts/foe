@@ -2,6 +2,7 @@ import * as _ from "lodash";
 import { Entity } from "./entity";
 import { GAME, WorldTime } from "./GAME";
 import { Text } from "./text";
+import { Season } from "./time";
 
 export function P2(literals: TemplateStringsArray, ...tags: Array<string|boolean>) {
     let result = "";
@@ -294,3 +295,28 @@ const syntax: {[index: string]: (opts: IParseSyntaxOpts) => string} = {
         return _.sample(body);
     },
 };
+
+/* Global parser */
+export namespace GP {
+    export function season(spring: string, summer: string, autumn: string, winter: string) {
+        const s = WorldTime().season;
+        switch (s) {
+            case Season.Spring: return spring;
+            case Season.Summer: return summer;
+            case Season.Autumn: return autumn;
+            default:
+            case Season.Winter: return winter;
+        }
+    }
+
+    export function comps(alone: string, two: string, group: string) {
+        const num: number = GAME().party.Num();
+        if (num > 2) { // group
+            return group;
+        } else if (num === 2) { // two
+            return two;
+        } else { // alone
+            return alone;
+        }
+    }
+}
