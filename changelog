@@ -10,6 +10,7 @@ Version 0.5.3
 * Fixed numerous minor logic errors in scenes discovered by applying strict typing.
 * Fixed some race detection errors in scenes, also discovered by applying strict typing.
 * Added some debug functionality. If you are in to hacking through the console, a bunch of game variables can now be accessed through the console on the object 'game'.
+* Added a new parser methodology that should make implementing scenes quicker and less prune to errors. It uses template literals from ES6 and some helper objects to allow for a simple parser syntax.
 
 --------------------------------------------
              PREVIOUS VERSIONS
