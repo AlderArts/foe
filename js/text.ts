@@ -97,7 +97,7 @@ export namespace Text {
 	// This is used internally by Add and the helper methods below.
 	// This should be used for styling any text that should
 	// not be passed through Text.Parse
-	function ApplyStyle(text: string|number, cssClasses?: string, tag: string = "span") {
+	export function ApplyStyle(text: string|number, cssClasses?: string, tag: string = "span") {
 		const classes = cssClasses ? ` class ="${cssClasses}">` : ">";
 		return `<${tag}${classes}${text}</${tag}>`;
 	}
@@ -113,6 +113,19 @@ export namespace Text {
 			buffer += ApplyStyle(parsed, cssClasses, tag);
 		} else {
 			buffer += parsed;
+		}
+	}
+
+	export function Out(text: string, cssClasses?: string, tag?: string) {
+		// Insert <i> tags at dialogue
+		text = text.replace(/“/g, "<i>“").replace(/”/g, "”</i>");
+		// Insert line breaks
+		text = text.replace(/\n/g, "<br>");
+
+		if (cssClasses) {
+			buffer += ApplyStyle(text, cssClasses, tag);
+		} else {
+			buffer += text;
 		}
 	}
 

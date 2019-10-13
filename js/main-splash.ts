@@ -20,15 +20,15 @@ const SplashScreen = () => {
 	Text.NL();
 
 	Text.Add(Text.InsertImage(Images.gwendy)); // TEMP
-	Text.Add("<i>Game developed by <a href=\"http://www.furaffinity.net/user/aldergames/\">Alder</a></i>");
-	Text.NL();
-	Text.Add("Editors: MrKrampus, Del, Johnathan Roberts, Ryous, CalmKhaos. Thanks a bunch for your hard work!");
-	Text.NL();
-	Text.Add("Thanks to <a href=\"http://www.fenoxo.com/\">Fenoxo</a> for hosting this and for the inspiration. This game would never have been created if not for CoC!");
-	Text.NL();
-	Text.Add("<b>This game contains adult content. By playing you confirm that you are 18 years or older. Also, beware furries and futas.</b>");
-	Text.NL();
-	Text.Add("This game has hotkeys enabled, you can use 1-5, q-t, a-g");
+	Text.Out(`<i>Game developed by <a href="http://www.furaffinity.net/user/aldergames/">Alder</a></i>
+
+		Editors: MrKrampus, Del, Johnathan Roberts, Ryous, CalmKhaos. Thanks a bunch for your hard work!
+
+		Thanks to <a href="http://www.fenoxo.com/">Fenoxo</a> for hosting this and for the inspiration. This game would never have been created if not for CoC!
+
+		<b>This game contains adult content. By playing you confirm that you are 18 years or older. Also, beware furries and futas.</b>
+
+		This game has hotkeys enabled, you can use 1-5, q-t, a-g`);
 
 	Input.buttons[0].Setup("New game", () => {
 		// Init game
@@ -82,7 +82,7 @@ const SplashScreen = () => {
 
 	Text.NL();
 	if (isOnline() && Saver.HasSaves()) {
-		Text.Add("DEBUG: localStorage usage: " + JSON.stringify(localStorage).length / 2636625);
+		Text.Add(`DEBUG: localStorage usage: ${JSON.stringify(localStorage).length} characters.`);
 	}
 	Text.Flush();
 };
