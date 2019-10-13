@@ -8,7 +8,6 @@ import { CacheToGame } from "./gamecache";
 import { GameState, isOnline, SetGameState } from "./gamestate";
 import { Gui } from "./gui";
 import { Input } from "./input";
-import { P2 } from "./parser";
 import { Saver } from "./saver";
 import { Text } from "./text";
 
@@ -21,7 +20,7 @@ const SplashScreen = () => {
 	Text.NL();
 
 	Text.Add(Text.InsertImage(Images.gwendy)); // TEMP
-	Text.Add(P2`<i>Game developed by <a href="http://www.furaffinity.net/user/aldergames/">Alder</a></i>
+	Text.Out(`<i>Game developed by <a href="http://www.furaffinity.net/user/aldergames/">Alder</a></i>
 
 		Editors: MrKrampus, Del, Johnathan Roberts, Ryous, CalmKhaos. Thanks a bunch for your hard work!
 
@@ -83,7 +82,7 @@ const SplashScreen = () => {
 
 	Text.NL();
 	if (isOnline() && Saver.HasSaves()) {
-		Text.Add("DEBUG: localStorage usage: " + JSON.stringify(localStorage).length / 2636625);
+		Text.Add(`DEBUG: localStorage usage: ${JSON.stringify(localStorage).length} characters.`);
 	}
 	Text.Flush();
 };

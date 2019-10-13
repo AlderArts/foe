@@ -116,6 +116,19 @@ export namespace Text {
 		}
 	}
 
+	export function Out(text: string, cssClasses?: string, tag?: string) {
+		// Insert <i> tags at dialogue
+		text = text.replace(/“/g, "<i>“").replace(/”/g, "”</i>");
+		// Insert line breaks
+		text = text.replace(/\n/g, "<br>");
+
+		if (cssClasses) {
+			buffer += ApplyStyle(text, cssClasses, tag);
+		} else {
+			buffer += text;
+		}
+	}
+
 	// Adds text wrapped in a span.
 	export function AddSpan(text: string, parse?: IParse, cssClasses?: string) {
 		Text.Add(text, parse, cssClasses, "span");
