@@ -50,11 +50,11 @@ export namespace GwendyScenes {
 		Gui.SetButtonsFromList(options, true);
 	}
 
-	export function LoftSexPrompt(back: CallableFunction, disableSleep: boolean) {
+	export function LoftSexPrompt(back: CallableFunction, disableSleep: boolean, minWinScene: GwendyFlags.ChallengeWinScene = GwendyFlags.ChallengeWinScene.Kiss, minLossScene: GwendyFlags.ChallengeLostScene = GwendyFlags.ChallengeLostScene.Kiss) {
 		const parse: IParse = {};
 		const options: IChoice[] = [];
-		GwendyScenes.ChallengeSexWonPrompt(true, options, disableSleep);
-		GwendyScenes.ChallengeSexLostPrompt(true, options, disableSleep);
+		GwendyScenes.ChallengeSexWonPrompt(true, options, disableSleep, minWinScene);
+		GwendyScenes.ChallengeSexLostPrompt(true, options, disableSleep, minLossScene);
 		if (!disableSleep) {
 			options.push({ nameStr : "Sleep",
 				func() {
@@ -664,7 +664,7 @@ export namespace GwendyScenes {
 		}
 	}
 
-	export function ChallengeSexWonPrompt(hangout: boolean, options: IChoice[], disableSleep: boolean) {
+	export function ChallengeSexWonPrompt(hangout: boolean, options: IChoice[], disableSleep: boolean, minScene: GwendyFlags.ChallengeWinScene = GwendyFlags.ChallengeWinScene.Kiss) {
 		const player: Player = GAME().player;
 		const gwendy: Gwendy = GAME().gwendy;
 		const parse: IParse = {
@@ -716,7 +716,7 @@ export namespace GwendyScenes {
 				TimeStep({minute: 5});
 				Text.Flush();
 				Gui.NextPrompt();
-			}, enabled : true,
+			}, enabled : minScene <= GwendyFlags.ChallengeWinScene.Kiss,
 			tooltip : "Just a peck, please.",
 		});
 		if (wins >= GwendyFlags.ChallengeWinScene.Hands) {
@@ -724,7 +724,7 @@ export namespace GwendyScenes {
 				options.push({ nameStr : "Handjob",
 					func() {
 						GwendyScenes.ChallengeSexHands(true, hangout);
-					}, enabled : true,
+					}, enabled : minScene <= GwendyFlags.ChallengeWinScene.Hands,
 					tooltip : "Have her jerk you off.",
 				});
 			}
@@ -732,7 +732,7 @@ export namespace GwendyScenes {
 				options.push({ nameStr : "Frig",
 					func() {
 						GwendyScenes.ChallengeSexHands(false, hangout);
-					}, enabled : true,
+					}, enabled : minScene <= GwendyFlags.ChallengeWinScene.Hands,
 					tooltip : "Have her pleasure your cunt with her hands.",
 				});
 			}
@@ -742,14 +742,14 @@ export namespace GwendyScenes {
 				options.push({ nameStr : "Titfuck",
 					func() {
 						GwendyScenes.ChallengeSexBody(true, hangout, disableSleep);
-					}, enabled : true,
+					}, enabled : minScene <= GwendyFlags.ChallengeWinScene.Titfuck,
 					tooltip : "Those tits could be fun to play with.",
 				});
 			}
 			options.push({ nameStr : "Tease",
 				func() {
 					GwendyScenes.ChallengeSexBody(false, hangout, disableSleep);
-				}, enabled : true,
+				}, enabled : minScene <= GwendyFlags.ChallengeWinScene.Titfuck,
 				tooltip : "Play a little with her body, teasing her.",
 			});
 		}
@@ -758,7 +758,7 @@ export namespace GwendyScenes {
 				options.push({ nameStr : "Blowjob",
 					func() {
 						GwendyScenes.ChallengeSexOral(true, hangout);
-					}, enabled : true,
+					}, enabled : minScene <= GwendyFlags.ChallengeWinScene.Oral,
 					tooltip : "Put her mouth to work sucking dick.",
 				});
 			}
@@ -766,7 +766,7 @@ export namespace GwendyScenes {
 				options.push({ nameStr : "Cunnilingus",
 					func() {
 						GwendyScenes.ChallengeSexOral(false, hangout);
-					}, enabled : true,
+					}, enabled : minScene <= GwendyFlags.ChallengeWinScene.Oral,
 					tooltip : "Let her have a taste of your cunt.",
 				});
 			}
@@ -777,7 +777,7 @@ export namespace GwendyScenes {
 					options.push({ nameStr : "Fuck her",
 						func() {
 							GwendyScenes.ChallengeSexVag(true, hangout);
-						}, enabled : true,
+						}, enabled : minScene <= GwendyFlags.ChallengeWinScene.Fuck,
 						tooltip : "The girl is begging for it, oblige her and ravage her cunt.",
 					});
 				}
@@ -785,7 +785,7 @@ export namespace GwendyScenes {
 					options.push({ nameStr : "Tribbing",
 						func() {
 							GwendyScenes.ChallengeSexVag(false, hangout);
-						}, enabled : true,
+						}, enabled : minScene <= GwendyFlags.ChallengeWinScene.Fuck,
 						tooltip : "Have a little girly fun with the sexy farmer.",
 					});
 				}
@@ -796,7 +796,7 @@ export namespace GwendyScenes {
 				options.push({ nameStr : "Anal",
 					func() {
 						GwendyScenes.ChallengeSexAnal(GwendyFlags.Toys.None, hangout);
-					}, enabled : true,
+					}, enabled : minScene <= GwendyFlags.ChallengeWinScene.Anal,
 					tooltip : "Plow her ass.",
 				});
 			}
@@ -804,7 +804,7 @@ export namespace GwendyScenes {
 				options.push({ nameStr : "Toys",
 					func() {
 						GwendyScenes.ChallengeSexAnal(GwendyFlags.Toys.Strapon, hangout);
-					}, enabled : true,
+					}, enabled : minScene <= GwendyFlags.ChallengeWinScene.Anal,
 					tooltip : "Browse through Gwendy’s collection to see if something catches your eyes.",
 				});
 			} else {
@@ -994,7 +994,12 @@ export namespace GwendyScenes {
 						"featureless crotch";
 		Text.Clear();
 
-		const first  = gwendy.flags.ChallengeWinScene === GwendyFlags.ChallengeWinScene.Titfuck;
+		let lossScene = gwendy.flags.ChallengeLostScene;
+		let wonScene  = gwendy.flags.ChallengeWonScene;
+		if (hangout) { lossScene--; }
+		if (hangout) { wonScene--; }
+
+		const first  = wonScene === GwendyFlags.ChallengeWinScene.Titfuck;
 		const second = !first && !hangout;
 
 		// If first time
@@ -1181,8 +1186,8 @@ export namespace GwendyScenes {
 						Text.Add("<i>“Say... are you really just going to leave it like that?”</i> she manages to pant, grinding back against your body. <i>“Come on... I need it...”</i>", parse);
 						Text.Flush();
 
-						GwendyScenes.LoftSexPrompt(undefined, disableSleep);
-					}, enabled : true,
+						GwendyScenes.LoftSexPrompt(undefined, disableSleep, GwendyFlags.ChallengeWinScene.Oral, GwendyFlags.ChallengeLostScene.Oral);
+					}, enabled : wonScene >= GwendyFlags.ChallengeWinScene.Oral || lossScene >= GwendyFlags.ChallengeLostScene.Oral,
 					tooltip : "She is ready and more than willing.",
 				});
 				Gui.SetButtonsFromList(options);
@@ -1977,7 +1982,7 @@ export namespace GwendyScenes {
 		}
 	}
 
-	export function ChallengeSexLostPrompt(hangout: boolean, options: IChoice[], disableSleep: boolean) {
+	export function ChallengeSexLostPrompt(hangout: boolean, options: IChoice[], disableSleep: boolean, minScene: GwendyFlags.ChallengeLostScene = GwendyFlags.ChallengeLostScene.Kiss) {
 		const player: Player = GAME().player;
 		const gwendy: Gwendy = GAME().gwendy;
 
@@ -2027,7 +2032,7 @@ export namespace GwendyScenes {
 						scenes.AddEnc(() => {
 							Text.Add("As she breaks the kiss, you find yourself slightly aroused. The same could be said for Gwendy and her amorous glance. <i>“Heheh, sorry, [playername], but that's all for now.”</i> She smiles upon noticing your disappointment, though she makes up with another, longer kiss. <i>“Then again, I might not be able to resist so easily... whaddaya say we kick it up a notch?”</i>", parse);
 							Text.Flush();
-							GwendyScenes.LoftSexPrompt(undefined, disableSleep);
+							GwendyScenes.LoftSexPrompt(undefined, disableSleep, GwendyFlags.ChallengeWinScene.Hands, GwendyFlags.ChallengeLostScene.Makeout);
 						}, 1.0, () => lossScene >= GwendyFlags.ChallengeLostScene.Makeout || wonScene >= GwendyFlags.ChallengeWinScene.Hands);
 
 						scenes.Get();
@@ -2036,7 +2041,7 @@ export namespace GwendyScenes {
 						Text.Flush();
 						Gui.NextPrompt();
 					}
-				}, enabled : true,
+				}, enabled : minScene <= GwendyFlags.ChallengeLostScene.Kiss,
 				tooltip : "Let Gwendy kiss you.",
 			});
 		}
@@ -2099,12 +2104,9 @@ export namespace GwendyScenes {
 							Text.Add("<i>“You know... we can always kick this up a notch if you want to...”</i>", parse);
 							Text.NL();
 							Text.Add("Without wasting a moment, you agree, eager to get back at her for this.", parse);
-							Text.NL();
-							Text.Add("<b>TEMP, SCENE MISSING</b>");
 							Text.Flush();
-							// TODO: SEX PROMPT
-							Gui.NextPrompt();
-						}, 1.0, () => true);
+							GwendyScenes.LoftSexPrompt(undefined, disableSleep, GwendyFlags.ChallengeWinScene.Titfuck, GwendyFlags.ChallengeLostScene.Denial);
+						}, 1.0, () => lossScene >= GwendyFlags.ChallengeLostScene.Denial || wonScene >= GwendyFlags.ChallengeWinScene.Titfuck);
 
 						scenes.Get();
 					} else {
@@ -2112,7 +2114,7 @@ export namespace GwendyScenes {
 						Text.Flush();
 						Gui.NextPrompt();
 					}
-				}, enabled : true,
+				}, enabled : minScene <= GwendyFlags.ChallengeLostScene.Makeout,
 				tooltip : "Have a steamy make-out session.",
 			});
 		}
@@ -2123,9 +2125,9 @@ export namespace GwendyScenes {
 					const second = !first && !hangout;
 
 					Text.Clear();
-					Text.Add("She wins... yet again. ", parse);
 
 					if (!hangout) {
+						Text.Add("She wins... yet again. ", parse);
 						if (first) {
 							player.libido.IncreaseStat(100, 2);
 
@@ -2210,7 +2212,7 @@ export namespace GwendyScenes {
 					Text.Flush();
 
 					Gui.NextPrompt();
-				}, enabled : true,
+				}, enabled : minScene <= GwendyFlags.ChallengeLostScene.Denial,
 				tooltip : "Gwendy will tease you and test your sexual endurance.",
 			});
 		}
@@ -2222,7 +2224,7 @@ export namespace GwendyScenes {
 					Text.Add("", parse);
 					Text.NL();
 					Text.Flush();
-				}, enabled : true,
+				}, enabled : minScene <= GwendyFlags.ChallengeLostScene.Oral,
 				tooltip : "Please Gwendy with your tongue."
 			});
 		}
@@ -2233,7 +2235,7 @@ export namespace GwendyScenes {
 					Text.Add("", parse);
 					Text.NL();
 					Text.Flush();
-				}, enabled : true,
+				}, enabled : minScene <= GwendyFlags.ChallengeLostScene.Ride,
 				tooltip : "Catch a ride."
 			});
 		}
@@ -2244,7 +2246,7 @@ export namespace GwendyScenes {
 					Text.Add("", parse);
 					Text.NL();
 					Text.Flush();
-				}, enabled : true,
+				}, enabled : minScene <= GwendyFlags.ChallengeLostScene.Fucked,
 				tooltip : "Gwendy's itching to play with her toy again."
 			});
 		}
