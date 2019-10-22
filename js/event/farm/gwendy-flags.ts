@@ -12,4 +12,23 @@ export namespace GwendyFlags {
         Beads    = 3,
         DDildo   = 4,
     }
+
+    export enum ChallengeWinScene {
+        Kiss    = 0,
+        Hands   = 1,
+        Titfuck = 2,
+        Oral    = 3,
+        Fuck    = 4,
+        Anal    = 5,
+        LAST    = 6, // TODO
+    }
+
+    export enum ChallengeLostScene {
+        Kiss    = 0,
+        Makeout = 1,
+        Denial  = 2,
+        Oral    = 3,
+        Ride    = 4,
+        Fucked  = 5,
+    }
 }

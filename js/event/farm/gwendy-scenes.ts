@@ -309,7 +309,7 @@ export namespace GwendyScenes {
 			Text.Add(" You tell [p1name] to get help with work as well, as there's more than enough for you two to pitch a hand in.", parse);
 		} else if (!party.Alone()) {
 			Text.Add(" You tell the group to get to work as well, seeing as there's enough to do for everyone to pitch a hand in.", parse);
- }
+ 		}
 
 		// Random scenes
 		const scenes = new EncounterTable();
@@ -419,7 +419,7 @@ export namespace GwendyScenes {
 			Text.Add(" [name] waits for you patiently at the entrance to the farm, smiling as you join [himher] and set off.", parse);
 		} else if (!party.Alone()) {
 			Text.Add(" Your companions are chatting among themselves while waiting for you at the entrance to the farm, smiling as you join them and set off.", parse);
- }
+ 		}
 
 		Text.Flush();
 
@@ -634,9 +634,9 @@ export namespace GwendyScenes {
 				Text.Add("She won this time... meaning you've got to pay up to her in whatever way she demands. Your thoughts are confirmed when she looks at you with a sly smile.", parse);
 			} else if (gwendy.flags.LostChallenge < 6) {
 				Text.Add("Despite your efforts, it seems like you can't beat the girl in her domain. A part of you wonders why you continue with these challenges if the result is always you losing and letting her degrade you. Still, you've got to try to best her somehow... after she reaps her reward from you, at least.", parse);
- } else {
+ 			} else {
 				Text.Add("Face it, when she puts her mind to it, you can't win. At this point, you have to wonder if you actually accept your defeat and are just taking the challenges to get off. Who knows, maybe it's not so bad losing to the sexy girl? In any event, she gets to have her way with you again.", parse);
- }
+ 			}
 			Text.Flush();
 			Gui.NextPrompt(() => {
 				const options: IChoice[] = [];
@@ -654,9 +654,9 @@ export namespace GwendyScenes {
 				Text.Add("It looks like you've bested the farm girl, and she pouts a bit. Still, a bet was a bet, and she's going to have to pay up!", parse);
 			} else if (gwendy.flags.WonChallenge < 6) {
 				Text.Add("Seems like she's still going to challenge you, even though you've bested her so far! Her defiance has definitely increased her efforts whenever you challenge her, but the end result is the same: her waiting on your whim.", parse);
- } else {
+ 			} else {
 				Text.Add("At this point, it's hard to call it a challenge. Despite that, Gwendy has definitely given it her all to best you, it's just that her best isn't good enough. A shame, but it means you're going to have some fun...", parse);
- }
+ 			}
 			Text.Flush();
 			const options: IChoice[] = [];
 			GwendyScenes.ChallengeSexWonPrompt(false, options, false);
@@ -678,7 +678,7 @@ export namespace GwendyScenes {
 			func() {
 				Text.Clear();
 				// If first time
-				if (wins === 0 && !hangout) {
+				if (wins === GwendyFlags.ChallengeWinScene.Kiss && !hangout) {
 					if (gwendy.flags.LostChallenge > 0) {
 						Text.Add("Since Gwendy went easy on you when you lost the first time, you decide to start things off light.", parse);
 					} else {
@@ -688,7 +688,7 @@ export namespace GwendyScenes {
 					gwendy.subDom.DecreaseStat(-100, 5);
 					player.subDom.IncreaseStat(100, 3);
 
-					gwendy.flags.ChallengeWinScene = 1;
+					gwendy.flags.ChallengeWinScene = GwendyFlags.ChallengeWinScene.Hands;
 				} else {
 					Text.Add("You decide to let her off easy this time, and only ask for a kiss.", parse);
 				}
@@ -719,7 +719,7 @@ export namespace GwendyScenes {
 			}, enabled : true,
 			tooltip : "Just a peck, please.",
 		});
-		if (wins >= 1) {
+		if (wins >= GwendyFlags.ChallengeWinScene.Hands) {
 			if (player.FirstCock()) {
 				options.push({ nameStr : "Handjob",
 					func() {
@@ -737,7 +737,7 @@ export namespace GwendyScenes {
 				});
 			}
 		}
-		if (wins >= 2) {
+		if (wins >= GwendyFlags.ChallengeWinScene.Titfuck) {
 			if (player.FirstCock()) {
 				options.push({ nameStr : "Titfuck",
 					func() {
@@ -753,7 +753,7 @@ export namespace GwendyScenes {
 				tooltip : "Play a little with her body, teasing her.",
 			});
 		}
-		if (wins >= 3) {
+		if (wins >= GwendyFlags.ChallengeWinScene.Oral) {
 			if (player.FirstCock()) {
 				options.push({ nameStr : "Blowjob",
 					func() {
@@ -771,7 +771,7 @@ export namespace GwendyScenes {
 				});
 			}
 		}
-		if (wins >= 4) {
+		if (wins >= GwendyFlags.ChallengeWinScene.Fuck) {
 			if (gwendy.FirstVag()) {
 				if (player.FirstCock()) {
 					options.push({ nameStr : "Fuck her",
@@ -791,7 +791,7 @@ export namespace GwendyScenes {
 				}
 			}
 		}
-		if (wins >= 5) {
+		if (wins >= GwendyFlags.ChallengeWinScene.Anal) {
 			if (player.FirstCock()) {
 				options.push({ nameStr : "Anal",
 					func() {
@@ -850,7 +850,7 @@ export namespace GwendyScenes {
 						"featureless crotch";
 		Text.Clear();
 
-		const first  = gwendy.flags.ChallengeWinScene === 1;
+		const first  = gwendy.flags.ChallengeWinScene === GwendyFlags.ChallengeWinScene.Hands;
 		const second = !first && !hangout;
 
 		// If first time
@@ -865,7 +865,7 @@ export namespace GwendyScenes {
 			gwendy.subDom.DecreaseStat(-100, 5);
 			player.subDom.IncreaseStat(100, 3);
 
-			gwendy.flags.ChallengeWinScene = 2;
+			gwendy.flags.ChallengeWinScene = GwendyFlags.ChallengeWinScene.Titfuck;
 		} else if (second) {
 			Text.Add("With another win under your belt, you lead Gwendy back to her loft. Once there, you instruct Gwendy to wait as you quickly strip down, eager to engage in another bout of fun.", parse);
 		} else {
@@ -994,7 +994,7 @@ export namespace GwendyScenes {
 						"featureless crotch";
 		Text.Clear();
 
-		const first  = gwendy.flags.ChallengeWinScene === 2;
+		const first  = gwendy.flags.ChallengeWinScene === GwendyFlags.ChallengeWinScene.Titfuck;
 		const second = !first && !hangout;
 
 		// If first time
@@ -1008,7 +1008,7 @@ export namespace GwendyScenes {
 			gwendy.subDom.DecreaseStat(-100, 5);
 			player.subDom.IncreaseStat(100, 3);
 
-			gwendy.flags.ChallengeWinScene = 3;
+			gwendy.flags.ChallengeWinScene = GwendyFlags.ChallengeWinScene.Oral;
 		} else if (second) {
 			Text.Add("Once more, you lead her to her room for some privacy after your win. You grab a chair from the table and direct Gwendy to kneel before it as you undress and sit down.", parse);
 		} else {
@@ -1112,9 +1112,9 @@ export namespace GwendyScenes {
 				Text.Add("moist and dripping cunt.", parse);
 			} else if (gwendy.Gender() === Gender.male) {
 				Text.Add("impossibly rigid [gcocks].", parse);
- } else {
+ 			} else {
 				Text.Add("equally stimulated sexes.", parse);
- }
+ 			}
 			Text.NL();
 			Text.Add("You smile, seeing that your touches and kisses has provoked the girl so much that she's almost begging for relief. Instead, you get off the horny girl, telling Gwendy to stand up and lean against the chair. She does so eagerly, the lust in her eyes shining desperately.", parse);
 			Text.NL();
@@ -1137,9 +1137,9 @@ export namespace GwendyScenes {
 				}
 			} else if (gwendy.FirstVag()) {
 				Text.Add("Glad to please her, you push your index finger into her tight ass while your middle and ring fingers penetrate her juicy cunt.", parse);
- } else if (gwendy.FirstCock()) {
+ 			} else if (gwendy.FirstCock()) {
 				Text.Add("You slowly push two fingers into her taut rear, pressing mercilessly against her prostate.", parse);
- }
+ 			}
 
 			Text.NL();
 			Text.Add("The curvy farmer tries to stifle a moan, but with a sharp slap on her butt from your free hand, she lets it out, her hips moving of their own accord as your fingers thrust within her. Just as you wanted it: Gwendy, aroused beyond words or thoughts, and you in control.", parse);
@@ -1205,7 +1205,7 @@ export namespace GwendyScenes {
 						"featureless crotch";
 		Text.Clear();
 
-		const first  = gwendy.flags.ChallengeWinScene === 3;
+		const first  = gwendy.flags.ChallengeWinScene === GwendyFlags.ChallengeWinScene.Oral;
 		const second = !first && !hangout;
 
 		parse.s        = player.NumCocks() > 1 ? "s" : "";
@@ -1227,7 +1227,7 @@ export namespace GwendyScenes {
 			gwendy.subDom.DecreaseStat(-100, 5);
 			player.subDom.IncreaseStat(100, 3);
 
-			gwendy.flags.ChallengeWinScene = 4;
+			gwendy.flags.ChallengeWinScene = GwendyFlags.ChallengeWinScene.Fuck;
 		} else if (second) {
 			Text.Add("Heading back to the room where you've claimed all your “rewards”, you pull up the chair again after undressing, while Gwendy gets on her knees awaiting your instructions.", parse);
 		} else {
@@ -1348,7 +1348,7 @@ export namespace GwendyScenes {
 
 		Text.Clear();
 
-		const first  = gwendy.flags.ChallengeWinScene === 4;
+		const first  = gwendy.flags.ChallengeWinScene === GwendyFlags.ChallengeWinScene.Fuck;
 		const second = !first && !hangout;
 
 		parse.isAre    = player.NumCocks() > 1 ? "are" : "is";
@@ -1373,7 +1373,7 @@ export namespace GwendyScenes {
 			gwendy.subDom.DecreaseStat(-100, 5);
 			player.subDom.IncreaseStat(100, 3);
 
-			gwendy.flags.ChallengeWinScene = 5;
+			gwendy.flags.ChallengeWinScene = GwendyFlags.ChallengeWinScene.Anal;
 		} else if (second) {
 			Text.Add("With yet another win under your belt, you head back to the loft with the defeated farmer in tow. Once the two of you are secluded, you hastily strip as lust and greed begin to overtake you. Uncaring of the odd glances she casts at you, you push her onto the table, ready to claim her [gvag] again!", parse);
 		} else {
@@ -1503,7 +1503,7 @@ export namespace GwendyScenes {
 
 		Text.Clear();
 
-		const first  = gwendy.flags.ChallengeWinScene === 5;
+		const first  = gwendy.flags.ChallengeWinScene === GwendyFlags.ChallengeWinScene.Anal;
 		const second = !first && !hangout;
 
 		parse.isAre    = player.NumCocks() > 1 ? "are" : "is";
@@ -1527,7 +1527,7 @@ export namespace GwendyScenes {
 			gwendy.subDom.DecreaseStat(-100, 5);
 			player.subDom.IncreaseStat(100, 3);
 
-			gwendy.flags.ChallengeWinScene = 6;
+			gwendy.flags.ChallengeWinScene = GwendyFlags.ChallengeWinScene.LAST;
 		} else if (second) {
 			Text.Add("Is Gwendy even trying anymore? As you walk back to the loft, conversing lightly, you give her a smack on her rear, whispering to her that she is in for some more anal attention today. Blushing slightly, the farmer’s eyes flit around, checking if anyone saw the exchange. She increase her pace slightly, perhaps to get out of public view, or maybe... she is looking forward to it?", parse);
 			Text.NL();
@@ -1547,7 +1547,7 @@ export namespace GwendyScenes {
 				Text.Add("Now then... lets see what sort of naughty things Gwendy has lying about in her room. You sternly tell her to remain where she is while you start rummaging through her drawers. Poor girl must have been a bit lonely before you showed up, judging by the number of toys she got stored here. Discounting several bottles of what looks to be massage oils and lubricants, you pull out a variety of sex toys, lining them up on the floor in front of the blushing farm girl.", parse);
 				Text.NL();
 				Text.Add("Dildos of various shapes and sizes, anal beads, several strap-ons... ", parse);
-				if (gwendy.flags.ChallengeLostScene >= 6) {
+				if (gwendy.flags.ChallengeLostScene >= GwendyFlags.ChallengeLostScene.Fucked) {
 					Text.Add("the latter not entirely unfamiliar to you.", parse);
 				} else {
 					Text.Add("you idly wonder who she was planning to use the latter on.", parse);
@@ -2000,7 +2000,7 @@ export namespace GwendyScenes {
 		if (hangout) { lossScene--; }
 		if (hangout) { wonScene--; }
 
-		if (lossScene >= 0) {
+		if (lossScene >= GwendyFlags.ChallengeLostScene.Kiss) {
 			options.push({ nameStr : "KissSub",
 				func() {
 					Text.Clear();
@@ -2028,7 +2028,7 @@ export namespace GwendyScenes {
 							Text.Add("As she breaks the kiss, you find yourself slightly aroused. The same could be said for Gwendy and her amorous glance. <i>“Heheh, sorry, [playername], but that's all for now.”</i> She smiles upon noticing your disappointment, though she makes up with another, longer kiss. <i>“Then again, I might not be able to resist so easily... whaddaya say we kick it up a notch?”</i>", parse);
 							Text.Flush();
 							GwendyScenes.LoftSexPrompt(undefined, disableSleep);
-						}, 1.0, () => lossScene >= 1 || wonScene >= 1);
+						}, 1.0, () => lossScene >= GwendyFlags.ChallengeLostScene.Makeout || wonScene >= GwendyFlags.ChallengeWinScene.Hands);
 
 						scenes.Get();
 					} else {
@@ -2040,7 +2040,7 @@ export namespace GwendyScenes {
 				tooltip : "Let Gwendy kiss you.",
 			});
 		}
-		if (lossScene >= 1) {
+		if (lossScene >= GwendyFlags.ChallengeLostScene.Makeout) {
 			options.push({ nameStr : "Make-out",
 				func() {
 					Text.Clear();
@@ -2052,7 +2052,7 @@ export namespace GwendyScenes {
 					Text.NL();
 					Text.Add("Approaching you with a mischievous smile, Gwendy all but forces herself on you then and there, throwing her arms around you and locking lips with you once more.", parse);
 					Text.NL();
-					if (lossScene === 1) {
+					if (lossScene === GwendyFlags.ChallengeLostScene.Makeout) {
 						Text.Add("You wonder if she’s just going to repeat the same thing she did last time, as her tongue begins to stroke and caress yours. Your question is answered when you feel your back press against something solid. The girl is a <i>lot</i> more forceful this time.", parse);
 						Text.NL();
 					}
@@ -2116,10 +2116,10 @@ export namespace GwendyScenes {
 				tooltip : "Have a steamy make-out session.",
 			});
 		}
-		if (lossScene >= 2) {
+		if (lossScene >= GwendyFlags.ChallengeLostScene.Denial) {
 			options.push({ nameStr : "Denial",
 				func() {
-					const first  = lossScene === 2;
+					const first  = lossScene === GwendyFlags.ChallengeLostScene.Denial;
 					const second = !first && !hangout;
 
 					Text.Clear();
@@ -2215,7 +2215,7 @@ export namespace GwendyScenes {
 			});
 		}
 		/*
-		if(lossScene >= 3 && gwendy.FirstVag()) {
+		if(lossScene >= GwendyFlags.ChallengeLostScene.Oral && gwendy.FirstVag()) {
 			options.push({ nameStr : "Eat her",
 				func : () => {
 					Text.Clear();
@@ -2226,18 +2226,18 @@ export namespace GwendyScenes {
 				tooltip : "Please Gwendy with your tongue."
 			});
 		}
-		if(lossScene >= 4) {
-			options.push({ nameStr : "Bondage",
+		if(lossScene >= GwendyFlags.ChallengeLostScene.Ride) {
+			options.push({ nameStr : "Ride",
 				func : () => {
 					Text.Clear();
 					Text.Add("", parse);
 					Text.NL();
 					Text.Flush();
 				}, enabled : true,
-				tooltip : "Time for a little BDSM... with you on the receiving end."
+				tooltip : "Catch a ride."
 			});
 		}
-		if(lossScene >= 5 && !gwendy.FirstCock()) {
+		if(lossScene >= GwendyFlags.ChallengeLostScene.Fucked && !gwendy.FirstCock()) {
 			options.push({ nameStr : "Strap-on",
 				func : () => {
 					Text.Clear();
