@@ -134,6 +134,26 @@ class EntityParser {
 	public get anus() { return this.ent.Butt().AnalShort(); }
 	public get vag() { return this.ent.FirstVag().Short(); }
 	public get clit() { return this.ent.FirstVag().ClitShort(); }
+	public get gen() {
+		let ret = "";
+		const c = this.ent.FirstCock();
+		const v = this.ent.FirstVag();
+
+		if (c === undefined && v === undefined) {
+			return "featureless crotch";
+		}
+
+		if (c !== undefined) {
+			ret += this.cocks;
+		}
+		if (c !== undefined && v !== undefined) {
+			ret += " and ";
+		}
+		if (v !== undefined) {
+			ret += this.vag;
+		}
+		return ret;
+	}
 	public get breasts() { return this.ent.FirstBreastRow().Short(); }
 	public get nip() { return this.ent.FirstBreastRow().NipShort(); }
 	public get nips() { return this.ent.FirstBreastRow().NipsShort(); }
