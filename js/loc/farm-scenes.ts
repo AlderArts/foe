@@ -8,6 +8,7 @@ import { DreamsScenes } from "../event/dreams";
 import { Gwendy } from "../event/farm/gwendy";
 import { GwendyScenes } from "../event/farm/gwendy-scenes";
 import { LaylaScenes } from "../event/farm/layla-scenes";
+import { GlobalScenes } from "../event/global";
 import { Player } from "../event/player";
 import { RoamingScenes } from "../event/roaming";
 import { GAME, MoveToLocation, TimeStep, WORLD, WorldTime } from "../GAME";
@@ -16,6 +17,7 @@ import { Gui } from "../gui";
 import { IngredientItems } from "../items/ingredients";
 import { IChoice, Link } from "../link";
 import { ILocation, ILocFarm } from "../location";
+import { GP } from "../parser";
 import { Party } from "../party";
 import { IParse, Text } from "../text";
 import { Season } from "../time";
@@ -45,7 +47,15 @@ export namespace FarmScenesIntro {
 
         const parse: IParse = {};
 
-        Text.Add("While trekking along the rolling grasslands of the plains, you briefly wonder what else might lie out here, until you spot a foreign structure with a muddy pathway leading toward it. In the distance, you see what appears to be an old and worn building. Although from here you are not sure what it is, you feel compelled to go out there and have a look.", parse);
+        Text.Out(`While trekking through the rolling grasslands of the plains, you recall your first meeting with Miranda outside the gates of Rigard. She mentioned that farmers cultivated these lands, and from what you've seen of the lush fields, it's no wonder.
+
+        Just as your mind begins to wander, you spot an old and worn building in the distance, with a muddy pathway leading towards it. Maybe this is one of the farmsteads that the guardswoman spoke of?`);
+        Text.NL();
+        if (GlobalScenes.RigardVisa()) {
+            Text.Out(`While you already have access to Rigard, surely knowing a little more about the locals can't be of harm?`);
+        } else {
+            Text.Out(`If you were able to befriend one of the locals, they may be able to help you gain entry to Rigard. Miranda mentioned that someone with a pass to enter the city could vouch for you, and farmers would be bound to make frequent trips to the city in order to sell their yield.`);
+        }
         Text.Flush();
 
         // [Approach][Nah]
@@ -90,7 +100,7 @@ export namespace FarmScenesIntro {
             Text.NL();
         }
 
-        Text.Add("The building is a fair distance away, and you vaguely wonder how much longer it will take you to reach it. Much to your relief, you reach it quickly, and are immediately rewarded with its identity. It turns out to be a timeworn barn in apparent danger of collapsing, if the patchwork repairs are any indication.", parse);
+        Text.Add("The building is a fair distance away, and as it’s gradually revealed, your hopes of running across a prosperous farmstead wither. Your destination turns out to be a timeworn barn in apparent danger of collapsing, despite the multitude of patchwork repairs dotting its faded walls and roof.", parse);
         Text.NL();
         Text.Add("To its sides, you see a variety of animals quietly grazing on the rather fertile-looking fields. Another look reveals various other life around as well. The occasional equine and dog-morph tend to menial tasks, such as moving hay and sheaf, or watering cattle.", parse);
         if (party.Two()) {
@@ -1008,13 +1018,20 @@ FarmLoc.Loft.events.push(new Link(
 	() => {
 		const gwendy: Gwendy = GAME().gwendy;
 		if (gwendy.IsAtLocation(FarmLoc.Loft)) {
-			Text.Add("Gwendy is here.");
+			if (gwendy.IsAsleep()) {
+				Text.Out(`At this time of night, Gwendy has retired to her bed, though her sleep seems shallow.`);
+			} else {
+				Text.Out(`Gwendy is currently poring over various documents at her work table.`);
+			}
 		} else {
 			Text.Add("Gwendy doesn't seem to be in at the moment.");
 		}
 		Text.NL();
 	},
-	GwendyScenes.LoftPrompt,
+	() => {
+		GwendyScenes.Approach();
+		GwendyScenes.LoftPrompt();
+	},
 ));
 FarmLoc.Barn.events.push(new Link(
 	"Gwendy", () => {
@@ -1024,13 +1041,16 @@ FarmLoc.Barn.events.push(new Link(
 	() => {
 		const gwendy: Gwendy = GAME().gwendy;
 		if (gwendy.IsAtLocation(FarmLoc.Barn)) {
-			Text.Add("Gwendy is here.");
+			Text.Add("Gwendy is currently tending to the animals, seeing to it that they are fed and watered.");
 		} else {
 			Text.Add("Gwendy doesn't seem to be here at the moment.");
 		}
 		Text.NL();
 	},
-	GwendyScenes.BarnPrompt,
+	() => {
+		GwendyScenes.Approach();
+		GwendyScenes.BarnPrompt();
+	},
 ));
 FarmLoc.Fields.events.push(new Link(
 	"Gwendy", () => {
@@ -1040,20 +1060,23 @@ FarmLoc.Fields.events.push(new Link(
 	() => {
 		const gwendy: Gwendy = GAME().gwendy;
 		if (gwendy.IsAtLocation(FarmLoc.Fields)) {
-			Text.Add("Gwendy is here.");
+			Text.Add("Gwendy is hard at work in the fields, acting as director of the farm’s meager labor force, but also getting her own hands dirty.");
 		} else {
 			Text.Add("Gwendy doesn't seem to be here at the moment.");
 		}
 		Text.NL();
 	},
-	GwendyScenes.FieldsPrompt,
+	() => {
+		GwendyScenes.Approach();
+		GwendyScenes.FieldsPrompt();
+	},
 ));
 
 //
 // Gwendy's farm, the fields
 //
 FarmLoc.Fields.description = () => {
-	Text.Add("Fields.");
+	Text.Out(`Gwendy's farm is a lively place despite its ramshackle appearance. ${GP.season("The fields are currently being plowed and sowed, the farmer and her helpers preparing a multitude of crops for growing in the fertile soil of the plains.", "Growing crops cover the fields in every direction, promising a bountiful harvest in days to come.", "The fall season is one of the busiest times that this place sees, and the process of harvesting the bounty of the fields is currently underway.", "Despite the cold, work here has far from seized. Several well-trodden muddy paths through the layer of snow covering the plains speak of recent activity.")} In the distance, the barn itself stands, a stoic testament to the farmer's persistence.`);
 	Text.NL();
 };
 
@@ -1122,7 +1145,7 @@ FarmLoc.Fields.links.push(new Link(
 // Gwendy's barn
 //
 FarmLoc.Barn.description = () => {
-	Text.Add("Barn.");
+	Text.Out(`The barn is the hub of Gwendy's farmstead, housing most of her cattle as well as the farmer herself up in her loft. While the various animal pens have a very lived-in appearance, they are by no means ill-tended, and their occupants appear to be well cared for and in good spirits.`);
 	Text.NL();
 };
 FarmLoc.Barn.links.push(new Link(
@@ -1146,7 +1169,7 @@ FarmLoc.Barn.links.push(new Link(
 FarmLoc.Loft.SaveSpot   = "GwendysLoft";
 FarmLoc.Loft.safe       = () => true;
 FarmLoc.Loft.description = () => {
-	Text.Add("Gwendy's loft. ");
+	Text.Out(`Gwendy's little hidey-hole is snug and comfy, if precariously located as it is in the rafters of the barn. Several pieces of simple furniture grace it, including a rural bed with a lockbox at its foot, a dresser with a mirror, a round table with two chairs, and a small wash basin.`);
 	Text.NL();
 };
 FarmLoc.Loft.links.push(new Link(

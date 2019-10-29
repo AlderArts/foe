@@ -8,6 +8,10 @@ export namespace GlobalScenes {
 		return GAME().miranda.Met();
 	}
 
+	export function RigardVisa(): boolean {
+		return GAME().rigard.Visa();
+	}
+
 	export function VisitedOutlaws(): boolean {
 		return GAME().outlaws.flags.Met >= OutlawsFlags.Met.Met;
 	}

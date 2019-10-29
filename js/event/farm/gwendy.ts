@@ -122,6 +122,10 @@ export class Gwendy extends Entity {
 		return false;
 	}
 
+	public IsAsleep() {
+		return (WorldTime().hour >= 23 || WorldTime().hour < 5);
+	}
+
 	// Party interaction
 	public Interact(switchSpot: boolean) {
 		const gwendy: Gwendy = GAME().gwendy;

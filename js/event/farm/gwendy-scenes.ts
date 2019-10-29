@@ -13,38 +13,52 @@ import { BurrowsFlags } from "../../loc/burrows-flags";
 import { MarketScenes } from "../../loc/farm-market";
 import { Party } from "../../party";
 import { IParse, Text } from "../../text";
+import { Season } from "../../time";
 import { Player } from "../player";
 import { Gwendy } from "./gwendy";
 import { GwendyFlags } from "./gwendy-flags";
+import { Layla } from "./layla";
+import { LaylaFlags } from "./layla-flags";
 
 export namespace GwendyScenes {
+	export function Approach() {
+		const gwendy: Gwendy = GAME().gwendy;
+		const player: Player = GAME().player;
+		const pc = player.Parser;
+
+		Text.Clear();
+		Text.Out(`The farmer looks up as you approach, `);
+		if (gwendy.Relation() < 30) {
+			Text.Out(`giving you a tired little wave. “Howdy there, ${pc.name}.” ${gwendy.IsAsleep() ? "She stretches and yawns, pushing a stray hair out of her eyes. “What brings you to waking up a gal in the middle of the night?”" : "She pauses in her work, wiping her brow with the back of her hand. “What can I do for ya?”"}`);
+		} else if (gwendy.Relation() < 60) {
+			Text.Out(`giving you a warm smile. “Hey, ${pc.name}, nice seeing you!” ${gwendy.IsAsleep() ? "She rises slowly, stretching seductively. “I hope ya got something important on your mind, interrupting my beauty sleep like this.” Despite her snarky tone, she doesn’t appear to mind your presence that much." : "She pauses in her work, wiping her brow with the back of her hand as she steps over to you. “Now, what do you want with little old me?”"}`);
+		} else { // High rel
+			Text.Out(`her worried frown melting away. “Mm… don’t be a stranger, come over here.” ${gwendy.IsAsleep() ? "She rises slowly, giving you a little show as she adjusts her tight nightdress, her eyes never leaving yours. “I was just having a nap. I’m sure we can find something more interesting to do.” She pats the bed next to her." : "She pauses in her work, wiping her brow with the back of her hand as she steps up close to you and gives you a playful punch on the shoulder. “Here to help, or did you just want to ogle me?” From her tone, she doesn’t appear to mind being ogled."}`);
+		}
+		Text.Flush();
+	}
+
+	function TalkEntry(back: CallableFunction) {
+		return { nameStr : "Talk",
+			func : () => {
+				Text.Clear();
+				Text.Out(`“In a talkative mood, eh? Sure, I’ve got a few moments to spare. What did you want to chat about?”`);
+				Text.Flush();
+
+				GwendyScenes.Talk(back);
+			}, enabled : true,
+			tooltip : "Chat with Gwendy.",
+		};
+	}
 
 	export function LoftPrompt() {
 		const gwendy: Gwendy = GAME().gwendy;
-		Text.Clear();
 
-		const parse: IParse = {
-
-		};
-
-		Text.Add("PLACEHOLDER: Loft.", parse);
-		Text.NL();
-		Text.Add("", parse);
-		Text.NL();
-		Text.Add("", parse);
-		Text.NL();
-		Text.Add("", parse);
-		Text.NL();
-
-		Text.Flush();
 		// [Talk][Work]
 		const options: IChoice[] = [];
-		options.push({ nameStr : "Talk",
-			func : GwendyScenes.Talk, obj : GwendyScenes.LoftPrompt, enabled : true,
-			tooltip : "Chat with Gwendy.",
-		});
+		options.push(TalkEntry(LoftPrompt));
 		options.push({ nameStr : "Sex",
-			func : GwendyScenes.LoftSexPrompt, obj : GwendyScenes.LoftPrompt, enabled : gwendy.Sexed(),
+			func : GwendyScenes.LoftSexPrompt, enabled : gwendy.Sexed(),
 			tooltip : "Proposition her for sex.",
 		});
 		Gui.SetButtonsFromList(options, true);
@@ -82,28 +96,9 @@ export namespace GwendyScenes {
 	}
 
 	export function BarnPrompt() {
-		Text.Clear();
-
-		const parse: IParse = {
-
-		};
-
-		// TODO: Initial talk
-		Text.Add("PLACEHOLDER: Barn.", parse);
-		Text.NL();
-		Text.Add("", parse);
-		Text.NL();
-		Text.Add("", parse);
-		Text.NL();
-		Text.Add("", parse);
-		Text.Flush();
-
 		// [Talk][Work]
 		const options: IChoice[] = [];
-		options.push({ nameStr : "Talk",
-			func : GwendyScenes.Talk, obj : GwendyScenes.BarnPrompt, enabled : true,
-			tooltip : "Chat with Gwendy.",
-		});
+		options.push(TalkEntry(BarnPrompt));
 		options.push({ nameStr : "Work",
 			func : GwendyScenes.Work, enabled : true,
 			tooltip : "Be a little productive, and lend an able hand.",
@@ -112,27 +107,9 @@ export namespace GwendyScenes {
 	}
 
 	export function FieldsPrompt() {
-		Text.Clear();
-
-		const parse: IParse = {
-
-		};
-
-		Text.Add("PLACEHOLDER: Fields.", parse);
-		Text.NL();
-		Text.Add("", parse);
-		Text.NL();
-		Text.Add("", parse);
-		Text.NL();
-		Text.Add("", parse);
-		Text.Flush();
-
 		// [Talk][Work]
 		const options: IChoice[] = [];
-		options.push({ nameStr : "Talk",
-			func : GwendyScenes.Talk, obj : GwendyScenes.FieldsPrompt, enabled : true,
-			tooltip : "Chat with Gwendy.",
-		});
+		options.push(TalkEntry(FieldsPrompt));
 		options.push({ nameStr : "Work",
 			func : GwendyScenes.Work, enabled : true,
 			tooltip : "Be a little productive, and lend an able hand.",
@@ -147,18 +124,13 @@ export namespace GwendyScenes {
 			playername : player.name,
 		};
 
-		Text.Clear();
-		// TODO
-		Text.Add("", parse);
-		Text.NL();
-		Text.Flush();
-
 		// [Sure][Nah]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Chat",
 			func() {
 				Text.Clear();
 
+				const world = WORLD();
 				const scenes = new EncounterTable();
 				scenes.AddEnc(() => {
 					Text.Add("<i>“D’you know anything about those rabbit people that’ve been showing up lately?”</i> Gwendy asks you. <i>“They come in groups, usually at dusk or dawn when there isn’t anyone on watch. I’ve had to chase them off several times, but they still managed to steal a lot of goods.”</i> The farmer grimaces. <i>“Not to mention they ruin the crops with all their hopping about, the dumb things.”</i>", parse);
@@ -173,23 +145,33 @@ export namespace GwendyScenes {
 						Text.Add("<i>“Really now? Do you think they might become a problem? I’ll fight the bastards off any time, but I can’t guard the farm day and night.”</i> The girl suddenly looks very tired. <i>“So much work to do, and these critters aren’t making my life any easier.”</i>", parse);
 					}
 				}, 1.0, () => true);
-				/* TODO
 				scenes.AddEnc(() => {
-					Text.Add("", parse);
-					Text.NL();
-				}, 1.0, () => true);
-				scenes.AddEnc(() => {
-					Text.Add("", parse);
-					Text.NL();
-				}, 1.0, () => true);
-				*/
-				scenes.Get();
+					Text.Out(`“I’ve heard worrisome things coming out of the hills lately,” Gwendy states. “Word is that bandit raids against the local villages have been increasing, and that they are coming well equipped.” She shakes her head, a frown on her face.
 
+					“By the tone of some folks, they seem more an army rather than the riffraff down here on the plains that’s been pestering me. Whatever the case, they better stay off my land or they’ll see the sharp end of my pitchfork.”`);
+				}, 1.0, () => true);
+				scenes.AddEnc(() => {
+					Text.Out(`“Ever wonder about that huge tree off on the horizon? My Da always used to say that big old log was important. That it’s ancient, the last remaining of its kind, and so on,” Gwendy muses. “I’m no romantic poet or tree worshipping elf or anything, but something about it is… comforting, you know? It’s a constant in a world full of chaos and uncertainty. I wonder what it looks like up close.”`);
+				}, 1.0, () => true);
+				scenes.AddEnc(() => {
+					Text.Out(`“Sometimes I wonder what I’d do if I didn’t have the farm to take care of,” Gwendy muses. “This place has kinda been my everything as far back as I can remember.”
+
+					“I suppose I’d head to the free cities up north and find some place to settle down there. The farther I can get from the kingdom, the better. Then again, they probably have their own fair share of corruption. Grass is always greener on the other side and all that.”
+
+					She shakes her head. “Not that I would abandon my home for anything!”`);
+				}, 1.0, () => true);
+				scenes.AddEnc(() => {
+					Text.Out(`“Horrible weather we’ve been having lately,” Gwendy muses, glaring daggers at the brightly shining sun.
+
+					You admit that you don’t quite see her point.
+
+					“Sun is all fine and dandy if all y’er worried about is a nice tan,” the farmer pokes at the dirt. “But these crops will need some good rain if I’m to have a decent harvest this fall.”`);
+				}, 1.0, () => WorldTime().season === Season.Summer && gwendy.IsAtLocation(world.loc.Farm.Fields));
+
+				scenes.Get();
 				Text.Flush();
 
-				Gui.NextPrompt(() => {
-					GwendyScenes.Talk(backfunc);
-				});
+				GwendyScenes.Talk(backfunc);
 			}, enabled : true,
 			tooltip : "Talk about random things.",
 		});
@@ -204,9 +186,7 @@ export namespace GwendyScenes {
 					Text.Flush();
 					gwendy.flags.Market = GwendyFlags.Market.Asked;
 
-					Gui.NextPrompt(() => {
-						GwendyScenes.Talk(backfunc);
-					});
+					GwendyScenes.Talk(backfunc);
 				}, enabled : true,
 				tooltip : "Ask her for a way to get into the city of Rigard.",
 			});
@@ -217,9 +197,8 @@ export namespace GwendyScenes {
 					if (WorldTime().hour >= 7) {
 						Text.Add("<i>“[playername], can we talk about this tomorrow morning? I’m busy right now, and just not in the mood to talk about the city, okay?”</i>", parse);
 						Text.Flush();
-						Gui.NextPrompt(() => {
-							GwendyScenes.Talk(backfunc);
-						});
+
+						GwendyScenes.Talk(backfunc);
 						return;
 					} else if (gwendy.Relation() < 30) {
 						Text.Add("<i>“While I do have a pass to get within the gates, you wouldn’t believe what I had to go through just to get one. No offense, [playername], but I think we should get to know each other a little more before I’m willing to vouch for you. If you do something bad within the city limits, I’d be the one taking the fall.</i>", parse);
@@ -229,9 +208,7 @@ export namespace GwendyScenes {
 						Text.Add("<i>“Good, anything else you’d like to talk about? There is so much work to do, but I can spare some time to chat if you want,”</i> she smiles.", parse);
 						Text.Flush();
 
-						Gui.NextPrompt(() => {
-							GwendyScenes.Talk(backfunc);
-						});
+						GwendyScenes.Talk(backfunc);
 						return;
 					}
 
@@ -262,9 +239,7 @@ export namespace GwendyScenes {
 							Text.Add("<i>“Anyway, anything else you’d like to talk about?”</i>", parse);
 							Text.Flush();
 
-							Gui.NextPrompt(() => {
-								GwendyScenes.Talk(backfunc);
-							});
+							GwendyScenes.Talk(backfunc);
 						}, enabled : true,
 						tooltip : "On second thought, you’ve changed your mind.",
 					});
@@ -273,19 +248,101 @@ export namespace GwendyScenes {
 				tooltip : "Ask her if the two of you can make a trip to the market in Rigard.",
 			});
 		}
+		options.push({ nameStr : "Danie",
+			func : () => {
+				Text.Clear();
+				Text.Out(`“Danie’s quite the gal if you ask me, more to her than meets the eye.” Gwendy smiles to herself. “Most of the sheep folk tend to be rather nervous working in a place like this, but they mellow right up after spending five minutes around her. She acts like she doesn’t have anything but air in that little head of hers, but somehow she always knows just the right thing to keep your spirits up.”
 
+				“That, and she’s just cute as a button.”`);
+				Text.Flush();
+
+				GwendyScenes.Talk(backfunc);
+			}, enabled : true,
+			tooltip : "Ask about the spunky sheepmorph living on the farm.",
+		});
+		options.push({ nameStr : "Adrian",
+			func : () => {
+				Text.Clear();
+				Text.Out(`“Adrian’s been with me on and off for years. He’s always been the quiet type, not usually one to start up a conversation. Still, he’s dependable like no other, and never raises a complaint. When it comes to help around here, he’s the most consistent I have, a hard worker at that.”
+
+				You have some ideas about why the silent equine hangs around Gwendy so much, but you hold your tongue.
+
+				“He’s one of the few farmhands that lives here on the farm. Used to be there were plenty of people doing so back when, but with only the barn I just don’t have room any longer, nor do I have the money to afford it. Adrian’s gone without pay for me more than once through some rough stretches in recent years. I owe a lot to him.”`);
+				Text.Flush();
+
+				GwendyScenes.Talk(backfunc);
+			}, enabled : true,
+			tooltip : "Ask about the silent equine farmhand.",
+		});
+		const layla: Layla = GAME().layla;
+		const lMet: LaylaFlags.Met = layla.flags.Met;
+		const lKnowName = lMet >= LaylaFlags.Met.Farm;
+		if (lMet !== LaylaFlags.Met.NotMet) {
+			options.push({ nameStr : lKnowName ? "Layla" : "Scavenger",
+				func : () => {
+					Text.Clear();
+					if (lMet >= LaylaFlags.Met.Party) {
+						Text.Out(`The conversation shifts to Layla, the odd scavenger-turned-farmhand-turned-companion that you first met here on Gwendy’s farm.
+
+						“How is she doing nowadays?” the farmer asks you. “Time she spent here and all, she feels a little like a part of the team you know?”
+
+						You assure her that Layla is doing fine in your care.
+
+						“Well, you toss the gal a howdy from me, alright? She’s welcome to come visit anytime she wants.” She smiles. “She can even have some apples, long as she asks first, alright?”`);
+					} else if (lMet >= LaylaFlags.Met.Farm) {
+						Text.Out(`The conversation shifts to Layla, the odd scavenger-turned-farmhand currently working for Gwendy.
+
+						“She’s starting to pull her weight around here,” Gwendy muses. “Have to teach her most things, even the basic stuff, but if I tell her something, it sticks. Strong like a bull too, she gives Adrian a run for his money when it comes to back breaking labor.”
+
+						The farmer sighs. “Can’t help but feel I’m holding her up here though. She’s already worked off whatever damage she caused way back when, and I’m not sure if she's the kinda gal to devote herself to an old dump like this.” She gives you an oblique smile.`);
+					} else if (lMet >= LaylaFlags.Met.Won) {
+						Text.Out(`Your chat shifts to the recent scavenger that you and Gwendy managed to capture, and who is now working off her debt to the farmer.
+
+						“After spending some time around her, I can’t say that I’m angry with her anymore. For all her fire before, she seems genuinely sorry for what she did.” Gwendy, shakes her head. “Not the most skilled worker, but she appears to learn quick enough. Good thing too, since she left quite a bit of damage in her wake to repair.”`);
+					} else { // Not captured
+						Text.Out(`Your chat shifts to the recent scavenger that has been plaguing Gwendy’s farmstead.
+
+						“Feisty creature, whoever she was,” Gwendy mutters. “I’ve a feeling I haven’t seen the last of her… and frankly she’s too much of a handful for me to capture on my lonesome if she does return.”
+
+						The farmer scowls, looking quite frustrated by her lackluster ability to defend her home. “Can’t ask those bloodsuckers out of Rigard either, they’d ask an arm and a leg to even lift a finger… and that on top of all those taxes I pay! ‘Sides, my pride would never allow it.”`);
+					}
+					Text.Flush();
+
+					GwendyScenes.Talk(backfunc);
+				}, enabled : true,
+				tooltip : lKnowName ? "Ask about Layla." : "Ask about the scavenger who was rifling through her shed.",
+			});
+		}
 		/* TODO
 		options.push({ nameStr : "Placeholder",
 			func : () => {
 				Text.Clear();
-				Text.Add("", parse);
-				Text.NL();
+				Text.Out(``);
 				Text.Flush();
-			}, enabled : false,
-			tooltip : ""
+			}, enabled : true,
+			tooltip : "",
 		});
 		*/
-		Gui.SetButtonsFromList(options, true, backfunc);
+		Gui.SetButtonsFromList(options, true, () => {
+			Text.Clear();
+			Text.Out(`You tell her you have no more questions.`);
+			Text.NL();
+
+			const scenes = new EncounterTable();
+			scenes.AddEnc(() => {
+				Text.Out(`“Alright, don’t hesitate if you want to talk more. Seems lately that most people I interact with are either in my employ or trying to rip me off in some way.”`);
+			}, 1.0, () => true);
+			scenes.AddEnc(() => {
+				Text.Out(`“Alright. I should get back to what I was doing.”`);
+			}, 1.0, () => true);
+			scenes.AddEnc(() => {
+				Text.Out(`“That’s fine, I’m sure we can find something else to occupy our time with.” She gives you a naughty grin.`);
+			}, 1.0, () => gwendy.Sexed());
+			scenes.Get();
+			Text.Flush();
+
+			backfunc();
+		});
 	}
 
 	export function Work() {
