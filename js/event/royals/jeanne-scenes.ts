@@ -1,3 +1,4 @@
+import * as _ from "lodash";
 import { GetDEBUG } from "../../../app";
 import { Alchemy } from "../../alchemy";
 import { GAME, GameCache, TimeStep } from "../../GAME";
@@ -53,55 +54,66 @@ export namespace JeanneScenes {
     }
 
     export function InteractPrompt() {
-        const player: Player = GAME().player;
-        const jeanne: Jeanne = GAME().jeanne;
-        const terry: Terry = GAME().terry;
-        const party: Party = GAME().party;
+		const player: Player = GAME().player;
+		const jeanne: Jeanne = GAME().jeanne;
+		const terry: Terry = GAME().terry;
+		const party: Party = GAME().party;
 
-        const parse: IParse = {};
+		const pc = player.Parser;
+
+		const parse: IParse = {};
         // [Talk][Golem][Sex]
-        const options: IChoice[] = [];
-        options.push({ nameStr : "Talk",
-            func : JeanneScenes.Talk, enabled : true,
-            tooltip : "Seek the magician's advice.",
-        });
-        options.push({ nameStr : "Alchemy",
-            func() {
-                Text.Clear();
-                Text.Add("<i>“Certainly,”</i> Jeanne replies. <i>“Understand that I cannot sell you much, but if you bring me the right ingredients, perhaps I can help you.”</i> She frowns slightly. <i>“Just know there are certain recipes I will not make for you.”</i>", parse);
-                if (player.alchemyLevel > 0) {
-                    Text.NL();
-                    Text.Add("You’ll be sure to take notes so you can replicate the procedure later.", parse);
-                }
-                Text.NL();
+		const options: IChoice[] = [];
+		options.push({ nameStr : "Talk",
+			func : () => {
+				Text.Clear();
+				Text.Out(_.sample([
+					`“You would seek my advice on something?”`,
+					`“How may I assist you, ${pc.name}?”`,
+					`“Questioning is the first step of knowing.”`,
+				]));
+				Text.Flush();
+				JeanneScenes.Talk();
+			}, enabled : true,
+			tooltip : "Seek the magician's advice.",
+		});
+		options.push({ nameStr : "Alchemy",
+			func() {
+				Text.Clear();
+				Text.Add("<i>“Certainly,”</i> Jeanne replies. <i>“Understand that I cannot sell you much, but if you bring me the right ingredients, perhaps I can help you.”</i> She frowns slightly. <i>“Just know there are certain recipes I will not make for you.”</i>", parse);
+				if (player.alchemyLevel > 0) {
+					Text.NL();
+					Text.Add("You’ll be sure to take notes so you can replicate the procedure later.", parse);
+				}
+				Text.NL();
 
-                Alchemy.Prompt(jeanne, party.inventory, JeanneScenes.AlchemyBack, JeanneScenes.AlchemyCallback, true);
-            }, enabled : true,
-            tooltip : "Ask to make use of Jeanne’s services as an alchemist.",
-        });
-        if (party.InParty(terry) && (terry.flags.TF & TerryFlags.TF.Jeanne)) {
-            options.push({ nameStr : "Terry TF",
-                func() {
-                    Text.Clear();
-                    Text.Add("<i>“Sure, what would you like me to prepare?”</i>", parse);
-                    Text.Flush();
-                    TerryScenes.JeanneTFPrompt();
-                }, enabled : true,
-                tooltip : "Ask Jeanne to help you make some transformatives for Terry.",
-            });
-        }
-        /*
-        options.push({ nameStr : "Nah",
-            func : () => {
-                Text.Clear();
-                Text.Add("", parse);
-                Text.NL();
-                Text.Flush();
-            }, enabled : true,
-            tooltip : ""
-        });
-        */
-        Gui.SetButtonsFromList(options, true);
+				Alchemy.Prompt(jeanne, party.inventory, JeanneScenes.AlchemyBack, JeanneScenes.AlchemyCallback, true);
+			}, enabled : true,
+			tooltip : "Ask to make use of Jeanne’s services as an alchemist.",
+		});
+		if (party.InParty(terry) && (terry.flags.TF & TerryFlags.TF.Jeanne)) {
+			options.push({ nameStr : "Terry TF",
+				func() {
+					Text.Clear();
+					Text.Add("<i>“Sure, what would you like me to prepare?”</i>", parse);
+					Text.Flush();
+					TerryScenes.JeanneTFPrompt();
+				}, enabled : true,
+				tooltip : "Ask Jeanne to help you make some transformatives for Terry.",
+			});
+		}
+		/*
+		options.push({ nameStr : "Nah",
+			func : () => {
+				Text.Clear();
+				Text.Add("", parse);
+				Text.NL();
+				Text.Flush();
+			}, enabled : true,
+			tooltip : ""
+		});
+		*/
+		Gui.SetButtonsFromList(options, true);
     }
 
     export function AlchemyCallback(item: TFItem) {
@@ -420,7 +432,12 @@ export namespace JeanneScenes {
             }
         }
 
-        Gui.SetButtonsFromList(options, true, JeanneScenes.InteractPrompt);
+        Gui.SetButtonsFromList(options, true, () => {
+			Text.Clear();
+			Text.Out(`“You know where to find me, should you need my aid. There are many ways I could be of help to you.” The elf gives you a sly, playful smile.`);
+			Text.Flush();
+			JeanneScenes.InteractPrompt();
+		});
     }
 
     export function First() {

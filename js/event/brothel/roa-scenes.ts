@@ -138,13 +138,12 @@ export namespace RoaScenes {
         options.push({ nameStr : "Talk",
             func() {
                 Text.Clear();
-                Text.Add("PLACEHOLDER", parse); // TODO
-                Text.NL();
+                Text.Out(`“Just here to talk?” The small lagomorph throws you a disappointed pout. He nuzzles up to your side. “There are so many other fun things we could do though…” You shift, feeling the warmth of his body against your side.`);
                 Text.Flush();
 
                 RoaScenes.TalkPrompt(RoaScenes.BrothelPrompt);
             }, enabled : true,
-            tooltip : "",
+            tooltip : "You have some questions for the lagomorph.",
         });
 
         /*
@@ -320,7 +319,10 @@ export namespace RoaScenes {
         }
 
         Gui.SetButtonsFromList(options, true, () => {
-            backPrompt();
+			Text.Clear();
+			Text.Out(`“Now that we are done talking, whatever should we get up to?” The petite bunny flutters his eyelashes at you seductively.`);
+			Text.Flush();
+			backPrompt();
         });
     }
 
