@@ -124,6 +124,8 @@ export namespace GwendyScenes {
 			playername : player.name,
 		};
 
+		const pc = player.Parser;
+
 		// [Sure][Nah]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Chat",
@@ -313,6 +315,71 @@ export namespace GwendyScenes {
 				tooltip : lKnowName ? "Ask about Layla." : "Ask about the scavenger who was rifling through her shed.",
 			});
 		}
+		if (gwendy.flags.Met < GwendyFlags.Met.TalkedSelf) {
+			options.push({ nameStr : "Gwendy",
+				func : () => {
+					Text.Clear();
+					Text.Out(`Gwendy rarely speaks of herself, having an almost zealous stubborn focus on her work and her farm, despite everything going against her. You find yourself wanting to know more about what drives her, and how she came to be where she is right now.
+
+					“Little old me?” Gwendy cocks her head to the side and gives her braid a coquettish twirl. “Looking for the captivating story of how I became the queen of turnips? I’ll have to disappoint, I’m afraid. There’s not that much to tell.” The evasive way she turns her head away tells a different tale, but you hold your tongue, not wanting to interrupt her.
+
+					“This place… it used to be a lot bigger way back when. You’ve probably noticed some of the overgrown mounds out in the fields; they mark the remains of the old farm, before it burned down. My parents owned and ran it, and it was a bustling and active community, almost a village on its own.” She throws you a sad smile. “As you can see, present management leaves a bit to be desired.”
+
+					“It was a happy environment to grow up in, with plenty of friends and adventure awaiting ‘round every corner…” The girl trails off, faltering. “Then… the fire happened, and my parents passed away. In one fell stroke, my entire world was shattered. I… I’m not even sure how I got through those times… I threw myself into restoring the farm… stupid girl I was, thinking it’d be that simple, but for a few hangers on of my parents I probably wouldn’t have survived my first winter.”
+
+					The mood has turned rather dour, with Gwendy looking outright depressed. Scrambling to cheer her up, you point out that she seems to have recovered admirably. The farm might not be a village, but the people here seem to enjoy being here, and it’s a cozy and welcoming place.
+
+					“Thanks.” The farmer looks down at her hands. “We started from zero, with nothing but the land itself and a healthy helping of old debts. My father’s friends stayed on for a year or so, helping me build the barn up, but after that I decided I couldn’t impose on their charity any longer. Room enough for me, some animals and a few helpers… circumstances have never called for - or allowed - me to expand on it, but I’ve managed to hang on by a thread.”
+
+					“It’s… been difficult. The taxman in Rigard takes his cut of my already meager winnings, and then there’s the debts which never seem to go away. I sometimes wonder if…” Gwendy trails off again, her eyes misting. She suddenly turns away. “I’m sorry, ${pc.name}, I want to be alone for a while.”
+
+					You assure her that she has nothing to apologize for. For the time being, you should give her some space, but maybe you can cheer her up later; ask her about the more positive aspects of her youth, those memories she seems to cherish.`);
+					Text.Flush();
+
+					gwendy.relation.IncreaseStat(100, 3);
+
+					gwendy.flags.Met = GwendyFlags.Met.TalkedSelf;
+
+					TimeStep({hour: 1});
+
+					Gui.NextPrompt();
+				}, enabled : true,
+				tooltip : "Ask the farmer about herself.",
+			});
+		} else {
+			options.push({ nameStr : "Childhood",
+				func : () => TalkChildhood(backfunc), enabled : true,
+				tooltip : "Ask Gwendy about her childhood and what the farm was like back when she grew up.",
+			});
+			options.push({ nameStr : "Her Parents",
+				func : () => {
+					if (gwendy.flags.Met < GwendyFlags.Met.TalkedParents) {
+						Text.Clear();
+						Text.Out(`“Mum and Dad… they were always fair with those that worked for them. They made sure to take care of everyone at the farm, seeing to their needs and settling disputes when they cropped up, never picking favorites.” Gwendy grins. “Except in my case; I was massively spoiled and pampered relentlessly.”
+
+						“I don’t blame them for it, with me being their only kid and such… but due to it, it took me quite a while to grow up properly and not be a huge brat to everyone around me. Can’t rely on being cute forever, eh?” She flutters her eyelashes at you innocently.
+
+						“Their names were Randall and Wylla, and they were the center of my world growing up. Despite my rebellious attempts to the contrary, I managed to learn more than a little from them about the running of the farm, and how to act toward others. Curiously enough, it was a case of ‘doing what I do, not what I say’, so to speak.”
+
+						“Dad knew everything about cultivating the land, and was handy like no other. He built much of the original farm with his own hands, and he always seemed to know exactly what the right thing to do was. Mom had an affinity for tending to animals and people alike, and could befriend just about anybody in the span of half an hour.”
+
+						Gwendy goes on to tell you a number of anecdotes about growing up with her parents, how they treated those around them and how hard they worked for the farm. She appears to hold both of them in the highest regard, but you take note of how she strays from their topic of their ultimate fate, focusing instead on her interactions with them during the happier days of her childhood.
+
+						“They were good people who did good to those around them,” the farmer concludes. “All I can hope is to attempt to live up to their legacy.”`);
+						Text.Flush();
+
+						TimeStep({hour: 1});
+
+						gwendy.flags.Met = GwendyFlags.Met.TalkedParents;
+
+						Talk(backfunc);
+					} else {
+						TalkParents(backfunc);
+					}
+				}, enabled : true,
+				tooltip : "Ask Gwendy about her parents.",
+			});
+		}
 		/* TODO
 		options.push({ nameStr : "Placeholder",
 			func : () => {
@@ -343,6 +410,174 @@ export namespace GwendyScenes {
 
 			backfunc();
 		});
+	}
+
+	export function TalkParents(backfunc: CallableFunction) {
+		const gwendy: Gwendy = GAME().gwendy;
+
+		Text.Clear();
+		Text.Out(`You ask Gwendy to tell you more about her parents, Randall and Wylla, and about growing up with them on the farm.`);
+		Text.NL();
+
+		const scenes = [
+			() => {
+				Text.Out(`“Dad did his best to teach me his craft, though I was a horrible student most of the time. That being said, whenever I’d badger him with inane questions as I was wont to do, he’d always patiently answer, slowly nurturing a growing curiosity and proficiency.” She chuckles ruefully. “Where others would have gotten angry or frustrated, he stuck with me for the long haul, trusting I’d one day see the wisdom of his words. That’s the kind of man he was.”
+
+				“Though he knew a great deal about most things around the farm, it was cultivating the fields that he excelled at, and which he truly enjoyed. I remember a guest of the house marveling at the abundant fields around the farm, professing that my father could grow an orchard in a barren desert. Dad chuckled and replied that he could do no such thing; what he was doing wasn’t forcing plants to grow where they were unsuited, rather he was merely listening to them and giving them a helping hand. The guest gaped, and exclaimed that if that was the case, he must be a damn good listener.”
+
+				“Remembering the conversation, I later watched him work, and at least to me there seemed to be something beyond mere intuition to it. Intrigued, I asked him where he learned these things. He gave me a smile and said that an old friend of his taught it to him long ago, in a time when he was a much less patient man. At first, he said, he’d only asked about it as a distraction, and that those close to him scoffed his fancy. As time went by, he’d invest more and more of his time into his idle distraction, much to his own surprise. He said that looking back on those days, learning these skills was by far the most valuable thing he ever accomplished.”
+
+				“That is, besides meeting my mother.” Gwendy smiles warmly, reminiscing fond memories.`);
+			},
+			() => {
+				Text.Out(`“My mom was a kind woman. It wasn’t that she put others before herself; rather, she always took the opportunity when it presented itself to enrich others’ lives.” The farmer smiles quizzically. “I always used to think of her as grounded, wise beyond measure. I couldn’t even fathom her telling a lie to anyone, yet as the years have gone by since her passing… I’ve begun to realize that there were so many things about her that I didn’t understand, things that she struggled with.”
+
+				“One memory in particular has stayed with me. My mother loved weaving, and she was proficient at it too. Never did anyone on the farm go cold during winter under her watch. Her work was almost always practical in nature: sweaters, mittens, cloaks and socks. Except that one time.” Gwendy closes her eyes, remembering the scene.
+
+				“It was during high summer. I think I was about six years old. I had been searching for my mother throughout the house, and found her in her workshop on the upper floor. For reasons I can’t recall, once I heard her softly humming, I approached quietly.” The girl looks conflicted, both sadness and happiness vying for her expression. “The first thing I saw was the tapestry. It was a simple yet beautiful thing, a single white flower on a blue field. I was spellbound by it, and the calm sensations my mother’s soothing wordless hum. That was when I realized that she was softly crying to herself.” Gwendy looks down, hugging herself.
+
+				“It distressed and confused me enough that I started crying too. Mother turned around in surprise, quickly wiping her tears as she hurried to scoop me up and comfort me. I took one last look at the lone white flower on the field of blue before mother led me out of the room, closing the door behind us. I never saw that tapestry again.” Gwendy sighs. “I still have no idea what it meant to her, even to this day. I know it sounds stupid now, but I was afraid of asking her about it; afraid to shatter my perfect image of her by laying bare whatever pain or loss she had endured. If I could talk to her one last time… well, there are so many things I would want to tell her and ask her. But the meaning of that tapestry would definitely be one of them.”`);
+			},
+			() => {
+				Text.Out(`“My father was no nobleman won’t to lord it over others who were beneath him, yet his position at the farm did grant him some power, as adjudicator if nothing else. Those working for him or living in the villages nearby would come to him for advice on settling disputes, though it was never an authority he himself claimed. He’d take the disputing parties into his hall and seating them at his table, not as two subjects facing a ruler, but as three friends talking amongst themselves. He’d listen earnestly, ask both of them to explain their positions, and offer his blunt thoughts on the matter. Very seldom did I hear him raise his voice to anyone.” Gwendy smiles weakly. “I think that, much like myself, those that spoke with him came to fear his disappointment more than anything.”
+
+				“There were two bitter rivals who came to him one winter eve when I was nine or so, and I happened to be in the hall as they spoke. The man owned a small farm with a bountiful orchard bordering it; the woman was a huntress who hunted game that grazed in said orchard. The man accused her of poaching on his land, the woman him of setting vicious traps for the wildlife that maimed and spoiled unnecessarily. The man claimed ownership of the area as it fell within the reaches of his farm; the woman claimed her family had been hunting in those woods for generations.”
+
+				“Though either were reluctant to give an inch at first, my father eventually managed to glean that the man didn’t harm the wildlife on purpose; he didn’t want them eating from his orchard and it was lack of skill rather than malice that had led to the unfortunate situation. Furthermore, the woman hadn’t technically been poaching; she’d been tracking a deer that she’d wounded while hunting which had stolen into the orchard. Thinking the dispute done, my father bid them shake on it and be about their day, but the two glared daggers at each other and quickly raised two new aspirations on the other’s character. I watched their dance back and forth in fascination.”
+
+				“They talked back and forth for hours, my father painstakingly dragging out every little twist and knot between them and laying it bare. They both seemed more and more sheepish as the pettiness of their feud revealed itself, and how my father failed to be impressed by it. I fell asleep through half of it, though evidently their talk proved fruitful. The next morning the two left together, eyeing each other guardedly but without open hostility. Somehow, my father had convinced them to work together, sharing the contested land between them and helping solving each others problems.”
+
+				“Working together, they prospered to a degree that I think surprised even my father. Within a year, the two of them were married.”`);
+			},
+			() => {
+				Text.Out(`“My mother had principles that at times got her into trouble. The farm, being placed on a major trading route to the outer territories of the kingdom, was a natural place for wayfarers and travelers to seek refuge. The eve that this particular story takes place, two such wanderers were housed here. The two were not people my father would have normally relished or welcomed on the farm; not only were they minor nobles, but also known to hate and conspire against each other. It was a disaster waiting to happen, but my mother argued to allow them on the farm, as a storm was raging outside.”
+
+				“Dinner was tense to say the least. The two courtiers spend all night jabbing and arguing with each other. Their feud didn’t restrict itself to the two of them either, they were both quite at ease with taking their position here for granted and taking advantage of the maids and farmhands.” Gwendy purses her lips. “I didn’t like them very much. Much of what they said went over my head back then, but as the evening wound on, their arguments turned to their respective prowess with the ladies. It got so bad that one of them made advances on my mother, who icily rejected them. My father, jaw set tightly, ordered the evening concluded and hastily set me off to bed.”
+
+				“Some time during the night, I was roused by a commotion. Rather than retire as told to, the two noblemen had continued drinking, until they eventually turned violent. The whole household was in an uproar; the lecherous noble from before had attempted something very bad involving my mother, while the other had ‘jumped to her rescue’ - no doubt with similar aspirations. Blood had been spilled. I found my mother with her arms stained red as she grimly tended to the two wounded fools. She did it despite their less than honorable intentions regarding her, and to my father’s vehement protests.”
+
+				“Even then, the two hadn’t had enough, but my father furiously put any further hostilities to rest. Once the storm had died down and he was assured the two wouldn’t bleed to death on their own, he tossed out both of them from the farm, stating that if they wanted to tear each other to pieces, they could do so off his land.”
+
+				She sighs.
+
+				“As you can imagine, this didn’t exactly make any new friends, and it unfortunately wouldn’t be the last we saw of either of them.”`);
+			},
+			() => {
+				Text.Out(`“As you might have guessed from my previous stories, I didn’t exactly make life easier for my parents. Their usual sense of fairness had a massive blind spot when it came to me, and while I was old enough to realize it, I was also young enough to not feel scrupulous about it. I took advantage of it numerous times to get things my way.” The farmer looks rather embarrassed. “Looking back on it, there’s no way that they didn’t realize, with how blatant I was about it. I eventually stopped once I grew older, but I never really apologized for it. I wish I had.”
+
+				“Most children rebel against their parents in some fashion, something I took to an extreme degree. They were determined to raise me as a caring and capable woman who could take responsibility for her own actions; I was countered by being as wild and irresponsible as I possibly could. A miracle of the Spirits that it didn’t get me into more trouble than it did.”
+
+				“In part, I think it was precisely because life on the farm was so good. Here, I was completely and utterly safe, and no one wished me ill. I was pampered to a degree that probably wasn’t good for me, and it was… stifling.” She shakes her head ruefully. “I probably sound stupid saying so, but I intentionally ran away from all of that, possibly seeking thrills, or maybe just some place where not everything would go my way. I threw myself against the world and delighted in the challenge.”
+
+				“Life… is not a fair competitor though, as it turns out. Every misfortune was a learning experience, but more than once I found myself in situations where I’d bitten off far more than I could chew. My mother or father would always step in and rescue me… until they weren’t able to anymore.”
+
+				Gwendy falls silent.
+
+				“Can we talk about something else for a while?”`);
+			},
+		];
+
+		let sceneId = gwendy.flags.RotParents;
+		if (sceneId >= scenes.length) {
+			sceneId = 0;
+			gwendy.relation.IncreaseStat(20, 1);
+		}
+
+		gwendy.flags.RotParents = sceneId + 1;
+
+		// Play scene
+		scenes[sceneId]();
+
+		Text.Flush();
+
+		TimeStep({minute: 15});
+
+		Talk(backfunc);
+	}
+
+	export function TalkChildhood(backfunc: CallableFunction) {
+		const gwendy: Gwendy = GAME().gwendy;
+		const player: Player = GAME().player;
+
+		const pc = player.Parser;
+
+		Text.Clear();
+
+		const scenes = [
+			() => {
+				Text.Out(`“Mm… it’s nostalgic to look back on. There were… five or six large buildings making up the main farm, and three barns for animals of various kinds. Besides that, there were a number of smaller cottages down the road. Da used to lend them to those who worked here short term.”
+
+				“There were so many people passing through all the time: workers helping on the farm, traveling trades peddling their wares, the people on the nearby farms.” She trails off, staring into the distance as she relives old memories.
+
+				“It was a wondrous place for a child to grow up in, with never a dull moment.” She throws you a rueful smile. “I probably gave my parents a few heart attacks, with all the trouble I got myself into.”
+
+				“I’d always want to run after and pester people as they worked, but most of the time they humored me, probably because of Dad. Inadvertently, I managed to learn a bit or two about the work on the farm as well, even if that wasn’t exactly my intent.”
+
+				“I remember one time in particular. I was six or so, running around the large plow working the fields while my father was leading the draft horse, the largest one on the farm. He was walking along, his mind wandering, when I suddenly vanished. He panickedly ran around, shouting my name, thinking I’d gone under. I’m not sure if seeing me grinning and waving like an idiot on the back of the massive horse made his day better or worse.”`);
+			},
+			() => {
+				Text.Out(`“Despite the trove of fun to be had around the farm, it didn’t take me long to start trying to expand my horizons. If my parents were worried about the trouble I was getting myself into under their careful supervision, their hair started turning gray when I began embarking on expeditions into the outside world.” Gwendy flashes you a grin. “Don’t get me wrong, they weren’t negligent. Thing is, there’s always something important to do around a place like this to keep it running, and I was starting to get crafty… one moment of lapsing attention was all it took and I’d be off.”
+
+				“First time I headed off wasn’t even on purpose. I was playing around one of the barns playing hide and seek with the other kids, and I found the best hiding spot ever: the back of a wagon packed full of goods.” She shakes her head, disparaging at her young self. “I’m sure you can imagine what happened next. The wagon started moving, heading down the road away from the farm. Of course I couldn’t just raise my voice and announce myself - I could see the other kids running around the yard and I’d be damned if I’d give myself away - and after we’d left the premises, I was way too preoccupied gawking at my unfamiliar surroundings to alert the driver.”
+
+				Gwendy chuckles. “By the time I was caught out and the driver turned the wagon around, my father was raising hell at the farm, getting a search party together. I was grounded for a week, and I acted properly repentant… but I’d gotten my first taste of adventure, and I wasn’t about to forget about it anytime soon.”
+
+				The farmer goes on to detail the various creative ways she employed to circumvent her parents’ rising vigilance, and how they eventually relented in letting her go along on trips to nearby villages and towns.
+
+				“It was a few more years until I got to visit the big city, and for a while, it was even more enchanting than the wilderness I’d come to yearn for over the years…” Gwendy trails off, scowling. “As you might be able to tell, the passage of time has changed my mind.”
+
+				As she doesn’t sound like she’s about to continue down that line of thought, your conversation turns to other matters.`);
+			},
+			() => {
+				Text.Out(`“There came a time when I was trusted enough to go about the neighboring area of the farm unchaperoned. Well, that’s what I like to tell myself at least; more likely is that I took advantage of the confusion of the busy harvest season to roam wider than I previously had, which worried my parents to no end.” Gwendy shakes her head ruefully. “In hindsight, they were probably right to be worried.”
+
+				“I was ten or so, gangly, skinny-kneed and bubbling with adventure lust and annoying questions. The farm hands were probably glad to have me out of their hair for a while. One day, I set to exploring a nearby forest I’d been warned about entering. It was there that I first met Waffles.”
+
+				“He was in a sorry state - not much more than a scraggly and matted ball of gray fur, barely more than a pup, hungry and very frightened. At the time, I thought him a stray dog, perhaps abandoned by some passing trader - I’d seen plenty of caravans who kept guard dogs. I fed him some dried meat from my knapsack, which he greedily wolfed down. We hit it off after that, but he was still suspicious and refused my attempts to make him follow me out of the forest.”
+
+				“In the weeks to follow, I returned to the forest almost daily, finding excuses to avoid my chores and smuggle away food to my growing doggy. He took to me quickly - I always had a way with animals, even back then - and though he happily roamed together with me, he appeared to be frightened of other people, and always shied away from approaching the farm.”
+
+				“Don’t ask about the name, I was ten.” Gwendy grins as she stares off into the distance. “He was my secret friend outside the farm, someone only I knew about, and I relished in playing together with him. I brought him as much food as I could, and he was growing fast.”
+
+				Her mood wilters. “I’m pretty sure that you can see where the story is heading. Half a year or so after I began taking care of Waffles, he was the size of a pony, and just about as unruly as I was. We were a good pair, but it wasn’t to last.” She sighs solemnly. “What food I was bringing wasn’t nearly enough to keep up with his growth, and I couldn’t keep pilfering from the farm stores for much longer; suspicion had been rising for a while.”
+
+				“My dad had other troubles however; a predator of some sort had been ravaging the sheep, killing at least three of them in the last month or so. Finally one dark winter night, he managed to interrupt its feeding and drive it off for good, wounding it in the process.”
+
+				“I was horrified when I found my Waffles soaked in blood and missing one eye, and heartbroken when he growled and ran away from me. For weeks, I tried looking for him, but never found anything more than tracks. In the end, that was the last I ever saw of him; I think he moved to other hunting grounds. I was furious at my dad for months, and he was even more furious at me when he finally dragged the full story out of me.”
+
+				“And that, ${pc.name}, is the story of how I raised a pet wolf.”`);
+			},
+			() => {
+				Text.Out(`“There were a bunch of other kids my age around the farm that I’d play with. Most of them were sons and daughters of the people who worked at the farm, while the rest were relatives of various friends of my parents who visited the farm frequently.” She smiles to herself. “I was the undisputed queen of the playground; even back then I had a competitive streak a mile wide. It made me a nuisance and a half to the adults, but it fit in perfectly with most of the other kids.”
+
+				Gwendy blushes, looking a bit uncomfortable. “I say most… some of the younger kids were pretty shy and timid around me, and at times I could be a bit of a bully when it came to getting my way. Not something I’m particularly proud of, but it wasn’t something that I became aware of until later, when I saw others exhibiting the same type of behavior.”
+
+				The farmer sighs. “In all honesty, I was quite the brat when I was a kid. I always wanted to have things my way, and I was never afraid of bothering the workmen with my endless stream of questions. The adults put up with it because of my parents; the kids were too overwhelmed to do anything other than go with my flow. I got into fights a few times with the older kids who wouldn’t take my bullshit, which in turn got them into trouble with my dad.”
+
+				“It was only much later, when I began to frequent the big city where no one knew or cared who I was, that I met kids my own age who were as selfish as I was. For a while, I thought I’d found the coolest company ever, but some of the people I saw were… sobering, especially when I glimpsed some of my own behavior in them.” She doesn’t look like she’s going to elaborate further. “I did my best to temper myself after that revelation, and not be such a total ass to those around me. In the long turn, I think it salvaged more than a few friendships.”
+
+				Gwendy goes on to tell you about some of the friends that she had around the farm, both girls and boys, humans and morphs alike. There seems to have been an abundance of the latter working at and passing through the farm.
+
+				“Some of the attitudes of people in the city towards morphs shocked me even back then. I couldn’t make heads or tails of where adults could summon such unjustified cruelty from… but that’s a topic for another day.”`);
+			},
+		];
+
+		let sceneId = gwendy.flags.RotChildhood;
+		if (sceneId >= scenes.length) {
+			sceneId = 0;
+			gwendy.relation.IncreaseStat(20, 1);
+		}
+
+		gwendy.flags.RotChildhood = sceneId + 1;
+
+		// Play scene
+		scenes[sceneId]();
+
+		Text.Flush();
+
+		TimeStep({minute: 15});
+
+		Talk(backfunc);
 	}
 
 	export function Work() {

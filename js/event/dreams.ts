@@ -10,6 +10,7 @@ import { IParse, Text } from "../text";
 import { Asche } from "./asche";
 import { AscheFlags } from "./asche-flags";
 import { Gwendy } from "./farm/gwendy";
+import { GwendyFlags } from "./farm/gwendy-flags";
 import { Fera } from "./fera";
 import { Kiakai } from "./kiakai";
 import { KiakaiScenes } from "./kiakai-scenes";
@@ -69,8 +70,8 @@ export namespace DreamsScenes {
 				scenes.AddEnc(DreamsScenes.Kiakai63, 1.0, () => party.InParty(kiakai), ravenTrigger);
 				scenes.AddEnc(DreamsScenes.RosalinNursing, 1.0, () => rosalin.flags.PastDialog > RosalinFlags.PastDialog.Past, ravenTrigger);
 				scenes.AddEnc(DreamsScenes.RosalinTransformation, 1.0, () => rosalin.flags.Met !== 0, ravenTrigger);
-				scenes.AddEnc(DreamsScenes.GwendyBarn, 1.0, () => gwendy.flags.Met !== 0, ravenTrigger);
-				scenes.AddEnc(DreamsScenes.GwendyStallion, 1.0, () => gwendy.flags.Met !== 0, ravenTrigger);
+				scenes.AddEnc(DreamsScenes.GwendyBarn, 1.0, () => gwendy.flags.Met !== GwendyFlags.Met.NotMet, ravenTrigger);
+				scenes.AddEnc(DreamsScenes.GwendyStallion, 1.0, () => gwendy.flags.Met !== GwendyFlags.Met.NotMet, ravenTrigger);
 				scenes.AddEnc(DreamsScenes.FeraKittens, 1.0, () => fera.FirstVag().virgin === false, ravenTrigger);
 				scenes.AddEnc(DreamsScenes.MirandaJailed, 1.0, () => miranda.flags.Met !== 0, ravenTrigger);
 				scenes.AddEnc(DreamsScenes.MirandaMerc, 1.0, () => miranda.flags.Dates >= 1, ravenTrigger);

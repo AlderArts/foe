@@ -216,6 +216,8 @@ export namespace OutlawsScenes {
 			Text.Add("<i>Rolf “Smiley” Erikson</i><br>", parse);
 			Text.Add("<i>Michael</i><br>", parse);
 			Text.Add("<i>Angela Nestrus</i><br>", parse);
+			Text.Add("<i>Randall</i><br>", parse);
+			Text.Add("<i>Wylla</i><br>", parse);
 			Text.Add("<i>Reina, daughter of Valerie</i><br>", parse);
 			Text.Add("<i>Enrico</i><br>", parse);
 			Text.Add("...", parse);

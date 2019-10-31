@@ -6,6 +6,7 @@ import { Sex } from "../entity-sex";
 import { Event } from "../event";
 import { DreamsScenes } from "../event/dreams";
 import { Gwendy } from "../event/farm/gwendy";
+import { GwendyFlags } from "../event/farm/gwendy-flags";
 import { GwendyScenes } from "../event/farm/gwendy-scenes";
 import { LaylaScenes } from "../event/farm/layla-scenes";
 import { GlobalScenes } from "../event/global";
@@ -85,7 +86,7 @@ export namespace FarmScenesIntro {
         TimeStep({minute: 15});
         Text.Clear();
 
-        gwendy.flags.Met = 1;
+        gwendy.flags.Met = GwendyFlags.Met.Met;
 
         const parse: IParse = {
             handsomecute : player.body.femininity.Get() > 0 ? "cute" : "handsome",

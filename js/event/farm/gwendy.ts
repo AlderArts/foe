@@ -64,6 +64,10 @@ export class Gwendy extends Entity {
 		this.flags.Market = 0;
 		this.flags.Toys = 0; // seen/used toys
 
+		// Talk rotations
+		this.flags.RotChildhood = 0;
+		this.flags.RotParents = 0;
+
 		this.flags.WorkMilked = 0;
 		this.flags.WorkFeed   = 0;
 		// Note: refers to how many times the player won/lost

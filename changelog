@@ -12,6 +12,8 @@ Version 0.5.3
 * Added some debug functionality. If you are in to hacking through the console, a bunch of game variables can now be accessed through the console on the object 'game'.
 * Added a new parser methodology that should make implementing scenes quicker and less prune to errors. It uses template literals from ES6 and some helper objects to allow for a simple parser syntax.
 
+Adding roughly 9k words of new content:
+* Gwendy has new talk scenes for various topics. The farm description placeholders have been removed.
 * Replaced some awkward placeholders for Jeanne, Roa.
 
 --------------------------------------------
