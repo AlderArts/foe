@@ -94,6 +94,7 @@ export class Halloween {
 		// Save player/party
 		this.player = player.ToStorage();
 		this.party = party.ToStorage();
+
 		// Remove all equipment/items/coin
 		player.Strip();
 		player.topArmorSlot = HalloweenItems.SkimpyCostume;
@@ -114,13 +115,13 @@ export class Halloween {
 	}
 
 	public Restore() {
-		let player = GAME().player;
+		const player = GAME().player;
 		// Restore player/party
 		_.remove(EntityStorage(), (e) => {
 			return e === player;
 		});
-		player = new Player(this.player);
-		EntityStorage().push(player);
+		GAME().player = new Player(this.player);
+		EntityStorage().push(GAME().player);
 		GAME().party = new Party(this.party);
 	}
 
