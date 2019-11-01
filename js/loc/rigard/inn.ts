@@ -81,7 +81,11 @@ InnLoc.Common.links.push(new Link(
 InnLoc.Penthouse.SaveSpot = "LB2";
 InnLoc.Penthouse.safe = () => true;
 InnLoc.Penthouse.description = () => {
-	Text.Add("You are in the Lady's Blessing's penthouse.");
+	Text.Out(`The finest rooms the Lady’s Blessing has to offer are furnished with exquisite antique furniture decorated with florid designs and elaborate carved patterns. These include a large bed, a divan with plush cushions and an accompanying low table, as well as a heavy oak dining table and several comfortable-looking chairs.
+
+	The floors are covered with rich, embroidered carpets, and the walls are adorned with lavish hangings and tapestries. The crowning piece is a decadent display covering one of the walls - clearly of masterful craftsmanship - depicting a variety of lewd scenes ranging from the suggestive to the explicitly sexual.
+
+	Opposite the distracting drapery, a large open fireplace is connected to a central chimney, currently ${WorldTime().season === Season.Winter ? "sporting a roaring fire that spreads a comforting heat throughout the room" : "empty"}.`);
 	Text.NL();
 	Text.Flush();
 };
