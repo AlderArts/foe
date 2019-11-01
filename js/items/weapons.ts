@@ -1,0 +1,212 @@
+import { Item, ItemType } from "../item";
+
+const dagger = new Item("dag0", "Dagger", ItemType.Weapon);
+dagger.price = 15;
+dagger.sDesc = () => "dagger";
+dagger.lDesc = () => "a simple dagger";
+dagger.Short = () => "Dagger";
+dagger.Long = () => "A simple dagger.";
+dagger.effect.atkMod  = 0.1;
+dagger.effect.dexterity = 1;
+dagger.effect.apPierce = 1;
+
+const golClaw = new Item("dag1", "Gol claw", ItemType.Weapon);
+golClaw.price = 750;
+golClaw.sDesc = () => "Gol claw";
+golClaw.lDesc = () => "a dagger fashioned out of a Gol claw";
+golClaw.Short = () => "Gol claw";
+golClaw.Long = () => "A dagger fashioned out of a Gol claw.";
+golClaw.effect.atkMod    = 0.6;
+golClaw.effect.strength  = 2;
+golClaw.effect.stamina   = 2;
+golClaw.effect.dexterity = 10;
+golClaw.effect.apPierce  = 1;
+golClaw.effect.apSlash   = 0.5;
+
+const shortSword = new Item("swrd0", "S.Sword", ItemType.Weapon);
+shortSword.price = 50;
+shortSword.sDesc = () => "short sword";
+shortSword.lDesc = () => "a simple short sword";
+shortSword.Short = () => "Short sword";
+shortSword.Long = () => "A simple short sword.";
+shortSword.effect.atkMod = 0.1;
+shortSword.effect.strength = 1;
+shortSword.effect.apSlash = 1;
+
+const krawitzSword = new Item("swrd1", "K.Sword", ItemType.Weapon);
+krawitzSword.price = 2000;
+krawitzSword.sDesc = () => "fine rapier";
+krawitzSword.lDesc = () => "Krawitz' fine rapier";
+krawitzSword.Short = () => "Fine rapier";
+krawitzSword.Long = () => "Krawitz' fine rapier.";
+krawitzSword.effect.atkMod    = 0.7;
+krawitzSword.effect.strength  = 3;
+krawitzSword.effect.dexterity = 10;
+krawitzSword.effect.apPierce  = 1;
+
+const greatSword = new Item("swrd2", "G.Sword", ItemType.Weapon);
+greatSword.price = 100;
+greatSword.sDesc = () => "greatsword";
+greatSword.lDesc = () => "a large greatsword";
+greatSword.Short = () => "Greatsword";
+greatSword.Long = () => "A large greatsword.";
+greatSword.effect.atkMod = 1;
+greatSword.effect.strength = 4;
+greatSword.effect.apSlash = 1;
+
+const rapier = new Item("swrd3", "Rapier", ItemType.Weapon);
+rapier.price = 75;
+rapier.sDesc = () => "rapier";
+rapier.lDesc = () => "a rapier";
+rapier.Short = () => "Rapier";
+rapier.Long = () => "A sharp rapier.";
+rapier.effect.atkMod    = 0.1;
+rapier.effect.dexterity = 2;
+rapier.effect.apPierce  = 1;
+
+const jeweledMageblade = new Item("swrd4", "J.Mageblade", ItemType.Weapon);
+jeweledMageblade.price = 1500;
+jeweledMageblade.sDesc = () => "jeweled mageblade";
+jeweledMageblade.lDesc = () => "a short sword with rubies inlaid in the crossguard";
+jeweledMageblade.Short = () => "Jeweled mageblade";
+jeweledMageblade.Long = () => "A short sword with rubies inlaid in the crossguard. Brief concentration on the part of the wielder causes the edge to erupt in flame.";
+jeweledMageblade.effect.atkMod = 0.5;
+jeweledMageblade.effect.maxSp = 100;
+jeweledMageblade.effect.intelligence = 7;
+jeweledMageblade.effect.spirit = 3;
+jeweledMageblade.effect.apSlash = 1;
+jeweledMageblade.effect.amFire = 0.5;
+
+const woodenStaff = new Item("staff0", "Staff", ItemType.Weapon);
+woodenStaff.price = 15;
+woodenStaff.sDesc = () => "wooden staff";
+woodenStaff.lDesc = () => "a simple wooden staff";
+woodenStaff.Short = () => "Wooden staff";
+woodenStaff.Long = () => "A simple wooden staff.";
+woodenStaff.effect.atkMod = 0;
+woodenStaff.effect.intelligence = 1;
+woodenStaff.effect.apBlunt = 1;
+
+const mageStaff = new Item("staff1", "M.Staff", ItemType.Weapon);
+mageStaff.price = 200;
+mageStaff.sDesc = () => "magician's staff";
+mageStaff.lDesc = () => "a magician's staff";
+mageStaff.Short = () => "Magician's staff";
+mageStaff.Long = () => "A magician's staff.";
+mageStaff.effect.atkMod = 0.2;
+mageStaff.effect.intelligence = 5;
+mageStaff.effect.spirit = 3;
+mageStaff.effect.apBlunt = 1;
+
+const amberStaff = new Item("staff2", "A.Staff", ItemType.Weapon);
+amberStaff.price = 1000;
+amberStaff.sDesc = () => "amber staff";
+amberStaff.lDesc = () => "an old amber staff";
+amberStaff.Short = () => "Old amber staff";
+amberStaff.Long = () => "A weathered staff with a knob made of amber. While old, it’s still useful as a conduit for electrical energies.";
+amberStaff.effect.atkMod = 0.5;
+amberStaff.effect.intelligence = 10;
+amberStaff.effect.spirit = 10;
+amberStaff.effect.apBlunt = 0.5;
+amberStaff.effect.amThunder = 0.5;
+
+const lWhip = new Item("whip0", "L.Whip", ItemType.Weapon);
+lWhip.price = 30;
+lWhip.sDesc = () => "leather whip";
+lWhip.lDesc = () => "a simple leather whip";
+lWhip.Short = () => "Leather whip";
+lWhip.Long = () => "A simple leather whip.";
+lWhip.effect.atkMod  = 0;
+lWhip.effect.libido  = 1;
+lWhip.effect.apSlash = 1;
+
+const vineWhip = new Item("whip1", "V.Whip", ItemType.Weapon);
+vineWhip.price = 300;
+vineWhip.sDesc = () => "vine whip";
+vineWhip.lDesc = () => "a whip made of vines";
+vineWhip.Short = () => "Vine whip";
+vineWhip.Long = () => "A whip made of vines.";
+vineWhip.effect.atkMod  = 0.2;
+vineWhip.effect.libido  = 5;
+vineWhip.effect.charisma = 3;
+vineWhip.effect.apSlash = 1;
+vineWhip.effect.amNature = 0.5;
+
+const golWhip = new Item("whip2", "G.Whip", ItemType.Weapon);
+golWhip.price = 900;
+golWhip.sDesc = () => "Gol whip";
+golWhip.lDesc = () => "a whip dripping with Gol venom";
+golWhip.Short = () => "Gol whip";
+golWhip.Long = () => "A whip dripping with Gol venom.";
+golWhip.effect.maxLust = 100;
+golWhip.effect.atkMod  = 0.8;
+golWhip.effect.libido  = 9;
+golWhip.effect.charisma = 5;
+golWhip.effect.apSlash = 1;
+golWhip.effect.amNature = 0.5;
+golWhip.effect.alust = 0.5;
+
+const oakSpear = new Item("spear0", "Oak Spear", ItemType.Weapon);
+oakSpear.price = 85;
+oakSpear.sDesc = () => "oak spear";
+oakSpear.lDesc = () => "an oak spear";
+oakSpear.Short = () => "Oak spear";
+oakSpear.Long = () => "A shaft of treated wood with a pointed tip attached. Good for the defensive fighter in keeping your distance.";
+oakSpear.effect.atkMod   = 0.2;
+oakSpear.effect.defMod   = 0.2;
+oakSpear.effect.apPierce = 1;
+
+const halberd = new Item("spear1", "Halberd", ItemType.Weapon);
+halberd.price = 115;
+halberd.sDesc = () => "halberd";
+halberd.lDesc = () => "a halberd";
+halberd.Short = () => "Halberd";
+halberd.Long = () => "Like a spear, but it slashes, too!";
+halberd.effect.atkMod   = 0.3;
+halberd.effect.defMod   = 0.3;
+halberd.effect.apPierce = 0.5;
+halberd.effect.apSlash  = 0.5;
+
+const heavyFlail = new Item("flail0", "Heavy flail", ItemType.Weapon);
+heavyFlail.price = 125;
+heavyFlail.sDesc = () => "heavy flail";
+heavyFlail.lDesc = () => "a heavy flail";
+heavyFlail.Short = () => "Heavy flail";
+heavyFlail.Long = () => "A spiked wrecking ball on a stick for the offensively oriented. Hampers your ability to defend yourself, but grants considerable attacking momentum.";
+heavyFlail.effect.atkMod    = 0.5;
+heavyFlail.effect.defMod    = -0.1;
+heavyFlail.effect.apBlunt   = 0.8;
+heavyFlail.effect.apPierce  = 0.2;
+heavyFlail.effect.dexterity = 2;
+heavyFlail.effect.strength  = 2;
+
+const warHammer = new Item("hammer0", "Warhammer", ItemType.Weapon);
+warHammer.price = 125;
+warHammer.sDesc = () => "warhammer";
+warHammer.lDesc = () => "a warhammer";
+warHammer.Short = () => "Warhammer";
+warHammer.Long = () => "Unwieldy, but learn to hold this thing right and you’ll be popping skulls like overripe fruit.";
+warHammer.effect.atkMod    = 0.6;
+warHammer.effect.apBlunt   = 1;
+warHammer.effect.dexterity = -1;
+warHammer.effect.strength  = 4;
+
+export namespace WeaponsItems {
+    export const Dagger = dagger;
+    export const GolClaw = golClaw;
+    export const ShortSword = shortSword;
+    export const KrawitzSword = krawitzSword;
+    export const GreatSword = greatSword;
+    export const Rapier = rapier;
+    export const JeweledMageblade = jeweledMageblade;
+    export const WoodenStaff = woodenStaff;
+    export const MageStaff = mageStaff;
+    export const AmberStaff = amberStaff;
+    export const LWhip = lWhip;
+    export const VineWhip = vineWhip;
+    export const GolWhip = golWhip;
+    export const OakSpear = oakSpear;
+    export const Halberd = halberd;
+    export const HeavyFlail = heavyFlail;
+    export const WarHammer = warHammer;
+}

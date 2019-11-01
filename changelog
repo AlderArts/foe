@@ -5,15 +5,76 @@ CHANGELOG for Fall of Eden
                   CURRENT
 --------------------------------------------
 
+Version 0.5.3
+-------------
+* Fixed numerous minor logic errors in scenes discovered by applying strict typing.
+* Fixed some race detection errors in scenes, also discovered by applying strict typing.
+* Added some debug functionality. If you are in to hacking through the console, a bunch of game variables can now be accessed through the console on the object 'game'.
+* Added a new parser methodology that should make implementing scenes quicker and less prune to errors. It uses template literals from ES6 and some helper objects to allow for a simple parser syntax.
+
+Adding roughly 8k words of new content:
+* Gwendy has new talk scenes for various topics (chat, childhood, parents). The farm description placeholders have been removed.
+* Gwendy has a new loss scene for her challenge (eat her out).
+* Replaced some awkward placeholders for Jeanne, Roa, Twin's Penthouse (content for the twins themselves to come).
+
+--------------------------------------------
+             PREVIOUS VERSIONS
+--------------------------------------------
+
+Version 0.5.2
+-------------
+* Fixed bug in Abilities (would show if you tried to Heal out of combat, and then pressed "Back").
+* Fixed bug in default pregnancy trigger handler.
+* Fixed Cassidy's shop being broken.
+* Added the ability to set cock size on character creation.
+* The pregnancy hastening effects of Gestarium are now applied when using Gestarium+ too.
+* Fixed a bug in Lagon's bad end.
+* Fixed a bug in fucking Terry with strapon (borrowed).
+
+Version 0.5.1
+-------------
+* Correctly bundled fonts.
+* Fixed a bug in one of Cale's scenes.
+* Fixed Fera being bugged.
+* Fixed Miranda first date bug.
+
+Version 0.5.0
+-------------
+* Fixed numerous typos.
+* Fixed a few Cavalcade parser errors.
+* Changed common measurement unit to imperial (inches, feet, yards) for consistency.
+ - Adjusted a bunch of NPC cock sizes to account for this. Holler if you find discrepancies or size evaluations that doesn't make sense!
+* Becoming a herm in the intro now starts you with a seven inch cock (bigger than before).
+* Added a slew of new cock size adjectives (and reduced their prevalence in scenes). The descriptors should be slightly less repetitive now.
+* Added a review/redo option to character creation in the intro.
+* Renamed FemmeBoy body type to Trap.
+* Added a Voluptuous option for female start.
+* Using cheats to get items in the tent now gives 10 of every item instead of 1.
+* Fixed a bug in Alchemy that would cause brewing to consume 2x the amount of ingredients actually required.
+* At the end of combat, loot is now combined if you receive multiple instances of the same type of item.
+* Combat output has been streamlined. There should be less button mashing to get to the next combat choice now. This doesn't change any of the mechanics, just how combat is displayed.
+ - When picking a spell, the battle screen now shows what spell you picked when you choose a target.
+* Spells with a cast time that target specific enemies will now retarget if the original target is knocked out before the spell hits. Yes, bleeding edge 90's era RPG technology here.
+* Added a "Raise" spell to Healer/Acolyte jobs. With it, you can get fallen allies back on their feet again.
+
+* Streamlined Chief talk scenes (removed Next, now looks more in line with other NPC dialogue).
+* Adjusted pacing in the Equines win scenes. They are now split up into multiple pages rather than one long scene.
+* Adjusted pacing in Barnaby's blowjob scenes (the bartender of the Maidens' Bane) by splitting the scene in multiple pages.
+
+* Major update to the structure of the code base (hence the update from 0.4 to 0.5).
+ - The entire code base has been converted to ES6 modules and TypeScript instead of JavaScript, making much of the code strictly type checked (finding/fixing a fair number of obscure bugs), and preventing pollution of the global namespace.
+ - The build system has been changed from gulp to webpack.
+ - Node.js is used to get the latest versions of all vendor packages.
+ - More than anything else, this gives me a more stable platform to add content to.
+* What does this update mean for you as a player? It shouldn't change anything, but due to the magnitude of the changes, it's possible that some errors have sneaked their way through. I'll be releasing a slightly bigger, non-uglified development version that contains some more backtrace information until things stabilize, please report any issues that show up.
+ - For those that used the player object in the console to cheat, this method is unfortunately not available anymore. If there's requests for that kind of thing, I might consider making the objects accessible in some way.
+ - The application has been tested on the latest versions of Chrome and Firefox and seem to work fine on them. If you run into any issues starting the game, please append what browser/version you are using.
+
 Version 0.4.24
 --------------
 * Fixed a bug that didn't correctly remove lactation when breasts are flat.
 * Changed Androgyn and Testos items so that they both reduce breast size to flat level.
 * Changed Estros item so that it will increase breast size (though not as much as Bovia).
-
---------------------------------------------
-             PREVIOUS VERSIONS
---------------------------------------------
 
 Version 0.4.23
 --------------
@@ -1213,7 +1274,7 @@ Version 0.2h
 
   parseOptions = {HeShe: kiakai.HeShe(), name: kiakai.name};
   Text.AddOutput("[name] is an elf. [HeShe] is pious.", parseOptions);
-  
+
 * Fixed some issues that would cause 2nd playthrough players to get multiple genetalia
 * Code conforms with closure compiler
 * Fixed a bunch of typos
@@ -1234,14 +1295,14 @@ Version 0.2f
 ------------
 * Write intro scenes
  - Light aspect (up until arriving on Eden)
- 
+
 * Locking off locations
  - Removed Ranch
  - Locked off Nomad camp temporarily (effectively sealing off the explorable world)
 
 * Improve way that clitCocks are handled (too much hassle as it is)
  - Find a way to add clitCock to cock array and treat as ordinary cock
- 
+
 * Improved appearance screen slightly
 * Fixed setting eye, skin and hair color
 * Fixed adding/removing appendages (tail, horns)
@@ -1283,7 +1344,7 @@ Version 0.2d
 ------------
 * Added initial part of "Hey there" encounter for Miranda in the bar
  - fixed bugs
- 
+
 * Button graphics
 * Explore and People tabs are sorted lexically
 * Design HP/MP bars for squadbased combat

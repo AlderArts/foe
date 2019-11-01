@@ -1,5 +1,0 @@
-
-
-Scenes.CityWatch = {};
-
-

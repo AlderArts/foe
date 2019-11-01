@@ -81,7 +81,7 @@ table.party tr {
 	padding:      5px;
 	border-style: solid;
 	border-color: black;
-	-moz-border-radius: ;
+	border-radius: 1em;
 }
 table.party td {
 	text-align:   center;
@@ -89,7 +89,7 @@ table.party td {
 	padding:      5px;
 	border-style: solid;
 	border-color: black;
-	-moz-border-radius: ;
+	border-radius: 1em;
 }
 
 /* Used in Text.Parse for any parser errors */

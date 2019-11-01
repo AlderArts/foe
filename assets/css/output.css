@@ -43,37 +43,37 @@ Toolbar CSS classes
 
 /*Button backgrounds - NOTE: Alternatively can simply apply them via code with Jquery .css() method*/
 .bigBlueButton {
-	background-image: url('assets/img/gui/big_blue.png');
+	background-image: url('../img/gui/big_blue.png');
 	height: 35px;
 	width: 155px;
 }
 .bigGoldButton {
-	background-image: url('assets/img/gui/big_gold.png');
+	background-image: url('../img/gui/big_gold.png');
 	height: 35px;
 	width: 155px;
 }
 .bigGrayButton {
-	background-image: url('assets/img/gui/big_gray.png');
+	background-image: url('../img/gui/big_gray.png');
 	height: 35px;
 	width: 155px;
 }
 .bigGreenButton {
-	background-image: url('assets/img/gui/big_green.png');
+	background-image: url('../img/gui/big_green.png');
 	height: 35px;
 	width: 155px;
 }
 .smallBlueButton {
-	background-image: url('assets/img/gui/small_blue.png');
+	background-image: url('../img/gui/small_blue.png');
 	height: 35px;
 	width: 155px;
 }
 .smallGoldButton {
-	background-image: url('assets/img/gui/small_gray.png');
+	background-image: url('../img/gui/small_gray.png');
 	height: 35px;
 	width: 155px;
 }
 .smallGreenButton {
-	background-image: url('assets/img/gui/small_green.png');
+	background-image: url('../img/gui/small_green.png');
 	height: 35px;
 	width: 155px;
 }
