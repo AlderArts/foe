@@ -101,8 +101,9 @@ class EntityParser {
 		this.ent = entity;
 	}
 
-	public get name() { return this.ent.nameDesc(); }
-	public get Name() { return this.ent.NameDesc(); }
+	public get name() { return this.ent.name; }
+	public get mname() { return this.ent.nameDesc(); }
+	public get mName() { return this.ent.NameDesc(); }
 	public get heshe() { return this.ent.heshe(); }
 	public get HeShe() { return this.ent.HeShe(); }
 	public get hisher() { return this.ent.hisher(); }
@@ -2579,6 +2580,9 @@ export class Entity {
 	}
 
 	// Convenience functions, breasts
+	public HasBreastsBiggerThan(threshold: number) {
+		return this.body.breasts[0].Size() >= threshold;
+	}
 	public NumBreastRows() {
 		return this.body.breasts.length;
 	}

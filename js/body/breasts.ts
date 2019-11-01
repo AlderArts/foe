@@ -14,6 +14,10 @@ export enum NippleType {
 	cock     = 4,
 }
 
+export enum BreastSize {
+	Small = 3,
+}
+
 // Defines a PAIR of breasts (or row)
 export class Breasts extends BodyPart {
 	public nippleCount: number;

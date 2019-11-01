@@ -13,7 +13,8 @@ Version 0.5.3
 * Added a new parser methodology that should make implementing scenes quicker and less prune to errors. It uses template literals from ES6 and some helper objects to allow for a simple parser syntax.
 
 Adding roughly 9k words of new content:
-* Gwendy has new talk scenes for various topics. The farm description placeholders have been removed.
+* Gwendy has new talk scenes for various topics (chat, childhood, parents). The farm description placeholders have been removed.
+* Gwendy has a new loss scene for her challenge (eat her out).
 * Replaced some awkward placeholders for Jeanne, Roa.
 
 --------------------------------------------

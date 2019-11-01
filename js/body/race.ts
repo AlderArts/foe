@@ -89,7 +89,7 @@ export class RaceDesc {
 	}
 
 	// Checks if this race (or any of its parents)
-	public isRace(...args: RaceDesc[]) {
+	public isRace(...args: RaceDesc[]): boolean {
 		for (const arg of args) {
 			if (this === arg) {
 				return true;
