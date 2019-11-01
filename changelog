@@ -7,7 +7,7 @@ CHANGELOG for Fall of Eden
 
 Version 0.5.4
 -------------
-* Bugfix, Halloween event no longer steals all your items.
+*
 
 --------------------------------------------
              PREVIOUS VERSIONS
@@ -15,6 +15,8 @@ Version 0.5.4
 
 Version 0.5.3
 -------------
+* Bugfix, Halloween event no longer steals all your items.
+
 * Fixed numerous minor logic errors in scenes discovered by applying strict typing.
 * Fixed some race detection errors in scenes, also discovered by applying strict typing.
 * Added some debug functionality. If you are in to hacking through the console, a bunch of game variables can now be accessed through the console on the object 'game'.
