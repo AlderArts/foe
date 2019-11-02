@@ -112,7 +112,7 @@ function ItemDetails(brewable: IBrewable, inventory: Inventory) {
 	const batchFormats = [1, 5, 10, 25];
 	const list: IChoice[] = [];
 	const BrewBatch = brewable.brewFn;
-	const inInventory = inventory.QueryNum(brewable.it);
+	const inInventory = inventory.QueryNum(brewable.it) || 0;
 
 	const parser: IParse = {
 		item: brewable.it.name,
