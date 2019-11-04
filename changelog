@@ -8,6 +8,7 @@ CHANGELOG for Fall of Eden
 Version 0.5.4
 -------------
 * Bugfix: there was a bug where alchemy would fail if you didn't already have any of the item being crafted in your inventory.
+* Bugfix: Fixed Gol Tailfuck/Hyperfuck scene prompt.
 
 --------------------------------------------
              PREVIOUS VERSIONS

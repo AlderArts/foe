@@ -610,7 +610,7 @@ export namespace GolScenes {
 				options.push({ nameStr : "Tailfuck",
 					func() {
 						GolScenes.CombatWinTailfuck(enc, p2cock);
-					}, enabled : p2cock.length !== undefined,
+					}, enabled : p2cock !== undefined,
 					tooltip : "Fuck that tailgina until it’s dripping and leaking eggs!",
 				});
 			}
