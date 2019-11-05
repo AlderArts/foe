@@ -164,6 +164,7 @@ class EntityParser {
 	public get hair() { return this.ent.Hair().Short(); }
 	public get lips() { return this.ent.LipsDesc(); }
 	public get face() { return this.ent.FaceDesc(); }
+	public get faceLong() { return this.ent.body.FaceDescLong(); }
 	public get ear() { return this.ent.EarDesc(); }
 	public get ears() { return this.ent.EarDesc(true); }
 	public get eye() { return this.ent.EyeDesc(); }
@@ -1777,99 +1778,96 @@ export class Entity {
 
 	/* ENTITY DESC */
 	public PrintDescription(partial?: boolean) {
-		let parse: IParse = {
-			name     : this.NameDesc(),
-			possesive: this.possessive(),
-			weigth   : Math.floor(this.body.weigth.Get() * 2).toString(),
-			race     : this.body.RaceStr(),
-			gender   : this.body.GenderStr(),
-			skinDesc : this.body.SkinDesc(),
-			faceDesc : this.body.FaceDescLong(),
-			eyeCount : Text.NumToText(this.body.head.eyes.count.Get()),
-			eyeColor : Color.Desc(this.body.head.eyes.color),
-			eyeS     : this.body.head.eyes.count.Get() === 1 ? "" : "s",
-			hairDesc : this.body.head.hair.Long(),
-			buttDesc : this.Butt().Long(),
-			hipsDesc : this.HipsDesc(),
-			anusDesc : this.Butt().AnalLong(),
-			ballsDesc: this.Balls().Long(),
-			has      : this.has(),
-			is       : this.is(),
-			larmor   : this.LowerArmorDescLong(),
-		};
-		parse = this.ParserTags(parse);
-		parse = this.ParserPronouns(parse);
 		const height = Math.floor(Unit.CmToInch(this.body.height.Get()));
 		const heightFeet = Math.floor(height / 12);
 		const heightInches = Math.floor(height % 12);
-		parse.height = heightFeet + " feet";
+		let h = heightFeet + " feet";
 		if (heightInches > 0) {
-			parse.height += " and " + heightInches + " inch";
+			h += " and " + heightInches + " inch";
 			if (heightInches > 1) {
-				parse.height += "es";
+				h += "es";
 			}
 		}
+		const ent = this.Parser;
 
-		Text.Add("[name] [is] a [gender] [race], [height] tall and weighing around [weigth]lb. [HeShe] [has] [skinDesc]. ", parse);
-		Text.Add("[HeShe] [is] wearing [armor].", parse);
-		if (this.LowerArmor()) { Text.Add(" [HeShe] [is] wearing [larmor].", parse); }
-		if (this.Weapon()) { Text.Add(" [HeShe] [is] wielding [weapon].", parse); }
+		const armor = this.ArmorDescLong();
+
+		const gender = this.body.GenderStr();
+		const race = this.body.RaceStr();
+		const weigth = Math.floor(this.body.weigth.Get() * 2).toString();
+		Text.Add(`${ent.mName} ${ent.is} a ${gender} ${race}, ${h} tall and weighing around ${weigth}lb. ${ent.HeShe} ${ent.has} ${ent.skin}. `);
+		Text.Add(`${ent.HeShe} ${ent.is} wearing ${armor}.`);
+		if (this.LowerArmor()) {
+			const botarmor = this.LowerArmorDescLong();
+			Text.Add(` ${ent.HeShe} ${ent.is} wearing ${botarmor}.`);
+		}
+		if (this.Weapon()) {
+			const weapon = this.WeaponDescLong();
+			Text.Add(` ${ent.HeShe} ${ent.is} wielding ${weapon}.`);
+		}
 		// TODO Body appearance, skin color
 		Text.NL();
-		Text.Add("[HeShe] [has] [faceDesc]. [HisHer] [eyeCount] [eyeColor] [eye][eyeS] observe the surroundings. ", parse);
-		Text.Add("A pair of [ears] sticks out from [possesive] [hairDesc]. ", parse);
+
+		const eyeCount = Text.NumToText(this.body.head.eyes.count.Get());
+		const eyeColor = Color.Desc(this.body.head.eyes.color);
+		const eyeS = this.body.head.eyes.count.Get() === 1 ? "" : "s";
+		Text.Add(`${ent.HeShe} ${ent.has} ${ent.faceLong}. ${ent.HisHer} ${eyeCount} ${eyeColor} ${ent.eye}${eyeS} observe the surroundings. `);
+		const hairDesc = this.body.head.hair.Long();
+		Text.Add(`A pair of ${ent.ears} sticks out from ${ent.poss} ${hairDesc}. `);
 
 		for (const app of this.body.head.appendages) {
-			parse.appDesc = app.Long();
-			Text.Add("On [hisher] head, [heshe] [has] a [appDesc]. ", parse);
+			const appDesc = app.Long();
+			Text.Add(`On ${ent.hisher} head, ${ent.heshe} ${ent.has} a ${appDesc}. `);
 		}
 
 		Text.NL();
 		let bs = false;
 		// Back slots
 		for (const b of this.body.backSlots) {
-			parse.appDesc = b.Long();
-			Text.Add("On [hisher] back, [heshe] [has] a [appDesc]. ", parse);
+			const appDesc = b.Long();
+			Text.Add(`On ${ent.hisher} back, ${ent.heshe} ${ent.has} a ${appDesc}. `);
 			bs = true;
 		}
-		if (bs) { Text.NL(); }
+		if (bs) {
+			Text.NL();
+		}
 
 		// TODO: Arms/Legs
 		if (this.body.legs.count === 2) {
-			Text.Add("[name] [has] arms. [name] [has] [legs], ending in [feet].", parse);
+			Text.Add(`${ent.mName} ${ent.has} arms. ${ent.mName} ${ent.has} ${ent.legs}, ending in ${ent.feet}.`);
 		} else if (this.body.legs.count > 2) {
-			parse.num = Text.NumToText(this.body.legs.count);
-			parse.race = this.body.legs.race.qShort();
-			Text.Add("[name] [has] arms and [num] [race] legs.", parse);
+			const num = Text.NumToText(this.body.legs.count);
+			const race = this.body.legs.race.qShort();
+			Text.Add(`${ent.mName} ${ent.has} arms and ${num} ${race} legs.`);
 		} else {
-			parse.race = this.body.legs.race.qShort();
-			Text.Add("[name] [has] arms and [race] lower body.", parse);
+			const race = this.body.legs.race.qShort();
+			Text.Add(`${ent.mName} ${ent.has} arms and ${race} lower body.`);
 		}
 		Text.NL();
 
 		// TODO: Hips/butt
-		Text.Add("[name] [has] [hipsDesc], and [buttDesc].", parse);
+		const buttDesc = this.Butt().Long();
+		Text.Add(`${ent.mName} ${ent.has} ${ent.hips}, and ${buttDesc}.`);
 		Text.NL();
 
 		// TODO: Breasts
 		const breasts = this.body.breasts;
 		if (breasts.length === 1) {
-			parse.breastDesc = breasts[0].Long();
-			Text.Add("[HeShe] [has] [breastDesc].", parse);
+			const breastDesc = breasts[0].Long();
+			Text.Add(`${ent.HeShe} ${ent.has} ${breastDesc}.`);
 		} else if (breasts.length > 1) {
 			const breast = breasts[0];
-			const breastDesc = breast.Desc();
-			parse.breastDesc = breasts[0].Short();
-			parse.breastSize = breastDesc.size;
-			Text.Add("Multiple rows of " + breast.nounPlural() + " sprout from [hisher] chest. [HisHer] first pair of [breastDesc] are [breastSize] in circumference.", parse);
+			const breastSize = breast.Desc().size;
+			const breastDesc = breasts[0].Short();
+			Text.Add(`Multiple rows of ${breast.nounPlural()} sprout from ${ent.hisher} chest. ${ent.HisHer} first pair of ${breastDesc} are ${breastSize} in circumference.`);
 			for (let i = 1; i < breasts.length; i++) {
-				Text.Add("<br>Another two breasts.");
+				Text.Add(`<br>Another two breasts.`);
 			}
 		} else {
-			Text.Add("[name] have a featureless smooth chest.", parse);
+			Text.Add(`${ent.mName} ${ent.has} a featureless smooth chest.`);
 		}
 		if (breasts.length > 0) {
-			this.LactationDesc(parse);
+			this.LactationDesc();
 		}
 		Text.NL();
 
@@ -1879,17 +1877,16 @@ export class Entity {
 
 		if (cocks.length === 1) {
 			const cock = cocks[0];
-			parse.cockDesc = cock.aLong();
-			Text.Add("[name] [has] [cockDesc].", parse);
+			const cockDesc = cock.aLong();
+			Text.Add(`${ent.mName} ${ent.has} ${cockDesc}.`);
 		} else if (cocks.length > 1) {
 			const cock = cocks[0];
-			parse.cockDesc = cock.aLong();
-			parse.numCocks = Text.NumToText(cocks.length);
-			Text.Add("[name] [has] a brace of [numCocks] " + cock.nounPlural() + ".", parse);
+			const numCocks = Text.NumToText(cocks.length);
+			Text.Add(`${ent.mName} ${ent.has} a brace of ${numCocks} ${cock.nounPlural()}.`);
 			for (const cock of cocks) {
-				parse.cockDesc = cock.aLong();
+				const cockDesc = cock.aLong();
 				Text.NL();
-				Text.Add("[name] [has] [cockDesc].", parse);
+				Text.Add(`${ent.mName} ${ent.has} ${cockDesc}.`);
 			}
 		}
 		if (cocks[0]) {
@@ -1898,16 +1895,17 @@ export class Entity {
 
 		// TODO: balls
 		if (this.HasBalls()) {
+			const ballsDesc = this.Balls().Long();
 			if (cocks.length > 0 || vags.length > 0) {
-				Text.Add("Beneath [hisher] other genitalia, [ballsDesc] hang.", parse);
+				Text.Add(`Beneath ${ent.hisher} other genitalia, ${ballsDesc} hang.`);
 			} else {
 				// Weird, no genetalia, just balls
-				Text.Add("Strangely, [ballsDesc] hang from [hisher] otherwise flat crotch.", parse);
+				Text.Add(`Strangely, ${ballsDesc} hang from ${ent.hisher} otherwise flat crotch.`);
 			}
 			Text.NL();
 		} else if (cocks.length === 0 && vags.length === 0) {
 			// Genderless, no balls
-			Text.Add("[name] [has] a smooth, featureless crotch.", parse);
+			Text.Add(`${ent.mName} ${ent.has} a smooth, featureless crotch.`);
 			Text.NL();
 		}
 
@@ -1915,12 +1913,12 @@ export class Entity {
 		if (vags.length === 1) {
 			const vag = vags[0];
 			const vagDesc = vag.Desc();
-			Text.Add("[name] [has] " + vagDesc.a + " " + vagDesc.adj + " " + vag.noun() + ".", parse);
+			Text.Add(`${ent.mName} ${ent.has} ${vagDesc.a} ${vagDesc.adj} ${vag.noun()}.`);
 		} else if (vags.length > 1) {
 			const vag = vags[0];
-			Text.Add("[name] [has] multiple " + vag.nounPlural() + ". [HisHer] first " + vag.noun() + " is slutty.<br>", parse);
+			Text.Add(`${ent.mName} ${ent.has} multiple ${vag.nounPlural()}. ${ent.HisHer} first ${vag.noun()} is slutty.<br>`);
 			for (let i = 1; i < vags.length; i++) {
-				Text.Add("<br>Another of [hisher] " + vag.nounPlural() + " is slutty.", parse);
+				Text.Add(`<br>Another of ${ent.hisher} ${vag.nounPlural()} is slutty.`);
 			}
 		}
 		if (vags[0]) {
@@ -1933,30 +1931,31 @@ export class Entity {
 
 		// TODO TEMP
 		const balls = this.Balls();
-		Text.Add("Cum: " + balls.cum.Get().toFixed(2) + " / " + balls.CumCap().toFixed(2));
+		Text.Add(`Cum: ${balls.cum.Get().toFixed(2)} / ${balls.CumCap().toFixed(2)}`);
 		Text.NL();
-		Text.Add("Milk: " + this.Milk().toFixed(2) + " / " + this.MilkCap().toFixed(2));
+		Text.Add(`Milk: ${this.Milk().toFixed(2)} / ${this.MilkCap().toFixed(2)}`);
 		Text.NL();
 
 		// TODO: Pregnancy
 		let womb = this.pregHandler.Womb({slot: PregnancyHandler.Slot.Vag});
 		if (womb && womb.pregnant) {
-			parse.proc = (womb.progress * 100).toFixed(1);
-			parse.hour = womb.hoursToBirth.toFixed(1);
-			Text.Add("[name] [is] pregnant. Current progress, [proc]%. [hour] hours to term.", parse);
+			const proc = (womb.progress * 100).toFixed(1);
+			const hour = womb.hoursToBirth.toFixed(1);
+			Text.Add(`${ent.mName} ${ent.is} pregnant. Current progress, ${proc}%. ${hour} hours to term.`);
 			Text.NL();
 		}
 
 		womb = this.pregHandler.Womb({slot: PregnancyHandler.Slot.Butt});
 		if (womb && womb.pregnant) {
-			parse.proc = (womb.progress * 100).toFixed(1);
-			parse.hour = womb.hoursToBirth.toFixed(1);
-			Text.Add("[name] [is] butt-pregnant. Current progress, [proc]%. [hour] hours to term.", parse);
+			const proc = (womb.progress * 100).toFixed(1);
+			const hour = womb.hoursToBirth.toFixed(1);
+			Text.Add(`${ent.mName} ${ent.is} butt-pregnant. Current progress, ${proc}%. ${hour} hours to term.`);
 			Text.NL();
 		}
 
 		// TODO: Ass
-		Text.Add("[name] [has] [anusDesc].", parse);
+		const anusDesc = this.Butt().AnalLong();
+		Text.Add(`${ent.mName} ${ent.has} ${anusDesc}.`);
 
 		if (GetDEBUG()) {
 			Text.NL();
@@ -2147,7 +2146,7 @@ export class Entity {
 		return this.body.HasScales();
 	}
 
-	public LactationDesc(parse: IParse) {
+	public LactationDesc() {
 
 	}
 	public StomachDesc() {
