@@ -163,16 +163,13 @@ export namespace GolScenes {
 	export function SearchForScepter() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const parse: IParse = {
-
-		};
 
 		Text.Clear();
-		Text.Add("Just when you’re about to give up the search for the missing merchant, you notice tracks leading off the beaten path and into a hilly, forested area off in the distance. Only, it doesn’t look like the decision to change course was made willingly - in fact, it looks like the cart was dragged off, and there are signs of a struggle, faded by time but still visible if you look for them.", parse);
-		Text.NL();
-		Text.Add("Following the tracks, you end up near the mouth of a narrow canyon. Here, too, you see the signs of struggle - a ripped piece of clothing, the ripped off wheel from a merchant’s cart, a smashed barrel with various knick-knacks spread across the ground.", parse);
-		Text.NL();
-		Text.Add("You waver on the brink of the crevasse. This may be your only lead on finding Lagon’s scepter, but this doesn’t look like the work of ordinary bandits. Not only that, you have an uneasy feeling about this place.", parse);
+		Text.Out(`Just when you’re about to give up the search for the missing merchant, you notice tracks leading off the beaten path and into a hilly, forested area off in the distance. Only, it doesn’t look like the decision to change course was made willingly - in fact, it looks like the cart was dragged off, and there are signs of a struggle, faded by time but still visible if you look for them.
+
+		Following the tracks, you end up near the mouth of a narrow canyon. Here, too, you see the signs of struggle - a ripped piece of clothing, the ripped off wheel from a merchant’s cart, a smashed barrel with various knick-knacks spread across the ground.
+
+		You waver on the brink of the crevasse. This may be your only lead on finding Lagon’s scepter, but this doesn’t look like the work of ordinary bandits. Not only that, you have an uneasy feeling about this place.`);
 		Text.Flush();
 
 		TimeStep({minute: 30});
@@ -182,7 +179,7 @@ export namespace GolScenes {
 		options.push({ nameStr : "Leave",
 			func() {
 				Text.Clear();
-				Text.Add("You decide to return to the dubious safety of the main travel route. If you want to take on whatever attacked the caravan, you should do so when better prepared.", parse);
+				Text.Out(`You decide to return to the dubious safety of the main travel route. If you want to take on whatever attacked the caravan, you should do so when better prepared.`);
 				Text.Flush();
 
 				Gui.NextPrompt();
@@ -192,32 +189,30 @@ export namespace GolScenes {
 		options.push({ nameStr : "Explore",
 			func() {
 				Text.Clear();
-				Text.Add("Steeling yourself, you head inside the winding canyon, nerves on end and ready for combat. ", parse);
-				parse.Comp = party.Num() === 2 ? party.Get(1).name : "Your companions";
-				parse.notS = party.Num() === 2 ? "s" : "";
+				Text.Out(`Steeling yourself, you head inside the winding canyon, nerves on end and ready for combat. `);
 				if (party.Num() > 1) {
-					Text.Add("[Comp] walk[notS] by your side, staying as close to you as possible. ", parse);
+					const two = party.Num() === 2;
+					Text.Out(`${two ? party.Get(1).name : "Your companions"} walk${two ? "s" : ""} by your side, staying as close to you as possible. `);
 				}
-				Text.Add("It’s eerily quiet, and you don’t hear the usual din of the wilds here - no calls of birds or baying of distant wild dogs. You find further evidence of the caravan; splinters of wood and patches of cloth hanging off scraggly trees. Some of the narrow sections you pass through doesn’t look like they’d even allow for a regular wagon to pass through. It’s as if someone hauled it through bodily. It’s not a feat possible for a regular horse, far less by mere bandits.", parse);
-				Text.NL();
-				Text.Add("More alarming, you begin to see unnatural secretions of… something. Sticky mucus clings to the cliffside like an infestation of some sort. It’s not spiderwebs, but perhaps something similar. Surely, it’s not natural. Trying not to touch it, you soldier on.", parse);
-				Text.NL();
-				Text.Add("Rounding a corner, you come upon a secluded valley in the hill; a place of madness and corruption. The strange sticky mucus is everywhere, and there is an unnerving whirring noise, like that of the distant rapid beat of insect wings. Even looking around, you can’t figure out its source - it’s as if it was emanating from the inside of your skull.", parse);
-				Text.NL();
-				Text.Add("Here, you finally discover the fate of the unlucky caravan: the remains of several wagons smashed to pieces and scattered across the ground. You quickly realize that you’re not alone, however, as there is a large hulking shape rummaging through the remains of one of the carts. Half woman, half insect, all terrifying, she stands well over ten feet tall, with four arms - two of which are similar to enormous scythes - and six legs. Her face is vaguely human, though the antenna sticking out of her long green hair and the four inhuman eyes on her forehead belay her insectoid nature; she looks like a freakish mix between a human and a mantis.", parse);
-				Text.NL();
-				Text.Add("Sensing your approach, the monster steps out of the wreckage, tossing aside planks and iron-rimmed wagon wheels with ease. In one scythe-like hand, she holds an unconscious maiden with a belly distended with the unmistakable bulge of late-term pregnancy and clad in ill-fitting clothes ripped from within. The insectile behemoth meets your gaze, and a smile breaks across her face. Placing the woman gently behind her, she unintentionally gives you a good look at her chitinous lower half, complete with a half-dozen skittering legs and a tubular, tail-like extension that sprouts from the back of her abdomen. The backmost foot of it shines with reflective juices. Whether they're her own or her captive's, you cannot say.", parse);
-				Text.NL();
-				Text.Add("You realize that you’ve seen something like her before; during the time you helped Ophelia, you found the husk of one of her kind. This insectoid being has to be one of the Gol, the fearsome creatures that the alchemist warned you about. Looks like you have no choice but to face this one, however. Looking a live one in the face is a heck of a lot more intimidating than their remains, that’s for sure… and this one looks even bigger than the one you found. No - not just one. You see several others nearby, though much smaller and differently endowed. Perhaps these are drones of some kind.", parse);
-				Text.NL();
-				Text.Add("<i>“Did you also come to join my hive?”</i> her buzzing voice asks as she lays her victim alongside a number of other, similarly swollen captives. Some are unconscious, but others are awake, softly moaning as their fingers splay across taut, pregnant skin or fluid-drenched fur. Not even the males have escaped her attentions. They lie there with swollen balls and dazed looks on their faces, looking fondly at her while quietly begging for her attention.", parse);
-				Text.NL();
-				Text.Add("In her other hand, she is grasping what must unmistakably be Lagon’s scepter. It’s a grand thing, crowned by a large gemstone. You tell her in no uncertain terms that you're here for the scepter, not to join her hive - trying to hide your surprise at her words. You thought these creatures were feral? Readying yourself for battle, you prepare to face down the monstrosity.", parse);
-				Text.NL();
-				parse.incubatorBreeder = player.mfFem("incubator", "breeder");
-				Text.Add("The Gol straightens to her full height and turns to answer, splintering wood as each pointed, chitin-plated foot slams into the remains of an unlucky wagon. <i>“A shame.”</i> She climbs closer, batting the eyelashes over her human eyes while four unblinking, insectile eyes stare you down. <i>“I've only learned to enjoy sex as your people do since discovering this scepter.”</i> She holds it aloft in one hand, just below her scything arms. <i>“But it's so much better when you start out unwilling.”</i> Her nippleless breasts heave with excitement. <i>“You shall make a fine [incubatorBreeder] for the hive!”</i>", parse);
-				Text.NL();
-				Text.Add("The monster waves her scepter, and the men and women are carried away by scurrying drones, off to whatever fate awaits them deeper within the canyon. You're going to have to fight this crazy Gol if you don't want to wind up like the people of the caravan!", parse);
+				Text.Out(`It’s eerily quiet, and you don’t hear the usual din of the wilds here - no calls of birds or baying of distant wild dogs. You find further evidence of the caravan; splinters of wood and patches of cloth hanging off scraggly trees. Some of the narrow sections you pass through doesn’t look like they’d even allow for a regular wagon to pass through. It’s as if someone hauled it through bodily. It’s not a feat possible for a regular horse, far less by mere bandits.
+
+				More alarming, you begin to see unnatural secretions of… something. Sticky mucus clings to the cliffside like an infestation of some sort. It’s not spiderwebs, but perhaps something similar. Surely, it’s not natural. Trying not to touch it, you soldier on.
+
+				Rounding a corner, you come upon a secluded valley in the hill; a place of madness and corruption. The strange sticky mucus is everywhere, and there is an unnerving whirring noise, like that of the distant rapid beat of insect wings. Even looking around, you can’t figure out its source - it’s as if it was emanating from the inside of your skull.
+
+				Here, you finally discover the fate of the unlucky caravan: the remains of several wagons smashed to pieces and scattered across the ground. You quickly realize that you’re not alone, however, as there is a large hulking shape rummaging through the remains of one of the carts. Half woman, half insect, all terrifying, she stands well over ten feet tall, with four arms - two of which are similar to enormous scythes - and six legs. Her face is vaguely human, though the antenna sticking out of her long green hair and the four inhuman eyes on her forehead belay her insectoid nature; she looks like a freakish mix between a human and a mantis.
+
+				Sensing your approach, the monster steps out of the wreckage, tossing aside planks and iron-rimmed wagon wheels with ease. In one scythe-like hand, she holds an unconscious maiden with a belly distended with the unmistakable bulge of late-term pregnancy and clad in ill-fitting clothes ripped from within. The insectile behemoth meets your gaze, and a smile breaks across her face. Placing the woman gently behind her, she unintentionally gives you a good look at her chitinous lower half, complete with a half-dozen skittering legs and a tubular, tail-like extension that sprouts from the back of her abdomen. The backmost foot of it shines with reflective juices. Whether they're her own or her captive's, you cannot say.
+
+				You realize that you’ve seen something like her before; during the time you helped Ophelia, you found the husk of one of her kind. This insectoid being has to be one of the Gol, the fearsome creatures that the alchemist warned you about. Looks like you have no choice but to face this one, however. Looking a live one in the face is a heck of a lot more intimidating than their remains, that’s for sure… and this one looks even bigger than the one you found. No - not just one. You see several others nearby, though much smaller and differently endowed. Perhaps these are drones of some kind.
+
+				“Did you also come to join my hive?” her buzzing voice asks as she lays her victim alongside a number of other, similarly swollen captives. Some are unconscious, but others are awake, softly moaning as their fingers splay across taut, pregnant skin or fluid-drenched fur. Not even the males have escaped her attentions. They lie there with swollen balls and dazed looks on their faces, looking fondly at her while quietly begging for her attention.
+
+				In her other hand, she is grasping what must unmistakably be Lagon’s scepter. It’s a grand thing, crowned by a large gemstone. You tell her in no uncertain terms that you're here for the scepter, not to join her hive - trying to hide your surprise at her words. You thought these creatures were feral? Readying yourself for battle, you prepare to face down the monstrosity.
+
+				The Gol straightens to her full height and turns to answer, splintering wood as each pointed, chitin-plated foot slams into the remains of an unlucky wagon. “A shame.” She climbs closer, batting the eyelashes over her human eyes while four unblinking, insectile eyes stare you down. “I've only learned to enjoy sex as your people do since discovering this scepter.” She holds it aloft in one hand, just below her scything arms. “But it's so much better when you start out unwilling.” Her nippleless breasts heave with excitement. “You shall make a fine ${player.mfFem("incubator", "breeder")} for the hive!”
+
+				The monster waves her scepter, and the men and women are carried away by scurrying drones, off to whatever fate awaits them deeper within the canyon. You're going to have to fight this crazy Gol if you don't want to wind up like the people of the caravan!`);
 				Text.Flush();
 
 				Gui.NextPrompt(() => {
@@ -250,16 +245,18 @@ export namespace GolScenes {
 			foot() { return player.FootDesc(); },
 		};
 
+		const lusty = player.LustLevel() > 0.7;
+
 		Text.Clear();
-		parse.lust = player.LustLevel() > 0.7 ? ", lust-" : "";
+		parse.lust = lusty ? ", lust-" : "";
 		Text.Add("Looming above your defeated[lust]stricken form, the Gol leers at you, all six of her eyes focusing down at you. You do your best to scramble away through the rubble, but it's quite difficult to move in your state. She thoughtfully strokes her chin with a humanlike arm, holding the scepter aloft in her other. <i>“You're different than the others. They broke without much effort.”</i> She snaps her mantis-like claws. <i>“All I had to do was treat them with a degree of tenderness, perhaps expose them to my pollen, and they became willing breeders.”</i>", parse);
 		Text.NL();
 		Text.Add("You try to crawl away, but she hooks an insectile limb around your [foot].", parse);
 		Text.NL();
 		Text.Add("<i>“Tsk, tsk. Just because you can struggle doesn't mean you won't be useful to my hive.”</i> She spins the scepter in her hand. <i>“Do you think an item such as this - one that gave me the gifts of thought and speech - could be used to bring you into the fold? To make you willingly, eagerly mine?”</i> She skitters forward, dislodging bits of wood as she moves. The insectile horror looms large as she bends forward, dangling her scepter just above your face. <i>“You know what? I think it can.”</i>", parse);
 		Text.NL();
-		parse.lust = player.LustLevel() > 0.7 ? ", no matter how horny you are" : "";
-		parse.lust2 = player.LustLevel() > 0.7 ? " and lust" : "";
+		parse.lust = lusty ? ", no matter how horny you are" : "";
+		parse.lust2 = lusty ? " and lust" : "";
 		Text.Add("You're not going to give her the chance[lust]! You twist to the side and claw forward, giving yourself a half-dozen splinters in the process. The pain is nothing next to the fear[lust2] coursing through you.", parse);
 		Text.NL();
 
@@ -299,138 +296,118 @@ export namespace GolScenes {
 
 	export function CombatLossIncubator(gol: GolQueen) {
 		const player: Player = GAME().player;
-		const parse: IParse = {
-			skinDesc() { return player.SkinDesc(); },
-			armor() { return player.ArmorDesc(); },
-			legs() { return player.LegsDesc(); },
-			vagina() { return player.FirstVag().Short(); },
-		};
+		const pc = player.Parser;
 
 		Text.Clear();
-		Text.Add("The rapid-fire clicks of her legs punching through the ruins of the caravan keep you jumpy, your nerves on edge, but you dare not move or even open your eyes. Just seeing one of those exoskeletal monstrosities coming down next to your head would probably send you into fits. You try your damnedest to quiet the tremors of nervous energy toying with your muscles, but the partial success is little comfort.", parse);
-		Text.NL();
-		Text.Add("The heat of the insect-woman’s enormous underside washes over you in waves, accompanied by scents both musky and pleasant; all are oddly sexual, spreading twinges of desire through your body under the tight-knit balls of fear.", parse);
-		Text.NL();
-		Text.Add("<i>“Oh, don’t be afraid. I’d never hurt one of my breeders.”</i>", parse);
-		Text.NL();
-		Text.Add("You stomach a smarmy reply - there’s no use in getting offed if you can help it. You beg for her to let you go, sincerely doubting that it’ll work.", parse);
-		Text.NL();
-		Text.Add("As expected, it doesn’t. The monstrous Gol actually giggles. <i>“Oh, still your worrying, pet. All will be made clear enough soon. Here, let me assuage your fears - you seem awfully worried about being stepped on, after all.”</i> Something warm and wet sprays across you, and you can’t hold your eyes shut any longer. You have to see what fresh horror she has brought to the fore.", parse);
-		Text.NL();
-		Text.Add("<i>“Oh.”</i> The word slips through your lips at the sight of your body covered in sticky, rapidly solidifying webbing. Some of the pointed legs zip back and forth across your body, arranging it before it finishes hardening, then she squirts another wave of the stuff from recessed glands you would have missed at first glance, covering you in so much that everything below your neck obscured by white silk. Well, almost everything. Your crotch has been left curiously unguarded and your [armor] removed. When did that happen? You feel like you should be struggling, but your head is dizzy from the fight or her scent, and you don’t want to get stepped on. The thickening cocoon is blessedly comfortable as well.", parse);
-		Text.NL();
-		Text.Add("At some point while your eyes were closed, the insect Matron spun around so that her front was past your feet, and her tail positioned over your head. Now you’re getting your first good look at the odd organ at its tip. It’s a little longer than it was when you first got here, if such a thing is possible, and a small, lubricant dripping hole sits at the end. You don’t know that much about insects, but you wager this is where her eggs come from. Maybe you should be grossed out right now. Instead, you find yourself fascinated by its unique biology.", parse);
-		Text.NL();
-		Text.Add("Just how big could her eggs be, and why is everyone from the caravan pregnant if she lays eggs? Her tail twitches as if mindful of your gaze, dripping a thicker flow of its fluid onto your bound chest. She must be ready to birth again. The organ surges out another inch or so from the surrounding carapace, gleaming in the starlight. That scent you smelled earlier - the musky, sexual tang that sent shivers down your spine - is stronger now, given off by the swelling ovipositor above.", parse);
-		Text.NL();
-		parse.l = player.LowerBodyType() !== LowerBodyType.Single ? "between your thighs" : "in your loins";
-		Text.Add("You whimper, though from fear or arousal, you cannot tell. The Gol queen is a magnificent piece of work, perfectly engineered to breed often and in large quantities. The dripping hole above is clearly her ovipositor, and it’s stretching out before your very eyes, engorging in preparation of... something. You try to convince yourself the moisture [l] is nervous sweat and that the prickle of your sensitive nipples against their bindings is a trick of your mind. It works until a droplet of slippery goo lands on your neck, hot and wonderfully sensuous against your [skinDesc].", parse);
-		Text.NL();
-		Text.Add("You gasp in shock, wriggling in your confinement. ", parse);
+		Text.Out(`The rapid-fire clicks of her legs punching through the ruins of the caravan keep you jumpy, your nerves on edge, but you dare not move or even open your eyes. Just seeing one of those exoskeletal monstrosities coming down next to your head would probably send you into fits. You try your damnedest to quiet the tremors of nervous energy toying with your muscles, but the partial success is little comfort.
+
+		The heat of the insect-woman’s enormous underside washes over you in waves, accompanied by scents both musky and pleasant; all are oddly sexual, spreading twinges of desire through your body under the tight-knit balls of fear.
+
+		“Oh, don’t be afraid. I’d never hurt one of my breeders.”
+
+		You stomach a smarmy reply - there’s no use in getting offed if you can help it. You beg for her to let you go, sincerely doubting that it’ll work.
+
+		As expected, it doesn’t. The monstrous Gol actually giggles. <i>“Oh, still your worrying, pet. All will be made clear enough soon. Here, let me assuage your fears - you seem awfully worried about being stepped on, after all.”</i> Something warm and wet sprays across you, and you can’t hold your eyes shut any longer. You have to see what fresh horror she has brought to the fore.
+
+		“Oh.” The word slips through your lips at the sight of your body covered in sticky, rapidly solidifying webbing. Some of the pointed legs zip back and forth across your body, arranging it before it finishes hardening, then she squirts another wave of the stuff from recessed glands you would have missed at first glance, covering you in so much that everything below your neck obscured by white silk. Well, almost everything. Your crotch has been left curiously unguarded and your ${pc.armor} removed. When did that happen? You feel like you should be struggling, but your head is dizzy from the fight or her scent, and you don’t want to get stepped on. The thickening cocoon is blessedly comfortable as well.
+
+		At some point while your eyes were closed, the insect Matron spun around so that her front was past your feet, and her tail positioned over your head. Now you’re getting your first good look at the odd organ at its tip. It’s a little longer than it was when you first got here, if such a thing is possible, and a small, lubricant dripping hole sits at the end. You don’t know that much about insects, but you wager this is where her eggs come from. Maybe you should be grossed out right now. Instead, you find yourself fascinated by its unique biology.
+
+		Just how big could her eggs be, and why is everyone from the caravan pregnant if she lays eggs? Her tail twitches as if mindful of your gaze, dripping a thicker flow of its fluid onto your bound chest. She must be ready to birth again. The organ surges out another inch or so from the surrounding carapace, gleaming in the starlight. That scent you smelled earlier - the musky, sexual tang that sent shivers down your spine - is stronger now, given off by the swelling ovipositor above.
+
+		You whimper, though from fear or arousal, you cannot tell. The Gol queen is a magnificent piece of work, perfectly engineered to breed often and in large quantities. The dripping hole above is clearly her ovipositor, and it’s stretching out before your very eyes, engorging in preparation of... something. You try to convince yourself the moisture ${player.LowerBodyType() !== LowerBodyType.Single ? "between your thighs" : "in your loins"} is nervous sweat and that the prickle of your sensitive nipples against their bindings is a trick of your mind. It works until a droplet of slippery goo lands on your neck, hot and wonderfully sensuous against your ${pc.skin}.
+
+		You gasp in shock, wriggling in your confinement. Your ${pc.legs} `);
 		if (player.LowerBodyType() !== LowerBodyType.Single) {
-			Text.Add("Your [legs] are so perfectly spread and anchored by yet more webs until closing them is an impossibility. You want to close them, close them and grind them together, squeezing down on the wetness between, but you can’t.", parse);
+			Text.Out(`are so perfectly spread and anchored by yet more webs until closing them is an impossibility. You want to close them, close them and grind them together, squeezing down on the wetness between, but you can’t.`);
 		} else {
-			Text.Add("Your [legs] is stretched out so that you can’t even flex or twist, anchored with web upon web until movement or concealment of your [vagina] is an impossibility. You wish you could curl back onto yourself, and maybe rub a little across your increasingly puffy entrance, but you can’t.", parse);
+			Text.Out(`is stretched out so that you can’t even flex or twist, anchored with web upon web until movement or concealment of your ${pc.vag} is an impossibility. You wish you could curl back onto yourself, and maybe rub a little across your increasingly puffy entrance, but you can’t.`);
 		}
-		Text.Add(" You’re pinned and exposed, being dripped on and dripped from. Another splatter of goo smears your cheek, and you moan in anxious need.", parse);
+		Text.Out(` You’re pinned and exposed, being dripped on and dripped from. Another splatter of goo smears your cheek, and you moan in anxious need.`);
 		Text.NL();
 		GolScenes.CombatLossIncEntry(gol);
 	}
 
 	export function CombatLossIncEntry(gol: GolQueen) {
 		const player: Player = GAME().player;
-		const p1cock = player.BiggestCock();
+		const pc = player.Parser;
 
-		let parse: IParse = {
-			vagina() { return player.FirstVag().Short(); },
-			cocks() { return player.MultiCockDesc(); },
-			cock() { return p1cock.Short(); },
-		};
+		Text.Out(`Why isn’t she doing anything to you? Can’t she see how horny you are? Can’t she see the way your bare flesh is gleaming? You whine, high pitched and plaintive, looking at her growing ovipositor with a sort of half-understood need. There’s no doubting the thing’s phallic nature now. It isn’t meant to lay eggs; it’s meant to ram into a hot, sweaty box like yours and pump it full of eggs in the most pleasant way possible. A splatter of fragrant lubricant glances off your lip, and you taste it without thinking, savoring the flavor. An idea bursts upon, whole and fully formed, perfect in its majesty - you could let her fill you with eggs and escape while she’s tired.
 
-		parse = Text.ParserPlural(parse, player.NumCocks() > 1);
+		It might be a little hard to walk, with your belly all pregnant and dome-like, gleaming and shifting with every egg-weighted step you take, but you could get away, maybe find somewhere quiet to lie down and.... It’s better to leave it a mystery. Maybe you’ll jill yourself off and dig every drop of her delicious nectar from your well-used slit. Maybe you’ll just sit there, rubbing your tummy while the life within you grows to maturity. Maybe you’ll cum just from feeling your beautiful Gol babies slide out into the grass, slick with fluid that smells just as wonderful as their mommy’s.
 
-		Text.Add("Why isn’t she doing anything to you? Can’t she see how horny you are? Can’t she see the way your bare flesh is gleaming? You whine, high pitched and plaintive, looking at her growing ovipositor with a sort of half-understood need. There’s no doubting the thing’s phallic nature now. It isn’t meant to lay eggs; it’s meant to ram into a hot, sweaty box like yours and pump it full of eggs in the most pleasant way possible. A splatter of fragrant lubricant glances off your lip, and you taste it without thinking, savoring the flavor. An idea bursts upon, whole and fully formed, perfect in its majesty - you could let her fill you with eggs and escape while she’s tired.", parse);
-		Text.NL();
-		Text.Add("It might be a little hard to walk, with your belly all pregnant and dome-like, gleaming and shifting with every egg-weighted step you take, but you could get away, maybe find somewhere quiet to lie down and.... It’s better to leave it a mystery. Maybe you’ll jill yourself off and dig every drop of her delicious nectar from your well-used slit. Maybe you’ll just sit there, rubbing your tummy while the life within you grows to maturity. Maybe you’ll cum just from feeling your beautiful Gol babies slide out into the grass, slick with fluid that smells just as wonderful as their mommy’s.", parse);
-		Text.NL();
-		Text.Add("A warm, melodious voice cuts through your musings like a blade through butter. Why didn’t you notice how sweet she sounded before? <i>“Is something the matter, dear?”</i> The armored women is looking over her shoulder at you with a look of knowing concern, but the excited flush of her cheeks tell you just how aware of your condition she is. Why, her ovipositor is still growing above you, firming up in preparation of something. She scuttles a short distance away, then turns to face you. <i>“You look... eager. Did you change your mind... about being my incubator?”</i> She pauses, blushing hotter. <i>“I have so many I could give you, again and again.”</i>", parse);
-		Text.NL();
-		Text.Add("Your mouth waters and your head swims. Your [vagina] feels like a hot spring’s waterfall. The Gol’s ovipositor just looked so thick and... filling. You were going to trick her into... stuffing you full of her eggs so you could get away. Somehow, you get even wetter at the idea.", parse);
-		Text.NL();
-		Text.Add("Licking your lips, you answer, proud of how deceptively eager you sound, <i>“Yes! Use me as your eggholster!”</i> A decidedly panty-drenching thought occurs to you, and you can’t help but give it voice. <i>“Stuff me so full of eggs you have to web my gaped cunt shut just to hold them in!”</i> That was filthy, but it made your [vagina] weep with anticipation. Maybe she’ll wrap you up in webs and just let you hang there until it’s time for your next filling.", parse);
-		Text.NL();
-		Text.Add("Her voice cuts your fantasies short once more. <i>“I exist to serve.”</i> Her tone is anything but humble, but how could you care when that thick cunt-stretcher is being pointed in your direction. It’s so close to you now, the clear fluids it exudes painting a trail up the ruined quilt toward the ", parse);
-		if (player.LowerBodyType() !== LowerBodyType.Single) {
-			Text.Add("junction of your thighs", parse);
-		} else {
-			Text.Add("hole that lies at the center of your body and thoughts", parse);
-		}
-		Text.Add(". The need is palpable, almost all consuming. Your heartbeat hammers so hard you worry that it’ll crack your chest when the Gol’s oozing organ finally makes first contact.", parse);
-		Text.NL();
-		Text.Add("It feels better than you thought it would - better than a fingertip or penis ever could. Your lips part with glacial slowness around the intruder’s slickened bulk. You can tell she’s going easy on you, much as you might want her to ram it in until it’s splitting your cervix. Even going slow, it feels right in a way that tickles at your synapses, burning away worries and depression more effectively than any celebration or gift. With a shuddering gasp, you realize why this is so wonderful: it’s a fulfillment of purpose.", parse);
+		A warm, melodious voice cuts through your musings like a blade through butter. Why didn’t you notice how sweet she sounded before? “Is something the matter, dear?” The armored women is looking over her shoulder at you with a look of knowing concern, but the excited flush of her cheeks tell you just how aware of your condition she is. Why, her ovipositor is still growing above you, firming up in preparation of something. She scuttles a short distance away, then turns to face you. “You look... eager. Did you change your mind... about being my incubator?” She pauses, blushing hotter. “I have so many I could give you, again and again.”
+
+		Your mouth waters and your head swims. Your ${pc.vag} feels like a hot spring’s waterfall. The Gol’s ovipositor just looked so thick and... filling. You were going to trick her into... stuffing you full of her eggs so you could get away. Somehow, you get even wetter at the idea.
+
+		Licking your lips, you answer, proud of how deceptively eager you sound, “Yes! Use me as your eggholster!” A decidedly panty-drenching thought occurs to you, and you can’t help but give it voice. “Stuff me so full of eggs you have to web my gaped cunt shut just to hold them in!” That was filthy, but it made your ${pc.vag} weep with anticipation. Maybe she’ll wrap you up in webs and just let you hang there until it’s time for your next filling.
+
+		Her voice cuts your fantasies short once more. “I exist to serve.” Her tone is anything but humble, but how could you care when that thick cunt-stretcher is being pointed in your direction. It’s so close to you now, the clear fluids it exudes painting a trail up the ruined quilt toward the ${player.LowerBodyType() !== LowerBodyType.Single ? "junction of your thighs" : "hole that lies at the center of your body and thoughts"}. The need is palpable, almost all consuming. Your heartbeat hammers so hard you worry that it’ll crack your chest when the Gol’s oozing organ finally makes first contact.
+
+		It feels better than you thought it would - better than a fingertip or penis ever could. Your lips part with glacial slowness around the intruder’s slickened bulk. You can tell she’s going easy on you, much as you might want her to ram it in until it’s splitting your cervix. Even going slow, it feels right in a way that tickles at your synapses, burning away worries and depression more effectively than any celebration or gift. With a shuddering gasp, you realize why this is so wonderful: it’s a fulfillment of purpose.`);
 		Text.NL();
 
 		Sex.Vaginal(gol, player);
 		player.FuckVag(player.FirstVag(), gol.FirstCock(), 6);
 		gol.Fuck(gol.FirstCock(), 6);
 
-		Text.Add("You were meant to do this. Meant to take life inside you and nurture it. You see that now, as clearly as you feel your new purpose being bored into your quivering slit. Your thoughts of escape burn away under the raw, untamed truth of it, molten hot in a way that sears your pleasure inside you, forcing you to boil in it. Runnels of girlcum stream out onto the rubble below as if forced out to make room for the new you. A soon to be pregnant you.", parse);
+		Text.Out(`You were meant to do this. Meant to take life inside you and nurture it. You see that now, as clearly as you feel your new purpose being bored into your quivering slit. Your thoughts of escape burn away under the raw, untamed truth of it, molten hot in a way that sears your pleasure inside you, forcing you to boil in it. Runnels of girlcum stream out onto the rubble below as if forced out to make room for the new you. A soon to be pregnant you.`);
 		Text.Flush();
 
 		Gui.NextPrompt(() => {
 			Text.Clear();
-			Text.Add("You close your eyes once more, not because of fear or revulsion, but because dealing with the wealth of sensory data from your stretching quim and your vision is making you dizzy. You can’t shut off the input from down below, so the vision has to go. It’s easier this way. You can focus on the rippling distentions and veins of the expanding ovipositor, the way it tingles and numbs and enhances your sensations all at once.", parse);
-			Text.NL();
-			Text.Add("You almost wish it would triple in size, just to see if she could take you that far. Something about her fluids seems to dim your ability to feel pain, and you can feel something inside you relaxing and opening up, blossoming like a beautiful flower.", parse);
-			Text.NL();
-			Text.Add("The Gol grunts, abruptly pushing forward, giving you exactly what you want. Her organ widens the closer it gets to the base, and you feel your walls giving as they’re pulled to their limit and beyond. The more it pushes, the more intense the pleasure becomes, rolling in like impenetrable pink fog.", parse);
-			Text.NL();
-			Text.Add("You gasp, <i>“More!”</i> without thinking of the hows or the whys or even if your body is capable of such a feat; the only concern is being taken and filled to the brim. You want your pussy filled with her ovipositor, your womb stuffed with eggs, and your tits brimming with more milk than your babies will ever be able to drink. Do insects-girls drink milk? A flash of yourself tugging on your nipples, fountaining milk while a hip-splitting egg slowly works its way out of your overtaxed pussy overwhelms you, and you decide it doesn’t matter.", parse);
-			Text.NL();
-			Text.Add("The Gol queen, your Queen, you realize, shoves harder, slamming her lengthy organ in to the hilt. You feel it slip past some obstruction inside you. Your womb, you realize through the haze of pleasure. Then she pulls back, waits a moment, and slams herself home, fully seating her egg-laying she-dick within your moist accommodations, forcing your cervix to dilate wide as its tip nuzzles at your fallopian tubes.", parse);
+			Text.Out(`You close your eyes once more, not because of fear or revulsion, but because dealing with the wealth of sensory data from your stretching quim and your vision is making you dizzy. You can’t shut off the input from down below, so the vision has to go. It’s easier this way. You can focus on the rippling distentions and veins of the expanding ovipositor, the way it tingles and numbs and enhances your sensations all at once.
+
+			You almost wish it would triple in size, just to see if she could take you that far. Something about her fluids seems to dim your ability to feel pain, and you can feel something inside you relaxing and opening up, blossoming like a beautiful flower.
+
+			The Gol grunts, abruptly pushing forward, giving you exactly what you want. Her organ widens the closer it gets to the base, and you feel your walls giving as they’re pulled to their limit and beyond. The more it pushes, the more intense the pleasure becomes, rolling in like impenetrable pink fog.
+
+			You gasp, “More!” without thinking of the hows or the whys or even if your body is capable of such a feat; the only concern is being taken and filled to the brim. You want your pussy filled with her ovipositor, your womb stuffed with eggs, and your tits brimming with more milk than your babies will ever be able to drink. Do insects-girls drink milk? A flash of yourself tugging on your nipples, fountaining milk while a hip-splitting egg slowly works its way out of your overtaxed pussy overwhelms you, and you decide it doesn’t matter.
+
+			The Gol queen, your Queen, you realize, shoves harder, slamming her lengthy organ in to the hilt. You feel it slip past some obstruction inside you. Your womb, you realize through the haze of pleasure. Then she pulls back, waits a moment, and slams herself home, fully seating her egg-laying she-dick within your moist accommodations, forcing your cervix to dilate wide as its tip nuzzles at your fallopian tubes.`);
 			Text.NL();
 
 			const cum = player.OrgasmCum();
 
-			parse.woman = player.mfFem("man", "woman");
-			Text.Add("You cum to the feeling of utter violation. If it weren’t for the steel-strong silk binding you in place, you’d be thrashing like a wild [woman]. ", parse);
+			Text.Out(`You cum to the feeling of utter violation. If it weren’t for the steel-strong silk binding you in place, you’d be thrashing like a wild ${player.mfFem("man", "woman")}. `);
 			if (player.FirstCock()) {
-				Text.Add("Your [cocks] launch[notEs] gob after gob of forgotten cum onto your face, but [itThey] only serves to make your situation all the hotter. Such a heedless, arrogant release, riding high on the waves of your true pleasure, the pleasure of serving your purpose. All that a dick is for is making you an even wetter, sluttier drone for the Queen until she decrees otherwise.", parse);
+				const parse: IParse = Text.ParserPlural(undefined, player.NumCocks() > 1);
+				Text.Add(`Your ${pc.cocks} launch[notEs] gob after gob of forgotten cum onto your face, but [itThey] only serves to make your situation all the hotter. Such a heedless, arrogant release, riding high on the waves of your true pleasure, the pleasure of serving your purpose. All that a dick is for is making you an even wetter, sluttier drone for the Queen until she decrees otherwise.`, parse);
 			} else {
-				Text.Add("Your juices run in streams around the dick, practically spraying out of you as you give in to the true pleasure. It’s the perfect orgasm for a perfect, slutty drone, one who will do this again and again, so long as the Queen wills it.", parse);
+				Text.Out("Your juices run in streams around the dick, practically spraying out of you as you give in to the true pleasure. It’s the perfect orgasm for a perfect, slutty drone, one who will do this again and again, so long as the Queen wills it.");
 			}
 			Text.NL();
-			Text.Add("The Queen, grunting with effort, still manages to grace you with a smile. <i>“Cumming already? Well, I suppose it will not matter.”</i> She grunts once more, straining with something. <i>“It’s good that you find such pleasure in your place, little incubator. If you handle these eggs well, I will give you all you can handle, and visits from the drones besides.”</i>", parse);
-			Text.NL();
-			Text.Add("Drones? Visions of big-dicked, handsome bug-boys dance in your head, clapping their carapace-covered crotches against your own again and again, your pregnant belly wobbling just above. You nearly cum again. The Queen - your Queen - is so generous!", parse);
+			Text.Out(`The Queen, grunting with effort, still manages to grace you with a smile. “Cumming already? Well, I suppose it will not matter.” She grunts once more, straining with something. “It’s good that you find such pleasure in your place, little incubator. If you handle these eggs well, I will give you all you can handle, and visits from the drones besides.”
+
+			Drones? Visions of big-dicked, handsome bug-boys dance in your head, clapping their carapace-covered crotches against your own again and again, your pregnant belly wobbling just above. You nearly cum again. The Queen - your Queen - is so generous!`);
 			Text.Flush();
 
 			Gui.NextPrompt(() => {
 				Text.Clear();
-				Text.Add("The ovipositor lodged inside of you shifts, twisting and rubbing against your overtaxed walls in whole new ways. It flexes, the base expanding slightly, and then that distention slides deeper inside you. Behind it, the ovipositor narrows once more. She must be giving you your first egg! You giggle with girlish glee, a little pleasure-drunk, and try to relax your muscles as much as possible.", parse);
-				Text.NL();
-				Text.Add("Even with your acceptance, the egg still has a tough time squeezing through your increasingly narrow hole, slowing down the closer it gets to your womb. The ovipositor clenches and flexes, pushing harder and harder, forcing the obstruction deeper and deeper. You feel it’s about to tear you in two and make you cum all at the same time, and then, suddenly, it’s inside you, falling to rest against the soft wall of your womb.", parse);
-				Text.NL();
-				Text.Add("The egg is so warm. Even buried within you, you can feel it radiating heat. It’s just a hair warmer than your own body, enough to remind you at all times that you’re carrying more than just your own flesh.", parse);
-				Text.NL();
-				Text.Add("While you marvel at your motherhood, flush with multiple varieties of pleasure, another egg begins its journey inward. Then another, and another... and another. These come easier than the first. Your elasticized pussy has spread so terrifically wide. You doubt a lesser lover could ever please you again. The eggs come on, one after another, slowly filling your uterus with potential life, pressing by sensitive nerves on their way in.", parse);
-				Text.NL();
-				Text.Add("The eighth egg has you cumming and screaming your devotion to the Queen. The body-wracking ecstasy goes on for so long that you lose count of just how many eggs slip inside, but the number doesn’t really matter, so long as you’re full of her blessings. Drool runs from the corner of your open, moaning mouth, but that doesn’t matter either. Your life as an incubator doesn’t matter. Being gaped by an insect woman doesn’t matter.", parse);
-				Text.NL();
-				Text.Add("Being the best possible egg-bearer is what matters. That, and cumming as often as possible while doing so.", parse);
-				Text.NL();
-				Text.Add("Your belly bulges. Your pussy creams. You cum, and cum, and cum until unconsciousness claims you.", parse);
+				Text.Out(`The ovipositor lodged inside of you shifts, twisting and rubbing against your overtaxed walls in whole new ways. It flexes, the base expanding slightly, and then that distention slides deeper inside you. Behind it, the ovipositor narrows once more. She must be giving you your first egg! You giggle with girlish glee, a little pleasure-drunk, and try to relax your muscles as much as possible.
+
+				Even with your acceptance, the egg still has a tough time squeezing through your increasingly narrow hole, slowing down the closer it gets to your womb. The ovipositor clenches and flexes, pushing harder and harder, forcing the obstruction deeper and deeper. You feel it’s about to tear you in two and make you cum all at the same time, and then, suddenly, it’s inside you, falling to rest against the soft wall of your womb.
+
+				The egg is so warm. Even buried within you, you can feel it radiating heat. It’s just a hair warmer than your own body, enough to remind you at all times that you’re carrying more than just your own flesh.
+
+				While you marvel at your motherhood, flush with multiple varieties of pleasure, another egg begins its journey inward. Then another, and another... and another. These come easier than the first. Your elasticized pussy has spread so terrifically wide. You doubt a lesser lover could ever please you again. The eggs come on, one after another, slowly filling your uterus with potential life, pressing by sensitive nerves on their way in.
+
+				The eighth egg has you cumming and screaming your devotion to the Queen. The body-wracking ecstasy goes on for so long that you lose count of just how many eggs slip inside, but the number doesn’t really matter, so long as you’re full of her blessings. Drool runs from the corner of your open, moaning mouth, but that doesn’t matter either. Your life as an incubator doesn’t matter. Being gaped by an insect woman doesn’t matter.
+
+				Being the best possible egg-bearer is what matters. That, and cumming as often as possible while doing so.
+
+				Your belly bulges. Your pussy creams. You cum, and cum, and cum until unconsciousness claims you.`);
 				Text.Flush();
 
 				Gui.NextPrompt(() => {
 					Text.Clear();
-					Text.Add("<b>Sometime later...</b>", parse);
-					Text.NL();
-					Text.Add("You lie in your cubby, masturbating to the feelings coming from your newly grown abdomen. Just as the queen promised, having a second womb doubled your pleasure, and your abdomen can hold so many more eggs that your belly! Every now and then it shifts in the most pleasant way, adjusting to the growing young within.", parse);
-					Text.NL();
-					Text.Add("The Queen promised you that it would double in size before you got to give birth. That’s why it’s so important that you stay in your cubby, where the lower level drones can keep you fed and the higher level ones can find you for release. Your body gives you all the entertainment you could ever want anyway. Why, just circling a tender nipple could keep your entertained for hours.", parse);
-					Text.NL();
-					Text.Add("The hive needs so many born to finish conquering the world, but you and your sisters are up to the task. You rub the shining dome of your gravid tummy. Oh yes, are you ever.", parse);
+					Text.Out(`<b>Sometime later...</b>
+
+					You lie in your cubby, masturbating to the feelings coming from your newly grown abdomen. Just as the queen promised, having a second womb doubled your pleasure, and your abdomen can hold so many more eggs that your belly! Every now and then it shifts in the most pleasant way, adjusting to the growing young within.
+
+					The Queen promised you that it would double in size before you got to give birth. That’s why it’s so important that you stay in your cubby, where the lower level drones can keep you fed and the higher level ones can find you for release. Your body gives you all the entertainment you could ever want anyway. Why, just circling a tender nipple could keep your entertained for hours.
+
+					The hive needs so many born to finish conquering the world, but you and your sisters are up to the task. You rub the shining dome of your gravid tummy. Oh yes, are you ever.`);
 					Text.Flush();
 
 					TimeStep({season: 1});
@@ -585,7 +562,7 @@ export namespace GolScenes {
 				Text.Add("The scepter you came for rolls down the heaped rubble to your [foot]. You can grab it and go, but you might never get a chance to make it with a Gol, and she seemed quite keen on breeding with you.", parse);
 			} else {
 				parse.fem = player.mfFem("king", "queen");
-				Text.Add("The Gol takes one shuddering step toward you before collapsing in a heap, moaning and thrashing. Her human arms dive into the simmering sexpot that dominates her crotch while the insectile ones cross behind her back, pressing her huge breasts in your direction enticingly. The flexible extension at the end of her abdomen raises up to point in your direction, dripping long strands of fragrant lubricant. <i>”You... win... Fuck me.... Be hive [fem]. I will serve you. Please! So hot!”</i>", parse);
+				Text.Add("The Gol takes one shuddering step toward you before collapsing in a heap, moaning and thrashing. Her human arms dive into the simmering sexpot that dominates her crotch while the insectile ones cross behind her back, pressing her huge breasts in your direction enticingly. The flexible extension at the end of her abdomen raises up to point in your direction, dripping long strands of fragrant lubricant. <i>“You... win... Fuck me.... Be hive [fem]. I will serve you. Please! So hot!”</i>", parse);
 				Text.NL();
 				Text.Add("Forgotten, the scepter rolls down the mound of rubble to stop at your [feet]. You can grab and go, but when will you get another chance to sexually dominate a Gol? Her eyes are glassy with lust, and her expression is pleading.", parse);
 			}
@@ -627,11 +604,11 @@ export namespace GolScenes {
 					Text.Clear();
 					Text.Add("No… you shouldn’t forget why you came here. You grab hold of the scepter and back away from the creature, still wary of her.", parse);
 					Text.NL();
-					Text.Add("<i>”M-my scepter!”</i> she mumbles, reaching after you half-heartedly, but you are able to easily avoid her grasping scythes. Feeling a bit curious, you ask her what it does.", parse);
+					Text.Add("<i>“M-my scepter!”</i> she mumbles, reaching after you half-heartedly, but you are able to easily avoid her grasping scythes. Feeling a bit curious, you ask her what it does.", parse);
 					Text.NL();
-					Text.Add("<i>”I… before, I… don’t remember,”</i> she struggles, faltering on her words. <i>”I remember standing there, the scepter in hand, and it all seemed so clear. I was to be ruler of all!”</i> The Gol shakes her head, a confused look on her face.", parse);
+					Text.Add("<i>“I… before, I… don’t remember,”</i> she struggles, faltering on her words. <i>“I remember standing there, the scepter in hand, and it all seemed so clear. I was to be ruler of all!”</i> The Gol shakes her head, a confused look on her face.", parse);
 					Text.NL();
-					Text.Add("<i>”I was… as none of my race has been before. With this, I could take down even the mighty towers of your people!”</i> You look at the scepter in wonder. Apparently, it holds quite a lot of power… you should be careful to not let it fall in the wrong hands. It seemingly played a role in giving the Gol an intellect far surpassing her old, feral mind. It’s not a stretch to say that it probably did the same for Lagon and his brood.", parse);
+					Text.Add("<i>“I was… as none of my race has been before. With this, I could take down even the mighty towers of your people!”</i> You look at the scepter in wonder. Apparently, it holds quite a lot of power… you should be careful to not let it fall in the wrong hands. It seemingly played a role in giving the Gol an intellect far surpassing her old, feral mind. It’s not a stretch to say that it probably did the same for Lagon and his brood.", parse);
 					Text.Flush();
 
 					TimeStep({minute: 30});
@@ -721,9 +698,9 @@ export namespace GolScenes {
 			Text.Add("Your waist contacts the Gol's before you know it, signalling the complete envelopment of your rod. You haven't even fully plumbed her depths yet. She's too deep, even for you. Resuming your forceful fucking, you consider that bottoming out is far better than being too big to fit inside and wrap your arms around the sapient insect-woman's waist for a better grip. Your bodies, lubricated by the slickness of her sex, slip and slide against one another with every dick-hilting thrust. Your voices are little more than grunts and groans. Reason long ago fled both your forms, replaced with simmering need and undiluted ecstasy.", parse);
 		} else if (p1cock.Len() < 152) { // 5'
 			Text.Add("You feel yourself hit what must be the edge of the Gol's last womb about the same time that your hips slap into her waist, fully embedding your tool to the hilt. It's like she was made for you. Taking a moment to savor this once in a lifetime opportunity, you grab her waist. Then, you resume your forceful fucking. Reason long ago fled your forms, and you twist and writhe against each other, lubricated in what feels like a curtain of your lover's gushing lube. Her groans mix with your grunts, filling the air with the sounds of simmering need mixed with undiluted ecstasy.", parse);
-	} else {
+		} else {
 			Text.Add("You feel yourself hit what must be the edge of the Gol's last womb long before you manage to bottom out. She's doesn't seem to mind, in the slightest. If anything, her trembling moans transform in throaty groans as you test her limits. She's clearly not been so filled in an age, and she loves it. Her abdomen looks swollen and distorted from the tremendous insertion, packed full of potential virility. She looks almost regretful that she can't take more of you, but undiluted ecstasy steals the expression away as soon as it comes. It barely matters anyway; she can handle a pretty tremendous amount of cock, ensuring you're suffused with pleasure.", parse);
-	}
+		}
 		Text.NL();
 		parse.len = p1cock.Len() >= 152 ? " despite the lack of any room for you to go" : "";
 		Text.Add("Lost in coital bliss, you fervently pump away, goaded on by the ebullient cries of the wriggling Gol. She lurches into orgasm, squirting what feels like a waterfall of her girlish honey down your legs, twisting in place so violently that the piled wreckage shifts dangerously. Her tunnel clenches and squeezes, almost unbearably warm against your flesh, pulling you deeper[len]. Her voice begs, <i>“Please! Fertilize me!”</i>", parse);
@@ -874,7 +851,6 @@ export namespace GolScenes {
 	export function CombatWinCunn(enc: GolEncounter) {
 		const player: Player = GAME().player;
 		const gol = enc.gol;
-		const lusty = gol.LustLevel() >= 0.5;
 		const p1cock = player.BiggestCock();
 
 		let parse: IParse = {
@@ -951,7 +927,7 @@ export namespace GolScenes {
 		Text.NL();
 		Text.Add("You could grab the scepter and your things and take off if you wished, but being so covered in her pheromones has left you feeling surprisingly giddy. Your netherlips feel even puffier than before, greedy for a touch, making that vaguely phallic, leaking tail look far more appetizing than it did a minute ago.", parse);
 		Text.NL();
-		Text.Add("<i>”I have… other things that could go inside your pussy,”</i> the Gol offers, her voice shaky but mesmerizing. <i>”Just lay back… I will fill you with my eggs, yes...”</i> Her tail twitches enticingly.", parse);
+		Text.Add("<i>“I have… other things that could go inside your pussy,”</i> the Gol offers, her voice shaky but mesmerizing. <i>“Just lay back… I will fill you with my eggs, yes...”</i> Her tail twitches enticingly.", parse);
 		Text.Flush();
 
 		TimeStep({hour: 1});
@@ -963,9 +939,9 @@ export namespace GolScenes {
 		options.push({ nameStr : "Stick it in",
 			func() {
 				Text.Clear();
-				Text.Add("You lie back in a daze, allowing the Gol to loom over you, covering your body in a sticky goo that drips from hidden glans on her body. When you realize what it’s for, it’s already too late; the strands have hardened into a cocoon around you, only exposing your head and nether region. The stuff is strong as steel, and you can barely move a muscle.", parse);
-				Text.NL();
-				Text.Add("<i>”Worry not, little one,”</i> the mantis-woman drones in a singsong voice. <i>”I shall fulfill your desires… ease the aching in your loins.”</i> She hovers over you, her tantalizing ovipositor <i>just</i> outside your reach.", parse);
+				Text.Out(`You lie back in a daze, allowing the Gol to loom over you, covering your body in a sticky goo that drips from hidden glans on her body. When you realize what it’s for, it’s already too late; the strands have hardened into a cocoon around you, only exposing your head and nether region. The stuff is strong as steel, and you can barely move a muscle.
+
+				“Worry not, little one,” the mantis-woman drones in a singsong voice. “I shall fulfill your desires… ease the aching in your loins.” She hovers over you, her tantalizing ovipositor <i>just</i> outside your reach.`);
 				Text.NL();
 
 				GolScenes.CombatLossIncEntry(gol);
@@ -975,9 +951,9 @@ export namespace GolScenes {
 		options.push({ nameStr : "Scepter",
 			func() {
 				Text.Clear();
-				Text.Add("No! You shake off the effects of the pheromones as best as you can. This creature wanted to enslave you and make you into a breeding slut not half an hour ago, you should know better than to let it take control.", parse);
-				Text.NL();
-				Text.Add("The Gol gives out a disappointed cry as you grab the scepter and back away from her, but she stays put, knowing better than to fight you.", parse);
+				Text.Out(`No! You shake off the effects of the pheromones as best as you can. This creature wanted to enslave you and make you into a breeding slut not half an hour ago, you should know better than to let it take control.
+
+				The Gol gives out a disappointed cry as you grab the scepter and back away from her, but she stays put, knowing better than to fight you.`);
 				Text.Flush();
 				Gui.NextPrompt(() => {
 					GolScenes.CombatAftermath(enc);
@@ -989,26 +965,22 @@ export namespace GolScenes {
 	}
 
 	export function CombatAftermath(enc: GolEncounter) {
-		const parse: IParse = {
-
-		};
-
 		Text.Clear();
-		Text.Add("Scepter in hand, you have what you came here for. A pity you couldn’t do anything for the poor souls that the Gol waylaid, but it looks like they’re long gone, dragged back to the hive. Just as well; you’re quite glad you didn’t have to face ten of these beasts at once. One thing is for sure, there’s still more of them out there, somewhere.", parse);
-		Text.NL();
-		Text.Add("Now; what are you to do with this one? Despite the thorough trashing you gave it, the creature looks like it’s slowly recovering, wobbling back on its legs unsteadily. There’s something… different about it, however. There is a wild look in her eyes, and she’s making very strange insectile sounds, interspersed with fragmented speech.", parse);
-		Text.NL();
-		Text.Add("<i>”No… you can’t… zzzgh… my rod… schee...”</i> she pants, wobbling from side to side. With a hungry look in her eyes, the Gol takes a few steps toward you with her scythe-like arms stretching for her treasured prize, only for her to fall down on her knees, shaking.", parse);
-		Text.NL();
-		Text.Add("<i>”M-mine!”</i> she cries, one last futile outburst. What little humanity she had seems to have left her completely; without the scepter, she seem to be nothing more than a feral bug once again. She almost looks a bit pitiful, but you are mindful of her sharp scythes flailing about.", parse);
-		Text.NL();
-		Text.Add("That reminds you… you really shouldn’t be staying around. Already, you can hear the buzzing of the drones returning to aid their queen - dozens of them skittering toward you with bared fangs. Not wanting to take on the entire hive, you hastily make your exit, the angry drones hard on your trail. The last you see of the Gol queen, she’s still trying to get to her feet, scrabbling mindlessly and hissing at her minions.", parse);
-		Text.NL();
-		Text.Add("You somehow manage to make your way back to the king’s road in one piece - the drones left you alone as soon as you left the canyon behind you. This isn’t the end of the threat however, and you shudder, knowing that you may have to fight these beasts again in the future. At least they won’t have the mind-altering scepter then.", parse);
-		Text.NL();
-		Text.Add("You should bring this back to the burrows as soon as you can, and perhaps alert the guards in Rigard of this threat.", parse);
-		Text.NL();
-		Text.Add("<b>You’ve acquired Lagon’s scepter.</b>", parse);
+		Text.Out(`Scepter in hand, you have what you came here for. A pity you couldn’t do anything for the poor souls that the Gol waylaid, but it looks like they’re long gone, dragged back to the hive. Just as well; you’re quite glad you didn’t have to face ten of these beasts at once. One thing is for sure, there’s still more of them out there, somewhere.
+
+		Now; what are you to do with this one? Despite the thorough trashing you gave it, the creature looks like it’s slowly recovering, wobbling back on its legs unsteadily. There’s something… different about it, however. There is a wild look in her eyes, and she’s making very strange insectile sounds, interspersed with fragmented speech.
+
+		“No… you can’t… zzzgh… my rod… schee...” she pants, wobbling from side to side. With a hungry look in her eyes, the Gol takes a few steps toward you with her scythe-like arms stretching for her treasured prize, only for her to fall down on her knees, shaking.
+
+		“M-mine!” she cries, one last futile outburst. What little humanity she had seems to have left her completely; without the scepter, she seem to be nothing more than a feral bug once again. She almost looks a bit pitiful, but you are mindful of her sharp scythes flailing about.
+
+		That reminds you… you really shouldn’t be staying around. Already, you can hear the buzzing of the drones returning to aid their queen - dozens of them skittering toward you with bared fangs. Not wanting to take on the entire hive, you hastily make your exit, the angry drones hard on your trail. The last you see of the Gol queen, she’s still trying to get to her feet, scrabbling mindlessly and hissing at her minions.
+
+		You somehow manage to make your way back to the king’s road in one piece - the drones left you alone as soon as you left the canyon behind you. This isn’t the end of the threat however, and you shudder, knowing that you may have to fight these beasts again in the future. At least they won’t have the mind-altering scepter then.
+
+		You should bring this back to the burrows as soon as you can, and perhaps alert the guards in Rigard of this threat.
+
+		<b>You’ve acquired Lagon’s scepter.</b>`);
 		Text.Flush();
 
 		GAME().burrows.flags.Access = BurrowsFlags.AccessFlags.Stage5;
