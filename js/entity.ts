@@ -491,11 +491,11 @@ export class Entity {
 
 		this.statusDefGear = [];
 
-		if (this.weaponSlot   && this.weaponSlot.Equip) {   this.weaponSlot.Equip(this); }
-		if (this.topArmorSlot && this.topArmorSlot.Equip) { this.topArmorSlot.Equip(this); }
-		if (this.botArmorSlot && this.botArmorSlot.Equip) { this.botArmorSlot.Equip(this); }
-		if (this.acc1Slot     && this.acc1Slot.Equip) {     this.acc1Slot.Equip(this); }
-		if (this.acc2Slot     && this.acc2Slot.Equip) {     this.acc2Slot.Equip(this); }
+		if (this.weaponSlot)   { this.weaponSlot.Equip(this); }
+		if (this.topArmorSlot) { this.topArmorSlot.Equip(this); }
+		if (this.botArmorSlot) { this.botArmorSlot.Equip(this); }
+		if (this.acc1Slot)     { this.acc1Slot.Equip(this); }
+		if (this.acc2Slot)     { this.acc2Slot.Equip(this); }
 
 		this.BalanceStats();
 	}
