@@ -1,7 +1,6 @@
-
+import * as _ from "lodash";
 import { IStorage } from "../istorage";
 import { Stat } from "../stat";
-import { Rand } from "../utility";
 import { BodyPart } from "./bodypart";
 import { Color } from "./color";
 import { RaceDesc } from "./race";
@@ -87,7 +86,7 @@ export class Breasts extends BodyPart {
 			nouns.push("hooter");
 			nouns.push("pillow");
 		}
-		return nouns[Rand(nouns.length)];
+		return _.sample(nouns);
 	}
 	public nounPlural() {
 		const size = this.size.Get();
@@ -109,7 +108,7 @@ export class Breasts extends BodyPart {
 			nouns.push("hooters");
 			nouns.push("pillows");
 		}
-		return nouns[Rand(nouns.length)];
+		return _.sample(nouns);
 	}
 	public Desc() {
 		const size = this.size.Get();
@@ -154,14 +153,82 @@ export class Breasts extends BodyPart {
 			adjs.push("monstrous");
 			adjs.push("Jacques-sized");
 		}
-		const adj = adjs[Rand(adjs.length)];
-
-		let cup;
-		if     (size <= 1    ) { cup = "manly"; } else if (size <= 2    ) { cup = "AA-cup"; } else if (size <= 3    ) { cup = "A-cup"; } else if (size <= 5    ) { cup = "B-cup"; } else if (size <= 7.5  ) { cup = "C-cup"; } else if (size <= 10   ) { cup = "D-cup"; } else if (size <= 12.5 ) { cup = "E-cup"; } else if (size <= 15   ) { cup = "F-cup"; } else if (size <= 17.5 ) { cup = "G-cup"; } else if (size <= 20   ) { cup = "H-cup"; } else if (size <= 22.5 ) { cup = "I-cup"; } else if (size <= 25   ) { cup = "J-cup"; } else if (size <= 27.5 ) { cup = "K-cup"; } else if (size <= 30   ) { cup = "L-cup"; } else if (size <= 32.5 ) { cup = "M-cup"; } else if (size <= 35   ) { cup = "N-cup"; } else if (size <= 37.5 ) { cup = "O-cup"; } else if (size <= 40   ) { cup = "P-cup"; } else if (size <= 42.5 ) { cup = "Q-cup"; } else if (size <= 45   ) { cup = "R-cup"; } else if (size <= 47.5 ) { cup = "S-cup"; } else if (size <= 50   ) { cup = "T-cup"; } else if (size <= 52.5 ) { cup = "U-cup"; } else if (size <= 55   ) { cup = "V-cup"; } else if (size <= 57.5 ) { cup = "W-cup"; } else if (size <= 60   ) { cup = "X-cup"; } else if (size <= 70   ) { cup = "XX-cup"; } else if (size <= 80   ) { cup = "XXX-cup"; } else if (size <= 90   ) { cup = "Y-cup"; } else if (size <= 100  ) { cup = "YY-cup"; } else if (size <= 110  ) { cup = "YYY-cup"; } else if (size <= 120  ) { cup = "Z-cup"; } else if (size <= 130  ) { cup = "ZZ-cup"; } else {                   cup = "ZZZ-cup"; }
-
+		const adj = _.sample(adjs);
 		const sizeStr = size / 2 + " inches";
 
-		return {a: "a pair of", adj, cup, size: sizeStr};
+		return {a: "a pair of", adj, cup: this.Cup(), size: sizeStr};
+	}
+	public Cup() {
+		const size = this.size.Get();
+		if (size <= 1) {
+			return "manly";
+		} else if (size <= 2) {
+			return "AA-cup";
+		} else if (size <= 3) {
+			return "A-cup";
+		} else if (size <= 5) {
+			return "B-cup";
+		} else if (size <= 7.5) {
+			return "C-cup";
+		} else if (size <= 10) {
+			return "D-cup";
+		} else if (size <= 12.5) {
+			return "E-cup";
+		} else if (size <= 15) {
+			return "F-cup";
+		} else if (size <= 17.5) {
+			return "G-cup";
+		} else if (size <= 20) {
+			return "H-cup";
+		} else if (size <= 22.5) {
+			return "I-cup";
+		} else if (size <= 25) {
+			return "J-cup";
+		} else if (size <= 27.5) {
+			return "K-cup";
+		} else if (size <= 30) {
+			return "L-cup";
+		} else if (size <= 32.5) {
+			return "M-cup";
+		} else if (size <= 35) {
+			return "N-cup";
+		} else if (size <= 37.5) {
+			return "O-cup";
+		} else if (size <= 40) {
+			return "P-cup";
+		} else if (size <= 42.5) {
+			return "Q-cup";
+		} else if (size <= 45) {
+			return "R-cup";
+		} else if (size <= 47.5) {
+			return "S-cup";
+		} else if (size <= 50) {
+			return "T-cup";
+		} else if (size <= 52.5) {
+			return "U-cup";
+		} else if (size <= 55) {
+			return "V-cup";
+		} else if (size <= 57.5) {
+			return "W-cup";
+		} else if (size <= 60) {
+			return "X-cup";
+		} else if (size <= 70) {
+			return "XX-cup";
+		} else if (size <= 80) {
+			return "XXX-cup";
+		} else if (size <= 90) {
+			return "Y-cup";
+		} else if (size <= 100) {
+			return "YY-cup";
+		} else if (size <= 110) {
+			return "YYY-cup";
+		} else if (size <= 120) {
+			return "Z-cup";
+		} else if (size <= 130) {
+			return "ZZ-cup";
+		} else {
+			return "ZZZ-cup";
+		}
 	}
 	public nipNoun() {
 		// TODO
@@ -199,7 +266,7 @@ export class Breasts extends BodyPart {
 	// TODO: lactation
 	public Long() {
 		const desc = this.Desc();
-		return `${desc.a} ${desc.adj} ${this.nounPlural()}`;
+		return `${desc.a} ${desc.adj}, ${desc.cup} ${this.nounPlural()}`;
 	}
 
 }

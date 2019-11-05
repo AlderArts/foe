@@ -1,5 +1,5 @@
 import { LowerBodyType } from "../body/body";
-import { Color } from "../body/color";
+import { ColorDesc } from "../body/color";
 import { Gender } from "../body/gender";
 import { Orifice } from "../body/orifice";
 import { EncounterTable } from "../encountertable";
@@ -291,7 +291,7 @@ export namespace KiakaiSexScenes {
 			name    : kiakai.name,
 			heatStirring : player.FirstCock() ? "stirring" : "heat",
 			priest       : kiakai.flags.InitialGender === Gender.male ? "priest" : "priestess",
-			eyeColor     : Color.Desc(kiakai.Eyes().color),
+			eyeColor     : ColorDesc(kiakai.Eyes().color),
 			manwoman     : kiakai.body.femininity.Get() > 0 ? "woman" : "man",
 			load         : player.HasBalls() ? "the contents of your sack" : "your load",
 			loadOrg      : player.HasBalls() ? "your balls" : "deep within your body",
@@ -1012,7 +1012,7 @@ export namespace KiakaiSexScenes {
 			name    : kiakai.name,
 			heatStirring : player.FirstCock() ? "stirring" : "heat",
 			priest       : kiakai.flags.InitialGender === Gender.male ? "priest" : "priestess",
-			eyeColor     : Color.Desc(kiakai.Eyes().color),
+			eyeColor     : ColorDesc(kiakai.Eyes().color),
 		};
 
 		parse = kiakai.ParserPronouns(parse);

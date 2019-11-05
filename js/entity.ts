@@ -14,7 +14,7 @@ import { BodyPartType } from "./body/bodypart";
 import { NippleType } from "./body/breasts";
 import { Butt } from "./body/butt";
 import { Cock } from "./body/cock";
-import { Color } from "./body/color";
+import { Color, ColorDesc } from "./body/color";
 import { Gender } from "./body/gender";
 import { IMouth } from "./body/head";
 import { Orifice } from "./body/orifice";
@@ -1809,7 +1809,7 @@ export class Entity {
 		Text.NL();
 
 		const eyeCount = Text.NumToText(this.body.head.eyes.count.Get());
-		const eyeColor = Color.Desc(this.body.head.eyes.color);
+		const eyeColor = ColorDesc(this.body.head.eyes.color);
 		const eyeS = this.body.head.eyes.count.Get() === 1 ? "" : "s";
 		Text.Add(`${ent.HeShe} ${ent.has} ${ent.faceLong}. ${ent.HisHer} ${eyeCount} ${eyeColor} ${ent.eye}${eyeS} observe the surroundings. `);
 		const hairDesc = this.body.head.hair.Long();

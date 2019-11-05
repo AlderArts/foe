@@ -1,6 +1,6 @@
 import * as _ from "lodash";
 
-import { Color } from "../../body/color";
+import { ColorDesc } from "../../body/color";
 import { Encounter } from "../../combat";
 import { Entity } from "../../entity";
 import { GAME, TimeStep, WORLD, WorldTime } from "../../GAME";
@@ -1699,7 +1699,7 @@ export namespace LeiScenes {
 			Text.NL();
 			Text.Add("You proceed slowly, scanning the walls around you carefully, staring intently into shadows. At the corner of your eye, you see one shadow move, jumping out from a doorway, and darting toward you. You spin, and desperately jump backward, as a shortsword stops where you had been standing, pointing at your chest.", parse);
 			Text.NL();
-			parse.eyecolor = Color.Desc(player.Eyes().color);
+			parse.eyecolor = ColorDesc(player.Eyes().color);
 			Text.Add("<i>“Oh, that is mighty nice, poppet.”</i> You stand facing the man. Beneath his drawn hood, his orange glint with reflections of distant light, as you know your own [eyecolor] ones must be. <i>“I dinnae think ye could see in ‘ere. Still, that was an awful close dodge, wa’n’t it? And can ye defend yeself now? Don’t seem wise to follow me in ‘ere.”</i>", parse);
 		} else {
 			Text.Add("To your left and right, you feel as much as see walls looming, blocking what little light there was from reaching further. The narrow strip of cloudy sky above is a slightly lighter darkness in your vision. Bare hints of outlines in front suggest boxes or perhaps piles of rubbish. If the man just chose to stand pressed against a wall somewhere, you’re not sure you’d be able to find him.", parse);

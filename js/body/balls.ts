@@ -1,8 +1,7 @@
-
+import * as _ from "lodash";
 import { IStorage } from "../istorage";
 import { Stat } from "../stat";
 import { Text } from "../text";
-import { Rand } from "../utility";
 import { BodyPart } from "./bodypart";
 import { Color } from "./color";
 import { RaceDesc } from "./race";
@@ -84,7 +83,7 @@ export class Balls extends BodyPart {
 			nouns.push("nut");
 			nouns.push("testicle");
 		}
-		let noun = nouns[Rand(nouns.length)];
+		let noun = _.sample(nouns);
 		if (count > 1) { noun += "s"; }
 		return noun;
 	}
@@ -127,7 +126,7 @@ export class Balls extends BodyPart {
 		if (size >= 22 && size < 27) { adjs.push("beachball-sized"); }
 		if (size >= 27) {              adjs.push("hideously swollen and oversized"); }
 
-		return adjs[Rand(adjs.length)];
+		return _.sample(adjs);
 	}
 
 	public adj2() {
@@ -149,7 +148,7 @@ export class Balls extends BodyPart {
 			return "";
 		}
 
-		return adjs[Rand(adjs.length)];
+		return _.sample(adjs);
 	}
 
 	public Short() {

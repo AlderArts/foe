@@ -1,4 +1,4 @@
-import { Rand } from "../utility";
+import * as _ from "lodash";
 
 enum Gender {
 	male   = 0,
@@ -10,32 +10,20 @@ enum Gender {
 
 namespace Gender {
 	export function Desc(gender: Gender) {
-		let r;
 		switch (gender) {
 		case Gender.male: return "male";
 		case Gender.female: return "female";
 		case Gender.herm:
-			r = Rand(2);
-			if (r === 0) {
-				return "hermaphrodite";
-			} else {
-				return "herm";
-			}
+			return _.sample(["hermaphrodite", "herm"]);
 		default: return "genderless";
 		}
 	}
 	export function Noun(gender: Gender) {
-		let r;
 		switch (gender) {
 		case Gender.male: return "man";
 		case Gender.female: return "woman";
 		case Gender.herm:
-			r = Rand(2);
-			if (r === 0) {
-				return "herm";
-			} else {
-				return "herm";
-			}
+			return _.sample(["hermaphrodite", "herm"]);
 		default: return "neuter";
 		}
 	}

@@ -30,7 +30,6 @@ import { Party } from "../../party";
 import { PregnancyHandler } from "../../pregnancy";
 import { IParse, Text } from "../../text";
 import { TF, TFItem } from "../../tf";
-import { Rand } from "../../utility";
 import { Kiakai } from "../kiakai";
 import { KiakaiFlags } from "../kiakai-flags";
 import { Player } from "../player";
@@ -1380,7 +1379,7 @@ export namespace RosalinScenes {
 					const r = ["equine cum", "harpy eggs", "mandrake", "nightshade", "spider eggs"];
 					if (rosalin.FirstCock()) { r.push("of my cum"); }
 					if (rosalin.Lactation()) { r.push("of my milk"); }
-					parse.seasoning = r[Rand(r.length)];
+					parse.seasoning = _.sample(r);
 
 					AlchemyItems.Felinix.Use(player);
 
