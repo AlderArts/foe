@@ -6,9 +6,9 @@
   "scripts": {
     "build": "webpack",
     "release": "node --max_old_space_size=4096 ./node_modules/webpack/bin/webpack.js --mode production",
-	"start": "webpack-dev-server",
-	"test": "cross-env TS_NODE_COMPILER_OPTIONS={\\\"module\\\":\\\"commonjs\\\"} TS_NODE_FILES=true mocha --exit --require ts-node/register --colors test/**/*.ts",
-	"coverage": "nyc npm run test"
+    "start": "webpack-dev-server",
+    "test": "cross-env TS_NODE_COMPILER_OPTIONS={\\\"module\\\":\\\"commonjs\\\"} TS_NODE_FILES=true mocha -r ts-node/register -r ignore-styles --colors -r jsdom-global/register test/**/*.ts",
+    "coverage": "nyc npm run test"
   },
   "author": "aldergames",
   "repository": "https://github.com/AlderArts/foe",
@@ -27,7 +27,10 @@
     "cross-env": "^6.0.3",
     "css-loader": "^3.0.0",
     "file-loader": "^4.0.0",
+    "ignore-styles": "^5.0.1",
     "jquery": "^3.4.1",
+    "jsdom": "^15.2.1",
+    "jsdom-global": "^3.0.2",
     "lodash": "^4.17.14",
     "lz-string": "^1.4.4",
     "mini-css-extract-plugin": "^0.7.0",
