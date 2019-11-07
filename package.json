@@ -7,7 +7,7 @@
     "build": "webpack",
     "release": "node --max_old_space_size=4096 ./node_modules/webpack/bin/webpack.js --mode production",
     "start": "webpack-dev-server",
-    "test": "cross-env TS_NODE_COMPILER_OPTIONS={\\\"module\\\":\\\"commonjs\\\"} TS_NODE_FILES=true mocha -r ts-node/register -r ignore-styles --colors -r jsdom-global/register test/**/*.ts",
+    "test": "cross-env TS_NODE_COMPILER_OPTIONS={\\\"module\\\":\\\"commonjs\\\"} TS_NODE_FILES=true mocha -r ts-node/register -r ignore-styles --colors -r test/mocks/dom-mock.js test/**/*.ts",
     "coverage": "nyc npm run test"
   },
   "author": "aldergames",
