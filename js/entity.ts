@@ -120,13 +120,14 @@ class EntityParser {
 	public mfFem(male: string, female: string) { return this.ent.mfFem(male, female); }
 	public mfTrue(male: string, female: string) { return this.ent.mfTrue(male, female); }
 	public taur(iftaur: string, nottaur: string) { return this.ent.IsTaur() ? iftaur : nottaur; }
-	public naga(ifnaga: string, notnaga: string) { return this.ent.IsTaur() ? ifnaga : notnaga; }
-	public goo(ifgoo: string, notgoo: string) { return this.ent.IsTaur() ? ifgoo : notgoo; }
+	public naga(ifnaga: string, notnaga: string) { return this.ent.IsNaga() ? ifnaga : notnaga; }
+	public goo(ifgoo: string, notgoo: string) { return this.ent.IsGoo() ? ifgoo : notgoo; }
 	public flexible(ifflexible: string, notflexible: string) { return this.ent.IsFlexible() ? ifflexible : notflexible; }
 	public hashair(ifhashair: string, nothashair: string) { return this.ent.HasHair() ? ifhashair : nothashair; }
 	public longhair(iflonghair: string, notlonghair: string) { return this.ent.HasLongHair() ? iflonghair : notlonghair; }
 	public longtongue(iflongtongue: string, notlongtongue: string) { return this.ent.LongTongue() ? iflongtongue : notlongtongue; }
 	public get cocks() { return this.ent.MultiCockDesc(); }
+	public get cocksandballs() { return `${this.cocks}${this.ent.HasBalls() ? ` and ${this.balls}` : ""}`; }
 	public get cock() { const cock = this.ent.GetPreferredCock() || this.ent.FirstCock(); return cock.Short(); }
 	public get cockTip() { const cock = this.ent.GetPreferredCock() || this.ent.FirstCock(); return cock.TipShort(); }
 	public get knot() { const cock = this.ent.GetPreferredCock() || this.ent.FirstCock(); return cock.KnotShort(); }
@@ -134,6 +135,7 @@ class EntityParser {
 	public get butt() { return this.ent.Butt().Short(); }
 	public get anus() { return this.ent.Butt().AnalShort(); }
 	public get vag() { return this.ent.FirstVag().Short(); }
+	public get vagoranus() { return this.ent.FirstVag() ? this.vag : this.anus; }
 	public get clit() { return this.ent.FirstVag().ClitShort(); }
 	public get gen() {
 		let ret = "";
