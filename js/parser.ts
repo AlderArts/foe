@@ -58,5 +58,7 @@ export namespace GP {
 		public get itsTheyve() { return this.cond ? "they’ve" : "it’s"; }
 		public get thisThese() { return this.cond ? "these" : "this"; }
 		public get thatThose() { return this.cond ? "those" : "that"; }
+
+		public plural(many: string, one: string) { return this.cond ? many : one; }
 	}
 }
