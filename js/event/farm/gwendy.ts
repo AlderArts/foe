@@ -110,6 +110,10 @@ export class Gwendy extends Entity {
 		return storage;
 	}
 
+	public EPlus(): boolean {
+		return this.FirstCock() !== undefined;
+	}
+
 	// Schedule
 	public IsAtLocation(location: ILocation) {
 		const world = WORLD();
