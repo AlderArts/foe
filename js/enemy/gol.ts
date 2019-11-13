@@ -14,7 +14,6 @@ import { Color } from "../body/color";
 import { Race } from "../body/race";
 import { Encounter } from "../combat";
 import { Element } from "../damagetype";
-import { EncounterTable } from "../encountertable";
 import { ICombatEncounter, ICombatOrder } from "../entity";
 import { Sex } from "../entity-sex";
 import { Player } from "../event/player";
@@ -28,10 +27,10 @@ import { WeaponsItems } from "../items/weapons";
 import { IChoice } from "../link";
 import { BurrowsFlags } from "../loc/burrows-flags";
 import { SetGameOverButton } from "../main-gameover";
+import { GP } from "../parser";
 import { Party } from "../party";
 import { IParse, Text } from "../text";
 import { BossEntity } from "./boss";
-import { GP } from "../parser";
 
 export class GolQueen extends BossEntity {
 	constructor() {
@@ -120,17 +119,11 @@ export class GolQueen extends BossEntity {
 	public Act(encounter: ICombatEncounter, activeChar: ICombatOrder) {
 		const party: Party = GAME().party;
 		// TODO: Very TEMP
-		Text.Add(this.name + " acts! Buzz!");
+		Text.Add(`${this.name} acts! Buzz!`);
 		Text.NL();
 
 		// Pick a random target
 		const t = this.GetSingleTarget(encounter, activeChar);
-
-		const parseVars = {
-			name   : this.name,
-			hisher : this.hisher(),
-			tName  : t.name,
-		};
 
 		const choice = Math.random();
 		if (choice < 0.2) { // TODO
@@ -527,31 +520,26 @@ export namespace GolScenes {
 
 	export function CombatWin() {
 		const player: Player = GAME().player;
+		const pc = player.Parser;
 		const enc = this;
 		const gol: GolQueen = enc.gol;
 		SetGameState(GameState.Event, Gui);
 
-		const parse: IParse = {
-			feet() { return player.FeetDesc(); },
-			foot() { return player.FootDesc(); },
-		};
-
 		Gui.Callstack.push(() => {
 			Text.Clear();
 			if (gol.LustLevel() < 0.5) {
-				Text.Add("The Gol collapses under the weight of her body now that her strength is exhausted. All six legs splay out, and her human-like torso dips forward, barely held aloft by her four quivering arms. The scepter lies discarded so that she might stay at least partially upright.", parse);
-				Text.NL();
-				Text.Add("<i>“How? I... so much power. I could do anything! I... was... sure...”</i> she pants. Her eyes gleam with the undimmed light of defiance, but her body, weakened by the fight, is unable to offer up a sliver of resistance.", parse);
-				Text.NL();
-				Text.Add("The scepter you came for rolls down the heaped rubble to your [foot]. You can grab it and go, but you might never get a chance to make it with a Gol, and she seemed quite keen on breeding with you.", parse);
+				Text.Out(`The Gol collapses under the weight of her body now that her strength is exhausted. All six legs splay out, and her human-like torso dips forward, barely held aloft by her four quivering arms. The scepter lies discarded so that she might stay at least partially upright.
+
+				“How? I... so much power. I could do anything! I... was... sure...” she pants. Her eyes gleam with the undimmed light of defiance, but her body, weakened by the fight, is unable to offer up a sliver of resistance.
+
+				The scepter you came for rolls down the heaped rubble to your ${pc.foot}. You can grab it and go, but you might never get a chance to make it with a Gol, and she seemed quite keen on breeding with you.`);
 			} else {
-				parse.fem = player.mfFem("king", "queen");
-				Text.Add("The Gol takes one shuddering step toward you before collapsing in a heap, moaning and thrashing. Her human arms dive into the simmering sexpot that dominates her crotch while the insectile ones cross behind her back, pressing her huge breasts in your direction enticingly. The flexible extension at the end of her abdomen raises up to point in your direction, dripping long strands of fragrant lubricant. <i>“You... win... Fuck me.... Be hive [fem]. I will serve you. Please! So hot!”</i>", parse);
-				Text.NL();
-				Text.Add("Forgotten, the scepter rolls down the mound of rubble to stop at your [feet]. You can grab and go, but when will you get another chance to sexually dominate a Gol? Her eyes are glassy with lust, and her expression is pleading.", parse);
+				Text.Out(`The Gol takes one shuddering step toward you before collapsing in a heap, moaning and thrashing. Her human arms dive into the simmering sexpot that dominates her crotch while the insectile ones cross behind her back, pressing her huge breasts in your direction enticingly. The flexible extension at the end of her abdomen raises up to point in your direction, dripping long strands of fragrant lubricant. “You... win... Fuck me.... Be hive ${player.mfFem("king", "queen")}. I will serve you. Please! So hot!”
+
+				Forgotten, the scepter rolls down the mound of rubble to stop at your ${pc.feet}. You can grab and go, but when will you get another chance to sexually dominate a Gol? Her eyes are glassy with lust, and her expression is pleading.`);
 			}
 			Text.NL();
-			Text.Add("For now, the others seem to be gone, along with their captives. Perhaps they’ve retreated to the hive the Gol spoke about… at any rate, you think you have at least some time before they return.", parse);
+			Text.Out(`For now, the others seem to be gone, along with their captives. Perhaps they’ve retreated to the hive the Gol spoke about… at any rate, you think you have at least some time before they return.`);
 			Text.Flush();
 
 			// [Hyper fuck][Tailfuck][Cunnilingus][Scepter]
@@ -586,13 +574,13 @@ export namespace GolScenes {
 			options.push({ nameStr : "Scepter",
 				func() {
 					Text.Clear();
-					Text.Add("No… you shouldn’t forget why you came here. You grab hold of the scepter and back away from the creature, still wary of her.", parse);
-					Text.NL();
-					Text.Add("<i>“M-my scepter!”</i> she mumbles, reaching after you half-heartedly, but you are able to easily avoid her grasping scythes. Feeling a bit curious, you ask her what it does.", parse);
-					Text.NL();
-					Text.Add("<i>“I… before, I… don’t remember,”</i> she struggles, faltering on her words. <i>“I remember standing there, the scepter in hand, and it all seemed so clear. I was to be ruler of all!”</i> The Gol shakes her head, a confused look on her face.", parse);
-					Text.NL();
-					Text.Add("<i>“I was… as none of my race has been before. With this, I could take down even the mighty towers of your people!”</i> You look at the scepter in wonder. Apparently, it holds quite a lot of power… you should be careful to not let it fall in the wrong hands. It seemingly played a role in giving the Gol an intellect far surpassing her old, feral mind. It’s not a stretch to say that it probably did the same for Lagon and his brood.", parse);
+					Text.Out(`No… you shouldn’t forget why you came here. You grab hold of the scepter and back away from the creature, still wary of her.
+
+					“M-my scepter!” she mumbles, reaching after you half-heartedly, but you are able to easily avoid her grasping scythes. Feeling a bit curious, you ask her what it does.
+
+					“I… before, I… don’t remember,” she struggles, faltering on her words. “I remember standing there, the scepter in hand, and it all seemed so clear. I was to be ruler of all!” The Gol shakes her head, a confused look on her face.
+
+					“I was… as none of my race has been before. With this, I could take down even the mighty towers of your people!” You look at the scepter in wonder. Apparently, it holds quite a lot of power… you should be careful to not let it fall in the wrong hands. It seemingly played a role in giving the Gol an intellect far surpassing her old, feral mind. It’s not a stretch to say that it probably did the same for Lagon and his brood.`);
 					Text.Flush();
 
 					TimeStep({minute: 30});
