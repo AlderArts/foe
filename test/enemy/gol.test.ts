@@ -16,8 +16,8 @@ describe("GolQueen", () => {
 		const gol = new GolQueen();
 		const drops = gol.DropTable();
 
-		expect(_.some(drops, (obj) => {return obj.it.id === "quest3";})).to.be.true; // Lagon's Scepter
-		expect(_.some(drops, (obj) => {return obj.it.id === "dag1";})).to.be.true; // GolClaw
+		expect(_.some(drops, (obj) => obj.it.id === "quest3")).to.be.true; // Lagon's Scepter
+		expect(_.some(drops, (obj) => obj.it.id === "dag1")).to.be.true; // GolClaw
 	});
 });
 

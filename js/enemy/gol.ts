@@ -239,25 +239,21 @@ export namespace GolScenes {
 		const player: Player = GAME().player;
 		const enc: GolEncounter = this;
 		const gol = enc.gol;
-		SetGameState(GameState.Event, Gui);
 
-		const parse: IParse = {
-			foot() { return player.FootDesc(); },
-		};
+		const pc = player.Parser;
+
+		SetGameState(GameState.Event, Gui);
 
 		const lusty = player.LustLevel() > 0.7;
 
 		Text.Clear();
-		parse.lust = lusty ? ", lust-" : "";
-		Text.Add("Looming above your defeated[lust]stricken form, the Gol leers at you, all six of her eyes focusing down at you. You do your best to scramble away through the rubble, but it's quite difficult to move in your state. She thoughtfully strokes her chin with a humanlike arm, holding the scepter aloft in her other. <i>“You're different than the others. They broke without much effort.”</i> She snaps her mantis-like claws. <i>“All I had to do was treat them with a degree of tenderness, perhaps expose them to my pollen, and they became willing breeders.”</i>", parse);
-		Text.NL();
-		Text.Add("You try to crawl away, but she hooks an insectile limb around your [foot].", parse);
-		Text.NL();
-		Text.Add("<i>“Tsk, tsk. Just because you can struggle doesn't mean you won't be useful to my hive.”</i> She spins the scepter in her hand. <i>“Do you think an item such as this - one that gave me the gifts of thought and speech - could be used to bring you into the fold? To make you willingly, eagerly mine?”</i> She skitters forward, dislodging bits of wood as she moves. The insectile horror looms large as she bends forward, dangling her scepter just above your face. <i>“You know what? I think it can.”</i>", parse);
-		Text.NL();
-		parse.lust = lusty ? ", no matter how horny you are" : "";
-		parse.lust2 = lusty ? " and lust" : "";
-		Text.Add("You're not going to give her the chance[lust]! You twist to the side and claw forward, giving yourself a half-dozen splinters in the process. The pain is nothing next to the fear[lust2] coursing through you.", parse);
+		Text.Out(`Looming above your defeated, ${lusty ? "lust-" : ""}stricken form, the Gol leers at you, all six of her eyes focusing down at you. You do your best to scramble away through the rubble, but it's quite difficult to move in your state. She thoughtfully strokes her chin with a humanlike arm, holding the scepter aloft in her other. “You're different than the others. They broke without much effort.” She snaps her mantis-like claws. “All I had to do was treat them with a degree of tenderness, perhaps expose them to my pollen, and they became willing breeders.”
+
+		You try to crawl away, but she hooks an insectile limb around your ${pc.foot}.
+
+		“Tsk, tsk. Just because you can struggle doesn't mean you won't be useful to my hive.” She spins the scepter in her hand. “Do you think an item such as this - one that gave me the gifts of thought and speech - could be used to bring you into the fold? To make you willingly, eagerly mine?” She skitters forward, dislodging bits of wood as she moves. The insectile horror looms large as she bends forward, dangling her scepter just above your face. “You know what? I think it can.”
+
+		You're not going to give her the chance${lusty ? ", no matter how horny you are" : ""}! You twist to the side and claw forward, giving yourself a half-dozen splinters in the process. The pain is nothing next to the fear${lusty ? " and lust" : ""} coursing through you.`);
 		Text.NL();
 
 		let incubator: boolean;
@@ -271,18 +267,15 @@ export namespace GolScenes {
 		}, 1.0, () => player.FirstCock() !== undefined);
 		scenes.Get();
 
-		parse.inc = incubator ? "incubator" : "drone prince";
-		parse.him = player.mfFem("him", "her");
+		Text.Out(`“Oh, that won't do,” the Gol coos, excitedly scampering after you. Pincers hook underneath your shoulders and lift you aloft. “I can't have my new ${incubator ? "incubator" : "drone prince"} injuring ${pc.mfFem("him", "her")}self.” She looks almost upset. “What kind of Queen would that make me?”
 
-		Text.Add("<i>“Oh, that won't do,”</i> the Gol coos, excitedly scampering after you. Pincers hook underneath your shoulders and lift you aloft. <i>“I can't have my new [inc] injuring [him]self.”</i> She looks almost upset. <i>“What kind of Queen would that make me?”</i>", parse);
-		Text.NL();
-		Text.Add("You feebly struggle once, then sag back, defeated and wondering what fresh terrors she's going to inflict upon you.", parse);
-		Text.NL();
-		Text.Add("The Gol chirps in happiness. <i>“That's more like it. I don't desire your pain, only your compliance.”</i> One of her legs tugs a ragged-looking quilt out from the caravan's rubble, its once fine stitching torn in places. Its fluff has bled out in places, but there is no doubt that it was a well-made blanket. Feeling the comforting softness press against you as you're laid down is a stark relief. <i>“Now, why don't you just forget about your old life and focus on serving me. It'll be easier for you that way.”</i>", parse);
-		Text.NL();
-		Text.Add("You spit your defiance at her. There is still too much left for you to do!", parse);
-		Text.NL();
-		Text.Add("She shakes her head sadly. <i>“How petty and simple your goals are. The world does not revolve around you, little meatling. The scepter has helped me see that. It is only by working together in unified purpose that we can make anything good, and who better to guide that purpose than the one who holds the scepter?”</i> Her armored bulk skitters forward. Pointed legs stab through the blanket on either side of you, and you do your best to hold still lest you gain a few new holes. <i>“I will give you purpose.”</i>", parse);
+		You feebly struggle once, then sag back, defeated and wondering what fresh terrors she's going to inflict upon you.
+
+		The Gol chirps in happiness. “That's more like it. I don't desire your pain, only your compliance.” One of her legs tugs a ragged-looking quilt out from the caravan's rubble, its once fine stitching torn in places. Its fluff has bled out in places, but there is no doubt that it was a well-made blanket. Feeling the comforting softness press against you as you're laid down is a stark relief. “Now, why don't you just forget about your old life and focus on serving me. It'll be easier for you that way.”
+
+		You spit your defiance at her. There is still too much left for you to do!
+
+		She shakes her head sadly. “How petty and simple your goals are. The world does not revolve around you, little meatling. The scepter has helped me see that. It is only by working together in unified purpose that we can make anything good, and who better to guide that purpose than the one who holds the scepter?” Her armored bulk skitters forward. Pointed legs stab through the blanket on either side of you, and you do your best to hold still lest you gain a few new holes. “I will give you purpose.”`);
 		Text.Flush();
 
 		Gui.NextPrompt(() => {
