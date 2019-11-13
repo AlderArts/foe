@@ -4,6 +4,7 @@
  *
  */
 
+import * as _ from "lodash";
 import { Abilities } from "../abilities";
 import { Images } from "../assets";
 import { Body } from "../body/body";
@@ -30,6 +31,7 @@ import { SetGameOverButton } from "../main-gameover";
 import { Party } from "../party";
 import { IParse, Text } from "../text";
 import { BossEntity } from "./boss";
+import { GP } from "../parser";
 
 export class GolQueen extends BossEntity {
 	constructor() {
@@ -256,16 +258,15 @@ export namespace GolScenes {
 		You're not going to give her the chance${lusty ? ", no matter how horny you are" : ""}! You twist to the side and claw forward, giving yourself a half-dozen splinters in the process. The pain is nothing next to the fear${lusty ? " and lust" : ""} coursing through you.`);
 		Text.NL();
 
-		let incubator: boolean;
+		const incArray = [];
+		if (player.FirstVag()) {
+			incArray.push(true);
+		}
+		if (player.FirstCock()) {
+			incArray.push(false);
+		}
 
-		const scenes = new EncounterTable();
-		scenes.AddEnc(() => {
-			incubator = true;
-		}, 1.0, () => player.FirstVag() !== undefined);
-		scenes.AddEnc(() => {
-			incubator = false;
-		}, 1.0, () => player.FirstCock() !== undefined);
-		scenes.Get();
+		const incubator = _.sample(incArray);
 
 		Text.Out(`“Oh, that won't do,” the Gol coos, excitedly scampering after you. Pincers hook underneath your shoulders and lift you aloft. “I can't have my new ${incubator ? "incubator" : "drone prince"} injuring ${pc.mfFem("him", "her")}self.” She looks almost upset. “What kind of Queen would that make me?”
 
@@ -364,8 +365,8 @@ export namespace GolScenes {
 
 			Text.Out(`You cum to the feeling of utter violation. If it weren’t for the steel-strong silk binding you in place, you’d be thrashing like a wild ${player.mfFem("man", "woman")}. `);
 			if (player.FirstCock()) {
-				const parse: IParse = Text.ParserPlural(undefined, player.NumCocks() > 1);
-				Text.Add(`Your ${pc.cocks} launch[notEs] gob after gob of forgotten cum onto your face, but [itThey] only serves to make your situation all the hotter. Such a heedless, arrogant release, riding high on the waves of your true pleasure, the pleasure of serving your purpose. All that a dick is for is making you an even wetter, sluttier drone for the Queen until she decrees otherwise.`, parse);
+				const c = new GP.Plural(player.NumCocks() > 1);
+				Text.Out(`Your ${pc.cocks} launch${c.notEs} gob after gob of forgotten cum onto your face, but ${c.itThey} only serves to make your situation all the hotter. Such a heedless, arrogant release, riding high on the waves of your true pleasure, the pleasure of serving your purpose. All that a dick is for is making you an even wetter, sluttier drone for the Queen until she decrees otherwise.`);
 			} else {
 				Text.Out("Your juices run in streams around the dick, practically spraying out of you as you give in to the true pleasure. It’s the perfect orgasm for a perfect, slutty drone, one who will do this again and again, so long as the Queen wills it.");
 			}
@@ -415,56 +416,47 @@ export namespace GolScenes {
 		const player: Player = GAME().player;
 		const p1cock = player.BiggestCock();
 
-		let parse: IParse = {
-			vagina() { return player.FirstVag().Short(); },
-			cocks() { return player.MultiCockDesc(); },
-			cock() { return p1cock.Short(); },
-			cockTip() { return p1cock.TipShort(); },
-			armor() { return player.ArmorDesc(); },
-			face() { return player.FaceDesc(); },
-			hair() { return player.Hair().Short(); },
-			legs() { return player.LegsDesc(); },
-			butt() { return player.Butt().Short(); },
-		};
+		const pc = player.Parser;
+		const c = new GP.Plural(player.NumCocks() > 1);
 
 		const growcock = p1cock.Len() < 90;
 
-		parse = Text.ParserPlural(parse, player.NumCocks() > 1);
+		player.SetPreferredCock(p1cock);
 
 		Text.Clear();
-		Text.Add("Gingerly, the Gol lowers herself down onto you, pinning you under her soft underside. It's less uncomfortable than you would think, but it does put you in the unfortunate position of having her fragrant gash positioned a few inches above your face.", parse);
-		Text.NL();
-		Text.Add("She wiggles, getting comfortable, and in the process rubbing your uncomfortably hard penis between your bodies. Dragging the scepter's head around her engorging folds, the feminine creature promises, <i>“You're going to get very acquainted with this hole soon.”</i> She brings it up to do tiny circuits around a very prominent clitoris. <i>“The males from the caravan were quite taken with it. I believe their exact words were that it was entrancing.”</i>", parse);
-		Text.NL();
-		Text.Add("Entrancing? You don't really see it. Sure, it's a huge, fertile-looking pussy with puffy, wet lips that would feel so good to slip inside of it, but you wouldn't really call it entrancing. It's just a pussy. A nice-looking example of feminine genitalia, but nothing more.", parse);
-		Text.NL();
-		Text.Add("<i>“There you go, staring at it like it's the most important thing in the world. If you aren't careful, you're going to want to fuck it more than anything - more than having free will.”</i> The Gol playfully strokes your hair.", parse);
-		Text.NL();
-		Text.Add("Yeah, right. You ignore her condescending petting. You could look somewhere else if you wanted. There's nothing stopping you. It's just... just that it's her most interesting feature - the best part of her for sure. The smell of it is even kind of pleasant in its way. You squirm a little, feeling more than a little hot, but that's only because she's pinning it down and making you look at her fuckable cunt. It's a perfectly normal reaction. A droplet of lubrication falls on your cheek, making you wonder just what it would taste like.", parse);
-		Text.NL();
-		Text.Add("Giggling excitedly, the Gol drags the scepter across her increasingly wet womanhood once more. Her lips briefly part, revealing a flash of its insides so pink that you could swear it burns an afterimage into your retinas. <i>“It's okay if you don't look away. That's what I want, after all. Do you want me to hold it open so that you can see it better?”</i> From the corner of your vision, you see her cock her head questioningly.", parse);
-		Text.NL();
-		Text.Add("When a sexy girl asks you if you want to see the inside of her pussy, you don't say no. <i>“Yes...”</i> Your [cocks] surge[notS] excitedly at the prospect. Damn, you're really, really hard. She doesn't have any kind of magic vagina powers or anything, she's just really hot, wet, and smells like bottled sex. Your [cocks] strains[notS] inside your [armor]. You'd have to be castrated not to want a slit like that. <i>“Please?”</i>", parse);
-		Text.NL();
-		Text.Add("The Gol says something, but you're too busy watching her fingers hook into her sides of her dribbling delta and pull it wide opening, revealing the wettest, slickest looking pussy you've ever laid eyes on it. And it's just so... so... <i>pink</i>.", parse);
-		Text.NL();
-		Text.Add("You breathe deeply and sigh in delight. Her scent smells even more potent now - practically all-consuming. The air itself seems stained with her incredibly feminine flavor. Perhaps it's from how wet she's gotten? You thrill at the knowledge that she's lubricating for you, making herself ready for you to fuck her. If only you hadn't tried to fight her, you could be fucking <i>right now</i>. You groan and twist beneath her, rubbing your dick against her supple underbelly. Your eyes longingly trace the contours of her interior, and your mouth falls open, hoping to catch one of the glistening droplets that are falling over your [face].", parse);
-		Text.NL();
-		Text.Add("The Gol dips a finger inside, gathering some of her juices up. <i>“Do you want a taste?”</i> She giggles. <i>“Once you try it, you'll never want another woman again. You'll be hooked on my pussy.”</i>", parse);
-		Text.NL();
-		Text.Add("It's enough to make you chuckle. <i>“Just because I'd be eating you out if I could doesn't mean I'm going to follow you around, worshipping it all day long.”</i> You smirk, then open wide. <i>“Go on, let me have a taste so we can stop this silly game and get to the fucking.”</i>", parse);
-		Text.NL();
-		Text.Add("<i>“Now that's the kind of eagerness I like to hear from my drones!”</i> The Gol puts her gooey finger on your lip. Her hand blocks your view of her entrance, but that's just fine, you figure. The view would just distract you from the taste. Closing your eyes, you suck her proffered digit into your maw and run your tongue over it, licking her flavorful juices from her knuckle. She tastes like... peaches and cherries mixed together? You pause momentarily, then flick your tongue around the finger, gathering her ambrosia from every nook and cranny. You hum softly as you work, suckling her to the knuckle.", parse);
-		Text.NL();
-		Text.Add("Even when there's nothing left but your own saliva, you can still feel the taste on your tongue, in your throat, and in your belly. It suffuses your body, fills you with a tingling, bubbling kind of sexual excitement. Here you are, pinned down by this sexy creature, and you can't even use your mouth to please her, let alone your wildly pulsating, dribbling dick. If you put it inside right now, you'd probably cum on the spot. But that's fine. You'd just have to keep fucking her until you could cum a second time. Somehow you know you'd have quite a few wombs to fill.", parse);
-		Text.NL();
-		Text.Add("Pulling her finger out, the Gol looks between you and her spit-glossed digit. <i>“Well, what do you think, drone? Isn't it a pussy worth worshipping?”</i>", parse);
-		Text.NL();
-		Text.Add("You lick your lips in an effort to gather every stray mote of flavor into your maw, eyes shining brightly as they openly stare at the alien gash. <i>“It's, uh... pretty good. Scoot forward, would you? Please?”</i>", parse);
-		Text.NL();
-		Text.Add("The Gol edges her scuttling form forward just enough to press the bottom of her oversized slit against your chin. Strings of her sticky, feminine syrup fall over your face. Heedless of how slick your face is getting, you lean up and press yourself against her, finally getting to touch your tongue directly to this sexy monster-woman's entrance. A shiver wracks your pinned body, and your cock's need explodes from a quiet simmer to a rolling boil. You grunt in ecstasy, muffled by the thick, fertile folds of the mantis-girl's heavenly slit. Cum bubbles out of your [cocks] in thick squirts, your dick harder than its ever felt before.", parse);
+		Text.Out(`Gingerly, the Gol lowers herself down onto you, pinning you under her soft underside. It's less uncomfortable than you would think, but it does put you in the unfortunate position of having her fragrant gash positioned a few inches above your face.
+
+		She wiggles, getting comfortable, and in the process rubbing your uncomfortably hard penis between your bodies. Dragging the scepter's head around her engorging folds, the feminine creature promises, “You're going to get very acquainted with this hole soon.” She brings it up to do tiny circuits around a very prominent clitoris. “The males from the caravan were quite taken with it. I believe their exact words were that it was entrancing.”
+
+		Entrancing? You don't really see it. Sure, it's a huge, fertile-looking pussy with puffy, wet lips that would feel so good to slip inside of it, but you wouldn't really call it entrancing. It's just a pussy. A nice-looking example of feminine genitalia, but nothing more.
+
+		“There you go, staring at it like it's the most important thing in the world. If you aren't careful, you're going to want to fuck it more than anything - more than having free will.” The Gol playfully strokes your hair.
+
+		Yeah, right. You ignore her condescending petting. You could look somewhere else if you wanted. There's nothing stopping you. It's just... just that it's her most interesting feature - the best part of her for sure. The smell of it is even kind of pleasant in its way. You squirm a little, feeling more than a little hot, but that's only because she's pinning it down and making you look at her fuckable cunt. It's a perfectly normal reaction. A droplet of lubrication falls on your cheek, making you wonder just what it would taste like.
+
+		Giggling excitedly, the Gol drags the scepter across her increasingly wet womanhood once more. Her lips briefly part, revealing a flash of its insides so pink that you could swear it burns an afterimage into your retinas. “It's okay if you don't look away. That's what I want, after all. Do you want me to hold it open so that you can see it better?” From the corner of your vision, you see her cock her head questioningly.
+
+		When a sexy girl asks you if you want to see the inside of her pussy, you don't say no. “Yes...” Your ${pc.cocks} surge${c.notS} excitedly at the prospect. Damn, you're really, really hard. She doesn't have any kind of magic vagina powers or anything, she's just really hot, wet, and smells like bottled sex. Your ${pc.cocks} strains${c.notS} inside your ${pc.armor}. You'd have to be castrated not to want a slit like that. “Please?”
+
+		The Gol says something, but you're too busy watching her fingers hook into her sides of her dribbling delta and pull it wide opening, revealing the wettest, slickest looking pussy you've ever laid eyes on it. And it's just so... so... <i>pink</i>.
+
+		You breathe deeply and sigh in delight. Her scent smells even more potent now - practically all-consuming. The air itself seems stained with her incredibly feminine flavor. Perhaps it's from how wet she's gotten? You thrill at the knowledge that she's lubricating for you, making herself ready for you to fuck her. If only you hadn't tried to fight her, you could be fucking <i>right now</i>. You groan and twist beneath her, rubbing your dick against her supple underbelly. Your eyes longingly trace the contours of her interior, and your mouth falls open, hoping to catch one of the glistening droplets that are falling over your ${pc.face}.
+
+		The Gol dips a finger inside, gathering some of her juices up. “Do you want a taste?” She giggles. “Once you try it, you'll never want another woman again. You'll be hooked on my pussy.”
+
+		It's enough to make you chuckle. “Just because I'd be eating you out if I could doesn't mean I'm going to follow you around, worshipping it all day long.” You smirk, then open wide. “Go on, let me have a taste so we can stop this silly game and get to the fucking.”
+
+		“Now that's the kind of eagerness I like to hear from my drones!” The Gol puts her gooey finger on your lip. Her hand blocks your view of her entrance, but that's just fine, you figure. The view would just distract you from the taste. Closing your eyes, you suck her proffered digit into your maw and run your tongue over it, licking her flavorful juices from her knuckle. She tastes like... peaches and cherries mixed together? You pause momentarily, then flick your tongue around the finger, gathering her ambrosia from every nook and cranny. You hum softly as you work, suckling her to the knuckle.
+
+		Even when there's nothing left but your own saliva, you can still feel the taste on your tongue, in your throat, and in your belly. It suffuses your body, fills you with a tingling, bubbling kind of sexual excitement. Here you are, pinned down by this sexy creature, and you can't even use your mouth to please her, let alone your wildly pulsating, dribbling dick. If you put it inside right now, you'd probably cum on the spot. But that's fine. You'd just have to keep fucking her until you could cum a second time. Somehow you know you'd have quite a few wombs to fill.
+
+		Pulling her finger out, the Gol looks between you and her spit-glossed digit. “Well, what do you think, drone? Isn't it a pussy worth worshipping?”
+
+		You lick your lips in an effort to gather every stray mote of flavor into your maw, eyes shining brightly as they openly stare at the alien gash. “It's, uh... pretty good. Scoot forward, would you? Please?”
+
+		The Gol edges her scuttling form forward just enough to press the bottom of her oversized slit against your chin. Strings of her sticky, feminine syrup fall over your face. Heedless of how slick your face is getting, you lean up and press yourself against her, finally getting to touch your tongue directly to this sexy monster-woman's entrance. A shiver wracks your pinned body, and your cock's need explodes from a quiet simmer to a rolling boil. You grunt in ecstasy, muffled by the thick, fertile folds of the mantis-girl's heavenly slit. Cum bubbles out of your ${pc.cocks} in thick squirts, your dick harder than its ever felt before.`);
 		if (growcock) {
-			Text.Add(" Every eruption seems to ooze out higher on your body, matched by an increase in the tightness between you.", parse);
+			Text.Add(` Every eruption seems to ooze out higher on your body, matched by an increase in the tightness between you.`);
 		}
 		Text.NL();
 
@@ -474,58 +466,57 @@ export namespace GolScenes {
 
 		const cum = player.OrgasmCum();
 
-		Text.Add("The Gol chitters in enthusiastic delight, stroking a humanoid hand through your [hair]. <i>“There there. Isn't it wonderful, drone? You're tasting your very purpose - nursing on the nectar of your new life. ", parse);
+		Text.Add(`The Gol chitters in enthusiastic delight, stroking a humanoid hand through your ${pc.hair}. <i>“There there. Isn't it wonderful, drone? You're tasting your very purpose - nursing on the nectar of your new life. `);
 		if (growcock) {
-			Text.Add("After all, what good is a drone if he isn't big enough to seed each of my wombs in turn?”</i> Her pussy's juices thicken, concentrating the flavor that much further. You relish gulping them down all the same, delighted that you're able to taste her that much more strongly. You barely notice[oneof] your [cocks] bumping into the underside of your chin, still oozing alabaster goo.", parse);
+			Text.Add(`After all, what good is a drone if he isn't big enough to seed each of my wombs in turn?”</i> Her pussy's juices thicken, concentrating the flavor that much further. You relish gulping them down all the same, delighted that you're able to taste her that much more strongly. You barely notice${c.oneof} your ${pc.cocks} bumping into the underside of your chin, still oozing alabaster goo.`);
 		} else {
-			Text.Add("After all, what good is a drone if he can't stay hard through a few successive orgasms?”</i> Her pussy's juices thicken, concentrating the flavor that much further. You relish gulping them down all the same, delighted that you're able to taste her that much more strongly. You barely notice fresh, alabaster streams squirting from your [cocks], rolling down either side of your pinned body.", parse);
+			Text.Add(`After all, what good is a drone if he can't stay hard through a few successive orgasms?”</i> Her pussy's juices thicken, concentrating the flavor that much further. You relish gulping them down all the same, delighted that you're able to taste her that much more strongly. You barely notice fresh, alabaster streams squirting from your ${pc.cocks}, rolling down either side of your pinned body.`);
 		}
-		Text.Add(" <i>“There's a good drone. Wouldn't it be better to put all that eager cum inside me?”</i>", parse);
-		Text.NL();
-		Text.Add("Oh gods, yes it would! You peel your face away from your cunnilingual nirvana to answer. Her clear juices hang between your forms in a thick web, glittering in the light before they eventually snap. <i>“Yes!”</i> It's getting hard to think of doing anything but that. You know you were impassioned about proving something to her just a minute ago, but it seems small and unimportant next to the need to flood her delightful honeypot with fertile seed. You rub your palms along her chitinous sides. She'd feel so good swollen with your eggs. If only she'd let you inside! <i>“Please, Queen!”</i>", parse);
-		Text.NL();
-		Text.Add("You don't know why you called her that, but it felt... right somehow. The powerful, regal creature looms large in stature, both above and in your mind. She deserves to be worshipped. The realization bursts across you like your previous orgasm. Whatever you were trying to prove to her before, this new knowledge supplants it. You know now that proving your loyal worship of your Queen is all that matters. Your [cocks] jump[notS] in agreement.", parse);
-		Text.NL();
-		Text.Add("<i>She</i> throws back her head and laughs. Her smile looks heartless, but at least it's a smile. <i>“I'm not so sure you've earned the right. I don't let just anyone fertilize my eggs, you know. What's to stop you from running away after you fucked me to orgasm a few times?”</i> She gathers a droplet of her juices on her finger once more and holds it before you. Your eyes cross to watch it. <i>“What indeed.”</i>", parse);
-		Text.NL();
-		parse.ItsTheyre = player.NumCocks() > 1 ? "They're" : "It's";
-		Text.Add("You lick your lips, whimpering. Belatedly, you remember that your Queen expects a response. <i>“Why would I run with you right here?”</i> You tip your head back and open your mouth hungrily, hoping she'll press that droplet to your tongue. It makes talking difficult, but you manage. <i>“Why would I want to stop fucking you?”</i> If you could, you'd gesture at your [cocks]. [ItsTheyre] still pumping bullets of cum from your overactive balls. You’re so horny that it's hard to think. The very idea of stopping just because you've cum seems almost ludicrous.", parse);
-		Text.NL();
-		Text.Add("<i>“Shhh, shhh...”</i> The Gol presses that droplet to your tongue, letting you suck. <i>“I believe you, drone.”</i> She lifts herself up, pulling her cleaned finger from your pursed lips.", parse);
-		Text.NL();
-		Text.Add("The sensation of cool air on your [cocks] is almost foreign and, frankly, a little unpleasant. You want the warm tightness of your Queen's underbelly - the hot press of her huge, powerful frame on you.", parse);
+		Text.Out(` “There's a good drone. Wouldn't it be better to put all that eager cum inside me?”
+
+		Oh gods, yes it would! You peel your face away from your cunnilingual nirvana to answer. Her clear juices hang between your forms in a thick web, glittering in the light before they eventually snap. “Yes!” It's getting hard to think of doing anything but that. You know you were impassioned about proving something to her just a minute ago, but it seems small and unimportant next to the need to flood her delightful honeypot with fertile seed. You rub your palms along her chitinous sides. She'd feel so good swollen with your eggs. If only she'd let you inside! “Please, Queen!”
+
+		You don't know why you called her that, but it felt... right somehow. The powerful, regal creature looms large in stature, both above and in your mind. She deserves to be worshipped. The realization bursts across you like your previous orgasm. Whatever you were trying to prove to her before, this new knowledge supplants it. You know now that proving your loyal worship of your Queen is all that matters. Your ${pc.cocks} jump${c.notS} in agreement.
+
+		<i>She</i> throws back her head and laughs. Her smile looks heartless, but at least it's a smile. “I'm not so sure you've earned the right. I don't let just anyone fertilize my eggs, you know. What's to stop you from running away after you fucked me to orgasm a few times?” She gathers a droplet of her juices on her finger once more and holds it before you. Your eyes cross to watch it. “What indeed.”
+
+		You lick your lips, whimpering. Belatedly, you remember that your Queen expects a response. “Why would I run with you right here?” You tip your head back and open your mouth hungrily, hoping she'll press that droplet to your tongue. It makes talking difficult, but you manage. “Why would I want to stop fucking you?” If you could, you'd gesture at your ${pc.cocks}. ${c.ItsTheyre} still pumping bullets of cum from your overactive balls. You’re so horny that it's hard to think. The very idea of stopping just because you've cum seems almost ludicrous.
+
+		“Shhh, shhh...” The Gol presses that droplet to your tongue, letting you suck. “I believe you, drone.” She lifts herself up, pulling her cleaned finger from your pursed lips.
+
+		The sensation of cool air on your ${pc.cocks} is almost foreign and, frankly, a little unpleasant. You want the warm tightness of your Queen's underbelly - the hot press of her huge, powerful frame on you.`);
 		Text.NL();
 		if (growcock) {
-			Text.Add("And there's so much feeling coming from your crotch! You look down at gasp at the immensity of your erection[s]. You've gotten big enough that you doubt anyone save for the Gol Queen could ever take you again. Like it or not, she's changed you to fit your new role, and the strangest part is that you do like it. You like it very much if the dribbling wads of cum are any indication.", parse);
+			Text.Add(`And there's so much feeling coming from your crotch! You look down at gasp at the immensity of your erection${c.s}. You've gotten big enough that you doubt anyone save for the Gol Queen could ever take you again. Like it or not, she's changed you to fit your new role, and the strangest part is that you do like it. You like it very much if the dribbling wads of cum are any indication.`);
 		} else {
-			Text.Add("And what a mess you made while she lavished her affections on you! You're drenched in frothing, ivory cream of your own creation. More still is rolling out of your bloated cocktip[s]. You wonder if you're ever going to completely stop cumming, or if you really care.", parse);
+			Text.Add(`And what a mess you made while she lavished her affections on you! You're drenched in frothing, ivory cream of your own creation. More still is rolling out of your bloated cocktip${c.s}. You wonder if you're ever going to completely stop cumming, or if you really care.`);
 		}
 		Text.NL();
-		Text.Add("The Gol's skittering legs carry her back toward a comfortable patch of grass, near where her other captives are. None are affected like you. They're all either packing egg-bulged bellies or far-away, hungry looks, but none bear your impressive manhood[s]. She settles next to a glassy-eyed woman and eases the tip of her tail into her willing incubator's cunt. <i>“Come here.”</i> The Gol Queen gestures to you. <i>“You may father the eggs of future hives if you wish, drone-king. All you have to do is cum in here, forever.”</i> She rubs anxiously at her slit, quivering with her own need for breeding.", parse);
-		Text.NL();
-		Text.Add("Staggering up, you grab hold of your oozing erection[s] and stumble toward your Queen. She needs you, and you need her. You understand that. Without an endless source of cum, she won't be able to spread her hive across the lands. She won't be able to make the rest of the world understand what you do: that there's endless pleasure to be found beneath her scepter.", parse);
+		Text.Out(`The Gol's skittering legs carry her back toward a comfortable patch of grass, near where her other captives are. None are affected like you. They're all either packing egg-bulged bellies or far-away, hungry looks, but none bear your impressive manhood${c.s}. She settles next to a glassy-eyed woman and eases the tip of her tail into her willing incubator's cunt. “Come here.” The Gol Queen gestures to you. “You may father the eggs of future hives if you wish, drone-king. All you have to do is cum in here, forever.” She rubs anxiously at her slit, quivering with her own need for breeding.
+
+		Staggering up, you grab hold of your oozing erection${c.s} and stumble toward your Queen. She needs you, and you need her. You understand that. Without an endless source of cum, she won't be able to spread her hive across the lands. She won't be able to make the rest of the world understand what you do: that there's endless pleasure to be found beneath her scepter.`);
 		Text.Flush();
 
 		Gui.NextPrompt(() => {
 			Text.Clear();
-			Text.Add("Walking across the rubble is hard enough without trying to support several feet worth of cum-drizzling cock. The Gol Queen is watching you, though, smiling to herself when your motions cause you to accidentally stroke your sensitive skin and shoot a lance of release across your own path. You nearly fall twice, each time due to your own pleasure, but every step is bringing you closer to your queen and her heavenly scent. There's only a few yards of distance left.", parse);
-			Text.NL();
-			Text.Add("When you accidentally bump your drizzling member into her belly, you cry out in relief, shooting pent-up loads across her curvy tits. Spunk sluices off both sides and down the middle of her expansive cleavage. You writhe in place, dropping to your knees. Your [cocks] [isAre] lurching wildly as [itThey] erupt[notS]. Rope after rope is falling over your Queen, and all you can think of is how wonderful her flesh feels against you and how her incredible aroma completes your world.", parse);
-			Text.NL();
-			Text.Add("Giggling, your Queen grabs you pumping length and angles it south. <i>“Why don't we put all this energy to better use?”</i> Guiding your [cockTip] to her lips, she spreads them just enough for your vigorous ejaculation to flow inside. Her cheeks flush in enjoyment, and she sighs, a sound that's heaven to your ears. <i>“There we go. Mmmm, this is just the beginning. Thrust inside, and claim your place as my consort.”</i>", parse);
-			Text.NL();
-			Text.Add("Tentatively, you wrap your arms around her human waistline and pull yourself forward, pushing inch after inch of climax-craving flesh into her perfect hole. Narrow rings give way for your sperm-slinging length, allowing you deeper access by the second. Somehow you know them to be entrances to successive wombs - wombs that you're glazing in a thick layer of virile fuckjuice. You bottom out, still pumping, still filling your Queen, still cumming until your eyes cross.", parse);
+			Text.Out(`Walking across the rubble is hard enough without trying to support several feet worth of cum-drizzling cock. The Gol Queen is watching you, though, smiling to herself when your motions cause you to accidentally stroke your sensitive skin and shoot a lance of release across your own path. You nearly fall twice, each time due to your own pleasure, but every step is bringing you closer to your queen and her heavenly scent. There's only a few yards of distance left.
+
+			When you accidentally bump your drizzling member into her belly, you cry out in relief, shooting pent-up loads across her curvy tits. Spunk sluices off both sides and down the middle of her expansive cleavage. You writhe in place, dropping to your knees. Your ${pc.cocks} ${c.isAre} lurching wildly as ${c.itThey} erupt${c.notS}. Rope after rope is falling over your Queen, and all you can think of is how wonderful her flesh feels against you and how her incredible aroma completes your world.
+
+			Giggling, your Queen grabs you pumping length and angles it south. “Why don't we put all this energy to better use?” Guiding your ${pc.cockTip} to her lips, she spreads them just enough for your vigorous ejaculation to flow inside. Her cheeks flush in enjoyment, and she sighs, a sound that's heaven to your ears. “There we go. Mmmm, this is just the beginning. Thrust inside, and claim your place as my consort.”
+
+			Tentatively, you wrap your arms around her human waistline and pull yourself forward, pushing inch after inch of climax-craving flesh into her perfect hole. Narrow rings give way for your sperm-slinging length, allowing you deeper access by the second. Somehow you know them to be entrances to successive wombs - wombs that you're glazing in a thick layer of virile fuckjuice. You bottom out, still pumping, still filling your Queen, still cumming until your eyes cross.`);
 			Text.NL();
 
 			Sex.Vaginal(player, gol);
-			gol.FuckVag(gol.FirstVag(), player.FirstCock(), 5);
-			player.Fuck(player.FirstCock(), 5);
+			gol.FuckVag(gol.FirstVag(), p1cock, 5);
+			player.Fuck(p1cock, 5);
 
-			Text.Add("Silky softness presses against your back, looping over your shoulders. More of it wraps your hips, your [legs], even your [butt]. Lolling your head back, you try to figure out what's going on. Rational thought is difficult with your dick being constantly milked, but you eventually work out that she's spooling silk out of her mouth to web you in place with. It's like some kind of fuck-sling, keeping you in place so that she can tend to her business without having to stop to breed.", parse);
-			Text.NL();
-			Text.Add("There's just enough freedom to slide a few inches out and in. Indeed, every movement she takes does that for you. You're able to just sit there, filling her with your jism, lost to pleasure. Sighing in perfect contentment, you let her every movement milk your dick. This is your place now, ensuring that your Queen has all the genetic resources she'll need to spread her hive to every corner of the world.", parse);
-			Text.NL();
-			Text.Add("You're a good drone, and endless orgasms are your reward.", parse);
+			Text.Out(`Silky softness presses against your back, looping over your shoulders. More of it wraps your hips, your ${pc.legs}, even your ${pc.butt}. Lolling your head back, you try to figure out what's going on. Rational thought is difficult with your dick being constantly milked, but you eventually work out that she's spooling silk out of her mouth to web you in place with. It's like some kind of fuck-sling, keeping you in place so that she can tend to her business without having to stop to breed.
+
+			There's just enough freedom to slide a few inches out and in. Indeed, every movement she takes does that for you. You're able to just sit there, filling her with your jism, lost to pleasure. Sighing in perfect contentment, you let her every movement milk your dick. This is your place now, ensuring that your Queen has all the genetic resources she'll need to spread her hive to every corner of the world.
+
+			You're a good drone, and endless orgasms are your reward.`);
 			Text.Flush();
 
 			TimeStep({season: 1});
