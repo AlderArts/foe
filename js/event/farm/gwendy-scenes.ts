@@ -2747,11 +2747,11 @@ export namespace GwendyScenes {
 			if (cap >= Capacity.gaping) {
 				Text.Out(`Moaning with pleasure, you arch your back as the toy easily slips inside you, earning you a look of grudging respect from Gwendy. “${dildoFirst ? `Not your first rodeo, I take. Someone has trained you well.` : `You’re getting better at this, ${pc.name}. It took me quite a bit of practice to be able to take this bad boy, but you’re a natural.`}” Before long, the double ended dildo is firmly lodged inside your nethers, allowing for the farmer to start moving on top of you.`);
 			} else if (cap >= Capacity.loose) {
-				Text.Out(`You’re stretched so wide, and each agonizing second you feel more and more <i>full</i>, the toy probing and expanding your deepest depths. “${dildoFirst ? `Mm… you’re doing quite well for your first time with this bad boy, ${pc.name}. Only a few more inches to go…` : `You remember this feeling well, don’t you? Let me train your ${target} more with this bad boy…`}” Gwendy takes it slow and keeps encouraging you with soft quips, but nevertheless the double ended dildo advances inexorably deeper into your ${target}.`);
+				Text.Out(`You’re stretched so wide, and each agonizing second you feel more and more <i>full</i>, the toy probing and expanding your deepest depths. “${dildoFirst ? `Mm… you’re doing quite well for your first time with this bad boy, ${pc.name}. Only a few more inches to go…` : `You remember this feeling well, don’t you? Let me train your ${target()} more with this bad boy…`}” Gwendy takes it slow and keeps encouraging you with soft quips, but nevertheless the double ended dildo advances inexorably deeper into your ${target()}.`);
 			} else {
-				Text.Out(`The feeling is indescribable, and despite the copious amounts of lube, you have to bite down ${flip ? "on the pillow" : "on your lip"} in order to not cry out in pain. Seeing your distress, Gwendy withdraws the toy, giving you some time to recover before teasing the entrance to your ${target} again. “${dildoFirst ? `Don’t worry, I’ll go slow, give you some time to get used to it.` : `So tight… but you’ve done this before, ${pc.name}, you will do it again.`}” With that, the farmer presses the lubed up toy lightly against your ${target}, gaining a little more purchase each time she pushes it into your depths.
+				Text.Out(`The feeling is indescribable, and despite the copious amounts of lube, you have to bite down ${flip ? "on the pillow" : "on your lip"} in order to not cry out in pain. Seeing your distress, Gwendy withdraws the toy, giving you some time to recover before teasing the entrance to your ${target()} again. “${dildoFirst ? `Don’t worry, I’ll go slow, give you some time to get used to it.` : `So tight… but you’ve done this before, ${pc.name}, you will do it again.`}” With that, the farmer presses the lubed up toy lightly against your ${target()}, gaining a little more purchase each time she pushes it into your depths.
 
-				By the time she has a good ten inches firmly lodged inside you, your ${pc.skin} is glistening with sweat and your breathing is ragged. Gwendy makes an experimental move, pulling herself a few inches up her end of the toy before slowly sinking back down again, exerting pressure on your filled-to-the-brim passage. It’s uncomfortable… but somehow no longer painful. The cool lubricant appears to have a somewhat numbing effect, besides granting your ${target} unprecedented elasticity.`);
+				By the time she has a good ten inches firmly lodged inside you, your ${pc.skin} is glistening with sweat and your breathing is ragged. Gwendy makes an experimental move, pulling herself a few inches up her end of the toy before slowly sinking back down again, exerting pressure on your filled-to-the-brim passage. It’s uncomfortable… but somehow no longer painful. The cool lubricant appears to have a somewhat numbing effect, besides granting your ${target()} unprecedented elasticity.`);
 				TimeStep({minute: 30});
 			}
 			Text.NL();
@@ -2796,7 +2796,7 @@ export namespace GwendyScenes {
 		Text.Out(`When she thrusts down, it almost drives the wind out of you. Now that she’s done teasing you, the farmer goes wild, riding you with abandon, hands planted on either side of your torso for support. Her unabashed, lust-filled cries can probably be heard for miles around - for certain, no one on the farm can be unaware of your activities by this point.`);
 		Text.NL();
 		if (ddildo) {
-			Text.Out(`Each bucking thrust of her hips grinds your end of the massive double ended dildo deeper into your ${target}, ${!targetVag ? (cock ? `the thick shaft massaging your prostate through your stretched anal walls` : `relentlessly stretching your bowels`) : `the flared tip bumping against the entrance to your womb`}. Gwendy’s fucking you, not the other way around, and you’re loving it. Not that she isn’t getting her own pleasure from this; the farmer’s eyes are closed in a perpetual state of bliss, and it’s no wonder: she’s riding the monster cock like a champ, each bounce taking roughly half of the toy inside her stretched pussy and coating it with her slick juices.`);
+			Text.Out(`Each bucking thrust of her hips grinds your end of the massive double ended dildo deeper into your ${target()}, ${!targetVag ? (cock ? `the thick shaft massaging your prostate through your stretched anal walls` : `relentlessly stretching your bowels`) : `the flared tip bumping against the entrance to your womb`}. Gwendy’s fucking you, not the other way around, and you’re loving it. Not that she isn’t getting her own pleasure from this; the farmer’s eyes are closed in a perpetual state of bliss, and it’s no wonder: she’s riding the monster cock like a champ, each bounce taking roughly half of the toy inside her stretched pussy and coating it with her slick juices.`);
 		} else if (bigcock) {
 			Text.Out(`Despite your considerable size, Gwendy is taking you like a champ, rhythmically rising and falling on your ${pc.cock} without showing any signs of relenting. Most of your shaft is covered in her slick juices, and each bounce envelops you in her warm innards, eliciting a blissful grunt from your lover every time you bump against the entrance to her womb.`);
 		} else {
@@ -2842,13 +2842,13 @@ export namespace GwendyScenes {
 		} else {
 			Text.Out(`The farmer is tireless, barely pausing as her hips quiver with her first climax. She cries out, sweat-slick body trembling as she rides it out, but there’s still plenty of fire left in her. After leaning down to give you a fierce kiss, your lover flips her leg, twisting around until she’s ${flip ? `facing you ass-to-ass, the two of you connected by her massive double-ended toy` : `riding you reverse cowgirl`}.
 
-			“‘Nough resting, I’m far from done with you, ${pc.name}.” True to her words, Gwendy slams her ass ${flip ? `back` : `down`} on ${ddildo ? `the equine dildo` : `your ${pc.cock}`}, barely giving you time to recover before she shifts back into full gear. Before long, you can feel your own climax approaching, ${ddildo ? `forced out by the massive toy spearing your ${target}` : `coaxed out by her pussy clamping down on you`}. You moan loudly, hips buckling as the wave hits you.`);
+			“‘Nough resting, I’m far from done with you, ${pc.name}.” True to her words, Gwendy slams her ass ${flip ? `back` : `down`} on ${ddildo ? `the equine dildo` : `your ${pc.cock}`}, barely giving you time to recover before she shifts back into full gear. Before long, you can feel your own climax approaching, ${ddildo ? `forced out by the massive toy spearing your ${target()}` : `coaxed out by her pussy clamping down on you`}. You moan loudly, hips buckling as the wave hits you.`);
 			Text.NL();
 
 			const cum = player.OrgasmCum();
 
 			if (ddildo) {
-				Text.Out(`Your ${target} constricts on your end of the double ended horsecock, your walls clamping down tightly and convulsing uncontrollably on the massive toy. `);
+				Text.Out(`Your ${target()} constricts on your end of the double ended horsecock, your walls clamping down tightly and convulsing uncontrollably on the massive toy. `);
 				if (cock) {
 					Text.Out(`Your ${pc.cocks} fire${c.s} off ${c.itsTheir} load, which splatters uselessly ${flip ? `onto the sheets` : `all over your ${pc.belly} and ${pc.breasts}`}, your sperm fruitlessly seeking a womb it will never find. `);
 				}
@@ -2910,7 +2910,7 @@ export namespace GwendyScenes {
 			Text.Out(`It’s more than two hours and multiple orgasms later that the farmer finally calls it quits, collapsing on top of you in blissful stupor. Your entire body aches, and you’re decidedly spent from the wild ride.`);
 			Text.NL();
 			if (ddildo) {
-				Text.Out(`With a slow, lewd ‘slop’, the equine double dildo slides out of Gwendy’s well-used snatch, leaving it gaping. The girl nuzzles up against you, leaning down to free the other end from your stretched ${target}.
+				Text.Out(`With a slow, lewd ‘slop’, the equine double dildo slides out of Gwendy’s well-used snatch, leaving it gaping. The girl nuzzles up against you, leaning down to free the other end from your stretched ${target()}.
 
 				“${dildoFirst ? `Ya took it like a champ, ${pc.name}. Hope ya want to try this again sometime… I sure would` : `Mmm… not many that can say they can take this bad boy and walk properly afterwards… you make me proud, ${pc.name}`}.” You wince. You’re going to be feeling this one for a while.`);
 			} else {
