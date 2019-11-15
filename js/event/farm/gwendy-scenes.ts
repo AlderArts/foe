@@ -1294,7 +1294,7 @@ export namespace GwendyScenes {
 		Text.Clear();
 
 		let lossScene = gwendy.flags.ChallengeLostScene;
-		let wonScene  = gwendy.flags.ChallengeWonScene;
+		let wonScene  = gwendy.flags.ChallengeWinScene;
 		if (hangout) { lossScene--; }
 		if (hangout) { wonScene--; }
 
@@ -2294,7 +2294,7 @@ export namespace GwendyScenes {
 
 		// gwendy.flags["ChallengeLostScene"]
 		let lossScene = gwendy.flags.ChallengeLostScene;
-		let wonScene  = gwendy.flags.ChallengeWonScene;
+		let wonScene  = gwendy.flags.ChallengeWinScene;
 		if (hangout) { lossScene--; }
 		if (hangout) { wonScene--; }
 
