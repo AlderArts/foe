@@ -55,12 +55,6 @@ export namespace TerryFlags {
         High     = 5,
         VeryHigh = 7.5,
     }
-    export enum CumLevel {
-        Low      = 3,
-        Mid      = 8,
-        High     = 13,
-        VeryHigh = 20,
-    }
     export enum PersonalQuest {
         NotStarted = 0,
         Started    = 1,

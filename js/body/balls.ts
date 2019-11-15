@@ -6,6 +6,13 @@ import { BodyPart } from "./bodypart";
 import { Color } from "./color";
 import { RaceDesc } from "./race";
 
+export enum CumLevel {
+	Low      = 3,
+	Mid      = 8,
+	High     = 13,
+	VeryHigh = 20,
+}
+
 export class Balls extends BodyPart {
 	public count: Stat;
 	public size: Stat;

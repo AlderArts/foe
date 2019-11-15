@@ -15,6 +15,8 @@ export enum NippleType {
 
 export enum BreastSize {
 	Small = 3,
+	Medium = 7.5,
+	Large = 15,
 }
 
 // Defines a PAIR of breasts (or row)

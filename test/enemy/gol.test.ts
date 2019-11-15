@@ -6,21 +6,21 @@ import { CacheToGame } from "../../js/gamecache";
 import { Gui } from "../../js/gui";
 
 describe("GolQueen", () => {
-	it("init", () => {
+	it("can be instantiated", () => {
 		const gol = new GolQueen();
 		expect(gol.ID).to.equal("gol");
 		expect(gol.name).to.equal("Gol Queen");
 	});
 
-	it("has drops", () => {
+	it("has required drops", () => {
 		const gol = new GolQueen();
 		const drops = gol.DropTable();
 
-		expect(_.some(drops, (obj) => obj.it.id === "quest3")).to.be.true; // Lagon's Scepter
-		expect(_.some(drops, (obj) => obj.it.id === "dag1")).to.be.true; // GolClaw
+		expect(_.some(drops, (obj) => obj.it.id === "quest3")).to.equal(true); // Lagon's Scepter
+		expect(_.some(drops, (obj) => obj.it.id === "dag1")).to.equal(true); // GolClaw
 	});
 });
-
+/*
 describe("GolScenes", () => {
 	it("search for scepter", () => {
 		Gui.Init();
@@ -28,3 +28,4 @@ describe("GolScenes", () => {
 		GolScenes.SearchForScepter();
 	});
 });
+*/

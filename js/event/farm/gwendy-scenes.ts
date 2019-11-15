@@ -1,10 +1,13 @@
 import * as _ from "lodash";
+import { CumLevel } from "../../body/balls";
 import { LowerBodyType } from "../../body/body";
 import { BreastSize } from "../../body/breasts";
 import { Cock } from "../../body/cock";
 import { Gender } from "../../body/gender";
+import { Capacity, Orifice } from "../../body/orifice";
 import { Race } from "../../body/race";
 import { EncounterTable } from "../../encountertable";
+import { Entity } from "../../entity";
 import { Sex } from "../../entity-sex";
 import { GAME, TimeStep, WORLD, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
@@ -14,6 +17,7 @@ import { ToysItems } from "../../items/toys";
 import { IChoice } from "../../link";
 import { BurrowsFlags } from "../../loc/burrows-flags";
 import { MarketScenes } from "../../loc/farm-market";
+import { GP } from "../../parser";
 import { Party } from "../../party";
 import { IParse, Text } from "../../text";
 import { Season } from "../../time";
@@ -1095,7 +1099,7 @@ export namespace GwendyScenes {
 					tooltip : "Plow her ass.",
 				});
 			}
-			if (gwendy.flags.Toys === 0) {
+			if (gwendy.flags.Toys === GwendyFlags.Toys.None) {
 				options.push({ nameStr : "Toys",
 					func() {
 						GwendyScenes.ChallengeSexAnal(GwendyFlags.Toys.Strapon, hangout);
@@ -1841,18 +1845,10 @@ export namespace GwendyScenes {
 		Text.NL();
 
 		if (toys) {
-			if (gwendy.flags.Toys === 0) {
-				gwendy.flags.Toys = 1;
-
+			if (gwendy.flags.Toys === GwendyFlags.Toys.None) {
 				Text.Add("Now then... lets see what sort of naughty things Gwendy has lying about in her room. You sternly tell her to remain where she is while you start rummaging through her drawers. Poor girl must have been a bit lonely before you showed up, judging by the number of toys she got stored here. Discounting several bottles of what looks to be massage oils and lubricants, you pull out a variety of sex toys, lining them up on the floor in front of the blushing farm girl.", parse);
 				Text.NL();
-				Text.Add("Dildos of various shapes and sizes, anal beads, several strap-ons... ", parse);
-				if (gwendy.flags.ChallengeLostScene >= GwendyFlags.ChallengeLostScene.Fucked) {
-					Text.Add("the latter not entirely unfamiliar to you.", parse);
-				} else {
-					Text.Add("you idly wonder who she was planning to use the latter on.", parse);
-				}
-				Text.Add(" As you look over the collection, you sense a certain theme here. Judging by her stash, Gwendy <i>really</i> seems to be into equine toys. More than two-thirds of the toys are shaped like horsecocks of various sizes, some so big you are surprised her body could even take them.", parse);
+				Text.Add("Dildos of various shapes and sizes, anal beads, several strap-ons... you idly wonder who she was planning to use the latter on. As you look over the collection, you sense a certain theme here. Judging by her stash, Gwendy <i>really</i> seems to be into equine toys. More than two-thirds of the toys are shaped like horsecocks of various sizes, some so big you are surprised her body could even take them.", parse);
 				Text.NL();
 				Text.Add("<i>“G-going through a girl’s private stuff like that,”</i> the farmer huffs, embarrassed as you let your curious gaze wander across her collection. Ignoring her, you ask if this is all of it, or if she is hiding more somewhere else. <i>“Yes!”</i> she pipes, though her eyes betray her, as she throws a brief glance toward a huge chest on the other end of the room. Chuckling, you walk over to it to see what she is hiding.", parse);
 				Text.NL();
@@ -2019,6 +2015,8 @@ export namespace GwendyScenes {
 		parse.gnotS    = gwendy.NumCocks() > 1 ? "" : "s";
 		parse.ges      = gwendy.NumCocks() > 1 ? "" : "es";
 		parse.gits     = gwendy.NumCocks() > 1 ? "their" : "its";
+
+		gwendy.flags.Toys |= toy;
 
 		if (toy === GwendyFlags.Toys.Strapon) { // TODO Write scene
 			Text.Add("", parse);
@@ -2519,19 +2517,18 @@ export namespace GwendyScenes {
 				}, enabled : minScene <= GwendyFlags.ChallengeLostScene.Oral,
 				tooltip : "Please Gwendy with your tongue.",
 			});
+			/* TODO Blowjob */
 		}
-		/*
 		if (lossScene >= GwendyFlags.ChallengeLostScene.Ride) {
 			options.push({ nameStr : "Ride",
 				func : () => {
-					Text.Clear();
-					Text.Add("", parse);
-					Text.NL();
-					Text.Flush();
+					const first = lossScene === GwendyFlags.ChallengeLostScene.Ride;
+					LossRide(hangout, first);
 				}, enabled : minScene <= GwendyFlags.ChallengeLostScene.Ride,
-				tooltip : "Catch a ride.",
+				tooltip : "Have Gwendy ride you.",
 			});
 		}
+		/*
 		if (lossScene >= GwendyFlags.ChallengeLostScene.Fucked && !gwendy.EPlus()) {
 			options.push({ nameStr : "Strap-on",
 				func : () => {
@@ -2560,6 +2557,396 @@ export namespace GwendyScenes {
 			Text.Flush();
 			return true;
 		}
+	}
+
+	export function _GetHorsecockBigcock(ent: Entity) {
+		// Get biggest cock or horsecock
+		const cocks = ent.AllCocks();
+		let cock: Cock;
+		let horsecock: boolean;
+		for (const c of cocks) {
+			if (cock === undefined) {
+				cock = c;
+			}
+			const isBigger = c.Len() > cock.Len();
+			if (c.race.isRace(Race.Horse)) {
+				if (!horsecock || isBigger) {
+					cock = c;
+				}
+				horsecock = true;
+			} else if (isBigger) {
+				cock = c;
+			}
+		}
+
+		let bigcock: boolean;
+		if (cock && cock.Len() >= 28) {
+			bigcock = true;
+		}
+
+		return { cock, bigcock, horsecock };
+	}
+
+	export function _DDildoOdds(subdomDiff: number, hasCock: boolean) {
+		let ddildo: boolean;
+		const table = new EncounterTable();
+		if (subdomDiff < 50) { subdomDiff = 0; }
+		table.AddEnc(() => {
+			ddildo = true;
+		}, subdomDiff);
+		if (hasCock) {
+			table.AddEnc(() => {
+				ddildo = false;
+			}, 100 - subdomDiff);
+		}
+		table.Get();
+		return ddildo;
+	}
+
+	function LossRide(hangout: boolean, first: boolean) {
+		const gwendy: Gwendy = GAME().gwendy;
+		const player: Player = GAME().player;
+
+		const pc = player.Parser;
+		const c = new GP.Plural(player.NumCocks() > 1);
+
+		// Get biggest cock or horsecock
+		const { cock, bigcock, horsecock } = _GetHorsecockBigcock(player);
+		player.SetPreferredCock(cock);
+
+		const dOdds = gwendy.SubDom() - player.SubDom();
+		const ddildo = _DDildoOdds(dOdds, cock !== undefined);
+		const eplus = gwendy.EPlus();
+
+		Text.Clear();
+		if (hangout) {
+			Text.Out(`“Getting greedy, aren’t we?” Gwendy purrs as she leans into you, her hands trailing your body possessively. “I’m a gal who’s always up for some more fun, but I don’t want you getting the wrong impression.” `);
+			if (horsecock || bigcock) {
+				Text.Out(`She pushes her hand against the sizable bulge in your ${pc.botarmor}, caressing the outline of your ${pc.cock}. “I’m gonna give this bad boy some lovin’, and you’re going to lie back and take it, got it? We are not done here until I say we’re done.”`);
+			} else if (cock) {
+				if (ddildo) {
+					Text.Out(`She rubs a hand against your crotch, brushing up against your ${pc.cock} through your ${pc.botarmor}. Gwendy gives you a wicked grin. “If you think I’ll allow you to use this, you are in for some disappointment.” She leans in closer, whispering tauntingly in your ${pc.ear}: “Come back with something more impressive if you want me to even consider it.”`);
+				} else {
+					Text.Out(`She rubs a hand against your crotch, brushing up against your ${pc.cock} through your ${pc.botarmor}. Gwendy gives you a disappointed, teasing pout. “You have some nerve wanting to pleasure me with something like this… I'm debating bring out one of my toys instead… but I guess you’ll do for now.”`);
+				}
+			} else {
+				Text.Out(`She rubs a hand against your crotch, brushing against your ${pc.gen} through your ${pc.botarmor}. “How do you want to do this… Do you have your own toys…? No, never mind. I’ll bring mine. I know just the one; I bet you’re going to like this a lot…”`);
+			}
+			Text.NL();
+			Text.Out(`With that, she gives you a sharp slap on your ${pc.butt}, pointing you in the direction of the bed. “I want you naked and ready. You don’t wanna keep me waiting.” You hurriedly comply and lie down on the bed while the farmer discards her own clothes in a leisurely manner.`);
+		} else {
+			if (first) {
+				Text.Out(`Gwendy gives you a predatory grin as you count the tally. Predictably, she’s won yet again.
+
+				“You’re such a tease… you just keep pushing me to see how far I’ll go, don’t you?” The farmer gives you a smoldering glare. “Be careful, my patience with your cockiness is wearing thin. I have some thoughts on what I’ll do if you challenge me and lose again, something I’m sure you’d <b>love</b>… but for now, I’m gonna use you good.”
+
+				Gesturing imperiously, she calls you to follow her back to the loft, hips swaying seductively. There are some grins and envious looks from the other farm hands as she leads you along. They no doubt suspect what’s going on between the two of you - Gwendy hasn’t exactly been secretive about her little victory celebrations.`);
+			} else {
+				Text.Out(`“Think your stamina will hold out better than last time?” Gwendy grins, giving you a friendly jab in the side. “Don’t think I’ll go easy on you just ‘cause we’ve been working all day; I’ve still got plenty left in me… and I’m gonna release a bit of pent up stress with you.” With that, she tugs you along back to the loft in the rafters of the barn, teasing you all the way.`);
+			}
+			Text.NL();
+			Text.Out(`Once you’ve climbed up the ladder to the farmer’s cramped living space, she turns to you, hands on her hips. “Now… let’s see what I’ve got to work with.” Raising her chin and giving you a smirk, she gives her order: “Strip down. All of it.”
+
+			You gulp, but also feel a bubbling sense of excitement. Under Gwendy’s possessive gaze, you slowly remove your gear until you’re wearing nothing more than your ${pc.skin}. You blush as her eyes roam your body, coming to rest on your ${pc.gen}. ${eplus ? "There’s a distinct growing bulge in the farmer’s pants, suggesting she very much likes what she sees. " : ""}She gives you a knowing smile.`);
+			Text.NL();
+			if (horsecock || bigcock) {
+				Text.Out(`“Mm… that’s a juicy looking cock you have there, ${pc.name}.” Gwendy coos, licking her lips hungrily. “I think I’ll have a little taste before we move on… but first, let me get out of these pesky clothes. Lie down on the bed and enjoy the show.”`);
+			} else if (cock) {
+				if (ddildo) {
+					Text.Out(`“Oh baby… that just won’t do.” Gwendy gives you a wicked smile, shaking her head as she disparages over your ${pc.cocks}. “I’m used to bigger, and I’m not going to settle for second rate… but don’t worry, you’re still going to pleasure me - just not with that. I’m going to go and fetch something… You. Bed. Now.” She gestures imperiously before starting to undo her belt.`);
+				} else {
+					Text.Out(`“Hmm… I guess you’ll do.” Gwendy throws you a teasing smile. “I’m used to bigger, but I’m not about to give up my prize just because it’s slightly disappointing. I’m gonna get out of these pesky clothes… why don’t you go and wait on the bed.”`);
+				}
+			} else {
+				Text.Out(`“Don’t worry, I’m going to get you something to work with,” Gwendy promises, giving you a wink, hand trailing down your nubile form in a loving caress. “I think you may even end up enjoying it as much as I will… but enough stalling. Get on the bed.”`);
+			}
+			Text.Out(` Obeying her, you settle down on the soft sheets, excitement building as you raptly watch her disrobe.`);
+		}
+		Text.NL();
+		if (eplus) {
+			Text.Out(`You gulp as the well-endowed farmgirl shrugs out of her pants, her massive member flopping out to dangle down to her knees. Though it’s already grown to an impressive length, she’s still only half hard.
+
+			“See something you like, ${pc.name}?” Gwendy asks huskily, giving you a sultry smirk as she slips out of the rest of her clothes. “Don’t worry, you’re safe… for now.” Her cock twitches in protest, having quite different ideas in mind.`);
+		} else {
+			Text.Out(`Gwendy shrugs out of her pants and panties, tugging them down her long, freckled legs. With a practiced movement, she frees her heavy breasts from their confinement. Watching them heave with her labored breathing is intoxicating, and it only gets more so as the farmer starts feeling herself up.
+
+			“That’s right, drink it all up,” she teases you as she touches herself. “I can’t wait to get started with you.”`);
+		}
+		Text.NL();
+
+		const dildoFirst = ddildo && !gwendy.UsedDDildo();
+		let flip: boolean;
+
+		let target: () => string;
+		let targetObj: Orifice;
+		let targetVag: boolean;
+
+		if (ddildo) {
+			gwendy.flags.Toys |= GwendyFlags.Toys.DDildo;
+			Text.Out(`Gwendy strides past you to a chest set against one of the walls. She bends over to rummage around in it, giving you an enticing view of her soft, bobbing buttocks and the wet patch of her snatch nestled between them.${eplus ? " Your eyes travel further down, coming to rest on her massive balls and turgid horse dong dangle, its flared head crowned by a bead of thick pre." : ""}
+
+			When she reemerges, the farmer is proudly cradling a ridiculously long, double-ended equine dildo. “${dildoFirst ? "I don’t get to use this often, but I have a feeling you’ll be seeing it a lot more from now on…" : "Remember this bad boy?"} I hope you can take it.” She smiles wickedly. “After all… half of this is going into you.” You gulp nervously as she stalks toward you, a dildo the size of a two handed club in her arms.`);
+			Text.NL();
+
+			const scenes = [() => {
+				flip = true;
+				Text.Out(`“Mm… so sexy, so vulnerable…” Gwendy murmurs as she trails a hand down your ${pc.breasts}, over your ${pc.belly} and to your crotch. ${cock ? `The farmer gives your ${pc.cocksandballs} a teasing squeeze, a taunting reminder that ${player.NumCocks() > 1 || player.HasBalls() ? "they" : "it"} won’t be getting any more attention from her.` : `The farmer gives you a teasing caress before withdrawing her fingers.`}
+
+				“Roll over on your stomach,” she instructs. “Butt up. Good, just like that.” She gives your ${pc.butt} a slap, nudging you to fold your ${pc.knees} to further prop it up for her. Once she’s satisfied with your position, she spreads your cheeks apart, exposing your ${pc.anus}${pc.naga(` and ${pc.gen}`, ``)}. “Looks snug enough… not that it will remain so for long.” She teases your hole  lightly with her thumb, the shadow of a promise of what’s awaiting you.`);
+			}];
+			if (player.HasLegs()) {
+				scenes.push(() => {
+					Text.Out(`“Spread ‘em wide, this will take a little work.” Gwendy doesn’t give you much chance to protest as she sidles up against you, bumping up your ${pc.legs} and pinning her shoulder under one of your ${pc.knees}. You feel incredibly vulnerable as you feel her hand caress your ${pc.gen}, boldly groping you between your ${pc.legs}.
+
+					You shift restlessly as she pushes her finger inside you, barely giving you time to adjust before she adds another. ${eplus ? `All the while, you can feel her dick rubbing against your ${pc.butt} - hot, turgid and still swelling. ` : ``}You grunt as she adds the fourth and final digit, working you relentlessly… not that anything she does to you now is going to come close to what she has planned for your immediate future.`);
+				});
+			}
+			if (player.IsNaga() && player.FirstVag()) {
+				scenes.push(() => {
+					Text.Out(`Gwendy sits herself down on top of you, trapping your ${pc.legs} between her knees. “Squirm all you want, I’m not letting you go anytime soon,” she declares, letting her free hand trail down your ${pc.skin} to your crotch. Despite her order, you shift restlessly as she plays with your ${pc.gen}, dipping her fingers into your waiting depths. “Dripping and ready.” Your tail twitches feebly as the farmer thrusts her digits into you, all the while taunting you of how she’s going to use you for her own pleasure.`);
+				});
+			}
+			_.sample(scenes)();
+
+			Text.NL();
+			Text.Out(`“Just a moment… I won’t keep ya waiting for long.” She withdraws, liberally coating the impressive length of her massive toy with the entire contents of a vial placed on the bed stand. Your lover presses one flared tip against her cleft, letting out a soft moan and biting down on her lip as she slowly starts feeding it inside herself. Though accepting the double ended equine fuck stick is a daunting task, the relative ease with which she’s able to take it in shows signs of frequent practice.`);
+			Text.NL();
+
+			Sex.Vaginal(undefined, gwendy);
+			gwendy.FuckVag(gwendy.FirstVag(), ToysItems.EquineDildo.cock, 3);
+
+			Text.Out(`${eplus ? "By this point, the farmgirl is fully hard, erect equine member jutting out proudly. For every inch that she eases inside herself, her cock bobs happily, splattering you and the bed equally with her salty pre. " : ""}Before long, Gwendy has accommodated enough of the toy to allow her to clamp down on it with her vaginal muscles, leaving roughly two thirds of it dangling between her legs menacingly. “Now, it’s your turn,” she proclaims, short on breath and freckled cheeks flush with excitement.
+
+			She confidently shuffles closer, ${flip && player.HasTail() ? "lifting your ${pc.tail} to allow her access, " : ""}her hand guiding the remaining flared head to her target, your `);
+			const targetScene = new EncounterTable();
+			if (player.FirstVag() && (!flip || !player.IsNaga())) {
+				targetScene.AddEnc(() => {
+					targetVag = true;
+					targetObj = player.FirstVag();
+					target = () => pc.vag;
+					Text.Out(`wet but woefully unprepared ${pc.vag}. “This is going to feel amazing,” she promises soothingly, teasing your cleft with the toy. “This lubricant will work wonders, it’s from my special stock. You just… have to… Let. Me. <b>In.</b>”`);
+					Text.NL();
+					Sex.Vaginal(undefined, player);
+					player.FuckVag(player.FirstVag(), ToysItems.EquineDildo.cock, 3);
+				}, 3);
+			}
+			if (flip || !player.IsNaga()) {
+				targetScene.AddEnc(() => {
+					targetObj = player.Butt();
+					target = () => pc.anus;
+					Text.Out(`puckered ${pc.anus}. “Hope you’re ready for this,” she murmurs, grinning wickedly as she teases your protesting opening. “This lubricant will work wonders, it’s from my special stock. You just… have to… Let. Me. <b>In.</b>”`);
+					Text.NL();
+					Sex.Anal(undefined, player);
+					player.FuckAnal(player.Butt(), ToysItems.EquineDildo.cock, 3);
+				}, 1);
+			}
+			targetScene.Get();
+			Text.NL();
+			const cap = targetObj.Cap();
+			Text.Out(`Your ${pc.eyes} go wide and your voice fails you as she penetrates you, slowly but persistently pushing the massive artificial cock deeper inside your body. `);
+			if (cap >= Capacity.gaping) {
+				Text.Out(`Moaning with pleasure, you arch your back as the toy easily slips inside you, earning you a look of grudging respect from Gwendy. “${dildoFirst ? `Not your first rodeo, I take. Someone has trained you well.` : `You’re getting better at this, ${pc.name}. It took me quite a bit of practice to be able to take this bad boy, but you’re a natural.`}” Before long, the double ended dildo is firmly lodged inside your nethers, allowing for the farmer to start moving on top of you.`);
+			} else if (cap >= Capacity.loose) {
+				Text.Out(`You’re stretched so wide, and each agonizing second you feel more and more <i>full</i>, the toy probing and expanding your deepest depths. “${dildoFirst ? `Mm… you’re doing quite well for your first time with this bad boy, ${pc.name}. Only a few more inches to go…` : `You remember this feeling well, don’t you? Let me train your ${target} more with this bad boy…`}” Gwendy takes it slow and keeps encouraging you with soft quips, but nevertheless the double ended dildo advances inexorably deeper into your ${target}.`);
+			} else {
+				Text.Out(`The feeling is indescribable, and despite the copious amounts of lube, you have to bite down ${flip ? "on the pillow" : "on your lip"} in order to not cry out in pain. Seeing your distress, Gwendy withdraws the toy, giving you some time to recover before teasing the entrance to your ${target} again. “${dildoFirst ? `Don’t worry, I’ll go slow, give you some time to get used to it.` : `So tight… but you’ve done this before, ${pc.name}, you will do it again.`}” With that, the farmer presses the lubed up toy lightly against your ${target}, gaining a little more purchase each time she pushes it into your depths.
+
+				By the time she has a good ten inches firmly lodged inside you, your ${pc.skin} is glistening with sweat and your breathing is ragged. Gwendy makes an experimental move, pulling herself a few inches up her end of the toy before slowly sinking back down again, exerting pressure on your filled-to-the-brim passage. It’s uncomfortable… but somehow no longer painful. The cool lubricant appears to have a somewhat numbing effect, besides granting your ${target} unprecedented elasticity.`);
+				TimeStep({minute: 30});
+			}
+			Text.NL();
+			Text.Out(`“Ready or not, I’m gonna start moving now. Better hold on to something.” Your fingers tighten on the sheets as she tenses her legs, raising herself up until only the flared head of the double ended dildo remains inside her pussy.`);
+
+			// TODO #set $cock = toy
+		} else { // Regular scene, ride PC cock
+			Text.Out(`The bed creaks as Gwendy steps onto it, her blonde hair almost brushing against the low rafters as she looms over your prone form, hands on her hips. You draw a surprised breath as she traces the length of your ${pc.cock} with the sole of her bare foot, pinching and teasing it with her toes. ${player.HasBalls() ? `She lightly puts weight on your ${pc.balls}, further cementing her absolute control over you. ` : ``}Your ${pc.cocks} ${c.isAre} stiffening under her delicate teasing, jutting up ${bigcock ? `proudly` : `hopefully`} from your crotch by the time she withdraws her foot.`);
+			Text.NL();
+			if (horsecock || bigcock) {
+				Text.Out(`“Mm… almost ready for me.” The farmer sinks to her knees on the bed, trailing her tongue${player.HasBalls() ? ` from your ${pc.balls} and` : ``} up${c.plural(` the biggest one of`, ``)} your cock${c.s}, playfully licking the ${pc.cockTip}. She keeps teasing you with her mouth and fingers for a few minutes, but by the time she’s pushed you close to the edge, the girl stops. She gently but firmly presses your shaft down against your ${pc.belly}, holding it down with the palm of her hand.
+
+				“I’m gonna savor this. You just lie back for now…” Stradling you, Gwendy lets her other set of lips have a taste of you. Sighing contently, your lover drags her wet cunt caress your turgid length from root to stem, ${eplus ? `her own equine member rubbing against your ${pc.face} as she nears its apex, filling your nostrils with her musk` : `coating it liberally with her juices`}. You moan happily as she uses you, relentlessly teasing your ${pc.cock} until a bead of your sticky pre mounts its twitching crown.
+
+				“Don’t blow your load already now,” she taunts you. “You’re not allowed to cum until I tell you so… and if you still do before I’ve had my fill… well, don’t expect me to be lenient with you just because of that.” With that warning expressed, the farmer slowly rises, dragging her nether lips along the length of your ${pc.cock} until its ${pc.cockTip} comes to rest against the entrance to her pussy. You both stifle a grunt as she presses down, spearing herself onto your dick.`);
+			} else {
+				Text.Out(`“Bet you’d love to fuck me, wouldn’t you?” the farmer teases you, sinking to her knees and letting the ${pc.cockTip} of${c.oneof} your ${pc.cocks} play against the enticing lips of her pussy. “Well, you’re going to, but it’ll be on <b>my</b> terms, and until <b>I’m</b> done with you.” She emphasizes her statements by pressing her cunt against your member, never quite letting you penetrate her.
+
+				“You know you’re lucky that I’m allowing this, don’t you?” she breathes, tantalizing opening hovering just beyond your reach. You nod.
+
+				“You know that I’ve toys twice your size that could fill me much better, don’t you?” You reluctantly give her a nod, blushing deeply.
+
+				“Beg for it.”
+
+				You comply.
+
+				“Good ${player.mfFem(`boy`, `girl`)}.” Having teased you enough, she pushes down on your ${pc.cock}, her hungry nether lips swallowing you whole in one smooth motion. She grinds against your hips, moaning softly as she lets you get a feel of her insides. Wasting no time, she pulls herself up again until only the the ${pc.cockTip} remains inside her.`);
+
+				player.subDom.DecreaseStat(-75, 2);
+				gwendy.subDom.IncreaseStat(100, 3);
+			}
+			Text.NL();
+
+			Sex.Vaginal(player, gwendy);
+			player.Fuck(cock, 3);
+			gwendy.FuckVag(gwendy.FirstVag(), cock, 3);
+
+			Text.Out(`“Ready or not, I’m gonna start moving now. Better hold on to something.”`);
+			// TODO #set $cock = pc pref cock
+		}
+		Text.NL();
+		Text.Out(`When she thrusts down, it almost drives the wind out of you. Now that she’s done teasing you, the farmer goes wild, riding you with abandon, hands planted on either side of your torso for support. Her unabashed, lust-filled cries can probably be heard for miles around - for certain, no one on the farm can be unaware of your activities by this point.`);
+		Text.NL();
+		if (ddildo) {
+			Text.Out(`Each bucking thrust of her hips grinds your end of the massive double ended dildo deeper into your ${target}, ${!targetVag ? (cock ? `the thick shaft massaging your prostate through your stretched anal walls` : `relentlessly stretching your bowels`) : `the flared tip bumping against the entrance to your womb`}. Gwendy’s fucking you, not the other way around, and you’re loving it. Not that she isn’t getting her own pleasure from this; the farmer’s eyes are closed in a perpetual state of bliss, and it’s no wonder: she’s riding the monster cock like a champ, each bounce taking roughly half of the toy inside her stretched pussy and coating it with her slick juices.`);
+		} else if (bigcock) {
+			Text.Out(`Despite your considerable size, Gwendy is taking you like a champ, rhythmically rising and falling on your ${pc.cock} without showing any signs of relenting. Most of your shaft is covered in her slick juices, and each bounce envelops you in her warm innards, eliciting a blissful grunt from your lover every time you bump against the entrance to her womb.`);
+		} else {
+			Text.Out(`Judging by the ease with which the farmer rides you - every bounce slams her hips into yours, bottoming out on your ${pc.cock} - the girl is used to far larger insertions. Not that she’s loose by any stretch; her warm vaginal walls cling to your shaft snugly, and if her expression is any tell, the girl appears to be getting her own fair share of pleasure out of it.`);
+		}
+		Text.NL();
+		if (eplus) {
+			Text.Out(`Gwendy’s enormous equine cock is twitching, overflowing with pre and eager to release her virile seed into a willing receptacle. Each thrust of her hips delivers a thick serving of dickgirl cum that splatters onto your ${flip ? `back` : `${pc.belly}, ${pc.breasts} and ${pc.face}`}, liberally coating your ${pc.skin}.`);
+			Text.NL();
+
+			let bj: boolean;
+			const scenes = [() => {
+				Text.Out(`Bottoming out on ${ddildo ? `her end of the toy` : `your ${pc.cock}`} and balancing herself with one hand on your ${flip ? `lower back` : `shoulder`}, the farmer starts grinding her pussy against you while using her free hand to jerk herself off. Her turgid bitch breeder is way too thick for her to encompass with her fingers, but with the pleasure from getting fucked, she doesn’t need much to push her over the edge.`);
+			}];
+			if (!flip && player.BiggestBreasts().Size() >= BreastSize.Medium) {
+				scenes.push(() => {
+					Text.Out(`“Mmm… got something for you to do, ${pc.name}.” The farmer leans in for a kiss, pressing her massive cock against you. As your lips lock and she greedily tongue fucks you, she reaches to pull your ${pc.hand} up to one of your ${pc.breasts}. “Press ‘em together… yeah, just like that…” Gwendy lines herself up between your ${pc.breasts} as you dutifully push them together, forming a fuck sleeve for her to use.`);
+					Text.NL();
+					if (bigcock || ddildo) {
+						Text.Out(`Your lover alternates between bottoming out on ${ddildo ? `her end of the toy` : `your ${pc.cock}`} and rocking her hips forward, making your ${pc.breasts} bounce. The tip of her horsecock grinds against and leaves a sticky trail of pre across your ${pc.face} and forehead, and from the erratic pulsing of the turgid shaft, she’s not gonna last much longer.`);
+					} else {
+						Text.Out(`Your lover thrusts between your ${pc.breasts} with abandon, each back-thrust bringing her hips down on your crotch with a wet smack. Her cock leaves a sticky trail all across your front, lubing up your cleavage and splattering onto your ${pc.face}. You can tell that her climax is getting close, and it’s going to be a messy one.`);
+					}
+					Text.NL();
+					Text.Out(`“F-fuck, so good…”`);
+				});
+			}
+			if (!flip && bigcock) {
+				scenes.push(() => {
+					bj = true;
+					Text.Out(`“Mmm… come on now, ${pc.name}, don’t leave a gal hanging… say aah…” The farmer’s intentions are clear. She shifts her weight forward, the flared head of her sticky cock rubbing against your ${pc.lips}, demanding entry. Giving in to her whims, you open your mouth, letting your ${pc.tongue} ${pc.longtongue(`unfurl and encircle`, `play across`)} her thick shaft. Her musky taste is heady, and you are relishing in it. “That’s it… now… <b>open wide</b>.” Your ${pc.eyes} go wide as she shoves her hips forward, feeding a good three inches of equine girlcock into your unprepared maw. Already, she’s nudging the entrance to your gullet insistently, and she has plenty more to give.`);
+					Text.NL();
+
+					Sex.Blowjob(player, gwendy);
+					gwendy.Fuck(gwendy.FirstCock());
+					player.FuckOral(player.Mouth(), gwendy.FirstCock());
+
+					Text.Out(`Soon, your jaw is aching from her back-and-forth throatfucking. Each downthrust brings pleasure in the form of her hips slamming down on ${ddildo ? `her end of the double ended dildo, jostling your nethers` : `your ${pc.cock}`}, but it’s inexorably followed by several inches of horsecock being forced down your esophagus. It’s all you can do to hang on and take it. Thankfully, from Gwendy’s increasingly erratic moans, she’s not going to last much longer.`);
+				});
+			}
+			Text.NL();
+			Text.Out(`The farmer lets out a ragged gasp, a shiver running through her that you can feel through ${ddildo ? `the toy connecting you together` : `her cunt clamping down on your ${pc.cock}`}. With a wild buckle of her hips, she lets loose her pent up ejaculate, ${bj ? `flooding your mouth with` : `hosing you down in`} white, sticky nut batter. It takes almost a full minute for her to come down from her high, continuous tremors through her member depositing more and more of the contents of her balls ${bj ? `into your swelling tummy` : `over you and the bed`}. Finally, she tosses her hair back, wiping a mixture of sweat and cum from her brow${bj ? `. You cough and sputter, drawing ragged breaths as she dislodges her cock from your throat` : ``}. She grins wickedly as she lightly shifts her loin, sending a burst of pleasure through your sensitive nethers.`);
+		} else {
+			Text.Out(`The farmer is tireless, barely pausing as her hips quiver with her first climax. She cries out, sweat-slick body trembling as she rides it out, but there’s still plenty of fire left in her. After leaning down to give you a fierce kiss, your lover flips her leg, twisting around until she’s ${flip ? `facing you ass-to-ass, the two of you connected by her massive double-ended toy` : `riding you reverse cowgirl`}.
+
+			“‘Nough resting, I’m far from done with you, ${pc.name}.” True to her words, Gwendy slams her ass ${flip ? `back` : `down`} on ${ddildo ? `the equine dildo` : `your ${pc.cock}`}, barely giving you time to recover before she shifts back into full gear. Before long, you can feel your own climax approaching, ${ddildo ? `forced out by the massive toy spearing your ${target}` : `coaxed out by her pussy clamping down on you`}. You moan loudly, hips buckling as the wave hits you.`);
+			Text.NL();
+
+			const cum = player.OrgasmCum();
+
+			if (ddildo) {
+				Text.Out(`Your ${target} constricts on your end of the double ended horsecock, your walls clamping down tightly and convulsing uncontrollably on the massive toy. `);
+				if (cock) {
+					Text.Out(`Your ${pc.cocks} fire${c.s} off ${c.itsTheir} load, which splatters uselessly ${flip ? `onto the sheets` : `all over your ${pc.belly} and ${pc.breasts}`}, your sperm fruitlessly seeking a womb it will never find. `);
+				}
+				if (player.FirstVag()) {
+					Text.Out(`You groan as your ${pc.vag} starts leaking with your girly juices${player.HasLegs() ? ` between your ${pc.legs}` : ``}, afire with blissful pleasure. `);
+				}
+				Text.Out(`Eyes refocusing, you see Gwendy grinning at you in the dim light.
+
+				“Looks like I’m not the only one enjoying this bad boy… have you fallen in love, ${pc.name}?” You answer with a non-committal whimper. “I’m afraid he’s taken… but I’m sure we can work something out, don’t you think?” A light nudge of her hips forces out a weak moan from you.`);
+			} else { // PC has cock
+				Text.Out(`Your ${pc.cock} gives a final twitch before depositing your cum into the farmer’s waiting pussy, causing you to arch your back and buck your hips into your lover. `);
+				if (player.NumCocks() > 1) {
+					const c2 = new GP.Plural(player.NumCocks() > 2);
+					Text.Out(`Your free cock${c2.s} spew${c2.notS} out ${c2.itsTheir} load onto your ${pc.belly} and all over Gwendy’s front, coating her from tits to tummy. `);
+				}
+				if (cum >= CumLevel.Mid) {
+					const b = new GP.Plural(player.HasBalls());
+					Text.Out(`Your ${pc.balls} ${b.hasHave} plenty to give, churning as you deposit wave after wave of potent baby batter inside her. `);
+				}
+				Text.Out(`Utterly spent, you collapse onto your back, breathing heavily.
+
+				“Mmm… so warm… someone was a bit pent up…” Gwendy slowly pulls herself off your ${pc.cock}, your love juices trailing down the inside of her leg. `);
+				if (cum < CumLevel.Low) {
+					Text.Out(`“Hope there’s more where that’s coming from…”`);
+				} else if (cum < CumLevel.Mid) {
+					Text.Out(`“M-more than a bit…” She reaches down between her legs, scooping up a bit of your cum and bringing it to her lips. “Delicious.”`);
+				} else {
+					Text.Out(`“S-so much… wow… I feel so full…” A massive glob of your sticky load splatters down on the sheets, and by the swell on her tummy, there’s still plenty more lodged inside her.`);
+				}
+				Text.NL();
+
+				const subby = _DDildoOdds(dOdds, true);
+
+				if (subby) {
+					Text.Out(`You’re vaguely aware of Gwendy moving around on top of you, still coming down from your high. You blink as you feel a splatter of something wet and sticky landing on your ${pc.face}. Looking up, you see your lover stradling you, her freshly-fucked vag looming over you, still leaking with your spooge.
+
+					“Feels like it’d be greedy of me to… aah… keep such a treasure to myself, don’t ya think?” The farmer has a wicked grin on her face as she lowers herself down, grinding her cum-filled cunt against your mouth. With your head trapped between her thighs, you’ve little choice but to do as she says and lap it up, the salty taste of your sticky climax heavy on your taste buds. Finally, she relents, flipping around to face you again and giving you a sloppy kiss. “What goes around cums around… mhm… tasty.”`);
+					Text.NL();
+				}
+				Text.Out(`Dragging her pussy over your ${pc.cocks}, Gwendy slowly coaxes you back to hardness, teasing your ${pc.cockTip} with her sticky sex.`);
+			}
+			Text.Out(` The farmer gives you a minute to gather yourself, but it’s not long before she starts moving again.`);
+		}
+		Text.NL();
+		Text.Out(`“${_.sample([
+				`Mmm… didn’t think… I was done, did you?`,
+				`Hope you’re… hah… ready for round two, ${pc.name}.`,
+				`I’m not spent yet… hah… not by far. I hope you’re not either.`,
+				`Aah… I really needed that… but we’re just getting started, ${pc.name}.`,
+				`Don’t you look a… hah… sticky mess… but I think I can do better.`,
+			])}” Not waiting for a reply, Gwendy wastes no time resuming her energetic riding, her boundless stamina showing no signs of depleting. All you can hope to do is grab onto the stained sheets and endure… it looks like you’re going to be here for a while.`);
+		Text.Flush();
+
+		Gui.NextPrompt(() => {
+			Text.Clear();
+
+			const cum = player.OrgasmCum(3);
+
+			Text.Out(`It’s more than two hours and multiple orgasms later that the farmer finally calls it quits, collapsing on top of you in blissful stupor. Your entire body aches, and you’re decidedly spent from the wild ride.`);
+			Text.NL();
+			if (ddildo) {
+				Text.Out(`With a slow, lewd ‘slop’, the equine double dildo slides out of Gwendy’s well-used snatch, leaving it gaping. The girl nuzzles up against you, leaning down to free the other end from your stretched ${target}.
+
+				“${dildoFirst ? `Ya took it like a champ, ${pc.name}. Hope ya want to try this again sometime… I sure would` : `Mmm… not many that can say they can take this bad boy and walk properly afterwards… you make me proud, ${pc.name}`}.” You wince. You’re going to be feeling this one for a while.`);
+			} else {
+				Text.Out(`With a lewd ‘slop’, your ${pc.cock} slides out of her stretched pussy, `);
+				if (cum < CumLevel.Low) {
+					Text.Out(`the residue from your numerous orgasms lazily pouring out onto the sheets.`);
+				} else if (cum < CumLevel.Mid) {
+					Text.Out(`letting out a spurt of dammed up cum which pools on the sheets.`);
+				} else {
+					Text.Out(`a deluge of your cum flowing onto the sheets following it. There’s a distinct swell visible on the farmer’s stomach from the sheer amount she’s milked from you.`);
+				}
+				Text.Out(` ${eplus ?
+					`Gwendy’s own cock gives a feeble twitch against` :
+					`Gwendy shivers happily, softly trailing her fingers down`} your ${pc.belly}. “${bigcock ? `Nothing quite like a good fuck… mhm… this ache in my loins is the best…` : `Not bad… I might give you a go again sometime.`}” The farmer gives you a weak smile, snuggling up against you.`);
+			}
+			Text.NL();
+			Text.Out(`The two of you remain like that for a while, too exhausted to do much more than cuddle.`);
+			Text.NL();
+			if (hangout) {
+				Text.Out(`“Well… I guess all this is going to the laundry bin,” Gwendy scratches her head, surveying the utter mess the two of you have made of the bed. “I think I’ll be busy for a while. Be seeing you, ${pc.name}.”
+
+				You put on your clothes and spend some time helping her with the cleanup before you part ways.`);
+			} else if (first) {
+				Text.Out(`As you restore your clothing and gear, you can’t help but wonder: If this is Gwendy’s idea of a casual romp, what are those ‘special plans’ of hers for your next loss going to be like? You’re not sure that finding out is going to be good for your health.`);
+			} else {
+				Text.Out(`Still a bit shaky, you start restoring your clothing and gear as Gwendy surveys the mess the two of you created of the bed. “I think I might have gone a bit overboard again.”
+
+				Maybe a tad.`);
+			}
+
+			Text.Flush();
+
+			TimeStep({hour: 3});
+
+			Gui.NextPrompt();
+		});
 	}
 
 	function LossEatHerOut(hangout: boolean, first: boolean) {
@@ -2616,28 +3003,11 @@ export namespace GwendyScenes {
 		Text.NL();
 
 		// Get biggest cock or horsecock
-		const cocks = player.AllCocks();
-		let cock: Cock;
-		let horsecock: boolean;
-		for (const c of cocks) {
-			if (cock === undefined) {
-				cock = c;
-				continue;
-			}
-			const isBigger = c.Len() > cock.Len();
-			if (c.race.isRace(Race.Horse)) {
-				if (!horsecock || isBigger) {
-					cock = c;
-				}
-				horsecock = true;
-			} else if (isBigger) {
-				cock = c;
-			}
-		}
+		const { cock, bigcock, horsecock } = _GetHorsecockBigcock(player);
 		player.SetPreferredCock(cock);
 
 		// Horsecock or 14"+ cock
-		if (horsecock || cock && cock.Len() >= 28) {
+		if (horsecock || bigcock) {
 			Text.Out(`“Mmm… now there’s a treat and a half… you’re hung like a stallion.” You can almost hear her mouth salivating at the sight of your ${pc.cock}. “I… might give you a hand with that… later.” She gives your shaft a firm squeeze. “For now… stay focused. If you’re good, I might decide to… mmh… reward your efforts.”`);
 			if (player.HasBalls()) {
 				Text.Out(` Her hand trails further down, caressing the swell of your ${pc.balls}.`);

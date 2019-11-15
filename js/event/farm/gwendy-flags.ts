@@ -16,8 +16,8 @@ export namespace GwendyFlags {
 		None     = 0,
 		Strapon  = 1,
 		RStrapon = 2,
-		Beads    = 3,
-		DDildo   = 4,
+		Beads    = 4,
+		DDildo   = 8,
 	}
 
 	export enum ChallengeWinScene {
