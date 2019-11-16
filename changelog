@@ -5,6 +5,14 @@ CHANGELOG for Fall of Eden
                   CURRENT
 --------------------------------------------
 
+Version 0.5.5
+-------------
+* Bugfix: Introduction Review bug that would eventually cause issues with the parser.
+
+--------------------------------------------
+             PREVIOUS VERSIONS
+--------------------------------------------
+
 Version 0.5.4
 -------------
 * Bugfix: there was a bug where alchemy would fail if you didn't already have any of the item being crafted in your inventory.
@@ -14,10 +22,6 @@ Version 0.5.4
 
 Adding 5k words of new content:
 * A new loss scene for Gwendy with quite a lot of variation. It has a major variation if the pc has low dominance (or is female) involving one of Gwendy's toys.
-
---------------------------------------------
-             PREVIOUS VERSIONS
---------------------------------------------
 
 Version 0.5.3
 -------------

@@ -377,7 +377,7 @@ export namespace Intro {
 			Intro.JobSelect();
 		}, true);
 		Input.buttons[1].Setup("No", () => {
-			player.body = new Body(this);
+			player.body = new Body(player);
 			Intro.SelectGender();
 		}, true);
 	}
