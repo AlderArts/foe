@@ -2447,13 +2447,13 @@ export class Entity {
 
 	// TODO: affect with things such as stretch, lust, perks etc
 	public VagCap() {
-		return this.FirstVag().capacity.Get();
+		return this.FirstVag().Capacity();
 	}
 	public OralCap() {
 		return this.Mouth().capacity.Get();
 	}
 	public AnalCap() {
-		return this.Butt().capacity.Get();
+		return this.Butt().Capacity();
 	}
 
 	public ResetVirgin() {

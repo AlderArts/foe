@@ -44,15 +44,13 @@ export class Stat {
 		const old = this.base;
 		this.base += diff;
 		if (GetDEBUG() && this.debug) {
-			Text.NL();
 			if (diff > 0) {
-				Text.Add(`DEBUG: ${this.debug()} ${old} -> ${this.base} (ideal: ${ideal})`, undefined, "blue bold");
+				Text.Add(`<br>DEBUG: ${this.debug()} ${old} -> ${this.base} (ideal: ${ideal})<br>`, undefined, "blue bold");
 			} else if (diff === 0) {
-				Text.Add(`DEBUG: ${this.debug()} ${old} capped (ideal: ${ideal})`, undefined, "bold");
+				Text.Add(`<br>DEBUG: ${this.debug()} ${old} capped (ideal: ${ideal})<br>`, undefined, "bold");
  			} else {
-				Text.Add(`DEBUG: ${this.debug()} ${old} -> ${this.base} (ideal: ${ideal})`, undefined, "red bold");
+				Text.Add(`<br>DEBUG: ${this.debug()} ${old} -> ${this.base} (ideal: ${ideal})<br>`, undefined, "red bold");
  			}
-			Text.NL();
 			Text.Flush();
 		}
 		if (fraction) {
@@ -74,13 +72,11 @@ export class Stat {
 		const old = this.base;
 		this.base += diff;
 		if (GetDEBUG() && this.debug) {
-			Text.NL();
 			if (diff === 0) {
-				Text.Add(`DEBUG: ${this.debug()} ${old} capped (ideal: ${ideal})`, undefined, "black bold");
+				Text.Add(`<br>DEBUG: ${this.debug()} ${old} capped (ideal: ${ideal})<br>`, undefined, "black bold");
 			} else {
-				Text.Add(`DEBUG: ${this.debug()} ${old} -> ${this.base} (max: ${ideal})`, undefined, "blue bold");
+				Text.Add(`<br>DEBUG: ${this.debug()} ${old} -> ${this.base} (max: ${ideal})<br>`, undefined, "blue bold");
 			}
-			Text.NL();
 			Text.Flush();
 		}
 		if (fraction) {
@@ -102,13 +98,11 @@ export class Stat {
 		const old = this.base;
 		this.base -= diff;
 		if (GetDEBUG() && this.debug) {
-			Text.NL();
 			if (diff === 0) {
-				Text.Add(`DEBUG: ${this.debug()} ${old} capped (ideal: ${ideal})`, undefined, "black bold");
+				Text.Add(`<br>DEBUG: ${this.debug()} ${old} capped (ideal: ${ideal})<br>`, undefined, "black bold");
 			} else {
-				Text.Add(`DEBUG: ${this.debug()} ${old} -> ${this.base} (min: ${ideal})`, undefined, "red bold");
+				Text.Add(`<br>DEBUG: ${this.debug()} ${old} -> ${this.base} (min: ${ideal})<br>`, undefined, "red bold");
 			}
-			Text.NL();
 			Text.Flush();
 		}
 		if (fraction) {

@@ -2913,6 +2913,11 @@ export namespace GwendyScenes {
 				Text.Out(`With a slow, lewd ‘slop’, the equine double dildo slides out of Gwendy’s well-used snatch, leaving it gaping. The girl nuzzles up against you, leaning down to free the other end from your stretched ${target()}.
 
 				“${dildoFirst ? `Ya took it like a champ, ${pc.name}. Hope ya want to try this again sometime… I sure would` : `Mmm… not many that can say they can take this bad boy and walk properly afterwards… you make me proud, ${pc.name}`}.” You wince. You’re going to be feeling this one for a while.`);
+
+				if (targetObj.capacity.IncreaseStat(8, .5)) {
+					Text.NL();
+					Text.Add(`<b>Your ${targetVag ? `pussy` : `butt`} feels slightly stretchier.</b>`);
+				}
 			} else {
 				Text.Out(`With a lewd ‘slop’, your ${pc.cock} slides out of her stretched pussy, `);
 				if (cum < CumLevel.Low) {
