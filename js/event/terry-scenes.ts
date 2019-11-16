@@ -1,6 +1,7 @@
 import * as _ from "lodash";
 
 import { Images } from "../assets";
+import { CumLevel } from "../body/balls";
 import { LowerBodyType } from "../body/body";
 import { Cock } from "../body/cock";
 import { Gender } from "../body/gender";
@@ -2747,11 +2748,11 @@ export namespace TerryScenes {
 			Text.Add("Your hands continue to stroke and caress the [foxvixen]’s [petitebulging] balls, gently kneading them and rolling them around on your palms as you try to gauge their weight and firmness, and from that the amount of semen stored within.", parse);
 			Text.NL();
 			const cum = terry.Cum();
-			if (cum >= TerryFlags.CumLevel.High) {
+			if (cum >= CumLevel.High) {
 				Text.Add("It goes without saying that Terry’s balls are full of cum; you can practically see the difference in size even before you touch them. In your hands, the seed-bloated orbs have a substantial amount of weight to them, straining over their liquid contents to the point the tension is palpable with the slightest touch. The [foxvixen] can’t hold back a plaintive moan, a bead of precum visibly welling from [hisher] shaft at the gentle pressure you inflict. You really doubt Terry would object to getting some venting, if you were of a mind.", parse);
-			} else if (cum >= TerryFlags.CumLevel.Mid) {
+			} else if (cum >= CumLevel.Mid) {
 				Text.Add("There’s a very real weight to Terry’s nuts, well beyond what [heshe] should normally have. There’s no question that there’s an abundance of semen in there; you can feel the firmness of [hisher] balls under your fingers as it packs them full. A quiver wracks the [foxvixen]’s form, and a moan escapes Terry’s mouth, letting you know how sensitive they are as a result. It’d be quite messy if you were to tap [himher] now.", parse);
-	} else if (cum >= TerryFlags.CumLevel.Low) {
+	} else if (cum >= CumLevel.Low) {
 				Text.Add("You can definitely feel a little extra weight to the [foxvixen]’s balls, and there’s a definite firmness to the touch. You’d hesitate to say that [heshe]’s extremely loaded with semen, but it feels like [heshe] has enough for a nice fuck if you were in the mood.", parse);
 	} else {
 				Text.Add("Despite your efforts, you can’t really feel any weight beyond what you’d consider normal for Terry. Not only that, but they feel quite soft to the touch. You’d have to guess that [heshe]’s pretty much running on empty, practically nothing left inside them at all. Might be best to leave [himher] to fill up a while before your next session.", parse);

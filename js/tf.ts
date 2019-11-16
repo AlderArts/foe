@@ -16,7 +16,6 @@ import { Entity } from "./entity";
 import { GAME } from "./GAME";
 import { Item, ItemType } from "./item";
 import { IParse, Text } from "./text";
-import { Rand } from "./utility";
 
 export namespace TF {
 	export enum Effect {
@@ -43,9 +42,9 @@ export namespace TF {
 			}
 			if (list.length > 0) {
 				changed = Effect.Changed;
-				const idx = Rand(list.length);
-				list[idx].race = race;
-				ret.bodypart   = list[idx];
+				const bp = _.sample(list);
+				bp.race = race;
+				ret.bodypart = bp;
 			}
 		} else {
 			changed       = (bodypart.race !== race) ? Effect.Changed : Effect.Unchanged;

@@ -160,11 +160,11 @@ export class Bandit extends Entity {
 		} else if (col < 0.7) {
 			this.body.SetBodyColor(Color.light);
 		} else if (col < 0.8) {
-					this.body.SetBodyColor(Color.dark);
+			this.body.SetBodyColor(Color.dark);
 		} else if (col < 0.9) {
-					this.body.SetBodyColor(Color.olive);
+			this.body.SetBodyColor(Color.olive);
 		} else {
-					this.body.SetBodyColor(Color.black);
+			this.body.SetBodyColor(Color.black);
 		}
 
 		const hairCol = Math.random();
@@ -173,7 +173,7 @@ export class Bandit extends Entity {
 		} else if (hairCol < 0.7) {
 			this.body.SetHairColor(Color.brown);
 		} else {
-					this.body.SetHairColor(Color.blonde);
+			this.body.SetHairColor(Color.blonde);
 		}
 
 		this.body.SetEyeColor(Rand(Color.numColors));

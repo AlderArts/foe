@@ -277,32 +277,30 @@ export class Player extends Entity {
 		}
 	}
 
-	public LactationDesc(parse: IParse) {
+	public LactationDesc() {
 		if (!this.lactHandler.CanLactate()) {
 			return;
 		}
 
-		parse.nips = this.FirstBreastRow().NipsShort();
-		parse.breasts = this.FirstBreastRow().Short();
+		const ent = this.Parser;
 		const rate = this.lactHandler.Rate();
 
 		if (this.Lactation()) {
-			parse.toparmor = this.ArmorDesc();
 			if (rate > 3) {
-				parse.ua = this.Armor() ? Text.Parse(" under your [toparmor]", parse) : "";
-				Text.Add(" Milk practically gushes from your [nips], soaking your clothing and leaving a faintly sweet smell in its wake. There’s no way you’re going to be hiding this at all - or the contours of your [breasts] as the wet fabric clings to you[ua], leaving little to the imagination.", parse);
+				const ua = this.Armor() ? Text.Parse(` under your ${ent.armor}`) : "";
+				Text.Add(` Milk practically gushes from your ${ent.nips}, soaking your clothing and leaving a faintly sweet smell in its wake. There’s no way you’re going to be hiding this at all - or the contours of your ${ent.breasts} as the wet fabric clings to you${ua}, leaving little to the imagination.`);
 			} else if (rate > 1) {
-				parse.ua = this.Armor() ? Text.Parse(" At least your [toparmor] manages to conceal it reasonably well, although it still is uncomfortable down there.", parse) : "";
-				Text.Add(" Small streams of milk flow from your [nips], staining your clothing and creating a distinct wet blotch on the fabric.[ua] You feel like a good milking should probably be in order when you can get a moment to yourself.", parse);
+				const ua = this.Armor() ? Text.Parse(` At least your ${ent.armor} manages to conceal it reasonably well, although it still is uncomfortable down there.`) : "";
+				Text.Add(` Small streams of milk flow from your ${ent.nips}, staining your clothing and creating a distinct wet blotch on the fabric.${ua} You feel like a good milking should probably be in order when you can get a moment to yourself.`);
 			} else {
-				Text.Add(" Beads of fresh, white cream well up on your [nips] intermittently. Forced out from the pressure within your [breasts], they cling on for as long as they can before rolling off and seeping into your clothing. While it takes a little time for the wetness to build up, you get there just fine in the end.", parse);
+				Text.Add(` Beads of fresh, white cream well up on your ${ent.nips} intermittently. Forced out from the pressure within your ${ent.breasts}, they cling on for as long as they can before rolling off and seeping into your clothing. While it takes a little time for the wetness to build up, you get there just fine in the end.`);
 			}
 		} else if (rate > 0) {
 			const level = this.lactHandler.MilkLevel();
 			if (level >= 0.9) {
-				Text.Add(" Your [breasts] are fat and full, a distinct sensation of pressure behind your [nips] as they approach their capacity. Distinctly tender from their engorged state, they jiggle slightly with each step you take, a side-effect of holding all that weight.", parse);
+				Text.Add(` Your ${ent.breasts} are fat and full, a distinct sensation of pressure behind your ${ent.nips} as they approach their capacity. Distinctly tender from their engorged state, they jiggle slightly with each step you take, a side-effect of holding all that weight.`);
 			} else if (level >= 0.5) {
-				Text.Add(" Tingling and sensitive, there’s a distinct feeling of full sloshiness in your [breasts] as you go about your business. There’s much less sag and a lot more perkiness to them now, a welcome side effect of being filled like that.", parse);
+				Text.Add(` Tingling and sensitive, there’s a distinct feeling of full sloshiness in your ${ent.breasts} as you go about your business. There’s much less sag and a lot more perkiness to them now, a welcome side effect of being filled like that.`);
  			}
 		}
 	}

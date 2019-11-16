@@ -1,4 +1,4 @@
-import { Color } from "../body/color";
+import { ColorDesc } from "../body/color";
 import { Gender } from "../body/gender";
 import { Race } from "../body/race";
 import { EncounterTable } from "../encountertable";
@@ -598,7 +598,7 @@ export namespace FarmScenesIntro {
 
         let parse: IParse = {
             playername : player.name,
-            eyeColor   : Color.Desc(player.Eyes().color),
+            eyeColor   : ColorDesc(player.Eyes().color),
             mistermiss : player.body.Gender() === Gender.male ? "mister" : "miss",
             MisterMiss : player.body.Gender() === Gender.male ? "Mister" : "Miss",
         };

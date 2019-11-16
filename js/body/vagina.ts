@@ -65,28 +65,26 @@ export class Vagina extends Orifice {
 		return _.sample(nouns);
 	}
 	public Desc() {
-		let ret;
 		const vagArea = this.capacity.Get() * this.stretch.Get();
-		if     (vagArea <= 3 ) {
-			ret = {a: "an", adj: "extremely tight"};
-		} else if (vagArea <= 4 ) {
-			ret = {a: "a", adj: "very tight"};
-		} else if (vagArea <= 5 ) {
-			ret = {a: "a", adj: "tight"};
-		} else if (vagArea <= 6 ) {
-			ret = {a: "a", adj: "well-proportioned"};
-		} else if (vagArea <= 8 ) {
-			ret = {a: "a", adj: "flexible"};
+		if (vagArea <= 3) {
+			return {a: "an", adj: "extremely tight"};
+		} else if (vagArea <= 4) {
+			return {a: "a", adj: "very tight"};
+		} else if (vagArea <= 5) {
+			return {a: "a", adj: "tight"};
+		} else if (vagArea <= 6) {
+			return {a: "a", adj: "well-proportioned"};
+		} else if (vagArea <= 8) {
+			return {a: "a", adj: "flexible"};
 		} else if (vagArea <= 10) {
-			ret = {a: "a", adj: "very flexible"};
+			return {a: "a", adj: "very flexible"};
 		} else if (vagArea <= 12) {
-			ret = {a: "a", adj: "loose"};
+			return {a: "a", adj: "loose"};
 		} else if (vagArea <= 15) {
-			ret = {a: "a", adj: "slutty"};
+			return {a: "a", adj: "slutty"};
 		} else {
-			ret = {a: "a", adj: "gaping"};
+			return {a: "a", adj: "gaping"};
 		}
-		return ret;
 	}
 	// TODO
 	public Short() {

@@ -5,21 +5,33 @@ CHANGELOG for Fall of Eden
                   CURRENT
 --------------------------------------------
 
+Version 0.5.4
+-------------
+* Bugfix: there was a bug where alchemy would fail if you didn't already have any of the item being crafted in your inventory.
+* Bugfix: Fixed Gol Tailfuck/Hyperfuck scene prompt.
+* Bugfix: Gwendy's Win scenes were capped to Titjob/Tease level. This has been fixed, and the rest of the scenes can be accessed once again.
+* Bugfix: Cleanup of debug output.
+
+Adding 5k words of new content:
+* A new loss scene for Gwendy with quite a lot of variation. It has a major variation if the pc has low dominance (or is female) involving one of Gwendy's toys.
+
+--------------------------------------------
+             PREVIOUS VERSIONS
+--------------------------------------------
+
 Version 0.5.3
 -------------
+* Bugfix, Halloween event no longer steals all your items.
+
 * Fixed numerous minor logic errors in scenes discovered by applying strict typing.
 * Fixed some race detection errors in scenes, also discovered by applying strict typing.
 * Added some debug functionality. If you are in to hacking through the console, a bunch of game variables can now be accessed through the console on the object 'game'.
-* Added a new parser methodology that should make implementing scenes quicker and less prune to errors. It uses template literals from ES6 and some helper objects to allow for a simple parser syntax.
+* Added a new parser methodology that should make implementing scenes quicker and less prone to errors. It uses template literals from ES6 and some helper objects to allow for a simple parser syntax.
 
 Adding roughly 8k words of new content:
 * Gwendy has new talk scenes for various topics (chat, childhood, parents). The farm description placeholders have been removed.
 * Gwendy has a new loss scene for her challenge (eat her out).
 * Replaced some awkward placeholders for Jeanne, Roa, Twin's Penthouse (content for the twins themselves to come).
-
---------------------------------------------
-             PREVIOUS VERSIONS
---------------------------------------------
 
 Version 0.5.2
 -------------

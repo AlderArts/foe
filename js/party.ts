@@ -253,15 +253,11 @@ export class Party {
 	}
 
 	public SwitchPrompt(member: Entity) {
-		const parse: IParse = {
-			name:   member.name,
-			himher: member.himher(),
-			HeShe:  member.HeShe(),
-		};
+		const ent = member.Parser;
 		const active = this.InParty(member);
 		const that = this;
 		Text.Clear();
-		Text.Add("Switch [name] with who?", parse);
+		Text.Out(`Switch ${ent.name} with who?`);
 		Text.Flush();
 
 		if (active) {
@@ -271,10 +267,9 @@ export class Party {
 					that.SwitchOut(member);
 					Gui.PrintDefaultOptions();
 				}, enabled : true,
-				tooltip: Text.Parse("Send [name] to the reserve.", parse),
+				tooltip: `Send ${ent.name} to the reserve.`,
 			});
 			for (const e of this.reserve) {
-				parse.name2 = e.name;
 				options.push({ nameStr : e.name,
 					obj  : e,
 					func(obj: Entity) {
@@ -282,7 +277,7 @@ export class Party {
 						that.SwitchIn(obj);
 						Gui.PrintDefaultOptions();
 					}, enabled : true,
-					tooltip: Text.Parse("Switch [name] to the reserve, replacing [himher] with [name2].", parse),
+					tooltip: `Switch ${ent.name} to the reserve, replacing ${ent.himher} with ${e.name}.`,
 				});
 			}
 			if (options.length === 1) {
@@ -302,7 +297,7 @@ export class Party {
 						that.SwitchIn(member);
 						Gui.PrintDefaultOptions();
 					}, enabled : i !== 0,
-					tooltip: Text.Parse("Switch [name] into the active party, replacing [name2].", parse),
+					tooltip: `Switch ${ent.name} into the active party, replacing ${e.name}.`,
 				});
 				i++;
 			}
@@ -316,7 +311,7 @@ export class Party {
 							that.SwitchIn(member);
 							Gui.PrintDefaultOptions();
 						}, enabled : true,
-						tooltip: Text.Parse("Bring [name] into the active party.", parse),
+						tooltip: `Bring ${ent.name} into the active party.`,
 					});
 				}
 				Gui.SetButtonsFromList(options);
@@ -390,16 +385,13 @@ export class Party {
 
 						// Check for maxed out job
 						const master   = jd.job.Master(member);
-						let toLevel;
-						if (!master) {
-							const newLevel = jd.job.levels[jd.level - 1];
-							toLevel      = newLevel.expToLevel * jd.mult;
-						}
 
 						Text.Add("<tr><td><b>Job:</b></td><td>");
 						if (master) {
 							Text.Add("<b>(MASTER) [job]</b></td></tr>", parse);
 						} else {
+							const newLevel = jd.job.levels[jd.level - 1];
+							const toLevel = newLevel.expToLevel * jd.mult;
 							Text.Add("[job] level [lvl]/[maxlvl] (exp " + Math.floor(jd.experience) + "/" + Math.floor(toLevel) + ")</td></tr>", parse);
 						}
 					}

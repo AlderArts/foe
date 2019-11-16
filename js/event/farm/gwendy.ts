@@ -15,6 +15,7 @@ import { IStorage } from "../../istorage";
 import { IChoice } from "../../link";
 import { ILocation } from "../../location";
 import { Text } from "../../text";
+import { GwendyFlags } from "./gwendy-flags";
 
 // TODO: FIX STATS
 export class Gwendy extends Entity {
@@ -62,7 +63,7 @@ export class Gwendy extends Entity {
 
 		this.flags.Met  = 0;
 		this.flags.Market = 0;
-		this.flags.Toys = 0; // seen/used toys
+		this.flags.Toys = GwendyFlags.Toys.None; // seen/used toys
 
 		// Talk rotations
 		this.flags.RotChildhood = 0;
@@ -108,6 +109,14 @@ export class Gwendy extends Entity {
 		this.SaveSexFlags(storage);
 
 		return storage;
+	}
+
+	public EPlus(): boolean {
+		return this.FirstCock() !== undefined;
+	}
+
+	public UsedDDildo(): boolean {
+		return (this.flags.Toys & GwendyFlags.Toys.DDildo) !== 0;
 	}
 
 	// Schedule

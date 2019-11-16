@@ -2,7 +2,6 @@ import * as _ from "lodash";
 
 import { IStorage } from "../istorage";
 import { Stat } from "../stat";
-import { Text } from "../text";
 import { Orifice } from "./orifice";
 
 export class Butt extends Orifice {
@@ -94,28 +93,26 @@ export class Butt extends Orifice {
 		return _.sample(nouns);
 	}
 	public AnalDesc() {
-		let ret;
 		const area = this.capacity.Get() * this.stretch.Get();
 		if (area <= 2 ) {
-			ret = {a: "an", adj: "extremely tight"};
+			return {a: "an", adj: "extremely tight"};
 		} else if (area <= 3 ) {
-			ret = {a: "a", adj: "very tight"};
+			return {a: "a", adj: "very tight"};
 		} else if (area <= 4 ) {
-			ret = {a: "a", adj: "tight"};
+			return {a: "a", adj: "tight"};
 		} else if (area <= 5 ) {
-			ret = {a: "a", adj: "well-proportioned"};
+			return {a: "a", adj: "well-proportioned"};
 		} else if (area <= 7 ) {
-			ret = {a: "a", adj: "flexible"};
+			return {a: "a", adj: "flexible"};
 		} else if (area <= 9 ) {
-			ret = {a: "a", adj: "very flexible"};
+			return {a: "a", adj: "very flexible"};
 		} else if (area <= 11) {
-			ret = {a: "a", adj: "loose"};
+			return {a: "a", adj: "loose"};
 		} else if (area <= 15) {
-			ret = {a: "a", adj: "slutty"};
+			return {a: "a", adj: "slutty"};
 		} else {
-			ret = {a: "a", adj: "gaping"};
+			return {a: "a", adj: "gaping"};
 		}
-		return ret;
 	}
 	// TODO
 	public Short() {

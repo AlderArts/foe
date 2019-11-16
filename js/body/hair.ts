@@ -2,7 +2,7 @@
 import { IStorage } from "../istorage";
 import { Stat } from "../stat";
 import { BodyPart } from "./bodypart";
-import { Color } from "./color";
+import { Color, ColorDesc } from "./color";
 import { RaceDesc } from "./race";
 
 export enum HairStyle {
@@ -56,25 +56,17 @@ export class Hair extends BodyPart {
 		if (this.length.Get() === 0) {
 			return `bald scalp`;
 		} else {
-			return `${Color.Desc(this.color)} hair`;
+			return `${ColorDesc(this.color)} hair`;
 		}
 	}
+
 	public Long() {
 		const len = this.length.Get();
 		if (len === 0) {
 			return `bald scalp`;
 		} else {
-			const color = Color.Desc(this.color);
-			let style;
-			switch (this.style) {
-				case HairStyle.straight: style = `straight ${color} hair`; break;
-				case HairStyle.wavy:     style = `wavy ${color} hair`; break;
-				case HairStyle.ponytail: style = `${color} hair, which is kept in a ponytail`; break;
-				case HairStyle.shaggy:   style = `shaggy ${color} hair`; break;
-				case HairStyle.curly:    style = `curly ${color} hair`; break;
-				case HairStyle.braid:    style = `${color} hair, which is kept in a braid`; break;
-				default:                 style = `unkempt hair`; break;
-			}
+			const color = ColorDesc(this.color);
+			const style = this.Style();
 
 			if (len < 1) {
 				return `${color} stubble`;
@@ -100,4 +92,16 @@ export class Hair extends BodyPart {
 		}
 	}
 
+	private Style() {
+		const color = ColorDesc(this.color);
+		switch (this.style) {
+			case HairStyle.straight: return `straight ${color} hair`;
+			case HairStyle.wavy:     return `wavy ${color} hair`;
+			case HairStyle.ponytail: return `${color} hair, which is kept in a ponytail`;
+			case HairStyle.shaggy:   return `shaggy ${color} hair`;
+			case HairStyle.curly:    return `curly ${color} hair`;
+			case HairStyle.braid:    return `${color} hair, which is kept in a braid`;
+			default:                 return `unkempt hair`;
+		}
+	}
 }

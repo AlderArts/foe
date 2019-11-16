@@ -6,8 +6,8 @@ export const windowHeight = 720;
 const APP_NAME = "Fall of Eden";
 const VERSION_MAJOR = 0;
 const VERSION_MINOR = 5;
-const VERSION_SUBSCRIPT = 3;
-const VERSION_NAME = "Revisiting Gwendy";
+const VERSION_SUBSCRIPT = 4;
+const VERSION_NAME = "Barnyard Romp";
 
 export const SAVE_VERSION = 29;
 // Save version 1: Initial

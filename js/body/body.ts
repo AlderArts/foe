@@ -10,7 +10,7 @@ import { BodyPart } from "./bodypart";
 import { Breasts } from "./breasts";
 import { Butt } from "./butt";
 import { Cock } from "./cock";
-import { Color } from "./color";
+import { ColorDesc } from "./color";
 import { DefBody } from "./defbody";
 import { Gender } from "./gender";
 import { Genitalia } from "./genitalia";
@@ -371,7 +371,7 @@ export class Body implements IBody {
 	public SkinDesc(part?: BodyPart) {
 		let ret = "";
 
-		const col = Color.Desc(this.torso.color);
+		const col = ColorDesc(this.torso.color);
 		if (Math.random() < 0.3 && this.HasSkin()) { ret += "bare "; }
 		if (Math.random() < 0.3) { ret += col + " "; }
 		const race = part ? part.race : this.torso.race;

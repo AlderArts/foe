@@ -93,7 +93,7 @@ export class Orifice {
 		} else if (ratio < 1) {
 			this.stretch.IncreaseStat(Orifice.Tightness.loose, 0.5);
 		} else {
-					this.stretch.IncreaseStat(Orifice.Tightness.gaping, 0.75);
+			this.stretch.IncreaseStat(Orifice.Tightness.gaping, 0.75);
 		}
 
 		if (!silent) {

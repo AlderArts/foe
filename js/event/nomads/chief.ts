@@ -3,6 +3,7 @@
  * Define Nomad chief
  *
  */
+import * as _ from "lodash";
 import { GetDEBUG } from "../../../app";
 import { Gender } from "../../body/gender";
 import { RaceScore } from "../../body/race";
@@ -13,7 +14,6 @@ import { IStorage } from "../../istorage";
 import { IChoice } from "../../link";
 import { Party } from "../../party";
 import { IParse, Text } from "../../text";
-import { Rand } from "../../utility";
 import { Kiakai } from "../kiakai";
 import { Player } from "../player";
 import { Rosalin } from "./rosalin";
@@ -189,7 +189,7 @@ export namespace ChiefScenes {
 					});
 				}
 
-				const scene = scenes[Rand(scenes.length)];
+				const scene = _.sample(scenes);
 
 				scene();
 			}, enabled : true,
@@ -270,7 +270,7 @@ export namespace ChiefScenes {
 					});
 				}
 
-				const scene = scenes[Rand(scenes.length)];
+				const scene = _.sample(scenes);
 
 				scene();
 			}, enabled : true,
