@@ -975,9 +975,17 @@ export namespace GwendyScenes {
 
 		options.push({ nameStr : "KissDom",
 			func() {
+				const first = wins === GwendyFlags.ChallengeWinScene.Kiss;
+
 				Text.Clear();
+
+				if (!first) {
+					player.subDom.IncreaseStat(0, 1);
+					gwendy.subDom.DecreaseStat(0, 1);
+				}
+
 				// If first time
-				if (wins === GwendyFlags.ChallengeWinScene.Kiss && !hangout) {
+				if (first && !hangout) {
 					if (gwendy.flags.LostChallenge > 0) {
 						Text.Add("Since Gwendy went easy on you when you lost the first time, you decide to start things off light.", parse);
 					} else {
@@ -1152,6 +1160,11 @@ export namespace GwendyScenes {
 		const first  = gwendy.flags.ChallengeWinScene === GwendyFlags.ChallengeWinScene.Hands;
 		const second = !first && !hangout;
 
+		if (!first) {
+			player.subDom.IncreaseStat(25, 1);
+			gwendy.subDom.DecreaseStat(-25, 1);
+		}
+
 		// If first time
 		if (first) {
 			Text.Add("Once again, you come out on top, and Gwendy looks rather annoyed at being beaten again. That won't do. She's the loser, so she has to follow your instruction. Smiling victoriously, you decide to go a bit farther this time.", parse);
@@ -1300,6 +1313,11 @@ export namespace GwendyScenes {
 
 		const first  = wonScene === GwendyFlags.ChallengeWinScene.Titfuck;
 		const second = !first && !hangout;
+
+		if (!first) {
+			player.subDom.IncreaseStat(30, 1);
+			gwendy.subDom.DecreaseStat(-30, 1);
+		}
 
 		// If first time
 		if (first) {
@@ -1517,9 +1535,13 @@ export namespace GwendyScenes {
 		parse.oneof    = player.NumCocks() > 1 ? " one of" : "";
 		parse.itsTheir = player.NumCocks() > 1 ? "their" : "its";
 
+		if (!first) {
+			player.subDom.IncreaseStat(40, 1);
+			gwendy.subDom.DecreaseStat(-40, 1);
+		}
+
 		// If first time
 		if (first) {
-
 			if (gwendy.flags.LostChallenge === 0) {
 				Text.Add("Was there any doubt you were going to win? So far, it's just been win after win, though you must admit she at least mounted quite an effort. Still, you won, and now you're going to reap your reward!", parse);
 			} else {
@@ -1665,6 +1687,11 @@ export namespace GwendyScenes {
 		parse.gnotS    = gwendy.NumCocks() > 1 ? "" : "s";
 		parse.ges      = gwendy.NumCocks() > 1 ? "" : "es";
 		parse.gits     = gwendy.NumCocks() > 1 ? "their" : "its";
+
+		if (!first) {
+			player.subDom.IncreaseStat(50, 1);
+			gwendy.subDom.DecreaseStat(-50, 2);
+		}
 
 		// If first time
 		if (first) {
@@ -1821,6 +1848,11 @@ export namespace GwendyScenes {
 		parse.geachof  = gwendy.NumCocks() > 1 ? " each of" : "";
 		parse.ges      = gwendy.NumCocks() > 1 ? "" : "es";
 		parse.gits     = gwendy.NumCocks() > 1 ? "their" : "its";
+
+		if (!first) {
+			player.subDom.IncreaseStat(50, 1);
+			gwendy.subDom.DecreaseStat(-50, 2);
+		}
 
 		// If first time
 		if (first) {
@@ -2018,6 +2050,11 @@ export namespace GwendyScenes {
 
 		gwendy.flags.Toys |= toy;
 
+		if (!first) {
+			player.subDom.IncreaseStat(50, 1);
+			gwendy.subDom.DecreaseStat(-50, 2);
+		}
+
 		if (toy === GwendyFlags.Toys.Strapon) { // TODO Write scene
 			Text.Add("", parse);
 			Text.NL();
@@ -2087,14 +2124,12 @@ export namespace GwendyScenes {
 					Text.Add("<i>“Pervert,”</i> she mutters as she stalks past you, climbing down the ladder to the barn. You tag along close behind her, eager to see how she’ll fare.", parse);
 					Text.NL();
 
-					const scenes = new EncounterTable();
-					scenes.AddEnc(() => {
+					const scenes = [() => {
 						Text.Add("Gwendy doesn’t seem to want to leave the barn, so she goes to tend the cows. She doesn’t do a very good job at it though, as she winces visibly each time she sits down to milk one of them. She keeps throwing smoldering glances in your direction.", parse);
 						if (!hangout) {
 							Text.Add(" Such a sore loser.", parse);
 						}
-					}, 1.0, () => true);
-					scenes.AddEnc(() => {
+					}, () => {
 						parse.Adrian = adrian.name;
 						parse.heshe  = adrian.heshe();
 						parse.himher = adrian.himher();
@@ -2106,8 +2141,7 @@ export namespace GwendyScenes {
 						} else {
 							Text.Add("<i>“What is it no-”</i> Gwendy snaps angrily, whirling about. <i>“Oh. A-[Adrian].”</i> She hastily excuses herself, walking away from the confused horse-morph, throwing glowering looks in your direction.", parse);
 						}
-					}, 1.0, () => true);
-					scenes.AddEnc(() => {
+					}, () => {
 						Text.Add("Gwendy decides to go tend to the sheep, quickly regretting her decision when she meets the bubbly airhead Danie.", parse);
 						Text.NL();
 						Text.Add("<i>“Hello, Miss Gwendy! Such a lovely day!”</i> the sheep-morph gaily exclaims. <i>“Are you alright miss?”</i> Danie looks a bit concerned at the farmer’s discomfort.", parse);
@@ -2115,9 +2149,8 @@ export namespace GwendyScenes {
 						Text.Add("<i>“J-just fine, Danie, just fine,”</i> she chips out, throwing glowering glances in your direction. The curious sheep follows Gwendy around as she goes about her work, and at the moment she least expects it, Danie pulls on the short piece of string sticking out of Gwendy’s pants.", parse);
 						Text.NL();
 						Text.Add("<i>“DANIE!”</i> the farmer yowls, batting off the confused sheep, inadvertently scattering the entire flock with her waving arms. Ah, fun times.", parse);
-					}, 1.0, () => true);
-
-					scenes.Get();
+					}];
+					_.sample(scenes)();
 
 					Text.NL();
 					Text.Add("<b>Time passes...</b>", parse);
@@ -2301,7 +2334,13 @@ export namespace GwendyScenes {
 		if (lossScene >= GwendyFlags.ChallengeLostScene.Kiss) {
 			options.push({ nameStr : "KissSub",
 				func() {
+					const first = lossScene === GwendyFlags.ChallengeLostScene.Kiss;
 					Text.Clear();
+
+					if (!first) {
+						player.subDom.DecreaseStat(0, 1);
+						gwendy.subDom.IncreaseStat(0, 1);
+					}
 
 					TimeStep({minute: 30});
 					player.AddLustFraction(0.1);
@@ -2341,7 +2380,14 @@ export namespace GwendyScenes {
 		if (lossScene >= GwendyFlags.ChallengeLostScene.Makeout) {
 			options.push({ nameStr : "Make-out",
 				func() {
+					const first = lossScene === GwendyFlags.ChallengeLostScene.Makeout;
+
 					Text.Clear();
+					if (!first) {
+						player.subDom.DecreaseStat(-25, 1);
+						gwendy.subDom.IncreaseStat(25, 1);
+					}
+
 					if (hangout) {
 						Text.Add("Gwendy giggles happily. If the sultry look in her eyes are any indication, you’d best be prepared...", parse);
 					} else {
@@ -2350,7 +2396,7 @@ export namespace GwendyScenes {
 					Text.NL();
 					Text.Add("Approaching you with a mischievous smile, Gwendy all but forces herself on you then and there, throwing her arms around you and locking lips with you once more.", parse);
 					Text.NL();
-					if (lossScene === GwendyFlags.ChallengeLostScene.Makeout) {
+					if (first) {
 						Text.Add("You wonder if she’s just going to repeat the same thing she did last time, as her tongue begins to stroke and caress yours. Your question is answered when you feel your back press against something solid. The girl is a <i>lot</i> more forceful this time.", parse);
 						Text.NL();
 					}
@@ -2418,6 +2464,10 @@ export namespace GwendyScenes {
 					const second = !first && !hangout;
 
 					Text.Clear();
+					if (!first) {
+						player.subDom.DecreaseStat(-40, 1);
+						gwendy.subDom.IncreaseStat(40, 2);
+					}
 
 					if (!hangout) {
 						Text.Add("She wins... yet again. ", parse);
@@ -2618,6 +2668,12 @@ export namespace GwendyScenes {
 		const ddildo = _DDildoOdds(dOdds, cock !== undefined);
 		const eplus = gwendy.EPlus();
 
+		if (!first) {
+			const diff = ddildo ? 2 : 1;
+			player.subDom.DecreaseStat(-75, diff);
+			gwendy.subDom.IncreaseStat(75, 2 * diff);
+		}
+
 		Text.Clear();
 		if (hangout) {
 			Text.Out(`“Getting greedy, aren’t we?” Gwendy purrs as she leans into you, her hands trailing your body possessively. “I’m a gal who’s always up for some more fun, but I don’t want you getting the wrong impression.” `);
@@ -2780,8 +2836,8 @@ export namespace GwendyScenes {
 
 				“Good ${player.mfFem(`boy`, `girl`)}.” Having teased you enough, she pushes down on your ${pc.cock}, her hungry nether lips swallowing you whole in one smooth motion. She grinds against your hips, moaning softly as she lets you get a feel of her insides. Wasting no time, she pulls herself up again until only the the ${pc.cockTip} remains inside her.`);
 
-				player.subDom.DecreaseStat(-75, 2);
-				gwendy.subDom.IncreaseStat(100, 3);
+				player.subDom.DecreaseStat(-50, 1);
+				gwendy.subDom.IncreaseStat(50, 1);
 			}
 			Text.NL();
 
@@ -2959,6 +3015,11 @@ export namespace GwendyScenes {
 		const player: Player = GAME().player;
 
 		const pc = player.Parser;
+
+		if (!first) {
+			player.subDom.DecreaseStat(-50, 1);
+			gwendy.subDom.IncreaseStat(50, 2);
+		}
 
 		Text.Clear();
 		if (hangout) {
