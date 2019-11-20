@@ -44,6 +44,7 @@ export namespace GP {
 		public get wasWere() { return this.cond ? "were" : "was"; }
 
 		public get oneof() { return this.cond ? " one of" : ""; }
+		public get bothof() { return this.cond ? " both of" : ""; }
 		public get someof() { return this.cond ? " some of" : ""; }
 		public get eachof() { return this.cond ? " each of" : ""; }
 		public get allof() { return this.cond ? " all of" : ""; }
