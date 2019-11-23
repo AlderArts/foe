@@ -178,7 +178,7 @@ export class CatboyMage extends Entity {
 			CombatItems.DecoyStick.combat.Use(encounter, that);
 		}, 1.0, () => true);
 		scenes.AddEnc(() => {
-			CombatItems.HPotion.combat.Use(encounter, that);
+			CombatItems.HPotion.combat.Use(encounter, that, that);
 		}, 1.0, () => that.HPLevel() < 0.5);
 		scenes.AddEnc(() => {
 			Abilities.Black.Bolt.Use(encounter, that, t);

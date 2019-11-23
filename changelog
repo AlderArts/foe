@@ -8,6 +8,7 @@ CHANGELOG for Fall of Eden
 Version 0.5.5
 -------------
 * Bugfix: Introduction Review bug that would eventually cause issues with the parser.
+* Bugfix: Fixed an error in the Catboy Mage AI.
 
 --------------------------------------------
              PREVIOUS VERSIONS
