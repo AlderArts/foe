@@ -135,6 +135,7 @@ class EntityParser {
 	public get butt() { return this.ent.Butt().Short(); }
 	public get anus() { return this.ent.Butt().AnalShort(); }
 	public get vag() { return this.ent.FirstVag().Short(); }
+	public hasvag(vag: string, novag: string) { return this.ent.FirstVag() !== undefined ? vag : novag; }
 	public get vagoranus() { return this.ent.FirstVag() ? this.vag : this.anus; }
 	public get clit() { return this.ent.FirstVag().ClitShort(); }
 	public get gen() {
