@@ -119,6 +119,7 @@ class EntityParser {
 	public get is() { return this.ent.is(); }
 	public mfFem(male: string, female: string) { return this.ent.mfFem(male, female); }
 	public mfTrue(male: string, female: string) { return this.ent.mfTrue(male, female); }
+	public haslegs(iflegs: string, nolegs: string) { return this.ent.HasLegs() ? iflegs : nolegs; }
 	public taur(iftaur: string, nottaur: string) { return this.ent.IsTaur() ? iftaur : nottaur; }
 	public naga(ifnaga: string, notnaga: string) { return this.ent.IsNaga() ? ifnaga : notnaga; }
 	public goo(ifgoo: string, notgoo: string) { return this.ent.IsGoo() ? ifgoo : notgoo; }
@@ -186,8 +187,11 @@ class EntityParser {
 	public get feet() { return this.ent.FeetDesc(); }
 	public get belly() { return this.ent.StomachDesc(); }
 	public get tail() { const tail = this.ent.HasTail(); return tail ? tail.Short() : ""; }
+	public hastail(tail: string, notail: string) { return this.ent.HasTail() ? tail : notail; }
 	public get wing() { const wing = this.ent.HasWings(); return wing ? wing.Short() : ""; }
+	public haswings(wing: string, nowing: string) { return this.ent.HasWings() ? wing : nowing; }
 	public get horns() { const horns = this.ent.HasHorns(); return horns ? horns.Short() : ""; }
+	public hashorns(horns: string, nohorns: string) { return this.ent.HasHorns() ? horns : nohorns; }
 	public get weapon() { return this.ent.WeaponDesc(); }
 	public get armor() { return this.ent.ArmorDesc(); }
 	public get botarmor() { return this.ent.LowerArmorDesc(); }
