@@ -299,7 +299,7 @@ const EntityMenu = {
 					Text.Clear();
 					slotFunc2("Toy", that.strapOn);
 					Text.AddDiv("<hr>");
-					Text.Add("<i>What strapon do[es] [heshe] equip?</i>", parse);
+					Text.Add("<i>What strap-on do[es] [heshe] equip?</i>", parse);
 					Text.AddDiv("<hr>");
 					Text.Flush();
 					party.inventory.ShowEquippable(that, ItemSubtype.StrapOn, equipFunc);

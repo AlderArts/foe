@@ -1889,12 +1889,12 @@ export namespace GwendyScenes {
 						func() {
 							GwendyScenes.ChallengeSexAnalToys(GwendyFlags.Toys.Strapon, hangout, first);
 						}, enabled : false && !player.FirstCock(), // TODO ACTIVATE SCENE
-						tooltip : "Fuck her with one of her horsecock strapons.",
+						tooltip : "Fuck her with one of her equine strap-ons.",
 					}, { nameStr : "R.Strapon",
 						func() {
 							GwendyScenes.ChallengeSexAnalToys(GwendyFlags.Toys.RStrapon, hangout, first);
 						}, enabled : false, // TODO ACTIVATE SCENE
-						tooltip : "Have her wear a strapon and fuck you.",
+						tooltip : "Have her wear a strap-on and fuck you.",
 					}, { nameStr : "Beads",
 						func() {
 							GwendyScenes.ChallengeSexAnalToys(GwendyFlags.Toys.Beads, hangout, first);
@@ -2991,9 +2991,13 @@ export namespace GwendyScenes {
 				Maybe a tad.`);
 			}
 
+			// TODO CLEANUP TIMER
+
 			Text.Flush();
 
 			TimeStep({hour: 3});
+
+			// TODO MOVE TO BARN
 
 			Gui.NextPrompt();
 		});

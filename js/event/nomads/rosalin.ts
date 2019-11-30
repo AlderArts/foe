@@ -624,11 +624,11 @@ export namespace RosalinScenes {
 						func() {
 							Text.Clear();
 							if (cocksInAss.length === 0) {
-								Text.Add("<i>“Gimme a sec… no, too small… this one? Ah! Perfect!”</i> Rosalin triumphantly pulls out a huge strapon, formed in the shape of a canine cock. Near the thick base, there is a quite realistic knot, complete with veins and all. The entire thing is slightly longer than Cale’s own member.", parse);
+								Text.Add("<i>“Gimme a sec… no, too small… this one? Ah! Perfect!”</i> Rosalin triumphantly pulls out a huge strap-on, formed in the shape of a canine cock. Near the thick base, there is a quite realistic knot, complete with veins and all. The entire thing is slightly longer than Cale’s own member.", parse);
 								Text.NL();
 								Text.Add("<i>“Fitting, don’t you think?”</i> Rosalin grins, handing you the toy. <i>“You can keep it, I have a few other ones laying around.”</i> You gratefully accept the gift, securing the straps around your waist.", parse);
 								Text.NL();
-								Text.Add("<b>Acquired and equipped a canid strapon!</b>", parse);
+								Text.Add("<b>Acquired and equipped a canid strap-on!</b>", parse);
 								Text.NL();
 
 								const inv = party.inventory;
