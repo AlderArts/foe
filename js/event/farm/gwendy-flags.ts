@@ -12,6 +12,16 @@ export namespace GwendyFlags {
 		TalkedParents = 3,
 	}
 
+	export enum Bailout {
+		Init     = 0,
+		Slip     = 1,
+		Talked   = 2,
+		Locked   = 3,
+		Resolved = 4,
+		Dominate = 4,
+		Submit   = 5,
+	}
+
 	export enum Toys {
 		None     = 0,
 		Strapon  = 1,

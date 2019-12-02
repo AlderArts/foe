@@ -64,6 +64,7 @@ export class Gwendy extends Entity {
 		this.flags.Met  = 0;
 		this.flags.Market = 0;
 		this.flags.Toys = GwendyFlags.Toys.None; // seen/used toys
+		this.flags.Bailout = GwendyFlags.Bailout.Init;
 
 		// Talk rotations
 		this.flags.RotChildhood = 0;
