@@ -2720,89 +2720,20 @@ export namespace GwendyScenes {
 		Text.NL();
 
 		const dildoFirst = ddildo && !gwendy.UsedDDildo();
-		let flip: boolean;
-
-		let target: () => string;
-		let targetObj: Orifice;
-		let targetVag: boolean;
 
 		if (ddildo) {
 			gwendy.flags.Toys |= GwendyFlags.Toys.DDildo;
 			Text.Out(`Gwendy strides past you to a chest set against one of the walls. She bends over to rummage around in it, giving you an enticing view of her soft, bobbing buttocks and the wet patch of her snatch nestled between them.${eplus ? " Your eyes travel further down, coming to rest on her massive balls and turgid horse dong dangle, its flared head crowned by a bead of thick pre." : ""}
 
 			When she reemerges, the farmer is proudly cradling a ridiculously long, double-ended equine dildo. “${dildoFirst ? "I don’t get to use this often, but I have a feeling you’ll be seeing it a lot more from now on…" : "Remember this bad boy?"} I hope you can take it.” She smiles wickedly. “After all… half of this is going into you.” You gulp nervously as she stalks toward you, a dildo the size of a two handed club in her arms.`);
-			Text.NL();
 
-			const scenes = [() => {
-				flip = true;
-				Text.Out(`“Mm… so sexy, so vulnerable…” Gwendy murmurs as she trails a hand down your ${pc.breasts}, over your ${pc.belly} and to your crotch. ${cock ? `The farmer gives your ${pc.cocksandballs} a teasing squeeze, a taunting reminder that ${player.NumCocks() > 1 || player.HasBalls() ? "they" : "it"} won’t be getting any more attention from her.` : `The farmer gives you a teasing caress before withdrawing her fingers.`}
+			// TODO: BAILOUT ENTRYPOINT
 
-				“Roll over on your stomach,” she instructs. “Butt up. Good, just like that.” She gives your ${pc.butt} a slap, nudging you to fold your ${pc.knees} to further prop it up for her. Once she’s satisfied with your position, she spreads your cheeks apart, exposing your ${pc.anus}${pc.naga(` and ${pc.gen}`, ``)}. “Looks snug enough… not that it will remain so for long.” She teases your hole  lightly with her thumb, the shadow of a promise of what’s awaiting you.`);
-			}];
-			if (player.HasLegs()) {
-				scenes.push(() => {
-					Text.Out(`“Spread ‘em wide, this will take a little work.” Gwendy doesn’t give you much chance to protest as she sidles up against you, bumping up your ${pc.legs} and pinning her shoulder under one of your ${pc.knees}. You feel incredibly vulnerable as you feel her hand caress your ${pc.gen}, boldly groping you between your ${pc.legs}.
-
-					You shift restlessly as she pushes her finger inside you, barely giving you time to adjust before she adds another. ${eplus ? `All the while, you can feel her dick rubbing against your ${pc.butt} - hot, turgid and still swelling. ` : ``}You grunt as she adds the fourth and final digit, working you relentlessly… not that anything she does to you now is going to come close to what she has planned for your immediate future.`);
-				});
-			}
-			if (player.IsNaga() && player.FirstVag()) {
-				scenes.push(() => {
-					Text.Out(`Gwendy sits herself down on top of you, trapping your ${pc.legs} between her knees. “Squirm all you want, I’m not letting you go anytime soon,” she declares, letting her free hand trail down your ${pc.skin} to your crotch. Despite her order, you shift restlessly as she plays with your ${pc.gen}, dipping her fingers into your waiting depths. “Dripping and ready.” Your tail twitches feebly as the farmer thrusts her digits into you, all the while taunting you of how she’s going to use you for her own pleasure.`);
-				});
-			}
-			_.sample(scenes)();
-
-			Text.NL();
-			Text.Out(`“Just a moment… I won’t keep ya waiting for long.” She withdraws, liberally coating the impressive length of her massive toy with the entire contents of a vial placed on the bed stand. Your lover presses one flared tip against her cleft, letting out a soft moan and biting down on her lip as she slowly starts feeding it inside herself. Though accepting the double ended equine fuck stick is a daunting task, the relative ease with which she’s able to take it in shows signs of frequent practice.`);
-			Text.NL();
-
-			Sex.Vaginal(undefined, gwendy);
-			gwendy.FuckVag(gwendy.FirstVag(), ToysItems.EquineDildo.cock, 3);
-
-			Text.Out(`${eplus ? "By this point, the farmgirl is fully hard, erect equine member jutting out proudly. For every inch that she eases inside herself, her cock bobs happily, splattering you and the bed equally with her salty pre. " : ""}Before long, Gwendy has accommodated enough of the toy to allow her to clamp down on it with her vaginal muscles, leaving roughly two thirds of it dangling between her legs menacingly. “Now, it’s your turn,” she proclaims, short on breath and freckled cheeks flush with excitement.
-
-			She confidently shuffles closer, ${flip && player.HasTail() ? "lifting your ${pc.tail} to allow her access, " : ""}her hand guiding the remaining flared head to her target, your `);
-			const targetScene = new EncounterTable();
-			if (player.FirstVag() && (!flip || !player.IsNaga())) {
-				targetScene.AddEnc(() => {
-					targetVag = true;
-					targetObj = player.FirstVag();
-					target = () => pc.vag;
-					Text.Out(`wet but woefully unprepared ${pc.vag}. “This is going to feel amazing,” she promises soothingly, teasing your cleft with the toy. “This lubricant will work wonders, it’s from my special stock. You just… have to… Let. Me. <b>In.</b>”`);
-					Text.NL();
-					Sex.Vaginal(undefined, player);
-					player.FuckVag(player.FirstVag(), ToysItems.EquineDildo.cock, 3);
-				}, 3);
-			}
-			if (flip || !player.IsNaga()) {
-				targetScene.AddEnc(() => {
-					targetObj = player.Butt();
-					target = () => pc.anus;
-					Text.Out(`puckered ${pc.anus}. “Hope you’re ready for this,” she murmurs, grinning wickedly as she teases your protesting opening. “This lubricant will work wonders, it’s from my special stock. You just… have to… Let. Me. <b>In.</b>”`);
-					Text.NL();
-					Sex.Anal(undefined, player);
-					player.FuckAnal(player.Butt(), ToysItems.EquineDildo.cock, 3);
-				}, 1);
-			}
-			targetScene.Get();
-			Text.NL();
-			const cap = targetObj.Cap();
-			Text.Out(`Your ${pc.eyes} go wide and your voice fails you as she penetrates you, slowly but persistently pushing the massive artificial cock deeper inside your body. `);
-			if (cap >= Capacity.gaping) {
-				Text.Out(`Moaning with pleasure, you arch your back as the toy easily slips inside you, earning you a look of grudging respect from Gwendy. “${dildoFirst ? `Not your first rodeo, I take. Someone has trained you well.` : `You’re getting better at this, ${pc.name}. It took me quite a bit of practice to be able to take this bad boy, but you’re a natural.`}” Before long, the double ended dildo is firmly lodged inside your nethers, allowing for the farmer to start moving on top of you.`);
-			} else if (cap >= Capacity.loose) {
-				Text.Out(`You’re stretched so wide, and each agonizing second you feel more and more <i>full</i>, the toy probing and expanding your deepest depths. “${dildoFirst ? `Mm… you’re doing quite well for your first time with this bad boy, ${pc.name}. Only a few more inches to go…` : `You remember this feeling well, don’t you? Let me train your ${target()} more with this bad boy…`}” Gwendy takes it slow and keeps encouraging you with soft quips, but nevertheless the double ended dildo advances inexorably deeper into your ${target()}.`);
-			} else {
-				Text.Out(`The feeling is indescribable, and despite the copious amounts of lube, you have to bite down ${flip ? "on the pillow" : "on your lip"} in order to not cry out in pain. Seeing your distress, Gwendy withdraws the toy, giving you some time to recover before teasing the entrance to your ${target()} again. “${dildoFirst ? `Don’t worry, I’ll go slow, give you some time to get used to it.` : `So tight… but you’ve done this before, ${pc.name}, you will do it again.`}” With that, the farmer presses the lubed up toy lightly against your ${target()}, gaining a little more purchase each time she pushes it into your depths.
-
-				By the time she has a good ten inches firmly lodged inside you, your ${pc.skin} is glistening with sweat and your breathing is ragged. Gwendy makes an experimental move, pulling herself a few inches up her end of the toy before slowly sinking back down again, exerting pressure on your filled-to-the-brim passage. It’s uncomfortable… but somehow no longer painful. The cool lubricant appears to have a somewhat numbing effect, besides granting your ${target()} unprecedented elasticity.`);
-				TimeStep({minute: 30});
-			}
-			Text.NL();
-			Text.Out(`“Ready or not, I’m gonna start moving now. Better hold on to something.” Your fingers tighten on the sheets as she tenses her legs, raising herself up until only the flared head of the double ended dildo remains inside her pussy.`);
-
-			// TODO #set $cock = toy
+			LossRideEntrypoint({
+				first, hangout, eplus,
+				ddildo, dildoFirst, dOdds, bigcock,
+				cock,
+			});
 		} else { // Regular scene, ride PC cock
 			Text.Out(`The bed creaks as Gwendy steps onto it, her blonde hair almost brushing against the low rafters as she looms over your prone form, hands on her hips. You draw a surprised breath as she traces the length of your ${pc.cock} with the sole of her bare foot, pinching and teasing it with her toes. ${player.HasBalls() ? `She lightly puts weight on your ${pc.balls}, further cementing her absolute control over you. ` : ``}Your ${pc.cocks} ${c.isAre} stiffening under her delicate teasing, jutting up ${bigcock ? `proudly` : `hopefully`} from your crotch by the time she withdraws her foot.`);
 			Text.NL();
@@ -2836,7 +2767,136 @@ export namespace GwendyScenes {
 
 			Text.Out(`“Ready or not, I’m gonna start moving now. Better hold on to something.”`);
 			// TODO #set $cock = pc pref cock
+
+			LossRideMerge({
+				first, hangout, eplus,
+				ddildo, dildoFirst, dOdds, bigcock,
+				cock,
+			});
 		}
+	}
+
+	interface ILossRideData {
+		first: boolean;
+		hangout: boolean;
+		eplus: boolean;
+		flip?: boolean;
+
+		ddildo: boolean;
+		dildoFirst: boolean;
+		dOdds: number;
+		bigcock: boolean;
+
+		cock: Cock;
+		target?: () => string;
+		targetObj?: Orifice;
+		targetVag?: boolean;
+	}
+
+	function LossRideEntrypoint(opts: ILossRideData) {
+		const gwendy: Gwendy = GAME().gwendy;
+		const player: Player = GAME().player;
+
+		const pc = player.Parser;
+
+		const { first, hangout, eplus,
+			ddildo, dildoFirst, dOdds, bigcock, cock } = opts;
+
+		let flip: boolean;
+		let target: () => string;
+		let targetObj: Orifice;
+		let targetVag: boolean;
+
+		Text.NL();
+
+		const scenes = [() => {
+			flip = true;
+			Text.Out(`“Mm… so sexy, so vulnerable…” Gwendy murmurs as she trails a hand down your ${pc.breasts}, over your ${pc.belly} and to your crotch. ${cock ? `The farmer gives your ${pc.cocksandballs} a teasing squeeze, a taunting reminder that ${player.NumCocks() > 1 || player.HasBalls() ? "they" : "it"} won’t be getting any more attention from her.` : `The farmer gives you a teasing caress before withdrawing her fingers.`}
+
+			“Roll over on your stomach,” she instructs. “Butt up. Good, just like that.” She gives your ${pc.butt} a slap, nudging you to fold your ${pc.knees} to further prop it up for her. Once she’s satisfied with your position, she spreads your cheeks apart, exposing your ${pc.anus}${pc.naga(` and ${pc.gen}`, ``)}. “Looks snug enough… not that it will remain so for long.” She teases your hole  lightly with her thumb, the shadow of a promise of what’s awaiting you.`);
+		}];
+		if (player.HasLegs()) {
+			scenes.push(() => {
+				Text.Out(`“Spread ‘em wide, this will take a little work.” Gwendy doesn’t give you much chance to protest as she sidles up against you, bumping up your ${pc.legs} and pinning her shoulder under one of your ${pc.knees}. You feel incredibly vulnerable as you feel her hand caress your ${pc.gen}, boldly groping you between your ${pc.legs}.
+
+				You shift restlessly as she pushes her finger inside you, barely giving you time to adjust before she adds another. ${eplus ? `All the while, you can feel her dick rubbing against your ${pc.butt} - hot, turgid and still swelling. ` : ``}You grunt as she adds the fourth and final digit, working you relentlessly… not that anything she does to you now is going to come close to what she has planned for your immediate future.`);
+			});
+		}
+		if (player.IsNaga() && player.FirstVag()) {
+			scenes.push(() => {
+				Text.Out(`Gwendy sits herself down on top of you, trapping your ${pc.legs} between her knees. “Squirm all you want, I’m not letting you go anytime soon,” she declares, letting her free hand trail down your ${pc.skin} to your crotch. Despite her order, you shift restlessly as she plays with your ${pc.gen}, dipping her fingers into your waiting depths. “Dripping and ready.” Your tail twitches feebly as the farmer thrusts her digits into you, all the while taunting you of how she’s going to use you for her own pleasure.`);
+			});
+		}
+		_.sample(scenes)();
+
+		Text.NL();
+		Text.Out(`“Just a moment… I won’t keep ya waiting for long.” She withdraws, liberally coating the impressive length of her massive toy with the entire contents of a vial placed on the bed stand. Your lover presses one flared tip against her cleft, letting out a soft moan and biting down on her lip as she slowly starts feeding it inside herself. Though accepting the double ended equine fuck stick is a daunting task, the relative ease with which she’s able to take it in shows signs of frequent practice.`);
+		Text.NL();
+
+		Sex.Vaginal(undefined, gwendy);
+		gwendy.FuckVag(gwendy.FirstVag(), ToysItems.EquineDildo.cock, 3);
+
+		Text.Out(`${eplus ? "By this point, the farmgirl is fully hard, erect equine member jutting out proudly. For every inch that she eases inside herself, her cock bobs happily, splattering you and the bed equally with her salty pre. " : ""}Before long, Gwendy has accommodated enough of the toy to allow her to clamp down on it with her vaginal muscles, leaving roughly two thirds of it dangling between her legs menacingly. “Now, it’s your turn,” she proclaims, short on breath and freckled cheeks flush with excitement.
+
+		She confidently shuffles closer, ${flip && player.HasTail() ? "lifting your ${pc.tail} to allow her access, " : ""}her hand guiding the remaining flared head to her target, your `);
+		const targetScene = new EncounterTable();
+		if (player.FirstVag() && (!flip || !player.IsNaga())) {
+			targetScene.AddEnc(() => {
+				targetVag = true;
+				targetObj = player.FirstVag();
+				target = () => pc.vag;
+				Text.Out(`wet but woefully unprepared ${pc.vag}. “This is going to feel amazing,” she promises soothingly, teasing your cleft with the toy. “This lubricant will work wonders, it’s from my special stock. You just… have to… Let. Me. <b>In.</b>”`);
+				Text.NL();
+				Sex.Vaginal(undefined, player);
+				player.FuckVag(player.FirstVag(), ToysItems.EquineDildo.cock, 3);
+			}, 3);
+		}
+		if (flip || !player.IsNaga()) {
+			targetScene.AddEnc(() => {
+				targetObj = player.Butt();
+				target = () => pc.anus;
+				Text.Out(`puckered ${pc.anus}. “Hope you’re ready for this,” she murmurs, grinning wickedly as she teases your protesting opening. “This lubricant will work wonders, it’s from my special stock. You just… have to… Let. Me. <b>In.</b>”`);
+				Text.NL();
+				Sex.Anal(undefined, player);
+				player.FuckAnal(player.Butt(), ToysItems.EquineDildo.cock, 3);
+			}, 1);
+		}
+		targetScene.Get();
+		Text.NL();
+		const cap = targetObj.Cap();
+		Text.Out(`Your ${pc.eyes} go wide and your voice fails you as she penetrates you, slowly but persistently pushing the massive artificial cock deeper inside your body. `);
+		if (cap >= Capacity.gaping) {
+			Text.Out(`Moaning with pleasure, you arch your back as the toy easily slips inside you, earning you a look of grudging respect from Gwendy. “${dildoFirst ? `Not your first rodeo, I take. Someone has trained you well.` : `You’re getting better at this, ${pc.name}. It took me quite a bit of practice to be able to take this bad boy, but you’re a natural.`}” Before long, the double ended dildo is firmly lodged inside your nethers, allowing for the farmer to start moving on top of you.`);
+		} else if (cap >= Capacity.loose) {
+			Text.Out(`You’re stretched so wide, and each agonizing second you feel more and more <i>full</i>, the toy probing and expanding your deepest depths. “${dildoFirst ? `Mm… you’re doing quite well for your first time with this bad boy, ${pc.name}. Only a few more inches to go…` : `You remember this feeling well, don’t you? Let me train your ${target()} more with this bad boy…`}” Gwendy takes it slow and keeps encouraging you with soft quips, but nevertheless the double ended dildo advances inexorably deeper into your ${target()}.`);
+		} else {
+			Text.Out(`The feeling is indescribable, and despite the copious amounts of lube, you have to bite down ${flip ? "on the pillow" : "on your lip"} in order to not cry out in pain. Seeing your distress, Gwendy withdraws the toy, giving you some time to recover before teasing the entrance to your ${target()} again. “${dildoFirst ? `Don’t worry, I’ll go slow, give you some time to get used to it.` : `So tight… but you’ve done this before, ${pc.name}, you will do it again.`}” With that, the farmer presses the lubed up toy lightly against your ${target()}, gaining a little more purchase each time she pushes it into your depths.
+
+			By the time she has a good ten inches firmly lodged inside you, your ${pc.skin} is glistening with sweat and your breathing is ragged. Gwendy makes an experimental move, pulling herself a few inches up her end of the toy before slowly sinking back down again, exerting pressure on your filled-to-the-brim passage. It’s uncomfortable… but somehow no longer painful. The cool lubricant appears to have a somewhat numbing effect, besides granting your ${target()} unprecedented elasticity.`);
+			TimeStep({minute: 30});
+		}
+		Text.NL();
+		Text.Out(`“Ready or not, I’m gonna start moving now. Better hold on to something.” Your fingers tighten on the sheets as she tenses her legs, raising herself up until only the flared head of the double ended dildo remains inside her pussy.`);
+
+		// TODO #set $cock = toy
+		LossRideMerge({
+			first, hangout, eplus, flip,
+			ddildo, dildoFirst, dOdds, bigcock,
+			cock, target, targetObj, targetVag,
+		});
+	}
+
+	function LossRideMerge(opts: ILossRideData) {
+		const gwendy: Gwendy = GAME().gwendy;
+		const player: Player = GAME().player;
+
+		const pc = player.Parser;
+		const c = new GP.Plural(player.NumCocks() > 1);
+
+		const { first, hangout, eplus, flip,
+			ddildo, dildoFirst, dOdds, bigcock,
+			cock, target, targetObj, targetVag } = opts;
+
 		Text.NL();
 		Text.Out(`When she thrusts down, it almost drives the wind out of you. Now that she’s done teasing you, the farmer goes wild, riding you with abandon, hands planted on either side of your torso for support. Her unabashed, lust-filled cries can probably be heard for miles around - for certain, no one on the farm can be unaware of your activities by this point.`);
 		Text.NL();
