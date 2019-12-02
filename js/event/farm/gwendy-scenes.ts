@@ -2653,9 +2653,10 @@ export namespace GwendyScenes {
 		const { cock, bigcock, horsecock } = _GetHorsecockBigcock(player);
 		player.SetPreferredCock(cock);
 
+		const eplus = gwendy.EPlus();
 		const dOdds = gwendy.SubDom() - player.SubDom();
 		const ddildo = _DDildoOdds(dOdds, cock !== undefined);
-		const eplus = gwendy.EPlus();
+		const dildoFirst = ddildo && !gwendy.UsedDDildo();
 
 		if (!first) {
 			const diff = ddildo ? 2 : 1;
@@ -2718,8 +2719,6 @@ export namespace GwendyScenes {
 			“That’s right, drink it all up,” she teases you as she touches herself. “I can’t wait to get started with you.”`);
 		}
 		Text.NL();
-
-		const dildoFirst = ddildo && !gwendy.UsedDDildo();
 
 		if (ddildo) {
 			gwendy.flags.Toys |= GwendyFlags.Toys.DDildo;
