@@ -1157,8 +1157,17 @@ FarmLoc.Barn.links.push(new Link(
 	},
 ));
 FarmLoc.Barn.links.push(new Link(
-	"Loft", true, true,
-	undefined,
+	"Loft", true, () => {
+        const gwendy: Gwendy = GAME().gwendy;
+        return !gwendy.IsCleaning();
+    },
+	() => {
+        const gwendy: Gwendy = GAME().gwendy;
+        if (gwendy.IsCleaning()) {
+            Text.Out(`There’s a hastily written sign hung on the ladder leading up to Gwendy’s loft saying: ‘Warning! Keep out!’. You deduce that the farmer is still busy cleaning up from the latest mess caused to her bedroom, and will likely be so for a while longer.`);
+            Text.NL();
+        }
+    },
 	() => {
 		MoveToLocation(FarmLoc.Loft, {minute: 5});
 	},

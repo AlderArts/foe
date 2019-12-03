@@ -15,10 +15,13 @@ import { IStorage } from "../../istorage";
 import { IChoice } from "../../link";
 import { ILocation } from "../../location";
 import { Text } from "../../text";
+import { ITime, Time } from "../../time";
 import { GwendyFlags } from "./gwendy-flags";
 
 // TODO: FIX STATS
 export class Gwendy extends Entity {
+	public cleanTimer: Time;
+
 	constructor(storage?: IStorage) {
 		super();
 
@@ -66,6 +69,8 @@ export class Gwendy extends Entity {
 		this.flags.Toys = GwendyFlags.Toys.None; // seen/used toys
 		this.flags.Bailout = GwendyFlags.Bailout.Init;
 
+		this.cleanTimer = new Time();
+
 		// Talk rotations
 		this.flags.RotChildhood = 0;
 		this.flags.RotParents = 0;
@@ -93,23 +98,32 @@ export class Gwendy extends Entity {
 		return false;
 	}
 
-	public FromStorage(storage: IStorage) {
+	public FromStorage(storage: any) {
 		this.LoadPersonalityStats(storage);
 
 		// Load flags
 		this.LoadFlags(storage);
 		this.LoadSexFlags(storage);
+
+		this.cleanTimer.FromStorage(storage.ct);
 	}
 
 	public ToStorage() {
-		const storage: IStorage = {};
+		const storage: any = {};
 
 		this.SavePersonalityStats(storage);
 
 		this.SaveFlags(storage);
 		this.SaveSexFlags(storage);
 
+		storage.ct = this.cleanTimer.ToStorage();
+
 		return storage;
+	}
+
+	public Update(step: ITime) {
+		super.Update(step);
+		this.cleanTimer.Dec(step);
 	}
 
 	public EPlus(): boolean {
@@ -120,8 +134,16 @@ export class Gwendy extends Entity {
 		return (this.flags.Toys & GwendyFlags.Toys.DDildo) !== 0;
 	}
 
+	public IsCleaning(): boolean {
+		return !this.cleanTimer.Expired();
+	}
+
 	// Schedule
 	public IsAtLocation(location: ILocation) {
+		if (this.IsCleaning()) {
+			return false;
+		}
+
 		const world = WORLD();
 		// Numbers/slacking/sleep
 		if     (location === world.loc.Farm.Loft) {
