@@ -920,22 +920,19 @@ export namespace GwendyScenes {
 
 	export function ChallengeSex(skillcheck: number, lose: boolean) {
 		const gwendy: Gwendy = GAME().gwendy;
-		const parse: IParse = {
-
-		};
 
 		// TODO: Proper loss condition
 		if (lose || skillcheck < 20) {
 			gwendy.flags.LostChallenge++;
-			Text.Add("<i>“Seems like I'm the winner!”</i> Gwendy concludes as she counts the tally, eager to get to the action.", parse);
+			Text.Out(`“Seems like I'm the winner!” Gwendy concludes as she counts the tally, eager to get to the action.`);
 			Text.NL();
 
 			if (gwendy.flags.LostChallenge < 3) {
-				Text.Add("She won this time... meaning you've got to pay up to her in whatever way she demands. Your thoughts are confirmed when she looks at you with a sly smile.", parse);
+				Text.Out(`She won this time... meaning you've got to pay up to her in whatever way she demands. Your thoughts are confirmed when she looks at you with a sly smile.`);
 			} else if (gwendy.flags.LostChallenge < 6) {
-				Text.Add("Despite your efforts, it seems like you can't beat the girl in her domain. A part of you wonders why you continue with these challenges if the result is always you losing and letting her degrade you. Still, you've got to try to best her somehow... after she reaps her reward from you, at least.", parse);
+				Text.Out(`Despite your efforts, it seems like you can't beat the girl in her domain. A part of you wonders why you continue with these challenges if the result is always you losing and letting her degrade you. Still, you've got to try to best her somehow... after she reaps her reward from you, at least.`);
  			} else {
-				Text.Add("Face it, when she puts her mind to it, you can't win. At this point, you have to wonder if you actually accept your defeat and are just taking the challenges to get off. Who knows, maybe it's not so bad losing to the sexy girl? In any event, she gets to have her way with you again.", parse);
+				Text.Out(`Face it, when she puts her mind to it, you can't win. At this point, you have to wonder if you actually accept your defeat and are just taking the challenges to get off. Who knows, maybe it's not so bad losing to the sexy girl? In any event, she gets to have her way with you again.`);
  			}
 			Text.Flush();
 			Gui.NextPrompt(() => {
@@ -947,15 +944,15 @@ export namespace GwendyScenes {
 			});
 		} else {
 			gwendy.flags.WonChallenge++;
-			Text.Add("Counting the tally, it seems you came out the victor this time!", parse);
+			Text.Out(`Counting the tally, it seems you came out the victor this time!`);
 			Text.NL();
 
 			if (gwendy.flags.WonChallenge < 3) {
-				Text.Add("It looks like you've bested the farm girl, and she pouts a bit. Still, a bet was a bet, and she's going to have to pay up!", parse);
+				Text.Out(`It looks like you've bested the farm girl, and she pouts a bit. Still, a bet was a bet, and she's going to have to pay up!`);
 			} else if (gwendy.flags.WonChallenge < 6) {
-				Text.Add("Seems like she's still going to challenge you, even though you've bested her so far! Her defiance has definitely increased her efforts whenever you challenge her, but the end result is the same: her waiting on your whim.", parse);
+				Text.Out(`Seems like she's still going to challenge you, even though you've bested her so far! Her defiance has definitely increased her efforts whenever you challenge her, but the end result is the same: her waiting on your whim.`);
  			} else {
-				Text.Add("At this point, it's hard to call it a challenge. Despite that, Gwendy has definitely given it her all to best you, it's just that her best isn't good enough. A shame, but it means you're going to have some fun...", parse);
+				Text.Out(`At this point, it's hard to call it a challenge. Despite that, Gwendy has definitely given it her all to best you, it's just that her best isn't good enough. A shame, but it means you're going to have some fun...`);
  			}
 			Text.Flush();
 			const options: IChoice[] = [];
