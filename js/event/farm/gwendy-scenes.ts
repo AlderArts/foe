@@ -2298,6 +2298,8 @@ export namespace GwendyScenes {
 		const player: Player = GAME().player;
 		const gwendy: Gwendy = GAME().gwendy;
 
+		const eplus = gwendy.EPlus();
+
 		Text.Clear();
 
 		let parse: IParse = {
@@ -2545,7 +2547,7 @@ export namespace GwendyScenes {
 				tooltip : "Gwendy will tease you and test your sexual endurance.",
 			});
 		}
-		if (lossScene >= GwendyFlags.ChallengeLostScene.Oral && !gwendy.EPlus()/* gwendy.FirstVag() */) {
+		if (lossScene >= GwendyFlags.ChallengeLostScene.Oral && !eplus/* gwendy.FirstVag() */) {
 			options.push({ nameStr : "Eat her",
 				func : () => {
 					const first = lossScene === GwendyFlags.ChallengeLostScene.Oral;
@@ -2564,19 +2566,15 @@ export namespace GwendyScenes {
 				tooltip : "Have Gwendy ride you.",
 			});
 		}
-		/*
-		if (lossScene >= GwendyFlags.ChallengeLostScene.Fucked && !gwendy.EPlus()) {
-			options.push({ nameStr : "Strap-on",
+		if (lossScene >= GwendyFlags.ChallengeLostScene.Fucked) {
+			options.push({ nameStr : eplus ? `Get fucked` : `Strap-on`,
 				func : () => {
-					Text.Clear();
-					Text.Add("", parse);
-					Text.NL();
-					Text.Flush();
+					const first = lossScene === GwendyFlags.ChallengeLostScene.Fucked;
+					LossGetFucked(hangout, first);
 				}, enabled : minScene <= GwendyFlags.ChallengeLostScene.Fucked,
-				tooltip : "Gwendy's itching to play with her toy again.",
+				tooltip : eplus ? `Gwendy’s itching to fuck you again… you can see the equine monstrosity between her legs stirring.` : `Gwendy's itching to play with her toy again… with you on the receiving end.`,
 			});
 		}
-		*/
 		if (hangout) {
 			return true;
 		} else if (lossScene < options.length) {
