@@ -3303,6 +3303,7 @@ export namespace GwendyScenes {
 					LossGetFuckedMerge({ first, hangout });
 				}, enabled: true, tooltip: "Those lust-filled eyes of hers keep you pinned just where you are. You can’t move… or is it that you don’t want to?"},
 			];
+			Gui.SetButtonsFromList(options);
 		} else {
 			LossGetFuckedMerge({ first, hangout });
 		}
