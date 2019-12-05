@@ -1370,7 +1370,14 @@ export namespace GwendyScenes {
 		// TODO: Proper loss condition
 		if (lose || skillcheck < 20) {
 			gwendy.flags.LostChallenge++;
-			Text.Out(`“Seems like I'm the winner!” Gwendy concludes as she counts the tally, eager to get to the action.`);
+
+			if (gwendy.flags.Bailout === GwendyFlags.Bailout.Dominate) {
+				Text.Out(`“My... what a surprise, I win again. Are you even trying anymore?” Gwendy grins at you.`);
+			} else if (gwendy.flags.Bailout === GwendyFlags.Bailout.Submit) {
+				Text.Out(`“My, my... seems I still got it!” Gwendy almost looks a little surprised at having won.`);
+			} else {
+				Text.Out(`“Seems like I'm the winner!” Gwendy concludes as she counts the tally, eager to get to the action.`);
+			}
 			Text.NL();
 
 			if (gwendy.flags.LostChallenge < 3) {
@@ -1390,7 +1397,14 @@ export namespace GwendyScenes {
 			});
 		} else {
 			gwendy.flags.WonChallenge++;
-			Text.Out(`Counting the tally, it seems you came out the victor this time!`);
+
+			if (gwendy.flags.Bailout === GwendyFlags.Bailout.Dominate) {
+				Text.Out(`“Mmm... seems you've won. What will you do to me this time, I wonder?” From her tone, Gwendy doesn't seem to mind the idea of being your plaything.`);
+			} else if (gwendy.flags.Bailout === GwendyFlags.Bailout.Submit) {
+				Text.Out(`“Hmm, you've been holding back on me, haven't you?” Gwendy looks like she didn't expect things to turn out this way. “Still, fair is fair... and you've earned your win. This time.”`);
+			} else {
+				Text.Out(`Counting the tally, it seems you came out the victor this time!`);
+			}
 			Text.NL();
 
 			if (gwendy.flags.WonChallenge < 3) {
