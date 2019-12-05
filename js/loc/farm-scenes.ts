@@ -1030,8 +1030,7 @@ FarmLoc.Loft.events.push(new Link(
 		Text.NL();
 	},
 	() => {
-		GwendyScenes.Approach();
-		GwendyScenes.LoftPrompt();
+		GwendyScenes.Approach(GwendyScenes.LoftPrompt);
 	},
 ));
 FarmLoc.Barn.events.push(new Link(
@@ -1049,8 +1048,7 @@ FarmLoc.Barn.events.push(new Link(
 		Text.NL();
 	},
 	() => {
-		GwendyScenes.Approach();
-		GwendyScenes.BarnPrompt();
+		GwendyScenes.Approach(GwendyScenes.BarnPrompt);
 	},
 ));
 FarmLoc.Fields.events.push(new Link(
@@ -1068,8 +1066,7 @@ FarmLoc.Fields.events.push(new Link(
 		Text.NL();
 	},
 	() => {
-		GwendyScenes.Approach();
-		GwendyScenes.FieldsPrompt();
+		GwendyScenes.Approach(GwendyScenes.FieldsPrompt);
 	},
 ));
 

@@ -16,10 +16,9 @@ export namespace GwendyFlags {
 		Init     = 0,
 		Slip     = 1,
 		Talked   = 2,
-		Locked   = 3,
-		Resolved = 4,
-		Dominate = 4,
-		Submit   = 5,
+		Resolved = 3,
+		Dominate = 3,
+		Submit   = 4,
 	}
 
 	export enum Toys {
@@ -47,5 +46,6 @@ export namespace GwendyFlags {
 		Oral    = 3,
 		Ride    = 4,
 		Fucked  = 5,
+		LAST    = 6, // TODO
 	}
 }
