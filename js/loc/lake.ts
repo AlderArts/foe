@@ -13,7 +13,7 @@ import { QuestItems } from "../items/quest";
 import { Link } from "../link";
 import { ILocLake } from "../location";
 import { Party } from "../party";
-import { IParse, Text } from "../text";
+import { Text } from "../text";
 import { Burrows } from "./burrows";
 import { BurrowsFlags } from "./burrows-flags";
 
@@ -26,7 +26,7 @@ const LakeLoc: ILocLake = {
 // Shore
 //
 LakeLoc.Shore.description = () => {
-	Text.Add("You are standing on the shore of the great lake in which the river that passes Rigard pours its waters. Further upstream, you can see the slums and docks of the great city spread out. Despite this, the lake looks pristine; you figure there must be multiple sources of its waters. Further out, you spot an island, and beyond that Eden ends, and the cloudy void begins.");
+	Text.Out(`You are standing on the shore of the great lake in which the river that passes Rigard pours its waters. Further upstream, you can see the slums and docks of the great city spread out. Despite this, the lake looks pristine; you figure there must be multiple sources of its waters. Further out, you spot an island, and beyond that Eden ends, and the cloudy void begins.`);
 };
 
 LakeLoc.Shore.links.push(new Link(
@@ -46,20 +46,17 @@ LakeLoc.Shore.enc.AddEnc(() => {
 	return () => {
 		const party: Party = GAME().party;
 		const burrows: Burrows = GAME().burrows;
-		const parse: IParse = {
-
-		};
 
 		Text.Clear();
-		Text.Add("Walking along the shore of the lake, you spot a patch of the red algae that Ophelia was looking for. Luckily enough, there seems to be plenty of it, and you are able to gather all of what she needs in a single go.", parse);
-		Text.NL();
-		Text.Add("<b>Received three samples of red algae!</b>", parse);
-		Text.Flush();
+		Text.Out(`Walking along the shore of the lake, you spot a patch of the red algae that Ophelia was looking for. Luckily enough, there seems to be plenty of it, and you are able to gather all of what she needs in a single go.
+
+		<b>Received three samples of red algae!</b>`);
 
 		party.Inv().AddItem(QuestItems.RedAlgae, 3);
 		burrows.flags.BrainyTrait = BurrowsFlags.TraitFlags.Gathered;
+
 		Text.NL();
-		Text.Add("You think you've gathered enough of these for now, you should return them to Ophelia.", parse);
+		Text.Out(`You think you've gathered enough of these for now, you should return them to Ophelia.`);
 		Text.Flush();
 
 		TimeStep({minute: 15});

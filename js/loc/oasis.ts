@@ -27,54 +27,55 @@ export class Oasis {
 		this.Shopbought = false;
 
 		// Caravan Shop
-		this.shop = new Shop();
-		this.flags.shop     = 0;
-		this.shopItems = []; // TODO
-		this.shopItems.push(IngredientItems.HorseHair);
-		this.shopItems.push(IngredientItems.HorseShoe);
-		this.shopItems.push(IngredientItems.HorseCum);
-		this.shopItems.push(IngredientItems.RabbitFoot);
-		this.shopItems.push(IngredientItems.CarrotJuice);
-		this.shopItems.push(IngredientItems.Lettuce);
-		this.shopItems.push(IngredientItems.Whiskers);
-		this.shopItems.push(IngredientItems.HairBall);
-		this.shopItems.push(IngredientItems.CatClaw);
-		this.shopItems.push(IngredientItems.SnakeOil);
-		this.shopItems.push(IngredientItems.LizardScale);
-		this.shopItems.push(IngredientItems.LizardEgg);
-		this.shopItems.push(IngredientItems.GoatMilk);
-		this.shopItems.push(IngredientItems.SheepMilk);
-		this.shopItems.push(IngredientItems.Ramshorn);
-		this.shopItems.push(IngredientItems.CowMilk);
-		this.shopItems.push(IngredientItems.CowBell);
-		this.shopItems.push(IngredientItems.FreshGrass);
-		this.shopItems.push(IngredientItems.CanisRoot);
-		this.shopItems.push(IngredientItems.DogBone);
-		this.shopItems.push(IngredientItems.DogBiscuit);
-		this.shopItems.push(IngredientItems.WolfFang);
-		this.shopItems.push(IngredientItems.Wolfsbane);
-		this.shopItems.push(IngredientItems.FoxBerries);
-		this.shopItems.push(IngredientItems.Foxglove);
-		this.shopItems.push(IngredientItems.BlackGem);
-		this.shopItems.push(IngredientItems.Hummus);
-		this.shopItems.push(IngredientItems.SpringWater);
-		this.shopItems.push(IngredientItems.Feather);
-		this.shopItems.push(IngredientItems.Trinket);
-		this.shopItems.push(IngredientItems.FruitSeed);
-		this.shopItems.push(IngredientItems.MFluff);
-		this.shopItems.push(IngredientItems.MDust);
-		this.shopItems.push(IngredientItems.Stinger);
-		this.shopItems.push(IngredientItems.SVenom);
-		this.shopItems.push(IngredientItems.SClaw);
-		this.shopItems.push(IngredientItems.TreeBark);
-		this.shopItems.push(IngredientItems.AntlerChip);
-		this.shopItems.push(IngredientItems.GoatFleece);
-		this.shopItems.push(IngredientItems.FlowerPetal);
-		this.shopItems.push(IngredientItems.RawHoney);
-		this.shopItems.push(IngredientItems.BeeChitin);
+		this.shop       = new Shop();
+		this.flags.shop = 0;
+		this.shopItems = [
+			IngredientItems.HorseHair,
+			IngredientItems.HorseShoe,
+			IngredientItems.HorseCum,
+			IngredientItems.RabbitFoot,
+			IngredientItems.CarrotJuice,
+			IngredientItems.Lettuce,
+			IngredientItems.Whiskers,
+			IngredientItems.HairBall,
+			IngredientItems.CatClaw,
+			IngredientItems.SnakeOil,
+			IngredientItems.LizardScale,
+			IngredientItems.LizardEgg,
+			IngredientItems.GoatMilk,
+			IngredientItems.SheepMilk,
+			IngredientItems.Ramshorn,
+			IngredientItems.CowMilk,
+			IngredientItems.CowBell,
+			IngredientItems.FreshGrass,
+			IngredientItems.CanisRoot,
+			IngredientItems.DogBone,
+			IngredientItems.DogBiscuit,
+			IngredientItems.WolfFang,
+			IngredientItems.Wolfsbane,
+			IngredientItems.FoxBerries,
+			IngredientItems.Foxglove,
+			IngredientItems.BlackGem,
+			IngredientItems.Hummus,
+			IngredientItems.SpringWater,
+			IngredientItems.Feather,
+			IngredientItems.Trinket,
+			IngredientItems.FruitSeed,
+			IngredientItems.MFluff,
+			IngredientItems.MDust,
+			IngredientItems.Stinger,
+			IngredientItems.SVenom,
+			IngredientItems.SClaw,
+			IngredientItems.TreeBark,
+			IngredientItems.AntlerChip,
+			IngredientItems.GoatFleece,
+			IngredientItems.FlowerPetal,
+			IngredientItems.RawHoney,
+			IngredientItems.BeeChitin,
+		];
 
 		this.flags.Visit = OasisFlags.Visit.NotVisited;
-		this.flags.Rakh = OasisFlags.RakhFlag.NotSeen;
+		this.flags.Rakh  = OasisFlags.RakhFlag.NotSeen;
 
 		if (storage) { this.FromStorage(storage); }
 	}
@@ -384,9 +385,9 @@ export namespace OasisScenes {
 						Text.Add("Her breasts press against your [breasts] as she", parse);
 					} else if (player.FirstBreastRow().Size() > 3) {
 						Text.Add("Your breasts press against his toned chest as he", parse);
-	} else {
+					} else {
 						Text.Add("He", parse);
-	}
+					}
 					Text.Add(" leans in, [rhisher] mouth pressing hungrily against yours. You wrap your arms around [rhimher], pressing your bodies tighter together, your lips parting eagerly to admit [rhisher] long, flexible tongue into your mouth.", parse);
 					Text.NL();
 					Text.Add("The caravan master moans in pleasure as you return the favor, tracing [rhisher] teeth with your [tongue] before pushing inside. The two of you stand locked in breathless arousal for a long minute. Your hands move down [rhisher] body, settling on [rhisher] butt and giving a firm squeeze. ", parse);

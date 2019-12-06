@@ -37,9 +37,15 @@ NomadsLoc.Tent.SaveSpot = "NomadsTent";
 NomadsLoc.Tent.safe = () => true;
 NomadsLoc.Tent.description = () => {
 	let light;
-	if     (WorldTime().hour >= 6 && WorldTime().hour < 19) { light = "sunlight"; } else if (WorldTime().hour >= 19 || WorldTime().hour < 2) { light = "firelight"; } else { light = "moonlight"; }
+	if (WorldTime().hour >= 6 && WorldTime().hour < 19) {
+		light = "sunlight";
+	} else if (WorldTime().hour >= 19 || WorldTime().hour < 2) {
+		light = "firelight";
+	} else {
+		light = "moonlight";
+	}
 
-	Text.Add("The interior of the tent is dim, with little of the [light] reaching inside. Various pots, pans and other cooking utensils are packed away in an open wooden chest, should you want to prepare some food. There is little actual furniture besides that; a few rugs rolled out to protect bare feet and a set of bed rolls are free for you to use.", {light});
+	Text.Out(`The interior of the tent is dim, with little of the ${light} reaching inside. Various pots, pans and other cooking utensils are packed away in an open wooden chest, should you want to prepare some food. There is little actual furniture besides that; a few rugs rolled out to protect bare feet and a set of bed rolls are free for you to use.`);
 	Text.NL();
 };
 
@@ -47,9 +53,15 @@ NomadsLoc.Tent.links.push(new Link(
 	"Outside", true, true,
 	() => {
 		let light;
-		if     (WorldTime().hour >= 6 && WorldTime().hour < 19) { light = "sunlight"; } else if (WorldTime().hour >= 19 || WorldTime().hour < 2) { light = "firelight"; } else { light = "moonlight"; }
+		if (WorldTime().hour >= 6 && WorldTime().hour < 19) {
+			light = "sunlight";
+		} else if (WorldTime().hour >= 19 || WorldTime().hour < 2) {
+			light = "firelight";
+		} else {
+			light = "moonlight";
+		}
 
-		Text.Add("Outside, the [light] illuminates several other tents that are similar to the one you are in now. ", {light});
+		Text.Out(`Outside, the ${light} illuminates several other tents that are similar to the one you are in now. `);
 	},
 	() => {
 		MoveToLocation(NomadsLoc.Fireplace, {minute: 5});
@@ -111,9 +123,9 @@ NomadsLoc.Fireplace.description = () => {
 		Text.Add("Currently it is unlit. Not many people are around, most likely seeing to their daily chores.");
 	} else if (WorldTime().hour >= 19 || WorldTime().hour < 2) {
 		Text.Add("A roaring fire reaches toward the dark skies, sparks swirling around in the breeze. Most of the adult population in the camp has gathered by the fireplace for the night's festivities.");
- } else {
+ 	} else {
 		Text.Add("The smoldering ashes from last night's fire still glow faintly. Most of the camp is sleeping at the current hour.");
- }
+ 	}
 	Text.NL();
 };
 NomadsLoc.Fireplace.links.push(new Link(

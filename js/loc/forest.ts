@@ -22,7 +22,7 @@ import { QuestItems } from "../items/quest";
 import { Link } from "../link";
 import { ILocForest } from "../location";
 import { Party } from "../party";
-import { IParse, Text } from "../text";
+import { Text } from "../text";
 import { Season } from "../time";
 import { Burrows } from "./burrows";
 import { BurrowsFlags } from "./burrows-flags";
@@ -48,9 +48,9 @@ ForestLoc.Outskirts.enc.AddEnc(() => {
 		const party: Party = GAME().party;
 		Text.Clear();
 
-		Text.Add("Not having much else to do, you wander the outskirts of the forest for a few minutes. You pick up a particularly fresh bundle of grass. Who knows, could be useful for something.");
-		Text.NL();
-		Text.Add("You pick up some fresh grass.", undefined, "bold");
+		Text.Out(`Not having much else to do, you wander the outskirts of the forest for a few minutes. You pick up a particularly fresh bundle of grass. Who knows, could be useful for something.
+
+		<b>You pick up some fresh grass.</b>`);
 		Text.Flush();
 		party.inventory.AddItem(IngredientItems.FreshGrass);
 
@@ -63,9 +63,9 @@ ForestLoc.Outskirts.enc.AddEnc(() => {
 		const party: Party = GAME().party;
 		Text.Clear();
 
-		Text.Add("Not having much else to do, you wander the outskirts of the forest for a few minutes. You pick up a pretty flower. Who knows, could be useful for something.");
-		Text.NL();
-		Text.Add("You pick up a Foxglove.", undefined, "bold");
+		Text.Out(`Not having much else to do, you wander the outskirts of the forest for a few minutes. You pick up a pretty flower. Who knows, could be useful for something.
+
+		<b>You pick up a Foxglove.</b>`);
 		Text.Flush();
 		party.inventory.AddItem(IngredientItems.Foxglove);
 
@@ -78,9 +78,9 @@ ForestLoc.Outskirts.enc.AddEnc(() => {
 		const party: Party = GAME().party;
 		Text.Clear();
 
-		Text.Add("As you trek through the undergrowth of the deep forest, you come across a cluster of small bushes with red berries. Seeing as nothing is trying to kill you at the moment, you spend some time gathering them, figuring they could be of some use.");
-		Text.NL();
-		Text.Add("You pick some fox berries.", undefined, "bold");
+		Text.Out(`As you trek through the undergrowth of the deep forest, you come across a cluster of small bushes with red berries. Seeing as nothing is trying to kill you at the moment, you spend some time gathering them, figuring they could be of some use.
+
+		<b>You pick some fox berries.</b>`);
 		Text.Flush();
 		party.inventory.AddItem(IngredientItems.FoxBerries);
 
@@ -92,10 +92,9 @@ ForestLoc.Outskirts.enc.AddEnc(() => {
 	return () => {
 		const party: Party = GAME().party;
 		Text.Clear();
+		Text.Out(`Not having much else to do, you wander the outskirts of the forest for a few minutes. You pick up an odd root. Who knows, could be useful for something.
 
-		Text.Add("Not having much else to do, you wander the outskirts of the forest for a few minutes. You pick up an odd root. Who knows, could be useful for something.");
-		Text.NL();
-		Text.Add("You pick up a Canis root.", undefined, "bold");
+		<b>You pick up a Canis root.</b>`);
 		Text.Flush();
 		party.inventory.AddItem(IngredientItems.CanisRoot);
 
@@ -108,9 +107,9 @@ ForestLoc.Outskirts.enc.AddEnc(() => {
 		const party: Party = GAME().party;
 		Text.Clear();
 
-		Text.Add("While wandering the forest, you come across a small spring filled with clear water. Figuring you might as well get some in case you grow thirsty, you pick out a vial from your pack.");
-		Text.NL();
-		Text.Add("You fill a vial with pure spring water.", undefined, "bold");
+		Text.Out(`While wandering the forest, you come across a small spring filled with clear water. Figuring you might as well get some in case you grow thirsty, you pick out a vial from your pack.
+
+		<b>You fill a vial with pure spring water.</b>`);
 		Text.Flush();
 		party.inventory.AddItem(IngredientItems.SpringWater);
 
@@ -121,13 +120,10 @@ ForestLoc.Outskirts.enc.AddEnc(() => {
 ForestLoc.Outskirts.enc.AddEnc(() => {
 	return () => {
 		const party: Party = GAME().party;
-		const parse: IParse = {
-
-		};
 		Text.Clear();
-		Text.Add("Something catches your eye as you plod along through the undergrowth: a piece of particularly tough tree bark. It doesn’t seem to belong to any of the trees around you; someone or something must have brought it here. You give it a rap with your knuckle. The thing seems pretty resilient… maybe it has some alchemical properties?", parse);
-		Text.NL();
-		Text.Add("<b>Picked up some tree bark.</b>", parse);
+		Text.Out(`Something catches your eye as you plod along through the undergrowth: a piece of particularly tough tree bark. It doesn’t seem to belong to any of the trees around you; someone or something must have brought it here. You give it a rap with your knuckle. The thing seems pretty resilient… maybe it has some alchemical properties?
+
+		<b>Picked up some tree bark.</b>`);
 		Text.Flush();
 
 		party.inventory.AddItem(IngredientItems.TreeBark);
@@ -139,13 +135,11 @@ ForestLoc.Outskirts.enc.AddEnc(() => {
 ForestLoc.Outskirts.enc.AddEnc(() => {
 	return () => {
 		const party: Party = GAME().party;
-		const parse: IParse = {
 
-		};
 		Text.Clear();
-		Text.Add("As you walk through the forest, you find a small broken piece of a deer antler, perhaps left there in a clash between two battling studs. Well, they won’t be needing it anymore, and perhaps you can find some use for it...", parse);
-		Text.NL();
-		Text.Add("<b>Picked up part of a deer antler.</b>", parse);
+		Text.Out(`As you walk through the forest, you find a small broken piece of a deer antler, perhaps left there in a clash between two battling studs. Well, they won’t be needing it anymore, and perhaps you can find some use for it...
+
+		<b>Picked up part of a deer antler.</b>`);
 		Text.Flush();
 
 		party.inventory.AddItem(IngredientItems.AntlerChip);
@@ -198,24 +192,20 @@ ForestLoc.Outskirts.enc.AddEnc(() => {
 	return () => {
 		const burrows: Burrows = GAME().burrows;
 		const party: Party = GAME().party;
-		const parse: IParse = {
-
-		};
 
 		Text.Clear();
-		Text.Add("You find the remains of some large insect; an immense whitened husk, mostly deteriorated by the passage of time. From what you see, you wouldn’t want to meet a live one face to face. Though its lower body is a mess of chitin and a multitude of legs, the shriveled torso looks oddly human. You’d never mistake the face for that of a human, however.", parse);
-		Text.NL();
-		Text.Add("Shuddering, you pocket a small part of the chitin that still looks usable.", parse);
-		Text.NL();
-		Text.Add("<b>Received a Gol husk!</b>", parse);
-		Text.Flush();
+		Text.Out(`You find the remains of some large insect; an immense whitened husk, mostly deteriorated by the passage of time. From what you see, you wouldn’t want to meet a live one face to face. Though its lower body is a mess of chitin and a multitude of legs, the shriveled torso looks oddly human. You’d never mistake the face for that of a human, however.
+
+		Shuddering, you pocket a small part of the chitin that still looks usable.
+
+		<b>Received a Gol husk!</b>`);
 
 		party.Inv().AddItem(QuestItems.GolHusk);
 
 		if (party.Inv().QueryNum(QuestItems.GolHusk) >= 3) {
 			burrows.flags.HermTrait = BurrowsFlags.TraitFlags.Gathered;
 			Text.NL();
-			Text.Add("You think you've gathered enough of these for now, you should return them to Ophelia.", parse);
+			Text.Out(`You think you've gathered enough of these for now, you should return them to Ophelia.`);
 		}
 		Text.Flush();
 
@@ -231,7 +221,7 @@ ForestLoc.Outskirts.enc.AddEnc(() => {
 ForestLoc.Outskirts.links.push(new Link(
 	"Crossroads", true, true,
 	() => {
-		Text.Add("Behind you is the way back to the crossroads.<br>");
+		Text.Out(`Behind you is the way back to the crossroads.<br>`);
 	},
 	() => {
 		MoveToLocation(WORLD().loc.Plains.Crossroads, {hour: 2});

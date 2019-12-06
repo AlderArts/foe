@@ -1006,68 +1006,68 @@ export namespace FarmScenesIntro {
 
 // Create namespace
 const FarmLoc: ILocFarm = {
-	Fields : new Event("Plains: Gwendy's farm"),
-	Barn   : new Event("The barn"),
-	Loft   : new Event("Gwendy's loft"),
+    Fields : new Event("Plains: Gwendy's farm"),
+    Barn   : new Event("The barn"),
+    Loft   : new Event("Gwendy's loft"),
 };
 
 FarmLoc.Loft.events.push(new Link(
-	"Gwendy", () => {
-		const gwendy: Gwendy = GAME().gwendy;
-		return gwendy.IsAtLocation(FarmLoc.Loft);
-	}, true,
-	() => {
-		const gwendy: Gwendy = GAME().gwendy;
-		if (gwendy.IsAtLocation(FarmLoc.Loft)) {
-			if (gwendy.IsAsleep()) {
-				Text.Out(`At this time of night, Gwendy has retired to her bed, though her sleep seems shallow.`);
-			} else {
-				Text.Out(`Gwendy is currently poring over various documents at her work table.`);
-			}
-		} else {
-			Text.Add("Gwendy doesn't seem to be in at the moment.");
-		}
-		Text.NL();
-	},
-	() => {
-		GwendyScenes.Approach(GwendyScenes.LoftPrompt);
-	},
+    "Gwendy", () => {
+        const gwendy: Gwendy = GAME().gwendy;
+        return gwendy.IsAtLocation(FarmLoc.Loft);
+    }, true,
+    () => {
+        const gwendy: Gwendy = GAME().gwendy;
+        if (gwendy.IsAtLocation(FarmLoc.Loft)) {
+            if (gwendy.IsAsleep()) {
+                Text.Out(`At this time of night, Gwendy has retired to her bed, though her sleep seems shallow.`);
+            } else {
+                Text.Out(`Gwendy is currently poring over various documents at her work table.`);
+            }
+        } else {
+            Text.Out("Gwendy doesn't seem to be in at the moment.");
+        }
+        Text.NL();
+    },
+    () => {
+        GwendyScenes.Approach(GwendyScenes.LoftPrompt);
+    },
 ));
 FarmLoc.Barn.events.push(new Link(
-	"Gwendy", () => {
-		const gwendy: Gwendy = GAME().gwendy;
-		return gwendy.IsAtLocation(FarmLoc.Barn);
-	}, true,
-	() => {
-		const gwendy: Gwendy = GAME().gwendy;
-		if (gwendy.IsAtLocation(FarmLoc.Barn)) {
-			Text.Add("Gwendy is currently tending to the animals, seeing to it that they are fed and watered.");
-		} else {
-			Text.Add("Gwendy doesn't seem to be here at the moment.");
-		}
-		Text.NL();
-	},
-	() => {
-		GwendyScenes.Approach(GwendyScenes.BarnPrompt);
-	},
+    "Gwendy", () => {
+        const gwendy: Gwendy = GAME().gwendy;
+        return gwendy.IsAtLocation(FarmLoc.Barn);
+    }, true,
+    () => {
+        const gwendy: Gwendy = GAME().gwendy;
+        if (gwendy.IsAtLocation(FarmLoc.Barn)) {
+            Text.Out("Gwendy is currently tending to the animals, seeing to it that they are fed and watered.");
+        } else {
+            Text.Out("Gwendy doesn't seem to be here at the moment.");
+        }
+        Text.NL();
+    },
+    () => {
+        GwendyScenes.Approach(GwendyScenes.BarnPrompt);
+    },
 ));
 FarmLoc.Fields.events.push(new Link(
-	"Gwendy", () => {
-		const gwendy: Gwendy = GAME().gwendy;
-		return gwendy.IsAtLocation(FarmLoc.Fields);
-	}, true,
-	() => {
-		const gwendy: Gwendy = GAME().gwendy;
-		if (gwendy.IsAtLocation(FarmLoc.Fields)) {
-			Text.Add("Gwendy is hard at work in the fields, acting as director of the farm’s meager labor force, but also getting her own hands dirty.");
-		} else {
-			Text.Add("Gwendy doesn't seem to be here at the moment.");
-		}
-		Text.NL();
-	},
-	() => {
-		GwendyScenes.Approach(GwendyScenes.FieldsPrompt);
-	},
+    "Gwendy", () => {
+        const gwendy: Gwendy = GAME().gwendy;
+        return gwendy.IsAtLocation(FarmLoc.Fields);
+    }, true,
+    () => {
+        const gwendy: Gwendy = GAME().gwendy;
+        if (gwendy.IsAtLocation(FarmLoc.Fields)) {
+            Text.Out("Gwendy is hard at work in the fields, acting as director of the farm’s meager labor force, but also getting her own hands dirty.");
+        } else {
+            Text.Out("Gwendy doesn't seem to be here at the moment.");
+        }
+        Text.NL();
+    },
+    () => {
+        GwendyScenes.Approach(GwendyScenes.FieldsPrompt);
+    },
 ));
 
 //
@@ -1088,86 +1088,85 @@ FarmLoc.Fields.onEntry = (x: boolean, from: ILocation) => {
 
 FarmLoc.Fields.enc = new EncounterTable();
 FarmLoc.Fields.enc.AddEnc(() => {
-	return () => {
-		const party: Party = GAME().party;
-		Text.Clear();
+    return () => {
+        const party: Party = GAME().party;
+        Text.Clear();
+        Text.Out(`Not having much else to do, you wander the fields for a few minutes. You pick up a particularly fresh bundle of grass. Who knows, could be useful for something.
 
-		Text.Add("Not having much else to do, you wander the fields for a few minutes. You pick up a particularly fresh bundle of grass. Who knows, could be useful for something.");
-		Text.NL();
-		Text.Add("You pick up some fresh grass.", undefined, "bold");
-		party.inventory.AddItem(IngredientItems.FreshGrass);
+        <b>You pick up some fresh grass.</b>`);
+        party.inventory.AddItem(IngredientItems.FreshGrass);
 
-		TimeStep({minute: 15});
-		Text.Flush();
-		Gui.NextPrompt();
-	};
+        TimeStep({minute: 15});
+        Text.Flush();
+        Gui.NextPrompt();
+    };
 }, 1.0, () => WorldTime().season !== Season.Winter);
 
 FarmLoc.Fields.enc.AddEnc(() => {
-	return RoamingScenes.FlowerPetal;
+    return RoamingScenes.FlowerPetal;
 }, 1.0, () => WorldTime().season !== Season.Winter);
 
 FarmLoc.Fields.enc.AddEnc(() => {
-	return () => {
-		const party: Party = GAME().party;
-		Text.Clear();
+    return () => {
+        const party: Party = GAME().party;
+        Text.Clear();
 
-		Text.Add("Not having much else to do, you wander the fields for a few minutes. You pick up a pretty flower. Who knows, could be useful for something.");
-		Text.NL();
-		Text.Add("You pick up a Foxglove.", undefined, "bold");
-		party.inventory.AddItem(IngredientItems.Foxglove);
+        Text.Out(`Not having much else to do, you wander the fields for a few minutes. You pick up a pretty flower. Who knows, could be useful for something.
 
-		TimeStep({minute: 15});
+        <b>You pick up a Foxglove.</b>`);
+        party.inventory.AddItem(IngredientItems.Foxglove);
 
-		Text.Flush();
-		Gui.NextPrompt();
-	};
+        TimeStep({minute: 15});
+
+        Text.Flush();
+        Gui.NextPrompt();
+    };
 }, 1.0, () => WorldTime().season !== Season.Winter);
 
 FarmLoc.Fields.links.push(new Link(
-	"Crossroads", true, true,
-	undefined,
-	() => {
-		MoveToLocation(WORLD().loc.Plains.Crossroads, {minute: 30});
-	},
+    "Crossroads", true, true,
+    undefined,
+    () => {
+        MoveToLocation(WORLD().loc.Plains.Crossroads, {minute: 30});
+    },
 ));
 FarmLoc.Fields.links.push(new Link(
-	"Barn", true, true,
-	undefined,
-	() => {
-		MoveToLocation(FarmLoc.Barn, {minute: 5});
-	},
+    "Barn", true, true,
+    undefined,
+    () => {
+        MoveToLocation(FarmLoc.Barn, {minute: 5});
+    },
 ));
 
 //
 // Gwendy's barn
 //
 FarmLoc.Barn.description = () => {
-	Text.Out(`The barn is the hub of Gwendy's farmstead, housing most of her cattle as well as the farmer herself up in her loft. While the various animal pens have a very lived-in appearance, they are by no means ill-tended, and their occupants appear to be well cared for and in good spirits.`);
-	Text.NL();
+    Text.Out(`The barn is the hub of Gwendy's farmstead, housing most of her cattle as well as the farmer herself up in her loft. While the various animal pens have a very lived-in appearance, they are by no means ill-tended, and their occupants appear to be well cared for and in good spirits.`);
+    Text.NL();
 };
 FarmLoc.Barn.links.push(new Link(
-	"Fields", true, true,
-	undefined,
-	() => {
-		MoveToLocation(FarmLoc.Fields, {minute: 5});
-	},
+    "Fields", true, true,
+    undefined,
+    () => {
+        MoveToLocation(FarmLoc.Fields, {minute: 5});
+    },
 ));
 FarmLoc.Barn.links.push(new Link(
-	"Loft", true, () => {
+    "Loft", true, () => {
         const gwendy: Gwendy = GAME().gwendy;
         return !gwendy.IsCleaning();
     },
-	() => {
+    () => {
         const gwendy: Gwendy = GAME().gwendy;
         if (gwendy.IsCleaning()) {
             Text.Out(`There’s a hastily written sign hung on the ladder leading up to Gwendy’s loft saying: ‘Warning! Keep out!’. You deduce that the farmer is still busy cleaning up from the latest mess caused to her bedroom, and will likely be so for a while longer.`);
             Text.NL();
         }
     },
-	() => {
-		MoveToLocation(FarmLoc.Loft, {minute: 5});
-	},
+    () => {
+        MoveToLocation(FarmLoc.Loft, {minute: 5});
+    },
 ));
 
 //
@@ -1176,55 +1175,47 @@ FarmLoc.Barn.links.push(new Link(
 FarmLoc.Loft.SaveSpot   = "GwendysLoft";
 FarmLoc.Loft.safe       = () => true;
 FarmLoc.Loft.description = () => {
-	Text.Out(`Gwendy's little hidey-hole is snug and comfy, if precariously located as it is in the rafters of the barn. Several pieces of simple furniture grace it, including a rural bed with a lockbox at its foot, a dresser with a mirror, a round table with two chairs, and a small wash basin.`);
-	Text.NL();
+    Text.Out(`Gwendy's little hidey-hole is snug and comfy, if precariously located as it is in the rafters of the barn. Several pieces of simple furniture grace it, including a rural bed with a lockbox at its foot, a dresser with a mirror, a round table with two chairs, and a small wash basin.`);
+    Text.NL();
 };
 FarmLoc.Loft.links.push(new Link(
-	"Climb down", true, true,
-	undefined,
-	() => {
-		MoveToLocation(FarmLoc.Barn, {minute: 5});
-	},
+    "Climb down", true, true,
+    undefined,
+    () => {
+        MoveToLocation(FarmLoc.Barn, {minute: 5});
+    },
 ));
 
 FarmLoc.Loft.SleepFunc = () => {
-	const party: Party = GAME().party;
+    const party: Party = GAME().party;
 
-	const parse: IParse = {
+    SetGameState(GameState.Event, Gui);
 
-	};
+    Text.Clear();
 
-	SetGameState(GameState.Event, Gui);
+    // TODO Sleep func
+    Text.Add(`You head off to bed.`);
+    Text.NL();
+    Text.Flush();
 
-	Text.Clear();
+    const func = (dream: any) => {
+        TimeStep({hour: 8});
+        party.Sleep();
 
-	// TODO
-	Text.Add("PLACEHOLDER", parse);
-	Text.NL();
-	Text.Add("You head off to bed", parse);
-	Text.NL();
-	Text.Add("", parse);
-
-	Text.Flush();
-
-	const func = (dream: any) => {
-		TimeStep({hour: 8});
-		party.Sleep();
-
-		if (LaylaScenes.FarmMeetingTrigger(false)) { return; }
+        if (LaylaScenes.FarmMeetingTrigger(false)) { return; }
 
         // TODO
-		Text.Add("You wake up, feeling rested and refreshed.", parse);
+        Text.Add(`You wake up, feeling rested and refreshed.`);
 
-		Text.Flush();
-		Gui.PrintDefaultOptions(true);
-	};
+        Text.Flush();
+        Gui.PrintDefaultOptions(true);
+    };
 
-	Gui.NextPrompt(() => {
-		Text.Clear();
+    Gui.NextPrompt(() => {
+        Text.Clear();
 
-		DreamsScenes.Entry(func);
-	});
+        DreamsScenes.Entry(func);
+    });
 };
 
 export namespace FarmScenes {

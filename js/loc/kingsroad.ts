@@ -16,7 +16,7 @@ import { RoamingScenes } from "../event/roaming";
 import { GAME, MoveToLocation, WORLD, WorldTime } from "../GAME";
 import { Link } from "../link";
 import { ILocKingsroad } from "../location";
-import { IParse, Text } from "../text";
+import { Text } from "../text";
 import { Season } from "../time";
 import { BurrowsFlags } from "./burrows-flags";
 
@@ -29,10 +29,7 @@ const KingsRoadLoc: ILocKingsroad = {
 // Hills, main hunting grounds
 //
 KingsRoadLoc.Road.description = () => {
-	const parse: IParse = {
-		TreeFar : GlobalScenes.TreeFarDesc(),
-	};
-	Text.Add("You are standing on the well-paved road leading from Rigard to the Free Cities, a major trading route on Eden. Estates and farm holds dot the landscape, which is a blend of flat plains on one side, and rougher country on the other as the gentle grasslands are swallowed by the great forest. [TreeFar]", parse);
+	Text.Out(`You are standing on the well-paved road leading from Rigard to the Free Cities, a major trading route on Eden. Estates and farm holds dot the landscape, which is a blend of flat plains on one side, and rougher country on the other as the gentle grasslands are swallowed by the great forest. ${GlobalScenes.TreeFarDesc()}`);
 };
 
 KingsRoadLoc.Road.links.push(new Link(
