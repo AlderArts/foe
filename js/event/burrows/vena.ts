@@ -17,7 +17,7 @@ export class Vena extends Entity {
 
 		this.ID = "vena";
 
-		this.name              = "Vena";
+		this.name = "Vena";
 
 		this.body.DefFemale();
 

@@ -325,11 +325,12 @@ export class LagonBrute extends BossEntity {
 	}
 
 	public DropTable() {
-		const drops = [];
-		drops.push({ it: AlchemyItems.Leporine });
-		drops.push({ it: AlchemyItems.Testos });
-		drops.push({ it: AlchemyItems.Virilium });
-		drops.push({ it: AccItems.LagonCrown });
+		const drops = [
+			{ it: AlchemyItems.Leporine },
+			{ it: AlchemyItems.Testos },
+			{ it: AlchemyItems.Virilium },
+			{ it: AccItems.LagonCrown },
+		];
 		return drops;
 	}
 

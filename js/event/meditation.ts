@@ -193,9 +193,9 @@ export namespace MeditationScenes {
 				Text.Add("Your concentration lapses more than once as lewd thoughts force their way to your attention, but you manage to forcibly push them down from whence they came and re-orient your mind on the meditative exercise at hand. There’s the lingering suspicion in the back of your mind that they’ll be back in force before too long, but you’ll take any opening you can get.", parse);
 			} else if (lust >= 0.3) {
 				Text.Add("Your mind is riddled with the occasional lewd thought as you begin meditating, but you have enough willpower and presence of mind to overrule them and push them back into the dark recesses of your mind from when they came. Those minor hiccups aside, though, the opening steps of your meditation go by smoothly, and before long you feel settled and ready to begin in earnest.", parse);
-	} else {
+			} else {
 				Text.Add("With your full concentration at hand, it’s a small matter to gather your thoughts into a neat little package and shunt them into a corner of your mind, leaving a dark, peaceful blankness behind your eyes for you to luxuriate in and begin the task of keeping your mental house in order.", parse);
-	}
+			}
 			Text.Add(" The gem in your hands starts to grow warm, a gentle, pulsating heat, and you feel that you’re as ready as you’ll ever be.", parse);
 			Text.NL();
 

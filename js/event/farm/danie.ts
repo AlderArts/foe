@@ -90,11 +90,11 @@ export class Danie extends Entity {
 
 		if (GetDEBUG()) {
 			Text.NL();
-			Text.Add("DEBUG: relation: " + danie.relation.Get(), undefined, "bold");
-			Text.NL();
-			Text.Add("DEBUG: subDom: " + danie.subDom.Get(), undefined, "bold");
-			Text.NL();
-			Text.Add("DEBUG: slut: " + danie.slut.Get(), undefined, "bold");
+			Text.Out(`<b>DEBUG: relation: ${danie.relation.Get()}
+
+			DEBUG: subDom: ${danie.subDom.Get()}
+
+			DEBUG: slut: ${danie.slut.Get()}</b>`);
 			Text.NL();
 		}
 		Text.Flush();

@@ -170,22 +170,23 @@ export class Gwendy extends Entity {
 
 		that.PrintDescription();
 
-		const options: IChoice[] = [];
-		options.push({ nameStr: "Release",
-			func() {
-				Text.Clear();
-				Text.Add("[Placeholder] Gwendy masturbates fiercely, cumming buckets.");
+		const options: IChoice[] = [
+			{ nameStr: "Release",
+				func() {
+					Text.Clear();
+					Text.Add("[Placeholder] Gwendy masturbates fiercely, cumming buckets.");
 
-				TimeStep({minute : 10});
+					TimeStep({minute : 10});
 
-				that.AddLustFraction(-1);
-				Text.Flush();
-				Gui.NextPrompt(() => {
-					that.Interact(switchSpot);
-				});
-			}, enabled : true,
-			tooltip : "Pleasure yourself.",
-		});
+					that.AddLustFraction(-1);
+					Text.Flush();
+					Gui.NextPrompt(() => {
+						that.Interact(switchSpot);
+					});
+				}, enabled : true,
+				tooltip : "Pleasure yourself.",
+			},
+		];
 		// Equip, stats, job, switch
 		that.InteractDefault(options, switchSpot, true, true, true, true);
 

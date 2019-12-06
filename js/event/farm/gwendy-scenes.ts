@@ -1326,33 +1326,34 @@ export namespace GwendyScenes {
 		if (allowChallenge) {
 			Text.Flush();
 			// [Yeah!][No][Lose]
-			const options: IChoice[] = [];
-			options.push({ nameStr : "Yeah!",
-				func() {
-					Text.Clear();
-					Text.Add("You tell Gwendy you wouldn't mind taking her on, especially considering what winning seems to entail. <i>“I figured you'd say something like that, but don't think I'm gonna go easy on you, either.”</i> The two of you stare at one another for a moment, adopting challenging smiles on your faces before dashing off to try and best one another!", parse);
-					Gui.PrintDefaultOptions();
-				}, enabled : true,
-				tooltip : "Sounds like fun!",
-			});
-			options.push({ nameStr : "No",
-				func() {
-					challenge = false;
-					Text.Clear();
-					Text.Add("You decline, saying with the workload before the two of you, a challenge should be the last thing on her mind. She sucks her teeth at that, but admits you have a point. <i>“Oh well, in any event, we probably will be more productive without the added stuff. Alright, I'll see you when we're finished then, okay?”</i> With a nod, you go back to what you were doing, though you notice that Gwendy has a slight pout on her face. While cute, she seems disappointed with you, but what's done is done. Now, time to get to work!", parse);
-					Gui.PrintDefaultOptions();
-				}, enabled : true,
-				tooltip : "Isn't there too much work to do to be playing around?",
-			});
-			options.push({ nameStr : "Lose",
-				func() {
-					lose = true;
-					Text.Clear();
-					Text.Add("You accept her challenge, but in the back of your mind you decide to just lose for the sake of it. Given her demeanor and allure, a part of you wants to see what the losing side is like!", parse);
-					Gui.PrintDefaultOptions();
-				}, enabled : true,
-				tooltip : "Who gives a damn, you'll be with Gwendy! Lose on purpose.",
-			});
+			const options: IChoice[] = [
+				{ nameStr : "Yeah!",
+					func() {
+						Text.Clear();
+						Text.Add("You tell Gwendy you wouldn't mind taking her on, especially considering what winning seems to entail. <i>“I figured you'd say something like that, but don't think I'm gonna go easy on you, either.”</i> The two of you stare at one another for a moment, adopting challenging smiles on your faces before dashing off to try and best one another!", parse);
+						Gui.PrintDefaultOptions();
+					}, enabled : true,
+					tooltip : "Sounds like fun!",
+				},
+				{ nameStr : "No",
+					func() {
+						challenge = false;
+						Text.Clear();
+						Text.Add("You decline, saying with the workload before the two of you, a challenge should be the last thing on her mind. She sucks her teeth at that, but admits you have a point. <i>“Oh well, in any event, we probably will be more productive without the added stuff. Alright, I'll see you when we're finished then, okay?”</i> With a nod, you go back to what you were doing, though you notice that Gwendy has a slight pout on her face. While cute, she seems disappointed with you, but what's done is done. Now, time to get to work!", parse);
+						Gui.PrintDefaultOptions();
+					}, enabled : true,
+					tooltip : "Isn't there too much work to do to be playing around?",
+				},
+				{ nameStr : "Lose",
+					func() {
+						lose = true;
+						Text.Clear();
+						Text.Add("You accept her challenge, but in the back of your mind you decide to just lose for the sake of it. Given her demeanor and allure, a part of you wants to see what the losing side is like!", parse);
+						Gui.PrintDefaultOptions();
+					}, enabled : true,
+					tooltip : "Who gives a damn, you'll be with Gwendy! Lose on purpose.",
+				},
+			];
 			Gui.SetButtonsFromList(options);
 		} else {
 			challenge = false;
@@ -1941,30 +1942,31 @@ export namespace GwendyScenes {
 				// TODO: Conditional?
 
 				// [Cuddle][Sex]
-				const options: IChoice[] = [];
-				options.push({ nameStr : "Cuddle",
-					func() {
-						Text.Clear();
-						Text.Add("After cuddling together for a while, you part ways with her, though not before Gwendy gets one last kiss in.", parse);
-						Text.NL();
-						Text.Add("<i>“That was more fun than last time, [playername]. I wouldn't mind doing this again sometime...”</i> You smile boldly as you leave, glad that both of you were able to enjoy this little stint.", parse);
-						Text.Flush();
+				const options: IChoice[] = [
+					{ nameStr : "Cuddle",
+						func() {
+							Text.Clear();
+							Text.Add("After cuddling together for a while, you part ways with her, though not before Gwendy gets one last kiss in.", parse);
+							Text.NL();
+							Text.Add("<i>“That was more fun than last time, [playername]. I wouldn't mind doing this again sometime...”</i> You smile boldly as you leave, glad that both of you were able to enjoy this little stint.", parse);
+							Text.Flush();
 
-						Gui.NextPrompt();
-					}, enabled : true,
-					tooltip : "Just cuddle for now, take some time to calm down.",
-				});
-				// #if horny enough and sex is unlocked? Else default to cuddle
-				options.push({ nameStr : "Sex",
-					func() {
-						Text.Clear();
-						Text.Add("<i>“Say... are you really just going to leave it like that?”</i> she manages to pant, grinding back against your body. <i>“Come on... I need it...”</i>", parse);
-						Text.Flush();
+							Gui.NextPrompt();
+						}, enabled : true,
+						tooltip : "Just cuddle for now, take some time to calm down.",
+					},
+					// #if horny enough and sex is unlocked? Else default to cuddle
+					{ nameStr : "Sex",
+						func() {
+							Text.Clear();
+							Text.Add("<i>“Say... are you really just going to leave it like that?”</i> she manages to pant, grinding back against your body. <i>“Come on... I need it...”</i>", parse);
+							Text.Flush();
 
-						GwendyScenes.LoftSexPrompt(undefined, disableSleep, GwendyFlags.ChallengeWinScene.Oral, GwendyFlags.ChallengeLostScene.Oral);
-					}, enabled : wonScene >= GwendyFlags.ChallengeWinScene.Oral || lossScene >= GwendyFlags.ChallengeLostScene.Oral,
-					tooltip : "She is ready and more than willing.",
-				});
+							GwendyScenes.LoftSexPrompt(undefined, disableSleep, GwendyFlags.ChallengeWinScene.Oral, GwendyFlags.ChallengeLostScene.Oral);
+						}, enabled : wonScene >= GwendyFlags.ChallengeWinScene.Oral || lossScene >= GwendyFlags.ChallengeLostScene.Oral,
+						tooltip : "She is ready and more than willing.",
+					},
+				];
 				Gui.SetButtonsFromList(options);
 			}
 		}
@@ -2422,11 +2424,13 @@ export namespace GwendyScenes {
 			if (first) {
 				Text.Out(`“S-so good!” she gasps. “We have to do this more!” Well, you aren’t going to voice any complaints there.`);
 			} else {
-				const scenes = [() => {
-					Text.Out(`“Yes, yes!” the farm girl cries out. “Fuck me, use me!”`);
-				}, () => {
-					Text.Out(`“That’s right, stretch my butt!”`);
-				}];
+				const scenes = [
+					() => {
+						Text.Out(`“Yes, yes!” the farm girl cries out. “Fuck me, use me!”`);
+					}, () => {
+						Text.Out(`“That’s right, stretch my butt!”`);
+					},
+				];
 				if (player.FirstCock().race.isRace(Race.Horse)) {
 					scenes.push(() => {
 						Text.Out(`“I just can’t get enough of it!” the horny farmer gasps. “I love being fucked by a horsecock, so big...”`);
@@ -2546,92 +2550,93 @@ export namespace GwendyScenes {
 			Text.Flush();
 
 			// [Walk][Work][Take out]
-			const options: IChoice[] = [];
-			options.push({ nameStr : "Walk",
-				func() {
-					Text.Clear();
-					Text.Add("You tell her to walk around a bit like that, crawling on all fours around the loft. She grudgingly obeys, wincing as each movement moves the beads around in her bowels. You give her an encouraging slap on her cheek as she is passing by, earning you an infuriated look from the proud farmer.", parse);
-					Text.NL();
-					Text.Add("<i>“Ugh, you’ve had your fun, take this out already,”</i> Gwendy moans, annoyed with you. As the lady commands.", parse);
-					// Pop from call stack
-					Gui.PrintDefaultOptions();
-				}, enabled : player.SubDom() >= 15,
-				tooltip : "Have her walk around the room a bit, see if she's so tough.",
-			});
-			options.push({ nameStr : "Work",
-				func() {
-					Text.Clear();
-					Text.Add("Fair enough. Why don’t she go about her day then?", parse);
-					Text.NL();
-					Text.Add("<i>“W-what? Like this?”</i> She looks dismayed as you nod. Blushing furiously, she nonetheless picks up her clothes, pulling them on gingerly. Gwendy stands up unsteadily, wincing as she leans down to pull on her boots. When standing up, one almost wouldn’t suspect that she had a long string of anal beads stuffed up her butt.", parse);
-					if (gwendy.EPlus()) {
-						Text.Add(" Her [gcocks] straining against the fabric of her tight shorts could clue someone in, though.", parse);
-					}
-					Text.NL();
-					Text.Add("<i>“Pervert,”</i> she mutters as she stalks past you, climbing down the ladder to the barn. You tag along close behind her, eager to see how she’ll fare.", parse);
-					Text.NL();
-
-					const scenes = [() => {
-						Text.Add("Gwendy doesn’t seem to want to leave the barn, so she goes to tend the cows. She doesn’t do a very good job at it though, as she winces visibly each time she sits down to milk one of them. She keeps throwing smoldering glances in your direction.", parse);
-						if (!hangout) {
-							Text.Add(" Such a sore loser.", parse);
-						}
-					}, () => {
-						parse.Adrian = adrian.name;
-						parse.heshe  = adrian.heshe();
-						parse.himher = adrian.himher();
-
-						Text.Add("Gwendy decides to go tending to the fields, and you keep a respectable distance as she angrily grabs hold of a scythe. Better not make her <i>too</i> angry at you. She goes about her business, so focused on cutting grass that she doesn’t notice [Adrian] coming up behind her.", parse);
-						Text.NL();
-						if (gwendy.EPlus()) {
-							Text.Add("<i>“Gwendy, can you-”</i> [Adrian] falters as the farmer whirls about, faced with her barely contained, rock-hard [gcocks]. <i>“I- uh, I’ll just be over here,”</i> [heshe] mumbles, quickly putting some distance between [himher]self and the horny, irritated farm girl. She goes back to hacking angrily at the innocent grass, throwing glowering looks in your direction.", parse);
-						} else {
-							Text.Add("<i>“What is it no-”</i> Gwendy snaps angrily, whirling about. <i>“Oh. A-[Adrian].”</i> She hastily excuses herself, walking away from the confused horse-morph, throwing glowering looks in your direction.", parse);
-						}
-					}, () => {
-						Text.Add("Gwendy decides to go tend to the sheep, quickly regretting her decision when she meets the bubbly airhead Danie.", parse);
-						Text.NL();
-						Text.Add("<i>“Hello, Miss Gwendy! Such a lovely day!”</i> the sheep-morph gaily exclaims. <i>“Are you alright miss?”</i> Danie looks a bit concerned at the farmer’s discomfort.", parse);
-						Text.NL();
-						Text.Add("<i>“J-just fine, Danie, just fine,”</i> she chips out, throwing glowering glances in your direction. The curious sheep follows Gwendy around as she goes about her work, and at the moment she least expects it, Danie pulls on the short piece of string sticking out of Gwendy’s pants.", parse);
-						Text.NL();
-						Text.Add("<i>“DANIE!”</i> the farmer yowls, batting off the confused sheep, inadvertently scattering the entire flock with her waving arms. Ah, fun times.", parse);
-					}];
-					_.sample(scenes)();
-
-					Text.NL();
-					Text.Add("<b>Time passes...</b>", parse);
-					Text.Flush();
-
-					Gui.NextPrompt(() => {
+			const options: IChoice[] = [
+				{ nameStr : "Walk",
+					func() {
 						Text.Clear();
-						Text.Add("<i>“Enough!”</i> Gwendy finally pants, dragging you back toward the loft.", parse);
+						Text.Add("You tell her to walk around a bit like that, crawling on all fours around the loft. She grudgingly obeys, wincing as each movement moves the beads around in her bowels. You give her an encouraging slap on her cheek as she is passing by, earning you an infuriated look from the proud farmer.", parse);
 						Text.NL();
-						parse.cum = gwendy.EPlus() ? "cum" : "clear liquid";
-						Text.Add("The last stretch is the worst for her, and as she climbs up the ladder in front of you, you see a trickle of [cum] slowly dripping down one of her legs. When you pull yourself up on the landing, Gwendy’s legs are shaking slightly in the afterglow of her anal orgasm.", parse);
-						Text.NL();
-						parse.gen = gwendy.EPlus() ? Text.Parse(", freeing her stiff [gcocks]", parse) : "";
-						Text.Add("<i>“T-take this out, right now!”</i> she whimpers, pulling down her shorts[gen]. As the lady commands.", parse);
+						Text.Add("<i>“Ugh, you’ve had your fun, take this out already,”</i> Gwendy moans, annoyed with you. As the lady commands.", parse);
 						// Pop from call stack
 						Gui.PrintDefaultOptions();
+					}, enabled : player.SubDom() >= 15,
+					tooltip : "Have her walk around the room a bit, see if she's so tough.",
+				},
+				{ nameStr : "Work",
+					func() {
+						Text.Clear();
+						Text.Add("Fair enough. Why don’t she go about her day then?", parse);
+						Text.NL();
+						Text.Add("<i>“W-what? Like this?”</i> She looks dismayed as you nod. Blushing furiously, she nonetheless picks up her clothes, pulling them on gingerly. Gwendy stands up unsteadily, wincing as she leans down to pull on her boots. When standing up, one almost wouldn’t suspect that she had a long string of anal beads stuffed up her butt.", parse);
+						if (gwendy.EPlus()) {
+							Text.Add(" Her [gcocks] straining against the fabric of her tight shorts could clue someone in, though.", parse);
+						}
+						Text.NL();
+						Text.Add("<i>“Pervert,”</i> she mutters as she stalks past you, climbing down the ladder to the barn. You tag along close behind her, eager to see how she’ll fare.", parse);
+						Text.NL();
 
-						player.subDom.IncreaseStat(50, 1);
-						gwendy.subDom.DecreaseStat(-10, 1);
-						TimeStep({hour: 1});
-					});
+						const scenes = [() => {
+							Text.Add("Gwendy doesn’t seem to want to leave the barn, so she goes to tend the cows. She doesn’t do a very good job at it though, as she winces visibly each time she sits down to milk one of them. She keeps throwing smoldering glances in your direction.", parse);
+							if (!hangout) {
+								Text.Add(" Such a sore loser.", parse);
+							}
+						}, () => {
+							parse.Adrian = adrian.name;
+							parse.heshe  = adrian.heshe();
+							parse.himher = adrian.himher();
 
-				}, enabled : player.SubDom() >= 30 && (WorldTime().hour < 19 && WorldTime().hour >= 5),
-				tooltip : "Have her work for a while like this.",
-			});
-			options.push({ nameStr : "Take out",
-				func() {
-					Text.Clear();
-					Text.Add("Looks like she has had enough for now.", parse);
-					// Pop from call stack
-					Gui.PrintDefaultOptions();
-				}, enabled : true,
-				tooltip : "Have mercy on her and remove the beads.",
-			});
+							Text.Add("Gwendy decides to go tending to the fields, and you keep a respectable distance as she angrily grabs hold of a scythe. Better not make her <i>too</i> angry at you. She goes about her business, so focused on cutting grass that she doesn’t notice [Adrian] coming up behind her.", parse);
+							Text.NL();
+							if (gwendy.EPlus()) {
+								Text.Add("<i>“Gwendy, can you-”</i> [Adrian] falters as the farmer whirls about, faced with her barely contained, rock-hard [gcocks]. <i>“I- uh, I’ll just be over here,”</i> [heshe] mumbles, quickly putting some distance between [himher]self and the horny, irritated farm girl. She goes back to hacking angrily at the innocent grass, throwing glowering looks in your direction.", parse);
+							} else {
+								Text.Add("<i>“What is it no-”</i> Gwendy snaps angrily, whirling about. <i>“Oh. A-[Adrian].”</i> She hastily excuses herself, walking away from the confused horse-morph, throwing glowering looks in your direction.", parse);
+							}
+						}, () => {
+							Text.Add("Gwendy decides to go tend to the sheep, quickly regretting her decision when she meets the bubbly airhead Danie.", parse);
+							Text.NL();
+							Text.Add("<i>“Hello, Miss Gwendy! Such a lovely day!”</i> the sheep-morph gaily exclaims. <i>“Are you alright miss?”</i> Danie looks a bit concerned at the farmer’s discomfort.", parse);
+							Text.NL();
+							Text.Add("<i>“J-just fine, Danie, just fine,”</i> she chips out, throwing glowering glances in your direction. The curious sheep follows Gwendy around as she goes about her work, and at the moment she least expects it, Danie pulls on the short piece of string sticking out of Gwendy’s pants.", parse);
+							Text.NL();
+							Text.Add("<i>“DANIE!”</i> the farmer yowls, batting off the confused sheep, inadvertently scattering the entire flock with her waving arms. Ah, fun times.", parse);
+						}];
+						_.sample(scenes)();
+
+						Text.NL();
+						Text.Add("<b>Time passes...</b>", parse);
+						Text.Flush();
+
+						Gui.NextPrompt(() => {
+							Text.Clear();
+							Text.Add("<i>“Enough!”</i> Gwendy finally pants, dragging you back toward the loft.", parse);
+							Text.NL();
+							parse.cum = gwendy.EPlus() ? "cum" : "clear liquid";
+							Text.Add("The last stretch is the worst for her, and as she climbs up the ladder in front of you, you see a trickle of [cum] slowly dripping down one of her legs. When you pull yourself up on the landing, Gwendy’s legs are shaking slightly in the afterglow of her anal orgasm.", parse);
+							Text.NL();
+							parse.gen = gwendy.EPlus() ? Text.Parse(", freeing her stiff [gcocks]", parse) : "";
+							Text.Add("<i>“T-take this out, right now!”</i> she whimpers, pulling down her shorts[gen]. As the lady commands.", parse);
+							// Pop from call stack
+							Gui.PrintDefaultOptions();
+
+							player.subDom.IncreaseStat(50, 1);
+							gwendy.subDom.DecreaseStat(-10, 1);
+							TimeStep({hour: 1});
+						});
+
+					}, enabled : player.SubDom() >= 30 && (WorldTime().hour < 19 && WorldTime().hour >= 5),
+					tooltip : "Have her work for a while like this.",
+				},
+				{ nameStr : "Take out",
+					func() {
+						Text.Clear();
+						Text.Add("Looks like she has had enough for now.", parse);
+						// Pop from call stack
+						Gui.PrintDefaultOptions();
+					}, enabled : true,
+					tooltip : "Have mercy on her and remove the beads.",
+				},
+			];
 			Gui.SetButtonsFromList(options);
 
 			Gui.Callstack.push(() => {

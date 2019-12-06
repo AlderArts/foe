@@ -100,15 +100,15 @@ export class Roa extends Entity {
 	public Interact() {
 		const roa: Roa = GAME().roa;
 		Text.Clear();
-		Text.Add("Rawr Imma bunny.");
+		Text.Out(`Rawr Imma bunny.`);
 
 		if (GetDEBUG()) {
 			Text.NL();
-			Text.Add("DEBUG: relation: " + roa.relation.Get(), undefined, "bold");
-			Text.NL();
-			Text.Add("DEBUG: subDom: " + roa.subDom.Get(), undefined, "bold");
-			Text.NL();
-			Text.Add("DEBUG: slut: " + roa.slut.Get(), undefined, "bold");
+			Text.Out(`<b>DEBUG: relation: ${roa.relation.Get()}
+
+			DEBUG: subDom: ${roa.subDom.Get()}
+
+			DEBUG: slut: ${roa.slut.Get()}</b>`);
 			Text.NL();
 		}
 

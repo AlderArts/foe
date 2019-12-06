@@ -87,11 +87,11 @@ export class Adrian extends Entity {
 
 		if (GetDEBUG()) {
 			Text.NL();
-			Text.Add("DEBUG: relation: " + adrian.relation.Get(), undefined, "bold");
-			Text.NL();
-			Text.Add("DEBUG: subDom: " + adrian.subDom.Get(), undefined, "bold");
-			Text.NL();
-			Text.Add("DEBUG: slut: " + adrian.slut.Get(), undefined, "bold");
+			Text.Out(`<b>DEBUG: relation: ${adrian.relation.Get()}
+
+			DEBUG: subDom: ${adrian.subDom.Get()}
+
+			DEBUG: slut: ${adrian.slut.Get()}</b>`);
 			Text.NL();
 		}
 
