@@ -477,9 +477,9 @@ export namespace IslaScenes {
 				Text.Add("If she’s having cravings, at least she knows better than to trouble you with them, and you have to admit that having undeniable proof of her fertility only serves to make her look more womanly and attractive. She may be pregnant, but that’s no reason not to have some fun…", parse);
 			} else if (num <= 2) {
 				Text.Add("Odd, though… you’re no expert on these matters, but it seems to you that her belly’s a little bigger that it ought to be. Maybe this cub of hers is just growing extra large and healthy in her, or maybe there’s a bit more fluid than usual. Nothing to worry about.", parse);
- } else { // triplets
+ 			} else { // triplets
 				Text.Add("It’s obvious by now that more than one cub has taken root within the fertile confines of Isla’s womb - the swell of her pregnancy is far too big too soon to be anything but multiples, although it’s too early to tell just how many are in there by sight alone. The proof of both her fertility and your virility combined causes no end of delight in her, and she’s always sneaking in a belly rub or two when she thinks you’re not looking.", parse);
- }
+		 	}
 		} else if (stage < 0.8) {
 			Text.Add("It’s been getting bigger and bigger, filling steadily with new life as the moment of birthing draws closer with each day. Her lean body only makes her big belly even more pronounced - she’s drawn an intricate pattern of body-paint on it centered about her navel, ostensibly to help the cubs inside grow big and healthy. As hormones have flooded her body, so have her nipples darkened, and you find yourself wondering just how her milk tastes like…", parse);
 			Text.NL();
@@ -487,7 +487,7 @@ export namespace IslaScenes {
 				Text.Add("All in all, though, you know that it’s not going to be too long before Isla’s fully ripened and ready to bear fruit. Before that happens, though, her tummy’s only going to get bigger, her cub more vigorous…", parse);
 			} else if (num <= 2) {
 				Text.Add("Besides, there’s little doubt now that she’s carrying more than one cub inside her - with how big she is, she’d be ready to pop soon if she were carrying but one. Instead of being grouchy or resentful, Isla seems to take a certain glee in this proof of her above-average fertility, a smug smile on her muzzle as she tenderly caresses the tender girth of her burgeoning belly.", parse);
- } else {
+ 			} else {
 				Text.Add("Isla is starting to get really heavy - her belly’s bigger than that of a full-term singleton pregnancy, and the fur about her midsection is starting to thin out due to all the area it has to cover now. It’s a good thing that she usually has plenty of energy to spare, because her tummy is only going to get even bigger before she finally pops out her cubs.", parse);
 				Text.NL();
 				Text.Add("She’s even had to loosen her makeshift bra with how milky and jiggly her swelling tits are becoming, jostling for space on her chest.", parse);
@@ -1532,9 +1532,9 @@ export namespace IslaScenes {
 				Text.Add("Her slender hips are firm and solid, and as you press down with your fingers on skin and fur you can feel muscle shift underneath. She may not look it, but there’s no doubt the sable-morph is a fine girl in her own right and has the strength to be just as vigorous when the situation calls for it.", parse);
 			} else if (figure === IslaFlags.Figure.Womanly) {
 				Text.Add("Her widened hips and rounded butt have definitely improved her overall figure, and the difference is distinct under your fingertips as you reach for her firm, fleshy butt for a squeeze and pinch. No matter how many times you do it, it’s always worth that flustered squeak that it elicits from her muzzle.", parse);
- } else { // curvy
+ 			} else { // curvy
 				Text.Add("Her broodmother-worthy hips and swollen rump are a delight to grope, testament to how the spring’s changed her. Feeling your fingers at her crack, the sable-morph thrusts her ass firmly into your grasp, giving you a delightful handful of tail.", parse);
- }
+ 			}
 			Text.NL();
 			Text.Add("Ah, right. Now that she’s all softened up and ready, how do you want to proceed?", parse);
 			Text.Flush();
@@ -1673,7 +1673,7 @@ export namespace IslaScenes {
 				Text.Add(" With your [cock] as large as it is, it creates a distinct rise in Isla’s lower belly. It visibly squirms about in her like a live thing as she continues to ride you, causing the poor sable-morph no small amount of consternation.", parse);
 			} else if (cockSize >= 100) {
 				Text.Add(" Churning about within Isla’s heated depths, your [cock] creates a bulge in the sable-morph’s lower belly as she rides you. She may not be able to see it like you can, but she can definitely <i>feel</i> how your size’s amplifying your every motion, turning her into a wriggling mess of pleasure.", parse);
- }
+ 			}
 			Text.NL();
 			Text.Add("Seems like she didn’t get very far, despite having had the initiative. Or then again, was she planning on losing from the outset?", parse);
 			Text.NL();
@@ -1745,7 +1745,7 @@ export namespace IslaScenes {
 				Text.Add(" Her heavily swollen baby bag hangs under her, so heavy that it almost touches the ground. It wobbles and jiggles slightly as she moves, the weight of the cubs within continually testing the firm muscle of her womb.", parse);
 			} else if (opts.preg) {
 				Text.Add(" The sable-morph’s pregnancy hangs under her noticeably, a round bump that protrudes downward from her midriff. You smile and reach down to caress it, eliciting a happy purring sound from the back of her throat.", parse);
- }
+ 			}
 			Text.Add(" Greedily, you grab one of her taut asscheeks and give it a firm squeeze, which only serves to arouse her further.", parse);
 			Text.NL();
 			Text.Add("<i>“Wanna count how many times you can make me scream in one sitting?”</i>", parse);
@@ -1895,9 +1895,9 @@ export namespace IslaScenes {
 				Text.Add("The phallic bulge from your massive member is blatant on her lower belly as her cunt struggles to contain as much cock as it can, and although she’s fairly flexible as a sable-morph, she’s not <i>that</i> flexible.", parse);
 			} else if (cockSize >= 100) {
 				Text.Add("You can’t help but notice that your member is creating a gentle bulge on Isla’s lower belly with each downstroke, her insides seeking to accommodate your hefty shaft as best as they can. Sure, she’s a sable-morph and hence quite flexible, but even she doesn’t go <i>that</i> far.", parse);
- } else {
+ 			} else {
 				Text.Add("Isla squeaks and wriggles as she moves herself into a better position to serve as your sheath. She feels wonderfully tight and juicy with powerful muscles equipped to clench, suck and squeeze, no doubt the result of her rather active lifestyle.", parse);
- }
+ 			}
 			Text.NL();
 			Text.Add("When Isla finally climaxes for the second time, her pussy goes into overdrive, squeezing and milking at your cock as she cries out for you to breed her. Pressing her firmly against the wall, you drive hard into her a few more times, making sure she gets her wish good and hard.", parse);
 			Text.NL();
