@@ -492,9 +492,9 @@ export class Body implements IBody {
 		}
 
 		if (legs.race.isRace(Race.Cow, Race.Goat, Race.Sheep, Race.Deer, Race.Horse)) { return "hoofs"; }
-		if (legs.race.isRace(Race.Gryphon)) { return "taloned feet"; }
-		if (legs.race.isRace(Race.Avian, Race.Reptile, Race.Demon)) { return "clawed feet"; }
-		if (legs.race.isRace(Race.Musteline, Race.Rabbit, Race.Canine, Race.Feline)) { return "paws"; }
+		if (legs.race.isRace(Race.Avian)) { return "taloned feet"; }
+		if (legs.race.isRace(Race.Reptile, Race.Demon)) { return "clawed feet"; }
+		if (legs.race.isRace(Race.Gryphon, Race.Musteline, Race.Rabbit, Race.Canine, Race.Feline)) { return "paws"; }
 
 		return "feet";
 	}
