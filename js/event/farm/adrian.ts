@@ -6,6 +6,7 @@
 import { GetDEBUG } from "../../../app";
 import { AppendageType } from "../../body/appendage";
 import { Color } from "../../body/color";
+import { BodyTypeMale } from "../../body/defbody";
 import { Race } from "../../body/race";
 import { Entity } from "../../entity";
 import { GAME, NAV } from "../../GAME";
@@ -43,9 +44,19 @@ export class Adrian extends Entity {
 		this.sexlevel = 3;
 		this.SetExpToLevel();
 
-		this.body.DefMale();
+		this.body.DefMale(BodyTypeMale.Muscular);
 		this.body.SetRace(Race.Horse);
 		TF.SetAppendage(this.Back(), AppendageType.tail, Race.Horse, Color.brown);
+
+		this.body.height.base      = 205;
+		this.body.weigth.base      = 100;
+		this.body.muscleTone.base  = 1;
+
+		this.FirstCock().length.base    = 32;
+		this.FirstCock().thickness.base = 5;
+		this.Balls().cumCap.base        = 10;
+		this.Balls().size.base          = 6;
+		this.Balls().count.base         = 2;
 
 		this.SetLevelBonus();
 		this.RestFull();

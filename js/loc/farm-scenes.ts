@@ -89,7 +89,7 @@ export namespace FarmScenesIntro {
         gwendy.flags.Met = GwendyFlags.Met.Met;
 
         const parse: IParse = {
-            handsomecute : player.body.femininity.Get() > 0 ? "cute" : "handsome",
+            handsomecute : player.mfFem(`handsome`, `cute`),
             playername   : player.name,
         };
 
@@ -111,7 +111,7 @@ export namespace FarmScenesIntro {
             Text.Add(" Your party disperses, each of you going separate ways to see what else lies on the farm for themselves.", parse);
         }
         Text.NL();
-        Text.Add("The most distinct person visible from this mix of races has to be the human girl carrying two wooden buckets of water, each at the end of a wooden pole she skillfully hoists upon her shoulders. At a brief glance, she seems rather cute, with freckles spread lightly across her cheeks and bare shoulders, while her taut muscles complement her lean and sexy body. Her most notable trait, besides her short shorts and a crop top, is the long blonde braid reaching past her butt and tied with a blue ribbon, a much deeper shade than the vibrant blue of her eyes. As you look at her, she spots you and approaches with a friendly smile on her face, still carrying the two buckets of water.", parse);
+        Text.Add("The most distinct person visible from this mix of races has to be the human girl carrying two wooden buckets of water, each at the end of a wooden pole she skillfully hoists upon her shoulders. At a brief glance, she seems rather cute, with freckles spread lightly across her cheeks and bare shoulders, while her taut muscles complement her lean and sexy body. Her most notable trait, besides her short shorts and a crop top, is the long blonde braid reaching past her butt. It's tied with a blue ribbon, a much deeper shade than the vibrant blue of her eyes. As you look at her, she spots you and approaches with a friendly smile on her face, still carrying the two buckets of water.", parse);
         Text.NL();
         Text.Add("<i>“Well, how do you do, stranger?”</i> The girl asks as she stands before you, the contents of the bucket shaking a bit as she comes to a halt. <i>“Can't say I've seen you around here before. And I wouldn't forget a face as [handsomecute] as yours.”</i> You are taken slightly aback by the rather frank response, but the girl doesn't seem to notice. <i>“The name's Gwendy, if you're wondering what to call me. What's yours?”</i> You tell her your name, and she repeats it, as if for good measure. While the two of you get acquainted, she occasionally shuffles her weight a bit to shift her burden from one side to the other.", parse);
         Text.NL();
@@ -504,7 +504,7 @@ export namespace FarmScenesIntro {
         options.push({ nameStr : "Talk",
             func() {
                 Text.Clear();
-                adrian.subDom.IncreaseStat(100, 3);
+                adrian.relation.IncreaseStat(100, 5);
                 Text.Add("While working on a rather unwieldy pile, you call Adrian over for assistance. He looks over and sighs as he walks over, lifting the pile by himself. You offer some thanks, but he waves it off before getting back to his own work. In an effort to get to know your co-worker better, you try to talk to him, but he remains silent.", parse);
                 Text.NL();
                 Text.Add("Finally, after what seems like thirty minutes of continuous effort, the equine finally decides to speak a few words. <i>“Thank you... for helping me out. I'm sorry if I didn't talk too much but... you're kind of cool. Hope we can work together again, sometime.”</i> That is all he says before he goes to work on a separate pile. Well, it seems that he was sincere in his response, which makes you glad you managed to talk before delving back into work.", parse);
@@ -516,7 +516,7 @@ export namespace FarmScenesIntro {
         options.push({ nameStr : "Flirt",
             func() {
                 Text.Clear();
-                adrian.subDom.DecreaseStat(-100, 5);
+                adrian.slut.IncreaseStat(100, 5);
                 Text.Add("In an attempt to win the attention of the equine, you pretend you are having trouble lifting the piles of hay. Calling him over to help while holding on to the pitchfork, you relish the feeling of him wrapping his strong arms around you, his muscles flexing as he works with you.", parse);
                 Text.NL();
                 Text.Add("This process continues for a while, you pretending to be incompetent and having him come to your aid. However, in your last attempt, you wait until he is close behind you before rubbing your [buttDesc] against his groin.", parse);
@@ -530,7 +530,8 @@ export namespace FarmScenesIntro {
         options.push({ nameStr : "Gwendy",
             func() {
                 Text.Clear();
-                adrian.subDom.IncreaseStat(100, 5);
+                adrian.relation.IncreaseStat(100, 3);
+                adrian.slut.IncreaseStat(100, 2);
                 Text.Add("After working for a solid thirty minutes, you take a small break to unwind from the rigors of lifting and raking. Adrian likewise pauses in his work, leaning on his pitchfork. Taking the moment to make small talk, you ask him what he thinks of Gwendy.", parse);
                 Text.NL();
                 Text.Add("To your surprise, a tint of rose races across his face at the question. <i>“G-Gwendy is cool, I guess,”</i> Adrian manages to get out, while staring intently at the ground. Odd, you were not expecting the macho-looking Adrian to be so shy around this topic, but it might be somewhat understandable.", parse);
@@ -544,6 +545,7 @@ export namespace FarmScenesIntro {
         options.push({ nameStr : "Just work",
             func() {
                 Text.Clear();
+                adrian.relation.IncreaseStat(100, 2);
                 Text.Add("Well, Gwendy did say she had a schedule to keep, and you did say you would help, so you leave Adrian alone for the time being. If anything, you can take the opportunity to talk when dust is not threatening to clog your lungs.", parse);
                 Text.Flush();
                 Gui.NextPrompt(FarmScenesIntro.HelpAdrianFinished);
@@ -555,32 +557,28 @@ export namespace FarmScenesIntro {
 
     export function HelpAdrianFinished() {
         const player: Player = GAME().player;
+        const pc = player.Parser;
 
         Text.Clear();
         TimeStep({hour: 1});
 
-        const parse: IParse = {
-            playername : player.name,
-            buttDesc() { return player.Butt().Short(); },
-        };
-
-        if (player.stamina.Get() < 25) {
-            Text.Add("You struggle to get as much done as the equine, who does his task with very little apparent effort. For every pile you make, he is working a third. You feel a bit embarrassed, but press on, if only to maintain your dignity.", parse);
+        if (player.Sta() < 25) {
+            Text.Out(`You struggle to get as much done as the equine, who does his task with very little apparent effort. For every pile you make, he is working a third. You feel a bit embarrassed, but press on, if only to maintain your dignity.`);
         } else {
-            Text.Add("It is a bit of a hassle, but you manage to keep somewhat of an even pace with Adrian. Despite his skill at this, he is rather slow about it, but makes up for it by making monstrous piles that easily dwarf yours. Still, all in all, the two of you mass together quite a number of haystacks before calling it a day.", parse);
+            Text.Out(`It is a bit of a hassle, but you manage to keep somewhat of an even pace with Adrian. Despite his skill at this, he is rather slow about it, but makes up for it by making monstrous piles that easily dwarf yours. Still, all in all, the two of you mass together quite a number of haystacks before calling it a day.`);
         }
         Text.NL();
-        Text.Add("After an hour or so of backbreaking raking and piling, the field appears to be done. Wiping the sweat off your forehead, you look around to see what Adrian is up to. He seems to be busy moving the piles into larger ones under what looks to be some type of canopy, likely where the hay will be stored to await further processing.", parse);
-        Text.NL();
-        Text.Add("You set out to assist him, but he holds a hand out and insists in a deep voice, <i>“Go to Gwendy for something else, I can handle this on my own, [playername].”</i> To be honest, you would not mind working on something else, so you follow his instructions.", parse);
-        Text.NL();
-        Text.Add("Going to the stalls, you find the girl gently working a cow's udders, steadily filling a milk pail with practiced movements. Nearby, you notice she already has a dozen or more such pails filled to the brim, yet she is still tirelessly going, with cows and cow girls looking on in anticipation.", parse);
-        Text.NL();
-        Text.Add("Stopping her for just a moment, you ask her what else she would like you to do. <i>“Well, I didn't really expect for you to be done so soon, but I suppose this is for the best. The faster we finish, the better, after all.”</i>", parse);
-        Text.NL();
-        Text.Add("Standing up to stretch, Gwendy looks you in the eyes and smiles. <i>“Alright, your next job is tending the sheep. They have yet to be fed and watered, and I need to bring them in before nightfall, so if you wouldn't mind...”</i> After a few instructions on where they are and what to do before you go, Gwendy gives you a quick peck on the cheek.", parse);
-        Text.NL();
-        Text.Add("<i>“That's for being such a great help. There might be more if you can keep it up!”</i> She gives a brief pat to your [buttDesc] before going back to her duties, leaving you to yours.", parse);
+        Text.Out(`After an hour or so of backbreaking raking and piling, the field appears to be done. Wiping the sweat off your forehead, you look around to see what Adrian is up to. He seems to be busy moving the piles into larger ones under what looks to be some type of canopy, likely where the hay will be stored to await further processing.
+
+        You set out to assist him, but he holds a hand out and insists in a deep voice, “Go to Gwendy for something else, I can handle this on my own, ${pc.name}.” To be honest, you would not mind working on something else, so you follow his instructions.
+
+        Going to the stalls, you find the girl gently working a cow's udders, steadily filling a milk pail with practiced movements. Nearby, you notice she already has a dozen or more such pails filled to the brim, yet she is still tirelessly going, with cows and cow girls looking on in anticipation.
+
+        Stopping her for just a moment, you ask her what else she would like you to do. “Well, I didn't really expect for you to be done so soon, but I suppose this is for the best. The faster we finish, the better, after all.”
+
+        Standing up to stretch, Gwendy looks you in the eyes and smiles. “Alright, your next job is tending the sheep. They have yet to be fed and watered, and I need to bring them in before nightfall, so if you wouldn't mind...” After a few instructions on where they are and what to do before you go, Gwendy gives you a quick peck on the cheek.
+
+        “That's for being such a great help. There might be more if you can keep it up!” She gives a brief pat to your ${pc.butt} before going back to her duties, leaving you to yours.`);
         Text.Flush();
         Gui.NextPrompt(FarmScenesIntro.MeetDanie);
     }

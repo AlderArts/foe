@@ -1434,7 +1434,7 @@ export namespace OpheliaScenes {
                         Text.NL();
                         Text.Add("<i>“Well, that’s done,”</i> the disheveled alchemist sighs, wavering slightly as she adjusts her glasses. There is more of the sticky stuff dripping from her hair and trickling down her inner thigh.", parse);
                         Text.NL();
-                        Text.Add("<i>“I sent them off to a breeding chamber,”</i> she answers your silent question, <i>“there were a few… complications.”</i> It doesn’t look like she wants to say anything more on the subject, so you leave it at that. Ophelia wordlessly hands you a bag of coins for your trouble.", parse);
+                        Text.Add("<i>“I sent them off to a breeding chamber,”</i> she answers your silent question. <i>“There were a few… complications.”</i> It doesn’t look like she wants to say anything more on the subject, so you leave it at that. Ophelia wordlessly hands you a bag of coins for your trouble.", parse);
                         Text.NL();
                         Text.Add("<b>You receive 250 coins!</b>", parse);
                         Text.Flush();
