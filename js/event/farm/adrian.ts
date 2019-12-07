@@ -15,6 +15,7 @@ import { IStorage } from "../../istorage";
 import { ILocation } from "../../location";
 import { Text } from "../../text";
 import { TF } from "../../tf";
+import { AdrianFlags } from "./adrian-flags";
 
 export class Adrian extends Entity {
 	constructor(storage?: IStorage) {
@@ -41,7 +42,7 @@ export class Adrian extends Entity {
 		this.charisma.base     = 18;
 
 		this.level = 5;
-		this.sexlevel = 3;
+		this.sexlevel = 2;
 		this.SetExpToLevel();
 
 		this.body.DefMale(BodyTypeMale.Muscular);
@@ -61,7 +62,7 @@ export class Adrian extends Entity {
 		this.SetLevelBonus();
 		this.RestFull();
 
-		this.flags.Met = 0;
+		this.flags.Met = AdrianFlags.Met.NotMet;
 
 		if (storage) { this.FromStorage(storage); }
 	}
