@@ -104,7 +104,7 @@ export namespace GryphonsScenes {
 			if (gender === Gender.male) {
 				Text.Add("You are a male gryphon-morph, standing tall and proud; the tops of most people’s heads would barely reach your shoulders. While your body above your chest is covered in feathers of a dun brown color, your groin and legs bear the tawny golden fur of your leonine half, the two colors highlighted by the white streaks that run across your feathers. Hard, narrow eyes gaze back at you in the mirror, their irises such a dark brown that they’re almost black; a scar across your right eye completes your grim visage. A mane of deep brown hair falls from your head and ends between your white-tipped wings, slightly wild and unkempt, and you click your short, cruel beak in satisfaction.", parse);
 				Text.NL();
-				Text.Add("Battle, hunger and survival have turned your body hard and rugged, the muscles more for use rather than show; save for the bulging pecs needed to power your wide wings, your body is more lean than large. Your arms and hands are human-like, save for the small claws that cap each finger, while your feet are digitigrade feline paws with talons that click on hard surfaces. Extending from your tailbone is a long, leonine tail, the tufted end swaying to and fro idly.", parse);
+				Text.Add("Battle, hunger and survival have turned your body hard and rugged, the muscles more for use rather than show; save for the bulging pecs needed to power your wide wings, your body is more lean than large. Your arms and hands are human-like, save for the small claws that cap each finger, while your feet are digitigrade feline paws with claws that click on hard surfaces. Extending from your tailbone is a long, leonine tail, the tufted end swaying to and fro idly.", parse);
 				Text.NL();
 				Text.Add("On your groin is a sheath that hides your cock, jet black and somewhere between ten and eleven inches long and two and a half inches thick - not counting the knot that lies near its base. Held tightly against your body by your scrotum are a pair of fist-sized testicles, and between your hard asscheeks, you have a virgin anus.", parse);
 				Text.NL();
@@ -112,7 +112,7 @@ export namespace GryphonsScenes {
 			} else {
 				Text.Add("You are a female gryphon-morph, sleek and swift; standing tall on your digitigrade stance, you’re perhaps a half-head taller than the average person on the streets of Rigard. Covered from chest to legs in luxurious silvery-grey fur, your head and shoulders are clothed in soft, white feathers and down; fur and feathers alike sport small dark speckles evenly interspersed amidst your fine coat. Your hair falls between your scythe-shaped wings and down your back, tickling the base of your leonine tail and causing your tufted tail-tip to twitch of its own accord.", parse);
 				Text.NL();
-				Text.Add("Gazing at yourself in the mirror, you note that your eyes are wide with dark pupils, gleaming orbs that drink in the world about them with a curious innocence. The beak that sits under them is short, hard and graced with a sharp tip, made for killing prey and tearing meat. With the talons that protrude from your feline feet and small claws that tip your human-like hands, your entire body is a weapon in and of itself - equally suited to destruction as it is to creation.", parse);
+				Text.Add("Gazing at yourself in the mirror, you note that your eyes are wide with dark pupils, gleaming orbs that drink in the world about them with a curious innocence. The beak that sits under them is short, hard and graced with a sharp tip, made for killing prey and tearing meat. With the claws that protrude from your feline feet and small claws that tip your human-like hands, your entire body is a weapon in and of itself - equally suited to destruction as it is to creation.", parse);
 				Text.NL();
 				Text.Add("Sitting on your chest, on the border of fur and feathers, is a pair of generous breasts, perhaps a large C-cup. Held high and firm by the underlying flight muscles, they look just made to be filled with warm goodness. While your nipples aren’t blatant enough to jut through your fur, there are two tiny peaks betraying their presence to all who would look closely. Past your sleek waist, you sport a set of motherly hips and a generous ass - but as inviting as they are, they can’t compare to the glimpse of your pussy between your thighs and just under your fur, its heat and puffiness advertising your prodigious fertility.", parse);
 				Text.NL();
@@ -287,9 +287,9 @@ export namespace GryphonsScenes {
 					player.Arms().race = Race.Lion;
 					return t;
 				} else if (!player.Legs().race.isRace(Race.Gryphon)) {
-					t = Text.Parse("You look down and find that your lower body has changed completely - you now sport a pair of leonine and digitigrade legs and feet, capped with hooked talons. Rippling with muscle, they’re suited for both slow stalking and quick pouncing.", parse);
+					t = Text.Parse("You look down and find that your lower body has changed completely - you now sport a pair of leonine and digitigrade legs and feet, capped with hooked claws. Rippling with muscle, they’re suited for both slow stalking and quick pouncing.", parse);
 					if (player.HasLegs()) {
-						t = Text.Parse("Your stance seems to be carrying your weight a little differently, and when you look down you realize that your legs and feet have changed. They’re now leonine, digitigrade and capped with talons, rippling with muscle and suited for both slow stalking and quick movement.", parse);
+						t = Text.Parse("Your stance seems to be carrying your weight a little differently, and when you look down you realize that your legs and feet have changed. They’re now leonine, digitigrade and capped with claws, rippling with muscle and suited for both slow stalking and quick movement.", parse);
 					}
 					player.Legs().race = Race.Gryphon;
 					player.Legs().count = 2;
@@ -641,7 +641,7 @@ export namespace GryphonsScenes {
 					tooltip : "Circle around to the water’s source and take the initiative from high ground.",
 					func() {
 						Text.Clear();
-						Text.Add("You decide that a frontal approach is too risky and that it would be better to strike from where she thinks it’s safe. The cliff that the waterfall careens down may be high, but that means little to one capable of flight. Withdrawing from the water’s edge, you skirt around the clearing, making for the rise in the land; you don’t have to get up very high, just high enough to avoid notice. Ignoring the protests of your aching muscles, you dig your talons into the limestone wall and begin to climb.", parse);
+						Text.Add("You decide that a frontal approach is too risky and that it would be better to strike from where she thinks it’s safe. The cliff that the waterfall careens down may be high, but that means little to one capable of flight. Withdrawing from the water’s edge, you skirt around the clearing, making for the rise in the land; you don’t have to get up very high, just high enough to avoid notice. Ignoring the protests of your aching muscles, you dig your claws into the limestone wall and begin to climb.", parse);
 						Text.NL();
 						Text.Add("A quick glance down at your prey reveals that she’s still engrossed in cleaning herself; in an act of surprising flexibility, she’s stretched one of her wingtips up to her face such that she can preen the long, stiff flight feathers with her beak. As you watch, she finishes up with her wing and moves onto those powerful legs of hers, giving you just a glimpse of her snatch in the process.", parse);
 						Text.NL();
