@@ -165,6 +165,9 @@ class EntityParser {
 	public get tongue() { return this.ent.TongueDesc(); }
 	public get tongueTip() { return this.ent.TongueTipDesc(); }
 	public get skin() { return this.ent.SkinDesc(); }
+	public hasfur(fur: string, nofur: string = ``) { return this.ent.HasFur() ? fur : nofur; }
+	public hasscales(scales: string, noscales: string = ``) { return this.ent.HasScales() ? scales : noscales; }
+	public hasskin(skin: string, noskin: string = ``) { return this.ent.HasSkin() ? skin : noskin; }
 	public get hair() { return this.ent.Hair().Short(); }
 	public get lips() { return this.ent.LipsDesc(); }
 	public get face() { return this.ent.FaceDesc(); }
