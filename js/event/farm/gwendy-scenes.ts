@@ -270,7 +270,7 @@ export namespace GwendyScenes {
 				nameStr : "Alright…",
 				func : () => {
 					Text.Clear();
-					Text.Add(`“Ya got spunk at least, I’ll give you that.” Gwendy gestures for you to follow her as she ${atLoft ? `climbs down the ladder` : atBarn ? `turns` : `walks inside the barn`}, heading over to one of the pens. Your confidence starts to dwindle as you approach, spying the giant shape housed within.
+					Text.Out(`“Ya got spunk at least, I’ll give you that.” Gwendy gestures for you to follow her as she ${atLoft ? `climbs down the ladder` : atBarn ? `turns` : `walks inside the barn`}, heading over to one of the pens. Your confidence starts to dwindle as you approach, spying the giant shape housed within.
 
 					“This here’s Midnight,” the farmer proclaims as she leads a veritable monster of a horse out of the enclosure. The muscular steed is by far the biggest specimen of his kind you’ve ever seen; pitch black and in possession of a very mean glare. He stomps, snorting derisively at you. Gwendy seems unperturbed by the wild beast.`);
 					Text.NL();
@@ -282,18 +282,18 @@ export namespace GwendyScenes {
 					const loss = skillcheck < 60;
 
 					if (player.Humanoid()) {
-						Text.Add(`The three of you head out into the yard, and Gwendy hands you the reins. “Come along, let’s see you put your money where your mouth is. You can go first.” ${player.Height() < 200 ? `The farmer points to a bale of hay nearby to use as a platform. Even so` : `Even for someone as tall as you`}, mounting the massive equine is no small feat.`);
+						Text.Out(`The three of you head out into the yard, and Gwendy hands you the reins. “Come along, let’s see you put your money where your mouth is. You can go first.” ${player.Height() < 200 ? `The farmer points to a bale of hay nearby to use as a platform. Even so` : `Even for someone as tall as you`}, mounting the massive equine is no small feat.`);
 						Text.NL();
 						if (bigloss) {
-							Text.Add(`You’ve barely gained your seat when Midnight rears on his hind legs, flinging you through the air and onto your back with a loud thud. Thankfully, nothing seems broken. “You… alright there, ${pc.name}?” Gwendy snickers, peering over your prone form. “Want a second try? Looks like you slipped a little…” You groan that you think you’ve had enough.`);
+							Text.Out(`You’ve barely gained your seat when Midnight rears on his hind legs, flinging you through the air and onto your back with a loud thud. Thankfully, nothing seems broken. “You… alright there, ${pc.name}?” Gwendy snickers, peering over your prone form. “Want a second try? Looks like you slipped a little…” You groan that you think you’ve had enough.`);
 						} else if (loss) {
-							Text.Add(`You’ve barely gained your seat when Midnight rears on his hind legs, and it’s all you can do to stay seated. Somehow, you’re able to grasp hold of his mane and stabilize yourself. You hang on for dear life as the stallion throws himself into a wild gallop around the farm, but you can already feel that you’re not going to last for long. Gwendy wasn’t kidding when she said he’s the meanest horse this side of the Kingdom.
+							Text.Out(`You’ve barely gained your seat when Midnight rears on his hind legs, and it’s all you can do to stay seated. Somehow, you’re able to grasp hold of his mane and stabilize yourself. You hang on for dear life as the stallion throws himself into a wild gallop around the farm, but you can already feel that you’re not going to last for long. Gwendy wasn’t kidding when she said he’s the meanest horse this side of the Kingdom.
 
 							You last about five minutes before your arms give and you’re thrown off Midnight’s back, scrambling out of the way to not get trampled. “Not bad, I must say.” The farmer has been observing from atop a nearby bale of hay with an amused grin on her face.`);
 
 							TimeStep({minute: 5});
 						} else {
-							Text.Add(`You’ve barely gained your seat when Midnight rears on his hind legs, attempting to toss you off. You manage to hold on, grabbing onto the reins tightly. The stallion gives you a nasty glare over his shoulder, before throwing himself into a wild gallop around the farm. At first, it’s all you can do to keep your seat, but gradually the exhilarating sense of power of riding the beast starts to fill you. The wind roars in your ${pc.ears} and whips your ${pc.skin}, but you stay in the saddle.
+							Text.Out(`You’ve barely gained your seat when Midnight rears on his hind legs, attempting to toss you off. You manage to hold on, grabbing onto the reins tightly. The stallion gives you a nasty glare over his shoulder, before throwing himself into a wild gallop around the farm. At first, it’s all you can do to keep your seat, but gradually the exhilarating sense of power of riding the beast starts to fill you. The wind roars in your ${pc.ears} and whips your ${pc.skin}, but you stay in the saddle.
 
 							Gwendy tosses you a loud woop as you speed by the barn, and you turn and give her a wave. “Careful there!” she hollers. Too late, you turn to see the oncoming tree branch, which swats you to the ground and takes the wind out of you. Groaning, you pull yourself up, verifying that nothing is broken. The horse gives you the most evil of grins before nonchalantly trotting off. That he did it on purpose isn’t even a question. Still, you managed to stay on his back for a good fifteen minutes.
 
@@ -302,28 +302,28 @@ export namespace GwendyScenes {
 							TimeStep({minute: 15});
 						}
 						Text.NL();
-						Text.Add(`Tossing her braid over her shoulder, Gwendy confidently strides towards where Midnight is stalking the yard. The giant steed snorts as she approaches, pawing the ground with his hoof. You gulp, worried for the farmer’s health.
+						Text.Out(`Tossing her braid over her shoulder, Gwendy confidently strides towards where Midnight is stalking the yard. The giant steed snorts as she approaches, pawing the ground with his hoof. You gulp, worried for the farmer’s health.
 
 						“Alright, my turn.” She runs up and grabs Midnight’s reins, smoothly swinging onto his back. You tense up… and… nothing happens. Gwendy whistles innocently, not even bothering to sit astride the horse properly, both her legs dangling down one side like a delicate noblewoman. The giant equine pokes at the dirt with one hoof, cool as a cucumber.
 
 						“We can wait for awhile if you want… but I don’t think there’s much need, is there?” Gwendy cocks her head to the side, smirking down at you. Sighing and accepting that you’ve been tricked, you shake your head, admitting defeat.`);
 					} else {
-						Text.Add(`The three of you head into the yard, Gwendy hopping onto Midnight’s back with practiced ease. The horse throws you a nonchalant and dismissive glance as you get into place beside him. You ask the farmer what the course will be, but she just grins at you. “Don’t worry, all you need to do is follow behind me. On my mark…” Before you have time to protest, she gives a shrill whistle, signaling the start of the race.`);
+						Text.Out(`The three of you head into the yard, Gwendy hopping onto Midnight’s back with practiced ease. The horse throws you a nonchalant and dismissive glance as you get into place beside him. You ask the farmer what the course will be, but she just grins at you. “Don’t worry, all you need to do is follow behind me. On my mark…” Before you have time to protest, she gives a shrill whistle, signaling the start of the race.`);
 						Text.NL();
 						if (bigloss) {
-							Text.Add(`Gwendy and Midnight streak off like the wind, easily leaving you behind. You get about a third of the way before you slow down, winded and desponded. By the looks of it, the farmer has almost completed her circuit. Grumbling, you turn aside from the trail, heading back towards the farm to meet with her.`);
+							Text.Out(`Gwendy and Midnight streak off like the wind, easily leaving you behind. You get about a third of the way before you slow down, winded and desponded. By the looks of it, the farmer has almost completed her circuit. Grumbling, you turn aside from the trail, heading back towards the farm to meet with her.`);
 						} else if (loss) {
-							Text.Add(`Despite your best efforts, you can barely keep up with Gwendy and Midnight. The giant horse’s hindquarters slowly inch away from you as the tireless beast gallops around the farm, leaving you in his dust. By the time Gwendy finishes the circuit, you’re behind by half a minute.`);
+							Text.Out(`Despite your best efforts, you can barely keep up with Gwendy and Midnight. The giant horse’s hindquarters slowly inch away from you as the tireless beast gallops around the farm, leaving you in his dust. By the time Gwendy finishes the circuit, you’re behind by half a minute.`);
 						} else {
-							Text.Add(`At first, you are able to keep abreast of Midnight as the horse thunders down the trail, but inch by inch you start losing ground. It’s not about raw speed and power, you are simply not used enough to your new body to match up against a beast in its natural habitat. It’s not by much, but by the time you complete the circuit, Gwendy is ahead of you by a few seconds.`);
+							Text.Out(`At first, you are able to keep abreast of Midnight as the horse thunders down the trail, but inch by inch you start losing ground. It’s not about raw speed and power, you are simply not used enough to your new body to match up against a beast in its natural habitat. It’s not by much, but by the time you complete the circuit, Gwendy is ahead of you by a few seconds.`);
 						}
 						Text.NL();
-						Text.Add(`“A valiant, if futile, effort.” The farmer smiles as you ${pc.taur(`trot`, `slither`)} into the yard. You complain that it wasn’t exactly a fair challenge. “Never claimed it was.” She tosses her braid over her shoulder, giving you a smoldering look. “Besides, you knew what you were getting yourself into, didn’t you? I hope you’re not planning on going back on your word…?”
+						Text.Out(`“A valiant, if futile, effort.” The farmer smiles as you ${pc.taur(`trot`, `slither`)} into the yard. You complain that it wasn’t exactly a fair challenge. “Never claimed it was.” She tosses her braid over her shoulder, giving you a smoldering look. “Besides, you knew what you were getting yourself into, didn’t you? I hope you’re not planning on going back on your word…?”
 
 						You sigh and shake your head, admitting defeat.`);
 					}
 					Text.NL();
-					Text.Add(`“Excellent. Let me scrub Midnight down and put him in his pen. When I get up to the loft, I expect to see you naked and ready. Don’t disappoint me further.” You enter the barn behind her, splitting off to climb the ladder up to Gwendy’s love nest. It’s a while before the farmer herself will finish below, so you have plenty of time to undress. You flop down on the bed, nuzzling a pillow as you contemplate your recent life choices and impending fate.
+					Text.Out(`“Excellent. Let me scrub Midnight down and put him in his pen. When I get up to the loft, I expect to see you naked and ready. Don’t disappoint me further.” You enter the barn behind her, splitting off to climb the ladder up to Gwendy’s love nest. It’s a while before the farmer herself will finish below, so you have plenty of time to undress. You flop down on the bed, nuzzling a pillow as you contemplate your recent life choices and impending fate.
 
 					Your lover is already shedding her clothes as she enters the loft, leaving pieces of fabric strewn around carelessly on the floor. ${eplus ?
 						`She wastes little time stripping down to her birthday suit, her massive equine shaft already swelling` :
@@ -346,7 +346,7 @@ export namespace GwendyScenes {
 				nameStr : "Back out",
 				func : () => {
 					Text.Clear();
-					Text.Add(`You gulp, shaking your head as you come to your senses.
+					Text.Out(`You gulp, shaking your head as you come to your senses.
 
 					“Thought as much…” Gwendy says, nonetheless managing to look disappointed. “If you change your mind… well, you know where to find me.” She gives you a wink. “Might have tipped my hand a bit there… I hope you are still up for our regular challenges?”`);
 					Text.Flush();
@@ -3623,7 +3623,7 @@ export namespace GwendyScenes {
 
 				if (targetObj.capacity.IncreaseStat(8, .5)) {
 					Text.NL();
-					Text.Add(`<b>Your ${targetVag ? `pussy` : `butt`} feels slightly stretchier.</b>`);
+					Text.Out(`<b>Your ${targetVag ? `pussy` : `butt`} feels slightly stretchier.</b>`);
 				}
 			} else {
 				Text.Out(`With a lewd ‘slop’, your ${pc.cock} slides out of her stretched pussy, `);
