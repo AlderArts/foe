@@ -164,8 +164,6 @@ TavernLoc.Common.DrunkHandler = () => {
 					Text.NL();
 					Text.Add("<i>“Right then, get behind the bar, drop down, open wide and try not to choke on my dick. Last thing I need is to haul your ass back to the backrooms again.”</i>", parse);
 					Text.NL();
-					Text.Add("<i>“Right then, get behind the bar, drop down, open wide and try not to choke on my dick. Last thing I need is to haul your ass back to the backrooms again.”</i>", parse);
-					Text.NL();
 					Text.Add("You keep any thoughts you may have on his attitude to yourself and do as you’re told, heading around the counter and settling behind it. The sour-tempered stallion has already yanked off his pants, revealing a good-sized, half-erect horsecock... and an almost painfully swollen set of bulging balls.", parse);
 					Text.NL();
 					Text.Add("With junk like this, no wonder he’s so cranky all the time... still, you wonder if maybe you’ve bitten off a little more than you can chew with this...", parse);
