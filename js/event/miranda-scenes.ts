@@ -4966,11 +4966,11 @@ export namespace MirandaScenes {
 					Text.Add("The two of you go through a series of largely improvised positions[l]. You lost count of how many times you climax, only pausing in your fervent love making while waiting for Miranda’s knot to deflate.", parse);
 					if (player.FirstCock()) {
 						parse.nice = !nasty ? Text.Parse(", even taking a ride on [itThem] once", parse) : "";
-						Text.Add(" So as not to leave your [cocks] unattended, the dogmorph gives [itThem] some attention with her tongue[nice].", parse);
+						Text.Add(" So as not to leave your [cocks] unattended, the dog-morph gives [itThem] some attention with her tongue[nice].", parse);
 					}
 					if (player.FirstVag()) {
 						Text.NL();
-						Text.Add("In order to relieve your aching [vag], the dogmorph stuffs some of her toys into the wet cleft. She casually mentions that she’s going to use that hole instead next time since you’re whimpering so much about it.", parse);
+						Text.Add("In order to relieve your aching [vag], the dog-morph stuffs some of her toys into the wet cleft. She casually mentions that she’s going to use that hole instead next time since you’re whimpering so much about it.", parse);
 					}
 					Text.NL();
 
@@ -5000,7 +5000,7 @@ export namespace MirandaScenes {
 
 					Text.Add("<i>“Ah, I haven’t cum like that in <b>days</b>,”</i> she pants, trembling as she collapses on her back. Still not satisfied, you start to roll your [hips], using her massive knot to stimulate you ass. <i>“H-hold on,”</i> she gasps, feeling the situation spiraling out of her control. <i>“I haven’t- Ah!”</i>", parse);
 					Text.NL();
-					Text.Add("Gyrating your hips wildly, you somehow manage to pull her knot loose again - only to slam yourself back down on it immediately. The guardswoman’s lubricating semen overflowing from your used hole makes the task way easier, but it’s still quite a feat. Using the prone dogmorph like a sex toy, you push yourself toward your second climax, clenching down on her cock like a vice.", parse);
+					Text.Add("Gyrating your hips wildly, you somehow manage to pull her knot loose again - only to slam yourself back down on it immediately. The guardswoman’s lubricating semen overflowing from your used hole makes the task way easier, but it’s still quite a feat. Using the prone dog-morph like a sex toy, you push yourself toward your second climax, clenching down on her cock like a vice.", parse);
 					if (player.FirstCock()) {
 						Text.Add(" Your own [cocks] throw[notS] out jets of pearly white cum, landing on your lover’s tits.", parse);
 					}

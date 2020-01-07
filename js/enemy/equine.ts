@@ -197,7 +197,7 @@ export namespace EquineScenes {
 			Text.Clear();
 			Text.Add("You[party] spot a strange shadow farther up one of the many paths and roads surrounding the area. Thinking that it might be dangerous, you head on a different pathway. A few moments pass and all is well. With the sound of something heavy pounding against the ground, you turn and just manage to dodge a thundering charge aimed right at you!", parse);
 			Text.NL();
-			Text.Add("Getting back your bearings, you[party] get into a defensive position. Getting a better look at your opponent, you are shocked to see that it is a horse, nearly seven foot tall, in the shape of a person! A more feminine shaped mare approaches and stands next to the horse morph.", parse);
+			Text.Add("Getting back your bearings, you[party] get into a defensive position. Getting a better look at your opponent, you are shocked to see that it is a horse, nearly seven foot tall, in the shape of a person! A more feminine shaped mare approaches and stands next to the horse-morph.", parse);
 			Text.NL();
 			Text.Add("The stallion has a piece of crude leather tied around his waist covering most of his genitals; bits of his black orbs are clearly visible. Despite being covered, the outline of his knob forms around the cloth. His brown coat contrasts against his hair in a strange way.", parse);
 			Text.NL();

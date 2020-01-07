@@ -910,7 +910,7 @@ export namespace RoaScenes {
             Text.Add("Of course; he’s very lucky that you chose him for your pleasure today.", parse);
         }
         Text.NL();
-        Text.Add("Squeezing with your netherlips as best you can, you start to rise from your position, dragging your hips with tantalizing slowness back up Roa’s shaft until only the very tip remains inside. You pause there, letting the cool breeze tingle on your partner’s exposed cock flesh, and then lower yourself again with the same slow, deliberate motions. Pussy wrinkling as you flex and release, you repeat the cycle, tormenting Roa with your almost leisurely pace, moaning in pleasure as his girth slides back and forth through your depths.", parse);
+        Text.Add("Squeezing with your netherlips as best you can, you start to rise from your position, dragging your hips with tantalizing slowness back up Roa’s shaft until only the very tip remains inside. You pause there, letting the cool breeze tingle on your partner’s exposed cockflesh, and then lower yourself again with the same slow, deliberate motions. Pussy wrinkling as you flex and release, you repeat the cycle, tormenting Roa with your almost leisurely pace, moaning in pleasure as his girth slides back and forth through your depths.", parse);
         Text.NL();
         Text.Add("The bunny-slut moans in desire, his eyes casting a pleading look from below you. You feel his hands gently settle on your [hips], careful, almost reverent. When he sees that you aren’t rebuking him, he begins to slowly move his own hips, pumping into you in tandem with your own motions. Roa is such a good boy...", parse);
         Text.NL();

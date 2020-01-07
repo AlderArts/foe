@@ -160,7 +160,7 @@ export namespace AquiliusScenes {
 		Text.NL();
 		Text.Add("<i>“Good, because I usually only have to get out the leather when I’m doing amputations. Now, this is going to be the last bit… there. You’ll need to come back a few days later to have the stitches removed; I’ll put you on light duty in the meantime. Now… this is going to sting a little.”</i>", parse);
 		Text.NL();
-		Text.Add("The eagle-morph pours something onto a clean cloth and swabs away; the horse morph screams again, louder than the first.", parse);
+		Text.Add("The eagle-morph pours something onto a clean cloth and swabs away; the horse-morph screams again, louder than the first.", parse);
 		Text.NL();
 		Text.Add("<i>“Psh. All right, now, off with you. Maybe the pain will remind you not to risk bursting those stitches.”</i>", parse);
 		Text.NL();
