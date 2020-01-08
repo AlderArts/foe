@@ -127,6 +127,7 @@ class EntityParser {
 	public hashair(ifhashair: string, nothashair: string) { return this.ent.HasHair() ? ifhashair : nothashair; }
 	public longhair(iflonghair: string, notlonghair: string) { return this.ent.HasLongHair() ? iflonghair : notlonghair; }
 	public longtongue(iflongtongue: string, notlongtongue: string) { return this.ent.LongTongue() ? iflongtongue : notlongtongue; }
+	public hascock(cock: string, nocock: string) { return this.ent.FirstCock() !== undefined ? cock : nocock; }
 	public get cocks() { return this.ent.MultiCockDesc(); }
 	public get cocksandballs() { return `${this.cocks}${this.ent.HasBalls() ? ` and ${this.balls}` : ""}`; }
 	public get cock() { const cock = this.ent.GetPreferredCock() || this.ent.FirstCock(); return cock.Short(); }
