@@ -1,6 +1,5 @@
 import * as _ from "lodash";
 import { CumLevel } from "../../body/balls";
-import { LowerBodyType } from "../../body/body";
 import { BreastSize } from "../../body/breasts";
 import { Cock } from "../../body/cock";
 import { Gender } from "../../body/gender";

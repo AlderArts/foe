@@ -13,11 +13,14 @@ import { GAME, NAV } from "../../GAME";
 import { Gui } from "../../gui";
 import { IStorage } from "../../istorage";
 import { ILocation } from "../../location";
+import { Stat } from "../../stat";
 import { Text } from "../../text";
 import { TF } from "../../tf";
 import { AdrianFlags } from "./adrian-flags";
 
 export class Adrian extends Entity {
+	public jealousy: Stat;
+
 	constructor(storage?: IStorage) {
 		super();
 
@@ -62,7 +65,13 @@ export class Adrian extends Entity {
 		this.SetLevelBonus();
 		this.RestFull();
 
+		const that = this;
+		this.jealousy = new Stat(0);
+		this.jealousy.debug = () => that.name + ".jealousy";
+
 		this.flags.Met = AdrianFlags.Met.NotMet;
+		this.flags.Taunted = AdrianFlags.Taunt.No;
+		this.flags.Seduced = AdrianFlags.Seduce.No;
 
 		if (storage) { this.FromStorage(storage); }
 	}
@@ -70,6 +79,8 @@ export class Adrian extends Entity {
 	public FromStorage(storage: IStorage) {
 		this.body.FromStorage(storage.body);
 		this.LoadPersonalityStats(storage);
+
+		this.jealousy.base = parseInt(storage.jealousy, 10) || this.jealousy.base;
 
 		// Load flags
 		this.LoadFlags(storage);
@@ -81,9 +92,15 @@ export class Adrian extends Entity {
 		this.SaveBodyPartial(storage, {ass: true});
 		this.SavePersonalityStats(storage);
 
+		if (this.jealousy.base !== 0) { storage.jealousy = this.jealousy.base.toFixed(); }
+
 		this.SaveFlags(storage);
 
 		return storage;
+	}
+
+	public Jealousy() {
+		return this.jealousy.Get();
 	}
 
 	// Schedule
@@ -98,10 +115,15 @@ export class Adrian extends Entity {
 		Text.Add("Rawr Imma horse.");
 
 		if (GetDEBUG()) {
+			const state = adrian.flags.Met;
+			const Dom = state === AdrianFlags.Met.Dom;
+			const Sub = state === AdrianFlags.Met.Sub;
 			Text.NL();
-			Text.Out(`<b>DEBUG: relation: ${adrian.relation.Get()}
+			Text.Out(`<b>DEBUG: State = ${Dom ? `Dom` : Sub ? `Sub` : `Shy`}
 
-			DEBUG: subDom: ${adrian.subDom.Get()}
+			relation: ${adrian.relation.Get()}
+
+			DEBUG: jealousy: ${adrian.subDom.Get()}
 
 			DEBUG: slut: ${adrian.slut.Get()}</b>`);
 			Text.NL();
