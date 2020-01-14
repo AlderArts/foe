@@ -6,13 +6,11 @@ export namespace AdrianFlags {
         Dom     = 3,
     }
 
-    export enum Taunt {
-        No      = 0,
-        Taunted = 1,
-    }
-
-    export enum Seduce {
-        No      = 0,
-        Seduced = 1,
+    // Bitmask
+    export enum Flags {
+        Taunted    = 1,
+        Humiliated = 2,
+        Encouraged = 4,
+        Seduced    = 8,
     }
 }

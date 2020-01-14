@@ -70,8 +70,7 @@ export class Adrian extends Entity {
 		this.jealousy.debug = () => that.name + ".jealousy";
 
 		this.flags.Met = AdrianFlags.Met.NotMet;
-		this.flags.Taunted = AdrianFlags.Taunt.No;
-		this.flags.Seduced = AdrianFlags.Seduce.No;
+		this.flags.Flags = 0;
 
 		if (storage) { this.FromStorage(storage); }
 	}
