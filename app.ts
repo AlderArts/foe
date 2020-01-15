@@ -3,12 +3,6 @@ const frametime = 0.050; // Used for time updates
 export const windowWidth  = 1280;
 export const windowHeight = 720;
 
-const APP_NAME = "Fall of Eden";
-const VERSION_MAJOR = 0;
-const VERSION_MINOR = 5;
-const VERSION_SUBSCRIPT = 5;
-const VERSION_NAME = "Barnyard Bailout";
-
 export const SAVE_VERSION = 29;
 // Save version 1: Initial
 // Save version 2: Added inventory
@@ -40,7 +34,9 @@ export const SAVE_VERSION = 29;
 // Save version 28: Lei flags fix
 // Save version 29: Cleared some unused flags from Lagon
 
-export const VERSION_STRING = APP_NAME + " " + VERSION_MAJOR + "." + VERSION_MINOR + "." + VERSION_SUBSCRIPT + ": " + VERSION_NAME;
+declare var VERSION: string;
+declare var VERSION_NAME: string;
+export const VERSION_STRING = `Fall of Eden ${VERSION}: ${VERSION_NAME}`;
 
 export const HEADER_FONT  = "bold 30pt Calibri";
 export const BUTTON_FONT  = "bold 14pt Tahoma, 'Droid Sans', sans-serif";

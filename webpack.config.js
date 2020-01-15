@@ -10,11 +10,16 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const ZipPlugin = require('zip-webpack-plugin');
 
 const CircularDependencyPlugin = require('circular-dependency-plugin');
+const webpack = require(`webpack`);
 
 module.exports = {
   mode: "development",
   entry: './index.ts',
   plugins: [
+    new webpack.DefinePlugin({
+      VERSION: JSON.stringify(require("./package.json").version),
+      VERSION_NAME: JSON.stringify(require("./package.json").description)
+    }),
     new TSLintPlugin({
       files: ['./**/*.ts']
     }),
