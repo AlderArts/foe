@@ -6,6 +6,10 @@ export namespace AdrianFlags {
         Dom     = 3,
     }
 
+    export enum EPlus {
+        NotStarted = 0,
+    }
+
     // Bitmask
     export enum Flags {
         Taunted    = 1,

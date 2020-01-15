@@ -5,6 +5,8 @@ import { EncounterTable } from "../encountertable";
 import { Sex } from "../entity-sex";
 import { Event } from "../event";
 import { DreamsScenes } from "../event/dreams";
+import { Adrian } from "../event/farm/adrian";
+import { AdrianScenes } from "../event/farm/adrian-scenes";
 import { Gwendy } from "../event/farm/gwendy";
 import { GwendyFlags } from "../event/farm/gwendy-flags";
 import { GwendyScenes } from "../event/farm/gwendy-scenes";
@@ -1065,6 +1067,30 @@ FarmLoc.Fields.events.push(new Link(
     },
     () => {
         GwendyScenes.Approach(GwendyScenes.FieldsPrompt);
+    },
+));
+FarmLoc.Barn.events.push(new Link(
+    "Adrian", () => {
+        const adrian: Adrian = GAME().adrian;
+        return adrian.IsAtLocation(FarmLoc.Barn);
+    }, true,
+    () => {
+        AdrianScenes.AdrianDesc(FarmLoc.Barn);
+    },
+    () => {
+        AdrianScenes.Approach();
+    },
+));
+FarmLoc.Fields.events.push(new Link(
+    "Adrian", () => {
+        const adrian: Adrian = GAME().adrian;
+        return adrian.IsAtLocation(FarmLoc.Fields);
+    }, true,
+    () => {
+        AdrianScenes.AdrianDesc(FarmLoc.Fields);
+    },
+    () => {
+        AdrianScenes.Approach();
     },
 ));
 

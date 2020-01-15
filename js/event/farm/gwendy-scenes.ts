@@ -22,6 +22,8 @@ import { Party } from "../../party";
 import { IParse, Text } from "../../text";
 import { Season, Time } from "../../time";
 import { Player } from "../player";
+import { Adrian } from "./adrian";
+import { AdrianScenes } from "./adrian-scenes";
 import { Gwendy } from "./gwendy";
 import { GwendyFlags } from "./gwendy-flags";
 import { Layla } from "./layla";
@@ -374,7 +376,7 @@ export namespace GwendyScenes {
 	export function LoftPrompt() {
 		const gwendy: Gwendy = GAME().gwendy;
 
-		// [Talk][Work]
+		// [Talk][Sex]
 		const options: IChoice[] = [];
 		options.push(TalkEntry(LoftPrompt));
 		options.push({ nameStr : "Sex",
@@ -999,6 +1001,7 @@ export namespace GwendyScenes {
 	export function Work() {
 		const party: Party = GAME().party;
 		const gwendy: Gwendy = GAME().gwendy;
+		const adrian: Adrian = GAME().adrian;
 		Text.Clear();
 
 		gwendy.relation.IncreaseStat(40, 1);
@@ -1017,21 +1020,26 @@ export namespace GwendyScenes {
 			Text.Add(" You tell [p1name] to get help with work as well, as there's more than enough for you two to pitch a hand in.", parse);
 		} else if (!party.Alone()) {
 			Text.Add(" You tell the group to get to work as well, seeing as there's enough to do for everyone to pitch a hand in.", parse);
- 		}
+		}
+		Text.NL();
 
 		// Random scenes
 		const scenes = new EncounterTable();
 		// MILKING
 		scenes.AddEnc(GwendyScenes.WorkMilking, 1.0, () => true);
-		// FEEDING
+		// FEEDING (DANIE)
 		scenes.AddEnc(GwendyScenes.WorkFeedingDanie, 1.0, () => true);
-		// TODO
-		/*
+		// HELP ADRIAN
 		scenes.AddEnc(() => {
-			Text.Add("", parse);
+			Text.Out(`${_.sample([
+				`“I got things covered here, but maybe you can give Adrian a hand?”`,
+				`“Oh yeah, there is something you could help out with. I gave Adrian a task a while back, but I think it’d go faster if you were to head over and give him a hand.”`,
+				`“That’s sweet of you… but I think your help is more needed elsewhere. Go find Adrian, he’ll tell you the rest.”`,
+				])} Gwendy instructs you where you can find the taciturn farmhand before returning to her own tasks. It’s not long before you find him; the hulking equine stands out.`);
 			Text.NL();
-		}, 1.0, () => true);
-		*/
+			AdrianScenes.Work();
+		}, 1.0, () => adrian.workTimer.Expired());
+		// TODO
 		/*
 		scenes.AddEnc(() => {
 			Text.Add("", parse);
