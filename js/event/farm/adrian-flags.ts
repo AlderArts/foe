@@ -12,9 +12,10 @@ export namespace AdrianFlags {
 
     // Bitmask
     export enum Flags {
-        Taunted    = 1,
-        Humiliated = 2,
-        Encouraged = 4,
-        Seduced    = 8,
+        TalkedGwendy = 1,
+        Taunted      = 2,
+        Humiliated   = 4,
+        Encouraged   = 8,
+        Seduced      = 16,
     }
 }

@@ -71,6 +71,7 @@ export class Adrian extends Entity {
 		this.flags.EPlus = AdrianFlags.EPlus.NotStarted;
 		// Talk progression
 		this.flags.TalkWork = 0;
+		this.flags.SeduceCnt = 0;
 
 		this.interactTimer = new Time();
 		this.workTimer = new Time();

@@ -119,15 +119,15 @@ class EntityParser {
 	public get is() { return this.ent.is(); }
 	public mfFem(male: string, female: string) { return this.ent.mfFem(male, female); }
 	public mfTrue(male: string, female: string) { return this.ent.mfTrue(male, female); }
-	public haslegs(iflegs: string, nolegs: string) { return this.ent.HasLegs() ? iflegs : nolegs; }
-	public taur(iftaur: string, nottaur: string) { return this.ent.IsTaur() ? iftaur : nottaur; }
-	public naga(ifnaga: string, notnaga: string) { return this.ent.IsNaga() ? ifnaga : notnaga; }
-	public goo(ifgoo: string, notgoo: string) { return this.ent.IsGoo() ? ifgoo : notgoo; }
-	public flexible(ifflexible: string, notflexible: string) { return this.ent.IsFlexible() ? ifflexible : notflexible; }
-	public hashair(ifhashair: string, nothashair: string) { return this.ent.HasHair() ? ifhashair : nothashair; }
-	public longhair(iflonghair: string, notlonghair: string) { return this.ent.HasLongHair() ? iflonghair : notlonghair; }
-	public longtongue(iflongtongue: string, notlongtongue: string) { return this.ent.LongTongue() ? iflongtongue : notlongtongue; }
-	public hascock(cock: string, nocock: string) { return this.ent.FirstCock() !== undefined ? cock : nocock; }
+	public haslegs(iflegs: string, nolegs: string = ``) { return this.ent.HasLegs() ? iflegs : nolegs; }
+	public taur(iftaur: string, nottaur: string = ``) { return this.ent.IsTaur() ? iftaur : nottaur; }
+	public naga(ifnaga: string, notnaga: string = ``) { return this.ent.IsNaga() ? ifnaga : notnaga; }
+	public goo(ifgoo: string, notgoo: string = ``) { return this.ent.IsGoo() ? ifgoo : notgoo; }
+	public flexible(ifflexible: string, notflexible: string = ``) { return this.ent.IsFlexible() ? ifflexible : notflexible; }
+	public hashair(ifhashair: string, nothashair: string = ``) { return this.ent.HasHair() ? ifhashair : nothashair; }
+	public longhair(iflonghair: string, notlonghair: string = ``) { return this.ent.HasLongHair() ? iflonghair : notlonghair; }
+	public longtongue(iflongtongue: string, notlongtongue: string = ``) { return this.ent.LongTongue() ? iflongtongue : notlongtongue; }
+	public hascock(cock: string, nocock: string = ``) { return this.ent.FirstCock() !== undefined ? cock : nocock; }
 	public get cocks() { return this.ent.MultiCockDesc(); }
 	public get cocksandballs() { return `${this.cocks}${this.ent.HasBalls() ? ` and ${this.balls}` : ""}`; }
 	public get cock() { const cock = this.ent.GetPreferredCock() || this.ent.FirstCock(); return cock.Short(); }
@@ -137,7 +137,7 @@ class EntityParser {
 	public get butt() { return this.ent.Butt().Short(); }
 	public get anus() { return this.ent.Butt().AnalShort(); }
 	public get vag() { return this.ent.FirstVag().Short(); }
-	public hasvag(vag: string, novag: string) { return this.ent.FirstVag() !== undefined ? vag : novag; }
+	public hasvag(vag: string, novag: string = ``) { return this.ent.FirstVag() !== undefined ? vag : novag; }
 	public get vagoranus() { return this.ent.FirstVag() ? this.vag : this.anus; }
 	public get clit() { return this.ent.FirstVag().ClitShort(); }
 	public get gen() {
@@ -191,11 +191,11 @@ class EntityParser {
 	public get feet() { return this.ent.FeetDesc(); }
 	public get belly() { return this.ent.StomachDesc(); }
 	public get tail() { const tail = this.ent.HasTail(); return tail ? tail.Short() : ""; }
-	public hastail(tail: string, notail: string) { return this.ent.HasTail() ? tail : notail; }
+	public hastail(tail: string, notail: string = ``) { return this.ent.HasTail() ? tail : notail; }
 	public get wing() { const wing = this.ent.HasWings(); return wing ? wing.Short() : ""; }
-	public haswings(wing: string, nowing: string) { return this.ent.HasWings() ? wing : nowing; }
+	public haswings(wing: string, nowing: string = ``) { return this.ent.HasWings() ? wing : nowing; }
 	public get horns() { const horns = this.ent.HasHorns(); return horns ? horns.Short() : ""; }
-	public hashorns(horns: string, nohorns: string) { return this.ent.HasHorns() ? horns : nohorns; }
+	public hashorns(horns: string, nohorns: string = ``) { return this.ent.HasHorns() ? horns : nohorns; }
 	public get weapon() { return this.ent.WeaponDesc(); }
 	public get armor() { return this.ent.ArmorDesc(); }
 	public get botarmor() { return this.ent.LowerArmorDesc(); }

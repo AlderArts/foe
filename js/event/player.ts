@@ -100,10 +100,10 @@ export class Player extends Entity {
 		}
 	}
 
-	public HeightDiff(other: Entity) {
+	public HeightDiff(other: Entity, diff: number = 30) {
 		return {
-			shortstackPC: this.Height() - other.Height() <= -30,
-			tallPC: this.Height() - other.Height() >= 30,
+			shortstackPC: this.Height() - other.Height() <= -diff,
+			tallPC: this.Height() - other.Height() >= diff,
 		};
 	}
 
