@@ -139,6 +139,10 @@ export class Adrian extends Entity {
 		return !this.interactTimer.Expired();
 	}
 
+	public IsAsleep() {
+		return (WorldTime().hour >= 22 || WorldTime().hour < 5);
+	}
+
 	// Schedule
 	public IsAtLocation(location?: ILocation) {
 		if (this.Timeout()) {
@@ -151,33 +155,8 @@ export class Adrian extends Entity {
 			return (WorldTime().hour >= 5  && WorldTime().hour < 15);
 		// Workday (Barn)
 		} else if (location === world.loc.Farm.Barn) {
-			return (WorldTime().hour >= 15 && WorldTime().hour < 21);
+			return true;
 		}
 		return false;
-	}
-
-	// Party interaction
-	public Interact() {
-		const adrian = GAME().adrian;
-		Text.Clear();
-		Text.Add("Rawr Imma horse.");
-
-		if (GetDEBUG()) {
-			const state = adrian.flags.Met;
-			const Dom = state === AdrianFlags.Met.Dom;
-			const Sub = state === AdrianFlags.Met.Sub;
-			Text.NL();
-			Text.Out(`<b>DEBUG: State = ${Dom ? `Dom` : Sub ? `Sub` : `Shy`}
-
-			relation: ${adrian.relation.Get()}
-
-			DEBUG: jealousy: ${adrian.subDom.Get()}
-
-			DEBUG: slut: ${adrian.slut.Get()}</b>`);
-			Text.NL();
-		}
-
-		Text.Flush();
-		Gui.NextPrompt(NAV().PartyInteraction);
 	}
 }

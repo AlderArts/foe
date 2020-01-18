@@ -1,8 +1,9 @@
 import * as _ from "lodash";
+import { GetDEBUG } from "../../../app";
 import { BreastSize } from "../../body/breasts";
 import { EncounterTable } from "../../encountertable";
 import { Sex } from "../../entity-sex";
-import { GAME, TimeStep, WORLD, WorldTime } from "../../GAME";
+import { EntityStorage, GAME, TimeStep, WORLD, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
 import { IChoice } from "../../link";
 import { Rigard } from "../../loc/rigard/rigard";
@@ -47,11 +48,13 @@ export namespace AdrianScenes {
         // Workday (Barn)
         } else if (location === world.loc.Farm.Barn) {
             if (adrian.IsAtLocation(location)) {
-                Text.Out(`Adrian is moving about the barn, hard at work. As usual, he’s misplaced his shirt somewhere. No one seems to be complaining about it.`);
-            } else {
-                Text.Out(`Adrian appears to have retired to his quarters for the night.`);
+                if (adrian.IsAsleep()) {
+                    Text.Out(`Adrian appears to have retired to his quarters for the night.`);
+                } else {
+                    Text.Out(`Adrian is moving about the barn, hard at work. As usual, he’s misplaced his shirt somewhere. No one seems to be complaining about it.`);
+                }
+                Text.NL();
             }
-            Text.NL();
         }
     }
 
@@ -91,6 +94,21 @@ export namespace AdrianScenes {
             Text.Out(`The shy equine farmhand blushes and looks away as you approach. “H-Hey…” he falters, pausing in his work, seemingly distracted by your presence. Even having acknowledged you, the muscular horse morph doesn’t meet your eyes.`);
         } else { // Shy
             Text.Out(`The stoic equine farmhand doesn’t look up from his tasks as you approach; you gain a grunt of acknowledgement, but not much else. You watch him for a little bit before he seems to become uncomfortable, pausing in his work. “Yes?”`);
+        }
+
+        if (GetDEBUG()) {
+            const state = adrian.flags.Met;
+            const Dom = state === AdrianFlags.Met.Dom;
+            const Sub = state === AdrianFlags.Met.Sub;
+            Text.NL();
+            Text.Out(`<b>DEBUG: State = ${Dom ? `Dom` : Sub ? `Sub` : `Shy`}
+
+            relation: ${adrian.Relation()}
+
+            DEBUG: jealousy: ${adrian.Jealousy()}
+
+            DEBUG: slut: ${adrian.Slut()}</b>`);
+            Text.NL();
         }
 
         Prompt();
@@ -150,13 +168,6 @@ export namespace AdrianScenes {
             },
         ];
 
-        if (Shy && !Seduced) {
-            options = _.concat(options, {
-                nameStr : `Seduce`,
-                func : Seduction, enabled : true,
-                tooltip : `Be more overt and physical in your flirting with the equine farmhand. You’re going to get into his pants one way or the other.`,
-            });
-        }
         if (Seduced || !Shy) {
             options = _.concat(options, {
                 nameStr : `Sex`,
@@ -179,6 +190,47 @@ export namespace AdrianScenes {
                 }, enabled : true,
                 tooltip : `So… is the ${Dom ? `stallion` : `farmhand`} up for a bit of fun?`,
             });
+        }
+        if (GetDEBUG()) {
+            options = _.concat(options, [{
+                nameStr : `RESET`,
+                func : () => {
+                    Text.Clear();
+                    Text.Out(`<b>Warning! This is a debug option intended for testing, it will reset Adrian's state! Proceed?</b>`);
+                    Text.Flush();
+                    const debugOpts: IChoice[] = [
+                        {
+                            nameStr: `Yes, reset`,
+                            func: () => {
+                                Text.Clear();
+                                Text.Out(`Just like that, Adrian forgets about all of your prior interactions...`);
+                                Text.Flush();
+
+                                const adrian: Adrian = GAME().adrian;
+                                // Restore player/party
+                                _.remove(EntityStorage(), (e) => {
+                                    return e === adrian;
+                                });
+                                GAME().adrian = new Adrian();
+                                EntityStorage().push(GAME().adrian);
+
+                                Gui.NextPrompt();
+                            }, enabled: true, tooltip: `Yes, reset horsie.`,
+                        },
+                        {
+                            nameStr: `No, abort`,
+                            func: () => {
+                                Text.Clear();
+                                Text.Out(`Adrian gives you a nervous look. “W-What are you playing around with there, ${pc.name}?”`);
+                                Prompt();
+                            }, enabled: true, tooltip: `No, leave horsie as he is.`,
+                        },
+                    ];
+                    Gui.SetButtonsFromList(debugOpts);
+                }, enabled : true,
+                tooltip : ``,
+                },
+            ]);
         }
         /* TODO
             {
@@ -471,7 +523,7 @@ export namespace AdrianScenes {
         const pc = player.Parser;
         const adrian: Adrian = GAME().adrian;
         const gwendy: Gwendy = GAME().gwendy;
-        const { Shy, Dom, Sub, jealous, Encouraged, Taunted } = _AdrianState();
+        const { Shy, Dom, Sub, jealous, Encouraged, Taunted, Seduced } = _AdrianState();
         Text.Flush();
 
         let options: IChoice[] = [
@@ -525,7 +577,7 @@ export namespace AdrianScenes {
                         }
                         Text.Out(_.sample(reply));
                     }
-                    adrian.slut.IncreaseStat(20, 1);
+                    adrian.slut.IncreaseStat(20, 2);
                     TimeStep({minute: 10});
                     FlirtPrompt();
                 }, enabled: true, tooltip: `Express your appreciation of Adrian’s hard work and handsome looks.`,
@@ -580,12 +632,21 @@ export namespace AdrianScenes {
                         }
                         Text.Out(_.sample(reply));
                     }
-                    adrian.slut.IncreaseStat(30, 2);
+                    adrian.slut.IncreaseStat(30, 3);
                     TimeStep({minute: 10});
                     FlirtPrompt();
                 }, enabled: true, tooltip: `Give Adrian some sexual compliments. He’s quite pleasant to the eye after all.`,
             },
         ];
+
+        if (Shy && !Seduced) {
+            options = _.concat(options, {
+                nameStr : `Seduce`,
+                func : Seduction, enabled : true,
+                tooltip : `Be more overt and physical in your flirting with the equine farmhand. You’re going to get into his pants one way or the other.`,
+            });
+        }
+
         const talkedGwendy = (adrian.flags.Flags & AdrianFlags.Flags.TalkedGwendy) !== 0;
         if (!talkedGwendy) {
             options.push({ nameStr: `Gwendy`,
@@ -629,7 +690,7 @@ export namespace AdrianScenes {
             }, enabled: true, tooltip: `You’ve seen Adrian pining after Gwendy like a lost puppy… how’s that working out for him?`});
         } else {
             // Lay claim, Taunt, Encourage
-            if (Taunted) {
+            if (!Taunted) {
                 options = _.concat(options, {
                     nameStr: `Lay claim`,
                     func: () => {
@@ -691,8 +752,8 @@ export namespace AdrianScenes {
 
                             You spend some time gently building Adrian’s confidence, though you suspect he might need some more… personal encouragement in order to get over his hangups in regards to the farmgirl.`);
 
-                            adrian.slut.IncreaseStat(40, 2);
-                            adrian.relation.IncreaseStat(30, 2);
+                            adrian.slut.IncreaseStat(30, 2);
+                            adrian.relation.IncreaseStat(40, 3);
 
                             TimeStep({minute: 10});
                             FlirtPrompt();
@@ -785,7 +846,7 @@ export namespace AdrianScenes {
                             “…F-Fuck off.” The farmhand glares at you and trudges off. So touchy.`);
 
                             adrian.slut.IncreaseStat(30, 1);
-                            adrian.jealousy.IncreaseStat(20, 2);
+                            adrian.jealousy.IncreaseStat(30, 2);
                             adrian.relation.DecreaseStat(0, 5);
 
                             adrian.interactTimer = new Time(0, 0, 0, 3, 0);
@@ -880,7 +941,7 @@ export namespace AdrianScenes {
 
             TimeStep({minute: 10});
             adrian.relation.IncreaseStat(20, 1);
-            adrian.slut.IncreaseStat(50, 3);
+            adrian.slut.IncreaseStat(50, 4);
             adrian.interactTimer = new Time(0, 0, 0, 3, 0);
         } else if (seduceCnt === 1 && slut >= 10) {
             adrian.flags.SeduceCnt++;
@@ -898,7 +959,7 @@ export namespace AdrianScenes {
 
             TimeStep({minute: 10});
             adrian.relation.IncreaseStat(20, 1);
-            adrian.slut.IncreaseStat(50, 3);
+            adrian.slut.IncreaseStat(50, 4);
             adrian.interactTimer = new Time(0, 0, 0, 3, 0);
         } else if (seduceCnt === 2 && slut >= 20) {
             adrian.flags.SeduceCnt++;
@@ -921,10 +982,9 @@ export namespace AdrianScenes {
             “D-Didn’t take you long to corrupt my most loyal farmhand. You can play around, just… haha… just make sure he’s able to function, ‘kay?” Chuckling to herself, Gwendy goes about her business.`);
             TimeStep({minute: 10});
             adrian.relation.IncreaseStat(20, 1);
-            adrian.slut.IncreaseStat(50, 3);
+            adrian.slut.IncreaseStat(50, 4);
             adrian.interactTimer = new Time(0, 0, 0, 3, 0);
         } else if (seduceCnt === 3 && slut >= 30) {
-            adrian.flags.SeduceCnt++;
             Text.Out(`Adrian eyes you apprehensively as you suggest the two of you venture somewhere private, but follows wordlessly, pointing to the part of the barn where he has his quarters. The inside is small and cozy, even more so than Gwendy’s own loft, which is directly above the equine farmhand’s living space.
 
             You sigh contentedly as you recline on the straw mattress that form his bedding, drinking in your prey. He shuffles back and forth on his hooves nervously, towering over you in the dim light. “Uh… about last time… you’ve been acting… weird, ${pc.name}. I…” He trails off, watching you intently. You can see the bulge of his cock begin to swell in his pants as he walks through the trajectory of your earlier flirting in his head.
@@ -937,6 +997,7 @@ export namespace AdrianScenes {
                 {
                     nameStr: `Free his cock`,
                     func: () => {
+                        adrian.flags.SeduceCnt++;
                         Text.Clear();
                         Text.Out(`Weird…? No, there’s nothing weird about this. You slowly rise, closing in on the equine farmhand. He tenses, then relaxes as you trail your hands down his sides, going as far as to ${tallPC ? `raise his head to meet your passionate kiss` : shortstackPC ? `lean down in order to kiss you` : `lean in to kiss you`}. You can feel his stiff member pressing against you, aching to be released from the confines of his pants.
 
@@ -1012,6 +1073,7 @@ export namespace AdrianScenes {
             {
                 nameStr: `Tease`,
                 func: () => {
+                    Text.Clear();
                     Text.Out(`Don’t worry about it, you assure the apprehensive farmhand. It’s actually kinda cute. Maybe you’re used to bigger, but cocks come in all shapes and sizes. He shouldn’t worry about it so much. You give him a sly smile as you cradle his thick shaft in your ${pc.palm}. He turns his head, looking crestfallen and embarrassed rather than reassured.
 
                     “It’s okay… you don’t have to sugarcoat it. D-Do you still want to…?”`);
@@ -1023,6 +1085,7 @@ export namespace AdrianScenes {
             {
                 nameStr: `Reassure`,
                 func: () => {
+                    Text.Clear();
                     Text.Out(`You gently tell him that while his maybe-girlfriend might have been used to bigger sizes, he’s by no means small. In fact, with most men it wouldn’t even be a competition, both when it comes to length and girth.
 
                     “I-Is that so?” Adrian looks slightly reassured, but still slightly apprehensive. “Are you sure? You don’t have to… for my sake…”`);
@@ -1033,10 +1096,11 @@ export namespace AdrianScenes {
             {
                 nameStr: `Intimidated`,
                 func: () => {
+                    Text.Clear();
                     Text.Out(`Truth be told… it’s the other way around. You gulp hesitantly as you study the massive member, cradling it in your ${pc.palm}. It’s heavy, and gives off a thick musk. You tell him that it’s among the bigger ones you’ve seen, and that he definitely shouldn’t be ashamed of it… rather, you’re not sure you’re going to be able to handle it.
 
                     “A-Ah… we can stop if you want…?”`);
-                    adrian.slut.IncreaseStat(100, 3);
+                    adrian.slut.IncreaseStat(100, 4);
                     adrian.relation.IncreaseStat(100, 2);
                     _intimidated = true;
                     Gui.PrintDefaultOptions();
@@ -1129,7 +1193,7 @@ export namespace AdrianScenes {
     export function SexPrompt() {
         const player: Player = GAME().player;
         const pc = player.Parser;
-        const { Dom, Sub, Shy } = _AdrianState();
+        const { Dom, Sub } = _AdrianState();
         Text.Flush();
         const options: IChoice[] = [
             {
@@ -1310,7 +1374,7 @@ export namespace AdrianScenes {
                     TimeStep({minute: 45});
 
                     player.slut.IncreaseStat(50, 1);
-                    adrian.slut.IncreaseStat(50, 2);
+                    adrian.slut.IncreaseStat(50, 3);
                     player.AddLustFraction(0.3);
                     _denial = false;
 
@@ -1496,7 +1560,7 @@ export namespace AdrianScenes {
 
                         Adrian brings out a bucket of water and a towel, letting you wash the worst of it away, but even so it takes more than a few rinses to get all of it out. It’s quite some time until you consider yourself presentable, by which point the farmhand has restored his clothing and looks to be ready for work again. You put on your gear again, but can’t help feeling even more horny.`);
 
-                        adrian.slut.IncreaseStat(75, 2);
+                        adrian.slut.IncreaseStat(75, 4);
                         TimeStep({hour: 1});
                         player.AddLustFraction(0.5);
                         _denial = false;
@@ -1543,7 +1607,7 @@ export namespace AdrianScenes {
                         Text.NL();
                         Text.Out(`The two of you slowly come down from your high, rinsing yourselves with some water and restoring your clothes to a somewhat presentable state. You left quite a mess… but it was worth it.`);
 
-                        adrian.slut.IncreaseStat(75, 1);
+                        adrian.slut.IncreaseStat(75, 2);
                         TimeStep({hour: 1});
                         player.AddLustFraction(0.3);
                         _denial = false;
@@ -1640,7 +1704,7 @@ export namespace AdrianScenes {
         Text.Out(`${Dom ? `Adrian wipes himself off before tossing you a slightly cum soaked towel` :
         `Adrian helps you clean up`}, and the two of you restore your clothes to the best of your abilities. Little can be done about the heavy smell of sex reeking from you, though.`);
 
-        adrian.slut.IncreaseStat(75, 2);
+        adrian.slut.IncreaseStat(75, 5);
         TimeStep({hour: 1});
         player.AddLustFraction(0.3);
         _denial = false;
@@ -1665,7 +1729,7 @@ export namespace AdrianScenes {
         TimeStep({hour: 5});
         player.OrgasmCum(3);
         player.subDom.DecreaseStat(-100, 3);
-        adrian.slut.IncreaseStat(100, 5);
+        adrian.slut.IncreaseStat(100, 7);
 
         Text.Flush();
         Gui.NextPrompt();
