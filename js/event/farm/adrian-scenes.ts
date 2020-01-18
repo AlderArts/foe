@@ -639,7 +639,7 @@ export namespace AdrianScenes {
             },
         ];
 
-        if (Shy && !Seduced) {
+        if (Shy && !Seduced && !Taunted) {
             options = _.concat(options, {
                 nameStr : `Seduce`,
                 func : Seduction, enabled : true,
