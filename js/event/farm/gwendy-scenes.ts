@@ -683,11 +683,45 @@ export namespace GwendyScenes {
 		options.push({ nameStr : "Adrian",
 			func : () => {
 				Text.Clear();
-				Text.Out(`“Adrian’s been with me on and off for years. He’s always been the quiet type, not usually one to start up a conversation. Still, he’s dependable like no other, and never raises a complaint. When it comes to help around here, he’s the most consistent I have, a hard worker at that.”
+				const { Dom, Sub, jealous, SeducedGwendySaw } = AdrianScenes._AdrianState();
+				// Reply dependent on current Adrian state
+				if (Dom) {
+					Text.Out(`“Man, how Adrian has changed. Took me a week to even get his name when he first showed up here, so tongue-tied was he.” Gwendy grins wickedly. “That, to be blunt, doesn’t seem to be an issue anymore. His old self was cute, but I must say I enjoy his new… attitude a lot more.”
 
-				You have some ideas about why the silent equine hangs around Gwendy so much, but you hold your tongue.
+					As well as other aspects of him, you’re sure. Gwendy blushes prettily.
 
-				“He’s one of the few farmhands that lives here on the farm. Used to be there were plenty of people doing so back when, but with only the barn I just don’t have room any longer, nor do I have the money to afford it. Adrian’s gone without pay for me more than once through some rough stretches in recent years. I owe a lot to him.”`);
+					“What can I say, I’m a simple girl. Give me three meals and a good serving of horsecock a day and I’m happy as peach. Despite any issues with the former, I don’t think I’ll be missing out on the latter anytime soon.” She looks positively dreamy.
+
+					Truly, you’ve unleashed a monster.
+
+					“Mind ya… Adrian’s a good boy. He’s not skimming on his regular duties, distractions notwithstanding. It’s a good thing too, he’s really is needed.”`);
+				} else if (Sub) {
+					Text.Out(`“Must say, when I saw that manly if slightly awkward stallion first wandering onto the farm, I never thought he’d end up moaning like a bitch in heat, skewered on my dick.” Gwendy cocks her head to the side thoughtfully. “Addendum. I never thought I’d have a dick either. How things change.”
+
+					And… she’s enjoying said changes?
+
+					“Oh, don’t you doubt it.” The futa farmgirl grins, putting a hand on her hip. “I’ve found I enjoy giving horsecock as much as I do taking, if not more. Having such a willing… receiver is truly a blessing from the Spirits. Oh, down, you.” She fruitlessly admonishes the growing bulge in her pants.
+
+					“What were we talking about?”`);
+				} else if (jealous) {
+					Text.Out(`“Hmm… Adrian’s been acting… oddly lately. Very quiet.” Gwendy muses, scratching her chin. “And that’s saying something, coming from him. You wouldn’t happen to know anything about that?”
+
+					You don’t think that she’d take kindly to your little rivalry with the equine farmhand, so you decide to hold your tongue for the time being.
+
+					“I tried to have a chat with the big oaf, see what’s bothering him, but he was pretty taciturn about it, so I laid off him.” The farmer shakes her head. “Still, a girl worries.”`);
+				} else if (SeducedGwendySaw) {
+					Text.Out(`“You’ve been having some fun with my farmhand lately, haven’tcha?” Gwendy gives you a wink. “I’m quite surprised you got him to come out of his shell, honest. I flirted with him myself when he first arrived here, but he acted so awkward about it I figured he just wasn’t into me. We’ve kept things platonic since, and that’s worked fine.${pc.mfTrue(` Guess he’s into boys, more power to him.`, ``)}”
+
+					You chortle a bit at that. If she only knew the truth of it. Still, you’d feel bad about outing the poor equine’s feelings for her like that, so you hold your tongue.
+
+					“You have my blessing to fool around as much as you want… just make sure he’s still functional.” She wags her finger at you menacingly. “And don’t dare break his heart. He deserves better than that.”`);
+				} else {
+					Text.Out(`“Adrian’s been with me on and off for years. He’s always been the quiet type, not usually one to start up a conversation. Still, he’s dependable like no other, and never raises a complaint. When it comes to help around here, he’s the most consistent I have, a hard worker at that.”
+
+					You have some ideas about why the silent equine hangs around Gwendy so much, but you hold your tongue.
+
+					“He’s one of the few farmhands that lives here on the farm. Used to be there were plenty of people doing so back when, but with only the barn I just don’t have room any longer, nor do I have the money to afford it. Adrian’s gone without pay for me more than once through some rough stretches in recent years. I owe a lot to him.”`);
+				}
 				Text.Flush();
 
 				GwendyScenes.Talk(backfunc);

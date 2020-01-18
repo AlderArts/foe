@@ -1,4 +1,7 @@
 import * as _ from "lodash";
+import { BreastSize } from "../../body/breasts";
+import { EncounterTable } from "../../encountertable";
+import { Sex } from "../../entity-sex";
 import { GAME, TimeStep, WORLD, WorldTime } from "../../GAME";
 import { Gui } from "../../gui";
 import { IChoice } from "../../link";
@@ -25,8 +28,9 @@ export namespace AdrianScenes {
         const Humiliated = (adrian.flags.Flags & AdrianFlags.Flags.Humiliated) !== 0;
         const Encouraged = (adrian.flags.Flags & AdrianFlags.Flags.Encouraged) !== 0;
         const Seduced = (adrian.flags.Flags & AdrianFlags.Flags.Seduced) !== 0;
+        const SeducedGwendySaw = (adrian.flags.SeduceCnt >= 3);
         const jealous = adrian.Jealousy() >= 30 || Taunted;
-        return { Shy, Dom, Sub, Seduced, Taunted, Humiliated, Encouraged, slut, friend, jealous };
+        return { Shy, Dom, Sub, Seduced, SeducedGwendySaw, Taunted, Humiliated, Encouraged, slut, friend, jealous };
     }
 
     export function AdrianDesc(location: ILocation) {
@@ -99,7 +103,7 @@ export namespace AdrianScenes {
         const { Shy, Dom, Sub, jealous, friend, slut, Seduced } = _AdrianState();
         Text.Flush();
 
-        const options: IChoice[] = [
+        let options: IChoice[] = [
             {
                 nameStr : `Talk`,
                 func : () => {
@@ -147,14 +151,14 @@ export namespace AdrianScenes {
         ];
 
         if (Shy && !Seduced) {
-            _.concat(options, {
+            options = _.concat(options, {
                 nameStr : `Seduce`,
                 func : Seduction, enabled : true,
                 tooltip : `Be more overt and physical in your flirting with the equine farmhand. You’re going to get into his pants one way or the other.`,
             });
         }
         if (Seduced || !Shy) {
-            _.concat(options, {
+            options = _.concat(options, {
                 nameStr : `Sex`,
                 func : () => {
                     Text.Clear();
@@ -211,33 +215,33 @@ export namespace AdrianScenes {
         const pc = player.Parser;
         const { Dom, Sub, Shy, Seduced, jealous, friend } = _AdrianState();
 
-        const variations = [
+        let variations = [
             `At your inquiry whether he needs help, Adrian gives you a wordless nod, gesturing for you to join him in his tasks.`,
             `Adrian replies to your offer of help with a wordless nod, gesturing for you to follow after him.`,
             `The equine farmhand looks like he could use some help. After briefly considering your offer, Adrian gestures for you to follow.`,
         ];
         if (Shy && jealous) {
-            _.concat(variations, [
+            variations = _.concat(variations, [
                 `“…Just don’t get in the way, got it?” Without another word, Adrian trudges off, gesturing for you to follow.`,
                 `“Not that I need the help… but fine. Grab that, will you?” Adrian instructs you, his tone of voice expressing clear doubt in your abilities.`,
                 `“…Fine. This way.” Without another word, he turns his back on you and trudges off. You follow, somewhat miffed at his attitude.`,
             ]);
         }
         if (Dom || (Shy && friend)) {
-            _.concat(variations, [
+            variations = _.concat(variations, [
                 `“Nice timing… need some help with something. You up for it?” Adrian turns and gestures for you to follow him.`,
                 `“${pc.name}, give me a hand here?” Adrian motions you closer.`,
                 `“Come here, ${pc.name}. I could use a hand.” Adrian waves you over, indicating the task.`,
             ]);
         }
         if (Dom) {
-            _.concat(variations, [
+            variations = _.concat(variations, [
                 `“I need you for something. We can chat more after, come along.” With that, Adrian trudges off, leaving you to scamper after him.`,
                 `“Mind helping out for a bit?” Adrian puts a familiar hand on your back, gently nudging you along. “This’ll take a while, but afterward, if you’re up for it, maybe we could… Well, time enough for that later.”`,
             ]);
         }
         if (Sub) {
-            _.concat(variations, [
+            variations = _.concat(variations, [
                 `“S-So… I could use some help… do you think…?” Adrian shuffles on his hooves nervously.`,
                 `The equine farmhand looks a little crestfallen, so you inquire why. “W-Well, you see…” Adrian goes on to tell you about some tasks that he needs to complete, but he’s running behind. “P-Please, could you help? Mistress Gwendy will be f-furious…”`,
                 `“I s-should get back to work. You shouldn’t l-loiter either, Mistress Gwendy will… punish us.” Though Adrian doesn’t look like he’s averse to the prospect, he nonetheless insists on enlisting your help in his chores.`,
@@ -470,23 +474,23 @@ export namespace AdrianScenes {
         const { Shy, Dom, Sub, jealous, Encouraged, Taunted } = _AdrianState();
         Text.Flush();
 
-        const options: IChoice[] = [
+        let options: IChoice[] = [
             { nameStr: `Compliment`,
                 func: () => {
                     Text.Clear();
-                    const variations = [
+                    let variations = [
                         `The farmhand sure is dependable. Gwendy sure is lucky to have such a resourceful, loyal and handsome fellow in her employ. Who knows what state the farm would be in without his presence?`,
                         `From what you’ve seen, the farmhand works tirelessly on the farm, always throwing Gwendy a helping hand when she needs one. Seems like his glistening muscles are always the first things to greet you when you arrive here.`,
                         `The farmhand seems a natural at this kind of work; strong, tireless and dependable. From what you’ve seen, he very seldom takes a break from his work, yet you’ve never seen him complain. You’re sure that everyone on the farm, including Gwendy herself, really appreciates everything he does.`,
                     ];
                     if (Dom) {
-                        _.concat(variations, [
+                        variations = _.concat(variations, [
                             `The farmhand was always strong and dependable, but since the changes, he’s truly become a pillar here at the farm. Whether it’s hard work or… easing tension, the stallion never fails to be there for everyone else.`,
                             `There can’t be any doubts that the farmhand is the hardest worker here on the farm… in more ways than one. Not that you think any of the girls here mind, rather the opposite.`,
                         ]);
                     }
                     if (Sub) {
-                        _.concat(variations, [
+                        variations = _.concat(variations, [
                             `With Adrian here, Gwendy surely has no need for worry. A tireless worker, a loyal companion and a sexy little plaything when the urge strikes her… she got herself quite a catch.`,
                             `The equine farmhand is doing so much work for the farm, both in keeping it up and running and in keeping his mistress in high spirits.`,
                         ]);
@@ -508,13 +512,13 @@ export namespace AdrianScenes {
                             `Adrian blushes and bows his head to you. “T-Thanks…” He flicks his tail, almost like a puppy who got a treat.`,
                             ]));
                     } else {
-                        const reply = [
+                        let reply = [
                             `“Uhh… thanks?” Adrian blinks at your comment, flicking his ear. He looks somewhat pleased.`,
                             `“…” Adrian blushes faintly at your comment and looks away.`,
                             `“O-Oh… thanks. I think.” Adrian gives you a sidelong glance, flicking his tail nervously.`,
                         ];
                         if (jealous) {
-                            _.concat(reply, [
+                            reply = _.concat(reply, [
                                 `“…I should get back to work.” Adrian blushes faintly as he turns away from you.`,
                                 `“…” Adrian eyes you suspiciously, as if trying to find a hidden barb in your compliment. When no jab follows, he turns back to his tasks.`,
                             ]);
@@ -528,22 +532,22 @@ export namespace AdrianScenes {
             }, { nameStr: `Tease`,
                 func: () => {
                     Text.Clear();
-                    const variations = [
+                    let variations = [
                         `Seeing Adrian’s bulging muscles up close like this makes you appreciate why he so seldom wears a shirt. Quite a sly devil he is. Quite possibly, the denizens of the farm wouldn’t mind him taking off a little more if the heat becomes ‘too much’. You sure wouldn’t, and you tell him as much.`,
                         `Such a strapping fellow as Adrian must cause quite a stir on the farm. It’s a wonder anyone else gets any work done, with him wandering around shirtless all over the place.`,
                         `So… does Adrian get a lot of propositions, flaunting that body of his so casually? Those chiseled abs of his should be enough to give anyone pause, and equines… well, let’s just say they have a reputation in the downstairs department.`,
                     ];
                     if (Shy) {
-                        _.concat(variations, [
+                        variations = _.concat(variations, [
                             `With a mysterious smile, you watch Adrian for a while as he works, finally prompting a response from the taciturn farmhand: “W-What?” Oh, nothing, just enjoying the view. Surely you are not the first one to appreciate his chiseled body?`,
                         ]);
                     } else if (Sub) {
-                        _.concat(variations, [
+                        variations = _.concat(variations, [
                             `You blatantly eye Adrian up and down, whistling appreciatively. As equines go, he’s quite the specimen… muscles strong enough to pull a plow, abs you could chop wood on, an ass chiseled by a sculptor. A feast for the eyes.`,
                             `Hehe… you can see why Gwendy ‘appreciates’ Adrian so much. Despite a muscular frame that would look intimidating on anyone else, there’s something about him that just screams ‘prey’. The equine shifts nervously as you trail a finger down his chiseled side, your ${pc.hand} coming to rest on his butt. Truly delectable.`,
                         ]);
                     } else if (Dom) {
-                        _.concat(variations, [
+                        variations = _.concat(variations, [
                             `Mm… with a body like this, there’s no question why Adrian draws eyes wherever he goes. You lick your lips as your gaze wanders his body, appreciating his well defined muscles and handsome mane of hair. Eventually, you realize you are staring at the sizable bulge on his crotch, mesmerized. “Something caught your eye, ${pc.name}?” Yes, something has.`,
                             `You have to wonder… with his new, more liberated view on sex, and everyone looking to get a piece of him… does he ever get anything done anymore? Adrian throws you a smile. “It’s not that bad. They tend to need some time to recover in between.” Touché.`,
                         ]);
@@ -564,13 +568,13 @@ export namespace AdrianScenes {
                             `“Ah… uhm…” The farmhand falters, blushing and lowering his eyes rather than answering. The way he squirms is really cute, and no one has even shoved a cock up his ass. Yet.`,
                             ]));
                     } else { // Shy
-                        const reply = [
+                        let reply = [
                             `“Y-You’ve got it wrong…” The farmhand blushes, looking away from you.`,
                             `“I-I… uhm…” The farmhand stammers, taken aback by your blatant flirting. “T-That’s not how it is…”`,
                             `For a moment, the farmhand just gapes at you. Finally catching his tongue, he mutters something about you speaking nonsense, very pointedly avoiding your eyes.`,
                         ];
                         if (jealous) {
-                            _.concat(reply, [
+                            reply = _.concat(reply, [
                                 `“N-Not everyone thinks like that!” The farmhand snaps, shuffling his hooves uncomfortably. He avoids meeting your eyes, but can’t hide his red cheeks from you.`,
                             ]);
                         }
@@ -626,7 +630,7 @@ export namespace AdrianScenes {
         } else {
             // Lay claim, Taunt, Encourage
             if (Taunted) {
-                _.concat(options, {
+                options = _.concat(options, {
                     nameStr: `Lay claim`,
                     func: () => {
                         Text.Clear();
@@ -646,7 +650,7 @@ export namespace AdrianScenes {
                 });
             }
             if (!Sub) {
-                _.concat(options, {
+                options = _.concat(options, {
                     nameStr: `Encourage`,
                     func: () => {
                         Text.Clear();
@@ -1209,19 +1213,460 @@ export namespace AdrianScenes {
     }
 
     export function HandjobEntrypoint() {
+        const player: Player = GAME().player;
+        const pc = player.Parser;
+        const adrian: Adrian = GAME().adrian;
+        const { Dom, slut } = _AdrianState();
         _sexed = true;
-        // TODO
+
         Text.NL();
-        Text.Out(`HANDJOB PLACEHOLDER`);
+        Text.Out(`Time to give the farmhand a hand. Smiling up at the ${Dom ? `confident` : `nervous`} equine, you wrap your digits around his stiff horsecock and start to slowly jerk him off, fingers playing lightly along its length. Adrian sighs contentedly, closing his eyes and leaning back, letting you run the show${Dom ? ` for the time being` : ``}.`);
+        Text.NL();
+
+        player.Fuck(undefined, 2);
+        adrian.Fuck(adrian.FirstCock(), 2);
+
+        let scenes = [
+            () => {
+                Text.Out(`You turn your attention fully to your latest plaything, seizing it with both ${pc.hand}s and forming a circle with your fingers. The equine bucks his hips as you put your improvised cocksleeve to use, massaging the entirety of his length from root to flared stem. He seems to be particularly sensitive around the glans; each time you reach the crown of his cock, a twitch runs through the entire shaft, letting a glob of pre shake loose and drip down your ${pc.hand}s, lubricating him.`);
+                Text.NL();
+                if (Dom || slut) {
+                    Text.Out(_.sample([
+                        `“Fuck… you sure know your way around, ${pc.name},” Adrian grunts, gently thrusting his hips to meet your movements. “Hope you won’t mind the mess…”`,
+                        `“That’s a good little… slut,” Adrian grunts. It’s cute that despite his boost in confidence, he’s still somewhat hesitant to talk dirty. “K-Keep going like this, and I’ll have a gift for you soon…”`,
+                        `“Mm… work that cock…” Adrian grunts, gently caressing your ${pc.hair} while you jack him off. “Good… hrn… ${pc.mfFem(`boy`, `girl`)}.”`,
+                    ]));
+                } else {
+                    Text.Out(_.sample([
+                        `“Mmm… o-oh…” Adrian whinnies as he lets you have your way with his junk, biting his lip cutely.`,
+                        `“A-Ah… that feels s-so good…” Adrian lets out a muffled moan, biting his lip. “M-Maybe a bit… s-slower?” Well, that’s up to you, not to him.`,
+                        `“A-Ah… that’s… oh!” Adrian whimpers as you tease and prod him, slowing down and speeding up in an unpredictable manner.`,
+                    ]));
+                }
+            },
+            () => {
+                Text.Out(`You press the equine’s massive shaft up toward his belly, holding it in place and lightly playing with it with one ${pc.hand}. This leaves your other one free to toy with the heavy ball sack hanging between Adrian’s legs, full of juicy horse spunk. You carefully cup the smooth spheres, feeling their weight. When he goes off, he’s going to make a giant mess, that’s for sure.`);
+                Text.NL();
+                if (Dom || slut) {
+                    Text.Out(_.sample([
+                        `“Mmm… someone getting thirsty?” The farmhand chuckles, petting your ${pc.hair}. “If so, I’ve got something good saved up, just for you…”`,
+                        `“Mmm… that’s good… I’m a bit… pent up… gonna be a big one for you…” The farmhand grunts, grinding against your ${pc.hand}.`,
+                        `“That’s right… if you continue being a good ${pc.mfFem(`boy`, `girl`)}, all of that c-cum will be yours,” the farmhand grunts, giving his horsecock a tug.`,
+                    ]));
+                } else {
+                    Text.Out(_.sample([
+                        `“C-Careful… ohhh…” The farmhand whinnies, stomping the ground with one hoof as you caress his jewels.`,
+                        `“Mph…” The farmhand whinnies nervously, biting his lip cutely. A single spurt of pre discharges from his twitching horsecock, slowly dripping down its length, coating your ${pc.hand}.`,
+                        `“I-I think… A-Ahh…!” The farmhand is cut off abruptly as you give him a warning squeeze. He doesn’t need to think right now; you’ll handle that for him.`,
+                    ]));
+                }
+                Text.NL();
+                Text.Out(`Much to his enjoyment, you continue to massage his sloshing sperm silos, driving him ever closer to his climax.`);
+            },
+        ];
+        if (Dom) {
+            scenes = _.concat(scenes, () => {
+                Text.Out(`“Mmm… hold like that for a bit… yeah, good ${pc.mfFem(`boy`, `girl`)}.” Following Adrian’s grunted instructions, you form a tight cocksleeve with your fingers, trapping his girth in your ${pc.hand}s. The farmhand starts to slowly rut against you, see-sawing a good foot of his massive horsecock back and forth through the gentle embrace of your digits.
+
+                He starts to pick up speed, sloppily fucking your ${pc.hand}s and depositing his sticky pre all over your ${pc.hair} and ${pc.face}. “F-Fuck, your ${pc.hand}s are smooth…” the equine groans. “H-Here… feel that?” He takes half a step forward, forcing your hands to the root of his member, letting the rest of it flop heavily onto your head. It pulses and twitches erratically, and your nostrils are filled with the heady smell from his balls.
+
+                After giving you a whiff, Adrian backs up, encouraging you softly as he lets you jerk him off.`);
+                player.subDom.DecreaseStat(-50, 1);
+            });
+        }
+        _.sample(scenes)();
+        Text.Out(` You can tell he’s getting close. Question is if you’re done with him yet?`);
+
         Text.Flush();
-        Gui.NextPrompt();
+        // [Facial][Blowjob][Denial]
+        const options: IChoice[] = [
+            {
+                nameStr: `Facial`,
+                func: () => {
+                    Text.Clear();
+                    Text.Out(`Using both of your ${pc.hand}s and all the tricks you can muster, you push the equine farmhand to the brink of climaxing, playing with both his throbbing shaft and his twitching balls. Adrian groans in pleasure, his breath coming in short bursts. He lets out a whinny and bites down on his lower lip, trying to last just a little bit longer.
+
+                    Shifting your weight around so that you are in his direct line of fire, you focus your attention on his glans. You speed up your coaxing until you can see his flared head starting to expand… you open your mouth and leave your tongue hanging, looking up at him as you hungrily await his cock batter.`);
+                    adrian.OrgasmCum();
+                    Text.NL();
+                    Text.Out(`Strand after strand of hot cum spew out from Adrian’s twitching${Dom ? ` monster` : ``} cock, landing in a sticky mess all over your ${pc.hair}, ${pc.face} and ${pc.tongue}. By the time he’s finished, you have a thick coating of equine seed covering your upper body, slowly dripping down to the ground.`);
+                    Text.NL();
+                    if (Dom || slut) {
+                        Text.Out(_.sample([
+                            `“Hah… not bad…” Adrian takes a shuddering breath, idly shaking a few more drops out of his meat to top your icing. “That… looks good on you.” He grins, rubbing the undercarriage of his cock against your face. You smile back at him.`,
+                            `“That was… quite a bit of fun.” Adrian grins down at you, rubbing his cock against your face and smearing his cum all over your ${pc.skin}. “If ya feel like… doing something more, don’t hesitate to ask.”`,
+                            `“Mmm… that’s a good… mare…” Adrian sighs contentedly, admiring the mess he’s made of your face. “So pretty…” You blush faintly.`,
+                        ]));
+                    } else {
+                        Text.Out(`${_.sample([
+                            `“A-Ahh… hah… that was… wow…”`,
+                            `“I-I… ${pc.name}, that w-was… hah…”`,
+                            `“Mph… hah… s-sorry for the… uhm…”`,
+                        ])} Adrian struggles for words, breathing heavily after his messy climax. You give him a smile and a wink. Anytime.`);
+                    }
+                    Text.NL();
+                    Text.Out(`Cleaning up takes some effort, but with a bucket of water, soap and a towel lent by the farmhand, you manage to get most of his spunk off you - enough to walk around in public at least. You can still taste him on your tongue, a constant reminder of your naughty frolicking. The two of you restore your clothes, Adrian ${Dom ? `taking some time to languidly stretch, showing off his flexing muscles` : `glancing around himself nervously as if expecting Gwendy to jump out of the woodworks anytime and scold him for neglecting his duties`}.`);
+
+                    TimeStep({minute: 45});
+
+                    player.slut.IncreaseStat(50, 1);
+                    adrian.slut.IncreaseStat(50, 2);
+                    player.AddLustFraction(0.3);
+                    _denial = false;
+
+                    Prompt();
+                }, enabled: true, tooltip: `Let him finish and spew his load all over your face.`,
+            },
+            {
+                nameStr: `Blowjob`,
+                func: () => {
+                    Text.Clear();
+                    Text.Out(`You cease your toying and teasing, ${pc.hand}s trailing up the equine farmhand’s shaft, gathering a dollop of pre from his twitching crown. Letting go of the bobbing member entirely, you give him a mischievous grin as you slurp it up. Delicious.
+
+                    “H-Hmm…? ${pc.name}? I was close…” Adrian huffs, looking down at you past the trunk of his massive throbbing horsecock. You stare back at him with a hungry look in your eyes. You’re not done with him yet, not by a long shot.`);
+                    _denial = true;
+
+                    BlowjobEntrypoint();
+                }, enabled: true, tooltip: `It’d be a shame to let all of that cum go to waste… take him in your mouth.`,
+            },
+            {
+                nameStr: `Denial`,
+                func: () => {
+                    Text.Clear();
+                    Text.Out(`The ${Dom ? `stallion` : `equine`} is about to blow his load when you constrict your ${pc.hand}s around the root of his shaft, squeezing his cumchute tight and preventing his climax.`);
+                    Text.NL();
+                    const denyDenial = Dom && player.SubDom() < 50 && (_.random(1, 60) >= player.SubDom());
+                    if (denyDenial) {
+                        Text.Out(`“Ngh… you naughty little… tease…” Adrian grunts, glowering down at you. “Don’t play around… I’m gonna get off, the only question is how.” You blush, intimidated by the close proximity of his massive member and the heavy musk emanating from his gonads. You should do what he says…`);
+                        player.subDom.DecreaseStat(0, 1);
+                        Text.Flush();
+
+                        _.last(options).enabled = false;
+                        Gui.SetButtonsFromList(options);
+                    } else {
+                        Text.Out(`Adrian whinnies, shifting his hooves to free himself, but you keep your grip, smiling up at him wickedly. Who said that he could cum? “B-But…! S-So close…” You stifle his protests, keeping him restrained until the twitching of his horsecock has died down. He winces as you give his swollen balls a pat. Good boy… but you have some other business to take care of. You’re sure he can take care of himself… right?
+
+                        ${Dom ? `“Oh… I’m sure I can find someone else interested in helping out with this… little issue.” Adrian flashes you a grin, almost making you regret your choice.` : `“Ah… but I thought…” he blushes, hanging his head. “O-Okay…” Though he attempts to look disappointed, a twitch from his neglected cock tells you that your treatment excites him.`} You and the equine farmhand restore your clothes, Adrian sporting quite a prominent tent on the front of his pants.`);
+
+                        adrian.slut.IncreaseStat(75, 2);
+                        player.subDom.IncreaseStat(50, 1);
+                        TimeStep({minute: 45});
+                        _denial = true;
+
+                        Prompt();
+                    }
+                }, enabled: player.SubDom() >= 20, tooltip: `You’ve toyed with him enough for now… but he doesn’t get to cum.${Dom ? ` The stallion might have other opinions about this.` : ``}`,
+            },
+        ];
+        Gui.SetButtonsFromList(options);
     }
 
     export function BlowjobEntrypoint() {
+        const player: Player = GAME().player;
+        const pc = player.Parser;
+        const adrian: Adrian = GAME().adrian;
+        const { Dom, Sub, Shy } = _AdrianState();
         _sexed = true;
-        // TODO
+
         Text.NL();
-        Text.Out(`BLOWJOB PLACEHOLDER`);
+        Text.Out(`Adrian tenses up as your greedy lips envelop the head of his cock. Your jaw aches trying to accommodate his girth, but the taste of his thick pre-cum is worth the discomfort. You let your ${pc.tongue} play across his flared tip, swirling up and swallowing any stray globs of pre. Nursing and suckling his head and cumslit, you let your ${pc.hand}s work their magic on his length, slick fingers gently caressing his veiny shaft, reaching down to cup and feel his heavy balls.${_denial ? ` After all your teasing, he’s desperate for release.` : ``}`);
+        Text.NL();
+
+        Sex.Blowjob(player, adrian);
+        player.FuckOral(player.Mouth(), adrian.FirstCock(), 2);
+        adrian.Fuck(adrian.FirstCock(), 2);
+
+        // TODO
+        const beginner = player.sex.gBlow < 10;
+        const inexperienced = player.sex.gBlow < 30;
+        const master = !inexperienced;
+
+        if (beginner) {
+            Text.Out(`Trying to pleasure a dick as large as Adrian’s is no easy feat for someone as inexperienced as you; you can barely get more than two inches of the equine’s tree trunk into your mouth. The best you manage is making out with his crown, letting your ${pc.tongue} lap at his glans. Your mouth is filled to the brim with pink cockflesh, and even the small fraction of him that you are able to take presses uncomfortably against the back of your throat.`);
+        } else if (inexperienced) {
+            Text.Out(`Even for a seasoned cock-sucker like you, trying to blow such a thick shaft is quite the challenge. You manage to get a few inches of him inside your mouth before meeting resistance, but you don’t let yourself get discouraged. You twist this way and that, letting your ${pc.tongue} work every square inch of your lover’s juicy fuckstick and lapping up as much of his nut batter as you can.`);
+        } else {
+            Text.Out(`Once the initial discomfort has eased, your experience sets in. You know your way around a cock, and Adrian’s about to get his blown by a pro. Its sheer girth is an issue, but not one that you’ll allow getting in your way. You twist this way and that, letting your ${pc.tongue} work every square inch of your lover’s juicy fuckstick, before easing the back of your throat, pushing your head forward and taking in several more inches of the hung horse morph.`);
+        }
+        Text.NL();
+        Text.Out(`Adrian groans in appreciation of your oral ministrations, ${Sub ? `squirming meekly` : `caressing your ${pc.hair}`} as you bob up and down on his horsecock. Your saliva drips and trails down the length of his shaft, giving it a slick, lewd sheen, courtesy of your prick polishing.`);
+        Text.NL();
+
+        const scenes = new EncounterTable();
+        scenes.AddEnc(() => {
+            Text.Out(`Surfacing for air, you gasp, throwing the farmhand a smoldering look as you lick your lips. You jerk him off sensually as you plant kisses all the way down his equine phallus, lapping and licking his ballsack. Closing your eyes to flood your senses of touch, taste and smell, you take one of his huge testicles into your mouth and suck it, eliciting further grunts of approval from its owner.
+
+            You alternate between suckling at his head and worshipping his balls, caressing, licking, sucking, lavishing in the teeming cum repositories. ${Sub ? `Almost seems a shame that most of the virile horse’s seed these days splatters to the ground uselessly during one of Gwendy’s prostate pounding sessions… maybe you can offer him a different kind of release?` : `The kind of load these bad boys are packing could get a girl pregnant just by looking at it.`} You greedily slurp at his nuts one last time, before returning to licking his flared head, mouth open in anticipation.`);
+        }, 1.0, true);
+        scenes.AddEnc(() => {
+            Text.Out(`The talents of your mouth and your tongue are far from the only thing in your arsenal, however. You shift your weight forward and upward, pressing the sloppily lubed up girth of his thick rod into the soft valley formed by your cleavage. Using your ${pc.breasts}, you massage and play with him, saliva and pre mixing and splattering onto your ${pc.skin}.
+
+            ${player.HasBreastsBiggerThan(BreastSize.Large) ? `Even a cock as large as Adrian’s easily vanishes between your huge boobs, swallowed by titflesh on all sides. You work him for a few minutes, relishing in the turgid heat pressing against your body.` : `You pinch and tease your ${pc.nips} as you embrace his turgid length in your bosom, moaning softly around his cock.`} When you start feeling him growing close to his climax, you press your ${pc.breasts} together, surfacing for air and gasping in anticipation, ${pc.tongue} lolling hungrily just in front of his flared head.`);
+        }, 1.0, player.HasBreastsBiggerThan(BreastSize.Medium));
+        scenes.AddEnc(() => {
+            Text.Out(`Just as you are starting to get into it, you feel Adrian’s hand on the back of your head. ${inexperienced ? `Your eyes go wide. No no no no… none of your muffled protest are heeded, as the stallion slowly but surely feeds you more and more dick, far beyond your capacity. Each gentle thrust of his hips pushes his shaft another half inch down into so far untouched parts of your gullet, making you gag and gulp. No matter how much you try, his hand stays firm, allowing you the occasional desperate draft of air through your nostrils, but never leaving your throat empty.` : `Your eyes widen as you realize what the previously so timid farmhand is up to… and you are in to it. Relaxing your throat with practiced ease, you let him enter it, greedily swallowing inch after inch of his massive girth.`}
+
+            A few minutes of deepthroating later, the morph finally allows you to surface for air, and you gasp and cough, throwing him a smoldering glare. “C’mon… you’re not done.” ${player.SubDom() >= 50 ? `You give his balls a warning squeeze. He’s taking himself a few too many liberties here… but you’re too turned on to care.` : `You meekly allow yourself to be manhandled, opening your mouth wide as Adrian drags his cock over your upturned features, leaving a sticky trail in its wake.`} You return to licking and lapping at his flared head, looking up eagerly in anticipation of what he’ll do next.`);
+            player.subDom.DecreaseStat(-75, 1);
+        }, _denial ? 3.0 : 1.0, Dom);
+        const isDommy = (subdom: number) => subdom >= 50 ? 2 : subdom < 10 ? 0 : (subdom - 10) / 20.0;
+        scenes.AddEnc(() => {
+            Text.Out(`You surface briefly to tease the farmhand, telling him that you hope he isn’t gonna pop already… you are just getting started. Before he can respond, you go down on him again, this time allowing his flared head entry into your well-trained throat. The equine gives a muffled groan as you deepthroat him, too overwhelmed to give you any coherent answer.
+
+            For a few minutes, you continue to rock Adrian’s world with your expert cocksucking skills. You hum and moan around his massive shaft, the vibrations sending shivers all the way up his spine. There’s a warm sensation lower down in your throat as he deposits another batch of fresh pre. You pull up to get a taste, whisking your ${pc.tongue} around his flared head as you look up at him in anticipation.`);
+        }, 1.0 + isDommy(player.SubDom()), master);
+
+        scenes.Get();
+
+        Text.NL();
+
+        let variations = [
+            `“M-Mhm… that feels so… good…” Adrian moans, shifting his hips.`,
+            `“O-Ohh… ${pc.name}... a-almost there… f-fuck…” Adrian groans, `,
+        ];
+        if (Dom) {
+            variations = _.concat(variations, [
+                `“Mmm… fuck, you’re good with that tongue of yours… hrmf… gonna…” Adrian grunts, pawing at the ground.`,
+                `“Mmm… that’s a good… mare… g-get ready…” Adrian grunts, muscles tensing.`,
+            ]);
+        } else if (Sub) {
+            variations = _.concat(variations, [
+                `Adrian whinnies desperately, stamping the ground with one of his hoofs. “A-Ahhh! C-Can’t…!”`,
+                `“I-I won’t h-hold much longer… I-I… Ahhh!!!” Adrian moans weakly, his legs trembling.`,
+            ]);
+        }
+
+        Text.Out(`${_.sample(variations)} You can feel a twitch running through his member. The eye of his cumslit winks at you, heralding his impending climax.`);
+
+        let deepOdds = _denial ? 50 : 25;
+        if (player.SubDom() >= 50) {
+            deepOdds -= player.SubDom() - 50;
+        } else if (player.SubDom() < 0) {
+            deepOdds -= player.SubDom();
+        }
+        const deepthroat = Dom && _.random(1, 100) < deepOdds;
+        if (deepthroat) {
+            Text.NL();
+            Text.Out(`Just as you are pondering how you want to finish the stallion off, you find that your decision has been made for you. With little regard for your comfort - or anything else excluding his pleasure - the dominant stud places a firm hand on the back of your head and thrusts his hips forward, burying his massive girth in your esophagus. Adrian’s eyes are closed, and the farmhand is grunting and moaning to himself, rutting faster and faster as he nears his orgasm. ${master ?
+                `You are surprised at his rough manhandling at first, but quickly adapt to his rapid pace, eagerly deepthroating your dominant lover` :
+                `Any feeble protests from your side are completely ignored by the dominant farmhand, who proceeds to throatfuck you with gusto. You eventually resign yourself to your fate, left with little choice to do otherwise`}.`);
+            BlowjobDeepthroatEntrypoint(true);
+        } else {
+            Text.Flush();
+            // [Cum shower][Deepthroat][Outside][Denial]
+            const options: IChoice[] = [
+                {
+                    nameStr: `Cum shower`,
+                    func: () => {
+                        Text.Clear();
+                        Text.Out(`That’s it, that’s a good stud… you want this so badly… You smile, stroking him sensually, coaxing him to stop holding back, to give it all to you. ${Sub ? _.sample([
+                            `Adrian whinnies, hooves pawing at the ground as you grasp his member firmly. “I… I need to… hahh… can I c-cum, ${pc.name}? P-Please let me… hngh…!”`,
+                            `“A-Ahh… p-please, I need to cum!” Adrian bites his lip, gasping and giving you a sultry look. No need for him to worry… you’ve worked too hard for this to let him off easy now. You grab hold of his member firmly, rapidly jacking him off. “F-Fuck… ${pc.name}, t-thank youuu…!”`,
+                        ]) : Dom ? _.sample([
+                            `Adrian smirks down at you, caressing your ${pc.hair} as he grabs hold of his member, guiding it to point directly at you. “You want it that much…? Better not regret this… gonna be a big one… hng!”`,
+                            `“Mmm… you look good down there, m-mare…” Adrian huffs, slowly jerking himself off as he points his spunk cannon at your expectant ${pc.face}. “Where you belong, in front of my dick… hngh!”`,
+                        ]) : _.sample([
+                            `Adrian whinnies, blushing down at you like he doesn’t know what to do… not that it matters. You grasp hold of his member firmly. His body will give you want you need. “A-Ahh… ${pc.name}, I… c-cumming…!”`,
+                            `“A-Ahh! I-It’s coming… mph…” Adrian bites down on his lip, trembling as you firmly grasp his member, jacking him off to completion. “I-I… hngh!”`,
+                        ])} He tenses up, cockhead flaring. You close your eyes just as the first wave of his massive load hits you.`);
+                        adrian.OrgasmCum();
+
+                        Text.NL();
+                        Text.Out(`The farmhand must have been pretty pent up: the stream of seed pumped from his balls seem almost endless. In just a few blasts, your entire front - ${pc.face}, ${pc.hair} and ${pc.breasts} alike - are thoroughly coated in thick white strands of potent horse jizz. You cough, surprised for a moment as a single discharge of his bloated nuts all but flood your open mouth.
+
+                        You languish in his hot, sticky spunk basting, feeling more and more of it soaking your ${pc.skin}, like you’re being given a very lewd spa treatment. He’s utterly drenched you, and his scent fills your nostrils, overpowering your sense of smell. You languidly lick your lips and swallow, lavishing his taste.
+
+                        Eventually, the deluge relents. Adrian sighs happily, most of his nut batter successfully transferred from his balls to you and everything in a five foot radius of you. You peek an eye open, wiping a strand of stray spunk from your brow.`);
+                        Text.NL();
+                        let variations = [
+                            `“T-Thanks…” The horse-morph lets out a shuddering gasp, coming down from his high. He gives his softening beast a jerk, shaking out the last of his load to splatter on the ground.`,
+                            `The horse-morph grunts, shaking the last drops of cum from his softening member. “That was… hah… thanks.” He blushes, looking away from the mess he’s made of you.`,
+                        ];
+                        if (Dom) {
+                            variations = _.concat(variations, [
+                                `“Mm… a pretty mess you are.” The horse-morph grins at you. “I don’t mind seeing you like this… though I bet you’d look even better with your belly f-full with my cum.” You blush a little at that. “Maybe next time, eh?”`,
+                                `“Fuck, I needed that… good job, ${pc.name}.” The horse-morph smiles at you, patting your ${pc.hair} fondly. “Knew I could count on you to get me off… l-looking forward to next time.” He holds out his sticky fingers for you, letting you lick him clean.`,
+                            ]);
+                        } else if (Sub) {
+                            variations = _.concat(variations, [
+                                `“S-Sorry about that… here, let me h-help.” The horse-morph leans down to clean up the worst of the mess, dirtying himself in the progress. You smile to yourself as he licks your fingers clean of his own spunk. Despite his demure act, he sure doesn’t balk at debasing himself when prompted.`,
+                            ]);
+                        }
+                        Text.Out(`${_.sample(variations)}
+
+                        Adrian brings out a bucket of water and a towel, letting you wash the worst of it away, but even so it takes more than a few rinses to get all of it out. It’s quite some time until you consider yourself presentable, by which point the farmhand has restored his clothing and looks to be ready for work again. You put on your gear again, but can’t help feeling even more horny.`);
+
+                        adrian.slut.IncreaseStat(75, 2);
+                        TimeStep({hour: 1});
+                        player.AddLustFraction(0.5);
+                        _denial = false;
+
+                        Prompt();
+                    }, enabled: true, tooltip: `Jerk him to completion and have him mark you with his seed.`,
+                },
+                {
+                    nameStr: `Deepthroat`,
+                    func: () => {
+                        Text.Clear();
+                        Text.Out(`${Dom ? `“Mmm… that’s a good… little mare…” The farmhand smiles approvingly as you sensually wrap your lips tightly around his dick and grasp him tightly by the hips, pushing him deep into the back of your mouth` : `“W-Woah…” The farmhand looks down at you with wide eyes as you easily swallow his huge dick`}, hungrily devouring his member. You start rapidly bobbing your head on his cock, massaging his entire length with your throat, eliciting eager moans from your lover.`);
+                        BlowjobDeepthroatEntrypoint(false);
+                    }, enabled: master, tooltip: `Take him deep in your throat and swallow every drop of his hot load.`,
+                },
+                {
+                    nameStr: `Outside`,
+                    func: () => {
+                        Text.Clear();
+                        const { tallPC, shortstackPC } = player.HeightDiff(adrian);
+                        Text.Out(`The ${Dom ? `stallion` : `farmhand`} looks just about ready to blow, and judging by the size of his swollen balls, it’ll be a big one. You smoothly rise, leaning into Adrian’s side and whispering sweet nothings to him as you jerk off his throbbing member, getting out of its line of fire.`);
+                        Text.NL();
+                        if (Sub) {
+                            const c = new GP.Plural(player.NumCocks() > 1);
+                            Text.Out(`“N-Ngh… y-you… stopped…?” The horse-morph whimpers, looking ${tallPC ? `up` : shortstackPC ? `down` : `sideways`} at you. Fufu… he thought you’d swallow his mess? Maybe if he’s a good boy you’ll consider it… for now, you’ve got something else in mind.
+
+                            You work his shaft relentlessly, caressing the massive saliva-slickened pillar of cockflesh. ${pc.hascock(`Your ${pc.cocks} rub${c.notS}`, `You rub your sopping wet ${pc.vag}`)} against his muscular thigh through your undergarments, as your free hand sneaks up behind the preoccupied equine. He wants to cum…? You suddenly let go of his twitching dick, which bobs up and down, dripping sloppy pre on the ground. Well… go right ahead!
+
+                            Adrian whinnies loudly as you plant a sharp slap on his exposed buttocks. The unexpected stimulation is the last drop for the farmhand, and you watch mirthfully as his horsecock twitches, firing off rope after rope of thick seed that splashes uselessly on the ground.${player.SubDom() >= 60 ?
+                            ` There’s a good boy… but good boys clean up their messes, right? The submissive equine’s eyes widen as you bring your cum slick fingers to his lips, presenting them for licking. After only a moment’s hesitation, he complies, eagerly suckling at your digits.` :
+                            ``} You pat him on the cheek, cooing at him encouragingly as he shudders, riding out his orgasm.`);
+                        } else if (Dom) {
+                            Text.Out(`“C’mere, you… mmph…” Adrian hungrily pulls you into a sloppy kiss while you jack him off, your tongues fencing with each other even as he starts pumping out his seed. You can feel his girthy phallus twitching in your ${pc.hand}, hot cum spraying from its flared head and dripping down on your fingers.
+
+                            You lean into his kiss, riding out his messy orgasm. “Mmm… that’s a good ${pc.mfFem(`boy`, `girl`)},” the stallion praises you, nuzzling against you and playfully nibbling your neck. “You made quite the mess…” He trails off suggestively, wearing a ghost of a smile.
+
+                            ${player.Slut() >= 40 ? `You lean back, looking deep into his eyes as you slowly raise your sticky ${pc.hand} to your lips and sensually lick yourself clean.` : `You blush, looking away from him. You hurriedly wipe your hand of his sticky seed.`} The equine chuckles, patting your ${pc.hair}.`);
+                        } else {
+                            Text.Out(`It’s not long before the equine succumbs to your fervent handjob, spraying the ground in front of him with rope after rope of his thick seed. You keep tugging at his horsecock until he’s thoroughly spent.
+
+                            “Unf… haah… t-thanks… that felt… nice.” The farmhand blushes, looking away, quite flustered after his climax. “M-Maybe next time, you can f-finish me off with your… m-mouth?” Next time, huh? He sure is growing bold, isn’t he? He blushes even brighter. You say you’ll think about it, petting his softening member familiarly.`);
+                        }
+                        adrian.OrgasmCum();
+                        Text.NL();
+                        Text.Out(`The two of you slowly come down from your high, rinsing yourselves with some water and restoring your clothes to a somewhat presentable state. You left quite a mess… but it was worth it.`);
+
+                        adrian.slut.IncreaseStat(75, 1);
+                        TimeStep({hour: 1});
+                        player.AddLustFraction(0.3);
+                        _denial = false;
+
+                        Prompt();
+                    }, enabled: true, tooltip: `Move out of the way and have him spew his seed on the ground while you jerk him off.`,
+                },
+                {
+                    nameStr: `Denial`,
+                    func: () => {
+                        Text.Clear();
+                        Text.Out(`You give Adrian a sultry smile as your hand constricts sharply around his root, squeezing his cumchute closed tight. The farmhand’s horsecock twitches desperately, his nuts churning with repressed need. You wag your finger. Naughty horsies don’t get to cum as easily as that… You’ve had your fun, you’re sure he can find some way to solve this issue on his own, right?`);
+                        Text.NL();
+
+                        const denyDenial = Dom && player.SubDom() < 60 && (_.random(1, 70) >= player.SubDom());
+
+                        if (Dom && _denial) {
+                            Text.Out(`“Ngh… that does it!” Adrian growls, slapping your hand away. You gasp as he glowers down at you. “I think someone is in n-need of a lesson!” Oh? And whatever punishment does the stallion have in store for his misbehaving little mare?
+
+                            Rather than answering, the muscular equine just tosses you up over one shoulder as if you were a sack of grain. Adrian carries you through the barn, ignoring the surprised stares of farmhands and livestock alike.`);
+                            // TODO Leadin
+                            DomProperFuckedEntrypoint();
+                        } else if (denyDenial) {
+                            Text.Out(`“Ngh… don’t think I’ll let something like that slide…” Adrian grunts, glowering down at you. “I’m gonna get off, the only question is how.” You blush and ease your grip, licking your lips and getting a taste of his potent cum. His cock is bobbing in front of you, juicy, enticing and full of delicious horse spunk. You should probably do what he says…`);
+                            player.subDom.DecreaseStat(0, 1);
+                            Text.Flush();
+
+                            _.last(options).enabled = false;
+                            Gui.SetButtonsFromList(options);
+                        } else {
+                            Text.Out(`“B-But…! Ngh…” You chuckle at his struggling, but remain unrelenting. Maybe next time… if he keeps being a good boy. The equine shudders, his dick slowly softening. His balls remain swollen and heavy, denied their purpose. He’ll probably be feeling this one for a while…
+
+                            ${Dom ?
+                                `“Hrm… ya got spunk, ${pc.name},” Adrian rumbles, giving you a playful punch on the shoulder. “I’m gonna give you a warning… I’m gonna need to take care of this, at that’ll mean fucking whoever I run into next. If you want to stay on your high horse… better stay out of my way for a while, got it? Or, you know, don’t.” His confident smirk reduces the weight somewhat of your show of power. Still, he relents. For now.` : Sub ?
+                                `“H-Hah… I… alright.” Adrian whinnes, hanging his head. You give his balls a friendly pat, making the hulking equine shiver. Good, he knows his place. You’ll be back to play with him later… when you feel like it. He nods meekly, though you catch him looking around for Gwendy, maybe in the hopes that she’ll ‘reprimand’ him.` :
+                                `“I-I was so close… why d-did you…?” Adrian glowers at you accusingly. Come on now… you’ve been nice to him; shouldn’t he return the favor now and then? His eyes widen slightly at that. “I… ugh.” He shakes his head and looks away, blushing at your knowing grin.`} You and the farmhand restore your clothes, the horse-morph still sporting quite a prominent tent on the front of his pants.`);
+
+                            adrian.slut.IncreaseStat(75, 2);
+                            player.subDom.IncreaseStat(60, 1);
+                            player.AddLustFraction(0.1);
+                            TimeStep({hour: 1});
+                            _denial = true;
+
+                            Prompt();
+                        }
+                    }, enabled: player.SubDom() >= 30, tooltip: `${Dom ? (_denial ? `You’ve been blue balling the stallion for a while now… let’s see how far you can push him before he pushes back.` : `Deny the stallion his pleasure. He might have something to say about it… but that could also be rather fun.`) : `He doesn’t get to cum today, no matter how much he begs.`}`,
+                },
+            ];
+            Gui.SetButtonsFromList(options);
+        }
+    }
+
+    export function BlowjobDeepthroatEntrypoint(forced: boolean) {
+        const adrian: Adrian = GAME().adrian;
+        const player: Player = GAME().player;
+        const pc = player.Parser;
+        const { Dom } = _AdrianState();
+
+        Text.NL();
+        if (Dom) {
+            Text.Out(`${_.sample([
+                `“Mmm… fuck, your mouth is good, ${pc.name}... just a little longer…”`,
+                `“Ngh… gonna blow my load soon… gonna fill you up, ${pc.name}...”`,
+                `“F-Fuck, that feels good… ngh… your reward is coming… just a little more…”`,
+                `“Mmm… your throat is the best, ${pc.name}... gonna give you your treat…”`,
+                ])} Adrian grunts, grinding his girth into you as deep as it will go.`);
+        } else {
+            Text.Out(`${_.sample([
+                `“A-Ahh… ${pc.name}... I’m gonna… ngh!”`,
+                `“H-Hah… h-holy S-Spirits… c-cumming…!”`,
+                `“Ahh! C-Can’t hold it any l-longer… ${pc.name}... I’m… gonna…!”`,
+                `“Ngh! Ahh… s-sorry, I’m gonna… ahh… here it c-comes!”`,
+                ])} Adrian twitches and tenses up. The farmhand muffles his high pitched whinny with his hand, biting down on his lip.`);
+        }
+        Text.Out(` You can feel his shaft throbbing in your throat urgently, expanded by an endless flood of hot horse seed pumped directly from his swollen nuts. Your bowels are blasted by his thick load, which quickly bloats your stomach, threatening to overflow it.`);
+
+        player.AddSexExp(1);
+        adrian.OrgasmCum();
+
+        Text.NL();
+        if (forced) {
+            Text.Out(`You’re fading, choking on close to twenty inches of horsecock, feebly tapping the stallion’s thigh for relief. By the time he acknowledges your plight, you’ve almost blacked out. With excruciating slowness, Adrian withdraws his massive member, flopping it messily against your ${pc.face} as you cough and gasp for air, drooling cum everywhere.
+
+            ${_.sample([
+                `“Sorry… lost control there for a bit. Heh.” His wide grin somewhat takes away from the sincerity of his apology.`,
+                `“Ahh… I needed that. Sorry if I was a bit rough - you’ll get used to it with some more practice.” Judging by his wide grin, he’d be more than happy to help out in that regard.`,
+                `“Good job, ${pc.name}.” The grinning farmhand reaches down to pat you on the head. “I knew you could do it.”`,
+            ])} You glower up at him, wiping a glob of messy spunk from your lips.`);
+            player.subDom.DecreaseStat(-75, 1);
+        } else {
+            Text.Out(`You savor every drop, nursing and suckling the ${Dom ? `stallion` : `horse boy`}’s shaft as he comes down from his high. When you slowly pull yourself off him, sucking every inch spotless as you go. You smirk up at him and swallow the last of his cum, licking your lips and feeling thoroughly satisfied.`);
+        }
+        Text.NL();
+        Text.Out(`${Dom ? `Adrian wipes himself off before tossing you a slightly cum soaked towel` :
+        `Adrian helps you clean up`}, and the two of you restore your clothes to the best of your abilities. Little can be done about the heavy smell of sex reeking from you, though.`);
+
+        adrian.slut.IncreaseStat(75, 2);
+        TimeStep({hour: 1});
+        player.AddLustFraction(0.3);
+        _denial = false;
+
+        Prompt();
+    }
+
+    export function DomProperFuckedEntrypoint() {
+        const player: Player = GAME().player;
+        const adrian: Adrian = GAME().adrian;
+        // TODO PLACEHOLDER
+        Text.NL();
+        Text.Out(`Giving you little chance to protest, the stallion straps you into one of the stalls, securing you with thick ropes. Over the course of the next couple of hours, he proceeds to fuck you with gusto, leaving you a ruined mess as reward for your transgression. When you’re finally let go, you wobble away, followed by the knowing eyes of the other farmhands.`);
+
+        Sex.Anal(adrian, player);
+        player.FuckAnal(player.Butt(), adrian.FirstCock(), 3);
+        if (player.FirstVag()) {
+            Sex.Vaginal(adrian, player);
+            player.FuckVag(player.FirstVag(), adrian.FirstCock(), 0);
+        }
+
+        TimeStep({hour: 5});
+        player.OrgasmCum(3);
+        player.subDom.DecreaseStat(-100, 3);
+        adrian.slut.IncreaseStat(100, 5);
+
         Text.Flush();
         Gui.NextPrompt();
     }
