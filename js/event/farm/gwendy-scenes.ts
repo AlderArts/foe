@@ -983,7 +983,7 @@ export namespace GwendyScenes {
 			() => {
 				Text.Out(`“There came a time when I was trusted enough to go about the neighboring area of the farm unchaperoned. Well, that’s what I like to tell myself at least; more likely is that I took advantage of the confusion of the busy harvest season to roam wider than I previously had, which worried my parents to no end.” Gwendy shakes her head ruefully. “In hindsight, they were probably right to be worried.”
 
-				“I was ten or so, gangly, skinny-kneed and bubbling with adventure lust and annoying questions. The farm hands were probably glad to have me out of their hair for a while. One day, I set to exploring a nearby forest I’d been warned about entering. It was there that I first met Waffles.”
+				“I was ten or so, gangly, skinny-kneed and bubbling with adventure lust and annoying questions. The farmhands were probably glad to have me out of their hair for a while. One day, I set to exploring a nearby forest I’d been warned about entering. It was there that I first met Waffles.”
 
 				“He was in a sorry state - not much more than a scraggly and matted ball of gray fur, barely more than a pup, hungry and very frightened. At the time, I thought him a stray dog, perhaps abandoned by some passing trader - I’d seen plenty of caravans who kept guard dogs. I fed him some dried meat from my knapsack, which he greedily wolfed down. We hit it off after that, but he was still suspicious and refused my attempts to make him follow me out of the forest.”
 
@@ -3267,7 +3267,7 @@ export namespace GwendyScenes {
 
 				“You’re such a tease… you just keep pushing me to see how far I’ll go, don’t you?” The farmer gives you a smoldering glare. “Be careful, my patience with your cockiness is wearing thin. I have some thoughts on what I’ll do if you challenge me and lose again, something I’m sure you’d <b>love</b>… but for now, I’m gonna use you good.”
 
-				Gesturing imperiously, she calls you to follow her back to the loft, hips swaying seductively. There are some grins and envious looks from the other farm hands as she leads you along. They no doubt suspect what’s going on between the two of you - Gwendy hasn’t exactly been secretive about her little victory celebrations.`);
+				Gesturing imperiously, she calls you to follow her back to the loft, hips swaying seductively. There are some grins and envious looks from the other farmhands as she leads you along. They no doubt suspect what’s going on between the two of you - Gwendy hasn’t exactly been secretive about her little victory celebrations.`);
 			} else {
 				Text.Out(`“Think your stamina will hold out better than last time?” Gwendy grins, giving you a friendly jab in the side. “Don’t think I’ll go easy on you just ‘cause we’ve been working all day; I’ve still got plenty left in me… and I’m gonna release a bit of pent up stress with you.” With that, she tugs you along back to the loft in the rafters of the barn, teasing you all the way.`);
 			}

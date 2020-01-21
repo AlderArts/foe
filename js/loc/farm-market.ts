@@ -209,7 +209,7 @@ export namespace MarketScenes {
         if (rigard.Visa()) {
             Text.Add("Both you and Gwendy pull the papers out and let the guards inspect them. They hand them back with lackluster approval, but let you in nonetheless.", parse);
         } else {
-            Text.Add("Gwendy holds her papers out for the guards, which they approve rather quickly. When they ask you for yours, Gwendy explains to them that you’re a farm hand that came to accompany her for her business today. ", parse);
+            Text.Add("Gwendy holds her papers out for the guards, which they approve rather quickly. When they ask you for yours, Gwendy explains to them that you’re a farmhand that came to accompany her for her business today. ", parse);
             Text.NL();
             Text.Add("She also tells them you’ll get a visa as soon as you have finished in the market district, which seems to work as the guards shrug their shoulders and let you pass. You murmur a thank you, but she waves it off.", parse);
             Text.NL();
