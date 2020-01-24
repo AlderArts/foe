@@ -26,7 +26,7 @@ import { BurrowsFlags } from "./burrows-flags";
 
 export function InitBurrows() {
     InitLagon(OpheliaScenes);
-	   WORLD().SaveSpots.Burrows = BurrowsLoc.Lab;
+    WORLD().SaveSpots.Burrows = BurrowsLoc.Lab;
 }
 
 // Create namespace

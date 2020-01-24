@@ -180,7 +180,7 @@ export namespace VenaScenes {
                     Text.Add("You try to explain that Lagon isn’t in charge anymore, Ophelia is, but Vena doesn’t seem to grasp the concept.", parse);
                 } else if (ophelia.InPartyAndBroken()) {
                     Text.Add("The matriarch gives Ophelia a happy squee, embracing her. <i>“Me here, mother!”</i> It’s actually quite touching.", parse);
- }
+                }
                 Text.Flush();
                 TimeStep({minute: 5});
             }, enabled : true,
