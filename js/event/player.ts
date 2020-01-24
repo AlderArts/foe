@@ -6,7 +6,7 @@
 
 import { GetDEBUG } from "../../app";
 import { Images } from "../assets";
-import { Gender } from "../body/gender";
+import { Gender, GenderPref } from "../body/gender";
 import { EncounterTable } from "../encountertable";
 import { DrunkLevel, Entity } from "../entity";
 import { GAME, NAV, TimeStep } from "../GAME";
@@ -67,6 +67,7 @@ export class Player extends Entity {
 		this.sexlevel     = 1;
 
 		this.flags.startJob = JobEnum.Fighter;
+		this.flags.genderPref = GenderPref.Auto;
 
 		this.summons = [];
 
@@ -149,6 +150,20 @@ export class Player extends Entity {
 	}
 	public plural() {
 		return true;
+	}
+
+	public mfFem(male: string, female: string) {
+		const pref: GenderPref = this.flags.genderPref;
+		if (pref === GenderPref.Male) { return male; }
+		if (pref === GenderPref.Female) { return female; }
+		return super.mfFem(male, female);
+	}
+
+	public mfTrue(male: string, female: string) {
+		const pref: GenderPref = this.flags.genderPref;
+		if (pref === GenderPref.Male) { return male; }
+		if (pref === GenderPref.Female) { return female; }
+		return super.mfTrue(male, female);
 	}
 
 	public Magic() {
@@ -719,6 +734,46 @@ export class Player extends Entity {
 		});
 		// Equip, stats, job, switch
 		player.InteractDefault(options, switchSpot, true, true, true, false);
+		options.push({ nameStr: "Gender",
+			func() {
+				Text.Clear();
+				Text.Out(`How do you wish to present yourself to the world?`);
+				Text.Flush();
+
+				const GenderPrompt = () => {
+					const curPref: GenderPref = player.flags.genderPref;
+					const opts: IChoice[] = [
+						{
+							nameStr: `Auto`,
+							func: () => {
+								player.flags.genderPref = GenderPref.Auto;
+								GenderPrompt();
+							}, enabled: true, tooltip : `Gender expression will automatically change with your appearance and physical sex.`,
+							image: curPref === GenderPref.Auto ? Images.imgButtonEnabled2 : Images.imgButtonEnabled,
+						},
+						{
+							nameStr: `Male`,
+							func: () => {
+								player.flags.genderPref = GenderPref.Male;
+								GenderPrompt();
+							}, enabled: true, tooltip : `You will project a masculine demeanor, regardless of your appearance, and people around you will refer to you accordingly.`,
+							image: curPref === GenderPref.Male ? Images.imgButtonEnabled2 : Images.imgButtonEnabled,
+						},
+						{
+							nameStr: `Female`,
+							func: () => {
+								player.flags.genderPref = GenderPref.Female;
+								GenderPrompt();
+							}, enabled: true, tooltip : `You will project a feminine demeanor, regardless of your appearance, and people around you will refer to you accordingly.`,
+							image: curPref === GenderPref.Female ? Images.imgButtonEnabled2 : Images.imgButtonEnabled,
+						},
+					];
+					Gui.SetButtonsFromList(opts, true, () => { player.Interact(switchSpot); });
+				};
+				GenderPrompt();
+			}, enabled : true,
+			tooltip : "Change your gender preference.",
+		});
 
 		Gui.SetButtonsFromList(options, true, NAV().PartyInteraction);
 	}

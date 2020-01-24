@@ -8,6 +8,12 @@ enum Gender {
 	LAST   = 4,
 }
 
+export enum GenderPref {
+	Auto = 0,
+	Male = 1,
+	Female = 2,
+}
+
 namespace Gender {
 	export function Desc(gender: Gender) {
 		switch (gender) {
