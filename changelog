@@ -7,7 +7,7 @@ CHANGELOG for Fall of Eden
 
 Version 0.5.6
 -------------
-* Feature: Can select a gender preference for the player, which will override how NPCs refer to you. By default, this is set to Auto, which will go by your appearance (old behavior). This will not change which scenes are available to you.
+* Feature: Can select a gender preference for the player, which will override how NPCs refer to you. By default, this is set to Auto, which will go by your appearance (old behavior). Holler if there are any inconsistencies resulting from this, or if there's any scenes not adherring to it. This will not change which scenes are available to you, you still need the right parts.
 
 --------------------------------------------
              PREVIOUS VERSIONS

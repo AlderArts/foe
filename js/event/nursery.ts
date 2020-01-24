@@ -275,11 +275,11 @@ export namespace NurseryScenes {
 				Text.NL();
 				Text.Add("The wrinkled old man is in his usual spot by the fire, his long pipe smoking away, and looks up at you as you approach. His eyes widen a little as he takes in the newborn [infant][s] in your arms, but the mood soon passes and he settles back into his usual grumpy, taciturn self.", parse);
 				Text.NL();
-				if (player.Gender() === Gender.male) {
+				if (player.FirstVag()) {
+					Text.Add("<i>“So,”</i> he says at last. <i>“You went and got yourself knocked up - well, either that, or something went and knocked you up. Same difference, really. And now that it’s run its course, I suppose you want me to do something about it?”</i>", parse);
+				} else { // Male-ish
 					parse.k = num > 1 ? "some kids" : "a kid";
 					Text.Add("<i>“So,”</i> he says at last. <i>“You went and found some girlie and knocked her up, and now you got [k] on your hands? I suppose you want me to do something about it?”</i>", parse);
-				} else { // Female
-					Text.Add("<i>“So,”</i> he says at last. <i>“You went and got yourself knocked up - well, either that, or something went and knocked you up. Same difference, really. And now that it’s run its course, I suppose you want me to do something about it?”</i>", parse);
 				}
 				Text.NL();
 

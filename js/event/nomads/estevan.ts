@@ -305,7 +305,7 @@ export namespace EstevanScenes {
 			});
 		}
 		// Sex
-		if (player.Gender() === Gender.male) {
+		if (!player.FirstVag()) {
 			const tooltip = estevan.HadGaySex() ? "Split a few drinks with Estevan. Wine isn’t the only cork the satyr likes to pop when he’s drunk." : "The satyr seem to be a ladies man. Try to… convince him to make an exception.";
 			options.push({ nameStr : "Sex",
 				func : EstevanScenes.SexGay, enabled : true,

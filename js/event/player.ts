@@ -166,6 +166,13 @@ export class Player extends Entity {
 		return super.mfTrue(male, female);
 	}
 
+	public Gender() {
+		const pref: GenderPref = this.flags.genderPref;
+		if (pref === GenderPref.Male) { return Gender.male; }
+		if (pref === GenderPref.Female) { return Gender.female; }
+		return super.Gender();
+	}
+
 	public Magic() {
 		return GlobalScenes.MagicStage1();
 	}

@@ -150,31 +150,31 @@ export class Rosalin extends Entity {
 	}
 
 	public heshe() {
-		const gender = this.flags.PrefGender;
+		const gender: Gender = this.flags.PrefGender;
 		if (gender === Gender.male) { return "he"; } else { return "she"; }
 	}
 	public HeShe() {
-		const gender = this.flags.PrefGender;
+		const gender: Gender = this.flags.PrefGender;
 		if (gender === Gender.male) { return "He"; } else { return "She"; }
 	}
 	public himher() {
-		const gender = this.flags.PrefGender;
+		const gender: Gender = this.flags.PrefGender;
 		if (gender === Gender.male) { return "him"; } else { return "her"; }
 	}
 	public HimHer() {
-		const gender = this.flags.PrefGender;
+		const gender: Gender = this.flags.PrefGender;
 		if (gender === Gender.male) { return "Him"; } else { return "Her"; }
 	}
 	public hisher() {
-		const gender = this.flags.PrefGender;
+		const gender: Gender = this.flags.PrefGender;
 		if (gender === Gender.male) { return "his"; } else { return "her"; }
 	}
 	public HisHer() {
-		const gender = this.flags.PrefGender;
+		const gender: Gender = this.flags.PrefGender;
 		if (gender === Gender.male) { return "His"; } else { return "Her"; }
 	}
 	public hishers() {
-		const gender = this.flags.PrefGender;
+		const gender: Gender = this.flags.PrefGender;
 		if (gender === Gender.male) { return "his"; } else { return "hers"; }
 	}
 
@@ -3391,7 +3391,7 @@ export namespace RosalinScenes {
 		parse.knees = player.LowerBodyType() !== LowerBodyType.Single ? " onto your knees" : "";
 		Text.Add("The view is rather erotic, and you find your own [genDesc] engorging quite speedily with untamed lust. Rosalin smiles as you draw a bit nearer, waving [hisher] cock back and forth tantalizingly, the unmistakable scent of musky pheromones rolling off [himher] in waves. You inhale before sighing. There's something about the way [heshe] smells ever since growing that cock that makes you just want to... want to... Mmm, you drop down[knees] with another blissful exhalation, making room so that you can inhale a more concentrated dose of [hisher] pheromones from up close.", parse);
 		Text.NL();
-		parse.boygirl = player.Gender() === Gender.male ? "boy" : "girl";
+		parse.boygirl = player.mfFem(`boy`, `girl`);
 		if (sexState === RosalinSexState.Rut) {
 			Text.Add("<i>“That's right... good [boygirl]. Now hurry up, before I decide to ram this down your throat myself!”</i> The [raceDesc] alchemist huffs, panting with need, barely able to contain [himher]self.", parse);
 		} else {

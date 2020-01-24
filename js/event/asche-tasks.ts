@@ -392,7 +392,7 @@ export namespace AscheTasksScenes {
 			parse = player.ParserTags(parse);
 
 			Text.Clear();
-			if (player.Gender() === Gender.female && player.Femininity() >= 0) {
+			if (player.FirstVag() && player.Femininity() >= 0) {
 				Text.Add("The shaman fidgets uncomfortably at your suggestion and swallows hard. <i>“I… you can’t mean to...”</i>", parse);
 				Text.NL();
 				Text.Add("Oh? You run your hands across your [skin], lingering over your [breasts] and [butt], then grin at him - and at the bulge on his loincloth, growing by the moment. Who says you can’t?", parse);

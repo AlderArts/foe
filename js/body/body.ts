@@ -350,11 +350,11 @@ export class Body implements IBody {
 			return Gender.male;
 		} else if (cocks === 0 && vags > 0) {
 			return Gender.female;
- } else if (cocks > 0 && vags > 0) {
+		} else if (cocks > 0 && vags > 0) {
 			return Gender.herm;
- } else {
+		} else {
 			return Gender.none;
- }
+		}
 	}
 	public GenderStr() {
 		return Gender.Desc(this.Gender());

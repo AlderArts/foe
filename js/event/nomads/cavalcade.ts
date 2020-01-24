@@ -399,8 +399,8 @@ export namespace NCavalcadeScenes {
 
 				if (virgin) {
 					Text.Add("<i>“Wait- WHAT?!”</i> Cale looks around him bewildered. <i>“B-but...”</i> No buts. Just his butt.", parse);
-					if (player.Gender() === Gender.female || cocksInAss.length === 0) {
-						if (player.Gender() === Gender.female) {
+					if (!player.FirstCock() || cocksInAss.length === 0) {
+						if (!player.FirstCock()) {
 							Text.Add(" <i>“B-but you don’t even have a… you know...”</i> he falters.", parse);
 						} else {
 							Text.Add(" <i>“B-but that… thing is <b>way</b> too big! It won’t fit!”</i> he stammers.", parse);
@@ -432,8 +432,8 @@ export namespace NCavalcadeScenes {
 					Text.Add("<i>“Fine, let’s get this over with,”</i> he sighs. Grinning, you tell him to turn around and bend over the log. <i>“What, here?”</i> he protests, but lowers his head as you sternly remind him about the rules again. <i>“Okay, okay, just be gentle- WILL YOU STOP LAUGHING?”</i> the wolf exclaims, his raw nerves chafing at Estevan’s roaring laughter. It takes a bit of further coaxing, but you finally have Cale propped up over the log, butt sticking up in the air.", parse);
 				} else if (cale.Slut() < 30) {
 					Text.Add("<i>“What? Here?”</i> Cale looks around him furtively, wincing at Estevan. Come on, it’s not like he’s got anything to hide, is there? <i>“I… I suppose not,”</i> he mumbles, scratching his head.", parse);
-					if (player.Gender() === Gender.female || cocksInAss.length === 0) {
-						if (player.Gender() === Gender.female) {
+					if (!player.FirstCock() || cocksInAss.length === 0) {
+						if (!player.FirstCock()) {
 							Text.Add(" <i>“Do you even have, you know...”</i> he falters, looking curious.", parse);
 						} else {
 							Text.Add(" <i>“N-no way that will fit,”</i> he says, eyeing your bulge nervously.", parse);
@@ -459,8 +459,8 @@ export namespace NCavalcadeScenes {
 					Text.Add("This way was more fun, plus it adds another exciting level to Cavalcade.", parse);
 					Text.NL();
 					Text.Add("<i>“Guess that’s true,”</i> the wolf agrees. <i>“How do you want me?”</i> You tell him to turn around and bend over. Cale eagerly jumps to obey you, his tail wagging excitedly.", parse);
-					if (player.Gender() === Gender.female || cocksInAss.length === 0) {
-						if (player.Gender() === Gender.female) {
+					if (!player.FirstCock() || cocksInAss.length === 0) {
+						if (!player.FirstCock()) {
 							Text.Add(" <i>“Do you have a nice big cock for me?”</i> he wonders, sounding pretty eager.", parse);
 						} else {
 							Text.Add(" <i>“I… ah, sorry, but I don’t think my ass is quite <b>that</b> flexible yet,”</i> he says, regretfully eyeing your bulge.", parse);
