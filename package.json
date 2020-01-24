@@ -1,7 +1,7 @@
 {
   "name": "FoE",
-  "version": "0.5.6",
-  "description": "Horsing around",
+  "version": "0.5.7",
+  "description": "E+",
   "private": true,
   "scripts": {
     "build": "webpack",
