@@ -229,7 +229,7 @@ export namespace MothgirlScenes {
 						Text.Add("[HeShe] sighs. <i>”Whatever... you’re the boss,”</i> [heshe] shrugs.", parse);
 						Text.NL();
 
-						terry.relation.DecreaseStat(30, -1);
+						terry.relation.DecreaseStat(30, 1);
 					}
 					Text.Add("<i>“Sure, whatever. Take it!”</i> you say, taking one of your coin pouches and tossing [coin] coins her way. She nimbly catches her ill-gotten gains, hooking the pouch onto her golden belt with a self-satisfied smile.", parse);
 					Text.NL();

@@ -1285,7 +1285,7 @@ export namespace LagonScenes {
                         Text.NL();
                         Text.Add("<i>“Now, if there’s nothing else, be on your way traveler,”</i> Lagon dismisses you curtly, putting a firm hand on his daughter’s head and pressing down until the girl is almost choking on his dick. He seems to be in a bad mood; perhaps it’s best to leave for now.", parse);
                         Text.Flush();
-                        lagon.relation.DecreaseStat(0, -2);
+                        lagon.relation.DecreaseStat(0, 2);
                         Gui.NextPrompt();
                     }, enabled : !burrows.LagonAlly(),
                     tooltip : "That’s not how he should treat his wife.",

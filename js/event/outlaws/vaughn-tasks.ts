@@ -1027,7 +1027,7 @@ export namespace VaughnTasksScenes {
 			Text.NL();
 			Text.Add("<i>“Well, yes, and they were more than willing to come, ‘cause they thought that the bastard was going to get his dues. Seems like they were disappointed, but them’s the breaks.</i>", parse);
 
-			outlaws.relation.DecreaseStat(0, -4);
+			outlaws.relation.DecreaseStat(0, 4);
 
 			VaughnTasksScenes.Snitch.DebriefFailure(parse);
 		}
