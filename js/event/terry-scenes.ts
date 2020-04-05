@@ -4676,7 +4676,7 @@ export namespace TerryScenes {
 					terry.relation.DecreaseStat(0, 1);
 				} else if (terry.Relation() >= 30) {
 					terry.relation.IncreaseStat(45, 1);
-	}
+				}
 				Text.NL();
 
 				TimeStep({hour: 1});
@@ -5214,9 +5214,9 @@ export namespace TerryScenes {
 						Text.Add("<i>“Hng! T-take it easy, [playername].”</i>", parse);
 					} else if (terry.Slut() < 60) {
 						Text.Add("<i>“Ugh! It’s cold!”</i> the [foxvixen] complains.", parse);
-	} else {
+					} else {
 						Text.Add("The [foxvixen] shudders as you begin massaging the lube into [hisher] tight rosebud. <i>“Don’t worry - it’s cold but I’m fine. Just start fingering me, please.”</i>", parse);
-	}
+					}
 					Text.NL();
 					Text.Add("With your thumb, you continue spiraling around and around Terry’s tailhole until you deem the surface sufficiently lubed. Now, it’s time to start lubing [himher] up inside... Extending your finger, you begin to push gently but firmly at [hisher] newly creamed hole, patiently worming the very tip of your finger inside of the [foxvixen]’s ass, eliciting a moan from the vulpine. [HeShe] adjusts [himher]self, bucking back against your digit slightly.", parse);
 					if (terry.Slut() >= 60) {
@@ -8608,9 +8608,9 @@ export namespace TerryScenes {
 				Text.Add("You curl your toes", parse);
 			} else if (player.IsNaga()) {
 				Text.Add("You curl your tail-end around [hisher] leg", parse);
-	} else {
+			} else {
 				Text.Add("Your lower body becomes agitated", parse);
-	}
+			}
 			Text.Add(" as you feel [hisher] knot stretching you oh-so-wonderfully, tugging at your insides as Terry does [hisher] best to pull it out from your [vag].", parse);
 			Text.NL();
 			parse.b = player.HasBalls() ? Text.Parse("r [balls]", parse) : "";
@@ -9981,9 +9981,9 @@ export namespace TerryScenes {
 			Text.Add("nervously.", parse);
 		} else if (terry.Relation() < 60) {
 			Text.Add("inquisitively.", parse);
-	} else {
+		} else {
 			Text.Add("expectantly.", parse);
-	}
+		}
 		parse.rel = terry.Relation() >= 30 ? Text.Parse(", the way you know [heshe] likes it", parse) : "";
 		Text.Add(" Stopping at arm’s length, you reach out and tenderly caress [hisher] cheek, drawing your fingers along [hisher] dainty features before moving to stroke [hisher] hair. You admire the way it parts around your digits like silk, then scratch [himher] at the base of [hisher] ear[rel].", parse);
 		Text.NL();
@@ -10035,13 +10035,13 @@ export namespace TerryScenes {
 			Text.Add("The [foxvixen]’s girlishly flat chest has nothing to really play with... except, of course, for [hisher] perky little nipples. Drawn to them like iron filings to a magnet, you start to caress the closest nub. Your fingers stroke tender circles around [hisher] areolae, brushing [hisher] nipple until it starts to swell. Once it has proudly risen up, you gently pinch it between forefinger and thumb.", parse);
 		} else if (terry.Cup() < TerryFlags.Breasts.Bcup) {
 			Text.Add("Terry’s dainty little A-cups are just big enough that you can savor their softness against your fingertips as you caress them. You run your fingers through the silken fur to brush the sensitive skin beneath before spiraling inexorably toward [hisher] dainty nipples. You can feel [himher] hardening under your touch, each nub rising as you lavish it tenderly.", parse);
-	} else if (terry.Cup() < TerryFlags.Breasts.Ccup) {
+		} else if (terry.Cup() < TerryFlags.Breasts.Ccup) {
 			Text.Add("The perky B-cup is just the right size to fit into the palm of your hand. Soft fur over soft flesh squishes in your grip as you affectionately caress the [foxvixen]’s boob, alternatively running your fingers back and forth across its suppleness and kneading it between your fingers.", parse);
-	} else if (terry.Cup() < TerryFlags.Breasts.Dcup) {
+		} else if (terry.Cup() < TerryFlags.Breasts.Dcup) {
 			Text.Add("Terry’s proud C-cup is just begging for you to grope it, squishing wonderfully as you knead and caress it. You can feel the heavy fullness of Terry’s breast in your grip as you attempt to palm the pillowy orb.", parse);
-	} else {
+		} else {
 			Text.Add("The [foxvixen]’s over-inflated tits are far too big to encompass with just one hand... but that doesn’t mean you can’t enjoy yourself trying. Your fingers sink into supple boobflesh as you tenderly squeeze it, kneading the luscious breast as best you can.", parse);
-	}
+		}
 		Text.NL();
 		Text.Add("Terry arches [hisher] back, moaning profusely at your ministrations. That’s a good [boygirl]; now, let’s see how close [heshe] is to being ready...", parse);
 		Text.NL();
@@ -10958,9 +10958,9 @@ export namespace TerryScenes {
 					Text.Add("Poor little [foxvixen]; [heshe] looks like [heshe]’s still waiting for the other boot to drop. Still, you can fix that...", parse);
 				} else if (terry.Relation() < 60) {
 					Text.Add("You bite back a chuckle; sweet little [foxvixen], [heshe] just looks so lost. Well, you can help [himher] with that...", parse);
-	} else {
+				} else {
 					Text.Add("Aw, how cute; [heshe]’s still so easy to embarrass, even after all you’ve done together. But that’s just part of [hisher] charms. Well, you know how to get [himher] in the proper mood...", parse);
-	}
+				}
 				Text.NL();
 				Text.Add("You reach out with one hand and tenderly take hold of the [foxvixen]’s stallionhood near the knot, lifting it from your [skin]. With the other hand, you start to run your fingertips over [hisher] length. Soft, warm skin glides under your fingers with each rhythmic stroke, coaxing [himher] into growing longer and firmer.", parse);
 				Text.NL();
