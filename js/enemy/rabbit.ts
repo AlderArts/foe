@@ -13,6 +13,7 @@ import { Race } from "../body/race";
 import { Element } from "../damagetype";
 import { Entity, ICombatEncounter, ICombatOrder } from "../entity";
 import { AlchemyItems } from "../items/alchemy";
+import { AlchemySpecial } from "../items/alchemyspecial";
 import { IngredientItems } from "../items/ingredients";
 import { TF } from "../tf";
 
@@ -81,6 +82,7 @@ export class Lagomorph extends Entity {
 
 	public DropTable() {
 		const drops = [];
+		if (Math.random() < 0.01) { drops.push({ it: AlchemySpecial.LeporinePlus }); }
 		if (Math.random() < 0.05) { drops.push({ it: AlchemyItems.Leporine }); }
 		if (Math.random() < 0.5) {  drops.push({ it: IngredientItems.RabbitFoot }); }
 		if (Math.random() < 0.5) {  drops.push({ it: IngredientItems.CarrotJuice }); }

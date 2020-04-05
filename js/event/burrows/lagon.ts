@@ -27,6 +27,7 @@ import { IParse, Text } from "../../text";
 import { TF } from "../../tf";
 import { ITime } from "../../time";
 import { Player } from "../player";
+import { AlchemySpecial } from "../../items/alchemyspecial";
 
 export class Lagon extends Entity {
 	constructor(storage?: IStorage) {
@@ -158,9 +159,10 @@ export class LagonRegular extends BossEntity {
 
 	public DropTable() {
 		const drops = [];
-		drops.push({ it: AlchemyItems.Leporine });
+		drops.push({ it: AlchemyItems.Leporine, num: 2 });
+		drops.push({ it: AlchemySpecial.LeporinePlus });
 		if (this.tougher) {
-			drops.push({ it: AlchemyItems.Leporine });
+			drops.push({ it: AlchemyItems.Leporine, num: 2 });
 		}
 		return drops;
 	}
@@ -326,7 +328,8 @@ export class LagonBrute extends BossEntity {
 
 	public DropTable() {
 		const drops = [
-			{ it: AlchemyItems.Leporine },
+			{ it: AlchemySpecial.LeporinePlus },
+			{ it: AlchemyItems.Leporine, num: 3 },
 			{ it: AlchemyItems.Testos },
 			{ it: AlchemyItems.Virilium },
 			{ it: AccItems.LagonCrown },

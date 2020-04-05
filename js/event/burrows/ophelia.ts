@@ -144,6 +144,7 @@ export class OpheliaBrute extends BossEntity {
 	public DropTable() {
 		const drops = [
 			{ it: AlchemyItems.Leporine },
+			{ it: AlchemySpecial.LeporinePlus, num: 2 },
 			{ it: AlchemySpecial.EquiniumPlus },
 			{ it: AlchemyItems.Estros },
 			{ it: AlchemyItems.GestariumPlus },

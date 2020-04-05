@@ -1,6 +1,7 @@
 import * as _ from "lodash";
 
 import { HipSize } from "../body/body";
+import { BreastSize } from "../body/breasts";
 import { Cock } from "../body/cock";
 import { Color } from "../body/color";
 import { Genitalia } from "../body/genitalia";
@@ -95,6 +96,29 @@ equiniumPlus.PushEffect(TF.ItemEffects.SetLegs, {odds: 0.3, race: Race.Horse, st
 equiniumPlus.PushEffect(TF.ItemEffects.DecFem, {odds: 0.3, ideal: -1, max: .2, male: true});
 equiniumPlus.PushEffect(TF.ItemEffects.IncTone, {odds: 0.3, ideal: 1, max: .1 });
 equiniumPlus.PushEffect(TF.ItemEffects.DecHips, {odds: 0.2, ideal: HipSize.Medium, max: 1});
+
+const leporinePlus = new TFItem("lago+0", "Leporine+");
+leporinePlus.price = 100;
+leporinePlus.lDesc = () => "a bottle of Leporine+";
+leporinePlus.Short = () => "A bottle of Leporine+";
+leporinePlus.Long = () => "A bottle labeled Leporine, potent enough to significantly change your body. The fluid within is a bright orange juice.";
+leporinePlus.recipe = [{it: AlchemyItems.Leporine, num: 3}, {it: IngredientItems.CarrotJuice}, {it: IngredientItems.Lettuce}];
+// Effects
+leporinePlus.PushEffect(TF.ItemEffects.SetCock, {odds: 0.8, race: Race.Rabbit, str: "a bunnycock"});
+leporinePlus.PushEffect(TF.ItemEffects.SetEars, {odds: 0.8, race: Race.Rabbit, str: "floppy bunny ears"});
+leporinePlus.PushEffect(TF.ItemEffects.SetTail, {odds: 0.8, race: Race.Rabbit, color: Color.white, str: "a white, fluffy bunny tail"});
+leporinePlus.PushEffect(TF.ItemEffects.SetBody, {odds: 0.4, race: Race.Rabbit, str: "an bunny-like body"});
+leporinePlus.PushEffect(TF.ItemEffects.SetFace, {odds: 0.3, race: Race.Rabbit, str: "a rabbit-like face"});
+leporinePlus.PushEffect(TF.ItemEffects.SetArms, {odds: 0.3, race: Race.Rabbit, str: "furred bunny arms"});
+leporinePlus.PushEffect(TF.ItemEffects.SetLegs, {odds: 0.3, race: Race.Rabbit, str: "furred bunny legs, with paws"});
+leporinePlus.PushEffect(TF.ItemEffects.SetIdealCockLen, {odds: 0.7, ideal: 15, max: 1});
+leporinePlus.PushEffect(TF.ItemEffects.SetIdealCockThk, {odds: 0.7, ideal: 3, max: 1});
+leporinePlus.PushEffect(TF.ItemEffects.IncLib, {odds: 0.4, ideal: 35, max: 1});
+leporinePlus.PushEffect(TF.ItemEffects.IncDex, {odds: 0.4, ideal: 35, max: 1});
+leporinePlus.PushEffect(TF.ItemEffects.IncFem, {odds: 0.1, ideal: .5, max: .1});
+leporinePlus.PushEffect(TF.ItemEffects.DecTone, {odds: 0.3, ideal: 0, max: .1 });
+leporinePlus.PushEffect(TF.ItemEffects.DecHips, {odds: 0.3, ideal: HipSize.Thin, max: 1});
+leporinePlus.PushEffect(TF.ItemEffects.DecBreastSize, {odds: 0.4, ideal: BreastSize.Large, max: 2 });
 
 // TODO
 const tigris = new TFItem("felin+0", "Tigris");
@@ -468,6 +492,7 @@ Trigger heat (10%)
 
 export namespace AlchemySpecial {
 	export const EquiniumPlus = equiniumPlus;
+	export const LeporinePlus = leporinePlus;
 	export const Tigris = tigris;
 	export const InfernumPlus = infernumPlus;
 	export const Nagazm = nagazm;
