@@ -42,7 +42,7 @@ export class Lagon extends Entity {
 		this.body.DefMale();
 
 		this.FirstCock().thickness.base = 7;
-		this.FirstCock().length.base = 34;
+		this.FirstCock().length.base = 38;
 		this.Balls().size.base = 6;
 
 		this.Butt().buttSize.base = 2;
