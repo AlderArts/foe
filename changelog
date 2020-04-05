@@ -12,6 +12,7 @@ Version 0.5.7
  - Adds a menu item Gender to the player party menu. You can change your choice (Auto, Male, Female) at any point.
  - If you wish to continue playing the game as usual, you don't have to do anything.
 * Bugfix: A few instances where decreasing stats would actually increase them are fixed. Thanks JadedFirefly for the report!
+* Various typos fixed.
 
 --------------------------------------------
              PREVIOUS VERSIONS
