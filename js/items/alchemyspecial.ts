@@ -111,10 +111,10 @@ leporinePlus.PushEffect(TF.ItemEffects.SetBody, {odds: 0.4, race: Race.Rabbit, s
 leporinePlus.PushEffect(TF.ItemEffects.SetFace, {odds: 0.3, race: Race.Rabbit, str: "a rabbit-like face"});
 leporinePlus.PushEffect(TF.ItemEffects.SetArms, {odds: 0.3, race: Race.Rabbit, str: "furred bunny arms"});
 leporinePlus.PushEffect(TF.ItemEffects.SetLegs, {odds: 0.3, race: Race.Rabbit, str: "furred bunny legs, with paws"});
-leporinePlus.PushEffect(TF.ItemEffects.SetIdealCockLen, {odds: 0.7, ideal: 15, max: 1});
-leporinePlus.PushEffect(TF.ItemEffects.SetIdealCockThk, {odds: 0.7, ideal: 3, max: 1});
-leporinePlus.PushEffect(TF.ItemEffects.IncLib, {odds: 0.4, ideal: 35, max: 1});
-leporinePlus.PushEffect(TF.ItemEffects.IncDex, {odds: 0.4, ideal: 35, max: 1});
+leporinePlus.PushEffect(TF.ItemEffects.SetIdealCockLen, {odds: 0.4, ideal: 15, max: 1});
+leporinePlus.PushEffect(TF.ItemEffects.SetIdealCockThk, {odds: 0.4, ideal: 3, max: 1});
+leporinePlus.PushEffect(TF.ItemEffects.IncLib, {odds: 0.4, ideal: 50, max: 3});
+leporinePlus.PushEffect(TF.ItemEffects.IncDex, {odds: 0.4, ideal: 50, max: 3});
 leporinePlus.PushEffect(TF.ItemEffects.IncFem, {odds: 0.1, ideal: .5, max: .1});
 leporinePlus.PushEffect(TF.ItemEffects.DecTone, {odds: 0.3, ideal: 0, max: .1 });
 leporinePlus.PushEffect(TF.ItemEffects.DecHips, {odds: 0.3, ideal: HipSize.Thin, max: 1});
