@@ -1302,6 +1302,8 @@ export namespace OpheliaScenes {
     export function PotionsPrompt() {
         const player: Player = GAME().player;
         const pc = player.Parser;
+        const ophelia: Ophelia = GAME().ophelia;
+        const oph = ophelia.Parser;
         const party: Party = GAME().party;
         const burrows: Burrows = GAME().burrows;
 
@@ -1372,7 +1374,7 @@ export namespace OpheliaScenes {
 
                     The rabbit is panting with need, and eagerly obeys, begging for her restraints to be undone so she can throw herself at the magnificent horsecock. Ophelia circles the girl, pulling her long tail aside to expose her dripping pussy. The scientist carefully inserts two fingers into the folds of her test subject, followed by two more when she meets no resistance.
 
-                    “Hey, ${pc.name}, have a look at this!” she calls out to you, simultaneously shoving her entire fist inside the bunny-girl. “She can take my entire forearm without even blinking!” Ophelia marvels at the girl’s flexible cunt, “I guess they are meant for each other.” There is a large visible bulge on the lagomorph’s stomach, yet she doesn’t seem to experience any pain or discomfort from the intruding limb, continuing to beg for the tantalizing equine dick just outside her reach. The alchemist pulls out her arm, releasing a waft of musk so heady it feels like a punch in the face. Almost instinctively, she gives the fluid a lick, shaking her head in confusion.${burrows.flags.Access >= BurrowsFlags.AccessFlags.QuestlineComplete ? ` Her cock is straining against the fabric of her lab coat, aching to be buried in that sweet honeypot.` : ``}
+                    “Hey, ${pc.name}, have a look at this!” she calls out to you, simultaneously shoving her entire fist inside the bunny-girl. “She can take my entire forearm without even blinking!” Ophelia marvels at the girl’s flexible cunt, “I guess they are meant for each other.” There is a large visible bulge on the lagomorph’s stomach, yet she doesn’t seem to experience any pain or discomfort from the intruding limb, continuing to beg for the tantalizing equine dick just outside her reach. The alchemist pulls out her arm, releasing a waft of musk so heady it feels like a punch in the face. Almost instinctively, she gives the fluid a lick, shaking her head in confusion.${oph.hascock(` Her cock is straining against the fabric of her lab coat, aching to be buried in that sweet honeypot.`)}
 
                     The strong secretions reach the male lagomorph-equine hybrid, who groans almost as if in pain, thrashing against his bonds, his cock impossibly stiff and leaking pre like a broken faucet. The rest of the chained test subjects are also stirring, roused and aroused by the strong scents that now permeate the entire lab. Ophelia’s guards pick this moment to step inside to see what all the fuss is about, their jaws dropping in unison as they drink in the scene before them. As one, they jump toward the pair, overcome by their lust.
 

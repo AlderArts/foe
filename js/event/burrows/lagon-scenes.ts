@@ -2062,9 +2062,9 @@ export namespace LagonScenes {
             Text.Add("Only, unlike her, you can still feel the shame burning deep in your chest.", parse);
         } else if (player.SubDom() >= -30) {
             Text.Add("It is demeaning, but you fear this is only the start of it.", parse);
- } else {
+        } else {
             Text.Add("It comes naturally to you, but it’s still piteous for your rebellion against your master to end this way.", parse);
- }
+        }
         Text.NL();
         Text.Add("<i>“You’ll have to do better than that,”</i> Lagon urges, though a shiver runs through his hardening cock… that big, juicy cock… Ophelia is the first one to lean forward and suckle the giant shaft, letting her tongue play along its length, but you know you can’t be idle for long. Besides, the rabbit king has a <i>lot</i> of cock, plenty for the both of you. You add your [tongue] to the mix, obediently worshipping the stiffening member.", parse);
         if (party.Num() > 1) {

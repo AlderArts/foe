@@ -8,7 +8,7 @@ export namespace BurrowsFlags {
         Stage3            = 5, // turned in final ingredient
         Stage4            = 6, // talked to Roa about scepter
         Stage5            = 7, // confronted Gol
-        QuestlineComplete = 8,  // confronted Lagon and sided with him or Ophelia
+        QuestlineComplete = 8, // confronted Lagon and sided with him or Ophelia
     }
 
     export enum Traits {
