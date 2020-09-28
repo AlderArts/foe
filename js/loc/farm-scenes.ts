@@ -117,7 +117,7 @@ export namespace FarmScenesIntro {
         Text.NL();
         Text.Add("<i>“Well, how do you do, stranger?”</i> The girl asks as she stands before you, the contents of the bucket shaking a bit as she comes to a halt. <i>“Can't say I've seen you around here before. And I wouldn't forget a face as [handsomecute] as yours.”</i> You are taken slightly aback by the rather frank response, but the girl doesn't seem to notice. <i>“The name's Gwendy, if you're wondering what to call me. What's yours?”</i> You tell her your name, and she repeats it, as if for good measure. While the two of you get acquainted, she occasionally shuffles her weight a bit to shift her burden from one side to the other.", parse);
         Text.NL();
-        Text.Add("Though she does not voice a complaint or ask for help, it would be common courtesy to lend a hand to the friendly farm girl.", parse);
+        Text.Add("Though she does not voice a complaint or ask for help, it would be common courtesy to lend a hand to the friendly farmgirl.", parse);
 
         hasBucket = false;
         Text.Flush();
@@ -245,7 +245,7 @@ export namespace FarmScenesIntro {
                     talkedAboutGwendy = true;
                     FarmScenesIntro.GwendyQuestions1();
                 }, enabled : true,
-                tooltip : "Try to get to know the farm girl better.",
+                tooltip : "Try to get to know the farmgirl better.",
             });
         }
         if (!talkedAboutBarn) {
@@ -254,7 +254,7 @@ export namespace FarmScenesIntro {
                     Text.Clear();
                     Text.Add("Though you admire the girl's obvious effort in maintaining the farm, you can't help but note the declining state of the barn. Gwendy's happy expression becomes a bit more somber when you point that out. You try to take your words back, but the girl shakes her head at your apologies. <i>“It's alright, I know that it's shabby. Even with trying to do repairs when I can, I don't have enough time and money to do that and keep paying these taxes <b>and</b> chase off the fools who come and make trouble... Still, I do what I can to keep it functioning at least. That's the duty of a farmer, right?”</i> Even though she ends with a somewhat positive tone, the pain of dealing with a farm on the brink of collapse is apparent on her face. <i>“Well, it is what it is, but I promise I will have this place up and running, even if it takes me the rest of my life to do it!”</i>", parse);
                     Text.NL();
-                    Text.Add("Looking over the barn once more, it becomes obvious that accomplishing that would be almost miraculous, but perhaps you could lend a hand or two to revive this place? It would definitely win the favor of the farm girl for you...", parse);
+                    Text.Add("Looking over the barn once more, it becomes obvious that accomplishing that would be almost miraculous, but perhaps you could lend a hand or two to revive this place? It would definitely win the favor of the farmgirl for you...", parse);
                     talkedAboutBarn = true;
                     FarmScenesIntro.GwendyQuestions1();
                 }, enabled : true,

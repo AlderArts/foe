@@ -139,7 +139,7 @@ export namespace MarketScenes {
                 Text.Clear();
                 Text.Add("The bandits have defeated you, despite of the fight you put up. The sole female pins you down, putting a dagger to your throat. The leader has sauntered over to Gwendy, who is kneeling on all fours, gritting her teeth in rage.", parse);
                 Text.NL();
-                Text.Add("<i>“Told you it’s no use resisting, girlie,”</i> the bandit guaffs, pushing down the farm girl’s head into the dirt with his boot. <i>“The fuck do you think you are doing out here anyway, Gwendy? Got bored with getting railed by horsecock all day?”</i>", parse);
+                Text.Add("<i>“Told you it’s no use resisting, girlie,”</i> the bandit guaffs, pushing down the farmgirl’s head into the dirt with his boot. <i>“The fuck do you think you are doing out here anyway, Gwendy? Got bored with getting railed by horsecock all day?”</i>", parse);
                 Text.NL();
                 Text.Add("<i>“How the fuck do you know my name, bastard?”</i> Gwendy groans. <i>“Were you waiting for me?”</i>", parse);
                 Text.NL();
@@ -228,7 +228,7 @@ export namespace MarketScenes {
             Text.NL();
             Text.Add("<i>“P-pardon me?!”</i> Gwendy splutters, more surprised than angry at first. <i>“Just who the hell do you think you are, bitch?”</i> Miranda’s eyes narrow, slightly taken aback by the vehement response.", parse);
             Text.NL();
-            Text.Add("<i>“I’m the law, that’s who I am,”</i> she growls, showing her teeth to the farmer. <i>“And you’ll behave while you are in my city, or you’ll regret it.”</i> The guardswoman looks back to you one last time before returning to her post. <i>“Come by The Maidens’ Bane when you are tired of blondie, I’ll show you a good time.”</i> With that, Miranda saunters off, leaving you with the fuming farm girl.", parse);
+            Text.Add("<i>“I’m the law, that’s who I am,”</i> she growls, showing her teeth to the farmer. <i>“And you’ll behave while you are in my city, or you’ll regret it.”</i> The guardswoman looks back to you one last time before returning to her post. <i>“Come by The Maidens’ Bane when you are tired of blondie, I’ll show you a good time.”</i> With that, Miranda saunters off, leaving you with the fuming farmgirl.", parse);
             Text.NL();
             Text.Add("<i>“[playername], how come you know that bitch?”</i> Gwendy inquiries intently, her fists balled up tightly as she steers the cart into town. You try to keep your response rather vague so as not to upset her further, but she doesn’t look like she is very mollified by your evasive answers. The farmer manages to coax a name from you at the very least.", parse);
             Text.NL();
@@ -247,7 +247,7 @@ export namespace MarketScenes {
             Text.Add("Your cart pulls into a large square, packed with merchant stalls and bustling with activity. Gwendy skillfully navigates the masses and pulls into an empty lot, hopping down and gesturing you to join her at the back.", parse);
             Text.NL();
             if (won) {
-                Text.Add("<i>“Those bandits cost us some precious time,”</i> the farm girl tells you, instructing you to unload the wares and place them in front of the cart. <i>“We’ll just have to make up for it in presentation. I intend to leave here with my pockets filled and my baskets empty.”</i>", parse);
+                Text.Add("<i>“Those bandits cost us some precious time,”</i> the farmgirl tells you, instructing you to unload the wares and place them in front of the cart. <i>“We’ll just have to make up for it in presentation. I intend to leave here with my pockets filled and my baskets empty.”</i>", parse);
             } else {
                 Text.Add("<i>“Well, this sucks,”</i> Gwendy sighs, surveying the wares still left. <i>“This is going to take a whole lot of convincing to get rid of, and even if we manage to sell it all, we’ll still leave with light pockets. Let’s just make the best we can of the situation.”</i>", parse);
             }
@@ -452,7 +452,7 @@ export namespace MarketScenes {
         Text.NL();
         Text.Add("A significant amount of time later, you finally roll into the yard in front of Gwendy’s derelict barn. You help her stash the cart and care for the horse, before both of you collapse on a stack of hay, exhausted after the long day.", parse);
         Text.NL();
-        Text.Add("<i>“Thanks a lot for the help, [playername],”</i> Gwendy yawns, stretching. <i>“For a lot of things. Who knows what would have happened if you weren’t there...”</i> The farm girl suddenly looks very vulnerable, reminding you of her young age.", parse);
+        Text.Add("<i>“Thanks a lot for the help, [playername],”</i> Gwendy yawns, stretching. <i>“For a lot of things. Who knows what would have happened if you weren’t there...”</i> The farmgirl suddenly looks very vulnerable, reminding you of her young age.", parse);
         Text.NL();
         Text.Add("<i>“I… I need to think a bit,”</i> Gwendy muses as she looks up at the sky. <i>“This place could use some better security, perhaps a guard dog or something. I just feel that sleeping alone is going to be difficult for a while, with those sorts hanging around...”</i> she trails off, the invitation clear.", parse);
         Text.Flush();
@@ -468,7 +468,7 @@ export namespace MarketScenes {
         options.push({ nameStr : "Sleep",
             func() {
                 Text.Clear();
-                Text.Add("<i>“Thanks,”</i> she whispers, giving you a peck on the cheek. You follow closely behind the beautiful farmer, climbing up the ladder to the loft. You have quite the nice view as you make your way up, Gwendy’s well-shaped ass wiggling invitingly just above you. There is an awkward silence as you reach the ledge. The farm girl eyes the bed suggestively.", parse);
+                Text.Add("<i>“Thanks,”</i> she whispers, giving you a peck on the cheek. You follow closely behind the beautiful farmer, climbing up the ladder to the loft. You have quite the nice view as you make your way up, Gwendy’s well-shaped ass wiggling invitingly just above you. There is an awkward silence as you reach the ledge. The farmgirl eyes the bed suggestively.", parse);
                 Text.NL();
                 Text.Add("<i>“Well, we could just get some sleep. Or...”</i>", parse);
                 Text.Flush();
