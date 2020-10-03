@@ -39,7 +39,7 @@ export namespace AdrianScenes {
         const world = WORLD();
         // Workday (Fields)
         if (adrian.IsAtLocation(location) && location === world.loc.Farm.Fields) {
-            Text.Out(`Adrian is tirelessly working in the fields. The horse morph looks unperturbed despite the heavy labor. ${GP.season(
+            Text.Out(`Adrian is tirelessly working in the fields. The horse-morph looks unperturbed despite the heavy labor. ${GP.season(
                 `He’s shirtless, allowing you to fully appreciate his well defined muscles`,
                 `His shirtless, muscular upper body is glistening in the warm rays of the sun`,
                 `You can see the outline of his muscles flexing beneath his sleeveless roughspun shirt`,
@@ -75,7 +75,7 @@ export namespace AdrianScenes {
 
         Text.Clear();
         if (first) {
-            Text.Out(`Deciding to try talking to Gwendy’s stoic and silent equine farmhand again, you wander over to where Adrian is toiling away at his tasks. The horse morph stiffens slightly as you wave to him, giving you a sidelong glance, but no response to your greeting. Just when things start to turn uncomfortable, he shifts his considerable bulk, putting down the tools of his trade and slowly turning to face you. He wipes the sweat from his brow, momentarily allowing you a glimpse of his eyes before his shaggy mane covers them again. They are a dark brown, bordering on black.
+            Text.Out(`Deciding to try talking to Gwendy’s stoic and silent equine farmhand again, you wander over to where Adrian is toiling away at his tasks. The horse-morph stiffens slightly as you wave to him, giving you a sidelong glance, but no response to your greeting. Just when things start to turn uncomfortable, he shifts his considerable bulk, putting down the tools of his trade and slowly turning to face you. He wipes the sweat from his brow, momentarily allowing you a glimpse of his eyes before his shaggy mane covers them again. They are a dark brown, bordering on black.
 
             “…Gwendy told you to help me again?” You shake your head, saying that you just wanted to talk with him for a bit. The farmhand shuffles his hooves, looking at a loss. “…About?”
 
@@ -91,7 +91,7 @@ export namespace AdrianScenes {
         } else if (friend) {
             Text.Out(`The shy equine farmhand graces you with a nod as you approach. “Hey… ${pc.name}.” You wait for him to follow up on that thought, but he doesn’t. Eventually, he puts down what he’s working with, turning to you.`);
         } else if (slut) {
-            Text.Out(`The shy equine farmhand blushes and looks away as you approach. “H-Hey…” he falters, pausing in his work, seemingly distracted by your presence. Even having acknowledged you, the muscular horse morph doesn’t meet your eyes.`);
+            Text.Out(`The shy equine farmhand blushes and looks away as you approach. “H-Hey…” he falters, pausing in his work, seemingly distracted by your presence. Even having acknowledged you, the muscular horse-morph doesn’t meet your eyes.`);
         } else { // Shy
             Text.Out(`The stoic equine farmhand doesn’t look up from his tasks as you approach; you gain a grunt of acknowledgement, but not much else. You watch him for a little bit before he seems to become uncomfortable, pausing in his work. “Yes?”`);
         }
@@ -252,9 +252,9 @@ export namespace AdrianScenes {
                 Text.Out(`${_sexed || _denial ? `“See you around… and come back when you want some more fun.” The stallion flashes you a knowing grin. He’s certainly changed from when you first met him.` : `“Later, then.” The stallion gives you a nod, returning to what he was doing prior to your intrusion.`}`);
             } else if (Sub) {
                 Text.NL();
-                Text.Out(`${_sexed ? `“T-Thank you… for, you know,” he mumbles, blushing. “W-We could… do that again sometime?” You scratch him behind the ear, assuring him that you’ll be back for more later.` : _denial ? `“B-Bye,” he mumbles, blushing. You can see him still pitching a tent from your teasing; he’s no doubt going to run off somewhere to take care of that on his own. You give him a sly smile, brushing against him as you head out.` : `The horse morph nods, blushing slightly as you brush against him heading off. “I-I should get back to work.” He looks a bit disappointed to see you leave so soon.`}`);
+                Text.Out(`${_sexed ? `“T-Thank you… for, you know,” he mumbles, blushing. “W-We could… do that again sometime?” You scratch him behind the ear, assuring him that you’ll be back for more later.` : _denial ? `“B-Bye,” he mumbles, blushing. You can see him still pitching a tent from your teasing; he’s no doubt going to run off somewhere to take care of that on his own. You give him a sly smile, brushing against him as you head out.` : `The horse-morph nods, blushing slightly as you brush against him heading off. “I-I should get back to work.” He looks a bit disappointed to see you leave so soon.`}`);
             } else {
-                Text.Out(` ${_sexed || _denial ? `The horse morph blushes as you brush against him. “S-See you around…” You grin. You definitely will.` : `The horse morph gives you a non-committal grunt, returning to what he was doing prior to your intrusion.`}`);
+                Text.Out(` ${_sexed || _denial ? `The horse-morph blushes as you brush against him. “S-See you around…” You grin. You definitely will.` : `The horse-morph gives you a non-committal grunt, returning to what he was doing prior to your intrusion.`}`);
             }
             Text.Flush();
             Gui.NextPrompt();
@@ -1245,7 +1245,7 @@ export namespace AdrianScenes {
 
                         Mesmerized, you obey his command, sloppily licking and lapping at his massive horsecock with your ${pc.tongue}, hands playing with his balls. Once you’ve thoroughly familiarized yourself with his dick from root to stem, you position yourself in front of his pre dripping flared crown, planting a big kiss on it. “Good ${pc.mfFem(`boy`, `girl`)}, ${pc.name},” the farmhand grunts, patting your head fondly. “Go on… no need to hold back.” You don’t need telling twice.`);
                     } else {
-                        Text.Out(`Adrian follows your flow as best as he can, but the big equine is hesitant, not being fully used to this kind of intimacy yet. You debate taking it slow with him, but whatever qualms or hang ups he has, they are overshadowed by the primal instincts of his body: the way his massive dick is threatening to rip out of his pants speak louder than words what the horse morph desires.
+                        Text.Out(`Adrian follows your flow as best as he can, but the big equine is hesitant, not being fully used to this kind of intimacy yet. You debate taking it slow with him, but whatever qualms or hang ups he has, they are overshadowed by the primal instincts of his body: the way his massive dick is threatening to rip out of his pants speak louder than words what the horse-morph desires.
 
                         Pulling back, you smile sweetly at him as you lower yourself down${pc.haslegs(` to your ${pc.knees}`)}, casually pulling his trousers down to his knees and freeing his erection. Fourteen inches of thick, juicy horsecock calls to your ${pc.tongue}, and before Adrian can mouth a protest, you heed its call, sensually licking and lapping at his length. The farmhand is blushing brightly, embarrassed beyond belief, yet unable to pull back and break eye contact. Breathing heavily, he meekly allows you to continue playing with his manhood, whinnying as you drag your ${pc.tongue} along it from root to stem.
 
@@ -1450,7 +1450,7 @@ export namespace AdrianScenes {
         } else if (inexperienced) {
             Text.Out(`Even for a seasoned cock-sucker like you, trying to blow such a thick shaft is quite the challenge. You manage to get a few inches of him inside your mouth before meeting resistance, but you don’t let yourself get discouraged. You twist this way and that, letting your ${pc.tongue} work every square inch of your lover’s juicy fuckstick and lapping up as much of his nut batter as you can.`);
         } else {
-            Text.Out(`Once the initial discomfort has eased, your experience sets in. You know your way around a cock, and Adrian’s about to get his blown by a pro. Its sheer girth is an issue, but not one that you’ll allow getting in your way. You twist this way and that, letting your ${pc.tongue} work every square inch of your lover’s juicy fuckstick, before easing the back of your throat, pushing your head forward and taking in several more inches of the hung horse morph.`);
+            Text.Out(`Once the initial discomfort has eased, your experience sets in. You know your way around a cock, and Adrian’s about to get his blown by a pro. Its sheer girth is an issue, but not one that you’ll allow getting in your way. You twist this way and that, letting your ${pc.tongue} work every square inch of your lover’s juicy fuckstick, before easing the back of your throat, pushing your head forward and taking in several more inches of the hung horse-morph.`);
         }
         Text.NL();
         Text.Out(`Adrian groans in appreciation of your oral ministrations, ${Sub ? `squirming meekly` : `caressing your ${pc.hair}`} as you bob up and down on his horsecock. Your saliva drips and trails down the length of his shaft, giving it a slick, lewd sheen, courtesy of your prick polishing.`);
