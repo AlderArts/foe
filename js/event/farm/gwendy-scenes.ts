@@ -4112,9 +4112,10 @@ export namespace GwendyScenes {
 
 			With a loud moan, Gwendy slams her equine ${eplus ? `shaft` : `strap-on`} inside you for a final time before collapsing on top of you, utterly spent. ${eplus ? `You can feel her balls unloading one last time inside you, your ${pc.belly} straining from the pressure` : `You can feel her shiver as her pussy convulses in orgasm one last time, her feeble, shuddering spasms propagating through the massive toy lodged in your ${target()}`}.
 
-			You stay like that for a while, both of you too exhausted to move. The farmer is the first to stir, gently dislodging her ${eplus ? `softening horsecock from your gaping fuckhole and letting out a deluge of cum previously captured inside you` : `artificial horsecock from your gaping fuckhole. She releases the leather straps on it holding it in place, letting the toy fall on the floor with a loud thump`}.
-
-			“Mrr… you’re a good ${hangout ? `fuck` : `sport`}, ${pc.name},” Gwendy purrs, stretching leisurely as she gives you a hand up. “I think I could get used to doing this more oft-” She trails off, eyes coming to rest on the site of your lovemaking.`);
+			You stay like that for a while, both of you too exhausted to move. The farmer is the first to stir, gently dislodging her ${eplus ? `softening horsecock from your gaping fuckhole and letting out a deluge of cum previously captured inside you` : `artificial horsecock from your gaping fuckhole. She releases the leather straps on it holding it in place, letting the toy fall on the floor with a loud thump`}.`);
+			Text.NL();
+			// Prep for alternative E+ leadin
+			Text.Out(`“Mrr… you’re a good ${hangout ? `fuck` : `sport`}, ${pc.name},” Gwendy purrs, stretching leisurely as she gives you a hand up. “I think I could get used to doing this more oft-” She trails off, eyes coming to rest on the site of your lovemaking.`);
 
 			TimeStep({hour: 2});
 
