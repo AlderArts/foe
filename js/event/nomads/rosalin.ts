@@ -1121,7 +1121,7 @@ export namespace RosalinScenes {
 							Text.Add(".", parse);
 						}
 						Text.NL();
-						Text.Add("Not wanting to be left out, Rosalin crawls around in front of you, spreading her legs and presenting you with her loose cunt. Eagerly burying your [tongueDesc] in her folds, you feel your tastebuds being assaulted with a variety of flavors; the catgirl's sweet juices, blended with the salty taste of precum. Howling, the wolf-morph fills your [targetDesc] with his seed, his expanding knot effectively trapping the sticky substance inside.", parse);
+						Text.Add("Not wanting to be left out, Rosalin crawls around in front of you, spreading her legs and presenting you with her loose cunt. Eagerly burying your [tongueDesc] in her folds, you feel your tastebuds being assaulted with a variety of flavors; the catgirl's sweet juices, blended with the salty taste of pre-cum. Howling, the wolf-morph fills your [targetDesc] with his seed, his expanding knot effectively trapping the sticky substance inside.", parse);
 						Text.NL();
 
 						Text.Add("<i>“Mm, I'll definitely have to get more of this later,”</i> the canid sighs as he collapses on top of you, his weight pushing you to the ground. Rosalin whimpers as another orgasm hits her, drenching your [faceDesc]. When she is spent, she snuggles up against you, the worst of her heat apparently worn off.", parse);
@@ -2865,7 +2865,7 @@ export namespace RosalinScenes {
 						parse.s = player.NumCocks() > 1 ? "s" : "";
 						parse.notS = player.NumCocks() > 1 ? "" : "s";
 						parse.itThem = player.NumCocks() > 1 ? "them" : "it";
-						Text.Add(" Your own [cocks] stand[notS] at attention, pearly precum splattering from the tip[s], dripping onto your stomach. Rosalin occasionally teases you by rubbing against [itThem] with [hisher] hands, but never letting you get too excited. As if you could focus on anything but your [targetDesc] right now.", parse);
+						Text.Add(" Your own [cocks] stand[notS] at attention, pearly pre-cum splattering from the tip[s], dripping onto your stomach. Rosalin occasionally teases you by rubbing against [itThem] with [hisher] hands, but never letting you get too excited. As if you could focus on anything but your [targetDesc] right now.", parse);
 					}
 
 					if (target === BodyPartType.vagina) {

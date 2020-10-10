@@ -532,7 +532,7 @@ export namespace RoaScenes {
             Text.NL();
             Text.Add("Sparks of pleasure crackle along your [skin], and you can’t help but moan your satisfaction with the lagomorph’s oral skills. For a moment, you are sorely tempted to just give yourself over to the hungry wetness of his mouth, to let him suck and gulp and swallow until you have emptied yourself into his waiting belly. But the moment passes and, with a final shudder, you push him away, his mouth popping as it leaves your now-dripping dick.", parse);
             Text.NL();
-            Text.Add("Inhaling deeply to keep yourself under control, shaft[s] dripping precum onto the carpet below, you instruct the lapin to get up on the bed and present himself, lest you simply take him right here on the floor...", parse);
+            Text.Add("Inhaling deeply to keep yourself under control, shaft[s] dripping pre-cum onto the carpet below, you instruct the lapin to get up on the bed and present himself, lest you simply take him right here on the floor...", parse);
             Text.NL();
             Text.Add("<i>“Hmm, that sounds like an enticing idea, but you’re the boss.”</i> He gets up and turns on his heels, hopping onto the bed and raising his butt high up into the air. The bunny then pops two fingers inside his pucker, stretching it out and holding it open for you.", parse);
             Text.NL();
@@ -877,7 +877,7 @@ export namespace RoaScenes {
             }
         }
         Text.NL();
-        Text.Add("Still pinning him down, your gaze shifts to the jutting manhood you are fondling. Thick streams of precum are starting to well from its tip, rolling lazily down its length, and your fingers move to intercept. You smear his juices back and forth, coating every inch until it gleams wetly in the light. Roa tries to hold still, but your touches make him wriggle and moan, despite his efforts.", parse);
+        Text.Add("Still pinning him down, your gaze shifts to the jutting manhood you are fondling. Thick streams of pre-cum are starting to well from its tip, rolling lazily down its length, and your fingers move to intercept. You smear his juices back and forth, coating every inch until it gleams wetly in the light. Roa tries to hold still, but your touches make him wriggle and moan, despite his efforts.", parse);
         Text.NL();
         Text.Add("When you are satisfied with your impromptu lubing, you shift your position to straddle his hips, raising yourself aloft to align your [vag] with his cock. Your hand brushes itself tenderly against his cheek, a single stroke of comfort, and then you allow yourself to descend.", parse);
         Text.NL();

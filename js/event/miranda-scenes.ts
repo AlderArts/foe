@@ -6128,7 +6128,7 @@ export namespace MirandaScenes {
 					scenes.Get();
 
 					parse.dom = player.SubDom() > 50 ? " That's a good bitch, you absently quip back to her." : "";
-					Text.Add("A moan of pleasure escapes your throat as you feel Miranda's mouth and tongue going to work.[dom] Emboldened, you turn your attention back to her own throbbing dog-cock and open your mouth, swallowing her girldick as deeply as you can and noisily sucking on it. The turgid flesh throbs between your lips, salt-sweet precum oozing steadily over your tongue and vanishing down your throat with each suckle you make. Painstakingly you lick every crease and fold and vein, pumping her shaft in and out between your lips, wriggling your hips back to grant Miranda better access to your own nethers as you do so.", parse);
+					Text.Add("A moan of pleasure escapes your throat as you feel Miranda's mouth and tongue going to work.[dom] Emboldened, you turn your attention back to her own throbbing dog-cock and open your mouth, swallowing her girldick as deeply as you can and noisily sucking on it. The turgid flesh throbs between your lips, salt-sweet pre-cum oozing steadily over your tongue and vanishing down your throat with each suckle you make. Painstakingly you lick every crease and fold and vein, pumping her shaft in and out between your lips, wriggling your hips back to grant Miranda better access to your own nethers as you do so.", parse);
 					Text.NL();
 					parse.gen = target === Target.Blowjob ? () => player.MultiCockDesc() :
 								target === Target.Cunn ? () => player.FirstVag().Short() :

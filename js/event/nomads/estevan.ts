@@ -546,10 +546,10 @@ export namespace EstevanScenes {
 						if (firstBlow) {
 							Text.Add("but you did promise him your mouth in lieu of your ass.", parse);
 						} else {
-							Text.Add("but the veritable river of precum he's producing is an indication that Estevan needs to get off, and soon.", parse);
+							Text.Add("but the veritable river of pre-cum he's producing is an indication that Estevan needs to get off, and soon.", parse);
 						}
 						Text.NL();
-						Text.Add("As soon as you start to suckle the head of Estevan's cock, the amount of fluid coming out of his cumslit rapidly increases. You've barely started to blow him and already you're swallowing mouthfuls of his precum.", parse);
+						Text.Add("As soon as you start to suckle the head of Estevan's cock, the amount of fluid coming out of his cumslit rapidly increases. You've barely started to blow him and already you're swallowing mouthfuls of his pre-cum.", parse);
 						Text.NL();
 
 						Sex.Blowjob(player, estevan);
@@ -568,7 +568,7 @@ export namespace EstevanScenes {
 						Text.NL();
 						Text.Add("<i>“You’re so good at this. You could teach some of the girls around this camp a thing or two. Maybe we could do a demonstration: you, on your knees, sucking my cock in front of the whole camp? That could be... instructive,”</i> he jokes, laughing. You lick his shaft and suck harder to cut his laughter short. <i>“Mmm...are you doing that on purpose? I-I don’t know how long I can hold back with you teasing me like this.”</i>", parse);
 						Text.NL();
-						Text.Add("Estevan humps your face like the world is ending and the only safe place left is somewhere just past your esophagus. His prodigious leakage coats your mouth and throat in his surprisingly sweet precum. He forces your face into his furry crotch with each stroke; the combined smell of his sweat-drenched pelt and the feeling of him fucking your face makes your [cocks] jump. You give yourself a few tugs just to help alleviate the near painful hardness ", parse);
+						Text.Add("Estevan humps your face like the world is ending and the only safe place left is somewhere just past your esophagus. His prodigious leakage coats your mouth and throat in his surprisingly sweet pre-cum. He forces your face into his furry crotch with each stroke; the combined smell of his sweat-drenched pelt and the feeling of him fucking your face makes your [cocks] jump. You give yourself a few tugs just to help alleviate the near painful hardness ", parse);
 						if (player.HasBalls()) {
 							Text.Add("and the needy ache in your balls.", parse);
 						} else {
@@ -677,7 +677,7 @@ export namespace EstevanScenes {
 				Text.NL();
 				Text.Add("You command him down to his knees in the dirt and you can tell that you’ve pushed him out of his comfort zone because he complies with a half-hearted grumble instead of his usual jokes and mockery. Estevan gets down on his knees and presses his chest to the ground, he uses his hands to spread his ass-cheeks and his gaping hole awaits you.", parse);
 				Text.NL();
-				Text.Add("It takes one hard shove and your dick is back inside him. He bleats out a note of surprise, but the walls of his anus squeeze against you anyway. You growl into the goat-slut’s ear, letting him know how much you enjoy fucking him into the dirt. He tugs at his meaty cock, liberally dripping precum between his legs while you slam his back door. The satyr’s copious leakage gives you an idea and you brush his hand away from his cock, replacing his grip with your own. You squeeze down on his shaft while seeking out the hard nub of his prostate with your prick. The effect is instant: he gushes thick seminal fluid, groaning and squirming while you milk him like livestock.", parse);
+				Text.Add("It takes one hard shove and your dick is back inside him. He bleats out a note of surprise, but the walls of his anus squeeze against you anyway. You growl into the goat-slut’s ear, letting him know how much you enjoy fucking him into the dirt. He tugs at his meaty cock, liberally dripping pre-cum between his legs while you slam his back door. The satyr’s copious leakage gives you an idea and you brush his hand away from his cock, replacing his grip with your own. You squeeze down on his shaft while seeking out the hard nub of his prostate with your prick. The effect is instant: he gushes thick seminal fluid, groaning and squirming while you milk him like livestock.", parse);
 				Text.NL();
 				Text.Add("The handfuls of cum you extract from his rock-hard cock go straight onto your own. You plunge it back into him and he lets slip a grunt that turns into a long, hungry moan. You continue plowing him, using his own spunk as lube, and he pushes back against you as wanton and horny as ever.", parse);
 				Text.NL();
@@ -708,7 +708,7 @@ export namespace EstevanScenes {
 
 						let cum = player.OrgasmCum();
 
-						Text.Add("He licks the thick spooge off of his lips while you pant and come down from your sexual high. His hands are busy between his legs, one jerking his fat organ and the other disappearing into his prised-open fuckhole. The satyr’s member spurts more precum by the second and he repurposes it as lube to coat his swollen head.", parse);
+						Text.Add("He licks the thick spooge off of his lips while you pant and come down from your sexual high. His hands are busy between his legs, one jerking his fat organ and the other disappearing into his prised-open fuckhole. The satyr’s member spurts more pre-cum by the second and he repurposes it as lube to coat his swollen head.", parse);
 						Text.NL();
 						Text.Add("<i>“You’d better not...I’m not usually...I mean…”</i> he mutters, while cramming his sloppy hole with another finger or two. He tightens his grip around the shaft, and hisses, <i>“fuck!”</i>", parse);
 						Text.NL();
@@ -725,7 +725,7 @@ export namespace EstevanScenes {
 				options.push({ nameStr : "Inside",
 					func() {
 						Text.Clear();
-						Text.Add("There’s no reason to stop fucking Estevan, after all he’s willing, and—from the size of his cock and how madly it’s precumming as you bang his butt—he seems to be into it. Your lower half is nestled close against the satyr’s rump with just enough room to allow your [hips] to piston back and forth, driving[oneof] your cock[s] into his hole. He uses one of his hands to keep his ass cheeks spread open while yanking his own chain, getting himself off to the insistent rhythms of your aggressive fucking.", parse);
+						Text.Add("There’s no reason to stop fucking Estevan, after all he’s willing, and—from the size of his cock and how madly it’s pre-cumming as you bang his butt—he seems to be into it. Your lower half is nestled close against the satyr’s rump with just enough room to allow your [hips] to piston back and forth, driving[oneof] your cock[s] into his hole. He uses one of his hands to keep his ass cheeks spread open while yanking his own chain, getting himself off to the insistent rhythms of your aggressive fucking.", parse);
 						Text.NL();
 						Text.Add("You approach the point of no return and then go barrelling past it like a chariot on fire careening off of a cliff. Your [cock] plunges deep into Estevan’s hole as you plant your first burst of cum inside him. ", parse);
 						if (player.NumCocks() > 1) {

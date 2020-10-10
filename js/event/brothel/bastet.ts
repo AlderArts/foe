@@ -485,7 +485,7 @@ export namespace BastetScenes {
 		Text.NL();
 		Text.Add("<i>“It’s nothing I haven’t seen before, plus I’m flattered that you find me attractive, Your Ladyship,”</i> she says, sashaying towards you and gently hugging you from behind, pressing her soft mounds to your back.", parse);
 		Text.NL();
-		Text.Add("A shiver runs down your spine at the contact. A pang of lust throbs within you, your traitorous manhood now beginning to drool precum in anticipation.", parse);
+		Text.Add("A shiver runs down your spine at the contact. A pang of lust throbs within you, your traitorous manhood now beginning to drool pre-cum in anticipation.", parse);
 		Text.NL();
 		Text.Add("She removes the cloth from your head and discards it carelessly, throwing it over her shoulders. <i>“You won’t be needing that anymore, nor will you be needing this,”</i> she says, tugging on your loincloth from the side.", parse);
 		Text.NL();
@@ -891,7 +891,7 @@ export namespace BastetScenes {
 			Text.NL();
 			Text.Add("Even as the twins continue their massage, moving along your shoulders and down your arms, you still have to bite your lip to help you keep from pulling away from Adala’s ministrations. Finally, mercifully, the priestess gently removes the funnel and you can unclench your jaw. The coppery tang of blood washes across your tongue and you know that you have broken the skin.", parse);
 			Text.NL();
-			Text.Add("As you ruminate upon this, a shiver runs up your body, causing you to growl softly in pleasure. Adala has leaned her face back in towards your throbbing cock, drooling a thick mixture of oil and precum, and her warm breath stirs the sensitive flesh like nothing you’ve ever imagined.", parse);
+			Text.Add("As you ruminate upon this, a shiver runs up your body, causing you to growl softly in pleasure. Adala has leaned her face back in towards your throbbing cock, drooling a thick mixture of oil and pre-cum, and her warm breath stirs the sensitive flesh like nothing you’ve ever imagined.", parse);
 			Text.NL();
 			Text.Add("And then her tongue sweeps across your oil-soaked, pre-smeared balls and you nearly leap off of the altar with a girlish squeal. Your balls have always been kind of sensitive, but that just felt like nothing you’ve ever known before!", parse);
 			Text.NL();
@@ -939,7 +939,7 @@ export namespace BastetScenes {
 			Text.NL();
 			Text.Add("<i>“Yes, lady Adala,”</i> the twins reply in unison, each grabbing a pitcher full of oil. They coat your legs and your feet with the sacred oil, then they each take one of your legs and lifts it.", parse);
 			Text.NL();
-			Text.Add("You shift slightly, trying to help them by holding your legs aloft. As their nimble little fingers begin to rub against your inner thighs, you purr softly in pleasure, feeling the first drops of a new batch of precum starting to seep from your cock.", parse);
+			Text.Add("You shift slightly, trying to help them by holding your legs aloft. As their nimble little fingers begin to rub against your inner thighs, you purr softly in pleasure, feeling the first drops of a new batch of pre-cum starting to seep from your cock.", parse);
 			Text.NL();
 			Text.Add("Two sets of eyes flick towards your dripping dick, matching mischievous grins spreading on identical faces, but the twins remain professional. Their hands lovingly sweep back and forth along their chosen thighs, rubbing more of that wonderful oil into your fur and your skin. Once they deem your thighs coated, they renew their own handfuls of oil and start sliding up your legs, meticulously covering each limb in feminizing lubricants.", parse);
 			Text.NL();

@@ -690,12 +690,12 @@ export namespace LizardsScenes {
 
 		Text.NL();
 		if (player.FirstCock()) {
-			Text.Add("You feel her gaze on your [cocks], and realize that you're leaking precum steadily.", parse);
+			Text.Add("You feel her gaze on your [cocks], and realize that you're leaking pre-cum steadily.", parse);
 			Text.NL();
 			if (player.NumCocks() === 2) {
 				Text.Add("A small hunger in her eyes leaves you suddenly wary of her. You see one hand come forward, reaching for your pair of pulsating dicks. Her tail twitches inside of you, and you feel yourself sliding forward. Her fingers close around your [cocks], giving a slow, sensual <i>squeeze.</i> Perhaps two is just the right number for her...", parse);
 				Text.NL();
-				Text.Add("Slowly she begins to pump her hand up and down your sensitive flesh, squishing your thick shafts against each other, smearing your own precum along your lengths. All too soon though, she lets go, returning to the slow, steady pumps of her tail instead...", parse);
+				Text.Add("Slowly she begins to pump her hand up and down your sensitive flesh, squishing your thick shafts against each other, smearing your own pre-cum along your lengths. All too soon though, she lets go, returning to the slow, steady pumps of her tail instead...", parse);
 				Text.NL();
 			}
 		}
@@ -739,7 +739,7 @@ export namespace LizardsScenes {
 				Text.NL();
 				Text.Add("You feel [m1name] drawing her tail slowly, steadily out of you then, letting it slide free from your stretched pucker. You give a soft groan as it wriggles out of you, your eyes widening at just how much was buried deep in your gut. Though you tense your muscles in preparation for what you know is coming, you can't stifle the loud cry that comes as she <i>rams</i> her tail back into you.", parse);
 				Text.NL();
-				Text.Add("Before you can react beyond a quivering groan, she draws her tail back out... and then thrusts it back inside of you. Her roughly textured tail begins to batter through your entrance, fucking your slicked pucker almost violently. You spasm on top of her, your [cocks] twitching as you feel yourself begin to drip precum freely.", parse);
+				Text.Add("Before you can react beyond a quivering groan, she draws her tail back out... and then thrusts it back inside of you. Her roughly textured tail begins to batter through your entrance, fucking your slicked pucker almost violently. You spasm on top of her, your [cocks] twitching as you feel yourself begin to drip pre-cum freely.", parse);
 				Text.NL();
 				Text.Add("For what feels like ages she brutally pumps her tail in and out of you, slowed only by your hands which keep her relatively under control. Finally you feel yourself approaching that plateau of pleasure in a strange way, your untouched [cocks] pulsing ever more frequently.", parse);
 				Text.NL();
@@ -832,7 +832,7 @@ export namespace LizardsScenes {
 		Gui.NextPrompt(() => {
 			Text.Clear();
 
-			Text.Add("You grind the tip of your slowly oozing cock against [m1hisher] pucker, smearing it with your precum, ensuring that it's nice and slick. [m1Name] grunts, looking away and closing [m1hisher] eyes. Underneath you, [m1hisher] tail twitches uneasily. You contemplate toying with [m1himher] a little longer, but decide that [m1heshe]'s had enough – and you don't want to wait anymore.", parse);
+			Text.Add("You grind the tip of your slowly oozing cock against [m1hisher] pucker, smearing it with your pre-cum, ensuring that it's nice and slick. [m1Name] grunts, looking away and closing [m1hisher] eyes. Underneath you, [m1hisher] tail twitches uneasily. You contemplate toying with [m1himher] a little longer, but decide that [m1heshe]'s had enough – and you don't want to wait anymore.", parse);
 			Text.NL();
 			Text.Add("With a powerful heave, you <i>shove</i> [m1hisher] legs wider apart, making [m1hisher] muscles strain. [m1HeShe] cries out just as you thrust your hips forward, the tip of your dick pushing hard against [m1hisher] tight ring of muscles. The pressure builds quickly, before [m1hisher] [m1anus] can't take it any more. <i>“Oh, gods, s-stop!”</i> [m1heshe] cries, muscles tensing. [m1HisHer] sphincter gives way and you feel your [cock] suddenly sink several inches into [m1himher], the warmth of [m1hisher] body gripping your shaft tightly.", parse);
 			Text.NL();
@@ -1115,7 +1115,7 @@ export namespace LizardsScenes {
 					Text.NL();
 					Text.Add("He lets out a hiss as you aim one away from yourself, but as his second slick, hot shaft meets your [anus] that hiss melts into a croon. He bucks gently against you, but you’re ready for it, quickly rising. His yellow-green muzzle contorts in impatience. You smirk at how eager he is, so soon after being beaten.", parse);
 					Text.NL();
-					Text.Add("You steady yourself, feeling your tight pucker squeeze against the tip of his slimy pole. A gentle pulse, and you feel a small gush of precum ooze against your entrance, leaving a blush on your cheeks. Slowly, you lower yourself, letting the pressure build against your flesh as his fat, oozing dick presses against you. After what feels like an hour of slow, aching buildup, you feel your tight ring stretch around his slippery, bulbous tip. Two inches sink into you, making your muscles burn... but the burn is worth it.", parse);
+					Text.Add("You steady yourself, feeling your tight pucker squeeze against the tip of his slimy pole. A gentle pulse, and you feel a small gush of pre-cum ooze against your entrance, leaving a blush on your cheeks. Slowly, you lower yourself, letting the pressure build against your flesh as his fat, oozing dick presses against you. After what feels like an hour of slow, aching buildup, you feel your tight ring stretch around his slippery, bulbous tip. Two inches sink into you, making your muscles burn... but the burn is worth it.", parse);
 					Text.NL();
 
 					player.FuckAnal(player.Butt(), enemy.FirstCock(), 4);
@@ -1127,7 +1127,7 @@ export namespace LizardsScenes {
 						if (player.NumCocks() > 1) {
 							Text.Add("Your own [cocks] jump to life, throbbing together, bumping against each other.", parse);
 						} else {
-							Text.Add("Your own [cock] throbs at attention, a bead of precum already drooling from your tip.", parse);
+							Text.Add("Your own [cock] throbs at attention, a bead of pre-cum already drooling from your tip.", parse);
 						}
 						Text.NL();
 					}
@@ -1164,14 +1164,14 @@ export namespace LizardsScenes {
 								if (player.Butt().Tightness() > Orifice.Tightness.loose) {
 									Text.Add("<i>“Not many can fit both in one hole... Mmm...”</i> his sibilant whispers come. You swallow.", parse);
 								} else {
-									Text.Add("His second dick bumps against your warm rump, and you feel his slimy precum smearing against you.", parse);
+									Text.Add("His second dick bumps against your warm rump, and you feel his slimy pre-cum smearing against you.", parse);
 									Text.NL();
 									Text.Add("<i>“If only you coulda fitted both,”</i> he rumbles, his eyes half lidded.", parse);
 								}
 								Text.NL();
 
 								if (player.FirstCock()) {
-									Text.Add("You feel your [cocks] jump, and precum dribbles freely. The lizard smirks at the way your own arousal shows. <i>“Let's go faster,”</i> he hisses amusedly.", parse);
+									Text.Add("You feel your [cocks] jump, and pre-cum dribbles freely. The lizard smirks at the way your own arousal shows. <i>“Let's go faster,”</i> he hisses amusedly.", parse);
 									Text.NL();
 								}
 								if (player.FirstVag()) {
@@ -1221,7 +1221,7 @@ export namespace LizardsScenes {
 										Text.Add("As his ridged, slimy prick squishes up ", parse);
 									}
 
-									Text.Add("against your sensitive spot, your cheeks grow a darker shade of red and you feel precum forced up and through your [cocks]. [m1Name] smirks as it drips from your body, and you can't completely suppress a moan as he <i>rams</i> himself against your prostate again.", parse);
+									Text.Add("against your sensitive spot, your cheeks grow a darker shade of red and you feel pre-cum forced up and through your [cocks]. [m1Name] smirks as it drips from your body, and you can't completely suppress a moan as he <i>rams</i> himself against your prostate again.", parse);
 								}
 								Text.NL();
 								Text.Add("Up and down he lifts you and pulls you down, forcing his ", parse);
@@ -1243,7 +1243,7 @@ export namespace LizardsScenes {
 									} else {
 										Text.Add(", his slimy flesh", parse);
 									}
-									Text.Add(" pressing mercilessly against your prostate. Your moans turn higher still. As he bounces you up and down in his lap, you can feel a steady pressure growing in your body, an aching heat that you realize is only growing harder to resist. Your feel your [cocks] twitch, and a steady stream of precum oozing through your urethra leaves you blushing.", parse);
+									Text.Add(" pressing mercilessly against your prostate. Your moans turn higher still. As he bounces you up and down in his lap, you can feel a steady pressure growing in your body, an aching heat that you realize is only growing harder to resist. Your feel your [cocks] twitch, and a steady stream of pre-cum oozing through your urethra leaves you blushing.", parse);
 									player.AddLustFraction(0.1);
 								} else {
 									Text.Add(".", parse);
@@ -1257,7 +1257,7 @@ export namespace LizardsScenes {
 										Text.NL();
 										Text.Add("His [m1cocks] spasm and pulse inside of you, and his hands squeeze your taut rump tightly.", parse);
 									} else {
-										Text.Add("[m1Name] squeezes you tightly, his powerful hands pressing in around you. His scales feel rough as he <i>shoves</i> you upward. You feel your tight pucker clench down around his tip, trying to keep his slippery, bulbous flesh inside of you. His throbbing, spongy shaft twitches inside of you, its brother sliding wetly against your rump, slathered in his precum. His hands pull you downward as his hips piston upward, the reptile burying himself in you one more time. Hard, supple ridges plow into your body, making your muscles spasm.", parse);
+										Text.Add("[m1Name] squeezes you tightly, his powerful hands pressing in around you. His scales feel rough as he <i>shoves</i> you upward. You feel your tight pucker clench down around his tip, trying to keep his slippery, bulbous flesh inside of you. His throbbing, spongy shaft twitches inside of you, its brother sliding wetly against your rump, slathered in his pre-cum. His hands pull you downward as his hips piston upward, the reptile burying himself in you one more time. Hard, supple ridges plow into your body, making your muscles spasm.", parse);
 										Text.NL();
 										Text.Add("You feel both his heated dicks begin to twitch and pulse wildly, and his eyes lose focus.", parse);
 									}
@@ -1453,7 +1453,7 @@ export namespace LizardsScenes {
 			if (player.FirstCock()) {
 				parse.s = player.Butt().Tightness() > Orifice.Tightness.loose ? "s" : "";
 				parse.notS = player.Butt().Tightness() > Orifice.Tightness.loose ? "" : "s";
-				Text.Add("His spongy, drooling tip[s] grind[notS] against your engorged prostate and you hear a soft, fleshy squelch as you grind yourself down onto him. He lets out a hiss of pleasure as you send a slick spurt of precum from your [cocks] over his chest.", parse);
+				Text.Add("His spongy, drooling tip[s] grind[notS] against your engorged prostate and you hear a soft, fleshy squelch as you grind yourself down onto him. He lets out a hiss of pleasure as you send a slick spurt of pre-cum from your [cocks] over his chest.", parse);
 				Text.NL();
 			}
 			Text.Add("You set into a steady pace, lifting yourself up to his oozing tips, only to let yourself sink back down, pushing his dense flesh ", parse);
@@ -1476,7 +1476,7 @@ export namespace LizardsScenes {
 				Text.NL();
 				Text.Add("He feels so big inside of you, being taken by what feels like two males at once. You can feel him getting closer...", parse);
 			} else {
-				Text.Add("[m1Name] claws at the ground in ecstasy, his shaft throbbing powerfully inside of you and making your pucker stretch. His second shaft twitches against your [butt], smearing ever more of his slick, oily precum over your flesh. He moans lowly, squeezing his eyes shut as your muscles stretch to fit him.", parse);
+				Text.Add("[m1Name] claws at the ground in ecstasy, his shaft throbbing powerfully inside of you and making your pucker stretch. His second shaft twitches against your [butt], smearing ever more of his slick, oily pre-cum over your flesh. He moans lowly, squeezing his eyes shut as your muscles stretch to fit him.", parse);
 				Text.NL();
 				Text.Add("Up and down you bounce in his lap, breathing harder with each moment, your blood pounding in your ears. Your hole burns, a deep ache in your ring as it slides up and down along his bulbous meat, but the pleasure only bubbles up inside of you.", parse);
 			}
@@ -1908,16 +1908,16 @@ export namespace LizardsScenes {
 						if (party.Num() > 2) { Text.Add(" You can't see anyone else, though you can hear them...", parse); }
 						Text.NL();
 						if (player.FirstCock()) {
-							Text.Add("You feel precum drooling from your [cocks], and try not to focus on the sensation too much.", parse);
+							Text.Add("You feel pre-cum drooling from your [cocks], and try not to focus on the sensation too much.", parse);
 						}
 						Text.NL();
 						Text.Add("You pass out watching [p1name] pleasure [m2name], feeling [m1name]'s seed settling in your womb.", parse);
 					} else {
 						Text.Add("You manage to pull your legs closed, but roll into the puddle you and [m1name] made.", parse);
 						if (player.NumCocks() === 1) {
-							Text.Add(" You let out a groan as a gob of precum trails up to the tip of your [cock], oozing down your length.", parse);
+							Text.Add(" You let out a groan as a gob of pre-cum trails up to the tip of your [cock], oozing down your length.", parse);
 						} else if (player.NumCocks() > 1) {
-							Text.Add("You let out a soft groan as gobs of precum trail up to the tip of your [cocks], oozing down the length of each.", parse);
+							Text.Add("You let out a soft groan as gobs of pre-cum trail up to the tip of your [cocks], oozing down the length of each.", parse);
 						}
 						Text.Add(" Blushing shamefully, you pass out to the sensations of his seed settling in your womb.", parse);
 					}
@@ -2039,7 +2039,7 @@ export namespace LizardsScenes {
 					if (player.FirstVag()) {
 						Text.Add("You let your hand trail down to your groin, feeling tempted to join in the reptile's sensations... but the way that his shaft fills your face so entirely, its partner smearing the scaled creature's fluids over your [face] leaves you feeling an itch for something... else. Your hand trails lower, between your legs. Your fingers brush the wet folds of your [vag], beginning to stroke across them, one finger just beginning to plumb your aching depths.", parse);
 					} else if (player.NumCocks() > 1) {
-						Text.Add("Your hand trails down to your groin, where you let it find your favorite dick. Slowly you squeeze it, blushing yet deeper as you feel precum start to drip from multiple tips.", parse);
+						Text.Add("Your hand trails down to your groin, where you let it find your favorite dick. Slowly you squeeze it, blushing yet deeper as you feel pre-cum start to drip from multiple tips.", parse);
 					} else {
 						Text.Add("You let your hand trail down to your [cock], feeling yourself harden.", parse);
 					}
@@ -2448,7 +2448,7 @@ export namespace LizardsScenes {
 				Text.NL();
 
 				if (player.LustLevel() > 0.6) {
-					Text.Add("Encouraged by her actions, you reach up and take her scaly, pert breasts in your hands, squeezing them tightly. She gasps in surprise, her loose pussy clenching slickly around you and you let out a soft moan, your precum spurting deeper into her. She gives a delighted moan, letting you toy with her [m1breasts], her eyes shut.", parse);
+					Text.Add("Encouraged by her actions, you reach up and take her scaly, pert breasts in your hands, squeezing them tightly. She gasps in surprise, her loose pussy clenching slickly around you and you let out a soft moan, your pre-cum spurting deeper into her. She gives a delighted moan, letting you toy with her [m1breasts], her eyes shut.", parse);
 				} else {
 					Text.Add("She squeezes her [m1breasts] slowly, sensually as she rides you, and you find yourself steadily encouraged by the action - whatever else, it's very definitely naughty. You close your eyes and let out a long, shaky breath as her wet cunt milks your [cocks] steadily.", parse);
 				}
