@@ -62,7 +62,7 @@ PlainsLoc.Crossroads.description = () => {
 	} else if (GAME().jeanne.flags.Met !== 0) {
 		Text.Add("This is probably the place that Jeanne was talking about. ", parse);
  	}
-	Text.Add("The Nomad camp where you first arrived on Eden lies on the horizon, one beacon of familiarity in this strange land.", parse);
+	Text.Add("The nomad camp where you first arrived on Eden lies on the horizon, one beacon of familiarity in this strange land.", parse);
 };
 
 PlainsLoc.Crossroads.enc = new EncounterTable();
