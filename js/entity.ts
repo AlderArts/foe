@@ -134,6 +134,7 @@ class EntityParser {
 	public get cockTip() { const cock = this.ent.GetPreferredCock() || this.ent.FirstCock(); return cock.TipShort(); }
 	public get knot() { const cock = this.ent.GetPreferredCock() || this.ent.FirstCock(); return cock.KnotShort(); }
 	public get balls() { return this.ent.BallsDesc(); }
+	public hasballs(balls: string, noballs: string = ``) { return this.ent.HasBalls() ? balls : noballs; }
 	public get butt() { return this.ent.Butt().Short(); }
 	public get anus() { return this.ent.Butt().AnalShort(); }
 	public get vag() { return this.ent.FirstVag().Short(); }
