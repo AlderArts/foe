@@ -3039,15 +3039,18 @@ export namespace GwendyScenes {
                 tooltip : "Gwendy will tease you and test your sexual endurance.",
             });
         }
-        if (lossScene >= GwendyFlags.ChallengeLostScene.Oral && !eplus/* gwendy.FirstVag() */) {
-            options.push({ nameStr : "Eat her",
-                func : () => {
-                    const first = lossScene === GwendyFlags.ChallengeLostScene.Oral;
-                    LossEatHerOut(hangout, first);
-                }, enabled : minScene <= GwendyFlags.ChallengeLostScene.Oral,
-                tooltip : "Please Gwendy with your tongue.",
-            });
-            /* TODO Blowjob */
+        if (lossScene >= GwendyFlags.ChallengeLostScene.Oral) {
+            if (eplus) {
+                /* TODO Blowjob */
+            } else {
+                options.push({ nameStr : "Eat her",
+                    func : () => {
+                        const first = lossScene === GwendyFlags.ChallengeLostScene.Oral;
+                        LossEatHerOut(hangout, first);
+                    }, enabled : minScene <= GwendyFlags.ChallengeLostScene.Oral,
+                    tooltip : "Please Gwendy with your tongue.",
+                });
+            }
         }
         if (lossScene >= GwendyFlags.ChallengeLostScene.Ride) {
             options.push({ nameStr : "Ride",
