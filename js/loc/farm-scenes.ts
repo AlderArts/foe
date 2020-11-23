@@ -1072,7 +1072,7 @@ FarmLoc.Fields.events.push(new Link(
 FarmLoc.Barn.events.push(new Link(
     "Adrian", () => {
         const adrian: Adrian = GAME().adrian;
-        return adrian.IsAtLocation(FarmLoc.Barn) && !adrian.IsAsleep();
+        return adrian.IsAtLocation(FarmLoc.Barn) && !adrian.IsAsleep() && !adrian.Exiled();
     }, true,
     () => {
         AdrianScenes.AdrianDesc(FarmLoc.Barn);
@@ -1084,7 +1084,7 @@ FarmLoc.Barn.events.push(new Link(
 FarmLoc.Fields.events.push(new Link(
     "Adrian", () => {
         const adrian: Adrian = GAME().adrian;
-        return adrian.IsAtLocation(FarmLoc.Fields);
+        return adrian.IsAtLocation(FarmLoc.Fields) && !adrian.Exiled();
     }, true,
     () => {
         AdrianScenes.AdrianDesc(FarmLoc.Fields);

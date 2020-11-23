@@ -31,13 +31,17 @@ export namespace AdrianScenes {
         const Seduced = (adrian.flags.Flags & AdrianFlags.Flags.Seduced) !== 0;
         const SeducedGwendySaw = (adrian.flags.SeduceCnt >= 3);
         const jealous = adrian.Jealousy() >= 30 || Taunted;
-        return { Shy, Dom, Sub, Seduced, SeducedGwendySaw, Taunted, Humiliated, Encouraged, slut, friend, jealous };
+        const Exiled = adrian.Exiled();
+        return { Exiled, Shy, Dom, Sub, Seduced, SeducedGwendySaw, Taunted, Humiliated, Encouraged, slut, friend, jealous };
     }
 
     export function AdrianDesc(location: ILocation) {
         const adrian: Adrian = GAME().adrian;
         const world = WORLD();
-        // Workday (Fields)
+        if (adrian.Exiled()) {
+            return;
+        }
+		// Workday (Fields)
         if (adrian.IsAtLocation(location) && location === world.loc.Farm.Fields) {
             Text.Out(`Adrian is tirelessly working in the fields. The horse-morph looks unperturbed despite the heavy labor. ${GP.season(
                 `He’s shirtless, allowing you to fully appreciate his well defined muscles`,

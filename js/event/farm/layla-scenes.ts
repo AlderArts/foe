@@ -23,6 +23,7 @@ import { Momo } from "../momo";
 import { Cveta } from "../outlaws/cveta";
 import { Player } from "../player";
 import { Terry } from "../terry";
+import { Adrian } from "./adrian";
 import { Gwendy } from "./gwendy";
 import { GwendyScenes } from "./gwendy-scenes";
 import { Layla } from "./layla";
@@ -687,6 +688,7 @@ export namespace LaylaScenes {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const gwendy: Gwendy = GAME().gwendy;
+		const adrian: Adrian = GAME().adrian;
 		const layla: Layla = GAME().layla;
 		const enc = this;
 		SetGameState(GameState.Event, Gui);
@@ -700,27 +702,27 @@ export namespace LaylaScenes {
 		};
 
 		Text.Clear();
-		Text.Add("<i>“Dammit!”</i> you hear Gwendy curse as the creature dashes past her in a single leap. You give chase, but by the time you exit the storehouse she’s already gone.", parse);
-		Text.NL();
-		Text.Add("<i>“Fuck!”</i> Gwendy curses again. <i>“Look at this mess!”</i>", parse);
-		Text.NL();
-		Text.Add("As if you could miss it. By herself, that thing, whatever it was, seems to have eaten easily a third of all the food Gwendy had stored here. Shelves are torn down, broken or discarded containers lie everywhere, and the floor is covered in puddles of brine, honey, jam, broken eggs, flour and spilt milk.", parse);
-		Text.NL();
-		Text.Add("<i>“I-Is the monster gone?”</i> A familiar sheep asks, peeking in from outside.", parse);
-		Text.NL();
-		Text.Add("<i>“Yes, it’s gone. Danie, be a dear and fetch Adrian for me. I’m going to need some help cleaning this up. Plus, the door needs fixing.”</i>", parse);
-		Text.NL();
-		Text.Add("<i>“Sure!”</i> Danie replies, darting away.", parse);
-		Text.NL();
-		Text.Add("Taking in the damage again, you tap Gwendy on her shoulder to get her attention. When she turns to you, you point out that this probably won’t be the last raid. That creature looked hungry, and now that she knows where there’s food to be had, you’d lay money on her coming back for more when she wants it.", parse);
-		Text.NL();
-		Text.Add("<i>“Yeah, I’m pretty sure she will. But when she does, we’ll be ready.”</i>", parse);
-		Text.NL();
-		Text.Add("You nod firmly, assuring Gwendy that if you can, you’ll try and be here to help her with the next raid.", parse);
-		Text.NL();
-		Text.Add("<i>“Thanks, [playername],”</i> the farmer says, getting up on her feet and offering you a smile. <i>“If you want, you can stay over and I’ll call you when we spot that creature again.”</i>", parse);
-		Text.NL();
-		Text.Add("You thank Gwendy for her offer, and tell her you’ll consider it. For now, you should figure out what you want to do.", parse);
+		Text.Out(`“Dammit!” you hear Gwendy curse as the creature dashes past her in a single leap. You give chase, but by the time you exit the storehouse she’s already gone.
+
+		“Fuck!” Gwendy curses again. “Look at this mess!”
+
+		As if you could miss it. By herself, that thing, whatever it was, seems to have eaten easily a third of all the food Gwendy had stored here. Shelves are torn down, broken or discarded containers lie everywhere, and the floor is covered in puddles of brine, honey, jam, broken eggs, flour and spilt milk.
+
+		“I-Is the monster gone?” A familiar sheep asks, peeking in from outside.
+
+		“Yes, it’s gone. Danie, be a dear and fetch ${adrian.Exiled() ? `one of the farmhands` : `Adrian`} for me. I’m going to need some help cleaning this up. Plus, the door needs fixing.”
+
+		“Sure!” Danie replies, darting away.
+
+		Taking in the damage again, you tap Gwendy on her shoulder to get her attention. When she turns to you, you point out that this probably won’t be the last raid. That creature looked hungry, and now that she knows where there’s food to be had, you’d lay money on her coming back for more when she wants it.
+
+		“Yeah, I’m pretty sure she will. But when she does, we’ll be ready.”
+
+		You nod firmly, assuring Gwendy that if you can, you’ll try and be here to help her with the next raid.
+
+		“Thanks, [playername],” the farmer says, getting up on her feet and offering you a smile. “If you want, you can stay over and I’ll call you when we spot that creature again.”
+
+		You thank Gwendy for her offer, and tell her you’ll consider it. For now, you should figure out what you want to do.`);
 		Text.Flush();
 
 		TimeStep({minute: 30});

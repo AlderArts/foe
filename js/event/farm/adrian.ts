@@ -143,6 +143,10 @@ export class Adrian extends Entity {
 		return (WorldTime().hour >= 22 || WorldTime().hour < 5);
 	}
 
+	public Exiled(): boolean {
+		return false; // TODO
+	}
+
 	// Schedule
 	public IsAtLocation(location?: ILocation) {
 		if (this.Timeout()) {
