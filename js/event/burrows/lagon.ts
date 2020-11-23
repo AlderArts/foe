@@ -19,6 +19,7 @@ import { Gui } from "../../gui";
 import { IStorage } from "../../istorage";
 import { AccItems } from "../../items/accessories";
 import { AlchemyItems } from "../../items/alchemy";
+import { AlchemySpecial } from "../../items/alchemyspecial";
 import { QuestItems } from "../../items/quest";
 import { Burrows } from "../../loc/burrows";
 import { ILocation } from "../../location";
@@ -27,7 +28,6 @@ import { IParse, Text } from "../../text";
 import { TF } from "../../tf";
 import { ITime } from "../../time";
 import { Player } from "../player";
-import { AlchemySpecial } from "../../items/alchemyspecial";
 
 export class Lagon extends Entity {
 	constructor(storage?: IStorage) {
