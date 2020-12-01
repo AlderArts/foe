@@ -14,6 +14,7 @@ Version 0.5.7
 * Bugfix: A few instances where decreasing stats would actually increase them are fixed. Thanks JadedFirefly for the report!
 * Various typos fixed. Changed some word usage to be more consistent throughout the game.
 * Item: Added a Leporine+ item (rabbit TF level 2). It is dropped from Lagon, Brute Lagon and Brute Ophelia, and can drop from regular rabbit mobs with very low rate. It has less extreme effects than Equinium+ does, but there are special variations of the item brewed by Ophelia.
+* Debug feature to call arbitrary scenes from the window.scenes console variable. This is not a scene gallery!
 
 --------------------------------------------
              PREVIOUS VERSIONS
