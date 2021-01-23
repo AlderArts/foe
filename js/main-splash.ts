@@ -30,6 +30,7 @@ const SplashScreen = () => {
 
 		This game has hotkeys enabled, you can use 1-5, q-t, a-g`);
 
+	Input.buttons[0].enabledImage = Images.imgButtonEnabled2;
 	Input.buttons[0].Setup("New game", () => {
 		// Init game
 		SetGameCache({});
