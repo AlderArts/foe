@@ -1,8 +1,8 @@
 import * as _ from "lodash";
-import { GameState, SetGameState } from "./gamestate";
-import { Gui } from "./gui";
-import { Input } from "./input";
-import { Text } from "./text";
+import { GameState, SetGameState } from "./engine/gamestate";
+import { Text } from "./engine/parser/text";
+import { Gui } from "./gui/gui";
+import { Input } from "./gui/input";
 
 const Patrons = [
 	`StarcraftJunkie`,
@@ -128,13 +128,13 @@ const Content = [
 	{name: `Zebra shaman`, authors: [`Bluebusterman`]},
 ];
 
-function PrintList(list: Array<String>) {
+function PrintList(list: string[]) {
 	let out = `${list[0]}`;
 	for (let i = 1; i < list.length - 1; ++i) {
 		out += `, ${list[i]}`;
 	}
 	if (list.length > 1) {
-		out += ` and ${list[list.length-1]}`;
+		out += ` and ${list[list.length - 1]}`;
 	}
 	return out;
 }
@@ -147,7 +147,7 @@ export function CreditsScreen(SplashScreen: CallableFunction) {
 	Text.Add("Loyal patreons:", undefined, "bold");
 	Text.NL();
 	Text.Out(`${PrintList(Patrons)}
-	
+
 	...and all the rest of you!`);
 
 	Text.NL();

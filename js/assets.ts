@@ -3,8 +3,8 @@ const preloader = require("preloader");
 import * as $ from "jquery";
 import * as _ from "lodash";
 
-import { CardItems } from "./items/cards";
-import { StatusEffect } from "./statuseffect";
+import { CardItems } from "./engine/cavalcade/cards";
+import { StatusEffect } from "./engine/combat/statuseffect";
 
 const Images: any = {};
 

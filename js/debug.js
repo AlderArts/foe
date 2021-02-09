@@ -1,4 +1,4 @@
-import { GAME, WORLD } from "./GAME";
+import { GAME, WORLD } from "./engine/GAME";
 import { SCENES } from "./SCENES";
 
 export function InitDebugObjects() {

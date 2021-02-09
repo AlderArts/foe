@@ -1,10 +1,10 @@
 import * as _ from "lodash";
 
 import { expect } from "chai";
-import { Cock } from "../../../js/body/cock";
-import { Race } from "../../../js/body/race";
-import { Entity } from "../../../js/entity";
-import { GwendyScenes } from "../../../js/event/farm/gwendy-scenes";
+import { GwendyScenes } from "../../../js/content/event/farm/gwendy-scenes";
+import { Cock } from "../../../js/engine/entity/body/cock";
+import { Race } from "../../../js/engine/entity/body/race";
+import { Entity } from "../../../js/engine/entity/entity";
 
 describe("GwendyScenes", () => {
 	it("ddildo odds verification", () => {

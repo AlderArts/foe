@@ -7,5 +7,5 @@ import './assets/css/droid-sans.css';
 */
 
 // Start up the main text
-import "./js/exploration";
+import "./js/engine/navigation/exploration";
 import "./js/main-entry";

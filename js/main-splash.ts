@@ -1,15 +1,15 @@
 import { GetDEBUG, GetRenderPictures, SetDEBUG, SetRenderPictures, VERSION_STRING } from "../app";
 import { Images } from "./assets";
+import { Intro } from "./content/event/introduction";
 import { CreditsScreen } from "./credits";
-import { Intro } from "./event/introduction";
-import { loadfileOverlay } from "./fileoverlay";
-import { SetGameCache } from "./GAME";
-import { CacheToGame } from "./gamecache";
-import { GameState, isOnline, SetGameState } from "./gamestate";
-import { Gui } from "./gui";
-import { Input } from "./input";
-import { Saver } from "./saver";
-import { Text } from "./text";
+import { SetGameCache } from "./engine/GAME";
+import { CacheToGame } from "./engine/gamecache";
+import { GameState, isOnline, SetGameState } from "./engine/gamestate";
+import { Text } from "./engine/parser/text";
+import { loadfileOverlay } from "./gui/fileoverlay";
+import { Gui } from "./gui/gui";
+import { Input } from "./gui/input";
+import { Saver } from "./gui/saver";
 
 const SplashScreen = () => {
 	SetGameState(GameState.Credits, Gui);

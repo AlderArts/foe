@@ -1,12 +1,12 @@
 import { assetsOverlay, LoadImages } from "./assets";
-import { NAV } from "./GAME";
-import { setOnline } from "./gamestate";
-import { Gui } from "./gui";
-import { Input } from "./input";
+import { NAV } from "./engine/GAME";
+import { setOnline } from "./engine/gamestate";
+import { InitWorld } from "./engine/navigation/world";
+import { Gui } from "./gui/gui";
+import { Input } from "./gui/input";
+import { Saver } from "./gui/saver";
 import { InitGameOver } from "./main-gameover";
 import { SplashScreen } from "./main-splash";
-import { Saver } from "./saver";
-import { InitWorld } from "./world";
 
 // Set the main entrypoint of the application
 function EntryPoint() {

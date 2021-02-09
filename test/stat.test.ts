@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import { SetDEBUG } from "../app";
-import { Stat } from "../js/stat";
+import { Stat } from "../js/engine/entity/stat";
 
 describe("Stat", () => {
 	it("is initialized as 0", () => {

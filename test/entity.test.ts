@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { Entity } from "../js/entity";
+import { Entity } from "../js/engine/entity/entity";
 
 describe("Entity", () => {
 	it("has Parser", () => {

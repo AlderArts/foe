@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { Season } from "../js/time";
+import { Season } from "../js/engine/navigation/time";
 
 describe("Season", () => {
 	it("test test", () => {

@@ -1,21 +1,21 @@
 import * as _ from "lodash";
 
 import { GetDEBUG, SetDEBUG } from "../app";
-import { Cock } from "./body/cock";
-import { Vagina } from "./body/vagina";
-import { Kiakai } from "./event/kiakai";
-import { KiakaiFlags } from "./event/kiakai-flags";
-import { GAME, WORLD } from "./GAME";
-import { Gui } from "./gui";
-import { Item } from "./item";
-import { AlchemyItems } from "./items/alchemy";
-import { AlchemySpecial } from "./items/alchemyspecial";
-import { CombatItems } from "./items/combatitems";
-import { IngredientItems } from "./items/ingredients";
-import { StrapOnItems } from "./items/strapon";
-import { ToysItems } from "./items/toys";
-import { IChoice, Link } from "./link";
-import { IParse, Text } from "./text";
+import { Kiakai } from "./content/event/kiakai";
+import { KiakaiFlags } from "./content/event/kiakai-flags";
+import { Cock } from "./engine/entity/body/cock";
+import { Vagina } from "./engine/entity/body/vagina";
+import { GAME, WORLD } from "./engine/GAME";
+import { Item } from "./engine/inventory/item";
+import { AlchemyItems } from "./engine/inventory/items/alchemy";
+import { AlchemySpecial } from "./engine/inventory/items/alchemyspecial";
+import { CombatItems } from "./engine/inventory/items/combatitems";
+import { IngredientItems } from "./engine/inventory/items/ingredients";
+import { StrapOnItems } from "./engine/inventory/items/strapon";
+import { ToysItems } from "./engine/inventory/items/toys";
+import { IChoice, Link } from "./engine/navigation/link";
+import { IParse, Text } from "./engine/parser/text";
+import { Gui } from "./gui/gui";
 
 export function InitCheats() {
 	const world = WORLD();
