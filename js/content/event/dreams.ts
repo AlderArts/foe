@@ -1142,7 +1142,7 @@ export namespace DreamsScenes {
 			Text.Add(", her fingers curling about your [cocks], quickly stroking [itThem] to painful erection", parse);
 		} else if (player.FirstVag()) {
 			Text.Add(", her fingers nimbly slipping into the wet heat of your snatch", parse);
-	}
+		}
 		Text.Add(" even as she plants a firm kiss on your lips.", parse);
 		Text.NL();
 		Text.Add("You wake up relaxed, if a little disoriented. Is there a scent of jasmine in the air? No, no, it’s gone now; it must have been your imagination - and yet the final touch of the jackaless’ lips lingers on your own…", parse);
@@ -1150,19 +1150,9 @@ export namespace DreamsScenes {
 
 	/*
 	export function Ocean = function(ravenTrigger) {
-		let parse: IParse = {
-			raven : DreamsScenes.RavenText(ravenTrigger, "", "")
-		};
+		const raven = DreamsScenes.RavenText(ravenTrigger, ``, ``);
 
-		Text.Add("", parse);
-		Text.NL();
-		Text.Add("", parse);
-		Text.NL();
-		Text.Add("", parse);
-		Text.NL();
-		Text.Add("", parse);
-		Text.NL();
-		Text.Add("", parse);
+		Text.Out(``);
 	}
 	*/
 
