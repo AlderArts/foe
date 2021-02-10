@@ -3,9 +3,10 @@ import * as _ from "lodash";
 import { Images } from "../../assets";
 import { DreamsScenes } from "../../content/event/dreams";
 import { Gui } from "../../gui/gui";
+import { Entity } from "../entity/entity";
 import { GAME, StepToHour, TimeStep } from "../GAME";
 import { GameState, SetGameState } from "../gamestate";
-import { IParse, Text } from "../parser/text";
+import { Text } from "../parser/text";
 import { EncounterTable } from "./encountertable";
 import { IChoice, Link } from "./link";
 import { ILocation, ILocationEnc } from "./location";
@@ -94,7 +95,7 @@ export class Event implements ILocation {
 	public SleepFunc() {
 		SetGameState(GameState.Event, Gui);
 		Text.NL();
-		Text.Add("You sleep for 8 hours.");
+		Text.Out(`You sleep for 8 hours.`);
 		Text.Flush();
 		Gui.NextPrompt(() => {
 			Text.Clear();
@@ -112,89 +113,89 @@ export class Event implements ILocation {
 	public WaitFunc() {
 		SetGameState(GameState.Event, Gui);
 		Text.Clear();
-		Text.Add("How long do you want to wait?");
+		Text.Out(`How long do you want to wait?`);
 		Text.Flush();
 
 		const options: IChoice[] = [];
-		options.push({ nameStr : "Half hour",
-			tooltip : "Wait for half an hour.",
+		options.push({ nameStr : `Half hour`,
+			tooltip : `Wait for half an hour.`,
 			func() {
 				TimeStep({minute: 30});
 				Gui.PrintDefaultOptions();
 			}, enabled : true,
 		});
-		options.push({ nameStr : "One hour",
-			tooltip : "Wait for one hour.",
+		options.push({ nameStr : `One hour`,
+			tooltip : `Wait for one hour.`,
 			func() {
 				TimeStep({hour: 1});
 				Gui.PrintDefaultOptions();
 			}, enabled : true,
 		});
-		options.push({ nameStr : "Two hours",
-			tooltip : "Wait for two hours.",
+		options.push({ nameStr : `Two hours`,
+			tooltip : `Wait for two hours.`,
 			func() {
 				TimeStep({hour: 2});
 				Gui.PrintDefaultOptions();
 			}, enabled : true,
 		});
-		options.push({ nameStr : "Four hours",
-			tooltip : "Wait for four hours.",
+		options.push({ nameStr : `Four hours`,
+			tooltip : `Wait for four hours.`,
 			func() {
 				TimeStep({hour: 4});
 				Gui.PrintDefaultOptions();
 			}, enabled : true,
 		});
-		options.push({ nameStr : "Eight hours",
-			tooltip : "Wait for eight hours.",
+		options.push({ nameStr : `Eight hours`,
+			tooltip : `Wait for eight hours.`,
 			func() {
 				TimeStep({hour: 8});
 				Gui.PrintDefaultOptions();
 			}, enabled : true,
 		});
-		options.push({ nameStr : "A day",
-			tooltip : "Wait for a day.",
+		options.push({ nameStr : `A day`,
+			tooltip : `Wait for a day.`,
 			func() {
 				TimeStep({day: 1});
 				Gui.PrintDefaultOptions();
 			}, enabled : true,
 		});
-		options.push({ nameStr : "Until 4:00",
-			tooltip : "Wait until early morning.",
+		options.push({ nameStr : `Until 4:00`,
+			tooltip : `Wait until early morning.`,
 			func() {
 				StepToHour(4);
 				Gui.PrintDefaultOptions();
 			}, enabled : true,
 		});
-		options.push({ nameStr : "Until 8:00",
-			tooltip : "Wait until morning.",
+		options.push({ nameStr : `Until 8:00`,
+			tooltip : `Wait until morning.`,
 			func() {
 				StepToHour(8);
 				Gui.PrintDefaultOptions();
 			}, enabled : true,
 		});
-		options.push({ nameStr : "Until 12:00",
-			tooltip : "Wait until midday.",
+		options.push({ nameStr : `Until 12:00`,
+			tooltip : `Wait until midday.`,
 			func() {
 				StepToHour(12);
 				Gui.PrintDefaultOptions();
 			}, enabled : true,
 		});
-		options.push({ nameStr : "Until 16:00",
-			tooltip : "Wait until afternoon.",
+		options.push({ nameStr : `Until 16:00`,
+			tooltip : `Wait until afternoon.`,
 			func() {
 				StepToHour(16);
 				Gui.PrintDefaultOptions();
 			}, enabled : true,
 		});
-		options.push({ nameStr : "Until 20:00",
-			tooltip : "Wait until evening.",
+		options.push({ nameStr : `Until 20:00`,
+			tooltip : `Wait until evening.`,
 			func() {
 				StepToHour(20);
 				Gui.PrintDefaultOptions();
 			}, enabled : true,
 		});
-		options.push({ nameStr : "Until 00:00",
-			tooltip : "Wait until midnight.",
+		options.push({ nameStr : `Until 00:00`,
+			tooltip : `Wait until midnight.`,
 			func() {
 				StepToHour(0);
 				Gui.PrintDefaultOptions();
@@ -206,19 +207,16 @@ export class Event implements ILocation {
 	}
 
 	public DrunkHandler() {
-		const parse: IParse = {};
-		const comp = GAME().party.GetRandom();
+		const comp: Entity = GAME().party.GetRandom();
 		Text.Clear();
 		if (comp) {
-			parse.name  = comp.name;
-			parse.HeShe = comp.HeShe();
-			parse.heshe = comp.heshe();
-			Text.Add("With some effort, you open your eyes and find a concerned [name] standing above you. [HeShe] helps you to your feet, but you flinch as [heshe] starts to speak, as a splitting pain thunders through your head. As you draw in a sharp breath, you notice that something smells of vomit, although thankfully you look clean.", parse);
+			const c = comp.Parser;
+			Text.Out(`With some effort, you open your eyes and find a concerned ${c.name} standing above you. ${c.HeShe} helps you to your feet, but you flinch as ${c.heshe} starts to speak, as a splitting pain thunders through your head. As you draw in a sharp breath, you notice that something smells of vomit, although thankfully you look clean.`);
 		} else {
-			Text.Add("With some effort you open your eyes and drag yourself to your feet. You really don’t feel so good. Your head feels like it’s about to split open, and something smells of vomit.", parse);
+			Text.Out(`With some effort you open your eyes and drag yourself to your feet. You really don’t feel so good. Your head feels like it’s about to split open, and something smells of vomit.`);
 		}
 		Text.NL();
-		Text.Add("Some of the decisions that led you to this state were probably not the best. Still, there’s a dark whisper in your mind asking if perhaps you’d feel better if you had just one more drink...", parse);
+		Text.Out(`Some of the decisions that led you to this state were probably not the best. Still, there’s a dark whisper in your mind asking if perhaps you’d feel better if you had just one more drink...`);
 		Text.Flush();
 
 		Gui.NextPrompt();
@@ -293,9 +291,11 @@ export class Event implements ILocation {
 
 		// At safe locations you can sleep and save
 		if (GAME().party.location.safe()) {
-			Text.NL();
-			Text.Add("<b>This is a safe location, you can sleep and save here.</b>");
-			Text.NL();
+			Text.Out(`
+
+			<b>This is a safe location, you can sleep and save here.</b>
+
+			`);
 		}
 		Text.Flush();
 	}

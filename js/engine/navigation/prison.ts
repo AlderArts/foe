@@ -8,7 +8,7 @@ import { Gui } from "../../gui/gui";
 import { Entity } from "../entity/entity";
 import { GAME } from "../GAME";
 import { GameState, SetGameState } from "../gamestate";
-import { IParse, Text } from "../parser/text";
+import { Text } from "../parser/text";
 import { Party } from "./party";
 
 /*
@@ -62,13 +62,8 @@ export class PrisonMinigame {
 
 	// TODO
 	public Tick() {
-		const parse: IParse = {
-
-		};
-
 		Text.Clear();
-		Text.Add("", parse);
-		Text.NL();
+		Text.Add(``);
 		Text.Flush();
 
 		// TODO Set up choices

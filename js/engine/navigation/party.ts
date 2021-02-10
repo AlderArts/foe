@@ -15,7 +15,7 @@ import { Entity } from "../entity/entity";
 import { GAME, NAV, WORLD } from "../GAME";
 import { GameState, SetGameState } from "../gamestate";
 import { Inventory } from "../inventory/inventory";
-import { IParse, Text } from "../parser/text";
+import { Text } from "../parser/text";
 import { IChoice } from "./link";
 import { ILocation } from "./location";
 
@@ -262,7 +262,7 @@ export class Party {
 
 		if (active) {
 			const options: IChoice[] = [];
-			options.push({ nameStr : "---",
+			options.push({ nameStr : `---`,
 				func() {
 					that.SwitchOut(member);
 					Gui.PrintDefaultOptions();
@@ -306,7 +306,7 @@ export class Party {
 				Gui.PrintDefaultOptions();
 			} else {
 				if (options.length < 4) {
-					options.push({ nameStr : "+++",
+					options.push({ nameStr : `+++`,
 						func() {
 							that.SwitchIn(member);
 							Gui.PrintDefaultOptions();
@@ -348,10 +348,6 @@ export class Party {
 	}
 
 	public Interact(preventClear?: boolean, switchSpot?: boolean, back?: CallableFunction) {
-		const parse: IParse = {
-
-		};
-
 		if (!preventClear) {
 			Text.Clear();
 		}
@@ -360,53 +356,50 @@ export class Party {
 		const list = new Array();
 
 		// Interacting with self opens options for masturbation etc
-		Text.Add("<table class='party' style='width:[w]%'>", {w: this.members.length > 1 ? "100" : "50"});
-		Text.Add("<tr>");
+		Text.Out(`<table class='party' style='width:${this.members.length > 1 ? `100` : `50`}%'>`);
+		Text.Out(`<tr>`);
 		let i = 0;
 		for (const member of this.members) {
-			Text.Add("<td>");
-			Text.Add("<p><center style='font-size: x-large'><b>" + member.name + "</b></center></p>");
-			Text.Add("<table class='party' style='width:100%'>");
-			Text.Add("<tr><td><b>HP:</b></td><td>" + Math.floor(member.curHp) + "/" + Math.floor(member.HP()) + "</td></tr>", parse);
-			Text.Add("<tr><td><b>SP:</b></td><td>" + Math.floor(member.curSp) + "/" + Math.floor(member.SP()) + "</td></tr>", parse);
-			Text.Add("<tr><td><b>Lust:</b></td><td>" + Math.floor(member.curLust) + "/" + Math.floor(member.Lust()) + "</td></tr>", parse);
-			Text.Add("<tr><td><b>Level:</b></td><td>" + member.level + "</td></tr>", parse);
-			Text.Add("<tr><td><b>Exp:</b></td><td>" + Math.floor(member.experience) + "/" + Math.floor(member.expToLevel) + "</td></tr>");
-			Text.Add("<tr><td><b>SexLevel:</b></td><td>" + member.sexlevel + "</td></tr>", parse);
-			Text.Add("<tr><td><b>S.Exp:</b></td><td>" + Math.floor(member.sexperience) + "/" + Math.floor(member.sexpToLevel) + "</td></tr>");
+			Text.Out(`<td>`);
+			Text.Out(`<p><center style='font-size: x-large'><b>${member.name}</b></center></p>`);
+			Text.Out(`<table class='party' style='width:100%'>`);
+			Text.Out(`<tr><td><b>HP:</b></td><td>${Math.floor(member.curHp)}/${Math.floor(member.HP())}</td></tr>`);
+			Text.Out(`<tr><td><b>SP:</b></td><td>${Math.floor(member.curSp)}/${Math.floor(member.SP())}</td></tr>`);
+			Text.Out(`<tr><td><b>Lust:</b></td><td>${Math.floor(member.curLust)}/${Math.floor(member.Lust())}</td></tr>`);
+			Text.Out(`<tr><td><b>Level:</b></td><td>${member.level}</td></tr>`);
+			Text.Out(`<tr><td><b>Exp:</b></td><td>${Math.floor(member.experience)}/${Math.floor(member.expToLevel)}</td></tr>`);
+			Text.Out(`<tr><td><b>SexLevel:</b></td><td>${member.sexlevel}</td></tr>`);
+			Text.Out(`<tr><td><b>S.Exp:</b></td><td>${Math.floor(member.sexperience)}/${Math.floor(member.sexpToLevel)}</td></tr>`);
 			if (member.currentJob) {
 					const jd  = member.jobs[member.currentJob.name];
 					if (jd) {
-						const parse: IParse = {
-							job        : jd.job.Short(this),
-							lvl        : jd.level,
-							maxlvl     : jd.job.levels.length + 1,
-						};
-
 						// Check for maxed out job
 						const master   = jd.job.Master(member);
+						const job = jd.job.Short(this);
+						const lvl = jd.level;
+						const maxlvl = jd.job.levels.length + 1;
 
-						Text.Add("<tr><td><b>Job:</b></td><td>");
+						Text.Out(`<tr><td><b>Job:</b></td><td>`);
 						if (master) {
-							Text.Add("<b>(MASTER) [job]</b></td></tr>", parse);
+							Text.Out(`<b>(MASTER) ${job}</b></td></tr>`);
 						} else {
 							const newLevel = jd.job.levels[jd.level - 1];
 							const toLevel = newLevel.expToLevel * jd.mult;
-							Text.Add("[job] level [lvl]/[maxlvl] (exp " + Math.floor(jd.experience) + "/" + Math.floor(toLevel) + ")</td></tr>", parse);
+							Text.Out(`${job} level ${lvl}/${maxlvl} (exp ${Math.floor(jd.experience)}/${Math.floor(toLevel)})</td></tr>`);
 						}
 					}
 				}
-			Text.Add("<tr><td><b>Strength:</b></td><td>"     + Math.floor(member.Str()) + "</td></tr>");
-			Text.Add("<tr><td><b>Stamina:</b></td><td>"      + Math.floor(member.Sta()) + "</td></tr>");
-			Text.Add("<tr><td><b>Dexterity:</b></td><td>"    + Math.floor(member.Dex()) + "</td></tr>");
-			Text.Add("<tr><td><b>Intelligence:</b></td><td>" + Math.floor(member.Int()) + "</td></tr>");
-			Text.Add("<tr><td><b>Spirit:</b></td><td>"       + Math.floor(member.Spi()) + "</td></tr>");
-			Text.Add("<tr><td><b>Libido:</b></td><td>"       + Math.floor(member.Lib()) + "</td></tr>");
-			Text.Add("<tr><td><b>Charisma:</b></td><td>"     + Math.floor(member.Cha()) + "</td></tr>");
-			Text.Add("</table>");
-			Text.Add("</td>");
+			Text.Out(`<tr><td><b>Strength:</b></td><td>`     + Math.floor(member.Str()) + `</td></tr>`);
+			Text.Out(`<tr><td><b>Stamina:</b></td><td>`      + Math.floor(member.Sta()) + `</td></tr>`);
+			Text.Out(`<tr><td><b>Dexterity:</b></td><td>`    + Math.floor(member.Dex()) + `</td></tr>`);
+			Text.Out(`<tr><td><b>Intelligence:</b></td><td>` + Math.floor(member.Int()) + `</td></tr>`);
+			Text.Out(`<tr><td><b>Spirit:</b></td><td>`       + Math.floor(member.Spi()) + `</td></tr>`);
+			Text.Out(`<tr><td><b>Libido:</b></td><td>`       + Math.floor(member.Lib()) + `</td></tr>`);
+			Text.Out(`<tr><td><b>Charisma:</b></td><td>`     + Math.floor(member.Cha()) + `</td></tr>`);
+			Text.Out(`</table>`);
+			Text.Out(`</td>`);
 			if (i === 1) {
-				Text.Add("</tr><tr>");
+				Text.Out(`</tr><tr>`);
 			}
 
 			list.push({
@@ -418,8 +411,8 @@ export class Party {
 			});
 			i++;
 		}
-		Text.Add("</tr>");
-		Text.Add("</table>");
+		Text.Out(`</tr>`);
+		Text.Out(`</table>`);
 		if (switchSpot) {
 			// Add reserve too
 			for (const member of this.reserve) {
@@ -459,8 +452,7 @@ export class Party {
 					if (ability.OOC) {
 						const en = ability.enabledCondition(undefined, entity);
 
-						Text.Add("[name] can use [ability] for [cost]: [desc]<br>",
-							{name: Text.Bold(entity.name), ability: ability.name, cost: ability.CostStr(), desc: ability.Short()});
+						Text.Out(`${Text.Bold(entity.name)} can use ${ability.name} for ${ability.CostStr()}: ${ability.Short()}<br>`);
 
 						interface ICasting {
 							caster: Entity;
@@ -473,8 +465,7 @@ export class Party {
 							obj     : { caster: entity, skill : ability },
 							func(obj: ICasting) {
 								Text.Clear();
-								Text.Add("Who will [name] cast [ability] on?",
-									{name: obj.caster.name, ability: obj.skill.name});
+								Text.Out(`Who will ${obj.caster.name} cast ${obj.skill.name} on?`);
 								Text.NL();
 								Text.Flush();
 

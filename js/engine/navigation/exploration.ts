@@ -1,4 +1,3 @@
-
 // ***************************************************//
 //                                                   //
 //               Exploration functions               //
@@ -34,35 +33,35 @@ function SetExploreButtons() {
 	// At safe locations you can sleep and save
 	const safeLocation = party.location.safe();
 
-	Input.exploreButtons[ExploreButtonIndex.Explore].Setup("Explore", Explore, true);
+	Input.exploreButtons[ExploreButtonIndex.Explore].Setup(`Explore`, Explore, true);
 
 	if (!GAME().IntroActive) {
 		Input.exploreButtons[ExploreButtonIndex.Party].enabledImage = (party.location.switchSpot()) ? Images.imgButtonEnabled2 : Images.imgButtonEnabled;
-		Input.exploreButtons[ExploreButtonIndex.Party].Setup("Party", PartyInteraction, true);
+		Input.exploreButtons[ExploreButtonIndex.Party].Setup(`Party`, PartyInteraction, true);
 		if (party.members.length === 0) { Input.exploreButtons[ExploreButtonIndex.Party].SetEnabled(false); }
 
-		Input.exploreButtons[ExploreButtonIndex.Items].Setup("Items", ShowInventory, true);
+		Input.exploreButtons[ExploreButtonIndex.Items].Setup(`Items`, ShowInventory, true);
 
-		Input.exploreButtons[ExploreButtonIndex.Ability].Setup("Abilities", ShowAbilities, true);
+		Input.exploreButtons[ExploreButtonIndex.Ability].Setup(`Abilities`, ShowAbilities, true);
 		if (player.alchemyLevel > 0) {
-			Input.exploreButtons[ExploreButtonIndex.Alchemy].Setup("Alchemy", ShowAlchemy, true);
+			Input.exploreButtons[ExploreButtonIndex.Alchemy].Setup(`Alchemy`, ShowAlchemy, true);
 		}
-		Input.exploreButtons[ExploreButtonIndex.Quests].Setup("Quests", ShowQuests, true);
+		Input.exploreButtons[ExploreButtonIndex.Quests].Setup(`Quests`, ShowQuests, true);
 		if (GetDEBUG()) { // TODO
-			Input.exploreButtons[ExploreButtonIndex.Hunt].Setup("Hunt", ShowHunting, true);
+			Input.exploreButtons[ExploreButtonIndex.Hunt].Setup(`Hunt`, ShowHunting, true);
 		}
 
 		if (safeLocation) { // SLEEP
-			Input.exploreButtons[ExploreButtonIndex.Sleep].Setup("", party.location.SleepFunc, waitLocation, undefined,
-				"Sleep until you are fully rested (restores HP/SP).");
+			Input.exploreButtons[ExploreButtonIndex.Sleep].Setup(``, party.location.SleepFunc, waitLocation, undefined,
+				`Sleep until you are fully rested (restores HP/SP).`);
 		} else { // WAIT
-			Input.exploreButtons[ExploreButtonIndex.Wait].Setup("", party.location.WaitFunc, waitLocation, undefined,
-				"Wait for a while.");
+			Input.exploreButtons[ExploreButtonIndex.Wait].Setup(``, party.location.WaitFunc, waitLocation, undefined,
+				`Wait for a while.`);
 		}
 
 		// FIGHT/SEARCH
-		Input.exploreButtons[ExploreButtonIndex.Look].Setup("", Fight, party.location.enc !== undefined, undefined,
-			"Explore the immediate surroundings, possibly finding enemies, new locations or hidden treasures.", GameState.Event);
+		Input.exploreButtons[ExploreButtonIndex.Look].Setup(``, Fight, party.location.enc !== undefined, undefined,
+			`Explore the immediate surroundings, possibly finding enemies, new locations or hidden treasures.`, GameState.Event);
 	}
 }
 
@@ -73,20 +72,20 @@ function LimitedDataPrompt(backFunc: CallableFunction) {
 
 	Gui.SavePromptText();
 
-	Input.buttons[0].Setup("Save game", () => {
+	Input.buttons[0].Setup(`Save game`, () => {
 		Saver.SavePrompt(() => {
 			LimitedDataPrompt(backFunc);
 		});
 	}, isOnline());
 
-	Input.buttons[2].Setup("Save file", Saver.SaveToFile, true);
+	Input.buttons[2].Setup(`Save file`, Saver.SaveToFile, true);
 
-	Input.buttons[6].Setup("Save text", () => {
+	Input.buttons[6].Setup(`Save text`, () => {
 		GameToCache();
 		const seen: any[] = [];
 		const data = JSON.stringify(GameCache(),
 			(key, val) => {
-				if (typeof val === "object") {
+				if (typeof val === `object`) {
 					if (seen.indexOf(val) >= 0) {
 						return;
 					}
@@ -102,7 +101,7 @@ function LimitedDataPrompt(backFunc: CallableFunction) {
 		});
 	}, true);
 
-	Input.buttons[11].Setup("Back", backFunc, true);
+	Input.buttons[11].Setup(`Back`, backFunc, true);
 }
 NAV().LimitedDataPrompt = LimitedDataPrompt;
 
@@ -116,21 +115,21 @@ function DataPrompt() {
 
 	Gui.SavePromptText();
 
-	Input.buttons[0].Setup("Save game", () => {
+	Input.buttons[0].Setup(`Save game`, () => {
 		Saver.SavePrompt(DataPrompt);
 	}, isOnline() && safeLocation);
 
-	Input.buttons[1].Setup("Load game", () => {
+	Input.buttons[1].Setup(`Load game`, () => {
 		Saver.LoadPrompt(DataPrompt);
 	}, Saver.HasSaves());
 
-	Input.buttons[2].Setup("Save file", Saver.SaveToFile, safeLocation);
+	Input.buttons[2].Setup(`Save file`, Saver.SaveToFile, safeLocation);
 
-	Input.buttons[3].Setup("Load file", () => {
+	Input.buttons[3].Setup(`Load file`, () => {
 		loadfileOverlay();
 	}, true);
 
-	Input.buttons[4].Setup("Toggle debug", () => {
+	Input.buttons[4].Setup(`Toggle debug`, () => {
 		SetDEBUG(!GetDEBUG());
 		if (GetDEBUG()) { Gui.debug.show(); } else { Gui.debug.hide(); }
 		for (const member of party.members) {
@@ -138,14 +137,14 @@ function DataPrompt() {
 		}
 	}, true);
 
-	Input.buttons[5].Setup("Quit game", SplashScreen, true);
+	Input.buttons[5].Setup(`Quit game`, SplashScreen, true);
 
-	Input.buttons[6].Setup("Save text", () => {
+	Input.buttons[6].Setup(`Save text`, () => {
 		GameToCache();
 		const seen: any[] = [];
 		const data = JSON.stringify(GameCache(),
 			(key, val) => {
-				if (typeof val === "object") {
+				if (typeof val === `object`) {
 					if (seen.indexOf(val) >= 0) {
 						return;
 					}
@@ -159,7 +158,7 @@ function DataPrompt() {
 		Gui.NextPrompt(DataPrompt);
 	}, safeLocation);
 
-	Input.buttons[7].Setup(Gui.ShortcutsVisible ? "Keys: On" : "Keys: Off", () => {
+	Input.buttons[7].Setup(Gui.ShortcutsVisible ? `Keys: On` : `Keys: Off`, () => {
 		Gui.ShortcutsVisible = !Gui.ShortcutsVisible;
 		if (isOnline()) {
 			localStorage.ShortcutsVisible = Gui.ShortcutsVisible ? 1 : 0;
@@ -167,21 +166,21 @@ function DataPrompt() {
 		DataPrompt();
 	}, true);
 
-	Input.buttons[8].Setup("Set bg color", () => {
+	Input.buttons[8].Setup(`Set bg color`, () => {
 		Gui.BgColorPicker(DataPrompt);
 	}, true);
 
-	Input.buttons[9].Setup("Set font", () => {
+	Input.buttons[9].Setup(`Set font`, () => {
 		Gui.FontPicker(DataPrompt);
 	}, true);
 
-	Input.buttons[10].Setup(GetRenderPictures() ? "Pics: On" : "Pics: Off", () => {
+	Input.buttons[10].Setup(GetRenderPictures() ? `Pics: On` : `Pics: Off`, () => {
 		SetRenderPictures(!GetRenderPictures());
 
 		DataPrompt();
 	}, true);
 
-	Input.buttons[11].Setup("Back", Gui.PrintDefaultOptions, true);
+	Input.buttons[11].Setup(`Back`, Gui.PrintDefaultOptions, true);
 }
 NAV().DataPrompt = DataPrompt;
 
@@ -198,7 +197,7 @@ const Explore = (preventClear: boolean) => {
 	}
 
 	if (party.location === undefined) {
-		Text.Add("ERROR, LOCATION IS NULL");
+		Text.Add(`ERROR, LOCATION IS NULL`);
 		Text.Flush();
 		return;
 	}
@@ -226,7 +225,7 @@ const Fight = (preventClear: boolean) => {
 		Text.Clear();
 	}
 	if (party.location === undefined) {
-		Text.Add("ERROR, LOCATION IS NULL");
+		Text.Add(`ERROR, LOCATION IS NULL`);
 		Text.Flush();
 		return;
 	}
@@ -240,7 +239,7 @@ const Fight = (preventClear: boolean) => {
 			enc();
 		}
 	} else {
-		Text.Add("You didn't find anything.");
+		Text.Add(`You didn't find anything.`);
 		Text.Flush();
 		SetGameState(GameState.Game, Gui);
 	}
@@ -253,7 +252,7 @@ const ShowInventory = (preventClear: boolean) => {
 		Text.Clear();
 	}
 	if (party.inventory === undefined) {
-		Text.Add("ERROR, INVENTORY IS NULL");
+		Text.Add(`ERROR, INVENTORY IS NULL`);
 		Text.Flush();
 		return;
 	}
