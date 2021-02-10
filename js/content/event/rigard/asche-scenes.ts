@@ -1,24 +1,24 @@
 import * as _ from "lodash";
 
-import { GAME } from "../../engine/GAME";
-import { AccItems } from "../../engine/inventory/items/accessories";
-import { CombatItems } from "../../engine/inventory/items/combatitems";
-import { EncounterTable } from "../../engine/navigation/encountertable";
-import { IChoice } from "../../engine/navigation/link";
-import { Party } from "../../engine/navigation/party";
-import { IParse, Text } from "../../engine/parser/text";
-import { Gui } from "../../gui/gui";
-import { DryadGladeFlags } from "../loc/glade-flags";
-import { MagicShopScenes } from "../loc/rigard/magicshop";
-import { Rigard } from "../loc/rigard/rigard";
+import { GAME } from "../../../engine/GAME";
+import { AccItems } from "../../../engine/inventory/items/accessories";
+import { CombatItems } from "../../../engine/inventory/items/combatitems";
+import { EncounterTable } from "../../../engine/navigation/encountertable";
+import { IChoice } from "../../../engine/navigation/link";
+import { Party } from "../../../engine/navigation/party";
+import { IParse, Text } from "../../../engine/parser/text";
+import { Gui } from "../../../gui/gui";
+import { DryadGladeFlags } from "../../loc/glade-flags";
+import { MagicShopScenes } from "../../loc/rigard/magicshop";
+import { Rigard } from "../../loc/rigard/rigard";
+import { Layla } from "../farm/layla";
+import { GlobalScenes } from "../global";
+import { Kiakai } from "../kiakai";
+import { Player } from "../player";
+import { Terry } from "../terry";
 import { Asche } from "./asche";
 import { AscheFlags } from "./asche-flags";
 import { AscheTasksScenes } from "./asche-tasks";
-import { Layla } from "./farm/layla";
-import { GlobalScenes } from "./global";
-import { Kiakai } from "./kiakai";
-import { Player } from "./player";
-import { Terry } from "./terry";
 
 export namespace AscheScenes {
     export function FortuneCost() {

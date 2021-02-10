@@ -1,7 +1,6 @@
 import * as _ from "lodash";
 
 import { GetDEBUG } from "../../../app";
-import { AscheTasksScenes } from "../../content/event/asche-tasks";
 import { GlobalScenes } from "../../content/event/global";
 import { CaleFlags } from "../../content/event/nomads/cale-flags";
 import { Rosalin } from "../../content/event/nomads/rosalin";
@@ -9,6 +8,7 @@ import { Aquilius } from "../../content/event/outlaws/aquilius";
 import { Vaughn } from "../../content/event/outlaws/vaughn";
 import { VaughnFlags } from "../../content/event/outlaws/vaughn-flags";
 import { VaughnTasksScenes } from "../../content/event/outlaws/vaughn-tasks";
+import { AscheTasksScenes } from "../../content/event/rigard/asche-tasks";
 import { LeiFlags } from "../../content/event/royals/lei-flags";
 import { LeiTaskScenes } from "../../content/event/royals/lei-tasks";
 import { TwinsFlags } from "../../content/event/royals/twins-flags";

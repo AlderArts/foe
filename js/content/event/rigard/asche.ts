@@ -4,9 +4,9 @@
  *
  */
 
-import { Race } from "../../engine/entity/body/race";
-import { Entity } from "../../engine/entity/entity";
-import { IStorage } from "../../engine/entity/istorage";
+import { Race } from "../../../engine/entity/body/race";
+import { Entity } from "../../../engine/entity/entity";
+import { IStorage } from "../../../engine/entity/istorage";
 import { AscheFlags } from "./asche-flags";
 
 export class Asche extends Entity {

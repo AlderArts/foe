@@ -3,29 +3,29 @@
  * Define SixtyNine
  *
  */
-import { GetDEBUG } from "../../../app";
-import { LowerBodyType } from "../../engine/entity/body/body";
-import { NippleType } from "../../engine/entity/body/breasts";
-import { Race, RaceDesc, RaceScore } from "../../engine/entity/body/race";
-import { Entity } from "../../engine/entity/entity";
-import { IStorage } from "../../engine/entity/istorage";
-import { GAME, MoveToLocation, TimeStep, WORLD } from "../../engine/GAME";
-import { EncounterTable } from "../../engine/navigation/encountertable";
-import { IChoice } from "../../engine/navigation/link";
-import { ILocation } from "../../engine/navigation/location";
-import { Party } from "../../engine/navigation/party";
-import { IParse, Text } from "../../engine/parser/text";
-import { Gui } from "../../gui/gui";
-import { RigardFlags } from "../loc/rigard/rigard-flags";
-import { Roa } from "./brothel/roa";
-import { Gwendy } from "./farm/gwendy";
-import { GlobalScenes } from "./global";
-import { Kiakai } from "./kiakai";
-import { KiakaiFlags } from "./kiakai-flags";
+import { GetDEBUG } from "../../../../app";
+import { LowerBodyType } from "../../../engine/entity/body/body";
+import { NippleType } from "../../../engine/entity/body/breasts";
+import { Race, RaceDesc, RaceScore } from "../../../engine/entity/body/race";
+import { Entity } from "../../../engine/entity/entity";
+import { IStorage } from "../../../engine/entity/istorage";
+import { GAME, MoveToLocation, TimeStep, WORLD } from "../../../engine/GAME";
+import { EncounterTable } from "../../../engine/navigation/encountertable";
+import { IChoice } from "../../../engine/navigation/link";
+import { ILocation } from "../../../engine/navigation/location";
+import { Party } from "../../../engine/navigation/party";
+import { IParse, Text } from "../../../engine/parser/text";
+import { Gui } from "../../../gui/gui";
+import { RigardFlags } from "../../loc/rigard/rigard-flags";
+import { Roa } from "../brothel/roa";
+import { Gwendy } from "../farm/gwendy";
+import { GlobalScenes } from "../global";
+import { Kiakai } from "../kiakai";
+import { KiakaiFlags } from "../kiakai-flags";
+import { Player } from "../player";
+import { Lei } from "../royals/lei";
 import { Miranda } from "./miranda";
-import { Player } from "./player";
 import { Room69Flags } from "./room69-flags";
-import { Lei } from "./royals/lei";
 
 export class Room69 extends Entity {
 	constructor(storage?: IStorage) {

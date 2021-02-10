@@ -1,11 +1,11 @@
 
 import { Abilities } from "../../content/ability/abilities";
 import { GlobalScenes } from "../../content/event/global";
-import { MirandaFlags } from "../../content/event/miranda-flags";
 import { CaleFlags } from "../../content/event/nomads/cale-flags";
 import { EstevanFlags } from "../../content/event/nomads/estevan-flags";
 import { CvetaFlags } from "../../content/event/outlaws/cveta-flags";
 import { MariaFlags } from "../../content/event/outlaws/maria-flags";
+import { MirandaFlags } from "../../content/event/rigard/miranda-flags";
 import { TerryFlags } from "../../content/event/terry-flags";
 import { Ability, AbilityCollection } from "../combat/ability";
 import { GAME } from "../GAME";

@@ -1,24 +1,24 @@
 import * as _ from "lodash";
 
-import { GetDEBUG } from "../../../app";
-import { Encounter } from "../../engine/combat/combat";
-import { Status } from "../../engine/combat/statuseffect";
-import { HipSize } from "../../engine/entity/body/body";
-import { GAME, MoveToLocation, StepToHour, TimeStep, WORLD, WorldTime } from "../../engine/GAME";
-import { EncounterTable } from "../../engine/navigation/encountertable";
-import { IChoice } from "../../engine/navigation/link";
-import { Party } from "../../engine/navigation/party";
-import { Time } from "../../engine/navigation/time";
-import { IParse, Text } from "../../engine/parser/text";
-import { Gui } from "../../gui/gui";
-import { Rigard } from "../loc/rigard/rigard";
+import { GetDEBUG } from "../../../../app";
+import { Encounter } from "../../../engine/combat/combat";
+import { Status } from "../../../engine/combat/statuseffect";
+import { HipSize } from "../../../engine/entity/body/body";
+import { GAME, MoveToLocation, StepToHour, TimeStep, WORLD, WorldTime } from "../../../engine/GAME";
+import { EncounterTable } from "../../../engine/navigation/encountertable";
+import { IChoice } from "../../../engine/navigation/link";
+import { Party } from "../../../engine/navigation/party";
+import { Time } from "../../../engine/navigation/time";
+import { IParse, Text } from "../../../engine/parser/text";
+import { Gui } from "../../../gui/gui";
+import { Rigard } from "../../loc/rigard/rigard";
+import { Player } from "../player";
+import { Lei } from "../royals/lei";
 import { Cassidy, CassidySpar } from "./cassidy";
 import { CassidyFlags } from "./cassidy-flags";
 import { CassidySexScenes, CassidySparSexScenes } from "./cassidy-sex";
 import { Miranda } from "./miranda";
 import { MirandaFlags } from "./miranda-flags";
-import { Player } from "./player";
-import { Lei } from "./royals/lei";
 
 let shopBought: boolean;
 let shopSold: boolean;

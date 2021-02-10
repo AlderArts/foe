@@ -2,9 +2,9 @@
 import { InitCheats } from "../../cheats";
 import { DreamsScenes } from "../../content/event/dreams";
 import { DarkAspect, Intro, LightAspect } from "../../content/event/introduction";
-import { MirandaScenes } from "../../content/event/miranda-scenes";
 import { BullTowerLoc } from "../../content/event/outlaws/bulltower";
 import { CvetaScenes } from "../../content/event/outlaws/cveta-scenes";
+import { MirandaScenes } from "../../content/event/rigard/miranda-scenes";
 import { BurrowsLoc, InitBurrows } from "../../content/loc/burrows-scenes";
 import { DesertLoc } from "../../content/loc/desert";
 import { DragonDenLoc } from "../../content/loc/dragonden";

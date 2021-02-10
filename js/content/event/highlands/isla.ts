@@ -20,8 +20,8 @@ import { Party } from "../../../engine/navigation/party";
 import { ITime, Time } from "../../../engine/navigation/time";
 import { IParse, Text } from "../../../engine/parser/text";
 import { Gui } from "../../../gui/gui";
-import { AscheFlags } from "../asche-flags";
 import { Player } from "../player";
+import { AscheFlags } from "../rigard/asche-flags";
 import { IslaFlags } from "./isla-flags";
 
 export class Isla extends Entity {

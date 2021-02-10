@@ -4,28 +4,27 @@
  */
 import * as _ from "lodash";
 
-import { GetDEBUG } from "../../../app";
-import { Encounter } from "../../engine/combat/combat";
-import { Gender } from "../../engine/entity/body/gender";
-import { Sex } from "../../engine/entity/entity-sex";
-import { Jobs } from "../../engine/entity/job";
-import { GAME, TimeStep, WORLD, WorldTime } from "../../engine/GAME";
-import { GameState, SetGameState } from "../../engine/gamestate";
-import { AccItems } from "../../engine/inventory/items/accessories";
-import { IngredientItems } from "../../engine/inventory/items/ingredients";
-import { QuestItems } from "../../engine/inventory/items/quest";
-import { EncounterTable } from "../../engine/navigation/encountertable";
-import { IChoice } from "../../engine/navigation/link";
-import { Party } from "../../engine/navigation/party";
-import { Season } from "../../engine/navigation/time";
-import { IParse, Text } from "../../engine/parser/text";
-import { Gui } from "../../gui/gui";
-import { ZebraBrave, ZebraShaman, ZebraShamanScenes } from "../enemy/zebra";
-import { Rigard } from "../loc/rigard/rigard";
+import { GetDEBUG } from "../../../../app";
+import { Encounter } from "../../../engine/combat/combat";
+import { Sex } from "../../../engine/entity/entity-sex";
+import { Jobs } from "../../../engine/entity/job";
+import { GAME, TimeStep, WORLD, WorldTime } from "../../../engine/GAME";
+import { GameState, SetGameState } from "../../../engine/gamestate";
+import { AccItems } from "../../../engine/inventory/items/accessories";
+import { IngredientItems } from "../../../engine/inventory/items/ingredients";
+import { QuestItems } from "../../../engine/inventory/items/quest";
+import { EncounterTable } from "../../../engine/navigation/encountertable";
+import { IChoice } from "../../../engine/navigation/link";
+import { Party } from "../../../engine/navigation/party";
+import { Season } from "../../../engine/navigation/time";
+import { IParse, Text } from "../../../engine/parser/text";
+import { Gui } from "../../../gui/gui";
+import { ZebraBrave, ZebraShaman, ZebraShamanScenes } from "../../enemy/zebra";
+import { Rigard } from "../../loc/rigard/rigard";
+import { Player } from "../player";
 import { Asche } from "./asche";
 import { AscheFlags } from "./asche-flags";
 import { AscheSexScenes } from "./asche-sex";
-import { Player } from "./player";
 
 export namespace AscheTasksScenes {
 	let AscheScenes: any;

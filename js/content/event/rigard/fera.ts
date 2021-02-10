@@ -3,22 +3,22 @@
  * Define Fera
  *
  */
-import { GetDEBUG } from "../../../app";
-import { AppendageType } from "../../engine/entity/body/appendage";
-import { Color } from "../../engine/entity/body/color";
-import { Gender } from "../../engine/entity/body/gender";
-import { Race, RaceScore } from "../../engine/entity/body/race";
-import { Entity } from "../../engine/entity/entity";
-import { IStorage } from "../../engine/entity/istorage";
-import { TF } from "../../engine/entity/tf";
-import { GAME, MoveToLocation, TimeStep, WORLD, WorldTime } from "../../engine/GAME";
-import { EncounterTable } from "../../engine/navigation/encountertable";
-import { IChoice } from "../../engine/navigation/link";
-import { ILocation } from "../../engine/navigation/location";
-import { ITime, Time } from "../../engine/navigation/time";
-import { IParse, Text } from "../../engine/parser/text";
-import { Gui } from "../../gui/gui";
-import { Player } from "./player";
+import { GetDEBUG } from "../../../../app";
+import { AppendageType } from "../../../engine/entity/body/appendage";
+import { Color } from "../../../engine/entity/body/color";
+import { Gender } from "../../../engine/entity/body/gender";
+import { Race, RaceScore } from "../../../engine/entity/body/race";
+import { Entity } from "../../../engine/entity/entity";
+import { IStorage } from "../../../engine/entity/istorage";
+import { TF } from "../../../engine/entity/tf";
+import { GAME, MoveToLocation, TimeStep, WORLD, WorldTime } from "../../../engine/GAME";
+import { EncounterTable } from "../../../engine/navigation/encountertable";
+import { IChoice } from "../../../engine/navigation/link";
+import { ILocation } from "../../../engine/navigation/location";
+import { ITime, Time } from "../../../engine/navigation/time";
+import { IParse, Text } from "../../../engine/parser/text";
+import { Gui } from "../../../gui/gui";
+import { Player } from "../player";
 
 export class Fera extends Entity {
 	public nexelleTimer: Time;

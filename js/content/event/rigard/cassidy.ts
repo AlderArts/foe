@@ -4,22 +4,22 @@
  *
  */
 
-import { Images } from "../../assets";
-import { Element } from "../../engine/combat/damagetype";
-import { Race } from "../../engine/entity/body/race";
-import { Entity, ICombatEncounter, ICombatOrder } from "../../engine/entity/entity";
-import { IStorage } from "../../engine/entity/istorage";
-import { GAME } from "../../engine/GAME";
-import { Item } from "../../engine/inventory/item";
-import { ArmorItems } from "../../engine/inventory/items/armor";
-import { WeaponsItems } from "../../engine/inventory/items/weapons";
-import { Shop } from "../../engine/inventory/shop";
-import { EncounterTable } from "../../engine/navigation/encountertable";
-import { ITime, Time } from "../../engine/navigation/time";
-import { IParse, Text } from "../../engine/parser/text";
-import { Abilities } from "../ability/abilities";
+import { Images } from "../../../assets";
+import { Element } from "../../../engine/combat/damagetype";
+import { Race } from "../../../engine/entity/body/race";
+import { Entity, ICombatEncounter, ICombatOrder } from "../../../engine/entity/entity";
+import { IStorage } from "../../../engine/entity/istorage";
+import { GAME } from "../../../engine/GAME";
+import { Item } from "../../../engine/inventory/item";
+import { ArmorItems } from "../../../engine/inventory/items/armor";
+import { WeaponsItems } from "../../../engine/inventory/items/weapons";
+import { Shop } from "../../../engine/inventory/shop";
+import { EncounterTable } from "../../../engine/navigation/encountertable";
+import { ITime, Time } from "../../../engine/navigation/time";
+import { IParse, Text } from "../../../engine/parser/text";
+import { Abilities } from "../../ability/abilities";
+import { GlobalScenes } from "../global";
 import { CassidyFlags } from "./cassidy-flags";
-import { GlobalScenes } from "./global";
 
 export class Cassidy extends Entity {
 	public orderTimer: Time;

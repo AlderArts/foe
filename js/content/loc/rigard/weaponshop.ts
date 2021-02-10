@@ -8,9 +8,9 @@ import { Event } from "../../../engine/navigation/event";
 import { Link } from "../../../engine/navigation/link";
 import { IParse, Text } from "../../../engine/parser/text";
 import { Gui } from "../../../gui/gui";
-import { Cassidy } from "../../event/cassidy";
-import { CassidyFlags } from "../../event/cassidy-flags";
-import { CassidyScenes } from "../../event/cassidy-scenes";
+import { Cassidy } from "../../event/rigard/cassidy";
+import { CassidyFlags } from "../../event/rigard/cassidy-flags";
+import { CassidyScenes } from "../../event/rigard/cassidy-scenes";
 
 const WeaponShopLoc = new Event("The Pale Flame");
 

@@ -17,9 +17,9 @@ import { Event } from "../../../engine/navigation/event";
 import { Link } from "../../../engine/navigation/link";
 import { IParse, Text } from "../../../engine/parser/text";
 import { Gui } from "../../../gui/gui";
-import { Asche } from "../../event/asche";
-import { AscheFlags } from "../../event/asche-flags";
 import { Player } from "../../event/player";
+import { Asche } from "../../event/rigard/asche";
+import { AscheFlags } from "../../event/rigard/asche-flags";
 
 const MagicShopLoc = new Event("Asche's Fanciful Trinkets");
 

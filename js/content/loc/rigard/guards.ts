@@ -6,10 +6,10 @@ import { Link } from "../../../engine/navigation/link";
 import { ILocRigardBarracks } from "../../../engine/navigation/location";
 import { Text } from "../../../engine/parser/text";
 import { Gui } from "../../../gui/gui";
-import { Miranda } from "../../event/miranda";
-import { MirandaScenes } from "../../event/miranda-scenes";
 import { Vaughn } from "../../event/outlaws/vaughn";
 import { VaughnTasksScenes } from "../../event/outlaws/vaughn-tasks";
+import { Miranda } from "../../event/rigard/miranda";
+import { MirandaScenes } from "../../event/rigard/miranda-scenes";
 import { TerryScenes } from "../../event/terry-scenes";
 import { RigardFlags } from "./rigard-flags";
 

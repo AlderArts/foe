@@ -1,18 +1,18 @@
-import { HipSize } from "../../engine/entity/body/body";
-import { Cock } from "../../engine/entity/body/cock";
-import { Race } from "../../engine/entity/body/race";
-import { Sex } from "../../engine/entity/entity-sex";
-import { Jobs } from "../../engine/entity/job";
-import { GAME, MoveToLocation, StepToHour, TimeStep, WORLD } from "../../engine/GAME";
-import { GameState, SetGameState } from "../../engine/gamestate";
-import { EncounterTable } from "../../engine/navigation/encountertable";
-import { IChoice } from "../../engine/navigation/link";
-import { Party } from "../../engine/navigation/party";
-import { IParse, Text } from "../../engine/parser/text";
-import { Gui } from "../../gui/gui";
+import { HipSize } from "../../../engine/entity/body/body";
+import { Cock } from "../../../engine/entity/body/cock";
+import { Race } from "../../../engine/entity/body/race";
+import { Sex } from "../../../engine/entity/entity-sex";
+import { Jobs } from "../../../engine/entity/job";
+import { GAME, MoveToLocation, StepToHour, TimeStep, WORLD } from "../../../engine/GAME";
+import { GameState, SetGameState } from "../../../engine/gamestate";
+import { EncounterTable } from "../../../engine/navigation/encountertable";
+import { IChoice } from "../../../engine/navigation/link";
+import { Party } from "../../../engine/navigation/party";
+import { IParse, Text } from "../../../engine/parser/text";
+import { Gui } from "../../../gui/gui";
+import { Player } from "../player";
 import { Cassidy } from "./cassidy";
 import { CassidyFlags } from "./cassidy-flags";
-import { Player } from "./player";
 
 export namespace CassidySexScenes {
 

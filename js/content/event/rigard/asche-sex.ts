@@ -1,10 +1,10 @@
-import { Sex } from "../../engine/entity/entity-sex";
-import { GAME, TimeStep } from "../../engine/GAME";
-import { IChoice } from "../../engine/navigation/link";
-import { IParse, Text } from "../../engine/parser/text";
-import { Gui } from "../../gui/gui";
+import { Sex } from "../../../engine/entity/entity-sex";
+import { GAME, TimeStep } from "../../../engine/GAME";
+import { IChoice } from "../../../engine/navigation/link";
+import { IParse, Text } from "../../../engine/parser/text";
+import { Gui } from "../../../gui/gui";
+import { Player } from "../player";
 import { Asche } from "./asche";
-import { Player } from "./player";
 
 export namespace AscheSexScenes {
 	export function Prompt() {

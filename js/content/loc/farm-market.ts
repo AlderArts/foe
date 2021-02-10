@@ -9,9 +9,9 @@ import { Gui } from "../../gui/gui";
 import { Bandit } from "../enemy/bandit";
 import { Gwendy } from "../event/farm/gwendy";
 import { GwendyFlags } from "../event/farm/gwendy-flags";
-import { Miranda } from "../event/miranda";
-import { MirandaFlags } from "../event/miranda-flags";
 import { Player } from "../event/player";
+import { Miranda } from "../event/rigard/miranda";
+import { MirandaFlags } from "../event/rigard/miranda-flags";
 
 let GwendyScenes: any;
 export function InitMarket(gScenes: any) {

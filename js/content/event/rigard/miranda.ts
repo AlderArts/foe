@@ -3,21 +3,21 @@
  * Define Miranda
  *
  */
-import { Images } from "../../assets";
-import { Color } from "../../engine/entity/body/color";
-import { Race } from "../../engine/entity/body/race";
-import { Entity } from "../../engine/entity/entity";
-import { IStorage } from "../../engine/entity/istorage";
-import { JobDesc, Jobs } from "../../engine/entity/job";
-import { GAME, NAV, TimeStep, WORLD, WorldTime } from "../../engine/GAME";
-import { ArmorItems } from "../../engine/inventory/items/armor";
-import { WeaponsItems } from "../../engine/inventory/items/weapons";
-import { IChoice } from "../../engine/navigation/link";
-import { ILocation } from "../../engine/navigation/location";
-import { Party } from "../../engine/navigation/party";
-import { ITime, Time } from "../../engine/navigation/time";
-import { Text } from "../../engine/parser/text";
-import { Gui } from "../../gui/gui";
+import { Images } from "../../../assets";
+import { Color } from "../../../engine/entity/body/color";
+import { Race } from "../../../engine/entity/body/race";
+import { Entity } from "../../../engine/entity/entity";
+import { IStorage } from "../../../engine/entity/istorage";
+import { JobDesc, Jobs } from "../../../engine/entity/job";
+import { GAME, NAV, TimeStep, WORLD, WorldTime } from "../../../engine/GAME";
+import { ArmorItems } from "../../../engine/inventory/items/armor";
+import { WeaponsItems } from "../../../engine/inventory/items/weapons";
+import { IChoice } from "../../../engine/navigation/link";
+import { ILocation } from "../../../engine/navigation/location";
+import { Party } from "../../../engine/navigation/party";
+import { ITime, Time } from "../../../engine/navigation/time";
+import { Text } from "../../../engine/parser/text";
+import { Gui } from "../../../gui/gui";
 import { MirandaFlags } from "./miranda-flags";
 
 export class Miranda extends Entity {

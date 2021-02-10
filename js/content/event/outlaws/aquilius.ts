@@ -16,10 +16,10 @@ import { Party } from "../../../engine/navigation/party";
 import { ITime, Time } from "../../../engine/navigation/time";
 import { IParse, Text } from "../../../engine/parser/text";
 import { Gui } from "../../../gui/gui";
-import { AscheTasksScenes } from "../asche-tasks";
 import { GlobalScenes } from "../global";
 import { Kiakai } from "../kiakai";
 import { Player } from "../player";
+import { AscheTasksScenes } from "../rigard/asche-tasks";
 import { AquiliusFlags } from "./aquilius-flags";
 
 export class Aquilius extends Entity {

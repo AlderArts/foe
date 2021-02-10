@@ -7,7 +7,7 @@ import { ILocRigardResidential } from "../../../engine/navigation/location";
 import { Party } from "../../../engine/navigation/party";
 import { Text } from "../../../engine/parser/text";
 import { Gui } from "../../../gui/gui";
-import { Miranda } from "../../event/miranda";
+import { Miranda } from "../../event/rigard/miranda";
 import { LeiScenes } from "../../event/royals/lei-scenes";
 import { TerryScenes } from "../../event/terry-scenes";
 import { BrothelScenes } from "./brothel";

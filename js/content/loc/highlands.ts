@@ -16,11 +16,11 @@ import { Gui } from "../../gui/gui";
 import { FelinesScenes } from "../enemy/feline";
 import { MaliceScoutsScenes } from "../enemy/malice-scouts";
 import { ZebraShamanScenes } from "../enemy/zebra";
-import { AscheFlags } from "../event/asche-flags";
-import { AscheTasksScenes } from "../event/asche-tasks";
 import { Isla, IslaScenes } from "../event/highlands/isla";
 import { IslaFlags } from "../event/highlands/isla-flags";
 import { MomoScenes } from "../event/momo";
+import { AscheFlags } from "../event/rigard/asche-flags";
+import { AscheTasksScenes } from "../event/rigard/asche-tasks";
 import { RoamingScenes } from "../event/roaming";
 
 // Create namespace

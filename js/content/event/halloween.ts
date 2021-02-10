@@ -29,7 +29,6 @@ import { Layla } from "./farm/layla";
 import { GlobalScenes } from "./global";
 import { HalloweenFlags } from "./halloween-flags";
 import { Kiakai } from "./kiakai";
-import { Miranda } from "./miranda";
 import { Momo } from "./momo";
 import { Cale } from "./nomads/cale";
 import { Estevan } from "./nomads/estevan";
@@ -38,6 +37,7 @@ import { Patchwork, PatchworkFlags, PatchworkScenes } from "./nomads/patchwork";
 import { Rosalin } from "./nomads/rosalin";
 import { Cveta } from "./outlaws/cveta";
 import { Player } from "./player";
+import { Miranda } from "./rigard/miranda";
 import { Terry } from "./terry";
 
 // Put here instead of in Halloween items in order to prevent circular reference.

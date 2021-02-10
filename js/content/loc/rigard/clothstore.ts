@@ -8,8 +8,8 @@ import { IChoice, Link } from "../../../engine/navigation/link";
 import { Party } from "../../../engine/navigation/party";
 import { IParse, Text } from "../../../engine/parser/text";
 import { Gui } from "../../../gui/gui";
-import { Fera, FeraScenes } from "../../event/fera";
 import { Player } from "../../event/player";
+import { Fera, FeraScenes } from "../../event/rigard/fera";
 
 //
 // Sliken Delights

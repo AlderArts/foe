@@ -7,8 +7,8 @@ import { ILocRigardSlums } from "../../../engine/navigation/location";
 import { Season } from "../../../engine/navigation/time";
 import { Text } from "../../../engine/parser/text";
 import { Gui } from "../../../gui/gui";
-import { Miranda } from "../../event/miranda";
-import { MirandaScenes } from "../../event/miranda-scenes";
+import { Miranda } from "../../event/rigard/miranda";
+import { MirandaScenes } from "../../event/rigard/miranda-scenes";
 import { LeiScenes } from "../../event/royals/lei-scenes";
 
 let RigardScenes: any;
