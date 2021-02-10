@@ -1,5 +1,5 @@
 import { GAME, GameCache } from "../../engine/GAME";
-import { DryadGladeFlags } from "../loc/glade-flags";
+import { DryadGladeFlags } from "../loc/eden/forest/glade-flags";
 import { OutlawsFlags } from "./outlaws/outlaws-flags";
 
 export namespace GlobalScenes {

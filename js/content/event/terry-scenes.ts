@@ -26,7 +26,7 @@ import { IChoice } from "../../engine/navigation/link";
 import { Party } from "../../engine/navigation/party";
 import { IParse, Text } from "../../engine/parser/text";
 import { Gui } from "../../gui/gui";
-import { RigardFlags } from "../loc/rigard/rigard-flags";
+import { RigardFlags } from "../loc/eden/rigard/rigard-flags";
 import { Rosalin } from "./nomads/rosalin";
 import { Player } from "./player";
 import { Miranda } from "./rigard/miranda";

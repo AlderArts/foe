@@ -22,7 +22,7 @@ import { Party } from "../../engine/navigation/party";
 import { IParse, Text } from "../../engine/parser/text";
 import { Gui } from "../../gui/gui";
 import { Input } from "../../gui/input";
-import { Burrows } from "../loc/burrows";
+import { Burrows } from "../loc/eden/plains/burrows";
 import { Roa } from "./brothel/roa";
 import { Gwendy } from "./farm/gwendy";
 import { Layla } from "./farm/layla";

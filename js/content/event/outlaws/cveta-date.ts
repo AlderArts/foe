@@ -6,7 +6,7 @@ import { IChoice } from "../../../engine/navigation/link";
 import { Party } from "../../../engine/navigation/party";
 import { IParse, Text } from "../../../engine/parser/text";
 import { Gui } from "../../../gui/gui";
-import { DryadGladeFlags } from "../../loc/glade-flags";
+import { DryadGladeFlags } from "../../loc/eden/forest/glade-flags";
 import { Player } from "../player";
 import { Cveta } from "./cveta";
 import { CvetaFlags } from "./cveta-flags";

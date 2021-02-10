@@ -11,7 +11,7 @@ import { Time } from "../../../engine/navigation/time";
 import { GP } from "../../../engine/parser/parser";
 import { Text } from "../../../engine/parser/text";
 import { Gui } from "../../../gui/gui";
-import { Rigard } from "../../loc/rigard/rigard";
+import { Rigard } from "../../loc/eden/rigard/rigard";
 import { Player } from "../player";
 import { Adrian } from "./adrian";
 import { AdrianFlags } from "./adrian-flags";

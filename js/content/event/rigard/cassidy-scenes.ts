@@ -11,7 +11,7 @@ import { Party } from "../../../engine/navigation/party";
 import { Time } from "../../../engine/navigation/time";
 import { IParse, Text } from "../../../engine/parser/text";
 import { Gui } from "../../../gui/gui";
-import { Rigard } from "../../loc/rigard/rigard";
+import { Rigard } from "../../loc/eden/rigard/rigard";
 import { Player } from "../player";
 import { Lei } from "../royals/lei";
 import { Cassidy, CassidySpar } from "./cassidy";

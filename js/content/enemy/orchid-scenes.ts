@@ -10,7 +10,7 @@ import { Layla } from "../event/farm/layla";
 import { LaylaFlags } from "../event/farm/layla-flags";
 import { Kiakai } from "../event/kiakai";
 import { Player } from "../event/player";
-import { OasisFlags } from "../loc/oasis-flags";
+import { OasisFlags } from "../loc/eden/desert/oasis-flags";
 import { OrchidBoss } from "./orchid";
 import { OrchidFlags } from "./orchid-flags";
 

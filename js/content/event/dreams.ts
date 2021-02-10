@@ -6,7 +6,7 @@ import { IChoice } from "../../engine/navigation/link";
 import { Party } from "../../engine/navigation/party";
 import { IParse, Text } from "../../engine/parser/text";
 import { Gui } from "../../gui/gui";
-import { Rigard } from "../loc/rigard/rigard";
+import { Rigard } from "../loc/eden/rigard/rigard";
 import { Gwendy } from "./farm/gwendy";
 import { GwendyFlags } from "./farm/gwendy-flags";
 import { Kiakai } from "./kiakai";

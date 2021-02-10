@@ -29,7 +29,7 @@ import { Gui } from "../../gui/gui";
 import { SetGameOverButton } from "../../main-gameover";
 import { Abilities } from "../ability/abilities";
 import { Player } from "../event/player";
-import { BurrowsFlags } from "../loc/burrows-flags";
+import { BurrowsFlags } from "../loc/eden/plains/burrows-flags";
 import { BossEntity } from "./boss";
 
 export class GolQueen extends BossEntity {

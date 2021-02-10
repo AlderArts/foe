@@ -11,7 +11,7 @@ import { Season, Time } from "../../../engine/navigation/time";
 import { IParse, Text } from "../../../engine/parser/text";
 import { Gui } from "../../../gui/gui";
 import { SetGameOverButton } from "../../../main-gameover";
-import { RigardFlags } from "../../loc/rigard/rigard-flags";
+import { RigardFlags } from "../../loc/eden/rigard/rigard-flags";
 import { Kiakai } from "../kiakai";
 import { Player } from "../player";
 import { Miranda } from "../rigard/miranda";

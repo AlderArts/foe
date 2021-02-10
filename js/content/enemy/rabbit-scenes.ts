@@ -20,9 +20,9 @@ import { Player } from "../event/player";
 import { Terry } from "../event/terry";
 import { TerryFlags } from "../event/terry-flags";
 import { TerryScenes } from "../event/terry-scenes";
-import { Burrows } from "../loc/burrows";
-import { BurrowsFlags } from "../loc/burrows-flags";
-import { BurrowsScenes } from "../loc/burrows-scenes";
+import { Burrows } from "../loc/eden/plains/burrows";
+import { BurrowsFlags } from "../loc/eden/plains/burrows-flags";
+import { BurrowsScenes } from "../loc/eden/plains/burrows-scenes";
 import { Lagomorph, LagomorphAlpha, LagomorphBrute, LagomorphWizard } from "./rabbit";
 
 export namespace LagomorphScenes {

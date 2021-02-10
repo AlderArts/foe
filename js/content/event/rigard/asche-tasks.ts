@@ -20,7 +20,7 @@ import { Season } from "../../../engine/navigation/time";
 import { IParse, Text } from "../../../engine/parser/text";
 import { Gui } from "../../../gui/gui";
 import { ZebraBrave, ZebraShaman, ZebraShamanScenes } from "../../enemy/zebra";
-import { Rigard } from "../../loc/rigard/rigard";
+import { Rigard } from "../../loc/eden/rigard/rigard";
 import { Player } from "../player";
 import { Asche } from "./asche";
 import { AscheFlags } from "./asche-flags";

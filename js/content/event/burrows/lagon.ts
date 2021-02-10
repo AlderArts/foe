@@ -26,7 +26,7 @@ import { Gui } from "../../../gui/gui";
 import { Abilities } from "../../ability/abilities";
 import { BossEntity } from "../../enemy/boss";
 import { Lagomorph, LagomorphAlpha, LagomorphBrute, LagomorphElite, LagomorphWizard } from "../../enemy/rabbit";
-import { Burrows } from "../../loc/burrows";
+import { Burrows } from "../../loc/eden/plains/burrows";
 import { Player } from "../player";
 
 export class Lagon extends Entity {

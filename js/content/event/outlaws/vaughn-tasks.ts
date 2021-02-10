@@ -9,7 +9,7 @@ import { Party } from "../../../engine/navigation/party";
 import { Time } from "../../../engine/navigation/time";
 import { IParse, Text } from "../../../engine/parser/text";
 import { Gui } from "../../../gui/gui";
-import { RigardFlags } from "../../loc/rigard/rigard-flags";
+import { RigardFlags } from "../../loc/eden/rigard/rigard-flags";
 import { GlobalScenes } from "../global";
 import { Player } from "../player";
 import { Miranda } from "../rigard/miranda";

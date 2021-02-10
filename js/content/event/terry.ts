@@ -22,7 +22,7 @@ import { ILocation } from "../../engine/navigation/location";
 import { IParse, Text } from "../../engine/parser/text";
 import { Gui } from "../../gui/gui";
 import { Abilities } from "../ability/abilities";
-import { RigardLoc } from "../loc/rigard/rigard-scenes";
+import { RigardLoc } from "../loc/eden/rigard/rigard-scenes";
 import { TerryFlags } from "./terry-flags";
 import { TerryScenes } from "./terry-scenes";
 

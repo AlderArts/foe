@@ -16,7 +16,7 @@ import { ILocation } from "../../../engine/navigation/location";
 import { Party } from "../../../engine/navigation/party";
 import { IParse, Text } from "../../../engine/parser/text";
 import { Gui } from "../../../gui/gui";
-import { RigardFlags } from "../../loc/rigard/rigard-flags";
+import { RigardFlags } from "../../loc/eden/rigard/rigard-flags";
 import { Roa } from "../brothel/roa";
 import { Gwendy } from "../farm/gwendy";
 import { GlobalScenes } from "../global";

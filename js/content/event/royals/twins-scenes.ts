@@ -4,7 +4,7 @@ import { IChoice } from "../../../engine/navigation/link";
 import { Time } from "../../../engine/navigation/time";
 import { IParse, Text } from "../../../engine/parser/text";
 import { Gui } from "../../../gui/gui";
-import { RigardFlags } from "../../loc/rigard/rigard-flags";
+import { RigardFlags } from "../../loc/eden/rigard/rigard-flags";
 import { Player } from "../player";
 import { Terry } from "../terry";
 import { TerryFlags } from "../terry-flags";
