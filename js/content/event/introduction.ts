@@ -68,19 +68,19 @@ export namespace Intro {
 
 		Text.Clear();
 
-		Text.Add("You are not quite sure what draws you there, but once again, you find yourself climbing the rickety ladder leading to the attic of the old house. With a heave and a cloud of dust, you open the trapdoor and peek into the room. An alarmed caw and a flutter of wings inform you of the presence of a bird's nest somewhere in the darkness above. Guess someone still uses this place after all.");
-		Text.NL();
-		Text.Add("Taking a good look around, you survey the odd collection of artifacts, furniture and broken pottery that clutter the dusty attic. Some of the objects are draped in ragged pieces of cloth, and a thick coat of dust covers everything. A single ray of light sneaks its way down from a crack in the old roof, the evening sun illuminating a small part of the dusty floor boards.");
-		Text.NL();
-		Text.Add("You take a deep breath, taking in the musty smell of the room, and immediately regret it. As your fit of coughing subsides, you notice something that is different from the last time you were here. There, right in the circle of light, is a footprint.");
-		Text.NL();
-		Text.Add("An involuntary shiver runs down your spine. The house has been abandoned for at least a decade, when the owner last left on one of his travels. Faint memories of an eccentric old man come back to you; weathered, leathery skin, a short dark beard slashed with gray, and a rugged leather hat on his head. It was so long ago that the old recluse left, people even forgot his name.");
-		Text.NL();
-		Text.Add("As far as you know, no one but you has visited the decaying house on the hilltop since he last left it. As far as you <i>knew</i>, you correct yourself, the evidence right in front of you. Someone was here... and recently.");
-		Text.NL();
-		Text.Add("Peering around nervously, you climb up into the attic, taking care not to step on any of the scattered objects on the floor. You catch glimpses of old pots and plates in silver, bronze and cracked pottery, and briefly reflect on why no one has looted this place. A faint glow from the back of the room, in the direction the footprints are leading, distracts you from your musings.");
-		Text.NL();
-		Text.Add("Heart thumping, you carefully make your way to the back of the room where an object you have never seen before stands. It's oval and flat in shape, taller than you, standing propped up against the wall. The faint red glow seems to come from the object itself, but is muffled by the cloth covering. The footprints lead straight to the object, then stop just in front of it. You see no further signs of their owner.");
+		Text.Out(`You are not quite sure what draws you there, but once again, you find yourself climbing the rickety ladder leading to the attic of the old house. With a heave and a cloud of dust, you open the trapdoor and peek into the room. An alarmed caw and a flutter of wings inform you of the presence of a bird's nest somewhere in the darkness above. Guess someone still uses this place after all.
+
+		Taking a good look around, you survey the odd collection of artifacts, furniture and broken pottery that clutter the dusty attic. Some of the objects are draped in ragged pieces of cloth, and a thick coat of dust covers everything. A single ray of light sneaks its way down from a crack in the old roof, the evening sun illuminating a small part of the dusty floor boards.
+
+		You take a deep breath, taking in the musty smell of the room, and immediately regret it. As your fit of coughing subsides, you notice something that is different from the last time you were here. There, right in the circle of light, is a footprint.
+
+		An involuntary shiver runs down your spine. The house has been abandoned for at least a decade, when the owner last left on one of his travels. Faint memories of an eccentric old man come back to you; weathered, leathery skin, a short dark beard slashed with gray, and a rugged leather hat on his head. It was so long ago that the old recluse left, people even forgot his name.
+
+		As far as you know, no one but you has visited the decaying house on the hilltop since he last left it. As far as you <i>knew</i>, you correct yourself, the evidence right in front of you. Someone was here... and recently.
+
+		Peering around nervously, you climb up into the attic, taking care not to step on any of the scattered objects on the floor. You catch glimpses of old pots and plates in silver, bronze and cracked pottery, and briefly reflect on why no one has looted this place. A faint glow from the back of the room, in the direction the footprints are leading, distracts you from your musings.
+
+		Heart thumping, you carefully make your way to the back of the room where an object you have never seen before stands. It's oval and flat in shape, taller than you, standing propped up against the wall. The faint red glow seems to come from the object itself, but is muffled by the cloth covering. The footprints lead straight to the object, then stop just in front of it. You see no further signs of their owner.`);
 		Text.Flush();
 
 		Gui.NextPrompt(Intro.Mirror);
@@ -92,13 +92,13 @@ export namespace Intro {
 	export function Mirror() {
 		Text.Clear();
 
-		Text.Add("Almost as if in a trance, you reach out and grab the dry cloth, steel yourself and yank it aside. You gasp reverently and take a step back at the sight, involuntarily setting off another coughing fit. As you recover, you marvel at the object in front of you.");
-		Text.NL();
-		Text.Add("It is a mirror, but what a mirror! The red glow, previously muted by the covering, seems to emanate from the surface itself, giving the reflection a strange, distorted tint. A slight hint of movement in the reflected world causes you to whip your head around... nothing. Trying to calm yourself, you study the mirror more closely.");
-		Text.NL();
-		Text.Add("Surprised, you realize that the ornamental border of the mirror is pure gold, with expensive-looking gems set at regular intervals. The thing must be worth a fortune! Despite this, however, your attention is drawn to the surface of the mirror. The reddish tint gives the reflection of the room an almost sinister look, and imperfections in the glass bend the light in weird ways, twisting the image. As you watch in wonder, the distortions are actually subtly <i>moving</i>, slowly flowing across the surface. You must be more careful, this thing clearly has magical properties, but nothing like you have ever seen before.");
-		Text.NL();
-		Text.Add("The dust you stirred up on your entry is gently moving in the reflection, the distorted light giving it the look of a red mist covering the room. In the center of the reflection, you see yourself.");
+		Text.Out(`Almost as if in a trance, you reach out and grab the dry cloth, steel yourself and yank it aside. You gasp reverently and take a step back at the sight, involuntarily setting off another coughing fit. As you recover, you marvel at the object in front of you.
+
+		It is a mirror, but what a mirror! The red glow, previously muted by the covering, seems to emanate from the surface itself, giving the reflection a strange, distorted tint. A slight hint of movement in the reflected world causes you to whip your head around... nothing. Trying to calm yourself, you study the mirror more closely.
+
+		Surprised, you realize that the ornamental border of the mirror is pure gold, with expensive-looking gems set at regular intervals. The thing must be worth a fortune! Despite this, however, your attention is drawn to the surface of the mirror. The reddish tint gives the reflection of the room an almost sinister look, and imperfections in the glass bend the light in weird ways, twisting the image. As you watch in wonder, the distortions are actually subtly <i>moving</i>, slowly flowing across the surface. You must be more careful, this thing clearly has magical properties, but nothing like you have ever seen before.
+
+		The dust you stirred up on your entry is gently moving in the reflection, the distorted light giving it the look of a red mist covering the room. In the center of the reflection, you see yourself.`);
 		Text.Flush();
 
 		Gui.NextPrompt(Intro.SelectGender);
@@ -111,19 +111,29 @@ export namespace Intro {
 		const player: Player = GAME().player;
 
 		Text.Clear();
-		Gui.ClearButtons();
 
-		Text.Add("You look at yourself in the mirror... what is your physical appearance?");
+		Text.Add(`You look at yourself in the mirror... what is your physical appearance?`);
 		Text.Flush();
 
-		Input.buttons[0].Setup("A man", () => {
-			player.InitCharacter(Gender.male);
-			SelectGenderPref(SelectBodyTypeMale);
-		}, true);
-		Input.buttons[1].Setup("A woman", () => {
-			player.InitCharacter(Gender.female);
-			SelectGenderPref(SelectBodyTypeFemale);
-		}, true);
+		const options: IChoice[] = [
+			{
+				nameStr : "A man",
+				func() {
+					player.InitCharacter(Gender.male);
+					SelectGenderPref(SelectBodyTypeMale);
+				}, enabled : true,
+				tooltip : "You are a man.",
+			},
+			{
+				nameStr : "A woman",
+				func() {
+					player.InitCharacter(Gender.female);
+					SelectGenderPref(SelectBodyTypeFemale);
+				}, enabled : true,
+				tooltip : "You are a woman.",
+			},
+		];
+		Gui.SetButtonsFromList(options);
 	}
 
 	/*
@@ -167,31 +177,48 @@ export namespace Intro {
 		const player: Player = GAME().player;
 
 		Text.Clear();
-		Gui.ClearButtons();
 
 		Text.Add("What is your build?");
 		Text.Flush();
 
-		Input.buttons[0].Setup("Average", () => {
-			player.body.DefMale(BodyTypeMale.Average);
-			Intro.SelectCockSize();
-		}, true);
-		Input.buttons[1].Setup("Thin", () => {
-			player.body.DefMale(BodyTypeMale.Thin);
-			Intro.SelectCockSize();
-		}, true);
-		Input.buttons[2].Setup("Muscular", () => {
-			player.body.DefMale(BodyTypeMale.Muscular);
-			Intro.SelectCockSize();
-		}, true);
-		Input.buttons[3].Setup("Girly", () => {
-			player.body.DefMale(BodyTypeMale.Girly);
-			Intro.SelectCockSize();
-		}, true);
-		Input.buttons[4].Setup("Trap", () => {
-			player.body.DefMale(BodyTypeMale.Trap);
-			Intro.SelectCockSize();
-		}, true);
+		const options: IChoice[] = [
+			{
+				nameStr : "Average",
+				func() {
+					player.body.DefMale(BodyTypeMale.Average);
+					Intro.SelectCockSize();
+				}, enabled : true,
+			},
+			{
+				nameStr : "Thin",
+				func() {
+					player.body.DefMale(BodyTypeMale.Thin);
+					Intro.SelectCockSize();
+				}, enabled : true,
+			},
+			{
+				nameStr : "Muscular",
+				func() {
+					player.body.DefMale(BodyTypeMale.Muscular);
+					Intro.SelectCockSize();
+				}, enabled : true,
+			},
+			{
+				nameStr : "Girly",
+				func() {
+					player.body.DefMale(BodyTypeMale.Girly);
+					Intro.SelectCockSize();
+				}, enabled : true,
+			},
+			{
+				nameStr : "Trap",
+				func() {
+					player.body.DefMale(BodyTypeMale.Trap);
+					Intro.SelectCockSize();
+				}, enabled : true,
+			},
+		];
+		Gui.SetButtonsFromList(options);
 	}
 
 	export function SelectCockSize() {
@@ -201,63 +228,72 @@ export namespace Intro {
 		Text.Add("How big is your cock?");
 		Text.Flush();
 
-		const options: IChoice[] = [];
-		options.push({ nameStr : "3\"",
-			func() {
-				player.FirstCock().length.base = 6;
-				player.FirstCock().thickness.base = 1.5;
-				Intro.SkinColor();
-			}, enabled : true,
-		});
-		options.push({ nameStr : "4\"",
-			func() {
-				player.FirstCock().length.base = 8;
-				player.FirstCock().thickness.base = 2;
-				Intro.SkinColor();
-			}, enabled : true,
-		});
-		options.push({ nameStr : "5\"",
-			func() {
-				player.FirstCock().length.base = 10;
-				player.FirstCock().thickness.base = 2.5;
-				Intro.SkinColor();
-			}, enabled : true,
-		});
-		options.push({ nameStr : "6\"",
-			func() {
-				player.FirstCock().length.base = 12;
-				player.FirstCock().thickness.base = 3;
-				Intro.SkinColor();
-			}, enabled : true,
-		});
-		options.push({ nameStr : "7\"",
-			func() {
-				player.FirstCock().length.base = 14;
-				player.FirstCock().thickness.base = 3;
-				Intro.SkinColor();
-			}, enabled : true,
-		});
-		options.push({ nameStr : "8\"",
-			func() {
-				player.FirstCock().length.base = 16;
-				player.FirstCock().thickness.base = 3.5;
-				Intro.SkinColor();
-			}, enabled : true,
-		});
-		options.push({ nameStr : "9\"",
-			func() {
-				player.FirstCock().length.base = 18;
-				player.FirstCock().thickness.base = 3.5;
-				Intro.SkinColor();
-			}, enabled : true,
-		});
-		options.push({ nameStr : "10\"",
-			func() {
-				player.FirstCock().length.base = 20;
-				player.FirstCock().thickness.base = 4;
-				Intro.SkinColor();
-			}, enabled : true,
-		});
+		const options: IChoice[] = [
+			{
+				nameStr : "3\"",
+				func() {
+					player.FirstCock().length.base = 6;
+					player.FirstCock().thickness.base = 1.5;
+					Intro.SkinColor();
+				}, enabled : true,
+			},
+			{
+				nameStr : "4\"",
+				func() {
+					player.FirstCock().length.base = 8;
+					player.FirstCock().thickness.base = 2;
+					Intro.SkinColor();
+				}, enabled : true,
+			},
+			{
+				nameStr : "5\"",
+				func() {
+					player.FirstCock().length.base = 10;
+					player.FirstCock().thickness.base = 2.5;
+					Intro.SkinColor();
+				}, enabled : true,
+			},
+			{
+				nameStr : "6\"",
+				func() {
+					player.FirstCock().length.base = 12;
+					player.FirstCock().thickness.base = 3;
+					Intro.SkinColor();
+				}, enabled : true,
+			},
+			{
+				nameStr : "7\"",
+				func() {
+					player.FirstCock().length.base = 14;
+					player.FirstCock().thickness.base = 3;
+					Intro.SkinColor();
+				}, enabled : true,
+			},
+			{
+				nameStr : "8\"",
+				func() {
+					player.FirstCock().length.base = 16;
+					player.FirstCock().thickness.base = 3.5;
+					Intro.SkinColor();
+				}, enabled : true,
+			},
+			{
+				nameStr : "9\"",
+				func() {
+					player.FirstCock().length.base = 18;
+					player.FirstCock().thickness.base = 3.5;
+					Intro.SkinColor();
+				}, enabled : true,
+			},
+			{
+				nameStr : "10\"",
+				func() {
+					player.FirstCock().length.base = 20;
+					player.FirstCock().thickness.base = 4;
+					Intro.SkinColor();
+				}, enabled : true,
+			},
+		];
 		Gui.SetButtonsFromList(options);
 	}
 
@@ -266,11 +302,11 @@ export namespace Intro {
 		const player: Player = GAME().player;
 
 		Text.Clear();
-		Gui.ClearButtons();
 
 		Text.Add("What is your build?");
 		Text.Flush();
 
+		Gui.ClearButtons();
 		Input.buttons[0].Setup("Average", () => {
 			player.body.DefFemale(BodyTypeFemale.Average);
 			Intro.SkinColor();
@@ -301,11 +337,11 @@ export namespace Intro {
 		const player: Player = GAME().player;
 
 		Text.Clear();
-		Gui.ClearButtons();
 
 		Text.Add("What is your complexion?");
 		Text.Flush();
 
+		Gui.ClearButtons();
 		Input.buttons[0].Setup("White", () => {
 			player.SetSkinColor(Color.white);
 			Intro.HairColor();
@@ -328,11 +364,11 @@ export namespace Intro {
 		const player: Player = GAME().player;
 
 		Text.Clear();
-		Gui.ClearButtons();
 
 		Text.Add("What is the color of your hair?");
 		Text.Flush();
 
+		Gui.ClearButtons();
 		Input.buttons[0].Setup("Black", () => {
 			player.SetHairColor(Color.black);
 			Intro.EyeColor();
@@ -367,11 +403,11 @@ export namespace Intro {
 		const player: Player = GAME().player;
 
 		Text.Clear();
-		Gui.ClearButtons();
 
 		Text.Add("What is the color of your eyes?");
 		Text.Flush();
 
+		Gui.ClearButtons();
 		Input.buttons[0].Setup("Black", () => {
 			player.SetEyeColor(Color.black);
 			Intro.Review();
@@ -402,13 +438,13 @@ export namespace Intro {
 		const player: Player = GAME().player;
 
 		Text.Clear();
-		Gui.ClearButtons();
 
 		player.PrintDescription(true);
 
 		Text.Add("Is this correct?");
 		Text.Flush();
 
+		Gui.ClearButtons();
 		Input.buttons[0].Setup("Yes", () => {
 			Intro.JobSelect();
 		}, true);
@@ -426,67 +462,71 @@ export namespace Intro {
 		Text.Flush();
 
 		// [Fighter][Scholar][Courtesan]
-		const options: IChoice[] = [];
-		options.push({ nameStr : "Fighter",
-			func() {
-				Text.NL();
-				Text.Add("You take pride in your strength and physical prowess, and hope to one day become a mighty warrior. There is still much to learn, however...");
-				Text.Flush();
+		const options: IChoice[] = [
+			{
+				nameStr : "Fighter",
+				func() {
+					Text.NL();
+					Text.Add("You take pride in your strength and physical prowess, and hope to one day become a mighty warrior. There is still much to learn, however...");
+					Text.Flush();
 
-				player.currentJob           = Jobs.Fighter;
-				player.strength.growth     += 0.6;
-				player.stamina.growth      += 0.3;
-				player.dexterity.growth    += 0.3;
-				player.intelligence.growth += 0.0;
-				player.spirit.growth       += 0.1;
-				player.libido.growth       += 0.0;
-				player.charisma.growth     += 0.1;
-				player.flags.startJob    = JobEnum.Fighter;
+					player.currentJob           = Jobs.Fighter;
+					player.strength.growth     += 0.6;
+					player.stamina.growth      += 0.3;
+					player.dexterity.growth    += 0.3;
+					player.intelligence.growth += 0.0;
+					player.spirit.growth       += 0.1;
+					player.libido.growth       += 0.0;
+					player.charisma.growth     += 0.1;
+					player.flags.startJob    = JobEnum.Fighter;
 
-				Gui.NextPrompt(Intro.Mirror2);
-			}, enabled : true,
-			tooltip : "Focused on martial abilities and strength, strives to excel in physical combat.",
-		});
-		options.push({ nameStr : "Scholar",
-			func() {
-				Text.NL();
-				Text.Add("You like to take a calculated approach to problems facing you, weighing options against each other. From books and scrolls, you have taught yourself various useful supportive abilities. There is still much to learn, however...");
-				Text.Flush();
+					Gui.NextPrompt(Intro.Mirror2);
+				}, enabled : true,
+				tooltip : "Focused on martial abilities and strength, strives to excel in physical combat.",
+			},
+			{
+				nameStr : "Scholar",
+				func() {
+					Text.NL();
+					Text.Add("You like to take a calculated approach to problems facing you, weighing options against each other. From books and scrolls, you have taught yourself various useful supportive abilities. There is still much to learn, however...");
+					Text.Flush();
 
-				player.currentJob           = Jobs.Scholar;
-				player.strength.growth     += 0.0;
-				player.stamina.growth      += 0.1;
-				player.dexterity.growth    += 0.2;
-				player.intelligence.growth += 0.6;
-				player.spirit.growth       += 0.3;
-				player.libido.growth       += 0.1;
-				player.charisma.growth     += 0.1;
-				player.flags.startJob    = JobEnum.Scholar;
+					player.currentJob           = Jobs.Scholar;
+					player.strength.growth     += 0.0;
+					player.stamina.growth      += 0.1;
+					player.dexterity.growth    += 0.2;
+					player.intelligence.growth += 0.6;
+					player.spirit.growth       += 0.3;
+					player.libido.growth       += 0.1;
+					player.charisma.growth     += 0.1;
+					player.flags.startJob    = JobEnum.Scholar;
 
-				Gui.NextPrompt(Intro.Mirror2);
-			}, enabled : true,
-			tooltip : "Takes a more intellectual approach to problems, and dabbles slightly in the mystical. Starts out with several support abilities.",
-		});
-		options.push({ nameStr : "Courtesan",
-			func() {
-				Text.NL();
-				Text.Add("You often try to fall back on your sex appeal whenever trouble arises, relying on your natural charm to distract and seduce your foes. There is still much to learn, however...");
-				Text.Flush();
+					Gui.NextPrompt(Intro.Mirror2);
+				}, enabled : true,
+				tooltip : "Takes a more intellectual approach to problems, and dabbles slightly in the mystical. Starts out with several support abilities.",
+			},
+			{
+				nameStr : "Courtesan",
+				func() {
+					Text.NL();
+					Text.Add("You often try to fall back on your sex appeal whenever trouble arises, relying on your natural charm to distract and seduce your foes. There is still much to learn, however...");
+					Text.Flush();
 
-				player.currentJob           = Jobs.Courtesan;
-				player.strength.growth     += 0.0;
-				player.stamina.growth      += 0.0;
-				player.dexterity.growth    += 0.2;
-				player.intelligence.growth += 0.2;
-				player.spirit.growth       += 0.0;
-				player.libido.growth       += 0.5;
-				player.charisma.growth     += 0.5;
-				player.flags.startJob    = JobEnum.Courtesan;
+					player.currentJob           = Jobs.Courtesan;
+					player.strength.growth     += 0.0;
+					player.stamina.growth      += 0.0;
+					player.dexterity.growth    += 0.2;
+					player.intelligence.growth += 0.2;
+					player.spirit.growth       += 0.0;
+					player.libido.growth       += 0.5;
+					player.charisma.growth     += 0.5;
+					player.flags.startJob    = JobEnum.Courtesan;
 
-				Gui.NextPrompt(Intro.Mirror2);
-			}, enabled : true,
-			tooltip : "Focused on sensual abilities and charming your foes into submission.",
-		});
+					Gui.NextPrompt(Intro.Mirror2);
+				}, enabled : true,
+				tooltip : "Focused on sensual abilities and charming your foes into submission.",
+			},
+		];
 		Gui.SetButtonsFromList(options);
 	}
 

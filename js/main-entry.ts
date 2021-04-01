@@ -25,24 +25,24 @@ window.onload = EntryPoint;
 function Setup() {
     InitGameOver(SplashScreen);
 
-	// Load assets
-	   LoadImages(() => {
-		assetsOverlay();
+    // Load assets
+    LoadImages(() => {
+    	assetsOverlay();
 
-		// Go to credits screen
-		SplashScreen();
-		// Render first frame
-		setTimeout(Gui.Render, 100);
-	});
+    	// Go to credits screen
+    	SplashScreen();
+    	// Render first frame
+    	setTimeout(Gui.Render, 100);
+    });
 
-	   InitWorld();
+    InitWorld();
 
-	// Intialize GUI (set key shortcuts, buttons etc)
-	   Gui.Init();
-	   Saver.Init();
+    // Intialize GUI (set key shortcuts, buttons etc)
+    Gui.Init();
+    Saver.Init();
 
-	// Basic menu
-	   Input.menuButtons[0].Setup("Data", NAV().DataPrompt, true);
+    // Basic menu
+    Input.menuButtons[0].Setup(`Data`, NAV().DataPrompt, true);
 
-	   Gui.Render();
+    Gui.Render();
 }

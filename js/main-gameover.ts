@@ -8,13 +8,13 @@ export function InitGameOver(splashScreen: () => void) {
 }
 
 export function SetGameOverButton(text?: Tooltip) {
-	text = text || "This is where your journey comes to an end.";
-	Gui.ClearButtons();
-	Input.buttons[0].Setup("Game Over", GameOver, true, undefined, text);
+    text = text || `This is where your journey comes to an end.`;
+    Gui.ClearButtons();
+    Input.buttons[0].Setup(`Game Over`, GameOver, true, undefined, text);
 }
 
 // TODO: Stats, newgame+ etc
 const GameOver = () => {
-	Gui.Callstack = [];
-	SplashScreen();
+    Gui.Callstack = [];
+    SplashScreen();
 };
