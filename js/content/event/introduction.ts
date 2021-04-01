@@ -3688,9 +3688,9 @@ export namespace Intro {
 			parse.job = "Scholar";
 		} else if (player.flags.startJob === JobEnum.Courtesan) {
 			parse.job = "Courtesan";
-	} else {
+		} else {
 			parse.job = "Fighter";
-	}
+		}
 
 		Text.Add("<i>“Oh... one more thing before [i] leave.”</i>", parse);
 		Text.NL();
@@ -3699,9 +3699,9 @@ export namespace Intro {
 			Text.Add("<i>“Very interesting!”</i> [name] lights up, excited in finding a fellow knowledge seeker. <i>“There is always more to learn, and regarding this, I may be able to help you. These scrolls can also aid you, perhaps broaden your horizons?”</i> ", parse);
 		} else if (player.flags.startJob === JobEnum.Courtesan) {
 			Text.Add("<i>“I... cannot say I understand your way of fighting.”</i> [name]’s cheek blossom, slightly embarrassed. <i>“Should you reconsider your ways, please study these scrolls.”</i> ", parse);
-	} else { // Fighter
+		} else { // Fighter
 			Text.Add("<i>“I am sure you must be very strong... I do not think I can help you much, as it is not my calling, but please take these scrolls, they describe other ways you can defeat your foes.”</i> ", parse);
-	}
+		}
 		Text.Add("[HeShe] hands you three different scrolls, detailing the basics of physical, magical and sensual combat, and how to best get started with each of those.", parse);
 		Text.NL();
 		Text.Add("<i>“The chief has provided you with some equipment, you can find it in that chest over there.”</i> [name] points to a large coffer near the back of the tent. Opening it reveals ", parse);
