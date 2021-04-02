@@ -542,13 +542,13 @@ export namespace Intro {
 	export function Mirror3() {
 		Text.Clear();
 
-		Text.Add("Unable to resist, you reach out to grab the beautiful stone. As your fingers connect with the gemstone, something peculiar happens. The mist within the stone suddenly stops moving for a fraction of a second, before returning to its previous slow motion. You get the sense that the gem is glowing slightly brighter.");
-		Text.NL();
-		Text.Add("Mustering your courage, you grab the purple stone and pull it from its socket in the mirror. A jolt of energy shoots through you, leaving behind a tingling feeling. Examining the stone in wonder, you notice that it now pulses with a faint light, perfectly in sync with your heartbeat. Resolving to study it further at a later time, you pocket the gem.");
-		Text.NL();
-		Text.Add("<b>Acquired purple gemstone!</b>");
-		Text.NL();
-		Text.Add("Your eyes are drawn upward by a reddish glow. Gasping in genuine shock, you stumble back a few steps. The surface of the mirror has completely transformed. While you can still see your own reflection, the room behind you has vanished. In its place is a hellish landscape of fire and smoke. Panicking, you whip your head around, relieved to find that you are, indeed, still in the old dusty attic. Perhaps the mirror is a portal to another world? If so, it doesn't look like it leads to any place you want to visit.");
+		Text.Out(`Unable to resist, you reach out to grab the beautiful stone. As your fingers connect with the gemstone, something peculiar happens. The mist within the stone suddenly stops moving for a fraction of a second, before returning to its previous slow motion. You get the sense that the gem is glowing slightly brighter.
+
+		Mustering your courage, you grab the purple stone and pull it from its socket in the mirror. A jolt of energy shoots through you, leaving behind a tingling feeling. Examining the stone in wonder, you notice that it now pulses with a faint light, perfectly in sync with your heartbeat. Resolving to study it further at a later time, you pocket the gem.
+
+		<b>Acquired purple gemstone!</b>
+
+		Your eyes are drawn upward by a reddish glow. Gasping in genuine shock, you stumble back a few steps. The surface of the mirror has completely transformed. While you can still see your own reflection, the room behind you has vanished. In its place is a hellish landscape of fire and smoke. Panicking, you whip your head around, relieved to find that you are, indeed, still in the old dusty attic. Perhaps the mirror is a portal to another world? If so, it doesn't look like it leads to any place you want to visit.`);
 		Text.Flush();
 
 		Gui.NextPrompt(Intro.Mirror4);
@@ -557,15 +557,15 @@ export namespace Intro {
 	export function Mirror4() {
 		Text.Clear();
 
-		Text.Add("Can you really keep this a secret? Perhaps you should leave, for now... You are stopped short as your eyes snap back to the mirror. Behind your reflection, a nightmarish creature is rising on its haunches. You get a glimpse of callused red skin streaked with black and a bizarre collection of sharp claws, horns and spikes before the hulking creature presses a clawed hand down on your shoulder.");
-		Text.NL();
-		Text.Add("<b>CAUGHT YOU.</b> A voice thunders inside your skull, seeming to come from everywhere around you. Panicking, you try to break away, but are held fast. You must look rather comical, struggling with an invisible assailant, but the grip on your shoulder is very real.");
-		Text.NL();
-		Text.Add("<b>LITTLE PET,</b> the demon chuckles in amusement, <b>OH, WHAT FUN WE SHALL HAVE.</b> In the mirror, the creature bends down ponderously - it must be at least twice your height - until you can feel its breath on your neck. A long barbed tongue snakes its way out of its mouth and down into your clothes, the rough appendage painfully scraping your soft skin and almost drawing blood.");
-		Text.NL();
-		Text.Add("Slowly, you are being pushed closer and closer to the reflection, an uncomfortable pressure against your back urging you forward. You instinctively pull away from it as you realize that it can only be the demon's unholy cock, stiffening as it brushes you.");
-		Text.NL();
-		Text.Add("As your face is roughly pressed against the surface of the mirror, you are surprised to find it soft, yielding to the pressure. Slowly, your body is pushed into the mirror, swallowing you into oblivion. Your senses go into overdrive as you are surrounded by cold swirling flames, burning and tearing at your clothes. The smell of smoke and sulfur assault your nose, and you feel the tang of hot blood on your tongue as you scream in pain. Exhaustion overcomes you, and you pass out in the whirling chaos.");
+		Text.Out(`Can you really keep this a secret? Perhaps you should leave, for now... You are stopped short as your eyes snap back to the mirror. Behind your reflection, a nightmarish creature is rising on its haunches. You get a glimpse of callused red skin streaked with black and a bizarre collection of sharp claws, horns and spikes before the hulking creature presses a clawed hand down on your shoulder.
+
+		<b>CAUGHT YOU.</b> A voice thunders inside your skull, seeming to come from everywhere around you. Panicking, you try to break away, but are held fast. You must look rather comical, struggling with an invisible assailant, but the grip on your shoulder is very real.
+
+		<b>LITTLE PET,</b> the demon chuckles in amusement, <b>OH, WHAT FUN WE SHALL HAVE.</b> In the mirror, the creature bends down ponderously - it must be at least twice your height - until you can feel its breath on your neck. A long barbed tongue snakes its way out of its mouth and down into your clothes, the rough appendage painfully scraping your soft skin and almost drawing blood.
+
+		Slowly, you are being pushed closer and closer to the reflection, an uncomfortable pressure against your back urging you forward. You instinctively pull away from it as you realize that it can only be the demon's unholy cock, stiffening as it brushes you.
+
+		As your face is roughly pressed against the surface of the mirror, you are surprised to find it soft, yielding to the pressure. Slowly, your body is pushed into the mirror, swallowing you into oblivion. Your senses go into overdrive as you are surrounded by cold swirling flames, burning and tearing at your clothes. The smell of smoke and sulfur assault your nose, and you feel the tang of hot blood on your tongue as you scream in pain. Exhaustion overcomes you, and you pass out in the whirling chaos.`);
 		Text.Flush();
 
 		Gui.NextPrompt(Intro.EnterDarkAspect);
@@ -579,11 +579,11 @@ export namespace Intro {
 
 		Text.Clear();
 
-		Text.Add("Slowly, you come to as your senses return to you. You jump up in a crouch, afraid that the creature from before followed, but you seem to be completely alone. The sudden motion makes you dizzy, and you are forced to sit down again, groaning until your head stops spinning. Your naked skin rubs uncomfortably on the cracked ground.");
-		Text.NL();
-		Text.Add("Checking the ragged remains of your clothes, you confirm that the gemstone is somehow still in your pocket.");
-		Text.NL();
-		Text.Add("The stale air is surprisingly cold. Shivering and wondering what the hell you have gotten yourself into now, you rise to your feet and have a look around you.");
+		Text.Out(`Slowly, you come to as your senses return to you. You jump up in a crouch, afraid that the creature from before followed, but you seem to be completely alone. The sudden motion makes you dizzy, and you are forced to sit down again, groaning until your head stops spinning. Your naked skin rubs uncomfortably on the cracked ground.
+
+		Checking the ragged remains of your clothes, you confirm that the gemstone is somehow still in your pocket.
+
+		The stale air is surprisingly cold. Shivering and wondering what the hell you have gotten yourself into now, you rise to your feet and have a look around you.`);
 		Text.Flush();
 
 		Gui.NextPrompt(() => {
@@ -597,7 +597,7 @@ export namespace Intro {
 	// Dark aspect dimension
 	//
 	DarkAspect.Barrens.description = () => {
-		Text.Add("You are in an unfamiliar place, an endless plain of red cracked earth, interspersed with black thorn bushes. The sky looks like something from an insane painting, vivid red streaks clashing with dark brown, gray and black clouds. Occasionally, red lightning flashes across the sky, flooding the dim and dreary wasteland with sharp light.");
+		Text.Out(`You are in an unfamiliar place, an endless plain of red cracked earth, interspersed with black thorn bushes. The sky looks like something from an insane painting, vivid red streaks clashing with dark brown, gray and black clouds. Occasionally, red lightning flashes across the sky, flooding the dim and dreary wasteland with sharp light.`);
 		Text.NL();
 	};
 	DarkAspect.Barrens.links.push(new Link(
@@ -611,27 +611,27 @@ export namespace Intro {
 
 			Text.Clear();
 
-			Text.Add("Seeing nothing else of interest and getting a bit cold, you start out for the mountains.");
-			Text.NL();
-			Text.Add("Measuring the distance, you guess that it will take you several hours to reach the foothills. Hopefully, you can find some shelter from the elements there, but you fear that your bare feet will be bloodied stumps by the time you arrive. Still, you don't really have anywhere else to go.");
-			Text.NL();
-			Text.Add("As you walk, you start to contemplate your situation. You are clearly not in your own world, but what is this place? Some strange hell? How exactly did the mirror transport you here? Where - you shudder - did that demon disappear to? Exposed as you are, you'd hate to run into that creature here.");
-			Text.NL();
-			Text.Add("As if summoned, a deafening crash behind you shatters your train of thought. Twirling around, you gape in disbelief as the earth shakes violently, huge cracks appearing. With a final roar, the ground shudders and collapses in on itself, opening a huge fiery chasm.");
-			Text.NL();
-			Text.Add("From the abyss rises the demon from before, but it is different this time. Limbs ablaze with a red sooty flame, the thing must be at least a hundred feet tall. It tilts its triangular head as it notices you, a far-too-wide grin spreading across its face, baring hundreds of razor sharp teeth.");
-			Text.NL();
-			Text.Add("<b>FOUND YOU!</b> The voice echoes triumphantly across the blazing plains. The demon starts to climb out of the chasm, the ground catching fire where the creature plants its claws. You shake yourself and turn around to run. This is <b>NOT</b> a good place to be in.");
+			Text.Out(`Seeing nothing else of interest and getting a bit cold, you start out for the mountains.
+
+			Measuring the distance, you guess that it will take you several hours to reach the foothills. Hopefully, you can find some shelter from the elements there, but you fear that your bare feet will be bloodied stumps by the time you arrive. Still, you don't really have anywhere else to go.
+
+			As you walk, you start to contemplate your situation. You are clearly not in your own world, but what is this place? Some strange hell? How exactly did the mirror transport you here? Where - you shudder - did that demon disappear to? Exposed as you are, you'd hate to run into that creature here.
+
+			As if summoned, a deafening crash behind you shatters your train of thought. Twirling around, you gape in disbelief as the earth shakes violently, huge cracks appearing. With a final roar, the ground shudders and collapses in on itself, opening a huge fiery chasm.
+
+			From the abyss rises the demon from before, but it is different this time. Limbs ablaze with a red sooty flame, the thing must be at least a hundred feet tall. It tilts its triangular head as it notices you, a far-too-wide grin spreading across its face, baring hundreds of razor sharp teeth.
+
+			<b>FOUND YOU!</b> The voice echoes triumphantly across the blazing plains. The demon starts to climb out of the chasm, the ground catching fire where the creature plants its claws. You shake yourself and turn around to run. This is <b>NOT</b> a good place to be in.`);
 			Text.Flush();
 
 			Gui.NextPrompt(() => {
 				Text.Clear();
 
-				Text.Add("Terrified, you scramble along as fast as your legs can carry you, but it is clear from the shaking ground and the growing heat that the demon is gaining on you. Looking up again, the mountains appear to be no closer than before and still hopelessly out of your reach.");
-				Text.NL();
-				Text.Add("You can feel the demon's breath on your back, a sharp stink of sulfur. Desperately, you close your eyes and sprint as fast as you can, waiting for the inevitable demonic claw to descend on you and crush your small body. Your heart almost bursts from your chest in terror as you trip on some hidden crevice and fall forward. Instinctively rolling up your body in a tight ball, you manage to deflect most of the damage from the fall, but your breath is knocked from your body as you slam into... a rock wall?");
-				Text.NL();
-				Text.Add("Dizzied, you open your eyes. Far across the plains, miles away, you see the huge demon striding toward you. Looking up, you realize that you have somehow reached the foothills of the mountain. Distance doesn't seem to work the same way here... Still, you are far from out of danger.");
+				Text.Out(`Terrified, you scramble along as fast as your legs can carry you, but it is clear from the shaking ground and the growing heat that the demon is gaining on you. Looking up again, the mountains appear to be no closer than before and still hopelessly out of your reach.
+
+				You can feel the demon's breath on your back, a sharp stink of sulfur. Desperately, you close your eyes and sprint as fast as you can, waiting for the inevitable demonic claw to descend on you and crush your small body. Your heart almost bursts from your chest in terror as you trip on some hidden crevice and fall forward. Instinctively rolling up your body in a tight ball, you manage to deflect most of the damage from the fall, but your breath is knocked from your body as you slam into... a rock wall?
+
+				Dizzied, you open your eyes. Far across the plains, miles away, you see the huge demon striding toward you. Looking up, you realize that you have somehow reached the foothills of the mountain. Distance doesn't seem to work the same way here... Still, you are far from out of danger.`);
 				Text.Flush();
 
 				player.curSp -= 10;
@@ -645,28 +645,28 @@ export namespace Intro {
 	));
 
 	DarkAspect.Mountains.description = () => {
-		Text.Add("You are at the base of a towering mountain range, rising like massive black pillars toward the chaotic sky. Below, on the wasteland, you can see the demon striding toward you in long steps. Behind it, fire is spreading out, the cracks from the demon's heavy footsteps opening up into an endless abyss.");
+		Text.Out(`You are at the base of a towering mountain range, rising like massive black pillars toward the chaotic sky. Below, on the wasteland, you can see the demon striding toward you in long steps. Behind it, fire is spreading out, the cracks from the demon's heavy footsteps opening up into an endless abyss.`);
 		Text.NL();
 	};
 	DarkAspect.Mountains.links.push(new Link(
 		"Peak", true, true,
 		() => {
-			Text.Add("The only way left to you is up, but you have no idea how to make the climb. Up close, the mountain is a sheer cliff, almost vertical.");
+			Text.Out(`The only way left to you is up, but you have no idea how to make the climb. Up close, the mountain is a sheer cliff, almost vertical.`);
 			Text.NL();
 		},
 		() => {
 			const player: Player = GAME().player;
 
 			Text.Clear();
-			Text.Add("With no time to lose, you attempt to climb the cliff, somehow finding purchase for your fingers and toes in the ragged rock face. With difficulty, you manage to climb up a crevice, reaching a small platform. The area is about ten by ten yards large, surrounded by jagged outcroppings as sharp as swords.");
-			Text.NL();
-			Text.Add("The short climb has left you winded. This isn't going to work, you conclude. Looking back to where you came from, the demon seems to have reached the foothills below and has started climbing the crevice. It will reach this place in mere moments. Scrambling to find a hiding place, you duck in behind a rock, scratching yourself and drawing blood.");
-			Text.NL();
-			Text.Add("Peeking out from your hiding place, your hope drains as you see one of the demon's massive clawed hands crest the edge of the cliff. It has already caught up with you.");
-			Text.NL();
-			Text.Add("<b>DON'T RUN, PUNY HUMAN. THERE IS NO USE HIDING,</b> the booming voice announces, sounding slightly amused. <b>YOU ARE IN MY REALM NOW, THERE IS NO ESCAPE.</b> It draws itself up to rest its arms in the clearing and you get your first good look at the thing.");
-			Text.NL();
-			Text.Add("A multitude of spikes and horns rise from its hairless head in a chaotic mess. The demon's lipless mouth, filled with incredibly sharp teeth, is spread in a huge grin spanning the entirety of the creature's red skinned triangular head. Two sunken eyes burning like hot coals search the area, trying to find you.");
+			Text.Out(`With no time to lose, you attempt to climb the cliff, somehow finding purchase for your fingers and toes in the ragged rock face. With difficulty, you manage to climb up a crevice, reaching a small platform. The area is about ten by ten yards large, surrounded by jagged outcroppings as sharp as swords.
+
+			The short climb has left you winded. This isn't going to work, you conclude. Looking back to where you came from, the demon seems to have reached the foothills below and has started climbing the crevice. It will reach this place in mere moments. Scrambling to find a hiding place, you duck in behind a rock, scratching yourself and drawing blood.
+
+			Peeking out from your hiding place, your hope drains as you see one of the demon's massive clawed hands crest the edge of the cliff. It has already caught up with you.
+
+			<b>DON'T RUN, PUNY HUMAN. THERE IS NO USE HIDING,</b> the booming voice announces, sounding slightly amused. <b>YOU ARE IN MY REALM NOW, THERE IS NO ESCAPE.</b> It draws itself up to rest its arms in the clearing and you get your first good look at the thing.
+
+			A multitude of spikes and horns rise from its hairless head in a chaotic mess. The demon's lipless mouth, filled with incredibly sharp teeth, is spread in a huge grin spanning the entirety of the creature's red skinned triangular head. Two sunken eyes burning like hot coals search the area, trying to find you.`);
 			Text.Flush();
 
 			player.curHp -= 2;
@@ -674,9 +674,9 @@ export namespace Intro {
 
 			Gui.NextPrompt(() => {
 				Text.Clear();
-				Text.Add("A shrill laugh startles you. While you were focusing on the demon, some strange creature has sneaked up on you from behind! The tiny red monster seems to be some kind of imp; a nude, scrawny creature with bulging eyes and a head too large for its body.");
-				Text.NL();
-				Text.Add("Cursing, you prepare to fight the imp, which is quickly joined by another one just like it. Together, they force you out into the open. Above you, the demon watches the spectacle with a bemused grin. <b>HAH. THIS MIGHT BE AMUSING.</b>");
+				Text.Out(`A shrill laugh startles you. While you were focusing on the demon, some strange creature has sneaked up on you from behind! The tiny red monster seems to be some kind of imp; a nude, scrawny creature with bulging eyes and a head too large for its body.
+
+				Cursing, you prepare to fight the imp, which is quickly joined by another one just like it. Together, they force you out into the open. Above you, the demon watches the spectacle with a bemused grin. <b>HAH. THIS MIGHT BE AMUSING.</b>`);
 				Text.Flush();
 
 				Gui.NextPrompt(Intro.DemonFight);
@@ -692,9 +692,9 @@ export namespace Intro {
 
 		Text.Clear();
 
-		Text.Add("A quick, cursory glance tells you that the imps carry nothing of value. In fact, they carry nothing at all, not even clothes.");
-		Text.NL();
-		Text.Add("The words of the demon return to you... why should you not claim your rightful price? You thoughtfully consider the fallen group of scrawny imps - hardly an appealing lot, but maybe they can relieve that itch in your loins?");
+		Text.Out(`A quick, cursory glance tells you that the imps carry nothing of value. In fact, they carry nothing at all, not even clothes.
+
+		The words of the demon return to you... why should you not claim your rightful price? You thoughtfully consider the fallen group of scrawny imps - hardly an appealing lot, but maybe they can relieve that itch in your loins?`);
 		Text.NL();
 
 		Text.Flush();
@@ -2846,7 +2846,7 @@ export namespace Intro {
 
 		Text.Clear();
 
-		Text.Add("As she gently places her hand on your chest, you are shrouded in light suffusing your entire body. You feel the horns on your forehead painlessly recede. At the same time you feel your tail diminish and shrink back into your body.");
+		Text.Out(`As she gently places her hand on your chest, you are shrouded in light suffusing your entire body. You feel the horns on your forehead painlessly recede. At the same time you feel your tail diminish and shrink back into your body.`);
 
 		// Remove tail/horns
 		player.Appendages().pop();
@@ -2864,9 +2864,9 @@ export namespace Intro {
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Remove",
 				func() {
-					Text.Add("After a brief moment of hesitation, you nod. Her cheeks flushed, the Goddess trails her finger down the cleft between your breasts, before uncertainly giving your clit an experimental prod. Barely stifling a moan from the touch, a twinge of regret flits through you as the appendage is enveloped in a soft glow, shrinking down to its original size.");
-					Text.NL();
-					Text.Add("Aria gives her head a quick shake, clearing her thoughts.");
+					Text.Out(`After a brief moment of hesitation, you nod. Her cheeks flushed, the Goddess trails her finger down the cleft between your breasts, before uncertainly giving your clit an experimental prod. Barely stifling a moan from the touch, a twinge of regret flits through you as the appendage is enveloped in a soft glow, shrinking down to its original size.
+
+					Aria gives her head a quick shake, clearing her thoughts.`);
 					const cocks = player.AllCocks();
 					cocks[ccIdx].vag.clitCock = undefined;
 					cocks.splice(ccIdx, 1);
@@ -2877,9 +2877,9 @@ export namespace Intro {
 			});
 			options.push({ nameStr : "Keep",
 				func() {
-					Text.Add("You thoughtfully bite your lower lip, studying your erect girl-cock. Deciding that you rather like it the way it is, you shake your head at the Goddess, causing her to raise an eyebrow at you but letting it pass.");
-					Text.NL();
-					Text.Add("Aria gives her head a quick shake, clearing her thoughts.");
+					Text.Out(`You thoughtfully bite your lower lip, studying your erect girl-cock. Deciding that you rather like it the way it is, you shake your head at the Goddess, causing her to raise an eyebrow at you but letting it pass.
+
+					Aria gives her head a quick shake, clearing her thoughts.`);
 					Text.Flush();
 					Gui.NextPrompt(Intro.AriaTalk);
 				}, enabled : true,
@@ -2899,9 +2899,9 @@ export namespace Intro {
 	export function AriaTalk() {
 		Text.Clear();
 
-		Text.Add("The whole purification process was unexpectedly tiring, leaving you weak at the knees.");
-		Text.NL();
-		Text.Add("<i>Now then,</i> she gestures to a marble bench nearby. <i>Please allow me to answer your questions.</i> The two of you get seated. What do you want to ask the Goddess?");
+		Text.Out(`The whole purification process was unexpectedly tiring, leaving you weak at the knees.
+
+		<i>Now then,</i> she gestures to a marble bench nearby. <i>Please allow me to answer your questions.</i> The two of you get seated. What do you want to ask the Goddess?`);
 
 		ariaTalkedAboutAria = false;
 		ariaTalkedAboutUru = false;
@@ -2981,9 +2981,11 @@ export namespace Intro {
 			options.push({ nameStr : "Bird",
 				func() {
 					Text.Clear();
-					Text.Add("<i>“I met a talking bird outside,”</i> you comment.");
-					Text.NL();
-					Text.Add("Looking at you a bit amused, Aria replies coyly. <i>After all you have been through, you find talking birds strange?</i> Guess you can't argue with that.");
+					Text.Out(`“I met a talking bird outside,” you comment.
+
+					Looking at you a bit amused, Aria replies coyly. <i>After all you have been through, you find talking birds strange?</i>
+
+					Guess you can't argue with that.`);
 
 					talkedToBird = false;
 					Intro.AriaQnA();
@@ -3001,25 +3003,25 @@ export namespace Intro {
 	export function AriaEnd() {
 		Text.Clear();
 
-		Text.Add("Putting two and two together, you recall Uru's last words to you. Worried, you explain that she may, indeed, have found a way to enter other realms, possibly through the power of the gem in your hand. For a moment, the Goddess falters. <i>In that case, time is even shorter than I thought. I must act quickly.</i>");
-		Text.NL();
-		Text.Add("Deep in thought, the Goddess strides back and forth. You attempt to get up from the bench, but find yourself too tired. Seems that the recent physical and mental hardships have finally caught up with you.");
-		Text.NL();
-		Text.Add("<i>Even if Uru is loose, there is really only one place that she can go without proper tools. To the center realm... to Eden.</i> She gazes at your exhausted form thoughtfully, weighing your worth. <i>Very soon, you will find yourself tested, and I find myself wondering what choices you will make.</i>");
-		Text.NL();
-		Text.Add("You struggle to reply, but something seems to have caught in your throat, a sharp pain spreading across your chest. Worried, Aria hurries over to you. <i>You cannot stay here much longer. Quickly, the gem.</i> Grabbing a hold of your wrist, she gently presses the purple jewel against your chest. <i>I have done all I can for you, but now you must return to the mortal realm. You are at your limit, staying here any longer will put your life in danger.</i>");
-		Text.NL();
-		Text.Add("<i>The jewel should have enough power to take you to Eden,</i> she assures you. <i>Once there, one of my servants will meet you.</i> As she speaks, a bright, shining light envelops you. Aria's face fades away until all that you can see is the white light.");
-		Text.NL();
-		Text.Add("You float, suspended in limbo. Slowly, the emptiness around you takes on color, the deep blue of an endless summer sky.");
-		Text.NL();
-		Text.Add("Far below you, the light takes on a slightly different hue, a fluffy mass of white. Surprised, you realize that you are looking at a bed of clouds. A tiny dark speck appears, growing larger as you come closer. You are moving incredibly fast, although, you do not feel any wind. Below you is a small patch of land with a single tree on it, floating in the middle of a white sea.");
-		Text.NL();
-		Text.Add("As you get closer, your sense of scale skews as miniature mountains, lakes, cities, and forests become visible. No, wait, not miniature - the landmass is actually huge, the great tree at its center gargantuan, its crown thousands of feet above the ground.");
-		Text.NL();
-		Text.Add("<i>Do not be afraid,</i> Aria whispers faintly. <i>Welcome to Eden.</i>");
-		Text.NL();
-		Text.Add("You have no chance to reply, nor even scream, as you close in on the ground and your vision goes black.");
+		Text.Out(`Putting two and two together, you recall Uru's last words to you. Worried, you explain that she may, indeed, have found a way to enter other realms, possibly through the power of the gem in your hand. For a moment, the Goddess falters. <i>In that case, time is even shorter than I thought. I must act quickly.</i>
+
+		Deep in thought, the Goddess strides back and forth. You attempt to get up from the bench, but find yourself too tired. Seems that the recent physical and mental hardships have finally caught up with you.
+
+		<i>Even if Uru is loose, there is really only one place that she can go without proper tools. To the center realm... to Eden.</i> She gazes at your exhausted form thoughtfully, weighing your worth. <i>Very soon, you will find yourself tested, and I find myself wondering what choices you will make.</i>
+
+		You struggle to reply, but something seems to have caught in your throat, a sharp pain spreading across your chest. Worried, Aria hurries over to you. <i>You cannot stay here much longer. Quickly, the gem.</i> Grabbing a hold of your wrist, she gently presses the purple jewel against your chest. <i>I have done all I can for you, but now you must return to the mortal realm. You are at your limit, staying here any longer will put your life in danger.</i>
+
+		<i>The jewel should have enough power to take you to Eden,</i> she assures you. <i>Once there, one of my servants will meet you.</i> As she speaks, a bright, shining light envelops you. Aria's face fades away until all that you can see is the white light.
+
+		You float, suspended in limbo. Slowly, the emptiness around you takes on color, the deep blue of an endless summer sky.
+
+		Far below you, the light takes on a slightly different hue, a fluffy mass of white. Surprised, you realize that you are looking at a bed of clouds. A tiny dark speck appears, growing larger as you come closer. You are moving incredibly fast, although, you do not feel any wind. Below you is a small patch of land with a single tree on it, floating in the middle of a white sea.
+
+		As you get closer, your sense of scale skews as miniature mountains, lakes, cities, and forests become visible. No, wait, not miniature - the landmass is actually huge, the great tree at its center gargantuan, its crown thousands of feet above the ground.
+
+		<i>Do not be afraid,</i> Aria whispers faintly. <i>Welcome to Eden.</i>
+
+		You have no chance to reply, nor even scream, as you close in on the ground and your vision goes black.`);
 		Text.Flush();
 		Gui.NextPrompt(Intro.NomadsWakingUp);
 	}
