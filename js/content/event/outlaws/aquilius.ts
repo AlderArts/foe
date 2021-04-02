@@ -3,6 +3,7 @@
  */
 import * as _ from "lodash";
 
+import { Race } from "../../../engine/entity/body/race";
 import { Entity } from "../../../engine/entity/entity";
 import { IStorage } from "../../../engine/entity/istorage";
 import { Jobs } from "../../../engine/entity/job";
@@ -45,6 +46,7 @@ export class Aquilius extends Entity {
 		this.name = "Aquilius";
 
 		this.body.DefMale();
+		this.body.SetRace(Race.Avanai);
 
 		this.SetLevelBonus();
 		this.RestFull();

@@ -5,6 +5,7 @@
  */
 import { Images } from "../../../assets";
 import { Color } from "../../../engine/entity/body/color";
+import { Race } from "../../../engine/entity/body/race";
 import { Entity } from "../../../engine/entity/entity";
 import { IStorage } from "../../../engine/entity/istorage";
 import { JobDesc, Jobs } from "../../../engine/entity/job";
@@ -56,6 +57,7 @@ export class Cveta extends Entity {
 		this.SetExpToLevel();
 
 		this.body.DefFemale();
+		this.body.SetRace(Race.Avanai);
 		this.FirstBreastRow().size.base = 5;
 		this.Butt().buttSize.base = 3;
 		this.SetSkinColor(Color.red);

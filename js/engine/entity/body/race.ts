@@ -374,6 +374,10 @@ Race.Avian = new RaceDesc("avian", 16, {
 	desc: [{a: "an", noun: "avian"}, {a: "a", noun: "bird"}],
 	quantify: [{a: "an", noun: "avian"}],
 });
+Race.Avanai = new RaceDesc("avanai", 45, {
+	desc: [{a: "an", noun: "avanai"}],
+	quantify: [{a: "an", noun: "avanai"}],
+}, Race.Avian);
 Race.Gryphon = new RaceDesc("gryphon", 40, {
 	desc: [{a: "a", noun: "gryphon"}],
 	geneSize : 1.2,
@@ -486,5 +490,7 @@ Race.Hyena = new RaceDesc("hyena", 44, {
 	desc: [{a: "a", noun: "hyena"}],
 	quantify: [{a: "a", noun: "hyenalike"}],
 });
+
+// NEXT FREE: 46
 
 export { Race };
