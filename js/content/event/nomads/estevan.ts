@@ -6,7 +6,6 @@
 import { GetDEBUG } from "../../../../app";
 import { AppendageType } from "../../../engine/entity/body/appendage";
 import { Color } from "../../../engine/entity/body/color";
-import { Gender } from "../../../engine/entity/body/gender";
 import { Orifice } from "../../../engine/entity/body/orifice";
 import { Race } from "../../../engine/entity/body/race";
 import { Entity } from "../../../engine/entity/entity";

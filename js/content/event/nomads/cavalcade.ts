@@ -4,7 +4,6 @@
 import { GetDEBUG } from "../../../../app";
 import { Cavalcade } from "../../../engine/cavalcade/cavalcade";
 import { ICavalcadePlayer } from "../../../engine/cavalcade/cavalcade-player";
-import { Gender } from "../../../engine/entity/body/gender";
 import { RaceScore } from "../../../engine/entity/body/race";
 import { GAME, TimeStep } from "../../../engine/GAME";
 import { GameState, SetGameState } from "../../../engine/gamestate";
