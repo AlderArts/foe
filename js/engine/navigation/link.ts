@@ -1,3 +1,4 @@
+import { Tooltip } from "../../gui/button";
 
 type funcType = (obj?: any, ...args: any[]) => void;
 
@@ -37,6 +38,6 @@ export interface IChoice {
     func: funcType;
     obj?: any;
     enabled: boolean;
-    tooltip?: string;
+    tooltip?: Tooltip;
     image?: any;
 }
