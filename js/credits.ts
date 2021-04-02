@@ -166,7 +166,7 @@ export function CreditsScreen(SplashScreen: CallableFunction) {
 
 	Text.Add("Code snippets:", undefined, "bold");
 	Text.NL();
-	Text.Add("Image pre-loader: https://github.com/DimitarChristoff/pre-loader");
+	Text.Add(`Image pre-loader: <a href="https://github.com/DimitarChristoff/pre-loader">https://github.com/DimitarChristoff/pre-loader</a>`);
 
 	Text.NL();
 
