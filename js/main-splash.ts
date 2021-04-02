@@ -16,19 +16,16 @@ const SplashScreen = () => {
 	Text.Clear();
 	Gui.ClearButtons();
 
-	Text.Add("<span style=\"font-size: 26pt; font-family:Calibri;\">" + VERSION_STRING + "</span>");
-	Text.NL();
+	Text.Out(`<span style="font-size: 26pt; font-family:Calibri;">${VERSION_STRING}</span>
+	${Text.InsertImage(Images.gwendy)} <i>Game developed by <a href="http://www.furaffinity.net/user/aldergames/">Alder</a></i>
 
-	Text.Add(Text.InsertImage(Images.gwendy)); // TEMP
-	Text.Out(`<i>Game developed by <a href="http://www.furaffinity.net/user/aldergames/">Alder</a></i>
+	Editors: MrKrampus, Del, Johnathan Roberts, Ryous, CalmKhaos. Thanks a bunch for your hard work!
 
-		Editors: MrKrampus, Del, Johnathan Roberts, Ryous, CalmKhaos. Thanks a bunch for your hard work!
+	Thanks to <a href="http://www.fenoxo.com/">Fenoxo</a> for hosting this and for the inspiration. This game would never have been created if not for CoC!
 
-		Thanks to <a href="http://www.fenoxo.com/">Fenoxo</a> for hosting this and for the inspiration. This game would never have been created if not for CoC!
+	<b>This game contains adult content. By playing you confirm that you are 18 years or older. Also, beware furries and futas.</b>
 
-		<b>This game contains adult content. By playing you confirm that you are 18 years or older. Also, beware furries and futas.</b>
-
-		This game has hotkeys enabled, you can use 1-5, q-t, a-g`);
+	This game has hotkeys enabled, you can use 1-5, q-t, a-g`);
 
 	Input.buttons[0].enabledImage = Images.imgButtonEnabled2;
 	Input.buttons[0].Setup("New game", () => {
