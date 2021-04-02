@@ -1,7 +1,6 @@
 import { IChoice } from "./engine/navigation/link";
 import { Tooltip } from "./gui/button";
 import { Gui } from "./gui/gui";
-import { Input } from "./gui/input";
 
 let SplashScreen: () => void;
 export function InitGameOver(splashScreen: () => void) {

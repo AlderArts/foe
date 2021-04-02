@@ -40,6 +40,7 @@ export const VERSION_STRING = `Fall of Eden ${VERSION}: ${VERSION_NAME}`;
 
 export const HEADER_FONT  = "bold 30pt Calibri";
 export const BUTTON_FONT  = "bold 14pt Tahoma, 'Droid Sans', sans-serif";
+export const TINY_FONT    = "8pt Calibri";
 export const SMALL_FONT   = "16pt Calibri";
 export const DEFAULT_FONT = "20pt Calibri";
 export const LARGE_FONT   = "26pt Calibri";

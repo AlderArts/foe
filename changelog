@@ -11,6 +11,7 @@ Version 0.5.7
  - Adds a choice at character creation.
  - Adds a menu item Gender to the player party menu. You can change your choice (Auto, Male, Female) at any point.
  - If you wish to continue playing the game as usual, you don't have to do anything.
+* Feature: After not working for very long, the show keybinds feature is back in action. Toggle it in the main menu to show the keyboard shortcut for the Gui buttons.
 * Bugfix: A few instances where decreasing stats would actually increase them are fixed. Thanks JadedFirefly for the report!
 * Various typos fixed. Changed some word usage to be more consistent throughout the game.
 * Item: Added a Leporine+ item (rabbit TF level 2). It is dropped from Lagon, Brute Lagon and Brute Ophelia, and can drop from regular rabbit mobs with very low rate. It has less extreme effects than Equinium+ does, but there are special variations of the item brewed by Ophelia.

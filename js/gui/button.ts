@@ -6,10 +6,11 @@
 import * as $ from "jquery";
 import * as _ from "lodash";
 
-import { BUTTON_FONT } from "../../app";
+import { BUTTON_FONT, TINY_FONT } from "../../app";
 import { Images } from "../assets";
 import { gameState, GameState, SetGameState } from "../engine/gamestate";
 import { Text } from "../engine/parser/text";
+import { KeyToText } from "./keys";
 
 export type Tooltip = ((obj: any) => string) | string;
 
@@ -30,6 +31,7 @@ export class Button {
 	public image: any;
 	public text: any;
 	public text2: any;
+	public textKeybind: any;
 	public glow: any;
 
 	constructor(Gui: any, rect: any, text: string, func: CallableFunction, enabled: boolean, image: any, disabledImage: any, glow?: boolean) {
@@ -62,10 +64,15 @@ export class Button {
 		});
 		if (Button.Shadow) {
 			this.text    = Gui.canvas.text((rect.x + rect.w / 2) + 2, (rect.y + rect.h / 2) + 2, text).attr(
-				{fill: "#FFF", /*stroke:"#000",*/ font: BUTTON_FONT});
+				{fill: "#FFF", /*stroke:"#000",*/ font: BUTTON_FONT},
+			);
 		}
 		this.text2   = Gui.canvas.text(rect.x + rect.w / 2, rect.y + rect.h / 2, text).attr(
-			{fill: "#000", /*stroke:"#000",*/ font: BUTTON_FONT});
+			{fill: "#000", /*stroke:"#000",*/ font: BUTTON_FONT},
+		);
+		this.textKeybind = Gui.canvas.text(rect.x + 6, rect.y + 7, "A").attr(
+			{fill: "#FFF", font: TINY_FONT},
+		);
 		this.set.push(this.image);
 		// Disable text selection
 		if (Button.Shadow) {
@@ -94,6 +101,16 @@ export class Button {
 			this.glow = this.image.glow({width: 5, color: "green", opacity: 1});
 			this.set.push(this.glow);
 		}
+		$(this.textKeybind.node).css({
+			"-webkit-touch-callout": "none",
+			"-webkit-user-select": "none",
+			"-khtml-user-select": "none",
+			"-moz-user-select": "none",
+			"-ms-user-select": "none",
+			"user-select": "none",
+			"pointer-events": "none",
+		});
+		this.set.push(this.textKeybind);
 
 		this.set.attr({
 			cursor: "pointer",
@@ -144,6 +161,10 @@ export class Button {
 	 */
 	public SetKey(key: number) {
 		this.key = key;
+		this.textKeybind.attr({text: KeyToText[key]});
+	}
+
+	public ShowKeybind(visible: boolean) {
 	}
 
 	public SetEnabled(value: boolean) {
@@ -163,16 +184,17 @@ export class Button {
 
 	public SetVisible(value: boolean) {
 		this.visible = value;
-		if (value) {
-			this.set.show();
-		} else {
-			this.set.hide();
-		}
+		this.SetVisibility();
 	}
 
 	public SetVisibility() {
 		if (this.visible) {
 			this.set.show();
+			if (this.Gui.ShortcutsVisible) {
+				this.textKeybind.show();
+			} else {
+				this.textKeybind.hide();
+			}
 		} else {
 			this.set.hide();
 		}

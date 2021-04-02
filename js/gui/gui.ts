@@ -14,7 +14,8 @@ import { ExploreButtonIndex } from "../engine/navigation/explorestate";
 import { IChoice } from "../engine/navigation/link";
 import { Text } from "../engine/parser/text";
 import { Tooltip } from "./button";
-import { Input, Keys } from "./input";
+import { Input } from "./input";
+import { Keys } from "./keys";
 
 const textArea = {
 	x: 270,
@@ -76,7 +77,18 @@ export class Gui {
 	static set debug(d) { debug = d; }
 
 	static get ShortcutsVisible() { return ShortcutsVisible; }
-	static set ShortcutsVisible(visible) { ShortcutsVisible = visible; }
+	static set ShortcutsVisible(visible) {
+		ShortcutsVisible = visible;
+		for (const button of Input.exploreButtons) {
+			button.ShowKeybind(visible);
+		}
+		for (const button of Input.menuButtons) {
+			button.ShowKeybind(visible);
+		}
+		for (const button of Input.navButtons) {
+			button.ShowKeybind(visible);
+		}
+	}
 
 	static get barWidth() { return 145; }
 
