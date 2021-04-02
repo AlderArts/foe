@@ -286,7 +286,7 @@ Race.Human = new RaceDesc("human", 0, {
 });
 Race.Horse = new RaceDesc("horse", 1, {
 	desc: [{a: "a", noun: "horse"}, {a: "an", noun: "equine"}],
-	descMale: [{a: "a", noun: "stallion"}],
+	descMale: [{a: "a", noun: "stallion"}, {a: "a", noun: "stud"}],
 	descFemale: [{a: "a", noun: "mare"}],
 	quantify: [{a: "an", noun: "equine"}],
 	geneSize : 1.3,
@@ -490,7 +490,28 @@ Race.Hyena = new RaceDesc("hyena", 44, {
 	desc: [{a: "a", noun: "hyena"}],
 	quantify: [{a: "a", noun: "hyenalike"}],
 });
+Race.Rodent = new RaceDesc("rodent", 46, {
+	desc: [{a: "a", noun: "rodent"}],
+	descMale: [{a: "a", noun: "buck"}],
+	descFemale: [{a: "a", noun: "doe"}],
+	quantify: [{a: "a", noun: "leporine"}],
+});
+Race.Rat = new RaceDesc("rat", 47, {
+	desc: [{a: "a", noun: "rat"}],
+	quantify: [{a: "a", noun: "ratlike"}],
+	geneSize : 0.6,
+}, Race.Rodent);
+Race.Mouse = new RaceDesc("mouse", 48, {
+	desc: [{a: "a", noun: "mouse"}],
+	quantify: [{a: "a", noun: "mouselike"}],
+	geneSize : 0.3,
+}, Race.Rodent);
+Race.Squirrel = new RaceDesc("squirrel", 49, {
+	desc: [{a: "a", noun: "squirrel"}],
+	quantify: [{a: "a", noun: "sciuridae"}],
+	geneSize : 0.5,
+}, Race.Rodent);
 
-// NEXT FREE: 46
+// NEXT FREE: 50
 
 export { Race };
