@@ -511,7 +511,20 @@ Race.Squirrel = new RaceDesc("squirrel", 49, {
 	quantify: [{a: "a", noun: "sciuridae"}],
 	geneSize : 0.5,
 }, Race.Rodent);
+Race.Bear = new RaceDesc("bear", 50, {
+	desc: [{a: "a", noun: "bear"}],
+	descMale: [{a: "a", noun: "boar"}],
+	descFemale: [{a: "a", noun: "sow"}, {a: "a", noun: "she-bear"}],
+	quantify: [{a: "an", noun: "ursine"}],
+	geneSize : 2,
+});
+Race.Donkey = new RaceDesc("donkey", 51, {
+	desc: [{a: "a", noun: "donkey"}],
+	descMale: [{a: "a", noun: "jack"}],
+	descFemale: [{a: "a", noun: "jenny"}],
+	geneSize : 1.2,
+}, Race.Horse);
 
-// NEXT FREE: 50
+// NEXT FREE: 52
 
 export { Race };
