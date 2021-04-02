@@ -95,30 +95,28 @@ export namespace MagnusScenes {
 
 	export function Interact() {
 		const player: Player = GAME().player;
+		const pc = player.Parser;
 		const magnus: Magnus = GAME().magnus;
 		Text.Clear();
 
-		const parse: IParse = {
-			upDown     : player.Height() >= 185 ? " up" : player.Height() <= 165 ? " down" : "",
-			playername : player.name,
-		};
+		const upDown = player.Height() >= 185 ? " up" : player.Height() <= 165 ? " down" : "";
 
 		if (magnus.flags.Met === 0) {
-			Text.Add("Curious as to what could be so interesting about the dusty old book, you sneak up behind the young man to peek over his shoulder. The tome is filled with strange runes, scrawled willy-nilly all over the pages without any kind of system. At first glance they look like pure gibberish, but something about them calls out to you, though you cannot put your finger on what.", parse);
-			Text.NL();
-			Text.Add("Suddenly aware of his hidden audience, the young man looks up at you, adjusting his thick glasses to get better focus. He looks like he hasn’t shaved in a few days, but the stray scraggle on his chin doesn’t bode well for his chances of ever growing a beard. Behind the thick spectacles, you see dark pouches under his bleary eyes, presumably from lack of proper sleep. You’d gauge him to be in his early twenties.", parse);
-			Text.NL();
-			Text.Add("<i>“Yes?”</i> he mutters, somewhat irritated at being pulled out of his reverie. You tell him you were just curious as to what he was so focused on, and who he is for that matter. From all the strange people you’ve seen among the nomads so far, he seems a bit out of place.", parse);
-			Text.NL();
-			Text.Add("<i>“Oh, I’m a recent arrival,”</i> suddenly mindful of his ragged appearance, the young man puts down the tome and rises to face you, trying in vain to smooth out the wrinkles on his robe. <i>“My name is Magnus,”</i> he introduces himself, stretching out his hand, peering[upDown] at you curiously.", parse);
-			Text.NL();
-			Text.Add("You somewhat reluctantly shake hands with him, and present yourself.", parse);
-			Text.NL();
-			Text.Add("<i>“[playername], eh?”</i> He examines you closely, blushing slightly when you raise your eyebrows at his scrutiny. <i>“Ahem!”</i> Magnus coughs uncomfortably, his eyes wandering back to his tome. <i>“Well… I’m a student, of sorts. I study magic.”</i> He waves noncommittally to the large book.", parse);
-			Text.NL();
-			Text.Add("<i>“As to why I am here… I was recently expelled from the academy.”</i> He looks a bit bewildered and slightly hurt about this. <i>“I never really figured out why, they kicked me out and refused to let me back in. I wandered for quite a while until these fine folk took me in.”</i> He gestures to the nomads around the two of you.", parse);
-			Text.NL();
-			Text.Add("<i>“Ah, as much as I would like to chat with you more, I just think I understood something from my book, I need to check something quickly.”</i> With that, he once again sticks his nose into the dusty old tome, poring over the strange symbols therein. Looks like you are dismissed.", parse);
+			Text.Out(`Curious as to what could be so interesting about the dusty old book, you sneak up behind the young man to peek over his shoulder. The tome is filled with strange runes, scrawled willy-nilly all over the pages without any kind of system. At first glance they look like pure gibberish, but something about them calls out to you, though you cannot put your finger on what.
+
+			Suddenly aware of his hidden audience, the young man looks up at you, adjusting his thick glasses to get better focus. He looks like he hasn’t shaved in a few days, but the stray scraggle on his chin doesn’t bode well for his chances of ever growing a beard. Behind the thick spectacles, you see dark pouches under his bleary eyes, presumably from lack of proper sleep. You’d gauge him to be in his early twenties.
+
+			“Yes?” he mutters, somewhat irritated at being pulled out of his reverie. You tell him you were just curious as to what he was so focused on, and who he is for that matter. From all the strange people you’ve seen among the nomads so far, he seems a bit out of place.
+
+			“Oh, I’m a recent arrival,” suddenly mindful of his ragged appearance, the young man puts down the tome and rises to face you, trying in vain to smooth out the wrinkles on his robe. “My name is Magnus,” he introduces himself, stretching out his hand, peering${upDown} at you curiously.
+
+			You somewhat reluctantly shake hands with him, and present yourself.
+
+			“${pc.name}, eh?” He examines you closely, blushing slightly when you raise your eyebrows at his scrutiny. “Ahem!” Magnus coughs uncomfortably, his eyes wandering back to his tome. “Well… I’m a student, of sorts. I study magic.” He waves noncommittally to the large book.
+
+			“As to why I am here… I was recently expelled from the academy.” He looks a bit bewildered and slightly hurt about this. “I never really figured out why, they kicked me out and refused to let me back in. I wandered for quite a while until these fine folk took me in.” He gestures to the nomads around the two of you.
+
+			“Ah, as much as I would like to chat with you more, I just think I understood something from my book, I need to check something quickly.” With that, he once again sticks his nose into the dusty old tome, poring over the strange symbols therein. Looks like you are dismissed.`);
 
 			magnus.flags.Met = 1;
 
@@ -132,12 +130,12 @@ export namespace MagnusScenes {
 				Text.NL();
 			}
 
-			Text.Add("You wave at Magnus as you pull up beside the young magician, flopping down on the log. He seems to register that you’re trying to talk to him, and briefly put his book down on his lap.", parse);
+			Text.Out(`You wave at Magnus as you pull up beside the young magician, flopping down on the log. He seems to register that you’re trying to talk to him, and briefly put his book down on his lap.`);
 			Text.NL();
 			if (!GlobalScenes.MagicStage1()) {
-				Text.Add("<i>“Yes, [playername]? How can I help you?”</i>", parse);
+				Text.Out(`“Yes, ${pc.name}? How can I help you?”`);
 			} else {
-				Text.Add("<i>“[playername]! Great to see you again, how fare your studies?”</i>", parse);
+				Text.Out(`“${pc.name}! Great to see you again, how fare your studies?”`);
 			}
 			Text.Flush();
 
@@ -148,26 +146,26 @@ export namespace MagnusScenes {
 					func() {
 						Text.Clear();
 						if (magnus.flags.Talked === 1) {
-							Text.Add("<i>“Truly, you wish to hear my story again?”</i> Magnus seems happy about this, and clears his throat to reiterate his tale. ", parse);
+							Text.Out(`“Truly, you wish to hear my story again?” Magnus seems happy about this, and clears his throat to reiterate his tale. `);
 						} else {
-							Text.Add("<i>“Ah, there isn’t really much to tell,”</i> the young man scratches his scraggly attempt at a beard thoughtfully. ", parse);
+							Text.Out(`“Ah, there isn’t really much to tell,” the young man scratches his scraggly attempt at a beard thoughtfully. `);
 						}
 
-						Text.Add("<i>“I come from the other side of Eden, beyond the mountains. The power of the kingdom doesn’t reach there, and there are a number of free cities that govern themselves.”</i>", parse);
-						Text.NL();
-						Text.Add("<i>“The largest center of study on Eden is found there, the Academy of Higher Arts. Though they study all sorts of subjects, my interest has always been in magic. It is such a fickle and playful force, yet more powerful than anything you could imagine if wielded correctly.”</i>", parse);
-						Text.NL();
-						Text.Add("He goes on to tell you various things about his studies of the art of magic, and you are amazed at how dry and boring he can make conjuring fireballs sound. Despite yourself, you sort of drowse off, shaking yourself in order to not fall asleep.", parse);
+						Text.Out(`“I come from the other side of Eden, beyond the mountains. The power of the kingdom doesn’t reach there, and there are a number of free cities that govern themselves.”
+
+						“The largest center of study on Eden is found there, the Academy of Higher Arts. Though they study all sorts of subjects, my interest has always been in magic. It is such a fickle and playful force, yet more powerful than anything you could imagine if wielded correctly.”
+
+						He goes on to tell you various things about his studies of the art of magic, and you are amazed at how dry and boring he can make conjuring fireballs sound. Despite yourself, you sort of drowse off, shaking yourself in order to not fall asleep.`);
 						Text.NL();
 						if (magnus.flags.Confronted !== 0) {
-							Text.Add("<i>“One day, I was no longer welcome there anymore.”</i> Magnus sighs sadly. <i>“If what you told me is true, I have my suspicions to what the cause may have been.”</i> The magician shakes his head despairingly. <i>“I- I must remain strong, and not let this entity become my master. I must study more...”</i> He waves toward his books uncertainly, grasping for the one constant in his troubled existence.", parse);
+							Text.Out(`“One day, I was no longer welcome there anymore.” Magnus sighs sadly. “If what you told me is true, I have my suspicions to what the cause may have been.” The magician shakes his head despairingly. “I- I must remain strong, and not let this entity become my master. I must study more...” He waves toward his books uncertainly, grasping for the one constant in his troubled existence.`);
 						} else {
-							Text.Add("<i>“But alas, one day I was not welcome at the academy anymore.”</i> Magnus sighs to himself, despairing at the unfair nature of the world. <i>“I couldn’t even get a rational statement out of my teachers, they just chucked me out on the street and told me to never come back. They seemed almost… afraid. I’m not sure why, I mostly studied and meditated, never harmed a fly.”</i> The apprentice shrugs and gestures to the old tome he is currently reading.", parse);
-							Text.NL();
-							Text.Add("<i>“This and a few others were books I had borrowed from the library. Since they didn’t seem to want them back, I brought them with me to further my studies. For every page I read, I feel like I know less and less about how the world really works.”</i>", parse);
+							Text.Out(`“But alas, one day I was not welcome at the academy anymore.” Magnus sighs to himself, despairing at the unfair nature of the world. “I couldn’t even get a rational statement out of my teachers, they just chucked me out on the street and told me to never come back. They seemed almost… afraid. I’m not sure why, I mostly studied and meditated, never harmed a fly.” The apprentice shrugs and gestures to the old tome he is currently reading.
+
+							“This and a few others were books I had borrowed from the library. Since they didn’t seem to want them back, I brought them with me to further my studies. For every page I read, I feel like I know less and less about how the world really works.”`);
 						}
 						Text.NL();
-						Text.Add("Him bringing it up seems to have rekindled his drive for learning. Magnus dives back down into his book, poring over the strange symbols, having seemingly forgotten about you.", parse);
+						Text.Out(`Him bringing it up seems to have rekindled his drive for learning. Magnus dives back down into his book, poring over the strange symbols, having seemingly forgotten about you.`);
 						Text.Flush();
 
 						magnus.flags.Talked = 1;
@@ -186,80 +184,80 @@ export namespace MagnusScenes {
 							if (GameCache().flags.LearnedMagic >= 2) {
 								if (magnus.flags.Teach < MagnusFlags.Teaching.Jeanne) {
 									if (magnus.flags.Teach === MagnusFlags.Teaching.Done) {
-										Text.Add("<i>“Now that you mention it...”</i> Magnus peers at you curiously. <i>“I sense a change in your magic, as if you are much stronger now. Did you come to some insight, [playername]?”</i>", parse);
-										Text.NL();
-										Text.Add("You confide that you asked Jeanne to help you out with your studies, and that it helped you understand things better.", parse);
+										Text.Out(`“Now that you mention it...” Magnus peers at you curiously. “I sense a change in your magic, as if you are much stronger now. Did you come to some insight, ${pc.name}?”
+
+										You confide that you asked Jeanne to help you out with your studies, and that it helped you understand things better.`);
 									} else {
 										if (magnus.flags.Teach === MagnusFlags.Teaching.None) {
-											Text.Add("<i>“Ah, does the subject of magic interest you?”</i> Magnus seems to brighten up, no longer the only nerd in the gathering. You nod.", parse);
+											Text.Out(`“Ah, does the subject of magic interest you?” Magnus seems to brighten up, no longer the only nerd in the gathering. You nod.`);
 										} else if (magnus.flags.Teach === MagnusFlags.Teaching.Wait) {
-											Text.Add("<i>“Ah, have you decided to give it another try, [playername]?”</i> Magnus peers at you suspiciously. <i>“I would really appreciate it if you could stay awake this time.”</i>", parse);
-	}
+											Text.Out(`“Ah, have you decided to give it another try, ${pc.name}?” Magnus peers at you suspiciously. “I would really appreciate it if you could stay awake this time.”`);
+										}
 										Text.NL();
-										Text.Add("Excited, he starts to quickly line out abstract concepts and ideas pertaining to the nature of magic. He scribbles magical symbols on the ground, explaining their origins and meaning. It’s not long before you feel yourself drowsing off. Let’s see if this shuts him up.", parse);
-										Text.NL();
-										Text.Add("Magnus’ tirade about the third theorem of the Ether falters and tapers off as you nonchalantly summon a ball of magical energy, hovering above your palm.", parse);
-										Text.NL();
-										Text.Add("<i>“Y-you can use magic?!”</i> the scrawny student exclaims, peering at your apparition of power. <i>“Tell me, where did you learn this?”</i>", parse);
-										Text.NL();
-										Text.Add("Dismissing the glowing orb, you explain that Jeanne showed you a few pointers.", parse);
+										Text.Out(`Excited, he starts to quickly line out abstract concepts and ideas pertaining to the nature of magic. He scribbles magical symbols on the ground, explaining their origins and meaning. It’s not long before you feel yourself drowsing off. Let’s see if this shuts him up.
+
+										Magnus’ tirade about the third theorem of the Ether falters and tapers off as you nonchalantly summon a ball of magical energy, hovering above your palm.
+
+										“Y-you can use magic?!” the scrawny student exclaims, peering at your apparition of power. “Tell me, where did you learn this?”
+
+										Dismissing the glowing orb, you explain that Jeanne showed you a few pointers.`);
 									}
 									Text.NL();
-									Text.Add("<i>“<b>J-Jeanne?!?</b>”</i> he stutters as soon as you mention the elf. <i>“You studied under the court magician?!”</i>", parse);
-									Text.NL();
-									Text.Add("You go on to explain the circumstances of your lessons, and mention the gem that you carry.", parse);
-									Text.NL();
-									Text.Add("<i>“I… this is amazing, [playername]! Jeanne was the one who founded the academy where I studied, long ago. Meeting her would be a dream come true!”</i> He slumps a bit. <i>“Not that I think she’d have much interest in me...”</i>", parse);
-									Text.NL();
-									Text.Add("Perhaps. Maybe you could ask her.", parse);
-									Text.NL();
-									Text.Add("<i>“I… I’d very much like that,”</i> Magnus mumbles. <i>“Either way… I don’t think I can be of any use to you as a teacher anymore. Jeanne is a legend, I’m a mere apprentice...”</i> he trails off, his mind wandering.", parse);
-									Text.NL();
-									Text.Add("You leave the magician to his thoughts. Plenty of time to talk about this later.", parse);
+									Text.Out(`“<b>J-Jeanne?!?</b>” he stutters as soon as you mention the elf. “You studied under the court magician?!”
+
+									You go on to explain the circumstances of your lessons, and mention the gem that you carry.
+
+									“I… this is amazing, ${pc.name}! Jeanne was the one who founded the academy where I studied, long ago. Meeting her would be a dream come true!” He slumps a bit. “Not that I think she’d have much interest in me...”
+
+									Perhaps. Maybe you could ask her.
+
+									“I… I’d very much like that,” Magnus mumbles. “Either way… I don’t think I can be of any use to you as a teacher anymore. Jeanne is a legend, I’m a mere apprentice...” he trails off, his mind wandering.
+
+									You leave the magician to his thoughts. Plenty of time to talk about this later.`);
 								} else {
-									Text.Add("<i>“Ah, I’m afraid I can’t really teach you anything that you don’t already know,”</i> Magnus confides, hanging his head sheepishly. <i>“I could perhaps be of some help in aiding you with meditation, if you’d like. Tell me, did you talk more with Jeanne? There is so much I want to ask her...”</i>", parse);
+									Text.Out(`“Ah, I’m afraid I can’t really teach you anything that you don’t already know,” Magnus confides, hanging his head sheepishly. “I could perhaps be of some help in aiding you with meditation, if you’d like. Tell me, did you talk more with Jeanne? There is so much I want to ask her...”`);
 								}
 								magnus.flags.Teach = MagnusFlags.Teaching.Jeanne;
 								Text.Flush();
 							} else if (magnus.flags.Teach === MagnusFlags.Teaching.None) {
-								Text.Add("<i>“Ah, does the subject of magic interest you?”</i> Magnus seems to brighten up, no longer the only nerd in the gathering. You nod uncertainly, not really sure what you are getting yourself into.", parse);
-								Text.NL();
-								Text.Add("Excited, he starts to quickly line out abstract concepts and ideas pertaining to the nature of magic. He scribbles strange symbols on the ground, explaining their origins and meaning.", parse);
+								Text.Out(`“Ah, does the subject of magic interest you?” Magnus seems to brighten up, no longer the only nerd in the gathering. You nod uncertainly, not really sure what you are getting yourself into.
+
+								Excited, he starts to quickly line out abstract concepts and ideas pertaining to the nature of magic. He scribbles strange symbols on the ground, explaining their origins and meaning.`);
 								Text.NL();
 
 								if (player.jobs.Scholar.level >= 3) {
-									Text.Add("Somehow, you manage to somewhat follow what he is talking about, though you can feel your eyelids drooping dangerously.", parse);
+									Text.Out(`Somehow, you manage to somewhat follow what he is talking about, though you can feel your eyelids drooping dangerously.`);
 									Text.NL();
 
 									MagnusScenes.LearnMagic();
 									return;
 								} else {
-									Text.Add("Despite your initial enthusiasm, you are unable to keep focused, and find your head dropping as sleep overcomes you. When you come to, Magnus is looking at you disapprovingly, slightly hurt over that you fell asleep during his tira-<i>lecture.</i>", parse);
-									Text.NL();
-									Text.Add("<i>“Come back once you’ve learned how to focus properly,”</i> Magnus admonishes you.", parse);
-									Text.NL();
-									Text.Add("<b>You will need to be at least a level 3 scholar to avoid falling asleep.</b>", parse);
+									Text.Out(`Despite your initial enthusiasm, you are unable to keep focused, and find your head dropping as sleep overcomes you. When you come to, Magnus is looking at you disapprovingly, slightly hurt over that you fell asleep during his tira-<i>lecture.</i>
+
+									“Come back once you’ve learned how to focus properly,” Magnus admonishes you.
+
+									<b>You will need to be at least a level 3 scholar to avoid falling asleep.</b>`);
 									Text.Flush();
 									magnus.flags.Teach = MagnusFlags.Teaching.Wait;
 									TimeStep({hour: 1});
 								}
 							} else if (magnus.flags.Teach === MagnusFlags.Teaching.Wait) {
 								if (player.jobs.Scholar.level >= 3) {
-									Text.Add("You tell him that you are ready to accept his teachings. This time, you manage to hang on to his words, and somehow remain alert throughout the ordeal. The magician looks encouraged by your intense focus.", parse);
+									Text.Out(`You tell him that you are ready to accept his teachings. This time, you manage to hang on to his words, and somehow remain alert throughout the ordeal. The magician looks encouraged by your intense focus.`);
 									Text.NL();
 
 									MagnusScenes.LearnMagic();
 									return;
 								} else {
-									Text.Add("<i>“Come back once you’ve learned how to focus properly,”</i> Magnus admonishes you.", parse);
-									Text.NL();
-									Text.Add("<b>You will need to be at least a level 3 scholar to avoid falling asleep.</b>", parse);
+									Text.Out(`“Come back once you’ve learned how to focus properly,” Magnus admonishes you.
+
+									<b>You will need to be at least a level 3 scholar to avoid falling asleep.</b>`);
 									Text.Flush();
 								}
 							} else {
 								// TODO: Variations
 
-								Text.Add("<i>“I’m afraid I’ve taught you all I am able, everyone learns differently, and the best way to nurture your talent is to apply it diligently. I am sure you will become a great mage some day, if you just put effort into your studies! The only way I can help you now is to aid you in meditation, and perhaps lend you some reading material once you’ve advanced enough.”</i>", parse);
+								Text.Out(`“I’m afraid I’ve taught you all I am able, everyone learns differently, and the best way to nurture your talent is to apply it diligently. I am sure you will become a great mage some day, if you just put effort into your studies! The only way I can help you now is to aid you in meditation, and perhaps lend you some reading material once you’ve advanced enough.”`);
 								Text.Flush();
 							}
 
@@ -271,13 +269,13 @@ export namespace MagnusScenes {
 						func() {
 							Text.Clear();
 							if (magnus.flags.Confronted === 0) {
-								Text.Add("<i>“W-what?”</i> The magician looks at you, bewildered. <i>“I hardly think that would be appropriate!”</i> he stutters, blushing as he goes back to his book, reading with renewed intensity. You smile slightly as you catch him throwing furtive glances in your direction.", parse);
-								Text.NL();
-								Text.Add("Guess that approach isn’t going to work.", parse);
+								Text.Out(`“W-what?” The magician looks at you, bewildered. “I hardly think that would be appropriate!” he stutters, blushing as he goes back to his book, reading with renewed intensity. You smile slightly as you catch him throwing furtive glances in your direction.
+
+								Guess that approach isn’t going to work.`);
 							} else {
-								Text.Add("<i>“I- uh, I don’t really feel comfortable about what I did to you, [playername],”</i> Magnus avoids your gaze, blushing. <i>“Perhaps… no, I cannot risk it. Something like that may bring the demon forth again.”</i> You aren’t quite sure what ‘something like that’ entails, but from his expression, you suppose it was naughty.", parse);
-								Text.NL();
-								Text.Add("Ah well, if you want some rough tentacle fucking, you know just the way to coax it out of him. Perhaps he’ll grow used to the idea sooner or later.", parse);
+								Text.Out(`“I- uh, I don’t really feel comfortable about what I did to you, ${pc.name},” Magnus avoids your gaze, blushing. “Perhaps… no, I cannot risk it. Something like that may bring the demon forth again.” You aren’t quite sure what ‘something like that’ entails, but from his expression, you suppose it was naughty.
+
+								Ah well, if you want some rough tentacle fucking, you know just the way to coax it out of him. Perhaps he’ll grow used to the idea sooner or later.`);
 							}
 							Text.Flush();
 
@@ -289,9 +287,9 @@ export namespace MagnusScenes {
 						options.push({ nameStr : "Gem",
 							func() {
 								Text.Clear();
-								Text.Add("Magnus shakes his head as you present him with the gemstone.", parse);
-								Text.NL();
-								Text.Add("<i>“I’m afraid I cannot help you, [playername]. I’ve never seen something like this before. Perhaps one of the staff at the academy… or maybe the court magician of Rigard could tell you more. It certainly contains magic, but also seems to be a product of alchemy.”</i>", parse);
+								Text.Out(`Magnus shakes his head as you present him with the gemstone.
+
+								“I’m afraid I cannot help you, ${pc.name}. I’ve never seen something like this before. Perhaps one of the staff at the academy… or maybe the court magician of Rigard could tell you more. It certainly contains magic, but also seems to be a product of alchemy.”`);
 								Text.Flush();
 
 								Gui.NextPrompt(TalkPrompt);
@@ -347,9 +345,9 @@ export namespace MagnusScenes {
 					Text.Add("All you have seen so far has been connected to the gemstone you carry. The more you find out about it, the better. A magician, or an alchemist, may be able to tell you more, if you find one skilled enough.", parse);
 				} else if (!GlobalScenes.PortalsOpen()) {
 					Text.Add("You need to find a way to power up the gemstone, and Jeanne seems to have a plan. Following her instructions seems to be the best course of action for now.", parse);
-	} else {
+				} else {
 					Text.Add("With the activation of the gemstone, the realms lie open for you to explore. Who knows what you might find if you step through one of the portals? Perhaps something that will aid you in your quest, and prepare you for the inevitable confrontation with Uru.", parse);
-	}
+				}
 				Text.NL();
 				Text.Add("<b>Later…</b>", parse);
 				Text.NL();
@@ -464,9 +462,9 @@ export namespace MagnusScenes {
 						Text.Add("<i>We are sure you… can imagine what comes next,</i> the voice mocks you, swatting your [butt] playfully.", parse);
 					} else if (magnus.flags.Sexed < 5) {
 						Text.Add("<i>You know what… comes next, pet,</i> the voice purrs, caressing your [butt].", parse);
-	} else {
+					} else {
 						Text.Add("<i>We had not expected… to find such, a, slut. Coming back over and over… again, wanting to be… used.</i> The voice is triumphant, certain that it has broken you.", parse);
-	}
+					}
 					Text.Add(" Suddenly, the tentacles wrap tighter and tighter around you, binding you securely. You are swiveled around, face inches from Magnus’ throbbing trio of demonic cocks, limbs splayed wide.", parse);
 					Text.NL();
 					Text.Add("<i>We are not un… grateful to our host. You shall pleasure him.</i> With that, the owner of the raspy voice relentlessly pushes you down on one of Magnus’ members. You can feel its uneven nubs and ridges dragging against the inside of your throat, straining painfully against your limits. The demon doesn’t play around, quickly impaling you on the ten inch erection. Ten? It somehow feels like more, as if the throbbing shaft is growing, seeking its way further down your tortured esophagus even as your lips are pressed against Magnus’ crotch.", parse);
