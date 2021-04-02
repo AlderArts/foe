@@ -868,50 +868,47 @@ export namespace MagnusScenes {
 
 	export function LearnMagic() {
 		const player: Player = GAME().player;
+		const pc = player.Parser;
 		const magnus: Magnus = GAME().magnus;
-		const parse: IParse = {
-			hand() { return player.HandDesc(); },
-			playername : player.name,
-		};
 
-		Text.Add("Once he has explained the basic terms and concepts behind using magic, he tells you that it is time for a demonstration. He walks off a small distance from the campfire, away from the other nomads.", parse);
-		Text.NL();
-		Text.Add("<i>“Know that I’m still a mage in training, so I need time and focus to properly use these powers,”</i> he explains. You sit back and wait while he closes his eyes, breathing deeply. Sparks of light begin to dance on his outstretched palms, changing colors and swirling around playfully.", parse);
-		Text.NL();
-		Text.Add("<i>“Spire!”</i> Magnus shouts, throwing his hands down toward the earth. There is a loud rumbling noise, and a pillar of rock twice his height shoot up into the air, pebbles and clumps of dirt raining down everywhere. He looks pleased with his handiwork, and turns back to you.", parse);
-		Text.NL();
-		Text.Add("<i>“That was an example of a beginners level elemental spell,”</i> he explains, dusting the debris from his robes. <i>“The elements are the easiest to start with, though there is a step even before that.”</i> He holds out his hand and focuses again, summoning the dancing lights. As he does, you notice that the gem in your pocket is resonating with the lights, pulsing slightly.", parse);
-		Text.NL();
-		Text.Add("<i>“First, you must gather your own energy and mold it, forming patterns and symbols with it to boost its power. The stronger the magic around you is, the easier you will find this, but it is not a skill everyone can learn. It might take you months of deep meditation before you are able to handle it properly.”</i>", parse);
-		Text.NL();
-		Text.Add("You think back on the concepts and ideas that Magnus has explained to you, trying to figure out how to apply them. First, you try to close your eyes and breathe, as you saw him do, but after a while your mind wanders when nothing happens. Slightly frustrated, you try again, stretching out your [hand]s in front of you and concentrating.", parse);
-		Text.NL();
-		Text.Add("<i>“Don’t feel bad about it, it took me weeks before I could even muster the magic to light a candle,”</i> the magician encourages you. You irritably wave him away, intent on making this work. Another ten minutes or so pass before you are just about fed up with this. In frustration, you throw your [hand]s down, rubbing against the gemstone in your pouch by chance. You yelp as you are struck by a small spark, stinging you. The stone falls to the ground, glowing slightly.", parse);
-		Text.NL();
-		Text.Add("Carefully, you retrieve the gemstone, looking at it curiously. It feels strangely warm in your [hand], as if it has a life of its own. On a whim, you try to focus on gathering magic again, and the dull glow inside the stone intensifies. Seems like you are on to something here.", parse);
-		Text.NL();
-		Text.Add("With the help of the gem acting as an indicator, you manage to narrow down the exact state of mind needed to focus your energy in a remarkably short amount of time. Happy with your efforts, you pocket the gem and stretch out your [hand]s again. Breathing deeply, you summon powerful forces from within you, your arms tingling as glowing spots of light dance from your fingertips.", parse);
-		Text.NL();
-		Text.Add("Magnus is gaping at you as the light grows, enveloping your [hand]s. You grin at him, almost feeling like you are showing off. The light grows steadily, and you are beginning to feel a bit weak, as if the act is somehow draining you. The magician shakes himself a bit, suddenly looking a bit concerned.", parse);
-		Text.NL();
-		Text.Add("<i>“This is amazing, [playername], but you must release it, or you will pass out!”</i> he warns you, hurrying to your side. You follow his intent instructions on how to channel the flow of energy, trying to focus as you feel your strength wane.", parse);
-		Text.NL();
-		Text.Add("<i>“Surge!”</i> A blast of energy flows from your [hand]s, blasting a small crater in the ground. You weakly flop down on your back, completely drained from the ordeal.", parse);
-		Text.NL();
-		Text.Add("<i>“Astounding!”</i> Magnus exclaims, eyes shining brightly, <i>“I’ve never seen someone attune themselves so quickly! Just what is that stone…?”</i>", parse);
+		Text.Out(`Once he has explained the basic terms and concepts behind using magic, he tells you that it is time for a demonstration. He walks off a small distance from the campfire, away from the other nomads.
+
+		“Know that I’m still a mage in training, so I need time and focus to properly use these powers,” he explains. You sit back and wait while he closes his eyes, breathing deeply. Sparks of light begin to dance on his outstretched palms, changing colors and swirling around playfully.
+
+		“Spire!” Magnus shouts, throwing his hands down toward the earth. There is a loud rumbling noise, and a pillar of rock twice his height shoot up into the air, pebbles and clumps of dirt raining down everywhere. He looks pleased with his handiwork, and turns back to you.
+
+		“That was an example of a beginners level elemental spell,” he explains, dusting the debris from his robes. “The elements are the easiest to start with, though there is a step even before that.” He holds out his hand and focuses again, summoning the dancing lights. As he does, you notice that the gem in your pocket is resonating with the lights, pulsing slightly.
+
+		“First, you must gather your own energy and mold it, forming patterns and symbols with it to boost its power. The stronger the magic around you is, the easier you will find this, but it is not a skill everyone can learn. It might take you months of deep meditation before you are able to handle it properly.”
+
+		You think back on the concepts and ideas that Magnus has explained to you, trying to figure out how to apply them. First, you try to close your eyes and breathe, as you saw him do, but after a while your mind wanders when nothing happens. Slightly frustrated, you try again, stretching out your ${pc.hand}s in front of you and concentrating.
+
+		“Don’t feel bad about it, it took me weeks before I could even muster the magic to light a candle,” the magician encourages you. You irritably wave him away, intent on making this work. Another ten minutes or so pass before you are just about fed up with this. In frustration, you throw your ${pc.hand}s down, rubbing against the gemstone in your pouch by chance. You yelp as you are struck by a small spark, stinging you. The stone falls to the ground, glowing slightly.
+
+		Carefully, you retrieve the gemstone, looking at it curiously. It feels strangely warm in your ${pc.hand}, as if it has a life of its own. On a whim, you try to focus on gathering magic again, and the dull glow inside the stone intensifies. Seems like you are on to something here.
+
+		With the help of the gem acting as an indicator, you manage to narrow down the exact state of mind needed to focus your energy in a remarkably short amount of time. Happy with your efforts, you pocket the gem and stretch out your ${pc.hand}s again. Breathing deeply, you summon powerful forces from within you, your arms tingling as glowing spots of light dance from your fingertips.
+
+		Magnus is gaping at you as the light grows, enveloping your ${pc.hand}s. You grin at him, almost feeling like you are showing off. The light grows steadily, and you are beginning to feel a bit weak, as if the act is somehow draining you. The magician shakes himself a bit, suddenly looking a bit concerned.
+
+		“This is amazing, ${pc.name}, but you must release it, or you will pass out!” he warns you, hurrying to your side. You follow his intent instructions on how to channel the flow of energy, trying to focus as you feel your strength wane.
+
+		“Surge!” A blast of energy flows from your ${pc.hand}s, blasting a small crater in the ground. You weakly flop down on your back, completely drained from the ordeal.
+
+		“Astounding!” Magnus exclaims, eyes shining brightly, “I’ve never seen someone attune themselves so quickly! Just what is that stone…?”`);
 		Text.Flush();
 
 		Gui.NextPrompt(() => {
 			Text.Clear();
-			Text.Add("You eventually disentangle yourself from the enthusiastic mage, explaining that you have things to do, and that you could probably use a few hours of sleep. Magnus reluctantly lets you go, but hands you a few scrolls before you leave.", parse);
-			Text.NL();
-			Text.Add("<i>“To further your studies,”</i> he explains. <i>“With such talent, I’m sure you will surpass me in no time!”</i> The scrolls seem to line out a few basic spells, and with the aid of Magnus, you manage to decipher them.", parse);
-			Text.NL();
-			Text.Add("<b>Unlocked the Mage job.</b><br>", parse);
-			Text.Add("<b>Unlocked the Mystic job.</b><br>", parse);
-			Text.Add("<b>Unlocked the Healer job.</b><br>", parse);
-			Text.NL();
-			Text.Add("You thank him for his help, and set out on your journey, a new power at your beck and call.", parse);
+			Text.Out(`You eventually disentangle yourself from the enthusiastic mage, explaining that you have things to do, and that you could probably use a few hours of sleep. Magnus reluctantly lets you go, but hands you a few scrolls before you leave.
+
+			“To further your studies,” he explains. “With such talent, I’m sure you will surpass me in no time!” The scrolls seem to line out a few basic spells, and with the aid of Magnus, you manage to decipher them.
+
+			<b>Unlocked the Mage job.</b>
+			<b>Unlocked the Mystic job.</b>
+			<b>Unlocked the Healer job.</b>
+
+			You thank him for his help, and set out on your journey, a new power at your beck and call.`);
 			Text.Flush();
 
 			TimeStep({hour: 3});
@@ -926,14 +923,11 @@ export namespace MagnusScenes {
 
 	export function Desc() {
 		const magnus: Magnus = GAME().magnus;
-		const parse: IParse = {
-			litExtinguished : WorldTime().hour >= 19 ? "lit" : "extinguished",
-		};
 
 		if (magnus.flags.Met === 0) {
-			Text.Add("Near the [litExtinguished] campfire, you see a thin and nervous-looking young man. He is carrying slightly tattered robes and a pair of thick glasses, and seems to be embroiled in studying a heavy tome. The man hardly seems to register anything going on around him, so absorbed is he in the book.", parse);
+			Text.Out(`Near the ${WorldTime().hour >= 19 ? "lit" : "extinguished"} campfire, you see a thin and nervous-looking young man. He is carrying slightly tattered robes and a pair of thick glasses, and seems to be embroiled in studying a heavy tome. The man hardly seems to register anything going on around him, so absorbed is he in the book.`);
 		} else {
-			Text.Add("Magnus the apprentice mage is poring over some old book, probably trying to find some secret knowledge in the strange, squiggly symbols covering its pages. As usual, he is deeply focused on his studies, and you doubt even an attack on the camp would distract his reverie.", parse);
+			Text.Out(`Magnus the apprentice mage is poring over some old book, probably trying to find some secret knowledge in the strange, squiggly symbols covering its pages. As usual, he is deeply focused on his studies, and you doubt even an attack on the camp would distract his reverie.`);
 		}
 		Text.NL();
 	}
