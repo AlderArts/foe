@@ -85,8 +85,7 @@ export namespace DreamsScenes {
 				scenes.AddEnc(DreamsScenes.FragileArmor, 1.0, () => rigard.Twopenny.Met > 0, ravenTrigger);
 				scenes.AddEnc(DreamsScenes.AscheNighttime, 1.0, () => asche.flags.Met >= AscheFlags.Met.Met, ravenTrigger);
 				scenes.AddEnc(DreamsScenes.AscheDance, 1.0, () => asche.flags.Magic !== 0, ravenTrigger);
-				// TODO //Must have completed Asche’s first task, be it success or failure.
-				// scenes.AddEnc(DreamsScenes.AscheHotSpring, 1.0, () => asche.flags["Magic"] !== 0, ravenTrigger);
+				scenes.AddEnc(DreamsScenes.AscheHotSpring, 1.0, () => (asche.flags.Tasks & AscheFlags.Tasks.Spring_Visited) !== 0, ravenTrigger);
 
 				const end = () => {
 					DreamsScenes.RavenAfterDream(ravenTrigger, func);
@@ -1129,7 +1128,7 @@ export namespace DreamsScenes {
 		Text.NL();
 		Text.Add("<i>“Customer is liking this?”</i> The jackaless’ voice is salacious and suggestive, dripping with honey and unspoken promises. Like you, she’s steeped to her neck in cloudy, mineral-rich water, eyes half-closed with utter bliss written all over her face. <i>“Is taking this jackaless some practice to conjure up proper memory, but she is finding it very useful after long day’s work, almost like real thing. Is also very nice place to entertain others.”</i>", parse);
 		Text.NL();
-		Text.Add("Mmm… if this what a highland hot spring feels like, you need to find one for real when you wake up.", parse);
+		Text.Add("Mmm… if this is what a highland hot spring feels like, you need to find one for real when you wake up.", parse);
 		Text.NL();
 		if (ravenTrigger) {
 			Text.Add("<i>“Nice, private location where one is not likely to be interrupted, yes yes,”</i> Asche continues. <i>“There was little bird spy earlier on, but Asche is chasing it away and sending it back to where it is coming from.”</i>", parse);
