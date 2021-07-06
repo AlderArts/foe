@@ -25,6 +25,8 @@ const SplashScreen = () => {
 
 	<b>This game contains adult content. By playing you confirm that you are 18 years or older. Also, beware furries and futas.</b>
 
+    If you would like content warnings for certain choices, activate the "Content Hints" option in the options menu.
+
 	This game has hotkeys enabled, you can use 1-5, q-t, a-g`);
 
 	Input.buttons[0].enabledImage = Images.imgButtonEnabled2;

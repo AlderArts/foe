@@ -32,7 +32,7 @@ export class Button {
 	public text: any;
 	public text2: any;
 	public textKeybind: any;
-	public textContentWarning: any;
+	public textContentHint: any;
 	public glow: any;
 
 	constructor(Gui: any, rect: any, text: string, func: CallableFunction, enabled: boolean, image: any, disabledImage: any, glow?: boolean) {
@@ -116,10 +116,10 @@ export class Button {
 		});
         this.set.push(this.textKeybind);
 
-		this.textContentWarning = Gui.canvas.text(rect.x + rect.w - 26, rect.y + rect.h - 3, "Content").attr(
+		this.textContentHint = Gui.canvas.text(rect.x + rect.w - 26, rect.y + rect.h - 3, "Content").attr(
 			{fill: "#F88", font: TINY_FONT},
 		);
-		$(this.textContentWarning.node).css({
+		$(this.textContentHint.node).css({
 			"-webkit-touch-callout": "none",
 			"-webkit-user-select": "none",
 			"-khtml-user-select": "none",
@@ -128,7 +128,7 @@ export class Button {
 			"user-select": "none",
             "pointer-events": "none",
 		});
-		this.set.push(this.textContentWarning);
+		this.set.push(this.textContentHint);
 
 		this.set.attr({
 			cursor: "pointer",
@@ -213,10 +213,10 @@ export class Button {
 			} else {
 				this.textKeybind.hide();
 			}
-			if (this.Gui.ContentWarning) {
-				this.textContentWarning.show();
+			if (this.Gui.ContentHint) {
+				this.textContentHint.show();
 			} else {
-				this.textContentWarning.hide();
+				this.textContentHint.hide();
 			}
 		} else {
 			this.set.hide();
@@ -241,11 +241,11 @@ export class Button {
 		this.SetEnabled(enabled);
 		this.tooltip = tooltip;
         this.state   = state;
-        this.SetContentWarning("");
+        this.SetContentHint("");
 	}
 
-    public SetContentWarning(text: string) {
-        this.textContentWarning.attr({text});
+    public SetContentHint(text: string) {
+        this.textContentHint.attr({text});
     }
 
 	/*

@@ -47,7 +47,7 @@ let callstack: CallableFunction[] = [];
 let canvas: any;
 let debug: any;
 let ShortcutsVisible: boolean;
-let ContentWarning: boolean;
+let ContentHint: boolean;
 let fonts: any;
 
 let party: RaphaelSet;
@@ -90,9 +90,9 @@ export class Gui {
 			button.ShowKeybind(visible);
 		}
     }
-    static get ContentWarning() { return ContentWarning; }
-    static set ContentWarning(cw) {
-        ContentWarning = cw;
+    static get ContentHint() { return ContentHint; }
+    static set ContentHint(cw) {
+        ContentHint = cw;
     }
 
 	static get barWidth() { return 145; }
@@ -103,7 +103,7 @@ export class Gui {
 	public static Init() {
 		Gui.debug = undefined;
 		Gui.ShortcutsVisible = false;
-		Gui.ContentWarning = false;
+		Gui.ContentHint = false;
 
 		Gui.canvas = Raphael("wrap", 100, 100);
 		Gui.canvas.setViewBox(0, 0, windowWidth, windowHeight, true);
@@ -201,7 +201,7 @@ export class Gui {
 		FontSize = isOnline() && localStorage.fontSize ? localStorage.fontSize : "large";
 		document.getElementById("mainTextArea").style.fontSize = FontSize;
 		Gui.ShortcutsVisible = isOnline() ? parseInt(localStorage.ShortcutsVisible, 10) === 1 : false;
-		Gui.ContentWarning = isOnline() ? parseInt(localStorage.ContentWarning, 10) === 1 : false;
+		Gui.ContentHint = isOnline() ? parseInt(localStorage.ContentHint, 10) === 1 : false;
 
 		// Setup keyboard shortcuts
 		// Row 1
@@ -443,14 +443,14 @@ export class Gui {
                 }, enabled: true
             },
             {
-                nameStr: ContentWarning ? `Content Warnings: On` : `Content Warnings: Off`,
+                nameStr: ContentHint ? `Content Hints: On` : `Content Hints: Off`,
                 func () {
-                    ContentWarning = !ContentWarning;
+                    ContentHint = !ContentHint;
                     if (isOnline()) {
-                        localStorage.ContentWarning = Gui.ContentWarning ? 1 : 0;
+                        localStorage.ContentHint = Gui.ContentHint ? 1 : 0;
                     }
                     Gui.OptionsScreen(back);
-                }, enabled: true, contentWarning: "Example CW"
+                }, enabled: true, contentWarning: "Example Hint"
             },
         ];
 
@@ -634,7 +634,7 @@ export class Gui {
             const cw = list[j].contentWarning || "";
 			Input.buttons[i].enabledImage = list[j].image || Images.imgButtonEnabled;
             Input.buttons[i].Setup(name, func, en, list[j].obj, list[j].tooltip, state);
-            Input.buttons[i].SetContentWarning(cw);
+            Input.buttons[i].SetContentHint(cw);
 		}
 	}
 
