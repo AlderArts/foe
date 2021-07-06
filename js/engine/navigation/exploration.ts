@@ -137,8 +137,6 @@ function DataPrompt() {
 		}
 	}, true);
 
-	Input.buttons[5].Setup(`Quit game`, SplashScreen, true);
-
 	Input.buttons[6].Setup(`Save text`, () => {
 		GameToCache();
 		const seen: any[] = [];
@@ -158,27 +156,11 @@ function DataPrompt() {
 		Gui.NextPrompt(DataPrompt);
 	}, safeLocation);
 
-	Input.buttons[7].Setup(Gui.ShortcutsVisible ? `Keys: On` : `Keys: Off`, () => {
-		Gui.ShortcutsVisible = !Gui.ShortcutsVisible;
-		if (isOnline()) {
-			localStorage.ShortcutsVisible = Gui.ShortcutsVisible ? 1 : 0;
-		}
-		DataPrompt();
-	}, true);
+    Input.buttons[7].Setup(`Options`, () => {
+        Gui.OptionsScreen(DataPrompt);
+    }, true);
 
-	Input.buttons[8].Setup(`Set bg color`, () => {
-		Gui.BgColorPicker(DataPrompt);
-	}, true);
-
-	Input.buttons[9].Setup(`Set font`, () => {
-		Gui.FontPicker(DataPrompt);
-	}, true);
-
-	Input.buttons[10].Setup(GetRenderPictures() ? `Pics: On` : `Pics: Off`, () => {
-		SetRenderPictures(!GetRenderPictures());
-
-		DataPrompt();
-	}, true);
+	Input.buttons[8].Setup(`Quit game`, SplashScreen, true);
 
 	Input.buttons[11].Setup(`Back`, Gui.PrintDefaultOptions, true);
 }

@@ -1,4 +1,4 @@
-import { GetDEBUG, GetRenderPictures, SetDEBUG, SetRenderPictures, VERSION_STRING } from "../app";
+import { GetDEBUG, SetDEBUG, VERSION_STRING } from "../app";
 import { Images } from "./assets";
 import { Intro } from "./content/event/introduction";
 import { CreditsScreen } from "./credits";
@@ -52,26 +52,9 @@ const SplashScreen = () => {
 		if (GetDEBUG()) { Gui.debug.show(); } else { Gui.debug.hide(); }
 	}, true);
 
-	Input.buttons[7].Setup(Gui.ShortcutsVisible ? "Keys: On" : "Keys: Off", () => {
-		Gui.ShortcutsVisible = !Gui.ShortcutsVisible;
-		if (isOnline()) {
-			localStorage.ShortcutsVisible = Gui.ShortcutsVisible ? 1 : 0;
-		}
-		SplashScreen();
-	}, true);
-
-	Input.buttons[8].Setup("Set bg color", () => {
-		Gui.BgColorPicker(SplashScreen);
-	}, true);
-
-	Input.buttons[9].Setup("Set font", () => {
-		Gui.FontPicker(SplashScreen);
-	}, true);
-
-	Input.buttons[10].Setup(GetRenderPictures() ? "Pics: On" : "Pics: Off", () => {
-		SetRenderPictures(!GetRenderPictures());
-		SplashScreen();
-	}, true);
+    Input.buttons[7].Setup("Options", () => {
+        Gui.OptionsScreen(SplashScreen);
+    }, true);
 
 	Input.buttons[11].Setup("Clear saves", () => {
 		Saver.Clear();

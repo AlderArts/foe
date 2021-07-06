@@ -11,7 +11,8 @@ Version 0.5.7
  - Adds a choice at character creation.
  - Adds a menu item Gender to the player party menu. You can change your choice (Auto, Male, Female) at any point.
  - If you wish to continue playing the game as usual, you don't have to do anything.
-* Feature: After not working for very long, the show keybinds feature is back in action. Toggle it in the main menu to show the keyboard shortcut for the Gui buttons.
+* Feature: After not working for very long, the show keybinds feature is back in action. Toggle it in the options menu to show the keyboard shortcut for the Gui buttons.
+* Feature: Added a "Content Warnings" toggle that adds a little marker on certain choices. Not applied anywhere yet.
 * Bugfix: A few instances where decreasing stats would actually increase them are fixed. Thanks JadedFirefly for the report!
 * Bugfix: Added a dream for Asche that was commented out (need to have visited the Highland spring during one of her quests). Probably written by The Observer.
 * Various typos fixed. Changed some word usage to be more consistent throughout the game.

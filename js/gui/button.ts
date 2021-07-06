@@ -32,6 +32,7 @@ export class Button {
 	public text: any;
 	public text2: any;
 	public textKeybind: any;
+	public textContentWarning: any;
 	public glow: any;
 
 	constructor(Gui: any, rect: any, text: string, func: CallableFunction, enabled: boolean, image: any, disabledImage: any, glow?: boolean) {
@@ -62,18 +63,13 @@ export class Button {
 			"-ms-user-select": "none",
 			"user-select": "none",
 		});
+        this.set.push(this.image);
+
 		if (Button.Shadow) {
 			this.text    = Gui.canvas.text((rect.x + rect.w / 2) + 2, (rect.y + rect.h / 2) + 2, text).attr(
 				{fill: "#FFF", /*stroke:"#000",*/ font: BUTTON_FONT},
 			);
 		}
-		this.text2   = Gui.canvas.text(rect.x + rect.w / 2, rect.y + rect.h / 2, text).attr(
-			{fill: "#000", /*stroke:"#000",*/ font: BUTTON_FONT},
-		);
-		this.textKeybind = Gui.canvas.text(rect.x + 6, rect.y + 7, "A").attr(
-			{fill: "#FFF", font: TINY_FONT},
-		);
-		this.set.push(this.image);
 		// Disable text selection
 		if (Button.Shadow) {
 			$(this.text.node).css({
@@ -86,7 +82,11 @@ export class Button {
 				"pointer-events": "none",
 			});
 			this.set.push(this.text);
-		}
+        }
+
+		this.text2   = Gui.canvas.text(rect.x + rect.w / 2, rect.y + rect.h / 2, text).attr(
+			{fill: "#000", /*stroke:"#000",*/ font: BUTTON_FONT},
+		);
 		$(this.text2.node).css({
 			"-webkit-touch-callout": "none",
 			"-webkit-user-select": "none",
@@ -100,7 +100,11 @@ export class Button {
 		if (glow) {
 			this.glow = this.image.glow({width: 5, color: "green", opacity: 1});
 			this.set.push(this.glow);
-		}
+        }
+
+		this.textKeybind = Gui.canvas.text(rect.x + 6, rect.y + 7, "A").attr(
+			{fill: "#FFF", font: TINY_FONT},
+		);
 		$(this.textKeybind.node).css({
 			"-webkit-touch-callout": "none",
 			"-webkit-user-select": "none",
@@ -110,7 +114,21 @@ export class Button {
 			"user-select": "none",
 			"pointer-events": "none",
 		});
-		this.set.push(this.textKeybind);
+        this.set.push(this.textKeybind);
+
+		this.textContentWarning = Gui.canvas.text(rect.x + rect.w - 26, rect.y + rect.h - 3, "Content").attr(
+			{fill: "#F88", font: TINY_FONT},
+		);
+		$(this.textContentWarning.node).css({
+			"-webkit-touch-callout": "none",
+			"-webkit-user-select": "none",
+			"-khtml-user-select": "none",
+			"-moz-user-select": "none",
+			"-ms-user-select": "none",
+			"user-select": "none",
+            "pointer-events": "none",
+		});
+		this.set.push(this.textContentWarning);
 
 		this.set.attr({
 			cursor: "pointer",
@@ -195,6 +213,11 @@ export class Button {
 			} else {
 				this.textKeybind.hide();
 			}
+			if (this.Gui.ContentWarning) {
+				this.textContentWarning.show();
+			} else {
+				this.textContentWarning.hide();
+			}
 		} else {
 			this.set.hide();
 		}
@@ -217,8 +240,13 @@ export class Button {
 		this.SetVisible(true);
 		this.SetEnabled(enabled);
 		this.tooltip = tooltip;
-		this.state   = state;
+        this.state   = state;
+        this.SetContentWarning("");
 	}
+
+    public SetContentWarning(text: string) {
+        this.textContentWarning.attr({text});
+    }
 
 	/*
 	 * Set from ability

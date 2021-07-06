@@ -2,7 +2,7 @@ import * as $ from "jquery";
 import * as _ from "lodash";
 import * as Raphael from "raphael";
 
-import { DEFAULT_FONT, GetRenderPictures, SMALL_FONT, windowHeight, windowWidth } from "../../app";
+import { DEFAULT_FONT, GetRenderPictures, SMALL_FONT, windowHeight, windowWidth, SetRenderPictures } from "../../app";
 import { Images } from "../assets";
 import { CurrentActiveChar, EnemyParty } from "../engine/combat/combat-data";
 import { StatusEffect } from "../engine/combat/statuseffect";
@@ -47,6 +47,7 @@ let callstack: CallableFunction[] = [];
 let canvas: any;
 let debug: any;
 let ShortcutsVisible: boolean;
+let ContentWarning: boolean;
 let fonts: any;
 
 let party: RaphaelSet;
@@ -88,7 +89,11 @@ export class Gui {
 		for (const button of Input.navButtons) {
 			button.ShowKeybind(visible);
 		}
-	}
+    }
+    static get ContentWarning() { return ContentWarning; }
+    static set ContentWarning(cw) {
+        ContentWarning = cw;
+    }
 
 	static get barWidth() { return 145; }
 
@@ -98,6 +103,7 @@ export class Gui {
 	public static Init() {
 		Gui.debug = undefined;
 		Gui.ShortcutsVisible = false;
+		Gui.ContentWarning = false;
 
 		Gui.canvas = Raphael("wrap", 100, 100);
 		Gui.canvas.setViewBox(0, 0, windowWidth, windowHeight, true);
@@ -195,6 +201,7 @@ export class Gui {
 		FontSize = isOnline() && localStorage.fontSize ? localStorage.fontSize : "large";
 		document.getElementById("mainTextArea").style.fontSize = FontSize;
 		Gui.ShortcutsVisible = isOnline() ? parseInt(localStorage.ShortcutsVisible, 10) === 1 : false;
+		Gui.ContentWarning = isOnline() ? parseInt(localStorage.ContentWarning, 10) === 1 : false;
 
 		// Setup keyboard shortcuts
 		// Row 1
@@ -399,7 +406,57 @@ export class Gui {
 		tooltip.style.height =        ratio * tooltipArea.h + "px";
 	}
 
-	public static FontPicker(back: any) {
+
+    public static OptionsScreen(back: CallableFunction) {
+        const options: IChoice[] = [
+            {
+                nameStr: ShortcutsVisible ? `Keys: On` : `Keys: Off`,
+                func() {
+                    Gui.ShortcutsVisible = !Gui.ShortcutsVisible;
+                    if (isOnline()) {
+                        localStorage.ShortcutsVisible = Gui.ShortcutsVisible ? 1 : 0;
+                    }
+                    Gui.OptionsScreen(back);
+                }, enabled: true
+            },
+            {
+                nameStr: `Set bg color`,
+                func() {
+                    Gui.BgColorPicker(() => {
+                        Gui.OptionsScreen(back);
+                    });
+                }, enabled: true
+            },
+            {
+                nameStr: `Set font`,
+                func() {
+                    Gui.FontPicker(() => {
+                        Gui.OptionsScreen(back);
+                    });
+                }, enabled: true
+            },
+            {
+                nameStr: GetRenderPictures() ? `Pics: On` : `Pics: Off`,
+                func () {
+                    SetRenderPictures(!GetRenderPictures());
+                    Gui.OptionsScreen(back);
+                }, enabled: true
+            },
+            {
+                nameStr: ContentWarning ? `Content Warnings: On` : `Content Warnings: Off`,
+                func () {
+                    ContentWarning = !ContentWarning;
+                    if (isOnline()) {
+                        localStorage.ContentWarning = Gui.ContentWarning ? 1 : 0;
+                    }
+                    Gui.OptionsScreen(back);
+                }, enabled: true, contentWarning: "Example CW"
+            },
+        ];
+
+		Gui.SetButtonsFromList(options, true, back);
+    }
+	public static FontPicker(back: CallableFunction) {
 		Text.Clear();
 		Text.Add("Set a new font/fontsize?");
 		Text.NL();
@@ -449,7 +506,7 @@ export class Gui {
 		Gui.SetButtonsFromList(options, true, back);
 	}
 
-	public static BgColorPicker(back: any) {
+	public static BgColorPicker(back: CallableFunction) {
 		Text.Clear();
 		Text.Add("Set a new background color?");
 		Text.Flush();
@@ -573,9 +630,11 @@ export class Gui {
 		for (let i = 0, j = page * Input.buttons.length; i < Input.buttons.length && j < list.length; i++, j++) {
 			const name = list[j].nameStr || "NULL";
 			const func = list[j].func;
-			const en = list[j].enabled || false;
+            const en = list[j].enabled || false;
+            const cw = list[j].contentWarning || "";
 			Input.buttons[i].enabledImage = list[j].image || Images.imgButtonEnabled;
-			Input.buttons[i].Setup(name, func, en, list[j].obj, list[j].tooltip, state);
+            Input.buttons[i].Setup(name, func, en, list[j].obj, list[j].tooltip, state);
+            Input.buttons[i].SetContentWarning(cw);
 		}
 	}
 

@@ -40,4 +40,5 @@ export interface IChoice {
     enabled: boolean;
     tooltip?: Tooltip;
     image?: any;
+    contentWarning ?: string;
 }
