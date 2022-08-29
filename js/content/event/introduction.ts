@@ -211,9 +211,9 @@ export namespace Intro {
 				}, enabled : true,
 			},
 			{
-				nameStr : "Trap",
+				nameStr : "Femboy",
 				func() {
-					player.body.DefMale(BodyTypeMale.Trap);
+					player.body.DefMale(BodyTypeMale.Femboy);
 					Intro.SelectCockSize();
 				}, enabled : true,
 			},

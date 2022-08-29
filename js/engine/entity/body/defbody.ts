@@ -23,7 +23,7 @@ export enum BodyTypeMale {
 	Thin     = 1,
 	Muscular = 2,
 	Girly    = 3,
-	Trap     = 4,
+	Femboy   = 4,
 	Shemale  = 5,
 }
 
@@ -131,7 +131,7 @@ const DefBody = {
 			this.torso.hipSize.base = 5;
 			break;
 
-		case BodyTypeMale.Trap:
+		case BodyTypeMale.Femboy:
 			this.femininity.base = 0.4;
 			this.weigth.base = 60;
 			this.height.base = 170;
