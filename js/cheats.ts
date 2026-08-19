@@ -1,4 +1,4 @@
-import * as _ from "lodash";
+import _ from "lodash";
 
 import { GetDEBUG, SetDEBUG } from "../app";
 import { Kiakai } from "./content/event/kiakai";

@@ -3,7 +3,7 @@
  * Button class, includes input handling
  *
  */
-import * as $ from "jquery";
+import $ from "jquery";
 import * as _ from "lodash";
 
 import { BUTTON_FONT, TINY_FONT } from "../../app";

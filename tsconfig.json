@@ -1,13 +1,15 @@
 {
-  "compilerOptions": {
-	"sourceMap": true,
-    "outDir": "./dist/",
-    "noImplicitAny": true,
-    "target": "es6",
-    "jsx": "react",
-    "allowJs": true
-  },
-  "exclude": [
-    "node_modules"
-  ]
+	"compilerOptions": {
+		"target": "ES2015",
+		"module": "CommonJS",
+		"strict": false,
+		"noImplicitAny": true,
+		"esModuleInterop": true,
+		"allowJs": true,
+		"skipLibCheck": true,
+		"forceConsistentCasingInFileNames": true,
+		"resolveJsonModule": true,
+		"lib": ["ES2015", "DOM"]
+	},
+	"include": ["js", "test", "typings", "index.ts"]
 }

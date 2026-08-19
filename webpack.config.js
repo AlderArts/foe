@@ -1,10 +1,8 @@
 const path = require('path');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const TerserJSPlugin = require("terser-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-const TSLintPlugin = require('tslint-webpack-plugin');
 
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const ZipPlugin = require('zip-webpack-plugin');
@@ -15,30 +13,34 @@ const webpack = require(`webpack`);
 module.exports = {
   mode: "development",
   entry: './index.ts',
+  output: {
+    filename: 'foe.js',
+    path: path.resolve(__dirname, 'dist'),
+    clean: true
+  },
   plugins: [
     new webpack.DefinePlugin({
       VERSION: JSON.stringify(require("./package.json").version),
       VERSION_NAME: JSON.stringify(require("./package.json").description)
     }),
-    new TSLintPlugin({
-      files: ['./**/*.ts']
+    // Opt-in bundle analysis: ANALYZE=1 npm run build
+    ...(process.env.ANALYZE ? [new BundleAnalyzerPlugin()] : []),
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: './foe.html' },
+        { from: './changelog' },
+        { from: 'assets/css', to: 'assets/css' },
+        { from: 'assets/fonts', to: 'assets/fonts' }
+      ]
     }),
-    new BundleAnalyzerPlugin(),
-    new CopyWebpackPlugin([
-        './foe.html',
-        './changelog',
-        {from:'assets/css',to:'assets/css'},
-        {from:'assets/fonts',to:'assets/fonts'}
-    ]),
     new MiniCssExtractPlugin({
       filename: "[name].css",
       chunkFilename: "[id].css"
     }),
-    new CleanWebpackPlugin(),
     new ZipPlugin({
       filename: 'FoE-latest.zip',
     }),
-    
+
     new CircularDependencyPlugin({
         // exclude detection of files based on a RegExp
         exclude: /a\.js|node_modules/,
@@ -52,7 +54,8 @@ module.exports = {
     rules: [
       {
         test: /\.tsx?$/,
-        use: 'ts-loader',
+        loader: 'esbuild-loader',
+        options: { target: 'es2015' },
         exclude: /node_modules/
       },
       {
@@ -64,15 +67,13 @@ module.exports = {
       },
       {
         test: /\.(png|svg|jpg|gif|webp)$/,
-        use: [
-          'file-loader?name=assets/img/[name].[ext]'
-        ]
+        type: 'asset/resource',
+        generator: { filename: 'assets/img/[name][ext]' }
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
-        use: [
-          'file-loader?name=assets/fonts/[name].[ext]'
-        ]
+        type: 'asset/resource',
+        generator: { filename: 'assets/fonts/[name][ext]' }
       }
     ]
   },
@@ -81,12 +82,12 @@ module.exports = {
   },
   optimization: {
     minimizer: [
-      new TerserJSPlugin({}),
-      new OptimizeCSSAssetsPlugin({})
+      new TerserPlugin({}),
+      new CssMinimizerPlugin({})
     ]
   },
-  output: {
-    filename: 'foe.js',
-    path: path.resolve(__dirname, 'dist')
+  devServer: {
+    static: { directory: path.join(__dirname) },
+    port: 8080
   }
 };

@@ -1,4 +1,4 @@
-import { expect } from "chai";
+import { describe, it } from "vitest";
 import { Entity } from "../js/engine/entity/entity";
 
 describe("Entity", () => {

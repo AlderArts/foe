@@ -1,6 +1,6 @@
-import * as $ from "jquery";
+import $ from "jquery";
 import * as _ from "lodash";
-import * as Raphael from "raphael";
+import Raphael from "raphael";
 
 import { DEFAULT_FONT, GetRenderPictures, SMALL_FONT, windowHeight, windowWidth, SetRenderPictures } from "../../app";
 import { Images } from "../assets";

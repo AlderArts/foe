@@ -1,4 +1,4 @@
-import * as $ from "jquery";
+import $ from "jquery";
 import * as LZString from "lz-string";
 
 import { GameCache, SetGameCache } from "../engine/GAME";

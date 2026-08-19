@@ -1,6 +1,6 @@
 import * as _ from "lodash";
 
-import { expect } from "chai";
+import { describe, it, expect } from "vitest";
 import { GwendyScenes } from "../../../js/content/event/farm/gwendy-scenes";
 import { Cock } from "../../../js/engine/entity/body/cock";
 import { Race } from "../../../js/engine/entity/body/race";

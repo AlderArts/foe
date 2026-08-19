@@ -1,4 +1,4 @@
-import { expect } from "chai";
+import { describe, it, expect } from "vitest";
 import { Season } from "../js/engine/navigation/time";
 
 describe("Season", () => {
