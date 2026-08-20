@@ -92,7 +92,7 @@ speedPotion.lDesc = () => "a speed potion";
 speedPotion.Short = () => "A speed potion.";
 speedPotion.Long = () => "A speed potion.";
 speedPotion.combat.targetMode = TargetMode.Self;
-speedPotion.combat.castTree.push((ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
+speedPotion.combat.castTree.push((ability: Ability, encounter: Encounter, caster: Entity, _target: Entity) => {
 	const parse = AbilityNode.DefaultParser(caster);
 
 	Status.Haste(caster, { turns : 3, turnsR : 3, factor : 2 });
@@ -105,7 +105,7 @@ const smokeBomb = new CombatItem("esc0", "S.Bomb");
 smokeBomb.price = 100;
 smokeBomb.Short = () => "A smoke bomb.";
 smokeBomb.Long = () => "A glass sphere containing an alchemical concoction that disperses in thick, oily smoke when mixed with air. Smashing the bomb creates instant cover.";
-smokeBomb.combat.enabledCondition = (encounter: Encounter, caster: Entity) => {
+smokeBomb.combat.enabledCondition = (encounter: Encounter, _caster: Entity) => {
 	return encounter.canRun;
 };
 smokeBomb.combat.targetMode = TargetMode.Self;

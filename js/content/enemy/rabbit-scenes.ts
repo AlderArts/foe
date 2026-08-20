@@ -223,12 +223,12 @@ export namespace LagomorphScenes {
 		Encounter.prototype.onLoss.call(enc);
 	}
 
-	export function GroupLossOnPlainsBrainy(enc: LagomorphEncounter)  {
+	export function GroupLossOnPlainsBrainy(_enc: LagomorphEncounter)  {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const p1cock = player.BiggestCock();
 
-		const brainy = enc.brainy;
+		//const brainy = enc.brainy;
 		let parse: IParse = {
 
 		};
@@ -820,7 +820,7 @@ export namespace LagomorphScenes {
 			Text.Add("You can feel his jaws stretch, trying to suck your folds inside, nursing perversely in an effort to gulp down as much of your fluids as possible, tongue still lavishing attentions on your cunny.", parse);
 			Text.NL();
 
-			const cum = player.OrgasmCum();
+			player.OrgasmCum();
 
 			Text.Add("Were you not holding onto the brute’s head, you’re pretty sure you’d have lost your balance. You cry out as your orgasm rocks throughout your body, femcum flooding from your [vag] and into the lapin’s hungry maw.", parse);
 			Text.NL();
@@ -1053,7 +1053,7 @@ export namespace LagomorphScenes {
 						Text.Add("Looks like [name] made some new friends.", parse);
 						Text.NL();
 
-						const cum = kiakai.OrgasmCum();
+						kiakai.OrgasmCum();
 						kiakai.slut.IncreaseStat(75, 2);
 
 						Gui.PrintDefaultOptions();
@@ -1123,7 +1123,7 @@ export namespace LagomorphScenes {
 						Text.Add("Turning your head around, you give [name] a kiss before returning to the task at hand, thanking [himher] for being there.", parse);
 						Text.NL();
 
-						const cum = kiakai.OrgasmCum();
+						kiakai.OrgasmCum();
 						kiakai.relation.IncreaseStat(50, 1);
 
 						Gui.PrintDefaultOptions();
@@ -1312,7 +1312,7 @@ export namespace LagomorphScenes {
 								Text.Add("As one, the bunny-boys noisily kiss Terry’s cock, nibbling gently at [hisher] flare with their teeth. This is the last straw for Terry; the [foxvixen] arches [hisher] back and cries out throatily as [hisher] flare bulges to its full length and erupts in a great shower of pearly white. Streams of cum pour from [hisher] shaft, flowing wetly across the lower bunny’s face, his envious brother dipping [hisher] face down to slurp at the gushing seed like a youth at a fountain.", parse);
 								Text.NL();
 
-								const cum = terry.OrgasmCum();
+								terry.OrgasmCum();
 
 								Text.Add("By the time Terry finishes, the lower bunny is totally soaked in spunk, lying on his back in a great puddle of [foxvixen] seed, whilst his upper brother is dripping from the face from his efforts at drinking. Despite this, both bunny-sluts are grinning happily.", parse);
 								Text.NL();
@@ -1359,7 +1359,7 @@ export namespace LagomorphScenes {
 								Text.Add("Seems like they’re gonna be a while...", parse);
 								Text.NL();
 
-								const cum = terry.OrgasmCum();
+								terry.OrgasmCum();
 
 								Gui.PrintDefaultOptions();
 							}
@@ -1400,7 +1400,7 @@ export namespace LagomorphScenes {
 				Gui.NextPrompt(() => {
 					Text.Clear();
 
-					const cum = player.OrgasmCum(2);
+					player.OrgasmCum(2);
 
 					if (compsJoining.length === 1) {
 						parse.comp  = " and " + compsJoining[0].name;
@@ -1595,7 +1595,7 @@ export namespace LagomorphScenes {
 
 				kiakai.slut.IncreaseStat(60, 3);
 
-				const cum = kiakai.OrgasmCum();
+				kiakai.OrgasmCum();
 
 				Text.Add("Soon, [name]’s moans join with yours as they echo across the plains. Looks like your elf has grown to like getting fucked; you should make sure [heshe] gets [hisher] fill more often...", parse);
 			} else { // Prude
@@ -1652,7 +1652,7 @@ export namespace LagomorphScenes {
 		Gui.NextPrompt(() => {
 			Text.Clear();
 
-			const cum = player.OrgasmCum(2);
+			player.OrgasmCum(2);
 
 			Text.Add("A significant amount of time later, it seems like the rabbits are finally running out of steam. Your belly is bloated with their numerous loads, cum seeping out of every orifice. Each of your lovers give you one final go before they hop off to rejoin their friends in the pile, though in their exhausted state they’ll most likely spend some time as bottoms.", parse);
 			Text.NL();

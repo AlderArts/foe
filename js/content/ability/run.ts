@@ -13,7 +13,7 @@ const RunAb = new Ability();
 RunAb.name = "Run";
 RunAb.Short = () => "Run away.";
 RunAb.targetMode = TargetMode.Self;
-RunAb.enabledCondition = (encounter, caster) => {
+RunAb.enabledCondition = (encounter, _caster) => {
 	return encounter.canRun;
 };
 RunAb.CastInternal = (encounter, caster) => {

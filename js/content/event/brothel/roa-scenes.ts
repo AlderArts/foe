@@ -347,7 +347,7 @@ export namespace RoaScenes {
         const roa: Roa = GAME().roa;
 
         const cost   = roa.Cost();
-        const p1cock = player.BiggestCock();
+        //const p1cock = player.BiggestCock();
 
         let parse: IParse = {
             cost : Text.NumToText(cost),
@@ -745,8 +745,6 @@ export namespace RoaScenes {
             Text.NL();
             Text.Add("You make a show of looking yourself over, then slowly shake your head, proclaiming your satisfaction with what Roa has done.", parse);
         } else if (strapon) {
-            const first =
-
             Text.Add("Your hand abandons its place at the bunny’s cock to instead trail down lower. As your other hand toys with Roa’s nipples, you bend closer to his ear and whisper to him, telling him to cum, then. As you do so, you plunge your [cock] ", parse);
             if (knot) {
                 Text.Add("as far as it’ll go without knotting the lapin whore,", parse);
@@ -959,7 +957,7 @@ export namespace RoaScenes {
                 Text.NL();
                 Text.Add("By the time Roa shudders and sighs long and low in pleasure, you feel distinctly full, jampacked with thick sloppy bunny-cream. As he goes limp under you, you slowly pry your fingers free of his ass, which attempts to cling to them even despite his sated state. Once they are free, you slide your weight off of the panting lagomorph, letting his semen-stained shaft slide slowly from your well-used [vag] before hopping off of the bed entirely.", parse);
 
-                const cum = roa.OrgasmCum();
+                roa.OrgasmCum();
                 // Impreg
                 RoaScenes.Impregnate(player, cameinside, PregnancyHandler.Slot.Vag);
 
@@ -978,7 +976,7 @@ export namespace RoaScenes {
                 Text.NL();
                 Text.Add("When the panting lagomorph slumps back across the bed, you release his cock and pull your fingers free of his ass.", parse);
 
-                const cum = roa.OrgasmCum();
+                roa.OrgasmCum();
 
                 Gui.PrintDefaultOptions();
             }, enabled : true,
@@ -1079,7 +1077,7 @@ export namespace RoaScenes {
                 Text.Add("Your climax stretches on for what feels like a blissful eternity... then seeps away, leaving you panting with exertion atop of your lapin lover.", parse);
                 Text.NL();
 
-                const cum = player.OrgasmCum();
+                player.OrgasmCum();
 
                 Text.Add("The bunny-whore moans lavishly as your tunnel constricts him, but shows no sign of slowing down despite your vice-like grip. He continues to pump into you as you ride out your climax, trying your best to milk his shaft as your walls contract.", parse);
                 Text.NL();
@@ -1100,7 +1098,7 @@ export namespace RoaScenes {
                         Text.NL();
                         Text.Add("After a few moments of adding molten heat to your cunt, Roa sighs and goes limp, clearly spent from his climax. Affectionately petting his head, you slowly lift yourself from his body. A thick stream of off-white flows from your loins as you pull out and slide out of the bed.", parse);
 
-                        const cum = roa.OrgasmCum();
+                        roa.OrgasmCum();
                         RoaScenes.Impregnate(player, cameinside, PregnancyHandler.Slot.Vag);
 
                         Gui.PrintDefaultOptions();
@@ -1112,7 +1110,7 @@ export namespace RoaScenes {
                         Text.Clear();
                         Text.Add("You all but throw yourself backward, nearly rolling yourself off of the bed to escape Roa’s impending orgasm. Unbothered by your departure, Roa squeals in pleasure, arcing his back until he almost lifts himself off the bed before firing great spurts of semen toward the ceiling. They make a valiant effort, but he just can’t reach that far, and so they simply curl back down, splattering heavily across his belly, his chest, even his face. By the time he goes limp, panting heavily, he’s visibly painted with his own juices, and you are watching him from the bedside, having slid off to avoid being painted yourself.", parse);
 
-                        const cum = roa.OrgasmCum();
+                        roa.OrgasmCum();
 
                         Gui.PrintDefaultOptions();
                     }, enabled : true,

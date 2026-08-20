@@ -492,7 +492,7 @@ export class Party {
 			if (jobAbilities) {
 				pushAbilities(jobAbilities);
 			}
-			_.forIn(abilities, (value, key) => {
+			_.forIn(abilities, (value, _key) => {
 				pushAbilities(value, jobAbilities);
 			});
 		}

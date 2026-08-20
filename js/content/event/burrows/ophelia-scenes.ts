@@ -1409,7 +1409,7 @@ export namespace OpheliaScenes {
     }
 
     export function DeliverCactoids() {
-        const player: Player = GAME().player;
+        //const player: Player = GAME().player;
         const party: Party = GAME().party;
         const burrows: Burrows = GAME().burrows;
 
@@ -1467,7 +1467,7 @@ export namespace OpheliaScenes {
     }
 
     export function DeliverGolHusks() {
-        const player: Player = GAME().player;
+        //const player: Player = GAME().player;
         const party: Party = GAME().party;
         const burrows: Burrows = GAME().burrows;
 
@@ -1995,7 +1995,7 @@ export namespace OpheliaScenes {
                         You give Ophelia an encouraging smile, returning her faux kiss in earnest. Together, you’ll get through this, and while you’re at it, you might as well enjoy it, right?`);
                         Text.NL();
 
-                        const cum = player.OrgasmCum(3);
+                        player.OrgasmCum(3);
 
                         Text.Flush();
 

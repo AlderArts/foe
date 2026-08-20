@@ -121,12 +121,6 @@ export class Naga extends Entity {
 		// Pick a random target
 		const t = this.GetSingleTarget(encounter, activeChar);
 
-		const parseVars = {
-			name   : this.name,
-			hisher : this.hisher(),
-			tName  : t.name,
-		};
-
 		const choice = Math.random();
 		if (choice < 0.4) {
 			Abilities.Attack.Use(encounter, this, t);
@@ -271,7 +265,7 @@ export namespace NagaScenes {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const enc  = this;
-		const naga: Naga = enc.naga;
+		//const naga: Naga = enc.naga;
 		SetGameState(GameState.Event, Gui);
 
 		let parse: IParse = {
@@ -1135,7 +1129,7 @@ export namespace NagaScenes {
 				Text.Add("Your [vag]’s orgasm wracks your form, and your upper body curves backward from your [hips] to your head, your spasming muscles locking you into a crescent shape. The naga screams in delight as your fingers, still locked around her [nnips], pull roughly on her [nbreasts], adding to her own overflowing pleasure. You feel long, intense surges of warmth travel through the cock lodged inside your cunt, the snake-slut pumping a huge amount of her cum straight into your welcoming tunnel.", parse);
 				Text.NL();
 
-				const cum = player.OrgasmCum();
+				player.OrgasmCum();
 
 				if (player.FirstCock()) {
 					parse.c = player.NumCocks() > 1 ? "Each of y" : "Y";
@@ -1279,7 +1273,7 @@ export namespace NagaScenes {
 
 			NagaScenes.Impregnate(player, naga, PregnancyHandler.Slot.Vag);
 
-			const cum = player.OrgasmCum();
+			player.OrgasmCum();
 
 			if (player.FirstCock()) {
 				Text.Add("Your own neglected [cocks] take[notS] the match of your lover’s climax with your kitty’s as invitation to join the jism-party. [ItThey] sympathetically spray[notS] your own cum into the sticky mess between your torso and your mate’s. Your body is completely wracked with orgasmic pleasure as you’re pleased in so many ways at once. Your mind goes blank for a few seconds, so completely overloaded by ecstasy that you can’t even begin to think about anything else.", parse);
@@ -1330,7 +1324,7 @@ export namespace NagaScenes {
 			Text.Add("After what seems an eternity of entwined rapture, you and your mate cry out in fervent passion as her slit swallows you to the hilt one last time. You feel her pussy quake and tremble even as it milks your [cock] with machine-like ardor. Her reptilian cunt gushes around your engulfed member, spewing femcum out to soak the upper region of your own serpentine tail. Meanwhile, her pair of massive cocks throbs and pulsates, unleashing a deluge of her seed upward to splatter against[b] your [breasts], your collarbone and face. Your whole upper body is bathed in serpent spunk in short order, even your [hair] gets its share of thick naga cum to soak in.", parse);
 			Text.NL();
 
-			const cum = player.OrgasmCum();
+			player.OrgasmCum();
 
 			Text.Add("With such intense stimulation, not to mention the intense cumbath, your cock finally succumbs to the pleasure, a torrential surge of cum flooding the naga’s cunt, painting her walls white. Her moans intensify with the surge of heat inside her, and she quivers in delight at the cream filling you’re giving her.", parse);
 			if (player.NumCocks() > 1) {

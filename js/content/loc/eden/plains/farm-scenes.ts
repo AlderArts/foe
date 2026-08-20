@@ -1222,7 +1222,7 @@ FarmLoc.Loft.SleepFunc = () => {
     Text.NL();
     Text.Flush();
 
-    const func = (dream: any) => {
+    const func = (_dream: any) => {
         TimeStep({hour: 8});
         party.Sleep();
 

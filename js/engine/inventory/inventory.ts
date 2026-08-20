@@ -17,7 +17,7 @@ export class Inventory {
 	// Divides items by their 'type'
 	public static ItemByType(inv: IItemQuantity[], itemsByType?: any, usableItemsByType?: any, combatItemsByType?: any) {
 		// Add all keys first. Ensures item output will be in whatever order our ItemType enum is in
-		_.forIn(ItemType, (value, key) => {
+		_.forIn(ItemType, (value, _key) => {
 			if (itemsByType) {
 				itemsByType[value] = [];
 			}
@@ -43,7 +43,7 @@ export class Inventory {
 			}
 		}
 		// Clear empty arrays
-		_.forIn(ItemType, (value, key) => {
+		_.forIn(ItemType, (value, _key) => {
 			if (itemsByType && itemsByType[value].length === 0) {
 				delete itemsByType[value];
 			}
@@ -58,7 +58,7 @@ export class Inventory {
 	// Divides items by their 'type' and further by their 'subtype' inside each primary type. Items WITHOUT a subtype are under property 'None'
 	public static ItemByBothTypes(inv: IItemQuantity[], itemsByType: any = {}, usableItemsByType?: any, combatItemsByType?: any) {
 		// Add all keys first. Ensures item output will be in whatever order our ItemType enum is in
-		_.forIn(ItemType, (value, key) => {
+		_.forIn(ItemType, (value, _key) => {
 			if (itemsByType) {
 				itemsByType[value] = {};
 			}
@@ -69,7 +69,7 @@ export class Inventory {
 				combatItemsByType[value] = {};
 			}
 
-			_.forIn(ItemSubtype, (value2, key2) => {
+			_.forIn(ItemSubtype, (value2, _key2) => {
 				if (itemsByType) {
 					itemsByType[value][value2] = [];
 				}
@@ -95,10 +95,10 @@ export class Inventory {
 			}
 		}
 		// Clear empty arrays
-		_.forIn(ItemType, (itType, key) => {
+		_.forIn(ItemType, (itType, _key) => {
 			const items = itemsByType[itType];
 			// Remove empty subtypes
-			_.forIn(ItemSubtype, (subType, key2) => {
+			_.forIn(ItemSubtype, (subType, _key2) => {
 				if (itemsByType && items[subType].length === 0) {
 					delete items[subType];
 				}
@@ -354,7 +354,7 @@ export class Inventory {
 		const options: IChoice[] = [];
 		for (const u of usable) {
 			const it  = u.it;
-			const num = u.num;
+			//const num = u.num;
 
 			// Text.Add(num + "x " + it.name + " - " + it.Short() + "<br>");
 			options.push({

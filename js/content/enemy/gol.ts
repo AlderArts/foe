@@ -354,7 +354,7 @@ export namespace GolScenes {
 			The Gol queen, your Queen, you realize, shoves harder, slamming her lengthy organ in to the hilt. You feel it slip past some obstruction inside you. Your womb, you realize through the haze of pleasure. Then she pulls back, waits a moment, and slams herself home, fully seating her egg-laying she-dick within your moist accommodations, forcing your cervix to dilate wide as its tip nuzzles at your fallopian tubes.`);
 			Text.NL();
 
-			const cum = player.OrgasmCum();
+			player.OrgasmCum();
 
 			Text.Out(`You cum to the feeling of utter violation. If it weren’t for the steel-strong silk binding you in place, you’d be thrashing like a wild ${player.mfFem("man", "woman")}. `);
 			if (player.FirstCock()) {
@@ -457,7 +457,7 @@ export namespace GolScenes {
 		player.Fuck(undefined, 4);
 		gol.Fuck(undefined, 4);
 
-		const cum = player.OrgasmCum();
+		player.OrgasmCum();
 
 		Text.Add(`The Gol chitters in enthusiastic delight, stroking a humanoid hand through your ${pc.hair}. <i>“There there. Isn't it wonderful, drone? You're tasting your very purpose - nursing on the nectar of your new life. `);
 		if (growcock) {
@@ -707,7 +707,7 @@ export namespace GolScenes {
 	export function CombatWinTailfuck(enc: GolEncounter, p1cock: Cock) {
 		const player: Player = GAME().player;
 		const gol = enc.gol;
-		const lusty = gol.LustLevel() >= 0.5;
+		//const lusty = gol.LustLevel() >= 0.5;
 
 		let parse: IParse = {
 			cocks() { return player.MultiCockDesc(); },
@@ -936,7 +936,7 @@ export namespace GolScenes {
 		Gui.SetButtonsFromList(options, false, undefined);
 	}
 
-	export function CombatAftermath(enc: GolEncounter) {
+	export function CombatAftermath(_enc: GolEncounter) {
 		Text.Clear();
 		Text.Out(`Scepter in hand, you have what you came here for. A pity you couldn’t do anything for the poor souls that the Gol waylaid, but it looks like they’re long gone, dragged back to the hive. Just as well; you’re quite glad you didn’t have to face ten of these beasts at once. One thing is for sure, there’s still more of them out there, somewhere.
 

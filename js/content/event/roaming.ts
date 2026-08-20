@@ -103,7 +103,7 @@ export namespace RoamingScenes {
 		} else {
 			capt.body.DefMale();
 		}
-		const gender = capt.Gender();
+		//const gender = capt.Gender();
 
 		parse = capt.ParserPronouns(parse, "r");
 		parse.rmanwoman = capt.mfTrue("man", "woman");
@@ -626,7 +626,7 @@ export namespace RoamingScenes {
 		const enc = this;
 
 		const bandits = enc.enemy;
-		const num = bandits.NumTotal();
+		//const num = bandits.NumTotal();
 
 		let parse: IParse = {
 

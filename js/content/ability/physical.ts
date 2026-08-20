@@ -50,7 +50,7 @@ grandSlam.castTree.push(AbilityNode.Template.Physical({
 	atkMod: 1.1,
 	hitMod: 0.8,
 	damageType: {pBlunt: 1},
-	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
+	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, _target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster);
 		Text.Add("[Name] read[y] a powerful blow, aiming to stun any who stand in [hisher] way! ", parse);
 		Text.NL();
@@ -199,7 +199,7 @@ setTrap.castTree.push((ability: Ability, encounter: Encounter, caster: Entity) =
 		}
 	}
 
-	Status.Counter(caster, { turns : 999, hits : 1, OnHit(enc: Encounter, caster2: Entity, attacker: Entity, dmg: number) {
+	Status.Counter(caster, { turns : 999, hits : 1, OnHit(enc: Encounter, caster2: Entity, attacker: Entity, _dmg: number) {
 			PhysicalAb.SpringTrap.Use(encounter, caster2, attacker);
 			return false;
 		},
@@ -452,7 +452,7 @@ fade.targetMode = TargetMode.Enemies;
 fade.cost = { hp: undefined, sp: 50, lp: undefined};
 fade.castTree.push(AbilityNode.Template.Physical({
 	toDamage: undefined,
-	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
+	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, _target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster);
 		Text.Add("[Name] fade[notS] from notice.", parse);
 		Text.NL();

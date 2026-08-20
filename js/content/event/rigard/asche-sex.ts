@@ -563,7 +563,7 @@ export namespace AscheSexScenes {
 		Text.Add("The excited, pulsing warmth deep within you is writhing, seeking release, and comes dangerously close when you feel bottom-Asche’s fingers work their way between you and the mattress, probing your ass cheeks for your back door. They find it soon enough, and you shudder as she slides a furry digit in, your sphincter clenching tight about the welcome intruder.", parse);
 		Text.NL();
 
-		const cum = player.OrgasmCum();
+		player.OrgasmCum();
 
 		Text.Add("Time to up the ante yourself. Withdrawing momentarily from top-Asche, you run the tip of your [tongue] across her outer lips, seeking that tiny nub of flesh you know is there - and when you do find it, giving it a flick with your [tongueTip]. That’s enough to push Asche over the edge - with a loud howl, top-Asche throws back her head and grabs at your neck as she convulses atop you, pussy juice squirting from her love-hole as orgasm wracks her body. Bottom-Asche ", parse);
 		if (player.FirstCock()) {

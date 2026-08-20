@@ -20,7 +20,7 @@ export function InitMarket(gScenes: any) {
 
 export namespace MarketScenes {
 
-    export function GoToMarketFirst(backfunc: any) {
+    export function GoToMarketFirst(_backfunc: any) {
         const player: Player = GAME().player;
         const party: Party = GAME().party;
         const gwendy: Gwendy = GAME().gwendy;

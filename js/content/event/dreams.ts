@@ -29,7 +29,7 @@ import { UruFlags } from "./uru";
 
 export namespace DreamsScenes {
 
-	export function Entry(func: any) {
+	export function Entry(func: CallableFunction) {
 		const party: Party = GAME().party;
 		const player: Player = GAME().player;
 		const ravenmother: RavenMother = GAME().ravenmother;
@@ -132,7 +132,7 @@ export namespace DreamsScenes {
 		}
 	}
 
-	export function RavenAfterDream(ravenTrigger: boolean, func: any) {
+	export function RavenAfterDream(ravenTrigger: boolean, func: CallableFunction) {
 		const party: Party = GAME().party;
 		const ravenmother: RavenMother = GAME().ravenmother;
 		const kiakai: Kiakai = GAME().kiakai;

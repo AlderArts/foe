@@ -41,7 +41,7 @@ export class Farm {
 		return storage;
 	}
 
-	public Update(step: ITime) {
+	public Update(_step: ITime) {
 		// TODO: Farm produce etc
 	}
 

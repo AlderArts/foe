@@ -424,7 +424,7 @@ export namespace HalloweenScenes {
 
 	export function EnterDream(first: boolean) {
 		const player: Player = GAME().player;
-		const party: Party = GAME().party;
+		//const party: Party = GAME().party;
 
 		const parse: IParse = {
 			skin : player.SkinDesc(),
@@ -1958,7 +1958,7 @@ export namespace HalloweenScenes {
 	HWLoc.TortureRoom.description = () => {
 		const player: Player = GAME().player;
 
-		const first = !(HW.flags & HalloweenFlags.Flags.TRoom);
+		//const first = !(HW.flags & HalloweenFlags.Flags.TRoom);
 		HW.flags |= HalloweenFlags.Flags.TRoom;
 
 		Text.Add("Your first impression of the chamber is that it’s some kind of dungeon. A second impression confirms it, although a rather different sort of dungeon than you had initially believed.");
@@ -3454,7 +3454,7 @@ export namespace HalloweenScenes {
 			feet() { return player.FeetDesc(); },
 		};
 
-		const first = !(HW.harthon & HalloweenFlags.Harthon.Met);
+		//const first = !(HW.harthon & HalloweenFlags.Harthon.Met);
 		HW.harthon |= HalloweenFlags.Harthon.Met;
 
 		Text.Clear();

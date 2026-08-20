@@ -545,7 +545,7 @@ export namespace MagnusScenes {
 						Text.Add("You pass in and out of consciousness, not sure how long the ordeal lasts. Your swelling stomach tells you that not only the cocks being pumped down your throat are feeding you their demonic cum, the tentacles fucking your other hole[s] are also depositing a seemingly endless amounts of their thick syrup into your bowels[womb].", parse);
 						Text.NL();
 
-						const cum = player.OrgasmCum(2);
+						player.OrgasmCum(2);
 
 						Text.Add("Next time you wake up, there is a large pool of cum beneath you.", parse);
 						if (player.FirstCock()) {
@@ -624,7 +624,7 @@ export namespace MagnusScenes {
 						Text.Add("The feeling of absolute fullness, a constant pressure in your insides, finally sends you over the edge. Wracked by a powerful orgasm, you pass out, your body spent.", parse);
 						Text.NL();
 
-						const cum = player.OrgasmCum(2);
+						player.OrgasmCum(2);
 
 						Text.Add("You wake some time later, roused by yet another dose of cum from the demon. From your aching bones, you can only assume that it just kept on fucking you, seemingly having no limits to its stamina. You fade in and out of consciousness for the next hour or so, completely at the creature’s mercy.", parse);
 					}, 1.0, () => true);
@@ -672,7 +672,7 @@ export namespace MagnusScenes {
 						Text.Add("Once it has grown bored of raping your throat, the demon jerks itself off inside your stomach using its tentacles, hissing and chuckling as it brings Magnus to climax. When it comes, it is like a sudden expansion, an explosion of cum originating in your stomach and trying to escape in every direction at the same time.", parse);
 						Text.NL();
 
-						const cum = player.OrgasmCum(2);
+						player.OrgasmCum(2);
 
 						Text.Add("You groan helplessly, pushed far beyond your own limits as the heat spreading through your straining belly triggering your own orgasm. Tugging your body roughly, the tentacled creature pulls you off its cocks, a rapidly rising wall of semen following closely behind the retracting tips. It pulls out of your lips and your [anus] at approximately the same time, first pausing in order to fill up the little remaining space inside you with its corrupted seed.", parse);
 						Text.NL();

@@ -46,7 +46,7 @@ export class Aria extends Entity {
 	}
 
 	// Schedule
-	public IsAtLocation(location?: ILocation) {
+	public IsAtLocation(_location?: ILocation) {
 		return true;
 	}
 }

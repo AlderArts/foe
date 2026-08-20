@@ -1245,7 +1245,7 @@ export namespace LagonDScenes {
 			Text.Add("Reaching beneath your strap-on, your fingers dive for your quivering quim, plunging between your sopping wet folds as you eagerly reach for your g-spots. Spots dance in your vision as your digits close around your [clit], your body so primed that you just can’t...", parse);
 			Text.NL();
 
-			const cum = player.OrgasmCum();
+			player.OrgasmCum();
 
 			Text.Add("Arching your back, you squeal in pleasure as femcum gushes from between your folds, a river of perverse juices that runs down your [legs] and patters like raindrops as it puddles on Lagon’s floor. The world flickers, your mind unable to focus on what’s around you as pure pleasure storms through your brain, leaving you reeling as you struggle to ride out the wave.", parse);
 			Text.NL();
@@ -1563,7 +1563,7 @@ export namespace LagonDScenes {
 					Text.Add("Caught up in your need to breed, you bury yourself as deeply into Vena as you possibly can and let yourself go. Sparks fill your vision, nerves afire with pleasure as you allow yourself to erupt into her waiting snatch, thick jets of seed pouring towards her greedy womb.", parse);
 					Text.NL();
 
-					const cum = player.OrgasmCum();
+					player.OrgasmCum();
 
 					if (player.Slut() < 30) {
 						Text.Add("In between the shudders of pleasure, you manage to muster a spark of concern; what if you get her pregnant? Then you brush it aside as meaningless; Vena wouldn’t care if you did, and really, what are a few more bunnies? Besides, a little freshening to the gene pool will do them some good.", parse);
@@ -1871,7 +1871,7 @@ export namespace LagonDScenes {
 			Text.Add("Cock throbbing madly, you’re about to blow... when a thought manages to strike you, even through the veil of lust and pleasure crowding your mind.", parse);
 			Text.NL();
 
-			cum += player.OrgasmCum();
+			/*cum += */player.OrgasmCum();
 
 			Text.Add("With a primal roar of ecstasy, you fiercely pull your cock free of Lagon’s ass, grabbing it roughly in your hand and pumping to push yourself over the edge. Your whole body convulses as you climax again, thick jets of semen spraying over Lagon’s butt and back. You paint him with your seed, irrefutably marking him as your bitch, and then fall back with a sated sigh.", parse);
 			Text.NL();

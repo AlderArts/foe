@@ -331,7 +331,7 @@ const CreateShop = (cassidy: Cassidy) => {
 
 			cassidy.relation.IncreaseStat(30, 2);
 		},
-		buyFailFunc(item: Item, cost: number, bought: boolean) {
+		buyFailFunc(_item: Item, _cost: number, _bought: boolean) {
 			let parse: IParse = {
 
 			};
@@ -376,7 +376,7 @@ const CreateShop = (cassidy: Cassidy) => {
 				Text.NL();
 			}
 		},
-		sellSuccessFunc(item: Item, cost: number, num: number) {
+		sellSuccessFunc(_item: Item, _cost: number, _num: number) {
 			let parse: IParse = {
 
 			};
@@ -388,7 +388,7 @@ const CreateShop = (cassidy: Cassidy) => {
 			Text.Add("<i>“That’ll do, that’ll do… damn, I really hate bookkeeping…”</i> the salamander mutters as [heshe] scribbles in a ledger, then slams it shut and counts out your money. <i>“Okay, there I go, and here you are. Enjoy!”</i> ", parse);
 			Text.NL();
 		},
-		sellFailFunc(item: Item, cost: number, sold: boolean) {
+		sellFailFunc(item: Item, _cost: number, _sold: boolean) {
 			let parse: IParse = {
 				item : item.sDesc(),
 			};

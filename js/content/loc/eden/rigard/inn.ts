@@ -632,7 +632,7 @@ export namespace LBScenes {
 
 		};
 
-		const busy = RigardFlags.LB.Busy();
+		//const busy = RigardFlags.LB.Busy();
 
 		const options: IChoice[] = [];
 		// Various info about the inn
@@ -1014,7 +1014,7 @@ export namespace LBScenes {
 		Gui.NextPrompt();
 		return;
 
-		const task = efriaction;
+		//const task = efriaction;
 
 		Text.Clear();
 		Text.Add("", parse);

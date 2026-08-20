@@ -359,7 +359,7 @@ anusol.PushEffect((target: Entity) => {
 	};
 	parse = target.ParserTags(parse);
 
-	const cum = target.OrgasmCum();
+	target.OrgasmCum();
 
 	if (target === GAME().player) {
 		Text.Add("You raise the bottle to your lips and tip the contents down your throat. The oily green elixir disappears smoothly enough, leaving behind a somewhat greasy aftertaste and a lingering taste of sweetness.", parse);

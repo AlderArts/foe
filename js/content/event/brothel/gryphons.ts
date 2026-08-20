@@ -337,9 +337,6 @@ export namespace GryphonsScenes {
 		});
 
 		if (gender === Gender.male && player.FirstCock()) {
-			let parse2: IParse = {};
-			parse2 = Text.ParserPlural(parse2, player.NumCocks() > 1);
-
 			const incompleteCockSizeOne = (c: Cock) => {
 				if (c.Len() < 28) { return true; }
 				if (c.Thickness() < 5) { return true; }
@@ -475,7 +472,7 @@ export namespace GryphonsScenes {
 			});
 			func({
 				tf() {
-					_.each(player.AllBreastRows(), (b) => {
+					_.each(player.AllBreastRows(), (_b) => {
 						player.FirstBreastRow().nippleThickness.IncreaseStat(2, .5);
 						player.FirstBreastRow().nippleLength.IncreaseStat(2, .5);
 					});

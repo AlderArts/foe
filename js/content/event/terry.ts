@@ -304,7 +304,7 @@ export class Terry extends Entity {
 	}
 
 	// Party interaction
-	public Interact(switchSpot: boolean) {
+	public Interact(_switchSpot: boolean) {
 		const terry: Terry = GAME().terry;
 
 		const parse: IParse = {
@@ -383,7 +383,7 @@ export class Terry extends Entity {
 
 	// TODO ITEMS
 
-	public ItemUsable(item: Item) {
+	public ItemUsable(_item: Item) {
 		return true;
 	}
 

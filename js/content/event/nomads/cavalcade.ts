@@ -593,7 +593,7 @@ export namespace NCavalcadeScenes {
 	}
 
 	// TODO
-	export function SexyEstevanWin(cheat: boolean) {
+	export function SexyEstevanWin(_cheat: boolean) {
 		const parse: IParse = {
 
 		};
@@ -608,7 +608,7 @@ export namespace NCavalcadeScenes {
 	}
 
 	// TODO
-	export function SexyCaleWin(cheat: boolean) {
+	export function SexyCaleWin(_cheat: boolean) {
 		const parse: IParse = {
 
 		};
@@ -623,7 +623,7 @@ export namespace NCavalcadeScenes {
 	}
 
 	// TODO
-	export function SexyRosalinWin(cheat: boolean) {
+	export function SexyRosalinWin(_cheat: boolean) {
 		const parse: IParse = {
 
 		};

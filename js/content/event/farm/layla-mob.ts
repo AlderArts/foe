@@ -55,12 +55,6 @@ export class LaylaMob extends Entity {
 		// Pick a random target (go for lowest abs HP)
 		const t = this.GetSingleTarget(encounter, activeChar, TargetStrategy.LowAbsHp);
 
-		const parseVars = {
-			name   : this.name,
-			hisher : this.hisher(),
-			tName  : t.name,
-		};
-
 		const choice = Math.random();
 		if (choice < 0.6) {
 			Abilities.Attack.Use(encounter, this, t);

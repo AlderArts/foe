@@ -141,12 +141,6 @@ export class Wildcat extends Entity {
 		// Pick a random target
 		const t = this.GetSingleTarget(encounter, activeChar);
 
-		const parseVars = {
-			name   : this.name,
-			hisher : this.hisher(),
-			tName  : t.name,
-		};
-
 		const choice = Math.random();
 		if (choice < 0.7) {
 			Abilities.Attack.Use(encounter, this, t);
@@ -423,9 +417,9 @@ export namespace FelinesScenes {
 
 	export function Intro() {
 		const enc: Encounter = this;
-		const enemy   = enc.enemy;
-		const group   = enemy.Num() > 1;
-		const mainCat = enemy.Get(0);
+		//const enemy   = enc.enemy;
+		//const group   = enemy.Num() > 1;
+		//const mainCat = enemy.Get(0);
 
 		if (Math.random() > 0.5) {
 			enc.onEncounter = FelinesScenes.IntroRegular;
@@ -577,7 +571,7 @@ export namespace FelinesScenes {
 			}
 			Text.Flush();
 
-			let numMales   = 0;
+			//let numMales   = 0;
 			let numFemales = 0;
 			let numHerms   = 0;
 			let male: Wildcat;
@@ -587,7 +581,7 @@ export namespace FelinesScenes {
 				const ent: Wildcat    = enemy.Get(i) as Wildcat;
 				const gender = ent.Gender();
 				if (gender === Gender.male) {
-					numMales++;
+					//numMales++;
 					if (male === undefined) { male = ent; }
 				} else if (gender === Gender.female) {
 					numFemales++;
@@ -731,7 +725,7 @@ export namespace FelinesScenes {
 			return cat !== mainCat;
 		});
 
-		const herm = mainCat.FirstVag();
+		//const herm = mainCat.FirstVag();
 		const cat1 = otherCats[0];
 		const group = enemy.Num() > 1;
 		const group2 = enemy.Num() > 2;
@@ -1345,7 +1339,7 @@ export namespace FelinesScenes {
 		}
 	}
 
-	export function WinGetBlowjob(cat: Wildcat, group: boolean, enc: Encounter) {
+	export function WinGetBlowjob(cat: Wildcat, group: boolean, _enc: Encounter) {
 		const player: Player = GAME().player;
 		let parse: IParse = {
 			oneof    : group ? " one of" : "",
@@ -1694,7 +1688,7 @@ export namespace FelinesScenes {
 		}
 
 		let numMales   = 0;
-		let numFemales = 0;
+		//let numFemales = 0;
 		let numHerms   = 0;
 		let male: Wildcat;
 		let female: Wildcat;
@@ -1706,7 +1700,7 @@ export namespace FelinesScenes {
 				numMales++;
 				if (male === undefined) { male = ent; }
 			} else if (gender === Gender.female) {
-				numFemales++;
+				//numFemales++;
 				if (female === undefined) { female = ent; }
 			} else if (gender === Gender.herm) {
 				numHerms++;
@@ -2564,7 +2558,7 @@ export namespace FelinesScenes {
 		return true;
 	}
 
-	export function LossDrainMilk(mainCat: Wildcat, group: boolean, enc: Encounter) {
+	export function LossDrainMilk(mainCat: Wildcat, group: boolean, _enc: Encounter) {
 		const player: Player = GAME().player;
 		let parse: IParse = {
 			name : mainCat.nameDesc(),
@@ -2676,7 +2670,7 @@ export namespace FelinesScenes {
 	}
 	*/
 
-	export function LossDoubleTeam(cat: Wildcat, cat2: Wildcat, group: boolean, enc: Encounter) {
+	export function LossDoubleTeam(cat: Wildcat, cat2: Wildcat, group: boolean, _enc: Encounter) {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 
@@ -2921,7 +2915,7 @@ export namespace FelinesScenes {
 				Text.Add("Your vision blurs. You hope you can hold on long enough for the others to finish.", parse);
 				Text.NL();
 
-				const cum = player.OrgasmCum();
+				player.OrgasmCum();
 
 				Text.Add("A combination purr and yowl gets your attention from behind you. <i>“Hey, hot stuff, I’m gonna cum too. You want it in or out?”</i>", parse);
 				Text.NL();
@@ -3040,7 +3034,7 @@ export namespace FelinesScenes {
 					}
 					Text.NL();
 
-					const cum = player.OrgasmCum();
+					player.OrgasmCum();
 
 					Text.Add("Your muscles reflexively clamp down on the kitty-pricks still stuffing your ass and cunt as if begging to milk them dry, their barbs pressing into your sensitive insides. That sets off both cats; in unison, they yowl, thrust, shudder, and pump their sweet cream inside you. You whimper, warmth spreading to every part of your insides as thick jets of seed fill your already stuffed holes to the brim, and more.", parse);
 					Text.NL();

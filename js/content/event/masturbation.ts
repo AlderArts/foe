@@ -886,8 +886,8 @@ export namespace MasturbationScenes {
 
 	export function VagToy(parse: IParse, toy: ItemToy) {
 		const player: Entity = GAME().player;
-		const preg = player.PregHandler().IsPregnant();
-		const bellySize = player.PregHandler().BellySize();
+		//const preg = player.PregHandler().IsPregnant();
+		//const bellySize = player.PregHandler().BellySize();
 
 		parse.toy = toy.sDesc();
 
@@ -931,7 +931,7 @@ export namespace MasturbationScenes {
 
 	export function VagTailfuck(parse: IParse) {
 		const player: Entity = GAME().player;
-		const preg = player.PregHandler().IsPregnant();
+		//const preg = player.PregHandler().IsPregnant();
 		const bellySize = player.PregHandler().BellySize();
 
 		const br = player.FirstBreastRow().Size();
@@ -1120,7 +1120,7 @@ export namespace MasturbationScenes {
 		Text.Add("With that in mind, you collect your gear once more, putting on and doing up your [armor] before[c] setting off on your way.", parse);
 		Text.Flush();
 
-		const cum = player.OrgasmCum();
+		player.OrgasmCum();
 
 		TimeStep({minute: 30});
 		Gui.NextPrompt();

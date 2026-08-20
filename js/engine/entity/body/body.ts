@@ -694,7 +694,7 @@ export class Body implements IBody {
 		return adj + (plural ? "hips" : "hip");
 	}
 
-	public StomachDesc(bellysize: number) {
+	public StomachDesc(_bellysize: number) {
 		const nouns = [];
 
 		nouns.push("belly");

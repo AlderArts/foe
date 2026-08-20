@@ -165,7 +165,7 @@ export class Shop {
 				if (items) {
 					for (const item of items) {
 						const it       = item.it;
-						const num      = item.num;
+						//const num      = item.num;
 						let enabled  = item.enabled ? item.enabled() : true;
 						const cost     = GetDEBUG() ? 0 : Math.floor(item.price * it.price);
 						const func     = item.func;

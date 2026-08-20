@@ -1,5 +1,5 @@
 // Universal constants
-const frametime = 0.050; // Used for time updates
+//const frametime = 0.050; // Used for time updates
 export const windowWidth  = 1280;
 export const windowHeight = 720;
 
@@ -34,8 +34,8 @@ export const SAVE_VERSION = 29;
 // Save version 28: Lei flags fix
 // Save version 29: Cleared some unused flags from Lagon
 
-declare var VERSION: string;
-declare var VERSION_NAME: string;
+declare let VERSION: string;
+declare let VERSION_NAME: string;
 export const VERSION_STRING = `Fall of Eden ${VERSION}: ${VERSION_NAME}`;
 
 export const HEADER_FONT  = "bold 30pt Calibri";

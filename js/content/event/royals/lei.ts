@@ -207,7 +207,7 @@ export class LeiSpar extends Entity {
 		Text.NL();
 
 		// Pick a random target
-		const targets = this.GetPartyTarget(encounter, activeChar);
+		//const targets = this.GetPartyTarget(encounter, activeChar);
 		const t = this.GetSingleTarget(encounter, activeChar);
 
 		const choice = Math.random();

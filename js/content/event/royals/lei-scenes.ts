@@ -1904,7 +1904,7 @@ export namespace LeiScenes {
 		LeiScenes.GuardStalkingOutro(parse, nv);
 	}
 
-	export function GuardStalkingOutro(parse: IParse, nv: boolean) {
+	export function GuardStalkingOutro(parse: IParse, _nv: boolean) {
 		const party: Party = GAME().party;
 		const kiakai: Kiakai = GAME().kiakai;
 		const miranda: Miranda = GAME().miranda;

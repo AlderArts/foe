@@ -3594,7 +3594,7 @@ export namespace TerryScenes {
 
 		terry.SetPussy();
 
-		const cum = terry.OrgasmCum();
+		terry.OrgasmCum();
 
 		JeanneScenes.InteractPrompt();
 	}
@@ -3733,7 +3733,7 @@ export namespace TerryScenes {
 		}
 		Text.Flush();
 
-		const cum = terry.OrgasmCum();
+		terry.OrgasmCum();
 
 		JeanneScenes.InteractPrompt();
 	}
@@ -3789,7 +3789,7 @@ export namespace TerryScenes {
 				terry.SetPussy();
 			}
 
-			const cum = terry.OrgasmCum();
+			terry.OrgasmCum();
 		} else {
 			parse.lust = (terry.LustLevel() >= 0.5 || terry.Slut() >= 60) ? " beyond usual" : "";
 			Text.Add("Both you and Terry wait patiently, but nothing happens. There’s simply no alteration in the [foxvixen]. No stirring on [hisher] pussy, not even a tickle of arousal[lust]. After a few moments, Terry simply gives you a noncommittal shrug, whilst you feel very foolish about using a penis-removing suppository on someone who doesn’t have a penis to remove.", parse);
@@ -3816,7 +3816,7 @@ export namespace TerryScenes {
 			TerryScenes.JeanneTFHorsegasmEntrypoint();
 
 			Text.Flush();
-			const cum = terry.OrgasmCum();
+			terry.OrgasmCum();
 
 			JeanneScenes.InteractPrompt();
 			return;
@@ -3912,7 +3912,7 @@ export namespace TerryScenes {
 		terry.SetCock();
 
 		TimeStep({hour: 1});
-		const cum = terry.OrgasmCum();
+		terry.OrgasmCum();
 
 		JeanneScenes.InteractPrompt();
 	}
@@ -4334,7 +4334,7 @@ export namespace TerryScenes {
 		Text.Add("Shivers race along your spine, your brain clouded by a fog of pleasure. A hot pressure wells within your belly, your body quivering as the sensation grows stronger. You’re close... oh, so close...", parse);
 		Text.NL();
 
-		const cum = player.OrgasmCum();
+		player.OrgasmCum();
 
 		Text.Add("A cry of pleasure rips its way out of your throat as the dam breaks within you. Juices sluice forth and splatter onto Terry’s muzzle, washing over [hisher] tongue in your orgasm.", parse);
 		if (player.FirstCock()) {
@@ -5533,7 +5533,7 @@ export namespace TerryScenes {
 				}
 				Text.NL();
 
-				const cum = terry.OrgasmCum();
+				terry.OrgasmCum();
 
 				Text.Add("You stop for a moment to admire the shuddering [foxvixen] below you, barely managing to remain on all fours as [hisher] trembling arms and knees threaten to give at any moment. You hug [himher] from behind, supporting [himher] as you turn to give [hisher] cheek a kiss.", parse);
 				Text.NL();
@@ -5592,7 +5592,7 @@ export namespace TerryScenes {
 				Text.Add("You decide to silence [himher] by going at it even harder than before, violently bouncing Terry up and down in your lap to give [himher] the hardest fucking you can possibly manage. Obscene noises echo around you, a perverse chorus of fleshy slapping, squelching as your cock slurps through Terry’s pre-filled anus, and the whimpers, mewls and salacious moans of your pleasure delirious fucktoy.", parse);
 				Text.NL();
 
-				const cum = terry.OrgasmCum();
+				terry.OrgasmCum();
 
 				Text.Add("There is no warning when the [foxvixen]’s butt suddenly clenches, grasping your [cock] mid-thrust. ", parse);
 				if (terry.FirstVag()) {
@@ -5651,7 +5651,7 @@ export namespace TerryScenes {
 						parse.v = player.FirstVag() ? " The sudden shudders that ripple through you as your own orgasm hits don’t help." : "";
 						Text.Add("The impact nearly knocks you over, and does make you drop the toy you were so busily plumbing [hisher] ass with before.[v] The two of you lie there for the moment, panting for breath, even as you mindlessly adjust Terry in your lap to be a little more comfortable.", parse);
 
-						const cum = player.OrgasmCum();
+						player.OrgasmCum();
 					} else {
 						Text.Add("You cry out in pleasure as your resistance breaks and orgasm washes through you, fountaining your sperm into Terry’s waiting ass.", parse);
 						Text.NL();
@@ -5882,7 +5882,7 @@ export namespace TerryScenes {
 				Text.Add("Overwhelmed by pleasure, Terry involuntarily thrusts into your mouth. [HisHer] fingers and toes dig into the ground. Seems like [heshe]’s gonna blow anytime now... ", parse);
 				Text.NL();
 
-				const cum = terry.OrgasmCum();
+				terry.OrgasmCum();
 
 				Text.Add("Deeming the [foxvixen] finally stimulated to your liking, you close your eyes and wetly pop your mouth free. A trail of saliva links your gaping lips to [hisher] flaring glans for a moment before [heshe] howls in pleasure and veritably explodes in orgasm.", parse);
 				Text.NL();
@@ -6227,7 +6227,7 @@ export namespace TerryScenes {
 		parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 		parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
 
-		const defFunc = (opts: any) => {
+		const defFunc = (_opts: any) => {
 			Text.Flush();
 			Gui.NextPrompt();
 		};
@@ -6382,7 +6382,7 @@ export namespace TerryScenes {
 		parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 		parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
 
-		const defFunc = (opts: any) => {
+		const defFunc = (_opts: any) => {
 			Text.Flush();
 			Gui.NextPrompt();
 		};
@@ -6643,7 +6643,7 @@ export namespace TerryScenes {
 						Text.Add("Terry’s become pretty good at this. [HisHer] tongue massages you in all the key spots [heshe]’s come to know so well. As you facefuck your pet [foxvixen], you come to realize that your hips are moving of their own accord - not that either of you are complaining at this point. Suddenly, you feel [himher] take you all the way, as deep into [hisher] muzzle as [heshe] can. The feeling of [hisher] throat closing down on your shaft is the last straw.", parse);
 						Text.NL();
 
-						const cum = player.OrgasmCum();
+						player.OrgasmCum();
 
 						Text.Add("With a jubilant howl of pleasure, you empty yourself into Terry’s waiting belly, shedding a nice sized gush of seed down [hisher] throat. [HeShe] sucks hungrily, gulping down each shot, until you finally finish, confident that you have given [hisher] stomach a nice whitewash.", parse);
 						Text.NL();
@@ -6664,7 +6664,7 @@ export namespace TerryScenes {
 						Text.Add("Terry engulfs your [vag], letting [hisher] tongue drill into your muff, draining it of your precious juices which you’re only too glad to give [himher]. ", parse);
 						Text.NL();
 
-						const cum = player.OrgasmCum();
+						player.OrgasmCum();
 
 						Text.Add("With a shriek of ecstasy, your whole body shudders in climax, gushing your feminine juices into the [foxvixen]’s ever-hungry mouth. [HeShe] practically inhales your honey, gulping it down until every last drop is gone, then carefully licks around to remove the last vestiges from your flower. You can only moan weakly in bliss until [heshe] finally deigns to lift [hisher] face from your folds.", parse);
 						Text.NL();
@@ -6784,7 +6784,7 @@ export namespace TerryScenes {
 		Text.Add("You watch as the bunnies have their fun with your pet [foxvixen] before you decide to leave them to their own devices.", parse);
 		Text.NL();
 
-		const cum = terry.OrgasmCum();
+		terry.OrgasmCum();
 	}
 
 	export function SexPitchVaginal(cocks: Cock[]) {
@@ -8097,7 +8097,7 @@ export namespace TerryScenes {
 							Text.Add("The two of you writhe together, mutually pleasuring each other as best you can. With your earlier efforts, you don’t last much longer. Huffing as you try to hold it back, you cry out a warning to Terry that you’re cumming. Seconds later, you arch your back and cry out as your [cock] erupts right into Terry’s face.", parse);
 							Text.NL();
 
-							let cum = player.OrgasmCum();
+							player.OrgasmCum();
 
 							if (player.NumCocks() > 1) {
 								Text.Add("You dimly note your other neglected cock[s2] erupting in turn; some of it catches Terry right in the face, but most of it simply flies right over [hisher] head.", parse);
@@ -8131,7 +8131,7 @@ export namespace TerryScenes {
 							}
 							Text.NL();
 
-							cum = terry.OrgasmCum();
+							terry.OrgasmCum();
 
 							Text.Add("<i>“Haah, haah, that was… pretty good,”</i> Terry says, collapsing on the ground.", parse);
 							Text.NL();
@@ -8220,7 +8220,7 @@ export namespace TerryScenes {
 				Text.Add("Despite [hisher] climax, Terry never stops licking you, nor kissing your [clit]. With the scent of Terry’s climax hanging in your nostrils and such attention, it is little wonder that moments later, you are crying out in ecstasy. Your whole body quivers with pleasure as orgasm ripples through your body, pussy trying to clamp on Terry’s intruding tongue but spasming too fiercely to hold it.", parse);
 				Text.NL();
 
-				const cum = player.OrgasmCum();
+				player.OrgasmCum();
 
 				Text.Add("When your climax washes through you, you are left weak and spent. Panting for breath, you slowly topple from your perch atop Terry onto the ground beside [himher], flopping bonelessly onto your back as you continue to gulp air.", parse);
 				Text.NL();
@@ -8419,7 +8419,7 @@ export namespace TerryScenes {
 					Text.Add("Even as you gasp, grunt and groan, Terry hungrily slaves away at your dick. Caught off-guard like this, your attempts to hold out against the feelings assaulting you are in vain. You can’t... you’re going to...", parse);
 					Text.NL();
 
-					const cum = player.OrgasmCum();
+					player.OrgasmCum();
 
 					Text.Add("Terry greedily gulps down your cum like a baby suckling on a teat. Even though this wasn’t such a powerful orgasm, you still produce enough seed to give the [foxvixen] the equivalent of a hearty meal, and only when your flow has slowed to a trickle does Terry release you.", parse);
 					Text.NL();
@@ -8714,7 +8714,7 @@ export namespace TerryScenes {
 					Text.Add("Terry works [himher]self out of your [vag] and begins furiously stroking [hisher] foxhood. Moments later, [heshe] moans as ropes of fox-seed erupts from [hisher] overworked shaft to splatter on the two of you.", parse);
 					Text.NL();
 
-					const cum = terry.OrgasmCum();
+					terry.OrgasmCum();
 
 					Text.Add("You watch as Terry groans and slumps forward, whole body going limp in the wake of [hisher] climax. ", parse);
 					if (terry.Relation() < 60) {
@@ -8747,7 +8747,7 @@ export namespace TerryScenes {
 						Text.Add("Terry suddenly pulls out and furiously strokes [himher]self, moaning as [heshe] reaches [hisher] climax, sending a few ropes of fox-seed arcing through the air to splatter on the both of you.", parse);
 						Text.NL();
 
-						const cum = terry.OrgasmCum();
+						terry.OrgasmCum();
 
 						Text.Add("Even though you left it up to [himher], you can't hold back a sigh of disappointment. You gaze at the [foxvixen] with obvious frustration, and [heshe] replies before you even have a chance to speak.", parse);
 						Text.NL();
@@ -8826,10 +8826,10 @@ export namespace TerryScenes {
 		Text.Add("The sensation is just too much for both of you, your ecstatic howls forming a lewd love-duet as you hit a mutual climax.", parse);
 		Text.NL();
 
-		let cum = terry.OrgasmCum();
+		const cum = terry.OrgasmCum();
 		TerryScenes.Impregnate(player, terry, cum, PregnancyHandler.Slot.Vag);
 
-		cum = player.OrgasmCum();
+		player.OrgasmCum();
 
 		Text.Add("Thick jets of [foxvixen]-seed pour into your defenseless cunt, swirling around your depths and mixing into a thick stew as your own feminine honey meets it from above. Trapped with nowhere to go by the seal of [hisher] knot, Terry’s cum just keeps on gushing inside of you. Your hands slap themselves over your midriff, moaning like a whore as you feel yourself swell up like a perverse balloon as [heshe] just keeps on cumming, and cumming...", parse);
 		Text.NL();
@@ -8910,7 +8910,7 @@ export namespace TerryScenes {
 		Text.Add("You can feel [himher] grinding deliberately against your most sensitive spots, substituting attentiveness for vigor. As aroused as you were to begin with, this skillful application of [hisher] dick is the last straw for you.", parse);
 		Text.NL();
 
-		let cum = player.OrgasmCum();
+		player.OrgasmCum();
 
 		Text.Add("You arch your back and cry out in pleasure, fingers clawing at the ground as your orgasm rocks your whole body. Thick femcum surges from your netherlips, a tidal wave of nectar that soaks your petals and Terry's prick with equal thoroughness, rolling over [hisher] balls and puddling on the ground beneath you.", parse);
 		Text.NL();
@@ -8927,7 +8927,7 @@ export namespace TerryScenes {
 		Text.Add("An answer swiftly comes as Terry leans back on [hisher] haunches, pawing roughly at [hisher] throbbing dick. The knot bulges, so large you can hardly believe you would have been able to fit it, and the shaft's underside distends obscenely. A bulge races up its length, like a snake eating an egg in reverse, until an enormous gout of [foxvixen]-cum comes gushing out of [hisher] flared glans!", parse);
 		Text.NL();
 
-		cum = terry.OrgasmCum();
+		terry.OrgasmCum();
 
 		if (player.Slut() < 30) {
 			Text.Add("You can't help but squeal as Terry's seed comes raining down on you, instinctively raising your arms to try and shield your face from the lewd deluge about to wash you down.", parse);
@@ -9129,7 +9129,7 @@ export namespace TerryScenes {
 		Text.Add("<i>“Well then, how’s this for some help?”</i> [HeShe] pumps [hisher] fingers in whilst simultaneously giving your [clit] a [c].", parse);
 		Text.NL();
 
-		const cum = player.OrgasmCum();
+		player.OrgasmCum();
 
 		Text.Add("Oh, that did it! You can't even try to hold back an ecstatic shriek as you cum right there on the spot. Spots dance in front of your eyes as your whole body quivers with the effort of climax, squeezing down on Terry's fingers with a death grip. Your [legs] quiver[lnotS] and twitch[lnotEs], feminine honey spurting from your folds and spraying all over Terry's chin.", parse);
 		Text.NL();
@@ -10254,7 +10254,7 @@ export namespace TerryScenes {
 				Text.Add("A thrill runs through you, and you change tack. Your mouth moves up, passionately making out with Terry’s netherlips, suckling and lapping. With your free hand, you resume playing with [hisher] clitoris, tweaking it expertly between your fingertips. Your thirst for [hisher] nectar is overwhelming, driving you to push [himher] over the edge.", parse);
 				Text.NL();
 
-				const cum = terry.OrgasmCum();
+				terry.OrgasmCum();
 
 				Text.Add("Terry’s whole body shakes and [heshe] virtually howls in ecstasy as climax washes through [himher]. A flood of feminine honey pours into your mouth and you avidly gulp it down, swallowing mouthful after mouthful as excess runs down your chin. [HisHer] spicy-sweet flavor caresses your tongue and sets your stomach afire, making you thirst for more and more.", parse);
 				Text.NL();
@@ -10430,7 +10430,7 @@ export namespace TerryScenes {
 				Text.Add("With thumb and tongue, you double-stuff Terry, working both holes in sync and with no mercy. The [foxvixen]’s cries grow louder and higher, the strain building inside of [himher] as you play [himher] like an instrument.", parse);
 				Text.NL();
 
-				const cum = terry.OrgasmCum();
+				terry.OrgasmCum();
 
 				Text.Add("Inevitably, under your careful ministrations, Terry reaches [hisher] limits. With a vulpine howl of ecstasy, [heshe] cums, and you plunge your face into [hisher] thighs to drink your fill.", parse);
 				if (terry.FirstCock()) {
@@ -10618,7 +10618,7 @@ export namespace TerryScenes {
 						Text.Add("You nibble at [hisher] clit, pump [hisher] cock, lick and suckle and stroke for all you’re worth...", parse);
 						Text.NL();
 
-						const cum = terry.OrgasmCum();
+						terry.OrgasmCum();
 
 						Text.Add("With a suddenness that shocks you, Terry arches [hisher] back and howls in ecstasy. You can feel [hisher] mighty horsemeat bulging almost double its girth as the first huge wave of cum erupts from [hisher] overstuffed balls, forcing your clasping fingers apart as it rushes out of [hisher] cumslit. Your stray hand, busily teasing the jutting flare, is too close to the liquid explosion, and you can feel thick wet warmth washing over your [skin] as it is soaked in this first eruption - the first of many, judging by the way you can feel [hisher] shaft bulging again...", parse);
 						Text.NL();
@@ -10765,7 +10765,7 @@ export namespace TerryScenes {
 						Text.Add("Terry convulses in your grip, grunting and moaning as [hisher] balls draw tight. <i>“Aaaahn!”</i> [heshe] cries out lasciviously.", parse);
 						Text.NL();
 
-						const cum = terry.OrgasmCum();
+						terry.OrgasmCum();
 
 						Text.Add("The [foxvixen]’s ecstatic howl has barely begun to resound in your ears before you move. Impatiently, you spit out [hisher] ball so you can plunge your face into [hisher] cunt, greedily guzzling the small wave of female nectar that pours down your gullet. Still held tight in your hand, Terry’s cock spits seed onto the uncaring ground below, a small puddle forming lonely and ignored under [hisher] belly. You don’t allow a single drop of [hisher] precious pussy-juice to escape your lips, greedily swallowing all of it down your throat.", parse);
 						Text.NL();
@@ -11005,7 +11005,7 @@ export namespace TerryScenes {
 				Text.Add("<i>“Ack! I can- cumming!”</i> [heshe] exclaims as [hisher] cock throbs one last time and tenses in preparation for the first blow.", parse);
 				Text.NL();
 
-				const cum = terry.OrgasmCum();
+				terry.OrgasmCum();
 
 				Text.Add("Almost like a teaser as to what’s to come, a thick gobbet of cum spatters across your tongue, making your senses reel with its rich, salty taste. Avidly, you suck all the harder, determined to feed to your heart’s content as Terry cries out and erupts inside of your mouth.", parse);
 				Text.NL();
@@ -11318,7 +11318,7 @@ export namespace TerryScenes {
 				}
 				Text.NL();
 
-				const cum = terry.OrgasmCum();
+				terry.OrgasmCum();
 
 				Text.Add("The torrential flood of white, hot, creamy fox-cum that follows fills your jaws in no time. Terry is absolutely delirious with pleasure, unable to do anything but thrust [himher]self as deep into your maw as [heshe] can.", parse);
 				Text.NL();
@@ -11667,7 +11667,7 @@ export namespace TerryScenes {
 				Text.Add("Opening your mouth as wide as you can and pulling backwards, you manage to wriggle free. Terry’s shaft throbs in your vision, deep red in its engorgement. You grasp it just below the knot with your free [hand], holding it steady as you open your mouth and extend your tongue beneath it.", parse);
 				Text.NL();
 
-				const cum = terry.OrgasmCum();
+				terry.OrgasmCum();
 
 				Text.Add("With your fingers, you thrust firmly into the mewling vulpine’s ass, ruthlessly stroking [hisher] prostate until, with a howl, [heshe] cums. [HisHer] glans distends before spurting forth a long, thick rope of seed that splatters onto your tongue and rolls down your throat. You gulp it down eagerly and keep milking [himher], coaxing another rope, and another.", parse);
 				Text.NL();
@@ -12316,7 +12316,7 @@ export namespace TerryScenes {
 		Text.Add("Then [heshe] should just let it all out...", parse);
 		Text.NL();
 
-		const cum = terry.OrgasmCum();
+		terry.OrgasmCum();
 
 		Text.Add("The [foxvixen] arches [hisher] back and does [hisher] best to howl as climax wracks [hisher] body. Hand clenched just above [hisher] turgid knot, you can feel [hisher] shaft distend as the first torrent of seed wells up from [hisher] groaning nuts.", parse);
 		Text.NL();
@@ -12596,7 +12596,7 @@ export namespace TerryScenes {
 		Text.Add("You give Terry no quarter, massaging [hisher] prostate throughout [hisher] orgasm, pulling [himher] close in an attempt to encompass [himher] as the [foxvixen] shivers with the effort of pushing [hisher] cum out into the air.", parse);
 		Text.NL();
 
-		const cum = terry.OrgasmCum();
+		terry.OrgasmCum();
 
 		Text.Add("Your pet [foxvixen] isn’t terribly productive, so you’re not surprised when the flow of [hisher] seed tapers after only a few shots. You give [hisher] prostate one more push to draw the last stubborn rope from [himher] and then pull your fingers out.", parse);
 		Text.NL();
@@ -12956,7 +12956,7 @@ export namespace TerryScenes {
 		Text.Add("<i>“[playername]! I think I’m about to- Ah!”</i>", parse);
 		Text.NL();
 
-		const cum = terry.OrgasmCum();
+		terry.OrgasmCum();
 
 		Text.Add("You can feel the [foxvixen]’s spine flexing as [heshe] arches [hisher] back, head turned skyward as if baying at some unseen moon. Thick femcum sprays from [hisher] pussy, squirting between its quenched lips and smearing over your dangling fingers.", parse);
 		Text.NL();

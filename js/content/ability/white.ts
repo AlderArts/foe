@@ -185,7 +185,7 @@ tirade.castTree.push(AbilityNode.Template.Magical({
 	damageFunc: AbilityNode.DamageFunc.Magical,
 	damageType: {mVoid: 1},
 	damagePool: [AbilityNode.DamagePool.Magical],
-	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
+	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, _target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster);
 		Text.Add("[Name] start[notS] rambling about petty things", parse);
 	}],
@@ -235,7 +235,7 @@ sermon.castTree.push(AbilityNode.Template.Magical({
 	damageFunc: AbilityNode.DamageFunc.Magical,
 	damageType: {mVoid: 1},
 	damagePool: [AbilityNode.DamagePool.Magical],
-	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
+	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, _target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster);
 		Text.Add("[Name] start[notS] proselytizing to the enemy party. Somehow, [heshe] manage[notS] to sound extremely condescending and immensly boring at the same time!", parse);
 		Text.NL();

@@ -104,12 +104,6 @@ export class Scorpion extends Entity {
 		// Pick a random target
 		const t = this.GetSingleTarget(encounter, activeChar);
 
-		const parseVars = {
-			name   : this.name,
-			hisher : this.hisher(),
-			tName  : t.name,
-		};
-
 		const choice = Math.random();
 		if (choice < 0.4) {
 			Abilities.Attack.Use(encounter, this, t);

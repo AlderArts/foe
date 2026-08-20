@@ -104,7 +104,7 @@ const EntityMenu = {
 			Text.Add("<br>");
 		}
 		Text.Add("Known abilities:<br>", undefined, "bold");
-		_.forIn(this.abilities, (abSet, key) => {
+		_.forIn(this.abilities, (abSet, _key) => {
 			for (const ability of abSet.AbilitySet) {
 				Text.Add("[ability] ([cost]): [desc]<br>",
 					{ability: ability.name, cost: ability.CostStr(), desc: ability.Short()});
@@ -363,7 +363,7 @@ const EntityMenu = {
 
 		const options: IChoice[] = [];
 
-		_.forIn (this.jobs, (jd, key) => {
+		_.forIn (this.jobs, (jd, _key) => {
 			if (!jd.job.Unlocked(this)) { return; }
 
 			parse.job = jd.job.Short(this);

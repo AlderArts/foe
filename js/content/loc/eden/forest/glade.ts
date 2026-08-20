@@ -54,7 +54,7 @@ export class DryadGlade {
 		});
 	}
 
-	public Update(step: ITime) {
+	public Update(_step: ITime) {
 
 	}
 

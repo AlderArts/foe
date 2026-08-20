@@ -89,7 +89,7 @@ export class Player extends Entity {
 		}
 	}
 
-	public ItemUsable(item: Item) {
+	public ItemUsable(_item: Item) {
 		return true;
 	}
 

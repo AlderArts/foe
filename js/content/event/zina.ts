@@ -9,7 +9,6 @@ import { Race } from "../../engine/entity/body/race";
 import { Entity } from "../../engine/entity/entity";
 import { IStorage } from "../../engine/entity/istorage";
 import { TF } from "../../engine/entity/tf";
-import { GAME } from "../../engine/GAME";
 import { ILocation } from "../../engine/navigation/location";
 
 export class Zina extends Entity {
@@ -92,8 +91,8 @@ export class Zina extends Entity {
 	}
 
 	// Schedule
-	public IsAtLocation(location?: ILocation) {
-		location = location || GAME().party.location;
+	public IsAtLocation(_location?: ILocation) {
+		//location = location || GAME().party.location;
 		return true;
 	}
 }

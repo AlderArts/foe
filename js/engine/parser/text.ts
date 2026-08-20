@@ -170,11 +170,11 @@ export namespace Text {
 		buffer += "<br/><br/>";
 	}
 
-	export function Flush(textCssClasses?: string, toolbarCssClasses?: string) {
+	export function Flush(textCssClasses?: string, _toolbarCssClasses?: string) {
 		// let textbox = document.getElementById("mainTextArea");
 		const textBox = $("#mainTextArea");
 		const textClasses = (textCssClasses) ? textCssClasses : "";
-		const toolbarClasses = (toolbarCssClasses) ? toolbarCssClasses : "";
+		// const toolbarClasses = (toolbarCssClasses) ? toolbarCssClasses : "";
 		// textbox.innerHTML += "<div class=\""+toolbarClasses+"\">"+Text.toolbar+"</div>";
 		if (toolbars) {
 			textBox.append(toolbars);
@@ -357,7 +357,7 @@ export namespace Text {
 		if (type.toLowerCase() === "button") {
 			const btnName = inputOptions.nameStr;
 			const onclick = inputOptions.func;
-			const clickParam = inputOptions.param;
+			//const clickParam = inputOptions.param;
 			input = $("<input />", {
 				type  : "button",
 				class : "tbarInput " + classesStr,

@@ -190,7 +190,7 @@ export namespace AbilityNode {
 			*/
 			return _.bind(RunAddSpellstack, node);
 		}
-		function RunAddSpellstack(ability: Ability, encounter: Encounter, caster: Entity, target: Entity, result: any) {
+		function RunAddSpellstack(ability: Ability, encounter: Encounter, caster: Entity, target: Entity, _result: any) {
 			const that: IAbilityNode = this;
 
 			const value = _.isFunction(that.value) ? that.value() : that.value;
@@ -293,7 +293,7 @@ export namespace AbilityNode {
 	}
 
 	export namespace ToHit {
-		export function StrikeThrough(caster: Entity, target: Entity) {
+		export function StrikeThrough(_caster: Entity, _target: Entity) {
 			return true;
 		}
 		export function Regular(caster: Entity, target: Entity) {
@@ -307,13 +307,13 @@ export namespace AbilityNode {
 	}
 
 	export namespace HitFunc {
-		export function Physical(caster: Entity, target: Entity) {
+		export function Physical(caster: Entity, _target: Entity) {
 			return caster.PHit();
 		}
-		export function Magical(caster: Entity, target: Entity) {
+		export function Magical(caster: Entity, _target: Entity) {
 			return caster.MHit();
 		}
-		export function Lust(caster: Entity, target: Entity) {
+		export function Lust(caster: Entity, _target: Entity) {
 			return caster.LHit();
 		}
 	}
@@ -363,13 +363,13 @@ export namespace AbilityNode {
 	}
 
 	export namespace AtkFunc {
-		export function Physical(caster: Entity, target: Entity) {
+		export function Physical(caster: Entity, _target: Entity) {
 			return caster.PAttack();
 		}
-		export function Magical(caster: Entity, target: Entity) {
+		export function Magical(caster: Entity, _target: Entity) {
 			return caster.MAttack();
 		}
-		export function Lust(caster: Entity, target: Entity) {
+		export function Lust(caster: Entity, _target: Entity) {
 			return caster.LAttack();
 		}
 	}

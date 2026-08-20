@@ -6,7 +6,6 @@ import { Input } from "../../gui/input";
 import { Rand } from "../../utility";
 import { GAME, SetCavalcade } from "../GAME";
 import { GameState, SetGameState } from "../gamestate";
-import { IChoice } from "../navigation/link";
 import { Party } from "../navigation/party";
 import { IParse, Text } from "../parser/text";
 import { CardItem, CardItems, CardSuit } from "./cards";
@@ -324,7 +323,7 @@ export class Cavalcade {
 		Gui.ClearButtons();
 
 		// [Sure][Nah]
-		const options: IChoice[] = [];
+		//const options: IChoice[] = [];
 
 		switch (that.round) {
 		case 0:

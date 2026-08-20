@@ -11,9 +11,11 @@ import { LeiFlags } from "./lei-flags";
 export namespace LeiSexScenes {
 
 	export function Prompt(options: IChoice[]) {
+		/*
 		const parse: IParse = {
 
 		};
+		*/
 
 		if (LeiSexScenes.PettingUnlocked()) {
 			options.push({ nameStr : "Petting",

@@ -244,7 +244,7 @@ tViolate.castTree.push(AbilityNode.Template.Physical({
 
 		Text.Add("[tName] take[tnotS] " + Text.Damage(dmg) + " damage!", parse);
 
-		const cum = target.OrgasmCum();
+		target.OrgasmCum();
 
 		Text.NL();
 	}],
@@ -266,7 +266,7 @@ golLustyPheromones.castTree.push(AbilityNode.Template.Lust({
 		Text.Add("[tName] hold[tnotS] [thisher] breath to avoid as much of it as possible. Frowning, the Gol releases her netherlips.", parse);
 		Text.NL();
 	}],
-	onDamage: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity, dmg: number) => {
+	onDamage: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity, _dmg: number) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[tName] blush[tnotEs] as [thisher] head swims with thoughts of naked trysts under the stars, overwhelmed by the Gol’s pheromones.", parse);
 		Text.NL();
@@ -316,13 +316,13 @@ golPollen.targetMode = TargetMode.Enemies;
 golPollen.castTree.push(AbilityNode.Template.Physical({
 	hitMod: 0.8,
 	toDamage: undefined,
-	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
+	onCast: [(_ability: Ability, _encounter: Encounter, _caster: Entity, _target: Entity) => {
 		const parse: IParse = {};
 		Text.Add("Sighing, the Gol runs her hands through her shimmering black hair in frustration. After her fingers' first pass, she repeats the action, then does it again. And again. Soon, the air around her seems slightly foggy, and your nose itches. A sneeze wracks your body as she continues the motion, filling the air with... something. You can't say what, but it's making you sneeze, and causing your nose to get itchy and irritable. The insectile beauty seems taller and more imposing after each involuntary spasm of your body. Her breasts appear larger, her pussy more inviting, and her face more charmingly human. For a monster, she wouldn't be a bad one to settle down with.", parse);
 		Text.NL();
 	}],
 	onMiss: [Defaults.Physical._onMiss],
-	onHit: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity, dmg: number) => {
+	onHit: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity, _dmg: number) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
 		target.AddLustFraction(0.2);
 
@@ -406,7 +406,7 @@ corishevWideStrike.targetMode = TargetMode.Enemies;
 corishevWideStrike.castTree.push(AbilityNode.Template.Physical({
 	atkMod: 1.2,
 	damageType: {pPierce: 1, lust: 0.2},
-	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
+	onCast: [(_ability: Ability, _encounter: Encounter, _caster: Entity, _target: Entity) => {
 		const parse: IParse = {};
 		Text.Add("The crazed lieutenant swings his whip in an arc, hoping to catch the both of you with a single strike.", parse);
 		Text.NL();

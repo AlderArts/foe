@@ -108,12 +108,6 @@ export class Lagomorph extends Entity {
 		// Pick a random target
 		const t = this.GetSingleTarget(encounter, activeChar);
 
-		const parseVars = {
-			name   : this.name,
-			hisher : this.hisher(),
-			tName  : t.name,
-		};
-
 		const choice = Math.random();
 		if (choice < 0.6) {
 			Abilities.Attack.Use(encounter, this, t);
@@ -236,12 +230,6 @@ export class LagomorphBrute extends Lagomorph {
 		// Pick a random target
 		const t = this.GetSingleTarget(encounter, activeChar);
 
-		const parseVars = {
-			name   : this.name,
-			hisher : this.hisher(),
-			tName  : t.name,
-		};
-
 		const choice = Math.random();
 		if (choice < 0.4) {
 			Abilities.Attack.Use(encounter, this, t);
@@ -296,12 +284,6 @@ export class LagomorphWizard extends Lagomorph {
 	public Act(encounter: ICombatEncounter, activeChar: ICombatOrder) {
 		// Pick a random target
 		const t = this.GetSingleTarget(encounter, activeChar);
-
-		const parseVars = {
-			name   : this.name,
-			hisher : this.hisher(),
-			tName  : t.name,
-		};
 
 		const choice = Math.random();
 		if (choice < 0.1) {

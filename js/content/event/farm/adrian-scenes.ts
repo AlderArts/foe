@@ -1433,7 +1433,7 @@ export namespace AdrianScenes {
         const player: Player = GAME().player;
         const pc = player.Parser;
         const adrian: Adrian = GAME().adrian;
-        const { Dom, Sub, Shy } = _AdrianState();
+        const { Dom, Sub } = _AdrianState();
         _sexed = true;
 
         Text.NL();

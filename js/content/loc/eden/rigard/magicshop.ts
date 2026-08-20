@@ -39,7 +39,7 @@ export namespace MagicShopScenes {
 	}
 
 	export function CreateShop() {
-		const buySuccessFunc = (item: Item, cost: number, num: number) => {
+		const buySuccessFunc = (_item: Item, _cost: number, _num: number) => {
 			const parse: IParse = {};
 
 			Text.Clear();
@@ -51,7 +51,7 @@ export namespace MagicShopScenes {
 
 			Text.NL();
 		};
-		const buyFailFunc = (item: Item, cost: number, bought: boolean) => {
+		const buyFailFunc = (_item: Item, _cost: number, bought: boolean) => {
 			const parse: IParse = {};
 
 			Text.Clear();
@@ -116,7 +116,7 @@ export namespace MagicShopScenes {
 
 				Text.NL();
 			},
-			sellSuccessFunc(item: Item, cost: number, num: number) {
+			sellSuccessFunc(_item: Item, _cost: number, _num: number) {
 				const player: Player = GAME().player;
 				const parse: IParse = {
 					hisher : player.mfFem("his", "her"),
@@ -135,7 +135,7 @@ export namespace MagicShopScenes {
 
 				Text.NL();
 			},
-			sellFailFunc(item: Item, cost: number, sold: boolean) {
+			sellFailFunc(_item: Item, _cost: number, sold: boolean) {
 				const player: Player = GAME().player;
 				const parse: IParse = {
 					hisher : player.mfFem("his", "her"),

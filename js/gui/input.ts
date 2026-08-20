@@ -92,7 +92,7 @@ export class Input {
 	}
 
 	public static InitMenuButtons() {
-		const offset = {x: 15, y: 620};
+		//const offset = {x: 15, y: 620};
 
 		// TOP, Data menu
 		const button = new Button(Gui, {x : 10, y : 10, w : 155, h : 35}, "DATA", undefined, true, Images.imgButtonEnabled, Images.imgButtonDisabled);
@@ -154,7 +154,7 @@ export class Input {
 	}
 
 	// Catches key releases
-	public static Keyup(event: any) {
+	public static Keyup(_event: any) {
 		/* TODO Not really used atm
 		switch(event.keyCode) {
 			case Keys.KEY_A: Input.keyinput[LEFT_ARROW]  = false; break;

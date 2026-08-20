@@ -638,7 +638,7 @@ export class Gui {
 		}
 	}
 
-	public static SetButtonsFromList(list: IChoice[], backEnabled?: boolean, backFunc: CallableFunction = Gui.PrintDefaultOptions, state?: GameState, backState?: GameState) {
+	public static SetButtonsFromList(list: IChoice[], backEnabled?: boolean, backFunc: CallableFunction = Gui.PrintDefaultOptions, state?: GameState, _backState?: GameState) {
 		Gui.ClearButtons();
 		let currentPage = 0;
 
@@ -829,7 +829,7 @@ export class Gui {
 		clock.minuteNum = minute;
 	}
 
-	public static SetGameState(state: GameState) {
+	public static SetGameState(_state: GameState) {
 		switch (gameState) { // TODO?
 			case GameState.Game:
 				for (const button of Input.menuButtons) {

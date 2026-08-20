@@ -92,7 +92,7 @@ export class Roa extends Entity {
 	}
 
 	// Schedule //TODO
-	public IsAtLocation(location?: ILocation) {
+	public IsAtLocation(_location?: ILocation) {
 		return true;
 	}
 

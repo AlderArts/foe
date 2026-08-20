@@ -295,7 +295,7 @@ export namespace CassidySexScenes {
 		}
 		Text.Add(".", parse);
 
-		const cum = player.OrgasmCum();
+		player.OrgasmCum();
 
 		Text.NL();
 		Text.Add("With a final groan and shudder, you’re unable to keep yourself upright anymore and collapse readily onto your own mess of love-juices, a soft squelch rising from the bed as the aftershocks die out and leave you wriggling and gasping for breath.", parse);
@@ -355,7 +355,7 @@ export namespace CassidySexScenes {
 		Text.Add("Faster and faster she goes, and you can feel the pricking of Cassidy’s claws starting to sink ever so slightly into your flesh as she ramps up in ferocity, threatening to tear apart your tender insides with the brutal fucking she’s giving you. Despite her lack of bulk, all the energy she usually expends in hammering metal has been redirected into hammering your ass instead; reduced to a helpless, whimpering mass, you’re pretty much putty in Cass’ hands.", parse);
 		Text.NL();
 
-		const cum = player.OrgasmCum();
+		player.OrgasmCum();
 
 		Text.Add("At last, you can’t take any more. Even if you had the strength to hold back your climax, you don’t think you would have wanted to, and it wells up in you like a dam about to burst. Somehow sensing this, Cassidy tightens her hold on you and rams as much of her tail into you as far as it’ll go - that’s far more than enough to send you over the edge, and you yowl with what little breath’s still in your body as love-juices gush out of you like an open faucet.", parse);
 		if (player.FirstCock()) {
@@ -879,7 +879,7 @@ export namespace CassidySexScenes {
 		Text.Add("and let things cool off a bit. Cass tries to say something, but is pretty much too breathless at the moment to do so and eventually just gives up. Moments tick by, and at last you’ve softened enough to extract yourself from her without <i>too</i> much trouble, which you do.", parse);
 		Text.NL();
 
-		const cum = player.OrgasmCum();
+		player.OrgasmCum();
 
 		Text.Add("<i>“Right,”</i> Cass groans, flopping onto her belly. <i>“Thanks, champ.”</i>", parse);
 		Text.NL();
@@ -1268,7 +1268,7 @@ export namespace CassidySparSexScenes {
 				}
 				Text.NL();
 
-				const cum = player.OrgasmCum();
+				player.OrgasmCum();
 
 				Text.Add("Having her burning insides filled with warm, gooey cream is just too much for poor Cass. Unable to keep up the strength required to continue tailfucking herself, the salamander’s cum-slick tail falls out of her cunt as she makes desperate little noises in the back of her throat, fighting not to scream out loud as the shock of orgasm ravages her body. Glob upon glob of spunk sinks deep into her, backing up and oozing out from about your shaft - both your minds are pretty much black with pleasure, the two of you reduced to rutting animals from the burning heat of your copulation.", parse);
 				Text.NL();
@@ -1327,7 +1327,7 @@ export namespace CassidySparSexScenes {
 					Text.Add("That’s right, no need to bottle it up. Just let it out… let it all out - and that includes her girl-cum, too, blasting out from around the girth stuck in her pussy and dripping onto the grass. Both her inner walls and sphincter clamp down hard on your cocks, which in turn sets you off. You howl as you pump away with wanton abandon - no matter how much seed you might actually have, it still <i>feels</i> like a whole ton thanks to how tight she is and how your sperm is actually spurting out from around your shafts, mixing in with the nectar from her honeypot as the two of you ride out the aftermath of your heated, explosive lovemaking.", parse);
 					Text.NL();
 
-					const cum = player.OrgasmCum();
+					player.OrgasmCum();
 
 					Text.Add("<i>“Shit,”</i> Cass moans weakly. <i>“Hope the neighbors don’t complain tomorrow, heh, but damn, it was worth it.”</i>", parse);
 					Text.NL();
@@ -1358,7 +1358,7 @@ export namespace CassidySparSexScenes {
 		parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 		parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
 
-		const fem = cassidy.Feminized();
+		//const fem = cassidy.Feminized();
 
 		Text.Clear();
 		Text.Add("<i>“Heh,”</i> Cassidy says, dropping to her knees on the soft grass and resting her head against your hips. A noise not too unlike a low, gentle hiss sounds in the back of her throat as she rubs a cheek against you. <i>“Guessed you’d ask for that sooner or later.”</i>", parse);
@@ -1436,7 +1436,7 @@ export namespace CassidySparSexScenes {
 		parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 		parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
 
-		const fem = cassidy.Feminized();
+		//const fem = cassidy.Feminized();
 
 		Text.Clear();
 		Text.Add("Placing a hand on Cassidy’s shoulder, you apply gentle pressure downwards. The salamander quickly realizes what you want of her, and gets down on her knees. ", parse);

@@ -443,7 +443,7 @@ export namespace AscheTasksScenes {
 
 				ZebraShamanScenes.Impregnate(player, zebra);
 
-				const cum = player.OrgasmCum();
+				player.OrgasmCum();
 
 				Text.Add("Hell, you don’t even remember if you came yourself. What you <i>do</i> remember, though, is all of them pulling out of and away from you, finally having had some relief for their… ah, aches and pains. You’re dropped in the most ignoble fashion in the puddle of cum you helped with creating, trickles of the sticky fluid running from your mouth and cunt.", parse);
 				Text.NL();
@@ -526,7 +526,7 @@ export namespace AscheTasksScenes {
 			const party: Party = GAME().party;
 			const asche: Asche = GAME().asche;
 
-			const enc = this;
+			//const enc = this;
 			SetGameState(GameState.Event, Gui);
 
 			const parse: IParse = {

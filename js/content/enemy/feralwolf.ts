@@ -93,12 +93,6 @@ export class FeralWolf extends Entity {
 		// Pick a random target
 		const t = this.GetSingleTarget(encounter, activeChar);
 
-		const parseVars = {
-			hisher : this.hisher(),
-			name   : this.name,
-			tName  : t.name,
-		};
-
 		const choice = Math.random();
 		if (choice < 0.5) {
 			Abilities.Attack.Use(encounter, this, t);

@@ -395,7 +395,7 @@ export class Ability {
 		return onCooldown;
 	}
 
-	public enabledTargetCondition(encounter: ICombatEncounter, caster: Entity, target: Entity) {
+	public enabledTargetCondition(_encounter: ICombatEncounter, _caster: Entity, _target: Entity) {
 		return true;
 	}
 

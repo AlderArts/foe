@@ -120,12 +120,6 @@ export class Mothgirl extends Entity {
 		// Pick a random target
 		const t = this.GetSingleTarget(encounter, activeChar);
 
-		const parseVars = {
-			name   : this.name,
-			hisher : this.hisher(),
-			tName  : t.name,
-		};
-
 		const choice = Math.random();
 		if (choice < 0.5) {
 			Abilities.Attack.Use(encounter, this, t);
@@ -360,7 +354,7 @@ export namespace MothgirlScenes {
 		Encounter.prototype.onVictory.call(enc);
 	}
 
-	export function WinTitfuck(enc: MothgirlEncounter) {
+	export function WinTitfuck(_enc: MothgirlEncounter) {
 		const player: Player = GAME().player;
 		const p1cock = player.BiggestCock();
 		const hugecock = p1cock.Len() > 20;
@@ -406,7 +400,7 @@ export namespace MothgirlScenes {
 		Text.Add("The desperate, greedy look she gives you over her bouncing breasts is the last straw. You grit your teeth, trying not to cry out as you feel your [cock] swelling with seed, surging toward the slutty bug. She gives a little scream of surprise as the first hot, salty load shoots her straight in the face, splattering over her writhing tongue and agape lips. She coughs and tries to turn aside, but her tongue is trapped between her tits, pinning her face in the perfect angle for a full-bore facial. You slap her boobs together as hard as you can as you give your final, climactic thrusts through the crack of her cleavage, chest heaving with exertion and ecstasy as you glaze the moth-girl's face and melons with cum.", parse);
 		Text.NL();
 
-		const cum = player.OrgasmCum();
+		player.OrgasmCum();
 
 		Text.Add("<i>“Oh, Goddess,”</i> the moth-girl breathes as your last hot, sticky squirt of semen plasters on her chin.", parse);
 		Text.NL();
@@ -500,7 +494,7 @@ export namespace MothgirlScenes {
 		Text.Add(". She clenches down hard around you, enough to push you over the edge[c].", parse);
 		Text.NL();
 
-		const cum = player.OrgasmCum();
+		player.OrgasmCum();
 
 		if (strapon) {
 			Text.Add("You grit your teeth and continue thrusting as you bring yourself to orgasm at the moth's expense, hammering your strapon deep into her one last time.", parse);
@@ -569,7 +563,7 @@ export namespace MothgirlScenes {
 		Text.Add("Her tongue slips back from one set of lips and down to the other, making you squirm with a shuddering delight as the shaft of her tongue slithers past your spread pussylips and into the deep channel of your sex. You bite your lip and hold on for the ride, bucking your hips back as her tongue worms in like a thick, wet tentacle, ceaselessly rubbing and caressing your most sensitive spots. Unconsciously, you feel your hands slipping back down to the moth's ample bust, cupping the full swells of her breasts and giving them a playful squeeze. Her back arches as your twist her teats, squeezing and kneading them until a bright red flush spreads through her body, her chest heaving as pleasure takes hold of her. You're not far behind her, hips bucking back against her tongue as you use it like a thick, writhing cock to get yourself off on - liberally drenching the moth's face and chest with your flowing juices as you do so.", parse);
 		Text.NL();
 
-		const cum = player.OrgasmCum();
+		player.OrgasmCum();
 
 		Text.Add("<i>“Ooooohhhhhhh,”</i> the moth-girl coos, squirming in your relentless grasp, crying out as you molest her expansive bust. As her pleasure mounts, it's as if she loses control of her tongue; the muscle goes wild inside you, thrashing about like a fire hose, fucking its way so deep inside you can feel its tip kissing the entrance of your womb. You throw your head back, thrusting your hips down hard in return and letting your body take control, mind fading in response to the pleasure of your lovemaking. The moth joins you in orgasm - or rather, boobgasm - screaming around her extended tongue as she cums, tongue ramming so far into your [cunt] that you could swear you can feel your stomach bulging in its wake.", parse);
 		Text.NL();
@@ -661,7 +655,7 @@ export namespace MothgirlScenes {
 			Text.Add("You keep doing what you're doing, suckling[and] fingering[c] harder and faster until the moth throws her head back with an orgiastic scream of pleasure that echoes out around you. She roars in feminine ecstasy as fem-cum gushes out around you, smearing your crotch with her juices as she cums and cums, her orgasm lasting for what seems like a blissful eternity.", parse);
 			if (player.FirstCock()) {
 				Text.Add(" Her cunt spasms and squeezes so wonderfully tight around your [cock] as she orgasms, drawing you so close to the edge you can hardly think, save to grab the moth's hips and slam her down on your dick, cramming every last inch into her. She gives another shriek of pleasure, not skipping a beat as she moves her hips to bring you over too. Your fingers dig into her skin, holding the moth-slut tight as you join her in climax, blowing your load deep inside her.", parse);
-				const cum = player.OrgasmCum();
+				player.OrgasmCum();
 			} else {
 				player.AddLustFraction(0.2);
 			}
@@ -697,7 +691,7 @@ export namespace MothgirlScenes {
 			Text.Add("With a cry of pleasure, you find yourself cumming. Your [cock] throbs between the moth's tits, making her gasp and giggle as you squirt your load out between her huge mounds. The moth grins up at you and keeps pumping, rocking her shoulders back and forth to roll your cock between her breasts until you've blown the last of your wad, completely slathering the gorge of her breasts with your seed.", parse);
 			Text.NL();
 
-			let cum = player.OrgasmCum();
+			player.OrgasmCum();
 
 			Text.Add("<i>“I just knew you were a boobs [guygirl],”</i> the thief teases, drawing her tongue off from around your shaft - and very deliberately back through the valley of her cleavage, letting it get smeared with your cum before she swallows it up, making a delightfully lewd moan as she gets a taste of you. She shifts back up to her knees, wiping her lips with the back of her hand and looking more than satisfied with her work.", parse);
 			Text.NL();
@@ -740,7 +734,7 @@ export namespace MothgirlScenes {
 			Text.Add("The moth gives a little gasp as the first shot of seed spills into her but keeps on moving. The second spurt of cum you send splattering across the writhing walls of her pussy sends her over the edge too, breaking the kiss as she throws her head back with an exultant cry. You pull her down on your [cock], ramming yourself in [c], shooting the rest of your load deep into her. She's more than happy to take it if the way she moans and gasps is any indication!", parse);
 			Text.NL();
 
-			cum = player.OrgasmCum();
+			player.OrgasmCum();
 
 			Text.Add("You collapse against the tree trunk, chest heaving with exertion as the moth slumps forward, head resting against your [breasts]. Her wings flitter weakly behind her, arms wrapping around your neck to hold you tight. Pinned underneath a heap of warm, fuzzy moth-girl, you don't have many options but to lock your arms around her waist and return the favor, closing your eyes in momentary contentment.", parse);
 			Text.NL();

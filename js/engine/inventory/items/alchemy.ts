@@ -519,7 +519,7 @@ virilium.PushEffect((target: Entity) => {
 	}
 	// TODO: parse
 	if ((target.HasBalls() || target.FirstCock()) && Math.random() < 0.2) {
-		const res = target.Balls().fertility.IncreaseStat(.7, .1, true);
+		/*const res =*/ target.Balls().fertility.IncreaseStat(.7, .1, true);
 	}
 	Text.Flush();
 });
@@ -646,7 +646,7 @@ estros.PushEffect((target: Entity) => {
 		notS: target.plural() ? "" : "s",
 	};
 	if (target.HasBalls() && Math.random() < 0.6) {
-		const res = target.Balls().size.DecreaseStat(1, 1);
+		/*const res =*/ target.Balls().size.DecreaseStat(1, 1);
 		if (target.Balls().size.Get() <= 1) {
 			target.Balls().count.base = 0;
 			Text.Add("[Poss] balls shrivel and disappear completely!", parse);
@@ -1098,7 +1098,7 @@ gestariumPlus.PushEffect((target: Entity) => {
 		notS: target.plural() ? "" : "s",
 	};
 	if (target.HasBalls() && Math.random() < 0.6) {
-		const res = target.Balls().size.DecreaseStat(1, 1);
+		/*const res =*/ target.Balls().size.DecreaseStat(1, 1);
 		if (target.Balls().size.Get() <= 1) {
 			target.Balls().count.base = 0;
 			Text.Add("[Poss] balls shrivel and disappear completely!", parse);

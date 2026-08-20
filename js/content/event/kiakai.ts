@@ -135,7 +135,7 @@ export class Kiakai extends Entity {
 		return this.FirstVag() && false;
 	}
 
-	public ItemUsable(item: Item) {
+	public ItemUsable(_item: Item) {
 		return true;
 	}
 
@@ -154,7 +154,7 @@ export class Kiakai extends Entity {
 	}
 
 	// Schedule
-	public IsAtLocation(location?: ILocation) {
+	public IsAtLocation(_location?: ILocation) {
 		return true;
 	}
 

@@ -1763,7 +1763,7 @@ export namespace GwendyScenes {
             }
             Text.NL();
 
-            const cum = player.OrgasmCum();
+            player.OrgasmCum();
             player.AddSexExp(1);
             gwendy.AddSexExp(1);
 
@@ -1875,7 +1875,7 @@ export namespace GwendyScenes {
             }
             Text.NL();
 
-            const cum = player.OrgasmCum();
+            player.OrgasmCum();
             player.AddSexExp(1);
             gwendy.AddSexExp(2);
 
@@ -2110,7 +2110,7 @@ export namespace GwendyScenes {
             Text.Add("You feel an immense sense of relief as you ejaculate, enjoying the slick feel of Gwendy's mouth filling up with your spunk. It doesn't last long, however, as she begins to suck and drain all of your cargo without missing a beat. Once she finishes drinking your spooge, you withdraw, feeling worn but refreshed all the same.", parse);
             Text.NL();
 
-            const cum = player.OrgasmCum();
+            player.OrgasmCum();
 
             if (hangout) {
                 Text.Add("She looks satisfied, indulging in your seed dripping down her throat. With a stray finger, she wipes whatever excess leakage there is, licking it up seductively. When she finishes, she leans in to kiss you, sharing a small bit of your fluids.", parse);
@@ -2142,7 +2142,7 @@ export namespace GwendyScenes {
                 Text.NL();
             }
 
-            const cum = player.OrgasmCum();
+            player.OrgasmCum();
 
             if (hangout) {
                 Text.Add("Pulling her face from your cleft, she looks up appreciatively. It seems like she's enjoyed herself more than you had imagined.", parse);
@@ -2246,8 +2246,8 @@ export namespace GwendyScenes {
             Text.NL();
             Text.Add("Letting loose a torrent of cum, you feel your seed gush out, flooding her tunnel while you cry out in pleasure. Your lover isn’t far behind, her legs trapping you in place as her cunt constricts around your [cock], wringing you dry.", parse);
 
-            const cum = player.OrgasmCum();
-            const gcum = gwendy.OrgasmCum();
+            player.OrgasmCum();
+            gwendy.OrgasmCum();
 
             if (gwendy.EPlus()) {
                 Text.Add(" Even as Gwendy’s [gvag] squeeze you, her [gCockDesc] erupt[gnotS] in a large geyser, thick globs of white seed sprouting aimlessly from the tip of the flared cock before gravity kicks in, coating the two of you in a fresh coat of horse-spunk.", parse);
@@ -2298,8 +2298,8 @@ export namespace GwendyScenes {
             player.AddSexExp(3);
             gwendy.AddSexExp(3);
 
-            const cum = player.OrgasmCum();
-            const gcum = gwendy.OrgasmCum();
+            player.OrgasmCum();
+            gwendy.OrgasmCum();
 
             Text.Add("The two of you lie together for a long time after your climax, basking in the afterglow and trying to catch your breaths. ", parse);
             if (hangout) {
@@ -2494,7 +2494,7 @@ export namespace GwendyScenes {
             Text.Out(`All too soon, the familiar surge of orgasm flows through you. You welcome it, readying yourself to cream her and mark her as yours. As a final churn goes through you${player.HasBalls() ? `r ${pc.balls}` : ``}, you let loose your cargo into her. Gwendy cries out in shock as her bowels are stuffed with spooge, pumped ceaselessly from your quivering shaft. You stay in her for a while, just enjoying the sensation of her, plugged and full of your seed. When you finally pull out, cum bubbles and drips from her rosy pucker as it struggles to retain its shape prior to your domination.`);
             Text.NL();
 
-            const cum = player.OrgasmCum();
+            player.OrgasmCum();
 
             if (hangout) {
                 Text.Out(`Satisfied with your romp, you rise and gear up. Behind you, Gwendy gets up, shivering slightly as she carefully balances on the edge of the bed. You ask her if she’ll be fine, but she dismisses your concerns.
@@ -3170,7 +3170,7 @@ export namespace GwendyScenes {
         Text.Out(`After a while, her stream of teasing taunts becomes more and more strained, until she drops it entirely, leaving only her labored breaths to accompany the lewd sounds of your licking. Gwendy grows more and more enthusiastic as she nears her climax, roughly bucking her hips as she rides your ${pc.face}. Finally, you can feel her pussy convulsing, filling your mouth with her sweet nectar.`);
         Text.NL();
 
-        const cum = gwendy.OrgasmCum();
+        gwendy.OrgasmCum();
 
         Text.Out(`Some time later, the two of you are cuddling on her bed in the aftermath of her orgasm. She leans over to nuzzle against the side of your face. `);
         if (hangout) {
@@ -4052,7 +4052,7 @@ export namespace GwendyScenes {
         }
         Text.NL();
 
-        const cum = player.OrgasmCum(3);
+        player.OrgasmCum(3);
 
         Text.Out(`Bereft of voice, you merely mewl weakly in response, biting your lip as she gyrates and grinds herself deep inside you.`);
         if (player.FirstCock()) {

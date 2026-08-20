@@ -158,12 +158,6 @@ export class OpheliaBrute extends BossEntity {
 		const targets = this.GetPartyTarget(encounter, activeChar);
 		const t = this.GetSingleTarget(encounter, activeChar);
 
-		const parseVars = {
-			name   : this.name,
-			hisher : this.hisher(),
-			tName  : t.name,
-		};
-
 		const choice = Math.random();
 		if (choice < 0.2 && Abilities.Physical.Bash.enabledCondition(encounter, this)) {
 			Abilities.Physical.Bash.Use(encounter, this, t);

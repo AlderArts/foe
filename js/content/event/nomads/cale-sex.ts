@@ -842,7 +842,7 @@ export namespace CaleSexScenes {
 		const player: Player = GAME().player;
 		const cale: Cale = GAME().cale;
 		const virgin = cale.Butt().virgin;
-		const biggestCock = player.BiggestCock();
+		//const biggestCock = player.BiggestCock();
 
 		let parse: IParse = {
 			playername     : player.name,
@@ -1848,7 +1848,7 @@ export namespace CaleSexScenes {
 		Gui.NextPrompt();
 	}
 
-	export function SexCaleCleanCockEntrypoint(cock: Cock, outside: boolean) {
+	export function SexCaleCleanCockEntrypoint(cock: Cock, _outside: boolean) {
 		const player: Player = GAME().player;
 		let parse: IParse = {
 
@@ -2223,7 +2223,7 @@ export namespace CaleSexScenes {
 					}
 					Text.NL();
 
-					const cum = player.OrgasmCum();
+					player.OrgasmCum();
 
 					Text.Add("Without his knot to hold the seed in, most of it winds up leaking around the seal of your ass, splattering your butt with white. Only when the jets are reduced to a trickle does Cale pull away, sputtering a couple weak ropes onto your [butt]. <i>“Ah, that hit the spot. Too bad y’ wouldn’t let me tie,”</i> he says, panting as he sits down beside you and leans on the [log].", parse);
 					Text.NL();

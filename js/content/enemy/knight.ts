@@ -108,12 +108,6 @@ export class Footman extends Entity {
 		// Pick a random target
 		const t = this.GetSingleTarget(encounter, activeChar);
 
-		const parseVars = {
-			hisher : this.hisher(),
-			name   : this.name,
-			tName  : t.name,
-		};
-
 		const choice = Math.random();
 		if (choice < 0.4 && Abilities.Physical.DAttack.enabledCondition(encounter, this)) {
 			Abilities.Physical.DAttack.CastInternal(encounter, this, t);

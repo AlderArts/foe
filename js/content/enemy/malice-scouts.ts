@@ -453,7 +453,7 @@ export class GoatAlchemist extends Entity {
 		Text.Flush();
 
 		// Pick a random target
-		const targets = this.GetPartyTarget(encounter, activeChar);
+		//const targets = this.GetPartyTarget(encounter, activeChar);
 		const t = this.GetSingleTarget(encounter, activeChar);
 
 		const allies = this.GetPartyTarget(encounter, activeChar, true);
@@ -677,7 +677,7 @@ export namespace MaliceScoutsScenes {
 			const player: Player = GAME().player;
 			const party: Party = GAME().party;
 			const catboy = enc.catboy;
-			const p1cock = player.BiggestCock();
+			//const p1cock = player.BiggestCock();
 			let parse: IParse = {
 
 			};
@@ -1150,7 +1150,7 @@ export namespace MaliceScoutsScenes {
 			Gui.NextPrompt();
 		}
 
-		export function Petting(enc: ScoutEncounter) {
+		export function Petting(_enc: ScoutEncounter) {
 			const player: Player = GAME().player;
 			let parse: IParse = {
 
@@ -1343,9 +1343,9 @@ export namespace MaliceScoutsScenes {
 			Encounter.prototype.onLoss.call(enc);
 		}
 
-		export function GetMilked(enc: ScoutEncounter) {
+		export function GetMilked(_enc: ScoutEncounter) {
 			const player: Player = GAME().player;
-			const catboy = enc.catboy;
+			//const catboy = enc.catboy;
 			let parse: IParse = {
 
 			};
@@ -1922,9 +1922,9 @@ export namespace MaliceScoutsScenes {
 			Gui.NextPrompt();
 		}
 
-		export function WinFist(enc: ScoutEncounter) {
+		export function WinFist(_enc: ScoutEncounter) {
 			const player: Player = GAME().player;
-			const mare = enc.mare;
+			//const mare = enc.mare;
 			const p1cock = player.BiggestCock();
 			let parse: IParse = {
 
@@ -2092,7 +2092,7 @@ export namespace MaliceScoutsScenes {
 			scenes.Get();
 		}
 
-		export function LossFacesit(enc: ScoutEncounter) {
+		export function LossFacesit(_enc: ScoutEncounter) {
 			const player: Player = GAME().player;
 			let parse: IParse = {
 
@@ -2284,9 +2284,9 @@ export namespace MaliceScoutsScenes {
 			Encounter.prototype.onVictory.call(enc);
 		}
 
-		export function WinTurnTables(enc: ScoutEncounter) {
+		export function WinTurnTables(_enc: ScoutEncounter) {
 			const player: Player = GAME().player;
-			const goat = enc.goat;
+			//const goat = enc.goat;
 			let parse: IParse = {
 
 			};
@@ -2881,7 +2881,7 @@ export namespace MaliceScoutsScenes {
 			Encounter.prototype.onLoss.call(enc);
 		}
 
-		export function LossEntry(enc: ScoutEncounter) {
+		export function LossEntry(_enc: ScoutEncounter) {
 			const player: Player = GAME().player;
 			let parse: IParse = {
 
@@ -3748,7 +3748,7 @@ export namespace MaliceScoutsScenes {
 			Gui.NextPrompt();
 		}
 
-		export function LossMagicalBondage(enc: ScoutEncounter) {
+		export function LossMagicalBondage(_enc: ScoutEncounter) {
 			const player: Player = GAME().player;
 			const party: Party = GAME().party;
 			let parse: IParse = {
@@ -3975,7 +3975,7 @@ export namespace MaliceScoutsScenes {
 				Text.NL();
 			}
 
-			const cum = player.OrgasmCum();
+			player.OrgasmCum();
 
 			Text.Add("Another glance at your captors. The centauress is decidedly not looking at you, while the catboy is doing the same, only with a bright blush on his face. Yeah, you’re not going to get anything out of them.", parse);
 			Text.NL();

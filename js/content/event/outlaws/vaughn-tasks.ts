@@ -1608,7 +1608,7 @@ export namespace VaughnTasksScenes {
 			Gui.SetButtonsFromList(options, false, undefined);
 		}
 
-		export function Kitchen(opts: any) {
+		export function Kitchen(_opts: any) {
 			const player: Player = GAME().player;
 			const party: Party = GAME().party;
 			const vaughn: Vaughn = GAME().vaughn;

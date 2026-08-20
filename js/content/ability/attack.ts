@@ -14,7 +14,7 @@ const AttackAb = new Ability("Attack");
 AttackAb.Short = () => "Perform a physical attack.";
 AttackAb.castTree.push(AbilityNode.Template.Physical({
 	onAbsorb: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity, dmg: number) => {
-		const parse = AbilityNode.DefaultParser(caster, target);
+		//const parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[Name] attack[notS] [tname], but [theshe] absorb[tnotS] the blow for " + Text.Heal(dmg) + " damage!");
 		Text.NL();
 	}],

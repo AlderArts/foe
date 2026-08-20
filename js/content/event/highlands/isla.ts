@@ -98,11 +98,11 @@ export class Isla extends Entity {
 	}
 
 	// Schedule
-	public IsAtLocation(location?: ILocation) {
+	public IsAtLocation(_location?: ILocation) {
 		return true;
 	}
 
-	public PregnancyTrigger(womb: Womb, slot: number) {
+	public PregnancyTrigger(womb: Womb, _slot: number) {
 		const isla: Isla = GAME().isla;
 		// Use unshift instead of push to make sure pregnancy doesn't interfere with scene progression
 		Gui.Callstack.unshift(() => {
@@ -1457,7 +1457,7 @@ export namespace IslaScenes {
 			const womb = isla.PregHandler().Womb();
 			const preg = womb && womb.pregnant;
 			const stage = preg ? womb.progress : 0;
-			const num = womb.litterSize;
+			//const num = womb.litterSize;
 
 			const figure = isla.Figure();
 
@@ -1727,7 +1727,7 @@ export namespace IslaScenes {
 				Text.NL();
 				Text.Add("The climax, when it comes, takes you completely by surprise; one moment, a great prickling surge is running through your body from head to toe, and the next thing you know, copious amounts of girl-cum are oozing out from the straps holding your shaft in place, making the mess even larger. You moan like the whore you are, shuddering under Isla as the both of you ride out the storm together.", parse);
 
-				const cum = player.OrgasmCum();
+				player.OrgasmCum();
 			}
 			Text.NL();
 

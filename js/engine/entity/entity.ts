@@ -438,7 +438,7 @@ export class Entity {
 		this.relation.debug = () => that.name + ".relation";
 	}
 
-	public Interact(switchSpot: boolean) {
+	public Interact(_switchSpot: boolean) {
 
 	}
 
@@ -533,7 +533,7 @@ export class Entity {
 		return true;
 	}
 
-	public ItemUse(item: Item, backPrompt: CallableFunction) {
+	public ItemUse(_item: Item, _backPrompt: CallableFunction) {
 		return {grab : false, consume : true};
 	}
 
@@ -686,10 +686,10 @@ export class Entity {
 		this.pregHandler.Update(hours);
 	}
 
-	public PregnancyProgess(womb: Womb, slot: number, oldProgress: number, progress: number) {
+	public PregnancyProgess(_womb: Womb, _slot: number, _oldProgress: number, _progress: number) {
 	}
 
-	public PregnancyTrigger(womb: Womb, slot: number) {
+	public PregnancyTrigger(womb: Womb, _slot: number) {
 		const that = this;
 		// Use unshift instead of push to make sure pregnancy doesn't interfere with scene progression
 		Gui.Callstack.unshift(() => {
@@ -718,8 +718,8 @@ export class Entity {
 		if (sta < Math.E) { sta = Math.E; }
 		return Math.log(sta) / 25;
 	}
-	public HandleDrunknessOverTime(hours: number, suppressText?: boolean) {
-		const oldLevel = this.drunkLevel;
+	public HandleDrunknessOverTime(hours: number, _suppressText?: boolean) {
+		//const oldLevel = this.drunkLevel;
 		this.drunkLevel -= this.DrunkRecoveryRate() * hours;
 		if (this.drunkLevel < 0) { this.drunkLevel = 0; }
 	}
@@ -745,10 +745,10 @@ export class Entity {
 		}
 		return false;
 	}
-	public Drink(drink: number, suppressText: boolean) {
+	public Drink(drink: number, _suppressText: boolean) {
 		let sta = this.Sta();
 		if (sta < Math.E) { sta = Math.E; }
-		const oldLevel = this.drunkLevel;
+		//const oldLevel = this.drunkLevel;
 		this.drunkLevel += drink / Math.log(sta);
 	}
 	// TODO: Implement for companions
@@ -1356,7 +1356,7 @@ export class Entity {
 	}
 
 	// TODO temp
-	public PEvade(attack?: number) {
+	public PEvade(_attack?: number) {
 		const evadeStat = 3 * this.Dex() + this.Int() + this.Cha();
 
 		return evadeStat;
@@ -1388,7 +1388,7 @@ export class Entity {
 	}
 
 	// TODO temp
-	public MEvade(attack?: number) {
+	public MEvade(_attack?: number) {
 		const evadeStat = 3 * this.Spi() + this.Int() + this.Dex();
 
 		return evadeStat;
@@ -1431,7 +1431,7 @@ export class Entity {
 	}
 
 	// TODO temp
-	public LEvade(attack?: number) {
+	public LEvade(_attack?: number) {
 		let evadeStat = 3 * this.Spi() + this.Sta() + this.Int();
 
 		const blind = this.combatStatus.stats[StatusEffect.Blind];
@@ -1690,7 +1690,7 @@ export class Entity {
 	public LoadRecipes(storage: any) {
 		if (storage.recipes) {
 			this.recipes = [];
-			_.forIn(storage.recipes, (value, key) => {
+			_.forIn(storage.recipes, (value, _key) => {
 				this.recipes.push(ItemIds[value]);
 			});
 		}
@@ -1698,7 +1698,7 @@ export class Entity {
 
 	public LoadJobs(storage: IStorage) {
 		if (storage.jobs) {
-			_.forIn(this.jobs, (jd, key) => {
+			_.forIn(this.jobs, (jd, _key) => {
 				jd.FromStorage(storage.jobs[jd.job.name]);
 			});
 		}
@@ -1773,7 +1773,7 @@ export class Entity {
 	}
 
 	public RecallAbilities() {
-		_.forIn(this.jobs, (jd, key) => {
+		_.forIn(this.jobs, (jd, _key) => {
 			for (let i = 0; i < jd.level - 1; i++) {
 				if (i >= jd.job.levels.length) { break; }
 				const skills = jd.job.levels[i].skills;
@@ -2820,7 +2820,7 @@ export class Entity {
 	public MilkCap() {
 		return this.lactHandler.MilkCap();
 	}
-	public LactationProgress(oldMilk: number, newMilk: number, lactationRate: number) {
+	public LactationProgress(_oldMilk: number, _newMilk: number, _lactationRate: number) {
 		// Placeholder, implement in each entity if applicable
 	}
 }

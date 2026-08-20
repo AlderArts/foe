@@ -766,7 +766,7 @@ export namespace MirandaScenes {
 					Text.Add("<i>“Take my load, bitch!”</i> the herm yells, pouring her thick cum down your gullet and into your [belly]. You swallow dutifully, but you can feel her seed rising in your throat, the pressure becoming too high. Despite your efforts, some of it leaks out, trailing down your chin. Finally, the sadistic dog-herm pulls out, allowing you to breathe again.", parse);
 					Text.NL();
 
-					const mCum = miranda.OrgasmCum();
+					miranda.OrgasmCum();
 					player.AddLustFraction(0.3);
 					miranda.relation.IncreaseStat(100, 3);
 					miranda.subDom.IncreaseStat(100, 5);
@@ -815,7 +815,7 @@ export namespace MirandaScenes {
 					player.FuckOral(player.Mouth(), miranda.FirstCock(), 2);
 
 					player.AddLustFraction(0.3);
-					const mCum = miranda.OrgasmCum();
+					miranda.OrgasmCum();
 					miranda.subDom.IncreaseStat(50, 1);
 					player.subDom.DecreaseStat(-50, 1);
 
@@ -1046,7 +1046,7 @@ export namespace MirandaScenes {
 					Text.Flush();
 
 					player.AddLustFraction(-1);
-					const mCum = miranda.OrgasmCum();
+					miranda.OrgasmCum();
 					miranda.relation.IncreaseStat(50, 1);
 					miranda.subDom.IncreaseStat(100, 1);
 					player.subDom.DecreaseStat(-100, 1);
@@ -1529,7 +1529,7 @@ export namespace MirandaScenes {
 							miranda.flags.Attitude = MirandaFlags.Attitude.Nice;
 							miranda.relation.IncreaseStat(100, 5);
 							miranda.subDom.IncreaseStat(100, 10);
-							const mCum = miranda.OrgasmCum();
+							miranda.OrgasmCum();
 
 							TimeStep({hour : 5});
 
@@ -1578,7 +1578,7 @@ export namespace MirandaScenes {
 							Text.NL();
 							Text.Add("As her huge member begins to twitch violently in your mouth, you can feel the thick semen being deposited right into your belly, load after hot load. Just before you black out from lack of air, Miranda pulls out enough for you to breathe. You cough as a few more spurts hit your face, but you feel proud that most of her juicy cock-milk now resides in your slightly distended stomach.", parse);
 
-							const mCum = miranda.OrgasmCum();
+							miranda.OrgasmCum();
 
 							Text.NL();
 							parse.kneeling = player.HasLegs() ? "kneeling" : "submissive";
@@ -1950,7 +1950,7 @@ export namespace MirandaScenes {
 	}
 
 	export function BarTalkOptions(options: IChoice[], next: CallableFunction) {
-		const parse: IParse = {};
+		//const parse: IParse = {};
 
 		options.push({ nameStr : "Her past",
 			func() {
@@ -2260,8 +2260,8 @@ export namespace MirandaScenes {
 								Text.Add("As the both of you ride out your climax, the spectators chuckle to each other and head to another room. They leave the door open for all to see as you rest in each other's arms in an expanding pool of mixed love juices. After resting up a bit, the two of you decide that it is probably best to leave for today. As you walk out into the night, Miranda gives you an peck on the cheek. She seems a bit more demure than her usual abrasive self.", parse);
 								Text.NL();
 
-								const cum = player.OrgasmCum();
-								const mCum = miranda.OrgasmCum();
+								player.OrgasmCum();
+								miranda.OrgasmCum();
 
 								Text.Add("<i>“That was great, hun...”</i> she whispers into your ear. <i>“You can do that to me again aaanytime you like.”</i> Miranda sways off into the night, leaving you alone.", parse);
 								Text.Flush();
@@ -2317,7 +2317,7 @@ export namespace MirandaScenes {
 							if (player.FirstCock()) {
 								Text.Add(" Your cock[s] convulse[notS] and start[notS] pumping semen all over your lover.", parse);
 
-								const cum = player.OrgasmCum();
+								player.OrgasmCum();
 							}
 							Text.Add(" She grins as you cum, rocking on top of her.", parse);
 							Text.NL();
@@ -2328,7 +2328,7 @@ export namespace MirandaScenes {
 							Text.NL();
 							Text.Add("Your body rests limply against hers as she starts pumping you full of her seed, putting up a show for the audience. As you lean against her, totally exhausted, she whispers in your ear, <i>“Not bad for the first time, I think I’ve found myself a keeper!”</i> Once her knot has shrunk enough and you finally are able to separate, the two of you head out into the night, too tired to keep up the drinking game. Miranda has a thoughtful look on her face.", parse);
 
-							const mCum = miranda.OrgasmCum();
+							miranda.OrgasmCum();
 
 							Text.NL();
 							Text.Add("<i>“Did you enjoy performing in front of an audience?”</i> she asks playfully. <i>“Maybe I shouldn't have been so greedy, and let them join in?”</i> She laughs loudly at your blushing face and saunters off into the night.", parse);
@@ -2386,7 +2386,7 @@ export namespace MirandaScenes {
 							if (player.FirstCock()) {
 								Text.Add(" Your cock[s] violently erupt[notS] on the hard wooden floor, making you cry out in ecstasy.", parse);
 
-								const cum = player.OrgasmCum();
+								player.OrgasmCum();
 							}
 							Text.NL();
 							parse.butt = player.FirstCock() ? " by repeatedly hitting your prostate" : "";
@@ -2400,7 +2400,7 @@ export namespace MirandaScenes {
 							Text.NL();
 							Text.Add("<i>“FUUUUUUCK!!!”</i> she loudly cries out as you feel wave after wave of potent cum fill your belly. The knot is preventing any sperm from escaping, leaving her immense load only one way to go. After what feels like an eternity, she is finally spent. Your stomach is stretched beyond what you thought possible, making you look heavily pregnant. Miranda collapses on top of you, the weight of her breasts pressing down on your back.", parse);
 
-							const mCum = miranda.OrgasmCum();
+							miranda.OrgasmCum();
 
 							Text.NL();
 							Text.Add("This, of course, is the time that the bartender decides to check in on you. He surveys the scene clinically: you lie pressed on the floor with your butt sticking out, completely filled by the hermaphrodite dog’s knotted cock. Trickles of the guardswoman’s cum somehow flows past the bulb and join the pool of your fluids on the floor. The tall equine sighs and mutters that this will be a mess to clean up, shaking his head as he walks out. The flushed and tired Miranda sits up and pulls you into her lap.", parse);
@@ -2663,7 +2663,7 @@ export namespace MirandaScenes {
 	export function BarSexOptions(options: IChoice[]) {
 		const miranda: Miranda = GAME().miranda;
 
-		const parse: IParse = {};
+		//const parse: IParse = {};
 
 		options.push({ nameStr : "Date",
 			func : MirandaScenes.DatingEntry, enabled : true,
@@ -3028,7 +3028,7 @@ export namespace MirandaScenes {
 				}, 1.0, () => true);
 				scenes.Get();
 
-				const cum = player.OrgasmCum();
+				player.OrgasmCum();
 				player.AddLustFraction(0.5);
 
 				Text.NL();
@@ -3128,7 +3128,7 @@ export namespace MirandaScenes {
 		Text.Add("You’re trembling as your juices mix with hers and trickle down on her deliciously thick knot… just a move of your hips, and she’ll have you tied completely...", parse);
 		Text.NL();
 
-		const cum = player.OrgasmCum();
+		player.OrgasmCum();
 
 		Text.Flush();
 		// [Knot][No knot]
@@ -3586,7 +3586,7 @@ export namespace MirandaScenes {
 			}
 			Text.NL();
 
-			const mCum = miranda.OrgasmCum();
+			miranda.OrgasmCum();
 
 			player.subDom.IncreaseStat(75, 1);
 			miranda.subDom.DecreaseStat(-75, 3);
@@ -3815,9 +3815,9 @@ export namespace MirandaScenes {
 					Text.Add("Gush after massive gush jets from your squirting [cocks], absolutely drenching the dog-morph's head and upper torso in your seed. Her face is liberally plastered in off-white spunk, her breasts similarly coated and a veritable river of semen drools down the canyon of her cleavage and over her belly.", parse);
 				} else if (load > 3) {
 					Text.Add("Thick ropes of sperm plaster themselves over Miranda's face and tits, draping her in a veritable veil of streaks of off-white. The dickmilk is everywhere, coating her face and her breasts alike in your liquid climax.", parse);
-	} else {
+				} else {
 					Text.Add("Pearly strands spray across the morph's face and tits, giving her a perverse necklace of jism streamers by the time you are through.", parse);
-	}
+				}
 				Text.NL();
 				parse.sub = miranda.SubDom() < 0 ? " - in fact, I love it -" : ",";
 				Text.Add("Licking some of your seed from her snout, the panting morph says, <i>“You’ve had your fun. I don’t mind the face paint[sub] but at least finish me off, please?”</i>", parse);
@@ -3879,7 +3879,7 @@ export namespace MirandaScenes {
 			Text.Add("You happily give yourself over to the sensations, content to ride the dober-morph for all you are worth. You can feel your[second] orgasm fast approaching, and from the growls and whimpers echoing from below you, Miranda herself can't be far off. As you sink down yet again, you feel her hugely swollen knot grinding against your anal ring...", parse);
 			Text.Flush();
 
-			const mCum = miranda.OrgasmCum();
+			miranda.OrgasmCum();
 
 			// [Take Knot] [Skip Knot]
 			const options: IChoice[] = [];
@@ -3892,7 +3892,7 @@ export namespace MirandaScenes {
 					Text.Add("You scream in a cocktail of pleasure, pain and triumph as Miranda's knot is forced inside of you, the swollen flesh stretching you out impossibly as it swells to anchor the two of you together. The feeling of being stretched so much, filled so full,[cock] is just too much to bear and your ass clamps down as you are wracked with the throes of climax.", parse);
 					if (player.FirstCock()) {
 						Text.Add(" Your [cocks] erupt[notS] for the second time, showering semen across Miranda's belly and breasts.", parse);
-						const load = player.OrgasmCum();
+						player.OrgasmCum();
 					}
 					if (player.FirstVag()) {
 						Text.Add(" Your neglected womanhood rains its female fluids down onto Miranda's stomach, drooling wetly over her belly as you orgasm.", parse);
@@ -3938,7 +3938,7 @@ export namespace MirandaScenes {
 					Text.Add("Abandoning Miranda's balls, you instead seize hold of her knot, squeezing it with your fingers even as your ass wrings down on her shaft, trying to milk her. The sensation is all that Miranda needs, the morph howling in ecstasy as she cums inside of you, the feeling of her hot semen geysering up into your sensitive [anus] is enough to trigger your [secondOwn] climax in turn.", parse);
 					if (player.FirstCock()) {
 						Text.Add(" Once again, your [cocks] erupt[notS], painting Miranda's stomach and tits alike with ropes of pearly semen.", parse);
-						const load = player.OrgasmCum();
+						player.OrgasmCum();
 					}
 					if (player.FirstVag()) {
 						Text.Add(" Female honey pours from your neglected womanhood, slopping wetly over Miranda's belly as you orgasm.", parse);
@@ -4141,7 +4141,7 @@ export namespace MirandaScenes {
 		parse.artificial = pCock.isStrapon ? " artificial" : "";
 		scenes = new EncounterTable();
 
-		const mCum = miranda.OrgasmCum();
+		miranda.OrgasmCum();
 
 		scenes.AddEnc(() => {
 			Text.Add("Just where you want her. Grinning widely, you slow down a bit - retaining the depth of your thrusts - but keeping the dog-morph just a hair's breadth away from the orgasm she so desperately craves. When Miranda realizes what you are up to, she growls, cursing you. Her complaints gradually turn to whines and pleas and finally into full on begging as you break down her will with your pistoning [cock].", parse);
@@ -4494,8 +4494,8 @@ export namespace MirandaScenes {
 		}
 		*/
 
-		const cocksInVag = player.CocksThatFit(miranda.FirstVag(), false, 15);
-		const p1Cock     = player.BiggestCock(cocksInVag);
+		//const cocksInVag = player.CocksThatFit(miranda.FirstVag(), false, 15);
+		//const p1Cock     = player.BiggestCock(cocksInVag);
 
 		options.push({ nameStr : "Dommy ride",
 			func() {
@@ -5623,7 +5623,7 @@ export namespace MirandaScenes {
 			Text.NL();
 			Text.Add("Miranda's orgasm is something you barely notice, caught up in the throes of your own as you are. Sealed together by your knot as you are, your seed penetrates deeply inside her, flooding toward her very womb without mercy. ", parse);
 
-			const mCum = miranda.OrgasmCum();
+			miranda.OrgasmCum();
 			const cum = player.OrgasmCum();
 
 			if (cum > 6) {
@@ -5661,7 +5661,7 @@ export namespace MirandaScenes {
 			Text.NL();
 			Text.Add("The sound of her yowling in ecstasy and of her semen spattering across the cushions below, the scent of sex in your nostrils, the feel of her writhing beneath you... it's too much for you to hold back anymore. Throwing your own head back, you cry out as your own climax washes through you.", parse);
 
-			const mCum = miranda.OrgasmCum();
+			miranda.OrgasmCum();
 
 			const cum = p1Cock.isStrapon ? -1 : player.OrgasmCum();
 			player.AddLustFraction(-1);
@@ -6014,7 +6014,7 @@ export namespace MirandaScenes {
 				Text.Add("A few moments later, she finally grabs you, shoving herself as deep inside your throat as she can. A loud groan of pleasure emanates from the doberherm as she floods your insides with her spunk. A ceaseless tsunami of white batters your stomach until it’s full and beyond.", parse);
 				Text.NL();
 
-				const cum = miranda.OrgasmCum();
+				miranda.OrgasmCum();
 
 				if (player.SubDom() > 0) {
 					if (miranda.Attitude() >= MirandaFlags.Attitude.Neutral) {
@@ -6142,7 +6142,7 @@ export namespace MirandaScenes {
 					Text.Add("Miranda’s moans are muffled as she diligently works on your [gen]. From your advantageous spot, you can see, and feel, every muscle in her body tensing. A thick spurt of pre heralds the oncoming eruption of doggie-cum that fills your mouth with nary but a single jet. You quickly move to swallow her thick load, just as she delivers another.", parse);
 					Text.NL();
 
-					const cum = miranda.OrgasmCum();  // the let 'cum' name is the same as the player (?)
+					miranda.OrgasmCum();  // the let 'cum' name is the same as the player (?)
 
 					Text.Add("As the semen fountain masquerading as doberherm beneath you keeps on erupting into your maw, you diligently swallow each load, at least for a time. Having had enough, you relax your jaws and release her, allowing her cum to spray unabashedly over her thighs as you use your hand to continue milking her. Finally, her spurts grow weaker and weaker until she lets out a final groan and issues what you suspect is her final jet of this orgasm. Quickly, you move, mouth diving in to capture her last load and hold it inside your lips, letting the thick stickiness of it roll across your tongue.", parse);
 					Text.NL();
@@ -6155,7 +6155,7 @@ export namespace MirandaScenes {
 						parse.vc = player.FirstVag().clitCock ? "" : Text.Parse(", her fuzzy chin rubbing against your [clit] seemingly by accident", parse);
 						Text.Add("Throughout her own climax, Miranda's tongue keeps slurping and squelching through your petals, lapping greedily for your feminine nectar[vc]. Your hips twitch and sway, but she simply won't relent in her assault, and inevitably your womanhood releases its juices right into the morph's hungry jaws.", parse);
 
-						const cum = player.OrgasmCum(); // ? why?
+						player.OrgasmCum();
 					} else {
 						Text.Add("Miranda lewdly slurps and laps at your back passage, making you shudder and wriggle even through her own climax. As her cock slides limply back into her sheath, she continues her assault, but evidently you've worn her out as her licks grow slower and slower until she stops entirely. As she lies back and pants, you're left glowing pleasantly in arousal.", parse);
 						player.AddLustFraction(0.5);
@@ -6241,7 +6241,7 @@ export namespace MirandaScenes {
 					Text.Add("With a throaty howl of pleasure, the morph's cock erupts in a geyser of seed, spraying thick spurts of off-white all over her belly and tits, caking your [foot] in a thick, dripping layer of girlspunk in the process. You shiver slightly as the warm, sticky fluid washes over your [skin], dabbling at her glans with the tip of your toes to let further spurts wash over you. Inevitably, though, even Miranda's balls expend themselves, and the sodden morph goes flaccid, panting as she lies in a great puddle of her own making.", parse);
 					Text.NL();
 
-					const cum = miranda.OrgasmCum();
+					miranda.OrgasmCum();
 
 					if (dom > 50) {
 						Text.Add("<i>“Ah, this feels great,”</i> she remarks, hands moving to rub her breasts, plastered with her own jism. ", parse);
@@ -6806,7 +6806,7 @@ export namespace MirandaScenes {
 		scenes.Get();
 	}
 
-	export function TalkBackstory(atBar: boolean) {
+	export function TalkBackstory(_atBar: boolean) {
 		const player: Player = GAME().player;
 		const miranda: Miranda = GAME().miranda;
 
@@ -7622,7 +7622,7 @@ export namespace MirandaScenes {
 						Text.NL();
 						Text.Add("Before you have time to react, Miranda withdraws from your mouth, grabbing the back of your head with one hand and jerking herself off with the other. The first blast splashes onto your [tongueDesc], but the following stream is less discriminatory, drenching your face and splattering on your [breastDesc]. The herm rubs the last drops of cum off the tip of her cock on your cheek, before hastily pulling up her pants again.", parse);
 
-						const mCum = miranda.OrgasmCum();
+						miranda.OrgasmCum();
 
 						Text.NL();
 						Text.Add("Huffing slightly, Miranda pulls you out of the alleyway, smiling disarmingly at the city official as she drags you over to the booth. The guardswoman talks as if nothing is amiss, explaining that you need a visa and that she’ll vouch for you. When the flustered administrator starts to protest, she shows her identification as a member of the city watch, which speeds up the process considerably. From the burning in your cheeks, you are probably wearing a blush at least as deep as the clerk - though you doubt he can see it through the thick layer of cum dripping down your face.", parse);

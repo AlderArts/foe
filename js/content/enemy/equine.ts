@@ -137,12 +137,6 @@ export class Equine extends Entity {
 		// Pick a random target
 		const t = this.GetSingleTarget(encounter, activeChar);
 
-		const parseVars = {
-			hisher : this.hisher(),
-			name   : this.name,
-			tName  : t.name,
-		};
-
 		const choice = Math.random();
 		if (choice < 0.6) {
 			Abilities.Attack.Use(encounter, this, t);
@@ -731,7 +725,7 @@ export namespace EquineScenes {
 	export function WinFuckHim(enc: EquineEncounter) {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const mare = enc.mare;
+		//const mare = enc.mare;
 		const stallion = enc.stallion;
 
 		const p1cock = player.BiggestCock();
@@ -1177,7 +1171,7 @@ export namespace EquineScenes {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const mare = enc.mare;
-		const stallion = enc.stallion;
+		//const stallion = enc.stallion;
 
 		let parse: IParse = {
 
@@ -1326,7 +1320,7 @@ export namespace EquineScenes {
 
 	export function WinRideHimVag(enc: EquineEncounter) {
 		const player: Player = GAME().player;
-		const mare = enc.mare;
+		//const mare = enc.mare;
 		const stallion = enc.stallion;
 
 		let parse: IParse = {

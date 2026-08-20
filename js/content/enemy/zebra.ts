@@ -246,8 +246,8 @@ export namespace ZebraShamanScenes {
 
 	export function OnLoss() {
 		const party: Party = GAME().party;
-		const enc: ZebraEncounter = this;
-		const zebra = enc.zebra;
+		//const enc: ZebraEncounter = this;
+		//const zebra = enc.zebra;
 		SetGameState(GameState.Event, Gui);
 
 		const parse: IParse = {
@@ -323,7 +323,7 @@ export namespace ZebraShamanScenes {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const enc: ZebraEncounter = this;
-		const zebra = enc.zebra;
+		//const zebra = enc.zebra;
 		SetGameState(GameState.Event, Gui);
 
 		const parse: IParse = {
@@ -384,7 +384,7 @@ export namespace ZebraShamanScenes {
 		const zebra = enc.zebra;
 
 		const lusty = zebra.LustLevel() > 0.5;
-		const p1cock = player.BiggestCock();
+		//const p1cock = player.BiggestCock();
 
 		let parse: IParse = {
 			clothes() { return player.ArmorDesc(); },
@@ -467,7 +467,7 @@ export namespace ZebraShamanScenes {
 			Text.Add("Thanks to your relentless pounding, he lets out a drawn out moan and succumbs to his second orgasm. Though not as powerful as his first, he still manages to shoot a few large strands of cum on the ground. His cock isn’t the only part of him that’s getting off, though; his anal passage squeezes down tight around your [cock], hoping to milk you dry as you fuck him wildly.", parse);
 			Text.NL();
 
-			const cum = player.OrgasmCum();
+			player.OrgasmCum();
 
 			Text.Add("At last, you feel your [balls] begin to swell, a telltale sign of your own impending orgasm. With a loud howl you plant your [cock] deeply into his bowels and let out a tidal wave of seed. Glob after glob pours into him, painting his inner walls white and stuffing his stomach with spunk. ", parse);
 			if (player.FirstVag()) {
@@ -494,7 +494,7 @@ export namespace ZebraShamanScenes {
 		const zebra = enc.zebra;
 
 		const lusty = zebra.LustLevel() > 0.5;
-		const p1cock = player.BiggestCock();
+		//const p1cock = player.BiggestCock();
 
 		let parse: IParse = {
 			clothes() { return player.ArmorDesc(); },
@@ -574,7 +574,7 @@ export namespace ZebraShamanScenes {
 			Text.Add("Just as you thought, the first of several waves of his orgasm hits you. Literally. The force of his ejaculation is enough to push your mouth off his member and send you into a coughing fit while still coating your face and [breasts] in zebra spunk. You manage to calm yourself enough to catch a few of the last spurts in your mouth. By the time it's over, you look more like a glazed donut than an adventurer.", parse);
 			Text.NL();
 
-			let cum = player.OrgasmCum();
+			player.OrgasmCum();
 
 			Text.Add("The shaman hasn't slowed down on his end, however. Thanks to his unrelenting tongue fuck, you cry out in ecstasy as your own orgasm hits. Your inner walls clench down on the shaman's tongue, fruitlessly trying to wring it for semen; at the same time, your [vag] sprays its juices all over his face and into his mouth, and he makes sure to lap up every drop.", parse);
 			if (player.FirstCock()) {
@@ -618,7 +618,7 @@ export namespace ZebraShamanScenes {
 			Text.Add("When the shaman's orgasm finally comes to an end, he collapses onto his back. His equine member follows suit, exiting your abused [vag] with a loud pop. You take a few moments to lay there and catch your breath, staring up at the clouds and basking in the sunlight. That was one hell of a fuck, you think to yourself; you’ll probably be walking funny for a while.", parse);
 			Text.NL();
 
-			cum = player.OrgasmCum();
+			player.OrgasmCum();
 
 			Text.Add("When you've regained your energy, you flip over and push yourself to your feet. As you dust the dirt off your clothes, you hear the sounds of snoring just behind you and turn around to look, seeing that the shaman has returned to his normal form and is completely passed out. You chuckle at the sight. The poor guy really must have worn himself out, even with all that energy the potion gave him. You kneel down beside him and give him a small kiss on the forehead. His ears flick adorably in response.", parse);
 			Text.NL();

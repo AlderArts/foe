@@ -224,7 +224,7 @@ BullTowerLoc.Courtyard.Yard.links.push(new Link(
     "Enter tower", true, true,
     undefined,
     () => {
-        const outlaws: Outlaws = GAME().outlaws;
+        //const outlaws: Outlaws = GAME().outlaws;
         MoveToLocation(BullTowerLoc.Building.Hall, {minute: 5});
         BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
     },
@@ -233,7 +233,7 @@ BullTowerLoc.Courtyard.Yard.links.push(new Link(
     "Caravans", true, true,
     undefined,
     () => {
-        const outlaws: Outlaws = GAME().outlaws;
+        //const outlaws: Outlaws = GAME().outlaws;
         MoveToLocation(BullTowerLoc.Courtyard.Caravans, {minute: 5});
         BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
     },
@@ -242,7 +242,7 @@ BullTowerLoc.Courtyard.Yard.links.push(new Link(
     "Animal Pens", true, true,
     undefined,
     () => {
-        const outlaws: Outlaws = GAME().outlaws;
+        //const outlaws: Outlaws = GAME().outlaws;
         MoveToLocation(BullTowerLoc.Courtyard.Pens, {minute: 5});
         BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
     },
@@ -402,7 +402,7 @@ BullTowerLoc.Courtyard.Caravans.links.push(new Link(
     "Courtyard", true, true,
     undefined,
     () => {
-        const outlaws: Outlaws = GAME().outlaws;
+        //const outlaws: Outlaws = GAME().outlaws;
         MoveToLocation(BullTowerLoc.Courtyard.Yard, {minute: 5});
         BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
     },
@@ -410,13 +410,13 @@ BullTowerLoc.Courtyard.Caravans.links.push(new Link(
 
 BullTowerLoc.Courtyard.Caravans.events.push(new Link(
     "Guards", () => {
-        const outlaws: Outlaws = GAME().outlaws;
+        //const outlaws: Outlaws = GAME().outlaws;
         return !(BT.guardsDown);
     }, true,
     undefined,
     () => {
         const player: Player = GAME().player;
-        const outlaws: Outlaws = GAME().outlaws;
+        //const outlaws: Outlaws = GAME().outlaws;
 
         const parse: IParse = {
             playername : player.name,
@@ -576,7 +576,7 @@ BullTowerLoc.Courtyard.Caravans.events.push(new Link(
         return !(outlaws.flags.BT & OutlawsFlags.BullTower.CaravansSearched) &&
             !(outlaws.flags.BT & OutlawsFlags.BullTower.CaravansIgnited);
     }, () => {
-        const outlaws: Outlaws = GAME().outlaws;
+        //const outlaws: Outlaws = GAME().outlaws;
         return BT.guardsDown;
     },
     undefined,
@@ -699,7 +699,7 @@ BullTowerLoc.Courtyard.Pens.links.push(new Link(
     "Courtyard", true, true,
     undefined,
     () => {
-        const outlaws: Outlaws = GAME().outlaws;
+        //const outlaws: Outlaws = GAME().outlaws;
         MoveToLocation(BullTowerLoc.Courtyard.Yard, {minute: 5});
         BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
     },
@@ -769,7 +769,7 @@ BullTowerLoc.Building.Hall.links.push(new Link(
     "Courtyard", true, true,
     undefined,
     () => {
-        const outlaws: Outlaws = GAME().outlaws;
+        //const outlaws: Outlaws = GAME().outlaws;
         MoveToLocation(BullTowerLoc.Courtyard.Yard, {minute: 5});
         BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
     },
@@ -812,7 +812,7 @@ BullTowerLoc.Building.Hall.links.push(new Link(
     "Office", true, true,
     undefined,
     () => {
-        const outlaws: Outlaws = GAME().outlaws;
+        //const outlaws: Outlaws = GAME().outlaws;
         MoveToLocation(BullTowerLoc.Building.Office, {minute: 5});
         BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
     },
@@ -821,7 +821,7 @@ BullTowerLoc.Building.Hall.links.push(new Link(
     "Cell", true, true,
     undefined,
     () => {
-        const outlaws: Outlaws = GAME().outlaws;
+        //const outlaws: Outlaws = GAME().outlaws;
         MoveToLocation(BullTowerLoc.Building.Cell, {minute: 5});
         BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
     },
@@ -830,7 +830,7 @@ BullTowerLoc.Building.Hall.links.push(new Link(
     "Tower", true, true,
     undefined,
     () => {
-        const outlaws: Outlaws = GAME().outlaws;
+        //const outlaws: Outlaws = GAME().outlaws;
         MoveToLocation(BullTowerLoc.Building.Watchtower, {minute: 5});
         BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
     },
@@ -979,7 +979,7 @@ BullTowerLoc.Building.Warehouse.links.push(new Link(
     "Hall", true, true,
     undefined,
     () => {
-        const outlaws: Outlaws = GAME().outlaws;
+        //const outlaws: Outlaws = GAME().outlaws;
         MoveToLocation(BullTowerLoc.Building.Hall, {minute: 5});
         BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
     },
@@ -1051,7 +1051,7 @@ BullTowerLoc.Building.Warehouse.events.push(new Link(
 ));
 
 BullTowerLoc.Building.Watchtower.description = () => {
-    const outlaws: Outlaws = GAME().outlaws;
+    //const outlaws: Outlaws = GAME().outlaws;
 
     Text.Add("From the outside, the ancient watchtower of Bull Tower looks proud and strong in spite of its age. On the inside, it’s just dusty and claustrophobic. The long, spiral staircase up to the top is enough to take the wind out of anyone, and leads to a landing and a ladder that in turn leads up to the belfry. Flickering light filters down from above. A peek upward through the hatch reveals that ");
     if (BT.towerGuardDown) {
@@ -1067,7 +1067,7 @@ BullTowerLoc.Building.Watchtower.links.push(new Link(
     "Hall", true, true,
     undefined,
     () => {
-        const outlaws: Outlaws = GAME().outlaws;
+        //const outlaws: Outlaws = GAME().outlaws;
         MoveToLocation(BullTowerLoc.Building.Hall, {minute: 5});
         BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
     },
@@ -1075,13 +1075,13 @@ BullTowerLoc.Building.Watchtower.links.push(new Link(
 
 BullTowerLoc.Building.Watchtower.events.push(new Link(
     "Guard", () => {
-        const outlaws: Outlaws = GAME().outlaws;
+        //const outlaws: Outlaws = GAME().outlaws;
         return !BT.towerGuardDown;
     }, true,
     undefined,
     () => {
         const player: Player = GAME().player;
-        const outlaws: Outlaws = GAME().outlaws;
+        //const outlaws: Outlaws = GAME().outlaws;
 
         const parse: IParse = {
 
@@ -1154,12 +1154,12 @@ BullTowerLoc.Building.Watchtower.events.push(new Link(
 
 BullTowerLoc.Building.Watchtower.events.push(new Link(
     "Lantern", () => {
-        const outlaws: Outlaws = GAME().outlaws;
+        //const outlaws: Outlaws = GAME().outlaws;
         return BT.towerGuardDown && !BT.stoleLantern;
     }, true,
     undefined,
     () => {
-        const outlaws: Outlaws = GAME().outlaws;
+        //const outlaws: Outlaws = GAME().outlaws;
         const parse: IParse = {
 
         };
@@ -1196,7 +1196,7 @@ BullTowerLoc.Building.Office.links.push(new Link(
     "Hall", true, true,
     undefined,
     () => {
-        const outlaws: Outlaws = GAME().outlaws;
+        //const outlaws: Outlaws = GAME().outlaws;
         MoveToLocation(BullTowerLoc.Building.Hall, {minute: 5});
         BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
     },
@@ -1462,7 +1462,7 @@ export namespace BullTowerScenes {
     export function MovingOut() {
         const player: Player = GAME().player;
         const party: Party = GAME().party;
-        const outlaws: Outlaws = GAME().outlaws;
+        //const outlaws: Outlaws = GAME().outlaws;
         const cveta: Cveta = GAME().cveta;
 
         const parse: IParse = {
@@ -1600,7 +1600,7 @@ export namespace BullTowerScenes {
     }
 
     export function GuardsWin() {
-        const outlaws: Outlaws = GAME().outlaws;
+        //const outlaws: Outlaws = GAME().outlaws;
 
         const enc  = this;
         SetGameState(GameState.Event, Gui);
@@ -1625,7 +1625,7 @@ export namespace BullTowerScenes {
     }
 
     export function GuardsLoss() {
-        const enc  = this;
+        //const enc  = this;
         SetGameState(GameState.Event, Gui);
 
         const parse: IParse = {
@@ -1640,7 +1640,7 @@ export namespace BullTowerScenes {
     }
 
     export function CorishevLoss() {
-        const enc  = this;
+        //const enc  = this;
         SetGameState(GameState.Event, Gui);
 
         const parse: IParse = {
@@ -1918,7 +1918,7 @@ export namespace BullTowerScenes {
                 Text.Add("It seems doubtful that he can take much more, and to be frank, neither can you. With a final, hard thrust, you [c][c2]. Corishev’s rectum instinctively clenches down hard about your shaft[knot], his cock simultaneously expelling the remainder of his seed. Satisfied that you’ve taught the bastard a lesson in humility, you begin the arduous task of retrieving your shaft from his ass, letting him slump off you and into the puddle of sexual fluids on the floor.", parse);
                 Text.NL();
 
-                const cum = player.OrgasmCum();
+                player.OrgasmCum();
 
                 parse.la = player.LowerArmor() ? Text.Parse(", don your [lowerarmordesc]", parse) : "";
                 Text.Add("Finally, done! You clean yourself up as best you can[la] and head for the exit, stopping along the way to pick up Corishev’s whip, still on the floor where it had been dropped. Taking care, you lock the cell behind you - best to make sure he stays in there until the rest of the guards have a chance to find him - and hurry to rejoin Cveta and Alaric. Hopefully you haven’t taken too long in administering that much-needed dose of discipline.", parse);
@@ -2285,7 +2285,7 @@ export namespace BullTowerScenes {
 
     export function EndingSlipOut() {
         const party: Party = GAME().party;
-        const outlaws: Outlaws = GAME().outlaws;
+        //const outlaws: Outlaws = GAME().outlaws;
 
         const parse: IParse = {
 

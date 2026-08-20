@@ -352,7 +352,7 @@ export namespace KiakaiSexScenes {
 					}
 					Text.NL();
 
-					const cum = player.OrgasmCum();
+					player.OrgasmCum();
 
 					const scenes = new EncounterTable();
 					scenes.AddEnc(() => {
@@ -563,7 +563,7 @@ export namespace KiakaiSexScenes {
 											Text.NL();
 											Text.Add("Unable to withstand [name]'s anal probing for long, you are soon shaking, trying to hold back the coming flood. Noticing your plight, the elf eagerly milks you, [hisher] frenzied thrusts pushing you over the edge. Unloading wads of white into [name]'s waiting maw, you lean back, riding out the wave of your orgasm.", parse);
 
-											const cum = player.OrgasmCum();
+											player.OrgasmCum();
 
 											if (player.NumCocks() > 1) {
 												Text.NL();
@@ -583,7 +583,7 @@ export namespace KiakaiSexScenes {
 											Text.Add("Shaking your head in annoyance, you rebuff [name]'s advances. You have the elf get you off with only [hisher] mouth instead. You have a hard time getting into it however, and irritably motion the elf to finish it quicker. Despite it all, you manage to get your pleasure, your cum dribbling down [name]'s throat and splattering on [hisher] [kbreasts].", parse);
 											Text.NL();
 
-											const cum = player.OrgasmCum();
+											player.OrgasmCum();
 
 											Text.Add("Troubled, you gather up your gear and prepare to continue your journey.", parse);
 											Text.Flush();
@@ -808,7 +808,7 @@ export namespace KiakaiSexScenes {
 									Text.Add(". [name]'s slender fingers reach deep inside you, stretching your sphincter[c]. Edged on by your increasingly erratic moans, [heshe] adds another digit to [hisher] pounding, spreading you even further.", parse);
 									Text.NL();
 
-									const cum = player.OrgasmCum();
+									player.OrgasmCum();
 
 									Text.Add("Before long, you groan in ecstasy as the elf's multi-pronged attentions bear fruit, drenching [hisher] pretty face in your girly juices.", parse);
 									if (player.FirstCock()) {
@@ -848,7 +848,7 @@ export namespace KiakaiSexScenes {
 							Text.Add("Growing bolder by the minute, the horny elf adds another finger to [hisher] excavation team, pressing each of them knuckle-deep inside your tunnel. Your trembling [vag] is gushing with girly juices, and lewd wet sounds come out from you at each of [hisher] thrusts.", parse);
 							Text.NL();
 
-							const cum = player.OrgasmCum();
+							player.OrgasmCum();
 
 							Text.Add("Finally, with a shuddering moan, you cum. Your [legs] squirm[notS] as you shake uncontrollably, gushing sweet nectar all around your lover's fingers.", parse);
 							if (player.FirstCock()) {
@@ -893,7 +893,7 @@ export namespace KiakaiSexScenes {
 							Text.Add("Burying [hisher] tongue in your [vag], [hisher] nose bumping up against your [clit], [name] insistently laps at your inner tunnel, coaxing an orgasm from your burning body.", parse);
 							Text.NL();
 
-							const cum = player.OrgasmCum();
+							player.OrgasmCum();
 
 							Text.Add("Moaning loudly, you unleash a gushing torrent of girly juices into the elf's waiting mouth, simultaneously letting your male endowment[s] shower [himher] with sticky spunk.", parse);
 							Text.NL();
@@ -903,7 +903,7 @@ export namespace KiakaiSexScenes {
 							Text.Add("Suddenly overwhelmed by all the options in front of [himher], [name] panics slightly. Noticing that your [cocks] [isAre] about to erupt, [heshe] ineffectually tries to hold back the flow with both hands. This only succeeds in pushing you over the edge, staining [hisher] hands in your semen.", parse);
 							Text.NL();
 
-							const cum = player.OrgasmCum();
+							player.OrgasmCum();
 
 							Text.Add("Slightly flustered, [name] attempts to focus on cleaning your [vag], trying to ignore the white strands dripping down your cock[s], landing on [hisher] nose.", parse);
 						}
@@ -1079,7 +1079,7 @@ export namespace KiakaiSexScenes {
 
 					player.AddSexExp(1);
 					kiakai.AddSexExp(1);
-					const cum = kiakai.OrgasmCum();
+					kiakai.OrgasmCum();
 
 					kiakai.subDom.IncreaseStat(0, 1);
 
@@ -1208,7 +1208,7 @@ export namespace KiakaiSexScenes {
 					Text.Add("It isn't long before your hands bring the elf to a shuddering orgasm, [hisher] tight walls clamping down on you, soaking your digits in [hisher] juices. Smiling, you pull out of [himher], giving your fingers a lick before presenting them to the elf, allowing [himher] to clean you. [name] blushes as [heshe] tastes [hisher] own girl-cum, but nonetheless cleans you meticulously.", parse);
 					Text.NL();
 
-					const cum = kiakai.OrgasmCum();
+					kiakai.OrgasmCum();
 
 					player.AddSexExp(1);
 					kiakai.AddSexExp(1);
@@ -1246,7 +1246,7 @@ export namespace KiakaiSexScenes {
 					Text.Add("Licking your lips, you withdraw from the trembling elf, a satisfied smirk on your face.", parse);
 					Text.NL();
 
-					const cum = kiakai.OrgasmCum();
+					kiakai.OrgasmCum();
 
 					Sex.Cunnilingus(player, kiakai);
 					player.Fuck(undefined, 2);
@@ -1338,7 +1338,7 @@ export namespace KiakaiSexScenes {
 						Text.Add("Its sheer size allows you to gently jerk the giant clit as if it were a dick. The stimulation is too much for [name], who cries out in [hisher] first climax not a minute after you begin your combined assault, [hisher] cock-like appendage twitching helplessly in your hand.", parse);
 						Text.NL();
 
-						const cum = kiakai.OrgasmCum();
+						kiakai.OrgasmCum();
 
 						Text.Add("Relenting, you allow the elf time to recover, releasing [hisher] clit until [hisher] trembling subsides. Your other hand, however, doesn't let up its rhythmic reaming of [name]'s [kanus].", parse);
 						Text.NL();
@@ -1350,7 +1350,7 @@ export namespace KiakaiSexScenes {
 						Text.Add("[HisHer] defenses quickly erode under your merciless dual-pronged assault, and [heshe] crosses [hisher] legs in a futile attempt to keep you at bay. The plan backfires as the motion grinds your fingers deeper into [hisher] female parts. [name] cries out and helplessly bucks [hisher] hips, riding out [hisher] climax.", parse);
 						Text.NL();
 
-						const cum = kiakai.OrgasmCum();
+						kiakai.OrgasmCum();
 
 						Text.Add("You continue to rhythmically pump the elf's [kanus] all through [hisher] orgasm, but relent and allow [hisher] [kclit] some time to recover. Once [hisher] squirming has lessened, you pry [hisher] legs apart again, sternly instructing the elf to let you lead. Blushing, [name] spreads [hisher] legs, allowing you full access.", parse);
 						Text.NL();
@@ -1911,7 +1911,7 @@ export namespace KiakaiSexScenes {
 							Text.Add("In a sudden move, you take [hisher] [kcock] into your mouth, sucking and blowing it for all you are worth. [name] cries out into your crotch, [hisher] legs trembling from intense pleasure. Your vice-like grip on [hisher] shaft prevents the poor elf from orgasming, leaving [himher] with no recourse but to attempt to thrust into your maw. You are amused by [hisher] desperate twitches, but don't relinquish your tight embrace.", parse);
 							Text.NL();
 
-							const cum = kiakai.OrgasmCum();
+							kiakai.OrgasmCum();
 
 							Text.Add("Exhausted, the elf falls back to the ground.", parse);
 							if (kiakai.HasBalls()) {
@@ -2042,7 +2042,7 @@ export namespace KiakaiSexScenes {
 							Text.Add("Really, [name] needs to be trained better than this; <i>[heshe]</i> should be the one pleasuring you, not the other way around. Climaxing or not, you're going to make [himher] work for it. You slowly gyrate your hips, reasoning that if the elf can't keep up, you'll make a concerted effort on your own.", parse);
 							Text.NL();
 
-							const cum = kiakai.OrgasmCum();
+							kiakai.OrgasmCum();
 
 							KIAI2();
 
@@ -2056,7 +2056,7 @@ export namespace KiakaiSexScenes {
 								Text.NL();
 								Text.Add("It's not long before your plans come to fruition in a sticky, sloppy mess. You possessively pat [name]'s mound before getting up, gathering your gear.", parse);
 
-								const cum = kiakai.OrgasmCum();
+								kiakai.OrgasmCum();
 
 								Text.Flush();
 
@@ -2204,14 +2204,14 @@ export namespace KiakaiSexScenes {
 							Text.Add("It's not long before [name]'s filled [kanus] constricts, and the elf's entire body shakes in pleasure. With a nudge of your [hips], you remind [himher] to return the favor. [HeShe] meekly complies, going down on your nethers with renewed vigor.", parse);
 							Text.NL();
 
-							let cum = kiakai.OrgasmCum();
+							kiakai.OrgasmCum();
 
 							KIAI2();
 
 							Text.NL();
 							Text.Add("You have barely gotten started. You resume pumping [pen] in and out of [name]. It doesn't take long before [name] is overwhelmed by another anal orgasm, yet you keep going.", parse);
 
-							cum = kiakai.OrgasmCum();
+							kiakai.OrgasmCum();
 
 							if (kiakai.FirstCock()) {
 								Text.NL();
@@ -2403,7 +2403,7 @@ export namespace KiakaiSexScenes {
 				Text.Flush();
 				player.AddLustFraction(0.1);
 
-				const cum = kiakai.OrgasmCum();
+				kiakai.OrgasmCum();
 
 				kiakai.flags.Sexed++;
 				Gui.NextPrompt(kiakai.Interact);
@@ -2952,7 +2952,7 @@ export namespace KiakaiSexScenes {
 							Text.NL();
 							Text.Add("<i>“T-too much - ngh - it is coming!”</i> [name] gasps, announcing [hisher] orgasm. You continue to ream the elf throughout [hisher] climax, causing [hisher] [cumJuices] to splatter all over the ground beneath [himher].", parse);
 
-							const cum = kiakai.OrgasmCum();
+							kiakai.OrgasmCum();
 						}
 						Text.Flush();
 
@@ -3131,7 +3131,7 @@ export namespace KiakaiSexScenes {
 							if (kiakai.FirstCock()) {
 								Text.Add("[name]'s [kcocks] [isAre] drooling cum, the thick fluid seeping out continuously rather than coming in short bursts. You'd guess [heshe] has orgasmed several times, but [hisher] body is too confused to handle the intense sensation.", parse);
 								Text.NL();
-								const cum = kiakai.OrgasmCum(3);
+								kiakai.OrgasmCum(3);
 							}
 							Text.Add("The two of you lose all sense of time, your world reduced to relishing in your carnal desires, the relentless pounding of flesh, the tingling wash of healing energy that courses through you.", parse);
 							Text.Flush();
@@ -3371,7 +3371,7 @@ export namespace KiakaiSexScenes {
 		Text.Flush();
 
 		// TODO Toys
-		const playerCock = player.BiggestCock(undefined, true);
+		//const playerCock = player.BiggestCock(undefined, true);
 		const kiaiCock   = kiakai.BiggestCock(undefined, true);
 
 		let parse: IParse = {
@@ -4125,7 +4125,7 @@ export namespace KiakaiSexScenes {
 									Text.NL();
 									Text.Add("<i>“S-sorry, [playername]!”</i> the elf moans as [heshe] unloads inside you, [hisher] seed flooding your [anus]. You think you detect a trace of... glee? That doesn't seem very much like [himher] at all...", parse);
 									Text.NL();
-									const cum = kiakai.OrgasmCum();
+									kiakai.OrgasmCum();
 									Text.Add("<i>“I am sorry, I did not want to hurt you,”</i> [name]'s voice is sweet and innocent, but you still can't shake feeling that there is a tinge of defiance in it. Probably nothing.", parse);
 									Text.NL();
 									Text.Add("<i>“You are close... let me make you feel good.”</i> Still stuck inside you, [name] begins to grind [hisher] hips slowly, urging you on. [HeShe] reaches down, using [hisher] hands to pleasure your [gen].", parse);
@@ -4153,7 +4153,7 @@ export namespace KiakaiSexScenes {
 									Text.NL();
 									Text.Add("<i>“H-hold on,”</i> you yelp, quickly rolling onto your back as [heshe] pulls out. <i>“Give it to me, I want you to soak me in your hot cum!”</i> You close your eyes as the first generous gouts of sticky liquid splatter across your body, a long strand painted straight across one of your [breasts]. The next shot goes even farther, clinging to your face. It's followed by a rapid succession of loads covering your entire body.", parse);
 									Text.NL();
-									const cum = kiakai.OrgasmCum();
+									kiakai.OrgasmCum();
 									Text.Add("When [name] is finally done hosing you down, you experimentally open an eye, peering down across your stained body. The elf has dropped down to [hisher] knees and crawled up to you, gleefully slurping up any globs of cream in [hisher] way as [heshe] dives onto your [gen]. Between [hisher] legs, you can see that [hisher] [kcock] is pulsating weakly, still drooling cum.", parse);
 									kiakai.subDom.IncreaseStat(50, 1);
 
@@ -4182,8 +4182,8 @@ export namespace KiakaiSexScenes {
 		const player: Player = GAME().player;
 		const kiakai: Kiakai = GAME().kiakai;
 
-		const playerCock = player.BiggestCock(undefined, true);
-		const kiaiCock   = kiakai.BiggestCock(undefined, true);
+		//const playerCock = player.BiggestCock(undefined, true);
+		//const kiaiCock   = kiakai.BiggestCock(undefined, true);
 
 		let parse: IParse = {
 			playername   : player.name,
@@ -4201,7 +4201,7 @@ export namespace KiakaiSexScenes {
 		Text.Add("It's not long after that your own orgasm hits, further adding to the mess of sexual fluids and sweat covering your bodies. The two of you snuggle together for a while, reveling in the afterglow of your steamy copulation.", parse);
 		Text.NL();
 
-		const cum = player.OrgasmCum();
+		player.OrgasmCum();
 
 		/*
 		Text.Add("<b>--PLACEHOLDER--</b>", parse);

@@ -253,7 +253,7 @@ export namespace BrothelScenes {
 			Text.Add("You eagerly comply, the bed squeaking and squealing from the force of your thrusts, matching the mewls and moans of the two of you. Lost in the haze of pleasure and lust that envelops you, it’s impossible to say how long you last; you only know when the molten ice of climax spikes in your brain and you cum, the maid under you shrieking loudly in orgasm as her cunt milks your newfound dick of its cream.", parse);
 			Text.NL();
 
-			const cum = player.OrgasmCum();
+			player.OrgasmCum();
 
 			Text.Add("When you have spent yourself at last, you roll limply away, your recent bedmate panting as heavily as you. Dimly, you register her huge grin of satisfaction.", parse);
 			Text.NL();

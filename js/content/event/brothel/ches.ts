@@ -53,7 +53,7 @@ export class Ches extends Entity {
 	// Flags
 
 	// Schedule
-	public IsAtLocation(location?: ILocation) {
+	public IsAtLocation(_location?: ILocation) {
 		return true;
 	}
 }

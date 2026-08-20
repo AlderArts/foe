@@ -278,7 +278,7 @@ whirlwind.castTime = 120;
 whirlwind.castTree.push(AbilityNode.Template.Magical({
 	damageType: {pSlash: 0.3, mWind: 1},
 	atkMod: 1.9,
-	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
+	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, _target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster);
 		Text.Add("[Poss] [hand]s raise a large torrent of wind, throwing things every which way. The huge whirlwind envelops the opposing party, cutting and slashing!", parse);
 		Text.NL();
@@ -296,7 +296,7 @@ eruption.castTime = 110;
 eruption.castTree.push(AbilityNode.Template.Magical({
 	damageType: {mFire: 1.2},
 	atkMod: 2.1,
-	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
+	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, _target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster);
 		Text.Add("[Name] summon[notS] a wave of fire and smoke, boiling forth from the ground. The flames envelop the opposing party!", parse);
 		Text.NL();
@@ -314,7 +314,7 @@ spread.castTime = 110;
 spread.castTree.push(AbilityNode.Template.Magical({
 	damageType: {mWater: 1.3},
 	atkMod: 2.1,
-	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
+	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, _target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster);
 		Text.Add("[Name] summon[notS] a wave of rushing water, sprouting forth from the ground. The great torrent sweeps over the opposing party!", parse);
 		Text.NL();
@@ -361,7 +361,7 @@ thunderStorm.castTime = 100;
 thunderStorm.castTree.push(AbilityNode.Template.Magical({
 	atkMod: 2.2,
 	damageType: {mThunder: 1},
-	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
+	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, _target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster);
 		Text.Add("The air tingles as [name] call[notS] on the power of thunder. Great stormclouds gather, as nature unleashes an enormous amount of pent-up energy, enveloping the opposing party in a jagged cage of electricity!", parse);
 		Text.NL();
@@ -414,7 +414,7 @@ ivy.castTime = 100;
 ivy.castTree.push(AbilityNode.Template.Magical({
 	atkMod: 2,
 	damageType: {mNature: 1.3},
-	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
+	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, _target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster);
 		Text.Add("[Name] summon[notS] a mass of writhing thorn and ivy, sprouting forth from the ground to entangle the opposing party!", parse);
 		Text.NL();
@@ -433,7 +433,7 @@ hellfire.cooldown = 3;
 hellfire.castTree.push(AbilityNode.Template.Magical({
 	atkMod: 3,
 	damageType: {mFire: 3, mDark: 3},
-	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
+	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, _target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster);
 		Text.Add("[Name] summon[notS] the most vile of magic, unleashing a sea of dark fire on [hisher] enemies!", parse);
 		Text.NL();
@@ -450,7 +450,7 @@ scream.cost = { hp: undefined, sp: 30, lp: 30 };
 scream.castTree.push(AbilityNode.Template.Magical({
 	damageType: {mWind: 0.5, pBlunt: 0.5},
 	atkMod: 2,
-	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
+	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, _target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster);
 		Text.Add("[Poss] let[notS] out a ear-splitting shriek, the sheer force of [hisher] voice rippling through the air.", parse);
 		Text.NL();
@@ -461,7 +461,7 @@ scream.castTree.push(AbilityNode.Template.Magical({
 		Text.NL();
 	}],
 	onAbsorb: [Defaults.Black._onAbsorb],
-	onMiss: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity, dmg: number) => {
+	onMiss: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity, _dmg: number) => {
 		const parse = AbilityNode.DefaultParser(caster, target);
 		Text.Add("[tName] [tis] struck by the sudden piercing screech, but manage[tnotS] to resist its effects.", parse);
 		Text.NL();
@@ -525,7 +525,7 @@ hailstorm.castTime = 100;
 hailstorm.castTree.push(AbilityNode.Template.Magical({
 	atkMod: 2.2,
 	damageType: {mIce: 1},
-	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
+	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, _target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster);
 		Text.Add("[Name] conjure[notS] up a cone of icy wind and pointed hailstones, directing it towards the enemy party!", parse);
 		Text.NL();
@@ -550,7 +550,7 @@ quake.castTime = 90;
 quake.castTree.push(AbilityNode.Template.Magical({
 	atkMod: 2,
 	damageType: {mEarth: 1},
-	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
+	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, _target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster);
 		Text.Add("Muttering under [hisher] breath and gesturing at the ground, [name] suddenly summon[notS] a small earthquake under the enemy party!", parse);
 		Text.NL();
@@ -568,7 +568,7 @@ prismaticBurst.castTime = 130;
 prismaticBurst.castTree.push(AbilityNode.Template.Magical({
 	atkMod: 1.5,
 	damageType: {mEarth: 0.5, mFire: 0.5, mIce: 0.5, mThunder: 0.5},
-	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
+	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, _target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster);
 		Text.Add("[Name] weave[notS] [hisher] [hand]s about, summoning streamers of colored light that dart towards the enemy party!", parse);
 		Text.NL();
@@ -583,7 +583,7 @@ lifetap.Short = () => "Convert one fifth of your max HP to SP. While it cannot r
 lifetap.cost = { hp: undefined, sp: undefined, lp: undefined};
 lifetap.targetMode = TargetMode.Self;
 lifetap.cooldown = 2;
-lifetap.castTree.push((ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
+lifetap.castTree.push((ability: Ability, encounter: Encounter, caster: Entity, _target: Entity) => {
 	const parse = AbilityNode.DefaultParser(caster);
 
 	const hp = Math.floor(Math.min(caster.HP() / 5, caster.curHp - 1));

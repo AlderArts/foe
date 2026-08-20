@@ -4,7 +4,7 @@
 //                                                   //
 // ***************************************************//
 
-import { GetDEBUG, GetRenderPictures, SetDEBUG, SetRenderPictures } from "../../../app";
+import { GetDEBUG, SetDEBUG } from "../../../app";
 import { GameState, isOnline, SetGameState } from "../gamestate";
 
 import { Images } from "../../assets";
@@ -84,7 +84,7 @@ function LimitedDataPrompt(backFunc: CallableFunction) {
 		GameToCache();
 		const seen: any[] = [];
 		const data = JSON.stringify(GameCache(),
-			(key, val) => {
+			(_key, val) => {
 				if (typeof val === `object`) {
 					if (seen.indexOf(val) >= 0) {
 						return;

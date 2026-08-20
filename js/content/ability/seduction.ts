@@ -286,7 +286,7 @@ stripTease.targetMode = TargetMode.Enemies;
 stripTease.castTree.push(AbilityNode.Template.Lust({
 	atkMod: 1.5,
 	damageType: {lust: 1},
-	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, target: Entity) => {
+	onCast: [(ability: Ability, encounter: Encounter, caster: Entity, _target: Entity) => {
 		const parse = AbilityNode.DefaultParser(caster);
 		parse.hips = caster.HipsDesc();
 		Text.Add("[Name] tease[notS] the enemy party, shaking [hisher] [hips]! ", parse);

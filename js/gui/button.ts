@@ -182,7 +182,7 @@ export class Button {
 		this.textKeybind.attr({text: KeyToText[key]});
 	}
 
-	public ShowKeybind(visible: boolean) {
+	public ShowKeybind(_visible: boolean) {
 	}
 
 	public SetEnabled(value: boolean) {

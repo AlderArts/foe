@@ -690,16 +690,12 @@ export namespace LaylaScenes {
 		const gwendy: Gwendy = GAME().gwendy;
 		const adrian: Adrian = GAME().adrian;
 		const layla: Layla = GAME().layla;
-		const enc = this;
+		//const enc = this;
 		SetGameState(GameState.Event, Gui);
 
 		if (party.InParty(gwendy)) {
 			party.LoadActiveParty();
 		}
-
-		const parse: IParse = {
-			playername : player.name,
-		};
 
 		Text.Clear();
 		Text.Out(`“Dammit!” you hear Gwendy curse as the creature dashes past her in a single leap. You give chase, but by the time you exit the storehouse she’s already gone.
@@ -720,7 +716,7 @@ export namespace LaylaScenes {
 
 		You nod firmly, assuring Gwendy that if you can, you’ll try and be here to help her with the next raid.
 
-		“Thanks, [playername],” the farmer says, getting up on her feet and offering you a smile. “If you want, you can stay over and I’ll call you when we spot that creature again.”
+		“Thanks, ${player.name},” the farmer says, getting up on her feet and offering you a smile. “If you want, you can stay over and I’ll call you when we spot that creature again.”
 
 		You thank Gwendy for her offer, and tell her you’ll consider it. For now, you should figure out what you want to do.`);
 		Text.Flush();
@@ -737,7 +733,7 @@ export namespace LaylaScenes {
 		const party: Party = GAME().party;
 		const gwendy: Gwendy = GAME().gwendy;
 		const layla: Layla = GAME().layla;
-		const enc = this;
+		//const enc = this;
 		SetGameState(GameState.Event, Gui);
 
 		if (party.InParty(gwendy)) {
@@ -1394,7 +1390,7 @@ export namespace LaylaScenes {
 			Text.Add("Layla’s legs grip you extra-tight, nearly crushing with her deceptive strength, while you thrust into her one last time, all the way to the hilt and watch as Layla is driven to her very first orgasm.", parse);
 			Text.NL();
 
-			const cum = layla.OrgasmCum();
+			layla.OrgasmCum();
 
 			Text.Add("It doesn’t last long, as Layla soon grows lax, relaxing her legs and tail. You break the kiss and let her pant, catching her breath. Gently, you stroke her hair as the scent of sex fills the air, a delightful aroma that makes you want to a reach a climax of your own… but you’ll have plenty of time to pursue that later.", parse);
 			Text.NL();
@@ -3204,7 +3200,7 @@ export namespace LaylaScenes {
 			Text.Add("You can feel your heart pounding with arousal as you watch Layla mewling and writhing under your ministrations. You may not be getting quite the same pleasure out of this that she is, but the show is certainly worth it! On that thought, you redouble your efforts, determined to push the teetering chimera cleanly over the brink of her restraint.", parse);
 			Text.NL();
 
-			const cum = layla.OrgasmCum();
+			layla.OrgasmCum();
 
 			Text.Add("Inevitably, Layla can’t hold out, and her short, sharp gasps of pleasure give way to a full-throated scream of ecstasy. Her cunt latches onto your precious strap-on with such ferocity that, for a moment, you almost fear she’s going to break it.", parse);
 			if (opts.LCock) {
@@ -3255,7 +3251,7 @@ export namespace LaylaScenes {
 					Text.Add("When Layla deftly tweaks your [clit] between her fingers, your meager wall of resistance crumbles. Your cunt clenches down around the chimera’s digits with all your might, spots flashing in the darkness of your screwed shut eyes as you cum.", parse);
 					Text.NL();
 
-					const cum = player.OrgasmCum();
+					player.OrgasmCum();
 
 					Text.Add("A great mewl of pleasure bursts from your lips, trailing away into a sigh of relief as the intense pleasure dwindles to the warmth of afterglow. Your body goes limp, causing you to slump gently against Layla’s shoulder for support. With a languid purr of pleasure, you open your eyes and congratulate Layla on her talents - that was just what you needed.", parse);
 					Text.NL();
@@ -3289,7 +3285,7 @@ export namespace LaylaScenes {
 					Text.Add("Sparks flash in front of your eyes as you feel a strange fluttering deep inside your belly. Looks like that’s answered your question - Layla’s tongue has reached all the way to your cervix! You... oh, gods, you can’t - can’t!", parse);
 					Text.NL();
 
-					const cum = player.OrgasmCum();
+					player.OrgasmCum();
 
 					Text.Add("You squeal in pleasure as the fluttering sensation finally proves too much to resist. Your tunnel grips the gently flicking tongue as hard as it can, squeezing the soft, squishy flesh as your cum pours down its length. Layla does her best to swallow, but with her tongue trapped inside of you more of your honey pours over her cheeks than goes down her throat.", parse);
 					Text.NL();
@@ -3407,7 +3403,7 @@ export namespace LaylaScenes {
 					Text.Add("With the final pair, Layla nuzzles your [clit] with one, immediately beginning to vibrate it while the other doing likewise as it enters your wet [vag]. You arch your back in shock, crying out around your impromptu gag; this is, is beyond anything any human lover could do to you! You, you can’t hold on!", parse);
 					Text.NL();
 
-					const cum = player.OrgasmCum();
+					player.OrgasmCum();
 
 					Text.Add("You doubt you’d have been able to hold out against the chimera’s perverse assault if you had been fresh; in your current state, you cum like a bomb. You can’t remember the last time you came this hard; all your senses locked in wave after wave of mind-scrambling bliss as your body spasms again, and again...", parse);
 					Text.NL();
@@ -3438,7 +3434,7 @@ export namespace LaylaScenes {
 			Text.NL();
 			Text.Add("Her blue cock visibly pulsates, throbbing madly with her pleasure before it distends and erupts in a sympathetic male orgasm. Great arcs of chimera seed soar through the air, painting ropes of off-white all over her belly and breasts. Some even shoots so far as to spatter onto her face and into her gaping mouth, prompting her tongue to whip out and lap her face clean.", parse);
 
-			const cum = layla.OrgasmCum();
+			layla.OrgasmCum();
 
 			opts.CummyL = true;
 		}
@@ -3447,7 +3443,7 @@ export namespace LaylaScenes {
 			Text.Add("The quivering sensation between your clenching buttocks is the only warning you get before Layla’s tail drives itself home in a single sharp thrust, shooting forward so powerfully that she buries all of her cock and even a few inches of tail-meat inside of you.", parse);
 			Text.NL();
 
-			const cum = layla.OrgasmCum();
+			layla.OrgasmCum();
 
 			Text.Add("You can feel your prostate being mercilessly ground under her invading member, but that pales in comparison to the explosion of liquid warmth that rushes inside of you. Layla’s tail spews a veritable geyser of pseudo-seed into your innards, the cascade of cream rushing up into your depths through sheer force; you can actually feel it fizzing around inside your stomach.", parse);
 			Text.NL();

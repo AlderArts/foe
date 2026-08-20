@@ -117,8 +117,8 @@ export class Cveta extends Entity {
 	}
 
 	// Schedule TODO
-	public IsAtLocation(location?: ILocation) {
-		location = location || GAME().party.location;
+	public IsAtLocation(_location?: ILocation) {
+		//location = location || GAME().party.location;
 		return true;
 	}
 

@@ -492,7 +492,7 @@ export namespace EstevanScenes {
 						Text.Add("There is a vast amount of cum inside you between the leftovers of Estevan’s first orgasm and the heavy volume of his second. You can feel it pressing up into your bowels. There’s no chance of alleviating the pressure either with Estevan still fucking your sloppy hole. Both the fullness of your gut and the feeling of Estevan trampling your prostate trigger your own release.", parse);
 						Text.NL();
 
-						const cum = player.OrgasmCum();
+						player.OrgasmCum();
 
 						Text.Add("You shower the ground in front of you with your seed, slightly amazed by how hard you’re shooting. Meanwhile Estevan whoops and growls as your tensing anus coaxes yet more cum out of his still-throbbing prick.", parse);
 						Text.NL();
@@ -705,7 +705,7 @@ export namespace EstevanScenes {
 						Text.Add("You give him a warning, but your load arrives hot and fast. You blast your first shot up over Estevan’s head, but the second lands square on his forehead and the thick cum slides down over the bridge of his nose. You push your erupting prick[s] right up to the satyr’s face and dump your hot cum right on his skin. The pleasure of your orgasm is intense, but the real satisfaction comes out of seeing the smirking satyr take a hot cum skin treatment straight from your engorged cock[s].", parse);
 						Text.NL();
 
-						let cum = player.OrgasmCum();
+						player.OrgasmCum();
 
 						Text.Add("He licks the thick spooge off of his lips while you pant and come down from your sexual high. His hands are busy between his legs, one jerking his fat organ and the other disappearing into his prised-open fuckhole. The satyr’s member spurts more pre-cum by the second and he repurposes it as lube to coat his swollen head.", parse);
 						Text.NL();
@@ -714,7 +714,7 @@ export namespace EstevanScenes {
 						Text.Add("Estevan twitches and contorts in pleasure as his cock produces a veritable shower of spunk. The wild, directionless torrent ends up everywhere including your [armor]. When it almost seems that Estevan won’t stop cumming, he starts to jerk his dick and the flood of semen slows to a trickle. He sighs and lets go of himself, but his still-hard rod continues to leak into the dirt.", parse);
 						Text.NL();
 
-						cum = estevan.OrgasmCum();
+						estevan.OrgasmCum();
 
 						Text.Add("<i>“Usually I’m on the other side of this equation,”</i> Estevan jokes. <i>“Maybe I’ll have more empathy for the poor souls who have to wash my cum out of their hair?”</i> He ponders the proposition for a while, then shrugs. <i>Nah…”</i>", parse);
 						Gui.PrintDefaultOptions();

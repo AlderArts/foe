@@ -1,6 +1,5 @@
 import * as _ from "lodash";
 
-import { Gender } from "../../engine/entity/body/gender";
 import { Race, RaceDesc } from "../../engine/entity/body/race";
 import { Entity } from "../../engine/entity/entity";
 import { Womb } from "../../engine/entity/pregnancy";

@@ -279,7 +279,7 @@ export namespace LagonScenes {
             Text.Add("You can’t wait to wrap your lips around the lapin king’s magnificent cock and drink up every drop of his royal seed. Trying to make your voice as sultry as you can, you beg Lagon for permission to relieve his stress with your mouth, your eyes locked on your prize.", parse);
         }
         Text.NL();
-        let messy = false;
+        //let messy = false;
         if (lagon.Relation() < 0) {
             Text.Add("<i>“By all means,”</i> he replies in a bored voice. <i>“You’ll have to wait your turn though.”</i> He caresses his daughter’s head fondly, coaxing her to swallow more and more of his length. <i>“Come here,”</i> he idly waves you over, pointing at the base of his throne. <i>“Kneel while in attendance to your king.”</i>", parse);
             Text.NL();
@@ -296,7 +296,7 @@ export namespace LagonScenes {
             Text.Add("<i>“Let’s see if you can match my daughter, traveler,”</i> Lagon grins down at you. <i>“Somehow, I doubt it. Don’t make me fall asleep now.”</i> His cock twitches in your grip as he shifts in his seat.", parse);
 
             player.subDom.DecreaseStat(-30, 1);
-            messy = true;
+            //messy = true;
         } else if (lagon.Relation() < 50) {
             Text.Add("<i>“Not quite what I had in mind, but it’ll have to do,”</i> Lagon jests. He gives his daughter a pat on the head. <i>“You, run off now. Don’t pout like that, you can sit on daddy’s cock after I’m done with this one.”</i> She steals one last lick of pre before hopping away, letting you have a go at her father’s glistening shaft.", parse);
             Text.NL();
@@ -1987,10 +1987,6 @@ export namespace LagonScenes {
     }
 
     export function Usurp(toolate: boolean) {
-        const parse: IParse = {
-
-        };
-
         const enemy = new Party();
         const lagonMob = new LagonRegular(true);
         enemy.AddMember(lagonMob);
@@ -2116,7 +2112,7 @@ export namespace LagonScenes {
         SetGameState(GameState.Event, Gui);
 
         const enc: UsurpEncounter = this;
-        const toolate = enc.toolate;
+        //const toolate = enc.toolate;
         const scepter = party.Inv().QueryNum(QuestItems.Scepter);
 
         const parse: IParse = {
@@ -2165,7 +2161,7 @@ export namespace LagonScenes {
         SetGameState(GameState.Event, Gui);
 
         const enc: UsurpEncounter = this;
-        const toolate = enc.toolate;
+        //const toolate = enc.toolate;
         const scepter = party.Inv().QueryNum(QuestItems.Scepter);
 
         const parse: IParse = {
@@ -2259,7 +2255,7 @@ export namespace LagonScenes {
         const player: Player = GAME().player;
 
         SetGameState(GameState.Event, Gui);
-        const enc: UsurpEncounter = this;
+        //const enc: UsurpEncounter = this;
 
         const parse: IParse = {
             cocks() { return player.MultiCockDesc(); },

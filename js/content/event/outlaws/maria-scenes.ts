@@ -847,7 +847,7 @@ export namespace MariaScenes {
                         maria.FuckVag(maria.FirstVag(), player.FirstCock(), 3);
                         player.Fuck(player.FirstCock(), 3);
 
-                        const cum = player.OrgasmCum();
+                        player.OrgasmCum();
 
                         if (player.FirstVag()) {
                             Text.Add(" Your [vag] clenches in sympathy, and clear girl-cum runs down your [legs].", parse);
@@ -874,7 +874,7 @@ export namespace MariaScenes {
                             Text.Add(" Bumping your clit against Maria's again, you slide down and slip your [clit] between her folds. Hot lust bubbles up in your body, and your cunny starts convulsing as you cum hard on the archer-woman's rosy folds.", parse);
                             Text.NL();
 
-                            const cum = player.OrgasmCum();
+                            player.OrgasmCum();
                             player.AddSexExp(3);
                             maria.AddSexExp(3);
                         }

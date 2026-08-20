@@ -61,7 +61,7 @@ export class IntroDemon extends BossEntity {
 		this.RestFull();
 	}
 
-	public Act(encounter: ICombatEncounter, activeChar: ICombatOrder) {
+	public Act(encounter: ICombatEncounter, _activeChar: ICombatOrder) {
 		// TODO: More actions (rand 'em)
 
 		this.turnCounter++;

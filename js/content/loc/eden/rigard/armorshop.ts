@@ -99,7 +99,7 @@ export namespace ArmorShopScenes {
 	}
 
 	export function CreateShop() {
-		const buySuccessFunc = (item: Item, cost: number, num: number) => {
+		const buySuccessFunc = (_item: Item, _cost: number, _num: number) => {
 			const player: Player = GAME().player;
 			const parse: IParse = {
 				sirmadam : player.mfTrue("sir", "madam"),
@@ -115,7 +115,7 @@ export namespace ArmorShopScenes {
 
 			Text.NL();
 		};
-		const buyFailFunc = (item: Item, cost: number, bought: boolean) => {
+		const buyFailFunc = (_item: Item, _cost: number, bought: boolean) => {
 			const player: Player = GAME().player;
 			const parse: IParse = {
 				sirmadam : player.mfTrue("sir", "madam"),
@@ -194,7 +194,7 @@ export namespace ArmorShopScenes {
 
 				Text.NL();
 			},
-			sellSuccessFunc(item: Item, cost: number, num: number) {
+			sellSuccessFunc(_item: Item, _cost: number, _num: number) {
 				const player: Player = GAME().player;
 				const parse: IParse = {
 					sirmadam : player.mfTrue("sir", "madam"),
@@ -216,7 +216,7 @@ export namespace ArmorShopScenes {
 
 				Text.NL();
 			},
-			sellFailFunc(item: Item, cost: number, sold: boolean) {
+			sellFailFunc(item: Item, _cost: number, sold: boolean) {
 				const player: Player = GAME().player;
 				const parse: IParse = {
 					sirmadam : player.mfTrue("sir", "madam"),
