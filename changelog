@@ -21,6 +21,8 @@ Version 0.5.7
 * Various behind-the-scenes refactoring of old code.
 * Re-renamed Trap body type to Femboy.
 
+* QoL developer stuff: Upgraded toolchain to TS6+eslint+vitest+webpack5, resolving dependency vulnerabilities.
+
 --------------------------------------------
              PREVIOUS VERSIONS
 --------------------------------------------
