@@ -70,7 +70,7 @@ export class Breasts extends BodyPart {
 	}
 	public noun() {
 		const size = this.size.Get();
-		const nouns = new Array();
+		const nouns = [];
 		if (size <= 2) { nouns.push("pec"); }
 		nouns.push("breast");
 		if (size >= 3) {
@@ -92,7 +92,7 @@ export class Breasts extends BodyPart {
 	}
 	public nounPlural() {
 		const size = this.size.Get();
-		const nouns = new Array();
+		const nouns = [];
 		if (size <= 2) { nouns.push("pecs"); }
 		nouns.push("breasts");
 		if (size >= 3) {

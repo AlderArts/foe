@@ -3,10 +3,12 @@ import { gameState, GameState } from "../engine/gamestate";
 import { Button } from "./button";
 
 // Internal logical representations
+/*
 const LEFT_ARROW  = 0;
 const RIGHT_ARROW = 1;
 const UP_ARROW    = 2;
 const DOWN_ARROW  = 3;
+*/
 
 let Gui: any;
 let buttonSet: RaphaelSet;

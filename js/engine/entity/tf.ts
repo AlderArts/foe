@@ -55,7 +55,7 @@ export namespace TF {
 	}
 
 	export function SetRaceAll(bodypart: BodyPart|BodyPart[], race: RaceDesc) {
-		let changed: any = Effect.Unchanged;
+		let changed: Effect|boolean = Effect.Unchanged;
 		if (_.isArray(bodypart)) {
 			const list = [];
 			for (const bp of bodypart) {
@@ -194,12 +194,18 @@ export namespace TF {
 		race: RaceDesc;
 		str: string;
 		count: number;
+		color?: Color;
 	}
 
 	interface IItemEffectsModStat {
 		odds: number;
 		ideal: number;
 		max: number;
+	}
+
+	interface IItemEffectsRem {
+		count: number;
+		odds?: number;
 	}
 
 	interface IItemEffectsModStatMulti extends IItemEffectsModStat {
@@ -286,7 +292,7 @@ export namespace TF {
 			let changed = Effect.Unchanged;
 			const parse   = { Poss: target.Possessive(), str: opts.str };
 			const odds    = opts.odds || 1;
-			const count   = opts.count || 2;
+			//const count   = opts.count || 2;
 			const legs    = target.body.legs;
 			if (legs.count >= 2 && Math.random() < odds) {
 				changed = TF.SetRaceOne(legs, opts.race);
@@ -413,7 +419,7 @@ export namespace TF {
 		}
 
 		// odds, race, str, color
-		export function SetTail(target: Entity, opts: any) {
+		export function SetTail(target: Entity, opts: IItemEffectsOpts) {
 			let changed = Effect.Unchanged;
 			const parse   = { name: target.NameDesc(), Poss: target.Possessive(), s: target === GAME().player ? "" : "s", str: opts.str };
 
@@ -436,7 +442,7 @@ export namespace TF {
 		}
 
 		// odds, count
-		export function RemTail(target: Entity, opts: any) {
+		export function RemTail(target: Entity, opts: IItemEffectsRem) {
 			let changed = Effect.Unchanged;
 			const tail    = target.HasTail();
 			const parse: IParse = { name: target.NameDesc(), Poss: target.Possessive(), count: Text.NumToText(opts.count), hisher: target.hisher() };
@@ -460,7 +466,7 @@ export namespace TF {
 		}
 
 		// odds, race, str, color, count
-		export function SetHorn(target: Entity, opts: any) {
+		export function SetHorn(target: Entity, opts: IItemEffectsOpts) {
 			let changed = Effect.Unchanged;
 			const parse   = { name: target.NameDesc(), Poss: target.Possessive(), s: target === GAME().player ? "" : "s", str: opts.str };
 
@@ -483,7 +489,7 @@ export namespace TF {
 		}
 
 		// odds, count
-		export function RemHorn(target: Entity, opts: any) {
+		export function RemHorn(target: Entity, opts: IItemEffectsRem) {
 			let changed = Effect.Unchanged;
 			const parse   = { name: target.NameDesc(), Poss: target.Possessive(), count: Text.NumToText(opts.count), hisher: target.hisher() };
 			const odds    = opts.odds || 1;
@@ -505,7 +511,7 @@ export namespace TF {
 		}
 
 		// odds, race, str, color, count
-		export function SetAntenna(target: Entity, opts: any) {
+		export function SetAntenna(target: Entity, opts: IItemEffectsOpts) {
 			let changed = Effect.Unchanged;
 			const parse   = { name: target.NameDesc(), Poss: target.Possessive(), s: target === GAME().player ? "" : "s", str: opts.str };
 
@@ -529,7 +535,7 @@ export namespace TF {
 		}
 
 		// odds, count
-		export function RemAntenna(target: Entity, opts: any) {
+		export function RemAntenna(target: Entity, opts: IItemEffectsRem) {
 			let changed = Effect.Unchanged;
 			const parse   = { name: target.NameDesc(), Poss: target.Possessive(), count: Text.NumToText(opts.count), hisher: target.hisher() };
 			const odds    = opts.odds || 1;
@@ -551,7 +557,7 @@ export namespace TF {
 		}
 
 		// odds, race, str, color, count
-		export function SetWings(target: Entity, opts: any) {
+		export function SetWings(target: Entity, opts: IItemEffectsOpts) {
 			let changed = Effect.Unchanged;
 			const parse   = { name: target.NameDesc(), Poss: target.Possessive(), s: target === GAME().player ? "" : "s", str: opts.str };
 
@@ -575,7 +581,7 @@ export namespace TF {
 		}
 
 		// odds, count
-		export function RemWings(target: Entity, opts: any) {
+		export function RemWings(target: Entity, opts: IItemEffectsRem) {
 			let changed = Effect.Unchanged;
 			const parse   = { name: target.NameDesc(), Poss: target.Possessive(), count: Text.NumToText(opts.count), hisher: target.hisher() };
 			const odds    = opts.odds || 1;
@@ -597,7 +603,7 @@ export namespace TF {
 		}
 
 		// odds, race, str, color, count
-		export function SetAbdomen(target: Entity, opts: any) {
+		export function SetAbdomen(target: Entity, opts: IItemEffectsOpts) {
 			let changed = Effect.Unchanged;
 			const parse   = { name: target.NameDesc(), Poss: target.Possessive(), s: target === GAME().player ? "" : "s", str: opts.str };
 
@@ -621,7 +627,7 @@ export namespace TF {
 		}
 
 		// odds, count
-		export function RemAbdomen(target: Entity, opts: any) {
+		export function RemAbdomen(target: Entity, opts: IItemEffectsRem) {
 			let changed = Effect.Unchanged;
 			const parse   = { name: target.NameDesc(), Poss: target.Possessive(), count: Text.NumToText(opts.count), hisher: target.hisher() };
 			const odds    = opts.odds || 1;

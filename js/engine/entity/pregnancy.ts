@@ -11,6 +11,7 @@ import { Sex } from "./entity-sex";
 import { IStorage } from "./istorage";
 import { Perks } from "./perks";
 import { Stat } from "./stat";
+import type { Entity } from "./entity";
 
 // Progress
 export enum PregnancyLevel {
@@ -23,8 +24,8 @@ export enum PregnancyLevel {
 
 export class Womb {
 	public litterSize: number;
-	public father: any;
-	public mother: any;
+	public father: string;
+	public mother: string;
 	public race: RaceDesc;
 	public pregnant: boolean;
 	public progress: number;
@@ -97,12 +98,12 @@ const PHSlot = {
 };
 
 export class PregnancyHandler {
-	public entity: any;
+	public entity: Entity;
 	public gestationRate: Stat;
 	public fertility: Stat;
 	public mpreg: boolean;
 
-	constructor(entity: any, storage?: any) {
+	constructor(entity: Entity, storage?: any) {
 		this.entity = entity;
 
 		this.gestationRate = new Stat(1);

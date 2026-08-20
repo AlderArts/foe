@@ -33,17 +33,17 @@ export class Job {
 		this.abilities = new AbilityCollection("Job"); // Contains abilities available when job is used
 	}
 
-	public Short(entity: Entity) {
+	public Short(_entity: Entity) {
 		return this.name;
 	}
-	public Long(entity: Entity) {
+	public Long(_entity: Entity) {
 		return this.name;
 	}
-	public Unlocked(entity?: Entity) {
+	public Unlocked(_entity?: Entity) {
 		return true;
 	}
 
-	public AddExp(entity: Entity, exp?: number, reserve?: boolean) {
+	public AddExp(entity: Entity, exp?: number, _reserve?: boolean) {
 		// Check for undefined arguments and broken links
 		if (entity === undefined) { return; }
 		const jd: JobDesc = entity.jobs[this.name];
@@ -300,7 +300,7 @@ Jobs.Acolyte.levels.push(new JobLevel(640, [{ab: Abilities.White.Empower, set: "
 
 // Cveta specific
 Jobs.Songstress = new Job("Songstress");
-Jobs.Songstress.Long = (entity: Entity) => {
+Jobs.Songstress.Long = (_entity: Entity) => {
 	const parse: IParse = {};
 	return Text.Parse("All may practice hard, but some gifts are inborn and cannot be imparted through teaching. The Songstress uses the strange, magical qualities of her voice to sway the tides of battle.", parse);
 };
@@ -373,7 +373,7 @@ Jobs.Ranger.Long = (entity: Entity) => {
 	const parse: IParse = {hisher: entity.hisher(), HeShe: entity.HeShe(), name: entity.nameDesc(), is: entity.is()};
 	return Text.Parse("As a ranger, [name] [is] a skilled hunter, well versed in ways to ensnare and distract [hisher] prey.", parse);
 };
-Jobs.Ranger.Unlocked = (entity: Entity) => {
+Jobs.Ranger.Unlocked = (_entity: Entity) => {
 	const estevan = GAME().estevan;
 	const maria = GAME().maria;
 	if (estevan.flags.Ranger >= EstevanFlags.Ranger.Taught) { return true; }
@@ -399,7 +399,7 @@ Jobs.Squire.Long = (entity: Entity) => {
 	// TODO Desc
 	return Text.Parse("Tank", parse);
 };
-Jobs.Squire.Unlocked = (entity: Entity) => {
+Jobs.Squire.Unlocked = (_entity: Entity) => {
 	return false; // TODO Trainer
 };
 Jobs.Squire.preqs.push({job : Jobs.Fighter, lvl : 3});
@@ -435,7 +435,7 @@ Jobs.Mage.levels.push(new JobLevel(160,  undefined, {int : 0.2, cha : 0.1}));
 Jobs.Mage.levels.push(new JobLevel(320,  [{ab: Abilities.Black.Freeze, set: "Spells"}], {int : 0.2, dex : 0.1}));
 Jobs.Mage.levels.push(new JobLevel(640,  [{ab: Abilities.White.Dispel, set: "Support"}], {int : 0.1, spi : 0.2}));
 Jobs.Mage.levels.push(new JobLevel(1280, [{ab: Abilities.Black.Bolt, set: "Spells"}, {ab: Abilities.Black.Eruption, set: "Spells"}], {int : 0.4, spi : 0.1, sp : 5}));
-Jobs.Mage.Unlocked = (entity: Entity) => {
+Jobs.Mage.Unlocked = (_entity: Entity) => {
 	return GlobalScenes.MagicStage1();
 };
 
@@ -458,7 +458,7 @@ Jobs.Mystic.levels.push(new JobLevel(160,  [{ab: Abilities.White.Purify, set: "S
 Jobs.Mystic.levels.push(new JobLevel(320,  [{ab: Abilities.Black.Spire, set: "Spells"}], {int : 0.2, str : 0.1}));
 Jobs.Mystic.levels.push(new JobLevel(640,  [{ab: Abilities.Black.Gust, set: "Spells"}], {int : 0.1, lib : 0.2}));
 Jobs.Mystic.levels.push(new JobLevel(1280, [{ab: Abilities.Black.Venom, set: "Spells"}, {ab: Abilities.Black.Stalagmite, set: "Spells"}], {spi : 0.4, sta : 0.1}));
-Jobs.Mystic.Unlocked = (entity: Entity) => {
+Jobs.Mystic.Unlocked = (_entity: Entity) => {
 	return GlobalScenes.MagicStage1();
 };
 
@@ -478,7 +478,7 @@ Jobs.Healer.levels.push(new JobLevel(160,  undefined, {spi : 0.2, int : 0.1}));
 Jobs.Healer.levels.push(new JobLevel(320,  [{ab: Abilities.White.Cleanse, set: "Support"}], {int : 0.3}));
 Jobs.Healer.levels.push(new JobLevel(640,  undefined, {cha : 0.2, sta : 0.1}));
 Jobs.Healer.levels.push(new JobLevel(1280, [{ab: Abilities.White.Recover, set: "Support"}, {ab: Abilities.White.Raise, set: "Support"}], {spi : 0.4, int : 0.1, sp : 5}));
-Jobs.Healer.Unlocked = (entity: Entity) => {
+Jobs.Healer.Unlocked = (_entity: Entity) => {
 	return GlobalScenes.MagicStage1();
 };
 
@@ -524,7 +524,7 @@ Jobs.Elementalist.levels.push(new JobLevel(320,  undefined, {spi : 0.2, sta : 0.
 Jobs.Elementalist.levels.push(new JobLevel(640,  [{ab: Abilities.Black.Hailstorm, set: "Spells"}], {int : 0.4}));
 Jobs.Elementalist.levels.push(new JobLevel(1280, undefined, {dex : 0.1, sta : 0.1, spi : 0.2}));
 Jobs.Elementalist.levels.push(new JobLevel(2560, [{ab: Abilities.Black.Quake, set: "Spells"}, {ab: Abilities.Black.PrismaticBurst, set: "Spells"}], {int : 0.5, spi : 0.2, sp : 5}));
-Jobs.Elementalist.Unlocked = (entity: Entity) => {
+Jobs.Elementalist.Unlocked = (_entity: Entity) => {
 	return GlobalScenes.MagicStage2();
 };
 
@@ -545,7 +545,7 @@ Jobs.Warlock.levels.push(new JobLevel(320,  undefined, {lib : 0.2, sta : 0.2}));
 Jobs.Warlock.levels.push(new JobLevel(640,  [{ab: Abilities.Black.DrainingTouch, set: "Spells"}], {int : 0.3, str : 0.1}));
 Jobs.Warlock.levels.push(new JobLevel(1280, undefined, {spi : 0.3, sta : 0.1}));
 Jobs.Warlock.levels.push(new JobLevel(2560, [{ab: Abilities.Black.EntropicFortune, set: "Spells"}, {ab: Abilities.Black.TaintedVitality, set: "Spells"}], {int : 0.3, sta : 0.3, spi : 0.1, sp : 5}));
-Jobs.Warlock.Unlocked = (entity: Entity) => {
+Jobs.Warlock.Unlocked = (_entity: Entity) => {
 	return GlobalScenes.MagicStage2();
 };
 
@@ -567,7 +567,7 @@ Jobs.Hypnotist.levels.push(new JobLevel(320,  undefined, {cha : 0.3, int : 0.1})
 Jobs.Hypnotist.levels.push(new JobLevel(640,  [{ab: Abilities.Seduction.SIllusion, set: "Support"}], {spi : 0.2, lib : 0.2}));
 Jobs.Hypnotist.levels.push(new JobLevel(1280, undefined, {int : 0.1, cha : 0.3}));
 Jobs.Hypnotist.levels.push(new JobLevel(2560, [{ab: Abilities.Seduction.Confuse, set: "Support"}, {ab: Abilities.Seduction.Allure, set: "Support"}], {cha : 0.3, lib : 0.3, int : 0.2, lp : 5}));
-Jobs.Hypnotist.Unlocked = (entity: Entity) => {
+Jobs.Hypnotist.Unlocked = (_entity: Entity) => {
 	return GlobalScenes.MagicStage2();
 };
 
@@ -589,7 +589,7 @@ Jobs.Eromancer.levels.push(new JobLevel(320,  undefined, {str : 0.2}));
 Jobs.Eromancer.levels.push(new JobLevel(640,  undefined, {str : 0.2}));
 Jobs.Eromancer.levels.push(new JobLevel(1280, undefined, {str : 0.2}));
 Jobs.Eromancer.levels.push(new JobLevel(2560, undefined, {str : 0.2}));
-Jobs.Eromancer.Unlocked = (entity: Entity) => {
+Jobs.Eromancer.Unlocked = (_entity: Entity) => {
 	return GlobalScenes.MagicStage2();
 };
 
@@ -611,7 +611,7 @@ Jobs.RunicKnight.levels.push(new JobLevel(320,  undefined, {str : 0.2}));
 Jobs.RunicKnight.levels.push(new JobLevel(640,  undefined, {str : 0.2}));
 Jobs.RunicKnight.levels.push(new JobLevel(1280, undefined, {str : 0.2}));
 Jobs.RunicKnight.levels.push(new JobLevel(2560, undefined, {str : 0.2}));
-Jobs.RunicKnight.Unlocked = (entity: Entity) => {
+Jobs.RunicKnight.Unlocked = (_entity: Entity) => {
 	return GlobalScenes.MagicStage2();
 };
 

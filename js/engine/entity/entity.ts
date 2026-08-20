@@ -41,6 +41,8 @@ import { Perk, PerkIds } from "./perks";
 import { PregnancyHandler, Womb } from "./pregnancy";
 import { Stat } from "./stat";
 
+import type { Party } from "../navigation/party";
+
 export enum DrunkLevel {
 	Sober   = 0.25,
 	Tipsy   = 0.50,
@@ -84,7 +86,7 @@ export interface ICombatOrder {
 
 export interface ICombatEncounter {
 	combatOrder: ICombatOrder[];
-	enemy: any;
+	enemy: Party;
 	GetLivePartyArray: () => any;
 	GetLiveEnemyArray: () => any;
 	CombatTick: () => void;
@@ -319,7 +321,7 @@ export class Entity {
 		this.GroupName    = undefined;
 		this.ID           = undefined;
 		// Titles are achieved by performing feats or by achieving great strength
-		this.title        = new Array();
+		this.title        = [];
 
 		this.avatar       = {};
 
@@ -802,7 +804,7 @@ export class Entity {
 	}
 
 	// TODO Structure
-	public FinishCastInternal(ability: any, encounter: any, caster: any, targets: any) {
+	public FinishCastInternal(_ability: any, encounter: any, _caster: any, _targets: any) {
 		Text.Flush();
 
 		if (encounter) {
@@ -813,7 +815,7 @@ export class Entity {
 	}
 
 	// Can be overrided to allow for selective cancellation
-	public CanBeInterrupted(ability: any, encounter: any, caster: any, result: any) {
+	public CanBeInterrupted(_ability: any, _encounter: any, _caster: any, _result: any) {
 		return true;
 	}
 
@@ -2656,7 +2658,7 @@ export class Entity {
 		return c;
 	}
 	public NipplesThatFitLen(capacity: number) {
-		const ret = new Array();
+		const ret = [];
 		for (let i = 0, j = this.body.breasts.length; i < j; i++) {
 			const row = this.body.breasts[i];
 			if (row.nippleType === NippleType.lipple ||
@@ -2671,7 +2673,7 @@ export class Entity {
 
 	public AllOrfices(capacity?: number) {
 		capacity = capacity || 0;
-		const ret = new Array();
+		const ret = [];
 
 		const vags = this.VagsThatFit(capacity);
 		for (let i = 0, j = vags.length; i < j; i++) {
@@ -2692,7 +2694,7 @@ export class Entity {
 	}
 
 	public AllPenetrators(orifice: Orifice) {
-		const ret = new Array();
+		const ret = [];
 
 		const cocks = this.CocksThatFit(orifice);
 		for (let i = 0, j = cocks.length; i < j; i++) {
@@ -2703,14 +2705,14 @@ export class Entity {
 		return ret;
 	}
 
-	public Fuck(cock: Cock, expMult?: number) {
+	public Fuck(_cock: Cock, expMult?: number) {
 		expMult = expMult || 1;
 		this.AddSexExp(expMult);
 		// TODO: Stretch
 	}
 
 	// Fuck entitys mouth (vag, cock)
-	public FuckOral(mouth: IMouth, cock: Cock, expMult?: number) {
+	public FuckOral(_mouth: IMouth, _cock: Cock, expMult?: number) {
 		expMult = expMult || 1;
 		this.AddSexExp(expMult);
 		// TODO: Stretch

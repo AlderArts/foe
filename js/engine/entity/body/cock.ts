@@ -234,7 +234,7 @@ export class Cock extends BodyPart {
 		const noun    = this.noun();
 		const knotted = this.Knot() ? ", knotted" : "";
 		const sheath  = this.Sheath() ? ", sheathed" : "";
-		return desc.adj + knotted + sheath + " " + this.race.Short(Gender.male) + " " + this.noun() + ", " + desc.len + " long and " + desc.thickness + " thick";
+		return desc.adj + knotted + sheath + " " + this.race.Short(Gender.male) + " " + noun + ", " + desc.len + " long and " + desc.thickness + " thick";
 	}
 
 }

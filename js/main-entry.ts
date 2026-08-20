@@ -12,7 +12,7 @@ import { SplashScreen } from "./main-splash";
 function EntryPoint() {
 	try {
 		setOnline(localStorage ? true : false);
-	} catch (ex) {
+	} catch {
 		setOnline(false);
 	} finally {
 		// Setup the application

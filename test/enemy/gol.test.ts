@@ -1,9 +1,9 @@
 import * as _ from "lodash";
 
 import { describe, it, expect } from "vitest";
-import { GolQueen, GolScenes } from "../../js/content/enemy/gol";
-import { CacheToGame } from "../../js/engine/gamecache";
-import { Gui } from "../../js/gui/gui";
+import { GolQueen /*, GolScenes */ } from "../../js/content/enemy/gol";
+//import { CacheToGame } from "../../js/engine/gamecache";
+//import { Gui } from "../../js/gui/gui";
 
 describe("GolQueen", () => {
 	it("can be instantiated", () => {

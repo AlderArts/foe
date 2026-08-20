@@ -353,7 +353,7 @@ export class Party {
 		}
 
 		SetGameState(GameState.Game, Gui);
-		const list = new Array();
+		const list = [];
 
 		// Interacting with self opens options for masturbation etc
 		Text.Out(`<table class='party' style='width:${this.members.length > 1 ? `100` : `50`}%'>`);
@@ -469,7 +469,7 @@ export class Party {
 								Text.NL();
 								Text.Flush();
 
-								const target = new Array();
+								const target = [];
 								for (let i = 0, j = that.members.length; i < j; i++) {
 									const t = that.members[i];
 									target.push({

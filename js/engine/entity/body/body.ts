@@ -103,17 +103,17 @@ export class Body implements IBody {
 		// Torso
 		this.torso         = new Torso(debugName);
 		// Add slots for wings, tails and such
-		this.backSlots     = new Array();
+		this.backSlots     = [];
 
 		// Genetalia
 		this.gen = new Genitalia(this);
-		this.cock = new Array();
+		this.cock = [];
 		this.balls = new Balls();
 
-		this.vagina = new Array();
+		this.vagina = [];
 		this.ass = new Butt();
 
-		this.breasts = new Array();
+		this.breasts = [];
 		this.breasts.push(new Breasts());
 
 		// Arms and legs
@@ -138,7 +138,7 @@ export class Body implements IBody {
 			race : this.torso.race.id.toFixed(),
 		};
 		if (this.backSlots.length > 0) {
-			storage.back = new Array();
+			storage.back = [];
 			for (const backSlot of this.backSlots) {
 				storage.back.push(backSlot.ToStorage());
 			}
@@ -146,7 +146,7 @@ export class Body implements IBody {
 		// Genetalia
 		storage.gen = this.gen.ToStorage();
 		if (this.cock.length > 0) {
-			storage.cock = new Array();
+			storage.cock = [];
 			for (const a of this.cock) {
 				const c = a.ToStorage(true);
 				if (a.vag) {
@@ -158,7 +158,7 @@ export class Body implements IBody {
 		storage.balls = this.balls.ToStorage(true);
 
 		if (this.vagina.length > 0) {
-			storage.vag = new Array();
+			storage.vag = [];
 			for (const vag of this.vagina) {
 				storage.vag.push(vag.ToStorage(true));
 			}
@@ -167,7 +167,7 @@ export class Body implements IBody {
 		storage.ass = this.ass.ToStorage(true);
 
 		if (this.breasts.length > 0) {
-			storage.breasts = new Array();
+			storage.breasts = [];
 			for (const breast of this.breasts) {
 				storage.breasts.push(breast.ToStorage(true));
 			}
@@ -239,7 +239,7 @@ export class Body implements IBody {
 		}
 
 		if (storage.back) {
-			this.backSlots = new Array();
+			this.backSlots = [];
 			for (const back of storage.back) {
 				const newApp = new Appendage();
 				newApp.FromStorage(back);
@@ -250,7 +250,7 @@ export class Body implements IBody {
 		this.gen.FromStorage(storage.gen);
 
 		if (storage.cock) {
-			this.cock = new Array();
+			this.cock = [];
 			for (const cock of storage.cock) {
 				const c = new Cock();
 				c.FromStorage(cock);
@@ -261,7 +261,7 @@ export class Body implements IBody {
 		this.balls.FromStorage(storage.balls);
 
 		if (storage.vag) {
-			this.vagina = new Array();
+			this.vagina = [];
 			for (const vag of storage.vag) {
 				const v = new Vagina();
 				v.FromStorage(vag);
@@ -286,7 +286,7 @@ export class Body implements IBody {
 		this.ass.FromStorage(storage.ass);
 
 		if (storage.breasts) {
-			this.breasts = new Array();
+			this.breasts = [];
 			for (const breasts of storage.breasts) {
 				const b = new Breasts();
 				b.FromStorage(breasts);

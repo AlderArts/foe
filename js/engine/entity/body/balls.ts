@@ -78,7 +78,7 @@ export class Balls extends BodyPart {
 
 	public noun() {
 		const count = this.count.Get();
-		const nouns = new Array();
+		const nouns = [];
 		if (Math.random() < 0.5) {
 			nouns.push("ball");
 			if (count === 4) {

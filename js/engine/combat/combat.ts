@@ -37,7 +37,7 @@ export class Encounter implements ICombatEncounter {
 		// Party filled with entitys
 		this.enemy = enemy;
 		// Array filled with {entity: Entity, isEnemy: bool, initiative: number }
-		this.combatOrder = new Array();
+		this.combatOrder = [];
 		// Used for fancy trickery
 		this.Callstack = [];
 	}
@@ -119,7 +119,7 @@ export class Encounter implements ICombatEncounter {
 	}
 
 	public GetLiveEnemyArray() {
-		const e = new Array();
+		const e = [];
 		for (const ent of this.enemy.members) {
 			if (!ent.Incapacitated()) {
 				e.push(ent);
@@ -129,7 +129,7 @@ export class Encounter implements ICombatEncounter {
 	}
 
 	public GetDownedEnemyArray() {
-		const e = new Array();
+		const e = [];
 		for (const ent of this.enemy.members) {
 			if (ent.Incapacitated()) {
 				e.push(ent);
@@ -139,7 +139,7 @@ export class Encounter implements ICombatEncounter {
 	}
 
 	public GetLivePartyArray() {
-		const p = new Array();
+		const p = [];
 		for (const ent of GAME().party.members) {
 			if (!ent.Incapacitated()) {
 				p.push(ent);
@@ -149,7 +149,7 @@ export class Encounter implements ICombatEncounter {
 	}
 
 	public GetDownedPartyArray() {
-		const p = new Array();
+		const p = [];
 		for (const ent of GAME().party.members) {
 			if (ent.Incapacitated()) {
 				p.push(ent);
@@ -159,7 +159,7 @@ export class Encounter implements ICombatEncounter {
 	}
 
 	public GetEnemyArray() {
-		const e = new Array();
+		const e = [];
 		for (const ent of this.enemy.members) {
 			e.push(ent);
 		}
@@ -167,7 +167,7 @@ export class Encounter implements ICombatEncounter {
 	}
 
 	public GetPartyArray() {
-		const p = new Array();
+		const p = [];
 		for (const ent of GAME().party.members) {
 			p.push(ent);
 		}

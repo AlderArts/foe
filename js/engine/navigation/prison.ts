@@ -11,6 +11,12 @@ import { GameState, SetGameState } from "../gamestate";
 import { Text } from "../parser/text";
 import { Party } from "./party";
 
+
+export interface IPrisonMinigameOpts {
+	party?: Entity[];
+	enemy?: Party;
+}
+
 /*
  * opts {
  *  party : [player, kiakai...],  - only used for setup
@@ -23,7 +29,7 @@ export class PrisonMinigame {
 	public party: Entity[];
 	public enemy: Party;
 
-	constructor(opts?: any) {
+	constructor(opts?: IPrisonMinigameOpts) {
 		opts = opts || {};
 		this.party = opts.party || [];
 		this.enemy = opts.enemy || new Party();

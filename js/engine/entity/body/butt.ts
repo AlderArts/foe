@@ -31,8 +31,8 @@ export class Butt extends Orifice {
 	}
 
 	public noun() {
-		const size = this.buttSize.Get();
-		const nouns = new Array();
+		//TODO: const size = this.buttSize.Get();
+		const nouns = [];
 		nouns.push("butt");
 		nouns.push("rear");
 		nouns.push("rump");

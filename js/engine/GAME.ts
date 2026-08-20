@@ -74,14 +74,14 @@ export function StepToHour(hour: number, minute: number = 0) {
 	return step;
 }
 
-let entityStorage = new Array();
+let entityStorage: any[] = [];
 
 export function EntityStorage() {
     return entityStorage;
 }
 
 export function InitEntityStorage() {
-    entityStorage = new Array();
+    entityStorage = [];
 }
 
 let cavalcade: any;

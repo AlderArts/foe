@@ -271,7 +271,7 @@ export class Inventory {
 					Text.Add("Use [it] on which partymember?", {it: item.name});
 					Text.Flush();
 
-					const target = new Array();
+					const target: any[] = [];
 					_.each(GAME().party.members, (t: Entity) => {
 						target.push({
 							nameStr : t.name,

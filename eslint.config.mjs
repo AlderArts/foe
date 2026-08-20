@@ -39,7 +39,6 @@ export default tseslint.config(
 			'@typescript-eslint/no-namespace': 'off',
 			'@typescript-eslint/no-explicit-any': 'warn',
 			'@typescript-eslint/no-this-alias': 'warn',
-			'@typescript-eslint/no-array-constructor': 'warn',
 			'no-useless-assignment': 'warn',
 			'no-case-declarations': 'warn',
 			'no-constant-condition': 'warn',

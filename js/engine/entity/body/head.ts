@@ -59,7 +59,7 @@ export class Head extends BodyPart {
 			race : this.ears.race.id.toFixed(),
 		};
 		if (this.appendages.length > 0) {
-			storage.app = new Array();
+			storage.app = [];
 			for (const app of this.appendages) {
 				storage.app.push(app.ToStorage());
 			}
@@ -93,7 +93,7 @@ export class Head extends BodyPart {
 		}
 
 		if (storage.app) {
-			this.appendages = new Array();
+			this.appendages = [];
 			for (const app of storage.app) {
 				const newApp = new Appendage();
 				newApp.FromStorage(app);

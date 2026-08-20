@@ -3398,7 +3398,7 @@ export namespace KiakaiSexScenes {
 
 		Text.Flush();
 		// [Rim][Suck [himher]][Selfsuck][Frot][Oil]
-		let options = new Array();
+		let options: IChoice[] = [];
 		options.push({ nameStr : "Rim",
 			func() {
 				KiakaiSexScenes.AnalCatchPrep(KiakaiFlags.AnalCatchPrepScene.Rim, true);
@@ -3428,7 +3428,7 @@ export namespace KiakaiSexScenes {
 		options.push({ nameStr : "Oil",
 			func() {
 				KiakaiSexScenes.AnalCatchPrep(KiakaiFlags.AnalCatchPrepScene.Oil, true);
-			}, enabled : party.inventory.QueryNum(IngredientItems.SnakeOil),
+			}, enabled : party.inventory.QueryNum(IngredientItems.SnakeOil) > 0,
 			tooltip : "Use a vial of oil.",
 		});
 
@@ -3437,7 +3437,7 @@ export namespace KiakaiSexScenes {
 			return;
 		} else if (!assert) {
 			// [Sure][Nah]
-			options = new Array();
+			options = [];
 			options.push({ nameStr : "Yes",
 				func() {
 					kiakai.subDom.IncreaseStat(10, 1);
@@ -3575,7 +3575,7 @@ export namespace KiakaiSexScenes {
 		Text.Flush();
 
 		// [Sure][Nah]
-		options = new Array();
+		options = [];
 		options.push({ nameStr : "Take charge",
 			func() {
 				let tailpegFlag = false;
