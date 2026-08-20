@@ -162,7 +162,7 @@ export namespace AbilityNode {
 
 			return _.bind(RunFallthrough, node);
 		}
-		function RunFallthrough(ability: Ability, encounter: Encounter, caster: Entity, target: Entity, result: any) {
+		function RunFallthrough(ability: Ability, encounter: Encounter, caster: Entity, target: Entity, result: number) {
 			const that: IAbilityNode = this;
 			const fraction = that.fraction || 1;
 
@@ -190,7 +190,7 @@ export namespace AbilityNode {
 			*/
 			return _.bind(RunAddSpellstack, node);
 		}
-		function RunAddSpellstack(ability: Ability, encounter: Encounter, caster: Entity, target: Entity, _result: any) {
+		function RunAddSpellstack(ability: Ability, encounter: Encounter, caster: Entity, target: Entity, _result: number) {
 			const that: IAbilityNode = this;
 
 			const value = _.isFunction(that.value) ? that.value() : that.value;
@@ -213,7 +213,7 @@ export namespace AbilityNode {
 
 			return _.bind(RunMatchSpellstack, node);
 		}
-		function RunMatchSpellstack(ability: Ability, encounter: Encounter, caster: Entity, target: Entity, result: any) {
+		function RunMatchSpellstack(ability: Ability, encounter: Encounter, caster: Entity, target: Entity, result: number) {
 			const that: IAbilityNode = this;
 
 			const consume = that.consume;
@@ -257,7 +257,7 @@ export namespace AbilityNode {
 			node.onMiss    = node.onMiss   || [];
 			return _.bind(RunCancel, node);
 		}
-		function RunCancel(ability: Ability, encounter: Encounter, caster: Entity, target: Entity, result: any) {
+		function RunCancel(ability: Ability, encounter: Encounter, caster: Entity, target: Entity, result: number) {
 			const that: IAbilityNode = this;
 			const entry = target.GetCombatEntry(encounter);
 			// Only trigger if target is casting
@@ -422,7 +422,7 @@ export namespace AbilityNode {
 		}
 	}
 
-	export function Run(ability: Ability, encounter: Encounter, caster: Entity, target: Entity|Party|any, result: any) {
+	export function Run(ability: Ability, encounter: Encounter, caster: Entity, target: Entity|Party|any, result: number) {
 		const that: IAbilityNode = this;
 
 		// OnCast, always apply no matter what

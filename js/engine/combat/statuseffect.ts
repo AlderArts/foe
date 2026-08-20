@@ -6,6 +6,7 @@ import * as _ from "lodash";
 import { IStorage } from "../entity/istorage";
 import { CurEncounter } from "./combat-data";
 import { DamageType } from "./damagetype";
+import type { Entity } from "../entity/entity";
 
 export enum StatusEffect {
 	Burn     = 0, // OK
@@ -42,7 +43,7 @@ export enum StatusEffect {
 export namespace Status {
 	export const Keys = _.keys(StatusEffect);
 
-	export function Venom(target: any, opts?: any) {
+	export function Venom(target: Entity, opts?: any) {
 		if (!target) { return; }
 		opts = opts || {};
 
@@ -68,7 +69,7 @@ export namespace Status {
 		return true;
 	}
 	// TODO fix formula
-	Venom.Tick = function(target: any) {
+	Venom.Tick = function(target: Entity) {
 		const damageType = new DamageType({mNature : this.str});
 		const atkRand = 0.05 * (Math.random() - 0.5) + 1;
 		let dmg = this.dmg * atkRand * target.HP();
@@ -84,7 +85,7 @@ export namespace Status {
 		}
 	};
 
-	export function Burn(target: any, opts?: any) {
+	export function Burn(target: Entity, opts?: any) {
 		if (!target) { return; }
 		opts = opts || {};
 
@@ -110,7 +111,7 @@ export namespace Status {
 		return true;
 	}
 	// TODO fix formula
-	Burn.Tick = function(target: any) {
+	Burn.Tick = function(target: Entity) {
 		const damageType = new DamageType({mFire : this.str});
 		const atkRand = 0.05 * (Math.random() - 0.5) + 1;
 		let dmg = this.dmg * atkRand * target.HP();
@@ -126,7 +127,7 @@ export namespace Status {
 		}
 	};
 
-	export function Freeze(target: any, opts?: any) {
+	export function Freeze(target: Entity, opts?: any) {
 		if (!target) { return; }
 		opts = opts || {};
 
@@ -150,7 +151,7 @@ export namespace Status {
 
 		return true;
 	}
-	Freeze.Tick = function(target: any) {
+	Freeze.Tick = function(target: Entity) {
 		this.turns--;
 		// Remove freeze effect
 		if (this.turns <= 0) {
@@ -158,7 +159,7 @@ export namespace Status {
 		}
 	};
 
-	export function Numb(target: any, opts?: any) {
+	export function Numb(target: Entity, opts?: any) {
 		if (!target) { return; }
 		opts = opts || {};
 
@@ -181,7 +182,7 @@ export namespace Status {
 
 		return true;
 	}
-	Numb.Tick = function(target: any) {
+	Numb.Tick = function(target: Entity) {
 		this.turns--;
 		// Remove numb effect
 		if (this.turns <= 0) {
@@ -189,7 +190,7 @@ export namespace Status {
 		}
 	};
 
-	export function Blind(target: any, opts?: any) {
+	export function Blind(target: Entity, opts?: any) {
 		if (!target) { return; }
 		opts = opts || {};
 
@@ -213,7 +214,7 @@ export namespace Status {
 
 		return true;
 	}
-	Blind.Tick = function(target: any) {
+	Blind.Tick = function(target: Entity) {
 		this.turns--;
 		// Remove blind effect
 		if (this.turns <= 0) {
@@ -221,7 +222,7 @@ export namespace Status {
 		}
 	};
 
-	export function Siphon(target: any, opts?: any) {
+	export function Siphon(target: Entity, opts?: any) {
 		if (!target) { return; }
 		opts = opts || {};
 
@@ -247,7 +248,7 @@ export namespace Status {
 
 		return true;
 	}
-	Siphon.Tick = function(target: any) {
+	Siphon.Tick = function(target: Entity) {
 		this.turns--;
 
 		const hp = target.AddHPAbs(-this.hp);
@@ -265,7 +266,7 @@ export namespace Status {
 		}
 	};
 
-	export function Sleep(target: any, opts?: any) {
+	export function Sleep(target: Entity, opts?: any) {
 		if (!target) { return; }
 		opts = opts || {};
 
@@ -287,7 +288,7 @@ export namespace Status {
 
 		return true;
 	}
-	Sleep.Tick = function(target: any) {
+	Sleep.Tick = function(target: Entity) {
 		this.turns--;
 		// Remove sleep effect
 		if (this.turns <= 0) {
@@ -295,7 +296,7 @@ export namespace Status {
 		}
 	};
 
-	export function Bleed(target: any, opts?: any) {
+	export function Bleed(target: Entity, opts?: any) {
 		if (!target) { return; }
 		opts = opts || {};
 
@@ -320,7 +321,7 @@ export namespace Status {
 		return true;
 	}
 	// TODO fix formula
-	Bleed.Tick = function(target: any) {
+	Bleed.Tick = function(target: Entity) {
 		const atkRand = 0.05 * (Math.random() - 0.5) + 1;
 		let dmg = this.dmg * atkRand * target.HP();
 		dmg = Math.floor(dmg);
@@ -335,7 +336,7 @@ export namespace Status {
 	};
 
 	// TODO: Use as heal of slow?
-	export function Haste(target: any, opts?: any) {
+	export function Haste(target: Entity, opts?: any) {
 		if (!target) { return; }
 		opts = opts || {};
 
@@ -352,7 +353,7 @@ export namespace Status {
 
 		return true;
 	}
-	Haste.Tick = function(target: any) {
+	Haste.Tick = function(target: Entity) {
 		this.turns--;
 		// Remove haste effect
 		if (this.turns <= 0) {
@@ -361,7 +362,7 @@ export namespace Status {
 	};
 
 	// TODO: Remove haste?
-	export function Slow(target: any, opts?: any) {
+	export function Slow(target: Entity, opts?: any) {
 		if (!target) { return; }
 		opts = opts || {};
 
@@ -386,7 +387,7 @@ export namespace Status {
 
 		return true;
 	}
-	Slow.Tick = function(target: any) {
+	Slow.Tick = function(target: Entity) {
 		this.turns--;
 		// Remove slow effect
 		if (this.turns <= 0) {
@@ -394,7 +395,7 @@ export namespace Status {
 		}
 	};
 
-	export function Horny(target: any, opts?: any) {
+	export function Horny(target: Entity, opts?: any) {
 		if (!target) { return; }
 		opts = opts || {};
 
@@ -420,7 +421,7 @@ export namespace Status {
 		return true;
 	}
 	// TODO fix formula?
-	Horny.Tick = function(target: any) {
+	Horny.Tick = function(target: Entity) {
 		const damageType = new DamageType({lust : this.str});
 		const atkRand = 0.05 * (Math.random() - 0.5) + 1;
 		let dmg = this.dmg * atkRand * target.Lust();
@@ -436,7 +437,7 @@ export namespace Status {
 	};
 
 	// All modifiers are multipliers, so 1.05 means 5% extra.
-	export function Aroused(target: any, opts?: any) {
+	export function Aroused(target: Entity, opts?: any) {
 		if (!target) { return; }
 		opts = opts || {};
 
@@ -465,7 +466,7 @@ export namespace Status {
 
 		return true;
 	}
-	Aroused.Update = function(target: any, step: number) {
+	Aroused.Update = function(target: Entity, step: number) {
 		this.hours -= step;
 		if (this.hours <= 0) {
 			target.combatStatus.stats[StatusEffect.Aroused] = undefined;
@@ -492,7 +493,7 @@ export namespace Status {
 	};
 
 	// All modifiers are multipliers, so 1.05 means 5% extra.
-	export function Limp(target: any, opts?: any) {
+	export function Limp(target: Entity, opts?: any) {
 		if (!target) { return; }
 		opts = opts || {};
 
@@ -522,7 +523,7 @@ export namespace Status {
 
 		return true;
 	}
-	Limp.Update = function(target: any, step: number) {
+	Limp.Update = function(target: Entity, step: number) {
 		this.hours -= step;
 		if (this.hours <= 0) {
 			target.combatStatus.stats[StatusEffect.Limp] = undefined;
@@ -548,7 +549,7 @@ export namespace Status {
 		return obj;
 	};
 
-	export function Decoy(target: any, opts?: any) {
+	export function Decoy(target: Entity, opts?: any) {
 		if (!target) { return; }
 		opts = opts || {};
 
@@ -564,7 +565,7 @@ export namespace Status {
 	/*
 	* OnHit = function(enc, target, attacker, dmg)
 	*/
-	export function Counter(target: any, opts?: any) {
+	export function Counter(target: Entity, opts?: any) {
 		if (!target) { return; }
 		opts = opts || {};
 
@@ -581,7 +582,7 @@ export namespace Status {
 
 		return true;
 	}
-	Counter.Tick = function(target: any) {
+	Counter.Tick = function(target: Entity) {
 		this.turns--;
 		// Remove counter effect
 		if (this.turns <= 0) {
@@ -590,7 +591,7 @@ export namespace Status {
 	};
 
 	// opts.exp is a modifier that adds extra exp. 1.05 means 5% extra, rounded up.
-	export function Full(target: any, opts?: any) {
+	export function Full(target: Entity, opts?: any) {
 		if (!target) { return; }
 		opts = opts || {};
 
@@ -605,7 +606,7 @@ export namespace Status {
 
 		return true;
 	}
-	Full.Update = function(target: any, step: number) {
+	Full.Update = function(target: Entity, step: number) {
 		this.hours -= step;
 		// Remove full effect
 		if (this.hours <= 0) {
@@ -632,7 +633,7 @@ export namespace Status {
 	/*
 	* func = function(encounter, activeChar)
 	*/
-	export function Confuse(target: any, opts?: any) {
+	export function Confuse(target: Entity, opts?: any) {
 		if (!target) { return; }
 		opts = opts || {};
 
@@ -665,14 +666,14 @@ export namespace Status {
 
 		return true;
 	}
-	Confuse.Tick = function(target: any) {
+	Confuse.Tick = function(target: Entity) {
 		this.turns--;
 		// Remove confuse effect
 		if (this.turns <= 0) {
 			target.combatStatus.stats[StatusEffect.Confuse] = undefined;
 		}
 	};
-	Confuse.OnFade = (encounter: any, entity: any) => {
+	Confuse.OnFade = (encounter: any, entity: Entity) => {
 		// cleanup
 		for (let i = 0, j = encounter.combatOrder.length; i < j; i++) {
 			const c = encounter.combatOrder[i];
@@ -685,7 +686,7 @@ export namespace Status {
 		entity.combatStatus.stats[StatusEffect.Confuse] = undefined;
 	};
 
-	export function Weakness(target: any, opts?: any) {
+	export function Weakness(target: Entity, opts?: any) {
 		if (!target) { return; }
 		opts = opts || {};
 
@@ -708,7 +709,7 @@ export namespace Status {
 
 		return true;
 	}
-	Weakness.Tick = function(target: any) {
+	Weakness.Tick = function(target: Entity) {
 		this.turns--;
 		// Remove weakness effect
 		if (this.turns <= 0) {
@@ -717,7 +718,7 @@ export namespace Status {
 	};
 
 	// All modifiers are multipliers, so 1.05 means 5% extra.
-	export function Buff(target: any, opts?: any) {
+	export function Buff(target: Entity, opts?: any) {
 		if (!target) { return; }
 		opts = opts || {};
 
@@ -743,7 +744,7 @@ export namespace Status {
 
 		return true;
 	}
-	Buff.Update = function(target: any, step: number) {
+	Buff.Update = function(target: Entity, step: number) {
 		this.hours -= step;
 		if (this.hours <= 0) {
 			target.combatStatus.stats[StatusEffect.Buff] = undefined;
@@ -786,7 +787,7 @@ export namespace Status {
 		return obj;
 	};
 
-	export function Curse(target: any, opts?: any) {
+	export function Curse(target: Entity, opts?: any) {
 		if (!target) { return; }
 		opts = opts || {};
 
@@ -809,7 +810,7 @@ export namespace Status {
 
 		return true;
 	}
-	Curse.Tick = function(target: any) {
+	Curse.Tick = function(target: Entity) {
 		this.turns--;
 		// Remove curse effect
 		if (this.turns <= 0) {
