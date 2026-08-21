@@ -3940,8 +3940,8 @@ export namespace KiakaiSexScenes {
 				Text.NL();
 				Text.Add("Almost at the same time as your companion, you reach your own peak.", parse);
 
-				let cum = kiakai.OrgasmCum();
-				cum = player.OrgasmCum();
+				kiakai.OrgasmCum();
+				const cum = player.OrgasmCum();
 
 				if (player.FirstCock()) {
 					parse.mess = kiakai.NumCocks() > 1 ? "adding to the" : "creating a";

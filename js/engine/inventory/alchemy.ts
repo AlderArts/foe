@@ -221,7 +221,8 @@ function CountBrewable(it: Item, inventory: Inventory, alchemist: Entity): IBrew
 	return {
 		it,
 		qty: _.map(productionSteps, "qty").reduce((sum, qty) => {
-			return sum += qty;
+			sum += qty;
+			return sum;
 		}, 0),
 		steps: productionSteps,
 		brewFn(batchSize: number, backPrompt: CallableFunction, callback: CallableFunction, mockRemove: boolean) {

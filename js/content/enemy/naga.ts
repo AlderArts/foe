@@ -541,7 +541,7 @@ export namespace NagaScenes {
 		Text.Add("Soon, the majority of your [cock] escapes the naga’s mouth, although still being stimulated by her prehensile penis-licker. You moan as she lowers herself again, returning your shaft to the warmth inside of her with the speed you’d expect from a snake’s bite. Without stopping at the base this time, she blows you with increasing speed, waves of ecstasy from your [cock] wracking your body[b].", parse);
 		Text.NL();
 
-		let cum = player.OrgasmCum();
+		const cum = player.OrgasmCum();
 		parse.cum = cum > 6 ? "explode" :
 					cum > 3 ? "erupt" :
 					"burst";
@@ -630,7 +630,7 @@ export namespace NagaScenes {
 		Text.Add("Geysers of alabaster jizz stream from her massive pricks, most of it soaring over you onto the desert sands with the force of her climax, but some lands on your [breasts], covering them in a thick coat of hot, sticky cum. A flood of femcum bursts from the naga’s slit, and as you feel it seep into the skin of your [cock] and crotch, your body convulses, your denied orgasms coming back to you with a vengeance and bringing you to a furious double climax.", parse);
 		Text.NL();
 
-		cum = player.OrgasmCum(3);
+		player.OrgasmCum(3);
 
 		if (player.HasBalls()) {
 			Text.Add("Your [balls] tighten and you feel the need within them overflow as your climax begins. ", parse);

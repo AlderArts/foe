@@ -2289,7 +2289,7 @@ export namespace LaylaScenes {
 					Text.Add("Nodding emphatically, Layla grips your [hips], thrusting forcefully once, twice, then finally hilting inside you one last time as her orgasm finally overtakes her, pumping a torrent of white, hot chimera seed up your butt.", parse);
 					Text.NL();
 
-					let cum = layla.OrgasmCum();
+					const cum = layla.OrgasmCum();
 
 					LaylaScenes.Impregnate(player, layla, cum, PregnancyHandler.Slot.Butt);
 
@@ -2302,7 +2302,7 @@ export namespace LaylaScenes {
 					}
 					Text.NL();
 
-					cum = player.OrgasmCum();
+					player.OrgasmCum();
 
 					Text.Add("You can feel it. Her knot is growing inside your [anus], effectively trapping you as her climax slows down to a trickle.", parse);
 					Text.NL();
@@ -2365,11 +2365,11 @@ export namespace LaylaScenes {
 		Text.Add("As you thrust and moan, you feel your own pleasure building, curling your limbs around your chimeric lover as you grind together. Layla cries out, arching her back as the first shot of her cum erupts inside of you. The feeling of it - sticky and warm, like wet heat slurping lewdly inside of you - pushes you past the limit, and you climax in turn.", parse);
 		Text.NL();
 
-		let cum = layla.OrgasmCum();
+		const cum = layla.OrgasmCum();
 
 		LaylaScenes.Impregnate(player, layla, cum, PregnancyHandler.Slot.Butt);
 
-		cum = player.OrgasmCum();
+		player.OrgasmCum();
 
 		if (player.FirstCock()) {
 			Text.Add("Your [cocks], sandwiched between the two of you, go[notEs] off in a shower of cum, smearing you both with your fluids.", parse);
@@ -3087,8 +3087,8 @@ export namespace LaylaScenes {
 					Text.NL();
 
 					// #PC cums inside Layla
-					let cum = layla.OrgasmCum();
-					cum = player.OrgasmCum();
+					layla.OrgasmCum();
+					let cum = player.OrgasmCum();
 
 					Text.Add("Underneath you, the chimera writhes in the throes of her own pleasure, crying out as the feel of your cum pouring into her waiting tunnel triggers her to climax in turn.", parse);
 
@@ -3158,8 +3158,8 @@ export namespace LaylaScenes {
 					Text.Add("Lost in your pleasure, you absently thrust away, bucking your hips as you lose more and more of yourself to the haze clouding your mind. Your heart pounds in your chest, electricity crackles courses through your body, until you can’t take it anymore and cum erupts from your thrusting member[s].", parse);
 					Text.NL();
 
-					let cum = layla.OrgasmCum();
-					cum = player.OrgasmCum();
+					layla.OrgasmCum();
+					let cum = player.OrgasmCum();
 
 					let multiplier = 1;
 					if (opts.TailJuice) { multiplier++; }
@@ -3348,9 +3348,9 @@ export namespace LaylaScenes {
 					Text.Add("The slap of flesh-on-flesh echoes as the two of you thrust together, locked at the hips. Warmth wells inside of you, burning in your depths; you can’t hold out much longer, and from the gasping cries falling from Layla’s lips, she can’t either.", parse);
 					Text.NL();
 
-					let cum = player.OrgasmCum();
+					player.OrgasmCum();
 
-					cum = layla.OrgasmCum();
+					const cum = layla.OrgasmCum();
 
 					LaylaScenes.Impregnate(player, layla, cum, PregnancyHandler.Slot.Vag);
 

@@ -379,7 +379,7 @@ export class Gui {
 		const h = $(window).height();
 		const ratioW = w / windowWidth;
 		const ratioH = h / windowHeight;
-		let xpos = 0; let ypos = 0; let ratio = 1;
+		let xpos = 0; let ypos = 0; let ratio;
 		// alert("R:" + ratio + " RW:" + ratioW + " RH:" + ratioH);
 		if (ratioW / ratioH > 1) {
 			xpos  = (w - ratioH * windowWidth) / 2;

@@ -5948,7 +5948,7 @@ export namespace MirandaScenes {
 		Text.NL();
 		Text.Add("<i>“Yeah, that’s how you do it,”</i> she comments, tongue lolling out as she becomes immersed in pleasure.", parse);
 		Text.NL();
-		let choices = 3;
+		let choices;
 		if (miranda.Attitude() < MirandaFlags.Attitude.Neutral) {
 			if (player.SubDom() > 0) {
 				Text.Add("Much as the rancor burns in your veins at the thought, you know that the consequences of trying to defy her just aren't worth the satisfaction you'd get at interrupting her ravaging of your throat. You'll just have to let her do what she wants… for now.", parse);
