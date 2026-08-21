@@ -14,7 +14,7 @@ import { DamageType, Element } from "../combat/damagetype";
 import { StatusEffect } from "../combat/statuseffect";
 import { StatusList } from "../combat/statuslist";
 import { GAME } from "../GAME";
-import { Item, ItemIds } from "../inventory/item";
+import { IItemQuantity, Item, ItemIds } from "../inventory/item";
 import { ItemToy } from "../inventory/items/toy-item";
 import { ILocation } from "../navigation/location";
 import { ITime, Time } from "../navigation/time";
@@ -35,7 +35,7 @@ import { Vagina } from "./body/vagina";
 import { EntityDict } from "./entity-dict";
 import { EntityMenu } from "./entity-menu";
 import { IStorage } from "./istorage";
-import { Jobs } from "./job";
+import { Job, Jobs } from "./job";
 import { LactationHandler } from "./lactation";
 import { Perk, PerkIds } from "./perks";
 import { PregnancyHandler, Womb } from "./pregnancy";
@@ -64,7 +64,7 @@ export enum TargetStrategy {
 
 export interface ICastingEntry {
 	ability: Ability;
-	target: Entity|any;
+	target: Entity|Party;
 	retarget: CallableFunction;
 }
 
@@ -87,13 +87,26 @@ export interface ICombatOrder {
 export interface ICombatEncounter {
 	combatOrder: ICombatOrder[];
 	enemy: Party;
-	GetLivePartyArray: () => any;
-	GetLiveEnemyArray: () => any;
+	GetLivePartyArray: () => Entity[];
+	GetLiveEnemyArray: () => Entity[];
 	CombatTick: () => void;
 	GenerateUniqueName: (entity: Entity) => void;
 	canRun: boolean;
 	onRun: () => void;
 	RunLevel: () => number;
+}
+
+export interface ISexFlags {
+	rBlow? : number;
+	gBlow? : number;
+	rCunn? : number;
+	gCunn? : number;
+	rAnal? : number;
+	gAnal? : number;
+	rVag?  : number;
+	gVag?  : number;
+	sired? : number;
+	birth? : number;
 }
 
 class EntityParser {
@@ -237,7 +250,7 @@ export class Entity {
 	public recipes: Item[];
 	public alchemyLevel: number;
 	public jobs: any;
-	public currentJob: any;
+	public currentJob: Job;
 	public experience: number;
 	public level: number;
 	public pendingStatPoints: number;
@@ -289,7 +302,7 @@ export class Entity {
 	public pregHandler: PregnancyHandler;
 	public lactHandler: LactationHandler;
 	public flags: any;
-	public sex: any;
+	public sex: ISexFlags;
 	public perks: Perk[];
 	public aggro: any[];
 	public subDom: Stat;
@@ -620,7 +633,7 @@ export class Entity {
 	}
 
 	// Should return an array of drops (if any) in the form of {it: Item, num: amount}
-	public DropTable(): any[] {
+	public DropTable(): IItemQuantity[] {
 		return [];
 	}
 
@@ -804,7 +817,7 @@ export class Entity {
 	}
 
 	// TODO Structure
-	public FinishCastInternal(_ability: any, encounter: any, _caster: any, _targets: any) {
+	public FinishCastInternal(_ability: Ability, encounter: ICombatEncounter, _caster: Entity, _targets: Entity|Party) {
 		Text.Flush();
 
 		if (encounter) {
@@ -815,7 +828,7 @@ export class Entity {
 	}
 
 	// Can be overrided to allow for selective cancellation
-	public CanBeInterrupted(_ability: any, _encounter: any, _caster: any, _result: any) {
+	public CanBeInterrupted(_ability: Ability, _encounter: ICombatEncounter, _caster: Entity, _result: number) {
 		return true;
 	}
 
@@ -1466,8 +1479,8 @@ export class Entity {
 
 	/* ENTITY SAVE */
 
-	public SaveSexFlags(storage: IStorage) {
-		const sex: any = {};
+	public SaveSexFlags(storage: any) {
+		const sex: ISexFlags = {};
 		if (this.sex.rBlow !== 0) { sex.rBlow = this.sex.rBlow; }
 		if (this.sex.gBlow !== 0) { sex.gBlow = this.sex.gBlow; }
 		if (this.sex.rCunn !== 0) { sex.rCunn = this.sex.rCunn; }
@@ -1724,9 +1737,16 @@ export class Entity {
 	}
 
 	public LoadSexFlags(storage: any) {
-		_.forIn(storage.sex, (value, key) => {
-			this.sex[key] = parseInt(value, 10);
-		});
+		this.sex.rBlow = parseInt(storage.sex["rBlow"], 10);
+		this.sex.gBlow = parseInt(storage.sex["gBlow"], 10);
+		this.sex.rCunn = parseInt(storage.sex["rCunn"], 10);
+		this.sex.gCunn = parseInt(storage.sex["gCunn"], 10);
+		this.sex.rAnal = parseInt(storage.sex["rAnal"], 10);
+		this.sex.gAnal = parseInt(storage.sex["gAnal"], 10);
+		this.sex.rVag = parseInt(storage.sex["rVag"], 10);
+		this.sex.gVag = parseInt(storage.sex["gVag"], 10);
+		this.sex.sired = parseInt(storage.sex["sired"], 10);
+		this.sex.birth = parseInt(storage.sex["birth"], 10);
 	}
 
 	public LoadPerks(storage: IStorage) {
@@ -2518,7 +2538,7 @@ export class Entity {
 			return this.strapOn.cock;
  		}
 	}
-	public CocksThatFit(orifice?: Orifice, onlyRealCocks?: boolean, extension?: any) {
+	public CocksThatFit(orifice?: Orifice, onlyRealCocks?: boolean, extension?: number) {
 		const ret = [];
 		for (let i = 0, j = this.body.cock.length; i < j; i++) {
 			const c = this.body.cock[i];
