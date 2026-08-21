@@ -2649,7 +2649,14 @@ export namespace LaylaScenes {
 		}
 	}
 
-	export function SexPitchVaginalCont(opts: any, p1cock: Cock, parse: IParse) {
+	interface ISexPitchVaginalOpts {
+		TailPeg?: boolean;
+		LCock?: boolean;
+		TailJuice?: boolean;
+		CummyL?: boolean;
+	}
+
+	export function SexPitchVaginalCont(opts: ISexPitchVaginalOpts, p1cock: Cock, parse: IParse) {
 		const player: Player = GAME().player;
 		const layla: Layla = GAME().layla;
 
@@ -2747,7 +2754,7 @@ export namespace LaylaScenes {
 		Gui.SetButtonsFromList(options, false, undefined);
 	}
 
-	export function SexPitchVaginalCont2(opts: any, p1cock: Cock, parse: IParse) {
+	export function SexPitchVaginalCont2(opts: ISexPitchVaginalOpts, p1cock: Cock, parse: IParse) {
 		const player: Player = GAME().player;
 		const layla: Layla = GAME().layla;
 
@@ -3046,7 +3053,7 @@ export namespace LaylaScenes {
 		Gui.SetButtonsFromList(options, false, undefined);
 	}
 
-	export function SexPitchVaginalCont3(opts: any, p1cock: Cock, parse: IParse) {
+	export function SexPitchVaginalCont3(opts: ISexPitchVaginalOpts, p1cock: Cock, parse: IParse) {
 		const player: Player = GAME().player;
 		const layla: Layla = GAME().layla;
 
@@ -3427,7 +3434,7 @@ export namespace LaylaScenes {
 		}
 	}
 
-	export function SexPitchVaginalVariable(opts: any, p1cock: Cock, parse: IParse) {
+	export function SexPitchVaginalVariable(opts: ISexPitchVaginalOpts, p1cock: Cock, parse: IParse) {
 		const layla: Layla = GAME().layla;
 
 		if (opts.LCock) {
@@ -3451,7 +3458,7 @@ export namespace LaylaScenes {
 		}
 	}
 
-	export function SexPitchVaginalCummy(opts: any, p1cock: Cock, parse: IParse) {
+	export function SexPitchVaginalCummy(opts: ISexPitchVaginalOpts, p1cock: Cock, parse: IParse) {
 		Text.NL();
 		if (opts.CummyL) {
 			Text.Add("Layla sits up, still a bit sluggish after the sex. Once she’s had time to catch her breath, she busies herself with licking the cum off her body, her long tongue extending to catch every little wad of semen still clinging to her.", parse);

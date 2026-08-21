@@ -1589,7 +1589,7 @@ export namespace Intro {
 		Text.Add("What is your name?");
 		Text.Flush();
 
-		const textBox: any = document.getElementById("textInputArea");
+		const textBox: HTMLInputElement = document.getElementById("textInputArea") as HTMLInputElement;
 		textBox.value = "";
 		textBox.style.visibility = "visible";
 		textBox.focus();

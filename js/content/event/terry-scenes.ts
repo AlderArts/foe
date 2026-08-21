@@ -2895,6 +2895,13 @@ export namespace TerryScenes {
 		JeanneScenes.Talk();
 	}
 
+	interface IJeanneTFObj {
+		item: TFItem;
+		scene: CallableFunction;
+		mult: number;
+		str: string;
+	}
+
 	export function JeanneTFPrompt() {
 		const terry: Terry = GAME().terry;
 		const player: Player = GAME().player;
@@ -2910,7 +2917,7 @@ export namespace TerryScenes {
 
 		const AddItem = (item: TFItem, scene: CallableFunction, name: string, tooltip: string, costmult: number, horseTF?: boolean) => {
 			options.push({ nameStr : name || item.name,
-				func: (obj: any) => {
+				func: (obj: IJeanneTFObj) => {
 					parse.item = obj.str;
 					const coin = obj.mult * TerryScenes.JeanneTFCost();
 					parse.coin = Text.NumToText(coin);
@@ -6213,7 +6220,7 @@ export namespace TerryScenes {
 	}
 
 	// Clean Terry Up Entry Point
-	export function PCCleansTerry(func?: CallableFunction, opts: any = {}) {
+	export function PCCleansTerry(func?: CallableFunction) {
 		const terry: Terry = GAME().terry;
 		const player: Player = GAME().player;
 
@@ -6227,7 +6234,7 @@ export namespace TerryScenes {
 		parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 		parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
 
-		const defFunc = (_opts: any) => {
+		const defFunc = () => {
 			Text.Flush();
 			Gui.NextPrompt();
 		};
@@ -6281,7 +6288,7 @@ export namespace TerryScenes {
 					Text.Add("<i>“Kiss me good night?”</i> [heshe] requests. A request which you’re only too happy to oblige before leaving [himher] to rest with a smile.", parse);
 				}
 
-				func(opts);
+				func();
 			}, enabled : true,
 			tooltip : Text.Parse("Grab a towel or something and help rub [himher] down.", parse),
 		});
@@ -6358,7 +6365,7 @@ export namespace TerryScenes {
 				player.slut.IncreaseStat(75, 1);
 				terry.slut.IncreaseStat(100, 2);
 
-				func(opts);
+				func();
 			}, enabled : true,
 			tooltip : Text.Parse(tooltip, parse),
 		});
@@ -6367,7 +6374,7 @@ export namespace TerryScenes {
 	// Clean Terry Up Exit Point
 
 	// Terry cleans PC Entry Point
-	export function TerryCleansPC(func?: any, opts: any = {}) {
+	export function TerryCleansPC(func?: CallableFunction) {
 		const terry: Terry = GAME().terry;
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
@@ -6382,7 +6389,7 @@ export namespace TerryScenes {
 		parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 		parse = Text.ParserPlural(parse, player.NumCocks() > 2, "", "2");
 
-		const defFunc = (_opts: any) => {
+		const defFunc = () => {
 			Text.Flush();
 			Gui.NextPrompt();
 		};
@@ -6420,7 +6427,7 @@ export namespace TerryScenes {
 					terry.relation.IncreaseStat(80, 2);
 				}
 
-				func(opts);
+				func();
 			}, enabled : true,
 			tooltip,
 		});
@@ -6691,7 +6698,7 @@ export namespace TerryScenes {
 					terry.relation.IncreaseStat(75, 2);
 				}
 
-				func(opts);
+				func();
 			}, enabled : true,
 			tooltip,
 		});

@@ -64,14 +64,14 @@ export class Nursery {
 	}
 
 	public BirthedBy(mother: string) {
-		const ret: any[] = [];
+		const ret: NurseryKid[] = [];
 		_.each(this.kids, (kid) => {
 			if (kid.mother === mother) { ret.push(kid); }
 		});
 		return ret;
 	}
 	public FatheredBy(father: string) {
-		const ret: any[] = [];
+		const ret: NurseryKid[] = [];
 		_.each(this.kids, (kid) => {
 			if (kid.father === father) { ret.push(kid); }
 		});

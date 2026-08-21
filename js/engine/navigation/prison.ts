@@ -12,7 +12,7 @@ import { Text } from "../parser/text";
 import { Party } from "./party";
 
 
-export interface IPrisonMinigameOpts {
+interface IPrisonMinigameOpts {
 	party?: Entity[];
 	enemy?: Party;
 }

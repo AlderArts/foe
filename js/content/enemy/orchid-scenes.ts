@@ -352,7 +352,14 @@ export namespace OrchidScenes {
 		OrchidScenes.FirstTalkPrompt({});
 	}
 
-	export function FirstTalkPrompt(opts: any) {
+	interface IFirstTalkOpts {
+		attacker?: boolean;
+		elves?: boolean;
+		spring?: boolean;
+		lizard?: boolean;
+	}
+
+	export function FirstTalkPrompt(opts: IFirstTalkOpts) {
 		const player: Player = GAME().player;
 		const kiakai: Kiakai = GAME().kiakai;
 		const party: Party = GAME().party;

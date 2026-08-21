@@ -13,7 +13,7 @@ import { CvetaFlags } from "./cveta-flags";
 
 export namespace CvetaDateScenes {
 
-	export function Prompt(prompt: any) {
+	export function Prompt(prompt: CallableFunction) {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const cveta: Cveta = GAME().cveta;

@@ -1551,7 +1551,17 @@ export namespace IslaScenes {
 			});
 		}
 
-		export function PitchVaginalPrompt(parse: IParse, opts: any) {
+		interface IPitchVaginalOpts {
+			stage: number;
+			nowall?: boolean;
+			p1cock: Cock;
+			strapon: boolean;
+			knot: boolean;
+			preg: boolean;
+			figure: IslaFlags.Figure;
+		}
+
+		export function PitchVaginalPrompt(parse: IParse, opts: IPitchVaginalOpts) {
 			// [Against Wall][Mount Her][Go Under]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Against Wall",
@@ -1584,7 +1594,7 @@ export namespace IslaScenes {
 			Gui.SetButtonsFromList(options, false, undefined);
 		}
 
-		export function PitchVaginalUnder(parse: IParse, opts: any) {
+		export function PitchVaginalUnder(parse: IParse, opts: IPitchVaginalOpts) {
 			const player: Player = GAME().player;
 			const isla: Isla = GAME().isla;
 			Text.Clear();
@@ -1734,7 +1744,7 @@ export namespace IslaScenes {
 			IslaScenes.IslaSex.PitchVaginalExit(parse, opts);
 		}
 
-		export function PitchVaginalMount(parse: IParse, opts: any) {
+		export function PitchVaginalMount(parse: IParse, opts: IPitchVaginalOpts) {
 			const player: Player = GAME().player;
 			const isla: Isla = GAME().isla;
 			const figure = opts.figure;
@@ -1837,7 +1847,7 @@ export namespace IslaScenes {
 			IslaScenes.IslaSex.PitchVaginalExit(parse, opts);
 		}
 
-		export function PitchVaginalWall(parse: IParse, opts: any) {
+		export function PitchVaginalWall(parse: IParse, opts: IPitchVaginalOpts) {
 			const player: Player = GAME().player;
 			const isla: Isla = GAME().isla;
 			Text.Add("Grabbing Isla by the shoulders, you whirl her around, leading her to the nearest mountain face and pinning her against the cool, mossy rock.", parse);
@@ -1936,7 +1946,7 @@ export namespace IslaScenes {
 			IslaScenes.IslaSex.PitchVaginalExit(parse, opts);
 		}
 
-		export function PitchVaginalExit(parse: IParse, opts: any) {
+		export function PitchVaginalExit(parse: IParse, opts: IPitchVaginalOpts) {
 			const player: Player = GAME().player;
 			const isla: Isla = GAME().isla;
 

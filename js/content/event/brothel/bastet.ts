@@ -128,6 +128,12 @@ export namespace BastetScenes {
 		}
 	}
 
+	interface ITFEffect {
+		tf?: () => string;
+		odds?: number;
+		cond?: () => boolean;
+	}
+
 	export function TFBlock() {
 		const player: Player = GAME().player;
 
@@ -155,7 +161,7 @@ export namespace BastetScenes {
 			return false;
 		};
 
-		const func = (obj: any) => {
+		const func = (obj: ITFEffect) => {
 			scenes.AddEnc(() => {
 				TFapplied = true;
 				return _.isFunction(obj.tf) ? obj.tf() : "";
@@ -163,27 +169,27 @@ export namespace BastetScenes {
 		};
 
 		func({
-			tf() {
+			tf: () => {
 				for (const breasts of player.AllBreastRows()) {
 					breasts.size.IncreaseStat(40, 2);
 				}
 				return "Your [breasts] feel a bit heavier. It seems like your [breasts] have increased in size.";
 			},
 			odds: 2,
-			cond() { return player.SmallestBreasts().Size() < 40; },
+			cond: () => { return player.SmallestBreasts().Size() < 40; },
 		});
 		func({
-			tf() {
+			tf: () => {
 				for (const breasts of player.AllBreastRows()) {
 					breasts.nippleThickness.IncreaseStat(2, 0.5);
 					breasts.nippleLength.IncreaseStat(2, 0.5);
 				}
 				return "Your [nips] feel tingly, and upon closer examination, you realize they have grown bigger.";
 			},
-			cond() { return player.SmallestNips().NipSize() < 4; },
+			cond: () => { return player.SmallestNips().NipSize() < 4; },
 		});
 		func({
-			tf() {
+			tf: () => {
 				const ret = player.Lactation();
 				player.lactHandler.lactating = true;
 				player.lactHandler.FillMilk(1);
@@ -194,15 +200,15 @@ export namespace BastetScenes {
 			odds: 2,
 		});
 		func({
-			tf() {
+			tf: () => {
 				player.body.femininity.IncreaseStat(1, 0.1);
 				return "Your reflection looks more… feminine than before.";
 			},
 			odds: 1,
-			cond() { return player.body.femininity.Get() < 1; },
+			cond: () => { return player.body.femininity.Get() < 1; },
 		});
 		func({
-			tf() {
+			tf: () => {
 				const ret = player.HasBalls();
 				TF.SetBalls(player.Balls(), 2, 2);
 				player.Balls().size.IncreaseStat(6, 1);
@@ -210,35 +216,35 @@ export namespace BastetScenes {
 				return ret ? "Your balls feel heavier somehow, and you just know it isn’t just more cum that you’re producing. Your balls have actually gotten bigger." : "You note the addition of a nutsack below your [cocks]. This wasn’t here before...";
 			},
 			odds: 3,
-			cond() { return player.FirstCock(); },
+			cond: () => { return player.FirstCock() !== undefined; },
 		});
 		func({
-			tf() {
+			tf: () => {
 				player.body.cock.push(new Cock(Race.Feline));
 				parse = Text.ParserPlural(parse, player.NumCocks() > 1);
 				return "Looking between your legs, you notice that you seem to have acquired a feline pecker. Much like the one you had in the world beyond the mirror. Although it lacks a sheath, and isn’t nearly as big as the one you had as Bastet.";
 			},
 			odds: 1,
-			cond() { return !player.FirstCock(); },
+			cond: () => { return !player.FirstCock(); },
 		});
 		func({
-			tf() {
+			tf: () => {
 				player.FirstVag().minStretch.IncreaseStat(Capacity.loose, 0.5);
 				return "Your [vag] tingles for some reason. Spreading your nethers to examine yourself, you note that you feel much more stretchy than before. This should let you take bigger cocks than you could before.";
 			},
 			odds: 1,
-			cond() { return player.FirstVag() && player.FirstVag().Tightness() < Capacity.loose; },
+			cond: () => { return player.FirstVag() && player.FirstVag().Tightness() < Capacity.loose; },
 		});
 		func({
-			tf() {
+			tf: () => {
 				player.body.vagina.push(new Vagina());
 				return "A tingling between your legs bothers you, and you move to scratch it. A gasp of pleasure escapes you as you unwittingly touch a pair of pussy lips between your legs. It seems that you have grown a new pussy.";
 			},
 			odds: 1,
-			cond() { return !player.FirstVag(); },
+			cond: () => { return !player.FirstVag(); },
 		});
 		func({
-			tf() {
+			tf: () => {
 				let t: string;
 				if (!player.Ears().race.isRace(Race.Feline)) {
 					t = Text.Parse("You hadn’t realized before, but it seems your [ears] have have turned into triangular cat-ears. You twitch them experimentally and reach up to touch them. These are no illusion...", parse);
@@ -287,7 +293,7 @@ export namespace BastetScenes {
 				}
 			},
 			odds: 3,
-			cond() { return incompleteCatTF(); },
+			cond: () => { return incompleteCatTF(); },
 		});
 
 		const text: string[] = [];

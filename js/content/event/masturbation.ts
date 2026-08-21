@@ -59,7 +59,7 @@ export namespace MasturbationScenes {
 			_.each(player.AllCocks(), (c: Cock) => {
 				optsTc.push({ nameStr : c.race.qCShort(),
 					tooltip : c.aLong(),
-					func: (obj: any) => {
+					func: (obj: Cock) => {
 						MasturbationScenes.CockOpening(obj);
 					}, enabled : true,
 					obj : c,

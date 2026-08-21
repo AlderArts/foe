@@ -726,11 +726,11 @@ export namespace MariaScenes {
 
                 const enemy = new Party();
                 enemy.AddMember(maria);
-                const enc: any = new Encounter(enemy);
+                const enc: Encounter = new Encounter(enemy);
 
                 maria.RestFull();
 
-                enc.oldParty = party.members;
+                const oldParty = party.members;
                 party.members = [player];
 
                 maria.pots = 2;
@@ -738,7 +738,7 @@ export namespace MariaScenes {
                 enc.canRun = false;
                 enc.onLoss = () => {
                     SetGameState(GameState.Event, Gui);
-                    party.members = enc.oldParty;
+                    party.members = oldParty;
 
                     maria.flags.Met |= MariaFlags.Met.FightLost;
 
@@ -769,7 +769,7 @@ export namespace MariaScenes {
                 };
                 enc.onVictory = () => {
                     SetGameState(GameState.Event, Gui);
-                    party.members = enc.oldParty;
+                    party.members = oldParty;
                     MariaScenes.ForestConfrontWin();
                 };
 

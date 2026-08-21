@@ -446,7 +446,7 @@ export namespace RavenMotherScenes {
 		prompt();
 	}
 
-	export function TheHuntQuestions(back: any) {
+	export function TheHuntQuestions(back: CallableFunction) {
 		const parse: IParse = {
 
 		};
@@ -515,7 +515,7 @@ export namespace RavenMotherScenes {
 		Gui.SetButtonsFromList(options, true, back);
 	}
 
-	export function RavenPrompt(back: any) {
+	export function RavenPrompt(back: CallableFunction) {
 		const ravenmother: RavenMother = GAME().ravenmother;
 
 		const parse: IParse = {};

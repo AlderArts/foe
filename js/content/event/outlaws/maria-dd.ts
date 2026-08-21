@@ -114,7 +114,7 @@ export namespace DeadDropScenes {
 		});
 	}
 
-	export function Repeat(CampPrompt: any) {
+	export function Repeat(CampPrompt: CallableFunction) {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const maria: Maria = GAME().maria;
@@ -197,7 +197,7 @@ export namespace DeadDropScenes {
 	}
 
 	export namespace First {
-		export function Chat(CampPrompt: any) {
+		export function Chat(CampPrompt: CallableFunction) {
 			const parse: IParse = {};
 
 			Text.Clear();

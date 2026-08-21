@@ -5,6 +5,7 @@ import { GAME, MoveToLocation, TimeStep, WORLD, WorldTime } from "../../../engin
 import { CombatItems } from "../../../engine/inventory/items/combatitems";
 import { QuestItems } from "../../../engine/inventory/items/quest";
 import { IChoice } from "../../../engine/navigation/link";
+import { ILocation } from "../../../engine/navigation/location";
 import { Party } from "../../../engine/navigation/party";
 import { Time } from "../../../engine/navigation/time";
 import { IParse, Text } from "../../../engine/parser/text";
@@ -48,7 +49,7 @@ export namespace VaughnTasksScenes {
  		}
 	}
 
-	export function TaskPrompt(Prompt: any) {
+	export function TaskPrompt(Prompt: CallableFunction) {
 		const parse: IParse = {
 
 		};
@@ -424,7 +425,7 @@ export namespace VaughnTasksScenes {
 			Gui.NextPrompt();
 		}
 
-		export function MirandaTalk(options: any[], onDuty: any) {
+		export function MirandaTalk(options: IChoice[], onDuty: boolean) {
 			const miranda: Miranda = GAME().miranda;
 			const vaughn: Vaughn = GAME().vaughn;
 
@@ -439,7 +440,7 @@ export namespace VaughnTasksScenes {
 			}
 		}
 
-		export function Miranda(onDuty: any) {
+		export function Miranda(onDuty: boolean) {
 			const player: Player = GAME().player;
 			const vaughn: Vaughn = GAME().vaughn;
 			const miranda: Miranda = GAME().miranda;
@@ -1223,7 +1224,7 @@ export namespace VaughnTasksScenes {
 			return true;
 		}
 
-		export function ArrivalAtInn(onWait: any, oldLocation?: any) {
+		export function ArrivalAtInn(onWait: boolean, oldLocation?: ILocation) {
 			const parse: IParse = {
 				Orvin : RigardFlags.LB.KnowsOrvin() ? "Orvin" : "the innkeeper",
 			};
@@ -1250,7 +1251,14 @@ export namespace VaughnTasksScenes {
 			VaughnTasksScenes.Poisoning.InnPrompt({});
 		}
 
-		export function InnPrompt(opts: any) {
+		interface IInnOpts {
+			Orvin?: boolean;
+			Waiters?: boolean;
+			Lei?: boolean;
+			Twins?: boolean;
+		}
+
+		export function InnPrompt(opts: IInnOpts) {
 			const player: Player = GAME().player;
 			const party: Party = GAME().party;
 			const vaughn: Vaughn = GAME().vaughn;
@@ -1608,7 +1616,7 @@ export namespace VaughnTasksScenes {
 			Gui.SetButtonsFromList(options, false, undefined);
 		}
 
-		export function Kitchen(_opts: any) {
+		export function Kitchen(_opts: IInnOpts) {
 			const player: Player = GAME().player;
 			const party: Party = GAME().party;
 			const vaughn: Vaughn = GAME().vaughn;

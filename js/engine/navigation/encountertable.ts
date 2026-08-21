@@ -2,7 +2,7 @@ import * as _ from "lodash";
 import { Link } from "./link";
 
 export interface IScene {
-	func: (obj: any) => any;
+	func: CallableFunction;
 	odds?: number | (() => number);
 	cond?: boolean | (() => boolean);
 	obj?: any;
@@ -22,7 +22,7 @@ export class EncounterTable {
 	}
 
 	// Setup phase
-	public AddEnc(func: (obj: any) => any, odds?: number | (() => number), cond?: boolean | (() => boolean), obj?: any) {
+	public AddEnc(func: CallableFunction, odds?: number | (() => number), cond?: boolean | (() => boolean), obj?: any) {
 		this.encounters.push({func, odds, cond, obj});
 	}
 

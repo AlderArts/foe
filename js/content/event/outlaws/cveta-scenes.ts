@@ -1562,7 +1562,14 @@ export namespace CvetaScenes {
 		CvetaScenes.FirstMeetingPrompt(opts);
 	}
 
-	export function FirstMeetingPrompt(opts: any) {
+	interface IFirstMeetingOpts {
+		wellbeing?: boolean;
+		outlaws?: boolean;
+		music?: boolean;
+		weather?: boolean;
+	}
+
+	export function FirstMeetingPrompt(opts: IFirstMeetingOpts) {
 		const player: Player = GAME().player;
 
 		const parse: IParse = {
@@ -2037,7 +2044,7 @@ export namespace CvetaScenes {
  }
 	}
 
-	export function DreamRoses(ravenTrigger: any) {
+	export function DreamRoses(ravenTrigger: boolean) {
 		const parse: IParse = {
 			raven : DreamsScenes.RavenText(ravenTrigger, " and a raven perched on one of the thorny rosebushes", " and the familiar form of a raven perched on one of the rosebushes, something you should remember"),
 		};
@@ -2059,7 +2066,7 @@ export namespace CvetaScenes {
 		Text.Add("You wake, feeling strangely saddened.", parse);
 	}
 
-	export function DreamBrood(ravenTrigger: any) {
+	export function DreamBrood(ravenTrigger: boolean) {
 		const player: Player = GAME().player;
 
 		const parse: IParse = {
