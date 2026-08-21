@@ -40,7 +40,7 @@ tIllusion.castTree.push((ability: Ability, encounter: Encounter, caster: Entity)
 	parse.num = Text.NumToText(num);
 
 	Text.Add("Weaving [hisher] [hand]s in exotic patterns, [name] create[notS] [num] terrifying apparitions, which rise from purple smoke; bellowing in rage while drawing their phantasmal weapons.", parse);
-	Status.Decoy(caster, { copies : num, func : (attacker: Entity) => {
+	Status.Decoy(caster, { copies : num, OnHit : (attacker: Entity) => {
 		const decoy = caster.combatStatus.stats[StatusEffect.Decoy];
 		const num = decoy.copies;
 		decoy.copies--;
@@ -79,7 +79,7 @@ sIllusion.castTree.push((ability: Ability, encounter: Encounter, caster: Entity)
 	parse.num = Text.NumToText(num);
 
 	Text.Add("Weaving [hisher] [hand]s in exotic patterns, [name] create[notS] [num] mesmerising and utterly lewd images which strut about invitingly; offering comfort and release with throaty groans and soft, alluring gasps.", parse);
-	Status.Decoy(caster, { copies : num, func : (attacker: Entity) => {
+	Status.Decoy(caster, { copies : num, OnHit : (attacker: Entity) => {
 		const decoy = caster.combatStatus.stats[StatusEffect.Decoy];
 		const num = decoy.copies;
 		decoy.copies--;

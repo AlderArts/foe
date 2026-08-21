@@ -7,6 +7,7 @@ import { IStorage } from "../entity/istorage";
 import { CurEncounter } from "./combat-data";
 import { DamageType } from "./damagetype";
 import type { Entity } from "../entity/entity";
+import { Encounter } from "./combat";
 
 export enum StatusEffect {
 	Burn     = 0, // OK
@@ -40,10 +41,46 @@ export enum StatusEffect {
 	LAST     = 27,
 }
 
+export interface IStatusEffectOpts {
+	hit?: number;
+	turns?: number;
+	turnsR?: number;
+	str?: number;
+	dmg?: number;
+	oocDmg?: number;
+	proc?: number;
+	hp?: number;
+	sp?: number;
+	lp?: number;
+	caster?: Entity;
+	factor?: number;
+	hours?: number;
+	fer?: number;
+	copies?: number;
+	hits?: number;
+	OnHit?: CallableFunction;
+	exp?: number;
+}
+
+	// All modifiers are multipliers, so 1.05 means 5% extra.
+export interface IBuffOpts {
+	hours?: number;
+	Str?  : number;
+	Sta?  : number;
+	Dex?  : number;
+	Int?  : number;
+	Spi?  : number;
+	Lib?  : number;
+	Cha?  : number;
+	HP?   : number;
+	SP?   : number;
+	LP?   : number;
+};
+
 export namespace Status {
 	export const Keys = _.keys(StatusEffect);
 
-	export function Venom(target: Entity, opts?: any) {
+	export function Venom(target: Entity, opts?: IStatusEffectOpts) {
 		if (!target) { return; }
 		opts = opts || {};
 
@@ -85,7 +122,7 @@ export namespace Status {
 		}
 	};
 
-	export function Burn(target: Entity, opts?: any) {
+	export function Burn(target: Entity, opts?: IStatusEffectOpts) {
 		if (!target) { return; }
 		opts = opts || {};
 
@@ -127,7 +164,7 @@ export namespace Status {
 		}
 	};
 
-	export function Freeze(target: Entity, opts?: any) {
+	export function Freeze(target: Entity, opts?: IStatusEffectOpts) {
 		if (!target) { return; }
 		opts = opts || {};
 
@@ -159,7 +196,7 @@ export namespace Status {
 		}
 	};
 
-	export function Numb(target: Entity, opts?: any) {
+	export function Numb(target: Entity, opts?: IStatusEffectOpts) {
 		if (!target) { return; }
 		opts = opts || {};
 
@@ -190,7 +227,7 @@ export namespace Status {
 		}
 	};
 
-	export function Blind(target: Entity, opts?: any) {
+	export function Blind(target: Entity, opts?: IStatusEffectOpts) {
 		if (!target) { return; }
 		opts = opts || {};
 
@@ -222,7 +259,7 @@ export namespace Status {
 		}
 	};
 
-	export function Siphon(target: Entity, opts?: any) {
+	export function Siphon(target: Entity, opts?: IStatusEffectOpts) {
 		if (!target) { return; }
 		opts = opts || {};
 
@@ -266,7 +303,7 @@ export namespace Status {
 		}
 	};
 
-	export function Sleep(target: Entity, opts?: any) {
+	export function Sleep(target: Entity, opts?: IStatusEffectOpts) {
 		if (!target) { return; }
 		opts = opts || {};
 
@@ -296,7 +333,7 @@ export namespace Status {
 		}
 	};
 
-	export function Bleed(target: Entity, opts?: any) {
+	export function Bleed(target: Entity, opts?: IStatusEffectOpts) {
 		if (!target) { return; }
 		opts = opts || {};
 
@@ -336,7 +373,7 @@ export namespace Status {
 	};
 
 	// TODO: Use as heal of slow?
-	export function Haste(target: Entity, opts?: any) {
+	export function Haste(target: Entity, opts?: IStatusEffectOpts) {
 		if (!target) { return; }
 		opts = opts || {};
 
@@ -362,7 +399,7 @@ export namespace Status {
 	};
 
 	// TODO: Remove haste?
-	export function Slow(target: Entity, opts?: any) {
+	export function Slow(target: Entity, opts?: IStatusEffectOpts) {
 		if (!target) { return; }
 		opts = opts || {};
 
@@ -395,7 +432,7 @@ export namespace Status {
 		}
 	};
 
-	export function Horny(target: Entity, opts?: any) {
+	export function Horny(target: Entity, opts?: IStatusEffectOpts) {
 		if (!target) { return; }
 		opts = opts || {};
 
@@ -437,7 +474,7 @@ export namespace Status {
 	};
 
 	// All modifiers are multipliers, so 1.05 means 5% extra.
-	export function Aroused(target: Entity, opts?: any) {
+	export function Aroused(target: Entity, opts?: IStatusEffectOpts) {
 		if (!target) { return; }
 		opts = opts || {};
 
@@ -493,7 +530,7 @@ export namespace Status {
 	};
 
 	// All modifiers are multipliers, so 1.05 means 5% extra.
-	export function Limp(target: Entity, opts?: any) {
+	export function Limp(target: Entity, opts?: IStatusEffectOpts) {
 		if (!target) { return; }
 		opts = opts || {};
 
@@ -549,14 +586,14 @@ export namespace Status {
 		return obj;
 	};
 
-	export function Decoy(target: Entity, opts?: any) {
+	export function Decoy(target: Entity, opts?: IStatusEffectOpts) {
 		if (!target) { return; }
 		opts = opts || {};
 
 		// Apply decoy
 		target.combatStatus.stats[StatusEffect.Decoy] = {
 			copies  : opts.copies,
-			func    : opts.func,
+			func    : opts.OnHit,
 		};
 
 		return true;
@@ -565,7 +602,7 @@ export namespace Status {
 	/*
 	* OnHit = function(enc, target, attacker, dmg)
 	*/
-	export function Counter(target: Entity, opts?: any) {
+	export function Counter(target: Entity, opts?: IStatusEffectOpts) {
 		if (!target) { return; }
 		opts = opts || {};
 
@@ -591,7 +628,7 @@ export namespace Status {
 	};
 
 	// opts.exp is a modifier that adds extra exp. 1.05 means 5% extra, rounded up.
-	export function Full(target: Entity, opts?: any) {
+	export function Full(target: Entity, opts?: IStatusEffectOpts) {
 		if (!target) { return; }
 		opts = opts || {};
 
@@ -633,7 +670,7 @@ export namespace Status {
 	/*
 	* func = function(encounter, activeChar)
 	*/
-	export function Confuse(target: Entity, opts?: any) {
+	export function Confuse(target: Entity, opts?: IStatusEffectOpts) {
 		if (!target) { return; }
 		opts = opts || {};
 
@@ -650,9 +687,9 @@ export namespace Status {
 		// Apply confuse
 		target.combatStatus.stats[StatusEffect.Confuse] = {
 			turns,
-			func   : opts.func || undefined,
+			func   : opts.OnHit || undefined,
 			Tick   : Confuse.Tick,
-			OnFade : opts.fade || Confuse.OnFade,
+			OnFade : opts.OnHit || Confuse.OnFade,
 		};
 
 		// cleanup
@@ -673,7 +710,7 @@ export namespace Status {
 			target.combatStatus.stats[StatusEffect.Confuse] = undefined;
 		}
 	};
-	Confuse.OnFade = (encounter: any, entity: Entity) => {
+	Confuse.OnFade = (encounter: Encounter, entity: Entity) => {
 		// cleanup
 		for (let i = 0, j = encounter.combatOrder.length; i < j; i++) {
 			const c = encounter.combatOrder[i];
@@ -686,7 +723,7 @@ export namespace Status {
 		entity.combatStatus.stats[StatusEffect.Confuse] = undefined;
 	};
 
-	export function Weakness(target: Entity, opts?: any) {
+	export function Weakness(target: Entity, opts?: IStatusEffectOpts) {
 		if (!target) { return; }
 		opts = opts || {};
 
@@ -718,7 +755,7 @@ export namespace Status {
 	};
 
 	// All modifiers are multipliers, so 1.05 means 5% extra.
-	export function Buff(target: Entity, opts?: any) {
+	export function Buff(target: Entity, opts?: IBuffOpts) {
 		if (!target) { return; }
 		opts = opts || {};
 
@@ -787,7 +824,7 @@ export namespace Status {
 		return obj;
 	};
 
-	export function Curse(target: Entity, opts?: any) {
+	export function Curse(target: Entity, opts?: IStatusEffectOpts) {
 		if (!target) { return; }
 		opts = opts || {};
 

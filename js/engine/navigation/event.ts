@@ -20,18 +20,28 @@ import { ILocation, ILocationEnc } from "./location";
  *
  */
 
+export interface IEventOpts {
+	description?: string|(() => void);
+	endDescription?: string|(() => void);
+	links?: Link[];
+	events?: Link[];
+	hunt?: Link[];
+	onEntry?: (preventClear?: boolean, from?: ILocation) => void;
+	enc?: EncounterTable;
+}
+
 export class Event implements ILocation {
 	public nameFunc: string|(() => string);
-	public description: () => void;
-	public endDescription: () => void;
+	public description: string|(() => void);
+	public endDescription: string|(() => void);
 	public links: Link[];
 	public events: Link[];
 	public hunt: Link[];
-	public onEntry: () => void;
+	public onEntry: (preventClear?: boolean, from?: ILocation) => void;
 	public enc: EncounterTable;
 	public SaveSpot: string;
 
-	constructor(nameFunc: string|(() => string), opts?: any) {
+	constructor(nameFunc: string|(() => string), opts?: IEventOpts) {
 		opts = opts || {};
 		// Returns the name of the location/event
 		this.nameFunc = nameFunc;

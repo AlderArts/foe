@@ -23,8 +23,8 @@ export interface ILocation {
     WaitFunc: () => void;
     DrunkHandler: () => void;
     PrintDesc: () => void;
-    description: () => void;
-    endDescription: () => void;
+    description: string|(() => void);
+    endDescription: string|(() => void);
     onEntry: (preventClear?: boolean, from?: ILocation) => void;
     events: Link[];
     links: Link[];
