@@ -340,7 +340,7 @@ export class Cavalcade {
 			Text.NL();
 		case 1:
 		case 2:
-		case 3:
+		case 3: {
 			if (GAME().player.out) {
 				Text.Add("You are no longer in the game.");
 			} else if (GAME().player.folded) {
@@ -434,8 +434,9 @@ export class Cavalcade {
 				}, true);
 			}
 			break;
+		}
 
-		default:
+		default: {
 			that.Finish();
 
 			Text.NL();
@@ -490,6 +491,7 @@ export class Cavalcade {
 			that.onPost();
 
 			break;
+		}
 		}
 		Text.Flush();
 		that.round++;

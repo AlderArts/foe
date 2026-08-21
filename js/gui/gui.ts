@@ -890,7 +890,7 @@ export class Gui {
 				overlay.show();
 
 				break;
-			case GameState.Cavalcade:
+			case GameState.Cavalcade: {
 				party.hide();
 				enemy.hide();
 				const cavalcade = GetCavalcade();
@@ -951,6 +951,7 @@ export class Gui {
 				Gui.RenderLocation(GAME().party.location.nameFunc);
 				overlay.show();
 				break;
+			}
 		}
 	}
 
