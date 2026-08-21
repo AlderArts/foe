@@ -42,7 +42,6 @@ export default tseslint.config(
 			'no-useless-assignment': 'warn',
 			'no-case-declarations': 'warn',
 			'no-constant-condition': 'warn',
-			'no-dupe-else-if': 'warn',
 			'@typescript-eslint/no-duplicate-enum-values': 'warn',
 			'no-constant-binary-expression': 'warn',
 			'no-fallthrough': 'warn',

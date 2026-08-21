@@ -8986,12 +8986,12 @@ export namespace TerryScenes {
 		Text.Add("[HeShe] grunts with effort as [heshe] pushes inside you, driving [himher]self as far as [heshe] can into your pliable cunt, then [heshe] tries to pull away once more. The two of your repeat this back and forth until you can’t take it anymore and you clamp down on your willing partner’s shaft.", parse);
 		Text.NL();
 
-		let cum = player.OrgasmCum();
+		player.OrgasmCum();
 
 		Text.Add("You cry out in pleasure as your pussy spasms and your juices flood your passage; your walls contract, working to milk the member embedded deep within you. Terry grips your hips extra-hard, but not hard enough to hurt you, as [heshe] grinds [himher]self against you, gyrating [hisher] hips to grant you maximum pleasure before [heshe] climaxes [himher]self.", parse);
 		Text.NL();
 
-		cum = terry.OrgasmCum();
+		const cum = terry.OrgasmCum();
 		TerryScenes.Impregnate(player, terry, cum, PregnancyHandler.Slot.Vag);
 
 		Text.Add("You can feel the warmth spreading throughout your nethers mixing with your juices. With the [foxvixen]’s knot holding you shut, the mixture has nowhere to go but into your womb. Terry’s load isn’t exactly prodigious, but all things considered, you’d still say [heshe] came buckets. The two of you grind into each other as you come off your orgasmic high. The [foxvixen] collapses atop you and you move to embrace your lover as you feel the heat in your [vag] die out into an ember that spreads pleasantly through your body.", parse);
@@ -9113,7 +9113,7 @@ export namespace TerryScenes {
 		Text.NL();
 		if (terry.Relation() < 30) {
 			Text.Add("[HeShe]'s... well, if you're honest, [heshe]'s not very good, but at least [heshe]'s making an honest effort at it. Just that fact alone is enough to make you squeeze down a little tighter, a delicious tingling spreading through your nethers. When [heshe] chances upon a particularly sweet spot, you moan shamelessly, letting [himher] know [heshe]’s hit the right stuff.", parse);
-		} else if (terry.Relation() < 30) {
+		} else if (terry.Relation() < 60) {
 			Text.Add("The [foxvixen]'s efforts are a little hit-and-miss, but [heshe]'s got a good memory for the sweeter spots. The slightest twitch on your face or the whisper of a moan and [heshe] redirects [hisher] efforts, teasing some of your more blatant spots and making you grow wetter. [HeShe] could use a little more practice, but [heshe] definitely knows how to get you all fired up.", parse);
 		} else {
 			Text.Add("You may as well be putty in your vulpine lover's hands. [HisHer] dexterous digit seeks out even the most well-hidden and sensitive of your pleasure spots with needle-like precision, leaving you squirming and mewling happily as [heshe] plays with you.", parse);
@@ -9147,7 +9147,7 @@ export namespace TerryScenes {
 		Text.NL();
 		if (terry.Relation() < 30) {
 			Text.Add("The [foxvixen] wriggles a little in your arms, clearly not entirely enthused with the idea of being your cuddly toy, but you just tighten your grip. [HeShe] sighs softly and submits. Still, as you drift off, you think you feel [himher] snuggle in a little closer.", parse);
-		} else if (terry.Relation() < 30) {
+		} else if (terry.Relation() < 60) {
 			Text.Add("Terry seems content to put up with your sudden need for a life-sized stuffed toy. [HeShe] makes [himher]self comfortable and the two of you soon drift off together in equitable silence.", parse);
 		} else {
 			Text.Add("Your lover is caught off-guard by your sudden glomp, but quickly rallies and hugs you back. Lost in each other's arms, you nuzzle each other sleepily and allow sleep to claim you both.", parse);
@@ -9535,11 +9535,11 @@ export namespace TerryScenes {
 				Text.Add("The sound of flesh slapping against flesh competes with the sound of your heartbeat racing in your [ears], drowning out the world around you. There is only you and Terry, connected by the [tcock] ravaging your [anus]. Finally, in one definitive thrust, Terry slams [himher]self home, bulging knot stretching your asshole to its breaking point before gliding inside.", parse);
 				Text.NL();
 
-				let cum = terry.OrgasmCum();
+				const cum = terry.OrgasmCum();
 
 				TerryScenes.Impregnate(player, terry, cum, PregnancyHandler.Slot.Butt);
 
-				cum = player.OrgasmCum();
+				player.OrgasmCum();
 
 				Text.Add("As your pucker grinds shut, Terry howls like the fox [heshe] resembles, firing ropes of hot cum into your sealed tight hole, the feel of liquid warmth splashing around inside of you the final thing you needed to push you over the edge. Your own cry of ecstasy rises to match your partner’s as your body quakes in orgasm.", parse);
 				if (player.FirstCock()) {
@@ -9620,7 +9620,7 @@ export namespace TerryScenes {
 				Text.Add("Faster than you can follow, Terry pulls you backwards as [heshe] falls onto [hisher] shapely behind, the sudden shift in position bringing gravity to play. Your own weight means you fall down hard on Terry’s shaft, the [tcock] spearing upward with such force that [hisher] knot proves no obstacle. Instead, you feel your anal ring stretching with all its might as it envelops the proud bulb of [foxvixen] flesh, driving it completely inside before you wetly slurp shut around it.", parse);
 				Text.NL();
 
-				let cum = terry.OrgasmCum();
+				const cum = terry.OrgasmCum();
 
 				TerryScenes.Impregnate(player, terry, 2 * cum, PregnancyHandler.Slot.Butt);
 
@@ -9649,7 +9649,7 @@ export namespace TerryScenes {
 				Text.Add("If Terry says anything, it’s drowned out by your own cry of ecstasy as [heshe] provides the last bits of stimulation you need. In your mind, the metaphorical dam breaks, drowning you in a sea of pleasure. Your nerves spark and your blood sings as you arch your back, shuddering violently in climax.", parse);
 				Text.NL();
 
-				cum = player.OrgasmCum();
+				player.OrgasmCum();
 
 				if (player.FirstCock()) {
 					Text.Add("Your [cocks], painfully erect and throbbing by this point, finally erupt[s] under Terry’s nimble fingers. Ropes of seed fly from your loins, drenching the [foxvixen]’s hands and painting the ground before you with the fruits of your pleasure.", parse);
@@ -9791,11 +9791,11 @@ export namespace TerryScenes {
 					Text.Add("[HisHer] eyes home in on your [cocks], and in one fell swoop [heshe] takes[oneof] your cock[s] into [hisher] mouth, sucking on the [cockTip] in an effort to grant you that last spike you need to orgasm yourself.", parse);
 					Text.NL();
 
-					let cum = terry.OrgasmCum();
+					const cum = terry.OrgasmCum();
 
 					TerryScenes.Impregnate(player, terry, cum, PregnancyHandler.Slot.Butt);
 
-					cum = player.OrgasmCum();
+					player.OrgasmCum();
 
 					Text.Add("You fling your head back and cry out as you explode into the [foxvixen]’s suckling mouth. Terry valiantly swallows and gulps, drinking every last drop you have to give [himher].", parse);
 					Text.NL();
@@ -9811,11 +9811,11 @@ export namespace TerryScenes {
 					Text.Add("[HisHer] eyes home in on your [vag], and in a moment of desperation [heshe] shuffles to finger your moist entrance. Two digits are crammed inside your pussy, while [hisher] thumb teases your [clit]. This is the last straw - you can’t hold back anymore!", parse);
 					Text.NL();
 
-					let cum = terry.OrgasmCum();
+					const cum = terry.OrgasmCum();
 
 					TerryScenes.Impregnate(player, terry, cum, PregnancyHandler.Slot.Butt);
 
-					cum = player.OrgasmCum();
+					player.OrgasmCum();
 
 					Text.Add("You cry out in pleasure, quaking violently against your vulpine lover. Your [vag] clasps shut, trying to squeeze [hisher] fingers like the cock they have pretended to be, drenching [hisher] wrist in your feminine honey.", parse);
 					Text.NL();
@@ -11835,7 +11835,7 @@ export namespace TerryScenes {
 			Text.NL();
 			if (terry.Relation() < 30) {
 				Text.Add("Before you can sink too far into your reverie, a sharp cough from above reaches your ears. Terry doesn’t sound too thrilled with you sniffing [himher] like that, and so you sadly let go of [hisher] fur and get back to business.", parse);
-			} else if (terry.Relation() < 30) {
+			} else if (terry.Relation() < 60) {
 				Text.Add("<i>“Enjoying yourself?”</i> Terry asks with a hint of mirth in [hisher] voice.", parse);
 				Text.NL();
 				Text.Add("You sigh and nod dreamily in response. There’s still much more to come, and so you reluctantly let Terry go.", parse);

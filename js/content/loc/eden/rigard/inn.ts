@@ -206,7 +206,7 @@ InnLoc.Common.onEntry = (preventClear: boolean, oldLocation: ILocation) => {
 		Text.Add("<i>“Welcome to the Lady’s Blessing, [sir],”</i> she greets you with a bow and a collected smile. ", parse);
 		if (party.NumTotal() === 1) {
 			parse.comp = "";
-		} else if (party.NumTotal() === 1) {
+		} else if (party.NumTotal() === 2) {
 			parse.comp = " and your friend";
 		} else {
 			parse.comp = " and your friends";
