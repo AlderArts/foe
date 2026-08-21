@@ -872,7 +872,7 @@ export class Gui {
 				} else {
 					enemy.hide();
 				}
-
+				// falls through intentionally
 			case GameState.Game:
 			case GameState.Event:
 				if (gameState === GameState.Game) {

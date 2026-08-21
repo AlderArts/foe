@@ -130,6 +130,7 @@ export class Input {
 				for (const button of exploreButtons) {
 					button.HandleKeydown(event.keyCode);
 				}
+				// falls through intentionally
 			case GameState.Event:
 			case GameState.Credits:
 			case GameState.Combat:

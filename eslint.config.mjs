@@ -36,8 +36,7 @@ export default tseslint.config(
 			// Legacy codebase: keep the noisiest rules as warnings until a cleanup pass
 			'@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
 			'@typescript-eslint/no-namespace': 'off',
-			'@typescript-eslint/no-explicit-any': 'warn',
-			'no-fallthrough': 'warn'
+			'@typescript-eslint/no-explicit-any': 'warn'
 		}
 	}
 );

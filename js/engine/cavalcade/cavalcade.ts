@@ -335,6 +335,7 @@ export class Cavalcade {
 			}
 			Text.Add("There are [pot] [token]s in the pot.", parse, "bold");
 			Text.NL();
+			// falls through intentionally
 		case 1:
 		case 2:
 		case 3: {
