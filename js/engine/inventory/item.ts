@@ -4,6 +4,7 @@ import { DamageType } from "../combat/damagetype";
 import { Status, StatusEffect } from "../combat/statuseffect";
 import { Entity } from "../entity/entity";
 import { Text } from "../parser/text";
+import { CombatItemAbility } from "./items/combatitems";
 
 export interface IItemQuantity {
 	it: Item;
@@ -47,7 +48,7 @@ export class Item {
 	public Use: any;
 	public effect: any;
 	public isTF: boolean;
-	public combat: any;
+	public combat: CombatItemAbility;
 
 	constructor(id: string, name: string, type: ItemType) {
 		// Required (An item will always have these)

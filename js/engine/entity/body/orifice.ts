@@ -52,7 +52,7 @@ export class Orifice {
 		this.capacity.base   = parseFloat(storage.cap)  || this.capacity.base;
 		this.minStretch.base = parseFloat(storage.mstr) || this.minStretch.base;
 		this.stretch.base    = parseFloat(storage.str)  || this.stretch.base;
-		this.virgin          = storage.hasOwnProperty("virgin") ? parseInt(storage.virgin, 10) === 1 : this.virgin;
+		this.virgin          = Object.hasOwn(storage, "virgin") ? parseInt(storage.virgin, 10) === 1 : this.virgin;
 	}
 
 	public Capacity() {

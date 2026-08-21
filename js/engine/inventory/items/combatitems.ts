@@ -44,7 +44,6 @@ export class CombatItem extends Item {
 		Text.NL();
 	}
 	public consume: boolean;
-	public combat: CombatItemAbility;
 
 	constructor(id: string, name: string, type?: ItemType) {
 		super(id, name, type);

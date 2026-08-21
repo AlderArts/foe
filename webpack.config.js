@@ -55,7 +55,7 @@ module.exports = {
       {
         test: /\.tsx?$/,
         loader: 'esbuild-loader',
-        options: { target: 'es2015' },
+        options: { target: 'es2022' },
         exclude: /node_modules/
       },
       {

@@ -48,7 +48,7 @@ export namespace Saver {
 		if (HasSaves()) {
 			let storageLength = 0;
 			for (const key in localStorage) {
-				if (localStorage.hasOwnProperty(key) && localStorage[key].length) {
+				if (Object.hasOwn(localStorage, key) && localStorage[key].length) {
 					storageLength += localStorage[key].length;
 				}
 			}
@@ -147,7 +147,7 @@ export namespace Saver {
 		if (HasSaves()) {
 			let storageLength = 0;
 			for (const key in localStorage) {
-				if (localStorage.hasOwnProperty(key) && localStorage[key].length) {
+				if (Object.hasOwn(localStorage, key) && localStorage[key].length) {
 					storageLength += localStorage[key].length;
 				}
 			}
