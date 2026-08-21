@@ -372,37 +372,35 @@ export class Entity {
 		this.sexpToLevel  = this.SexpToLevel;
 
 		// Base stats
-		const that = this;
-
 		// Health stat and functions
 		this.curHp        = 0;
 		this.maxHp        = new Stat(10, 10, 5);
-		this.maxHp.debug = () => that.name + ".maxHp";
+		this.maxHp.debug = () => this.name + ".maxHp";
 		// SP
 		this.curSp        = 0;
 		this.maxSp        = new Stat(10, 5, 5);
-		this.maxSp.debug = () => that.name + ".maxSp";
+		this.maxSp.debug = () => this.name + ".maxSp";
 
 		// Lust stat and functions
 		this.curLust      = 0;
 		this.maxLust      = new Stat(10, 5, 5);
-		this.maxLust.debug = () => that.name + ".maxLust";
+		this.maxLust.debug = () => this.name + ".maxLust";
 
 		// Main stats
 		this.strength     = new Stat(0, 1, 0.1);
-		this.strength.debug = () => that.name + ".strength";
+		this.strength.debug = () => this.name + ".strength";
 		this.stamina      = new Stat(0, 1, 0.1);
-		this.stamina.debug = () => that.name + ".stamina";
+		this.stamina.debug = () => this.name + ".stamina";
 		this.dexterity    = new Stat(0, 1, 0.1);
-		this.dexterity.debug = () => that.name + ".dexterity";
+		this.dexterity.debug = () => this.name + ".dexterity";
 		this.intelligence = new Stat(0, 1, 0.1);
-		this.intelligence.debug = () => that.name + ".intelligence";
+		this.intelligence.debug = () => this.name + ".intelligence";
 		this.spirit       = new Stat(0, 1, 0.1);
-		this.spirit.debug = () => that.name + ".spirit";
+		this.spirit.debug = () => this.name + ".spirit";
 		this.libido       = new Stat(0, 1, 0.1);
-		this.libido.debug = () => that.name + ".libido";
+		this.libido.debug = () => this.name + ".libido";
 		this.charisma     = new Stat(0, 1, 0.1);
-		this.charisma.debug = () => that.name + ".charisma";
+		this.charisma.debug = () => this.name + ".charisma";
 
 		this.elementAtk   = new DamageType();
 		this.elementDef   = new DamageType();
@@ -444,11 +442,11 @@ export class Entity {
 
 		// Personality stats
 		this.subDom   = new Stat(0); // sub = low, dom = high
-		this.subDom.debug = () => that.name + ".subDom";
+		this.subDom.debug = () => this.name + ".subDom";
 		this.slut     = new Stat(0);
-		this.slut.debug = () => that.name + ".slut";
+		this.slut.debug = () => this.name + ".slut";
 		this.relation = new Stat(0);
-		this.relation.debug = () => that.name + ".relation";
+		this.relation.debug = () => this.name + ".relation";
 	}
 
 	public Interact(_switchSpot: boolean) {
@@ -703,14 +701,13 @@ export class Entity {
 	}
 
 	public PregnancyTrigger(womb: Womb, _slot: number) {
-		const that = this;
 		// Use unshift instead of push to make sure pregnancy doesn't interfere with scene progression
 		Gui.Callstack.unshift(() => {
 			womb.pregnant = false;
 
 			if (GetDEBUG()) {
 				const parse: IParse = {
-					name : that.name,
+					name : this.name,
 				};
 
 				Text.Clear();
@@ -833,10 +830,9 @@ export class Entity {
 	}
 
 	public GetCombatEntry(encounter: ICombatEncounter) {
-		const ent = this;
 		let found: ICombatOrder;
 		_.each(encounter.combatOrder, (it) => {
-			if (it.entity === ent) {
+			if (it.entity === this) {
 				found = it;
 				return false;
 			}
@@ -1138,7 +1134,6 @@ export class Entity {
 		const parse: IParse = {
 			possessive : this.possessive(),
 		};
-		const ent = this;
 
 		// Healing
 		if (val >= 0) { return true; }
@@ -1182,9 +1177,9 @@ export class Entity {
 				parse.copy  = num > 1 ? "copies" : "copy";
 				Text.Add("The attack is absorbed by[oneof] [possessive] [copy]!", parse);
 				Text.NL();
-				ent.combatStatus.stats[StatusEffect.Decoy].copies--;
-				if (ent.combatStatus.stats[StatusEffect.Decoy].copies <= 0) {
-					ent.combatStatus.stats[StatusEffect.Decoy] = undefined;
+				this.combatStatus.stats[StatusEffect.Decoy].copies--;
+				if (this.combatStatus.stats[StatusEffect.Decoy].copies <= 0) {
+					this.combatStatus.stats[StatusEffect.Decoy] = undefined;
 				}
 				Text.Flush();
 				return false;
@@ -2413,51 +2408,49 @@ export class Entity {
 	}
 
 	public ParserTags(parse: IParse = {}, prefix: string = "", p1cock?: Cock) {
-		const ent = this;
+		p1cock = p1cock || this.BiggestCock(undefined, true);
 
-		p1cock = p1cock || ent.BiggestCock(undefined, true);
-
-		parse[prefix + "cocks"]     = () => ent.MultiCockDesc();
+		parse[prefix + "cocks"]     = () => this.MultiCockDesc();
 		parse[prefix + "cock"]      = () => p1cock.Short();
 		parse[prefix + "cockTip"]   = () => p1cock.TipShort();
 		parse[prefix + "knot"]      = () => p1cock.KnotShort();
-		parse[prefix + "balls"]     = () => ent.BallsDesc();
-		parse[prefix + "butt"]      = () => ent.Butt().Short();
-		parse[prefix + "anus"]      = () => ent.Butt().AnalShort();
-		parse[prefix + "vag"]       = () => ent.FirstVag() ? ent.FirstVag().Short() : "crotch";
-		parse[prefix + "clit"]      = () => ent.FirstVag().ClitShort();
-		parse[prefix + "breasts"]   = () => ent.FirstBreastRow().Short();
-		parse[prefix + "nip"]       = () => ent.FirstBreastRow().NipShort();
-		parse[prefix + "nips"]      = () => ent.FirstBreastRow().NipsShort();
-		parse[prefix + "tongue"]    = () => ent.TongueDesc();
-		parse[prefix + "tongueTip"] = () => ent.TongueTipDesc();
-		parse[prefix + "skin"]      = () => ent.SkinDesc();
-		parse[prefix + "hair"]      = () => ent.Hair().Short();
-		parse[prefix + "face"]      = () => ent.FaceDesc();
-		parse[prefix + "ear"]       = () => ent.EarDesc();
-		parse[prefix + "ears"]      = () => ent.EarDesc(true);
-		parse[prefix + "eye"]       = () => ent.EyeDesc();
-		parse[prefix + "eyes"]      = () => ent.EyeDesc() + "s";
-		parse[prefix + "hand"]      = () => ent.HandDesc();
-		parse[prefix + "palm"]      = () => ent.PalmDesc();
-		parse[prefix + "hip"]       = () => ent.HipDesc();
-		parse[prefix + "hips"]      = () => ent.HipsDesc();
-		parse[prefix + "thigh"]     = () => ent.ThighDesc();
-		parse[prefix + "thighs"]    = () => ent.ThighsDesc();
-		parse[prefix + "legs"]      = () => ent.LegsDesc();
-		parse[prefix + "leg"]       = () => ent.LegDesc();
-		parse[prefix + "knee"]      = () => ent.KneeDesc();
-		parse[prefix + "knees"]     = () => ent.KneesDesc();
-		parse[prefix + "foot"]      = () => ent.FootDesc();
-		parse[prefix + "feet"]      = () => ent.FeetDesc();
-		parse[prefix + "belly"]     = () => ent.StomachDesc();
-		parse[prefix + "tail"]      = () => { const tail = ent.HasTail(); return tail ? tail.Short() : ""; };
-		parse[prefix + "wings"]     = () => { const wings = ent.HasWings(); return wings ? wings.Short() : ""; };
-		parse[prefix + "horns"]     = () => { const horns = ent.HasHorns(); return horns ? horns.Short() : ""; };
+		parse[prefix + "balls"]     = () => this.BallsDesc();
+		parse[prefix + "butt"]      = () => this.Butt().Short();
+		parse[prefix + "anus"]      = () => this.Butt().AnalShort();
+		parse[prefix + "vag"]       = () => this.FirstVag() ? this.FirstVag().Short() : "crotch";
+		parse[prefix + "clit"]      = () => this.FirstVag().ClitShort();
+		parse[prefix + "breasts"]   = () => this.FirstBreastRow().Short();
+		parse[prefix + "nip"]       = () => this.FirstBreastRow().NipShort();
+		parse[prefix + "nips"]      = () => this.FirstBreastRow().NipsShort();
+		parse[prefix + "tongue"]    = () => this.TongueDesc();
+		parse[prefix + "tongueTip"] = () => this.TongueTipDesc();
+		parse[prefix + "skin"]      = () => this.SkinDesc();
+		parse[prefix + "hair"]      = () => this.Hair().Short();
+		parse[prefix + "face"]      = () => this.FaceDesc();
+		parse[prefix + "ear"]       = () => this.EarDesc();
+		parse[prefix + "ears"]      = () => this.EarDesc(true);
+		parse[prefix + "eye"]       = () => this.EyeDesc();
+		parse[prefix + "eyes"]      = () => this.EyeDesc() + "s";
+		parse[prefix + "hand"]      = () => this.HandDesc();
+		parse[prefix + "palm"]      = () => this.PalmDesc();
+		parse[prefix + "hip"]       = () => this.HipDesc();
+		parse[prefix + "hips"]      = () => this.HipsDesc();
+		parse[prefix + "thigh"]     = () => this.ThighDesc();
+		parse[prefix + "thighs"]    = () => this.ThighsDesc();
+		parse[prefix + "legs"]      = () => this.LegsDesc();
+		parse[prefix + "leg"]       = () => this.LegDesc();
+		parse[prefix + "knee"]      = () => this.KneeDesc();
+		parse[prefix + "knees"]     = () => this.KneesDesc();
+		parse[prefix + "foot"]      = () => this.FootDesc();
+		parse[prefix + "feet"]      = () => this.FeetDesc();
+		parse[prefix + "belly"]     = () => this.StomachDesc();
+		parse[prefix + "tail"]      = () => { const tail = this.HasTail(); return tail ? tail.Short() : ""; };
+		parse[prefix + "wings"]     = () => { const wings = this.HasWings(); return wings ? wings.Short() : ""; };
+		parse[prefix + "horns"]     = () => { const horns = this.HasHorns(); return horns ? horns.Short() : ""; };
 
-		parse[prefix + "weapon"]    = () => ent.WeaponDesc();
-		parse[prefix + "armor"]     = () => ent.ArmorDesc();
-		parse[prefix + "botarmor"]  = () => ent.LowerArmorDesc();
+		parse[prefix + "weapon"]    = () => this.WeaponDesc();
+		parse[prefix + "armor"]     = () => this.ArmorDesc();
+		parse[prefix + "botarmor"]  = () => this.LowerArmorDesc();
 		return parse;
 	}
 

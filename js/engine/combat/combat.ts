@@ -176,7 +176,6 @@ export class Encounter implements ICombatEncounter {
 
 	public SetButtons(activeChar: ICombatOrder, combatScreen: () => void) {
 		const entity = activeChar.entity;
-		const encounter = this;
 
 		const backPrompt = () => {
 			Text.Clear();
@@ -185,40 +184,40 @@ export class Encounter implements ICombatEncounter {
 
 		const BasePrompt = () => {
 			Gui.ClearButtons();
-			Input.buttons[0].SetFromAbility(encounter, entity, Abilities.Attack, backPrompt);
+			Input.buttons[0].SetFromAbility(this, entity, Abilities.Attack, backPrompt);
 
-			Input.buttons[1].SetFromAbility(encounter, entity, Abilities.Seduction.Tease, backPrompt);
+			Input.buttons[1].SetFromAbility(this, entity, Abilities.Seduction.Tease, backPrompt);
 
 			if (entity.currentJob && entity.currentJob.abilities.Empty() === false) {
-				Input.buttons[2].SetFromAbility(encounter, entity, entity.currentJob.abilities, backPrompt);
+				Input.buttons[2].SetFromAbility(this, entity, entity.currentJob.abilities, backPrompt);
 			}
 			if (entity.abilities.Special.Empty() === false) {
-				Input.buttons[3].SetFromAbility(encounter, entity, entity.abilities.Special, backPrompt);
+				Input.buttons[3].SetFromAbility(this, entity, entity.abilities.Special, backPrompt);
 			}
 			if (entity.abilities.Skills.Empty() === false) {
-				Input.buttons[4].SetFromAbility(encounter, entity, entity.abilities.Skills, backPrompt);
+				Input.buttons[4].SetFromAbility(this, entity, entity.abilities.Skills, backPrompt);
 			}
 			if (entity.abilities.Spells.Empty() === false) {
-				Input.buttons[5].SetFromAbility(encounter, entity, entity.abilities.Spells, backPrompt);
+				Input.buttons[5].SetFromAbility(this, entity, entity.abilities.Spells, backPrompt);
 			}
 			if (entity.abilities.Support.Empty() === false) {
-				Input.buttons[6].SetFromAbility(encounter, entity, entity.abilities.Support, backPrompt);
+				Input.buttons[6].SetFromAbility(this, entity, entity.abilities.Support, backPrompt);
 			}
 			if (entity.abilities.Seduce.Empty() === false) {
-				Input.buttons[7].SetFromAbility(encounter, entity, entity.abilities.Seduce, backPrompt);
+				Input.buttons[7].SetFromAbility(this, entity, entity.abilities.Seduce, backPrompt);
 			}
-			Input.buttons[8].SetFromAbility(encounter, entity, Abilities.Wait, backPrompt);
+			Input.buttons[8].SetFromAbility(this, entity, Abilities.Wait, backPrompt);
 			Input.buttons[9].Setup("Item", () => {
-				GAME().party.inventory.CombatInventory(encounter, entity, backPrompt);
+				GAME().party.inventory.CombatInventory(this, entity, backPrompt);
 			}, true);
 			Input.buttons[10].Setup("Submit", () => {
-				encounter.onLoss();
+				this.onLoss();
 			}, true);
-			Input.buttons[11].SetFromAbility(encounter, entity, Abilities.Run, backPrompt);
+			Input.buttons[11].SetFromAbility(this, entity, Abilities.Run, backPrompt);
 
 			if (GetDEBUG()) {
 				Input.navButtons[2].Setup("Cheat", () => {
-					encounter.onVictory();
+					this.onVictory();
 				}, true);
 			}
 			combatScreen();
@@ -375,32 +374,30 @@ export class Encounter implements ICombatEncounter {
 	}
 
 	public CombatTick() {
-		const enc = this;
-
-		const e = enc.Callstack.pop();
+		const e = this.Callstack.pop();
 		if (e) {
-			e(enc);
+			e(this);
 			return;
 		}
 
 		SetCurrentActiveChar(undefined);
 
-		if (enc.onTick) {
-			enc.onTick();
+		if (this.onTick) {
+			this.onTick();
 		}
 
-		if (enc.LossCondition()) {
+		if (this.LossCondition()) {
 			Gui.NextPrompt(() => {
-				enc.onLoss();
+				this.onLoss();
 			});
-		} else if (enc.VictoryCondition()) {
+		} else if (this.VictoryCondition()) {
 			Gui.NextPrompt(() => {
-				enc.onVictory();
+				this.onVictory();
 			});
 		} else {
 			let found = false;
 			while (!found) {
-				_.each(enc.combatOrder, (c) => {
+				_.each(this.combatOrder, (c) => {
 					if (!c.entity.Incapacitated()) {
 						if (c.initiative >= 100) {
 							found = true;
@@ -411,15 +408,15 @@ export class Encounter implements ICombatEncounter {
 
 				if (found) { break; }
 
-				_.each(enc.combatOrder, (c) => {
+				_.each(this.combatOrder, (c) => {
 					if (!c.entity.Incapacitated()) {
 						c.initiative += c.entity.Initiative();
 					}
 				});
 			}
 
-			enc.combatOrder.sort(Encounter.InitiativeSorter);
-			const activeChar = enc.combatOrder[0];
+			this.combatOrder.sort(Encounter.InitiativeSorter);
+			const activeChar = this.combatOrder[0];
 
 			SetCurrentActiveChar(activeChar.entity);
 
@@ -439,7 +436,7 @@ export class Encounter implements ICombatEncounter {
 			activeChar.initiative -= ini;
 
 			// Add lust
-			_.each(enc.combatOrder, (c) => {
+			_.each(this.combatOrder, (c) => {
 				if (!c.entity.Incapacitated()) {
 					c.entity.AddLustOverTime(0.02);
 				}
@@ -448,7 +445,7 @@ export class Encounter implements ICombatEncounter {
 			// Tick status effects
 			CurrentActiveChar().combatStatus.Tick(CurrentActiveChar());
 			if (CurrentActiveChar().Incapacitated()) {
-				enc.CombatTick();
+				this.CombatTick();
 				return;
 			}
 
@@ -459,7 +456,7 @@ export class Encounter implements ICombatEncounter {
 					Text.Add("[name] [is] stunned and cannot move!",
 						{name: CurrentActiveChar().NameDesc(), is: CurrentActiveChar().is()});
 					Text.NL();
-					enc.CombatTick();
+					this.CombatTick();
 					return;
 				}
 			}
@@ -470,7 +467,7 @@ export class Encounter implements ICombatEncounter {
 				Text.Add("[name] [is] asleep and cannot act!",
 					{name: CurrentActiveChar().NameDesc(), is: CurrentActiveChar().is()});
 				Text.NL();
-				enc.CombatTick();
+				this.CombatTick();
 				return;
 			}
 
@@ -495,7 +492,7 @@ export class Encounter implements ICombatEncounter {
 				}
 
 				const tempParty: ICombatOrderSort[] = [];
-				_.each(enc.combatOrder, (c) => {
+				_.each(this.combatOrder, (c) => {
 					if (!c.entity.Incapacitated()) {
 						entityName = c.entity.uniqueName ? c.entity.uniqueName : c.entity.name;
 						tempParty.push({entry: c, name: entityName, ini: c.initiative, inc: c.entity.Initiative()});
@@ -531,7 +528,7 @@ export class Encounter implements ICombatEncounter {
 				if (casting.retarget) {
 					casting.target = casting.retarget(casting.target);
 				}
-				ability.CastInternal(enc, activeChar.entity, casting.target);
+				ability.CastInternal(this, activeChar.entity, casting.target);
 			} else {
 				// Reduce cooldowns
 				if (activeChar.cooldown) {
@@ -546,22 +543,22 @@ export class Encounter implements ICombatEncounter {
 				if (Math.random() < activeChar.entity.LustCombatTurnLossChance()) {
 					Text.Add("[name] is too aroused to do anything worthwhile!", {name: activeChar.entity.name});
 					Text.NL();
-					enc.CombatTick();
+					this.CombatTick();
 				} else {
 					// TODO: Confuse? Is this correctly implemented?
 					if (activeChar.isEnemy) {
-						activeChar.entity.Act(enc, activeChar);
+						activeChar.entity.Act(this, activeChar);
 					} else {
 						// Confuse
 						const confuse = CurrentActiveChar().combatStatus.stats[StatusEffect.Confuse];
 						if (confuse) {
 							if (confuse.func) {
-								confuse.func(enc, activeChar);
+								confuse.func(this, activeChar);
 							} else {
-								activeChar.entity.Act(enc, activeChar);
+								activeChar.entity.Act(this, activeChar);
 							}
 						} else {
-							enc.SetButtons(activeChar, combatScreen);
+							this.SetButtons(activeChar, combatScreen);
 						}
 					}
 					Text.Flush();

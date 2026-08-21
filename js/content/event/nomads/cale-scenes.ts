@@ -141,7 +141,7 @@ export namespace CaleScenes {
 			// [BeForward] [Neutral] [Comfort]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Be forward",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Smirking to yourself, you saunter closer to the wolf-morph, who visibly restrains himself from flinching. Your hand reaches out and presses itself gently against his thigh, feeling the soft fur underneath. With slow, sensuous motions, your fingers start to rub up and down, trailing the contour of his nicely muscled legs.", parse);
 					Text.NL();
@@ -184,7 +184,7 @@ export namespace CaleScenes {
 				tooltip : "Looks like you definitely left the right sort of impression on him. Why not tease him a little?",
 			});
 			options.push({ nameStr : "Neutral",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You ask if he meant what he said before - about wanting to try things your way again.", parse);
 					Text.NL();
@@ -206,7 +206,7 @@ export namespace CaleScenes {
 				tooltip : "Let's just cut to the chase.",
 			});
 			options.push({ nameStr : "Comfort",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Smiling gently, you ask if he's alright, and apologize for how you treated him that time with Rosalin.", parse);
 					Text.NL();
@@ -248,7 +248,7 @@ export namespace CaleScenes {
 			// [Reassert] [Ignore] [Enjoy]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Reassert",
-				func() {
+				func: () => {
 					Text.Clear();
 					parse.dom = player.SubDom() > 50 ? ", lest he lose it" : "";
 					Text.Add("Bristling indignantly, you look the amorous wolf right in the eye and snap at him to remove his paw[dom], glaring fiercely and making it clear from tone and posture that you won't brook any refusal.", parse);
@@ -274,7 +274,7 @@ export namespace CaleScenes {
 				tooltip : "Tell him to keep his paws to himself.",
 			});
 			options.push({ nameStr : "Ignore",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Your eyes flick casually to his hand, but then you look back at him nonchalantly, making no show of any feelings you may have about it being there.", parse);
 					Text.NL();
@@ -290,7 +290,7 @@ export namespace CaleScenes {
 				tooltip : "Eh, it's not hurting you, let him rub.",
 			});
 			options.push({ nameStr : "Enjoy",
-				func() {
+				func: () => {
 					Text.Clear();
 
 					parse.ears = player.HasFlexibleEars() ? Text.Parse(" your [ears] flattened against your skull,", parse) : "";
@@ -314,7 +314,7 @@ export namespace CaleScenes {
 					// [Yes][No]
 					const options: IChoice[] = [];
 					options.push({ nameStr : "Yes",
-						func() {
+						func: () => {
 							Text.Clear();
 
 							player.slut.IncreaseStat(100, 3);
@@ -334,7 +334,7 @@ export namespace CaleScenes {
 						tooltip : "Well, you were practically asking for it, why not go all the way?",
 					});
 					options.push({ nameStr : "No",
-						func() {
+						func: () => {
 							Text.Clear();
 							Text.Add("<i>“Too bad. But my offer stands. Come to me whenever you feel like you need some good wuffie lovin,”</i> he chuckles. Slowly, he releases you and gives you some distance. <i>“Now then, since you don’t want to visit my tent, what can I do for you?”</i>", parse);
 							Text.Flush();
@@ -415,7 +415,7 @@ export namespace CaleScenes {
 		// [Talk][Tent][Sex][Shop][Rogue][Anal]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Talk",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“Just chat then? Sure, whatcha wanna talk about?”</i>", parse);
 				Text.Flush();
@@ -424,7 +424,7 @@ export namespace CaleScenes {
 			tooltip : "Have a chat with Cale.",
 		});
 		options.push({ nameStr : "Tent",
-			func() {
+			func: () => {
 				Text.Clear();
 				if (cale.Slut() >= 60) {
 					Text.Add("<i>“Why, are you getting shy all of a sudden?”</i> Cale teases you with a grin. <i>“You can take me for a ride anytime, any place.”</i> Eager to get started, the wolf pulls you along, heading for his tent.", parse);
@@ -441,14 +441,14 @@ export namespace CaleScenes {
 			tooltip : "Ask if he’s up for a quick skirmish in his tent.",
 		});
 		options.push({ nameStr : "Sex",
-			func() {
+			func: () => {
 				Text.Clear();
 				CaleSexScenes.OutsideSex(CaleScenes.Prompt);
 			}, enabled : true,
 			tooltip : "Ask the wolf if he's up for a fuck - right here, right now.",
 		});
 		options.push({ nameStr : "Shop",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“You're interested in buying what I got, huh? Well, sure, I can let you take a look,”</i> the wolf-morph notes. From his various pockets and pouches, he brings out his most recent gathering results, displaying them for you. <i>“What do you think of these?”</i>", parse);
 				Text.NL();
@@ -531,7 +531,7 @@ export namespace CaleScenes {
 		// [Himself][His Past][Goals][Rosalin]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Himself",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“Myself? Eh, I’m not really that interesting,”</i> he says nonchalantly.", parse);
 				Text.NL();
@@ -581,7 +581,7 @@ export namespace CaleScenes {
 			tooltip : "See if Cale will share something about his past with you.",
 		});
 		options.push({ nameStr : "Goals",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“I’m sorta a guy living in the moment,”</i> Cale says, scratching his chin. <i>“I guess I don’t really think about stuff like that too much. When you get right down to it, I’m in it for the ladies.”</i> He stretches languidly, flexing his muscles.", parse);
 				Text.NL();
@@ -611,7 +611,7 @@ export namespace CaleScenes {
 			tooltip : "What is he looking for in life?",
 		});
 		options.push({ nameStr : "Rosalin",
-			func() {
+			func: () => {
 				Text.Clear();
 
 				if (cale.flags.rosPast < 1) {
@@ -650,7 +650,7 @@ export namespace CaleScenes {
 		});
 		if (cale.Butt().virgin === false) {
 			options.push({ nameStr : "Anal",
-				func() {
+				func: () => {
 					Text.Clear();
 					if (cale.flags.Met2 === CaleFlags.Met2.TalkedSlut) {
 						Text.Add("<i>“Ah, don’t worry about what I said before, I like it, I like it,”</i> the wolf hurriedly assures you. <i>“A lot, actually,”</i> he adds, blushing faintly.", parse);
@@ -682,7 +682,7 @@ export namespace CaleScenes {
 			// [name]
 			options.push({ nameStr : "Anal experiment",
 				tooltip : "Cale goes on frequent runs for Rosalin, maybe he could get some stuff for you on the side?",
-				func() {
+				func: () => {
 
 					const first = (rosalin.flags.Anusol < RosalinFlags.Anusol.TalkedToCale);
 					rosalin.flags.Anusol = RosalinFlags.Anusol.TalkedToCale;
@@ -720,7 +720,7 @@ export namespace CaleScenes {
 						// [Deal][No sex][No deal]
 						options.push({ nameStr : "Deal",
 							tooltip : "Fuck Cale’s butt <i>and</i> get a discount? Sounds like a bargain!",
-							func() {
+							func: () => {
 								Text.Clear();
 								Text.Add("<i>“Knew you’d see things my way. After all, who doesn’t like Cale?”</i> he grins.", parse);
 								Text.NL();
@@ -738,7 +738,7 @@ export namespace CaleScenes {
 						});
 						options.push({ nameStr : "No sex",
 							tooltip : "You’d rather pay the full price than take his wolfy butt.",
-							func() {
+							func: () => {
 								Text.Clear();
 								Text.Add("<i>“Ouch, you really know how to hurt a wolf’s feelings...”</i> he replies with a grimace.", parse);
 								Text.NL();
@@ -758,7 +758,7 @@ export namespace CaleScenes {
 						});
 						options.push({ nameStr : "No deal",
 							tooltip : "Unfortunately, you can’t afford to pay for his services at this time.",
-							func() {
+							func: () => {
 								Text.Clear();
 								Text.Add("<i>“Having a hard time getting your coin? No problem, if you change your mind you could always come back to me.”</i>", parse);
 								Text.NL();
@@ -772,7 +772,7 @@ export namespace CaleScenes {
 						// [Deal][No deal]
 						options.push({ nameStr : "Deal",
 							tooltip : "Sounds fair, he’s got himself a deal!",
-							func() {
+							func: () => {
 								Text.Clear();
 								Text.Add("<i>“Alright then, just hand me the money and I’ll get you everything you need in three days time tops!”</i> he says with a confident smirk.", parse);
 								Text.NL();
@@ -788,7 +788,7 @@ export namespace CaleScenes {
 						});
 						options.push({ nameStr : "No deal",
 							tooltip : "You can’t afford to pay for his services at this moment...",
-							func() {
+							func: () => {
 								Text.Clear();
 								Text.Add("<i>“Having a hard time getting your coin? No problem, if you change your mind you could always come back to me.”</i>", parse);
 								Text.NL();
@@ -1005,7 +1005,7 @@ export namespace CaleScenes {
 				// [Let go][Fuck him]
 				const options: IChoice[] = [];
 				options.push({ nameStr : "Let go",
-					func() {
+					func: () => {
 						Text.Clear();
 						if (cale.Slut() >= 30) {
 							Text.Add("<i>“Ah… okay.”</i> The wolf sounds a bit disappointed.", parse);
@@ -1017,7 +1017,7 @@ export namespace CaleScenes {
 					tooltip : "Have mercy on him.",
 				});
 				options.push({ nameStr : "Fuck him",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("You grin widely. The opportunity is just too good to pass up. Wasn’t those his words? All that matters in a fight is that you win? Still keeping a firm grip on his tail, you caress his round butt, sending a shiver up the wolf’s spine. The loser can’t be going expecting the victor to take any mercy on him, now can he?", parse);
 						Text.NL();
@@ -1060,7 +1060,7 @@ export namespace CaleScenes {
 				// [Yield][Take it]
 				const options: IChoice[] = [];
 				options.push({ nameStr : "Yield",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("<i>“Good choice,”</i> he comments, releasing you. Relieved from your awkward hold, you take a moment to stretch out and work out the kinks in your muscles before you get back up. <i>“One of the most important rules is if you wanna live to see the next day is to know your limits. There’s always someone better than you out there. And surrendering might save your life or give you an opportunity to fight back.”</i> He grins.", parse);
 						Text.NL();
@@ -1070,7 +1070,7 @@ export namespace CaleScenes {
 					tooltip : "You give, you give.",
 				});
 				options.push({ nameStr : "Take it",
-					func() {
+					func: () => {
 						Text.Clear();
 						parse.vag = player.FirstVag() ? Text.Parse("and [vag]", parse) : "";
 						Text.Add("Cale chuckles, <i>“Alright then, no mercy it is!”</i> He wrestles with your [botarmor] and somehow manages to rip it off your, exposing your naked [anus] [vag] to his appreciative eyes.", parse);

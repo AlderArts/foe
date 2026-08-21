@@ -137,7 +137,7 @@ export namespace RoamingScenes {
 			// [Adventurers][Bandits!]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Adventurers",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You tell the sergeant that you are adventurers, and you’re here as part of your quest. Okay, it might not be an <i>essential</i> part of your quest, but there’s no reason to tell [rhimher] that.", parse);
 					Text.NL();
@@ -180,7 +180,7 @@ export namespace RoamingScenes {
 				tooltip : Text.Parse("Tell [rhimher] that you’re adventurers.", parse),
 			});
 			options.push({ nameStr : "Bandits!",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Trying to keep a straight face, you proclaim that you are bandits, here to murder, rape, and kill!", parse);
 					Text.NL();
@@ -302,9 +302,8 @@ export namespace RoamingScenes {
 		enc.rclothing = rclothing;
 		enc.capt = capt;
 
-		enc.OnIncapacitate = function(entity: Entity) {
+		enc.OnIncapacitate = (entity: Entity) => {
 			Encounter.prototype.OnIncapacitate.call(this, entity);
-			const enc = this;
 			const enemy = enc.enemy;
 
 			let found = false;
@@ -429,7 +428,7 @@ export namespace RoamingScenes {
 		// [Report][Attack][Extort][Leave]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Report",
-			func() {
+			func: () => {
 				parse = bandits.capt.ParserPronouns(parse, "r");
 
 				Text.Clear();
@@ -458,7 +457,7 @@ export namespace RoamingScenes {
 		});
 		parse.num = Text.NumToText(num);
 		options.push({ nameStr : "Attack",
-			func() {
+			func: () => {
 				Text.Clear();
 				if (party.Num() === 2) {
 					Text.Add("[name] shadowing your steps, you", {name: party.Get(1).name});
@@ -475,7 +474,7 @@ export namespace RoamingScenes {
 			tooltip : Text.Parse("There’s no need to get help - you’ll take out the [num] bandits here and now.", parse),
 		});
 		options.push({ nameStr : "Extort",
-			func() {
+			func: () => {
 				Text.Clear();
 				parse.c = party.Num() === 2 ? Text.Parse(", while [name] steps up into the doorway behind you", {name: party.Get(1).name}) :
 							party.Num() > 2 ? ", while your companions frame you in the doorway" : "";
@@ -515,7 +514,6 @@ export namespace RoamingScenes {
 	}
 
 	export function BanditsOnEncounter() {
-		const enc = this;
 		const parse: IParse = {};
 
 		const num = this.enemy.NumTotal();
@@ -531,12 +529,12 @@ export namespace RoamingScenes {
 
 			// Start combat
 			Gui.NextPrompt(() => {
-				enc.PrepCombat();
+				this.PrepCombat();
 			});
 		} else {
 			Text.Flush();
 			Gui.NextPrompt(() => {
-				enc.PrepCombat();
+				this.PrepCombat();
 			});
 		}
 	}
@@ -546,9 +544,7 @@ export namespace RoamingScenes {
 
 		SetGameState(GameState.Event, Gui);
 
-		const enc = this;
-
-		const bandits = enc.enemy;
+		const bandits = this.enemy;
 		const num = bandits.NumTotal();
 
 		let fallen = 0;
@@ -615,7 +611,7 @@ export namespace RoamingScenes {
 			Gui.NextPrompt();
 		});
 
-		Encounter.prototype.onLoss.call(enc);
+		Encounter.prototype.onLoss.call(this);
 	}
 
 	export function BanditsWin() {
@@ -623,9 +619,7 @@ export namespace RoamingScenes {
 
 		SetGameState(GameState.Event, Gui);
 
-		const enc = this;
-
-		const bandits = enc.enemy;
+		const bandits = this.enemy;
 		//const num = bandits.NumTotal();
 
 		let parse: IParse = {
@@ -655,7 +649,7 @@ export namespace RoamingScenes {
 				const options: IChoice[] = [];
 				// TODO
 				options.push({ nameStr : "Fuck",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("", parse);
 						Text.NL();
@@ -666,7 +660,7 @@ export namespace RoamingScenes {
 					tooltip : "",
 				});
 				options.push({ nameStr : "Loot",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("And to the victor go the spoils. You meticulously search the bandits, patting them down and making a neat pile of coins and chipped weapons on the table. ", parse);
 
@@ -732,7 +726,7 @@ export namespace RoamingScenes {
 					tooltip : "Loot everything!",
 				});
 				options.push({ nameStr : "Leave",
-					func() {
+					func: () => {
 						Text.Clear();
 						if (fucked || looted) {
 							Text.Add("Your main tasks complete, you check on the stolen livestock around the farm, making sure all the animals ", parse);
@@ -759,7 +753,7 @@ export namespace RoamingScenes {
 			prompt();
 		});
 
-		Encounter.prototype.onVictory.call(enc);
+		Encounter.prototype.onVictory.call(this);
 	}
 
 }

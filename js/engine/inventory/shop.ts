@@ -81,8 +81,6 @@ export class Shop {
 	public Buy(back: CallableFunction = Gui.PrintDefaultOptions, preventClear?: boolean) {
 		const party: Party = GAME().party;
 
-		const shop = this;
-
 		if (!preventClear) {
 			Text.Clear();
 		} else {
@@ -98,18 +96,18 @@ export class Shop {
 			const cost = obj.cost;
 			const num  = party.Inv().QueryNum(obj.it) || 0;
 
-			if (shop.buyPromptFunc) { shop.buyPromptFunc(obj.it, cost, bought); } else { Text.Clear(); }
+			if (this.buyPromptFunc) { this.buyPromptFunc(obj.it, cost, bought); } else { Text.Clear(); }
 			Text.Add("Buy " + obj.it.name + " for " + cost + " coin? You are carrying " + num + ".");
 			Text.Flush();
 
 			// [name]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Buy 1",
-				func() {
-					if (shop.buySuccessFunc) { shop.buySuccessFunc(obj.it, cost, 1); }
+				func: () => {
+					if (this.buySuccessFunc) { this.buySuccessFunc(obj.it, cost, 1); }
 					// Remove cost
 					party.coin -= cost;
-					shop.totalBought += cost;
+					this.totalBought += cost;
 					// Add item to inv
 					party.inventory.AddItem(obj.it);
 					buyFunc(obj, true);
@@ -117,11 +115,11 @@ export class Shop {
 				tooltip : "",
 			});
 			options.push({ nameStr : "Buy 5",
-				func() {
-					if (shop.buySuccessFunc) { shop.buySuccessFunc(obj.it, cost, 5); }
+				func: () => {
+					if (this.buySuccessFunc) { this.buySuccessFunc(obj.it, cost, 5); }
 					// Remove cost
 					party.coin -= cost * 5;
-					shop.totalBought += cost * 5;
+					this.totalBought += cost * 5;
 					// Add item to inv
 					party.inventory.AddItem(obj.it, 5);
 					buyFunc(obj, true);
@@ -129,11 +127,11 @@ export class Shop {
 				tooltip : "",
 			});
 			options.push({ nameStr : "Buy 10",
-				func() {
-					if (shop.buySuccessFunc) { shop.buySuccessFunc(obj.it, cost, 10); }
+				func: () => {
+					if (this.buySuccessFunc) { this.buySuccessFunc(obj.it, cost, 10); }
 					// Remove cost
 					party.coin -= cost * 10;
-					shop.totalBought += cost * 10;
+					this.totalBought += cost * 10;
 					// Add item to inv
 					party.inventory.AddItem(obj.it, 10);
 					buyFunc(obj, true);
@@ -143,8 +141,8 @@ export class Shop {
 			Gui.SetButtonsFromList(options, true, () => {
 				// Recreate the menu
 				// TODO: Keep page!
-				if (shop.buyFailFunc) { shop.buyFailFunc(obj.it, cost, bought); }
-				shop.Buy(back, true);
+				if (this.buyFailFunc) { this.buyFailFunc(obj.it, cost, bought); }
+				this.Buy(back, true);
 			});
 		};
 
@@ -191,8 +189,6 @@ export class Shop {
 	public Sell(back: CallableFunction = Gui.PrintDefaultOptions, preventClear?: boolean, customSellFunc?: CallableFunction) {
 		const party: Party = GAME().party;
 
-		const shop = this;
-
 		if (!preventClear) {
 			Text.Clear();
 		} else {
@@ -210,19 +206,19 @@ export class Shop {
 			}
 
 			let num = obj.num;
-			const cost = Math.floor(shop.sellPrice * obj.it.price);
+			const cost = Math.floor(this.sellPrice * obj.it.price);
 
-			if (shop.sellPromptFunc) { shop.sellPromptFunc(obj.it, cost, havesold); } else { Text.Clear(); }
+			if (this.sellPromptFunc) { this.sellPromptFunc(obj.it, cost, havesold); } else { Text.Clear(); }
 			Text.Add("Sell " + obj.it.name + " for " + cost + " coin? You are carrying " + num + ".");
 			Text.Flush();
 
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Sell 1",
-				func() {
-					if (shop.sellSuccessFunc) { shop.sellSuccessFunc(obj.it, cost, 1); }
+				func: () => {
+					if (this.sellSuccessFunc) { this.sellSuccessFunc(obj.it, cost, 1); }
 					// Add cash
 					party.coin += cost;
-					shop.totalSold += cost;
+					this.totalSold += cost;
 					// Remove item from inv
 					party.inventory.RemoveItem(obj.it);
 
@@ -231,7 +227,7 @@ export class Shop {
 					num -= 1;
 					if (num <= 0) {
 						// Recreate the menu
-						shop.Sell(back, true, customSellFunc);
+						this.Sell(back, true, customSellFunc);
 					} else {
 						sellFunc(obj, true);
 					}
@@ -239,12 +235,12 @@ export class Shop {
 				tooltip : "",
 			});
 			options.push({ nameStr : "Sell 5",
-				func() {
+				func: () => {
 					const sold = Math.min(num, 5);
-					if (shop.sellSuccessFunc) { shop.sellSuccessFunc(obj.it, cost, sold); }
+					if (this.sellSuccessFunc) { this.sellSuccessFunc(obj.it, cost, sold); }
 					// Add cash
 					party.coin += cost * sold;
-					shop.totalSold += cost * sold;
+					this.totalSold += cost * sold;
 					// Remove item from inv
 					party.inventory.RemoveItem(obj.it, sold);
 
@@ -253,7 +249,7 @@ export class Shop {
 					num -= sold;
 					if (num <= 0) {
 						// Recreate the menu
-						shop.Sell(back, true, customSellFunc);
+						this.Sell(back, true, customSellFunc);
 					} else {
 						sellFunc(obj, true);
 					}
@@ -261,11 +257,11 @@ export class Shop {
 				tooltip : "",
 			});
 			options.push({ nameStr : "Sell all",
-				func() {
-					if (shop.sellSuccessFunc) { shop.sellSuccessFunc(obj.it, cost, num); }
+				func: () => {
+					if (this.sellSuccessFunc) { this.sellSuccessFunc(obj.it, cost, num); }
 					// Add cash
 					party.coin += cost * num;
-					shop.totalSold += cost * num;
+					this.totalSold += cost * num;
 					// Remove item from inv
 					party.inventory.RemoveItem(obj.it, num);
 
@@ -273,15 +269,15 @@ export class Shop {
 
 					// Recreate the menu
 					// TODO: Keep page!
-					shop.Sell(back, true, customSellFunc);
+					this.Sell(back, true, customSellFunc);
 				}, enabled : true,
 				tooltip : "",
 			});
 			Gui.SetButtonsFromList(options, true, () => {
-				if (shop.sellFailFunc) { shop.sellFailFunc(obj.it, cost, havesold); }
+				if (this.sellFailFunc) { this.sellFailFunc(obj.it, cost, havesold); }
 				// Recreate the menu
 				// TODO: Keep page!
-				shop.Sell(back, true);
+				this.Sell(back, true);
 			});
 		};
 
@@ -305,7 +301,7 @@ export class Shop {
 					for (const item of items) {
 						const it       = item.it;
 						const num      = item.num;
-						const price    = Math.floor(shop.sellPrice * it.price);
+						const price    = Math.floor(this.sellPrice * it.price);
 
 						if (price <= 0) { continue; }
 						// TODO Could look better. Perhaps add 'table' functionality to text.js and use it here

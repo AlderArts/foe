@@ -176,7 +176,6 @@ export namespace NagaScenes {
 
 	export function DesertEncounter() {
 		const player: Player = GAME().player;
-		const enc: NagaEncounter = this;
 		let parse: IParse = {
 
 		};
@@ -216,13 +215,13 @@ export namespace NagaScenes {
 			// [Fuck][Fight]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Fuck",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("The naga smiles and stares into your eyes with her faintly glowing magenta orbs. <i>“That’s a good [boyGirl]... Come on, I’ll help you get off all of those pesky clothes...”</i> she purrs while you fall once again under her spell.", parse);
 					Text.NL();
 					Text.Flush();
 
-					const ret = NagaScenes.DesertLossScenes(enc);
+					const ret = NagaScenes.DesertLossScenes(this);
 
 					if (!ret) {
 						Text.Add("PLACEHOLDER...");
@@ -233,13 +232,13 @@ export namespace NagaScenes {
 				tooltip : "Forget fighting, get down and dirty with the scaly slut!",
 			});
 			options.push({ nameStr : "Fight",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("The naga sighs. <i>“Must we <b>really</b> go through this again? Fine, but I’m not holding back!”</i> she shouts as she rears up to her full height, ready to fight!", parse);
 					Text.Flush();
 
 					Gui.NextPrompt(() => {
-						enc.PrepCombat();
+						this.PrepCombat();
 					});
 				}, enabled : true,
 				tooltip : "Resist the naga’s temptation and fight her off!",
@@ -256,7 +255,7 @@ export namespace NagaScenes {
 			Text.Flush();
 
 			Gui.NextPrompt(() => {
-				enc.PrepCombat();
+				this.PrepCombat();
 			});
 		}
 	}
@@ -264,8 +263,6 @@ export namespace NagaScenes {
 	export function DesertLoss() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const enc  = this;
-		//const naga: Naga = enc.naga;
 		SetGameState(GameState.Event, Gui);
 
 		let parse: IParse = {
@@ -300,7 +297,7 @@ export namespace NagaScenes {
 			}
 			Text.NL();
 
-			const ret = NagaScenes.DesertLossScenes(enc);
+			const ret = NagaScenes.DesertLossScenes(this);
 
 			if (!ret) {
 				Text.Add("PLACEHOLDER...");
@@ -308,7 +305,7 @@ export namespace NagaScenes {
 				Gui.NextPrompt();
 			}
 		});
-		Encounter.prototype.onLoss.call(enc);
+		Encounter.prototype.onLoss.call(this);
 	}
 
 	export function DesertLossScenes(enc: NagaEncounter) {
@@ -703,8 +700,7 @@ export namespace NagaScenes {
 	export function DesertWinPrompt() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const enc  = this;
-		const naga: Naga = enc.naga;
+		const naga: Naga = this.naga;
 		SetGameState(GameState.Event, Gui);
 
 		let parse: IParse = {
@@ -729,9 +725,9 @@ export namespace NagaScenes {
 			Text.Add("<i>“Please forgive me, [master]. I had no idea you were this… powerful.”</i> Her surrender is delivered in a breathy, clearly aroused voice, and she licks her lips enticingly when she pauses. It’s blatantly obvious that the naga will let you do whatever you want to her.", parse);
 			Text.Flush();
 
-			NagaScenes.DesertWinPrompt2(enc, false);
+			NagaScenes.DesertWinPrompt2(this, false);
 		});
-		Encounter.prototype.onVictory.call(enc);
+		Encounter.prototype.onVictory.call(this);
 	}
 
 	export function DesertWinPrompt2(enc: NagaEncounter, hypno: boolean) {
@@ -744,7 +740,7 @@ export namespace NagaScenes {
 		const options: IChoice[] = [];
 		if (player.FirstCock()) {
 			options.push({ nameStr : "Fuck & Jerk",
-				func() {
+				func: () => {
 					NagaScenes.DesertWinFuckJerk(enc, hypno);
 				}, enabled : true,
 				tooltip : "Pound the naga’s slit while giving her a double handjob.",
@@ -752,7 +748,7 @@ export namespace NagaScenes {
 		}
 		if (player.FirstVag()) {
 			options.push({ nameStr : "Get fucked",
-				func() {
+				func: () => {
 					NagaScenes.DesertWinGetFuckedVag(enc, hypno);
 				}, enabled : true,
 				tooltip : "Take one of the naga’s huge cocks vaginally.",
@@ -768,21 +764,21 @@ export namespace NagaScenes {
 		*/
 		if (Jobs.Hypnotist.Master(player)) {
 			options.push({ nameStr : "Hypnotize",
-				func() {
+				func: () => {
 					NagaScenes.DesertWinHypnotizeOwn(enc);
 				}, enabled : !hypno,
 				tooltip : "Several times during the battle, you’ve caught a familiar glint in the naga’s eyes. Wouldn’t it be fun to show this creature what a true hypnotist can do?",
 			});
 		} else if (Naga.HypnoUnlocked()) {
 			options.push({ nameStr : "Hypnotize",
-				func() {
+				func: () => {
 					NagaScenes.DesertWinHypnotize(enc);
 				}, enabled : !hypno,
 				tooltip : "Having been on the receiving end of the naga’s hypnotic eyes before, you have a plan on how to turn her powers back on herself...",
 			});
 		}
 		options.push({ nameStr : "Leave",
-			func() {
+			func: () => {
 				Text.Clear();
 				if (player.LustLevel() > 0.4) {
 					Text.Add("You decide you’d rather satisfy your own needs elsewhere than with this aggressive snake.", parse);
@@ -1180,7 +1176,7 @@ export namespace NagaScenes {
 		// [Tailpeg][No]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Tailpeg",
-			func() {
+			func: () => {
 				Text.Clear();
 				parse.hypno1 = hypno ? "order" : "instruct";
 				parse.hypno2 = hypno ? "entranced, " : "";
@@ -1205,7 +1201,7 @@ export namespace NagaScenes {
 			tooltip : "It’s time to put the naga’s tail to use, and get her to fuck you in the ass.",
 		});
 		options.push({ nameStr : "No",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You brush the errant thought aside, and focus on the pleasure you’re already feeling.", parse);
 				Text.NL();

@@ -167,24 +167,23 @@ export class Ability {
 
 	// Used as entrypoint for PC/Party (active selection)
 	public OnSelect(encounter: ICombatEncounter, caster: Entity, backPrompt?: CallableFunction, ext?: any) {
-		const ability = this;
 		// TODO: Buttons (use portraits for target?)
 
 		Text.Clear();
-		const castTime = ability.castTime !== 0 ? ability.castTime.toString() : "instant";
+		const castTime = this.castTime !== 0 ? this.castTime.toString() : "instant";
 		Text.Add("[ability] (Cost: [cost], Cast time: [time]): [desc]<br>",
 			{
-				ability: ability.name,
-				cost: ability.CostStr(),
+				ability: this.name,
+				cost: this.CostStr(),
 				time: castTime,
-				desc: ability.Short(),
+				desc: this.Short(),
 			});
 		Text.Flush();
 
 		const target: IChoice[] = [];
 		const party: Party = GAME().party;
 
-		switch (ability.targetMode) {
+		switch (this.targetMode) {
 			case TargetMode.All: {
 				const validTarget = (t: Entity) => {
 					// Don't add incapacitated
@@ -217,11 +216,11 @@ export class Ability {
 
 					target.push({
 						nameStr : t.name,
-						func(t: Entity) {
+						func: (t: Entity) => {
 							Text.Clear();
-							ability.Use(encounter, caster, t, ext, retargetAlly);
+							this.Use(encounter, caster, t, ext, retargetAlly);
 						},
-						enabled : ability.enabledTargetCondition(encounter, caster, t),
+						enabled : this.enabledTargetCondition(encounter, caster, t),
 						obj     : t,
 					});
 				});
@@ -232,11 +231,11 @@ export class Ability {
 
 					target.push({
 						nameStr : t.uniqueName || t.name,
-						func(t: Entity) {
+						func: (t: Entity) => {
 							Text.Clear();
-							ability.Use(encounter, caster, t, ext, retargetEnemy);
+							this.Use(encounter, caster, t, ext, retargetEnemy);
 						},
-						enabled : ability.enabledTargetCondition(encounter, caster, t),
+						enabled : this.enabledTargetCondition(encounter, caster, t),
 						obj     : t,
 					});
 				});
@@ -246,7 +245,7 @@ export class Ability {
 			}
 			case TargetMode.Self:
 				Text.Clear();
-				ability.Use(encounter, caster, undefined, ext);
+				this.Use(encounter, caster, undefined, ext);
 				break;
 
 			case TargetMode.Ally:
@@ -254,10 +253,10 @@ export class Ability {
 			case TargetMode.AllyFallen: {
 				const validTarget = (t: Entity) => {
 					// Don't add self unless allowed
-					if (ability.targetMode === TargetMode.AllyNotSelf && t === caster) { return false; }
+					if (this.targetMode === TargetMode.AllyNotSelf && t === caster) { return false; }
 					// Don't add incapacitated unless allowed
 					const incap = t.Incapacitated();
-					if (ability.targetMode === TargetMode.AllyFallen) {
+					if (this.targetMode === TargetMode.AllyFallen) {
 						if (!incap) {
 							return false;
 						}
@@ -281,11 +280,11 @@ export class Ability {
 					if (validTarget(t)) {
 						target.push({
 							nameStr : t.name,
-							func(t: Entity) {
+							func: (t: Entity) => {
 								Text.Clear();
-								ability.Use(encounter, caster, t, ext, retarget);
+								this.Use(encounter, caster, t, ext, retarget);
 							},
-							enabled : ability.enabledTargetCondition(encounter, caster, t),
+							enabled : this.enabledTargetCondition(encounter, caster, t),
 							obj     : t,
 						});
 					}
@@ -314,11 +313,11 @@ export class Ability {
 					if (validTarget(t)) {
 						target.push({
 							nameStr : t.uniqueName || t.name,
-							func(t: Entity) {
+							func: (t: Entity) => {
 								Text.Clear();
-								ability.Use(encounter, caster, t, ext, retarget);
+								this.Use(encounter, caster, t, ext, retarget);
 							},
-							enabled : ability.enabledTargetCondition(encounter, caster, t),
+							enabled : this.enabledTargetCondition(encounter, caster, t),
 							obj     : t,
 						});
 					}
@@ -329,11 +328,11 @@ export class Ability {
 			}
 			case TargetMode.Party:
 				Text.Clear();
-				ability.Use(encounter, caster, party, ext);
+				this.Use(encounter, caster, party, ext);
 				break;
 			case TargetMode.Enemies:
 				Text.Clear();
-				ability.Use(encounter, caster, encounter.enemy, ext);
+				this.Use(encounter, caster, encounter.enemy, ext);
 				break;
 			default: // Shouldn't happen
 				Text.NL();
@@ -384,10 +383,9 @@ export class Ability {
 	}
 
 	public OnCooldown(casterEntry: ICombatOrder) {
-		const ability = this;
 		let onCooldown = 0;
 		_.each(casterEntry.cooldown, (c) => {
-			if (ability === c.ability) {
+			if (this === c.ability) {
 				onCooldown = c.cooldown;
 				return false;
 			}
@@ -441,16 +439,15 @@ export class AbilityCollection {
 	}
 
 	public OnSelect(encounter: Encounter, caster: Entity, backPrompt?: CallableFunction) {
-		const collection = this;
 		const entry = caster.GetCombatEntry(encounter);
 
 		const ret = () => {
-			collection.OnSelect(encounter, caster, backPrompt);
+			this.OnSelect(encounter, caster, backPrompt);
 		};
 
 		const prompt = () => {
 			Text.Clear();
-			_.each(collection.AbilitySet, (ability) => {
+			_.each(this.AbilitySet, (ability) => {
 				const castTime = ability.castTime !== 0 ? ability.castTime.toString() : "instant";
 				const cooldown = ability.OnCooldown(entry);
 				const plural   = (cooldown > 1 ? "s" : "");

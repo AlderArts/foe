@@ -129,7 +129,6 @@ export class Cavalcade {
 	public PrepGame(keepOut?: boolean) {
 		SetGameState(GameState.Cavalcade, Gui);
 
-		const that = this;
 		_.each(this.players, (p) => {
 			if (!keepOut) {
 				p.out = false;
@@ -139,8 +138,8 @@ export class Cavalcade {
 			if (p.out) {
 				p.folded = true;
 			} else {
-				p.hand.push(that.PullCard());
-				p.hand.push(that.PullCard());
+				p.hand.push(this.PullCard());
+				p.hand.push(this.PullCard());
 				p.folded = false;
 			}
 			p.res = undefined;
@@ -154,10 +153,9 @@ export class Cavalcade {
 	}
 
 	public Finish() {
-		const cav = this;
-		_.each(cav.players, (p) => {
+		_.each(this.players, (p) => {
 			if (p.folded) { return; }
-			_.each(cav.house, (h) => {
+			_.each(this.house, (h) => {
 				p.hand.push(h);
 			});
 			// TODO: TEMP
@@ -166,7 +164,7 @@ export class Cavalcade {
 				if (key > 0) {
 					Text.Add(", ");
 				}
-				if (h === cav.stag) {
+				if (h === this.stag) {
 					Text.Add(h.name + " (*)", undefined, "bold");
 				} else {
 					Text.Add(h.name);
@@ -313,11 +311,10 @@ export class Cavalcade {
 	// If the Stag is revealed in the house hand, replace it with a new card
 	public CoinGameRound() {
 		const party: Party = GAME().party;
-		const that: Cavalcade = this;
 		const parse: IParse = {
-			token : that.token,
-			bet : () => that.bet.toString(),
-			pot : () => that.pot.toString(),
+			token : this.token,
+			bet : () => this.bet.toString(),
+			pot : () => this.pot.toString(),
 		};
 
 		Gui.ClearButtons();
@@ -325,12 +322,12 @@ export class Cavalcade {
 		// [Sure][Nah]
 		//const options: IChoice[] = [];
 
-		switch (that.round) {
+		switch (this.round) {
 		case 0:
-			_.each(that.players, (p) => {
+			_.each(this.players, (p) => {
 				if (p.folded) { return; }
-				p.purse.coin -= that.bet;
-				that.pot += that.bet;
+				p.purse.coin -= this.bet;
+				this.pot += this.bet;
 			});
 			if (!GAME().player.out) {
 				Text.Add("You put [bet] [token]s in the pot. The dealer gives you two cards.", parse);
@@ -348,14 +345,14 @@ export class Cavalcade {
 			} else {
 				Text.Add("Your cards are ");
 				let card = GAME().player.hand[0];
-				if (card === that.stag) {
+				if (card === this.stag) {
 					Text.Add(card.name + " (*)", undefined, "bold");
 				} else {
 					Text.Add(card.name);
 				}
 				Text.Add(", ");
 				card = GAME().player.hand[1];
-				if (card === that.stag) {
+				if (card === this.stag) {
 					Text.Add(card.name + " (*)", undefined, "bold");
 				} else {
 					Text.Add(card.name);
@@ -363,33 +360,33 @@ export class Cavalcade {
 				Text.Add(".");
 			}
 			Text.NL();
-			if (that.round > 0) {
+			if (this.round > 0) {
 				Text.Add("The dealer reveals a house card.");
 				Text.NL();
 			}
 
-			if (that.house[that.round - 1] === that.stag) {
-				Text.Add("The revealed card is [stag]!", {stag: that.stag.name});
+			if (this.house[this.round - 1] === this.stag) {
+				Text.Add("The revealed card is [stag]!", {stag: this.stag.name});
 				Text.NL();
 				Text.Add("The card is discarded, and the dealer pulls another one from the deck.");
-				that.house[that.round - 1] = that.PullCard();
+				this.house[this.round - 1] = this.PullCard();
 				Text.Flush();
 				Gui.NextPrompt(() => {
 					Text.Clear();
-					that.NextRound();
+					this.NextRound();
 				});
 				return;
 			}
 
 			Text.Add("The house hand is: ");
 			let i;
-			for (i = 0; i < that.round; i++) {
-				const card = that.house[i];
+			for (i = 0; i < this.round; i++) {
+				const card = this.house[i];
 				Text.Add(card.name);
 				if (i < 2) { Text.Add(", "); }
 			}
 			for (; i < 3; i++) {
-				const card = that.house[i];
+				const card = this.house[i];
 				if (GetDEBUG()) {
 					Text.Add(card.name);
 				}
@@ -404,7 +401,7 @@ export class Cavalcade {
 			if (GAME().player.folded) {
 				Input.buttons[0].Setup("Next", () => {
 					Text.Clear();
-					that.NextRound();
+					this.NextRound();
 				}, true);
 			} else {
 				// TODO: Opponent AI
@@ -412,89 +409,89 @@ export class Cavalcade {
 					Text.Clear();
 					Text.Add("You call.");
 					Text.NL();
-					that.NextRound();
+					this.NextRound();
 				}, true);
 				Input.buttons[4].Setup("Raise", () => {
 					Text.Clear();
 					Text.Add("You raise the bet.");
 					Text.NL();
-					_.each(that.players, (p) => {
+					_.each(this.players, (p) => {
 						if (p.folded) { return; }
-						p.purse.coin -= Math.min(that.bet, p.purse.coin);
-						that.pot += that.bet;
+						p.purse.coin -= Math.min(this.bet, p.purse.coin);
+						this.pot += this.bet;
 					});
-					that.NextRound();
-				}, that.players[0].purse.coin >= that.bet); // TODO
+					this.NextRound();
+				}, this.players[0].purse.coin >= this.bet); // TODO
 				Input.buttons[8].Setup("Fold", () => {
 					Text.Clear();
 					Text.Add("You fold.");
 					Text.NL();
 					GAME().player.folded = true;
-					that.NextRound();
+					this.NextRound();
 				}, true);
 			}
 			break;
 		}
 
 		default: {
-			that.Finish();
+			this.Finish();
 
 			Text.NL();
 
-			that.winners = [];
-			_.each(that.players, (p) => {
+			this.winners = [];
+			_.each(this.players, (p) => {
 				if (p.folded) { return; }
-				that.winners.push(p);
+				this.winners.push(p);
 			});
 
-			_.each(that.winners, (w) => {
+			_.each(this.winners, (w) => {
 				Text.Add(`HAND EVALUATION (${w.name}):<br>`);
-				w.res = that.EvaluateHand(w.hand);
-				const result = that.ResultStr(w.res);
+				w.res = this.EvaluateHand(w.hand);
+				const result = this.ResultStr(w.res);
 				Text.Add(`Hand evaluated as: ${result}`);
 				Text.NL();
 			});
 
-			that.winners.sort(Cavalcade.EvaluateWinnerSorter);
+			this.winners.sort(Cavalcade.EvaluateWinnerSorter);
 
-			const winner = that.winners[0];
+			const winner = this.winners[0];
 			let idx = 1;
 			// Check how many are in a draw position
-			for (; idx < that.winners.length; idx++) {
-				if (Cavalcade.EvaluateWinnerSorter(winner, that.winners[idx]) !== 0) { break; }
+			for (; idx < this.winners.length; idx++) {
+				if (Cavalcade.EvaluateWinnerSorter(winner, this.winners[idx]) !== 0) { break; }
 			}
 			// Remove none-draw
-			that.winners = that.winners.slice(0, idx);
+			this.winners = this.winners.slice(0, idx);
 			// Multiple winners
-			if (that.winners.length > 1) {
+			if (this.winners.length > 1) {
 				Text.Add("There was a draw! The pot is split between the winners.");
-				that.pot = Math.floor(that.pot / that.winners.length);
-				_.each(that.winners, (w) => {
-					w.purse.coin += that.pot;
+				this.pot = Math.floor(this.pot / this.winners.length);
+				_.each(this.winners, (w) => {
+					w.purse.coin += this.pot;
 					if (party.InParty(w as any)) {
 						Text.NL();
-						parse.pot = that.pot.toString();
+						parse.pot = this.pot.toString();
 						Text.Add("The party gains [pot] [token]s!", parse);
 					}
 				});
 			} else {
-				that.winner = that.winners[0];
-				Text.Add("[name] won the round!", {name: that.winner.NameDesc()});
-				that.winner.purse.coin += that.pot;
-				if (party.InParty(that.winner as any)) {
+				this.winner = this.winners[0];
+				Text.Add("[name] won the round!", {name: this.winner.NameDesc()});
+				this.winner.purse.coin += this.pot;
+				if (party.InParty(this.winner as any)) {
 					Text.NL();
-					parse.pot = that.pot.toString();
+					parse.pot = this.pot.toString();
 					Text.Add("The party gains [pot] [token]s!", parse);
 				}
 			}
 
-			that.onPost();
+			this.onPost();
 
 			break;
 		}
 		}
 		Text.Flush();
-		that.round++;
+		this.round++;
 	}
 
 }

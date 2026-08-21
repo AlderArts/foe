@@ -209,7 +209,7 @@ export class Kiakai extends Entity {
 		const options: IChoice[] = [];
 
 		options.push({ nameStr: "Talk",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("What do you want to talk with [name] about?", parse);
 				Text.Flush();
@@ -217,7 +217,7 @@ export class Kiakai extends Entity {
 			}, enabled : true,
 		});
 		options.push({ nameStr: "Release",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("[Placeholder] Kiai masturbates fiercely, cumming buckets.");
 
@@ -233,7 +233,7 @@ export class Kiakai extends Entity {
 			tooltip : "Pleasure yourself.",
 		});
 		options.push({ nameStr: "Meditate",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Placeholder: [name] sits down and attempts to calm [hisher] thoughts.", parse);
 				Text.Flush();
@@ -280,7 +280,7 @@ export class Kiakai extends Entity {
 		});
 		// TALK ABOUT ARIA
 		options.push({ nameStr: "Aria",
-			func() {
+			func: () => {
 				Text.Clear();
 				KiakaiScenes.TalkAria();
 			}, enabled : true,
@@ -288,7 +288,7 @@ export class Kiakai extends Entity {
 		});
 		// TALK ABOUT URU
 		options.push({ nameStr: "Uru",
-			func() {
+			func: () => {
 				Text.Clear();
 				KiakaiScenes.TalkUru();
 			}, enabled : true,
@@ -296,7 +296,7 @@ export class Kiakai extends Entity {
 		});
 		// TALK ABOUT EDEN
 		options.push({ nameStr: "Eden",
-			func() {
+			func: () => {
 				Text.Clear();
 				KiakaiScenes.TalkEden();
 			}, enabled : true,
@@ -304,7 +304,7 @@ export class Kiakai extends Entity {
 		});
 		// TALK ABOUT ELVES
 		options.push({ nameStr: "Elves",
-			func() {
+			func: () => {
 				Text.Clear();
 				KiakaiScenes.TalkElves();
 			}, enabled : true,
@@ -312,7 +312,7 @@ export class Kiakai extends Entity {
 		});
 		// TALK ABOUT PRIESTHOOD
 		options.push({ nameStr: "Priesthood",
-			func() {
+			func: () => {
 				Text.Clear();
 				KiakaiScenes.TalkPriest();
 			}, enabled : true,
@@ -323,7 +323,7 @@ export class Kiakai extends Entity {
 		if (r >= RavenFlags.Stage.ravenstage2 + 2 &&
 		   ravenmother.flags.Met === 0) {
 			options.push({ nameStr : "Ravens",
-				func() {
+				func: () => {
 					KiakaiScenes.RavenDreams();
 					kiakai.TalkPrompt();
 				}, enabled : true,

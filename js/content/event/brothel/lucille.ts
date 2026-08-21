@@ -173,19 +173,19 @@ export namespace LucilleScenes {
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Cat Dynasty",
 			tooltip : "Choose the Cat Dynasty and enter the role of Bastet, the hermaphrodite feline Goddess.",
-			func() {
+			func: () => {
 				selection(BastetScenes.IntroEntryPoint);
 			}, enabled : true,
 		});
 		options.push({ nameStr : "Gryphons",
 			tooltip : "Choose Birth of a Kingdom and step back to the beginning of time, seeing history through the eyes of two gryphon-morphs.",
-			func() {
+			func: () => {
 				selection(GryphonsScenes.IntroEntryPoint);
 			}, enabled : true,
 		});
 		options.push({ nameStr : "Fireblossom",
 			tooltip : "Choose Under the Dragon’s Claw, and embody Fireblossom, the princess turned slave.",
-			func() {
+			func: () => {
 				selection(FireblossomScenes.IntroEntryPoint);
 			}, enabled : true,
 		});
@@ -309,14 +309,14 @@ export namespace LucilleScenes {
 			// [Pay][Shark]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Pay",
-				func() {
+				func: () => {
 					Text.Clear();
 					payFunc();
 				}, enabled : party.coin >= cost,
 				tooltip : Text.Parse("Pay the [coin] you owe her.", parse),
 			});
 			options.push({ nameStr : "Shark",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“I’m sure you remember our deal,”</i> Lucille slowly replies at your refusal, licking her lips in anticipation. Before you can even react, you find yourself paralyzed, unable to lift even a finger as you’re lost in the hypnotic depths of Lucille’s eyes. The madame slowly sways past you, heading toward Chester by the entrance. <i>“I’ll enjoy watching this,”</i> she whispers as she passes by you, <i>“as I’m sure the other customers will as well.”</i>", parse);
 					Text.NL();

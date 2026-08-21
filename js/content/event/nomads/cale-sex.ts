@@ -47,21 +47,21 @@ export namespace CaleSexScenes {
 		// [Oral]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Give BJ",
-			func() {
+			func: () => {
 				CaleSexScenes.SexSuckHim();
 			}, enabled : true,
 			tooltip : "Offer to suck his cock.",
 		});
 		if (player.FirstCock()) {
 			options.push({ nameStr : "Get BJ",
-				func() {
+				func: () => {
 					CaleSexScenes.SexGetBJ(Prompt);
 				}, enabled : true,
 				tooltip : "Have him blow your cock.",
 			});
 			if (player.FirstVag()) {
 				options.push({ nameStr : "Trick BJ",
-					func() {
+					func: () => {
 						CaleSexScenes.SexGetTrickBJ();
 					}, enabled : true,
 					tooltip : "Lure him into eating you out, then switch to getting a blowjob.",
@@ -70,7 +70,7 @@ export namespace CaleSexScenes {
 		}
 		if (player.FirstVag()) {
 			options.push({ nameStr : "Get eaten",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“It’d be my pleasure,”</i> Cale grins, licking his lips wolfishly.", parse);
 					Text.NL();
@@ -80,21 +80,21 @@ export namespace CaleSexScenes {
 			});
 
 			options.push({ nameStr : "Catch Vaginal",
-				func() {
+				func: () => {
 					CaleSexScenes.SexCatchVag();
 				}, enabled : true,
 				tooltip : "You want that hot wolf dick inside you, now!",
 			});
 		}
 		options.push({ nameStr : "Catch anal",
-			func() {
+			func: () => {
 				CaleSexScenes.SexCatchAnal();
 			}, enabled : true,
 			tooltip : "Because Rogues do it from behind.",
 		});
 		if (player.FirstCock() || player.Strapon()) {
 			options.push({ nameStr : "Fuck him",
-				func() {
+				func: () => {
 					Text.Clear();
 					if (cale.sex.rAnal === 1) {
 						Text.Add("<i>“You know, I’ve been thinking about before. You know. When you did the thing.”</i> You sweetly ask him whatever he could be talking about. The wolf looks slightly pained. <i>“I… uh, I never let anyone fuck me before. Not like that.”</i>", parse);
@@ -167,21 +167,21 @@ export namespace CaleSexScenes {
 
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Give BJ",
-			func() {
+			func: () => {
 				CaleSexScenes.SexSuckHim(true);
 			}, enabled : true,
 			tooltip : "Offer to suck his cock.",
 		});
 		if (player.FirstCock()) {
 			options.push({ nameStr : "Get BJ",
-				func() {
+				func: () => {
 					CaleSexScenes.SexGetBJ(Prompt, true);
 				}, enabled : true,
 				tooltip : "Have him blow your cock.",
 			});
 			if (player.FirstVag()) {
 				options.push({ nameStr : "Trick BJ",
-					func() {
+					func: () => {
 						CaleSexScenes.SexGetTrickBJ(true);
 					}, enabled : true,
 					tooltip : "Lure him into eating you out, then switch to getting a blowjob.",
@@ -190,7 +190,7 @@ export namespace CaleSexScenes {
 		}
 		if (player.FirstVag()) {
 			options.push({ nameStr : "Get eaten",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“Sure, I was getting a bit hungry anyways,”</i> Cale grins, licking his lips. <i>“Hope you don’t mind an audience!”</i>", parse);
 					Text.NL();
@@ -199,21 +199,21 @@ export namespace CaleSexScenes {
 				tooltip : "Have him eat you out.",
 			});
 			options.push({ nameStr : "Catch Vaginal",
-				func() {
+				func: () => {
 					CaleSexScenes.SexCatchVag(true);
 				}, enabled : true,
 				tooltip : "You want that hot wolf dick inside you, now!",
 			});
 		}
 		options.push({ nameStr : "Catch anal",
-			func() {
+			func: () => {
 				CaleSexScenes.SexCatchAnal(true);
 			}, enabled : true,
 			tooltip : "Because Rogues do it from behind.",
 		});
 		if (player.FirstCock() || player.Strapon()) {
 			options.push({ nameStr : "Fuck him",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You twirl your finger, motioning for him to turn around. ", parse);
 					if (cale.Slut() >= 60) {
@@ -288,7 +288,7 @@ export namespace CaleSexScenes {
 		// [Suck][Tease][Finger]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Suck",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("There are a lot of things you could do to mess with the cocky wolf, but in truth you just want his cock. Closing your eyes in bliss, you wrap your lips around the magnificent member and sink down on it, taking almost half of it on your first try.", parse);
 				Text.NL();
@@ -326,7 +326,7 @@ export namespace CaleSexScenes {
 			tooltip : "You can’t resist any longer, just dive in and take him!",
 		});
 		options.push({ nameStr : "Tease",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("With a smile playing on your lips, you hover there, your hot breath wafting on Cale’s cock. You place a single kiss on his glans, letting a strand of pre trail from his cumslit to your mouth, but that is as far as you’ll go for the moment. The wolf gives you a confused glance as you begin to stroke him slowly, your fingers dancing lightly across his veined shaft. Your other hand cradles his balls, squeezing them gently.", parse);
 				Text.NL();
@@ -353,7 +353,7 @@ export namespace CaleSexScenes {
 			tooltip : "Drag it out for as long as you can to tease him.",
 		});
 		options.push({ nameStr : "Finger",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Oh, you’ll show him teasing. He’s in for way more than he bargained for. You give his tip a swipe before you go lower down his shaft, lathering it up with long licks of your tongue. Oblivious to your plans, the wolf leans back, sighing in pleasure. You give his sack a few encouraging rubs before wetting your fingers, sliding them up his inner thigh. Simultaneously, you wrap your lips around his cock, starting to suck.", parse);
 				Text.NL();
@@ -410,7 +410,7 @@ export namespace CaleSexScenes {
 			// [Swallow][Facial][Reverse]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Swallow",
-				func() {
+				func: () => {
 					Text.Clear();
 					if (finger) {
 						Text.Add("You line your finger up and - in a single, smooth motion - you push it inside of Cale’s used tailhole to the knuckle, twisting as you do so in order to better grind against his prostate.", parse);
@@ -460,7 +460,7 @@ export namespace CaleSexScenes {
 				tooltip : "Gulp down his load.",
 			});
 			options.push({ nameStr : "Facial",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You give the wolf’s shaft a final round of polishing before releasing it from your hungry lips, grasping it in both hands. Pointing his cumslit right at your open mouth, you enthusiastically jerk him off, looking up into his eyes.", parse);
 					Text.NL();
@@ -480,7 +480,7 @@ export namespace CaleSexScenes {
 			});
 			if (finger) {
 				options.push({ nameStr : "Reverse",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("With drops of his pre still lingering on your [tongue], you pull off his cock, rising in one smooth motion to give the wolf a big, fat kiss. He sputters, losing his balance in a vain effort to get away from you, which makes pushing him on his back all the more easy. A sharp shove and the confused Cale is prone, ass propped up in the air by the [log]. He gasps as you shove your fingers back into his [cAnusDesc], spreading him wide.", parse);
 						Text.NL();
@@ -587,7 +587,7 @@ export namespace CaleSexScenes {
 				// [Eat out][Trick]
 				const options: IChoice[] = [];
 				options.push({ nameStr : "Eat out",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("<i>“That’s my girl,”</i> Cale grins, his eyes shining brightly at the prospect of a nice meal.", parse);
 						Text.NL();
@@ -597,7 +597,7 @@ export namespace CaleSexScenes {
 					tooltip : "Well, alright. Tell him you’ve changed your mind.",
 				});
 				options.push({ nameStr : "Trick",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("Sure… you might start out that way, but you have some other intentions for the wolf’s mouth. You nod amiably, telling him that you’ve changed your mind.", parse);
 						Text.NL();
@@ -1099,7 +1099,7 @@ export namespace CaleSexScenes {
 			// [Doggy][R.Cowgirl]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Doggy",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You lean forward, nuzzling the pliant wolf and burying your head in the fluffy fur of his neck. His insides feel <i>so</i> good, you can barely contain your rutting. Cale is mumbling something about you being his alpha, though it’s difficult to make out between his cries of pleasure.", parse);
 					Text.NL();
@@ -1144,7 +1144,7 @@ export namespace CaleSexScenes {
 				tooltip : "Keep railing him from behind, you are so close to cumming...",
 			});
 			options.push({ nameStr : "R.Cowgirl",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You’ve already made him cum, how about asking him to return the favor? Grabbing the wolf by the armpits, you haul him into an upright position, shifting him around as you sit down on the [log] again, with Cale riding you reverse cowgirl.", parse);
 					Text.NL();
@@ -1221,7 +1221,7 @@ export namespace CaleSexScenes {
 						// [BeForward] [Neutral] [Comfort]
 						const options: IChoice[] = [];
 						options.push({ nameStr : "Be forward",
-							func() {
+							func: () => {
 								Text.Clear();
 								Text.Add("Smirking to yourself, you nuzzle the wolf-morph, who visibly restrains himself from flinching. Your hand reaches around and presses itself gently against his stomach, feeling the soft fur. With slow, sensuous motions, your fingers start to rub up and down, trailing the contour of his nicely muscled abs.", parse);
 								Text.NL();
@@ -1249,7 +1249,7 @@ export namespace CaleSexScenes {
 							tooltip : "Looks like he liked it. Why not tease him a little?",
 						});
 						options.push({ nameStr : "Neutral",
-							func() {
+							func: () => {
 								Text.Clear();
 								Text.Add("You ask if he would be willing to try things your way again.", parse);
 								Text.NL();
@@ -1265,7 +1265,7 @@ export namespace CaleSexScenes {
 							tooltip : "Let's just cut to the chase, this isn’t such a big deal.",
 						});
 						options.push({ nameStr : "Comfort",
-							func() {
+							func: () => {
 								Text.Clear();
 								Text.Add("Smiling gently, you ask if he's alright, and apologize for how you treated him.", parse);
 								Text.NL();
@@ -1425,7 +1425,7 @@ export namespace CaleSexScenes {
 		// [Handjob] [Blowjob] [StrokeSelf]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Handjob",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("With a grin, you saunter toward him and kneel down before him, gently but insistently pushing his hands away before wrapping your own fingers around his dick. The warm, semi-turgid flesh pulsates gently in your grip as you start to rhythmically stroke up and down. You squeeze and release as you go, alternating the pressure in time with your motions, sliding Cale’s wolfhood through your digits and across your palm before glancing up and seeing how he’s enjoying this.", parse);
 				Text.NL();
@@ -1453,7 +1453,7 @@ export namespace CaleSexScenes {
 			tooltip : "Bat his hands away and show him how it’s done, firsthand.",
 		});
 		options.push({ nameStr : "Blowjob",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Smirking seductively, you sashay your way over to Cale and kneel with exaggeratedly demure motions before him. You slowly run your tongue over your lips in a tantalizing motion that makes the wolf move his hands, allowing you to lower your [face] toward his groin.", parse);
 				Text.NL();
@@ -1474,7 +1474,7 @@ export namespace CaleSexScenes {
 		});
 		if (cale.Slut() >= 60 && (player.FirstCock() || player.Strapon())) {
 			options.push({ nameStr : "Stroke self",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Grinning cockily back at him, you shift your pose slightly to more prominently display your [cocks], hands on your [hips].", parse);
 					Text.NL();
@@ -1605,7 +1605,7 @@ export namespace CaleSexScenes {
 			// [Yes] [No]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Yes",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Cale’s thrusts increase in potency, each slap loosening you just a tiny bit as he works to force that huge knot of his inside. With a triumphant howl, he finally pops it in and proceeds to dump his considerable load within you.", parse);
 					Text.NL();
@@ -1647,7 +1647,7 @@ export namespace CaleSexScenes {
 				tooltip : "You want him inside you, all the way; let’s have that knot!",
 			});
 			options.push({ nameStr : "No",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Cale’s thrust double in speed as he becomes a blur, trying his best to not let his knot slip into your used [vag]. With a triumphant howl, the wolf cums! Spurt after spurt of his lupine spunk painting your walls white, even as some of his copious load escapes your entrance to drench his knot and balls. You can feel him throbbing inside, his hips still moving, or perhaps just trembling, in pleasure until he finally collapses in a panting heap of satisfied wolf.", parse);
 					Text.NL();
@@ -1942,7 +1942,7 @@ export namespace CaleSexScenes {
 		const options: IChoice[] = [];
 		if (knotted) {
 			options.push({ nameStr : "Tie Him",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("With a roar of effort, you drive Cale and your cock together as hard as you possibly can, jamming the swollen bulb of your flesh through his tight boypussy until he is wedged against you. The feel of his flesh enveloping your knot, grinding it fit to burst, is the last straw for you; you are barely aware of Cale’s cries of pleasure, or the warm semen splattering over your chest and running down your [skin] as your own seed erupts inside of him.", parse);
 					Text.NL();
@@ -2005,7 +2005,7 @@ export namespace CaleSexScenes {
 			});
 		}
 		options.push({ nameStr : "Nah",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You thrust into Cale’s colon as deeply as you can, the two of you crying out in mutual pleasure as your limits are breached and the both of you climax in unison. Cale’s seed sprays across your stomach and [breasts], trickling strands of off-white running down your [skin], even as your cum floods inside of his ass.", parse);
 				Text.NL();
@@ -2152,7 +2152,7 @@ export namespace CaleSexScenes {
 			// [Yes][No]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Yes",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Rather than waste time with words, you let your body do the talking, grinding back against Cale’s hips as best you can from your present position. You will your clenching asshole to open further, stretching yourself out with each inch you force yourself back over Cale’s bulging knot. Gritting your teeth from the effort, you strain with all your might, crying out in triumph as you finally force him inside of you to the hilt, anchoring him within your ass.", parse);
 					Text.NL();
@@ -2203,7 +2203,7 @@ export namespace CaleSexScenes {
 				tooltip : "You can take anything he can throw at you!",
 			});
 			options.push({ nameStr : "No",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“Aw, too bad. But it’s alright, I still got a lot. To. Give. You,”</i> he says, punctuating each word with a rough thrust.", parse);
 					Text.NL();
@@ -2411,7 +2411,7 @@ export namespace CaleSexScenes {
 			// [Hell yeah!][No]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Hell yeah!",
-				func() {
+				func: () => {
 					cale.flags.eBlow++;
 
 					Text.Clear();
@@ -2479,7 +2479,7 @@ export namespace CaleSexScenes {
 				tooltip : "Why not? Let the satyr have some fun with his wolf rival.",
 			});
 			options.push({ nameStr : "No",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You tell the satyr to back off for now. Cale looks relieved, but you remind him to not get too comfortable, you are <i>far</i> from done with him.", parse);
 					Text.NL();

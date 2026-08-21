@@ -142,7 +142,7 @@ export namespace VaughnScenes {
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Appearance",
 			tooltip : "Give the fox a once-over.",
-			func() {
+			func: () => {
 				Text.Clear();
 				parse.w = WorldTime().season === Season.Winter ? ", and he’s let his winter coat grow out a bit to better ward off the cold" : "";
 				Text.Add("Standing at about five foot seven, Vaughn is a fox-morph of middling stature and disposition. His russet coat of fur has seen better days, what with the whole war thing and all[w]. Had life been kinder to him - and if he could be bothered to care for it, of course - Vaughn might have had a sleek and glorious coat of fur, but as it is, he’s a lost cause. Not <i>dirty</i>, of course, just coarse and rough.", parse);
@@ -163,7 +163,7 @@ export namespace VaughnScenes {
 		});
 		options.push({ nameStr : "Talk",
 			tooltip : "Chat up the grizzled veteran.",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“Doesn’t seem like much’s happening at the moment. I suppose I’ll take a small smoke break… I know I’m on the clock, but it can’t hurt to be a little flexible on a quiet night.”</i> With that, Vaughn pulls a cigarette and box of matches out of his vest. After some fumbling, he eventually gets his smoke lit and sticks it in his muzzle, stamping out the match stub under his boot. <i>“Right. You wanted to talk?”</i>", parse);
 				Text.Flush();
@@ -173,7 +173,7 @@ export namespace VaughnScenes {
 		});
 		options.push({ nameStr : "Tasks",
 			tooltip : "Ask him if he has any work for you.",
-			func() { VaughnTasksScenes.TaskPrompt(VaughnScenes.Prompt); }, enabled : true,
+			func: () => { VaughnTasksScenes.TaskPrompt(VaughnScenes.Prompt); }, enabled : true,
 		});
 		options.push({ nameStr : "Sex",
 			tooltip : "Proposition Vaughn for sex.",
@@ -206,7 +206,7 @@ export namespace VaughnScenes {
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Himself",
 			tooltip : "Ask Vaughn about himself.",
-			func() {
+			func: () => {
 				Text.Clear();
 
 				const first = !(vaughn.flags.Talk & VaughnFlags.Talk.Himself);
@@ -224,7 +224,7 @@ export namespace VaughnScenes {
 		});
 		options.push({ nameStr : "War",
 			tooltip : "Ask Vaughn about the civil war.",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“Hmph. I can tell you a bit about it.”</i> Vaughn says. <i>“No one has the entirety of the picture, of course, but all of us hold our own bits and pieces, and with enough effort you can start putting together a story that makes sense. To be honest? I’m kinda flattered that you’d ask me.”</i>", parse);
 				Text.NL();
@@ -238,7 +238,7 @@ export namespace VaughnScenes {
 		});
 		options.push({ nameStr : "Engineer",
 			tooltip : "So, as an engineer, what does he do around here?",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“Like I told you before, I’m responsible for the gate and walls, and their upkeep. Those stakes there in the pit - tarring and treating them makes them as hard as stone, but even stone doesn’t stay sharp forever, especially in this forest. The mobile bridges you come in on - those actually came from the army’s own designs, given a few modifications by me, of course. Ten years and some change, and I think I’ve done the camp some good; while there aren’t too many willing to learn, I’ve found a couple of lads with the right head for the numbers involved and having more hands about is always great.</i>", parse);
 				Text.NL();
@@ -281,7 +281,7 @@ export namespace VaughnScenes {
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Past",
 			tooltip : "So, where’d he come from, who is he, and where is he going?",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“I thought I told you that already.”</i>", parse);
 				Text.NL();
@@ -315,7 +315,7 @@ export namespace VaughnScenes {
 		});
 		options.push({ nameStr : "Arrival",
 			tooltip : "Did he have to look so menacing when you first came in?",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“It’s kinda expected. I’m responsible for the gate. You were brought in as Maria’s prisoner. It was my duty to give you an appropriate welcome, and while it may have been unwarranted - now that I know your circumstances - I’m not going to apologize for it.”</i> He folds his arms and broadens his stance just a little. <i>“As far as I’m concerned, you were just a prisoner, and that’s the end of the discussion.”</i>", parse);
 				Text.NL();
@@ -333,7 +333,7 @@ export namespace VaughnScenes {
 		});
 		options.push({ nameStr : "Watch",
 			tooltip : "How’s his shift on the gates coming along?",
-			func() {
+			func: () => {
 				Text.Clear();
 
 				const scenes = new EncounterTable();
@@ -412,7 +412,7 @@ export namespace VaughnScenes {
 		if ((vaughn.flags.Talk & VaughnFlags.Talk.Past) || (vaughn.flags.TWar >= VaughnFlags.TalkWar.Desertion)) {
 			options.push({ nameStr : "Fiancee",
 				tooltip : "So, he mentioned a fiancee…",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You’re aware that this might bring up some bad memories, but nevertheless, curiosity gets the better of you and you have to ask. He never saw his fiancee again… did he lose her in the war?", parse);
 					Text.NL();
@@ -471,7 +471,7 @@ export namespace VaughnScenes {
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Beginnings",
 			tooltip : "How did it all get started, from his point of view?",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("His cigarette firmly in his mouth, Vaughn leans back against one of the watchtower’s supports, removes his hat, and fans himself with it. <i>“I know it didn’t happen all at once, although it does seem that way at times. Most of the little people don’t stand very tall to be able to see very far, you know? Still, I heard things coming out from behind the city walls, rumors and the like that the Crown and the various merchant’s guilds were at loggerheads once more. Supposedly, it was all due to the portal trouble, but I never paid any attention to it ‘cause it didn’t affect the shipwrighting business any. Despite there being just the wall between the docks and the city proper, it might as well all have been going down on another place as far as I was concerned.”</i>", parse);
 				Text.NL();
@@ -505,7 +505,7 @@ export namespace VaughnScenes {
 					const options: IChoice[] = [];
 					options.push({ nameStr : "Sure",
 						tooltip : "Why not? It’s a cold night.",
-						func() {
+						func: () => {
 							Text.Clear();
 							Text.Add("You accept the hip flask from Vaughn and take a swig. Whatever’s inside, it’s smooth and silky, without any hint of foam and fizz. Sweet enough to be on the level of sugar water, yet there’s a hint of wild fruit somewhere in it, and of course, plenty of alcohol. A flush of heat courses through your veins as the drink enters you, and you take another swig before handing the hip flask back to Vaughn.", parse);
 							Text.NL();
@@ -521,7 +521,7 @@ export namespace VaughnScenes {
 					});
 					options.push({ nameStr : "Nah",
 						tooltip : "Not right now.",
-						func() {
+						func: () => {
 							Text.Clear();
 							Text.Add("You don’t feel like having a drink right at the moment, and wave off Vaughn’s offer. The fox-morph shrugs and takes a couple more swigs from the flask. <i>“Sure, that just means more for me. Don’t mind if I do, then.</i>", parse);
 							Gui.PrintDefaultOptions();
@@ -561,7 +561,7 @@ export namespace VaughnScenes {
 		if (vaughn.flags.TWar >= VaughnFlags.TalkWar.Beginnings) {
 			options.push({ nameStr : "Wartime",
 				tooltip : "So… just how did it go down? The civil war, that is.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“It was messy, that’s for sure. As a trainee in the engineering corps, I didn’t get out that often - we were taken from the city to one of the country forts and given a crash course on machines of war. Bridges you could put together and take apart on the spot, ballistae, catapults, building proper fortifications, that sort of stuff. All ten of us had backgrounds in either masonry or woodworking of some sort, so they didn’t have to go over the basics like loading and tensile strength with us. Like the others, I tried to apply myself as best as I could without lingering on just <i>why</i> we were being told to study this stuff, or that we might have to use it on our own people at some point.</i>", parse);
 					Text.NL();
@@ -629,7 +629,7 @@ export namespace VaughnScenes {
 		if (vaughn.flags.TWar >= VaughnFlags.TalkWar.Wartime) {
 			options.push({ nameStr : "Desertion",
 				tooltip : "What was life as a deserter like?",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Vaughn draws on his cigarette and tugs at his collar as he reminisces. <i>“It wasn’t easy, but it wasn’t as hard as some would make it out to be, either. I knew I had to get away from Rigard, but I doubled back into the slums anyways, hoping to at least say goodbye to Sabrina… but of course, neither she nor her folks were there anymore. I did get to see my old master, though, snuck in even though the shipwright’s was boarded up and said goodbye, had my last hot meal for a long time. After that, I trekked straight out into the plains, where I thought there’d be a good chance of someone like me just vanishing into thin air.</i>", parse);
 					Text.NL();
@@ -883,7 +883,7 @@ export namespace VaughnScenes {
 			});
 			options.push({ nameStr : "Let it go",
 				tooltip : "Just let him have his way, the poor thing.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You consider stopping right now and asking Vaughn about it, but decide not to ruin the moment with your little hold-up. So what if he’s dreaming about someone else while fucking your tits - are you going to try and control what he thinks? What sort of petty control freak would you be, then?", parse);
 					Text.NL();

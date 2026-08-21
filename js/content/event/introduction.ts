@@ -118,7 +118,7 @@ export namespace Intro {
 		const options: IChoice[] = [
 			{
 				nameStr : "A man",
-				func() {
+				func: () => {
 					player.InitCharacter(Gender.male);
 					SelectGenderPref(SelectBodyTypeMale);
 				}, enabled : true,
@@ -126,7 +126,7 @@ export namespace Intro {
 			},
 			{
 				nameStr : "A woman",
-				func() {
+				func: () => {
 					player.InitCharacter(Gender.female);
 					SelectGenderPref(SelectBodyTypeFemale);
 				}, enabled : true,
@@ -184,35 +184,35 @@ export namespace Intro {
 		const options: IChoice[] = [
 			{
 				nameStr : "Average",
-				func() {
+				func: () => {
 					player.body.DefMale(BodyTypeMale.Average);
 					Intro.SelectCockSize();
 				}, enabled : true,
 			},
 			{
 				nameStr : "Thin",
-				func() {
+				func: () => {
 					player.body.DefMale(BodyTypeMale.Thin);
 					Intro.SelectCockSize();
 				}, enabled : true,
 			},
 			{
 				nameStr : "Muscular",
-				func() {
+				func: () => {
 					player.body.DefMale(BodyTypeMale.Muscular);
 					Intro.SelectCockSize();
 				}, enabled : true,
 			},
 			{
 				nameStr : "Girly",
-				func() {
+				func: () => {
 					player.body.DefMale(BodyTypeMale.Girly);
 					Intro.SelectCockSize();
 				}, enabled : true,
 			},
 			{
 				nameStr : "Femboy",
-				func() {
+				func: () => {
 					player.body.DefMale(BodyTypeMale.Femboy);
 					Intro.SelectCockSize();
 				}, enabled : true,
@@ -231,7 +231,7 @@ export namespace Intro {
 		const options: IChoice[] = [
 			{
 				nameStr : "3\"",
-				func() {
+				func: () => {
 					player.FirstCock().length.base = 6;
 					player.FirstCock().thickness.base = 1.5;
 					Intro.SkinColor();
@@ -239,7 +239,7 @@ export namespace Intro {
 			},
 			{
 				nameStr : "4\"",
-				func() {
+				func: () => {
 					player.FirstCock().length.base = 8;
 					player.FirstCock().thickness.base = 2;
 					Intro.SkinColor();
@@ -247,7 +247,7 @@ export namespace Intro {
 			},
 			{
 				nameStr : "5\"",
-				func() {
+				func: () => {
 					player.FirstCock().length.base = 10;
 					player.FirstCock().thickness.base = 2.5;
 					Intro.SkinColor();
@@ -255,7 +255,7 @@ export namespace Intro {
 			},
 			{
 				nameStr : "6\"",
-				func() {
+				func: () => {
 					player.FirstCock().length.base = 12;
 					player.FirstCock().thickness.base = 3;
 					Intro.SkinColor();
@@ -263,7 +263,7 @@ export namespace Intro {
 			},
 			{
 				nameStr : "7\"",
-				func() {
+				func: () => {
 					player.FirstCock().length.base = 14;
 					player.FirstCock().thickness.base = 3;
 					Intro.SkinColor();
@@ -271,7 +271,7 @@ export namespace Intro {
 			},
 			{
 				nameStr : "8\"",
-				func() {
+				func: () => {
 					player.FirstCock().length.base = 16;
 					player.FirstCock().thickness.base = 3.5;
 					Intro.SkinColor();
@@ -279,7 +279,7 @@ export namespace Intro {
 			},
 			{
 				nameStr : "9\"",
-				func() {
+				func: () => {
 					player.FirstCock().length.base = 18;
 					player.FirstCock().thickness.base = 3.5;
 					Intro.SkinColor();
@@ -287,7 +287,7 @@ export namespace Intro {
 			},
 			{
 				nameStr : "10\"",
-				func() {
+				func: () => {
 					player.FirstCock().length.base = 20;
 					player.FirstCock().thickness.base = 4;
 					Intro.SkinColor();
@@ -465,7 +465,7 @@ export namespace Intro {
 		const options: IChoice[] = [
 			{
 				nameStr : "Fighter",
-				func() {
+				func: () => {
 					Text.NL();
 					Text.Add("You take pride in your strength and physical prowess, and hope to one day become a mighty warrior. There is still much to learn, however...");
 					Text.Flush();
@@ -486,7 +486,7 @@ export namespace Intro {
 			},
 			{
 				nameStr : "Scholar",
-				func() {
+				func: () => {
 					Text.NL();
 					Text.Add("You like to take a calculated approach to problems facing you, weighing options against each other. From books and scrolls, you have taught yourself various useful supportive abilities. There is still much to learn, however...");
 					Text.Flush();
@@ -507,7 +507,7 @@ export namespace Intro {
 			},
 			{
 				nameStr : "Courtesan",
-				func() {
+				func: () => {
 					Text.NL();
 					Text.Add("You often try to fall back on your sex appeal whenever trouble arises, relying on your natural charm to distract and seduce your foes. There is still much to learn, however...");
 					Text.Flush();
@@ -701,7 +701,7 @@ export namespace Intro {
 		// [No][Use][Ride][Group]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "No",
-			func() {
+			func: () => {
 				Text.Add("With a shake of your head, you regain your composure, leaving the pile of imps to their own devices. You catch the demon throwing you a disappointed glance before he returns to his own thoughts.");
 				Text.Flush();
 				Gui.NextPrompt();
@@ -709,7 +709,7 @@ export namespace Intro {
 			tooltip : "Eww, what were you thinking!?",
 		});
 		options.push({ nameStr : "Use",
-			func() {
+			func: () => {
 				if (player.FirstVag()) {
 					Intro.ImpsWinUseFemale();
 				} else {
@@ -751,7 +751,7 @@ export namespace Intro {
 		// [Gentle][Rough][Anal]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Gentle",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Showing mercy on the imp, you pull out of his mouth, allowing him to draw breath. Before he can get too comfortable though, you insistently prod his cheek with your [cockDesc], coaxing him.", parse);
 				Text.NL();
@@ -773,7 +773,7 @@ export namespace Intro {
 			tooltip : "Let him show off his cock sucking skills.",
 		});
 		options.push({ nameStr : "Rough",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("...Who cares about imps, anyway? Ignoring the creature's increasingly desperate pleas, you resume your skull-fucking with undiminished vigor, only occasionally letting the imp draw air to keep it from passing out.");
 				Text.NL();
@@ -799,7 +799,7 @@ export namespace Intro {
 			tooltip : "Fuck being gentle, you are almost there!",
 		});
 		options.push({ nameStr : "Anal",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You pull out of the imp's mouth, absently rubbing your saliva and pre-covered [cockDesc] against his cheek. The creature takes the opportunity to take a few wheezing breaths before trying to scramble away from you. Effortlessly grabbing his tail and sweeping his legs away from under him, you chide him.", parse);
 				Text.NL();
@@ -864,7 +864,7 @@ export namespace Intro {
 		// [No][Use][Ride][Group]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Oral ride",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("With a rough shove, you push the surprised imp flat on his back. Smirking, you turn around and lower yourself, presenting your pussy to the confused creature. Licking your lips, you survey the imp's [impCockDesc], giving it a friendly squeeze.", parse);
 				Text.NL();
@@ -884,7 +884,7 @@ export namespace Intro {
 			tooltip : "Your legs are getting a bit wobbly, and you realize it would be much comfier to straddle the imp's face, and maybe give him a blowjob while you are at it.",
 		});
 		options.push({ nameStr : !cuntBlocked ? "Vaginal ride" : "Anal ride",
-			func() {
+			func: () => {
 				Text.Clear();
 
 				if (!cuntBlocked) {
@@ -899,7 +899,7 @@ export namespace Intro {
 			tooltip : !cuntBlocked ? "Push the imp down on his back and ride his cock." : "Knowing that the demon will probably stop you again, you might as well use your ass from the get-go.",
 		});
 		options.push({ nameStr : "Get fucked",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You step back from the eager imp's cunnilingus and twirl around. Getting down on your knees, you spread your legs, exposing your bare crotch. <i>“Come on, big boy, spear me on that impaler!”</i>", parse);
 				Text.NL();
@@ -1081,7 +1081,7 @@ export namespace Intro {
 		// [Yourself][Imp]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Yourself",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Methodically, you start the process of getting yourself cleaned up, using your tongue to gather up the largest wads of spunk from your body. You are slightly impeded by one of the imps deciding to have a round two, ruining most of your work so far, but eventually you manage to get yourself cleaned up.");
 				Text.Flush();
@@ -1090,7 +1090,7 @@ export namespace Intro {
 			tooltip : "Try to lick as much of that delicious cum from your body as you can.",
 		});
 		options.push({ nameStr : "Imp",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“You got me messed up like this,”</i> you complain to the tired imps around you, <i>“you get to clean me up!”</i> The dismayed protests of the imps are quickly cut off by threatening to beat them up again, and they dejectedly get down to business. You lean back and relax, turning around at the appropriate times to give them better access. Eventually, you are as clean as you are likely to become without taking a proper bath.");
 				Text.Flush();
@@ -1110,7 +1110,7 @@ export namespace Intro {
 		// [No][Oral][Get fucked]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "No",
-			func() {
+			func: () => {
 				Text.NL();
 				Text.Add("You have had quite enough of <i>that</i> to last you the day. As you back away, you are hounded by their jeers, promising to give you a good time.");
 				Text.Flush();
@@ -1266,7 +1266,7 @@ export namespace Intro {
 		// [No][Big breasts][Vaginal cap][Bigger load][Larger cock][Anal cap]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "No",
-			func() {
+			func: () => {
 				Text.Add("You shake your head, refusing the demon's temptations.");
 				Text.Flush();
 				Gui.NextPrompt();
@@ -1275,7 +1275,7 @@ export namespace Intro {
 		});
 		if (player.FirstVag()) {
 			options.push({ nameStr : "Vaginal cap",
-				func() {
+				func: () => {
 					Text.Add("You let out a shuddering gasp as you feel your insides shift around. You feel you could probably take a lot bigger cocks now...");
 
 					player.FirstVag().capacity.base++;
@@ -1290,7 +1290,7 @@ export namespace Intro {
 		}
 		if (player.FirstCock()) {
 			options.push({ nameStr : "Bigger load",
-				func() {
+				func: () => {
 					Text.Add("Before you even utter the words, you can feel your sack churning, growing larger and more virile. You are filled with an urge to deposit your seed in something, anything.");
 
 					player.Balls().size.base++;
@@ -1305,7 +1305,7 @@ export namespace Intro {
 				tooltip : "Cumming feels so good...",
 			});
 			options.push({ nameStr : "Larger cock",
-				func() {
+				func: () => {
 					player.FirstCock().thickness.base++;
 					player.FirstCock().length.base += 5;
 
@@ -1320,7 +1320,7 @@ export namespace Intro {
 			});
 		}
 		options.push({ nameStr : "Anal cap",
-			func() {
+			func: () => {
 				Text.Add("Groaning, you feel your insides shift around, allowing for larger things to be put in your butt!");
 
 				player.Butt().capacity.base++;
@@ -1333,7 +1333,7 @@ export namespace Intro {
 			tooltip : "Increasing your capacity would allow you to take even bigger dicks...",
 		});
 		options.push({ nameStr : "Big breasts",
-			func() {
+			func: () => {
 				Text.Add("You moan as your chest fills out, gaining at least a few cup sizes. You carefully touch your stiff nipples; apparently they grew a bit too.");
 
 				player.FirstBreastRow().size.base += 5;
@@ -1663,7 +1663,7 @@ export namespace Intro {
 
 			const options: IChoice[] = [];
 			options.push({ nameStr: "Demon",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You explain about the demon that brought you to this realm - the demon that she just slaughtered. This doesn't seem to be the right thing to say, though, as her mood darkens noticeably. <i>“You are lying! As if that pathetic worm could bridge the gate between dimensions! Not even I...”</i> she trails off thoughtfully. <i>“There must have been something else... what was it?”</i>");
 					Text.NL();
@@ -1672,7 +1672,7 @@ export namespace Intro {
 
 					const options: IChoice[] = [];
 					options.push({ nameStr: "Mirror",
-						func() {
+						func: () => {
 							Text.Clear();
 							Text.Add("Thinking back, the thing that sticks to your mind is the mirror you found in the attic. When you mention it, Uru perks up again. <i>“Yeah, that sounds kind of plausible, a magical artifact, no doubt. Maybe even that runt could have managed it, in that case.”</i> She purses her lips. <i>“Actually, it sounds kind of familiar... but enough about that for now, though, I want to know more about you!”</i>");
 							Text.Flush();
@@ -1684,7 +1684,7 @@ export namespace Intro {
 						tooltip : "Why not tell her the truth about the mirror? What harm could it do?",
 					});
 					options.push({ nameStr: "Lie",
-						func() {
+						func: () => {
 							Text.Clear();
 							Text.Add("You are not sure why, but you don't think it would be a good idea to tell her about the mirror or the gem, even if she did save you. Not trusting everyone you come across is probably a healthy attitude when you have been transported to Hell. <i>“Nothing I can think of,”</i> you shrug. <i>“That big demon just appeared out of nowhere and pulled me here.”</i> She doesn't seem particularly happy about your evasive answer.");
 							Text.NL();
@@ -1717,7 +1717,7 @@ export namespace Intro {
 		// [Power][Love][Peace]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Power",
-			func() {
+			func: () => {
 				Text.NL();
 				Text.Add("You tell her that you desire power, to be a ruler of men.");
 				Text.Flush();
@@ -1726,7 +1726,7 @@ export namespace Intro {
 			tooltip : "You desire power.",
 		});
 		options.push({ nameStr : "Love",
-			func() {
+			func: () => {
 				Text.NL();
 				Text.Add("Most of all, you desire to be loved.");
 				Text.Flush();
@@ -1735,7 +1735,7 @@ export namespace Intro {
 			tooltip : "You desire to be loved.",
 		});
 		options.push({ nameStr : "Peace",
-			func() {
+			func: () => {
 				Text.NL();
 				Text.Add("You desire to live peacefully, with the power to protect your friends and loved ones from harm.");
 				Text.Flush();
@@ -1787,7 +1787,7 @@ export namespace Intro {
 
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Cock",
-			func() {
+			func: () => {
 				Text.Add("Uru closes in on you, a wicked smile on her face. <i>“Really now, is that so?”</i> As you nod, the object of your admiration rises to full mast. It is certainly the biggest one you've ever seen");
 				if (player.FirstCock()) { Text.Add(", much bigger than your own"); }
 				Text.Add(". She licks her lips hungrily and gives her shaft a tentative stroke. <i>“How about putting it to use then?”</i>");
@@ -1798,7 +1798,7 @@ export namespace Intro {
 			tooltip : "That cock sure looks juicy...",
 		});
 		options.push({ nameStr : "Vagina",
-			func() {
+			func: () => {
 				Text.Add("Uru puts one leg on the seat of the throne, letting you get a closer look at her exposed female sex. Her glistening lower lips are a darker shade of red than her skin, but her inner walls are a delicious pink. <i>“All look and no touch?”</i> she teases with a naughty smile.");
 				Text.NL();
 
@@ -1807,7 +1807,7 @@ export namespace Intro {
 			tooltip : "Her vagina is moist with juices, inviting and alluring.",
 		});
 		options.push({ nameStr : "Ass",
-			func() {
+			func: () => {
 				Text.Add("She chuckles and places a hand on her expansive butt. <i>“I guess I make a good first impression!”</i> She turns around with a little twirl and presents her booty to you. Between her legs, you can clearly see her dripping sex - or rather, both of them. <i>“You like what you see?”</i> she challenges you with a husky voice. <i>“Why don't you try claiming it?”</i>");
 				Text.NL();
 
@@ -1816,7 +1816,7 @@ export namespace Intro {
 			tooltip : "What wouldn't you give to tap that ass?",
 		});
 		options.push({ nameStr : "Breasts",
-			func() {
+			func: () => {
 				Text.Add("<i>“Oh, these inconvenient things?”</i> she asks with an exaggerated sigh that causes her D-cups to bounce in an almost hypnotic manner. Bending forward, she gives you a much closer look. <i>“Go ahead, you can touch them,”</i> she murmurs throatily, <i>“but wouldn't you rather do something more fun?”</i>");
 				Text.NL();
 
@@ -1845,7 +1845,7 @@ export namespace Intro {
 
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Fuck vagina",
-			func() {
+			func: () => {
 				uru.flags.Intro |= UruFlags.Intro.FuckedUru;
 				if (!player.FirstCock()) {
 					Gui.Callstack.push(Intro.UruSexFuckVagina);
@@ -1857,7 +1857,7 @@ export namespace Intro {
 			tooltip : (player.FirstCock()) ? "Your cock yearns to be buried inside the omnibus, and her vagina provides a tantalizing target." : "You simply must fuck this beautiful hermaphrodite, and her vagina provides a tantalizing target. Exactly how that is supposed to work is a bit unclear.",
 		});
 		options.push({ nameStr : "Fuck anal",
-			func() {
+			func: () => {
 				uru.flags.Intro |= UruFlags.Intro.FuckedUru;
 				if (!player.FirstCock()) {
 					Gui.Callstack.push(Intro.UruSexFuckAnal);
@@ -1869,7 +1869,7 @@ export namespace Intro {
 			tooltip : (player.FirstCock()) ? "You can't wait to rail that tight butt. That a demonic tail is attached an inch above it only provides a slight distraction." : "That butt looks simply delicious... if only you had something to fuck it with.",
 		});
 		options.push({ nameStr : "Get fucked",
-			func() {
+			func: () => {
 				uru.flags.Intro |= UruFlags.Intro.FuckedByUru;
 				Intro.UruSexGetFucked();
 			}, enabled : true,
@@ -1906,7 +1906,7 @@ export namespace Intro {
 
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Spit",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Coughing, you spit the thick fluid on the ground. The taste is strangely sweet... ");
 				if (uru.flags.Intro & UruFlags.Intro.LostToImps) {
@@ -1923,7 +1923,7 @@ export namespace Intro {
 			tooltip : "Ew, gross! Spit it out!",
 		});
 		options.push({ nameStr : "Swallow",
-			func() {
+			func: () => {
 				Text.Clear();
 				player.AddSexExp(5);
 				player.slut.IncreaseStat(100, 2);
@@ -1963,7 +1963,7 @@ export namespace Intro {
 
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Deeper",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("In for a penny, in for a pound. You increase your pace and make your thrusts deeper and harder, bottoming out each time you push into the demon. <i>“Yeah! Fuck me deeper!”</i> The omnibus moans loudly. <i>“Ram that shaft into my cunt!”</i> You are only too happy to oblige.");
 				Text.NL();
@@ -1974,7 +1974,7 @@ export namespace Intro {
 			tooltip : "Fuck it, keep going!",
 		});
 		options.push({ nameStr : "Tits",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Slowing your thrusts, you let go of the demon's hips and lean to grab at her soft breasts, kneading and squeezing them as a baker would dough. After giving them a thorough massage, you switch to pinching and pulling at her pert nipples. Uru seems to definitely enjoy the attention you are giving her, moaning soft encouragements as she bites her full lips, looking up at you intently.");
 				Text.NL();
@@ -1985,7 +1985,7 @@ export namespace Intro {
 			tooltip : "Try to distract her by massaging her breasts.",
 		});
 		options.push({ nameStr : "Suck cock",
-			func() {
+			func: () => {
 				Text.Clear();
 
 				timesSuckedUru++;
@@ -2023,7 +2023,7 @@ export namespace Intro {
 
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Nope",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“Guess not,”</i> she sighs, disappointed, as you shake your head firmly.");
 					Text.NL();
@@ -2036,7 +2036,7 @@ export namespace Intro {
 				tooltip : "No way are you agreeing to that!" + (player.Gender() === Gender.male ? " Gay!" : ""),
 			});
 			options.push({ nameStr : "Get fucked",
-				func() {
+				func: () => {
 					uru.flags.Intro |= UruFlags.Intro.FuckedByUru;
 					Text.Clear();
 					Text.Add("To your muddled mind, this doesn't seem like such a bad idea, and you eagerly nod. With the same wicked smile, the omnibus lets go of you, allowing you to withdraw your spent [cock] from her depths, only for her to suddenly manhandle you with surprising strength until you are on all fours. <i>“No regrets, right?”</i> she murmurs into your ear. On second thought, you are not so sure anymore.", parse);
@@ -2071,7 +2071,7 @@ export namespace Intro {
 		let suckeddick = false;
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Spit",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Eager to get right into the action, you apply a generous glob of saliva to her anus and rub it in with the tip of your [cock]. Grabbing the demon's full buttocks, you give the supple red skin a firm squeeze before planting your [cock] between them. With long, slow strokes, you spread the makeshift lube evenly along your stiff length, hotdogging the horny demon.", parse);
 				Text.NL();
@@ -2082,7 +2082,7 @@ export namespace Intro {
 			tooltip : "Saliva is the poor man's lube.",
 		});
 		options.push({ nameStr : "Cunt",
-			func() {
+			func: () => {
 				Text.Clear();
 				player.AddSexExp(1);
 				parse.male = player.HasBalls() ? ", your balls slapping against her stiff cock" : "";
@@ -2097,7 +2097,7 @@ export namespace Intro {
 			tooltip : "Why not use that nice cunt to lube yourself up?",
 		});
 		options.push({ nameStr : "Suck",
-			func() {
+			func: () => {
 				Text.Clear();
 
 				player.slut.IncreaseStat(100, 5);
@@ -2160,7 +2160,7 @@ export namespace Intro {
 			// [Eager][Let be][Deny]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Eager",
-				func() {
+				func: () => {
 					Text.Clear();
 					player.AddSexExp(2);
 					player.slut.IncreaseStat(100, 5);
@@ -2174,7 +2174,7 @@ export namespace Intro {
 				tooltip : "Mm... that feels good...",
 			});
 			options.push({ nameStr : "Let be",
-				func() {
+				func: () => {
 					Text.Clear();
 					player.AddSexExp(1);
 					buttfucked = true;
@@ -2185,7 +2185,7 @@ export namespace Intro {
 				tooltip : "If that makes her happy, why not? You got other things on your mind - like fucking her brains out.",
 			});
 			options.push({ nameStr : "Deny",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Gently, but firmly, you grab the demon's tail and move it away. The omnibus seems annoyed for a moment, but forgets about the incident entirely as you grab hold of her hips and start to ram your [cock] even further up her butt. In no time at all, she is at your mercy, moaning for you to go faster, harder, deeper.", parse);
 					Text.Flush();
@@ -2208,7 +2208,7 @@ export namespace Intro {
 				// [Get fucked][Nope]
 				const options: IChoice[] = [];
 				options.push({ nameStr : "Get fucked",
-					func() {
+					func: () => {
 						uru.flags.Intro |= UruFlags.Intro.FuckedByUru;
 						Text.Clear();
 						Text.Add("To your muddled mind, this doesn't seem like such a bad idea, and you eagerly nod. With a wicked smile, the omnibus lets go of you, allowing you to withdraw your spent member. With surprising strength, she manhandles you until you are on all fours. <i>“No regrets, right?”</i> she murmurs into your ear. On second thought, you are not so sure anymore.");
@@ -2218,7 +2218,7 @@ export namespace Intro {
 					tooltip : "Well, it would only be fair to let her have some fun too... what could go wrong?",
 				});
 				options.push({ nameStr : "Nope",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("<i>“I thought so,”</i> she sighs mournfully. ");
 						if (suckeddick) {
@@ -2284,7 +2284,7 @@ export namespace Intro {
 			// [Anal][Vaginal]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Anal",
-				func() {
+				func: () => {
 					fuckedTarget = BodyPartType.ass;
 					if (player.Butt().virgin === false) {
 						Text.Add("<i>“Heh, getting addicted to butt-fucking, are we?”</i>");
@@ -2299,7 +2299,7 @@ export namespace Intro {
 				tooltip : (player.Butt().virgin) ? "No way you are giving up your virginity! Taking it in the butt can't be that bad, can it?" : "Well, seeing how it is already broken in...",
 			});
 			options.push({ nameStr : "Vaginal",
-				func() {
+				func: () => {
 					fuckedTarget = BodyPartType.vagina;
 					lubedFlag = false; // In case the imps raped you before
 					Text.Add("<i>“Ah, I'll be getting a virginal treat?”</i> She slides closer until the two of you are pressed against each other, her male genitalia rubbing against your stomach.");
@@ -2326,7 +2326,7 @@ export namespace Intro {
 		// [Suck her][Lead][Passive]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Suck her",
-			func() {
+			func: () => {
 				Text.NL();
 				Text.Add("Deciding that it would probably be wise to lube her up before she fucks you, you lean forward, planting a kiss on her massive member.");
 				Text.Flush();
@@ -2335,13 +2335,13 @@ export namespace Intro {
 			tooltip : "How about a taste?",
 		});
 		options.push({ nameStr : "Lead",
-			func() {
+			func: () => {
 				Intro.UruSexGetFuckedLead();
 			}, enabled : true,
 			tooltip : "Take the lead and ride her.",
 		});
 		options.push({ nameStr : "Passive",
-			func() {
+			func: () => {
 				Intro.UruSexGetFuckedPassive();
 			}, enabled : true,
 			tooltip : "Submit to the powerful omnibus.",
@@ -2393,7 +2393,7 @@ export namespace Intro {
 			Text.Add("A bit overwhelmed by the sheer cum production of the hermaphrodite demon, you worriedly caress your swelling stomach. Perhaps enough is enough.");
 		} else { // Disable this option after 3 times total
 			options.push({ nameStr : "Again",
-				func() {
+				func: () => {
 					Text.NL();
 					Text.Add("Well... once more couldn't hurt.");
 					Text.Flush();
@@ -2404,13 +2404,13 @@ export namespace Intro {
 		}
 
 		options.push({ nameStr : "Lead",
-			func() {
+			func: () => {
 				Intro.UruSexGetFuckedLead();
 			}, enabled : true,
 			tooltip : "Take the lead and ride her.",
 		});
 		options.push({ nameStr : "Passive",
-			func() {
+			func: () => {
 				Intro.UruSexGetFuckedPassive();
 			}, enabled : true,
 			tooltip : "Submit to the powerful omnibus.",
@@ -2863,7 +2863,7 @@ export namespace Intro {
 			// [Remove][Keep]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Remove",
-				func() {
+				func: () => {
 					Text.Out(`After a brief moment of hesitation, you nod. Her cheeks flushed, the Goddess trails her finger down the cleft between your breasts, before uncertainly giving your clit an experimental prod. Barely stifling a moan from the touch, a twinge of regret flits through you as the appendage is enveloped in a soft glow, shrinking down to its original size.
 
 					Aria gives her head a quick shake, clearing her thoughts.`);
@@ -2876,7 +2876,7 @@ export namespace Intro {
 				tooltip : "You don't know what got over you... of course you don't want to have a cock!",
 			});
 			options.push({ nameStr : "Keep",
-				func() {
+				func: () => {
 					Text.Out(`You thoughtfully bite your lower lip, studying your erect girl-cock. Deciding that you rather like it the way it is, you shake your head at the Goddess, causing her to raise an eyebrow at you but letting it pass.
 
 					Aria gives her head a quick shake, clearing her thoughts.`);
@@ -2916,7 +2916,7 @@ export namespace Intro {
 		const options: IChoice[] = [];
 		if (!ariaTalkedAboutAria) {
 			options.push({ nameStr : "Aria",
-				func() {
+				func: () => {
 					Text.Clear();
 
 					Text.Add("<i>“You... I guess you saved me back there. How? Why? Who <b>are</b> you, exactly... are you a Goddess?”</i> you ask, feeling self-conscious.");
@@ -2935,7 +2935,7 @@ export namespace Intro {
 		}
 		if (!ariaTalkedAboutUru) {
 			options.push({ nameStr : "Uru",
-				func() {
+				func: () => {
 					Text.Clear();
 
 					Text.Add("<i>“That demon... who was she?”</i> As you ask, you realize that you want to know more about the tempting yet fickle hermaphrodite, but you cannot quite pinpoint the reason. Are you just interested because of the threat she represents, or do you have some other, darker motive?");
@@ -2955,7 +2955,7 @@ export namespace Intro {
 		}
 		if (!ariaTalkedAboutPortals) {
 			options.push({ nameStr : "Portals",
-				func() {
+				func: () => {
 					Text.Clear();
 
 					Text.Add("<i>“How did I get to that place? Last thing I remember is the old attic...”</i>");
@@ -2979,7 +2979,7 @@ export namespace Intro {
 		}
 		if (talkedToBird) {
 			options.push({ nameStr : "Bird",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Out(`“I met a talking bird outside,” you comment.
 
@@ -3047,7 +3047,7 @@ export namespace Intro {
 		// [Male][Female]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Male",
-			func() {
+			func: () => {
 				kiakai.flags.InitialGender = Gender.male;
 				kiakai.InitCharacter(Gender.male);
 				Intro.MeetingKia();
@@ -3055,7 +3055,7 @@ export namespace Intro {
 			tooltip : "Is that a bulge in your pants?",
 		});
 		options.push({ nameStr : "Female",
-			func() {
+			func: () => {
 				kiakai.flags.InitialGender = Gender.female;
 				kiakai.InitCharacter(Gender.female);
 				Intro.MeetingKia();
@@ -3114,7 +3114,7 @@ export namespace Intro {
 		const options: IChoice[] = [];
 		if (!kiaTalkedAboutAria) {
 			options.push({ nameStr : "Aria",
-				func() {
+				func: () => {
 					Text.Clear();
 
 					Text.Add("<i>“The Lady informed me of your arrival, and told me to assist you,”</i> [name] tells you. <i>“She is the Light that wards against the Dark, and a great darkness is approaching. You have been granted a great task by her, the outcome of which may decide the fate of this entire realm.”</i>", parse);
@@ -3131,7 +3131,7 @@ export namespace Intro {
 		}
 		if (!kiaTalkedAboutEden) {
 			options.push({ nameStr : "Eden",
-				func() {
+				func: () => {
 					Text.Clear();
 
 					Text.Add("You ask how it is exactly that you came to this place, and where it is. [HeShe] mentioned Eden? [name] looks surprised.", parse);
@@ -3155,7 +3155,7 @@ export namespace Intro {
 		}
 		if (!kiaTalkedAboutSelf) {
 			options.push({ nameStr : kiakai.name,
-				func() {
+				func: () => {
 					Text.Clear();
 					parse.title = kiakai.mfTrue("priest", "priestess");
 					Text.Add("<i>“I have been in the service of Lady Aria for some thirty years now. I am honored to be a member of her priesthood.”</i>");
@@ -3175,7 +3175,7 @@ export namespace Intro {
 		}
 		if (!kiaTalkedAboutHealing) {
 			options.push({ nameStr : "'Healing'",
-				func() {
+				func: () => {
 					Text.Clear();
 
 					Text.Add("You ask how what [heshe] was doing was in any way a form of healing. The elf looks indignant, but at least has the shame to blush a bit.", parse);
@@ -3253,7 +3253,7 @@ export namespace Intro {
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Save world",
 			tooltip : "The elf seems to be earnest and the cause good, why not join each other?",
-			func() {
+			func: () => {
 				GameCache().flags.IntroOutset = Intro.Outset.SaveWorld;
 				kiakai.flags.Attitude = KiakaiFlags.Attitude.Nice;
 				kiakai.relation.IncreaseStat(100, 10);
@@ -3271,7 +3271,7 @@ export namespace Intro {
 		});
 		options.push({ nameStr : "Go home",
 			tooltip : "No... this is not your fight. Still, you seem to be stuck here, for better or worse.",
-			func() {
+			func: () => {
 				GameCache().flags.IntroOutset = Intro.Outset.GoHome;
 
 				Text.Add("<i>“Look, I know you mean well, but I just want to go home,”</i> you explain to the disappointed elf. <i>“Saving the world is not my job.”</i>");
@@ -3286,7 +3286,7 @@ export namespace Intro {
 				const options: IChoice[] = [];
 				options.push({ nameStr : "Accept",
 					tooltip : "A friend on the road could certainly help.",
-					func() {
+					func: () => {
 						kiakai.flags.Attitude = KiakaiFlags.Attitude.Nice;
 						kiakai.relation.IncreaseStat(100, 5);
 
@@ -3301,7 +3301,7 @@ export namespace Intro {
 				});
 				options.push({ nameStr : "I'm the boss",
 					tooltip : Text.Parse("The elf could be useful to you, but [heshe] needs to be put in [hisher] place.", parse),
-					func() {
+					func: () => {
 						kiakai.flags.Attitude = KiakaiFlags.Attitude.Naughty;
 						kiakai.relation.DecreaseStat(-100, 5);
 
@@ -3316,7 +3316,7 @@ export namespace Intro {
 				});
 				options.push({ nameStr : "Decline",
 					tooltip : Text.Parse("You'll probably be better off on your own, could you really trust [name]?", {name : kiakai.name}),
-					func() {
+					func: () => {
 						kiakai.flags.Attitude = KiakaiFlags.Attitude.Neutral;
 						Text.Add("<i>“I understand,”</i> the elf nods sadly. <i>“I will try to make inquiries on my own, then. Should you ever change your mind, find me at the center, at Aria's shrine.”</i> The elf bows to you and quietly moves toward the entrance of the tent, leaving you to your own devices.");
 						Text.Flush();
@@ -3328,7 +3328,7 @@ export namespace Intro {
 		});
 		options.push({ nameStr : "Gain power",
 			tooltip : "While recent events have put you in a completely unfamiliar environment, why not use this situation to your advantage? Seems like the gem you carry is an object of great power...",
-			func() {
+			func: () => {
 				GameCache().flags.IntroOutset = Intro.Outset.GainPower;
 				player.subDom.IncreaseStat(100, 5);
 				kiakai.subDom.DecreaseStat(-100, 5);
@@ -3348,7 +3348,7 @@ export namespace Intro {
 				const options: IChoice[] = [];
 				options.push({ nameStr : "I'm the boss",
 					tooltip : Text.Parse("The elf could be useful to you, but [heshe] needs to be put in [hisher] place.", parse),
-					func() {
+					func: () => {
 						kiakai.flags.Attitude = KiakaiFlags.Attitude.Naughty;
 						Text.Add("<i>“You may come along if you wish, but don't think that you, or your Lady, is in charge here,”</i> you declare. [name] looks shocked for a moment, but humbly nods, content that [heshe] can follow you and help you.", parse);
 						Text.NL();
@@ -3361,7 +3361,7 @@ export namespace Intro {
 				});
 				options.push({ nameStr : "Decline",
 					tooltip : "What use could the elf possibly be?",
-					func() {
+					func: () => {
 						kiakai.flags.Attitude = KiakaiFlags.Attitude.Neutral;
 						Text.Add("<i>“I understand,”</i> the elf nods sadly. <i>“I will try to make inquiries on my own, then. Should you ever change your mind, find me at the center, at Aria's shrine.”</i> The elf bows to you and quietly moves toward the entrance of the tent, leaving you to your own devices.");
 						Text.Flush();
@@ -3396,7 +3396,7 @@ export namespace Intro {
 		const options: IChoice[] = [];
 		options.push({ nameStr : kiakai.name,
 			tooltip : Text.Parse("How about asking [name] to finish [hisher] healing session, you could use some release.", parse),
-			func() {
+			func: () => {
 				kiakai.flags.Sexed++;
 
 				Text.Add("<i>“Actually, before we head out, could you help me with something?”</i>");
@@ -3449,7 +3449,7 @@ export namespace Intro {
 		});
 		options.push({ nameStr : "Ignore",
 			tooltip : "Let's try to keep focused here...",
-			func() {
+			func: () => {
 				player.AddLustFraction(-0.5);
 				Text.Add("Taking a few deep breaths, you try to calm down and focus on the task at hand.");
 				Gui.NextPrompt(Intro.Finalizing);
@@ -3479,7 +3479,7 @@ export namespace Intro {
 		if (kiakai.NumVags() > 0) {
 			options.push({ nameStr : "Vagina",
 				tooltip : Text.Parse("[name] deserves some attention too, how about eating [himher] out?", parse),
-				func() {
+				func: () => {
 					Text.Clear();
 					Sex.Cunnilingus(player, kiakai);
 					player.Fuck(undefined, 1);
@@ -3492,7 +3492,7 @@ export namespace Intro {
 		if (kiakai.NumCocks() > 0) {
 			options.push({ nameStr : "Cock",
 			tooltip : Text.Parse("[name] deserves some attention too, and that cock looks rather juicy...", parse),
-				func() {
+				func: () => {
 					Text.Clear();
 					Sex.Blowjob(player, kiakai);
 					player.FuckOral(player.Mouth(), kiakai.FirstCock(), 1);
@@ -3504,7 +3504,7 @@ export namespace Intro {
 		}
 		options.push({ nameStr : "Finger",
 			tooltip : Text.Parse("How about getting a bit kinky? Let's see how [name] feels about a finger up [hisher] butt. Who knows, perhaps [heshe] will like it?", parse),
-			func() {
+			func: () => {
 				Text.Clear();
 				player.AddSexExp(2);
 				kiakai.AddSexExp(2);
@@ -3518,7 +3518,7 @@ export namespace Intro {
 		});
 		options.push({ nameStr : "Nope",
 			tooltip : Text.Parse("[name] seems to be doing good on [hisher] own, just enjoy it.", parse),
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You give [name] a few perfunctory caresses on [hisher] soft [kbutt], then lean back and enjoy your healing session. The light touches only serves to egg the elf on, redoubling [hisher] efforts.", parse);
 				sucking = false;
@@ -3587,7 +3587,7 @@ export namespace Intro {
 		if (player.FirstCock()) {
 			options.push({ nameStr : "Blowjob",
 				tooltip : Text.Parse("Your cock needs release, and [name] looks like [heshe] has the perfect mouth to provide it.", parse),
-				func() {
+				func: () => {
 					kiakai.flags.Sexed++;
 
 					Sex.Blowjob(kiakai, player);
@@ -3625,7 +3625,7 @@ export namespace Intro {
 		if (player.FirstVag()) {
 			options.push({ nameStr : "Get eaten",
 				tooltip : Text.Parse("Your cunt is itching for release. Straddling [name]'s face and letting [himher] eat you out should hit the spot.", parse),
-				func() {
+				func: () => {
 					kiakai.flags.Sexed++;
 
 					Sex.Cunnilingus(kiakai, player);
@@ -3665,7 +3665,7 @@ export namespace Intro {
 		}
 		options.push({ nameStr : "Ignore",
 			tooltip : "Tempting as it is to take advantage of the elf, you have other things to do.",
-			func() {
+			func: () => {
 				Text.Add("Shaking your head a bit, you refocus on the task at hand. Plenty of time to get release later, and it does not seem like the elf would be totally against helping, either.");
 				Text.Flush();
 				Gui.NextPrompt(Intro.Finalizing);

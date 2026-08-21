@@ -91,7 +91,7 @@ export namespace CassidySexScenes {
 		options.push({nameStr : "Savor",
 			tooltip : Text.Parse("No need to rush things. You’ll look her over first.", parse),
 			enabled : !opts.savor,
-			func() {
+			func: () => {
 				CassidySexScenes.Savor(opts);
 			},
 		});
@@ -104,14 +104,14 @@ export namespace CassidySexScenes {
 			options.push({nameStr : "Fuck her",
 				tooltip : Text.Parse("A traditional favorite.", parse),
 				enabled : cocksInVag.length > 0,
-				func() {
+				func: () => {
 					CassidySexScenes.FuckHer(cocksInVag);
 				},
 			});
 			options.push({nameStr : "Anal",
 				tooltip : Text.Parse("You feel like the greatest analmancer today, and are going to prove it.", parse),
 				enabled : cocksInAss.length > 0,
-				func() {
+				func: () => {
 					CassidySexScenes.Anal(cocksInAss);
 				},
 			});
@@ -215,7 +215,7 @@ export namespace CassidySexScenes {
 			options.push({nameStr : "Fuck",
 				tooltip : Text.Parse("In your cunt!", parse),
 				enabled : true,
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You’ve made up your mind. You want it in your heated pussy, to feel that wriggling tail-tip force its way past your netherlips and probe ever deeper into your depths like some horrible, tentacular, violating <i>thing</i>. A flush of desire runs through your lower belly at the mere thought of the act, reaching your loins and suffusing it with urgent warmth.", parse);
 					Text.NL();
@@ -227,7 +227,7 @@ export namespace CassidySexScenes {
 			options.push({nameStr : "Peg",
 				tooltip : Text.Parse("In the ass!", parse),
 				enabled : true,
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Right. You want it in the back door - the sheer thought of the strong, flexible tip of Cassidy’s tail violating your pucker, stretching your [anus] ever wider as more and more of its girth enters you ", parse);
 					if (player.FirstCock()) {
@@ -243,7 +243,7 @@ export namespace CassidySexScenes {
 			options.push({nameStr : "Her choice",
 				tooltip : Text.Parse("You don’t care, just get it in already!", parse),
 				enabled : true,
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You don’t really care, you’re dying down here from all the anticipation! Could she just get started already?", parse);
 					Text.NL();
@@ -524,7 +524,7 @@ export namespace CassidySexScenes {
 		options.push({nameStr : "Breasts",
 			tooltip : Text.Parse("They’re not small, they’re fun-sized!", parse),
 			enabled : true,
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You take a few moments to apply the finishing touches to Cassidy’s back and shoulders, then slowly settle yourself atop the salamander smith, firmly ensconcing her in your embrace and pressing your [breasts] against her back.", parse);
 				Text.NL();
@@ -555,7 +555,7 @@ export namespace CassidySexScenes {
 		options.push({nameStr : "Cunt",
 			tooltip : Text.Parse("What better way to shed some stress than a good dose of relief?", parse),
 			enabled : true,
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Right. In order to be truly relaxed, one has got to go past the physical; it’s not just her body that’s worked hard, but her mind, too. The best way to shed that stress is to get a good dose of relief, and you know where to get just that. In fact, you even vaguely remember that what you’re about to do was touted as a cure for hysteria, although you’re not sure where exactly you heard that…", parse);
 				Text.NL();
@@ -575,7 +575,7 @@ export namespace CassidySexScenes {
 		options.push({nameStr : "Tail",
 			tooltip : Text.Parse("Touch scaly tail. Enough said.", parse),
 			enabled : true,
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Gradually, your eyes are drawn to the entire length of Cassidy’s tail, all the way from thick base to tapered tip. Sometimes aflame, true… but now it’s not, merely ashimmer with a pleasant - no, inviting - heat that warms the cockles of your heart.", parse);
 				Text.NL();
@@ -935,8 +935,7 @@ export namespace CassidySparSexScenes {
 		const cassidy: Cassidy = GAME().cassidy;
 		const world = WORLD();
 
-		const enc  = this;
-		enc.Cleanup();
+		this.Cleanup();
 		SetGameState(GameState.Event, Gui);
 
 		party.LoadActiveParty();
@@ -975,7 +974,7 @@ export namespace CassidySparSexScenes {
 			options.push({nameStr : "Yes",
 				tooltip : Text.Parse("Why not? Your blood’s still up from all that fighting.", parse),
 				enabled : true,
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Taking a moment to catch your breath, you lend Cassidy a hand - and as she takes it, haul her up such that you’re face-to-face and lock lips with the poor salamander. Her entire body - skin and scales all - is flush with exertion and desire alike, but her lips are the warmest of them all as she greedily returns the kiss, arms wrapping about you in a scaly, bone-crushing hug.", parse);
 					Text.NL();
@@ -987,7 +986,7 @@ export namespace CassidySparSexScenes {
 					options.push({nameStr : "Outside",
 						tooltip : Text.Parse("Strike while the iron is hot! Take Cass here, right in the back yard.", parse),
 						enabled : true,
-						func() {
+						func: () => {
 							Text.Clear();
 							if (player.RaceCompare(Race.Salamander) < 0.3) {
 								Text.Add("You may not be a salamander, but you’ll be damned if your blood isn’t as heated as Cassidy’s is from all that fighting. ", parse);
@@ -1011,7 +1010,7 @@ export namespace CassidySparSexScenes {
 					options.push({nameStr : "Inside",
 						tooltip : Text.Parse("You’d prefer a more private setting for what you’re about to get up to.", parse),
 						enabled : true,
-						func() {
+						func: () => {
 							Text.Clear();
 							Text.Add("Despite the heat radiating off her body, Cass isn’t sweating in the slightest at all, and grins maniacally as you lead her back into the building. She leans her warhammer against the wall, then whisks the both of you into her room, pulling at her shirt and unbuckling her belt even before you’ve reached the bed.", parse);
 							Text.NL();
@@ -1032,7 +1031,7 @@ export namespace CassidySparSexScenes {
 			options.push({nameStr : "No",
 				tooltip : Text.Parse("Not tonight. Beating the stuffing out of each other has worn you out.", parse),
 				enabled : true,
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Taking a moment to catch your breath, you lend Cassidy a hand and haul the salamander up to her feet.", parse);
 					Text.NL();
@@ -1158,7 +1157,7 @@ export namespace CassidySparSexScenes {
 		options.push({nameStr : "Vag",
 			tooltip : Text.Parse("Stick it to her the tried and true way.", parse),
 			enabled : true,
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("…And ram yourself into her cunt, sending her reeling from the sheer force of your first blow in this battle. Sure, most people don’t open with their strongest shot first, but then the night is only so long - you don’t have the time to waste on frivolities like foreplay. The meat of the matter is what’s pressing at the moment, and your meat is what’s pressing at Cassidy’s hot and well-lubricated inner walls. The salamander’s arousal is well-conveyed through her sudden surge in body temperature, and her ", parse);
 				if (fem) {
@@ -1229,7 +1228,7 @@ export namespace CassidySparSexScenes {
 		options.push({nameStr : "Ass",
 			tooltip : Text.Parse("Plug her ass.", parse),
 			enabled : true,
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("…And stuff yourself straight into the salamander’s ass, your [cockTip] brushing her sphincter for the briefest of moments before the tight ring’s rammed open and you bury yourself ", parse);
 				if (p1cock.Len() >= 23) {
@@ -1280,7 +1279,7 @@ export namespace CassidySparSexScenes {
 			options.push({nameStr : "DP",
 				tooltip : Text.Parse("Why pick one when you can do both at the same time?", parse),
 				enabled : true,
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("…And hesitate. With Cass presenting herself to you so gloriously, you have to admit that you’re spoilt for choice. You simply just can’t decide which hole to take her in… guess you’ll just have to do both at the same time, then. After all, it’s not as if you aren’t equipped for it", parse);
 					if (player.NumCocks() > 2) {
@@ -1599,8 +1598,7 @@ export namespace CassidySparSexScenes {
 		const cassidy: Cassidy = GAME().cassidy;
 		const world = WORLD();
 
-		const enc  = this;
-		enc.Cleanup();
+		this.Cleanup();
 		SetGameState(GameState.Event, Gui);
 
 		party.LoadActiveParty();

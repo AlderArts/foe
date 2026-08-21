@@ -270,7 +270,7 @@ export namespace RosalinScenes {
 		});
 		if (rosalin.flags.AlQuest === 3) {
 			options.push({ nameStr : "Combine",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("The alchemist shows you a list of ingredients that [heshe] could turn into a potion of some sort. You could show Rosalin some ingredients that you have found on your travels.", parse);
 					Text.NL();
@@ -333,7 +333,7 @@ export namespace RosalinScenes {
 		const options: IChoice[] = [];
 		if (rosalin.flags.AlQuest === 0) {
 			options.push({ nameStr : "Alchemy",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("A morbid curiosity drives you to ask the alchemist about her craft.", parse);
 					Text.NL();
@@ -361,7 +361,7 @@ export namespace RosalinScenes {
 		}
 		if (rosalin.flags.AlQuest === 1) {
 			options.push({ nameStr : "Alchemy",
-				func() {
+				func: () => {
 					Text.Clear();
 
 					// Removed requested items
@@ -421,7 +421,7 @@ export namespace RosalinScenes {
 		}
 		if (rosalin.flags.AlQuest === 3) {
 			options.push({ nameStr : "Alchemy",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“There are several types of ingredients that can be used for alchemy,”</i> Rosalin explains. <i>“Most basic alchemical compounds are created from passive ingredients like these.”</i> [HeShe] points out a random assortment of small jars and bottles. Most seem to be samples taken from animals or plants, others are common cooking ingredients. <i>“This stuff doesn't have much use on its own, but it gets interesting when you mix them together.”</i>", parse);
 					Text.NL();
@@ -439,7 +439,7 @@ export namespace RosalinScenes {
 		}
 		if (rosalin.flags.PastDialog >= RosalinFlags.PastDialog.Past) {
 			options.push({ nameStr : Text.Parse("[HisHer] past", parse),
-				func() {
+				func: () => {
 					Text.Clear();
 
 					Text.Add("<i>“You wanna know about me?”</i> the alchemist looks slightly surprised. <i>“Well, let's see... I grew up in Rigard, third child of a relatively well-to-do noble family. Always had a calling to mixing things, and I thought I wanted to be a chef when I was young.”</i> [HisHer] eyes look off into the distance. <i>“I was really proud of my first dish, and I gave it to my daddy for testing. He seemed to really like it.... but I think it was shortly after that when I found a different calling.”</i>", parse);
@@ -466,7 +466,7 @@ export namespace RosalinScenes {
 		}
 		if (rosalin.flags.PastDialog >= RosalinFlags.PastDialog.Teacher) {
 			options.push({ nameStr : Text.Parse("[HisHer] teacher", parse),
-				func() {
+				func: () => {
 					Text.Clear();
 
 					Text.Add("<i>“Why'd you want to know about her?”</i> Rosalin shoots back, a bit annoyed, <i>“by now, I've far surpassed her in alchemy. I'm doing stuff she wouldn't even <b>dream</b> of trying.”</i> Somehow, you don't doubt that last part. Still, you try to get some more information from the [raceDesc] alchemist.", parse);
@@ -505,7 +505,7 @@ export namespace RosalinScenes {
 		}
 		if (rosalin.flags.PastDialog >= RosalinFlags.PastDialog.Nomads) {
 			options.push({ nameStr : "The Nomads",
-				func() {
+				func: () => {
 					Text.Clear();
 
 					Text.Add("<i>“I wandered around a bit after my apprenticeship ended, not really knowing where to go,”</i> Rosalin tells you. <i>“Rigard wasn't really a place for me - there was no place where I could perform my experiments in peace.”</i>", parse);
@@ -532,7 +532,7 @@ export namespace RosalinScenes {
 		}
 		if (rosalin.flags.PastDialog >= RosalinFlags.PastDialog.TreeCity) {
 			options.push({ nameStr : "Tree city",
-				func() {
+				func: () => {
 					Text.Clear();
 
 					Text.Add("<i>“There is said to be a large city in the branches of the Great Tree,”</i> Rosalin excitedly tells you, pointing toward the hulking behemoth in the distance. As if you could miss it. <i>“All sorts of folks are said to live there; morphs, talking animals, strange creatures from lands you couldn't even imagine! Just think of all the knowledge they must have...”</i> [HeShe] trails off, looking a bit dejected.", parse);
@@ -579,7 +579,7 @@ export namespace RosalinScenes {
 		}
 		if (cale.flags.Met2 === CaleFlags.Met2.TalkedSlut) {
 			options.push({ nameStr : "Cale anal",
-				func() {
+				func: () => {
 					cale.flags.Met2 = CaleFlags.Met2.Goop;
 					Text.Clear();
 					Text.Add("<i>“Sure, what does wuffie want?”</i> the alchemist asks, a light shining up in [hisher] eyes at the opportunity to experiment on someone. You explain that he’s been taking a lot of cock lately, and he’s wondering if Rosalin could... help him with that.", parse);
@@ -621,7 +621,7 @@ export namespace RosalinScenes {
 					// [Take him][Rosalin]
 					const options: IChoice[] = [];
 					options.push({ nameStr : "Take him",
-						func() {
+						func: () => {
 							Text.Clear();
 							if (cocksInAss.length === 0) {
 								Text.Add("<i>“Gimme a sec… no, too small… this one? Ah! Perfect!”</i> Rosalin triumphantly pulls out a huge strap-on, formed in the shape of a canine cock. Near the thick base, there is a quite realistic knot, complete with veins and all. The entire thing is slightly longer than Cale’s own member.", parse);
@@ -645,7 +645,7 @@ export namespace RosalinScenes {
 					});
 					if (rosalin.FirstCock()) {
 						options.push({ nameStr : "Rosalin",
-							func() {
+							func: () => {
 								Text.Clear();
 								parse.rcocks = () => rosalin.MultiCockDesc();
 								Text.Add("You ask if the alchemist wants to take care of him.", parse);
@@ -670,7 +670,7 @@ export namespace RosalinScenes {
 			const tooltip = caleScene ? "You’ve been wondering about that mixture [heshe] made for Cale’s butt..." : "You’ve been wondering about something that would make anal more pleasurable...";
 			if (rosalin.flags.Anusol === 0) {
 				options.push({ nameStr : "Anal experiment",
-					func() {
+					func: () => {
 						rosalin.flags.Anusol = RosalinFlags.Anusol.OnTask;
 
 						Text.Clear();
@@ -895,7 +895,7 @@ export namespace RosalinScenes {
 
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Fuck her",
-			func() {
+			func: () => {
 				Text.Clear();
 
 				cale.flags.Met = CaleFlags.Met.First; // YouTookRosalin
@@ -945,7 +945,7 @@ export namespace RosalinScenes {
 			tooltip : "Why not rise to the occasion and fuck her until she calms down. You got there first, the wolf can just buzz off.",
 		});
 		options.push({ nameStr : "Wolf",
-			func() {
+			func: () => {
 				cale.flags.Met = CaleFlags.Met.CaleTookRosalin;
 
 				Text.Clear();
@@ -962,7 +962,7 @@ export namespace RosalinScenes {
 			tooltip : "Let the wolf handle her on his own, he seems capable enough.",
 		});
 		options.push({ nameStr : "Share",
-			func() {
+			func: () => {
 				Text.Clear();
 				rosalin.relation.IncreaseStat(100, 10);
 
@@ -977,7 +977,7 @@ export namespace RosalinScenes {
 				// [Get serviced][Get fucked][Fuck her]
 				const options: IChoice[] = [];
 				options.push({ nameStr : "Get serviced",
-					func() {
+					func: () => {
 						Text.Add("Amused, you aid her in undressing you, exposing your [genDesc]. The catgirl quickly adjusts to pleasuring both of you, ", parse);
 						if (player.FirstCock()) {
 							Text.Add("alternating between sucking you off and stroking your [cocks].", parse);
@@ -996,7 +996,7 @@ export namespace RosalinScenes {
 						// [Oral][Fuck him]
 						const options: IChoice[] = [];
 						options.push({ nameStr : "Oral",
-							func() {
+							func: () => {
 								Text.Clear();
 								p1Cock = player.BiggestCock();
 
@@ -1064,7 +1064,7 @@ export namespace RosalinScenes {
 					tooltip : "Have her pleasure you orally.",
 				});
 				options.push({ nameStr : "Get fucked",
-					func() {
+					func: () => {
 						player.subDom.DecreaseStat(-100, 3);
 						cale.flags.Sexed++;
 
@@ -1139,7 +1139,7 @@ export namespace RosalinScenes {
 				});
 				if (p1Cock) {
 					options.push({ nameStr : "Fuck her",
-						func() {
+						func: () => {
 							player.subDom.IncreaseStat(100, 3);
 
 							Text.Add("Rather than waiting for him to get ready, you pull out your [cocks], circling the prone catgirl and pulling at her tail insistently. Mouth clamped tight around several inches of canid cock, she nonetheless raises her butt, arching her back to ease your access as you grin at the glowering wolf. First come, first served. Still, with his dick buried inside the catgirl's throat, he can hardly complain.", parse);
@@ -1174,7 +1174,7 @@ export namespace RosalinScenes {
 							// [Oral][Fuck him]
 							const options: IChoice[] = [];
 							options.push({ nameStr : "Oral",
-								func() {
+								func: () => {
 									Text.Clear();
 									Text.Add("Sauntering around to the panting alchemist's face, you present Rosalin with a replacement for the recently removed canid cock. She is quick to take up the challenge, enclosing your [cock] with her mouth, allowing her tongue to quickly lap at the [cockTipDesc], hoping to get a treat.", parse);
 									Text.NL();
@@ -1374,7 +1374,7 @@ export namespace RosalinScenes {
 			// [You][Rosalin][Discard]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "You",
-				func() {
+				func: () => {
 					Text.Clear();
 					const r = ["equine cum", "harpy eggs", "mandrake", "nightshade", "spider eggs"];
 					if (rosalin.FirstCock()) { r.push("of my cum"); }
@@ -1392,7 +1392,7 @@ export namespace RosalinScenes {
 				tooltip : "Drink the potion yourself.",
 			});
 			options.push({ nameStr : "Rosalin",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“Down the hatch!”</i> Rosalin gleefully exclaims, drinking the potion in one go.", parse);
 					Text.NL();
@@ -1416,7 +1416,7 @@ export namespace RosalinScenes {
 				tooltip : "Offer the potion to Rosalin.",
 			});
 			options.push({ nameStr : "Discard",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Shaking your head, you decide to discard the results of the experiment. The vegetation around Rosalin's workbench takes on a slightly fuzzy look, and you swear you spot one of the flowers growing whiskers.", parse);
 					Text.Flush();
@@ -1440,7 +1440,7 @@ export namespace RosalinScenes {
 			// [You][Rosalin][Discard]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "You",
-				func() {
+				func: () => {
 					Text.Clear();
 
 					AlchemyItems.Leporine.Use(player);
@@ -1454,7 +1454,7 @@ export namespace RosalinScenes {
 				tooltip : "Drink the potion yourself.",
 			});
 			options.push({ nameStr : "Rosalin",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“Trying to get me to eat healthy food? Not gonna happen.”</i> Swallowing the refreshing drink quickly, the alchemist burps happily.", parse);
 					Text.NL();
@@ -1511,7 +1511,7 @@ export namespace RosalinScenes {
 				tooltip : "Offer the potion to Rosalin.",
 			});
 			options.push({ nameStr : "Discard",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Shaking your head, you decide to discard the results of the experiment. The plants around Rosalin's workbench suddenly look a little fluffier.", parse);
 					Text.Flush();
@@ -1540,7 +1540,7 @@ export namespace RosalinScenes {
 			// [You][Rosalin][Discard]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "You",
-				func() {
+				func: () => {
 					Text.Clear();
 
 					const checkCocks = () => {
@@ -1572,7 +1572,7 @@ export namespace RosalinScenes {
 				tooltip : "Drink the potion yourself.",
 			});
 			options.push({ nameStr : "Rosalin",
-				func() {
+				func: () => {
 					Text.Clear();
 
 					if (rosalin.flags["TakenEquinium+"] === 0) {
@@ -1662,7 +1662,7 @@ export namespace RosalinScenes {
 				tooltip : "Offer the potion to Rosalin.",
 			});
 			options.push({ nameStr : "Discard",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Shaking your head, you decide to discard the results of the experiment. Perhaps that was for the best too, you decide, as the plant you pour it over suddenly springs to life, a dozen thick tentacles sprouting from it.", parse);
 					Text.Flush();
@@ -1688,7 +1688,7 @@ export namespace RosalinScenes {
 			// [You][Rosalin][Discard]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "You",
-				func() {
+				func: () => {
 					Text.Clear();
 
 					AlchemyItems.Equinium.Use(player);
@@ -1702,7 +1702,7 @@ export namespace RosalinScenes {
 				tooltip : "Drink the potion yourself.",
 			});
 			options.push({ nameStr : "Rosalin",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“For me? How nice of you!”</i> Greedily clutching the bottle, Rosalin drinks the thick liquid.", parse);
 					Text.NL();
@@ -1757,7 +1757,7 @@ export namespace RosalinScenes {
 				tooltip : "Offer the potion to Rosalin.",
 			});
 			options.push({ nameStr : "Discard",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Shaking your head, you decide to discard the results of the experiment. Rosalin looks slightly disappointed as you pour the contents of the bottle on the ground. As you prepare to leave, you could swear you hear a quiet neigh from behind the workbench.", parse);
 					Text.Flush();
@@ -1784,7 +1784,7 @@ export namespace RosalinScenes {
 			// [You][Rosalin][Discard]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "You",
-				func() {
+				func: () => {
 					Text.Clear();
 					const c1 = player.NumCocks();
 					AlchemyItems.Lacertium.Use(player);
@@ -1805,7 +1805,7 @@ export namespace RosalinScenes {
 				tooltip : "Drink the potion yourself.",
 			});
 			options.push({ nameStr : "Rosalin",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“Hmm... well, what could go wrong?”</i> The alchemist shrugs, downing the oily draft.", parse);
 					Text.NL();
@@ -1845,7 +1845,7 @@ export namespace RosalinScenes {
 				tooltip : "Offer the potion to Rosalin.",
 			});
 			options.push({ nameStr : "Discard",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Shaking your head, you decide to discard the results of the experiment. The vegetation around Rosalin's workbench takes on a bright, almost metallic sheen. Some of the plants split into two identical ones, for no particular reason.", parse);
 					Text.Flush();
@@ -1873,7 +1873,7 @@ export namespace RosalinScenes {
 			// [You][Rosalin][Discard]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "You",
-				func() {
+				func: () => {
 					Text.Clear();
 					AlchemyItems.Bovia.Use(player);
 					if (player.Lactation()) {
@@ -1893,7 +1893,7 @@ export namespace RosalinScenes {
 				tooltip : "Drink the potion yourself.",
 			});
 			options.push({ nameStr : "Rosalin",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("[HeShe] chugs the thick liquid down. <i>“Refreshing!”</i> [heshe] licks [hisher] lips clean.", parse);
 					Text.NL();
@@ -1937,7 +1937,7 @@ export namespace RosalinScenes {
 				tooltip : "Offer the potion to Rosalin.",
 			});
 			options.push({ nameStr : "Discard",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Shaking your head, you decide to discard the results of the experiment. Doused with the concoction, the nearby vegetation starts to seep a strange white liquid.", parse);
 					Text.Flush();
@@ -1964,7 +1964,7 @@ export namespace RosalinScenes {
 			// [You][Rosalin][Discard]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "You",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Steeling yourself, you take a large swig of the pink goop.", parse);
 					Text.NL();
@@ -1990,7 +1990,7 @@ export namespace RosalinScenes {
 				tooltip : "Drink the potion yourself.",
 			});
 			options.push({ nameStr : "Rosalin",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“I… I’m actually going to pass on this one. Can’t handle the taste of snake.”</i> You look incredulously at the alchemist. Apparently even [heshe] has [hisher] limits.", parse);
 					Text.Flush();
@@ -1998,7 +1998,7 @@ export namespace RosalinScenes {
 				tooltip : "Offer the potion to Rosalin.",
 			});
 			options.push({ nameStr : "Discard",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("This… doesn’t look healthy. You decide to discard the concoction, pouring it out on the ground. The nearby vegetation wriggles unsettlingly.", parse);
 					Text.Flush();
@@ -2023,7 +2023,7 @@ export namespace RosalinScenes {
 			// [You][Rosalin][Discard]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "You",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.NL();
 					AlchemyItems.Canis.Use(player);
@@ -2037,7 +2037,7 @@ export namespace RosalinScenes {
 				tooltip : "Drink the potion yourself.",
 			});
 			options.push({ nameStr : "Rosalin",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("The alchemist grimaces as [heshe] gulps down the reddish liquid. Apparently the taste doesn’t quite agree with [himher]. [HisHer] body has other plans though.", parse);
 					Text.NL();
@@ -2104,7 +2104,7 @@ export namespace RosalinScenes {
 				tooltip : "Offer the potion to Rosalin.",
 			});
 			options.push({ nameStr : "Discard",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You don’t quite like the smell of this… let’s just pour it out. A small puff of smoke rises from the puddle of reddish liquid as it spreads over the ground. The plants around you look decidedly furrier than before. Some of them bark at you.", parse);
 					Text.Flush();
@@ -2134,7 +2134,7 @@ export namespace RosalinScenes {
 			// [You][Rosalin][Discard]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "You",
-				func() {
+				func: () => {
 					Text.Clear();
 					AlchemyItems.Lobos.Use(player);
 					Text.Add("<i>“Hmm,”</i> Rosalin mutters, jotting down a few observations in [hisher] notebook. <i>“Tell me, do you feel more inclined to… howl?”</i>", parse);
@@ -2146,7 +2146,7 @@ export namespace RosalinScenes {
 				tooltip : "Drink the potion yourself.",
 			});
 			options.push({ nameStr : "Rosalin",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“Okay!”</i> the alchemist chippers, gulping down the gray liquid without hesitation.", parse);
 					Text.NL();
@@ -2213,7 +2213,7 @@ export namespace RosalinScenes {
 				tooltip : "Offer the potion to Rosalin.",
 			});
 			options.push({ nameStr : "Discard",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("The surrounding vegetation doesn’t seem to have any problem absorbing the solution. Some of the flowers take on a gray tint, but remain perky. Feral, in fact. You can swear that one dandelion is looking hungry.", parse);
 					Text.Flush();
@@ -2241,7 +2241,7 @@ export namespace RosalinScenes {
 			// [You][Rosalin][Discard]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "You",
-				func() {
+				func: () => {
 					Text.Clear();
 					AlchemyItems.Vulpinix.Use(player);
 					Text.Add("<i>“Well, what do you think?”</i> Rosalin asks expectantly. <i>“Perhaps I should try being a chef again? Maybe open a restaurant.”</i>", parse);
@@ -2255,7 +2255,7 @@ export namespace RosalinScenes {
 				tooltip : "Drink the potion yourself.",
 			});
 			options.push({ nameStr : "Rosalin",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“Here goes!”</i> the alchemist fearlessly downs the red concoction, beads of sweat forming on [hisher] body due to the powerful alchemical solution.", parse);
 					Text.NL();
@@ -2323,7 +2323,7 @@ export namespace RosalinScenes {
 				tooltip : "Offer the potion to Rosalin.",
 			});
 			options.push({ nameStr : "Discard",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("On second thought, probably best to pass on this one. That much veggies can’t be healthy. The vegetation around the alchemist’s workbench perks up as you pour out the red liquid, some of them suddenly sprouting fat red berries.", parse);
 					Text.Flush();
@@ -2350,7 +2350,7 @@ export namespace RosalinScenes {
 			// [You][Rosalin][Discard]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "You",
-				func() {
+				func: () => {
 					Text.Clear();
 					AlchemyItems.Scorpius.Use(player);
 					Text.Add("Rosalin studies you for a few moments after you down the potion, counting under [hisher] breath. After ten seconds or so, [heshe] relaxes.", parse);
@@ -2364,7 +2364,7 @@ export namespace RosalinScenes {
 				tooltip : "Drink the potion yourself.",
 			});
 			options.push({ nameStr : "Rosalin",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“Down it goes!”</i> Rosalin cheerfully exclaims as [heshe] chugs the dubious liquid.", parse);
 					Text.NL();
@@ -2390,7 +2390,7 @@ export namespace RosalinScenes {
 				tooltip : "Offer the potion to Rosalin.",
 			});
 			options.push({ nameStr : "Discard",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("...No. Drinking this might actually kill you. You pour out the vile concoction - most likely a wise move, as some of the plants right up shrivel and die.", parse);
 					Text.Flush();
@@ -2417,7 +2417,7 @@ export namespace RosalinScenes {
 			// [You][Rosalin][Discard]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "You",
-				func() {
+				func: () => {
 					Text.Clear();
 					AlchemyItems.Lepida.Use(player);
 					Text.Add("Rosalin jots down some notes on a piece of paper as [heshe] observes the potion’s effect on you.", parse);
@@ -2429,7 +2429,7 @@ export namespace RosalinScenes {
 				tooltip : "Drink the potion yourself.",
 			});
 			options.push({ nameStr : "Rosalin",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“Here we go!”</i> Rosalin cheerfully chugs the purple potion, a bright smile on [hisher] face as [heshe] pours the sweet liquid down [hisher] throat.", parse);
 					Text.NL();
@@ -2476,7 +2476,7 @@ export namespace RosalinScenes {
 				tooltip : "Offer the potion to Rosalin.",
 			});
 			options.push({ nameStr : "Discard",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You pour the glittering liquid on the plants around Rosalin’s workbench. Some of them seem to absorb the concoction, changing in color and letting out small puffs of glittering powder.", parse);
 					Text.Flush();
@@ -2507,7 +2507,7 @@ export namespace RosalinScenes {
 			// [You][Rosalin][Discard]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "You",
-				func() {
+				func: () => {
 					Text.Clear();
 					AlchemyItems.Avia.Use(player);
 					Text.Add("Rosalin notes the effects of the potion on your body, humming to [himher]self happily.", parse);
@@ -2519,7 +2519,7 @@ export namespace RosalinScenes {
 				tooltip : "Drink the potion yourself.",
 			});
 			options.push({ nameStr : "Rosalin",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“Sure, I’ll try it!”</i> Rosalin readily agrees, quickly downing the potion. As always, the alchemist is eager to see the fruit of [hisher] efforts.", parse);
 					Text.NL();
@@ -2555,7 +2555,7 @@ export namespace RosalinScenes {
 				tooltip : "Offer the potion to Rosalin.",
 			});
 			options.push({ nameStr : "Discard",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Better skip this one. You pour out the contents next to Rosalin’s workbench, warily eyeing the now much fluffier plants around it. They tweet innocently, but seem to be largely harmless.", parse);
 					Text.Flush();
@@ -2584,7 +2584,7 @@ export namespace RosalinScenes {
 				// [You][Rosalin][Discard]
 				const options: IChoice[] = [];
 				options.push({ nameStr : "You",
-					func() {
+					func: () => {
 						Text.Clear();
 						AlchemyItems.Ovis.Use(player);
 						Text.Add("<i>“Do you feel any… different?”</i> the alchemist asks you, notepad at the ready. <i>“Any urge to give up your quest and follow the masses?”</i>", parse);
@@ -2596,7 +2596,7 @@ export namespace RosalinScenes {
 					tooltip : "Drink the potion yourself.",
 				});
 				options.push({ nameStr : "Rosalin",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("<i>“Nu-uh,”</i> Rosalin shakes [hisher] head. <i>“I wouldn’t want to become a sheep! This stuff can make you really air-headed, I hear! I’ve some limits, you know. I couldn’t make potions if I were stupid!”</i>", parse);
 						Text.NL();
@@ -2608,7 +2608,7 @@ export namespace RosalinScenes {
 					tooltip : "Offer the potion to Rosalin.",
 				});
 				options.push({ nameStr : "Discard",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("You pour out the potion into the vegetation around Rosalin’s workbench. The mindless baa-h of the wooly plants are kind of soothing, believe it or not.", parse);
 						Text.Flush();
@@ -2632,7 +2632,7 @@ export namespace RosalinScenes {
 			// [You][Rosalin][Discard]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "You",
-				func() {
+				func: () => {
 					Text.Clear();
 					AlchemySpecial.Anusol.Use(player);
 					Text.Add("You take the oily green fluid a little cautiously, then slowly drink it down. No sooner have you finished off the last of it, when you drop the bottle in shock as a tingling sensation sweeps across your [skin]. Warmth emanates from deep inside of you, and your arms sweep around your stomach as you moan. ", parse);
@@ -2650,7 +2650,7 @@ export namespace RosalinScenes {
 				tooltip : "Drink the potion yourself.",
 			});
 			options.push({ nameStr : "Rosalin",
-				func() {
+				func: () => {
 					Text.Clear();
 
 					const scenes = new EncounterTable();
@@ -2687,7 +2687,7 @@ export namespace RosalinScenes {
 				tooltip : "Offer the potion to Rosalin.",
 			});
 			options.push({ nameStr : "Discard",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Shaking your head, you decide to discard the results of the experiment. Rosalin looks slightly disappointed as you pour the contents of the bottle on the ground. The plants around her lab open wide, pink-red blooms, leaking visible rivers of nectar as the potion is soaked up into them.", parse);
 					Text.Flush();
@@ -2792,7 +2792,7 @@ export namespace RosalinScenes {
 			// [Get fucked][Fuck her][Wolfie]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Get fucked",
-				func() {
+				func: () => {
 					Text.Clear();
 					p1Cock     = player.BiggestCock();
 
@@ -2962,7 +2962,7 @@ export namespace RosalinScenes {
 			});
 			if (rosalin.BiggestCock() && rosalin.BiggestCock().length.Get() >= 25) {
 				options.push({ nameStr : "Worship",
-					func() { RosalinScenes.CockWorship(RosalinSexState.Rut); }, enabled : true,
+					func: () => { RosalinScenes.CockWorship(RosalinSexState.Rut); }, enabled : true,
 					tooltip : "Offer your worship to the alchemist's cock.",
 				});
 			}
@@ -2977,7 +2977,7 @@ export namespace RosalinScenes {
 			});
 			*/
 			options.push({ nameStr : cale.name,
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Fuck, looks like [heshe]'s lost it. You begin to edge back from the horny [raceDesc], not really wanting to deal with [himher] right now. Rosalin follows you, [hisher] eyes glued to you, like a cat stalking a mouse. Before you know it [heshe] has you cornered between a wagon and a tent.", parse);
 					Text.NL();
@@ -3015,7 +3015,7 @@ export namespace RosalinScenes {
 						// [Sure][Nah]
 						const options: IChoice[] = [];
 						options.push({ nameStr : "Leave",
-							func() {
+							func: () => {
 								Text.Clear();
 								Text.Add("You hurry off, leaving the pair on the ground. Looks like [wName] is in for a rough ride. He lets out a pained yelp as Rosalin gets down to business, spearing the poor wolf-morph on [hisher] [rcock]. Better avoid this area for a while.", parse);
 
@@ -3028,7 +3028,7 @@ export namespace RosalinScenes {
 							tooltip : "Get out of there while you still can.",
 						});
 						options.push({ nameStr : "Watch",
-							func() {
+							func: () => {
 								Text.Clear();
 								Text.Add("", parse);
 								Text.NL();
@@ -3039,7 +3039,7 @@ export namespace RosalinScenes {
 							tooltip : "",
 						});
 						options.push({ nameStr : "Join",
-							func() {
+							func: () => {
 								Text.Clear();
 								Text.Add("", parse);
 								Text.NL();
@@ -3082,7 +3082,7 @@ export namespace RosalinScenes {
 			// [Sure][Nah]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Recv. Oral",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“Mm... you got me, like, all hot and bothered now,”</i> Rosalin murmurs, eyeing you hungrily. <i>“How are you going to take responsibility?”</i> Crooking your finger calling [himher] over, you start undoing your [armorDesc]. Giving you a delighted yelp, the [raceDesc] alchemist gets down on [hisher] knees, licking [hisher] lips while waiting for you to get [undressedReady].", parse);
 					Text.NL();
@@ -3098,14 +3098,14 @@ export namespace RosalinScenes {
 			});
 			if (rosalin.BiggestCock() && rosalin.BiggestCock().length.Get() >= 25) {
 				options.push({ nameStr : "Worship",
-					func() { RosalinScenes.CockWorship(RosalinSexState.Regular); }, enabled : true,
+					func: () => { RosalinScenes.CockWorship(RosalinSexState.Regular); }, enabled : true,
 					tooltip : "Offer your worship to the alchemist's cock.",
 				});
 			}
 
 			if (p1Cock && rosalin.FirstVag()) {
 				options.push({ nameStr : "Fuck Vag",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("<i>“Hey, feeling up for a bit of fun?”</i> Rosalin coyly lifts [hisher] dress, exposing the wet slit between [hisher] [rlegs].", parse);
 						if (rosalin.FirstCock()) {

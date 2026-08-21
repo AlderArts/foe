@@ -220,10 +220,9 @@ export class RaceScore {
 	}
 
 	public SumRace(race: RaceDesc) {
-		const that = this;
-		let sum = that.score[race.id];
+		let sum = this.score[race.id];
 		_.each(race.children, (r) => {
-			sum += that.SumRace(r);
+			sum += this.SumRace(r);
 		});
 		return sum;
 	}

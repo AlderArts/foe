@@ -164,7 +164,7 @@ export namespace BrothelScenes {
 		// [Resist][Lucille]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Resist",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You open your mouth to reject her… but who are you kidding? You want... no. You need her!", parse);
 				Text.NL();
@@ -173,7 +173,7 @@ export namespace BrothelScenes {
 			tooltip : "Despite your arousal, attempt to resist temptation.",
 		});
 		options.push({ nameStr : "Lucille",
-			func() {
+			func: () => {
 				Text.Clear();
 				Gui.PrintDefaultOptions();
 			}, enabled : true,

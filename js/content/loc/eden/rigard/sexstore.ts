@@ -51,12 +51,12 @@ export namespace OddShopScenes {
 			// [name]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Buy",
-				func() {
+				func: () => {
 					rigard.SexShop.Buy(prompt);
 				}, enabled : true,
 			});
 			options.push({ nameStr : "Sell",
-				func() {
+				func: () => {
 					rigard.SexShop.Sell(prompt);
 				}, enabled : true,
 			});

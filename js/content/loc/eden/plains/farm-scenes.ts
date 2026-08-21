@@ -68,7 +68,7 @@ export namespace FarmScenesIntro {
             tooltip : "Approach the building and try to find out what it is.",
         });
         options.push({ nameStr : "Nah",
-            func() {
+            func: () => {
                 Text.NL();
                 Text.Add("Deciding to not explore the distant building, you continue on your journey.", parse);
                 Text.Flush();
@@ -125,7 +125,7 @@ export namespace FarmScenesIntro {
         // [Sure][Guess so][Nah]
         const options: IChoice[] = [];
         options.push({ nameStr : "Sure",
-            func() {
+            func: () => {
                 Text.Clear();
                 player.strength.IncreaseStat(40, 1);
                 gwendy.relation.IncreaseStat(100, 5);
@@ -144,7 +144,7 @@ export namespace FarmScenesIntro {
             tooltip : "She has been kind and even gave you a compliment. Give her a hand!",
         });
         options.push({ nameStr : "Guess so",
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Add("You offer a hand to her and ask if you could hold a bucket. She gives you a smirk before shuffling her weight once more. <i>“No one's forcing you to do anything, [playername]. I'm fine for now. Still, if you'd like to help, please follow me.”</i>", parse);
                 Text.NL();
@@ -156,7 +156,7 @@ export namespace FarmScenesIntro {
             tooltip : "Well, you have nothing better to do... offer her a hand?",
         });
         options.push({ nameStr : "Nah",
-            func() {
+            func: () => {
                 Text.Clear();
                 gwendy.relation.DecreaseStat(-100, 5);
                 Text.Add("Well, as pretty as she may be, Gwendy should be more than capable of handling her own chores. She seems to have managed so far, so she'll be fine on her own for now. Your attitude becomes apparent to the girl as she shuffles once more, the buckets threatening to spill, but thanks to her balance and skill the crisis is averted.", parse);
@@ -235,7 +235,7 @@ export namespace FarmScenesIntro {
         const options: IChoice[] = [];
         if (!talkedAboutGwendy) {
             options.push({ nameStr : "Gwendy",
-                func() {
+                func: () => {
                     Text.Clear();
                     Text.Add("You tell her you'd like to know more about her, since it seems she manages the farm by herself. She smiles proudly before inviting you to sit at the table. <i>“Where do I start with this?”</i> she murmurs, looking off into the distance.", parse);
                     Text.NL();
@@ -250,7 +250,7 @@ export namespace FarmScenesIntro {
         }
         if (!talkedAboutBarn) {
             options.push({ nameStr : "Barn",
-                func() {
+                func: () => {
                     Text.Clear();
                     Text.Add("Though you admire the girl's obvious effort in maintaining the farm, you can't help but note the declining state of the barn. Gwendy's happy expression becomes a bit more somber when you point that out. You try to take your words back, but the girl shakes her head at your apologies. <i>“It's alright, I know that it's shabby. Even with trying to do repairs when I can, I don't have enough time and money to do that and keep paying these taxes <b>and</b> chase off the fools who come and make trouble... Still, I do what I can to keep it functioning at least. That's the duty of a farmer, right?”</i> Even though she ends with a somewhat positive tone, the pain of dealing with a farm on the brink of collapse is apparent on her face. <i>“Well, it is what it is, but I promise I will have this place up and running, even if it takes me the rest of my life to do it!”</i>", parse);
                     Text.NL();
@@ -263,7 +263,7 @@ export namespace FarmScenesIntro {
         }
         if (!talkedAboutAlone) {
             options.push({ nameStr : "Alone?",
-                func() {
+                func: () => {
                     Text.Clear();
                     Text.Add("Curiously, you point out that she's the only human on a farm full of animals and morphs. Doesn't that make her feel a bit secluded?", parse);
                     Text.NL();
@@ -308,7 +308,7 @@ export namespace FarmScenesIntro {
         const options: IChoice[] = [];
         if (!flirtGwendy) {
             options.push({ nameStr : "Flirt",
-                func() {
+                func: () => {
                     Text.Clear();
                     flirtGwendy = true;
 
@@ -324,7 +324,7 @@ export namespace FarmScenesIntro {
                     // [Breasts][Hair][Ass][Lips][Body]
                     const options: IChoice[] = [];
                     options.push({ nameStr : "Breasts",
-                        func() {
+                        func: () => {
                             Text.Clear();
                             player.AddLustFraction(0.2);
                             gwendy.relation.IncreaseStat(100, 5);
@@ -336,7 +336,7 @@ export namespace FarmScenesIntro {
                         tooltip : "Girl's got a nice pair of breasts!",
                     });
                     options.push({ nameStr : "Hair",
-                        func() {
+                        func: () => {
                             Text.Clear();
                             player.AddLustFraction(0.1);
                             gwendy.relation.IncreaseStat(100, 3);
@@ -348,7 +348,7 @@ export namespace FarmScenesIntro {
                         tooltip : "Her hair is so pretty! You're kind of jealous.",
                     });
                     options.push({ nameStr : "Ass",
-                        func() {
+                        func: () => {
                             Text.Clear();
                             player.AddLustFraction(0.3);
                             gwendy.relation.IncreaseStat(100, 5);
@@ -360,7 +360,7 @@ export namespace FarmScenesIntro {
                         tooltip : "Baby got back!",
                     });
                     options.push({ nameStr : "Lips",
-                        func() {
+                        func: () => {
                             Text.Clear();
                             player.AddLustFraction(0.1);
                             gwendy.relation.IncreaseStat(100, 2);
@@ -372,7 +372,7 @@ export namespace FarmScenesIntro {
                         tooltip : "Those lips bring many thoughts to your mind...",
                     });
                     options.push({ nameStr : "Body",
-                        func() {
+                        func: () => {
                             Text.Clear();
                             player.AddLustFraction(0.4);
                             gwendy.relation.IncreaseStat(100, 8);
@@ -391,7 +391,7 @@ export namespace FarmScenesIntro {
             });
         }
         options.push({ nameStr : "Help",
-            func() {
+            func: () => {
                 Text.Clear();
                 // Boons!
                 for (const c of party.members) {
@@ -410,7 +410,7 @@ export namespace FarmScenesIntro {
         });
         // TODO!!! Leave loiter
         options.push({ nameStr : "Leave",
-            func() {
+            func: () => {
                 Text.Clear();
 
                 Text.Add("You tell Gwendy that you're fine for now, but thank her for welcoming you into her room. She casts a questioning glance at you, but doesn't ask anything. <i>“Alright then, if that's what you want. I've things to do myself, so I'm leaving now. Of course, you can still check out the farm if you'd like, but I won't be there to help you get around. Other than that, see ya!”</i>", parse);
@@ -504,7 +504,7 @@ export namespace FarmScenesIntro {
         // [Talk][Flirt][Gwendy][Just work]
         const options: IChoice[] = [];
         options.push({ nameStr : "Talk",
-            func() {
+            func: () => {
                 Text.Clear();
                 adrian.relation.IncreaseStat(100, 5);
                 Text.Add("While working on a rather unwieldy pile, you call Adrian over for assistance. He looks over and sighs as he walks over, lifting the pile by himself. You offer some thanks, but he waves it off before getting back to his own work. In an effort to get to know your co-worker better, you try to talk to him, but he remains silent.", parse);
@@ -516,7 +516,7 @@ export namespace FarmScenesIntro {
             tooltip : "Try to get to know him.",
         });
         options.push({ nameStr : "Flirt",
-            func() {
+            func: () => {
                 Text.Clear();
                 adrian.slut.IncreaseStat(100, 5);
                 Text.Add("In an attempt to win the attention of the equine, you pretend you are having trouble lifting the piles of hay. Calling him over to help while holding on to the pitchfork, you relish the feeling of him wrapping his strong arms around you, his muscles flexing as he works with you.", parse);
@@ -530,7 +530,7 @@ export namespace FarmScenesIntro {
             tooltip : "Why not? He is cute and silent.",
         });
         options.push({ nameStr : "Gwendy",
-            func() {
+            func: () => {
                 Text.Clear();
                 adrian.relation.IncreaseStat(100, 3);
                 adrian.slut.IncreaseStat(100, 2);
@@ -545,7 +545,7 @@ export namespace FarmScenesIntro {
             tooltip : "Ask him what he thinks of Gwendy.",
         });
         options.push({ nameStr : "Just work",
-            func() {
+            func: () => {
                 Text.Clear();
                 adrian.relation.IncreaseStat(100, 2);
                 Text.Add("Well, Gwendy did say she had a schedule to keep, and you did say you would help, so you leave Adrian alone for the time being. If anything, you can take the opportunity to talk when dust is not threatening to clog your lungs.", parse);
@@ -623,7 +623,7 @@ export namespace FarmScenesIntro {
         // [Yes][No]
         const options: IChoice[] = [];
         options.push({ nameStr : "Yes",
-            func() {
+            func: () => {
                 Text.Clear();
                 danie.relation.IncreaseStat(100, 5);
                 player.AddLustFraction(0.2);
@@ -650,7 +650,7 @@ export namespace FarmScenesIntro {
             tooltip : "Why not? She might actually be of help.",
         });
         options.push({ nameStr : "No",
-            func() {
+            func: () => {
                 Text.Clear();
                 danie.relation.DecreaseStat(-100, 5);
                 Text.Add("As sweet as she is, you can't take the time to look after her and do your job at the same time, so you tell her no. Maybe when you're free you can come and play, but you have a job and you need to do it as quickly as possible. ", parse);
@@ -689,7 +689,7 @@ export namespace FarmScenesIntro {
         // [Talk][Leave]
         const options: IChoice[] = [];
         options.push({ nameStr : "Talk",
-            func() {
+            func: () => {
                 Text.Clear();
                 danie.relation.IncreaseStat(100, 5);
                 Text.Add("Asking her if she is okay, you are caught off guard as she jumps on you, giving you a quick hug. <i>“I'm alright, [playername]! Thank you for asking!”</i> She backs up a bit suddenly, leaving you looking at her in confusion while she stares back with a guilty look. <i>“You must think I'm such a klutz, causing us to trip like that... I know I'm a bit clumsy, but I didn't mean to hurt you. Sorry...”</i>", parse);
@@ -709,7 +709,7 @@ export namespace FarmScenesIntro {
             tooltip : "Well, she seems to like being around you, why not talk to her for a bit?",
         });
         options.push({ nameStr : "Leave",
-            func() {
+            func: () => {
                 Text.Clear();
                 danie.relation.DecreaseStat(-100, 5);
                 Text.Add("You just barely recovered from your aroused state, and you really don't need anything to push you back into it at this point. It pains you to admit it, but you're going to have to leave the girl. Knowing her attitude and behavior, she will likely be a little crushed, but you can explain the next time you see her... you hope, at least.", parse);
@@ -761,7 +761,7 @@ export namespace FarmScenesIntro {
             });
         }
         options.push({ nameStr : "Nevermind",
-            func() {
+            func: () => {
                 Text.Clear();
                 player.AddLustFraction(-0.2);
                 Text.Add("You tell the helpful girl that this isn't something she needs to concern herself with. Before she can protest, you stand up and tell her to stay here. It's bad enough that you are aroused, but you do not want to do anything irreversible just because you can barely keep your pants on.", parse);

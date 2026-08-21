@@ -261,7 +261,7 @@ export namespace CassidyScenes {
 		});
 		options.push({ nameStr : "Talk",
 			tooltip : "Chat a bit with Cassidy.",
-			func() {
+			func: () => {
 				Text.Clear();
 				if (cassidy.Relation() >= 30) {
 					Text.Add("Cass perks up at the suggestion. <i>“Oh, sure! I don’t mind, so long as you understand that I’ve got to break it off if a customer comes round. Gotta watch the time, too… it always seems to fly by when I’m chatting with you.</i>", parse);
@@ -278,7 +278,7 @@ export namespace CassidyScenes {
 		});
 		options.push({ nameStr : "Buy",
 			tooltip : "See what Cass has for sale on the racks today.",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You decide to browse through the racks, displays and glass cases, checking out what Cassidy’s set out on the shop floor today: an assortment of keen edges, sharp points and weighty bludgeons. All of them have been bolted to their displays, and a small sign helpfully instructs you that the displays are just that, and to ask about any purchases you’d like to make.", parse);
 				Text.NL();
@@ -290,7 +290,7 @@ export namespace CassidyScenes {
 		});
 		options.push({ nameStr : "Sell",
 			tooltip : "Hock your excess stuff onto the sally-mander.",
-			func() {
+			func: () => {
 				// TODO Restrict item type?
 				// Cassidy will buy spare weapons and armor off your hands.
 				Text.Clear();
@@ -305,7 +305,7 @@ export namespace CassidyScenes {
 		if (cassidy.flags.Met < CassidyFlags.Met.AskedBack) {
 			options.push({ nameStr : "Hang Out",
 				tooltip : "Ask Cassidy if he’d like to hang out with you for a bit after work.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Leaning forward, you ask if Cass would like to join you for a drink sometime in the evening, after the shop’s closed. Maybe somewhere nice, like the Lady’s Blessing? They have very good drinks there, after all.", parse);
 					Text.NL();
@@ -362,7 +362,7 @@ export namespace CassidyScenes {
 		} else { // Go out back
 			options.push({ nameStr : "Head Inside",
 				tooltip : "So, does Cass want to stay in with you after closing shop?",
-				func() {
+				func: () => {
 					Text.Clear();
 					if (WorldTime().hour < 15) {
 						Text.Add("You were just about to pop the question, but catch yourself mid-sentence. Yeah, Cass <i>did</i> say to come an hour or two before closing time - this is probably too early for that. If you asked now, you’d just get a refusal and annoy Cassidy in the process. Best to wait this one out; patience is a virtue, after all.", parse);
@@ -454,7 +454,7 @@ export namespace CassidyScenes {
 		const options: IChoice[] = [];
 		options.push({ nameStr : "What’s Up?",
 			tooltip : Text.Parse("So… has [heshe] heard anything new?", parse),
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“New? New? Lemme think…”</i> Cassidy drums [hisher] claws on the counter and taps [hisher] tail on the floor - both of them in time - as [heshe] furrows [hisher] brow in thought.", parse);
 				Text.NL();
@@ -510,7 +510,7 @@ export namespace CassidyScenes {
 		});
 		options.push({ nameStr : "Shop",
 			tooltip : Text.Parse("So… The Pale Flame. Sounds like it’s got a bit of history.", parse),
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“It does,”</i> Cass replies. <i>“There might not be as much history floating about this place as there is about… say, Rigard Castle - it’s not as if I inherited the forge from my father’s father’s father’s father, who in turn got it from his mother’s grandfather on his father’s side. You know, that kind of lineage the nobles like to tote around. Nevertheless, it’s <b>my</b> history and my dad’s, and I’m proud enough of it that I don’t mind telling the story every now and then.”</i>", parse);
 				Text.NL();
@@ -847,7 +847,7 @@ export namespace CassidyScenes {
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Talk",
 			tooltip : "Have a chat.",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“Nothing better than spending the evening chatting away with a friend,”</i> Cassidy says, smiling. <i>“Go on, you pick the topic.”</i>", parse);
 				Text.Flush();
@@ -867,7 +867,7 @@ export namespace CassidyScenes {
 			if (cassidy.flags.Talk & CassidyFlags.Talk.Spar) {
 				options.push({ nameStr : "Spar",
 					tooltip : "Test your strength against Cassidy’s.",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("<i>“Oh, you wanna fight, ace?”</i> Cassidy instantly perks up at the suggestion. She sure does enjoy fighting, doesn’t she? ", parse);
 						if (cassidy.Relation() >= 40) {
@@ -1164,7 +1164,7 @@ export namespace CassidyScenes {
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Smithing",
 			tooltip : "Is blacksmithing the official family trade?",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("At your question, Cassidy thinks a moment, rubbing [hisher] chin. <i>“Not exactly, but kinda sorta. My uncle and aunts run a foundry down by the northern coast; that’s where the clan homestead is. Again, like The Pale Flame, I garner they’ve gathered a bit of local reputation. Well… at least that’s how they were last I heard. Ever since I took over running the forge from my dad, there’s been no time for a trip back to the old clan grounds. Mom would take me and big bro back while Dad stayed to tend the shop - now, though, it’s just me around…</i>", parse);
 				Text.NL();
@@ -1188,7 +1188,7 @@ export namespace CassidyScenes {
 		});
 		options.push({ nameStr : "Salamanders",
 			tooltip : Text.Parse("So… are there many of [hisher] kind on Eden?", parse),
-			func() {
+			func: () => {
 				Text.Clear();
 
 				const first = !(cassidy.flags.Talk & CassidyFlags.Talk.Salamanders);
@@ -1288,7 +1288,7 @@ export namespace CassidyScenes {
 		});
 		options.push({ nameStr : "Family",
 			tooltip : Text.Parse("So, what’s the rest of [hisher] family like?", parse),
-			func() {
+			func: () => {
 				Text.Clear();
 
 				const first = !(cassidy.flags.Talk & CassidyFlags.Talk.Family);
@@ -1360,7 +1360,7 @@ export namespace CassidyScenes {
 		});
 		options.push({ nameStr : "Loner",
 			tooltip : "You’ve noticed that Cass doesn’t get out that much…",
-			func() {
+			func: () => {
 				Text.Clear();
 
 				const first = !(cassidy.flags.Talk & CassidyFlags.Talk.Loner);
@@ -1395,7 +1395,7 @@ export namespace CassidyScenes {
 		if ((cassidy.flags.Met < CassidyFlags.Met.TalkFem) && cassidy.KnowGender()) {
 			options.push({ nameStr : "Tomboy",
 				tooltip : "So, does she really mind that much if others mistake her for a guy?",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Cassidy whistles at the question. <i>“You know, you’re probably the only one to ask me that question for some time now.”</i>", parse);
 					Text.NL();
@@ -1430,7 +1430,7 @@ export namespace CassidyScenes {
 						const options: IChoice[] = [];
 						options.push({ nameStr : "Yes",
 							tooltip : "Yeah, it really would help.",
-							func() {
+							func: () => {
 								Text.Clear();
 								Text.Add("Getting up from your seat, you walk around to Cassidy and gently place a hand on her shoulder. You know how much it irks her… but changing one’s outward appearance is far easier than shifting her personality, which is pretty much set in stone anyway.", parse);
 								Text.NL();
@@ -1464,7 +1464,7 @@ export namespace CassidyScenes {
 						});
 						options.push({ nameStr : "No",
 							tooltip : "After some thought, you really do like her as she is.",
-							func() {
+							func: () => {
 								Text.Clear();
 								Text.Add("You get up from your seat, cross over to Cassidy’s side of the table and clap the salamander on the shoulder with as much force as she’d have done for you. As much as there’s some merit to what’s been brought up, when all’s said and done, you still like Cass as she is. Sure, she may not quite project the image she wants to… but hey, there’s more than one way to skin a cat.", parse);
 								Text.NL();
@@ -1580,7 +1580,7 @@ export namespace CassidyScenes {
 			if (!asked) {
 				options.push({ nameStr : "What Do?",
 					tooltip : "Just what does minding the shop entail, anyway?",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("Before you make any promises, what does minding the shop entail, anyway?", parse);
 						Text.NL();
@@ -1603,13 +1603,13 @@ export namespace CassidyScenes {
 			}
 			options.push({ nameStr : "Yes",
 				tooltip : "Yeah, you’ll do it.",
-				func() {
+				func: () => {
 					CassidyScenes.ManagingShopAccept();
 				}, enabled : true,
 			});
 			options.push({ nameStr : "No",
 				tooltip : "Hmm, you don’t think yourself up to the task.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Actually, to be honest, Cass would be better off just closing the shop. You don’t think you’ve it in you to properly handle the forge’s customers without knowing much about the business yourself, plus you have a few things to attend to yourself.", parse);
 					Text.NL();
@@ -1724,7 +1724,7 @@ export namespace CassidyScenes {
 		});
 		options.push({ nameStr : "Short sword",
 			tooltip : "It's pretty plain, but with any luck he won't cut himself to shreds with it.",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Ah, you have just the thing for the little guy. Pulling out a short sword, you hand it to the young wolf-morph; the little guy tests its balance and gives you a nod.", parse);
 				Text.NL();
@@ -1778,7 +1778,7 @@ export namespace CassidyScenes {
 		});
 		options.push({ nameStr : "375 coins",
 			tooltip : "",
-			func() {
+			func: () => {
 				score++;
 				Text.Clear();
 				Text.Add("<i>“That does sound about right. Here’s your money, then.”</i>", parse);
@@ -1854,7 +1854,7 @@ export namespace CassidyScenes {
 		});
 		options.push({ nameStr : "Halberd",
 			tooltip : "You think you saw a halberd in the back, that ought to fit the bill, right?",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“Right, right. That’s perfect.”</i> A furtive glance. <i>“Look, how much do I owe you?”</i>", parse);
 				Text.NL();
@@ -1956,7 +1956,7 @@ export namespace CassidyScenes {
 		});
 		options.push({ nameStr : "Warhammer",
 			tooltip : "Sure, the two-handed warhammer isn't very fancy, but it should certainly be able to deliver a thorough pounding, right?",
-			func() {
+			func: () => {
 				score++;
 
 				Text.Clear();
@@ -2025,7 +2025,7 @@ export namespace CassidyScenes {
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Yes",
 			tooltip : "",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You tell the elderly lady that the special order can indeed be arranged, and she brightens immediately.", parse);
 				Text.NL();
@@ -2037,7 +2037,7 @@ export namespace CassidyScenes {
 		});
 		options.push({ nameStr : "No",
 			tooltip : "",
-			func() {
+			func: () => {
 				score++;
 
 				Text.Clear();
@@ -2178,7 +2178,7 @@ export namespace CassidyScenes {
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Yes",
 			tooltip : "Sure, you’d love some cookies.",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“Great! Help me get this open, okay?”</i>", parse);
 				Text.NL();
@@ -2188,7 +2188,7 @@ export namespace CassidyScenes {
 		});
 		options.push({ nameStr : "No",
 			tooltip : "Nah, you’ll pass.",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Cassidy squints at you. <i>“You on a diet or something? Welp, more for me.”</i>", parse);
 				Text.NL();
@@ -2467,7 +2467,7 @@ export namespace CassidyScenes {
 		options.push({nameStr : "Sure!",
 			tooltip : Text.Parse("Modeling for Cass sounds like fun!", parse),
 			enabled : true,
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Yeah, sure, that sounds like a lot of fun! Besides, Cass is so enthusiastic and eager, her golden eyes so bright - it’d practically be a travesty to say no to such a face. All right, then. What do you need to do? Just stand around and pose some, maybe flex a little?", parse);
 				Text.NL();
@@ -2523,7 +2523,7 @@ export namespace CassidyScenes {
 				options.push({nameStr : "Heroic",
 					tooltip : Text.Parse("Brave and dashing! A traditional favorite!", parse),
 					enabled : true,
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("You decide to go with the timeless favorite - brave, heroic and dashing. After all, you’re supposed to be saving Eden, right? Right? That ought to qualify you for something, at the very least.", parse);
 						Text.NL();
@@ -2545,7 +2545,7 @@ export namespace CassidyScenes {
 				options.push({nameStr : "Determined",
 					tooltip : Text.Parse("Show your resolve of stone!", parse),
 					enabled : true,
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("Determined, that’s what you want to be, that’s how you want others to see you. Resolute in the face of adversity, plowing ahead in the face of the oncoming storm, unbroken in the wake of danger. With such thoughts in mind, you strike the most determined pose that you can possibly think of, widening your stance and just daring, <i>daring</i> anything to come at you.", parse);
 						Text.NL();
@@ -2563,7 +2563,7 @@ export namespace CassidyScenes {
 				options.push({nameStr : "Mysterious",
 					tooltip : Text.Parse("Dark and Mysterious, that’s you.", parse),
 					enabled : true,
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("Nothing for it, then. You draw in upon yourself and do your best to appear dark, mysterious and dangerous. The brooding type, an enigma unto itself. Layer wrapped within layers of, um, deep and rich backstory. Something like that, anyway, the kind of person that shows up in two-bit adventure and romance novels.", parse);
 						Text.NL();
@@ -2742,7 +2742,7 @@ export namespace CassidyScenes {
 		options.push({nameStr : "No Thanks",
 			tooltip : Text.Parse("You had other plans for this evening.", parse),
 			enabled : true,
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("It’s a little hard to refuse such eagerness, especially coming from someone like Cassidy, but you’ve got to turn her down. After all, you <i>did</i> have other plans for this evening.", parse);
 				Text.NL();
@@ -2936,7 +2936,7 @@ export namespace CassidyScenes {
 		options.push({nameStr : "Yeah",
 			tooltip : Text.Parse("Sure, a bit of sparring wouldn’t hurt.", parse),
 			enabled : true,
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Sure, why not? To be honest, you’re also a bit curious about how well the salamander smith can fight.", parse);
 				Text.NL();
@@ -2959,7 +2959,7 @@ export namespace CassidyScenes {
 		options.push({nameStr : "Nah",
 			tooltip : Text.Parse("Not right now. You came here to relax, not to get worked up.", parse),
 			enabled : true,
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“Yeah, I get it, no worries. Like I said, it’d probably have taken up the rest of the evening anyway, and you probably wanted to do other things.”</i>", parse);
 				Text.NL();

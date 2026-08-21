@@ -45,7 +45,7 @@ export namespace LaylaScenes {
 		const options: IChoice[] = [];
 
 		options.push({ nameStr : "Talk",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Layla tilts her head to the side, looking at you inquisitively. Her long tail sways behind her as she waits to hear what you want to talk to her about.", parse);
 				Text.Flush();
@@ -59,7 +59,7 @@ export namespace LaylaScenes {
 			enabled = enabled && (player.FirstCock() !== undefined || player.Strapon() !== undefined);
 		}
 		options.push({ nameStr : "Sex",
-			func() {
+			func: () => {
 				if (layla.Virgin()) {
 					LaylaScenes.SexFirstTime();
 				} else {
@@ -75,7 +75,7 @@ export namespace LaylaScenes {
 			tooltip,
 		});
 		options.push({ nameStr : "Appearance",
-			func() {
+			func: () => {
 				LaylaScenes.Appearance(switchSpot);
 			}, enabled : true,
 			tooltip : "You want to take a closer look at Layla’s body.",
@@ -116,7 +116,7 @@ export namespace LaylaScenes {
 
 		const tooltip = layla.Virgin() ? "Despite her apparent innocence, Layla does have a nice body. So why not proposition the chimeric beauty for a little romp in the hay?" : "Now that Layla knows what it is, what does she think about sex?";
 		options.push({ nameStr : "Sex",
-			func() {
+			func: () => {
 				Text.Clear();
 
 				layla.flags.Talk |= LaylaFlags.Talk.Sex;
@@ -772,7 +772,7 @@ export namespace LaylaScenes {
 			// [Tea] [Coffee] [You’re fine] [Sex]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Tea",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“Alright, take a seat and I’ll prepare you some tea.”</i>", parse);
 					Text.NL();
@@ -784,7 +784,7 @@ export namespace LaylaScenes {
 				tooltip : "Some tea would be lovely.",
 			});
 			options.push({ nameStr : "Coffee",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“Okay, sit down while I prepare some.”</i>", parse);
 					Text.NL();
@@ -795,7 +795,7 @@ export namespace LaylaScenes {
 				tooltip : "Coffee would be great.",
 			});
 			options.push({ nameStr : "You’re fine",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“You sure? Alright then. Hope you don’t mind if I fix some coffee for myself.”</i>", parse);
 					Text.NL();
@@ -806,7 +806,7 @@ export namespace LaylaScenes {
 				tooltip : "You’re not thirsty, but you appreciate the offer.",
 			});
 			options.push({ nameStr : "Sex",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You tell her that if she wants to show you her gratitude, you can think of a more enjoyable way for her to do that...", parse);
 					Text.NL();
@@ -903,7 +903,7 @@ export namespace LaylaScenes {
 				// [Take] [Don’t take]
 				const options: IChoice[] = [];
 				options.push({ nameStr : "Take",
-					func() {
+					func: () => {
 						layla.flags.Take = 1;
 
 						Text.Clear();
@@ -913,7 +913,7 @@ export namespace LaylaScenes {
 					tooltip : "Offer to take the creature with you; that should keep her out of mischief, at least.",
 				});
 				options.push({ nameStr : "Don’t take",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("Gwendy shrugs, then turn back to the girl. <i>“Alright then, we’ll figure that part out some other time. For now there is a little matter you and I have to settle first, missy.”</i>", parse);
 						Text.NL();
@@ -1109,7 +1109,7 @@ export namespace LaylaScenes {
 		// [name]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Catch anal",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“Sure!”</i> she replies happily, shifting her skin out of the way.", parse);
 				Text.NL();
@@ -1477,7 +1477,7 @@ export namespace LaylaScenes {
 			// [Examine][Touch][Lick]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Examine",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You bend your head in closer, taking in every inch of Layla’s newly revealed girl-dick. As you thought, it’s a foot in length and two and a half inches thick. Aside from the knot now distending its base, it’s basically human in form. The biggest oddity about it - aside from its existence - is its color. Like Layla’s pussy, her cock is an indigo blue shade, darkening to a deep purple at the glans, rather like her clitoris.", parse);
 					Text.NL();
@@ -1490,7 +1490,7 @@ export namespace LaylaScenes {
 				tooltip : "You’re not about to touch that, but you could always take a closer look.",
 			});
 			options.push({ nameStr : "Touch",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Inquisitively, you reach out and take Layla by the dick. Your fingers wrap around its length, warm and throbbing in your hand. Layla gasps at your touch, a white bead of pre forming on the tip of her member.", parse);
 					Text.NL();
@@ -1505,7 +1505,7 @@ export namespace LaylaScenes {
 				tooltip : "Only one way to properly examine her...",
 			});
 			options.push({ nameStr : "Lick",
-				func() {
+				func: () => {
 					licked = true;
 					Text.Clear();
 					Text.Add("Determined to examine every aspect of Layla’s cock, you clasp her shaft in your fingers. The warm, soft flesh is velvety smooth against your palm, throbbing gently as you knead it tenderly between your digits.", parse);
@@ -1551,7 +1551,7 @@ export namespace LaylaScenes {
 				// [Yes][No][Taste]
 				const options: IChoice[] = [];
 				options.push({ nameStr : "Yes",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("<i>“Okay,”</i> she replies with a smile, wrapping her digits around her tail-cock and gently stroking it.", parse);
 						Text.NL();
@@ -1562,7 +1562,7 @@ export namespace LaylaScenes {
 					tooltip : "Yes, if she doesn’t mind showing you.",
 				});
 				options.push({ nameStr : "No",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("<i>“Okay,”</i> she replies, shrugging.", parse);
 						Text.NL();
@@ -1571,7 +1571,7 @@ export namespace LaylaScenes {
 					tooltip : "It’s fine, she doesn’t have to.",
 				});
 				options.push({ nameStr : "Taste",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("<i>“Okay,”</i> she replies with a smile, moving her tail within your reach.", parse);
 						Text.NL();
@@ -1626,7 +1626,7 @@ export namespace LaylaScenes {
 					// [Yes][No][Taste]
 					const options: IChoice[] = [];
 					options.push({ nameStr : "Yes",
-						func() {
+						func: () => {
 							Text.Clear();
 							Text.Add("She's okay with that?", parse);
 							Text.NL();
@@ -1653,7 +1653,7 @@ export namespace LaylaScenes {
 						tooltip : "Well, if she’s really okay with it...",
 					});
 					options.push({ nameStr : "No",
-						func() {
+						func: () => {
 							Text.Clear();
 							Text.Add("You politely decline.", parse);
 							Text.NL();
@@ -1664,7 +1664,7 @@ export namespace LaylaScenes {
 						tooltip : "You’d rather not, thanks for the offer.",
 					});
 					options.push({ nameStr : "Taste",
-						func() {
+						func: () => {
 							Text.Clear();
 							Text.Add("You have something more interesting to stick in there than a finger, if she’s okay with that?", parse);
 							Text.NL();
@@ -1738,7 +1738,7 @@ export namespace LaylaScenes {
 							const options: IChoice[] = [];
 							if (player.FirstVag()) {
 								options.push({ nameStr : "Pussy",
-									func() {
+									func: () => {
 										Text.Clear();
 										Text.Add("Well, it’s only right she learns what it’s like to be on the other side of vaginal.", parse);
 										Text.NL();
@@ -1751,7 +1751,7 @@ export namespace LaylaScenes {
 								});
 							}
 							options.push({ nameStr : "Ass",
-								func() {
+								func: () => {
 									Text.Clear();
 									Text.Add("You think she should learn about the pleasures of anal, if she’s going to practice pitching.", parse);
 									Text.NL();
@@ -1774,7 +1774,7 @@ export namespace LaylaScenes {
 							tooltip : "It’s only fair she gets her chance too. Plus you’d be a failure as a teacher if you didn’t teach her how to pitch too.",
 						});
 						options.push({ nameStr : "Later",
-							func() {
+							func: () => {
 								Text.Clear();
 								Text.Add("<i>“Oh? Sure,”</i> she replies with a smile.", parse);
 								Text.NL();
@@ -1834,7 +1834,7 @@ export namespace LaylaScenes {
 			// [Tail fuck][Lick’n suck][Blow her]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Tail fuck",
-				func() {
+				func: () => {
 					Text.Clear();
 					parse.t = player.HasLegs() ? "thigh" : "midriff";
 					Text.Add("<i>“Okay!”</i> Layla replies cheerfully, getting off your back and moving her tail to encircle your [t].", parse);
@@ -1905,7 +1905,7 @@ export namespace LaylaScenes {
 			});
 			if (layla.sexlevel >= 5) {
 				options.push({ nameStr : "Lick’n suck",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("<i>“Okay!”</i> she exclaims happily, moving to grope your [butt].", parse);
 						Text.NL();
@@ -1996,7 +1996,7 @@ export namespace LaylaScenes {
 				});
 			}
 			options.push({ nameStr : "Blow her",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“Okay!”</i> she says enthusiastically, circling around to sit down before you. She spreads her legs, giving you a perfect view of her throbbing maleness and her sopping wet pussy, then supporting herself on her hands, thrusts her chest out proudly as she waits for you to begin.", parse);
 					Text.NL();
@@ -2118,7 +2118,7 @@ export namespace LaylaScenes {
 				// [Yes][No]
 				const options: IChoice[] = [];
 				options.push({ nameStr : "Yes",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("She leans in toward you, caressing your cheek, as she wraps your lips in a passionate kiss, thrusting her tongue inside and exploring your mouth as her flexible organ digs ever closer to your throat.", parse);
 						Text.NL();
@@ -2129,7 +2129,7 @@ export namespace LaylaScenes {
 					tooltip : "Of course she can kiss you.",
 				});
 				options.push({ nameStr : "No",
-					func() {
+					func: () => {
 						Text.Clear();
 						if (layla.sexlevel >= 3) {
 							Text.Add("<i>“Then... would you like my tail instead?”</i>", parse);
@@ -2138,7 +2138,7 @@ export namespace LaylaScenes {
 							// [Yes][No]
 							const options: IChoice[] = [];
 							options.push({ nameStr : "Yes",
-								func() {
+								func: () => {
 									Text.Clear();
 									Text.Add("She smiles and turns her attention back to your nipples, gently biting, forcing a moan out of you as the pain mixes with pleasure. Her tail enters your field of vision, and you watch as it splits open, a single drop of its tasty juices landing on your lips.", parse);
 									Text.NL();
@@ -2150,7 +2150,7 @@ export namespace LaylaScenes {
 								tooltip : "How can you possibly resist an offer like that?",
 							});
 							options.push({ nameStr : "No",
-								func() {
+								func: () => {
 									Text.Clear();
 									Text.Add("<i>“Okay,”</i> she says, leaning over and licking your nipples once more before resuming her sucking.", parse);
 									Text.NL();
@@ -2179,7 +2179,7 @@ export namespace LaylaScenes {
 				// [Accept][Push away]
 				const options: IChoice[] = [];
 				options.push({ nameStr : "Accept",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("You open your mouth without hesitation, and immediately Layla’s tail glides inside. Wrapping your lips around its girth, you suckle happily, feeling the warming, mint-tinged goo trickling down your throat.", parse);
 						Text.NL();
@@ -2189,7 +2189,7 @@ export namespace LaylaScenes {
 					tooltip : "Let’s just say ‘aahhh’ already.",
 				});
 				options.push({ nameStr : "Push away",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("With a grimace, you raise a hand to the oozing tail, pushing it away from your face with the back of your hand.", parse);
 						Text.NL();
@@ -2203,7 +2203,7 @@ export namespace LaylaScenes {
 						// [Yes][No]
 						const options: IChoice[] = [];
 						options.push({ nameStr : "Yes",
-							func() {
+							func: () => {
 								Text.Clear();
 								Text.Add("Layla smiles and leans over you, pressing her lips to yours.", parse);
 								Text.NL();
@@ -2215,7 +2215,7 @@ export namespace LaylaScenes {
 							tooltip : "Of course you can.",
 						});
 						options.push({ nameStr : "No",
-							func() {
+							func: () => {
 								Text.Clear();
 								Text.Add("<i>“Okay,”</i> she replies in disappointment, returning to your nipples.", parse);
 								Text.NL();
@@ -2284,7 +2284,7 @@ export namespace LaylaScenes {
 			// [Yes] [No]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Yes",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Nodding emphatically, Layla grips your [hips], thrusting forcefully once, twice, then finally hilting inside you one last time as her orgasm finally overtakes her, pumping a torrent of white, hot chimera seed up your butt.", parse);
 					Text.NL();
@@ -2344,7 +2344,7 @@ export namespace LaylaScenes {
 				tooltip : "After everything else, it’d be a waste to not let her knot you!",
 			});
 			options.push({ nameStr : "No",
-				func() {
+				func: () => {
 					Text.Clear();
 					LaylaScenes.SexCatchAnalCont3(parse);
 				}, enabled : true,
@@ -2484,7 +2484,7 @@ export namespace LaylaScenes {
 				const options: IChoice[] = [];
 				options.push({ nameStr : "Hands",
 					tooltip : "You’re quite confident she can work wonders with her fingers...",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("Your gaze drifts to her hands, and you tell her that a handjob would sure feel nice.", parse);
 						Text.NL();
@@ -2530,7 +2530,7 @@ export namespace LaylaScenes {
 				});
 				options.push({ nameStr : "Tail",
 					tooltip : "Having her stroke you with her tail would be pretty hot...",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("Watching the chimera’s reptilian appendage with its hidden surprise idly flicking through the air, your decision is easy to make. You tell Layla that you’d love to see what she can do by wrapping that tail of hers around your cock and jerking you off with it.", parse);
 						Text.NL();
@@ -2590,7 +2590,7 @@ export namespace LaylaScenes {
 				});
 				options.push({ nameStr : "Tentacles",
 					tooltip : "How can you pass up the kinky fun of tentacles...",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("As your gaze sweeps over Layla’s curvaceous form, you can’t help but remember the great surprise she conceals under her skin: the waving forest of writhing appendages she can sprout with a moment’s thought. From the depths of your mind surfaces a mental image of her tentacles sweeping over your body, molesting your cock[s] and every other sensitive spot they can touch.", parse);
 						Text.NL();
@@ -2657,7 +2657,7 @@ export namespace LaylaScenes {
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Finger",
 			tooltip : "Why get fancy for this? Your fingers should be just fine for getting her all fired up.",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Decision made, you close the distance between yourself and the chimera. You reach out with one arm, draping it over Layla’s shoulders before pulling her into a kiss. With her usual innocence, Layla melts into your mouth, gently parting her lips to let your tongue sneak inside her mouth. Her taste washes over your senses, making your body prickle with anticipation.", parse);
 				Text.NL();
@@ -2703,7 +2703,7 @@ export namespace LaylaScenes {
 		});
 		options.push({ nameStr : "Eat her out",
 			tooltip : "A nice bit of muff-diving should be just the thing to fire her up for the real deal.",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Having made your decision, you reach out and place a hand on Layla’s shoulder before telling the chimera to lie down. Layla quietly nods her understanding and drops to the ground, your hand wrapped around her shoulders to make the descent as gentle as possible.", parse);
 				Text.NL();
@@ -2755,7 +2755,7 @@ export namespace LaylaScenes {
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Cock",
 			tooltip : "It’s right in front of you, so you may as well give it a lick.",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Decision made, you lower your face back between Layla’s thighs once more. Your [tongue] slips from between your lips and you daintily lick along Layla’s slit once more. You glide along her length, steadily working your way higher up her mound until your tongue is no longer dabbing at her folds. Instead, you knowingly caress the spot where her cock lies concealed, brushing it with your [tongueTip] before withdrawing.", parse);
 				Text.NL();
@@ -2800,7 +2800,7 @@ export namespace LaylaScenes {
 		});
 		options.push({ nameStr : "Tail-cock",
 			tooltip : "There’s plenty more fun to be had with her tail.",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("The sight of the aroused chimera’s tail flicking through the corner of your vision cements your desire. Adjusting yourself to free a hand, you tell Layla to give you her tail-cock.", parse);
 				Text.NL();
@@ -2847,7 +2847,7 @@ export namespace LaylaScenes {
 		});
 		options.push({ nameStr : "Finish up",
 			tooltip : "No, there’s no need for further teasing here.",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("After a moment’s thought, you shake your head; no need to go overboard. Layla’s soft panting fills your ears as the aroused chimera stares up at you expectantly; that’s all the evidence you need that it’s time to get things started for real.", parse);
 				Gui.PrintDefaultOptions();
@@ -2937,7 +2937,7 @@ export namespace LaylaScenes {
 				const options: IChoice[] = [];
 				options.push({ nameStr : "Allow",
 					tooltip : "Fair is fair, after all...",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("You simply nod your assent.", parse);
 						Text.NL();
@@ -2959,7 +2959,7 @@ export namespace LaylaScenes {
 				});
 				options.push({ nameStr : "Deny",
 					tooltip : "There’s only one cock going in a hole this time.",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("You can’t bring yourself to speak, and so you simply shake your head.", parse);
 						Text.NL();
@@ -2986,7 +2986,7 @@ export namespace LaylaScenes {
 				const options: IChoice[] = [];
 				options.push({ nameStr : "Allow",
 					tooltip : "She asked first, and it’s only fair, given you’re sticking her already...",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("Smiling, you tell her to go right ahead; you trust her to be gentle. Then you happily bend forward to try and capture her lips again.", parse);
 						Text.NL();
@@ -3022,7 +3022,7 @@ export namespace LaylaScenes {
 				});
 				options.push({ nameStr : "Deny",
 					tooltip : "No, this is supposed to be about you penetrating her; she can keep that cock to herself.",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("With a shake for emphasis, you tell her to put that tail away.", parse);
 						Text.NL();
@@ -3077,7 +3077,7 @@ export namespace LaylaScenes {
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Inside",
 				tooltip : "You haven’t gone through all this to waste it; aim for her womb and let fly!",
-				func() {
+				func: () => {
 					Text.Clear();
 					parse.tp = opts.TailPeg ? Text.Parse(" As if in return, she renews her own thrusting into your increasingly sloppy [anus].", parse) : "";
 					Text.Add("Mind made up, you slam yourself back into Layla’s pussy with a renewed vigor.[tp] The two of you grunt, gasp and groan in unison as your hips slam together, pleasure crackling through your body.", parse);
@@ -3150,7 +3150,7 @@ export namespace LaylaScenes {
 			});
 			options.push({ nameStr : "Pull out",
 				tooltip : "Yank your cock out and see if you can paint Layla white with it!",
-				func() {
+				func: () => {
 					Text.Clear();
 					parse.lc = opts.LCock ? ", absently frotting her own cock in the bargain" : "";
 					Text.Add("Decision made, you pull as hard as you can on your next thrust out of Layla. The chimera’s disappointed mewl gives way to a croon of delight as you thrust back between her thighs; not penetrating, but roughly grinding your sloppy, juice-smeared dick over her cunt[lc].", parse);
@@ -3236,7 +3236,7 @@ export namespace LaylaScenes {
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Frig",
 				tooltip : "Let’s see what she can do with those long, slender fingers of hers.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You slowly crawl forward until you are level with Layla’s face, putting your overheated [vag] within easy reach. You reach out and possessively clasp one of Layla’s hands, bringing it around to rest atop your cunt. A lustful grin spreads across your lips as you tell Layla to show you what her fingers can do.", parse);
 					Text.NL();
@@ -3267,7 +3267,7 @@ export namespace LaylaScenes {
 			});
 			options.push({ nameStr : "Lick",
 				tooltip : "That tongue of hers is just made for licking pussy.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Licking your own lips salaciously at the thought, you lazily curl around and start to creep forward. You crawl your way slowly and deliberately across the supine chimera’s body, intent on your goal.", parse);
 					if (opts.LCock) {
@@ -3305,7 +3305,7 @@ export namespace LaylaScenes {
 			});
 			options.push({ nameStr : "Cock",
 				tooltip : "You gave her your ‘cock’, so she can give you hers now.",
-				func() {
+				func: () => {
 					Text.Clear();
 					if (opts.LCock) {
 						Text.Add("The sight of the chimera’s indigo-fleshed phallus lying limply against her belly gives you pause. You can’t do anything with her in <i>that</i> sort of shape! But... that’s easily corrected. As a mischievous grin crosses your face, you reach out and tenderly clasp Layla’s cock.", parse);
@@ -3370,7 +3370,7 @@ export namespace LaylaScenes {
 			});
 			options.push({ nameStr : "Tentacles",
 				tooltip : "How can you pass up the extravaganza of tentacles?",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Grinning widely, you inform the chimera you feel adventurous. You want her to show you just what she can do with all those yummy tentacles of hers.", parse);
 					Text.NL();

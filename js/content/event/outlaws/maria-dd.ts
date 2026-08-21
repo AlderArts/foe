@@ -133,7 +133,7 @@ export namespace DeadDropScenes {
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Yes",
 			tooltip : "Yeah. Anything need picking up or dropping off?",
-			func() {
+			func: () => {
 
 				// PARTY STUFF
 				maria.DDtimer = new Time(0, 0, 2, 0, 0);
@@ -183,7 +183,7 @@ export namespace DeadDropScenes {
 		});
 		options.push({ nameStr : "No",
 			tooltip : "Actually, not right now.",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Maria shrugs and rolls her eyes. <i>“You were just asking? Well, there’s always work for me and mine to be done. Thanks for your concern, but if you’re not about to help then the next best thing you can do is stay out of our way.</i>", parse);
 				Text.NL();
@@ -216,7 +216,7 @@ export namespace DeadDropScenes {
 			});
 			options.push({ nameStr : "No",
 				tooltip : "Not just yet.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“Right.”</i> Is it your imagination, or does Maria look relieved? <i>“Get yourself sorted out, then come find me again when you’re done.”</i>", parse);
 					Text.NL();
@@ -316,7 +316,7 @@ export namespace DeadDropScenes {
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Pay",
 				tooltip : "Offer to buy back the package for ten coins.",
-				func() {
+				func: () => {
 					party.coin -= 10;
 
 					maria.flags.DD |= MariaFlags.DeadDrops.PaidKid;
@@ -357,7 +357,7 @@ export namespace DeadDropScenes {
 			});
 			options.push({ nameStr : "No",
 				tooltip : "You’re not going to let this little brat hold your goods ransom.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Pay for what’s yours? Oh, the cheek of that little squirt; he’s not ransoming a single coin out of you! Still, there’s got to be some way that you can get the drop on him, and just chasing the little brat like this isn’t going to yield much in the way of results. While you have to keep on getting lucky to continue hounding him, the street urchin just has to get lucky once to give you the slip; if you’re not going to give in to his demands, you’ll need to act fast.", parse);
 					Text.NL();
@@ -584,7 +584,7 @@ export namespace DeadDropScenes {
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Yes",
 				tooltip : "Join in for a hand or two.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“All right, then, I’m out. Give my spot to the newcomer.”</i>", parse);
 					Text.NL();
@@ -602,7 +602,7 @@ export namespace DeadDropScenes {
 			});
 			options.push({ nameStr : "No",
 				tooltip : "Sit things out and wait for the dockhands to be done.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“Well, it’s your call,”</i> comes the reply. <i>“I guess we don’t mind you watching, now that we know you’re not a snitch for the boss, or even worse, the watch. But fair warning - we’ll be a little while, so you might want to make yourself comfortable.”</i>", parse);
 					Text.Flush();
@@ -636,9 +636,7 @@ export namespace DeadDropScenes {
 				players.push(dockworker);
 			}
 
-			const onEnd = function() {
-				const that = this;
-
+			const onEnd = () => {
 				const parse: IParse = {
 					playername : player.name,
 				};
@@ -648,7 +646,7 @@ export namespace DeadDropScenes {
 				TimeStep({minute: 5});
 
 				Text.NL();
-				if (that.winner === player) {
+				if (this.winner === player) {
 					DeadDropScenes.Docks.CavalcadeWin();
 				} else {
 					Text.Add("<i>“Want another try, stranger?”</i> the dealer asks, smiling invitingly.", parse);
@@ -657,14 +655,14 @@ export namespace DeadDropScenes {
 					// [Sure][Nah]
 					const options: IChoice[] = [];
 					options.push({ nameStr : "Sure",
-						func() {
+						func: () => {
 							Text.NL();
 							DeadDropScenes.Docks.CavalcadePrep();
 						}, enabled : party.coin >= coin,
 						tooltip : "Deal another round!",
 					});
 					options.push({ nameStr : "Nah",
-						func() {
+						func: () => {
 							Text.Clear();
 							Text.Add("<i>“Don’t worry about it too much,”</i> one of the dockhands tells you, clapping you on the shoulder. <i>“That last one was a pretty decent game. Why don’t you have a seat and wait for us to be done?”</i>", parse);
 							Text.Flush();
@@ -780,7 +778,7 @@ export namespace DeadDropScenes {
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Dive",
 				tooltip : "Dive into the lake water. If it’s good enough for the dockhands, it’s good enough for you.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Without thinking twice, you toss the crate aside and ease yourself over the edge and into the lake’s clear water. Since the dock workers are doing it, it can’t be that bad, can it? At the very least, it’s got to be better than being stopped by a bunch of overarmed, pompous prats looking for a shakedown.", parse);
 					Text.NL();
@@ -813,7 +811,7 @@ export namespace DeadDropScenes {
 			});
 			options.push({ nameStr : "Walk Past",
 				tooltip : "Try to mingle with the crowd and hope you don’t get called out.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Quickly dropping the crate and stowing it back with the others, you make to cross the pier at a brisk pace, hoping to join the crowd fleeing along the waterfront. Sure, you’ll be a little behind considering the late start you’ve had, but once you catch up with the flow, you ought to be able to disappear into the slums and hide out until the Royal Guards have gone.", parse);
 					Text.NL();
@@ -914,7 +912,7 @@ export namespace DeadDropScenes {
 			});
 			options.push({ nameStr : "Hide",
 				tooltip : "Find a nice place to hide and be out of it.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("From the looks of it, you won’t be able to cross the pier in time to blend in with the fleeing crowd - or at least, not quick enough that you can be sure you can make a clean getaway. Fine, if you’re stuck here, then you might as well make the most of it. The pier is filled with plenty of cargo from river barges waiting to be offloaded to the warehouses or brought on board, and you make a quick decision. ", parse);
 
@@ -1005,7 +1003,7 @@ export namespace DeadDropScenes {
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Pay",
 				tooltip : "Just pay their bloody price and be done with it. Fifteen coins should do it.",
-				func() {
+				func: () => {
 					party.coin -= 15;
 
 					Text.Clear();
@@ -1036,7 +1034,7 @@ export namespace DeadDropScenes {
 			});
 			options.push({ nameStr : "Service",
 				tooltip : "You may not want to pay or have the money, but there’s certainly something else you can do…",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Moments tick by, and the guard’s gaze grows ever stonier as you fail to pony up the expected bribe. <i>“Don’t have the money, eh? Well, good thing the law’s made allowances for those who can’t meet their fines. Maybe a night or two behind bars will change your mind on that.”</i>", parse);
 					Text.NL();
@@ -1123,7 +1121,7 @@ export namespace DeadDropScenes {
 			if (GAME().rigard.Krawitz.Q >= RigardFlags.KrawitzQ.HeistDone) {
 				options.push({ nameStr : "Royals",
 					tooltip : "You have the Twins’ letter with you, don’t you? Time to turn the tables.",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("Well, the Royal Guards mean to throw their authority around, don’t they? Maybe they’ll think twice after seeing this. Grimly, you reach into your possessions and draw out your royal pass, opening the envelope and holding out the contents for the bastard to see, although you make sure to keep it out of his reach.", parse);
 						Text.NL();

@@ -94,7 +94,7 @@ export namespace VenaScenes {
 
         const options: IChoice[] = [];
         options.push({ nameStr : "Talk",
-            func() {
+            func: () => {
                 Text.Clear();
                 TimeStep({minute: 5});
                 Text.Add("You make an attempt at catching Vena’s attention, trying to divert her mind from sex for a few moments. Caressing her cheek, you ask if she wants to answer a few questions.", parse);
@@ -146,7 +146,7 @@ export namespace VenaScenes {
         // [Herself][Lagon][Ophelia][Roa][The Pit][Back]
         const options: IChoice[] = [];
         options.push({ nameStr : "Herself",
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Add("<i>“Vena is loyal slut,”</i> she boasts proudly. <i>“Makes lots and lots of babies for my mate.”</i>", parse);
                 Text.NL();
@@ -159,7 +159,7 @@ export namespace VenaScenes {
             tooltip : "Ask Vena about herself and her past.",
         });
         options.push({ nameStr : "Lagon",
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Add("<i>“Vena loves her mate,”</i> the matriarch replies staunchly. <i>“Births many children for him!”</i> She isn’t lying, you can tell, she really does feel this way about the tyrant king. Perhaps she doesn’t understand her current circumstances.", parse);
                 Text.NL();
@@ -172,7 +172,7 @@ export namespace VenaScenes {
             tooltip : "How does she feel about Lagon? How did he rise to his throne?",
         });
         options.push({ nameStr : "Ophelia",
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Add("<i>“Good girl,”</i> Vena says proudly. <i>“Helps her father much. Want to see more of her...”</i>", parse);
                 Text.NL();
@@ -188,7 +188,7 @@ export namespace VenaScenes {
         });
         if (burrows.flags.Access >= BurrowsFlags.AccessFlags.Stage3) {
             options.push({ nameStr : "Roa",
-                func() {
+                func: () => {
                     Text.Clear();
                     Text.Add("<i>“Roa is good boy!”</i> Vena replies. <i>“Often kept me company here in Pit.”</i> She licks her lips, and one of her hands absently strays to her massive cock. <i>“Would… love keep him company again.”</i>", parse);
                     if (party.InParty(roa)) {
@@ -202,7 +202,7 @@ export namespace VenaScenes {
             });
         }
         options.push({ nameStr : "The Pit",
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Add("<i>“This my home, everyone nice here,”</i> she proclaims, nuzzling her children. <i>“They care for Vena, give me all the food and warmth and sex I need.”</i>", parse);
                 Text.Flush();

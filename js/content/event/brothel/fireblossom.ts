@@ -147,14 +147,14 @@ export namespace FireblossomScenes {
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Enter",
 				tooltip : "Continue exploring Fireblossom’s world from where you left off.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Gui.PrintDefaultOptions();
 				}, enabled : !fireblossom.ReachedEnd(),
 			});
 			options.push({ nameStr : "Reset",
 				tooltip : "Start over from the beginning. Now that you’ve seen part of it, perhaps you’ll act differently this time around.",
-				func() {
+				func: () => {
 					fireblossom.ResetState();
 
 					Text.Clear();
@@ -287,7 +287,7 @@ export namespace FireblossomScenes {
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Protest",
 				tooltip : "Give this grabby maid a harsh telling off. She clearly doesn’t know her place!",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Now <i>this</i> is going too far! Who does she think she is!?", parse);
 					Text.NL();
@@ -320,7 +320,7 @@ export namespace FireblossomScenes {
 			});
 			options.push({ nameStr : "Don’t",
 				tooltip : "Stifle your protests. She might be a bit grabby, but she’s good with her hands.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You glower, but nod faintly.", parse);
 					Text.NL();
@@ -339,7 +339,7 @@ export namespace FireblossomScenes {
 			});
 			options.push({ nameStr : "Encourage",
 				tooltip : "That thing she did… can she do it again?",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You grudgingly admit that you’ve indeed never lain with a man. Nor a woman, you add, cheeks flushed, not quite sure what’s gotten over you. There’s a slight change in Xari’s movements; slight, but oh so noticeable to your sensitive skin. You shiver, biting your lip as you once again feel her fingers trailing lower down across your stomach to that most secret of spots, her other hand fondling your breast.", parse);
 					Text.NL();
@@ -431,7 +431,7 @@ export namespace FireblossomScenes {
 					const options: IChoice[] = [];
 					options.push({ nameStr : "Give in",
 						tooltip : "It’s no use, you can’t fight him.",
-						func() {
+						func: () => {
 							fireblossom.flags.Outset = FireblossomFlags.Outset.Draxen;
 
 							FireblossomScenes.S1Draxen();
@@ -439,7 +439,7 @@ export namespace FireblossomScenes {
 					});
 					options.push({ nameStr : "Scheme",
 						tooltip : "You can’t fight back openly, not here and now - you can’t even think straight in Draxen’s presence. You must find a way to get away from him.",
-						func() {
+						func: () => {
 							fireblossom.flags.Outset = FireblossomFlags.Outset.Rakkat;
 
 							FireblossomScenes.S1Rakkat();
@@ -447,7 +447,7 @@ export namespace FireblossomScenes {
 					});
 					options.push({ nameStr : "Protest",
 						tooltip : "Invoke your right as princess of Galenta, demand that this outrage is stopped!",
-						func() {
+						func: () => {
 							fireblossom.flags.Outset = FireblossomFlags.Outset.Grex;
 
 							FireblossomScenes.S1Grex();
@@ -649,7 +649,7 @@ export namespace FireblossomScenes {
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Wait for him",
 				tooltip : "For now, do as he says. Wait and observe.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Your stomach flutters as you shrug yourself out of Xari’s dress. Peeking out across the garden, you try to see if Rakkat is spying on you, but he seems to be completely absorbed in his maps and reports. You sigh and flop down on the bed, brooding over your situation. There’s need for careful observation and planning; before you can act and start twisting him to your liking, you must know how he thinks. An irksomely daunting task, thanks to the General’s polite, stony expression.", parse);
 					Text.NL();
@@ -680,7 +680,7 @@ export namespace FireblossomScenes {
 			});
 			options.push({ nameStr : "Seduce",
 				tooltip : "If you are ever going to hold any sway over this man, you are going to have to be the first one to move.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You throw a thoughtful glance across the garden. No. There is no sense in antagonizing this man. He was only following orders, and truth be told, the conquest of Galenta was a lot less bloody than it could have been.", parse);
 					Text.NL();
@@ -736,7 +736,7 @@ export namespace FireblossomScenes {
 			});
 			options.push({ nameStr : "Kill him",
 				tooltip : "There’s no way this is going to end well… but Rakkat must pay for his crimes.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("A quick glance across the courtyard; Rakkat is busy in his studies, and doesn’t appear to be monitoring your movements. No matter how much you try, you can’t accept this man as your master. You retreat back into the common room, eyes alighting on the General’s weapon stand.", parse);
 					Text.NL();
@@ -959,7 +959,7 @@ export namespace FireblossomScenes {
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Survey",
 			tooltip : "Look through Grex’s chambers.",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("The room is bigger than what you thought a regular soldier would have, even counting the size of the drakes; it really seems like Grex occupies some position of power here. That, or he’s murdered the previous owner of the quarters. Much of it is occupied by a low drake-sized bed lining one of the sides of the room. Plain, but at least it’s not a bale of hay. Along one side of the wall is Grex’s armory, containing a selection of various weapons.", parse);
 				if (fireblossom.flags.Outset === FireblossomFlags.Outset.RakkatToGrex) {
@@ -978,7 +978,7 @@ export namespace FireblossomScenes {
 		});
 		options.push({ nameStr : "Explore",
 			tooltip : "Slip out into the corridor and see what else there is around here.",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Feeling a strange bravado - you’re pretty much already in the worst situation you could be, anyways - you slip back out into the corridor, peering around. Back the way you came, you see the backs of two drakes. Bad idea. The other way, you hear the sounds of carousing, but at least you don’t see anyone moving about. Deciding to chance it, you creep down the corridor.", parse);
 				Text.NL();
@@ -1006,7 +1006,7 @@ export namespace FireblossomScenes {
 		});
 		options.push({ nameStr : "Wait",
 			tooltip : "Best not get into even more trouble. Hopefully Qin will be back soon, then you can ask her how to get out of here.",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You hate being cramped in here, the smell of Grex all around you, but going wandering is bound to end badly. Sighing dejectedly, you settle down and wait for Qin’s return. Minutes tick by, but they feel more like hours. Just when you are beginning to despair, the kobold returns. She’s walking a bit unsteadily, and there are stains of sticky white fluid dripping down from her maw.", parse);
 				Text.NL();

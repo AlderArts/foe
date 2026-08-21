@@ -235,12 +235,10 @@ export class Player extends Entity {
 	}
 
 	public LactationProgress(oldMilk: number, newMilk: number, lactationRate: number) {
-		const player: Player = this;
-
 		if (oldMilk < 0.5 && newMilk >= 0.5) {
 			Gui.Callstack.unshift(() => {
 				const parse: IParse = {
-					breasts : player.FirstBreastRow().Short(),
+					breasts : this.FirstBreastRow().Short(),
 				};
 				Text.Clear();
 				Text.Add("A new weight in your [breasts] draws your attention, and you gently test them with a finger. While they haven’t actually <i>grown</i> that much, they’re definitely fuller, perkier and more tender than before; if you close your eyes and lay a palm across the curve of one, you can feel the faint pulsing of your baby feeders hard at production. At least you’ve still got some way to go until they’re full up.", parse);
@@ -251,8 +249,8 @@ export class Player extends Entity {
 		if (oldMilk < 0.9 && newMilk >= 0.9) {
 			Gui.Callstack.unshift(() => {
 				const parse: IParse = {
-					breasts() { return player.FirstBreastRow().Short(); },
-					nips: player.FirstBreastRow().NipsShort(),
+					breasts() { return this.FirstBreastRow().Short(); },
+					nips: this.FirstBreastRow().NipsShort(),
 				};
 
 				Text.Clear();
@@ -265,8 +263,8 @@ export class Player extends Entity {
 		if (oldMilk < 1 && newMilk >= 1 && lactationRate !== 0) {
 			Gui.Callstack.unshift(() => {
 				const parse: IParse = {
-					breasts() { return player.FirstBreastRow().Short(); },
-					nips: player.FirstBreastRow().NipsShort(),
+					breasts() { return this.FirstBreastRow().Short(); },
+					nips: this.FirstBreastRow().NipsShort(),
 				};
 
 				Text.Clear();
@@ -295,7 +293,7 @@ export class Player extends Entity {
 		if (oldMilk > 0 && newMilk <= 0) {
 			Gui.Callstack.unshift(() => {
 				const parse: IParse = {
-					nips: player.FirstBreastRow().NipsShort(),
+					nips: this.FirstBreastRow().NipsShort(),
 				};
 
 				Text.Clear();
@@ -335,14 +333,12 @@ export class Player extends Entity {
 	}
 
 	public PregnancyProgess(womb: Womb, slot: number, oldProgress: number, progress: number) {
-		const player: Player = this;
-
 		if (!womb) { return; }
 		const num = womb.litterSize;
-		const breasts = player.FirstBreastRow().Size() >= 2;
+		const breasts = this.FirstBreastRow().Size() >= 2;
 
 		const parse: IParse = {};
-		parse.belly = player.StomachDesc();
+		parse.belly = this.StomachDesc();
 
 		if (progress > PregnancyLevel.Level1 && oldProgress <= PregnancyLevel.Level1) {
 			Gui.Callstack.unshift(() => {
@@ -443,7 +439,7 @@ export class Player extends Entity {
 					Text.Add("You have a sudden urge to cradle your [belly].", parse);
 				}, 1.0, () => true);
 				scenes.AddEnc(() => {
-					parse.breasts = player.FirstBreastRow().Short();
+					parse.breasts = this.FirstBreastRow().Short();
 					Text.Add("Your [breasts] are starting to feel fuller, though not overly so yet.", parse);
 				}, 1.0, () => breasts);
 				scenes.AddEnc(() => {
@@ -483,7 +479,7 @@ export class Player extends Entity {
 					Text.Add("Rubbing your [belly] gently, you’re made distinctly aware of the fact that your pregnancy is approaching its end.", parse);
 				}, 1.0, () => true);
 				scenes.AddEnc(() => {
-					parse.breasts = player.FirstBreastRow().Short();
+					parse.breasts = this.FirstBreastRow().Short();
 					Text.Add("The pressure within your [breasts] is starting to get a little intense - you’d probably leak if someone squeezed them…", parse);
 				}, 1.0, () => breasts);
 				scenes.AddEnc(() => {
@@ -560,7 +556,6 @@ export class Player extends Entity {
 
 	// Pregnancy TODO
 	public PregnancyTrigger(womb: Womb, slot: number) {
-		const player: Player = this;
 		const party: Party = GAME().party;
 
 		if (!womb) { return; }
@@ -570,12 +565,12 @@ export class Player extends Entity {
 			let parse: IParse = {
 
 			};
-			parse = player.ParserTags(parse);
+			parse = this.ParserTags(parse);
 
 			const num  = womb.litterSize;
 			const race = womb.race;
 			const egg  = womb.IsEgg();
-			const lact = player.FirstBreastRow().Size() >= 2;
+			const lact = this.FirstBreastRow().Size() >= 2;
 
 			parse = Text.ParserPlural(parse, num > 1);
 
@@ -623,9 +618,9 @@ export class Player extends Entity {
 			Text.NL();
 
 			// #Labour block (Birthsize comes into play here)
-			let birthsize = player.body.torso.hipSize.Get() / 4;
+			let birthsize = this.body.torso.hipSize.Get() / 4;
 			birthsize /= womb.Size() || 1;
-			if (player.HasPerk(Perks.Breeder)) { birthsize *= 1.5; }
+			if (this.HasPerk(Perks.Breeder)) { birthsize *= 1.5; }
 
 			Text.Add("It’s not long before labor begins in earnest. Even as you pant and puff, you can feel your contractions coming on more strongly and at quicker intervals, picking up the pace even as your cervix begins to dilate to allow new life to enter the world.", parse);
 			Text.NL();
@@ -674,7 +669,7 @@ export class Player extends Entity {
 			// #Nursing block - fallback
 			// else if TODO
 			if (!egg && lact) {
-				const milk = player.Milk();
+				const milk = this.Milk();
 
 				parse.m = num > 1 ? " one at a time" : "";
 				parse.ren = num > 1 ? "ren" : "";
@@ -689,7 +684,7 @@ export class Player extends Entity {
 					Text.Add("With your [breasts] being as bountiful as they are, there’s no worry about you not being able to feed your new brood. No matter how much your nipples are squeezed, milked and suckled, there’s a seemingly inexhaustible supply of nourishment to be had, an overflowing font of rich cream. While your [breasts] are a little less tender now, you have a feeling they’ll probably fill right back up soon… ", parse);
 				}
 
-				player.MilkDrain(15);
+				this.MilkDrain(15);
 
 				Text.NL();
 				Text.Add("Hugging your newborn[s], you burp the little one[s] and turn your attention to what needs to be done next.", parse);
@@ -715,7 +710,7 @@ export class Player extends Entity {
 
 		const options: IChoice[] = [];
 		options.push({ nameStr: "Fantasize",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("[Placeholder] You dream about sexy things.");
 				Text.Flush();
@@ -728,13 +723,13 @@ export class Player extends Entity {
 			tooltip : "Rest a while and dream of sex.",
 		});
 		options.push({ nameStr: "Release",
-			func() {
+			func: () => {
 				MasturbationScenes.Entry();
 			}, enabled : true,
 			tooltip : "Pleasure yourself.",
 		});
 		options.push({ nameStr: "Meditate",
-			func() {
+			func: () => {
 				MeditationScenes.Entry();
 			}, enabled : true,
 			tooltip : "Calm yourself through meditation.",
@@ -742,7 +737,7 @@ export class Player extends Entity {
 		// Equip, stats, job, switch
 		player.InteractDefault(options, switchSpot, true, true, true, false);
 		options.push({ nameStr: "Gender",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Out(`How do you wish to present yourself to the world?`);
 				Text.Flush();

@@ -107,8 +107,6 @@ export namespace LagomorphScenes {
 		const party: Party = GAME().party;
 		const burrows: Burrows = GAME().burrows;
 
-		const enc = this;
-
 		let parse: IParse = {
 			himherthem : party.Num() > 1 ? "them" : player.mfFem("him", "her"),
 		};
@@ -131,7 +129,7 @@ export namespace LagomorphScenes {
 		scenes.Get();
 		Text.NL();
 
-		if (enc.brainy) {
+		if (this.brainy) {
 			Text.Add("<i>“Oh, will you all cut it out!”</i> screeches an indignant female voice, clearly quite unhappy with what is going on. From amongst the mass of bodies comes the figure of a female rabbit-morph, quite modestly dressed in comparison. She’s actually wearing clothes, however rudimentary in nature - little more than an improvised dress crudely sewn from scraps of salvaged cloth, and a pair of spectacles perched on her little pink nose.", parse);
 			Text.NL();
 			Text.Add("She steps pointedly over one rutting pair, nose twitching in disgust. <i>“Seriously, Father sent us out on a scouting mission, not to gad about fucking each other! That’s what the Pit is for!”</i> she complains, angrily glowering about at her companions. Her gaze shifts in your direction and she starts, a gasp of shock bubbling out between her lips.", parse);
@@ -141,13 +139,13 @@ export namespace LagomorphScenes {
 			Text.Add("The kicked rabbits stir to their feet, chittering unhappily even as the female’s curses rouse others nearby to join you. Still, many more bunnies continue to happily fuck each other, the spectacle-wearing bunny cursing them even as she brandishes a stick in your direction.", parse);
 			Text.NL();
 			Text.Add("You have a fight on your hands!", parse);
-		} else if (enc.brute) {
+		} else if (this.brute) {
 			Text.Add("<i>“Good...”</i> rumbles an alarmingly deep voice, drawing your attention to the owner. It’s a rabbit... but definitely not like the other bunnies around him. This one is a monster, easily twice the size of his compatriots, muscles bulging visibly beneath his tangled pelt. He is holding a smaller bunny in his arms, brutally thrusts into it twice, then lets out a veritable roar of pleasure. The lagomorph caught in the brute’s arm squeals in ecstasy, the sound barely audible over the brute’s roar. Sperm gushes messily from the smaller rabbit’s rear, plastering the brute’s thighs even as the bulk of it distends the rabbit’s stomach with a faux-pregnancy.", parse);
 			Text.NL();
 			Text.Add("Grunting casually, the bunny-brute pulls the now-bloated rabbit from his loins, revealing a half-flaccid cock easily as long as his arm bobbing in the breeze, then casually dumps his former partner atop the pile of still-fucking bunnies. At once, the brute is swarmed by eager-looking morphs, all excitedly yammering, reaching their hands for his impressive piece of fuckmeat. A self-satisfied grin crosses the brute’s features as he looks idly around, clearly ready to pick his next playmate, but then he looks right at you.", parse);
 			Text.NL();
 			Text.Add("An expression of dull surprise washes over the hulking lagomorph’s features, quickly chased away by a horny grin, cock rising to its full length once again. <i>“Fresh meat!”</i> he thunders, and charges impatiently toward you, his jealous groupies swarming after him. You have to defend yourself!", parse);
-		} else if (enc.herm) {
+		} else if (this.herm) {
 			Text.Add("The mound of writhing bodies seems to ripple and heave, its ceaseless throes eventually throwing forth a stumbling figure, notably larger than its compatriots. The lagomorph sports a fine pair of heaving breasts upon her chest, but as she wades from the sea of bunnies, her mouth curled into an “O-shape” of pleasure, a distinctly masculine cock is revealed, an eager rabbit greedily suckling and lapping at it even as another humps away at her bouncy butt.", parse);
 			Text.NL();
 			Text.Add("Impatiently, the herm lagomorph wriggles, tossing back the bunny humping her ass, kicking away the one trying to suck her cock. She pouts impatiently, clearly dissatisfied with her current choice of playmates, and looks around as if hoping to see something better. She spots you and her eyes light up with glee.", parse);
@@ -156,7 +154,7 @@ export namespace LagomorphScenes {
 			Text.NL();
 			Text.Add("You can’t run; you have to fight!", parse);
 		} else {
-			parse = enc.enemy.Get(0).ParserPronouns(parse);
+			parse = this.enemy.Get(0).ParserPronouns(parse);
 
 			const scenes = new EncounterTable();
 			scenes.AddEnc(() => {
@@ -181,7 +179,7 @@ export namespace LagomorphScenes {
 
 		// Start combat
 		Gui.NextPrompt(() => {
-			enc.PrepCombat();
+			this.PrepCombat();
 		});
 	}
 
@@ -189,19 +187,18 @@ export namespace LagomorphScenes {
 		const burrows: Burrows = GAME().burrows;
 		SetGameState(GameState.Event, Gui);
 
-		const enc = this;
 		Gui.Callstack.push(() => {
 			Text.Clear();
 			const scenes = new EncounterTable();
 
 			// TODO: Add alternate loss scene that
 			scenes.AddEnc(() => {
-				LagomorphScenes.GroupLossOnPlainsToBurrows(enc);
+				LagomorphScenes.GroupLossOnPlainsToBurrows(this);
 			}, 1.0, () => burrows.flags.Access === BurrowsFlags.AccessFlags.Unknown);
 
-			if (enc.brainy) {
+			if (this.brainy) {
 				scenes.AddEnc(() => {
-					LagomorphScenes.GroupLossOnPlainsBrainy(enc);
+					LagomorphScenes.GroupLossOnPlainsBrainy(this);
 				}, 1.0, () => true);
 			} else if (scenes.encounters.length === 1) {
 				scenes.AddEnc(() => {
@@ -220,7 +217,7 @@ export namespace LagomorphScenes {
 			scenes.Get();
 		});
 
-		Encounter.prototype.onLoss.call(enc);
+		Encounter.prototype.onLoss.call(this);
 	}
 
 	export function GroupLossOnPlainsBrainy(_enc: LagomorphEncounter)  {
@@ -481,23 +478,21 @@ export namespace LagomorphScenes {
 		const burrows: Burrows = GAME().burrows;
 		SetGameState(GameState.Event, Gui);
 
-		const enc: LagomorphEncounter = this;
-
 		const parse: IParse = {
 
 		};
 
 		Gui.Callstack.push(() => {
 			Text.Clear();
-			if (enc.brute) {
+			if (this.brute) {
 				Text.Add("The large brute looks incredulous as he lands on his butt, completely defeated. The rest of his group huddles behind him, eyeing your warily… or perhaps lustily? It seems that you have impressed them quite a bit by beating their alpha, and all they really wanted was sex. Are you willing to provide it? Or perhaps you want to have them pull out some of their comrades from the pile that are more to your liking?", parse);
-			} else if (enc.brainy) {
+			} else if (this.brainy) {
 				Text.Add("The bespectacled leader of the rabbit mob sulks as you stand victorious over her.", parse);
 				Text.NL();
 				Text.Add("<i>“You big meanie, we just wanted to have some fun with you...”</i> she pouts, crossing her arms over her fluffy chest. Her companions are already distracted again, eyeing the rutting pile longingly.", parse);
 				Text.NL();
 				Text.Add("Well, if that was what they wanted, why didn’t they say so? You could have a bit of fun with this girl - she seems to be a lot sharper than her siblings - or perhaps have her companions drag someone more to your liking from the pile.", parse);
-			} else if (enc.herm) {
+			} else if (this.herm) {
 				Text.Add("The hermaphrodite bunny scowls at you sulkily, her plans to rape you shattered by your stubborn resistance. Regardless, sex is even closer on her mind than before, as you can see her male parts at full mast. She blushes a bit under your gaze, and bites her lip sultrily.", parse);
 				Text.NL();
 				Text.Add("<i>“You… fuck? Me bad girl, punish!”</i> she moans, offering herself as her natural instincts to mate take over. She’s a girl with quite a few options, sporting both a regular pussy and a more uncommon cock. You could appease the horny rabbit’s needs… or you could have her comrades drag out some rabbits more to your liking from the pile.", parse);
@@ -512,8 +507,8 @@ export namespace LagomorphScenes {
 				Text.Add("...Just what is going on here? Where are all these bunnies coming from anyways?", parse);
 
 				options.push({ nameStr : "Question",
-					func() {
-						LagomorphScenes.GroupWinInterrorigate(enc);
+					func: () => {
+						LagomorphScenes.GroupWinInterrorigate(this);
 					}, enabled : true,
 					tooltip : "Interrorigate the leader to find out more about the rabbits.",
 				});
@@ -527,13 +522,13 @@ export namespace LagomorphScenes {
 
 			group.males   = 0;
 			group.females = 0;
-			for (let i = 0, j = enc.enemy.Num(); i < j; ++i) {
-				const mob = enc.enemy.Get(i);
+			for (let i = 0, j = this.enemy.Num(); i < j; ++i) {
+				const mob = this.enemy.Get(i);
 				if (mob.Gender() === Gender.male) {   group.males++; }
 				if (mob.Gender() === Gender.female) { group.females++; }
 			}
 
-			if (!(enc.brute || enc.brainy || enc.herm)) {
+			if (!(this.brute || this.brainy || this.herm)) {
 				group.malegroup   = group.males > 0 && group.females === 0;
 				group.femalegroup = group.females > 0 && group.males === 0;
 				group.mixedgroup  = !group.malegroup && !group.femalegroup;
@@ -546,12 +541,12 @@ export namespace LagomorphScenes {
 			}
 
 			// Brute TODO
-			if (enc.brute) {
+			if (this.brute) {
 				// [Fuck Him][Vaginal Ride][Anal Ride]
 				if (player.FirstCock() || player.Strapon()) {
 					options.push({ nameStr : "Fuck him",
-						func() {
-							LagomorphScenes.GroupWinOnPlainsFuckBrute(enc);
+						func: () => {
+							LagomorphScenes.GroupWinOnPlainsFuckBrute(this);
 						}, enabled : true,
 						tooltip : "You’re pretty sure this big guy’s butt is pretty much unused. So why not use his back door to relieve yourself?",
 					});
@@ -567,7 +562,7 @@ export namespace LagomorphScenes {
 					tooltip : ""
 				});
 				*/
-			} else if (enc.brainy) {
+			} else if (this.brainy) {
 				/* TODO
 				options.push({ nameStr : "name",
 					func : () => {
@@ -579,7 +574,7 @@ export namespace LagomorphScenes {
 					tooltip : ""
 				});
 				*/
-			} else if (enc.herm) {
+			} else if (this.herm) {
 				/* TODO
 				options.push({ nameStr : "name",
 					func : () => {
@@ -600,8 +595,8 @@ export namespace LagomorphScenes {
 			}
 
 			options.push({ nameStr : "Get fucked (M)",
-				func() {
-					LagomorphScenes.GroupWinOnPlainsGetFuckedM(enc, group);
+				func: () => {
+					LagomorphScenes.GroupWinOnPlainsGetFuckedM(this, group);
 				}, enabled : true,
 				tooltip : Text.Parse(tooltip, parse),
 			});
@@ -612,8 +607,8 @@ export namespace LagomorphScenes {
 				tooltip += " Who knows, perhaps [comp] will join you as well.";
 			}
 			options.push({ nameStr : "Fuck (M)",
-				func() {
-					LagomorphScenes.GroupWinOnPlainsFuckM(enc, group);
+				func: () => {
+					LagomorphScenes.GroupWinOnPlainsFuckM(this, group);
 				}, enabled : true,
 				tooltip : Text.Parse(tooltip, parse),
 			});
@@ -631,7 +626,7 @@ export namespace LagomorphScenes {
 			*/
 
 			options.push({ nameStr : "Leave",
-				func() {
+				func: () => {
 					Gui.PrintDefaultOptions();
 				}, enabled : true,
 				tooltip : "Leave the rabbits.",
@@ -639,7 +634,7 @@ export namespace LagomorphScenes {
 			Gui.SetButtonsFromList(options);
 
 		});
-		Encounter.prototype.onVictory.call(enc);
+		Encounter.prototype.onVictory.call(this);
 	}
 
 	export function GroupWinOnPlainsFuckBrute(enc: LagomorphEncounter)  {
@@ -1024,7 +1019,7 @@ export namespace LagomorphScenes {
 			const options: IChoice[] = [];
 			if (kiakai.FirstCock()) {
 				options.push({ nameStr : "Fuck them",
-					func() {
+					func: () => {
 						compsJoining.push(kiakai);
 
 						Text.Clear();
@@ -1061,7 +1056,7 @@ export namespace LagomorphScenes {
 					tooltip : "Encourage the elf to have a go at the bunnies.",
 				});
 				options.push({ nameStr : "Fuck you",
-					func() {
+					func: () => {
 						compsJoining.push(kiakai);
 
 						Text.Clear();
@@ -1132,7 +1127,7 @@ export namespace LagomorphScenes {
 				});
 			}
 			options.push({ nameStr : "Service them",
-				func() {
+				func: () => {
 					compsJoining.push(kiakai);
 
 					Text.Clear();
@@ -1173,7 +1168,7 @@ export namespace LagomorphScenes {
 				tooltip : Text.Parse("Doesn’t [heshe] think it’s unfair that all those bunny cocks are just bobbing there, unsatisfied?", parse),
 			});
 			options.push({ nameStr : "Sit it out",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“R-right,”</i> the elf bobs [hisher] head in agreement, quickly scurrying away to [hisher] pile of discarded clothes. Maybe next time...", parse);
 					Text.NL();
@@ -1209,7 +1204,7 @@ export namespace LagomorphScenes {
 				const options: IChoice[] = [];
 				if (terry.FirstCock()) {
 					options.push({ nameStr : "Fuck",
-						func() {
+						func: () => {
 							compsJoining.push(terry);
 
 							Text.Clear();
@@ -1368,7 +1363,7 @@ export namespace LagomorphScenes {
 					});
 				}
 				options.push({ nameStr : "Get fucked",
-					func() {
+					func: () => {
 						compsJoining.push(terry);
 
 						Text.Clear();
@@ -1380,7 +1375,7 @@ export namespace LagomorphScenes {
 					tooltip : Text.Parse("Well, if [heshe] wants it so bad, you can spare some bunny-cocks for [hisher] needy holes...", parse),
 				});
 				options.push({ nameStr : "Don’t fuck",
-					func() {
+					func: () => {
 						Text.Clear();
 						Gui.PrintDefaultOptions();
 					}, enabled : true,
@@ -1703,7 +1698,7 @@ export namespace LagomorphScenes {
 		// [Leave][Intimidate][Seduce]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Leave",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Useless. You have better things to do than terrorize hapless rabbits. It’s not like beating them would be a hassle, should they prove foolish enough to challenge you again.", parse);
 				Text.NL();
@@ -1715,7 +1710,7 @@ export namespace LagomorphScenes {
 			tooltip : "You are just wasting time here.",
 		});
 		options.push({ nameStr : "Intimidate",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You push your defeated enemy to the ground beneath you, holding [m1himher] down by force. [m1HeShe] cringes back, growing frightened at your intimidating demeanor.", parse);
 				Text.NL();
@@ -1752,7 +1747,7 @@ export namespace LagomorphScenes {
 			tooltip : "Force some answers from your captive.",
 		});
 		options.push({ nameStr : "Seduce",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Rather than the stick, perhaps the carrot could prove more effective in getting your way...", parse);
 				Text.NL();
@@ -1782,7 +1777,7 @@ export namespace LagomorphScenes {
 				// [Follow][Ditch]
 				const options: IChoice[] = [];
 				options.push({ nameStr : "Follow",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("You nod to your guide encouragingly, telling [m1himher] to lead on. As you enter the mob, the alpha calls out a few wordless commands. An entourage quickly forms, countless hands grabbing hold of you[comp], hoisting you into the air.", parse);
 						Text.NL();
@@ -1798,7 +1793,7 @@ export namespace LagomorphScenes {
 					tooltip : "Follow the alpha into the crowd.",
 				});
 				options.push({ nameStr : "Ditch",
-					func() {
+					func: () => {
 						Text.Clear();
 						parse.down = player.HasLegs() ? "getting down on your knees" : "lowering yourself";
 						Text.Add("Rather than follow the alpha into the gathering, you pull [m1himher] off to the side, [down] in front of the short bunny-morph. The alpha moans expectantly, [m1hisher] hips twitching of their own accord in anticipation.", parse);

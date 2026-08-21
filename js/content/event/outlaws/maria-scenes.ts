@@ -127,7 +127,7 @@ export namespace MariaScenes {
         options.push({nameStr : "Talk",
             tooltip : Text.Parse("You have some things you want to talk with her about.", parse),
             enabled : true,
-            func() {
+            func: () => {
                 Text.Clear();
 
                 const scenes = new EncounterTable();
@@ -155,7 +155,7 @@ export namespace MariaScenes {
         });
         if (cveta.flags.Met === CvetaFlags.Met.MariaTalk) {
             options.push({ nameStr : "Princess",
-                func() {
+                func: () => {
                     CvetaScenes.MariaTalkRepeat();
                 }, enabled : cveta.WakingTime(),
                 tooltip : "You've changed your mind. If Maria really can't sort out this so-called princess, maybe you can.",
@@ -165,7 +165,7 @@ export namespace MariaScenes {
         if (maria.flags.DD & MariaFlags.DeadDrops.Talked) {
             options.push({ nameStr : "Dead-Drop",
                 tooltip : "So, does she want to go on a little pick-up errand?",
-                func() {
+                func: () => {
                     if (maria.flags.DD & MariaFlags.DeadDrops.Completed) {
                         DeadDropScenes.Repeat(MariaScenes.CampPrompt);
                     } else {
@@ -178,7 +178,7 @@ export namespace MariaScenes {
         options.push({nameStr : "Ranger",
             tooltip : Text.Parse("Perhaps she could teach you something about forestry?", parse),
             enabled : true,
-            func() {
+            func: () => {
                 MariaScenes.RangerTraining();
             },
         });
@@ -219,7 +219,7 @@ export namespace MariaScenes {
             options.push({nameStr : "Yes",
                 tooltip : Text.Parse("Even experts must go over the fundamentals sometime.", parse),
                 enabled : true,
-                func() {
+                func: () => {
                     Text.Clear();
                     Text.Add("You let Maria know that you’d like to have a little refresher course anyways. There’s no sense in getting overconfident - that’s how it gets you in the end, isn’t it? Overconfidence and thinking that you’re above the little basic things. Wasn’t there a saying about this? For want of a nail, or something?", parse);
                     Text.NL();
@@ -253,7 +253,7 @@ export namespace MariaScenes {
             options.push({nameStr : "No",
                 tooltip : Text.Parse("Let’s not waste anyone’s time here.", parse),
                 enabled : true,
-                func() {
+                func: () => {
                     Text.Clear();
                     Text.Add("You tell Maria that you’ll be fine, in that case. No point in going over ground well-trodden.", parse);
                     Text.NL();
@@ -335,7 +335,7 @@ export namespace MariaScenes {
         options.push({nameStr : "Chat",
             tooltip : Text.Parse("Just chat for a bit.", parse),
             enabled : true,
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Add("You break out into a bit of small talk, chatting about this and that without any real direction to the conversation.", parse);
                 Text.NL();
@@ -403,7 +403,7 @@ export namespace MariaScenes {
         options.push({nameStr : "Forest",
             tooltip : Text.Parse("How’ve things been out there in the woods?", parse),
             enabled : true,
-            func() {
+            func: () => {
                 Text.Clear();
                 // TODO #If Vaughn task 4 completed
                 /*
@@ -446,7 +446,7 @@ export namespace MariaScenes {
         options.push({nameStr : "Outlaws",
             tooltip : Text.Parse("How’s the situation in camp?", parse),
             enabled : true,
-            func() {
+            func: () => {
                 Text.Clear();
 
                 const scenes = new EncounterTable();
@@ -567,7 +567,7 @@ export namespace MariaScenes {
         options.push({nameStr : "Zenith",
             tooltip : Text.Parse("So, what does she think about the Outlaws’ leader?", parse),
             enabled : true,
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Add("Maria looks at you oddly. <i>“Hey, [playername]. You know how it’s not polite to gossip about someone behind his or her back? Especially when it comes to someone you respect?”</i>", parse);
                 Text.NL();
@@ -589,7 +589,7 @@ export namespace MariaScenes {
             options.push({nameStr : "Family",
                 tooltip : Text.Parse("Does she miss them?", parse),
                 enabled : true,
-                func() {
+                func: () => {
                     Text.Clear();
                     Text.Add("Maria sighs. <i>“Can’t get teary-eyed over when I don’t remember, [playername]. So no, I don’t miss them.”</i>", parse);
                     Text.NL();
@@ -704,7 +704,7 @@ export namespace MariaScenes {
             tooltip : "Follow her.",
         });
         options.push({ nameStr : "Fight",
-            func() {
+            func: () => {
                 Text.Clear();
                 if (party.Alone()) {
                     Text.Add("You've had just about enough of this presumptuous highwaywoman. Lunging forward, you tackle the archer to the ground before she has the chance to respond.", parse);
@@ -780,7 +780,7 @@ export namespace MariaScenes {
             tooltip : "Try to fight your captor.",
         });
         options.push({ nameStr : "Trick",
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Add("Though you can't fight back, you don't want to find out where this bandit wants to take you. Tossing about a few ideas, you finally decide that the best course of action is to follow her for now. As soon as you have the chance, you will slip away. For a while, she seems dead set on watching you, but eventually Maria's attention fades. Taking advantage of her lapse in vigilance, you easily dart the other way and escape.", parse);
                 Text.NL();
@@ -825,7 +825,7 @@ export namespace MariaScenes {
             // [Yes][No]
             const options: IChoice[] = [];
             options.push({ nameStr : "Yes",
-                func() {
+                func: () => {
                     maria.flags.Met |= MariaFlags.Met.FightSexed;
 
                     Text.Clear();
@@ -893,7 +893,7 @@ export namespace MariaScenes {
                 tooltip : "Heck yeah! This bitch has it coming!",
             });
             options.push({ nameStr : "No",
-                func() {
+                func: () => {
                     Text.NL();
                     Text.Add("You decide that now, in the middle of the forest, is perhaps not the best time for this.", parse);
                     Text.NL();
@@ -948,7 +948,7 @@ export namespace MariaScenes {
         // [Silent][Talk][Flirt]
         const options: IChoice[] = [];
         options.push({ nameStr : "Silent",
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Add("Having nothing in particular to say to the archer, you simply follow her quietly. Instead of wasting your breath talking, you try to watch the path she follows in an attempt to memorize the way she's taking you. Even so, within twenty minutes you are hopelessly lost.", parse);
 
@@ -957,7 +957,7 @@ export namespace MariaScenes {
             tooltip : "Follow her silently.",
         });
         options.push({ nameStr : "Talk",
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Add("At first, you stay silent, wary of the archer's wrath, but eventually you decide that since you can do little else, you might as well ask her some questions. When you first speak, she jumps a little as if she didn't expect you to speak along the way. Most of your questions she either outright ignores, or answers vaguely at best until, that is, you ask her about precisely where she comes from.", parse);
                 Text.NL();
@@ -972,7 +972,7 @@ export namespace MariaScenes {
             tooltip : "Ask her some questions as you walk.",
         });
         options.push({ nameStr : "Flirt",
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Add("Watching her move her body enticingly, you strike up a conversation with the buxom bandit. First, the topic stays on innocuous things. Before long, you begin talking about Maria, and you compliment her on her generous cleavage.", parse);
                 Text.NL();
@@ -1043,7 +1043,7 @@ export namespace MariaScenes {
             // [Listen][Interrupt]
             const options: IChoice[] = [];
             options.push({ nameStr : "Listen",
-                func() {
+                func: () => {
                     Text.Clear();
                     Text.Add("<i>“[playername] is that one we heard about from Tez'rah. The one that came from a different plane. [HeShe] didn't look so tough, so I decided to try and take [himher] down.”</i>", parse);
                     Text.NL();
@@ -1068,7 +1068,7 @@ export namespace MariaScenes {
                 tooltip : "Let Maria do the explaining.",
             });
             options.push({ nameStr : "Interrupt",
-                func() {
+                func: () => {
                     Text.Clear();
                     Text.Add("You interrupt the busty archer with a question. Facing down Zenith, you demand he explain why he has agents capturing people in the forest. For a moment, he looks at you in surprise. It quickly passes, however, replaced by a far more intimidating look of annoyance.", parse);
                     Text.NL();

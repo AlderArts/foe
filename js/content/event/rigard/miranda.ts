@@ -185,7 +185,7 @@ export class Miranda extends Entity {
 
 		const options: IChoice[] = [];
 		options.push({ nameStr: "Release",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("[Placeholder] Miranda masturbates fiercely, cumming buckets.");
 

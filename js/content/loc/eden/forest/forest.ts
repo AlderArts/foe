@@ -166,7 +166,7 @@ ForestLoc.Outskirts.enc.AddEnc(
 // Temp mothgirl enemy
 ForestLoc.Outskirts.AddEncounter({
 	nameStr : "Mothgirl",
-	func() {
+	func: () => {
 		return MothgirlScenes.LoneEnc();
 	}, odds : 1.0, enc : true,
 	visible : true, enabled : true, hunt : true,
@@ -174,7 +174,7 @@ ForestLoc.Outskirts.AddEncounter({
 
 ForestLoc.Outskirts.AddEncounter({
 	nameStr : "Wolf",
-	func() {
+	func: () => {
 		return FeralWolfScenes.LoneEnc();
 	}, odds : 1.0, enc : true,
 	visible : true, enabled : true, hunt : true,

@@ -204,7 +204,6 @@ export class CassidySpar extends Entity {
 	}
 
 	public Act(encounter: ICombatEncounter, activeChar: ICombatOrder) {
-		const that = this;
 		// TODO: Very TEMP
 		Text.Add(this.name + " acts! Rawr!");
 		Text.NL();
@@ -215,38 +214,38 @@ export class CassidySpar extends Entity {
 
 		const scenes = new EncounterTable();
 		scenes.AddEnc(() => {
-			Abilities.Attack.Use(encounter, that, t);
+			Abilities.Attack.Use(encounter, this, t);
 		}, 1.0, () => true);
 		scenes.AddEnc(() => {
-			Abilities.Physical.Bash.Use(encounter, that, t);
-		}, 1.0, () => Abilities.Physical.Bash.enabledCondition(encounter, that));
+			Abilities.Physical.Bash.Use(encounter, this, t);
+		}, 1.0, () => Abilities.Physical.Bash.enabledCondition(encounter, this));
 		scenes.AddEnc(() => {
-			Abilities.Physical.DAttack.Use(encounter, that, t);
-		}, 1.0, () => Abilities.Physical.DAttack.enabledCondition(encounter, that));
+			Abilities.Physical.DAttack.Use(encounter, this, t);
+		}, 1.0, () => Abilities.Physical.DAttack.enabledCondition(encounter, this));
 		scenes.AddEnc(() => {
-			Abilities.EnemySkill.Cassidy.TailSlap.Use(encounter, that, t);
-		}, 1.0, () => Abilities.EnemySkill.Cassidy.TailSlap.enabledCondition(encounter, that));
+			Abilities.EnemySkill.Cassidy.TailSlap.Use(encounter, this, t);
+		}, 1.0, () => Abilities.EnemySkill.Cassidy.TailSlap.enabledCondition(encounter, this));
 		scenes.AddEnc(() => {
-			Abilities.EnemySkill.Cassidy.Smoke.Use(encounter, that, t);
-		}, 1.0, () => Abilities.EnemySkill.Cassidy.Smoke.enabledCondition(encounter, that));
+			Abilities.EnemySkill.Cassidy.Smoke.Use(encounter, this, t);
+		}, 1.0, () => Abilities.EnemySkill.Cassidy.Smoke.enabledCondition(encounter, this));
 		scenes.AddEnc(() => {
-			Abilities.Seduction.Tease.Use(encounter, that, t);
+			Abilities.Seduction.Tease.Use(encounter, this, t);
 		}, 1.0, () => true);
 
 		// Conditional abilities (only available at higher Cass levels)
 
-		if (that.level >= 10) {
-			if (!that.reflexFlag) {
+		if (this.level >= 10) {
+			if (!this.reflexFlag) {
 				scenes.AddEnc(() => {
-					Abilities.EnemySkill.Cassidy.Reflex.Use(encounter, that, t);
-				}, 1.0, () => Abilities.EnemySkill.Cassidy.Reflex.enabledCondition(encounter, that));
+					Abilities.EnemySkill.Cassidy.Reflex.Use(encounter, this, t);
+				}, 1.0, () => Abilities.EnemySkill.Cassidy.Reflex.enabledCondition(encounter, this));
 			}
 		}
 
-		if (that.level >= 14) {
+		if (this.level >= 14) {
 			scenes.AddEnc(() => {
-				Abilities.EnemySkill.Cassidy.Impact.Use(encounter, that, t);
-			}, 1.0, () => Abilities.EnemySkill.Cassidy.Impact.enabledCondition(encounter, that));
+				Abilities.EnemySkill.Cassidy.Impact.Use(encounter, this, t);
+			}, 1.0, () => Abilities.EnemySkill.Cassidy.Impact.enabledCondition(encounter, this));
 		}
 
 		scenes.Get();

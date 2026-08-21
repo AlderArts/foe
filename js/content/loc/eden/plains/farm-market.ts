@@ -466,7 +466,7 @@ export namespace MarketScenes {
         // [Sleep][Decline]
         const options: IChoice[] = [];
         options.push({ nameStr : "Sleep",
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Add("<i>“Thanks,”</i> she whispers, giving you a peck on the cheek. You follow closely behind the beautiful farmer, climbing up the ladder to the loft. You have quite the nice view as you make your way up, Gwendy’s well-shaped ass wiggling invitingly just above you. There is an awkward silence as you reach the ledge. The farmgirl eyes the bed suggestively.", parse);
                 Text.NL();
@@ -480,7 +480,7 @@ export namespace MarketScenes {
             tooltip : "Join her in the loft.",
         });
         options.push({ nameStr : "Decline",
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Add("<i>“It’s alright, I understand,”</i> Gwendy says, though she looks a bit lonely. <i>“See you around, I suppose?”</i> You nod, promising you’ll return later.", parse);
                 if (party.Num() > 1) {

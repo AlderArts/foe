@@ -411,7 +411,7 @@ export class Gui {
         const options: IChoice[] = [
             {
                 nameStr: ShortcutsVisible ? `Keys: On` : `Keys: Off`,
-                func() {
+                func: () => {
                     Gui.ShortcutsVisible = !Gui.ShortcutsVisible;
                     if (isOnline()) {
                         localStorage.ShortcutsVisible = Gui.ShortcutsVisible ? 1 : 0;
@@ -421,7 +421,7 @@ export class Gui {
             },
             {
                 nameStr: `Set bg color`,
-                func() {
+                func: () => {
                     Gui.BgColorPicker(() => {
                         Gui.OptionsScreen(back);
                     });
@@ -429,7 +429,7 @@ export class Gui {
             },
             {
                 nameStr: `Set font`,
-                func() {
+                func: () => {
                     Gui.FontPicker(() => {
                         Gui.OptionsScreen(back);
                     });
@@ -467,7 +467,7 @@ export class Gui {
 
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Reset",
-			func() {
+			func: () => {
 				FontFamily = "Georgia, sans-serif, \"Arial\", \"Helvetica\"";
 				document.getElementById("mainTextArea").style.fontFamily = FontFamily;
 				FontSize = "large";
@@ -479,7 +479,7 @@ export class Gui {
 			}, enabled : true,
 		});
 		options.push({ nameStr : "Font",
-			func() {
+			func: () => {
 				const font = prompt("Please enter fonts (css: font-families) to use, in order of priority.", FontFamily || "sans-serif, Georgia");
 				if (font !== undefined && font !== "") {
 					FontFamily = font;
@@ -491,7 +491,7 @@ export class Gui {
 			}, enabled : true,
 		});
 		options.push({ nameStr : "Size",
-			func() {
+			func: () => {
 				const size = prompt("Please enter desired font size (css: font-size). For example: small, medium, large.", FontSize || "large");
 				if (size !== undefined && size !== "") {
 					FontSize = size;
@@ -513,7 +513,7 @@ export class Gui {
 
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Light",
-			func() {
+			func: () => {
 				BgColor = "rgba(255, 255, 255, 0.2)";
 				if (isOnline()) {
 					localStorage.bgcolor = BgColor;
@@ -522,7 +522,7 @@ export class Gui {
 			}, enabled : true,
 		});
 		options.push({ nameStr : "Pink",
-			func() {
+			func: () => {
 				BgColor = "rgba(240, 48, 192, 0.6)";
 				if (isOnline()) {
 					localStorage.bgcolor = BgColor;
@@ -531,7 +531,7 @@ export class Gui {
 			}, enabled : true,
 		});
 		options.push({ nameStr : "Yellow",
-			func() {
+			func: () => {
 				BgColor = "rgba(240, 192, 48, 0.6)";
 				if (isOnline()) {
 					localStorage.bgcolor = BgColor;
@@ -540,7 +540,7 @@ export class Gui {
 			}, enabled : true,
 		});
 		options.push({ nameStr : "Cyan",
-			func() {
+			func: () => {
 				BgColor = "rgba(48, 240, 192, 0.6)";
 				if (isOnline()) {
 					localStorage.bgcolor = BgColor;
@@ -549,7 +549,7 @@ export class Gui {
 			}, enabled : true,
 		});
 		options.push({ nameStr : "Blue",
-			func() {
+			func: () => {
 				BgColor = "rgba(48, 192, 240, 0.6)";
 				if (isOnline()) {
 					localStorage.bgcolor = BgColor;
@@ -558,7 +558,7 @@ export class Gui {
 			}, enabled : true,
 		});
 		options.push({ nameStr : "Green",
-			func() {
+			func: () => {
 				BgColor = "rgba(120, 240, 48, 0.6)";
 				if (isOnline()) {
 					localStorage.bgcolor = BgColor;
@@ -567,7 +567,7 @@ export class Gui {
 			}, enabled : true,
 		});
 		options.push({ nameStr : "Purple",
-			func() {
+			func: () => {
 				BgColor = "rgba(192, 48, 240, 0.6)";
 				if (isOnline()) {
 					localStorage.bgcolor = BgColor;
@@ -576,7 +576,7 @@ export class Gui {
 			}, enabled : true,
 		});
 		options.push({ nameStr : "None",
-			func() {
+			func: () => {
 				BgColor = "rgba(0, 0, 0, 0.0)";
 				if (isOnline()) {
 					localStorage.bgcolor = BgColor;
@@ -585,7 +585,7 @@ export class Gui {
 			}, enabled : true,
 		});
 		options.push({ nameStr : "Custom",
-			func() {
+			func: () => {
 				const col = prompt("Please enter desired background color. Format is rgba(R,G,B,A). Colors are in the range 0-255. Opacity is in the range 0-1.", BgColor || "rgba(255,255,255,1.0)");
 				if (col !== undefined && col !== "") {
 					BgColor = col;

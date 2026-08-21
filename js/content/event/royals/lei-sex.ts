@@ -20,7 +20,7 @@ export namespace LeiSexScenes {
 		if (LeiSexScenes.PettingUnlocked()) {
 			options.push({ nameStr : "Petting",
 				tooltip : "Ask him to pet you.",
-				func() {
+				func: () => {
 					LeiSexScenes.Petting(true);
 				}, enabled : true,
 			});
@@ -105,7 +105,7 @@ export namespace LeiSexScenes {
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Purr",
 			tooltip : "Why not? It <i>is</i> rather pleasant.",
-			func() {
+			func: () => {
 				Text.Clear();
 				if (catty) {
 					Text.Add("Purring comes naturally to you. If anything, it's a bit of a surprise you weren't purring already. You take a deep breath, and slowly push it out, letting a deep, low purr cascade out from your stomach.", parse);
@@ -123,7 +123,7 @@ export namespace LeiSexScenes {
 		});
 		options.push({ nameStr : "Bite",
 			tooltip : "There's more than one way cats might react - bite the hand that strokes you.",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You wait for Lei to finish one of his strokes, before grabbing hold of his right arm, and nibbling on the hand. You worry at the skin for a few moments, and then take a bigger bite, taking the knuckle of his thumb between your teeth. Keeping firm hold of the hand, you glance up at him out of the corner of your eye.", parse);
 				Text.NL();

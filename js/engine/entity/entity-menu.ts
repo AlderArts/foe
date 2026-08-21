@@ -11,30 +11,29 @@ import { Stat } from "./stat";
 
 const EntityMenu = {
 	InteractDefault(options: IChoice[], switchSpot: boolean, enableEquip: boolean, enableStats: boolean, enableJob: boolean, enableSwitch: boolean) {
-		const that = this;
 		options.push({ nameStr: "Equip",
-			func() {
-				that.EquipPrompt(that.Interact);
+			func: () => {
+				this.EquipPrompt(this.Interact);
 			}, enabled : enableEquip,
 		});
-		options.push({ nameStr: that.pendingStatPoints !== 0 ? "Level up" : "Stats",
-			func() {
-				that.LevelUpPrompt(that.Interact);
+		options.push({ nameStr: this.pendingStatPoints !== 0 ? "Level up" : "Stats",
+			func: () => {
+				this.LevelUpPrompt(this.Interact);
 			}, enabled : enableStats,
-			image : that.pendingStatPoints !== 0 ? Images.imgButtonEnabled2 : undefined,
+			image : this.pendingStatPoints !== 0 ? Images.imgButtonEnabled2 : undefined,
 		});
 		options.push({ nameStr: "Job",
-			func() {
-				that.JobPrompt(that.Interact);
+			func: () => {
+				this.JobPrompt(this.Interact);
 			}, enabled : enableJob,
 		});
 		if (switchSpot) {
 			const party = GAME().party;
-			options.push({ nameStr: party.InParty(that) ? "Switch out" : "Switch in",
-				func() {
-					party.SwitchPrompt(that);
+			options.push({ nameStr: party.InParty(this) ? "Switch out" : "Switch in",
+				func: () => {
+					party.SwitchPrompt(this);
 				}, enabled : enableSwitch,
-				tooltip: party.InParty(that) ? "Send to reserve." : "Switch into active party.",
+				tooltip: party.InParty(this) ? "Send to reserve." : "Switch into active party.",
 			});
 		}
 	},
@@ -113,8 +112,6 @@ const EntityMenu = {
 
 		Text.Flush();
 
-		const that = this;
-
 		if (this.pendingStatPoints <= 0) {
 			Gui.NextPrompt(backFunc);
 			return;
@@ -122,58 +119,58 @@ const EntityMenu = {
 
 		const options: IChoice[] = [];
 		options.push({ nameStr: "Strength",
-			func() {
-				that.strength.growth += Stat.growthPerPoint;
-				that.pendingStatPoints--;
-				that.LevelUpPrompt(backFunc);
+			func: () => {
+				this.strength.growth += Stat.growthPerPoint;
+				this.pendingStatPoints--;
+				this.LevelUpPrompt(backFunc);
 			}, enabled : true,
 			tooltip : "A person with high <b>strength</b> can deal a massive amount of physical damage.",
 		});
 		options.push({ nameStr: "Stamina",
-			func() {
-				that.stamina.growth += Stat.growthPerPoint;
-				that.pendingStatPoints--;
-				that.LevelUpPrompt(backFunc);
+			func: () => {
+				this.stamina.growth += Stat.growthPerPoint;
+				this.pendingStatPoints--;
+				this.LevelUpPrompt(backFunc);
 			}, enabled : true,
 			tooltip : "A person with high <b>stamina</b> can take a large amount of punishment. It's most effective against physical attacks, but affects other types of defence as well.",
 		});
 		options.push({ nameStr: "Dexterity",
-			func() {
-				that.dexterity.growth += Stat.growthPerPoint;
-				that.pendingStatPoints--;
-				that.LevelUpPrompt(backFunc);
+			func: () => {
+				this.dexterity.growth += Stat.growthPerPoint;
+				this.pendingStatPoints--;
+				this.LevelUpPrompt(backFunc);
 			}, enabled : true,
 			tooltip : "A person with high <b>dexterity</b> can deftly evade enemy attacks, and is better at landing their blows. The swifter a person is, the quicker they are to act.",
 		});
 		options.push({ nameStr: "Intelligence",
-			func() {
-				that.intelligence.growth += Stat.growthPerPoint;
-				that.pendingStatPoints--;
-				that.LevelUpPrompt(backFunc);
+			func: () => {
+				this.intelligence.growth += Stat.growthPerPoint;
+				this.pendingStatPoints--;
+				this.LevelUpPrompt(backFunc);
 			}, enabled : true,
 			tooltip : "Someone with high <b>intelligence</b> is very sharp, and can deal a massive amount of damage with spells. They are also able to act more quickly, as they don't have to spend as much time thinking up their battle plan.",
 		});
 		options.push({ nameStr: "Spirit",
-			func() {
-				that.spirit.growth += Stat.growthPerPoint;
-				that.pendingStatPoints--;
-				that.LevelUpPrompt(backFunc);
+			func: () => {
+				this.spirit.growth += Stat.growthPerPoint;
+				this.pendingStatPoints--;
+				this.LevelUpPrompt(backFunc);
 			}, enabled : true,
 			tooltip : "A person with high <b>spirit</b> is very stoic - a pillar of willpower. They can take large amounts of magical damage before they fall.",
 		});
 		options.push({ nameStr: "Libido",
-			func() {
-				that.libido.growth += Stat.growthPerPoint;
-				that.pendingStatPoints--;
-				that.LevelUpPrompt(backFunc);
+			func: () => {
+				this.libido.growth += Stat.growthPerPoint;
+				this.pendingStatPoints--;
+				this.LevelUpPrompt(backFunc);
 			}, enabled : true,
 			tooltip : "Someone with high <b>libido</b> is a highly experienced in the sexual arts, and can deal high damage with lust attacks. However, it also makes their lust rise faster.",
 		});
 		options.push({ nameStr: "Charisma",
-			func() {
-				that.charisma.growth += Stat.growthPerPoint;
-				that.pendingStatPoints--;
-				that.LevelUpPrompt(backFunc);
+			func: () => {
+				this.charisma.growth += Stat.growthPerPoint;
+				this.pendingStatPoints--;
+				this.LevelUpPrompt(backFunc);
 			}, enabled : true,
 			tooltip : "Someone with high <b>charisma</b> has a way with other people, affecting many parts of battle. The most apparent effect is that their lust attacks are more appealing, but it's also useful in other situations.",
 		});
@@ -182,17 +179,16 @@ const EntityMenu = {
 
 	EquipPrompt(backfunc: CallableFunction) {
 		const party = GAME().party;
-		const that = this;
 		const parse: IParse = {
-			name    : that.NameDesc(),
-			isAre   : that.is(),
-			HeShe() { return that.HeShe(); },
-			heshe() { return that.heshe(); },
-			HisHer() { return that.HisHer(); },
-			hisher() { return that.hisher(); },
-			himher() { return that.himher(); },
-			hishers() { return that.hishers(); },
-			es() { return that.plural() ? "" : "es"; },
+			name    : this.NameDesc(),
+			isAre   : this.is(),
+			HeShe	:() => { return this.HeShe(); },
+			heshe	:() => { return this.heshe(); },
+			HisHer	:() => { return this.HisHer(); },
+			hisher	:() => { return this.hisher(); },
+			himher	:() => { return this.himher(); },
+			hishers	:() => { return this.hishers(); },
+			es		:() => { return this.plural() ? "" : "es"; },
 		};
 
 		const equipFunc = () => {
@@ -212,12 +208,12 @@ const EntityMenu = {
 
 			Text.Add("[name] [isAre] currently equipped with:", parse);
 			Text.NL();
-			slotFunc("Weapon", that.weaponSlot);
-			slotFunc("Top armor", that.topArmorSlot);
-			slotFunc("Bottom armor", that.botArmorSlot);
-			slotFunc("Accessory", that.acc1Slot);
-			slotFunc("Accessory", that.acc2Slot);
-			slotFunc("Toy", that.strapOn);
+			slotFunc("Weapon", this.weaponSlot);
+			slotFunc("Top armor", this.topArmorSlot);
+			slotFunc("Bottom armor", this.botArmorSlot);
+			slotFunc("Accessory", this.acc1Slot);
+			slotFunc("Accessory", this.acc2Slot);
+			slotFunc("Toy", this.strapOn);
 			Text.Flush();
 
 			const slotFunc2 = (slotname: string, slot?: Item) => {
@@ -234,75 +230,75 @@ const EntityMenu = {
 
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Weapon",
-				func() {
+				func: () => {
 					Text.Clear();
-					slotFunc2("Weapon", that.weaponSlot);
+					slotFunc2("Weapon", this.weaponSlot);
 					Text.AddDiv("<hr>");
 					Text.Add("<i>What weapon do[es] [heshe] equip?</i>", parse);
 					Text.AddDiv("<hr>");
 					Text.Flush();
-					party.inventory.ShowEquippable(that, ItemType.Weapon, equipFunc);
+					party.inventory.ShowEquippable(this, ItemType.Weapon, equipFunc);
 				}, enabled : true,
 				tooltip : "",
 			});
 			options.push({ nameStr : "Top",
-				func() {
+				func: () => {
 					Text.Clear();
-					slotFunc2("Top armor", that.topArmorSlot);
+					slotFunc2("Top armor", this.topArmorSlot);
 					Text.AddDiv("<hr>");
 					Text.Add("<i>What primary armor do[es] [heshe] equip?</i>", parse);
 					Text.AddDiv("<hr>");
 					Text.Flush();
-					party.inventory.ShowEquippable(that, ItemSubtype.TopArmor, equipFunc);
+					party.inventory.ShowEquippable(this, ItemSubtype.TopArmor, equipFunc);
 				}, enabled : true,
 				tooltip : "",
 			});
-			const enabled = that.topArmorSlot ? (that.topArmorSlot.subtype !== ItemSubtype.FullArmor) : true;
+			const enabled = this.topArmorSlot ? (this.topArmorSlot.subtype !== ItemSubtype.FullArmor) : true;
 			options.push({ nameStr : "Bottom",
-				func() {
+				func: () => {
 					Text.Clear();
-					slotFunc2("Bottom armor", that.botArmorSlot);
+					slotFunc2("Bottom armor", this.botArmorSlot);
 					Text.AddDiv("<hr>");
 					Text.Add("<i>What secondary armor do[es] [heshe] equip?</i>", parse);
 					Text.AddDiv("<hr>");
 					Text.Flush();
-					party.inventory.ShowEquippable(that, ItemSubtype.BotArmor, equipFunc);
+					party.inventory.ShowEquippable(this, ItemSubtype.BotArmor, equipFunc);
 				}, enabled,
 				tooltip : "",
 			});
 			options.push({ nameStr : "Acc.1",
-				func() {
+				func: () => {
 					Text.Clear();
-					slotFunc2("Accessory", that.acc1Slot);
+					slotFunc2("Accessory", this.acc1Slot);
 					Text.AddDiv("<hr>");
 					Text.Add("<i>What primary accessory do[es] [heshe] equip?</i>", parse);
 					Text.AddDiv("<hr>");
 					Text.Flush();
-					party.inventory.ShowEquippable(that, ItemSubtype.Acc1, equipFunc);
+					party.inventory.ShowEquippable(this, ItemSubtype.Acc1, equipFunc);
 				}, enabled : true,
 				tooltip : "",
 			});
 			options.push({ nameStr : "Acc.2",
-				func() {
+				func: () => {
 					Text.Clear();
-					slotFunc2("Accessory", that.acc2Slot);
+					slotFunc2("Accessory", this.acc2Slot);
 					Text.AddDiv("<hr>");
 					Text.Add("<i>What secondary accessory do[es] [heshe] equip?</i>", parse);
 					Text.AddDiv("<hr>");
 					Text.Flush();
-					party.inventory.ShowEquippable(that, ItemSubtype.Acc2, equipFunc);
+					party.inventory.ShowEquippable(this, ItemSubtype.Acc2, equipFunc);
 				}, enabled : true,
 				tooltip : "",
 			});
 			options.push({ nameStr : "Toy",
-				func() {
+				func: () => {
 					Text.Clear();
-					slotFunc2("Toy", that.strapOn);
+					slotFunc2("Toy", this.strapOn);
 					Text.AddDiv("<hr>");
 					Text.Add("<i>What strap-on do[es] [heshe] equip?</i>", parse);
 					Text.AddDiv("<hr>");
 					Text.Flush();
-					party.inventory.ShowEquippable(that, ItemSubtype.StrapOn, equipFunc);
+					party.inventory.ShowEquippable(this, ItemSubtype.StrapOn, equipFunc);
 				}, enabled : true,
 				tooltip : "",
 			});
@@ -312,7 +308,6 @@ const EntityMenu = {
 	},
 
 	JobPrompt(backfunc: CallableFunction) {
-		const that = this;
 		Text.Clear();
 		// Fallback for bugs
 		if (this.currentJob === undefined) {
@@ -393,14 +388,14 @@ const EntityMenu = {
 			}
 
 			options.push({ nameStr : jd.job.Short(this),
-				func(obj: Job) {
+				func: (obj: Job) => {
 					parse.job = obj.Short(this);
 					Text.Clear();
 					Text.Add("[Possessive] current job is <b>[job]</b>.", parse);
 					Text.NL();
 					Text.Flush();
 
-					that.currentJob = obj;
+					this.currentJob = obj;
 
 					Gui.NextPrompt(backfunc);
 				}, enabled : jd.job.Available(this),

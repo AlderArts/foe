@@ -704,7 +704,7 @@ export namespace HalloweenScenes {
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Fuck",
 				tooltip : "Time to scratch an itch.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Grinning lustfully, you present your half-erect cock to your beta, gesturing towards it.", parse);
 					Text.NL();
@@ -736,7 +736,7 @@ export namespace HalloweenScenes {
 			});
 			options.push({ nameStr : "Dismiss",
 				tooltip : "You don’t actually need him. Give him a pat and then send him off again.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You reach down and playfully tussle Ronnie’s ears, the beta werewolf groaning luxuriantly as you pet his head. Graciously, you allow Ronnie a chance to catch his breath, leisurely petting and stroking him until he’s calmed down, and then indicate the woods, telling him that he’s free to go.", parse);
 					Text.NL();
@@ -789,7 +789,7 @@ export namespace HalloweenScenes {
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Submit!",
 				tooltip : "Let alpha Ronnie fuck your ass!",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("With a soft, lupine churr, you eagerly grind your ass back against Ronnie’s teasing cock. You’re happy here, as Ronnie’s beta, and right now, you want your ass full of his magnificent shaft.", parse);
 					if (player.PregHandler().MPregEnabled()) {
@@ -820,14 +820,14 @@ export namespace HalloweenScenes {
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Yes",
 				tooltip : "He’s here, you’re both horny, why fight it?",
-				func() {
+				func: () => {
 					Text.Clear();
 					HalloweenScenes.RonniePitch();
 				}, enabled : true,
 			});
 			options.push({ nameStr : "No",
 				tooltip : "He’ll have to go and take care of himself, you don’t have time to play.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("With a sharp bark and a few gestures, you convey to Ronnie that you’re not interested in ‘playtime’ at the moment.", parse);
 					Text.NL();
@@ -912,7 +912,7 @@ export namespace HalloweenScenes {
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Help",
 			tooltip : "How can you possibly ignore someone in need?",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Smiling warmly, you reach out and give the bunny a friendly clasp on the shoulder, offering him your help in finding his missing animal.", parse);
 				Text.NL();
@@ -974,7 +974,7 @@ export namespace HalloweenScenes {
 					const options: IChoice[] = [];
 					options.push({ nameStr : "Fight!",
 						tooltip : "He’d catch you in a heartbeat, you have to fight!",
-						func() {
+						func: () => {
 							Text.Clear();
 							Text.Add("With no better weapon available to you, you grab the dildo-stake that the Elder gave you and brandish it like a club, waiting for the werewolf to make the first move. Your every sinew tenses, readying your body to defend itself against a coming attack.", parse);
 							Text.NL();
@@ -1023,7 +1023,7 @@ export namespace HalloweenScenes {
 							const options: IChoice[] = [];
 							options.push({ nameStr : "Chase",
 								tooltip : "To the hunt! You need a new bitch!",
-								func() {
+								func: () => {
 									Text.Clear();
 									Text.Add("With a howl of joy and anticipation, you bound off after the transformed rabbit, crashing through the wilderness in hot pursuit.", parse);
 									Text.NL();
@@ -1054,7 +1054,7 @@ export namespace HalloweenScenes {
 							});
 							options.push({ nameStr : "Leave",
 								tooltip : "Let’s see what else is out there, waiting to be chased!",
-								func() {
+								func: () => {
 									Text.Clear();
 									Text.Add("Shaking your head, you turn and head back the way you came - with your new nose, it’s easy to find your path. Let Ronnie go; you have other places to explore.", parse);
 									Text.Flush();
@@ -1069,7 +1069,7 @@ export namespace HalloweenScenes {
 					});
 					options.push({ nameStr : "Flee!",
 						tooltip : "Run away! Run, run, run!",
-						func() {
+						func: () => {
 							Text.Clear();
 							Text.Add("Unthinkingly, you spin around and sprint for your life, fleeing your transformed companion as fast as you possibly can. From behind you, that awful sound of a wolf on the hunt splits the air and you can hear him bounding after you.", parse);
 							Text.NL();
@@ -1126,7 +1126,7 @@ export namespace HalloweenScenes {
 							});
 							options.push({ nameStr : "Submit",
 								tooltip : "There’s a certain thrill in being taken by the smaller wolf, and you do owe him for your current form… Maybe it wouldn’t hurt to be his beta.",
-								func() {
+								func: () => {
 									Text.Clear();
 									Text.Add("Whining softly, you lower your head meekly to the ground, hungrily grinding your hips back on your beautiful white alpha’s cock, ready and eager to be marked as belonging to him.", parse);
 									Text.NL();
@@ -1142,7 +1142,7 @@ export namespace HalloweenScenes {
 					if (party.Inv().QueryNum(HalloweenItems.SqueakyToy)) {
 						options.push({ nameStr : "Squeaky Bone!",
 							tooltip : "It’s a long shot, but maybe you can distract him with a doggie toy.",
-							func() {
+							func: () => {
 								Text.Clear();
 								Text.Add("Without a second thought, you pull the squeaking rubber bone from your possessions and hold it aloft before giving it a sharp squeeze, to see what will happen.", parse);
 								Text.NL();
@@ -1179,7 +1179,7 @@ export namespace HalloweenScenes {
 		});
 		options.push({ nameStr : "Wish luck",
 			tooltip : "Let him find his own damn sheep, you have more important things to do.",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("As politely as you can, you wish Ronnie luck in finding his Dory. You’d like to help, but you have problems of your own to handle.", parse);
 				Text.NL();
@@ -1552,7 +1552,7 @@ export namespace HalloweenScenes {
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Yes",
 				tooltip : "Reach for the end of the road.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Yeah, you’re getting out of here. One, two, three more steps, and a light suddenly grows, engulfing the world around you, blotting out even the ravens’ cawing…", parse);
 					Text.NL();
@@ -1566,7 +1566,7 @@ export namespace HalloweenScenes {
 			});
 			options.push({ nameStr : "No",
 				tooltip : "Turn back. You still have work to be done here.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("As tempting as it is to leave this place, you force yourself to turn around and head back to the crossroads. You have business left here, and it wouldn’t do to leave it unfinished - as everyone knows, leaving business unfinished only leads to bad things happening.", parse);
 					Text.Flush();
@@ -1693,7 +1693,7 @@ export namespace HalloweenScenes {
 		});
 		options.push({ nameStr : "Item",
 			tooltip : "Maybe there’s something on you that could help.",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Right, right. You rummage about in your possessions, seeing if there’s anything you could use in order to get you out of this bind. Alternatively, if you don’t have anything on you to your liking, there are other things you could do…", parse);
 				Text.Flush();
@@ -1702,7 +1702,7 @@ export namespace HalloweenScenes {
 				const options: IChoice[] = [];
 				options.push({ nameStr : "Stake",
 					tooltip : "Put the weapon you received to good use!",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("Right, the stake! You draw out the stake the Elder gave you, complete with its rubber fixing, and advance upon the nearest zombie - a rather buxom specimen of a young elf woman, had she not been a zombie. Gathering all your strength, you thrust your blessed weapon straight for the vile creature’s heart -", parse);
 						Text.NL();
@@ -1715,7 +1715,7 @@ export namespace HalloweenScenes {
 				if (party.Inv().QueryNum(HalloweenItems.HolyWater)) {
 					options.push({ nameStr : "Holy Water",
 						tooltip : "Holy water’s supposed to be good against the undead, isn’t it?",
-						func() {
+						func: () => {
 							Text.Clear();
 							Text.Add("Rummaging about in your possessions, you feel your fingers close about the canteen of holy water in your possession. Or is that “holee”? When the walking dead are advancing upon you, who cares? Unscrewing the top off the canteen, you hurl the holy water at the nearest zombie at hand.", parse);
 							Text.NL();
@@ -1733,7 +1733,7 @@ export namespace HalloweenScenes {
 				if (party.Inv().QueryNum(HalloweenItems.Garlic)) {
 					options.push({ nameStr : "Garlic",
 						tooltip : "Maybe the garlic can help you here. It repels evil, right?",
-						func() {
+						func: () => {
 							Text.Clear();
 							Text.Add("Thinking quickly, you draw the string of garlic out from the pack and hang it around your neck. While its reputation for warding off evil is most commonly associated with vampires, you’re pretty sure it extends to zombies as well - or so you hope. The string of bulbs isn’t just heavy - it stinks to high heaven with you just wearing it, and already you can see the zombies nearest to you shrinking back from the overpowering stench.", parse);
 							Text.NL();
@@ -1753,7 +1753,7 @@ export namespace HalloweenScenes {
 				if (party.Inv().QueryNum(HalloweenItems.Shades)) {
 					options.push({ nameStr : "Shades",
 						tooltip : "The shades! You're not sure how they will work against the zombies, but perhaps it's time to try your luck...",
-						func() {
+						func: () => {
 							Text.Clear();
 							Text.Add("You slip on the shades, and instantly feel cooler. About twenty percent cooler, to be exact. Zombies are so dumb that if you can’t see them, they think they can’t see you… that’s how the invisibility charm works, right?", parse);
 							Text.NL();
@@ -1777,7 +1777,7 @@ export namespace HalloweenScenes {
 				if (party.Inv().QueryNum(HalloweenItems.SqueakyToy)) {
 					options.push({ nameStr : "Dog Bone",
 						tooltip : "Do zombies like to play fetch?",
-						func() {
+						func: () => {
 							Text.Clear();
 							Text.Add("Picking out the squeaky toy bone from your possessions, you brandish it aloft and press on it a few times. Ringing in the emptiness of the moonlit night, the squeaky noise sure gets the attention of every single zombie in the cemetery. Moaning angrily, the elf zombies redouble their efforts to get to you; you sure caught their attention well enough.", parse);
 							Text.NL();
@@ -2018,13 +2018,13 @@ export namespace HalloweenScenes {
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Yes",
 			tooltip : "It’s just a damned jar, what are you afraid of? What could go wrong?",
-			func() {
+			func: () => {
 				HalloweenScenes.NadirMa();
 			}, enabled : true,
 		});
 		options.push({ nameStr : "No",
 			tooltip : "No, you’re not going to fall for this. Let sleeping evils lie.",
-			func() {
+			func: () => {
 				Gui.PrintDefaultOptions();
 			}, enabled : true,
 		});
@@ -2289,7 +2289,7 @@ export namespace HalloweenScenes {
 					});
 					options.push({ nameStr : "No",
 						tooltip : "Nobody is changing your body, no matter who they think they are.",
-						func() {
+						func: () => {
 							Text.Clear();
 							HalloweenScenes.NadirMaNoEntry(parse, prompt3);
 						}, enabled : true,
@@ -2310,7 +2310,7 @@ export namespace HalloweenScenes {
 			});
 			options.push({ nameStr : "No",
 				tooltip : "You’re nobody’s servant, not even for a piece of tail like her.",
-				func() {
+				func: () => {
 					Text.Clear();
 					HalloweenScenes.NadirMaNoEntry(parse, prompt2);
 				}, enabled : true,
@@ -2326,7 +2326,7 @@ export namespace HalloweenScenes {
 		});
 		options.push({ nameStr : "No",
 			tooltip : "If something’s too good to be true, it certainly is. No chance.",
-			func() {
+			func: () => {
 				Text.Clear();
 				HalloweenScenes.NadirMaNoEntry(parse, prompt1);
 			}, enabled : true,
@@ -2546,7 +2546,7 @@ export namespace HalloweenScenes {
 				});
 				options.push({ nameStr : "No",
 					tooltip : "No way; the cock is one thing, but you don’t need a pair of ugly balls hanging over your cunt too!",
-					func() {
+					func: () => {
 						Text.Clear();
 						HalloweenScenes.NadirMaNoEntry(parse, prompt2);
 					}, enabled : true,
@@ -2563,7 +2563,7 @@ export namespace HalloweenScenes {
 		});
 		options.push({ nameStr : "No",
 			tooltip : "Gross! You’re not licking cum off of anything, especially not off of someone’s foot!",
-			func() {
+			func: () => {
 				Text.Clear();
 				HalloweenScenes.NadirMaNoEntry(parse, prompt);
 			}, enabled : true,
@@ -2960,7 +2960,7 @@ export namespace HalloweenScenes {
 		});
 		options.push({ nameStr : "No",
 			tooltip : "Uh-uh, no way, your ass is strictly exit only! You draw the line here!",
-			func() {
+			func: () => {
 				Text.Clear();
 				HalloweenScenes.NadirMaNoEntry(parse, prompt);
 			}, enabled : true,
@@ -2992,7 +2992,7 @@ export namespace HalloweenScenes {
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Obey",
 				tooltip : "Best not to piss off someone who’s obviously supernatural.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Swallowing your pride, you put on your best apologetic smile and tell her that you didn’t mean it. You’ll be happy to do what she wants.", parse);
 					Text.NL();
@@ -3003,7 +3003,7 @@ export namespace HalloweenScenes {
 			});
 			options.push({ nameStr : "Defy",
 				tooltip : "You don’t care who or what she is, no means no!",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Looking her straight in the eye, you tell her that you said no, and you meant it.", parse);
 					Text.NL();
@@ -3498,7 +3498,7 @@ export namespace HalloweenScenes {
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Fight!",
 			tooltip : "You aren’t going to let some crazy fox make a slave out of you!",
-			func() {
+			func: () => {
 				Text.Clear();
 				if (werewolf) {
 					Text.Add("You throw your head back and howl like the beast you are before springing forward, swiping your claws at the vampiric vulpine.", parse);
@@ -3521,7 +3521,7 @@ export namespace HalloweenScenes {
 		});
 		options.push({ nameStr : "Submit!",
 			tooltip : "Yes, give in, serve him...",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("A smile of purest ignorant bliss washes across your face as you give yourself over to your Master’s will. You can feel your thoughts blurring, a wonderfully soft fog creeping over your mind, drowning out everything but the need to obey your Master...", parse);
 				Text.NL();
@@ -3530,7 +3530,7 @@ export namespace HalloweenScenes {
 		});
 		options.push({ nameStr : "Flee!",
 			tooltip : "Time to run for it!",
-			func() {
+			func: () => {
 				Text.Clear();
 				parse.w = werewolf ? ", dropping to all fours for an extra burst of speed" : "";
 				Text.Add("With a shake of your head, you spin around and bolt for the stairway out of this forsaken place[w].", parse);
@@ -3562,7 +3562,7 @@ export namespace HalloweenScenes {
 		if (party.Inv().QueryNum(HalloweenItems.Garlic)) {
 			options.push({ nameStr : "Use garlic!",
 				tooltip : "That pack the merchant gave you; it’s your only hope!",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("With a surge of willpower, and no small amount of desperation, you lunge for the pack that you received from the witch. Plunging your hand inside, fortune smiles as you immediately find the key to your survival. With a triumphant shout, you withdraw the strung-together bulbs of garlic, brandishing the aromatic ornament at the vulpine vampire.", parse);
 					Text.NL();
@@ -3621,7 +3621,7 @@ export namespace HalloweenScenes {
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Sex",
 			tooltip : "How could you possibly turn this over? Let’s see if this vampire is the sex god they like to say they are...",
-			func() {
+			func: () => {
 				Text.Clear();
 
 				HW.harthon |= HalloweenFlags.Harthon.Thrall;
@@ -3652,7 +3652,7 @@ export namespace HalloweenScenes {
 				if (femHarthon) {
 					options.push({ nameStr : "Pussy",
 						tooltip : "How could you resist breaking in her new pussy?",
-						func() {
+						func: () => {
 							Text.Clear();
 							if (werewolf) {
 								Text.Add("Fortunately, you don’t need to worry about undressing in turn. Your fur keeps you modest when you need it, but doesn’t get in the way when you don’t.", parse);
@@ -3688,7 +3688,7 @@ export namespace HalloweenScenes {
 				}
 				options.push({ nameStr : "Ass",
 					tooltip : Text.Parse("That lovely ass of [hishers] is far too tempting to pass up.", parse),
-					func() {
+					func: () => {
 						Text.Clear();
 						if (werewolf) {
 							Text.Add("Fortunately, you don’t need to worry about undressing in turn. Your fur keeps you modest when you need it, but doesn’t get in the way when you don’t.", parse);
@@ -3733,7 +3733,7 @@ export namespace HalloweenScenes {
 			!(HW.harthon & HalloweenFlags.Harthon.Feminized)) {
 			options.push({ nameStr : "Holy Water",
 				tooltip : "If the garlic did this, what might the Holy Water do? Can’t hurt to give it a shot.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Doing your best to ignore the mewling, panting vampire before you, you pull out the Holee Water canteen. No matter how much you look at it, it still looks like a cheap knock-off; does it even hold what it claims to?", parse);
 					Text.NL();
@@ -3772,7 +3772,7 @@ export namespace HalloweenScenes {
 		}
 		options.push({ nameStr : "Leave",
 			tooltip : Text.Parse("...Yeah, like you’re going to fuck a horny vampire. [HeShe]’ll bite you the second [heshe]’s done cumming.", parse),
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Mind made up, you spin around and make for the stairwell leading out of this dank pit. “Lord” Harthon’s pitiful pleas echoing in your ears as you ascend, until finally they are swallowed by the earth as you step forth into the cemetery once again.", parse);
 				Text.Flush();
@@ -4144,7 +4144,7 @@ export namespace HalloweenScenes {
 				const options: IChoice[] = [];
 				options.push({ nameStr : "Let her",
 					tooltip : "Why not let her enjoy herself? Might make her more eager the next time.",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("Moaning softly, you close your eyes and happily bask in Terry’s efforts. Mmm, she’s quite a good little cock-sucker; but then, what more would you expect of a slutty little ex-vampire, hmm? Pleasure washes over you, and all too soon you are emptying a second dose of your seed into Terry’s greedy mouth, the vixen avidly sucking down every last drop.", parse);
 						Text.NL();
@@ -4173,7 +4173,7 @@ export namespace HalloweenScenes {
 				});
 				options.push({ nameStr : "Stop her",
 					tooltip : "You have places to be, it’s time to put an end to this.",
-					func() {
+					func: () => {
 						HalloweenScenes.HarthonPitchVagStop(parse);
 					}, enabled : true,
 				});
@@ -4518,7 +4518,7 @@ export namespace HalloweenScenes {
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Sex",
 			tooltip : Text.Parse("[HeShe] may serve you... most intimately", parse),
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You inform the [foxvixen] that you desire [hisher]... personal attendance.", parse);
 				Text.NL();
@@ -4540,7 +4540,7 @@ export namespace HalloweenScenes {
 				if (femHarthon) {
 					options.push({ nameStr : "Pussy",
 						tooltip : "You want that sweet pussy of hers.",
-						func() {
+						func: () => {
 							parse.preg = (pregStage > 0 && pregStage < 5) ? ", beneath the gravid swell of her belly" : "";
 
 							Text.Clear();
@@ -4598,7 +4598,7 @@ export namespace HalloweenScenes {
 				}
 				options.push({ nameStr : "Ass",
 					tooltip : Text.Parse("[HisHer] sexy ass is far too good to pass up.", parse),
-					func() {
+					func: () => {
 						Text.Clear();
 						parse.w = werewolf ? ", like the predator that you are" : "";
 						Text.Add("Instead of answering Terry with words, you slowly stalk towards [himher][w], circling around to [hisher] rear. If your actions confuse your thrall, [heshe] keeps [hisher] thoughts to [himher]self, obediently standing there as you take your desired position.", parse);
@@ -4670,7 +4670,7 @@ export namespace HalloweenScenes {
 				});
 				options.push({ nameStr : "Blowjob",
 					tooltip : Text.Parse("You want to put [hisher] sucking skills to good use.", parse),
-					func() {
+					func: () => {
 						Text.Clear();
 
 						const first = !(HW.harthon & HalloweenFlags.Harthon.BJ);
@@ -4804,7 +4804,7 @@ export namespace HalloweenScenes {
 		if (!femHarthon && party.Inv().QueryNum(HalloweenItems.HolyWater)) {
 			options.push({ nameStr : "Holy Water",
 				tooltip : "You wish to conduct a little experiment.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Reaching into your belongings, you retrieve the canteen of “Holee Water”, and then tell your thrall to hold still.", parse);
 					Text.NL();
@@ -4966,7 +4966,7 @@ export namespace HalloweenScenes {
 		}
 		options.push({ nameStr : "Dismiss",
 			tooltip : Text.Parse("That will be all, for the moment. [HeShe] is free to leave now.", parse),
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You shake your head and tell Terry that you don’t need anything right now.", parse);
 				Text.NL();
@@ -5166,7 +5166,7 @@ export namespace HalloweenScenes {
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Curiosity",
 			tooltip : "You were just wandering about, no biggie.",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Oh, no particular reason. You were just out here in the middle of the night, saw this burned chapel and thought to yourself that it might just be a nice place to do a little exploring.", parse);
 				Text.NL();
@@ -5176,7 +5176,7 @@ export namespace HalloweenScenes {
 		});
 		options.push({ nameStr : "Treasure",
 			tooltip : "You were here in hopes of nabbing some sweet loot.",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Laggoth sneers at your answer. <i>“Not once in my long captivity in the Pit did I doubt that the greed of mortals would free me from my prison. Even after that, it seems that this particular trait will be downfall of your kind. No! You will not find any treasure remaining in this place, fool. Instead, all you will find is your doom!”</i>", parse);
 				Gui.PrintDefaultOptions();
@@ -5184,7 +5184,7 @@ export namespace HalloweenScenes {
 		});
 		options.push({ nameStr : "Fight Evil",
 			tooltip : "You’re here to vanquish the forces of insufficient light!",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You answer that you’re here to fight the evil lurking in the chapel - that is, Laggoth himself.", parse);
 				Text.NL();
@@ -5202,7 +5202,7 @@ export namespace HalloweenScenes {
 		});
 		options.push({ nameStr : "Don’t Answer",
 			tooltip : "Just keep mum, you don’t want to let on more than you already have.",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Not intending to let on any more than you absolutely have to, you stare at the demon king in stony silence - or at least, as stony as you can muster while having to endure the sulfurous reek coming off him.", parse);
 				Text.NL();
@@ -5270,7 +5270,7 @@ export namespace HalloweenScenes {
 		if (!opts.pref) {
 			options.push({ nameStr : "Preferences",
 				tooltip : "So, what’s he into anyway?",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Laggoth looks a little startled at the question, the demon king narrowing his burning eyes. <i>“What’s it to you?”</i>", parse);
 					Text.NL();
@@ -5303,7 +5303,7 @@ export namespace HalloweenScenes {
 		if (!opts.conq) {
 			options.push({ nameStr : "Conquest",
 				tooltip : "He really means to rule the entirety of this plane, eh? Any particular reason why?",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“Because,”</i> Laggoth replies with full confidence, <i>“that’s what we Lords of the Pit do.”</i>", parse);
 					Text.NL();
@@ -5332,7 +5332,7 @@ export namespace HalloweenScenes {
 		if (!opts.imps) {
 			options.push({ nameStr : "Imps",
 				tooltip : "If he’s really that great and powerful, why’s all he got at his command a handful of imps?",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“Why? Are you trying to tell me that my underlings are somehow inferior?”</i>", parse);
 					Text.NL();
@@ -5388,7 +5388,7 @@ export namespace HalloweenScenes {
 				const options: IChoice[] = [];
 				options.push({ nameStr : "Comfort",
 					tooltip : "It’s clear that Laggoth’s clearly trying a bit too hard at this demon king gig. He must be having a hard time to be overcompensating this much.",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("Look, you know this must be hard on him.", parse);
 						Text.NL();
@@ -5458,7 +5458,7 @@ export namespace HalloweenScenes {
 				});
 				options.push({ nameStr : "Resign",
 					tooltip : "Yeah… when you look at it, a handjob isn’t that big of a deal. You shouldn’t have come here without properly preparing yourself, anyway.",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("Eh, a handjob isn’t too bad a thing. He could’ve demanded to stick that monster of his into you, and that would’ve been something else altogether, but Laggoth seems to be a reasonable fellow - for a demon king, anyway. ", parse);
 						Text.NL();
@@ -5554,7 +5554,7 @@ export namespace HalloweenScenes {
 		if (party.Inv().QueryNum(HalloweenItems.HolyWater)) {
 			options.push({ nameStr : "Holy Water",
 				tooltip : "Holy water should be effective against demons. Splash it on him!",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Pulling the canteen of “Holee Water” out of your possessions, you quickly unscrew the top while Laggoth’s attention is occupied and upend it all over the demon king. The clear liquid washes its way over the demon king’s body, erupting into large plumes of blue holy flame that consume his entire form.", parse);
 					Text.NL();
@@ -5608,7 +5608,7 @@ export namespace HalloweenScenes {
 		}
 		options.push({ nameStr : "Stake",
 			tooltip : "That “stake” of yours is your only hope! Nail the demon king with your holy stake!",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("That’s it - the stake! Pulling the holy weapon out from your pack, you seize the opportunity by the throat and plunge the blessed dildo deep into Laggoth’s waiting pucker, putting all of your strength into the blow and ramming it in as far as it’ll go. There’s a brief moment of silence as time seems to slow to a crawl… and then the demon king roars and flails as he bursts into an enormous plume of sickly orange-green flames and acrid smoke. Groaning, he slumps to the floor face down with his ass raised high in the air, the blessed dildo still sticking up from between his butt cheeks, untouched by the flames and unsullied by ash.", parse);
 				Text.NL();
@@ -5674,7 +5674,7 @@ export namespace HalloweenScenes {
 		if (party.Inv().QueryNum(HalloweenItems.Garlic)) {
 			options.push({ nameStr : "Garlic",
 				tooltip : "Garlic is supposed to ward off evil… let’s see if it’s strong enough to ward off this evil.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("A determined glint in your eye, you bring out the string of garlic from your pack and wave it about. Gah, it stinks, almost as bad as the sulfurous stench that pervades the air! Nevertheless, you hold it out, hoping that it’ll… well… do something. Anything?", parse);
 					Text.NL();
@@ -5691,7 +5691,7 @@ export namespace HalloweenScenes {
 		if (party.Inv().QueryNum(HalloweenItems.Bread)) {
 			options.push({ nameStr : "Bread",
 				tooltip : "That stick of bread you have… it’s perfectly useable as a club. Go to town!",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Yes! That stick of hard, stale bread in your hands… it looks like the sort of thing which could brain a minotaur and then go for seconds on anyone nearby. For goodness’ sake, the thing’s practically fossilized!", parse);
 					Text.NL();
@@ -5802,7 +5802,7 @@ export namespace HalloweenScenes {
 		});
 		options.push({ nameStr : "No",
 			tooltip : "This isn’t something you want to get tangled up with.",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("The roses, the thorns, the scent, the bed… you’re not quite sure that you’ll be able to handle whatever it is that’s hidden behind the drapes. Not just yet, anyway - you’re not running away, it’s merely a tactical retreat that you’re beating here. Slowly, you back away from the defiled, overgrown sacristy and once you’re out of sight of the doorway, make a dash for the pews.", parse);
 				Text.Flush();
@@ -6043,7 +6043,7 @@ export namespace HalloweenScenes {
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Submit",
 			tooltip : "It’s hopeless. Might as well just lie back and enjoy your new life as a fallen angel’s breeding slave.",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Oh, what’s the use. Lying here in this oh-so-comfortable bed, having your cock milked by someone both skilled and eager, for the express purpose of bearing as many of your offspring as possible… and for all eternity, too. There are far worse fates than this, you realize as the gentle haze descends upon your senses once more and snuffs out your last spark or resistance. Far worse fates…", parse);
 				Text.NL();
@@ -6132,7 +6132,7 @@ export namespace HalloweenScenes {
 		});
 		options.push({ nameStr : "Resist",
 			tooltip : "No! You’ve got to fight this!",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("No! The realization that this demoness was somehow screwing with your mind only fuels the sudden spark of anger that flares in your breast, and… and…", parse);
 				Text.NL();
@@ -6157,7 +6157,7 @@ export namespace HalloweenScenes {
 				const options: IChoice[] = [];
 				options.push({ nameStr : "Flee",
 					tooltip : "You don’t want to push your luck. Get out of here!",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("Screw this, you’ve had just about enough of this demoness and her insidious way of affecting one’s mind. Taking care not to tread on any of the thorny rose vines, you nip on out of the former sacristy as quickly as you can while Lenka struggles against her bonds. You’d do well not to return here, because she’s going to be furious when she finally gets free… ", parse);
 						Text.Flush();
@@ -6167,7 +6167,7 @@ export namespace HalloweenScenes {
 				});
 				options.push({ nameStr : "Turn Tables",
 					tooltip : "Seeing the demoness tied up like this gives you an idea… if she wants your cum so badly, she can take it in her butt.",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("A grin spreads across your [face] as a particularly nasty thought comes to mind: since this lusty hussy wants your seed so much, you’re more than willing to give it to her - in the entirely wrong place, of course. Besides, her bird-butt is jiggling so prettily as she squirms about on the sheets, trying to free herself from her bonds; it’d be a shame not to get a good, firm handful of those.", parse);
 						Text.NL();
@@ -6313,14 +6313,14 @@ export namespace HalloweenScenes {
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Sure",
 				tooltip : "Yeah, you changed your mind.",
-				func() {
+				func: () => {
 					Text.Clear();
 					HalloweenScenes.JennaBroomfuck();
 				}, enabled : true,
 			});
 			options.push({ nameStr : "Nah",
 				tooltip : "Answer’s still no, sorry.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Thanks for the offer, but you’ll still decline.", parse);
 					Text.NL();
@@ -6350,7 +6350,7 @@ export namespace HalloweenScenes {
 
 		options.push({ nameStr : "Switch",
 			tooltip : "The witch’s up to no good. Switch the teacups.",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Yeaah… you don’t trust this Jenna witch one bit. She probably messed with your tea or something… just to be on the safe side, you’ll switch the drinks. If she isn’t trying to pull any shenanigans, no harm done, and if she is… well.", parse);
 				Text.NL();
@@ -6393,7 +6393,7 @@ export namespace HalloweenScenes {
 		});
 		options.push({ nameStr : "Don’t Switch",
 			tooltip : "Trust the witch and drink your own tea.",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Eh, it doesn’t do to be suspicious of everyone all the time. Picking up your cup, you drain it of its contents - the tea is sweet and refreshing, although you’re fairly sure that this wasn’t brewed from your run-of-the-mill tea leaves.", parse);
 				Text.NL();
@@ -6456,7 +6456,7 @@ export namespace HalloweenScenes {
 		if (!opts.trader) {
 			options.push({ nameStr : "Trader",
 				tooltip : "See if the trader has anything to say.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You turn your eyes questioningly towards the trader at your side and their colorful patchwork robes. Surely there <i>has</i> to be some kind of reaction you can get out of them, right?", parse);
 					Text.NL();
@@ -6494,7 +6494,7 @@ export namespace HalloweenScenes {
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Agree",
 			tooltip : "Yeah, sure. You suppose you could agree to that...",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You know what? That sure sounds kinky. Yeah, one for broomstick fuckings, please. Without hesitation, you lunge forward and plant a deep kiss on Jenna’s lips with such force that her witch’s hat falls off her head and floats to the ground. She doesn’t care as she leans into you and returns the kiss with equal vigor, your tongues wrestling, her ample milk cans pressing against your [breasts] as her weight presses against you. After what seems like forever, she pulls away with an audible pop and whispers into your ear.", parse);
 				Text.NL();
@@ -6515,7 +6515,7 @@ export namespace HalloweenScenes {
 		});
 		options.push({ nameStr : "Don’t Agree",
 			tooltip : "That doesn’t sound like something you’d like to engage in.",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("No, nein, nope, nada. This place is weird enough, but you’re drawing the line here.", parse);
 				Text.NL();
@@ -6532,7 +6532,7 @@ export namespace HalloweenScenes {
 		if (!opts.what) {
 			options.push({ nameStr : "...What?",
 				tooltip : "Uh, you don’t quite get what was said.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Wait wait wait wait wait. She wants to <b>what</b>?", parse);
 					Text.NL();
@@ -6846,7 +6846,7 @@ export namespace HalloweenScenes {
 		if (hasPassword) {
 			options.push({ nameStr : "Give Password",
 				tooltip : Text.Parse("Alright, you found something that may be a password. Let’s try it and see what [heshe] think[s].", parse),
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Well... lets see how this goes... [pw]?", {pw: Halloween.PW()});
 					success();
@@ -6855,7 +6855,7 @@ export namespace HalloweenScenes {
 		}
 		options.push({ nameStr : "Input",
 			tooltip : "Try to input password.",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("So, how about...", parse);
 				Text.Flush();
@@ -6884,7 +6884,7 @@ export namespace HalloweenScenes {
 		});
 		options.push({ nameStr : "Say Anything",
 			tooltip : knowsPatches ? "Patches never changes; same old game. Just make something up and you know she’ll buy it." : "They can’t seriously expect you to know some cockamamie password. Just try spouting some gibberish, that ought to satisfy them.",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You spout some random gibberish... [pw]?", { pw : PatchworkScenes.PW() });
 				failure();
@@ -6892,7 +6892,7 @@ export namespace HalloweenScenes {
 		});
 		options.push({ nameStr : "Leave",
 			tooltip : "There’s nothing more you can do here, you might as well get going.",
-			func() {
+			func: () => {
 				Text.Clear();
 				parse.p = knowsPatches ? ", beyond a nod of the head" : "";
 				Text.Add("You say goodbye to [Patches], even though you don’t get a response in return[p], and leave [himher] be.", parse);

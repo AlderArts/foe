@@ -372,7 +372,7 @@ export namespace NobleScenes {
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Old man",
 			tooltip : "Side with the old man.",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Deciding to intervene, you step towards the duo - they freeze and stare at you a moment as you approach, then quickly relax when they realize you aren’t with the Royal Guard. Quickly explaining that you heard everything, you begin chiding the younger man for his reluctance - it’s just a single coin, after all, and it’s not as if he truly intends to steal it if he intends to replace the missing money once he receives his wages. Does he really intend to put his grandfather through that all over a white lie?", parse);
 				Text.NL();
@@ -391,7 +391,7 @@ export namespace NobleScenes {
 		});
 		options.push({ nameStr : "Young man",
 			tooltip : "Side with the young man.",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Deciding to intervene, you step towards the duo - they freeze and stare at you a moment as you approach, then quickly relax when they realize you aren’t with the Royal Guard. Quickly explaining that you heard everything, you chide the older man for urging his grandson to steal from his lord. Even if the theft wasn’t noticed, one lie tends to lead to another - and if it <i>were</i> noticed, that’d mean his entire livelihood would be at stake. Go hungry for a few days, or go hungry for who knows how long?", parse);
 				Text.NL();
@@ -402,7 +402,7 @@ export namespace NobleScenes {
 				const options: IChoice[] = [];
 				options.push({ nameStr : "Give",
 					tooltip : "Give the old man one of your own coins.",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("Digging into your own pockets, you draw out a coin and press it into the older man’s hand. There, a coin of your own in lieu of one dishonestly gained. Is he happy now?", parse);
 						Text.NL();
@@ -418,7 +418,7 @@ export namespace NobleScenes {
 				});
 				options.push({ nameStr : "Leave",
 					tooltip : "Just walk away. He’s not deserving of so much as a coin.",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("Well then, that’s his problem to solve, isn’t it? What with such short-sightedness in jeopardizing his grandson’s livelihood and his future source of income, maybe that’s something to think about.", parse);
 						Text.NL();
@@ -433,7 +433,7 @@ export namespace NobleScenes {
 		});
 		options.push({ nameStr : "Leave",
 			tooltip : "Just walk away, this is none of your business.",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Shrugging, you turn and walk away, leaving the old man and his grandson to sort matters out on their own - well, it’s that, or all the noise they’re making is going to draw the guard and have the former thrown out of the castle grounds.", parse);
 				Text.NL();
@@ -472,7 +472,7 @@ export namespace NobleScenes {
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Confront",
 			tooltip : "It’s impolite to stare, you know.",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Making up your mind to confront the strange servant, you start off towards her, determined to at least find out why you’re such an interesting person. Before you can reach her, though, she disappears almost as if by magic - it happens so suddenly that you do a double-take, but there’s no doubt about it: she’s gone.", parse);
 				Text.NL();
@@ -482,7 +482,7 @@ export namespace NobleScenes {
 		});
 		options.push({ nameStr : "Leave",
 			tooltip : "Just slip away, the last thing you need is a ruckus on the palace grounds.",
-			func() {
+			func: () => {
 				Text.Clear();
 
 				const humanity = player.Humanity();
@@ -668,7 +668,7 @@ export namespace NobleScenes {
 		if (first) {
 			options.push({ nameStr : "Buy",
 				tooltip : "Sure, you’ll have one of… whatever he’s selling.",
-				func() {
+				func: () => {
 					Text.Clear();
 
 					rigard.flags.Nobles |= RigardFlags.Nobles.BoughtBuns;
@@ -718,7 +718,7 @@ export namespace NobleScenes {
 			});
 			options.push({ nameStr : "No",
 				tooltip : "It might smell delicious, but you think you’ll pass this time.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("The young man shrugs at your reply, flipping the meat patties with his spatula to brown them evenly. <i>“Suit yourself. If you change your mind, I’m in the castle district most days, although I can’t guarantee I won’t be sold out by the time you get here. These things move really quickly.”</i>", parse);
 					Text.NL();
@@ -731,7 +731,7 @@ export namespace NobleScenes {
 		} else {
 			options.push({ nameStr : "Yes",
 				tooltip : "Sure, you’ve got nothing better to do with your money.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Sure! If you’re going to burn your money, you might as well do so spending it on overpriced food that’s touted as being wonderfully scrumptious! It’s even better than wasting it at a fancy restaurant - because, let’s face it, doing so means that you probably won’t even be guaranteed that the food will taste good, just be called by some funny name.", parse);
 					Text.NL();
@@ -791,7 +791,7 @@ export namespace NobleScenes {
 			});
 			options.push({ nameStr : "No",
 				tooltip : "Hmm, maybe not today.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Nah. While the smell <i>is</i> appetizing, you’re not that hungry yet. You’ll pass for now.", parse);
 					Text.NL();

@@ -74,7 +74,7 @@ export namespace CvetaScenes {
 		// [Yes][No]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Yes",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You ask Cveta what it is she wants.", parse);
 				Text.NL();
@@ -129,7 +129,7 @@ export namespace CvetaScenes {
 			tooltip : "You do have the time to hear what the songstress wants.",
 		});
 		options.push({ nameStr : "No",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You tell Cveta that you’ll be a little busy for the next few days. Is it important?", parse);
 				Text.NL();
@@ -164,7 +164,7 @@ export namespace CvetaScenes {
 		// [Yes][No]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Yes",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("She brightens immediately. <i>“You have it? Please, hand it over.”</i>", parse);
 				Text.NL();
@@ -202,7 +202,7 @@ export namespace CvetaScenes {
 			tooltip : "Yes, you got the violin. Here it is, in all its glory.",
 		});
 		options.push({ nameStr : "No",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“I see. Are the gate guards being an exceptionally noisome lot of late?”</i>", parse);
 				Text.NL();
@@ -275,26 +275,26 @@ export namespace CvetaScenes {
 		// [Talk][Music][Play][Leave]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Talk",
-			func() {
+			func: () => {
 				CvetaScenes.TalkPrompt();
 			}, enabled : true,
 			tooltip : "Speak with Cveta. She’s not one for small talk, though.",
 		});
 		options.push({ nameStr : "Music",
-			func() {
+			func: () => {
 				CvetaScenes.MusicPrompt();
 			}, enabled : true,
 			tooltip : "Have the beautiful bird give you a private performance.",
 		});
 		options.push({ nameStr : "Play",
-			func() {
+			func: () => {
 				CvetaScenes.PlayPrompt();
 			}, enabled : true,
 			tooltip : "Play around with Cveta. Maybe you can break that prudish attitude of hers…",
 		});
 		if (cveta.flags.Music >= CvetaFlags.Music.Talked && cveta.flags.Bard < CvetaFlags.Bard.Taught && cveta.flags.Singer < CvetaFlags.Singer.Taught) {
 			options.push({ nameStr : "Teach",
-				func() {
+				func: () => {
 					CvetaScenes.Teach();
 				}, enabled : cveta.Relation() >= 25,
 				tooltip : "Ask Cveta if she can teach you something of her craft.",
@@ -302,7 +302,7 @@ export namespace CvetaScenes {
 		}
 		if (outlaws.BullTowerCompleted()) {
 			options.push({ nameStr : "Get Intimate",
-				func() {
+				func: () => {
 					Text.Clear();
 					parse.rel = cveta.Relation() >= 80 ? ", although you can tell she’s quite flustered at all the attention, judging from the hint of unease that’s crept into her usual composed demeanor" : "";
 					Text.Add("You remember just how warm and comfortable Cveta’s body felt against yours, and are resolved to have just another taste of that delightful touch again. The songstress is still playing away, pretending not to notice your roving eyes[rel].", parse);
@@ -314,7 +314,7 @@ export namespace CvetaScenes {
 			});
 
 			options.push({ nameStr : "Date",
-				func() {
+				func: () => {
 					CvetaDateScenes.Prompt(CvetaScenes.Prompt);
 				}, enabled : true,
 				tooltip : "Ask Cveta if she’d like to go somewhere with you.",
@@ -467,7 +467,7 @@ export namespace CvetaScenes {
 		// [Flirt][Pet][Get Intimate][Date]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Flirt",
-			func() {
+			func: () => {
 				Text.Clear();
 				if (cveta.Relation() < 40) {
 					Text.Add("The songstress looks you directly in the eye, both gaze and face as blank as a stone wall. <i>“Why yes, [playername]. I am acutely aware of the fact that I am quite a desirable specimen of beauty. After all, it is part of the image I am deliberately cultivating for my performances. It helps if the eyes are soothed in addition to the ears.”</i>", parse);
@@ -541,7 +541,7 @@ export namespace CvetaScenes {
 		// [Scratch][Preen][Wings]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Scratch",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You tell Cveta that she’s been looking quite tense of late, and you’d love to help the beautiful bird work out a little stress. The songstress stops playing, but doesn’t set down her lyre and instead closes her eyes and takes a few deep breaths, the heaving of her chest noticeable from under her gown.", parse);
 				Text.NL();
@@ -587,7 +587,7 @@ export namespace CvetaScenes {
 			tooltip : "Give the fluffier bits of her body a good scratching. She needs to loosen up.",
 		});
 		options.push({ nameStr : "Preen",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You tell Cveta that you’d love to help her look her best for her twice-daily performances.", parse);
 				Text.NL();
@@ -627,7 +627,7 @@ export namespace CvetaScenes {
 			tooltip : "Help Cveta make sure she’s always looking regal and proper.",
 		});
 		options.push({ nameStr : "Wings",
-			func() {
+			func: () => {
 				Text.Clear();
 				if (cveta.Relation() < 50) {
 					Text.Add("<i>“The offer is appreciated, but I believe that I will be fine with handling them on my own,”</i> Cveta tells you. <i>“My wings are very delicate things, as you might imagine, and quite sensitive, too. A deft touch is needed.”</i>", parse);
@@ -731,7 +731,7 @@ export namespace CvetaScenes {
 		// [Wellbeing][Chat][Herself][Back]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Wellbeing",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Cveta tilts her head slightly to the side and regards you. <i>“I am in fine health and of good disposition, [playername]. Your concern is appreciated. And do you fare well yourself?”</i>", parse);
 				Text.Flush();
@@ -739,7 +739,7 @@ export namespace CvetaScenes {
 				// [Yes][No]
 				const options: IChoice[] = [];
 				options.push({ nameStr : "Yes",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("You tell Cveta that things are going smoothly for you.", parse);
 						Text.NL();
@@ -750,7 +750,7 @@ export namespace CvetaScenes {
 					tooltip : "You’re doing just fine.",
 				});
 				options.push({ nameStr : "No",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("You tell Cveta that you’ve seen better days.", parse);
 						Text.NL();
@@ -765,7 +765,7 @@ export namespace CvetaScenes {
 			tooltip : "Ask how Cveta is doing.",
 		});
 		options.push({ nameStr : "Chat",
-			func() {
+			func: () => {
 				Text.Clear();
 				if (cveta.Relation() < 50) {
 					Text.Add("<i>“I am sorry, [playername]. I do not think very much of idle, inconsequential chatter, even if your intentions in doing so are good. Please, might we find a more serious topic of conversation?”</i>", parse);
@@ -812,7 +812,7 @@ export namespace CvetaScenes {
 			tooltip : "Just chat a bit.",
 		});
 		options.push({ nameStr : "Herself",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“I see. Do be aware that while you are free to ask questions, [playername], I am equally free to attempt to evade them or refuse to answer outright.”</i>", parse);
 				Text.NL();
@@ -843,7 +843,7 @@ export namespace CvetaScenes {
 		// [Outlaws][Nobility][Mandate][Past][Voice][Music]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Outlaws",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("The songstress frowns at your question, moving to smooth out a few wrinkles on her faded gown. <i>“I believe I have already related this tale to you?”</i>", parse);
 				Text.NL();
@@ -883,7 +883,7 @@ export namespace CvetaScenes {
 		});
 		if (cveta.flags.Herself >= CvetaFlags.Herself.Outlaws) {
 			options.push({ nameStr : "Nobility",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“Mmm…”</i> Cveta’s uncovered eye flicks this way and that. <i>“Are you sure you wish to hear my opinion on this subject, [playername]? It can get quite unorthodox.”</i>", parse);
 					Text.NL();
@@ -916,7 +916,7 @@ export namespace CvetaScenes {
 					// [Naive][Idealistic][No Comment]
 					const options: IChoice[] = [];
 					options.push({ nameStr : "Naive",
-						func() {
+						func: () => {
 							Text.Clear();
 							Text.Add("Surely, she can’t be so naive as to be blind the to the way the world really is?", parse);
 							Text.NL();
@@ -932,7 +932,7 @@ export namespace CvetaScenes {
 						tooltip : "Sounds like this bird is overly romantic… does she know the way the real world works?",
 					});
 					options.push({ nameStr : "Idealistic",
-						func() {
+						func: () => {
 							Text.Clear();
 							Text.Add("<i>“Well, of course it is,”</i> Cveta remarks dryly. <i>“It is an ideal, and thus I do not realistically expect it to be attained by anyone without immense effort, if attaining it is possible at all. Yet all things ought to strive, [playername], and it helps and inspires when one has something in mind to strive for. Aimless wandering can hardly be expected to produce results, and time is too precious to be wasted on games of chance.”", parse);
 							Text.NL();
@@ -943,7 +943,7 @@ export namespace CvetaScenes {
 						tooltip : "That sounds a little idealistic.",
 					});
 					options.push({ nameStr : "No comment",
-						func() {
+						func: () => {
 							Text.Clear();
 							Text.Add("<i>“That is all right,”</i> Cveta replies. clicking her beak. <i>“The less people have to think about politics in their day-to-day lives, the better the system is working to serve them in accordance with the Mandate of the Spirits. It is like… ah, air, money, or maybe love. Perfectly unimportant when all is proper and in place, a desperately pressing need when something has gone awry.”</i>", parse);
 							Text.NL();
@@ -964,7 +964,7 @@ export namespace CvetaScenes {
 		}
 		if (cveta.flags.Herself >= CvetaFlags.Herself.Nobility) {
 			options.push({ nameStr : "Mandate",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Cveta blinks, then composes herself. <i>“I am surprised you caught that, [playername]. The Mandate of the Spirits is but a saying from where I come from. The idea goes as such: if the monarch and aristocracy of a land rule it well and justly, their reign will be blessed with peace and prosperity.”", parse);
 					Text.NL();
@@ -981,7 +981,7 @@ export namespace CvetaScenes {
 			});
 		}
 		options.push({ nameStr : "Past",
-			func() {
+			func: () => {
 				Text.Clear();
 				if (cveta.Relation() < 30) {
 					Text.Add("<i>“I do not wish to discuss it.”</i>", parse);
@@ -1038,7 +1038,7 @@ export namespace CvetaScenes {
 			tooltip : "Ask Cveta about her past.",
 		});
 		options.push({ nameStr : "Voice",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“Even I do not know much about it myself, I must confess,”</i> Cveta admits, staring into the distance past your shoulder. <i>“Father told me that it has always been in our family line, just as we have always been bird-morphs of one kind or another. Our voices manifest themselves differently in accordance to who we are - for example, one of my cousins simply commands with brute force and expects to be obeyed, while I myself prefer to be more… subtle.”</i>", parse);
 				Text.NL();
@@ -1074,7 +1074,7 @@ export namespace CvetaScenes {
 			tooltip : "Just what is this strange power of Cveta’s?",
 		});
 		options.push({ nameStr : "Music",
-			func() {
+			func: () => {
 				Text.Clear();
 
 				if (cveta.flags.Music < CvetaFlags.Music.Talked) {
@@ -1129,7 +1129,7 @@ export namespace CvetaScenes {
 		// [Sing][Play Lyre][Play Violin]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Sing",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You tell Cveta that you’d like to hear her lovely voice at work.", parse);
 				Text.NL();
@@ -1207,7 +1207,7 @@ export namespace CvetaScenes {
 			tooltip : "Do you know why the caged bird sings?",
 		});
 		options.push({ nameStr : "Play lyre",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You indicate that you’d like to hear her play something on her lyre.", parse);
 				Text.NL();
@@ -1284,7 +1284,7 @@ export namespace CvetaScenes {
 		});
 		if (cveta.Violin()) {
 			options.push({ nameStr : "Play violin",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You tell Cveta that you’d love to hear her play the violin.", parse);
 					Text.NL();
@@ -1317,7 +1317,7 @@ export namespace CvetaScenes {
 						// [Great!][Bad][Eh…]
 						const options: IChoice[] = [];
 						options.push({ nameStr : "Great!",
-							func() {
+							func: () => {
 								Text.Clear();
 								Text.Add("Cveta sniffs at your answer. <i>“You do not have to flatter me, you know. That outro was deliberately bad. Whoever ends like that and lets an audience down on their expectations? They end up feeling empty and unfulfilled, you know. I am not so full of myself that I cannot bear someone pointing out a flaw in my playing, especially when the entire point of this session is to improve.”</i>", parse);
 								Text.NL();
@@ -1326,7 +1326,7 @@ export namespace CvetaScenes {
 							tooltip : "Tell Cveta it was pretty good.",
 						});
 						options.push({ nameStr : "Bad",
-							func() {
+							func: () => {
 								Text.Clear();
 								Text.Add("Cveta nods. <i>“Well, at least you are honest about it. Yes, I did that poorly on purpose. I suppose I should not have sought to test you, [playername], but you have not disappointed me. It gets very tiring when the only thing that comes out of another’s mouth is praise - not because it is deserved, but because one seeks to flatter.”</i>", parse);
 								Text.NL();
@@ -1335,7 +1335,7 @@ export namespace CvetaScenes {
 							tooltip : "No, that wasn’t acceptable, especially that last bit.",
 						});
 						options.push({ nameStr : "Eh…",
-							func() {
+							func: () => {
 								Text.Clear();
 								Text.Add("The songstress listens to your explanation and waves it off. <i>“That you are trying to be tactful in your honesty speaks well of you, [playername], but feel free to be blunt with me, especially when it comes to the matter of critique. Now, be direct.”</i>", parse);
 								Text.NL();
@@ -1372,7 +1372,7 @@ export namespace CvetaScenes {
 						// [Ask][Let it be]
 						const options: IChoice[] = [];
 						options.push({ nameStr : "Ask",
-							func() {
+							func: () => {
 								Text.Clear();
 								Text.Add("You gently reach out to tap Cveta on the shoulder, and ask if anything happened to inspire today’s performance. The bird-morph doesn’t reply at first, but eventually looks up at you and shakes her head. <i>“No, I am myself today. I merely wished to experiment with a few styles I remember hearing in the distant past. It has been so long that my memories of them are not the sharpest… I merely wished to test myself to see if I could recall them satisfactorily.”</i>", parse);
 								Text.NL();
@@ -1385,7 +1385,7 @@ export namespace CvetaScenes {
 							tooltip : "Question Cveta if she’s feeling all right.",
 						});
 						options.push({ nameStr : "Let it be",
-							func() {
+							func: () => {
 								Text.Clear();
 								Text.Add("Knowing how much the songstress respects her own space, you decide to keep your concerns to yourself. After all, she’ll tell you of her own accord if and when she wants to - trying to pry words from her is harder than a yarn ball from a cat-morph, which everyone knows is almost impossible.", parse);
 								Text.NL();
@@ -1468,7 +1468,7 @@ export namespace CvetaScenes {
 		// [Yes][No]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Yes",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Maria visibly sags at your assent, letting out a sigh of relief. <i>“Oh, thank the stars and spirits. Zenith may have set me to the task, but she drives me crazy. And it's not just how stuck up she is - she uses all those strange words and I can barely understand her. Wouldn't have bothered with such an odd one myself, but he thinks he can use the bird to get leverage from the Free Cities…”</i>", parse);
 				Text.NL();
@@ -1483,7 +1483,7 @@ export namespace CvetaScenes {
 			tooltip : "Take on the job, no matter how momentary, of playing camp counselor.",
 		});
 		options.push({ nameStr : "No",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You shake your head and reply that you don't have the time, either. Besides, you point out to her, considering how “convincing” she was in your first meeting, if she can't take a mere girl in hand, who else can?", parse);
 				Text.NL();
@@ -1573,7 +1573,7 @@ export namespace CvetaScenes {
 		const options: IChoice[] = [];
 		if (opts.wellbeing === false) {
 			options.push({ nameStr : "Wellbeing",
-				func() {
+				func: () => {
 					opts.wellbeing = true;
 					Text.Clear();
 					Text.Add("<i>“I am doing well, thank you very much. There are areas in my life and condition that could use improvement, but all things strive.”</i>", parse);
@@ -1585,7 +1585,7 @@ export namespace CvetaScenes {
 		}
 		if (opts.outlaws === false) {
 			options.push({ nameStr : "Outlaws",
-				func() {
+				func: () => {
 					opts.outlaws = true;
 					Text.Clear();
 					Text.Add("You ask Cveta what she thinks of the outlaws.", parse);
@@ -1599,7 +1599,7 @@ export namespace CvetaScenes {
 		}
 		if (opts.music === false) {
 			options.push({ nameStr : "Music",
-				func() {
+				func: () => {
 					opts.music = true;
 					Text.Clear();
 					Text.Add("<i>“So you heard me play? It was Lady Felicia Kobert's Song without Words in A minor, opus four. Or a variant of it adapted for a solo performance, considering it was originally meant for a proper string quartet. It's quite the moving piece, when played as the composer intended.”</i>", parse);
@@ -1619,7 +1619,7 @@ export namespace CvetaScenes {
 		}
 		if (opts.weather === false) {
 			options.push({ nameStr : "Weather",
-				func() {
+				func: () => {
 					opts.weather = true;
 					Text.Clear();
 					Text.Add("Cveta shrugs, letting out a slight rustle as her feathers move over the fabric of her once-glorious gown.", parse);
@@ -1641,7 +1641,7 @@ export namespace CvetaScenes {
 		}
 		if (options.length === 0) {
 			options.push({ nameStr : "Give up",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("There's nothing left. You're all out of options for making small talk, and Cveta here is remaining as uncooperative as ever. Maybe it would be best to just leave the entire bad situation and tell Maria to-", parse);
 					Text.NL();
@@ -1659,7 +1659,7 @@ export namespace CvetaScenes {
 					// [Truth][Silence]
 					const options: IChoice[] = [];
 					options.push({ nameStr : "Truth",
-						func() {
+						func: () => {
 							Text.Clear();
 							Text.Add("You sigh and admit that Maria was getting worried about her putting on airs, and the effect it was having on some of the outlaws. Cveta listens intently to your words, then nods.", parse);
 							Text.NL();
@@ -1676,7 +1676,7 @@ export namespace CvetaScenes {
 						tooltip : "Tell Cveta that Maria sent you to talk to her, and why.",
 					});
 					options.push({ nameStr : "Silence",
-						func() {
+						func: () => {
 							Text.Clear();
 							Text.Add("Since Cveta's already figured out someone sent you, it'd do little good to claim you just came in for a stroll of your own accord. Shrugging, you opt to stay silent, which seems to be the best way to cover for Maria. After a few moments, Cveta realizes you aren't going to spill the beans and brushes the hair away from her usually covered eye, raising her gaze to meet your own.", parse);
 							Text.NL();
@@ -2212,7 +2212,7 @@ export namespace CvetaScenes {
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Yes",
 			tooltip : "Yes, it does quite fit you.",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Why yes, you tell the songstress - it does sound a lot like you.", parse);
 				Text.NL();
@@ -2227,7 +2227,7 @@ export namespace CvetaScenes {
 		});
 		options.push({ nameStr : "No",
 			tooltip : "No, that’s not how you see yourself.",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Cveta looks a little worried for a moment, then the mood passes and her expression reasserts itself to her usual calm demeanor. <i>“Well, maybe I was wrong and misread you,”</i> she admits. <i>“But there is a difference between how one sees oneself and what one <b>is</b>. I can only read the latter, not the former.”</i>", parse);
 				Text.NL();
@@ -2276,19 +2276,19 @@ export namespace CvetaScenes {
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Nuzzle",
 			tooltip : "She may not be able to kiss you, but this is pretty good, too.",
-			func() {
+			func: () => {
 				CvetaScenes.IntimateNuzzle();
 			}, enabled : true,
 		});
 		options.push({ nameStr : "Cuddle",
 			tooltip : "Embrace the beautiful bird’s warmth.",
-			func() {
+			func: () => {
 				CvetaScenes.IntimateCuddle();
 			}, enabled : true,
 		});
 		options.push({ nameStr : "Grope",
 			tooltip : "Yes, you want to feel more of that flesh under her feathers.",
-			func() {
+			func: () => {
 				CvetaScenes.IntimateGrope();
 			}, enabled : true,
 		});
@@ -2485,7 +2485,7 @@ export namespace CvetaScenes {
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Yes",
 			tooltip : "Screw that, she’s too far gone. Full steam ahead!",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Stop? Screw that, even if you stopped now she’d probably just push herself over the edge anyway. A few deft strokes of your fingers against your broody bird’s pussy is all it takes to send Cveta over the edge, a series of sharp trills rising from her throat as her feminine honey overflows; her pussy lips clench, desperately seeking something to draw into her. Unable to keep standing, Cveta collapses against you, cum stains starting to spread on the skirt of her gown, and you carefully set her down on her bed.", parse);
 				Text.NL();
@@ -2505,7 +2505,7 @@ export namespace CvetaScenes {
 		});
 		options.push({ nameStr : "No",
 			tooltip : "Let her calm down. Pushing her too far now may make her clam up later.",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Carefully, you withdraw your hand from Cveta’s skirts and set her down on her bed, giving her time to calm her thoughts. It takes a good while, but eventually her panting slows as the heat subsides, her gaze becoming focused once more.", parse);
 				Text.NL();

@@ -174,7 +174,7 @@ export namespace FeraScenes {
 		// [Nexelle] [Fera] [Mother] [Shop] [City] [Touch] [Assistance] [Back]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Nexelle",
-			func() {
+			func: () => {
 				// Set timer
 				fera.nexelleTimer = new Time(0, 0, 0, 24 - WorldTime().hour);
 
@@ -188,7 +188,7 @@ export namespace FeraScenes {
 				// [Encourage][Scold][Ignore]
 				const options: IChoice[] = [];
 				options.push({ nameStr : "Encourage",
-					func() {
+					func: () => {
 						Text.Add("You pat Fera on the head and tell her she does a good job and just needs to be more careful. Her face lights up in response to your praise.", parse);
 						Text.Flush();
 						fera.relation.IncreaseStat(100, 1);
@@ -197,7 +197,7 @@ export namespace FeraScenes {
 					tooltip : "Reassure Fera about her work.",
 				});
 				options.push({ nameStr : "Scold",
-					func() {
+					func: () => {
 						Text.Add("You tell Fera she should be ashamed to say such things about her caretaker and that it is her fault for constantly messing up. She looks down and seems saddened by your words.", parse);
 						Text.Flush();
 						fera.relation.DecreaseStat(-100, 1);
@@ -206,7 +206,7 @@ export namespace FeraScenes {
 					tooltip : "Scold her for badmouthing her beautiful employer.",
 				});
 				options.push({ nameStr : "Ignore",
-					func() {
+					func: () => {
 						FeraScenes.Interact();
 					}, enabled : true,
 					tooltip : "Say nothing and move on.",
@@ -217,7 +217,7 @@ export namespace FeraScenes {
 			tooltip : "Speak with Fera about Miss Nexelle.",
 		});
 		options.push({ nameStr : "Fera",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You ask Fera about herself.", parse);
 				Text.NL();
@@ -233,7 +233,7 @@ export namespace FeraScenes {
 		});
 		if (fera.flags.Mom === 1) {
 			options.push({ nameStr : "Mother",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You ask Fera to tell you about her mother.", parse);
 					Text.NL();
@@ -246,7 +246,7 @@ export namespace FeraScenes {
 					// [Hold her] [Apologize] [Scoff] [Ignore]
 					const options: IChoice[] = [];
 					options.push({ nameStr : "Hold her",
-						func() {
+						func: () => {
 							Text.Add("You put an arm around Fera and stroke her head with your other hand. She winces slightly as you brush against a bruise on her scalp, but seems to relax as you pat her hair, soothing the pain. Her sobbing stops after a while and she looks up at you. <i>“Thank you... I'm so sorry about this. I just get so lonely...”</i>", parse);
 							Text.Flush();
 							fera.relation.IncreaseStat(100, 5);
@@ -256,7 +256,7 @@ export namespace FeraScenes {
 						tooltip : "Hold the poor lonely catgirl.",
 					});
 					options.push({ nameStr : "Apologize",
-						func() {
+						func: () => {
 							Text.Add("You apologize to Fera for making her cry. <i>“It's ok...”</i> she sniffs. <i>“I should get back before I get in trouble again...”</i>", parse);
 							Text.Flush();
 							fera.relation.IncreaseStat(100, 1);
@@ -266,7 +266,7 @@ export namespace FeraScenes {
 						tooltip : "Apologize for bringing up her mother.",
 					});
 					options.push({ nameStr : "Scoff",
-						func() {
+						func: () => {
 							Text.Add("Scoffing at her tears, you tell her that you find her whole situation and manner pathetic. You say that if she were stronger, none of these things would bother her. <i>“<b>You are so mean!</b>”</i> she yells as she starts to cry harder. Before you can say anything else, she runs off and heads behind the counter.", parse);
 							Text.Flush();
 							fera.relation.DecreaseStat(-100, 5);
@@ -279,7 +279,7 @@ export namespace FeraScenes {
 						tooltip : "Berate her for being so weak.",
 					});
 					options.push({ nameStr : "Ignore",
-						func() {
+						func: () => {
 							fera.flags.Mom = 3;
 							FeraScenes.Interact();
 						}, enabled : true,
@@ -291,7 +291,7 @@ export namespace FeraScenes {
 			});
 		}
 		options.push({ nameStr : "Shop",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“We sell the nicest clothes!”</i> she exclaims. <i>“Everything here is so soft and nice...”</i> she purrs as she rubs her head against a nearby robe. <i>“Miss Nexelle makes such nice clothes... I wish I could make such nice things...”</i>", parse);
 				Text.NL();
@@ -300,7 +300,7 @@ export namespace FeraScenes {
 				// [Encourage] [Realistic] [Ignore]
 				const options: IChoice[] = [];
 				options.push({ nameStr : "Encourage",
-					func() {
+					func: () => {
 						Text.Add("You smile and tell her that she could be that good if she works at it really hard. <i>“Really? You really think so, [playername]?”</i> She smiles and seems very happy that you believe in her.", parse);
 						Text.Flush();
 						fera.relation.IncreaseStat(100, 1);
@@ -309,7 +309,7 @@ export namespace FeraScenes {
 					tooltip : "Encourage Fera.",
 				});
 				options.push({ nameStr : "Realistic",
-					func() {
+					func: () => {
 						Text.Add("You explain that Miss Nexelle has worked and practiced for years to be so good and that it is unlikely that she would get that good anytime soon. <i>“I know... I just wish I wasn't so clumsy...”</i> she says sadly.", parse);
 						Text.Flush();
 						fera.relation.DecreaseStat(-100, 1);
@@ -318,7 +318,7 @@ export namespace FeraScenes {
 					tooltip : "Tell her not to get her hopes up.",
 				});
 				options.push({ nameStr : "Ignore",
-					func() {
+					func: () => {
 						FeraScenes.Interact();
 					}, enabled : true,
 					tooltip : "Say nothing and move on.",
@@ -331,7 +331,7 @@ export namespace FeraScenes {
 			tooltip : "Ask the cute catgirl about Silken Delights.",
 		});
 		options.push({ nameStr : "City",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You ask Fera what she thinks of the city. <i>“Umm... I think morphs should be treated better. Many people in town are so mean to us just because we look different. It's not fair...”</i> she pouts.", parse);
 				Text.NL();
@@ -340,7 +340,7 @@ export namespace FeraScenes {
 				// [Agree] [Disagree] [Ignore]
 				const options: IChoice[] = [];
 				options.push({ nameStr : "Agree",
-					func() {
+					func: () => {
 						Text.Add("You tell the cute catgirl that you agree with her that morphs should be treated better. <i>“I'm so glad you agree, [playername],”</i> she says with a smile.", parse);
 						Text.Flush();
 						fera.relation.IncreaseStat(100, 1);
@@ -349,7 +349,7 @@ export namespace FeraScenes {
 					tooltip : "Agree with her.",
 				});
 				options.push({ nameStr : "Disagree",
-					func() {
+					func: () => {
 						Text.Add("Shaking your head, you tell her that you don't think it likely or possible for different creatures to be treated as well as humans. You explain that creatures who are different should be treated different. Unsurprisingly, she looks very angry at your words and hurries off, saying nothing.", parse);
 						Text.Flush();
 						fera.relation.DecreaseStat(-100, 2);
@@ -358,7 +358,7 @@ export namespace FeraScenes {
 					tooltip : "Disagree with her.",
 				});
 				options.push({ nameStr : "Ignore",
-					func() {
+					func: () => {
 						FeraScenes.Interact();
 					}, enabled : true,
 					tooltip : "Say nothing.",
@@ -401,7 +401,7 @@ export namespace FeraScenes {
 		// [Cuddle][Fondle]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Cuddle",
-			func() {
+			func: () => {
 				Text.Clear();
 				if (fera.relation.Get() >= 5) {
 					Text.Add("Fera comes close and purrs as you pull her into your arms. She puts her arms around you and rubs her head [against] your [breasts] in return. Clearly, she appreciates someone being kind to her.", parse);
@@ -424,7 +424,7 @@ export namespace FeraScenes {
 			tooltip : "Hold Fera.",
 		});
 		options.push({ nameStr : "Fondle",
-			func() {
+			func: () => {
 				Text.Clear();
 
 				if (fera.relation.Get() >= 8) {
@@ -533,7 +533,7 @@ export namespace FeraScenes {
 		// [Try on][Give oral][Get oral][Titfuck][Sex][Standing][Behind][Anal][Sitting]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Try on",
-			func() {
+			func: () => {
 				p1Cock = player.BiggestCock();
 
 				Text.Clear();
@@ -653,7 +653,7 @@ export namespace FeraScenes {
 		// GIVE ORAL
 		if (fera.relation.Get() >= 10) {
 			options.push({ nameStr : "Give oral",
-				func() {
+				func: () => {
 					Text.Clear();
 					parse.l = player.HasLegs() ? "kneel" : "lower yourself";
 					Text.Add("You instruct Fera to sit on the small bench, spread her legs and lift up her dress. She does as you command, the dress' pink ruffles bunched around her waist, and you [l] on the floor in front of her. Pushing aside her white silk panties, you reveal her [fvag]. Pulling in close, you begin to lick it gently, tasting her sweet folds with your [tongue].", parse);
@@ -678,7 +678,7 @@ export namespace FeraScenes {
 			});
 			// GET ORAL
 			options.push({ nameStr : "Get oral",
-				func() {
+				func: () => {
 					Text.Clear();
 					if (player.FirstCock()) {
 						p1Cock = player.BiggestCock();
@@ -763,7 +763,7 @@ export namespace FeraScenes {
 		// TITJOB
 		if (fera.relation.Get() > 15) {
 			options.push({ nameStr : "Titfuck",
-				func() {
+				func: () => {
 					p1Cock = player.BiggestCock();
 
 					Text.Clear();
@@ -804,7 +804,7 @@ export namespace FeraScenes {
 		}
 		if (fera.relation.Get() >= 20 && fera.FirstVag().virgin) {
 			options.push({ nameStr : "Sex",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You hold her tightly and ask Fera if she wants to have sex with you.", parse);
 					Text.NL();
@@ -871,7 +871,7 @@ export namespace FeraScenes {
 		}
 		if (fera.relation.Get() >= 20 && !fera.FirstVag().virgin) {
 			options.push({ nameStr : "Standing",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("As you begin to remove your [botarmor], you tell Fera to pull up her dress and remove her panties. She does as you ask and stares intently at you, occasionally glancing down at your [cocks][ballsD].", parse);
 					Text.NL();
@@ -940,7 +940,7 @@ export namespace FeraScenes {
 				tooltip : "Do it while standing.",
 			});
 			options.push({ nameStr : "Behind",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("As you quietly remove your [botarmor], your [cocks] flop[notS] out. Fera stares intently at your equipment as you tell her to pull her dress up and pull down her panties. With her mound now exposed, you press against her, putting your [cocks] between her legs. You begin to push back and forth, rubbing your [cocks] against the wet lips of her [fvag].", parse);
 					Text.NL();
@@ -1014,7 +1014,7 @@ export namespace FeraScenes {
 			});
 			if (fera.relation.Get() > 25) {
 				options.push({ nameStr : "Anal",
-					func() {
+					func: () => {
 						p1Cock = player.BiggestCock(cocksInAss);
 						Text.Clear();
 						Text.Add("You order Fera to lift up her dress and take off her panties. Meanwhile, you take off your [botarmor], letting your [cocks][ballsD] hang free. She watches you unabashedly, waiting to hear what you have planned. Pressing her tightly against you, you reach around and grab her ass firmly. You tell her you are going to fuck her [fanus].", parse);
@@ -1101,7 +1101,7 @@ export namespace FeraScenes {
 			}
 			if (fera.relation.Get() > 30) {
 				options.push({ nameStr : "Sitting",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("You sit down on the small bench and take off your [botarmor], showing off your [cocks][ballsD]. Fera waits impatiently in front of you, one of her hands pressing against her dress to massage her [fbreasts] while the other snakes inside her skirt, playing coyly with her nethers. She stares at you, a desperate look of lust in her eyes as she rubs herself.", parse);
 						Text.NL();

@@ -284,7 +284,7 @@ export namespace OasisScenes {
 			// [Trade][Rumors][Fun][Leave]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Trade",
-				func() {
+				func: () => {
 					Text.Clear();
 					if (busy) { busyFunc(); }
 					Text.Add("<i>“Here, I'll show you what I have. My main cargo is already bought and paid for, but I have some oddments lying around.”</i>", parse);
@@ -295,7 +295,7 @@ export namespace OasisScenes {
 				tooltip : Text.Parse("See what the caravan master has to offer.", parse),
 			});
 			options.push({ nameStr : "Rumors",
-				func() {
+				func: () => {
 					Text.Clear();
 					if (busy) { busyFunc(); }
 					Text.Add("You ask the caravan master if [rheshe]’s heard anything interesting lately.", parse);
@@ -343,7 +343,7 @@ export namespace OasisScenes {
 				tooltip += " Besides, you want to play with that intriguing bulge of [rhishers]...";
 			}
 			options.push({ nameStr : "Fun",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You ask the caravan master if [rheshe] would like to show you just how [rheshe] plans to help out with your needs.", parse);
 					Text.NL();
@@ -456,7 +456,7 @@ export namespace OasisScenes {
 				tooltip : Text.Parse(tooltip, parse),
 			});
 			options.push({ nameStr : "Leave",
-				func() {
+				func: () => {
 					TimeStep({hour: 1});
 					Gui.PrintDefaultOptions();
 				}, enabled : true,

@@ -142,7 +142,7 @@ GladeLoc.onEntry = () => {
 		tooltip : "There is no time to lose. Go forth, steeling yourself against whatever danger awaits.",
 	});
 	options.push({ nameStr : "Leave",
-		func() {
+		func: () => {
 			Text.Clear();
 			Text.Add("You divert your course, staying clear of the glade for now. You should return when you are better prepared.", parse);
 			Text.Flush();
@@ -587,8 +587,6 @@ export namespace DryadGladeScenes {
 		const kiakai: Kiakai = GAME().kiakai;
 		SetGameState(GameState.Event, Gui);
 
-		const enc: Encounter = this;
-
 		let parse: IParse = {
 			playername : player.name,
 			name       : kiakai.name,
@@ -665,7 +663,7 @@ export namespace DryadGladeScenes {
 			});
 		});
 
-		Encounter.prototype.onVictory.call(enc);
+		Encounter.prototype.onVictory.call(this);
 	}
 
 	export function MotherTree() {
@@ -701,7 +699,7 @@ export namespace DryadGladeScenes {
 		// [Talk][Sex][Healing]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Talk",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“Ask, and I shall answer as well as I can.”</i>", parse);
 				Text.Flush();
@@ -722,7 +720,7 @@ export namespace DryadGladeScenes {
 		});
 		*/
 		options.push({ nameStr : "Healing",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“Gladly, [playername],”</i> the dryad nods, instructing you to take a seat on her lower roots. Warmth suffuses you as you feel all your worries and fatigue wash away, and when you step away, you feel purified.", parse);
 				Text.NL();
@@ -746,7 +744,7 @@ export namespace DryadGladeScenes {
 		// [Herself][Orchid][Spirit][Lifegiver]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Herself",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“When you get to be as old as I am, you perceive time in a different manner,”</i> Mother Tree responds. <i>“There is much to tell, but I fear that much of it would bore you. Most of my life has been rather uneventful from your perspective; I give birth to daughters and sons, I nourish the glade, and I watch the lives of mortals pass by my eyes like candles flickering in and out.”</i> She looks at you sadly. <i>“A long life is sometimes more a burden than a boon.”</i>", parse);
 				Text.NL();
@@ -757,7 +755,7 @@ export namespace DryadGladeScenes {
 			tooltip : "Ask her for her story.",
 		});
 		options.push({ nameStr : "Orchid",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“Orchid was always so carefree and happy, but she has changed after you saved her from the corruption. She is very self concious, and I fear she blames herself for what happened, even though she is innocent.”</i> Mother Tree looks out into the peaceful glade, watching over her daughter. <i>“The others try to be kind to her, but many cannot get over her new appearance.”</i>", parse);
 				Text.NL();
@@ -768,7 +766,7 @@ export namespace DryadGladeScenes {
 			tooltip : "Ask her about her betentacled daughter.",
 		});
 		options.push({ nameStr : "Spirit",
-			func() {
+			func: () => {
 				Text.Clear();
 				if (GlobalScenes.PortalsOpen()) {
 					Text.Add("<i>“It really surprised me when Spirit said she was going with you. Then again, she’s always been a headstrong child. Though she looks young, she does so because she wishes to; it’s well over two decades since her birth.”</i>", parse);
@@ -788,7 +786,7 @@ export namespace DryadGladeScenes {
 		if (false) { // TODO Unlocks after being to the Spring for the first time.
 			options.push({ nameStr : "Spring",
 				tooltip : "Ask Mother Tree if she knows a way you could get past the thorns and get to the spring.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You tell Mother Tree about your expedition to the Spring using the directions Orchid gave you, and ask about the seemingly invincible canopy of thorns that block your path. Is there any way you could get past those thorny trees?", parse);
 					Text.NL();
@@ -808,7 +806,7 @@ export namespace DryadGladeScenes {
 		}
 		*/
 		options.push({ nameStr : "Lifegiver",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“It is who you are and who you will be,”</i> she replies. <i>“All will be revealed in time, if you persevere. Much rests on you, according to the sage.”</i>", parse);
 				Text.Flush();

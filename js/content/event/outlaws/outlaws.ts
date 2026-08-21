@@ -186,7 +186,7 @@ export namespace OutlawsScenes {
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Yes",
 			tooltip : "You can probably hazard a guess, yes.",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("With the bouquets and names, it’s not too hard to guess what this is supposed to be - a memorial of some sort, isn’t it? And the names… you’re guessing that they were outlaws who died while out and about outlaw business, right?", parse);
 				Text.NL();
@@ -196,7 +196,7 @@ export namespace OutlawsScenes {
 		});
 		options.push({ nameStr : "No",
 			tooltip : "While you can guess, you’re not a mind-reader.",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Hmm… you can probably guess that this is a memorial of some sort, but as to <i>why</i> Maria brought you here… well, part of it’s probably that she wants to impress upon you the numbers of the dead. Beyond that, though, it’s anyone’s guess. Perhaps she could be so kind as to tell you?", parse);
 				Text.NL();
@@ -248,7 +248,7 @@ export namespace OutlawsScenes {
 		if (!opts.Respects) {
 			options.push({ nameStr : "Respects",
 				tooltip : "Since she’s paying her respects here, you take it she lost someone?",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Trying not to phrase your words too bluntly, you ask Maria if there’s someone here that she remembers.", parse);
 					Text.NL();
@@ -272,7 +272,7 @@ export namespace OutlawsScenes {
 		if (!opts.Monument) {
 			options.push({ nameStr : "Monument",
 				tooltip : "So, is there anything she can tell you about this monument? Who built it?",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“I don’t know,”</i> she replies flatly. <i>“It was one of the earliest outlaws who set it up, I think - back then, we weren’t even calling ourselves by that name, let alone taking pride instead of shame from it. The first time I came across it was when Zenith took me here and asked me if I remembered my family’s names, so he could get them down on the stone. Back then, there was only one of them, and as many sides in use.”</i>", parse);
 					Text.NL();
@@ -294,7 +294,7 @@ export namespace OutlawsScenes {
 		if (!opts.Bouquets) {
 			options.push({ nameStr : "Bouquets",
 				tooltip : "Judging by the other bouquets, she’s not the only one to come here, is she?",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“Most of us who’ve been here for a long time lost someone or the other to the war,”</i> Maria replies, her gaze steely and trained on the names that line the monument. <i>“It’s only more recently that we’ve had those who’d the good fortune to escape the worst of it by being born after the fact.</i>", parse);
 					Text.NL();
@@ -768,7 +768,7 @@ export namespace OutlawsScenes {
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Yes",
 				tooltip : "Sure, why not?",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Yeah, sure. You shrug your shoulders, push through the small crowd and step forward to take the lizan’s place, settling in with a minimum of fuss. One of the other players deals out the hand, and the game begins.", parse);
 					Text.NL();
@@ -777,7 +777,7 @@ export namespace OutlawsScenes {
 			});
 			options.push({ nameStr : "No",
 				tooltip : "Nah, not now.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You shake your head and tell the lizan you’ve got better things to do at the moment.", parse);
 					Text.NL();
@@ -829,7 +829,7 @@ export namespace OutlawsScenes {
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Yes",
 				tooltip : "Sure, why not? A bit of friendly competition couldn’t hurt.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Sure, why not? Pitting yourself against Maria and Vaughn sounds like a bit of fun.", parse);
 					Text.NL();
@@ -861,7 +861,7 @@ export namespace OutlawsScenes {
 					const options: IChoice[] = [];
 					options.push({ nameStr : "Head",
 						tooltip : "Score high! Show off a bit and aim for the head.",
-						func() {
+						func: () => {
 							dex += _.random(0, 20);
 
 							Text.Clear();
@@ -871,7 +871,7 @@ export namespace OutlawsScenes {
 					});
 					options.push({ nameStr : "Body",
 						tooltip : "Go for the more reliable center of mass.",
-						func() {
+						func: () => {
 							dex += _.random(10, 25);
 
 							Text.Clear();
@@ -947,7 +947,7 @@ export namespace OutlawsScenes {
 			});
 			options.push({ nameStr : "No",
 				tooltip : "You don’t feel like it today. Maybe not.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You shake your head, declining Maria’s offer to join the archery competition - whatever your reasons, you just don’t feel like it today. Maria looks a little surprised at your refusal, but shrugs it off with a little more nonchalance than strictly necessary.", parse);
 					Text.NL();
@@ -1088,7 +1088,7 @@ export namespace OutlawsScenes {
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Yes",
 				tooltip : "Sure, why not? You weren’t doing anything of import, after all.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Nodding, you accept a square of sandpaper and freshly-hewn plank from Vaughn, and set to work. Even though you quickly fall into a steady scrubbing rhythm, using your back rather than your arm to work the plank’s surface, the effort still takes the wind out of your sails surprisingly quickly. Vaughn himself has his head bowed and gaze pinned on his own work, eyes hard and narrow as he sands both sides of the plank in turn.", parse);
 					Text.NL();
@@ -1129,7 +1129,7 @@ export namespace OutlawsScenes {
 			});
 			options.push({ nameStr : "No",
 				tooltip : "You’ll pass, thanks. It’s his job, not yours.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Nah, thanks. You were just passing by, anyway.", parse);
 					Text.NL();

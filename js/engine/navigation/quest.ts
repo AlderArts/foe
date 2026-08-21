@@ -154,21 +154,21 @@ export namespace Quests {
 
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Active",
-			func() {
+			func: () => {
 				Text.Clear();
 				curType = Quests.Type.Visible;
 				Quests.Print(SetExploreButtons);
 			}, enabled : curType !== Quests.Type.Visible,
 		});
 		options.push({ nameStr : "Completed",
-			func() {
+			func: () => {
 				Text.Clear();
 				curType = Quests.Type.Completed;
 				Quests.Print(SetExploreButtons);
 			}, enabled : curType !== Quests.Type.Completed,
 		});
 		options.push({ nameStr : "All",
-			func() {
+			func: () => {
 				Text.Clear();
 				curType = Quests.Type.All;
 				Quests.Print(SetExploreButtons);

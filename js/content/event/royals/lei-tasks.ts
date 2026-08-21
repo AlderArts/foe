@@ -263,7 +263,7 @@ export namespace LeiTaskScenes {
 				const options: IChoice[] = [];
 				options.push({ nameStr : "Flirt",
 					tooltip : "You’re pretty sure she’s showing off for you, so why not compliment her?",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("You let your eyes roam languidly over Aliana’s body, and she smiles at you, clearly enjoying the attention. When she stands before you, you let your gaze drift up her neck and stop at her lips, and tell her that you quite like her outfit.", parse);
 						Text.NL();
@@ -279,7 +279,7 @@ export namespace LeiTaskScenes {
 				});
 				options.push({ nameStr : "Don’t",
 					tooltip : "It’s your first job. You’re supposed to remain professional, aren’t you?",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("You keep your expression tactfully neutral, meeting Ventor’s eyes as he approaches you.", parse);
 						Text.NL();
@@ -410,7 +410,7 @@ export namespace LeiTaskScenes {
 							const p = party.Get(i);
 							options.push({ nameStr : p.name,
 								tooltip : Text.Parse("Take [name] with you.", {name: p.name}),
-								func(obj: Entity) {
+								func: (obj: Entity) => {
 									Text.Clear();
 
 									party.ClearActiveParty();
@@ -438,8 +438,6 @@ export namespace LeiTaskScenes {
 			SetGameState(GameState.Event, Gui);
 			Text.Clear();
 
-			const enc = this;
-
 			const parse: IParse = {
 
 			};
@@ -455,10 +453,10 @@ export namespace LeiTaskScenes {
 				Text.Add("Apparently, your employers ran into them and asked them to assist you. You take a helping hand up and thank the woman, though you’re sure you would’ve managed somehow with a last moment burst of strength even if they had not come.", parse);
 				Text.NL();
 				Text.Add("You tell her the details of the ambush, and she assures you they’ll do their best to catch the men. She releases you to go on your way, as she sets off to catch up with her companions. Accepting her word, you head back toward the mansion, where, from the guard’s", parse);
-				LeiTaskScenes.Escort.PostCombat(enc, false);
+				LeiTaskScenes.Escort.PostCombat(this, false);
 			});
 
-			Encounter.prototype.onLoss.call(enc);
+			Encounter.prototype.onLoss.call(this);
 		}
 
 		export function CombatWin() {
@@ -468,8 +466,6 @@ export namespace LeiTaskScenes {
 			SetGameState(GameState.Event, Gui);
 			Text.Clear();
 
-			const enc = this;
-
 			const parse: IParse = {
 
 			};
@@ -477,7 +473,7 @@ export namespace LeiTaskScenes {
 			lei.flags.T1 |= LeiFlags.EscortTask.WonCombat;
 
 			Gui.Callstack.push(() => {
-				enc.prof += 2;
+				this.prof += 2;
 
 				Text.Clear();
 				parse.l = player.HasLegs() ? "at your feet" : "before you";
@@ -487,10 +483,10 @@ export namespace LeiTaskScenes {
 				Text.Add("Apparently, your employer ran into them and asked them to assist you. You tell the guards that for opponents of this caliber[comp] you were quite enough, though they are welcome to apprehend the attackers. Ventor would probably appreciate knowing how they knew to set the ambush here.", parse);
 				Text.NL();
 				Text.Add("The guards roll their eyes at your bravado, but set to work securing their incapacitated captives. You leave them to it and set out back toward the mansion, where, from the guards’", parse);
-				LeiTaskScenes.Escort.PostCombat(enc, true);
+				LeiTaskScenes.Escort.PostCombat(this, true);
 			});
 
-			Encounter.prototype.onVictory.call(enc);
+			Encounter.prototype.onVictory.call(this);
 		}
 
 		export function PostCombat(enc: any, won: boolean) {
@@ -564,7 +560,7 @@ export namespace LeiTaskScenes {
 					if (!assist) {
 						options.push({ nameStr : "Assist",
 							tooltip : "Offer your assistance in the investigation.",
-							func() {
+							func: () => {
 								assist = true;
 								Text.Clear();
 								Text.Add("You tell Ventor that you’re not sure who arranged that ambush, but you’re prepared to look into the matter for him if he wants.", parse);
@@ -592,7 +588,7 @@ export namespace LeiTaskScenes {
 					}
 					options.push({ nameStr : "Payment",
 						tooltip : "Your job here is done. Get your payment and go.",
-						func() {
+						func: () => {
 							Text.Clear();
 							Text.Add("You ask Ventor if he’s planning to visit the final store as well.", parse);
 							Text.NL();
@@ -767,13 +763,13 @@ export namespace LeiTaskScenes {
 					const options: IChoice[] = [];
 					options.push({ nameStr : "Reward",
 						tooltip : "Rewards are nice. You’d like a reward.",
-						func() {
+						func: () => {
 							LeiSexScenes.Petting(false);
 						}, enabled : true,
 					});
 					options.push({ nameStr : "Refuse",
 						tooltip : "No reward for you.",
-						func() {
+						func: () => {
 							Text.Clear();
 							Text.Add("You tell Lei that actually, you’d rather not right now.", parse);
 							Text.NL();

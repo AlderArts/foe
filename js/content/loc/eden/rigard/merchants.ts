@@ -249,7 +249,7 @@ ShopStreetLoc.Street.events.push(new Link(
 		// [Yes][No]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Yes",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Damn. Sure, Cveta did say the proprietor was going to try and cheat you, but that wasn’t Dio - that was his grandfather, and the old coot’s dead and buried now. Pulling off that sort of trick when he’s clearly new to the game- well, it’s not going to be easy on your conscience. Steeling yourself, you show Dio the maker’s mark on the bottom of the violin, explain what you think it is, and tell him that the instrument is probably worth a good deal more than his grandfather thought it was.", parse);
 				Text.NL();
@@ -278,7 +278,7 @@ ShopStreetLoc.Street.events.push(new Link(
 			tooltip : "Tell the young lion-morph the violin is worth more than his grandfather’s valuation.",
 		});
 		options.push({ nameStr : "No",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Remembering Cveta’s words, you nod and follow Dio to the counter before counting out his payment. The lion-morph watches the small pile of coins grow steadily, then sweeps them into a drawer before making a note in his pocketbook.", parse);
 				Text.NL();
@@ -341,7 +341,7 @@ ShopStreetLoc.Street.events.push(new Link(
 			// [Pay][Leave]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Pay",
-				func() {
+				func: () => {
 					Text.Clear();
 
 					party.coin -= 120;
@@ -637,7 +637,7 @@ export namespace ShopStreetScenes {
 		// [Inquire][Ignore]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Inquire",
-			func() {
+			func: () => {
 				Text.Clear();
 				if (buying) {
 					if (trueFalseDeal === 1) {
@@ -674,7 +674,7 @@ export namespace ShopStreetScenes {
 			tooltip : Text.Parse("Perhaps there is some profit to be made here (requires [x] coins).", parse),
 		});
 		options.push({ nameStr : "Ignore",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You tell [himher] that you really have no use for [wares], and walk on, deciding you'd rather not bother trying to speculate on the price.", parse);
 				Text.Flush();

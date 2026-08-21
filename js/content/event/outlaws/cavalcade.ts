@@ -37,14 +37,14 @@ export namespace OCavalcadeScenes {
 				// [Sure][Nah]
 				const options: IChoice[] = [];
 				options.push({ nameStr : "Sure",
-					func() {
+					func: () => {
 						Text.NL();
 						OCavalcadeScenes.PrepRandomCoinGame();
 					}, enabled : party.coin >= OCavalcadeScenes.Bet(),
 					tooltip : "Deal another round!",
 				});
 				options.push({ nameStr : "Nah",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("<i>“Alright, see you around!”</i> You leave the group, another outlaw soon taking your place.", parse);
 						Text.Flush();

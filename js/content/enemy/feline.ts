@@ -416,24 +416,22 @@ export namespace FelinesScenes {
 	}
 
 	export function Intro() {
-		const enc: Encounter = this;
 		//const enemy   = enc.enemy;
 		//const group   = enemy.Num() > 1;
 		//const mainCat = enemy.Get(0);
 
 		if (Math.random() > 0.5) {
-			enc.onEncounter = FelinesScenes.IntroRegular;
+			this.onEncounter = FelinesScenes.IntroRegular;
 		} else {
-			enc.onEncounter = FelinesScenes.IntroStalking;
+			this.onEncounter = FelinesScenes.IntroStalking;
 		}
-		enc.onEncounter();
+		this.onEncounter();
 	}
 
 	export function IntroRegular() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const enc: Encounter = this;
-		const enemy: Party   = enc.enemy;
+		const enemy: Party   = this.enemy;
 		const group: boolean = enemy.Num() > 1;
 		const mainCat: Wildcat = enemy.Get(0) as Wildcat;
 
@@ -485,16 +483,15 @@ export namespace FelinesScenes {
 
 		// Start combat
 		Gui.NextPrompt(() => {
-			enc.PrepCombat();
+			this.PrepCombat();
 		});
 	}
 
 	export function IntroStalking() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const enc: Encounter = this;
 		const p1 = party.Get(1);
-		const enemy = enc.enemy;
+		const enemy = this.enemy;
 		const group = enemy.Num() > 1;
 		const mainCat: Wildcat = enemy.Get(0) as Wildcat;
 
@@ -538,7 +535,7 @@ export namespace FelinesScenes {
 
 		// Start combat
 		Gui.NextPrompt(() => {
-			enc.PrepCombat();
+			this.PrepCombat();
 		});
 	}
 
@@ -546,8 +543,7 @@ export namespace FelinesScenes {
 		const player: Player = GAME().player;
 		SetGameState(GameState.Event, Gui);
 
-		const enc: Encounter = this;
-		const enemy = enc.enemy;
+		const enemy = this.enemy;
 		const group = enemy.Num() > 1;
 		const mainCat: Wildcat = enemy.Get(0) as Wildcat;
 		const taur = player.IsTaur();
@@ -599,24 +595,24 @@ export namespace FelinesScenes {
 
 				if (cocksInVag.length > 0) {
 					options.push({ nameStr : "Fuck vag(F)",
-						func() {
-							FelinesScenes.WinFuckVag(female, group, enc, cocksInVag, numFemales);
+						func: () => {
+							FelinesScenes.WinFuckVag(female, group, this, cocksInVag, numFemales);
 						}, enabled : true,
 						tooltip : "Get some pussy.",
 					});
 				}
 				if (cocksInAss.length > 0) {
 					options.push({ nameStr : "Fuck ass(F)",
-						func() {
-							FelinesScenes.WinFuckButt(female, group, enc, cocksInAss);
+						func: () => {
+							FelinesScenes.WinFuckButt(female, group, this, cocksInAss);
 						}, enabled : true,
 						tooltip : Text.Parse("Push[oneof] [himher] down on [hisher] back and fuck [himher] in the ass.", parse),
 					});
 				}
 				if (player.FirstCock()) {
 					options.push({ nameStr : "Get blowjob(F)",
-						func() {
-							FelinesScenes.WinGetBlowjob(female, group, enc);
+						func: () => {
+							FelinesScenes.WinGetBlowjob(female, group, this);
 						}, enabled : true,
 						tooltip : Text.Parse("Order[oneof] [himher] to give you a blowjob.", parse),
 					});
@@ -627,16 +623,16 @@ export namespace FelinesScenes {
 
 				if (cocksInAss.length > 0) {
 					options.push({ nameStr : "Fuck ass(M)",
-						func() {
-							FelinesScenes.WinFuckButt(male, group, enc, cocksInAss);
+						func: () => {
+							FelinesScenes.WinFuckButt(male, group, this, cocksInAss);
 						}, enabled : true,
 						tooltip : Text.Parse("Push[oneof] [himher] down on [hisher] back and fuck [himher] in the ass.", parse),
 					});
 				}
 				if (player.FirstCock()) {
 					options.push({ nameStr : "Get blowjob(M)",
-						func() {
-							FelinesScenes.WinGetBlowjob(male, group, enc);
+						func: () => {
+							FelinesScenes.WinGetBlowjob(male, group, this);
 						}, enabled : true,
 						tooltip : Text.Parse("Order[oneof] [himher] to give you a blowjob.", parse),
 					});
@@ -644,7 +640,7 @@ export namespace FelinesScenes {
 				if (player.FirstVag()) {
 					options.push({ nameStr : "Get fucked(M)",
 						tooltip : Text.Parse("Have[oneof] [himher] fuck your pussy.", parse),
-						func() {
+						func: () => {
 							FelinesScenes.WinCatchVag(male, enemy);
 						}, enabled : true,
 					});
@@ -656,24 +652,24 @@ export namespace FelinesScenes {
 
 				if (cocksInVag.length > 0) {
 					options.push({ nameStr : "Fuck vag(H)",
-						func() {
-							FelinesScenes.WinFuckVag(herm, group, enc, cocksInVag, numHerms);
+						func: () => {
+							FelinesScenes.WinFuckVag(herm, group, this, cocksInVag, numHerms);
 						}, enabled : true,
 						tooltip : "Get some pussy.",
 					});
 				}
 				if (cocksInAss.length > 0) {
 					options.push({ nameStr : "Fuck ass(H)",
-						func() {
-							FelinesScenes.WinFuckButt(herm, group, enc, cocksInAss);
+						func: () => {
+							FelinesScenes.WinFuckButt(herm, group, this, cocksInAss);
 						}, enabled : true,
 						tooltip : Text.Parse("Push[oneof] [himher] down on [hisher] back and fuck [himher] in the ass.", parse),
 					});
 				}
 				if (player.FirstCock()) {
 					options.push({ nameStr : "Get blowjob(H)",
-						func() {
-							FelinesScenes.WinGetBlowjob(herm, group, enc);
+						func: () => {
+							FelinesScenes.WinGetBlowjob(herm, group, this);
 						}, enabled : true,
 						tooltip : Text.Parse("Order[oneof] [himher] to give you a blowjob.", parse),
 					});
@@ -681,7 +677,7 @@ export namespace FelinesScenes {
 				if (player.FirstVag()) {
 					options.push({ nameStr : "Get fucked(H)",
 						tooltip : Text.Parse("Have[oneof] [himher] fuck your pussy.", parse),
-						func() {
+						func: () => {
 							FelinesScenes.WinCatchVag(herm, enemy);
 						}, enabled : true,
 					});
@@ -689,8 +685,8 @@ export namespace FelinesScenes {
 			}
 			if (group && !taur && player.FirstCock()) {
 				options.push({ nameStr : "Service Cock" + (player.NumCocks() > 1 ? "s" : ""),
-					func() {
-						FelinesScenes.WinGroupService(enc, enemy);
+					func: () => {
+						FelinesScenes.WinGroupService(this, enemy);
 					}, enabled : true,
 					tooltip : "Cats love milk, don’t they? So how about serving these naughty pussies a bit of your male-milk?",
 				});
@@ -698,13 +694,13 @@ export namespace FelinesScenes {
 			/* TODO more
 				options.push({ nameStr : "Nah",
 					func : () => {
-						FelinesScenes.WinFuckVag(female, enc);
+						FelinesScenes.WinFuckVag(female, this);
 					}, enabled : true,
 					tooltip : ""
 				});
 			*/
 			options.push({ nameStr : "Leave",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You gather up your belongings and leave the defeated feline[s] behind you.", {s: group ? "s" : ""});
 					Text.Flush();
@@ -716,7 +712,7 @@ export namespace FelinesScenes {
 			Gui.SetButtonsFromList(options);
 		});
 
-		Encounter.prototype.onVictory.call(enc);
+		Encounter.prototype.onVictory.call(this);
 	}
 
 	export function WinCatchVag(mainCat: Wildcat, enemy: Party) {
@@ -816,7 +812,7 @@ export namespace FelinesScenes {
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Yes",
 			tooltip : "Why not? If you do get pregnant, you’re sure your kittens would be adorable!",
-			func() {
+			func: () => {
 				Text.Clear();
 				parse.b = player.FirstBreastRow().Size() > 2 ? Text.Parse(", pressing your [breasts] against [hisher] [cbreasts],", parse) : "";
 				Text.Add("You hug [himher] tightly[b] and whisper for [himher] to cum and fill you up with [hisher] kitty-cream.", parse);
@@ -832,7 +828,7 @@ export namespace FelinesScenes {
 		});
 		options.push({ nameStr : "No",
 			tooltip : "It’s best not to risk it. You’re just not ready to have a little kitten.",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("On your next rise, you pull yourself off the [cat]’s barbed prick. [HeShe] looks at you in confusion, but you quickly come back down, letting [hisher] cock rub against your [vag].", parse);
 				Text.NL();
@@ -1039,7 +1035,7 @@ export namespace FelinesScenes {
 				// [Comply][Deny]
 				const options: IChoice[] = [];
 				options.push({ nameStr : "Comply",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("You relent to her pleading, gripping her dick with one of your [hand]s. [Name] purrs happily, sighing with pleasure as you begin to stroke her. The hermaphrodite cat starts gyrating her hips, grinding your [cock] home while letting you jerk her off. Her feline cock is stiff as rock in your [hand], the veins standing out visibly. Near the tapered tip, tiny barbs stand out.", parse);
 						Text.NL();
@@ -1054,7 +1050,7 @@ export namespace FelinesScenes {
 					tooltip : "Jerk her off.",
 				});
 				options.push({ nameStr : "Deny",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("You grin mockingly, asking her why you should do all the work. When she lifts a trembling hand to jerk herself off, you swat it away in annoyance. You tell her that you’ll maybe help her out - if she puts some effort into pleasing you. Grumbling slightly, but recognizing your authority, [name] braces herself with her quivering legs, carefully pushing herself up until only the [cockTip] remains inside her.", parse);
 						Text.NL();
@@ -1268,7 +1264,7 @@ export namespace FelinesScenes {
 			// [Inside][Mouth][Body]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Inside",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("No going back now! Grunting, you make a final thrust, pushing your [cock] deep in [possessive] formerly tight ass. [HisHer] eyes widen as [heshe] feels the first warm splatters of your seed pouring into [himher], forever marking the kitty as your slut.", parse);
 					Text.NL();
@@ -1292,7 +1288,7 @@ export namespace FelinesScenes {
 				tooltip : Text.Parse("Just keep ramming [himher] until [heshe]’s leaking cum from [hisher] ears!", parse),
 			});
 			options.push({ nameStr : "Mouth",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Just before you go over the edge, you pull out of the moaning feline, leaving [hisher] ass gaping. Jutting your [hips] forward, you take hold of the back of [possessive] head, shoving [himher] down on your [cock]. [HeShe] protests weakly, but pipes down as you pour your cream into [hisher] mouth and against the back of [hisher] throat.", parse);
 					Text.NL();
@@ -1312,7 +1308,7 @@ export namespace FelinesScenes {
 				tooltip : Text.Parse("Give the kitty a tasty treat as your farewell gift!", parse),
 			});
 			options.push({ nameStr : "Body",
-				func() {
+				func: () => {
 					Text.Clear();
 					parse.s        = player.NumCocks() > 1 ? "s" : "";
 					parse.itsTheir = player.NumCocks() > 1 ? "their" : "its";
@@ -1405,7 +1401,7 @@ export namespace FelinesScenes {
 		// [Face][Mouth][Throat]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Face",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Just before you are about to blow, you roughly grab [name] by [hisher] hair, pulling [himher] off your [cock]. For a brief moment, [heshe] looks confused, bereft of [hisher] new favorite toy, but your intentions quickly dawn on [himher] when [heshe] sees your throbbing [cock] in its full glory.", parse);
 				Text.NL();
@@ -1424,7 +1420,7 @@ export namespace FelinesScenes {
 			tooltip : Text.Parse("Shoot your load all over [hisher] face.", parse),
 		});
 		options.push({ nameStr : "Mouth",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You pull out until only the [cockTip] of your [cock] remains in [possessive] mouth, and then tell [himher] to start sucking. It quickly dawns on [himher] what your intention is as you start to stroke your free length, but at this point [name] seems to be resigned to [hisher] fate. If [heshe] is going to be a cocksucking slut from now on, [heshe] may as well try to enjoy it.", parse);
 				Text.NL();
@@ -1442,7 +1438,7 @@ export namespace FelinesScenes {
 			tooltip : Text.Parse("Pour it in [hisher] mouth and let [himher] taste it.", parse),
 		});
 		options.push({ nameStr : "Throat",
-			func() {
+			func: () => {
 				throat = true;
 				Text.Clear();
 				parse.deep = player.FirstCock().length.Get() > 30 ? Text.Parse("wrapping as much as possible of your enormous shaft in the warm embrace of [possessive] straining mouth", parse) : Text.Parse("connecting [possessive] lips with your crotch", parse);
@@ -1663,8 +1659,7 @@ export namespace FelinesScenes {
 
 		SetGameState(GameState.Event, Gui);
 
-		const enc = this;
-		const enemy: Party   = enc.enemy;
+		const enemy: Party   = this.enemy;
 		const group   = enemy.Num() > 1;
 		const mainCat: Wildcat = enemy.Get(0) as Wildcat;
 
@@ -1720,28 +1715,28 @@ export namespace FelinesScenes {
 			let scenes = new EncounterTable();
 			if (male) {
 				scenes.AddEnc(() => {
-					return FelinesScenes.LossCatchVaginal(male, group, enc);
+					return FelinesScenes.LossCatchVaginal(male, group, this);
 				}, 1.0, () => player.FirstVag() !== undefined);
 			}
 			if (female) {
 				const cocksInVag = player.CocksThatFit(female.FirstVag());
 
 				scenes.AddEnc(() => {
-					return FelinesScenes.LossPitchVaginal(female, group, enc, cocksInVag);
+					return FelinesScenes.LossPitchVaginal(female, group, this, cocksInVag);
 				}, 1.0, () => cocksInVag.length > 0);
 			}
 			if (herm) {
 				const cocksInVag = player.CocksThatFit(herm.FirstVag());
 
 				scenes.AddEnc(() => {
-					return FelinesScenes.LossCatchVaginal(herm, group, enc);
+					return FelinesScenes.LossCatchVaginal(herm, group, this);
 				}, 1.0, () => player.FirstVag() !== undefined);
 				scenes.AddEnc(() => {
-					return FelinesScenes.LossPitchVaginal(herm, group, enc, cocksInVag);
+					return FelinesScenes.LossPitchVaginal(herm, group, this, cocksInVag);
 				}, 1.0, () => cocksInVag.length > 0);
 			}
 			scenes.AddEnc(() => {
-				return FelinesScenes.LossDrainMilk(mainCat, group, enc);
+				return FelinesScenes.LossDrainMilk(mainCat, group, this);
 			}, 1.0, () => player.Lactation());
 			scenes.AddEnc(() => {
 				return FelinesScenes.LossPCblowsCat(mainCat, enemy);
@@ -1772,7 +1767,7 @@ export namespace FelinesScenes {
 					}, 1.0, () => numHerms > 0);
 					scenes.Get();
 
-					return FelinesScenes.LossDoubleTeam(cat, cat2, enemy.Num() > 2, enc);
+					return FelinesScenes.LossDoubleTeam(cat, cat2, enemy.Num() > 2, this);
 				}, numMales + numHerms, () => true);
 			}
 
@@ -1783,7 +1778,7 @@ export namespace FelinesScenes {
 				Gui.NextPrompt();
 			}
 		});
-		Encounter.prototype.onLoss.call(enc);
+		Encounter.prototype.onLoss.call(this);
 	}
 
 	export function LossPCblowsCat(mainCat: Wildcat, enemy: Party) {
@@ -2177,7 +2172,7 @@ export namespace FelinesScenes {
 		// [Inside][Outside]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Inside",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“I’m so glad to hear you say this, my darling. I’ll make sure to shoot as deep inside you as I can,”</i> [heshe] says, smiling as [heshe] redoubles [hisher] efforts to thrust into you.", parse);
 				Text.NL();
@@ -2234,7 +2229,7 @@ export namespace FelinesScenes {
 			tooltip : Text.Parse("Tell [himher] to cum inside. You wouldn’t mind giving birth to a cute kitten or two!", parse),
 		});
 		options.push({ nameStr : "Outside",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“As you wish,”</i> [heshe] replies, thrusting into you forcefully a couple more times, then finally withdrawing and leaning back as [hisher] hands fly to [hisher] throbbing cathood, violently stroking.", parse);
 				Text.NL();
@@ -2393,7 +2388,7 @@ export namespace FelinesScenes {
 		// [PoundHer][LayBack][TittyFuck]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Pound Her",
-			func() {
+			func: () => {
 				Text.Clear();
 				if (dom) {
 					Text.Add("Now <i>this</i> is something you can sink your teeth into! With a surge of motion, you force yourself forward, pushing [name] clean over and pinning her down underneath you. Baring your teeth for emphasis, you seize her soft, fur-coated thighs and hoist them upright, allowing you to start pounding her with all your might.", parse);
@@ -2441,7 +2436,7 @@ export namespace FelinesScenes {
 			tooltip : "Let’s make sure she’ll remember you for the coming weeks!",
 		});
 		options.push({ nameStr : "Lay Back",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("With a soft, moaning sigh of contentment, you allow yourself to settle back against the ground. Your own motions nearly cease, content as you are to languidly lie there and cup her buttocks in your hands, feeling the flesh squish and flex most interestingly amidst your fingers. Giving yourself over to her entirely, you submit to being used like a toy, content to allow her to bring you both to your mutual climax. Your mind goes nearly blank, casting aside everything but the weight of your feline lover atop you, the feel of her fur against your [skin], the slapping of flesh on flesh and the sensations of her milking your cock for all she's worth.", parse);
 				Text.NL();
@@ -2507,7 +2502,7 @@ export namespace FelinesScenes {
 			tooltip : "This feels too good, plus she’s won fair and square. She can finish you off herself.",
 		});
 		options.push({ nameStr : "Titty Fuck",
-			func() {
+			func: () => {
 				Text.Clear();
 				if (dom) {
 					Text.Add("It's time to take charge of this matter. With a fierceness more becoming of you, you suddenly surge into motion, pushing the startled feline atop of you over onto her back and pinning her down with your weight.", parse);
@@ -2658,7 +2653,6 @@ export namespace FelinesScenes {
 
 	/*
 	export function WinPrompt = () => {
-		let enc: Encounter = this;
 		let parse: IParse = {
 
 		};
@@ -2769,7 +2763,7 @@ export namespace FelinesScenes {
 		options.push({nameStr : "Present",
 			tooltip : Text.Parse("Get down[l] and offer your ass.", {l: player.Humanoid() ? " on all fours" : ""}),
 			enabled : true,
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("There is a patch of short grass nearby that looks comfortable. You kneel down, ass ", parse);
 				if (player.HasTail()) {
@@ -2939,7 +2933,7 @@ export namespace FelinesScenes {
 			options.push({nameStr : "Ride",
 				tooltip : Text.Parse("Stuff that cock inside your [vag]. The other cat doesn’t seem interested in that hole anyway…", parse),
 				enabled : true,
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You sink to the ground, ", parse);
 					if (player.IsNaga()) {

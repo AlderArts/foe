@@ -56,7 +56,7 @@ HighlandsLoc.Hills.enc = new EncounterTable();
 
 HighlandsLoc.Hills.AddEncounter({
 	nameStr : "Puma",
-	func() {
+	func: () => {
 		return FelinesScenes.PumaEnc(2);
 	}, odds : 0.5, enc : true,
 	visible : true, enabled : true, hunt : true,
@@ -64,7 +64,7 @@ HighlandsLoc.Hills.AddEncounter({
 
 HighlandsLoc.Hills.AddEncounter({
 	nameStr : "Lynx",
-	func() {
+	func: () => {
 		return FelinesScenes.LynxEnc(2);
 	}, odds : 0.5, enc : true,
 	visible : true, enabled : true, hunt : true,
@@ -72,7 +72,7 @@ HighlandsLoc.Hills.AddEncounter({
 
 HighlandsLoc.Hills.AddEncounter({
 	nameStr : "Zebra",
-	func() {
+	func: () => {
 		return ZebraShamanScenes.LoneEnc();
 	}, odds : 1, enc : true,
 	visible : true, enabled : true, hunt : true,
@@ -80,7 +80,7 @@ HighlandsLoc.Hills.AddEncounter({
 
 HighlandsLoc.Hills.AddEncounter({
 	nameStr : "Catboy",
-	func() {
+	func: () => {
 		return MaliceScoutsScenes.Catboy.LoneEncounter(1);
 	}, odds : 1, enc : true,
 	visible : true, enabled : true, hunt : true,
@@ -88,7 +88,7 @@ HighlandsLoc.Hills.AddEncounter({
 
 HighlandsLoc.Hills.AddEncounter({
 	nameStr : "Centauress",
-	func() {
+	func: () => {
 		return MaliceScoutsScenes.Mare.LoneEncounter(1);
 	}, odds : 1, enc : true,
 	visible : true, enabled : true, hunt : true,
@@ -96,7 +96,7 @@ HighlandsLoc.Hills.AddEncounter({
 
 HighlandsLoc.Hills.AddEncounter({
 	nameStr : "Goat alchemist",
-	func() {
+	func: () => {
 		return MaliceScoutsScenes.Goat.LoneEncounter(1);
 	}, odds : 1, enc : true,
 	visible : true, enabled : true, hunt : true,
@@ -104,7 +104,7 @@ HighlandsLoc.Hills.AddEncounter({
 
 HighlandsLoc.Hills.AddEncounter({
 	nameStr : "Scouts",
-	func() {
+	func: () => {
 		return MaliceScoutsScenes.Group.GroupEncounter(0);
 	}, odds : 1, enc : true,
 	visible : true, enabled : true, hunt : true,

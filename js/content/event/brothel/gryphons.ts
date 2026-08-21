@@ -619,7 +619,7 @@ export namespace GryphonsScenes {
 				const options: IChoice[] = [];
 				options.push({ nameStr : "Undergrowth",
 					tooltip : "Move from the cover of vegetation, and strike when the time is right.",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("Yes… yes. That could work. The undergrowth is thick and will cover your approach; even after you leave the tree-line, reeds and rushes grow tall and thick, more than enough to hide your person. With the waterfall masking your scent, you will remain hidden so long as she does not catch sight of you.", parse);
 						Text.NL();
@@ -636,7 +636,7 @@ export namespace GryphonsScenes {
 				});
 				options.push({ nameStr : "Waterfall",
 					tooltip : "Circle around to the water’s source and take the initiative from high ground.",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("You decide that a frontal approach is too risky and that it would be better to strike from where she thinks it’s safe. The cliff that the waterfall careens down may be high, but that means little to one capable of flight. Withdrawing from the water’s edge, you skirt around the clearing, making for the rise in the land; you don’t have to get up very high, just high enough to avoid notice. Ignoring the protests of your aching muscles, you dig your claws into the limestone wall and begin to climb.", parse);
 						Text.NL();
@@ -653,7 +653,7 @@ export namespace GryphonsScenes {
 				});
 				options.push({ nameStr : "Sky",
 					tooltip : "Soar high and dive for the pool, making the most of speed and surprise.",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("Looking around, you can’t find a path to your prey that you feel would adequately conceal your approach. While it is true that you are experienced in stalking and stealth, it will never do to underestimate your quarry, not when the crux of your plans hinges on your success here. If you fail here, who knows if you will ever be allowed a second chance, let alone one as wondrous as this…", parse);
 						Text.NL();
@@ -798,7 +798,7 @@ export namespace GryphonsScenes {
 		if (!opts.Name) {
 			options.push({ nameStr : "Name",
 				tooltip : "What’s her name?",
-				func() {
+				func: () => {
 					opts.Name = true;
 
 					Text.Clear();
@@ -814,7 +814,7 @@ export namespace GryphonsScenes {
 		if (!opts.Others) {
 			options.push({ nameStr : "Others",
 				tooltip : "Are there any other gryphons in this valley?",
-				func() {
+				func: () => {
 					opts.Others = true;
 
 					Text.Clear();
@@ -828,7 +828,7 @@ export namespace GryphonsScenes {
 		if (!opts.Land) {
 			options.push({ nameStr : "Land",
 				tooltip : "Is this her land? Her territory?",
-				func() {
+				func: () => {
 					opts.Land = true;
 
 					Text.Clear();
@@ -1032,7 +1032,7 @@ export namespace GryphonsScenes {
 				const options: IChoice[] = [];
 				options.push({ nameStr : "Wash",
 					tooltip : "Well, if he’s willing to do all the work, you’ll just enjoy a little soak.",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("Well, if he’s sure he can handle it by himself, you’ll just stay out of his way and watch.", parse);
 						Text.NL();
@@ -1059,7 +1059,7 @@ export namespace GryphonsScenes {
 				});
 				options.push({ nameStr : "Help Out",
 					tooltip : "It’s not right that he does all the work, and you’re far from helpless. You should see what you can do to help out.",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("It’s not right that he does all the work, you point out. You can work a little way downstream from him and get cleaned up at the same time. Besides, since you’ve been eating more lately, it’s probably best that the both of you bring in as much as you can, lest you devour it all.", parse);
 						Text.NL();
@@ -1216,7 +1216,7 @@ export namespace GryphonsScenes {
 					const options: IChoice[] = [];
 					options.push({ nameStr : "Ask",
 						tooltip : "Ask him what he’s up to.",
-						func() {
+						func: () => {
 							Text.Clear();
 							Text.Add("Your eyes dart between him and… Mother, the rest of you fidgeting nervously while you try to figure out what to do.", parse);
 							Text.NL();
@@ -1231,7 +1231,7 @@ export namespace GryphonsScenes {
 					});
 					options.push({ nameStr : "Watch",
 						tooltip : "There’s something somber about his actions. Words can wait; you should just watch.",
-						func() {
+						func: () => {
 							Text.Clear();
 							Text.Add("Your breath catching in your throat, you step up beside him; he shuffles slightly to one side, making space for you. Usually, you have to force yourself to come here and stand here before the tree, before Mother, but today is different.", parse);
 							Text.NL();
@@ -1313,7 +1313,7 @@ export namespace GryphonsScenes {
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Hot",
 				tooltip : "",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Hot, that’s the word you were looking for. Dreamily, you think back to the night that he first came; how he took you, filled you up and made you feel so full. You love the feeling of having life growing inside of you, the faint flutters of movement inside your womb only serving to fuel your delight. You haven’t told him about those - they only started a few nights ago - but imagining your brood stirring inside you only serves to make your heart beat faster while you daydream of growing heavy with child.", parse);
 					Text.NL();
@@ -1324,7 +1324,7 @@ export namespace GryphonsScenes {
 			});
 			options.push({ nameStr : "Content",
 				tooltip : "",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Content, that’s the word; you feel so peaceful. The sensation of new lives growing inside of you make you feel calm and relaxed, perhaps even sleepy; you have little doubt that this feeling will only grow with time. He says it’s odd that your belly is getting this big this quickly, that there’s probably more than one in there. Even so, you aren’t worried about the prospect of such; all of this just feels so <i>right</i>, and it keeps any fears you might have had at bay.", parse);
 					Text.NL();
@@ -1335,7 +1335,7 @@ export namespace GryphonsScenes {
 			});
 			options.push({ nameStr : "Worried",
 				tooltip : "",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Worried, that’s the word you were looking for. He’s mentioned that you’re starting to show sooner than expected, whatever that means, and that you’re probably carrying more than one gryphlet. How big are you going to get? Will you get too heavy to fly? You try to imagine your belly big and round like he described, full of growing gryphlets, but no matter how you picture it you always end up looking fat and clumsy…", parse);
 					Text.NL();
@@ -1430,7 +1430,7 @@ export namespace GryphonsScenes {
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Proud",
 			tooltip : "",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Proud, proud that you’re going to bear his gryphlets. Meeting his gaze with a playful one of your own, you lean back with hands on your broad hips and push out your belly as far as it’ll go. Does he like what he sees?", parse);
 				Text.NL();
@@ -1443,7 +1443,7 @@ export namespace GryphonsScenes {
 		});
 		options.push({ nameStr : "Pleased",
 			tooltip : "",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Pleased, pleased that he appreciates you. It’s the same sensation of being watched from the very first night he entered your life, but knowing now that his gaze is protective… it makes you feel all warm and good inside. His hand slides up your tail to its base, pausing to grope and squeeze your full, firm buttcheeks one at a time; wanting more, you push into his cupped palm and rub your ass all over his fingers.", parse);
 				Text.NL();
@@ -1458,7 +1458,7 @@ export namespace GryphonsScenes {
 		});
 		options.push({ nameStr : "Shy",
 			tooltip : "",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Shy, shy that he won’t appreciate you the way he did when you were sleek and slender. Sensing your hesitation, he croons deeply and runs a hand down your front, following the contours of your form from your collarbone, through your cleavage, over the bump of your pregnancy and finally stopping just above your snatch.", parse);
 				Text.NL();
@@ -1661,7 +1661,7 @@ export namespace GryphonsScenes {
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Satisfied",
 				tooltip : "It’s not much, but it’s the best you could do under these circumstances.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Satisfied. Sure, what you have to work with is really crude, but more importantly, it works. Of course, you’re not going to lie to yourself and this is the best you can do, but one step at a time - you’ve got only two pairs of hands to deal with things, and one pair is still learning.", parse);
 					Text.NL();
@@ -1671,7 +1671,7 @@ export namespace GryphonsScenes {
 			});
 			options.push({ nameStr : "Dissatisfied",
 				tooltip : "These are really crude, you ought to have done much better.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Discontent. Yes, you’ve done what you can on your own, without a whole tribe at your back aiding you, but even then you can’t silence the little voice in your head that keeps on telling you more could have been done. What would your father have said if he saw this? Maybe he <i>is</i> looking down at you with as much disapproval as you’re feeling right now…", parse);
 					Text.NL();
@@ -1703,7 +1703,7 @@ export namespace GryphonsScenes {
 				const options: IChoice[] = [];
 				options.push({ nameStr : "Aggressive",
 					tooltip : "Make it clear that if they’re here to cause trouble, you’re more than willing to fight.",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("Best to meet the newcomers with a bit of deterrence, then. Planting your feet firmly on the ground, you broaden your stance, ready your spear and watch them close the distance with a stony gaze. Two of them, yes, and with a distinct deep blue color to their fur and plumage - from the northern tribes, then. Unarmed, but that doesn’t have to mean anything. They land on the shelf a little distance away from you, eyes darting between your gaze and the point of your spear.", parse);
 						Text.NL();
@@ -1725,7 +1725,7 @@ export namespace GryphonsScenes {
 				});
 				options.push({ nameStr : "Diplomatic",
 					tooltip : "Go for a peaceful approach, but make it clear there’s an iron fist in that velvet glove.",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("They’re gryphons like you, even if from another tribe. Though the tribes have never quite agreed on much for most of their existence, maybe things can be different on a more personal level. At the very least, you think you can give them the benefit of the doubt - until they make a single false move, that is.", parse);
 						Text.NL();
@@ -1745,7 +1745,7 @@ export namespace GryphonsScenes {
 				});
 				options.push({ nameStr : "Thoughtful",
 					tooltip : "Maybe you can make use of this situation and turn it to your advantage.",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("They’re gryphons like you are, even if they’re from another tribe - at the very least, they’re not bloodthirsty wyverns out for pillage and territory. While the need for caution doesn’t escape you, there still can be some way you can turn this chance happenstance to your advantage; at the very least, some news of the remaining tribes and their fight against the wyverns would be welcome. Life is idyllic here in the valley, and it would be good to have a reminder of why you’re here in the first place.", parse);
 						Text.NL();
@@ -1840,7 +1840,7 @@ export namespace GryphonsScenes {
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Fulfilled",
 			tooltip : "",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Cooing and chirping, you pat the prodigious swell of your pregnancy, and feel the gryphlets within respond to your touch through fur and flesh. Perhaps you should be worried, but you just feel so full, so <i>right</i>. The sense of warm bliss that spreads out from your belly and suffuses the entirety of your being leaves no doubt in your mind that this is your destiny, what you were made for. Good thing, then, that you love it so much; even after the gryphlets have been born, you can’t wait to go through it all over again. Sure, it’s not all good, but it’s so worth it.", parse);
 				Text.NL();
@@ -1858,7 +1858,7 @@ export namespace GryphonsScenes {
 		});
 		options.push({ nameStr : "Calm",
 			tooltip : "",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Sighing, you lean back and close your eyes, wings fluttering a little as you settle down on your side. You’re not lazing around, you’re just… just taking a much needed rest. While being so swollen has had its downsides - you do miss soaring through the skies - it hasn’t been all too bad, either. He’s taken good care of you, you’ve to admit as much; and besides, lying down like this on your side, hands just holding your swollen midriff, you feel at peace.", parse);
 				Text.NL();
@@ -1871,7 +1871,7 @@ export namespace GryphonsScenes {
 		});
 		options.push({ nameStr : "Frustrated",
 			tooltip : "",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Well, at least it’ll be easier to deal with than the condition you’re stuck in right now. Swollen, heavy, unable to fly, always hungry - and while those are the least of your problems, it doesn’t help that they’re practically always there, nudging at the edges of your thoughts. To make it all worse, you’ve been feeling utterly sullen for no good reason at all - he just smacks you on the tush and teases your impotent broodiness, and that just makes it… urgh! You want him, and yet you don’t want him.", parse);
 				Text.NL();
@@ -2024,7 +2024,7 @@ export namespace GryphonsScenes {
 					const options: IChoice[] = [];
 					options.push({ nameStr : "Comfort",
 						tooltip : "Comfort him in the way you know he likes most.",
-						func() {
+						func: () => {
 							Text.Clear();
 							Text.Add("You turn to take one last look at the gryphlets - and let your worries rest once you see them sleeping by the remains of the fire, huddled together in a tight, warm bundle. They’re sleeping very well; now to help your mate do the same.", parse);
 							Text.NL();
@@ -2092,7 +2092,7 @@ export namespace GryphonsScenes {
 					});
 					options.push({ nameStr : "Hug",
 						tooltip : "Give him a nice, long hug. Let him know you’re still around.",
-						func() {
+						func: () => {
 							Text.Clear();
 							Text.Add("A soft chirp escapes your beak, followed by a gentle purr in the back of your throat as you step forward and wrap your arms around him in a hug from behind, closing your eyes to better appreciate the scents and sensations of being so close to him. Besides, you know he enjoys your sleek body, too, and want him to appreciate it as much as he wants.", parse);
 							Text.NL();
@@ -2113,7 +2113,7 @@ export namespace GryphonsScenes {
 					});
 					options.push({ nameStr : "Watch",
 						tooltip : "If he doesn’t want to be touched, then you’ll respect that for now…  but you’re here.",
-						func() {
+						func: () => {
 							Text.Clear();
 							Text.Add("Slowly, you shuffle closer to him, settling down on the lush, soft grass at his feet - not quite touching him but nevertheless entering his little circle of personal space, letting him <i>feel</i> your presence. Well, it’s the first time you’ve actually tried doing it on purpose, and it’s a different way from how he does it, but you think you’ve got it all figured out. Chirping softly, you gather the gryphlets into your lap, and the little ones make small, mewling noises as they snuggle into your fur, seeking warmth and comfort.", parse);
 							Text.NL();

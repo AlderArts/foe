@@ -59,9 +59,8 @@ export class Adrian extends Entity {
 		this.SetLevelBonus();
 		this.RestFull();
 
-		const that = this;
 		this.jealousy = new Stat(0);
-		this.jealousy.debug = () => that.name + ".jealousy";
+		this.jealousy.debug = () => this.name + ".jealousy";
 
 		this.flags.Met = AdrianFlags.Met.NotMet;
 		this.flags.Flags = 0;

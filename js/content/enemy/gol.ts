@@ -172,7 +172,7 @@ export namespace GolScenes {
 		// [Leave][Explore]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Leave",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Out(`You decide to return to the dubious safety of the main travel route. If you want to take on whatever attacked the caravan, you should do so when better prepared.`);
 				Text.Flush();
@@ -182,7 +182,7 @@ export namespace GolScenes {
 			tooltip : "You can always return later when you are better prepared for what lies ahead.",
 		});
 		options.push({ nameStr : "Explore",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Out(`Steeling yourself, you head inside the winding canyon, nerves on end and ready for combat. `);
 				if (party.Num() > 1) {
@@ -232,8 +232,7 @@ export namespace GolScenes {
 	// TODO
 	export function CombatLoss() {
 		const player: Player = GAME().player;
-		const enc: GolEncounter = this;
-		const gol = enc.gol;
+		const gol = this.gol;
 
 		const pc = player.Parser;
 
@@ -521,8 +520,7 @@ export namespace GolScenes {
 	export function CombatWin() {
 		const player: Player = GAME().player;
 		const pc = player.Parser;
-		const enc = this;
-		const gol: GolQueen = enc.gol;
+		const gol: GolQueen = this.gol;
 		SetGameState(GameState.Event, Gui);
 
 		Gui.Callstack.push(() => {
@@ -551,28 +549,28 @@ export namespace GolScenes {
 				const p2cock = player.BiggestCock(cocksInTail);
 
 				options.push({ nameStr : "Hyper fuck",
-					func() {
-						GolScenes.CombatWinHyperFuck(enc, p1cock);
+					func: () => {
+						GolScenes.CombatWinHyperFuck(this, p1cock);
 					}, enabled : p1cock.Len() >= 61, // > 2'
 					tooltip : "It’s not often you find someone who can take a cock as big as yours… the opportunity is too good to pass up.",
 				});
 				options.push({ nameStr : "Tailfuck",
-					func() {
-						GolScenes.CombatWinTailfuck(enc, p2cock);
+					func: () => {
+						GolScenes.CombatWinTailfuck(this, p2cock);
 					}, enabled : p2cock !== undefined,
 					tooltip : "Fuck that tailgina until it’s dripping and leaking eggs!",
 				});
 			}
 			if (player.FirstVag()) {
 				options.push({ nameStr : "Cunnilingus",
-					func() {
-						GolScenes.CombatWinCunn(enc);
+					func: () => {
+						GolScenes.CombatWinCunn(this);
 					}, enabled : true,
 					tooltip : "Have her eat you out.",
 				});
 			}
 			options.push({ nameStr : "Scepter",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Out(`No… you shouldn’t forget why you came here. You grab hold of the scepter and back away from the creature, still wary of her.
 
@@ -586,7 +584,7 @@ export namespace GolScenes {
 					TimeStep({minute: 30});
 
 					Gui.NextPrompt(() => {
-						GolScenes.CombatAftermath(enc);
+						GolScenes.CombatAftermath(this);
 					});
 				}, enabled : true,
 				tooltip : "Just grab the scepter and go.",
@@ -594,7 +592,7 @@ export namespace GolScenes {
 			Gui.SetButtonsFromList(options, false, undefined);
 
 		});
-		Encounter.prototype.onVictory.call(enc);
+		Encounter.prototype.onVictory.call(this);
 	}
 
 	export function CombatWinHyperFuck(enc: GolEncounter, p1cock: Cock) {
@@ -759,7 +757,7 @@ export namespace GolScenes {
 		// [Inside] [Outside]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Outside",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Not seeing any point in giving her any bastards to remember you by, you yank your hips backward as pleasure overwhelms you. Your [cocks] give[notS] one last fitful pulse before finally releasing, throwing long ropes of seed into the air.", parse);
 				Text.NL();
@@ -787,7 +785,7 @@ export namespace GolScenes {
 			tooltip : "Pull out; she’s not worthy of your seed.",
 		});
 		options.push({ nameStr : "Inside",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Not content to waste your cum on her smooth chitin, you jackhammer a few last strokes home, each harder than the one that preceded it, propelled on increasingly tight spasms of pleasure. The Gol wriggles below you, throatily hissing, <i>“Yesssssss,”</i> while her body squirms, inside and out, pumping your [cock] as if she could milk every drop from you via contraction alone.", parse);
 				Text.NL();
@@ -909,7 +907,7 @@ export namespace GolScenes {
 		// [Stick It In] [Scepter]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Stick it in",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Out(`You lie back in a daze, allowing the Gol to loom over you, covering your body in a sticky goo that drips from hidden glans on her body. When you realize what it’s for, it’s already too late; the strands have hardened into a cocoon around you, only exposing your head and nether region. The stuff is strong as steel, and you can barely move a muscle.
 
@@ -921,7 +919,7 @@ export namespace GolScenes {
 			tooltip : "Yes… you want her to take you...",
 		});
 		options.push({ nameStr : "Scepter",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Out(`No! You shake off the effects of the pheromones as best as you can. This creature wanted to enslave you and make you into a breeding slut not half an hour ago, you should know better than to let it take control.
 

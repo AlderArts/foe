@@ -221,24 +221,21 @@ export namespace EquineScenes {
 		const party: Party = GAME().party;
 		SetGameState(GameState.Event, Gui);
 
-		// this = encounter
-		const enc = this;
-
 		const parse: IParse = {
 			party         : !party.Alone() ? " and your party" : "",
-			hisher1       : enc.stallion.hisher(),
-			heshe1        : enc.stallion.heshe(),
-			HeShe1        : enc.stallion.HeShe(),
-			hisher2       : enc.mare.hisher(),
-			heshe2        : enc.mare.heshe(),
-			HeShe2        : enc.mare.HeShe(),
-			HisHer2       : enc.mare.HisHer(),
-			breast2   : enc.mare.FirstBreastRow().Short(),
-			nip2      : enc.mare.FirstBreastRow().NipsShort(),
+			hisher1       : this.stallion.hisher(),
+			heshe1        : this.stallion.heshe(),
+			HeShe1        : this.stallion.HeShe(),
+			hisher2       : this.mare.hisher(),
+			heshe2        : this.mare.heshe(),
+			HeShe2        : this.mare.HeShe(),
+			HisHer2       : this.mare.HisHer(),
+			breast2   : this.mare.FirstBreastRow().Short(),
+			nip2      : this.mare.FirstBreastRow().NipsShort(),
 		};
-		enc.parse = parse;
+		this.parse = parse;
 
-		const lustBonus = enc.mare.LustLevel() + enc.stallion.LustLevel();
+		const lustBonus = this.mare.LustLevel() + this.stallion.LustLevel();
 
 		Gui.Callstack.push(() => {
 			Text.Clear();
@@ -296,16 +293,16 @@ export namespace EquineScenes {
 				const options: IChoice[] = [];
 				if (player.NumCocks() > 0) {
 					options.push({ nameStr : "Fuck her",
-						func() {
-							EquineScenes.FuckFemale(enc);
+						func: () => {
+							EquineScenes.FuckFemale(this);
 						}, enabled : true,
 						tooltip : "The female equine has caught your interest, and judging from her demeanor, she likely wouldn't object.",
 					});
 				}
 				if (player.NumVags() > 0) {
 					options.push({ nameStr : "Get fucked",
-						func() {
-							EquineScenes.GetFucked(enc);
+						func: () => {
+							EquineScenes.GetFucked(this);
 						}, enabled : true,
 						tooltip : "Taking on that thick horse cock looks like a challenge, but you can't let that stop you!",
 					});
@@ -313,21 +310,21 @@ export namespace EquineScenes {
 
 				if (player.NumCocks() > 0) {
 					options.push({ nameStr : "Threesome",
-						func() {
-							EquineScenes.Threesome1(enc);
+						func: () => {
+							EquineScenes.Threesome1(this);
 						}, enabled : true,
 						tooltip : "Why not have both of them join in? The stallion looks like he is willing to share his partner... that, and they both have parts you could play with.",
 					});
 				} else if (player.NumVags() > 0) {
 					options.push({ nameStr : "Threesome",
-						func() {
-							EquineScenes.Threesome2(enc);
+						func: () => {
+							EquineScenes.Threesome2(this);
 						}, enabled : true,
 						tooltip : "Why not have both of them join in? That cock looks like it could serve both you and the mare.",
 					});
 				}
 				options.push({ nameStr : "No",
-					func() {
+					func: () => {
 						parse.party = !party.Alone() ? " and wake your incapacitated party" : "";
 
 						Text.Clear();
@@ -349,7 +346,7 @@ export namespace EquineScenes {
 			scenes.Get();
 
 		});
-		Encounter.prototype.onLoss.call(enc);
+		Encounter.prototype.onLoss.call(this);
 	}
 
 	export function FuckFemale(enc: EquineEncounter) {
@@ -404,7 +401,7 @@ export namespace EquineScenes {
 		// [Inside][Tits][Face]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Inside",
-			func() {
+			func: () => {
 				Text.Clear();
 
 				Text.Add("You decide to throw caution to the wind and ride it out. She moves her hands from where they once clung to your back and begins furiously rubbing her clit while juggling her own tits. Apparently, she wants a second turn, and you're not about to raise any any objections!", parse);
@@ -417,7 +414,7 @@ export namespace EquineScenes {
 			tooltip : "No turning back now, this feels way too good to stop!",
 		});
 		options.push({ nameStr : "Tits",
-			func() {
+			func: () => {
 				Text.Clear();
 
 				Text.Add("The rawest emotion in your mind tells you that it's a bit childish, but you go for it. Finally with someone giving you free reign, you decide to take advantage of it. You feel your orgasm dangerously close, and you pull out of her slick hole, not wanting to risk losing the opportunity. ", parse);
@@ -430,7 +427,7 @@ export namespace EquineScenes {
 			tooltip : "Cum all over those magnificent tits of hers!",
 		});
 		options.push({ nameStr : "Face",
-			func() {
+			func: () => {
 				Text.Clear();
 
 				parse.rest = player.HasLegs() ? " lay your knees on her sides, against the cold stone below you" : " lightly rest your lower body over her";
@@ -657,7 +654,6 @@ export namespace EquineScenes {
 	export function WinPrompt() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const enc  = this;
 		SetGameState(GameState.Event, Gui);
 
 		const parse: IParse = {
@@ -681,22 +677,22 @@ export namespace EquineScenes {
 			const options: IChoice[] = [];
 			if (player.FirstCock()) {
 				options.push({ nameStr : "Fuck her",
-					func() {
-						EquineScenes.WinFuckHer(enc);
+					func: () => {
+						EquineScenes.WinFuckHer(this);
 					}, enabled : true,
 					tooltip : "This rowdy mare gave you a hard time - it’s only proper you return the favor...",
 				});
 				options.push({ nameStr : "Fuck him",
-					func() {
-						EquineScenes.WinFuckHim(enc);
+					func: () => {
+						EquineScenes.WinFuckHim(this);
 					}, enabled : true,
 					tooltip : "You’re in the mood for a little role-reversal; this time, <b>he</b> gets to be the mare.",
 				});
 			}
 			if (player.FirstVag()) {
 				options.push({ nameStr : "Ride him",
-					func() {
-						EquineScenes.WinRideHimVag(enc);
+					func: () => {
+						EquineScenes.WinRideHimVag(this);
 					}, enabled : true,
 					tooltip : "Time for a little rodeo. Mount up!",
 				});
@@ -718,7 +714,7 @@ export namespace EquineScenes {
 				Gui.NextPrompt();
 			});
 		});
-		Encounter.prototype.onVictory.call(enc);
+		Encounter.prototype.onVictory.call(this);
 	}
 
 	// TODO
@@ -794,7 +790,7 @@ export namespace EquineScenes {
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Get blown",
 			tooltip : "Time to put a cock in that cocky mouth of his.",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Since he's already down there, you decide to provide the stallion a thorough lesson in how to give a proper blowjob. His awkward licking would almost be endearing under different circumstances, but right now, he is little more than your plaything - and it's about time he started acting the part. Your fingers bury themselves in his mane once more, and you pull his head back just a little, forcing his gaze to meet yours.", parse);
 				Text.NL();
@@ -877,7 +873,7 @@ export namespace EquineScenes {
 							const options: IChoice[] = [];
 							options.push({ nameStr : "Cum inside",
 								tooltip : "Down the hatch!",
-								func() {
+								func: () => {
 									Text.Clear();
 									parse.throatMuzzle = longCock ? "throat" : "muzzle";
 									parse.stomachMouth = longCock ? "stomach" : "mouth";
@@ -925,7 +921,7 @@ export namespace EquineScenes {
 							});
 							options.push({ nameStr : "Cum outside",
 								tooltip : "Make him a pretty painted pony.",
-								func() {
+								func: () => {
 									Text.Clear();
 									Text.Add("You pull back sharply so that your rigid shaft frees itself from the stallion's lips with an audible pop. Surprised by the sudden action, the stallion emits something between a grunt and a frustrated groan; but he can tell you are on the verge of orgasm, so he opens his mouth and lets his tongue hang out expectantly. All at once, your climax crashes over you like a tidal wave, and you cannot contain your load as it explodes from your [cocks] and arcs through the air, directly at the equine's upturned face.", parse);
 									Text.NL();
@@ -998,7 +994,7 @@ export namespace EquineScenes {
 		});
 		options.push({ nameStr : "Fuck his ass",
 			tooltip : "Teach the randy pony what it <i>really</i> means to ride bareback.",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You tangle your fingers in the stallion's mane and pull him toward you, taking a step backward so that he is forced to get on all fours in order to keep from face planting into your crotch. You order him to keep his ass as high in the air as he can while he services you, quelling his odd look with a quick cockslap to the cheek. Suitably cowed, the stallion resumes attending your [cocks], arching his back slightly to keep his rump pointed skyward. He even lifts his tail to drape over his lower back, though whether or not this was intentional is debatable. While the stud is otherwise occupied, you snap to get the mare's attention, beckoning her closer. She hesitantly complies, crawling toward you on all fours as her gaze flits between you and her mate's uncharacteristic behavior. You gently tilt her chin upward with one hand, forcing her to look into your eyes, and smile at her.", parse);
 				Text.NL();
@@ -1069,7 +1065,7 @@ export namespace EquineScenes {
 							const options: IChoice[] = [];
 							options.push({ nameStr : "Cum inside",
 								tooltip : "Pump the slut full of cum!",
-								func() {
+								func: () => {
 									Text.Clear();
 									Text.Add("The submissive display sends you over the edge; you plant your hands over his and pull him forcefully back against you as you thrust forward with pelvis-bruising force, burying your [cock] to the hilt inside his pliant hole. You cry out as a blast of hot cum travels up your shaft to explode in the equine’s bowels.", parse);
 									Text.NL();
@@ -1113,7 +1109,7 @@ export namespace EquineScenes {
 							});
 							options.push({ nameStr : "Cum outside",
 								tooltip : "Give your new slut a cum bath.",
-								func() {
+								func: () => {
 									Text.Clear();
 									Text.Add("The submissive display sends you over the edge; you plant your hands over his and pull out of him forcefully, leaving his pliant hole gaped and spasming as if begging for more cock. You cry out as a blast of hot cum travels up your shaft[s], exploding from your tip[s] in a white, creamy rain.", parse);
 									Text.NL();

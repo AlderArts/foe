@@ -143,7 +143,7 @@ export namespace MagnusScenes {
 				// [Talk][Magic][Sex][Meditate]
 				const options: IChoice[] = [];
 				options.push({ nameStr : "Talk",
-					func() {
+					func: () => {
 						Text.Clear();
 						if (magnus.flags.Talked === 1) {
 							Text.Out(`“Truly, you wish to hear my story again?” Magnus seems happy about this, and clears his throat to reiterate his tale. `);
@@ -178,7 +178,7 @@ export namespace MagnusScenes {
 				});
 				if (magnus.flags.Talked === 1) {
 					options.push({ nameStr : "Magic",
-						func() {
+						func: () => {
 							Text.Clear();
 
 							if (GameCache().flags.LearnedMagic >= 2) {
@@ -266,7 +266,7 @@ export namespace MagnusScenes {
 						tooltip : "Ask Magnus if he could teach you how to use magic.",
 					});
 					options.push({ nameStr : "Sex",
-						func() {
+						func: () => {
 							Text.Clear();
 							if (magnus.flags.Confronted === 0) {
 								Text.Out(`“W-what?” The magician looks at you, bewildered. “I hardly think that would be appropriate!” he stutters, blushing as he goes back to his book, reading with renewed intensity. You smile slightly as you catch him throwing furtive glances in your direction.
@@ -285,7 +285,7 @@ export namespace MagnusScenes {
 					});
 					if (GlobalScenes.MagicStage1()) {
 						options.push({ nameStr : "Gem",
-							func() {
+							func: () => {
 								Text.Clear();
 								Text.Out(`Magnus shakes his head as you present him with the gemstone.
 
@@ -337,7 +337,7 @@ export namespace MagnusScenes {
 		// [Your quest][Magic][Sex]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Your quest",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You dwell on the actions and events that have led you to this point, and how you should proceed next.", parse);
 				Text.NL();
@@ -363,7 +363,7 @@ export namespace MagnusScenes {
 			tooltip : "Try to figure out what you should do next.",
 		});
 		options.push({ nameStr : "Magic",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You try to muster what knowledge you have of magic, and attempt to see how it ties together with the gemstone. Calling on the power within you, you let it flow through your limbs, but do not release it. Rather than the raging current you feel when casting a spell, it is like a calm stream, pulsing gently.", parse);
 				Text.NL();
@@ -387,7 +387,7 @@ export namespace MagnusScenes {
 			tooltip : "Meditate on the nature of magic and the gemstone.",
 		});
 		options.push({ nameStr : "Sex",
-			func() {
+			func: () => {
 				Text.Clear();
 				const first = magnus.flags.Sexed === 0;
 				if (first) {
@@ -739,7 +739,7 @@ export namespace MagnusScenes {
 								tooltip : "Tell him what happened to you while you were meditating.",
 							});
 							options.push({ nameStr : "Say nothing",
-								func() {
+								func: () => {
 									Text.Clear();
 									Text.Add("You keep silent regarding your experiences, mulling them over silently. You have to consider how you should treat the magician from now on, and if you should confront him about what happened. He is clearly not aware of it himself.", parse);
 									Text.Flush();
@@ -811,7 +811,7 @@ export namespace MagnusScenes {
 		// [Condemn][Comfort][Complain]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Comfort",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“Thank you, [playername],”</i> Magnus bows his head gratefully. <i>“Your words are heartening, though not strictly true. If I hadn’t messed with that book, this would never had happened.”</i> The magician sighs, scratching his scraggly beard.", parse);
 				Text.NL();
@@ -827,7 +827,7 @@ export namespace MagnusScenes {
 			tooltip : "This wasn’t his fault. Well, not his intention anyway.",
 		});
 		options.push({ nameStr : "Complain",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“Surely you can’t mean… you liked it?”</i> Magnus looks at you in disbelief. You reply that you most certainly did. Sure, it was a bit rough… but he certainly is ‘gifted’. Can he do that growing thing with his cocks on demand?", parse);
 				Text.NL();
@@ -848,7 +848,7 @@ export namespace MagnusScenes {
 			tooltip : "Why would he try to suppress it?",
 		});
 		options.push({ nameStr : "Condemn",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“I am truly sorry,”</i> the magician bows his head, unwilling to look at you. <i>“I promise I will make it up to you, but I need time. I can’t exorcise the demon without the Tome of Erodith, but I can attempt to restrict its influence, now that I know it’s there.”</i>", parse);
 				Text.NL();

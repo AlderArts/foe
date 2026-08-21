@@ -74,7 +74,7 @@ KingsRoadLoc.Road.enc.AddEnc(() => {
 
 KingsRoadLoc.Road.AddEncounter({
 	nameStr : "Wildcat",
-	func() {
+	func: () => {
 		return FelinesScenes.WildcatEnc(2);
 	}, odds : 0.25, enc : true,
 	visible : true, enabled : true, hunt : true,
@@ -82,7 +82,7 @@ KingsRoadLoc.Road.AddEncounter({
 
 KingsRoadLoc.Road.AddEncounter({
 	nameStr : "Puma",
-	func() {
+	func: () => {
 		return FelinesScenes.PumaEnc(3);
 	}, odds : 0.25, enc : true,
 	visible : true, enabled : true, hunt : true,
@@ -90,7 +90,7 @@ KingsRoadLoc.Road.AddEncounter({
 
 KingsRoadLoc.Road.AddEncounter({
 	nameStr : "Jaguar",
-	func() {
+	func: () => {
 		return FelinesScenes.JaguarEnc(3);
 	}, odds : 0.25, enc : true,
 	visible : true, enabled : true, hunt : true,
@@ -98,7 +98,7 @@ KingsRoadLoc.Road.AddEncounter({
 
 KingsRoadLoc.Road.AddEncounter({
 	nameStr : "Lynx",
-	func() {
+	func: () => {
 		return FelinesScenes.LynxEnc(3);
 	}, odds : 0.25, enc : true,
 	visible : true, enabled : true, hunt : true,
@@ -106,7 +106,7 @@ KingsRoadLoc.Road.AddEncounter({
 
 KingsRoadLoc.Road.AddEncounter({
 	nameStr : "Equines",
-	func() {
+	func: () => {
 		return EquineScenes.PairEnc(4);
 	}, odds : 1.0, enc : true,
 	visible : true, enabled : true, hunt : true,

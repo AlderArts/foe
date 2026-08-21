@@ -349,7 +349,7 @@ const CacheToGame = () => {
 
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Fighter",
-				func() {
+				func: () => {
 					GAME().player.flags.startJob = JobEnum.Fighter;
 					GAME().player.currentJob           = Jobs.Fighter;
 					GAME().player.strength.growth     += 0.6;
@@ -370,7 +370,7 @@ const CacheToGame = () => {
 				tooltip : "Focused on martial abilities and strength, strives to excel in physical combat.",
 			});
 			options.push({ nameStr : "Scholar",
-				func() {
+				func: () => {
 					GAME().player.flags.startJob = JobEnum.Scholar;
 					GAME().player.currentJob           = Jobs.Scholar;
 					GAME().player.strength.growth     += 0.0;
@@ -391,7 +391,7 @@ const CacheToGame = () => {
 				tooltip : "Takes a more intellectual approach to problems, and dabbles slightly in the mystical. Starts out with several support abilities.",
 			});
 			options.push({ nameStr : "Courtesan",
-				func() {
+				func: () => {
 					GAME().player.flags.startJob = JobEnum.Courtesan;
 					GAME().player.currentJob           = Jobs.Courtesan;
 					GAME().player.strength.growth     += 0.0;

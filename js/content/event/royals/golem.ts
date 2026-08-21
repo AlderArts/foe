@@ -168,7 +168,7 @@ export namespace GolemScenes {
 		// [Fight!][Leave]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Fight!",
-			func() {
+			func: () => {
 				golem.RestFull();
 
 				const enemy = new Party();
@@ -190,7 +190,7 @@ export namespace GolemScenes {
 			tooltip : "Try to defeat the tower guardian in order to gain entry!",
 		});
 		options.push({ nameStr : "Leave",
-			func() {
+			func: () => {
 				MoveToLocation(world.loc.Rigard.Castle.Grounds);
 			}, enabled : true,
 			tooltip : "Retreat for now - it doesn’t look like it will follow you.",

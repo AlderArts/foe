@@ -91,7 +91,7 @@ export namespace RoaScenes {
         // [name]
         const options: IChoice[] = [];
         options.push({ nameStr : "Buy",
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Add("Roa giggles with glee as you pull him close possessively and start leading the way to the backrooms. Finding a free room, you open it and push the lagomorph inside before locking the door behind you.", parse);
                 Text.NL();
@@ -136,7 +136,7 @@ export namespace RoaScenes {
             tooltip : Text.Parse("What else do you do with a whore in a brothel? Take him back and let’s have some fun! If you remember correctly, his fee is [cost] coins.", parse),
         });
         options.push({ nameStr : "Talk",
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Out(`“Just here to talk?” The small lagomorph throws you a disappointed pout. He nuzzles up to your side. “There are so many other fun things we could do though…” You shift, feeling the warmth of his body against your side.`);
                 Text.Flush();
@@ -208,7 +208,7 @@ export namespace RoaScenes {
         else*/
         if (burrows.flags.Access >= BurrowsFlags.AccessFlags.Stage3 && roa.flags.Lagon < RoaFlags.Lagon.Talked) {
             options.push({ nameStr : "Scepter",
-                func() {
+                func: () => {
                     burrows.flags.Access = BurrowsFlags.AccessFlags.Stage4;
                     roa.flags.Lagon      = RoaFlags.Lagon.Talked;
                     rigard.flags.Scepter = 1;
@@ -282,7 +282,7 @@ export namespace RoaScenes {
             });
         } else if (burrows.LagonDefeated() && roa.flags.Lagon < RoaFlags.Lagon.Defeated) {
             options.push({ nameStr : "Lagon",
-                func() {
+                func: () => {
                     Text.Clear();
                     roa.flags.Lagon = RoaFlags.Lagon.Defeated;
                     Text.Add("<i>“Y-you did what?”</i> Roa looks shocked at your revelation, disbelief clear in his eyes. <i>“That’s impossible! No one in the Burrows could even touch my father! J-just how strong are you?!”</i>", parse);
@@ -307,7 +307,7 @@ export namespace RoaScenes {
             });
         } else if (burrows.VenaRestored() && roa.flags.Lagon < RoaFlags.Lagon.Restored) {
             options.push({ nameStr : "Vena",
-                func() {
+                func: () => {
                     Text.Clear();
                     RoaScenes.RestoredVenaTalk();
                     Text.Flush();
@@ -405,7 +405,7 @@ export namespace RoaScenes {
         // [Buy] [Leave]
         const options: IChoice[] = [];
         options.push({ nameStr : "Buy",
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Add("<i>“Great! Come with me!”</i> he says, springing to his feet and grabbing your [hand].", parse);
                 Text.NL();
@@ -479,7 +479,7 @@ export namespace RoaScenes {
 
                 // Vaginal
                 options.push({ nameStr : "Vaginal",
-                    func() {
+                    func: () => {
                         RoaScenes.TSLCatchVaginal();
                     }, enabled : true,
                     tooltip : "Nope, you’ve got an itch you need scratched, and he’s just the one to do it for you. Let’s see just how good he is with his dick instead of his ass.",
@@ -490,7 +490,7 @@ export namespace RoaScenes {
             tooltip : Text.Parse("You’re in a brothel, he’s clearly willing, why not enjoy a little mutual fun? After all, [cost] coin is hardly a fortune.", parse),
         });
         options.push({ nameStr : "Leave",
-            func() {
+            func: () => {
                 Gui.PrintDefaultOptions();
             }, enabled : true,
             tooltip : Text.Parse("You’re not in the mood for this one.", parse),
@@ -950,7 +950,7 @@ export namespace RoaScenes {
         // [Inside] [Outside]
         const options: IChoice[] = [];
         options.push({ nameStr : "Inside",
-            func() {
+            func: () => {
                 cameinside++;
                 Text.Clear();
                 Text.Add("You thrust back against Roa, forcing him down so hard he gets mashed into the mattress, pinned under your weight as you grind his prostate for all you’re worth. The lapin lets out a high-pitched squeal of pleasure, fingers grabbing at you for dear life as he bucks one last time and explodes messily inside you. Liquid warmth floods your loins as he cums, surging up inside of you for several long, pleasant moments.", parse);
@@ -966,7 +966,7 @@ export namespace RoaScenes {
             tooltip : Text.Parse("You’re a big [boygirl], let him give you a nice creamy filling.", {boygirl: player.mfFem("boy", "girl")}),
         });
         options.push({ nameStr : "Outside",
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Add("You pull your fingers free of Roa’s ass with an audible popping sound, using your hands to help you push yourself up until Roa’s cock slides free of your used pussy. The startled lapin looks at you with wide, innocent eyes, looking honestly tearful as you slide yourself off of the bed.", parse);
                 Text.NL();
@@ -1000,7 +1000,7 @@ export namespace RoaScenes {
             // [Help] [Don’t help]
             const options: IChoice[] = [];
             options.push({ nameStr : "Help",
-                func() {
+                func: () => {
                     Text.Clear();
                     Text.Add("A smirk on your lips, you proclaim you’ll give Roa more than a ‘moment’. Your hand reaches out and closes around the trembling bunny-boy’s half-erect shaft, tenderly brushing it twice. Then, leaning over the bed, you open your mouth and extend your [tongue], licking along its length, tasting the mixture of cum and sweat and your own sexual fluids coating the soft skin.", parse);
                     Text.NL();
@@ -1017,7 +1017,7 @@ export namespace RoaScenes {
                 tooltip : "Why not enjoy yourself by giving him an extra ‘hand’?",
             });
             options.push({ nameStr : "Don’t help",
-                func() {
+                func: () => {
                     Text.Clear();
                     Text.Add("You nod to show you understand and wait patiently for Roa.", parse);
                     Text.NL();
@@ -1090,7 +1090,7 @@ export namespace RoaScenes {
                 // [Inside] [Outside]
                 const options: IChoice[] = [];
                 options.push({ nameStr : "Inside",
-                    func() {
+                    func: () => {
                         cameinside++;
 
                         Text.Clear();
@@ -1106,7 +1106,7 @@ export namespace RoaScenes {
                     tooltip : cameinside > 0 ? "Double your pleasure, double your cum, right? What could another helping of Roa-spooge hurt?" : "Well, since he was good enough to let you cum this time, why not reward him by letting him shoot it where it belongs?",
                 });
                 options.push({ nameStr : "Outside",
-                    func() {
+                    func: () => {
                         Text.Clear();
                         Text.Add("You all but throw yourself backward, nearly rolling yourself off of the bed to escape Roa’s impending orgasm. Unbothered by your departure, Roa squeals in pleasure, arcing his back until he almost lifts himself off the bed before firing great spurts of semen toward the ceiling. They make a valiant effort, but he just can’t reach that far, and so they simply curl back down, splattering heavily across his belly, his chest, even his face. By the time he goes limp, panting heavily, he’s visibly painted with his own juices, and you are watching him from the bedside, having slid off to avoid being painted yourself.", parse);
 
@@ -1174,7 +1174,7 @@ export namespace RoaScenes {
         // [Snuggle] [Bathe] [Kiss] [Dismiss]
         const options: IChoice[] = [];
         options.push({ nameStr : "Snuggle",
-            func() {
+            func: () => {
                 const first = roa.flags.snug === 0;
                 roa.flags.snug++;
 
@@ -1235,7 +1235,7 @@ export namespace RoaScenes {
                     roa.Relation() < 40 ? "Why not spend some time snuggling with your favorite bunny?" : "You know Roa would just love if you stayed and snuggled awhile; why not indulge him?",
         });
         options.push({ nameStr : "Kiss",
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Add("The only warning you give the lapin is a predatory smile. Roa lets out a delicious little squeak of shock before you swoop down on him like the proverbial bird of prey. Your arms crush him against your [breasts], folding tightly around velvety white fur and holding him fast as your [lipsDesc] devour his own. His softness envelops your senses, prickling across your skin, his taste enrapturing your [tongue] as it washes across its surface.", parse);
                 Text.NL();
@@ -1273,13 +1273,13 @@ export namespace RoaScenes {
                     roa.Relation() < 40 ? "You’re sure Roa would just love a little memento before you leave." : "How can you possibly leave without giving your favorite bunny boy-slut a goodbye kiss?",
         });
         options.push({ nameStr : "Dismiss",
-            func() {
+            func: () => {
                 Text.Clear();
                 if (roa.Relation() < 20) {
                     Text.Add("<i>“Very well, thank you for your patronage, [fem],”</i> he says, bowing with a smile.", parse);
                 } else if (roa.Relation() < 40) {
                     Text.Add("<i>“That’s too bad. I guess I’ll see you some other time then, [playername],”</i> he says with a disappointed sigh.", parse);
- } else {
+                } else {
                     Text.Add("<i>“Aww. Not even a kiss?”</i> he asks with pleading eyes.", parse);
                     Text.NL();
                     Text.Add("Your hand shoots out and grab a particularly bushy puff of fur on his chest, hauling him in close to you. Your lips crash down like waves on a shore, your [tongue] plunging shamelessly into Roa’s mouth. The lapin voices a muffled moan, sucking greedily as you feed him your tongue, before you break the kiss as sharply as you gave it.", parse);

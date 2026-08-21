@@ -52,12 +52,11 @@ export class Nursery {
 	}
 
 	public FromStorage(storage: any) {
-		const that = this;
 		storage = storage || {};
 		const kids = storage.kids;
 		_.each(kids, (kid) => {
 			const k = new NurseryKid(kid);
-			that.kids.push(k);
+			this.kids.push(k);
 		});
 		_.forIn(storage.flags, (value, key) => {
 			this.flags[key] = parseInt(value, 10);

@@ -146,7 +146,7 @@ export namespace Room69Scenes {
 		const options: IChoice[] = [];
 		if (introTalkedSentience === false) {
 			options.push({ nameStr : "Sentience",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You ask how is it that a room can talk and move.", parse);
 					Text.NL();
@@ -163,7 +163,7 @@ export namespace Room69Scenes {
 		}
 		if (introTriedToLeave === false) {
 			options.push({ nameStr : "Leave",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Without saying a word, you turn around, and head toward the door. You attempt to turn the handle, but it simply refuses to move.", parse);
 					Text.NL();
@@ -189,7 +189,7 @@ export namespace Room69Scenes {
 			});
 		}
 		options.push({ nameStr : "What now",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You ask what the room wants with you.", parse);
 				Text.NL();
@@ -225,7 +225,7 @@ export namespace Room69Scenes {
 		});
 		if (introTriedArgue === false) {
 			options.push({ nameStr : "Argue",
-				func() {
+				func: () => {
 					Text.Clear();
 					parse.lust = player.LustLevel() >= 0.6 ? ", hoping your arousal is not too obvious" : "";
 					Text.Add("Feeling a little silly arguing with an ‘empty’ room, you tell Sixtynine that you are in no mood to play right now[lust]. You explain you are drunk and tired and really in no shape to do anything with it.", parse);
@@ -242,7 +242,7 @@ export namespace Room69Scenes {
 			});
 		} else {
 			options.push({ nameStr : "Insist",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“Look, you shabby closet, I am not interested in you. You being coy about it doesn’t change anything. I don’t want to fuck some dusty cobweb-strewn pantry.”</i>", parse);
 					Text.NL();
@@ -289,7 +289,7 @@ export namespace Room69Scenes {
 		}
 		if (introTriedForce === false) {
 			options.push({ nameStr : "Force",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You decide you don’t appreciate the room’s approach. It’s time to get out.", parse);
 					Text.NL();
@@ -791,7 +791,7 @@ export namespace Room69Scenes {
 			// [Apologize][Leave]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Apologize",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Trying to look meek, you stand awkwardly in the empty-looking room, and stammer out an apology. You tell Sixtynine that you were still more than a little drunk, and felt really trapped and confused, and you're deeply sorry you hurt it.", parse);
 					Text.NL();
@@ -813,7 +813,7 @@ export namespace Room69Scenes {
 				tooltip : "You came here to apologize to the room.",
 			});
 			options.push({ nameStr : "Leave",
-				func() {
+				func: () => {
 					TimeStep({minute: 10});
 					Gui.PrintDefaultOptions();
 				}, enabled : true,
@@ -876,7 +876,7 @@ export namespace Room69Scenes {
 		// [Apologize][Insult Fight][Leave]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Apologize",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("It feels silly to speak to the empty air, even though you know a sentient room is listening, but you persevere and tell Sixtynine that you are sorry about what happened earlier. You just felt trapped, and it was the only way out you saw...", parse);
 				Text.NL();
@@ -906,7 +906,7 @@ export namespace Room69Scenes {
 			tooltip : "Provocation or no, you probably went a little too far...",
 		});
 		options.push({ nameStr : "Insult Fight",
-			func() {
+			func: () => {
 				Text.NL();
 				if (player.Int() > 40) {
 					Text.Add("<i>“Is <b>that</b> how it works? Then I’m surprised you don’t spend more time thinking about oaks,”</i> you retort. You tap your foot on the floor, regarding it skeptically. <i>“Well, not oaks, clearly. I guess any kind of decent tree would be too dignified for you. Maybe about beetle-chewed pines.”</i>", parse);
@@ -946,7 +946,7 @@ export namespace Room69Scenes {
 			tooltip : "You are <i>not</i> letting it get away with that. If it wants to fight, you’re sure your wits are up to the challenge!",
 		});
 		options.push({ nameStr : "Leave",
-			func() {
+			func: () => {
 				TimeStep({minute: 10});
 				Gui.PrintDefaultOptions();
 			}, enabled : true,

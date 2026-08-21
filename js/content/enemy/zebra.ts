@@ -246,8 +246,6 @@ export namespace ZebraShamanScenes {
 
 	export function OnLoss() {
 		const party: Party = GAME().party;
-		//const enc: ZebraEncounter = this;
-		//const zebra = enc.zebra;
 		SetGameState(GameState.Event, Gui);
 
 		const parse: IParse = {
@@ -281,7 +279,6 @@ export namespace ZebraShamanScenes {
 	export function LoneEncounter() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const enc: ZebraEncounter = this;
 
 		const parse: IParse = {
 			weapon : player.WeaponDesc(),
@@ -315,15 +312,13 @@ export namespace ZebraShamanScenes {
 		Text.Flush();
 
 		Gui.NextPrompt(() => {
-			enc.PrepCombat();
+			this.PrepCombat();
 		});
 	}
 
 	export function OnWin() {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
-		const enc: ZebraEncounter = this;
-		//const zebra = enc.zebra;
 		SetGameState(GameState.Event, Gui);
 
 		const parse: IParse = {
@@ -345,22 +340,22 @@ export namespace ZebraShamanScenes {
 			// [Fuck him] [Ride him] [Leave]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Fuck him",
-				func() {
-					ZebraShamanScenes.OnWinFuckHim(enc);
+				func: () => {
+					ZebraShamanScenes.OnWinFuckHim(this);
 				}, enabled : player.FirstCock() !== undefined,
 				tooltip : "Perhaps you can convince him to have a bit of fun with you? After all, he did assault you… letting you fuck his ass is the least he can do.",
 			});
 			if (player.FirstVag()) {
 				options.push({ nameStr : "Get Fucked",
-					func() {
-						ZebraShamanScenes.OnWinVaginal(enc);
+					func: () => {
+						ZebraShamanScenes.OnWinVaginal(this);
 					}, enabled : true,
 					tooltip : "You consider it rather rude of him for attacking you and then waving it off as a simple mistake. It's only right that he should apologize to you properly, but words alone aren't going to cut it. You need him to make it up to you, and if the heat in your loins is anything to go by, you know exactly how he can do it.",
 				});
 			}
 			/* TODO
 			options.push({ nameStr : "name",
-				func : () => {
+				func: () => {
 					Text.Clear();
 					Text.Add("", parse);
 					Text.NL();
@@ -376,7 +371,7 @@ export namespace ZebraShamanScenes {
 				Gui.NextPrompt();
 			});
 		});
-		Encounter.prototype.onVictory.call(enc);
+		Encounter.prototype.onVictory.call(this);
 	}
 
 	export function OnWinFuckHim(enc: ZebraEncounter) {

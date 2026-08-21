@@ -59,7 +59,7 @@ export namespace MasturbationScenes {
 			_.each(player.AllCocks(), (c: Cock) => {
 				optsTc.push({ nameStr : c.race.qCShort(),
 					tooltip : c.aLong(),
-					func(obj: any) {
+					func: (obj: any) => {
 						MasturbationScenes.CockOpening(obj);
 					}, enabled : true,
 					obj : c,
@@ -69,7 +69,7 @@ export namespace MasturbationScenes {
 			if (optsTc.length >= 1) {
 				options.push({ nameStr : "Jerk cock",
 					tooltip : "",
-					func() {
+					func: () => {
 						if (optsTc.length >= 2) {
 							Gui.SetButtonsFromList(optsTc, false, undefined);
 						} else {
@@ -83,7 +83,7 @@ export namespace MasturbationScenes {
 		if (player.FirstVag()) {
 			options.push({ nameStr : "Vag - finger",
 				tooltip : "",
-				func() {
+				func: () => {
 					MasturbationScenes.VagOpening(MasturbationScenes.VagFinger);
 				}, enabled : !taur,
 			});
@@ -96,7 +96,7 @@ export namespace MasturbationScenes {
 				if (party.Inv().QueryNum(toy)) {
 					optsTv.push({ nameStr : toy.name,
 						tooltip : toy.Long(),
-						func(obj: any) {
+						func: (obj: any) => {
 							MasturbationScenes.VagOpening(MasturbationScenes.VagToy, obj);
 						}, enabled,
 						obj : toy,
@@ -120,7 +120,7 @@ export namespace MasturbationScenes {
 			if (optsTv.length >= 1) {
 				options.push({ nameStr : "Vag - toys",
 					tooltip : "",
-					func() {
+					func: () => {
 						Gui.SetButtonsFromList(optsTv, false, undefined);
 					}, enabled : !taur && toyAvailable,
 				});
@@ -130,7 +130,7 @@ export namespace MasturbationScenes {
 			if (player.HasPrehensileTail()) {
 				options.push({ nameStr : "Vag - tail",
 					tooltip : "",
-					func() {
+					func: () => {
 						MasturbationScenes.VagOpening(MasturbationScenes.VagTailfuck);
 					}, enabled : !taur,
 				});
@@ -139,7 +139,7 @@ export namespace MasturbationScenes {
 
 		options.push({ nameStr : "Ass - finger",
 			tooltip : "",
-			func() {
+			func: () => {
 				MasturbationScenes.AnalOpening(MasturbationScenes.AnalFinger);
 			}, enabled : !taur,
 		});
@@ -152,7 +152,7 @@ export namespace MasturbationScenes {
 			if (party.Inv().QueryNum(toy)) {
 				optsTa.push({ nameStr : toy.name,
 					tooltip : toy.Long(),
-					func(obj: any) {
+					func: (obj: any) => {
 						MasturbationScenes.AnalOpening(MasturbationScenes.AnalToy, obj);
 					}, enabled,
 					obj : toy,
@@ -176,7 +176,7 @@ export namespace MasturbationScenes {
 		if (optsTa.length >= 1) {
 			options.push({ nameStr : "Anal - toys",
 				tooltip : "",
-				func() {
+				func: () => {
 					Gui.SetButtonsFromList(optsTa, false, undefined);
 				}, enabled : !taur && toyAvailable,
 			});

@@ -69,7 +69,7 @@ PlainsLoc.Crossroads.enc = new EncounterTable();
 
 PlainsLoc.Crossroads.AddEncounter({
 	nameStr : "Wildcat",
-	func() {
+	func: () => {
 		return FelinesScenes.WildcatEnc(0);
 	}, odds : 0.25, enc : true,
 	visible : true, enabled : true, hunt : true,
@@ -77,7 +77,7 @@ PlainsLoc.Crossroads.AddEncounter({
 
 PlainsLoc.Crossroads.AddEncounter({
 	nameStr : "Puma",
-	func() {
+	func: () => {
 		return FelinesScenes.PumaEnc(0);
 	}, odds : 0.25, enc : true,
 	visible : true, enabled : true, hunt : true,
@@ -85,7 +85,7 @@ PlainsLoc.Crossroads.AddEncounter({
 
 PlainsLoc.Crossroads.AddEncounter({
 	nameStr : "Jaguar",
-	func() {
+	func: () => {
 		return FelinesScenes.JaguarEnc(0);
 	}, odds : 0.25, enc : true,
 	visible : true, enabled : true, hunt : true,
@@ -93,7 +93,7 @@ PlainsLoc.Crossroads.AddEncounter({
 
 PlainsLoc.Crossroads.AddEncounter({
 	nameStr : "Lynx",
-	func() {
+	func: () => {
 		return FelinesScenes.LynxEnc(0);
 	}, odds : 0.25, enc : true,
 	visible : true, enabled : true, hunt : true,
@@ -101,7 +101,7 @@ PlainsLoc.Crossroads.AddEncounter({
 
 PlainsLoc.Crossroads.AddEncounter({
 	nameStr : "Equines",
-	func() {
+	func: () => {
 		return EquineScenes.PairEnc(0);
 	}, odds : 1.0, enc : true,
 	visible : true, enabled : true, hunt : true,
@@ -109,7 +109,7 @@ PlainsLoc.Crossroads.AddEncounter({
 
 PlainsLoc.Crossroads.AddEncounter({
 	nameStr : "Bunnies",
-	func() {
+	func: () => {
 		return LagomorphScenes.GroupEnc();
 	}, odds : 1.0, enc : true,
 	visible : true, enabled : true, hunt : true,
@@ -160,7 +160,7 @@ PlainsLoc.Crossroads.enc.AddEnc(() => {
 		// [Coins][Luck]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Coins",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You dig into your purse and pass the man five coins, telling him that you hope these will help keep him fed until he reaches his destination.", parse);
 				Text.NL();
@@ -179,7 +179,7 @@ PlainsLoc.Crossroads.enc.AddEnc(() => {
 			tooltip : "Give the man five coins to help him on his way.",
 		});
 		options.push({ nameStr : "Luck",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You sympathize with the man, but you don’t have any resources you can spare just now.", parse);
 				Text.NL();

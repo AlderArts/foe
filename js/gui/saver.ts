@@ -26,7 +26,7 @@ export namespace Saver {
 			if (name) {
 				Text.Add(name);
 				options.push({ nameStr : "Game " + i,
-					func(obj: number) {
+					func: (obj: number) => {
 						const prmpt = prompt("This will overwrite save slot " + obj + ", continue? \n\n Comment:");
 						if (prmpt !== undefined) { SaveGame(obj, prmpt); }
 					}, enabled : true, obj : i,
@@ -34,7 +34,7 @@ export namespace Saver {
 			} else {
 				Text.Add("EMPTY");
 				options.push({ nameStr : "Game " + i,
-					func(obj: number) {
+					func: (obj: number) => {
 						const prmpt = prompt("This will save to slot " + obj + ", continue? \n\n Comment:");
 						if (prmpt !== undefined) { SaveGame(obj, prmpt); }
 					}, enabled : true, obj : i,

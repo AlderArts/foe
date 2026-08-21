@@ -284,7 +284,7 @@ BullTowerLoc.Courtyard.Yard.events.push(new Link(
         // [Yes][No]
         const options: IChoice[] = [];
         options.push({ nameStr : "Yes",
-            func() {
+            func: () => {
                 Text.Clear();
                 let sus;
                 if (outlaws.flags.BT & OutlawsFlags.BullTower.AlaricFreed) {
@@ -314,7 +314,7 @@ BullTowerLoc.Courtyard.Yard.events.push(new Link(
             tooltip : "Time for some heroic vandalism!",
         });
         options.push({ nameStr : "No",
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Add("Despite you being sorely tempted to send the likeness of that pompous ass careening to the ground, you stay your hand for now and step back from the statue. Now’s not the time to give in to impulses of petty vindictiveness.", parse);
                 if (outlaws.flags.BT & OutlawsFlags.BullTower.AlaricFreed) {
@@ -354,13 +354,13 @@ BullTowerLoc.Courtyard.Yard.links.push(new Link(
             // [Yes][No]
             const options: IChoice[] = [];
             options.push({ nameStr : "Yes",
-                func() {
+                func: () => {
                     BullTowerScenes.EndingSlipOut();
                 }, enabled : true,
                 tooltip : "Best leave while still ahead.",
             });
             options.push({ nameStr : "No",
-                func() {
+                func: () => {
                     Text.Clear();
                     Text.Add("The urge to leave the tower grounds is strong - the less you linger, the smaller the chance you’ll be detected, after all - but you fight the impulse to flee. There’s still work to be done here.", parse);
                     Text.Flush();
@@ -431,7 +431,7 @@ BullTowerLoc.Courtyard.Caravans.events.push(new Link(
         // [Sneak][Distract][Lull][Back]
         const options: IChoice[] = [];
         options.push({ nameStr : "Sneak",
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Add("You outline your plan to Cveta: sneak in as close as possible, wait for an opening and take out as many of the guards as you can before they can react. The songstress looks a little uncertain at the idea, but you reassure her of your confidence in your abilities.", parse);
                 Text.NL();
@@ -469,7 +469,7 @@ BullTowerLoc.Courtyard.Caravans.events.push(new Link(
             tooltip : "Sneak up to the guards and knock them out.",
         });
         options.push({ nameStr : "Distract",
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Add("You briefly outline your plan to Cveta: distract the guards so they’re looking the other way, then sneak up on them from behind and take them out with a minimum of fuss.", parse);
                 Text.NL();
@@ -520,7 +520,7 @@ BullTowerLoc.Courtyard.Caravans.events.push(new Link(
             tooltip : "Try to trick the guards to turn the other way and jump them from behind.",
         });
         options.push({ nameStr : "Lull",
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Add("You quickly assess the situation and ask Cveta if she can put her talents to use here. Ordering these particular sentries away like she did with the gate guards might be useful.", parse);
                 Text.NL();
@@ -644,7 +644,7 @@ BullTowerLoc.Courtyard.Caravans.events.push(new Link(
         // [Yes][No]
         const options: IChoice[] = [];
         options.push({ nameStr : "Yes",
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Add("Yes, the wagons are close enough that the fire should easily spread between them. You’re a bit surprised at how readily the canvas hoods catch flame - it’s almost as if they <i>want</i> to be destroyed - and just for good measure, you pay extra attention to the wooden frames, going over them carefully and making sure there’s going to be nothing salvageable after the intense heat has done its work.", parse);
                 if (!(outlaws.flags.BT & OutlawsFlags.BullTower.AlaricFreed)) {
@@ -665,7 +665,7 @@ BullTowerLoc.Courtyard.Caravans.events.push(new Link(
             tooltip : "Light ‘em up!",
         });
         options.push({ nameStr : "No",
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Add("Reconsidering, you step back from the wagons. If you burned them, there’d be no turning back if you decided that they could be useful later. Maybe you could return and finish the job just before you leave the tower grounds for good?", parse);
                 Text.Flush();
@@ -880,7 +880,7 @@ BullTowerLoc.Building.Cell.onEntry = () => {
         // [Yes][No]
         const options: IChoice[] = [];
         options.push({ nameStr : "No",
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Add("As much as you want to burst in right now, you realize that it’s better to prepare first. You can mostly guess what’s going on the other side of that door… but if you are missing something, you don’t want to be caught with your pants down.", parse);
                 Text.NL();
@@ -895,7 +895,7 @@ BullTowerLoc.Building.Cell.onEntry = () => {
             tooltip : "As much as you want to burst in right now, you realize that it’s better to prepare first.",
         });
         options.push({ nameStr : "Yes",
-            func() {
+            func: () => {
                 BT.foughtCorishev = true;
 
                 Text.Clear();
@@ -1096,7 +1096,7 @@ BullTowerLoc.Building.Watchtower.events.push(new Link(
         // [Sneak][Lull][Leave]
         const options: IChoice[] = [];
         options.push({ nameStr : "Sneak",
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Add("In a low whisper, you explain to Cveta that you’re going to sneak up the ladder and knock out the guard. She nods, and you begin your ascent.", parse);
                 Text.NL();
@@ -1127,7 +1127,7 @@ BullTowerLoc.Building.Watchtower.events.push(new Link(
             tooltip : "Sneak up the ladder and knock him out cold.",
         });
         options.push({ nameStr : "Lull",
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Add("As you watch the guard, an idea comes to mind. Since the guard is already struggling to stay awake, it shouldn’t take too much effort to send him to sleep, should it? You tell Cveta as much; the songstress steps back, studies the guard herself, then nods.", parse);
                 Text.NL();
@@ -1360,7 +1360,7 @@ export namespace BullTowerScenes {
         const options: IChoice[] = [];
         if (!opts.presence) {
             options.push({ nameStr : "Presence",
-                func() {
+                func: () => {
                     Text.Clear();
                     Text.Add("<i>“Some sort of smuggling is my guess,”</i> Maria pipes up. <i>“I’ve spotted some of the Royal Guard hanging around the old fort from time to time since the beginning of the year, almost always escorting folk transporting goods or lugging the stuff themselves. I managed to jump one of the caravan parties after they’d left the tower, made it look like your standard highway holdup. Most of what they were carrying were luxury goods from outside Rigard. Cheeses, wine, fine fabrics, smokes, other odds and ends. None of them illegal, but all of them highly taxed.”</i>", parse);
                     Text.NL();
@@ -1379,7 +1379,7 @@ export namespace BullTowerScenes {
         }
         if (!opts.plan) {
             options.push({ nameStr : "Plan",
-                func() {
+                func: () => {
                     Text.Clear();
                     Text.Add("Zenith nods at your question. <i>“Our eyes and ears have informed us that there are a number of shipments slated to come in that night; we’ll divert the guards by attacking the last of the convoys along the King’s Road within sight of the tower. ", parse);
                     if (party.Num() > 1) {
@@ -1411,7 +1411,7 @@ export namespace BullTowerScenes {
         }
         if (!opts.obj && opts.presence) {
             options.push({ nameStr : "Objectives",
-                func() {
+                func: () => {
                     Text.Clear();
                     Text.Add("Zenith and Maria look at each other for a moment, then the former shrugs and smiles. <i>“By all means, [playername]. Opportunities to screw Preston over are hard to come by, so feel free to be creative. Although I must remind you to focus on your primary goal and to take no unnecessary risks. Alaric comes first; everything else is secondary.</i>", parse);
                     Text.NL();
@@ -1437,7 +1437,7 @@ export namespace BullTowerScenes {
             });
         }
         options.push({ nameStr : "Leave",
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Add("You decide you’re as ready as you’ll ever be, and say so.", parse);
                 Text.NL();
@@ -1481,7 +1481,7 @@ export namespace BullTowerScenes {
 
         const options: IChoice[] = [];
         options.push({ nameStr : "Wait",
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Add("You’re going to have only one shot at this. While time is of the essence here, it won’t do to head into the great unknown without making all the preparations you can; with that in mind, you step back and return to the middle of camp. You’ll be back when everything’s been taken care of.", parse);
                 Text.NL();
@@ -1493,7 +1493,7 @@ export namespace BullTowerScenes {
             tooltip : "You still need to make a few more preparations.",
         });
         options.push({ nameStr : "Move out",
-            func() {
+            func: () => {
                 Text.Clear();
                 if (WorldTime().hour >= 21 || WorldTime().hour < 4) {
                     Text.Add("There’s no need to wait any longer; time’s a-wasting. Stepping towards Cveta’s tent, you practically run into the songstress as she emerges from within.", parse);
@@ -1602,7 +1602,6 @@ export namespace BullTowerScenes {
     export function GuardsWin() {
         //const outlaws: Outlaws = GAME().outlaws;
 
-        const enc  = this;
         SetGameState(GameState.Event, Gui);
 
         const parse: IParse = {
@@ -1621,11 +1620,10 @@ export namespace BullTowerScenes {
             Gui.NextPrompt();
             BT.IncSuspicion(100, BullTowerStats.MoveSuspicion);
         });
-        Encounter.prototype.onVictory.call(enc);
+        Encounter.prototype.onVictory.call(this);
     }
 
     export function GuardsLoss() {
-        //const enc  = this;
         SetGameState(GameState.Event, Gui);
 
         const parse: IParse = {
@@ -1640,7 +1638,6 @@ export namespace BullTowerScenes {
     }
 
     export function CorishevLoss() {
-        //const enc  = this;
         SetGameState(GameState.Event, Gui);
 
         const parse: IParse = {
@@ -1667,8 +1664,7 @@ export namespace BullTowerScenes {
         const player: Player = GAME().player;
         const outlaws: Outlaws = GAME().outlaws;
 
-        const enc  = this;
-        const corishev = enc.corishev;
+        const corishev = this.corishev;
         SetGameState(GameState.Event, Gui);
 
         const parse: IParse = {
@@ -1711,7 +1707,7 @@ export namespace BullTowerScenes {
             // [Fuck][Leave]
             const options: IChoice[] = [];
             options.push({ nameStr : "Fuck",
-                func() {
+                func: () => {
                     Text.Clear();
                     Text.Add("Just a minute, you tell Alaric. There’s some unfinished business you have to take care of - if Cveta would be kind enough to help him out? You’ll catch up with them in a moment.", parse);
                     Text.NL();
@@ -1727,7 +1723,7 @@ export namespace BullTowerScenes {
                 tooltip : "The bastard lieutenant sure can dish it out; let’s see how well he can take it.",
             });
             options.push({ nameStr : "Leave",
-                func() {
+                func: () => {
                     Text.Clear();
                     Text.Add("You find yourself in total agreement with the little bean counter. Not wishing to spend one moment longer in the cell, you help Alaric to his feet, you and Cveta each grabbing him under a shoulder and lifting. Before stepping onto the stairs, you relieve the lieutenant of his venom-coated whip, which could make a good weapon. The little bean-counter is still bleeding from his lashes, but he summons the strength to keep pace with both of you. Together, the three of you hobble up the steps and to the main hall, but not before you lock the cell door with the keys you found. On the off-chance that the lieutenant comes to before dawn, he can stew there until his underlings come and get him out.", parse);
                     Text.Flush();
@@ -1740,7 +1736,7 @@ export namespace BullTowerScenes {
             });
             Gui.SetButtonsFromList(options, false, undefined);
         });
-        Encounter.prototype.onVictory.call(enc);
+        Encounter.prototype.onVictory.call(this);
     }
 
     export function CorishevImpregnate(mother: Entity, father: Corishev, slot?: number) {
@@ -1771,7 +1767,7 @@ export namespace BullTowerScenes {
         // [Whip][Ride][Anal][Reconsider]
         const options: IChoice[] = [];
         options.push({ nameStr : "Whip",
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Add("An evil grin spreads across your lips as you reach down and pick up the lieutenant’s whip from the floor. While it looks quite nice as it is, you carefully pick off the barbs - you don’t want to kill the twisted bastard, as much as he deserves it, just bleed and humiliate him a little. It’s still got a thick coat of aphrodisiac venom on it, but you reach over for the vials you discovered and give the whip a second coating until it’s practically dripping with the stuff. Taking a step back to admire your handiwork, you shake your head at the poetic justice of the lieutenant becoming victim to the very same methods with which he tormented others.", parse);
                 Text.NL();
@@ -1845,7 +1841,7 @@ export namespace BullTowerScenes {
         });
         parse.gen = player.FirstVag() ? "pussy" : "ass";
         options.push({ nameStr : "Ride",
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Add("The sight of the lieutenant’s limp prick gives you an idea. Sure, it’s pretty dead at the moment, but with all that Gol venom on it getting the little soldier to stand to attention shouldn’t be too hard. Your suspicions are confirmed when you reach down and get a firm hold on his flaccid prick - a few strokes are all it takes to have it up and ready, as thick and vital as it was when you entered the cell.", parse);
                 Text.NL();
@@ -1898,7 +1894,7 @@ export namespace BullTowerScenes {
             tooltip : Text.Parse("Ride Corishev’s Cock with your [gen] and show him who’s boss.", parse),
         });
         options.push({ nameStr : "Anal",
-            func() {
+            func: () => {
                 const strapon = p1cock.isStrapon;
 
                 Text.Clear();
@@ -1931,7 +1927,7 @@ export namespace BullTowerScenes {
             tooltip : Text.Parse("Fuck that ass of his with your [cocks].", parse),
         });
         options.push({ nameStr : "Reconsider",
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Add("Looking down at the defeated lieutenant, you shake your head. What were you thinking, wasting precious time on this? Turning heel on the scene, you stop on the way to pick up Corishev’s whip - it might be useful as a weapon - and lock the cell door behind you with the keys you found. Hopefully it’ll keep him from raising the alarm if he comes around too quickly.", parse);
                 Text.NL();
@@ -1959,7 +1955,7 @@ export namespace BullTowerScenes {
         // [Inspect][Unlock][Disarm][Fake Out][Leave]
         const options: IChoice[] = [];
         options.push({ nameStr : "Inspect",
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Add("Leaning closer in the dim light, you take a closer look at the safe and its mechanisms. About the size of a bedside stand, it’s newer than the masonry that surrounds it, having yet to gain the coat of tarnish or rust that covers most of the metal objects remaining in the tower. Rapping on the solid steel door with your knuckles fails to produce a hollow sound - it’s unlikely you’ll be able to break into it by brute force, then.", parse);
                 Text.NL();
@@ -1979,7 +1975,7 @@ export namespace BullTowerScenes {
         if (BT.inspectedSafe && !BT.unlockedSafe) {
             if (outlaws.flags.BT & OutlawsFlags.BullTower.AlaricFreed) {
                 options.push({ nameStr : "Unlock",
-                    func() {
+                    func: () => {
                         Text.Clear();
                         Text.Add("Could it be? Is it? Steadying yourself, you take out the key you picked off the lecherous lieutenant and push it into the keyhole. It’s a perfect fit, the tumblers slide smoothly, and there’s an audible click from within as the latch moves. Unfortunately, there’s also a click from the slot beneath you, something sliding into place and poised to spring once triggered.", parse);
                         Text.NL();
@@ -1995,7 +1991,7 @@ export namespace BullTowerScenes {
         }
         if (BT.unlockedSafe && !(outlaws.flags.BT & OutlawsFlags.BullTower.SafeLooted)) {
             options.push({ nameStr : "Disarm",
-                func() {
+                func: () => {
                     Text.Clear();
                     Text.Add("Crouching down so you’re level with the slot, you do your best to take stock of the workings of the trap. Both Cveta and Alaric stand a healthy distance back as you begin to work, the latter looking distinctly nervous as you begin your fiddling.", parse);
                     Text.NL();
@@ -2038,7 +2034,7 @@ export namespace BullTowerScenes {
                 tooltip : "Attempt to disarm the trap.",
             });
             options.push({ nameStr : "Fake Out",
-                func() {
+                func: () => {
                     Text.Clear();
                     Text.Add("You think it better that you don’t actually attempt to disarm the trap and instead set it off safely.", parse);
                     Text.NL();

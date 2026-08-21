@@ -87,14 +87,14 @@ export namespace NCavalcadeScenes {
 			// [Coin game][Sexy game]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Coin game",
-				func() {
+				func: () => {
 					Text.Clear();
 					NCavalcadeScenes.PrepCoinGame();
 				}, enabled : party.coin >= NCavalcadeScenes.Bet(),
 				tooltip : "Play for coins.",
 			});
 			options.push({ nameStr : "Sexy game",
-				func() {
+				func: () => {
 					Text.Clear();
 					NCavalcadeScenes.PrepSexyGame();
 				}, enabled : true,
@@ -135,14 +135,14 @@ export namespace NCavalcadeScenes {
 				// [Sure][Nah]
 				const options: IChoice[] = [];
 				options.push({ nameStr : "Sure",
-					func() {
+					func: () => {
 						Text.NL();
 						NCavalcadeScenes.PrepCoinGame();
 					}, enabled : party.coin >= NCavalcadeScenes.Bet(),
 					tooltip : "Deal another round!",
 				});
 				options.push({ nameStr : "Nah",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("<i>“Alright, see you around!”</i> Your group disperses, each person going about their own business.", parse);
 						Text.Flush();
@@ -529,7 +529,7 @@ export namespace NCavalcadeScenes {
 		*/
 		if (caleCockInAss.length > 0) {
 			options.push({ nameStr : "Fuck Cale",
-				func() {
+				func: () => {
 					const virgin = cale.Butt().virgin;
 
 					cale.flags.cLoss++;
@@ -570,7 +570,7 @@ export namespace NCavalcadeScenes {
 			});
 		}
 		options.push({ nameStr : "Nothing",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“How noble of you, but don’t think it’ll let you off the hook if I win next time,”</i> Estevan quips.", parse);
 				Text.NL();

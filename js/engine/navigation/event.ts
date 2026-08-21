@@ -129,84 +129,84 @@ export class Event implements ILocation {
 		const options: IChoice[] = [];
 		options.push({ nameStr : `Half hour`,
 			tooltip : `Wait for half an hour.`,
-			func() {
+			func: () => {
 				TimeStep({minute: 30});
 				Gui.PrintDefaultOptions();
 			}, enabled : true,
 		});
 		options.push({ nameStr : `One hour`,
 			tooltip : `Wait for one hour.`,
-			func() {
+			func: () => {
 				TimeStep({hour: 1});
 				Gui.PrintDefaultOptions();
 			}, enabled : true,
 		});
 		options.push({ nameStr : `Two hours`,
 			tooltip : `Wait for two hours.`,
-			func() {
+			func: () => {
 				TimeStep({hour: 2});
 				Gui.PrintDefaultOptions();
 			}, enabled : true,
 		});
 		options.push({ nameStr : `Four hours`,
 			tooltip : `Wait for four hours.`,
-			func() {
+			func: () => {
 				TimeStep({hour: 4});
 				Gui.PrintDefaultOptions();
 			}, enabled : true,
 		});
 		options.push({ nameStr : `Eight hours`,
 			tooltip : `Wait for eight hours.`,
-			func() {
+			func: () => {
 				TimeStep({hour: 8});
 				Gui.PrintDefaultOptions();
 			}, enabled : true,
 		});
 		options.push({ nameStr : `A day`,
 			tooltip : `Wait for a day.`,
-			func() {
+			func: () => {
 				TimeStep({day: 1});
 				Gui.PrintDefaultOptions();
 			}, enabled : true,
 		});
 		options.push({ nameStr : `Until 4:00`,
 			tooltip : `Wait until early morning.`,
-			func() {
+			func: () => {
 				StepToHour(4);
 				Gui.PrintDefaultOptions();
 			}, enabled : true,
 		});
 		options.push({ nameStr : `Until 8:00`,
 			tooltip : `Wait until morning.`,
-			func() {
+			func: () => {
 				StepToHour(8);
 				Gui.PrintDefaultOptions();
 			}, enabled : true,
 		});
 		options.push({ nameStr : `Until 12:00`,
 			tooltip : `Wait until midday.`,
-			func() {
+			func: () => {
 				StepToHour(12);
 				Gui.PrintDefaultOptions();
 			}, enabled : true,
 		});
 		options.push({ nameStr : `Until 16:00`,
 			tooltip : `Wait until afternoon.`,
-			func() {
+			func: () => {
 				StepToHour(16);
 				Gui.PrintDefaultOptions();
 			}, enabled : true,
 		});
 		options.push({ nameStr : `Until 20:00`,
 			tooltip : `Wait until evening.`,
-			func() {
+			func: () => {
 				StepToHour(20);
 				Gui.PrintDefaultOptions();
 			}, enabled : true,
 		});
 		options.push({ nameStr : `Until 00:00`,
 			tooltip : `Wait until midnight.`,
-			func() {
+			func: () => {
 				StepToHour(0);
 				Gui.PrintDefaultOptions();
 			}, enabled : true,

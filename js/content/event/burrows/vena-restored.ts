@@ -144,7 +144,7 @@ export namespace VenaRScenes {
 			options.push({nameStr : "Lagon’s fate",
 				tooltip : Text.Parse("You want to talk about what’s going to happen to Lagon.", parse),
 				enabled : true,
-				func() {
+				func: () => {
 					vena.flags.Met |= VenaFlags.Met.Judgement;
 
 					Text.Clear();
@@ -213,7 +213,7 @@ export namespace VenaRScenes {
 		options.push({nameStr : "Public Fuck",
 			tooltip : Text.Parse("What better way to break his power than a public humiliation?", parse),
 			enabled : true,
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You run the scenario over in your head, smirking to yourself as you nod in satisfaction. Yes, this idea feels perfect; a punishment worthy of the crimes, and yet also merciful enough that it should make Vena happy.", parse);
 				Text.NL();
@@ -249,7 +249,7 @@ export namespace VenaRScenes {
 			options.push({nameStr : "Kill him",
 				tooltip : Text.Parse("It’s the easiest way to end his threat once and for all.", parse),
 				enabled : true,
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Finally, you shrug your shoulders and calmly tell Vena that, in her place, knowing what Lagon did to her and to her children, you’d have him executed.", parse);
 					Text.NL();
@@ -273,7 +273,7 @@ export namespace VenaRScenes {
 			options.push({nameStr : "Exile",
 				tooltip : Text.Parse("Banishing him from the burrows would be the cruellest kindness you can offer.", parse),
 				enabled : true,
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("After a moment’s thought, you tell Vena that if Lagon seems to think so little of his family, then the best punishment would be to send him away. See if being all alone out there makes him realize how wrong he was to mistreat his kin so badly.", parse);
 					Text.NL();
@@ -297,7 +297,7 @@ export namespace VenaRScenes {
 			options.push({nameStr : "Drug him",
 				tooltip : Text.Parse("Giving him a taste of his own medicine should work wonders.", parse),
 				enabled : true,
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Smirking at the irony, you suggest to Vena that since Lagon was so eager to drug her and their children, it would be a fitting punishment indeed to dose him with some drugs in turn.", parse);
 					Text.NL();

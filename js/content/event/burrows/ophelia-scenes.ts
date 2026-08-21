@@ -94,7 +94,7 @@ export namespace OpheliaScenes {
 
         if (burrows.flags.BruteTrait === BurrowsFlags.TraitFlags.Inactive) {
             options.push({ nameStr : `Cactoid`,
-                func() {
+                func: () => {
                     Text.Clear();
                     Text.Out(`“The cactoids should be fairly easy to catch, if you find them. The problem is the environment they live in. I’ve heard the desert is harsh.” Ophelia goes on to describe the critter in greater detail. “Look for small turtle-like creatures. They have needles on their backs, so be careful.”
 
@@ -111,7 +111,7 @@ export namespace OpheliaScenes {
             });
         } else { // turned in
             options.push({ nameStr : `Brawny trait`,
-                func() {
+                func: () => {
                     Text.Clear();
                     Text.Out(`“I… I’m not certain that it was a good idea to introduce this strain.” Ophelia looks troubled. “The specimens show great strength, and are considerably larger than the usual offspring, large enough to easily overpower regular men. It comes at a price however.”
 
@@ -124,7 +124,7 @@ export namespace OpheliaScenes {
         }
         if (burrows.flags.HermTrait === BurrowsFlags.TraitFlags.Inactive) {
             options.push({ nameStr : `Gol husk`,
-                func() {
+                func: () => {
                     Text.Clear();
                     Text.Out(`“The Gol are large feral insects, quite dangerous if you are caught unawares. In fact, you should probably run if you come across a live one,” Ophelia cautions you. “Trust me, you’ll know it when you see it - they are larger than horses.” She shows you a picture of a husk from one of her books, so you know what to look for.
 
@@ -141,7 +141,7 @@ export namespace OpheliaScenes {
             });
         } else { // turned in
             options.push({ nameStr : `Herm trait`,
-                func() {
+                func: () => {
                     Text.Clear();
                     Text.Out(`“This one was certainly interesting. I think I might even consider it myself...” Ophelia trails off thoughtfully. “All the males seem to enjoy their cocks so much, I wonder what it would feel like...”
 
@@ -154,7 +154,7 @@ export namespace OpheliaScenes {
         }
         if (burrows.flags.BrainyTrait === BurrowsFlags.TraitFlags.Inactive) {
             options.push({ nameStr : `Algae`,
-                func() {
+                func: () => {
                     Text.Clear();
                     Text.Out(`“The algae should be the easiest ones, since you can find them at the shores of the lake. They should look something like this.” She shows you a scroll, depicting an odd aquatic plant. “Just make sure to get the red ones. The yellow ones are apparently lethal to the touch. I think that is what the scroll says anyways, the writer is a bit unclear about it.”
 
@@ -171,7 +171,7 @@ export namespace OpheliaScenes {
             });
         } else { // turned in
             options.push({ nameStr : `Brainy trait`,
-                func() {
+                func: () => {
                     Text.Clear();
                     Text.Out(`“I had hoped that this one would help mother, but it seems my alchemy wasn’t strong enough.” Ophelia shrugs dejectedly. “At the very least, I can have some slightly more stimulating conversations with my brothers and sisters now.”`);
                     Text.Flush();
@@ -192,7 +192,7 @@ export namespace OpheliaScenes {
         // [Herself] [Her lab] [Sex] [Vena] [Lagon]
         const options: IChoice[] = [];
         options.push({ nameStr : `Herself`,
-            func() {
+            func: () => {
                 Text.Clear();
                 if (ophelia.flags.Talk & OpheliaFlags.Talk.Herself) {
                     Text.Out(`“Again?”
@@ -262,7 +262,7 @@ export namespace OpheliaScenes {
             tooltip : `You’d like to know a little more about Ophelia.`,
         });
         options.push({ nameStr : `Her Lab`,
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Out(`“We sometimes steal things from passing merchants or wanderers. One time, after a successful picking, we got a few books on alchemy. I got interested, and started researching the subject.”
 
@@ -297,7 +297,7 @@ export namespace OpheliaScenes {
             tooltip : `So, how did Ophelia start working with alchemy anyway?`,
         });
         options.push({ nameStr : `Sex`,
-            func() {
+            func: () => {
                 Text.Clear();
                 if (ophelia.flags.Talk & OpheliaFlags.Talk.Sex) {
                     Text.Out(`“I love sex. You should know. You’ve had me.”
@@ -339,7 +339,7 @@ export namespace OpheliaScenes {
             tooltip : `Ophelia’s... different... to the other bunnies in the warren. What does she think of sex?`,
         });
         options.push({ nameStr : `Vena`,
-            func() {
+            func: () => {
                 Text.Clear();
                 if (burrows.VenaRestored()) {
                     Text.Out(`“If you want to know more about her, you should consider asking her yourself. Mom is a lot more approachable than father.” Ophelia reminds you, a slight grin on her face. “But I have no problem talking to you about her. What exactly did you have in mind?”`);
@@ -353,13 +353,13 @@ export namespace OpheliaScenes {
                         // [Yes] [No]
                         const options: IChoice[] = [];
                         options.push({ nameStr : `Yes`,
-                            func() {
+                            func: () => {
                                 OpheliaScenes.TurnInScepter();
                             }, enabled : GAME().party.Inv().QueryNum(QuestItems.Scepter),
                             tooltip : `Show her the scepter.`,
                         });
                         options.push({ nameStr : `No`,
-                            func() {
+                            func: () => {
                                 Text.Clear();
                                 Text.Out(`With a shake of your head, you inform her that you haven’t managed to find it yet. You do promise that you’ll let her know as soon as you do have it.`);
                                 Text.NL();
@@ -378,7 +378,7 @@ export namespace OpheliaScenes {
             tooltip : `If she’s okay with it, you’d like to know more about her mom.`,
         });
         options.push({ nameStr : `Lagon`,
-            func() {
+            func: () => {
                 Text.Clear();
                 if (burrows.LagonDefeated()) {
                     Text.Out(`“Thank you so much for stopping him,” Ophelia says with a grin. “I still can’t believe you beat him.”
@@ -390,7 +390,7 @@ export namespace OpheliaScenes {
 
                     const options: IChoice[] = [];
                     options.push({ nameStr : `Be modest`,
-                        func() {
+                        func: () => {
                             Text.Clear();
                             Text.Out(`She merely shakes her head. “No, believe me, I’m not. Even if there are some of us who don’t seem to care, the truth is that you’ve done a great service for the colony.”
 
@@ -400,7 +400,7 @@ export namespace OpheliaScenes {
                         tooltip : `Ophelia is giving you far too much credit.`,
                     });
                     options.push({ nameStr : `Boast`,
-                        func() {
+                        func: () => {
                             Text.Clear();
                             Text.Out(`Thrusting out your chin, you fold your arms over your chest and give a triumphant grin. With a firm tone, you praise Ophelia for her attentiveness; it’s good to see she, at least, appreciates your efforts in rescuing her and her siblings from Lagon.
 
@@ -443,7 +443,7 @@ export namespace OpheliaScenes {
                     // [Come with me] [Stay silent]
                     const options: IChoice[] = [];
                     options.push({ nameStr : `Come with me`,
-                        func() {
+                        func: () => {
                             Text.Clear();
                             Text.Out(`There’s a moment of hesitation as the lapin alchemist considers your invitation, but she takes your hand and pushes it off her shoulders. “I’m sorry, ${pc.name}. I’m so sorry, but I can’t leave my mother here to suffer while I run, and that is assuming we could even run in the first place. If we tried, my father would surely hunt us down, and he would find us. It’s… it’s just too dangerous. I’m sorry,” she says in resignation.
 
@@ -459,7 +459,7 @@ export namespace OpheliaScenes {
                         tooltip : `Invite Ophelia to leave the burrows and join you in your travels.`,
                     });
                     options.push({ nameStr : `Stay silent`,
-                        func() {
+                        func: () => {
                             Text.Clear();
                             Text.Out(`“I’m sorry. I’m fine now,” she says, rubbing her eyes and brushing your hand off her shoulder. “Thank you.”
                             It was nothing, you assure her.`);
@@ -493,7 +493,7 @@ export namespace OpheliaScenes {
 
         if (burrows.flags.Access >= BurrowsFlags.AccessFlags.Stage3) {
             options.push({ nameStr : `Roa`,
-                func() {
+                func: () => {
                     OpheliaScenes.TalkRoa();
                 }, enabled : true,
                 tooltip : burrows.flags.Access >= BurrowsFlags.AccessFlags.Stage4 ? `Talk to Ophelia about Roa.` : `Ask Ophelia for clues on Roa’s whereabouts.`,
@@ -565,7 +565,7 @@ export namespace OpheliaScenes {
             // [Experiments][Sex]
             const options: IChoice[] = [];
             options.push({ nameStr : `Experiments`,
-                func() {
+                func: () => {
                     Text.Clear();
 
                     const scenes = [];
@@ -695,7 +695,7 @@ export namespace OpheliaScenes {
                 tooltip : `Ask about the experiments that she performed on Roa.`,
             });
             options.push({ nameStr : `Sex`,
-                func() {
+                func: () => {
                     Text.Clear();
 
                     const scenes = [];
@@ -882,7 +882,7 @@ export namespace OpheliaScenes {
         const options: IChoice[] = [];
         if (player.FirstCock()) {
             options.push({ nameStr : `Vaginal`,
-                func() {
+                func: () => {
                     ophelia.flags.Talk |= OpheliaFlags.Talk.Sex;
                     OpheliaScenes.SexVaginal();
                 }, enabled : true,
@@ -933,7 +933,7 @@ export namespace OpheliaScenes {
         // [Slowly] [Don’t bother]
         const options: IChoice[] = [];
         options.push({ nameStr : `Slowly`,
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Out(`A smile on your lips, you stride purposefully toward Ophelia. The female lagomorph smiles a little nervously at you, excitement obvious as she shifts her weight from foot to foot. Tenderly, you reach out with your hand, running your digits through her soft hair, and then you shift upwards. You take the rim of her elongated ear between forefinger and thumb, stroking the sensitive flesh with delicate twitches of your fingers.
 
@@ -1100,7 +1100,7 @@ export namespace OpheliaScenes {
             tooltip : `Why not have some fun before you get down to business? A little foreplay never hurt anyone...`,
         });
         options.push({ nameStr : `Don’t bother`,
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Out(`No sense in beating around the bush, you know what you want and what she wants. Without further ado, you tell her to get on all fours as circle behind her. She complies without protest, looking over her shoulders to watch your movements as you move to lift the hem of her lab coat and grab her ass.
 
@@ -1206,7 +1206,7 @@ export namespace OpheliaScenes {
         const options: IChoice[] = [];
 
         options.push({ nameStr : `Talk`,
-            func() {
+            func: () => {
                 Text.Clear();
                 if (burrows.VenaRestored()) {
                     Text.Out(`“Sure, I got time. What would you like to talk about?”`);
@@ -1225,7 +1225,7 @@ export namespace OpheliaScenes {
         OpheliaScenes.TraitPrompt(options);
 
         options.push({ nameStr : `Potions`,
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Out(`“If you have any, I’ll trade you coins for new alchemical brews that may be of use to the colony.”
 
@@ -1237,7 +1237,7 @@ export namespace OpheliaScenes {
             tooltip : `Donate some of your alchemical stock to Ophelia.`,
         });
         options.push({ nameStr : `Sex`,
-            func() {
+            func: () => {
                 Text.Clear();
                 const first = !(ophelia.flags.Talk & OpheliaFlags.Talk.Sex);
                 if (first) {
@@ -1264,7 +1264,7 @@ export namespace OpheliaScenes {
         });
         if (burrows.flags.Access < BurrowsFlags.AccessFlags.QuestlineComplete && party.Inv().QueryNum(QuestItems.Scepter)) {
         options.push({ nameStr : `Scepter`,
-            func() {
+            func: () => {
                 OpheliaScenes.TurnInScepter();
             }, enabled : true,
             tooltip : `Give Ophelia the scepter.`,
@@ -1310,7 +1310,7 @@ export namespace OpheliaScenes {
         const options: IChoice[] = [];
         if (burrows.flags.Felinix === 0) {
             options.push({ nameStr : `Felinix`,
-                func() {
+                func: () => {
                     Text.Clear();
                     Text.Out(`“Feline you say?” Ophelia looks thoughtfully at the offered bottle, giving it a swirl experimentally. Finally, she shakes her head and returns the bottle to you.
 
@@ -1326,7 +1326,7 @@ export namespace OpheliaScenes {
         }
         if (burrows.flags.Lacertium === 0) {
             options.push({ nameStr : `Lacertium`,
-                func() {
+                func: () => {
                     Text.Clear();
                     Text.Out(`“To be honest, I’m not sure what giving this to rabbits would do...” Ophelia studies the bottle of Lacertium carefully. “Protective scales? Perhaps it will make us lay eggs? Only one way to find out I guess...” The lapine alchemist hops over to two of her chained test subjects, one male and one female.
 
@@ -1358,7 +1358,7 @@ export namespace OpheliaScenes {
         }
         if (burrows.flags.Equinium === 0) {
             options.push({ nameStr : `Equinium`,
-                func() {
+                func: () => {
                     Text.Clear();
                     Text.Out(`“Oh, I’ve been searching for this!” Ophelia almost snatches the bottle from your hand, swirling the liquid around excitedly. “We lagomorphs may be quick on our feet, but we are not very physically strong. Well, if you discount my father,” she corrects herself. “Either way… the reproductive rates of my own race combined with the strength and size of the equines… I need to test this right now!”
 
@@ -1624,7 +1624,7 @@ export namespace OpheliaScenes {
             // [Stop him][Divert][Watch]
             const options: IChoice[] = [];
             options.push({ nameStr : `Stop him`,
-                func() {
+                func: () => {
                     Text.Clear();
                     Text.Out(`This has gone far enough. You pull Ophelia back from her enraged father, wrapping a protective arm around her as you face down with Lagon. At first, he looks incredulous, but his face quickly turns unreadable.
 
@@ -1640,7 +1640,7 @@ export namespace OpheliaScenes {
                 tooltip : `Stand up for her.`,
             });
             options.push({ nameStr : `Divert`,
-                func() {
+                func: () => {
                     Text.Clear();
                     Text.Out(`The situation is quickly heading down the drains, and you hurriedly suggest that you should all head for the Pit, to see the effects of the new potion. Lagon studies your face, barely keeping his rage in check. He nods slowly.
 
@@ -1654,7 +1654,7 @@ export namespace OpheliaScenes {
                 tooltip : `Step in before something ugly happens.`,
             });
             options.push({ nameStr : `Watch`,
-                func() {
+                func: () => {
                     WatchedOphelia = true;
                     Text.Clear();
                     Text.Out(`You watch in silence as father and daughter lock gazes. She holds out for a short while, but after a few moments, she sullenly looks down, admitting defeat.
@@ -1864,7 +1864,7 @@ export namespace OpheliaScenes {
             // [Stop Vena][Watch][Offer][Attack]
             const options: IChoice[] = [];
             options.push({ nameStr : `Stop Vena`,
-                func() {
+                func: () => {
                     stoppedVena = true;
 
                     Text.Clear();
@@ -1882,7 +1882,7 @@ export namespace OpheliaScenes {
                 tooltip : `Stop Vena by force before she throws herself on Ophelia.`,
             });
             options.push({ nameStr : `Watch`,
-                func() {
+                func: () => {
                     Text.Clear();
                     Text.Out(`A quick glance in Lagon’s direction tells you that he is watching your every move carefully, taut muscles ready to spring should you rush to the alchemist’s aid. He acknowledges you coyly with a malicious grin, daring you to act.
 
@@ -1898,7 +1898,7 @@ export namespace OpheliaScenes {
                 tooltip += ` You are not sure you’ll be able to take it, but you can’t just let the alchemist be raped in front of your eyes.`;
             }
             options.push({ nameStr : `Offer`,
-                func() {
+                func: () => {
                     Text.Clear();
                     fuckedByVena = true;
 
@@ -2016,7 +2016,7 @@ export namespace OpheliaScenes {
                 tooltip,
             });
             options.push({ nameStr : `Attack`,
-                func() {
+                func: () => {
                     Gui.Callstack.pop();
                     Text.Clear();
                     Text.Out(`No. Fuck this. You’re not going to let this go on for any longer. Time to put the self-proclaimed king of the rabbits in his place. Without letting your eyes off Lagon, you tell Ophelia to run away; to trust in you. A look of surprise passes over Lagon’s face, quickly replaced by a contemptuous sneer.
@@ -2174,7 +2174,7 @@ export namespace OpheliaScenes {
         const options: IChoice[] = [];
         if (WatchedOphelia) {
             options.push({ nameStr : `Sorry`,
-                func() {
+                func: () => {
                     Text.Clear();
                     Text.Out(`“N-no, that is fine,” Ophelia gives herself a tiny shake. “I fully understand. You are not from here and have no stake in this… not to mention you cannot beat my father. No one can.”
 
@@ -2191,7 +2191,7 @@ export namespace OpheliaScenes {
             });
         }
         options.push({ nameStr : `Encourage`,
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Out(`“I… I just don’t want you to do anything stupid,” she frets, though she looks happy to have your support. “My father… no one who has gone up against him has lived through it. The only reason he still keeps me around after I defied him is that he needs me. Promise you won’t do anything rash, okay?”`);
 
@@ -2202,7 +2202,7 @@ export namespace OpheliaScenes {
             tooltip : `Her father goes too far, and should be stopped.`,
         });
         options.push({ nameStr : `Rebuke`,
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Out(`“I am <b>already</b> in danger. You have seen my mother. Father will do the same to me the very moment I stop being useful to him.” You have to admit that she has a point - from what you have seen of him, Lagon seems to be an exceedingly ruthless king, not to mention an uncaring parent.`);
 
@@ -2230,7 +2230,7 @@ export namespace OpheliaScenes {
         const options: IChoice[] = [];
         if (!player.HasPerk(Perks.Virility)) {
             options.push({ nameStr : `Virility`,
-                func() {
+                func: () => {
                     Text.Clear();
                     Text.Out(`“This one will help you with the ladies, provided you can find someone who will spread her legs.” Lagon hands you the potion. `);
                     if (player.FirstCock()) {
@@ -2253,7 +2253,7 @@ export namespace OpheliaScenes {
         }
         if (!player.HasPerk(Perks.Fertility)) {
             options.push({ nameStr : `Fertility`,
-                func() {
+                func: () => {
                     Text.Clear();
                     Text.Out(`“Ah, I remember this one,” Lagon smiles fondly. “One of Ophelia’s first successful experiments. I don’t even know how much of this stuff Vena has drunk - it’s practically a cornerstone of her diet now. Still, I can spare this much.” He hands you the potion, which you promptly chug down.`);
                     if (player.FirstVag()) {
@@ -2276,7 +2276,7 @@ export namespace OpheliaScenes {
         }
         if (!player.HasPerk(Perks.Breeder)) {
             options.push({ nameStr : `Breeder`,
-                func() {
+                func: () => {
                     Text.Clear();
                     Text.Out(`“A staple of Vena’s daily diet, it’ll have you popping out babies in no time.” Lagon grins as he hands you the potion, whispering something to one of his attendants as you drink it. `);
                     if (player.FirstVag()) {
@@ -2299,7 +2299,7 @@ export namespace OpheliaScenes {
         }
         // Always available
         options.push({ nameStr : `Gold`,
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Out(`“Just in it for the money, eh? I have little use for it anyways.” Lagon shrugs, clapping his hands sharply. Two of his flunkies drag forth a large sack of money, dumping it on the floor in front of you with a loud clink.
 
@@ -2314,7 +2314,7 @@ export namespace OpheliaScenes {
         });
         if (rewardSexFlag === false) {
             options.push({ nameStr : `Sex`,
-                func() {
+                func: () => {
                     Text.Clear();
                     Text.Out(`“You really are quite the slut, aren’t you?” Lagon laughs, amused at your pleading. “I’ll fuck you raw any time you ask. Surely you want something more for your reward…?” By his grin, he is toying with you, as he spreads his legs slightly to give you easier access to his groin. You scramble forward eagerly, wrapping your lips around his cock. Inside your mouth, his thick rod grows and stiffens, overpowering your senses of taste and smell, not to mention straining your jaw to its limits.
 

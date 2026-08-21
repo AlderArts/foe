@@ -92,7 +92,7 @@ export namespace LagonScenes {
         // [Talk][Sex] ( [Usurp] )
         const options: IChoice[] = [];
         options.push({ nameStr : "Talk",
-            func() {
+            func: () => {
                 Text.Clear();
                 if (lagon.Relation() < 0) {
                     Text.Add("<i>“Make it quick, I’m busy,”</i> he responds shortly. It doesn’t look like the king appreciates you butting into his affairs.", parse);
@@ -108,7 +108,7 @@ export namespace LagonScenes {
             tooltip : "There’s something you want to ask the king.",
         });
         options.push({ nameStr : "Sex",
-            func() {
+            func: () => {
                 Text.Clear();
                 const first = !(lagon.flags.Talk & LagonFlags.Talk.RegularSex);
                 if (first) {
@@ -153,14 +153,14 @@ export namespace LagonScenes {
         */
         if (burrows.flags.Access >= BurrowsFlags.AccessFlags.Stage3 && !burrows.LagonAlly()) {
             options.push({ nameStr : "Usurp!",
-                func() {
+                func: () => {
                     Text.Clear();
                     Text.Add("Uh... are you sure that you’re ready for this? Once you go up against Lagon, there’s no turning back.", parse);
                     Text.Flush();
 
                     const options: IChoice[] = [];
                     options.push({ nameStr : "Do it!",
-                        func() {
+                        func: () => {
                             Text.Clear();
                             Text.Add("<i>“And what can I do for you today, traveler?”</i> Lagon leisurely regards you with a bored expression. <i>“I believe that you already bought all the needed ingredients to Ophelia; I do not have any further requests for your currently.”</i> He shakes his head. <i>“I feel the girl grows rebellious. Perhaps it’s time to throw her in the Pit together with her mother, as I should have done long ago.”</i>", parse);
                             Text.NL();
@@ -186,7 +186,7 @@ export namespace LagonScenes {
                         tooltip : "You’re ready to take him on!",
                     });
                     options.push({ nameStr : "No",
-                        func() {
+                        func: () => {
                             Text.Clear();
                             Text.Add("You reconsider. Attacking right now would be foolhardy.", parse);
                             Text.Flush();
@@ -212,14 +212,14 @@ export namespace LagonScenes {
         // [Blowjob][Get fucked][The Pit][(Back)]
         const options: IChoice[] = [];
         options.push({ nameStr : "Blowjob",
-            func() {
+            func: () => {
                 lagon.flags.Talk |= LagonFlags.Talk.RegularSex;
                 LagonScenes.RulerBlowjob();
             }, enabled : true,
             tooltip : "Ask the king for permission to suck his cock.",
         });
         options.push({ nameStr : "Get fucked",
-            func() {
+            func: () => {
                 lagon.flags.Talk |= LagonFlags.Talk.RegularSex;
                 Text.Clear();
                 Text.Add("You tell him that you want him to mount you and make you his bitch, to fuck you with that amazing cock of his. Judging from his expression, those were just the right words to use.", parse);
@@ -440,7 +440,7 @@ export namespace LagonScenes {
         // [Swallow][Shower][Finger][Beg]
         const options: IChoice[] = [];
         options.push({ nameStr : "Swallow",
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Add("Eager for your reward, you redouble your efforts, deepthroating your king for all that you’re worth. <i>“That’s sluts for you,”</i> he grunts. <i>“Always showing their true nature when they’re offered a generous serving of jizz.”</i> Scuttling to his feet, the lapin grabs you by the back of your head and starts thrusting in time with you, giving you a rough and messy skullfucking.", parse);
                 Text.NL();
@@ -451,7 +451,7 @@ export namespace LagonScenes {
             tooltip : "You don’t want to waste a single drop.",
         });
         options.push({ nameStr : "Shower",
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Add("Just as he’s about to blow, you pull away after leaving a final kiss on the tip of his throbbing member. Using both hands to jerk off the massive cum-cannon, you open your mouth expectantly, looking up lustfully at your king. Lagon shifts in his seat, leaning back and stretching luxuriously.", parse);
                 Text.NL();
@@ -476,7 +476,7 @@ export namespace LagonScenes {
             const first = !(lagon.flags.Talk & LagonFlags.Talk.BJfinger);
             const tooltip = first ? "Let’s see just how far you can push him. You’re interested to find out how the lagomorph king would react to a prostate massage… and who knows, perhaps it’ll lead to even more fun." : "You know what will happen, but you can’t resist the urge to tease the lagomorph king further. Him getting rougher only turns you on even more, and your loins ache, longing for his cock.";
             options.push({ nameStr : "Finger",
-                func() {
+                func: () => {
                     Text.Clear();
                     if (first) {
                         lagon.flags.Talk |= LagonFlags.Talk.BJfinger;
@@ -526,7 +526,7 @@ export namespace LagonScenes {
             });
         }
         options.push({ nameStr : "Beg",
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Add("You pull off his cock, giving the tip a final sultry lick  as you slowly back away.", parse);
                 Text.NL();
@@ -1062,7 +1062,7 @@ export namespace LagonScenes {
         // [Blowjob][Get fucked][The Pit][Decline]
         const options: IChoice[] = [];
         options.push({ nameStr : "Blowjob",
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Add("<i>“Is my loyal minion apprehensive? Or perhaps just hungry?”</i> Lagon grins, motioning for you to come closer. <i>“You have your king’s permission to suck his cock.”</i> He reclines, eyes intent on you as he waits for you to get started. Swallowing your doubts, you kneel down between his legs, licking your lips.", parse);
                 Text.NL();
@@ -1071,7 +1071,7 @@ export namespace LagonScenes {
             tooltip : "Perhaps just start with what the girl was doing as you came in.",
         });
         options.push({ nameStr : "Get fucked",
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Add("<i>“Very good,”</i> Lagon murmurs, motioning for you to approach. <i>“The king shall share his bounty with his loyal subject… with his slut.”</i> You gulp as your eyes meet his. There is a hunger in them, a raging fire that seeks to use and consume all that stands before it… and right now, you are in his sights. And Aria help you, you want to be there.", parse);
                 Text.NL();
@@ -1080,7 +1080,7 @@ export namespace LagonScenes {
             tooltip : "Yes… you want this. Accept the king’s reward.",
         });
         options.push({ nameStr : "The Pit",
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Add("<i>“You keep exceeding my expectations, my little slut,”</i> Lagon laughs, slapping the arm of his throne. <i>“But very well, I shall entertain your request. You’ll receive a place of honor right next to my dear mate, and you may stay there for as long as you please. All your needs will be taken care of, and I will personally grace you whenever the mood strikes me. Is that what you wish for?”</i>", parse);
                 Text.NL();
@@ -1094,7 +1094,7 @@ export namespace LagonScenes {
             tooltip : "You wish for nothing more than to be fucked by him… by him and everyone of his men, by Vena, by the entire Pit.",
         });
         options.push({ nameStr : "Decline",
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Add("<i>“How noble of you, declining your just payment,”</i> Lagon drawls, waving for another one of his daughters to claim your reward instead. <i>“Truly, you’re a paragon of honor, shedding your blood for your king without wishing for anything in return.”</i> He looks disappointed at your refusal to humiliate yourself, but it’s not about to ruin his good mood.", parse);
                 Text.NL();
@@ -1123,7 +1123,7 @@ export namespace LagonScenes {
         // [Burrows][Lagon][Vena][Ophelia] { [Scepter][Roa] }
         const options: IChoice[] = [];
         options.push({ nameStr : "Burrows",
-            func() {
+            func: () => {
                 Text.Clear();
                 TimeStep({minute: 10});
                 if (lagon.Relation() < 25) {
@@ -1161,7 +1161,7 @@ export namespace LagonScenes {
             tooltip : "This colony, this kingdom of his… what’s he planning to do with it?",
         });
         options.push({ nameStr : "Lagon",
-            func() {
+            func: () => {
                 Text.Clear();
                 TimeStep({minute: 10});
                 if (lagon.Relation() < 0) {
@@ -1227,7 +1227,7 @@ export namespace LagonScenes {
             tooltip : "Ask him about himself.",
         });
         options.push({ nameStr : "Vena",
-            func() {
+            func: () => {
                 Text.Clear();
                 TimeStep({minute: 10});
                 if (lagon.Relation() < 0) {
@@ -1247,7 +1247,7 @@ export namespace LagonScenes {
                 // [Fair][Admirable][Questionable]
                 const options: IChoice[] = [];
                 options.push({ nameStr : "Fair",
-                    func() {
+                    func: () => {
                         Text.Clear();
                         Text.Add("As an outsider, you cannot fault the lagomorphs’ customs.", parse);
                         Text.NL();
@@ -1260,7 +1260,7 @@ export namespace LagonScenes {
                     tooltip : "Better not anger him.",
                 });
                 options.push({ nameStr : "Admirable",
-                    func() {
+                    func: () => {
                         Text.Clear();
                         Text.Add("You agree that he’s lucky to have a mate such as Vena. Anyone would be envious to be in her place.", parse);
                         Text.NL();
@@ -1279,7 +1279,7 @@ export namespace LagonScenes {
                     tooltip : "Agree that it truly is a high honor. Anyone would be envious to be in Vena’s place.",
                 });
                 options.push({ nameStr : "Questionable",
-                    func() {
+                    func: () => {
                         Text.Clear();
                         Text.Add("<i>“Your ways may not be ours, but do not presume to judge my mate’s dedication.”</i> There’s a thinly veiled threat in his voice, suggesting that you shouldn’t continue this train of thought. <i>“My mate is mine to treat as I please.”</i>", parse);
                         Text.NL();
@@ -1295,7 +1295,7 @@ export namespace LagonScenes {
             tooltip : "Ask him about his mate, Vena.",
         });
         options.push({ nameStr : "Ophelia",
-            func() {
+            func: () => {
                 Text.Clear();
                 TimeStep({minute: 10});
                 if (burrows.LagonAlly()) {
@@ -1362,7 +1362,7 @@ export namespace LagonScenes {
         if (burrows.LagonAlly()) {
             if (!party.Inv().QueryNum(QuestItems.Scepter)) {
                 options.push({ nameStr : "Scepter",
-                    func() {
+                    func: () => {
                         Text.Clear();
                         TimeStep({minute: 10});
                         Text.Add("<i>“A mere trinket acquired during my youth,”</i> Lagon dismisses it, <i>“though if it carries such power as Ophelia seemed to think, perhaps I should have guarded it more carefully. In either case, it’s of little use to me now.”</i>", parse);
@@ -1383,7 +1383,7 @@ export namespace LagonScenes {
                         // [Silence][Request]
                         const options: IChoice[] = [];
                         options.push({ nameStr : "Silence",
-                            func() {
+                            func: () => {
                                 Text.Clear();
                                 Text.Add("<i>“If there’s nothing else, I have better things to do,”</i> the kind dismisses you.", parse);
                                 Text.Flush();
@@ -1392,7 +1392,7 @@ export namespace LagonScenes {
                             tooltip : "Say nothing.",
                         });
                         options.push({ nameStr : "Request",
-                            func() {
+                            func: () => {
                                 Text.Clear();
                                 if (lagon.Relation() < 50) {
                                     Text.Add("<i>“I don’t think that you’ve quite earned something like that yet, pet,”</i> Lagon drawls lazily, without his eyes leaving the valuable stone. <i>“You’ll have to be a little more… shall we say enthusiastic? Request denied.”</i>", parse);
@@ -1430,7 +1430,7 @@ export namespace LagonScenes {
                                 // [Refuse][Accept]
                                 const options: IChoice[] = [];
                                 options.push({ nameStr : "Refuse",
-                                    func() {
+                                    func: () => {
                                         Text.Clear();
                                         Text.Add("<i>“Your loss,”</i> Lagon shrugs.", parse);
                                         Text.Flush();
@@ -1439,7 +1439,7 @@ export namespace LagonScenes {
                                     tooltip : "Ah… no. You don’t really need it, come to think of it.",
                                 });
                                 options.push({ nameStr : "Accept",
-                                    func() {
+                                    func: () => {
                                         Text.Clear();
                                         Text.Add("<i>“Excellent… this shall be very entertaining, I’m sure,”</i> Lagon grins, scratching your head. He leans down, adding. <i>“Of course, avoiding your duty or leaving the Pit for any reason will count as breaking the deal. Only a full week will do.”</i>", parse);
                                         Text.NL();
@@ -1470,7 +1470,7 @@ export namespace LagonScenes {
                 });
             }
             options.push({ nameStr : "Roa",
-                func() {
+                func: () => {
                     Text.Clear();
                     TimeStep({minute: 10});
                     if (roa.Recruited()) {
@@ -1514,7 +1514,6 @@ export namespace LagonScenes {
         const lagon: Lagon = GAME().lagon;
 
         SetGameState(GameState.Event, Gui);
-        const enc: UsurpEncounter = this;
         const parse: IParse = {
 
         };
@@ -1551,7 +1550,7 @@ export namespace LagonScenes {
             Gui.NextPrompt();
         });
 
-        Encounter.prototype.onVictory.call(enc);
+        Encounter.prototype.onVictory.call(this);
     }
 
     export function PitDefianceLoss() {
@@ -1773,7 +1772,7 @@ export namespace LagonScenes {
         // [Enter][Leave]
         const options: IChoice[] = [];
         options.push({ nameStr : "Leave",
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Add("No… not yet.", parse);
                 Text.NL();
@@ -1789,7 +1788,7 @@ export namespace LagonScenes {
             tooltip : "You’re not ready quite yet. Lagon isn’t going anywhere.",
         });
         options.push({ nameStr : "Enter",
-            func() {
+            func: () => {
                 Text.Clear();
                 const toolate = ophelia.CountdownExpired();
 
@@ -1862,7 +1861,7 @@ export namespace LagonScenes {
         // [Enter][Leave]
         const options: IChoice[] = [];
         options.push({ nameStr : "Leave",
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Add("You can’t be quite sure what’ll face you inside… if Lagon’s caught whiff of who sent you looking for the scepter, and why, there’s bound to be trouble.", parse);
                 Text.NL();
@@ -1875,7 +1874,7 @@ export namespace LagonScenes {
             tooltip : "You need some more time to prepare… Lagon isn’t going anywhere.",
         });
         options.push({ nameStr : "Enter",
-            func() {
+            func: () => {
                 Text.Clear();
                 burrows.flags.Access = BurrowsFlags.AccessFlags.QuestlineComplete;
                 party.location = WORLD().loc.Burrows.Throne;
@@ -1919,7 +1918,7 @@ export namespace LagonScenes {
                 // [Oppose][Stand down]
                 const options: IChoice[] = [];
                 options.push({ nameStr : "Oppose",
-                    func() {
+                    func: () => {
                         Text.Clear();
                         Text.Add("No, it’s not going to be that easy. You stand by Ophelia, and the king can take his offers and stuff them. You’ve had enough of his bullshit.", parse);
                         Text.NL();
@@ -1940,7 +1939,7 @@ export namespace LagonScenes {
                     tooltip : "Fuck that. Lagon is a treacherous snake, you very much doubt that he’d keep such promises… not to mention his sinister agenda.",
                 });
                 options.push({ nameStr : "Stand down",
-                    func() {
+                    func: () => {
                         Text.Clear();
                         Text.Add("Ophelia can hardly believe her eyes as you walk over to Lagon and hand over the scepter.", parse);
                         if (party.InParty(kiakai)) {
@@ -2014,8 +2013,7 @@ export namespace LagonScenes {
 
         SetGameState(GameState.Event, Gui);
 
-        const enc: UsurpEncounter = this;
-        const toolate = enc.toolate;
+        const toolate = this.toolate;
         const scepter = party.Inv().QueryNum(QuestItems.Scepter);
 
         const parse: IParse = {
@@ -2111,8 +2109,6 @@ export namespace LagonScenes {
 
         SetGameState(GameState.Event, Gui);
 
-        const enc: UsurpEncounter = this;
-        //const toolate = enc.toolate;
         const scepter = party.Inv().QueryNum(QuestItems.Scepter);
 
         const parse: IParse = {
@@ -2149,7 +2145,7 @@ export namespace LagonScenes {
                 enc.Start();
             });
         });
-        Encounter.prototype.onVictory.call(enc);
+        Encounter.prototype.onVictory.call(this);
     }
 
     export function WinToBruteLagon() {
@@ -2160,8 +2156,6 @@ export namespace LagonScenes {
 
         SetGameState(GameState.Event, Gui);
 
-        const enc: UsurpEncounter = this;
-        //const toolate = enc.toolate;
         const scepter = party.Inv().QueryNum(QuestItems.Scepter);
 
         const parse: IParse = {
@@ -2235,7 +2229,7 @@ export namespace LagonScenes {
             }
         });
 
-        Encounter.prototype.onVictory.call(enc);
+        Encounter.prototype.onVictory.call(this);
     }
 
     export function OpheliaFight() {
@@ -2255,7 +2249,6 @@ export namespace LagonScenes {
         const player: Player = GAME().player;
 
         SetGameState(GameState.Event, Gui);
-        //const enc: UsurpEncounter = this;
 
         const parse: IParse = {
             cocks() { return player.MultiCockDesc(); },
@@ -2314,7 +2307,6 @@ export namespace LagonScenes {
         const lagon: Lagon = GAME().lagon;
 
         SetGameState(GameState.Event, Gui);
-        const enc: UsurpEncounter = this;
 
         const parse: IParse = {
             playername : player.name,
@@ -2355,7 +2347,7 @@ export namespace LagonScenes {
             Gui.NextPrompt();
         });
 
-        Encounter.prototype.onVictory.call(enc);
+        Encounter.prototype.onVictory.call(this);
     }
 
 }

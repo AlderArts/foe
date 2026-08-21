@@ -11,7 +11,7 @@ export function SetGameOverButton(text?: Tooltip) {
     const options: IChoice[] = [
         {
             nameStr : `Game Over`,
-            func() {
+            func: () => {
                 // TODO: Stats, newgame+ etc
                 Gui.Callstack = [];
                 SplashScreen();

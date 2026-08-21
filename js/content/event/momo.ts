@@ -178,7 +178,7 @@ export namespace MomoScenes {
 		// [HelpHer][LeaveHer]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Help her",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Seeing no reason not to aid her, you decide to show her to the Nomads’ camp. While you can’t really help her yourself, you’re pretty sure someone there will be able to.", parse);
 				Text.NL();
@@ -204,7 +204,7 @@ export namespace MomoScenes {
 			tooltip : "Take the strange woman back to the Nomads’ camp, she clearly needs the help.",
 		});
 		options.push({ nameStr : "Leave her",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("With a shake of your head, you tell her that she can forget it; she’s probably just trying to lead you into an ambush.", parse);
 				Text.NL();
@@ -247,7 +247,7 @@ export namespace MomoScenes {
 		// [HelpHer][Leave]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Help her",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Heaving a sigh, you decide to approach her.", parse);
 				Text.NL();
@@ -281,7 +281,7 @@ export namespace MomoScenes {
 			tooltip : "Let your pity win over and help the girl.",
 		});
 		options.push({ nameStr : "Leave",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("She mustn’t have noticed you yet, perfect. You’d rather avoid contact with her, so you walk away, leaving her to her own devices.", parse);
 				Text.Flush();
@@ -422,7 +422,7 @@ export namespace MomoScenes {
 		// [Talk] [Cook] [Flirt]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Talk",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add(" <i>“You'd like to talk?”</i> Momo repeats, furrowing her brow curiously at the notion. When you nod your head, she beams in delight.  <i>“Why, certainly! I'd love to talk, [playername] - what's on your mind?”</i>", parse);
 				Text.Flush();
@@ -432,7 +432,7 @@ export namespace MomoScenes {
 			tooltip : "Why not talk with Momo for a while?",
 		});
 		options.push({ nameStr : "Cook",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“You want me to cook you something? Why, sure! Be happy to!”</i> she smiles proudly. <i>“Anything in particular you wanted to eat? Something nice and tasty, to give you a recharge? Or perhaps you want me to do a little gastronomic magic?”</i> she suggests with a mischievous grin.", parse);
 				Text.Flush();
@@ -470,7 +470,7 @@ export namespace MomoScenes {
 		// [Nice Meal][Gastroalchemy][Experiment]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Nice Meal",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“One hearty, wholesome, filling meal coming right up,”</i> the chef declares proudly, puffing out her ample chest for emphasis. <i>“Just take a seat over there and be patient, I’ll have something whipped up for you in a jiffy,”</i> she assures you, already starting to gather ingredients and utensils for her latest dish.", parse);
 				Text.NL();
@@ -561,7 +561,7 @@ export namespace MomoScenes {
 		// [Chat] [Herself] [Family] [Cooking] [Skills]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Chat",
-			func() {
+			func: () => {
 				Text.Clear();
 				const scenes = new EncounterTable();
 				scenes.AddEnc(() => {
@@ -605,7 +605,7 @@ export namespace MomoScenes {
 			tooltip : "Just have a nice chat with the pretty dragon-girl.",
 		});
 		options.push({ nameStr : "Herself",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“You wanna know about little old me?”</i> Momo asks, fingers pressed against her ample chest, an exaggerated look of surprise on her features. <i>“Well, aren't you just the charmer?”</i> she playfully notes. <i>“Okay, it's not really anything exciting, but... I'm Monareth Kindling, or Momo to my friends. I'm twenty-five years old, and I come from the... was it northwestern parts of the country? I don't recall,”</i> she confesses, looking a little sheepish as she admits that.", parse);
 				Text.NL();
@@ -644,7 +644,7 @@ export namespace MomoScenes {
 		});
 		if (momo.flags.tSelf !== 0) {
 			options.push({ nameStr : "Family",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“You want to know about my family?”</i> Momo repeats, brow furrowed in surprise. <i>“Well, sure, I can tell you a little about them if you really want to know.”</i>", parse);
 					Text.NL();
@@ -698,7 +698,7 @@ export namespace MomoScenes {
 					// [Flirt][Nope]
 					const options: IChoice[] = [];
 					options.push({ nameStr : "Flirt",
-						func() {
+						func: () => {
 							Text.Clear();
 							Text.Add("You slowly look Momo over, making it blatantly apparent that you’re checking her out. Then with a smirk, you suggest that you happen to know a thing or two about <i>feeling good down there</i>. Maybe she’d like you to show her?", parse);
 							Text.NL();
@@ -745,7 +745,7 @@ export namespace MomoScenes {
 						tooltip : "She did just regale you with a rather raunchy tale, why not take advantage of it and see if you can take this somewhere?",
 					});
 					options.push({ nameStr : "Nope",
-						func() {
+						func: () => {
 							Text.Clear();
 							if (momo.flags.tFamily === 1) {
 								Text.Add("You thank Momo for the story; you’d never have guessed that this was exactly how a human-dragon hybrid would come to be.", parse);
@@ -772,7 +772,7 @@ export namespace MomoScenes {
 			});
 		}
 		options.push({ nameStr : "Cooking",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“Ooh, I love telling this story,”</i> Momo notes happily, grinning a toothy grin of glee at you at the topic. <i>“Well, I come from a really big farming family, and that means two things. Firstly, we need a <b>lot</b> of food when it's meal time. Secondly, cooking meals is a full-time job. So, the way my family sorts it out is that we have these team schedules - some of us are doing chores in the yards, some of us are cooking and cleaning, all that sort of thing. You know what I mean?”</i>", parse);
 				Text.NL();
@@ -807,7 +807,7 @@ export namespace MomoScenes {
 					// [Big family][Small family][Only Child]
 					const options: IChoice[] = [];
 					options.push({ nameStr : "Big family",
-						func() {
+						func: () => {
 							Text.Clear();
 							Text.Add("It was a big family. Not as big as hers, of course. There were times when you thought you were going to go insane, and you bickered with your siblings a lot. But there were also times you were glad to have everyone backing you up. It was a noisy family, but once you got used to it you wouldn’t exchange that for anything. This talk actually made you feel a little homesick... you wonder how they’re doing now...", parse);
 							Text.NL();
@@ -827,7 +827,7 @@ export namespace MomoScenes {
 						tooltip : "Your family was a lot like hers: big and noisy.",
 					});
 					options.push({ nameStr : "Small family",
-						func() {
+						func: () => {
 							Text.Clear();
 							Text.Add("Unlike hers, you have a small family. Everyone kinda stuck in their own corner for the most part, so it was easy to live with them. But there were times when you all gathered together for a reason or another, and you lived knowing you always had people you could count on nearby. 'Course there’s always the usual bickering in the family, but in the end of the day you’d all sit together and laugh it out over dinner. You can’t help but wonder how your siblings are doing…", parse);
 							Text.NL();
@@ -845,7 +845,7 @@ export namespace MomoScenes {
 						tooltip : "You had some siblings, but not as many as she did.",
 					});
 					options.push({ nameStr : "Only Child",
-						func() {
+						func: () => {
 							Text.Clear();
 							Text.Add("You didn’t have any siblings. For the longest time, it was just you - not that you minded much. You kind of get used to it. It was a bit lonely at times, you admit, but you aren’t sure how you’d handle having to deal with any sort of siblings.", parse);
 							Text.NL();
@@ -901,7 +901,7 @@ export namespace MomoScenes {
 		});
 		if (momo.flags.tCook !== MomoFlags.TalkCook.First) {
 			options.push({ nameStr : "Skills",
-				func() {
+				func: () => {
 					Text.Clear();
 					if (momo.flags.tSkills === 0) {
 						Text.Add("<i>“You want to know what sort of things I can cook? Why, certainly, I'd be happy to tell you that,”</i> Momo grins with delight, eager to show off.", parse);

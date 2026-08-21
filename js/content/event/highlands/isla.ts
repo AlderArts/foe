@@ -172,7 +172,7 @@ export namespace IslaScenes {
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Lost",
 			tooltip : "Tell her you got lost and stumbled upon this place.",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“Lost? You’re a long way from any of the proper roads, friend - or at least, what passes for roads in the Highlands. Just how long have you been wandering around?”</i>", parse);
 				Text.NL();
@@ -184,7 +184,7 @@ export namespace IslaScenes {
 		});
 		options.push({ nameStr : "Curious",
 			tooltip : "Tell her you saw the plateau from afar and went to investigate.",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Isla raises an eyebrow at you, her tiny black nose twitching as she sniffs in mild distaste. <i>“Oh, come on. There’re hundreds of little pools in the Highlands, and you chose this particular one to take a look-see at?”</i>", parse);
 				Text.NL();
@@ -196,7 +196,7 @@ export namespace IslaScenes {
 		});
 		options.push({ nameStr : "Spring",
 			tooltip : "There was this spring you were looking for…  ",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Honesty is the best policy, you guess. You tell Isla that you were looking for a magic spring in the vicinity, and to your surprise, the sable-morph just folds her arms, rolls her eyes and smiles.", parse);
 				Text.NL();
@@ -351,7 +351,7 @@ export namespace IslaScenes {
 
 		options.push({ nameStr : "Talk",
 			tooltip : "Have a chat with Isla.",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“Aye?”</i>", parse);
 				Text.Flush();
@@ -371,7 +371,7 @@ export namespace IslaScenes {
 		}
 		options.push({ nameStr : "Sex",
 			tooltip : "Proposition Isla for sex.",
-			func() {
+			func: () => {
 				if (isla.flags.Talk & IslaFlags.Talk.Sex) {
 					IslaScenes.IslaSex.Repeat();
 				} else {
@@ -543,7 +543,7 @@ export namespace IslaScenes {
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Herself",
 			tooltip : "Ask Isla about herself.",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“About me? I can’t really say much. I guess I’ve had a pretty good life so far… peaceful childhood, was sometimes a bit hungry but never actually starved, the neighboring tribes never actually bothered us… that’s how it is in the Highlands. Little scattered tribes of morphs living beyond the reach of the kingdom in the mountains, just doing their own thing and staying out of peoples’ way.”</i>", parse);
 				Text.NL();
@@ -578,7 +578,7 @@ export namespace IslaScenes {
 		});
 		options.push({ nameStr : "Spring",
 			tooltip : "So, what’s so special about this spring, anyway?",
-			func() {
+			func: () => {
 				isla.flags.Talk |= IslaFlags.Talk.Spring;
 
 				Text.Clear();
@@ -632,7 +632,7 @@ export namespace IslaScenes {
 		});
 		options.push({ nameStr : "Guardian",
 			tooltip : "Ask her about her job as the spring’s guardian.",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("So… what exactly <i>does</i> she do as the spring’s guardian, anyway?", parse);
 				Text.NL();
@@ -662,7 +662,7 @@ export namespace IslaScenes {
 		});
 		options.push({ nameStr : "Tribe",
 			tooltip : "So, what are her people like, anyway?",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("So, what are her people like, anyway? With all the small tribes that dot the Highlands, it’s hard to run into any particular one, whether it be intentional or by accident.", parse);
 				Text.NL();
@@ -708,7 +708,7 @@ export namespace IslaScenes {
 
 			options.push({ nameStr : "Figure",
 				tooltip : "Propose that Isla should use the spring herself, to enhance her womanly figure.",
-				func() {
+				func: () => {
 					Text.Clear();
 
 					if (figure === IslaFlags.Figure.Girly) {
@@ -1556,7 +1556,7 @@ export namespace IslaScenes {
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Against Wall",
 				tooltip : "Pin the slippery sable to a wall and nail her good.",
-				func() {
+				func: () => {
 					Text.Clear();
 					if (opts.stage >= 0.75) {
 						opts.nowall = true;
@@ -1571,13 +1571,13 @@ export namespace IslaScenes {
 			});
 			options.push({ nameStr : "Mount Her",
 				tooltip : "Get that slinky sable on all fours and breed her like the animal she is.",
-				func() {
+				func: () => {
 					IslaScenes.IslaSex.PitchVaginalMount(parse, opts);
 				}, enabled : true,
 			});
 			options.push({ nameStr : "Go Under",
 				tooltip : "Let her get on top and ride you.",
-				func() {
+				func: () => {
 					IslaScenes.IslaSex.PitchVaginalUnder(parse, opts);
 				}, enabled : true,
 			});
@@ -2016,7 +2016,7 @@ export namespace IslaScenes {
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Quick Dip",
 			tooltip : "Take a quick dip in the spring.",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Deciding to take just a quick dip, you remove your [armor] and wade out into the hot spring. The waist-high water is delightfully warm, and it’s a pleasure to be able to wash off the dust and dirt of your journey - and of course, any other things which you might’ve picked up along the way. You dunk your head in a few times, making sure you’re thoroughly rinsed all over, and a strange warm tingling creeps into your [skin] as the spring’s transformative magic takes effect…", parse);
 
@@ -2029,7 +2029,7 @@ export namespace IslaScenes {
 		});
 		options.push({ nameStr : "Relax",
 			tooltip : "Have a longer, more relaxing and transformative soak.",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Since you’re here, you might as well settle in and relax for a while. Stripping yourself of your [armor], you toe the spring’s bubbling surface - delightfully warm, as expected. Even the best bathhouses in Rigard don’t compare to this… or at least, when it comes to the water.", parse);
 				Text.NL();
@@ -2046,7 +2046,7 @@ export namespace IslaScenes {
 		});
 		options.push({ nameStr : "Long Soak",
 			tooltip : "Take a long soak in the spring, letting its magic take full effect.",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Ah… you’ve come all the way up here to use this thing, and you’re getting the most out of it. Yes, you’re not getting out of this little spring until you’re thoroughly clean and every bit of you has been scrubbed clean and raw. Throwing off your [armor] without a care in the world, you lower yourself into the water, feeling the bubbles fizz delightfully against your body and the rising steam work its way into your lungs, leaving you feeling refreshed both inside and out.", parse);
 				Text.NL();

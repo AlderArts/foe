@@ -194,7 +194,7 @@ export namespace AscheTasksScenes {
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Approach",
 				tooltip : "See if you can negotiate with the shamans. Maybe you can come to an agreement of some sort.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Deciding that you should at least try a peaceful way of resolving this conundrum, you call out to the three zebras, holding up your empty hands in the air to signal your intent. They certainly weren’t expecting anyone to come across this place, let alone an outsider like you, and grab their staves, looking quite panicked.", parse);
 					Text.NL();
@@ -223,7 +223,7 @@ export namespace AscheTasksScenes {
 			const tooltip = Text.Parse("Try to slip past the zebras and enter the spring basin while they’re [day].", {day: WorldTime().IsDay() ? "distracted" : "out of it"});
 			options.push({ nameStr : "Sneak",
 				tooltip,
-				func() {
+				func: () => {
 					// Make a dex check. If success, PC sneaks by and digs one up, else, fail and fight.
 
 					const dex = Math.floor(player.Dex() + Math.random() * 20);
@@ -270,7 +270,7 @@ export namespace AscheTasksScenes {
 			});
 			options.push({ nameStr : "Fight",
 				tooltip : "Since you have the initiative, it’s probably best to get the jump on them while you can.",
-				func() {
+				func: () => {
 					Text.Clear();
 					const day = WorldTime().IsDay();
 					Text.Add("You decide that force is probably going to be the easiest solution to this quandary, and prepare to do battle. It might cause problems for Asche to march in and start bashing skulls, but you’re a filthy, filthy outsider and you doing so probably won’t cause much of a stir.", parse);
@@ -333,7 +333,7 @@ export namespace AscheTasksScenes {
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Pay",
 				tooltip : "Pay what they want and be done with it.",
-				func() {
+				func: () => {
 					Text.Clear();
 					party.coin -= 350;
 					Text.Add("You wanted to buy them off, so you’ll buy them off all right. Digging into your coin pouch, you draw out the requisite amount of money and pass it into the shaman’s waiting hand. Once he’s done counting the payment, he gives the fellows behind him a nod.", parse);
@@ -367,7 +367,7 @@ export namespace AscheTasksScenes {
 			});
 			options.push({ nameStr : "Fight",
 				tooltip : "Screw this - enough talk! Have at them!",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Either you’re unwilling or unable to pay the price - it doesn’t matter in the end, does it? Lunging at the shaman with a growl, you tackle him to the ground even as his fellows grab their spears and run to his aid.", parse);
 					Text.NL();
@@ -476,7 +476,7 @@ export namespace AscheTasksScenes {
 				});
 				options.push({ nameStr : "Fight",
 					tooltip : "Screw this (well, not literally), enough talk! Have at them!",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("They dare reject your advances? Fie! Lunging at the shaman with a growl, you tackle him to the ground even as his fellows grab their staves and run to his aid.", parse);
 						Text.NL();
@@ -494,7 +494,6 @@ export namespace AscheTasksScenes {
 			const party: Party = GAME().party;
 			const asche: Asche = GAME().asche;
 
-			const enc = this;
 			SetGameState(GameState.Event, Gui);
 
 			const parse: IParse = {
@@ -519,14 +518,13 @@ export namespace AscheTasksScenes {
 
 				Gui.NextPrompt();
 			});
-			Encounter.prototype.onVictory.call(enc);
+			Encounter.prototype.onVictory.call(this);
 		}
 
 		export function FightLoss() {
 			const party: Party = GAME().party;
 			const asche: Asche = GAME().asche;
 
-			//const enc = this;
 			SetGameState(GameState.Event, Gui);
 
 			const parse: IParse = {
@@ -602,7 +600,7 @@ export namespace AscheTasksScenes {
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Yes",
 				tooltip : "Why not? The mystical shopkeeper is definitely willing and able.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“Ah, [handsomepretty] customer most certainly has good taste.”</i> A sly grin spreads Asche’s muzzle, widening with each step she takes towards you. <i>“This jackal-morph shall be showing you to the back room now, yes? Asche is a bit too shy to be doing funny business in storefront.”</i>", parse);
 					Text.NL();
@@ -642,7 +640,7 @@ export namespace AscheTasksScenes {
 			});
 			options.push({ nameStr : "No",
 				tooltip : "As exotically alluring as Asche is, you have better things to do. You’ll have the money that was promised.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You shake your head. While Asche is a very lovely jackaless in that sari and shawl of hers, you just don’t feel up to the task. You do your best to decline the offer with as much tact as you can muster.", parse);
 					Text.NL();
@@ -968,7 +966,7 @@ export namespace AscheTasksScenes {
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Lesson",
 				tooltip : "Well, you aren’t the kind to pass up a very educational experience…",
-				func() {
+				func: () => {
 					Text.Clear();
 
 					party.Inv().AddItem(AccItems.GreenScentedCandle);
@@ -1029,7 +1027,7 @@ export namespace AscheTasksScenes {
 			});
 			options.push({ nameStr : "Money",
 				tooltip : "The money will be just fine.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Asche looks a little disappointed when you tell her you’ll just have the money, but the jackaless’ usual easygoing demeanor returns in a matter of moments. <i>“Well, Asche is being respecting [handsomepretty] customer’s choice - coin is [hisher] desire, and coin [heshe] will have.”</i>", parse);
 					Text.NL();
@@ -1166,7 +1164,7 @@ export namespace AscheTasksScenes {
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Step out",
 				tooltip : "Taking the initiative might help if you need to get physical.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Working the last of the aches out of your body, you leave your hiding place and plant yourself at the end of the trail, ready to meet whoever it is who’s coming straight up to you. Soon enough, the newcomers emerge - a trio of husky dog-morphs, the biggest one a female, a male behind her, and a bound captive hefted between the two of them on a makeshift contraption of wood and vine that looks much like a stretcher. There’s a distinct resemblance between the former two, and you wonder if they’re related somehow.", parse);
 					Text.NL();
@@ -1184,7 +1182,7 @@ export namespace AscheTasksScenes {
 			});
 			options.push({ nameStr : "Hide",
 				tooltip : "You don’t want trouble, just some of the spring water.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Choosing to remain hidden, you hunker down in the grasses, pressing yourself as flat as you can and willing your breathing to slow as the footsteps draw closer. Your patience is rewarded with the sight of a trio of husky dog-morphs bursting onto the plateau meadow - the biggest of them a female, a male behind her, and a bound captive hefted between the two of them on a makeshift contraption of wood and vine that looks much like a stretcher. There’s a distinct resemblance between the former two, and you wonder if they’re related somehow.", parse);
 					Text.NL();
@@ -1290,7 +1288,7 @@ export namespace AscheTasksScenes {
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Reward",
 				tooltip : "You’ll just take the goods, thank you very much.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“Ah,”</i> Asche replies, just the barest hint of disappointment in the jackaless’ voice. <i>“Customer is going for safe option? Well, there is always being next time.”</i>", parse);
 					Text.NL();
@@ -1313,7 +1311,7 @@ export namespace AscheTasksScenes {
 			});
 			options.push({ nameStr : "Education",
 				tooltip : "You wouldn’t mind yet another educational experience with the lovely jackaless.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("The moment the words leave your mouth, Asche’s demeanor changes completely. It’s but a small shift in her posture, how she carries herself, but is more than enough to hint at what’s bubbling under the surface. <i>“Ah, [handsomepretty] customer is being wanting to learn, is [heshe]? Asche shall teach, then; she shall make customer into best student she is ever being having.”</i>", parse);
 					Text.NL();

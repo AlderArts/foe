@@ -197,7 +197,7 @@ export namespace MothgirlScenes {
 			// [Fight] [Give Money] [Trade Sex]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Fight Her",
-				func() {
+				func: () => {
 					enc.coin = Math.min(party.coin, enc.coin);
 
 					Text.Clear();
@@ -212,7 +212,7 @@ export namespace MothgirlScenes {
 				tooltip : "Time to teach this fluffy slut who's boss!",
 			});
 			options.push({ nameStr : "Give Money",
-				func() {
+				func: () => {
 					Text.Clear();
 					if (party.InParty(terry)) {
 						parse = terry.ParserPronouns(parse);
@@ -246,7 +246,7 @@ export namespace MothgirlScenes {
 				tooltip : Text.Parse("No need for violence… just take my money! Give her [coin] coins.", parse),
 			});
 			options.push({ nameStr : "Trade Sex",
-				func() {
+				func: () => {
 					Text.Clear();
 
 					parse.admitLie = party.coin < enc.coin ? "admit" : "lie";
@@ -304,8 +304,7 @@ export namespace MothgirlScenes {
 
 	export function WinPrompt() {
 		const player: Player = GAME().player;
-		const enc = this;
-		const moth: Mothgirl = enc.moth;
+		const moth: Mothgirl = this.moth;
 		SetGameState(GameState.Event, Gui);
 
 		const cocksInAss = player.CocksThatFit(moth.Butt(), undefined, 5);
@@ -327,31 +326,31 @@ export namespace MothgirlScenes {
 			const options: IChoice[] = [];
 			if (player.FirstCock()) {
 				options.push({ nameStr : "Titfuck",
-					func() {
-						MothgirlScenes.WinTitfuck(enc);
+					func: () => {
+						MothgirlScenes.WinTitfuck(this);
 					}, enabled : true,
 					tooltip : Text.Parse("Shove[oneof] your cock[s] between those big, succulent breasts of hers!", parse),
 				});
 			}
 			if (p1cock) {
 				options.push({ nameStr : "Anal",
-					func() {
-						MothgirlScenes.WinAnal(enc, cocksInAss);
+					func: () => {
+						MothgirlScenes.WinAnal(this, cocksInAss);
 					}, enabled : cocksInAss.length > 0,
 					tooltip : Text.Parse("Stick your [acocks] in her butt!", parse),
 				});
 			}
 			if (player.FirstVag()) {
 				options.push({ nameStr : "Get Oral",
-					func() {
-						MothgirlScenes.WinCunn(enc);
+					func: () => {
+						MothgirlScenes.WinCunn(this);
 					}, enabled : true,
 					tooltip : Text.Parse("Play with the moth's tits and make her eat your pussy!", parse),
 				});
 			}
 			Gui.SetButtonsFromList(options, true);
 		});
-		Encounter.prototype.onVictory.call(enc);
+		Encounter.prototype.onVictory.call(this);
 	}
 
 	export function WinTitfuck(_enc: MothgirlEncounter) {

@@ -257,13 +257,13 @@ export namespace PatchworkScenes {
 		const options: IChoice[] = [];
 
 		options.push({ nameStr : "Talk",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("[Placeholder] I'ma shopkeeper.");
 			}, enabled : false, // TODO
 		});
 		options.push({ nameStr : "Buy",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“What are ya buying?”</i> [heshe] ask[notS], opening [hisher] robes to show you the item-lined pockets.", parse);
 				Text.NL();
@@ -276,7 +276,7 @@ export namespace PatchworkScenes {
 			}, enabled : true,
 		});
 		options.push({ nameStr : "Sell",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“What are ya selling?”</i> [heshe] ask[notS], [hisher] telescopic monocle extending past [hisher] robes to examine your goods.", parse);
 				Text.NL();

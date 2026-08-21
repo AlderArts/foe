@@ -36,8 +36,6 @@ export class Button {
 	public glow: any;
 
 	constructor(Gui: any, rect: any, text: string, func: CallableFunction, enabled: boolean, image: any, disabledImage: any, glow?: boolean) {
-		const that = this;
-
 		this.Gui = Gui;
 
 		this.enabledImage  = image || Images.imgButtonEnabled;
@@ -133,9 +131,9 @@ export class Button {
 		this.set.attr({
 			cursor: "pointer",
 		}).click(() => {
-			that.HandleClick();
+			this.HandleClick();
 		}).hover(() => {
-			that.HoverIn();
+			this.HoverIn();
 		}, () => {
 			document.getElementById("tooltipTextArea").style.visibility = "hidden";
 		});

@@ -399,7 +399,7 @@ export namespace ArmorShopScenes {
 			// [name]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Buy",
-				func() {
+				func: () => {
 					Text.Clear();
 					const scenes = new EncounterTable();
 					scenes.AddEnc(() => { Text.Add("Donovan’s eyes light up, the stoat suddenly alert and excitable. <i>“A purchase? Marvellous! What can I interest you in today, then?”</i>", parse); });
@@ -417,7 +417,7 @@ export namespace ArmorShopScenes {
 				}, enabled : true,
 			});
 			options.push({ nameStr : "Sell",
-				func() {
+				func: () => {
 					Text.Clear();
 					const scenes = new EncounterTable();
 					scenes.AddEnc(() => { Text.Add("<i>“Ah! You have something you’d like me to take off your hands? Something too old, a little out of fashion, or maybe you’re outgrowing your first breastplate? Oh, no need to be shy, it happens.”</i> He rubs his paws together.", parse); });
@@ -437,7 +437,7 @@ export namespace ArmorShopScenes {
 				}, enabled : true,
 			});
 			options.push({ nameStr : "Specials",
-				func() {
+				func: () => {
 					Text.Clear();
 					const scenes = new EncounterTable();
 					scenes.AddEnc(() => { Text.Add("<i>“Ah! I see, I see. You’re looking for something special today, aren’t you, my good [sirmadam]? Well, I’m sure I can hook you up with something one way or the other, just let me check what’s in the back.”</i>", parse); });
@@ -454,7 +454,7 @@ export namespace ArmorShopScenes {
 				}, enabled : false, // TODO enable
 			});
 			options.push({ nameStr : "Talk",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Donovan scratches his head and looks at the small crowd in his establishment. <i>“Eh, well, since there’s no one wanting my attention right now… sure, why not? Just so you know, though, anyone else comes up while we’re talking, I gotta tend to them.”</i>", parse);
 					Text.Flush();
@@ -478,7 +478,7 @@ export namespace ArmorShopScenes {
 		// [Shop][Himself][Business][Back]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Shop",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“The store? It’s a long story. Got my start twenty years ago as a street lad, back during the war. Couldn’t have been more than seven or eight then… but you know, it was a bad time. Bodies started turning up on the streets all of a sudden, and little old me thought that there were plenty of things going to waste. Oh, most of the common stuff - coin purses and the like - were quickly snatched up, but there’s plenty of value to be had in a good pair of boots, and no one really notices yet another dirty brat. I’d bring in boots and clothes and things, Ma would clean off the blood with her special mixture of wood ash, fat and lye, maybe mend them a little, and we’d sell them good as new.”</i>", parse);
 				Text.NL();
@@ -508,7 +508,7 @@ export namespace ArmorShopScenes {
 			tooltip : "Oh, won’t he regale you with the story of his shop?",
 		});
 		options.push({ nameStr : "Himself",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Donovan eyes you. <i>“Eh? Me? Never mind me, I’m just your usual everyday guy… seriously. Sure, I had an exciting childhood, but anyone who lived through the war as a kid had one whether they wanted it or not. It came with the package and all.”</i>", parse);
 				Text.NL();
@@ -520,7 +520,7 @@ export namespace ArmorShopScenes {
 			tooltip : "Ask Donovan about himself.",
 		});
 		options.push({ nameStr : "Business",
-			func() {
+			func: () => {
 				Text.Clear();
 
 				const scenes = new EncounterTable();
@@ -552,7 +552,7 @@ export namespace ArmorShopScenes {
 		});
 		if (rigard.Twopenny.TShop >= 1) {
 			options.push({ nameStr : "City Watch",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“It’s quite a complicated thing,”</i> Donovan replies, scratching his head.", parse);
 					Text.NL();

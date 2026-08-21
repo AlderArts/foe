@@ -155,17 +155,17 @@ ClothShopLoc.events.push(new Link(
 			const options: IChoice[] = [];
 
 			options.push({ nameStr : "Buy",
-				func() {
+				func: () => {
 					rigard.ClothShop.Buy(nexellePrompt);
 				}, enabled : true,
 			});
 			options.push({ nameStr : "Sell",
-				func() {
+				func: () => {
 					rigard.ClothShop.Sell(nexellePrompt);
 				}, enabled : true,
 			});
 			options.push({ nameStr : "Nexelle",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You ask Miss Nexelle about herself.", parse);
 					Text.NL();
@@ -175,7 +175,7 @@ ClothShopLoc.events.push(new Link(
 				tooltip : "Ask the tailor about herself.",
 			});
 			options.push({ nameStr : "Store",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You ask the tailor to tell you about her store.", parse);
 					Text.NL();
@@ -185,7 +185,7 @@ ClothShopLoc.events.push(new Link(
 				tooltip : "Ask her about the store.",
 			});
 			options.push({ nameStr : "Guards",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You ask Miss Nexelle about the guards she has outside her store.", parse);
 					Text.NL();
@@ -195,7 +195,7 @@ ClothShopLoc.events.push(new Link(
 				tooltip : "Ask her about the two guards outside the store.",
 			});
 			options.push({ nameStr : "City",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You ask the tailor to tell you about the city.", parse);
 					Text.NL();
@@ -205,7 +205,7 @@ ClothShopLoc.events.push(new Link(
 				tooltip : "Ask her what she thinks of Rigard.",
 			});
 			options.push({ nameStr : "Fera",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You ask her about the cute catgirl that works for her.", parse);
 					Text.NL();
@@ -221,7 +221,7 @@ ClothShopLoc.events.push(new Link(
 			});
 			if (fera.flags.Mom === 2) {
 				options.push({ nameStr : "Fera's mom",
-					func() {
+					func: () => {
 						Text.Clear();
 
 						if (player.FirstVag()) {

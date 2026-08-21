@@ -19,23 +19,22 @@ export class StatusList {
 
 	public FromStorage = function(storage: any) {
 		if (!_.isArray(storage)) { return; }
-		const that = this;
 		_.each(storage, (stat) => {
 			const idx = (stat.idx === undefined) ? 0 : parseInt(stat.idx, 10);
 
 			switch (idx) {
 				// TODO Add permanent status effects here
 				case StatusEffect.Aroused:
-					that.stats[StatusEffect.Aroused] = Status.Aroused.FromStorage(stat);
+					this.stats[StatusEffect.Aroused] = Status.Aroused.FromStorage(stat);
 					break;
 				case StatusEffect.Buff:
-					that.stats[StatusEffect.Buff] = Status.Buff.FromStorage(stat);
+					this.stats[StatusEffect.Buff] = Status.Buff.FromStorage(stat);
 					break;
 				case StatusEffect.Full:
-					that.stats[StatusEffect.Full] = Status.Full.FromStorage(stat);
+					this.stats[StatusEffect.Full] = Status.Full.FromStorage(stat);
 					break;
 				case StatusEffect.Limp:
-					that.stats[StatusEffect.Limp] = Status.Limp.FromStorage(stat);
+					this.stats[StatusEffect.Limp] = Status.Limp.FromStorage(stat);
 					break;
 
 				default:

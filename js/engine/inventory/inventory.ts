@@ -212,9 +212,8 @@ export class Inventory {
 		Text.Flush();
 	}
 	public ShowInventory(SetExploreButtons: CallableFunction, preventClear?: boolean) {
-		const inv = this;
-		inv.items.sort(compareItemByProp("name"));
-		const backPrompt = () => { inv.ShowInventory(SetExploreButtons); };
+		this.items.sort(compareItemByProp("name"));
+		const backPrompt = () => { this.ShowInventory(SetExploreButtons); };
 		if (!preventClear) {
 			Text.Clear();
 		}
@@ -264,7 +263,7 @@ export class Inventory {
 				enabled: true,
 				// tooltip: it.Long(),
 				obj: it,
-				func(item: Item) {
+				func: (item: Item) => {
 					Text.Clear();
 					Text.Add(item.Long());
 					Text.NL();
@@ -275,16 +274,16 @@ export class Inventory {
 					_.each(GAME().party.members, (t: Entity) => {
 						target.push({
 							nameStr : t.name,
-							func(t: Entity) {
+							func: (t: Entity) => {
 								Text.Clear();
 								const use = t.ItemUse(item, backPrompt);
 								if (use.grab) {
 									if (use.consume) {
-										inv.RemoveItem(item);
+										this.RemoveItem(item);
 									}
 								} else {
 									if (item.Use(t).consume) { // Consume?
-										inv.RemoveItem(item);
+										this.RemoveItem(item);
 									}
 									Gui.NextPrompt(backPrompt);
 								}
@@ -309,11 +308,10 @@ export class Inventory {
 	}
 	// TODO Make this use the fancy GUI!
 	public CombatInventory(encounter: Encounter, entity: Entity, back?: CallableFunction) {
-		const inv = this;
 		Text.Clear();
 
 		const backPrompt = () => {
-			inv.CombatInventory(encounter, entity, back);
+			this.CombatInventory(encounter, entity, back);
 		};
 
 		const combatItemsByType: any = {};
@@ -362,8 +360,8 @@ export class Inventory {
 				enabled: it.combat ? it.combat.enabledCondition(encounter, entity) : true,
 				// tooltip: it.Long(),
 				obj: it,
-				func(item: CombatItem) {
-					if (item.combat.OnSelect(encounter, entity, backPrompt, inv)) {
+				func: (item: CombatItem) => {
+					if (item.combat.OnSelect(encounter, entity, backPrompt, this)) {
 						Text.Clear();
 						Text.Add(item.Long());
 						Text.NL();
@@ -382,7 +380,6 @@ export class Inventory {
 	}
 
 	public ShowEquippable(entity: Entity, type: ItemType|ItemSubtype, backPrompt?: () => void) {
-		const inv = this;
 		// Populate item list
 		const items: Item[] = [];
 		_.each(this.items, (it) => {
@@ -420,30 +417,30 @@ export class Inventory {
 		const list = [];
 		list.push({
 			nameStr : "Dequip",
-			func() {
+			func: () => {
 				switch (type) {
 					case ItemType.Weapon:
-						if (entity.weaponSlot) { inv.AddItem(entity.weaponSlot); }
+						if (entity.weaponSlot) { this.AddItem(entity.weaponSlot); }
 						entity.weaponSlot = undefined;
 						break;
 					case ItemSubtype.TopArmor:
-						if (entity.topArmorSlot) { inv.AddItem(entity.topArmorSlot); }
+						if (entity.topArmorSlot) { this.AddItem(entity.topArmorSlot); }
 						entity.topArmorSlot = undefined;
 						break;
 					case ItemSubtype.BotArmor:
-						if (entity.botArmorSlot) { inv.AddItem(entity.botArmorSlot); }
+						if (entity.botArmorSlot) { this.AddItem(entity.botArmorSlot); }
 						entity.botArmorSlot = undefined;
 						break;
 					case ItemSubtype.Acc1:
-						if (entity.acc1Slot) { inv.AddItem(entity.acc1Slot); }
+						if (entity.acc1Slot) { this.AddItem(entity.acc1Slot); }
 						entity.acc1Slot = undefined;
 						break;
 					case ItemSubtype.Acc2:
-						if (entity.acc2Slot) { inv.AddItem(entity.acc2Slot); }
+						if (entity.acc2Slot) { this.AddItem(entity.acc2Slot); }
 						entity.acc2Slot = undefined;
 						break;
 					case ItemSubtype.StrapOn:
-						if (entity.strapOn) { inv.AddItem(entity.strapOn); }
+						if (entity.strapOn) { this.AddItem(entity.strapOn); }
 						entity.strapOn = undefined;
 						break;
 				}
@@ -459,44 +456,44 @@ export class Inventory {
 			Text.AddDiv("<hr>");
 			list.push({
 				nameStr : it.name,
-				func(t: Item) {
-					inv.RemoveItem(t);
+				func: (t: Item) => {
+					this.RemoveItem(t);
 					const switchType = (t.subtype !== ItemSubtype.None) ? t.subtype : t.type;
 					switch (switchType) {
 						case ItemType.Weapon:
-							if (entity.weaponSlot) { inv.AddItem(entity.weaponSlot); }
+							if (entity.weaponSlot) { this.AddItem(entity.weaponSlot); }
 							entity.weaponSlot = t;
 							break;
 
 						case ItemSubtype.FullArmor:
-							if (entity.topArmorSlot) { inv.AddItem(entity.topArmorSlot); }
-							if (entity.botArmorSlot) { inv.AddItem(entity.botArmorSlot); }
+							if (entity.topArmorSlot) { this.AddItem(entity.topArmorSlot); }
+							if (entity.botArmorSlot) { this.AddItem(entity.botArmorSlot); }
 							entity.topArmorSlot = t;
 							entity.botArmorSlot = undefined;
 							break;
 
 						case ItemSubtype.TopArmor:
-							if (entity.topArmorSlot) { inv.AddItem(entity.topArmorSlot); }
+							if (entity.topArmorSlot) { this.AddItem(entity.topArmorSlot); }
 							entity.topArmorSlot = t;
 							break;
 
 						case ItemSubtype.BotArmor:
-							if (entity.botArmorSlot) { inv.AddItem(entity.botArmorSlot); }
+							if (entity.botArmorSlot) { this.AddItem(entity.botArmorSlot); }
 							entity.botArmorSlot = t;
 							break;
 
 						case ItemType.Accessory:
 							if (type === ItemSubtype.Acc1) {
-								if (entity.acc1Slot) { inv.AddItem(entity.acc1Slot); }
+								if (entity.acc1Slot) { this.AddItem(entity.acc1Slot); }
 								entity.acc1Slot = t;
 							} else if (type === ItemSubtype.Acc2) {
-								if (entity.acc2Slot) { inv.AddItem(entity.acc2Slot); }
+								if (entity.acc2Slot) { this.AddItem(entity.acc2Slot); }
 								entity.acc2Slot = t;
 							}
 							break;
 
 						case ItemSubtype.StrapOn:
-							if (entity.strapOn) { inv.AddItem(entity.strapOn); }
+							if (entity.strapOn) { this.AddItem(entity.strapOn); }
 							entity.strapOn = t as ItemToy;
 							break;
 					}

@@ -390,7 +390,7 @@ export namespace PlazaScenes {
 			// [Accept][Tease][Investigate]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Accept",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You tell the elf that from what you saw of Aria, the story indeed does not fit very well.", parse);
 					Text.NL();
@@ -406,7 +406,7 @@ export namespace PlazaScenes {
 				tooltip : "The story did sound rather ridiculous...",
 			});
 			options.push({ nameStr : "Tease",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You start telling the elf that the story does sound quite implausible, and as [heshe] starts nodding, you add how implausible it is that Aria would refuse to sleep with Riorbane. Despite your best efforts, you can't quite suppress your laughter, as [name]'s expression goes from open-mouthed astonishment, to red-faced embarrassment, to obvious consternation. [HisHer] mouth tries to start moving again and again, but no words come out for a good half minute.", parse);
 					Text.NL();
@@ -419,7 +419,7 @@ export namespace PlazaScenes {
 				tooltip : "'Agree' that Aria refusing to sleep with Riorbane seems implausible.",
 			});
 			options.push({ nameStr : "Investigate",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You tell the elf that while many elements of the story sound implausible, clearly it does bear some resemblance to reality. Further study will be required to disentangle truth from myth.", parse);
 					Text.NL();
@@ -531,7 +531,7 @@ export namespace PlazaScenes {
 		// [Deliver][Open]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Deliver",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("The task is a little demeaning, but you decide it's worth a small effort to get a few more coins. Occasionally asking for directions, you quickly reach your destination, and hand over the note to the recipient, [recipient].", parse);
 				Text.NL();
@@ -546,7 +546,7 @@ export namespace PlazaScenes {
 			tooltip : "Deliver the note as the noble wants.",
 		});
 		options.push({ nameStr : "Open",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You decide people shouldn't assume others will do what they demand without consulting them. You break the plain wax seal, tossing it to the side of the road, and have a look at the note.", parse);
 				Text.NL();

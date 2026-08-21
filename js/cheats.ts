@@ -56,7 +56,7 @@ export function InitCheats() {
 				const player: Player = GAME().player;
 				const options: IChoice[] = [];
 				options.push({ nameStr : "Add cock",
-					func() {
+					func: () => {
 						player.body.cock.push(new Cock());
 						Text.Add("You gain a cock, giving you " + player.NumCocks());
 						Text.NL();
@@ -64,7 +64,7 @@ export function InitCheats() {
 					}, enabled : player.NumCocks() < 10,
 				});
 				options.push({ nameStr : "Lose cock",
-					func() {
+					func: () => {
 						player.body.cock.pop();
 						Text.Add("You lose a cock, leaving you with " + player.NumCocks());
 						Text.NL();
@@ -72,7 +72,7 @@ export function InitCheats() {
 					}, enabled : player.NumCocks() >= 0,
 				});
 				options.push({ nameStr : "Cock+L",
-					func() {
+					func: () => {
 						const cocks = player.AllCocks();
 						for (const cock of cocks) {
 							let inc = 30;
@@ -87,7 +87,7 @@ export function InitCheats() {
 					}, enabled : player.FirstCock() && player.FirstCock().length.Get() < 200,
 				});
 				options.push({ nameStr : "Cock-L",
-					func() {
+					func: () => {
 						const cocks = player.AllCocks();
 						for (const cock of cocks) {
 							let inc = 30;
@@ -102,7 +102,7 @@ export function InitCheats() {
 					}, enabled : player.FirstCock() && player.FirstCock().length.Get() > 5,
 				});
 				options.push({ nameStr : "Cock+T",
-					func() {
+					func: () => {
 						const cocks = player.AllCocks();
 						for (const cock of cocks) {
 							let inc = 10;
@@ -117,7 +117,7 @@ export function InitCheats() {
 					}, enabled : player.FirstCock() && player.FirstCock().thickness.Get() < 50,
 				});
 				options.push({ nameStr : "Cock-T",
-					func() {
+					func: () => {
 						const cocks = player.AllCocks();
 						for (const cock of cocks) {
 							let inc = 10;
@@ -132,7 +132,7 @@ export function InitCheats() {
 					}, enabled : player.FirstCock() && player.FirstCock().thickness.Get() > 1,
 				});
 				options.push({ nameStr : "Add vag",
-					func() {
+					func: () => {
 						player.body.vagina.push(new Vagina());
 						Text.Add("You gain a vagina");
 						Text.NL();
@@ -140,7 +140,7 @@ export function InitCheats() {
 					}, enabled : !player.FirstVag(),
 				});
 				options.push({ nameStr : "Lose vag",
-					func() {
+					func: () => {
 						player.body.vagina.pop();
 						Text.Add("You lose your vagina");
 						Text.NL();
@@ -148,7 +148,7 @@ export function InitCheats() {
 					}, enabled : player.FirstVag() !== null,
 				});
 				options.push({ nameStr : "Add balls",
-					func() {
+					func: () => {
 						player.Balls().count.base = 2;
 						Text.Add("You gain balls");
 						Text.NL();
@@ -156,7 +156,7 @@ export function InitCheats() {
 					}, enabled : !player.HasBalls(),
 				});
 				options.push({ nameStr : "Lose balls",
-					func() {
+					func: () => {
 						player.Balls().count.base = 0;
 						Text.Add("You lose your balls");
 						Text.NL();
@@ -164,7 +164,7 @@ export function InitCheats() {
 					}, enabled : player.HasBalls(),
 				});
 				options.push({ nameStr : "Breasts+",
-					func() {
+					func: () => {
 						let inc = 30;
 						if (player.FirstBreastRow().size.Get() <= 50) { inc = 10; }
 						if (player.FirstBreastRow().size.Get() <= 20) { inc = 5; }
@@ -176,7 +176,7 @@ export function InitCheats() {
 					}, enabled : player.FirstBreastRow().size.Get() < 200,
 				});
 				options.push({ nameStr : "Breasts-",
-					func() {
+					func: () => {
 						let inc = 30;
 						if (player.FirstBreastRow().size.Get() <= 50) { inc = 10; }
 						if (player.FirstBreastRow().size.Get() <= 20) { inc = 5; }
@@ -188,7 +188,7 @@ export function InitCheats() {
 					}, enabled : player.FirstBreastRow().size.Get() > 1,
 				});
 				options.push({ nameStr : "Reset virgin",
-					func() {
+					func: () => {
 						player.ResetVirgin();
 						Text.Add("You are now a virgin in all the relevant places.");
 						Text.NL();
@@ -196,22 +196,22 @@ export function InitCheats() {
 					}, enabled : true,
 				});
 				options.push({ nameStr : "Dom+10",
-					func() {
+					func: () => {
 						player.subDom.IncreaseStat(100, 10);
 					}, enabled : true,
 				});
 				options.push({ nameStr : "Dom-10",
-					func() {
+					func: () => {
 						player.subDom.DecreaseStat(-100, 10);
 					}, enabled : true,
 				});
 				options.push({ nameStr : "Slut+10",
-					func() {
+					func: () => {
 						player.slut.IncreaseStat(100, 10);
 					}, enabled : true,
 				});
 				options.push({ nameStr : "Slut-10",
-					func() {
+					func: () => {
 						player.slut.DecreaseStat(-100, 10);
 					}, enabled : true,
 				});
@@ -247,10 +247,10 @@ export function InitCheats() {
 				Text.Flush();
 				const options: IChoice[] = [];
 				options.push({ nameStr : "Attitude",
-					func() {
+					func: () => {
 						const options: IChoice[] = [];
 						options.push({ nameStr : "Nice",
-							func() {
+							func: () => {
 								GAME().party.SwitchIn(kiakai);
 								kiakai.flags.Attitude = KiakaiFlags.Attitude.Nice;
 								ElfSmith();
@@ -258,7 +258,7 @@ export function InitCheats() {
 							tooltip : "Be nice to the elf.",
 						});
 						options.push({ nameStr : "Naughty",
-							func() {
+							func: () => {
 								GAME().party.SwitchIn(kiakai);
 								kiakai.flags.Attitude = KiakaiFlags.Attitude.Naughty;
 								ElfSmith();
@@ -266,7 +266,7 @@ export function InitCheats() {
 							tooltip : "Be naughty to the elf.",
 						});
 						options.push({ nameStr : "Dismiss",
-							func() {
+							func: () => {
 								GAME().party.RemoveMember(kiakai);
 								kiakai.flags.Attitude = KiakaiFlags.Attitude.Neutral;
 								ElfSmith();
@@ -277,35 +277,35 @@ export function InitCheats() {
 					}, enabled : true,
 				});
 				options.push({ nameStr : "Relation",
-					func() {
+					func: () => {
 						const options: IChoice[] = [];
 						options.push({ nameStr : "Rel+10",
-							func() {
+							func: () => {
 								kiakai.relation.IncreaseStat(100, 10);
 							}, enabled : true,
 						});
 						options.push({ nameStr : "Rel-10",
-							func() {
+							func: () => {
 								kiakai.relation.DecreaseStat(-100, 10);
 							}, enabled : true,
 						});
 						options.push({ nameStr : "Dom+10",
-							func() {
+							func: () => {
 								kiakai.subDom.IncreaseStat(100, 10);
 							}, enabled : true,
 						});
 						options.push({ nameStr : "Dom-10",
-							func() {
+							func: () => {
 								kiakai.subDom.DecreaseStat(-100, 10);
 							}, enabled : true,
 						});
 						options.push({ nameStr : "Slut+10",
-							func() {
+							func: () => {
 								kiakai.slut.IncreaseStat(100, 10);
 							}, enabled : true,
 						});
 						options.push({ nameStr : "Slut-10",
-							func() {
+							func: () => {
 								kiakai.slut.DecreaseStat(-100, 10);
 							}, enabled : true,
 						});
@@ -313,12 +313,12 @@ export function InitCheats() {
 					}, enabled : true,
 				});
 				options.push({ nameStr : "Body mods",
-					func() {
+					func: () => {
 						const ElfSmithBody = () => {
 							Text.Flush();
 							const options: IChoice[] = [];
 							options.push({ nameStr : "Add cock",
-								func() {
+								func: () => {
 									kiakai.body.cock.push(new Cock());
 									Text.Out(`${k.name} gains a cock, giving ${k.himher} ${kiakai.NumCocks()}.`);
 									Text.NL();
@@ -326,7 +326,7 @@ export function InitCheats() {
 								}, enabled : kiakai.NumCocks() < 10,
 							});
 							options.push({ nameStr : "Lose cock",
-								func() {
+								func: () => {
 									kiakai.body.cock.pop();
 									Text.Out(`${k.name} lose a cock, leaving ${k.himher} with ${kiakai.NumCocks()}.`);
 									Text.NL();
@@ -334,7 +334,7 @@ export function InitCheats() {
 								}, enabled : kiakai.FirstCock() !== undefined,
 							});
 							options.push({ nameStr : "Cock+L",
-								func() {
+								func: () => {
 									const cocks = kiakai.AllCocks();
 									for (const cock of cocks) {
 										let inc = 30;
@@ -349,7 +349,7 @@ export function InitCheats() {
 								}, enabled : kiakai.FirstCock() && kiakai.FirstCock().length.Get() < 200,
 							});
 							options.push({ nameStr : "Cock-L",
-								func() {
+								func: () => {
 									const cocks = kiakai.AllCocks();
 									for (const cock of cocks) {
 										let inc = 30;
@@ -364,7 +364,7 @@ export function InitCheats() {
 								}, enabled : kiakai.FirstCock() && kiakai.FirstCock().length.Get() > 5,
 							});
 							options.push({ nameStr : "Cock+T",
-								func() {
+								func: () => {
 									const cocks = kiakai.AllCocks();
 									for (const cock of cocks) {
 										let inc = 10;
@@ -379,7 +379,7 @@ export function InitCheats() {
 								}, enabled : kiakai.FirstCock() && kiakai.FirstCock().thickness.Get() < 50,
 							});
 							options.push({ nameStr : "Cock-T",
-								func() {
+								func: () => {
 									const cocks = kiakai.AllCocks();
 									for (const cock of cocks) {
 										let inc = 10;
@@ -394,7 +394,7 @@ export function InitCheats() {
 								}, enabled : kiakai.FirstCock() && kiakai.FirstCock().thickness.Get() > 1,
 							});
 							options.push({ nameStr : "Add vag",
-								func() {
+								func: () => {
 									kiakai.body.vagina.push(new Vagina());
 									Text.Out(`${k.name} gain a vagina.`);
 									Text.NL();
@@ -402,7 +402,7 @@ export function InitCheats() {
 								}, enabled : !kiakai.FirstVag(),
 							});
 							options.push({ nameStr : "Lose vag",
-								func() {
+								func: () => {
 									kiakai.body.vagina.pop();
 									Text.Out(`${k.name} lose ${k.hisher} vagina.`);
 									Text.NL();
@@ -410,7 +410,7 @@ export function InitCheats() {
 								}, enabled : kiakai.FirstVag() !== undefined,
 							});
 							options.push({ nameStr : "Add balls",
-								func() {
+								func: () => {
 									kiakai.Balls().count.base = 2;
 									Text.Out(`${k.name} gain balls.`);
 									Text.NL();
@@ -418,7 +418,7 @@ export function InitCheats() {
 								}, enabled : !kiakai.HasBalls(),
 							});
 							options.push({ nameStr : "Lose balls",
-								func() {
+								func: () => {
 									kiakai.Balls().count.base = 0;
 									Text.Out(`${k.name} lose ${k.hisher} balls.`);
 									Text.NL();
@@ -426,7 +426,7 @@ export function InitCheats() {
 								}, enabled : kiakai.HasBalls(),
 							});
 							options.push({ nameStr : "Breasts+",
-								func() {
+								func: () => {
 									let inc = 30;
 									if (kiakai.FirstBreastRow().size.Get() <= 50) { inc = 10; }
 									if (kiakai.FirstBreastRow().size.Get() <= 20) { inc = 5; }
@@ -438,7 +438,7 @@ export function InitCheats() {
 								}, enabled : kiakai.FirstBreastRow().size.Get() < 200,
 							});
 							options.push({ nameStr : "Breasts-",
-								func() {
+								func: () => {
 									let inc = 30;
 									if (kiakai.FirstBreastRow().size.Get() <= 50) { inc = 10; }
 									if (kiakai.FirstBreastRow().size.Get() <= 20) { inc = 5; }
@@ -450,7 +450,7 @@ export function InitCheats() {
 								}, enabled : kiakai.FirstBreastRow().size.Get() > 1,
 							});
 							options.push({ nameStr : "Reset virgin",
-								func() {
+								func: () => {
 									kiakai.ResetVirgin();
 									Text.Add("The elf is now a virgin in all the relevant places.");
 									Text.NL();

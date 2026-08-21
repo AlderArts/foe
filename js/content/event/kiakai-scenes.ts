@@ -139,7 +139,7 @@ export namespace KiakaiScenes {
 		const options: IChoice[] = [];
 		// TALK ABOUT ARIA'S GOALS
 		options.push({ nameStr: "Goals",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("What are Aria's goals exactly? For what reason is she putting so much effort into keeping Eden safe?", parse);
 				Text.NL();
@@ -204,7 +204,7 @@ export namespace KiakaiScenes {
 		const options: IChoice[] = [];
 		// TALK ABOUT CONFLICT WITH ARIA
 		options.push({ nameStr: "Conflict",
-			func() {
+			func: () => {
 				Text.Clear();
 
 				Text.Add("[name] frowns, trying to collect [hisher] thoughts, <i>“All I know is that Lady Aria has done battle with the one known as Uru before, and that their last conflict ended in Uru being trapped in the realm you saw but a brief glimpse of.”</i>", parse);
@@ -225,7 +225,7 @@ export namespace KiakaiScenes {
 		});
 		// TALK ABOUT WHY URU WAS TRAPPED
 		options.push({ nameStr: "Trapped",
-			func() {
+			func: () => {
 				Text.Clear();
 
 				Text.Add("<i>“Understand that a being so powerful cannot easily pass between the realms,”</i> [name] explains, <i>“A regular portal could not withstand her passing, and her inability to create a more stable one has kept the other planes of existence safe till now.”</i> The elf bows [hisher] head sorrowfully, <i>“But this safety is dearly bought, as an entire realm is now under her influence.”</i>", parse);
@@ -243,7 +243,7 @@ export namespace KiakaiScenes {
 					// [Comfort][Boast][Who cares]
 					const options: IChoice[] = [];
 					options.push({ nameStr: "Comfort",
-						func() {
+						func: () => {
 							if (kiakai.flags.Attitude < KiakaiFlags.Attitude.Neutral) {
 								Text.Add("You take pity on the poor elf and embrace [himher]. You feel [hisher] body momentarily go rigid, surprised by your actions, before [heshe] relaxes in your arms. You do your best to soothe and calm [himher] as you assure [himher] that it will not come to that. The elf's shaking slowly subsides as [heshe] presses desperately against you.", parse);
 								Text.NL();
@@ -266,7 +266,7 @@ export namespace KiakaiScenes {
 						tooltip : Text.Parse("Try to comfort [himher].", parse),
 					});
 					options.push({ nameStr: "Boast",
-						func() {
+						func: () => {
 							const uru = GAME().uru;
 							Text.Add("<i>“Hah, that demon isn't so tough,”</i> you brag confidently, ", parse);
 							if (uru.flags.Intro & UruFlags.Intro.FuckedUru ||
@@ -285,7 +285,7 @@ export namespace KiakaiScenes {
 						tooltip : "Boast about your own power.",
 					});
 					options.push({ nameStr: "Who cares",
-						func() {
+						func: () => {
 							kiakai.relation.DecreaseStat(-100, 5);
 							Text.Add("You explain to [name] that Eden isn't your world, and you have higher priorities than dealing with Uru.", parse);
 							Text.NL();
@@ -325,7 +325,7 @@ export namespace KiakaiScenes {
 		});
 		// TALK ABOUT URU CONQUESTS
 		options.push({ nameStr: "Conquests",
-			func() {
+			func: () => {
 				Text.Clear();
 
 				Text.Add("<i>“Before Uru was sealed in the dark realm, many worlds fell under her influence,”</i> [name] intones sorrowfully. <i>“Twisted, corrupted, defiled... they all succumbed, until Lady Aria intervened.”</i>", parse);
@@ -366,7 +366,7 @@ export namespace KiakaiScenes {
 		const options: IChoice[] = [];
 		// TALK ABOUT GEOGRAPHY
 		options.push({ nameStr: "Geography",
-			func() {
+			func: () => {
 				Text.Clear();
 
 				const scenes = [];
@@ -441,7 +441,7 @@ export namespace KiakaiScenes {
 		});
 		// TALK ABOUT PEOPLE
 		options.push({ nameStr: "People",
-			func() {
+			func: () => {
 				Text.Clear();
 
 				const scenes = [];
@@ -533,7 +533,7 @@ export namespace KiakaiScenes {
 		});
 		// TALK ABOUT HUBWORLD
 		options.push({ nameStr: "Hubworld",
-			func() {
+			func: () => {
 				Text.Clear();
 
 				Text.Add("<i>“There is... something about this particular realm that makes it easier for portals to open, sometimes without any apparent reason,”</i> [name] explains, <i>“The Lady once explained it to me as reality being thinner here, though I did not quite understand her at the time.”</i>", parse);
@@ -659,7 +659,7 @@ export namespace KiakaiScenes {
 		// [Culture][Parents][Childhood][Why Leave]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Culture",
-			func() {
+			func: () => {
 				Text.Clear();
 
 				const scenes = [];
@@ -715,7 +715,7 @@ export namespace KiakaiScenes {
 			tooltip : Text.Parse("Ask [name] more about elvish culture.", parse),
 		});
 		options.push({ nameStr : "Parents",
-			func() {
+			func: () => {
 				Text.Clear();
 
 				const scenes = [];
@@ -757,7 +757,7 @@ export namespace KiakaiScenes {
 			tooltip : Text.Parse("Ask [name] more about [hisher] parents.", parse),
 		});
 		options.push({ nameStr : "Childhood",
-			func() {
+			func: () => {
 				Text.Clear();
 
 				const scenes = [];
@@ -789,7 +789,7 @@ export namespace KiakaiScenes {
 							// [Comfort][Explain][You're Weird!]
 							const options: IChoice[] = [];
 							options.push({ nameStr : "Comfort",
-								func() {
+								func: () => {
 									kiakai.relation.IncreaseStat(100, 5);
 									if (kiakai.flags.Attitude > KiakaiFlags.Attitude.Neutral) {
 										Text.Add("You embrace the elf, telling [himher] that you will be with [himher] now. [name] relaxes in your grasp and hugs you back tightly, pressing [hisher] head into your chest.", parse);
@@ -806,7 +806,7 @@ export namespace KiakaiScenes {
 								tooltip : Text.Parse("Tell the elf that [heshe] is not alone anymore.", parse),
 							});
 							options.push({ nameStr : "Explain",
-								func() {
+								func: () => {
 									Text.Add("You tell the elf not to worry. You have felt lonely yourself sometimes, and you know it is tempting to look for friends wherever you can find them.", parse);
 									Text.NL();
 									Text.Add("<i>“Thanks, [playername],”</i> [name] tells you with a wry smile. <i>“It is good to know I am not the only one going crazy!”</i>", parse);
@@ -816,7 +816,7 @@ export namespace KiakaiScenes {
 								tooltip : "Explain to the elf that's what loneliness does.",
 							});
 							options.push({ nameStr : "You're Weird!",
-								func() {
+								func: () => {
 									kiakai.relation.DecreaseStat(-100, 5);
 
 									Text.Add("You tell the elf that, yes, that's really strange. Why would you make friends with the trees and the birds? They can't tell you anything, or even understand you, for that matter!", parse);
@@ -861,7 +861,7 @@ export namespace KiakaiScenes {
 		});
 		// TODO
 		options.push({ nameStr : "Why Leave",
-			func() {
+			func: () => {
 				Text.Clear();
 
 				// Low rel version
@@ -882,7 +882,7 @@ export namespace KiakaiScenes {
 							// [Demand answer][Let it go]
 							const options: IChoice[] = [];
 							options.push({ nameStr : "Demand answer",
-								func() {
+								func: () => {
 									kiakai.flags.TalkedWhyLeaveForce = 1;
 
 									kiakai.relation.DecreaseStat(-100, 5);
@@ -898,7 +898,7 @@ export namespace KiakaiScenes {
 								tooltip : "Demand that the elf tell you what happened.",
 							});
 							options.push({ nameStr : "Let it go",
-								func() {
+								func: () => {
 									Text.Clear();
 									Text.Add("You decide that whatever [name] is concealing, it's probably not important anyway. Maybe [heshe]'ll tell you later if [heshe] wants.", parse);
 									Text.NL();
@@ -977,7 +977,7 @@ export namespace KiakaiScenes {
 			// [Go on...][Later]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Go on...",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You hold the elf's hand, telling [himher] that you'd like to hear the rest of it. [HeShe] nods hesitantly, seeming to take strength from your grip.", parse);
 					Text.NL();
@@ -986,7 +986,7 @@ export namespace KiakaiScenes {
 				tooltip : "Ask the elf to continue.",
 			});
 			options.push({ nameStr : "Later",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Seeing [name] so distressed, you tell [himher] that [heshe] can finish the story later.", parse);
 					Text.NL();
@@ -1034,7 +1034,7 @@ export namespace KiakaiScenes {
 			// [Hug][Thank][Dismiss]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Hug",
-				func() {
+				func: () => {
 					Text.Clear();
 
 					kiakai.flags.TalkedWhyLeaveLongReact = 1; // HUG/THANK
@@ -1057,7 +1057,7 @@ export namespace KiakaiScenes {
 				tooltip : Text.Parse("Hug the elf, thanking [himher] for telling you the story.", parse),
 			});
 			options.push({ nameStr : "Thank",
-				func() {
+				func: () => {
 					Text.Clear();
 
 					kiakai.flags.TalkedWhyLeaveLongReact = 1; // HUG/THANK
@@ -1074,7 +1074,7 @@ export namespace KiakaiScenes {
 				tooltip : "Thank the elf for telling you what happened.",
 			});
 			options.push({ nameStr : "Dismiss",
-				func() {
+				func: () => {
 					Text.Clear();
 
 					kiakai.flags.TalkedWhyLeaveLongReact = 2; // DISMISS
@@ -1248,7 +1248,7 @@ export namespace KiakaiScenes {
 					// [But...][Okay]
 					const options: IChoice[] = [];
 					options.push({ nameStr : "But...",
-						func() {
+						func: () => {
 							Text.NL();
 							Text.Add("You mention that the two of you have engaged in certain activities.", parse);
 							Text.NL();
@@ -1261,7 +1261,7 @@ export namespace KiakaiScenes {
 						tooltip : "But... you know, you and I...",
 					});
 					options.push({ nameStr : "Okay",
-						func() {
+						func: () => {
 							Text.NL();
 							Text.Add("You decide it's best not to mention to the elf that what the two of you have done constitutes as sex.", parse);
 							Text.NL();
@@ -1271,7 +1271,7 @@ export namespace KiakaiScenes {
 					});
 					if (kiakai.flags.TalkedSex === 1) {
 						options.push({ nameStr : "Confront",
-							func() {
+							func: () => {
 								Text.Clear();
 								Text.Add("What is so wrong with sex? It's just natural reproductive urges after all...", parse);
 								Text.NL();

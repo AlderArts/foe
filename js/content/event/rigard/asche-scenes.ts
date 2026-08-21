@@ -82,7 +82,7 @@ export namespace AscheScenes {
         });
         options.push({ nameStr : "Talk",
             tooltip : "Chat up Asche.",
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Add("Asche looks around the her shop for a bit, craning her neck this way and that. Once the jackaless is content that business isn’t too brisk to prevent a bit of chit-chat, she lounges on the counter with all the nonchalance of a lazy cat and smiles at you.", parse);
                 Text.NL();
@@ -94,7 +94,7 @@ export namespace AscheScenes {
         });
         options.push({ nameStr : "Buy",
             tooltip : "Ask to see her wares.",
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Add("The jackaless nods and beams at you. <i>“Asche is happy to be able to service customer! Please to be browsing, perusing, going through. If customer is finding anything to [hisher] liking, then is but small matter of money to be bringing it away with [himher].”</i>", parse);
 
@@ -120,7 +120,7 @@ export namespace AscheScenes {
         });
         options.push({ nameStr : "Sell",
             tooltip : "Get rid of some of your surplus.",
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Add("<i>“Customer is wanting to sell something to Asche?”</i> The jackaless rubs her hands together, a movement accompanied by the clinking of bangles. <i>“Let Asche see item, and she will tell you how much she thinks she will buy it for.”</i>", parse);
 
@@ -134,7 +134,7 @@ export namespace AscheScenes {
         });
         options.push({ nameStr : "The Magic Box",
             tooltip : "Do you feel lucky? Well, do you?",
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Add("<i>“Ah, customer is interested in magic box?”</i> There’s a soft clink of metal as Asche shifts slightly in her seat. <i>“What is it that good customer desires? Fee is [coin] coins.”</i>", {coin: Text.NumToText(asche.MagicBoxCost()) });
                 Text.Flush();
@@ -144,7 +144,7 @@ export namespace AscheScenes {
         });
         options.push({ nameStr : "Fortune Telling",
             tooltip : "Ask Asche to see what the future has in store for you.",
-            func() {
+            func: () => {
                 Text.Clear();
                 parse.coin = Text.NumToText(AscheScenes.FortuneCost());
                 Text.Add("<i>Ah, you are wanting Asche to be divining what future holds for you?”</i> the jackaless says with a smirk and wink. <i>“Can be done, for the price of [coin] coins.”</i>", parse);
@@ -155,7 +155,7 @@ export namespace AscheScenes {
         });
         options.push({ nameStr : "Sex",
             tooltip : "Propose a romp in the hay with the exotic shopkeeper.",
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Add("<i>“Mm…”</i> Asche licks her muzzle, then leans up close to you. Nonchalantly, she cups her breasts, one in each hand, then pushes her lady lumps forward such that the hand-filling mounds seem even bigger and fuller than they already are - you can practically see them through the fabric of her sari. Making sure you’re looking, the jackaless begins kneading gently, a small whine escaping her muzzle before she stops and grins at you. <i>“Asche thinks… not. Asche is a good girl, a nice girl, and does not give freebies to get others hooked, unlike her big sister.”</i>", parse);
                 Text.NL();
@@ -222,7 +222,7 @@ export namespace AscheScenes {
         const options: IChoice[] = [];
         options.push({ nameStr : "Shop",
             tooltip : "That’s a nice shop she has there.",
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Add("The shop’s a pretty nice place, you mention, looking around. It definitely has that feel that one gets when entering one of those tiny antique shops, or perhaps an old bookstore - the kind in which forgotten treasures are found, treasures which have entire stories revolving about them.", parse);
                 Text.NL();
@@ -254,7 +254,7 @@ export namespace AscheScenes {
         });
         options.push({ nameStr : "Herself",
             tooltip : "Ask the jackaless about herself.",
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Add("Perhaps she could tell you something about herself.", parse);
                 Text.NL();
@@ -285,7 +285,7 @@ export namespace AscheScenes {
         // Requires having asked about herself and shop
         options.push({ nameStr : "Sister",
             tooltip : "So, this sister she mentioned…",
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Add("The jackaless’ ears flick at your question. <i>“Why yes, Asche has one big sister. Much lovelier than Asche, too - and much more nasty. Big sister also runs shop much like Asche’s, only with much fewer scruples; while Asche is careful not to sell things that harm customers unless misused, big sister does not think twice about doing so. That is why while Asche can remain in one place, big sister was always having to move shop before shop was moved for her, if you are understanding Asche’s meaning.”</i>", parse);
                 Text.NL();
@@ -309,7 +309,7 @@ export namespace AscheScenes {
         });
         options.push({ nameStr : "Stock",
             tooltip : "Where does she get all the stuff she sells?",
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Add("You’ll admit to being a bit curious - just where does Asche get her stock? Some of the things she sells are positively odd; you don’t think the likes of them can be found in any other shop in Rigard - in fact, you’re pretty sure some of her goods would be more at home in the Academy of Higher Arts rather than sitting on her shelves.", parse);
                 Text.NL();
@@ -328,7 +328,7 @@ export namespace AscheScenes {
         // TODO Default response:
         options.push({ nameStr : "Tasks",
             tooltip : "Does she perchance need the services of an adventurer?",
-            func() {
+            func: () => {
                 if (AscheTasksScenes.Ginseng.IsEligable()) {
                     AscheTasksScenes.Ginseng.Initiation();
                 } else if (AscheTasksScenes.Ginseng.IsOn()) {
@@ -545,7 +545,7 @@ export namespace AscheScenes {
         const options: IChoice[] = [];
         options.push({ nameStr : "Fortune",
             tooltip : "Ask for a quick, light and easy reading.",
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Add("<i>“Mm.”</i> The jackaless pulls at her shawl as you pass her the money, then dips her head. <i>“All right. Good customer is to be holding out hand, please.”</i>", parse);
                 Text.NL();
@@ -626,7 +626,7 @@ export namespace AscheScenes {
         });
         options.push({ nameStr : "Fate",
             tooltip : "So, you’re serious about asking Asche to read what the future has in store for you…",
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Add("All trace of nonchalance drops from the jackaless’ face. Her eyes harden, her lips thin, and you notice that she’s begun fiddling with the hem of her shawl. <i>“So, you are being serious about this, then.”</i>", parse);
                 Text.NL();
@@ -748,7 +748,7 @@ export namespace AscheScenes {
         });
         options.push({ nameStr : "Explain",
             tooltip : "How does this fortune-telling of her work, anyway?",
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Add("Eyeing Asche, you tell the jackaless you’d probably be interested in having your fortune told, but perhaps if you knew a little more about what you were getting yourself into, you could be more enthusiastic about the prospect…", parse);
                 Text.NL();
@@ -768,7 +768,7 @@ export namespace AscheScenes {
         });
         options.push({ nameStr : "Never Mind",
             tooltip : "Maybe another time.",
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Add("<i>“As customer is wishing.”</i> Is that a hint of sourness you hear in her voice? <i>“Is there any other business that [heshe] has with Asche?”</i>", parse);
                 Text.Flush();
@@ -795,14 +795,14 @@ export namespace AscheScenes {
         if (asche.flags.Talk & AscheFlags.Talk.Box) {
             options.push({ nameStr : "Grab",
                 tooltip : "Stick your hand into limbo and see what you can draw out.",
-                func() {
+                func: () => {
                     AscheScenes.MagicBoxGrab();
                 }, enabled : GAME().party.coin >= asche.MagicBoxCost(),
             });
         }
         options.push({ nameStr : "Explanation",
             tooltip : "Just what is this box?",
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Add("<i>“Idea is very simple,”</i> Asche begins, lazily drawing small circles on the counter with a finger. <i>“Box is old family heirloom, artifact with power to draw out lost things. Money behind couch cushions, things fallen beneath floorboards, blasted into limbo, that sort of thing, yes? For small price of [coin] coins, customer can stick hand into box and see what [heshe] can draw out. Is like… hmm… is like a game, yes? Or maybe like lottery. No guarantee that customer will find something useful, but there is also chance that customer will find a great steal. Only sure thing is that thing you draw out is not likely to harm you, and I am here to watch, so customer is perfectly safe.”</i>", parse);
                 Text.NL();
@@ -931,7 +931,7 @@ export namespace AscheScenes {
             const options: IChoice[] = [];
             options.push({ nameStr : "Yes",
                 tooltip : "What could go wrong?",
-                func() {
+                func: () => {
                     Text.Clear();
                     Text.Add("Well, nothing for it! Down the hatch! You pull out the cork with a satisfying pop and pour the viscous liquid down your throat, feeling it settle in your stomach. Job done, you smack your lips and savor the aftertaste, vaguely reminiscent of cherries and cream as you wait for the elixir to do its job.", parse);
                     Text.NL();
@@ -969,7 +969,7 @@ export namespace AscheScenes {
             });
             options.push({ nameStr : "No",
                 tooltip : "Best not risk it.",
-                func() {
+                func: () => {
                     Text.Clear();
                     Text.Add("Shaking your head, you pass the expired elixir to Asche, who slides it beneath the counter. <i>“Is good thing you decided not to drink. Potions which sit too long can cause problems, ingredients get old, properties are changing…”</i> The jackaless shrugs and smiles. <i>“Asche will dispose of it properly, rather than just pour it out on ground. Most irresponsible way of dealing with old potions, is it not? Sad to say, though, Asche cannot refund your money for use of box.”</i>", parse);
                     AscheScenes.MagicBoxRepeat();
@@ -993,7 +993,7 @@ export namespace AscheScenes {
             const options: IChoice[] = [];
             options.push({ nameStr : "Keep",
                 tooltip : "It might be pulp fiction, but it’s still a read, right?",
-                func() {
+                func: () => {
                     Text.Clear();
                     Text.Add("Books are books, wherever you find them. Asche coughs loudly when you elect to keep the salacious novel on you, but keeps any comments to herself as you pack it away. Maybe it’ll come in useful later on… or at the very least, keep you company on those cold, lonely nights.", parse);
                     party.Inv().AddItem(AccItems.TrashyNovel);
@@ -1003,7 +1003,7 @@ export namespace AscheScenes {
             });
             options.push({ nameStr : "Toss",
                 tooltip : "You don’t really need such a thing…",
-                func() {
+                func: () => {
                     Text.Clear();
                     Text.Add("Shaking your head, you toss the novel back into the box. You certainly don’t need a piece of dead weight on you. The book plunges into the swirling depths of the box and vanishes without a trace. There’s already plenty of written pornography floating about - more of the same old trashy stuff isn’t going to do the world any favors, right?", parse);
 
@@ -1114,13 +1114,13 @@ export namespace AscheScenes {
         const options: IChoice[] = [];
         options.push({ nameStr : "Yes",
             tooltip : "Why not? Another go it is!",
-            func() {
+            func: () => {
                 AscheScenes.MagicBoxGrab();
             }, enabled : party.coin >= asche.MagicBoxCost(),
         });
         options.push({ nameStr : "No",
             tooltip : "Nah, not now.",
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Add("Deciding that you’ve played enough, you gesture for Asche to put away the box. Lady Luck gets tired having to carry one particular person for too long, and you feel you’ve exhausted your share of good fortune for now. Maybe later.", parse);
                 Text.Flush();

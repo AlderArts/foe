@@ -69,7 +69,7 @@ export namespace BurrowsScenes {
         // [Leave][Approach]
         const options: IChoice[] = [];
         options.push({ nameStr : "Leave",
-            func() {
+            func: () => {
                 Text.NL();
                 Text.Add("You still have some second thoughts about approaching the unpredictable mob. You decide to head back toward the crossroads.", parse);
                 Text.Flush();
@@ -81,7 +81,7 @@ export namespace BurrowsScenes {
             tooltip : "Go back where you came from.",
         });
         options.push({ nameStr : "Approach",
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Add("Well, time to get to the bottom of this. Hopefully this won’t turn out to be a really bad idea...", parse);
                 Text.NL();
@@ -248,7 +248,7 @@ export namespace BurrowsScenes {
         const options: IChoice[] = [];
         if (!OpheliaTalkBurrows) {
             options.push({ nameStr : "Burrows",
-                func() {
+                func: () => {
                     Text.Clear();
                     Text.Add("You ask her about this place, and about her species.", parse);
                     Text.NL();
@@ -268,7 +268,7 @@ export namespace BurrowsScenes {
         }
         if (!OpheliaTalkOphelia) {
             options.push({ nameStr : "Ophelia",
-                func() {
+                func: () => {
                     Text.Clear();
                     Text.Add("You ask Ophelia how it is that she is so different from every other lagomorph you’ve met so far.", parse);
                     Text.NL();
@@ -288,7 +288,7 @@ export namespace BurrowsScenes {
         }
         if (!OpheliaTalkVena) {
             options.push({ nameStr : "Vena",
-                func() {
+                func: () => {
                     Text.Clear();
                     Text.Add("You ask her about her... mother, Vena, whom you saw in the Pit.", parse);
                     Text.NL();
@@ -312,7 +312,7 @@ export namespace BurrowsScenes {
         }
         if (!OpheliaTalkLab) {
             options.push({ nameStr : "Lab",
-                func() {
+                func: () => {
                     Text.Clear();
                     Text.Add("<i>“This is my workplace. Neat, isn’t it?”</i> Ophelia looks proudly at the rather dank laboratory, filled with odd jars and vials. Her workbench is a jumble of scribbled notes and bubbling concoctions.", parse);
                     if (rosalin.flags.Met === 1) {
@@ -355,7 +355,7 @@ export namespace BurrowsScenes {
                 // [Go along][Resist]
                 const options: IChoice[] = [];
                 options.push({ nameStr : "Go along",
-                    func() {
+                    func: () => {
                         Text.Clear();
                         Text.Add("You nod uncertainly, not seeing much choice in the matter. As you[comp] head outside together with Ophelia, the regiment of guards close ranks around you, leading you off to who knows where. These are a different breed of rabbits than the simple mob milling around on the surface; disciplined, alert, and carrying a variety of weapons. A quick look tells you their equipment is in poor shape, as if its owners don’t know how to care for it. It shows signs of relatively recent combat, giving you the sinking feeling that most of it is probably looted from unlucky adventurers such as yourself.", parse);
                         Text.NL();
@@ -370,7 +370,7 @@ export namespace BurrowsScenes {
                     tooltip : "You are not in a good position to mount a resistance, surrounded as you are. You aren’t even sure that you could find your way out on your own.",
                 });
                 options.push({ nameStr : "Resist",
-                    func() {
+                    func: () => {
                         Text.Clear();
                         Text.Add("You make your decision quickly. Bouldering past the hapless messenger, you overpower two of the guards with the element of surprise on your side. You find your intended escape route blocked, however, as there appear to be enough rabbits on hand to make any progress down the tunnel impossible. It looks like you have to find another way. There should be several exits to the laboratory...", parse);
                         Text.NL();
@@ -458,7 +458,7 @@ export namespace BurrowsScenes {
         const options: IChoice[] = [];
         if (!ArrivalLagonTalkAssault) {
             options.push({ nameStr : "Assault",
-                func() {
+                func: () => {
                     Text.Clear();
                     Text.Add("<i>“I thought you a more pragmatic person,”</i> the large lagomorph growls. <i>“If you think I’ve been rough with you so far, perhaps you’d like to take this slut’s place for the rest of our discussion?”</i> He shifts his hips slightly forward pointedly. With her head firmly held in place by the larger rabbit, Ophelia has no choice but to deepthroat her father. She doesn’t seem to be particularly enjoying it.", parse);
                     Text.NL();
@@ -475,7 +475,7 @@ export namespace BurrowsScenes {
             });
         }
         options.push({ nameStr : "Job",
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Add("Guardedly, you ask what the job would entail. So far, you have nothing to lose, and this may be the only way for you to get out of here alive.", parse);
                 Text.NL();

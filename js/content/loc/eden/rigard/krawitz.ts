@@ -226,7 +226,7 @@ export namespace KrawitzScenes {
 				// [Grounds]
 				const options: IChoice[] = [];
 				options.push({ nameStr : "Grounds",
-					func() {
+					func: () => {
 						MoveToLocation(KrawitzLoc.Grounds);
 					}, enabled : true,
 					tooltip : "Move back to the grounds",
@@ -251,7 +251,7 @@ export namespace KrawitzScenes {
 
 					if (stat.ServantFood === 2) {
 						options.push({ nameStr : "Food",
-							func() {
+							func: () => {
 								Text.Clear();
 								parse.brotherSister = player.mfFem("brother", "sister");
 								Text.Add("<i>“Many thanks, [brotherSister]!”</i> one of the resting servants calls out. He and his friends gather around, digging into the food. You feel as if a bit of the suspicion surrounding you has dissipated, and that the servants act slightly more trusting toward you.", parse);
@@ -266,7 +266,7 @@ export namespace KrawitzScenes {
 					}
 					if (stat.HasWine && !stat.ServantWine) {
 						options.push({ nameStr : "Wine",
-							func() {
+							func: () => {
 								Text.Clear();
 								Text.Add("<i>“Hey, what do you have there?”</i> A half-dressed servant asks you, pointing to the bottle of wine sticking out of your pack. You pull it out and show it to him, and he almost reverently cradles the bottle.", parse);
 								Text.NL();
@@ -287,7 +287,7 @@ export namespace KrawitzScenes {
 					}
 					if (stat.LustPotion && stat.HasWine && !stat.ServantSpikedWine) {
 						options.push({ nameStr : "Spiked Wine",
-							func() {
+							func: () => {
 								Text.Clear();
 
 								stat.ServantWine = true;
@@ -315,7 +315,7 @@ export namespace KrawitzScenes {
 								// [Leave][Bathhouse]
 								const options: IChoice[] = [];
 								options.push({ nameStr : "Leave",
-									func() {
+									func: () => {
 										Text.Clear();
 										Text.Add("Satisfied that you won’t have to run into any more of the servants, you quickly leave the quarters before you are tempted to join. You have more important business to tend to here tonight.", parse);
 										Text.Flush();
@@ -327,7 +327,7 @@ export namespace KrawitzScenes {
 									tooltip : "Leave them to it; they likely won’t bother you for the rest of the night.",
 								});
 								options.push({ nameStr : "Bathhouse",
-									func() {
+									func: () => {
 										Text.Clear();
 										Text.Add("You slyly suggest that they ought to thank the kind ladies who provided such a fine gift for them. Some of them are too far gone in their lust to hear you, but you manage to gather a substantial group to listen to your plan. They nod eagerly as you tell them of the ladies partying in the bathhouse, their clouded minds trying to process your words.", parse);
 										Text.NL();
@@ -364,7 +364,7 @@ export namespace KrawitzScenes {
 
 					const options: IChoice[] = [];
 					options.push({ nameStr : "Yes",
-						func() {
+						func: () => {
 							Text.Clear();
 							Text.Add("You’ve managed to avoid discovery so far, but you can feel your luck growing thin. Perhaps it’s time to call it quits. You methodically shed your servants’ garb, returning it to the storeroom before you step out the back door into the street, just another wanderer in the night.", parse);
 							Text.NL();
@@ -429,7 +429,7 @@ export namespace KrawitzScenes {
 
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Yes",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You’ve managed to avoid detection so far, but you can feel your luck growing thin. Perhaps it is time to call it quits. Eyeing your surroundings carefully, you confirm that no guards are around at the moment. Silently, you slip over the fence, back into the streets. You shed your servants’ garb, hiding it in an alley.");
 					Text.NL();
@@ -625,7 +625,7 @@ export namespace KrawitzScenes {
 					};
 
 					options.push({ nameStr : "Food",
-						func() {
+						func: () => {
 							foodFunc();
 							Text.Add(" <i>“I have no further need for you tonight, leave me,”</i> he mumbles between mouthfuls. Krawitz ushers you out of the study, locking the door behind you to prevent further interruption.", parse);
 							Text.NL();
@@ -641,7 +641,7 @@ export namespace KrawitzScenes {
 					});
 					if (stat.TFItem) {
 						options.push({ nameStr : "Spiked Food",
-							func() {
+							func: () => {
 								foodFunc();
 								Text.Add(" You stand back, observing curiously as Krawitz digs into his slightly modified meal, wondering what the effects will be. He looks like he is enjoying the taste at the very least.", parse);
 								Text.NL();
@@ -676,7 +676,7 @@ export namespace KrawitzScenes {
 		// [Challenge][Leave]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Challenge",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You tell him that he presumes too much, not bothering to sugarcoat your words. Krawitz looks at you incredulously, hardly believing his ears.", parse);
 				Text.NL();
@@ -688,7 +688,7 @@ export namespace KrawitzScenes {
 			tooltip : "Confront the old bugger, shedding your disguise.",
 		});
 		options.push({ nameStr : "Leave",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You pardon yourself, leaving the room.", parse);
 				Text.Flush();
@@ -722,7 +722,7 @@ export namespace KrawitzScenes {
 		// [Fight][Binder][Flee]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Fight",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Surely, the old man can’t be that tough. Confidently, you prepare yourself for battle.", parse);
 				Text.NL();
@@ -756,7 +756,7 @@ export namespace KrawitzScenes {
 			tooltip : "Try to overpower him.",
 		});
 		options.push({ nameStr : "Binder",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You glance at the documents that Krawitz was poring over. He seemed worried that someone might see them… Before he can react, you lunge for them.", parse);
 				Text.NL();
@@ -774,7 +774,7 @@ export namespace KrawitzScenes {
 			tooltip : "Grab hold of the documents and run for it!",
 		});
 		options.push({ nameStr : "Flee",
-			func() {
+			func: () => {
 				Text.Clear();
 				KrawitzScenes.Flee();
 			}, enabled : true,
@@ -949,7 +949,7 @@ export namespace KrawitzScenes {
 			// [Work][Leave]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Work",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Joining the group, you explain that you overheard them, and are currently looking for work. The old man, who seems to be some sort of administrator, eyes you critically.", parse);
 					Text.NL();
@@ -986,7 +986,7 @@ export namespace KrawitzScenes {
 				tooltip : "Take the chance that is presented to you - getting access to the estate should be way easier if you have a legitimate reason for it. Talking to the servants may also give you some ideas on how to humiliate Krawitz.",
 			});
 			options.push({ nameStr : "Leave",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Shrugging, you move on before you are noticed. At least you got some interesting information out of it.", parse);
 					Text.Flush();
@@ -1043,7 +1043,7 @@ export namespace KrawitzScenes {
 			// [Yes][No][Wait]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Yes",
-				func() {
+				func: () => {
 					NAV().LimitedDataPrompt(KrawitzScenes.EnteringTheWork);
 				}, enabled : true, tooltip : "",
 			});
@@ -1051,7 +1051,7 @@ export namespace KrawitzScenes {
 				func : KrawitzScenes.EnteringTheWork, enabled : true, tooltip : "",
 			});
 			options.push({ nameStr : "Wait",
-				func() {
+				func: () => {
 					Text.NL();
 					Text.Add("Deciding that you still need to prepare, you hold off on entering the estate.", parse);
 					Text.Flush();
@@ -1128,7 +1128,7 @@ export namespace KrawitzScenes {
 			// [Yes][No][Wait]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Yes",
-				func() {
+				func: () => {
 					NAV().LimitedDataPrompt(KrawitzScenes.SneakingIn);
 				}, enabled : true, tooltip : "",
 			});
@@ -1136,7 +1136,7 @@ export namespace KrawitzScenes {
 				func : KrawitzScenes.SneakingIn, enabled : true, tooltip : "",
 			});
 			options.push({ nameStr : "Wait",
-				func() {
+				func: () => {
 					Text.NL();
 					Text.Add("Deciding that you still need to prepare, you hold off on entering the estate.", parse);
 					Text.Flush();
@@ -1292,7 +1292,7 @@ export namespace KrawitzScenes {
 		// [Run][Hide][Charm][Attack!][Wine]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Run",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You leg it, somehow managing to hide from [entity][s].", parse);
 				Text.Flush();
@@ -1302,7 +1302,7 @@ export namespace KrawitzScenes {
 			tooltip : Text.Parse("Avoid [entity][s], potentially raising the alarm.", parse),
 		});
 		options.push({ nameStr : "Hide",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Quickly, you fade into the shadows, avoiding detection.", parse);
 				Text.NL();
@@ -1319,7 +1319,7 @@ export namespace KrawitzScenes {
 			tooltip : Text.Parse("Use your cunning to hide from [entity][s].", parse),
 		});
 		options.push({ nameStr : "Charm",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("With your charm and wit, you try to convince [entity][s] that you are one of the staff.", parse);
 				Text.NL();
@@ -1336,7 +1336,7 @@ export namespace KrawitzScenes {
 			tooltip : Text.Parse("Use your guile to convince [entity][s] you belong there.", parse),
 		});
 		options.push({ nameStr : "Attack!",
-			func() {
+			func: () => {
 				Text.Clear();
 				let s = 1;
 				if (Math.random() > 0.5) {
@@ -1357,7 +1357,7 @@ export namespace KrawitzScenes {
 		});
 		if (stat.HasWine) {
 			options.push({ nameStr : stat.LustPotion && stat.HasWine ? "Spiked Wine" : "Wine",
-				func() {
+				func: () => {
 					let s = KrawitzScenes.EntitySuspicion(entity);
 					Text.Clear();
 					Text.Add("Brushing aside any questions, you offer a cup of spiked wine to [entity][s]. [HeShe] seem a little surprised, but accept gladly. With the the friendlier mood, you manage to slip away while [heshe] enjoy[notS] [hisher] drink[s].", parse);
@@ -1649,7 +1649,7 @@ export namespace KrawitzScenes {
 		// [Scavenge][Leave]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Scavenge",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You slip inside the building, quickly entering the storeroom.", parse);
 				Text.NL();
@@ -1674,7 +1674,7 @@ export namespace KrawitzScenes {
 			tooltip : "Perhaps you could find some servants’ garb in the storeroom, to better blend in?",
 		});
 		options.push({ nameStr : "Leave",
-			func() {
+			func: () => {
 				Text.NL();
 				Text.Add("You carefully withdraw from the servants’ quarters, judging it too difficult to sneak in unnoticed.", parse);
 				Text.Flush();
@@ -1774,7 +1774,7 @@ export namespace KrawitzScenes {
 			// [Leave][Wine]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Leave",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You quickly retreat, catching Lady Krawitz’ command: <i>“Fetch that wine, pronto!”</i>", parse);
 					Text.Flush();
@@ -1787,7 +1787,7 @@ export namespace KrawitzScenes {
 			});
 			if (stat.HasWine) {
 				options.push({ nameStr : "Wine",
-					func() {
+					func: () => {
 						Text.Clear();
 						KrawitzScenes.BathhouseWine();
 						Text.NL();
@@ -1807,7 +1807,7 @@ export namespace KrawitzScenes {
 			}
 			if (stat.HasWine && stat.LustPotion) {
 				options.push({ nameStr : "Spiked Wine",
-					func() {
+					func: () => {
 						Text.Clear();
 						KrawitzScenes.BathhouseWine();
 						stat.BathhouseSpiked = true;
@@ -1836,7 +1836,7 @@ export namespace KrawitzScenes {
 						// [Sex][Leave]
 						const options: IChoice[] = [];
 						options.push({ nameStr : "Leave",
-							func() {
+							func: () => {
 								Text.Clear();
 								Text.Add("You respectfully decline her offer. For a brief moment, Marlene looks disappointed, but she’s soon forgotten you were even there, focusing all of her attention on her companion, lavishing her body with kisses as a lusty haze clouds her mind.", parse);
 								Text.NL();
@@ -1855,7 +1855,7 @@ export namespace KrawitzScenes {
 							tooltip : "Decline her offer - you have to keep your cool if you are going to stay out of trouble tonight.",
 						});
 						options.push({ nameStr : "Sex",
-							func() {
+							func: () => {
 								Text.Clear();
 								stat.SexedGirls = true;
 								Text.Add("Marlene’s clouded gaze is firmly fixed on you as you saunter over to the two inebriated women, hastily removing your gear. She pulls you down into a lusty kiss, and as your lips lock, you taste a blend of her, Gina, and the alluring taste of the potent wine. This last hits you like a wall of hot air, making your heart skip a beat as it takes effect.", parse);
@@ -2109,7 +2109,7 @@ export namespace KrawitzScenes {
 			// [OfferHelp][IgnoreIt]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Offer help",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“Oh? Thank you for the offer, [sir], but I don’t wish to trouble you with my own affairs,”</i> she smiles.", parse);
 					Text.Flush();
@@ -2119,7 +2119,7 @@ export namespace KrawitzScenes {
 					// [Insist][HoldDoor][Leave]
 					const options: IChoice[] = [];
 					options.push({ nameStr : "Insist",
-						func() {
+						func: () => {
 							Text.Clear();
 							parse.fem = player.mfFem("handsome", "beautiful");
 							parse.gender = player.mfFem("man", "lady");
@@ -2136,7 +2136,7 @@ export namespace KrawitzScenes {
 							// [Ask] [Don'tAsk]
 							const options: IChoice[] = [];
 							options.push({ nameStr : "Ask",
-								func() {
+								func: () => {
 									Text.Clear();
 									Text.Add("<i>“Old tools and crafts from my recently deceased father,”</i> she explains, ears drooping in sadness. <i>“I’m just clearing out his things before I move back to my hometown,”</i> she adds.", parse);
 									Text.Flush();
@@ -2144,7 +2144,7 @@ export namespace KrawitzScenes {
 									// [Sympathize] [Continue]
 									const options: IChoice[] = [];
 									options.push({ nameStr : "Sympathize",
-										func() {
+										func: () => {
 											Text.Clear();
 											Text.Add("<i>“Thank you, I appreciate it [sir],”</i> she smiles a bit under her grimace.", parse);
 											Text.NL();
@@ -2153,7 +2153,7 @@ export namespace KrawitzScenes {
 										tooltip : "Express your sympathies for her loss.",
 									});
 									options.push({ nameStr : "Continue",
-										func() {
+										func: () => {
 											Text.Clear();
 											Gui.PrintDefaultOptions();
 										}, enabled : true,
@@ -2178,7 +2178,7 @@ export namespace KrawitzScenes {
 								tooltip : "Your curiosity is piqued; you just have to know what she's carrying to make it so heavy.",
 							});
 							options.push({ nameStr : "Don’t ask",
-								func() {
+								func: () => {
 									Text.Clear();
 									Text.Add("With the package taking up both hands, you ask her to mind the door, and step inside the inn as she holds it open for you.", parse);
 									Text.NL();
@@ -2197,7 +2197,7 @@ export namespace KrawitzScenes {
 						tooltip : "You can't just let her brush you off that easily; she really does look like she needs help.",
 					});
 					options.push({ nameStr : "Hold door",
-						func() {
+						func: () => {
 							Text.Clear();
 							Text.Add("“Thank you very much, [sir],” she replies pleasantly, tail wagging as she drags the bag through the door.", parse);
 							Text.NL();
@@ -2211,7 +2211,7 @@ export namespace KrawitzScenes {
 						tooltip : "Even if she doesn't want you to carry it for her, you could at least make it easier for her to get through with it.",
 					});
 					options.push({ nameStr : "Leave",
-						func() {
+						func: () => {
 							Text.Clear();
 							Text.Add("Accepting her wishes, you push on through the door and head inside the inn yourself.", parse);
 							Text.NL();
@@ -2229,7 +2229,7 @@ export namespace KrawitzScenes {
 				tooltip : "The poor thing's clearly struggling with that load of hers; why not ask if you can help her?",
 			});
 			options.push({ nameStr : "Ignore her",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Not keen on being questioned about your nightly activities, you quickly excuse yourself and step into the inn. The first signs of morning have appeared before you step inside the Lady’s Blessing, which seems to be dormant at this time of day. Someone who never seems to be asleep, however, is Lei.", parse);
 					Text.NL();
@@ -2353,7 +2353,7 @@ export namespace KrawitzScenes {
 								Text.NL();
 								Text.Add("She is eyeing the bulge at your crotch with a slightly hungry look in her eyes.", parse);
 								options.push({ nameStr : "Blowjob",
-									func() {
+									func: () => {
 										Text.Clear();
 										Text.Add("<i>“While that would be really amusing, I think we should get the introductions out of the way first,”</i> the man interjects, grinning as he ruffles his blushing companion’s hair.", parse);
 										Text.Flush();
@@ -2364,7 +2364,7 @@ export namespace KrawitzScenes {
 							}
 							if (player.FirstVag()) {
 								options.push({ nameStr : "Cunnilingus",
-									func() {
+									func: () => {
 										Text.Clear();
 										Text.Add("<i>“You don’t bandy words, do you,”</i> the man laughs merrily, his voice light and melodical. <i>“How about we get the introductions out of the way first?”</i>", parse);
 										Text.Flush();
@@ -2374,7 +2374,7 @@ export namespace KrawitzScenes {
 								});
 							}
 							options.push({ nameStr : "Not now",
-								func() {
+								func: () => {
 									Text.Clear();
 									Text.Add("<i>“Well, the offer is standing.”</i> Both of them look slightly disappointed when you turn them down.", parse);
 									Text.Flush();
@@ -2433,7 +2433,7 @@ export namespace KrawitzScenes {
 		const options: IChoice[] = [];
 		if (!twinsTalkRoyals) {
 			options.push({ nameStr : "Royals",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“You say our city, but it really isn’t, not yet anyways.”</i> Rumi pouts a bit. <i>“Father can be very overprotective at times. We just want to see our kingdom with our own eyes, experience new things, that sort of thing.”</i> She seems a bit vague on what those things might be, exactly.", parse);
 					Text.NL();
@@ -2453,7 +2453,7 @@ export namespace KrawitzScenes {
 		}
 		if (!twinsTalkKrawitz) {
 			options.push({ nameStr : "Krawitz",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“Oh, don’t get us wrong, we don’t <b>hate</b> him, per se,”</i> the princess assures you. <i>“He is our fencing instructor at court, though we can both best him at this point. He is a xenophobic old fart who is way too full of himself. We wanted to teach him a lesson, sort of.”</i>", parse);
 					Text.NL();
@@ -2467,7 +2467,7 @@ export namespace KrawitzScenes {
 		}
 		if (!twinsTalkDisguise) {
 			options.push({ nameStr : "Disguise",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“It should seem rather obvious we’d want to keep our presence here in the city low-key,”</i> the princess looks a bit confused until she understands what it is that you are asking. <i>“Ah, you mean why do I dress and act as a man while Rani poses as a woman?”</i>", parse);
 					Text.NL();
@@ -2483,7 +2483,7 @@ export namespace KrawitzScenes {
 		}
 		if (!twinsTalkLei) {
 			options.push({ nameStr : "Lei",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“Lei is the best at his job, though unfortunately a bit too dedicated to it for our tastes.”</i> Rumi replies to your question. <i>“Mother figured out that we were sneaking into the city, and hired a bodyguard for us rather than telling father.”</i> She smiles wickedly. <i>“Mother’s plan might have backfired a bit though. Though Lei is known for completing his missions to the letter, a bit of persuasion and some cash convinced him to take on some additional duties when he isn’t busy protecting us.”</i>", parse);
 					Text.NL();
@@ -2568,7 +2568,7 @@ export namespace KrawitzScenes {
 		// [Challenge][Leave]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Challenge",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You approach Krawitz, placing yourself between him and his servant. He pauses in his tantrum and glares at you. With a sardonic smile, you remark to the lord that he must be paying quite a bonus to his servants so they would let him yell at them. Otherwise, they’d probably just beat him up for being so obnoxious.", parse);
 				Text.NL();
@@ -2662,7 +2662,7 @@ export namespace KrawitzScenes {
 			tooltip : "Challenge Krawitz to a fencing duel.",
 		});
 		options.push({ nameStr : "Leave",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You decide challenging the man at the one thing he’s best at is not the smartest of plans, and walk away, leaving the servant to his mercy.", parse);
 				Text.Flush();

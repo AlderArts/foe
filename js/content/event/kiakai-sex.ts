@@ -113,7 +113,7 @@ export namespace KiakaiSexScenes {
 			// [Heal][Seduce][Insist]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Heal",
-				func() {
+				func: () => {
 					player.AddHPFraction(1.0);
 					const scenes = new EncounterTable();
 					scenes.AddEnc(() => {
@@ -137,7 +137,7 @@ export namespace KiakaiSexScenes {
 				tooltip : "A small spark of healing energy should be enough to perk you up.",
 			});
 			options.push({ nameStr : "Seduce",
-				func() {
+				func: () => {
 					player.AddHPFraction(1.0);
 					Text.Add("You give [name] a light caress on [hisher] cheek and gaze deep into [hisher] eyes. <i>“What sort of healer doesn't help those in need?”</i> you mockingly tease [himher]. Flustered, the elf asks you where you are hurt. Suggesting that it would be easier to find if you were nude, you undress in front of the blushing elf. In fact, you suggest, perhaps it'd be easier if both of you were nude...", parse);
 					Text.NL();
@@ -163,7 +163,7 @@ export namespace KiakaiSexScenes {
 				tooltip : "Coax the elf into having some fun with you.",
 			});
 			options.push({ nameStr : "Insist",
-				func() {
+				func: () => {
 					player.AddHPFraction(1.0);
 					Text.Add("Insisting that you are indeed hurt, you slip out of your clothing without any urging from the elf. Shrugging, the elf motions for you to turn around, searching your body for signs of injury. Instead of heeding [hisher] instruction, you take [hisher] hand in yours. <i>“Here, I'll show you where...”</i>", parse);
 					Text.NL();
@@ -223,7 +223,7 @@ export namespace KiakaiSexScenes {
 		// [Finish][Seduce][Nah]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Finish",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You gather up your gear, resolving to deal with your arousal in some other manner. While you are not quite sure, you could almost swear that you catch [himher] taking a peek as you get dressed.", parse);
 				Text.NL();
@@ -241,7 +241,7 @@ export namespace KiakaiSexScenes {
 			tooltip : "It is time to carry on with your quest.",
 		});
 		options.push({ nameStr : "Seduce",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Rather than complying with [hisher] wishes, you stretch sinuously, making certain to flaunt your body for the captive audience as much as you can. Patting the ground beside you, you motion for your elvish companion to join you.", parse);
 				Text.NL();
@@ -261,7 +261,7 @@ export namespace KiakaiSexScenes {
 			tooltip : "Perhaps you could persuade the elf to tend to you a bit... more?",
 		});
 		options.push({ nameStr : "Assert",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“And just where do you think you're going?”</i> you complain, amused at the elf's surprised expression. <i>“[stuttername]...?”</i>", parse);
 				Text.NL();
@@ -316,7 +316,7 @@ export namespace KiakaiSexScenes {
 		if (player.FirstCock()) {
 			// HANDJOB
 			options.push({ nameStr : "Handjob",
-				func() {
+				func: () => {
 					Text.Clear();
 					player.AddSexExp(1);
 					kiakai.AddSexExp(1);
@@ -450,7 +450,7 @@ export namespace KiakaiSexScenes {
 
 			// BLOWJOB
 			options.push({ nameStr : "Blowjob",
-				func() {
+				func: () => {
 					Text.Clear();
 
 					Sex.Blowjob(kiakai, player);
@@ -482,7 +482,7 @@ export namespace KiakaiSexScenes {
 					// [Passive][Active]
 					const options: IChoice[] = [];
 					options.push({ nameStr : "Passive",
-						func() {
+						func: () => {
 							Text.Clear();
 							Text.Add("Sighing in pleasure, you lean back and allow [name] to show [hisher] skills. ", parse);
 							Text.NL();
@@ -549,7 +549,7 @@ export namespace KiakaiSexScenes {
 									// [Allow][Deny][Punish]
 									const options: IChoice[] = [];
 									options.push({ nameStr : "Allow",
-										func() {
+										func: () => {
 											Text.Clear();
 											// TODO: Increase odds of scene
 
@@ -575,7 +575,7 @@ export namespace KiakaiSexScenes {
 										tooltip : Text.Parse("Somewhat surprisingly, [name] has revealed a kinkier side... why not encourage it?", parse),
 									});
 									options.push({ nameStr : "Deny",
-										func() {
+										func: () => {
 											// Clear stacked scene
 											Gui.Callstack.pop();
 											Text.Clear();
@@ -656,7 +656,7 @@ export namespace KiakaiSexScenes {
 						tooltip : Text.Parse("Let [name] finish you off as best [heshe] can.", parse),
 					});
 					options.push({ nameStr : "Active",
-						func() {
+						func: () => {
 							Text.Clear();
 							player.AddSexExp(1);
 							kiakai.AddSexExp(1);
@@ -721,7 +721,7 @@ export namespace KiakaiSexScenes {
 		if (player.FirstVag()) {
 			// EAT YOU OUT
 			options.push({ nameStr : "Eat you",
-				func() {
+				func: () => {
 					Text.Clear();
 
 					Sex.Cunnilingus(kiakai, player);
@@ -793,7 +793,7 @@ export namespace KiakaiSexScenes {
 							// [Allow][Deny][Punish]
 							const options: IChoice[] = [];
 							options.push({ nameStr : "Allow",
-								func() {
+								func: () => {
 									Text.Clear();
 									// TODO: Increase odds of scene
 									Text.Add("Smiling broadly, you nod slowly, encouraging the elf to continue. [HisHer] restrictions lifted, [name] insistently presses two fingers into your [anus], probing your back door while [heshe] returns to lapping at your [vag].", parse);
@@ -822,7 +822,7 @@ export namespace KiakaiSexScenes {
 								tooltip : Text.Parse("Somewhat surprisingly, [name] has revealed a kinkier side... why not encourage it?", parse),
 							});
 							options.push({ nameStr : "Deny",
-								func() {
+								func: () => {
 									Text.Clear();
 									// TODO: Decrease odds of scene
 									Text.Add("Slightly annoyed, you shake your head. [name] hastily withdraws [hisher] fingers, determined to service you in some other way.", parse);
@@ -966,7 +966,7 @@ export namespace KiakaiSexScenes {
 		});
 
 		options.push({ nameStr : "Cuddle",
-			func() {
+			func: () => {
 				Text.Clear();
 
 				Text.Add("Rather than take advantage of the nervous elf, you wrap your arms around [himher]", parse);
@@ -1052,7 +1052,7 @@ export namespace KiakaiSexScenes {
 
 			// [Handjob][Blowjob]
 			options.push({ nameStr : "Handjob",
-				func() {
+				func: () => {
 					Text.Clear();
 
 					parse.s = kiakai.FirstCock().length.Get() >= 20 ? "s" : "";
@@ -1088,7 +1088,7 @@ export namespace KiakaiSexScenes {
 				tooltip : "Use your hands.",
 			});
 			options.push({ nameStr : "Blowjob",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You intend to do far more than touch. To get [himher] started, you grab hold of[oneof] [name]'s [kcock] and give it a few strokes. ", parse);
 					if (kiakai.flags.Sexed < 10) {
@@ -1196,7 +1196,7 @@ export namespace KiakaiSexScenes {
 
 			// [Frig][Eat out]
 			options.push({ nameStr : "Frig",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Humoring the horny elf, you drag your fingers across [hisher] lower lips, giving [hisher] [kclit] a light flick before spreading [hisher] labia with both hands. Agonizingly slow, you push two digits inside [name]'s wet [kvag], probing deeply into [hisher] slick tunnel.", parse);
 					Text.NL();
@@ -1219,7 +1219,7 @@ export namespace KiakaiSexScenes {
 				tooltip : Text.Parse("Use your fingers to get [name] off.", parse),
 			});
 			options.push({ nameStr : "Eat out",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Well, since [heshe] is asking so nicely...", parse);
 					Text.NL();
@@ -1263,7 +1263,7 @@ export namespace KiakaiSexScenes {
 
 		// [Ass][Denial]
 		options.push({ nameStr : "Ass",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Touch? You have some much more interesting ideas in mind. You push [name] down on [hisher] back, grabbing the elf by [hisher] knees and pushing [hisher] legs up toward [hisher] head. Sweetly, you ask [himher] to hold them for you, and not move from that position. The elf complies, blushing brightly at [hisher] compromising position.", parse);
 				Text.NL();
@@ -1382,7 +1382,7 @@ export namespace KiakaiSexScenes {
 			tooltip : Text.Parse("[HisHer] [kgen] will have to wait, you are going to play with [hisher] [kanus] this time.", parse),
 		});
 		options.push({ nameStr : "Denial",
-			func() {
+			func: () => {
 				parse.ktarget = kiakai.FirstCock() ? parse.kcock : parse.kvag;
 				Text.Clear();
 				Text.Add("You instruct the elf to lie down on [hisher] back and spread [hisher] legs for you. [name] eagerly complies, believing that you'll help with [hisher] itch. ", parse);
@@ -1486,7 +1486,7 @@ export namespace KiakaiSexScenes {
 
 		if (player.FirstCock()) {
 			options.push({ nameStr : "Blowjob",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("In no uncertain terms, you tell the elf to give you a blowjob.", parse);
 					Text.NL();
@@ -1639,7 +1639,7 @@ export namespace KiakaiSexScenes {
 		// CUNNILINGUS
 		if (player.FirstVag()) {
 			options.push({ nameStr : "Cunnilingus",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You flaunt your [vag] for [name]'s benefit, slyly asking if [heshe] wants to eat you out.", parse);
 					Text.NL();
@@ -1745,7 +1745,7 @@ export namespace KiakaiSexScenes {
 						// [Mercy][Punish]
 						const options: IChoice[] = [];
 						options.push({ nameStr : "Mercy",
-							func() {
+							func: () => {
 								Text.NL();
 								Text.Add("Relenting, you give [name] a hand up, helping [himher] with [hisher] gear. The two of you ready yourselves to continue your journey.", parse);
 								Text.Flush();
@@ -1754,7 +1754,7 @@ export namespace KiakaiSexScenes {
 							tooltip : Text.Parse("Give [himher] a break.", parse),
 						});
 						options.push({ nameStr : "Punish",
-							func() {
+							func: () => {
 								Text.NL();
 								Text.Add("You simply sit back down, grinding your crotch against [himher], using [hisher] face like a towel. Before gathering your gear and continuing your journey, you give [name] an encouraging kiss on the cheek.", parse);
 
@@ -1781,7 +1781,7 @@ export namespace KiakaiSexScenes {
 		}
 		// DOMMY 69
 		options.push({ nameStr : "69",
-			func() {
+			func: () => {
 				Text.Clear();
 				parse.emo     = kiakai.flags.Sexed > 15 ? "eagerly" : "fearfully";
 				parse = Text.ParserPlural(parse, kiakai.NumCocks() > 1);
@@ -1872,7 +1872,7 @@ export namespace KiakaiSexScenes {
 				const options: IChoice[] = [];
 				if (kiakai.FirstCock()) {
 					options.push({ nameStr : "Cock",
-						func() {
+						func: () => {
 							const cock = kiakai.BiggestCock();
 
 							Text.Clear();
@@ -1933,7 +1933,7 @@ export namespace KiakaiSexScenes {
 							// [Release][Deny]
 							const options: IChoice[] = [];
 							options.push({ nameStr : "Release",
-								func() {
+								func: () => {
 									Text.Clear();
 									Text.Add("Taking pity on [name], you pull [himher] out of your mouth, planting one last kiss on [hisher] [kcockTip] before changing your tactics. With your free hand, you rapidly jerk [himher] off, still keeping a tight grip on the base of [hisher] [kcock]. When you judge that [heshe] is about to blow, you suddenly release your hold, letting the elf's liquids flow freely.", parse);
 									Text.NL();
@@ -1960,7 +1960,7 @@ export namespace KiakaiSexScenes {
 								tooltip : Text.Parse("Relent and allow the elf to cum. With the amount [heshe] has stacked up, it'll probably be a big one.", parse),
 							});
 							options.push({ nameStr : "Deny",
-								func() {
+								func: () => {
 									Text.Clear();
 									Text.Add("<i>“You'll have to do better than that,”</i> you tell [himher] as you briefly surface, licking [name]'s [kcock] slowly while awaiting [hisher] response.", parse);
 									Text.NL();
@@ -2003,7 +2003,7 @@ export namespace KiakaiSexScenes {
 				}
 				if (kiakai.FirstVag()) {
 					options.push({ nameStr : "Vagina",
-						func() {
+						func: () => {
 							Text.Clear();
 
 							Sex.Cunnilingus(player, kiakai);
@@ -2075,7 +2075,7 @@ export namespace KiakaiSexScenes {
 					});
 				}
 				options.push({ nameStr : "Anal",
-					func() {
+					func: () => {
 
 						Text.Clear();
 
@@ -2118,7 +2118,7 @@ export namespace KiakaiSexScenes {
 
 						const options: IChoice[] = [];
 						options.push({ nameStr : "Fingers",
-							func() {
+							func: () => {
 								parse.pen = () => Math.random() > 0.5 ? "your fingers" : "your digits";
 								Text.Clear();
 								Text.Add("By now, three fingers hardly offer any resistance, so you add another one to the mix. You build up a rapid rhythm, plunging deep inside [name]'s [kanus].", parse);
@@ -2131,7 +2131,7 @@ export namespace KiakaiSexScenes {
 						});
 						if (player.LongTongue()) {
 							options.push({ nameStr : "Tongue",
-								func() {
+								func: () => {
 									parse.pen = () => Text.Parse("your [tongue]", parse);
 									Text.Clear();
 									Text.Add("Your [tongue], rival to a cock in length, snakes out and buries itself deep inside [name], immediately beginning to thrust in and out.", parse);
@@ -2149,7 +2149,7 @@ export namespace KiakaiSexScenes {
 								const toySize = toy.cock.length.Get();
 								const cap = kiakai.Butt().capacity.Get() * (0.75 + kiakai.LustLevel() + kiakai.flags.AnalExp / 100);
 								options.push({ nameStr : toy.name,
-									func() {
+									func: () => {
 										parse.toy = toy.sDesc();
 										parse.pen = Text.Parse("the [toy]", parse);
 										parse.itThem  = toy.plural ? "them" : "it";
@@ -2259,7 +2259,7 @@ export namespace KiakaiSexScenes {
 			tooltip : Text.Parse("Have [name] get down on [hisher] back and mount [himher], giving you full access to their own genitalia.", parse),
 		});
 		options.push({ nameStr : "Anal",
-			func() {
+			func: () => {
 				Text.Clear();
 
 				// First time
@@ -2459,7 +2459,7 @@ export namespace KiakaiSexScenes {
 			// [Love][Friend][Fuck][Nevermind]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Love",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You pour your heart out to your companion.", parse);
 					Text.NL();
@@ -2482,7 +2482,7 @@ export namespace KiakaiSexScenes {
 				tooltip : "Confess that you love the elf.",
 			});
 			options.push({ nameStr : "Friend",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("The two of you have gotten to know each other by now, right?", parse);
 					Text.NL();
@@ -2507,7 +2507,7 @@ export namespace KiakaiSexScenes {
 				tooltip : "With all that you've gone through together, shouldn't the two of you try to get a bit closer?",
 			});
 			options.push({ nameStr : "Fuck",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You ask [name], quite bluntly, if [heshe] wants to have sex with you. For a long time, [heshe] does nothing but stare at you in disbelief, mouth opening and closing as the elf tries to form a coherent sentence in [hisher] mind.", parse);
 					Text.NL();
@@ -2532,7 +2532,7 @@ export namespace KiakaiSexScenes {
 				tooltip : Text.Parse("Ask [himher] to put out.", parse),
 			});
 			options.push({ nameStr : "Nevermind",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You decide to drop the topic for now, though [name] looks at you with uncertainty.", parse);
 					Text.Flush();
@@ -2558,7 +2558,7 @@ export namespace KiakaiSexScenes {
 			// [Passive][Mutual][Dig in]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Passive",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“Have you...? Don't you think it's time you took some initiative?”</i> you challenge the elf.", parse);
 					Text.NL();
@@ -2581,7 +2581,7 @@ export namespace KiakaiSexScenes {
 				tooltip : Text.Parse("Encourage [himher] take the lead.", parse),
 			});
 			options.push({ nameStr : "Mutual",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You respond by kissing the elf deeply, your [tongue] copulating with [hishers], betraying your eagerness. Once [hisher] initial surprise has worn off, [name] begins to return your feelings, and the two of you melt into each other's arms.", parse);
 					Text.NL();
@@ -2600,7 +2600,7 @@ export namespace KiakaiSexScenes {
 				tooltip : "Explore each other's bodies.",
 			});
 			options.push({ nameStr : "Dig in",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“Mmm... first, get those pesky clothes out of the way.”</i> As [name] hastily complies, you sit back and enjoy the view, appreciating [hisher] impromptu striptease. Once [heshe] is completely nude, you instruct [himher] to show off the goods.", parse);
 					Text.NL();
@@ -2704,7 +2704,7 @@ export namespace KiakaiSexScenes {
 		// Sex options
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Anal pitch",
-			func() {
+			func: () => {
 				Text.Clear();
 
 				kiakai.relation.IncreaseStat(50, 2);
@@ -2903,7 +2903,7 @@ export namespace KiakaiSexScenes {
 				// [Gentle][Rough][Ruin]
 				const options: IChoice[] = [];
 				options.push({ nameStr : "Gentle",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("Slowly, you start to rock your [hips], your [cock] sliding in and out of [name] with the inexorable regularity of ocean waves, gently rolling against a shoreline. Each gentle push elicits an appreciative moan from the prone elf, urging you on.", parse);
 						Text.NL();
@@ -3012,7 +3012,7 @@ export namespace KiakaiSexScenes {
 					tooltip : "Give the elf some gentle loving.",
 				});
 				options.push({ nameStr : "Rough",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("<i>“I'll fuck you good,”</i> you announce, accentuating your words with a rough shove of your hips, driving your [cock] deep inside the elf. [name] cries out in surprise at the motion, but there is a fair bit of poorly disguised delight in there too. As you build up a rhythm, your suspicions are confirmed as [heshe] starts moaning, wordlessly begging you to keep going.", parse);
 						Text.NL();
@@ -3107,7 +3107,7 @@ export namespace KiakaiSexScenes {
 				});
 				if (kiakai.flags.AnalExp >= 20 && kiakai.subDom.Get() < 0) {
 					options.push({ nameStr : "Ruin",
-						func() {
+						func: () => {
 							Text.Clear();
 							parse = Text.ParserPlural(parse, kiakai.NumCocks() > 1);
 							Text.Add("Pulling out all the way, your [cock] leaves [name]'s stretched sphincter with a loud popping noise. The elf is given little time to recover, however, as you quickly plunge into [himher] again, ramming your [cock] in as far as it will go. A pained yelp escapes your submissive companion as you pound [himher], testing [hisher] limits.", parse);
@@ -3212,7 +3212,7 @@ export namespace KiakaiSexScenes {
 			tooltip : attitude ? Text.Parse("You can finally have a go at [himher], like you have been longing to... Fuck [name]'s butt until [heshe] begs for more.", parse) : Text.Parse("Fuck [name]'s butt until [heshe] begs for more.", parse),
 		});
 		options.push({ nameStr : "Anal catch",
-			func() {
+			func: () => {
 				Text.Clear();
 				kiakai.flags.Sexed++;
 				kiakai.relation.IncreaseStat(50, 1);
@@ -3400,33 +3400,33 @@ export namespace KiakaiSexScenes {
 		// [Rim][Suck [himher]][Selfsuck][Frot][Oil]
 		let options: IChoice[] = [];
 		options.push({ nameStr : "Rim",
-			func() {
+			func: () => {
 				KiakaiSexScenes.AnalCatchPrep(KiakaiFlags.AnalCatchPrepScene.Rim, true);
 			}, enabled : true,
 			tooltip : "Have the elf give you a rimjob.",
 		});
 		options.push({ nameStr : Text.Parse("Suck [himher]", parse),
-			func() {
+			func: () => {
 				KiakaiSexScenes.AnalCatchPrep(KiakaiFlags.AnalCatchPrepScene.Suck, true);
 			}, enabled : true,
 			tooltip : "Get the elf nice and slick with your mouth.",
 		});
 		options.push({ nameStr : "Selfsuck",
-			func() {
+			func: () => {
 				KiakaiSexScenes.AnalCatchPrep(KiakaiFlags.AnalCatchPrepScene.Selfsuck, true);
 			}, enabled : kiaiCock.length.Get() >= 25,
 			tooltip : Text.Parse("Tell the elf to suck [himher]self off.", parse),
 		});
 		if (player.FirstCock()) {
 			options.push({ nameStr : "Frot",
-				func() {
+				func: () => {
 					KiakaiSexScenes.AnalCatchPrep(KiakaiFlags.AnalCatchPrepScene.Frot, true);
 				}, enabled : true,
 				tooltip : "You could use your own cum...",
 			});
 		}
 		options.push({ nameStr : "Oil",
-			func() {
+			func: () => {
 				KiakaiSexScenes.AnalCatchPrep(KiakaiFlags.AnalCatchPrepScene.Oil, true);
 			}, enabled : party.inventory.QueryNum(IngredientItems.SnakeOil) > 0,
 			tooltip : "Use a vial of oil.",
@@ -3439,14 +3439,14 @@ export namespace KiakaiSexScenes {
 			// [Sure][Nah]
 			options = [];
 			options.push({ nameStr : "Yes",
-				func() {
+				func: () => {
 					kiakai.subDom.IncreaseStat(10, 1);
 					KiakaiSexScenes.AnalCatchPrep(choice, true);
 				}, enabled : true,
 				tooltip : "Accept the elf's request.",
 			});
 			options.push({ nameStr : "No",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Slightly annoyed, you shake your head. [name] looks a bit crestfallen. Instead, you will...", parse);
 					kiakai.subDom.DecreaseStat(-30, 1);
@@ -3577,7 +3577,7 @@ export namespace KiakaiSexScenes {
 		// [Sure][Nah]
 		options = [];
 		options.push({ nameStr : "Take charge",
-			func() {
+			func: () => {
 				let tailpegFlag = false;
 				let suckFlag    = false;
 				let jerkFlag    = false;
@@ -3864,7 +3864,7 @@ export namespace KiakaiSexScenes {
 		});
 
 		options.push({ nameStr : "More",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You moan contentedly that [heshe] has the right idea, encouraging [himher] to keep going. [name] sets a steady rhythm, pushing deep inside you with each thrust. The elf leans down, planting kisses on your lips and neck, unabashedly letting [hisher] hands roam over your body.", parse);
 				if (player.LowerBodyType() !== LowerBodyType.Single) {
@@ -4004,7 +4004,7 @@ export namespace KiakaiSexScenes {
 		});
 
 		options.push({ nameStr : "Beg",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Almost babbling, you cry out how good [name] is, how nice it feels to get fucked by [himher], how much you need it. It's quite amazing to see the elf's expression turn more and more confident as you praise [himher]. Not only that, there is a new vigor to [hisher] thrusting, each stroke more powerful than the last.", parse);
 				Text.NL();
@@ -4098,7 +4098,7 @@ export namespace KiakaiSexScenes {
 						// [Sure][Nah]
 						const options: IChoice[] = [];
 						options.push({ nameStr : "Inside",
-							func() {
+							func: () => {
 								Text.Clear();
 								Text.Add("<i>“I-inside!”</i> You moan, begging to be filled with hot cream. It's unclear whether the elf obeys you, or if [heshe] is simply too far gone to care. [name] cries out, [hisher] pulsating [kcock] pouring its contents directly into your receptive bowels.", parse);
 								const cum = kiakai.OrgasmCum();
@@ -4117,7 +4117,7 @@ export namespace KiakaiSexScenes {
 							tooltip : Text.Parse("Beg for [name] to fill you with [hisher] spunk.", parse),
 						});
 						options.push({ nameStr : "Pull out",
-							func() {
+							func: () => {
 								Text.Clear();
 								Text.Add("<i>“W-wait!”</i> you pant, suddenly telling the elf to pull out from your [anus]. ", parse);
 								if (kiaiCock.knot !== 0 && len <= cap) {
@@ -4147,7 +4147,7 @@ export namespace KiakaiSexScenes {
 						});
 						if (cum > 3) {
 							options.push({ nameStr : "Shower",
-								func() {
+								func: () => {
 									Text.Clear();
 									Text.Add("You've seen the copious amounts of sperm that the elf can produce, and you want all of it.", parse);
 									Text.NL();

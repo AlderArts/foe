@@ -111,13 +111,13 @@ export namespace DreamsScenes {
 				// [Onward][Not now]
 				const options: IChoice[] = [];
 				options.push({ nameStr : "Onward",
-					func() {
+					func: () => {
 						RavenMotherScenes.TheHunt(func);
 					}, enabled : true,
 					tooltip : "Focus on the crystal, pursue the ravens. You <i>will</i> know why they are intruding on your mind.",
 				});
 				options.push({ nameStr : "Not now",
-					func() {
+					func: () => {
 						Text.Clear();
 						dream();
 					}, enabled : true,
@@ -163,7 +163,7 @@ export namespace DreamsScenes {
 					// [Ravens][Fine]
 					const options: IChoice[] = [];
 					options.push({ nameStr : "Ravens",
-						func() {
+						func: () => {
 							KiakaiScenes.RavenDreams();
 
 							Gui.NextPrompt(() => {
@@ -173,7 +173,7 @@ export namespace DreamsScenes {
 						tooltip : Text.Parse("Ask [name] if [heshe] knows anything about the ravens that have been appearing in your dreams.", parse),
 					});
 					options.push({ nameStr : "Fine",
-						func() {
+						func: () => {
 							Text.Clear();
 							Text.Add("You tell [name] that you’re alright - you just had a strange dream. [HeShe] smiles, looking only a little skeptical.", parse);
 							Text.Flush();
@@ -452,7 +452,7 @@ export namespace DreamsScenes {
 		// [Resist][Support her]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Resist",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You shout defiance at the demon, and jump back, preparing to fight. In an instant, she’s stripped you of your weapons and armor, leaving your belongings in a messy heap behind her.", parse);
 				Text.NL();
@@ -468,7 +468,7 @@ export namespace DreamsScenes {
 			tooltip : "Even if it’s come to this, you’ll fight her to the end!",
 		});
 		options.push({ nameStr : "Support her",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You take hold of Uru’s hand, and tell her that you’ve been hoping all along that she’d succeed. A being as beautiful as her should naturally rule the worlds. A little flattery can’t possibly hurt...", parse);
 				Text.NL();
@@ -580,7 +580,7 @@ export namespace DreamsScenes {
 		// [Advice][Sex]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Advice",
-			func() {
+			func: () => {
 				Text.Clear();
 				const scenes = new EncounterTable();
 				scenes.AddEnc(() => {
@@ -603,7 +603,7 @@ export namespace DreamsScenes {
 			tooltip : "Ask her for advice on how to complete your task.",
 		});
 		options.push({ nameStr : "Sex",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Aria looks at you without replying, though she blushes faintly. The proud Lady looks like she’s hesitating. Finally, she slowly nods her head, expression unreadable.", parse);
 				Text.NL();

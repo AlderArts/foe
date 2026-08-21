@@ -78,7 +78,7 @@ export namespace JeanneScenes {
 			tooltip : "Seek the magician's advice.",
 		});
 		options.push({ nameStr : "Alchemy",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“Certainly,”</i> Jeanne replies. <i>“Understand that I cannot sell you much, but if you bring me the right ingredients, perhaps I can help you.”</i> She frowns slightly. <i>“Just know there are certain recipes I will not make for you.”</i>", parse);
 				if (player.alchemyLevel > 0) {
@@ -93,7 +93,7 @@ export namespace JeanneScenes {
 		});
 		if (party.InParty(terry) && (terry.flags.TF & TerryFlags.TF.Jeanne)) {
 			options.push({ nameStr : "Terry TF",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“Sure, what would you like me to prepare?”</i>", parse);
 					Text.Flush();
@@ -166,7 +166,7 @@ export namespace JeanneScenes {
         // [Gem][Magic][Alchemy][Elves][Jeanne][Golem][Rosalin][Terry]
         const options: IChoice[] = [];
         options.push({ nameStr : "Gem",
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Add("<i>“Alliser’s gem is a prize fit for kings,”</i> Jeanne explains. <i>“Its true powers are only revealed through its magic, though, and now that you have bonded yourself to it, only you can access this.”</i>", parse);
                 Text.NL();
@@ -191,7 +191,7 @@ export namespace JeanneScenes {
             tooltip : "Discuss the gemstone with Jeanne.",
         });
         options.push({ nameStr : "Magic",
-            func() {
+            func: () => {
                 Text.Clear();
 
                 if (!GlobalScenes.MagicStage1()) {
@@ -301,7 +301,7 @@ export namespace JeanneScenes {
         });
         */
         options.push({ nameStr : "Elves",
-            func() {
+            func: () => {
                 Text.Clear();
                 Text.Add("<i>“I no longer keep in touch with my kin. Any I considered family are long dead, centuries upon centuries ago.”</i> There is a twinge of sadness in her composure, but it quickly fades. <i>“Do I miss some of them? Of course I do… but I have no regrets about my decisions.”</i>", parse);
                 Text.NL();
@@ -319,7 +319,7 @@ export namespace JeanneScenes {
             tooltip : "Ask Jeanne if she has any dealings with the elves anymore. How was it growing up among them?",
         });
         options.push({ nameStr : "Jeanne",
-            func() {
+            func: () => {
                 Text.Clear();
                 if (jeanne.flags.bg === 0) {
                     Text.Add("<i>“There is hardly time to tell all of it. I have lived a long life, both here on Eden and in other worlds.”</i> Jeanne ponders your question. <i>“Where to start…?”</i>", parse);
@@ -369,7 +369,7 @@ export namespace JeanneScenes {
         */
         if (rosalin.flags.Met !== 0) {
             options.push({ nameStr : "Rosalin",
-                func() {
+                func: () => {
                     Text.Clear();
                     Text.Add("<i>“Ah, her.”</i> Jeanne frowns, looking a bit sad. <i>“You may have noticed that I live alone here. I used to have disciples, since teaching is a passion of mine. Rosalin… changed that. She was always a problematic child, causing quite a bit of trouble for her poor parents. From what I hear, her brief venture into the culinary realm almost put her father on the brink of death.”</i>", parse);
                     Text.NL();
@@ -396,7 +396,7 @@ export namespace JeanneScenes {
             if (party.Inv().QueryNum(AlchemySpecial.Anusol) && rosalin.flags.Anusol < RosalinFlags.Anusol.ShowedJeanne) {
                 options.push({ nameStr : "Rosalin’s pot",
                     tooltip : "You wonder what Jeanne would have to say about this new potion of Rosalin’s. Maybe showing it to her would be a good idea?",
-                    func() {
+                    func: () => {
                         rosalin.flags.Anusol = RosalinFlags.Anusol.ShowedJeanne;
                         jeanne.recipes.push(AlchemySpecial.AnusolPlus);
 
@@ -484,7 +484,7 @@ export namespace JeanneScenes {
         const options: IChoice[] = [];
         if (talkedGolem === false) {
             options.push({ nameStr : "Golem",
-                func() {
+                func: () => {
                     Text.Clear();
                     Text.Add("<i>“I was sure I sealed the tower,”</i> the elf says, looking perplexed. <i>“You say that you were attacked by a golem…?”</i> It looks like understanding slowly dawns on her, and she looks a bit apprehensive.", parse);
                     Text.NL();
@@ -511,7 +511,7 @@ export namespace JeanneScenes {
         }
         if (talkedJeanne === false) {
             options.push({ nameStr : "Jeanne",
-                func() {
+                func: () => {
                     Text.Clear();
                     Text.Add("<i>“It matters little to me who rules in Rigard, I have been here longer than they.”</i> The beautiful elf gestures to the laboratory around her. <i>“I’ve lived here for centuries, long before the current king came along with his silly ideas; I will stay here, long after he is gone. There is so very much to learn about the world, and as long as the royals provide me with materials and stay out of my way, I give them advice.”</i>", parse);
                     Text.NL();
@@ -528,7 +528,7 @@ export namespace JeanneScenes {
         }
         if (talkedGem === false) {
             options.push({ nameStr : "Gem",
-                func() {
+                func: () => {
                     Text.Clear();
                     Text.Add("When you pull out the purple gemstone you carry, Jeanne’s eyes almost bulge in surprise.", parse);
                     Text.NL();

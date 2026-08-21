@@ -43,7 +43,7 @@ DragonDenLoc.Entry.enc = new EncounterTable();
 // FUCK YOU ENCOUNTER
 DragonDenLoc.Entry.AddEncounter({
 	nameStr : "Drake",
-	func() {
+	func: () => {
 		return DrakeScenes.DrakeEnc();
 	}, odds : 1.0, enc : true,
 	visible : true, enabled : true, hunt : true,

@@ -171,8 +171,9 @@ export class Gwendy extends Entity {
 		that.PrintDescription();
 
 		const options: IChoice[] = [
-			{ nameStr: "Release",
-				func() {
+			{
+				nameStr: "Release",
+				func: () => {
 					Text.Clear();
 					Text.Add("[Placeholder] Gwendy masturbates fiercely, cumming buckets.");
 

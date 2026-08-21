@@ -62,7 +62,7 @@ export namespace VaughnTasksScenes {
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Yes",
 				tooltip : "Yes, you’ll take it.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“All right, then. Let’s see what the boss-man wants me to hand down to you today…”</i>", parse);
 					Text.Flush();
@@ -72,7 +72,7 @@ export namespace VaughnTasksScenes {
 			});
 			options.push({ nameStr : "No",
 				tooltip : "No, you’re not sure if you can see the task through.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Vaughn nods and shrugs at your words. <i>“Better that you say upfront that you can’t do it, rather than accept the job and get creamed, then leave everyone else to pick up the pieces. It’s no big deal; I’ll just pass along the task to someone who’s in the clear. You get points in my book for being honest about it.”</i>", parse);
 					Text.NL();
@@ -432,7 +432,7 @@ export namespace VaughnTasksScenes {
 			if (vaughn.flags.Met === VaughnFlags.Met.OnTaskSnitch && miranda.flags.Snitch === 0) {
 				options.push({ nameStr : "Snitch",
 					tooltip : "Present your evidence against Terrell to Miranda and ask the dobie if anything can be done.",
-					func() {
+					func: () => {
 						VaughnTasksScenes.Snitch.Miranda(onDuty);
 					}, enabled : true,
 				});
@@ -497,7 +497,7 @@ export namespace VaughnTasksScenes {
 				const options: IChoice[] = [];
 				options.push({ nameStr : "Refuse",
 					tooltip : "You’re not going to deceive her, but you’re not going to tell the whole truth, either.",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("A friend, you tell Miranda. You can’t reveal his name because that would get him into trouble - he spoke to you trusting that he wouldn’t be snitched on. The evidence is good, and you’re willing to stake your reputation on it.", parse);
 						Text.NL();
@@ -518,7 +518,7 @@ export namespace VaughnTasksScenes {
 				});
 				options.push({ nameStr : "Lie",
 					tooltip : "What’s a little white lie? Justice is served, and you don’t want to see the inside of a cell.",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("Right. You quickly try and think of a plausible lie, and tell Miranda that you got the evidence off one of the den’s employees who’s harboring a grudge against his current boss. Now, you have to watch out for your informants, so you’re not going to tell Miranda just <i>who</i> it is, but suffice to say that while it took a little effort, it certainly wasn’t impossible for said informant to get the bill of sale.", parse);
 						Text.NL();
@@ -594,7 +594,7 @@ export namespace VaughnTasksScenes {
 				const options: IChoice[] = [];
 				options.push({ nameStr : "Yes",
 					tooltip : "If that’s what she wants…",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("You wait in stony silence for a few minutes, the hubbub of the Maiden’s Bane swirling about the two of you, but Miranda really isn’t going to relent.", parse);
 						Text.NL();
@@ -689,7 +689,7 @@ export namespace VaughnTasksScenes {
 						const options: IChoice[] = [];
 						options.push({ nameStr : "Yes",
 							tooltip : "Yeah, you’ve had enough of this. Time to call the score even… for now.",
-							func() {
+							func: () => {
 								Text.Clear();
 								Text.Add("Fine, fine. Having Miranda mad at you all the time was exhausting on the nerves, anyways - getting her off your back would be a small relief.", parse);
 								Text.NL();
@@ -707,7 +707,7 @@ export namespace VaughnTasksScenes {
 						});
 						options.push({ nameStr : "No",
 							tooltip : "Refuse to call it quits.",
-							func() {
+							func: () => {
 								Text.Clear();
 								Text.Add("Miranda shows you her teeth. <i>“Well, if that’s the way you want it, asshole. More fun for me, I suppose. Guess I’ll be facefucking your slutty little mouth for a little while longer, or maybe that’s what you want? Not now, though. I’ll deal with you later, after I’ve finished cracking some skulls back at the yard.”</i>", parse);
 								Text.NL();
@@ -722,7 +722,7 @@ export namespace VaughnTasksScenes {
 				});
 				options.push({ nameStr : "No",
 					tooltip : "No. You’re not standing for this. You’ll take your chances at the watch headquarters.",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("Screw this. While you might have expected that Miranda would be a hard sell, you hadn’t expected her to be <i>this</i> vindictive. Leaving your drink untouched, you quickly pay for it and stand up, making for the door.", parse);
 						Text.NL();
@@ -785,7 +785,7 @@ export namespace VaughnTasksScenes {
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Lock",
 				tooltip : Text.Parse("[Jimmy] the lock.", {Jimmy: rogue ? "Pick" : "Jimmy"}),
-				func() {
+				func: () => {
 					Text.Clear();
 					if (rogue) {
 						Text.Add("Well, no time to waste. You stoop and quickly inspect the lock one last time, then get to work. Having been trained in the ways of the rogue, you find the attempt easier than most might expect, but success is by no means guaranteed.", parse);
@@ -837,7 +837,7 @@ export namespace VaughnTasksScenes {
 			if (mage) {
 				options.push({ nameStr : "Magic",
 					tooltip : "Try and get the bolt to lift with a bit of magic.",
-					func() {
+					func: () => {
 						Text.Clear();
 						parse.phisher = player.mfTrue("his", "her");
 						Text.Add("Right. Getting a bolt to move quietly and silently… that should be child’s play for someone who can conjure up fire with a snap of [phisher] fingers, right? You size up your opponent one last time - while it would be easier to blast the door open as opposed to the finesse required to stealthily lift the bolt, it’d also create no end of unfortunate repercussions you’d rather avoid.", parse);
@@ -892,7 +892,7 @@ export namespace VaughnTasksScenes {
 			if (party.InParty(terry)) {
 				options.push({ nameStr : "Terry",
 					tooltip : "Have Terry open the locker for you.",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("<i>“Really?”</i> Terry moans in an exaggerated display of exasperation. <i>“That? You want me to work on that flimsy old thing? My talents are wasted here, I tell you.”</i>", parse);
 						Text.NL();
@@ -1152,7 +1152,7 @@ export namespace VaughnTasksScenes {
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Poison",
 				tooltip : "The poison sounds cruel enough, thank you very much.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Vaughn nods and hands you the vial. <i>“I’m not going to envy the poor bitch when this gets into her system, but she really ought to have chosen a better bastard to throw her weight behind. I mean, I’ve never seen Majid in the flesh, but what I’ve heard of him makes me glad I’ve never had the chance for such. Well, since she enjoys spending so much time with dirty characters, I’m sure a case of the squealing shits won’t raise any eyebrows. The poison will take effect the following morning, so you’ll have plenty of time to make a getaway without raising too much suspicion.</i>", parse);
 					Text.NL();
@@ -1166,7 +1166,7 @@ export namespace VaughnTasksScenes {
 			});
 			options.push({ nameStr : "Aphrodisiac",
 				tooltip : "Why not? It might be fun to watch.",
-				func() {
+				func: () => {
 					Text.Clear();
 					parse.gen = player.mfFem("fellow", "girl");
 					Text.Add("Vaughn grins at you and hands you the vial. <i>“Oh, looking to create a roof-raising scene, are we? That should be fun… as well as bring down a whole lot of disrepute upon our good lady. She certainly won’t be doing any speaking at court, then. Maybe some moaning… ha. Seriously, though, you’re quite the naughty [gen], [playername].”</i>", parse);
@@ -1267,7 +1267,7 @@ export namespace VaughnTasksScenes {
 			if (RigardFlags.LB.KnowsOrvin() && !opts.Orvin) {
 				options.push({ nameStr : "Orvin",
 					tooltip : "Chat with Orvin and try to find out more about the situation.",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("You wait for an opening when Orvin doesn’t look <i>too</i> busy, then step in and greet the innkeeper. He hesitates a moment, then returns your greeting with a smile, looking perhaps a little too happy to have an excuse to set down the empty dishes he’s carrying and take a breather.", parse);
 						Text.NL();
@@ -1296,14 +1296,14 @@ export namespace VaughnTasksScenes {
 			}
 			options.push({ nameStr : "Kitchen",
 				tooltip : "Sneak into the kitchen and get up to some mischief.",
-				func() {
+				func: () => {
 					VaughnTasksScenes.Poisoning.Kitchen(opts);
 				}, enabled : true,
 			});
 			if (!opts.Waiters) {
 				options.push({ nameStr : "Waiters",
 					tooltip : "Waylay one of the waiters with your charm and try to create an opening.",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("Hmm. If the kitchen’s a no-go, then that leaves you with the only option of waylaying the food en route to its destination. <i>That</i> in turn means having to deal with one of the many waiters plying up and down the staircase leading to the inn’s upper stories, and you get the distinct feeling that whatever shenanigans you’re going to cook up to distract the waiters with, they’re going to have to be good. Really good.", parse);
 						Text.NL();
@@ -1325,7 +1325,7 @@ export namespace VaughnTasksScenes {
 			if (!opts.Lei) {
 				options.push({ nameStr : "Lei",
 					tooltip : "Ask Lei and see if you can learn more about the situation.",
-					func() {
+					func: () => {
 						opts.Lei = true;
 
 						Text.Clear();
@@ -1340,7 +1340,7 @@ export namespace VaughnTasksScenes {
 						const options: IChoice[] = [];
 						options.push({ nameStr : "Yes",
 							tooltip : "Ask Lei if he’s willing to moonlight for you.",
-							func() {
+							func: () => {
 								Text.Clear();
 								Text.Add("<i>“Yes, [playername]? What is it?”</i>", parse);
 								Text.NL();
@@ -1374,7 +1374,7 @@ export namespace VaughnTasksScenes {
 									const options: IChoice[] = [];
 									options.push({ nameStr : "Yes",
 										tooltip : "Pay his asking price.",
-										func() {
+										func: () => {
 											Text.Clear();
 											Text.Add("<i>“Delightful.”</i> Lei’s expression doesn’t change as he counts your money, then without warning, he stands from his seat.", parse);
 											Text.NL();
@@ -1416,7 +1416,7 @@ export namespace VaughnTasksScenes {
 									});
 									options.push({ nameStr : "No",
 										tooltip : "You can’t or won’t pay.",
-										func() {
+										func: () => {
 											Text.Clear();
 											Text.Add("You shake your head and say that on second thought, maybe you’ll do it yourself. Lei shows no displeasure at your words, but simply nods.", parse);
 											Text.NL();
@@ -1447,7 +1447,7 @@ export namespace VaughnTasksScenes {
 						});
 						options.push({ nameStr : "No",
 							tooltip : "Nah, you’ll pass.",
-							func() {
+							func: () => {
 								Text.Clear();
 								Text.Add("Lei glances at you as you make yourself comfortable in the seat. <i>“[playername]. What brings you to me today?”</i>", parse);
 								Text.NL();
@@ -1476,7 +1476,7 @@ export namespace VaughnTasksScenes {
 			if (!opts.Twins) {
 				options.push({ nameStr : "Twins",
 					tooltip : "Could the Twins possibly lend a hand here?",
-					func() {
+					func: () => {
 						Text.Clear();
 
 						opts.Twins = true;
@@ -1633,7 +1633,7 @@ export namespace VaughnTasksScenes {
 				const options: IChoice[] = [];
 				options.push({ nameStr : "Terry",
 					tooltip : Text.Parse("The thief's experience should really pay off here; you doubt [heshe]'ll have any trouble getting it done.", parse),
-					func() {
+					func: () => {
 						Text.Clear();
 
 						parse.boygirl = terry.mfPronoun("boy", "girl");
@@ -1710,7 +1710,7 @@ export namespace VaughnTasksScenes {
 				});
 				options.push({ nameStr : "Yourself",
 					tooltip : "If you want something done properly, you’ll have to do it yourself.",
-					func() {
+					func: () => {
 						Text.Clear();
 						VaughnTasksScenes.Poisoning.KitchenYourself();
 					}, enabled : true,
@@ -1821,13 +1821,13 @@ export namespace VaughnTasksScenes {
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Peek",
 				tooltip : "Face it, you just want to know what’s going on inside.",
-				func() {
+				func: () => {
 					VaughnTasksScenes.Poisoning.AphrodisiacPeek();
 				}, enabled : true,
 			});
 			options.push({ nameStr : "Leave",
 				tooltip : "You don’t want to linger here any more than necessary.",
-				func() {
+				func: () => {
 					VaughnTasksScenes.Poisoning.AphrodisiacLeave();
 				}, enabled : true,
 			});
@@ -1873,7 +1873,7 @@ export namespace VaughnTasksScenes {
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Join",
 				tooltip : "Why let a good orgy go to waste? Join in the fun!",
-				func() {
+				func: () => {
 					Text.Clear();
 					parse.ar = player.Armor() ? Text.Parse("[armor] and ", parse) : "";
 					Text.Add("Screw this, you could never resist a good orgy, and the fact that it’s an impromptu one comprised of the upper crust makes it all the more dangerous and appealing. Wading through the mess of fabric and bodies, skin rubbing against skin and hands grasping at your calves and thighs, you allow yourself to embrace the increasingly cloying atmosphere of sweet sex growing in the inn suite, hurriedly stripping off your [ar]clothes as you approach the epicenter of the fuck-pile - Lady Heydrich.", parse);
@@ -1930,7 +1930,7 @@ export namespace VaughnTasksScenes {
 			if (room69.flags.Rel >= Room69Flags.RelFlags.GoodTerms) {
 				options.push({ nameStr : "69",
 					tooltip : "Come to think of it, you know someone who might keep them occupied for a while…",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("An idea comes to your mind, and a very nasty grin spreads out on your face as it takes form. Yes… you may need to get out of here soon, but there’s someone else who might do a better job of keeping an eye on these fine people, and you know just who it is.", parse);
 						Text.NL();
@@ -1957,7 +1957,7 @@ export namespace VaughnTasksScenes {
 			}
 			options.push({ nameStr : "Leave",
 				tooltip : "All right, you know the the job is done. Get out!",
-				func() {
+				func: () => {
 					VaughnTasksScenes.Poisoning.AphrodisiacLeave();
 				}, enabled : true,
 			});

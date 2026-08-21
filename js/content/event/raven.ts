@@ -152,7 +152,7 @@ export namespace RavenMotherScenes {
 				// [Ask][Investigate]
 				const options: IChoice[] = [];
 				options.push({ nameStr : "Ask",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("You ask [person] if [pheshe] knows where the raven went or how to follow it.", parse);
 						Text.NL();
@@ -166,7 +166,7 @@ export namespace RavenMotherScenes {
 					tooltip : Text.Parse("Ask [person] for help.", parse),
 				});
 				options.push({ nameStr : "Investigate",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("Ignoring [person]’s bemused entreaties, you carefully examine the corner where the raven disappeared. There’s something different about it. Reality - for lack of a better term - feels thinner there, easier to penetrate. Is it simply because it’s such an unimportant part of the dream?", parse);
 						Text.NL();
@@ -255,7 +255,7 @@ export namespace RavenMotherScenes {
 		// [Comply][Don’t]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Comply",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("It cost you a lot of effort to catch the bird, but this seems for the best. As you release your hold, the raven’s claws dig into your hands as it... no, as she jumps up and takes wing with a croak of indignation. In a moment, you lose track of her among the multitude of her kin.", parse);
 				Text.NL();
@@ -268,7 +268,7 @@ export namespace RavenMotherScenes {
 			tooltip : "Release the raven.",
 		});
 		options.push({ nameStr : "Don’t",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("It cost you a lot of effort to catch the bird. You’re not going to letting it go this easily. You tell the girl that if she wants it back, she’ll have to explain what this is all about, and explain well.", parse);
 				Text.NL();
@@ -314,7 +314,7 @@ export namespace RavenMotherScenes {
 		// [Rephrase][Keep going]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Rephrase",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You take a few moments to phrase your question. Can you help me understand what information and reasoning led you to believe that it’s desirable to send ravens to observe my dreams?", parse);
 				Text.NL();
@@ -357,7 +357,7 @@ export namespace RavenMotherScenes {
 			tooltip : "Actually, now that you think about, there’s a better way to ask her.",
 		});
 		options.push({ nameStr : "Keep going",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Well, you’ll get there eventually. You ask why she needed to know what kind of person you are.", parse);
 				Text.NL();
@@ -403,19 +403,19 @@ export namespace RavenMotherScenes {
 			// [Questions][Nah]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Questions",
-				func() {
+				func: () => {
 					RavenMotherScenes.TheHuntQuestions(prompt);
 				}, enabled : true,
 				tooltip : "There are a few things you want to ask her...",
 			});
 			options.push({ nameStr : "Ravens",
-				func() {
+				func: () => {
 					RavenMotherScenes.RavenPrompt(prompt);
 				}, enabled : true,
 				tooltip : "Ask her to do something about the ravens.",
 			});
 			options.push({ nameStr : "Leave",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You rise to your feet, feeling a thousand stares follow your movement suspiciously. Your eyes meet the Raven Mother’s and you tell her that it’s time you went. If you are going to ask her for something, you don’t know what it is yet.", parse);
 					Text.NL();
@@ -454,7 +454,7 @@ export namespace RavenMotherScenes {
 		// [Herself][Ravens][Dreams]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Herself",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You ask the Raven Mother what she is.", parse);
 				Text.NL();
@@ -470,7 +470,7 @@ export namespace RavenMotherScenes {
 			tooltip : "Just what is she exactly?",
 		});
 		options.push({ nameStr : "Ravens",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Feeling a little foolish, you ask the Raven Mother how she's connected to ravens.", parse);
 				Text.NL();
@@ -492,7 +492,7 @@ export namespace RavenMotherScenes {
 			tooltip : "What's her connection to the ravens?",
 		});
 		options.push({ nameStr : "Dreams",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You ask the Raven Mother if she’s has some special link to dreams. After all, she sent ravens to spy on you in dreams, and this meeting is taking place in a dream as well.", parse);
 				Text.NL();
@@ -532,7 +532,7 @@ export namespace RavenMotherScenes {
 		// [Stop][Send them]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Stop",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("The birds are really quite annoying. You tell the Raven Mother that she’s probably learned all she’s going to learn from your dreams by now, so she should stop sending her winged spies.", parse);
 				Text.NL();
@@ -548,7 +548,7 @@ export namespace RavenMotherScenes {
 			tooltip : "Ask her to stop sending ravens to watch your dreams.",
 		});
 		options.push({ nameStr : "Send them",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Somehow, your dreams feel a little better with the birds there. You tentatively explain that perhaps you wouldn’t mind seeing ravens in your dreams after all.", parse);
 				Text.NL();

@@ -78,7 +78,7 @@ export namespace ChiefScenes {
 			// [Polite][Rude]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Polite",
-				func() {
+				func: () => {
 					chief.relation.IncreaseStat(100, 10);
 					Text.Add("You politely ask what he means, not sure what [elfname] has promised, or who the old man is, for that matter. The second question is answered almost immediately, as the grizzled man speaks. <i>“I'm the chief, herding these here folks in about the same direction, looking out for their interests, so to speak.”</i> The old man takes a deep draft from his pipe before continuing.", parse);
 					Text.NL();
@@ -87,7 +87,7 @@ export namespace ChiefScenes {
 				tooltip : "Remain polite.",
 			});
 			options.push({ nameStr : "Rude",
-				func() {
+				func: () => {
 					Text.Add("Not intending to take any sass from the old fart, your snide reply is cut short as the old man pokes the air from your lungs with a sharp stab of his pipe to the sternum. Instinctively sucking in air, your indignant protests turn to uncontrollable coughing as you breathe in a mouthful of blue-black smoke.", parse);
 					Text.NL();
 					Text.Add("<i>“No reason to take that tone, young one,”</i> the old man grins at you. <i>“I'm the chief around these parts, and whatever magical maguffin you carry around, that isn't going to change. Show some respect for your elders.”</i>", parse);
@@ -149,7 +149,7 @@ export namespace ChiefScenes {
 		// [Portal][Nomads]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Portal",
-			func() {
+			func: () => {
 				Text.Clear();
 				chief.relation.IncreaseStat(30, 5);
 				Text.Add("Wishing to know more about portals in general, you query the old man about their properties.");
@@ -196,7 +196,7 @@ export namespace ChiefScenes {
 			tooltip : "Ask the chief about the properties of portals.",
 		});
 		options.push({ nameStr : "Nomads",
-			func() {
+			func: () => {
 				Text.Clear();
 				chief.relation.IncreaseStat(30, 5);
 				Text.Add("Wishing to know more about the other inhabitants of the camp, you ask the old man about them.");
@@ -277,7 +277,7 @@ export namespace ChiefScenes {
 			tooltip : "Ask about the other nomads.",
 		});
 		options.push({ nameStr : "Jobs",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“Learning a new trade takes dedication and experience,”</i> the old man explains. <i>“If you focus and apply yourself, you can eventually master new skills, given that you have the proper knowledge.”</i>", parse);
 				Text.NL();

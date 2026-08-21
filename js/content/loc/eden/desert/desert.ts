@@ -90,7 +90,7 @@ DesertLoc.Drylands.enc.AddEnc(() => {
 
 DesertLoc.Drylands.AddEncounter({
 	nameStr : "Lizard",
-	func() {
+	func: () => {
 		return LizardsScenes.GroupEnc();
 	}, odds : 1.0, enc : true,
 	visible : true, enabled : true, hunt : true,
@@ -98,7 +98,7 @@ DesertLoc.Drylands.AddEncounter({
 
 DesertLoc.Drylands.AddEncounter({
 	nameStr : "Naga",
-	func() {
+	func: () => {
 		return NagaScenes.LoneEnc();
 	}, odds : 1.0, enc : true,
 	visible : true, enabled : true, hunt : true,
@@ -106,7 +106,7 @@ DesertLoc.Drylands.AddEncounter({
 
 DesertLoc.Drylands.AddEncounter({
 	nameStr : "Scorpion",
-	func() {
+	func: () => {
 		return ScorpionScenes.LoneEnc();
 	}, odds : 1.0, enc : true,
 	visible : true, enabled : true, hunt : true,

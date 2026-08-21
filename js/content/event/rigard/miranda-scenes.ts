@@ -130,7 +130,7 @@ export namespace MirandaScenes {
 		*/
 		const know = miranda.flags.Herm !== 0;
 		options.push({ nameStr : "Spar",
-			func() {
+			func: () => {
 				Text.Clear();
 				if (miranda.Attitude() >= MirandaFlags.Attitude.Neutral) {
 					Text.Add("<i>“Hah, think you have a shot at beating me, [playername]? I’m not gonna play nice just cause I like you,”</i> Miranda replies, winking. <i>“I could use the workout. Well then, shall we?”</i>", parse);
@@ -188,8 +188,7 @@ export namespace MirandaScenes {
 		const miranda: Miranda = GAME().miranda;
 
 		SetGameState(GameState.Event, Gui);
-		const enc = this;
-		enc.Cleanup();
+		this.Cleanup();
 
 		const parse: IParse = {
 
@@ -216,8 +215,7 @@ export namespace MirandaScenes {
 		const miranda: Miranda = GAME().miranda;
 
 		SetGameState(GameState.Event, Gui);
-		const enc = this;
-		enc.Cleanup();
+		this.Cleanup();
 
 		const parse: IParse = {
 
@@ -285,7 +283,7 @@ export namespace MirandaScenes {
 		// [Decline][Blowjob][Assert]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Decline",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“Your call,”</i> Miranda shrugs, looking a little disappointed.", parse);
 				Text.Flush();
@@ -295,7 +293,7 @@ export namespace MirandaScenes {
 			tooltip : "Turn down her offer.",
 		});
 		options.push({ nameStr : "Blowjob",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“Would be a nice start. Might get you half a lesson,”</i> she toys with you. <i>“Offering anything else?”</i>", parse);
 				Text.Flush();
@@ -303,7 +301,7 @@ export namespace MirandaScenes {
 				// [Decline][Get fucked]
 				const options: IChoice[] = [];
 				options.push({ nameStr : "Get fucked",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("<i>“Hear that, guys? Miranda still has the skills,”</i> the dobie boasts, earning her a few catcalls. You blush at the attention, but there’s no way out of this rabbit hole now.", parse);
 						Text.NL();
@@ -326,7 +324,7 @@ export namespace MirandaScenes {
 						// [No way!][Obey]
 						const options: IChoice[] = [];
 						options.push({ nameStr : "No way!",
-							func() {
+							func: () => {
 								Text.Clear();
 								miranda.subDom.IncreaseStat(100, 2);
 								player.subDom.DecreaseStat(-100, 1);
@@ -336,7 +334,7 @@ export namespace MirandaScenes {
 							tooltip : "That’s going too far!",
 						});
 						options.push({ nameStr : "Obey",
-							func() {
+							func: () => {
 								Text.Clear();
 								miranda.subDom.IncreaseStat(100, 5);
 								player.subDom.DecreaseStat(-100, 2);
@@ -350,7 +348,7 @@ export namespace MirandaScenes {
 					tooltip : "Damn it, Miranda… Alright, you’re game.",
 				});
 				options.push({ nameStr : "Decline",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("<i>“Your call,”</i> Miranda shrugs, looking a little disappointed.", parse);
 						Text.Flush();
@@ -366,7 +364,7 @@ export namespace MirandaScenes {
 		if (miranda.Attitude() >= MirandaFlags.Attitude.Neutral) {
 			const dom = player.SubDom() - miranda.SubDom();
 			options.push({ nameStr : "Assert",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“You take all the fun out of things,”</i> Miranda sighs. <i>“Well, I guess I don’t really have anything better to do. Let’s get into the yard and get started, shall we?”</i> As the two of you head outside, you notice a few odd looks from the guardsmen. Apparently, they aren’t used to Miranda not getting her way with things.", parse);
 
@@ -708,7 +706,7 @@ export namespace MirandaScenes {
 		const options: IChoice[] = [];
 		if (rigard.Visa() && miranda.flags.gBribe < 1) {
 			options.push({ nameStr : "Your job",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“Cute, [playername],”</i> the guardswoman scoffs. <i>“Things work a bit differently here in the slums, though. This is my turf, my rules. Pass or no pass.”</i>", parse);
 					Text.Flush();
@@ -723,7 +721,7 @@ export namespace MirandaScenes {
 		}
 		if (miranda.flags.gBribe < 2) {
 			options.push({ nameStr : "Money",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“Fuck off,”</i> she curtly dismisses you, not interested in your money.", parse);
 					Text.NL();
@@ -738,7 +736,7 @@ export namespace MirandaScenes {
 			});
 		}
 		options.push({ nameStr : "Blowjob",
-			func() {
+			func: () => {
 				Text.Clear();
 				if (miranda.flags.gBJ === 0) { // First
 					Text.Add("You suggest that you could perhaps... relieve her? Miranda’s sour expression slowly shifts to a wide grin.", parse);
@@ -861,7 +859,7 @@ export namespace MirandaScenes {
 		});
 		if (miranda.flags.gBJ >= 5) {
 			options.push({ nameStr : "Buttsex",
-				func() {
+				func: () => {
 					Text.Clear();
 					const first    = miranda.flags.gAnal === 0;
 					const virgin   = player.Butt().virgin;
@@ -1198,7 +1196,7 @@ export namespace MirandaScenes {
 		const options: IChoice[] = [];
 		if (welcomeToRigardPASS) {
 			options.push({ nameStr : "Pass",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“As I said, the only way to legitimately obtain a pass is to apply for one inside the city itself. That can be quite a bothersome process, though,”</i> Miranda explains. <i>“Another way to get inside is to have someone reputable vouch for you. There are a great number of traders and farmers entering and leaving the city daily, and any one of those could provide you entry.”</i>", parse);
 					Text.NL();
@@ -1214,7 +1212,7 @@ export namespace MirandaScenes {
 		}
 		if (welcomeToRigardOUTLAWS) {
 			options.push({ nameStr : "Outlaws",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“You really aren't from around here, are you?”</i> the dog-morph looks at you suspiciously. <i>“I'd have a hard time believing there's someone who isn't familiar with the war and the current tension resulting from it.”</i>", parse);
 					Text.NL();
@@ -1230,7 +1228,7 @@ export namespace MirandaScenes {
 		}
 		if (welcomeToRigardMIRANDA) {
 			options.push({ nameStr : "Miranda",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“Me?”</i> She purses her lips, studying you thoughtfully. <i>“I'm not anyone that special... well, besides being the best fighter the Watch's got.”</i> Her confident stance and athletic build give you the impression that this isn't just bravado. Still... curiously, you ask why she is posted watching the gates if she is so important?", parse);
 					Text.NL();
@@ -1356,7 +1354,7 @@ export namespace MirandaScenes {
 			// [Sure][Nah]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Drop it",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Moving on...", parse);
 
@@ -1365,7 +1363,7 @@ export namespace MirandaScenes {
 				tooltip : "Talk about something else.",
 			});
 			options.push({ nameStr : "Inquire",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“What do you mean?”</i> you ask her. She gives you a long look, weighing you up, before deciding what to say.", parse);
 					Text.NL();
@@ -1379,7 +1377,7 @@ export namespace MirandaScenes {
 				tooltip : "What does she mean by ‘good time’?",
 			});
 			options.push({ nameStr : "Flirt",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("The booze is getting to your head, and you are finding it more difficult to keep your eyes to the more civilized parts of the shapely woman sitting beside you. You shift a bit closer to her until you touch her thigh with your [leg], and murmur softly: <i>“<b>I</b> could show you a good time.”</i>", parse);
 					Text.NL();
@@ -1448,7 +1446,7 @@ export namespace MirandaScenes {
 			// [Comfort][Check]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Comfort",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You shuffle closer and put an arm around her.", parse);
 					Text.NL();
@@ -1475,7 +1473,7 @@ export namespace MirandaScenes {
 				tooltip : "Far be it for you to take advantage of the poor girl.",
 			});
 			options.push({ nameStr : "Check",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("As you lean in closer, you notice that her hands are moving back and forth between her legs, stroking something. She is gasping now, short on breath and with her tongue sticking out. You drop under the table, curious about what she is doing. She squirms a bit and crosses her legs at first, but then concedes and spreads them.", parse);
 					Text.NL();
@@ -1491,7 +1489,7 @@ export namespace MirandaScenes {
 					// [Flee!][Watch][Help her]
 					const options: IChoice[] = [];
 					options.push({ nameStr : "Flee!",
-						func() {
+						func: () => {
 							Text.Clear();
 							Text.Add("A slightly panicked look on your face, you exclaim that she needs another drink, and hurry over to the bar to get one. When you get back, Miranda has calmed down a little bit, looking slightly annoyed. After finishing half the drink, she declares that she has to go home. She stumbles away from you, heading for the exit.", parse);
 							Text.NL();
@@ -1509,7 +1507,7 @@ export namespace MirandaScenes {
 						tooltip : "Nope the fuck out of there.",
 					});
 					options.push({ nameStr : "Watch",
-						func() {
+						func: () => {
 							Text.Clear();
 							Text.NL();
 							Text.Add("Mesmerized by the bobbing rod in front of you, you can't decide what you should do: move out of the way or throw yourself at it. The slight dribble of drool from your mouth is matched by a growing bead of pre-cum on the tip of Miranda's shaft.", parse);
@@ -1538,7 +1536,7 @@ export namespace MirandaScenes {
 						tooltip : "You can’t miss this show.",
 					});
 					options.push({ nameStr : "Help her",
-						func() {
+						func: () => {
 							Text.Clear();
 							Text.Add("In a haze of alcohol and arousal, you lean in closer and softly touch the bulging cock in front of you. After a slight hesitation, you grab it more firmly. Miranda's hands freeze, and she looks down at you, a bit surprised.", parse);
 							Text.NL();
@@ -1631,7 +1629,7 @@ export namespace MirandaScenes {
 		back = back || Gui.PrintDefaultOptions;
 
 		options.push({ nameStr : "Chat",
-			func() {
+			func: () => {
 				Text.Clear();
 
 				const scenes = new EncounterTable();
@@ -1658,7 +1656,7 @@ export namespace MirandaScenes {
 			tooltip : "Just chat for a while.",
 		});
 		options.push({ nameStr : "Guards gossip",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You ask Miranda about her job in the City Watch. What’s the hot gossip? Any juicy details on criminals?", parse);
 				Text.NL();
@@ -1741,7 +1739,7 @@ export namespace MirandaScenes {
 			tooltip : "Ask her what’s new with the City Watch.",
 		});
 		options.push({ nameStr : "Forest",
-			func() {
+			func: () => {
 				Text.Clear();
 				// First
 				if (miranda.flags.Forest === 0) {
@@ -1752,7 +1750,7 @@ export namespace MirandaScenes {
 					// [Sure][Nah]
 					const options: IChoice[] = [];
 					options.push({ nameStr : "Like what?",
-						func() {
+						func: () => {
 							Text.NL();
 							Text.Add("She giggles at you.", parse);
 							Text.NL();
@@ -1764,7 +1762,7 @@ export namespace MirandaScenes {
 						tooltip : "Ask her to explain what she means.",
 					});
 					options.push({ nameStr : "Hunting",
-						func() {
+						func: () => {
 							Text.NL();
 							Text.Add("<i>“I'm a bit different,”</i> she says, <i>“I've walked those woods for years hunting game, I know which creatures to avoid.”</i> She gives you a playful glance and places a hand on your [thigh].", parse);
 							Text.NL();
@@ -1808,7 +1806,7 @@ export namespace MirandaScenes {
 		options.push({nameStr : "Outlaws",
 			tooltip : Text.Parse("Ask her about the rebels in the forest.", parse),
 			enabled : true,
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“The Outlaws, huh.”</i> Miranda pauses for a second, taking a long drink from her tankard. <i>“Don’t get me wrong, it’s hard to stand on their side when they start ambushing caravans and burning down countryside manors, but I can at least see where they are coming from.”</i>", parse);
 				Text.NL();
@@ -1823,7 +1821,7 @@ export namespace MirandaScenes {
 		options.push({nameStr : "Rigard",
 			tooltip : Text.Parse("Ask her about the city she calls home.", parse),
 			enabled : true,
-			func() {
+			func: () => {
 				Text.Clear();
 				const scenes = new EncounterTable();
 
@@ -1870,7 +1868,7 @@ export namespace MirandaScenes {
 		options.push({nameStr : "Kids",
 			tooltip : Text.Parse(kidsFirst ? "So… uh, from her tales, it sounds like she gets around a lot. Isn’t she ever worried about fathering a bastard? Or getting pregnant herself?" : "Has she ever considered getting kids?", parse),
 			enabled : miranda.flags.ssRotMax >= 3 && miranda.flags.bgRotMax >= 5 && miranda.Relation() >= 10,
-			func() {
+			func: () => {
 				miranda.flags.Talk |= MirandaFlags.Talk.Kids;
 				Text.Clear();
 				if (kidsFirst) {
@@ -1922,7 +1920,7 @@ export namespace MirandaScenes {
 
 		if ((rigard.Krawitz.Q >= RigardFlags.KrawitzQ.CaughtTerry) && (terry.flags.Saved === TerryFlags.Saved.NotStarted)) {
 			options.push({ nameStr : "Thief",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“The thief? Why do you care?”</i>", parse);
 					Text.NL();
@@ -1953,7 +1951,7 @@ export namespace MirandaScenes {
 		//const parse: IParse = {};
 
 		options.push({ nameStr : "Her past",
-			func() {
+			func: () => {
 				Gui.Callstack.push(() => {
 					Text.Flush();
 					next();
@@ -1963,7 +1961,7 @@ export namespace MirandaScenes {
 			tooltip : "Ask Miranda about her past.",
 		});
 		options.push({ nameStr : "Her conquests",
-			func() {
+			func: () => {
 				Gui.Callstack.push(() => {
 					Text.Flush();
 					next();
@@ -2048,7 +2046,7 @@ export namespace MirandaScenes {
 			// [Take Charge][Let Her Lead]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Take Charge",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You lunge forward, wrapping your arms around her and pulling her into a passionate kiss. Idly, you slam the door shut behind you, blatantly squeezing her ass cheeks as you feel her tented erection rubbing against your midriff.", parse);
 					MirandaScenes.HomeDommySex();
@@ -2056,7 +2054,7 @@ export namespace MirandaScenes {
 				tooltip : "This time, you get to run this show.",
 			});
 			options.push({ nameStr : "Passive",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("With a smile, you simply stand there on the doorstep and spread your arms, making it clear that you are welcoming Miranda to do with you as she wills. A hungry grin crosses the morph's lips, eyes alight as she promptly grabs you and bodily drags you in over the threshold, slamming the door shut behind you.", parse);
 					MirandaScenes.HomeSubbySex();
@@ -2114,7 +2112,7 @@ export namespace MirandaScenes {
 			// [Apologize][Leave]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Apologize",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You apologize to her for running out, giving her a weak smile. Miranda’s expression softens up a bit.", parse);
 					Text.NL();
@@ -2132,7 +2130,7 @@ export namespace MirandaScenes {
 				tooltip : "Apologize for running out on her.",
 			});
 			options.push({ nameStr : "Leave",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Murmuring some excuse, you start to shuffle away. There is a slightly hurt look in her eyes.", parse);
 					Text.NL();
@@ -2169,7 +2167,7 @@ export namespace MirandaScenes {
 			// [Accept][Leave][Touch it]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Accept",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You declare that it doesn’t matter what she has between her legs, you’ll still be her friend, even if her revelation startled you a little bit. Miranda makes a happy yip and gives you a quick hug, her soft member hitting your [thigh] with a wet slap. A bit embarrassed, she shoves her cock back into her pants, then leads you back to the benches. As you walk, she leans on your shoulder and fondles your butt playfully.", parse);
 					Text.NL();
@@ -2185,7 +2183,7 @@ export namespace MirandaScenes {
 				tooltip : "Got no problem with that, you still want to hang out with her.",
 			});
 			options.push({ nameStr : "Leave",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Murmuring some excuse, you start to shuffle away. There is a slightly hurt look in her eyes.", parse);
 					Text.NL();
@@ -2201,7 +2199,7 @@ export namespace MirandaScenes {
 				tooltip : "Not interested. Find an excuse to ditch her.<br><br>...On second thought, getting on the bad side of the law might have reprecussions.",
 			});
 			options.push({ nameStr : "Touch it",
-				func() {
+				func: () => {
 					miranda.flags.Attitude = MirandaFlags.Attitude.Nice;
 
 					Text.Clear();
@@ -2224,7 +2222,7 @@ export namespace MirandaScenes {
 					const options: IChoice[] = [];
 					if (player.FirstCock()) {
 						options.push({ nameStr : "Fuck her",
-							func() {
+							func: () => {
 								Text.Clear();
 								Text.Add("You envelop Miranda in your arms, embracing the horny doggy close and playfully nipping at her fluffy ears. She hugs you close as you lift her up so she sits in your lap, facing you. You reach down and pull out your [cocks] from [itsTheir] confines. [ItThey] [isAre] painfully hard as [itThey] snap[notS] up against her crotch, pressing between her ample testicles.", parse);
 								Text.NL();
@@ -2279,7 +2277,7 @@ export namespace MirandaScenes {
 						});
 					}
 					options.push({ nameStr : "Ride her",
-						func() {
+						func: () => {
 							let target = BodyPartType.ass;
 							if (player.FirstVag()) {
 								target = BodyPartType.vagina;
@@ -2348,7 +2346,7 @@ export namespace MirandaScenes {
 						tooltip : "Give her relief by riding her thick cock.",
 					});
 					options.push({ nameStr : "Let her",
-						func() {
+						func: () => {
 							Text.Clear();
 							Text.Add("You blush a bit, eyeing her throbbing member nervously. Unsure if you are doing the right thing, you ask if she’ll be gentle with you.", parse);
 							Text.NL();
@@ -2474,7 +2472,7 @@ export namespace MirandaScenes {
 		const dom = miranda.SubDom() - player.SubDom();
 
 		options.push({ nameStr : "Talk",
-			func() {
+			func: () => {
 				Text.Clear();
 
 				const scenes = new EncounterTable();
@@ -2589,7 +2587,7 @@ export namespace MirandaScenes {
 			// [Let her][Not now]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Let her",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“No complaints? Good bitch,”</i> she murmurs as she twirls you around, pushing you ahead. You make no attempt to stop her as she manhandles you through the door and slams it shut behind you.", parse);
 					MirandaScenes.HomeSubbySex();
@@ -2597,7 +2595,7 @@ export namespace MirandaScenes {
 				tooltip : "She’s going to have her way with you no matter what you say, why resist?",
 			});
 			options.push({ nameStr : "Not now",
-				func() {
+				func: () => {
 					Text.Clear();
 					parse.himher = terry.flags.Met < TerryFlags.Met.Found ? "him" : "her";
 					Text.Add("<i>“C’mon, I need some relief here!”</i> Miranda complains, attempting to shove you inside. You barely manage to avoid her grab, dancing outside her reach. <i>“Fine,”</i> she growls, <i>“but I’m getting some action today <b>one</b> way or another.”</i> That doesn’t sound like it bodes well for the thief when you finally catch [himher].", parse);
@@ -2625,7 +2623,7 @@ export namespace MirandaScenes {
 			// [Take charge][Let her lead][Not now]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Take charge",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You order her to stop chatting and open the door, taking the chance to give her butt a grope before pushing the surprised herm inside. You step inside and close the door after you. Time to take both of your minds off chasing thieves for a while.", parse);
 
@@ -2634,7 +2632,7 @@ export namespace MirandaScenes {
 				tooltip : "Take her inside and fuck her.",
 			});
 			options.push({ nameStr : "Let her lead",
-				func() {
+				func: () => {
 					Text.Clear();
 					parse.boyGirl = player.mfTrue("boy", "girl");
 					Text.Add("You nod eagerly, looking at her imploringly. <i>“Good [boyGirl],”</i> Miranda grins, twirling you around and pushing you through the doorway into her home. The dobie closes the door after you, sealing off your escape.", parse);
@@ -2643,7 +2641,7 @@ export namespace MirandaScenes {
 				tooltip : "Let Miranda take you inside and relieve her stress.",
 			});
 			options.push({ nameStr : "Not now",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“You are such a tease sometimes, you know that?”</i> Miranda complains. She grudgingly nods in agreement, leading the way as you try to figure out where to search next.", parse);
 					Text.Flush();
@@ -2710,7 +2708,7 @@ export namespace MirandaScenes {
 		// [BJ] TODO
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Blow her",
-			func() {
+			func: () => {
 				Text.Clear();
 
 				MirandaScenes.TavernSexPublicBJ();
@@ -2816,7 +2814,7 @@ export namespace MirandaScenes {
 				// [Stay][Don’t]
 				const options: IChoice[] = [];
 				options.push({ nameStr : "Stay",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("Miranda scoots over and pats a relatively clean spot beside her. You strip down and join her, using her arm as a pillow. With a grin, she draws you close, resting your head against her breast as her breathing levels out. Soon enough, you join her in a restful slumber.", parse);
 						Text.NL();
@@ -2839,7 +2837,7 @@ export namespace MirandaScenes {
 					tooltip : "Why not? You’re feeling pretty tired after all.",
 				});
 				options.push({ nameStr : "Don’t",
-					func() {
+					func: () => {
 						Text.Clear();
 						// TODO
 						TimeStep({hour: 2});
@@ -2884,27 +2882,27 @@ export namespace MirandaScenes {
 		// [Fuck vag][Fuck anal][Ride vag][Ride anal][Cellar/Dungeon]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Fuck vag",
-			func() {
+			func: () => {
 				MirandaScenes.HomeDommySexFuckDobieVag(cocksInVag);
 			}, enabled : cocksInVag.length > 0,
 			tooltip : "Take her upstairs and fuck her.",
 		});
 		options.push({ nameStr : "Fuck anal",
-			func() {
+			func: () => {
 				MirandaScenes.HomeDommySexFuckDobieAss(cocksInAss);
 			}, enabled : cocksInAss.length > 0,
 			tooltip : "The dommy doggie likes giving, let’s see if she likes receiving.",
 		});
 		if (player.FirstVag()) {
 			options.push({ nameStr : "Ride vag",
-				func() {
+				func: () => {
 					MirandaScenes.HomeDommySexRideDobieCockVag();
 				}, enabled : true,
 				tooltip : "Pin Miranda on her back and ride her like there’s no tomorrow.",
 			});
 		}
 		options.push({ nameStr : "Ride anal",
-			func() {
+			func: () => {
 				MirandaScenes.HomeDommySexRideDobieCockAnal();
 			}, enabled : true,
 			tooltip : "Take that juicy cock of hers for a ride she won’t soon forget.",
@@ -2956,7 +2954,7 @@ export namespace MirandaScenes {
 		// [Take oral][Fuck][Submit]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Take oral",
-			func() {
+			func: () => {
 				Text.Clear();
 				if (dom < -25) {
 					Text.Add("An incredulous look crosses Miranda’s face at your demand, followed by her breaking out into laughter. She places a firm hand on your hip, and slowly drives her cock home, impaling you on her rigid shaft. You let out a surprised yelp, but are unable to push her off. The grinning dobie just grins at your fidgeting attempts to escape her.", parse);
@@ -3046,7 +3044,7 @@ export namespace MirandaScenes {
 			tooltip : "No, she’s not going to have it that easy. How about <i>she</i> pleasure <i>you</i> first?",
 		});
 		options.push({ nameStr : "Fuck",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Well, let's see if she’s ready for <i>this</i>. In a sudden motion, you thrust your [hips] downward, impaling yourself on the dog-herm’s cock all the way to the knot. Your ferocity catches Miranda off-guard, though she’s quick on the uptake, placing her hands on your hips to help guide your frenzied fucking.", parse);
 				Text.NL();
@@ -3055,7 +3053,7 @@ export namespace MirandaScenes {
 			tooltip : "You can’t wait to get started!",
 		});
 		options.push({ nameStr : "Submit",
-			func() {
+			func: () => {
 				Text.Clear();
 				if (dom < -25) {
 					Text.Add("Your slight hesitation and the faint blush on your cheeks are the only signs of submission the dommy dobie needs. With a smug grin, she flips you over on your back, her cock hovering at your entrance.", parse);
@@ -3134,7 +3132,7 @@ export namespace MirandaScenes {
 		// [Knot][No knot]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Knot",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Even as you feel the first jet of dog-seed pour inside your used sex, you press down <i>hard</i> knowing that your only shot of forcing Miranda’s massive knot inside you is before it has time to expand to its full size. It’s an incredibly tight fit, but in a joint effort and with the aid of gravity, your crotches finally grind together, sealed with a bulge the size of a coconut.", parse);
 				Text.NL();
@@ -3166,7 +3164,7 @@ export namespace MirandaScenes {
 			tooltip : "Just a little more... make her breed you!",
 		});
 		options.push({ nameStr : "No knot",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You strain your [hand]s on her chest, barely managing to overpower the exhausted doggie before she pulls you down on her knot. Realizing that she’s grown too big to fit inside you, Miranda abandons her efforts, letting her hands fall down to her sides while she rides out her orgasm. Knot or not, you can still feel copious amounts of dog-seed basting your innards, though as least as much escapes your cunt to pool between Miranda’s legs.", parse);
 				Text.NL();
@@ -3357,7 +3355,7 @@ export namespace MirandaScenes {
 		// [Boobs][Cunt][Cock]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Boobs",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Before she can struggle further, you grasp her offered breasts, pinching and pulling at her erect nipples. The herm groans, gripping at the sheets as her cock twitches, bouncing on her stomach.", parse);
 				target = Target.boobs;
@@ -3366,7 +3364,7 @@ export namespace MirandaScenes {
 			tooltip : "Massage her tits.",
 		});
 		options.push({ nameStr : "Cunt",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("The herm's got another hole that is unoccupied - no wonder she is being fiesty. Grinning, you play with her cunt, thrusting your fingers into her folds and teasing her clit. Her other, significantly bigger ‘clit’ twitches appreciatively.", parse);
 				target = Target.cunt;
@@ -3375,7 +3373,7 @@ export namespace MirandaScenes {
 			tooltip : "Start working that pussy of hers.",
 		});
 		options.push({ nameStr : "Cock",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Without hesitating, you grasp Miranda’s erect cock, jerking it rapidly while your other hand fondles her heavy balls. The herm throws her head back, moaning loudly as you work her shaft.", parse);
 				target = Target.cock;
@@ -3673,7 +3671,7 @@ export namespace MirandaScenes {
 		// [GetLube] [Pre-Lube] [Blow-Lube] [Cunt-Lube]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Get Lube",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“Hang on,”</i> she says, reaching for a nearby drawer. She fumbles around with the contents before producing a jar. <i>“Catch!</i> she exclaims as she tosses the container.", parse);
 				Text.NL();
@@ -3689,7 +3687,7 @@ export namespace MirandaScenes {
 			tooltip : "If Miranda likes anal as much as she says she does, she’s gotta have some around here.",
 		});
 		options.push({ nameStr : "Pre-Lube",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("While you still have a grip on her balls, you reach back with your free hand, and you start to stroke her dick. Sliding up and down her length with smooth, even movements, you toy with her pointy glans with thumb and fingertips. Pre-cum bubbles hot and wet from her urethra, spilling over your digits, and you caress her cock until your [hand] is nice and slick. Deeming it sufficiently covered, you remove your fingers from Miranda's shaft, a soft whimper escaping the herm, and begin to massage your [anus], tenderly rubbing the sexual fluids into your back passage. You allow your eyes to close and moan softly in pleasure as you stroke and play with your asshole, working a thumbtip inside to ensure a nice, solid coating inside and out.", parse);
 				Text.NL();
@@ -3703,7 +3701,7 @@ export namespace MirandaScenes {
 			tooltip : "Why not play with her a little and see if you can't milk her enough to use her own juices for lube?",
 		});
 		options.push({ nameStr : "Blow-Lube",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Still retaining your grip on the herm's balls, you swivel your hips around until you are reverse-straddling her, your face pointing toward Miranda's feet... and, more importantly, her dick. You allow yourself to be seated on her stomach and then lie down, pushing your rear up toward the dog-morph's face and bringing your own face down to be level with Miranda's jutting girl-cock. Sticking out your [tongue], you start to gently lap at the ruddy flesh before you, running your tongue up and down its length with smooth motions, painstakingly coating it with your saliva.", parse);
 				Text.NL();
@@ -3732,7 +3730,7 @@ export namespace MirandaScenes {
 		});
 		if (player.FirstVag()) {
 			options.push({ nameStr : "Cunt-Lube",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Shifting your hips slightly, you align Miranda's cock not with your ass, but with your [vag], lowering your body until the heat of it is wafting across her sensitive prickflesh.", parse);
 					Text.NL();
@@ -3884,7 +3882,7 @@ export namespace MirandaScenes {
 			// [Take Knot] [Skip Knot]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Take knot",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Mind made up, your next sink is your last as you force yourself upon the bloated bulge of flesh at the base of Miranda's girl-cock. Your teeth clench and your whole body strains at the effort; it feels like you're trying to insert an apple up your ass, but your determination and sheer stubbornness prevails over the weakness of the flesh.", parse);
 					Text.NL();
@@ -3932,7 +3930,7 @@ export namespace MirandaScenes {
 				tooltip : "Miranda's clearly aching for it, why not let her tie you this time?",
 			});
 			options.push({ nameStr : "Skip knot",
-				func() {
+				func: () => {
 					Text.Clear();
 					parse.secondOwn = player.FirstCock() ? "second" : "own";
 					Text.Add("Abandoning Miranda's balls, you instead seize hold of her knot, squeezing it with your fingers even as your ass wrings down on her shaft, trying to milk her. The sensation is all that Miranda needs, the morph howling in ecstasy as she cums inside of you, the feeling of her hot semen geysering up into your sensitive [anus] is enough to trigger your [secondOwn] climax in turn.", parse);
@@ -4243,7 +4241,7 @@ export namespace MirandaScenes {
 			// [Inside][Outside][Ass]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Inside",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You are not about to stop here. With a rapid series of thrusts, you go over the edge and pour your cum into the horny herm.", parse);
 
@@ -4257,7 +4255,7 @@ export namespace MirandaScenes {
 				tooltip : "Pour your load into the dommy herm.",
 			});
 			options.push({ nameStr : "Outside",
-				func() {
+				func: () => {
 					Text.Clear();
 					load = player.OrgasmCum();
 					if (mode === Mode.back) {
@@ -4278,7 +4276,7 @@ export namespace MirandaScenes {
 			});
 			if (widenButt) {
 				options.push({ nameStr : "Ass",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("By now, you’ve worked your thumbs into her ass to the knuckle, giving her a thorough anal workout even as you rail her pussy. Just before you are about to blow, you pull out and plunge your [cock] into Miranda’s butt. The guardswoman gives a surprised yelp, trailing off into a moan as you pour your hot cum inside her.", parse);
 
@@ -4358,7 +4356,7 @@ export namespace MirandaScenes {
 				// [Stay][Don’t]
 				const options: IChoice[] = [];
 				options.push({ nameStr : "Stay",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("Miranda scoots over and pats a clean spot beside her. You strip down and join her, using her arm as a pillow. With a grin, she draws you close, resting your head against her breast as her breathing levels out. Soon enough, you join her in a restful slumber.", parse);
 						Text.NL();
@@ -4381,7 +4379,7 @@ export namespace MirandaScenes {
 					tooltip : "Why not? You’re feeling pretty tired after all.",
 				});
 				options.push({ nameStr : "Don’t",
-					func() {
+					func: () => {
 						Text.Clear();
 						// TODO
 						TimeStep({hour: 2});
@@ -4476,7 +4474,7 @@ export namespace MirandaScenes {
 		// [Take anal][Take vag][Dommy ride]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Take anal",
-			func() {
+			func: () => {
 				MirandaScenes.HomeSubbySexTakeAnal(location);
 			}, enabled : true,
 			tooltip : "You need her... offer your ass to the horny herm.",
@@ -4485,7 +4483,7 @@ export namespace MirandaScenes {
 		/*
 		if (player.FirstVag()) {
 			options.push({ nameStr : "Take vag",
-				func() {
+				func: () => {
 					// Do nothing
 					Text.Flush();
 				}, enabled : false,
@@ -4498,7 +4496,7 @@ export namespace MirandaScenes {
 		//const p1Cock     = player.BiggestCock(cocksInVag);
 
 		options.push({ nameStr : "Dommy ride",
-			func() {
+			func: () => {
 				MirandaScenes.HomeSubbySexDommyRide(location);
 			}, enabled : true,
 			tooltip : "Perhaps... she’d let you fuck her if you asked?",
@@ -5025,7 +5023,7 @@ export namespace MirandaScenes {
 					// [Toys][Shower][Reversal]
 					const options: IChoice[] = [];
 					options.push({ nameStr : "Toys",
-						func() {
+						func: () => {
 							Text.Clear();
 							Text.Add("You make a token effort to rouse the exhausted herm, but it looks like you’ve outlasted her. Growling in frustration, you let your gaze wander… to fall on Miranda’s rather impressive collection of toys. A slow smile spreads on your lips.", parse);
 							Text.NL();
@@ -5066,7 +5064,7 @@ export namespace MirandaScenes {
 
 					if (player.FirstCock()) {
 						options.push({ nameStr : "Blowjob",
-							func() {
+							func: () => {
 
 								const p1Cock = player.BiggestCock();
 
@@ -5141,7 +5139,7 @@ export namespace MirandaScenes {
 						parse.cock = () => p1Cock.Short();
 
 						options.push({ nameStr : "Reversal",
-							func() {
+							func: () => {
 								Text.Clear();
 								Text.Add("You moan desperately, but you’ve thoroughly wrung out the dobie; you probably shouldn’t be expecting more action from her for a few hours… unless you want to turn the tables on her. ", parse);
 								if (nasty || dom > 25) {
@@ -5298,7 +5296,7 @@ export namespace MirandaScenes {
 		// [name]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "name",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("", parse);
 				Text.NL();
@@ -5340,7 +5338,7 @@ export namespace MirandaScenes {
 			// [BlowHer][TakeHer]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Blow her",
-				func() {
+				func: () => {
 					Text.Clear();
 					if (dom > 0) {
 						Text.Add("With a smirk, you tell her to strip down; you feel like a little protein in your diet.", parse);
@@ -5356,7 +5354,7 @@ export namespace MirandaScenes {
 				tooltip : "Give Miranda a blowjob.",
 			});
 			options.push({ nameStr : "Take her",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("With a hungry smile, you close the distance between the two of you and cup Miranda's chin, pulling her into a passionate kiss, feeding the eager morph your [tongue]. Pleasantly, your tongues wrestle for several moments as your arms pull the pair of you together, letting you feel her erection grinding against you.", parse);
 					Text.NL();
@@ -5976,7 +5974,7 @@ export namespace MirandaScenes {
 		// [Take It][69][Footjob]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Take it",
-			func() {
+			func: () => {
 				Text.Clear();
 
 				miranda.relation.IncreaseStat(60, 1);
@@ -6076,7 +6074,7 @@ export namespace MirandaScenes {
 		});
 		if (choices >= 2) {
 			options.push({ nameStr : "69",
-				func() {
+				func: () => {
 					Text.Clear();
 
 					miranda.relation.IncreaseStat(50, 1);
@@ -6207,7 +6205,7 @@ export namespace MirandaScenes {
 		}
 		if (choices >= 3) {
 			options.push({ nameStr : "Footjob",
-				func() {
+				func: () => {
 					Text.Clear();
 
 					miranda.relation.IncreaseStat(50, 1);
@@ -6470,7 +6468,7 @@ export namespace MirandaScenes {
 			// [Polite][Rude][Sultry]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Polite",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You rather guardedly tell her it’s a nice place, not really sure what she’s expecting you to say.", parse);
 					Text.NL();
@@ -6481,7 +6479,7 @@ export namespace MirandaScenes {
 				tooltip : "Very nice. No, really.",
 			});
 			options.push({ nameStr : "Rude",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“Nostalgia is what it is. I have some good memories here, and I’m not ashamed of that.”</i> Miranda looks grumpy at your reaction.", parse);
 					Text.NL();
@@ -6494,7 +6492,7 @@ export namespace MirandaScenes {
 				tooltip : "A rather crude place to take someone on a date, isn’t it?",
 			});
 			options.push({ nameStr : "Sultry",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Rather than being taken aback, Miranda takes your counter in a stride.", parse);
 					Text.NL();
@@ -6588,7 +6586,7 @@ export namespace MirandaScenes {
 		// [Do it][Refuse]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Do it",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“Good, showing your true colors,”</i> Miranda purrs.", parse);
 				Text.NL();
@@ -6616,7 +6614,7 @@ export namespace MirandaScenes {
 			tooltip : "Get down on your knees and give her a blowjob.",
 		});
 		options.push({ nameStr : "Refuse",
-			func() {
+			func: () => {
 				Text.Clear();
 				if (miranda.Attitude() >= MirandaFlags.Attitude.Neutral) {
 					Text.Add("<i>“Well, fuck. I’m sure you’ll come around sooner or later.”</i> Miranda sounds determined, if a bit disappointed. <i>“I’m not giving up on this, but you are off the hook until later tonight. Shall we go?”</i>", parse);
@@ -6667,7 +6665,7 @@ export namespace MirandaScenes {
 			// [Drink][Don’t]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Drink",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You both down your mugs, your head swimming and throat burning from the incredibly strong liquid.", parse);
 					Text.NL();
@@ -6709,7 +6707,7 @@ export namespace MirandaScenes {
 				tooltip : "Bottoms up!",
 			});
 			options.push({ nameStr : "Don’t",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“Come on, don’t be such a pussy,”</i> Miranda growls, downing her own mug in one go. You can almost taste the alcohol in her exhaled breath. <i>“Ahh, that hit the spot.”</i>", parse);
 					Text.NL();
@@ -6768,7 +6766,7 @@ export namespace MirandaScenes {
 				tooltip : "Ask her for some raunchier stories. She’s bound to have some, right?",
 			});
 			options.push({ nameStr : "Her place",
-				func() {
+				func: () => {
 					Text.Clear();
 					if (miranda.Nasty()) {
 						Text.Add("<i>“Can hardly wait to get the dick, can you?”</i> Miranda laughs mockingly. <i>“Fine, let’s head to my place so I can bang your brains out, slut.”</i>", parse);
@@ -6890,7 +6888,7 @@ export namespace MirandaScenes {
 					const options: IChoice[] = [];
 					options.push({ nameStr : "Sure!",
 					// ((Seduction supreme))
-						func() {
+						func: () => {
 							Text.Clear();
 							parse.guyGirl = player.mfTrue("guy", "girl");
 							parse.heshe   = player.mfTrue("he", "she");
@@ -6935,7 +6933,7 @@ export namespace MirandaScenes {
 						tooltip : "That sounds interesting!",
 					});
 					options.push({ nameStr : "No",
-						func() {
+						func: () => {
 							Text.Clear();
 							Text.Add("Seeing the trap coming from a mile away, you politely decline, asking her to continue the story.", parse);
 							Text.NL();
@@ -7249,7 +7247,7 @@ export namespace MirandaScenes {
 			// [Take charge][Passive][Decline]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Take charge",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You catch the surprised Miranda in a deep kiss, fumbling with the door as you grope her. You twirl her around, giving her crotch a familiar grope before you push her into the house, closing the door behind you.", parse);
 
@@ -7260,7 +7258,7 @@ export namespace MirandaScenes {
 				tooltip : "You can’t wait to get a piece of her.",
 			});
 			options.push({ nameStr : "Passive",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“In a subby mood today, pet?”</i> Miranda grins as you let yourself be led inside, pushing you through the open doorway. <i>“That’s how I like them.”</i> You can feel her stiff member poking you in the back, and suspect you might get into even closer contact with it shortly.", parse);
 
@@ -7271,7 +7269,7 @@ export namespace MirandaScenes {
 				tooltip : "Let Miranda call the shots.",
 			});
 			options.push({ nameStr : "Decline",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“That’s really a shame,”</i> Miranda pouts. <i>“Now how am I going to keep concentration on patrol tomorrow? Not even a quickie?”</i>", parse);
 					Text.NL();
@@ -7301,7 +7299,7 @@ export namespace MirandaScenes {
 			// [Passive][Decline]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Passive",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You let yourself be led inside, pushed through the open door with Miranda close in tow. You can feel her stiff member poking you in the back, and suspect you might get into even closer contact with it shortly.", parse);
 
@@ -7312,7 +7310,7 @@ export namespace MirandaScenes {
 				tooltip : "Follow her lead.",
 			});
 			options.push({ nameStr : "Decline",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“If that’s the way you want it, fine. Come see me at the bar when you change your mind.”</i> With that, she turns and slams the door behind her, leaving you on the street outside.", parse);
 					miranda.relation.DecreaseStat(0, 1);
@@ -7342,7 +7340,7 @@ export namespace MirandaScenes {
 			// [Follow][Decline]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Follow",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You back away, shaking your head. ", parse);
 					if (miranda.flags.subCellar !== 0) {
@@ -7358,7 +7356,7 @@ export namespace MirandaScenes {
 				tooltip : miranda.flags.subCellar !== 0 ? "You know very well what’s going to happen… and you look forward to it." : "Sure... what could go wrong?",
 			});
 			options.push({ nameStr : "Decline",
-				func() {
+				func: () => {
 					Text.Clear();
 					if (miranda.flags.subCellar !== 0) {
 						Text.Add("You’re not going back into her cellar again, no way!", parse);
@@ -7413,7 +7411,7 @@ export namespace MirandaScenes {
 		// [Polite][Rude][Sultry]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Polite",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“Hey, you making fun of me?”</i> Miranda growls playfully, nudging you. <i>“I know it doesn’t look like much, but for a kid, there was so much to see and learn. The sailors may seem a bit rough around the edges, but they had much to teach.”</i>", parse);
 				Text.NL();
@@ -7428,7 +7426,7 @@ export namespace MirandaScenes {
 			tooltip : "Seems like a nice place to grow up.",
 		});
 		options.push({ nameStr : "Rude",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“Well… true,”</i> Miranda grudgingly admits. <i>“Still, it’s not that bad. For a little eight-year old, this place was cool as fuck.”</i>", parse);
 				Text.NL();
@@ -7437,7 +7435,7 @@ export namespace MirandaScenes {
 			tooltip : "It stinks of fish and worse.",
 		});
 		options.push({ nameStr : "Sultry",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“Hey… I think of things other than sex, you know.”</i> Miranda frowns at you. <i>“’Sides, I was just a kid at the time.”</i> Seems like you upset her a bit.", parse);
 				Text.NL();
@@ -7469,7 +7467,7 @@ export namespace MirandaScenes {
 		// [Polite][Rude][Sultry]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Polite",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“Nice?”</i> Miranda scoffs. <i>“Did you listen to a word I just said? This place is a cesspool for the lowest criminal scum in the city, anyone who can handle a weapon is welcome to join. Only reason they didn’t try to rape the pretty young doggie’s brains out when she entered was that I had already gotten a bit of a reputation at that point. Anyone brave enough to assault me would end up with a broken arm or two, and be unable to sit properly for a few weeks. I was strong, even back then.”</i>", parse);
 				Text.NL();
@@ -7484,7 +7482,7 @@ export namespace MirandaScenes {
 			tooltip : "How come she left if this is such a nice place?",
 		});
 		options.push({ nameStr : "Rude",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“My thoughts exactly. It was nice work. Shame about the crowd I had to hang with though.”</i> There is a wicked smile playing on Miranda’s lips. <i>“I still bump into some of them these days, but usually in work-related matters. Being the law has its perks at times.”</i>", parse);
 				Text.NL();
@@ -7499,7 +7497,7 @@ export namespace MirandaScenes {
 			tooltip : "What a dungheap.",
 		});
 		options.push({ nameStr : "Sultry",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“Very funny, asshole,”</i> she chuckles. <i>“True, though. Not much else to do between missions. Of course, I gave as much as I took, if not more.”</i> The guardswoman looks thoughtful.", parse);
 				Text.NL();
@@ -7605,7 +7603,7 @@ export namespace MirandaScenes {
 				// [Blow her][Fuck no]
 				const options: IChoice[] = [];
 				options.push({ nameStr : "Blow her",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("<i>“That’s the spirit,”</i> Miranda purrs as you lower yourself into position. <i>“Swallow your pride. Swallow a lot more.”</i> As she’s talking, she undoes her britches, releasing her stiff red cock. You gulp, getting second thoughts. It looks a lot bigger up close…", parse);
 						Text.NL();
@@ -7640,7 +7638,7 @@ export namespace MirandaScenes {
 					tooltip : "Fine, lets do this.",
 				});
 				options.push({ nameStr : "Fuck no",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("<i>“Your choice.”</i> She shrugs, stepping back. <i>“Just for your information, it was the wrong one.”</i> Looking disappointed, the guardswoman heads off, motioning for you to follow her. Still affronted, you follow her into the residential district.", parse);
 						Text.Flush();
@@ -7686,7 +7684,7 @@ export namespace MirandaScenes {
 
 			// [Take charge][Passive][Decline]
 			options.push({ nameStr : "Take charge",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("In response, you go in for a kiss, pushing the surprised woman inside. <i>“I wouldn’t do this for just anyone, you know,”</i> Miranda huffs, a faint blush visible on her cheeks. You close the door with your shoulder, glancing around the room.", parse);
 					MirandaScenes.HomeDommySex();
@@ -7694,7 +7692,7 @@ export namespace MirandaScenes {
 				tooltip : "Heck yeah! Take her for a ride she won’t forget.",
 			});
 			options.push({ nameStr : "Passive",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You nod, smiling demurely and waiting for her to make a move. <i>“Just what I want to hear,”</i> Miranda grins as she pulls you inside, slamming the door behind you.", parse);
 					MirandaScenes.HomeSubbySex();
@@ -7702,7 +7700,7 @@ export namespace MirandaScenes {
 				tooltip : "Let her call the shots.",
 			});
 			options.push({ nameStr : "Decline",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“You don’t know what you’re missing.”</i> Miranda gives you a kiss before seeing you off, adding: <i>“You know where to find me, should you change your mind. I had a good time tonight, [playername], I want to show you my appreciation...”</i>", parse);
 					Text.NL();
@@ -7730,7 +7728,7 @@ export namespace MirandaScenes {
 			// [Get fucked][Decline]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Get fucked",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“Of course you are.”</i> She grins as she pulls you inside, slamming the door behind her. <i>“Had you pinned for a bitch from the moment I saw you.”</i>", parse);
 					MirandaScenes.HomeSubbySex();
@@ -7738,7 +7736,7 @@ export namespace MirandaScenes {
 				tooltip : "If she’s offering, you’re willing.",
 			});
 			options.push({ nameStr : "Decline",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“You are no fun,”</i> she huffs, <i>“as if I wanted to hang out with you just for your company. Well, fuck off then.”</i> With that, she slams the door in your face. From what you can tell, she’s not used to being turned down.", parse);
 					Text.NL();
@@ -7771,7 +7769,7 @@ export namespace MirandaScenes {
 			// [Follow][Decline]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Follow",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("…It’s probably nothing, you tell yourself. And you are about to score, all right! Miranda leads you inside, smiling encouragingly. You have a few moments to look around the room before the floor rushes to meet you, and everything goes black.", parse);
 					MirandaScenes.HomeDommyDungeonFirst();
@@ -7779,7 +7777,7 @@ export namespace MirandaScenes {
 				tooltip : "She is begging for it. After all, what could she do, knock you out and tie you up in her cellar?",
 			});
 			options.push({ nameStr : "Decline",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“Well this was a lousy day,”</i> Miranda grumbles. <i>“Ditched on my own doorstep. Well, fuck you too.”</i> She slams the door in your face, leaving you alone on the street. That could have gone better, you suppose. You’re just about to walk off, a bit unfamiliar with the neighborhood, when you hear a bell ringing loudly. Glancing up, you see that Miranda is watching you from her window, grinning widely as she clangs a small brass bell.", parse);
 					Text.NL();

@@ -191,7 +191,7 @@ export namespace EstevanScenes {
 		});
 		*/
 		options.push({ nameStr : "Ranger",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“Sure, as long as you don’t spread my secrets to Wolfie, I can teach you a few tricks,”</i> the satyr agrees.", parse);
 				if (estevan.flags.Ranger === EstevanFlags.Ranger.NotTalked) {
@@ -228,14 +228,14 @@ export namespace EstevanScenes {
 		});
 		if (estevan.flags.cav !== 0) {
 			options.push({ nameStr : "Cheat",
-				func() {
+				func: () => {
 					Text.Clear();
 
 					const setupFunc = () => {
 						// [Nope][Yeah!]
 						const options: IChoice[] = [];
 						options.push({ nameStr : "Nope",
-							func() {
+							func: () => {
 								Text.Clear();
 								Text.Add("<i>“Aww, but it's such a nice idea!”</i>", parse);
 								Text.Flush();
@@ -248,7 +248,7 @@ export namespace EstevanScenes {
 							tooltip : "On second thought… no.",
 						});
 						options.push({ nameStr : "Yeah!",
-							func() {
+							func: () => {
 								Text.Clear();
 								Text.Add("<i>“Knew I could count on you, partner!”</i> Estevan grins excitedly. <i>“Bring up the subject next time we run a game, and I’ll handle the rest. Poor wolf won’t know what hit him, and he’ll likely be butthurt about it for days after. Heh.”</i>", parse);
 								Text.Flush();
@@ -399,7 +399,7 @@ export namespace EstevanScenes {
 		// [Oblige Estevan][Taunt Estevan]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Oblige Estevan",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("The satyr ‘helps’ you strip and then turns you around so that you're facing the camp. You turn your head and find him staring at your ass. He whistles. <i>“That's some [butt]. Not a pussy, but it’ll do: a hole’s a hole, after all.”</i> ", parse);
 				Text.NL();
@@ -431,7 +431,7 @@ export namespace EstevanScenes {
 				// [Yes!][Uh…]
 				const options: IChoice[] = [];
 				options.push({ nameStr : "Yes!",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("<i>“There’s a good boy,”</i> Estevan says.", parse);
 						Text.NL();
@@ -520,7 +520,7 @@ export namespace EstevanScenes {
 					tooltip : "You’re committed to taking all Estevan has to offer.",
 				});
 				options.push({ nameStr : "Uh…",
-					func() {
+					func: () => {
 						const firstBlow = (estevan.flags.Gay & EstevanFlags.GaySex.Blowjob) === 0;
 
 						Text.Clear();
@@ -605,7 +605,7 @@ export namespace EstevanScenes {
 			tooltip : "Give the horny satyr full access to your ass.",
 		});
 		options.push({ nameStr : "Taunt Estevan", // TODO
-			func() {
+			func: () => {
 				const firstSex = (estevan.flags.Gay & EstevanFlags.GaySex.FuckedHim) === 0;
 				const fuckedBy = (estevan.flags.Gay & EstevanFlags.GaySex.FuckedBy)  !== 0;
 
@@ -696,7 +696,7 @@ export namespace EstevanScenes {
 				// [Facial][Inside]
 				const options: IChoice[] = [];
 				options.push({ nameStr : "Facial",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("You give it a half-dozen more thrusts, just enough to push yourself to the absolute limit, before pulling out of Estevan’s butt. He makes a noise that’s either disappointment or gratitude, or maybe a bit of both. He’s still face-down in the dirt with his freshly-fucked ass wagging in front of you. It’s not his ass that you’re after though, is it?", parse);
 						Text.NL();
@@ -722,7 +722,7 @@ export namespace EstevanScenes {
 					tooltip : "The satyr <i>would</i> look pretty hot with your spunk running down his face, wouldn’t he?",
 				});
 				options.push({ nameStr : "Inside",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("There’s no reason to stop fucking Estevan, after all he’s willing, and—from the size of his cock and how madly it’s pre-cumming as you bang his butt—he seems to be into it. Your lower half is nestled close against the satyr’s rump with just enough room to allow your [hips] to piston back and forth, driving[oneof] your cock[s] into his hole. He uses one of his hands to keep his ass cheeks spread open while yanking his own chain, getting himself off to the insistent rhythms of your aggressive fucking.", parse);
 						Text.NL();

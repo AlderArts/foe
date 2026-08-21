@@ -237,7 +237,7 @@ export namespace AquiliusScenes {
 				const options: IChoice[] = [];
 				options.push({ nameStr : "Yes",
 					tooltip : Text.Parse("Yes, hand over a measure of [ingredient].", parse),
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("Digging about in your possessions, your hands close about a measure of [ingredient] and you hand it over to Aquilius without further ado. The surgeon looks slightly surprised at first, then quickly moves to produce a small square of waxed paper to wrap it up in.", parse);
 						Text.NL();
@@ -261,7 +261,7 @@ export namespace AquiliusScenes {
 				});
 				options.push({ nameStr : "No",
 					tooltip : "You have better uses for it.",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("While Aquilius may be in need of it, you decide that you’d rather save the ingredient for your own ends.", parse);
 						Text.Flush();
@@ -369,7 +369,7 @@ export namespace AquiliusScenes {
 		} else {
 			options.push({ nameStr : "Talk",
 				tooltip : "How about a fireside chat with the good surgeon?",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“Sure, I wouldn’t mind a little company. You want to open, or let me do it?”</i>", parse);
 					Text.Flush();
@@ -429,7 +429,7 @@ export namespace AquiliusScenes {
 		});
 		options.push({ nameStr : "War",
 			tooltip : "Ask Aquilius about the war between the Crown and the guilds.",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Aquilius doesn’t reply at first, instead staring intently into the distance just past your shoulder, as if he’s seen a ghost. Maybe he has. It’s a good half-minute before he finally moves again, taking his pipe out of his beak and blowing a slow, long stream of smoke through his nostrils.", parse);
 				Text.NL();
@@ -482,7 +482,7 @@ export namespace AquiliusScenes {
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Past",
 			tooltip : "So, where did he come from, who is he, and where is he going?",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“My boyhood?”</i> Aquilius leans forward, chin in hand, and draws on his pipe as he thinks. <i>“Can’t say it was too special. Lived in Rigard, second of four brats, always hungry, always emptying the larder and then looking for more to eat. Didn’t starve or anything, but that’s just the way kids are. You leave them alone for a moment and they turn up wanting food; I was no exception.</i>", parse);
 				Text.NL();
@@ -504,7 +504,7 @@ export namespace AquiliusScenes {
 		});
 		options.push({ nameStr : "Surgery",
 			tooltip : "What does he think of his job?",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“It’s a living.”</i>", parse);
 				Text.NL();
@@ -542,7 +542,7 @@ export namespace AquiliusScenes {
 		});
 		options.push({ nameStr : "Outlaws",
 			tooltip : "How’d he end up with the Outlaws?",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“I knew Zenith from back in the civil war. Lad was with the guilds… that is, on the wrong side of the fence. Young man of fifteen, already known for his work and just itching to make his name even bigger, and the guilds just had to get it into their mind to move against the Crown and start a civil war. He really had no stake in the whole business save holding membership - back in those days, if you weren’t a member of the guilds and did business anyway, they’d rough you up and shake you down - but that was enough.”</i>", parse);
 				Text.NL();
@@ -579,7 +579,7 @@ export namespace AquiliusScenes {
 		if (party.InParty(kiakai, true)) { // TODO flags for this!
 			options.push({ nameStr : kiakai.name,
 				tooltip : "So… what DOES he have against the elf, anyway?",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Since [name] isn’t with you, you can feel free to ask the question in the open. Not that talking about someone behind his or her back is a good thing, but in this case, it would only create more problems than it would solve.", parse);
 					Text.NL();
@@ -696,7 +696,7 @@ export namespace AquiliusScenes {
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Origins",
 			tooltip : "How did the war get started in the first place?",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Aquilius is silent for a long time, long enough for you to worry that you’ve sent the good surgeon into the recesses of his own head, but at long last he coughs loudly, sending his pipe clattering to the floor. Shaking his head, he picks it up with unsteady fingers and shoves it back into his beak.", parse);
 				Text.NL();
@@ -727,7 +727,7 @@ export namespace AquiliusScenes {
 		});
 		options.push({ nameStr : "Fighting",
 			tooltip : "What was the fighting like?",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“What do you think? It was a civil war; those are never pretty.”</i> Aquilius puffs on his pipe. <i>“I’ll be honest; as a surgeon in training, I was in the barracks most of the time, so I didn’t see as much fighting as you’d expect. But the folks they brought in to be put together again, they had tales to tell. Oh, they had plenty to say, mostly to take their mind off the pain while I was sawing and sewing.</i>", parse);
 				Text.NL();
@@ -749,7 +749,7 @@ export namespace AquiliusScenes {
 		});
 		options.push({ nameStr : "Free Cities",
 			tooltip : "Did the Free Cities get involved in the whole mess?",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“Couldn’t rightly say. Zenith’s trying to see if they’ll lend us their support now, but back then… well, that’s anyone’s guess,”</i> Aquilius replies after a moment’s thought. <i>“I know there were a number of mercenary companies hailing from them that worked one side or another - bastards always crop up like flies to a corpse when there’s trouble to make money off. Some of the free cities also proclaimed they were willing to take in refugees from the civil war - some did flee down the King’s Road, although not many were willing or able to make the trip.", parse);
 				Text.NL();
@@ -760,7 +760,7 @@ export namespace AquiliusScenes {
 		});
 		options.push({ nameStr : "End",
 			tooltip : "So what happened in the end?",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“Well, you can see for yourself,”</i> Aquilius says, his voice completely flat and emotionless. <i>“Full humans don’t like morphs, and vice versa. Here we sit, plotting the overthrow of the Riordain line. The king has grown cold and distant, and confers with shady characters like that Majid fellow. Whispers fly that he can’t love Rhylla like he did with his first wife. The slums are still filled with those who lost their homes during the war, and those who lost their parents in the killing have only just begun to leave the orphanages in the last handful of years.</i>", parse);
 				Text.NL();
@@ -946,7 +946,7 @@ export namespace AquiliusScenes {
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Gather herbs",
 			tooltip : "Offer to go herb picking.",
-			func() {
+			func: () => {
 				Text.Clear();
 				if (aquilius.flags.Herbs < AquiliusFlags.Herbs.Known) {
 					Text.Add("<i>“This is the first time you’ve offered to go flower picking for me. Do you know what I’m looking for?”</i>", parse);

@@ -255,7 +255,6 @@ export class Party {
 	public SwitchPrompt(member: Entity) {
 		const ent = member.Parser;
 		const active = this.InParty(member);
-		const that = this;
 		Text.Clear();
 		Text.Out(`Switch ${ent.name} with who?`);
 		Text.Flush();
@@ -263,8 +262,8 @@ export class Party {
 		if (active) {
 			const options: IChoice[] = [];
 			options.push({ nameStr : `---`,
-				func() {
-					that.SwitchOut(member);
+				func: () => {
+					this.SwitchOut(member);
 					Gui.PrintDefaultOptions();
 				}, enabled : true,
 				tooltip: `Send ${ent.name} to the reserve.`,
@@ -272,16 +271,16 @@ export class Party {
 			for (const e of this.reserve) {
 				options.push({ nameStr : e.name,
 					obj  : e,
-					func(obj: Entity) {
-						that.SwitchOut(member);
-						that.SwitchIn(obj);
+					func: (obj: Entity) => {
+						this.SwitchOut(member);
+						this.SwitchIn(obj);
 						Gui.PrintDefaultOptions();
 					}, enabled : true,
 					tooltip: `Switch ${ent.name} to the reserve, replacing ${ent.himher} with ${e.name}.`,
 				});
 			}
 			if (options.length === 1) {
-				that.SwitchOut(member);
+				this.SwitchOut(member);
 				Gui.PrintDefaultOptions();
 			} else {
 				Gui.SetButtonsFromList(options);
@@ -292,9 +291,9 @@ export class Party {
 			for (const e of this.members) {
 				options.push({ nameStr : e.name,
 					obj  : e,
-					func(obj: Entity) {
-						that.SwitchOut(obj);
-						that.SwitchIn(member);
+					func: (obj: Entity) => {
+						this.SwitchOut(obj);
+						this.SwitchIn(member);
 						Gui.PrintDefaultOptions();
 					}, enabled : i !== 0,
 					tooltip: `Switch ${ent.name} into the active party, replacing ${e.name}.`,
@@ -302,13 +301,13 @@ export class Party {
 				i++;
 			}
 			if (options.length === 1) {
-				that.SwitchIn(member);
+				this.SwitchIn(member);
 				Gui.PrintDefaultOptions();
 			} else {
 				if (options.length < 4) {
 					options.push({ nameStr : `+++`,
-						func() {
-							that.SwitchIn(member);
+						func: () => {
+							this.SwitchIn(member);
 							Gui.PrintDefaultOptions();
 						}, enabled : true,
 						tooltip: `Bring ${ent.name} into the active party.`,
@@ -434,7 +433,6 @@ export class Party {
 
 	public ShowAbilities() {
 		const list: IChoice[] = [];
-		const that = this;
 
 		const ents = [];
 		for (const member of this.members) {
@@ -463,18 +461,18 @@ export class Party {
 							nameStr : ability.name,
 							enabled : en,
 							obj     : { caster: entity, skill : ability },
-							func(obj: ICasting) {
+							func: (obj: ICasting) => {
 								Text.Clear();
 								Text.Out(`Who will ${obj.caster.name} cast ${obj.skill.name} on?`);
 								Text.NL();
 								Text.Flush();
 
 								const target = [];
-								for (let i = 0, j = that.members.length; i < j; i++) {
-									const t = that.members[i];
+								for (let i = 0, j = this.members.length; i < j; i++) {
+									const t = this.members[i];
 									target.push({
 										nameStr : t.name,
-										func(t: Entity) {
+										func: (t: Entity) => {
 											obj.skill.UseOutOfCombat(obj.caster, t);
 										},
 										enabled : true,

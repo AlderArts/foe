@@ -106,7 +106,7 @@ TavernLoc.Common.DrunkHandler = () => {
 	options.push({nameStr : "Pay Up",
 		tooltip : Text.Parse("Just give him what he wants. Some coins are a small price to pay for not being robbed, molested or who knows what while you were out cold.", parse),
 		enabled : party.coin >= 25,
-		func() {
+		func: () => {
 			party.coin -= 25;
 			Text.Clear();
 			Text.Add("You tell him that you’ll pay him for his troubles. But he’ll need to give you back your stuff so you can give him the money.", parse);
@@ -125,7 +125,7 @@ TavernLoc.Common.DrunkHandler = () => {
 	options.push({nameStr : "Blowjob",
 		tooltip : Text.Parse("Wrap your mouth around his dick, and all debts should melt away in a few minutes.", parse),
 		enabled : true,
-		func() {
+		func: () => {
 			const bjfirst = !rigard.BlownBarnaby();
 			rigard.flags.Barnaby |= RigardFlags.Barnaby.Blowjob;
 
@@ -320,7 +320,7 @@ export namespace BarnabyScenes {
 		options.push({nameStr : "Ale",
 			tooltip : Text.Parse("Light alcohol, costs [coin1] coin.", parse),
 			enabled : party.coin >= coin1,
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You ask for some Ale.", parse);
 				Text.NL();
@@ -343,7 +343,7 @@ export namespace BarnabyScenes {
 		options.push({nameStr : "Mead",
 			tooltip : Text.Parse("Moderate alcohol content, costs [coin2] coin.", parse),
 			enabled : party.coin >= coin2,
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You ask for some Mead.", parse);
 				Text.NL();
@@ -368,7 +368,7 @@ export namespace BarnabyScenes {
 		options.push({nameStr : "Spirits",
 			tooltip : Text.Parse("Strong alcohol, costs [coin3] coin.", parse),
 			enabled : party.coin >= coin3,
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You ask for some Spirits.", parse);
 				Text.NL();
@@ -395,7 +395,7 @@ export namespace BarnabyScenes {
 		options.push({nameStr : "Rumors",
 			tooltip : Text.Parse("A barkeep sees and hears a lot. Maybe he’d share some tidbits with you, if you asked?", parse),
 			enabled : true,
-			func() {
+			func: () => {
 				Text.Clear();
 				if (!talkative) {
 					Text.Add("<i>“Buy something first and I’ll consider talking to you, otherwise get out of my bar. I don’t have time to chit chat with everyone that passes by.”</i>", parse);
@@ -493,7 +493,7 @@ export namespace BarnabyScenes {
 		options.push({nameStr : "Chat",
 			tooltip : Text.Parse("He looks like he’s got time. Maybe he can tell you some things?", parse),
 			enabled : true,
-			func() {
+			func: () => {
 				Text.Clear();
 				if (talkative) {
 					Text.Add("<i>“Tell you about what?”</i>", parse);
@@ -511,7 +511,7 @@ export namespace BarnabyScenes {
 		options.push({nameStr : "Blow Him",
 			tooltip : Text.Parse("He looks like he could use some relief. Maybe a nice blowjob would put him in a better mood...", parse),
 			enabled : true,
-			func() {
+			func: () => {
 				const bjfirst = !rigard.BlownBarnaby();
 				rigard.flags.Barnaby |= RigardFlags.Barnaby.Blowjob;
 
@@ -669,7 +669,7 @@ export namespace BarnabyScenes {
 		options.push({nameStr : "Miranda",
 			tooltip : Text.Parse("What can he tell you about the literal watchdog who hangs out here of a night?", parse),
 			enabled : true,
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“Ah, she’s the only cool member of the Watch. Doesn’t make trouble, teach smartasses a lesson, and most importantly, she always comes by to drink. I don’t mind putting up with her even if she were to get absolutely smashed.”</i>", parse);
 				Text.NL();
@@ -725,7 +725,7 @@ export namespace BarnabyScenes {
 			options.push({nameStr : "Zina",
 				tooltip : Text.Parse("So, what’s the deal with that hyena-girl in the corner?", parse),
 				enabled : true,
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“Girl’s a vagrant, showed up around here a few days ago.”</i>", parse);
 					Text.NL();

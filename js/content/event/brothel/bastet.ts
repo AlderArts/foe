@@ -419,7 +419,7 @@ export namespace BastetScenes {
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Correct",
 				tooltip : "You’re pretty sure you heard her refer to you as “Her Ladyship”. But you’re a man! Maybe you should correct her.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You try not to sound too affronted, lest you anger the high priestess, as you gently correct her. She referred to you as “Ladyship”, but you’re male.", parse);
 					Text.NL();
@@ -451,7 +451,7 @@ export namespace BastetScenes {
 			});
 			options.push({ nameStr : "Nevermind",
 				tooltip : "Maybe you heard it wrong? Though you feel compelled to correct her, you’re not sure if someone as important as her would take it well if a mere peasant like you corrected her.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("It’s probably for the best if you don’t say anything and simply follow her in silence.", parse);
 					Text.NL();
@@ -548,7 +548,7 @@ export namespace BastetScenes {
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Masturbate",
 			tooltip : "You’re sure no one will mind if you take the opportunity to relieve some tension. Adala did tell that you could relax if you wanted...",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Mind made up, you push out of your impromptu seat and slink behind one of the palms that grows upon the pool’s banks, using it as a cover for what you are about to do. Need for privacy sated, you empty your mind of anything other than visions of the voluptuous loveliness that is the high priestess.", parse);
 				Text.NL();
@@ -566,7 +566,7 @@ export namespace BastetScenes {
 		});
 		options.push({ nameStr : "Meditate",
 			tooltip : "No, you shouldn’t. This is a sacred place. It wouldn’t be right. Maybe you should meditate, try to calm your body...",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Closing your eyes, you inhale deeply, holding your breath as you try to think of nothing. Though the lust continues to rage inside of you, it slowly ebbs away as you focus on nothing but breathing. In, out, in, out.", parse);
 				Text.NL();
@@ -586,7 +586,7 @@ export namespace BastetScenes {
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Explain",
 				tooltip : "You don’t feel ready just yet. Why not ask her to explain the ritual while you wait?",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“Of course, Your Ladyship,”</i> she replies, bowing in reverence.", parse);
 					Text.NL();
@@ -611,7 +611,7 @@ export namespace BastetScenes {
 					const options: IChoice[] = [];
 					options.push({ nameStr : "Yes!",
 						tooltip : "I mean, this your manhood that we’re talking about! And if what she said is true, you’re going to lose it!",
-						func() {
+						func: () => {
 							Text.Clear();
 							Text.Add("Panic races through your veins, your whole body trembling with the desire to run. From somewhere deep within your bones, a primal urge to flee this place and never look back rises...", parse);
 							Text.NL();
@@ -623,7 +623,7 @@ export namespace BastetScenes {
 					});
 					options.push({ nameStr : "Hot",
 						tooltip : "Yes, you might lose your manhood… but then again? Would be it be so bad? Especially when you’re going to be a woman as pretty as Lady Bastet.",
-						func() {
+						func: () => {
 							Text.Clear();
 							Text.Add("Your tail sticks as if you had been electrified, ears perked up. Shivers race across your body, prickles of delight dancing under your skin. That sounds... that sounds so <b>hot!</b> Your mind’s eye flashes before you, teasing you of images of yourself remade to fit the Goddess. Unthinkingly, you cup the imaginary bulge of your prodigious breasts, trembling with fantasized pleasure.", parse);
 							Text.NL();
@@ -633,7 +633,7 @@ export namespace BastetScenes {
 					});
 					options.push({ nameStr : "No…",
 						tooltip : "...This is but a small sacrifice for the many blessings Lady Bastet has granted you and your village.",
-						func() {
+						func: () => {
 							Text.Clear();
 							Text.Add("You inhale deeply, letting your raging emotions still, exhaling softly to expel your doubts. Humbly, you thank Adala for being honest with you about what will happen. You promise her that you will do whatever she asks so that you may fulfill your role.", parse);
 							Gui.PrintDefaultOptions();
@@ -659,7 +659,7 @@ export namespace BastetScenes {
 			});
 			options.push({ nameStr : "Wait",
 				tooltip : "You’re not ready yet. Ask her for a few moments so you can steel yourself.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“Of course, Your Ladyship. We have time, but please try not to delay for too long. The ritual is ready and we are waiting for you.”</i>", parse);
 					Text.NL();
@@ -673,7 +673,7 @@ export namespace BastetScenes {
 			});
 			options.push({ nameStr : "Ready",
 				tooltip : "You’re as ready as you’ll ever be. Time to go and assume your role as Bastet’s new avatar.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“Excellent, then please follow me,”</i> she says, extending her hand welcomingly.", parse);
 					Text.NL();

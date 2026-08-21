@@ -1164,7 +1164,7 @@ export namespace RigardScenes {
 			// [Accept][Run]
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Accept",
-				func() {
+				func: () => {
 					Text.Clear();
 					party.location = RigardLoc.Residential.Street;
 					Text.Add("Your face flushes slightly at his accusations, though it’s hard to say whether from embarrassment or anger. You curse at the little man, but tell him that if he wants you so desperately, you’ll come with him, if only he’ll stop shouting about your imagined sex life to the whole street.", parse);
@@ -1182,7 +1182,7 @@ export namespace RigardScenes {
 				tooltip : "Well, if he wants you so badly, you’ll come, if he’ll just be quiet.",
 			});
 			options.push({ nameStr : "Run",
-				func() {
+				func: () => {
 					Text.Clear();
 					if (party.Num() === 2) {
 						parse.comp = party.Get(1).name;
@@ -1442,7 +1442,7 @@ export namespace RigardScenes {
 				// [Hot]
 				const options: IChoice[] = [];
 				options.push({ nameStr : "Neutral",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("Sorry, but you aren’t in to that. The herm shrugs her shoulders, apparently not unfamiliar with the reaction.", parse);
 						Text.NL();
@@ -1457,7 +1457,7 @@ export namespace RigardScenes {
 					tooltip : "Not really your thing, sorry.",
 				});
 				options.push({ nameStr : "Hot",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("Stepping around the table, you grab onto her shaft, giving it a quick stroke and drawing a moan from Miranda. <i>“I take it this means that you - ooh! - like what you see?”</i> she breathes, looking down on you with half-closed eyes.", parse);
 						Text.NL();
@@ -1467,7 +1467,7 @@ export namespace RigardScenes {
 						// [TakeCharge]
 						const options: IChoice[] = [];
 						options.push({ nameStr : "Take charge",
-							func() {
+							func: () => {
 								Text.Clear();
 								Text.Add("Smirking mischievously at her, you lift a hand to cup her chin and give her a big, wet kiss. Hungrily, you thrust your [tongue] into the warm wetness of her mouth to wrestle with her own.", parse);
 								Text.NL();
@@ -1480,7 +1480,7 @@ export namespace RigardScenes {
 							tooltip : "She wants sex, but who says she has to get it on her terms? Why not take charge of scratching her itch?",
 						});
 						options.push({ nameStr : "Submit",
-							func() {
+							func: () => {
 								Text.Clear();
 								parse.legs = player.HasLegs() ? " on your knees" : "";
 								Text.Add("The dog-herm wastes no time in hopping on her feet, stripping off the rest of her armor as she approaches you to help you take off your [armor]. Though she fumbles with both your outfits, she has you naked in record time. Without so much as a word, she takes you by the arm and sets you down[legs] atop the cushions in the corner of the room.", parse);
@@ -1492,7 +1492,7 @@ export namespace RigardScenes {
 							tooltip : "If she wants her itch scratched, then she can come and get it.",
 						});
 						options.push({ nameStr : "Later",
-							func() {
+							func: () => {
 								Text.Clear();
 								Text.Add("You carefully tuck her cock in and pull her pants up. The two of you have a thief to catch, after all.", parse);
 								Text.NL();
@@ -1512,7 +1512,7 @@ export namespace RigardScenes {
 					tooltip : "The way you see it, this just gives you more options. Why not indulge?",
 				});
 				options.push({ nameStr : "Disgusting",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("<i>“What? Come on! You’re not gonna pussy out on me just because I have a dick now, are you?”</i> she frowns, clearly not happy with you.", parse);
 						Text.NL();
@@ -1537,7 +1537,7 @@ export namespace RigardScenes {
 					// [TakeCharge] [Submit] [Later]
 					const options: IChoice[] = [];
 					options.push({ nameStr : "Take charge",
-						func() {
+						func: () => {
 							Text.Clear();
 							Text.Add("Authoritatively, you push your chair back and stand up. Throwing her a proud smirk, you saunter around the tabletop toward her, your gaze never leaving hers as you close the distance. Cupping her chin in your hand, your lips descend to cover hers possessively, hungrily thrusting your [tongue] into the warm wetness of her mouth to wrestle with her own.", parse);
 							Text.NL();
@@ -1549,7 +1549,7 @@ export namespace RigardScenes {
 						tooltip : "Even if she wants sex, who says she has to get it on her terms? Why not take charge of scratching her itch?",
 					});
 					options.push({ nameStr : "Submit",
-						func() {
+						func: () => {
 							Text.Clear();
 							parse.legs = player.HasLegs() ? " on your knees" : "";
 							Text.Add("The dog-herm wastes no time in hopping on her feet, stripping off her armor as she approaches you to help you take off your [armor]. Though she fumbles with both your outfits she has you naked in record time. Without so much as a word, she takes you by the arm and sets you down[legs] atop the cushions in the corner of the room.", parse);
@@ -1560,7 +1560,7 @@ export namespace RigardScenes {
 						tooltip : "If she wants her itch scratched, then she can come and get it.",
 					});
 					options.push({ nameStr : "Later",
-						func() {
+						func: () => {
 							Text.Clear();
 							Text.Add("You scold Miranda for her suggestion. The thief isn’t going to catch himself, after all. No nookie for now.", parse);
 							Text.NL();
@@ -1592,7 +1592,7 @@ export namespace RigardScenes {
 					// [Submit][Reluctant][Refuse]
 					const options: IChoice[] = [];
 					options.push({ nameStr : "Submit",
-						func() {
+						func: () => {
 							Text.Clear();
 							Text.Add("You cower in your seat, helpless to resist the authority of the herm before you. You couldn't resist her, even if she didn't have such a charge to label against you. Shyly, you stand up from your seat - unable to meet her eyes in your embarrassment - as you begin meekly stripping yourself down.", parse);
 
@@ -1611,7 +1611,7 @@ export namespace RigardScenes {
 						Gui.PrintDefaultOptions();
 					};
 					options.push({ nameStr : "Reluctant",
-						func() {
+						func: () => {
 							Text.Clear();
 							reluctant();
 							player.subDom.DecreaseStat(-100, 1);
@@ -1620,7 +1620,7 @@ export namespace RigardScenes {
 						tooltip : "As much as it rails you, you are in no position to refuse her. You could very well end up in prison for this.",
 					});
 					options.push({ nameStr : "Refuse",
-						func() {
+						func: () => {
 							Text.Clear();
 							parse.legs2 = player.HasLegs() ? " on your knees - right here, right now - to" : " to";
 							Text.Add("<i>“Perhaps I wasn’t clear,”</i> Miranda’s eyes narrow dangerously. <i>“Either you are getting down[legs2] suck my dick, or I’m hauling your ass straight to prison and performing a cavity search on you. Your choice.”</i>", parse);

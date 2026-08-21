@@ -69,7 +69,7 @@ export namespace OrchidScenes {
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Talk",
 			tooltip : "Ask her if she has time to chat for a bit.",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“Sure, I can always spare time to talk to my savior.”</i> She smiles.", parse);
 				Text.Flush();
@@ -105,7 +105,7 @@ export namespace OrchidScenes {
 		if (false) { // TODO
 		options.push({ nameStr : "Spring",
 			tooltip : "Maybe Orchid knows of a way to get past the thorns?",
-			func() {
+			func: () => {
 				// #Shows up after PC has visited the Spring for the first time.
 				Text.Clear();
 				Text.Add("You explain to Orchid about the wall of thorns blocking your way to the spring, and ask her if she knows a way around them.", parse);
@@ -136,7 +136,7 @@ export namespace OrchidScenes {
 		*/
 		options.push({ nameStr : "How is she?",
 			tooltip : "She’s been through a lot, and you’re still concerned for her wellbeing… ask her how she’s holding up.",
-			func() {
+			func: () => {
 				Text.Clear();
 				const slut = orchid.Slut();
 				if (slut < 5) {
@@ -211,7 +211,7 @@ export namespace OrchidScenes {
 		});
 		options.push({ nameStr : "Mother Tree",
 			tooltip : "You’re curious about Mother Tree, maybe Orchid could share a few things about her?",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You ask Orchid if she wouldn’t mind talking about Mother Tree.", parse);
 				Text.NL();
@@ -257,7 +257,7 @@ export namespace OrchidScenes {
 		});
 		options.push({ nameStr : "Her corruption",
 			tooltip : "It’s a sensitive subject, but maybe Orchid wouldn’t mind sating your curiosity?",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You preface your question by stating that she doesn’t have to say anything if she doesn’t feel like it, but if she does you’d appreciate it.", parse);
 				Text.NL();
@@ -369,7 +369,7 @@ export namespace OrchidScenes {
 		if (!opts.attacker) {
 			options.push({ nameStr : "Attackers",
 				tooltip : "First, how about she recounts what she remembers from the attackers? You can discuss the details afterwards.",
-				func() {
+				func: () => {
 					opts.attacker = true;
 					Text.Clear();
 					Text.Add("<i>“O-okay, sure.”</i> She takes a deep breath.", parse);
@@ -397,7 +397,7 @@ export namespace OrchidScenes {
 			if (!opts.elves) {
 			options.push({ nameStr : "Elves",
 				tooltip : "What were they like? Has she met them before?",
-				func() {
+				func: () => {
 					opts.elves = true;
 					Text.Clear();
 					if (party.InParty(kiakai)) {
@@ -427,7 +427,7 @@ export namespace OrchidScenes {
 			if (!opts.spring) {
 			options.push({ nameStr : "Spring",
 				tooltip : "Where is it located? What was it like before the corruption?",
-				func() {
+				func: () => {
 					opts.spring = true;
 					Text.Clear();
 					Text.Add("<i>“The spring used to be beautiful. I used to bathe there all the time. Many animals used that as their drinking hole, and I know of a few elves that came to collect its waters frequently.”</i>", parse);
@@ -498,7 +498,7 @@ export namespace OrchidScenes {
 			if (!opts.lizard) {
 			options.push({ nameStr : "Lizard?",
 				tooltip : "The lizard creature. Is there anything else she could tell you about him? What was he dressed like? Any markings she’d be able to recognize?",
-				func() {
+				func: () => {
 					opts.lizard = true;
 					Text.Clear();
 					Text.Add("<i>“I… let me think...”</i> she furrows her brows in thought for a few moments.", parse);
@@ -572,7 +572,7 @@ export namespace OrchidScenes {
 		} else {
 			options.push({ nameStr : "Tentacles",
 				tooltip : "So, her tentacles… From the looks of it, it doesn’t seem like they’re going away...",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“Y-yeah… They’re weird, I’m a monster!”</i> she declares, beginning to tear up.", parse);
 					Text.NL();
@@ -617,7 +617,7 @@ export namespace OrchidScenes {
 					const options: IChoice[] = [];
 					options.push({ nameStr : "Sex",
 						tooltip : "Well, the best way to do this is to show her.",
-						func() {
+						func: () => {
 							Text.Clear();
 							Text.Add("PLACEHOLDER", parse);
 							Text.NL();
@@ -629,7 +629,7 @@ export namespace OrchidScenes {
 					});
 					options.push({ nameStr : "Later",
 						tooltip : "Well, like you said, it’s hard to explain, and you can’t really try to do that right now.",
-						func() {
+						func: () => {
 							Text.Clear();
 							Text.Add("<i>“Oh? Okay.”</i>", parse);
 							Text.NL();

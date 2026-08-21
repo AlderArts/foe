@@ -168,27 +168,25 @@ export class CatboyMage extends Entity {
 			return;
 		}
 
-		const that = this;
-
 		const scenes = new EncounterTable();
 		scenes.AddEnc(() => {
-			Abilities.Attack.Use(encounter, that, t);
+			Abilities.Attack.Use(encounter, this, t);
 		}, 1.0, () => true);
 		scenes.AddEnc(() => {
-			CombatItems.DecoyStick.combat.Use(encounter, that);
+			CombatItems.DecoyStick.combat.Use(encounter, this);
 		}, 1.0, () => true);
 		scenes.AddEnc(() => {
-			CombatItems.HPotion.combat.Use(encounter, that, that);
-		}, 1.0, () => that.HPLevel() < 0.5);
+			CombatItems.HPotion.combat.Use(encounter, this, this);
+		}, 1.0, () => this.HPLevel() < 0.5);
 		scenes.AddEnc(() => {
-			Abilities.Black.Bolt.Use(encounter, that, t);
-		}, 3.0, () => Abilities.Black.Bolt.enabledCondition(encounter, that));
+			Abilities.Black.Bolt.Use(encounter, this, t);
+		}, 3.0, () => Abilities.Black.Bolt.enabledCondition(encounter, this));
 		scenes.AddEnc(() => {
-			Abilities.Black.Eruption.Use(encounter, that, targets);
-		}, 4.0, () => Abilities.Black.Eruption.enabledCondition(encounter, that));
+			Abilities.Black.Eruption.Use(encounter, this, targets);
+		}, 4.0, () => Abilities.Black.Eruption.enabledCondition(encounter, this));
 		scenes.AddEnc(() => {
-			Abilities.Black.ThunderStorm.Use(encounter, that, targets);
-		}, 3.0, () => Abilities.Black.ThunderStorm.enabledCondition(encounter, that));
+			Abilities.Black.ThunderStorm.Use(encounter, this, targets);
+		}, 3.0, () => Abilities.Black.ThunderStorm.enabledCondition(encounter, this));
 		scenes.Get();
 	}
 
@@ -313,26 +311,24 @@ export class CentaurMare extends Entity {
 		// Pick a random target
 		const t = this.GetSingleTarget(encounter, activeChar);
 
-		const that = this;
-
 		const scenes = new EncounterTable();
 
 		scenes.AddEnc(() => {
-			Abilities.Attack.Use(encounter, that, t);
+			Abilities.Attack.Use(encounter, this, t);
 		}, 1.0, () => true);
 		scenes.AddEnc(() => {
-			Abilities.Physical.Bash.Use(encounter, that, t);
-		}, 2.0, () => Abilities.Physical.Bash.enabledCondition(encounter, that));
+			Abilities.Physical.Bash.Use(encounter, this, t);
+		}, 2.0, () => Abilities.Physical.Bash.enabledCondition(encounter, this));
 		scenes.AddEnc(() => {
-			Abilities.Physical.CrushingStrike.Use(encounter, that, t);
-		}, 3.0, () => Abilities.Physical.CrushingStrike.enabledCondition(encounter, that));
+			Abilities.Physical.CrushingStrike.Use(encounter, this, t);
+		}, 3.0, () => Abilities.Physical.CrushingStrike.enabledCondition(encounter, this));
 		scenes.AddEnc(() => {
-			Abilities.Physical.FocusStrike.Use(encounter, that, t);
-		}, 2.0, () => Abilities.Physical.FocusStrike.enabledCondition(encounter, that));
+			Abilities.Physical.FocusStrike.Use(encounter, this, t);
+		}, 2.0, () => Abilities.Physical.FocusStrike.enabledCondition(encounter, this));
 		/* TODO Taunt attack? (focus)
 		scenes.AddEnc(() => {
-			Abilities.Physical.TAttack.Use(encounter, that, t);
-		}, 3.0, () => Abilities.Physical.TAttack.enabledCondition(encounter, that));
+			Abilities.Physical.TAttack.Use(encounter, this, t);
+		}, 3.0, () => Abilities.Physical.TAttack.enabledCondition(encounter, this));
 		*/
 		scenes.Get();
 	}
@@ -459,32 +455,30 @@ export class GoatAlchemist extends Entity {
 		const allies = this.GetPartyTarget(encounter, activeChar, true);
 		const ally = this.GetSingleTarget(encounter, activeChar, TargetStrategy.LowHp, true);
 
-		const that = this;
-
 		const scenes = new EncounterTable();
 		// Offensive
 		scenes.AddEnc(() => {
-			Abilities.Attack.Use(encounter, that, t);
+			Abilities.Attack.Use(encounter, this, t);
 		}, 2.0, () => true);
 		scenes.AddEnc(() => {
-			Abilities.Black.Shimmer.Use(encounter, that, t);
-		}, 3.0, () => Abilities.Black.Shimmer.enabledCondition(encounter, that));
+			Abilities.Black.Shimmer.Use(encounter, this, t);
+		}, 3.0, () => Abilities.Black.Shimmer.enabledCondition(encounter, this));
 		scenes.AddEnc(() => {
-			Abilities.White.Tirade.Use(encounter, that, t);
-		}, 1.0, () => Abilities.White.Tirade.enabledCondition(encounter, that));
+			Abilities.White.Tirade.Use(encounter, this, t);
+		}, 1.0, () => Abilities.White.Tirade.enabledCondition(encounter, this));
 		// Buffing/Healing
 		scenes.AddEnc(() => {
-			CombatItems.SpeedPotion.combat.Use(encounter, that);
+			CombatItems.SpeedPotion.combat.Use(encounter, this);
 		}, 1.0, () => true);
 		scenes.AddEnc(() => {
-			Abilities.White.Heal.Use(encounter, that, ally);
-		}, 1.0, () => Abilities.White.Heal.enabledCondition(encounter, that) && ally.HPLevel() < 0.9);
+			Abilities.White.Heal.Use(encounter, this, ally);
+		}, 1.0, () => Abilities.White.Heal.enabledCondition(encounter, this) && ally.HPLevel() < 0.9);
 		scenes.AddEnc(() => {
-			Abilities.White.Cheer.Use(encounter, that, allies);
-		}, 1.0, () => Abilities.White.Cheer.enabledCondition(encounter, that));
+			Abilities.White.Cheer.Use(encounter, this, allies);
+		}, 1.0, () => Abilities.White.Cheer.enabledCondition(encounter, this));
 		scenes.AddEnc(() => {
-			Abilities.White.Empower.Use(encounter, that, ally);
-		}, 1.0, () => Abilities.White.Empower.enabledCondition(encounter, that));
+			Abilities.White.Empower.Use(encounter, this, ally);
+		}, 1.0, () => Abilities.White.Empower.enabledCondition(encounter, this));
 
 		scenes.Get();
 	}
@@ -582,7 +576,6 @@ export namespace MaliceScoutsScenes {
 		export function WinPrompt() {
 			const player: Player = GAME().player;
 			const party: Party = GAME().party;
-			const enc: ScoutEncounter = this;
 			SetGameState(GameState.Event, Gui);
 
 			const parse: IParse = {
@@ -627,23 +620,23 @@ export namespace MaliceScoutsScenes {
 				options.push({nameStr : "Petting",
 					tooltip : Text.Parse("Aww, what a pathetic little kitty. Why don’t you give him a scratch?", parse),
 					enabled : true,
-					func() {
-						MaliceScoutsScenes.Catboy.Petting(enc);
+					func: () => {
+						MaliceScoutsScenes.Catboy.Petting(this);
 					},
 				});
 				options.push({nameStr : "Petplay",
 					tooltip : Text.Parse("Play around with the kitty, put him in his place. Have him put that mouth of his to good use.", parse),
 					enabled : true,
-					func() {
-						MaliceScoutsScenes.Catboy.PetPlay(enc);
+					func: () => {
+						MaliceScoutsScenes.Catboy.PetPlay(this);
 					},
 				});
 				if (player.FirstVag()) {
 					options.push({nameStr : "Pity fuck",
 						tooltip : Text.Parse("Take pity on the poor guy and let him have it.", parse),
 						enabled : true,
-						func() {
-							MaliceScoutsScenes.Catboy.PityFuck(enc, true);
+						func: () => {
+							MaliceScoutsScenes.Catboy.PityFuck(this, true);
 						},
 					});
 				}
@@ -670,7 +663,7 @@ export namespace MaliceScoutsScenes {
 					Gui.NextPrompt();
 				});
 			});
-			Encounter.prototype.onVictory.call(enc);
+			Encounter.prototype.onVictory.call(this);
 		}
 
 		export function PityFuck(enc: ScoutEncounter, win: boolean) {
@@ -1194,7 +1187,7 @@ export namespace MaliceScoutsScenes {
 			options.push({nameStr : "Handjob",
 				tooltip : Text.Parse("Why not give the poor pent-up kitty a hand?", parse),
 				enabled : true,
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Hey, you may not have made him a man like he wanted, but you’ve still made him feel very, very good. Leaving one hand to continue teasing and prodding at the catboy’s ears, you seize his considerable maleness in the other, stroking him off with an up-and-down pumping motion. The cartilaginous barbs along his shaft push into your palms, every bit as hard as the rest of his cock; you tighten your grip, feeling them dig into your flesh.", parse);
 					Text.NL();
@@ -1224,7 +1217,7 @@ export namespace MaliceScoutsScenes {
 			options.push({nameStr : "Tease",
 				tooltip : Text.Parse("That, from just an ear rub? Let’s find out just how much of a hair-trigger he is...", parse),
 				enabled : true,
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Teasingly, you tell the catboy that he really is a hair-trigger - all this from just an ear rub?", parse);
 					Text.NL();
@@ -1275,9 +1268,6 @@ export namespace MaliceScoutsScenes {
 			SetGameState(GameState.Event, Gui);
 			Text.Clear();
 
-			// this = encounter
-			const enc: ScoutEncounter = this;
-
 			const parse: IParse = {
 
 			};
@@ -1314,11 +1304,11 @@ export namespace MaliceScoutsScenes {
 				const scenes = new EncounterTable();
 
 				scenes.AddEnc(() => {
-					MaliceScoutsScenes.Catboy.PityFuck(enc, false);
+					MaliceScoutsScenes.Catboy.PityFuck(this, false);
 					return true;
 				}, 1.0, () => player.FirstVag() && player.Femininity() > 0.3);
 				scenes.AddEnc(() => {
-					MaliceScoutsScenes.Catboy.GetMilked(enc);
+					MaliceScoutsScenes.Catboy.GetMilked(this);
 					return true;
 				}, 1.0, () => player.Lactation());
 				/* TODO
@@ -1340,7 +1330,7 @@ export namespace MaliceScoutsScenes {
 					Gui.NextPrompt();
 				}
 			});
-			Encounter.prototype.onLoss.call(enc);
+			Encounter.prototype.onLoss.call(this);
 		}
 
 		export function GetMilked(_enc: ScoutEncounter) {
@@ -1477,7 +1467,7 @@ export namespace MaliceScoutsScenes {
 				options.push({nameStr : "Yes",
 					tooltip : Text.Parse("Oh, why not? She’s clearly in a bad spot.", parse),
 					enabled : true,
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("The mare visibly sags in relief, her shoulders slumping as she puts away her weapon. <i>“Thanks for being reasonable,”</i> she mumbles, her body now quaking ever so slightly with repressed need. <i>“Shit, just thinking about it is already getting me all wet - not that I don’t like this body of mine, but some days it just wants to do something at the most inconvenient times, if you get what I mean.”</i>", parse);
 						Text.NL();
@@ -1500,7 +1490,7 @@ export namespace MaliceScoutsScenes {
 				options.push({nameStr : "No",
 					tooltip : Text.Parse("No thanks, you’re just not feeling up to it today.", parse),
 					enabled : true,
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("You do your best to explain to the centaur mare that you’re really not interested in the offer she’s soliciting for, but she won’t have any of it.", parse);
 						Text.NL();
@@ -1532,7 +1522,6 @@ export namespace MaliceScoutsScenes {
 
 		export function WinPrompt() {
 			const player: Player = GAME().player;
-			const enc  = this;
 			SetGameState(GameState.Event, Gui);
 
 			const parse: IParse = {
@@ -1556,16 +1545,16 @@ export namespace MaliceScoutsScenes {
 					options.push({nameStr : "Fuck",
 						tooltip : Text.Parse("Give her what she wants - but on your terms.", parse),
 						enabled: player.HasLegs() && p1cock.Len() >= 25, // Gotta have legs and a 10" cock
-						func() {
-							MaliceScoutsScenes.Mare.WinFuck(enc);
+						func: () => {
+							MaliceScoutsScenes.Mare.WinFuck(this);
 						},
 					});
 				}
 				options.push({nameStr : "Fist",
 					tooltip : Text.Parse("Literally pound the mare’s pussy.", parse),
 					enabled : true,
-					func() {
-						MaliceScoutsScenes.Mare.WinFist(enc);
+					func: () => {
+						MaliceScoutsScenes.Mare.WinFist(this);
 					},
 				});
 				/* TODO
@@ -1600,7 +1589,7 @@ export namespace MaliceScoutsScenes {
 					Gui.NextPrompt();
 				});
 			});
-			Encounter.prototype.onVictory.call(enc);
+			Encounter.prototype.onVictory.call(this);
 		}
 
 		export function WinFuck(enc: ScoutEncounter) {
@@ -2038,9 +2027,6 @@ export namespace MaliceScoutsScenes {
 			SetGameState(GameState.Event, Gui);
 			Text.Clear();
 
-			// this = encounter
-			const enc: ScoutEncounter = this;
-
 			let parse: IParse = {
 
 			};
@@ -2071,9 +2057,9 @@ export namespace MaliceScoutsScenes {
 
 				Text.Add("Your concentration is so focused on her spear-tip that you don’t notice one of her hooved forefeet lashing out, catching you soundly on the chest and sending you sprawling onto your back. Before you know it, she’s tossed aside her spear and shield and is on you, pawing messily at your [arm] in a frantic bid to get it off. It takes somewhat longer than one would expect thanks to how haphazardly she’s grabbing at the material, but eventually the lot is off and you’re at her mercy.", parse);
 				Text.NL();
-				MaliceScoutsScenes.Mare.LossEntry(enc);
+				MaliceScoutsScenes.Mare.LossEntry(this);
 			});
-			Encounter.prototype.onLoss.call(enc);
+			Encounter.prototype.onLoss.call(this);
 		}
 
 		export function LossEntry(enc: ScoutEncounter) {
@@ -2231,7 +2217,6 @@ export namespace MaliceScoutsScenes {
 		}
 
 		export function WinPrompt() {
-			const enc  = this;
 			SetGameState(GameState.Event, Gui);
 
 			const parse: IParse = {
@@ -2252,8 +2237,8 @@ export namespace MaliceScoutsScenes {
 				options.push({nameStr : "Turn Tables",
 					tooltip : Text.Parse("So, he was planning to experiment on you? Turnabout is fair play.", parse),
 					enabled : true,
-					func() {
-						MaliceScoutsScenes.Goat.WinTurnTables(enc);
+					func: () => {
+						MaliceScoutsScenes.Goat.WinTurnTables(this);
 					},
 				});
 
@@ -2281,7 +2266,7 @@ export namespace MaliceScoutsScenes {
 					Gui.NextPrompt();
 				});
 			});
-			Encounter.prototype.onVictory.call(enc);
+			Encounter.prototype.onVictory.call(this);
 		}
 
 		export function WinTurnTables(_enc: ScoutEncounter) {
@@ -2391,7 +2376,7 @@ export namespace MaliceScoutsScenes {
 					options.push({nameStr : "Cock",
 						tooltip : Text.Parse("Do you really have to think twice about this? Swab a batch on your [cocks].", parse),
 						enabled : true,
-						func() {
+						func: () => {
 							Text.Clear();
 							intro();
 							if (player.NumCocks() > 1) {
@@ -2464,7 +2449,7 @@ export namespace MaliceScoutsScenes {
 					options.push({nameStr : "Balls",
 						tooltip : Text.Parse("Because everyone knows that the pair makes the man.", parse),
 						enabled : true,
-						func() {
+						func: () => {
 							Text.Clear();
 							intro();
 							Text.Add("Right, no turning back now. Pulling down your [botarmor], you reach down and apply the cream you’ve gathered to your [balls]. ", parse);
@@ -2511,7 +2496,7 @@ export namespace MaliceScoutsScenes {
 				options.push({nameStr : "Breasts",
 					tooltip : Text.Parse("Your rack could do with a little enhancement…", parse),
 					enabled : true,
-					func() {
+					func: () => {
 						Text.Clear();
 						intro();
 						if (player.FirstBreastRow().Size() > 10) {
@@ -2549,7 +2534,7 @@ export namespace MaliceScoutsScenes {
 					options.push({nameStr : "Vag",
 						tooltip : Text.Parse("Not the first thing that comes to mind, but it should work.", parse),
 						enabled : true,
-						func() {
+						func: () => {
 							Text.Clear();
 							Text.Add("Hand halfway to your groin, you pause for a second and consider what you’re about to do. Sure, this isn’t the sort of thing that usually comes to mind when one thinks of growing things bigger, but technically it should work, right?", parse);
 							Text.NL();
@@ -2638,7 +2623,7 @@ export namespace MaliceScoutsScenes {
 				options.push({nameStr : "Alchemist",
 					tooltip : Text.Parse("Yeah, you’re not using this stuff on yourself. Him, though…", parse),
 					enabled : true,
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("Yeeeah. Seeing what just a small handful of this stuff has done to the alchemist, you look down at the rest of the tub in your hands and a wry smile comes to your lips. There’s no way you’re going to be using any of this stuff on yourself, not after that - but the alchemist himself, though, he looks like he could use some more enhancement - quite a lot of it, in fact.", parse);
 						Text.NL();
@@ -2746,7 +2731,7 @@ export namespace MaliceScoutsScenes {
 				options.push({nameStr : "Use on him",
 					tooltip : Text.Parse("You really DO want to know just how this works…", parse),
 					enabled : true,
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("Riiight. The dildo looks so interesting - and with so many buttons to boot - that you can’t help but want to see just how it works. Besides, you’ve got a helpless subject here who you can freely experiment on without any moral qualms whatsoever, so why the hell not?", parse);
 						Text.NL();
@@ -2824,7 +2809,7 @@ export namespace MaliceScoutsScenes {
 				options.push({nameStr : "Don’t Use",
 					tooltip : Text.Parse("You have a bad feeling about this. Just drop the doggy dildo and walk away.", parse),
 					enabled : true,
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("Hmm. As much as you’d like to see what exactly <i>this</i> is capable of, you just plain don’t feel like a little scientific experimentation today. Mercy… yeah, it’s a fun thing, maybe you’ll show a little.", parse);
 						Text.NL();
@@ -2859,9 +2844,6 @@ export namespace MaliceScoutsScenes {
 			SetGameState(GameState.Event, Gui);
 			Text.Clear();
 
-			// this = encounter
-			const enc: ScoutEncounter = this;
-
 			let parse: IParse = {
 
 			};
@@ -2876,9 +2858,9 @@ export namespace MaliceScoutsScenes {
 				Text.Add("<i>“Don’t worry,”</i> he continues. <i>“I’d like to think that I’m a very ethical experimenter - there’s little point in making irreversible changes or permanently impairing potential test subjects, it makes acquiring the next one all that more difficult. Now, let’s see what I wanted to take a look at here…”</i>", parse);
 				Text.NL();
 				Text.Add("The alchemist pats at his toolbelt, chewing at his lip with his buckteeth until he flips open a small pouch and his hands close in upon a ", parse);
-				MaliceScoutsScenes.Goat.LossEntry(enc);
+				MaliceScoutsScenes.Goat.LossEntry(this);
 			});
-			Encounter.prototype.onLoss.call(enc);
+			Encounter.prototype.onLoss.call(this);
 		}
 
 		export function LossEntry(_enc: ScoutEncounter) {
@@ -3416,7 +3398,6 @@ export namespace MaliceScoutsScenes {
 
 		export function WinPrompt() {
 			const player: Player = GAME().player;
-			const enc  = this;
 			SetGameState(GameState.Event, Gui);
 
 			let parse: IParse = {
@@ -3462,7 +3443,7 @@ export namespace MaliceScoutsScenes {
 					});
 				}
 			});
-			Encounter.prototype.onVictory.call(enc);
+			Encounter.prototype.onVictory.call(this);
 		}
 
 		export function LossPrompt() {
@@ -3470,9 +3451,6 @@ export namespace MaliceScoutsScenes {
 			const party: Party = GAME().party;
 			SetGameState(GameState.Event, Gui);
 			Text.Clear();
-
-			// this = encounter
-			const enc: ScoutEncounter = this;
 
 			const parse: IParse = {
 
@@ -3507,13 +3485,13 @@ export namespace MaliceScoutsScenes {
 
 				const scenes = new EncounterTable();
 				scenes.AddEnc(() => {
-					MaliceScoutsScenes.Group.LossCatboyForcedTF(enc);
+					MaliceScoutsScenes.Group.LossCatboyForcedTF(this);
 				}, 1.0, () => true);
 				scenes.AddEnc(() => {
-					MaliceScoutsScenes.Group.LossMagicalBondage(enc);
+					MaliceScoutsScenes.Group.LossMagicalBondage(this);
 				}, 1.0, () => true);
 				scenes.AddEnc(() => {
-					MaliceScoutsScenes.Group.LossCatRape(enc);
+					MaliceScoutsScenes.Group.LossCatRape(this);
 				}, 1.0, () => player.FirstVag() && catlike >= 0.4);
 
 				/* TODO
@@ -3525,7 +3503,7 @@ export namespace MaliceScoutsScenes {
 				*/
 				scenes.Get();
 			});
-			Encounter.prototype.onLoss.call(enc);
+			Encounter.prototype.onLoss.call(this);
 		}
 
 		export function LossCatboyForcedTF(enc: ScoutEncounter) {

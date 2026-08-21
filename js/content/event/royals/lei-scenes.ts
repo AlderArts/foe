@@ -69,7 +69,7 @@ export namespace LeiScenes {
 		// PRE KRAWITZ
 		if (rigard.Krawitz.Q >= RigardFlags.KrawitzQ.Started && rigard.Krawitz.Q < RigardFlags.KrawitzQ.HeistDone) {
 			options.push({ nameStr : "Krawitz",
-				func() {
+				func: () => {
 					Text.Clear();
 
 					// rigard.Krawitz["Duel"] = 0; // 0 = no, 1 = superwin, 2 = win, 3 = loss
@@ -128,7 +128,7 @@ export namespace LeiScenes {
 				tooltip : "Ask for advice for dealing with Krawitz.",
 			});
 			options.push({ nameStr : "Talk",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You try to strike up a conversation with Lei, but he only glances at you, looking bemused, in response. <i>“Let us put off idle words until <b>after</b> you are finished with your task.”</i>", parse);
 					Text.Flush();
@@ -137,7 +137,7 @@ export namespace LeiScenes {
 			});
 		} else {
 			options.push({ nameStr : "Talk",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("<i>“Ask away, though I make no promises of answering.”</i>", parse);
 					Text.Flush();
@@ -148,7 +148,7 @@ export namespace LeiScenes {
 			});
 			if (lei.flags.Talk & LeiFlags.Talk.Skills) {
 				options.push({ nameStr : "Training",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("You ask Lei if he can help you get stronger.", parse);
 						Text.NL();
@@ -176,7 +176,7 @@ export namespace LeiScenes {
 			}
 			if (lei.flags.Talk & LeiFlags.Talk.Sex) {
 				options.push({ nameStr : "Sex",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("<i>“Do go on.”</i> Lei studies you with an unreadable expression.", parse);
 						Text.Flush();
@@ -295,7 +295,7 @@ export namespace LeiScenes {
 
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Confront",
-			func() {
+			func: () => {
 				Text.Clear();
 
 				if (party.Two()) {
@@ -338,7 +338,7 @@ export namespace LeiScenes {
 				const FightPrompt = () => {
 					const options: IChoice[] = [];
 					options.push({ nameStr : "Fight",
-						func() {
+						func: () => {
 							Text.Clear();
 							Text.Add("You tell him that you <i>will</i> use force if that's what it's going to take.", parse);
 							Text.NL();
@@ -349,7 +349,7 @@ export namespace LeiScenes {
 								// [Fight][Observe]
 								const options: IChoice[] = [];
 								options.push({ nameStr : "Fight",
-									func() {
+									func: () => {
 										Text.NL();
 										Text.Add("You decide it doesn't matter how menacing he makes himself sound. You'll take him on and make him tell you what you want to know.", parse);
 										Text.NL();
@@ -359,7 +359,7 @@ export namespace LeiScenes {
 									tooltip : "His confidence only serves to anger you further, and you resolve to fight.",
 								});
 								options.push({ nameStr : "Observe",
-									func() {
+									func: () => {
 										Text.Clear();
 										Text.Add("You decide that perhaps discretion is the better part of valor after all. Your cheeks flushing with shame, you tell him that you will bow to his judgement in this, and decline to fight him after all.", parse);
 										Text.NL();
@@ -386,7 +386,7 @@ export namespace LeiScenes {
 						tooltip : "Challenge Lei to a fight to get an explanation.",
 					});
 					options.push({ nameStr : "Bribe",
-						func() {
+						func: () => {
 							Text.Clear();
 							Text.Add("You recall that one of the things Lei said he valued was money, so you swallow your pride and offer to pay him for an explanation.", parse);
 							Text.NL();
@@ -396,7 +396,7 @@ export namespace LeiScenes {
 							// [Pay][Nevermind][Observe]
 							const options: IChoice[] = [];
 							options.push({ nameStr : "Pay",
-								func() {
+								func: () => {
 									Text.NL();
 									Text.Add("Grudgingly, you accept his price, and hand over the coins. He accepts them without counting, and nods at you slightly.", parse);
 									party.coin -= 400;
@@ -407,7 +407,7 @@ export namespace LeiScenes {
 								tooltip : "Pay 400 coins for the explanation.",
 							});
 							options.push({ nameStr : "Nevermind",
-								func() {
+								func: () => {
 									Text.NL();
 									Text.Add("You decide that you aren't willing to pay quite that much for a simple explanation, and reconsider your options.", parse);
 									Text.Flush();
@@ -416,7 +416,7 @@ export namespace LeiScenes {
 								tooltip : "That's more than you're willing to pay.",
 							});
 							options.push({ nameStr : "Nah",
-								func() {
+								func: () => {
 									Text.Clear();
 									Text.Add("He's asking an outrageous amount! You decide that you'll find out for yourself, and resolve to watch him for now.", parse);
 									Text.NL();
@@ -429,7 +429,7 @@ export namespace LeiScenes {
 						tooltip : "Offer to pay Lei for an explanation.",
 					});
 					options.push({ nameStr : "Observe",
-						func() {
+						func: () => {
 							Text.Clear();
 							Text.Add("You decide it’s going to be too troublesome to get an answer out of him directly, and stalk away, pretending frustration. Mostly pretending, anyway.", parse);
 							Text.NL();
@@ -444,14 +444,14 @@ export namespace LeiScenes {
 			tooltip : "Confront Lei about following the couple.",
 		});
 		options.push({ nameStr : "Observe",
-			func() {
+			func: () => {
 				Text.Clear();
 				LeiScenes.ObserveMain(first);
 			}, enabled : true,
 			tooltip : "Just wait and see what Lei does for now. If he’s following the couple, maybe they’ll show up here too.",
 		});
 		options.push({ nameStr : "Leave",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("On second thought, you decide, it's probably not worth bothering with him just now. The issue of him and the couple can wait until later.", parse);
 				Text.Flush();
@@ -513,7 +513,7 @@ export namespace LeiScenes {
 		// [Wait][Nah]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Wait",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You decide you might as well get it over with, and settle in to wait for the couple to come. You sit beside Lei, careful not to block his view, and the two of you drink in almost companionable silence while you wait.", parse);
 				Text.NL();
@@ -663,7 +663,7 @@ export namespace LeiScenes {
 			const options: IChoice[] = [];
 			if (!talkedPersonality) {
 				options.push({ nameStr : "Personality",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("You ask just what makes Krawitz so annoying.", parse);
 						Text.NL();
@@ -684,7 +684,7 @@ export namespace LeiScenes {
 			}
 			if (!talkedStatus) {
 				options.push({ nameStr : "Status",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("You can't help but notice the ‘Lord' part of Krawitz's monicker, and ask if it's really okay for you to offend someone like that.", parse);
 						Text.NL();
@@ -700,7 +700,7 @@ export namespace LeiScenes {
 				});
 			}
 			options.push({ nameStr : "Nothing else",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You decide that you've learned the basics of the situation, so it's time to get going. The man tells you the location of Krawitz's house, and says that you should come find Lei in the Lady's Blessing tavern when you're done, and you part ways.", parse);
 					Text.NL();
@@ -894,7 +894,7 @@ export namespace LeiScenes {
 				Text.Flush();
 
 				const observe = { nameStr : "Observe",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("You swallow your pride and have to admit that there's no way you're beating him head-on. Still, returning to the tavern, you decide that if you just wait and see, there's nothing he can do to stop you from doing that.", parse);
 						Text.NL();
@@ -907,7 +907,7 @@ export namespace LeiScenes {
 				// [Attack][Observe] strike 1
 				const options: IChoice[] = [];
 				options.push({ nameStr : "Attack",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("You charge after Lei, aiming to land a telling blow while his back is turned. Somehow, as you're a step behind him, and start your lunge, he simultaneously slips to the side, without turning, making it look like you were aiming at air. You stumble and get to your feet, glaring at him.", parse);
 						Text.NL();
@@ -921,7 +921,7 @@ export namespace LeiScenes {
 						// [Attack][Observe] strike 2
 						const options: IChoice[] = [];
 						options.push({ nameStr : "Attack",
-							func() {
+							func: () => {
 								Text.Clear();
 								Text.Add("A snarl of rage escapes you and you charge at him, swinging wildly at his head, but, again, he side-steps, as if you have the speed of a child.", parse);
 								Text.NL();
@@ -935,7 +935,7 @@ export namespace LeiScenes {
 								// [Attack][Observe] strike 3
 								const options: IChoice[] = [];
 								options.push({ nameStr : "Attack",
-									func() {
+									func: () => {
 										Text.Clear();
 										Text.Add("With a roar of outrage, you charge at Lei once more, your [feetDesc] finding even better purchase than before on the slightly damp cobblestones. Beyond the ability to form any coherent plans, you simply launch yourself at the man from three steps away, intending to simply hurl him down to the ground, and pound his head into the stones.", parse);
 										Text.NL();
@@ -1019,7 +1019,7 @@ export namespace LeiScenes {
 		if (!(lei.flags.Talk & LeiFlags.Talk.Skills)) {
 			options.push({ nameStr : "Skills",
 				tooltip : "Ask him how he came to be as powerful as he is.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You ask Lei how he came to be so good at combat.", parse);
 					Text.NL();
@@ -1047,7 +1047,7 @@ export namespace LeiScenes {
 		}
 		options.push({ nameStr : "Twins",
 			tooltip : "Ask him about his relationship with the royal twins.",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You ask Lei how he gets along with Rumi and Rani.", parse);
 				Text.NL();
@@ -1063,7 +1063,7 @@ export namespace LeiScenes {
 		});
 		options.push({ nameStr : "Past",
 			tooltip : "Ask him about his past.",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You tell Lei you’d like to get to know more about him. What he’s done over the years, where he came from, those sorts of things. ", parse);
 				if (lei.Relation() < 75) {
@@ -1077,7 +1077,7 @@ export namespace LeiScenes {
 		});
 		options.push({ nameStr : "Bodyguarding",
 			tooltip : "Ask what kind of special tasks the royal twins assign him.",
-			func() {
+			func: () => {
 
 				const first = !(lei.flags.Talk & LeiFlags.Talk.Sex);
 
@@ -1114,7 +1114,7 @@ export namespace LeiScenes {
 					const options: IChoice[] = [];
 					options.push({ nameStr : "Ask",
 						tooltip : "Ask Lei what he thinks about the twins’ acquisitions.",
-						func() {
+						func: () => {
 							lei.flags.Talk |= LeiFlags.Talk.Sex;
 
 							Text.Clear();
@@ -1132,7 +1132,7 @@ export namespace LeiScenes {
 								const options: IChoice[] = [];
 								options.push({ nameStr : "Offer",
 									tooltip : "Is he interested in you? You’re definitely interested in him.",
-									func() {
+									func: () => {
 										// TODO #set lei_sex_toggle = 1
 										lei.flags.SexOpen = 1;
 
@@ -1197,7 +1197,7 @@ export namespace LeiScenes {
 		// TODO
 		options.push({ nameStr : "Eden",
 			tooltip : "Ask Lei what he’s been doing around Eden; what he thinks of it.",
-			func() {
+			func: () => {
 				Text.Clear();
 
 				const scenes = [];
@@ -1269,7 +1269,7 @@ export namespace LeiScenes {
 		if (lei.flags.SexOpen === 0) {
 			options.push({ nameStr : "Flirt",
 				tooltip : "Flirt with him, and mention you’d like to do more than flirt.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You tell Lei that you’re curious whether his drive for increasing his skill extends beyond his swordplay - perhaps, to things that few get to see?", parse);
 					Text.NL();
@@ -1294,7 +1294,7 @@ export namespace LeiScenes {
 		} else {
 			options.push({ nameStr : "Discuss",
 				tooltip : "Actually, you’d like to return to a non-sexual relationship for now.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Feeling a little awkward, you tell Lei that while you have enjoyed his attention so far, you’d like to keep your relationship a bit more hands off for now.", parse);
 					Text.NL();
@@ -1343,7 +1343,7 @@ export namespace LeiScenes {
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Spar",
 			tooltip : "Ask Lei to spar with you.",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You ask Lei if he would like to spar.", parse);
 				Text.NL();
@@ -1416,10 +1416,9 @@ export namespace LeiScenes {
 		const player: Player = GAME().player;
 		const party: Party = GAME().party;
 		const lei: Lei = GAME().lei;
-		const enc = this;
 
 		SetGameState(GameState.Event, Gui);
-		enc.Cleanup();
+		this.Cleanup();
 		Text.Clear();
 
 		const parse: IParse = {
@@ -1427,7 +1426,7 @@ export namespace LeiScenes {
 		};
 
 		for (let i = 0; i < party.Num(); ++i) {
-			party.Get(i).AddExp(enc.lei.combatExp);
+			party.Get(i).AddExp(this.lei.combatExp);
 		}
 
 		TimeStep({hour: 1});
@@ -1493,10 +1492,9 @@ export namespace LeiScenes {
 	export function SparLoss() {
 		const party: Party = GAME().party;
 		const lei: Lei = GAME().lei;
-		const enc = this;
 
 		SetGameState(GameState.Event, Gui);
-		enc.Cleanup();
+		this.Cleanup();
 		Text.Clear();
 
 		const parse: IParse = {
@@ -1507,7 +1505,7 @@ export namespace LeiScenes {
 			party.Get(i).AddExp(5);
 		}
 
-		if (enc.lei.HPLevel() >= 0.5) {
+		if (this.lei.HPLevel() >= 0.5) {
 			Text.Add("Lei regards you calmly. <i>“I hope you have learned from that. You will need to improve to make this useful for me.”</i>", parse);
 			Text.NL();
 			Text.Add("You tell him that you have. You’ll make this quite interesting for him before too long!", parse);
@@ -1593,7 +1591,7 @@ export namespace LeiScenes {
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Observe",
 			tooltip : "This <i>still</i> has nothing to do with you. Keep watching.",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You shrug. Well, the situation’s unfortunate for the forces of law and order, but then, the forces of law and order in this area have never been much to begin with.", parse);
 				Text.NL();
@@ -1625,7 +1623,7 @@ export namespace LeiScenes {
 		});
 		options.push({ nameStr : "Assist",
 			tooltip : "You’d better help the unconscious guard. Who knows what your conscience might do if he’s killed in front of you...",
-			func() {
+			func: () => {
 				Text.Clear();
 				parse.nv = nv ? "you pace yourself, carefully avoiding the many potholes in your way" : "you’re forced to pace yourself as you stumble on a pothole in the darkness";
 				Text.Add("You set off at a run toward the fallen guard, though [nv].", parse);
@@ -1743,7 +1741,7 @@ export namespace LeiScenes {
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Approve",
 				tooltip : "Lei provided a free, useful lesson to the guard. Certainly praiseworthy.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("That’s generous of Lei - going to all the trouble of providing the guard with motivation, and taking just a sword in return.", parse);
 					Text.NL();
@@ -1752,7 +1750,7 @@ export namespace LeiScenes {
 			});
 			options.push({ nameStr : "Indifferent",
 				tooltip : "What do you care what Lei does in his free time? It doesn’t concern you.",
-				func() {
+				func: () => {
 					Text.Clear();
 					parse.nv = nv ? ". If" : " before remembering that he probably can’t see the movement. Or, given his handling of the sword earlier, perhaps he can… In any case, you tell him that if";
 					Text.Add("You shrug[nv] that’s how he wants to pass his time, that’s his decision. You’re a little curious, however - why does he bother with this?", parse);
@@ -1762,7 +1760,7 @@ export namespace LeiScenes {
 			});
 			options.push({ nameStr : "Chastise",
 				tooltip : "The fact that Lei is harming others just because he feels like it is quite horrible, and you’re going to tell him as much.",
-				func() {
+				func: () => {
 					Text.Clear();
 
 					lei.relation.DecreaseStat(0, 2);
@@ -1784,7 +1782,7 @@ export namespace LeiScenes {
 					const options: IChoice[] = [];
 					options.push({ nameStr : "Flirt",
 						tooltip : "And what kind of reward is he offering for your growth?",
-						func() {
+						func: () => {
 							Text.Clear();
 							Text.Add("Well, if he selfishly wants something like that, he’s going to have to pay up when you accomplish it for him, isn’t he?", parse);
 							Text.NL();
@@ -1799,13 +1797,13 @@ export namespace LeiScenes {
 					});
 					options.push({ nameStr : "Move on",
 						tooltip : "It doesn’t look like you’re going to make much progress in this argument. You’ve got other things to do.",
-						func() {
+						func: () => {
 							LeiScenes.GuardStalkingMoveOn(parse, nv);
 						}, enabled : true,
 					});
 					options.push({ nameStr : "Confront",
 						tooltip : "There are other ways he can be stopped too…",
-						func() {
+						func: () => {
 							Text.Clear();
 							Text.Add("You could always just report what he did to the guards. That would stop him - or at least slow him down.", parse);
 							Text.NL();
@@ -1845,7 +1843,7 @@ export namespace LeiScenes {
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Flirt",
 			tooltip : "Does he think these crops are so delicious?",
-			func() {
+			func: () => {
 				Text.Clear();
 				parse.juicyfirm = player.mfTrue("firm", "juicy");
 				Text.Add("You take a small step toward him. Is he looking forward to tasting the ripe, [juicyfirm] fruits of his cultivation so very much?", parse);
@@ -1886,7 +1884,7 @@ export namespace LeiScenes {
 		});
 		options.push({ nameStr : "Move on",
 			tooltip : "Well, time to get going. Maybe you’ll check on the guard along the way.",
-			func() {
+			func: () => {
 				LeiScenes.GuardStalkingMoveOn(parse, nv);
 			}, enabled : true,
 		});

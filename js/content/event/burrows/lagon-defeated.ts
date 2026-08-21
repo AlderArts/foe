@@ -72,7 +72,7 @@ export namespace LagonDScenes {
 		options.push({nameStr : "Sex",
 			tooltip : Text.Parse("Put an end to Lagon's boredom and take him for a little romp in the hay.", parse),
 			enabled : true,
-			func() {
+			func: () => {
 				LagonDScenes.SexPrompt();
 			},
 		});
@@ -80,7 +80,7 @@ export namespace LagonDScenes {
 		options.push({nameStr : "Scepter", // TODO
 			tooltip : Text.Parse(first ? "If this [scepter] can affect minds so much, maybe it can give Lagon a little attitude adjustment? It's worth a shot." : "Time to give Lagon a little time with his inner feelings.", parse),
 			enabled : true,
-			func() {
+			func: () => {
 				LagonDScenes.ScepterEntry();
 			},
 		});
@@ -179,7 +179,7 @@ export namespace LagonDScenes {
 		options.push({nameStr : "Pitch anal",
 			tooltip : Text.Parse("He’s just begging for your [cock] up his tight little bunny-butt.", parse),
 			enabled : player.BiggestCock(undefined, true) !== undefined,
-			func() {
+			func: () => {
 				LagonDScenes.PitchAnal();
 			},
 		});
@@ -649,7 +649,7 @@ export namespace LagonDScenes {
 		options.push({nameStr : "Sex",
 			tooltip : Text.Parse("Since he’s so eager to please, how about the two of you spend some quality time together?", parse),
 			enabled : true,
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("With a grin, you tell Lagon that you’d love a nice fuckfest.", parse);
 				Text.NL();
@@ -725,7 +725,7 @@ export namespace LagonDScenes {
 		options.push({nameStr : "Pitch anal",
 			tooltip : Text.Parse("If he’s that eager to get his ass tapped, why not oblige him?", parse),
 			enabled : player.BiggestCock(undefined, true) !== undefined,
-			func() {
+			func: () => {
 				LagonDScenes.ScepterPitchAnal();
 			},
 		});
@@ -1394,7 +1394,7 @@ export namespace LagonDScenes {
 			options.push({nameStr : "PC fuck",
 				tooltip : Text.Parse("How can you pass up the chance to humiliate Lagon again?", parse),
 				enabled : true,
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("With a hungry smile, you tell Vena that you’d like to do the honors.", parse);
 					Text.NL();
@@ -1413,7 +1413,7 @@ export namespace LagonDScenes {
 			options.push({nameStr : "Vena fuck",
 				tooltip : Text.Parse("There’s just too much delicious irony to turn up the chance to watch Vena dicking her husband for once.", parse),
 				enabled : true,
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("With a mischievous smirk and a courtly bow, you ask Vena to do the honors. It would mean so much more if she did it.", parse);
 					Text.NL();
@@ -1556,7 +1556,7 @@ export namespace LagonDScenes {
 			options.push({nameStr : "Cum",
 				tooltip : Text.Parse("You’ve got plenty of dick-cream to spare for Lagon; fill Vena with your cum and let Lagon see how a real [guygirl] does it!", parse),
 				enabled : true,
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("More than confident in your capabilities, you see no reason to rob yourself of any pleasure, nor Vena for that matter. With your concerns squashed, you allow yourself to thrust away with reckless abandon, feeling your control fraying thinner and thinner.", parse);
 					Text.NL();
@@ -1585,7 +1585,7 @@ export namespace LagonDScenes {
 			options.push({nameStr : "Save it",
 				tooltip : Text.Parse("Vena might be disappointed, but you want to give Lagon a stuffing he’ll remember for the rest of his days.", parse),
 				enabled : true,
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("The next time that you pull out, you hold there, breathing slowly and steadily in an effort to get yourself under control. Vena whimpers, squeezing down on your sensitive cock, but you have to take things carefully; you want to get her off too, you just want to make sure you don’t shoot your own load in the process.", parse);
 					Text.NL();
@@ -2071,7 +2071,7 @@ export namespace LagonDScenes {
 		options.push({nameStr : "Cum inside",
 			tooltip : Text.Parse("Best way to humiliate Lagon is to show him what it’s like to be bred like a bitch.", parse),
 			enabled : true,
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Zipping around behind Vena, you place your hands on her gloriously full ass - too busy to even cop a feel - and firmly shove her forward, driving her back inside of Lagon to the hilt.", parse);
 				Text.NL();
@@ -2099,7 +2099,7 @@ export namespace LagonDScenes {
 		options.push({nameStr : "Cum bath",
 			tooltip : Text.Parse("Lagon’s never going to live it down if his wife paints him in spooge.", parse),
 			enabled : true,
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Slipping over next to Vena, you watch her carefully, waiting for the moment to strike. As soon as her cock leaves the warm, tight confines of her husband’s ass, you pounce. Grappling the behemoth manhood, you roughly train it on the kneeling lagomorph, brushing the pulsating flesh with your hands.", parse);
 				Text.NL();

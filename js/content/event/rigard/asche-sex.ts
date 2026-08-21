@@ -12,40 +12,40 @@ export namespace AscheSexScenes {
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Fuck her",
 			tooltip : "You’ve long waited for the chance to have a go at the exotic shopkeeper.",
-			func() {
+			func: () => {
 				AscheSexScenes.FuckHer();
 			}, enabled : player.FirstCock() !== undefined || player.Strapon() !== undefined,
 		});
 		options.push({ nameStr : "Give Oral",
 			tooltip : "Better to give than to receive, isn’t it?",
-			func() {
+			func: () => {
 				AscheSexScenes.GiveOral();
 			}, enabled : true,
 		});
 		options.push({ nameStr : "Get Oral",
 			tooltip : "She certainly has a nice, long muzzle… wonder if her tongue’s just as good.",
-			func() {
+			func: () => {
 				AscheSexScenes.GetOral();
 			}, enabled : player.Humanoid() && (player.FirstCock() !== undefined || player.FirstVag() !== undefined),
 		});
 		if (player.FirstCock()) {
 			options.push({ nameStr : "Titfuck",
 				tooltip : "Those ripe melons sure look soft and juicy… a verdant valley to bury your cock in.",
-				func() {
+				func: () => {
 					AscheSexScenes.Titfuck();
 				}, enabled : true,
 			});
 		}
 		options.push({ nameStr : "Milk",
 			tooltip : "You’d like to sample her tits, please. Those are bound to be delicious.",
-			func() {
+			func: () => {
 				AscheSexScenes.MilkHer();
 			}, enabled : true,
 		});
 		if (player.FirstVag()) {
 			options.push({ nameStr : "Tribbing",
 				tooltip : "Maybe some lady love would be nice.",
-				func() {
+				func: () => {
 					AscheSexScenes.Tribbing();
 				}, enabled : true,
 			});

@@ -50,7 +50,7 @@ export namespace CvetaDateScenes {
 			if (glade.flags.Visit >= DryadGladeFlags.Visit.DefeatedOrchid) {
 				options.push({ nameStr : "Glade",
 					tooltip : "Why not take her out to the dryads’ glade?",
-					func() {
+					func: () => {
 						Text.Clear();
 						CvetaDateScenes.DryadGlade();
 					}, enabled : true,
@@ -58,7 +58,7 @@ export namespace CvetaDateScenes {
 			}
 			options.push({ nameStr : "Spring",
 				tooltip : "Take her to this forest spring you know…",
-				func() {
+				func: () => {
 					Text.Clear();
 					CvetaDateScenes.Spring();
 				}, enabled : true,
@@ -75,7 +75,7 @@ export namespace CvetaDateScenes {
 			if (cveta.flags.Date !== 0) {
 				options.push({ nameStr : "Up to her",
 					tooltip : "Well, where does she fancy going?",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("You tell Cveta that since you asked her out, she should decide where she wants to go this time around. The songstress looks a little surprised, her eyes growing wide, but she quickly recovers from the show of emotion and assumes her calm, pleasant demeanor once more. What was that all about?", parse);
 						Text.NL();
@@ -338,7 +338,7 @@ export namespace CvetaDateScenes {
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Home",
 			tooltip : "Ask her about home, and why she left.",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("<i>“I do not quite remember if I have told you this yet,”</i> Cveta replies. <i>“Suffice to say that I had an argument with my mother.</i>", parse);
 				Text.NL();
@@ -358,7 +358,7 @@ export namespace CvetaDateScenes {
 		});
 		options.push({ nameStr : "Hopes",
 			tooltip : "What does she hope to achieve with the outlaws?",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Cveta considers your question a moment against the backdrop of her gentle music. <i>“I do not quite understand. What do you mean by ‘achieve’?”</i>", parse);
 				Text.NL();
@@ -378,7 +378,7 @@ export namespace CvetaDateScenes {
 		});
 		options.push({ nameStr : "Yourself",
 			tooltip : "Ask the songstress what she thinks of you.",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Cveta closes her eyes, and you note her breathing deepen, her music slowing to match. <i>“Hmm… why do you ask?”</i>", parse);
 				Text.NL();
@@ -416,7 +416,7 @@ export namespace CvetaDateScenes {
 		});
 		options.push({ nameStr : "Listen",
 			tooltip : "Hold your silence and just listen to her play.",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("Not really wanting to spoil the mood by saying anything, you settle down and listen to Cveta play. The spring’s serene atmosphere is clearly having an effect on the songstress’ choice of music, the notes that rise from her fingers are slow and calm on the surface, but possessed of a deep, moving undercurrent that tugs gently at your mind, shifting it along a dark lakebed to parts unknown…", parse);
 				Text.NL();
@@ -460,7 +460,7 @@ export namespace CvetaDateScenes {
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Wash",
 				tooltip : "Get a little spring water in your cup and wash it off.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Cveta is a little surprised when you take her hand in your own, but soon relaxes as she realizes what you’re about to do. You pour the water in your cup over the offending stain, scrubbing as best as you can; another soon follows when your attempts to remove the stain from the cloth are met with varying degrees of success.", parse);
 					Text.NL();
@@ -474,7 +474,7 @@ export namespace CvetaDateScenes {
 			});
 			options.push({ nameStr : "Lick",
 				tooltip : "Shouldn’t let good jam go to waste, it’s finger-licking good.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Cveta looks a little surprised when you take her hand in your own, and is even more so when you give the stain a gentle lick. Even in the cloth of her gloves, the honey and jam taste pretty much as you’d expect, sweet and delicious. The songstress’ eyes widen as you engulf the entire fingertip in your mouth, suckling gently; she squirms, clearly flustered, but the resistance is no more than token.", parse);
 					Text.NL();
@@ -490,7 +490,7 @@ export namespace CvetaDateScenes {
 			});
 			options.push({ nameStr : "Watch",
 				tooltip : "She can handle it by herself, she’s a capable girl.",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("Grumbling to herself, Cveta pours the contents of her cup over the offending stain on her finger, then another when it refuses to wash out. You watch her with a faint smile - given her tiny frame, being sulky and angry only makes the songstress harder to take seriously.", parse);
 					Text.NL();

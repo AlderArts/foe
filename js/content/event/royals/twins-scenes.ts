@@ -48,7 +48,7 @@ export namespace TwinsScenes {
 		const options: IChoice[] = [];
 		if (rigard.Krawitz.Q >= RigardFlags.KrawitzQ.CaughtTerry) {
 			options.push({ nameStr : "Thief",
-				func() {
+				func: () => {
 					Text.Clear();
 					if (terry.flags.Saved <= TerryFlags.Saved.TalkedMiranda) {
 						Text.Add("You explain to them that you have been feeling guilty about the sentence of death decreed for the vulpine thief who inadvertently took the blame for your own raid on the Krawitz estate, as well as his own crimes there. You ask if they couldn't intervene somehow - at least to lighten his sentence, if they can't arrange a pardon?", parse);

@@ -13,7 +13,7 @@ export namespace AbilityNode {
 		let parse: IParse = {};
 
 		if (caster) {
-			parse         = caster.ParserPronouns(parse);
+			parse      = caster.ParserPronouns(parse);
 			parse.name = caster.nameDesc();
 			parse.Name = caster.NameDesc();
 			parse.poss = caster.possessive();
@@ -28,7 +28,7 @@ export namespace AbilityNode {
 			parse.hand = () => caster.HandDesc();
 		}
 		if (target) {
-			parse          = target.ParserPronouns(parse, "t");
+			parse       = target.ParserPronouns(parse, "t");
 			parse.tname = target.nameDesc();
 			parse.tName = target.NameDesc();
 			parse.tposs = target.possessive();
@@ -163,21 +163,20 @@ export namespace AbilityNode {
 			return _.bind(RunFallthrough, node);
 		}
 		function RunFallthrough(ability: Ability, encounter: Encounter, caster: Entity, target: Entity, result: number) {
-			const that: IAbilityNode = this;
-			const fraction = that.fraction || 1;
+			const fraction = this.fraction || 1;
 
 			const dmg = fraction * result;
 
-			const onattack = that.damageFunc(caster, target, dmg);
+			const onattack = this.damageFunc(caster, target, dmg);
 
 			if (onattack) {
 				// On dealing damage (dmg is negative)
 				if (dmg <= 0) {
-					_.each(that.onDamage, (node) => {
+					_.each(this.onDamage, (node) => {
 						node(ability, encounter, caster, target, dmg);
 					});
 				} else {
-					_.each(that.onAbsorb, (node) => {
+					_.each(this.onAbsorb, (node) => {
 						node(ability, encounter, caster, target, dmg);
 					});
 				}
@@ -191,9 +190,7 @@ export namespace AbilityNode {
 			return _.bind(RunAddSpellstack, node);
 		}
 		function RunAddSpellstack(ability: Ability, encounter: Encounter, caster: Entity, target: Entity, _result: number) {
-			const that: IAbilityNode = this;
-
-			const value = _.isFunction(that.value) ? that.value() : that.value;
+			const value = _.isFunction(this.value) ? this.value() : this.value;
 
 			const entry = target.GetCombatEntry(encounter);
 			entry.spellstack = entry.spellstack || [];
@@ -214,12 +211,10 @@ export namespace AbilityNode {
 			return _.bind(RunMatchSpellstack, node);
 		}
 		function RunMatchSpellstack(ability: Ability, encounter: Encounter, caster: Entity, target: Entity, result: number) {
-			const that: IAbilityNode = this;
-
-			const consume = that.consume;
+			const consume = this.consume;
 			const entry = target.GetCombatEntry(encounter);
 			const spellstack = entry.spellstack || [];
-			const stack = that.stack;
+			const stack = this.stack;
 			let match = true;
 			if (spellstack.length >= stack.length) {
 				let first = 0;
@@ -239,11 +234,11 @@ export namespace AbilityNode {
 			if (match) {
 				if (consume) { entry.spellstack = []; }
 
-				_.each(that.onHit, (node) => {
+				_.each(this.onHit, (node) => {
 					node(ability, encounter, caster, target, result);
 				});
 			} else {
-				_.each(that.onMiss, (node) => {
+				_.each(this.onMiss, (node) => {
 					node(ability, encounter, caster, target, result);
 				});
 			}
@@ -258,12 +253,11 @@ export namespace AbilityNode {
 			return _.bind(RunCancel, node);
 		}
 		function RunCancel(ability: Ability, encounter: Encounter, caster: Entity, target: Entity, result: number) {
-			const that: IAbilityNode = this;
 			const entry = target.GetCombatEntry(encounter);
 			// Only trigger if target is casting
 			if (entry && entry.casting) {
 				// Override result
-				result = that.result || result;
+				result = this.result || result;
 				// Is casted ability cancellable?
 				let cancellable = entry.casting.ability.cancellable;
 				// Check if applicable in this situation (for super special cancels)
@@ -279,12 +273,12 @@ export namespace AbilityNode {
 					// Cancel casting
 					entry.casting = undefined;
 					// Apply any additional effects
-					_.each(that.onHit, (node) => {
+					_.each(this.onHit, (node) => {
 						node(ability, encounter, caster, target, result);
 					});
 				} else {
 					// On miss
-					_.each(that.onMiss, (node) => {
+					_.each(this.onMiss, (node) => {
 						node(ability, encounter, caster, target);
 					});
 				}
@@ -297,10 +291,9 @@ export namespace AbilityNode {
 			return true;
 		}
 		export function Regular(caster: Entity, target: Entity) {
-			const that: IAbilityNode = this;
-			const hitMod = that.hitMod || 1;
-			const hit    = hitMod * that.hitFunc(caster, target);
-			const evade  = that.evadeFunc(caster, target);
+			const hitMod = this.hitMod || 1;
+			const hit    = hitMod * this.hitFunc(caster, target);
+			const evade  = this.evadeFunc(caster, target);
 
 			return Ability.ToHit(hit, evade);
 		}
@@ -332,13 +325,12 @@ export namespace AbilityNode {
 
 	export namespace ToDamage {
 		export function Regular(caster: Entity, target: Entity) {
-			const that: IAbilityNode = this;
-			const damageType = that.damageTypeNode ? that.damageTypeNode : caster.elementAtk;
-			const atkMod     = that.atkMod || 1;
-			const defMod     = that.defMod || 1;
+			const damageType = this.damageTypeNode ? this.damageTypeNode : caster.elementAtk;
+			const atkMod     = this.atkMod || 1;
+			const defMod     = this.defMod || 1;
 
-			const atkDmg     = atkMod * that.atkFunc(caster, target);
-			const def        = defMod * that.defFunc(caster, target);
+			const atkDmg     = atkMod * this.atkFunc(caster, target);
+			const def        = defMod * this.defFunc(caster, target);
 
 			// let dmg = atkDmg - def;
 			let dmg = Ability.Damage(atkDmg, def, caster.level, target.level);
@@ -350,10 +342,9 @@ export namespace AbilityNode {
 			return -dmg;
 		}
 		export function Heal(caster: Entity, target: Entity) {
-			const that: IAbilityNode = this;
-			const atkMod  = that.atkMod || 1;
+			const atkMod  = this.atkMod || 1;
 
-			let healing = atkMod * that.atkFunc(caster, target);
+			let healing = atkMod * this.atkFunc(caster, target);
 
 			if (healing < 0) { healing = 0; }
 			healing = Math.floor(healing);
@@ -423,21 +414,19 @@ export namespace AbilityNode {
 	}
 
 	export function Run(ability: Ability, encounter: Encounter, caster: Entity, target: Entity|Party|any, result: number) {
-		const that: IAbilityNode = this;
-
 		// OnCast, always apply no matter what
-		_.each(that.onCast, (node) => {
+		_.each(this.onCast, (node) => {
 			node(ability, encounter, caster, target);
 		});
 
 		// Checks if it's actually possible to cast
-		if (!Ability.EnabledCost(that, caster)) { return; }
+		if (!Ability.EnabledCost(this, caster)) { return; }
 		// Drain cost
-		Ability.ApplyCost(that, caster);
+		Ability.ApplyCost(this, caster);
 
 		const targets = _.has(target, "members") ? target.members : [target];
 
-		let nrAttacks = that.nrAttacks;
+		let nrAttacks = this.nrAttacks;
 		if (_.isFunction(nrAttacks)) {
 			nrAttacks = nrAttacks(ability, encounter, caster, target, result);
 		} else if (!_.isNumber(nrAttacks)) {
@@ -447,33 +436,33 @@ export namespace AbilityNode {
 		// For each target
 		_.each(targets, (e) => {
 			// Only hit fallen if allowed
-			if (!that.hitFallen && e.Incapacitated()) { return; }
+			if (!this.hitFallen && e.Incapacitated()) { return; }
 			// For x number of strikes
 			_.times(nrAttacks, () => {
-				const hit = that.toHit ? Math.random() < that.toHit(caster, e) : true;
+				const hit = this.toHit ? Math.random() < this.toHit(caster, e) : true;
 				// Check if it hits
 				if (hit) {
 					// If it can damage
-					if (that.toDamage) {
-						let dmg = that.toDamage(caster, e);
+					if (this.toDamage) {
+						let dmg = this.toDamage(caster, e);
 
-						if (that.damageFunc) {
-							dmg = that.damageFunc(encounter, caster, e, dmg);
+						if (this.damageFunc) {
+							dmg = this.damageFunc(encounter, caster, e, dmg);
 						}
 
 						if (_.isNumber(dmg)) {
 							// Apply damage to pools
-							_.each(that.damagePool, (node) => {
+							_.each(this.damagePool, (node) => {
 								node(ability, encounter, caster, e, dmg);
 							});
 
 							// On dealing damage (dmg is negative)
 							if (dmg <= 0) {
-								_.each(that.onDamage, (node) => {
+								_.each(this.onDamage, (node) => {
 									node(ability, encounter, caster, e, dmg);
 								});
 							} else {
-								_.each(that.onAbsorb, (node) => {
+								_.each(this.onAbsorb, (node) => {
 									node(ability, encounter, caster, e, dmg);
 								});
 							}
@@ -481,12 +470,12 @@ export namespace AbilityNode {
 					}
 
 					// Always apply this on hit, no matter what
-					_.each(that.onHit, (node) => {
+					_.each(this.onHit, (node) => {
 						node(ability, encounter, caster, e, result);
 					});
 				} else {
 					// On miss
-					_.each(that.onMiss, (node) => {
+					_.each(this.onMiss, (node) => {
 						node(ability, encounter, caster, e);
 					});
 				}

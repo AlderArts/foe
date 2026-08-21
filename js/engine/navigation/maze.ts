@@ -47,15 +47,14 @@ export class Maze {
 		}
 	}
 	public Print(room: MazeRoom) {
-		const maze = this;
 		// TODO TEMP
 		Text.Add(`<table class='party'>`);
-		_.times(maze.yMax + 1, (y) => {
+		_.times(this.yMax + 1, (y) => {
 			Text.Add(`<tr>`);
-			_.times(maze.xMax + 1, (x) => {
+			_.times(this.xMax + 1, (x) => {
 				Text.Add(`<td>`);
 				let img = ``;
-				const r = maze.GetRoom(x, y);
+				const r = this.GetRoom(x, y);
 				if (r === room) {
 					img = `Player`;
 				} else if (r) {

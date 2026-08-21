@@ -476,7 +476,7 @@ export namespace LBScenes {
 		const innPrompt = () => {
 			const options: IChoice[] = [];
 			options.push({ nameStr : "Talk",
-				func() {
+				func: () => {
 					Text.Clear();
 					if (!RigardFlags.LB.KnowsOrvin()) {
 						Text.Add("You tell him that you’d like to get to know a bit more about him and the inn.", parse);
@@ -498,7 +498,7 @@ export namespace LBScenes {
 				tooltip : "Chat with the innkeeper.",
 			});
 			options.push({ nameStr : "Room",
-				func() {
+				func: () => {
 					Text.Clear();
 
 					/*
@@ -529,7 +529,7 @@ export namespace LBScenes {
 					} else {
 						const options: IChoice[] = [];
 						options.push({ nameStr : "Rent room",
-							func() {
+							func: () => {
 								Text.Clear();
 
 								let roomNumber = (Math.floor(Math.random() * 3) + 2) * 100;
@@ -573,7 +573,7 @@ export namespace LBScenes {
 							tooltip : "Rent a room for " + RigardFlags.LB.RoomCost() + " coins.",
 						});
 						options.push({ nameStr : "Don't",
-							func() {
+							func: () => {
 								Text.Clear();
 								Text.Add("You thank [ikname] for the information and tell him that perhaps you’ll need a room some other time.", parse);
 								Text.NL();
@@ -588,7 +588,7 @@ export namespace LBScenes {
 				tooltip : Text.Parse("Ask [ikname] about the pricing for rooms.", parse),
 			});
 			options.push({ nameStr : "Drink",
-				func() {
+				func: () => {
 					Text.Clear();
 					parse.todaytonight = WorldTime().hour >= 17 || WorldTime().hour < 4 ? "tonight" : "today";
 					Text.Add("You ask [ikname] what drinks he has on offer [todaytonight].", parse);
@@ -637,7 +637,7 @@ export namespace LBScenes {
 		const options: IChoice[] = [];
 		// Various info about the inn
 		options.push({ nameStr : "Inn",
-			func() {
+			func: () => {
 				Text.Clear();
 
 				Text.Add("You ask Orvin to tell you a little more about the inn.");
@@ -705,7 +705,7 @@ export namespace LBScenes {
 		});
 		if (rigard.LB.CityTalk === 0) {
 			options.push({ nameStr : "City",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You tell Orvin you’re new to the city and ask if there’s anything he can tell you about it.", parse);
 					Text.NL();
@@ -723,7 +723,7 @@ export namespace LBScenes {
 			});
 		} else {
 			options.push({ nameStr : "Caravans",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You ask Orvin what’s going on with the caravans.", parse);
 					Text.NL();
@@ -742,7 +742,7 @@ export namespace LBScenes {
 				tooltip : "Ask him about the missing caravans.",
 			});
 			options.push({ nameStr : "Outlaws",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You ask Orvin what the situation with the outlaws is.", parse);
 					Text.NL();
@@ -757,7 +757,7 @@ export namespace LBScenes {
 				tooltip : "Ask him about the outlaws.",
 			});
 			options.push({ nameStr : "Royal guards",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You ask Orvin what the Royal Guards are doing.", parse);
 					Text.NL();
@@ -781,7 +781,7 @@ export namespace LBScenes {
 
 		if (lei.flags.Met < LeiFlags.Met.KnowName) {
 			options.push({ nameStr : "Stranger",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You ask Orvin if he knows anything about the cloaked stranger [sit] alone by the wall.", {sit : leiPresent ? "sitting" : "who sits"});
 					Text.NL();
@@ -797,7 +797,7 @@ export namespace LBScenes {
 			});
 		} else {
 			options.push({ nameStr : "Lei",
-				func() {
+				func: () => {
 					Text.Clear();
 					Text.Add("You ask Orvin if he can tell you anything about Lei", parse);
 					if (lei.flags.ToldOrvin === 0) {
@@ -834,7 +834,7 @@ export namespace LBScenes {
 		// SixtyNine
 		if (room69.flags.Rel !== Room69Flags.RelFlags.NotMet) {
 			options.push({ nameStr : "Sixtynine",
-				func() {
+				func: () => {
 					Text.Clear();
 					if (room69.flags.Rel === Room69Flags.RelFlags.BrokeDoor || room69.flags.Rel === Room69Flags.RelFlags.BadTerms) {
 						Text.Add("Orvin looks you up and down in response to your question. <i>“Well, I suppose I should tell you, even if you aren’t exactly friendly with it.”</i>", parse);
@@ -881,7 +881,7 @@ export namespace LBScenes {
 		}
 
 		options.push({ nameStr : "Rumors",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You ask Orvin if he’s heard any interesting rumors recently.", parse);
 				Text.NL();
@@ -947,7 +947,7 @@ export namespace LBScenes {
 			tooltip : "Ask him if there are any interesting rumors going around.",
 		});
 		options.push({ nameStr : "Vixen",
-			func() {
+			func: () => {
 				Text.Clear();
 
 				parse.foxvixen = terry.mfPronoun("fox", "vixen");
@@ -1024,7 +1024,7 @@ export namespace LBScenes {
 		// [Sure][Nah]
 		const options: IChoice[] = [];
 		options.push({ nameStr : "Sure",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("", parse);
 				Text.NL();
@@ -1033,7 +1033,7 @@ export namespace LBScenes {
 			tooltip : "",
 		});
 		options.push({ nameStr : "Nah",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("", parse);
 				Text.NL();
@@ -1065,7 +1065,7 @@ export namespace LBScenes {
 
 		// Beers
 		beers.push({ nameStr : "Local brew",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You ask him for the local brew, and he pours it for you into a wide glass, careful to avoid having the head get too tall.", parse);
 				Text.NL();
@@ -1084,7 +1084,7 @@ export namespace LBScenes {
 			},
 		});
 		beers.push({ nameStr : "Stout",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You ask him for the Tricker’s stout, and he pours it for you into a wide glass, careful to avoid having the head get too tall.", parse);
 				Text.NL();
@@ -1106,7 +1106,7 @@ export namespace LBScenes {
 			},
 		});
 		beers.push({ nameStr : "Ale",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You ask him for the Highlander ale, and he pours it for you into a wide glass, careful to avoid having the head get too tall.", parse);
 				Text.NL();
@@ -1130,7 +1130,7 @@ export namespace LBScenes {
 
 		// Wines
 		wines.push({ nameStr : "Local wine",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You ask for the local wine. You pay him, and drink in slow sips. It’s not so bad, but the taste of spirits is much too sharp underneath its fruity raspberry flavor.", parse);
 				Text.NL();
@@ -1148,7 +1148,7 @@ export namespace LBScenes {
 			},
 		});
 		wines.push({ nameStr : "West Rirvale",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You ask for the West Rirvale wine. Paying him, you drink in slow sips. It really is quite a nice taste - the different flavors mesh well together, while still being distinguishable.", parse);
 				Text.NL();
@@ -1168,7 +1168,7 @@ export namespace LBScenes {
 			},
 		});
 		wines.push({ nameStr : "Orsineau",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You ask him for the <i>“Royal”</i> wine. Paying him, you drink the red in slow sips. It is an impressively rich harmonious taste. You feel yourself notice one flavor after another, your mind drawn along with each one. It is a rather sweet wine, but instead of being cloying, it somehow gives you more energy and determination.", parse);
 				Text.NL();
@@ -1194,7 +1194,7 @@ export namespace LBScenes {
 
 		// Non-alcoholic
 		nonalcoholic.push({ nameStr : "Water",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You ask him for the water, and drink it down after paying. It’s cool and pure, and you find yourself refreshed after drinking it. Maybe it was worth the coins after all.", parse);
 				Text.Flush();
@@ -1208,7 +1208,7 @@ export namespace LBScenes {
 			},
 		});
 		nonalcoholic.push({ nameStr : "Lemonade",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("You ask him for a glass of lemonade, and drink it after paying. It is just the right shade of sour, sending a slight tingle along your tongue, without being unpleasant. You feel a little more alert and energetic after drinking the beverage.", parse);
 				Text.Flush();
@@ -1222,7 +1222,7 @@ export namespace LBScenes {
 			},
 		});
 		nonalcoholic.push({ nameStr : "Tea",
-			func() {
+			func: () => {
 				Text.Clear();
 				if (rigard.LB.Tea === 0) {
 					Text.Add("You’re a little wary of the blob-like organic machine that’s supposed to make your tea, but decide to give it a chance.", parse);
@@ -1277,7 +1277,7 @@ export namespace LBScenes {
 		});
 
 		exotic.push({ nameStr : "Firebrandy",
-			func() {
+			func: () => {
 				Text.Clear();
 				if (rigard.LB.Lizan === 0) {
 					Text.Add("You pay [ikname] and look at your drink skeptically. The liquid is an orange red, and seems to swirl even while you hold the cup still. You can definitely see how it got its name.", parse);
@@ -1315,7 +1315,7 @@ export namespace LBScenes {
 			},
 		});
 		exotic.push({ nameStr : "Nectar",
-			func() {
+			func: () => {
 				parse.name   = kiakai.name;
 				parse.heshe  = kiakai.heshe();
 				parse.HeShe  = kiakai.HeShe();
@@ -1382,7 +1382,7 @@ export namespace LBScenes {
 			},
 		});
 		exotic.push({ nameStr : "Green Fairy",
-			func() {
+			func: () => {
 				Text.Clear();
 				if (rigard.LB.Fairy === 0) {
 					Text.Add("You find yourself a little curious about just how much alcohol you can handle, and pay [ikname] for a glass of the green fairy.", parse);
@@ -1419,7 +1419,7 @@ export namespace LBScenes {
 			},
 		});
 		exotic.push({ nameStr : "Red River",
-			func() {
+			func: () => {
 				Text.Clear();
 				if (rigard.LB.Red === 0) {
 					parse.fairy = rigard.LB.Fairy !== 0 ? "You’ve already braved the green fairy, and are quite sure this can’t be nearly as bad. " : "";
@@ -1459,7 +1459,7 @@ export namespace LBScenes {
 			},
 		});
 		exotic.push({ nameStr : "Chocolate milk",
-			func() {
+			func: () => {
 				Text.Clear();
 				Text.Add("With some bemusement, you hand over the coins to [ikname], and receive your glass of chocolate milk. The liquid is a smooth light brown color, and, to no one’s surprise, smells of a combination of chocolate and milk.", parse);
 				Text.NL();
@@ -1583,7 +1583,7 @@ export namespace LBScenes {
 					const comp = party.Get(i);
 					parse.comp    = comp.name;
 					options.push({ nameStr : comp.name,
-						func(obj: Entity) {
+						func: (obj: Entity) => {
 							Text.NL();
 							Text.Add("You decide that [comp] can share your room, and lead [chimher] inside.", { comp : obj.name, chimher : obj.himher() });
 							Text.Flush();
@@ -1594,7 +1594,7 @@ export namespace LBScenes {
 					});
 				}
 				options.push({ nameStr : "No one",
-					func() {
+					func: () => {
 						Text.NL();
 						Text.Add("You decide you’ll just take this room for yourself, and head inside.", parse);
 						Text.Flush();
@@ -1671,7 +1671,7 @@ export namespace LBScenes {
 				// [Sure][Nah]
 				const options: IChoice[] = [];
 				options.push({ nameStr : "Accept",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("You nod, accepting the offer a little sheepishly. You probably do need a little help here.", parse);
 						Text.NL();
@@ -1683,7 +1683,7 @@ export namespace LBScenes {
 					tooltip : Text.Parse("Accept [comp]’s help in getting to your room.", parse),
 				});
 				options.push({ nameStr : "Decline",
-					func() {
+					func: () => {
 						Text.Clear();
 						Text.Add("You wave [comp] aside, and stalk off ahead of [himher], trying to seem confident. Behind you, you hear [himher] trailing after you, even [hisher] steps sounding doubtful. Well, you’ll show [himher].", parse);
 						Text.NL();
