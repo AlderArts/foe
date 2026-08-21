@@ -40,7 +40,6 @@ export default tseslint.config(
 			'@typescript-eslint/no-explicit-any': 'warn',
 			'@typescript-eslint/no-this-alias': 'warn',
 			'no-constant-condition': 'warn',
-			'@typescript-eslint/no-duplicate-enum-values': 'warn',
 			'no-constant-binary-expression': 'warn',
 			'no-fallthrough': 'warn',
 			'no-prototype-builtins': 'warn',

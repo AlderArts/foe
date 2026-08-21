@@ -369,7 +369,7 @@ export namespace CaleScenes {
 			Text.Add("You nod as you digest that fact. Then, prompted by curiosity, you ask how he knows Rosalin - it looks and sounds like the two of them are pretty close.", parse);
 			Text.NL();
 			Text.Add("<i>“Rosie and I got a thing going… well, I do anyway. But it’s nothing serious. She needs to get laid sometimes, and I like getting laid. She needs a stud, and I like pussy. Simple math. ", parse);
-			if (cale.flags.Met === CaleFlags.Met.YouTookRosalin) {
+			if (cale.flags.Met === CaleFlags.Met.First) { // YouTookRosalin
 				Text.Add("Not gonna lie, I’m not happy that you beat me to the punch last time, but I won’t hold it against you either. So rest easy, there’s always next time,”</i> he gives you a lopsided grin.", parse);
 			} else {
 				Text.Add("I don’t mind sharing her from time to time. So long as you don’t hog all of her for yourself.”</i> The wolf gives you a lopsided grin.", parse);

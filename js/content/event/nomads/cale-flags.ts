@@ -2,7 +2,6 @@ export namespace CaleFlags {
     export enum Met {
         NotMet = 0,
         First  = 1,
-        YouTookRosalin  = 1,
         CaleTookRosalin = 2,
         SharedGotFucked = 3,
         SharedFuckedHim = 4,

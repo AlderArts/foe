@@ -197,7 +197,7 @@ export namespace GwendyScenes {
         const { shortstackPC, tallPC } = player.HeightDiff(gwendy);
         const atLoft = GAME().party.location === WORLD().loc.Farm.Loft;
 
-        gwendy.flags.Bailout = GwendyFlags.Bailout.Dominate;
+        gwendy.flags.Bailout = GwendyFlags.Bailout.Resolved; //Dominate
 
         Text.Clear();
         Text.Out(`You’ve had just about enough of this charade. Quite bluntly, you tell her that this entire challenge thing she’s been pushing is nonsensical. She’s just making up rules as she goes, and it’s getting more and more forced as times goes by. Why go through all the trouble when it’s obvious she’s just looking for an excuse to fuck?
@@ -1227,7 +1227,7 @@ export namespace GwendyScenes {
             }
         }
 
-        if (gwendy.flags.Bailout === GwendyFlags.Bailout.Dominate) {
+        if (gwendy.flags.Bailout === GwendyFlags.Bailout.Resolved) { //Dominate
             Text.NL();
             Text.Out(`Really, she's going to try pulling this one again? The farmgirl blushes under your scrutiny... you have a feeling that she might actually <i>want</i> to lose this one. Still... should you humor her?`);
         } else if (gwendy.flags.Bailout === GwendyFlags.Bailout.Submit) {
@@ -1264,7 +1264,7 @@ export namespace GwendyScenes {
             skillcheck += Math.random() * 10 - 5;
             skillcheck -= Math.min(gwendy.flags.WorkMilked, 10);
 
-            if (gwendy.flags.Bailout === GwendyFlags.Bailout.Dominate) {
+            if (gwendy.flags.Bailout === GwendyFlags.Bailout.Resolved) { //Dominate
                 skillcheck += 25;
             } else if (gwendy.flags.Bailout === GwendyFlags.Bailout.Submit) {
                 skillcheck -= 25;
@@ -1412,7 +1412,7 @@ export namespace GwendyScenes {
         if (lose || skillcheck < 20) {
             gwendy.flags.LostChallenge++;
 
-            if (gwendy.flags.Bailout === GwendyFlags.Bailout.Dominate) {
+            if (gwendy.flags.Bailout === GwendyFlags.Bailout.Resolved) { //Dominate
                 Text.Out(`“My... what a surprise, I win again. Are you even trying anymore?” Gwendy grins at you.`);
             } else if (gwendy.flags.Bailout === GwendyFlags.Bailout.Submit) {
                 Text.Out(`“My, my... seems I still got it!” Gwendy almost looks a little surprised at having won.`);
@@ -1439,7 +1439,7 @@ export namespace GwendyScenes {
         } else {
             gwendy.flags.WonChallenge++;
 
-            if (gwendy.flags.Bailout === GwendyFlags.Bailout.Dominate) {
+            if (gwendy.flags.Bailout === GwendyFlags.Bailout.Resolved) { //Dominate
                 Text.Out(`“Mmm... seems you've won. What will you do to me this time, I wonder?” From her tone, Gwendy doesn't seem to mind the idea of being your plaything.`);
             } else if (gwendy.flags.Bailout === GwendyFlags.Bailout.Submit) {
                 Text.Out(`“Hmm, you've been holding back on me, haven't you?” Gwendy looks like she didn't expect things to turn out this way. “Still, fair is fair... and you've earned your win. This time.”`);

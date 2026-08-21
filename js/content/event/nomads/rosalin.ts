@@ -898,7 +898,7 @@ export namespace RosalinScenes {
 			func() {
 				Text.Clear();
 
-				cale.flags.Met = CaleFlags.Met.YouTookRosalin;
+				cale.flags.Met = CaleFlags.Met.First; // YouTookRosalin
 
 				rosalin.relation.IncreaseStat(100, 5);
 

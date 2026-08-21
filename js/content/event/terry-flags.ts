@@ -10,8 +10,7 @@ export namespace TerryFlags {
     export enum Met {
         NotMet  = 0,
         Found   = 1,
-        Caught  = 2,
-        LetHer  = 2,
+        Caught  = 2, // LetHer
         StopHer = 3,
         TakeHim = 4,
     }

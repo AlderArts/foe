@@ -658,7 +658,7 @@ export namespace TerryScenes {
 					terry.relation.DecreaseStat(-100, 5);
 					miranda.relation.IncreaseStat(100, 3);
 
-					terry.flags.Met = TerryFlags.Met.LetHer; // "0"
+					terry.flags.Met = TerryFlags.Met.Caught; // "0"
 
 					Gui.PrintDefaultOptions();
 				}, enabled : true,
@@ -931,7 +931,7 @@ export namespace TerryScenes {
 		Text.NL();
 		Text.Add("So, he remembers you then?", parse);
 		Text.NL();
-		if (terry.flags.Met === TerryFlags.Met.LetHer) {
+		if (terry.flags.Met === TerryFlags.Met.Caught) { // Note: Let Her
 			Text.Add("<i>“You let that dog rape me! What’re you here for? Want to finish what you started?”</i>", parse);
 			Text.NL();
 			Text.Add("You tell him that, actually, no; you came to see him released.", parse);

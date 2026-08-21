@@ -17,7 +17,6 @@ export namespace GwendyFlags {
 		Slip     = 1,
 		Talked   = 2,
 		Resolved = 3,
-		Dominate = 3,
 		Submit   = 4,
 	}
 
