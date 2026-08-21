@@ -1617,7 +1617,7 @@ export namespace GwendyScenes {
                 options.push({ nameStr : "Strapon",
                     func() {
                         GwendyScenes.ChallengeSexAnal(GwendyFlags.Toys.Strapon, hangout);
-                    }, enabled : false && !player.FirstCock(), // TODO ACTIVATE SCENE
+                    }, enabled : false /* && !player.FirstCock() */, // TODO ACTIVATE SCENE
                     tooltip : "Fuck her with one of her horsecock strap-ons.",
                 });
                 options.push({ nameStr : "R.Strapon",
@@ -2388,7 +2388,7 @@ export namespace GwendyScenes {
                     { nameStr : "Strapon",
                         func() {
                             GwendyScenes.ChallengeSexAnalToys(GwendyFlags.Toys.Strapon, hangout, first);
-                        }, enabled : false && !player.FirstCock(), // TODO ACTIVATE SCENE
+                        }, enabled : false /* && !player.FirstCock() */, // TODO ACTIVATE SCENE
                         tooltip : "Fuck her with one of her equine strap-ons.",
                     }, { nameStr : "R.Strapon",
                         func() {

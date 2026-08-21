@@ -662,7 +662,7 @@ export namespace RoamingScenes {
 						Text.Flush();
 						fucked = true;
 						prompt();
-					}, enabled : false && fucked === false,
+					}, enabled : false /* && fucked === false */,
 					tooltip : "",
 				});
 				options.push({ nameStr : "Loot",
