@@ -35,14 +35,11 @@ export default tseslint.config(
 		rules: {
 			// Legacy codebase: keep the noisiest rules as warnings until a cleanup pass
 			'@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
-			'no-empty': 'off',
 			'@typescript-eslint/no-namespace': 'off',
 			'@typescript-eslint/no-explicit-any': 'warn',
 			'@typescript-eslint/no-this-alias': 'warn',
-			'no-constant-condition': 'warn',
 			'no-fallthrough': 'warn',
-			'no-prototype-builtins': 'warn',
-			'no-var': 'warn'
+			'no-prototype-builtins': 'warn'
 		}
 	}
 );

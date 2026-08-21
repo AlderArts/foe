@@ -378,11 +378,13 @@ export namespace KiakaiScenes {
 					Text.NL();
 
 					// TODO: VISITED TREE CITY
-					if (true) {
+					//if (true) {
 						Text.Add("<i>“It is even rumored that there is an entire city clinging to the upper branches.”</i>", parse);
+						/*
 					} else {
 						Text.Add("<i>“Even so, it still surprises me that an entire city could thrive there, so far above the ground.”</i>", parse);
 					}
+					*/
 				});
 				// CITIES
 				scenes.push(() => {

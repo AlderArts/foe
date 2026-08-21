@@ -101,6 +101,7 @@ export namespace OrchidScenes {
 
 		// [name]
 		const options: IChoice[] = [];
+		/*
 		if (false) { // TODO
 		options.push({ nameStr : "Spring",
 			tooltip : "Maybe Orchid knows of a way to get past the thorns?",
@@ -132,6 +133,7 @@ export namespace OrchidScenes {
 			}, enabled : true,
 		});
 		}
+		*/
 		options.push({ nameStr : "How is she?",
 			tooltip : "She’s been through a lot, and you’re still concerned for her wellbeing… ask her how she’s holding up.",
 			func() {
@@ -508,7 +510,8 @@ export namespace OrchidScenes {
 					Text.Add("<i>“It was shaped like a snake, a snake with glowing eyes and a wide mouth, with four sharp fangs.”</i>", parse);
 					Text.NL();
 					// TODO HAVE SEEN MAJID STAFF FLAG
-					parse.m = false ? " In fact, haven’t you seen such a staff before?" : "";
+					//parse.m = false ? " In fact, haven’t you seen such a staff before?" : "";
+					parse.m = "";
 					Text.Add("You make a mental note of that.[m] Those details certainly help you narrow things down, but is there anything else she can tell you about him?", parse);
 					Text.NL();
 					Text.Add("<i>“Umm… well he was a lizard, like I said. I’ve never seen anyone like him, I guess.”</i>", parse);

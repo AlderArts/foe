@@ -406,6 +406,7 @@ export namespace MariaScenes {
             func() {
                 Text.Clear();
                 // TODO #If Vaughn task 4 completed
+                /*
                 if (false) {
                     Text.Add("Maria looks down at her hands, then back up at you. <i>“A little more peaceful. Just a little more, but I’m grateful for it - and to you for helping out as well.”</i>", parse);
                     Text.NL();
@@ -416,7 +417,7 @@ export namespace MariaScenes {
                     Text.Add("So, you should feel all nice and special that she’s deigned to confer her approval on you? Does this call for a celebration?", parse);
                     Text.NL();
                     Text.Add("<i>“Don’t push your luck, buster.”</i> She punches you lightly on the shoulder. <i>“But yeah. You and I know that the bane wasn’t the end of our troubles, and I get the feeling that whatever it is that’s out there, it’s going to be way out of my league. Yours, though… that’s something else altogether. If there’s anything I can do to help - within reason, of course - just ask away, and I’ll see what I can do. I owe you as much; we all do.”</i>", parse);
-                } else {
+                } else */ {
                     Text.Add("<i>“Have you spoken with Vaughn and asked him what he thinks? If you haven’t, you should. I’m in agreement with him that something’s off about the forest.”</i>", parse);
                     Text.NL();
                     Text.Add("Off? What does she mean by that?", parse);
@@ -511,6 +512,7 @@ export namespace MariaScenes {
                     Text.Add("Living out here in the woods with so many things close by, drink must be the only thing standing between the Outlaws and sanity, eh?", parse);
                     Text.NL();
                     Text.Add("A laugh. <i>“I’m not denying it. It’s easier to have something to help forget on the darker nights. ‘Nags and bumps and ghouls in the eaves, shadow and spit and demons about the leaves,’ as the old song goes. Those old children’s tales, they aren’t completely wrong, you know. ", parse);
+                    /*
                     if (false) { // TODO #if Vaughn task 4 completed - same line
                         Text.Add("Guess we were proved right.”</i>", parse);
                         Text.NL();
@@ -525,7 +527,7 @@ export namespace MariaScenes {
                         Text.Add("Gee, there’s no need to take it that personally.", parse);
                         Text.NL();
                         Text.Add("<i>“Pfff.”</i> Maria makes a show of closing her eyes and rubbing her temples. <i>“Right, maybe I was a bit forceful there, but you could at least put your words through that head of yours before letting them out to your mouth.”</i>", parse);
-                    } else {
+                    } else */ {
                         Text.Add("I’ve never come across anything truly terrible out there amongst the trees, but there are signs.”</i>", parse);
                         Text.NL();
                         Text.Add("You’ll take her word for it.", parse);

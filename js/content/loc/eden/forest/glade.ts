@@ -784,6 +784,7 @@ export namespace DryadGladeScenes {
 			}, enabled : true,
 			tooltip : "Ask her about her younger daughter Spirit, who resides in your Gem.",
 		});
+		/*
 		if (false) { // TODO Unlocks after being to the Spring for the first time.
 			options.push({ nameStr : "Spring",
 				tooltip : "Ask Mother Tree if she knows a way you could get past the thorns and get to the spring.",
@@ -805,6 +806,7 @@ export namespace DryadGladeScenes {
 				}, enabled : true,
 			});
 		}
+		*/
 		options.push({ nameStr : "Lifegiver",
 			func() {
 				Text.Clear();
